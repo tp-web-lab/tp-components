@@ -6,7 +6,7 @@
   ],
   "files": [
     {
-      "path": "/tp-components/index.html",
+      "path": "/index.html",
       "language": "html",
       "content": "<figure id=\"plot\" aria-label=\"Quadratic sequence chart\"></figure>"
     },

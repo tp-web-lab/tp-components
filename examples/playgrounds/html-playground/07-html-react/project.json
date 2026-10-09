@@ -2,5 +2,5 @@
   "id": "html-react-tabs",
   "label": "HTML + React tabs",
   "name": "HTML + React tabs",
-  "entry": "/tp-components/index.html"
+  "entry": "/index.html"
 }

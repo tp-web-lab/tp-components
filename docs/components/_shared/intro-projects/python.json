@@ -3,7 +3,7 @@
   "entry": "/main.py",
   "files": [
     {
-      "path": "/tp-components/index.html",
+      "path": "/index.html",
       "language": "html",
       "content": "<h2>Python result</h2><p id=\"result\">Starting Python…</p>"
     },

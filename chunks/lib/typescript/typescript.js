@@ -23117,7 +23117,7 @@ function uO(e, t, n) {
 		name: e,
 		entry: r,
 		files: [...n === "html" ? [] : [{
-			path: "/tp-components/index.html",
+			path: "/index.html",
 			language: "html",
 			content: "<main id=\"app\"></main>"
 		}], {
@@ -142860,7 +142860,7 @@ async function CB(e, t = {}) {
 		"@tp/test": a
 	} }, s = VO(e.files), c = t.kind === "typescript" ? await qO(e.files, s, o) : await HO(e.files, s, o), l = c.get(i.path);
 	if (l === void 0) throw Error(`Test module not built: ${i.path}`);
-	let u = new Map([...s.entries(), ...c.entries()]), d = YO(e, "/tp-components/index.html");
+	let u = new Map([...s.entries(), ...c.entries()]), d = YO(e, "/index.html");
 	return {
 		html: `
 <!doctype html>
@@ -142874,8 +142874,8 @@ async function CB(e, t = {}) {
   ${ek()}
   ${tk()}
 
-  <script src="https://cdn.jsdelivr.net/npm/mocha@10/mocha.js"><\/script>
-  <script src="https://cdn.jsdelivr.net/npm/chai@4/chai.js"><\/script>
+  <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/mocha@10/mocha.js"><\/script>
+  <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/chai@4/chai.js"><\/script>
 
 <script>
   mocha.setup('bdd');
@@ -143200,7 +143200,7 @@ ${JSON.stringify(e, null, 2)}
 `;
 }
 function BB(e) {
-	let t = e.findFile("/tp-components/index.html") ?? e.findFile("/index.htm");
+	let t = e.findFile("/index.html") ?? e.findFile("/index.htm");
 	return t === void 0 ? "<main id=\"app\"></main>" : t.content;
 }
 var VB = class extends pO {
@@ -143223,7 +143223,7 @@ var VB = class extends pO {
 			name: "JavaScript project",
 			entry: "/main.js",
 			files: [{
-				path: "/tp-components/index.html",
+				path: "/index.html",
 				language: "html",
 				content: "<main id=\"app\"></main>"
 			}, {
@@ -143381,7 +143381,7 @@ ${JSON.stringify(e, null, 2)}
 `;
 }
 function GB(e) {
-	return (e.findFile("/tp-components/index.html") ?? e.findFile("/index.htm"))?.content ?? "<main id=\"app\"></main>";
+	return (e.findFile("/index.html") ?? e.findFile("/index.htm"))?.content ?? "<main id=\"app\"></main>";
 }
 var KB = class extends pO {
 	get supportsTestExecution() {
@@ -143392,7 +143392,7 @@ var KB = class extends pO {
 			name: "TypeScript project",
 			entry: "/main.ts",
 			files: [{
-				path: "/tp-components/index.html",
+				path: "/index.html",
 				language: "html",
 				content: "<main id=\"app\"></main>"
 			}, {
@@ -143692,7 +143692,7 @@ async function QB(e, t = {}) {
 		fallbackToFirstFile: !1
 	});
 	if (n === void 0) throw Error("No Python entry file found.");
-	let r = YO(e, "/tp-components/index.html")?.content ?? "", i = JSON.stringify(Object.fromEntries(e.files.map((e) => [e.path, e.content]))), a = JSON.stringify(n.path), o = JSON.stringify(t.libs ?? []), s = JSON.stringify(t.scope ?? "default");
+	let r = YO(e, "/index.html")?.content ?? "", i = JSON.stringify(Object.fromEntries(e.files.map((e) => [e.path, e.content]))), a = JSON.stringify(n.path), o = JSON.stringify(t.libs ?? []), s = JSON.stringify(t.scope ?? "default");
 	return { html: `
 <!doctype html>
 <html>
@@ -143876,7 +143876,7 @@ async function tV(e, t = {}) {
 		ignoreProjectEntry: !0
 	});
 	if (r === void 0) throw Error(typeof n == "string" && n !== "" ? `Test file not found: ${n}.` : "No Python test file found.");
-	let i = YO(e, "/tp-components/index.html"), a = i ? eV(i.content) : "", o = JSON.stringify(Object.fromEntries(e.files.map((e) => [e.path, e.content]))), s = JSON.stringify(r.path), c = JSON.stringify(t.libs ?? []);
+	let i = YO(e, "/index.html"), a = i ? eV(i.content) : "", o = JSON.stringify(Object.fromEntries(e.files.map((e) => [e.path, e.content]))), s = JSON.stringify(r.path), c = JSON.stringify(t.libs ?? []);
 	return { html: `
 <!doctype html>
 <html>
@@ -144016,7 +144016,7 @@ var nV = class e extends pO {
 			name: "Python project",
 			entry: "/main.py",
 			files: [{
-				path: "/tp-components/index.html",
+				path: "/index.html",
 				language: "html",
 				content: "<main id=\"app\"></main>"
 			}, {
@@ -144169,7 +144169,7 @@ async function hV(e, t = {}) {
 		priorityPaths: ["/program.pl", "/main.pl"],
 		extensions: [".pl"],
 		fallbackToFirstFile: !1
-	}), r = mV(e, t.query), i = n?.path === r?.path ? void 0 : n, a = YO(e, "/tp-components/index.html"), o = e.files.filter((t) => t.path.endsWith(".pl") && t.path !== r?.path && t.path !== e.test), s = [...o.filter((e) => e.path !== i?.path), ...i === void 0 ? [] : [i]], c = sV(o), l = [...o.some((e) => cV(e.content)) ? [{
+	}), r = mV(e, t.query), i = n?.path === r?.path ? void 0 : n, a = YO(e, "/index.html"), o = e.files.filter((t) => t.path.endsWith(".pl") && t.path !== r?.path && t.path !== e.test), s = [...o.filter((e) => e.path !== i?.path), ...i === void 0 ? [] : [i]], c = sV(o), l = [...o.some((e) => cV(e.content)) ? [{
 		path: "/library/dom.pl",
 		content: iV
 	}] : [], ...s.map((e) => ({
@@ -145063,7 +145063,7 @@ async function bV(e, t = {}) {
 		fallbackToFirstFile: !1
 	});
 	if (r === void 0) throw Error("No Prolog entry file found.");
-	let i = YO(e, "/tp-components/index.html"), a = e.files.filter((t) => t.path.endsWith(".pl") && t.path !== n.path && t.path !== e.query), o = [...a.filter((e) => e.path !== r.path), r], s = sV(a), c = a.some((e) => cV(e.content)), l = JSON.stringify([...c ? [{
+	let i = YO(e, "/index.html"), a = e.files.filter((t) => t.path.endsWith(".pl") && t.path !== n.path && t.path !== e.query), o = [...a.filter((e) => e.path !== r.path), r], s = sV(a), c = a.some((e) => cV(e.content)), l = JSON.stringify([...c ? [{
 		path: "/library/dom.pl",
 		content: iV
 	}] : [], ...o.map((e) => ({
@@ -145606,7 +145606,7 @@ async function OV(e, t = {}) {
 	if (n === void 0) throw Error("No SQL entry file found.");
 	let r = e.getActiveDatabase() ?? null, i = (r?.type === "sql" ? YO(e, r.path) : void 0) ?? (typeof e.setup == "string" && e.setup !== "" ? YO(e, e.setup) : YO(e, "/tables.sql") ?? YO(e, "/setup.sql"));
 	if (typeof e.setup == "string" && e.setup !== "" && i === void 0) throw Error(`SQL setup file not found: ${e.setup}`);
-	let a = YO(e, "/tp-components/index.html"), o = a ? TV(a.content) : "<div id=\"sql-output\"></div>", s = i?.content ?? "", c = n.content, l = typeof t.scope == "string" && t.scope !== "" ? `tp-sql-notebook:${t.scope}` : typeof r?.storageKey == "string" ? r.storageKey : DV(e);
+	let a = YO(e, "/index.html"), o = a ? TV(a.content) : "<div id=\"sql-output\"></div>", s = i?.content ?? "", c = n.content, l = typeof t.scope == "string" && t.scope !== "" ? `tp-sql-notebook:${t.scope}` : typeof r?.storageKey == "string" ? r.storageKey : DV(e);
 	return { html: `
 <!doctype html>
 <html>

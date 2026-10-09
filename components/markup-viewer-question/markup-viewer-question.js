@@ -11,10 +11,10 @@ var r = class extends e {
 	async buildTests(e, r) {
 		let i = await e.createRenderedDocument();
 		return n(new t({
-			entry: "/tp-components/index.html",
+			entry: "/index.html",
 			test: r.path,
 			files: [{
-				path: "/tp-components/index.html",
+				path: "/index.html",
 				language: "html",
 				content: i
 			}, r]

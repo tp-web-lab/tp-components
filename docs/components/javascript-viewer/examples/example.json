@@ -3,7 +3,7 @@
   "entry": "/main.js",
   "files": [
     {
-      "path": "/tp-components/index.html",
+      "path": "/index.html",
       "language": "html",
       "content": "<main id=\"app\"></main>"
     },

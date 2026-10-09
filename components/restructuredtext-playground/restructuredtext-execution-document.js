@@ -18,7 +18,7 @@ async function o(o, s = {}) {
 		fallbackToFirstFile: !1
 	});
 	if (c === void 0) throw Error("No reStructuredText entry file found.");
-	let l = e(o, "/tp-components/index.html"), u = l === void 0 ? "<main id=\"app\"></main>" : a(l.content), d = i(Object.fromEntries(o.files.map((e) => [e.path, e.content]))), f = i(c.path), p = i((o.extensions ?? []).filter((e) => e.enabled !== !1));
+	let l = e(o, "/index.html"), u = l === void 0 ? "<main id=\"app\"></main>" : a(l.content), d = i(Object.fromEntries(o.files.map((e) => [e.path, e.content]))), f = i(c.path), p = i((o.extensions ?? []).filter((e) => e.enabled !== !1));
 	return { html: `
 <!doctype html>
 <html>

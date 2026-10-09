@@ -11,7 +11,7 @@ async function a(a, o = {}) {
 		fallbackToFirstFile: !1
 	});
 	if (s === void 0) throw Error("No Markdown entry file found.");
-	let c = e(a, "/tp-components/index.html")?.content ?? "", l = i(Object.fromEntries(a.files.map((e) => [e.path, e.content]))), u = i(s.path);
+	let c = e(a, "/index.html")?.content ?? "", l = i(Object.fromEntries(a.files.map((e) => [e.path, e.content]))), u = i(s.path);
 	return { html: `
 <!doctype html>
 <html>

@@ -3,7 +3,7 @@
   "entry": "/main.ts",
   "files": [
     {
-      "path": "/tp-components/index.html",
+      "path": "/index.html",
       "language": "html",
       "content": "<h2>TypeScript result</h2><p id=\"result\"></p>"
     },

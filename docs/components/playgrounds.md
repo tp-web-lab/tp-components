@@ -76,7 +76,7 @@ The available playgrounds are:
 | Playground | Main file type | Default entry file |
 | --- | --- | --- |
 | [`<tp-asciidoc-playground>`](asciidoc-playground/index.md) | AsciiDoc | `/index.adoc` |
-| [`<tp-html-playground>`](html-playground/index.md) | HTML, CSS, JavaScript | `/tp-components/index.html` |
+| [`<tp-html-playground>`](html-playground/index.md) | HTML, CSS, JavaScript | `/index.html` |
 | [`<tp-javascript-playground>`](javascript-playground/index.md) | JavaScript modules | `/main.js` |
 | [`<tp-markdown-playground>`](markdown-playground/index.md) | Markdown | `/index.md` |
 | [`<tp-prolog-playground>`](prolog-playground/index.md) | Prolog | `/program.pl` |
@@ -95,11 +95,11 @@ The same JSON structure can be loaded with the `src` attribute or embedded in a 
 ``` json
 {
   "name": "HTML with tests",
-  "entry": "/tp-components/index.html",
+  "entry": "/index.html",
   "test": "/main.test.js",
   "files": [
     {
-      "path": "/tp-components/index.html",
+      "path": "/index.html",
       "language": "html",
       "content": "<h1 id=\"title\">Hello HTML</h1>"
     },
@@ -157,11 +157,11 @@ The JSON file contains the metadata and the source files:
 ``` json
 {
   "name": "HTML with tests",
-  "entry": "/tp-components/index.html",
+  "entry": "/index.html",
   "test": "/main.test.js",
   "files": [
     {
-      "path": "/tp-components/index.html",
+      "path": "/index.html",
       "language": "html",
       "content": "<h1>Hello HTML</h1>"
     },
@@ -218,7 +218,7 @@ This is the most direct way to pass content when the project is already availabl
       test: '/main.test.js',
       files: [
         {
-          path: '/tp-components/index.html',
+          path: '/index.html',
           language: 'html',
           content: '<button id="button">Click</button>',
         },
@@ -255,7 +255,7 @@ The directory contains a `project.json` metadata file, a `.files.json` manifest 
   "id": "09-html-tests",
   "label": "HTML with tests",
   "name": "HTML with tests",
-  "entry": "/tp-components/index.html",
+  "entry": "/index.html",
   "test": "/main.test.js"
 }
 ```
@@ -303,7 +303,7 @@ Examples:
 
 ``` json
 {
-  "entry": "/tp-components/index.html"
+  "entry": "/index.html"
 }
 ```
 

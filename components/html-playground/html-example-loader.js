@@ -28,7 +28,7 @@ async function o(o) {
 	});
 	return new e({
 		name: s.name ?? s.label ?? s.id ?? "HTML project",
-		entry: s.entry ?? "/tp-components/index.html",
+		entry: s.entry ?? "/index.html",
 		importmap: s.importmap,
 		files: l
 	});

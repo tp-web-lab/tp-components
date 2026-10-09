@@ -15,7 +15,7 @@ async function s(s, c = {}) {
 		fallbackToFirstFile: !1
 	});
 	if (l === void 0) throw Error("No AsciiDoc entry file found.");
-	let u = e(s, "/tp-components/index.html"), d = u ? a(u.content) : "<main id=\"app\"></main>", f = JSON.stringify(Object.fromEntries(s.files.map((e) => [e.path, e.content]))), p = JSON.stringify(l.path), m = JSON.stringify(s.attributes ?? {}), h = JSON.stringify(o(s.extensions));
+	let u = e(s, "/index.html"), d = u ? a(u.content) : "<main id=\"app\"></main>", f = JSON.stringify(Object.fromEntries(s.files.map((e) => [e.path, e.content]))), p = JSON.stringify(l.path), m = JSON.stringify(s.attributes ?? {}), h = JSON.stringify(o(s.extensions));
 	return { html: `
 <!doctype html>
 <html>

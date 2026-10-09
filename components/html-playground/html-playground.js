@@ -34,7 +34,7 @@ var f = class extends t {
 	createProjectFromExample(e, t) {
 		return new c({
 			name: e.name ?? e.label ?? e.id ?? "HTML project",
-			entry: e.entry ?? "/tp-components/index.html",
+			entry: e.entry ?? "/index.html",
 			test: e.test,
 			importmap: e.importmap,
 			files: t
@@ -43,10 +43,10 @@ var f = class extends t {
 	createNewProject() {
 		return new c({
 			name: "HTML project",
-			entry: "/tp-components/index.html",
+			entry: "/index.html",
 			files: [
 				{
-					path: "/tp-components/index.html",
+					path: "/index.html",
 					language: "html",
 					content: "\n<link rel=\"stylesheet\" href=\"/styles.css\">\n<script type=\"module\" src=\"/main.js\"><\/script>\n\n<h1>Hello HTML playground</h1>\n"
 				},
@@ -81,10 +81,10 @@ var f = class extends t {
 	createEmptyProject() {
 		return new c({
 			name: "HTML project",
-			entry: "/tp-components/index.html",
+			entry: "/index.html",
 			files: [
 				{
-					path: "/tp-components/index.html",
+					path: "/index.html",
 					language: "html",
 					content: "\n<link rel=\"stylesheet\" href=\"/styles.css\">\n<script type=\"module\" src=\"/main.js\"><\/script>\n\n<h1>Hello HTML playground</h1>\n"
 				},

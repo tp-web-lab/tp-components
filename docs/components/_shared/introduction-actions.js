@@ -61,7 +61,7 @@
 			});
 		} else if (action === "filesystem") {
 			component.setFiles([
-				{ path: "/tp-components/index.html", language: "html", content: "<h1>Hello!</h1>" },
+				{ path: "/index.html", language: "html", content: "<h1>Hello!</h1>" },
 				{
 					path: "/tp-components/main.js",
 					language: "javascript",
