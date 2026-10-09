@@ -105,13 +105,15 @@ var a = class a extends e {
 		let e = this.getTocScope(), t = /* @__PURE__ */ new Set(), r = [];
 		for (let i of e.querySelectorAll(n)) {
 			if (!(i instanceof HTMLHeadingElement) || this.contains(i) || !o(i, e)) continue;
-			let n = i.textContent?.trim() ?? "";
-			if (n === "") continue;
-			let a = Number(i.tagName.slice(1)), s = this.ensureHeadingId(i, n, t);
+			let n = document.createTreeWalker(i, NodeFilter.SHOW_TEXT, { acceptNode: (e) => e.parentElement?.closest("tp-icon, script, style") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT }), a = "";
+			for (; n.nextNode();) a += n.currentNode.textContent ?? "";
+			let s = a.replace(/\s+/g, " ").trim();
+			if (s === "") continue;
+			let c = Number(i.tagName.slice(1)), l = this.ensureHeadingId(i, s, t);
 			r.push({
-				level: a,
-				id: s,
-				title: n
+				level: c,
+				id: l,
+				title: s
 			});
 		}
 		return r;
