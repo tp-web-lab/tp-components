@@ -147,7 +147,11 @@ var l = class extends e {
 			"rst",
 			"rest"
 		], s = r.flatMap((e) => o.flatMap((t) => [`${a}${e}/sidebar.${t}`, `${a}${e}/cover.${t}`]));
-		e.hidden = !(await Promise.all(s.map((e) => this.fetchText(e)))).some((e) => e !== null);
+		for (let t of s) if (await this.fetchText(t) !== null) {
+			e.hidden = !1;
+			return;
+		}
+		e.hidden = !0;
 	}
 	renderShell() {
 		this.innerHTML = `
