@@ -1,0 +1,14 @@
+{
+  "id": "05-md-music",
+  "label": "Music",
+  "name": "Music",
+  "entry": "/index.md",
+  "extensions": [
+    {
+      "id": "music",
+      "label": "Music",
+      "url": "/tp-components/extensions/markdown/music/index.js",
+      "enabled": true
+    }
+  ]
+}

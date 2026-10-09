@@ -1,0 +1,14 @@
+{
+  "id": "06-rst-map",
+  "label": "Map",
+  "name": "reStructuredText map",
+  "entry": "/index.rst",
+  "extensions": [
+    {
+      "id": "openstreetmap",
+      "label": "Map",
+      "url": "/tp-components/extensions/restructuredtext/openstreetmap/index.js",
+      "enabled": true
+    }
+  ]
+}

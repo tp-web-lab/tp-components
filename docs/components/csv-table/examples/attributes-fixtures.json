@@ -1,0 +1,20 @@
+{
+  "src": [
+    {
+      "label": "Default",
+      "value": ""
+    },
+    {
+      "label": "file1",
+      "value": "/tp-components/docs/components/csv-table/examples/countries.csv"
+    },
+    {
+      "label": "file2",
+      "value": "/tp-components/docs/components/csv-table/examples/scores.csv"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/tp-components/docs/components/csv-table/examples/file-unknown.csv"
+    }
+  ]
+}

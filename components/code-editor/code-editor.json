@@ -1,0 +1,378 @@
+{
+  "tagname": "tp-code-editor",
+  "classname": "TpCodeEditor",
+  "superclass": "TpBase",
+  "description": "Displays a CodeMirror 6 based code editor.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-code-editor></tp-code-editor>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "dir",
+      "description": "Text direction inherited from HTMLElement (`ltr`, `rtl`, `auto`).",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"inherited\""
+    },
+    {
+      "name": "filename",
+      "description": "Logical filename associated with the current content.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "fold-gutter",
+      "description": "Shows fold markers in the gutter.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "lang",
+      "description": "Language tag inherited from HTMLElement.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"inherited\""
+    },
+    {
+      "name": "language",
+      "description": "Fallback editing language when it cannot be inferred from a `tp/LANGUAGE` script or `src` extension.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "html"
+    },
+    {
+      "name": "line-numbers",
+      "description": "Shows line numbers.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "placeholder",
+      "description": "Text shown when the editor is empty. Defaults to `Type some LANGUAGE code... or F1 to toggle the toolbar` using the resolved language.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"Type some LANGUAGE code... or F1 to toggle the toolbar\""
+    },
+    {
+      "name": "readonly",
+      "description": "Enables read-only mode.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "URL of a source file to load.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "toolbar",
+      "description": "Shows the editor UI panel.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "value",
+      "description": "Initial editor content.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "word-wrap",
+      "description": "Enables soft wrapping.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [
+    {
+      "name": "focus(): void",
+      "inherited": false,
+      "description": "Moves focus to the CodeMirror editor."
+    },
+    {
+      "name": "getContentHeight(): number",
+      "inherited": false,
+      "description": "Returns the computed height required by the current editor content, in pixels."
+    },
+    {
+      "name": "getInitialValue(): string",
+      "inherited": false,
+      "description": "Returns the value currently used as the reset target."
+    },
+    {
+      "name": "getValue(): string",
+      "inherited": false,
+      "description": "Returns the current editor content."
+    },
+    {
+      "name": "isCursorAtEnd(): boolean",
+      "inherited": false,
+      "description": "Returns `true` when the editor selection is collapsed at the end of the document."
+    },
+    {
+      "name": "isCursorAtStart(): boolean",
+      "inherited": false,
+      "description": "Returns `true` when the editor selection is collapsed at the start of the document."
+    },
+    {
+      "name": "reload(): void",
+      "inherited": false,
+      "description": "Reloads the content from `src`, when a source file is configured."
+    },
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Restores the editor content to the initial value and emits `tp-code-editor-reset`."
+    },
+    {
+      "name": "setCodeCommentNumbers(owner: object, numbers: readonly number[], comments: ReadonlyMap<number, HTMLElement> = new Map()): void",
+      "inherited": false,
+      "description": "Registers a linked annotation list; an empty array removes only that owner's markers."
+    },
+    {
+      "name": "setInitialValue(value: string): void",
+      "inherited": false,
+      "description": "Sets the value used by `reset()` without changing the current editor content."
+    },
+    {
+      "name": "setValue(code: string): void",
+      "inherited": false,
+      "description": "Replaces the current editor content and stores it as an explicit API-provided value."
+    },
+    {
+      "name": "syncHeightToContent(): void",
+      "inherited": false,
+      "description": "Recomputes the editor height from the current content and panels."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-code-editor-boundary",
+      "description": "Emitted when keyboard navigation reaches the editor boundary.",
+      "detail": "{ direction: \"before\" | \"after\" }"
+    },
+    {
+      "name": "tp-code-editor-change",
+      "description": "Emitted when the editor content changes after user input.",
+      "detail": "{ filename: string; value: string }"
+    },
+    {
+      "name": "tp-code-editor-error",
+      "description": "Emitted when a source loading error occurs.",
+      "detail": "{ message: string }"
+    },
+    {
+      "name": "tp-code-editor-input",
+      "description": "Emitted on user input.",
+      "detail": "{ filename: string; value: string }"
+    },
+    {
+      "name": "tp-code-editor-load",
+      "description": "Emitted after the editor source has been resolved and loaded.",
+      "detail": "{ filename: string; source: \"api\" | \"script\" | \"src\" | \"value\"; valueLength: number }"
+    },
+    {
+      "name": "tp-code-editor-ready",
+      "description": "Emitted when the editor has been initialized.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-code-editor-reset",
+      "description": "Emitted after `reset()` restores the initial value.",
+      "detail": "{ value: string }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-code-editor-active-line",
+      "default": "var( --tp-syntax-active-line, color-mix(in srgb, var(--tp-neutral-fill-soft, #e5e7eb) 38%, transparent) )",
+      "description": "Background color of the active editor line."
+    },
+    {
+      "name": "--tp-code-editor-caret",
+      "default": "var(--tp-syntax-caret, var(--tp-text-body, #111827))",
+      "description": "Caret color."
+    },
+    {
+      "name": "--tp-code-editor-fold-background",
+      "default": "var( --tp-syntax-fold-background, color-mix(in srgb, var(--tp-neutral-fill-soft, #e5e7eb) 70%, transparent) )",
+      "description": "Background color of fold placeholders."
+    },
+    {
+      "name": "--tp-code-editor-foreground",
+      "default": "var(--tp-syntax-foreground, var(--tp-text-body, #111827))",
+      "description": "Main editor text color."
+    },
+    {
+      "name": "--tp-code-editor-gutter-background",
+      "default": "var( --tp-syntax-gutter-background, color-mix(in srgb, var(--tp-neutral-fill-softer, #f3f4f6) 88%, transparent) )",
+      "description": "Gutter background color."
+    },
+    {
+      "name": "--tp-code-editor-gutter-border",
+      "default": "var(--tp-syntax-gutter-border, var(--tp-neutral-stroke-soft, #d1d5db))",
+      "description": "Gutter border color."
+    },
+    {
+      "name": "--tp-code-editor-gutter-foreground",
+      "default": "var(--tp-syntax-gutter-foreground, var(--tp-text-muted, #6b7280))",
+      "description": "Gutter text and marker color."
+    },
+    {
+      "name": "--tp-code-editor-muted",
+      "default": "var(--tp-syntax-muted, var(--tp-text-muted, #6b7280))",
+      "description": "Muted editor text color."
+    },
+    {
+      "name": "--tp-code-editor-selection",
+      "default": "var( --tp-syntax-selection, color-mix(in srgb, var(--tp-brand-fill-mid, #60a5fa) 62%, transparent) )",
+      "description": "Selection background color."
+    },
+    {
+      "name": "--tp-code-editor-surface",
+      "default": "var(--tp-syntax-surface, var(--tp-paper-color, #ffffff))",
+      "description": "Editor surface background color."
+    },
+    {
+      "name": "--tp-code-editor-token-comment",
+      "default": "var(--tp-syntax-token-comment, #6b7280)",
+      "description": "Syntax color for comments."
+    },
+    {
+      "name": "--tp-code-editor-token-function",
+      "default": "var(--tp-syntax-token-function, #1d4ed8)",
+      "description": "Syntax color for function names."
+    },
+    {
+      "name": "--tp-code-editor-token-keyword",
+      "default": "var(--tp-syntax-token-keyword, #2563eb)",
+      "description": "Syntax color for keywords."
+    },
+    {
+      "name": "--tp-code-editor-token-link",
+      "default": "var(--tp-syntax-token-link, #0284c7)",
+      "description": "Syntax color for links."
+    },
+    {
+      "name": "--tp-code-editor-token-number",
+      "default": "var(--tp-syntax-token-number, #7c3aed)",
+      "description": "Syntax color for numbers."
+    },
+    {
+      "name": "--tp-code-editor-token-property",
+      "default": "var(--tp-syntax-token-property, #0f766e)",
+      "description": "Syntax color for properties."
+    },
+    {
+      "name": "--tp-code-editor-token-string",
+      "default": "var(--tp-syntax-token-string, #b45309)",
+      "description": "Syntax color for strings."
+    },
+    {
+      "name": "--tp-code-editor-token-type",
+      "default": "var(--tp-syntax-token-type, #1d4ed8)",
+      "description": "Syntax color for types."
+    },
+    {
+      "name": "--tp-code-editor-token-variable",
+      "default": "var(--tp-syntax-token-variable, #0f766e)",
+      "description": "Syntax color for variables."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-badge",
+      "summary": "Badge component for compact status labels."
+    },
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-copy-code",
+      "summary": "Copy-to-clipboard button component."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
+    },
+    {
+      "name": "tp-tooltip",
+      "summary": "Displays anchored tooltip content."
+    }
+  ],
+  "credits": [
+    {
+      "name": "CodeMirror",
+      "url": "https://codemirror.net/",
+      "summary": "Code editing and language support."
+    },
+    {
+      "name": "Lezer",
+      "url": "https://lezer.codemirror.net/",
+      "summary": "Syntax tree highlighting."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Code editor",
+    "introduction": "The custom `<tp-code-editor>` element implements the <tp-icon name=\"code-editor\" library=\"components\" size=\"1.25em\"></tp-icon> Code editor functionality: displays a CodeMirror 6 based code editor.",
+    "interactions": "Use F1 while the editor is focused to show or hide its toolbar. Mod means ⌘ on macOS and Ctrl elsewhere; Shift and Alt are shown as ⇧ and ⌥ on macOS.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Editor text | Click to place the cursor; drag to select text. Editing does not execute the code. |\n| Numbered comment marker, when linked to tp-code-comment | Hover to read its formatted explanation in a tooltip. |\n| Keyboard button | Open or close the command palette listed below. |\n| Copy code button | Copy the entire editor content, unlike Copy in the palette, which copies the selection. |\n| Theme button | Choose light, dark or automatic appearance for this editor. |\n| Fullscreen button | Enter or leave fullscreen for this editor. |\n| Language badge / line and column | Display the current language and cursor position; these are indicators, not buttons. |\n| Palette: Undo | Reverts the last editor change. |\n| Palette: Redo | Reapplies the last reverted editor change. |\n| Palette: Copy | Copies the current selection. |\n| Palette: Cut | Cuts the current selection. |\n| Palette: Paste | Pastes clipboard text at the current selection. |\n| Palette: Select all | Selects the whole editor content. |\n| Palette: Fold code | Folds the current foldable code block. |\n| Palette: Unfold code | Unfolds the current folded code block. |\n| Palette: Toggle gutters | Shows or hides the fold gutter. |\n| Palette: Toggle line numbers | Shows or hides line numbers. |\n| Palette: Indent | Indents the current line or selection. |\n| Palette: Dedent | Dedents the current line or selection. |\n| Palette: Search | Opens the search panel. |\n| Palette: Replace | Opens search and runs replace-next. |\n| Palette: Go to line | Opens the go-to-line prompt. |\n| Palette: Toggle line comment | Toggles line comments for the current line or selection. |\n| Palette: Toggle block comment | Toggles block comments for the current selection. |\n| Palette: Toggle Command Palette | Opens or closes the command palette. |\n| Palette: Toggle toolbar | Opens or closes the toolbar. |\n| Clipboard permission | Paste may require browser permission. Read-only content cannot be edited. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Typing and cursor movement | Edit text and move the insertion point in the focused editor. Editing is unavailable in read-only mode. |\n| `Mod Z` | Reverts the last editor change. |\n| `Mod Shift Z` | Reapplies the last reverted editor change. |\n| `Mod C` | Copies the current selection. |\n| `Mod X` | Cuts the current selection. |\n| `Mod V` | Pastes clipboard text at the current selection. |\n| `Mod A` | Selects the whole editor content. |\n| `Mod Alt ↓` | Folds the current foldable code block. |\n| `Mod Alt ↑` | Unfolds the current folded code block. |\n| `Mod Alt G` | Shows or hides the fold gutter. |\n| `Mod Alt L` | Shows or hides line numbers. |\n| `Tab` | Indents the current line or selection. |\n| `Shift Tab` | Dedents the current line or selection. |\n| `Mod F` | Opens the search panel. |\n| `Mod Alt F` | Open the search and replacement panel. |\n| `Mod G` | Opens the go-to-line prompt. |\n| `Mod Alt C` | Toggles line comments for the current line or selection. |\n| `Mod Alt B` | Toggles block comments for the current selection. |\n| `Mod Shift P` | Opens or closes the command palette. |\n| `F1` | Opens or closes the toolbar. |\n| Up / Down in the open palette | Move between commands. |\n| Enter / Space in the open palette | Activate the focused command. |\n| Escape in the open palette | Close the palette. |\n| Focus a numbered comment marker / Escape | Show its explanation / close the tooltip without changing the code. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

@@ -1,0 +1,36 @@
+<tp-notebook>
+  <script type="tp/markdown">
+    # Notebook example
+    Here is a notebook that combines Asciidoc, HTML, Markdown and reStructuredText as markup languages, and Python and JavaScript as programming languages.
+
+    ## Calculation
+    We perform a simple multiplication in Python to demonstrate the calculation.
+  </script>
+  <script type="tp/python">
+    x = 6 * 7
+    print(x)
+  </script>
+  <script type="tp/restructuredtext" doctest>
+    .. h2:: 
+       
+       Verification
+       
+    We use the doctest blocks in reStructuredText to verify the output of the Python code.
+
+    >>> print(6 * 7)
+    42
+  </script>
+  <script type="tp/html">
+    In JavaScript, we would have written the following code:
+  </script>
+  <script type="tp/javascript">
+    const x = 6 * 7;
+    console.log(x)
+  </script>
+  <script type="tp/asciidoc">
+    == Result
+    The result of the multiplication is displayed using Asciidoc and Mathjax:
+
+    latexmath:[x = 6 * 7 = 42]
+  </script>
+</tp-notebook>

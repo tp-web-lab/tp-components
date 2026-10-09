@@ -1,0 +1,16 @@
+{
+  "name": "Python viewer example",
+  "entry": "/main.py",
+  "files": [
+    {
+      "path": "/tp-components/index.html",
+      "language": "html",
+      "content": "<main id=\"app\"></main>"
+    },
+    {
+      "path": "/main.py",
+      "language": "python",
+      "content": "message = \"Python project loaded from src\"\nprint(message)"
+    }
+  ]
+}

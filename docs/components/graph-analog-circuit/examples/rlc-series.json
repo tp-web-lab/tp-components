@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "title": "Series RLC circuit",
+  "nodes": [
+    {
+      "id": "V1",
+      "type": "analog-voltage-source",
+      "x": 100,
+      "y": 180,
+      "label": "V1=5V",
+      "data": {
+        "voltage": 5,
+        "waveform": "sine",
+        "frequency": 200,
+        "angle": 90,
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "R1",
+      "type": "analog-resistor",
+      "x": 240,
+      "y": 100,
+      "label": "R=100 Ω",
+      "data": {
+        "resistance": 100,
+        "angle": 0
+      }
+    },
+    {
+      "id": "L1",
+      "type": "analog-inductor",
+      "x": 390,
+      "y": 100,
+      "label": "L=10 mH",
+      "data": {
+        "inductance": 0.01,
+        "displayScale": 0.001,
+        "angle": 0
+      }
+    },
+    {
+      "id": "C1",
+      "type": "analog-capacitor",
+      "x": 540,
+      "y": 180,
+      "label": "C=10 µF",
+      "data": {
+        "capacitance": 0.00001,
+        "displayScale": 0.000001,
+        "angle": 90
+      }
+    },
+    {
+      "id": "GND",
+      "type": "analog-ground",
+      "x": 320,
+      "y": 300,
+      "label": "GND"
+    },
+    {
+      "id": "node-1",
+      "type": "analog-switch",
+      "x": 180,
+      "y": 276,
+      "label": "Switch",
+      "data": {
+        "angle": 0,
+        "closed": false
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "type": "analog-wire",
+      "source": "V1",
+      "sourcePort": "north",
+      "target": "R1",
+      "targetPort": "west",
+      "direction": "none",
+      "routing": "orthogonal",
+      "data": {
+        "measurements": [
+          {
+            "id": "m-in",
+            "position": 0.5,
+            "label": "Vin"
+          }
+        ]
+      },
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "e2",
+      "type": "analog-wire",
+      "source": "R1",
+      "sourcePort": "east",
+      "target": "L1",
+      "targetPort": "west",
+      "direction": "none",
+      "routing": "straight"
+    },
+    {
+      "id": "e3",
+      "type": "analog-wire",
+      "source": "L1",
+      "sourcePort": "east",
+      "target": "C1",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "data": {
+        "measurements": [
+          {
+            "id": "m-c",
+            "position": 0.5,
+            "label": "Vc"
+          }
+        ]
+      },
+      "elbows": 1,
+      "departure": "horizontal",
+      "turns": "alternating"
+    },
+    {
+      "id": "e4",
+      "type": "analog-wire",
+      "source": "C1",
+      "sourcePort": "south",
+      "target": "GND",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "e5",
+      "type": "analog-wire",
+      "source": "node-1",
+      "sourcePort": "west",
+      "target": "V1",
+      "targetPort": "south",
+      "direction": "none",
+      "routing": "orthogonal",
+      "bendX": 50.78125,
+      "elbows": 1,
+      "departure": "horizontal",
+      "turns": "alternating"
+    },
+    {
+      "id": "edge-2",
+      "source": "node-1",
+      "target": "GND",
+      "type": "analog-wire",
+      "sourcePort": "east",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "straight"
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "tagname": "tp-mathfield",
+  "classname": "TpMathfield",
+  "superclass": "TpBase",
+  "description": "Mathematical expression field with live LaTeX or AsciiMath rendering.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-mathfield label=\"Formula\" value=\"E = mc^2\" clearable></tp-mathfield>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "autocomplete",
+      "description": "Native autocomplete hint.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "clearable",
+      "description": "Shows the clear button; it is disabled when empty, readonly or disabled.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the field.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "label",
+      "description": "Visible label associated with the editing field.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label-position",
+      "description": "Label position (`top`, `bottom`, `start`, or `end`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"top\""
+    },
+    {
+      "name": "mode",
+      "description": "Mathematical notation (`latexmath` or `asciimath`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"latexmath\""
+    },
+    {
+      "name": "multiline",
+      "description": "Uses a multiline editor and display-style rendering.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "name",
+      "description": "Name submitted with the containing form; defaults to the initial inline content when omitted.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "placeholder",
+      "description": "Placeholder shown while the field is empty; defaults to the active notation mode.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"Type LaTeX formula...\""
+    },
+    {
+      "name": "preview",
+      "description": "Opens the rendered MathJax preview panel.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "readonly",
+      "description": "Prevents value editing.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "required",
+      "description": "Marks the field as required.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "value",
+      "description": "Mathematical expression source.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "clear(): void",
+      "inherited": false,
+      "description": "Clears the expression and emits `input`, `change`, and `tp-clear`."
+    },
+    {
+      "name": "focus(options?: FocusOptions): void",
+      "inherited": false,
+      "description": "Focuses the expression editor."
+    },
+    {
+      "name": "getValue(): string",
+      "inherited": false,
+      "description": "Returns the mathematical expression source."
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "description": "Emitted when the expression is committed or a different notation is selected in the menu.",
+      "detail": "void"
+    },
+    {
+      "name": "input",
+      "description": "Emitted when the expression changes while editing.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-clear",
+      "description": "Emitted after the embedded button clears the expression.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-math-rendered",
+      "description": "Emitted after MathJax finishes rendering the expression.",
+      "detail": "{ mode: unknown; value: string }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-mathfield-inline-size",
+      "default": "28rem",
+      "description": "Controls the inline size."
+    },
+    {
+      "name": "--tp-mathfield-preview-background",
+      "default": "Canvas",
+      "description": "Controls the preview background."
+    },
+    {
+      "name": "--tp-mathfield-preview-border-color",
+      "default": "var(--tp-neutral-stroke-soft)",
+      "description": "Controls the preview border color."
+    },
+    {
+      "name": "--tp-mathfield-preview-padding",
+      "default": "0.75rem",
+      "description": "Controls the preview padding."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-copy-code",
+      "summary": "Copy-to-clipboard button component."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Dropdown menu component."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-markdown",
+      "summary": "Markdown rendering component."
+    },
+    {
+      "name": "tp-textfield",
+      "summary": "Single-line and automatically growing multiline text field."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Math field",
+    "introduction": "The custom `<tp-mathfield>` element implements the <tp-icon name=\"mathfield\" library=\"components\" size=\"1.25em\"></tp-icon> Math field functionality: mathematical expression field with live LaTeX or AsciiMath rendering.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Mathfield mark | Open the notation menu; choose latexmath or asciimath. A check identifies the active mode. |\n| Using the component | Use the trailing clear button when available to remove the expression. |\n| Using the component | A required-field marker means an answer is needed. |\n| Using the component | The formula copy button copies the mathematical source. |\n| Using the component | Eye opens or closes the rendered preview; its copy button copies the rendered SVG. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Enter / Space on the mathfield mark | Open the notation menu. Use Up / Down to navigate, Enter / Space to select, and Escape to close it. |\n| Tab / Shift+Tab | Move between the available controls. |\n| Typing | Enter or edit the value using the field controls; read-only and disabled fields cannot be edited. |\n| Enter / Space on Clear | Activate the clear button when available. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

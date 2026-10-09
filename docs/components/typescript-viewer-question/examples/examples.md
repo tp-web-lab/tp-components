@@ -1,0 +1,19 @@
+::::: tp-markdown-viewer { label="tp-typescript-viewer-question" allow-script }
+:::: script { type="tp/markdown" }
+``` example {label="Basic usage"}
+::: tp-typescript-viewer-question { open src="/tp-components/docs/components/playground-question/examples/typescript/double.ts" test="/tp-components/docs/components/playground-question/examples/typescript/double.test.ts" }
+Title
+:
+  Double a number
+
+Prompt
+:
+  Complete double so it returns twice its argument. Open Code to edit, then submit to run the tests.
+
+Solution
+:
+  Return value * 2.
+:::
+```
+::::
+:::::

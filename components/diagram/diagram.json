@@ -1,0 +1,54 @@
+{
+  "tagname": "tp-diagram",
+  "classname": "TpDiagram",
+  "superclass": "TpBase",
+  "description": "Renders Mermaid source supplied inline or through a source URL.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-diagram label=\"Request flow\">\n  <script type=\"tp/diagram\">\n    flowchart LR\n      Browser --> Server\n  </script>\n</tp-diagram>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "label",
+      "description": "Accessible name applied to the rendered SVG.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"Diagram\""
+    },
+    {
+      "name": "src",
+      "description": "Mermaid source file loaded relative to the containing document.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-diagram-rendered",
+      "description": "Emitted after Mermaid has rendered the diagram.",
+      "detail": "{ src: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Diagram",
+    "introduction": "The custom `<tp-diagram>` element renders flowcharts, sequence diagrams, class diagrams and the other diagram types supported by [Mermaid](https://mermaid.js.org/).",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Read the rendered diagram. |\n| Using the component | Any links in the diagram behave according to the page's security and interaction settings; the component does not provide a source editor. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

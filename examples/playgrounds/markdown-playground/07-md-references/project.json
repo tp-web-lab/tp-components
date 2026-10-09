@@ -1,0 +1,14 @@
+{
+  "id": "07-md-references",
+  "label": "References",
+  "name": "References",
+  "entry": "/index.md",
+  "extensions": [
+    {
+      "id": "references",
+      "label": "References",
+      "url": "/tp-components/extensions/markdown/references/index.js",
+      "enabled": true
+    }
+  ]
+}

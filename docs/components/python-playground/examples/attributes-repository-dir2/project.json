@@ -1,0 +1,6 @@
+{
+  "id": "python-repository-import",
+  "label": "Import a geometry module",
+  "name": "Import a geometry module",
+  "entry": "/main.py"
+}

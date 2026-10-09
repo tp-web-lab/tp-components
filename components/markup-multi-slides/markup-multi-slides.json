@@ -1,0 +1,33 @@
+{
+  "tagname": "tp-markup-multi-slides",
+  "classname": "TpMarkupMultiSlides",
+  "superclass": "TpMarkupMultiPages",
+  "description": "presents multi-format pages as a responsive slide deck.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-markup-multi-slides repository=\"/slides\"></tp-markup-multi-slides>"
+    }
+  ],
+  "attributes": [],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-markup-multi-pages",
+      "summary": "Multi-page documentation with support for multiple markup languages."
+    },
+    {
+      "name": "tp-numberfield",
+      "summary": "Numeric field with an optional native range slider."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Markup multi-slides",
+    "introduction": "The custom `<tp-markup-multi-slides>` element implements the <tp-icon name=\"markup-multi-slides\" library=\"components\" size=\"1.25em\"></tp-icon> Markup multi-slides functionality: presents multi-format pages as a responsive slide deck.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Next arrow / click in slide content | Reveal the next progressive step, then advance to the next slide. |\n| Previous arrow / right-click in slide content | Hide the previous step, or return to the preceding slide with its steps revealed. |\n| Slide slider | Drag to select a slide directly; its progressive content starts again from the beginning. |\n| Navigation menu, when shown | Choose a slide directly. |\n| Links, buttons and fields inside slides | Keep their usual behavior; interacting with them does not advance the slide. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space / Right Arrow outside editing controls | Reveal the next step or advance to the next slide. |\n| Left Arrow / Backspace outside editing controls | Hide the preceding step or return to the previous slide. |\n| Arrow keys on the slide slider | Choose a slide. |\n| Home / End on the slide slider | Choose the first or last slide. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

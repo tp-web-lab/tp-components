@@ -1,0 +1,14 @@
+{
+  "id": "03-rst-mermaid",
+  "label": "Mermaid",
+  "name": "reStructuredText Mermaid",
+  "entry": "/index.rst",
+  "extensions": [
+    {
+      "id": "mermaid",
+      "label": "Mermaid",
+      "url": "/tp-components/extensions/restructuredtext/mermaid/index.js",
+      "enabled": true
+    }
+  ]
+}

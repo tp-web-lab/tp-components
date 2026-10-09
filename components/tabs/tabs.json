@@ -1,0 +1,179 @@
+{
+  "tagname": "tp-tabs",
+  "classname": "TpTabs",
+  "superclass": "TpBase",
+  "description": "Accessible tab group.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-tabs>\n  <dl>\n    <dt>Tab 1</dt>\n    <dd>Content of panel <tp-icon size=\"2em\" name=\"numeric-1\"></tp-icon></dd>\n    <dt>Tab 2</dt>\n    <dd>Content of panel <tp-icon size=\"2em\" name=\"numeric-2\"></tp-icon></dd>\n    <dt>Tab 3</dt>\n    <dd>Content of panel <tp-icon size=\"2em\" name=\"numeric-3\"></tp-icon></dd>\n    <dt>Tab 4</dt>\n    <dd>Content of panel <tp-icon size=\"2em\" name=\"numeric-4\"></tp-icon></dd>\n  </dl>\n</tp-tabs>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "activation",
+      "description": "Keyboard activation mode (`auto` or `manual`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpTabsActivation",
+      "default": "auto"
+    },
+    {
+      "name": "orientation",
+      "description": "Tab list orientation (`horizontal` or `vertical`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpTabsOrientation",
+      "default": "horizontal"
+    },
+    {
+      "name": "selected",
+      "description": "Selected tab index.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "0"
+    }
+  ],
+  "methods": [
+    {
+      "name": "addTab(value: string, label: string): number",
+      "inherited": false,
+      "description": "Adds a tab and its empty panel."
+    },
+    {
+      "name": "clearTabs(): void",
+      "inherited": false,
+      "description": "Removes all tabs and panels."
+    },
+    {
+      "name": "getSelectedValue(): string | null",
+      "inherited": false,
+      "description": "Returns the selected tab value."
+    },
+    {
+      "name": "moveTab(fromIndex: number, toIndex: number): void",
+      "inherited": false,
+      "description": "Moves a tab from one index to another."
+    },
+    {
+      "name": "refresh(): void",
+      "inherited": false,
+      "description": "Rebuilds tab roles and selection state."
+    },
+    {
+      "name": "removeTab(value: string): void",
+      "inherited": false,
+      "description": "Removes a tab by value."
+    },
+    {
+      "name": "select(index: number): void",
+      "inherited": false,
+      "description": "Selects a tab by its index."
+    },
+    {
+      "name": "selectValue(value: string): void",
+      "inherited": false,
+      "description": "Selects a tab by its `data-value`."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-tabs-close",
+      "description": "Emitted when a tab close button is activated.",
+      "detail": "{ index: number; value: string }"
+    },
+    {
+      "name": "tp-tabs-reorder",
+      "description": "Emitted after a tab is reordered by drag and drop.",
+      "detail": "{ fromIndex: number; toIndex: number; value: string }"
+    },
+    {
+      "name": "tp-tabs-select",
+      "description": "Emitted after a tab is selected.",
+      "detail": "{ selected: number; value: string }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-tabs-border-color",
+      "default": "var(--tp-neutral-stroke-soft)",
+      "description": "Controls the border color."
+    },
+    {
+      "name": "--tp-tabs-border-selected-color",
+      "default": "var(--tp-brand-stroke-soft)",
+      "description": "Controls the border selected color."
+    },
+    {
+      "name": "--tp-tabs-panel-bg",
+      "default": "var(--tp-paper-color)",
+      "description": "Controls the panel bg."
+    },
+    {
+      "name": "--tp-tabs-tab-bg",
+      "default": "var(--tp-neutral-fill-softer)",
+      "description": "Controls the tab bg."
+    },
+    {
+      "name": "--tp-tabs-tab-color",
+      "default": "var(--tp-text-body)",
+      "description": "Controls the tab color."
+    },
+    {
+      "name": "--tp-tabs-tab-selected-bg",
+      "default": "var(--tp-paper-color)",
+      "description": "Controls the tab selected bg."
+    },
+    {
+      "name": "--tp-tabs-tab-selected-color",
+      "default": "var(--tp-brand-text-colorful)",
+      "description": "Controls the tab selected color."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Tabs",
+    "introduction": "The custom `<tp-tabs>` element implements the <tp-icon name=\"tabs\" library=\"components\" size=\"1.25em\"></tp-icon> Tabs functionality: accessible tab group in light DOM.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Tab | Click to display its panel. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the tab list and focusable panel content. |\n| ArrowRight / ArrowDown | Moves focus to the next tab according to orientation. |\n| ArrowLeft / ArrowUp | Moves focus to the previous tab according to orientation. |\n| Home | Moves focus to the first tab. |\n| End | Moves focus to the last tab. |\n| Enter / Space | Activates the focused tab in manual activation mode. |\n| Delete | Requests closing a dynamically added tab. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "ArrowRight / ArrowDown",
+        "description": "Moves focus to the next tab according to orientation."
+      },
+      {
+        "key": "ArrowLeft / ArrowUp",
+        "description": "Moves focus to the previous tab according to orientation."
+      },
+      {
+        "key": "Home",
+        "description": "Moves focus to the first tab."
+      },
+      {
+        "key": "End",
+        "description": "Moves focus to the last tab."
+      },
+      {
+        "key": "Enter / Space",
+        "description": "Activates the focused tab in manual activation mode."
+      },
+      {
+        "key": "Delete",
+        "description": "Requests closing a dynamically added tab."
+      }
+    ]
+  }
+}

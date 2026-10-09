@@ -1,0 +1,93 @@
+{
+  "tagname": "tp-blank",
+  "classname": "TpBlank",
+  "superclass": "TpBase",
+  "description": "displays a text, SVG or image answer in a focusable blank.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-blank name=\"result\" aria-label=\"Expected result\"></tp-blank>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "aria-label",
+      "description": "Controls the aria label.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "disabled",
+      "description": "Disables interaction.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "name",
+      "description": "Name used by tp-fill-blank form data.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "placeholder",
+      "description": "Text displayed while the blank is empty.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"…\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "clear(): void",
+      "inherited": false,
+      "description": "Empties the blank and notifies its form."
+    },
+    {
+      "name": "setAnswer(value: string, content: Node): void",
+      "inherited": false,
+      "description": "Assigns an identity and clones its visual content without moving the source."
+    }
+  ],
+  "events": [
+    {
+      "name": "input",
+      "description": "- Emitted when an answer is assigned or cleared.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-blank-filled-border-color",
+      "default": "var(--tp-brand-stroke-mid)",
+      "description": "Controls the filled border color."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Blank",
+    "introduction": "The custom `<tp-blank>` element implements the blank functionality: displays a text, SVG or image answer in a focusable blank.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Answer destination | Displays an assigned answer; it is not a typing field. |\n| Answer then blank | Select an answer and click the destination, or drag the answer onto it. |\n| Clear | Release the assigned answer; unavailable when empty or disabled. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab | Focus a target blank. |\n| Right Arrow | Move from the blank to the answer bank. |\n| Up / Down | Choose an answer. |\n| Enter / Space | Assign the chosen answer to the highlighted blank. |\n| Escape | Cancel. |\n| Delete / Backspace | Clear the focused blank. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

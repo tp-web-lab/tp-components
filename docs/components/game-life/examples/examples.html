@@ -1,0 +1,37 @@
+<tp-html-viewer label="tp-game-life" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-game-life preset="glider" label="Glider" cell-size="14"></tp-game-life>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>autoplay</li><li>wrap</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="preset" label="preset" label-position="top" orientation="horizontal" value="1"><ul><li>Default (empty)</li><li>glider</li><li>blinker</li><li>toad</li><li>beacon</li><li>gosper-gun</li></ul></tp-radio-list>
+      <tp-cluster><tp-textfield data-setting="alive-color" label="alive-color" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="background" label="background" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="cell-radius" label="cell-radius" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="cell-size" label="cell-size" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="dead-color" label="dead-color" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="grid-color" label="grid-color" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="grid-stroke-width" label="grid-stroke-width" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="interval" label="interval" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="label" label="label" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="padding" label="padding" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="preset-height" label="preset-height" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="preset-width" label="preset-width" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="preset-x" label="preset-x" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="preset-y" label="preset-y" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="steps" label="steps" value="" placeholder="" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="game-life attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/tp-components/docs/components/game-life/examples/attributes.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

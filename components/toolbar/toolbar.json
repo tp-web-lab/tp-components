@@ -1,0 +1,80 @@
+{
+  "tagname": "tp-toolbar",
+  "classname": "TpToolbar",
+  "superclass": "TpBase",
+  "description": "Sticky, zoned toolbar for tp-* components.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-box padding=\"0\">\n  <tp-toolbar>\n    <tp-icon section=\"start\" name=\"home\" aria-label=\"Home\"></tp-icon>\n    <tp-icon section=\"start\" name=\"menu\" aria-label=\"Menu\"></tp-icon>\n    <span section=\"center\">Document</span>\n    <tp-icon section=\"end\" name=\"github\" aria-label=\"GitHub\"></tp-icon>\n    <tp-icon section=\"end\" name=\"settings\" aria-label=\"Settings\"></tp-icon>\n    <tp-icon section=\"end\" name=\"help\" aria-label=\"Help\"></tp-icon>\n  </tp-toolbar>\n  <tp-box border-width=\"0\" style=\"min-block-size: 5rem; display: grid; place-items: center\">Document area</tp-box>\n</tp-box>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "orientation",
+      "description": "`horizontal` (default) or `vertical`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"horizontal\""
+    },
+    {
+      "name": "placement",
+      "description": "`top` (default for horizontal) | `bottom` | `start` | `end`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"top (horizontal) / start (vertical)\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "addButtonToSection(button: HTMLElement, section: string): void",
+      "inherited": false,
+      "description": "Adds button to section."
+    }
+  ],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-toolbar-gap",
+      "default": "0.25rem",
+      "description": "Controls the gap."
+    },
+    {
+      "name": "--tp-toolbar-padding",
+      "default": "0.25rem 0.5rem",
+      "description": "Controls the padding."
+    },
+    {
+      "name": "--tp-toolbar-section-gap",
+      "default": "0.25rem",
+      "description": "Controls the section gap."
+    },
+    {
+      "name": "--tp-toolbar-size",
+      "default": "3rem",
+      "description": "Controls the size."
+    },
+    {
+      "name": "--tp-toolbar-z-index",
+      "default": "100",
+      "description": "Controls the z index."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Toolbar",
+    "introduction": "The custom `<tp-toolbar>` element implements the <tp-icon name=\"toolbar\" library=\"components\" size=\"1.25em\"></tp-icon> Toolbar functionality: sticky, zoned toolbar for tp-* components.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

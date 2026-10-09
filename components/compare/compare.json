@@ -1,0 +1,106 @@
+{
+  "tagname": "tp-compare",
+  "classname": "TpCompare",
+  "superclass": "TpBase",
+  "description": "`<tp-compare>` compare deux contenus superposés, typiquement une image\nbefore/after, without using Shadow DOM.\n\nStructure attendue :\n\n```html\n<tp-compare position=\"50%\">\n  <img slot=\"before\" src=\"/before.jpg\" alt=\"Avant\">\n  <img slot=\"after\" src=\"/after.jpg\" alt=\"Après\">\n</tp-compare>\n```\n\nLe composant utilise l'attribut `slot` comme convention en DOM léger :\n- `slot=\"before\"`\n- `slot=\"after\"`\n\nReactive attributes:\n- `orientation`\n- `position`\n- `before-label`\n- `after-label`\n- `storage-key`",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-compare></tp-compare>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "after-label",
+      "description": "Optional label for the after layer.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "''"
+    },
+    {
+      "name": "before-label",
+      "description": "Optional label for the before layer.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "''"
+    },
+    {
+      "name": "orientation",
+      "description": "Comparator orientation.\n\n- `horizontal` : séparation gauche / droite\n- `vertical` : séparation haut / bas",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpCompareOrientation",
+      "default": "'horizontal'"
+    },
+    {
+      "name": "position",
+      "description": "Separator position as a percentage.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "''"
+    },
+    {
+      "name": "storage-key",
+      "description": "Local persistence key for the position.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "''"
+    }
+  ],
+  "methods": [
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Resets the position to its initial value."
+    }
+  ],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-compare-divider-size",
+      "default": "2px",
+      "description": "Controls the divider size."
+    },
+    {
+      "name": "--tp-compare-handle-size",
+      "default": "2.5rem",
+      "description": "Controls the handle size."
+    },
+    {
+      "name": "--tp-compare-position",
+      "default": "50%",
+      "description": "Controls the position."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Compare",
+    "introduction": "The custom `<tp-compare>` element implements the <tp-icon name=\"compare\" library=\"components\" size=\"1.25em\"></tp-icon> Compare functionality: before-and-after comparison component.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Drag | Drag the comparison handle to reveal more of either image or panel. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus the comparison handle. |\n| Arrow keys | Moves the separator by 1%, or by 10% while Shift is held. |\n| Home / End | Moves the separator to its minimum or maximum position. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Arrow keys",
+        "description": "Moves the separator by 1%, or by 10% while Shift is held."
+      },
+      {
+        "key": "Home / End",
+        "description": "Moves the separator to its minimum or maximum position."
+      }
+    ]
+  }
+}

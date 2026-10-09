@@ -1,0 +1,158 @@
+{
+  "tagname": "tp-callout",
+  "classname": "TpCallout",
+  "superclass": "TpBase",
+  "description": "Highlighted contextual content block.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-callout variant=\"info\" heading=\"Information\">\n The workshop starts at 9:00.\n</tp-callout>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "closable",
+      "description": "Shows a close button.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "heading",
+      "description": "Optional heading displayed above the content.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "icon",
+      "description": "Optional icon displayed before the heading.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "library",
+      "description": "Optional icon library used by `icon`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "outlined",
+      "description": "Removes the filled background.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "title",
+      "description": "Native title text observed for authored callouts.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "variant",
+      "description": "Visual variant (`success`, `danger`, `warning`, `info`, `neutral`, or `brand`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpVariantType",
+      "default": "neutral"
+    }
+  ],
+  "methods": [
+    {
+      "name": "toast(delay = 3000): void",
+      "inherited": false,
+      "description": "Displays the callout as a toast."
+    }
+  ],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-callout-accent",
+      "default": "var(--tp-brand-text-colorful)",
+      "description": "Accent color. Default: `var(--tp-neutral-text-colorful)`."
+    },
+    {
+      "name": "--tp-callout-background",
+      "default": "transparent",
+      "description": "Background color. Default: `var(--tp-neutral-fill-softer)`."
+    },
+    {
+      "name": "--tp-callout-border-color",
+      "default": "var(--tp-brand-stroke-soft)",
+      "description": "Border color. Default: `var(--tp-neutral-stroke-soft)`."
+    },
+    {
+      "name": "--tp-callout-border-width",
+      "default": "4px",
+      "description": "Leading border width. Default: `4px`."
+    },
+    {
+      "name": "--tp-callout-foreground",
+      "default": "var(--tp-brand-text-on-soft)",
+      "description": "Text color. Default: `var(--tp-text-body)`."
+    },
+    {
+      "name": "--tp-callout-heading-font-size",
+      "default": "1rem",
+      "description": "Heading font size. Default: `1rem`."
+    },
+    {
+      "name": "--tp-callout-heading-gap",
+      "default": "0.625rem",
+      "description": "Gap below the heading. Default: `0.625rem`."
+    },
+    {
+      "name": "--tp-callout-padding-block",
+      "default": "0.875rem",
+      "description": "Block padding. Default: `0.875rem`."
+    },
+    {
+      "name": "--tp-callout-padding-inline",
+      "default": "1rem",
+      "description": "Inline padding. Default: `1rem`."
+    },
+    {
+      "name": "--tp-callout-radius",
+      "default": "0.75rem",
+      "description": "Border radius. Default: `0.75rem`."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Callout",
+    "introduction": "The custom `<tp-callout>` element implements the <tp-icon name=\"callout\" library=\"components\" size=\"1.25em\"></tp-icon> Callout functionality: highlighted contextual content block.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Message | Read the highlighted information. |\n| Close, when shown | Dismiss the message. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the Close button when available. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

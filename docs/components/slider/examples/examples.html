@@ -1,0 +1,63 @@
+<tp-html-viewer label="tp-slider" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-box style="max-inline-size: 28rem">
+        <tp-slider scrollbar="" item-width="10rem" gap="1rem">
+          <tp-box>First</tp-box><tp-box>Second</tp-box><tp-box>Third</tp-box><tp-box>Fourth</tp-box>
+        </tp-slider>
+      </tp-box>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>scrollbar</li></ul></tp-checkbox-list>
+
+      <tp-cluster><tp-textfield data-setting="gap" label="gap" value="1rem" placeholder="1rem" clearable></tp-textfield>
+      <tp-textfield data-setting="item-width" label="item-width" value="auto" placeholder="auto" clearable></tp-textfield>
+      <tp-textfield data-setting="scrollback-thumb-color" label="scrollback-thumb-color" value="var(--tp-neutral-fill-mid)" placeholder="var(--tp-neutral-fill-mid)" clearable></tp-textfield>
+      <tp-textfield data-setting="scrollbar-track-color" label="scrollbar-track-color" value="transparent" placeholder="transparent" clearable></tp-textfield>
+      <tp-textfield data-setting="slider-height" label="slider-height" value="auto" placeholder="auto" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="slider attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/tp-components/docs/components/slider/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Image gallery">
+      <p>Browse the illustrations by scrolling horizontally. Press Tab to focus the gallery, then use Left/Right Arrow, Home or End.</p>
+      <tp-box style="max-inline-size: 32rem">
+        <tp-slider scrollbar="" item-width="14rem" gap="1rem" aria-label="Illustration gallery">
+          <tp-box>
+            <tp-stack style="--stack-gap: 0.5rem">
+              <p><img src="/tp-components/docs/medias/images/canoe.svg" alt="A red canoe on blue water" width="160" height="160"></p>
+              <p>Canoe</p>
+            </tp-stack>
+          </tp-box>
+          <tp-box>
+            <tp-stack style="--stack-gap: 0.5rem">
+              <p><img src="/tp-components/docs/medias/images/basketball.svg" alt="An orange basketball" width="160" height="160"></p>
+              <p>Basketball</p>
+            </tp-stack>
+          </tp-box>
+          <tp-box>
+            <tp-stack style="--stack-gap: 0.5rem">
+              <p><img src="/tp-components/docs/medias/images/walking-shoe.svg" alt="A walking shoe" width="160" height="160"></p>
+              <p>Walking shoe</p>
+            </tp-stack>
+          </tp-box>
+          <tp-box>
+            <tp-stack style="--stack-gap: 0.5rem">
+              <p><img src="/tp-components/docs/medias/images/lightsaber.svg" alt="A lightsaber" width="160" height="160"></p>
+              <p>Lightsaber</p>
+            </tp-stack>
+          </tp-box>
+        </tp-slider>
+      </tp-box>
+    </div>
+  </template>
+</tp-html-viewer>

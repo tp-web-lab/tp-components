@@ -1,0 +1,11 @@
+requirementDiagram
+  requirement accessible_component {
+    id: 1
+    text: Component has an accessible name
+    risk: high
+    verifymethod: test
+  }
+  element diagram {
+    type: web component
+  }
+  diagram - satisfies -> accessible_component

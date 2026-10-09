@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "title": "RC low-pass filter",
+  "nodes": [
+    {
+      "id": "V1",
+      "type": "analog-voltage-source",
+      "x": 120,
+      "y": 214,
+      "label": "V1=5V",
+      "data": {
+        "voltage": 5,
+        "waveform": "square",
+        "frequency": 100,
+        "angle": 90,
+        "orientation": "vertical",
+        "displayScale": 1
+      }
+    },
+    {
+      "id": "R1",
+      "type": "analog-resistor",
+      "x": 320,
+      "y": 160,
+      "label": "R=1 kΩ",
+      "data": {
+        "resistance": 1000
+      }
+    },
+    {
+      "id": "C1",
+      "type": "analog-capacitor",
+      "x": 440,
+      "y": 217,
+      "label": "C=10 µF",
+      "data": {
+        "capacitance": 0.00001,
+        "angle": 90,
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "GND",
+      "type": "analog-ground",
+      "x": 320,
+      "y": 300,
+      "label": "GND"
+    },
+    {
+      "id": "note",
+      "type": "comment",
+      "x": 620,
+      "y": 220,
+      "label": "The capacitor charges and discharges through R1.",
+      "data": {
+        "color": "info"
+      }
+    },
+    {
+      "id": "node-1",
+      "type": "analog-switch",
+      "x": 200,
+      "y": 275,
+      "label": "Switch",
+      "data": {
+        "angle": 0,
+        "closed": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "w1",
+      "type": "analog-wire",
+      "source": "V1",
+      "sourcePort": "north",
+      "target": "R1",
+      "targetPort": "west",
+      "direction": "none",
+      "routing": "orthogonal",
+      "data": {
+        "measurements": [
+          {
+            "id": "measure-vin",
+            "position": 0.7,
+            "label": "Vin"
+          }
+        ]
+      },
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "w2",
+      "type": "analog-wire",
+      "source": "R1",
+      "sourcePort": "east",
+      "target": "C1",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "data": {
+        "measurements": [
+          {
+            "id": "measure-vout",
+            "position": 0.55,
+            "label": "Vout"
+          }
+        ]
+      },
+      "elbows": 1,
+      "departure": "horizontal",
+      "turns": "alternating"
+    },
+    {
+      "id": "w3",
+      "type": "analog-wire",
+      "source": "C1",
+      "sourcePort": "south",
+      "target": "GND",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "w4",
+      "type": "analog-wire",
+      "source": "node-1",
+      "sourcePort": "west",
+      "target": "V1",
+      "targetPort": "south",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal",
+      "turns": "alternating"
+    },
+    {
+      "id": "edge-2",
+      "source": "node-1",
+      "target": "GND",
+      "type": "analog-wire",
+      "sourcePort": "east",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "straight"
+    }
+  ]
+}

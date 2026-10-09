@@ -1,0 +1,20 @@
+{
+  "repository": [
+    {
+      "label": "Default",
+      "value": "/tp-components/docs"
+    },
+    {
+      "label": "file1",
+      "value": "/tp-components/docs/components/markup-multi-pages/examples/attributes-repository-file1"
+    },
+    {
+      "label": "file2",
+      "value": "/tp-components/docs/components/markup-multi-pages/examples/attributes-repository-file2"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/tp-components/docs/components/markup-multi-pages/examples/attributes-repository-file-unknown"
+    }
+  ]
+}

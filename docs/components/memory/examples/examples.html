@@ -1,0 +1,76 @@
+<tp-html-viewer label="tp-memory" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-memory label="Match the fruits">
+        <ol><li>Apple</li><li>Pear</li><li>Plum</li></ol>
+      </tp-memory>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+
+      <tp-radio-list data-setting="back" label="back" label-position="top" orientation="horizontal" value="1"><ul><li>Default</li><li>file1</li><li>file2</li><li>file-unknown</li></ul></tp-radio-list>
+      <tp-cluster><tp-textfield data-setting="mismatch-delay" label="mismatch-delay" value="1000" placeholder="1000" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="memory attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+      <p>File-loading attributes offer only Default, file1, file2 and file-unknown. The two local fixtures preserve verified example formats (they may contain the same content); file-unknown deliberately exercises error handling. No arbitrary path can be entered.</p>
+      <script type="module" src="/tp-components/docs/components/memory/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Numbers 0 to 9">
+      <tp-memory back="/tp-components/medias/logos/logo-tp-components.svg">
+              <ol>
+                <li><tp-icon name="0" library="numbers" size="5em"></tp-icon></li>
+                <li><tp-icon name="1" library="numbers" size="5em"></tp-icon></li>
+                <li><tp-icon name="2" library="numbers" size="5em"></tp-icon></li>
+                <li><tp-icon name="3" library="numbers" size="5em"></tp-icon></li>
+                <li><tp-icon name="4" library="numbers" size="5em"></tp-icon></li>
+                <li><tp-icon name="5" library="numbers" size="5em"></tp-icon></li>
+                <li><tp-icon name="6" library="numbers" size="5em"></tp-icon></li>
+                <li><tp-icon name="7" library="numbers" size="5em"></tp-icon></li>
+                <li><tp-icon name="8" library="numbers" size="5em"></tp-icon></li>
+                <li><tp-icon name="9" library="numbers" size="5em"></tp-icon></li>
+              </ol>
+            </tp-memory>
+    </div>
+
+    <div role="example" label="European Union flags">
+      <tp-memory back="/tp-components/medias/logos/logo-tp-markdown.svg">
+              <ul>
+                <li><tp-icon name="at" library="flags" size="5em" title="Austria"></tp-icon></li>
+                <li><tp-icon name="be" library="flags" size="5em" title="Belgium"></tp-icon></li>
+                <li><tp-icon name="bg" library="flags" size="5em" title="Bulgaria"></tp-icon></li>
+                <li><tp-icon name="hr" library="flags" size="5em" title="Croatia"></tp-icon></li>
+                <li><tp-icon name="cy" library="flags" size="5em" title="Cyprus"></tp-icon></li>
+                <li><tp-icon name="cz" library="flags" size="5em" title="Czechia"></tp-icon></li>
+                <li><tp-icon name="dk" library="flags" size="5em" title="Denmark"></tp-icon></li>
+                <li><tp-icon name="ee" library="flags" size="5em" title="Estonia"></tp-icon></li>
+                <li><tp-icon name="fi" library="flags" size="5em" title="Finland"></tp-icon></li>
+                <li><tp-icon name="fr" library="flags" size="5em" title="France"></tp-icon></li>
+                <li><tp-icon name="de" library="flags" size="5em" title="Germany"></tp-icon></li>
+                <li><tp-icon name="gr" library="flags" size="5em" title="Greece"></tp-icon></li>
+                <li><tp-icon name="hu" library="flags" size="5em" title="Hungary"></tp-icon></li>
+                <li><tp-icon name="ie" library="flags" size="5em" title="Ireland"></tp-icon></li>
+                <li><tp-icon name="it" library="flags" size="5em" title="Italy"></tp-icon></li>
+                <li><tp-icon name="lv" library="flags" size="5em" title="Latvia"></tp-icon></li>
+                <li><tp-icon name="lt" library="flags" size="5em" title="Lithuania"></tp-icon></li>
+                <li><tp-icon name="lu" library="flags" size="5em" title="Luxembourg"></tp-icon></li>
+                <li><tp-icon name="mt" library="flags" size="5em" title="Malta"></tp-icon></li>
+                <li><tp-icon name="nl" library="flags" size="5em" title="Netherlands"></tp-icon></li>
+                <li><tp-icon name="pl" library="flags" size="5em" title="Poland"></tp-icon></li>
+                <li><tp-icon name="pt" library="flags" size="5em" title="Portugal"></tp-icon></li>
+                <li><tp-icon name="ro" library="flags" size="5em" title="Romania"></tp-icon></li>
+                <li><tp-icon name="sk" library="flags" size="5em" title="Slovakia"></tp-icon></li>
+                <li><tp-icon name="si" library="flags" size="5em" title="Slovenia"></tp-icon></li>
+                <li><tp-icon name="es" library="flags" size="5em" title="Spain"></tp-icon></li>
+                <li><tp-icon name="se" library="flags" size="5em" title="Sweden"></tp-icon></li>
+              </ul>
+            </tp-memory>
+    </div>
+  </template>
+</tp-html-viewer>

@@ -1,0 +1,7 @@
+{
+  "id": "04-py-tests",
+  "label": "Python tests",
+  "name": "Python tests",
+  "entry": "/main.py",
+  "test": "/main.test.py"
+}

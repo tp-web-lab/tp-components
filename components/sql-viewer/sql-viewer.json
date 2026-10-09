@@ -1,0 +1,63 @@
+{
+  "tagname": "tp-sql-viewer",
+  "classname": "TpSqlViewer",
+  "superclass": "TpSqlPlayground",
+  "description": "Displays and runs one SQL example in a compact interface.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-sql-viewer></tp-sql-viewer>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "repository",
+      "description": "Directory containing a project to load.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "src",
+      "description": "JSON project or sql source file to load.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-playground-repository-load",
+      "description": "Emitted after a project configured with `repository` has loaded.",
+      "detail": "{ repository: string; project: TpProject }"
+    },
+    {
+      "name": "tp-playground-src-load",
+      "description": "Emitted after a project configured with `src` has loaded.",
+      "detail": "{ src: string; project: TpProject }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-file-tree",
+      "summary": "Displays an interactive file and folder tree."
+    },
+    {
+      "name": "tp-sql-playground",
+      "summary": "SQL playground component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "SQL Viewer",
+    "introduction": "The custom `<tp-sql-viewer>` element implements the <tp-icon name=\"sql-viewer\" library=\"components\" size=\"1.25em\"></tp-icon> SQL Viewer functionality: displays and runs one SQL example in a compact interface.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Code | The viewer initially displays the result. **Code** shows or hides the source editor; edit the source there, then use **Run** to update the result. **Reset** restores the initial source. |\n| :tp-icon:{name=\"code\" size=\"1.25em\"} Code | Shows or hides the source editor. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"1.25em\"} Editor toolbar | Shows or hides the toolbar of every visible code editor. |\n| :tp-icon:{name=\"eye-outline\" size=\"1.25em\"} Render | Shows or hides the rendered result. |\n| :tp-icon:{name=\"terminal\" size=\"1.25em\"} Console | Shows or hides the console; output opens it automatically. |\n| :tp-icon:{name=\"refresh\" size=\"1.25em\"} Reset | Restores the initially loaded project. |\n| :tp-icon:{name=\"play\" size=\"1.25em\"} Run | Executes the current project. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "id": "04-sql-explain",
+  "label": "EXPLAIN query plan",
+  "name": "SQL EXPLAIN",
+  "entry": "/main.sql",
+  "setup": "/setup.sql"
+}

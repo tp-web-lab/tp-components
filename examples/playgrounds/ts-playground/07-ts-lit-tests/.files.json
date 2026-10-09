@@ -1,0 +1,7 @@
+{
+  "files": [
+    "main.test.ts",
+    "main.ts",
+    "my-counter.ts"
+  ]
+}

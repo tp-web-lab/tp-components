@@ -1,0 +1,91 @@
+{
+  "tagname": "tp-matching",
+  "classname": "TpMatching",
+  "superclass": "TpBase",
+  "description": "associates rich content from two or more optionally titled lists without grading the groups.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-matching>\n  <ul><li>Hello</li><li>Thank you</li><li>Goodbye</li></ul>\n  <ol><li>Bonjour</li><li>Merci</li><li>Au revoir</li></ol>\n</tp-matching>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "disabled",
+      "description": "Disables association controls without disabling embedded media.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "heading",
+      "description": "Uses the first list as column headings instead of matchable items.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Clears all groups and reshuffles every list; emits change when values changed."
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "description": "Emitted after associations change; ranks refer to the original lists.",
+      "detail": "{ value: TpMatchingValue; complete: boolean }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-matching-columns",
+      "default": "2",
+      "description": "Controls the columns."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-callout",
+      "summary": "Callout component for highlighted contextual content."
+    },
+    {
+      "name": "tp-dragdrop",
+      "summary": "Generic drag-and-drop controller for content."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Matching",
+    "introduction": "The custom `<tp-matching>` element implements the Matching functionality: associates rich content from two or more optionally titled lists without grading the groups.",
+    "interactions": "#### Mouse interactions\n\nAssociated cards share a color and a group number, including incomplete groups. Colors cycle through blue, violet, amber, cyan, orange and indigo; they indicate membership, never correctness. The number remains the identifier when colors repeat. Completing or editing a group preserves its color.\n\nClick a card or its link icon to select it, then click a card in another column to associate them. Clicking the selected card again cancels the selection. Embedded links, fields, media players and other controls retain their own interactions without selecting the card. The link icon also remains the keyboard selection control and drag handle.\n\n| Control or gesture | Result |\n| --- | --- |\n| Click a card | Select it or associate it with the selected item from another column. Clicking it again cancels selection. Embedded controls do not select the card. |\n| Select | Select an item, then one in each other column to build a group. Select an existing member to extend its group. Select the same item again to cancel. |\n| Drag a Select button | Drop it on an item in the other list to associate the two items. |\n| Remove pair / Remove from group (close icon) | Remove this member. Other members stay associated unless fewer than two remain. |\n| Pair or group number | The same number identifies associated items; it does not indicate a correct answer. A group contains at most one item per column. |\n| Embedded content | Use media players, links and components normally; interacting with them does not select an item. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move through the selection buttons, removal buttons and interactive content. |\n| Enter / Space on Select | Select the item, then activate Select in another column to extend its group. |\n| Enter / Space on Remove pair / Remove from group | Remove the member and return focus to its Select button. |\n| Escape | Cancel a pending selection while focus is inside an item. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Tab / Shift+Tab",
+        "description": "Moves through association controls and interactive content."
+      },
+      {
+        "key": "Enter / Space",
+        "description": "Selects an item or joins it to the selected group from another list."
+      },
+      {
+        "key": "Escape",
+        "description": "Cancels the pending selection."
+      }
+    ]
+  }
+}

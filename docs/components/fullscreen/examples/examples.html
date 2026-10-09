@@ -1,0 +1,60 @@
+<tp-html-viewer label="tp-fullscreen" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-box>
+            <tp-fullscreen></tp-fullscreen>
+            <p>This box is the fullscreen target.</p>
+            <p>Press Esc to exit fullscreen mode.</p>
+          </tp-box>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>disabled</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="size" label="size" label-position="top" orientation="horizontal" value="4"><ul><li>xxs</li><li>xs</li><li>s</li><li>m</li><li>l</li><li>xl</li><li>xxl</li></ul></tp-radio-list>
+      <tp-radio-list data-setting="variant" label="variant" label-position="top" orientation="horizontal" value="5"><ul><li>success</li><li>danger</li><li>warning</li><li>info</li><li>neutral</li><li>brand</li></ul></tp-radio-list>
+      <tp-cluster><tp-textfield data-setting="anchor" label="anchor" value="" placeholder="" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="fullscreen attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/tp-components/docs/components/fullscreen/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Toolbar control">
+      <tp-box>
+            <tp-toolbar>
+              <tp-fullscreen></tp-fullscreen>
+            </tp-toolbar>
+            <p>The fullscreen button is in a toolbar.</p>
+            <p>The containing box is still the fullscreen target.</p>
+          </tp-box>
+    </div>
+
+    <div role="example" label="Change event">
+      <tp-box id="fullscreen-event-target">
+            <tp-fullscreen anchor="#fullscreen-event-target"></tp-fullscreen>
+            <p>Enter or exit fullscreen to emit <code>tp-fullscreen-change</code>.</p>
+          </tp-box>
+          <tp-console></tp-console>
+          <script type="module">
+            customElements.whenDefined('tp-console').then(() => {
+              const section = document.querySelector('#fullscreen-event-target');
+              const output = document.querySelector('tp-console');
+              output.redirectConsoleToSelf();
+              section?.addEventListener('tp-fullscreen-change', (event) => {
+              console.info('tp-fullscreen-change', {
+                fullscreen: event.detail.fullscreen,
+                anchor: event.detail.anchor,
+                target: event.detail.target?.id,
+              });
+              });
+            });
+          </script>
+    </div>
+  </template>
+</tp-html-viewer>

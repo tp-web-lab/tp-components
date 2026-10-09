@@ -1,0 +1,12 @@
+[tp-asciidoc-viewer%allow-script,label="tp-graph-sequential-circuit"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-graph-sequential-circuit%grid,id="sequential-counter",grid-size="20",message="Hubs distribute CLK, Q0, and Q1 along separate orthogonal lanes.",src="/tp-components/docs/components/graph-sequential-circuit/examples/two-bit-counter.json"]
+====
+====
+======
+----
+========

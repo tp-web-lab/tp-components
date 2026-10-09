@@ -1,0 +1,112 @@
+{
+  "tagname": "tp-theme",
+  "classname": "TpTheme",
+  "superclass": "TpBase",
+  "description": "Parent-scoped theme switcher.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-theme></tp-theme>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "anchor",
+      "description": "CSS selector used as the explicit element that receives the selected theme.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the theme trigger.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "mode",
+      "description": "Theme mode (`light`, `dark`, `auto`)",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"auto\""
+    },
+    {
+      "name": "size",
+      "description": "Icon button size.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"m\""
+    },
+    {
+      "name": "ui-anchor",
+      "description": "CSS selector used only to anchor the dropdown UI.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "variant",
+      "description": "Icon button variant.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"neutral\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "syncToMode(mode: TpThemeMode): void",
+      "inherited": false,
+      "description": "Synchronizes the mode from another controller."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-theme-change",
+      "description": "Emitted when the effective theme applied to a target changes.",
+      "detail": "{ mode: \"light\" | \"dark\" | \"auto\"; theme: \"light\" | \"dark\"; anchor: string; target: HTMLElement }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Theme",
+    "introduction": "The custom `<tp-theme>` element implements the <tp-icon name=\"theme\" library=\"components\" size=\"1.25em\"></tp-icon> Theme functionality: parent-scoped theme switcher.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Theme button | Choose the light or dark appearance of the associated content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

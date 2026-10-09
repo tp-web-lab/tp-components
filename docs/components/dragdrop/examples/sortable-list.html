@@ -1,0 +1,14 @@
+<tp-box id="dragdrop-sortable" data-sortable-demo data-allow-script>
+  <p>Arrange these steps in the order you prefer. Drag an entry above or below another entry, or use its Up and Down buttons.</p>
+  <p>Keyboard: Tab to an entry, press Enter or Space to grab it, use the arrow keys to choose a position, then press Enter or Space to drop. Escape cancels.</p>
+  <ol aria-label="Publishing steps">
+    <li aria-label="Publish the document"><tp-box><tp-cluster justify="space-between"><span>Publish the document</span><tp-button-group><tp-icon-button name="arrow-up" data-direction="up" label="Move Publish the document up"></tp-icon-button><tp-icon-button name="arrow-down" data-direction="down" label="Move Publish the document down"></tp-icon-button></tp-button-group></tp-cluster></tp-box></li>
+    <li aria-label="Write a draft"><tp-box><tp-cluster justify="space-between"><span>Write a draft</span><tp-button-group><tp-icon-button name="arrow-up" data-direction="up" label="Move Write a draft up"></tp-icon-button><tp-icon-button name="arrow-down" data-direction="down" label="Move Write a draft down"></tp-icon-button></tp-button-group></tp-cluster></tp-box></li>
+    <li aria-label="Review the content"><tp-box><tp-cluster justify="space-between"><span>Review the content</span><tp-button-group><tp-icon-button name="arrow-up" data-direction="up" label="Move Review the content up"></tp-icon-button><tp-icon-button name="arrow-down" data-direction="down" label="Move Review the content down"></tp-icon-button></tp-button-group></tp-cluster></tp-box></li>
+    <li aria-label="Plan the document"><tp-box><tp-cluster justify="space-between"><span>Plan the document</span><tp-button-group><tp-icon-button name="arrow-up" data-direction="up" label="Move Plan the document up"></tp-icon-button><tp-icon-button name="arrow-down" data-direction="down" label="Move Plan the document down"></tp-icon-button></tp-button-group></tp-cluster></tp-box></li>
+  </ol>
+  <tp-button data-reset outlined>Reset order</tp-button>
+  <p data-sort-status role="status" aria-live="polite">The list is ready to reorder.</p>
+  <tp-dragdrop root="#dragdrop-sortable" items="ol > li"></tp-dragdrop>
+  <script src="/tp-components/docs/components/dragdrop/examples/sortable-list.js"></script>
+</tp-box>

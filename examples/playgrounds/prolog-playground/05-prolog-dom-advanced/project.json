@@ -1,0 +1,7 @@
+{
+  "id": "05-prolog-dom-advanced",
+  "label": "Advanced Prolog DOM",
+  "name": "Advanced Prolog DOM",
+  "entry": "/program.pl",
+  "query": "/query.pl"
+}

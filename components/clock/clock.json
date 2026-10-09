@@ -1,0 +1,58 @@
+{
+  "tagname": "tp-clock",
+  "classname": "TpClock",
+  "superclass": "TpBase",
+  "description": "Live clock component.\n\nThe component renders local time and keeps itself updated every second.\nThe `type` attribute controls whether the display is `digital` or `analogic`.\nThe date is exposed through an attached `<tp-tooltip>`.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-clock></tp-clock>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "size",
+      "description": "Clock size.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1rem\""
+    },
+    {
+      "name": "type",
+      "description": "Display type (`digital` or `analogic`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"digital\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-clock-size",
+      "default": "1rem",
+      "description": "Clock size."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-tooltip",
+      "summary": "Displays anchored tooltip content."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Clock",
+    "introduction": "The custom `<tp-clock>` element implements the <tp-icon name=\"clock\" library=\"components\" size=\"1.25em\"></tp-icon> Clock functionality: live clock component with digital or analogic display and date tooltip.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component displays information and has no control to operate. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

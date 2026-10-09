@@ -1,0 +1,104 @@
+{
+  "tagname": "tp-single-choice-question",
+  "classname": "TpSingleChoiceQuestion",
+  "superclass": "TpQuestion",
+  "description": "Single-choice question: wraps tp-question with radio-list validation.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-single-choice-question></tp-single-choice-question>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "answer",
+      "description": "1-based index of the correct answer in the original list order. Not reflected back to the DOM when set via JS property — read from attribute only.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "0"
+    },
+    {
+      "name": "name",
+      "description": "Name attribute passed to the underlying tp-radio-list.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "orientation",
+      "description": "Orientation attribute passed to the underlying tp-radio-list.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "random",
+      "description": "When present, items are shuffled on connect and after each reset.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "URL to an external JSON file describing items, answer, and feedback. When present, the answer is never exposed in the HTML source. Inherited from TpQuestion.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "value",
+      "description": "Value attribute passed to the underlying tp-radio-list.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "randomize(): void",
+      "inherited": false,
+      "description": "Randomizes the order of answer items."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-markdown",
+      "summary": "Markdown rendering component."
+    },
+    {
+      "name": "tp-question",
+      "summary": "Base description-list container for question components."
+    },
+    {
+      "name": "tp-radio-list",
+      "summary": "Transforms a list into a group of radio buttons."
+    }
+  ],
+  "credits": [
+    {
+      "name": "Zod",
+      "url": "https://zod.dev/",
+      "summary": "Runtime schema validation."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Single-choice question",
+    "introduction": "The custom `<tp-single-choice-question>` element implements the <tp-icon name=\"single-choice-question\" library=\"components\" size=\"1.25em\"></tp-icon> Single-choice question functionality: single-choice question: wraps tp-question with radio-list validation.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Read the prompt, choose one answer and submit it. |\n| Using the component | Review Feedback to understand the result or open Solution for the explanation. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Arrow keys | Move between radio answers in a single-choice question. |\n| Enter / Space on Submit | Submit the selected answers. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

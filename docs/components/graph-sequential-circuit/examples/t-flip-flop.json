@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "title": "T flip-flop",
+  "nodes": [
+    {
+      "id": "toggle",
+      "type": "logic-input",
+      "x": 100,
+      "y": 140,
+      "label": "T",
+      "state": {
+        "value": true
+      }
+    },
+    {
+      "id": "clock",
+      "type": "logic-clock",
+      "x": 140,
+      "y": 280,
+      "label": "Clock"
+    },
+    {
+      "id": "memory",
+      "type": "logic-t-flip-flop",
+      "x": 360,
+      "y": 140,
+      "label": "TFF",
+      "data": {
+        "initial": false,
+        "trigger": "rising"
+      },
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "output",
+      "type": "logic-output",
+      "x": 600,
+      "y": 140,
+      "label": "Q",
+      "state": {
+        "value": false
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "toggle-memory",
+      "type": "logic-wire",
+      "source": "toggle",
+      "sourcePort": "east",
+      "target": "memory",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "clock-memory",
+      "type": "logic-wire",
+      "source": "clock",
+      "sourcePort": "east",
+      "target": "memory",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "bendX": 280
+    },
+    {
+      "id": "memory-output",
+      "type": "logic-wire",
+      "source": "memory",
+      "sourcePort": "east",
+      "target": "output",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    }
+  ]
+}

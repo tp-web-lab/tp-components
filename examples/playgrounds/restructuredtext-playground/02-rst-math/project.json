@@ -1,0 +1,14 @@
+{
+  "id": "02-rst-math",
+  "label": "Math",
+  "name": "reStructuredText math",
+  "entry": "/index.rst",
+  "extensions": [
+    {
+      "id": "mathjax",
+      "label": "MathJax",
+      "url": "/tp-components/extensions/restructuredtext/mathjax/index.js",
+      "enabled": true
+    }
+  ]
+}

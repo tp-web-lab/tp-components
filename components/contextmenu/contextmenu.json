@@ -1,0 +1,136 @@
+{
+  "tagname": "tp-contextmenu",
+  "classname": "TpContextmenu",
+  "superclass": "TpBase",
+  "description": "Affiche un menu contextuel accessible et réutilisable.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-button id=\"intro-contextmenu-trigger\" data-demo-trigger>Right-click this button</tp-button>\n<tp-contextmenu anchor=\"#intro-contextmenu-trigger\" outside-click>\n<ul>\n<li>Item 1</li>\n<li>Item 2</li>\n<li>Item 3</li>\n</ul>\n</tp-contextmenu>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "anchor",
+      "description": "Sélecteur CSS de l’élément servant d’ancrage au clic droit.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "open",
+      "description": "Ouvre ou ferme le menu.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [
+    {
+      "name": "closeAll(): void",
+      "inherited": false,
+      "description": "Réinitialise l’état d’ouverture des sous-menus."
+    },
+    {
+      "name": "hide(): void",
+      "inherited": false,
+      "description": "Ferme explicitement le menu."
+    },
+    {
+      "name": "showAt(x: number, y: number): void",
+      "inherited": false,
+      "description": "Ouvre explicitement le menu à l’écran."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-contextmenu-select",
+      "description": "Émis quand un item terminal portant `data-action` est sélectionné.",
+      "detail": "{ action: string; item: HTMLLIElement; label: string }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-contextmenu-background",
+      "default": "Canvas",
+      "description": "Background color of the menu and submenus."
+    },
+    {
+      "name": "--tp-contextmenu-border-color",
+      "default": "color-mix(in srgb, currentColor 18%, transparent)",
+      "description": "Border color of the menu and dividers."
+    },
+    {
+      "name": "--tp-contextmenu-foreground",
+      "default": "CanvasText",
+      "description": "Text color of the menu."
+    },
+    {
+      "name": "--tp-contextmenu-hover",
+      "default": "color-mix(in srgb, currentColor 10%, transparent)",
+      "description": "Hover background color for menu items."
+    },
+    {
+      "name": "--tp-contextmenu-item-padding-block",
+      "default": "0.5rem",
+      "description": "Block padding for menu items."
+    },
+    {
+      "name": "--tp-contextmenu-item-padding-inline",
+      "default": "0.75rem",
+      "description": "Inline padding for menu items."
+    },
+    {
+      "name": "--tp-contextmenu-min-inline-size",
+      "default": "12rem",
+      "description": "Minimum inline size of menus."
+    },
+    {
+      "name": "--tp-contextmenu-padding",
+      "default": "0.25rem",
+      "description": "Padding around menus."
+    },
+    {
+      "name": "--tp-contextmenu-radius",
+      "default": "0.5rem",
+      "description": "Menu and submenu border radius."
+    },
+    {
+      "name": "--tp-contextmenu-shadow-1",
+      "default": "color-mix(in srgb, black 18%, transparent)",
+      "description": "Primary menu shadow color."
+    },
+    {
+      "name": "--tp-contextmenu-shadow-2",
+      "default": "color-mix(in srgb, black 10%, transparent)",
+      "description": "Secondary menu shadow color."
+    },
+    {
+      "name": "--tp-contextmenu-submenu-offset",
+      "default": "calc(100% - 0.25rem)",
+      "description": "Inline offset used to position submenus."
+    },
+    {
+      "name": "--tp-contextmenu-z-index",
+      "default": "1000",
+      "description": "Stacking level of the context menu."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Contextmenu",
+    "introduction": "The custom `<tp-contextmenu>` element implements the <tp-icon name=\"contextmenu\" library=\"components\" size=\"1.25em\"></tp-icon> Contextmenu functionality: affiche un menu contextuel accessible et réutilisable.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Open the context menu on its associated area, then choose an available action. |\n| Using the component | Dismiss the menu to return to the content without choosing an action. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

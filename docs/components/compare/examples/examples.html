@@ -1,0 +1,29 @@
+<tp-html-viewer label="tp-compare" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-compare position="50%" before-label="Before" after-label="After" style="height: 12rem;">
+        <tp-box slot="before" style="height: 100%; background: var(--tp-neutral-100);">Before: the original design</tp-box>
+        <tp-box slot="after" style="height: 100%; background: var(--tp-brand-100);">After: the updated design</tp-box>
+      </tp-compare>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+
+      <tp-radio-list data-setting="orientation" label="orientation" label-position="top" orientation="horizontal" value="1"><ul><li>horizontal</li><li>vertical</li></ul></tp-radio-list>
+      <tp-cluster><tp-textfield data-setting="after-label" label="after-label" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="before-label" label="before-label" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="position" label="position" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="storage-key" label="storage-key" value="" placeholder="" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="compare attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/tp-components/docs/components/compare/examples/attributes.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

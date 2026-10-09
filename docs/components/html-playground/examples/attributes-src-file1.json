@@ -1,0 +1,11 @@
+{
+  "name": "A small HTML document",
+  "entry": "/tp-components/index.html",
+  "files": [
+    {
+      "path": "/tp-components/index.html",
+      "language": "html",
+      "content": "<h2>Hello, HTML!</h2>\n<p>Edit this paragraph, then select Run to update the preview.</p>\n<ul><li>Write</li><li>Preview</li><li>Publish</li></ul>"
+    }
+  ]
+}

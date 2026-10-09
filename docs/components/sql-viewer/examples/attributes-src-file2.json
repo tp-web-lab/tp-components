@@ -1,0 +1,33 @@
+{
+  "name": "SQL viewer example",
+  "entry": "/query.sql",
+  "setup": "/tables.sql",
+  "database": {
+    "id": "tables.sql",
+    "name": "tables.sql",
+    "type": "sql",
+    "path": "/tables.sql",
+    "active": true
+  },
+  "databases": [
+    {
+      "id": "tables.sql",
+      "name": "tables.sql",
+      "type": "sql",
+      "path": "/tables.sql",
+      "active": true
+    }
+  ],
+  "files": [
+    {
+      "path": "/tables.sql",
+      "language": "sql",
+      "content": "CREATE TABLE users (name TEXT NOT NULL);\nINSERT INTO users (name) VALUES ('Ada'), ('Grace');"
+    },
+    {
+      "path": "/query.sql",
+      "language": "sql",
+      "content": "SELECT name FROM users ORDER BY name;"
+    }
+  ]
+}

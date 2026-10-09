@@ -1,0 +1,68 @@
+{
+  "tagname": "tp-switcher",
+  "classname": "TpSwitcher",
+  "superclass": "TpBase",
+  "description": "Switches between horizontal and vertical layouts based on available space.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "```html\n<tp-switcher threshold=\"35rem\" gap=\"1rem\">\n  <tp-box>1. Plan the content.</tp-box>\n  <tp-box>2. Write a draft.</tp-box>\n  <tp-box>3. Review the text.</tp-box>\n  <tp-box>4. Add illustrations.</tp-box>\n  <tp-box>5. Publish the result.</tp-box>\n</tp-switcher>\n```"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "gap",
+      "description": "Gap between switcher items, using --tp-switcher-gap when absent.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1rem\""
+    },
+    {
+      "name": "max-horizontal",
+      "description": "Maximum number of items per row; additional items wrap onto following rows. Below threshold, items still stack vertically. Absent by default: no per-row limit (the maxHorizontal property returns null).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "\"\""
+    },
+    {
+      "name": "threshold",
+      "description": "Available-width threshold below which the items stack vertically, using --tp-switcher-threshold when absent.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"30rem\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-switcher-gap",
+      "default": "1rem",
+      "description": "Default gap between switcher items."
+    },
+    {
+      "name": "--tp-switcher-threshold",
+      "default": "30rem",
+      "description": "Default switch threshold."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Switcher",
+    "introduction": "The custom `<tp-switcher>` element implements the <tp-icon name=\"switcher\" library=\"components\" size=\"1.25em\"></tp-icon> Switcher functionality: switches between horizontal and vertical layouts based on available space.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

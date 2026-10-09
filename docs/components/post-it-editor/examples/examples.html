@@ -1,0 +1,31 @@
+<tp-html-viewer label="tp-post-it-editor" allow-script style="--tp-html-viewer-frame-min-height: 48rem">
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-box id="post-it-editor-example">
+        <p>Select this first paragraph to attach a note about the introduction.</p>
+        <p>Or select this second paragraph to attach a different note. Reload this page to restore saved notes.</p>
+      </tp-box>
+      <tp-post-it-editor for="#post-it-editor-example" page="post-it-editor-example"></tp-post-it-editor>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+
+
+
+      <tp-stack>
+
+      <tp-radio-list data-setting="markup" label="markup" label-position="top" orientation="horizontal" value="5"><ul><li>html</li><li>markdown</li><li>asciidoc</li><li>restructuredtext</li><li>none</li></ul></tp-radio-list>
+      <tp-cluster><tp-textfield data-setting="for" label="for" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="page" label="page" value="" placeholder="" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="post-it-editor attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/tp-components/docs/components/post-it-editor/examples/attributes.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

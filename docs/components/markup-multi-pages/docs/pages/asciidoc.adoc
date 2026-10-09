@@ -1,0 +1,3 @@
+= AsciiDoc page
+
+This page is rendered by `<tp-asciidoc>` inside `<tp-markup-multi-pages>`.

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Vue tabs</title>
+    <link rel="stylesheet" href="./tabs.css" />
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <h2>Vue tabs</h2>
+    <div id="app">
+      <section class="tabs">
+        <div class="tab-list" role="tablist">
+          <button
+            v-for="(item, index) in items"
+            :key="item.label"
+            type="button"
+            role="tab"
+            :aria-selected="index === selected"
+            @click="selected = index"
+          >
+            {{ item.label }}
+          </button>
+        </div>
+
+        <div class="tab-panel" role="tabpanel">
+          <span v-if="items[selected].link">
+            <a :href="items[selected].link.href" target="_blank" rel="noopener noreferrer">
+              {{ items[selected].link.label }}
+            </a>
+            {{ items[selected].text }}
+          </span>
+          <span v-else>
+            {{ items[selected].text }}
+          </span>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+{
+  "tagname": "tp-code-comment",
+  "classname": "TpCodeComment",
+  "superclass": "TpBase",
+  "description": "associates an ordered annotation list with numbered comments in a code editor.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-code-editor id=\"commented-function\" language=\"typescript\">\n  <script type=\"tp/typescript\">\n    function f(x: number): number {\n      if (x > 0) { return 2 * x; } // <1>\n      else { return 4 * x; } // <2>\n    }\n  </script>\n</tp-code-editor>\n<tp-code-comment for=\"commented-function\">\n  <ol>\n    <li>Positive values are doubled.</li>\n    <li>Zero and negative values are multiplied by four.</li>\n  </ol>\n</tp-code-comment>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "for",
+      "description": "Exact ID, without #, of the tp-code-editor to annotate.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "open",
+      "description": "Show the explanation list; code markers and tooltips remain available when absent.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-callout",
+      "summary": "Callout component for highlighted contextual content."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Code comments",
+    "introduction": "The custom `<tp-code-comment>` element implements the code annotation functionality: associates an ordered annotation list with numbered comments in a code editor.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Hover a numbered icon in the code | Show its explanation in a tooltip, preserving the list item's formatting. |\n| Numbered icons in the explanation list | Match each explanation to the code marker with the same number. |\n| Editing the linked code | Update the markers as the source changes; the annotation list does not change the source text. |\n| Copy or save in the linked editor | Keep the original comments, including literal numbered markers. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Escape, then Tab from the editor | Leave code indentation mode and focus a numbered marker. Its explanation opens as on hover; Tab and Shift+Tab move between focusable controls. |\n| Escape while a tooltip is open | Close the tooltip without changing the source. |\n| Typing in the linked editor | Edit code using the editor's normal keyboard behavior. |\n| Ctrl+? | Open User help for the component under the pointer, falling back to the focused component. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

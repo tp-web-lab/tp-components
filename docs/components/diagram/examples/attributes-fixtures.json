@@ -1,0 +1,20 @@
+{
+  "src": [
+    {
+      "label": "Default",
+      "value": ""
+    },
+    {
+      "label": "file1",
+      "value": "/tp-components/docs/components/diagram/examples/attributes-src-file1.mmd"
+    },
+    {
+      "label": "file2",
+      "value": "/tp-components/docs/components/diagram/examples/attributes-src-file2.mmd"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/tp-components/docs/components/diagram/examples/attributes-src-file-unknown.mmd"
+    }
+  ]
+}

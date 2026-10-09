@@ -1,0 +1,20 @@
+{
+  "back": [
+    {
+      "label": "Default",
+      "value": ""
+    },
+    {
+      "label": "file1",
+      "value": "/tp-components/docs/components/memory/examples/attributes-back-file1.svg"
+    },
+    {
+      "label": "file2",
+      "value": "/tp-components/docs/components/memory/examples/attributes-back-file2.svg"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/tp-components/docs/components/memory/examples/attributes-back-file-unknown.svg"
+    }
+  ]
+}

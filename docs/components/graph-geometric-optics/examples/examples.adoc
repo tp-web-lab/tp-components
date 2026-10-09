@@ -1,0 +1,12 @@
+[tp-asciidoc-viewer%allow-script,label="tp-graph-geometric-optics"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-graph-geometric-optics%grid,id="optics-example",grid-size="20",message="Move the lens or screen and inspect the paraxial analysis.",src="/tp-components/docs/components/graph-geometric-optics/examples/converging-lens.json"]
+====
+====
+======
+----
+========

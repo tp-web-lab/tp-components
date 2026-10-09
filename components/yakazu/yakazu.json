@@ -1,0 +1,35 @@
+{
+  "tagname": "tp-yakazu",
+  "classname": "TpYakazu",
+  "superclass": "TpBase",
+  "description": "Web component for interactive Yakazu puzzles.\nUses lightDOM to maintain consistent styling with page content.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-yakazu></tp-yakazu>"
+    }
+  ],
+  "attributes": [],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Yakazu",
+    "introduction": "The custom `<tp-yakazu>` element implements the <tp-icon name=\"yakazu\" library=\"components\" size=\"1.25em\"></tp-icon> Yakazu functionality: yakazu puzzle web component using lightDOM. Provides interactive Yakazu puzzle solving via the `<tp-yakazu>` custom element. Yakazu is a logic puzzle combining elements of Sudoku with arithmetic constraints. Features: - Interactive grid solving with visual feedback - Dual entry modes: Game (single value) and Note (pencil marks) - Real-time validation with constraint checking - Undo/redo functionality - Assistance options (show cell, show solution, clear errors) - Entry mode toggling - Progress tracking and completion detection Puzzle data is loaded from data attributes or HTML list structures.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Complete the puzzle using the editable cells; fixed clues cannot be changed. |\n| Using the component | Use the displayed assistance controls to check or reveal information when available. |\n| Using the component | The puzzle's messages indicate progress and completion. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

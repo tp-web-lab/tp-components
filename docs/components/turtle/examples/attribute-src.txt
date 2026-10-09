@@ -1,0 +1,8 @@
+turtle x=0 y=0 heading=0 speed=6
+forward 80
+right 90
+forward 80
+right 90
+forward 80
+right 90
+forward 80

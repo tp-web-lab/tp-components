@@ -1,0 +1,50 @@
+{
+  "tagname": "tp-graph-query-tree",
+  "classname": "TpGraphQueryTree",
+  "superclass": "TpGraphEditor",
+  "description": "Edits relational algebra trees and generates equivalent SQL.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-graph-query-tree></tp-graph-query-tree>"
+    }
+  ],
+  "attributes": [],
+  "methods": [
+    {
+      "name": "addEdge(source: string, target: string, type = TP_QUERY_EDGE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = 'forward'): TpGraphEdge",
+      "inherited": false,
+      "description": "Adds edge."
+    },
+    {
+      "name": "addNode(type: string, point: TpGraphPoint, nodeLabel?: string): TpGraphNode",
+      "inherited": false,
+      "description": "Adds node."
+    },
+    {
+      "name": "setGraph(graph: TpGraphDocument): void",
+      "inherited": false,
+      "description": "Sets graph."
+    },
+    {
+      "name": "toSql(): string",
+      "inherited": false,
+      "description": "To sql."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-graph-editor",
+      "summary": "Extensible interactive graph editor."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Relational query trees",
+    "introduction": "The custom `<tp-graph-query-tree>` element implements the <tp-icon name=\"graph-query-tree\" library=\"components\" size=\"1.25em\"></tp-icon> Relational query trees functionality: edits relational algebra trees and generates equivalent SQL.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Select | Select a node to edit its relevant properties in the lower toolbar. |\n| Table | Relations expose **Table** and **Alias**. |\n| Select | Selection, projection, aggregation, sort, and join nodes expose their expression. |\n| Group by | Aggregation also exposes **Group by**, while joins offer inner, left, right, and full variants. |\n| Using the component | The generated SQL uses nested derived tables so that every relational operator remains visible in the translation. |\n| Using the component | For binary operators, the left and right operands are determined by their horizontal positions in the graph. |\n| Using the component | An incomplete tree displays a precise message instead of SQL. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

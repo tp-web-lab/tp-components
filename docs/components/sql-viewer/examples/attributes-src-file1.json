@@ -1,0 +1,33 @@
+{
+  "name": "European capitals",
+  "entry": "/query.sql",
+  "setup": "/tables.sql",
+  "database": {
+    "id": "tables.sql",
+    "name": "tables.sql",
+    "type": "sql",
+    "path": "/tables.sql",
+    "active": true
+  },
+  "files": [
+    {
+      "path": "/tables.sql",
+      "language": "sql",
+      "content": "CREATE TABLE capitals (country TEXT, city TEXT);\nINSERT INTO capitals VALUES ('France', 'Paris'), ('Italy', 'Rome'), ('Latvia', 'Riga');"
+    },
+    {
+      "path": "/query.sql",
+      "language": "sql",
+      "content": "SELECT country, city FROM capitals ORDER BY country;"
+    }
+  ],
+  "databases": [
+    {
+      "id": "tables.sql",
+      "name": "tables.sql",
+      "type": "sql",
+      "path": "/tables.sql",
+      "active": true
+    }
+  ]
+}

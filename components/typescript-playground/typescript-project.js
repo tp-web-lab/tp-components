@@ -1,0 +1,2 @@
+import { j as e } from "../../chunks/lib/typescript/typescript.js";
+export { e as TpTypescriptProject };

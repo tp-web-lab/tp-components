@@ -1,0 +1,117 @@
+[tp-asciidoc-viewer%allow-script,label="tp-timefield"]
+=========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-timefield%clearable,label="Time",value="14:30"]
+====
+====
+======
+
+.Attributes
+========
+Change several attributes on one preview. All controls start at their documented defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Reset defaults fills the controls with their defaults again. Controls stay available when the preview is disabled or readonly.
+
+[tp-stack]
+======
+[tp-checkbox-list%value,id="timefield-booleans",label="Boolean attributes",label-position="top",orientation="horizontal"]
+====
+* clearable
+
+* disabled
+
+* readonly
+
+* required
+====
+
+[tp-radio-list,data-setting="label-position",label="label-position",label-position="top",orientation="horizontal",value="1"]
+====
+* top
+
+* bottom
+
+* start
+
+* end
+====
+
+[tp-cluster]
+=====
+[tp-textfield%value%placeholder%clearable,data-setting="autocomplete",label="autocomplete"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="label",label="label"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="max",label="max"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="min",label="min"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="name",label="name"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="placeholder",label="placeholder"]
+====
+====
+
+[tp-textfield%clearable,data-setting="step",label="step",value="60",placeholder="60"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="value",label="value"]
+====
+====
+=====
+
+[tp-button,id="timefield-reset",type="button"]
+====
+Reset defaults
+====
+======
+
+[tp-divider]
+====
+====
+
+[h3]
+====
+Preview
+====
+
+[tp-box]
+=====
+[tp-timefield,id="timefield-preview"]
+====
+====
+=====
+
+[tp-box,id="timefield-readout",aria-live="polite"]
+====
+Reading native attributes…
+====
+
+[tp-callout,variant="info",heading="Things to try"]
+====
+Set label and enter a time such as 14:30 in value. Use HH:MM or HH:MM:SS for min and max; step is measured in seconds (60 by default). Change the native time and observe the value setting update. Enable clearable to show the clear button; it is hidden otherwise.
+====
+
+[script,type="module",src="/tp-components/docs/components/timefield/examples/attributes.js"]
+====
+====
+========
+
+.Inline named field
+======
+Value: [tp-timefield,value="14:30",placeholder="Enter a value"]#identifier#
+======
+----
+=========

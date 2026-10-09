@@ -1,0 +1,308 @@
+{
+  "tagname": "tp-graph-editor",
+  "classname": "TpGraphEditor",
+  "superclass": "TpBase",
+  "description": "Edits and animates domain-specific graphs.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-graph-editor></tp-graph-editor>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "grid",
+      "description": "Displays and uses the snapping grid.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "grid-size",
+      "description": "Grid spacing in graph units.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "20"
+    },
+    {
+      "name": "message",
+      "description": "Status message displayed by the graph editor.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "ports-visible",
+      "description": "Keeps attachment plots visible instead of showing them only on hover.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "readonly",
+      "description": "Prevents graph editing while keeping navigation available.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "URL of a tp/graph JSON document loaded at initialization.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "addEdge(source: string, target: string, type = \"edge\", sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = this.activeEdgeDirection, routing: TpGraphEdgeRouting = this.activeEdgeRouting): TpGraphEdge",
+      "inherited": false,
+      "description": "Adds edge."
+    },
+    {
+      "name": "addMeasurement(edgeId: string, position = 0.5, label?: string): TpGraphMeasurement",
+      "inherited": false,
+      "description": "Adds measurement."
+    },
+    {
+      "name": "addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode",
+      "inherited": false,
+      "description": "Adds node."
+    },
+    {
+      "name": "animateTransition(transition: TpGraphTransition): Promise<void>",
+      "inherited": false,
+      "description": "Animate transition."
+    },
+    {
+      "name": "copy(): boolean",
+      "inherited": false,
+      "description": "Copy."
+    },
+    {
+      "name": "cut(): boolean",
+      "inherited": false,
+      "description": "Cut."
+    },
+    {
+      "name": "exportJson(pretty = true): string",
+      "inherited": false,
+      "description": "Exports json."
+    },
+    {
+      "name": "exportSvg(): string",
+      "inherited": false,
+      "description": "Exports svg."
+    },
+    {
+      "name": "importJson(source: string): void",
+      "inherited": false,
+      "description": "Imports json."
+    },
+    {
+      "name": "moveMeasurement(id: string, position: number): void",
+      "inherited": false,
+      "description": "Moves measurement."
+    },
+    {
+      "name": "paste(): string | null",
+      "inherited": false,
+      "description": "Paste."
+    },
+    {
+      "name": "reconnectEdge(edgeId: string, endpoint: \"source\" | \"target\", nodeId: string, port: TpGraphPort): TpGraphEdge",
+      "inherited": false,
+      "description": "Reconnect edge."
+    },
+    {
+      "name": "redo(): boolean",
+      "inherited": false,
+      "description": "Redo."
+    },
+    {
+      "name": "registerPalette(palette: TpGraphPalette): void",
+      "inherited": false,
+      "description": "Registers palette."
+    },
+    {
+      "name": "registerSimulator(name: string, simulator: TpGraphSimulator): void",
+      "inherited": false,
+      "description": "Registers simulator."
+    },
+    {
+      "name": "removeElement(id: string): void",
+      "inherited": false,
+      "description": "Removes element."
+    },
+    {
+      "name": "resetZoom(): void",
+      "inherited": false,
+      "description": "Resets zoom."
+    },
+    {
+      "name": "setCommentColor(id: string, color: TpGraphCommentColor): void",
+      "inherited": false,
+      "description": "Sets comment color."
+    },
+    {
+      "name": "setEdgeDirection(edgeId: string, direction: TpGraphEdgeDirection): void",
+      "inherited": false,
+      "description": "Sets edge direction."
+    },
+    {
+      "name": "setEdgeOrthogonal(edgeId: string, elbows: 1 | 2 | 3, departure: \"horizontal\" | \"vertical\", turns: \"alternating\" | \"same\" = \"alternating\"): void",
+      "inherited": false,
+      "description": "Sets edge orthogonal."
+    },
+    {
+      "name": "setEdgeRouting(edgeId: string, routing: TpGraphEdgeRouting): void",
+      "inherited": false,
+      "description": "Sets edge routing."
+    },
+    {
+      "name": "setElementLabel(id: string, label: string): void",
+      "inherited": false,
+      "description": "Sets element label."
+    },
+    {
+      "name": "setGraph(graph: TpGraphDocument): void",
+      "inherited": false,
+      "description": "Sets graph."
+    },
+    {
+      "name": "setTitle(title: string): void",
+      "inherited": false,
+      "description": "Sets title."
+    },
+    {
+      "name": "setZoom(value: number): void",
+      "inherited": false,
+      "description": "Sets zoom."
+    },
+    {
+      "name": "step(simulatorName: string): Promise<void>",
+      "inherited": false,
+      "description": "Step."
+    },
+    {
+      "name": "undo(): boolean",
+      "inherited": false,
+      "description": "Undo."
+    },
+    {
+      "name": "unregisterPalette(id: string): void",
+      "inherited": false,
+      "description": "Unregisters palette."
+    },
+    {
+      "name": "zoomIn(): void",
+      "inherited": false,
+      "description": "Zoom in."
+    },
+    {
+      "name": "zoomOut(): void",
+      "inherited": false,
+      "description": "Zoom out."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-graph-change",
+      "description": "Fired after a user or API graph mutation.",
+      "detail": "{ reason: unknown; graph: unknown }"
+    },
+    {
+      "name": "tp-graph-error",
+      "description": "Emitted when graph error occurs.",
+      "detail": "{ error: unknown; operation: \"add-edge\" }"
+    },
+    {
+      "name": "tp-graph-export",
+      "description": "Emitted when graph export occurs.",
+      "detail": "{ graph: unknown }"
+    },
+    {
+      "name": "tp-graph-import",
+      "description": "Emitted when graph import occurs.",
+      "detail": "{ graph: unknown }"
+    },
+    {
+      "name": "tp-graph-selection-change",
+      "description": "Fired when the selection changes.",
+      "detail": "{ id: unknown; ids: unknown }"
+    },
+    {
+      "name": "tp-graph-simulation-step",
+      "description": "Fired after a simulator step.",
+      "detail": "{ simulator: unknown; graph: unknown }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-accordion",
+      "summary": "Accessible accordion component with keyboard navigation and ARIA mapping."
+    },
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button-group",
+      "summary": "Button group component for organizing multiple buttons."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-color",
+      "summary": "Brand color preset controller scoped to the containing element."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-save-image",
+      "summary": "Downloads an anchored image as SVG, PNG or WebP."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
+    }
+  ],
+  "credits": [
+    {
+      "name": "Zod",
+      "url": "https://zod.dev/",
+      "summary": "Runtime schema validation."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Graph editor",
+    "introduction": "The custom `<tp-graph-editor>` element implements the <tp-icon name=\"graph-editor\" library=\"components\" size=\"1.25em\"></tp-icon> Graph editor functionality: edits and animates domain-specific graphs.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Drag | Drag a shape from the palette onto the canvas to create a node. |\n| Select | Select and move nodes, connect their ports, and select links to edit them. |\n| Using the component | Use the toolbar for undo, redo, zoom, import and export. |\n| Using the component | The `language-json` toolbar button shows or hides a source editor below the palette and canvas. |\n| Graph JSON | Synchronization is explicit: after editing the JSON, use the `sync` button at the end of the **Graph JSON** header to apply it to the graph. |\n| Using the component | If the code has not been edited, the same button copies the current graph into the code editor. |\n| Using the component | Invalid JSON leaves the canvas unchanged and displays a validation message. |\n| Drag | Drag a shape from the palette and drop it on the canvas to create a node. |\n| Click | Clicking an empty part of the canvas only clears the selection. |\n| Drag | Drag a node by its body to move it. |\n| Using the component | When an existing link is selected, choosing another link mode in the palette changes that link immediately. |\n| Using the component | Without a selected link, the choice applies to the next link created. |\n| Hover | Hover or select a node to reveal its four attachment ports. |\n| Drag | Drag from the exact source port to the exact target port to create an edge. |\n| Using the component | A dashed preview follows the pointer, but releasing it over the node body does not create a connection. |\n| Hover | Hover or select an edge to reveal a handle at each endpoint. |\n| Drag | Drag either handle onto the exact destination port to reconnect that endpoint. |\n| Using the component | Domain rules are applied again, so an invalid endpoint is rejected without changing the edge. |\n| Drag | Drag the body of an edge to move the complete segment. |\n| Using the component | This disconnects both endpoints. |\n| Using the component | The endpoint handles can then reconnect the floating edge wherever needed. |\n| Measurement | Drag **Measurement** from the annotation palette and drop its small square directly on a link. |\n| Using the component | The point remains attached while nodes and bends move. |\n| Drag | Drag the square along the link to reposition it, then double-click it to give it a name. |\n| Using the component | Removing a node also removes its incident edges. |\n| Cut | The **Cut** button provides the equivalent toolbar action while retaining the element in the editor clipboard. |\n| Copy | Use **Copy**, **Cut**, and **Paste** on the selected element. |\n| Undo | A pasted node is offset from its source, with a larger offset for each consecutive paste. **Undo** and **Redo** navigate up to 100 graph changes. |\n| :tp-icon:{name=\"arrow-expand-vertical\" size=\"1.25em\"} :tp-icon:{name=\"arrow-collapse-vertical\" size=\"1.25em\"} Expand / Collapse | Expands or collapses every palette group. |\n| :tp-icon:{name=\"undo\" size=\"1.25em\"} :tp-icon:{name=\"redo\" size=\"1.25em\"} Undo / Redo | Navigates graph changes. |\n| :tp-icon:{name=\"select\" size=\"1.25em\"} Select area | Toggles rectangular multi-selection. |\n| :tp-icon:{name=\"content-copy\" size=\"1.25em\"} :tp-icon:{name=\"content-cut\" size=\"1.25em\"} :tp-icon:{name=\"content-paste\" size=\"1.25em\"} Copy / Cut / Paste | Copies, removes, or pastes selected graph elements. |\n| :tp-icon:{name=\"text-short\" size=\"1.25em\"} :tp-icon:{name=\"format-title\" size=\"1.25em\"} Label / Graph title | Edits the selected label or document title. |\n| :tp-icon:{name=\"magnify-minus-outline\" size=\"1.25em\"} :tp-icon:{name=\"magnify-plus-outline\" size=\"1.25em\"} Zoom out / Zoom in | Changes the canvas scale. |\n| :tp-icon:{name=\"grid\" size=\"1.25em\"} Grid | Shows or hides the snapping grid. |\n| :tp-icon:{name=\"file-upload\" size=\"1.25em\"} :tp-icon:{name=\"file-download\" size=\"1.25em\"} Import / Export | Loads or downloads the graph as JSON. |\n| :tp-icon:{name=\"language-json\" size=\"1.25em\"} Graph JSON | Shows or hides the JSON editor. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"1.25em\"} Editor toolbar | Shows or hides the JSON code editor toolbar. |\n| :tp-icon:{name=\"sync\" size=\"1.25em\"} Synchronize | Applies edited JSON or copies the graph into the JSON editor. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Delete / Backspace | Remove the selected node, edge or measurement point. |\n| Ctrl/Cmd+C | Copy the selected element. |\n| Ctrl/Cmd+X | Cut the selected element. |\n| Ctrl/Cmd+V | Paste the copied or cut element. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

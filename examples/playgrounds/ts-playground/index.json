@@ -1,0 +1,11 @@
+{
+  "examples": [
+    "01-ts-basic",
+    "02-ts-import",
+    "03-ts-lit",
+    "04-ts-tests",
+    "05-ts-dom-tests",
+    "06-ts-async-tests",
+    "07-ts-lit-tests"
+  ]
+}

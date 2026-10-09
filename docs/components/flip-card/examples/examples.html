@@ -1,0 +1,47 @@
+<tp-html-viewer label="tp-flip-card" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-flip-card>
+      <dl>
+        <dt>recto</dt><dd><p>This is the content <strong>recto...</strong></p></dd>
+        <dt>verso</dt><dd><p>...and here is the content <strong>verso.</strong></p></dd>
+      </dl>
+      </tp-flip-card>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>disabled</li><li>fit-content</li><li>flipped</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="button-position" label="button-position" label-position="top" orientation="horizontal" value="6"><ul><li>top start</li><li>top center</li><li>top end</li><li>bottom start</li><li>bottom center</li><li>bottom end</li><li>none</li></ul></tp-radio-list>
+      <tp-cluster></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="flip-card attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/tp-components/docs/components/flip-card/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Hearts suit">
+      <p>Click any card to turn it over. You can also focus a card with Tab and press Enter or Space.</p>
+      <tp-cluster>
+      <tp-flip-card button-position="none" style="--tp-flip-card-padding: 0" aria-label="Ace of hearts"><dl><dt>recto</dt><dd><tp-icon src="/tp-components/components/card/cards/hearts/ha.svg" size="100%" style="display: block" role="img" aria-label="Ace of hearts"></tp-icon></dd><dt>verso</dt><dd><tp-center intrinsic="" style="height: 100%; justify-content: center"><tp-icon name="logo-tp" size="10em" role="img" aria-label="tp-components logo"></tp-icon></tp-center></dd></dl></tp-flip-card>
+      <tp-flip-card button-position="none" style="--tp-flip-card-padding: 0" aria-label="Two of hearts"><dl><dt>recto</dt><dd><tp-icon src="/tp-components/components/card/cards/hearts/h2.svg" size="100%" style="display: block" role="img" aria-label="Two of hearts"></tp-icon></dd><dt>verso</dt><dd><tp-center intrinsic="" style="height: 100%; justify-content: center"><tp-icon name="logo-tp" size="10em" role="img" aria-label="tp-components logo"></tp-icon></tp-center></dd></dl></tp-flip-card>
+      <tp-flip-card button-position="none" style="--tp-flip-card-padding: 0" aria-label="Three of hearts"><dl><dt>recto</dt><dd><tp-icon src="/tp-components/components/card/cards/hearts/h3.svg" size="100%" style="display: block" role="img" aria-label="Three of hearts"></tp-icon></dd><dt>verso</dt><dd><tp-center intrinsic="" style="height: 100%; justify-content: center"><tp-icon name="logo-tp" size="10em" role="img" aria-label="tp-components logo"></tp-icon></tp-center></dd></dl></tp-flip-card>
+      <tp-flip-card button-position="none" style="--tp-flip-card-padding: 0" aria-label="Four of hearts"><dl><dt>recto</dt><dd><tp-icon src="/tp-components/components/card/cards/hearts/h4.svg" size="100%" style="display: block" role="img" aria-label="Four of hearts"></tp-icon></dd><dt>verso</dt><dd><tp-center intrinsic="" style="height: 100%; justify-content: center"><tp-icon name="logo-tp" size="10em" role="img" aria-label="tp-components logo"></tp-icon></tp-center></dd></dl></tp-flip-card>
+      <tp-flip-card button-position="none" style="--tp-flip-card-padding: 0" aria-label="Five of hearts"><dl><dt>recto</dt><dd><tp-icon src="/tp-components/components/card/cards/hearts/h5.svg" size="100%" style="display: block" role="img" aria-label="Five of hearts"></tp-icon></dd><dt>verso</dt><dd><tp-center intrinsic="" style="height: 100%; justify-content: center"><tp-icon name="logo-tp" size="10em" role="img" aria-label="tp-components logo"></tp-icon></tp-center></dd></dl></tp-flip-card>
+      <tp-flip-card button-position="none" style="--tp-flip-card-padding: 0" aria-label="Six of hearts"><dl><dt>recto</dt><dd><tp-icon src="/tp-components/components/card/cards/hearts/h6.svg" size="100%" style="display: block" role="img" aria-label="Six of hearts"></tp-icon></dd><dt>verso</dt><dd><tp-center intrinsic="" style="height: 100%; justify-content: center"><tp-icon name="logo-tp" size="10em" role="img" aria-label="tp-components logo"></tp-icon></tp-center></dd></dl></tp-flip-card>
+      <tp-flip-card button-position="none" style="--tp-flip-card-padding: 0" aria-label="Seven of hearts"><dl><dt>recto</dt><dd><tp-icon src="/tp-components/components/card/cards/hearts/h7.svg" size="100%" style="display: block" role="img" aria-label="Seven of hearts"></tp-icon></dd><dt>verso</dt><dd><tp-center intrinsic="" style="height: 100%; justify-content: center"><tp-icon name="logo-tp" size="10em" role="img" aria-label="tp-components logo"></tp-icon></tp-center></dd></dl></tp-flip-card>
+      <tp-flip-card button-position="none" style="--tp-flip-card-padding: 0" aria-label="Eight of hearts"><dl><dt>recto</dt><dd><tp-icon src="/tp-components/components/card/cards/hearts/h8.svg" size="100%" style="display: block" role="img" aria-label="Eight of hearts"></tp-icon></dd><dt>verso</dt><dd><tp-center intrinsic="" style="height: 100%; justify-content: center"><tp-icon name="logo-tp" size="10em" role="img" aria-label="tp-components logo"></tp-icon></tp-center></dd></dl></tp-flip-card>
+      <tp-flip-card button-position="none" style="--tp-flip-card-padding: 0" aria-label="Nine of hearts"><dl><dt>recto</dt><dd><tp-icon src="/tp-components/components/card/cards/hearts/h9.svg" size="100%" style="display: block" role="img" aria-label="Nine of hearts"></tp-icon></dd><dt>verso</dt><dd><tp-center intrinsic="" style="height: 100%; justify-content: center"><tp-icon name="logo-tp" size="10em" role="img" aria-label="tp-components logo"></tp-icon></tp-center></dd></dl></tp-flip-card>
+      <tp-flip-card button-position="none" style="--tp-flip-card-padding: 0" aria-label="Ten of hearts"><dl><dt>recto</dt><dd><tp-icon src="/tp-components/components/card/cards/hearts/h10.svg" size="100%" style="display: block" role="img" aria-label="Ten of hearts"></tp-icon></dd><dt>verso</dt><dd><tp-center intrinsic="" style="height: 100%; justify-content: center"><tp-icon name="logo-tp" size="10em" role="img" aria-label="tp-components logo"></tp-icon></tp-center></dd></dl></tp-flip-card>
+      <tp-flip-card button-position="none" style="--tp-flip-card-padding: 0" aria-label="Jack of hearts"><dl><dt>recto</dt><dd><tp-icon src="/tp-components/components/card/cards/hearts/hj.svg" size="100%" style="display: block" role="img" aria-label="Jack of hearts"></tp-icon></dd><dt>verso</dt><dd><tp-center intrinsic="" style="height: 100%; justify-content: center"><tp-icon name="logo-tp" size="10em" role="img" aria-label="tp-components logo"></tp-icon></tp-center></dd></dl></tp-flip-card>
+      <tp-flip-card button-position="none" style="--tp-flip-card-padding: 0" aria-label="Queen of hearts"><dl><dt>recto</dt><dd><tp-icon src="/tp-components/components/card/cards/hearts/hq.svg" size="100%" style="display: block" role="img" aria-label="Queen of hearts"></tp-icon></dd><dt>verso</dt><dd><tp-center intrinsic="" style="height: 100%; justify-content: center"><tp-icon name="logo-tp" size="10em" role="img" aria-label="tp-components logo"></tp-icon></tp-center></dd></dl></tp-flip-card>
+      <tp-flip-card button-position="none" style="--tp-flip-card-padding: 0" aria-label="King of hearts"><dl><dt>recto</dt><dd><tp-icon src="/tp-components/components/card/cards/hearts/hk.svg" size="100%" style="display: block" role="img" aria-label="King of hearts"></tp-icon></dd><dt>verso</dt><dd><tp-center intrinsic="" style="height: 100%; justify-content: center"><tp-icon name="logo-tp" size="10em" role="img" aria-label="tp-components logo"></tp-icon></tp-center></dd></dl></tp-flip-card>
+      </tp-cluster>
+    </div>
+  </template>
+</tp-html-viewer>

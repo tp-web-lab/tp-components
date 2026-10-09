@@ -1,0 +1,83 @@
+::::::: tp-markdown-viewer { label="tp-timeline" allow-script }
+:::::: script { type="tp/markdown" }
+``` example {label="Basic usage"}
+::: tp-timeline
+Time
+:
+  09:00
+
+Icon
+:
+  :tp-icon:{name="home"}
+
+Title
+:
+  Welcome
+
+Content
+:
+  Meet the team and explore the project.
+
+Time
+:
+  10:00
+
+Title
+:
+  Workshop
+
+Content
+:
+  Build your first component together.
+
+Time
+:
+  12:00
+
+Title
+:
+  Closing session
+:::
+```
+
+``` example {label="Attributes"}
+Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+
+::::: tp-stack
+::: tp-radio-list { data-setting="orientation" label="orientation" label-position="top" orientation="horizontal" value="1" }
+- vertical
+
+- horizontal
+:::
+
+::: tp-cluster
+:::
+
+:::: tp-button-group
+::: tp-button { id="attributes-reset" type="button" }
+Reset defaults
+:::
+
+::: tp-button { id="attributes-reload" type="button" }
+Reload preview
+:::
+::::
+:::::
+
+::: tp-divider
+:::
+
+### Preview
+
+::: tp-iframe { id="attributes-frame" title="timeline attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
+:::
+
+::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
+Preparing the preview…
+:::
+
+::: script { type="module" src="/tp-components/docs/components/timeline/examples/attributes.js" }
+:::
+```
+::::::
+:::::::

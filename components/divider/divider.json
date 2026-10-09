@@ -1,0 +1,60 @@
+{
+  "tagname": "tp-divider",
+  "classname": "TpDivider",
+  "superclass": "TpBase",
+  "description": "Visual separator.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-divider></tp-divider>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "orientation",
+      "description": "Divider orientation (`horizontal` or `vertical`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"horizontal\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-divider-color",
+      "default": "var(--tp-neutral-stroke-soft, #d1d5db)",
+      "description": "Divider line color."
+    },
+    {
+      "name": "--tp-divider-margin-block",
+      "default": "0.125rem",
+      "description": "Block margin around the divider."
+    },
+    {
+      "name": "--tp-divider-margin-inline",
+      "default": "0",
+      "description": "Inline margin around the divider."
+    },
+    {
+      "name": "--tp-divider-thickness",
+      "default": "1px",
+      "description": "Divider line thickness."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Divider",
+    "introduction": "The custom `<tp-divider>` element implements the <tp-icon name=\"divider\" library=\"components\" size=\"1.25em\"></tp-icon> Divider functionality: visual separator.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

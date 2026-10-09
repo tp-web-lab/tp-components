@@ -1,0 +1,14 @@
+{
+  "id": "07-rst-references",
+  "label": "References",
+  "name": "References",
+  "entry": "/index.rst",
+  "extensions": [
+    {
+      "id": "references",
+      "label": "References",
+      "url": "/tp-components/extensions/restructuredtext/references/index.js",
+      "enabled": true
+    }
+  ]
+}

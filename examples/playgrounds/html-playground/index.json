@@ -1,0 +1,13 @@
+{
+  "examples": [
+    "01-html-basic",
+    "02-html-css",
+    "03-html-css-js-tabs",
+    "04-html-vanilla-web-component",
+    "05-html-lit",
+    "06-html-lit-importmap",
+    "07-html-react",
+    "08-html-vue",
+    "09-html-tests"
+  ]
+}

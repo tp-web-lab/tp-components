@@ -1,0 +1,8 @@
+{
+  "src": [
+    {"label": "Default", "value": ""},
+    {"label": "file1", "value": "/tp-components/docs/components/map/examples/brest-track.gpx"},
+    {"label": "file2", "value": "/tp-components/docs/components/map/examples/ouessant-route.gpx"},
+    {"label": "file-unknown", "value": "/tp-components/docs/components/map/examples/file-unknown.gpx"}
+  ]
+}

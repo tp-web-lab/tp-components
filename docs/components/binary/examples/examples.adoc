@@ -1,0 +1,109 @@
+[tp-asciidoc-viewer%allow-script,label="tp-binary"]
+=========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-binary]
+====
+. 1010110!0
+
+. 01!01!0011!
+
+. 0010101!1!
+
+. 11!01!0100
+
+. 10011001!
+
+. 0!110!1010
+
+. 0110!0!101
+
+. 10!0101!10
+====
+======
+
+.Attributes
+========
+Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+
+[tp-stack]
+======
+[tp-cluster]
+=====
+[tp-textfield%value%placeholder%clearable,data-setting="puzzle",label="puzzle"]
+====
+====
+=====
+
+[tp-button-group]
+=====
+[tp-button,id="attributes-reset",type="button"]
+====
+Reset defaults
+====
+
+[tp-button,id="attributes-reload",type="button"]
+====
+Reload preview
+====
+=====
+======
+
+[tp-divider]
+====
+====
+
+[h3]
+====
+Preview
+====
+
+[tp-iframe,id="attributes-frame",title="binary attribute preview",style="height: 24rem; display: flow-root; inline-size: auto;"]
+====
+====
+
+[tp-callout,id="attributes-status",variant="info",heading="Preview status"]
+====
+Preparing the preview…
+====
+
+[script,type="module",src="/tp-components/docs/components/binary/examples/attributes.js"]
+====
+====
+========
+
+.binary ⭐⭐
+======
+[tp-binary]
+=====
+. 0110!11!00
+. 001!100!11
+. 11001100!
+. 00!11!01!10!
+. 1!00!10!011
+. 1!1001001
+. 01100110!
+. 1!0011001
+=====
+======
+
+.binary ⭐⭐⭐
+======
+[tp-binary]
+=====
+. 0!0!101!10!10!1
+. 10!0100!110!1
+. 1100110010
+. 0011!011!001
+. 0!101!1!01100!
+. 110!010!011!0
+. 1!0100100!11
+. 0101001101
+. 011!0!101!010
+. 101!10!10010
+=====
+======
+----
+=========

@@ -1,0 +1,7 @@
+{
+  "id": "06-js-tests",
+  "label": "JavaScript tests",
+  "name": "JavaScript tests",
+  "entry": "/main.js",
+  "test": "/main.test.js"
+}

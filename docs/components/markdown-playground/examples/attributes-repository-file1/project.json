@@ -1,0 +1,14 @@
+{
+  "id": "02-md-math",
+  "label": "Math",
+  "name": "Math",
+  "entry": "/index.md",
+  "extensions": [
+    {
+      "id": "mathjax",
+      "label": "MathJax",
+      "url": "/tp-components/extensions/markdown/mathjax/index.js",
+      "enabled": true
+    }
+  ]
+}

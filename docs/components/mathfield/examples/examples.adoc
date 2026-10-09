@@ -1,0 +1,121 @@
+[tp-asciidoc-viewer%allow-script,label="tp-mathfield"]
+=========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-mathfield%clearable,label="Formula",value="E = mc^2"]
+====
+====
+======
+
+.Attributes
+========
+Change several attributes on one preview. All controls start at their documented defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Reset defaults fills the controls with their defaults again. Controls stay available when the preview is disabled or readonly.
+
+[tp-stack]
+======
+[tp-checkbox-list%value,id="mathfield-booleans",label="Boolean attributes",label-position="top",orientation="horizontal"]
+====
+* clearable
+
+* disabled
+
+* multiline
+
+* preview
+
+* readonly
+
+* required
+====
+
+[tp-radio-list,data-setting="label-position",label="label-position",label-position="top",orientation="horizontal",value="1"]
+====
+* top
+
+* bottom
+
+* start
+
+* end
+====
+
+[tp-radio-list,data-setting="mode",label="mode",label-position="top",orientation="horizontal",value="1"]
+====
+* latexmath
+
+* asciimath
+====
+
+[tp-cluster]
+=====
+[tp-textfield%value%placeholder%clearable,data-setting="autocomplete",label="autocomplete"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="label",label="label"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="name",label="name"]
+====
+====
+
+[tp-textfield%clearable,data-setting="placeholder",label="placeholder",value="Type LaTeX formula...",placeholder="Type LaTeX formula..."]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="value",label="value"]
+====
+====
+=====
+
+[tp-button,id="mathfield-reset",type="button"]
+====
+Reset defaults
+====
+======
+
+[tp-divider]
+====
+====
+
+[h3]
+====
+Preview
+====
+
+[tp-box]
+=====
+[tp-mathfield,id="mathfield-preview"]
+====
+====
+=====
+
+[tp-box,id="mathfield-readout",aria-live="polite"]
+====
+Reading native attributes…
+====
+
+[tp-callout,variant="info",heading="Things to try"]
+====
+Set label, enter x^2 in value, then enable preview to see the rendered formula. Compare latexmath and asciimath, and try multiline. The formula preview button also updates the preview checkbox. Enable clearable to show the clear button; it is hidden otherwise.
+====
+
+[script,type="module",src="/tp-components/docs/components/mathfield/examples/attributes.js"]
+====
+====
+========
+
+.Inline in prose
+======
+Einstein's equation [tp-mathfield,value="E = mc^2"]#energy# relates mass and energy.
+======
+
+.Inline named field
+======
+Value: [tp-mathfield,value="E = mc^2",placeholder="Enter a value"]#identifier#
+======
+----
+=========

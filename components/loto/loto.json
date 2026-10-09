@@ -1,0 +1,88 @@
+{
+  "tagname": "tp-loto",
+  "classname": "TpLoto",
+  "superclass": "TpBase",
+  "description": "Displays a playable French loto game.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-loto></tp-loto>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "cards",
+      "description": "Number of loto tickets displayed, from 1 to 4.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1"
+    }
+  ],
+  "methods": [
+    {
+      "name": "draw(): number | null",
+      "inherited": false,
+      "description": "Draws and returns the next number, or null when the game is over."
+    },
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Generates a new ticket and resets the draw and chronometer."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-loto-draw",
+      "description": "Emitted after a number is drawn.",
+      "detail": "{ number: number }"
+    },
+    {
+      "name": "tp-loto-reset",
+      "description": "Emitted after a new ticket and draw are generated.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-loto-win",
+      "description": "Emitted when every displayed ticket number has been drawn.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-game-cell-size",
+      "default": "3.25rem",
+      "description": "Size of a ticket cell."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-chronometer",
+      "summary": "Chronometer component with play, pause and stop controls."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-switcher",
+      "summary": "Switches between horizontal and vertical layouts based on available space."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Loto",
+    "introduction": "The custom `<tp-loto>` element implements the <tp-icon name=\"loto\" library=\"components\" size=\"1.25em\"></tp-icon> Loto functionality: displays a playable French loto game.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Draw numbers using the game control and compare them with the tickets. |\n| Using the component | The history shows numbers already drawn; the reset button starts a new game. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

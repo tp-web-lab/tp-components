@@ -1,0 +1,8 @@
+{
+  "title": "Translations from a file",
+  "prompt": "Match each English word with its French translation.",
+  "markup": "none",
+  "form": [["Cat", "Dog", "Bird"], ["Chat", "Chien", "Oiseau"]],
+  "feedback": "Think about the names of familiar animals.",
+  "solution": "Cat — Chat; Dog — Chien; Bird — Oiseau."
+}

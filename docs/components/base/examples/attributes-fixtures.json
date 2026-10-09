@@ -1,0 +1,38 @@
+{
+  "data-tp-help-src": [
+    {
+      "label": "Default",
+      "value": ""
+    },
+    {
+      "label": "file1",
+      "value": "/tp-components/docs/components/base/examples/attributes-data-tp-help-src-file1.json"
+    },
+    {
+      "label": "file2",
+      "value": "/tp-components/docs/components/base/examples/attributes-data-tp-help-src-file2.json"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/tp-components/docs/components/base/examples/attributes-data-tp-help-src-file-unknown.json"
+    }
+  ],
+  "data-tp-markdown-source": [
+    {
+      "label": "Default",
+      "value": ""
+    },
+    {
+      "label": "file1",
+      "value": "/tp-components/docs/components/base/examples/attributes-data-tp-markdown-source-file1.md"
+    },
+    {
+      "label": "file2",
+      "value": "/tp-components/docs/components/base/examples/attributes-data-tp-markdown-source-file2.md"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/tp-components/docs/components/base/examples/attributes-data-tp-markdown-source-file-unknown.md"
+    }
+  ]
+}

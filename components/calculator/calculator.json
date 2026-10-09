@@ -1,0 +1,66 @@
+{
+  "tagname": "tp-calculator",
+  "classname": "TpCalculator",
+  "superclass": "TpBase",
+  "description": "Scientific calculator with an editable expression and degree/radian modes.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-calculator></tp-calculator>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "orientation",
+      "description": "Arrangement of the scientific and numeric keypads.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"horizontal\" | \"vertical\"",
+      "default": "\"horizontal\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-calculator-result",
+      "description": "Emitted after a successful calculation.",
+      "detail": "{ expression: string; result: number }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-textfield",
+      "summary": "Single-line and automatically growing multiline text field."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Calculator",
+    "introduction": "",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Orientation icon, top right | Switch between horizontal and vertical layouts. |\n| Expression field | Edit the expression or select a part to transform. |\n| Digits, dot, comma, parentheses and operators | Insert at the caret or replace the selection. |\n| Scientific function | Wrap the selection or expression in the chosen function. |\n| e / π / Rand | Insert a constant or a random number. |\n| Deg / Rad | Toggle the trigonometric angle unit. |\n| = | Evaluate and display the result, or explain an error. |\n| AC | Clear the expression and result message. |\n| ⌫ | Delete the selection or character before the caret. |\n| ± | Negate the selection or expression. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the expression and keypad buttons. |\n| Enter / = in the expression | Evaluate the expression. |\n| Escape in the expression | Clear the expression and message. |\n| Arrow keys, Backspace, Delete in the expression | Move the caret or edit text normally. |\n| Enter / Space on a button | Activate that key. |\n| Ctrl+? | Open User help for the component under the pointer, falling back to the focused component. Shift may be needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Enter / =",
+        "description": "Evaluates the expression while its field is focused."
+      },
+      {
+        "key": "Escape",
+        "description": "Clears the expression while its field is focused."
+      }
+    ]
+  }
+}

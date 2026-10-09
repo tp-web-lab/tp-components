@@ -1,0 +1,21 @@
+h2 {
+  color: royalblue;
+}
+
+p {
+  margin-block-start: 0;
+}
+
+dl {
+  display: grid;
+  gap: 0.5rem 1rem;
+  grid-template-columns: max-content 1fr;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin: 0;
+}

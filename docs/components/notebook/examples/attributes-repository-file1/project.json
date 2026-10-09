@@ -1,0 +1,30 @@
+{
+  "name": "Calculation",
+  "cells": [
+    {
+      "type": "markup",
+      "language": "markdown",
+      "content": "## Calculation\nWe perform a simple multiplication in Python to demonstrate the calculation."
+    },
+    {
+      "type": "code",
+      "language": "python",
+      "files": [
+        {
+          "content": "x = 6 * 7\nprint(x)"
+        }
+      ]
+    },
+    {
+      "type": "markup",
+      "language": "restructuredtext",
+      "doctest": true,
+      "content": ".. raw:: html\n\n   <h2>Verification</h2>\n\nWe use the doctest blocks in reStructuredText to verify the output of the Python code.\n\n>>> print(6 * 7)\n42"
+    },
+    {
+      "type": "markup",
+      "language": "asciidoc",
+      "content": "== Result\nThe result of the multiplication is displayed using asciidoc and mathjax:\n\nlatexmath:[x = 6 * 7 = 42]"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "tagname": "tp-button-group",
+  "classname": "TpButtonGroup",
+  "superclass": "TpBase",
+  "description": "API documentation summary.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-button-group>\n<tp-button>Previous</tp-button>\n  <tp-button data-next>Next</tp-button>\n</tp-button-group>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "attached",
+      "description": "Attribute `attached`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "orientation",
+      "description": "Attribute `orientation`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "horizontal"
+    },
+    {
+      "name": "stretch",
+      "description": "Attribute `stretch`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-button-group-gap",
+      "default": "0",
+      "description": "Controls the gap."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Button group",
+    "introduction": "The custom `<tp-button-group>` element implements the <tp-icon name=\"button-group\" library=\"components\" size=\"1.25em\"></tp-icon> Button group functionality: aPI documentation summary.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "A TypeScript greeting",
+  "entry": "/main.ts",
+  "files": [
+    {
+      "path": "/tp-components/index.html",
+      "language": "html",
+      "content": "<h2>TypeScript result</h2><p id=\"result\"></p>"
+    },
+    {
+      "path": "/main.ts",
+      "language": "typescript",
+      "content": "const answer: number = 6 * 7;\nconst result = document.querySelector(\"#result\");\nif (result) result.textContent = `6 × 7 = ${answer}`;\nconsole.log(answer);"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "tagname": "tp-formula-picker",
+  "classname": "TpFormulaPicker",
+  "superclass": "TpBase",
+  "description": "Selects an Excel-compatible Formula.js function.  *",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-formula-picker></tp-formula-picker>"
+    }
+  ],
+  "attributes": [],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-formula-picker-select",
+      "description": "Emitted when formula picker select occurs.",
+      "detail": "{ name: unknown; formula: unknown; selectionStart: unknown; selectionEnd: unknown }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [
+    {
+      "name": "Formula.js",
+      "url": "https://formulajs.info/",
+      "summary": "Excel-compatible formula functions."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Formula picker",
+    "introduction": "The custom `<tp-formula-picker>` element implements the <tp-icon name=\"formula-picker\" library=\"components\" size=\"1.25em\"></tp-icon> Formula picker functionality: selects an Excel-compatible Formula.js function. *",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Browse or search for a formula, then select it. |\n| Using the component | In an editor, the selected formula is inserted into the current field; replace its selected parameters with your own values. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "src": [
+    { "label": "Inline HTML (default)", "value": "" },
+    { "label": "Article HTML", "value": "/tp-components/docs/components/skeleton/examples/article.html" },
+    { "label": "Reference HTML with iframe", "value": "/tp-components/docs/components/skeleton/examples/reference.html" },
+    { "label": "Missing HTML (test error)", "value": "/tp-components/docs/components/skeleton/examples/file-unknown.html" }
+  ]
+}

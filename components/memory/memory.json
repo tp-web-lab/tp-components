@@ -1,0 +1,93 @@
+{
+  "tagname": "tp-memory",
+  "classname": "TpMemory",
+  "superclass": "TpBase",
+  "description": "Creates a memory matching game.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-memory></tp-memory>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "back",
+      "description": "Card-back URL, or blue/red for an OpenDecks back.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "mismatch-delay",
+      "description": "Delay before unmatched cards turn back, in milliseconds.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1000"
+    }
+  ],
+  "methods": [
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Resets the timer, hides and reshuffles every card."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-memory-complete",
+      "description": "Emitted when every pair is matched.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-memory-match",
+      "description": "Emitted when a pair is matched.",
+      "detail": "{ pair: unknown }"
+    },
+    {
+      "name": "tp-memory-reset",
+      "description": "Emitted after the game is reset.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-memory-card-max-width",
+      "default": "10rem",
+      "description": "Maximum width of image and SVG cards."
+    },
+    {
+      "name": "--tp-memory-gap",
+      "default": "0.75rem",
+      "description": "Gap between cards."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-chronometer",
+      "summary": "Chronometer component with play, pause and stop controls."
+    },
+    {
+      "name": "tp-flip-card",
+      "summary": "Two-sided card component."
+    },
+    {
+      "name": "tp-switcher",
+      "summary": "Switches between horizontal and vertical layouts based on available space."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Memory",
+    "introduction": "The custom `<tp-memory>` element implements the <tp-icon name=\"memory\" library=\"components\" size=\"1.25em\"></tp-icon> Memory functionality: creates a memory matching game.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Reveal two cards and try to find matching pairs. |\n| Using the component | Unmatched cards turn back over; matched pairs remain revealed. |\n| Using the component | Reset starts a new game. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

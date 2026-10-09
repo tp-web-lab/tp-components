@@ -1,0 +1,158 @@
+{
+  "tagname": "tp-iframe",
+  "classname": "TpIframe",
+  "superclass": "TpBase",
+  "description": "Affiche un `iframe` natif encapsulé dans un composant sans Shadow DOM,\navec prise en charge de :\n- `src`\n- `srcdoc`\n- zoom\n- sandbox\n- interaction",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-iframe></tp-iframe>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "controls",
+      "description": "Affiche la barre de contrôles interne.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "fullscreen",
+      "description": "Autorise le mode plein écran.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "interaction",
+      "description": "Active ou désactive l’interaction pointeur avec l’iframe. Par défaut : `true`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "true"
+    },
+    {
+      "name": "loading",
+      "description": "Politique de chargement : `lazy` ou `eager`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "referrerpolicy",
+      "description": "Politique `referrerpolicy`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "sandbox",
+      "description": "Valeur de l’attribut `sandbox` de l’iframe.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "src",
+      "description": "URL du document à charger.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "srcdoc",
+      "description": "Document HTML inline à afficher.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "zoom",
+      "description": "Niveau de zoom. Par défaut : `1`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1"
+    },
+    {
+      "name": "zoom-levels",
+      "description": "Liste des niveaux de zoom disponibles. Par défaut : `25% 50% 75% 100% 125% 150% 175% 200%`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "25% 50% 75% 100% 125% 150% 175% 200%"
+    }
+  ],
+  "methods": [
+    {
+      "name": "getContentHeight(): number",
+      "inherited": false,
+      "description": "Mesure la hauteur du contenu interne de l’iframe."
+    },
+    {
+      "name": "resetZoom(value = 1): void",
+      "inherited": false,
+      "description": "Réinitialise le zoom."
+    },
+    {
+      "name": "zoomIn(): void",
+      "inherited": false,
+      "description": "Augmente le zoom."
+    },
+    {
+      "name": "zoomOut(): void",
+      "inherited": false,
+      "description": "Réduit le zoom."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-iframe-change",
+      "description": "Émis quand l’état visible de l’iframe change.",
+      "detail": "{ interaction: unknown; overflowWidth: unknown; scrollPosition: unknown; zoom: unknown; zoomText: unknown }"
+    },
+    {
+      "name": "tp-iframe-load",
+      "description": "Émis après le chargement de l’iframe interne.",
+      "detail": "{ contentHeight: unknown; hasSrcdoc: unknown; src: unknown }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-iframe-zoom",
+      "default": "1",
+      "description": "Controls the zoom."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Iframe",
+    "introduction": "The custom `<tp-iframe>` element implements the <tp-icon name=\"iframe\" library=\"components\" size=\"1.25em\"></tp-icon> Iframe functionality: controlled iframe component.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Read the displayed content and use its links and embedded controls. |\n| Using the component | The component itself adds no editing or playback controls. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "tagname": "tp-typewriting",
+  "classname": "TpTypewriting",
+  "superclass": "TpBase",
+  "description": "progressively reveals text one letter or one word at a time.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-typewriting speed=\"20\">\n  <p>Welcome to <strong>tp-components</strong>. Make your words appear progressively.</p>\n</tp-typewriting>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "delay",
+      "description": "Milliseconds before the first reveal and between repetitions.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "0"
+    },
+    {
+      "name": "loop",
+      "description": "Repeats the reveal after the complete text has been displayed.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "speed",
+      "description": "Letters per second, or words per second with word; zero pauses the reveal.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "20"
+    },
+    {
+      "name": "word",
+      "description": "Reveals whole words instead of Unicode grapheme clusters.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [
+    {
+      "name": "attachSpeech(controller: HTMLElement): void",
+      "inherited": false,
+      "description": "Gives a speech component ownership; content remains visible until a word boundary arrives."
+    },
+    {
+      "name": "beginSpeech(controller: HTMLElement): void",
+      "inherited": false,
+      "description": "Prepares a reading; unsupported boundary reporting leaves the complete text visible."
+    },
+    {
+      "name": "detachSpeech(controller: HTMLElement): void",
+      "inherited": false,
+      "description": "Releases ownership without letting an obsolete controller affect a newer one."
+    },
+    {
+      "name": "endSpeech(controller: HTMLElement): void",
+      "inherited": false,
+      "description": "Restores the complete text after speech ends, stops or fails."
+    },
+    {
+      "name": "getSpeechText(): string",
+      "inherited": false,
+      "description": "Returns the exact readable text, including separators between block elements."
+    },
+    {
+      "name": "revealSpeech(controller: HTMLElement, charIndex: number): void",
+      "inherited": false,
+      "description": "Reveals through the word at a Web Speech UTF-16 character offset."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Typewriting",
+    "introduction": "The custom `<tp-typewriting>` element implements the Typewriting functionality: progressively reveals text one letter or one word at a time.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Animated text | Watch the text appear progressively. Space is reserved for the complete content to avoid layout shifts. |\n| Click the component | Reveal all text immediately and stop repetition. Embedded links and controls retain their own actions. |\n| Linked speech controls | Speak starts the spoken reveal; Pause and Resume freeze and continue it. Stop shows all text. Clicking the text shows it without interrupting the audio. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab | Focus the animated component or a control inside it to reveal all text and stop repetition. No extra focus stop remains after completion. |\n| Ctrl+? | Open User Help for the component under the pointer, falling back to the focused component. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Tab",
+        "description": "Focus the component to reveal all text and stop the animation."
+      }
+    ]
+  }
+}

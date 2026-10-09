@@ -1,0 +1,86 @@
+{
+  "tagname": "tp-tooltip",
+  "classname": "TpTooltip",
+  "superclass": "TpOverlayElement",
+  "description": "Displays anchored tooltip content.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-tooltip></tp-tooltip>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "anchor",
+      "description": "CSS selector of the anchor element.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "offset",
+      "description": "Distance between the anchor and the tooltip.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"8px\""
+    },
+    {
+      "name": "open",
+      "description": "Opens the tooltip.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "outside-click",
+      "description": "Keeps outside-click state in the emitted toggle detail.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "placement",
+      "description": "Tooltip placement relative to the anchor.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpTooltipPlacement",
+      "default": "\"top\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-tooltip-toggle",
+      "description": "Emitted when the tooltip open state changes.",
+      "detail": "{ backdrop: boolean; open: boolean; outsideClick: boolean; anchor: string; placement: \"top\" | \"end\" | \"bottom\" | \"start\" }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Tooltip",
+    "introduction": "The custom `<tp-tooltip>` element implements the <tp-icon name=\"tooltip\" library=\"components\" size=\"1.25em\"></tp-icon> Tooltip functionality: displays anchored tooltip content.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Hover over the associated control | Show its explanation. The tooltip is not an actionable control. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus the associated control to show its explanation. |\n| Escape | Closes the tooltip. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Escape",
+        "description": "Closes the tooltip."
+      }
+    ]
+  }
+}

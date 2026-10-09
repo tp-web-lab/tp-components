@@ -1,0 +1,140 @@
+{
+  "tagname": "tp-post-it-editor",
+  "classname": "TpPostItEditor",
+  "superclass": "TpBase",
+  "description": "creates and edits persistent personal annotations attached to document elements.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-box id=\"post-it-editor-example\">\n  <p>Select this first paragraph to attach a note about the introduction.</p>\n  <p>Or select this second paragraph to attach a different note. Reload this page to restore saved notes.</p>\n</tp-box>\n<tp-post-it-editor for=\"#post-it-editor-example\" page=\"post-it-editor-example\"></tp-post-it-editor>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "for",
+      "description": "CSS selector of the document container to annotate; without it, use setTarget().",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "markup",
+      "description": "Default language for new notes; changes also apply to the active draft.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "| \"html\"\n\t\t| \"markdown\"\n\t\t| \"asciidoc\"\n\t\t| \"restructuredtext\"\n\t\t| \"none\"",
+      "default": "\"none\""
+    },
+    {
+      "name": "page",
+      "description": "Stable document identifier for localStorage; defaults to the current URL without its fragment.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "dispose(): void",
+      "inherited": false,
+      "description": "Explicit cleanup for consumers replacing their document shell."
+    },
+    {
+      "name": "setPage(page: string): void",
+      "inherited": false,
+      "description": "Changes storage scope; an empty value suspends annotation creation in source mode."
+    },
+    {
+      "name": "setTarget(target: HTMLElement): void",
+      "inherited": false,
+      "description": "Supplies a target without relying on a document-wide selector."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-box",
+      "summary": "Simple box layout component."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-button-group",
+      "summary": "Button group component for organizing multiple buttons."
+    },
+    {
+      "name": "tp-cluster",
+      "summary": "Flexible cluster layout component."
+    },
+    {
+      "name": "tp-color",
+      "summary": "Brand color preset controller scoped to the containing element."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Dropdown menu component."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-numberfield",
+      "summary": "Numeric field with an optional native range slider."
+    },
+    {
+      "name": "tp-post-it",
+      "summary": "displays a movable floating paper note that folds into a pushpin."
+    },
+    {
+      "name": "tp-stack",
+      "summary": "Vertical stack layout component."
+    },
+    {
+      "name": "tp-textfield",
+      "summary": "Single-line and automatically growing multiline text field."
+    }
+  ],
+  "credits": [
+    {
+      "name": "DOMPurify",
+      "url": "https://github.com/cure53/DOMPurify",
+      "summary": "HTML sanitization."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Post-it editor",
+    "introduction": "The custom `<tp-post-it-editor>` element creates and edits persistent personal annotations attached to document elements.",
+    "interactions": "#### Mouse interactions\n\n| Control | Result |\n| --- | --- |\n| Personal annotations | Open the annotation manager. |\n| + | Keep the editor open and select an element in the document. The pointer becomes a crosshair and hovered paragraphs, headings and other selectable content receive a dotted outline. Selecting a target opens the note fields in the same panel. |\n| Annotation language | In the header before Close, choose AsciiDoc, HTML, Markdown, reStructuredText or Plain text (default). Each menu entry has an icon and the selected entry has a check. The tp-icon-button trigger shows only the current language icon; the full name remains available in the menu and accessible description. Language and color settings are enabled while editing a note. |\n| Annotation text | Write the source; the clear button empties the field. |\n| Heading, color, opacity and rotation | Customize the note before saving. The tp-color palette button is in the header, between the language trigger and Close. The choice affects only this draft until Save, not the document's colors. Cancel discards it and Reset appearance defaults restores yellow. |\n| Save / Cancel | Save locally or discard draft changes. |\n| Pin | Open or fold a note; drag it to move its attachment within the selected document container. A drop outside this area restores the previous attachment. |\n| Pencil / Delete | Edit or delete the chosen saved note. |\n| Reattach | Choose a new target, including when the original target has disappeared. |\n\nA post-it can only be repositioned inside the element selected as the editor's document container (`for` or `setTarget`). Its pin must be dropped on content inside that container, not elsewhere on the page. It may move between paragraphs within this area; the expanded note itself can overlap its edges.\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| Tab / Shift+Tab | Navigate editor controls and document targets during selection. |\n| Enter / Space | Activate a focused button. Enter selects a focused document target. |\n| Arrow keys in the language dropdown | Navigate language choices; Enter selects one. |\n| Arrow keys on a pin or header | Move the note by 10 pixels, or 1 pixel with Shift. |\n| Escape | Cancel target selection while keeping the editor open, or close the language dropdown. |\n| Ctrl+? | Open User Help for the hovered or focused component. |\n\n### Markup language\n\nUse `markup=\"html|markdown|asciidoc|restructuredtext|none\"` to choose the language for new notes. The default, `none`, displays literal text. Unknown values also fall back to `none`. For example, `markup=\"markdown\"` renders `**Important**` as bold text after saving.\n\nThe header’s language icon opens a `tp-dropdown` containing the five languages, with a check beside the current choice. Choosing a language updates `markup` and the active draft; changing the attribute also updates the dropdown without discarding typed text. Each saved note retains its own language. Opening an older note restores that language; notes without stored language remain plain text. Rendering occurs on Save, while the editor always keeps the original source.\n\n### Mathematical formulas\n\nChoose Markdown in the language menu and write, for example, ``:tp-math:`x^2`{}``. After Save, the note renders the formula with MathJax. HTML notes can use `<tp-math value=\"x^2\"></tp-math>`; add `displaystyle` for a centered block or `mode=\"asciimath\"` for AsciiMath. Parser-generated LaTeX and AsciiMath placeholders are also rendered. Plain text (`markup=\"none\"`) keeps the source literal.",
+    "keyboard": [
+      {
+        "key": "Enter / Space",
+        "description": "Activate the editor, annotation controls or a focused pin."
+      },
+      {
+        "key": "Tab / Enter",
+        "description": "Choose a document target while adding or reattaching an annotation."
+      },
+      {
+        "key": "Escape",
+        "description": "Cancel target selection or close the language dropdown."
+      }
+    ]
+  }
+}

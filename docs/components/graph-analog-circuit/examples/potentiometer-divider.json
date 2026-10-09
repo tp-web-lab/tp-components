@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "title": "Potentiometer voltage divider",
+  "nodes": [
+    {
+      "id": "V1",
+      "type": "analog-voltage-source",
+      "x": 100,
+      "y": 220,
+      "label": "10 V DC",
+      "data": {
+        "voltage": 10,
+        "waveform": "dc",
+        "angle": 270,
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "H1",
+      "type": "analog-hub",
+      "x": 250,
+      "y": 100,
+      "label": "+10 V"
+    },
+    {
+      "id": "H2",
+      "type": "analog-hub",
+      "x": 250,
+      "y": 340,
+      "label": "Return"
+    },
+    {
+      "id": "P1",
+      "type": "analog-potentiometer",
+      "x": 430,
+      "y": 220,
+      "label": "P1 10 kΩ",
+      "data": {
+        "resistance": 10000,
+        "position": 0.5,
+        "displayScale": 1000,
+        "angle": 90,
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "OUT",
+      "type": "analog-hub",
+      "x": 590,
+      "y": 220,
+      "label": "Vout"
+    },
+    {
+      "id": "GND",
+      "type": "analog-ground",
+      "x": 250,
+      "y": 420,
+      "label": "GND"
+    },
+    {
+      "id": "note",
+      "type": "comment",
+      "x": 570,
+      "y": 340,
+      "label": "Select P1 and change Wiper (%) to adjust the output voltage.",
+      "data": {
+        "color": "info"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "source-high",
+      "type": "analog-wire",
+      "source": "V1",
+      "sourcePort": "north",
+      "target": "H1",
+      "targetPort": "west",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "source-return",
+      "type": "analog-wire",
+      "source": "V1",
+      "sourcePort": "south",
+      "target": "H2",
+      "targetPort": "west",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "pot-high",
+      "type": "analog-wire",
+      "source": "H1",
+      "sourcePort": "east",
+      "target": "P1",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal",
+      "turns": "alternating"
+    },
+    {
+      "id": "pot-return",
+      "type": "analog-wire",
+      "source": "P1",
+      "sourcePort": "south",
+      "target": "H2",
+      "targetPort": "east",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "wiper-output",
+      "type": "analog-wire",
+      "source": "P1",
+      "sourcePort": "east",
+      "target": "OUT",
+      "targetPort": "west",
+      "direction": "none",
+      "routing": "straight",
+      "data": {
+        "measurements": [
+          {
+            "id": "vout-measurement",
+            "position": 0.55,
+            "label": "Vout"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ground",
+      "type": "analog-wire",
+      "source": "H2",
+      "sourcePort": "south",
+      "target": "GND",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "straight"
+    }
+  ]
+}

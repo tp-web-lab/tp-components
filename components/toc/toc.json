@@ -1,0 +1,95 @@
+{
+  "tagname": "tp-toc",
+  "classname": "TpToc",
+  "superclass": "TpBase",
+  "description": "Table of contents generated from page headings.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-box data-tp-toc-scope>\n  <tp-toc label=\"On this page\" open expand-all></tp-toc>\n  <h2>Getting started</h2>\n  <p>Choose a heading in the table of contents to jump to its section.</p>\n  <h3>Installation</h3><p>Install the library in your project.</p>\n  <h3>First component</h3><p>Add your first interactive component.</p>\n</tp-box>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "brand",
+      "description": "Uses the soft brand background and contrasting brand text colors.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "expand-all",
+      "description": "Expands every table of contents subtree.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "label",
+      "description": "Visible summary label.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"Contents\""
+    },
+    {
+      "name": "open",
+      "description": "Opens the table of contents panel.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "position",
+      "description": "Placement (`start`, `end`, `center`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"center\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-toc-background",
+      "default": "var(--tp-brand-fill-softer)",
+      "description": "Panel background color."
+    },
+    {
+      "name": "--tp-toc-border-color",
+      "default": "var(--tp-brand-stroke-soft)",
+      "description": "Panel border color."
+    },
+    {
+      "name": "--tp-toc-color",
+      "default": "var(--tp-brand-text-on-soft)",
+      "description": "Panel text color."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-tree",
+      "summary": "Generic tree component for interactive hierarchical editing."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Table of contents",
+    "introduction": "The custom `<tp-toc>` element implements the <tp-icon name=\"toc\" library=\"components\" size=\"1.25em\"></tp-icon> Table of contents functionality: table of contents generated from page headings.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Select | Select a heading in the table of contents to navigate to that section. |\n| Using the component | Expand or collapse branches to show or hide nested headings. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

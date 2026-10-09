@@ -1,0 +1,64 @@
+{
+  "tagname": "tp-ref",
+  "classname": "TpRef",
+  "superclass": "TpBase",
+  "description": "Displays inline references to notes, bibliography and glossary entries with HTML tooltips.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<div data-tp-reference-scope=\"\">\n  <p>A useful detail <tp-ref href=\"^detail\"></tp-ref>.</p>\n  <tp-note ref=\"detail\" title=\"Detail\"><p>A note with <strong>formatted content</strong>.</p></tp-note>\n</div>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "href",
+      "description": "Prefixed identifier selecting a note, bibliography or glossary entry.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-biblio",
+      "summary": "Defines a bibliography entry referenced by tp-ref."
+    },
+    {
+      "name": "tp-glossary",
+      "summary": "Defines a glossary entry referenced by tp-ref."
+    },
+    {
+      "name": "tp-note",
+      "summary": "Defines an HTML note referenced by tp-ref."
+    },
+    {
+      "name": "tp-tooltip",
+      "summary": "Displays anchored tooltip content."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Reference",
+    "introduction": "The custom `<tp-ref>` element displays an inline reference with the corresponding HTML content in a tooltip.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reference | Hover or click to read its content in a tooltip. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus a reference and show its tooltip. |\n| Enter / Space | Show the focused reference tooltip. |\n| Escape | Close the tooltip. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Enter / Space",
+        "description": "Shows the reference tooltip."
+      },
+      {
+        "key": "Escape",
+        "description": "Closes the reference tooltip."
+      }
+    ]
+  }
+}

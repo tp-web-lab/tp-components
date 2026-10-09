@@ -1,0 +1,7 @@
+{
+  "id": "04-prolog-dom",
+  "label": "Prolog DOM",
+  "name": "Prolog DOM",
+  "entry": "/program.pl",
+  "query": "/query.pl"
+}

@@ -1,0 +1,28 @@
+<tp-html-viewer label="tp-avatar-group" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-avatar-group>
+        <tp-avatar initials="AL" label="Ada Lovelace"></tp-avatar>
+        <tp-avatar initials="GH" label="Grace Hopper"></tp-avatar>
+        <tp-avatar initials="KT" label="Katherine Johnson"></tp-avatar>
+      </tp-avatar-group>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+
+      <tp-radio-list data-setting="order" label="order" label-position="top" orientation="horizontal" value="1"><ul><li>ltr</li><li>rtl</li></ul></tp-radio-list>
+      <tp-radio-list data-setting="orientation" label="orientation" label-position="top" orientation="horizontal" value="1"><ul><li>horizontal</li><li>vertical</li></ul></tp-radio-list>
+      <tp-cluster><tp-textfield data-setting="offset" label="offset" value="0.75rem" placeholder="0.75rem" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="avatar-group attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/tp-components/docs/components/avatar-group/examples/attributes.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

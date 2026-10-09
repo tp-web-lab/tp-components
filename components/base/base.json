@@ -1,0 +1,67 @@
+{
+  "tagname": "tp-base",
+  "classname": "TpBase",
+  "superclass": "HTMLElement",
+  "description": "Shared base for `tp-*` components.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-base>This element provides the common tp-components foundation.</tp-base>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "data-tp-help-src",
+      "description": "URL of the component API manifest used by the help system.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "data-tp-markdown-source",
+      "description": "Source document URL used to resolve relative resources in generated help.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "dir",
+      "description": "Text direction (`ltr`, `rtl`, or `auto`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "lang",
+      "description": "Language tag used by the component content.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "help(): Promise<void>",
+      "inherited": false,
+      "description": "Opens generated component help."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Base",
+    "introduction": "The custom `<tp-base>` element implements the <tp-icon name=\"base\" library=\"components\" size=\"1.25em\"></tp-icon> Base functionality: shared base for `tp-*` components.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Pointer over a component | Identifies the component whose help opens with Ctrl+?. This also works for non-focusable content such as boxes. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

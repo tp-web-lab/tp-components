@@ -1,0 +1,71 @@
+{
+  "tagname": "tp-graph-dfa",
+  "classname": "TpGraphDfa",
+  "superclass": "TpGraphEditor",
+  "description": "Edits and simulates deterministic finite automata.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-graph-dfa></tp-graph-dfa>"
+    }
+  ],
+  "attributes": [],
+  "methods": [
+    {
+      "name": "addEdge(source: string, target: string, type = TP_DFA_TRANSITION, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = 'forward'): TpGraphEdge",
+      "inherited": false,
+      "description": "Adds edge."
+    },
+    {
+      "name": "addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode",
+      "inherited": false,
+      "description": "Adds node."
+    },
+    {
+      "name": "readNext(duration = 300): Promise<boolean>",
+      "inherited": false,
+      "description": "Reads next."
+    },
+    {
+      "name": "reset(word = this.inputWord): void",
+      "inherited": false,
+      "description": "Reset."
+    },
+    {
+      "name": "run(duration = 600): Promise<boolean>",
+      "inherited": false,
+      "description": "Run."
+    },
+    {
+      "name": "setGraph(graph: TpGraphDocument): void",
+      "inherited": false,
+      "description": "Sets graph."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-dfa-reset",
+      "description": "Fired after the input and active state are reset.",
+      "detail": "{ word: unknown; stateId: unknown; graph: unknown }"
+    },
+    {
+      "name": "tp-dfa-step",
+      "description": "Fired after one input symbol is consumed.",
+      "detail": "{ symbol: unknown; position: unknown; stateId: unknown; accepted: unknown; rejected: unknown; graph: unknown }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-graph-editor",
+      "summary": "Extensible interactive graph editor."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Deterministic finite automaton",
+    "introduction": "The custom `<tp-graph-dfa>` element implements the <tp-icon name=\"graph-dfa\" library=\"components\" size=\"1.25em\"></tp-icon> Deterministic finite automaton functionality: edits and simulates deterministic finite automata.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated pointer control; use any displayed child controls normally. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Play | Enter a word in the toolbar below the canvas. **Play** consumes the next symbol and highlights the active transition and state. **Run word** reads the complete word automatically with a visible 600 ms interval between transitions. **Reset** returns to the initial state. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

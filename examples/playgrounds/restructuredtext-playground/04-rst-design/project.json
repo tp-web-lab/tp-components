@@ -1,0 +1,14 @@
+{
+  "id": "04-rst-design",
+  "label": "Design",
+  "name": "reStructuredText design",
+  "entry": "/index.rst",
+  "extensions": [
+    {
+      "id": "sphinx-design",
+      "label": "Design",
+      "url": "/tp-components/extensions/restructuredtext/sphinx-design/index.js",
+      "enabled": true
+    }
+  ]
+}

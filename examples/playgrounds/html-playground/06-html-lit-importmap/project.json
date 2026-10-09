@@ -1,0 +1,6 @@
+{
+  "id": "html-lit-tabs-importmap",
+  "label": "HTML + Lit tabs with import map",
+  "name": "HTML + Lit tabs with import map",
+  "entry": "/tp-components/index.html"
+}

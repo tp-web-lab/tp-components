@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="tp-components" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata><name>Illustrative Rennes route</name><desc>Synthetic demonstration, not a navigation guide.</desc></metadata>
+  <wpt lat="48.1119" lon="-1.6800"><name>Rennes starting point</name></wpt>
+  <rte><name>City route</name>
+    <rtept lat="48.1119" lon="-1.6800"/>
+    <rtept lat="48.1136" lon="-1.6760"/>
+    <rtept lat="48.1148" lon="-1.6710"/>
+    <rtept lat="48.1173" lon="-1.6778"/>
+  </rte>
+</gpx>

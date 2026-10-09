@@ -1,0 +1,112 @@
+{
+  "tagname": "tp-color",
+  "classname": "TpColor",
+  "superclass": "TpBase",
+  "description": "Preset-based color controller.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<section>\n<tp-color></tp-color>\n<p>The selected brand color is scoped to this section.</p>\n<p><code>Inline code</code> is displayed in the brand colour.</p>\n</section>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "anchor",
+      "description": "CSS selector used as the explicit element that receives the selected preset.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the color trigger.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "preset",
+      "description": "Preset class name (e.g. `tp-default`, `tp-red`)",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"tp-default\""
+    },
+    {
+      "name": "size",
+      "description": "Icon button size.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"m\""
+    },
+    {
+      "name": "ui-anchor",
+      "description": "CSS selector used only to anchor the dropdown UI.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "variant",
+      "description": "Icon button variant.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"neutral\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "syncToPreset(preset: TpColorPreset): void",
+      "inherited": false,
+      "description": "Synchronizes the preset from another controller."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-color-change",
+      "description": "Emitted when the selected brand preset is applied to a target.",
+      "detail": "{ preset: string; brand: string; anchor: string; target: HTMLElement }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Color",
+    "introduction": "The custom `<tp-color>` element implements the <tp-icon name=\"color\" library=\"components\" size=\"1.25em\"></tp-icon> Color functionality: preset-based color controller.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Palette button | Open the color choices for the associated content. |\n| Color choice | Apply the selected brand color. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

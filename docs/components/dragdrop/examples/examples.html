@@ -1,0 +1,92 @@
+<tp-html-viewer label="tp-dragdrop" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-box id="dragdrop-board" data-dragdrop-demo="" data-allow-script="">
+        <p>Drag a task to <strong>To do</strong> or <strong>Done</strong>, including an empty column. The Move button sends a task to the other column without dragging.</p>
+        <p>Keyboard: focus a card, press Enter, use the arrow keys to choose another card, then press Enter to drop before or after it. Escape cancels.</p>
+        <tp-grid min-width="16rem" gap="1rem">
+          <tp-box data-zone="To do" role="group" aria-label="To do" style="min-height: 12rem;">
+            <h3>To do</h3>
+            <tp-stack gap="0.5rem" data-tasks="">
+              <tp-box data-task="" aria-label="Write the introduction"><p>Write the introduction</p><tp-button data-move="" size="s" aria-label="Move Write the introduction to the other column">Move</tp-button></tp-box>
+              <tp-box data-task="" aria-label="Review the examples"><p>Review the examples</p><tp-button data-move="" size="s" aria-label="Move Review the examples to the other column">Move</tp-button></tp-box>
+            </tp-stack>
+          </tp-box>
+          <tp-box data-zone="Done" role="group" aria-label="Done" style="min-height: 12rem;">
+            <h3>Done</h3>
+            <tp-stack gap="0.5rem" data-tasks="">
+              <tp-box data-task="" aria-label="Choose a title"><p>Choose a title</p><tp-button data-move="" size="s" aria-label="Move Choose a title to the other column">Move</tp-button></tp-box>
+            </tp-stack>
+          </tp-box>
+        </tp-grid>
+        <p data-demo-status="" role="status" aria-live="polite">Move a task to change its column.</p>
+        <tp-dragdrop root="#dragdrop-board" items="[data-task]"></tp-dragdrop>
+        <script src="/tp-components/docs/components/dragdrop/examples/task-board.js"></script>
+      </tp-box>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+
+
+      <tp-cluster><tp-textfield data-setting="handle" label="handle" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="items" label="items" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="root" label="root" value="" placeholder="" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="dragdrop attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/tp-components/docs/components/dragdrop/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Sortable list">
+      <tp-box id="dragdrop-sortable" data-sortable-demo="" data-allow-script="">
+        <p>Arrange these steps in the order you prefer. Drag an entry above or below another entry, or use its Up and Down buttons.</p>
+        <p>Keyboard: Tab to an entry, press Enter or Space to grab it, use the arrow keys to choose a position, then press Enter or Space to drop. Escape cancels.</p>
+        <ol aria-label="Publishing steps">
+          <li aria-label="Publish the document"><tp-box><tp-cluster justify="space-between"><span>Publish the document</span><tp-button-group><tp-icon-button name="arrow-up" data-direction="up" label="Move Publish the document up"></tp-icon-button><tp-icon-button name="arrow-down" data-direction="down" label="Move Publish the document down"></tp-icon-button></tp-button-group></tp-cluster></tp-box></li>
+          <li aria-label="Write a draft"><tp-box><tp-cluster justify="space-between"><span>Write a draft</span><tp-button-group><tp-icon-button name="arrow-up" data-direction="up" label="Move Write a draft up"></tp-icon-button><tp-icon-button name="arrow-down" data-direction="down" label="Move Write a draft down"></tp-icon-button></tp-button-group></tp-cluster></tp-box></li>
+          <li aria-label="Review the content"><tp-box><tp-cluster justify="space-between"><span>Review the content</span><tp-button-group><tp-icon-button name="arrow-up" data-direction="up" label="Move Review the content up"></tp-icon-button><tp-icon-button name="arrow-down" data-direction="down" label="Move Review the content down"></tp-icon-button></tp-button-group></tp-cluster></tp-box></li>
+          <li aria-label="Plan the document"><tp-box><tp-cluster justify="space-between"><span>Plan the document</span><tp-button-group><tp-icon-button name="arrow-up" data-direction="up" label="Move Plan the document up"></tp-icon-button><tp-icon-button name="arrow-down" data-direction="down" label="Move Plan the document down"></tp-icon-button></tp-button-group></tp-cluster></tp-box></li>
+        </ol>
+        <tp-button data-reset="" outlined="">Reset order</tp-button>
+        <p data-sort-status="" role="status" aria-live="polite">The list is ready to reorder.</p>
+        <tp-dragdrop root="#dragdrop-sortable" items="ol > li"></tp-dragdrop>
+        <script src="/tp-components/docs/components/dragdrop/examples/sortable-list.js"></script>
+      </tp-box>
+    </div>
+
+    <div role="example" label="Tree drag and drop">
+      <tp-box>
+        <p>Organize this project by dragging files or folders. Try moving <strong>notes.md</strong> into <strong>Documentation</strong>, then move <strong>index.html</strong> above <strong>app.js</strong>.</p>
+        <p>Drop in the middle of a folder row to move an item into it, or near the top or bottom of a row to insert it before or after that item. The tree highlights the destination. Moving a folder also moves its children.</p>
+        <p>Use the disclosure buttons to expand or collapse folders. Keyboard arrow keys navigate the tree; they do not perform drag and drop in this example.</p>
+        <tp-tree draggable="" selectable="" guides="" level="3" aria-label="Project files">
+          <ul>
+            <li data-node-id="project">Project
+              <ul>
+                <li data-node-id="documentation">Documentation
+                  <ul>
+                    <li data-node-id="readme">README.md</li>
+                    <li data-node-id="guide">guide.md</li>
+                  </ul>
+                </li>
+                <li data-node-id="source">Source
+                  <ul>
+                    <li data-node-id="app">app.js</li>
+                    <li data-node-id="index">index.html</li>
+                  </ul>
+                </li>
+                <li data-node-id="notes">notes.md</li>
+              </ul>
+            </li>
+          </ul>
+        </tp-tree>
+      </tp-box>
+    </div>
+  </template>
+</tp-html-viewer>

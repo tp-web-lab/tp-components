@@ -1,0 +1,3 @@
+= Automatically detected AsciiDoc
+
+`<tp-markup-single-page>` selected `<tp-asciidoc>` from this file's extension.

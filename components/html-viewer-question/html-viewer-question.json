@@ -1,0 +1,133 @@
+{
+  "tagname": "tp-html-viewer-question",
+  "classname": "TpHtmlViewerQuestion",
+  "superclass": "TpMarkupViewerQuestion",
+  "description": "checks rendered HTML using a viewer and external JavaScript DOM tests.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-html-viewer-question open src=\"/tp-components/docs/components/markup-viewer-question/examples/emphasis.html\" test=\"/tp-components/docs/components/markup-viewer-question/examples/emphasis.test.js\">\n  <dl>\n    <dt>Title</dt><dd>Semantic emphasis</dd>\n    <dt>Prompt</dt><dd>Mark Hello with strong emphasis. Open Code to edit, then submit.</dd>\n    <dt>Solution</dt><dd>Use the language's strong-emphasis syntax.</dd>\n  </dl>\n</tp-html-viewer-question>"
+    }
+  ],
+  "attributes": [],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-console",
+      "summary": "Displays structured console output."
+    },
+    {
+      "name": "tp-drawer",
+      "summary": "Displays a sliding drawer panel."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-file-tree",
+      "summary": "Displays an interactive file and folder tree."
+    },
+    {
+      "name": "tp-filesystem",
+      "summary": "In-memory file system component."
+    },
+    {
+      "name": "tp-html-viewer",
+      "summary": "Interactive HTML viewer with editable source, live rendering, and DOM inspection."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-iframe",
+      "summary": "Controlled iframe component."
+    },
+    {
+      "name": "tp-menu",
+      "summary": "Accessible menu component."
+    },
+    {
+      "name": "tp-question",
+      "summary": "Base description-list container for question components."
+    },
+    {
+      "name": "tp-splitter",
+      "summary": "Splitter component with two resizable panels."
+    },
+    {
+      "name": "tp-switcher",
+      "summary": "Switches between horizontal and vertical layouts based on available space."
+    },
+    {
+      "name": "tp-tabs",
+      "summary": "Accessible tabs component with keyboard and reorder support."
+    },
+    {
+      "name": "tp-toolbar",
+      "summary": "Sticky toolbar with start / center / end sections,"
+    }
+  ],
+  "credits": [
+    {
+      "name": "es-module-lexer",
+      "url": "https://github.com/guybedford/es-module-lexer",
+      "summary": "ECMAScript module import analysis."
+    },
+    {
+      "name": "Chai",
+      "url": "https://www.chaijs.com/",
+      "summary": "Assertions in browser tests."
+    },
+    {
+      "name": "Lit",
+      "url": "https://lit.dev/",
+      "summary": "Web-component examples and import maps."
+    },
+    {
+      "name": "Mocha",
+      "url": "https://mochajs.org/",
+      "summary": "Browser test execution."
+    },
+    {
+      "name": "TypeScript",
+      "url": "https://www.typescriptlang.org/",
+      "summary": "TypeScript transpilation and language services."
+    },
+    {
+      "name": "Zod",
+      "url": "https://zod.dev/",
+      "summary": "Runtime schema validation."
+    }
+  ],
+  "userHelp": {
+    "displayName": "HTML viewer question",
+    "introduction": "The custom `<tp-html-viewer-question>` element implements the markup exercise functionality: checks rendered HTML using a viewer and external JavaScript DOM tests.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Question title | Expand or collapse the exercise without losing code. |\n| Input / Output | Show or hide the answer form or feedback panels. |\n| Code / Render | Show or hide editable markup and its output. |\n| Rendered HTML / Generated HTML / Tree, when available | Inspect the preview, generated HTML or parser structure. |\n| Editor toolbar | Show or hide the source editor tools. |\n| Run in the embedded toolbar | Refresh the preview from the edited markup without submitting. |\n| Embedded Reset | Restore the original project. |\n| Submit response | Run the external tests against the current code, including on repeated unchanged submissions. |\n| Reset response | Restore the original code and cancel or clear the current report. |\n| Feedback / Solution | Read test messages or the author's solution, available before submission. |\n| Console controls | Copy or clear execution messages. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between question and programming controls. |\n| Enter / Space | Activate the focused action or expand/collapse the title. |\n| Arrow keys in Output tabs | Navigate Feedback and Solution. |\n| Typing in the editor | Modify source code using the embedded editor's editing behavior. |\n| Ctrl+? | Open User help for the component under the pointer, falling back to the focused component. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Enter / Space",
+        "description": "Expands the question or activates a focused action."
+      }
+    ]
+  }
+}

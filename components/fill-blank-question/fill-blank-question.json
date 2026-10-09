@@ -1,0 +1,103 @@
+{
+  "tagname": "tp-fill-blank-question",
+  "classname": "TpFillBlankQuestion",
+  "superclass": "TpQuestion",
+  "description": "Fill-in-the-blank question: wraps tp-question with input/select validation.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-fill-blank-question>\n  <dl>\n    <dt>Answers</dt><dd><ol><li>Paris</li></ol></dd>\n    <dt>Title</dt><dd>Geography</dd>\n    <dt>Prompt</dt><dd>Complete the sentence.</dd>\n    <dt>Form</dt><dd>The capital of France is <tp-textfield name=\"capital\" placeholder=\"Capital\" aria-placeholder=\"Capital\" aria-label=\"Capital\" clearable></tp-textfield></dd>\n    <dt>Feedback</dt><dd>Check the spelling.</dd>\n    <dt>Solution</dt><dd>Paris</dd>\n  </dl>\n</tp-fill-blank-question>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "case-sensitive",
+      "description": "Requires matching uppercase and lowercase letters in answers.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "closed",
+      "description": "Provides shuffled answers to assign to readonly tp-textfield blanks.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "partial",
+      "description": "Allows incomplete submissions and marks filled blanks as correct or incorrect after feedback.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-blank",
+      "summary": "displays a text, SVG or image answer in a focusable blank."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-button-group",
+      "summary": "Button group component for organizing multiple buttons."
+    },
+    {
+      "name": "tp-callout",
+      "summary": "Callout component for highlighted contextual content."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-dragdrop",
+      "summary": "Generic drag-and-drop controller for content."
+    },
+    {
+      "name": "tp-fill-blank",
+      "summary": "manages inline fields and rich blanks in the content."
+    },
+    {
+      "name": "tp-markdown",
+      "summary": "Markdown rendering component."
+    },
+    {
+      "name": "tp-question",
+      "summary": "Base description-list container for question components."
+    },
+    {
+      "name": "tp-sidebar",
+      "summary": "Sidebar layout component."
+    },
+    {
+      "name": "tp-textfield",
+      "summary": "Single-line and automatically growing multiline text field."
+    }
+  ],
+  "credits": [
+    {
+      "name": "Zod",
+      "url": "https://zod.dev/",
+      "summary": "Runtime schema validation."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Fill blank question",
+    "introduction": "The custom `<tp-fill-blank-question>` element implements the <tp-icon name=\"fill-blank-question\" library=\"components\" size=\"1.25em\"></tp-icon> Fill blank question functionality: fill-in-the-blank question: wraps tp-question with input/select validation.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Open-answer field | Click the field and enter an answer. |\n| Closed answer bank | Drag an answer to a blank, or select an answer then click a blank. |\n| Clear button | Remove the assigned answer. |\n| Submit | Check the answers. A correct answer displays a congratulatory message. |\n| Feedback / Solution tabs | Read feedback or view the solution. |\n| Case warning | When shown after the prompt, uppercase and lowercase letters must match. |\n| Input / Output buttons | Show or hide the answer form or result panel without losing their contents. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Right Arrow from a closed blank | Move to the answer bank. |\n| Up / Down in the answer bank | Choose an answer. |\n| Enter / Space in the answer bank | Place the chosen answer into the highlighted blank. |\n| Escape | Cancel answer selection. |\n| Delete on a blank | Clear its answer. |\n| Enter / Space | Activate the focused button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

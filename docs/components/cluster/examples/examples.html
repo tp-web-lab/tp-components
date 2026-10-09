@@ -1,0 +1,50 @@
+<tp-html-viewer label="tp-cluster" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-box>
+            <tp-cluster justify="center" gap="0.5rem">
+              <tp-button>Alpha</tp-button>
+              <tp-button>Beta</tp-button>
+              <tp-button>Gamma</tp-button>
+            </tp-cluster>
+          </tp-box>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+
+      <tp-radio-list data-setting="align" label="align" label-position="top" orientation="horizontal" value="3"><ul><li>normal</li><li>stretch</li><li>center</li><li>start</li><li>end</li><li>flex-start</li><li>flex-end</li><li>self-start</li><li>self-end</li><li>baseline</li><li>first baseline</li><li>last baseline</li></ul></tp-radio-list>
+      <tp-radio-list data-setting="justify" label="justify" label-position="top" orientation="horizontal" value="4"><ul><li>normal</li><li>start</li><li>end</li><li>flex-start</li><li>flex-end</li><li>center</li><li>left</li><li>right</li><li>space-between</li><li>space-around</li><li>space-evenly</li><li>stretch</li></ul></tp-radio-list>
+      <tp-cluster><tp-textfield data-setting="gap" label="gap" value="1rem" placeholder="1rem" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="cluster attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/tp-components/docs/components/cluster/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Space between">
+      <tp-box>
+            <tp-cluster justify="space-between">
+              <tp-badge>Start</tp-badge>
+              <tp-badge>End</tp-badge>
+            </tp-cluster>
+          </tp-box>
+    </div>
+
+    <div role="example" label="Wrapping items">
+      <tp-box style="max-inline-size: 16rem">
+            <tp-cluster gap="0.5rem">
+              <tp-button>One</tp-button>
+              <tp-button>Two</tp-button>
+              <tp-button>Three</tp-button>
+              <tp-button>Four</tp-button>
+            </tp-cluster>
+          </tp-box>
+    </div>
+  </template>
+</tp-html-viewer>

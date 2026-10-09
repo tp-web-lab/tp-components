@@ -1,0 +1,9 @@
+{
+  "examples": [
+    "01-js-basic",
+    "02-js-import",
+    "03-js-dom",
+    "04-js-web-component",
+    "06-js-tests"
+  ]
+}

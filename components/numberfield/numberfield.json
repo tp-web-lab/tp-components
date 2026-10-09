@@ -1,0 +1,200 @@
+{
+  "tagname": "tp-numberfield",
+  "classname": "TpNumberfield",
+  "superclass": "TpBase",
+  "description": "numeric field with an optional native range slider.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-numberfield label=\"Quantity\" value=\"3\" min=\"0\" max=\"10\" clearable></tp-numberfield>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "aria-label",
+      "description": "Accessible name when a visible label is not supplied.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "clearable",
+      "description": "Shows a button that empties a number or resets a slider to its native midpoint.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "disabled",
+      "description": "Disables editing, clearing and form submission.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "label",
+      "description": "Visible label associated with the native input.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label-position",
+      "description": "Label position (`top`, `bottom`, `start`, or `end`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"top\""
+    },
+    {
+      "name": "list",
+      "description": "ID of an external datalist supplying numeric suggestions or slider tick marks.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "max",
+      "description": "Upper bound; native range inputs default to 100.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "min",
+      "description": "Lower bound; native range inputs default to 0.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "name",
+      "description": "Name submitted with the containing form; defaults to the initial inline content when omitted.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "placeholder",
+      "description": "Hint shown by the empty number input; ignored in range mode.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "range",
+      "description": "Uses input type range instead of input type number.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "readonly",
+      "description": "Prevents editing; a readonly slider is disabled with a hidden submission mirror.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "required",
+      "description": "Requires a value in number mode; ignored by native range inputs.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "step",
+      "description": "Positive numeric increment, or `any` for unrestricted fractional values.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1\""
+    },
+    {
+      "name": "value",
+      "description": "Numeric value; range mode normalizes it to a nonempty value within its limits.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "clear(): void",
+      "inherited": false,
+      "description": "Empty a number or reset a slider to its native midpoint and notify consumers."
+    },
+    {
+      "name": "focus(options?: FocusOptions): void",
+      "inherited": false,
+      "description": "Focus the native number input or slider."
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "description": "Emitted when the value is committed or cleared.",
+      "detail": "void"
+    },
+    {
+      "name": "input",
+      "description": "Emitted when the value changes during editing or clearing.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-clear",
+      "description": "Emitted after clearing a number or resetting the slider.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Number field",
+    "introduction": "The custom `<tp-numberfield>` element implements the <tp-icon name=\"numberfield\" library=\"components\" size=\"1.25em\"></tp-icon> Number field functionality: numeric field with an optional native range slider.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Number field | Click to enter a number, or use the browser's increment/decrement controls. |\n| Slider | Drag the thumb to change the value shown next to the # marker. |\n| Clear button | Empty a number field; for a slider, restore the native midpoint rounded to an allowed step. |\n| Unavailable field | Read-only and disabled fields cannot be edited. Number formatting follows the browser's locale. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Typing in number mode | Enter or edit the number. |\n| Arrow keys | Adjust the number or the focused slider. |\n| Home / End in slider mode | Reach the minimum or maximum. |\n| Enter / Space on Clear | Activate the available clear/reset button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

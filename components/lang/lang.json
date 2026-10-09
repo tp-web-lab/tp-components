@@ -1,0 +1,97 @@
+{
+  "tagname": "tp-lang",
+  "classname": "TpLang",
+  "superclass": "TpBase",
+  "description": "Documentation language selector.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-lang></tp-lang>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "disabled",
+      "description": "Disables the language trigger.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "langs",
+      "description": "Comma-separated language codes.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"en\""
+    },
+    {
+      "name": "repository",
+      "description": "Documentation repository root.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "size",
+      "description": "Icon button size.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"m\""
+    },
+    {
+      "name": "variant",
+      "description": "Icon button variant.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"neutral\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-lang-change",
+      "description": "Emitted when the selected documentation language changes.",
+      "detail": "{ choice: string; lang: string; repository: string; anchor: null; target: HTMLElement | null }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Language",
+    "introduction": "The custom `<tp-lang>` element implements the <tp-icon name=\"lang\" library=\"components\" size=\"1.25em\"></tp-icon> Language functionality: documentation language selector.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Language button | Open the list of available languages. |\n| Language entry | Navigate to that language version of the documentation. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

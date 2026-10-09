@@ -1,0 +1,85 @@
+{
+  "tagname": "tp-graph-sequential-circuit",
+  "classname": "TpGraphSequentialCircuit",
+  "superclass": "TpGraphLogicalCircuit",
+  "description": "Edits and simulates synchronous sequential logic circuits.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-graph-sequential-circuit></tp-graph-sequential-circuit>"
+    }
+  ],
+  "attributes": [],
+  "methods": [
+    {
+      "name": "clockStep(): void",
+      "inherited": false,
+      "description": "Clock step."
+    },
+    {
+      "name": "evaluate(): void",
+      "inherited": false,
+      "description": "Evaluate."
+    },
+    {
+      "name": "resetSequentialState(): void",
+      "inherited": false,
+      "description": "Resets sequential state."
+    },
+    {
+      "name": "run(period = 700): void",
+      "inherited": false,
+      "description": "Run."
+    },
+    {
+      "name": "stop(): void",
+      "inherited": false,
+      "description": "Stop."
+    },
+    {
+      "name": "toggle(id: string, propagate = true): boolean",
+      "inherited": false,
+      "description": "Toggle."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-logic-evaluate",
+      "description": "Emitted when logic evaluate occurs.",
+      "detail": "{ graph: unknown }"
+    },
+    {
+      "name": "tp-logic-toggle",
+      "description": "Emitted when logic toggle occurs.",
+      "detail": "{ id: unknown; value: string; graph: unknown }"
+    },
+    {
+      "name": "tp-sequential-clock",
+      "description": "Emitted when sequential clock occurs.",
+      "detail": "{ values: unknown; graph: unknown }"
+    },
+    {
+      "name": "tp-sequential-reset",
+      "description": "Emitted when sequential reset occurs.",
+      "detail": "{ graph: unknown }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-graph-editor",
+      "summary": "Extensible interactive graph editor."
+    },
+    {
+      "name": "tp-graph-logical-circuit",
+      "summary": "Interactive combinational logic circuit editor and simulator."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Sequential logical circuit",
+    "introduction": "The custom `<tp-graph-sequential-circuit>` element implements the <tp-icon name=\"graph-sequential-circuit\" library=\"components\" size=\"1.25em\"></tp-icon> Sequential logical circuit functionality: edits and simulates synchronous sequential logic circuits.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reset sequential state | The lower toolbar provides **Reset sequential state**, **Stop clock**, **Run clock**, and **Clock step**. |\n| Using the component | A clock step first evaluates the complete combinational network from the current state, samples every D input, applies all Q values simultaneously, and evaluates the combinational outputs again. |\n| Using the component | This two-phase update makes the result independent of flip-flop ordering. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

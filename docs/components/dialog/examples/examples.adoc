@@ -1,0 +1,29 @@
+[tp-asciidoc-viewer%allow-script,label="tp-dialog"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-box%data-allow-script,data-intro-action="dialog"]
+=====
+[tp-button%data-demo-trigger,id="intro-dialog-trigger"]
+====
+Open the confirmation dialog
+====
+
+[tp-dialog]
+====
+====
+
+[p%data-demo-status,role="status"]
+====
+Try the dialog using its trigger.
+====
+
+[script,src="/tp-components/docs/components/_shared/introduction-actions.js"]
+====
+====
+=====
+======
+----
+========

@@ -1,0 +1,72 @@
+{
+  "tagname": "tp-inline",
+  "classname": "TpInline",
+  "superclass": "TpBase",
+  "description": "`<tp-inline>` aligne ses enfants sur une seule ligne, sans retour à la ligne,\nsans utiliser de Shadow DOM.\n\nBase styles:\n- `display: flex`\n- `flex-wrap: nowrap`\n- `gap: var(--tp-inline-gap, 0.5rem)`\n- `justify-content: flex-start`\n- `align-items: center`\n\nReactive attributes:\n- `gap` : espace entre les enfants\n- `justify` : valeur de `justify-content`\n- `align` : valeur de `align-items`\n- `stretch` : permet aux enfants de s'étirer (`flex: 1 1 0`)",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-inline></tp-inline>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "align",
+      "description": "Cross-axis alignment applied to align-items.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"normal\" | \"stretch\" | \"center\" | \"start\" | \"end\" | \"flex-start\" | \"flex-end\" | \"self-start\" | \"self-end\" | \"baseline\" | \"first baseline\" | \"last baseline\"",
+      "default": "\"center\""
+    },
+    {
+      "name": "gap",
+      "description": "Gap between children. When absent, uses the --tp-inline-gap CSS default.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"0.5rem\""
+    },
+    {
+      "name": "justify",
+      "description": "Main-axis alignment applied to justify-content.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"normal\" | \"start\" | \"end\" | \"flex-start\" | \"flex-end\" | \"center\" | \"left\" | \"right\" | \"space-between\" | \"space-around\" | \"space-evenly\" | \"stretch\"",
+      "default": "\"flex-start\""
+    },
+    {
+      "name": "stretch",
+      "description": "Indicates whether children can stretch.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-inline-gap",
+      "default": "0.5rem",
+      "description": "Controls the gap."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Inline",
+    "introduction": "The custom `<tp-inline>` element implements the <tp-icon name=\"inline\" library=\"components\" size=\"1.25em\"></tp-icon> Inline functionality: inline flex layout component.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

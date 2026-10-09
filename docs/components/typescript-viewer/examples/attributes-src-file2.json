@@ -1,0 +1,16 @@
+{
+  "name": "TypeScript viewer example",
+  "entry": "/main.ts",
+  "files": [
+    {
+      "path": "/tp-components/index.html",
+      "language": "html",
+      "content": "<main id=\"app\"></main>"
+    },
+    {
+      "path": "/main.ts",
+      "language": "typescript",
+      "content": "const message: string = 'Loaded from src';\n\ndocument.querySelector('#app')!.textContent = message;\nconsole.log(message);"
+    }
+  ]
+}

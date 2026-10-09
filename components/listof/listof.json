@@ -1,0 +1,56 @@
+{
+  "tagname": "tp-listof",
+  "classname": "TpListof",
+  "superclass": "TpBase",
+  "description": "Collects reference content or links to labelled elements matching a CSS selector.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<div data-tp-reference-scope=\"\">\n  <tp-listof selector=\"figure\"></tp-listof>\n  <figure><p>A diagram of the water cycle.</p><figcaption>The water cycle</figcaption></figure>\n  <figure><p>A diagram of a food chain.</p><figcaption>A food chain</figcaption></figure>\n</div>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "selector",
+      "description": "CSS selector for reference definitions or elements with a title, label or caption.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-biblio",
+      "summary": "Defines a bibliography entry referenced by tp-ref."
+    },
+    {
+      "name": "tp-glossary",
+      "summary": "Defines a glossary entry referenced by tp-ref."
+    },
+    {
+      "name": "tp-note",
+      "summary": "Defines an HTML note referenced by tp-ref."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "List of elements",
+    "introduction": "The custom `<tp-listof>` element builds a list of reference entries or links to labelled document elements.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| List link | Follow the link to its document element. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between generated links. |\n| Enter | Follow the focused link. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Enter",
+        "description": "Follows the focused list link."
+      }
+    ]
+  }
+}

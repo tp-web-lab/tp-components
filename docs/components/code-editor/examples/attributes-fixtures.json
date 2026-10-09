@@ -1,0 +1,20 @@
+{
+  "src": [
+    {
+      "label": "Default",
+      "value": ""
+    },
+    {
+      "label": "file1",
+      "value": "/tp-components/docs/components/code-editor/examples/attributes-src-file1.txt"
+    },
+    {
+      "label": "file2",
+      "value": "/tp-components/docs/components/code-editor/examples/attributes-src-file2.txt"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/tp-components/docs/components/code-editor/examples/attributes-src-file-unknown.txt"
+    }
+  ]
+}

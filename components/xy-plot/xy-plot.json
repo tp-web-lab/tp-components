@@ -1,0 +1,154 @@
+{
+  "tagname": "tp-xy-plot",
+  "classname": "TpXYPlot",
+  "superclass": "TpBase",
+  "description": "XY graph rendering component.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-xy-plot>\n  <script type=\"tp/xy-plot\">\n    xyFunctionGraph\n      title \"Functions\"\n      x-axis [-10,10]\n      y-axis [-5,5]\n      functions [[\"Sine\", \"2*sin(x)\"], [\"Line\", \"x/2\"]]\n  </script>\n</tp-xy-plot>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "axis",
+      "description": "Visible axes and their ticks.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"both\" | \"horizontal\" | \"vertical\" | \"none\"",
+      "default": "\"both\""
+    },
+    {
+      "name": "grid",
+      "description": "Visible grid directions; overrides the graph directive when present.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"both\" | \"horizontal\" | \"vertical\" | \"none\"",
+      "default": "\"both\""
+    },
+    {
+      "name": "no-legend",
+      "description": "Hides curve legends.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "settings",
+      "description": "Shows a button for editing the graph definition in a panel below the plot.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "Controls the src.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "anim(): string",
+      "inherited": false,
+      "description": "Gets the comma-separated reveal order, or sets it and returns to the start."
+    },
+    {
+      "name": "anim(names: string): void",
+      "inherited": false,
+      "description": "Anim."
+    },
+    {
+      "name": "anim(names?: string): string | undefined",
+      "inherited": false,
+      "description": "Anim."
+    },
+    {
+      "name": "goToEnd(): void",
+      "inherited": false,
+      "description": "Reveals all objects in the reveal sequence."
+    },
+    {
+      "name": "goToStart(): void",
+      "inherited": false,
+      "description": "Hides all objects in the reveal sequence."
+    },
+    {
+      "name": "next(): void",
+      "inherited": false,
+      "description": "Reveals the next object; stops at the end."
+    },
+    {
+      "name": "previous(): void",
+      "inherited": false,
+      "description": "Hides the last revealed object; stops at the start."
+    },
+    {
+      "name": "setData(data: TpXYPlotData): void",
+      "inherited": false,
+      "description": "Renders numeric series with automatic axis ranges; separate series preserve gaps."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-callout",
+      "summary": "Callout component for highlighted contextual content."
+    },
+    {
+      "name": "tp-cluster",
+      "summary": "Flexible cluster layout component."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-radio-list",
+      "summary": "Transforms a list into a group of radio buttons."
+    },
+    {
+      "name": "tp-stack",
+      "summary": "Vertical stack layout component."
+    },
+    {
+      "name": "tp-textfield",
+      "summary": "Single-line and automatically growing multiline text field."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    }
+  ],
+  "userHelp": {
+    "displayName": "XY plot",
+    "introduction": "The custom `<tp-xy-plot>` element implements the <tp-icon name=\"xy-plot\" library=\"components\" size=\"1.25em\"></tp-icon> XY plot functionality: xY graph rendering component.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Zoom in (+) / Zoom out (−) | Magnify or widen the coordinate ranges around the graph center, in both the preview and enlarged view. Keep the current animation step. |\n| Reset view (refresh) | Restore the original scale and position without changing the animation step. |\n| Drag the graph (mouse or touch) | Move the drawing horizontally and vertically. Center a point of interest before zooming in. |\n| Graph settings (gear) | Show or hide the settings panel below the graph. |\n| Settings fields | Update the graph and enlarged view; invalid entries retain the last valid graph and show feedback. |\n| Start / Previous / Next / End | Return to zero revealed objects, hide the last revealed object, reveal the next object, or reveal all objects. The counter shows the current step and total. |\n| Reset | Restore the original graph definition and settings. |\n| Zoom graph (outward arrows) | Open the enlarged graph. |\n| Close zoomed graph (inward arrows) | Close the enlarged graph and return to the preview. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button, including Zoom in, Zoom out, Graph settings and Reset. |\n| Arrow keys on the focused graph | Move the drawing in the arrow direction by 10% of the visible range. |\n| Home on the focused graph | Restore the original scale and position. |\n| Escape | Close the enlarged graph. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |\n\n### Dynamic zoom\n\nThe + and − buttons change the scale around the center of the current graph. Each + click multiplies magnification by 1.25; − reverses one step. Twelve steps are available in either direction from the initial view. Curves are resampled and automatic ticks are recalculated, while labels keep their size. Explicit curve intervals remain respected; numeric datasets are never extrapolated.\n\nDrag the graph to place a point of interest at the center, then use + to zoom around it. The refresh button restores both the original scale and position. Keyboard users can focus the graph with Tab, pan with the arrow keys and reset with Home.\n\nBoth views share the same zoom, position and animation state. Applying a new graph definition or dataset resets the zoom. Returning to the initial scale restores any custom ticks. Explicit axes outside the visible range disappear, with graduations placed along the frame.\n\n### Display attributes\n\n`grid=\"both|horizontal|vertical|none\"` chooses grid directions (default `both`). When present, it overrides the graph definition’s `grid` directive; removing it restores that directive. `axis=\"both|horizontal|vertical|none\"` chooses visible axes (default `both`). Hiding an axis also hides its ticks, numeric graduations and axis label, independently of the grid. The plot frame remains visible.\n\nThe boolean `no-legend` attribute hides curve legends (default `false`). These attributes update both views immediately without changing the current animation step. JavaScript properties are `grid`, `axis` and `noLegend`.\n\n### Step-by-step reveal\n\nAdd `anim [\"A\", \"u\", \"Sine\"]` to reveal those named points, vectors or functions in that order. Objects not listed remain visible from initialization. At step `0 / 3`, all listed objects are hidden. Each Next action reveals one more; Previous hides the last one. Start returns to `0 / 3` and End reveals everything. Curve legend entries follow their curves, including in the enlarged view. Axes, colors and framing stay stable throughout.\n\nOmitting `anim`, or using `anim []`, displays everything without progression controls. Names must match labels exactly, be nonempty and occur only once in the list; unknown names are reported as errors. Objects sharing a label are revealed together. The list can span several lines. Applying a new definition in Graph settings restarts at step zero.",
+    "keyboard": []
+  }
+}

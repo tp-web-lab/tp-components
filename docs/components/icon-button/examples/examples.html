@@ -1,0 +1,35 @@
+<tp-html-viewer label="tp-icon-button" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-box data-intro-action="counter" data-allow-script="">
+        <p>Activate the heart button to add a like.</p>
+        <tp-icon-button name="heart" label="Like this example" data-demo-trigger=""></tp-icon-button>
+        <p data-demo-status="" role="status">Likes: 0</p>
+        <script src="/tp-components/docs/components/_shared/introduction-actions.js"></script>
+      </tp-box>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>disabled</li><li>flip-h</li><li>flip-v</li><li>spin</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="size" label="size" label-position="top" orientation="horizontal" value="4"><ul><li>xxs</li><li>xs</li><li>s</li><li>m</li><li>l</li><li>xl</li><li>xxl</li></ul></tp-radio-list>
+      <tp-radio-list data-setting="type" label="type" label-position="top" orientation="horizontal" value="1"><ul><li>button</li><li>submit</li><li>reset</li></ul></tp-radio-list>
+      <tp-radio-list data-setting="variant" label="variant" label-position="top" orientation="horizontal" value="5"><ul><li>success</li><li>danger</li><li>warning</li><li>info</li><li>neutral</li><li>brand</li></ul></tp-radio-list>
+      <tp-cluster><tp-textfield data-setting="color" label="color" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="label" label="label" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="library" label="library" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="name" label="name" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="rotate" label="rotate" value="0deg" placeholder="0deg" clearable></tp-textfield>
+      <tp-textfield data-setting="scale" label="scale" value="1" placeholder="1" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="icon-button attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/tp-components/docs/components/icon-button/examples/attributes.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

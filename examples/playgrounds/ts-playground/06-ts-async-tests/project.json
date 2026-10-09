@@ -1,0 +1,7 @@
+{
+  "id": "06-ts-async-tests",
+  "label": "Typescript async tests",
+  "name": "Typescript async tests",
+  "entry": "/main.ts",
+  "test": "/main.test.ts"
+}

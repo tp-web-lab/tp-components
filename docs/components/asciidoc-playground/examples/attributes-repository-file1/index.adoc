@@ -1,0 +1,25 @@
+= AsciiDoc basic
+
+== Paragraphs
+
+AsciiDoc is a lightweight markup language for writing structured documents.
+
+A paragraph is simply one or more lines of text separated by blank lines.
+
+== Unordered list
+
+* HTML structures the document.
+* CSS styles the document.
+* JavaScript adds behavior.
+
+== Ordered list
+
+. Write the content.
+. Preview the result.
+. Improve the document.
+
+== Description list
+
+HTML:: Structure
+CSS:: Presentation
+JavaScript:: Behavior

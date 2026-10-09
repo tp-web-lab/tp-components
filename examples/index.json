@@ -1,0 +1,15 @@
+{
+  "groups": {
+    "playgrounds": {
+      "asciidoc": "/tp-components/examples/playgrounds/asciidoc-playground",
+      "html": "/tp-components/examples/playgrounds/html-playground",
+      "js": "/tp-components/examples/playgrounds/js-playground",
+      "markdown": "/tp-components/examples/playgrounds/markdown-playground",
+      "prolog": "/tp-components/examples/playgrounds/prolog-playground",
+      "py": "/tp-components/examples/playgrounds/py-playground",
+      "restructuredtext": "/tp-components/examples/playgrounds/restructuredtext-playground",
+      "sql": "/tp-components/examples/playgrounds/sql-playground",
+      "ts": "/tp-components/examples/playgrounds/ts-playground"
+    }
+  }
+}
