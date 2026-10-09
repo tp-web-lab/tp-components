@@ -23355,7 +23355,7 @@ var dO = class e {
 	async test() {
 		if (this.syncProjectFromFilesystem(), this.iframeEl !== null) try {
 			let e = await this.buildTestDocument(this.project);
-			this.iframeEl.setAttribute("srcdoc", e.html);
+			this.cleanupExecution?.(), this.cleanupExecution = e.cleanup ?? null, this.viewerIframeResizeObserver?.disconnect(), this.viewerIframeResizeObserver = null, this.viewerIframeMutationObserver?.disconnect(), this.viewerIframeMutationObserver = null, this.iframeEl.style.blockSize = "1px", this.iframeEl.hidden = !1, this.iframeEl.setAttribute("srcdoc", e.html);
 		} catch (e) {
 			this.reportError(e, "Tests are not supported.");
 		}
@@ -23728,7 +23728,15 @@ var dO = class e {
 		};
 		e();
 		let t = this.iframeEl.contentDocument;
-		t !== null && t.body !== null && typeof ResizeObserver < "u" && (this.viewerIframeResizeObserver = new ResizeObserver(e), this.viewerIframeResizeObserver.observe(t.body), t.documentElement !== null && this.viewerIframeResizeObserver.observe(t.documentElement)), t !== null && t.body !== null && typeof MutationObserver < "u" && (this.viewerIframeMutationObserver = new MutationObserver(e), this.viewerIframeMutationObserver.observe(t.body, {
+		if (t !== null && t.body !== null && typeof ResizeObserver < "u") {
+			let n = !1, r = new ResizeObserver(() => {
+				n || (n = !0, requestAnimationFrame(() => {
+					n = !1, !(this.viewerIframeResizeObserver !== r || this.iframeEl?.contentDocument !== t) && e();
+				}));
+			});
+			this.viewerIframeResizeObserver = r, this.viewerIframeResizeObserver.observe(t.body), t.documentElement !== null && this.viewerIframeResizeObserver.observe(t.documentElement);
+		}
+		t !== null && t.body !== null && typeof MutationObserver < "u" && (this.viewerIframeMutationObserver = new MutationObserver(e), this.viewerIframeMutationObserver.observe(t.body, {
 			childList: !0,
 			characterData: !0,
 			subtree: !0
