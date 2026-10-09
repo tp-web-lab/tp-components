@@ -32,6 +32,8 @@ export function rewriteUrls(source, base, roots) {
 		.replace(
 			/(["'`(=\s])\/(?!\/)([a-zA-Z0-9_.-]+)(?=[/"'`)?#\s<>]|$)/g,
 			(match, before, first) => {
+				// These are virtual project entry files inside playgrounds, not site URLs.
+				if (first === "index.html" || first === "index.htm") return match;
 				if (first === "src" || first === "dist")
 					return `${before}${base.slice(0, -1)}`;
 				return roots.has(first) ? `${before}${base}${first}` : match;

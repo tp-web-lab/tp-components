@@ -3,66 +3,76 @@
  * @summary Browser test document builder for playground projects.
  */
 
-import type { TpExecutionDocument } from './playground.js';
-import type { TpProject } from './project.js';
+import type { ImportMap } from "../../utilities/importmap/importmap-types.js";
+import type { TpExecutionDocument } from "./playground.js";
 
 import {
-  createCommonRuntimeScript,
-  createConsoleBridgeScript,
-  createJavaScriptModuleBlobUrls,
-  createStaticBlobUrls,
-  createTypescriptModuleBlobUrls,
-  findProjectFile,
-  resolveEntryFile,
-} from './playground-build-utils.js';
-import type { ImportMap } from '../../utilities/importmap/importmap-types.js';
+	createCommonRuntimeScript,
+	createConsoleBridgeScript,
+	createJavaScriptModuleBlobUrls,
+	createStaticBlobUrls,
+	createTypescriptModuleBlobUrls,
+	findProjectFile,
+	resolveEntryFile,
+} from "./playground-build-utils.js";
+import type { TpProject } from "./project.js";
 
 /** Options for building a browser test document. */
 export interface BuildBrowserTestDocumentOptions {
-  kind?: 'javascript' | 'typescript';
-  defaultTest?: string;
-  importmap?: ImportMap;
+	kind?: "javascript" | "typescript";
+	defaultTest?: string;
+	importmap?: ImportMap;
 }
 
 function stripScripts(html: string): string {
-  return html.replace(/<script\b[\s\S]*?<\/script>/gi, '');
+	return html.replace(/<script\b[\s\S]*?<\/script>/gi, "");
 }
 
 /** Builds the browser-based test execution document. */
 export async function buildBrowserTestDocument(
-  project: TpProject,
-  options: BuildBrowserTestDocumentOptions = {},
+	project: TpProject,
+	options: BuildBrowserTestDocumentOptions = {},
 ): Promise<TpExecutionDocument> {
-  console.log('browser test project.test', project.test);
-  const allowedTestExtensions =
-    options.kind === 'typescript'
-      ? ['.test.ts', '.tests.ts', '.spec.ts', '.test.tsx', '.tests.tsx', '.spec.tsx', '.test.js', '.tests.js', '.spec.js']
-      : ['.test.js', '.tests.js', '.spec.js'];
+	console.log("browser test project.test", project.test);
+	const allowedTestExtensions =
+		options.kind === "typescript"
+			? [
+					".test.ts",
+					".tests.ts",
+					".spec.ts",
+					".test.tsx",
+					".tests.tsx",
+					".spec.tsx",
+					".test.js",
+					".tests.js",
+					".spec.js",
+				]
+			: [".test.js", ".tests.js", ".spec.js"];
 
-  const explicitTestPath = project.test;
+	const explicitTestPath = project.test;
 
-  const testFile =
-    typeof explicitTestPath === 'string' && explicitTestPath !== ''
-      ? findProjectFile(project, explicitTestPath)
-      : resolveEntryFile(project, {
-          entry: options.defaultTest,
-          priorityPaths:
-            options.kind === 'typescript'
-              ? ['/main.test.ts', '/main.test.tsx', '/main.test.js']
-              : ['/main.test.js'],
-          extensions: allowedTestExtensions,
-          fallbackToFirstFile: false,
-          ignoreProjectEntry: true,
-        });
+	const testFile =
+		typeof explicitTestPath === "string" && explicitTestPath !== ""
+			? findProjectFile(project, explicitTestPath)
+			: resolveEntryFile(project, {
+					entry: options.defaultTest,
+					priorityPaths:
+						options.kind === "typescript"
+							? ["/main.test.ts", "/main.test.tsx", "/main.test.js"]
+							: ["/main.test.js"],
+					extensions: allowedTestExtensions,
+					fallbackToFirstFile: false,
+					ignoreProjectEntry: true,
+				});
 
-  if (testFile === undefined) {
-    throw new Error(
-      typeof explicitTestPath === 'string' && explicitTestPath !== ''
-        ? `Test file not found: ${explicitTestPath}.`
-        : 'No test file found.',
-    );
-  }
-  const tpTestModule = `
+	if (testFile === undefined) {
+		throw new Error(
+			typeof explicitTestPath === "string" && explicitTestPath !== ""
+				? `Test file not found: ${explicitTestPath}.`
+				: "No test file found.",
+		);
+	}
+	const tpTestModule = `
 const api = window.__tp_test__;
 
 if (!api) {
@@ -74,45 +84,45 @@ export const it = api.it;
 export const expect = api.expect;
 `;
 
-  const tpTestUrl = URL.createObjectURL(
-    new Blob([tpTestModule], { type: 'text/javascript' }),
-  );
+	const tpTestUrl = URL.createObjectURL(
+		new Blob([tpTestModule], { type: "text/javascript" }),
+	);
 
-  const importmap = {
-    imports: {
-      ...(options.importmap?.imports ?? {}),
-      '@tp/test': tpTestUrl,
-    },
-  };
+	const importmap = {
+		imports: {
+			...(options.importmap?.imports ?? {}),
+			"@tp/test": tpTestUrl,
+		},
+	};
 
-  const staticBlobUrls = createStaticBlobUrls(project.files);
-  const moduleBlobUrls =
-    options.kind === 'typescript'
-      ? await createTypescriptModuleBlobUrls(
-          project.files,
-          staticBlobUrls,
-          importmap,
-        )
-      : await createJavaScriptModuleBlobUrls(
-          project.files,
-          staticBlobUrls,
-          importmap,
-        );
-  const testUrl = moduleBlobUrls.get(testFile.path);
+	const staticBlobUrls = createStaticBlobUrls(project.files);
+	const moduleBlobUrls =
+		options.kind === "typescript"
+			? await createTypescriptModuleBlobUrls(
+					project.files,
+					staticBlobUrls,
+					importmap,
+				)
+			: await createJavaScriptModuleBlobUrls(
+					project.files,
+					staticBlobUrls,
+					importmap,
+				);
+	const testUrl = moduleBlobUrls.get(testFile.path);
 
-  if (testUrl === undefined) {
-    throw new Error(`Test module not built: ${testFile.path}`);
-  }
+	if (testUrl === undefined) {
+		throw new Error(`Test module not built: ${testFile.path}`);
+	}
 
-  const allBlobUrls = new Map<string, string>([
-    ...staticBlobUrls.entries(),
-    ...moduleBlobUrls.entries(),
-  ]);
+	const allBlobUrls = new Map<string, string>([
+		...staticBlobUrls.entries(),
+		...moduleBlobUrls.entries(),
+	]);
 
-  const htmlFile = findProjectFile(project, '/index.html');
-  const body = htmlFile ? stripScripts(htmlFile.content) : '';
+	const htmlFile = findProjectFile(project, "/index.html");
+	const body = htmlFile ? stripScripts(htmlFile.content) : "";
 
-  const html = `
+	const html = `
 <!doctype html>
 <html>
 <head>
@@ -124,8 +134,8 @@ export const expect = api.expect;
   ${createCommonRuntimeScript()}
   ${createConsoleBridgeScript()}
 
-  <script src="https://cdn.jsdelivr.net/npm/mocha@10/mocha.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chai@4/chai.js"></script>
+  <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/mocha@10/mocha.js"></script>
+  <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/chai@4/chai.js"></script>
 
 <script>
   mocha.setup('bdd');
@@ -200,13 +210,13 @@ ${JSON.stringify(importmap, null, 2)}
 </html>
 `;
 
-  return {
-    html,
-    cleanup: () => {
-      URL.revokeObjectURL(tpTestUrl);
-      for (const url of allBlobUrls.values()) {
-        URL.revokeObjectURL(url);
-      }
-    },
-  };
+	return {
+		html,
+		cleanup: () => {
+			URL.revokeObjectURL(tpTestUrl);
+			for (const url of allBlobUrls.values()) {
+				URL.revokeObjectURL(url);
+			}
+		},
+	};
 }

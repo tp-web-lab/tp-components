@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Preserve virtual `/index.html` and `/index.htm` playground files when preparing
+  the documentation for GitHub Pages; DOM and Web Component examples now render.
+- Load browser test libraries with CORS enabled so external script errors expose
+  their details instead of the generic "Script error." message.
+
 ## 1.0.0-rc.1 — 2026-10-09
 
 First public release candidate, consolidating the initial development history.

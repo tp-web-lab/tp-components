@@ -87,3 +87,18 @@ test("Pages deploys only main after a successful build with minimal permissions"
 		"tp-components/.pages",
 	);
 });
+
+test("playground HTML entry paths remain virtual when the site contains index.html", () => {
+	const roots = new Set(["index.html", "index.htm", "docs", "tp-loader.js"]);
+	const source = `project.findFile("/index.html") ?? project.findFile('/index.htm');`;
+	assert.equal(rewriteUrls(source, "/tp-components/", roots), source);
+	const project = JSON.stringify({
+		files: [
+			{ path: "/index.html", content: '<button id="btn">Click</button>' },
+		],
+	});
+	assert.equal(
+		JSON.parse(rewriteUrls(project, "/tp-components/", roots)).files[0].path,
+		"/index.html",
+	);
+});
