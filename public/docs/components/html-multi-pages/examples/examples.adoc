@@ -1,0 +1,15 @@
+[tp-asciidoc-viewer%allow-script,label="tp-html-multi-pages",style="--tp-markup-viewer-frame-min-height: 32rem"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-box,style="position: relative; contain: layout; block-size: 32rem; padding: 0;"]
+=====
+[tp-html-multi-pages%menu,repository="/docs/components/_shared/intro-documents/html",label="A small guide"]
+====
+====
+=====
+======
+----
+========

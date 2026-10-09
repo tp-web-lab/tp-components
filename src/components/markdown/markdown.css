@@ -1,0 +1,119 @@
+.tp-markdown {
+  display: block;
+}
+
+.tp-markdown-output {
+  min-inline-size: 0;
+}
+
+.tp-markdown-output > pre {
+  display: flow-root;
+}
+
+.tp-markdown-output table {
+  display: block;
+  inline-size: auto;
+  max-inline-size: 100%;
+  overflow-x: auto;
+}
+
+.tp-markdown-output .hljs {
+  display: block;
+  overflow-x: auto;
+  color: var(--tp-syntax-foreground, #d4d4d4);
+  background: var(--tp-syntax-surface, #1e1e1e);
+}
+
+.tp-markdown-output .hljs-subst {
+  color: var(--tp-syntax-foreground, #d4d4d4);
+}
+
+.tp-markdown-output .hljs-comment,
+.tp-markdown-output .hljs-quote {
+  color: var(--tp-syntax-token-comment, #6a9955);
+  font-style: italic;
+}
+
+.tp-markdown-output .hljs-keyword,
+.tp-markdown-output .hljs-selector-tag,
+.tp-markdown-output .hljs-literal,
+.tp-markdown-output .hljs-name,
+.tp-markdown-output .hljs-meta .hljs-keyword {
+  color: var(--tp-syntax-token-keyword, #569cd6);
+}
+
+.tp-markdown-output .hljs-string,
+.tp-markdown-output .hljs-attr,
+.tp-markdown-output .hljs-addition,
+.tp-markdown-output .hljs-regexp,
+.tp-markdown-output .hljs-template-tag,
+.tp-markdown-output .hljs-template-variable {
+  color: var(--tp-syntax-token-string, #ce9178);
+}
+
+.tp-markdown-output .hljs-number,
+.tp-markdown-output .hljs-symbol,
+.tp-markdown-output .hljs-bullet {
+  color: var(--tp-syntax-token-number, #b5cea8);
+}
+
+.tp-markdown-output .hljs-variable,
+.tp-markdown-output .hljs-params,
+.tp-markdown-output .hljs-selector-class,
+.tp-markdown-output .hljs-selector-id {
+  color: var(--tp-syntax-token-variable, #9cdcfe);
+}
+
+.tp-markdown-output .hljs-property,
+.tp-markdown-output .hljs-attribute,
+.tp-markdown-output .hljs-tag,
+.tp-markdown-output .hljs-selector-attr,
+.tp-markdown-output .hljs-selector-pseudo {
+  color: var(--tp-syntax-token-property, #9cdcfe);
+}
+
+.tp-markdown-output .hljs-type,
+.tp-markdown-output .hljs-class .hljs-title,
+.tp-markdown-output .hljs-title.class_ {
+  color: var(--tp-syntax-token-type, #4ec9b0);
+}
+
+.tp-markdown-output .hljs-title,
+.tp-markdown-output .hljs-title.function_,
+.tp-markdown-output .hljs-function .hljs-title {
+  color: var(--tp-syntax-token-function, #dcdcaa);
+}
+
+.tp-markdown-output .hljs-link {
+  color: var(--tp-syntax-token-link, #4fc1ff);
+  text-decoration: underline;
+}
+
+.tp-markdown-output .hljs-emphasis {
+  font-style: italic;
+}
+
+.tp-markdown-output .hljs-strong {
+  font-weight: 700;
+}
+
+.tp-markdown-error {
+  margin: 0;
+  padding: 0.9rem;
+  border: 1px solid #f1b7bf;
+  border-radius: 0.5rem;
+  background: #fff3f5;
+  color: #8a1c2c;
+  overflow: auto;
+}
+
+/* TpBase sets svg max-inline-size:100% + display:block.
+   MathJax inline/display formulas need intrinsic SVG width. */
+.tp-markdown-output .tp-md-math-inline svg,
+.tp-markdown-output .tp-md-math-display svg,
+.tp-markdown-output .tp-md-math-inline mjx-container > svg,
+.tp-markdown-output .tp-md-math-display mjx-container > svg {
+  display: inline-block;
+  max-width: none;
+  max-inline-size: none;
+}

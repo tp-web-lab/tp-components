@@ -1,0 +1,302 @@
+tp-button {
+	--tp-button-accent: var(--tp-neutral-text-colorful);
+	--tp-button-background: var(--tp-neutral-fill-loud);
+	--tp-button-foreground: var(--tp-neutral-text-on-loud);
+	--tp-button-border-color: var(--tp-neutral-stroke-mid);
+	--tp-button-outline-background: var(--tp-neutral-fill-softer);
+	--tp-button-focus-ring-color: var(--tp-focus-color);
+	--tp-button-radius: 0.5em;
+	--tp-button-font-size: 0.875em;
+	--tp-button-padding-block: 0.35em;
+	--tp-button-padding-inline: 0.7em;
+	--tp-button-spinner-size: 1em;
+	--tp-button-spinner-border-width: 2px;
+
+	align-items: center;
+	display: inline-flex;
+	line-height: 1;
+	max-inline-size: 100%;
+	vertical-align: middle;
+}
+
+tp-button[variant="success"] {
+	--tp-button-accent: var(--tp-success-text-colorful);
+	--tp-button-background: var(--tp-success-fill-loud);
+	--tp-button-foreground: var(--tp-success-text-on-loud);
+	--tp-button-border-color: var(--tp-success-stroke-mid);
+	--tp-button-outline-background: var(--tp-success-fill-softer);
+}
+
+tp-button[variant="danger"] {
+	--tp-button-accent: var(--tp-danger-text-colorful);
+	--tp-button-background: var(--tp-danger-fill-loud);
+	--tp-button-foreground: var(--tp-danger-text-on-loud);
+	--tp-button-border-color: var(--tp-danger-stroke-mid);
+	--tp-button-outline-background: var(--tp-danger-fill-softer);
+}
+
+tp-button[variant="warning"] {
+	--tp-button-accent: var(--tp-warning-text-colorful);
+	--tp-button-background: var(--tp-warning-fill-loud);
+	--tp-button-foreground: var(--tp-warning-text-on-loud);
+	--tp-button-border-color: var(--tp-warning-stroke-mid);
+	--tp-button-outline-background: var(--tp-warning-fill-softer);
+}
+
+tp-button[variant="info"] {
+	--tp-button-accent: var(--tp-info-text-colorful);
+	--tp-button-background: var(--tp-info-fill-loud);
+	--tp-button-foreground: var(--tp-info-text-on-loud);
+	--tp-button-border-color: var(--tp-info-stroke-mid);
+	--tp-button-outline-background: var(--tp-info-fill-softer);
+}
+
+tp-button[variant="neutral"] {
+	--tp-button-accent: var(--tp-neutral-text-colorful);
+	--tp-button-background: var(--tp-neutral-fill-loud);
+	--tp-button-foreground: var(--tp-neutral-text-on-loud);
+	--tp-button-border-color: var(--tp-neutral-stroke-mid);
+	--tp-button-outline-background: var(--tp-neutral-fill-softer);
+}
+
+tp-button[variant="brand"] {
+	--tp-button-accent: var(--tp-brand-text-colorful);
+	--tp-button-background: var(--tp-brand-fill-loud);
+	--tp-button-foreground: var(--tp-brand-text-on-loud);
+	--tp-button-border-color: var(--tp-brand-stroke-mid);
+	--tp-button-outline-background: var(--tp-brand-fill-softer);
+}
+
+tp-button[outlined] {
+	--tp-button-background: transparent;
+	--tp-button-foreground: var(--tp-button-accent);
+}
+
+tp-button[pill] {
+	--tp-button-radius: 999px;
+}
+
+tp-button > button,
+tp-button > a {
+	align-items: center;
+	appearance: none;
+	background: var(--tp-button-background);
+	border: 1px solid var(--tp-button-border-color);
+	border-radius: var(--tp-button-radius);
+	box-shadow: none;
+	color: var(--tp-button-foreground);
+	cursor: pointer;
+	display: inline-flex;
+	font: inherit;
+	font-size: var(--tp-button-font-size);
+	font-weight: 600;
+	gap: 0.25em;
+	inline-size: auto;
+	justify-content: center;
+	line-height: 1;
+	margin: 0;
+	max-inline-size: 100%;
+	min-block-size: 24px;
+	min-inline-size: 24px;
+	outline: none;
+	padding-block: var(--tp-button-padding-block);
+	padding-inline: var(--tp-button-padding-inline);
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+	transition:
+		background-color 0.15s ease,
+		border-color 0.15s ease,
+		color 0.15s ease,
+		box-shadow 0.15s ease,
+		filter 0.15s ease,
+		opacity 0.15s ease,
+		transform 0.15s ease;
+	user-select: none;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+tp-button > a:any-link,
+tp-button > a:any-link > [data-tp-button-content] {
+	color: var(--tp-button-foreground);
+}
+
+tp-button[outlined] > button,
+tp-button[outlined] > a {
+	border-color: var(--tp-button-accent);
+}
+
+tp-button > button > [data-tp-button-content],
+tp-button > a > [data-tp-button-content] {
+	display: inline-flex;
+	gap: inherit;
+}
+
+tp-button > button > [data-tp-button-spinner],
+tp-button > a > [data-tp-button-spinner] {
+	block-size: var(--tp-button-spinner-size);
+	border: var(--tp-button-spinner-border-width) solid
+		color-mix(in srgb, currentColor 28%, transparent);
+	border-radius: 999px;
+	border-top-color: currentColor;
+	box-sizing: border-box;
+	inline-size: var(--tp-button-spinner-size);
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+}
+
+/* sizes */
+tp-button[size="xxs"] {
+	--tp-button-font-size: 0.625em;
+	--tp-button-padding-block: 0.15em;
+	--tp-button-padding-inline: 0.4em;
+	--tp-button-spinner-size: 0.75em;
+	--tp-button-spinner-border-width: 1.5px;
+}
+
+tp-button[size="xs"] {
+	--tp-button-font-size: 0.6875em;
+	--tp-button-padding-block: 0.2em;
+	--tp-button-padding-inline: 0.5em;
+	--tp-button-spinner-size: 0.8em;
+}
+
+tp-button[size="s"] {
+	--tp-button-font-size: 0.75em;
+	--tp-button-padding-block: 0.25em;
+	--tp-button-padding-inline: 0.55em;
+	--tp-button-spinner-size: 0.9em;
+}
+
+tp-button[size="m"] {
+	--tp-button-font-size: 0.875em;
+	--tp-button-padding-block: 0.35em;
+	--tp-button-padding-inline: 0.7em;
+	--tp-button-spinner-size: 1em;
+}
+
+tp-button[size="l"] {
+	--tp-button-font-size: 0.95em;
+	--tp-button-padding-block: 0.42em;
+	--tp-button-padding-inline: 0.8em;
+	--tp-button-spinner-size: 1.05em;
+}
+
+tp-button[size="xl"] {
+	--tp-button-font-size: 1em;
+	--tp-button-padding-block: 0.5em;
+	--tp-button-padding-inline: 0.9em;
+	--tp-button-spinner-size: 1.1em;
+}
+
+tp-button[size="xxl"] {
+	--tp-button-font-size: 1.125em;
+	--tp-button-padding-block: 0.6em;
+	--tp-button-padding-inline: 1em;
+	--tp-button-spinner-size: 1.15em;
+}
+
+/* loading replace */
+tp-button[loading][loading-mode="replace"] > button > [data-tp-button-spinner],
+tp-button[loading][loading-mode="replace"] > a > [data-tp-button-spinner] {
+	animation: tp-button-spin 0.7s linear infinite;
+	inset-block-start: 50%;
+	inset-inline-start: 50%;
+	opacity: 1;
+	transform: translate(-50%, -50%);
+}
+
+tp-button[loading][loading-mode="replace"] > button > [data-tp-button-content],
+tp-button[loading][loading-mode="replace"] > a > [data-tp-button-content] {
+	opacity: 0;
+}
+
+/* loading inline */
+tp-button[loading][loading-mode="inline"] > button,
+tp-button[loading][loading-mode="inline"] > a {
+	align-items: center;
+}
+
+tp-button[loading][loading-mode="inline"] > button > [data-tp-button-spinner],
+tp-button[loading][loading-mode="inline"] > a > [data-tp-button-spinner] {
+	animation: tp-button-spin 0.7s linear infinite;
+	display: inline-block;
+	flex: 0 0 auto;
+	margin-inline-end: 0.35em;
+	opacity: 1;
+	position: static;
+	transform: none;
+	vertical-align: middle;
+}
+
+tp-button[loading][loading-mode="inline"] > button > [data-tp-button-content],
+tp-button[loading][loading-mode="inline"] > a > [data-tp-button-content] {
+	align-items: center;
+	display: inline-flex;
+	opacity: 1;
+}
+
+/* interactions */
+tp-button:not([disabled]):not([loading]) > button:hover,
+tp-button:not([disabled]):not([loading]) > a:hover {
+	border-color: var(--tp-button-accent);
+	box-shadow:
+		0 0 0 2px Canvas,
+		0 0 0 4px var(--tp-button-focus-ring-color);
+	filter: brightness(1.14);
+	transform: translateY(-1px);
+}
+
+tp-button[outlined]:not([disabled]):not([loading]) > button:hover,
+tp-button[outlined]:not([disabled]):not([loading]) > a:hover {
+	background-color: var(--tp-button-outline-background);
+}
+
+tp-button:not([disabled]):not([loading]) > button:active,
+tp-button:not([disabled]):not([loading]) > a:active {
+	transform: translateY(1px);
+}
+
+tp-button > button:focus-visible,
+tp-button > a:focus-visible {
+	box-shadow:
+		0 0 0 2px Canvas,
+		0 0 0 4px var(--tp-button-focus-ring-color);
+	outline: none;
+}
+
+/* disabled / loading */
+tp-button[disabled] > button,
+tp-button[disabled] > a,
+tp-button[loading] > button,
+tp-button[loading] > a {
+	cursor: not-allowed;
+}
+
+tp-button[disabled] > button,
+tp-button[disabled] > a {
+	opacity: 0.55;
+}
+
+tp-button[loading] > button,
+tp-button[loading] > a {
+	opacity: 0.85;
+}
+
+@keyframes tp-button-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	tp-button,
+	tp-button * {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		transition-delay: 0ms !important;
+	}
+}

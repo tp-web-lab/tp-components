@@ -1,0 +1,5 @@
+{
+  "components": ["markup-viewer", "asciidoc-viewer", "html-viewer", "markdown-viewer", "restructuredtext-viewer", "javascript-viewer", "prolog-viewer", "python-viewer", "sql-viewer", "typescript-viewer", "object-tree"],
+  "testFileCount": 18,
+  "targets": { "lines": 90, "statements": 90, "functions": 90, "branches": 80 }
+}

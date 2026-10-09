@@ -1,0 +1,10 @@
+{
+  "components": ["markup-single-page", "markup-multi-pages", "asciidoc-single-page", "asciidoc-multi-pages", "html-single-page", "html-multi-pages", "markdown-single-page", "markdown-multi-pages", "restructuredtext-single-page", "restructuredtext-multi-pages"],
+  "testFileCount": 10,
+  "targets": {
+    "lines": 90,
+    "statements": 90,
+    "functions": 90,
+    "branches": 80
+  }
+}

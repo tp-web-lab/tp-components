@@ -1,0 +1,9 @@
+{
+  "examples": [
+    "01-py-basic",
+    "02-py-import",
+    "03-py-package",
+    "04-py-tests",
+    "05-py-dom"
+  ]
+}

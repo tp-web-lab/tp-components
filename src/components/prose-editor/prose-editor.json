@@ -1,0 +1,213 @@
+{
+  "tagname": "tp-prose-editor",
+  "classname": "TpProseEditor",
+  "superclass": "TpBase",
+  "description": "ProseMirror-based rich text editor.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-prose-editor></tp-prose-editor>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "placeholder",
+      "description": "Text displayed while the editor is empty.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"Type your prose...\""
+    },
+    {
+      "name": "readonly",
+      "description": "Prevents the user from editing the prose.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "URL of an external document loaded into the editor.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "value",
+      "description": "Initial HTML content of the editor.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "addTableColumnAfter(): boolean",
+      "inherited": false,
+      "description": "Adds table column after."
+    },
+    {
+      "name": "addTableRowAfter(): boolean",
+      "inherited": false,
+      "description": "Adds table row after."
+    },
+    {
+      "name": "deleteTable(): boolean",
+      "inherited": false,
+      "description": "Deletes table."
+    },
+    {
+      "name": "deleteTableColumn(): boolean",
+      "inherited": false,
+      "description": "Deletes table column."
+    },
+    {
+      "name": "deleteTableRow(): boolean",
+      "inherited": false,
+      "description": "Deletes table row."
+    },
+    {
+      "name": "findNext(value?: string): boolean",
+      "inherited": false,
+      "description": "Finds next."
+    },
+    {
+      "name": "findPrevious(value?: string): boolean",
+      "inherited": false,
+      "description": "Finds previous."
+    },
+    {
+      "name": "focus(options?: FocusOptions): void",
+      "inherited": false,
+      "description": "Focus."
+    },
+    {
+      "name": "getHTML(): string",
+      "inherited": false,
+      "description": "Returns html."
+    },
+    {
+      "name": "insertTable(rows = 3, columns = 3): boolean",
+      "inherited": false,
+      "description": "Inserts table."
+    },
+    {
+      "name": "setHTML(value: string): void",
+      "inherited": false,
+      "description": "Sets html."
+    },
+    {
+      "name": "setSearchQuery(value: string, options: Omit<ConstructorParameters<typeof SearchQuery>[0], \"search\"> = {}): void",
+      "inherited": false,
+      "description": "Sets search query."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-prose-editor-change",
+      "description": "Emitted when prose editor change occurs.",
+      "detail": "{ value: string }"
+    },
+    {
+      "name": "tp-prose-editor-input",
+      "description": "Emitted when prose editor input occurs.",
+      "detail": "{ value: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-asciidoc",
+      "summary": "Semantic AsciiDoc rendering component."
+    },
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-checkbox-list",
+      "summary": "Transforms a list into a group of checkboxes."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-color",
+      "summary": "Brand color preset controller scoped to the containing element."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-emoji-picker",
+      "summary": "Unicode Emoji 17.0 picker."
+    },
+    {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-icon-picker",
+      "summary": "Icon picker that lists built-in icons from `icon-internal`"
+    },
+    {
+      "name": "tp-markdown",
+      "summary": "Markdown rendering component."
+    },
+    {
+      "name": "tp-menu",
+      "summary": "Accessible menu component."
+    },
+    {
+      "name": "tp-restructuredtext",
+      "summary": "reStructuredText rendering component."
+    },
+    {
+      "name": "tp-symbol-picker",
+      "summary": "HTML named-character symbol picker."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
+    },
+    {
+      "name": "tp-toolbar",
+      "summary": "Sticky toolbar with start / center / end sections,"
+    }
+  ],
+  "credits": [
+    {
+      "name": "ProseMirror",
+      "url": "https://prosemirror.net/",
+      "summary": "Rich-text editing."
+    },
+    {
+      "name": "MathJax",
+      "url": "https://www.mathjax.org/",
+      "summary": "Mathematical notation rendering."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Prose-editor",
+    "introduction": "The custom `<tp-prose-editor>` element implements the <tp-icon name=\"prose-editor\" library=\"components\" size=\"1.25em\"></tp-icon> Prose-editor functionality: proseMirror-based rich text editor.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Edit the document directly and use the toolbar to format text, insert content, undo or redo changes. |\n| :tp-icon:{name=\"file\" size=\"1.25em\"} Files | Creates, loads, saves, or exports the document. |\n| :tp-icon:{name=\"format-title\" size=\"1.25em\"} Types | Inserts paragraphs, headings, quotations, code, markup, math, and horizontal rules. |\n| :tp-icon:{name=\"letter-f\" size=\"1.25em\"} Format | Applies inline text, math, and link formatting. |\n| :tp-icon:{name=\"list-down\" size=\"1.25em\"} :tp-icon:{name=\"table\" size=\"1.25em\"} :tp-icon:{name=\"multimedia\" size=\"1.25em\"} Lists / Table / Media | Inserts and edits structured or media content. |\n| :tp-icon:{name=\"emoticon-happy-outline\" size=\"1.25em\"} :tp-icon:{name=\"shapes\" size=\"1.25em\"} :tp-icon:{name=\"symbol\" size=\"1.25em\"} Emoji / Icon / Symbol | Opens a compact picker and inserts the selected item inline. |\n| :tp-icon:{name=\"undo\" size=\"1.25em\"} :tp-icon:{name=\"redo\" size=\"1.25em\"} Undo / Redo | Navigates the editing history. |\n| :tp-icon:{name=\"copy\" size=\"1.25em\"} :tp-icon:{name=\"cut\" size=\"1.25em\"} :tp-icon:{name=\"paste\" size=\"1.25em\"} :tp-icon:{name=\"select-all\" size=\"1.25em\"} Copy / Cut / Paste / Select all | Applies the corresponding clipboard or selection operation. |\n| :tp-icon:{name=\"format-clear\" size=\"1.25em\"} Clear formatting | Removes formatting from the selection. |\n| :tp-icon:{name=\"language-html\" size=\"1.25em\"} HTML | Opens the HTML source and rendered views. |\n| :tp-icon:{name=\"search\" size=\"1.25em\"} Search | Finds and highlights matching text. |\n| :tp-icon:{name=\"dots-vertical\" size=\"1.25em\"} More | Shows or hides the secondary formatting toolbar. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"1.25em\"} Editor toolbar | Shows or hides the toolbar of the visible code or markup block editor. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

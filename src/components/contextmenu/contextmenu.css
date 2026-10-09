@@ -1,0 +1,152 @@
+tp-contextmenu {
+  --tp-contextmenu-background: Canvas;
+  --tp-contextmenu-foreground: CanvasText;
+  --tp-contextmenu-border-color: color-mix(in srgb, currentColor 18%, transparent);
+  --tp-contextmenu-shadow-1: color-mix(in srgb, black 18%, transparent);
+  --tp-contextmenu-shadow-2: color-mix(in srgb, black 10%, transparent);
+  --tp-contextmenu-hover: color-mix(in srgb, currentColor 10%, transparent);
+  --tp-contextmenu-radius: 0.5rem;
+  --tp-contextmenu-submenu-offset: calc(100% - 0.25rem);
+  --tp-contextmenu-min-inline-size: 12rem;
+  --tp-contextmenu-padding: 0.25rem;
+  --tp-contextmenu-item-padding-block: 0.5rem;
+  --tp-contextmenu-item-padding-inline: 0.75rem;
+  --tp-contextmenu-z-index: 1000;
+
+  background: var(--tp-contextmenu-background);
+  border: 1px solid var(--tp-contextmenu-border-color);
+  border-radius: var(--tp-contextmenu-radius);
+  box-shadow:
+    0 8px 24px var(--tp-contextmenu-shadow-1),
+    0 2px 8px var(--tp-contextmenu-shadow-2);
+  box-sizing: border-box;
+  color: var(--tp-contextmenu-foreground);
+  display: block;
+  inline-size: max-content;
+  min-inline-size: var(--tp-contextmenu-min-inline-size);
+  padding: var(--tp-contextmenu-padding);
+  position: fixed;
+  z-index: var(--tp-contextmenu-z-index);
+}
+
+tp-contextmenu:not([open]) {
+  display: none;
+}
+
+/* LISTES */
+
+tp-contextmenu > ul,
+tp-contextmenu ul ul {
+  background: var(--tp-contextmenu-background);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ITEMS */
+
+tp-contextmenu li {
+  align-items: center;
+  background: transparent;
+  border-radius: 0.375rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  min-block-size: 2rem;
+  padding-block: var(--tp-contextmenu-item-padding-block);
+  padding-inline: var(--tp-contextmenu-item-padding-inline);
+  position: relative;
+  user-select: none;
+}
+
+/* HOVER / FOCUS */
+
+tp-contextmenu li:hover,
+tp-contextmenu li:focus-visible {
+  background: var(--tp-contextmenu-hover);
+  outline: none;
+}
+
+/* =========================
+   DISABLED ITEMS
+   ========================= */
+
+tp-contextmenu li[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+/* IMPORTANT : pas de hover sur disabled */
+tp-contextmenu li[aria-disabled='true']:hover,
+tp-contextmenu li[aria-disabled='true']:focus-visible {
+  background: transparent;
+}
+
+/* =========================
+   SEPARATORS (version "hr")
+   ========================= */
+
+tp-contextmenu li[role='separator'] {
+  display: block;
+  min-block-size: 0;
+  padding: 0;
+  margin: 0.25rem 0;
+  pointer-events: none;
+  background: transparent;
+  border-radius: 0;
+  cursor: default;
+}
+
+tp-contextmenu li[role='separator']::before {
+  content: '';
+  display: block;
+  border-top: 1px solid var(--tp-contextmenu-border-color);
+  margin-inline: 0.25rem;
+}
+
+tp-contextmenu li[role='separator']::after {
+  content: none;
+}
+
+tp-contextmenu li[role='separator']:hover,
+tp-contextmenu li[role='separator']:focus-visible {
+  background: transparent;
+  outline: none;
+}
+
+/* =========================
+   SUBMENUS
+   ========================= */
+
+tp-contextmenu li[aria-haspopup='menu'] {
+  padding-inline-end: 2rem;
+}
+
+tp-contextmenu li[aria-haspopup='menu']::after {
+  content: '▸';
+  inset-inline-end: 0.75rem;
+  position: absolute;
+}
+
+/* sous-menu caché par défaut */
+tp-contextmenu li > ul {
+  background: var(--tp-contextmenu-background);
+  border: 1px solid var(--tp-contextmenu-border-color);
+  border-radius: var(--tp-contextmenu-radius);
+  box-shadow:
+    0 8px 24px var(--tp-contextmenu-shadow-1),
+    0 2px 8px var(--tp-contextmenu-shadow-2);
+  display: none;
+  inset-block-start: -0.25rem;
+  inset-inline-start: var(--tp-contextmenu-submenu-offset);
+  min-inline-size: var(--tp-contextmenu-min-inline-size);
+  padding: var(--tp-contextmenu-padding);
+  position: absolute;
+  z-index: calc(var(--tp-contextmenu-z-index) + 1);
+}
+
+/* ouvert */
+tp-contextmenu li[aria-expanded='true'] > ul {
+  display: block;
+}

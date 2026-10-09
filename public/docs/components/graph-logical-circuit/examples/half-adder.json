@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "title": "Half adder",
+  "nodes": [
+    {
+      "id": "a",
+      "type": "logic-input",
+      "x": 100,
+      "y": 100,
+      "label": "A",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "b",
+      "type": "logic-input",
+      "x": 100,
+      "y": 260,
+      "label": "B",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "a-hub",
+      "type": "logic-hub",
+      "x": 200,
+      "y": 100,
+      "label": "A"
+    },
+    {
+      "id": "b-hub",
+      "type": "logic-hub",
+      "x": 200,
+      "y": 260,
+      "label": "B"
+    },
+    {
+      "id": "xor",
+      "type": "logic-xor",
+      "x": 400,
+      "y": 120,
+      "label": "XOR"
+    },
+    {
+      "id": "and",
+      "type": "logic-and",
+      "x": 400,
+      "y": 240,
+      "label": "AND"
+    },
+    {
+      "id": "sum",
+      "type": "logic-output",
+      "x": 640,
+      "y": 120,
+      "label": "Sum"
+    },
+    {
+      "id": "carry",
+      "type": "logic-output",
+      "x": 640,
+      "y": 240,
+      "label": "Carry"
+    }
+  ],
+  "edges": [
+    {
+      "id": "a-hub-in",
+      "type": "logic-wire",
+      "source": "a",
+      "sourcePort": "east",
+      "target": "a-hub",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "straight"
+    },
+    {
+      "id": "b-hub-in",
+      "type": "logic-wire",
+      "source": "b",
+      "sourcePort": "east",
+      "target": "b-hub",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "straight"
+    },
+    {
+      "id": "a-xor",
+      "type": "logic-wire",
+      "source": "a-hub",
+      "sourcePort": "east",
+      "target": "xor",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "b-xor",
+      "type": "logic-wire",
+      "source": "b-hub",
+      "sourcePort": "north",
+      "target": "xor",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 3,
+      "departure": "vertical",
+      "bendY": 200,
+      "turns": "alternating"
+    },
+    {
+      "id": "a-and",
+      "type": "logic-wire",
+      "source": "a-hub",
+      "sourcePort": "south",
+      "target": "and",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 3,
+      "departure": "vertical",
+      "bendY": 176.34375,
+      "turns": "alternating",
+      "bendX": 274.77734375
+    },
+    {
+      "id": "b-and",
+      "type": "logic-wire",
+      "source": "b-hub",
+      "sourcePort": "east",
+      "target": "and",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "xor-sum",
+      "type": "logic-wire",
+      "source": "xor",
+      "sourcePort": "east",
+      "target": "sum",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "straight"
+    },
+    {
+      "id": "and-carry",
+      "type": "logic-wire",
+      "source": "and",
+      "sourcePort": "east",
+      "target": "carry",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "straight"
+    }
+  ]
+}

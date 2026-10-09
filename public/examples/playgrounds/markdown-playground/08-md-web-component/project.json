@@ -1,0 +1,14 @@
+{
+  "id": "08-md-web-component",
+  "label": "Web component",
+  "name": "Web component",
+  "entry": "/index.md",
+  "extensions": [
+    {
+      "id": "web-component",
+      "label": "Web component",
+      "url": "/extensions/markdown/web-component/index.js",
+      "enabled": true
+    }
+  ]
+}

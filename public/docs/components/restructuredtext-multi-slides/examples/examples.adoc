@@ -1,0 +1,12 @@
+[tp-asciidoc-viewer%allow-script,label="tp-restructuredtext-multi-slides",style="--tp-markup-viewer-frame-min-height: 32rem"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-restructuredtext-multi-slides,repository="/docs/components/restructuredtext-multi-pages/docs"]
+====
+====
+======
+----
+========

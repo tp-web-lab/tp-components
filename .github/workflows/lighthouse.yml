@@ -1,0 +1,37 @@
+name: Lighthouse
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: tp-components
+
+jobs:
+  audit:
+    name: Advisory Lighthouse audit
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: tp-components
+          persist-credentials: false
+      - uses: ./tp-components/.github/actions/setup-workspace
+      - name: Audit representative multi-page routes
+        run: pnpm lighthouse
+      - name: Keep Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: lighthouse-reports
+          path: |
+            tp-components/.lighthouseci/reports
+            tp-components/public/docs/appendices/lighthouse/index.md
+          if-no-files-found: warn

@@ -1,0 +1,178 @@
+{
+  "tagname": "tp-text-to-speech",
+  "classname": "TpTextToSpeech",
+  "superclass": "TpBase",
+  "description": "Reads inline or external text aloud with browser speech synthesis.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-text-to-speech lang=\"en\" show-text>\n  <script type=\"tp/txt\">Welcome to tp-components.</script>\n</tp-text-to-speech>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "autoplay",
+      "description": "Starts reading after the source is loaded when browser policy permits it.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "for",
+      "description": "ID of an element supplying readable text; overrides local sources and synchronizes word boundaries when the target is tp-typewriting.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "lite",
+      "description": "Replaces playback controls with a single speak/stop icon button.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "pitch",
+      "description": "Speech pitch from 0 to 2.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1"
+    },
+    {
+      "name": "rate",
+      "description": "Speech rate from 0.1 to 10.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1"
+    },
+    {
+      "name": "show-text",
+      "description": "Displays the source text alongside the playback controls.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "Text file loaded relative to the containing document.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "value",
+      "description": "Text supplied directly as an attribute.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "voice",
+      "description": "Preferred installed voice name or language tag.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "volume",
+      "description": "Speech volume from 0 to 1.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1"
+    }
+  ],
+  "methods": [
+    {
+      "name": "pause(): void",
+      "inherited": false,
+      "description": "Pauses the current reading."
+    },
+    {
+      "name": "resume(): void",
+      "inherited": false,
+      "description": "Resumes a paused reading."
+    },
+    {
+      "name": "speak(): Promise<void>",
+      "inherited": false,
+      "description": "Uses the browser's voice for the language unless a voice is explicitly requested."
+    },
+    {
+      "name": "stop(): void",
+      "inherited": false,
+      "description": "Stops the current reading."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-text-to-speech-end",
+      "description": "Emitted when speech ends or is stopped.",
+      "detail": "{ text: string }"
+    },
+    {
+      "name": "tp-text-to-speech-error",
+      "description": "Emitted when loading or speech synthesis fails.",
+      "detail": "{ error: string }"
+    },
+    {
+      "name": "tp-text-to-speech-start",
+      "description": "Emitted when speech starts.",
+      "detail": "{ text: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button-group",
+      "summary": "Button group component for organizing multiple buttons."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-typewriting",
+      "summary": "progressively reveals text one letter or one word at a time."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Text to speech",
+    "introduction": "The custom `<tp-text-to-speech>` element implements the <tp-icon name=\"text-to-speech\" library=\"components\" size=\"1.25em\"></tp-icon> Text to speech functionality: reads inline or external text aloud with browser speech synthesis.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Speak | Start reading the text aloud. |\n| Pause | Suspend reading. |\n| Resume | Continue paused reading. |\n| Stop | End reading. |\n| Settings | Choose a voice for the text language; Automatic lets the browser choose. Changing the voice stops reading. |\n| Compact speaker / stop button | Start or stop reading. Pause, Resume and voice settings are not available in this presentation. |\n| Status | Indicates whether speech is ready, playing, paused or unavailable. Voice availability depends on the browser and operating system. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Enter / Space",
+        "description": "Activates the native button inside each tp-button control."
+      }
+    ]
+  }
+}

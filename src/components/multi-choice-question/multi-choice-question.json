@@ -1,0 +1,104 @@
+{
+  "tagname": "tp-multi-choice-question",
+  "classname": "TpMultiChoiceQuestion",
+  "superclass": "TpQuestion",
+  "description": "Multi-choice question: wraps tp-question with checkbox-list validation.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-multi-choice-question></tp-multi-choice-question>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "answer",
+      "description": "Comma-separated 1-based indexes of the correct answers in the original list order (e.g. `\"1,3\"`). An empty answer means none of the choices is correct. Not reflected back to the DOM when set via JS property — read from attribute only.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "name",
+      "description": "Name attribute passed to the underlying tp-checkbox-list.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "orientation",
+      "description": "Orientation attribute passed to the underlying tp-checkbox-list.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "random",
+      "description": "When present, items are shuffled on connect and after each reset.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "URL to an external JSON file describing items, answer, and feedback. When present, the answer is never exposed in the HTML source. Inherited from TpQuestion.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "value",
+      "description": "Value attribute passed to the underlying tp-checkbox-list.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "randomize(): void",
+      "inherited": false,
+      "description": "Randomizes the order of answer items."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-checkbox-list",
+      "summary": "Transforms a list into a group of checkboxes."
+    },
+    {
+      "name": "tp-markdown",
+      "summary": "Markdown rendering component."
+    },
+    {
+      "name": "tp-question",
+      "summary": "Base description-list container for question components."
+    }
+  ],
+  "credits": [
+    {
+      "name": "Zod",
+      "url": "https://zod.dev/",
+      "summary": "Runtime schema validation."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Multi-choice question",
+    "introduction": "",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Select every answer you consider correct, or leave all boxes unchecked if none applies, then submit. |\n| Using the component | Review Feedback to understand the result or open Solution for the explanation. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Space | Select the focused answer; in a multiple-choice question, toggle its checkbox. |\n| Enter / Space on Submit | Submit the current selection, including no checked boxes. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

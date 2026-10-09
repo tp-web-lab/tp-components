@@ -1,0 +1,21 @@
+{
+  "components": [
+    "binary",
+    "cryptarithm",
+    "crossword",
+    "game-life",
+    "loto",
+    "mastermind",
+    "memory",
+    "solitaire",
+    "sudoku",
+    "yakazu"
+  ],
+  "testFileCount": 10,
+  "targets": {
+    "lines": 90,
+    "statements": 90,
+    "functions": 90,
+    "branches": 80
+  }
+}

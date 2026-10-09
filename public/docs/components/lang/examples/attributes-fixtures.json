@@ -1,0 +1,20 @@
+{
+  "repository": [
+    {
+      "label": "Default",
+      "value": ""
+    },
+    {
+      "label": "file1",
+      "value": "/docs/components/lang/examples/attributes-repository-file1"
+    },
+    {
+      "label": "file2",
+      "value": "/docs/components/lang/examples/attributes-repository-file2"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/docs/components/lang/examples/attributes-repository-file-unknown"
+    }
+  ]
+}

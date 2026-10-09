@@ -1,0 +1,7 @@
+tp-cluster {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tp-cluster-gap, 1rem);
+  justify-content: flex-start;
+}

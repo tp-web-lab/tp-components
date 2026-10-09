@@ -1,0 +1,15 @@
+{
+  "title": "English grammar",
+  "markup": "html",
+  "prompt": "Fill in the blanks with the correct past forms.",
+  "form": "<p>Yesterday, I <input name=\"blank1\" placeholder=\"go\"> to school, then I <input name=\"blank2\" placeholder=\"forgive\"> my friend, and later I <input name=\"blank3\" placeholder=\"become\"> tired.</p>",
+  "feedback": [
+    "The past tense of <em>go</em> is <strong>went</strong>.",
+    "The past tense of <em>forgive</em> is <strong>forgave</strong>.",
+    "The past tense of <em>become</em> is <strong>became</strong>."
+  ],
+  "solution": "<p>Yesterday, I <strong>went</strong> to school, then I <strong>forgave</strong> my friend, and later I <strong>became</strong> tired.</p>",
+  "attributes": {
+    "answer": ["went", "forgave", "became"]
+  }
+}

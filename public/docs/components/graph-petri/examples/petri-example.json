@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "nodes": [
+    {
+      "id": "input",
+      "type": "petri-place",
+      "x": 100,
+      "y": 100,
+      "label": "Input",
+      "data": {
+        "initialTokens": 2,
+        "capacity": 4
+      },
+      "state": {
+        "tokens": 2
+      }
+    },
+    {
+      "id": "consume",
+      "type": "petri-transition",
+      "x": 280,
+      "y": 100,
+      "label": "Consume"
+    }
+  ],
+  "edges": [
+    {
+      "id": "input-consume",
+      "type": "petri-arc",
+      "source": "input",
+      "target": "consume",
+      "label": "2",
+      "data": {
+        "weight": 2
+      }
+    }
+  ]
+}

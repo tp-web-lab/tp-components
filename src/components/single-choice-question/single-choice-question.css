@@ -1,0 +1,9 @@
+/* Correct answer revealed after max tries */
+[data-tp-question] li[data-tp-scq-correct] > label {
+  color: var(--tp-success-text-colorful, var(--tp-success-text, green));
+  font-weight: 600;
+}
+
+[data-tp-question] li[data-tp-scq-correct] > label::after {
+  content: ' ✓';
+}

@@ -1,0 +1,8 @@
+tp-graph-sequential-circuit { display: block; }
+.tp-sequential-memory { fill: var(--tp-neutral-fill-soft, #e5e7eb); stroke: var(--tp-neutral-stroke-loud, #172033); }
+.tp-sequential-symbol { font-size: 18px; font-weight: 700; }
+.tp-sequential-q { font-size: 0.75rem; }
+.tp-sequential-state.is-true { fill: var(--tp-success-fill-mid, #1c9b57); }
+.tp-sequential-state.is-false { fill: var(--tp-danger-fill-mid, #cf3c4f); }
+.tp-sequential-clock { fill: var(--tp-neutral-fill-soft, #e5e7eb); stroke: var(--tp-neutral-stroke-loud, #172033); }
+.tp-sequential-clock-wave { fill: none; stroke: var(--tp-neutral-text-colorful, #172033); stroke-width: 2; pointer-events: none; }

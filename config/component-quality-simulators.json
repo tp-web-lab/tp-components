@@ -1,0 +1,5 @@
+{
+  "components": ["graph-dfa", "graph-nfa", "graph-logical-circuit", "graph-sequential-circuit", "graph-petri", "graph-geometric-optics", "graph-analog-circuit", "graph-query-tree"],
+  "testFileCount": 8,
+  "targets": { "lines": 90, "statements": 90, "functions": 90, "branches": 80 }
+}

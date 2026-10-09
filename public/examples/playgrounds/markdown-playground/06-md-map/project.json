@@ -1,0 +1,14 @@
+{
+  "id": "06-md-map",
+  "label": "Map",
+  "name": "Map",
+  "entry": "/index.md",
+  "extensions": [
+    {
+      "id": "map",
+      "label": "OpenStreetMap",
+      "url": "/extensions/markdown/map/index.js",
+      "enabled": true
+    }
+  ]
+}

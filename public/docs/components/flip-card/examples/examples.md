@@ -1,0 +1,235 @@
+:::::::: tp-markdown-viewer { label="tp-flip-card" allow-script }
+::::::: script { type="tp/markdown" }
+``` example {label="Basic usage"}
+::: tp-flip-card
+recto
+:
+  This is the content **recto...**
+
+verso
+:
+  ...and here is the content **verso.**
+:::
+```
+
+``` example {label="Attributes"}
+Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+
+::::: tp-stack
+::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
+- disabled
+
+- fit-content
+
+- flipped
+:::
+
+::: tp-radio-list { data-setting="button-position" label="button-position" label-position="top" orientation="horizontal" value="6" }
+- top start
+
+- top center
+
+- top end
+
+- bottom start
+
+- bottom center
+
+- bottom end
+
+- none
+:::
+
+::: tp-cluster
+:::
+
+:::: tp-button-group
+::: tp-button { id="attributes-reset" type="button" }
+Reset defaults
+:::
+
+::: tp-button { id="attributes-reload" type="button" }
+Reload preview
+:::
+::::
+:::::
+
+::: tp-divider
+:::
+
+### Preview
+
+::: tp-iframe { id="attributes-frame" title="flip-card attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
+:::
+
+::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
+Preparing the preview…
+:::
+
+::: script { type="module" src="/docs/components/flip-card/examples/attributes.js" }
+:::
+```
+
+``` example {label="Hearts suit"}
+Click any card to turn it over. You can also focus a card with Tab and press Enter or Space.
+
+:::::: tp-cluster
+::::: tp-flip-card { button-position="none" style="--tp-flip-card-padding: 0" aria-label="Ace of hearts" }
+recto
+:
+  :tp-icon:{src="/src/components/card/cards/hearts/ha.svg" size="100%" style="display: block" role="img" aria-label="Ace of hearts"}
+
+verso
+:
+  :::: tp-center { intrinsic style="height: 100%; justify-content: center" }
+  :tp-icon:{name="logo-tp" size="10em" role="img" aria-label="tp-components logo"}
+  ::::
+:::::
+
+::::: tp-flip-card { button-position="none" style="--tp-flip-card-padding: 0" aria-label="Two of hearts" }
+recto
+:
+  :tp-icon:{src="/src/components/card/cards/hearts/h2.svg" size="100%" style="display: block" role="img" aria-label="Two of hearts"}
+
+verso
+:
+  :::: tp-center { intrinsic style="height: 100%; justify-content: center" }
+  :tp-icon:{name="logo-tp" size="10em" role="img" aria-label="tp-components logo"}
+  ::::
+:::::
+
+::::: tp-flip-card { button-position="none" style="--tp-flip-card-padding: 0" aria-label="Three of hearts" }
+recto
+:
+  :tp-icon:{src="/src/components/card/cards/hearts/h3.svg" size="100%" style="display: block" role="img" aria-label="Three of hearts"}
+
+verso
+:
+  :::: tp-center { intrinsic style="height: 100%; justify-content: center" }
+  :tp-icon:{name="logo-tp" size="10em" role="img" aria-label="tp-components logo"}
+  ::::
+:::::
+
+::::: tp-flip-card { button-position="none" style="--tp-flip-card-padding: 0" aria-label="Four of hearts" }
+recto
+:
+  :tp-icon:{src="/src/components/card/cards/hearts/h4.svg" size="100%" style="display: block" role="img" aria-label="Four of hearts"}
+
+verso
+:
+  :::: tp-center { intrinsic style="height: 100%; justify-content: center" }
+  :tp-icon:{name="logo-tp" size="10em" role="img" aria-label="tp-components logo"}
+  ::::
+:::::
+
+::::: tp-flip-card { button-position="none" style="--tp-flip-card-padding: 0" aria-label="Five of hearts" }
+recto
+:
+  :tp-icon:{src="/src/components/card/cards/hearts/h5.svg" size="100%" style="display: block" role="img" aria-label="Five of hearts"}
+
+verso
+:
+  :::: tp-center { intrinsic style="height: 100%; justify-content: center" }
+  :tp-icon:{name="logo-tp" size="10em" role="img" aria-label="tp-components logo"}
+  ::::
+:::::
+
+::::: tp-flip-card { button-position="none" style="--tp-flip-card-padding: 0" aria-label="Six of hearts" }
+recto
+:
+  :tp-icon:{src="/src/components/card/cards/hearts/h6.svg" size="100%" style="display: block" role="img" aria-label="Six of hearts"}
+
+verso
+:
+  :::: tp-center { intrinsic style="height: 100%; justify-content: center" }
+  :tp-icon:{name="logo-tp" size="10em" role="img" aria-label="tp-components logo"}
+  ::::
+:::::
+
+::::: tp-flip-card { button-position="none" style="--tp-flip-card-padding: 0" aria-label="Seven of hearts" }
+recto
+:
+  :tp-icon:{src="/src/components/card/cards/hearts/h7.svg" size="100%" style="display: block" role="img" aria-label="Seven of hearts"}
+
+verso
+:
+  :::: tp-center { intrinsic style="height: 100%; justify-content: center" }
+  :tp-icon:{name="logo-tp" size="10em" role="img" aria-label="tp-components logo"}
+  ::::
+:::::
+
+::::: tp-flip-card { button-position="none" style="--tp-flip-card-padding: 0" aria-label="Eight of hearts" }
+recto
+:
+  :tp-icon:{src="/src/components/card/cards/hearts/h8.svg" size="100%" style="display: block" role="img" aria-label="Eight of hearts"}
+
+verso
+:
+  :::: tp-center { intrinsic style="height: 100%; justify-content: center" }
+  :tp-icon:{name="logo-tp" size="10em" role="img" aria-label="tp-components logo"}
+  ::::
+:::::
+
+::::: tp-flip-card { button-position="none" style="--tp-flip-card-padding: 0" aria-label="Nine of hearts" }
+recto
+:
+  :tp-icon:{src="/src/components/card/cards/hearts/h9.svg" size="100%" style="display: block" role="img" aria-label="Nine of hearts"}
+
+verso
+:
+  :::: tp-center { intrinsic style="height: 100%; justify-content: center" }
+  :tp-icon:{name="logo-tp" size="10em" role="img" aria-label="tp-components logo"}
+  ::::
+:::::
+
+::::: tp-flip-card { button-position="none" style="--tp-flip-card-padding: 0" aria-label="Ten of hearts" }
+recto
+:
+  :tp-icon:{src="/src/components/card/cards/hearts/h10.svg" size="100%" style="display: block" role="img" aria-label="Ten of hearts"}
+
+verso
+:
+  :::: tp-center { intrinsic style="height: 100%; justify-content: center" }
+  :tp-icon:{name="logo-tp" size="10em" role="img" aria-label="tp-components logo"}
+  ::::
+:::::
+
+::::: tp-flip-card { button-position="none" style="--tp-flip-card-padding: 0" aria-label="Jack of hearts" }
+recto
+:
+  :tp-icon:{src="/src/components/card/cards/hearts/hj.svg" size="100%" style="display: block" role="img" aria-label="Jack of hearts"}
+
+verso
+:
+  :::: tp-center { intrinsic style="height: 100%; justify-content: center" }
+  :tp-icon:{name="logo-tp" size="10em" role="img" aria-label="tp-components logo"}
+  ::::
+:::::
+
+::::: tp-flip-card { button-position="none" style="--tp-flip-card-padding: 0" aria-label="Queen of hearts" }
+recto
+:
+  :tp-icon:{src="/src/components/card/cards/hearts/hq.svg" size="100%" style="display: block" role="img" aria-label="Queen of hearts"}
+
+verso
+:
+  :::: tp-center { intrinsic style="height: 100%; justify-content: center" }
+  :tp-icon:{name="logo-tp" size="10em" role="img" aria-label="tp-components logo"}
+  ::::
+:::::
+
+::::: tp-flip-card { button-position="none" style="--tp-flip-card-padding: 0" aria-label="King of hearts" }
+recto
+:
+  :tp-icon:{src="/src/components/card/cards/hearts/hk.svg" size="100%" style="display: block" role="img" aria-label="King of hearts"}
+
+verso
+:
+  :::: tp-center { intrinsic style="height: 100%; justify-content: center" }
+  :tp-icon:{name="logo-tp" size="10em" role="img" aria-label="tp-components logo"}
+  ::::
+:::::
+::::::
+```
+:::::::
+::::::::

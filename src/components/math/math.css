@@ -1,0 +1,19 @@
+tp-math {
+  display: inline;
+}
+tp-math[displaystyle] {
+  display: block;
+  max-inline-size: 100%;
+  overflow-x: auto;
+  text-align: center;
+  margin-block: 1em;
+}
+tp-math [data-tp-math-output] mjx-container {
+  display: inline-block;
+  margin: 0;
+}
+tp-math [data-tp-math-output] svg {
+  /* Preserve glyph edges and descenders at the MathJax viewBox boundary. */
+  overflow: visible;
+  max-inline-size: none;
+}

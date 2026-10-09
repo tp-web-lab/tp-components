@@ -1,0 +1,116 @@
+tp-splitter {
+  --tp-splitter-position: 50%;
+  --tp-splitter-divider-size: 0.75rem;
+  --tp-splitter-divider-color: var(--tp-brand-fill-mid, #2563eb);
+  display: flow-root;
+  min-block-size: 0;
+  min-inline-size: 0;
+  box-sizing: border-box;
+}
+
+tp-splitter > dl,
+tp-splitter > dl > dt,
+tp-splitter > dl > dd {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+tp-splitter > dl {
+  display: grid;
+  block-size: 100%;
+  inline-size: 100%;
+  min-block-size: inherit;
+  min-inline-size: inherit;
+}
+
+tp-splitter[axis='horizontal'] > dl {
+  grid-template-columns:
+    minmax(0, var(--tp-splitter-position))
+    var(--tp-splitter-divider-size)
+    minmax(0, calc(100% - var(--tp-splitter-position)));
+  grid-template-rows: 1fr;
+}
+
+tp-splitter[axis='vertical'] > dl {
+  grid-template-columns: 1fr;
+  grid-template-rows:
+    minmax(0, var(--tp-splitter-position))
+    var(--tp-splitter-divider-size)
+    minmax(0, calc(100% - var(--tp-splitter-position)));
+}
+
+tp-splitter > dl > dt {
+  display: none;
+}
+
+tp-splitter > dl > dd {
+  margin: 0;
+  min-block-size: 0;
+  min-inline-size: 0;
+  overflow: auto;
+}
+
+tp-splitter > dl > [data-tp-splitter-panel='start'] {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+tp-splitter > dl > [data-tp-splitter-panel='end'] {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+tp-splitter[axis='vertical'] > dl > [data-tp-splitter-panel='start'] {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+tp-splitter[axis='vertical'] > dl > [data-tp-splitter-panel='end'] {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+tp-splitter > dl > [data-tp-splitter-divider] {
+  align-items: center;
+  background: color-mix(in srgb, var(--tp-splitter-divider-color) 12%, Canvas);
+  display: flex;
+  justify-content: center;
+  min-block-size: 0;
+  min-inline-size: 0;
+  user-select: none;
+}
+
+tp-splitter[axis='horizontal'] > dl > [data-tp-splitter-divider] {
+  cursor: col-resize;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+tp-splitter[axis='vertical'] > dl > [data-tp-splitter-divider] {
+  cursor: row-resize;
+  grid-column: 1;
+  grid-row: 2;
+}
+
+tp-splitter > dl > [data-tp-splitter-divider]::before {
+  background: var(--tp-splitter-divider-color);
+  border-radius: 999px;
+  content: '';
+  display: block;
+}
+
+tp-splitter[axis='horizontal'] > dl > [data-tp-splitter-divider]::before {
+  block-size: 2rem;
+  inline-size: 0.2rem;
+}
+
+tp-splitter[axis='vertical'] > dl > [data-tp-splitter-divider]::before {
+  block-size: 0.2rem;
+  inline-size: 2rem;
+}
+
+tp-splitter[data-dragging='true'] tp-iframe,
+tp-splitter[data-dragging='true'] iframe {
+  pointer-events: none;
+}

@@ -1,0 +1,8 @@
+{
+  "examples": [
+    "01-sql-basic",
+    "02-sql-join",
+    "03-sql-entreprises",
+    "04-sql-explain"
+  ]
+}

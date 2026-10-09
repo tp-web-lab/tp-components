@@ -1,0 +1,115 @@
+.tp-xy-plot {
+  position: relative;
+  display: block;
+  inline-size: min(100%, 900px);
+  margin-block: 0.25rem;
+  margin-inline: auto;
+}
+
+.tp-xy-plot {
+  box-sizing: border-box;
+  display: flow-root;
+  inline-size: auto;
+  max-inline-size: min(100%, 900px);
+  min-inline-size: 0;
+}
+
+.tp-xy-plot-preview {
+  inline-size: 100%;
+}
+
+.tp-xy-plot-preview > svg {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.tp-xy-plot .tp-md-xy-graph-point {
+  fill: #333;
+  stroke: white;
+  stroke-width: 1.5;
+}
+
+.tp-xy-plot .tp-md-xy-graph-point-label {
+  fill: #333;
+  font-size: 12px;
+  font-family: system-ui, sans-serif;
+}
+
+.tp-xy-plot-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-block-end: 0.25rem;
+}
+
+.tp-xy-plot-dialog {
+  inline-size: min(96vw, 1200px);
+  max-inline-size: 1200px;
+  max-block-size: 92vh;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, CanvasText 18%, transparent);
+  border-radius: 1rem;
+  background: Canvas;
+  color: CanvasText;
+}
+
+.tp-xy-plot-dialog::backdrop {
+  background: color-mix(in srgb, black 55%, transparent);
+}
+
+.tp-xy-plot-dialog-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-block-end: 0.75rem;
+}
+
+.tp-xy-plot-dialog-content {
+  overflow: auto;
+}
+
+.tp-xy-plot-dialog-content > svg {
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.tp-xy-plot-error {
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid color-mix(in srgb, red 45%, transparent);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, red 8%, Canvas 92%);
+  color: CanvasText;
+}
+
+.tp-xy-plot-settings {
+  margin-block-start: 0.75rem;
+  padding-block: 0.75rem;
+  border-block-start: 1px solid color-mix(in srgb, CanvasText 20%, transparent);
+}
+
+.tp-xy-plot-settings[hidden] {
+  display: none;
+}
+
+.tp-xy-plot-animation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-block: 0.5rem;
+}
+.tp-xy-plot-animation [role="status"] {
+  font-variant-numeric: tabular-nums;
+}
+
+.tp-xy-plot-preview, .tp-xy-plot-dialog-content {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.tp-xy-plot-panning { cursor: grabbing; }
+.tp-xy-plot-preview:focus-visible, .tp-xy-plot-dialog-content:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}

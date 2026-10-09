@@ -1,0 +1,5 @@
+{
+  "components": ["asciidoc-playground", "html-playground", "javascript-playground", "markdown-playground", "prolog-playground", "python-playground", "restructuredtext-playground", "sql-playground", "typescript-playground"],
+  "testFileCount": 16,
+  "targets": { "lines": 90, "statements": 90, "functions": 90, "branches": 80 }
+}

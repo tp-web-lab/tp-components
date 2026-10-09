@@ -1,0 +1,40 @@
+tp-graph-logical-circuit { display: block; }
+.tp-logic-results-layout { display: grid; grid-template-columns: fit-content(65%) minmax(20rem, 1fr); }
+.tp-logic-results-layout > section + section { border-inline-start: 1px solid var(--tp-neutral-stroke-soft); }
+.tp-logic-results-layout table { width: max-content; }
+.tp-logic-results-layout :is(th, td).tp-logic-truth-boundary { border-inline-start-width: 3px; border-inline-start-color: var(--tp-neutral-stroke-strong, var(--tp-text-body)); }
+.tp-logic-equations-header { display: flex; align-items: center; gap: .5rem; }
+.tp-logic-equations-header tp-icon-button { margin-inline-start: auto; }
+.tp-logic-equations { display: grid; align-content: start; gap: .5rem; }
+.tp-logic-equation { font-size: 1.05rem; text-align: start; }
+.tp-logic-equation .tp-markdown-output p { display: block; text-align: start; }
+.tp-logic-equation [data-mathjax-display="false"],
+.tp-logic-equation mjx-container:not([display="true"]) { display: inline; margin: 0; }
+.tp-graph-results .tp-logic-equation mjx-container svg {
+  display: inline-block;
+  min-width: 0;
+  max-width: none;
+  vertical-align: inherit;
+}
+.tp-logic-equation .tp-markdown-output > :first-child { margin-block-start: 0; }
+.tp-logic-equation .tp-markdown-output > :last-child { margin-block-end: 0; }
+@media (max-width: 48rem) {
+  .tp-logic-results-layout { grid-template-columns: minmax(0, 1fr); }
+  .tp-logic-results-layout > section + section { border-block-start: 1px solid var(--tp-neutral-stroke-soft); border-inline-start: 0; }
+}
+.tp-logic-terminal, .tp-logic-gate { transition: fill .2s, stroke .2s; }
+.tp-logic-terminal.is-true { fill: var(--tp-success-fill-softer, #dcfce7); stroke: var(--tp-success-stroke-mid, #16a34a); }
+.tp-logic-terminal.is-false { fill: var(--tp-danger-fill-softer, #fee2e2); stroke: var(--tp-danger-stroke-mid, #dc2626); }
+.tp-logic-gate, .tp-logic-gate.is-selected, .tp-logic-gate.is-true, .tp-logic-gate.is-false, .tp-logic-hub { fill: var(--tp-neutral-fill-soft); stroke: var(--tp-text-body); }
+.tp-logic-gate-detail { fill: none; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.tp-logic-gate-detail, .tp-logic-gate-detail.is-true, .tp-logic-gate-detail.is-false { stroke: var(--tp-text-body); }
+.tp-logic-gate-label { font-size: 18px; font-weight: 700; }
+.tp-logic-inversion { fill: var(--tp-paper-color, Canvas); stroke: currentColor; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.tp-graph-node.is-toggleable { cursor: pointer; }
+.tp-graph-edge.is-true .tp-graph-edge-line { stroke: var(--tp-success-stroke-mid, #16a34a); }
+.tp-graph-edge.is-false .tp-graph-edge-line { stroke: var(--tp-danger-stroke-mid, #dc2626); }
+.tp-graph-palette .tp-logic-terminal, .tp-graph-palette .tp-logic-gate, .tp-graph-palette .tp-logic-gate-detail, .tp-graph-palette .tp-logic-inversion { stroke: var(--tp-text-body); }
+.tp-graph-palette .tp-logic-terminal { fill: var(--tp-neutral-fill-soft); }
+.tp-graph-palette .tp-logic-gate-label { font-size: 21px; }
+.tp-graph-palette .tp-logic-terminal + .tp-graph-label { fill: var(--tp-text-body); font-size: 16px; font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { tp-graph-logical-circuit, tp-graph-logical-circuit * { transition-duration: 0.01ms !important; transition-delay: 0ms !important; } }

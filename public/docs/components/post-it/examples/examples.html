@@ -1,0 +1,42 @@
+<tp-html-viewer label="tp-post-it" allow-script style="--tp-html-viewer-frame-min-height: 32rem">
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-box style="min-block-size: 20rem">
+        <p>Drag the note by its header to move it over the page. The pin folds and opens it.</p>
+        <tp-post-it heading="Remember">
+          <p>Keep examples <strong>simple and meaningful</strong>.</p>
+          <ul>
+            <li>Show a useful result.</li>
+            <li>Try the keyboard controls.</li>
+          </ul>
+        </tp-post-it>
+      </tp-box>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>lite</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="color" label="color" label-position="top" orientation="horizontal" value="5"><ul><li>default</li><li>red</li><li>orange</li><li>amber</li><li>yellow</li><li>lime</li><li>green</li><li>emerald</li><li>teal</li><li>glaz</li><li>cyan</li><li>sky</li><li>blue</li><li>indigo</li><li>violet</li><li>purple</li><li>fuchsia</li><li>pink</li><li>rose</li><li>zinc</li><li>ivory</li><li>stone</li></ul></tp-radio-list>
+      <tp-cluster><tp-textfield data-setting="heading" label="heading" value="" placeholder="" clearable></tp-textfield>
+      <tp-numberfield data-setting="opacity" label="opacity" value="1" min="0" max="1" step="0.05" range></tp-numberfield>
+      <tp-numberfield data-setting="rotation" label="rotation" value="0" min="-12" max="12" step="1" range></tp-numberfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="post-it attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/docs/components/post-it/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Lite note">
+      <tp-post-it heading="Reminder" lite=""><p>Keep examples <strong>simple and meaningful</strong>.</p></tp-post-it>
+    </div>
+
+    <div role="example" label="Notes board">
+      <tp-cluster gap="2rem" style="padding: 1rem"><tp-post-it heading="Plan" color="yellow" rotation="-2"><p>Write one useful example.</p></tp-post-it><tp-post-it heading="Review" color="blue" rotation="2"><p>Check the result with the keyboard.</p></tp-post-it><tp-post-it heading="Your reminder" color="pink"><tp-textfield label="Reminder" placeholder="What comes next?" clearable=""></tp-textfield></tp-post-it></tp-cluster>
+    </div>
+  </template>
+</tp-html-viewer>

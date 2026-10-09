@@ -1,0 +1,43 @@
+{
+  "tagname": "tp-source",
+  "classname": "TpSource",
+  "superclass": "TpBase",
+  "description": "Source repository link button.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-source></tp-source>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "url",
+      "description": "Source repository URL.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Source",
+    "introduction": "The custom `<tp-source>` element implements the <tp-icon name=\"source\" library=\"components\" size=\"1.25em\"></tp-icon> Source functionality: source repository link button.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Repository button | Open the source repository. No button is displayed when no repository is available. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

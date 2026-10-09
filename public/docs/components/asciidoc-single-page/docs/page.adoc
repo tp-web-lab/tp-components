@@ -1,0 +1,9 @@
+= AsciiDoc single page
+
+This external file is rendered with `<tp-asciidoc>`.
+
+[cols="1,1"]
+|===
+| Renderer | `tp-asciidoc`
+| Mode | Single page
+|===

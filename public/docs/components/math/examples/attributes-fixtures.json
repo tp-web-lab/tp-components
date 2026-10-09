@@ -1,0 +1,8 @@
+{
+  "src": [
+    { "label": "Default", "value": "" },
+    { "label": "file1", "value": "/docs/components/math/examples/identity.txt" },
+    { "label": "file2", "value": "/docs/components/math/examples/sum.txt" },
+    { "label": "file-unknown", "value": "/docs/components/math/examples/file-unknown.txt" }
+  ]
+}

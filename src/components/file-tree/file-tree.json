@@ -1,0 +1,165 @@
+{
+  "tagname": "tp-file-tree",
+  "classname": "TpFileTree",
+  "superclass": "TpBase",
+  "description": "Arbre spécialisé pour fichiers et dossiers.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-file-tree></tp-file-tree>"
+    }
+  ],
+  "attributes": [],
+  "methods": [
+    {
+      "name": "beginRenamePath(path: string): void",
+      "inherited": false,
+      "description": "Démarre le renommage d’un chemin."
+    },
+    {
+      "name": "collapseAll(): void",
+      "inherited": false,
+      "description": "Ferme tous les nœuds."
+    },
+    {
+      "name": "expandAll(): void",
+      "inherited": false,
+      "description": "Ouvre tous les nœuds."
+    },
+    {
+      "name": "getNodes(): TpFileTreeNode[]",
+      "inherited": false,
+      "description": "Retourne une copie triée des nœuds racine."
+    },
+    {
+      "name": "setActivePath(path: string | null): void",
+      "inherited": false,
+      "description": "Met à jour l’état actif logique."
+    },
+    {
+      "name": "setDirtyPaths(paths: readonly string[]): void",
+      "inherited": false,
+      "description": "Met à jour l’état dirty des fichiers."
+    },
+    {
+      "name": "setNodes(nodes: readonly TpFileTreeNode[]): void",
+      "inherited": false,
+      "description": "Charge une nouvelle liste de nœuds racine."
+    },
+    {
+      "name": "setOpenPaths(paths: readonly string[]): void",
+      "inherited": false,
+      "description": "Met à jour l’état logique des chemins ouverts."
+    },
+    {
+      "name": "setSelectedPath(path: string | null): void",
+      "inherited": false,
+      "description": "Met à jour la sélection logique."
+    },
+    {
+      "name": "setState(state: TpFileTreeState): void",
+      "inherited": false,
+      "description": "Synchronise en une fois les nœuds et états visuels."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-file-tree-active",
+      "description": "Émis lorsqu’un fichier devient actif.",
+      "detail": "{ path: string }"
+    },
+    {
+      "name": "tp-file-tree-add-request",
+      "description": "Émis lorsqu’un ajout de fichier ou dossier est demandé.",
+      "detail": "{ path: string | null; kind: \"file\" | \"directory\" }"
+    },
+    {
+      "name": "tp-file-tree-clone-request",
+      "description": "Émis lorsqu’un clonage est demandé.",
+      "detail": "{ path: string }"
+    },
+    {
+      "name": "tp-file-tree-copy-request",
+      "description": "Émis lorsqu’une copie de chemin est demandée.",
+      "detail": "{ path: string }"
+    },
+    {
+      "name": "tp-file-tree-delete-request",
+      "description": "Émis lorsqu’une suppression est demandée.",
+      "detail": "{ path: string }"
+    },
+    {
+      "name": "tp-file-tree-global-action",
+      "description": "Émis lorsqu’une action globale est choisie.",
+      "detail": "{ action: string }"
+    },
+    {
+      "name": "tp-file-tree-move-request",
+      "description": "Émis lorsqu’un déplacement est demandé.",
+      "detail": "{ sourcePath: string; destinationPath: string | null; position: \"inside\" | \"before\" | \"after\" }"
+    },
+    {
+      "name": "tp-file-tree-open",
+      "description": "Émis lorsqu’un fichier est ouvert.",
+      "detail": "{ path: string }"
+    },
+    {
+      "name": "tp-file-tree-rename-request",
+      "description": "Émis lorsqu’un renommage est demandé.",
+      "detail": "{ path: string; newName: string }"
+    },
+    {
+      "name": "tp-file-tree-select",
+      "description": "Émis lorsqu’un chemin est sélectionné.",
+      "detail": "{ path: string }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-file-tree-active-color",
+      "default": "inherit",
+      "description": "Couleur du fichier actif."
+    },
+    {
+      "name": "--tp-file-tree-dirty-color",
+      "default": "#d97706",
+      "description": "Couleur du marqueur dirty."
+    },
+    {
+      "name": "--tp-file-tree-icon-size",
+      "default": "1rem",
+      "description": "Taille des icônes de fichiers."
+    },
+    {
+      "name": "--tp-file-tree-open-color",
+      "default": "inherit",
+      "description": "Couleur des fichiers ouverts."
+    },
+    {
+      "name": "--tp-file-tree-selected-bg",
+      "default": "color-mix(in srgb, currentColor 8%, transparent)",
+      "description": "Couleur de fond du chemin sélectionné."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-tree",
+      "summary": "Generic tree component for interactive hierarchical editing."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "File Tree",
+    "introduction": "The custom `<tp-file-tree>` element implements the <tp-icon name=\"file-tree\" library=\"components\" size=\"1.25em\"></tp-icon> File Tree functionality: arbre spécialisé pour fichiers et dossiers.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Expand or collapse branches to inspect nested items. |\n| Select | Select available links or entries to use the actions provided by the surrounding page. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

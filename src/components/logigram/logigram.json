@@ -1,0 +1,119 @@
+{
+  "tagname": "tp-logigram",
+  "classname": "TpLogigram",
+  "superclass": "TpBase",
+  "description": "Solves logic-grid puzzles by matching items across categories using written clues.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-logigram label=\"The reading club\">\n  <dl>\n    <dt>Prompt</dt>\n    <dd><p>Three readers chose different books and drinks. Find every match.</p></dd>\n    <dt>Categories</dt>\n    <dd>\n  <ul>\n    <li>Readers<ul><li>Ada</li><li>Ben</li><li>Cleo</li></ul></li>\n    <li>Books<ul><li>Poetry</li><li>History</li><li>Science</li></ul></li>\n    <li>Drinks<ul><li>Tea</li><li>Juice</li><li>Water</li></ul></li>\n  </ul>\n  </dd>\n    <dt>Clues</dt>\n    <dd>\n  <ol>\n    <li>Ada chose Poetry.</li>\n    <li>The History reader drank Juice.</li>\n    <li>Ben drank Water.</li>\n    <li>Cleo did not choose Poetry.</li>\n  </ol>\n  </dd>\n    <dt>Solution</dt>\n    <dd>\n  <ol>\n    <li><ul><li>Ada</li><li>Poetry</li><li>Tea</li></ul></li>\n    <li><ul><li>Ben</li><li>Science</li><li>Water</li></ul></li>\n    <li><ul><li>Cleo</li><li>History</li><li>Juice</li></ul></li>\n  </ol>\n</dd>\n  </dl>\n</tp-logigram>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "auto-exclude",
+      "description": "Marks other cells in the same pair row and column as no after a yes.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "disabled",
+      "description": "Prevents playing and using game controls.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "label",
+      "description": "Puzzle title.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"Logigram\""
+    },
+    {
+      "name": "src",
+      "description": "Markdown file containing Prompt, Categories, Clues and Solution definitions.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "check(): ReturnType<LogigramModel[\"check\"]> | null",
+      "inherited": false,
+      "description": "Checks all marked cells and counts correct matches. Unknown negatives need not be filled."
+    },
+    {
+      "name": "redo(): void",
+      "inherited": false,
+      "description": "Reapplies an undone move."
+    },
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Clears the grid; the reset can be undone."
+    },
+    {
+      "name": "undo(): void",
+      "inherited": false,
+      "description": "Restores the preceding move, including automatic exclusions."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-logigram-change",
+      "description": "Emitted after a move, undo, redo or reset.",
+      "detail": "{ value: number[] }"
+    },
+    {
+      "name": "tp-logigram-check",
+      "description": "Emitted after checking the grid.",
+      "detail": "{ correct: number; total: number; errors: number[]; complete: boolean }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-checkbox-list",
+      "summary": "Transforms a list into a group of checkboxes."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Logigram",
+    "introduction": "",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Click a cell | Cycle unknown → no → yes → unknown. |\n| Right-click a cell | Mark yes. |\n| Ctrl-click / Command-click a cell | Clear its mark. |\n| Clue checkbox | Mark a clue as reviewed. |\n| Undo / Redo | Reverse or reapply a grid move. |\n| Assist… → Reset the game | Clear the grid; Undo can restore it. Clue reminders are retained. |\n| Assist… → Show all incorrect boxes | Show the score, highlight incorrect marks and announce a solved puzzle. |\n| Assist… → Clear the incorrect boxes | Clear incorrect marks while preserving correct ones. |\n| Assist… → Show the box | Reveal the last selected or focused cell. Select a cell first to enable this action. |\n| Assist… → Show the category pair | Reveal all cells in the selected cell’s category-pair block. |\n| Assist… → Show the solution | Reveal every pair and display the solved status. |\n\nEach assistance action that changes the grid can be undone in one step. Click a grid box or focus it with Tab to enable Show the box and Show the category pair. The selected box has a persistent outline, and the message below the toolbar identifies its two items. The selection is retained when you move to the menu. Revealing a box changes only that box, even when automatic exclusions are enabled.\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move among clues, toolbar controls and cells. |\n| Enter / Space | Activate a focused cell or button; Space toggles a clue checkbox. |\n| Arrow keys in Assist… / Enter | Choose and apply an assistance action using the native menu. |\n| Arrow keys in a matrix | Move to a neighbouring cell in the same matrix. |\n| Delete / Backspace in a cell | Clear its mark. |\n| Ctrl+? | Open User help for the component under the pointer, falling back to the focused component. Shift may be needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Enter / Space",
+        "description": "Cycles the focused cell through unknown, no and yes, or activates a control."
+      },
+      {
+        "key": "Arrow keys",
+        "description": "Moves between cells in the same category pair."
+      },
+      {
+        "key": "Delete / Backspace",
+        "description": "Clears the focused cell."
+      }
+    ]
+  }
+}

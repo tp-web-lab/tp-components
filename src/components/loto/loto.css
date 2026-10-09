@@ -1,0 +1,155 @@
+.tp-loto {
+  --tp-game-cell-size: 3.25rem;
+
+  box-sizing: border-box;
+  display: flow-root;
+  width: auto;
+  max-width: 100%;
+  margin: 1rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #f9f9f9;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.tp-loto *,
+.tp-loto *::before,
+.tp-loto *::after {
+  box-sizing: border-box;
+}
+
+.tp-loto-header,
+.tp-loto-controls,
+.tp-loto-draw,
+.tp-loto-history {
+  display: flex;
+  align-items: center;
+}
+
+.tp-loto-header {
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-end: 1rem;
+}
+
+.tp-loto-title {
+  color: #333;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.tp-loto-controls {
+  gap: 0.5rem;
+}
+
+.tp-loto-chronometer > tp-icon-button {
+  display: none;
+}
+
+.tp-loto-tickets {
+  display: grid;
+  gap: 1rem;
+}
+
+.tp-loto-ticket {
+  display: block;
+  inline-size: calc(9 * var(--tp-game-cell-size));
+  max-inline-size: 100%;
+  overflow: auto;
+  border-block-start: 2px solid #334155;
+  border-inline-start: 2px solid #334155;
+}
+
+.tp-loto-ticket > [role='row'] {
+  display: grid;
+  grid-template-columns: repeat(9, var(--tp-game-cell-size));
+}
+
+.tp-loto-cell {
+  display: grid;
+  width: var(--tp-game-cell-size);
+  height: var(--tp-game-cell-size);
+  place-items: center;
+  border-inline-end: 2px solid #334155;
+  border-block-end: 2px solid #334155;
+  background: white;
+  color: #172033;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.tp-loto-cell.empty {
+  background: #dbe3ec;
+}
+
+.tp-loto-cell.drawn {
+  background: var(--tp-green, #198754);
+  color: white;
+}
+
+.tp-loto-draw {
+  gap: 1rem;
+  margin-block-start: 1rem;
+}
+
+.tp-loto-draw-button {
+  min-height: 2.5rem;
+  padding: 0 1rem;
+  border: 0;
+  border-radius: 4px;
+  background: #0b63ce;
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tp-loto-draw-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.tp-loto-current {
+  display: grid;
+  width: 3.5rem;
+  height: 3.5rem;
+  flex: 0 0 3.5rem;
+  place-items: center;
+  color: #172033;
+  font-weight: 800;
+}
+
+.tp-loto-ball {
+  display: block;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 2.75rem;
+}
+
+.tp-loto-history {
+  width: calc(9 * var(--tp-game-cell-size));
+  max-width: 100%;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.tp-loto-history > .tp-loto-ball {
+  flex: 0 0 2.75rem;
+}
+
+.tp-loto-status {
+  margin-block-start: 1rem;
+  padding: 0.6rem;
+  border-radius: 4px;
+  background: #d1ecf1;
+  color: #0c5460;
+  text-align: center;
+  font-weight: 700;
+}
+
+.tp-loto-status.completed {
+  background: #d4edda;
+  color: #155724;
+}

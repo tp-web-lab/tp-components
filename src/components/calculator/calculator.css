@@ -1,0 +1,13 @@
+tp-calculator { display:flow-root; box-sizing:border-box; max-inline-size:48rem; padding:1rem; border:1px solid var(--tp-neutral-stroke-soft); border-radius:var(--tp-border-radius-md); background:var(--tp-paper-color); color:var(--tp-text-body); }
+tp-calculator .tp-calculator-header { display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-block-end:0.75rem; }
+tp-calculator .tp-calculator-header h3 { margin:0; font-size:1.25rem; }
+tp-calculator .tp-calculator-pads { display:flex; flex-wrap:wrap; gap:0.75rem; }
+tp-calculator .tp-calculator-scientific, tp-calculator .tp-calculator-numeric { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0.35rem; flex:1 1 14rem; min-inline-size:0; }
+tp-calculator[data-orientation="vertical"] { max-inline-size:25rem; }
+tp-calculator[data-orientation="vertical"] .tp-calculator-pads { flex-direction:column; }
+tp-calculator[data-orientation="vertical"] .tp-calculator-pads > div { flex-basis:auto; }
+tp-calculator tp-button { min-inline-size:0; }
+tp-calculator tp-button button { inline-size:100%; min-block-size:2.5rem; padding-inline:0.25rem; }
+tp-calculator .tp-calculator-status { min-block-size:1.5em; margin-block:0.5rem; overflow-wrap:anywhere; }
+tp-calculator > tp-textfield { --tp-textfield-inline-size:100%; }
+tp-calculator .tp-calculator-numeric tp-button:last-child { grid-column:span 2; }

@@ -1,0 +1,90 @@
+{
+  "tagname": "tp-graph-logical-circuit",
+  "classname": "TpGraphLogicalCircuit",
+  "superclass": "TpGraphEditor",
+  "description": "Edits and simulates combinational logic circuits.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-graph-logical-circuit></tp-graph-logical-circuit>"
+    }
+  ],
+  "attributes": [],
+  "methods": [
+    {
+      "name": "addEdge(source: string, target: string, type = TP_LOGIC_WIRE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = 'forward'): TpGraphEdge",
+      "inherited": false,
+      "description": "Adds edge."
+    },
+    {
+      "name": "addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode",
+      "inherited": false,
+      "description": "Adds node."
+    },
+    {
+      "name": "evaluate(): void",
+      "inherited": false,
+      "description": "Evaluate."
+    },
+    {
+      "name": "reconnectEdge(edgeId: string, endpoint: 'source' | 'target', nodeId: string, port: TpGraphPort): TpGraphEdge",
+      "inherited": false,
+      "description": "Reconnect edge."
+    },
+    {
+      "name": "setGraph(graph: TpGraphDocument): void",
+      "inherited": false,
+      "description": "Sets graph."
+    },
+    {
+      "name": "toggle(id: string, propagate = true): boolean",
+      "inherited": false,
+      "description": "Toggle."
+    },
+    {
+      "name": "toggleEquationNotation(): TpLogicalEquationNotation",
+      "inherited": false,
+      "description": "Toggles equation notation."
+    },
+    {
+      "name": "toggleRepresentation(): TpLogicGateRepresentation",
+      "inherited": false,
+      "description": "Toggles representation."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-logic-evaluate",
+      "description": "Emitted when logic evaluate occurs.",
+      "detail": "{ graph: unknown }"
+    },
+    {
+      "name": "tp-logic-toggle",
+      "description": "Emitted when logic toggle occurs.",
+      "detail": "{ id: unknown; value: string; graph: unknown }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-graph-editor",
+      "summary": "Extensible interactive graph editor."
+    },
+    {
+      "name": "tp-markdown",
+      "summary": "Markdown rendering component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Logical circuit",
+    "introduction": "The custom `<tp-graph-logical-circuit>` element implements the <tp-icon name=\"graph-logical-circuit\" library=\"components\" size=\"1.25em\"></tp-icon> Logical circuit functionality: edits and simulates combinational logic circuits.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Click | Click an input to toggle it and immediately propagate the new signal through the circuit. |\n| Using the component | Inputs, outputs, and gates use `success` when their value is `true` and `danger` when it is `false`. |\n| Using the component | Outputs can also be clicked to inspect or override their displayed state; the next evaluation restores the value computed from their incoming wire. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Enter / Space | Toggles the focused input or output terminal. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Enter / Space",
+        "description": "Toggles the focused input or output terminal."
+      }
+    ]
+  }
+}

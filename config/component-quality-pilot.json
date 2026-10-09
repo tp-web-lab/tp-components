@@ -1,0 +1,17 @@
+{
+  "components": ["animation", "code-editor", "compare", "modal"],
+  "testFiles": [
+    "src/components/animation/animation-triggers.test.ts",
+    "src/components/animation/animation.test.ts",
+    "src/components/code-editor/code-editor.test.ts",
+    "src/components/compare/compare.test.ts",
+    "src/components/modal/modal.test.ts",
+    "src/components/modal/modal-triggers.test.ts"
+  ],
+  "targets": {
+    "lines": 90,
+    "statements": 90,
+    "functions": 90,
+    "branches": 80
+  }
+}

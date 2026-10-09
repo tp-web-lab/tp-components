@@ -1,0 +1,32 @@
+[data-tp-dialog] {
+  border: 0;
+  border-radius: 0.75rem;
+  padding: 0;
+  max-inline-size: min(32rem, calc(100vw - 2rem));
+  inline-size: 32rem;
+}
+
+[data-tp-dialog]::backdrop {
+  background: rgb(0 0 0 / 0.35);
+}
+
+[data-tp-dialog-panel] {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+[data-tp-dialog-header] {
+  font-weight: 700;
+}
+
+[data-tp-dialog-body] {
+  max-block-size: 16rem;
+  overflow: auto;
+}
+
+[data-tp-dialog-footer] {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

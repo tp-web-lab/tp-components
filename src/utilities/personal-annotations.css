@@ -1,0 +1,121 @@
+tp-icon-button[data-action="annotations"] > button {
+	border: 1px solid var(--tp-neutral-stroke-mid, #9ca3af);
+	background: var(--tp-paper-color, #ffffff);
+}
+tp-icon-button[data-action="annotations"] > button:hover {
+	background: var(--tp-neutral-fill-soft, #e5e7eb);
+}
+[data-personal-annotation="panel"] {
+	position: fixed;
+	inset: 4rem 1rem auto auto;
+	margin: 0;
+	inline-size: min(36rem, calc(100vw - 2rem));
+	box-sizing: border-box;
+	max-block-size: calc(100dvh - 5rem);
+	overflow: auto;
+	z-index: var(--tp-z-index-toast, 1100);
+	background: var(--tp-paper-color, Canvas);
+	color: var(--tp-text-body, CanvasText);
+}
+[data-personal-annotation="panel"][hidden] {
+	display: none;
+}
+[data-annotation-header] > h3 {
+	margin: 0;
+	flex: 1;
+	min-inline-size: 0;
+	display: flex;
+	align-items: center;
+	gap: 0.35em;
+}
+[data-annotation-header] > h3 > span {
+	min-inline-size: 0;
+	overflow-wrap: anywhere;
+}
+[data-annotation-header] > h3 > tp-icon {
+	flex: none;
+}
+[data-annotation-header] > tp-icon-button,
+[data-annotation-header] > tp-color {
+	flex: none;
+}
+[data-annotation-header] {
+	flex-wrap: nowrap;
+	gap: var(--tp-toolbar-section-gap, 0.25rem);
+	padding-block-end: var(--tp-space-xs, 0.5rem);
+	margin-block-end: var(--tp-space-xs, 0.5rem);
+	border-block-end: 1px solid var(--tp-brand-stroke-soft, currentColor);
+}
+[data-annotation-footer] > tp-cluster {
+	gap: var(--tp-toolbar-section-gap, 0.25rem);
+}
+@media (max-width: 600px) {
+	[data-annotation-header] {
+		flex-wrap: wrap;
+	}
+	[data-annotation-header] > h3 {
+		flex-basis: 100%;
+	}
+}
+[data-personal-annotation="panel"] > p {
+	margin-block: 0.5rem;
+}
+[data-personal-annotation="panel"] > p:empty {
+	display: none;
+}
+[data-annotation-editor]:not([hidden]) {
+	display: grid;
+	gap: 0.5rem;
+}
+[data-annotation-languages] > li {
+	display: flex;
+	align-items: center;
+	gap: var(--tp-space-xs, 0.5rem);
+}
+[data-annotation-languages] [data-language-check] {
+	margin-inline-start: auto;
+}
+[data-annotation-languages] [data-language-check][hidden] {
+	display: none;
+}
+[data-annotation-ranges] {
+	flex-wrap: nowrap;
+}
+[data-annotation-ranges] > tp-numberfield {
+	flex: 1;
+	min-inline-size: 0;
+}
+[data-annotation-add] {
+	font-size: 2em;
+	margin-inline-end: var(--tp-space-xs, 0.5rem);
+}
+[data-annotation-header] tp-icon-button > button,
+[data-annotation-footer] tp-icon-button > button {
+	border: 1px solid var(--tp-brand-stroke-mid);
+	border-radius: var(--tp-border-radius-circle);
+}
+[data-annotation-header] tp-icon-button > button:hover,
+[data-annotation-footer] tp-icon-button > button:hover {
+	background: var(--tp-brand-fill-soft);
+	color: var(--tp-brand-text-on-soft);
+}
+[data-annotation-footer] {
+	margin-block-start: var(--tp-space-xs, 0.5rem);
+	padding-block-start: var(--tp-space-xs, 0.5rem);
+	border-block-start: 1px solid var(--tp-brand-stroke-soft, currentColor);
+}
+[data-personal-annotation="panel"]::backdrop {
+	pointer-events: none;
+}
+[data-annotation-selecting],
+[data-annotation-selecting] * {
+	cursor: crosshair;
+}
+[data-annotation-selecting]
+	:is(p, li, h1, h2, h3, h4, h5, h6, figure, img, blockquote, pre):is(
+		:hover,
+		:focus-visible
+	) {
+	outline: 2px dashed currentColor;
+	outline-offset: 2px;
+}

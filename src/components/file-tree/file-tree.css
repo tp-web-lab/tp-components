@@ -1,0 +1,68 @@
+tp-file-tree {
+  display: block;
+  font-family: system-ui, sans-serif;
+}
+
+tp-file-tree [data-tp-file-tree-row] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+tp-file-tree [data-tp-file-tree-icon] {
+  flex: 0 0 auto;
+  inline-size: var(--tp-file-tree-icon-size, 1rem);
+  block-size: var(--tp-file-tree-icon-size, 1rem);
+}
+
+tp-file-tree [data-tp-file-tree-label] {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+tp-file-tree li[data-active-path] > [data-tp-tree-row],
+tp-file-tree li[data-active-path] > [data-tp-file-tree-row] {
+  color: var(--tp-file-tree-active-color, inherit);
+  font-weight: 600;
+}
+
+tp-file-tree li[data-active-path] > [data-tp-tree-row] {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  opacity: 0.9;
+}
+
+tp-file-tree li[data-selected-path] > [data-tp-tree-row],
+tp-file-tree li[data-selected-path] > [data-tp-file-tree-row] {
+  background: var(--tp-file-tree-selected-bg, color-mix(in srgb, currentColor 8%, transparent));
+}
+
+tp-file-tree li[data-open-path] > [data-tp-tree-row],
+tp-file-tree li[data-open-path] > [data-tp-file-tree-row] {
+  color: var(--tp-file-tree-open-color, inherit);
+}
+
+/* selected uniquement si PAS active */
+tp-file-tree li[data-selected-path]:not([data-active-path]) > [data-tp-tree-row],
+tp-file-tree li[data-selected-path]:not([data-active-path]) > [data-tp-file-tree-row] {
+  background: var(
+    --tp-file-tree-selected-bg,
+    color-mix(in srgb, currentColor 10%, transparent)
+  );
+}
+
+/* active */
+tp-file-tree li[data-active-path] > [data-tp-tree-row],
+tp-file-tree li[data-active-path] > [data-tp-file-tree-row] {
+  background: transparent;
+  text-decoration: underline;
+}
+
+tp-file-tree li[data-dirty-path] [data-tp-file-tree-label]::after {
+  color: var(--tp-file-tree-dirty-color, #d97706);
+  content: "●";
+  font-size: 0.7em;
+  margin-inline-start: 0.35rem;
+}

@@ -1,0 +1,15 @@
+tp-lsystem {
+	display: flow-root;
+	min-inline-size: 0;
+}
+tp-lsystem > tp-button-group {
+	gap: var(--tp-space-xs, 0.5rem);
+}
+tp-lsystem > figure {
+	margin: 0;
+}
+tp-lsystem [data-lsystem-viewport] svg {
+	display: block;
+	max-inline-size: 100%;
+	block-size: auto;
+}

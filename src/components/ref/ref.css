@@ -1,0 +1,9 @@
+tp-ref { display: inline; }
+tp-ref > button { color: var(--tp-brand-text-colorful); cursor: pointer; text-decoration: none; }
+tp-ref > button:disabled { color: inherit; cursor: help; text-decoration: underline wavy; }
+tp-tooltip.tp-ref-tooltip { max-inline-size: min(32rem, calc(100vw - 1rem)); }
+tp-tooltip.tp-ref-tooltip > :first-child { margin-block-start: 0; }
+tp-tooltip.tp-ref-tooltip > :last-child { margin-block-end: 0; }
+tp-ref > button { display: inline; border: 0; padding: 0; background: none; font: inherit; }
+tp-ref[href^="%"] > button { text-decoration: underline dotted; text-underline-offset: 0.15em; }
+tp-ref > button > sup { font-size: 0.75em; line-height: 0; vertical-align: super; }

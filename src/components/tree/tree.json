@@ -1,0 +1,221 @@
+{
+  "tagname": "tp-tree",
+  "classname": "TpTree",
+  "superclass": "TpBase",
+  "description": "Interactive hierarchical tree.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-tree></tp-tree>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "draggable",
+      "description": "Enables node drag and drop.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "editable",
+      "description": "Enables node editing actions.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "guides",
+      "description": "Shows hierarchy guide lines.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "level",
+      "description": "Initial expansion depth.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1"
+    },
+    {
+      "name": "selectable",
+      "description": "Enables node selection.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [
+    {
+      "name": "beginRename(node: HTMLLIElement): void",
+      "inherited": false,
+      "description": "Starts inline rename for a tree node."
+    },
+    {
+      "name": "closeContextMenu(): void",
+      "inherited": false,
+      "description": "Closes the current context menu."
+    },
+    {
+      "name": "collapseAll(): void",
+      "inherited": false,
+      "description": "Collapses every tree item that has children."
+    },
+    {
+      "name": "collapseNode(item: HTMLLIElement): void",
+      "inherited": false,
+      "description": "Collapses a tree item that has children."
+    },
+    {
+      "name": "expandAll(): void",
+      "inherited": false,
+      "description": "Expands every tree item that has children."
+    },
+    {
+      "name": "expandNode(item: HTMLLIElement): void",
+      "inherited": false,
+      "description": "Expands a tree item that has children."
+    },
+    {
+      "name": "getSelectedItem(): HTMLLIElement | null",
+      "inherited": false,
+      "description": "Returns the selected tree item."
+    },
+    {
+      "name": "openGlobalContextMenuAt(x: number, y: number): void",
+      "inherited": false,
+      "description": "Opens the global context menu at viewport coordinates."
+    },
+    {
+      "name": "openNodeContextMenuAt(node: HTMLLIElement, x: number, y: number): void",
+      "inherited": false,
+      "description": "Opens the context menu for a tree node at viewport coordinates."
+    },
+    {
+      "name": "setContextMenuConfig(config: TpTreeContextMenuConfig | null): void",
+      "inherited": false,
+      "description": "Sets the context menu configuration."
+    },
+    {
+      "name": "sortAll(): void",
+      "inherited": false,
+      "description": "Sorts every subtree alphabetically."
+    },
+    {
+      "name": "sortNodeChildren(item: HTMLLIElement): void",
+      "inherited": false,
+      "description": "Sorts the direct children of a tree item alphabetically."
+    },
+    {
+      "name": "toggleGuides(): void",
+      "inherited": false,
+      "description": "Toggles hierarchy guide lines."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-tree-context-action",
+      "description": "Emitted when a context menu action is selected.",
+      "detail": "{ actionId: string; scope: \"global\" | \"node\"; target: TpTreeNodeTarget | null }"
+    },
+    {
+      "name": "tp-tree-context-close",
+      "description": "Emitted when a context menu closes.",
+      "detail": "{ scope: \"global\" | \"node\" | null }"
+    },
+    {
+      "name": "tp-tree-context-open",
+      "description": "Emitted when a context menu opens.",
+      "detail": "{ scope: \"global\" | \"node\"; target: TpTreeNodeTarget | null }"
+    },
+    {
+      "name": "tp-tree-node-add-request",
+      "description": "Emitted when a node add action is requested.",
+      "detail": "{ target: TpTreeNodeTarget | null; position: \"inside\" | \"before\" | \"after\"; actionId: \"add-leaf\" | \"add-node\" }"
+    },
+    {
+      "name": "tp-tree-node-clone-request",
+      "description": "Emitted when a node clone action is requested.",
+      "detail": "{ target: TpTreeNodeTarget }"
+    },
+    {
+      "name": "tp-tree-node-delete-request",
+      "description": "Emitted when a node delete action is requested.",
+      "detail": "{ target: TpTreeNodeTarget }"
+    },
+    {
+      "name": "tp-tree-node-move-request",
+      "description": "Emitted when a node move is requested.",
+      "detail": "{ source: TpTreeNodeTarget; destination: TpTreeNodeTarget | null; position: \"inside\" | \"before\" | \"after\" }"
+    },
+    {
+      "name": "tp-tree-node-rename-request",
+      "description": "Emitted when a node rename is requested.",
+      "detail": "{ target: TpTreeNodeTarget; oldLabel: string; newLabel: string }"
+    },
+    {
+      "name": "tp-tree-select",
+      "description": "Emitted when a node is selected.",
+      "detail": "{ target: TpTreeNodeTarget }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-tree-guide-inline-start",
+      "default": "calc(-0.8rem + 1px)",
+      "description": "Inline position of guide lines."
+    },
+    {
+      "name": "--tp-tree-guide-midline",
+      "default": "calc( var(--tp-tree-row-padding-block, 0.125rem) + var(--tp-tree-toggle-half-size, 0.5rem) )",
+      "description": "Block position of guide midlines."
+    },
+    {
+      "name": "--tp-tree-row-padding-block",
+      "default": "0.125rem",
+      "description": "Vertical padding for each tree row."
+    },
+    {
+      "name": "--tp-tree-toggle-half-size",
+      "default": "0.5rem",
+      "description": "Half toggle size used by guide alignment."
+    },
+    {
+      "name": "--tp-tree-toggle-size",
+      "default": "1rem",
+      "description": "Toggle icon button size."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-dragdrop",
+      "summary": "Generic drag-and-drop controller for content."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Tree",
+    "introduction": "The custom `<tp-tree>` element implements the <tp-icon name=\"tree\" library=\"components\" size=\"1.25em\"></tp-icon> Tree functionality: interactive hierarchical tree.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Expand or collapse branches to inspect nested items. |\n| Select | Select available links or entries to use the actions provided by the surrounding page. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

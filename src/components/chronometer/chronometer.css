@@ -1,0 +1,27 @@
+tp-chronometer {
+  --tp-chronometer-size: 1rem;
+
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5em;
+  display: inline-flex;
+  font-size: var(--tp-chronometer-size);
+  gap: 0.4em;
+  padding: 0.35em 0.5em;
+}
+
+tp-chronometer > [data-tp-chronometer-display] {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1em;
+  font-variant-numeric: tabular-nums;
+  min-inline-size: 8ch;
+}
+
+tp-chronometer > [data-tp-chronometer-icon] {
+  --tp-icon-size: 1.125em;
+  color: currentColor;
+}
+
+tp-chronometer > tp-icon-button > button {
+  border: 1px solid #d1d5db;
+}

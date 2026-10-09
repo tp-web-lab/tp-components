@@ -1,0 +1,14 @@
+{
+  "components": [
+    "accordion", "box", "card", "flip-card", "center", "cluster", "cover",
+    "grid", "frame", "inline", "menu", "sidebar", "slider",
+    "splitter", "stack", "switcher", "tabs", "timeline", "toc", "toolbar", "tree"
+  ],
+  "testFileCount": 27,
+  "targets": {
+    "lines": 90,
+    "statements": 90,
+    "functions": 90,
+    "branches": 80
+  }
+}

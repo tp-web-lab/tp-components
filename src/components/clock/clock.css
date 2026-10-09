@@ -1,0 +1,31 @@
+tp-clock {
+  --tp-clock-size: 1rem;
+
+  align-items: center;
+  border: 1px solid var(--tp-brand-stroke-soft, #d1d5db);
+  border-radius: 0.5em;
+  display: inline-flex;
+  font-size: var(--tp-clock-size);
+  gap: 0.5em;
+  padding: 0.35em 0.5em;
+}
+
+tp-clock > [data-tp-clock-time] {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1em;
+  font-variant-numeric: tabular-nums;
+}
+
+tp-clock > [data-tp-clock-graphic] {
+  block-size: 1.6em;
+  color: var(--tp-brand-text-on-soft, currentColor);
+  inline-size: 1.6em;
+}
+
+tp-clock:not([type='analogic']) > [data-tp-clock-graphic] {
+  display: none;
+}
+
+tp-clock[type='analogic'] > [data-tp-clock-time] {
+  display: none;
+}

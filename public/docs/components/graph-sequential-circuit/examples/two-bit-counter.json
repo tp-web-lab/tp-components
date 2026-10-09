@@ -1,0 +1,249 @@
+{
+  "version": 1,
+  "title": "Two-bit synchronous counter",
+  "nodes": [
+    {
+      "id": "clock",
+      "type": "logic-clock",
+      "x": 80,
+      "y": 360,
+      "label": "Clock"
+    },
+    {
+      "id": "clock-hub",
+      "type": "logic-hub",
+      "x": 200,
+      "y": 360,
+      "label": "CLK"
+    },
+    {
+      "id": "not0",
+      "type": "logic-not",
+      "x": 200,
+      "y": 120,
+      "label": "NOT Q0"
+    },
+    {
+      "id": "xor1",
+      "type": "logic-xor",
+      "x": 340,
+      "y": 240,
+      "label": "Q0 XOR Q1"
+    },
+    {
+      "id": "ff0",
+      "type": "logic-d-flip-flop",
+      "x": 440,
+      "y": 120,
+      "label": "Q0",
+      "data": {
+        "initial": false,
+        "trigger": "rising"
+      },
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "ff1",
+      "type": "logic-d-flip-flop",
+      "x": 520,
+      "y": 240,
+      "label": "Q1",
+      "data": {
+        "initial": false,
+        "trigger": "rising"
+      },
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "q0-hub",
+      "type": "logic-hub",
+      "x": 600,
+      "y": 120,
+      "label": "Q0"
+    },
+    {
+      "id": "q1-hub",
+      "type": "logic-hub",
+      "x": 660,
+      "y": 240,
+      "label": "Q1"
+    },
+    {
+      "id": "out0",
+      "type": "logic-output",
+      "x": 820,
+      "y": 120,
+      "label": "Bit 0"
+    },
+    {
+      "id": "out1",
+      "type": "logic-output",
+      "x": 820,
+      "y": 240,
+      "label": "Bit 1"
+    }
+  ],
+  "edges": [
+    {
+      "id": "clock-hub-in",
+      "type": "logic-wire",
+      "source": "clock",
+      "sourcePort": "east",
+      "target": "clock-hub",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "clock-ff0",
+      "type": "logic-wire",
+      "source": "clock-hub",
+      "sourcePort": "south",
+      "target": "ff0",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "vertical",
+      "turns": "alternating",
+      "bendY": 420
+    },
+    {
+      "id": "clock-ff1",
+      "type": "logic-wire",
+      "source": "clock-hub",
+      "sourcePort": "east",
+      "target": "ff1",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "not-ff0",
+      "type": "logic-wire",
+      "source": "not0",
+      "sourcePort": "east",
+      "target": "ff0",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "ff0-hub",
+      "type": "logic-wire",
+      "source": "ff0",
+      "sourcePort": "east",
+      "target": "q0-hub",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "q0-not",
+      "type": "logic-wire",
+      "source": "q0-hub",
+      "sourcePort": "north",
+      "target": "not0",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 3,
+      "departure": "vertical",
+      "turns": "alternating",
+      "bendX": 132.63671875,
+      "bendY": 60
+    },
+    {
+      "id": "q0-xor",
+      "type": "logic-wire",
+      "source": "q0-hub",
+      "sourcePort": "south",
+      "target": "xor1",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 3,
+      "departure": "vertical",
+      "turns": "alternating",
+      "bendX": 240,
+      "bendY": 180
+    },
+    {
+      "id": "q0-out",
+      "type": "logic-wire",
+      "source": "q0-hub",
+      "sourcePort": "east",
+      "target": "out0",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "xor-ff1",
+      "type": "logic-wire",
+      "source": "xor1",
+      "sourcePort": "east",
+      "target": "ff1",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "turns": "alternating",
+      "bendX": 460
+    },
+    {
+      "id": "ff1-hub",
+      "type": "logic-wire",
+      "source": "ff1",
+      "sourcePort": "east",
+      "target": "q1-hub",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "q1-xor",
+      "type": "logic-wire",
+      "source": "q1-hub",
+      "sourcePort": "south",
+      "target": "xor1",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 3,
+      "departure": "vertical",
+      "turns": "alternating",
+      "bendX": 240,
+      "bendY": 320
+    },
+    {
+      "id": "q1-out",
+      "type": "logic-wire",
+      "source": "q1-hub",
+      "sourcePort": "east",
+      "target": "out1",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    }
+  ]
+}

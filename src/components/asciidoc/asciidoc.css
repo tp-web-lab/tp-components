@@ -1,0 +1,37 @@
+.tp-asciidoc {
+  display: block;
+}
+
+.tp-asciidoc-output {
+  min-inline-size: 0;
+}
+
+.tp-asciidoc-output table {
+  display: block;
+  inline-size: auto;
+  max-inline-size: 100%;
+  overflow-x: auto;
+}
+
+.tp-asciidoc-output .stemblock svg,
+.tp-asciidoc-output .stem svg {
+  display: inline-block;
+  max-width: none;
+  max-inline-size: none;
+}
+
+/* Keep MathJax's formula-specific SVG baseline while centering its wrapper
+   within the surrounding text line. */
+.tp-asciidoc-output .MathJax_SVG {
+  vertical-align: middle;
+}
+
+.tp-asciidoc-error {
+  margin: 0;
+  padding: 0.9rem;
+  border: 1px solid #f1b7bf;
+  border-radius: 0.5rem;
+  background: #fff3f5;
+  color: #8a1c2c;
+  overflow: auto;
+}

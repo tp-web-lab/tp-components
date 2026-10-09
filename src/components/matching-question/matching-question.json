@@ -1,0 +1,66 @@
+{
+  "tagname": "tp-matching-question",
+  "classname": "TpMatchingQuestion",
+  "superclass": "TpQuestion",
+  "description": "checks groups across two or more optionally titled lists using tp-matching.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-matching-question>\n  <dl>\n    <dt>Title</dt><dd>English and French</dd>\n    <dt>Prompt</dt><dd>Match each English expression with its French translation.</dd>\n    <dt>Form</dt><dd>\n      <ul><li>Hello</li><li>Thank you</li><li>Goodbye</li></ul>\n      <ol><li>Bonjour</li><li>Merci</li><li>Au revoir</li></ol>\n    </dd>\n    <dt>Feedback</dt><dd>Distinguish greetings, thanks and farewells.</dd>\n    <dt>Solution</dt><dd>Hello — Bonjour; Thank you — Merci; Goodbye — Au revoir.</dd>\n  </dl>\n</tp-matching-question>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "heading",
+      "description": "Passes heading to the matching widget; the first list supplies column titles.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-callout",
+      "summary": "Callout component for highlighted contextual content."
+    },
+    {
+      "name": "tp-matching",
+      "summary": "associates rich content from two or more optionally titled lists without grading the groups."
+    },
+    {
+      "name": "tp-question",
+      "summary": "Base description-list container for question components."
+    }
+  ],
+  "credits": [
+    {
+      "name": "Zod",
+      "url": "https://zod.dev/",
+      "summary": "Runtime schema validation."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Matching question",
+    "introduction": "The custom `<tp-matching-question>` element implements the Matching question functionality: checks groups across two or more optionally titled lists using tp-matching.",
+    "interactions": "An initial info callout in the Feedback panel explains how to form a group with the mouse or keyboard. Close it when you no longer need the instructions; resetting the answer does not reopen it.\n\n#### Mouse interactions\n\nAssociated cards share a color and a group number, including incomplete groups. Colors cycle through blue, violet, amber, cyan, orange and indigo; they indicate membership, never correctness. The number remains the identifier when colors repeat. Completing or editing a group preserves its color.\n\nClick a card or its link icon to select it, then click a card in another column to associate them. Clicking the selected card again cancels the selection. Embedded links, fields, media players and other controls retain their own interactions without selecting the card. The link icon also remains the keyboard selection control and drag handle.\n\n| Control or gesture | Result |\n| --- | --- |\n| Close callout | Dismiss the introductory instructions without changing the associations. |\n| Click a card | Select it or associate it with the selected item from another column. Clicking it again cancels selection. Embedded controls do not select the card. |\n| Select | Select one item, then select its partner in the other list. Selecting the same item again cancels the pending selection. |\n| Drag a Select button | Drop it on an item in the opposite list to associate the pair. |\n| Remove pair / Remove from group (close icon) | Remove this member; the remaining group is retained if it still contains at least two members. Select any existing member to extend or revise a group. |\n| Embedded media or components | Use their controls normally; they do not select an answer. |\n| Submit | Submit all associations for checking. An incomplete response is rejected without counting an attempt. The result reports the number of correct pairs and, when needed, the author's feedback. An unchanged submission is not counted twice. |\n| Reset | Clear associations and independently reshuffle every list. |\n| Feedback / Solution tabs | Switch between the last result and the solution. The solution is available before submission; an empty solution displays a warning. |\n| Input / Output buttons beside Prompt | Show or hide the answer form or output panel, keeping at least one panel visible. |\n| Title | Expand or collapse the question. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move through association controls, embedded content, question actions and output tabs. |\n| Enter / Space | Activate the focused Select, Remove pair, Close callout, Reset, Submit or panel-toggle button. |\n| Escape inside an item | Cancel the pending selection without removing existing pairs. |\n| Arrow keys, Home / End on output tabs | Navigate the Feedback and Solution tabs using the standard tab controls. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Tab / Shift+Tab",
+        "description": "Moves between association controls, embedded content and question actions."
+      },
+      {
+        "key": "Enter / Space",
+        "description": "Activates the focused selection, removal, Reset or Submit button."
+      },
+      {
+        "key": "Escape",
+        "description": "Cancels the pending association selection."
+      }
+    ]
+  }
+}

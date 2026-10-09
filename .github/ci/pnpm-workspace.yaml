@@ -1,0 +1,6 @@
+packages:
+  - tp-components
+  - tp-utilities
+  - tp-markdown
+  - tp-asciidoc
+  - tp-restructuredtext

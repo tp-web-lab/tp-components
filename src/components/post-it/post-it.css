@@ -1,0 +1,145 @@
+tp-post-it {
+	display: flow-root;
+	inline-size: var(--tp-post-it-width, 20rem);
+	max-inline-size: 100%;
+	min-inline-size: 0;
+}
+tp-post-it[hidden] {
+	display: none;
+}
+tp-post-it[data-post-it-floating] {
+	position: fixed;
+	inset: auto;
+	left: var(--tp-post-it-x, 8px);
+	top: var(--tp-post-it-y, 8px);
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	overflow: visible;
+	max-inline-size: calc(100vw - 16px);
+	z-index: var(--tp-z-index-toast, 1100);
+}
+tp-post-it::backdrop {
+	background: transparent;
+	pointer-events: none;
+}
+tp-post-it > [data-post-it-paper] {
+	--tp-box-background: var(--tp-brand-fill-soft);
+	--tp-box-color: var(--tp-brand-text-on-soft);
+	--tp-box-border-width: 0;
+	--tp-box-padding: var(--tp-post-it-padding, 0.75rem);
+	position: relative;
+	box-shadow: var(--tp-shadow-mid);
+	transform: rotate(var(--tp-post-it-rotation, 0deg));
+	transform-origin: center top;
+	overflow-wrap: anywhere;
+}
+/* Removing lite restarts the opening rotation; the resting transform remains authoritative. */
+@keyframes tp-post-it-open {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(var(--tp-post-it-rotation, 0deg));
+	}
+}
+tp-post-it:not([lite]) > [data-post-it-paper] {
+	animation: tp-post-it-open 1s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+	tp-post-it:not([lite]) > [data-post-it-paper] {
+		animation: none;
+	}
+}
+/* The folded corner is decorative and never replaces text or controls. */
+tp-post-it > [data-post-it-paper]::after {
+	content: "";
+	position: absolute;
+	inset-block-end: 0;
+	inset-inline-end: 0;
+	inline-size: 1rem;
+	block-size: 1rem;
+	background: var(--tp-brand-fill-loud);
+	clip-path: polygon(100% 0, 100% 100%, 0 100%);
+	pointer-events: none;
+}
+tp-post-it [data-post-it-header] {
+	display: flex;
+	align-items: start;
+	gap: var(--tp-space-xs, 0.5rem);
+	margin-block-end: var(--tp-space-xs, 0.5rem);
+}
+tp-post-it:not([lite]) [data-post-it-header] {
+	padding-block-end: var(--tp-space-xs, 0.5rem);
+	border-block-end: 1px solid var(--tp-brand-stroke-soft, currentColor);
+}
+tp-post-it [data-post-it-header]:focus-visible {
+	outline: 2px solid var(--tp-brand-stroke-loud, currentColor);
+	outline-offset: 2px;
+}
+tp-post-it [data-post-it-heading][hidden],
+tp-post-it [data-post-it-reset][hidden],
+tp-post-it [data-post-it-content][hidden] {
+	display: none;
+}
+tp-post-it [data-post-it-heading] {
+	min-inline-size: 0;
+}
+tp-post-it [data-post-it-reset] {
+	margin-inline-start: auto;
+}
+tp-post-it [data-post-it-pin],
+tp-post-it [data-post-it-reset] {
+	flex: none;
+}
+tp-post-it:not([lite]) [data-post-it-header],
+tp-post-it[lite] [data-post-it-pin] {
+	flex: none;
+	touch-action: none;
+	user-select: none;
+}
+tp-post-it:not([lite]) [data-post-it-header],
+tp-post-it[lite] [data-post-it-pin] button {
+	cursor: grab;
+	touch-action: none;
+}
+tp-post-it[data-post-it-dragging] [data-post-it-header],
+tp-post-it[lite][data-post-it-dragging] [data-post-it-pin] button {
+	cursor: grabbing;
+}
+tp-post-it [data-post-it-content] {
+	display: flow-root;
+	max-block-size: max(3rem, calc(100dvh - 9rem));
+	overflow: auto;
+}
+tp-post-it [data-post-it-content] > :first-child {
+	margin-block-start: 0;
+}
+tp-post-it [data-post-it-content] > :last-child {
+	margin-block-end: 0;
+}
+tp-post-it[lite] {
+	inline-size: fit-content;
+}
+tp-post-it[lite] [data-post-it-pin] {
+	font-size: 2em;
+}
+tp-post-it[lite] > [data-post-it-paper] {
+	--tp-box-padding: 0px;
+	--tp-box-background: transparent;
+	--tp-box-color: var(--tp-brand-text-colorful);
+	box-shadow: none;
+	transform: none;
+}
+tp-post-it[lite] > [data-post-it-paper]::after {
+	display: none;
+}
+tp-post-it[lite] [data-post-it-header] {
+	margin: 0;
+}
+@media (forced-colors: active) {
+	tp-post-it:not([lite]) > [data-post-it-paper] {
+		border: 1px solid CanvasText;
+	}
+}

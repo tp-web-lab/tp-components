@@ -1,0 +1,14 @@
+{
+  "id": "04-md-design",
+  "label": "Design",
+  "name": "Design",
+  "entry": "/index.md",
+  "extensions": [
+    {
+      "id": "design",
+      "label": "Design",
+      "url": "/extensions/markdown/design/index.js",
+      "enabled": true
+    }
+  ]
+}

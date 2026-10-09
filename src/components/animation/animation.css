@@ -1,0 +1,7 @@
+tp-animation {
+  display: block;
+}
+
+tp-animation > [data-tp-animation-target] {
+  display: inherit;
+}

@@ -1,0 +1,105 @@
+{
+  "tagname": "tp-accordion",
+  "classname": "TpAccordion",
+  "superclass": "TpBase",
+  "description": "Accessible accordion web component based on light-DOM `<dl>` markup.\n\nExpected structure:\n\n```html\n<tp-accordion>\n  <dl>\n    <dt>Summary 1</dt>\n    <dd>Content 1</dd>\n\n    <dt>Summary 2</dt>\n    <dd>Content 2</dd>\n  </dl>\n</tp-accordion>\n```\n\nMapping rules:\n- `<dt>` nodes are treated as accordion headers\n- `<dd>` nodes are treated as accordion panels\n- headers/panels are paired by index order\n\nReactive attributes:\n- `multiple`: allows multiple expanded items\n- `open-indexes`: space-separated list of expanded item indexes\n- `appearance`: visual treatment (`default`, `outlined`, or `filled`)",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-accordion open-indexes=\"1\">\n  <dl>\n    <dt>What is HTML?</dt><dd>The language used to structure web pages.</dd>\n    <dt>What is CSS?</dt><dd>The language used to style web pages.</dd>\n    <dt>What is Javascript?</dt><dd>The language used to define the behaviour of web pages.</dd>\n  </dl>\n</tp-accordion>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "appearance",
+      "description": "Visual treatment of accordion items.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpAccordionAppearance",
+      "default": "\"default\""
+    },
+    {
+      "name": "multiple",
+      "description": "Allows several sections to remain open simultaneously.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "open-indexes",
+      "description": "Space-separated, zero-based indexes of the open sections.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "close(index: number): void",
+      "inherited": false,
+      "description": "Closes a section by index."
+    },
+    {
+      "name": "open(index: number): void",
+      "inherited": false,
+      "description": "Opens a section by index.\n\nIn single mode, this replaces the current open section."
+    },
+    {
+      "name": "toggle(index: number): void",
+      "inherited": false,
+      "description": "Toggles open/closed state for a section by index."
+    }
+  ],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-accordion-content-gap",
+      "default": "0",
+      "description": "Gap between an accordion heading and its content."
+    },
+    {
+      "name": "--tp-accordion-item-gap",
+      "default": "0",
+      "description": "Gap between consecutive accordion items."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Accordion",
+    "introduction": "The custom `<tp-accordion>` element implements the <tp-icon name=\"accordion\" library=\"components\" size=\"1.25em\"></tp-icon> Accordion functionality: collapsible multi-panels element.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Section heading | Click to expand or collapse its content. Opening a section may close the previous section. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus a section heading. |\n| ArrowDown | Moves focus to the next header. |\n| ArrowUp | Moves focus to the previous header. |\n| Home | Moves focus to the first header. |\n| End | Moves focus to the last header. |\n| Enter / Space | Expands or collapses the focused section. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "ArrowDown",
+        "description": "Moves focus to the next header."
+      },
+      {
+        "key": "ArrowUp",
+        "description": "Moves focus to the previous header."
+      },
+      {
+        "key": "Home",
+        "description": "Moves focus to the first header."
+      },
+      {
+        "key": "End",
+        "description": "Moves focus to the last header."
+      },
+      {
+        "key": "Enter / Space",
+        "description": "Expands or collapses the focused section."
+      }
+    ]
+  }
+}

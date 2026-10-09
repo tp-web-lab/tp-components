@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "title": "Employees in active departments",
+  "nodes": [
+    {
+      "id": "employees",
+      "type": "query-relation",
+      "x": 180,
+      "y": 360,
+      "label": "Employees",
+      "data": { "table": "employees", "alias": "e" }
+    },
+    {
+      "id": "departments",
+      "type": "query-relation",
+      "x": 500,
+      "y": 360,
+      "label": "Departments",
+      "data": { "table": "departments", "alias": "d" }
+    },
+    {
+      "id": "join",
+      "type": "query-join",
+      "x": 340,
+      "y": 260,
+      "label": "Department join",
+      "data": { "condition": "l.department_id = r.id", "joinType": "inner" }
+    },
+    {
+      "id": "selection",
+      "type": "query-selection",
+      "x": 340,
+      "y": 160,
+      "label": "Active only",
+      "data": { "condition": "q.active = TRUE" }
+    },
+    {
+      "id": "projection",
+      "type": "query-projection",
+      "x": 340,
+      "y": 60,
+      "label": "Result columns",
+      "data": { "columns": "q.employee_name, q.department_name" }
+    },
+    {
+      "id": "note",
+      "type": "comment",
+      "x": 610,
+      "y": 160,
+      "label": "Edges point from operands toward the root operator.",
+      "data": { "color": "info" }
+    }
+  ],
+  "edges": [
+    { "id": "employee-input", "type": "query-edge", "source": "employees", "sourcePort": "north", "target": "join", "targetPort": "west", "direction": "forward", "routing": "straight" },
+    { "id": "department-input", "type": "query-edge", "source": "departments", "sourcePort": "north", "target": "join", "targetPort": "east", "direction": "forward", "routing": "straight" },
+    { "id": "join-selection", "type": "query-edge", "source": "join", "sourcePort": "north", "target": "selection", "targetPort": "south", "direction": "forward", "routing": "straight" },
+    { "id": "selection-projection", "type": "query-edge", "source": "selection", "sourcePort": "north", "target": "projection", "targetPort": "south", "direction": "forward", "routing": "straight" }
+  ]
+}

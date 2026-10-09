@@ -1,0 +1,85 @@
+{
+  "tagname": "tp-lorem-ipsum",
+  "classname": "TpLoremIpsum",
+  "superclass": "TpBase",
+  "description": "generates placeholder sentences, titles, paragraphs or lists.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-lorem-ipsum length=\"1\" words-per-sentence=\"8\" sentences-per-paragraph=\"2\" seed=\"42\"></tp-lorem-ipsum>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "length",
+      "description": "Number or inclusive range of paragraphs or list entries; ignored for title and sentence.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"3-5\""
+    },
+    {
+      "name": "seed",
+      "description": "Integer seed for repeatable output; empty generates fresh random text.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "sentences-per-paragraph",
+      "description": "Number or inclusive range of sentences per paragraph; applies only to p.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"3-6\""
+    },
+    {
+      "name": "type",
+      "description": "Generated structure; title and sentence produce plain text.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"sentence\"|\"title\"|\"p\"|\"dl\"|\"ol\"|\"ul\"",
+      "default": "\"p\""
+    },
+    {
+      "name": "words-per-sentence",
+      "description": "Number or inclusive range of words per sentence or title.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"4-16\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "regenerate(): void",
+      "inherited": false,
+      "description": "Generates new content; the same seed and parameters always reproduce the same output."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-callout",
+      "summary": "Callout component for highlighted contextual content."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Lorem ipsum",
+    "introduction": "The custom `<tp-lorem-ipsum>` element implements the Lorem ipsum functionality: generates placeholder sentences, titles, paragraphs or lists.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Generated text | Read, select or copy the placeholder text. There are no component-specific buttons or gestures. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Generated text | No component-specific keyboard shortcut or extra focus stop. |\n| Ctrl+? | Open User Help for the component under the pointer, falling back to the focused component. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

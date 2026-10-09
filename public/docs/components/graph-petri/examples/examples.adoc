@@ -1,0 +1,12 @@
+[tp-asciidoc-viewer%allow-script,label="tp-graph-petri"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-graph-petri%grid,id="petri-intro",grid-size="20",src="/docs/components/graph-petri/examples/petri-intro.json"]
+====
+====
+======
+----
+========

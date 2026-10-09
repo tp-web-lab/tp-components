@@ -1,0 +1,72 @@
+/* Reuse textfield appearance while reserving room for native number steppers. */
+tp-numberfield:not([icon]) [data-tp-numberfield-control] {
+	grid-template-columns: minmax(0, 1fr) max-content max-content;
+	gap: 0.25em;
+}
+tp-numberfield [data-tp-numberfield-input] {
+	appearance: auto;
+	grid-column: 1;
+	grid-row: 1;
+	padding-inline-end: 0.5em;
+}
+tp-numberfield [data-tp-numberfield-clear],
+tp-numberfield [data-tp-numberfield-type] {
+	position: static;
+	transform: none;
+	grid-row: 1;
+}
+tp-numberfield [data-tp-numberfield-clear] {
+	grid-column: 2;
+}
+tp-numberfield [data-tp-numberfield-type] {
+	margin: 0;
+}
+tp-numberfield [data-tp-numberfield-suffix] {
+	display: inline-flex;
+	align-items: center;
+	grid-column: 3;
+	grid-row: 1;
+	margin-inline-end: 0.4em;
+	white-space: nowrap;
+}
+tp-numberfield[range] [data-tp-numberfield-input] {
+	appearance: auto;
+	accent-color: var(--tp-brand-text-colorful);
+	margin: 0.5em;
+	inline-size: calc(100% - 1em);
+	padding: 0;
+}
+/* Keep the shared focus outline, without framing the slider in a border. */
+tp-numberfield[range] [data-tp-numberfield-control] {
+	border: 0;
+}
+/* Custom global track/thumb skins hide native ticks in Firefox and WebKit.
+   Restore browser painting only when a datalist supplies graduations. */
+tp-numberfield[range] input[list]::-webkit-slider-runnable-track {
+	all: revert;
+}
+tp-numberfield[range] input[list]::-webkit-slider-thumb {
+	all: revert;
+}
+tp-numberfield[range] input[list]::-moz-range-track {
+	all: revert;
+}
+tp-numberfield[range] input[list]::-moz-range-thumb {
+	all: revert;
+}
+tp-numberfield[range] input[list]::-moz-range-progress {
+	all: revert;
+}
+tp-numberfield [data-tp-numberfield-value] {
+	font-variant-numeric: tabular-nums;
+}
+tp-numberfield [data-tp-numberfield-value][hidden] {
+	display: none;
+}
+
+/* Required has no meaning for the native slider, which is never empty. */
+tp-numberfield[range][required] [data-tp-numberfield-label-text]::after,
+tp-numberfield[range][required]:not([label])
+	[data-tp-numberfield-control]::before {
+	content: none;
+}

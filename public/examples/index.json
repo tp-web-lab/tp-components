@@ -1,0 +1,15 @@
+{
+  "groups": {
+    "playgrounds": {
+      "asciidoc": "/examples/playgrounds/asciidoc-playground",
+      "html": "/examples/playgrounds/html-playground",
+      "js": "/examples/playgrounds/js-playground",
+      "markdown": "/examples/playgrounds/markdown-playground",
+      "prolog": "/examples/playgrounds/prolog-playground",
+      "py": "/examples/playgrounds/py-playground",
+      "restructuredtext": "/examples/playgrounds/restructuredtext-playground",
+      "sql": "/examples/playgrounds/sql-playground",
+      "ts": "/examples/playgrounds/ts-playground"
+    }
+  }
+}

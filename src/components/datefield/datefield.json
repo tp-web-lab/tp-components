@@ -1,0 +1,239 @@
+{
+  "tagname": "tp-datefield",
+  "classname": "TpDatefield",
+  "superclass": "TpBase",
+  "description": "Native date field with labels, constraints, picker access, and clearing.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-datefield label=\"Date\" value=\"2026-09-03\" clearable></tp-datefield>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "autocomplete",
+      "description": "Native autocomplete hint.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "clearable",
+      "description": "Shows an embedded clear button while the field has a value.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the field and its action buttons.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "label",
+      "description": "Visible label associated with the native date input.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label-position",
+      "description": "Label position (`top`, `bottom`, `start`, or `end`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"top\""
+    },
+    {
+      "name": "max",
+      "description": "Latest selectable date in `YYYY-MM-DD` format.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "min",
+      "description": "Earliest selectable date in `YYYY-MM-DD` format.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "name",
+      "description": "Name submitted with the containing form; defaults to the initial inline content when omitted.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "placeholder",
+      "description": "Hint forwarded to the native input; browsers may ignore it for date and time controls.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "readonly",
+      "description": "Prevents value editing.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "required",
+      "description": "Marks the field as required.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "step",
+      "description": "Date interval in days.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1"
+    },
+    {
+      "name": "value",
+      "description": "Selected date in `YYYY-MM-DD` format.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "clear(): void",
+      "inherited": false,
+      "description": "Clears the selected date and emits `input`, `change`, and `tp-clear`."
+    },
+    {
+      "name": "focus(options?: FocusOptions): void",
+      "inherited": false,
+      "description": "Focuses the native date input."
+    },
+    {
+      "name": "showPicker(): void",
+      "inherited": false,
+      "description": "Opens the native date picker when supported by the browser."
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "description": "Emitted when the selected date is committed.",
+      "detail": "void"
+    },
+    {
+      "name": "input",
+      "description": "Emitted when the selected date changes while editing.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-clear",
+      "description": "Emitted after the embedded button clears the value.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-datefield-background",
+      "default": "var(--tp-paper-color)",
+      "description": "Controls the background."
+    },
+    {
+      "name": "--tp-datefield-border-color",
+      "default": "var(--tp-neutral-stroke-soft)",
+      "description": "Controls the border color."
+    },
+    {
+      "name": "--tp-datefield-focus-color",
+      "default": "var(--tp-brand-text-colorful)",
+      "description": "Controls the focus color."
+    },
+    {
+      "name": "--tp-datefield-inline-size",
+      "default": "12.5em",
+      "description": "Controls the inline size."
+    },
+    {
+      "name": "--tp-datefield-label-font-weight",
+      "default": "500",
+      "description": "Controls the label font weight."
+    },
+    {
+      "name": "--tp-datefield-label-gap",
+      "default": "0.35em",
+      "description": "Controls the label gap."
+    },
+    {
+      "name": "--tp-datefield-padding-block",
+      "default": "0.6em",
+      "description": "Controls the padding block."
+    },
+    {
+      "name": "--tp-datefield-padding-inline",
+      "default": "0.75em",
+      "description": "Controls the padding inline."
+    },
+    {
+      "name": "--tp-datefield-radius",
+      "default": "var(--tp-border-radius-sm)",
+      "description": "Controls the radius."
+    },
+    {
+      "name": "--tp-datefield-required-color",
+      "default": "var(--tp-danger-text-colorful)",
+      "description": "Controls the required color."
+    },
+    {
+      "name": "--tp-datefield-value-font-weight",
+      "default": "400",
+      "description": "Controls the value font weight."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Date field",
+    "introduction": "The custom `<tp-datefield>` element implements the <tp-icon name=\"datefield\" library=\"components\" size=\"1.25em\"></tp-icon> Date field functionality: native date field with labels, constraints, picker access, and clearing.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Type a date or use the browser's date picker. |\n| Using the component | The display follows your locale. |\n| Using the component | Use the clear control when available to remove the selected date. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Typing | Enter or edit the value using the field controls; read-only and disabled fields cannot be edited. |\n| Enter / Space on Clear | Activate the clear button when available. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

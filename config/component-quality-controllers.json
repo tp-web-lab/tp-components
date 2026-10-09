@@ -1,0 +1,10 @@
+{
+  "components": ["dir", "color", "fullscreen", "lang", "theme"],
+  "testFileCount": 5,
+  "targets": {
+    "lines": 90,
+    "statements": 90,
+    "functions": 90,
+    "branches": 80
+  }
+}

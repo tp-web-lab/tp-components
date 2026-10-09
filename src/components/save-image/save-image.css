@@ -1,0 +1,8 @@
+tp-save-image { display: inline-flex; vertical-align: middle; }
+tp-save-image > tp-icon-button { --tp-icon-button-size: 2rem; --tp-icon-button-icon-size: 1.15rem; }
+tp-save-image > tp-icon-button > button { border: 1px solid var(--tp-neutral-stroke-mid, #9ca3af); background: var(--tp-paper-color, #fff); }
+tp-save-image > tp-icon-button > button:hover { background: var(--tp-neutral-fill-soft, #e5e7eb); }
+tp-save-image > tp-dropdown { min-inline-size: 7rem; }
+tp-save-image > tp-dropdown > ul { margin: 0; padding: .25rem; list-style: none; }
+tp-save-image [data-format] { padding: .4rem .65rem; border-radius: var(--tp-border-radius-sm, .25rem); cursor: pointer; }
+tp-save-image [data-format]:is(:hover, :focus-visible) { background: var(--tp-neutral-fill-softer, #f3f4f6); outline: none; }

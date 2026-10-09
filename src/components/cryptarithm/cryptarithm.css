@@ -1,0 +1,39 @@
+tp-cryptarithm.tp-cryptarithm {
+  display: flow-root;
+  box-sizing: border-box;
+  color: var(--tp-fg, inherit);
+}
+
+.tp-cryptarithm-shell {
+  display: grid;
+  gap: 1rem;
+}
+
+.tp-cryptarithm-board {
+  display: grid;
+  gap: 0.75rem;
+  overflow: auto;
+}
+
+.tp-cryptarithm-status {
+  min-height: 1.25rem;
+}
+
+.tp-cryptarithm-status.success {
+  color: var(--tp-success, #1a7f37);
+}
+
+.tp-cryptarithm-status.info {
+  color: var(--tp-info, #0969da);
+}
+
+.tp-cryptarithm-error {
+  color: var(--tp-error, #d1242f);
+  font-weight: 600;
+}
+
+.tp-cryptarithm-shell button,
+.tp-cryptarithm-shell select,
+.tp-cryptarithm-shell input {
+  font: inherit;
+}

@@ -1,0 +1,70 @@
+{
+  "tagname": "tp-graph-analog-circuit",
+  "classname": "TpGraphAnalogCircuit",
+  "superclass": "TpGraphEditor",
+  "description": "Interactive analog-circuit editor and transient simulator.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-graph-analog-circuit></tp-graph-analog-circuit>"
+    }
+  ],
+  "attributes": [],
+  "methods": [
+    {
+      "name": "addEdge(source: string, target: string, type = TP_ANALOG_WIRE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = 'none', routing: TpGraphEdgeRouting = 'straight'): TpGraphEdge",
+      "inherited": false,
+      "description": "Adds edge."
+    },
+    {
+      "name": "addNode(type: string, point: TpGraphPoint, nodeLabel?: string): TpGraphNode",
+      "inherited": false,
+      "description": "Adds node."
+    },
+    {
+      "name": "rotateSelected(): void",
+      "inherited": false,
+      "description": "Rotate selected."
+    },
+    {
+      "name": "setGraph(graph: TpGraphDocument): void",
+      "inherited": false,
+      "description": "Sets graph."
+    },
+    {
+      "name": "simulate(duration?: number, step?: number): TpAnalogSimulation",
+      "inherited": false,
+      "description": "Simulate."
+    },
+    {
+      "name": "toggleSwitch(): void",
+      "inherited": false,
+      "description": "Toggles switch."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-analog-simulate",
+      "description": "Emitted when analog simulate occurs.",
+      "detail": "unknown"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-graph-editor",
+      "summary": "Extensible interactive graph editor."
+    },
+    {
+      "name": "tp-markdown",
+      "summary": "Markdown rendering component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Analog circuits",
+    "introduction": "The custom `<tp-graph-analog-circuit>` element implements the <tp-icon name=\"graph-analog-circuit\" library=\"components\" size=\"1.25em\"></tp-icon> Analog circuits functionality: interactive analog-circuit editor and transient simulator.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | The introductory circuit is an RC low-pass filter driven by a square-wave voltage source. |\n| Using the component | Its named `Vin` and `Vout` measurement points are the oscilloscope channels. |\n| Measurement | Drag **Measurement** from the **Annotations** palette onto any wire, then give it a label to add another channel. |\n| Run transient analysis | Press **Run transient analysis** to refresh the oscilloscope. |\n| Using the component | Wires merge connected terminals into electrical nodes, and every simulatable circuit needs a ground reference. |\n| Hub | A four-port **Hub** creates an electrical junction for clean branch layouts; all four ports share exactly the same potential. |\n| Using the component | The oscilloscope header provides independent time and voltage calibration controls. |\n| Using the component | The displayed values use `ms/div` and `V/div`; the center button restores both automatic scales. |\n| Using the component | Use the `V / A` selector in the oscilloscope header to display either node voltage or signed branch current at every named measurement point. |\n| Using the component | Current mode changes the legend and vertical scale to amperes. |\n| Using the component | A current point placed on a direct component wire uses the component terminal as its sign reference; a point on an electrically ambiguous junction branch reports zero until it is moved to a wire adjoining a component. |\n| Links | The **Links** palette provides straight and orthogonal wires without arrowheads. |\n| Using the component | Analog self-links are rejected because a component terminal cannot be wired back to the same component through a single editor link. |\n| Hub | The **Hub** is the single four-way equipotential junction used to lay out branches. |\n| Open or close selected switch | A switch can be open or closed; select it and use **Open or close selected switch** in the lower toolbar. |\n| Using the component | An open switch has a very high resistance, while a closed switch behaves as an ideal conductor. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

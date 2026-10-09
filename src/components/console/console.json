@@ -1,0 +1,284 @@
+{
+  "tagname": "tp-console",
+  "classname": "TpConsole",
+  "superclass": "TpBase",
+  "description": "Visual console for playground output.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-box data-intro-action=\"console\" data-allow-script>\n  <p>Inspect these example messages, then use Clear to empty the console.</p>\n  <tp-console></tp-console>\n  <p data-demo-status role=\"status\"></p>\n  <script src=\"/docs/components/_shared/introduction-actions.js\"></script>\n</tp-box>"
+    }
+  ],
+  "attributes": [],
+  "methods": [
+    {
+      "name": "addEntry(kind: TpConsoleEntryKind, values: TpConsoleValue[]): TpConsoleEntry",
+      "inherited": false,
+      "description": "Adds an entry to the console."
+    },
+    {
+      "name": "assert(condition: unknown, ...values: TpConsoleValue[]): void",
+      "inherited": false,
+      "description": "Writes an assertion failure."
+    },
+    {
+      "name": "clear(): void",
+      "inherited": false,
+      "description": "Removes all entries."
+    },
+    {
+      "name": "count(label = \"default\"): void",
+      "inherited": false,
+      "description": "Writes a counter value."
+    },
+    {
+      "name": "countReset(label = \"default\"): void",
+      "inherited": false,
+      "description": "Resets a counter."
+    },
+    {
+      "name": "error(...values: TpConsoleValue[]): void",
+      "inherited": false,
+      "description": "Writes an error entry."
+    },
+    {
+      "name": "getEntries(): TpConsoleEntry[]",
+      "inherited": false,
+      "description": "Returns a copy of the displayed entries."
+    },
+    {
+      "name": "getValue(): string",
+      "inherited": false,
+      "description": "Returns the text copied by the toolbar copy button."
+    },
+    {
+      "name": "group(...values: TpConsoleValue[]): void",
+      "inherited": false,
+      "description": "Starts an expanded group."
+    },
+    {
+      "name": "groupCollapsed(...values: TpConsoleValue[]): void",
+      "inherited": false,
+      "description": "Starts a collapsed group."
+    },
+    {
+      "name": "groupEnd(): void",
+      "inherited": false,
+      "description": "Ends the current group."
+    },
+    {
+      "name": "info(...values: TpConsoleValue[]): void",
+      "inherited": false,
+      "description": "Writes an informational entry."
+    },
+    {
+      "name": "log(...values: TpConsoleValue[]): void",
+      "inherited": false,
+      "description": "Writes a standard entry."
+    },
+    {
+      "name": "redirectConsoleToSelf(): () => void",
+      "inherited": false,
+      "description": "Redirects global console calls to this component."
+    },
+    {
+      "name": "restoreConsole(): void",
+      "inherited": false,
+      "description": "Restores the original global console methods."
+    },
+    {
+      "name": "table(...values: TpConsoleValue[]): void",
+      "inherited": false,
+      "description": "Writes tabular data."
+    },
+    {
+      "name": "time(label = \"default\"): void",
+      "inherited": false,
+      "description": "Starts a timer."
+    },
+    {
+      "name": "timeEnd(label = \"default\"): void",
+      "inherited": false,
+      "description": "Ends a timer."
+    },
+    {
+      "name": "timeLog(label = \"default\", ...values: TpConsoleValue[]): void",
+      "inherited": false,
+      "description": "Writes a timer value."
+    },
+    {
+      "name": "warn(...values: TpConsoleValue[]): void",
+      "inherited": false,
+      "description": "Writes a warning entry."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-console-clear",
+      "description": "Emitted when the console is cleared.",
+      "detail": "{ removedCount: number }"
+    },
+    {
+      "name": "tp-console-entry-add",
+      "description": "Emitted when an entry is added.",
+      "detail": "{ entry: TpConsoleEntry }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-console-bg",
+      "default": "#0d1117",
+      "description": "Console background."
+    },
+    {
+      "name": "--tp-console-bigint-color",
+      "default": "#bc8cff",
+      "description": "BigInt value color."
+    },
+    {
+      "name": "--tp-console-boolean-color",
+      "default": "#ffa657",
+      "description": "Boolean value color."
+    },
+    {
+      "name": "--tp-console-border",
+      "default": "#30363d",
+      "description": "Console border color."
+    },
+    {
+      "name": "--tp-console-circular-color",
+      "default": "#f2cc60",
+      "description": "Controls the circular color."
+    },
+    {
+      "name": "--tp-console-color",
+      "default": "#e6edf3",
+      "description": "Console text color."
+    },
+    {
+      "name": "--tp-console-date-color",
+      "default": "#7ee787",
+      "description": "Controls the date color."
+    },
+    {
+      "name": "--tp-console-depth",
+      "default": "0",
+      "description": "Controls the depth."
+    },
+    {
+      "name": "--tp-console-empty-color",
+      "default": "#8b949e",
+      "description": "Empty state text color."
+    },
+    {
+      "name": "--tp-console-entry-bg",
+      "default": "transparent",
+      "description": "Controls the entry bg."
+    },
+    {
+      "name": "--tp-console-entry-border",
+      "default": "#21262d",
+      "description": "Entry separator color."
+    },
+    {
+      "name": "--tp-console-error-color",
+      "default": "#ff7b72",
+      "description": "Controls the error color."
+    },
+    {
+      "name": "--tp-console-function-color",
+      "default": "#d2a8ff",
+      "description": "Controls the function color."
+    },
+    {
+      "name": "--tp-console-kind-accent",
+      "default": "#ff7b72",
+      "description": "Controls the kind accent."
+    },
+    {
+      "name": "--tp-console-nullish-color",
+      "default": "#8b949e",
+      "description": "Null and undefined value color."
+    },
+    {
+      "name": "--tp-console-number-color",
+      "default": "#79c0ff",
+      "description": "Number value color."
+    },
+    {
+      "name": "--tp-console-object-bg",
+      "default": "#11161d",
+      "description": "Object preview background."
+    },
+    {
+      "name": "--tp-console-object-border",
+      "default": "#30363d",
+      "description": "Object preview border color."
+    },
+    {
+      "name": "--tp-console-object-key-color",
+      "default": "#c9d1d9",
+      "description": "Object key color."
+    },
+    {
+      "name": "--tp-console-object-marker-color",
+      "default": "#8b949e",
+      "description": "Controls the object marker color."
+    },
+    {
+      "name": "--tp-console-object-panel-bg",
+      "default": "#0f141a",
+      "description": "Object tree panel background."
+    },
+    {
+      "name": "--tp-console-object-separator-color",
+      "default": "#8b949e",
+      "description": "Controls the object separator color."
+    },
+    {
+      "name": "--tp-console-object-summary-bg",
+      "default": "#161b22",
+      "description": "Controls the object summary bg."
+    },
+    {
+      "name": "--tp-console-object-summary-color",
+      "default": "#c9d1d9",
+      "description": "Object summary text color."
+    },
+    {
+      "name": "--tp-console-string-color",
+      "default": "#a5d6ff",
+      "description": "String value color."
+    },
+    {
+      "name": "--tp-console-time-color",
+      "default": "#8b949e",
+      "description": "Timestamp color."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-copy-code",
+      "summary": "Copy-to-clipboard button component."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-object-tree",
+      "summary": "Specialized tree for inspecting JavaScript values."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Console",
+    "introduction": "The custom `<tp-console>` element implements the <tp-icon name=\"console\" library=\"components\" size=\"1.25em\"></tp-icon> Console functionality: visual console for playground output.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Messages | Read output and errors. |\n| Structured values | Expand or collapse values to inspect their contents. |\n| Copy button | Copy the console text. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

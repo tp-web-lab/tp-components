@@ -1,0 +1,3 @@
+tp-formula-picker { display: inline-block; min-inline-size: 0; }
+tp-formula-picker label { display: flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; }
+tp-formula-picker select { box-sizing: border-box; min-block-size: 2rem; max-inline-size: 13rem; border: 1px solid var(--tp-neutral-stroke-soft); padding-inline: 0.4rem; background: var(--tp-paper-color); color: inherit; font: inherit; }

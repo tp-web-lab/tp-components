@@ -1,0 +1,18 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "@tp/tp-components API",
+  "entryPoints": [
+    "src/components",
+    "src/utilities/declarative-text-source.ts"
+  ],
+  "entryPointStrategy": "expand",
+  "tsconfig": "tsconfig.json",
+  "out": "public/api",
+  "exclude": ["**/*.test.ts", "**/*.browser.test.ts", "**/*.types.ts"],
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "plugin": ["./scripts/typedoc-summary-plugin.mjs"],
+  "customJs": "scripts/typedoc-html-examples.js",
+  "customCss": "scripts/typedoc.css",
+  "logLevel": "Error"
+}

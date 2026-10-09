@@ -1,0 +1,145 @@
+{
+  "tagname": "tp-post-it",
+  "classname": "TpPostIt",
+  "superclass": "TpBase",
+  "description": "displays a movable floating paper note that folds into a pushpin.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-box style=\"min-block-size: 20rem\">\n  <p>Drag the note by its header to move it over the page. The pin folds and opens it.</p>\n  <tp-post-it heading=\"Remember\">\n    <p>Keep examples <strong>simple and meaningful</strong>.</p>\n    <ul>\n      <li>Show a useful result.</li>\n      <li>Try the keyboard controls.</li>\n    </ul>\n  </tp-post-it>\n</tp-box>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "color",
+      "description": "Shared tp-color palette name without the tp- prefix; invalid values fall back to yellow.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"default\"|\"red\"|\"orange\"|\"amber\"|\"yellow\"|\"lime\"|\"green\"|\"emerald\"|\"teal\"|\"glaz\"|\"cyan\"|\"sky\"|\"blue\"|\"indigo\"|\"violet\"|\"purple\"|\"fuchsia\"|\"pink\"|\"rose\"|\"zinc\"|\"ivory\"|\"stone\"",
+      "default": "\"yellow\""
+    },
+    {
+      "name": "heading",
+      "description": "Optional plain-text heading above the preserved content.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "lite",
+      "description": "Folds the note into its pushpin; click the pin to expand or fold it again.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "opacity",
+      "description": "Opacity of the whole note, including its pin, clamped from 0 to 1; invalid or empty values use 1.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1"
+    },
+    {
+      "name": "rotation",
+      "description": "Paper rotation in degrees, clamped from -12 to 12; invalid values use 0.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "0"
+    }
+  ],
+  "methods": [
+    {
+      "name": "attachTo(element: Element, x: number, y: number, initial = false): void",
+      "inherited": false,
+      "description": "Restores a pin attachment using pixel offsets from the target's top-left corner."
+    },
+    {
+      "name": "moveTo(x: number, y: number): void",
+      "inherited": false,
+      "description": "Places the note in viewport pixels and attaches its pin to the underlying element."
+    },
+    {
+      "name": "resetPosition(): void",
+      "inherited": false,
+      "description": "Restores the loading position in the document without changing content or folded state."
+    },
+    {
+      "name": "toggle(): void",
+      "inherited": false,
+      "description": "Toggles the reflected lite attribute; the pin remains available in both states."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-post-it-move",
+      "description": "Emitted after a pointer or keyboard move, or a position reset; attachment exposes the target and offsets.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-post-it-toggle",
+      "description": "Emitted after the pin changes the folded state.",
+      "detail": "{ lite: boolean }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-post-it-padding",
+      "default": "0.75rem",
+      "description": "= 0.75rem Inner paper padding."
+    },
+    {
+      "name": "--tp-post-it-rotation",
+      "default": "0deg",
+      "description": "Controls the rotation."
+    },
+    {
+      "name": "--tp-post-it-width",
+      "default": "20rem",
+      "description": "= 20rem Preferred note width, limited by the available space."
+    },
+    {
+      "name": "--tp-post-it-x",
+      "default": "8px",
+      "description": "Controls the x."
+    },
+    {
+      "name": "--tp-post-it-y",
+      "default": "8px",
+      "description": "Controls the y."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-box",
+      "summary": "Simple box layout component."
+    },
+    {
+      "name": "tp-color",
+      "summary": "Brand color preset controller scoped to the containing element."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Post-it",
+    "introduction": "The custom `<tp-post-it>` element displays a movable floating paper note that folds into a pushpin.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Read the note and use any links or components inside it normally. |\n| Pushpin | Click to fold or open the note. In lite mode, drag the pin directly to move it without opening it; small movements under 4 pixels remain clicks. Its content is retained. |\n| Reset position | Return to the initial position captured when the file loaded, relative to the underlying document. Content and folded state are unchanged. |\n| Header | Drag anywhere on the header except its buttons, using a mouse, pen or touch. Pin and Reset keep their normal actions. In lite mode, drag the pin instead. |\n| Note surface | Read, select text or use controls without moving the note accidentally. The note does not block interaction with the rest of the page. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the pin, reset, header and interactive content in the expanded note. In lite mode, only the pin remains in keyboard navigation. |\n| Enter / Space | Activate the focused reset or pin button. Reset restores the initial document position; the pin folds or expands the note. |\n| Arrow keys on the header, or on the pin in lite mode | Move the note by 10 pixels. Hold Shift for 1-pixel steps. |\n| Escape during a drag | Cancel the movement and restore the starting position. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

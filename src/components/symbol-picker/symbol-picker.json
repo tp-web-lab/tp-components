@@ -1,0 +1,81 @@
+{
+  "tagname": "tp-symbol-picker",
+  "classname": "TpSymbolPicker",
+  "superclass": "TpBase",
+  "description": "HTML5 symbol picker.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-symbol-picker></tp-symbol-picker>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "compact",
+      "description": "Shows only the title, filters, and a compact 2em symbol grid.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "copy",
+      "description": "Clipboard format: `symbol`, `unicode`, `hexadecimal-html`, `decimal-html`, or `html-entity`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"symbol\""
+    },
+    {
+      "name": "filter",
+      "description": "Free-text filter applied to symbol names and metadata.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "group",
+      "description": "Active symbol group (`all` by default).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"all\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-symbol-picker-copy-error",
+      "description": "Emitted when the clipboard rejects a copy operation.",
+      "detail": "{ copy: unknown; value: string; error: unknown }"
+    },
+    {
+      "name": "tp-symbol-picker-select",
+      "description": "Emitted after a symbol is selected and copied.",
+      "detail": "{ copy: unknown; value: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-radio-list",
+      "summary": "Transforms a list into a group of radio buttons."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Symbol picker",
+    "introduction": "The custom `<tp-symbol-picker>` element implements the <tp-icon name=\"symbol-picker\" library=\"components\" size=\"1.25em\"></tp-icon> Symbol picker functionality: hTML5 symbol picker.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Browse or search the available items, then select one to copy it in the chosen format. |\n| Using the component | Use the displayed filters and format selector, when available, to narrow the list or change the copied representation. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

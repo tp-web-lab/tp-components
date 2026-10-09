@@ -1,0 +1,16 @@
+tp-frame {
+  --tp-frame-numerator: 16;
+  --tp-frame-denominator: 9;
+  align-items: center;
+  aspect-ratio: var(--tp-frame-numerator) / var(--tp-frame-denominator);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+tp-frame > img,
+tp-frame > video {
+  block-size: 100%;
+  inline-size: 100%;
+  object-fit: cover;
+}

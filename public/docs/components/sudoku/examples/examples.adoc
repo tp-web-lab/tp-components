@@ -1,0 +1,111 @@
+[tp-asciidoc-viewer%allow-script,label="tp-sudoku"]
+=========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-sudoku]
+====
+. 39465!7!1!8!2
+
+. 2!85913!4!67
+
+. 6!718!4!2395
+
+. 7!2!63!8!95!41!
+
+. 4!38!5612!79!
+
+. 159!27483!6!
+
+. 8674!2!5!913!
+
+. 9127!38654!
+
+. 54!3!1!9!6728
+====
+======
+
+.Attributes
+========
+Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+
+[tp-stack]
+======
+[tp-cluster]
+=====
+[tp-textfield%value%placeholder%clearable,data-setting="puzzle",label="puzzle"]
+====
+====
+=====
+
+[tp-button-group]
+=====
+[tp-button,id="attributes-reset",type="button"]
+====
+Reset defaults
+====
+
+[tp-button,id="attributes-reload",type="button"]
+====
+Reload preview
+====
+=====
+======
+
+[tp-divider]
+====
+====
+
+[h3]
+====
+Preview
+====
+
+[tp-iframe,id="attributes-frame",title="sudoku attribute preview",style="height: 24rem; display: flow-root; inline-size: auto;"]
+====
+====
+
+[tp-callout,id="attributes-status",variant="info",heading="Preview status"]
+====
+Preparing the preview…
+====
+
+[script,type="module",src="/docs/components/sudoku/examples/attributes.js"]
+====
+====
+========
+
+.sudoku ⭐⭐
+======
+[tp-sudoku]
+=====
+. 837!45!92!1!6!
+. 5!2!6!7!13498
+. 9!41826537
+. 6!7498!5!32!1!
+. 2!8364!1759!
+. 1!5!92!3!7684!
+. 3921648!75!
+. 415378!9!6!2!
+. 7!6!8!59!21!43
+=====
+======
+
+.sudoku ⭐⭐⭐
+======
+[tp-sudoku]
+=====
+. 34!2!9!567!81!
+. 765481923
+. 8!912374!5!6
+. 4!5!67!1329!8!
+. 93!762!8!145
+. 12!859!4367
+. 6!1!487!9532!
+. 579!367814
+. 28!3145!679!
+=====
+======
+----
+=========

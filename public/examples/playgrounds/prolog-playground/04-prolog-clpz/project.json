@@ -1,0 +1,7 @@
+{
+  "id": "04-prolog-clpz",
+  "label": "Prolog constraints",
+  "name": "Prolog constraints",
+  "entry": "/program.pl",
+  "query": "/query.pl"
+}

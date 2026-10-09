@@ -1,0 +1,59 @@
+{
+  "tagname": "tp-grid",
+  "classname": "TpGrid",
+  "superclass": "TpBase",
+  "description": "Creates an auto-fit responsive grid with configurable minimum column width and gap.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-grid></tp-grid>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "gap",
+      "description": "Gap between grid cells. When absent, uses the --tp-grid-gap CSS default.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1rem\""
+    },
+    {
+      "name": "min-width",
+      "description": "Minimum column width used by the responsive grid template, limited to the available container width. When absent, uses the --tp-grid-min-width CSS default.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"250px\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-grid-gap",
+      "default": "1rem",
+      "description": "Default gap between grid cells."
+    },
+    {
+      "name": "--tp-grid-min-width",
+      "default": "250px",
+      "description": "Default minimum column width."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Grid",
+    "introduction": "The custom `<tp-grid>` element implements the <tp-icon name=\"grid\" library=\"components\" size=\"1.25em\"></tp-icon> Grid functionality: creates an auto-fit responsive grid with configurable minimum column width and gap.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

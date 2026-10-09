@@ -1,0 +1,133 @@
+{
+  "tagname": "tp-speech-to-text",
+  "classname": "TpSpeechToText",
+  "superclass": "TpBase",
+  "description": "transcribes microphone speech into editable text using the Web Speech API.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-speech-to-text lang=\"en-US\" interim-results></tp-speech-to-text>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "continuous",
+      "description": "Requests multiple recognition results in one session.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "disabled",
+      "description": "Disables editing and recognition and stops any active session.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "interim-results",
+      "description": "Displays provisional recognition separately from the final transcript.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "value",
+      "description": "Final transcript, editable without microphone access.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "abort(): void",
+      "inherited": false,
+      "description": "Cancels recognition, discarding provisional text but retaining final text."
+    },
+    {
+      "name": "clear(): void",
+      "inherited": false,
+      "description": "Clears the transcript after cancelling active recognition."
+    },
+    {
+      "name": "start(): void",
+      "inherited": false,
+      "description": "Starts recognition after an explicit user action; never retries automatically."
+    },
+    {
+      "name": "stop(): void",
+      "inherited": false,
+      "description": "Stops listening while allowing the browser to deliver a final result."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-speech-to-text-end",
+      "description": "Emitted when recognition ends or is aborted.",
+      "detail": "{ value: string }"
+    },
+    {
+      "name": "tp-speech-to-text-error",
+      "description": "Emitted when recognition fails or is unavailable.",
+      "detail": "{ error: string }"
+    },
+    {
+      "name": "tp-speech-to-text-result",
+      "description": "Emitted when recognition updates its transcript.",
+      "detail": "{ value: string; interim: string }"
+    },
+    {
+      "name": "tp-speech-to-text-start",
+      "description": "Emitted when recognition starts listening.",
+      "detail": "{ value: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-button-group",
+      "summary": "Button group component for organizing multiple buttons."
+    },
+    {
+      "name": "tp-stack",
+      "summary": "Vertical stack layout component."
+    },
+    {
+      "name": "tp-textfield",
+      "summary": "Single-line and automatically growing multiline text field."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Speech to text",
+    "introduction": "The custom **`<tp-speech-to-text>`** element implements the speech-to-text functionality: transcribes microphone speech into editable text using the Web Speech API.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Start | Request microphone access and begin listening. |\n| Stop | Stop listening and let the browser finalize the transcript. |\n| Clear | Cancel listening and remove the transcript. |\n| Transcript | Click to edit finalized text. Provisional text may change while you speak. |\n| Status | Read permission or service errors. Recognition depends on the browser and may send audio to an online service. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Typing in the transcript | Edit the recognized text. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Tab / Shift+Tab",
+        "description": "Moves between playback controls and the transcript field."
+      },
+      {
+        "key": "Enter / Space",
+        "description": "Activates a focused button."
+      }
+    ]
+  }
+}

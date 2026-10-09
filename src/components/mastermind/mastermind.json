@@ -1,0 +1,69 @@
+{
+  "tagname": "tp-mastermind",
+  "classname": "TpMastermind",
+  "superclass": "TpBase",
+  "description": "Displays an interactive Mastermind game.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-mastermind></tp-mastermind>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "attempts",
+      "description": "Maximum number of guesses.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "10"
+    },
+    {
+      "name": "colors",
+      "description": "Available colors separated by spaces or commas.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"red blue green yellow orange purple\""
+    },
+    {
+      "name": "solution",
+      "description": "Secret color sequence separated by spaces or commas.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-chronometer",
+      "summary": "Chronometer component with play, pause and stop controls."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Mastermind",
+    "introduction": "The custom `<tp-mastermind>` element implements the <tp-icon name=\"mastermind\" library=\"components\" size=\"1.25em\"></tp-icon> Mastermind functionality: displays an interactive Mastermind game.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Choose colors for an attempt and check it. |\n| Using the component | Exact matches and misplaced colors help you refine the next attempt. |\n| Using the component | Use Undo or Redo to revisit changes, assistance for help, and the reset button to start with another code. |\n| Color | Selects the color used for the next peg. |\n| Play | Submits the current guess. |\n| :tp-icon:{name=\"undo\" size=\"1.25em\"} :tp-icon:{name=\"redo\" size=\"1.25em\"} Undo / Redo | Navigates changes made to the current game. |\n| :tp-icon:{name=\"refresh\" size=\"1.25em\"} Reset | Starts a game with a newly generated secret code. |\n| Reset the game | Restarts while retaining the current secret code. |\n| Show next peg | Reveals the next peg of the secret code. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

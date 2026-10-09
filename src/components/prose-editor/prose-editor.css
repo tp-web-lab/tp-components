@@ -1,0 +1,619 @@
+tp-prose-editor {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--tp-color-border, color-mix(in srgb, currentColor 18%, transparent));
+  border-radius: var(--tp-radius-m, 0.375rem);
+  background: var(--tp-color-surface, Canvas);
+  color: var(--tp-color-text, CanvasText);
+}
+
+tp-prose-editor[readonly] {
+  background: var(--tp-color-surface-muted, color-mix(in srgb, Canvas 94%, CanvasText));
+}
+
+tp-prose-editor > tp-toolbar[data-tp-prose-editor-toolbar],
+tp-prose-editor > tp-toolbar[data-tp-prose-editor-secondary-toolbar] {
+  position: static;
+  z-index: auto;
+  overflow-x: auto;
+  flex-wrap: wrap;
+  border-block-end: 1px solid var(--tp-color-border, color-mix(in srgb, currentColor 18%, transparent));
+  background: var(--tp-color-surface-raised, color-mix(in srgb, Canvas 96%, CanvasText));
+  --tp-toolbar-padding: 0.375rem;
+  --tp-toolbar-size: auto;
+  --tp-icon-button-size: 2rem;
+}
+
+tp-prose-editor > tp-toolbar[data-tp-prose-editor-secondary-toolbar] {
+  padding-block: 0.25rem;
+}
+
+tp-prose-editor > tp-toolbar[data-tp-prose-editor-secondary-toolbar][hidden] {
+  display: none;
+}
+
+tp-prose-editor tp-dropdown[data-tp-prose-editor-emoji-picker-dropdown],
+tp-prose-editor tp-dropdown[data-tp-prose-editor-icon-picker-dropdown],
+tp-prose-editor tp-dropdown[data-tp-prose-editor-symbol-picker-dropdown] {
+  inline-size: min(30rem, calc(100vw - 2rem));
+  max-inline-size: calc(100vw - 2rem);
+  padding: 0.5rem;
+}
+
+tp-prose-editor tp-dropdown[data-tp-prose-editor-emoji-picker-dropdown] > tp-emoji-picker,
+tp-prose-editor tp-dropdown[data-tp-prose-editor-icon-picker-dropdown] > tp-icon-picker,
+tp-prose-editor tp-dropdown[data-tp-prose-editor-symbol-picker-dropdown] > tp-symbol-picker {
+  inline-size: 100%;
+  box-sizing: border-box;
+}
+
+tp-prose-editor[readonly] > tp-toolbar[data-tp-prose-editor-toolbar],
+tp-prose-editor[readonly] > tp-toolbar[data-tp-prose-editor-secondary-toolbar] {
+  display: none;
+}
+
+tp-prose-editor tp-icon-button[aria-pressed="true"] > button {
+  background: var(--tp-color-accent-soft, color-mix(in srgb, Highlight 14%, transparent));
+  color: var(--tp-color-accent, Highlight);
+}
+
+tp-prose-editor [data-tp-prose-editor-separator] {
+  inline-size: 1px;
+  align-self: stretch;
+  margin-inline: 0.125rem;
+  background: color-mix(in srgb, CanvasText 22%, Canvas);
+}
+
+tp-prose-editor > tp-toolbar > [data-toolbar-start]:not(:empty) + [data-toolbar-center]:not(:empty),
+tp-prose-editor > tp-toolbar > [data-toolbar-center]:not(:empty) + [data-toolbar-end]:not(:empty),
+tp-prose-editor > tp-toolbar > [data-toolbar-start]:not(:empty) + [data-toolbar-end]:not(:empty) {
+  border-inline-start-color: color-mix(in srgb, CanvasText 22%, Canvas);
+}
+
+tp-prose-editor [data-tp-prose-editor-search-control] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+tp-prose-editor [data-tp-prose-editor-search-control][hidden] {
+  display: none;
+}
+
+tp-prose-editor [data-tp-prose-editor-search-input] {
+  box-sizing: border-box;
+  inline-size: min(14rem, 42vw);
+  min-inline-size: 7rem;
+  block-size: 1.75rem;
+  padding-inline: 0.5rem 1.875rem;
+  border: 1px solid var(--tp-color-border, color-mix(in srgb, currentColor 18%, transparent));
+  border-radius: var(--tp-radius-s, 0.25rem);
+  background: var(--tp-color-surface, Canvas);
+  color: inherit;
+  font: inherit;
+  font-size: 0.8125rem;
+  line-height: 1;
+}
+
+tp-prose-editor [data-tp-prose-editor-search-clear] {
+  position: absolute;
+  z-index: 1;
+  inset-inline-end: 0.125rem;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  --tp-icon-button-size: 1.5rem;
+  --tp-icon-button-icon-size: 0.875rem;
+}
+
+tp-prose-editor [data-tp-prose-editor-search-input]:focus-visible {
+  outline: 2px solid var(--tp-color-focus, Highlight);
+  outline-offset: 2px;
+}
+
+tp-prose-editor .tp-prose-editor-math-inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+tp-prose-editor .tp-prose-editor-math-block {
+  display: block;
+  margin-block: 1rem;
+  overflow-x: auto;
+  text-align: center;
+}
+
+tp-prose-editor .tp-prose-editor-math-inline svg,
+tp-prose-editor .tp-prose-editor-math-block svg,
+tp-prose-editor .tp-prose-editor-math-inline mjx-container > svg,
+tp-prose-editor .tp-prose-editor-math-block mjx-container > svg {
+  display: inline-block;
+  max-width: none;
+  max-inline-size: none;
+}
+
+tp-prose-editor [data-tp-prose-editor-file-menu],
+tp-prose-editor [data-tp-prose-editor-menu] {
+  box-sizing: border-box;
+  inline-size: max-content;
+  min-inline-size: 10rem;
+  max-inline-size: calc(100vw - 2rem);
+  max-block-size: min(24rem, calc(100vh - 4rem));
+  overflow: auto;
+  border: 0;
+  border-radius: 0;
+}
+
+tp-prose-editor tp-dropdown[data-tp-prose-editor-type-dropdown],
+tp-prose-editor [data-tp-prose-editor-menu][data-menu-kind="type"] {
+  overflow: visible !important;
+}
+
+tp-prose-editor [data-tp-prose-editor-menu][data-menu-kind="type"] {
+  max-block-size: none;
+}
+
+tp-prose-editor [data-tp-prose-editor-menu][data-menu-kind="type"] ul[data-tp-menu-submenu] {
+  z-index: 10002;
+}
+
+tp-prose-editor [data-tp-prose-editor-table-menu] {
+  box-sizing: border-box;
+  inline-size: max-content;
+  min-inline-size: 10rem;
+  max-inline-size: calc(100vw - 2rem);
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+
+tp-prose-editor [data-tp-prose-editor-table-menu] ul,
+tp-prose-editor [data-tp-prose-editor-table-menu] li {
+  list-style: none;
+  margin: 0;
+  padding-inline-start: 0;
+}
+
+tp-prose-editor tp-menu li[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+tp-prose-editor [data-tp-prose-editor-menu-label] {
+  display: inline-grid;
+  grid-template-columns: 1.25rem max-content;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+tp-prose-editor [data-tp-prose-editor-menu-label] > tp-icon {
+  display: inline-grid;
+  place-items: center;
+  font-size: 1.125rem;
+}
+
+tp-prose-editor tp-menu li[aria-expanded="true"] > ul[data-tp-prose-editor-horizontal-submenu] {
+  display: flex;
+  gap: 0.125rem;
+  align-items: center;
+}
+
+tp-prose-editor tp-menu ul[data-tp-prose-editor-horizontal-submenu] > li[role="menuitem"] {
+  display: grid;
+  place-items: center;
+  min-inline-size: 2rem;
+  padding: 0.35rem;
+  text-align: center;
+}
+
+tp-prose-editor [data-table-picker] {
+  position: relative;
+}
+
+tp-prose-editor tp-menu li[aria-expanded="true"] > ul[data-tp-prose-editor-table-picker-submenu] {
+  display: block;
+}
+
+tp-prose-editor ul[data-tp-prose-editor-table-picker-submenu],
+tp-prose-editor ul[data-tp-prose-editor-table-picker-submenu] > li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+tp-prose-editor [data-table-picker-content][role="menuitem"] {
+  cursor: default;
+}
+
+tp-prose-editor [data-table-picker-content][role="menuitem"]:hover {
+  background: transparent;
+  color: inherit;
+}
+
+tp-prose-editor [data-table-picker-content] [data-tp-prose-editor-table-picker] {
+  display: grid;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5rem 0.5rem;
+}
+
+tp-prose-editor [data-tp-prose-editor-table-picker-size] {
+  font-size: 0.8125rem;
+  color: var(--tp-color-text-muted, color-mix(in srgb, currentColor 72%, transparent));
+  text-align: center;
+}
+
+tp-prose-editor [data-tp-prose-editor-table-picker-grid] {
+  display: grid;
+  grid-template-columns: repeat(6, 0.75rem);
+  gap: 0.1875rem;
+}
+
+tp-prose-editor [data-table-grid-cell] {
+  appearance: none;
+  box-sizing: border-box;
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  min-block-size: 0;
+  min-height: 0;
+  min-inline-size: 0;
+  aspect-ratio: 1;
+  padding: 0;
+  line-height: 0;
+  border: 1px solid var(--tp-color-border, color-mix(in srgb, currentColor 22%, transparent));
+  border-radius: 0.125rem;
+  background: var(--tp-color-surface, Canvas);
+  color: inherit;
+  cursor: pointer;
+}
+
+tp-prose-editor [data-table-grid-cell][data-selected] {
+  border-color: var(--tp-color-accent, Highlight);
+  background: var(--tp-color-accent-soft, color-mix(in srgb, Highlight 18%, transparent));
+}
+
+tp-prose-editor [data-table-grid-cell]:focus-visible {
+  outline: 2px solid var(--tp-color-focus, Highlight);
+  outline-offset: 2px;
+}
+
+tp-prose-editor > [data-tp-prose-editor-surface],
+tp-prose-editor > [data-tp-prose-editor-html-rendered] {
+  min-block-size: 12rem;
+}
+
+tp-prose-editor > [data-tp-prose-editor-html-rendered] {
+  box-sizing: border-box;
+  padding: 0.875rem 1rem;
+  outline: none;
+  background: var(--tp-color-surface, Canvas);
+  color: inherit;
+}
+
+tp-prose-editor > [data-tp-prose-editor-html-rendered][hidden] {
+  display: none;
+}
+
+tp-prose-editor > [data-tp-prose-editor-html-source] {
+  box-sizing: border-box;
+  display: block;
+  inline-size: 100%;
+  min-block-size: 12rem;
+  padding: 0.875rem 1rem;
+  border: 0;
+  outline: none;
+  resize: vertical;
+  background: var(--tp-color-surface, Canvas);
+  color: inherit;
+  font: 0.875rem/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  white-space: pre;
+  tab-size: 2;
+}
+
+tp-prose-editor > [data-tp-prose-editor-html-source][hidden] {
+  display: none;
+}
+
+tp-prose-editor .ProseMirror {
+  position: relative;
+  box-sizing: border-box;
+  min-block-size: 12rem;
+  padding: 0.875rem 1rem;
+  outline: none;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+tp-prose-editor .ProseMirror[data-tp-prose-editor-empty]::before {
+  position: absolute;
+  inset-block-start: 0.875rem;
+  inset-inline-start: 1rem;
+  color: color-mix(in srgb, currentColor 45%, transparent);
+  content: attr(data-placeholder);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-custom-element] {
+  white-space: normal;
+}
+
+/* Keep the caret on the text baseline when an inline icon ends a line. */
+tp-prose-editor .ProseMirror tp-icon {
+  display: inline-flex;
+  block-size: var(--tp-icon-size, 1em);
+  line-height: inherit;
+  vertical-align: -0.125em;
+}
+
+tp-prose-editor .ProseMirror tp-icon > [data-tp-icon-container] {
+  block-size: 100%;
+  min-block-size: 0;
+}
+
+tp-prose-editor .ProseMirror > *:first-child {
+  margin-block-start: 0;
+}
+
+tp-prose-editor .ProseMirror > *:last-child {
+  margin-block-end: 0;
+}
+
+tp-prose-editor .ProseMirror p,
+tp-prose-editor .ProseMirror blockquote,
+tp-prose-editor .ProseMirror ul,
+tp-prose-editor .ProseMirror ol {
+  margin-block: 0 0.5rem;
+}
+
+tp-prose-editor .ProseMirror ul,
+tp-prose-editor .ProseMirror ol {
+  padding-inline-start: 1.5rem;
+}
+
+tp-prose-editor .ProseMirror hr {
+  border: 0;
+  border-block-start: 1px solid var(--tp-color-border, color-mix(in srgb, currentColor 18%, transparent));
+  margin-block: 1rem;
+}
+
+tp-prose-editor .ProseMirror figure:has(> img),
+tp-prose-editor .ProseMirror figure:has(> video),
+tp-prose-editor .ProseMirror figure:has(> audio) {
+  display: inline-block;
+  max-inline-size: 100%;
+  margin: 1rem 0;
+  padding: 0;
+  background: transparent;
+}
+
+tp-prose-editor .ProseMirror figure:has(> img) > img,
+tp-prose-editor .ProseMirror figure:has(> video) > video,
+tp-prose-editor .ProseMirror figure:has(> audio) > audio {
+  display: block;
+  max-inline-size: 100%;
+}
+
+tp-prose-editor .ProseMirror figure:has(> img) > figcaption,
+tp-prose-editor .ProseMirror figure:has(> video) > figcaption,
+tp-prose-editor .ProseMirror figure:has(> audio) > figcaption {
+  margin-block-start: 0.375rem;
+  color: var(--tp-color-text-muted, color-mix(in srgb, currentColor 72%, transparent));
+  font-size: 0.875rem;
+  line-height: 1.35;
+  text-align: center;
+}
+
+tp-prose-editor .ProseMirror audio {
+  margin-block-end: 0;
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-audio-button] {
+  display: inline-flex;
+  align-items: center;
+}
+
+tp-prose-editor .ProseMirror h1,
+tp-prose-editor .ProseMirror h2 {
+  margin-block: 1rem 0.5rem;
+  line-height: 1.2;
+}
+
+tp-prose-editor .ProseMirror h1 {
+  font-size: 1.75rem;
+}
+
+tp-prose-editor .ProseMirror h2 {
+  font-size: 1.375rem;
+}
+
+tp-prose-editor .ProseMirror blockquote {
+  margin-inline: 0;
+  padding-inline-start: 1rem;
+  border-inline-start: 0.25rem solid var(--tp-color-border-strong, color-mix(in srgb, currentColor 32%, transparent));
+  color: var(--tp-color-text-muted, color-mix(in srgb, currentColor 72%, transparent));
+}
+
+tp-prose-editor .ProseMirror code {
+  padding: 0.08em 0.3em;
+  border-radius: var(--tp-radius-s, 0.25rem);
+  background: var(--tp-color-code-background, color-mix(in srgb, currentColor 10%, transparent));
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.9em;
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-code-block-editor] {
+  display: grid;
+  gap: 0.5rem;
+  margin-block: 1rem;
+  padding: 0.5rem;
+  border: 1px solid var(--tp-color-border, color-mix(in srgb, currentColor 18%, transparent));
+  border-radius: var(--tp-radius-m, 0.375rem);
+  background: var(--tp-color-surface-raised, color-mix(in srgb, Canvas 96%, CanvasText));
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-code-block-toolbar] {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  white-space: normal;
+}
+
+tp-prose-editor [data-tp-prose-editor-code-menu] {
+  --tp-menu-gap: 0;
+  box-sizing: border-box;
+  inline-size: max-content;
+  min-inline-size: 9rem;
+  max-inline-size: calc(100vw - 2rem);
+  max-block-size: min(20rem, calc(100vh - 4rem));
+  margin: 0;
+  overflow: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  white-space: normal;
+}
+
+tp-prose-editor [data-tp-prose-editor-code-file-dropdown],
+tp-prose-editor [data-tp-prose-editor-code-language-dropdown] {
+  --tp-dropdown-gap: 0;
+  --tp-dropdown-padding: 0;
+  margin: 0;
+  padding: 0;
+  white-space: normal;
+}
+
+tp-prose-editor [data-tp-prose-editor-code-menu] ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+tp-prose-editor [data-tp-prose-editor-code-menu] li {
+  list-style: none;
+  margin: 0;
+  padding-block: 0;
+  padding-inline-start: 0;
+}
+
+tp-prose-editor [data-tp-prose-editor-code-menu] > ul[role="menu"] {
+  gap: 0;
+}
+
+tp-prose-editor [data-tp-prose-editor-code-menu] > ul[role="menu"] > li[role="menuitem"] {
+  padding-block: 0;
+  padding-inline: 0.5rem;
+}
+
+tp-prose-editor [data-tp-prose-editor-code-menu] li[data-selected] {
+  font-weight: 600;
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-block-editor] {
+  display: grid;
+  gap: 0.75rem;
+  margin-block: 1rem;
+  padding: 0.75rem;
+  border: 1px solid var(--tp-color-border, color-mix(in srgb, currentColor 18%, transparent));
+  border-radius: var(--tp-radius-m, 0.375rem);
+  background: var(--tp-color-surface-raised, color-mix(in srgb, Canvas 96%, CanvasText));
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-block-header] {
+  display: flex;
+  justify-content: flex-end;
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-block-modes] {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--tp-color-border, color-mix(in srgb, currentColor 18%, transparent));
+  border-radius: var(--tp-radius-s, 0.25rem);
+  background: var(--tp-color-surface, Canvas);
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-block-modes] > tp-icon-button {
+  border-inline-start: 1px solid var(--tp-color-border, color-mix(in srgb, currentColor 18%, transparent));
+  color: inherit;
+  --tp-icon-button-radius: 0;
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-block-modes] > tp-icon-button:first-child {
+  border-inline-start: 0;
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-block-modes] > tp-icon-button[aria-pressed="true"] > button {
+  background: var(--tp-color-accent-soft, color-mix(in srgb, Highlight 14%, transparent));
+  color: var(--tp-color-accent, Highlight);
+}
+
+tp-prose-editor .ProseMirror tp-code-editor[data-tp-prose-editor-markdown-source][hidden],
+tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-preview][hidden] {
+  display: none;
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-preview] {
+  min-block-size: 2rem;
+  padding-block-start: 0.75rem;
+  border-block-start: 1px solid var(--tp-color-border, color-mix(in srgb, currentColor 18%, transparent));
+  white-space: normal;
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-block-editor][data-view-mode="preview"] [data-tp-prose-editor-markdown-preview] {
+  padding-block-start: 0;
+  border-block-start: 0;
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-preview] > :first-child {
+  margin-block-start: 0;
+}
+
+tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-preview] > :last-child {
+  margin-block-end: 0;
+}
+
+tp-prose-editor .ProseMirror table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  inline-size: 100%;
+  margin-block: 1rem;
+}
+
+tp-prose-editor .ProseMirror td,
+tp-prose-editor .ProseMirror th {
+  position: relative;
+  min-inline-size: 1rem;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--tp-color-border, color-mix(in srgb, currentColor 18%, transparent));
+  vertical-align: top;
+}
+
+tp-prose-editor .ProseMirror .selectedCell::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  content: "";
+  background: color-mix(in srgb, Highlight 18%, transparent);
+}
+
+tp-prose-editor .ProseMirror .column-resize-handle {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: -2px;
+  inline-size: 4px;
+  z-index: 20;
+  background: Highlight;
+  pointer-events: none;
+}
+
+tp-prose-editor .ProseMirror.resize-cursor {
+  cursor: col-resize;
+}
+
+tp-prose-editor .ProseMirror-search-match {
+  background: color-mix(in srgb, Mark 65%, transparent);
+}
+
+tp-prose-editor .ProseMirror-active-search-match {
+  background: color-mix(in srgb, Highlight 45%, transparent);
+  outline: 1px solid Highlight;
+}

@@ -1,0 +1,6 @@
+tp-filesystem {
+  display: block;
+  font-family: var(--tp-font-family, system-ui, sans-serif);
+  font-size: var(--tp-font-size, 1rem);
+  line-height: var(--tp-line-height, 1.5);
+}

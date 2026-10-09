@@ -1,0 +1,96 @@
+{
+  "tagname": "tp-math",
+  "classname": "TpMath",
+  "superclass": "TpBase",
+  "description": "renders LaTeX or AsciiMath expressions as inline or display-style SVG.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<p>The identity <tp-math value=\"a^2 + b^2 = c^2\" label=\"a squared plus b squared equals c squared\"></tp-math> describes a right triangle.</p>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "displaystyle",
+      "description": "Uses display-style mathematics in a centered block instead of inline mathematics.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "label",
+      "description": "Accessible description of the formula; defaults to its source text.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "mode",
+      "description": "Mathematical input notation.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"latexmath\" | \"asciimath\"",
+      "default": "\"latexmath\""
+    },
+    {
+      "name": "src",
+      "description": "Expression file; takes precedence over value and inline content.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "value",
+      "description": "Expression without surrounding math delimiters.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-math-error",
+      "description": "Emitted when loading or rendering the current expression fails.",
+      "detail": "{ message: string }"
+    },
+    {
+      "name": "tp-math-rendered",
+      "description": "Emitted after the current expression is rendered successfully.",
+      "detail": "{ value: string; mode: TpMathMode; displaystyle: boolean }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-callout",
+      "summary": "Callout component for highlighted contextual content."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-markdown",
+      "url": "https://www.npmjs.com/package/@tp/tp-markdown",
+      "summary": "Markdown parsing and rendering."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Math",
+    "introduction": "The custom `<tp-math>` element implements the Math functionality: renders LaTeX or AsciiMath expressions as inline or display-style SVG.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Formula | Read the rendered expression. There are no component-specific buttons or editing controls. |\n| Wide display formula | Scroll horizontally when the expression exceeds the available width. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Formula | No component-specific keyboard interaction; the expression is not an editable field. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

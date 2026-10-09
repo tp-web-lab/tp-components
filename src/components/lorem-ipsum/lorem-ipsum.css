@@ -1,0 +1,7 @@
+tp-lorem-ipsum {
+	display: flow-root;
+	min-inline-size: 0;
+}
+tp-lorem-ipsum:is([type="sentence"], [type="title"]) {
+	display: inline;
+}

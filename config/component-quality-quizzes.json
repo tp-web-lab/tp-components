@@ -1,0 +1,24 @@
+{
+  "components": [
+    "fill-blank-question",
+    "javascript-playground-question",
+    "javascript-viewer-question",
+    "matching-question",
+    "multi-choice-question",
+    "playground-question",
+    "prolog-playground-question",
+    "prolog-viewer-question",
+    "python-playground-question",
+    "python-viewer-question",
+    "single-choice-question",
+    "typescript-playground-question",
+    "typescript-viewer-question"
+  ],
+  "testFileCount": 16,
+  "targets": {
+    "lines": 90,
+    "statements": 90,
+    "functions": 90,
+    "branches": 80
+  }
+}

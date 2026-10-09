@@ -1,0 +1,12 @@
+tp-graph-query-tree { display: block; }
+.tp-query-relation { fill: var(--tp-neutral-fill-soft); stroke: var(--tp-neutral-text-colorful); }
+.tp-query-operator { fill: var(--tp-paper-color); stroke: var(--tp-brand-stroke-mid); }
+.tp-query-symbol { fill: var(--tp-text-body); font: 600 16px system-ui, sans-serif; pointer-events: none; }
+.tp-query-detail { fill: var(--tp-neutral-text-colorful); font: 11px system-ui, sans-serif; pointer-events: none; }
+.tp-query-parameter { display: inline-flex; align-items: center; gap: .3rem; white-space: nowrap; }
+.tp-query-parameter[hidden] { display: none; }
+.tp-query-parameter :is(input, select) { box-sizing: border-box; width: 8rem; min-height: 1.8rem; border: 1px solid var(--tp-neutral-stroke-soft); border-radius: .35rem; color: inherit; background: var(--tp-paper-color); }
+.tp-query-expression input { width: min(24rem, 32vw); }
+.tp-query-sql pre { margin: 0; overflow: auto; color: var(--tp-text-body); background: var(--tp-neutral-fill-softer); border-radius: .4rem; padding: .75rem; }
+.tp-query-sql code { font: .86rem/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; }
+.tp-query-error { color: var(--tp-danger-text-colorful); }

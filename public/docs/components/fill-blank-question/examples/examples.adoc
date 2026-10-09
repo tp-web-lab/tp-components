@@ -1,0 +1,216 @@
+[tp-asciidoc-viewer%allow-script,label="tp-fill-blank-question"]
+=========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-fill-blank-question%case-sensitive]
+====
+Answers::
++
+. Paris
+
+. Rome
+
+Title::
++
+Geography
+
+Prompt::
++
+Complete both sentences.
+
+Form::
++
+The capital of France is [tp-textfield,clearable,name="france-capital",placeholder="Capital",aria-label="Capital of France"]#france-capital#.
++
+The capital of Italy is [tp-textfield,clearable,name="italy-capital",placeholder="Capital",aria-label="Capital of Italy"]#italy-capital#.
+
+Feedback::
++
+Check the spelling of each capital.
++
+* The capital of France is home to the Eiffel Tower.
+
+* The capital of Italy is home to the Colosseum.
+
+Solution::
++
+The capital of France is Paris. The capital of Italy is Rome.
+====
+======
+
+.Attributes
+========
+Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+
+[tp-stack]
+======
+[tp-checkbox-list%value,id="attributes-booleans",label="Boolean attributes",label-position="top",orientation="horizontal"]
+====
+* case-sensitive
+
+* closed
+
+* partial
+====
+
+[tp-cluster]
+====
+====
+
+[tp-button-group]
+=====
+[tp-button,id="attributes-reset",type="button"]
+====
+Reset defaults
+====
+
+[tp-button,id="attributes-reload",type="button"]
+====
+Reload preview
+====
+=====
+======
+
+[tp-divider]
+====
+====
+
+[h3]
+====
+Preview
+====
+
+[tp-iframe,id="attributes-frame",title="fill-blank-question attribute preview",style="height: 24rem; display: flow-root; inline-size: auto;"]
+====
+====
+
+[tp-callout,id="attributes-status",variant="info",heading="Preview status"]
+====
+Preparing the preview…
+====
+
+[script,type="module",src="/docs/components/fill-blank-question/examples/attributes.js"]
+====
+====
+========
+
+.Geography
+======
+[tp-fill-blank-question,lang="en"]
+====
+Answers::
++
+. Paris
+. Berlin
+. Rome
+
+Title:: Geography
+
+Prompt:: Complete the sentences with the capitals.
+
+Form::
++
+The capital of France is [tp-textfield,name="france",aria-label="Capital of France",placeholder="City name",clearable]#france#.
++
+The capital of Germany is [tp-textfield,name="germany",aria-label="Capital of Germany",placeholder="City name",clearable]#germany#.
++
+The capital of Italy is [tp-textfield,name="italy",aria-label="Capital of Italy",placeholder="City name",clearable]#italy#.
+
+Feedback:: Check the capital of each country and its spelling.
+
+Solution:: France: Paris. Germany: Berlin. Italy: Rome.
+====
+======
+
+.Irregular verbs
+======
+[tp-fill-blank-question,lang="en"]
+====
+Answers::
++
+. went
+. saw
+. took
+
+Title:: Irregular verbs
+
+Prompt:: Complete each sentence with the past simple form of the verb shown in the blank.
+
+Form::
++
+Yesterday, I [tp-textfield,name="go",aria-label="Past simple of go",placeholder="go",clearable]#go# to school.
++
+Last night, she [tp-textfield,name="see",aria-label="Past simple of see",placeholder="see",clearable]#see# a shooting star.
++
+Last Monday, we [tp-textfield,name="take",aria-label="Past simple of take",placeholder="take",clearable]#take# the train.
+
+Feedback:: These verbs are irregular: their past simple forms do not end in -ed.
+
+Solution:: go → went; see → saw; take → took.
+====
+======
+
+.Baltic capitals and flags
+======
+[tp-fill-blank-question%closed,lang="en"]
+====
+Answers::
++
+. Tallinn
+. {blank}
++
+[tp-icon,name="ee",library="flags",aria-label="Flag of Estonia"]#icon#
+. Riga
+. {blank}
++
+[tp-icon,name="lv",library="flags",aria-label="Flag of Latvia"]#icon#
+. Vilnius
+. {blank}
++
+[tp-icon,name="lt",library="flags",aria-label="Flag of Lithuania"]#icon#
+
+Title:: Baltic capitals and flags
+
+Prompt:: Match each country with its capital and national flag.
+
+Form::
++
+Estonia has [tp-blank,name="estonia-capital",aria-label="Capital of Estonia"]#estonia-capital# as its capital and [tp-blank,name="estonia-flag",aria-label="Flag of Estonia"]#estonia-flag# as its national flag.
++
+Latvia has [tp-blank,name="latvia-capital",aria-label="Capital of Latvia"]#latvia-capital# as its capital and [tp-blank,name="latvia-flag",aria-label="Flag of Latvia"]#latvia-flag# as its national flag.
++
+Lithuania has [tp-blank,name="lithuania-capital",aria-label="Capital of Lithuania"]#lithuania-capital# as its capital and [tp-blank,name="lithuania-flag",aria-label="Flag of Lithuania"]#lithuania-flag# as its national flag.
+
+Feedback:: Check which country each capital and flag belongs to.
+
+Solution:: Estonia: Tallinn; Latvia: Riga; Lithuania: Vilnius. Match each flag with its country.
+====
+======
+
+.Square root
+======
+[tp-fill-blank-question%closed,lang="en"]
+====
+Answers::
++
+. latexmath:[\mathbb{R}_{+}]
+. latexmath:[\mathbb{R}_{+}^{*}]
+. latexmath:[\frac{1}{2\sqrt{x}}]
+
+Title:: The square root function
+
+Prompt:: Complete the sentence with the mathematical expressions.
+
+Form::
++
+The square root function latexmath:[f(x) = \sqrt{x}] is defined on [tp-blank,name="domain",aria-label="Domain"]#domain#, differentiable on [tp-blank,name="differentiability",aria-label="Domain of differentiability"]#differentiability#, and latexmath:[f'(x) =] [tp-blank,name="derivative",aria-label="Derivative"]#derivative#.
+
+Feedback:: Consider whether zero belongs to the domain and whether the derivative exists there.
+
+Solution:: The domain is latexmath:[\mathbb{R}_{+} = \lbrack 0, +\infty)]. The function is differentiable on latexmath:[\mathbb{R}_{+}^{*} = (0, +\infty)], with latexmath:[f'(x) = \frac{1}{2\sqrt{x}}].
+====
+======
+----
+=========

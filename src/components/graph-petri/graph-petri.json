@@ -1,0 +1,106 @@
+{
+  "tagname": "tp-graph-petri",
+  "classname": "TpGraphPetri",
+  "superclass": "TpGraphEditor",
+  "description": "Edits and simulates place/transition Petri nets.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-graph-petri></tp-graph-petri>"
+    }
+  ],
+  "attributes": [],
+  "methods": [
+    {
+      "name": "addArc(source: string, target: string, weight = 1): TpGraphEdge",
+      "inherited": false,
+      "description": "Adds arc."
+    },
+    {
+      "name": "addEdge(source: string, target: string, type = TP_PETRI_ARC, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = 'forward'): TpGraphEdge",
+      "inherited": false,
+      "description": "Adds edge."
+    },
+    {
+      "name": "addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode",
+      "inherited": false,
+      "description": "Adds node."
+    },
+    {
+      "name": "addPlace(point: TpGraphPoint, label = 'Place', initialTokens = 0): TpGraphNode",
+      "inherited": false,
+      "description": "Adds place."
+    },
+    {
+      "name": "addTokens(placeId: string, count = 1, updateInitial = true): void",
+      "inherited": false,
+      "description": "Adds tokens."
+    },
+    {
+      "name": "addTransition(point: TpGraphPoint, label = 'Transition'): TpGraphNode",
+      "inherited": false,
+      "description": "Adds transition."
+    },
+    {
+      "name": "fire(transitionId: string, duration = 350): Promise<void>",
+      "inherited": false,
+      "description": "Fire."
+    },
+    {
+      "name": "fireNext(duration = 350): Promise<string | null>",
+      "inherited": false,
+      "description": "Fire next."
+    },
+    {
+      "name": "resetMarking(): void",
+      "inherited": false,
+      "description": "Resets marking."
+    },
+    {
+      "name": "setGraph(graph: TpGraphDocument): void",
+      "inherited": false,
+      "description": "Sets graph."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-graph-change",
+      "description": "Emitted when graph change occurs.",
+      "detail": "{ reason: \"add-token\"; graph: unknown }"
+    },
+    {
+      "name": "tp-graph-error",
+      "description": "Emitted when graph error occurs.",
+      "detail": "{ error: unknown; operation: \"add-token\" }"
+    },
+    {
+      "name": "tp-petri-fire",
+      "description": "Fired after a transition is fired.",
+      "detail": "{ transitionId: unknown; marking: unknown; graph: unknown }"
+    },
+    {
+      "name": "tp-petri-reset",
+      "description": "Fired after the initial marking is restored.",
+      "detail": "{ marking: unknown; graph: unknown }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-graph-editor",
+      "summary": "Extensible interactive graph editor."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Petri graph",
+    "introduction": "The custom `<tp-graph-petri>` element implements the <tp-icon name=\"graph-petri\" library=\"components\" size=\"1.25em\"></tp-icon> Petri graph functionality: edits and simulates place/transition Petri nets.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Franchissable transitions are highlighted in green. |\n| Hover | Hover one and use its play control to execute that specific transition. |\n| Using the component | The generic toolbar is above the canvas. |\n| Play | The Petri-specific toolbar is below the canvas: **Play** chooses randomly among all currently enabled transitions and **Reset** restores the initial marking. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Enter / Space | Fires the focused enabled transition. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Enter / Space",
+        "description": "Fires the focused enabled transition."
+      }
+    ]
+  }
+}

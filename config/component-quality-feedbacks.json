@@ -1,0 +1,10 @@
+{
+  "components": ["badge", "callout", "console", "post-it"],
+  "testFileCount": 4,
+  "targets": {
+    "lines": 90,
+    "statements": 90,
+    "functions": 90,
+    "branches": 80
+  }
+}

@@ -1,0 +1,125 @@
+name: Component quality pilot
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: tp-components
+
+jobs:
+  pilot:
+    name: Advisory component quality pilot
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: tp-components
+          persist-credentials: false
+      - uses: ./tp-components/.github/actions/setup-workspace
+      - name: Check native markup examples
+        run: pnpm examples:check-native-markup
+      - name: Run tests, coverage, and report
+        run: pnpm quality:pilot
+      - name: Run the Layouts family procedure
+        run: pnpm quality:layouts
+      - name: Run the Utilities family procedure
+        run: pnpm quality:utilities
+      - name: Run the Time family procedure
+        run: pnpm quality:time
+      - name: Run the Overlays family procedure
+        run: pnpm quality:overlays
+      - name: Run the Base family procedure
+        run: pnpm quality:base
+      - name: Run the Controllers family procedure
+        run: pnpm quality:controllers
+      - name: Run the Feedbacks family procedure
+        run: pnpm quality:feedbacks
+      - name: Run the Files family procedure
+        run: pnpm quality:files
+      - name: Run the Forms family procedure
+        run: pnpm quality:forms
+      - name: Run the Plots family procedure
+        run: pnpm quality:plots
+      - name: Run the Quizzes family procedure
+        run: pnpm quality:quizzes
+      - name: Run the Games family procedure
+        run: pnpm quality:games
+      - name: Run the Editors family procedure
+        run: pnpm quality:editors
+      - name: Run the Markup Languages family procedure
+        run: pnpm quality:markup-languages
+      - name: Run the Pickers family procedure
+        run: pnpm quality:pickers
+      - name: Run the Notebooks family procedure
+        run: pnpm quality:notebooks
+      - name: Run the Documentation family procedure
+        run: pnpm quality:documentation
+
+      - name: Run the Slides family procedure
+        run: pnpm quality:slides
+      - name: Run the Viewers family procedure
+        run: pnpm quality:viewers
+      - name: Run the Simulators family procedure
+        run: pnpm quality:simulators
+      - name: Run the Playgrounds family procedure
+        run: pnpm quality:playgrounds
+      - name: Keep the quality report
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: component-quality-report
+          path: |
+            tp-components/config/quality-coverage/coverage-summary.json
+            tp-components/config/layout-quality-coverage/coverage-summary.json
+            tp-components/config/utilities-quality-coverage/coverage-summary.json
+            tp-components/config/time-quality-coverage/coverage-summary.json
+            tp-components/config/overlays-quality-coverage/coverage-summary.json
+            tp-components/config/base-quality-coverage/base/coverage-summary.json
+            tp-components/config/base-quality-coverage/question/coverage-summary.json
+            tp-components/config/controllers-quality-coverage/coverage-summary.json
+            tp-components/config/feedbacks-quality-coverage/coverage-summary.json
+            tp-components/config/files-quality-coverage/coverage-summary.json
+            tp-components/config/forms-quality-coverage/coverage-summary.json
+            tp-components/config/plots-quality-coverage/coverage-summary.json
+            tp-components/config/quizzes-quality-coverage/coverage-summary.json
+            tp-components/config/games-quality-coverage/coverage-summary.json
+            tp-components/config/editors-quality-coverage/coverage-summary.json
+            tp-components/config/markup-languages-quality-coverage/coverage-summary.json
+            tp-components/config/pickers-quality-coverage/coverage-summary.json
+            tp-components/config/notebooks-quality-coverage/coverage-summary.json
+            tp-components/config/documentation-quality-coverage/coverage-summary.json
+            tp-components/config/slides-quality-coverage/coverage-summary.json
+            tp-components/config/viewers-quality-coverage/coverage-summary.json
+            tp-components/config/simulators-quality-coverage/coverage-summary.json
+            tp-components/config/playgrounds-quality-coverage/coverage-summary.json
+            tp-components/public/docs/appendices/component-quality/index.md
+            tp-components/public/docs/appendices/component-quality/layouts.md
+            tp-components/public/docs/appendices/component-quality/utilities.md
+            tp-components/public/docs/appendices/component-quality/time.md
+            tp-components/public/docs/appendices/component-quality/overlays.md
+            tp-components/public/docs/appendices/component-quality/base.md
+            tp-components/public/docs/appendices/component-quality/controllers.md
+            tp-components/public/docs/appendices/component-quality/feedbacks.md
+            tp-components/public/docs/appendices/component-quality/files.md
+            tp-components/public/docs/appendices/component-quality/forms.md
+            tp-components/public/docs/appendices/component-quality/plots.md
+            tp-components/public/docs/appendices/component-quality/quizzes.md
+            tp-components/public/docs/appendices/component-quality/games.md
+            tp-components/public/docs/appendices/component-quality/editors.md
+            tp-components/public/docs/appendices/component-quality/markup-languages.md
+            tp-components/public/docs/appendices/component-quality/pickers.md
+            tp-components/public/docs/appendices/component-quality/notebooks.md
+            tp-components/public/docs/appendices/component-quality/documentation.md
+            tp-components/public/docs/appendices/component-quality/slides.md
+            tp-components/public/docs/appendices/component-quality/viewers.md
+            tp-components/public/docs/appendices/component-quality/simulators.md
+            tp-components/public/docs/appendices/component-quality/playgrounds.md
+          if-no-files-found: warn

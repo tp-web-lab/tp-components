@@ -1,0 +1,97 @@
+tp-datefield {
+  display: inline-block;
+  inline-size: var(--tp-datefield-inline-size, 12.5em);
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  vertical-align: middle;
+}
+
+tp-datefield [data-tp-datefield-label] {
+  box-sizing: border-box;
+  display: grid;
+  gap: var(--tp-datefield-label-gap, 0.35em);
+  inline-size: 100%;
+  max-inline-size: none;
+  max-width: none;
+  min-inline-size: 0;
+  grid-template-columns: minmax(0, 100%);
+  grid-template-areas: "label" "control";
+}
+
+tp-datefield [data-tp-datefield-label-text] {
+  grid-area: label;
+  font-weight: var(--tp-datefield-label-font-weight, 500);
+}
+
+tp-datefield[required] [data-tp-datefield-label-text]::after {
+  content: " *";
+  color: var(--tp-datefield-required-color, var(--tp-danger-text-colorful));
+}
+
+tp-datefield[required]:not([label]) [data-tp-datefield-control]::before {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 0.2em;
+  inset-inline-start: 0.3em;
+  color: var(--tp-datefield-required-color, var(--tp-danger-text-colorful));
+  content: "*";
+  font-weight: 600;
+  line-height: 1;
+  pointer-events: none;
+}
+
+tp-datefield [data-tp-datefield-label] > [data-tp-datefield-control] { grid-area: control; }
+tp-datefield[label-position="bottom"] [data-tp-datefield-label] { grid-template-areas: "control" "label"; }
+
+tp-datefield[label-position="start"] [data-tp-datefield-label],
+tp-datefield[label-position="end"] [data-tp-datefield-label] {
+  align-items: center;
+  grid-template-columns: max-content minmax(0, 1fr);
+}
+
+tp-datefield[label-position="start"] [data-tp-datefield-label] { grid-template-areas: "label control"; }
+tp-datefield[label-position="end"] [data-tp-datefield-label] {
+  grid-template-columns: minmax(0, 1fr) max-content;
+  grid-template-areas: "control label";
+}
+
+tp-datefield [data-tp-datefield-control] {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content max-content;
+  align-items: center;
+  inline-size: 100%;
+  min-inline-size: 0;
+  overflow: hidden;
+  border: 1px solid var(--tp-datefield-border-color, var(--tp-neutral-stroke-soft));
+  border-radius: var(--tp-datefield-radius, var(--tp-border-radius-sm));
+  background: var(--tp-datefield-background, var(--tp-paper-color));
+}
+
+tp-datefield [data-tp-datefield-control]:focus-within {
+  border-color: var(--tp-datefield-focus-color, var(--tp-brand-text-colorful));
+  outline: 2px solid color-mix(in srgb, var(--tp-datefield-focus-color, var(--tp-brand-text-colorful)) 25%, transparent);
+  outline-offset: 1px;
+}
+
+tp-datefield [data-tp-datefield-input] {
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 2.5rem;
+  margin: 0;
+  padding: var(--tp-datefield-padding-block, 0.6em) var(--tp-datefield-padding-inline, 0.75em);
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: var(--tp-datefield-value-font-weight, 400);
+}
+
+tp-datefield input::-webkit-calendar-picker-indicator { display: none; }
+tp-datefield [data-tp-datefield-clear][hidden] { display: none; }
+tp-datefield[data-disabled] [data-tp-datefield-control] { cursor: not-allowed; opacity: 0.6; }

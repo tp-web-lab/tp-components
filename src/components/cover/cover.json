@@ -1,0 +1,82 @@
+{
+  "tagname": "tp-cover",
+  "classname": "TpCover",
+  "superclass": "TpBase",
+  "description": "Creates a vertical cover layout with an optional centered heading element.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-cover min-height=\"16rem\" heading=\"h2\">\n<p>A short introduction</p>\n<h2>A heading centered in the cover</h2>\n<p>Supporting information stays below.</p>\n</tp-cover>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "gap",
+      "description": "Gap between direct children. When absent, uses the --tp-cover-gap CSS default.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1rem\""
+    },
+    {
+      "name": "heading",
+      "description": "Simple CSS selector (for example h2, .hero or #title) identifying a direct child to center vertically in the available space, not the heading text. Empty by default: no child is selected for centering.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "min-height",
+      "description": "Minimum block size of the cover. When absent, uses the --tp-cover-min-height CSS default.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"100vh\""
+    },
+    {
+      "name": "padding",
+      "description": "Padding applied inside the cover. When absent, uses the --tp-cover-padding CSS default.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1rem\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-cover-gap",
+      "default": "1rem",
+      "description": "Default gap between direct children."
+    },
+    {
+      "name": "--tp-cover-min-height",
+      "default": "100vh",
+      "description": "Default minimum block size."
+    },
+    {
+      "name": "--tp-cover-padding",
+      "default": "1rem",
+      "description": "Default inner padding."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Cover",
+    "introduction": "The custom `<tp-cover>` element implements the <tp-icon name=\"cover\" library=\"components\" size=\"1.25em\"></tp-icon> Cover functionality: creates a vertical cover layout with an optional centered heading element.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

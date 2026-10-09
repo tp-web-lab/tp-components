@@ -1,0 +1,182 @@
+:root,
+.tp-light,
+.tp-dark {
+	/* Backward-compatible aliases for legacy component tokens. */
+	--tp-color-success: var(--tp-success-fill-mid);
+	--tp-color-danger: var(--tp-danger-fill-mid);
+	--tp-color-warning: var(--tp-warning-fill-mid);
+	--tp-color-info: var(--tp-info-fill-mid, var(--tp-brand-fill-mid));
+	--tp-color-neutral: var(--tp-neutral-fill-mid);
+	--tp-color-brand: var(--tp-brand-fill-mid);
+
+	--tp-radius-s: var(--tp-border-radius-lg, 0.5rem);
+	--tp-radius-pill: var(--tp-border-radius-pill, 999px);
+	--tp-focus-ring-inner: var(--tp-background-color, Canvas);
+}
+
+:where([data-tp-base-host]) {
+	box-sizing: border-box;
+	min-inline-size: 0;
+}
+
+:where([data-tp-base-host]),
+:where([data-tp-base-host]) *,
+:where([data-tp-base-host]) *::before,
+:where([data-tp-base-host]) *::after {
+	box-sizing: inherit;
+}
+
+:where([data-tp-base-host] [hidden]) {
+	display: none !important;
+}
+
+:where([data-tp-base-host] dl),
+:where([data-tp-base-host] dt),
+:where([data-tp-base-host] dd) {
+	margin: 0;
+	padding: 0;
+}
+
+:where([data-tp-base-host] button),
+:where([data-tp-base-host] input),
+:where([data-tp-base-host] select),
+:where([data-tp-base-host] textarea) {
+	font: inherit;
+}
+
+:where([data-tp-base-host] textarea) {
+	box-sizing: border-box;
+	display: block;
+	inline-size: 100%;
+	max-inline-size: 100%;
+	margin-inline: 0;
+	field-sizing: content;
+}
+
+:where([data-tp-base-host] img),
+:where([data-tp-base-host] svg),
+:where([data-tp-base-host] canvas),
+:where([data-tp-base-host] video) {
+	display: block;
+	max-inline-size: 100%;
+}
+
+/* MathJax containers control inline versus display math; their SVG must keep
+   its intrinsic size without introducing a block inside an inline formula. */
+:where([data-tp-base-host] mjx-container > svg),
+:where([data-tp-base-host] .MathJax_SVG > svg) {
+	display: inline-block;
+	max-width: none;
+	max-inline-size: none;
+}
+
+:where([data-tp-base-host] .tp-visually-hidden) {
+	block-size: 1px;
+	border: 0;
+	clip-path: inset(50%);
+	inline-size: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+}
+
+body {
+	margin-block: 0;
+	margin-inline: 0.5rem;
+}
+
+p {
+	margin: 0 0 0.5rem 0;
+}
+
+dt {
+	font-weight: 600;
+}
+
+dd {
+	margin: 0 0 0.5rem 1rem;
+}
+
+/* Shared choice-row feedback, including keyboard focus, without changing selection. */
+:is(tp-radio-list, tp-checkbox-list)
+	> :is(ul, ol)
+	> li:has(
+		> label
+			> :is(
+				input[data-tp-radio-list-input],
+				input[data-tp-checkbox-list-input]
+			):enabled
+	):is(:hover, :has(> label > input:focus-visible)) {
+	background-color: var(--tp-brand-fill-soft);
+	color: var(--tp-brand-text-on-soft);
+}
+/* Keep direct help previews contained without exposing authoring controls. */
+.tp-component-help {
+  display: grid;
+  gap: var(--tp-content-spacing);
+  padding: calc(var(--tp-content-spacing) / 2);
+  min-inline-size: 0;
+}
+
+.tp-component-help-preview {
+  display: flow-root;
+  contain: layout paint;
+  padding: calc(var(--tp-content-spacing) / 2);
+  max-block-size: 55vh;
+  overflow: auto;
+  min-inline-size: 0;
+}
+
+.tp-component-help-preview > :is([fullscreen], [full-window]) {
+  position: relative;
+  inline-size: 100%;
+  block-size: 24rem;
+}
+
+/* details */
+details {
+	/* Keep the box beside floated content, including a table of contents. */
+	display: flow-root;
+	border: 1px solid var(--tp-brand-fill-soft);
+	border-radius: 0.5em;
+	padding-block-end: 0;
+	padding-inline: 0.75em;
+}
+
+details[open] {
+	padding-block-end: 0.75em;
+	padding-inline: 0;
+}
+details[open] > :not(summary) {
+	padding-inline: 0.75em;
+}
+
+details:not([open]) {
+	padding-inline: 0;
+}
+details:not([open]) > summary {
+	cursor: pointer;
+	font-weight: 600;
+	padding-block: 0.5em;
+	margin-bottom: 0;
+	background-color: var(--tp-brand-fill-softer);
+}
+details[open] > summary {
+	cursor: pointer;
+	font-weight: 600;
+	padding-block: 0.5em;
+	margin-bottom: 0;
+	background-color: var(--tp-brand-fill-softer);
+}
+
+details > summary > * {
+	margin-inline: 0.35em;
+	vertical-align: middle;
+}
+
+/* Align game-rule headings with their paragraph content, preserving marker space. */
+details.tp-game-rules > :is(summary, p) {
+	padding-inline-start: 0.75rem;
+}

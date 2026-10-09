@@ -1,0 +1,20 @@
+{
+  "src": [
+    {
+      "label": "Default",
+      "value": ""
+    },
+    {
+      "label": "file1",
+      "value": "/docs/components/include/examples/attributes-src-file1.html"
+    },
+    {
+      "label": "file2",
+      "value": "/docs/components/include/examples/attributes-src-file2.html"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/docs/components/include/examples/attributes-src-file-unknown.html"
+    }
+  ]
+}

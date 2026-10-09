@@ -1,0 +1,66 @@
+<tp-html-viewer label="tp-binary" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-binary>
+              <ol>
+                <li>1010110!0</li>
+                <li>01!01!0011!</li>
+                <li>0010101!1!</li>
+                <li>11!01!0100</li>
+                <li>10011001!</li>
+                <li>0!110!1010</li>
+                <li>0110!0!101</li>
+                <li>10!0101!10</li>
+              </ol>
+            </tp-binary>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+
+
+      <tp-cluster><tp-textfield data-setting="puzzle" label="puzzle" value="" placeholder="" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="binary attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/docs/components/binary/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="binary ⭐⭐">
+      <tp-binary>
+              <ol>
+                <li>0110!11!00</li>
+                <li>001!100!11</li>
+                <li>11001100!</li>
+                <li>00!11!01!10!</li>
+                <li>1!00!10!011</li>
+                <li>1!1001001</li>
+                <li>01100110!</li>
+                <li>1!0011001</li>
+              </ol>
+            </tp-binary>
+    </div>
+
+    <div role="example" label="binary ⭐⭐⭐">
+      <tp-binary>
+              <ol>
+                <li>0!0!101!10!10!1</li>
+                <li>10!0100!110!1</li>
+                <li>1100110010</li>
+                <li>0011!011!001</li>
+                <li>0!101!1!01100!</li>
+                <li>110!010!011!0</li>
+                <li>1!0100100!11</li>
+                <li>0101001101</li>
+                <li>011!0!101!010</li>
+                <li>101!10!10010</li>
+              </ol>
+            </tp-binary>
+    </div>
+  </template>
+</tp-html-viewer>

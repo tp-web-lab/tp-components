@@ -1,0 +1,23 @@
+[tp-asciidoc-viewer%allow-script,label="tp-markdown-single-page"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-markdown-single-page]
+=====
+[script,type="tp/markdown"]
+====
+## A short guide
+
+This document is rendered as a single page.
+
+### Getting started
+
+- Read the introduction
+- Try a component
+====
+=====
+======
+----
+========

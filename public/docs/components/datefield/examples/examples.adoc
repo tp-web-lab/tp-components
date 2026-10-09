@@ -1,0 +1,117 @@
+[tp-asciidoc-viewer%allow-script,label="tp-datefield"]
+=========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-datefield%clearable,label="Date",value="2026-09-03"]
+====
+====
+======
+
+.Attributes
+========
+Change several attributes on one preview. All controls start at their documented defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Reset defaults fills the controls with their defaults again. Controls stay available when the preview is disabled or readonly.
+
+[tp-stack]
+======
+[tp-checkbox-list%value,id="datefield-booleans",label="Boolean attributes",label-position="top",orientation="horizontal"]
+====
+* clearable
+
+* disabled
+
+* readonly
+
+* required
+====
+
+[tp-radio-list,data-setting="label-position",label="label-position",label-position="top",orientation="horizontal",value="1"]
+====
+* top
+
+* bottom
+
+* start
+
+* end
+====
+
+[tp-cluster]
+=====
+[tp-textfield%value%placeholder%clearable,data-setting="autocomplete",label="autocomplete"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="label",label="label"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="max",label="max"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="min",label="min"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="name",label="name"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="placeholder",label="placeholder"]
+====
+====
+
+[tp-textfield%clearable,data-setting="step",label="step",value="1",placeholder="1"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="value",label="value"]
+====
+====
+=====
+
+[tp-button,id="datefield-reset",type="button"]
+====
+Reset defaults
+====
+======
+
+[tp-divider]
+====
+====
+
+[h3]
+====
+Preview
+====
+
+[tp-box]
+=====
+[tp-datefield,id="datefield-preview"]
+====
+====
+=====
+
+[tp-box,id="datefield-readout",aria-live="polite"]
+====
+Reading native attributes…
+====
+
+[tp-callout,variant="info",heading="Things to try"]
+====
+Set label and enter a date such as 2026-09-14 in value. Use YYYY-MM-DD for min and max; step is measured in days. Choose a date in the native field and observe the value setting update. Enable clearable to show the clear button; it is hidden otherwise.
+====
+
+[script,type="module",src="/docs/components/datefield/examples/attributes.js"]
+====
+====
+========
+
+.Inline named field
+======
+Value: [tp-datefield,value="2026-10-05",placeholder="Enter a value"]#identifier#
+======
+----
+=========

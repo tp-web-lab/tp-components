@@ -1,0 +1,16 @@
+{
+  "name": "Squares with Python",
+  "entry": "/main.py",
+  "files": [
+    {
+      "path": "/index.html",
+      "language": "html",
+      "content": "<h2>Squares of 1 to 5</h2><p id=\"result\">Starting Python…</p>"
+    },
+    {
+      "path": "/main.py",
+      "language": "python",
+      "content": "from js import document\nsquares = [number ** 2 for number in range(1, 6)]\nresult = \", \".join(str(square) for square in squares)\ndocument.getElementById(\"result\").textContent = result\nprint(\"Squares:\", result)"
+    }
+  ]
+}

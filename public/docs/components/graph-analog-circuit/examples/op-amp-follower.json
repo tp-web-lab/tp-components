@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "title": "Operational-amplifier voltage follower",
+  "nodes": [
+    {
+      "id": "VIN",
+      "type": "analog-voltage-source",
+      "x": 120,
+      "y": 220,
+      "label": "Vin",
+      "data": {
+        "voltage": 2,
+        "waveform": "sine",
+        "frequency": 100,
+        "angle": 270,
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "A1",
+      "type": "analog-op-amp",
+      "x": 340,
+      "y": 180,
+      "label": "A1",
+      "data": {
+        "gain": 100000,
+        "angle": 0
+      }
+    },
+    {
+      "id": "OUT",
+      "type": "analog-hub",
+      "x": 500,
+      "y": 180,
+      "label": "Out"
+    },
+    {
+      "id": "RL",
+      "type": "analog-resistor",
+      "x": 560,
+      "y": 260,
+      "label": "1 kΩ",
+      "data": {
+        "resistance": 1000,
+        "displayScale": 1000,
+        "angle": 90
+      }
+    },
+    {
+      "id": "GND",
+      "type": "analog-ground",
+      "x": 320,
+      "y": 340,
+      "label": "GND"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "type": "analog-wire",
+      "source": "VIN",
+      "sourcePort": "north",
+      "target": "A1",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "data": {
+        "measurements": [
+          {
+            "id": "m-in",
+            "position": 0.5,
+            "label": "Vin"
+          }
+        ]
+      },
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "e2",
+      "type": "analog-wire",
+      "source": "A1",
+      "sourcePort": "east",
+      "target": "OUT",
+      "targetPort": "west",
+      "direction": "none",
+      "routing": "orthogonal",
+      "data": {
+        "measurements": [
+          {
+            "id": "m-out",
+            "position": 0.51,
+            "label": "Vout"
+          }
+        ]
+      },
+      "elbows": 1,
+      "departure": "horizontal",
+      "turns": "alternating"
+    },
+    {
+      "id": "e3",
+      "type": "analog-wire",
+      "source": "OUT",
+      "sourcePort": "south",
+      "target": "A1",
+      "targetPort": "south",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 3,
+      "departure": "vertical",
+      "turns": "alternating",
+      "bendY": 260,
+      "bendX": 253.69140625
+    },
+    {
+      "id": "e4",
+      "type": "analog-wire",
+      "source": "OUT",
+      "sourcePort": "east",
+      "target": "RL",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal",
+      "turns": "alternating"
+    },
+    {
+      "id": "e5",
+      "type": "analog-wire",
+      "source": "RL",
+      "sourcePort": "south",
+      "target": "GND",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "e6",
+      "type": "analog-wire",
+      "source": "GND",
+      "sourcePort": "north",
+      "target": "VIN",
+      "targetPort": "south",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal",
+      "turns": "alternating"
+    }
+  ]
+}

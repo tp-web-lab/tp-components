@@ -1,0 +1,32 @@
+tp-blank {
+	position: relative;
+	display: inline-block;
+	vertical-align: baseline;
+	min-inline-size: 5ch;
+	min-block-size: 1em;
+	padding: 0.6em 2.25rem 0em 0.5em;
+	border-bottom: 2px dashed var(--tp-neutral-stroke-soft);
+	/*border-top: 0;*/
+	/*border-radius: var(--tp-border-radius-sm, 0.25rem);*/
+}
+tp-blank[data-tp-blank-filled] {
+	border-bottom-color: var(--tp-blank-filled-border-color, var(--tp-brand-stroke-mid));
+}
+tp-blank [data-tp-blank-tools] {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25em;
+	position: absolute;
+	inset-inline-end: 0;
+	inset-block-start: 50%;
+	transform: translateY(-50%);
+	color: var(--tp-text-muted);
+}
+tp-blank:focus-visible {
+	outline: 3px solid var(--tp-focus-color, var(--tp-brand-text-colorful));
+	outline-offset: 2px;
+}
+tp-blank > :is(svg, img) {
+	max-inline-size: 100%;
+	vertical-align: middle;
+}

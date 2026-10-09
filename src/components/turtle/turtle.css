@@ -1,0 +1,41 @@
+.tp-turtle {
+  display: block;
+}
+
+.tp-turtle-toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.tp-turtle-toolbar button {
+  font: inherit;
+}
+
+.tp-turtle-figure {
+  margin: 0;
+}
+
+.tp-turtle-figure figcaption {
+  margin-block-start: 0.4rem;
+  color: #4b5563;
+  font-size: 0.92rem;
+}
+
+.tp-turtle-viewport svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.tp-turtle-error {
+  margin: 0;
+  padding: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid #f1b7bf;
+  background: #fff3f5;
+  color: #8a1c2c;
+  overflow: auto;
+}

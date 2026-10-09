@@ -1,0 +1,97 @@
+{
+  "tagname": "tp-dir",
+  "classname": "TpDir",
+  "superclass": "TpBase",
+  "description": "Parent-scoped reading-direction switcher.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<p>The reading direction of this section can be changed.</p>\n    <p>اس حصے کی پڑھنے کی سمت تبدیل کی جا سکتی ہے۔</p>\n    <tp-dir></tp-dir>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "anchor",
+      "description": "CSS selector used as the explicit element that receives the selected direction.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the direction trigger.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "mode",
+      "description": "Reading-direction mode (`ltr`, `rtl`, `auto`). In `auto`, RTL is inferred from language or supported region codes.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"auto\""
+    },
+    {
+      "name": "size",
+      "description": "Icon button size.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"m\""
+    },
+    {
+      "name": "variant",
+      "description": "Icon button variant.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"neutral\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-dir-change",
+      "description": "Emitted when the reading direction applied to a target changes.",
+      "detail": "{ mode: \"ltr\" | \"rtl\" | \"auto\"; dir: \"ltr\" | \"rtl\"; anchor: string; target: HTMLElement }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Direction switcher",
+    "introduction": "The custom `<tp-dir>` element implements the <tp-icon name=\"dir\" library=\"components\" size=\"1.25em\"></tp-icon> Direction switcher functionality: parent-scoped reading-direction switcher.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Activate the direction button to change the reading direction of the associated content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

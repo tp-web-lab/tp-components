@@ -1,0 +1,187 @@
+.tp-mastermind {
+  --tp-game-cell-size: 3rem;
+
+  box-sizing: border-box;
+  display: flow-root;
+  max-width: 600px;
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #f9f9f9;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.tp-mastermind *,
+.tp-mastermind *::before,
+.tp-mastermind *::after {
+  box-sizing: border-box;
+}
+
+.tp-mastermind-container {
+  display: grid;
+  gap: 1rem;
+}
+
+.tp-mastermind-header,
+.tp-mastermind-controls,
+.tp-mastermind-header-actions,
+.tp-mastermind-palette,
+.tp-mastermind-pegs,
+.tp-mastermind-feedback {
+  display: flex;
+  align-items: center;
+}
+
+.tp-mastermind-header {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tp-mastermind-title {
+  color: #333;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.tp-mastermind-controls,
+.tp-mastermind-header-actions,
+.tp-mastermind-palette,
+.tp-mastermind-pegs,
+.tp-mastermind-feedback {
+  gap: 0.5rem;
+}
+
+.tp-mastermind-header-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.tp-mastermind-chronometer > tp-icon-button {
+  display: none;
+}
+
+.tp-mastermind button {
+  font: inherit;
+}
+
+.tp-mastermind-check {
+  min-height: 2.25rem;
+  padding: 0 0.9rem;
+  border: 0;
+  border-radius: 4px;
+  background: #0b63ce;
+  color: white;
+  cursor: pointer;
+}
+
+.tp-mastermind button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.tp-mastermind-board {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.tp-mastermind-row {
+  display: grid;
+  grid-template-columns: 2rem max-content minmax(5rem, 1fr) auto;
+  gap: 0.6rem;
+  align-items: center;
+  width: max-content;
+  min-width: 100%;
+  padding: 0.35rem;
+  border-radius: 6px;
+}
+
+.tp-mastermind-row.current {
+  background: #e6f0ff;
+}
+
+.tp-mastermind-attempt {
+  color: #526071;
+  font-weight: 700;
+  text-align: center;
+}
+
+.tp-mastermind-peg,
+.tp-mastermind-color {
+  width: var(--tp-game-cell-size);
+  height: var(--tp-game-cell-size);
+  flex: 0 0 var(--tp-game-cell-size);
+  padding: 0;
+  border: 3px solid #cbd5e1;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.tp-mastermind-peg.filled,
+.tp-mastermind-color {
+  background: var(--tp-brand-fill-mid, var(--tp-brand-seed));
+}
+
+.tp-mastermind-peg:not(:disabled),
+.tp-mastermind-color {
+  cursor: pointer;
+}
+
+.tp-mastermind-color.selected {
+  outline: 3px solid #111827;
+  outline-offset: 2px;
+}
+
+.tp-mastermind-feedback {
+  min-width: 5rem;
+  font-weight: 800;
+}
+
+.tp-mastermind-feedback-exact {
+  color: #111827;
+}
+
+.tp-mastermind-feedback-misplaced {
+  color: #64748b;
+}
+
+.tp-mastermind-check {
+  min-width: 4.5rem;
+}
+
+.tp-mastermind-row-action {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 4.5rem;
+}
+
+.tp-mastermind-status {
+  min-height: 1.5rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  background: #d1ecf1;
+  color: #0c5460;
+  text-align: center;
+  font-weight: 600;
+}
+
+.tp-mastermind-status.won {
+  background: #d4edda;
+  color: #155724;
+}
+
+.tp-mastermind-status.lost,
+.tp-mastermind-error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.tp-mastermind-error {
+  padding: 1rem;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  font-weight: 600;
+}

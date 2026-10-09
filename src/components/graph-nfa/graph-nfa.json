@@ -1,0 +1,65 @@
+{
+  "tagname": "tp-graph-nfa",
+  "classname": "TpGraphNfa",
+  "superclass": "TpGraphEditor",
+  "description": "Edits, generates, and simulates nondeterministic finite automata.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-graph-nfa></tp-graph-nfa>"
+    }
+  ],
+  "attributes": [],
+  "methods": [
+    {
+      "name": "addEdge(source: string, target: string, type = TP_NFA_TRANSITION, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = 'forward'): TpGraphEdge",
+      "inherited": false,
+      "description": "Adds edge."
+    },
+    {
+      "name": "addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode",
+      "inherited": false,
+      "description": "Adds node."
+    },
+    {
+      "name": "generate(source = this.regexSource): void",
+      "inherited": false,
+      "description": "Generate."
+    },
+    {
+      "name": "readNext(duration = 500): Promise<boolean>",
+      "inherited": false,
+      "description": "Reads next."
+    },
+    {
+      "name": "reset(word = this.inputWord): void",
+      "inherited": false,
+      "description": "Reset."
+    },
+    {
+      "name": "run(duration = 650): Promise<boolean>",
+      "inherited": false,
+      "description": "Run."
+    },
+    {
+      "name": "setGraph(graph: TpGraphDocument): void",
+      "inherited": false,
+      "description": "Sets graph."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-graph-editor",
+      "summary": "Extensible interactive graph editor."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Nondeterministic finite automaton",
+    "introduction": "The custom `<tp-graph-nfa>` element implements the <tp-icon name=\"graph-nfa\" library=\"components\" size=\"1.25em\"></tp-icon> Nondeterministic finite automaton functionality: edits, generates, and simulates nondeterministic finite automata.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | The initial expression is `ab(a&#124;b)*`. |\n| Using the component | It recognizes words over `{a,b}` that start with `ab`. |\n| Generate NFA | Change the expression and press **Generate NFA** to rebuild the graph. |\n| Using the component | Automatic execution waits 650 ms between characters so that the active states remain visible. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Read next character | Enter a word, then use **Read next character** or **Run word**. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

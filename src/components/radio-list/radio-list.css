@@ -1,0 +1,206 @@
+tp-radio-list {
+  --tp-radio-list-marker-gap: 0.5em;
+  --tp-radio-list-marker-width: 2ch;
+  display: block;
+  margin-bottom: 1em;
+}
+
+tp-radio-list > ul,
+tp-radio-list > ol {
+  margin: 0.5em 0;
+  padding-inline-start: 0.5em;
+}
+
+tp-radio-list > ul {
+  list-style: none;
+}
+
+tp-radio-list > ol {
+  counter-reset: tp-radio-list-counter;
+}
+
+tp-radio-list[orientation='vertical'] > ul > li,
+tp-radio-list[orientation='vertical'] > ol > li {
+  align-items: start;
+  column-gap: var(--tp-radio-list-marker-gap);
+  display: grid;
+  grid-template-columns: var(--tp-radio-list-marker-width) minmax(0, 1fr);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+tp-radio-list[orientation='vertical'] > ul > li + li,
+tp-radio-list[orientation='vertical'] > ol > li + li {
+  margin-block-start: 0.25em;
+}
+
+tp-radio-list[orientation='vertical'] > ul > li::before {
+  content: '';
+  text-align: end;
+}
+
+tp-radio-list[orientation='vertical'] > ol > li {
+  counter-increment: tp-radio-list-counter;
+}
+
+tp-radio-list[orientation='vertical'] > ol > li::before {
+  content: counter(tp-radio-list-counter) '.';
+  text-align: end;
+}
+
+tp-radio-list[orientation='vertical'] > ol[data-tp-radio-list-counter-style='lower-alpha'] > li::before {
+  content: counter(tp-radio-list-counter, lower-alpha) '.';
+}
+
+tp-radio-list[orientation='vertical'] > ol[data-tp-radio-list-counter-style='upper-alpha'] > li::before {
+  content: counter(tp-radio-list-counter, upper-alpha) '.';
+}
+
+tp-radio-list[orientation='vertical'] > ol[data-tp-radio-list-counter-style='lower-roman'] > li::before {
+  content: counter(tp-radio-list-counter, lower-roman) '.';
+}
+
+tp-radio-list[orientation='vertical'] > ol[data-tp-radio-list-counter-style='upper-roman'] > li::before {
+  content: counter(tp-radio-list-counter, upper-roman) '.';
+}
+
+tp-radio-list[orientation='vertical'] > ul > li > label[data-tp-radio-list-label],
+tp-radio-list[orientation='vertical'] > ol > li > label[data-tp-radio-list-label] {
+  align-items: start;
+  column-gap: 0.5em;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-column: 2;
+}
+
+tp-radio-list[orientation='horizontal'] > ul,
+tp-radio-list[orientation='horizontal'] > ol {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+tp-radio-list[orientation='horizontal'] > ul > li,
+tp-radio-list[orientation='horizontal'] > ol > li {
+  align-items: center;
+  column-gap: var(--tp-radio-list-marker-gap);
+  display: grid;
+  grid-template-columns: var(--tp-radio-list-marker-width) minmax(0, 1fr);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+tp-radio-list[orientation='horizontal'] > ul > li::before {
+  content: '';
+  text-align: end;
+}
+
+tp-radio-list[orientation='horizontal'] > ol > li {
+  counter-increment: tp-radio-list-counter;
+}
+
+tp-radio-list[orientation='horizontal'] > ol > li::before {
+  content: counter(tp-radio-list-counter) '.';
+  text-align: end;
+}
+
+tp-radio-list[orientation='horizontal'] > ol[data-tp-radio-list-counter-style='lower-alpha'] > li::before {
+  content: counter(tp-radio-list-counter, lower-alpha) '.';
+}
+
+tp-radio-list[orientation='horizontal'] > ol[data-tp-radio-list-counter-style='upper-alpha'] > li::before {
+  content: counter(tp-radio-list-counter, upper-alpha) '.';
+}
+
+tp-radio-list[orientation='horizontal'] > ol[data-tp-radio-list-counter-style='lower-roman'] > li::before {
+  content: counter(tp-radio-list-counter, lower-roman) '.';
+}
+
+tp-radio-list[orientation='horizontal'] > ol[data-tp-radio-list-counter-style='upper-roman'] > li::before {
+  content: counter(tp-radio-list-counter, upper-roman) '.';
+}
+
+tp-radio-list[orientation='horizontal'] > ul > li > label[data-tp-radio-list-label],
+tp-radio-list[orientation='horizontal'] > ol > li > label[data-tp-radio-list-label] {
+  grid-column: 2;
+}
+
+tp-radio-list label[data-tp-radio-list-label] {
+  line-height: 1.4;
+  vertical-align: middle;
+}
+
+tp-radio-list[orientation='vertical'] > ul > li > label[data-tp-radio-list-label] > :not(input[type='radio'][data-tp-radio-list-input]),
+tp-radio-list[orientation='vertical'] > ol > li > label[data-tp-radio-list-label] > :not(input[type='radio'][data-tp-radio-list-input]) {
+  grid-column: 2;
+  margin-inline-start: 0;
+}
+
+tp-radio-list label[data-tp-radio-list-label] :where(ul, ol) {
+  margin-inline-start: 0;
+  padding-inline-start: 1.25em;
+}
+
+tp-radio-list label[data-tp-radio-list-label] :where(
+  address,
+  article,
+  aside,
+  blockquote,
+  details,
+  div,
+  dl,
+  fieldset,
+  figcaption,
+  figure,
+  footer,
+  form,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  header,
+  hr,
+  main,
+  nav,
+  ol,
+  p,
+  pre,
+  section,
+  table,
+  ul
+) {
+  margin-block-start: 0;
+  margin-block-end: 0.5em;
+}
+
+tp-radio-list input[type='radio'][data-tp-radio-list-input] {
+  -webkit-appearance: radio;
+  appearance: auto;
+  background: revert;
+  border: revert;
+  border-radius: revert;
+  block-size: 1em;
+  flex: none;
+  inline-size: 1em;
+  margin: 0;
+  margin-inline-end: 0.5em;
+  accent-color: var(--tp-brand-seed);
+  vertical-align: middle;
+}
+
+/* Native markup parsers wrap option text in a paragraph. Keep its final
+   margin from shifting the text away from the centered radio input. */
+tp-radio-list label[data-tp-radio-list-label] > p:last-child {
+  margin-block-end: 0;
+}
+
+tp-radio-list[orientation='vertical'] > ul > li > label[data-tp-radio-list-label] > input[type='radio'][data-tp-radio-list-input],
+tp-radio-list[orientation='vertical'] > ol > li > label[data-tp-radio-list-label] > input[type='radio'][data-tp-radio-list-input] {
+  margin-inline-end: 0;
+  margin-top: 0.2em;
+}

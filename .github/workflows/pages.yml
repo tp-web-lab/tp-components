@@ -1,0 +1,55 @@
+name: Documentation Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: tp-components
+          persist-credentials: false
+      - uses: ./tp-components/.github/actions/setup-workspace
+      - name: Test publication preparation
+        working-directory: tp-components
+        run: node --test scripts/prepare-pages.test.mjs
+      - name: Build documentation
+        working-directory: tp-components
+        run: pnpm build
+      - name: Check release entry points
+        working-directory: tp-components
+        run: pnpm release:check
+      - name: Prepare project site
+        working-directory: tp-components
+        run: node scripts/prepare-pages.mjs /tp-components/
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: tp-components/.pages
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Publish documentation
+        id: deployment
+        uses: actions/deploy-pages@v4

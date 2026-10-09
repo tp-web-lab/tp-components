@@ -1,0 +1,150 @@
+tp-badge {
+  --tp-badge-accent: var(--tp-neutral-text-colorful);
+  --tp-badge-background: var(--tp-neutral-fill-softer);
+  --tp-badge-foreground: var(--tp-neutral-text-on-soft);
+  --tp-badge-border-color: var(--tp-neutral-stroke-soft);
+  --tp-badge-radius: 0.5em;
+  --tp-badge-font-size: 0.875em;
+  --tp-badge-padding-block: 0.35em;
+  --tp-badge-padding-inline: 0.7em;
+
+  align-items: center;
+  background-color: var(--tp-badge-background);
+  border: 1px solid var(--tp-badge-border-color);
+  border-radius: var(--tp-badge-radius);
+  color: var(--tp-badge-foreground);
+  display: inline-flex;
+  font: inherit;
+  font-size: var(--tp-badge-font-size);
+  font-weight: 600;
+  gap: 0.25em;
+  line-height: 1;
+  max-inline-size: 100%;
+  padding-block: var(--tp-badge-padding-block);
+  padding-inline: var(--tp-badge-padding-inline);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Block-based markup renderers may wrap compound badge content in paragraphs. */
+tp-badge > p {
+  display: contents;
+}
+
+tp-badge[variant='success'] {
+  --tp-badge-accent: var(--tp-success-text-colorful);
+  --tp-badge-background: var(--tp-success-fill-softer);
+  --tp-badge-foreground: var(--tp-success-text-on-soft);
+  --tp-badge-border-color: var(--tp-success-stroke-soft);
+}
+
+tp-badge[variant='danger'] {
+  --tp-badge-accent: var(--tp-danger-text-colorful);
+  --tp-badge-background: var(--tp-danger-fill-softer);
+  --tp-badge-foreground: var(--tp-danger-text-on-soft);
+  --tp-badge-border-color: var(--tp-danger-stroke-soft);
+}
+
+tp-badge[variant='warning'] {
+  --tp-badge-accent: var(--tp-warning-text-colorful);
+  --tp-badge-background: var(--tp-warning-fill-softer);
+  --tp-badge-foreground: var(--tp-warning-text-on-soft);
+  --tp-badge-border-color: var(--tp-warning-stroke-soft);
+}
+
+tp-badge[variant='info'] {
+  --tp-badge-accent: var(--tp-info-text-colorful);
+  --tp-badge-background: var(--tp-info-fill-softer);
+  --tp-badge-foreground: var(--tp-info-text-on-soft);
+  --tp-badge-border-color: var(--tp-info-stroke-soft);
+}
+
+tp-badge[variant='neutral'] {
+  --tp-badge-accent: var(--tp-neutral-text-colorful);
+  --tp-badge-background: var(--tp-neutral-fill-softer);
+  --tp-badge-foreground: var(--tp-neutral-text-on-soft);
+  --tp-badge-border-color: var(--tp-neutral-stroke-soft);
+}
+
+tp-badge[variant='brand'] {
+  --tp-badge-accent: var(--tp-brand-text-colorful);
+  --tp-badge-background: var(--tp-brand-fill-softer);
+  --tp-badge-foreground: var(--tp-brand-text-on-soft);
+  --tp-badge-border-color: var(--tp-brand-stroke-soft);
+}
+
+tp-badge[outlined] {
+  --tp-badge-background: transparent;
+  --tp-badge-foreground: var(--tp-badge-accent);
+  --tp-badge-border-color: var(--tp-badge-accent);
+}
+
+tp-badge[pill] {
+  --tp-badge-radius: 999em;
+}
+
+tp-badge[pulse] {
+  animation: tp-badge-pulse 1.4s ease-in-out infinite;
+}
+
+tp-badge[size='xxs'] {
+  --tp-badge-font-size: 0.625em;
+  --tp-badge-padding-block: 0.15em;
+  --tp-badge-padding-inline: 0.4em;
+}
+
+tp-badge[size='xs'] {
+  --tp-badge-font-size: 0.6875em;
+  --tp-badge-padding-block: 0.2em;
+  --tp-badge-padding-inline: 0.5em;
+}
+
+tp-badge[size='s'] {
+  --tp-badge-font-size: 0.75em;
+  --tp-badge-padding-block: 0.25em;
+  --tp-badge-padding-inline: 0.55em;
+}
+
+tp-badge[size='m'] {
+  --tp-badge-font-size: 0.875em;
+  --tp-badge-padding-block: 0.35em;
+  --tp-badge-padding-inline: 0.7em;
+}
+
+tp-badge[size='l'] {
+  --tp-badge-font-size: 0.95em;
+  --tp-badge-padding-block: 0.42em;
+  --tp-badge-padding-inline: 0.8em;
+}
+
+tp-badge[size='xl'] {
+  --tp-badge-font-size: 1em;
+  --tp-badge-padding-block: 0.5em;
+  --tp-badge-padding-inline: 0.9em;
+}
+
+tp-badge[size='xxl'] {
+  --tp-badge-font-size: 1.125em;
+  --tp-badge-padding-block: 0.6em;
+  --tp-badge-padding-inline: 1em;
+}
+
+@keyframes tp-badge-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--tp-badge-accent) 45%, transparent);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow: 0 0 0 0.35em color-mix(in srgb, var(--tp-badge-accent) 0%, transparent);
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  tp-badge[pulse] {
+    animation: none;
+    box-shadow: 0 0 0 0.18em color-mix(in srgb, var(--tp-badge-accent) 30%, transparent);
+  }
+}

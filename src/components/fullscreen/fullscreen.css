@@ -1,0 +1,23 @@
+tp-fullscreen {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+tp-fullscreen > tp-icon-button {
+  --tp-icon-button-size: 2rem;
+  --tp-icon-button-icon-size: 1.15rem;
+}
+
+tp-fullscreen > tp-icon-button > button {
+  border: 1px solid var(--tp-neutral-stroke-mid, #9ca3af);
+  background: var(--tp-paper-color, #ffffff);
+}
+
+tp-fullscreen > tp-icon-button > button:hover {
+  background: var(--tp-neutral-fill-soft, #e5e7eb);
+}
+
+:where([data-tp-fullscreen-target]):fullscreen {
+  background: var(--tp-background-color, Canvas);
+  color: var(--tp-text-body, CanvasText);
+}

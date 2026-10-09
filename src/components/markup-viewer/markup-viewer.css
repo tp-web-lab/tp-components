@@ -1,0 +1,213 @@
+.tp-markup-viewer {
+  display: block;
+  margin-block: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--tp-neutral-stroke-soft, #d0d7de);
+  border-radius: 0.5rem;
+  background: var(--tp-paper-color, #fff);
+}
+
+.tp-markup-viewer[lite] {
+  margin-block: 0;
+}
+
+.tp-markup-viewer[lite] .tp-markup-viewer-start,
+.tp-markup-viewer[lite] .tp-markup-viewer-end {
+  border-radius: 0;
+}
+
+.tp-markup-viewer[lite][data-layout='both'] .tp-markup-viewer-end {
+  border-block-start: 1px solid var(--tp-neutral-stroke-soft, #d0d7de);
+}
+
+.tp-markup-viewer-toolbar,
+.tp-markup-viewer-lite-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.25rem;
+  margin-block-end: 0;
+  margin-inline: 0;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  box-sizing: border-box;
+  padding: 0.25rem;
+  border: 0;
+  border-block-end: 1px solid var(--tp-neutral-stroke-soft, #d0d7de);
+  border-radius: 0.5rem 0.5rem 0 0;
+  background: var(--tp-paper-color, #fff);
+  min-inline-size: 0;
+}
+
+.tp-markup-viewer-toolbar-start,
+.tp-markup-viewer-toolbar-end {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-inline-size: 0;
+}
+
+.tp-markup-viewer-toolbar-start {
+  grid-column: 1;
+  justify-content: flex-start;
+}
+
+.tp-markup-viewer-toolbar-end {
+  grid-column: 3;
+  justify-content: flex-end;
+}
+
+.tp-markup-viewer-editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tp-markup-viewer-output-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tp-markup-viewer-output-actions[hidden] {
+  display: none;
+}
+
+.tp-markup-viewer-output-actions tp-divider {
+  block-size: 1.5rem;
+  margin-inline: 0.25rem;
+}
+
+.tp-markup-viewer-editor-actions[hidden] {
+  display: none;
+}
+
+.tp-markup-viewer-language {
+  margin-inline-end: 0.25rem;
+  color: var(--tp-text-muted, #374151);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tp-markup-viewer-toolbar tp-icon-button[aria-pressed='true'],
+.tp-markup-viewer-lite-toolbar tp-icon-button[aria-pressed='true'] {
+  color: var(--tp-brand-text-colorful, #2563eb);
+}
+
+.tp-markup-viewer-toolbar tp-icon-button[aria-pressed='true'] > button,
+.tp-markup-viewer-lite-toolbar tp-icon-button[aria-pressed='true'] > button {
+  background: var(--tp-brand-fill-softer, #eff6ff);
+  border-radius: 0.375rem;
+}
+
+.tp-markup-viewer-layout {
+  align-items: start;
+}
+
+.tp-markup-viewer-toolbar label,
+.tp-markup-viewer-start-controls label {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0;
+}
+
+.tp-markup-viewer-toolbar select,
+.tp-markup-viewer-start-controls select {
+  width: 100%;
+  height: 2.25rem;
+  box-sizing: border-box;
+}
+
+.tp-markup-viewer-start,
+.tp-markup-viewer-end {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+  align-self: start;
+  padding: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--tp-neutral-stroke-soft, #d0d7de);
+  border-radius: 0.75rem;
+  background: var(--tp-paper-color, #fff);
+}
+
+.tp-markup-viewer .tp-markup-viewer-start,
+.tp-markup-viewer .tp-markup-viewer-end {
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.tp-markup-viewer[data-layout='both'] .tp-markup-viewer-end {
+  border-block-start: 1px solid var(--tp-neutral-stroke-soft, #d0d7de);
+}
+
+.tp-markup-viewer .tp-markup-viewer-end {
+  padding: 6px;
+}
+
+.tp-markup-viewer tp-code-editor {
+  margin-inline: 0;
+  border: 0;
+}
+
+.tp-markup-viewer-start-controls:empty {
+  display: none;
+}
+
+.tp-markup-viewer-start-controls {
+  grid-column: 2;
+  justify-self: center;
+  min-inline-size: 0;
+}
+
+.tp-markup-viewer-source-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.tp-markup-viewer-source-toolbar tp-icon-button {
+  color: var(--tp-text-muted, #374151);
+}
+
+.tp-markup-viewer-output {
+  display: block;
+  inline-size: 100%;
+  min-block-size: 0;
+}
+
+.tp-markup-viewer-output > iframe {
+  display: block;
+  box-sizing: border-box;
+  inline-size: 100%;
+  border: 0;
+  min-height: var(
+    --tp-markup-viewer-frame-min-height,
+    var(--tp-html-viewer-frame-min-height, 0)
+  );
+  min-block-size: var(
+    --tp-markup-viewer-frame-min-height,
+    var(--tp-html-viewer-frame-min-height, 0)
+  );
+}
+
+.tp-markup-viewer[data-layout='source'],
+.tp-markup-viewer[data-layout='output'] {
+  display: block;
+}
+
+.tp-markup-viewer[data-layout='source'] .tp-markup-viewer-end,
+.tp-markup-viewer[data-layout='output'] .tp-markup-viewer-start {
+  display: none;
+}
+
+.tp-markup-viewer-error {
+  max-inline-size: 100%;
+  overflow: auto;
+}

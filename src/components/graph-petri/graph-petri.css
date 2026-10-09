@@ -1,0 +1,16 @@
+tp-graph-petri { --tp-graph-node-stroke: var(--tp-neutral-text-colorful, var(--tp-text-body, #263248)); }
+.tp-petri-place { fill: var(--tp-petri-place-fill, var(--tp-paper-color, Canvas)); }
+.tp-petri-transition { fill: var(--tp-petri-transition-fill, var(--tp-neutral-fill-loud, #263248)); }
+.tp-petri-transition.is-fired { fill: var(--tp-petri-fired-color, var(--tp-brand-fill-mid, #5268d8)); }
+.tp-graph-node.is-petri-enabled .tp-petri-transition { stroke: var(--tp-petri-enabled-color, var(--tp-success-stroke-mid, #1c9b57)); stroke-width: 3; }
+.tp-petri-fire-control { opacity: 0; pointer-events: none; cursor: pointer; transition: opacity .15s; }
+.tp-graph-node.is-petri-enabled:hover .tp-petri-fire-control,
+.tp-graph-node.is-petri-enabled:focus .tp-petri-fire-control { opacity: 1; pointer-events: all; }
+.tp-petri-fire-control circle { fill: var(--tp-petri-enabled-color, var(--tp-success-fill-mid, #1c9b57)); stroke: var(--tp-paper-color, Canvas); stroke-width: 1.5; }
+.tp-petri-fire-control path { fill: var(--tp-success-text-on-mid, white); pointer-events: none; }
+.tp-petri-token { fill: var(--tp-petri-token-color, var(--tp-text-body, #172033)); pointer-events: none; }
+.tp-petri-token-preview { stroke: var(--tp-petri-token-color, var(--tp-text-body, #172033)); stroke-width: 1; }
+.tp-petri-token-count { fill: var(--tp-petri-token-color, var(--tp-text-body, #172033)); font: 700 14px system-ui, sans-serif; pointer-events: none; }
+.tp-petri-label { dominant-baseline: hanging; }
+.tp-petri-toolbar-separator { align-self: stretch; width: 1px; margin: .1rem .15rem; background: var(--tp-neutral-stroke-soft, #d5dae4); }
+@media (prefers-reduced-motion: reduce) { tp-graph-petri, tp-graph-petri * { transition-duration: 0.01ms !important; transition-delay: 0ms !important; } }

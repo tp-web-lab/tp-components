@@ -1,0 +1,10 @@
+{
+  "components": ["markup-multi-slides", "asciidoc-multi-slides", "html-multi-slides", "markdown-multi-slides", "restructuredtext-multi-slides"],
+  "testFileCount": 6,
+  "targets": {
+    "lines": 90,
+    "statements": 90,
+    "functions": 90,
+    "branches": 80
+  }
+}

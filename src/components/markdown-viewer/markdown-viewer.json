@@ -1,0 +1,80 @@
+{
+  "tagname": "tp-markdown-viewer",
+  "classname": "TpMarkdownViewer",
+  "superclass": "TpMarkupViewer",
+  "description": "Interactive Markdown viewer component.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-markdown-viewer></tp-markdown-viewer>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "lite",
+      "description": "Uses the compact single-example viewer with rendered HTML output.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "Comma-separated URLs of external Markdown example files.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-html-viewer",
+      "summary": "Interactive HTML viewer with editable source, live rendering, and DOM inspection."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-markdown",
+      "summary": "Markdown rendering component."
+    },
+    {
+      "name": "tp-object-tree",
+      "summary": "Specialized tree for inspecting JavaScript values."
+    },
+    {
+      "name": "tp-switcher",
+      "summary": "Switches between horizontal and vertical layouts based on available space."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Markdown viewer",
+    "introduction": "The custom `<tp-markdown-viewer>` element implements the <tp-icon name=\"markdown-viewer\" library=\"components\" size=\"1.25em\"></tp-icon> Markdown viewer functionality: interactive Markdown viewer with editable source and parser outputs.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Code | The viewer initially displays the result. **Code** shows or hides the source editor; edit the source there, then use **Run** to update the result. **Reset** restores the initial source. |\n| HTML | In the output toolbar, **HTML**, **Generated HTML** (the code icon) and **Tree** switch between the rendered page, the parser's generated HTML in a read-only editor, and its syntax tree. |\n| Using the component | This is separate from the source-editor toggle and is not available in lite mode. |\n| :tp-icon:{name=\"code\" size=\"1.25em\"} Code | Shows or hides the source editor. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"1.25em\"} Editor toolbar | Shows or hides the toolbar of every visible code editor. |\n| :tp-icon:{name=\"eye-outline\" size=\"1.25em\"} Render | Shows or hides the rendered output. |\n| :tp-icon:{name=\"refresh\" size=\"1.25em\"} Reset | Restores the initially loaded content. |\n| :tp-icon:{name=\"play\" size=\"1.25em\"} Run | Renders the current source. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

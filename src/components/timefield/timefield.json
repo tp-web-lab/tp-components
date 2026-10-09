@@ -1,0 +1,239 @@
+{
+  "tagname": "tp-timefield",
+  "classname": "TpTimefield",
+  "superclass": "TpBase",
+  "description": "Native time field with labels, constraints, picker access, and clearing.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-timefield label=\"Time\" value=\"14:30\" clearable></tp-timefield>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "autocomplete",
+      "description": "Native autocomplete hint.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "clearable",
+      "description": "Shows an embedded clear button while the field has a value.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the field and its action buttons.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "label",
+      "description": "Visible label associated with the native time input.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label-position",
+      "description": "Label position (`top`, `bottom`, `start`, or `end`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"top\""
+    },
+    {
+      "name": "max",
+      "description": "Latest selectable time.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "min",
+      "description": "Earliest selectable time.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "name",
+      "description": "Name submitted with the containing form; defaults to the initial inline content when omitted.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "placeholder",
+      "description": "Hint forwarded to the native input; browsers may ignore it for date and time controls.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "readonly",
+      "description": "Prevents value editing.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "required",
+      "description": "Marks the field as required.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "step",
+      "description": "Time interval in seconds.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "60"
+    },
+    {
+      "name": "value",
+      "description": "Selected time in `HH:mm` or `HH:mm:ss` format.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "clear(): void",
+      "inherited": false,
+      "description": "Clears the selected time and emits `input`, `change`, and `tp-clear`."
+    },
+    {
+      "name": "focus(options?: FocusOptions): void",
+      "inherited": false,
+      "description": "Focuses the native time input."
+    },
+    {
+      "name": "showPicker(): void",
+      "inherited": false,
+      "description": "Opens the native time picker when supported by the browser."
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "description": "Emitted when the selected time is committed.",
+      "detail": "void"
+    },
+    {
+      "name": "input",
+      "description": "Emitted when the selected time changes while editing.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-clear",
+      "description": "Emitted after the embedded button clears the value.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-timefield-background",
+      "default": "var(--tp-paper-color)",
+      "description": "Controls the background."
+    },
+    {
+      "name": "--tp-timefield-border-color",
+      "default": "var(--tp-neutral-stroke-soft)",
+      "description": "Controls the border color."
+    },
+    {
+      "name": "--tp-timefield-focus-color",
+      "default": "var(--tp-brand-text-colorful)",
+      "description": "Controls the focus color."
+    },
+    {
+      "name": "--tp-timefield-inline-size",
+      "default": "10.5em",
+      "description": "Controls the inline size."
+    },
+    {
+      "name": "--tp-timefield-label-font-weight",
+      "default": "500",
+      "description": "Controls the label font weight."
+    },
+    {
+      "name": "--tp-timefield-label-gap",
+      "default": "0.35em",
+      "description": "Controls the label gap."
+    },
+    {
+      "name": "--tp-timefield-padding-block",
+      "default": "0.6em",
+      "description": "Controls the padding block."
+    },
+    {
+      "name": "--tp-timefield-padding-inline",
+      "default": "0.75em",
+      "description": "Controls the padding inline."
+    },
+    {
+      "name": "--tp-timefield-radius",
+      "default": "var(--tp-border-radius-sm)",
+      "description": "Controls the radius."
+    },
+    {
+      "name": "--tp-timefield-required-color",
+      "default": "var(--tp-danger-text-colorful)",
+      "description": "Controls the required color."
+    },
+    {
+      "name": "--tp-timefield-value-font-weight",
+      "default": "400",
+      "description": "Controls the value font weight."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Time field",
+    "introduction": "The custom `<tp-timefield>` element implements the <tp-icon name=\"timefield\" library=\"components\" size=\"1.25em\"></tp-icon> Time field functionality: native time field with labels, constraints, picker access, and clearing.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Type a time or use the browser's time controls. |\n| Using the component | The display follows your locale. |\n| Using the component | Use the clear control when available to remove the selected time. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Typing | Enter or edit the value using the field controls; read-only and disabled fields cannot be edited. |\n| Enter / Space on Clear | Activate the clear button when available. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

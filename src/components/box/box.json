@@ -1,0 +1,92 @@
+{
+  "tagname": "tp-box",
+  "classname": "TpBox",
+  "superclass": "TpBase",
+  "description": "Wraps content in a configurable bordered box.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-box>\n  The custom HTML element <code>&lt;tp-box&gt;</code> wraps its content in various ways.\n</tp-box>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "border-radius",
+      "description": "Border radius applied to the box. When absent, uses --tp-box-border-radius with a 0px fallback.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"0px\""
+    },
+    {
+      "name": "border-width",
+      "description": "Border width applied to the box. When absent, uses --tp-box-border-width with a 1px fallback.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1px\""
+    },
+    {
+      "name": "invert",
+      "description": "Uses an inverted surface with contrasting text.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "padding",
+      "description": "Padding applied inside the box. When absent, uses --tp-box-padding with a 1rem fallback.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1rem\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-box-background",
+      "default": "white",
+      "description": "Default box background."
+    },
+    {
+      "name": "--tp-box-border-radius",
+      "default": "0px",
+      "description": "Default border radius."
+    },
+    {
+      "name": "--tp-box-border-width",
+      "default": "1px",
+      "description": "Default border width."
+    },
+    {
+      "name": "--tp-box-color",
+      "default": "var(--tp-neutral-900)",
+      "description": "Default box text color."
+    },
+    {
+      "name": "--tp-box-padding",
+      "default": "1rem",
+      "description": "Default inner padding."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Box",
+    "introduction": "The custom `<tp-box>` element implements the <tp-icon name=\"box\" library=\"components\" size=\"1.25em\"></tp-icon> Box functionality: wraps content in a configurable bordered box.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

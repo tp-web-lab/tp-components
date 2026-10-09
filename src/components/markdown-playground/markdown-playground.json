@@ -1,0 +1,124 @@
+{
+  "tagname": "tp-markdown-playground",
+  "classname": "TpMarkdownPlayground",
+  "superclass": "TpPlayground",
+  "description": "Edits and renders a Markdown project.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-markdown-playground></tp-markdown-playground>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "repository",
+      "description": "Directory containing a Markdown playground project to load at initialization.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "src",
+      "description": "JSON project or markdown source file to load.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-console",
+      "summary": "Displays structured console output."
+    },
+    {
+      "name": "tp-drawer",
+      "summary": "Displays a sliding drawer panel."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-file-tree",
+      "summary": "Displays an interactive file and folder tree."
+    },
+    {
+      "name": "tp-filesystem",
+      "summary": "In-memory file system component."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-iframe",
+      "summary": "Controlled iframe component."
+    },
+    {
+      "name": "tp-menu",
+      "summary": "Accessible menu component."
+    },
+    {
+      "name": "tp-splitter",
+      "summary": "Splitter component with two resizable panels."
+    },
+    {
+      "name": "tp-switcher",
+      "summary": "Switches between horizontal and vertical layouts based on available space."
+    },
+    {
+      "name": "tp-tabs",
+      "summary": "Accessible tabs component with keyboard and reorder support."
+    },
+    {
+      "name": "tp-toolbar",
+      "summary": "Sticky toolbar with start / center / end sections,"
+    }
+  ],
+  "credits": [
+    {
+      "name": "es-module-lexer",
+      "url": "https://github.com/guybedford/es-module-lexer",
+      "summary": "ECMAScript module import analysis."
+    },
+    {
+      "name": "TypeScript",
+      "url": "https://www.typescriptlang.org/",
+      "summary": "TypeScript transpilation and language services."
+    },
+    {
+      "name": "Zod",
+      "url": "https://zod.dev/",
+      "summary": "Runtime schema validation."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Markdown Playground",
+    "introduction": "The custom `<tp-markdown-playground>` element implements the <tp-icon name=\"markdown-playground\" library=\"components\" size=\"1.25em\"></tp-icon> Markdown Playground functionality: edits and renders a Markdown project.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Select | Select a project file to edit it, then run the project to update the result. |\n| Using the component | Use the project and file menus to manage your work. |\n| Project | Creates, clears, imports, or exports a complete project. |\n| Project > Import from disk / Export to disk | Opens or saves a JSON project containing all files and project settings. Import replaces the current project. |\n| File > Open source file… | Opens a local source file, including in an empty playground, and creates its surrounding project automatically. This replaces the current project; choose Run to execute or render it. |\n| File > Save | Saves the active editor file, not the whole project. The first save asks for a destination; later saves reuse it where direct file access is supported, or download the file again otherwise. |\n| File > Save as… | Chooses a new destination or download filename for the active file. This does not rename files or change imports inside the project. Cancelling leaves the previous destination unchanged. |\n| Examples | Loads one of the bundled example projects. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"1.25em\"} Editor toolbar | Shows or hides the active code editor toolbar. |\n| :tp-icon:{name=\"refresh\" size=\"1.25em\"} Reset | Restores the initially loaded project. |\n| :tp-icon:{name=\"test-tube\" size=\"1.25em\"} Test | Runs the project test file when one is available. |\n| :tp-icon:{name=\"play\" size=\"1.25em\"} Run | Executes or renders the current project. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Arrow keys / Enter / Space / Escape | Navigate toolbar menus, activate an action, or close a submenu. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

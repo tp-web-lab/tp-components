@@ -1,0 +1,60 @@
+{
+  "tagname": "tp-card",
+  "classname": "TpCard",
+  "superclass": "TpBase",
+  "description": "Displays a structured card.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-card style=\"width:300px;\">\n<dl>\n<dt>header</dt>\n<dd>content header</dd>\n<dt>footer</dt>\n<dd>content footer</dd>\n<dt>main</dt>\n<dd>content body</dd>\n</dl>\n</tp-card>"
+    }
+  ],
+  "attributes": [],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-card-background",
+      "default": "var(--tp-paper-color, #fff)",
+      "description": "Card background."
+    },
+    {
+      "name": "--tp-card-border-color",
+      "default": "var(--tp-neutral-stroke-soft, #d6d9df)",
+      "description": "Card border color."
+    },
+    {
+      "name": "--tp-card-border-radius",
+      "default": "var(--tp-border-radius-lg, 0.5625rem)",
+      "description": "Card border radius."
+    },
+    {
+      "name": "--tp-card-footer-background",
+      "default": "var(--tp-neutral-fill-softer, #f5f6f8)",
+      "description": "Footer background."
+    },
+    {
+      "name": "--tp-card-header-background",
+      "default": "var(--tp-neutral-fill-softer, #f5f6f8)",
+      "description": "Header background."
+    },
+    {
+      "name": "--tp-card-padding",
+      "default": "1rem",
+      "description": "Section padding."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Card",
+    "introduction": "The custom `<tp-card>` element implements the <tp-icon name=\"card\" library=\"components\" size=\"1.25em\"></tp-icon> Card functionality: displays a structured card.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

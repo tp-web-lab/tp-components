@@ -1,0 +1,20 @@
+{
+  "src": [
+    {
+      "label": "No image (default)",
+      "value": ""
+    },
+    {
+      "label": "tp-components logo",
+      "value": "/docs/components/avatar/examples/attributes-src-file1.svg"
+    },
+    {
+      "label": "Portrait illustration",
+      "value": "/docs/components/avatar/examples/attributes-src-file2.svg"
+    },
+    {
+      "label": "Missing image (test fallback)",
+      "value": "/docs/components/avatar/examples/attributes-src-file-unknown.svg"
+    }
+  ]
+}

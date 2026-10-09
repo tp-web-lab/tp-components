@@ -1,0 +1,63 @@
+{
+  "tagname": "tp-crossword",
+  "classname": "TpCrossword",
+  "superclass": "TpBase",
+  "description": "Displays an interactive crossword puzzle.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-crossword>\n<dl>\n  <dt>solution</dt>\n  <dd>\n    <ol>\n      <li>BALL</li>\n      <li>AREA</li>\n      <li>LEAD</li>\n      <li>LADY</li>\n    </ol>\n   </dd>\n  <dt>across</dt>\n  <dd>\n    <ol>\n      <li>A. A round toy used in many sports</li>\n      <li>B. The size of a surface</li>\n      <li>C. A heavy metal</li>\n      <li>D. A polite word for a woman</li>\n    </ol>\n  </dd>\n  <dt>down</dt>\n  <dd>\n    <ol>\n      <li>1. A round toy used in many sports</li>\n       <li>2. The size of a surface</li>\n       <li>3. A heavy metal</li>\n       <li>4. A polite word for a woman</li>\n     </ol>\n   </dd>\n </dl>\n</tp-crossword>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "data-crossword-puzzle",
+      "description": "Crossword puzzle definition.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "data-crossword-silent",
+      "description": "Enables silent mode when set to `true`.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "false"
+    },
+    {
+      "name": "silent",
+      "description": "Enables silent mode.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Crossword",
+    "introduction": "The custom `<tp-crossword>` element implements the <tp-icon name=\"crossword\" library=\"components\" size=\"1.25em\"></tp-icon> Crossword functionality: displays an interactive crossword puzzle.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Complete the puzzle using the editable cells; fixed clues cannot be changed. |\n| Using the component | Use the displayed assistance controls to check or reveal information when available. |\n| Using the component | The puzzle's messages indicate progress and completion. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

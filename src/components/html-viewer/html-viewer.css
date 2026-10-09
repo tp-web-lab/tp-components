@@ -1,0 +1,6 @@
+.tp-html-viewer-output pre {
+  margin: 0;
+  max-width: 100%;
+  overflow: auto;
+  border-radius: 0.5rem;
+}

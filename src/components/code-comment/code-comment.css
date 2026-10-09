@@ -1,0 +1,29 @@
+tp-code-comment {
+  display: flow-root;
+  min-inline-size: 0;
+}
+
+tp-code-comment:not([open]) > ol {
+  display: none;
+}
+
+tp-code-comment > ol > li {
+  position: relative;
+  padding-inline-start: 0.25em;
+}
+
+tp-code-comment > ol > li:has(> [data-code-comment-number]:not([hidden]))::marker {
+  color: transparent;
+}
+
+tp-code-comment > ol > li > [data-code-comment-number] {
+  position: absolute;
+  inset-inline-start: -1.5em;
+  inset-block-start: 0.15em;
+  color: var(--tp-text-body, CanvasText);
+}
+
+/* Match the list's surface rather than retaining the SVG's fixed white fill. */
+tp-code-comment [data-code-comment-number] svg > circle[fill="white"] {
+  fill: var(--tp-paper-color, Canvas);
+}

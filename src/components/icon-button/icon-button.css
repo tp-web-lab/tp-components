@@ -1,0 +1,113 @@
+tp-icon-button {
+  --tp-icon-button-size: 1.75em;
+  --tp-icon-button-icon-size: 1em;
+  --tp-icon-button-radius: 999rem;
+  --tp-icon-button-hover-background: color-mix(
+    in srgb,
+    currentColor 10%,
+    transparent
+  );
+  --tp-icon-button-focus-ring: currentColor;
+
+  display: inline-flex;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+tp-icon-button[size='xxs'] {
+  --tp-icon-button-size: max(1.5rem, 1.25em);
+  --tp-icon-button-icon-size: 0.75em;
+}
+
+tp-icon-button[size='xs'] {
+  --tp-icon-button-size: max(1.5rem, 1.5em);
+  --tp-icon-button-icon-size: 0.875em;
+}
+
+tp-icon-button[size='s'] {
+  --tp-icon-button-size: 1.75em;
+  --tp-icon-button-icon-size: 1em;
+}
+
+tp-icon-button[size='m'] {
+  --tp-icon-button-size: 2em;
+  --tp-icon-button-icon-size: 1.125em;
+}
+
+tp-icon-button[size='l'] {
+  --tp-icon-button-size: 2.25em;
+  --tp-icon-button-icon-size: 1.25em;
+}
+
+tp-icon-button[size='xl'] {
+  --tp-icon-button-size: 2.75em;
+  --tp-icon-button-icon-size: 1.5em;
+}
+
+tp-icon-button[size='xxl'] {
+  --tp-icon-button-size: 3.25em;
+  --tp-icon-button-icon-size: 1.75em;
+}
+
+tp-icon-button > button {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: var(--tp-icon-button-radius);
+  color: currentColor;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  justify-content: center;
+  margin: 0;
+  min-block-size: var(--tp-icon-button-size);
+  min-inline-size: var(--tp-icon-button-size);
+  padding: 0;
+}
+
+tp-icon-button > button:hover {
+  background: var(--tp-icon-button-hover-background);
+}
+
+tp-icon-button > button:focus-visible {
+  outline: 2px solid var(--tp-icon-button-focus-ring);
+  outline-offset: 2px;
+}
+
+tp-icon-button > button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+tp-icon-button > button:disabled:hover {
+  background: transparent;
+}
+
+tp-icon-button tp-icon {
+  --tp-icon-size: var(--tp-icon-button-icon-size);
+}
+
+tp-icon-button[variant='brand'] {
+  color: var(--tp-button-brand, #7c3aed);
+}
+
+tp-icon-button[variant='success'] {
+  color: var(--tp-button-success, #15803d);
+}
+
+tp-icon-button[variant='danger'] {
+  color: var(--tp-button-danger, #b91c1c);
+}
+
+tp-icon-button[variant='warning'] {
+  color: var(--tp-button-warning, #c2410c);
+}
+
+tp-icon-button[variant='info'] {
+  color: var(--tp-button-info, #1d4ed8);
+}
+
+tp-icon-button[variant='neutral'] {
+  color: var(--tp-button-neutral, currentColor);
+}

@@ -1,0 +1,16 @@
+tp-inline {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--tp-inline-gap, 0.5rem);
+  justify-content: flex-start;
+  min-inline-size: 0;
+}
+
+tp-inline > * {
+  min-inline-size: 0;
+}
+
+tp-inline[stretch] > * {
+  flex: 1 1 0;
+}

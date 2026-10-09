@@ -1,0 +1,89 @@
+tp-graph-analog-circuit { display: block; }
+.tp-analog-component {
+  fill: none;
+  stroke: var(--tp-neutral-text-colorful);
+  stroke-width: 2;
+}
+
+.tp-analog-source { fill: none; }
+.tp-analog-probe { fill: none; }
+.tp-analog-hit {
+  fill: none;
+  stroke: none;
+  pointer-events: all;
+}
+.tp-analog-hit.is-selected { stroke: var(--tp-brand-stroke-mid); stroke-width: 2; stroke-dasharray: 4 3; }
+.tp-analog-ground-hit {
+  fill: none;
+  stroke: none;
+  pointer-events: all;
+}
+.tp-analog-ground-hit.is-selected {
+  stroke: var(--tp-brand-stroke-mid);
+  stroke-width: 2;
+  stroke-dasharray: 3 2;
+}
+.tp-analog-ground-symbol {
+  fill: none;
+  stroke: var(--tp-neutral-text-colorful);
+  stroke-linecap: square;
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+.tp-analog-hub { fill: var(--tp-neutral-fill-soft); stroke: var(--tp-neutral-text-colorful); }
+.tp-analog-hub-junction { fill: var(--tp-neutral-text-colorful); pointer-events: none; }
+.tp-analog-symbol {
+  fill: none;
+  stroke: var(--tp-neutral-text-colorful);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+.tp-analog-transistor-arrow { fill: var(--tp-neutral-text-colorful); }
+.tp-analog-internal-letter { fill: var(--tp-neutral-text-colorful); font-size: 16px; font-weight: 600; pointer-events: none; }
+.tp-analog-component.is-selected,
+.tp-analog-source.is-selected,
+.tp-analog-probe.is-selected { stroke: var(--tp-brand-stroke-mid); stroke-width: 3; }
+
+.tp-analog-results { overflow-x: auto; }
+tp-graph-analog-circuit > .tp-graph-results { display: grid; gap: .75rem; overflow: visible; border: 0; background: transparent; }
+.tp-analog-panel, .tp-analog-equations { overflow: hidden; border: 1px solid var(--tp-neutral-stroke-soft); border-radius: .75rem; background: var(--tp-paper-color); }
+.tp-analog-oscilloscope-header { display: flex; align-items: center; justify-content: space-between; gap: var(--tp-space-s); }
+.tp-analog-calibration { display: flex; align-items: center; gap: var(--tp-space-xs); flex-wrap: wrap; }
+.tp-analog-calibration-group { display: inline-flex; align-items: center; gap: .2rem; }
+.tp-analog-calibration-divider { align-self: stretch; width: 1px; min-height: 1.5rem; background: var(--tp-neutral-stroke-soft); }
+.tp-analog-calibration-value { min-width: 5.5rem; color: var(--tp-neutral-text-colorful); font-size: .72rem; text-align: center; text-transform: none; letter-spacing: normal; }
+.tp-analog-results svg { min-width: 38rem; width: 100%; height: 17rem; }
+.tp-analog-axis { fill: none; stroke: var(--tp-neutral-stroke-mid); stroke-width: 1; }
+.tp-analog-grid { fill: none; stroke: var(--tp-neutral-stroke-soft); stroke-width: 1; }
+.tp-analog-trace { fill: none; stroke: var(--tp-info-stroke-mid); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.tp-analog-trace-1 { stroke: var(--tp-success-stroke-mid); }
+.tp-analog-trace-2 { stroke: var(--tp-warning-stroke-mid); }
+.tp-analog-trace-3 { stroke: var(--tp-brand-stroke-mid); }
+.tp-analog-legend { color: var(--tp-neutral-text-colorful); display: flex; align-items: center; gap: var(--tp-space-s); flex-wrap: wrap; }
+.tp-analog-legend-title { font-weight: 600; }
+.tp-analog-legend-item { display: inline-flex; align-items: center; gap: .3rem; }
+.tp-analog-legend-swatch { width: 1.2rem; height: .18rem; background: var(--tp-info-stroke-mid); }
+.tp-analog-legend-swatch.tp-analog-trace-1 { background: var(--tp-success-stroke-mid); }
+.tp-analog-legend-swatch.tp-analog-trace-2 { background: var(--tp-warning-stroke-mid); }
+.tp-analog-legend-swatch.tp-analog-trace-3 { background: var(--tp-brand-stroke-mid); }
+.tp-analog-scale-label { fill: var(--tp-neutral-text-colorful); font-size: 12px; }
+.tp-analog-axis-title { fill: var(--tp-neutral-text-colorful); font-size: 13px; font-weight: 600; }
+.tp-analog-error { color: var(--tp-danger-text-colorful); }
+.tp-analog-equation-laws, .tp-analog-equation-list { display: grid; gap: .55rem; }
+.tp-analog-equation-laws > span { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1rem; }
+.tp-analog-equation-list { margin-block-start: 1rem; }
+.tp-analog-equation { display: grid; grid-template-columns: minmax(7rem, max-content) minmax(0, 1fr); gap: 1rem; align-items: baseline; }
+.tp-analog-equation-math .tp-markdown-output p { display: block; margin: 0; text-align: start; }
+.tp-analog-equations [data-mathjax-display="false"], .tp-analog-equations mjx-container:not([display="true"]) { display: inline; margin: 0; }
+.tp-graph-results .tp-analog-equations mjx-container svg { display: inline-block; min-width: 0; max-width: none; vertical-align: inherit; }
+.tp-analog-parameter { display: inline-flex; align-items: center; gap: .3rem; white-space: nowrap; }
+.tp-analog-parameter[hidden] { display: none; }
+.tp-analog-parameter input, .tp-analog-parameter select { box-sizing: border-box; width: 7rem; min-height: 1.8rem; border: 1px solid var(--tp-neutral-stroke-soft); border-radius: .35rem; color: inherit; background: var(--tp-paper-color); }
+.tp-analog-parameter input[type="number"] { width: 7.5rem; }
+.tp-analog-parameter select { width: 6.5rem; }
+.tp-analog-parameter select[data-analog-waveform] { width: 8rem; }
+@media (max-width: 32rem) { .tp-analog-equation { grid-template-columns: 1fr; gap: .15rem; } }

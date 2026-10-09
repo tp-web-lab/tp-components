@@ -1,0 +1,13 @@
+tp-include {
+  display: block;
+}
+
+tp-include > [data-tp-include-loading] {
+  font-style: italic;
+}
+
+tp-include[mode='raw'] > pre {
+  margin: 0;
+  overflow: auto;
+  white-space: pre;
+}

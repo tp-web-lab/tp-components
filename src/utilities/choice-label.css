@@ -1,0 +1,28 @@
+:is(tp-radio-list, tp-checkbox-list)[data-tp-choice-label-position] {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	grid-template-areas: "heading" "choices";
+	align-items: center;
+	gap: 0.35em 0.75em;
+}
+:is(tp-radio-list, tp-checkbox-list) > [data-tp-choice-label] {
+	grid-area: heading;
+	font-weight: var(--tp-textfield-label-font-weight, 500);
+}
+:is(tp-radio-list, tp-checkbox-list)[data-tp-choice-label-position]
+	> :is(ul, ol) {
+	grid-area: choices;
+	min-inline-size: 0;
+	margin: 0;
+}
+:is(tp-radio-list, tp-checkbox-list)[data-tp-choice-label-position="bottom"] {
+	grid-template-areas: "choices" "heading";
+}
+:is(tp-radio-list, tp-checkbox-list)[data-tp-choice-label-position="start"] {
+	grid-template-columns: max-content minmax(0, 1fr);
+	grid-template-areas: "heading choices";
+}
+:is(tp-radio-list, tp-checkbox-list)[data-tp-choice-label-position="end"] {
+	grid-template-columns: minmax(0, 1fr) max-content;
+	grid-template-areas: "choices heading";
+}

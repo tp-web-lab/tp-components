@@ -1,0 +1,39 @@
+{
+  "tagname": "tp-note",
+  "classname": "TpNote",
+  "superclass": "TpBase",
+  "description": "Defines an HTML note referenced by tp-ref.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<div data-tp-reference-scope=\"\">\n  <p>Read more <tp-ref href=\"^example\"></tp-ref>.</p>\n  <tp-note ref=\"example\" title=\"Example\"><p>Additional information with <strong>HTML content</strong>.</p></tp-note>\n  <tp-listof selector=\"tp-note\"></tp-listof>\n</div>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "ref",
+      "description": "Identifier used by references in this document.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Note",
+    "introduction": "The custom `<tp-note>` element defines a hidden HTML note for reference tooltips and generated lists.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| None | No component-specific mouse interaction; the definition is hidden. Its content is displayed through references and generated lists. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| None | No component-specific keyboard interaction. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

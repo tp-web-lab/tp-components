@@ -1,0 +1,133 @@
+{
+  "tagname": "tp-notebook",
+  "classname": "TpNotebook",
+  "superclass": "TpBase",
+  "description": "Combines editable markup cells and executable programming-language cells.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-notebook></tp-notebook>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "language",
+      "description": "Programming language enforced by a specialized notebook.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"javascript\""
+    },
+    {
+      "name": "readonly",
+      "description": "Makes all notebook editors read-only and disables structural changes.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "repository",
+      "description": "Directory containing project.json and .files.json.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "src",
+      "description": "JSON notebook file.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-notebook-change",
+      "description": "Emitted after the cell collection changes.",
+      "detail": "{ cells: number }"
+    },
+    {
+      "name": "tp-notebook-load",
+      "description": "Emitted after inline, src, or repository cells are loaded.",
+      "detail": "{ source: \"inline\" | \"src\" | \"repository\" | \"file\"; cells: number }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-asciidoc-viewer",
+      "summary": "Interactive AsciiDoc viewer with editable source and parser outputs."
+    },
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-html-viewer",
+      "summary": "Interactive HTML viewer with editable source, live rendering, and DOM inspection."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-javascript-viewer",
+      "summary": "Compact JavaScript code viewer and runner."
+    },
+    {
+      "name": "tp-markdown-viewer",
+      "summary": "Interactive Markdown viewer with editable source and parser outputs."
+    },
+    {
+      "name": "tp-prolog-viewer",
+      "summary": "Compact Prolog code viewer and runner."
+    },
+    {
+      "name": "tp-python-viewer",
+      "summary": "Compact Python code viewer and runner."
+    },
+    {
+      "name": "tp-restructuredtext-viewer",
+      "summary": "Interactive reStructuredText viewer with editable source and parser outputs."
+    },
+    {
+      "name": "tp-sql-viewer",
+      "summary": "Compact SQL code viewer and runner."
+    },
+    {
+      "name": "tp-typescript-viewer",
+      "summary": "Compact TypeScript code viewer and runner."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Notebook",
+    "introduction": "The custom `<tp-notebook>` element implements the <tp-icon name=\"notebook\" library=\"components\" size=\"1.25em\"></tp-icon> Notebook functionality: combines editable markup cells and executable programming-language cells.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Edit the notebook's blocks and run programming cells to see their results. |\n| Using the component | In editor mode, select a block to move, duplicate or delete it. |\n| Using the component | Preview displays the document; Export HTML saves an HTML version. |\n| Using the component | In editor mode, select a block to move, duplicate, or delete it. |\n| Using the component | The Markup dropdown adds markup blocks, while the generic notebook's Language dropdown adds programming blocks. |\n| Using the component | In a language-specific notebook, this dropdown is replaced by a button showing the language icon, its name, and a plus sign. |\n| Using the component | Markup blocks use their lite viewers, and programming blocks retain their complete interactive viewers. |\n| Using the component | The `Files` dropdown next to the title loads notebook JSON, imports a previously exported HTML document, and provides `Save`, `Save as…`, and `Export HTML`. |\n| Using the component | The `eye-outline` toggle replaces the cells with the final document directly inside the notebook; its icon becomes `pencil` to return to the cell editor. |\n| Using the component | Preview and exported HTML turn markup blocks into rendered HTML, preserve interactive programming blocks, and remove the notebook editing controls. |\n| Using the component | Exported HTML keeps non-executable notebook metadata so it can be imported again for editing. |\n| :tp-icon:{name=\"file-settings\" size=\"1.25em\"} Files | Loads, saves, imports, or exports a notebook. |\n| :tp-icon:{name=\"plus-box-outline\" size=\"1.25em\"} Markup + | Adds a markup cell in the selected language. |\n| :tp-icon:{name=\"plus-box-outline\" size=\"1.25em\"} Language + | Adds a programming cell; specialized notebooks use their fixed language. |\n| :tp-icon:{name=\"arrow-up\" size=\"1.25em\"} :tp-icon:{name=\"arrow-down\" size=\"1.25em\"} Move up / Move down | Moves the selected cell. |\n| :tp-icon:{name=\"content-copy\" size=\"1.25em\"} Duplicate | Duplicates the selected cell. |\n| :tp-icon:{name=\"delete-outline\" size=\"1.25em\"} Delete | Deletes the selected cell. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"1.25em\"} Editor toolbar | Shows or hides the toolbar of the selected cell's code editor. |\n| :tp-icon:{name=\"refresh\" size=\"1.25em\"} Reset | Restores the initially loaded notebook. |\n| :tp-icon:{name=\"eye-outline\" size=\"1.25em\"} :tp-icon:{name=\"pencil\" size=\"1.25em\"} Preview / Edit | Toggles between the final rendered document and the cell editor. |\n| :tp-icon:{name=\"play-all\" size=\"1.25em\"} Run all cells | Executes every programming cell in document order. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

@@ -1,0 +1,629 @@
+{
+  "generatedAt": "2026-09-20T11:13:35.695Z",
+  "expectedComponents": 171,
+  "standard": "WCAG 2.2 A and AA",
+  "browsers": [
+    {
+      "browser": "chromium",
+      "components": 171,
+      "complete": true,
+      "scanErrors": 0,
+      "incomplete": 123,
+      "violations": 6
+    },
+    {
+      "browser": "firefox",
+      "components": 171,
+      "complete": false,
+      "scanErrors": 2,
+      "incomplete": 124,
+      "violations": 5
+    },
+    {
+      "browser": "webkit",
+      "components": 171,
+      "complete": false,
+      "scanErrors": 1,
+      "incomplete": 118,
+      "violations": 6
+    }
+  ],
+  "scanErrors": [
+    {
+      "browser": "firefox",
+      "component": "tp-emoji-picker",
+      "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+    },
+    {
+      "browser": "firefox",
+      "component": "tp-symbol-picker",
+      "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+    },
+    {
+      "browser": "webkit",
+      "component": "tp-emoji-picker",
+      "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+    }
+  ],
+  "violations": [
+    {
+      "browser": "chromium",
+      "component": "tp-datefield",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
+      "id": "label",
+      "impact": "critical",
+      "targets": [
+        "#datefield-preview > span[data-tp-datefield-control=\"\"] > input[type=\"date\"][data-tp-datefield-input=\"\"][min=\"\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "#datefield-preview > span[data-tp-datefield-control=\"\"] > input[type=\"date\"][data-tp-datefield-input=\"\"][min=\"\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "component": "tp-flip-card",
+      "help": "Scrollable region must have keyboard access",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright",
+      "id": "scrollable-region-focusable",
+      "impact": "serious",
+      "targets": [
+        "tp-flip-card[aria-label=\"Ace of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Two of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Three of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Four of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Five of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Six of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Seven of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Eight of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Nine of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Ten of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Jack of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Queen of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"King of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Ace of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Two of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Three of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Four of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Five of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Six of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Seven of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Eight of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Nine of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Ten of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Jack of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Queen of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"King of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "component": "tp-numberfield",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
+      "id": "label",
+      "impact": "critical",
+      "targets": [
+        "input[min=\"\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "input[min=\"\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has an empty placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "component": "tp-restructuredtext-playground",
+      "help": "Scrollable region must have keyboard access",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright",
+      "id": "scrollable-region-focusable",
+      "impact": "serious",
+      "targets": [
+        "#attributes-frame > div[data-tp-iframe-viewport=\"\"][data-tp-iframe-role=\"viewport\"] > div[data-tp-iframe-stage=\"\"][data-tp-iframe-role=\"stage\"] > iframe",
+        ".cm-scroller"
+      ],
+      "details": [
+        {
+          "target": [
+            "#attributes-frame > div[data-tp-iframe-viewport=\"\"][data-tp-iframe-role=\"viewport\"] > div[data-tp-iframe-stage=\"\"][data-tp-iframe-role=\"stage\"] > iframe",
+            ".cm-scroller"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "component": "tp-textfield",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
+      "id": "label",
+      "impact": "critical",
+      "targets": [
+        "#textfield-preview > span[data-tp-textfield-control=\"\"] > input[data-tp-textfield-input=\"\"][type=\"text\"][placeholder=\"\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "#textfield-preview > span[data-tp-textfield-control=\"\"] > input[data-tp-textfield-input=\"\"][type=\"text\"][placeholder=\"\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has an empty placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "component": "tp-timefield",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
+      "id": "label",
+      "impact": "critical",
+      "targets": [
+        "#timefield-preview > span[data-tp-timefield-control=\"\"] > input[type=\"time\"][data-tp-timefield-input=\"\"][min=\"\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "#timefield-preview > span[data-tp-timefield-control=\"\"] > input[type=\"time\"][data-tp-timefield-input=\"\"][min=\"\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "browser": "firefox",
+      "component": "tp-datefield",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
+      "id": "label",
+      "impact": "critical",
+      "targets": [
+        "#datefield-preview > span[data-tp-datefield-control=\"\"] > input[type=\"date\"][data-tp-datefield-input=\"\"][min=\"\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "#datefield-preview > span[data-tp-datefield-control=\"\"] > input[type=\"date\"][data-tp-datefield-input=\"\"][min=\"\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "browser": "firefox",
+      "component": "tp-flip-card",
+      "help": "Scrollable region must have keyboard access",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright",
+      "id": "scrollable-region-focusable",
+      "impact": "serious",
+      "targets": [
+        "tp-flip-card[aria-label=\"Ace of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Two of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Three of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Four of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Five of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Six of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Seven of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Eight of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Nine of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Ten of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Jack of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Queen of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"King of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Ace of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Two of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Three of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Four of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Five of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Six of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Seven of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Eight of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Nine of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Ten of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Jack of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Queen of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"King of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        }
+      ]
+    },
+    {
+      "browser": "firefox",
+      "component": "tp-numberfield",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
+      "id": "label",
+      "impact": "critical",
+      "targets": [
+        "input[min=\"\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "input[min=\"\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has an empty placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "browser": "firefox",
+      "component": "tp-textfield",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
+      "id": "label",
+      "impact": "critical",
+      "targets": [
+        "#textfield-preview > span[data-tp-textfield-control=\"\"] > input[data-tp-textfield-input=\"\"][type=\"text\"][placeholder=\"\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "#textfield-preview > span[data-tp-textfield-control=\"\"] > input[data-tp-textfield-input=\"\"][type=\"text\"][placeholder=\"\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has an empty placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "browser": "firefox",
+      "component": "tp-timefield",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
+      "id": "label",
+      "impact": "critical",
+      "targets": [
+        "#timefield-preview > span[data-tp-timefield-control=\"\"] > input[type=\"time\"][data-tp-timefield-input=\"\"][min=\"\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "#timefield-preview > span[data-tp-timefield-control=\"\"] > input[type=\"time\"][data-tp-timefield-input=\"\"][min=\"\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "browser": "webkit",
+      "component": "tp-datefield",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
+      "id": "label",
+      "impact": "critical",
+      "targets": [
+        "#datefield-preview > span[data-tp-datefield-control=\"\"] > input[type=\"date\"][data-tp-datefield-input=\"\"][min=\"\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "#datefield-preview > span[data-tp-datefield-control=\"\"] > input[type=\"date\"][data-tp-datefield-input=\"\"][min=\"\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "browser": "webkit",
+      "component": "tp-flip-card",
+      "help": "Scrollable region must have keyboard access",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright",
+      "id": "scrollable-region-focusable",
+      "impact": "serious",
+      "targets": [
+        "tp-flip-card[aria-label=\"Ace of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Two of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Three of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Four of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Five of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Six of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Seven of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Eight of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Nine of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Ten of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Jack of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"Queen of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]",
+        "tp-flip-card[aria-label=\"King of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Ace of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Two of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Three of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Four of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Five of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Six of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Seven of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Eight of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Nine of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Ten of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Jack of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"Queen of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        },
+        {
+          "target": [
+            "tp-flip-card[aria-label=\"King of hearts\"][button-position=\"none\"] > .tp-flip-card-scene[role=\"button\"][aria-label=\"Show verso\"] > .tp-flip-card-inner > .tp-flip-card-recto[data-side=\"recto\"][aria-hidden=\"false\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        }
+      ]
+    },
+    {
+      "browser": "webkit",
+      "component": "tp-markdown-playground",
+      "help": "Scrollable region must have keyboard access",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright",
+      "id": "scrollable-region-focusable",
+      "impact": "serious",
+      "targets": [
+        "#attributes-frame > div[data-tp-iframe-viewport=\"\"][data-tp-iframe-role=\"viewport\"] > div[data-tp-iframe-stage=\"\"][data-tp-iframe-role=\"stage\"] > iframe",
+        ".cm-scroller"
+      ],
+      "details": [
+        {
+          "target": [
+            "#attributes-frame > div[data-tp-iframe-viewport=\"\"][data-tp-iframe-role=\"viewport\"] > div[data-tp-iframe-stage=\"\"][data-tp-iframe-role=\"stage\"] > iframe",
+            ".cm-scroller"
+          ],
+          "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        }
+      ]
+    },
+    {
+      "browser": "webkit",
+      "component": "tp-numberfield",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
+      "id": "label",
+      "impact": "critical",
+      "targets": [
+        "input[min=\"\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "input[min=\"\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has an empty placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "browser": "webkit",
+      "component": "tp-textfield",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
+      "id": "label",
+      "impact": "critical",
+      "targets": [
+        "#textfield-preview > span[data-tp-textfield-control=\"\"] > input[data-tp-textfield-input=\"\"][type=\"text\"][placeholder=\"\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "#textfield-preview > span[data-tp-textfield-control=\"\"] > input[data-tp-textfield-input=\"\"][type=\"text\"][placeholder=\"\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has an empty placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "browser": "webkit",
+      "component": "tp-timefield",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
+      "id": "label",
+      "impact": "critical",
+      "targets": [
+        "#timefield-preview > span[data-tp-timefield-control=\"\"] > input[type=\"time\"][data-tp-timefield-input=\"\"][min=\"\"]"
+      ],
+      "details": [
+        {
+          "target": [
+            "#timefield-preview > span[data-tp-timefield-control=\"\"] > input[type=\"time\"][data-tp-timefield-input=\"\"][min=\"\"]"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+.tp-markup-single-page {
+  display: block;
+}
+
+.tp-markup-single-page-output {
+  min-inline-size: 0;
+}
+
+.tp-markup-single-page-error {
+  margin: 0;
+  padding: 0.9rem;
+  border: 1px solid #f1b7bf;
+  border-radius: 0.5rem;
+  background: #fff3f5;
+  color: #8a1c2c;
+  overflow: auto;
+}

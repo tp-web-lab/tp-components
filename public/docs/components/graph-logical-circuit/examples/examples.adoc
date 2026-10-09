@@ -1,0 +1,12 @@
+[tp-asciidoc-viewer%allow-script,label="tp-graph-logical-circuit"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-graph-logical-circuit%grid,id="logic-example",grid-size="20",src="/docs/components/graph-logical-circuit/examples/xor.json"]
+====
+====
+======
+----
+========

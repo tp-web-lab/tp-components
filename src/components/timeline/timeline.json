@@ -1,0 +1,56 @@
+{
+  "tagname": "tp-timeline",
+  "classname": "TpTimeline",
+  "superclass": "TpBase",
+  "description": "Arranges chronological events on a vertical or horizontal timeline.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-timeline>\n  <dl>\n    <dt>Time</dt><dd>09:00</dd>\n    <dt>Icon</dt><dd><tp-icon name=\"home\"></tp-icon></dd>\n    <dt>Title</dt><dd>Welcome</dd>\n    <dt>Content</dt><dd>Meet the team and explore the project.</dd>\n  </dl>\n  <dl>\n    <dt>Time</dt><dd>10:00</dd>\n    <dt>Title</dt><dd>Workshop</dd>\n    <dt>Content</dt><dd>Build your first component together.</dd>\n  </dl>\n  <dl>\n    <dt>Time</dt><dd>12:00</dd>\n    <dt>Title</dt><dd>Closing session</dd>\n  </dl>\n</tp-timeline>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "orientation",
+      "description": "Timeline orientation (`vertical` or `horizontal`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"vertical\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-callout",
+      "summary": "Callout component for highlighted contextual content."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Timeline",
+    "introduction": "The custom `<tp-timeline>` element implements the Timeline functionality: arranges chronological events on a vertical or horizontal timeline.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Events | Read events in order. Vertical layouts place time beside the title; horizontal layouts place time above it. |\n| Horizontal scrolling | Scroll to reach events outside the visible area. |\n| Links and controls | Use embedded event controls normally. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab | Focuses the horizontal event list and any interactive event content. |\n| ArrowLeft / ArrowRight | Scrolls the focused horizontal event list left or right. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Tab",
+        "description": "Focuses the horizontal event list and any interactive event content."
+      },
+      {
+        "key": "ArrowLeft / ArrowRight",
+        "description": "Scrolls the focused horizontal event list left or right."
+      }
+    ]
+  }
+}

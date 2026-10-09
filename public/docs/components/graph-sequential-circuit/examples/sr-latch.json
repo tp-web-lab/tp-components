@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "title": "SR latch",
+  "nodes": [
+    {
+      "id": "set",
+      "type": "logic-input",
+      "x": 80,
+      "y": 80,
+      "label": "S",
+      "state": {
+        "value": true
+      }
+    },
+    {
+      "id": "reset",
+      "type": "logic-input",
+      "x": 80,
+      "y": 220,
+      "label": "R",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "clock",
+      "type": "logic-clock",
+      "x": 80,
+      "y": 360,
+      "label": "Clock",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "clock-hub",
+      "type": "logic-hub",
+      "x": 200,
+      "y": 360,
+      "label": "CLK",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "set-gate",
+      "type": "logic-and",
+      "x": 280,
+      "y": 100,
+      "label": "S · CLK",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "reset-gate",
+      "type": "logic-and",
+      "x": 280,
+      "y": 240,
+      "label": "R · CLK",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "memory",
+      "type": "logic-sr-latch",
+      "x": 500,
+      "y": 160,
+      "label": "SR",
+      "data": {
+        "initial": false
+      },
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "output",
+      "type": "logic-output",
+      "x": 720,
+      "y": 160,
+      "label": "Q",
+      "state": {
+        "value": false
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "set-gate-in",
+      "type": "logic-wire",
+      "source": "set",
+      "sourcePort": "east",
+      "target": "set-gate",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "reset-gate-in",
+      "type": "logic-wire",
+      "source": "reset",
+      "sourcePort": "east",
+      "target": "reset-gate",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "clock-hub-in",
+      "type": "logic-wire",
+      "source": "clock",
+      "sourcePort": "east",
+      "target": "clock-hub",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "clock-set",
+      "type": "logic-wire",
+      "source": "clock-hub",
+      "sourcePort": "north",
+      "target": "set-gate",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "vertical",
+      "bendY": 300
+    },
+    {
+      "id": "clock-reset",
+      "type": "logic-wire",
+      "source": "clock-hub",
+      "sourcePort": "east",
+      "target": "reset-gate",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "set-memory",
+      "type": "logic-wire",
+      "source": "set-gate",
+      "sourcePort": "east",
+      "target": "memory",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "reset-memory",
+      "type": "logic-wire",
+      "source": "reset-gate",
+      "sourcePort": "east",
+      "target": "memory",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "bendX": 440
+    },
+    {
+      "id": "memory-output",
+      "type": "logic-wire",
+      "source": "memory",
+      "sourcePort": "east",
+      "target": "output",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    }
+  ]
+}

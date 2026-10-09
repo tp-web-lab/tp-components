@@ -1,0 +1,5 @@
+axiom: F
+iterations: 4
+angle: 25
+orientation: north
+rule: F => F[+F]F[-F]F

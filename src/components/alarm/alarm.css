@@ -1,0 +1,79 @@
+tp-alarm {
+  --tp-alarm-alert: #b91c1c;
+  --tp-alarm-alert-bg: #fecaca;
+  --tp-alarm-muted: #9ca3af;
+  --tp-alarm-size: 1rem;
+
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5em;
+  display: inline-flex;
+  font-size: var(--tp-alarm-size);
+  gap: 0.5em;
+  padding: 0.35em 0.5em;
+}
+
+tp-alarm[data-alert] {
+  background-color: var(--tp-alarm-alert-bg);
+  border-color: var(--tp-alarm-alert);
+}
+
+tp-alarm > [data-tp-alarm-time] {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 1px solid #d1d5db;
+  border-radius: 0.35em;
+  padding: 0.2em 0.35em;
+}
+
+tp-alarm > [data-tp-alarm-time]::-webkit-calendar-picker-indicator {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-appearance: none;
+}
+
+tp-alarm > [data-tp-alarm-time]::-webkit-clear-button,
+tp-alarm > [data-tp-alarm-time]::-webkit-inner-spin-button {
+  display: none;
+}
+
+tp-alarm > [data-tp-alarm-time]::-webkit-datetime-edit-second-field,
+tp-alarm > [data-tp-alarm-time]::-webkit-datetime-edit-minute-field,
+tp-alarm > [data-tp-alarm-time]::-webkit-datetime-edit-hour-field {
+  padding: 0;
+}
+
+tp-alarm > [data-tp-alarm-display] {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1em;
+  font-variant-numeric: tabular-nums;
+}
+
+tp-alarm > [data-tp-alarm-icon] {
+  --tp-icon-size: var(--tp-alarm-size);
+  color: currentColor;
+  font-size: var(--tp-alarm-size);
+  block-size: var(--tp-alarm-size);
+  inline-size: var(--tp-alarm-size);
+  flex: 0 0 auto;
+}
+
+tp-alarm > tp-icon-button {
+  flex: 0 0 auto;
+}
+
+tp-alarm > tp-icon-button > button {
+  border: 1px solid #d1d5db;
+  box-sizing: border-box;
+}
+
+tp-alarm[data-alert] > [data-tp-alarm-display] {
+  color: var(--tp-alarm-alert);
+  font-weight: 700;
+}
+
+tp-alarm[data-stopped] > [data-tp-alarm-display] {
+  color: var(--tp-alarm-muted);
+}

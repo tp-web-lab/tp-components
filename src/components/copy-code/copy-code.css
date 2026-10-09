@@ -1,0 +1,59 @@
+tp-copy-code {
+  align-items: center;
+  cursor: pointer;
+  display: inline-flex;
+  inset-block-start: 0.5rem;
+  inset-inline-end: 0.5rem;
+  justify-content: center;
+  min-block-size: 2rem;
+  min-inline-size: 2rem;
+  position: absolute;
+  z-index: 1;
+  color: var(--tp-text-body);
+}
+
+tp-copy-code > tp-animation {
+  display: inline-flex;
+}
+
+tp-copy-code > tp-animation > tp-icon {
+  pointer-events: none;
+}
+
+
+tp-copy-code:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+tp-copy-code[data-state='success'] {
+  color: var(--tp-copy-code-success-color, green);
+}
+
+tp-copy-code[data-state='error'] {
+  color: var(--tp-copy-code-error-color, red);
+}
+
+pre.tp-code-block-copy {
+  position: relative;
+}
+
+pre.tp-code-block-copy > tp-copy-code[data-tp-code-block-copy] {
+  background: var(--tp-paper-color, Canvas);
+  border-radius: var(--tp-radius-s);
+  opacity: 0;
+  pointer-events: none;
+}
+
+pre.tp-code-block-copy:hover > tp-copy-code[data-tp-code-block-copy],
+pre.tp-code-block-copy:focus-within > tp-copy-code[data-tp-code-block-copy] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (hover: none) {
+  pre.tp-code-block-copy > tp-copy-code[data-tp-code-block-copy] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

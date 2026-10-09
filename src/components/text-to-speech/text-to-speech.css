@@ -1,0 +1,9 @@
+.tp-text-to-speech {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--tp-neutral-stroke-soft, #d0d7de);
+  border-radius: 0.5rem;
+}
+
+.tp-text-to-speech-text { margin: 0; }

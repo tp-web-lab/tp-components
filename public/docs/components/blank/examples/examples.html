@@ -1,0 +1,44 @@
+<tp-html-viewer label="tp-blank" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-fill-blank-question closed="">
+        <dl>
+          <dt>Title</dt><dd>Match the answers</dd>
+          <dt>Prompt</dt><dd>Choose an answer for each blank.</dd>
+          <dt>Answers</dt>
+          <dd><ol>
+            <li>Paris</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="48" height="40" viewBox="0 0 48 40" role="img" aria-label="Triangle"><path d="M24 3 45 37H3Z" fill="none" stroke="currentColor" stroke-width="3"></path></svg></li>
+            <li><img src="/docs/medias/logos/logo-tp.svg" alt="tp-components logo" width="40" height="40"></li>
+          </ol></dd>
+          <dt>Form</dt>
+          <dd>
+            <p>The capital of France: <tp-blank name="capital" aria-label="Capital of France"></tp-blank></p>
+            <p>A shape with three sides: <tp-blank name="shape" aria-label="Three-sided shape"></tp-blank></p>
+            <p>The library logo: <tp-blank name="logo" aria-label="Library logo"></tp-blank></p>
+          </dd>
+          <dt>Feedback</dt><dd>Match each answer to its description.</dd>
+          <dt>Solution</dt><dd>Paris; the triangle; the tp-components logo.</dd>
+        </dl>
+      </tp-fill-blank-question>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>disabled</li></ul></tp-checkbox-list>
+
+      <tp-cluster><tp-textfield data-setting="aria-label" label="aria-label" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="name" label="name" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="placeholder" label="placeholder" value="…" placeholder="…" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="blank attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/docs/components/blank/examples/attributes.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

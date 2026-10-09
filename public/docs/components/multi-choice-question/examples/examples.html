@@ -1,0 +1,89 @@
+<tp-html-viewer label="tp-multi-choice-question" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-multi-choice-question answer="1,3,5" random="">
+        <dl>
+          <dt>Title</dt><dd>Web languages</dd>
+          <dt>Prompt</dt><dd>Select the styling languages, including CSS preprocessors.</dd>
+          <dt>Form</dt><dd><ul><li>CSS</li><li>HTML</li><li>Sass</li><li>JavaScript</li><li>Less</li></ul></dd>
+          <dt>Feedback</dt><dd><ul><li>Correct. CSS describes presentation.</li><li>HTML structures content.</li><li>Correct. Sass is a CSS preprocessor.</li><li>JavaScript is a programming language.</li><li>Correct. Less is a CSS preprocessor.</li></ul></dd>
+          <dt>Solution</dt><dd>CSS, Sass and Less are used to define styles.</dd>
+        </dl>
+      </tp-multi-choice-question>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>random</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="orientation" label="orientation" label-position="top" orientation="horizontal" value="1"><ul><li>Default (empty)</li><li>horizontal</li><li>vertical</li></ul></tp-radio-list>
+      <tp-radio-list data-setting="src" label="src" label-position="top" orientation="horizontal" value="1"><ul><li>Default</li><li>file1</li><li>file2</li><li>file-unknown</li></ul></tp-radio-list>
+      <tp-cluster><tp-textfield data-setting="answer" label="answer" value="" placeholder="" clearable=""></tp-textfield>
+      <tp-textfield data-setting="name" label="name" value="" placeholder="" clearable=""></tp-textfield>
+      <tp-textfield data-setting="value" label="value" value="" placeholder="" clearable=""></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="multi-choice-question attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+      <p>File-loading attributes offer only Default, file1, file2 and file-unknown. The two local fixtures preserve verified example formats (they may contain the same content); file-unknown deliberately exercises error handling. No arbitrary path can be entered.</p>
+      <script type="module" src="/docs/components/multi-choice-question/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Derivatives of tan(x)">
+      <tp-multi-choice-question answer="1,3" lang="en" random="">
+        <dl>
+          <dt>Title</dt><dd>Equivalent derivatives of the tangent</dd>
+          <dt>Prompt</dt><dd>Select all expressions equal to the derivative of \(f(x) = \tan(x)\) wherever \(\cos(x) \ne 0\).</dd>
+          <dt>Form</dt><dd><ul><li>\(\displaystyle \frac{1}{\cos^2(x)}\)</li><li>\(1 - \tan^2(x)\)</li><li>\(1 + \tan^2(x)\)</li><li>\(\cos^2(x)\)</li><li>\(\displaystyle -\frac{1}{\sin^2(x)}\)</li></ul></dd>
+          <dt>Feedback</dt><dd><ul>
+            <li>Correct. Apply the quotient rule to sine divided by cosine.</li>
+            <li>The identity uses a plus sign, not a minus sign.</li>
+            <li>Correct. This is equivalent to the reciprocal square of the cosine.</li>
+            <li>The square of the cosine belongs in the denominator.</li>
+            <li>This is the derivative of the cotangent, not the tangent.</li>
+          </ul></dd>
+          <dt>Solution</dt><dd>\(\displaystyle f'(x) = \frac{1}{\cos^2(x)} = 1 + \tan^2(x)\). The expression \(1 - \tan^2(x)\) is not the derivative.</dd>
+        </dl>
+      </tp-multi-choice-question>
+      <script>
+        // Typeset after the question has created its checkbox controls.
+        window.MathJax = {
+          svg: { fontCache: "local" },
+          startup: {
+            pageReady: async () => {
+              await customElements.whenDefined("tp-multi-choice-question");
+              await customElements.whenDefined("tp-checkbox-list");
+              return MathJax.startup.defaultPageReady();
+            }
+          }
+        };
+      </script>
+      <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js"></script>
+    </div>
+
+    <div role="example" label="Markup languages">
+      <tp-multi-choice-question answer="1,3,5" lang="en" orientation="horizontal" random="">
+        <dl>
+          <dt>Title</dt><dd>Recognize markup languages</dd>
+          <dt>Prompt</dt><dd>Select the three logos representing markup languages rather than programming languages.</dd>
+          <dt>Form</dt><dd><ul><li><tp-icon name="file_type_html" library="languages" size="2em" role="img" aria-label="HTML"></tp-icon></li><li><tp-icon name="file_type_javascript" library="languages" size="2em" role="img" aria-label="JavaScript"></tp-icon></li><li><tp-icon name="file_type_markdown" library="languages" size="2em" role="img" aria-label="Markdown"></tp-icon></li><li><tp-icon name="file_type_python" library="languages" size="2em" role="img" aria-label="Python"></tp-icon></li><li><tp-icon name="file_type_asciidoc" library="languages" size="2em" role="img" aria-label="AsciiDoc"></tp-icon></li><li><tp-icon name="file_type_typescript" library="languages" size="2em" role="img" aria-label="TypeScript"></tp-icon></li></ul></dd>
+          <dt>Feedback</dt><dd><ul>
+            <li>Correct. HTML marks up the structure of web documents.</li>
+            <li>JavaScript is a programming language.</li>
+            <li>Correct. Markdown is a lightweight markup language.</li>
+            <li>Python is a programming language.</li>
+            <li>Correct. AsciiDoc is a markup language for documents.</li>
+            <li>TypeScript is a programming language based on JavaScript.</li>
+          </ul></dd>
+          <dt>Solution</dt><dd><p><tp-icon name="file_type_html" library="languages" size="1em" aria-hidden="true"></tp-icon> HTML, <tp-icon name="file_type_markdown" library="languages" size="1em" aria-hidden="true"></tp-icon> Markdown and <tp-icon name="file_type_asciidoc" library="languages" size="1em" aria-hidden="true"></tp-icon> AsciiDoc are markup languages.</p><p><tp-icon name="file_type_javascript" library="languages" size="1em" aria-hidden="true"></tp-icon> JavaScript, <tp-icon name="file_type_python" library="languages" size="1em" aria-hidden="true"></tp-icon> Python and <tp-icon name="file_type_typescript" library="languages" size="1em" aria-hidden="true"></tp-icon> TypeScript are programming languages.</p></dd>
+        </dl>
+      </tp-multi-choice-question>
+    </div>
+
+    <div role="example" label="No correct choices">
+      <tp-multi-choice-question answer=""><dl><dt>Title</dt><dd>No correct choices</dd><dt>Prompt</dt><dd>Select the even numbers. If none applies, submit without selecting a box.</dd><dt>Form</dt><dd><ul><li>3</li><li>5</li><li>7</li></ul></dd><dt>Solution</dt><dd>All three numbers are odd. Leaving every box unchecked is correct.</dd></dl></tp-multi-choice-question>
+    </div>
+  </template>
+</tp-html-viewer>

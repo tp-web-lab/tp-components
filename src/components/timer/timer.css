@@ -1,0 +1,55 @@
+tp-timer {
+  --tp-timer-alert: #b91c1c;
+  --tp-timer-alert-bg: #fecaca;
+  --tp-timer-muted: #9ca3af;
+  --tp-timer-size: 1rem;
+
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5em;
+  display: inline-flex;
+  font-size: var(--tp-timer-size);
+  gap: 0.5em;
+  padding: 0.35em 0.5em;
+}
+
+tp-timer[data-elapsed] {
+  background-color: var(--tp-timer-alert-bg);
+  border-color: var(--tp-timer-alert);
+}
+
+tp-timer > [data-tp-timer-duration] {
+  border: 1px solid #d1d5db;
+  border-radius: 0.35em;
+  inline-size: 4.5em;
+  padding: 0.2em 0.35em;
+}
+
+tp-timer > [data-tp-timer-display] {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1em;
+  font-variant-numeric: tabular-nums;
+  min-inline-size: 4.5ch;
+}
+
+tp-timer > [data-tp-timer-icon] {
+  --tp-icon-size: 1.125em;
+  color: currentColor;
+}
+
+tp-timer > tp-icon-button > button {
+  border: 1px solid #d1d5db;
+}
+
+tp-timer[data-elapsed] > tp-icon-button > button {
+  border-color: var(--tp-timer-alert);
+}
+
+tp-timer[data-elapsed] > [data-tp-timer-display] {
+  color: var(--tp-timer-alert);
+  font-weight: 700;
+}
+
+tp-timer[data-stopped] > [data-tp-timer-display] {
+  color: var(--tp-timer-muted);
+}

@@ -1,0 +1,58 @@
+tp-object-tree {
+  display: block;
+  font-size: var(--tp-object-tree-font-size, 0.875rem);
+}
+
+tp-object-tree [data-tp-object-tree-row] {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+tp-object-tree [data-tp-object-tree-key] {
+  color: var(--tp-object-tree-key-color, #6a737d);
+}
+
+tp-object-tree [data-tp-object-tree-separator] {
+  color: var(--tp-object-tree-separator-color, #8c959f);
+  margin-inline: 0.25em;
+}
+
+tp-object-tree [data-tp-object-tree-summary][data-value-kind='string'] {
+  color: var(--tp-object-tree-string-color, #0a7f3f);
+}
+
+tp-object-tree [data-tp-object-tree-summary][data-value-kind='number'] {
+  color: var(--tp-object-tree-number-color, #0550ae);
+}
+
+tp-object-tree [data-tp-object-tree-summary][data-value-kind='boolean'] {
+  color: var(--tp-object-tree-boolean-color, #8250df);
+}
+
+tp-object-tree [data-tp-object-tree-summary][data-value-kind='null'],
+tp-object-tree [data-tp-object-tree-summary][data-value-kind='undefined'] {
+  color: var(--tp-object-tree-nullish-color, #8c959f);
+  font-style: italic;
+}
+
+tp-object-tree [data-tp-object-tree-summary][data-value-kind='function'] {
+  color: var(--tp-object-tree-function-color, #953800);
+}
+
+tp-object-tree [data-tp-object-tree-summary][data-value-kind='date'] {
+  color: var(--tp-object-tree-date-color, #116329);
+}
+
+tp-object-tree [data-tp-object-tree-summary][data-value-kind='error'] {
+  color: var(--tp-object-tree-error-color, #cf222e);
+}
+
+tp-object-tree [data-tp-object-tree-summary][data-value-kind='circular'] {
+  color: var(--tp-object-tree-circular-color, #cf222e);
+  font-style: italic;
+}
+
+tp-object-tree [data-tp-object-tree-summary][data-value-kind='array'],
+tp-object-tree [data-tp-object-tree-summary][data-value-kind='object'] {
+  color: var(--tp-object-tree-structure-color, #57606a);
+  font-weight: 600;
+}

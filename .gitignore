@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+public/api/
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+/tmp/
+*.log
+*.tmp
+
+# Testing
+coverage/
+playwright-report/
+test-results/
+.lighthouseci/
+
+node_modules
+
+# Generated GitHub Pages site
+.pages/
+
+# CI installs must use the committed lockfile
+!.github/ci/pnpm-lock.yaml

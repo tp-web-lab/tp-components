@@ -1,0 +1,19 @@
+{
+  "title": "Geography",
+  "prompt": "Which city is the capital of France?",
+  "markup": "none",
+  "form": [
+    "Paris",
+    "London",
+    "Berlin"
+  ],
+  "feedback": [
+    "Correct.",
+    "London is in the UK.",
+    "Berlin is in Germany."
+  ],
+  "solution": "Paris",
+  "attributes": {
+    "answer": "1"
+  }
+}

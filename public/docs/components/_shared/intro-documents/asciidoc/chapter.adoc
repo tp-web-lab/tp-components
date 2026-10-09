@@ -1,0 +1,8 @@
+== Getting started
+
+You have opened the second document without leaving the guide.
+
+* Choose a page in the navigation menu.
+* Use Home to return to the introduction.
+
+link:cover.adoc[Back to the introduction]

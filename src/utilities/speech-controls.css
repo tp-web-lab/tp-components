@@ -1,0 +1,10 @@
+.tp-speech-controls {
+	--tp-button-group-gap: var(--tp-space-xs, 0.5rem);
+
+	flex-wrap: wrap;
+}
+
+.tp-speech-status {
+	margin: 0;
+	color: var(--tp-text-muted, #374151);
+}

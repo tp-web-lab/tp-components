@@ -1,0 +1,7 @@
+{
+  "id": "02-prolog-module-file",
+  "label": "Prolog project module",
+  "name": "Prolog project module",
+  "entry": "/program.pl",
+  "query": "/query.pl"
+}

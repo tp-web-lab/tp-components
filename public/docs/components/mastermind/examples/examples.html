@@ -1,0 +1,33 @@
+<tp-html-viewer label="tp-mastermind" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-mastermind solution="red blue green yellow" attempts="8"></tp-mastermind>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+
+
+      <tp-cluster><tp-textfield data-setting="attempts" label="attempts" value="10" placeholder="10" clearable></tp-textfield>
+      <tp-textfield data-setting="colors" label="colors" value="red blue green yellow orange purple" placeholder="red blue green yellow orange purple" clearable></tp-textfield>
+      <tp-textfield data-setting="solution" label="solution" value="" placeholder="" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="mastermind attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/docs/components/mastermind/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="mastermind ⭐⭐">
+      <tp-mastermind solution="orange purple red green" attempts="8"></tp-mastermind>
+    </div>
+
+    <div role="example" label="mastermind ⭐⭐⭐">
+      <tp-mastermind solution="yellow red purple blue orange" attempts="10"></tp-mastermind>
+    </div>
+  </template>
+</tp-html-viewer>

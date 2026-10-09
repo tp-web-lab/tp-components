@@ -1,0 +1,10 @@
+tp-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tp-switcher-gap, 1rem);
+}
+
+tp-switcher > * {
+  flex-basis: calc((var(--tp-switcher-threshold, 30rem) - 100%) * 999);
+  flex-grow: 1;
+}

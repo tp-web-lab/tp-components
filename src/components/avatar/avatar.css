@@ -1,0 +1,70 @@
+tp-avatar {
+  display: inline-flex;
+  flex: none;
+  inline-size: 3rem;
+  block-size: 3rem;
+  vertical-align: middle;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+tp-avatar[data-size="xxs"] {
+  inline-size: 1rem;
+  block-size: 1rem;
+  font-size: 0.416667rem;
+}
+
+tp-avatar[data-size="xs"] {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  font-size: 0.625rem;
+}
+
+tp-avatar[data-size="s"] {
+  inline-size: 2rem;
+  block-size: 2rem;
+  font-size: 0.833333rem;
+}
+
+tp-avatar[data-size="l"] {
+  inline-size: 4rem;
+  block-size: 4rem;
+  font-size: 1.666667rem;
+}
+
+tp-avatar[data-size="xl"] {
+  inline-size: 5rem;
+  block-size: 5rem;
+  font-size: 2.083333rem;
+}
+
+tp-avatar[data-size="xxl"] {
+  inline-size: 6rem;
+  block-size: 6rem;
+  font-size: 2.5rem;
+}
+
+tp-avatar > .tp-avatar-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+  border: 1px solid var(--tp-neutral-stroke-soft);
+  border-radius: 50%;
+  background: var(--tp-neutral-fill-softer);
+  color: var(--tp-neutral-text-on-soft);
+}
+
+tp-avatar[data-shape="square"] > .tp-avatar-visual {
+  border-radius: 0;
+}
+
+tp-avatar > .tp-avatar-visual > img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}

@@ -1,0 +1,30 @@
+tp-map {
+	display: flow-root;
+	min-inline-size: 0;
+	max-inline-size: 100%;
+}
+tp-map > tp-button-group {
+	margin-block-end: var(--tp-space-xs, 0.5rem);
+}
+/* Keep the declarative locations intact without displaying their source list. */
+tp-map > dl {
+	display: none;
+}
+tp-map > .tp-map-viewport {
+	inline-size: var(--tp-map-width, 100%);
+	block-size: var(--tp-map-height, 24rem);
+	min-block-size: 10rem;
+	max-inline-size: 100%;
+	isolation: isolate;
+}
+tp-map .leaflet-container {
+	color-scheme: light;
+}
+tp-map > tp-callout {
+	margin-block-start: var(--tp-space-xs, 0.5rem);
+}
+tp-map > [data-map-profile] {
+	inline-size: var(--tp-map-width, 100%);
+	max-inline-size: 100%;
+	margin-block-start: var(--tp-space-s, 1rem);
+}

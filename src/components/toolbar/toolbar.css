@@ -1,0 +1,117 @@
+/* ---------------------------------------------------------------------------
+ * tp-toolbar — sticky toolbar with start / center / end sections
+ * Sticks to the edge of its nearest scrolling/containing element.
+ * Set `position: relative` (or `overflow: auto`) on the parent to constrain it.
+ * --------------------------------------------------------------------------- */
+
+/* Host */
+tp-toolbar {
+  position: sticky;
+  z-index: var(--tp-toolbar-z-index, 100);
+  display: flex;
+  align-items: center;
+  gap: var(--tp-toolbar-gap, 0.25rem);
+  padding: var(--tp-toolbar-padding, 0.25rem 0.5rem);
+  background: inherit;/*var(--tp-paper-color, #ffffff)*/
+  /*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);*/
+}
+
+/* ---- Horizontal orientation ---- */
+
+tp-toolbar[data-orientation="horizontal"] {
+  flex-direction: row;
+  inset-inline: 0;
+  min-block-size: var(--tp-toolbar-size, 3rem);
+  /* full width so sticky spans the container */
+  inline-size: 100%;
+}
+
+tp-toolbar[data-orientation="horizontal"][data-placement="top"] {
+  top: 0;
+}
+
+tp-toolbar[data-orientation="horizontal"][data-placement="bottom"] {
+  bottom: 0;
+}
+
+/* ---- Vertical orientation ---- */
+
+tp-toolbar[data-orientation="vertical"] {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-inline-size: var(--tp-toolbar-size, 3rem);
+  /* full height so sticky spans the container */
+  block-size: 100%;
+  align-self: flex-start;
+}
+
+tp-toolbar[data-orientation="vertical"][data-placement="start"] {
+  left: 0;
+}
+
+tp-toolbar[data-orientation="vertical"][data-placement="end"] {
+  right: 0;
+}
+
+/* ---- Sections ---- */
+
+tp-toolbar > [data-toolbar-start],
+tp-toolbar > [data-toolbar-center],
+tp-toolbar > [data-toolbar-end] {
+  display: flex;
+  align-items: center;
+  gap: var(--tp-toolbar-section-gap, 0.25rem);
+  flex-shrink: 0;
+}
+
+/* Center section grows and centers its content */
+tp-toolbar > [data-toolbar-center] {
+  flex: 1;
+  justify-content: center;
+  flex-shrink: 1;
+}
+
+/* End section is pushed to the far edge */
+tp-toolbar > [data-toolbar-end] {
+  margin-inline-start: auto;
+}
+
+/* Vertical overrides: columns instead of rows */
+tp-toolbar[data-orientation="vertical"] > [data-toolbar-start],
+tp-toolbar[data-orientation="vertical"] > [data-toolbar-center],
+tp-toolbar[data-orientation="vertical"] > [data-toolbar-end] {
+  flex-direction: column;
+  align-items: center;
+}
+
+tp-toolbar[data-orientation="vertical"] > [data-toolbar-center] {
+  flex: 1;
+  justify-content: center;
+}
+
+tp-toolbar[data-orientation="vertical"] > [data-toolbar-end] {
+  margin-inline-start: 0;
+  margin-block-start: auto;
+}
+
+/* ---- Divider between non-empty adjacent sections ---- */
+
+tp-toolbar > [data-toolbar-start]:not(:empty) + [data-toolbar-center]:not(:empty),
+tp-toolbar > [data-toolbar-center]:not(:empty) + [data-toolbar-end]:not(:empty),
+tp-toolbar > [data-toolbar-start]:not(:empty) + [data-toolbar-end]:not(:empty) {
+  border-inline-start: 1px solid var(--tp-brand-stroke-soft, #d1d5db);
+  padding-inline-start: var(--tp-toolbar-section-gap, 0.25rem);
+  margin-inline-start: var(--tp-toolbar-section-gap, 0.25rem);
+}
+
+tp-toolbar[data-orientation="vertical"] > [data-toolbar-start]:not(:empty) + [data-toolbar-center]:not(:empty),
+tp-toolbar[data-orientation="vertical"] > [data-toolbar-center]:not(:empty) + [data-toolbar-end]:not(:empty),
+tp-toolbar[data-orientation="vertical"] > [data-toolbar-start]:not(:empty) + [data-toolbar-end]:not(:empty) {
+  border-inline-start: none;
+  padding-inline-start: 0;
+  margin-inline-start: 0;
+  border-block-start: 1px solid var(--tp-brand-stroke-soft, #d1d5db);
+  padding-block-start: var(--tp-toolbar-section-gap, 0.25rem);
+  margin-block-start: var(--tp-toolbar-section-gap, 0.25rem);
+}

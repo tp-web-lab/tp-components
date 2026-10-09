@@ -1,0 +1,29 @@
+tp-sidebar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--tp-sidebar-gap, 1rem);
+}
+
+/* Layout par défaut : sidebar = premier enfant */
+tp-sidebar:not([right-sidebar]) > :first-child {
+	flex-basis: var(--tp-sidebar-side-width, auto);
+	flex-grow: 1;
+}
+
+tp-sidebar:not([right-sidebar]) > :last-child {
+	flex-basis: 0;
+	flex-grow: 999;
+	min-inline-size: var(--tp-sidebar-content-width, 50%);
+}
+
+/* Variante : sidebar = dernier enfant */
+tp-sidebar[right-sidebar] > :first-child {
+	flex-basis: 0;
+	flex-grow: 999;
+	min-inline-size: var(--tp-sidebar-content-width, 50%);
+}
+
+tp-sidebar[right-sidebar] > :last-child {
+	flex-basis: var(--tp-sidebar-side-width, auto);
+	flex-grow: 1;
+}

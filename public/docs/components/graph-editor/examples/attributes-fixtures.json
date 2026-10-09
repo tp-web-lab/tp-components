@@ -1,0 +1,20 @@
+{
+  "src": [
+    {
+      "label": "Default",
+      "value": ""
+    },
+    {
+      "label": "file1",
+      "value": "/docs/components/graph-editor/examples/attributes-src-file1.json"
+    },
+    {
+      "label": "file2",
+      "value": "/docs/components/graph-editor/examples/attributes-src-file2.json"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/docs/components/graph-editor/examples/attributes-src-file-unknown.json"
+    }
+  ]
+}

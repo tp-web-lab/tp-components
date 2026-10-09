@@ -1,0 +1,195 @@
+/* ---------------------------------------------------------------------------
+ * tp-color-picker — viewer for tp.css color tokens
+ * --------------------------------------------------------------------------- */
+
+tp-color-picker {
+	display: grid;
+	gap: 1rem;
+	padding: 0.75rem;
+	border: 1px solid var(--tp-neutral-stroke-soft);
+	border-radius: var(--tp-border-radius-lg);
+	background: var(--tp-paper-color);
+}
+
+tp-color-picker [data-tp-color-picker-jump-controls] {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+	gap: 0.75rem;
+	padding: 0.5rem;
+	border: 1px solid var(--tp-neutral-stroke-soft);
+	border-radius: var(--tp-border-radius-md);
+	background: var(--tp-neutral-fill-softer);
+}
+
+tp-color-picker [data-tp-color-picker-jump-control] {
+	display: grid;
+	gap: 0.35rem;
+}
+
+tp-color-picker [data-tp-color-picker-jump-label] {
+	font-size: 0.78rem;
+	font-weight: var(--tp-font-weight-semibold);
+}
+
+tp-color-picker [data-tp-color-picker-jump-select] {
+	min-block-size: var(--tp-form-control-height-sm);
+	padding-inline: 0.5rem;
+	border: 1px solid var(--tp-neutral-stroke-soft);
+	border-radius: var(--tp-border-radius-sm);
+	background: var(--tp-paper-color);
+	color: var(--tp-text-body);
+}
+
+tp-color-picker [data-tp-color-picker-section] {
+	display: grid;
+	gap: 0.5rem;
+}
+
+tp-color-picker [data-tp-color-picker-section-title] {
+	margin: 0;
+	font-size: 0.95rem;
+}
+
+tp-color-picker [data-tp-color-picker-grid] {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+	gap: 0.5rem;
+}
+
+tp-color-picker [data-tp-color-picker-token] {
+	display: grid;
+	grid-template-columns: 2rem 1fr;
+	grid-template-areas:
+		"swatch token"
+		"swatch value";
+	column-gap: 0.5rem;
+	row-gap: 0.2rem;
+	align-items: center;
+	padding: 0.5rem;
+	border: 1px solid var(--tp-neutral-stroke-soft);
+	border-radius: var(--tp-border-radius-md);
+	background: var(--tp-neutral-fill-softer);
+	color: var(--tp-text-body);
+}
+
+tp-color-picker [data-tp-color-picker-token],
+tp-color-picker [data-tp-color-picker-class-swatch] {
+	cursor: copy;
+}
+
+tp-color-picker [data-tp-color-picker-token]:focus-visible,
+tp-color-picker [data-tp-color-picker-class-swatch]:focus-visible {
+	outline: 2px solid var(--tp-color-focus, Highlight);
+	outline-offset: 2px;
+}
+
+tp-color-picker [data-tp-color-picker-swatch] {
+	grid-area: swatch;
+	inline-size: 2rem;
+	block-size: 2rem;
+	border: 1px solid var(--tp-neutral-stroke-mid);
+	border-radius: var(--tp-border-radius-sm);
+	box-shadow: var(--tp-inset-shadow-softer);
+}
+
+tp-color-picker [data-tp-color-picker-token-name] {
+	grid-area: token;
+	font-size: 0.78rem;
+	line-height: 1.2;
+	word-break: break-word;
+}
+
+tp-color-picker [data-tp-color-picker-token-value] {
+	grid-area: value;
+	font-size: 0.75rem;
+	color: var(--tp-text-body);
+	word-break: break-word;
+}
+
+tp-color-picker [data-tp-color-picker-class] {
+	display: grid;
+	gap: 0.5rem;
+	box-sizing: border-box;
+	inline-size: fit-content;
+	max-inline-size: 100%;
+	justify-self: start;
+	padding: 0.5rem;
+	border: 1px solid var(--tp-neutral-stroke-soft);
+	border-radius: var(--tp-border-radius-md);
+	background: var(--tp-neutral-fill-softer);
+	color: var(--tp-text-body);
+}
+
+tp-color-picker [data-tp-color-picker-class-grid] {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: start;
+	justify-content: start;
+}
+
+tp-color-picker [data-tp-color-picker-class-swatch] {
+	display: grid;
+	gap: 0.25rem;
+	justify-items: center;
+}
+
+tp-color-picker [data-tp-color-picker-class-chip] {
+	display: grid;
+	place-items: center;
+	inline-size: 2rem;
+	block-size: 2rem;
+	border: 1px solid var(--tp-neutral-stroke-mid);
+	border-radius: var(--tp-border-radius-sm);
+	box-shadow: var(--tp-inset-shadow-softer);
+	font-size: 0.75rem;
+	font-weight: var(--tp-font-weight-bold);
+	line-height: 1;
+}
+
+tp-color-picker [data-tp-color-picker-class-name] {
+	font-size: 0.78rem;
+	line-height: 1.2;
+	word-break: break-word;
+}
+
+tp-color-picker [data-tp-color-picker-class-scales] {
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 0.5rem;
+	inline-size: 100%;
+	min-inline-size: 0;
+	overflow-x: auto;
+	padding-block-end: 0.125rem;
+}
+
+tp-color-picker [data-tp-color-picker-class-scales-title] {
+	font-size: 0.75rem;
+	color: var(--tp-text-body);
+	line-height: 1.1;
+}
+
+tp-color-picker [data-tp-color-picker-class-scales-best] {
+	padding-block-start: 0.25rem;
+	border-top: 1px solid var(--tp-neutral-stroke-soft);
+}
+
+tp-color-picker [data-tp-color-picker-class-scales-tone] {
+	padding-block-start: 0.25rem;
+	border-top: 1px solid var(--tp-neutral-stroke-soft);
+}
+
+tp-color-picker [data-tp-color-picker-class-caption] {
+	font-size: 0.75rem;
+	color: var(--tp-text-body);
+	text-align: center;
+	line-height: 1.2;
+	word-break: break-word;
+}
+
+tp-color-picker [data-tp-color-picker-class-subcaption] {
+	font-size: 0.7rem;
+	color: var(--tp-text-body);
+	text-align: center;
+	line-height: 1.1;
+	word-break: break-word;
+}

@@ -1,0 +1,91 @@
+tp-button-group {
+  --tp-button-group-gap: 0;
+
+  align-items: center;
+  display: inline-flex;
+  gap: var(--tp-button-group-gap);
+  vertical-align: middle;
+}
+
+/* Orientation verticale */
+tp-button-group[orientation='vertical'] {
+  align-items: stretch;
+  flex-direction: column;
+}
+
+/* Stretch */
+tp-button-group[stretch] {
+  display: flex;
+  inline-size: 100%;
+}
+
+tp-button-group > tp-button[hidden] {
+  display: none !important;
+}
+
+tp-button-group[stretch] > tp-button {
+  flex: 1 1 0;
+}
+
+/* Mode attaché */
+tp-button-group[attached] {
+  --tp-button-group-gap: 0;
+}
+
+tp-button-group[attached]
+  > tp-button[data-tp-button-group-single-visible]
+  > :is(button, a) {
+  border-radius: 999rem;
+}
+
+/* Fusion des bordures (horizontal) */
+tp-button-group[attached] > tp-button + tp-button {
+  margin-inline-start: -1px;
+}
+
+tp-button-group[attached][data-single-visible]
+  > tp-button:not([hidden])
+  > :is(button, a) {
+  border-radius: inherit;
+}
+
+/* ===== HORIZONTAL ===== */
+
+/* Supprime arrondi à gauche sauf premier */
+tp-button-group[attached]
+  > tp-button:not(:first-child):not(:only-child)
+  > :is(button, a) {
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+
+/* Supprime arrondi à droite sauf dernier */
+tp-button-group[attached]
+  > tp-button:not(:last-child):not(:only-child)
+  > :is(button, a) {
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+/* ===== VERTICAL ===== */
+
+tp-button-group[attached][orientation='vertical'] > tp-button + tp-button {
+  margin-block-start: -1px;
+  margin-inline-start: 0;
+}
+
+/* Supprime arrondi en haut sauf premier */
+tp-button-group[attached][orientation='vertical']
+  > tp-button:not(:first-child):not(:only-child)
+  > :is(button, a) {
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+}
+
+/* Supprime arrondi en bas sauf dernier */
+tp-button-group[attached][orientation='vertical']
+  > tp-button:not(:last-child):not(:only-child)
+  > :is(button, a) {
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+}

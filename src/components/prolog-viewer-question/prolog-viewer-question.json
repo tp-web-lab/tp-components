@@ -1,0 +1,108 @@
+{
+  "tagname": "tp-prolog-viewer-question",
+  "classname": "TpPrologViewerQuestion",
+  "superclass": "TpPlaygroundQuestion",
+  "description": "checks a Prolog exercise using the viewer and an external test file.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-prolog-viewer-question open src=\"/docs/components/playground-question/examples/prolog/double.pl\" test=\"/docs/components/playground-question/examples/prolog/double.test.pl\">\n  <dl>\n    <dt>Title</dt><dd>Double a number</dd>\n    <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Open Code to edit, then submit to run the tests.</dd>\n    <dt>Solution</dt><dd>Use Result is Value * 2.</dd>\n  </dl>\n</tp-prolog-viewer-question>"
+    }
+  ],
+  "attributes": [],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-console",
+      "summary": "Displays structured console output."
+    },
+    {
+      "name": "tp-drawer",
+      "summary": "Displays a sliding drawer panel."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-file-tree",
+      "summary": "Displays an interactive file and folder tree."
+    },
+    {
+      "name": "tp-filesystem",
+      "summary": "In-memory file system component."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-iframe",
+      "summary": "Controlled iframe component."
+    },
+    {
+      "name": "tp-menu",
+      "summary": "Accessible menu component."
+    },
+    {
+      "name": "tp-prolog-viewer",
+      "summary": "Compact Prolog code viewer and runner."
+    },
+    {
+      "name": "tp-question",
+      "summary": "Base description-list container for question components."
+    },
+    {
+      "name": "tp-splitter",
+      "summary": "Splitter component with two resizable panels."
+    },
+    {
+      "name": "tp-switcher",
+      "summary": "Switches between horizontal and vertical layouts based on available space."
+    },
+    {
+      "name": "tp-tabs",
+      "summary": "Accessible tabs component with keyboard and reorder support."
+    },
+    {
+      "name": "tp-toolbar",
+      "summary": "Sticky toolbar with start / center / end sections,"
+    }
+  ],
+  "credits": [
+    {
+      "name": "Zod",
+      "url": "https://zod.dev/",
+      "summary": "Runtime schema validation."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Prolog viewer question",
+    "introduction": "The custom `<tp-prolog-viewer-question>` element implements the programming exercise functionality: checks a Prolog exercise using the viewer and an external test file.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Question title | Expand or collapse the exercise without losing code. |\n| Input / Output | Show or hide the answer form or feedback panels. |\n| Code / Render | Show the editable source or program output. |\n| Run in the embedded toolbar | Execute the current program without submitting the exercise. |\n| Embedded Reset | Restore the original project. |\n| Embedded Test, when project tests exist | Run the project tests in the programming interface; Submit runs the exercise test file in Feedback. |\n| Submit response | Run the external tests against the current code, including on repeated unchanged submissions. |\n| Reset response | Restore the original code and cancel or clear the current report. |\n| Feedback / Solution | Read test messages or the author's solution, available before submission. |\n| Console controls | Copy or clear execution messages. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between question and programming controls. |\n| Enter / Space | Activate the focused action or expand/collapse the title. |\n| Arrow keys in Output tabs | Navigate Feedback and Solution. |\n| Typing in the editor | Modify source code using the embedded editor's editing behavior. |\n| Ctrl+? | Open User help for the component under the pointer, falling back to the focused component. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Enter / Space",
+        "description": "Expands the question or activates a focused action."
+      }
+    ]
+  }
+}

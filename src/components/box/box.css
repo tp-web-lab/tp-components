@@ -1,0 +1,29 @@
+tp-box {
+  display: flow-root;
+  padding: var(--tp-box-padding, 1rem);
+  border: var(--tp-box-border-width, 1px) solid currentColor;
+  border-radius: var(--tp-box-border-radius, 0px);
+  color: var(--tp-box-color, var(--tp-text-body, inherit));
+  background: var(--tp-box-background, var(--tp-paper-color, transparent));
+}
+
+tp-box :where(code, samp, tt) {
+  color: var(--tp-box-color, var(--tp-text-body, inherit));
+}
+
+/* The box padding supplies the final spacing, including for markup paragraphs. */
+tp-box > p:last-child {
+  margin-block-end: 0;
+}
+
+tp-box[invert] {
+  --tp-box-background: var(--tp-neutral-950);
+  --tp-box-color: var(--tp-neutral-200);
+  color-scheme: dark;
+}
+
+.tp-dark tp-box[invert] {
+  --tp-box-background: white;
+  --tp-box-color: var(--tp-neutral-900);
+  color-scheme: light;
+}

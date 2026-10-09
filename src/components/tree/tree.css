@@ -1,0 +1,202 @@
+tp-tree {
+  --tp-tree-toggle-size: 1rem;
+  --tp-tree-toggle-half-size: 0.5rem;
+  --tp-tree-row-padding-block: 0.125rem;
+  --tp-tree-guide-inline-start: calc(-0.8rem + 1px);
+  --tp-tree-guide-midline: calc(
+    var(--tp-tree-row-padding-block, 0.125rem) +
+      var(--tp-tree-toggle-half-size, 0.5rem)
+  );
+  display: block;
+  inline-size: 100%;
+  box-sizing: border-box;
+  position: relative;
+  color: inherit;
+}
+
+/* LIST RESET */
+
+tp-tree ul,
+tp-tree li {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+tp-tree ul {
+  list-style: none;
+  min-inline-size: 0;
+}
+
+tp-tree li {
+  display: block;
+  min-inline-size: 0;
+  position: relative;
+}
+
+tp-tree li > [data-tp-tree-row]:hover {
+  background: var(--tp-brand-fill-soft);
+  color: var(--tp-brand-text-on-soft);
+}
+
+/* ROW */
+
+tp-tree [data-tp-tree-row] {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  gap: 0.35rem;
+  inline-size: fit-content;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  padding: var(--tp-tree-row-padding-block, 0.125rem) 0.25rem;
+  border-radius: 0.25rem;
+  /*color: var(--tp-brand-text-on-soft);*/
+}
+
+/* TOGGLE */
+
+tp-tree tp-icon-button[data-tp-tree-toggle] {
+  --tp-icon-button-size: var(--tp-tree-toggle-size, 1rem);
+  --tp-icon-button-icon-size: var(--tp-tree-toggle-size, 1rem);
+  --tp-icon-button-radius: 0;
+  --tp-icon-button-hover-background: transparent;
+  flex: 0 0 auto;
+  align-self: center;
+  margin: 0;
+  padding: 0;
+  transform: translateY(-1px);
+}
+
+tp-tree tp-icon-button[data-tp-tree-toggle] tp-icon {
+  inline-size: var(--tp-tree-toggle-size);
+  block-size: var(--tp-tree-toggle-size);
+}
+
+/* SELECTION */
+
+tp-tree[selectable] li[data-selected] > [data-tp-tree-row] {
+  background: color-mix(in oklab, currentColor 12%, transparent);
+  outline: 1px solid color-mix(in oklab, currentColor 25%, transparent);
+}
+
+/* NESTING */
+
+tp-tree li > ul {
+  margin-inline-start: 1rem;
+  padding-inline-start: 0.5rem;
+}
+
+/* GUIDES */
+
+tp-tree[guides] li > ul {
+  border-inline-start: none;
+  margin-inline-start: 0.55rem;
+  padding-inline-start: 0.9rem;
+}
+
+tp-tree[guides] li > ul > li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: var(--tp-tree-guide-inline-start, calc(-0.8rem + 1px));
+  inset-block-start: 0;
+  inline-size: 0.8rem;
+  block-size: var(
+    --tp-tree-guide-midline,
+    calc(var(--tp-tree-row-padding-block, 0.125rem) + var(--tp-tree-toggle-half-size, 0.5rem))
+  );
+  border-inline-start: 1px solid
+    color-mix(in oklab, currentColor 18%, transparent);
+  border-block-end: 1px solid
+    color-mix(in oklab, currentColor 18%, transparent);
+}
+
+tp-tree[guides] li > ul > li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: var(--tp-tree-guide-inline-start);
+  inset-block-start: var(--tp-tree-guide-midline);
+  inset-block-end: -0.1rem;
+  border-inline-start: 1px solid
+    color-mix(in oklab, currentColor 18%, transparent);
+}
+
+/* DRAG & DROP */
+
+tp-tree li[draggable='true'] > [data-tp-tree-row] {
+  cursor: grab;
+}
+
+tp-tree li[data-drop-target='before'] > [data-tp-tree-row] {
+  box-shadow: inset 0 2px 0 color-mix(in oklab, currentColor 45%, transparent);
+}
+
+tp-tree li[data-drop-target='inside'] > [data-tp-tree-row] {
+  outline: 1px dashed color-mix(in oklab, currentColor 45%, transparent);
+  background: color-mix(in oklab, currentColor 8%, transparent);
+}
+
+tp-tree li[data-drop-target='after'] > [data-tp-tree-row] {
+  box-shadow: inset 0 -2px 0 color-mix(in oklab, currentColor 45%, transparent);
+}
+
+/* CONTEXT MENU */
+
+[data-tp-tree-contextmenu] {
+  position: fixed;
+  z-index: 1000;
+  min-inline-size: 12rem;
+  max-inline-size: min(24rem, calc(100vw - 1rem));
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem;
+  border: 1px solid color-mix(in oklab, currentColor 18%, Canvas);
+  border-radius: 0.5rem;
+  background: Canvas;
+  color: CanvasText;
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.18),
+    0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+[data-tp-tree-contextmenu-action] {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  inline-size: 100%;
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.35rem;
+  text-align: start;
+  font: inherit;
+}
+
+[data-tp-tree-contextmenu-action]:hover:not(:disabled) {
+  background: color-mix(in oklab, currentColor 10%, transparent);
+}
+
+[data-tp-tree-contextmenu-action]:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+[data-tp-tree-contextmenu-action][data-tone='danger'] {
+  color: var(--tp-danger-seed);
+}
+
+[data-tp-tree-contextmenu-shortcut] {
+  opacity: 0.65;
+  font-size: 0.875em;
+  white-space: nowrap;
+}
+
+[data-tp-tree-contextmenu-separator] {
+  block-size: 1px;
+  margin: 0.25rem 0;
+  background: color-mix(in oklab, currentColor 14%, transparent);
+}

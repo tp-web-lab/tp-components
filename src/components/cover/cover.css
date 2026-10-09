@@ -1,0 +1,10 @@
+tp-cover {
+  display: flex;
+  flex-direction: column;
+  min-block-size: var(--tp-cover-min-height, 100vh);
+  padding: var(--tp-cover-padding, 1rem);
+}
+
+tp-cover > * {
+  margin-block: var(--tp-cover-gap, 1rem);
+}

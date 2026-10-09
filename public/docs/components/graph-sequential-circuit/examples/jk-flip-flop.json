@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "title": "JK flip-flop",
+  "nodes": [
+    {
+      "id": "j",
+      "type": "logic-input",
+      "x": 100,
+      "y": 100,
+      "label": "J",
+      "state": {
+        "value": true
+      }
+    },
+    {
+      "id": "k",
+      "type": "logic-input",
+      "x": 100,
+      "y": 220,
+      "label": "K",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "clock",
+      "type": "logic-clock",
+      "x": 180,
+      "y": 320,
+      "label": "Clock"
+    },
+    {
+      "id": "memory",
+      "type": "logic-jk-flip-flop",
+      "x": 360,
+      "y": 160,
+      "label": "JK",
+      "data": {
+        "initial": false,
+        "trigger": "rising"
+      },
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "output",
+      "type": "logic-output",
+      "x": 600,
+      "y": 160,
+      "label": "Q",
+      "state": {
+        "value": false
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "j-memory",
+      "type": "logic-wire",
+      "source": "j",
+      "sourcePort": "east",
+      "target": "memory",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "k-memory",
+      "type": "logic-wire",
+      "source": "k",
+      "sourcePort": "east",
+      "target": "memory",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "clock-memory",
+      "type": "logic-wire",
+      "source": "clock",
+      "sourcePort": "east",
+      "target": "memory",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "bendX": 280
+    },
+    {
+      "id": "memory-output",
+      "type": "logic-wire",
+      "source": "memory",
+      "sourcePort": "east",
+      "target": "output",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "07-ts-lit-tests",
+  "label": "Typescript Lit tests",
+  "name": "Typescript Lit tests",
+  "entry": "/main.ts",
+  "test": "/main.test.ts",
+  "importmap": {
+    "imports": {
+      "lit": "https://cdn.jsdelivr.net/npm/lit@3/+esm",
+      "lit/": "https://cdn.jsdelivr.net/npm/lit@3/",
+      "@lit/reactive-element": "https://cdn.jsdelivr.net/npm/@lit/reactive-element@2/+esm",
+      "@lit/reactive-element/": "https://cdn.jsdelivr.net/npm/@lit/reactive-element@2/"
+    }
+  }
+}

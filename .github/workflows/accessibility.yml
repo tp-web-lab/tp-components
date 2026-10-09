@@ -1,0 +1,38 @@
+name: Accessibility
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: tp-components
+
+jobs:
+  axe:
+    name: axe (Chromium, Firefox, WebKit)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: tp-components
+          persist-credentials: false
+      - uses: ./tp-components/.github/actions/setup-workspace
+      - run: pnpm exec playwright install --with-deps chromium firefox webkit
+      - name: Scan component examples
+        run: pnpm test:a11y
+      - name: Keep the transversal report
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: accessibility-report
+          path: |
+            tp-components/config/accessibility-browser-results.json
+            tp-components/public/docs/appendices/accessibility/index.md
+            tp-components/test-results/accessibility
+          if-no-files-found: warn

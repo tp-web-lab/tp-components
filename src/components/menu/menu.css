@@ -1,0 +1,153 @@
+tp-menu {
+	/* Fit the menu and its border beside floated content. */
+	display: flow-root;
+	border: 1px solid color-mix(in srgb, CanvasText 18%, transparent);
+	border-radius: 0.5rem;
+}
+
+tp-menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+tp-menu ul > li {
+	list-style: none;
+}
+
+tp-menu > ul[role="menu"] {
+	display: flex;
+	gap: var(--tp-menu-gap, 0.25rem);
+}
+
+tp-menu[data-vertical] > ul[role="menu"] {
+	flex-direction: column;
+}
+
+tp-menu[data-horizontal]
+	> ul[role="menu"]
+	> li[role="menuitem"]:not(:last-child)::before {
+	background: color-mix(in srgb, CanvasText 18%, transparent);
+	block-size: 1.25rem;
+	content: "";
+	inline-size: 1px;
+	inset-block-start: 50%;
+	inset-inline-end: calc(-0.5 * var(--tp-menu-gap, 0.25rem));
+	position: absolute;
+	transform: translateY(-50%);
+}
+
+tp-menu[data-horizontal] > ul[role="menu"] {
+	align-items: center;
+	flex-direction: row;
+}
+
+tp-menu li[role="menuitem"] {
+	cursor: pointer;
+	position: relative;
+	user-select: none;
+	white-space: nowrap;
+}
+
+/* Markup parsers may wrap an item's label in a paragraph. */
+tp-menu li[role="menuitem"] > p {
+	margin: 0;
+}
+
+tp-menu li[role="menuitem"] > a,
+tp-menu li[role="menuitem"] > p > a {
+	display: inline-flex;
+	align-items: center;
+	min-block-size: 24px;
+	min-inline-size: 24px;
+}
+
+tp-menu > ul[role="menu"] > li[role="menuitem"] {
+	padding: 0.25rem 0.5rem;
+}
+
+tp-menu li[role="menuitem"]:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
+}
+
+tp-menu li[aria-haspopup="menu"] {
+	align-items: center;
+	display: grid;
+	grid-template-columns: max-content 1rem;
+	column-gap: 0.35rem;
+	padding-inline-end: 0.5rem;
+}
+
+tp-menu li[aria-haspopup="menu"]::after {
+	content: "▸";
+	grid-column: 2;
+	justify-self: end;
+	pointer-events: none;
+	position: static;
+	transform: none;
+}
+
+tp-menu[data-horizontal]
+	li[data-tp-menu-root-item][aria-haspopup="menu"]::after {
+	content: "▾";
+}
+
+tp-menu li[aria-haspopup="menu"][aria-expanded="true"]::after {
+	content: "▾";
+}
+
+tp-menu li[aria-haspopup="menu"] > ul[data-tp-menu-submenu] {
+	grid-column: 1 / -1;
+}
+
+tp-menu ul[data-tp-menu-submenu] {
+	background: Canvas;
+	border: 1px solid color-mix(in srgb, CanvasText 18%, transparent);
+	border-radius: 0.5rem;
+	box-shadow: 0 0.5rem 1rem color-mix(in srgb, CanvasText 18%, transparent);
+	color: CanvasText;
+	display: none;
+	min-inline-size: max-content;
+	padding: 0.25rem;
+	position: absolute;
+	z-index: 1000;
+}
+
+tp-menu li[aria-expanded="true"] > ul[data-tp-menu-submenu] {
+	display: block;
+}
+
+/* sous-menus imbriqués */
+tp-menu ul[data-tp-menu-submenu] {
+	inset-block-start: 0;
+	inset-inline-start: calc(100% + 0.25rem);
+}
+
+/* sous-menus du menu horizontal */
+tp-menu[data-horizontal] ul[data-tp-menu-root-submenu] {
+	inset-block-start: calc(100% + 0.15rem);
+	inset-inline-start: 0;
+}
+
+tp-menu ul[data-tp-menu-submenu] > li[role="menuitem"] {
+	padding: 0.35rem 0.75rem;
+}
+
+tp-menu ul[data-tp-menu-submenu] > li[aria-haspopup="menu"] {
+	padding-inline-end: 1.75rem;
+}
+
+tp-menu li[data-tp-menu-divider] {
+	background: color-mix(in srgb, CanvasText 18%, transparent);
+	block-size: 1px;
+	cursor: default;
+	margin-block: 0.25rem;
+	padding: 0;
+	pointer-events: none;
+}
+
+tp-menu li[data-tp-menu-divider]::before,
+tp-menu li[data-tp-menu-divider]::after {
+	content: none;
+}

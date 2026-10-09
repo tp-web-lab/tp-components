@@ -1,0 +1,83 @@
+[tp-asciidoc-viewer%allow-script,label="tp-code-comment"]
+=========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-code-editor,id="commented-function",language="typescript"]
+=====
+[script,type="tp/typescript"]
+====
+function f(x: number): number {
+  if (x > 0) { return 2 * x; } // <1>
+  else { return 4 * x; } // <2>
+}
+====
+=====
+
+[tp-code-comment,for="commented-function"]
+====
+. Positive values are doubled.
+
+. Zero and negative values are multiplied by four.
+====
+======
+
+.Attributes
+========
+Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+
+The preview code editor has `id="commented-function"`. Enter `commented-function` in `for` to link the comments, then enable `open` to display the list. Hover the numbered code markers to read their tooltips even when the list is hidden.
+
+[tp-stack]
+======
+[tp-checkbox-list%value,id="attributes-booleans",label="Boolean attributes",label-position="top",orientation="horizontal"]
+====
+* open
+====
+
+[tp-cluster]
+=====
+[tp-textfield%value%placeholder%clearable,data-setting="for",label="for"]
+====
+====
+=====
+
+[tp-button-group]
+=====
+[tp-button,id="attributes-reset",type="button"]
+====
+Reset defaults
+====
+
+[tp-button,id="attributes-reload",type="button"]
+====
+Reload preview
+====
+=====
+======
+
+[tp-divider]
+====
+====
+
+[h3]
+====
+Preview
+====
+
+[tp-iframe,id="attributes-frame",title="code-comment attribute preview",style="height: 24rem; display: flow-root; inline-size: auto;"]
+====
+====
+
+[tp-callout,id="attributes-status",variant="info",heading="Preview status"]
+====
+Preparing the preview…
+====
+
+[script,type="module",src="/docs/components/code-comment/examples/attributes.js"]
+====
+====
+========
+----
+=========

@@ -1,0 +1,21 @@
+tp-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+tp-stack * {
+  margin-block: 0;
+}
+
+tp-stack:not([recursive]) > * + * {
+  margin-block-start: var(--stack-gap, 1rem);
+}
+
+tp-stack[recursive] * + * {
+  margin-block-start: var(--stack-gap, 1rem);
+}
+
+tp-stack[split-after]:only-child {
+  block-size: 100%;
+}

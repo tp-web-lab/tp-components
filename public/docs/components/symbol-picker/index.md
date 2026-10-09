@@ -1,0 +1,416 @@
+# <tp-icon name="symbol-picker" library="components" size="1.25em"></tp-icon> Symbol picker
+
+<tp-toc position="end" expand-all open brand></tp-toc>
+
+The custom `<tp-symbol-picker>` element implements the <tp-icon name="symbol-picker" library="components" size="1.25em"></tp-icon> Symbol picker functionality: hTML5 symbol picker.
+
+<tp-symbol-picker></tp-symbol-picker>
+
+## Usage
+
+### User interactions
+
+#### Mouse interactions
+
+| Control or gesture | Result |
+| --- | --- |
+| Using the component | Browse or search the available items, then select one to copy it in the chosen format. |
+| Using the component | Use the displayed filters and format selector, when available, to narrow the list or change the copied representation. |
+
+#### Keyboard interactions
+
+| Key or gesture | Result |
+| --- | --- |
+| Tab / Shift+Tab | Move between the available controls. |
+| Focused controls | Use each control’s standard keyboard interaction.  |
+| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+
+### Author directives
+
+Use `filter` to search symbol names, entities, groups, glyphs, or code points. Use `group` to restrict the list and `copy` to preselect the clipboard format.
+
+```html
+<tp-symbol-picker filter="arrow"></tp-symbol-picker>
+<tp-symbol-picker group="Mathematics" copy="html-entity"></tp-symbol-picker>
+<tp-symbol-picker compact filter="arrow"></tp-symbol-picker>
+```
+
+The picker exposes each symbol’s Unicode notation, hexadecimal and decimal HTML references, and canonical named HTML entity. Aliases are also searchable and shown beside the selected symbol.
+
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Browse the symbols and select one using the picker controls.
+
+Attributes
+: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+## Programming
+
+### API
+<!-- tp-docgen:api TpSymbolPicker -->
+::: tp-tabs
+Attributes
+: | Attribute | Type | Default | Description |
+  | --- | --- | --- | --- |
+  | <code>compact</code> | <code>boolean</code> | <code>false</code> | Shows only the title, filters, and a compact 2em symbol grid. |
+  | <code>copy</code> | <code>string</code> | <code>&quot;symbol&quot;</code> | Clipboard format: `symbol`, `unicode`, `hexadecimal-html`, `decimal-html`, or `html-entity`. |
+  | <code>filter</code> | <code>string</code> | <code>&quot;&quot;</code> | Free-text filter applied to symbol names and metadata. |
+  | <code>group</code> | <code>string</code> | <code>&quot;all&quot;</code> | Active symbol group (`all` by default). |
+  [Attributes of `<tp-symbol-picker>`]
+
+Methods
+: | Method | Signature | Description |
+  | --- | --- | --- |
+  | None. |  |  |
+  [Public methods of `TpSymbolPicker`]
+
+Events
+: | Event | Detail | Description |
+  | --- | --- | --- |
+  | <code>tp-symbol-picker-copy-error</code> | <code>&#123; copy: unknown; value: string; error: unknown &#125;</code> | Emitted when the clipboard rejects a copy operation. |
+  | <code>tp-symbol-picker-select</code> | <code>&#123; copy: unknown; value: string &#125;</code> | Emitted after a symbol is selected and copied. |
+  [Events emitted by `<tp-symbol-picker>`]
+
+CSS properties
+: | CSS property | Default | Description |
+  | --- | --- | --- |
+  | None. |  |  |
+  [CSS properties of `<tp-symbol-picker>`]
+:::
+<!-- /tp-docgen:api -->
+
+<!-- tp-docgen:typedoc:start -->
+[More details…](/api/classes/components_symbol-picker.TpSymbolPicker.html)
+<!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Imports
+
+::: tp-tabs
+script
+: Autoloading:
+
+  ```html
+  <script type="module" src="tp-loader.js"></script>
+  ```
+
+  Cherry picking:
+
+  ```html
+  <script type="module" src="/path/to/components/symbol-picker/symbol-picker.js"></script>
+  ```
+
+import
+: ```js
+  import "/path/to/components/symbol-picker/symbol-picker.js";
+  ```
+
+bundler
+: ```js
+  import "@tp/tp-components/components/symbol-picker/symbol-picker.js";
+  ```
+:::
+
+<!-- tp-docgen:dependencies:start -->
+## Dependencies
+
+### Internal
+
+All tp-components used by `<tp-symbol-picker>` are loaded automatically by this component if they have not already been loaded by another component.
+
+<!--
+@tp-dependency tp-base
+@summary Shared base class for tp-* components.
+-->
+<!--
+@tp-dependency tp-radio-list
+@summary Transforms a list into a group of radio buttons.
+-->
+
+- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
+- [`<tp-radio-list>`](../radio-list/index.md) : Transforms a list into a group of radio buttons.
+
+### External
+
+<!--
+@summary No external dependency.
+-->
+No external dependency
+<!-- tp-docgen:dependencies:end -->

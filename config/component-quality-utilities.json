@@ -1,0 +1,13 @@
+{
+  "components": [
+    "animation", "avatar", "avatar-group", "copy-code", "divider", "dragdrop", "compare", "icon",
+    "csv-table", "list-table", "lorem-ipsum", "math", "save-image", "skeleton", "source", "speech-to-text", "text-to-speech", "typewriting"
+  ],
+  "testFileCount": 28,
+  "targets": {
+    "lines": 90,
+    "statements": 90,
+    "functions": 90,
+    "branches": 80
+  }
+}

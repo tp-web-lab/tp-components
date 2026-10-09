@@ -1,0 +1,718 @@
+{
+  "generatedAt": "2026-09-20T11:19:02.877Z",
+  "startedAt": "2026-09-20T11:03:16.031Z",
+  "tests": {
+    "total": 2510,
+    "passed": 2486,
+    "failed": 24,
+    "pending": 0
+  },
+  "testFiles": 240,
+  "unhandledErrors": 0,
+  "coverage": {
+    "lines": 93.46,
+    "statements": 92.05,
+    "functions": 95.54,
+    "branches": 80.84
+  },
+  "failures": [
+    {
+      "file": "src/components/markdown-components.test.ts",
+      "component": null,
+      "title": "markdown components migration removes internal tp CSS variables from tp-html-viewer source display",
+      "kind": "Assertion",
+      "message": "AssertionError: expected '<tp-box border-width=\"4px\" style=\"--t…' to contain '<tp-box border-width=\"4px\" style=\"col…'"
+    },
+    {
+      "file": "src/components/markdown-components.test.ts",
+      "component": null,
+      "title": "markdown components migration removes generated theme classes from tp-theme examples",
+      "kind": "Assertion",
+      "message": "AssertionError: expected '<section style=\"--tp-brand-seed: inhe…' to contain '<section>'"
+    },
+    {
+      "file": "src/components/programming-viewers.test.ts",
+      "component": null,
+      "title": "programming viewers renders the compact tp-sql-viewer interface",
+      "kind": "Timeout",
+      "message": "Error: STACK_TRACE_ERROR"
+    },
+    {
+      "file": "src/components/programming-viewers.test.ts",
+      "component": null,
+      "title": "programming viewers shows the SQL tables and query in tabs",
+      "kind": "Timeout",
+      "message": "Error: STACK_TRACE_ERROR"
+    },
+    {
+      "file": "src/components/accordion/accordion.test.ts",
+      "component": "accordion",
+      "title": "<tp-accordion> defines default, outlined, and filled appearance styles",
+      "kind": "Assertion",
+      "message": "AssertionError: expected 'tp-accordion {\\n\\t/* Fit beside float…' to contain 'tp-accordion[appearance=\\'default\\']'"
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "offers Basic usage followed by the same four named exercises in html",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(4) ] to deeply equal [ 'Basic usage', 'Geography', …(3) ]"
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "offers Basic usage followed by the same four named exercises in md",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(4) ] to deeply equal [ 'Basic usage', 'Geography', …(3) ]"
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "offers Basic usage followed by the same four named exercises in adoc",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(4) ] to deeply equal [ 'Basic usage', 'Geography', …(3) ]"
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "offers Basic usage followed by the same four named exercises in rst",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(4) ] to deeply equal [ 'Basic usage', 'Geography', …(3) ]"
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "declares the equivalent reStructuredText directive without requiring Pyodide in unit tests",
+      "kind": "Assertion",
+      "message": "AssertionError: expected '.. tp-restructuredtext-viewer::\\n   :…' to contain '.. tp-blank::'"
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "renders the md example with the library markup parser",
+      "kind": "Assertion",
+      "message": "AssertionError: expected undefined to be 'result' // Object.is equality"
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "renders the adoc example with the library markup parser",
+      "kind": "Assertion",
+      "message": "AssertionError: expected undefined to be 'result' // Object.is equality"
+    },
+    {
+      "file": "src/components/flip-card/flip-card-docs.test.ts",
+      "component": "flip-card",
+      "title": "uses shared components for both playing-card faces without image paragraph wrappers",
+      "kind": "Assertion",
+      "message": "Error: Expected test fixture value"
+    },
+    {
+      "file": "src/components/markup-multi-slides/markup-multi-slides.test.ts",
+      "component": "markup-multi-slides",
+      "title": "<tp-markup-multi-slides> reuses multi-pages loading and replaces page links with slide controls",
+      "kind": "Assertion",
+      "message": "AssertionError: expected '0.5' to be '1' // Object.is equality"
+    },
+    {
+      "file": "src/components/multi-choice-question/multi-choice-question-docs.test.ts",
+      "component": "multi-choice-question",
+      "title": "multi-choice documentation uses content-free RST icon directives with accessible labels",
+      "kind": "Assertion",
+      "message": "AssertionError: Target cannot be null or undefined."
+    },
+    {
+      "file": "src/components/notebook/notebook.test.ts",
+      "component": "notebook",
+      "title": "<tp-notebook> shows only markup output and keeps programming viewers intact",
+      "kind": "Assertion",
+      "message": "AssertionError: expected 'prolog-notebook' to be '' // Object.is equality"
+    },
+    {
+      "file": "src/components/prose-editor/prose-editor.test.ts",
+      "component": "prose-editor",
+      "title": "<tp-prose-editor> charge un fichier local dans un bloc de code depuis son menu file",
+      "kind": "Timeout",
+      "message": "Error: STACK_TRACE_ERROR"
+    },
+    {
+      "file": "src/components/prose-editor/prose-editor.test.ts",
+      "component": "prose-editor",
+      "title": "<tp-prose-editor> préserve les code editors dans le rendu HTML",
+      "kind": "Timeout",
+      "message": "Error: STACK_TRACE_ERROR"
+    },
+    {
+      "file": "src/components/prose-editor/prose-editor.test.ts",
+      "component": "prose-editor",
+      "title": "<tp-prose-editor> affiche les formules Markdown dans le rendu HTML",
+      "kind": "Timeout",
+      "message": "Error: STACK_TRACE_ERROR"
+    },
+    {
+      "file": "src/components/prose-editor/prose-editor.test.ts",
+      "component": "prose-editor",
+      "title": "<tp-prose-editor> sélectionne le rendu HTML visible avec le bouton select-all",
+      "kind": "Timeout",
+      "message": "Error: STACK_TRACE_ERROR"
+    },
+    {
+      "file": "src/components/speech-to-text/speech-to-text-docs.test.ts",
+      "component": "speech-to-text",
+      "title": "provides five HTML examples with Basic usage first",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ …(3) ] to have a length of 5 but got 3"
+    },
+    {
+      "file": "src/components/speech-to-text/speech-to-text-docs.test.ts",
+      "component": "speech-to-text",
+      "title": "renders equivalent md examples",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(2) ] to deeply equal [ 'Basic usage', 'Basic', …(3) ]"
+    },
+    {
+      "file": "src/components/speech-to-text/speech-to-text-docs.test.ts",
+      "component": "speech-to-text",
+      "title": "renders equivalent adoc examples",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(2) ] to deeply equal [ 'Basic usage', 'Basic', …(3) ]"
+    },
+    {
+      "file": "src/components/speech-to-text/speech-to-text-docs.test.ts",
+      "component": "speech-to-text",
+      "title": "preserves the reStructuredText examples",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(2) ] to deeply equal [ 'Basic usage', 'Basic', …(3) ]"
+    }
+  ],
+  "familyRuns": [
+    {
+      "name": "test:quality:pilot",
+      "startedAt": "2026-09-20T11:04:04.507Z",
+      "generatedAt": "2026-09-20T11:05:25.675Z",
+      "exitCodes": [
+        0
+      ],
+      "passed": 161,
+      "failed": 0
+    },
+    {
+      "name": "test:quality:layouts",
+      "startedAt": "2026-09-20T11:05:25.676Z",
+      "generatedAt": "2026-09-20T11:06:17.415Z",
+      "exitCodes": [
+        1
+      ],
+      "passed": 365,
+      "failed": 2
+    },
+    {
+      "name": "test:quality:utilities",
+      "startedAt": "2026-09-20T13:13:54.226Z",
+      "generatedAt": "2026-09-20T13:14:19.853Z",
+      "exitCodes": [
+        1
+      ],
+      "passed": 328,
+      "failed": 4
+    },
+    {
+      "name": "test:quality:time",
+      "startedAt": "2026-09-20T11:07:22.032Z",
+      "generatedAt": "2026-09-20T11:07:38.345Z",
+      "exitCodes": [
+        0
+      ],
+      "passed": 37,
+      "failed": 0
+    },
+    {
+      "name": "test:quality:overlays",
+      "startedAt": "2026-09-20T11:07:38.346Z",
+      "generatedAt": "2026-09-20T11:08:10.467Z",
+      "exitCodes": [
+        0
+      ],
+      "passed": 240,
+      "failed": 0
+    },
+    {
+      "name": "test:quality:base",
+      "startedAt": "2026-09-20T11:08:10.467Z",
+      "generatedAt": "2026-09-20T11:08:30.278Z",
+      "exitCodes": [
+        0,
+        0
+      ],
+      "passed": 38,
+      "failed": 0
+    },
+    {
+      "name": "test:quality:controllers",
+      "startedAt": "2026-09-20T11:08:30.279Z",
+      "generatedAt": "2026-09-20T11:08:54.067Z",
+      "exitCodes": [
+        0
+      ],
+      "passed": 92,
+      "failed": 0
+    },
+    {
+      "name": "test:quality:feedbacks",
+      "startedAt": "2026-09-20T11:08:54.068Z",
+      "generatedAt": "2026-09-20T11:09:12.716Z",
+      "exitCodes": [
+        0
+      ],
+      "passed": 53,
+      "failed": 0
+    },
+    {
+      "name": "test:quality:files",
+      "startedAt": "2026-09-20T11:09:12.717Z",
+      "generatedAt": "2026-09-20T11:09:35.980Z",
+      "exitCodes": [
+        0
+      ],
+      "passed": 74,
+      "failed": 0
+    },
+    {
+      "name": "test:quality:forms",
+      "startedAt": "2026-09-20T11:09:35.981Z",
+      "generatedAt": "2026-09-20T11:11:07.913Z",
+      "exitCodes": [
+        1
+      ],
+      "passed": 170,
+      "failed": 7
+    },
+    {
+      "name": "test:quality:plots",
+      "startedAt": "2026-09-20T11:11:07.915Z",
+      "generatedAt": "2026-09-20T11:12:15.541Z",
+      "exitCodes": [
+        0
+      ],
+      "passed": 76,
+      "failed": 0
+    },
+    {
+      "name": "test:quality:quizzes",
+      "startedAt": "2026-09-20T11:12:15.542Z",
+      "generatedAt": "2026-09-20T11:15:01.167Z",
+      "exitCodes": [
+        1
+      ],
+      "passed": 92,
+      "failed": 2
+    },
+    {
+      "name": "test:quality:games",
+      "startedAt": "2026-09-20T11:15:01.167Z",
+      "generatedAt": "2026-09-20T11:15:17.062Z",
+      "exitCodes": [
+        0
+      ],
+      "passed": 111,
+      "failed": 0
+    },
+    {
+      "name": "test:quality:editors",
+      "startedAt": "2026-09-20T11:15:17.063Z",
+      "generatedAt": "2026-09-20T11:20:58.119Z",
+      "exitCodes": [
+        0
+      ],
+      "passed": 215,
+      "failed": 0
+    },
+    {
+      "name": "test:quality:markup-languages",
+      "startedAt": "2026-09-20T11:20:58.120Z",
+      "generatedAt": "2026-09-20T11:21:03.715Z",
+      "exitCodes": [
+        0
+      ],
+      "passed": 21,
+      "failed": 0
+    },
+    {
+      "name": "test:quality:pickers",
+      "startedAt": "2026-09-20T11:21:03.715Z",
+      "generatedAt": "2026-09-20T11:37:12.037Z",
+      "exitCodes": [
+        1
+      ],
+      "passed": 68,
+      "failed": 1
+    },
+    {
+      "name": "test:quality:notebooks",
+      "startedAt": "2026-09-20T11:37:12.037Z",
+      "generatedAt": "2026-09-20T11:37:39.509Z",
+      "exitCodes": [
+        1
+      ],
+      "passed": 19,
+      "failed": 1
+    },
+    {
+      "name": "test:quality:documentation",
+      "startedAt": "2026-09-20T11:37:39.509Z",
+      "generatedAt": "2026-09-20T11:37:56.726Z",
+      "exitCodes": [
+        0
+      ],
+      "passed": 72,
+      "failed": 0
+    },
+    {
+      "name": "test:quality:slides",
+      "startedAt": "2026-09-20T11:37:56.726Z",
+      "generatedAt": "2026-09-20T11:38:02.575Z",
+      "exitCodes": [
+        1
+      ],
+      "passed": 15,
+      "failed": 1
+    },
+    {
+      "name": "test:quality:viewers",
+      "startedAt": "2026-09-20T11:38:02.575Z",
+      "generatedAt": "2026-09-20T12:12:13.198Z",
+      "exitCodes": [
+        1
+      ],
+      "passed": 156,
+      "failed": 4
+    },
+    {
+      "name": "test:quality:simulators",
+      "startedAt": "2026-09-20T12:12:13.199Z",
+      "generatedAt": "2026-09-20T12:44:17.936Z",
+      "exitCodes": [
+        1
+      ],
+      "passed": 96,
+      "failed": 1
+    },
+    {
+      "name": "test:quality:playgrounds",
+      "startedAt": "2026-09-20T12:44:17.936Z",
+      "generatedAt": "2026-09-20T13:01:04.315Z",
+      "exitCodes": [
+        1
+      ],
+      "passed": 69,
+      "failed": 2
+    }
+  ],
+  "familyFailures": [
+    {
+      "file": "src/components/accordion/accordion.test.ts",
+      "component": "accordion",
+      "title": "<tp-accordion> defines default, outlined, and filled appearance styles",
+      "kind": "Assertion",
+      "message": "AssertionError: expected 'tp-accordion {\\n\\t/* Fit beside float…' to contain 'tp-accordion[appearance=\\'default\\']'",
+      "family": "layouts",
+      "affectedComponents": [
+        "accordion"
+      ]
+    },
+    {
+      "file": "src/components/flip-card/flip-card-docs.test.ts",
+      "component": "flip-card",
+      "title": "uses shared components for both playing-card faces without image paragraph wrappers",
+      "kind": "Assertion",
+      "message": "Error: Expected test fixture value",
+      "family": "layouts",
+      "affectedComponents": [
+        "flip-card"
+      ]
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "offers Basic usage followed by the same four named exercises in html",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(4) ] to deeply equal [ 'Basic usage', 'Geography', …(3) ]",
+      "family": "forms",
+      "affectedComponents": [
+        "blank"
+      ]
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "offers Basic usage followed by the same four named exercises in md",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(4) ] to deeply equal [ 'Basic usage', 'Geography', …(3) ]",
+      "family": "forms",
+      "affectedComponents": [
+        "blank"
+      ]
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "offers Basic usage followed by the same four named exercises in adoc",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(4) ] to deeply equal [ 'Basic usage', 'Geography', …(3) ]",
+      "family": "forms",
+      "affectedComponents": [
+        "blank"
+      ]
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "offers Basic usage followed by the same four named exercises in rst",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(4) ] to deeply equal [ 'Basic usage', 'Geography', …(3) ]",
+      "family": "forms",
+      "affectedComponents": [
+        "blank"
+      ]
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "declares the equivalent reStructuredText directive without requiring Pyodide in unit tests",
+      "kind": "Assertion",
+      "message": "AssertionError: expected '.. tp-restructuredtext-viewer::\\n   :…' to contain '.. tp-blank::'",
+      "family": "forms",
+      "affectedComponents": [
+        "blank"
+      ]
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "renders the md example with the library markup parser",
+      "kind": "Assertion",
+      "message": "AssertionError: expected undefined to be 'result' // Object.is equality",
+      "family": "forms",
+      "affectedComponents": [
+        "blank"
+      ]
+    },
+    {
+      "file": "src/components/blank/blank-docs.test.ts",
+      "component": "blank",
+      "title": "renders the adoc example with the library markup parser",
+      "kind": "Assertion",
+      "message": "AssertionError: expected undefined to be 'result' // Object.is equality",
+      "family": "forms",
+      "affectedComponents": [
+        "blank"
+      ]
+    },
+    {
+      "file": "src/components/multi-choice-question/multi-choice-question-docs.test.ts",
+      "component": "multi-choice-question",
+      "title": "multi-choice documentation uses content-free RST icon directives with accessible labels",
+      "kind": "Assertion",
+      "message": "AssertionError: Target cannot be null or undefined.",
+      "family": "quizzes",
+      "affectedComponents": [
+        "multi-choice-question"
+      ]
+    },
+    {
+      "file": "src/components/playground-question/playground-question.test.ts",
+      "component": "playground-question",
+      "title": "forwards src and waits for the current control to finish loading",
+      "kind": "Timeout",
+      "message": "Error: STACK_TRACE_ERROR",
+      "family": "quizzes",
+      "affectedComponents": [
+        "playground-question"
+      ]
+    },
+    {
+      "file": "src/components/icon-picker/icon-picker.test.ts",
+      "component": "icon-picker",
+      "title": "<tp-icon-picker> copies the icon as svg",
+      "kind": "Timeout",
+      "message": "Error: STACK_TRACE_ERROR",
+      "family": "pickers",
+      "affectedComponents": [
+        "icon-picker"
+      ]
+    },
+    {
+      "file": "src/components/notebook/notebook.test.ts",
+      "component": "notebook",
+      "title": "<tp-notebook> shows only markup output and keeps programming viewers intact",
+      "kind": "Assertion",
+      "message": "AssertionError: expected 'prolog-notebook' to be '' // Object.is equality",
+      "family": "notebooks",
+      "affectedComponents": [
+        "notebook"
+      ]
+    },
+    {
+      "file": "src/components/markup-multi-slides/markup-multi-slides.test.ts",
+      "component": "markup-multi-slides",
+      "title": "<tp-markup-multi-slides> reuses multi-pages loading and replaces page links with slide controls",
+      "kind": "Assertion",
+      "message": "AssertionError: expected '0.5' to be '1' // Object.is equality",
+      "family": "slides",
+      "affectedComponents": [
+        "markup-multi-slides"
+      ]
+    },
+    {
+      "file": "src/components/markdown-components.test.ts",
+      "component": null,
+      "title": "markdown components migration removes internal tp CSS variables from tp-html-viewer source display",
+      "kind": "Assertion",
+      "message": "AssertionError: expected '<tp-box border-width=\"4px\" style=\"--t…' to contain '<tp-box border-width=\"4px\" style=\"col…'",
+      "family": "viewers",
+      "affectedComponents": [
+        "markup-viewer",
+        "asciidoc-viewer",
+        "html-viewer",
+        "markdown-viewer",
+        "restructuredtext-viewer",
+        "javascript-viewer",
+        "prolog-viewer",
+        "python-viewer",
+        "sql-viewer",
+        "typescript-viewer",
+        "object-tree"
+      ]
+    },
+    {
+      "file": "src/components/markdown-components.test.ts",
+      "component": null,
+      "title": "markdown components migration removes generated theme classes from component examples",
+      "kind": "Timeout",
+      "message": "Error: STACK_TRACE_ERROR",
+      "family": "viewers",
+      "affectedComponents": [
+        "markup-viewer",
+        "asciidoc-viewer",
+        "html-viewer",
+        "markdown-viewer",
+        "restructuredtext-viewer",
+        "javascript-viewer",
+        "prolog-viewer",
+        "python-viewer",
+        "sql-viewer",
+        "typescript-viewer",
+        "object-tree"
+      ]
+    },
+    {
+      "file": "src/components/markdown-components.test.ts",
+      "component": null,
+      "title": "markdown components migration removes generated theme classes from tp-theme examples",
+      "kind": "Assertion",
+      "message": "AssertionError: expected '<section style=\"--tp-brand-seed: inhe…' to contain '<section>'",
+      "family": "viewers",
+      "affectedComponents": [
+        "markup-viewer",
+        "asciidoc-viewer",
+        "html-viewer",
+        "markdown-viewer",
+        "restructuredtext-viewer",
+        "javascript-viewer",
+        "prolog-viewer",
+        "python-viewer",
+        "sql-viewer",
+        "typescript-viewer",
+        "object-tree"
+      ]
+    },
+    {
+      "file": "src/components/sql-viewer/sql-viewer.test.ts",
+      "component": "sql-viewer",
+      "title": "covers SQL viewer file resolution fallbacks",
+      "kind": "Timeout",
+      "message": "Error: STACK_TRACE_ERROR",
+      "family": "viewers",
+      "affectedComponents": [
+        "sql-viewer"
+      ]
+    },
+    {
+      "file": "src/components/graph-geometric-optics/graph-geometric-optics.test.ts",
+      "component": "graph-geometric-optics",
+      "title": "<tp-graph-geometric-optics> orients the point-source emission cone from the horizontal axis",
+      "kind": "Timeout",
+      "message": "Error: STACK_TRACE_ERROR",
+      "family": "simulators",
+      "affectedComponents": [
+        "graph-geometric-optics"
+      ]
+    },
+    {
+      "file": "src/components/notebook/notebook.test.ts",
+      "component": "notebook",
+      "title": "<tp-notebook> shows only markup output and keeps programming viewers intact",
+      "kind": "Assertion",
+      "message": "AssertionError: expected 'prolog-notebook' to be '' // Object.is equality",
+      "family": "playgrounds",
+      "affectedComponents": [
+        "notebook"
+      ]
+    },
+    {
+      "file": "src/components/python-playground/python-playground.test.ts",
+      "component": "python-playground",
+      "title": "covers Python project, runtime and playground contracts",
+      "kind": "Timeout",
+      "message": "Error: STACK_TRACE_ERROR",
+      "family": "playgrounds",
+      "affectedComponents": [
+        "python-playground"
+      ]
+    },
+    {
+      "file": "src/components/speech-to-text/speech-to-text-docs.test.ts",
+      "component": "speech-to-text",
+      "title": "provides five HTML examples with Basic usage first",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ …(3) ] to have a length of 5 but got 3",
+      "family": "utilities",
+      "affectedComponents": [
+        "speech-to-text"
+      ]
+    },
+    {
+      "file": "src/components/speech-to-text/speech-to-text-docs.test.ts",
+      "component": "speech-to-text",
+      "title": "renders equivalent md examples",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(2) ] to deeply equal [ 'Basic usage', 'Basic', …(3) ]",
+      "family": "utilities",
+      "affectedComponents": [
+        "speech-to-text"
+      ]
+    },
+    {
+      "file": "src/components/speech-to-text/speech-to-text-docs.test.ts",
+      "component": "speech-to-text",
+      "title": "renders equivalent adoc examples",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(2) ] to deeply equal [ 'Basic usage', 'Basic', …(3) ]",
+      "family": "utilities",
+      "affectedComponents": [
+        "speech-to-text"
+      ]
+    },
+    {
+      "file": "src/components/speech-to-text/speech-to-text-docs.test.ts",
+      "component": "speech-to-text",
+      "title": "preserves the reStructuredText examples",
+      "kind": "Assertion",
+      "message": "AssertionError: expected [ 'Basic usage', 'Attributes', …(2) ] to deeply equal [ 'Basic usage', 'Basic', …(3) ]",
+      "family": "utilities",
+      "affectedComponents": [
+        "speech-to-text"
+      ]
+    }
+  ]
+}

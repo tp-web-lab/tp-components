@@ -1,0 +1,19 @@
+[tp-asciidoc-viewer%allow-script,label="tp-markup-multi-slides",style="--tp-markup-viewer-frame-min-height: 32rem"]
+=========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-markup-multi-slides,repository="/docs/components/markup-multi-slides/docs",label="Mixed markup slides"]
+====
+====
+======
+
+.Slides navigation menu
+========
+[tp-markup-multi-slides,repository="/docs/components/markup-multi-slides/docs",label="Mixed markup slides",menu]
+======
+======
+========
+----
+=========

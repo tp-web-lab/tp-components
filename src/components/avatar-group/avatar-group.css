@@ -1,0 +1,25 @@
+tp-avatar-group {
+  display: inline-flex;
+  align-items: center;
+  isolation: isolate;
+  vertical-align: middle;
+  max-inline-size: 100%;
+}
+
+tp-avatar-group > tp-avatar {
+  position: relative;
+  z-index: var(--tp-avatar-group-index);
+}
+
+tp-avatar-group > tp-avatar ~ tp-avatar {
+  margin-inline-start: calc(-1 * var(--tp-avatar-group-overlap, 0.75rem));
+}
+
+tp-avatar-group[data-orientation="vertical"] {
+  flex-direction: column;
+}
+
+tp-avatar-group[data-orientation="vertical"] > tp-avatar ~ tp-avatar {
+  margin-inline-start: 0;
+  margin-block-start: calc(-1 * var(--tp-avatar-group-overlap, 0.75rem));
+}

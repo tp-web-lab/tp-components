@@ -1,0 +1,84 @@
+tp-slider {
+	--tp-slider-gap: 1rem;
+	--tp-scrollbar-size: 1rem;
+	block-size: auto;
+	display: flex;
+	flex-wrap: nowrap;
+	min-inline-size: 0;
+	gap: var(--tp-slider-gap);
+	overflow-x: auto;
+	overflow-y: hidden;
+	scrollbar-width: auto;
+	scrollbar-color: var(--tp-scrollbar-thumb-color, var(--tp-neutral-fill-mid))
+		var(--tp-scrollbar-track-color, transparent);
+}
+
+tp-slider::-webkit-scrollbar {
+	/* Native scrollbar pseudo-elements require a physical height in WebKit. */
+	height: var(--tp-scrollbar-size);
+}
+
+tp-slider::-webkit-scrollbar-track {
+	background-color: var(--tp-scrollbar-track-color, transparent);
+}
+
+tp-slider::-webkit-scrollbar-thumb {
+	background-color: var(--tp-scrollbar-thumb-color, var(--tp-neutral-fill-mid));
+	background-clip: padding-box;
+	border: 0.25rem solid var(--tp-scrollbar-track-color, transparent);
+	border-radius: var(--tp-scrollbar-size);
+}
+
+/* Standard colors otherwise override the sized scrollbar in Chromium. */
+@supports selector(::-webkit-scrollbar) and (not (-moz-appearance: none)) {
+	tp-slider {
+		scrollbar-color: auto;
+	}
+}
+
+tp-slider > * {
+	flex: 0 0 auto;
+	min-inline-size: 0;
+	inline-size: var(--tp-slider-item-width, auto);
+}
+
+tp-slider > img {
+	block-size: 100%;
+	flex-basis: auto;
+	inline-size: auto;
+}
+
+tp-slider[slider-height] > img,
+tp-slider[slider-height] > video {
+	block-size: 100%;
+	inline-size: auto;
+	object-fit: cover;
+}
+
+tp-slider:focus-visible {
+	outline: 2px solid var(--tp-focus-color, currentColor);
+	outline-offset: 2px;
+}
+
+/* Overlay scrollbars need room; classic scrollbars already reserve it. */
+tp-slider[scrollbar].overflowing {
+	padding-block-end: max(
+		0px,
+		calc(var(--tp-scrollbar-size) - var(--tp-slider-native-scrollbar-size, 0px))
+	);
+}
+
+tp-slider:not([scrollbar]) {
+	scrollbar-width: none;
+}
+
+tp-slider:not([scrollbar])::-webkit-scrollbar {
+	height: 0;
+}
+
+/* Keep the styled scrollbar alive when toggling it in Chromium/WebKit. */
+@supports selector(::-webkit-scrollbar) and (not (-moz-appearance: none)) {
+	tp-slider:not([scrollbar]) {
+		scrollbar-width: auto;
+	}
+}

@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "title": "Words that start with ab",
+  "data": {
+    "alphabet": [
+      "a",
+      "b"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "q0",
+      "type": "dfa-state",
+      "x": 100,
+      "y": 140,
+      "label": "q0",
+      "data": {
+        "initial": true
+      }
+    },
+    {
+      "id": "q1",
+      "type": "dfa-state",
+      "x": 280,
+      "y": 140,
+      "label": "q1"
+    },
+    {
+      "id": "q2",
+      "type": "dfa-state",
+      "x": 470,
+      "y": 140,
+      "label": "q2",
+      "data": {
+        "accepting": true
+      }
+    },
+    {
+      "id": "dead",
+      "type": "dfa-state",
+      "x": 280,
+      "y": 330,
+      "label": "dead"
+    }
+  ],
+  "edges": [
+    {
+      "id": "q0-a",
+      "type": "dfa-transition",
+      "source": "q0",
+      "target": "q1",
+      "label": "a",
+      "direction": "forward"
+    },
+    {
+      "id": "q0-b",
+      "type": "dfa-transition",
+      "source": "q0",
+      "target": "dead",
+      "label": "b",
+      "direction": "forward"
+    },
+    {
+      "id": "q1-b",
+      "type": "dfa-transition",
+      "source": "q1",
+      "target": "q2",
+      "label": "b",
+      "direction": "forward"
+    },
+    {
+      "id": "q1-a",
+      "type": "dfa-transition",
+      "source": "q1",
+      "target": "dead",
+      "label": "a",
+      "direction": "forward"
+    },
+    {
+      "id": "q2-a",
+      "type": "dfa-transition",
+      "source": "q2",
+      "target": "q2",
+      "label": "a",
+      "direction": "forward"
+    },
+    {
+      "id": "q2-b",
+      "type": "dfa-transition",
+      "source": "q2",
+      "target": "q2",
+      "label": "b",
+      "direction": "forward"
+    },
+    {
+      "id": "dead-a",
+      "type": "dfa-transition",
+      "source": "dead",
+      "target": "dead",
+      "label": "a",
+      "direction": "forward"
+    },
+    {
+      "id": "dead-b",
+      "type": "dfa-transition",
+      "source": "dead",
+      "target": "dead",
+      "label": "b",
+      "direction": "forward"
+    }
+  ]
+}

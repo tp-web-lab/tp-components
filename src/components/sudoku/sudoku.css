@@ -1,0 +1,215 @@
+.tp-sudoku {
+  --tp-game-cell-size: clamp(2.5rem, 3em, 3.5rem);
+  --tp-game-symbol-font-size: clamp(1.25rem, 1.5em, 2rem);
+  --tp-game-symbol-font-weight: 800;
+
+  box-sizing: border-box;
+  display: flow-root;
+  font-family: system-ui, -apple-system, sans-serif;
+  max-inline-size: 100%;
+  margin: 1em 0;
+  padding: 1em;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.tp-sudoku *,
+.tp-sudoku *::before,
+.tp-sudoku *::after {
+  box-sizing: border-box;
+}
+
+.tp-sudoku-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.tp-sudoku-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.tp-sudoku-title {
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #333;
+}
+
+.tp-sudoku-controls {
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tp-sudoku button {
+  appearance: none;
+  min-block-size: 2.25em;
+  padding: 0.45em 0.9em;
+  background: #0b63ce;
+  color: white;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+  transition: background 0.2s;
+  box-sizing: border-box;
+}
+
+.tp-sudoku button:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.tp-sudoku button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.tp-sudoku select {
+  flex: 0 1 auto;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-block-size: 2.25em;
+  padding: 0.35em 0.7em;
+  border: 1px solid #c7d2e0;
+  border-radius: 4px;
+  background: white;
+  color: #223;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+.tp-sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(9, var(--tp-game-cell-size));
+  grid-template-rows: repeat(9, var(--tp-game-cell-size));
+  gap: 0;
+  background: #333;
+  padding: 2px;
+  width: max-content;
+  max-width: 100%;
+  border: 2px solid #333;
+  margin-inline: auto;
+  overflow: auto;
+}
+
+.tp-sudoku-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid #ddd;
+  width: var(--tp-game-cell-size);
+  height: var(--tp-game-cell-size);
+  min-width: var(--tp-game-cell-size);
+  min-height: var(--tp-game-cell-size);
+  position: relative;
+}
+
+.tp-sudoku-cell.box-left {
+  border-left-width: 2px;
+  border-left-color: #333;
+}
+
+.tp-sudoku-cell.box-right {
+  border-right-width: 2px;
+  border-right-color: #333;
+}
+
+.tp-sudoku-cell.box-top {
+  border-top-width: 2px;
+  border-top-color: #333;
+}
+
+.tp-sudoku-cell.box-bottom {
+  border-bottom-width: 2px;
+  border-bottom-color: #333;
+}
+
+.tp-sudoku-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  text-align: center;
+  font: var(--tp-game-symbol-font-weight) var(--tp-game-symbol-font-size)/1 system-ui, -apple-system, sans-serif;
+  background: white;
+  color: #1f2937;
+  padding: 0;
+}
+
+.tp-sudoku-input:focus-visible {
+  outline: var(--tp-focus-ring, 2px solid #0b63ce);
+  outline-offset: -2px;
+}
+
+.tp-sudoku-cell.initial .tp-sudoku-input {
+  background: #dbe7ff;
+  color: #1d4f91;
+  font-weight: 800;
+  cursor: default;
+}
+
+.tp-sudoku-cell.initial.current-line .tp-sudoku-input {
+  background: #cfe0ff;
+}
+
+.tp-sudoku-cell.initial .tp-sudoku-input:focus-visible {
+  outline: var(--tp-focus-ring, 2px solid #0b63ce);
+  outline-offset: -2px;
+}
+
+.tp-sudoku-cell.incorrect .tp-sudoku-input {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.tp-sudoku-cell.current-line .tp-sudoku-input {
+  background: #e6f0ff;
+}
+
+.tp-sudoku-cell.current-cell {
+  box-shadow: inset 0 0 0 2px #0b63ce;
+}
+
+.tp-sudoku-status {
+  padding: 0.75em;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 500;
+  min-height: 1.5rem;
+}
+
+.tp-sudoku-status.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.tp-sudoku-status.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.tp-sudoku-status.info {
+  background: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+.tp-sudoku-error {
+  padding: 1rem;
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  tp-sudoku, tp-sudoku * { transition-duration: 0.01ms !important; transition-delay: 0ms !important; }
+}

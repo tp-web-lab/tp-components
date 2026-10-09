@@ -1,0 +1,108 @@
+{
+  "tagname": "tp-turtle",
+  "classname": "TpTurtle",
+  "superclass": "TpBase",
+  "description": "Turtle DSL rendering component.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-turtle></tp-turtle>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "background",
+      "description": "Controls the background.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "download-name",
+      "description": "Controls the download name.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "height",
+      "description": "Controls the height.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label",
+      "description": "Controls the label.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "replay-label",
+      "description": "Controls the replay label.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "save-label",
+      "description": "Controls the save label.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "src",
+      "description": "Controls the src.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "width",
+      "description": "Controls the width.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Turtle",
+    "introduction": "The custom `<tp-turtle>` element implements the <tp-icon name=\"turtle\" library=\"components\" size=\"1.25em\"></tp-icon> Turtle functionality: turtle DSL rendering component.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | View the drawing and use the available replay and download controls. |\n| Replay | Runs the drawing program again. |\n| Save SVG | Saves the generated drawing as SVG. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

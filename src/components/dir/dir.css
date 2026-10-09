@@ -1,0 +1,59 @@
+tp-dir {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+tp-dir > tp-icon-button {
+  --tp-icon-button-size: 2rem;
+  --tp-icon-button-icon-size: 1.15rem;
+}
+
+tp-dir > tp-icon-button > button {
+  border: 1px solid var(--tp-neutral-stroke-mid, #9ca3af);
+  background: var(--tp-paper-color, #ffffff);
+}
+
+tp-dir > tp-icon-button > button:hover {
+  background: var(--tp-neutral-fill-soft, #e5e7eb);
+}
+
+tp-dir > tp-dropdown {
+  min-inline-size: 14rem;
+}
+
+tp-dir > tp-dropdown > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem;
+}
+
+tp-dir .tp-dir-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  border-radius: var(--tp-border-radius-sm, 0.25rem);
+}
+
+tp-dir .tp-dir-option:hover {
+  background: var(--tp-neutral-fill-softer, #f3f4f6);
+}
+
+tp-dir .tp-dir-option[data-selected] {
+  background: var(--tp-neutral-fill-soft, #e5e7eb);
+}
+
+tp-dir .tp-dir-option > tp-icon[name='check'] {
+  visibility: hidden;
+}
+
+tp-dir .tp-dir-option[data-selected] > tp-icon[name='check'] {
+  visibility: visible;
+}
+
+tp-dir .tp-dir-separator {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

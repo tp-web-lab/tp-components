@@ -1,0 +1,72 @@
+{
+  "tagname": "tp-center",
+  "classname": "TpCenter",
+  "superclass": "TpBase",
+  "description": "Centers content within a configurable maximum inline size.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-center intrinsic>\n<tp-box>Centered content</tp-box>\n</tp-center>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "center-text",
+      "description": "Centers inline text content with `text-align: center`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "intrinsic",
+      "description": "Sizes children intrinsically by centering them in a column flex layout.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "max-inline-size",
+      "description": "Maximum inline size applied to the centered container. When absent, uses the --tp-center-width CSS default.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"60ch\""
+    },
+    {
+      "name": "padding-inline",
+      "description": "Symmetric inline padding applied to the centered container.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"0px\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-center-width",
+      "default": "60ch",
+      "description": "Default maximum inline size when `max-inline-size` is not set."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Center",
+    "introduction": "The custom `<tp-center>` element implements the <tp-icon name=\"center\" library=\"components\" size=\"1.25em\"></tp-icon> Center functionality: centers content within a configurable maximum inline size.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

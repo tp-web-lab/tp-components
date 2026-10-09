@@ -1,0 +1,48 @@
+tp-fill-blank-question [data-tp-closed-bank] {
+	display: flex;
+	gap: 0.5rem;
+}
+
+tp-fill-blank-question [data-tp-closed-bank] > div {
+	min-inline-size: 0;
+}
+
+tp-fill-blank-question tp-callout:has(> [data-tp-closed-reading]) {
+	margin-block-start: 0.5rem;
+}
+
+tp-fill-blank-question
+	tp-textfield[data-tp-closed-target]
+	[data-tp-textfield-control],
+tp-fill-blank-question tp-blank[data-tp-closed-target] {
+	outline: 3px solid var(--tp-focus-color, var(--tp-brand-text-colorful));
+	outline-offset: 2px;
+}
+
+tp-fill-blank-question tp-button[data-tp-closed-assigned] {
+	--tp-button-background: var(--tp-info-fill-softer);
+	--tp-button-foreground: var(--tp-info-text-colorful);
+	--tp-button-border-color: var(--tp-info-stroke-soft);
+}
+
+/* MathJax 2 previews may survive cloning: only its final SVG should be visible. */
+tp-fill-blank-question .MathJax_Preview:has(+ .MathJax_SVG) {
+	display: none;
+}
+
+tp-fill-blank-question [data-tp-reading-math],
+tp-fill-blank-question [data-tp-reading-math] > svg {
+	display: inline-block;
+}
+
+/* Partial grading belongs to the question; empty and edited blanks stay neutral. */
+tp-fill-blank-question[partial] [data-tp-blank-result] {
+	border-bottom-width: 4px;
+	border-bottom-style: solid;
+}
+tp-fill-blank-question[partial] [data-tp-blank-result="success"] {
+	border-bottom-color: var(--tp-success-stroke-mid);
+}
+tp-fill-blank-question[partial] [data-tp-blank-result="danger"] {
+	border-bottom-color: var(--tp-danger-stroke-mid);
+}

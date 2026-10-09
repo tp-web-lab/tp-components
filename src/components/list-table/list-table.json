@@ -1,0 +1,43 @@
+{
+  "tagname": "tp-list-table",
+  "classname": "TpListTable",
+  "superclass": "TpBase",
+  "description": "creates an HTML table from ordered or unordered lists while preserving cell content.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-list-table heading>\n  <ul>\n    <li><ul><li>Country</li><li>Capital</li></ul></li>\n    <li><ul><li>Estonia</li><li>Tallinn</li></ul></li>\n    <li><ul><li>Latvia</li><li>Riga</li></ul></li>\n    <li><ul><li>Lithuania</li><li>Vilnius</li></ul></li>\n  </ul>\n</tp-list-table>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "heading",
+      "description": "Uses the first row as column headings.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-callout",
+      "summary": "Callout component for highlighted contextual content."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "List table",
+    "introduction": "The custom `<tp-list-table>` element implements the List table functionality: creates an HTML table from ordered or unordered lists while preserving cell content.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Table | Read and select the cell content. Wide tables can be scrolled horizontally. |\n| Embedded controls | Use the controls normally; conversion preserves their content and event listeners. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Table | No table-specific keyboard shortcut. Embedded links and controls retain their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

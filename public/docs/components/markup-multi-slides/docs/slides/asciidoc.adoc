@@ -1,0 +1,27 @@
+= Single-choice question
+:showtitle:
+
+This slide is written in *AsciiDoc*.
+
+[tp-single-choice-question,answer="2"]
+====
+Title:: Markup languages
+
+Prompt:: Which markup language uses directives beginning with two dots?
+
+Form::
++
+* Markdown
+* reStructuredText
+* AsciiDoc
+* HTML
+
+Feedback::
++
+* Markdown commonly uses punctuation and fenced blocks.
+* Correct. reStructuredText directives begin with two dots.
+* AsciiDoc block declarations use square brackets.
+* HTML uses elements delimited by angle brackets.
+
+Solution:: reStructuredText
+====

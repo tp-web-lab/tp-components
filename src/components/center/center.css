@@ -1,0 +1,12 @@
+tp-center {
+	display: block;
+	box-sizing: content-box;
+	margin-inline: auto;
+	max-inline-size: var(--tp-center-width, 60ch);
+}
+
+tp-center[intrinsic] {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}

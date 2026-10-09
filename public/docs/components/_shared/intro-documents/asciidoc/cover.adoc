@@ -1,0 +1,5 @@
+== A small guide
+
+This example loads each document when you navigate to it.
+
+link:chapter.adoc[Read the next page]

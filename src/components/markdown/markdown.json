@@ -1,0 +1,51 @@
+{
+  "tagname": "tp-markdown",
+  "classname": "TpMarkdown",
+  "superclass": "TpBase",
+  "description": "Markdown rendering component.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-markdown><script type=\"tp/markdown\">This paragraph uses **Markdown**.</script></tp-markdown>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "src",
+      "description": "Controls the src.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-markdown-rendered",
+      "description": "Emitted when markdown rendered occurs.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-markdown",
+      "url": "https://www.npmjs.com/package/@tp/tp-markdown",
+      "summary": "Markdown parsing and rendering."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Markdown component",
+    "introduction": "The custom `<tp-markdown>` element implements the <tp-icon name=\"markdown\" library=\"components\" size=\"1.25em\"></tp-icon> Markdown component functionality: markdown rendering component.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Read the displayed content and use its links and embedded controls. |\n| Using the component | The component itself adds no editing or playback controls. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

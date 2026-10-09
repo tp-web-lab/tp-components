@@ -1,0 +1,195 @@
+tp-textfield {
+	display: inline-block;
+	inline-size: var(--tp-textfield-inline-size, 20ch);
+	max-inline-size: 100%;
+	min-inline-size: 0;
+	vertical-align: middle;
+}
+
+tp-textfield[multiline] {
+	box-sizing: border-box;
+	/* Fit the available space beside floats, without clipping focus outlines. */
+	display: flow-root;
+	flex-basis: 100%;
+	inline-size: auto;
+	min-inline-size: 0;
+	justify-self: stretch;
+	width: auto;
+}
+
+tp-textfield [data-tp-textfield-label] {
+	box-sizing: border-box;
+	display: grid;
+	gap: var(--tp-textfield-label-gap, 0.35em);
+	inline-size: 100%;
+	max-inline-size: none;
+	max-width: none;
+	min-inline-size: 0;
+	grid-template-columns: minmax(0, 100%);
+	grid-template-areas:
+		"label"
+		"control";
+}
+
+tp-textfield [data-tp-textfield-label-text] {
+	grid-area: label;
+	font-weight: var(--tp-textfield-label-font-weight, 500);
+}
+
+tp-textfield[required] [data-tp-textfield-label-text]::after {
+	content: " *";
+	color: var(--tp-textfield-required-color, var(--tp-danger-text-colorful));
+}
+
+tp-textfield[required]:not([label]) [data-tp-textfield-control]::before {
+	position: absolute;
+	z-index: 1;
+	inset-block-start: 0.2em;
+	inset-inline-start: 0.3em;
+	color: var(--tp-textfield-required-color, var(--tp-danger-text-colorful));
+	content: "*";
+	font-weight: 600;
+	line-height: 1;
+	pointer-events: none;
+}
+
+tp-textfield[label-position="bottom"] [data-tp-textfield-label] {
+	grid-template-areas:
+		"control"
+		"label";
+}
+
+tp-textfield[label-position="start"] [data-tp-textfield-label],
+tp-textfield[label-position="end"] [data-tp-textfield-label] {
+	align-items: center;
+	grid-template-columns: max-content minmax(0, 1fr);
+}
+
+tp-textfield[label-position="start"] [data-tp-textfield-label] {
+	grid-template-areas: "label control";
+}
+
+tp-textfield[label-position="end"] [data-tp-textfield-label] {
+	grid-template-columns: minmax(0, 1fr) max-content;
+	grid-template-areas: "control label";
+}
+
+tp-textfield [data-tp-textfield-control] {
+	position: relative;
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: max-content minmax(0, 1fr);
+	align-items: center;
+	inline-size: 100%;
+	min-inline-size: 0;
+	overflow: hidden;
+	border: 1px solid
+		var(--tp-textfield-border-color, var(--tp-neutral-stroke-soft));
+	border-radius: var(--tp-textfield-radius, var(--tp-border-radius-sm));
+	background: var(--tp-textfield-background, var(--tp-paper-color));
+}
+
+tp-textfield:not([icon]) [data-tp-textfield-control] {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+tp-textfield [data-tp-textfield-control]:focus-within {
+	border-color: var(--tp-textfield-focus-color, var(--tp-brand-text-colorful));
+	outline: 2px solid
+		color-mix(
+			in srgb,
+			var(--tp-textfield-focus-color, var(--tp-brand-text-colorful)) 25%,
+			transparent
+		);
+	outline-offset: 1px;
+}
+
+tp-textfield [data-tp-textfield-input] {
+	-webkit-appearance: none;
+	box-sizing: border-box;
+	display: block;
+	inline-size: 100%;
+	min-inline-size: 0;
+	min-block-size: 2.5rem;
+	margin: 0;
+	padding: var(--tp-textfield-padding-block, 0.6em)
+		var(--tp-textfield-padding-inline, 0.75em);
+	overflow: hidden;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	font-weight: var(--tp-textfield-value-font-weight, 400);
+}
+
+tp-textfield textarea[data-tp-textfield-input] {
+	justify-self: stretch;
+	min-width: 100%;
+	max-inline-size: none;
+	max-width: 100%;
+	width: 100%;
+	resize: none;
+	field-sizing: fixed;
+}
+
+tp-textfield [data-tp-textfield-prefix] {
+	align-self: center;
+	line-height: 1;
+	margin-inline-start: var(--tp-textfield-padding-inline, 0.75em);
+}
+
+tp-textfield [data-tp-textfield-label] > [data-tp-textfield-control] {
+	grid-area: control;
+}
+
+tp-textfield:not([icon]) [data-tp-textfield-prefix] {
+	display: none;
+}
+
+tp-textfield input::-webkit-contacts-auto-fill-button,
+tp-textfield input::-webkit-credentials-auto-fill-button,
+tp-textfield input::-webkit-search-cancel-button,
+tp-textfield input::-webkit-search-decoration {
+	display: none;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+tp-textfield [data-tp-textfield-clear] {
+	position: absolute;
+	inset-block-start: 50%;
+	inset-inline-end: 1.75rem;
+	margin: 0;
+	transform: translateY(-50%);
+}
+
+tp-textfield [data-tp-textfield-clear][hidden] {
+	display: none;
+}
+
+tp-textfield [data-tp-textfield-input] {
+	padding-inline-end: calc(
+		var(--tp-textfield-padding-inline, 0.75em) +
+		3.25rem
+	);
+}
+
+tp-textfield [data-tp-textfield-type] {
+	position: absolute;
+	inset-inline-end: 0.4em;
+	inset-block-start: 50%;
+	transform: translateY(-50%);
+	color: var(--tp-text-muted);
+	pointer-events: none;
+}
+
+tp-textfield[multiline] [data-tp-textfield-clear] {
+	inset-block-start: 0.35em;
+	transform: none;
+}
+
+tp-textfield[data-disabled] [data-tp-textfield-control] {
+	cursor: not-allowed;
+	opacity: 0.6;
+}

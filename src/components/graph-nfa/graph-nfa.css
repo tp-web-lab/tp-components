@@ -1,0 +1,9 @@
+tp-graph-nfa { display: block; }
+.tp-nfa-state.is-active { fill: var(--tp-info-fill-softer, #dbeafe); stroke: var(--tp-info-stroke-mid, #2563eb); stroke-width: 4; }
+.tp-nfa-accepting, .tp-nfa-initial-arrow { fill: none; stroke: var(--tp-graph-node-stroke, var(--tp-brand-stroke-mid, #5268d8)); stroke-width: 2; pointer-events: none; vector-effect: non-scaling-stroke; }
+.tp-graph-edge.is-active .tp-graph-edge-line { stroke: var(--tp-info-stroke-mid, #2563eb); stroke-width: 4; }
+.tp-nfa-field { display: inline-flex; align-items: center; gap: .3rem; font-size: .78rem; }
+.tp-nfa-field input { width: 8rem; min-height: 2rem; box-sizing: border-box; padding-inline: .45rem; border: 1px solid var(--tp-neutral-stroke-soft, #c7cedb); border-radius: .35rem; color: inherit; background: var(--tp-paper-color, Canvas); }
+.tp-nfa-status { min-width: 4rem; font-size: .8rem; font-weight: 600; }
+.tp-nfa-status.success { color: var(--tp-success-text-colorful, #15803d); }
+.tp-nfa-status.danger { color: var(--tp-danger-text-colorful, #b91c1c); }

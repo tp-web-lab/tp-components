@@ -1,0 +1,43 @@
+:where(tp-game-life) {
+  display: block;
+  inline-size: fit-content;
+}
+
+:where(tp-game-life .tp-game-life-container) {
+  display: grid;
+  gap: 0.5rem;
+  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  background: color-mix(in srgb, Canvas 94%, currentColor 6%);
+}
+
+:where(tp-game-life .tp-game-life-label) {
+  font-weight: 600;
+}
+
+:where(tp-game-life .tp-game-life-title) {
+  font-weight: 600;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+:where(tp-game-life .tp-game-life-toolbar) {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+:where(tp-game-life .tp-game-life-toolbar tp-button-group) {
+  --tp-button-group-gap: 0.4rem;
+}
+
+:where(tp-game-life .tp-game-life-svg) {
+  display: block;
+}
+
+:where(tp-game-life .tp-game-life-error) {
+  color: #b00020;
+  white-space: pre-wrap;
+}

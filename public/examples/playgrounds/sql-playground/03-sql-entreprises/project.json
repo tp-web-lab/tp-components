@@ -1,0 +1,7 @@
+{
+  "id": "03-sql-entreprises",
+  "label": "SQL Entreprises",
+  "name": "SQL Entreprises",
+  "entry": "/main.sql",
+  "setup": "/entreprises.sql"
+}

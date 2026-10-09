@@ -1,0 +1,194 @@
+{
+  "tagname": "tp-icon-button",
+  "classname": "TpIconButton",
+  "superclass": "TpBase",
+  "description": "Button icon accessible.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-icon-button></tp-icon-button>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "color",
+      "description": "Color forwarded to the internal `<tp-icon>`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "disabled",
+      "description": "Attribute `disabled`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "flip-h",
+      "description": "Horizontal flip forwarded to the internal `<tp-icon>`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "flip-v",
+      "description": "Vertical flip forwarded to the internal `<tp-icon>`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "label",
+      "description": "Attribute `label`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "library",
+      "description": "Attribute `library`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "name",
+      "description": "Attribute `name`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "rotate",
+      "description": "Rotation forwarded to the internal `<tp-icon>`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"0deg\""
+    },
+    {
+      "name": "scale",
+      "description": "Scale forwarded to the internal `<tp-icon>`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1"
+    },
+    {
+      "name": "size",
+      "description": "Attribute `size`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpSizeType",
+      "default": "m"
+    },
+    {
+      "name": "spin",
+      "description": "Continuous spin forwarded to the internal `<tp-icon>`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "type",
+      "description": "Attribute `type`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpIconButtonNativeType",
+      "default": "button"
+    },
+    {
+      "name": "variant",
+      "description": "Attribute `variant`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpVariantType",
+      "default": "neutral"
+    }
+  ],
+  "methods": [
+    {
+      "name": "focus(): void",
+      "inherited": false,
+      "description": "API documentation summary."
+    }
+  ],
+  "events": [
+    {
+      "name": "click",
+      "description": "Event.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-icon-button-focus-ring",
+      "default": "currentColor",
+      "description": "Controls the focus ring."
+    },
+    {
+      "name": "--tp-icon-button-hover-background",
+      "default": "color-mix( in srgb, currentColor 10%, transparent )",
+      "description": "Controls the hover background."
+    },
+    {
+      "name": "--tp-icon-button-icon-size",
+      "default": "1.75em",
+      "description": "Controls the icon size."
+    },
+    {
+      "name": "--tp-icon-button-radius",
+      "default": "999rem",
+      "description": "Controls the radius."
+    },
+    {
+      "name": "--tp-icon-button-size",
+      "default": "3.25em",
+      "description": "Controls the size."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Icon button",
+    "introduction": "The custom `<tp-icon-button>` element implements the <tp-icon name=\"icon-button\" library=\"components\" size=\"1.25em\"></tp-icon> Icon button functionality: button icon accessible.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Button | Click to perform the action identified by its label. Disabled controls cannot be activated. |\n| Navigation button | Click to open its destination. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter | Activate the focused button or link. |\n| Space | Activate a focused action button; links use Enter. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Enter / Space",
+        "description": "Uses the browser's native button activation behavior."
+      }
+    ]
+  }
+}

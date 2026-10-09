@@ -1,0 +1,12 @@
+tp-typewriting {
+	display: block;
+	min-inline-size: 0;
+}
+tp-typewriting [data-tp-typewriting-unit][data-pending] {
+	opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+	tp-typewriting [data-tp-typewriting-unit][data-pending] {
+		opacity: 1;
+	}
+}

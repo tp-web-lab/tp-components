@@ -1,0 +1,141 @@
+{
+  "tagname": "tp-object-tree",
+  "classname": "TpObjectTree",
+  "superclass": "TpBase",
+  "description": "Specialized tree for inspecting JavaScript values.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-object-tree>\n      <script type=\"tp/javascript\">\n        ({\n          course: {\n            title: 'Web components',\n            lessons: 12,\n            published: true\n          },\n          topics: ['HTML', 'CSS', 'JavaScript']\n        })\n      </script>\n    </tp-object-tree>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "src",
+      "description": "URL of an external JSON file to inspect.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "collapseAll(): void",
+      "inherited": false,
+      "description": "Collapses all nodes."
+    },
+    {
+      "name": "expandAll(): void",
+      "inherited": false,
+      "description": "Expands all nodes."
+    },
+    {
+      "name": "setValue(value: unknown): void",
+      "inherited": false,
+      "description": "Loads a new value into the tree."
+    },
+    {
+      "name": "sortAll(): void",
+      "inherited": false,
+      "description": "Sorts the current inspectable tree."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-object-tree-error",
+      "description": "Emitted when an external JSON file or inline JavaScript expression cannot be loaded.",
+      "detail": "{ message: string; source: \"script\" | \"src\"; src: string }"
+    },
+    {
+      "name": "tp-object-tree-load",
+      "description": "Emitted after an external JSON file or inline JavaScript expression has been loaded.",
+      "detail": "{ source: \"script\" | \"src\"; src: string; value: unknown }"
+    },
+    {
+      "name": "tp-tree-context-action",
+      "description": "Emitted when the user triggers a global tree action.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-object-tree-boolean-color",
+      "default": "#8250df",
+      "description": "Controls the boolean color."
+    },
+    {
+      "name": "--tp-object-tree-circular-color",
+      "default": "#cf222e",
+      "description": "Controls the circular color."
+    },
+    {
+      "name": "--tp-object-tree-date-color",
+      "default": "#116329",
+      "description": "Controls the date color."
+    },
+    {
+      "name": "--tp-object-tree-error-color",
+      "default": "#cf222e",
+      "description": "Controls the error color."
+    },
+    {
+      "name": "--tp-object-tree-font-size",
+      "default": "0.875rem",
+      "description": "Controls the font size."
+    },
+    {
+      "name": "--tp-object-tree-function-color",
+      "default": "#953800",
+      "description": "Controls the function color."
+    },
+    {
+      "name": "--tp-object-tree-key-color",
+      "default": "#6a737d",
+      "description": "Controls the key color."
+    },
+    {
+      "name": "--tp-object-tree-nullish-color",
+      "default": "#8c959f",
+      "description": "Controls the nullish color."
+    },
+    {
+      "name": "--tp-object-tree-number-color",
+      "default": "#0550ae",
+      "description": "Controls the number color."
+    },
+    {
+      "name": "--tp-object-tree-separator-color",
+      "default": "#8c959f",
+      "description": "Controls the separator color."
+    },
+    {
+      "name": "--tp-object-tree-string-color",
+      "default": "#0a7f3f",
+      "description": "Controls the string color."
+    },
+    {
+      "name": "--tp-object-tree-structure-color",
+      "default": "#57606a",
+      "description": "Controls the structure color."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-tree",
+      "summary": "Generic tree component for interactive hierarchical editing."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Object tree",
+    "introduction": "The custom `<tp-object-tree>` element implements the <tp-icon name=\"object-tree\" library=\"components\" size=\"1.25em\"></tp-icon> Object tree functionality: specialized tree for inspecting JavaScript values.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Expand or collapse branches to inspect nested items. |\n| Select | Select available links or entries to use the actions provided by the surrounding page. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

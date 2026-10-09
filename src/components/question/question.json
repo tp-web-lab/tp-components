@@ -1,0 +1,86 @@
+{
+  "tagname": "tp-question",
+  "classname": "TpQuestion",
+  "superclass": "TpBase",
+  "description": "Semantic base container for question content.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-question>\n    <dl>\n      <dt>Title</dt><dd>Reflection</dd>\n      <dt>Prompt</dt><dd>Describe one benefit of web components.</dd>\n    <dt>Form</dt><dd><tp-textfield multiline=\"\" rows=\"3\" placeholder=\"Type your answer...\"></tp-textfield></dd>\n      <dt>Feedback</dt><dd>Think about encapsulation and reuse.</dd>\n      <dt>Solution</dt><dd>They package reusable behavior behind a custom element.</dd>\n    </dl>\n  </tp-question>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "open",
+      "description": "Expands the question; absent by default, leaving only its title visible.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "URL of an external question definition.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-question-submit",
+      "description": "- Fired when the submit icon button is activated.\n`detail: { value: unknown }`",
+      "detail": "{ value: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-badge",
+      "summary": "Badge component for compact status labels."
+    },
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button-group",
+      "summary": "Button group component for organizing multiple buttons."
+    },
+    {
+      "name": "tp-callout",
+      "summary": "Callout component for highlighted contextual content."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-markdown",
+      "summary": "Markdown rendering component."
+    },
+    {
+      "name": "tp-switcher",
+      "summary": "Switches between horizontal and vertical layouts based on available space."
+    },
+    {
+      "name": "tp-tabs",
+      "summary": "Accessible tabs component with keyboard and reorder support."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Question",
+    "introduction": "The custom `<tp-question>` element implements the <tp-icon name=\"question\" library=\"components\" size=\"1.25em\"></tp-icon> Question functionality: semantic base container for question content.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Question title | Expand or collapse the question. Questions start collapsed; answers are retained when collapsed. |\n| Input button | Show or hide the answer form without losing answers. At least one panel stays visible. |\n| Output button | Show or hide the output without losing feedback or the solution. Highlighted buttons indicate visible panels. |\n| Submit | Check the completed answer form. |\n| Feedback tab | Read feedback, or the message indicating that none is available. |\n| Solution tab | Read the solution, available even before submission, or the message indicating that none is available. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space on the question title | Expand or collapse the question. |\n| Enter / Space | Activate the focused button. |\n| Arrow keys in Output tabs | Move between Feedback and Solution. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

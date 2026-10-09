@@ -1,0 +1,30 @@
+<tp-html-viewer label="tp-accordion" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-accordion open-indexes="1">
+          <dl>
+            <dt>What is HTML?</dt><dd>The language used to structure web pages.</dd>
+            <dt>What is CSS?</dt><dd>The language used to style web pages.</dd>
+            <dt>What is Javascript?</dt><dd>The language used to define the behaviour of web pages.</dd>
+          </dl>
+          </tp-accordion>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>multiple</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="appearance" label="appearance" label-position="top" orientation="horizontal" value="1"><ul><li>default</li><li>outlined</li><li>filled</li></ul></tp-radio-list>
+      <tp-checkbox-list data-setting="open-indexes" label="open-indexes" label-position="top" orientation="horizontal" value=""><ul><li>0</li><li>1</li><li>2</li></ul></tp-checkbox-list>
+      <tp-cluster></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="accordion attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/docs/components/accordion/examples/attributes.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

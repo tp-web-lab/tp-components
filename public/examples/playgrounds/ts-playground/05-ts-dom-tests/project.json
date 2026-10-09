@@ -1,0 +1,7 @@
+{
+  "id": "05-ts-dom-tests",
+  "label": "Typescript DOM tests",
+  "name": "Typescript DOM tests",
+  "entry": "/main.ts",
+  "test": "/main.test.ts"
+}

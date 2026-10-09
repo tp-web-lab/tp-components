@@ -1,0 +1,26 @@
+<tp-html-viewer label="tp-fill-blank" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-fill-blank>
+        <p>The capital of France is <tp-textfield name="capital" placeholder="City name" aria-label="Capital of France" clearable=""></tp-textfield>.</p>
+      </tp-fill-blank>
+    </div>
+
+    <div role="example" label="Selected answer with tp-blank">
+      <tp-box id="selected-answer-demo">
+        <p>Select a shape or drag it onto the blank. Use its clear button to remove the answer.</p>
+        <tp-fill-blank>
+          <p>A shape with three sides is <tp-blank name="shape" aria-label="Shape with three sides"></tp-blank>.</p>
+        </tp-fill-blank>
+        <tp-button-group aria-label="Shape choices">
+          <tp-button data-answer="triangle" aria-label="Triangle"><img src="/docs/medias/examples/36c2ceb2a29fc3ae.svg" alt="Triangle" width="48" height="40"></tp-button>
+          <tp-button data-answer="square" aria-label="Square"><img src="/docs/components/fill-blank/examples/square.svg" alt="Square" width="48" height="40"></tp-button>
+        </tp-button-group>
+        <tp-dragdrop root="#selected-answer-demo" items="tp-button[data-answer], tp-blank"></tp-dragdrop>
+        <p>The latest event is shown below. FormData is displayed as a list of name/value pairs.</p>
+        <tp-callout variant="neutral" heading="tp-fill-blank-change" aria-live="polite" aria-atomic="true"><div data-event-output="">No change event yet.</div></tp-callout>
+      </tp-box>
+      <script src="/docs/components/fill-blank/examples/selected-answer.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

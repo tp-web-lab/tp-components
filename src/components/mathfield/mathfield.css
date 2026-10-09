@@ -1,0 +1,176 @@
+tp-mathfield {
+	display: inline-flex;
+	align-items: flex-end;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	max-inline-size: 100%;
+	min-inline-size: 0;
+	vertical-align: middle;
+}
+
+tp-mathfield[label-position="bottom"] {
+	align-items: flex-start;
+}
+
+tp-mathfield[label-position="start"],
+tp-mathfield[label-position="end"] {
+	align-items: center;
+}
+
+tp-mathfield [data-tp-mathfield-editor] {
+	flex: 0 0 var(--tp-mathfield-inline-size, 28rem);
+	inline-size: var(--tp-mathfield-inline-size, 28rem);
+	min-inline-size: 0;
+}
+
+tp-mathfield[multiline] {
+	display: block;
+	inline-size: var(--tp-mathfield-inline-size, 28rem);
+}
+
+tp-mathfield[multiline] [data-tp-mathfield-editor] {
+	inline-size: 100%;
+}
+
+tp-mathfield [data-tp-textfield-control] [data-tp-mathfield-preview-button] {
+	position: absolute;
+	inset-block-start: 50%;
+	inset-inline-end: 1.9rem;
+	margin: 0;
+	transform: translateY(-50%);
+}
+
+tp-mathfield [data-tp-textfield-control] [data-tp-mathfield-source-copy] {
+	inset-block-start: 50%;
+	inset-inline-end: 3.65rem;
+	margin: 0;
+	min-block-size: 1.75rem;
+	min-inline-size: 1.75rem;
+	transform: translateY(-50%);
+}
+
+tp-mathfield [data-tp-textfield-control] [data-tp-textfield-clear] {
+	inset-inline-end: 5.4rem;
+}
+
+tp-mathfield tp-textfield [data-tp-textfield-input] {
+	padding-inline-end: calc(var(--tp-textfield-padding-inline, 0.75em) + 7rem);
+}
+
+tp-mathfield tp-textfield[clearable] [data-tp-textfield-input] {
+	padding-inline-end: calc(var(--tp-textfield-padding-inline, 0.75em) + 7rem);
+}
+
+tp-mathfield[multiline]
+	[data-tp-textfield-control]
+	[data-tp-mathfield-preview-button] {
+	inset-block-start: 0.35em;
+	transform: none;
+}
+
+tp-mathfield[multiline]
+	[data-tp-textfield-control]
+	[data-tp-mathfield-source-copy] {
+	inset-block-start: 0.35em;
+	transform: none;
+}
+
+tp-mathfield [data-tp-mathfield-preview] {
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	inline-size: max-content;
+	max-inline-size: 100%;
+	min-inline-size: 0;
+	padding: var(--tp-mathfield-preview-padding, 0.75rem);
+	overflow-x: auto;
+	border: 1px solid
+		var(--tp-mathfield-preview-border-color, var(--tp-neutral-stroke-soft));
+	border-radius: var(--tp-border-radius-sm);
+	background: var(--tp-mathfield-preview-background, Canvas);
+	text-align: start;
+}
+
+tp-mathfield[multiline] [data-tp-mathfield-preview] {
+	display: grid;
+	inline-size: 100%;
+	margin-block-start: 0.5rem;
+}
+
+tp-mathfield [data-tp-mathfield-preview][hidden] {
+	display: none;
+}
+
+tp-mathfield [data-tp-mathfield-preview-mode] {
+	display: block;
+	flex: 0 0 auto;
+	font-size: 0.875em;
+}
+
+tp-mathfield [data-tp-mathfield-preview-divider] {
+	--tp-divider-color: var(
+		--tp-mathfield-preview-border-color,
+		var(--tp-neutral-stroke-soft)
+	);
+	--tp-divider-margin-inline: 0.75rem;
+}
+
+tp-mathfield [data-tp-mathfield-preview-content] {
+	text-align: start;
+}
+tp-mathfield [data-tp-mathfield-preview-mode] {
+	order: 1;
+}
+tp-mathfield [data-tp-mathfield-preview-divider] {
+	order: 2;
+}
+tp-mathfield [data-tp-mathfield-preview-content] {
+	order: 3;
+}
+tp-mathfield [data-tp-mathfield-render-copy] {
+	order: 4;
+	position: relative;
+	inset: auto;
+	min-block-size: 1.75rem;
+	min-inline-size: 1.75rem;
+}
+tp-mathfield[multiline] [data-tp-mathfield-preview-mode] {
+	align-self: center;
+	grid-column: 1;
+	grid-row: 1;
+}
+tp-mathfield[multiline] [data-tp-mathfield-render-copy] {
+	grid-column: 2;
+	grid-row: 1;
+}
+tp-mathfield[multiline] [data-tp-mathfield-preview-divider] {
+	--tp-divider-margin-block: 0.5rem;
+	--tp-divider-margin-inline: 0;
+}
+tp-mathfield[multiline] [data-tp-mathfield-preview-content] {
+	grid-column: 1 / -1;
+	grid-row: 3;
+	inline-size: 100%;
+	text-align: center;
+}
+
+tp-mathfield[multiline] [data-tp-mathfield-preview] {
+	grid-template-columns: minmax(0, 1fr) auto;
+}
+
+tp-mathfield[multiline] [data-tp-mathfield-preview-divider] {
+	grid-column: 1 / -1;
+	grid-row: 2;
+}
+
+tp-mathfield [data-tp-mathfield-preview] .tp-markdown-output > :first-child {
+	margin-block-start: 0;
+}
+tp-mathfield [data-tp-mathfield-preview] .tp-markdown-output > :last-child {
+	margin-block-end: 0;
+}
+
+tp-mathfield [data-tp-mathfield-mode-button] { position: absolute; inset-inline-end: 0.4em; inset-block-start: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 0; background: transparent; color: var(--tp-text-muted); cursor: pointer; }
+tp-mathfield [data-tp-mathfield-mode-button]:focus-visible { outline: 2px solid var(--tp-brand-stroke); outline-offset: 2px; }
+tp-mathfield [data-tp-mathfield-mode-button]:disabled { cursor: not-allowed; }
+tp-mathfield [data-tp-mathfield-mode-menu] [data-mode-check] { display: inline-block; inline-size: 1.25em; }

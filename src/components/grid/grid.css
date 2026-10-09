@@ -1,0 +1,13 @@
+tp-grid {
+  display: grid;
+  gap: var(--tp-grid-gap, 1rem);
+}
+
+@supports (width: min(var(--tp-grid-min-width, 250px), 100%)) {
+  tp-grid {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(var(--tp-grid-min-width, 250px), 100%), 1fr)
+    );
+  }
+}

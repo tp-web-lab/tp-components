@@ -1,0 +1,17 @@
+{
+  "components": [
+    "code-comment",
+    "code-editor",
+    "graph-editor",
+    "post-it-editor",
+    "prose-editor",
+    "spreadsheet-editor"
+  ],
+  "testFileCount": 9,
+  "targets": {
+    "lines": 90,
+    "statements": 90,
+    "functions": 90,
+    "branches": 80
+  }
+}

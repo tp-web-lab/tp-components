@@ -1,0 +1,1378 @@
+@layer tp {
+  /* Light & dark shared properties */
+  :root,
+  .tp-light,
+  .tp-dark {
+    /* These base tokens are used to seed the color palettes. For best results, always use a midtone color such as any of the 500-level colors from: https://color.surf/
+     * For best results, avoid using seed colors in your own stylesheets!
+     */
+
+    --tp-brand-seed: #88B1A1;
+    --tp-neutral-seed: #918c87;
+    --tp-success-seed: #5dbb55;
+    --tp-danger-seed: #ef5655;
+    --tp-warning-seed: #e89a26;
+    --tp-info-seed: #4a97f4;
+
+    /*  The following design tokens are shared by both the light and dark theme. Color tokens are specific to light and
+     *  dark mode, so they appear later on.
+     */
+  
+    --tp-content-spacing: 1.75rem;
+    --tp-font-family: system-ui, sans-serif;
+    --tp-font-family-heading: var(--tp-font-family);
+    --tp-font-family-code: SFMono-Regular, Consolas, Menlo, Monaco, 'liberation mono', 'Courier New', monospace;
+    --tp-font-size: 18px;
+    --tp-font-weight-normal: 400;
+    --tp-font-weight-semibold: 500;
+    --tp-font-weight-bold: 700;
+    --tp-line-height: 1.7;
+    --tp-focus-width: 3px;
+    --tp-focus-offset: 1px;
+    --tp-backdrop-filter: blur(6px);
+
+    /* Border tokens */
+    --tp-border-style: solid;
+    --tp-border-width: 1px;
+    --tp-border-radius-xs: 0.1875rem; /* 3px */
+    --tp-border-radius-sm: 0.25rem; /* 4px */
+    --tp-border-radius-md: 0.375rem; /* 6px */
+    --tp-border-radius-lg: 0.5625rem; /* 9px */
+    --tp-border-radius-xl: 0.75rem; /* 12px */
+    --tp-border-radius-pill: 9999px;
+    --tp-border-radius-circle: 50%;
+
+    /* Form control tokens */
+    --tp-form-control-height-xs: 1.75rem;
+    --tp-form-control-height-sm: 2.25rem;
+    --tp-form-control-height-md: 2.75rem;
+    --tp-form-control-height-lg: 3.25rem;
+    --tp-form-control-height-xl: 3.75rem;
+    --tp-form-control-font-size-xs: 0.75rem;
+    --tp-form-control-font-size-sm: 0.875rem;
+    --tp-form-control-font-size-md: 1rem;
+    --tp-form-control-font-size-lg: 1.25rem;
+    --tp-form-control-font-size-xl: 1.5rem;
+    --tp-form-control-required-content: '*';
+    --tp-form-control-placeholder-color: var(--tp-text-muted);
+    --tp-button-active-offset: 1px;
+
+
+    --tp-brand-50: color-mix(in oklab, var(--tp-brand-seed), white 95%);
+    --tp-brand-100: color-mix(in oklab, var(--tp-brand-seed), white 87%);
+    --tp-brand-200: color-mix(in oklab, var(--tp-brand-seed), white 70%);
+    --tp-brand-300: color-mix(in oklab, var(--tp-brand-seed), white 47%);
+    --tp-brand-400: color-mix(in oklab, var(--tp-brand-seed), white 23%);
+    --tp-brand-500: var(--tp-brand-seed);
+    --tp-brand-600: color-mix(in oklab, var(--tp-brand-seed), black 15.5%);
+    --tp-brand-700: color-mix(in oklab, var(--tp-brand-seed), black 28.25%);
+    --tp-brand-800: color-mix(in oklab, var(--tp-brand-seed), black 43.5%);
+    --tp-brand-900: color-mix(in oklab, var(--tp-brand-seed), black 58.5%);
+    --tp-brand-950: color-mix(in oklab, var(--tp-brand-seed), black 73.75%);
+
+    --tp-neutral-50: color-mix(in oklab, var(--tp-neutral-seed), white 95%);
+    --tp-neutral-100: color-mix(in oklab, var(--tp-neutral-seed), white 87%);
+    --tp-neutral-200: color-mix(in oklab, var(--tp-neutral-seed), white 70%);
+    --tp-neutral-300: color-mix(in oklab, var(--tp-neutral-seed), white 47%);
+    --tp-neutral-400: color-mix(in oklab, var(--tp-neutral-seed), white 23%);
+    --tp-neutral-500: var(--tp-neutral-seed);
+    --tp-neutral-600: color-mix(in oklab, var(--tp-neutral-seed), black 15.5%);
+    --tp-neutral-700: color-mix(in oklab, var(--tp-neutral-seed), black 28.25%);
+    --tp-neutral-800: color-mix(in oklab, var(--tp-neutral-seed), black 43.5%);
+    --tp-neutral-900: color-mix(in oklab, var(--tp-neutral-seed), black 58.5%);
+    --tp-neutral-950: color-mix(in oklab, var(--tp-neutral-seed), black 73.75%);
+
+    --tp-success-50: color-mix(in oklab, var(--tp-success-seed), white 95%);
+    --tp-success-100: color-mix(in oklab, var(--tp-success-seed), white 87%);
+    --tp-success-200: color-mix(in oklab, var(--tp-success-seed), white 70%);
+    --tp-success-300: color-mix(in oklab, var(--tp-success-seed), white 47%);
+    --tp-success-400: color-mix(in oklab, var(--tp-success-seed), white 23%);
+    --tp-success-500: var(--tp-success-seed);
+    --tp-success-600: color-mix(in oklab, var(--tp-success-seed), black 15.5%);
+    --tp-success-700: color-mix(in oklab, var(--tp-success-seed), black 28.25%);
+    --tp-success-800: color-mix(in oklab, var(--tp-success-seed), black 43.5%);
+    --tp-success-900: color-mix(in oklab, var(--tp-success-seed), black 58.5%);
+    --tp-success-950: color-mix(in oklab, var(--tp-success-seed), black 73.75%);
+
+    --tp-warning-50: color-mix(in oklab, var(--tp-warning-seed), white 95%);
+    --tp-warning-100: color-mix(in oklab, var(--tp-warning-seed), white 87%);
+    --tp-warning-200: color-mix(in oklab, var(--tp-warning-seed), white 70%);
+    --tp-warning-300: color-mix(in oklab, var(--tp-warning-seed), white 47%);
+    --tp-warning-400: color-mix(in oklab, var(--tp-warning-seed), white 23%);
+    --tp-warning-500: var(--tp-warning-seed);
+    --tp-warning-600: color-mix(in oklab, var(--tp-warning-seed), black 15.5%);
+    --tp-warning-700: color-mix(in oklab, var(--tp-warning-seed), black 28.25%);
+    --tp-warning-800: color-mix(in oklab, var(--tp-warning-seed), black 43.5%);
+    --tp-warning-900: color-mix(in oklab, var(--tp-warning-seed), black 58.5%);
+    --tp-warning-950: color-mix(in oklab, var(--tp-warning-seed), black 73.75%);
+
+
+    --tp-danger-50: color-mix(in oklab, var(--tp-danger-seed), white 95%);
+    --tp-danger-100: color-mix(in oklab, var(--tp-danger-seed), white 87%);
+    --tp-danger-200: color-mix(in oklab, var(--tp-danger-seed), white 70%);
+    --tp-danger-300: color-mix(in oklab, var(--tp-danger-seed), white 47%);
+    --tp-danger-400: color-mix(in oklab, var(--tp-danger-seed), white 23%);
+    --tp-danger-500: var(--tp-danger-seed);
+    --tp-danger-600: color-mix(in oklab, var(--tp-danger-seed), black 15.5%);
+    --tp-danger-700: color-mix(in oklab, var(--tp-danger-seed), black 28.25%);
+    --tp-danger-800: color-mix(in oklab, var(--tp-danger-seed), black 43.5%);
+    --tp-danger-900: color-mix(in oklab, var(--tp-danger-seed), black 58.5%);
+    --tp-danger-950: color-mix(in oklab, var(--tp-danger-seed), black 73.75%);
+
+    --tp-info-50: color-mix(in oklab, var(--tp-info-seed), white 95%);
+    --tp-info-100: color-mix(in oklab, var(--tp-info-seed), white 87%);
+    --tp-info-200: color-mix(in oklab, var(--tp-info-seed), white 70%);
+    --tp-info-300: color-mix(in oklab, var(--tp-info-seed), white 47%);
+    --tp-info-400: color-mix(in oklab, var(--tp-info-seed), white 23%);
+    --tp-info-500: var(--tp-info-seed);
+    --tp-info-600: color-mix(in oklab, var(--tp-info-seed), black 15.5%);
+    --tp-info-700: color-mix(in oklab, var(--tp-info-seed), black 28.25%);
+    --tp-info-800: color-mix(in oklab, var(--tp-info-seed), black 43.5%);
+    --tp-info-900: color-mix(in oklab, var(--tp-info-seed), black 58.5%);
+    --tp-info-950: color-mix(in oklab, var(--tp-info-seed), black 73.75%);
+  }
+
+  /* Light theme colors */
+
+  :root,
+  .tp-light {
+    color-scheme: light;
+
+    --tp-silent: white;
+    --tp-strident: black;
+    --tp-background-color: white;
+    --tp-paper-color: white;
+    --tp-text-body: var(--tp-neutral-900);
+    --tp-text-muted: var(--tp-neutral-600);
+    --tp-focus-color: var(--tp-brand-fill-mid);
+    --tp-focus-ring: var(--tp-border-style) var(--tp-focus-width) var(--tp-focus-color);
+    --tp-backdrop-color: rgb(0 0 0 / 0.25);
+    --tp-selection-background-color: var(--tp-brand-300);
+    --tp-selection-color: var(--tp-text-body);
+    --tp-shadow-color: black;
+    --tp-shadow-softer: 0 0.0625rem 0.0625rem color-mix(in oklab, transparent, var(--tp-shadow-color) 4%);
+    --tp-shadow-soft: 0 0.125rem 0.1875rem color-mix(in oklab, transparent, var(--tp-shadow-color) 8%);
+    --tp-shadow-mid: 0 0.1875rem 0.375rem color-mix(in oklab, transparent, var(--tp-shadow-color) 10%);
+    --tp-shadow-loud: 0 0.375rem 0.75rem color-mix(in oklab, transparent, var(--tp-shadow-color) 12%);
+    --tp-shadow-louder: 0 0.5rem 1rem color-mix(in oklab, transparent, var(--tp-shadow-color) 14%);
+    --tp-inset-shadow-softer: inset 0 0.125rem 0.125rem -0.125rem color-mix(in oklab, black, transparent 94%);
+    --tp-inset-shadow-soft: inset 0 0.25rem 0.25rem -0.25rem color-mix(in oklab, black, transparent 90%);
+    --tp-inset-shadow-mid: inset 0 0.5rem 0.5rem -0.5rem color-mix(in oklab, black, transparent 88%);
+    --tp-inset-shadow-loud: inset 0 1rem 1rem -1rem color-mix(in oklab, black, transparent 85%);
+    --tp-inset-shadow-louder: inset 0 1.5rem 1.5rem -1.5rem color-mix(in oklab, black, transparent 82%);
+
+    /* Shared syntax theme tokens (CodeMirror + Highlight.js) */
+    --tp-syntax-surface: color-mix(in oklab, var(--tp-paper-color), var(--tp-neutral-100) 22%);
+    --tp-syntax-foreground: var(--tp-text-body);
+    --tp-syntax-muted: var(--tp-neutral-700);
+    --tp-syntax-caret: var(--tp-text-body);
+    --tp-syntax-selection: color-mix(in srgb, var(--tp-brand-fill-mid) 62%, transparent);
+    --tp-syntax-active-line: color-mix(in srgb, var(--tp-neutral-fill-soft) 38%, transparent);
+    --tp-syntax-gutter-background: color-mix(
+      in srgb,
+      var(--tp-neutral-fill-softer) 88%,
+      transparent
+    );
+    --tp-syntax-gutter-foreground: var(--tp-neutral-700);
+    --tp-syntax-gutter-border: var(--tp-neutral-stroke-soft);
+    --tp-syntax-fold-background: color-mix(in srgb, var(--tp-neutral-fill-soft) 70%, transparent);
+    --tp-syntax-token-keyword: var(--tp-info-800);
+    --tp-syntax-token-string: var(--tp-warning-900);
+    --tp-syntax-token-number: var(--tp-brand-800);
+    --tp-syntax-token-comment: var(--tp-neutral-700);
+    --tp-syntax-token-variable: var(--tp-info-800);
+    --tp-syntax-token-property: var(--tp-info-800);
+    --tp-syntax-token-type: var(--tp-brand-800);
+    --tp-syntax-token-function: var(--tp-warning-900);
+    --tp-syntax-token-link: var(--tp-info-800);
+
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: var(--tp-brand-700);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+
+    /* Neutral */
+    --tp-neutral-fill-softer: var(--tp-neutral-100);
+    --tp-neutral-fill-soft: var(--tp-neutral-200);
+    --tp-neutral-fill-mid: var(--tp-neutral-700);
+    --tp-neutral-fill-loud: var(--tp-neutral-800);
+    --tp-neutral-fill-louder: var(--tp-neutral-900);
+    --tp-neutral-text-on-soft: var(--tp-neutral-900);
+    --tp-neutral-text-on-mid: white;
+    --tp-neutral-text-on-loud: white;
+    --tp-neutral-text-colorful: color-mix(in oklab, var(--tp-neutral-600), black 12.5%);
+    --tp-neutral-stroke-softer: color-mix(in oklab, var(--tp-neutral-100), black 3%);
+    --tp-neutral-stroke-soft: var(--tp-neutral-300);
+    --tp-neutral-stroke-mid: var(--tp-neutral-500);
+
+    /* success */
+    --tp-success-fill-softer: var(--tp-success-100);
+    --tp-success-fill-soft: var(--tp-success-200);
+    --tp-success-fill-mid: var(--tp-success-700);
+    --tp-success-fill-loud: var(--tp-success-800);
+    --tp-success-fill-louder: var(--tp-success-900);
+    --tp-success-text-on-soft: var(--tp-success-900);
+    --tp-success-text-on-mid: white;
+    --tp-success-text-on-loud: white;
+    --tp-success-text-colorful: color-mix(in oklab, var(--tp-success-600), black 12.5%);
+    --tp-success-stroke-softer: color-mix(in oklab, var(--tp-success-100), black 3%);
+    --tp-success-stroke-soft: var(--tp-success-300);
+    --tp-success-stroke-mid: var(--tp-success-500);
+
+    /* warning */
+    --tp-warning-fill-softer: var(--tp-warning-100);
+    --tp-warning-fill-soft: var(--tp-warning-200);
+    --tp-warning-fill-mid: var(--tp-warning-800);
+    --tp-warning-fill-loud: var(--tp-warning-800);
+    --tp-warning-fill-louder: var(--tp-warning-900);
+    --tp-warning-text-on-soft: var(--tp-warning-900);
+    --tp-warning-text-on-mid: white;
+    --tp-warning-text-on-loud: white;
+    --tp-warning-text-colorful: color-mix(in oklab, var(--tp-warning-600), black 12.5%);
+    --tp-warning-stroke-softer: color-mix(in oklab, var(--tp-warning-100), black 3%);
+    --tp-warning-stroke-soft: var(--tp-warning-300);
+    --tp-warning-stroke-mid: var(--tp-warning-500);
+
+    /* danger */
+    --tp-danger-fill-softer: var(--tp-danger-100);
+    --tp-danger-fill-soft: var(--tp-danger-200);
+    --tp-danger-fill-mid: var(--tp-danger-700);
+    --tp-danger-fill-loud: var(--tp-danger-800);
+    --tp-danger-fill-louder: var(--tp-danger-900);
+    --tp-danger-text-on-soft: var(--tp-danger-900);
+    --tp-danger-text-on-mid: white;
+    --tp-danger-text-on-loud: white;
+    --tp-danger-text-colorful: color-mix(in oklab, var(--tp-danger-600), black 12.5%);
+    --tp-danger-stroke-softer: color-mix(in oklab, var(--tp-danger-100), black 3%);
+    --tp-danger-stroke-soft: var(--tp-danger-300);
+    --tp-danger-stroke-mid: var(--tp-danger-500);
+
+    /* info */
+    --tp-info-fill-softer: var(--tp-info-100);
+    --tp-info-fill-soft: var(--tp-info-200);
+    --tp-info-fill-mid: var(--tp-info-700);
+    --tp-info-fill-loud: var(--tp-info-800);
+    --tp-info-fill-louder: var(--tp-info-900);
+    --tp-info-text-on-soft: var(--tp-info-900);
+    --tp-info-text-on-mid: white;
+    --tp-info-text-on-loud: white;
+    --tp-info-text-colorful: color-mix(in oklab, var(--tp-info-600), black 12.5%);
+    --tp-info-stroke-softer: color-mix(in oklab, var(--tp-info-100), black 3%);
+    --tp-info-stroke-soft: var(--tp-info-300);
+    --tp-info-stroke-mid: var(--tp-info-500);
+  }
+
+  /* Dark theme colors */
+
+  .tp-dark {
+    color-scheme: dark;
+
+    --tp-silent: black;
+    --tp-strident: white;
+    --tp-background-color: var(--tp-neutral-950);
+    --tp-paper-color: color-mix(in oklab, var(--tp-neutral-950), white 2.5%);
+    --tp-text-body: var(--tp-neutral-200);
+    --tp-text-muted: var(--tp-neutral-500);
+    --tp-focus-color: var(--tp-brand-fill-mid);
+    --tp-focus-ring: var(--tp-border-style) var(--tp-focus-width) var(--tp-focus-color);
+    --tp-backdrop-color: rgb(0 0 0 / 0.5);
+    --tp-selection-background-color: var(--tp-brand-700);
+    --tp-selection-color: var(--tp-text-body);
+    --tp-shadow-color: black;
+    --tp-shadow-softer: 0 1px 2px color-mix(in oklab, transparent, var(--tp-shadow-color) 8%);
+    --tp-shadow-soft: 0 2px 4px color-mix(in oklab, transparent, var(--tp-shadow-color) 12%);
+    --tp-shadow-mid: 0 4px 8px color-mix(in oklab, transparent, var(--tp-shadow-color) 16%);
+    --tp-shadow-loud: 0 8px 16px color-mix(in oklab, transparent, var(--tp-shadow-color) 20%);
+    --tp-shadow-louder: 0 12px 20px color-mix(in oklab, transparent, var(--tp-shadow-color) 24%);
+
+    /* Shared syntax theme tokens (CodeMirror + Highlight.js), tuned for vs2015-like dark */
+    --tp-syntax-surface: color-mix(in oklab, var(--tp-neutral-950), white 5%);
+    --tp-syntax-foreground: color-mix(in oklab, var(--tp-neutral-100), white 8%);
+    --tp-syntax-muted: color-mix(in oklab, var(--tp-success-500), var(--tp-neutral-500) 45%);
+    --tp-syntax-caret: var(--tp-neutral-100);
+    --tp-syntax-selection: color-mix(in srgb, var(--tp-info-fill-mid) 55%, transparent);
+    --tp-syntax-active-line: color-mix(in srgb, var(--tp-neutral-fill-soft) 30%, transparent);
+    --tp-syntax-gutter-background: color-mix(in srgb, var(--tp-neutral-900) 92%, transparent);
+    --tp-syntax-gutter-foreground: var(--tp-neutral-400);
+    --tp-syntax-gutter-border: var(--tp-neutral-700);
+    --tp-syntax-fold-background: color-mix(in srgb, var(--tp-neutral-700) 55%, transparent);
+    --tp-syntax-token-keyword: color-mix(in oklab, var(--tp-info-300), white 4%);
+    --tp-syntax-token-string: color-mix(in oklab, var(--tp-warning-300), white 6%);
+    --tp-syntax-token-number: color-mix(in oklab, var(--tp-success-300), white 2%);
+    --tp-syntax-token-comment: color-mix(in oklab, var(--tp-success-500), var(--tp-neutral-500) 45%);
+    --tp-syntax-token-variable: color-mix(in oklab, var(--tp-info-300), white 14%);
+    --tp-syntax-token-property: color-mix(in oklab, var(--tp-info-300), white 8%);
+    --tp-syntax-token-type: color-mix(in oklab, var(--tp-success-300), var(--tp-info-300) 45%);
+    --tp-syntax-token-function: color-mix(in oklab, var(--tp-warning-200), white 2%);
+    --tp-syntax-token-link: color-mix(in oklab, var(--tp-info-300), white 8%);
+
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: var(--tp-brand-700);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+
+    /* Neutral */
+    --tp-neutral-fill-softer: color-mix(in oklab, var(--tp-neutral-900), white 1%);
+    --tp-neutral-fill-soft: var(--tp-neutral-800);
+    --tp-neutral-fill-mid: var(--tp-neutral-700);
+    --tp-neutral-fill-loud: var(--tp-neutral-200);
+    --tp-neutral-fill-louder: var(--tp-neutral-100);
+    --tp-neutral-text-on-soft: var(--tp-neutral-100);
+    --tp-neutral-text-on-mid: white;
+    --tp-neutral-text-on-loud: black;
+    --tp-neutral-text-colorful: var(--tp-neutral-500);
+    --tp-neutral-stroke-softer: color-mix(in oklab, var(--tp-neutral-900), white 7.5%);
+    --tp-neutral-stroke-soft: var(--tp-neutral-800);
+    --tp-neutral-stroke-mid: var(--tp-neutral-600);
+
+    /* success */
+    --tp-success-fill-softer: color-mix(in oklab, var(--tp-success-900), white 1%);
+    --tp-success-fill-soft: var(--tp-success-800);
+    --tp-success-fill-mid: var(--tp-success-700);
+    --tp-success-fill-loud: var(--tp-success-200);
+    --tp-success-fill-louder: var(--tp-success-100);
+    --tp-success-text-on-soft: var(--tp-success-100);
+    --tp-success-text-on-mid: white;
+    --tp-success-text-on-loud: black;
+    --tp-success-text-colorful: var(--tp-success-500);
+    --tp-success-stroke-softer: color-mix(in oklab, var(--tp-success-900), white 7.5%);
+    --tp-success-stroke-soft: var(--tp-success-800);
+    --tp-success-stroke-mid: var(--tp-success-600);
+
+    /* warning */
+    --tp-warning-fill-softer: color-mix(in oklab, var(--tp-warning-900), white 1%);
+    --tp-warning-fill-soft: var(--tp-warning-800);
+    --tp-warning-fill-mid: var(--tp-warning-800);
+    --tp-warning-fill-loud: var(--tp-warning-200);
+    --tp-warning-fill-louder: var(--tp-warning-100);
+    --tp-warning-text-on-soft: var(--tp-warning-100);
+    --tp-warning-text-on-mid: white;
+    --tp-warning-text-on-loud: black;
+    --tp-warning-text-colorful: var(--tp-warning-500);
+    --tp-warning-stroke-softer: color-mix(in oklab, var(--tp-warning-900), white 7.5%);
+    --tp-warning-stroke-soft: var(--tp-warning-800);
+    --tp-warning-stroke-mid: var(--tp-warning-600);
+
+    /* info */
+    --tp-info-fill-softer: color-mix(in oklab, var(--tp-info-900), white 1%);
+    --tp-info-fill-soft: var(--tp-info-800);
+    --tp-info-fill-mid: var(--tp-info-700);
+    --tp-info-fill-loud: var(--tp-info-200);
+    --tp-info-fill-louder: var(--tp-info-100);
+    --tp-info-text-on-soft: var(--tp-info-100);
+    --tp-info-text-on-mid: white;
+    --tp-info-text-on-loud: black;
+    --tp-info-text-colorful: var(--tp-info-500);
+    --tp-info-stroke-softer: color-mix(in oklab, var(--tp-info-900), white 7.5%);
+    --tp-info-stroke-soft: var(--tp-info-800);
+    --tp-info-stroke-mid: var(--tp-info-600);
+
+    /* danger */
+    --tp-danger-fill-softer: color-mix(in oklab, var(--tp-danger-900), white 1%);
+    --tp-danger-fill-soft: var(--tp-danger-800);
+    --tp-danger-fill-mid: var(--tp-danger-700);
+    --tp-danger-fill-loud: var(--tp-danger-200);
+    --tp-danger-fill-louder: var(--tp-danger-100);
+    --tp-danger-text-on-soft: var(--tp-danger-100);
+    --tp-danger-text-on-mid: white;
+    --tp-danger-text-on-loud: black;
+    --tp-danger-text-colorful: var(--tp-danger-500);
+    --tp-danger-stroke-softer: color-mix(in oklab, var(--tp-danger-900), white 7.5%);
+    --tp-danger-stroke-soft: var(--tp-danger-800);
+    --tp-danger-stroke-mid: var(--tp-danger-600);
+  }
+
+  /* Global styles to support nested themes */
+
+  /* Ensure the body color is set correctly when applying these classes to specific elements */
+  .tp-light,
+  .tp-dark {
+    color: var(--tp-text-body);
+  }
+
+  /* Guaranteed utilities */
+
+  /*
+    The cloak utility to reduce FOUCE when using the autoloader. This approach hides any element with the `tp-cloak`
+    class that has an undefined custom element until a) all elements are defined or b) two seconds has elapsed, ensuring
+    the content is never hidden for too long in the case of slow or troublesome networks.
+  */
+  .tp-cloak:has(:not(:defined)) {
+    animation: 2s step-end tpCloakAnimation;
+  }
+
+  @keyframes tpCloakAnimation {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Built-in presets */
+
+  .tp-default,
+  .tp-default-style {
+    --tp-brand-seed: #88B1A1;
+  }
+
+  .tp-red,
+  .tp-red-style {
+    --tp-brand-seed: #ef5655;
+  }
+
+  .tp-orange,
+  .tp-orange-style {
+    --tp-brand-seed: #f08039;
+  }
+
+  .tp-amber,
+  .tp-amber-style {
+    --tp-brand-seed: #e89a26;
+  }
+
+  .tp-yellow,
+  .tp-yellow-style {
+    --tp-brand-seed: #dcb31e;
+  }
+
+  .tp-lime,
+  .tp-lime-style {
+    --tp-brand-seed: #9abb28;
+  }
+
+  .tp-green,
+  .tp-green-style {
+    --tp-brand-seed: #5dbb55;
+  }
+
+  .tp-emerald,
+  .tp-emerald-style {
+    --tp-brand-seed: #47b873;
+  }
+
+  .tp-teal,
+  .tp-teal-style {
+    --tp-brand-seed: #37b995;
+  }
+
+  .tp-glaz,
+  .tp-glaz-style {
+    --tp-brand-seed: #88B1A1;
+  }
+
+  .tp-cyan,
+  .tp-cyan-style {
+    --tp-brand-seed: #20b8bc;
+  }
+
+  .tp-sky,
+  .tp-sky-style {
+    --tp-brand-seed: #1caedd;
+  }
+
+  .tp-blue,
+  .tp-blue-style {
+    --tp-brand-seed: #4a97f4;
+  }
+
+  .tp-indigo,
+  .tp-indigo-style {
+    --tp-brand-seed: #6e85f8;
+  }
+
+  .tp-violet,
+  .tp-violet-style {
+    --tp-brand-seed: #927cfb;
+  }
+
+  .tp-purple,
+  .tp-purple-style {
+    --tp-brand-seed: #ae75f6;
+  }
+
+  .tp-fuchsia,
+  .tp-fuchsia-style {
+    --tp-brand-seed: #d26ae8;
+  }
+
+  .tp-pink,
+  .tp-pink-style {
+    --tp-brand-seed: #e468b0;
+  }
+
+  .tp-rose,
+  .tp-rose-style {
+    --tp-brand-seed: #ee6383;
+  }
+
+  .tp-zinc,
+  .tp-zinc-style {
+    --tp-brand-seed: #8b8c93;
+  }
+
+  .tp-ivory,
+  .tp-ivory-style {
+    --tp-brand-seed: #fffff0;
+  }
+
+  .tp-stone,
+  .tp-stone-style {
+    --tp-brand-seed: #918c87;
+  }
+
+  .tp-default,
+  .tp-default-style,
+  .tp-red,
+  .tp-red-style,
+  .tp-orange,
+  .tp-orange-style,
+  .tp-amber,
+  .tp-amber-style,
+  .tp-yellow,
+  .tp-yellow-style,
+  .tp-lime,
+  .tp-lime-style,
+  .tp-green,
+  .tp-green-style,
+  .tp-emerald,
+  .tp-emerald-style,
+  .tp-teal,
+  .tp-teal-style,
+  .tp-glaz,
+  .tp-glaz-style,
+  .tp-cyan,
+  .tp-cyan-style,
+  .tp-sky,
+  .tp-sky-style,
+  .tp-blue,
+  .tp-blue-style,
+  .tp-indigo,
+  .tp-indigo-style,
+  .tp-violet,
+  .tp-violet-style,
+  .tp-purple,
+  .tp-purple-style,
+  .tp-fuchsia,
+  .tp-fuchsia-style,
+  .tp-pink,
+  .tp-pink-style,
+  .tp-rose,
+  .tp-rose-style,
+  .tp-zinc,
+  .tp-zinc-style,
+  .tp-ivory,
+  .tp-ivory-style,
+  .tp-stone,
+  .tp-stone-style {
+    --tp-brand-50: color-mix(in oklab, var(--tp-brand-seed), white 95%);
+    --tp-brand-100: color-mix(in oklab, var(--tp-brand-seed), white 87%);
+    --tp-brand-200: color-mix(in oklab, var(--tp-brand-seed), white 70%);
+    --tp-brand-300: color-mix(in oklab, var(--tp-brand-seed), white 47%);
+    --tp-brand-400: color-mix(in oklab, var(--tp-brand-seed), white 23%);
+    --tp-brand-500: var(--tp-brand-seed);
+    --tp-brand-600: color-mix(in oklab, var(--tp-brand-seed), black 15.5%);
+    --tp-brand-700: color-mix(in oklab, var(--tp-brand-seed), black 28.25%);
+    --tp-brand-800: color-mix(in oklab, var(--tp-brand-seed), black 43.5%);
+    --tp-brand-900: color-mix(in oklab, var(--tp-brand-seed), black 58.5%);
+    --tp-brand-950: color-mix(in oklab, var(--tp-brand-seed), black 73.75%);
+  }
+
+  /* Preset semantic tokens: light mode (default) */
+
+  .tp-default,
+  .tp-default-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-red,
+  .tp-red-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-orange,
+  .tp-orange-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-amber,
+  .tp-amber-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-yellow,
+  .tp-yellow-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-lime,
+  .tp-lime-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-green,
+  .tp-green-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-emerald,
+  .tp-emerald-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-teal,
+  .tp-teal-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-glaz,
+  .tp-glaz-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-cyan,
+  .tp-cyan-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-sky,
+  .tp-sky-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-blue,
+  .tp-blue-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-indigo,
+  .tp-indigo-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-violet,
+  .tp-violet-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-purple,
+  .tp-purple-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-fuchsia,
+  .tp-fuchsia-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-pink,
+  .tp-pink-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-rose,
+  .tp-rose-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-zinc,
+  .tp-zinc-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-ivory,
+  .tp-ivory-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  .tp-stone,
+  .tp-stone-style {
+    /* brand */
+    --tp-brand-fill-softer: var(--tp-brand-100);
+    --tp-brand-fill-soft: var(--tp-brand-200);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
+    --tp-brand-fill-loud: var(--tp-brand-800);
+    --tp-brand-fill-louder: var(--tp-brand-900);
+    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: white;
+    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
+    --tp-brand-stroke-soft: var(--tp-brand-300);
+    --tp-brand-stroke-mid: var(--tp-brand-500);
+  }
+
+  /* Preset semantic tokens: dark mode overrides */
+
+  .tp-dark .tp-default,
+  .tp-dark .tp-default-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-red,
+  .tp-dark .tp-red-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-orange,
+  .tp-dark .tp-orange-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-amber,
+  .tp-dark .tp-amber-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-yellow,
+  .tp-dark .tp-yellow-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-lime,
+  .tp-dark .tp-lime-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-green,
+  .tp-dark .tp-green-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-emerald,
+  .tp-dark .tp-emerald-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-teal,
+  .tp-dark .tp-teal-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-glaz,
+  .tp-dark .tp-glaz-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-cyan,
+  .tp-dark .tp-cyan-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-sky,
+  .tp-dark .tp-sky-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-blue,
+  .tp-dark .tp-blue-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-indigo,
+  .tp-dark .tp-indigo-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-violet,
+  .tp-dark .tp-violet-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-purple,
+  .tp-dark .tp-purple-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-fuchsia,
+  .tp-dark .tp-fuchsia-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-pink,
+  .tp-dark .tp-pink-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-rose,
+  .tp-dark .tp-rose-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-zinc,
+  .tp-dark .tp-zinc-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-ivory,
+  .tp-dark .tp-ivory-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+  .tp-dark .tp-stone,
+  .tp-dark .tp-stone-style {
+    /* brand */
+    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
+    --tp-brand-fill-soft: var(--tp-brand-800);
+    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
+    --tp-brand-fill-loud: var(--tp-brand-200);
+    --tp-brand-fill-louder: var(--tp-brand-100);
+    --tp-brand-text-on-soft: var(--tp-brand-100);
+    --tp-brand-text-on-mid: white;
+    --tp-brand-text-on-loud: black;
+    --tp-brand-text-colorful: var(--tp-brand-500);
+    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
+    --tp-brand-stroke-soft: var(--tp-brand-800);
+    --tp-brand-stroke-mid: var(--tp-brand-600);
+  }
+
+}
+
+/* Text-color shortcuts sit above reset layers and reuse semantic tokens. */
+.tp-default-style,
+.tp-red-style,
+.tp-orange-style,
+.tp-amber-style,
+.tp-yellow-style,
+.tp-lime-style,
+.tp-green-style,
+.tp-emerald-style,
+.tp-teal-style,
+.tp-glaz-style,
+.tp-cyan-style,
+.tp-sky-style,
+.tp-blue-style,
+.tp-indigo-style,
+.tp-violet-style,
+.tp-purple-style,
+.tp-fuchsia-style,
+.tp-pink-style,
+.tp-rose-style,
+.tp-zinc-style,
+.tp-ivory-style,
+.tp-stone-style {
+  color: var(--tp-brand-text-colorful);
+}

@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "title": "Graph example",
+  "nodes": [
+    {
+      "id": "input",
+      "type": "node",
+      "x": 140,
+      "y": 160,
+      "label": "Node 1"
+    },
+    {
+      "id": "hub",
+      "type": "hub",
+      "x": 340,
+      "y": 160,
+      "label": "Hub"
+    },
+    {
+      "id": "output",
+      "type": "node",
+      "x": 540,
+      "y": 160,
+      "label": "Node 3"
+    },
+    {
+      "id": "warning",
+      "type": "comment",
+      "x": 340,
+      "y": 100,
+      "label": "This hub distributes incoming connections.",
+      "data": {
+        "color": "warning"
+      }
+    },
+    {
+      "id": "node-7",
+      "type": "node",
+      "x": 140,
+      "y": 260,
+      "label": "Node 2"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "type": "edge",
+      "source": "input",
+      "sourcePort": "east",
+      "target": "hub",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "straight",
+      "label": "Link 1"
+    },
+    {
+      "id": "edge-2",
+      "type": "edge",
+      "source": "hub",
+      "sourcePort": "east",
+      "target": "output",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "straight",
+      "label": "Link 3"
+    },
+    {
+      "id": "edge-6",
+      "source": "warning",
+      "target": "hub",
+      "type": "edge",
+      "sourcePort": "north",
+      "targetPort": "south",
+      "direction": "none",
+      "routing": "straight"
+    },
+    {
+      "id": "edge-8",
+      "source": "node-7",
+      "target": "hub",
+      "type": "edge",
+      "sourcePort": "east",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal",
+      "turns": "alternating",
+      "label": "Link 2"
+    },
+    {
+      "id": "edge-9",
+      "type": "edge",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "vertical",
+      "turns": "same",
+      "source": "output",
+      "sourcePort": "north",
+      "target": "input",
+      "targetPort": "north",
+      "bendY": 60,
+      "label": "Link 4"
+    },
+    {
+      "id": "edge-3",
+      "source": "node-7",
+      "target": "node-7",
+      "type": "edge",
+      "sourcePort": "south",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "straight",
+      "label": "auto-link"
+    }
+  ]
+}

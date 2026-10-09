@@ -1,0 +1,13 @@
+tp-fill-blank {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+tp-fill-blank input,
+tp-fill-blank select {
+  display: inline-block;
+  width: auto;
+  min-height: 1.8em;
+  padding-block: 0.1em;
+  margin-inline: 0.25rem;
+}

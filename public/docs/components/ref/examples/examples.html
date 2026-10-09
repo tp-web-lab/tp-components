@@ -1,0 +1,44 @@
+<tp-html-viewer label="tp-ref" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <div data-tp-reference-scope="">
+        <p>A useful detail <tp-ref href="^detail"></tp-ref>.</p>
+        <tp-note ref="detail" title="Detail"><p>A note with <strong>formatted content</strong>.</p></tp-note>
+      </div>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <p>Enter ^detail in href to resolve the note. Clear the field to return to the empty default.</p>
+
+
+      <tp-stack>
+
+
+      <tp-cluster><tp-textfield data-setting="href" label="href" value="" placeholder="" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="ref attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/docs/components/ref/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Notes, bibliography and glossary">
+      <div data-tp-reference-scope="">
+      <p>Read a note <tp-ref href="^method"></tp-ref>, consult a source <tp-ref href="@book"></tp-ref>, or look up <tp-ref href="%ecosystem"></tp-ref>. Compare another note <tp-ref href="^weather"></tp-ref>, then read the first note again <tp-ref href="^method"></tp-ref>.</p>
+      <tp-note ref="method" title="Method"><p>Observe the habitat at <strong>three different times</strong> of day.</p><ul><li>Record the weather.</li><li>Compare your observations.</li></ul></tp-note>
+      <tp-biblio ref="book" title="Book"><p>Alex Example. <em>Field observation handbook</em>. Example Press, 2026.</p></tp-biblio>
+      <tp-glossary ref="ecosystem" title="Ecosystem"><p>A community of organisms interacting with their physical environment.</p></tp-glossary>
+      <tp-note ref="weather"><p>Record the temperature and cloud cover.</p></tp-note>
+      <tp-biblio ref="atlas"><p>Alex Example. <em>A field atlas</em>. Example Press, 2025.</p></tp-biblio>
+      <tp-glossary ref="community"><p>A group of interacting populations.</p></tp-glossary>
+      <h3>Notes</h3><tp-listof selector="tp-note"></tp-listof>
+      <h3>Bibliography</h3><tp-listof selector="tp-biblio"></tp-listof>
+      <h3>Glossary</h3><tp-listof selector="tp-glossary"></tp-listof>
+      </div>
+    </div>
+  </template>
+</tp-html-viewer>

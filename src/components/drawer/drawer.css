@@ -1,0 +1,193 @@
+tp-drawer {
+  --tp-drawer-size: min(24rem, 100vw);
+  --tp-drawer-duration: 200ms;
+  background: Canvas;
+  box-shadow: 0 0 0 1px color-mix(in srgb, CanvasText 12%, transparent),
+    0 1rem 2rem color-mix(in srgb, CanvasText 18%, transparent);
+  color: CanvasText;
+  display: flex;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  inset: auto;
+  max-block-size: 100vh;
+  max-inline-size: 100vw;
+  overflow: hidden;
+  position: fixed;
+  visibility: hidden;
+  z-index: 1000;
+}
+
+tp-drawer[contained] {
+  position: absolute;
+}
+
+tp-drawer[data-open='false'] {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+tp-drawer[data-open='true'] {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+tp-drawer[data-placement='end'] {
+  block-size: 100%;
+  inline-size: var(--tp-drawer-size);
+  inset-block: 0;
+  inset-inline-end: 0;
+  transform: translateX(100%);
+  transition:
+    transform var(--tp-drawer-duration) ease,
+    visibility 0s linear var(--tp-drawer-duration);
+}
+
+tp-drawer[data-placement='end'][data-open='true'] {
+  transform: translateX(0);
+  transition:
+    transform var(--tp-drawer-duration) ease,
+    visibility 0s linear 0s;
+}
+
+tp-drawer[data-placement='start'] {
+  block-size: 100%;
+  inline-size: var(--tp-drawer-size);
+  inset-block: 0;
+  inset-inline-start: 0;
+  transform: translateX(-100%);
+  transition:
+    transform var(--tp-drawer-duration) ease,
+    visibility 0s linear var(--tp-drawer-duration);
+}
+
+tp-drawer[data-placement='start'][data-open='true'] {
+  transform: translateX(0);
+  transition:
+    transform var(--tp-drawer-duration) ease,
+    visibility 0s linear 0s;
+}
+
+tp-drawer[data-placement='top'] {
+  block-size: min(24rem, 100vh);
+  inline-size: 100%;
+  inset-block-start: 0;
+  inset-inline: 0;
+  transform: translateY(-100%);
+  transition:
+    transform var(--tp-drawer-duration) ease,
+    visibility 0s linear var(--tp-drawer-duration);
+}
+
+tp-drawer[data-placement='top'][data-open='true'] {
+  transform: translateY(0);
+  transition:
+    transform var(--tp-drawer-duration) ease,
+    visibility 0s linear 0s;
+}
+
+tp-drawer[data-placement='bottom'] {
+  block-size: min(24rem, 100vh);
+  inline-size: 100%;
+  inset-block-end: 0;
+  inset-inline: 0;
+  transform: translateY(100%);
+  transition:
+    transform var(--tp-drawer-duration) ease,
+    visibility 0s linear var(--tp-drawer-duration);
+}
+
+tp-drawer[data-placement='bottom'][data-open='true'] {
+  transform: translateY(0);
+  transition:
+    transform var(--tp-drawer-duration) ease,
+    visibility 0s linear 0s;
+}
+
+tp-drawer > [data-tp-drawer-header] {
+  align-items: center;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 1rem;
+}
+
+tp-drawer > [data-tp-drawer-header] > [data-tp-drawer-actions] {
+  grid-column: 2;
+  align-items: center;
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+tp-drawer > [data-tp-drawer-header] > [data-tp-drawer-title] {
+  font: inherit;
+  font-weight: 600;
+  margin: 0;
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+tp-drawer > [data-tp-drawer-content] {
+  flex: 1 1 auto;
+  min-block-size: 0;
+  overflow: auto;
+  padding: 1rem;
+}
+
+tp-drawer > tp-divider[data-tp-drawer-resize] {
+  border: 0;
+  margin: 0;
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 8px;
+  cursor: ew-resize;
+  touch-action: none;
+  z-index: 1;
+}
+
+tp-drawer[data-placement='start'] > [data-tp-drawer-resize] {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+}
+
+tp-drawer > [data-tp-drawer-resize]:is(:hover, :focus-visible) {
+  background: var(--tp-brand-fill-mid);
+}
+
+tp-drawer > [data-tp-drawer-resize]:focus-visible {
+  outline: 2px solid var(--tp-brand-text-colorful);
+  outline-offset: -2px;
+}
+
+tp-drawer > [data-tp-drawer-resize][hidden] {
+  display: none;
+}
+
+tp-drawer-backdrop {
+  background: rgb(0 0 0 / 0.5);
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  transition: opacity 200ms ease;
+  visibility: hidden;
+  z-index: 999;
+}
+
+tp-drawer-backdrop[data-open='true'] {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+tp-drawer-backdrop[data-contained='true'] {
+  position: absolute;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  tp-drawer, tp-drawer *, tp-drawer-backdrop { transition-duration: 0.01ms !important; transition-delay: 0ms !important; }
+}

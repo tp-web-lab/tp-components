@@ -1,0 +1,19 @@
+{
+  "name": "Matplotlib chart",
+  "entry": "/main.py",
+  "libs": [
+    "matplotlib"
+  ],
+  "files": [
+    {
+      "path": "/index.html",
+      "language": "html",
+      "content": "<figure id=\"plot\" aria-label=\"Quadratic sequence chart\"></figure>"
+    },
+    {
+      "path": "/main.py",
+      "language": "python",
+      "content": "from io import StringIO\n\nimport matplotlib\nmatplotlib.use(\"svg\")\nimport matplotlib.pyplot as plt\nfrom js import document\n\nx = list(range(11))\ny = [value ** 2 for value in x]\n\nfig, ax = plt.subplots(figsize=(6, 3.5))\nax.plot(x, y, marker=\"o\", color=\"#2563eb\")\nax.set(title=\"Quadratic sequence\", xlabel=\"x\", ylabel=\"x²\")\nax.grid(alpha=0.25)\nfig.tight_layout()\n\nbuffer = StringIO()\nfig.savefig(buffer, format=\"svg\")\ndocument.getElementById(\"plot\").innerHTML = buffer.getvalue()\nplt.close(fig)"
+    }
+  ]
+}

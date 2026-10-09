@@ -1,0 +1,60 @@
+name: Set up the pinned tp workspace
+description: Install the five-package workspace and build component dependencies without running reports.
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v6
+      with:
+        repository: tp-web-lab/tp-utilities
+        ref: e8d72a81f4512335cb948470827bbae4e051fb96
+        path: tp-utilities
+        persist-credentials: false
+    - uses: actions/checkout@v6
+      with:
+        repository: tp-web-lab/tp-markdown
+        ref: 77de7490fa269375dd7da6d064f6490783242930
+        path: tp-markdown
+        persist-credentials: false
+    - uses: actions/checkout@v6
+      with:
+        repository: tp-web-lab/tp-asciidoc
+        ref: c62ba738e2fd3ff29253d397adc48c51a96f27c4
+        path: tp-asciidoc
+        persist-credentials: false
+    - uses: actions/checkout@v6
+      with:
+        repository: tp-web-lab/tp-restructuredtext
+        ref: b294a647ba1b1f7bc9e65ae3f1ea62911ca8eafc
+        path: tp-restructuredtext
+        persist-credentials: false
+    - name: Prepare the CI workspace
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: |
+        cp tp-components/.github/ci/package.json package.json
+        cp tp-components/.github/ci/pnpm-workspace.yaml pnpm-workspace.yaml
+        cp tp-components/.github/ci/pnpm-lock.yaml pnpm-lock.yaml
+    - uses: pnpm/action-setup@v6
+      with:
+        run_install: false
+    - uses: actions/setup-node@v6
+      with:
+        node-version: 24
+        cache: pnpm
+        cache-dependency-path: tp-components/.github/ci/pnpm-lock.yaml
+    - name: Install locked workspace dependencies
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: pnpm install --frozen-lockfile
+    - name: Build the shared packages
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: |
+        pnpm --filter @tp/tp-utilities build
+        pnpm --filter @tp/tp-markdown build
+        pnpm --filter @tp/tp-asciidoc build
+        pnpm --filter @tp/tp-restructuredtext build
+    - name: Check CI workspace configuration
+      shell: bash
+      working-directory: ${{ github.workspace }}/tp-components
+      run: node --test scripts/ci-workspace.test.mjs

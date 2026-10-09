@@ -1,0 +1,1641 @@
+/**
+ * @module tree/test
+ * @summary Tests du composant `<tp-tree>`.
+ */
+
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import './tree.js';
+import type { TpTree } from './tree.js';
+
+/**
+ * Attend la fin des micro-tâches en cours.
+ *
+ * @summary Attend la stabilisation asynchrone du DOM.
+ * @returns Promesse résolue au prochain tour de micro-tâche.
+ */
+async function flush(): Promise<void> {
+  await Promise.resolve();
+}
+
+/**
+ * Retourne une valeur définie ou lève une erreur explicite.
+ *
+ * @summary Garantit qu'une valeur n'est ni `null` ni `undefined`.
+ * @param value Valeur à vérifier.
+ * @param message Message d'erreur si la valeur est absente.
+ * @returns Valeur non nulle.
+ * @throws {Error} Si la valeur est absente.
+ */
+function expectDefined<T>(value: T | null | undefined, message: string): T {
+  if (value == null) {
+    throw new Error(message);
+  }
+
+  return value;
+}
+
+/**
+ * Retourne le premier élément `<tp-tree>` du document.
+ *
+ * @summary Récupère l’élément arbre de test.
+ * @returns Élément `<tp-tree>`.
+ * @throws {Error} Si aucun arbre n’est trouvé.
+ */
+function getTree(): TpTree {
+  const element = document.querySelector('tp-tree');
+
+  if (!(element instanceof HTMLElement)) {
+    throw new Error('tp-tree not found');
+  }
+
+  return element as TpTree;
+}
+
+function getDragdrop(): HTMLElement {
+  const element = document.querySelector('tp-tree tp-dragdrop');
+
+  if (!(element instanceof HTMLElement)) {
+    throw new Error('tp-dragdrop not found inside tp-tree');
+  }
+
+  return element;
+}
+
+/**
+ * Retourne tous les nœuds `<li>` du premier arbre.
+ *
+ * @summary Récupère tous les nœuds de l’arbre.
+ * @returns Liste des nœuds.
+ */
+function getItems(): HTMLLIElement[] {
+  const tree = getTree();
+
+  return Array.from(tree.querySelectorAll('li')).filter(
+    (element): element is HTMLLIElement => element instanceof HTMLLIElement,
+  );
+}
+
+/**
+ * Retourne les nœuds racine directs.
+ *
+ * @summary Récupère les nœuds directs de la racine.
+ * @returns Liste des nœuds racine.
+ */
+function getRootItems(): HTMLLIElement[] {
+  const tree = getTree();
+  const rootList = tree.querySelector(':scope > ul');
+
+  if (!(rootList instanceof HTMLUListElement)) {
+    throw new Error('root list not found');
+  }
+
+  return Array.from(rootList.children).filter(
+    (element): element is HTMLLIElement => element instanceof HTMLLIElement,
+  );
+}
+
+/**
+ * Retourne le premier bouton de bascule d’un nœud.
+ *
+ * @summary Récupère le bouton toggle d’un nœud.
+ * @param item Nœud concerné.
+ * @returns Bouton toggle ou `null`.
+ */
+function getToggle(item: HTMLLIElement): HTMLButtonElement | null {
+  const button = item.querySelector(':scope > [data-tp-tree-toggle]');
+  return button instanceof HTMLButtonElement ? button : null;
+}
+
+/**
+ * Retourne le premier libellé d’un nœud.
+ *
+ * @summary Récupère le libellé d’un nœud.
+ * @param item Nœud concerné.
+ * @returns Élément de libellé ou `null`.
+ */
+function getLabel(item: HTMLLIElement): HTMLElement | null {
+  const label = item.querySelector(':scope > [data-tp-tree-label]');
+  return label instanceof HTMLElement ? label : null;
+}
+
+/**
+ * Retourne le texte du libellé d’un nœud.
+ *
+ * @summary Retourne le texte lisible d’un nœud.
+ * @param item Nœud concerné.
+ * @returns Texte du nœud.
+ */
+function getItemText(item: HTMLLIElement): string {
+  return getLabel(item)?.textContent?.trim() ?? '';
+}
+
+/**
+ * Retourne la première sous-liste directe d’un nœud.
+ *
+ * @summary Récupère la sous-liste d’un nœud.
+ * @param item Nœud concerné.
+ * @returns Sous-liste ou `null`.
+ */
+function getChildList(item: HTMLLIElement): HTMLUListElement | null {
+  const list = item.querySelector(':scope > ul');
+  return list instanceof HTMLUListElement ? list : null;
+}
+
+/**
+ * Retourne les enfants directs d'une liste.
+ *
+ * @summary Récupère les `<li>` directs d'une liste `<ul>`.
+ * @param list Liste concernée.
+ * @returns Liste des nœuds enfants directs.
+ */
+function getDirectItems(list: HTMLUListElement): HTMLLIElement[] {
+  return Array.from(list.children).filter(
+    (element): element is HTMLLIElement => element instanceof HTMLLIElement,
+  );
+}
+
+/**
+ * Simule un drag and drop simplifié du nœud source vers une cible.
+ *
+ * Si `target` vaut `null`, le drop est simulé sur l’arbre lui-même,
+ * ce qui correspond à un drop à la racine.
+ *
+ * @summary Simule un déplacement par drag and drop.
+ * @param source Nœud déplacé.
+ * @param target Cible de drop ou `null` pour la racine.
+ * @param clientY Position verticale du curseur pour le drop.
+ */
+async function simulateDrop(
+  source: HTMLLIElement,
+  target: HTMLLIElement | null,
+  clientY = 50,
+): Promise<void> {
+  const dataTransfer = {
+    effectAllowed: '',
+    dropEffect: '',
+    setData: vi.fn(),
+    getData: vi.fn(),
+  } as unknown as DataTransfer;
+
+  source.dispatchEvent(
+    new DragEvent('dragstart', {
+      bubbles: true,
+      cancelable: true,
+      dataTransfer,
+    }),
+  );
+  await flush();
+
+  target?.dispatchEvent(
+    new DragEvent('dragenter', {
+      bubbles: true,
+      cancelable: true,
+      dataTransfer,
+      clientY,
+    }),
+  );
+  await flush();
+
+  target?.dispatchEvent(
+    new DragEvent('dragover', {
+      bubbles: true,
+      cancelable: true,
+      dataTransfer,
+      clientY,
+    }),
+  );
+  await flush();
+
+  target?.dispatchEvent(
+    new DragEvent('drop', {
+      bubbles: true,
+      cancelable: true,
+      dataTransfer,
+      clientY,
+    }),
+  );
+  await flush();
+
+  source.dispatchEvent(
+    new DragEvent('dragend', {
+      bubbles: true,
+      cancelable: true,
+      dataTransfer,
+    }),
+  );
+  await flush();
+}
+
+describe('<tp-tree>', () => {
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  it('est défini', () => {
+    expect(customElements.get('tp-tree')).toBeDefined();
+  });
+
+  it('déclare le rôle tree sur la liste racine', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const rootList = tree.querySelector(':scope > ul');
+
+    expect(rootList).toBeInstanceOf(HTMLUListElement);
+    expect(rootList?.getAttribute('role')).toBe('tree');
+  });
+
+  it('déclare le rôle treeitem sur chaque nœud', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const items = getItems();
+
+    expect(items).toHaveLength(2);
+    expect(items[0]?.getAttribute('role')).toBe('treeitem');
+    expect(items[1]?.getAttribute('role')).toBe('treeitem');
+  });
+
+  it('calcule correctement aria-level', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child
+                <ul>
+                  <li>Grandchild</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const items = getItems();
+
+    expect(items[0]?.getAttribute('aria-level')).toBe('1');
+    expect(items[1]?.getAttribute('aria-level')).toBe('2');
+    expect(items[2]?.getAttribute('aria-level')).toBe('3');
+  });
+
+  it('encapsule le libellé d’un nœud dans data-tp-tree-label', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root node</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const item = expectDefined(getItems()[0], 'item not found');
+    const label = getLabel(item);
+
+    expect(label).toBeInstanceOf(HTMLElement);
+    expect(label?.textContent?.trim()).toBe('Root node');
+  });
+
+  it('ajoute un bouton toggle uniquement aux nœuds ayant des enfants', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child 1</li>
+              <li>Child 2</li>
+            </ul>
+          </li>
+          <li>Leaf</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const items = getItems();
+    const root = expectDefined(items[0], 'root not found');
+    const child1 = expectDefined(items[1], 'child1 not found');
+    const child2 = expectDefined(items[2], 'child2 not found');
+    const leaf = expectDefined(items[3], 'leaf not found');
+
+    expect(getToggle(root)).toBeInstanceOf(HTMLButtonElement);
+    expect(getToggle(child1)).toBeNull();
+    expect(getToggle(child2)).toBeNull();
+    expect(getToggle(leaf)).toBeNull();
+  });
+
+  it('utilise plus-box-outline quand un nœud est fermé', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const root = expectDefined(getItems()[0], 'root not found');
+    const toggle = getToggle(root);
+    const icon = toggle?.querySelector('[data-tp-tree-toggle-icon]');
+
+    expect(icon).toBeInstanceOf(HTMLElement);
+    expect(icon?.getAttribute('name')).toBe('plus-box-outline');
+  });
+
+  it('utilise minus-box-outline quand un nœud est ouvert', async () => {
+    document.body.innerHTML = `
+      <tp-tree open>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const root = expectDefined(getItems()[0], 'root not found');
+    const toggle = getToggle(root);
+    const icon = toggle?.querySelector('[data-tp-tree-toggle-icon]');
+
+    expect(icon).toBeInstanceOf(HTMLElement);
+    expect(icon?.getAttribute('name')).toBe('minus-box-outline');
+  });
+
+  it('ferme les branches par défaut', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const root = expectDefined(getItems()[0], 'root not found');
+    const childList = getChildList(root);
+
+    expect(root.getAttribute('data-tp-tree-expanded')).toBe('false');
+    expect(root.getAttribute('aria-expanded')).toBe('false');
+    expect(childList?.hidden).toBe(true);
+  });
+
+  it('ouvre les branches à l’initialisation quand open est présent', async () => {
+    document.body.innerHTML = `
+      <tp-tree open>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const root = expectDefined(getItems()[0], 'root not found');
+    const childList = getChildList(root);
+
+    expect(root.getAttribute('data-tp-tree-expanded')).toBe('true');
+    expect(root.getAttribute('aria-expanded')).toBe('true');
+    expect(childList?.hidden).toBe(false);
+  });
+
+  it('bascule localement un nœud via toggleNode()', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const root = expectDefined(getItems()[0], 'root not found');
+    const childList = getChildList(root);
+
+    expect(root.getAttribute('data-tp-tree-expanded')).toBe('false');
+    expect(childList?.hidden).toBe(true);
+
+    tree.toggleNode(root);
+
+    expect(root.getAttribute('data-tp-tree-expanded')).toBe('true');
+    expect(childList?.hidden).toBe(false);
+  });
+
+  it('ouvre un nœud via expandNode()', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const root = expectDefined(getItems()[0], 'root not found');
+    const childList = getChildList(root);
+
+    tree.expandNode(root);
+
+    expect(root.getAttribute('data-tp-tree-expanded')).toBe('true');
+    expect(childList?.hidden).toBe(false);
+  });
+
+  it('ferme un nœud via collapseNode()', async () => {
+    document.body.innerHTML = `
+      <tp-tree open>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const root = expectDefined(getItems()[0], 'root not found');
+    const childList = getChildList(root);
+
+    tree.collapseNode(root);
+
+    expect(root.getAttribute('data-tp-tree-expanded')).toBe('false');
+    expect(childList?.hidden).toBe(true);
+  });
+
+  it('ouvre globalement toutes les branches via expandAll()', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root 1
+            <ul>
+              <li>Child 1</li>
+            </ul>
+          </li>
+          <li>Root 2
+            <ul>
+              <li>Child 2</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    tree.expandAll();
+
+    const roots = getItems().filter((item) => item.getAttribute('aria-level') === '1');
+    const firstRoot = expectDefined(roots[0], 'first root not found');
+    const secondRoot = expectDefined(roots[1], 'second root not found');
+
+    expect(firstRoot.getAttribute('data-tp-tree-expanded')).toBe('true');
+    expect(secondRoot.getAttribute('data-tp-tree-expanded')).toBe('true');
+    expect(getChildList(firstRoot)?.hidden).toBe(false);
+    expect(getChildList(secondRoot)?.hidden).toBe(false);
+  });
+
+  it('ferme globalement toutes les branches via collapseAll()', async () => {
+    document.body.innerHTML = `
+      <tp-tree open>
+        <ul>
+          <li>Root 1
+            <ul>
+              <li>Child 1</li>
+            </ul>
+          </li>
+          <li>Root 2
+            <ul>
+              <li>Child 2</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    tree.collapseAll();
+
+    const roots = getItems().filter((item) => item.getAttribute('aria-level') === '1');
+    const firstRoot = expectDefined(roots[0], 'first root not found');
+    const secondRoot = expectDefined(roots[1], 'second root not found');
+
+    expect(firstRoot.getAttribute('data-tp-tree-expanded')).toBe('false');
+    expect(secondRoot.getAttribute('data-tp-tree-expanded')).toBe('false');
+    expect(getChildList(firstRoot)?.hidden).toBe(true);
+    expect(getChildList(secondRoot)?.hidden).toBe(true);
+  });
+
+  it('met à jour aria-expanded sur le bouton toggle', async () => {
+    document.body.innerHTML = `
+      <tp-tree open>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const root = expectDefined(getItems()[0], 'root not found');
+    const toggle = getToggle(root);
+
+    expect(toggle?.getAttribute('aria-expanded')).toBe('true');
+
+    toggle?.click();
+    await flush();
+
+    expect(toggle?.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('émet tp-tree-toggle lors d’une bascule locale', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const listener = vi.fn();
+    tree.addEventListener('tp-tree-toggle', listener);
+
+    const root = expectDefined(getItems()[0], 'root not found');
+    const toggle = getToggle(root);
+
+    toggle?.click();
+    await flush();
+
+    expect(listener).toHaveBeenCalledTimes(1);
+
+    const event = listener.mock.calls[0]?.[0] as CustomEvent;
+    expect(event.detail.expanded).toBe(true);
+    expect(event.detail.level).toBe(1);
+    expect(event.detail.path).toEqual(['Root']);
+  });
+
+  it('émet tp-tree-node-contextmenu sur clic droit d’un libellé', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const listener = vi.fn();
+    tree.addEventListener('tp-tree-node-contextmenu', listener);
+
+    const root = expectDefined(getItems()[0], 'root not found');
+    const label = getLabel(root);
+
+    label?.dispatchEvent(
+      new MouseEvent('contextmenu', {
+        bubbles: true,
+        cancelable: true,
+        clientX: 42,
+        clientY: 84,
+      }),
+    );
+    await flush();
+
+    expect(listener).toHaveBeenCalledTimes(1);
+
+    const event = listener.mock.calls[0]?.[0] as CustomEvent;
+    expect(event.detail.level).toBe(1);
+    expect(event.detail.path).toEqual(['Root']);
+    expect(event.detail.clientX).toBe(42);
+    expect(event.detail.clientY).toBe(84);
+    expect(event.detail.item).toBe(root);
+    expect(event.detail.label).toBe(label);
+  });
+
+  it('sélectionne un nœud via selectNode()', async () => {
+    document.body.innerHTML = `
+      <tp-tree selectable>
+        <ul>
+          <li>Root</li>
+          <li>Leaf</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const items = getItems();
+    const leaf = expectDefined(items[1], 'leaf not found');
+    const root = expectDefined(items[0], 'root not found');
+
+    tree.selectNode(leaf);
+
+    expect(leaf.hasAttribute('data-tp-tree-selected')).toBe(true);
+    expect(leaf.getAttribute('aria-selected')).toBe('true');
+    expect(root.hasAttribute('data-tp-tree-selected')).toBe(false);
+    expect(root.getAttribute('aria-selected')).toBe('false');
+  });
+
+  it('sélectionne un nœud au clic sur le libellé quand selectable est présent', async () => {
+    document.body.innerHTML = `
+      <tp-tree selectable>
+        <ul>
+          <li>Root</li>
+          <li>Leaf</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const items = getItems();
+    const leaf = expectDefined(items[1], 'leaf not found');
+    const label = getLabel(leaf);
+
+    label?.click();
+    await flush();
+
+    expect(leaf.hasAttribute('data-tp-tree-selected')).toBe(true);
+    expect(leaf.getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('émet tp-tree-select lors d’une sélection', async () => {
+    document.body.innerHTML = `
+      <tp-tree selectable>
+        <ul>
+          <li>Root</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const listener = vi.fn();
+    tree.addEventListener('tp-tree-select', listener);
+
+    const item = expectDefined(getItems()[0], 'item not found');
+    tree.selectNode(item);
+
+    expect(listener).toHaveBeenCalledTimes(1);
+
+    const event = listener.mock.calls[0]?.[0] as CustomEvent;
+    expect(event.detail.selected).toBe(true);
+    expect(event.detail.path).toEqual(['Root']);
+    expect(event.detail.item).toBe(item);
+  });
+
+  it('efface la sélection via clearSelection()', async () => {
+    document.body.innerHTML = `
+      <tp-tree selectable>
+        <ul>
+          <li>Root</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const item = expectDefined(getItems()[0], 'item not found');
+
+    tree.selectNode(item);
+    tree.clearSelection();
+
+    expect(item.hasAttribute('data-tp-tree-selected')).toBe(false);
+    expect(item.getAttribute('aria-selected')).toBe('false');
+  });
+
+  it('démarre un renommage inline via startRename()', async () => {
+    document.body.innerHTML = `
+      <tp-tree editable>
+        <ul>
+          <li>Root</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const item = expectDefined(getItems()[0], 'item not found');
+
+    tree.startRename(item);
+    await flush();
+
+    const label = expectDefined(getLabel(item), 'label not found');
+    const input = label.querySelector(':scope > input[data-tp-tree-editor]');
+
+    expect(input).toBeInstanceOf(HTMLInputElement);
+    expect((input as HTMLInputElement).value).toBe('Root');
+  });
+
+  it('démarre un renommage inline au double clic quand editable est présent', async () => {
+    document.body.innerHTML = `
+      <tp-tree editable>
+        <ul>
+          <li>Root</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const item = expectDefined(getItems()[0], 'item not found');
+    const label = getLabel(item);
+
+    label?.dispatchEvent(new MouseEvent('dblclick', { bubbles: true }));
+    await flush();
+
+    const nextLabel = expectDefined(getLabel(item), 'label not found after dblclick');
+    const input = nextLabel.querySelector(':scope > input[data-tp-tree-editor]');
+
+    expect(input).toBeInstanceOf(HTMLInputElement);
+  });
+
+  it('valide un renommage inline avec Enter et émet tp-tree-rename', async () => {
+    document.body.innerHTML = `
+      <tp-tree editable>
+        <ul>
+          <li>Root</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const listener = vi.fn();
+    tree.addEventListener('tp-tree-rename', listener);
+
+    const item = expectDefined(getItems()[0], 'item not found');
+    tree.startRename(item);
+    await flush();
+
+    const label = expectDefined(getLabel(item), 'label not found');
+    const input = label.querySelector(':scope > input[data-tp-tree-editor]');
+
+    if (!(input instanceof HTMLInputElement)) {
+      throw new Error('rename input not found');
+    }
+
+    input.value = 'Root renamed';
+    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    await flush();
+
+    expect(getLabel(item)?.textContent?.trim()).toBe('Root renamed');
+    expect(listener).toHaveBeenCalledTimes(1);
+
+    const event = listener.mock.calls[0]?.[0] as CustomEvent;
+    expect(event.detail.oldValue).toBe('Root');
+    expect(event.detail.newValue).toBe('Root renamed');
+    expect(event.detail.path).toEqual(['Root renamed']);
+  });
+
+  it('annule un renommage inline avec Escape', async () => {
+    document.body.innerHTML = `
+      <tp-tree editable>
+        <ul>
+          <li>Root</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const item = expectDefined(getItems()[0], 'item not found');
+    tree.startRename(item);
+    await flush();
+
+    const label = expectDefined(getLabel(item), 'label not found');
+    const input = label.querySelector(':scope > input[data-tp-tree-editor]');
+
+    if (!(input instanceof HTMLInputElement)) {
+      throw new Error('rename input not found');
+    }
+
+    input.value = 'Changed';
+    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    await flush();
+
+    expect(getLabel(item)?.textContent?.trim()).toBe('Root');
+  });
+
+  it('ajoute un nœud à la racine via addNode() et émet tp-tree-add', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const listener = vi.fn();
+    tree.addEventListener('tp-tree-add', listener);
+
+    const added = tree.addNode(null, 'Added root');
+    await flush();
+
+    expect(added).toBeInstanceOf(HTMLLIElement);
+    expect(getItems()).toHaveLength(2);
+    expect(getLabel(expectDefined(added, 'added node not found'))?.textContent?.trim()).toBe('Added root');
+    expect(listener).toHaveBeenCalledTimes(1);
+
+    const event = listener.mock.calls[0]?.[0] as CustomEvent;
+    expect(event.detail.parent).toBeNull();
+    expect(event.detail.path).toEqual(['Added root']);
+  });
+
+  it('ajoute un nœud enfant via addNode() et ouvre le parent', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const root = expectDefined(getItems()[0], 'root not found');
+    const child = tree.addNode(root, 'Child');
+    await flush();
+
+    expect(child).toBeInstanceOf(HTMLLIElement);
+    expect(getChildList(root)).toBeInstanceOf(HTMLUListElement);
+    expect(root.getAttribute('data-tp-tree-expanded')).toBe('true');
+    expect(getChildList(root)?.hidden).toBe(false);
+    expect(getLabel(expectDefined(child, 'child not found'))?.textContent?.trim()).toBe('Child');
+  });
+
+  it('supprime un nœud via removeNode() et émet tp-tree-remove', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root</li>
+          <li>Leaf</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const listener = vi.fn();
+    tree.addEventListener('tp-tree-remove', listener);
+
+    const item = expectDefined(getItems()[1], 'item to remove not found');
+    tree.removeNode(item);
+    await flush();
+
+    expect(getItems()).toHaveLength(1);
+    expect(listener).toHaveBeenCalledTimes(1);
+
+    const event = listener.mock.calls[0]?.[0] as CustomEvent;
+    expect(event.detail.parent).toBeNull();
+    expect(event.detail.path).toEqual(['Leaf']);
+  });
+
+  it('déplace un nœud sous un nouveau parent via moveNode() et émet tp-tree-move', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root 1</li>
+          <li>Root 2</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const listener = vi.fn();
+    tree.addEventListener('tp-tree-move', listener);
+
+    const items = getItems();
+    const targetParent = expectDefined(items[0], 'target parent not found');
+    const source = expectDefined(items[1], 'source not found');
+
+    tree.moveNode(source, targetParent);
+    await flush();
+
+    const childList = getChildList(targetParent);
+
+    expect(childList).toBeInstanceOf(HTMLUListElement);
+    expect(source.parentElement).toBe(childList);
+    expect(listener).toHaveBeenCalledTimes(1);
+
+    const event = listener.mock.calls[0]?.[0] as CustomEvent;
+    expect(event.detail.oldParent).toBeNull();
+    expect(event.detail.newParent).toBe(targetParent);
+    expect(event.detail.path).toEqual(['Root 1', 'Root 2']);
+  });
+
+  it('déplace un nœud à la racine via moveNode(item, null)', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root 1
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+          <li>Root 2</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const child = getItems().find((item) => getItemText(item) === 'Child');
+    const definedChild = expectDefined(child, 'child node not found');
+
+    tree.moveNode(definedChild, null);
+    await flush();
+
+    const directChildren = getRootItems();
+
+    expect(directChildren).toHaveLength(3);
+    expect(directChildren.some((item) => getItemText(item) === 'Child')).toBe(true);
+  });
+
+  it('empêche de déplacer un nœud dans lui-même', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const root = expectDefined(getItems()[0], 'root not found');
+
+    tree.moveNode(root, root);
+    await flush();
+
+    const directChildren = getRootItems();
+
+    expect(directChildren).toHaveLength(1);
+    expect(directChildren[0]).toBe(root);
+  });
+
+  it('clone un nœud au même niveau avec le suffixe " clone"', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Beta</li>
+          <li>Gamma</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const beta = getRootItems().find((item) => getItemText(item) === 'Beta');
+    const definedBeta = expectDefined(beta, 'beta node not found');
+
+    const clone = tree.cloneTreeNode(definedBeta);
+    await flush();
+
+    const rootItems = getRootItems();
+    const first = expectDefined(rootItems[0], 'first root item not found');
+    const second = expectDefined(rootItems[1], 'second root item not found');
+    const third = expectDefined(rootItems[2], 'third root item not found');
+
+    expect(clone).toBeInstanceOf(HTMLLIElement);
+    expect(rootItems).toHaveLength(3);
+    expect(getItemText(first)).toBe('Beta');
+    expect(getItemText(second)).toBe('Beta clone');
+    expect(getItemText(third)).toBe('Gamma');
+  });
+
+  it('clone aussi le sous-arbre d’un nœud', async () => {
+    document.body.innerHTML = `
+      <tp-tree open>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child A</li>
+              <li>Child B</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const root = expectDefined(getItems()[0], 'root not found');
+
+    const clone = tree.cloneTreeNode(root);
+    await flush();
+
+    expect(getItemText(clone)).toBe('Root clone');
+    const cloneChildren = expectDefined(getChildList(clone), 'clone child list not found');
+    const childItems = getDirectItems(cloneChildren);
+    const first = expectDefined(childItems[0], 'first cloned child not found');
+    const second = expectDefined(childItems[1], 'second cloned child not found');
+
+    expect(childItems).toHaveLength(2);
+    expect(getItemText(first)).toBe('Child A');
+    expect(getItemText(second)).toBe('Child B');
+  });
+
+  it('trie alphabétiquement les enfants directs d’un nœud via sortNodeChildren()', async () => {
+    document.body.innerHTML = `
+      <tp-tree open>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Zulu</li>
+              <li>alpha</li>
+              <li>Beta</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const root = expectDefined(getItems()[0], 'root not found');
+
+    tree.sortNodeChildren(root);
+    await flush();
+
+    const childList = expectDefined(getChildList(root), 'child list not found');
+    const childItems = getDirectItems(childList);
+    const first = expectDefined(childItems[0], 'first child not found');
+    const second = expectDefined(childItems[1], 'second child not found');
+    const third = expectDefined(childItems[2], 'third child not found');
+
+    expect(getItemText(first)).toBe('alpha');
+    expect(getItemText(second)).toBe('Beta');
+    expect(getItemText(third)).toBe('Zulu');
+  });
+
+  it('ne fait rien sur sortNodeChildren() pour une feuille', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Leaf</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const leaf = expectDefined(getItems()[0], 'leaf not found');
+
+    tree.sortNodeChildren(leaf);
+    await flush();
+
+    expect(getItemText(leaf)).toBe('Leaf');
+    expect(getChildList(leaf)).toBeNull();
+  });
+
+  it('trie récursivement toutes les listes via sortAll()', async () => {
+    document.body.innerHTML = `
+      <tp-tree open>
+        <ul>
+          <li>Zulu
+            <ul>
+              <li>delta</li>
+              <li>Alpha</li>
+            </ul>
+          </li>
+          <li>Alpha
+            <ul>
+              <li>Zulu</li>
+              <li>beta</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    tree.sortAll();
+    await flush();
+
+    const roots = getRootItems();
+    const firstRoot = expectDefined(roots[0], 'first root not found');
+    const secondRoot = expectDefined(roots[1], 'second root not found');
+
+    expect(getItemText(firstRoot)).toBe('Alpha');
+    expect(getItemText(secondRoot)).toBe('Zulu');
+
+    const alphaChildren = expectDefined(getChildList(firstRoot), 'alpha children not found');
+    const alphaItems = getDirectItems(alphaChildren);
+    const alphaFirst = expectDefined(alphaItems[0], 'first alpha child not found');
+    const alphaSecond = expectDefined(alphaItems[1], 'second alpha child not found');
+
+    expect(getItemText(alphaFirst)).toBe('beta');
+    expect(getItemText(alphaSecond)).toBe('Zulu');
+
+    const zuluChildren = expectDefined(getChildList(secondRoot), 'zulu children not found');
+    const zuluItems = getDirectItems(zuluChildren);
+    const zuluFirst = expectDefined(zuluItems[0], 'first zulu child not found');
+    const zuluSecond = expectDefined(zuluItems[1], 'second zulu child not found');
+
+    expect(getItemText(zuluFirst)).toBe('Alpha');
+    expect(getItemText(zuluSecond)).toBe('delta');
+  });
+
+  it('permet le drop à la racine de l’arbre', async () => {
+    document.body.innerHTML = `
+      <tp-tree draggable open>
+        <ul>
+          <li>Root 1
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+          <li>Root 2</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const root = getRootItems().find((item) => getItemText(item) === 'Root 1');
+    const definedRoot = expectDefined(root, 'root not found');
+    const child = getItems().find((item) => getItemText(item) === 'Child');
+    const definedChild = expectDefined(child, 'child not found');
+
+    await simulateDrop(definedChild, null);
+
+    const rootItems = getRootItems();
+    expect(rootItems).toHaveLength(3);
+    expect(rootItems.some((item) => getItemText(item) === 'Child')).toBe(true);
+
+    const rootChildList = getChildList(definedRoot);
+    const directChildren = rootChildList instanceof HTMLUListElement ? getDirectItems(rootChildList) : [];
+    expect(directChildren).toHaveLength(0);
+  });
+
+  it('émet tp-tree-move lors d’un drop à la racine', async () => {
+    document.body.innerHTML = `
+      <tp-tree draggable open>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const listener = vi.fn();
+    tree.addEventListener('tp-tree-move', listener);
+
+    const child = getItems().find((item) => getItemText(item) === 'Child');
+    const definedChild = expectDefined(child, 'child not found');
+
+    await simulateDrop(definedChild, null);
+
+    expect(listener).toHaveBeenCalledTimes(1);
+
+    const event = listener.mock.calls[0]?.[0] as CustomEvent;
+    expect(event.detail.oldParent).not.toBeNull();
+    expect(event.detail.newParent).toBeNull();
+    expect(event.detail.path).toEqual(['Child']);
+  });
+
+  it('active la propriété guides par présence de l’attribut', async () => {
+    document.body.innerHTML = `
+      <tp-tree guides>
+        <ul>
+          <li>Root</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+
+    expect(tree.hasAttribute('guides')).toBe(true);
+  });
+
+  it('clone un nœud au même niveau avec le suffixe " clone"', async () => {
+    document.body.innerHTML = `
+      <tp-tree>
+        <ul>
+          <li>Beta</li>
+          <li>Gamma</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const beta = getRootItems().find((item) => getItemText(item) === 'Beta');
+    const definedBeta = expectDefined(beta, 'beta node not found');
+
+    const clone = tree.cloneTreeNode(definedBeta);
+    await flush();
+
+    const rootItems = getRootItems();
+    const first = expectDefined(rootItems[0], 'first root item not found');
+    const second = expectDefined(rootItems[1], 'second root item not found');
+    const third = expectDefined(rootItems[2], 'third root item not found');
+
+    expect(clone).toBeInstanceOf(HTMLLIElement);
+    expect(rootItems).toHaveLength(3);
+    expect(getItemText(first)).toBe('Beta');
+    expect(getItemText(second)).toBe('Beta clone');
+    expect(getItemText(third)).toBe('Gamma');
+  });
+
+  it('clone aussi le sous-arbre d’un nœud', async () => {
+    document.body.innerHTML = `
+      <tp-tree open>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child A</li>
+              <li>Child B</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const root = expectDefined(getItems()[0], 'root not found');
+
+    const clone = tree.cloneTreeNode(root);
+    await flush();
+
+    expect(getItemText(clone)).toBe('Root clone');
+
+    const cloneChildren = expectDefined(
+      getChildList(clone),
+      'clone child list not found',
+    );
+    const childItems = getDirectItems(cloneChildren);
+    const first = expectDefined(childItems[0], 'first cloned child not found');
+    const second = expectDefined(childItems[1], 'second cloned child not found');
+
+    expect(childItems).toHaveLength(2);
+    expect(getItemText(first)).toBe('Child A');
+    expect(getItemText(second)).toBe('Child B');
+  });
+
+  it('trie alphabétiquement les enfants directs d’un nœud via sortNodeChildren()', async () => {
+    document.body.innerHTML = `
+      <tp-tree open>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Zulu</li>
+              <li>alpha</li>
+              <li>Beta</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const root = expectDefined(getItems()[0], 'root not found');
+
+    tree.sortNodeChildren(root);
+    await flush();
+
+    const childList = expectDefined(getChildList(root), 'child list not found');
+    const childItems = getDirectItems(childList);
+    const first = expectDefined(childItems[0], 'first child not found');
+    const second = expectDefined(childItems[1], 'second child not found');
+    const third = expectDefined(childItems[2], 'third child not found');
+
+    expect(getItemText(first)).toBe('alpha');
+    expect(getItemText(second)).toBe('Beta');
+    expect(getItemText(third)).toBe('Zulu');
+  });
+
+  it('trie récursivement toutes les listes via sortAll()', async () => {
+    document.body.innerHTML = `
+      <tp-tree open>
+        <ul>
+          <li>Zulu
+            <ul>
+              <li>delta</li>
+              <li>Alpha</li>
+            </ul>
+          </li>
+          <li>Alpha
+            <ul>
+              <li>Zulu</li>
+              <li>beta</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    tree.sortAll();
+    await flush();
+
+    const roots = getRootItems();
+    const firstRoot = expectDefined(roots[0], 'first root not found');
+    const secondRoot = expectDefined(roots[1], 'second root not found');
+
+    expect(getItemText(firstRoot)).toBe('Alpha');
+    expect(getItemText(secondRoot)).toBe('Zulu');
+
+    const alphaChildren = expectDefined(
+      getChildList(firstRoot),
+      'alpha children not found',
+    );
+    const alphaItems = getDirectItems(alphaChildren);
+    const alphaFirst = expectDefined(alphaItems[0], 'first alpha child not found');
+    const alphaSecond = expectDefined(alphaItems[1], 'second alpha child not found');
+
+    expect(getItemText(alphaFirst)).toBe('beta');
+    expect(getItemText(alphaSecond)).toBe('Zulu');
+
+    const zuluChildren = expectDefined(
+      getChildList(secondRoot),
+      'zulu children not found',
+    );
+    const zuluItems = getDirectItems(zuluChildren);
+    const zuluFirst = expectDefined(zuluItems[0], 'first zulu child not found');
+    const zuluSecond = expectDefined(zuluItems[1], 'second zulu child not found');
+
+    expect(getItemText(zuluFirst)).toBe('Alpha');
+    expect(getItemText(zuluSecond)).toBe('delta');
+  });
+
+  it('permet le drop à la racine de l’arbre', async () => {
+    document.body.innerHTML = `
+      <tp-tree draggable open>
+        <ul>
+          <li>Root 1
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+          <li>Root 2</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const root = getRootItems().find((item) => getItemText(item) === 'Root 1');
+    const definedRoot = expectDefined(root, 'root not found');
+    const child = getItems().find((item) => getItemText(item) === 'Child');
+    const definedChild = expectDefined(child, 'child not found');
+
+    await simulateDrop(definedChild, null);
+
+    const rootItems = getRootItems();
+    expect(rootItems).toHaveLength(3);
+    expect(rootItems.some((item) => getItemText(item) === 'Child')).toBe(true);
+
+    const rootChildList = getChildList(definedRoot);
+    const directChildren =
+      rootChildList instanceof HTMLUListElement ? getDirectItems(rootChildList) : [];
+    expect(directChildren).toHaveLength(0);
+  });
+
+  it('émet tp-tree-move lors d’un drop à la racine', async () => {
+    document.body.innerHTML = `
+      <tp-tree draggable open>
+        <ul>
+          <li>Root
+            <ul>
+              <li>Child</li>
+            </ul>
+          </li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const listener = vi.fn();
+    tree.addEventListener('tp-tree-move', listener);
+
+    const child = getItems().find((item) => getItemText(item) === 'Child');
+    const definedChild = expectDefined(child, 'child not found');
+
+    await simulateDrop(definedChild, null);
+
+    expect(listener).toHaveBeenCalledTimes(1);
+
+    const event = listener.mock.calls[0]?.[0] as CustomEvent;
+    expect(event.detail.oldParent).not.toBeNull();
+    expect(event.detail.newParent).toBeNull();
+    expect(event.detail.path).toEqual(['Child']);
+  });
+
+  it('crée automatiquement un tp-dragdrop interne', async () => {
+    document.body.innerHTML = `
+      <tp-tree draggable>
+        <ul>
+          <li>Root</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const dragdrop = getDragdrop();
+
+    expect(dragdrop).toBeInstanceOf(HTMLElement);
+    expect(dragdrop.getAttribute('items')).toBe('li');
+  });
+
+  it('configure tp-dragdrop avec la racine de l’arbre', async () => {
+    document.body.innerHTML = `
+      <tp-tree draggable>
+        <ul>
+          <li>Root</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const tree = getTree();
+    const dragdrop = getDragdrop();
+    const treeId = tree.getAttribute('data-tp-tree-id');
+
+    expect(treeId).not.toBeNull();
+    expect(dragdrop.getAttribute('root')).toBe(`[data-tp-tree-id="${treeId ?? ''}"]`);
+  });
+
+  it('déplace un nœud avant un autre via drag and drop', async () => {
+    document.body.innerHTML = `
+      <tp-tree draggable>
+        <ul>
+          <li>Alpha</li>
+          <li>Beta</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const items = getItems();
+    const alpha = expectDefined(items[0], 'alpha not found');
+    const beta = expectDefined(items[1], 'beta not found');
+
+    vi.spyOn(beta, 'getBoundingClientRect').mockReturnValue({
+      x: 0,
+      y: 0,
+      top: 0,
+      left: 0,
+      right: 100,
+      bottom: 100,
+      width: 100,
+      height: 100,
+      toJSON: () => ({}),
+    });
+
+    await simulateDrop(beta, alpha, 10);
+
+    const roots = getRootItems();
+    const first = expectDefined(roots[0], 'first root not found');
+    const second = expectDefined(roots[1], 'second root not found');
+
+    expect(getItemText(first)).toBe('Beta');
+    expect(getItemText(second)).toBe('Alpha');
+  });
+
+  it('déplace un nœud dans un autre via drag and drop', async () => {
+    document.body.innerHTML = `
+      <tp-tree draggable>
+        <ul>
+          <li>Root</li>
+          <li>Leaf</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const items = getItems();
+    const root = expectDefined(items[0], 'root not found');
+    const leaf = expectDefined(items[1], 'leaf not found');
+
+    vi.spyOn(root, 'getBoundingClientRect').mockReturnValue({
+      x: 0,
+      y: 0,
+      top: 0,
+      left: 0,
+      right: 100,
+      bottom: 100,
+      width: 100,
+      height: 100,
+      toJSON: () => ({}),
+    });
+
+    await simulateDrop(leaf, root, 50);
+
+    const childList = getChildList(root);
+    const definedChildList = expectDefined(childList, 'child list not found');
+    const children = getDirectItems(definedChildList);
+    const firstChild = expectDefined(children[0], 'child not found');
+
+    expect(getItemText(firstChild)).toBe('Leaf');
+  });
+
+  it('déplace un nœud après un autre via drag and drop', async () => {
+    document.body.innerHTML = `
+      <tp-tree draggable>
+        <ul>
+          <li>Alpha</li>
+          <li>Beta</li>
+        </ul>
+      </tp-tree>
+    `;
+    await flush();
+
+    const items = getItems();
+    const alpha = expectDefined(items[0], 'alpha not found');
+    const beta = expectDefined(items[1], 'beta not found');
+
+    vi.spyOn(alpha, 'getBoundingClientRect').mockReturnValue({
+      x: 0,
+      y: 0,
+      top: 0,
+      left: 0,
+      right: 100,
+      bottom: 100,
+      width: 100,
+      height: 100,
+      toJSON: () => ({}),
+    });
+
+    await simulateDrop(alpha, beta, 90);
+
+    const roots = getRootItems();
+    const first = expectDefined(roots[0], 'first root not found');
+    const second = expectDefined(roots[1], 'second root not found');
+
+    expect(getItemText(first)).toBe('Beta');
+    expect(getItemText(second)).toBe('Alpha');
+  });
+});

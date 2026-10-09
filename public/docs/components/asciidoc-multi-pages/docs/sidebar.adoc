@@ -1,0 +1,4 @@
+* Documentation
+** link:cover.adoc[Cover]
+** link:pages/getting-started.adoc[Getting started]
+** link:pages/components.adoc[Components]

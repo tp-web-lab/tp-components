@@ -1,0 +1,12 @@
+tp-csv-table,
+tp-list-table {
+	display: flow-root;
+	min-inline-size: 0;
+	max-inline-size: 100%;
+	overflow-x: auto;
+}
+
+/* CSV line breaks are data, not HTML markup. */
+tp-csv-table :is(th, td) {
+	white-space: pre-wrap;
+}

@@ -1,0 +1,37 @@
+<tp-html-viewer label="tp-code-comment" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-code-editor id="commented-function" language="typescript">
+        <script type="tp/typescript">
+          function f(x: number): number {
+            if (x > 0) { return 2 * x; } // <1>
+            else { return 4 * x; } // <2>
+          }
+        </script>
+      </tp-code-editor>
+      <tp-code-comment for="commented-function">
+        <ol>
+          <li>Positive values are doubled.</li>
+          <li>Zero and negative values are multiplied by four.</li>
+        </ol>
+      </tp-code-comment>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <p>The preview code editor has <code>id="commented-function"</code>. Enter <code>commented-function</code> in <code>for</code> to link the comments, then enable <code>open</code> to display the list. Hover the numbered code markers to read their tooltips even when the list is hidden.</p>
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>open</li></ul></tp-checkbox-list>
+
+      <tp-cluster><tp-textfield data-setting="for" label="for" value="" placeholder="" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="code-comment attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/docs/components/code-comment/examples/attributes.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

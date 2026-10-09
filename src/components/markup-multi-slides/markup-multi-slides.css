@@ -1,0 +1,49 @@
+.tp-markup-multi-slides-host .tp-markup-multi-pages-content {
+	padding-block-end: 4rem;
+	font-size: clamp(1rem, calc(0.65rem + 1.15vw), 2.5rem);
+}
+
+.tp-markup-multi-slides-host [data-slide-step][data-slide-fragment-hidden] {
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.tp-markup-multi-slides-navigation {
+	position: absolute;
+	z-index: 2;
+	inset-inline: 0;
+	inset-block-end: 0;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.25rem 0.5rem;
+	border-radius: 0 0 0.75rem 0.75rem;
+	background: var(--tp-paper-color);
+}
+
+.tp-markup-multi-slides-navigation > tp-numberfield {
+	flex: 1 1 0;
+	min-inline-size: 0;
+}
+
+.tp-markup-multi-slides-controls {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 0.125rem;
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--tp-paper-color, #fff) 85%, transparent);
+}
+
+.tp-markup-multi-slides-controls tp-icon-button {
+	--tp-icon-button-padding: 0.25rem;
+}
+
+.tp-markup-multi-slides-counter {
+	min-inline-size: 3.25rem;
+	text-align: center;
+	color: var(--tp-brand-text-colorful, currentColor);
+	font-size: 0.75rem;
+	font-variant-numeric: tabular-nums;
+}
