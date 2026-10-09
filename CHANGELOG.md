@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Stop probing alternate translation formats once a translated entry page is found,
+  avoiding unnecessary 404 requests when loading multilingual documentation.
+
 - Exclude component icon labels from local table-of-contents entries.
 
 - Remove redundant in-frame resize observation during playground initialization;

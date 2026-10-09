@@ -383,10 +383,15 @@ export class TpMarkupMultiPages extends TpBase {
 				`${repositoryBase}${lang}/cover.${extension}`,
 			]),
 		);
-		const sources = await Promise.all(
-			probes.map((href) => this.fetchText(href)),
-		);
-		langElement.hidden = !sources.some((source) => source !== null);
+		// Only one translated entry page is needed. Do not request every
+		// alternate format after a valid translation has already been found.
+		for (const href of probes) {
+			if ((await this.fetchText(href)) !== null) {
+				langElement.hidden = false;
+				return;
+			}
+		}
+		langElement.hidden = true;
 	}
 
 	private renderShell(): void {
