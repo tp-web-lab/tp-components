@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Reset hidden previews and outgoing observers before browser tests, and defer
+  preview resizing outside ResizeObserver delivery, preventing Safari errors
+  when test libraries load without cached resources.
+
 - Preserve virtual `/index.html` and `/index.htm` playground files when preparing
   the documentation for GitHub Pages; DOM and Web Component examples now render.
 - Load browser test libraries with CORS enabled so external script errors expose

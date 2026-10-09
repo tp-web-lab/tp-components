@@ -472,6 +472,14 @@ export abstract class TpPlayground<
 		try {
 			const documentResult = await this.buildTestDocument(this.project);
 
+			this.cleanupExecution?.();
+			this.cleanupExecution = documentResult.cleanup ?? null;
+			this.viewerIframeResizeObserver?.disconnect();
+			this.viewerIframeResizeObserver = null;
+			this.viewerIframeMutationObserver?.disconnect();
+			this.viewerIframeMutationObserver = null;
+			this.iframeEl.style.blockSize = "1px";
+			this.iframeEl.hidden = false;
 			this.iframeEl.setAttribute("srcdoc", documentResult.html);
 		} catch (error: unknown) {
 			this.reportError(error, "Tests are not supported.");
@@ -1504,7 +1512,24 @@ export abstract class TpPlayground<
 			documentNode.body !== null &&
 			typeof ResizeObserver !== "undefined"
 		) {
-			this.viewerIframeResizeObserver = new ResizeObserver(sync);
+			// Resizing the iframe changes the observed document itself. Defer
+			// those writes until the next frame, outside ResizeObserver delivery,
+			// and coalesce notifications from both observed elements.
+			let pending = false;
+			const observer = new ResizeObserver(() => {
+				if (pending) return;
+				pending = true;
+				requestAnimationFrame(() => {
+					pending = false;
+					if (
+						this.viewerIframeResizeObserver !== observer ||
+						this.iframeEl?.contentDocument !== documentNode
+					)
+						return;
+					sync();
+				});
+			});
+			this.viewerIframeResizeObserver = observer;
 			this.viewerIframeResizeObserver.observe(documentNode.body);
 			if (documentNode.documentElement !== null) {
 				this.viewerIframeResizeObserver.observe(documentNode.documentElement);
@@ -2007,17 +2032,16 @@ export abstract class TpPlayground<
 		const canSave =
 			this.activeFile !== null &&
 			this.project.findFile(this.activeFile) !== undefined;
-		this.toolbarStartMenuEl
-			?.querySelectorAll<HTMLElement>(
+		this.toolbarStartMenuEl?.querySelectorAll<HTMLElement>(
+			'[data-tp-playground-action="save-file"], [data-tp-playground-action="save-file-as"]',
+		);
+		if (this.toolbarStartMenuEl) {
+			for (const item of this.toolbarStartMenuEl.querySelectorAll<HTMLElement>(
 				'[data-tp-playground-action="save-file"], [data-tp-playground-action="save-file-as"]',
-			)
-			if (this.toolbarStartMenuEl) {
-				for (const item of this.toolbarStartMenuEl.querySelectorAll<HTMLElement>(
-					'[data-tp-playground-action="save-file"], [data-tp-playground-action="save-file-as"]',
-				)) {
-					item.setAttribute("aria-disabled", String(!canSave));
-				}
+			)) {
+				item.setAttribute("aria-disabled", String(!canSave));
 			}
+		}
 		if (this.editorEl === null) {
 			return;
 		}
