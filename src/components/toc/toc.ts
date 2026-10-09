@@ -245,7 +245,17 @@ export class TpToc extends TpBase {
 				continue;
 			}
 
-			const title = heading.textContent?.trim() ?? "";
+			// Icon SVG titles and fallback labels are not heading text. Read
+			// text nodes without cloning custom elements or altering the heading.
+			const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT, {
+				acceptNode: (node) =>
+					node.parentElement?.closest("tp-icon, script, style")
+						? NodeFilter.FILTER_REJECT
+						: NodeFilter.FILTER_ACCEPT,
+			});
+			let text = "";
+			while (walker.nextNode()) text += walker.currentNode.textContent ?? "";
+			const title = text.replace(/\s+/g, " ").trim();
 			if (title === "") {
 				continue;
 			}

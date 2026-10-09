@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Exclude component icon labels from local table-of-contents entries.
+
 - Remove redundant in-frame resize observation during playground initialization;
   the parent continues to fit previews to dynamic content.
 
