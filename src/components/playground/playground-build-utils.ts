@@ -876,13 +876,9 @@ window.addEventListener('load', () => {
   tpPlaygroundReportHeight();
 });
 
-if (typeof ResizeObserver !== 'undefined') {
-  const observer = new ResizeObserver(() => {
-    tpPlaygroundReportHeight();
-  });
-
-  observer.observe(document.documentElement);
-}
+// TpPlayground observes the loaded document from the parent. A second
+// observer here starts during parsing and can report resize-loop errors in
+// Safari while the initial iframe layout is still settling.
 </script>
 `;
 }

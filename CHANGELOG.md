@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Remove redundant in-frame resize observation during playground initialization;
+  the parent continues to fit previews to dynamic content.
+
 - Reset hidden previews and outgoing observers before browser tests, and defer
   preview resizing outside ResizeObserver delivery, preventing Safari errors
   when test libraries load without cached resources.
