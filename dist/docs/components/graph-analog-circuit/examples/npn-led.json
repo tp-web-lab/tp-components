@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "title": "NPN transistor driving an LED",
+  "nodes": [
+    {
+      "id": "VCC",
+      "type": "analog-voltage-source",
+      "x": 100,
+      "y": 135,
+      "label": "5 V",
+      "data": {
+        "voltage": 5,
+        "waveform": "dc",
+        "angle": 270,
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "RC",
+      "type": "analog-resistor",
+      "x": 250,
+      "y": 100,
+      "label": "330 Ω",
+      "data": {
+        "resistance": 330,
+        "angle": 0
+      }
+    },
+    {
+      "id": "LED",
+      "type": "analog-led",
+      "x": 390,
+      "y": 100,
+      "label": "LED",
+      "data": {
+        "forwardVoltage": 1.8,
+        "angle": 0
+      }
+    },
+    {
+      "id": "Q1",
+      "type": "analog-transistor-npn",
+      "x": 480,
+      "y": 188,
+      "label": "Q1 NPN",
+      "data": {
+        "kind": "npn",
+        "angle": 0
+      }
+    },
+    {
+      "id": "VIN",
+      "type": "analog-voltage-source",
+      "x": 320,
+      "y": 239,
+      "label": "Control",
+      "data": {
+        "voltage": 5,
+        "waveform": "square",
+        "frequency": 50,
+        "angle": 90,
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "RB",
+      "type": "analog-resistor",
+      "x": 380,
+      "y": 188,
+      "label": "10 kΩ",
+      "data": {
+        "resistance": 10000,
+        "displayScale": 1000,
+        "angle": 0
+      }
+    },
+    {
+      "id": "GND",
+      "type": "analog-ground",
+      "x": 320,
+      "y": 340,
+      "label": "GND"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "type": "analog-wire",
+      "source": "VCC",
+      "sourcePort": "north",
+      "target": "RC",
+      "targetPort": "west",
+      "direction": "none",
+      "routing": "straight"
+    },
+    {
+      "id": "e2",
+      "type": "analog-wire",
+      "source": "RC",
+      "sourcePort": "east",
+      "target": "LED",
+      "targetPort": "west",
+      "direction": "none",
+      "routing": "straight"
+    },
+    {
+      "id": "e3",
+      "type": "analog-wire",
+      "source": "LED",
+      "sourcePort": "east",
+      "target": "Q1",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "data": {
+        "measurements": [
+          {
+            "id": "m-collector",
+            "position": 0.78,
+            "label": "Collector"
+          }
+        ]
+      },
+      "elbows": 1,
+      "departure": "horizontal",
+      "turns": "alternating"
+    },
+    {
+      "id": "e4",
+      "type": "analog-wire",
+      "source": "VIN",
+      "sourcePort": "north",
+      "target": "RB",
+      "targetPort": "west",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "e5",
+      "type": "analog-wire",
+      "source": "RB",
+      "sourcePort": "east",
+      "target": "Q1",
+      "targetPort": "west",
+      "direction": "none",
+      "routing": "straight"
+    },
+    {
+      "id": "e6",
+      "type": "analog-wire",
+      "source": "Q1",
+      "sourcePort": "south",
+      "target": "GND",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "e8",
+      "type": "analog-wire",
+      "source": "GND",
+      "sourcePort": "north",
+      "target": "VCC",
+      "targetPort": "south",
+      "direction": "none",
+      "routing": "orthogonal",
+      "bendX": 100
+    },
+    {
+      "id": "edge-1",
+      "source": "VIN",
+      "target": "GND",
+      "type": "analog-wire",
+      "sourcePort": "south",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "vertical",
+      "turns": "alternating"
+    }
+  ]
+}

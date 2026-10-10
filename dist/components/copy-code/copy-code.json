@@ -1,0 +1,111 @@
+{
+  "tagname": "tp-copy-code",
+  "classname": "TpCopyCode",
+  "superclass": "TpBase",
+  "description": "Copies the textual content of a target component to the clipboard.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-box>\n<tp-box id=\"intro-copy-code\" style=\"width:300px\">\n<pre><code>const answer = 6 * 7;</code></pre>\n</tp-box>\n<tp-copy-code for=\"intro-copy-code\"></tp-copy-code>\n</tp-box>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "copied-text",
+      "description": "Libellé accessible après une copie réussie. Valeur par défaut : `Copied!`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "Copied!"
+    },
+    {
+      "name": "error-icon",
+      "description": "Nom de l’icône affichée après une erreur. Valeur par défaut : `warning`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "warning"
+    },
+    {
+      "name": "for",
+      "description": "Identifiant de l’élément cible.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "icon",
+      "description": "Nom de l’icône affichée à l’état normal. Valeur par défaut : `copy`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "copy"
+    },
+    {
+      "name": "success-icon",
+      "description": "Nom de l’icône affichée après une copie réussie. Valeur par défaut : `check`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "check"
+    }
+  ],
+  "methods": [
+    {
+      "name": "copy(): Promise<boolean>",
+      "inherited": false,
+      "description": "Copie le contenu texte de la cible."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-copy-code-error",
+      "description": "Émis quand la copie a échoué.",
+      "detail": "{ message: string }"
+    },
+    {
+      "name": "tp-copy-code-success",
+      "description": "Émis quand la copie a réussi.",
+      "detail": "{ length: unknown; target: unknown }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-copy-code-error-color",
+      "default": "red",
+      "description": "Controls the error color."
+    },
+    {
+      "name": "--tp-copy-code-success-color",
+      "default": "green",
+      "description": "Controls the success color."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-animation",
+      "summary": "Applies an animation to a target element."
+    },
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Copy code",
+    "introduction": "The custom `<tp-copy-code>` element implements the <tp-icon name=\"copy-code\" library=\"components\" size=\"1.25em\"></tp-icon> Copy code functionality: copies the textual content of a target component to the clipboard.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Copy button | Copy the associated text. On code blocks, the button appears at the top right on hover or keyboard focus. |\n| Check mark | Temporarily confirms that the copy succeeded. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

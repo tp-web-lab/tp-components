@@ -1,0 +1,20 @@
+{
+  "repository": [
+    {
+      "label": "Default",
+      "value": "/docs"
+    },
+    {
+      "label": "file1",
+      "value": "/docs/components/markup-multi-pages/docs"
+    },
+    {
+      "label": "file2",
+      "value": "/docs/components/markdown-multi-pages/docs"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/docs/components/markdown-multi-pages/examples/attributes-repository-file-unknown"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+<tp-html-viewer label="tp-tabs" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-tabs>
+              <dl>
+                <dt>Tab 1</dt>
+                <dd>Content of panel <tp-icon size="2em" name="numeric-1"></tp-icon></dd>
+                <dt>Tab 2</dt>
+                <dd>Content of panel <tp-icon size="2em" name="numeric-2"></tp-icon></dd>
+                <dt>Tab 3</dt>
+                <dd>Content of panel <tp-icon size="2em" name="numeric-3"></tp-icon></dd>
+                <dt>Tab 4</dt>
+                <dd>Content of panel <tp-icon size="2em" name="numeric-4"></tp-icon></dd>
+              </dl>
+            </tp-tabs>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+
+      <tp-radio-list data-setting="activation" label="activation" label-position="top" orientation="horizontal" value="1"><ul><li>auto</li><li>manual</li></ul></tp-radio-list>
+      <tp-radio-list data-setting="orientation" label="orientation" label-position="top" orientation="horizontal" value="1"><ul><li>horizontal</li><li>vertical</li></ul></tp-radio-list>
+      <tp-cluster><tp-textfield data-setting="selected" label="selected" value="0" placeholder="0" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="tabs attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/docs/components/tabs/examples/attributes.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

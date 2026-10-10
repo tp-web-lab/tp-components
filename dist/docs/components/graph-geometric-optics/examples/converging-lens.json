@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "title": "Converging lens experiment",
+  "data": { "axisY": 240 },
+  "nodes": [
+    { "id": "object", "type": "optics-source", "x": 100, "y": 240, "label": "Object", "data": { "height": 60, "rayCount": 3 } },
+    { "id": "lens", "type": "optics-converging-lens", "x": 300, "y": 240, "label": "L1", "data": { "focalLength": 100 } },
+    { "id": "screen", "type": "optics-screen", "x": 500, "y": 240, "label": "Screen" }
+  ],
+  "edges": []
+}

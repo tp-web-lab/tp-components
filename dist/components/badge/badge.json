@@ -1,0 +1,116 @@
+{
+  "tagname": "tp-badge",
+  "classname": "TpBadge",
+  "superclass": "TpBase",
+  "description": "Compact status label.\nColors are derived from the shared `tp.css` semantic tokens.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<p>\n  Build status: <tp-badge variant=\"success\" pulse>Ready</tp-badge>\n  <tp-badge outlined><tp-icon name=\"file_type_vite\" library=\"languages\"></tp-icon> Vite<tp-divider orientation=\"vertical\"></tp-divider>8.1.5</tp-badge>\n</p>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "outlined",
+      "description": "Removes the filled background and uses the accent color for the border and text.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "pill",
+      "description": "Uses a fully rounded badge shape.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "pulse",
+      "description": "Makes the badge pulse to attract attention.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "size",
+      "description": "Badge size (`xxs`, `xs`, `s`, `m`, `l`, `xl`, or `xxl`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpSizeType",
+      "default": "m"
+    },
+    {
+      "name": "variant",
+      "description": "Visual variant (`success`, `danger`, `warning`, `info`, `neutral`, or `brand`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpVariantType",
+      "default": "neutral"
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-badge-accent",
+      "default": "var(--tp-brand-text-colorful)",
+      "description": "Accent color."
+    },
+    {
+      "name": "--tp-badge-background",
+      "default": "transparent",
+      "description": "Background color."
+    },
+    {
+      "name": "--tp-badge-border-color",
+      "default": "var(--tp-badge-accent)",
+      "description": "Border color."
+    },
+    {
+      "name": "--tp-badge-font-size",
+      "default": "1.125em",
+      "description": "Font size."
+    },
+    {
+      "name": "--tp-badge-foreground",
+      "default": "var(--tp-badge-accent)",
+      "description": "Text color."
+    },
+    {
+      "name": "--tp-badge-padding-block",
+      "default": "0.6em",
+      "description": "Block padding."
+    },
+    {
+      "name": "--tp-badge-padding-inline",
+      "default": "1em",
+      "description": "Inline padding."
+    },
+    {
+      "name": "--tp-badge-radius",
+      "default": "999em",
+      "description": "Border radius."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Badge",
+    "introduction": "The custom `<tp-badge>` element implements the <tp-icon name=\"badge\" library=\"components\" size=\"1.25em\"></tp-icon> Badge functionality: compact status label.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

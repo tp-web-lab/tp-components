@@ -1,0 +1,61 @@
+{
+  "tagname": "tp-csv-table",
+  "classname": "TpCsvTable",
+  "superclass": "TpBase",
+  "description": "creates an HTML table from CSV text or a CSV file.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-csv-table heading>\n<script type=\"tp/csv-table\">\nCountry,Capital\nEstonia,Tallinn\nLatvia,Riga\nLithuania,Vilnius\n</script>\n</tp-csv-table>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "heading",
+      "description": "Uses the first row as column headings.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "separator",
+      "description": "One-character field separator; use \\t for a tab.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\",\""
+    },
+    {
+      "name": "src",
+      "description": "CSV file URL; takes precedence over inline source.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-callout",
+      "summary": "Callout component for highlighted contextual content."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "CSV table",
+    "introduction": "The custom `<tp-csv-table>` element implements the CSV table functionality: creates an HTML table from CSV text or a CSV file.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Table | Read and select the cell content. Wide tables can be scrolled horizontally. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Table | No table-specific keyboard shortcut. Embedded links and controls retain their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

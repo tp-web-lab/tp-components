@@ -1,0 +1,70 @@
+{
+  "tagname": "tp-restructuredtext",
+  "classname": "TpRestructuredText",
+  "superclass": "TpBase",
+  "description": "Renders inline or external reStructuredText as HTML.\n\nThe browser runtime and the Docutils package are loaded lazily when the first\ndocument is rendered.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-restructuredtext>\n      <script type=\"tp/restructuredtext\">\n        Hello, **Docutils**!\n      </script>\n    </tp-restructuredtext>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "doctest",
+      "description": "Runs standard Python doctest blocks and reports their result.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "URL of an external reStructuredText source file.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-restructuredtext-doctest",
+      "description": "Emitted after the document doctests have run.",
+      "detail": "TpRestructuredTextDoctestResult"
+    },
+    {
+      "name": "tp-restructuredtext-rendered",
+      "description": "Emitted after conversion completes.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-restructuredtext",
+      "url": "https://www.npmjs.com/package/@tp/tp-restructuredtext",
+      "summary": "reStructuredText parsing and rendering."
+    },
+    {
+      "name": "highlight.js",
+      "url": "https://highlightjs.org/",
+      "summary": "Source-code syntax highlighting."
+    }
+  ],
+  "userHelp": {
+    "displayName": "reStructuredText",
+    "introduction": "The custom `<tp-restructuredtext>` element implements the <tp-icon name=\"restructuredtext\" library=\"components\" size=\"1.25em\"></tp-icon> reStructuredText functionality: reStructuredText rendering component.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Read the displayed content and use its links and embedded controls. |\n| Using the component | The component itself adds no editing or playback controls. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

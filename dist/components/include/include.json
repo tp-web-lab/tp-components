@@ -1,0 +1,125 @@
+{
+  "tagname": "tp-include",
+  "classname": "TpInclude",
+  "superclass": "TpBase",
+  "description": "Loads remote HTML content.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-include></tp-include>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "allow-scripts",
+      "description": "Allows included scripts to run.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "allow-styles",
+      "description": "Keeps included `<style>` and stylesheet links.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "fallback",
+      "description": "CSS selector for fallback content displayed on error.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "fetch-mode",
+      "description": "Fetch mode (`cors`, `no-cors`, or `same-origin`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"cors\""
+    },
+    {
+      "name": "loading",
+      "description": "Text shown while loading.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "mode",
+      "description": "Inclusion mode (`auto` or `raw`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"auto\""
+    },
+    {
+      "name": "sanitize",
+      "description": "Sanitizes included HTML with DOMPurify.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "HTML source URL.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "reload(): Promise<void>",
+      "inherited": false,
+      "description": "Reloads the included content."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-include-error",
+      "description": "Emitted when loading or injecting content fails.",
+      "detail": "{ src: string; fetchMode: \"cors\" | \"no-cors\" | \"same-origin\"; allowScripts: boolean; allowStyles: boolean; sanitize: boolean; scriptsExecuted: false; error: string }"
+    },
+    {
+      "name": "tp-include-load",
+      "description": "Emitted after content is loaded and injected.",
+      "detail": "{ src: string; fetchMode: \"cors\" | \"no-cors\" | \"same-origin\"; allowScripts: boolean; allowStyles: boolean; sanitize: boolean; scriptsExecuted: boolean }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [
+    {
+      "name": "DOMPurify",
+      "url": "https://github.com/cure53/DOMPurify",
+      "summary": "HTML sanitization."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Include",
+    "introduction": "The custom `<tp-include>` element implements the <tp-icon name=\"include\" library=\"components\" size=\"1.25em\"></tp-icon> Include functionality: loads remote HTML into the light DOM.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Read the displayed content and use its links and embedded controls. |\n| Using the component | The component itself adds no editing or playback controls. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

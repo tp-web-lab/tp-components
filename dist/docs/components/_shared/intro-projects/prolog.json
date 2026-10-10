@@ -1,0 +1,17 @@
+{
+  "name": "Family relations",
+  "entry": "/program.pl",
+  "query": "/query.pl",
+  "files": [
+    {
+      "path": "/program.pl",
+      "language": "prolog",
+      "content": "parent(ada, byron).\nparent(byron, charles).\ngrandparent(A, C) :- parent(A, B), parent(B, C)."
+    },
+    {
+      "path": "/query.pl",
+      "language": "prolog",
+      "content": "grandparent(ada, Grandchild)."
+    }
+  ]
+}

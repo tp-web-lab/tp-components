@@ -1,0 +1,9 @@
+classDiagram
+  Component <|-- Diagram
+  class Component {
+    +connectedCallback()
+  }
+  class Diagram {
+    +src: string
+    +label: string
+  }

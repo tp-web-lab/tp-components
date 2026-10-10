@@ -1,0 +1,118 @@
+{
+  "tagname": "tp-flip-card",
+  "classname": "TpFlipCard",
+  "superclass": "TpBase",
+  "description": "Displays a two-sided card.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-flip-card></tp-flip-card>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "button-position",
+      "description": "Position of the overlaid flip button, or none to hide it.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"bottom end\""
+    },
+    {
+      "name": "disabled",
+      "description": "Prevents the card from being flipped.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "fit-content",
+      "description": "Adapts the card dimensions to its verso content.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "flipped",
+      "description": "Shows the verso when present.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [
+    {
+      "name": "flip(): boolean",
+      "inherited": false,
+      "description": "Flips the card and returns its new state."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-flip-card-change",
+      "description": "Emitted after the visible side changes.",
+      "detail": "{ flipped: unknown }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-flip-card-aspect-ratio",
+      "default": "5 / 7",
+      "description": "Card aspect ratio."
+    },
+    {
+      "name": "--tp-flip-card-background",
+      "default": "var(--tp-paper-color, #fff)",
+      "description": "Card face background."
+    },
+    {
+      "name": "--tp-flip-card-border-color",
+      "default": "var(--tp-neutral-stroke-soft, #d6d9df)",
+      "description": "Card border color."
+    },
+    {
+      "name": "--tp-flip-card-border-radius",
+      "default": "var(--tp-border-radius-lg, 0.5625rem)",
+      "description": "Card border radius."
+    },
+    {
+      "name": "--tp-flip-card-button-offset",
+      "default": "0.5rem",
+      "description": "Distance between the button and the card edge."
+    },
+    {
+      "name": "--tp-flip-card-padding",
+      "default": "1rem",
+      "description": "Card face padding."
+    },
+    {
+      "name": "--tp-flip-card-width",
+      "default": "12rem",
+      "description": "Card width."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Flip card",
+    "introduction": "",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Flip button | Switch between the front and back of the card. |\n| Card without a flip button | Click the card itself to flip it. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Flip the focused card or activate its flip button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "tagname": "tp-checkbox-list",
+  "classname": "TpCheckboxList",
+  "superclass": "TpBase",
+  "description": "Transforms list items into checkbox options.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-checkbox-list value=\"1,3\">\n<ul>\n<li>HTML</li>\n<li>CSS</li>\n<li>JavaScript</li>\n</ul>\n</tp-checkbox-list>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "label",
+      "description": "Visible accessible group label; no fieldset is created.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label-position",
+      "description": "Group label position (`top`, `bottom`, `start`, or `end`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"top\""
+    },
+    {
+      "name": "name",
+      "description": "Checkbox group name used on generated inputs.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "orientation",
+      "description": "Item layout direction (`vertical` or `horizontal`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"vertical\""
+    },
+    {
+      "name": "value",
+      "description": "Comma-separated 1-based indexes of checked items (e.g. `\"2,4\"`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Resets checked items to the initial value."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-checkbox-list-change",
+      "description": "Emitted when selection changes (`detail: { value, label }`).",
+      "detail": "{ value: string; label: unknown }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-checkbox-list-marker-gap",
+      "default": "0.5em",
+      "description": "Controls the marker gap."
+    },
+    {
+      "name": "--tp-checkbox-list-marker-width",
+      "default": "2ch",
+      "description": "Controls the marker width."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Checkbox list",
+    "introduction": "The custom `<tp-checkbox-list>` element implements the <tp-icon name=\"checkbox-list\" library=\"components\" size=\"1.25em\"></tp-icon> Checkbox list functionality: transforms list items into checkbox options.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Option | Click to select or clear it; several options can be selected. |\n| Hover | Highlights an enabled option without changing its selection. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus a checkbox. |\n| Space | Select or clear the focused checkbox. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

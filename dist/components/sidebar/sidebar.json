@@ -1,0 +1,77 @@
+{
+  "tagname": "tp-sidebar",
+  "classname": "TpSidebar",
+  "superclass": "TpBase",
+  "description": "Creates a two-column sidebar and content layout.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-sidebar></tp-sidebar>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "content-width",
+      "description": "Minimum percentage of the container width reserved for the content column. When absent, uses the --tp-sidebar-content-width CSS default.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"50%\""
+    },
+    {
+      "name": "gap",
+      "description": "Gap between sidebar and content. When absent, uses --tp-sidebar-gap, with a fallback of 1rem.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1rem\""
+    },
+    {
+      "name": "right-sidebar",
+      "description": "Uses the last child as the sidebar instead of the first child.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "side-width",
+      "description": "Preferred sidebar width before flex space is distributed. By default, uses the item's own width or content-based size through --tp-sidebar-side-width.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"auto\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-sidebar-content-width",
+      "default": "50%",
+      "description": "Default content column width."
+    },
+    {
+      "name": "--tp-sidebar-gap",
+      "default": "1rem",
+      "description": "Default gap between sidebar and content."
+    },
+    {
+      "name": "--tp-sidebar-side-width",
+      "default": "auto",
+      "description": "Default sidebar column width."
+    }
+  ],
+  "dependencies": [],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Sidebar",
+    "introduction": "The custom `<tp-sidebar>` element implements the <tp-icon name=\"sidebar\" library=\"components\" size=\"1.25em\"></tp-icon> Sidebar functionality: creates a two-column sidebar and content layout.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Read or use the content in the side panel. Any links and controls inside it retain their usual actions. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

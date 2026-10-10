@@ -1,0 +1,14 @@
+{
+  "id": "03-md-mermaid",
+  "label": "Mermaid",
+  "name": "Mermaid",
+  "entry": "/index.md",
+  "extensions": [
+    {
+      "id": "mermaid",
+      "label": "Mermaid",
+      "url": "/extensions/markdown/mermaid/index.js",
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,378 @@
+{
+  "version": 1,
+  "title": "NAND-only circuit",
+  "nodes": [
+    {
+      "id": "a",
+      "type": "logic-input",
+      "x": 60,
+      "y": 60,
+      "label": "a",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "b",
+      "type": "logic-input",
+      "x": 60,
+      "y": 180,
+      "label": "b",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "c",
+      "type": "logic-input",
+      "x": 60,
+      "y": 340,
+      "label": "c",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "d",
+      "type": "logic-input",
+      "x": 60,
+      "y": 460,
+      "label": "d",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "not-a",
+      "type": "logic-nand",
+      "x": 180,
+      "y": 80,
+      "label": "NAND"
+    },
+    {
+      "id": "not-b",
+      "type": "logic-nand",
+      "x": 180,
+      "y": 200,
+      "label": "NAND"
+    },
+    {
+      "id": "not-c",
+      "type": "logic-nand",
+      "x": 180,
+      "y": 320,
+      "label": "NAND"
+    },
+    {
+      "id": "not-d",
+      "type": "logic-nand",
+      "x": 180,
+      "y": 440,
+      "label": "NAND"
+    },
+    {
+      "id": "or-ab",
+      "type": "logic-nand",
+      "x": 340,
+      "y": 140,
+      "label": "NAND"
+    },
+    {
+      "id": "not-or-ab",
+      "type": "logic-nand",
+      "x": 480,
+      "y": 140,
+      "label": "NAND"
+    },
+    {
+      "id": "not-not-c-and-not-d",
+      "type": "logic-nand",
+      "x": 340,
+      "y": 380,
+      "label": "NAND"
+    },
+    {
+      "id": "not-product",
+      "type": "logic-nand",
+      "x": 620,
+      "y": 260,
+      "label": "NAND"
+    },
+    {
+      "id": "s-gate",
+      "type": "logic-nand",
+      "x": 740,
+      "y": 260,
+      "label": "NAND"
+    },
+    {
+      "id": "s",
+      "type": "logic-output",
+      "x": 840,
+      "y": 260,
+      "label": "s",
+      "state": {
+        "value": false
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "a-na-1",
+      "source": "a",
+      "target": "not-a",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "a-na-2",
+      "source": "a",
+      "target": "not-a",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical"
+    },
+    {
+      "id": "b-nb-1",
+      "source": "b",
+      "target": "not-b",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "b-nb-2",
+      "source": "b",
+      "target": "not-b",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical"
+    },
+    {
+      "id": "c-nc-1",
+      "source": "c",
+      "target": "not-c",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "c-nc-2",
+      "source": "c",
+      "target": "not-c",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical"
+    },
+    {
+      "id": "d-nd-1",
+      "source": "d",
+      "target": "not-d",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "d-nd-2",
+      "source": "d",
+      "target": "not-d",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical"
+    },
+    {
+      "id": "na-or",
+      "source": "not-a",
+      "target": "or-ab",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "turns": "alternating"
+    },
+    {
+      "id": "nb-or",
+      "source": "not-b",
+      "target": "or-ab",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "turns": "alternating"
+    },
+    {
+      "id": "or-x-1",
+      "source": "or-ab",
+      "target": "not-or-ab",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating",
+      "bendX": 400
+    },
+    {
+      "id": "or-x-2",
+      "source": "or-ab",
+      "target": "not-or-ab",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical"
+    },
+    {
+      "id": "nc-y",
+      "source": "not-c",
+      "target": "not-not-c-and-not-d",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "turns": "alternating"
+    },
+    {
+      "id": "nd-y",
+      "source": "not-d",
+      "target": "not-not-c-and-not-d",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "turns": "alternating"
+    },
+    {
+      "id": "x-product",
+      "source": "not-or-ab",
+      "target": "not-product",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "turns": "alternating",
+      "bendX": 550,
+      "data": {
+        "measurements": [
+          {
+            "id": "measurement-1",
+            "position": 0.21,
+            "label": "p1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "y-product",
+      "source": "not-not-c-and-not-d",
+      "target": "not-product",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "turns": "alternating",
+      "bendX": 550,
+      "data": {
+        "measurements": [
+          {
+            "id": "measurement-2",
+            "position": 0.54,
+            "label": "p2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "product-s-1",
+      "source": "not-product",
+      "target": "s-gate",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "product-s-2",
+      "source": "not-product",
+      "target": "s-gate",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical"
+    },
+    {
+      "id": "s-output",
+      "source": "s-gate",
+      "target": "s",
+      "type": "logic-wire",
+      "sourcePort": "east",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "straight"
+    }
+  ]
+}

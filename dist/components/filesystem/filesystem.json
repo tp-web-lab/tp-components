@@ -1,0 +1,171 @@
+{
+  "tagname": "tp-filesystem",
+  "classname": "TpFilesystem",
+  "superclass": "TpBase",
+  "description": "In-memory file system with a file tree UI.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-filesystem></tp-filesystem>"
+    }
+  ],
+  "attributes": [],
+  "methods": [
+    {
+      "name": "addFile(file: TpFile): void",
+      "inherited": false,
+      "description": "Adds a file."
+    },
+    {
+      "name": "closeFile(path: string): void",
+      "inherited": false,
+      "description": "Closes an open file."
+    },
+    {
+      "name": "deleteFile(path: string): void",
+      "inherited": false,
+      "description": "Deletes a file."
+    },
+    {
+      "name": "getActivePath(): string | null",
+      "inherited": false,
+      "description": "Returns the active file path."
+    },
+    {
+      "name": "getDirtyPaths(): string[]",
+      "inherited": false,
+      "description": "Returns dirty file paths."
+    },
+    {
+      "name": "getFiles(): TpFile[]",
+      "inherited": false,
+      "description": "Returns all files."
+    },
+    {
+      "name": "getState(): TpFilesystemState",
+      "inherited": false,
+      "description": "Returns the full file system state."
+    },
+    {
+      "name": "moveFile(oldPath: string, newPath: string): void",
+      "inherited": false,
+      "description": "Moves a file."
+    },
+    {
+      "name": "openFile(path: string, emitEvent = true): void",
+      "inherited": false,
+      "description": "Opens a file and makes it active."
+    },
+    {
+      "name": "readFile(path: string): string | null",
+      "inherited": false,
+      "description": "Reads a file."
+    },
+    {
+      "name": "renameFile(oldPath: string, newPath: string): void",
+      "inherited": false,
+      "description": "Renames a file."
+    },
+    {
+      "name": "setActivePath(path: string | null, emitEvent = true): void",
+      "inherited": false,
+      "description": "Sets the active file path."
+    },
+    {
+      "name": "setDirtyPaths(paths: readonly string[]): void",
+      "inherited": false,
+      "description": "Replaces dirty file paths."
+    },
+    {
+      "name": "setFiles(files: readonly TpFile[]): void",
+      "inherited": false,
+      "description": "Replaces all files."
+    },
+    {
+      "name": "setState(state: TpFilesystemState): void",
+      "inherited": false,
+      "description": "Replaces the full file system state."
+    },
+    {
+      "name": "writeFile(path: string, content: string): void",
+      "inherited": false,
+      "description": "Writes file content."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-filesystem-active",
+      "description": "Emitted when the active file changes.",
+      "detail": "{ path: string }"
+    },
+    {
+      "name": "tp-filesystem-add",
+      "description": "Emitted when a file is added.",
+      "detail": "{ path: string }"
+    },
+    {
+      "name": "tp-filesystem-change",
+      "description": "Emitted when the file list changes.",
+      "detail": "{ files: TpFile[] }"
+    },
+    {
+      "name": "tp-filesystem-delete",
+      "description": "Emitted when a file is deleted.",
+      "detail": "{ path: string }"
+    },
+    {
+      "name": "tp-filesystem-move",
+      "description": "Emitted when a file is moved.",
+      "detail": "{ oldPath: string; newPath: string }"
+    },
+    {
+      "name": "tp-filesystem-open",
+      "description": "Emitted when a file is opened.",
+      "detail": "{ path: string }"
+    },
+    {
+      "name": "tp-filesystem-rename",
+      "description": "Emitted when a file or directory is renamed.",
+      "detail": "{ oldPath: string; newPath: string }"
+    },
+    {
+      "name": "tp-filesystem-write",
+      "description": "Emitted when file content is written.",
+      "detail": "{ path: string; content: string }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-font-family",
+      "default": "system-ui, sans-serif",
+      "description": "Font family used by the file system."
+    },
+    {
+      "name": "--tp-font-size",
+      "default": "1rem",
+      "description": "Font size used by the file system."
+    },
+    {
+      "name": "--tp-line-height",
+      "default": "1.5",
+      "description": "Line height used by the file system."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-file-tree",
+      "summary": "Displays an interactive file and folder tree."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Filesystem",
+    "introduction": "The custom `<tp-filesystem>` element implements the <tp-icon name=\"filesystem\" library=\"components\" size=\"1.25em\"></tp-icon> Filesystem functionality: in-memory file system with a file tree UI.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Use the file browser to navigate folders and select files. |\n| Using the component | File access may require permission from the browser. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

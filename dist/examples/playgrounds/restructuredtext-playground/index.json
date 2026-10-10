@@ -1,0 +1,12 @@
+{
+  "examples": [
+    "01-rst-basic",
+    "02-rst-math",
+    "03-rst-mermaid",
+    "04-rst-design",
+    "05-rst-music",
+    "06-rst-map",
+    "07-rst-references",
+    "08-rst-web-component"
+  ]
+}

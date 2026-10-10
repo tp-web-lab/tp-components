@@ -1,0 +1,138 @@
+[tp-asciidoc-viewer%allow-script,label="tp-textfield"]
+=========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-textfield%clearable,label="Single line",placeholder="Type some text..."]
+====
+====
+======
+
+.Attributes
+========
+Change several attributes on one preview. All controls start at their documented defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Reset defaults fills the controls with their defaults again. Controls stay available when the preview is disabled or readonly.
+
+[tp-stack]
+======
+[tp-checkbox-list%value,id="textfield-booleans",label="Boolean attributes",label-position="top",orientation="horizontal"]
+====
+* clearable
+
+* disabled
+
+* multiline
+
+* readonly
+
+* required
+====
+
+[tp-radio-list,data-setting="label-position",label="label-position",label-position="top",orientation="horizontal",value="1"]
+====
+* top
+
+* bottom
+
+* start
+
+* end
+====
+
+[tp-radio-list,data-setting="type",label="type",label-position="top",orientation="horizontal",value="1"]
+====
+* text
+
+* email
+
+* password
+
+* search
+
+* tel
+
+* url
+====
+
+[tp-cluster]
+=====
+[tp-textfield%value%placeholder%clearable,data-setting="aria-label",label="aria-label"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="autocomplete",label="autocomplete"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="icon",label="icon"]
+====
+====
+
+[tp-textfield%clearable,data-setting="icon-library",label="icon-library",value="tp",placeholder="tp"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="label",label="label"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="name",label="name"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="placeholder",label="placeholder"]
+====
+====
+
+[tp-textfield%clearable,data-setting="rows",label="rows",value="3",placeholder="3"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="value",label="value"]
+====
+====
+=====
+
+[tp-button,id="textfield-reset",type="button"]
+====
+Reset defaults
+====
+======
+
+[tp-divider]
+====
+====
+
+[h3]
+====
+Preview
+====
+
+[tp-box]
+=====
+[tp-textfield,id="textfield-preview"]
+====
+====
+=====
+
+[tp-box,id="textfield-readout",aria-live="polite"]
+====
+Reading native attributes…
+====
+
+[tp-callout,variant="info",heading="Things to try"]
+====
+Set label or aria-label to give the preview an accessible name. Choose type email and enter email in autocomplete, then focus the preview to try browser-managed suggestions (saved data and browser settings are required). Enable multiline to test rows. Type applies to single-line inputs only. Enable clearable to show the clear button; it is hidden otherwise.
+====
+
+[script,type="module",src="/docs/components/textfield/examples/attributes.js"]
+====
+====
+========
+
+.Inline named field
+======
+Value: [tp-textfield,value="Ada",placeholder="Enter a value"]#identifier#
+======
+----
+=========

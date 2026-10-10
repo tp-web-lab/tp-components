@@ -1,0 +1,4 @@
+= Page not found
+:showtitle:
+
+The requested AsciiDoc page could not be loaded: `{{ href }}`.

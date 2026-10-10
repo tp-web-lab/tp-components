@@ -1,0 +1,14 @@
+{
+  "id": "01-rst-basic",
+  "label": "Basic",
+  "name": "reStructuredText basic",
+  "entry": "/index.rst",
+    "extensions": [
+    {
+      "id": "rst-highlight-style",
+      "label": "highlight.js",
+      "url": "/extensions/restructuredtext/highlightjs/index.js",
+      "enabled": true
+    }
+  ]
+}

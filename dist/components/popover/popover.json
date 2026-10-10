@@ -1,0 +1,96 @@
+{
+  "tagname": "tp-popover",
+  "classname": "TpPopover",
+  "superclass": "TpOverlayElement",
+  "description": "Displays anchored popover content.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-popover></tp-popover>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "anchor",
+      "description": "CSS selector of the anchor element.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "backdrop",
+      "description": "Displays a transparent backdrop behind the popover.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "offset",
+      "description": "Distance between the anchor and the popover.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"8px\""
+    },
+    {
+      "name": "open",
+      "description": "Opens the popover.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "outside-click",
+      "description": "Closes the popover when the user clicks outside it.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "placement",
+      "description": "Popover placement relative to the anchor.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpPopoverPlacement",
+      "default": "\"bottom\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "toggle(): void",
+      "inherited": false,
+      "description": "Toggles the popover."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-popover-toggle",
+      "description": "Emitted when the popover open state changes.",
+      "detail": "{ backdrop: boolean; open: boolean; outsideClick: boolean; anchor: string; placement: \"top\" | \"end\" | \"bottom\" | \"start\" }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Popover",
+    "introduction": "The custom `<tp-popover>` element implements the <tp-icon name=\"popover\" library=\"components\" size=\"1.25em\"></tp-icon> Popover functionality: displays anchored popover content.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Activate the page's trigger to open the panel. |\n| Using the component | Use its controls or links, then close it with the available dismissal control. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Escape | Dismiss the panel when its settings allow it. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

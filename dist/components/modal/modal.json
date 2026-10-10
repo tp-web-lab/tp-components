@@ -1,0 +1,109 @@
+{
+  "tagname": "tp-modal",
+  "classname": "TpModal",
+  "superclass": "TpOverlayElement",
+  "description": "Displays modal content above the page.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-modal></tp-modal>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "backdrop",
+      "description": "Displays a backdrop behind the modal.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "breakout",
+      "description": "Allows the modal to ignore the default containment constraints.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "fixed",
+      "description": "Positions the modal relative to the viewport.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "margin",
+      "description": "Margin used when the modal is contained by the viewport.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "open",
+      "description": "Opens the modal.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "outside-click",
+      "description": "Closes the modal when the user clicks outside it.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-modal-toggle",
+      "description": "Emitted when the modal open state changes.",
+      "detail": "{ backdrop: boolean; open: boolean; outsideClick: boolean; breakout: boolean; fixed: boolean }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-modal-margin",
+      "default": "0px",
+      "description": "Margin used by the contained modal layout."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Modal",
+    "introduction": "The custom `<tp-modal>` element implements the <tp-icon name=\"modal\" library=\"components\" size=\"1.25em\"></tp-icon> Modal functionality: displays modal content above the page.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Activate the page's trigger to open the panel. |\n| Using the component | Use its controls or links, then close it with the available dismissal control. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab | Moves to the next focusable control and wraps inside the modal. |\n| Shift+Tab | Moves to the previous focusable control and wraps inside the modal. |\n| Escape | Closes the modal. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Tab",
+        "description": "Moves to the next focusable control and wraps inside the modal."
+      },
+      {
+        "key": "Shift+Tab",
+        "description": "Moves to the previous focusable control and wraps inside the modal."
+      },
+      {
+        "key": "Escape",
+        "description": "Closes the modal."
+      }
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+<tp-html-viewer label="tp-matching" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-matching>
+        <ul><li>Hello</li><li>Thank you</li><li>Goodbye</li></ul>
+        <ol><li>Bonjour</li><li>Merci</li><li>Au revoir</li></ol>
+      </tp-matching>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+
+
+
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>disabled</li><li>heading</li></ul></tp-checkbox-list>
+
+      <tp-cluster></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="matching attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/docs/components/matching/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Rich content">
+      <tp-matching>
+        <ul>
+          <li><tp-icon name="lt" library="flags" size="3em" role="img" aria-label="Flag to identify"></tp-icon></li>
+          <li><p>Listen to the sound.</p><audio controls="" src="/docs/medias/audios/glass-break.mp3" aria-label="Sound to identify"></audio></li>
+          <li><p>Watch the scene.</p><video controls="" width="240" src="/docs/medias/videos/chute-eau.mp4" aria-label="Scene to identify"></video></li>
+        </ul>
+        <ol><li>Lithuania</li><li>Breaking glass</li><li>A waterfall</li></ol>
+      </tp-matching>
+    </div>
+
+    <div role="example" label="Irregular verbs">
+      <tp-matching>
+      <dl>
+        <dt>Base form</dt><dd><ul><li>be</li><li>have</li><li>do</li></ul></dd>
+        <dt>Past simple</dt><dd><ol><li>was</li><li>had</li><li>did</li></ol></dd>
+        <dt>Past participle</dt><dd><ul><li>been</li><li>had</li><li>done</li></ul></dd>
+        <dt>French</dt><dd><ol><li>être</li><li>avoir</li><li>faire</li></ol></dd>
+      </dl>
+      </tp-matching>
+    </div>
+
+    <div role="example" label="Header list">
+      <tp-matching heading="">
+      <ul><li>English</li><li>French</li></ul>
+      <ul><li>Hello</li><li>Thank you</li><li>Goodbye</li></ul>
+      <ol><li>Bonjour</li><li>Merci</li><li>Au revoir</li></ol>
+      </tp-matching>
+    </div>
+  </template>
+</tp-html-viewer>

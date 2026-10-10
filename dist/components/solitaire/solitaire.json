@@ -1,0 +1,93 @@
+{
+  "tagname": "tp-solitaire",
+  "classname": "TpSolitaire",
+  "superclass": "TpBase",
+  "description": "Displays a playable Klondike solitaire.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-solitaire></tp-solitaire>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "back",
+      "description": "OpenDecks card back: blue or red.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"blue\""
+    },
+    {
+      "name": "deck-size",
+      "description": "Number of cards: 32 or 52.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "52"
+    }
+  ],
+  "methods": [
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Reshuffles and starts a new game."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-solitaire-move",
+      "description": "Emitted after a valid move.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-solitaire-reset",
+      "description": "Emitted after the cards are reshuffled.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-solitaire-win",
+      "description": "Emitted when the game is won.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-solitaire-card-width",
+      "default": "7rem",
+      "description": "Card width."
+    },
+    {
+      "name": "--tp-solitaire-gap",
+      "default": "0.75rem",
+      "description": "Gap between piles."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-chronometer",
+      "summary": "Chronometer component with play, pause and stop controls."
+    },
+    {
+      "name": "tp-dragdrop",
+      "summary": "Generic drag-and-drop controller for content."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Solitaire",
+    "introduction": "The custom `<tp-solitaire>` element implements the <tp-icon name=\"solitaire\" library=\"components\" size=\"1.25em\"></tp-icon> Solitaire functionality: displays a playable Klondike solitaire.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Select | Select a face-up card, then select its destination pile. |\n| Using the component | Reveal exposed face-down cards and move cards to the foundations according to the game rules. |\n| Click | Click a face-up card to select it, then click a destination tableau pile or foundation. |\n| Click | Click a face-down card at the top of a tableau pile to reveal it. |\n| Using the component | Double-click the top card of the waste or a tableau pile to send it directly to its foundation when the move is valid. |\n| Using the component | The chronometer starts with the first action and pauses when all cards reach the foundations. |\n| Using the component | The refresh button reshuffles the cards and resets the timer. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

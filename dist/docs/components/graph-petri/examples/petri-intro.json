@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "nodes": [
+    {
+      "id": "ready",
+      "type": "petri-place",
+      "x": 130,
+      "y": 160,
+      "label": "Ready",
+      "data": {
+        "initialTokens": 1
+      },
+      "state": {
+        "tokens": 1
+      }
+    },
+    {
+      "id": "start",
+      "type": "petri-transition",
+      "x": 300,
+      "y": 160,
+      "label": "Start"
+    },
+    {
+      "id": "running",
+      "type": "petri-place",
+      "x": 470,
+      "y": 160,
+      "label": "Running",
+      "data": {
+        "initialTokens": 0
+      },
+      "state": {
+        "tokens": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "ready-start",
+      "type": "petri-arc",
+      "source": "ready",
+      "target": "start",
+      "data": {
+        "weight": 1
+      }
+    },
+    {
+      "id": "start-running",
+      "type": "petri-arc",
+      "source": "start",
+      "target": "running",
+      "data": {
+        "weight": 1
+      }
+    }
+  ]
+}

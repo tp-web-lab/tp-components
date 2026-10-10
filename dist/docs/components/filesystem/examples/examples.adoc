@@ -1,0 +1,26 @@
+[tp-asciidoc-viewer%allow-script,label="tp-filesystem"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-box%data-allow-script,data-intro-action="filesystem"]
+=====
+Expand the folders and select a file in this in-memory example.
+
+[tp-filesystem]
+====
+====
+
+[p%data-demo-status,role="status"]
+====
+Select a file to see its path.
+====
+
+[script,src="/docs/components/_shared/introduction-actions.js"]
+====
+====
+=====
+======
+----
+========

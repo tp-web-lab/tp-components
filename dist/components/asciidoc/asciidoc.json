@@ -1,0 +1,51 @@
+{
+  "tagname": "tp-asciidoc",
+  "classname": "TpAsciidoc",
+  "superclass": "TpBase",
+  "description": "Renders inline or external AsciiDoc as semantic HTML.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-box><tp-asciidoc><script type=\"tp/asciidoc\">This paragraph uses *AsciiDoc*.</script></tp-asciidoc></tp-box>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "src",
+      "description": "URL of an external AsciiDoc source file.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-asciidoc-rendered",
+      "description": "Emitted after conversion and runtime initialization complete.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-asciidoc",
+      "url": "https://www.npmjs.com/package/@tp/tp-asciidoc",
+      "summary": "AsciiDoc parsing and rendering."
+    }
+  ],
+  "userHelp": {
+    "displayName": "AsciiDoc",
+    "introduction": "The custom `<tp-asciidoc>` element implements the <tp-icon name=\"asciidoc\" library=\"components\" size=\"1.25em\"></tp-icon> AsciiDoc functionality: semantic AsciiDoc rendering component.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Read the displayed content and use its links and embedded controls. |\n| Using the component | The component itself adds no editing or playback controls. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

@@ -1,0 +1,4 @@
+axiom: F
+iterations: 3
+angle: 60
+rule: F => F+F--F+F

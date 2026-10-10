@@ -1,0 +1,96 @@
+{
+  "tagname": "tp-html-viewer",
+  "classname": "TpHtmlViewer",
+  "superclass": "TpMarkupViewer",
+  "description": "Interactive HTML viewer component.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-html-viewer></tp-html-viewer>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "allow-script",
+      "description": "Allows executable scripts in the rendered example.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "lite",
+      "description": "Uses the compact single-example viewer with rendered HTML output.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "no-loader",
+      "description": "Disables automatic tp-loader injection when the example manages its own imports.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "URL of the HTML file to load into the viewer.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "setSource(source: string, baseHref: string | null = null, resetSource = source): void",
+      "inherited": false,
+      "description": "Sets the HTML source from code."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-object-tree",
+      "summary": "Specialized tree for inspecting JavaScript values."
+    },
+    {
+      "name": "tp-switcher",
+      "summary": "Switches between horizontal and vertical layouts based on available space."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "HTML viewer",
+    "introduction": "The custom `<tp-html-viewer>` element implements the <tp-icon name=\"html-viewer\" library=\"components\" size=\"1.25em\"></tp-icon> HTML viewer functionality: interactive HTML viewer with editable source, live rendering, and DOM inspection.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Code | The viewer initially displays the result. **Code** shows or hides the source editor; edit the source there, then use **Run** to update the result. **Reset** restores the initial source. |\n| :tp-icon:{name=\"code\" size=\"1.25em\"} Code | Shows or hides the source editor. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"1.25em\"} Editor toolbar | Shows or hides the toolbar of every visible code editor. |\n| :tp-icon:{name=\"eye-outline\" size=\"1.25em\"} Render | Shows or hides the rendered output. |\n| :tp-icon:{name=\"refresh\" size=\"1.25em\"} Reset | Restores the initially loaded content. |\n| :tp-icon:{name=\"play\" size=\"1.25em\"} Run | Renders the current source. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "tagname": "tp-map",
+  "classname": "TpMap",
+  "superclass": "TpBase",
+  "description": "displays an interactive OpenStreetMap with named markers and GPX routes or tracks.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-map lat=\"48.3904\" lon=\"-4.4861\" zoom=\"13\" title=\"Brest, Brittany, France\" marker></tp-map>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "elevation-profile",
+      "description": "Shows GPX altitude in metres against cumulative distance in kilometres below the map.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "fit-content",
+      "description": "Fits markers and GPX geometry together; takes precedence over fit-markers.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "fit-markers",
+      "description": "Fits the viewport to the markers when their locations change or fitting is enabled.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "lat",
+      "description": "Latitude of the configured location, between -90 and 90.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "48.8566"
+    },
+    {
+      "name": "lon",
+      "description": "Longitude of the configured location, between -180 and 180.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "2.3522"
+    },
+    {
+      "name": "marker",
+      "description": "Shows a marker at the configured coordinates when no location list is supplied.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "URL of a GPX file containing tracks, routes or waypoints.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "title",
+      "description": "Accessible map name and optional marker popup text.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "zoom",
+      "description": "Zoom level from 0 to 19.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "13"
+    }
+  ],
+  "methods": [
+    {
+      "name": "locate(): void",
+      "inherited": false,
+      "description": "Requests geolocation only following an explicit user action; stale replies are ignored."
+    }
+  ],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-map-height",
+      "default": "24rem",
+      "description": "Controls the height."
+    },
+    {
+      "name": "--tp-map-width",
+      "default": "100%",
+      "description": "Controls the width."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button-group",
+      "summary": "Button group component for organizing multiple buttons."
+    },
+    {
+      "name": "tp-callout",
+      "summary": "Callout component for highlighted contextual content."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-xy-plot",
+      "summary": "XY graph rendering component."
+    }
+  ],
+  "credits": [
+    {
+      "name": "Leaflet",
+      "url": "https://leafletjs.com/",
+      "summary": "Interactive geographic maps."
+    },
+    {
+      "name": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/copyright",
+      "summary": "Map tiles and geographic data; attribution required."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Map",
+    "introduction": "The custom `<tp-map>` element implements the map functionality: displays an interactive OpenStreetMap with named markers and GPX routes or tracks.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Drag the map | Explore the surrounding area without moving the configured marker. |\n| Zoom in / Zoom out | Change the map scale. Controls are disabled at the zoom limits. Double-click also zooms in; touch devices support pinch zoom. |\n| Use my location | Ask the browser for location permission and center the map on your position. Refusal or unavailability displays a warning and preserves the previous coordinates. |\n| Location marker | Open its title popup when a title is provided. Use the popup's close button to dismiss it. |\n| Mouse wheel | Scroll the page; it does not zoom the map. |\n| Route or track line | Follow the recorded path visually. Separate recording segments are not joined. Lines have no additional click action and do not provide navigation guidance. |\n| Elevation profile: Zoom / Close | Open the profile in a larger dialog, then close it to return to the map. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between toolbar buttons, the map, its marker and attribution links. |\n| Enter / Space | Activate a focused toolbar button or the profile's Zoom and Close buttons. Enter opens a focused marker's popup. |\n| Arrow keys | Pan the focused map. |\n| + / - | Zoom the focused map in or out. |\n| Escape | Close an open popup or the enlarged elevation profile. |\n| Ctrl+? | Open User Help for the component under the pointer, falling back to the focused component. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Arrow keys",
+        "description": "Pans the focused map."
+      },
+      {
+        "key": "+ / -",
+        "description": "Zooms the focused map in or out."
+      },
+      {
+        "key": "Enter / Space",
+        "description": "Activates toolbar buttons; Enter opens a focused marker popup."
+      },
+      {
+        "key": "Escape",
+        "description": "Closes an open popup."
+      }
+    ]
+  }
+}

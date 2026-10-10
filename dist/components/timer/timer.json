@@ -1,0 +1,92 @@
+{
+  "tagname": "tp-timer",
+  "classname": "TpTimer",
+  "superclass": "TpBase",
+  "description": "Countdown timer component.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-timer></tp-timer>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "duration",
+      "description": "Countdown duration in seconds.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "60"
+    },
+    {
+      "name": "silent",
+      "description": "Disables sound playback.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "size",
+      "description": "Icon and text size.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1rem\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-timer-elapsed",
+      "description": "Emitted when the countdown reaches zero.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-timer-alert",
+      "default": "#b91c1c",
+      "description": "Controls the alert."
+    },
+    {
+      "name": "--tp-timer-alert-bg",
+      "default": "#fecaca",
+      "description": "Controls the alert bg."
+    },
+    {
+      "name": "--tp-timer-muted",
+      "default": "#9ca3af",
+      "description": "Controls the muted."
+    },
+    {
+      "name": "--tp-timer-size",
+      "default": "1rem",
+      "description": "Icon and text size."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Timer",
+    "introduction": "The custom `<tp-timer>` element implements the <tp-icon name=\"timer\" library=\"components\" size=\"1.25em\"></tp-icon> Timer functionality: countdown timer with stop control and optional ring.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Duration | Enter the countdown duration in seconds. |\n| Start timer | Begin the countdown. Completion sound depends on the page and browser. |\n| Stop timer | Stop the countdown. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

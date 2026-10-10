@@ -1,0 +1,6 @@
+{
+  "id": "ts-tests",
+  "label": "Typescript tests",
+  "entry": "/main.ts",
+  "test": "/main.test.ts"
+}

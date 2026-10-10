@@ -1,0 +1,210 @@
+{
+  "tagname": "tp-button",
+  "classname": "TpButton",
+  "superclass": "TpBase",
+  "description": "an action button or navigation link with shared sizes, variants and loading states.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-button href=\"/#/components/button/index.md#usage\">Read the usage guide</tp-button>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "disabled",
+      "description": "Attribute `disabled`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "download",
+      "description": "Attribute `download`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "href",
+      "description": "Attribute `href`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "loading",
+      "description": "Attribute `loading`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "loading-mode",
+      "description": "API documentation summary.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpButtonLoadingMode",
+      "default": "replace"
+    },
+    {
+      "name": "outlined",
+      "description": "Attribute `outlined`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "pill",
+      "description": "Attribute `pill`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "rel",
+      "description": "Attribute `rel`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "size",
+      "description": "Attribute `size`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpSizeType",
+      "default": "m"
+    },
+    {
+      "name": "target",
+      "description": "Attribute `target`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "type",
+      "description": "Attribute `type`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpButtonNativeType",
+      "default": "button"
+    },
+    {
+      "name": "variant",
+      "description": "Attribute `variant`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpVariantType",
+      "default": "neutral"
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "click",
+      "description": "Event.\nColors are derived from the shared `tp.css` semantic tokens.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-button-accent",
+      "default": "var(--tp-brand-text-colorful)",
+      "description": "Controls the accent."
+    },
+    {
+      "name": "--tp-button-background",
+      "default": "transparent",
+      "description": "Controls the background."
+    },
+    {
+      "name": "--tp-button-border-color",
+      "default": "var(--tp-brand-stroke-mid)",
+      "description": "Controls the border color."
+    },
+    {
+      "name": "--tp-button-focus-ring-color",
+      "default": "var(--tp-focus-color)",
+      "description": "Controls the focus ring color."
+    },
+    {
+      "name": "--tp-button-font-size",
+      "default": "1.125em",
+      "description": "Controls the font size."
+    },
+    {
+      "name": "--tp-button-foreground",
+      "default": "var(--tp-button-accent)",
+      "description": "Controls the foreground."
+    },
+    {
+      "name": "--tp-button-outline-background",
+      "default": "var(--tp-brand-fill-softer)",
+      "description": "Controls the outline background."
+    },
+    {
+      "name": "--tp-button-padding-block",
+      "default": "0.6em",
+      "description": "Controls the padding block."
+    },
+    {
+      "name": "--tp-button-padding-inline",
+      "default": "1em",
+      "description": "Controls the padding inline."
+    },
+    {
+      "name": "--tp-button-radius",
+      "default": "999px",
+      "description": "Controls the radius."
+    },
+    {
+      "name": "--tp-button-spinner-border-width",
+      "default": "1.5px",
+      "description": "Controls the spinner border width."
+    },
+    {
+      "name": "--tp-button-spinner-size",
+      "default": "1.15em",
+      "description": "Controls the spinner size."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Button",
+    "introduction": "The custom `<tp-button>` element implements the <tp-icon name=\"button\" library=\"components\" size=\"1.25em\"></tp-icon> Button functionality: an action button or navigation link with shared sizes, variants and loading states.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Button | Click to perform the action identified by its label. Disabled controls cannot be activated. |\n| Navigation button | Click to open its destination. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter | Activate the focused button or link. |\n| Space | Activate a focused action button; links use Enter. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Enter / Space",
+        "description": "Uses the browser's native button activation behavior."
+      }
+    ]
+  }
+}

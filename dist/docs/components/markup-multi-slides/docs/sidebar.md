@@ -1,0 +1,7 @@
+- Presentation
+  - [Cover](cover.md)
+  - [Markdown slide](slides/markdown.md)
+  - [AsciiDoc slide](slides/asciidoc.adoc)
+  - [HTML slide](slides/html.html)
+  - [reStructuredText slide](slides/restructuredtext.rst)
+  - [Missing slide](slides/missing.md)

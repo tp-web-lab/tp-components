@@ -1,0 +1,253 @@
+{
+  "version": 1,
+  "title": "s = (not a and b) or (a and not b)",
+  "nodes": [
+    {
+      "id": "a",
+      "type": "logic-input",
+      "x": 80,
+      "y": 120,
+      "label": "a",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "b",
+      "type": "logic-input",
+      "x": 80,
+      "y": 300,
+      "label": "b",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "a-hub",
+      "type": "logic-hub",
+      "x": 180,
+      "y": 120,
+      "label": "a"
+    },
+    {
+      "id": "b-hub",
+      "type": "logic-hub",
+      "x": 180,
+      "y": 300,
+      "label": "b"
+    },
+    {
+      "id": "not-a",
+      "type": "logic-not",
+      "x": 300,
+      "y": 80,
+      "label": "not a"
+    },
+    {
+      "id": "not-b",
+      "type": "logic-not",
+      "x": 300,
+      "y": 340,
+      "label": "not b"
+    },
+    {
+      "id": "and-left",
+      "type": "logic-and",
+      "x": 480,
+      "y": 140,
+      "label": "not a and b"
+    },
+    {
+      "id": "and-right",
+      "type": "logic-and",
+      "x": 480,
+      "y": 280,
+      "label": "a and not b"
+    },
+    {
+      "id": "or",
+      "type": "logic-or",
+      "x": 660,
+      "y": 210,
+      "label": "OR"
+    },
+    {
+      "id": "s",
+      "type": "logic-output",
+      "x": 820,
+      "y": 210,
+      "label": "s"
+    }
+  ],
+  "edges": [
+    {
+      "id": "a-hub-in",
+      "type": "logic-wire",
+      "source": "a",
+      "sourcePort": "east",
+      "target": "a-hub",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "straight"
+    },
+    {
+      "id": "b-hub-in",
+      "type": "logic-wire",
+      "source": "b",
+      "sourcePort": "east",
+      "target": "b-hub",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "straight"
+    },
+    {
+      "id": "a-not",
+      "type": "logic-wire",
+      "source": "a-hub",
+      "sourcePort": "north",
+      "target": "not-a",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical"
+    },
+    {
+      "id": "b-not",
+      "type": "logic-wire",
+      "source": "b-hub",
+      "sourcePort": "south",
+      "target": "not-b",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical"
+    },
+    {
+      "id": "not-a-and",
+      "type": "logic-wire",
+      "source": "not-a",
+      "sourcePort": "east",
+      "target": "and-left",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "turns": "alternating",
+      "data": {
+        "measurements": [
+          {
+            "id": "measurement-3",
+            "position": 0.19,
+            "label": "p1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b-and",
+      "type": "logic-wire",
+      "source": "b-hub",
+      "sourcePort": "east",
+      "target": "and-left",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "bendX": 300
+    },
+    {
+      "id": "a-and",
+      "type": "logic-wire",
+      "source": "a-hub",
+      "sourcePort": "east",
+      "target": "and-right",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "bendX": 380
+    },
+    {
+      "id": "not-b-and",
+      "type": "logic-wire",
+      "source": "not-b",
+      "sourcePort": "east",
+      "target": "and-right",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "turns": "alternating",
+      "bendX": 380,
+      "data": {
+        "measurements": [
+          {
+            "id": "measurement-4",
+            "position": 0.15,
+            "label": "p2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "left-or",
+      "type": "logic-wire",
+      "source": "and-left",
+      "sourcePort": "east",
+      "target": "or",
+      "targetPort": "north",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "turns": "alternating",
+      "data": {
+        "measurements": [
+          {
+            "id": "measurement-1",
+            "position": 0.26,
+            "label": "p3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "right-or",
+      "type": "logic-wire",
+      "source": "and-right",
+      "sourcePort": "east",
+      "target": "or",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "horizontal",
+      "turns": "alternating",
+      "data": {
+        "measurements": [
+          {
+            "id": "measurement-2",
+            "position": 0.24,
+            "label": "p4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "or-s",
+      "type": "logic-wire",
+      "source": "or",
+      "sourcePort": "east",
+      "target": "s",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "straight"
+    }
+  ]
+}

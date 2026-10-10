@@ -1,0 +1,4 @@
+- Documentation
+  - [Cover](cover.md)
+  - [Getting started](pages/getting-started.md)
+  - [Components](pages/components.md)

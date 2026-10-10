@@ -1,0 +1,72 @@
+{
+  "tagname": "tp-avatar-group",
+  "classname": "TpAvatarGroup",
+  "superclass": "TpBase",
+  "description": "Groups tp-avatar elements with configurable overlap, stacking order and orientation.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-avatar-group>\n  <tp-avatar initials=\"AL\" label=\"Ada Lovelace\"></tp-avatar>\n  <tp-avatar initials=\"GH\" label=\"Grace Hopper\"></tp-avatar>\n  <tp-avatar initials=\"KT\" label=\"Katherine Johnson\"></tp-avatar>\n</tp-avatar-group>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "offset",
+      "description": "Overlap between adjacent avatars as a nonnegative CSS length; zero disables overlap.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"0.75rem\""
+    },
+    {
+      "name": "order",
+      "description": "Stacking order: ltr places later avatars in front; rtl places earlier avatars in front.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpAvatarGroupOrder",
+      "default": "\"ltr\""
+    },
+    {
+      "name": "orientation",
+      "description": "Layout axis (horizontal or vertical).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpAvatarGroupOrientation",
+      "default": "\"horizontal\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-avatar-group-index",
+      "default": "",
+      "description": "Controls the index."
+    },
+    {
+      "name": "--tp-avatar-group-overlap",
+      "default": "0.75rem",
+      "description": "Controls the overlap."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-avatar",
+      "summary": "Visual identity using an image, initials or an icon."
+    },
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Avatar group",
+    "introduction": "The custom `<tp-avatar-group>` element implements the Avatar group functionality: groups tp-avatar elements with configurable overlap, stacking order and orientation.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Read the people represented by the avatars. The group is static and has no mouse or keyboard controls. Overlap changes only their visual presentation: screen readers encounter each labelled avatar in its original reading order. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

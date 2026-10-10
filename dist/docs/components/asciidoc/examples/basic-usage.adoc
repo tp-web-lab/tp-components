@@ -1,0 +1,3 @@
+The custom HTML element `tp-asciidoc` renders its content from *AsciiDoc* code.
+
+Reminder: in AsciiDoc, `+*AsciiDoc*+` is displayed in bold: *AsciiDoc*, unlike in Markdown, where it is displayed in italics: _AsciiDoc_.

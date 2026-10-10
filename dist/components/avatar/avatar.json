@@ -1,0 +1,97 @@
+{
+  "tagname": "tp-avatar",
+  "classname": "TpAvatar",
+  "superclass": "TpBase",
+  "description": "Displays an image, initials or an icon in a circle or square.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-cluster>\n  <tp-avatar src=\"/docs/medias/logos/logo-tp.svg\" label=\"tp-components\"></tp-avatar>\n  <tp-avatar initials=\"AL\" label=\"Ada Lovelace\"></tp-avatar>\n  <tp-avatar icon=\"user\" shape=\"square\" label=\"Guest\"></tp-avatar>\n</tp-cluster>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "icon",
+      "description": "Fallback tp-icon name.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"user\""
+    },
+    {
+      "name": "initials",
+      "description": "Initials displayed when no image is available.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label",
+      "description": "Accessible name; without a label the avatar is decorative.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "library",
+      "description": "Icon library.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"tp\""
+    },
+    {
+      "name": "shape",
+      "description": "Avatar shape (`circle` or `square`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpAvatarShape",
+      "default": "\"circle\""
+    },
+    {
+      "name": "size",
+      "description": "Avatar size (`xxs`, `xs`, `s`, `m`, `l`, `xl`, or `xxl`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpSizeType",
+      "default": "\"m\""
+    },
+    {
+      "name": "src",
+      "description": "Image URL; falls back to initials or an icon if loading fails.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Avatar",
+    "introduction": "The custom `<tp-avatar>` element implements the Avatar functionality: displays an image, initials or an icon in a circle or square.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | An avatar identifies a person or entity. It is a static image, not a button: it has no mouse or keyboard action. Its accessible label is announced by screen readers when provided. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

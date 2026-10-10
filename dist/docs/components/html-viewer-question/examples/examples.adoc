@@ -1,0 +1,23 @@
+[tp-asciidoc-viewer%allow-script,label="tp-html-viewer-question"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-html-viewer-question%open,src="/docs/components/markup-viewer-question/examples/emphasis.html",test="/docs/components/markup-viewer-question/examples/emphasis.test.js"]
+====
+Title::
++
+Semantic emphasis
+
+Prompt::
++
+Mark Hello with strong emphasis. Open Code to edit, then submit.
+
+Solution::
++
+Use the language's strong-emphasis syntax.
+====
+======
+----
+========

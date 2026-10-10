@@ -1,0 +1,63 @@
+{
+  "tagname": "tp-cryptarithm",
+  "classname": "TpCryptarithm",
+  "superclass": "TpBase",
+  "description": "Displays an interactive cryptarithm puzzle.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-cryptarithm equation=\"SEND + MORE = MONEY\" solution=\"9567 + 1085 = 10652\"></tp-cryptarithm>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "equation",
+      "description": "Equation to solve.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "solution",
+      "description": "Numeric solution matching the equation.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Cryptarithm",
+    "introduction": "The custom `<tp-cryptarithm>` element implements the <tp-icon name=\"cryptarithm\" library=\"components\" size=\"1.25em\"></tp-icon> Cryptarithm functionality: displays an interactive cryptarithm puzzle.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Complete the puzzle using the editable cells; fixed clues cannot be changed. |\n| Using the component | Use the displayed assistance controls to check or reveal information when available. |\n| Using the component | The puzzle's messages indicate progress and completion. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Moves among assignments, assistance options, undo and redo controls. |\n| Number keys | Enters a digit in the focused letter assignment. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Tab / Shift+Tab",
+        "description": "Moves among assignments, assistance options, undo and redo controls."
+      },
+      {
+        "key": "Number keys",
+        "description": "Enters a digit in the focused letter assignment."
+      }
+    ]
+  }
+}

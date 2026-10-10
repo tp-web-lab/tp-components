@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "title": "D latch",
+  "nodes": [
+    {
+      "id": "data",
+      "type": "logic-input",
+      "x": 100,
+      "y": 120,
+      "label": "D",
+      "state": {
+        "value": true
+      }
+    },
+    {
+      "id": "clock",
+      "type": "logic-clock",
+      "x": 100,
+      "y": 280,
+      "label": "Clock",
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "memory",
+      "type": "logic-d-latch",
+      "x": 320,
+      "y": 160,
+      "label": "D latch",
+      "data": {
+        "initial": false
+      },
+      "state": {
+        "value": false
+      }
+    },
+    {
+      "id": "output",
+      "type": "logic-output",
+      "x": 560,
+      "y": 160,
+      "label": "Q",
+      "state": {
+        "value": false
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "data-memory",
+      "type": "logic-wire",
+      "source": "data",
+      "sourcePort": "east",
+      "target": "memory",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "clock-memory",
+      "type": "logic-wire",
+      "source": "clock",
+      "sourcePort": "east",
+      "target": "memory",
+      "targetPort": "south",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    },
+    {
+      "id": "memory-output",
+      "type": "logic-wire",
+      "source": "memory",
+      "sourcePort": "east",
+      "target": "output",
+      "targetPort": "west",
+      "direction": "forward",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal"
+    }
+  ]
+}

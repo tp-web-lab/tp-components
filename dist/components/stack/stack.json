@@ -1,0 +1,54 @@
+{
+  "tagname": "tp-stack",
+  "classname": "TpStack",
+  "superclass": "TpBase",
+  "description": "Stacks child elements vertically with an optional recursive gap and split point.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "```html\n<tp-stack>\n  <tp-box>Step 1: Write a draft.</tp-box>\n  <tp-box>Step 2: Review the content.</tp-box>\n  <tp-box>Step 3: Publish the document.</tp-box>\n</tp-stack>\n```"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "recursive",
+      "description": "Applies the stack gap recursively to descendant siblings instead of direct children only.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "split-after",
+      "description": "One-based child index after which the stack inserts a flexible split. Absent by default: no flexible split (the splitAfter property returns null). Requires available height to separate the groups.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number | null",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--stack-gap",
+      "default": "1rem",
+      "description": "Gap inserted between stacked items."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Stack",
+    "introduction": "The custom `<tp-stack>` element implements the <tp-icon name=\"stack\" library=\"components\" size=\"1.25em\"></tp-icon> Stack functionality: stacks child elements vertically with an optional recursive gap and split point.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

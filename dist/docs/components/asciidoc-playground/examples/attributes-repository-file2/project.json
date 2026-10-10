@@ -1,0 +1,6 @@
+{
+  "id": "01-asciidoc-basic",
+  "label": "AsciiDoc basic",
+  "name": "AsciiDoc basic",
+  "entry": "/index.adoc"
+}

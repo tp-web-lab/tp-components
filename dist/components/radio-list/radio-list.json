@@ -1,0 +1,98 @@
+{
+  "tagname": "tp-radio-list",
+  "classname": "TpRadioList",
+  "superclass": "TpBase",
+  "description": "Transforms list items into grouped radio options.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-radio-list></tp-radio-list>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "label",
+      "description": "Visible accessible group label; no fieldset is created.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label-position",
+      "description": "Group label position (`top`, `bottom`, `start`, or `end`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"top\""
+    },
+    {
+      "name": "name",
+      "description": "Radio group name used on generated inputs.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "orientation",
+      "description": "Item layout direction (`vertical` or `horizontal`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"vertical\""
+    },
+    {
+      "name": "value",
+      "description": "1-based index of the checked item (`\"\"` for no selection).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Resets selected item to the initial value."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-radio-list-change",
+      "description": "Emitted when selected value changes (`detail: { value, label }`).",
+      "detail": "{ value: string; label: unknown }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-radio-list-marker-gap",
+      "default": "0.5em",
+      "description": "Controls the marker gap."
+    },
+    {
+      "name": "--tp-radio-list-marker-width",
+      "default": "2ch",
+      "description": "Controls the marker width."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Radio list",
+    "introduction": "The custom `<tp-radio-list>` element implements the <tp-icon name=\"radio-list\" library=\"components\" size=\"1.25em\"></tp-icon> Radio list functionality: transforms list items into grouped radio options.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Option | Click to select one option and replace the previous selection. |\n| Hover | Highlights an enabled option without changing its selection. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Enter or leave the group. |\n| Arrow keys | Move and select among enabled radio options. |\n| Space | Select the focused option. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

@@ -1,0 +1,26 @@
+<tp-box>
+  <p>Organize this project by dragging files or folders. Try moving <strong>notes.md</strong> into <strong>Documentation</strong>, then move <strong>index.html</strong> above <strong>app.js</strong>.</p>
+  <p>Drop in the middle of a folder row to move an item into it, or near the top or bottom of a row to insert it before or after that item. The tree highlights the destination. Moving a folder also moves its children.</p>
+  <p>Use the disclosure buttons to expand or collapse folders. Keyboard arrow keys navigate the tree; they do not perform drag and drop in this example.</p>
+  <tp-tree draggable selectable guides level="3" aria-label="Project files">
+    <ul>
+      <li data-node-id="project">Project
+        <ul>
+          <li data-node-id="documentation">Documentation
+            <ul>
+              <li data-node-id="readme">README.md</li>
+              <li data-node-id="guide">guide.md</li>
+            </ul>
+          </li>
+          <li data-node-id="source">Source
+            <ul>
+              <li data-node-id="app">app.js</li>
+              <li data-node-id="index">index.html</li>
+            </ul>
+          </li>
+          <li data-node-id="notes">notes.md</li>
+        </ul>
+      </li>
+    </ul>
+  </tp-tree>
+</tp-box>

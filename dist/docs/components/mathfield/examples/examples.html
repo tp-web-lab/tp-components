@@ -1,0 +1,36 @@
+<tp-html-viewer label="tp-mathfield" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-mathfield label="Formula" value="E = mc^2" clearable=""></tp-mathfield>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Change several attributes on one preview. All controls start at their documented defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Reset defaults fills the controls with their defaults again. Controls stay available when the preview is disabled or readonly.</p>
+      <tp-stack>
+        <tp-checkbox-list id="mathfield-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>clearable</li><li>disabled</li><li>multiline</li><li>preview</li><li>readonly</li><li>required</li></ul></tp-checkbox-list>
+        <tp-radio-list data-setting="label-position" label="label-position" label-position="top" orientation="horizontal" value="1"><ul><li>top</li><li>bottom</li><li>start</li><li>end</li></ul></tp-radio-list>
+      <tp-radio-list data-setting="mode" label="mode" label-position="top" orientation="horizontal" value="1"><ul><li>latexmath</li><li>asciimath</li></ul></tp-radio-list>
+        <tp-cluster><tp-textfield data-setting="autocomplete" label="autocomplete" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="label" label="label" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="name" label="name" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="placeholder" label="placeholder" value="Type LaTeX formula..." placeholder="Type LaTeX formula..." clearable></tp-textfield>
+      <tp-textfield data-setting="value" label="value" value="" placeholder="" clearable></tp-textfield></tp-cluster>
+        <tp-button id="mathfield-reset" type="button">Reset defaults</tp-button>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-box><tp-mathfield id="mathfield-preview"></tp-mathfield></tp-box>
+      <tp-box id="mathfield-readout" aria-live="polite">Reading native attributes…</tp-box>
+      <tp-callout variant="info" heading="Things to try">Set label, enter x^2 in value, then enable preview to see the rendered formula. Compare latexmath and asciimath, and try multiline. The formula preview button also updates the preview checkbox. Enable clearable to show the clear button; it is hidden otherwise.</tp-callout>
+      <script type="module" src="/docs/components/mathfield/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Inline in prose">
+      <p>Einstein's equation <tp-mathfield name="energy" value="E = mc^2"></tp-mathfield> relates mass and energy.</p>
+    </div>
+
+    <div role="example" label="Inline named field">
+      <p>Value: <tp-mathfield name="identifier" value="E = mc^2" placeholder="Enter a value"></tp-mathfield></p>
+    </div>
+  </template>
+</tp-html-viewer>

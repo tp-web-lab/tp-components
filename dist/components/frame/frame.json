@@ -1,0 +1,50 @@
+{
+  "tagname": "tp-frame",
+  "classname": "TpFrame",
+  "superclass": "TpBase",
+  "description": "displays content in a fixed-aspect-ratio frame.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-frame></tp-frame>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "aspect-ratio",
+      "description": "Width-to-height ratio in numerator:denominator notation. When absent, uses the CSS defaults of 16 and 9.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"16:9\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-frame-denominator",
+      "default": "9",
+      "description": "Controls the denominator."
+    },
+    {
+      "name": "--tp-frame-numerator",
+      "default": "16",
+      "description": "Controls the numerator."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Frame",
+    "introduction": "The custom `<tp-frame>` element implements the <tp-icon name=\"frame\" library=\"components\" size=\"1.25em\"></tp-icon> Frame functionality: displays content in a fixed-aspect-ratio frame.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

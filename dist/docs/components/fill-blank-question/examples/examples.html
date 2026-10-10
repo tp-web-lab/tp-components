@@ -1,0 +1,122 @@
+<tp-html-viewer label="tp-fill-blank-question" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-fill-blank-question case-sensitive="">
+        <dl>
+          <dt>Answers</dt><dd><ol><li>Paris</li><li>Rome</li></ol></dd>
+          <dt>Title</dt><dd>Geography</dd>
+          <dt>Prompt</dt><dd>Complete both sentences.</dd>
+          <dt>Form</dt>
+          <dd>
+            <p>The capital of France is <tp-textfield name="france-capital" placeholder="Capital" aria-label="Capital of France" clearable=""></tp-textfield>.</p>
+            <p>The capital of Italy is <tp-textfield name="italy-capital" placeholder="Capital" aria-label="Capital of Italy" clearable=""></tp-textfield>.</p>
+          </dd>
+          <dt>Feedback</dt>
+          <dd>
+            <p>Check the spelling of each capital.</p>
+            <ul>
+              <li>The capital of France is home to the Eiffel Tower.</li>
+              <li>The capital of Italy is home to the Colosseum.</li>
+            </ul>
+          </dd>
+          <dt>Solution</dt><dd>The capital of France is Paris. The capital of Italy is Rome.</dd>
+        </dl>
+      </tp-fill-blank-question>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+
+
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>case-sensitive</li><li>closed</li><li>partial</li></ul></tp-checkbox-list>
+
+      <tp-cluster></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="fill-blank-question attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/docs/components/fill-blank-question/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Geography">
+      <tp-fill-blank-question lang="en">
+      <dl>
+      <dt>Answers</dt><dd><ol><li>Paris</li><li>Berlin</li><li>Rome</li></ol></dd>
+      <dt>Title</dt><dd>Geography</dd>
+      <dt>Prompt</dt><dd>Complete the sentences with the capitals.</dd>
+      <dt>Form</dt><dd><p>The capital of France is <tp-textfield name="france" aria-label="Capital of France" placeholder="City name" clearable=""></tp-textfield>.</p><p>The capital of Germany is <tp-textfield name="germany" aria-label="Capital of Germany" placeholder="City name" clearable=""></tp-textfield>.</p><p>The capital of Italy is <tp-textfield name="italy" aria-label="Capital of Italy" placeholder="City name" clearable=""></tp-textfield>.</p></dd>
+      <dt>Feedback</dt><dd>Check the capital of each country and its spelling.</dd>
+      <dt>Solution</dt><dd>France: Paris. Germany: Berlin. Italy: Rome.</dd>
+      </dl>
+      </tp-fill-blank-question>
+    </div>
+
+    <div role="example" label="Irregular verbs">
+      <tp-fill-blank-question lang="en">
+      <dl>
+      <dt>Answers</dt><dd><ol><li>went</li><li>saw</li><li>took</li></ol></dd>
+      <dt>Title</dt><dd>Irregular verbs</dd>
+      <dt>Prompt</dt><dd>Complete each sentence with the past simple form of the verb shown in the blank.</dd>
+      <dt>Form</dt><dd><p>Yesterday, I <tp-textfield name="go" aria-label="Past simple of go" placeholder="go" clearable=""></tp-textfield> to school.</p><p>Last night, she <tp-textfield name="see" aria-label="Past simple of see" placeholder="see" clearable=""></tp-textfield> a shooting star.</p><p>Last Monday, we <tp-textfield name="take" aria-label="Past simple of take" placeholder="take" clearable=""></tp-textfield> the train.</p></dd>
+      <dt>Feedback</dt><dd>These verbs are irregular: their past simple forms do not end in -ed.</dd>
+      <dt>Solution</dt><dd>go → went; see → saw; take → took.</dd>
+      </dl>
+      </tp-fill-blank-question>
+    </div>
+
+    <div role="example" label="Baltic capitals and flags">
+      <tp-fill-blank-question closed="" lang="en">
+      <dl>
+      <dt>Answers</dt><dd><ol><li>Tallinn</li><li><tp-icon name="ee" library="flags" aria-label="Flag of Estonia"></tp-icon></li><li>Riga</li><li><tp-icon name="lv" library="flags" aria-label="Flag of Latvia"></tp-icon></li><li>Vilnius</li><li><tp-icon name="lt" library="flags" aria-label="Flag of Lithuania"></tp-icon></li></ol></dd>
+      <dt>Title</dt><dd>Baltic capitals and flags</dd>
+      <dt>Prompt</dt><dd>Match each country with its capital and national flag.</dd>
+      <dt>Form</dt><dd><p>Estonia has <tp-blank name="estonia-capital" aria-label="Capital of Estonia"></tp-blank> as its capital and <tp-blank name="estonia-flag" aria-label="Flag of Estonia"></tp-blank> as its national flag.</p><p>Latvia has <tp-blank name="latvia-capital" aria-label="Capital of Latvia"></tp-blank> as its capital and <tp-blank name="latvia-flag" aria-label="Flag of Latvia"></tp-blank> as its national flag.</p><p>Lithuania has <tp-blank name="lithuania-capital" aria-label="Capital of Lithuania"></tp-blank> as its capital and <tp-blank name="lithuania-flag" aria-label="Flag of Lithuania"></tp-blank> as its national flag.</p></dd>
+      <dt>Feedback</dt><dd>Check which country each capital and flag belongs to.</dd>
+      <dt>Solution</dt><dd>Estonia: Tallinn; Latvia: Riga; Lithuania: Vilnius. Match each flag with its country.</dd>
+      </dl>
+      </tp-fill-blank-question>
+    </div>
+
+    <div role="example" label="Square root">
+      <tp-fill-blank-question closed="" lang="en">
+          <dl>
+            <dt>Answers</dt>
+            <dd>
+              <ol>
+                <li><span aria-label="Nonnegative real numbers">\(\mathbb{R}_{+}\)</span></li>
+                <li><span aria-label="Positive real numbers">\(\mathbb{R}_{+}^{*}\)</span></li>
+                <li><span aria-label="One over twice the square root of x">\(\frac{1}{2\sqrt{x}}\)</span></li>
+              </ol>
+            </dd>
+            <dt>Title</dt><dd>The square root function</dd>
+            <dt>Prompt</dt><dd>Complete the sentence with the mathematical expressions.</dd>
+            <dt>Form</dt>
+            <dd>
+              <p>The square root function \(f(x) = \sqrt{x}\) is defined on <tp-blank name="domain" aria-label="Domain"></tp-blank>, differentiable on <tp-blank name="differentiability" aria-label="Domain of differentiability"></tp-blank>, and \(f'(x) =\) <tp-blank name="derivative" aria-label="Derivative"></tp-blank>.</p>
+            </dd>
+            <dt>Feedback</dt><dd>Consider whether zero belongs to the domain and whether the derivative exists there.</dd>
+            <dt>Solution</dt>
+            <dd>The domain is \(\mathbb{R}_{+} = [0, +\infty)\). The function is differentiable on \(\mathbb{R}_{+}^{*} = (0, +\infty)\), with \(f'(x) = \frac{1}{2\sqrt{x}}\).</dd>
+          </dl>
+        </tp-fill-blank-question>
+        <script>
+          // Wait for the question and its answer buttons before typesetting their content.
+          window.MathJax = {
+            svg: { fontCache: "local" },
+            startup: {
+              pageReady: async () => {
+                await customElements.whenDefined("tp-fill-blank-question");
+                await customElements.whenDefined("tp-button");
+                return MathJax.startup.defaultPageReady();
+              }
+            }
+          };
+        </script>
+        <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

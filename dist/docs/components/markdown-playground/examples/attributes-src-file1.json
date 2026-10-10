@@ -1,0 +1,11 @@
+{
+  "name": "A small Markdown document",
+  "entry": "/index.md",
+  "files": [
+    {
+      "path": "/index.md",
+      "language": "markdown",
+      "content": "## Hello, Markdown!\n\nEdit this **paragraph**, then select Run.\n\n- Write\n- Preview\n- Publish"
+    }
+  ]
+}

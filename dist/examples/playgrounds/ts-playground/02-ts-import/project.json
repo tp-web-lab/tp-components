@@ -1,0 +1,5 @@
+{
+  "id": "ts-import",
+  "label": "Typescript import",
+  "entry": "/main.ts"
+}

@@ -1,0 +1,157 @@
+[tp-asciidoc-viewer%allow-script,label="tp-fullscreen"]
+==========
+[script,type="tp/asciidoc"]
+-----
+.Basic usage
+======
+[tp-box]
+=====
+[tp-fullscreen]
+====
+====
+
+This box is the fullscreen target.
+
+Press Esc to exit fullscreen mode.
+=====
+======
+
+.Attributes
+========
+Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+
+[tp-stack]
+======
+[tp-checkbox-list%value,id="attributes-booleans",label="Boolean attributes",label-position="top",orientation="horizontal"]
+====
+* disabled
+====
+
+[tp-radio-list,data-setting="size",label="size",label-position="top",orientation="horizontal",value="4"]
+====
+* xxs
+
+* xs
+
+* s
+
+* m
+
+* l
+
+* xl
+
+* xxl
+====
+
+[tp-radio-list,data-setting="variant",label="variant",label-position="top",orientation="horizontal",value="5"]
+====
+* success
+
+* danger
+
+* warning
+
+* info
+
+* neutral
+
+* brand
+====
+
+[tp-cluster]
+=====
+[tp-textfield%value%placeholder%clearable,data-setting="anchor",label="anchor"]
+====
+====
+=====
+
+[tp-button-group]
+=====
+[tp-button,id="attributes-reset",type="button"]
+====
+Reset defaults
+====
+
+[tp-button,id="attributes-reload",type="button"]
+====
+Reload preview
+====
+=====
+======
+
+[tp-divider]
+====
+====
+
+[h3]
+====
+Preview
+====
+
+[tp-iframe,id="attributes-frame",title="fullscreen attribute preview",style="height: 24rem; display: flow-root; inline-size: auto;"]
+====
+====
+
+[tp-callout,id="attributes-status",variant="info",heading="Preview status"]
+====
+Preparing the preview…
+====
+
+[script,type="module",src="/docs/components/fullscreen/examples/attributes.js"]
+====
+====
+========
+
+.Toolbar control
+=========
+[tp-box]
+=====
+[tp-toolbar]
+======
+[tp-fullscreen]
+========
+========
+======
+
+The fullscreen button is in a toolbar.
+
+The containing box is still the fullscreen target.
+=====
+=========
+
+.Change event
+========
+[tp-box,id="fullscreen-event-target"]
+=====
+[tp-fullscreen,anchor="#fullscreen-event-target"]
+======
+======
+
+Enter or exit fullscreen to emit
+`tp-fullscreen-change`
+.
+=====
+
+[tp-console]
+=====
+=====
+
+[script,type="module"]
+----
+customElements.whenDefined('tp-console').then(() => {
+  const section = document.querySelector('#fullscreen-event-target');
+  const output = document.querySelector('tp-console');
+  output.redirectConsoleToSelf();
+  section?.addEventListener('tp-fullscreen-change', (event) => {
+  console.info('tp-fullscreen-change', {
+    fullscreen: event.detail.fullscreen,
+    anchor: event.detail.anchor,
+    target: event.detail.target?.id,
+  });
+  });
+});
+----
+========
+-----
+==========

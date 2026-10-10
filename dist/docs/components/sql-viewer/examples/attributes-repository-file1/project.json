@@ -1,0 +1,21 @@
+{
+  "name": "SQL repository example",
+  "entry": "/query.sql",
+  "setup": "/tables.sql",
+  "database": {
+    "id": "tables.sql",
+    "name": "tables.sql",
+    "type": "sql",
+    "path": "/tables.sql",
+    "active": true
+  },
+  "databases": [
+    {
+      "id": "tables.sql",
+      "name": "tables.sql",
+      "type": "sql",
+      "path": "/tables.sql",
+      "active": true
+    }
+  ]
+}

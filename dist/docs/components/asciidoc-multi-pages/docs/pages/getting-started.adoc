@@ -1,0 +1,4 @@
+= Getting started
+:showtitle:
+
+Add AsciiDoc files to the repository and reference them from `sidebar.adoc`.

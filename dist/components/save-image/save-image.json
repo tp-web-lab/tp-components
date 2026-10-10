@@ -1,0 +1,109 @@
+{
+  "tagname": "tp-save-image",
+  "classname": "TpSaveImage",
+  "superclass": "TpBase",
+  "description": "Saves an anchored image in several formats.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-save-image></tp-save-image>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "anchor",
+      "description": "CSS selector of the image or exportable component.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the trigger.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "filename",
+      "description": "Download filename without its extension.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"image\""
+    },
+    {
+      "name": "name",
+      "description": "Icon used by the trigger.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"image-download\""
+    },
+    {
+      "name": "size",
+      "description": "Icon button size.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"m\""
+    },
+    {
+      "name": "variant",
+      "description": "Icon button variant.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"neutral\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "save(format: TpSaveImageFormat): Promise<void>",
+      "inherited": false,
+      "description": "Save."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-save-image-error",
+      "description": "Emitted when the target cannot be exported.",
+      "detail": "{ format: \"svg\" | \"png\" | \"webp\"; error: unknown; anchor: string }"
+    },
+    {
+      "name": "tp-save-image-save",
+      "description": "Emitted after an image has been prepared for download.",
+      "detail": "{ format: \"svg\" | \"png\" | \"webp\"; filename: string; anchor: string; target: Element }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Displays an anchored dropdown menu."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Save image",
+    "introduction": "The custom `<tp-save-image>` element implements the <tp-icon name=\"save-image\" library=\"components\" size=\"1.25em\"></tp-icon> Save image functionality: saves an anchored image in several formats.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Save image button | Download the associated image. The browser handles the download. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

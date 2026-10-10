@@ -1,0 +1,14 @@
+{
+  "id": "05-rst-music",
+  "label": "Music",
+  "name": "reStructuredText music",
+  "entry": "/index.rst",
+  "extensions": [
+    {
+      "id": "music",
+      "label": "Music",
+      "url": "/extensions/restructuredtext/music/index.js",
+      "enabled": true
+    }
+  ]
+}

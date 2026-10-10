@@ -1,0 +1,129 @@
+{
+  "tagname": "tp-dropdown",
+  "classname": "TpDropdown",
+  "superclass": "TpOverlayElement",
+  "description": "Displays an anchored dropdown menu.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-dropdown></tp-dropdown>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "anchor",
+      "description": "CSS selector of the anchor element.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "offset",
+      "description": "Distance between the anchor and the dropdown.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"8px\""
+    },
+    {
+      "name": "open",
+      "description": "Opens the dropdown.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "outside-click",
+      "description": "Closes the dropdown when the user clicks outside it.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "placement",
+      "description": "Dropdown placement relative to the anchor.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpDropdownPlacement",
+      "default": "\"bottom\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "closeAll(): void",
+      "inherited": false,
+      "description": "Closes all submenus."
+    },
+    {
+      "name": "show(): void",
+      "inherited": false,
+      "description": "Show."
+    },
+    {
+      "name": "toggle(): void",
+      "inherited": false,
+      "description": "Toggles the dropdown."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-dropdown-toggle",
+      "description": "Emitted when the dropdown open state changes.",
+      "detail": "{ backdrop: boolean; open: boolean; outsideClick: boolean; anchor: string; placement: \"top\" | \"end\" | \"bottom\" | \"start\" }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-dropdown-gap",
+      "default": "0.125rem",
+      "description": "Gap between menu items."
+    },
+    {
+      "name": "--tp-dropdown-padding",
+      "default": "0.25rem",
+      "description": "Padding around menus."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Dropdown",
+    "introduction": "The custom `<tp-dropdown>` element implements the <tp-icon name=\"dropdown\" library=\"components\" size=\"1.25em\"></tp-icon> Dropdown functionality: displays an anchored dropdown menu.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Activate the trigger to open the dropdown, then choose an item. |\n| Using the component | Close the dropdown to leave without selecting an action. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| ArrowDown / ArrowUp | Moves focus between menu items. |\n| ArrowRight / ArrowLeft | Opens or closes a submenu and moves focus appropriately. |\n| Home / End | Moves focus to the first or last item. |\n| Enter / Space | Activates an item or toggles its submenu. |\n| Escape | Closes the menu. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "ArrowDown / ArrowUp",
+        "description": "Moves focus between menu items."
+      },
+      {
+        "key": "ArrowRight / ArrowLeft",
+        "description": "Opens or closes a submenu and moves focus appropriately."
+      },
+      {
+        "key": "Home / End",
+        "description": "Moves focus to the first or last item."
+      },
+      {
+        "key": "Enter / Space",
+        "description": "Activates an item or toggles its submenu."
+      },
+      {
+        "key": "Escape",
+        "description": "Closes the menu."
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "A small reStructuredText document",
+  "entry": "/index.rst",
+  "files": [
+    {
+      "path": "/index.rst",
+      "language": "restructuredtext",
+      "content": "Hello, reStructuredText!\n========================================\n\nEdit this **paragraph**, then select Run.\n\n- Write\n- Preview\n- Publish"
+    }
+  ]
+}

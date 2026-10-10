@@ -1,0 +1,16 @@
+{
+  "name": "JavaScript viewer example",
+  "entry": "/main.js",
+  "files": [
+    {
+      "path": "/index.html",
+      "language": "html",
+      "content": "<main id=\"app\"></main>"
+    },
+    {
+      "path": "/main.js",
+      "language": "javascript",
+      "content": "const app = document.querySelector('#app');\n\nif (app instanceof HTMLElement) {\n  app.textContent = 'Loaded from src';\n}\n\nconsole.log('JavaScript project loaded from src');"
+    }
+  ]
+}

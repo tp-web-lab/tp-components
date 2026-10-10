@@ -1,0 +1,38 @@
+<tp-html-viewer label="tp-numberfield" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-cluster>
+        <tp-numberfield label="Quantity" value="3" min="0" max="10" clearable=""></tp-numberfield>
+        <tp-numberfield label="Level" value="40" min="0" max="100" step="5" range="" clearable=""></tp-numberfield>
+      </tp-cluster>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Change several attributes on one preview. All controls start at their documented defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Reset defaults fills the controls with their defaults again. Controls stay available when the preview is disabled or readonly.</p>
+      <tp-stack>
+        <tp-checkbox-list id="numberfield-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>clearable</li><li>disabled</li><li>range</li><li>readonly</li><li>required</li></ul></tp-checkbox-list>
+        <tp-radio-list data-setting="label-position" label="label-position" label-position="top" orientation="horizontal" value="1"><ul><li>top</li><li>bottom</li><li>start</li><li>end</li></ul></tp-radio-list>
+        <tp-cluster><tp-textfield data-setting="aria-label" label="aria-label" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="label" label="label" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="list" label="list" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="max" label="max" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="min" label="min" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="name" label="name" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="placeholder" label="placeholder" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="step" label="step" value="1" placeholder="1" clearable></tp-textfield>
+      <tp-textfield data-setting="value" label="value" value="" placeholder="" clearable></tp-textfield></tp-cluster>
+        <tp-button id="numberfield-reset" type="button">Reset defaults</tp-button>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-box><tp-numberfield id="numberfield-preview"></tp-numberfield></tp-box>
+      <tp-box id="numberfield-readout" aria-live="polite">Reading native attributes…</tp-box>
+      <tp-callout variant="info" heading="Things to try">Set label and a numeric value, then try min, max and step (a positive number or any). Enable range to use a slider; its value is always nonempty and is clamped to its limits. Clear resets a slider to its midpoint. Changing the preview also updates these controls. Enable clearable to show the clear button; it is hidden otherwise.</tp-callout>
+      <script type="module" src="/docs/components/numberfield/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Inline named field">
+      <p>Value: <tp-numberfield name="identifier" value="12" placeholder="Enter a value"></tp-numberfield></p>
+    </div>
+  </template>
+</tp-html-viewer>

@@ -1,0 +1,69 @@
+{
+  "tagname": "tp-chronometer",
+  "classname": "TpChronometer",
+  "superclass": "TpBase",
+  "description": "Chronometer component.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-chronometer></tp-chronometer>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "size",
+      "description": "Icon and text size.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1rem\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "pause(): void",
+      "inherited": false,
+      "description": "Pauses the chronometer."
+    },
+    {
+      "name": "play(): void",
+      "inherited": false,
+      "description": "Starts the chronometer."
+    },
+    {
+      "name": "stop(): void",
+      "inherited": false,
+      "description": "Stops and resets the chronometer."
+    }
+  ],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-chronometer-size",
+      "default": "1rem",
+      "description": "Icon and text size."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Chronometer",
+    "introduction": "The custom `<tp-chronometer>` element implements the <tp-icon name=\"chronometer\" library=\"components\" size=\"1.25em\"></tp-icon> Chronometer functionality: chronometer component with play, pause and stop controls.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Start chronometer | Start or resume timing. |\n| Pause chronometer | Freeze the elapsed time. |\n| Stop chronometer | Stop timing and reset the display. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

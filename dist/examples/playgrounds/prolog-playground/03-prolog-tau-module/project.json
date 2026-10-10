@@ -1,0 +1,7 @@
+{
+  "id": "03-prolog-tau-module",
+  "label": "Prolog Tau module",
+  "name": "Prolog Tau module",
+  "entry": "/program.pl",
+  "query": "/query.pl"
+}

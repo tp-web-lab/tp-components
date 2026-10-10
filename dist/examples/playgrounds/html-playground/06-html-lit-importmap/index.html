@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Lit tabs with import map</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "lit": "https://cdn.jsdelivr.net/npm/lit@3/+esm",
+          "lit/": "https://cdn.jsdelivr.net/npm/lit@3/",
+          "lit-html/": "https://cdn.jsdelivr.net/npm/lit-html@3/"
+        }
+      }
+    </script>
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <h2>Lit tabs with import map</h2>
+
+    <p>
+      This example imports Lit through an import map.
+    </p>
+
+<pre><code>
+&lt;script type="importmap"&gt;
+  {
+    "imports": {
+      "lit": "https://cdn.jsdelivr.net/npm/lit@3/+esm",
+      "lit/": "https://cdn.jsdelivr.net/npm/lit@3/",
+      "lit-html/": "https://cdn.jsdelivr.net/npm/lit-html@3/"
+    }
+  }
+&lt;/script&gt;
+</code></pre>
+
+    <tp-demo-tabs>
+      <dl>
+        <dt>HTML</dt>
+        <dd>HTML structures the document.</dd>
+
+        <dt>CSS</dt>
+        <dd>CSS styles the document.</dd>
+
+        <dt>JavaScript</dt>
+        <dd>JavaScript adds behavior.</dd>
+
+        <dt>Lit</dt>
+        <dd><a href="https://lit.dev/" target="_blank" rel="noopener noreferrer">Lit</a> helps create reactive custom elements with <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM" target="_blank" rel="noopener noreferrer">shadow DOM</a></dd>
+      </dl>
+    </tp-demo-tabs>
+  </body>
+</html>

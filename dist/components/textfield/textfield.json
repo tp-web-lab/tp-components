@@ -1,0 +1,270 @@
+{
+  "tagname": "tp-textfield",
+  "classname": "TpTextfield",
+  "superclass": "TpBase",
+  "description": "Single-line and automatically growing multiline text field.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-textfield label=\"Single line\" placeholder=\"Type some text...\" clearable></tp-textfield>\n\n    <tp-textfield label=\"Multiline\" multiline placeholder=\"Type some text...\" clearable value=\"An example of text that has already been entered in the field\"></tp-textfield>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "aria-label",
+      "description": "Controls the aria label.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "autocomplete",
+      "description": "Native autocomplete hint.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "clearable",
+      "description": "Shows the clear button; it is disabled when empty, readonly or disabled.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the field and its clear button.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "icon",
+      "description": "Prefix icon name.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "icon-library",
+      "description": "Prefix icon library.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"tp\""
+    },
+    {
+      "name": "label",
+      "description": "Visible label associated with the native input or textarea.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label-position",
+      "description": "Label position (`top`, `bottom`, `start`, or `end`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"top\""
+    },
+    {
+      "name": "multiline",
+      "description": "Uses an automatically growing textarea instead of an input.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "name",
+      "description": "Name submitted with the containing form; defaults to the initial inline content when omitted.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "placeholder",
+      "description": "Placeholder shown while the field is empty.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "readonly",
+      "description": "Prevents value editing.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "required",
+      "description": "Marks the field as required.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "rows",
+      "description": "Minimum number of rows in multiline mode.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "3"
+    },
+    {
+      "name": "type",
+      "description": "Input type (`text`, `email`, `password`, `search`, `tel`, or `url`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"text\""
+    },
+    {
+      "name": "value",
+      "description": "Current field value.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "clear(): void",
+      "inherited": false,
+      "description": "Clears the field and emits `input`, `change`, and `tp-clear`."
+    },
+    {
+      "name": "focus(options?: FocusOptions): void",
+      "inherited": false,
+      "description": "Focuses the native input or textarea."
+    },
+    {
+      "name": "select(): void",
+      "inherited": false,
+      "description": "Selects the complete field value."
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "description": "Emitted when the edited value is committed.",
+      "detail": "void"
+    },
+    {
+      "name": "input",
+      "description": "Emitted when the value changes while editing.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-clear",
+      "description": "Emitted after the embedded button clears the value.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-textfield-background",
+      "default": "var(--tp-paper-color)",
+      "description": "Controls the background."
+    },
+    {
+      "name": "--tp-textfield-border-color",
+      "default": "var(--tp-neutral-stroke-soft)",
+      "description": "Controls the border color."
+    },
+    {
+      "name": "--tp-textfield-focus-color",
+      "default": "var(--tp-brand-text-colorful)",
+      "description": "Controls the focus color."
+    },
+    {
+      "name": "--tp-textfield-inline-size",
+      "default": "20ch",
+      "description": "Controls the inline size."
+    },
+    {
+      "name": "--tp-textfield-label-font-weight",
+      "default": "500",
+      "description": "Controls the label font weight."
+    },
+    {
+      "name": "--tp-textfield-label-gap",
+      "default": "0.35em",
+      "description": "Controls the label gap."
+    },
+    {
+      "name": "--tp-textfield-padding-block",
+      "default": "0.6em",
+      "description": "Controls the padding block."
+    },
+    {
+      "name": "--tp-textfield-padding-inline",
+      "default": "0.75em",
+      "description": "Controls the padding inline."
+    },
+    {
+      "name": "--tp-textfield-radius",
+      "default": "var(--tp-border-radius-sm)",
+      "description": "Controls the radius."
+    },
+    {
+      "name": "--tp-textfield-required-color",
+      "default": "var(--tp-danger-text-colorful)",
+      "description": "Controls the required color."
+    },
+    {
+      "name": "--tp-textfield-value-font-weight",
+      "default": "400",
+      "description": "Controls the value font weight."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Text field",
+    "introduction": "The custom `<tp-textfield>` element implements the <tp-icon name=\"textfield\" library=\"components\" size=\"1.25em\"></tp-icon> Text field functionality: single-line and automatically growing multiline text field.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Type or edit text in the field. |\n| Using the component | The trailing clear button removes its contents when clearing is available. |\n| Using the component | A required-field marker means you must provide a value before submitting the form. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Typing | Enter or edit the value using the field controls; read-only and disabled fields cannot be edited. |\n| Enter / Space on Clear | Activate the clear button when available. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

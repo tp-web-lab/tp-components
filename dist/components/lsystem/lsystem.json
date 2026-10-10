@@ -1,0 +1,147 @@
+{
+  "tagname": "tp-lsystem",
+  "classname": "TpLsystem",
+  "superclass": "TpBase",
+  "description": "renders L-system fractals and explores their successive rewriting iterations.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-lsystem label=\"Koch curve\">\n  <script type=\"tp/lsystem\">\n    axiom: F\n    iterations: 3\n    angle: 60\n    rule: F => F+F--F+F\n  </script>\n</tp-lsystem>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "angle",
+      "description": "Optional turning-angle override in degrees; empty uses the definition.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "interval",
+      "description": "Milliseconds between playback iterations, at least 100.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1000"
+    },
+    {
+      "name": "iterations",
+      "description": "Optional iteration override from 0 to 12; empty uses the source or preset value.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label",
+      "description": "Visible caption and accessible SVG name.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"L-system\""
+    },
+    {
+      "name": "preset",
+      "description": "Built-in definition used when no source is supplied.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"fractal-tree\"|\"barnsley-fern\"|\"koch-curve\"|\"dragon-curve\"|\"hilbert-curve\"|\"peano-curve\"|\"levy-c-curve\"|\"gosper-curve\"|\"pythagoras-tree\"|\"sierpinski-triangle\"|\"sierpinski-carpet\"|\"sierpinski-arrowhead\"|\"sierpinski-gasket\"|\"sierpinski-tetrahedron\"",
+      "default": "\"koch-curve\""
+    },
+    {
+      "name": "src",
+      "description": "Source file; takes precedence over the internal script and preset.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "step",
+      "description": "Optional positive drawing-step override; empty uses the definition.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "exportSvg(): string",
+      "inherited": false,
+      "description": "Returns the current standalone SVG for export integrations."
+    },
+    {
+      "name": "pause(): void",
+      "inherited": false,
+      "description": "Pauses playback without changing the displayed iteration."
+    },
+    {
+      "name": "play(): void",
+      "inherited": false,
+      "description": "Starts user-requested playback, stopping at the final iteration without looping."
+    },
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Pauses and restores iteration zero, the unexpanded axiom."
+    },
+    {
+      "name": "step(): void",
+      "inherited": false,
+      "description": "Advances one iteration; reaching the limit restarts at the axiom on the next step."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-lsystem-rendered",
+      "description": "Emitted after an iteration has been drawn.",
+      "detail": "{ iteration: number; iterations: number }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-button-group",
+      "summary": "Button group component for organizing multiple buttons."
+    },
+    {
+      "name": "tp-callout",
+      "summary": "Callout component for highlighted contextual content."
+    },
+    {
+      "name": "tp-save-image",
+      "summary": "Downloads an anchored image as SVG, PNG or WebP."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    }
+  ],
+  "userHelp": {
+    "displayName": "L-system",
+    "introduction": "The custom `<tp-lsystem>` element renders L-system fractals and explores their successive rewriting iterations.\nIt reuses the grammar, presets, turtle interpreter and SVG renderer of `@tp/tp-utilities`, also used by the L-system extension of `@tp/tp-markdown`.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Step | Pause and advance one rewriting iteration. After the final iteration, return to iteration zero. |\n| Play / Pause | Play successive iterations or pause on the current one. Starting from the final iteration restarts at zero; playback stops at the final iteration. |\n| Reset | Pause and display the axiom at iteration zero. |\n| Save image | Choose SVG, PNG or WebP to download the current drawing. |\n| Iteration counter | Read the current iteration and the definition's maximum. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between playback and export controls. |\n| Enter / Space | Activate the focused button. |\n| Escape | Close the image export menu. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

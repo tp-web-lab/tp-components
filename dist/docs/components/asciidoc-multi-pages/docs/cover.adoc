@@ -1,0 +1,4 @@
+= AsciiDoc documentation
+:showtitle:
+
+Every file in this repository is rendered with `<tp-asciidoc>`.

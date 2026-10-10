@@ -1,0 +1,206 @@
+{
+  "tagname": "tp-game-life",
+  "classname": "TpGameLife",
+  "superclass": "TpBase",
+  "description": "Conway's Game of Life component.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-game-life></tp-game-life>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "alive-color",
+      "description": "Controls the alive color.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "autoplay",
+      "description": "Controls the autoplay.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "background",
+      "description": "Controls the background.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "cell-radius",
+      "description": "Controls the cell radius.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "cell-size",
+      "description": "Controls the cell size.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "dead-color",
+      "description": "Controls the dead color.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "grid-color",
+      "description": "Controls the grid color.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "grid-stroke-width",
+      "description": "Controls the grid stroke width.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "interval",
+      "description": "Controls the interval.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label",
+      "description": "Controls the label.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "padding",
+      "description": "Controls the padding.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "preset",
+      "description": "Controls the preset.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "preset-height",
+      "description": "Controls the preset height.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "preset-width",
+      "description": "Controls the preset width.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "preset-x",
+      "description": "Controls the preset x.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "preset-y",
+      "description": "Controls the preset y.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "steps",
+      "description": "Controls the steps.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "wrap",
+      "description": "Controls the wrap.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-button-group",
+      "summary": "Button group component for organizing multiple buttons."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Game of Life",
+    "introduction": "The custom `<tp-game-life>` element implements the <tp-icon name=\"game-life\" library=\"components\" size=\"1.25em\"></tp-icon> Game of Life functionality: conway's Game of Life component.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Toggle cells to prepare a pattern. |\n| Using the component | Step advances one generation; Play starts continuous evolution and changes to Pause. |\n| Using the component | Reset restores the starting state. |\n| Play / Pause | Starts or pauses the simulation. |\n| Step | Advances the simulation by one generation. |\n| Reset | Restores the initial pattern. |\n| Download | Saves the current pattern as a file. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

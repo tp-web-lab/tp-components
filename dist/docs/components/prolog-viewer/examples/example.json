@@ -1,0 +1,17 @@
+{
+  "name": "Prolog viewer example",
+  "entry": "/program.pl",
+  "query": "/query.pl",
+  "files": [
+    {
+      "path": "/program.pl",
+      "language": "prolog",
+      "content": "parent(ada, byron).\nparent(byron, charles).\n\ngrandparent(Grandparent, Grandchild) :-\n  parent(Grandparent, Parent),\n  parent(Parent, Grandchild)."
+    },
+    {
+      "path": "/query.pl",
+      "language": "prolog",
+      "content": "grandparent(ada, Grandchild)."
+    }
+  ]
+}

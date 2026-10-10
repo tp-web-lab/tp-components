@@ -1,0 +1,95 @@
+{
+  "tagname": "tp-restructuredtext-viewer",
+  "classname": "TpRestructuredTextViewer",
+  "superclass": "TpMarkupViewer",
+  "description": "Interactive editor and viewer for one or more reStructuredText examples.\n\nConsecutive examples can be declared with `.. example:: Label` blocks.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-restructuredtext-viewer></tp-restructuredtext-viewer>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "doctest",
+      "description": "Runs standard Python doctest blocks in rendered output.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "lite",
+      "description": "Uses the compact single-example viewer with rendered HTML output.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "Comma-separated URLs of external reStructuredText example files.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-html-viewer",
+      "summary": "Interactive HTML viewer with editable source, live rendering, and DOM inspection."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-object-tree",
+      "summary": "Specialized tree for inspecting JavaScript values."
+    },
+    {
+      "name": "tp-restructuredtext",
+      "summary": "reStructuredText rendering component."
+    },
+    {
+      "name": "tp-switcher",
+      "summary": "Switches between horizontal and vertical layouts based on available space."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-restructuredtext",
+      "url": "https://www.npmjs.com/package/@tp/tp-restructuredtext",
+      "summary": "reStructuredText parsing and rendering."
+    }
+  ],
+  "userHelp": {
+    "displayName": "reStructuredText viewer",
+    "introduction": "The custom `<tp-restructuredtext-viewer>` element implements the <tp-icon name=\"restructuredtext-viewer\" library=\"components\" size=\"1.25em\"></tp-icon> reStructuredText viewer functionality: interactive reStructuredText viewer with editable source and parser outputs.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Code | The viewer initially displays the result. **Code** shows or hides the source editor; edit the source there, then use **Run** to update the result. **Reset** restores the initial source. |\n| HTML | In the output toolbar, **HTML**, **Generated HTML** (the code icon) and **Tree** switch between the rendered page, the parser's generated HTML in a read-only editor, and its syntax tree. |\n| Using the component | This is separate from the source-editor toggle and is not available in lite mode. |\n| :tp-icon:{name=\"code\" size=\"1.25em\"} Code | Shows or hides the source editor. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"1.25em\"} Editor toolbar | Shows or hides the toolbar of every visible code editor. |\n| :tp-icon:{name=\"eye-outline\" size=\"1.25em\"} Render | Shows or hides the rendered output. |\n| :tp-icon:{name=\"refresh\" size=\"1.25em\"} Reset | Restores the initially loaded content. |\n| :tp-icon:{name=\"play\" size=\"1.25em\"} Run | Renders the current source. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

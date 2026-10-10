@@ -1,0 +1,170 @@
+.. tp-restructuredtext-viewer::
+   :label: tp-numberfield
+   :allow-script:
+
+   .. script::
+      :type: tp/restructuredtext
+
+      .. example:: Basic usage
+
+         .. tp-cluster::
+
+            .. tp-numberfield::
+               :label: Quantity
+               :value: 3
+               :min: 0
+               :max: 10
+               :clearable:
+
+            .. tp-numberfield::
+               :label: Level
+               :value: 40
+               :min: 0
+               :max: 100
+               :step: 5
+               :range:
+               :clearable:
+
+      .. example:: Attributes
+
+         Change several attributes on one preview. All controls start at their documented defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Reset defaults fills the controls with their defaults again. Controls stay available when the preview is disabled or readonly.
+
+         .. tp-stack::
+
+            .. tp-checkbox-list::
+               :id: numberfield-booleans
+               :label: Boolean attributes
+               :label-position: top
+               :orientation: horizontal
+               :value:
+
+               - clearable
+
+               - disabled
+
+               - range
+
+               - readonly
+
+               - required
+
+            .. tp-radio-list::
+               :data-setting: label-position
+               :label: label-position
+               :label-position: top
+               :orientation: horizontal
+               :value: 1
+
+               - top
+
+               - bottom
+
+               - start
+
+               - end
+
+            .. tp-cluster::
+
+               .. tp-textfield::
+                  :data-setting: aria-label
+                  :label: aria-label
+                  :value:
+                  :placeholder:
+                  :clearable:
+
+               .. tp-textfield::
+                  :data-setting: label
+                  :label: label
+                  :value:
+                  :placeholder:
+                  :clearable:
+
+               .. tp-textfield::
+                  :data-setting: list
+                  :label: list
+                  :value:
+                  :placeholder:
+                  :clearable:
+
+               .. tp-textfield::
+                  :data-setting: max
+                  :label: max
+                  :value:
+                  :placeholder:
+                  :clearable:
+
+               .. tp-textfield::
+                  :data-setting: min
+                  :label: min
+                  :value:
+                  :placeholder:
+                  :clearable:
+
+               .. tp-textfield::
+                  :data-setting: name
+                  :label: name
+                  :value:
+                  :placeholder:
+                  :clearable:
+
+               .. tp-textfield::
+                  :data-setting: placeholder
+                  :label: placeholder
+                  :value:
+                  :placeholder:
+                  :clearable:
+
+               .. tp-textfield::
+                  :data-setting: step
+                  :label: step
+                  :value: 1
+                  :placeholder: 1
+                  :clearable:
+
+               .. tp-textfield::
+                  :data-setting: value
+                  :label: value
+                  :value:
+                  :placeholder:
+                  :clearable:
+
+            .. tp-button::
+               :id: numberfield-reset
+               :type: button
+
+               Reset defaults
+
+         .. tp-divider::
+
+         .. h3::
+
+            Preview
+
+         .. tp-box::
+
+            .. tp-numberfield::
+               :id: numberfield-preview
+
+         .. tp-box::
+            :id: numberfield-readout
+            :aria-live: polite
+
+            Reading native attributes…
+
+         .. tp-callout::
+            :variant: info
+            :heading: Things to try
+
+            Set label and a numeric value, then try min, max and step (a positive number or any). Enable range to use a slider; its value is always nonempty and is clamped to its limits. Clear resets a slider to its midpoint. Changing the preview also updates these controls. Enable clearable to show the clear button; it is hidden otherwise.
+
+         .. script::
+            :type: module
+            :src: /docs/components/numberfield/examples/attributes.js
+
+      .. example:: Inline named field
+
+         .. role:: example-tp-numberfield-1(tp-numberfield)
+            :value: 12
+            :placeholder: Enter a value
+
+         Value: :example-tp-numberfield-1:`identifier`

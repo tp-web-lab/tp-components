@@ -1,0 +1,20 @@
+{
+  "src": [
+    {
+      "label": "Default",
+      "value": ""
+    },
+    {
+      "label": "file1",
+      "value": "/docs/components/asciidoc/examples/attributes-src-file1.adoc"
+    },
+    {
+      "label": "file2",
+      "value": "/docs/components/asciidoc/examples/attributes-src-file2.adoc"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/docs/components/asciidoc/examples/attributes-src-file-unknown.adoc"
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "title": "Lamp and motor in parallel",
+  "nodes": [
+    {
+      "id": "V1",
+      "type": "analog-voltage-source",
+      "x": 100,
+      "y": 220,
+      "label": "12 V DC",
+      "data": {
+        "voltage": 12,
+        "waveform": "dc",
+        "angle": 270,
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "H1",
+      "type": "analog-hub",
+      "x": 280,
+      "y": 100,
+      "label": "+12 V"
+    },
+    {
+      "id": "H2",
+      "type": "analog-hub",
+      "x": 280,
+      "y": 340,
+      "label": "Return"
+    },
+    {
+      "id": "LAMP1",
+      "type": "analog-lamp",
+      "x": 430,
+      "y": 220,
+      "label": "Lamp 24 Ω",
+      "data": {
+        "resistance": 24,
+        "angle": 90,
+        "orientation": "vertical",
+        "displayScale": 1
+      }
+    },
+    {
+      "id": "M1",
+      "type": "analog-motor",
+      "x": 590,
+      "y": 220,
+      "label": "Motor 12 Ω",
+      "data": {
+        "resistance": 12,
+        "angle": 90,
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "GND",
+      "type": "analog-ground",
+      "x": 280,
+      "y": 420,
+      "label": "GND"
+    },
+    {
+      "id": "note",
+      "type": "comment",
+      "x": 520,
+      "y": 420,
+      "label": "The lamp and motor receive the same voltage. Their branch currents depend on their resistance.",
+      "data": {
+        "color": "info"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "supply",
+      "type": "analog-wire",
+      "source": "V1",
+      "sourcePort": "north",
+      "target": "H1",
+      "targetPort": "west",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "return",
+      "type": "analog-wire",
+      "source": "V1",
+      "sourcePort": "south",
+      "target": "H2",
+      "targetPort": "west",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "lamp-supply",
+      "type": "analog-wire",
+      "source": "H1",
+      "sourcePort": "east",
+      "target": "LAMP1",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "horizontal",
+      "turns": "alternating",
+      "data": {
+        "measurements": [
+          {
+            "id": "lamp-current",
+            "position": 0.65,
+            "label": "Lamp"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lamp-return",
+      "type": "analog-wire",
+      "source": "LAMP1",
+      "sourcePort": "south",
+      "target": "H2",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "motor-supply",
+      "type": "analog-wire",
+      "source": "H1",
+      "sourcePort": "north",
+      "target": "M1",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 2,
+      "departure": "vertical",
+      "turns": "same",
+      "bendY": 60,
+      "data": {
+        "measurements": [
+          {
+            "id": "motor-current",
+            "position": 0.7,
+            "label": "Motor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "motor-return",
+      "type": "analog-wire",
+      "source": "M1",
+      "sourcePort": "south",
+      "target": "H2",
+      "targetPort": "east",
+      "direction": "none",
+      "routing": "orthogonal",
+      "elbows": 1,
+      "departure": "vertical",
+      "turns": "alternating"
+    },
+    {
+      "id": "ground",
+      "type": "analog-wire",
+      "source": "H2",
+      "sourcePort": "south",
+      "target": "GND",
+      "targetPort": "north",
+      "direction": "none",
+      "routing": "straight"
+    }
+  ]
+}

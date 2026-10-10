@@ -1,0 +1,94 @@
+{
+  "tagname": "tp-splitter",
+  "classname": "TpSplitter",
+  "superclass": "TpBase",
+  "description": "Splitter layout with two resizable panels.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "```html\n<tp-splitter position=\"40%\">\n  <dl>\n    <dt>start</dt><dd><tp-box>Drag the divider to resize this panel.</tp-box></dd>\n    <dt>end</dt><dd><tp-box>This panel uses the remaining space.</tp-box></dd>\n  </dl>\n</tp-splitter>\n```"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "axis",
+      "description": "Split direction (`horizontal` or `vertical`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpSplitterAxis",
+      "default": "horizontal"
+    },
+    {
+      "name": "position",
+      "description": "Divider position as a percentage.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "50%"
+    },
+    {
+      "name": "storage-key",
+      "description": "Optional localStorage key used to save and restore the divider position. Empty by default: persistence is disabled. Use a distinct key for each independent splitter.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Restores the divider to its initial position."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-splitter-change",
+      "description": "Emitted when the divider position changes.",
+      "detail": "{ axis: \"horizontal\" | \"vertical\"; position: string; storageKey: string }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-splitter-divider-color",
+      "default": "var(--tp-brand-fill-mid, #2563eb)",
+      "description": "Controls the divider color."
+    },
+    {
+      "name": "--tp-splitter-divider-size",
+      "default": "0.75rem",
+      "description": "Controls the divider size."
+    },
+    {
+      "name": "--tp-splitter-position",
+      "default": "50%",
+      "description": "Controls the position."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Splitter",
+    "introduction": "The custom `<tp-splitter>` element implements the <tp-icon name=\"splitter\" library=\"components\" size=\"1.25em\"></tp-icon> Splitter functionality: splitter layout with two resizable panels.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Drag | Drag the separator to resize the two panels. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus the separator. |\n| Arrow keys | Moves the divider by 1%, or by 10% while Shift is held. |\n| Home / End | Moves the divider to its minimum or maximum position. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Arrow keys",
+        "description": "Moves the divider by 1%, or by 10% while Shift is held."
+      },
+      {
+        "key": "Home / End",
+        "description": "Moves the divider to its minimum or maximum position."
+      }
+    ]
+  }
+}

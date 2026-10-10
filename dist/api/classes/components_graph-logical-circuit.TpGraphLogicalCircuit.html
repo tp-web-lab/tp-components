@@ -1,0 +1,1198 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>TpGraphLogicalCircuit | @tp/tp-components API</title><meta name="description" content="Documentation for @tp/tp-components API"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/custom.css"/><script defer src="../assets/main.js"></script><script defer src="../assets/custom.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container"><a href="../index.html" class="title">@tp/tp-components API</a>
+<div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/>
+<ul role="listbox" id="tsd-search-results"></ul>
+<div id="tsd-search-status" aria-live="polite" aria-atomic="true">
+<div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></header>
+<div class="container container-main">
+<div class="col-content">
+<div class="tsd-page-title">
+<ul class="tsd-breadcrumb" aria-label="Breadcrumb">
+<li><a href="../modules/components_graph-logical-circuit.html">components/graph-logical-circuit</a></li>
+<li><a href="" aria-current="page">TpGraphLogicalCircuit</a></li></ul>
+<h1>Class TpGraphLogicalCircuit</h1></div>
+<section class="tsd-panel tsd-comment">
+<div class="tsd-comment tsd-typography"><p>Edits and simulates combinational logic circuits.</p>
+</div>
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-example">
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-1">&lt;</span><span class="hl-9">tp</span><span class="hl-1">-</span><span class="hl-9">graph</span><span class="hl-1">-</span><span class="hl-9">logical</span><span class="hl-1">-</span><span class="hl-9">circuit</span><span class="hl-1">&gt;&lt;/</span><span class="hl-10">tp</span><span class="hl-1">-</span><span class="hl-10">graph</span><span class="hl-1">-</span><span class="hl-10">logical</span><span class="hl-1">-</span><span class="hl-10">circuit</span><span class="hl-1">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+</div>
+<div class="tsd-tag-tagname">
+<h4 class="tsd-anchor-link" id="tagname">Tagname<a href="#tagname" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>tp-graph-logical-circuit</p>
+</div>
+<div class="tsd-tag-accessibility">
+<h4 class="tsd-anchor-link" id="accessibility">Accessibility<a href="#accessibility" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Makes logical input and output terminals operable by pointer and keyboard.</p>
+</div>
+<div class="tsd-tag-keyboard">
+<h4 class="tsd-anchor-link" id="keyboard">Keyboard<a href="#keyboard" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Toggles the focused input or output terminal.</p>
+</div></div></section>
+<section class="tsd-panel tsd-hierarchy" data-refl="8011">
+<h4>Hierarchy (<a href="../hierarchy.html#components/graph-logical-circuit.TpGraphLogicalCircuit">View Summary</a>)</h4>
+<ul class="tsd-hierarchy">
+<li class="tsd-hierarchy-item"><a href="components_graph-editor.TpGraphEditor.html" class="tsd-signature-type tsd-kind-class">TpGraphEditor</a>
+<ul class="tsd-hierarchy">
+<li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">TpGraphLogicalCircuit</span>
+<ul class="tsd-hierarchy">
+<li class="tsd-hierarchy-item"><a href="components_graph-sequential-circuit.TpGraphSequentialCircuit.html" class="tsd-signature-type tsd-kind-class">TpGraphSequentialCircuit</a></li></ul></li></ul></li></ul></section><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L268">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:268</a></li></ul></aside>
+<section class="tsd-panel-group tsd-index-group">
+<section class="tsd-panel tsd-index-panel">
+<details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h5 class="tsd-index-heading uppercase">Index</h5></summary>
+<div class="tsd-accordion-details">
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading tsd-anchor-link" id="constructors">Constructors<a href="#constructors" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-index-list"><a href="#constructor" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor"><use href="../assets/icons.svg#icon-512"></use></svg><span>constructor</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading tsd-anchor-link" id="properties">Properties<a href="#properties" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-index-list"><a href="#activeedgedirection" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>active<wbr/>Edge<wbr/>Direction</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading tsd-anchor-link" id="accessors">Accessors<a href="#accessors" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-index-list"><a href="#equationnotation" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>equation<wbr/>Notation</span></a>
+<a href="#message" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>message</span></a>
+<a href="#portsvisible" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>ports<wbr/>Visible</span></a>
+<a href="#readonly" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>readonly</span></a>
+<a href="#representation" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>representation</span></a>
+<a href="#src" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>src</span></a>
+<a href="#value" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>value</span></a>
+<a href="#zoom" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>zoom</span></a>
+<a href="#observedattributes" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>observed<wbr/>Attributes</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading tsd-anchor-link" id="methods">Methods<a href="#methods" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-index-list"><a href="#addedge" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>add<wbr/>Edge</span></a>
+<a href="#addmeasurement" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>add<wbr/>Measurement</span></a>
+<a href="#addnode" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>add<wbr/>Node</span></a>
+<a href="#animatetransition" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>animate<wbr/>Transition</span></a>
+<a href="#attributechangedcallback" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>attribute<wbr/>Changed<wbr/>Callback</span></a>
+<a href="#bindextensionevents" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>bind<wbr/>Extension<wbr/>Events</span></a>
+<a href="#capturehelpsource" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>capture<wbr/>Help<wbr/>Source</span></a>
+<a href="#connectedcallback" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>connected<wbr/>Callback</span></a>
+<a href="#copy" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>copy</span></a>
+<a href="#cut" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cut</span></a>
+<a href="#disconnectedcallback" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>disconnected<wbr/>Callback</span></a>
+<a href="#edgedirections" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>edge<wbr/>Directions</span></a>
+<a href="#ensurebasestyles" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Base<wbr/>Styles</span></a>
+<a href="#ensureglobalstyle" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Global<wbr/>Style</span></a>
+<a href="#evaluate" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>evaluate</span></a>
+<a href="#exportjson" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>export<wbr/>Json</span></a>
+<a href="#exportsvg" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>export<wbr/>Svg</span></a>
+<a href="#getbooleanattribute" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Boolean<wbr/>Attribute</span></a>
+<a href="#getclosestskippingcontainers" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span></a>
+<a href="#getstringattribute" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>String<wbr/>Attribute</span></a>
+<a href="#graphworldbounds" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>graph<wbr/>World<wbr/>Bounds</span></a>
+<a href="#handlepalettedrop" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>handle<wbr/>Palette<wbr/>Drop</span></a>
+<a href="#help" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>help</span></a>
+<a href="#importjson" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>import<wbr/>Json</span></a>
+<a href="#issupportedlogicnode" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>is<wbr/>Supported<wbr/>Logic<wbr/>Node</span></a>
+<a href="#movemeasurement" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>move<wbr/>Measurement</span></a>
+<a href="#paste" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>paste</span></a>
+<a href="#queryelement" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>query<wbr/>Element</span></a>
+<a href="#reconnectedge" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>reconnect<wbr/>Edge</span></a>
+<a href="#redo" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>redo</span></a>
+<a href="#registerpalette" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>register<wbr/>Palette</span></a>
+<a href="#registersimulator" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>register<wbr/>Simulator</span></a>
+<a href="#removeattributes" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>remove<wbr/>Attributes</span></a>
+<a href="#removeelement" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>remove<wbr/>Element</span></a>
+<a href="#renderresults" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>render<wbr/>Results</span></a>
+<a href="#rendertoolbaractions" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>render<wbr/>Toolbar<wbr/>Actions</span></a>
+<a href="#resetzoom" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>reset<wbr/>Zoom</span></a>
+<a href="#selectmany" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>select<wbr/>Many</span></a>
+<a href="#setbooleanattribute" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Boolean<wbr/>Attribute</span></a>
+<a href="#setcommentcolor" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Comment<wbr/>Color</span></a>
+<a href="#setedgedirection" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Edge<wbr/>Direction</span></a>
+<a href="#setedgeorthogonal" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Edge<wbr/>Orthogonal</span></a>
+<a href="#setedgerouting" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Edge<wbr/>Routing</span></a>
+<a href="#setelementlabel" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Element<wbr/>Label</span></a>
+<a href="#setgraph" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Graph</span></a>
+<a href="#setstringattribute" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>String<wbr/>Attribute</span></a>
+<a href="#settitle" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Title</span></a>
+<a href="#setzoom" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Zoom</span></a>
+<a href="#step" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>step</span></a>
+<a href="#toggle" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>toggle</span></a>
+<a href="#toggleequationnotation" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>toggle<wbr/>Equation<wbr/>Notation</span></a>
+<a href="#togglerepresentation" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>toggle<wbr/>Representation</span></a>
+<a href="#undo" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>undo</span></a>
+<a href="#unregisterpalette" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>unregister<wbr/>Palette</span></a>
+<a href="#validateconnection" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>validate<wbr/>Connection</span></a>
+<a href="#validatelogicgraph" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>validate<wbr/>Logic<wbr/>Graph</span></a>
+<a href="#zoomin" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>zoom<wbr/>In</span></a>
+<a href="#zoomout" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>zoom<wbr/>Out</span></a>
+</div></section></div></details></section></section>
+<details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h2 class="tsd-anchor-link" id="constructors-1">Constructors<a href="#constructors-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
+<section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="constructor"><span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="constructortpgraphlogicalcircuit"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">TpGraphLogicalCircuit</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">TpGraphLogicalCircuit</a><a href="#constructortpgraphlogicalcircuit" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">TpGraphLogicalCircuit</a></h4><aside class="tsd-sources">
+<p>Overrides <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#constructor">constructor</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L273">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:273</a></li></ul></aside></div></li></ul></section></section></details>
+<details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h2 class="tsd-anchor-link" id="properties-1">Properties<a href="#properties-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
+<section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="activeedgedirection"><code class="tsd-tag">Protected</code><span>active<wbr/>Edge<wbr/>Direction</span><a href="#activeedgedirection" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">activeEdgeDirection</span><span class="tsd-signature-symbol">:</span> <a href="../types/components_graph-editor.TpGraphEdgeDirection.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphEdgeDirection</a><span class="tsd-signature-symbol"> = &quot;forward&quot;</span></div><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#activeedgedirection">activeEdgeDirection</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L479">tp-components/src/components/graph-editor/graph-editor.ts:479</a></li></ul></aside></section></section></details>
+<details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Accessors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h2 class="tsd-anchor-link" id="accessors-1">Accessors<a href="#accessors-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
+<section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="equationnotation"><span>equation<wbr/>Notation</span><a href="#equationnotation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li>
+<div class="tsd-signature" id="equationnotationequationnotation"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">equationNotation</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="../types/components_graph-logical-circuit.TpLogicalEquationNotation.html" class="tsd-signature-type tsd-kind-type-alias">TpLogicalEquationNotation</a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <a href="../types/components_graph-logical-circuit.TpLogicalEquationNotation.html" class="tsd-signature-type tsd-kind-type-alias">TpLogicalEquationNotation</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L391">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:391</a></li></ul></aside></div></li>
+<li>
+<div class="tsd-signature" id="equationnotationequationnotation-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">equationNotation</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <a href="../types/components_graph-logical-circuit.TpLogicalEquationNotation.html" class="tsd-signature-type tsd-kind-type-alias">TpLogicalEquationNotation</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">value</span>: <a href="../types/components_graph-logical-circuit.TpLogicalEquationNotation.html" class="tsd-signature-type tsd-kind-type-alias">TpLogicalEquationNotation</a></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L392">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:392</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="message"><span>message</span><a href="#message" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li>
+<div class="tsd-signature" id="messagemessage"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">message</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<p>Inherited from TpGraphEditor.message</p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L547">tp-components/src/components/graph-editor/graph-editor.ts:547</a></li></ul></aside></div></li>
+<li>
+<div class="tsd-signature" id="messagemessage-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">message</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from TpGraphEditor.message</p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L550">tp-components/src/components/graph-editor/graph-editor.ts:550</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="portsvisible"><span>ports<wbr/>Visible</span><a href="#portsvisible" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li>
+<div class="tsd-signature" id="portsvisibleportsvisible"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">portsVisible</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<p>Inherited from TpGraphEditor.portsVisible</p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L534">tp-components/src/components/graph-editor/graph-editor.ts:534</a></li></ul></aside></div></li>
+<li>
+<div class="tsd-signature" id="portsvisibleportsvisible-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">portsVisible</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from TpGraphEditor.portsVisible</p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L537">tp-components/src/components/graph-editor/graph-editor.ts:537</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="readonly"><span>readonly</span><a href="#readonly" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li>
+<div class="tsd-signature" id="readonlyreadonly"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">readonly</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<p>Inherited from TpGraphEditor.readonly</p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L521">tp-components/src/components/graph-editor/graph-editor.ts:521</a></li></ul></aside></div></li>
+<li>
+<div class="tsd-signature" id="readonlyreadonly-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">readonly</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from TpGraphEditor.readonly</p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L524">tp-components/src/components/graph-editor/graph-editor.ts:524</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="representation"><span>representation</span><a href="#representation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li>
+<div class="tsd-signature" id="representationrepresentation"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">representation</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="../types/components_graph-logical-circuit.TpLogicGateRepresentation.html" class="tsd-signature-type tsd-kind-type-alias">TpLogicGateRepresentation</a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <a href="../types/components_graph-logical-circuit.TpLogicGateRepresentation.html" class="tsd-signature-type tsd-kind-type-alias">TpLogicGateRepresentation</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L381">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:381</a></li></ul></aside></div></li>
+<li>
+<div class="tsd-signature" id="representationrepresentation-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">representation</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <a href="../types/components_graph-logical-circuit.TpLogicGateRepresentation.html" class="tsd-signature-type tsd-kind-type-alias">TpLogicGateRepresentation</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">value</span>: <a href="../types/components_graph-logical-circuit.TpLogicGateRepresentation.html" class="tsd-signature-type tsd-kind-type-alias">TpLogicGateRepresentation</a></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L382">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:382</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="src"><span>src</span><a href="#src" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li>
+<div class="tsd-signature" id="srcsrc"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">src</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<p>Inherited from TpGraphEditor.src</p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L527">tp-components/src/components/graph-editor/graph-editor.ts:527</a></li></ul></aside></div></li>
+<li>
+<div class="tsd-signature" id="srcsrc-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">src</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from TpGraphEditor.src</p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L530">tp-components/src/components/graph-editor/graph-editor.ts:530</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="value"><span>value</span><a href="#value" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li>
+<div class="tsd-signature" id="valuevalue"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">value</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/components_graph-editor.TpGraphDocument.html" class="tsd-signature-type tsd-kind-interface">TpGraphDocument</a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <a href="../interfaces/components_graph-editor.TpGraphDocument.html" class="tsd-signature-type tsd-kind-interface">TpGraphDocument</a></h4><aside class="tsd-sources">
+<p>Inherited from TpGraphEditor.value</p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L514">tp-components/src/components/graph-editor/graph-editor.ts:514</a></li></ul></aside></div></li>
+<li>
+<div class="tsd-signature" id="valuevalue-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">value</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">graph</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/components_graph-editor.TpGraphDocument.html" class="tsd-signature-type tsd-kind-interface">TpGraphDocument</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">graph</span>: <a href="../interfaces/components_graph-editor.TpGraphDocument.html" class="tsd-signature-type tsd-kind-interface">TpGraphDocument</a></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from TpGraphEditor.value</p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L517">tp-components/src/components/graph-editor/graph-editor.ts:517</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="zoom"><span>zoom</span><a href="#zoom" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li>
+<div class="tsd-signature" id="zoomzoom"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">zoom</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<p>Inherited from TpGraphEditor.zoom</p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L541">tp-components/src/components/graph-editor/graph-editor.ts:541</a></li></ul></aside></div></li>
+<li>
+<div class="tsd-signature" id="zoomzoom-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">zoom</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">number</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from TpGraphEditor.zoom</p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L544">tp-components/src/components/graph-editor/graph-editor.ts:544</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="observedattributes"><code class="tsd-tag">Static</code><span>observed<wbr/>Attributes</span><a href="#observedattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li>
+<div class="tsd-signature" id="observedattributesobservedattributes"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">observedAttributes</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Attributes observed by <code>tp-base</code> itself.</p>
+<p>Subclasses that define their own <code>observedAttributes</code> should include
+these via spread when they also want to react to <code>dir</code> and <code>lang</code>:</p>
+<pre><code class="ts"><span class="hl-9">static</span><span class="hl-1"> </span><span class="hl-9">get</span><span class="hl-1"> </span><span class="hl-0">observedAttributes</span><span class="hl-1">() {</span><br/><span class="hl-1">  </span><span class="hl-12">return</span><span class="hl-1"> [...</span><span class="hl-9">TpBase</span><span class="hl-1">.</span><span class="hl-9">observedAttributes</span><span class="hl-1">, </span><span class="hl-2">&#39;my-attr&#39;</span><span class="hl-1">];</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
+<p>Inherited from TpGraphEditor.observedAttributes</p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L504">tp-components/src/components/graph-editor/graph-editor.ts:504</a></li></ul></aside></div></li></ul></section></section></details>
+<details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
+<section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="addedge"><span>add<wbr/>Edge</span><a href="#addedge" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="addedge-1"><span class="tsd-kind-call-signature">addEdge</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">source</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">target</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">type</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">sourcePort</span><span class="tsd-signature-symbol">?:</span> <a href="../types/components_graph-editor.TpGraphPort.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphPort</a><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">targetPort</span><span class="tsd-signature-symbol">?:</span> <a href="../types/components_graph-editor.TpGraphPort.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphPort</a><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">direction</span><span class="tsd-signature-symbol">?:</span> <a href="../types/components_graph-editor.TpGraphEdgeDirection.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphEdgeDirection</a><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/components_graph-editor.TpGraphEdge.html" class="tsd-signature-type tsd-kind-interface">TpGraphEdge</a><a href="#addedge-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">source</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">target</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">type</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = TP_LOGIC_WIRE</span></span></li>
+<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">sourcePort</span>: <a href="../types/components_graph-editor.TpGraphPort.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphPort</a></span></li>
+<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">targetPort</span>: <a href="../types/components_graph-editor.TpGraphPort.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphPort</a></span></li>
+<li><span><span class="tsd-kind-parameter">direction</span>: <a href="../types/components_graph-editor.TpGraphEdgeDirection.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphEdgeDirection</a><span class="tsd-signature-symbol"> = &#39;forward&#39;</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../interfaces/components_graph-editor.TpGraphEdge.html" class="tsd-signature-type tsd-kind-interface">TpGraphEdge</a></h4><aside class="tsd-sources">
+<p>Overrides <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#addedge">addEdge</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L337">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:337</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="addmeasurement"><span>add<wbr/>Measurement</span><a href="#addmeasurement" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="addmeasurement-1"><span class="tsd-kind-call-signature">addMeasurement</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">edgeId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">position</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">label</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/components_graph-editor.TpGraphMeasurement.html" class="tsd-signature-type tsd-kind-interface">TpGraphMeasurement</a><a href="#addmeasurement-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">edgeId</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">position</span>: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0.5</span></span></li>
+<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">label</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../interfaces/components_graph-editor.TpGraphMeasurement.html" class="tsd-signature-type tsd-kind-interface">TpGraphMeasurement</a></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#addmeasurement">addMeasurement</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L1043">tp-components/src/components/graph-editor/graph-editor.ts:1043</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="addnode"><span>add<wbr/>Node</span><a href="#addnode" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="addnode-1"><span class="tsd-kind-call-signature">addNode</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">type</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">point</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/components_graph-editor.TpGraphPoint.html" class="tsd-signature-type tsd-kind-interface">TpGraphPoint</a><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">label</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/components_graph-editor.TpGraphNode.html" class="tsd-signature-type tsd-kind-interface">TpGraphNode</a><a href="#addnode-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">type</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">point</span>: <a href="../interfaces/components_graph-editor.TpGraphPoint.html" class="tsd-signature-type tsd-kind-interface">TpGraphPoint</a></span></li>
+<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">label</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../interfaces/components_graph-editor.TpGraphNode.html" class="tsd-signature-type tsd-kind-interface">TpGraphNode</a></h4><aside class="tsd-sources">
+<p>Overrides <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#addnode">addNode</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L333">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:333</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="animatetransition"><span>animate<wbr/>Transition</span><a href="#animatetransition" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="animatetransition-1"><span class="tsd-kind-call-signature">animateTransition</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">transition</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/components_graph-editor.TpGraphTransition.html" class="tsd-signature-type tsd-kind-interface">TpGraphTransition</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#animatetransition-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">transition</span>: <a href="../interfaces/components_graph-editor.TpGraphTransition.html" class="tsd-signature-type tsd-kind-interface">TpGraphTransition</a></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#animatetransition">animateTransition</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L1202">tp-components/src/components/graph-editor/graph-editor.ts:1202</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="attributechangedcallback"><code class="tsd-tag">Protected</code><span>attribute<wbr/>Changed<wbr/>Callback</span><a href="#attributechangedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="attributechangedcallback-1"><span class="tsd-kind-call-signature">attributeChangedCallback</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#attributechangedcallback-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description"><code class="tsd-tag">Internal</code>
+<div class="tsd-comment tsd-typography"><p>Lifecycle callback invoked when an observed attribute changes.</p>
+<p>This base implementation is intentionally empty. Subclasses should
+override it — without calling <code>super</code> — to react to their own
+attribute changes.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#attributechangedcallback">attributeChangedCallback</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L570">tp-components/src/components/graph-editor/graph-editor.ts:570</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="bindextensionevents"><code class="tsd-tag">Protected</code><span>bind<wbr/>Extension<wbr/>Events</span><a href="#bindextensionevents" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="bindextensionevents-1"><span class="tsd-kind-call-signature">bindExtensionEvents</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#bindextensionevents-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Overrides <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#bindextensionevents">bindExtensionEvents</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L456">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:456</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="capturehelpsource"><code class="tsd-tag">Protected</code><span>capture<wbr/>Help<wbr/>Source</span><a href="#capturehelpsource" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="capturehelpsource-1"><span class="tsd-kind-call-signature">captureHelpSource</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#capturehelpsource-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#capturehelpsource">captureHelpSource</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/base/base.ts#L883">tp-components/src/components/base/base.ts:883</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="connectedcallback"><code class="tsd-tag">Protected</code><span>connected<wbr/>Callback</span><a href="#connectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="connectedcallback-1"><span class="tsd-kind-call-signature">connectedCallback</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#connectedcallback-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description"><code class="tsd-tag">Internal</code>
+<div class="tsd-comment tsd-typography"><p>Lifecycle callback called when the component is connected to the document.</p>
+<p>Cette implémentation :</p>
+<ul>
+<li>injects the base styles once</li>
+<li>automatically marks the host with <code>data-tp-base-host</code></li>
+</ul>
+<p>Subclasses must call <code>super.connectedCallback()</code>.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Overrides <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#connectedcallback">connectedCallback</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L323">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:323</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="copy"><span>copy</span><a href="#copy" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="copy-1"><span class="tsd-kind-call-signature">copy</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><a href="#copy-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#copy">copy</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L630">tp-components/src/components/graph-editor/graph-editor.ts:630</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="cut"><span>cut</span><a href="#cut" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="cut-1"><span class="tsd-kind-call-signature">cut</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><a href="#cut-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#cut">cut</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L655">tp-components/src/components/graph-editor/graph-editor.ts:655</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="disconnectedcallback"><span>disconnected<wbr/>Callback</span><a href="#disconnectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="disconnectedcallback-1"><span class="tsd-kind-call-signature">disconnectedCallback</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#disconnectedcallback-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#disconnectedcallback">disconnectedCallback</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L565">tp-components/src/components/graph-editor/graph-editor.ts:565</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="edgedirections"><code class="tsd-tag">Protected</code><span>edge<wbr/>Directions</span><a href="#edgedirections" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="edgedirections-1"><span class="tsd-kind-call-signature">edgeDirections</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">readonly</span> <a href="../types/components_graph-editor.TpGraphEdgeDirection.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphEdgeDirection</a><span class="tsd-signature-symbol">[]</span><a href="#edgedirections-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-keyword">readonly</span> <a href="../types/components_graph-editor.TpGraphEdgeDirection.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphEdgeDirection</a><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
+<p>Overrides <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#edgedirections">edgeDirections</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L354">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:354</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="ensurebasestyles"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Base<wbr/>Styles</span><a href="#ensurebasestyles" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="ensurebasestyles-1"><span class="tsd-kind-call-signature">ensureBaseStyles</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">targetDocument</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#ensurebasestyles-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description"><code class="tsd-tag">Internal</code>
+<div class="tsd-comment tsd-typography"><p>Injects the global base styles if needed.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">targetDocument</span>: <span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol"> = document</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#ensurebasestyles">ensureBaseStyles</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/base/base.ts#L306">tp-components/src/components/base/base.ts:306</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="ensureglobalstyle"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Global<wbr/>Style</span><a href="#ensureglobalstyle" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="ensureglobalstyle-1"><span class="tsd-kind-call-signature">ensureGlobalStyle</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">styleId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">cssText</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">targetDocument</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#ensureglobalstyle-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description"><code class="tsd-tag">Internal</code>
+<div class="tsd-comment tsd-typography"><p>Injects a global stylesheet into <code>document.head</code>
+if it does not already exist.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">styleId</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>Identifiant unique de la balise <code>&lt;style&gt;</code>.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">cssText</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>Contenu CSS à injecter.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">targetDocument</span>: <span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol"> = document</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#ensureglobalstyle">ensureGlobalStyle</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/base/base.ts#L325">tp-components/src/components/base/base.ts:325</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="evaluate"><span>evaluate</span><a href="#evaluate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="evaluate-1"><span class="tsd-kind-call-signature">evaluate</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#evaluate-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L377">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:377</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="exportjson"><span>export<wbr/>Json</span><a href="#exportjson" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="exportjson-1"><span class="tsd-kind-call-signature">exportJson</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">pretty</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><a href="#exportjson-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">pretty</span>: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#exportjson">exportJson</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L783">tp-components/src/components/graph-editor/graph-editor.ts:783</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="exportsvg"><span>export<wbr/>Svg</span><a href="#exportsvg" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="exportsvg-1"><span class="tsd-kind-call-signature">exportSvg</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><a href="#exportsvg-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#exportsvg">exportSvg</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L787">tp-components/src/components/graph-editor/graph-editor.ts:787</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="getbooleanattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>Boolean<wbr/>Attribute</span><a href="#getbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="getbooleanattribute-1"><span class="tsd-kind-call-signature">getBooleanAttribute</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><a href="#getbooleanattribute-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description"><code class="tsd-tag">Internal</code>
+<div class="tsd-comment tsd-typography"><p>Returns the boolean value of an HTML attribute.</p>
+<p>Rule used:</p>
+<ul>
+<li>attribute present → <code>true</code></li>
+<li>attribute absent → <code>false</code></li>
+</ul>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">name</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>Attribute name.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><p>Boolean value of the attribute.</p>
+<aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#getbooleanattribute">getBooleanAttribute</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/base/base.ts#L352">tp-components/src/components/base/base.ts:352</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="getclosestskippingcontainers"><code class="tsd-tag">Protected</code><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span><a href="#getclosestskippingcontainers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="getclosestskippingcontainers-1"><span class="tsd-kind-call-signature">getClosestSkippingContainers</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">selectors</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><a href="#getclosestskippingcontainers-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description"><code class="tsd-tag">Internal</code>
+<div class="tsd-comment tsd-typography"><p>Skips over container elements when searching upward with a selector.</p>
+<p>Like <code>closest()</code>, but does not traverse through container elements
+(toolbar, menu, dropdown, button-group, contextmenu).</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">selectors</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>CSS selector to match.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h4><p>Matching ancestor, or <code>null</code>.</p>
+<aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#getclosestskippingcontainers">getClosestSkippingContainers</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/base/base.ts#L450">tp-components/src/components/base/base.ts:450</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="getstringattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>String<wbr/>Attribute</span><a href="#getstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="getstringattribute-1"><span class="tsd-kind-call-signature">getStringAttribute</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">fallback</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><a href="#getstringattribute-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description"><code class="tsd-tag">Internal</code>
+<div class="tsd-comment tsd-typography"><p>Returns the value of a text attribute with a default fallback.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">name</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>Attribute name.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">fallback</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></span>
+<div class="tsd-comment tsd-typography"><p>Fallback value if the attribute is absent.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>Attribute value or fallback value.</p>
+<aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#getstringattribute">getStringAttribute</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/base/base.ts#L386">tp-components/src/components/base/base.ts:386</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="graphworldbounds"><code class="tsd-tag">Protected</code><span>graph<wbr/>World<wbr/>Bounds</span><a href="#graphworldbounds" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="graphworldbounds-1"><span class="tsd-kind-call-signature">graphWorldBounds</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><br/>    <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">maxX</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">maxY</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">minX</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">minY</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">&gt;</span><br/><span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><a href="#graphworldbounds-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">maxX</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">maxY</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">minX</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">minY</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">&gt;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#graphworldbounds">graphWorldBounds</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L1648">tp-components/src/components/graph-editor/graph-editor.ts:1648</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="handlepalettedrop"><code class="tsd-tag">Protected</code><span>handle<wbr/>Palette<wbr/>Drop</span><a href="#handlepalettedrop" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="handlepalettedrop-1"><span class="tsd-kind-call-signature">handlePaletteDrop</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">type</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">point</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/components_graph-editor.TpGraphPoint.html" class="tsd-signature-type tsd-kind-interface">TpGraphPoint</a><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">target</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Element</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#handlepalettedrop-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">type</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">point</span>: <a href="../interfaces/components_graph-editor.TpGraphPoint.html" class="tsd-signature-type tsd-kind-interface">TpGraphPoint</a></span></li>
+<li><span><span class="tsd-kind-parameter">target</span>: <span class="tsd-signature-type">Element</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#handlepalettedrop">handlePaletteDrop</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L2587">tp-components/src/components/graph-editor/graph-editor.ts:2587</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="help"><span>help</span><a href="#help" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="help-1"><span class="tsd-kind-call-signature">help</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#help-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Opens generated component help in a drawer.</p>
+<p>The method loads the component JSON generated beside its source file by
+the Vite component API plugin. A custom URL can be provided with
+<code>data-tp-help-src</code>.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#help">help</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/base/base.ts#L252">tp-components/src/components/base/base.ts:252</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="importjson"><span>import<wbr/>Json</span><a href="#importjson" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="importjson-1"><span class="tsd-kind-call-signature">importJson</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">source</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#importjson-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">source</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#importjson">importJson</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L941">tp-components/src/components/graph-editor/graph-editor.ts:941</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="issupportedlogicnode"><code class="tsd-tag">Protected</code><span>is<wbr/>Supported<wbr/>Logic<wbr/>Node</span><a href="#issupportedlogicnode" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="issupportedlogicnode-1"><span class="tsd-kind-call-signature">isSupportedLogicNode</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">type</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><a href="#issupportedlogicnode-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">type</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L324">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:324</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="movemeasurement"><span>move<wbr/>Measurement</span><a href="#movemeasurement" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="movemeasurement-1"><span class="tsd-kind-call-signature">moveMeasurement</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">position</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#movemeasurement-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">id</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">position</span>: <span class="tsd-signature-type">number</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#movemeasurement">moveMeasurement</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L1065">tp-components/src/components/graph-editor/graph-editor.ts:1065</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="paste"><span>paste</span><a href="#paste" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="paste-1"><span class="tsd-kind-call-signature">paste</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><a href="#paste-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#paste">paste</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L673">tp-components/src/components/graph-editor/graph-editor.ts:673</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="queryelement"><code class="tsd-tag">Protected</code><span>query<wbr/>Element</span><a href="#queryelement" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="queryelement-1"><span class="tsd-kind-call-signature">queryElement</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#queryelementt">T</a> <span class="tsd-signature-keyword">extends</span> <span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">selectors</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">root</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">ParentNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="components_accordion.TpAccordion.html#queryelementt">T</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><a href="#queryelement-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description"><code class="tsd-tag">Internal</code>
+<div class="tsd-comment tsd-typography"><p>Returns the first element matching the selector.</p>
+</div>
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li><span id="queryelementt"><span class="tsd-kind-type-parameter">T</span> <span class="tsd-signature-keyword">extends</span> <span class="tsd-signature-type">Element</span></span></li></ul></section>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">selectors</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>CSS selector.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">root</span>: <span class="tsd-signature-type">ParentNode</span><span class="tsd-signature-symbol"> = ...</span></span>
+<div class="tsd-comment tsd-typography"><p>Search root. Defaults to the component itself.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a class="tsd-signature-type tsd-kind-type-parameter" href="components_accordion.TpAccordion.html#queryelementt">T</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h4><p>Found element or <code>null</code>.</p>
+<aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#queryelement">queryElement</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/base/base.ts#L431">tp-components/src/components/base/base.ts:431</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="reconnectedge"><span>reconnect<wbr/>Edge</span><a href="#reconnectedge" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="reconnectedge-1"><span class="tsd-kind-call-signature">reconnectEdge</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">edgeId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">endpoint</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;source&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;target&quot;</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">nodeId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">port</span><span class="tsd-signature-symbol">:</span> <a href="../types/components_graph-editor.TpGraphPort.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphPort</a><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/components_graph-editor.TpGraphEdge.html" class="tsd-signature-type tsd-kind-interface">TpGraphEdge</a><a href="#reconnectedge-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">edgeId</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">endpoint</span>: <span class="tsd-signature-type">&quot;source&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;target&quot;</span></span></li>
+<li><span><span class="tsd-kind-parameter">nodeId</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">port</span>: <a href="../types/components_graph-editor.TpGraphPort.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphPort</a></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../interfaces/components_graph-editor.TpGraphEdge.html" class="tsd-signature-type tsd-kind-interface">TpGraphEdge</a></h4><aside class="tsd-sources">
+<p>Overrides <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#reconnectedge">reconnectEdge</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L347">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:347</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="redo"><span>redo</span><a href="#redo" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="redo-1"><span class="tsd-kind-call-signature">redo</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><a href="#redo-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#redo">redo</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L730">tp-components/src/components/graph-editor/graph-editor.ts:730</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="registerpalette"><span>register<wbr/>Palette</span><a href="#registerpalette" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="registerpalette-1"><span class="tsd-kind-call-signature">registerPalette</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">palette</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/components_graph-editor.TpGraphPalette.html" class="tsd-signature-type tsd-kind-interface">TpGraphPalette</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#registerpalette-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">palette</span>: <a href="../interfaces/components_graph-editor.TpGraphPalette.html" class="tsd-signature-type tsd-kind-interface">TpGraphPalette</a></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#registerpalette">registerPalette</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L738">tp-components/src/components/graph-editor/graph-editor.ts:738</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="registersimulator"><span>register<wbr/>Simulator</span><a href="#registersimulator" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="registersimulator-1"><span class="tsd-kind-call-signature">registerSimulator</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">simulator</span><span class="tsd-signature-symbol">:</span> <a href="../types/components_graph-editor.TpGraphSimulator.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphSimulator</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#registersimulator-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">name</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">simulator</span>: <a href="../types/components_graph-editor.TpGraphSimulator.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphSimulator</a></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#registersimulator">registerSimulator</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L757">tp-components/src/components/graph-editor/graph-editor.ts:757</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="removeattributes"><code class="tsd-tag">Protected</code><span>remove<wbr/>Attributes</span><a href="#removeattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="removeattributes-1"><span class="tsd-kind-call-signature">removeAttributes</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">names</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#removeattributes-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description"><code class="tsd-tag">Internal</code>
+<div class="tsd-comment tsd-typography"><p>Removes multiple attributes in a single operation.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">names</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></span>
+<div class="tsd-comment tsd-typography"><p>Names of the attributes to remove.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#removeattributes">removeAttributes</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/base/base.ts#L416">tp-components/src/components/base/base.ts:416</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="removeelement"><span>remove<wbr/>Element</span><a href="#removeelement" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="removeelement-1"><span class="tsd-kind-call-signature">removeElement</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#removeelement-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">id</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#removeelement">removeElement</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L1175">tp-components/src/components/graph-editor/graph-editor.ts:1175</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="renderresults"><code class="tsd-tag">Protected</code><span>render<wbr/>Results</span><a href="#renderresults" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="renderresults-1"><span class="tsd-kind-call-signature">renderResults</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><a href="#renderresults-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<p>Overrides <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#renderresults">renderResults</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L401">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:401</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="rendertoolbaractions"><code class="tsd-tag">Protected</code><span>render<wbr/>Toolbar<wbr/>Actions</span><a href="#rendertoolbaractions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="rendertoolbaractions-1"><span class="tsd-kind-call-signature">renderToolbarActions</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><a href="#rendertoolbaractions-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<p>Overrides <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#rendertoolbaractions">renderToolbarActions</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L451">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:451</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="resetzoom"><span>reset<wbr/>Zoom</span><a href="#resetzoom" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="resetzoom-1"><span class="tsd-kind-call-signature">resetZoom</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#resetzoom-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#resetzoom">resetZoom</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L779">tp-components/src/components/graph-editor/graph-editor.ts:779</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="selectmany"><code class="tsd-tag">Protected</code><span>select<wbr/>Many</span><a href="#selectmany" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="selectmany-1"><span class="tsd-kind-call-signature">selectMany</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">ids</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">readonly</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#selectmany-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">ids</span>: <span class="tsd-signature-keyword">readonly</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#selectmany">selectMany</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L3333">tp-components/src/components/graph-editor/graph-editor.ts:3333</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="setbooleanattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>Boolean<wbr/>Attribute</span><a href="#setbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="setbooleanattribute-1"><span class="tsd-kind-call-signature">setBooleanAttribute</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#setbooleanattribute-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description"><code class="tsd-tag">Internal</code>
+<div class="tsd-comment tsd-typography"><p>Sets the boolean value of an HTML attribute.</p>
+<p>Rule used:</p>
+<ul>
+<li><code>true</code> → attribute present with an empty value</li>
+<li><code>false</code> → attribute removed</li>
+</ul>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">name</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>Attribute name.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></span>
+<div class="tsd-comment tsd-typography"><p>Value to apply.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#setbooleanattribute">setBooleanAttribute</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/base/base.ts#L368">tp-components/src/components/base/base.ts:368</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="setcommentcolor"><span>set<wbr/>Comment<wbr/>Color</span><a href="#setcommentcolor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="setcommentcolor-1"><span class="tsd-kind-call-signature">setCommentColor</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">color</span><span class="tsd-signature-symbol">:</span> <a href="../types/components_graph-editor.TpGraphCommentColor.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphCommentColor</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#setcommentcolor-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">id</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">color</span>: <a href="../types/components_graph-editor.TpGraphCommentColor.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphCommentColor</a></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#setcommentcolor">setCommentColor</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L981">tp-components/src/components/graph-editor/graph-editor.ts:981</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="setedgedirection"><span>set<wbr/>Edge<wbr/>Direction</span><a href="#setedgedirection" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="setedgedirection-1"><span class="tsd-kind-call-signature">setEdgeDirection</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">edgeId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">direction</span><span class="tsd-signature-symbol">:</span> <a href="../types/components_graph-editor.TpGraphEdgeDirection.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphEdgeDirection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#setedgedirection-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">edgeId</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">direction</span>: <a href="../types/components_graph-editor.TpGraphEdgeDirection.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphEdgeDirection</a></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#setedgedirection">setEdgeDirection</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L1115">tp-components/src/components/graph-editor/graph-editor.ts:1115</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="setedgeorthogonal"><span>set<wbr/>Edge<wbr/>Orthogonal</span><a href="#setedgeorthogonal" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="setedgeorthogonal-1"><span class="tsd-kind-call-signature">setEdgeOrthogonal</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">edgeId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">elbows</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">1</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">2</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">3</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">departure</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;horizontal&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;vertical&quot;</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">turns</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">&quot;alternating&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;same&quot;</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#setedgeorthogonal-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">edgeId</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">elbows</span>: <span class="tsd-signature-type">1</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">2</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">3</span></span></li>
+<li><span><span class="tsd-kind-parameter">departure</span>: <span class="tsd-signature-type">&quot;horizontal&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;vertical&quot;</span></span></li>
+<li><span><span class="tsd-kind-parameter">turns</span>: <span class="tsd-signature-type">&quot;alternating&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;same&quot;</span><span class="tsd-signature-symbol"> = &quot;alternating&quot;</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#setedgeorthogonal">setEdgeOrthogonal</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L1141">tp-components/src/components/graph-editor/graph-editor.ts:1141</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="setedgerouting"><span>set<wbr/>Edge<wbr/>Routing</span><a href="#setedgerouting" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="setedgerouting-1"><span class="tsd-kind-call-signature">setEdgeRouting</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">edgeId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">routing</span><span class="tsd-signature-symbol">:</span> <a href="../types/components_graph-editor.TpGraphEdgeRouting.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphEdgeRouting</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#setedgerouting-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">edgeId</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">routing</span>: <a href="../types/components_graph-editor.TpGraphEdgeRouting.html" class="tsd-signature-type tsd-kind-type-alias">TpGraphEdgeRouting</a></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#setedgerouting">setEdgeRouting</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L1131">tp-components/src/components/graph-editor/graph-editor.ts:1131</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="setelementlabel"><span>set<wbr/>Element<wbr/>Label</span><a href="#setelementlabel" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="setelementlabel-1"><span class="tsd-kind-call-signature">setElementLabel</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">label</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#setelementlabel-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">id</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">label</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#setelementlabel">setElementLabel</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L953">tp-components/src/components/graph-editor/graph-editor.ts:953</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="setgraph"><span>set<wbr/>Graph</span><a href="#setgraph" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="setgraph-1"><span class="tsd-kind-call-signature">setGraph</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">graph</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/components_graph-editor.TpGraphDocument.html" class="tsd-signature-type tsd-kind-interface">TpGraphDocument</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#setgraph-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">graph</span>: <a href="../interfaces/components_graph-editor.TpGraphDocument.html" class="tsd-signature-type tsd-kind-interface">TpGraphDocument</a></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Overrides <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#setgraph">setGraph</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L328">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:328</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="setstringattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>String<wbr/>Attribute</span><a href="#setstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="setstringattribute-1"><span class="tsd-kind-call-signature">setStringAttribute</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#setstringattribute-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description"><code class="tsd-tag">Internal</code>
+<div class="tsd-comment tsd-typography"><p>Sets or removes a text attribute.</p>
+<p>An empty string removes the attribute.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">name</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>Attribute name.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>Value to apply.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#setstringattribute">setStringAttribute</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/base/base.ts#L400">tp-components/src/components/base/base.ts:400</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="settitle"><span>set<wbr/>Title</span><a href="#settitle" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="settitle-1"><span class="tsd-kind-call-signature">setTitle</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">title</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#settitle-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">title</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#settitle">setTitle</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L975">tp-components/src/components/graph-editor/graph-editor.ts:975</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="setzoom"><span>set<wbr/>Zoom</span><a href="#setzoom" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="setzoom-1"><span class="tsd-kind-call-signature">setZoom</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#setzoom-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">number</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#setzoom">setZoom</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L761">tp-components/src/components/graph-editor/graph-editor.ts:761</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="step"><span>step</span><a href="#step" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="step-1"><span class="tsd-kind-call-signature">step</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">simulatorName</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#step-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">simulatorName</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#step">step</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L1188">tp-components/src/components/graph-editor/graph-editor.ts:1188</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="toggle"><span>toggle</span><a href="#toggle" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="toggle-1"><span class="tsd-kind-call-signature">toggle</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">propagate</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><a href="#toggle-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">id</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">propagate</span>: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L367">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:367</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="toggleequationnotation"><span>toggle<wbr/>Equation<wbr/>Notation</span><a href="#toggleequationnotation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="toggleequationnotation-1"><span class="tsd-kind-call-signature">toggleEquationNotation</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="../types/components_graph-logical-circuit.TpLogicalEquationNotation.html" class="tsd-signature-type tsd-kind-type-alias">TpLogicalEquationNotation</a><a href="#toggleequationnotation-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <a href="../types/components_graph-logical-circuit.TpLogicalEquationNotation.html" class="tsd-signature-type tsd-kind-type-alias">TpLogicalEquationNotation</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L397">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:397</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="togglerepresentation"><span>toggle<wbr/>Representation</span><a href="#togglerepresentation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="togglerepresentation-1"><span class="tsd-kind-call-signature">toggleRepresentation</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="../types/components_graph-logical-circuit.TpLogicGateRepresentation.html" class="tsd-signature-type tsd-kind-type-alias">TpLogicGateRepresentation</a><a href="#togglerepresentation-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <a href="../types/components_graph-logical-circuit.TpLogicGateRepresentation.html" class="tsd-signature-type tsd-kind-type-alias">TpLogicGateRepresentation</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L387">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:387</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="undo"><span>undo</span><a href="#undo" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="undo-1"><span class="tsd-kind-call-signature">undo</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><a href="#undo-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#undo">undo</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L722">tp-components/src/components/graph-editor/graph-editor.ts:722</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="unregisterpalette"><span>unregister<wbr/>Palette</span><a href="#unregisterpalette" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="unregisterpalette-1"><span class="tsd-kind-call-signature">unregisterPalette</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#unregisterpalette-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">id</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#unregisterpalette">unregisterPalette</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L747">tp-components/src/components/graph-editor/graph-editor.ts:747</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="validateconnection"><code class="tsd-tag">Protected</code><span>validate<wbr/>Connection</span><a href="#validateconnection" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="validateconnection-1"><span class="tsd-kind-call-signature">validateConnection</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">source</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">target</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">type</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#validateconnection-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">source</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">target</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">type</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Overrides <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#validateconnection">validateConnection</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L355">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:355</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="validatelogicgraph"><code class="tsd-tag">Protected</code><span>validate<wbr/>Logic<wbr/>Graph</span><a href="#validatelogicgraph" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="validatelogicgraph-1"><span class="tsd-kind-call-signature">validateLogicGraph</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">graph</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/components_graph-editor.TpGraphDocument.html" class="tsd-signature-type tsd-kind-interface">TpGraphDocument</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#validatelogicgraph-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">graph</span>: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/components_graph-editor.TpGraphDocument.html" class="tsd-signature-type tsd-kind-interface">TpGraphDocument</a><span class="tsd-signature-symbol">&gt;</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-logical-circuit/graph-logical-circuit.ts#L327">tp-components/src/components/graph-logical-circuit/graph-logical-circuit.ts:327</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="zoomin"><span>zoom<wbr/>In</span><a href="#zoomin" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="zoomin-1"><span class="tsd-kind-call-signature">zoomIn</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#zoomin-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#zoomin">zoomIn</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L771">tp-components/src/components/graph-editor/graph-editor.ts:771</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="zoomout"><span>zoom<wbr/>Out</span><a href="#zoomout" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited">
+<li class="tsd-is-inherited">
+<div class="tsd-signature tsd-anchor-link" id="zoomout-1"><span class="tsd-kind-call-signature">zoomOut</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#zoomout-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="components_graph-editor.TpGraphEditor.html">TpGraphEditor</a>.<a href="components_graph-editor.TpGraphEditor.html#zoomout">zoomOut</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/1a10be900b00b4da016fdfc7ea16fce5d5a7c853/src/components/graph-editor/graph-editor.ts#L775">tp-components/src/components/graph-editor/graph-editor.ts:775</a></li></ul></aside></div></li></ul></section></section></details></div>
+<div class="col-sidebar">
+<div class="page-menu">
+<div class="tsd-navigation settings">
+<details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></div>
+<div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>On This Page</h3></summary>
+<div class="tsd-accordion-details">
+<details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Constructors</summary>
+<div><a href="#constructor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor"><use href="../assets/icons.svg#icon-512"></use></svg><span>constructor</span></a></div></details>
+<details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Properties</summary>
+<div><a href="#activeedgedirection" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>active<wbr/>Edge<wbr/>Direction</span></a></div></details>
+<details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Accessors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Accessors</summary>
+<div><a href="#equationnotation"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>equation<wbr/>Notation</span></a><a href="#message" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>message</span></a><a href="#portsvisible" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>ports<wbr/>Visible</span></a><a href="#readonly" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>readonly</span></a><a href="#representation"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>representation</span></a><a href="#src" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>src</span></a><a href="#value" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>value</span></a><a href="#zoom" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>zoom</span></a><a href="#observedattributes" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>observed<wbr/>Attributes</span></a></div></details>
+<details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Methods</summary>
+<div><a href="#addedge"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>add<wbr/>Edge</span></a><a href="#addmeasurement" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>add<wbr/>Measurement</span></a><a href="#addnode"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>add<wbr/>Node</span></a><a href="#animatetransition" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>animate<wbr/>Transition</span></a><a href="#attributechangedcallback" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>attribute<wbr/>Changed<wbr/>Callback</span></a><a href="#bindextensionevents" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>bind<wbr/>Extension<wbr/>Events</span></a><a href="#capturehelpsource" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>capture<wbr/>Help<wbr/>Source</span></a><a href="#connectedcallback" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>connected<wbr/>Callback</span></a><a href="#copy" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>copy</span></a><a href="#cut" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cut</span></a><a href="#disconnectedcallback" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>disconnected<wbr/>Callback</span></a><a href="#edgedirections" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>edge<wbr/>Directions</span></a><a href="#ensurebasestyles" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Base<wbr/>Styles</span></a><a href="#ensureglobalstyle" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Global<wbr/>Style</span></a><a href="#evaluate"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>evaluate</span></a><a href="#exportjson" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>export<wbr/>Json</span></a><a href="#exportsvg" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>export<wbr/>Svg</span></a><a href="#getbooleanattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Boolean<wbr/>Attribute</span></a><a href="#getclosestskippingcontainers" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span></a><a href="#getstringattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>String<wbr/>Attribute</span></a><a href="#graphworldbounds" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>graph<wbr/>World<wbr/>Bounds</span></a><a href="#handlepalettedrop" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>handle<wbr/>Palette<wbr/>Drop</span></a><a href="#help" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>help</span></a><a href="#importjson" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>import<wbr/>Json</span></a><a href="#issupportedlogicnode" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>is<wbr/>Supported<wbr/>Logic<wbr/>Node</span></a><a href="#movemeasurement" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>move<wbr/>Measurement</span></a><a href="#paste" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>paste</span></a><a href="#queryelement" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>query<wbr/>Element</span></a><a href="#reconnectedge"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>reconnect<wbr/>Edge</span></a><a href="#redo" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>redo</span></a><a href="#registerpalette" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>register<wbr/>Palette</span></a><a href="#registersimulator" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>register<wbr/>Simulator</span></a><a href="#removeattributes" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>remove<wbr/>Attributes</span></a><a href="#removeelement" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>remove<wbr/>Element</span></a><a href="#renderresults" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>render<wbr/>Results</span></a><a href="#rendertoolbaractions" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>render<wbr/>Toolbar<wbr/>Actions</span></a><a href="#resetzoom" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>reset<wbr/>Zoom</span></a><a href="#selectmany" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>select<wbr/>Many</span></a><a href="#setbooleanattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Boolean<wbr/>Attribute</span></a><a href="#setcommentcolor" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Comment<wbr/>Color</span></a><a href="#setedgedirection" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Edge<wbr/>Direction</span></a><a href="#setedgeorthogonal" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Edge<wbr/>Orthogonal</span></a><a href="#setedgerouting" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Edge<wbr/>Routing</span></a><a href="#setelementlabel" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Element<wbr/>Label</span></a><a href="#setgraph"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Graph</span></a><a href="#setstringattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>String<wbr/>Attribute</span></a><a href="#settitle" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Title</span></a><a href="#setzoom" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Zoom</span></a><a href="#step" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>step</span></a><a href="#toggle"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>toggle</span></a><a href="#toggleequationnotation"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>toggle<wbr/>Equation<wbr/>Notation</span></a><a href="#togglerepresentation"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>toggle<wbr/>Representation</span></a><a href="#undo" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>undo</span></a><a href="#unregisterpalette" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>unregister<wbr/>Palette</span></a><a href="#validateconnection" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>validate<wbr/>Connection</span></a><a href="#validatelogicgraph" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>validate<wbr/>Logic<wbr/>Graph</span></a><a href="#zoomin" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>zoom<wbr/>In</span></a><a href="#zoomout" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>zoom<wbr/>Out</span></a></div></details></div></details></div>
+<div class="site-menu">
+<nav class="tsd-navigation"><a href="../modules.html">@tp/tp-components API</a>
+<ul class="tsd-small-nested-navigation" id="tsd-nav-container">
+<li>Loading...</li></ul></nav></div></div></div><footer>
+<p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer>
+<div class="overlay"></div></body></html>

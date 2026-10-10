@@ -1,0 +1,41 @@
+<tp-html-viewer label="tp-html-viewer" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-html-viewer>
+        <script type="tp/html">
+      <h2>Hello, HTML!</h2>
+      <p>This preview renders <strong>HTML content</strong>.</p>
+        </script>
+      </tp-html-viewer>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>allow-script</li><li>lite</li><li>no-loader</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="src" label="src" label-position="top" orientation="horizontal" value="1"><ul><li>Default</li><li>file1</li><li>file2</li><li>file-unknown</li></ul></tp-radio-list>
+      <tp-cluster></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="html-viewer attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+      <p>File-loading attributes offer only Default, file1, file2 and file-unknown. The two local fixtures preserve verified example formats (they may contain the same content); file-unknown deliberately exercises error handling. No arbitrary path can be entered.</p>
+      <script type="module" src="/docs/components/html-viewer/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Multiple examples">
+      <tp-html-viewer>
+            <script type="tp/html">
+              <div role="example" label="Paragraph">
+                <p>A paragraph with <strong>strong text</strong>.</p>
+              </div>
+              <div role="example" label="Button">
+                <button type="button">Continue</button>
+              </div>
+            </script>
+          </tp-html-viewer>
+    </div>
+  </template>
+</tp-html-viewer>

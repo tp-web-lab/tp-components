@@ -1,0 +1,115 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@tp/tp-components API</title><meta name="description" content="Documentation for @tp/tp-components API"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><link rel="stylesheet" href="assets/custom.css"/><script defer src="assets/main.js"></script><script defer src="assets/custom.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script><script async src="assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container"><a href="index.html" class="title">@tp/tp-components API</a>
+<div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/>
+<ul role="listbox" id="tsd-search-results"></ul>
+<div id="tsd-search-status" aria-live="polite" aria-atomic="true">
+<div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header>
+<div class="container container-main">
+<div class="col-content">
+<div class="tsd-page-title">
+<h1>@tp/tp-components API</h1></div>
+<div class="tsd-panel tsd-typography"><h1 id="tp-components" class="tsd-anchor-link">TP Components<a href="#tp-components" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<p><code>tp-components</code> is an open-source library of <strong>web components</strong> written in standard HTML, designed for creating <strong>technical documents for educational purposes</strong>.</p>
+<h2 id="features" class="tsd-anchor-link">Features<a href="#features" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li><strong>Declarative, framework-independent components.</strong> Compose interfaces with standard HTML and <code>tp-*</code> custom elements, configured through attributes, properties, methods and events.</li>
+<li><strong>Four authoring languages.</strong> Use HTML directly or native component extensions in Markdown, AsciiDoc and reStructuredText through <code>@tp/tp-markdown</code>, <code>@tp/tp-asciidoc</code> and <code>@tp/tp-restructuredtext</code>.</li>
+<li><strong>A broad component catalog.</strong> More than 140 components cover responsive layouts, forms, overlays, feedback, file handling, pickers, timers and reusable utilities. Explore the <a href="media/index.md">component families</a>.</li>
+<li><strong>Interactive technical content.</strong> Combine code, prose, graph and spreadsheet editors with viewers, playgrounds and notebooks. Supported execution environments include JavaScript, TypeScript, Python, SQL and Prolog.</li>
+<li><strong>Educational activities.</strong> Build single-choice, multiple-choice and fill-in-the-blank questions with feedback and solutions, including closed exercises with draggable text or graphics. Add puzzles, games and domain-specific simulators.</li>
+<li><strong>Diagrams and visualizations.</strong> Integrate Mermaid diagrams, turtle graphics, XY plots and timelines into documents and learning activities.</li>
+<li><strong>Documentation and presentations.</strong> Render single-page or dynamically loaded multi-page documentation, and create slide presentations from the supported markup languages.</li>
+<li><strong>Shared visual foundations.</strong> Reuse consistent sizes, semantic colors, spacing and focus styles, with light and dark themes based on shared <a href="media/index-1.md">design tokens</a>.</li>
+<li><strong>On-demand loading.</strong> The component loader imports components as they appear in the document, including dynamically inserted content. Content-oriented components can use inline sources or external files where supported.</li>
+<li><strong>Built-in user help.</strong> Press <code>Ctrl+?</code> to open contextual help for the component under the pointer or the focused component, with a live preview and mouse/keyboard interaction tables.</li>
+<li><strong>Documented and tested behavior.</strong> Component documentation provides live introductions, equivalent examples in all four languages, interactive attribute controls and generated API references. Component-level tests, coverage measurements and axe-core checks across Chromium, Firefox and WebKit support the <a href="media/index-2.md">quality</a> and <a href="media/index-3.md">accessibility</a> reports; automated checks do not replace manual accessibility review.</li>
+<li><strong>An extensible library.</strong> Follow the <a href="public/docs/appendices/component-authoring/index.md">component creation procedure</a> to reuse existing components, shared styles and content-loading mechanisms when adding new functionality.</li>
+</ul>
+<h2 id="development" class="tsd-anchor-link">Development<a href="#development" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>This package is developed and managed in a <code>Node.js</code> environment with :</p>
+<ul>
+<li><code>git</code> for version control,</li>
+<li><code>pnpm</code> for packages and scripts,</li>
+<li><code>typescript</code> for source code,</li>
+<li><code>typedoc</code> for API documentation,</li>
+<li><code>biome</code> for formatting and static code rules,</li>
+<li><code>vite</code> for development and builds,</li>
+<li><code>vitest</code> for unit tests and code coverage,</li>
+<li><code>playwright</code> for browser tests across Chromium, Firefox, and WebKit,</li>
+<li><code>axe-core</code> for automated accessibility checks.</li>
+</ul>
+<h3 id="build-from-source" class="tsd-anchor-link">Build from source<a href="#build-from-source" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Version <strong>1.0.0-rc.1</strong> is the first public release candidate. See the
+<a href="media/CHANGELOG.md">release notes</a>. The project uses the <strong>EUPL-1.2</strong> license;
+see <a href="media/LICENSE">LICENSE</a>. Third-party assets retain their own notices.</p>
+<p>Development requires the sibling <code>tp-utilities</code>, <code>tp-markdown</code>, <code>tp-asciidoc</code>
+and <code>tp-restructuredtext</code> packages in a pnpm workspace. The exact CI layout and
+pinned revisions are documented in <a href="media/README.md">.github/ci/README.md</a>.
+After installing and building the shared dependencies, run in <code>tp-components</code>:</p>
+<pre><code class="sh"><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">build</span><br/><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">release:check</span><br/><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">preview</span>
+</code><button type="button">Copy</button></pre>
+
+<p>For browser use, serve the complete <code>dist/</code> directory and load <code>tp-loader.js</code>
+as a module. It discovers and loads <code>tp-*</code> components automatically:</p>
+<pre><code class="html"><span class="hl-3">&lt;</span><span class="hl-4">script</span><span class="hl-5"> </span><span class="hl-6">type</span><span class="hl-5">=</span><span class="hl-7">&quot;module&quot;</span><span class="hl-5"> </span><span class="hl-6">src</span><span class="hl-5">=</span><span class="hl-7">&quot;./tp-loader.js&quot;</span><span class="hl-3">&gt;&lt;/</span><span class="hl-4">script</span><span class="hl-3">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>The package root points to <code>dist/tp-lib.js</code>, with declarations in
+<code>dist/index.d.ts</code>. The <code>@tp/tp-components/tp-loader</code> and
+<code>@tp/tp-components/tp-loader.js</code> exports point to the same loader. npm publication
+is a separate step; this candidate does not imply registry availability.</p>
+<h2 id="publishing-the-documentation" class="tsd-anchor-link">Publishing the documentation<a href="#publishing-the-documentation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>The <code>Documentation Pages</code> workflow builds and publishes the site at
+<code>https://tp-web-lab.github.io/tp-components/</code> on pushes to <code>main</code>. Manual runs on <code>main</code> can publish it too.</p>
+<p>Before the first deployment, select <strong>Settings → Pages → Build and deployment →
+Source → GitHub Actions</strong> in the repository. The workflow reuses the pinned CI
+workspace; shared packages do not need to be published on npm first.</p>
+<p>To prepare the same site locally, after building the workspace dependencies:</p>
+<pre><code class="sh"><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">build</span><br/><span class="hl-0">node</span><span class="hl-1"> </span><span class="hl-8">--test</span><span class="hl-1"> </span><span class="hl-2">scripts/prepare-pages.test.mjs</span><br/><span class="hl-0">node</span><span class="hl-1"> </span><span class="hl-2">scripts/prepare-pages.mjs</span><span class="hl-1"> </span><span class="hl-2">/tp-components/</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Upload the contents of <code>.pages/</code>, not <code>public/docs/</code>. The generated site includes
+compiled components, documentation, examples and assets. Preparation rewrites
+known local asset URLs for the project subdirectory, maps development <code>/src/</code>
+URLs to built files and leaves <code>dist/</code> untouched for library consumers. Serve
+<code>.pages/</code> mounted at <code>/tp-components/</code> to test it locally; opening HTML through
+<code>file://</code> does not reproduce HTTP loading. A root-domain deployment can use <code>/</code>
+as the preparation argument instead (and must update the workflow accordingly).</p>
+<p>After publication, the workflow publishes the compiled library (without source
+maps) to the <code>runtime</code> branch and commits its revision to
+<code>tp-examples/.github/tp-components-revision</code>. This triggers publication of the
+examples home and derivatives course. Never merge runtime or gh-pages into main.</p>
+<p>The shared setup uses four repository-specific read-only deploy keys:
+<code>TP_UTILITIES_READ_KEY</code>, <code>TP_MARKDOWN_READ_KEY</code>, <code>TP_ASCIIDOC_READ_KEY</code> and
+<code>TP_RESTRUCTUREDTEXT_READ_KEY</code>. Dependencies stay private and pinned. Fork pull
+requests skip jobs that need these credentials. <code>TP_EXAMPLES_UPDATE_KEY</code> grants
+write access only to tp-examples and is used to update its runtime revision.
+GitHub Pages must use GitHub Actions, not the historical gh-pages branch.</p>
+</div></div>
+<div class="col-sidebar">
+<div class="page-menu">
+<div class="tsd-navigation settings">
+<details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></div>
+<div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>On This Page</h3></summary>
+<div class="tsd-accordion-details"><a href="#tp-components"><span>TP <wbr/>Components</span></a>
+<ul>
+<li><a href="#features"><span>Features</span></a></li>
+<li><a href="#development"><span>Development</span></a></li>
+<li>
+<ul>
+<li><a href="#build-from-source"><span>Build from source</span></a></li></ul></li>
+<li><a href="#publishing-the-documentation"><span>Publishing the documentation</span></a></li></ul></div></details></div>
+<div class="site-menu">
+<nav class="tsd-navigation"><a href="modules.html">@tp/tp-components API</a>
+<ul class="tsd-small-nested-navigation" id="tsd-nav-container">
+<li>Loading...</li></ul></nav></div></div></div><footer>
+<p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer>
+<div class="overlay"></div></body></html>

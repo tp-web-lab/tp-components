@@ -1,0 +1,8 @@
+{
+  "src": [
+    {"label": "Default", "value": ""},
+    {"label": "file1", "value": "/docs/components/lsystem/examples/koch.lsys"},
+    {"label": "file2", "value": "/docs/components/lsystem/examples/tree.lsys"},
+    {"label": "file-unknown", "value": "/docs/components/lsystem/examples/file-unknown.lsys"}
+  ]
+}

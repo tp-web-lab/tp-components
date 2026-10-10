@@ -1,0 +1,113 @@
+{
+  "tagname": "tp-slider",
+  "classname": "TpSlider",
+  "superclass": "TpBase",
+  "description": "arranges content in a horizontally scrollable row with a configurable scrollbar.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "```html\n<tp-box style=\"max-inline-size: 28rem\">\n  <tp-slider scrollbar item-width=\"10rem\" gap=\"1rem\">\n    <tp-box>First</tp-box><tp-box>Second</tp-box><tp-box>Third</tp-box><tp-box>Fourth</tp-box>\n  </tp-slider>\n</tp-box>\n```"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "gap",
+      "description": "Gap between items, using --tp-slider-gap when absent.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1rem\""
+    },
+    {
+      "name": "item-width",
+      "description": "Preferred width of non-image items. By default, each item uses its own width or content-based size.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"auto\""
+    },
+    {
+      "name": "scrollback-thumb-color",
+      "description": "Scrollbar thumb color, using --tp-scrollbar-thumb-color when absent. Defaults to the theme's neutral scrollbar color.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"var(--tp-neutral-fill-mid)\""
+    },
+    {
+      "name": "scrollbar",
+      "description": "Shows the scrollbar when present and hides it when absent, regardless of the attribute's text value.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "scrollbar-track-color",
+      "description": "Scrollbar track color, using --tp-scrollbar-track-color when absent.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"transparent\""
+    },
+    {
+      "name": "slider-height",
+      "description": "Height of the scrolling area. By default, follows the content height.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"auto\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-slider-gap",
+      "default": "1rem",
+      "description": "Controls the gap."
+    },
+    {
+      "name": "--tp-slider-item-width",
+      "default": "auto",
+      "description": "Controls the item width."
+    },
+    {
+      "name": "--tp-slider-native-scrollbar-size",
+      "default": "0px",
+      "description": "Controls the native scrollbar size."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Slider",
+    "introduction": "The custom `<tp-slider>` element implements the <tp-icon name=\"slider\" library=\"components\" size=\"1.25em\"></tp-icon> Slider functionality: arranges content in a horizontally scrollable row with a configurable scrollbar.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Horizontal scrolling | Scroll to reveal items outside the visible area. |\n| Links and controls | Use embedded items normally. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab | Moves focus to the slider, then to its focusable children. |\n| ArrowLeft / ArrowRight | Scrolls the focused slider left or right by 80% of its visible width. |\n| Home / End | Scrolls the focused slider to the start or end of its content, respecting text direction. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Tab",
+        "description": "Moves focus to the slider, then to its focusable children."
+      },
+      {
+        "key": "ArrowLeft / ArrowRight",
+        "description": "Scrolls the focused slider left or right by 80% of its visible width."
+      },
+      {
+        "key": "Home / End",
+        "description": "Scrolls the focused slider to the start or end of its content, respecting text direction."
+      }
+    ]
+  }
+}

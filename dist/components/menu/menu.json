@@ -1,0 +1,62 @@
+{
+  "tagname": "tp-menu",
+  "classname": "TpMenu",
+  "superclass": "TpBase",
+  "description": "Turns a nested list into a keyboard-accessible menu.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "```html\n<tp-menu>\n  <ul>\n    <li><a href=\"/#/components/button/index.md\">Buttons</a></li>\n    <li><a href=\"/#/components/tabs/index.md\">Tabs</a></li>\n    <li><a href=\"/#/components/tree/index.md\">Trees</a></li>\n  </ul>\n</tp-menu>\n<script src=\"/docs/components/menu/examples/navigation.js\"></script>\n```"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "orientation",
+      "description": "Root menu orientation (`horizontal` or `vertical`).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"vertical\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "closeAll(): void",
+      "inherited": false,
+      "description": "Closes all expanded submenu items."
+    },
+    {
+      "name": "refresh(): void",
+      "inherited": false,
+      "description": "Refreshes the menu structure after content changes."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-menu-item-select",
+      "description": "Emitted when a menu item without submenu is selected.",
+      "detail": "{ item: HTMLLIElement }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-menu-gap",
+      "default": "0.25rem",
+      "description": "Gap between root menu items."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Menu",
+    "introduction": "The custom `<tp-menu>` element implements the <tp-icon name=\"menu\" library=\"components\" size=\"1.25em\"></tp-icon> Menu functionality: turns a nested list into a keyboard-accessible menu.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Open a menu branch to reveal its entries, then choose an available action or link. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

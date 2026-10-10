@@ -1,0 +1,77 @@
+<section id="dom-demo" class="dom-demo">
+  <style>
+    .dom-demo {
+      border: 1px solid #d0d7de;
+      border-radius: 0.5rem;
+      padding: 1rem;
+    }
+
+    .dom-demo.active {
+      background: #f6f8fa;
+      border-color: #7c3aed;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-block: 0.75rem;
+    }
+
+    .toolbar button {
+      cursor: pointer;
+    }
+
+    .items {
+      padding-inline-start: 1.25rem;
+    }
+
+    .items li {
+      margin-block: 0.25rem;
+    }
+
+    .items .added {
+      color: #047857;
+      font-weight: 600;
+    }
+
+    .items .replacement {
+      color: #7c3aed;
+      font-weight: 600;
+    }
+
+    .handled {
+      outline: 2px solid #047857;
+      outline-offset: 2px;
+    }
+
+    #details {
+      border-inline-start: 0.25rem solid #7c3aed;
+      margin-block: 0.75rem;
+      padding-inline-start: 0.75rem;
+    }
+  </style>
+
+  <h2 id="title">Advanced Prolog DOM</h2>
+
+  <p id="status"></p>
+
+  <div class="toolbar">
+    <button id="add-button" type="button">Append item</button>
+    <button id="replace-button" type="button">Replace first item</button>
+    <button id="remove-button" type="button">Remove first item</button>
+    <button id="toggle-button" type="button">Toggle panel</button>
+  </div>
+
+  <ul id="items" class="items">
+    <li id="first-item">Find elements with query_select/3.</li>
+    <li>Read text with get_text/2.</li>
+    <li>Mutate the DOM from Prolog goals.</li>
+  </ul>
+
+  <div id="details">
+    This panel is controlled by toggle/1 and toggle_class/2.
+  </div>
+</section>
+
+<div id="prolog-output"></div>

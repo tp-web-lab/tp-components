@@ -1,0 +1,63 @@
+{
+  "tagname": "tp-cluster",
+  "classname": "TpCluster",
+  "superclass": "TpBase",
+  "description": "Groups child elements in a wrapping flex row with configurable alignment and gap.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-box>\n  <tp-cluster justify=\"center\" gap=\"0.5rem\">\n    <tp-button>Alpha</tp-button>\n    <tp-button>Beta</tp-button>\n    <tp-button>Gamma</tp-button>\n  </tp-cluster>\n</tp-box>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "align",
+      "description": "Cross-axis alignment applied to `align-items`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"normal\" | \"stretch\" | \"center\" | \"start\" | \"end\" | \"flex-start\" | \"flex-end\" | \"self-start\" | \"self-end\" | \"baseline\" | \"first baseline\" | \"last baseline\"",
+      "default": "\"center\""
+    },
+    {
+      "name": "gap",
+      "description": "Gap between clustered items. When absent, uses the --tp-cluster-gap CSS default.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1rem\""
+    },
+    {
+      "name": "justify",
+      "description": "Main-axis alignment applied to `justify-content`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"normal\" | \"start\" | \"end\" | \"flex-start\" | \"flex-end\" | \"center\" | \"left\" | \"right\" | \"space-between\" | \"space-around\" | \"space-evenly\" | \"stretch\"",
+      "default": "\"flex-start\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-cluster-gap",
+      "default": "1rem",
+      "description": "Default gap between clustered items."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Cluster",
+    "introduction": "The custom `<tp-cluster>` element implements the <tp-icon name=\"cluster\" library=\"components\" size=\"1.25em\"></tp-icon> Cluster functionality: groups child elements in a wrapping flex row with configurable alignment and gap.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

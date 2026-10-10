@@ -1,0 +1,57 @@
+{
+  "tagname": "tp-skeleton",
+  "classname": "TpSkeleton",
+  "superclass": "TpBase",
+  "description": "Renders selected HTML elements as fixed shaded skeleton patterns without executing the source.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-skeleton label=\"Article layout preview\">\n  <script type=\"tp/html\">\n    <main>\n      <nav>Home · Articles · About</nav>\n      <h1>Building accessible interfaces</h1>\n      <p>An introduction to the article.</p>\n      <figure><img src=\"portrait.jpg\" alt=\"Portrait\"><figcaption>Caption</figcaption></figure>\n      <h2>Key ideas</h2>\n      <ul><li>Clear structure</li><li>Consistent interactions</li></ul>\n      <table><tr><th>Feature</th><th>Status</th></tr><tr><td>Keyboard</td><td>Ready</td></tr></table>\n      <blockquote>A useful quotation.</blockquote>\n    </main>\n  </script>\n</tp-skeleton>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "label",
+      "description": "Accessible description of the skeleton.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"Content layout preview\""
+    },
+    {
+      "name": "src",
+      "description": "HTML source URL, taking precedence over value and inline scripts.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "value",
+      "description": "HTML source string, taking precedence over an inline script.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Skeleton",
+    "introduction": "The custom `<tp-skeleton>` element implements the Skeleton functionality: renders selected HTML elements as fixed shaded skeleton patterns without executing the source.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This is a static preview of a document's structure. Shaded patterns stand for headings, paragraphs, lists and other recognized elements. The preview has no mouse or keyboard controls, does not animate, and does not automatically replace itself with the original content. Screen readers announce the preview description rather than the decorative shapes. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

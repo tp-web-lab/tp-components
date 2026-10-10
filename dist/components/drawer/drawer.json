@@ -1,0 +1,133 @@
+{
+  "tagname": "tp-drawer",
+  "classname": "TpDrawer",
+  "superclass": "TpOverlayElement",
+  "description": "Displays a sliding drawer panel.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-drawer></tp-drawer>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "backdrop",
+      "description": "Displays a backdrop behind the drawer.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "contained",
+      "description": "Keeps the drawer and backdrop inside the parent element.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "label",
+      "description": "Text displayed in the drawer header.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "open",
+      "description": "Opens the drawer.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "outside-click",
+      "description": "Closes the drawer when the user clicks outside it.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "placement",
+      "description": "Edge from which the drawer appears.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpDrawerPlacement",
+      "default": "\"end\""
+    },
+    {
+      "name": "width",
+      "description": "Drawer width when opened from the start or end edge. When absent, uses the --tp-drawer-size CSS default.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"min(24rem, 100vw)\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "setContent(content: string | Node | readonly Node[]): void",
+      "inherited": false,
+      "description": "Replaces the drawer body content."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-drawer-toggle",
+      "description": "Emitted when the drawer open state changes.",
+      "detail": "{ backdrop: boolean; open: boolean; outsideClick: boolean; contained: boolean; placement: \"top\" | \"end\" | \"bottom\" | \"start\" }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-drawer-duration",
+      "default": "200ms",
+      "description": "Drawer transition duration."
+    },
+    {
+      "name": "--tp-drawer-size",
+      "default": "min(24rem, 100vw)",
+      "description": "Drawer size on the sliding axis."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Drawer",
+    "introduction": "The custom `<tp-drawer>` element implements the <tp-icon name=\"drawer\" library=\"components\" size=\"1.25em\"></tp-icon> Drawer functionality: displays a sliding drawer panel.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Open trigger | Open the drawer. |\n| Close | Close the drawer. |\n| Expand / Collapse | Switch between expanded and normal presentation. |\n| Free edge of a left or right drawer | Drag to resize its width within the available space. |\n| Outside the drawer | Close it only when outside-click dismissal is enabled. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Escape | Close the drawer at any time. |\n| ArrowLeft / ArrowRight | Moves the focused resize edge by 10 pixels; hold Shift for 50 pixels. |\n| Home / End | Sets the focused resize edge to the minimum or maximum drawer width. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "ArrowLeft / ArrowRight",
+        "description": "Moves the focused resize edge by 10 pixels; hold Shift for 50 pixels."
+      },
+      {
+        "key": "Home / End",
+        "description": "Sets the focused resize edge to the minimum or maximum drawer width."
+      }
+    ]
+  }
+}

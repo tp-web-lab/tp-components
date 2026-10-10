@@ -1,0 +1,7 @@
+{
+  "id": "09-html-tests",
+  "label": "HTML with tests",
+  "name": "HTML with tests",
+  "entry": "/index.html",
+  "test": "/main.test.js"
+}

@@ -1,0 +1,45 @@
+{
+  "tagname": "tp-fill-blank",
+  "classname": "TpFillBlank",
+  "superclass": "TpBase",
+  "description": "manages inline fields and rich blanks and exposes their values as `FormData`.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-fill-blank>\n  <p>The capital of France is <tp-textfield name=\"capital\" placeholder=\"City name\" aria-label=\"Capital of France\" clearable></tp-textfield>.</p>\n</tp-fill-blank>"
+    }
+  ],
+  "attributes": [],
+  "methods": [
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Resets all blanks to initial values."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-fill-blank-change",
+      "description": "Fired in response to an input or change event from a blank; bubbles and crosses shadow boundaries. The detail contains a plain object of values and a FormData snapshot. For duplicate names, the object keeps the last value while FormData preserves all entries.",
+      "detail": "{ value: Record<string, string>; formData: FormData }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-blank",
+      "summary": "displays a text, SVG or image answer in a focusable blank."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Fill in blank",
+    "introduction": "The custom `<tp-fill-blank>` element implements the <tp-icon name=\"fill-blank\" library=\"components\" size=\"1.25em\"></tp-icon> Fill in blank functionality: manages inline fields and rich blanks and exposes their values as `FormData`.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Answer choices in the example | Click a shape or drag it onto the blank to assign it. |\n| Using the component | Type in editable fields, or use the answer choices provided by the surrounding exercise for closed blanks. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

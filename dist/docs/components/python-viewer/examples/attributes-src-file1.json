@@ -1,0 +1,16 @@
+{
+  "name": "A Python calculation",
+  "entry": "/main.py",
+  "files": [
+    {
+      "path": "/index.html",
+      "language": "html",
+      "content": "<h2>Python result</h2><p id=\"result\">Starting Python…</p>"
+    },
+    {
+      "path": "/main.py",
+      "language": "python",
+      "content": "from js import document\nanswer = 6 * 7\ndocument.getElementById(\"result\").textContent = f\"6 × 7 = {answer}\"\nprint(answer)"
+    }
+  ]
+}

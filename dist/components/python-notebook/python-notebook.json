@@ -1,0 +1,29 @@
+{
+  "tagname": "tp-python-notebook",
+  "classname": "TpPythonNotebook",
+  "superclass": "TpNotebook",
+  "description": "Interactive notebook combining markup and executable code cells.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-python-notebook></tp-python-notebook>"
+    }
+  ],
+  "attributes": [],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-notebook",
+      "summary": "Interactive notebook combining markup and executable code cells."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Python Notebook",
+    "introduction": "The custom `<tp-python-notebook>` element implements the <tp-icon name=\"python-notebook\" library=\"components\" size=\"1.25em\"></tp-icon> Python Notebook functionality: interactive notebook combining markup and executable code cells.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Edit the notebook's blocks and run programming cells to see their results. |\n| Using the component | In editor mode, select a block to move, duplicate or delete it. |\n| Using the component | Preview displays the document; Export HTML saves an HTML version. |\n| :tp-icon:{name=\"file-settings\" size=\"1.25em\"} Files | Loads, saves, imports, or exports a notebook. |\n| :tp-icon:{name=\"plus-box-outline\" size=\"1.25em\"} Markup + | Adds a markup cell in the selected language. |\n| :tp-icon:{name=\"plus-box-outline\" size=\"1.25em\"} Language + | Adds a programming cell; specialized notebooks use their fixed language. |\n| :tp-icon:{name=\"arrow-up\" size=\"1.25em\"} :tp-icon:{name=\"arrow-down\" size=\"1.25em\"} Move up / Move down | Moves the selected cell. |\n| :tp-icon:{name=\"content-copy\" size=\"1.25em\"} Duplicate | Duplicates the selected cell. |\n| :tp-icon:{name=\"delete-outline\" size=\"1.25em\"} Delete | Deletes the selected cell. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"1.25em\"} Editor toolbar | Shows or hides the toolbar of the selected cell's code editor. |\n| :tp-icon:{name=\"refresh\" size=\"1.25em\"} Reset | Restores the initially loaded notebook. |\n| :tp-icon:{name=\"eye-outline\" size=\"1.25em\"} :tp-icon:{name=\"pencil\" size=\"1.25em\"} Preview / Edit | Toggles between the final rendered document and the cell editor. |\n| :tp-icon:{name=\"play-all\" size=\"1.25em\"} Run all cells | Executes every programming cell in document order. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

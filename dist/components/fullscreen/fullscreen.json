@@ -1,0 +1,76 @@
+{
+  "tagname": "tp-fullscreen",
+  "classname": "TpFullscreen",
+  "superclass": "TpBase",
+  "description": "Fullscreen controller button.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-fullscreen></tp-fullscreen>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "anchor",
+      "description": "CSS selector of the element to toggle fullscreen.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the fullscreen trigger.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "size",
+      "description": "Icon button size.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"m\""
+    },
+    {
+      "name": "variant",
+      "description": "Icon button variant.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"neutral\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-fullscreen-change",
+      "description": "Emitted when the fullscreen state of the controlled target changes.",
+      "detail": "{ fullscreen: boolean; anchor: string; target: HTMLElement }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Fullscreen",
+    "introduction": "The custom `<tp-fullscreen>` element implements the <tp-icon name=\"fullscreen\" library=\"components\" size=\"1.25em\"></tp-icon> Fullscreen functionality: fullscreen controller button.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Fullscreen button | Expand the associated content; activate again to leave fullscreen. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Browser fullscreen exit command | Leave fullscreen. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

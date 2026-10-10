@@ -1,0 +1,5 @@
+{
+  "id": "ts-lit",
+  "label": "Typescript lit component",
+  "entry": "/main.ts"
+}

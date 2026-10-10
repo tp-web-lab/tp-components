@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="tp-components" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata><name>Illustrative Brest track</name><desc>Synthetic demonstration, not a navigation guide.</desc></metadata>
+  <wpt lat="48.3838" lon="-4.4931"><name>Brest Castle</name></wpt>
+  <wpt lat="48.3878" lon="-4.4892"><name>City viewpoint</name></wpt>
+  <trk><name>Two separate recording segments</name>
+    <trkseg>
+      <trkpt lat="48.3838" lon="-4.4931"/>
+      <trkpt lat="48.3848" lon="-4.4910"/>
+      <trkpt lat="48.3860" lon="-4.4895"/>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="48.3878" lon="-4.4892"/>
+      <trkpt lat="48.3890" lon="-4.4870"/>
+      <trkpt lat="48.3904" lon="-4.4861"/>
+    </trkseg>
+  </trk>
+</gpx>

@@ -1,0 +1,34 @@
+<tp-html-viewer label="tp-toolbar" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-box padding="0">
+      <tp-toolbar>
+        <tp-icon section="start" name="home" aria-label="Home"></tp-icon>
+        <tp-icon section="start" name="menu" aria-label="Menu"></tp-icon>
+        <span section="center">Document</span>
+        <tp-icon section="end" name="github" aria-label="GitHub"></tp-icon>
+        <tp-icon section="end" name="settings" aria-label="Settings"></tp-icon>
+        <tp-icon section="end" name="help" aria-label="Help"></tp-icon>
+      </tp-toolbar>
+        <tp-box border-width="0" style="min-block-size: 5rem; display: grid; place-items: center">Document area</tp-box>
+      </tp-box>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+      <tp-stack>
+
+      <tp-radio-list data-setting="orientation" label="orientation" label-position="top" orientation="horizontal" value="1"><ul><li>horizontal</li><li>vertical</li></ul></tp-radio-list>
+      <tp-radio-list data-setting="placement" label="placement" label-position="top" orientation="horizontal" value="1"><ul><li>Automatic (top / start)</li><li>top</li><li>bottom</li><li>start</li><li>end</li></ul></tp-radio-list>
+      <tp-cluster></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="toolbar attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/docs/components/toolbar/examples/attributes.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

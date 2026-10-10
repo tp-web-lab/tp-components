@@ -1,0 +1,199 @@
+{
+  "tagname": "tp-animation",
+  "classname": "TpAnimation",
+  "superclass": "TpBase",
+  "description": "`<tp-animation>` applique une animation à une cible du DOM léger.\n\nLe composant utilise animate.css pour les noms d'animation\net WAAPI pour le contrôle de lecture.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-animation></tp-animation>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "delay",
+      "description": "Controls the delay.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"0s\""
+    },
+    {
+      "name": "duration",
+      "description": "Controls the duration.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1s\""
+    },
+    {
+      "name": "easing",
+      "description": "Controls the easing.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"ease\""
+    },
+    {
+      "name": "fill",
+      "description": "Controls the fill.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "AnimationFillMode",
+      "default": "\"both\""
+    },
+    {
+      "name": "in",
+      "description": "Controls the in.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "iterations",
+      "description": "Controls the iterations.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"1\""
+    },
+    {
+      "name": "once",
+      "description": "Controls the once.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "out",
+      "description": "Controls the out.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "paused",
+      "description": "Controls the paused.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "root-margin",
+      "description": "Marge utilisée par IntersectionObserver.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"0px\""
+    },
+    {
+      "name": "target",
+      "description": "Controls the target.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "threshold",
+      "description": "Seuil utilisé par IntersectionObserver.\nPeut être un nombre unique ou une liste séparée par des virgules.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"0.1\""
+    },
+    {
+      "name": "trigger",
+      "description": "Controls the trigger.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpAnimationTrigger",
+      "default": "\"load\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "cancel(): void",
+      "inherited": false,
+      "description": "Cancel."
+    },
+    {
+      "name": "pause(): void",
+      "inherited": false,
+      "description": "Pause."
+    },
+    {
+      "name": "play(): Promise<void>",
+      "inherited": false,
+      "description": "Play."
+    },
+    {
+      "name": "playIn(): Promise<void>",
+      "inherited": false,
+      "description": "Play in."
+    },
+    {
+      "name": "playOut(): Promise<void>",
+      "inherited": false,
+      "description": "Play out."
+    },
+    {
+      "name": "restart(): Promise<void>",
+      "inherited": false,
+      "description": "Restart."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-animation-cancel",
+      "description": "Emitted when animation cancel occurs.",
+      "detail": "{ in: unknown; out: unknown }"
+    },
+    {
+      "name": "tp-animation-finish",
+      "description": "Emitted when animation finish occurs.",
+      "detail": "{ in: unknown; out: unknown; phase: unknown }"
+    },
+    {
+      "name": "tp-animation-start",
+      "description": "Emitted when animation start occurs.",
+      "detail": "{ in: unknown; out: unknown; phase: unknown }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Animation",
+    "introduction": "The custom `<tp-animation>` element implements the <tp-icon name=\"animation\" library=\"components\" size=\"1.25em\"></tp-icon> Animation functionality: `<tp-animation>` applique une animation à une cible du DOM léger. Le composant utilise animate.css pour les noms d'animation et WAAPI pour le contrôle de lecture.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Content may animate when it appears, when you click it or when you move the pointer over it, depending on the page. |\n| Using the component | There is no separate animation toolbar. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Enter / Space | Starts a click-triggered animation when its target is not a native control. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Enter / Space",
+        "description": "Starts a click-triggered animation when its target is not a native control."
+      }
+    ]
+  }
+}

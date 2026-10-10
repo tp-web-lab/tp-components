@@ -1,0 +1,40 @@
+{
+  "tagname": "tp-color-picker",
+  "classname": "TpColorPicker",
+  "superclass": "TpBase",
+  "description": "Viewer for base color tokens.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-color-picker></tp-color-picker>"
+    }
+  ],
+  "attributes": [],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-color-picker-copy-error",
+      "description": "Emitted when the clipboard rejects a copy operation.",
+      "detail": "{ token: unknown; value: string; error: unknown }"
+    },
+    {
+      "name": "tp-color-picker-select",
+      "description": "Emitted after a CSS variable reference is selected and copied.",
+      "detail": "{ token: unknown; value: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Color picker",
+    "introduction": "The custom `<tp-color-picker>` element implements the <tp-icon name=\"color-picker\" library=\"components\" size=\"1.25em\"></tp-icon> Color picker functionality: light-DOM viewer for base color tokens.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Select | Select a color to copy its CSS variable reference. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus a color choice. |\n| Enter / Space | Select the focused color and copy its CSS variable reference. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

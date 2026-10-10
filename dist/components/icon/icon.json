@@ -1,0 +1,144 @@
+{
+  "tagname": "tp-icon",
+  "classname": "TpIcon",
+  "superclass": "TpBase",
+  "description": "API documentation summary.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-icon></tp-icon>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "color",
+      "description": "Attribute `color`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "fallback",
+      "description": "Attribute `fallback`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "fallback-icon",
+      "description": "Attribute `fallback-icon`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "flip-h",
+      "description": "Attribute `flip-h`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "flip-v",
+      "description": "Attribute `flip-v`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "library",
+      "description": "Attribute `library`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "tp"
+    },
+    {
+      "name": "name",
+      "description": "Attribute `name`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "rotate",
+      "description": "Attribute `rotate`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "0deg"
+    },
+    {
+      "name": "scale",
+      "description": "Attribute `scale`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1"
+    },
+    {
+      "name": "size",
+      "description": "Attribute `size`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "1em"
+    },
+    {
+      "name": "spin",
+      "description": "Attribute `spin`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "Attribute `src`.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-icon-size",
+      "default": "1em",
+      "description": "Controls the size."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Icons",
+    "introduction": "The custom `<tp-icon>` element implements the <tp-icon name=\"icon\" library=\"components\" size=\"1.25em\"></tp-icon> Icons functionality: aPI documentation summary.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component displays information and has no control to operate. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}

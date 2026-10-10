@@ -1,0 +1,85 @@
+{
+  "tagname": "tp-icon-picker",
+  "classname": "TpIconPicker",
+  "superclass": "TpBase",
+  "description": "Picker for predefined icons.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-icon-picker></tp-icon-picker>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "compact",
+      "description": "Shows only the title, filters, and a compact 2em icon grid.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "copy",
+      "description": "Clipboard output format (`name` by default).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "'name'|'svg'|'tp-icon'|'tp-icon-button'|'img'",
+      "default": "\"name\""
+    },
+    {
+      "name": "filter",
+      "description": "Free-text filter applied to icon names/libraries.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "library",
+      "description": "Active library filter (`all` by default).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"all\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-icon-picker-copy-error",
+      "description": "Emitted when the clipboard rejects a copy operation.",
+      "detail": "{ name: unknown; library: unknown; format: unknown; value: string; error: unknown }"
+    },
+    {
+      "name": "tp-icon-picker-select",
+      "description": "Emitted after an icon is selected.",
+      "detail": "{ name: unknown; library: unknown; sourcePath: unknown; format: unknown; value: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-radio-list",
+      "summary": "Transforms a list into a group of radio buttons."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Icon picker",
+    "introduction": "The custom `<tp-icon-picker>` element implements the <tp-icon name=\"icon-picker\" library=\"components\" size=\"1.25em\"></tp-icon> Icon picker functionality: light-DOM picker for predefined icons.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Browse or search the available items, then select one to copy it in the chosen format. |\n| Using the component | Use the displayed filters and format selector, when available, to narrow the list or change the copied representation. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": []
+  }
+}
