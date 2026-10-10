@@ -363,6 +363,7 @@ const additional = {
 };
 
 export function describeExample(component, label) {
+	if (component === "markup-single-page" && label === "Toolbar controls") return "Compare the complete toolbar with a selection of Code, Calculator and Theme. Open a drawer or change the appearance without replacing the document.";
  if (["matching", "matching-question"].includes(component) && label === "Header list") return "Use the first list as English and French column headings. Match the three expressions; headings remain fixed and do not count as answers.";
  if (component === "multi-choice-question" && label === "No correct choices") return "Submit without checking a box to obtain full credit and unlock the solution. Reset, select a distractor and submit again to compare the feedback.";
  if (label === "Inline named field" && /^(text|math|number|date|time)field$/.test(component)) return "Edit the inline field. Its role content supplies the form name, while value supplies the initial data; inspect the source to compare the shared convention across markup languages.";
@@ -532,7 +533,7 @@ export function describeExample(component, label) {
 	if (component.endsWith("-multi-pages"))
 		objective = `Navigate between the ${language} documentation pages and observe dynamic page loading inside the isolated example.`;
 	if (component.endsWith("-single-page"))
-		objective = `Inspect the rendered ${language} document and use its page navigation controls.`;
+		objective = `Read the rendered ${language} document. The toolbar is hidden unless explicitly enabled.`;
 	if (component.endsWith("-multi-slides"))
 		objective = `Move between the slides rendered from the ${language} source.`;
 	if (component === "diagram" && label !== "Basic usage")

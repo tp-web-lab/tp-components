@@ -14,7 +14,7 @@
  */
 /**
  * @tp-dependency tp-dropdown
- * @summary Displays an anchored dropdown menu.
+ * @summary Dropdown menu component.
  */
 /**
  * @tp-dependency tp-icon
@@ -44,6 +44,10 @@ import type { TpDropdown } from "../dropdown/dropdown.js";
 
 type TpLangCode = string;
 type TpLangChoice = TpLangCode | "auto";
+type TpSinglePageHost = HTMLElement & {
+	documentLanguage: string;
+	setDocumentLanguage(language: string): void;
+};
 type TpRepositoryHost = HTMLElement & { repository?: string };
 
 const STYLE_ID = "tp-lang-styles";
@@ -324,6 +328,8 @@ export class TpLang extends TpBase {
 	}
 
 	private resolveCurrentLang(langs: readonly TpLangCode[]): TpLangCode {
+		const singlePage = this.resolveSinglePage();
+		if (singlePage) return singlePage.documentLanguage || langs[0] || "en";
 		const markdownDoc = this.resolveMarkdownDoc();
 		const docRepository =
 			markdownDoc === null ? "" : this.readHostRepository(markdownDoc);
@@ -439,6 +445,13 @@ export class TpLang extends TpBase {
 	private selectLang(choice: TpLangChoice): void {
 		const langs = this.readLangs();
 		const lang = choice === "auto" ? this.resolveAutoLang(langs) : choice;
+		const singlePage = this.resolveSinglePage();
+		if (singlePage) {
+			singlePage.setDocumentLanguage(lang);
+			this.updateControl();
+			this.emitChange(choice, lang, "", singlePage);
+			return;
+		}
 		const repository = this.repositoryForLang(lang);
 		const markdownDoc = this.resolveMarkdownDoc();
 
@@ -483,6 +496,11 @@ export class TpLang extends TpBase {
 
 		url.pathname = `${repository.replace(/\/+$/, "")}/index.html`;
 		window.history.pushState(null, "", url);
+	}
+
+	private resolveSinglePage(): TpSinglePageHost | null {
+		const host = this.closest<TpSinglePageHost>(".tp-markup-single-page");
+		return host && typeof host.setDocumentLanguage === "function" ? host : null;
 	}
 
 	private resolveMarkdownDoc(): HTMLElement | null {

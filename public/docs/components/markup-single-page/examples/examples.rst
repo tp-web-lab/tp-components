@@ -44,6 +44,20 @@
 
             .. tp-cluster::
 
+               .. tp-textfield::
+                  :data-setting: langs
+                  :label: langs
+                  :value: en
+                  :placeholder: en
+                  :clearable:
+
+               .. tp-textfield::
+                  :data-setting: toolbar
+                  :label: toolbar
+                  :value:
+                  :placeholder:
+                  :clearable:
+
             .. tp-button-group::
 
                .. tp-button::
@@ -81,3 +95,31 @@
          .. script::
             :type: module
             :src: /docs/components/markup-single-page/examples/attributes.js
+
+      .. example:: Toolbar controls
+
+         .. h3::
+
+            Complete toolbar
+
+         .. tp-markup-single-page::
+            :toolbar:
+
+            .. script::
+               :type: tp/markdown
+
+               ## Reading tools
+               Open the source, calculator or annotations; try the color and theme controls.
+
+         .. h3::
+
+            Selected controls
+
+         .. tp-markup-single-page::
+            :toolbar: code,calc,theme
+
+            .. script::
+               :type: tp/markdown
+
+               ## A smaller toolbar
+               Only Code, Calculator and Theme are available here.

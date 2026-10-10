@@ -52,6 +52,8 @@ export function attributeSettings(component) {
 				};
 			}
 			if (control?.kind === "boolean") value = value === true;
+			// An absent optional string is represented by an empty text control.
+			if (value === null) value = "";
 			return {
 				name: attribute.name,
 				value,

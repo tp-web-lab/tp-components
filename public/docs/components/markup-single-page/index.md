@@ -21,12 +21,18 @@ This document is rendered as a single page.
 
 ### User interactions
 
-Personal annotations are saved per document in this browser's localStorage, without account synchronization. Clearing site data removes them. The [Post-it editor](../post-it-editor/index.md) offers an Annotation language dropdown: adoc, html, md, rst or txt (default). Source and language are saved together; rendered markup is sanitized and scripts are not executed. If a target changes or disappears, use Reattach from the annotations list; no guessed replacement is silently selected. Storage errors are displayed in the editor. Elements inside embedded iframes are outside this page's annotation scope.
+The toolbar is optional. The interactions below are available only when the corresponding controls are displayed. Personal annotations are saved per document in this browser's localStorage, without account synchronization. Clearing site data removes them. The [Post-it editor](../post-it-editor/index.md) offers an Annotation language dropdown: adoc, html, md, rst or txt (default). Source and language are saved together; rendered markup is sanitized and scripts are not executed. If a target changes or disappears, use Reattach from the annotations list; no guessed replacement is silently selected. Storage errors are displayed in the editor. Elements inside embedded iframes are outside this page's annotation scope.
 
 #### Mouse interactions
 
 | Control or gesture | Result |
 | --- | --- |
+| Code | Open or close the document source in a drawer, without replacing the rendered document. |
+| Calculator | Open or close the scientific calculator. |
+| Clock | Read the time; hover to display the date. |
+| Language | Select an available translation of this document. |
+| Color / Theme | Change the brand color or the light/dark appearance. |
+| Fullscreen | Enter or leave fullscreen for this page. |
 | Personal annotations (comment with pencil in the toolbar) | Open the annotation list. Use the large + button to add an annotation, select a document element, enter text and Save. The close icon is at the right of the panel title. |
 | Annotation pin | Click to open the note, or drag it to another document element. Its attachment is saved. |
 | Edit / Reattach / Delete | Update the selected annotation, choose a new target, or remove it from this browser. Each note has pencil (Edit) and delete-outline (Delete) icon buttons in its bottom-right footer. |
@@ -46,20 +52,27 @@ Personal annotations are saved per document in this browser's localStorage, with
 
 ### Author directives
 
-Use `<tp-markup-single-page>` as shown below.
+The toolbar is hidden by default. Add `toolbar` (or `toolbar=""`) to display all available controls, or give a comma-separated selection. The toolbar updates immediately without reloading the document. Unknown names and duplicates are ignored.
 
 ```html
-<tp-markup-single-page></tp-markup-single-page>
+<tp-markup-single-page src="guide.md" toolbar="code,calc,postit,theme,fullscreen"></tp-markup-single-page>
 ```
+
+The left group contains `code`, `calc`, `postit`; the right group contains `clock`, `lang`, `color`, `theme`, `fullscreen`, in that order regardless of the order in the attribute. Code displays the original source as text; Calculator opens a separate drawer.
+
+For translated external documents, provide `langs="en,fr,es"`. The first language uses the source directory (for example `guide.md`); the others use subdirectories with the same filename (`fr/guide.md`, `es/guide.md`). With no `langs`, only `en` is assumed and no translation requests are made. The language control is shown only when `lang` is selected and at least two versions are available. It is hidden for inline documents. A static server must return 404 for missing translation files instead of serving a fallback page.
 
 ## Examples
 
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
-: Inspect the rendered markup document and use its page navigation controls.
+: Read the rendered markup document. The toolbar is hidden unless explicitly enabled.
 
 Attributes
 : Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
+
+Toolbar controls
+: Compare the complete toolbar with a selection of Code, Calculator and Theme. Open a drawer or change the appearance without replacing the document.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
@@ -84,13 +97,15 @@ Attributes
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
+  | <code>langs</code> | <code>string</code> | <code>&quot;en&quot;</code> | Candidate document languages. The first uses the source directory; others use language subdirectories. |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Source file. The extension selects the renderer. |
+  | <code>toolbar</code> | <code>string \| null</code> | <code>null</code> | Optional comma-separated controls: code, calc, postit, clock, lang, color, theme, fullscreen. Empty enables all; absent hides the toolbar. |
   [Attributes of `<tp-markup-single-page>`]
 
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | None. |  |  |
+  | <code>setDocumentLanguage</code> | <code>setDocumentLanguage(language: string): void</code> | Select a translation discovered for this document. |
   [Public methods of `TpMarkupSinglePage`]
 
 Events
@@ -415,18 +430,68 @@ All tp-components used by `<tp-markup-single-page>` are loaded automatically by 
 @summary Shared base class for tp-* components.
 -->
 <!--
+@tp-dependency tp-calculator
+@summary Scientific calculator with an editable expression and degree/radian modes.
+-->
+<!--
+@tp-dependency tp-clock
+@summary Live clock component with digital or analogic display and date tooltip.
+-->
+<!--
+@tp-dependency tp-color
+@summary Brand color preset controller scoped to the containing element.
+-->
+<!--
+@tp-dependency tp-drawer
+@summary Drawer overlay component.
+-->
+<!--
+@tp-dependency tp-fullscreen
+@summary Fullscreen controller button.
+-->
+<!--
+@tp-dependency tp-icon-button
+@summary Accessible icon button component.
+-->
+<!--
+@tp-dependency tp-lang
+@summary Documentation language selector.
+-->
+<!--
 @tp-dependency tp-markdown
 @summary Markdown rendering component.
+-->
+<!--
+@tp-dependency tp-post-it-editor
+@summary creates and edits persistent personal annotations attached to document elements.
 -->
 <!--
 @tp-dependency tp-restructuredtext
 @summary reStructuredText rendering component.
 -->
+<!--
+@tp-dependency tp-theme
+@summary Parent-scoped light/dark/auto theme controller with embedded UI.
+-->
+<!--
+@tp-dependency tp-toolbar
+@summary Sticky toolbar with start / center / end sections,
+-->
 
 - [`<tp-asciidoc>`](../asciidoc/index.md) : Semantic AsciiDoc rendering component.
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
+- [`<tp-calculator>`](../calculator/index.md) : Scientific calculator with an editable expression and degree/radian modes.
+- [`<tp-clock>`](../clock/index.md) : Live clock component with digital or analogic display and date tooltip.
+- [`<tp-color>`](../color/index.md) : Brand color preset controller scoped to the containing element.
+- [`<tp-drawer>`](../drawer/index.md) : Drawer overlay component.
+- [`<tp-fullscreen>`](../fullscreen/index.md) : Fullscreen controller button.
+- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
+- [`<tp-lang>`](../lang/index.md) : Documentation language selector.
 - [`<tp-markdown>`](../markdown/index.md) : Markdown rendering component.
+- [`<tp-post-it-editor>`](../post-it-editor/index.md) : creates and edits persistent personal annotations attached to document elements.
 - [`<tp-restructuredtext>`](../restructuredtext/index.md) : reStructuredText rendering component.
+- [`<tp-theme>`](../theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
+- [`<tp-toolbar>`](../toolbar/index.md) : Sticky toolbar with start / center / end sections,
 
 ### External
 

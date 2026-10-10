@@ -15,3 +15,12 @@
   color: #8a1c2c;
   overflow: auto;
 }
+
+.tp-markup-single-page-toolbar tp-lang[hidden] {
+  display: none;
+}
+
+.tp-markup-single-page:fullscreen {
+  overflow: auto;
+  background: var(--tp-paper-color, #fff);
+}

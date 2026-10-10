@@ -29,8 +29,13 @@ Combine the attributes on one preview. Controls start at the published defaults.
 - file-unknown
 :::
 
-::: tp-cluster
+:::: tp-cluster
+::: tp-textfield { data-setting="langs" label="langs" value="en" placeholder="en" clearable }
 :::
+
+::: tp-textfield { data-setting="toolbar" label="toolbar" value placeholder clearable }
+:::
+::::
 
 :::: tp-button-group
 ::: tp-button { id="attributes-reset" type="button" }
@@ -59,6 +64,26 @@ File-loading attributes offer only Default, file1, file2 and file-unknown. The t
 
 ::: script { type="module" src="/docs/components/markup-single-page/examples/attributes.js" }
 :::
+```
+
+``` example {label="Toolbar controls"}
+### Complete toolbar
+
+:::: tp-markup-single-page { toolbar }
+::: script { type="tp/markdown" }
+## Reading tools
+Open the source, calculator or annotations; try the color and theme controls.
+:::
+::::
+
+### Selected controls
+
+:::: tp-markup-single-page { toolbar="code,calc,theme" }
+::: script { type="tp/markdown" }
+## A smaller toolbar
+Only Code, Calculator and Theme are available here.
+:::
+::::
 ```
 ::::::
 :::::::
