@@ -3,7 +3,6 @@ name: Documentation Pages
 on:
   push:
     branches: [main]
-  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -15,6 +14,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -22,6 +22,11 @@ jobs:
           path: tp-components
           persist-credentials: false
       - uses: ./tp-components/.github/actions/setup-workspace
+        with:
+          utilities-key: ${{ secrets.TP_UTILITIES_READ_KEY }}
+          markdown-key: ${{ secrets.TP_MARKDOWN_READ_KEY }}
+          asciidoc-key: ${{ secrets.TP_ASCIIDOC_READ_KEY }}
+          restructuredtext-key: ${{ secrets.TP_RESTRUCTUREDTEXT_READ_KEY }}
       - name: Test publication preparation
         working-directory: tp-components
         run: node --test scripts/prepare-pages.test.mjs
@@ -34,6 +39,18 @@ jobs:
       - name: Prepare project site
         working-directory: tp-components
         run: node scripts/prepare-pages.mjs /tp-components/
+      - name: Prepare reusable runtime
+        working-directory: tp-components
+        run: |
+          mkdir -p ../runtime/dist
+          rsync -a --exclude='*.map' dist/ ../runtime/dist/
+          cp LICENSE ../runtime/LICENSE
+          node -e 'const fs = require("fs"); const p = require("./package.json"); fs.writeFileSync("../runtime/package.json", JSON.stringify({name:p.name,version:p.version,private:true,type:"module"})+"\n"); fs.writeFileSync("../runtime/source.json", JSON.stringify({repository:process.env.GITHUB_REPOSITORY,commit:process.env.GITHUB_SHA})+"\n")'
+      - uses: actions/upload-artifact@v6
+        with:
+          name: components-runtime
+          path: runtime
+          retention-days: 7
       - uses: actions/upload-pages-artifact@v4
         with:
           path: tp-components/.pages
@@ -53,3 +70,61 @@ jobs:
       - name: Publish documentation
         id: deployment
         uses: actions/deploy-pages@v4
+
+  update-examples:
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: runtime-site
+      - uses: actions/download-artifact@v6
+        with:
+          name: components-runtime
+          path: runtime
+      - name: Publish compiled runtime
+        id: runtime
+        working-directory: runtime-site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code origin refs/heads/runtime >/dev/null; then
+            git fetch origin runtime
+            git checkout -B runtime FETCH_HEAD
+          else
+            git checkout --orphan runtime
+          fi
+          rsync -a --delete --exclude='.git' ../runtime/ ./
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Build runtime from ${GITHUB_SHA}"
+          fi
+          git push origin HEAD:runtime
+          echo "revision=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v6
+        with:
+          repository: tp-web-lab/tp-examples
+          ref: main
+          path: examples
+          ssh-key: ${{ secrets.TP_EXAMPLES_UPDATE_KEY }}
+      - name: Update examples runtime revision
+        working-directory: examples
+        env:
+          RUNTIME_REVISION: ${{ steps.runtime.outputs.revision }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p .github
+          printf '%s\n' "$RUNTIME_REVISION" > .github/tp-components-revision
+          git add .github/tp-components-revision
+          if ! git diff --cached --quiet; then
+            git commit -m "Update published TP Components runtime"
+            for attempt in 1 2 3; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then exit 0; fi
+              sleep 2
+            done
+            exit 1
+          fi

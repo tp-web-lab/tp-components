@@ -61,8 +61,7 @@ is a separate step; this candidate does not imply registry availability.
 ## Publishing the documentation
 
 The `Documentation Pages` workflow builds and publishes the site at
-`https://tp-web-lab.github.io/tp-components/` on pushes to `main`. Pull requests
-build the artifact without deploying it. Manual runs on `main` can publish it too.
+`https://tp-web-lab.github.io/tp-components/` on pushes to `main`. Manual runs on `main` can publish it too.
 
 Before the first deployment, select **Settings → Pages → Build and deployment →
 Source → GitHub Actions** in the repository. The workflow reuses the pinned CI
@@ -83,3 +82,15 @@ URLs to built files and leaves `dist/` untouched for library consumers. Serve
 `.pages/` mounted at `/tp-components/` to test it locally; opening HTML through
 `file://` does not reproduce HTTP loading. A root-domain deployment can use `/`
 as the preparation argument instead (and must update the workflow accordingly).
+
+After publication, the workflow publishes the compiled library (without source
+maps) to the `runtime` branch and commits its revision to
+`tp-examples/.github/tp-components-revision`. This triggers publication of the
+examples home and derivatives course. Never merge runtime or gh-pages into main.
+
+The shared setup uses four repository-specific read-only deploy keys:
+`TP_UTILITIES_READ_KEY`, `TP_MARKDOWN_READ_KEY`, `TP_ASCIIDOC_READ_KEY` and
+`TP_RESTRUCTUREDTEXT_READ_KEY`. Dependencies stay private and pinned. Fork pull
+requests skip jobs that need these credentials. `TP_EXAMPLES_UPDATE_KEY` grants
+write access only to tp-examples and is used to update its runtime revision.
+GitHub Pages must use GitHub Actions, not the historical gh-pages branch.

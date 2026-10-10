@@ -1,5 +1,18 @@
 name: Set up the pinned tp workspace
 description: Install the five-package workspace and build component dependencies without running reports.
+inputs:
+  utilities-key:
+    description: Read-only deploy key for tp-utilities.
+    required: true
+  markdown-key:
+    description: Read-only deploy key for tp-markdown.
+    required: true
+  asciidoc-key:
+    description: Read-only deploy key for tp-asciidoc.
+    required: true
+  restructuredtext-key:
+    description: Read-only deploy key for tp-restructuredtext.
+    required: true
 runs:
   using: composite
   steps:
@@ -8,24 +21,28 @@ runs:
         repository: tp-web-lab/tp-utilities
         ref: e8d72a81f4512335cb948470827bbae4e051fb96
         path: tp-utilities
+        ssh-key: ${{ inputs.utilities-key }}
         persist-credentials: false
     - uses: actions/checkout@v6
       with:
         repository: tp-web-lab/tp-markdown
         ref: 77de7490fa269375dd7da6d064f6490783242930
         path: tp-markdown
+        ssh-key: ${{ inputs.markdown-key }}
         persist-credentials: false
     - uses: actions/checkout@v6
       with:
         repository: tp-web-lab/tp-asciidoc
         ref: c62ba738e2fd3ff29253d397adc48c51a96f27c4
         path: tp-asciidoc
+        ssh-key: ${{ inputs.asciidoc-key }}
         persist-credentials: false
     - uses: actions/checkout@v6
       with:
         repository: tp-web-lab/tp-restructuredtext
         ref: b294a647ba1b1f7bc9e65ae3f1ea62911ca8eafc
         path: tp-restructuredtext
+        ssh-key: ${{ inputs.restructuredtext-key }}
         persist-credentials: false
     - name: Prepare the CI workspace
       shell: bash

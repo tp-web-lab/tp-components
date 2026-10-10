@@ -15,6 +15,7 @@ defaults:
 jobs:
   pilot:
     name: Advisory component quality pilot
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     continue-on-error: true
 
@@ -24,6 +25,11 @@ jobs:
           path: tp-components
           persist-credentials: false
       - uses: ./tp-components/.github/actions/setup-workspace
+        with:
+          utilities-key: ${{ secrets.TP_UTILITIES_READ_KEY }}
+          markdown-key: ${{ secrets.TP_MARKDOWN_READ_KEY }}
+          asciidoc-key: ${{ secrets.TP_ASCIIDOC_READ_KEY }}
+          restructuredtext-key: ${{ secrets.TP_RESTRUCTUREDTEXT_READ_KEY }}
       - name: Check native markup examples
         run: pnpm examples:check-native-markup
       - name: Run tests, coverage, and report
