@@ -377,6 +377,28 @@ export class TpMarkupSinglePage extends TpBase {
 		void this.updateLanguages();
 	}
 
+	/** Resolve the authored source for the currently selected generated page. */
+	private getOriginalSource(src: string): string {
+		try {
+			const manifest: unknown = JSON.parse(
+				this.getAttribute("data-tp-prerendered") ?? "{}",
+			);
+			if (manifest && typeof manifest === "object" && src) {
+				const current = resolveComponentSourceUrl(this, src).href;
+				for (const [original, rendered] of Object.entries(manifest)) {
+					if (
+						typeof rendered === "string" &&
+						resolveComponentSourceUrl(this, rendered).href === current
+					)
+						return original;
+				}
+			}
+		} catch {
+			// Older publications only provide the original source attribute.
+		}
+		return this.getAttribute("data-tp-original-src")?.trim() || src;
+	}
+
 	private async updateLanguages(): Promise<void> {
 		const token = ++this.languageToken;
 		const control = this.toolbarElement?.querySelector("tp-lang");
@@ -472,8 +494,7 @@ export class TpMarkupSinglePage extends TpBase {
 		drawer.show();
 		try {
 			let source = dedent(this.inlineSourceSnapshot?.source ?? "");
-			const originalSrc =
-				this.getAttribute("data-tp-original-src")?.trim() || this.src.trim();
+			const originalSrc = this.getOriginalSource(this.src.trim());
 			if (originalSrc) {
 				const response = await fetch(
 					resolveComponentSourceUrl(this, originalSrc).href,
@@ -621,8 +642,7 @@ export class TpMarkupSinglePage extends TpBase {
 		src: string,
 	): void {
 		this.setAttribute("data-tp-markup-single-page-rendered", "");
-		const originalSrc =
-			this.getAttribute("data-tp-original-src")?.trim() || src;
+		const originalSrc = this.getOriginalSource(src);
 		const pageUrl = originalSrc
 			? resolveComponentSourceUrl(this, originalSrc).href
 			: `${this.ownerDocument.location.href.split("#")[0]}#${this.id || `${this.localName}-${Array.from(this.ownerDocument.querySelectorAll(this.localName)).indexOf(this)}`}`;

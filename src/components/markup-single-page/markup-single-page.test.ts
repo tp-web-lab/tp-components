@@ -361,6 +361,63 @@ describe("single-page toolbar", () => {
 		expect(element.querySelector("tp-toolbar")).toBeNull();
 	});
 
+	it("keeps Code and annotations on the selected pre-rendered translation", async () => {
+		vi.stubGlobal(
+			"fetch",
+			vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
+				const url = String(input);
+				if (init?.method === "HEAD") return new Response("");
+				const french = url.includes("/fr/");
+				return new Response(
+					url.endsWith(".md")
+						? french
+							? "# Français"
+							: "# English"
+						: `<p>${french ? "Bonjour" : "Hello"}</p>`,
+				);
+			}),
+		);
+		const element = document.createElement("tp-markup-single-page");
+		element.setAttribute("src", "/docs/index.html");
+		element.setAttribute("langs", "en,fr");
+		element.setAttribute("toolbar", "code,lang");
+		element.setAttribute("data-tp-original-src", "/docs/index.md");
+		element.setAttribute(
+			"data-tp-prerendered",
+			JSON.stringify({
+				"/docs/index.md": "/docs/index.html",
+				"/docs/fr/index.md": "/docs/fr/index.html",
+			}),
+		);
+		document.body.append(element);
+		await vi.waitFor(() =>
+			expect(element.querySelector("tp-lang")?.hidden).toBe(false),
+		);
+		element.setDocumentLanguage("fr");
+		await vi.waitFor(() =>
+			expect(
+				element.querySelector(".tp-markup-single-page-output p")?.textContent,
+			).toBe("Bonjour"),
+		);
+		expect(Reflect.get(element, "pageUrl")).toContain("/docs/fr/index.md");
+		element.querySelector<HTMLElement>('[data-action="code"]')?.click();
+		await vi.waitFor(() =>
+			expect(element.querySelector("tp-drawer pre code")?.textContent).toBe(
+				"# Français",
+			),
+		);
+		await vi.waitFor(() =>
+			expect(element.querySelector("tp-lang")?.hidden).toBe(false),
+		);
+		element.setDocumentLanguage("en");
+		await vi.waitFor(() =>
+			expect(
+				element.querySelector(".tp-markup-single-page-output p")?.textContent,
+			).toBe("Hello"),
+		);
+		expect(Reflect.get(element, "pageUrl")).toContain("/docs/index.md");
+	});
+
 	it("offers only existing translations and switches the source without navigating the host", async () => {
 		const fetchMock = vi.fn(
 			async (input: RequestInfo | URL, init?: RequestInit) => {
