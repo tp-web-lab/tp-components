@@ -1,3 +1,5 @@
+@import "../toolbar/document-label.css";
+
 tp-markup-multi-pages,
 [tp-markup-multi-pages-host],
 .tp-markup-multi-pages-host {
@@ -55,15 +57,7 @@ tp-markup-multi-pages,
   justify-content: flex-end;
 }
 
-.tp-markup-multi-pages-toolbar .tp-markup-multi-pages-toolbar-label {
-  display: block;
-  min-inline-size: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-weight: 600;
-  font-size: 1.5rem;
-}
+
 
 .tp-markup-multi-pages-toolbar tp-icon-button:not(:where([data-personal-annotation] *)) > button {
   color: inherit;
@@ -332,9 +326,6 @@ tp-markup-multi-pages,
     margin-inline-start: 0;
   }
 
-  .tp-markup-multi-pages-toolbar .tp-markup-multi-pages-toolbar-label {
-    font-size: 1rem;
-  }
 
   .tp-markup-multi-pages-page-nav {
     gap: 0.4rem;

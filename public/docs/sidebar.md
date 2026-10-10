@@ -209,6 +209,7 @@
       - [Speech to text](components/speech-to-text/index.md)
       - [Text to speech](components/text-to-speech/index.md)
       - [Typewriting](components/typewriting/index.md)
+  - [Examples](examples.md)
   - [Component authoring](component-authoring.md)
       - [Functionality]()
         - [Contract]()
