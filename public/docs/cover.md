@@ -24,7 +24,7 @@ main
 footer
 : 
   ::: center
-  :tp-button:Browse the examples{size=xxl variant=brand href=index.md}
+  :tp-button:Browse the examples{size=xxl variant=brand href="https://tp-web-lab.github.io/tp-examples/"}
   :::
 ::::
 
