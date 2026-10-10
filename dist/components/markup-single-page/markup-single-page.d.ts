@@ -79,6 +79,8 @@ export declare class TpMarkupSinglePage extends TpBase {
     private updateLabel;
     private disposeToolbar;
     private renderToolbar;
+    /** Resolve the authored source for the currently selected generated page. */
+    private getOriginalSource;
     private updateLanguages;
     private toggleCalculator;
     private toggleSource;

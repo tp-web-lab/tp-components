@@ -147,6 +147,16 @@ var p = class extends e {
 		let a = document.createElement("span");
 		a.className = "tp-markup-single-page-toolbar-label", a.setAttribute("section", "center"), a.textContent = this.label, r.append(a), this.prepend(r), this.updateLanguages();
 	}
+	getOriginalSource(e) {
+		try {
+			let t = JSON.parse(this.getAttribute("data-tp-prerendered") ?? "{}");
+			if (t && typeof t == "object" && e) {
+				let n = r(this, e).href;
+				for (let [e, i] of Object.entries(t)) if (typeof i == "string" && r(this, i).href === n) return e;
+			}
+		} catch {}
+		return this.getAttribute("data-tp-original-src")?.trim() || e;
+	}
 	async updateLanguages() {
 		let e = ++this.languageToken, t = this.toolbarElement?.querySelector("tp-lang");
 		if (this.languageSources.clear(), !t) return;
@@ -185,7 +195,7 @@ var p = class extends e {
 		let e = this.sourceDrawer, i = ++this.sourceToken, a = document.createElement("pre"), o = document.createElement("code");
 		a.append(o), o.textContent = "Loading…", e.setContent(a), e.show();
 		try {
-			let e = t(this.inlineSourceSnapshot?.source ?? ""), n = this.getAttribute("data-tp-original-src")?.trim() || this.src.trim();
+			let e = t(this.inlineSourceSnapshot?.source ?? ""), n = this.getOriginalSource(this.src.trim());
 			if (n) {
 				let t = await fetch(r(this, n).href);
 				if (!t.ok) throw Error(`Unable to load source (${t.status}).`);
@@ -254,7 +264,7 @@ var p = class extends e {
 	}
 	finishRender(e, t) {
 		this.setAttribute("data-tp-markup-single-page-rendered", "");
-		let n = this.getAttribute("data-tp-original-src")?.trim() || t, i = n ? r(this, n).href : `${this.ownerDocument.location.href.split("#")[0]}#${this.id || `${this.localName}-${Array.from(this.ownerDocument.querySelectorAll(this.localName)).indexOf(this)}`}`;
+		let n = this.getOriginalSource(t), i = n ? r(this, n).href : `${this.ownerDocument.location.href.split("#")[0]}#${this.id || `${this.localName}-${Array.from(this.ownerDocument.querySelectorAll(this.localName)).indexOf(this)}`}`;
 		this.pageUrl = i, this.annotations?.setPage(i);
 		let a = {
 			language: e,
