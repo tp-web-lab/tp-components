@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 import { TpDeclarativeTextSource as t } from "../utilities/declarative-text-source.js";
 import { n } from "./math.js";
 //#region src/components/math/math.css?inline

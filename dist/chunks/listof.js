@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 import "./biblio.js";
 import "./glossary.js";
 import "./note.js";

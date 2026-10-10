@@ -1,4 +1,4 @@
-import { pr as e } from "../../chunks/lib/typescript/typescript.js";
+import { mr as e } from "../../chunks/lib/typescript/typescript.js";
 import { n as t } from "../../chunks/blank.js";
 import "../../chunks/sidebar.js";
 //#region src/components/fill-blank-question/closed-answers.ts

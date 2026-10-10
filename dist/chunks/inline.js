@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 //#region src/components/inline/inline.css?inline
 var t = "tp-inline{align-items:center;gap:var(--tp-inline-gap,.5rem);flex-wrap:nowrap;justify-content:flex-start;min-inline-size:0;display:flex}tp-inline>*{min-inline-size:0}tp-inline[stretch]>*{flex:1 1 0}", n = class n extends e {
 	static styleId = "tp-inline-styles";

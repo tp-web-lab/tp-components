@@ -1,4 +1,4 @@
-import { Ct as e, Lt as t, ft as n, pt as r } from "../../chunks/lib/typescript/typescript.js";
+import { Rt as e, mt as t, pt as n, wt as r } from "../../chunks/lib/typescript/typescript.js";
 //#region src/components/asciidoc-playground/asciidoc-execution-document.ts
 var i = "https://cdn.jsdelivr.net/npm/@asciidoctor/core@3.0.4/dist/browser/asciidoctor.js";
 function a(e) {
@@ -8,14 +8,14 @@ function o(e) {
 	return (e ?? []).filter((e) => e.enabled !== !1);
 }
 async function s(s, c = {}) {
-	let l = t(s, {
+	let l = e(s, {
 		entry: c.entry,
 		priorityPaths: ["/index.adoc", "/main.adoc"],
 		extensions: [".adoc", ".asciidoc"],
 		fallbackToFirstFile: !1
 	});
 	if (l === void 0) throw Error("No AsciiDoc entry file found.");
-	let u = e(s, "/index.html"), d = u ? a(u.content) : "<main id=\"app\"></main>", f = JSON.stringify(Object.fromEntries(s.files.map((e) => [e.path, e.content]))), p = JSON.stringify(l.path), m = JSON.stringify(s.attributes ?? {}), h = JSON.stringify(o(s.extensions));
+	let u = r(s, "/index.html"), d = u ? a(u.content) : "<main id=\"app\"></main>", f = JSON.stringify(Object.fromEntries(s.files.map((e) => [e.path, e.content]))), p = JSON.stringify(l.path), m = JSON.stringify(s.attributes ?? {}), h = JSON.stringify(o(s.extensions));
 	return { html: `
 <!doctype html>
 <html>
@@ -52,7 +52,7 @@ async function s(s, c = {}) {
 <body>
   ${d}
   ${n()}
-  ${r()}
+  ${t()}
 
 <script>
 async function loadCommonJsExtension(extension) {

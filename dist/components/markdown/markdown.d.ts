@@ -2,20 +2,8 @@
  * @module components/markdown
  * @summary Markdown rendering component.
  */
-/**
- * @tp-dependency tp-base
- * @summary Shared base class for tp-* components.
- */
-/**
- * @credit tp-markdown https://www.npmjs.com/package/@tp/tp-markdown
- * @summary Markdown parsing and rendering.
- */
-import { TpMarkdownParser } from "@tp/tp-markdown/markdown/engine/markdown";
+export { createTpMarkdownParser, parseMarkdownToTokens, renderMarkdownToHtml, } from "../../utilities/markdown-source.js";
 import { TpBase } from "../base/base.js";
-type TpMarkdownParserInstance = InstanceType<typeof TpMarkdownParser>;
-export declare function createTpMarkdownParser(path?: string): TpMarkdownParserInstance;
-export declare function renderMarkdownToHtml(source: string, path?: string): Promise<string>;
-export declare function parseMarkdownToTokens(source: string, path?: string): Promise<unknown>;
 export declare function renderMarkdownInto(source: string, root: HTMLElement, path?: string): Promise<void>;
 export declare function renderMarkdownRuntimeIn(root: ParentNode, path?: string): Promise<void>;
 /**
@@ -42,4 +30,3 @@ export declare class TpMarkdown extends TpBase {
     private applyIncludePrefix;
     private renderInclude;
 }
-export {};

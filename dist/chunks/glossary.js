@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 //#region src/components/glossary/glossary.css?inline
 var t = "tp-glossary{display:none!important}", n = class extends e {
 	get ref() {

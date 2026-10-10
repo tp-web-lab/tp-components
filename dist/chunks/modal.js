@@ -1,4 +1,4 @@
-import { nr as e } from "./lib/typescript/typescript.js";
+import { rr as e } from "./lib/typescript/typescript.js";
 //#region src/components/modal/modal.css?inline
 var t = "tp-modal{z-index:1000;position:absolute;inset-block-start:50%;inset-inline-start:50%;transform:translate(-50%,-50%)}tp-modal[fixed]{position:fixed}tp-modal:not([open]){display:none}tp-modal.contain{--tp-modal-margin:0px;max-block-size:calc(100% - (var(--tp-modal-margin) * 2));max-inline-size:calc(100% - (var(--tp-modal-margin) * 2));overflow:auto}tp-modal-backdrop{opacity:0;pointer-events:none;visibility:hidden;z-index:999;background:#00000080;transition:opacity .2s;position:fixed;inset:0}tp-modal-backdrop[data-open=true]{opacity:1;pointer-events:auto;visibility:visible}tp-modal-backdrop[data-contained=true]{position:absolute}@media (prefers-reduced-motion:reduce){tp-modal,tp-modal *,tp-modal-backdrop{transition-duration:.01ms!important;transition-delay:0s!important}}", n = class n extends e {
 	overlayName = "tp-modal";

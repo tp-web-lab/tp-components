@@ -1,5 +1,5 @@
 import { o as e } from "./rolldown-runtime.js";
-import { Ku as t } from "./lib/typescript/typescript.js";
+import { qu as t } from "./lib/typescript/typescript.js";
 import { G as n, K as r, W as i, q as a } from "./lib/vendor/vendor.js";
 import { TpDeclarativeTextSource as o } from "../utilities/declarative-text-source.js";
 import { elevationStatistics as s, parseGpx as c } from "../components/map/gpx.js";

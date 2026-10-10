@@ -1,4 +1,4 @@
-import { B as e, Yt as t, z as n } from "../../chunks/lib/typescript/typescript.js";
+import { B as e, Xt as t, z as n } from "../../chunks/lib/typescript/typescript.js";
 //#region src/components/markup-viewer-question/markup-viewer-question.ts
 var r = class extends e {
 	sourceLoadedEvent = "tp-markup-viewer-src-load";

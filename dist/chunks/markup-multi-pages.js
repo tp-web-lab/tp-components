@@ -1,4 +1,4 @@
-import { Ku as e, tr as t } from "./lib/typescript/typescript.js";
+import { nr as e, qu as t } from "./lib/typescript/typescript.js";
 import "./calculator.js";
 import "./color.js";
 import { TpPostItEditor as n } from "../components/post-it-editor/post-it-editor.js";
@@ -18,7 +18,7 @@ function s(e, t) {
 function c(e) {
 	return o(e).replace(/^([^\n]+)\n([=~^+-]{3,})$/gm, "<span class=\"hljs-section\">$1\n$2</span>").replace(/^(\s*\.\.\s+[^\n]+)$/gm, "<span class=\"hljs-meta\">$1</span>").replace(/(\*\*[^*\n]+\*\*)/g, "<span class=\"hljs-strong\">$1</span>").replace(/(``[^`\n]+``)/g, "<span class=\"hljs-code\">$1</span>").replace(/^(\s*\d+\.\s+)/gm, "<span class=\"hljs-bullet\">$1</span>");
 }
-var l = class extends e {
+var l = class extends t {
 	static get observedAttributes() {
 		return [
 			"repository",
@@ -192,8 +192,8 @@ var l = class extends e {
 	}
 	toggleCalculator() {
 		if (!this.calculatorDrawer) {
-			let e = new t();
-			e.setAttribute("label", "Calculator"), e.setAttribute("placement", "end"), e.setAttribute("width", "min(52rem, 100vw)"), e.dataset.role = "calculator-drawer", e.setContent(document.createElement("tp-calculator")), this.append(e), this.calculatorDrawer = e;
+			let t = new e();
+			t.setAttribute("label", "Calculator"), t.setAttribute("placement", "end"), t.setAttribute("width", "min(52rem, 100vw)"), t.dataset.role = "calculator-drawer", t.setContent(document.createElement("tp-calculator")), this.append(t), this.calculatorDrawer = t;
 		}
 		this.calculatorDrawer.hasAttribute("open") ? this.calculatorDrawer.hide() : this.calculatorDrawer.show();
 	}

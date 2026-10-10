@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 //#region src/components/blank/blank.css?inline
 var t = "tp-blank{vertical-align:baseline;border-bottom:2px dashed var(--tp-neutral-stroke-soft);min-block-size:1em;min-inline-size:5ch;padding:.6em 2.25rem 0 .5em;display:inline-block;position:relative}tp-blank[data-tp-blank-filled]{border-bottom-color:var(--tp-blank-filled-border-color,var(--tp-brand-stroke-mid))}tp-blank [data-tp-blank-tools]{color:var(--tp-text-muted);align-items:center;gap:.25em;display:inline-flex;position:absolute;inset-block-start:50%;inset-inline-end:0;transform:translateY(-50%)}tp-blank:focus-visible{outline:3px solid var(--tp-focus-color,var(--tp-brand-text-colorful));outline-offset:2px}tp-blank>:is(svg,img){vertical-align:middle;max-inline-size:100%}", n = class extends e {
 	currentValue = "";

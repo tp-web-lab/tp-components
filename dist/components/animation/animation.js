@@ -1,2 +1,2 @@
-import { mr as e } from "../../chunks/lib/typescript/typescript.js";
+import { hr as e } from "../../chunks/lib/typescript/typescript.js";
 export { e as TpAnimation };

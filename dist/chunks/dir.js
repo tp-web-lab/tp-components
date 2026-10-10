@@ -1,4 +1,4 @@
-import { Ku as e, _r as t, gr as n, vr as r } from "./lib/typescript/typescript.js";
+import { _r as e, qu as t, vr as n, yr as r } from "./lib/typescript/typescript.js";
 import { isRtlLocale as i } from "../utilities/text-direction.js";
 //#region src/components/dir/dir.css?inline
 var a = "tp-dir{vertical-align:middle;display:inline-flex}tp-dir>tp-icon-button{--tp-icon-button-size:2rem;--tp-icon-button-icon-size:1.15rem}tp-dir>tp-icon-button>button{border:1px solid var(--tp-neutral-stroke-mid,#9ca3af);background:var(--tp-paper-color,#fff)}tp-dir>tp-icon-button>button:hover{background:var(--tp-neutral-fill-soft,#e5e7eb)}tp-dir>tp-dropdown{min-inline-size:14rem}tp-dir>tp-dropdown>ul{margin:0;padding:.25rem;list-style:none}tp-dir .tp-dir-option{cursor:pointer;border-radius:var(--tp-border-radius-sm,.25rem);align-items:center;gap:.5rem;padding:.3rem .5rem;display:flex}tp-dir .tp-dir-option:hover{background:var(--tp-neutral-fill-softer,#f3f4f6)}tp-dir .tp-dir-option[data-selected]{background:var(--tp-neutral-fill-soft,#e5e7eb)}tp-dir .tp-dir-option>tp-icon[name=check]{visibility:hidden}tp-dir .tp-dir-option[data-selected]>tp-icon[name=check]{visibility:visible}tp-dir .tp-dir-separator{margin:0;padding:0;list-style:none}";
@@ -28,7 +28,7 @@ function d(e, t) {
 	let n = s.get(e);
 	if (n !== void 0) for (let e of n.controllers) e !== t && e.mode !== t.mode && e.syncToMode(t.mode);
 }
-var f = class i extends e {
+var f = class i extends t {
 	static styleId = "tp-dir-styles";
 	static changeEventName = "tp-dir-change";
 	static nextControlId = 0;
@@ -48,8 +48,8 @@ var f = class i extends e {
 	isSyncing = !1;
 	hasAppliedDir = !1;
 	get mode() {
-		let e = this.getStringAttribute("mode", "auto");
-		return n(e) ? e : "auto";
+		let t = this.getStringAttribute("mode", "auto");
+		return e(t) ? t : "auto";
 	}
 	set mode(e) {
 		this.setStringAttribute("mode", e);
@@ -73,7 +73,7 @@ var f = class i extends e {
 	}
 	get size() {
 		let e = this.getAttribute("size") ?? "m";
-		return t(e) ? e : "m";
+		return n(e) ? e : "m";
 	}
 	set size(e) {
 		this.setAttribute("size", e);

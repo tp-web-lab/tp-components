@@ -1,4 +1,4 @@
-import { Ku as e } from "../../chunks/lib/typescript/typescript.js";
+import { qu as e } from "../../chunks/lib/typescript/typescript.js";
 import { t } from "../../chunks/content-table.js";
 import { createContentTable as n } from "../../utilities/content-table.js";
 import { TpDeclarativeTextSource as r } from "../../utilities/declarative-text-source.js";

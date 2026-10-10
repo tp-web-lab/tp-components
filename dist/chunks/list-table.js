@@ -1,4 +1,4 @@
-import { ct as e } from "./lib/typescript/typescript.js";
+import { lt as e } from "./lib/typescript/typescript.js";
 import { l as t } from "./lib/markdown-it/markdown-it.js";
 //#region ../tp-markdown/dist/markdown/renderers/list-table.js
 var n = {

@@ -1,4 +1,4 @@
-import { $n as e, Ku as t } from "./lib/typescript/typescript.js";
+import { er as e, qu as t } from "./lib/typescript/typescript.js";
 import { initializeFieldName as n } from "../utilities/field-name.js";
 import "../components/textfield/textfield.js";
 //#region src/components/mathfield/mathfield.css?inline

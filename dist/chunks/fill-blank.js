@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 import { n as t } from "./blank.js";
 import { getBlankFields as n } from "../components/fill-blank/fields.js";
 //#region src/components/fill-blank/fill-blank.css?inline

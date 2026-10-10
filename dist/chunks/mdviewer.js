@@ -1,4 +1,4 @@
-import { ct as e, lt as t, ut as n } from "./lib/typescript/typescript.js";
+import { ft as e, lt as t, ut as n } from "./lib/typescript/typescript.js";
 //#region ../tp-markdown/dist/markdown/renderers/mdviewer.js
 var r = {
 	id: "mdviewer",
@@ -6,12 +6,12 @@ var r = {
 		for (let n of e.querySelectorAll(".tp-md-mdviewer")) n instanceof HTMLElement && await i(n, t);
 	}
 };
-async function i(t, n) {
-	if (t.dataset.mdviewerRendered === "true") return;
-	t.dataset.mdviewerRendered = "true";
-	let r = t.querySelector(".tp-md-mdviewer-source"), i = t.querySelector(".tp-md-mdviewer-start"), o = t.querySelector(".tp-md-mdviewer-start-controls"), s = t.querySelector(".tp-md-mdviewer-source-output"), c = t.querySelector(".tp-md-mdviewer-output"), l = t.querySelector(".tp-md-mdviewer-select"), u = t.querySelector(".tp-md-mdviewer-layout");
+async function i(e, n) {
+	if (e.dataset.mdviewerRendered === "true") return;
+	e.dataset.mdviewerRendered = "true";
+	let r = e.querySelector(".tp-md-mdviewer-source"), i = e.querySelector(".tp-md-mdviewer-start"), o = e.querySelector(".tp-md-mdviewer-start-controls"), s = e.querySelector(".tp-md-mdviewer-source-output"), c = e.querySelector(".tp-md-mdviewer-output"), l = e.querySelector(".tp-md-mdviewer-select"), u = e.querySelector(".tp-md-mdviewer-layout");
 	if (!(r instanceof HTMLElement) || !(i instanceof HTMLElement) || !(c instanceof HTMLElement) || !(l instanceof HTMLSelectElement) || !(u instanceof HTMLSelectElement)) return;
-	let d = s instanceof HTMLElement ? s : i, f = o instanceof HTMLElement ? o : i, p = E(r), m = x(t.dataset.mdviewerExtensions ?? ""), g = await a(t, p, n, m), _ = new e({ attributes: { pageNav: { enabled: !1 } } }), v = g[0] ?? {
+	let d = s instanceof HTMLElement ? s : i, f = o instanceof HTMLElement ? o : i, p = E(r), m = x(e.dataset.mdviewerExtensions ?? ""), g = await a(e, p, n, m), _ = new t({ attributes: { pageNav: { enabled: !1 } } }), v = g[0] ?? {
 		label: "Example",
 		source: p,
 		renderSource: C(p, m),
@@ -24,7 +24,7 @@ async function i(t, n) {
 		e !== void 0 && (v = e, w());
 	}));
 	let S = () => {
-		t.dataset.mdviewerLayout = A(u.value);
+		e.dataset.mdviewerLayout = A(u.value);
 	}, w = async () => {
 		S(), d.replaceChildren(j(v.source, "markdown")), await _.renderRuntime(d, { only: ["highlight"] }), await D(c, v.renderSource, v.attributes, v.path ?? n.path, n.includeBaseUrl, k(l.value), v.allowScript === !0);
 	};
@@ -166,10 +166,10 @@ function m(e) {
 	return e.match(/^\s*---\r?\n[\s\S]*?\r?\n---\r?\n?/)?.[0].trimStart() ?? "";
 }
 function h(e) {
-	let n = e.match(/^\s*---\r?\n([\s\S]*?)\r?\n---/);
-	if (n === null) return {};
+	let t = e.match(/^\s*---\r?\n([\s\S]*?)\r?\n---/);
+	if (t === null) return {};
 	try {
-		let e = t(n[1] ?? "");
+		let e = n(t[1] ?? "");
 		return typeof e == "object" && e && !Array.isArray(e) ? e : {};
 	} catch {
 		return {};
@@ -249,12 +249,12 @@ async function T(e) {
 function E(e) {
 	return e instanceof HTMLTemplateElement ? e.innerHTML.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&quot;", "\"").replaceAll("&#39;", "'").replaceAll("&amp;", "&") : e.textContent ?? "";
 }
-async function D(t, r, i, a, o, s, c) {
-	if (t.toggleAttribute("data-allow-script", c), O(r)) {
-		t.replaceChildren(j("Nested mdviewer rendering skipped.", "text"));
+async function D(n, r, i, a, o, s, c) {
+	if (n.toggleAttribute("data-allow-script", c), O(r)) {
+		n.replaceChildren(j("Nested mdviewer rendering skipped.", "text"));
 		return;
 	}
-	let l = new e({
+	let l = new t({
 		path: a ?? "/mdviewer.md",
 		includeBaseUrl: o,
 		attributes: {
@@ -263,16 +263,16 @@ async function D(t, r, i, a, o, s, c) {
 		}
 	});
 	if (s === "render") {
-		t.innerHTML = await l.renderAsync(r), await l.renderRuntime(t, { exclude: ["mdviewer"] }), n(t);
+		n.innerHTML = await l.renderAsync(r), await l.renderRuntime(n, { exclude: ["mdviewer"] }), e(n);
 		return;
 	}
 	if (s === "html") {
 		let e = await l.renderAsync(r);
-		t.replaceChildren(j(V(e), "html")), await l.renderRuntime(t, { only: ["highlight"] });
+		n.replaceChildren(j(V(e), "html")), await l.renderRuntime(n, { only: ["highlight"] });
 		return;
 	}
 	let u = await l.parseAsync(r), d = JSON.stringify(u.tokens, null, 2);
-	t.replaceChildren(j(d, "json")), await l.renderRuntime(t, { only: ["highlight"] });
+	n.replaceChildren(j(d, "json")), await l.renderRuntime(n, { only: ["highlight"] });
 }
 function O(e) {
 	return /^(`{3,}|~{3,})[ \t]*mdviewer\b/m.test(e);

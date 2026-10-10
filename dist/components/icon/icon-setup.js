@@ -1,2 +1,2 @@
-import { xr as e } from "../../chunks/lib/typescript/typescript.js";
+import { Sr as e } from "../../chunks/lib/typescript/typescript.js";
 export { e as setupTpIcons };

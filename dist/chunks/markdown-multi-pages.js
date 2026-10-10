@@ -1,4 +1,4 @@
-import { Ku as e, st as t } from "./lib/typescript/typescript.js";
+import { qu as e, st as t } from "./lib/typescript/typescript.js";
 import "./color.js";
 import "./clock.js";
 import "./lang.js";

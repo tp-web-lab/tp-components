@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 import { J as t, a as n, i as r, o as i } from "./lib/vendor/vendor.js";
 import "./color.js";
 import "./formula-picker.js";

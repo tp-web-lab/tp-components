@@ -1,2 +1,2 @@
-import { Qn as e } from "../../chunks/lib/typescript/typescript.js";
+import { $n as e } from "../../chunks/lib/typescript/typescript.js";
 export { e as TpTooltip };

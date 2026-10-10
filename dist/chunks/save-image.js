@@ -1,4 +1,4 @@
-import { Ku as e, _n as t, _r as n, vn as r, vr as i } from "./lib/typescript/typescript.js";
+import { qu as e, vn as t, vr as n, yn as r, yr as i } from "./lib/typescript/typescript.js";
 //#region src/components/save-image/save-image.css?inline
 var a = "tp-save-image{vertical-align:middle;display:inline-flex}tp-save-image>tp-icon-button{--tp-icon-button-size:2rem;--tp-icon-button-icon-size:1.15rem}tp-save-image>tp-icon-button>button{border:1px solid var(--tp-neutral-stroke-mid,#9ca3af);background:var(--tp-paper-color,#fff)}tp-save-image>tp-icon-button>button:hover{background:var(--tp-neutral-fill-soft,#e5e7eb)}tp-save-image>tp-dropdown{min-inline-size:7rem}tp-save-image>tp-dropdown>ul{margin:0;padding:.25rem;list-style:none}tp-save-image [data-format]{border-radius:var(--tp-border-radius-sm,.25rem);cursor:pointer;padding:.4rem .65rem}tp-save-image [data-format]:is(:hover,:focus-visible){background:var(--tp-neutral-fill-softer,#f3f4f6);outline:none}";
 //#endregion

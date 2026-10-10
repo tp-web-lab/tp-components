@@ -1,4 +1,4 @@
-import { At as e, Jt as t, ft as n, gt as r, kt as i, pt as a, vt as o, z as s } from "../../chunks/lib/typescript/typescript.js";
+import { At as e, Yt as t, _t as n, jt as r, mt as i, pt as a, yt as o, z as s } from "../../chunks/lib/typescript/typescript.js";
 import { TpHtmlProject as c } from "./html-project.js";
 //#region src/components/html-playground/html-playground.ts
 function l(e) {
@@ -113,13 +113,13 @@ var f = class extends t {
 		if (s === null) throw Error("No HTML entry file found.");
 		let c = t.findFile(s);
 		if (c === void 0) throw Error(`HTML entry file not found: ${s}`);
-		let u = o(t.files), f = await r(t.files, u, t.importmap), p = () => {
+		let u = o(t.files), f = await n(t.files, u, t.importmap), p = () => {
 			for (let e of u.values()) URL.revokeObjectURL(e);
 			for (let e of f.values()) URL.revokeObjectURL(e);
 		}, m = new Map([...u, ...f]), h = d(c.content, s, m);
-		return t.importmap !== void 0 && (h = e(h, l(t.importmap))), h = i(h, `
-${n()}
+		return t.importmap !== void 0 && (h = r(h, l(t.importmap))), h = e(h, `
 ${a()}
+${i()}
 `), {
 			html: h,
 			cleanup: p

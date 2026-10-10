@@ -1,39 +1,39 @@
-import { an as e, cn as t, dn as n, fn as r, in as i, ln as a, on as o, sn as s } from "../../chunks/lib/typescript/typescript.js";
+import { an as e, cn as t, fn as n, ln as r, on as i, pn as a, sn as o, un as s } from "../../chunks/lib/typescript/typescript.js";
 //#region src/components/question/question-src-schema.ts
-var c = i([
+var c = e([
 	"markdown",
 	"md",
 	"html",
 	"none"
-]), l = a({
+]), l = s({
 	title: n().optional(),
 	markup: c.default("markdown").optional(),
 	prompt: n().min(1),
-	form: e(n().min(1)).min(2),
-	feedback: e(n()).optional(),
+	form: i(n().min(1)).min(2),
+	feedback: i(n()).optional(),
 	solution: n().optional()
-}), u = a({
-	answer: r([t().int().min(1), n().regex(/^\d+$/, "Expected a 1-based integer index")]),
+}), u = s({
+	answer: a([r().int().min(1), n().regex(/^\d+$/, "Expected a 1-based integer index")]),
 	random: o().optional(),
 	name: n().optional(),
 	orientation: n().optional(),
 	value: n().optional()
-}), d = l.extend({ attributes: u }), f = a({
-	answer: r([
-		s(""),
+}), d = l.extend({ attributes: u }), f = s({
+	answer: a([
+		t(""),
 		n().regex(/^\d+(,\s*\d+)*$/, "Expected comma-separated 1-based indexes"),
-		e(t().int().min(1))
+		i(r().int().min(1))
 	]),
 	random: o().optional(),
 	name: n().optional(),
 	orientation: n().optional(),
 	value: n().optional()
-}), p = l.extend({ attributes: f }), m = a({ answer: r([n().min(1), e(n().min(1)).min(1)]) }), h = a({
+}), p = l.extend({ attributes: f }), m = s({ answer: a([n().min(1), i(n().min(1)).min(1)]) }), h = s({
 	title: n().optional(),
 	markup: c.default("markdown").optional(),
 	prompt: n().min(1),
 	form: n().min(1),
-	feedback: e(n()).optional(),
+	feedback: i(n()).optional(),
 	solution: n().optional(),
 	attributes: m
 });

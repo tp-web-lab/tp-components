@@ -1,4 +1,4 @@
-import { Pr as e, Yu as t } from "../chunks/lib/typescript/typescript.js";
+import { Fr as e, Xu as t } from "../chunks/lib/typescript/typescript.js";
 //#region src/utilities/declarative-text-source.ts
 var n = class {
 	host;

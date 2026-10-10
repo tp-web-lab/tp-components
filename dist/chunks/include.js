@@ -1,4 +1,4 @@
-import { Ku as e, Pr as t } from "./lib/typescript/typescript.js";
+import { Fr as e, qu as t } from "./lib/typescript/typescript.js";
 import { t as n } from "./lib/dompurify/dompurify.js";
 //#region src/components/include/include.css?inline
 var r = "tp-include{display:block}tp-include>[data-tp-include-loading]{font-style:italic}tp-include[mode=raw]>pre{white-space:pre;margin:0;overflow:auto}";
@@ -10,7 +10,7 @@ function i(e) {
 function a(e) {
 	return /<html[\s>]/i.test(e) || /<body[\s>]/i.test(e);
 }
-var o = class o extends e {
+var o = class o extends t {
 	static styleId = "tp-include-styles";
 	requestId = 0;
 	static get observedAttributes() {
@@ -113,20 +113,20 @@ var o = class o extends e {
 		e.id = o.styleId, e.textContent = r, document.head.append(e);
 	}
 	async loadContent() {
-		let e = ++this.requestId;
+		let t = ++this.requestId;
 		if (this.src === "") {
 			this.replaceChildren();
 			return;
 		}
 		this.renderLoading();
 		try {
-			let n = t(this, this.src);
+			let n = e(this, this.src);
 			this.setAttribute("data-tp-source", n.href);
 			let r = await fetch(n.href, { mode: this.fetchMode });
-			if (e !== this.requestId) return;
+			if (t !== this.requestId) return;
 			if (!r.ok) throw Error(`HTTP ${String(r.status)}`);
 			let i = await r.text();
-			if (e !== this.requestId) return;
+			if (t !== this.requestId) return;
 			this.mode === "raw" ? this.injectRaw(i) : this.injectHtml(i), this.dispatchEvent(new CustomEvent("tp-include-load", {
 				bubbles: !0,
 				detail: {
@@ -138,8 +138,8 @@ var o = class o extends e {
 					scriptsExecuted: this.allowScripts && !this.sanitize
 				}
 			}));
-		} catch (t) {
-			if (e !== this.requestId) return;
+		} catch (e) {
+			if (t !== this.requestId) return;
 			this.renderFallback(), this.dispatchEvent(new CustomEvent("tp-include-error", {
 				bubbles: !0,
 				detail: {
@@ -149,7 +149,7 @@ var o = class o extends e {
 					allowStyles: this.allowStyles,
 					sanitize: this.sanitize,
 					scriptsExecuted: !1,
-					error: t instanceof Error ? t.message : "Unknown include error"
+					error: e instanceof Error ? e.message : "Unknown include error"
 				}
 			}));
 		}

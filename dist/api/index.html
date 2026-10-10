@@ -85,6 +85,12 @@ examples home and derivatives course. Never merge runtime or gh-pages into main.
 requests skip jobs that need these credentials. <code>TP_EXAMPLES_UPDATE_KEY</code> grants
 write access only to tp-examples and is used to update its runtime revision.
 GitHub Pages must use GitHub Actions, not the historical gh-pages branch.</p>
+<p><code>pnpm build</code> also supplies <code>dist/renderers/markdown.js</code>, a publication-time
+Markdown converter sharing the browser component's source conversion. It is
+used with a DOM implementation by the examples build; it does not register web
+components or run their interactive rendering. Generated single-page documents
+can retain their author source with <code>data-tp-original-src</code>, used by the Code
+control and the annotation storage scope.</p>
 </div></div>
 <div class="col-sidebar">
 <div class="page-menu">

@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 //#region src/components/source/source.css?inline
 var t = "tp-source{vertical-align:middle;display:inline-flex}tp-source[hidden]{display:none}tp-source>tp-icon-button{--tp-icon-button-size:2rem;--tp-icon-button-icon-size:1.15rem}tp-source>tp-icon-button>button{border:1px solid var(--tp-neutral-stroke-mid,#9ca3af);background:var(--tp-paper-color,#fff)}tp-source>tp-icon-button>button:hover{background:var(--tp-neutral-fill-soft,#e5e7eb)}", n = "tp-source-styles";
 function r(e) {

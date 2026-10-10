@@ -1,2 +1,2 @@
-import { Gt as e, Wt as t } from "../../chunks/lib/typescript/typescript.js";
-export { t as resolveSpecifier, e as resolveSpecifierDebug };
+import { Gt as e, Kt as t } from "../../chunks/lib/typescript/typescript.js";
+export { e as resolveSpecifier, t as resolveSpecifierDebug };

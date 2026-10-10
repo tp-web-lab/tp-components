@@ -1,17 +1,17 @@
-import { H as e, V as t, an as n, dn as r, in as i, ln as a } from "../../chunks/lib/typescript/typescript.js";
+import { H as e, V as t, an as n, fn as r, on as i, un as a } from "../../chunks/lib/typescript/typescript.js";
 import { n as o, t as s } from "../../chunks/matching.js";
 //#region src/components/matching-question/matching-question.ts
 var c = a({
 	title: r().optional(),
 	prompt: r().min(1),
-	markup: i([
+	markup: n([
 		"markdown",
 		"md",
 		"html",
 		"none"
 	]).optional(),
-	form: n(n(r().min(1)).min(1)).min(2).refine((e) => e.every((t) => t.length === e[0]?.length), "All lists must have the same number of items."),
-	headers: n(r().min(1)).optional(),
+	form: i(i(r().min(1)).min(1)).min(2).refine((e) => e.every((t) => t.length === e[0]?.length), "All lists must have the same number of items."),
+	headers: i(r().min(1)).optional(),
 	feedback: r().optional(),
 	solution: r().optional()
 }).refine((e) => !e.headers || e.headers.length === e.form.length, "Provide exactly one header per list."), l = class extends t {

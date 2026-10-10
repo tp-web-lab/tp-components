@@ -1,2 +1,2 @@
-import { rr as e } from "../../chunks/lib/typescript/typescript.js";
+import { ir as e } from "../../chunks/lib/typescript/typescript.js";
 export { e as TpDivider };

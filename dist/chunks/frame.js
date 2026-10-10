@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 //#region src/components/frame/frame.css?inline
 var t = "tp-frame{--tp-frame-numerator:16;--tp-frame-denominator:9;aspect-ratio:var(--tp-frame-numerator) / var(--tp-frame-denominator);justify-content:center;align-items:center;display:flex;overflow:hidden}tp-frame>img,tp-frame>video{object-fit:cover;block-size:100%;inline-size:100%}";
 //#endregion

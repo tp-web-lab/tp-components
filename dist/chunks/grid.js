@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 //#region src/components/grid/grid.css?inline
 var t = "tp-grid{gap:var(--tp-grid-gap,1rem);display:grid}@supports (width:min(var(--tp-grid-min-width, 250px), 100%)){tp-grid{grid-template-columns:repeat(auto-fit, minmax(min(var(--tp-grid-min-width,250px), 100%), 1fr))}}";
 //#endregion

@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 import "./avatar.js";
 //#region src/components/avatar-group/avatar-group.css?inline
 var t = "tp-avatar-group{isolation:isolate;vertical-align:middle;align-items:center;max-inline-size:100%;display:inline-flex}tp-avatar-group>tp-avatar{z-index:var(--tp-avatar-group-index);position:relative}tp-avatar-group>tp-avatar~tp-avatar{margin-inline-start:calc(-1 * var(--tp-avatar-group-overlap,.75rem))}tp-avatar-group[data-orientation=vertical]{flex-direction:column}tp-avatar-group[data-orientation=vertical]>tp-avatar~tp-avatar{margin-block-start:calc(-1 * var(--tp-avatar-group-overlap,.75rem));margin-inline-start:0}", n = class extends e {

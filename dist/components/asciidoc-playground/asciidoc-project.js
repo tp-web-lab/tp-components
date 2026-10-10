@@ -1,4 +1,4 @@
-import { Yt as e } from "../../chunks/lib/typescript/typescript.js";
+import { Xt as e } from "../../chunks/lib/typescript/typescript.js";
 //#region src/components/asciidoc-playground/asciidoc-project.ts
 var t = class t extends e {
 	attributes;

@@ -1,2 +1,2 @@
-import { xn as e } from "../../chunks/lib/typescript/typescript.js";
+import { Sn as e } from "../../chunks/lib/typescript/typescript.js";
 export { e as TpMenu };

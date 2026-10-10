@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 import "../components/textfield/textfield.js";
 import { calculate as t } from "../components/calculator/calculator-engine.js";
 //#region src/components/calculator/calculator.css?inline

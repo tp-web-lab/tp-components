@@ -1,4 +1,4 @@
-import { Sn as e } from "../../chunks/lib/typescript/typescript.js";
+import { Cn as e } from "../../chunks/lib/typescript/typescript.js";
 //#region src/components/iframe/iframe-controls.ts
 var t = /* @__PURE__ */ new WeakMap();
 function n(e) {

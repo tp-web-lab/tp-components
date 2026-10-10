@@ -1,2 +1,2 @@
-import { Cn as e } from "../chunks/lib/typescript/typescript.js";
+import { wn as e } from "../chunks/lib/typescript/typescript.js";
 export { e as IframeOverlayBridge };

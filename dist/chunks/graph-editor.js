@@ -1,4 +1,4 @@
-import { Ku as e, Qu as t, _n as n, vn as r } from "./lib/typescript/typescript.js";
+import { $u as e, qu as t, vn as n, yn as r } from "./lib/typescript/typescript.js";
 import "./accordion.js";
 import "./color.js";
 import "./save-image.js";
@@ -157,7 +157,7 @@ var T = {
 		height: 18,
 		render: () => "<rect x=\"-5\" y=\"-5\" width=\"10\" height=\"10\" class=\"tp-graph-measurement-shape\" />"
 	}]
-}, D = class c extends e {
+}, D = class c extends t {
 	static styleId = "tp-graph-editor-styles";
 	static editorCounter = 0;
 	graphValue = h(s);
@@ -272,12 +272,12 @@ var T = {
 	}
 	scheduleInitialization() {
 		if (!(this.initialized || this.initializationScheduled)) {
-			if (this.initializationScheduled = !0, this.src !== "" || t("graph", this) !== null) {
+			if (this.initializationScheduled = !0, this.src !== "" || e("graph", this) !== null) {
 				this.initializeEditor();
 				return;
 			}
 			this.initializationObserver = new MutationObserver(() => {
-				t("graph", this) !== null && this.initializeEditor();
+				e("graph", this) !== null && this.initializeEditor();
 			}), this.initializationObserver.observe(this, { childList: !0 }), window.requestAnimationFrame(() => {
 				this.initializeEditor();
 			});
@@ -628,10 +628,10 @@ var T = {
 		this.validateGraph(t), this.setGraph(t);
 	}
 	readGraphSource() {
-		let e = t("graph", this);
-		if (e !== null) {
-			let t = e.value;
-			return t.trim() !== "" && (this.initialGraphSourceSnapshot = t), t;
+		let t = e("graph", this);
+		if (t !== null) {
+			let e = t.value;
+			return e.trim() !== "" && (this.initialGraphSourceSnapshot = e), e;
 		}
 		return this.initialGraphSourceSnapshot ?? "";
 	}

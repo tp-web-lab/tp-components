@@ -1,2 +1,2 @@
-import { Qt as e, Xt as t, Zt as n } from "../../chunks/lib/typescript/typescript.js";
-export { t as createSingleSourceProject, n as loadPlaygroundSource, e as playgroundSourceAccept };
+import { $t as e, Qt as t, Zt as n } from "../../chunks/lib/typescript/typescript.js";
+export { n as createSingleSourceProject, t as loadPlaygroundSource, e as playgroundSourceAccept };

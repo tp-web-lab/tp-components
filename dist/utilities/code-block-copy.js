@@ -1,2 +1,2 @@
-import { Ju as e } from "../chunks/lib/typescript/typescript.js";
+import { Yu as e } from "../chunks/lib/typescript/typescript.js";
 export { e as ensureCodeBlockCopyButtons };

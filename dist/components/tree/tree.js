@@ -1,2 +1,2 @@
-import { Jn as e } from "../../chunks/lib/typescript/typescript.js";
+import { Yn as e } from "../../chunks/lib/typescript/typescript.js";
 export { e as TpTree };

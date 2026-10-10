@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 //#region src/components/biblio/biblio.css?inline
 var t = "tp-biblio{display:none!important}", n = class extends e {
 	get ref() {

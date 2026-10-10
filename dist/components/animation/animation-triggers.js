@@ -1,4 +1,4 @@
-import { mr as e } from "../../chunks/lib/typescript/typescript.js";
+import { hr as e } from "../../chunks/lib/typescript/typescript.js";
 //#region src/components/animation/animation-triggers.ts
 var t = /* @__PURE__ */ new WeakMap();
 function n(e) {

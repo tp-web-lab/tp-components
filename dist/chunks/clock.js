@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 //#region src/components/clock/clock.css?inline
 var t = "tp-clock{--tp-clock-size:1rem;border:1px solid var(--tp-brand-stroke-soft,#d1d5db);font-size:var(--tp-clock-size);border-radius:.5em;align-items:center;gap:.5em;padding:.35em .5em;display:inline-flex}tp-clock>[data-tp-clock-time]{font-variant-numeric:tabular-nums;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:1em}tp-clock>[data-tp-clock-graphic]{block-size:1.6em;color:var(--tp-brand-text-on-soft,currentColor);inline-size:1.6em}tp-clock:not([type=analogic])>[data-tp-clock-graphic],tp-clock[type=analogic]>[data-tp-clock-time]{display:none}";
 //#endregion

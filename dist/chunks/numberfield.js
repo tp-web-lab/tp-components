@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 import { initializeFieldName as t } from "../utilities/field-name.js";
 import { t as n } from "./textfield.js";
 import { n as r } from "./choice-label.js";

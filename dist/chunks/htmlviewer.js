@@ -1,4 +1,4 @@
-import { ct as e } from "./lib/typescript/typescript.js";
+import { lt as e } from "./lib/typescript/typescript.js";
 //#region ../tp-markdown/dist/markdown/renderers/htmlviewer.js
 var t = "Copy HTML code", n = "<svg viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect x=\"9\" y=\"9\" width=\"10\" height=\"10\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"2\" />\n  <path\n    d=\"M7 15H6C4.89543 15 4 14.1046 4 13V6C4 4.89543 4.89543 4 6 4H13C14.1046 4 15 4.89543 15 6V7\"\n    stroke=\"currentColor\"\n    stroke-linecap=\"round\"\n    stroke-width=\"2\"\n  />\n</svg>", r = new e({ attributes: { pageNav: { enabled: !1 } } }), i = {
 	id: "htmlviewer",

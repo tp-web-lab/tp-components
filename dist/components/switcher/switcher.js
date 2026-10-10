@@ -1,2 +1,2 @@
-import { bn as e } from "../../chunks/lib/typescript/typescript.js";
+import { xn as e } from "../../chunks/lib/typescript/typescript.js";
 export { e as TpSwitcher };

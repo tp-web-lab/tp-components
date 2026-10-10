@@ -1,4 +1,4 @@
-import { Ku as e } from "./lib/typescript/typescript.js";
+import { qu as e } from "./lib/typescript/typescript.js";
 //#region src/components/stack/stack.css?inline
 var t = "tp-stack{flex-direction:column;justify-content:flex-start;display:flex}tp-stack *{margin-block:0}tp-stack:not([recursive])>*+*,tp-stack[recursive] *+*{margin-block-start:var(--stack-gap,1rem)}tp-stack[split-after]:only-child{block-size:100%}", n = 0, r = class r extends e {
 	static styleId = "tp-stack-styles";
