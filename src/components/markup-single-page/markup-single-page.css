@@ -24,3 +24,23 @@
   overflow: auto;
   background: var(--tp-paper-color, #fff);
 }
+
+.tp-markup-single-page-toolbar-label {
+  min-inline-size: 0;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.tp-markup-single-page-toolbar tp-icon-button:is([data-action="code"], [data-action="calc"]) {
+  --tp-icon-button-size: 2rem;
+  --tp-icon-button-icon-size: 1.15rem;
+}
+
+.tp-markup-single-page-toolbar tp-icon-button:is([data-action="code"], [data-action="calc"]) > button {
+  border: 1px solid var(--tp-neutral-stroke-mid, #9ca3af);
+  background: var(--tp-paper-color, #ffffff);
+}
+
+.tp-markup-single-page-toolbar tp-icon-button:is([data-action="code"], [data-action="calc"]) > button:hover {
+  background: var(--tp-neutral-fill-soft, #e5e7eb);
+}

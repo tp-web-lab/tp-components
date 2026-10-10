@@ -30,6 +30,12 @@ Combine the attributes on one preview. Controls start at the published defaults.
 :::
 
 :::: tp-cluster
+::: tp-textfield { data-setting="git" label="git" value placeholder clearable }
+:::
+
+::: tp-textfield { data-setting="label" label="label" value placeholder clearable }
+:::
+
 ::: tp-textfield { data-setting="langs" label="langs" value="en" placeholder="en" clearable }
 :::
 

@@ -53,6 +53,10 @@
  * @summary reStructuredText rendering component.
  */
 /**
+ * @tp-dependency tp-source
+ * @summary Source repository link button.
+ */
+/**
  * @tp-dependency tp-theme
  * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
  */
@@ -69,6 +73,7 @@ import "../clock/clock.js";
 import "../lang/lang.js";
 import "../color/color.js";
 import "../theme/theme.js";
+import "../source/source.js";
 import "../fullscreen/fullscreen.js";
 import "../icon-button/icon-button.js";
 import { TpPostItEditor } from "../post-it-editor/post-it-editor.js";
@@ -155,6 +160,8 @@ function getRenderedEventName(language: TpMarkupSinglePageLanguage): string {
  * @tagname tp-markup-single-page
  * @attr {string} src = "" - Source file. The extension selects the renderer.
  * @attr {string | null} toolbar = null - Optional comma-separated controls: code, calc, postit, clock, lang, color, theme, fullscreen. Empty enables all; absent hides the toolbar.
+ * @attr {string} git = "" - Repository URL. Adds a source link before Code when the toolbar is enabled.
+ * @attr {string} label = "" - Text displayed in the center of the optional toolbar.
  * @attr {string} langs = "en" - Candidate document languages. The first uses the source directory; others use language subdirectories.
  * @event tp-markup-single-page-rendered Emitted after the selected renderer completes.
  * @eventdetail tp-markup-single-page-rendered { language: "html" | "markdown" | "asciidoc" | "restructuredtext"; src: string }
@@ -174,7 +181,7 @@ function getRenderedEventName(language: TpMarkupSinglePageLanguage): string {
  */
 export class TpMarkupSinglePage extends TpBase {
 	public static get observedAttributes(): string[] {
-		return ["src", "toolbar", "langs"];
+		return ["src", "toolbar", "langs", "label", "git"];
 	}
 
 	private readonly outputElement = document.createElement("div");
@@ -232,6 +239,8 @@ export class TpMarkupSinglePage extends TpBase {
 	protected attributeChangedCallback(name: string): void {
 		if (!this.isConnected) return;
 		if (name === "toolbar") this.renderToolbar();
+		else if (name === "git") this.updateGit();
+		else if (name === "label") this.updateLabel();
 		else if (name === "langs") void this.updateLanguages();
 		else {
 			void this.renderSinglePage();
@@ -247,6 +256,50 @@ export class TpMarkupSinglePage extends TpBase {
 	public set toolbar(value: string | null) {
 		if (value === null) this.removeAttribute("toolbar");
 		else this.setAttribute("toolbar", value);
+	}
+
+	public get git(): string {
+		return this.getAttribute("git") ?? "";
+	}
+
+	public set git(value: string) {
+		this.setAttribute("git", value);
+	}
+
+	private updateGit(): void {
+		const toolbar = this.toolbarElement;
+		if (!toolbar) return;
+		let source = toolbar.querySelector<HTMLElementTagNameMap["tp-source"]>(
+			"tp-source[data-action='git']",
+		);
+		if (!this.git.trim()) {
+			source?.remove();
+			return;
+		}
+		if (!source) {
+			source = document.createElement("tp-source");
+			source.setAttribute("section", "start");
+			source.dataset.action = "git";
+			source.url = this.git;
+			(toolbar.querySelector("[data-toolbar-start]") ?? toolbar).prepend(
+				source,
+			);
+		} else source.url = this.git;
+	}
+
+	public get label(): string {
+		return this.getAttribute("label") ?? "";
+	}
+
+	public set label(value: string) {
+		this.setAttribute("label", value);
+	}
+
+	private updateLabel(): void {
+		const label = this.toolbarElement?.querySelector(
+			".tp-markup-single-page-toolbar-label",
+		);
+		if (label) label.textContent = this.label;
 	}
 
 	private disposeToolbar(): void {
@@ -287,6 +340,7 @@ export class TpMarkupSinglePage extends TpBase {
 		toolbar.className = "tp-markup-single-page-toolbar";
 		toolbar.setAttribute("orientation", "horizontal");
 		this.toolbarElement = toolbar;
+		this.updateGit();
 		for (const name of controls) {
 			if (!selected.has(name)) continue;
 			let control: HTMLElement;
@@ -314,6 +368,11 @@ export class TpMarkupSinglePage extends TpBase {
 			);
 			toolbar.append(control);
 		}
+		const label = document.createElement("span");
+		label.className = "tp-markup-single-page-toolbar-label";
+		label.setAttribute("section", "center");
+		label.textContent = this.label;
+		toolbar.append(label);
 		this.prepend(toolbar);
 		void this.updateLanguages();
 	}

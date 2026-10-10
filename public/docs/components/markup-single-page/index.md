@@ -27,6 +27,7 @@ The toolbar is optional. The interactions below are available only when the corr
 
 | Control or gesture | Result |
 | --- | --- |
+| Source repository | Open the linked Git repository in a new tab. |
 | Code | Open or close the document source in a drawer, without replacing the rendered document. |
 | Calculator | Open or close the scientific calculator. |
 | Clock | Read the time; hover to display the date. |
@@ -52,11 +53,15 @@ The toolbar is optional. The interactions below are available only when the corr
 
 ### Author directives
 
+Use `label="My document"` to display a title in the center of the toolbar. Its default is an empty string. Changing or removing the label updates only the title, without reloading the document or closing its tools. Without a toolbar, the label is not displayed.
+
 The toolbar is hidden by default. Add `toolbar` (or `toolbar=""`) to display all available controls, or give a comma-separated selection. The toolbar updates immediately without reloading the document. Unknown names and duplicates are ignored.
 
 ```html
-<tp-markup-single-page src="guide.md" toolbar="code,calc,postit,theme,fullscreen"></tp-markup-single-page>
+<tp-markup-single-page src="guide.md" toolbar="code,calc,postit,theme,fullscreen" label="My document"></tp-markup-single-page>
 ```
+
+Set `git="https://github.com/owner/repository"` to add a repository button at the start of the toolbar, before Code. It opens the repository in a new tab. This button is independent of the selection in `toolbar`; an absent or empty `git` hides it. Without a toolbar, no repository button is displayed.
 
 The left group contains `code`, `calc`, `postit`; the right group contains `clock`, `lang`, `color`, `theme`, `fullscreen`, in that order regardless of the order in the attribute. Code displays the original source as text; Calculator opens a separate drawer.
 
@@ -97,6 +102,8 @@ Toolbar controls
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
+  | <code>git</code> | <code>string</code> | <code>&quot;&quot;</code> | Repository URL. Adds a source link before Code when the toolbar is enabled. |
+  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Text displayed in the center of the optional toolbar. |
   | <code>langs</code> | <code>string</code> | <code>&quot;en&quot;</code> | Candidate document languages. The first uses the source directory; others use language subdirectories. |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Source file. The extension selects the renderer. |
   | <code>toolbar</code> | <code>string \| null</code> | <code>null</code> | Optional comma-separated controls: code, calc, postit, clock, lang, color, theme, fullscreen. Empty enables all; absent hides the toolbar. |
