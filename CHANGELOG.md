@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Restore theme-aware brand colours for inline code, including scoped colour
+  presets, while preserving code-block syntax highlighting and link colours.
+
 - Stop probing alternate translation formats once a translated entry page is found,
   avoiding unnecessary 404 requests when loading multilingual documentation.
 

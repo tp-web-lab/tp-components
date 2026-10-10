@@ -308,7 +308,7 @@
     padding: 0.125em 0.25em;
     /*border-radius: var(--tp-border-radius-sm);*/
     /*background: var(--tp-neutral-fill-softer);*/
-    color: inherit;
+    color: var(--tp-brand-text-colorful);
     font-size: 0.875em;
     font-weight:500;
     font-family: var(--tp-font-family-code);
@@ -328,6 +328,13 @@
     font-size: 0.9375rem;
     font-family: var(--tp-font-family-code);
     tab-size: 2;
+
+    code,
+    samp,
+    tt,
+    span.docutils.literal {
+      color: inherit;
+    }
 
     code {
       font-size: inherit;
