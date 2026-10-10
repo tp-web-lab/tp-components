@@ -1,4 +1,4 @@
-import { qu as e } from "./lib/typescript/typescript.js";
+import { Zu as e } from "./lib/typescript/typescript.js";
 //#region src/components/typewriting/typewriting.css?inline
 var t = "tp-typewriting{min-inline-size:0;display:block}tp-typewriting [data-tp-typewriting-unit][data-pending]{opacity:0}@media (prefers-reduced-motion:reduce){tp-typewriting [data-tp-typewriting-unit][data-pending]{opacity:1}}", n = class extends e {
 	units = [];

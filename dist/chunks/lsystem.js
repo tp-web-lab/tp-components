@@ -1,4 +1,4 @@
-import { qu as e } from "./lib/typescript/typescript.js";
+import { Zu as e } from "./lib/typescript/typescript.js";
 import { TpDeclarativeTextSource as t } from "../utilities/declarative-text-source.js";
 import "./save-image.js";
 //#region ../tp-utilities/dist/l-system/l-system-parser.js

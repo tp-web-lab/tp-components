@@ -1,4 +1,4 @@
-import { qu as e, vr as t, yr as n } from "./lib/typescript/typescript.js";
+import { Cr as e, Sr as t, Zu as n } from "./lib/typescript/typescript.js";
 //#region src/components/lang/lang.css?inline
 var r = "tp-lang{vertical-align:middle;display:inline-flex}tp-lang>tp-icon-button{--tp-icon-button-size:2rem;--tp-icon-button-icon-size:1.15rem}tp-lang>tp-icon-button>button{border:1px solid var(--tp-neutral-stroke-mid,#9ca3af);background:var(--tp-paper-color,#fff)}tp-lang>tp-icon-button>button:hover{background:var(--tp-neutral-fill-soft,#e5e7eb)}tp-lang>tp-dropdown{overscroll-behavior:contain;max-block-size:calc(100vh - 1rem);inline-size:max-content;min-inline-size:9rem;overflow-y:auto}tp-lang>tp-dropdown>ul{inline-size:100%;margin:0;padding:.25rem;list-style:none}tp-lang .tp-lang-option{border-radius:var(--tp-border-radius-sm,.25rem);cursor:pointer;align-items:center;gap:.5rem;padding:.3rem .5rem;display:flex}tp-lang .tp-lang-option:hover{background:var(--tp-neutral-fill-softer,#f3f4f6)}tp-lang .tp-lang-option[data-selected]{background:var(--tp-neutral-fill-soft,#e5e7eb)}tp-lang .tp-lang-option>tp-icon[name=check]{visibility:hidden}tp-lang .tp-lang-option[data-selected]>tp-icon[name=check]{visibility:visible}tp-lang .tp-lang-option-icon{--tp-icon-size:1.15em}tp-lang .tp-lang-separator{margin:0;padding:0;list-style:none}", i = "tp-lang-styles";
 function a(e) {
@@ -17,7 +17,7 @@ function c(e, t) {
 	let n = t.replace(/^\/+|\/+$/g, "");
 	return e === "" || e === "/" ? `/${n}` : `${e.replace(/\/+$/, "")}/${n}`;
 }
-var l = class l extends e {
+var l = class l extends n {
 	static dropdownPlacement = "bottom";
 	static changeEventName = "tp-lang-change";
 	static nextControlId = 0;
@@ -50,8 +50,8 @@ var l = class l extends e {
 		this.setAttribute("repository", e);
 	}
 	get variant() {
-		let e = this.getAttribute("variant") ?? "neutral";
-		return n(e) ? e : "neutral";
+		let t = this.getAttribute("variant") ?? "neutral";
+		return e(t) ? t : "neutral";
 	}
 	set variant(e) {
 		this.setAttribute("variant", e);

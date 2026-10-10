@@ -1,4 +1,4 @@
-import { rr as e } from "./lib/typescript/typescript.js";
+import { sr as e } from "./lib/typescript/typescript.js";
 //#region src/components/popover/popover.css?inline
 var t = "tp-popover{z-index:1000;max-inline-size:min(24rem,100vw - 2rem);margin:0;position:fixed;inset:auto}tp-popover:not([open]){display:none}tp-popover-backdrop{opacity:0;pointer-events:none;visibility:hidden;z-index:999;background:0 0;position:fixed;inset:0}tp-popover-backdrop[data-open=true]{opacity:1;pointer-events:auto;visibility:visible}";
 //#endregion

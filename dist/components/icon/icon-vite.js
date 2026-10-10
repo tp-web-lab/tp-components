@@ -1,2 +1,2 @@
-import { xr as e } from "../../chunks/lib/typescript/typescript.js";
+import { Tr as e } from "../../chunks/lib/typescript/typescript.js";
 export { e as registerTpIconLibraryFromGlob };

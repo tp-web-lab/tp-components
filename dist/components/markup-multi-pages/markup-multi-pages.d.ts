@@ -138,6 +138,8 @@ export declare class TpMarkupMultiPages extends TpBase {
     private extractDocumentTitle;
     private cleanDocumentTitle;
     private extractDocumentDescription;
+    /** Build metadata maps original document URLs to pre-rendered HTML. */
+    private getRenderedHref;
     private detectLanguage;
     private getViewerTagName;
     private getInlineScriptType;

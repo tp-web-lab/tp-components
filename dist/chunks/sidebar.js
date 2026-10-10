@@ -1,4 +1,4 @@
-import { qu as e } from "./lib/typescript/typescript.js";
+import { Zu as e } from "./lib/typescript/typescript.js";
 //#region src/components/sidebar/sidebar.css?inline
 var t = "tp-sidebar{gap:var(--tp-sidebar-gap,1rem);flex-wrap:wrap;display:flex}tp-sidebar:not([right-sidebar])>:first-child{flex-basis:var(--tp-sidebar-side-width,auto);flex-grow:1}tp-sidebar:not([right-sidebar])>:last-child,tp-sidebar[right-sidebar]>:first-child{min-inline-size:var(--tp-sidebar-content-width,50%);flex-grow:999;flex-basis:0}tp-sidebar[right-sidebar]>:last-child{flex-basis:var(--tp-sidebar-side-width,auto);flex-grow:1}";
 //#endregion

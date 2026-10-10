@@ -1,2 +1,2 @@
-import { ar as e } from "../../chunks/lib/typescript/typescript.js";
+import { lr as e } from "../../chunks/lib/typescript/typescript.js";
 export { e as TpButton };

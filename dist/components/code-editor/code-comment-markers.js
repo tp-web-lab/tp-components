@@ -1,2 +1,2 @@
-import { Un as e, Wn as t } from "../../chunks/lib/typescript/typescript.js";
+import { Kn as e, qn as t } from "../../chunks/lib/typescript/typescript.js";
 export { e as codeCommentMarkers, t as findCodeCommentMarkers };

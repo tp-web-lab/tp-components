@@ -1,4 +1,4 @@
-import { qu as e } from "./lib/typescript/typescript.js";
+import { Zu as e } from "./lib/typescript/typescript.js";
 import "./chronometer.js";
 import "./flip-card.js";
 //#region src/components/memory/memory.css?inline

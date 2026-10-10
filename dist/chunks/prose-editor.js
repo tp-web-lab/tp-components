@@ -1,4 +1,4 @@
-import { Fr as e, Y as t, dr as n, et as r, it as i, qu as a, rt as o, td as s } from "./lib/typescript/typescript.js";
+import { Y as e, Zu as t, ad as n, et as r, hr as i, it as a, rt as o, zr as s } from "./lib/typescript/typescript.js";
 import { loadUsedTpComponents as c } from "../tp-loader.js";
 import { A as l, B as u, C as d, D as f, E as p, F as m, H as h, I as g, L as _, M as v, N as y, O as b, P as x, R as S, S as C, T as w, U as T, V as E, _ as D, b as O, c as k, d as A, f as j, g as M, h as N, j as P, k as F, l as ee, m as te, p as ne, s as re, u as ie, v as ae, w as oe, x as se, y as ce, z as le } from "./lib/vendor/vendor.js";
 import "./color.js";
@@ -543,7 +543,7 @@ function Ve(e) {
 function $(e) {
 	return e === "source" || e === "preview" ? e : "both";
 }
-var He = class h extends a {
+var He = class h extends t {
 	static styleId = "tp-prose-editor-styles";
 	static nextId = 0;
 	editorView = null;
@@ -586,7 +586,7 @@ var He = class h extends a {
 	srcLoadToken = 0;
 	static get observedAttributes() {
 		return [
-			...a.observedAttributes,
+			...t.observedAttributes,
 			"placeholder",
 			"readonly",
 			"src",
@@ -1023,20 +1023,20 @@ var He = class h extends a {
 	serializeRenderedElement(e) {
 		return this.syncFormControlAttributes(e), e.innerHTML;
 	}
-	async renderMarkupInto(e, t, i) {
+	async renderMarkupInto(e, t, n) {
 		if (t === "html") {
-			i.innerHTML = e;
+			n.innerHTML = e;
 			return;
 		}
 		if (t === "asciidoc") {
-			await n(e, i);
+			await i(e, n);
 			return;
 		}
 		if (t === "restructuredtext") {
-			await r(e, i);
+			await r(e, n);
 			return;
 		}
-		await o(e, i, "/tp-prose-editor-markup-block.md");
+		await o(e, n, "/tp-prose-editor-markup-block.md");
 	}
 	syncFormControlAttributes(e) {
 		for (let t of e.querySelectorAll("input")) t.type === "checkbox" || t.type === "radio" ? t.toggleAttribute("checked", t.checked) : t.setAttribute("value", t.value);
@@ -1062,8 +1062,8 @@ var He = class h extends a {
 		let t = e.pathname.split("/").pop() ?? "", n = t.lastIndexOf(".");
 		return n < 0 ? "" : t.slice(n + 1).toLowerCase();
 	}
-	resolveSourceUrl(t) {
-		return e(this, t);
+	resolveSourceUrl(e) {
+		return s(this, e);
 	}
 	parseHTML(e) {
 		let t = document.createElement("div");
@@ -1128,7 +1128,7 @@ var He = class h extends a {
 	}
 	async refreshRenderedHTML(e) {
 		try {
-			await c(e), await this.waitForRenderedMarkdownElements(e), await i(e, "/tp-prose-editor-html-render.md"), await this.renderMathElements(e);
+			await c(e), await this.waitForRenderedMarkdownElements(e), await a(e, "/tp-prose-editor-html-render.md"), await this.renderMathElements(e);
 		} catch (e) {
 			console.error("Unable to refresh prose editor HTML render", e);
 		}
@@ -1211,11 +1211,11 @@ var He = class h extends a {
 			}
 		};
 	}
-	createCodeBlockNodeView(e, t, n) {
-		let r = e, i = document.createElement("div"), a = document.createElement("div"), o = this.createToolbarId("code-file"), c = this.createToolbarId("code-language"), l = document.createElement("tp-code-editor"), u = document.createElement("input"), d = me.map((e) => `<li data-code-language="${e}">${e}</li>`).join("");
-		i.dataset.tpProseEditorCodeBlockEditor = "", a.dataset.tpProseEditorCodeBlockToolbar = "", a.innerHTML = `
-      <tp-icon-button id="${o}" name="file" label="Code file" aria-haspopup="menu" aria-expanded="false"></tp-icon-button>
-      <tp-dropdown data-tp-prose-editor-code-file-dropdown anchor="#${o}" placement="bottom" offset="4px" outside-click>
+	createCodeBlockNodeView(e, t, r) {
+		let i = e, a = document.createElement("div"), o = document.createElement("div"), s = this.createToolbarId("code-file"), c = this.createToolbarId("code-language"), l = document.createElement("tp-code-editor"), u = document.createElement("input"), d = me.map((e) => `<li data-code-language="${e}">${e}</li>`).join("");
+		a.dataset.tpProseEditorCodeBlockEditor = "", o.dataset.tpProseEditorCodeBlockToolbar = "", o.innerHTML = `
+      <tp-icon-button id="${s}" name="file" label="Code file" aria-haspopup="menu" aria-expanded="false"></tp-icon-button>
+      <tp-dropdown data-tp-prose-editor-code-file-dropdown anchor="#${s}" placement="bottom" offset="4px" outside-click>
         <tp-menu data-tp-prose-editor-code-menu>
           <ul>
             <li data-code-file-action="load"><span data-tp-prose-editor-menu-label><tp-icon name="file-download" aria-hidden="true"></tp-icon><span>Load</span></span></li>
@@ -1231,25 +1231,25 @@ var He = class h extends a {
         </tp-menu>
       </tp-dropdown>
       <tp-icon-button data-tp-prose-editor-code-toolbar name="keyboard-f1" label="Toggle editor toolbar" title="Toggle editor toolbar (F1)"></tp-icon-button>
-    `, l.dataset.tpProseEditorCodeBlock = "", l.setAttribute("line-numbers", ""), l.setAttribute("word-wrap", ""), l.readonly = this.readonly, u.type = "file", u.hidden = !0, u.dataset.tpProseEditorCodeFile = "", i.append(a, u, l);
-		let f = a.querySelector(`#${o}`), p = a.querySelector(`#${c}`), m = a.querySelector("[data-tp-prose-editor-code-toolbar]"), h = a.querySelector("[data-tp-prose-editor-code-file-dropdown]"), g = a.querySelector("[data-tp-prose-editor-code-language-dropdown]"), _ = () => {
-			let e = z(r.attrs.language), t = typeof r.attrs.src == "string" ? r.attrs.src.trim() : "";
-			l.setAttribute("language", e), be(l, r.attrs.theme), H(l, r.attrs.theme, r.attrs.color), t === "" ? (l.removeAttribute("src"), l.removeAttribute("filename")) : xe(t) ? (l.setAttribute("src", t), l.removeAttribute("filename")) : (l.removeAttribute("src"), l.setAttribute("filename", t));
-			for (let t of a.querySelectorAll("[data-code-language]")) t.toggleAttribute("data-selected", t.dataset.codeLanguage === e), t.dataset.codeLanguage === e ? t.setAttribute("aria-current", "true") : t.removeAttribute("aria-current");
-		}, v = (e = r.attrs, i = l.getValue()) => {
-			if (typeof n != "function") return;
-			let a = n();
+    `, l.dataset.tpProseEditorCodeBlock = "", l.setAttribute("line-numbers", ""), l.setAttribute("word-wrap", ""), l.readonly = this.readonly, u.type = "file", u.hidden = !0, u.dataset.tpProseEditorCodeFile = "", a.append(o, u, l);
+		let f = o.querySelector(`#${s}`), p = o.querySelector(`#${c}`), m = o.querySelector("[data-tp-prose-editor-code-toolbar]"), h = o.querySelector("[data-tp-prose-editor-code-file-dropdown]"), g = o.querySelector("[data-tp-prose-editor-code-language-dropdown]"), _ = () => {
+			let e = z(i.attrs.language), t = typeof i.attrs.src == "string" ? i.attrs.src.trim() : "";
+			l.setAttribute("language", e), be(l, i.attrs.theme), H(l, i.attrs.theme, i.attrs.color), t === "" ? (l.removeAttribute("src"), l.removeAttribute("filename")) : xe(t) ? (l.setAttribute("src", t), l.removeAttribute("filename")) : (l.removeAttribute("src"), l.setAttribute("filename", t));
+			for (let t of o.querySelectorAll("[data-code-language]")) t.toggleAttribute("data-selected", t.dataset.codeLanguage === e), t.dataset.codeLanguage === e ? t.setAttribute("aria-current", "true") : t.removeAttribute("aria-current");
+		}, v = (e = i.attrs, n = l.getValue()) => {
+			if (typeof r != "function") return;
+			let a = r();
 			if (typeof a != "number") return;
 			let o = t.state.tr.setNodeMarkup(a, void 0, e);
-			if (i !== r.textContent) {
-				let e = i === "" ? E.empty : E.from(Y.text(i));
-				o = o.replaceWith(a + 1, a + r.nodeSize - 1, e);
+			if (n !== i.textContent) {
+				let e = n === "" ? E.empty : E.from(Y.text(n));
+				o = o.replaceWith(a + 1, a + i.nodeSize - 1, e);
 			}
 			t.dispatch(o);
 		}, y = new MutationObserver(() => {
-			let e = ge([l]), t = _e([l]), n = B(r.attrs.theme), i = ye(l);
-			e !== null && i === "auto" && (l.classList.remove(...L), n !== null && l.classList.add(n), e = n), !(e === n && t === V(r.attrs.color)) && v({
-				...r.attrs,
+			let e = ge([l]), t = _e([l]), n = B(i.attrs.theme), r = ye(l);
+			e !== null && r === "auto" && (l.classList.remove(...L), n !== null && l.classList.add(n), e = n), !(e === n && t === V(i.attrs.color)) && v({
+				...i.attrs,
 				theme: e,
 				color: t
 			});
@@ -1263,23 +1263,23 @@ var He = class h extends a {
 		};
 		b(e.textContent), _();
 		let x = () => {
-			l.getValue() !== r.textContent && v(r.attrs, l.getValue());
+			l.getValue() !== i.textContent && v(i.attrs, l.getValue());
 		}, S = async () => {
 			let e = u.files?.[0];
 			if (e === void 0) return;
-			let t = await e.text(), n = z(s(e.name));
+			let t = await e.text(), r = z(n(e.name));
 			v({
-				...r.attrs,
-				language: n,
+				...i.attrs,
+				language: r,
 				src: e.name
-			}, t), b(t), l.setAttribute("language", n), l.removeAttribute("src"), l.setAttribute("filename", e.name), u.value = "";
+			}, t), b(t), l.setAttribute("language", r), l.removeAttribute("src"), l.setAttribute("filename", e.name), u.value = "";
 		}, C = () => {
 			S();
 		}, w = (e) => {
-			let t = typeof r.attrs.src == "string" ? r.attrs.src.trim() : "", n = e ?? (t.split("/").pop() || `code.${z(r.attrs.language)}`);
+			let t = typeof i.attrs.src == "string" ? i.attrs.src.trim() : "", n = e ?? (t.split("/").pop() || `code.${z(i.attrs.language)}`);
 			this.downloadTextFile(n, l.getValue(), "text/plain;charset=utf-8");
 		}, T = () => {
-			let e = (typeof r.attrs.src == "string" ? r.attrs.src.trim() : "").split("/").pop() || `code.${z(r.attrs.language)}`;
+			let e = (typeof i.attrs.src == "string" ? i.attrs.src.trim() : "").split("/").pop() || `code.${z(i.attrs.language)}`;
 			this.saveTextFileAs(e, l.getValue(), "text/plain;charset=utf-8");
 		}, D = (e) => {
 			let t = e.detail?.item, n = t?.dataset.codeFileAction;
@@ -1287,9 +1287,9 @@ var He = class h extends a {
 		}, O = (e) => {
 			let t = e.detail?.item, n = t?.dataset.codeLanguage;
 			n !== void 0 && (v({
-				...r.attrs,
+				...i.attrs,
 				language: n,
-				src: r.attrs.src
+				src: i.attrs.src
 			}, l.getValue()), t?.closest("tp-dropdown")?.hide());
 		}, k = () => {
 			x();
@@ -1309,12 +1309,12 @@ var He = class h extends a {
 			l.toolbar = !l.toolbar, m?.setAttribute("aria-pressed", String(l.toolbar));
 		};
 		return l.addEventListener("tp-code-editor-input", x), l.addEventListener("tp-code-editor-load", k), l.addEventListener("tp-code-editor-ready", A), u.addEventListener("change", C), f?.addEventListener("click", N), p?.addEventListener("click", P), m?.addEventListener("click", ee), h?.addEventListener("tp-dropdown-toggle", F), g?.addEventListener("tp-dropdown-toggle", F), h?.addEventListener("tp-menu-item-select", D), g?.addEventListener("tp-menu-item-select", O), {
-			dom: i,
+			dom: a,
 			stopEvent: () => !0,
 			ignoreMutation: () => !0,
 			update: (e) => {
-				if (e.type !== r.type) return !1;
-				r = e;
+				if (e.type !== i.type) return !1;
+				i = e;
 				let t = e.textContent;
 				return b(t), _(), l.readonly = this.readonly, !0;
 			},
@@ -2118,16 +2118,16 @@ var He = class h extends a {
 		let i = t + e.length;
 		this.htmlSourceElement.setSelectionRange(i, i), this.dispatchInputEvent();
 	}
-	setHTMLCodeMode(e) {
+	setHTMLCodeMode(t) {
 		if (this.surfaceElement === null || this.htmlSourceElement === null || this.htmlRenderedElement === null) return !1;
-		if (!e) {
+		if (!t) {
 			if (!this.htmlMode) return this.restoreEditorMode();
 			let e = this.htmlSourceElement.value;
 			return this.htmlMode = !1, this.htmlSourceElement.hidden = !0, this.htmlRenderMode = !1, this.htmlRenderedElement.hidden = !0, this.surfaceElement.hidden = !1, this.setHTML(e), this.editorView?.focus(), this.updateToolbarState(), !0;
 		}
 		if (this.htmlMode) return this.htmlSourceElement.focus(), this.updateToolbarState(), !0;
 		let n = this.htmlRenderMode ? this.htmlRenderedElement.innerHTML : this.serializeDocument(this.editorView?.state.doc ?? this.parseHTML(""));
-		return this.htmlSourceElement.value = t(n), this.htmlMode = !0, this.htmlRenderMode = !1, this.surfaceElement.hidden = !0, this.htmlRenderedElement.hidden = !0, this.htmlSourceElement.hidden = !1, this.htmlSourceElement.focus(), this.updateToolbarState(), !0;
+		return this.htmlSourceElement.value = e(n), this.htmlMode = !0, this.htmlRenderMode = !1, this.surfaceElement.hidden = !0, this.htmlRenderedElement.hidden = !0, this.htmlSourceElement.hidden = !1, this.htmlSourceElement.focus(), this.updateToolbarState(), !0;
 	}
 	setHTMLRenderMode(e) {
 		if (this.surfaceElement === null || this.htmlSourceElement === null || this.htmlRenderedElement === null) return !1;

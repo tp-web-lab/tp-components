@@ -1,4 +1,4 @@
-import { Rt as e, mt as t, pt as n, wt as r } from "../../chunks/lib/typescript/typescript.js";
+import { Dt as e, Vt as t, _t as n, gt as r } from "../../chunks/lib/typescript/typescript.js";
 //#region src/components/restructuredtext-playground/restructuredtext-execution-document.ts
 function i(e) {
 	return JSON.stringify(e).replaceAll("<\/script", "<\\/script");
@@ -7,7 +7,7 @@ function a(e) {
 	return e.replace(/<script(?![^>]*\bsrc=)[\s\S]*?<\/script>/gi, "");
 }
 async function o(o, s = {}) {
-	let c = e(o, {
+	let c = t(o, {
 		entry: s.entry,
 		priorityPaths: ["/index.rst", "/main.rst"],
 		extensions: [
@@ -18,7 +18,7 @@ async function o(o, s = {}) {
 		fallbackToFirstFile: !1
 	});
 	if (c === void 0) throw Error("No reStructuredText entry file found.");
-	let l = r(o, "/index.html"), u = l === void 0 ? "<main id=\"app\"></main>" : a(l.content), d = i(Object.fromEntries(o.files.map((e) => [e.path, e.content]))), f = i(c.path), p = i((o.extensions ?? []).filter((e) => e.enabled !== !1));
+	let l = e(o, "/index.html"), u = l === void 0 ? "<main id=\"app\"></main>" : a(l.content), d = i(Object.fromEntries(o.files.map((e) => [e.path, e.content]))), f = i(c.path), p = i((o.extensions ?? []).filter((e) => e.enabled !== !1));
 	return { html: `
 <!doctype html>
 <html>
@@ -45,8 +45,8 @@ async function o(o, s = {}) {
     id="tp-restructuredtext-playground-document"
     src=${f}
   ></tp-restructuredtext>
+  ${r()}
   ${n()}
-  ${t()}
 
   <script type="module">
     const tpRestructuredTextPlaygroundFiles = ${d};

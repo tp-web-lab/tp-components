@@ -1,4 +1,4 @@
-import { Fr as e, Xu as t, nr as n, qu as r } from "./lib/typescript/typescript.js";
+import { Zu as e, ed as t, or as n, zr as r } from "./lib/typescript/typescript.js";
 import "./calculator.js";
 import "./color.js";
 import { TpPostItEditor as i } from "../components/post-it-editor/post-it-editor.js";
@@ -34,7 +34,7 @@ function d(e) {
 function f(e) {
 	return e === "markdown" ? "tp-markdown-rendered" : e === "asciidoc" ? "tp-asciidoc-rendered" : e === "restructuredtext" ? "tp-restructuredtext-rendered" : "tp-markup-single-page-rendered";
 }
-var p = class extends r {
+var p = class extends e {
 	static get observedAttributes() {
 		return [
 			"src",
@@ -148,26 +148,26 @@ var p = class extends r {
 		a.className = "tp-markup-single-page-toolbar-label", a.setAttribute("section", "center"), a.textContent = this.label, r.append(a), this.prepend(r), this.updateLanguages();
 	}
 	async updateLanguages() {
-		let t = ++this.languageToken, n = this.toolbarElement?.querySelector("tp-lang");
-		if (this.languageSources.clear(), !n) return;
-		n.hidden = !0;
-		let r = [...new Set(this.langs.split(",").map((e) => e.trim().toLowerCase()).filter((e) => /^[a-z]{2,3}(?:-[a-z0-9]+)*$/.test(e)))], i = r[0];
-		if (!i || r.length < 2 || !this.src.trim()) return;
-		let a = e(this, this.src), o = new URL(".", a), s = o.pathname.split("/").filter(Boolean).at(-1) ?? "", c = s !== i && r.includes(s), l = c ? new URL("../", o) : o, d = a.pathname.split("/").at(-1) ?? "";
+		let e = ++this.languageToken, t = this.toolbarElement?.querySelector("tp-lang");
+		if (this.languageSources.clear(), !t) return;
+		t.hidden = !0;
+		let n = [...new Set(this.langs.split(",").map((e) => e.trim().toLowerCase()).filter((e) => /^[a-z]{2,3}(?:-[a-z0-9]+)*$/.test(e)))], i = n[0];
+		if (!i || n.length < 2 || !this.src.trim()) return;
+		let a = r(this, this.src), o = new URL(".", a), s = o.pathname.split("/").filter(Boolean).at(-1) ?? "", c = s !== i && n.includes(s), l = c ? new URL("../", o) : o, d = a.pathname.split("/").at(-1) ?? "";
 		this.currentDocumentLanguage = c ? s : i;
 		let f = /* @__PURE__ */ new Map();
-		for (let e of r) {
-			let n = new URL(`${e === i ? "" : `${e}/`}${d}`, l);
-			if (n.search = a.search, n.hash = a.hash, e === this.currentDocumentLanguage) f.set(e, a.href);
+		for (let t of n) {
+			let n = new URL(`${t === i ? "" : `${t}/`}${d}`, l);
+			if (n.search = a.search, n.hash = a.hash, t === this.currentDocumentLanguage) f.set(t, a.href);
 			else try {
 				let r = await fetch(n.href, { method: "HEAD" });
-				if (t !== this.languageToken) return;
+				if (e !== this.languageToken) return;
 				let i = u(a.pathname) !== "html" && r.headers.get("content-type")?.includes("text/html");
-				r.ok && !r.redirected && !i && f.set(e, n.href);
+				r.ok && !r.redirected && !i && f.set(t, n.href);
 			} catch {}
-			if (t !== this.languageToken) return;
+			if (e !== this.languageToken) return;
 		}
-		this.languageSources = f, n.langs = [...f.keys()].join(","), n.hidden = f.size < 2;
+		this.languageSources = f, t.langs = [...f.keys()].join(","), t.hidden = f.size < 2;
 	}
 	toggleCalculator() {
 		if (!this.calculatorDrawer) {
@@ -182,16 +182,16 @@ var p = class extends r {
 			return;
 		}
 		this.sourceDrawer || (this.sourceDrawer = new n(), this.sourceDrawer.setAttribute("label", "Source code"), this.sourceDrawer.setAttribute("placement", "end"), this.sourceDrawer.setAttribute("width", "min(60rem, 100vw)"), this.sourceDrawer.dataset.role = "source-drawer", this.append(this.sourceDrawer));
-		let r = this.sourceDrawer, i = ++this.sourceToken, a = document.createElement("pre"), o = document.createElement("code");
-		a.append(o), o.textContent = "Loading…", r.setContent(a), r.show();
+		let e = this.sourceDrawer, i = ++this.sourceToken, a = document.createElement("pre"), o = document.createElement("code");
+		a.append(o), o.textContent = "Loading…", e.setContent(a), e.show();
 		try {
-			let n = t(this.inlineSourceSnapshot?.source ?? ""), r = this.getAttribute("data-tp-original-src")?.trim() || this.src.trim();
-			if (r) {
-				let t = await fetch(e(this, r).href);
+			let e = t(this.inlineSourceSnapshot?.source ?? ""), n = this.getAttribute("data-tp-original-src")?.trim() || this.src.trim();
+			if (n) {
+				let t = await fetch(r(this, n).href);
 				if (!t.ok) throw Error(`Unable to load source (${t.status}).`);
-				n = await t.text();
+				e = await t.text();
 			}
-			i === this.sourceToken && (o.textContent = n);
+			i === this.sourceToken && (o.textContent = e);
 		} catch (e) {
 			i === this.sourceToken && (a.setAttribute("role", "alert"), o.textContent = e instanceof Error ? e.message : String(e));
 		}
@@ -214,19 +214,19 @@ var p = class extends r {
 			this.outputElement.innerHTML = `<pre class="tp-markup-single-page-error" role="alert"><code>${l(n)}</code></pre>`, this.finishRender("html", "");
 		}
 	}
-	async renderExternalSource(t, n) {
-		let r = this.fixedLanguage ?? u(t);
-		if (r === null) throw Error(`Unsupported single-page source extension: ${t}`);
-		if (this.setAttribute("data-tp-markup-single-page-language", r), this.setAttribute("data-tp-markup-single-page-source", e(this, t).pathname), r === "html") {
-			let i = e(this, t), a = await fetch(i.href, { cache: "no-store" });
+	async renderExternalSource(e, t) {
+		let n = this.fixedLanguage ?? u(e);
+		if (n === null) throw Error(`Unsupported single-page source extension: ${e}`);
+		if (this.setAttribute("data-tp-markup-single-page-language", n), this.setAttribute("data-tp-markup-single-page-source", r(this, e).pathname), n === "html") {
+			let i = r(this, e), a = await fetch(i.href, { cache: "no-store" });
 			if (!a.ok) throw Error(`Unable to load HTML file: ${i.pathname} (${String(a.status)})`);
-			if (n !== this.renderToken) return;
+			if (t !== this.renderToken) return;
 			let o = await a.text();
-			if (n !== this.renderToken) return;
-			this.outputElement.innerHTML = o, this.finishRender(r, t);
+			if (t !== this.renderToken) return;
+			this.outputElement.innerHTML = o, this.finishRender(n, e);
 			return;
 		}
-		await this.renderMarkupElement(r, n, t);
+		await this.renderMarkupElement(n, t, e);
 	}
 	async renderInlineSource(e) {
 		let n = this.inlineSourceSnapshot;
@@ -252,13 +252,13 @@ var p = class extends r {
 			this.outputElement.replaceChildren(o);
 		});
 	}
-	finishRender(t, n) {
+	finishRender(e, t) {
 		this.setAttribute("data-tp-markup-single-page-rendered", "");
-		let r = this.getAttribute("data-tp-original-src")?.trim() || n, i = r ? e(this, r).href : `${this.ownerDocument.location.href.split("#")[0]}#${this.id || `${this.localName}-${Array.from(this.ownerDocument.querySelectorAll(this.localName)).indexOf(this)}`}`;
+		let n = this.getAttribute("data-tp-original-src")?.trim() || t, i = n ? r(this, n).href : `${this.ownerDocument.location.href.split("#")[0]}#${this.id || `${this.localName}-${Array.from(this.ownerDocument.querySelectorAll(this.localName)).indexOf(this)}`}`;
 		this.pageUrl = i, this.annotations?.setPage(i);
 		let a = {
-			language: t,
-			src: n
+			language: e,
+			src: t
 		};
 		this.dispatchEvent(new CustomEvent("tp-markup-single-page-rendered", {
 			bubbles: !0,

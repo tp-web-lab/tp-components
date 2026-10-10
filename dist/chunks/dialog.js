@@ -1,4 +1,4 @@
-import { qu as e } from "./lib/typescript/typescript.js";
+import { Zu as e } from "./lib/typescript/typescript.js";
 //#region src/components/dialog/dialog.css?inline
 var t = "[data-tp-dialog]{border:0;border-radius:.75rem;inline-size:32rem;max-inline-size:min(32rem,100vw - 2rem);padding:0}[data-tp-dialog]::backdrop{background:#00000059}[data-tp-dialog-panel]{gap:1rem;padding:1rem;display:grid}[data-tp-dialog-header]{font-weight:700}[data-tp-dialog-body]{max-block-size:16rem;overflow:auto}[data-tp-dialog-footer]{justify-content:flex-end;gap:.5rem;display:flex}", n = class extends e {
 	dialogEl = null;

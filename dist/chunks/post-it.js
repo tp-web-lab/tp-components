@@ -1,4 +1,4 @@
-import { qu as e } from "./lib/typescript/typescript.js";
+import { Zu as e } from "./lib/typescript/typescript.js";
 import "./box.js";
 import { t } from "./color.js";
 //#region src/components/post-it/post-it.css?inline

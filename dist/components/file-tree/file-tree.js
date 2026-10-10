@@ -1,2 +1,2 @@
-import { En as e } from "../../chunks/lib/typescript/typescript.js";
+import { kn as e } from "../../chunks/lib/typescript/typescript.js";
 export { e as TpFileTree };

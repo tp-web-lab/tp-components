@@ -147,7 +147,7 @@ CSS properties
 <!-- /tp-docgen:api -->
 
 <!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_markdown.TpMarkdown.html)
+[More details…](/api/classes/components_markdown_markdown.TpMarkdown.html)
 <!-- tp-docgen:typedoc:end -->
 
 

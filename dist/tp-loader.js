@@ -1,4 +1,4 @@
-import { Ju as e } from "./chunks/lib/typescript/typescript.js";
+import { Qu as e } from "./chunks/lib/typescript/typescript.js";
 //#region src/tp-loader.ts
 var t = "tp-", n = /* @__PURE__ */ new Set(), r = /* @__PURE__ */ new Set(), i = /* @__PURE__ */ new Map(), a = null;
 function o(e) {

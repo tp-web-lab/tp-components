@@ -1,4 +1,4 @@
-import { Yt as e } from "../../chunks/lib/typescript/typescript.js";
+import { Qt as e } from "../../chunks/lib/typescript/typescript.js";
 import { getMarkupExtensionIdFromAction as t, isMarkupExtensionAction as n, renderMarkupExtensionMenu as r, syncMarkupExtensionMenuChecks as i } from "../markup-playground/markup-extension-menu.js";
 import { createMarkupExtensionMenuItems as a, toMarkupRuntimeExtensions as o, toggleMarkupExtensionId as s } from "../markup-playground/markup-extension-registry.js";
 import { buildRestructuredTextExecutionDocument as c } from "./restructuredtext-execution-document.js";

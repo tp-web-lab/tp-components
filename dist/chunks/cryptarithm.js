@@ -1,4 +1,4 @@
-import { qu as e } from "./lib/typescript/typescript.js";
+import { Zu as e } from "./lib/typescript/typescript.js";
 //#region ../tp-utilities/dist/games/cryptarithm/cryptarithm-parser.js
 function t(e) {
 	return e.trim().toUpperCase().replace(/\s+/g, " ").replace(/\s*\+\s*/g, " + ").replace(/\s*=\s*/g, " = ");

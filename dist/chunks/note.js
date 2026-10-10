@@ -1,4 +1,4 @@
-import { qu as e } from "./lib/typescript/typescript.js";
+import { Zu as e } from "./lib/typescript/typescript.js";
 //#region src/components/note/note.css?inline
 var t = "tp-note{display:none!important}", n = class extends e {
 	get ref() {

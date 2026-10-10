@@ -1,4 +1,4 @@
-import { $u as e, qu as t, vn as n, yn as r } from "./lib/typescript/typescript.js";
+import { Sn as e, Zu as t, rd as n, xn as r } from "./lib/typescript/typescript.js";
 import "./accordion.js";
 import "./color.js";
 import "./save-image.js";
@@ -272,12 +272,12 @@ var T = {
 	}
 	scheduleInitialization() {
 		if (!(this.initialized || this.initializationScheduled)) {
-			if (this.initializationScheduled = !0, this.src !== "" || e("graph", this) !== null) {
+			if (this.initializationScheduled = !0, this.src !== "" || n("graph", this) !== null) {
 				this.initializeEditor();
 				return;
 			}
 			this.initializationObserver = new MutationObserver(() => {
-				e("graph", this) !== null && this.initializeEditor();
+				n("graph", this) !== null && this.initializeEditor();
 			}), this.initializationObserver.observe(this, { childList: !0 }), window.requestAnimationFrame(() => {
 				this.initializeEditor();
 			});
@@ -628,10 +628,10 @@ var T = {
 		this.validateGraph(t), this.setGraph(t);
 	}
 	readGraphSource() {
-		let t = e("graph", this);
-		if (t !== null) {
-			let e = t.value;
-			return e.trim() !== "" && (this.initialGraphSourceSnapshot = e), e;
+		let e = n("graph", this);
+		if (e !== null) {
+			let t = e.value;
+			return t.trim() !== "" && (this.initialGraphSourceSnapshot = t), t;
 		}
 		return this.initialGraphSourceSnapshot ?? "";
 	}
@@ -1648,13 +1648,13 @@ var T = {
 		}), t.addEventListener("blur", () => r(!0)), e.append(t), t.focus(), t.select();
 	}
 	async downloadJson() {
-		let e = await n({
+		let t = await r({
 			suggestedName: this.jsonExportFilename(),
 			description: "Graph JSON",
 			mimeType: "application/json",
 			extension: ".json"
 		});
-		e && (await r(new Blob([this.exportJson()], { type: "application/json" }), e), this.dispatchEvent(new CustomEvent("tp-graph-export", {
+		t && (await e(new Blob([this.exportJson()], { type: "application/json" }), t), this.dispatchEvent(new CustomEvent("tp-graph-export", {
 			bubbles: !0,
 			detail: { graph: this.value }
 		})));

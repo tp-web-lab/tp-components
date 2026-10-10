@@ -1,24 +1,23 @@
-import { nr as e, qu as t } from "./lib/typescript/typescript.js";
+import { Zn as e, Zu as t, or as n } from "./lib/typescript/typescript.js";
 import "./calculator.js";
 import "./color.js";
-import { TpPostItEditor as n } from "../components/post-it-editor/post-it-editor.js";
+import { TpPostItEditor as r } from "../components/post-it-editor/post-it-editor.js";
 import "./clock.js";
 import "./lang.js";
 import "./source.js";
-import { resolveTextDirection as r } from "../utilities/text-direction.js";
+import { resolveTextDirection as i } from "../utilities/text-direction.js";
 //#region src/components/markup-multi-pages/markup-multi-pages.css?inline
-var i = ".tp-markup-single-page-toolbar .tp-markup-single-page-toolbar-label,.tp-markup-multi-pages-toolbar .tp-markup-multi-pages-toolbar-label{text-overflow:ellipsis;white-space:nowrap;min-inline-size:0;font-size:1.5rem;font-weight:600;display:block;overflow:hidden}@media (width<=48rem){.tp-markup-single-page-toolbar .tp-markup-single-page-toolbar-label,.tp-markup-multi-pages-toolbar .tp-markup-multi-pages-toolbar-label{font-size:1rem}}tp-markup-multi-pages,[tp-markup-multi-pages-host],.tp-markup-multi-pages-host{box-sizing:border-box;block-size:auto;inline-size:auto;display:block;position:fixed;inset-block:0;inset-inline:.5rem;overflow:hidden}.tp-markup-multi-pages-root{box-sizing:border-box;border-radius:.75rem;grid-template-rows:auto minmax(0,1fr);block-size:100%;min-block-size:0;inline-size:100%;display:grid;overflow:hidden}.tp-markup-multi-pages-toolbar{--tp-toolbar-size:auto;box-sizing:border-box;border:0;border-bottom:1px solid var(--tp-brand-stroke-soft);background:var(--tp-brand-fill-softer);min-block-size:3rem;inline-size:100%;max-inline-size:100%;color:var(--tp-text-body);background:var(--tp-paper-color);border-radius:.75rem .75rem 0 0;flex-wrap:wrap}.tp-markup-multi-pages-toolbar>[data-toolbar-start],.tp-markup-multi-pages-toolbar>[data-toolbar-center],.tp-markup-multi-pages-toolbar>[data-toolbar-end]{min-inline-size:0}.tp-markup-multi-pages-toolbar>tp-lang[hidden]{display:none!important}.tp-markup-multi-pages-toolbar>[data-toolbar-end]{flex-wrap:wrap;flex:0 auto;justify-content:flex-end}.tp-markup-multi-pages-toolbar tp-icon-button:not(:where([data-personal-annotation] *))>button{color:inherit;border:1px solid var(--tp-brand-stroke-mid);border-radius:var(--tp-border-radius-circle)}.tp-markup-multi-pages-toolbar tp-icon-button:not(:where([data-personal-annotation] *))>button:hover{background:var(--tp-brand-fill-soft);color:var(--tp-brand-text-on-soft)}.tp-markup-multi-pages{--tp-markup-multi-pages-sidebar-width:var(--tp-markup-multi-pages-sidebar-width,12rem);--tp-splitter-divider-size:.625rem;box-sizing:border-box;border:0;border-radius:0 0 .75rem .75rem;block-size:100%;min-block-size:0;inline-size:100%;position:relative;overflow:hidden}.tp-markup-multi-pages:not([sidebar-open])>dl{grid-template-columns:0 0 minmax(0,1fr)}.tp-markup-multi-pages:not([sidebar-open]) [data-tp-splitter-divider]{display:none}.tp-markup-multi-pages>dl,.tp-markup-multi-pages-sidebar-panel,.tp-markup-multi-pages-content-panel{block-size:100%;min-block-size:0;inline-size:100%;min-inline-size:0;overflow:hidden}.tp-markup-multi-pages-sidebar{box-sizing:border-box;background:var(--tp-paper-color);block-size:100%;min-block-size:0;inline-size:100%;color:var(--tp-text-body);padding:.75rem;overflow:auto}.tp-markup-multi-pages:not([sidebar-open]) .tp-markup-multi-pages-sidebar{display:none}.tp-markup-multi-pages-sidebar a[aria-current=page]{color:var(--tp-brand-text-colorful);font-weight:700}.tp-markup-multi-pages-sidebar a{text-decoration:none}.tp-markup-multi-pages-sidebar-controls{justify-content:flex-end;align-items:center;gap:.25rem;margin-block-end:.5rem;display:flex}.tp-markup-multi-pages-sidebar-controls tp-icon-button>button{border:1px solid color-mix(in srgb, currentColor 18%, transparent);border-radius:var(--tp-border-radius-circle)}.tp-markup-multi-pages-sidebar-tree{inline-size:100%}.tp-markup-multi-pages-sidebar ul,.tp-markup-multi-pages-sidebar ol{padding-inline-start:0;list-style:none}.tp-markup-multi-pages-sidebar li{list-style:none}.tp-markup-multi-pages-sidebar a{align-items:center;min-block-size:1.5rem;display:inline-flex}.tp-markup-multi-pages-sidebar li::marker{content:\"\"}.tp-markup-multi-pages-content{box-sizing:border-box;background:var(--tp-paper-color);block-size:100%;min-block-size:0;inline-size:100%;min-inline-size:0;color:var(--tp-text-body);padding:1rem;overflow:auto}.tp-markup-multi-pages-content .hljs-section,.tp-markup-multi-pages-content .hljs-meta{color:var(--tp-syntax-token-keyword,#569cd6)}.tp-markup-multi-pages-content .hljs-code{color:var(--tp-syntax-token-string,#ce9178)}.tp-markup-multi-pages-content .hljs-strong{color:var(--tp-syntax-token-type,#4ec9b0)}.tp-markup-multi-pages-page-nav{clear:both;border-block-start:1px solid var(--tp-brand-stroke-soft);grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:.75rem;margin-block-start:2rem;padding-block-start:1rem;display:grid}.tp-markup-multi-pages-page-nav-item{min-inline-size:0}.tp-markup-multi-pages-page-nav-next{text-align:end}.tp-markup-multi-pages-page-nav-top{text-align:center}.tp-markup-multi-pages-page-nav-link{box-sizing:border-box;border:1px solid var(--tp-brand-stroke-soft);max-inline-size:100%;color:inherit;background:var(--tp-brand-fill-softer);border-radius:.5rem;flex-direction:column;gap:.2rem;padding:.65rem .75rem;text-decoration:none;display:inline-flex}.tp-markup-multi-pages-page-nav-link:is(button){cursor:pointer;font:inherit}.tp-markup-multi-pages-page-nav-link:hover{border-color:var(--tp-brand-stroke-mid);background:var(--tp-brand-fill-soft)}.tp-markup-multi-pages-page-nav-meta{color:var(--tp-text-muted);font-size:.8rem;line-height:1.2}.tp-markup-multi-pages-page-nav-title{text-overflow:ellipsis;white-space:nowrap;color:var(--tp-brand-text-colorful);font-weight:700;line-height:1.3;overflow:hidden}.tp-markup-multi-pages-source pre{background:var(--tp-neutral-fill-loud);color:var(--tp-neutral-text-on-loud);border-radius:.5rem;margin:0;padding:.75rem;overflow:auto}.tp-markup-multi-pages-results{border:1px solid var(--tp-neutral-stroke-soft);background:var(--tp-paper-color);max-block-size:50vh;inline-size:min(34rem,100% - 1.5rem);box-shadow:var(--tp-shadow-loud);z-index:5;border-radius:.5rem;padding:.5rem;position:absolute;inset-block-start:3rem;inset-inline-start:.75rem;overflow:auto}.tp-markup-multi-pages-result{color:inherit;border-radius:.4rem;padding:.55rem;text-decoration:none;display:block}.tp-markup-multi-pages-result:hover{background:var(--tp-brand-fill-softer)}.tp-markup-multi-pages-result-title{margin-bottom:.15rem;font-weight:600}.tp-markup-multi-pages-result-excerpt{color:var(--tp-text-muted);font-size:.9rem}@media (width<=48rem){.tp-markup-multi-pages-toolbar{row-gap:.25rem}.tp-markup-multi-pages-toolbar>[data-toolbar-start]{order:1}.tp-markup-multi-pages-toolbar>[data-toolbar-end]{order:2;max-inline-size:calc(100% - 6rem)}.tp-markup-multi-pages-toolbar>[data-toolbar-center]{border-inline-start:0;flex:1 0 100%;order:3;justify-content:flex-start;margin-inline-start:0;padding-inline-start:0}.tp-markup-multi-pages-page-nav{gap:.4rem}.tp-markup-multi-pages-page-nav-link{padding:.5rem}.tp-markup-multi-pages-page-nav-meta{font-size:.75rem}.tp-markup-multi-pages-page-nav-title{font-size:.9rem}}@media (width<=24rem){.tp-markup-multi-pages-page-nav{grid-template-columns:minmax(0,1fr)}.tp-markup-multi-pages-page-nav-top,.tp-markup-multi-pages-page-nav-next{text-align:start}.tp-markup-multi-pages,.tp-markup-multi-pages>dl{display:block}.tp-markup-multi-pages [data-tp-splitter-divider],.tp-markup-multi-pages:not([sidebar-open]) [data-tp-splitter-divider]{display:none}.tp-markup-multi-pages .tp-markup-multi-pages-sidebar-panel,.tp-markup-multi-pages .tp-markup-multi-pages-content-panel{margin:0;padding:0;display:block}.tp-markup-multi-pages .tp-markup-multi-pages-sidebar-panel{display:none}.tp-markup-multi-pages[sidebar-open] .tp-markup-multi-pages-sidebar-panel{z-index:2;pointer-events:none;display:block;position:absolute;inset:0}.tp-markup-multi-pages .tp-markup-multi-pages-content-panel{block-size:100%}.tp-markup-multi-pages .tp-markup-multi-pages-sidebar{inline-size:min(var(--tp-markup-multi-pages-sidebar-width), 85%);border-inline-end:0;border-bottom:1px solid var(--tp-brand-stroke-soft);box-shadow:var(--tp-shadow-loud);pointer-events:auto;display:none;position:absolute;inset-block:0;inset-inline-start:0}.tp-markup-multi-pages[sidebar-open] .tp-markup-multi-pages-sidebar{border-inline-end:1px solid var(--tp-brand-stroke-soft);display:block}}@media (width<=32rem){.tp-markup-multi-pages-toolbar tp-clock{display:none}}", a = "tp-markup-multi-pages-styles";
-function o(e) {
+var a = ".tp-markup-single-page-toolbar .tp-markup-single-page-toolbar-label,.tp-markup-multi-pages-toolbar .tp-markup-multi-pages-toolbar-label{text-overflow:ellipsis;white-space:nowrap;min-inline-size:0;font-size:1.5rem;font-weight:600;display:block;overflow:hidden}@media (width<=48rem){.tp-markup-single-page-toolbar .tp-markup-single-page-toolbar-label,.tp-markup-multi-pages-toolbar .tp-markup-multi-pages-toolbar-label{font-size:1rem}}tp-markup-multi-pages,[tp-markup-multi-pages-host],.tp-markup-multi-pages-host{box-sizing:border-box;block-size:auto;inline-size:auto;display:block;position:fixed;inset-block:0;inset-inline:.5rem;overflow:hidden}.tp-markup-multi-pages-root{box-sizing:border-box;border-radius:.75rem;grid-template-rows:auto minmax(0,1fr);block-size:100%;min-block-size:0;inline-size:100%;display:grid;overflow:hidden}.tp-markup-multi-pages-toolbar{--tp-toolbar-size:auto;box-sizing:border-box;border:0;border-bottom:1px solid var(--tp-brand-stroke-soft);background:var(--tp-brand-fill-softer);min-block-size:3rem;inline-size:100%;max-inline-size:100%;color:var(--tp-text-body);background:var(--tp-paper-color);border-radius:.75rem .75rem 0 0;flex-wrap:wrap}.tp-markup-multi-pages-toolbar>[data-toolbar-start],.tp-markup-multi-pages-toolbar>[data-toolbar-center],.tp-markup-multi-pages-toolbar>[data-toolbar-end]{min-inline-size:0}.tp-markup-multi-pages-toolbar>tp-lang[hidden]{display:none!important}.tp-markup-multi-pages-toolbar>[data-toolbar-end]{flex-wrap:wrap;flex:0 auto;justify-content:flex-end}.tp-markup-multi-pages-toolbar tp-icon-button:not(:where([data-personal-annotation] *))>button{color:inherit;border:1px solid var(--tp-brand-stroke-mid);border-radius:var(--tp-border-radius-circle)}.tp-markup-multi-pages-toolbar tp-icon-button:not(:where([data-personal-annotation] *))>button:hover{background:var(--tp-brand-fill-soft);color:var(--tp-brand-text-on-soft)}.tp-markup-multi-pages{--tp-markup-multi-pages-sidebar-width:var(--tp-markup-multi-pages-sidebar-width,12rem);--tp-splitter-divider-size:.625rem;box-sizing:border-box;border:0;border-radius:0 0 .75rem .75rem;block-size:100%;min-block-size:0;inline-size:100%;position:relative;overflow:hidden}.tp-markup-multi-pages:not([sidebar-open])>dl{grid-template-columns:0 0 minmax(0,1fr)}.tp-markup-multi-pages:not([sidebar-open]) [data-tp-splitter-divider]{display:none}.tp-markup-multi-pages>dl,.tp-markup-multi-pages-sidebar-panel,.tp-markup-multi-pages-content-panel{block-size:100%;min-block-size:0;inline-size:100%;min-inline-size:0;overflow:hidden}.tp-markup-multi-pages-sidebar{box-sizing:border-box;background:var(--tp-paper-color);block-size:100%;min-block-size:0;inline-size:100%;color:var(--tp-text-body);padding:.75rem;overflow:auto}.tp-markup-multi-pages:not([sidebar-open]) .tp-markup-multi-pages-sidebar{display:none}.tp-markup-multi-pages-sidebar a[aria-current=page]{color:var(--tp-brand-text-colorful);font-weight:700}.tp-markup-multi-pages-sidebar a{text-decoration:none}.tp-markup-multi-pages-sidebar-controls{justify-content:flex-end;align-items:center;gap:.25rem;margin-block-end:.5rem;display:flex}.tp-markup-multi-pages-sidebar-controls tp-icon-button>button{border:1px solid color-mix(in srgb, currentColor 18%, transparent);border-radius:var(--tp-border-radius-circle)}.tp-markup-multi-pages-sidebar-tree{inline-size:100%}.tp-markup-multi-pages-sidebar ul,.tp-markup-multi-pages-sidebar ol{padding-inline-start:0;list-style:none}.tp-markup-multi-pages-sidebar li{list-style:none}.tp-markup-multi-pages-sidebar a{align-items:center;min-block-size:1.5rem;display:inline-flex}.tp-markup-multi-pages-sidebar li::marker{content:\"\"}.tp-markup-multi-pages-content{box-sizing:border-box;background:var(--tp-paper-color);block-size:100%;min-block-size:0;inline-size:100%;min-inline-size:0;color:var(--tp-text-body);padding:1rem;overflow:auto}.tp-markup-multi-pages-content .hljs-section,.tp-markup-multi-pages-content .hljs-meta{color:var(--tp-syntax-token-keyword,#569cd6)}.tp-markup-multi-pages-content .hljs-code{color:var(--tp-syntax-token-string,#ce9178)}.tp-markup-multi-pages-content .hljs-strong{color:var(--tp-syntax-token-type,#4ec9b0)}.tp-markup-multi-pages-page-nav{clear:both;border-block-start:1px solid var(--tp-brand-stroke-soft);grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:.75rem;margin-block-start:2rem;padding-block-start:1rem;display:grid}.tp-markup-multi-pages-page-nav-item{min-inline-size:0}.tp-markup-multi-pages-page-nav-next{text-align:end}.tp-markup-multi-pages-page-nav-top{text-align:center}.tp-markup-multi-pages-page-nav-link{box-sizing:border-box;border:1px solid var(--tp-brand-stroke-soft);max-inline-size:100%;color:inherit;background:var(--tp-brand-fill-softer);border-radius:.5rem;flex-direction:column;gap:.2rem;padding:.65rem .75rem;text-decoration:none;display:inline-flex}.tp-markup-multi-pages-page-nav-link:is(button){cursor:pointer;font:inherit}.tp-markup-multi-pages-page-nav-link:hover{border-color:var(--tp-brand-stroke-mid);background:var(--tp-brand-fill-soft)}.tp-markup-multi-pages-page-nav-meta{color:var(--tp-text-muted);font-size:.8rem;line-height:1.2}.tp-markup-multi-pages-page-nav-title{text-overflow:ellipsis;white-space:nowrap;color:var(--tp-brand-text-colorful);font-weight:700;line-height:1.3;overflow:hidden}.tp-markup-multi-pages-source pre{background:var(--tp-neutral-fill-loud);color:var(--tp-neutral-text-on-loud);border-radius:.5rem;margin:0;padding:.75rem;overflow:auto}.tp-markup-multi-pages-results{border:1px solid var(--tp-neutral-stroke-soft);background:var(--tp-paper-color);max-block-size:50vh;inline-size:min(34rem,100% - 1.5rem);box-shadow:var(--tp-shadow-loud);z-index:5;border-radius:.5rem;padding:.5rem;position:absolute;inset-block-start:3rem;inset-inline-start:.75rem;overflow:auto}.tp-markup-multi-pages-result{color:inherit;border-radius:.4rem;padding:.55rem;text-decoration:none;display:block}.tp-markup-multi-pages-result:hover{background:var(--tp-brand-fill-softer)}.tp-markup-multi-pages-result-title{margin-bottom:.15rem;font-weight:600}.tp-markup-multi-pages-result-excerpt{color:var(--tp-text-muted);font-size:.9rem}@media (width<=48rem){.tp-markup-multi-pages-toolbar{row-gap:.25rem}.tp-markup-multi-pages-toolbar>[data-toolbar-start]{order:1}.tp-markup-multi-pages-toolbar>[data-toolbar-end]{order:2;max-inline-size:calc(100% - 6rem)}.tp-markup-multi-pages-toolbar>[data-toolbar-center]{border-inline-start:0;flex:1 0 100%;order:3;justify-content:flex-start;margin-inline-start:0;padding-inline-start:0}.tp-markup-multi-pages-page-nav{gap:.4rem}.tp-markup-multi-pages-page-nav-link{padding:.5rem}.tp-markup-multi-pages-page-nav-meta{font-size:.75rem}.tp-markup-multi-pages-page-nav-title{font-size:.9rem}}@media (width<=24rem){.tp-markup-multi-pages-page-nav{grid-template-columns:minmax(0,1fr)}.tp-markup-multi-pages-page-nav-top,.tp-markup-multi-pages-page-nav-next{text-align:start}.tp-markup-multi-pages,.tp-markup-multi-pages>dl{display:block}.tp-markup-multi-pages [data-tp-splitter-divider],.tp-markup-multi-pages:not([sidebar-open]) [data-tp-splitter-divider]{display:none}.tp-markup-multi-pages .tp-markup-multi-pages-sidebar-panel,.tp-markup-multi-pages .tp-markup-multi-pages-content-panel{margin:0;padding:0;display:block}.tp-markup-multi-pages .tp-markup-multi-pages-sidebar-panel{display:none}.tp-markup-multi-pages[sidebar-open] .tp-markup-multi-pages-sidebar-panel{z-index:2;pointer-events:none;display:block;position:absolute;inset:0}.tp-markup-multi-pages .tp-markup-multi-pages-content-panel{block-size:100%}.tp-markup-multi-pages .tp-markup-multi-pages-sidebar{inline-size:min(var(--tp-markup-multi-pages-sidebar-width), 85%);border-inline-end:0;border-bottom:1px solid var(--tp-brand-stroke-soft);box-shadow:var(--tp-shadow-loud);pointer-events:auto;display:none;position:absolute;inset-block:0;inset-inline-start:0}.tp-markup-multi-pages[sidebar-open] .tp-markup-multi-pages-sidebar{border-inline-end:1px solid var(--tp-brand-stroke-soft);display:block}}@media (width<=32rem){.tp-markup-multi-pages-toolbar tp-clock{display:none}}", o = "tp-markup-multi-pages-styles";
+function s(e) {
 	return e.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'", "&#39;");
 }
-function s(e, t) {
-	let n = (e.match(/`{3,}/g) ?? []).reduce((e, t) => Math.max(e, t.length), 2), r = "`".repeat(n + 1);
-	return `${r}${t}\n${e}\n${r}`;
+function c(e, t) {
+	return `<pre><code class="language-${t}">${s(e).replaceAll("::include", "&#58;&#58;include")}</code></pre>`;
 }
-function c(e) {
-	return o(e).replace(/^([^\n]+)\n([=~^+-]{3,})$/gm, "<span class=\"hljs-section\">$1\n$2</span>").replace(/^(\s*\.\.\s+[^\n]+)$/gm, "<span class=\"hljs-meta\">$1</span>").replace(/(\*\*[^*\n]+\*\*)/g, "<span class=\"hljs-strong\">$1</span>").replace(/(``[^`\n]+``)/g, "<span class=\"hljs-code\">$1</span>").replace(/^(\s*\d+\.\s+)/gm, "<span class=\"hljs-bullet\">$1</span>");
+function l(e) {
+	return s(e).replace(/^([^\n]+)\n([=~^+-]{3,})$/gm, "<span class=\"hljs-section\">$1\n$2</span>").replace(/^(\s*\.\.\s+[^\n]+)$/gm, "<span class=\"hljs-meta\">$1</span>").replace(/(\*\*[^*\n]+\*\*)/g, "<span class=\"hljs-strong\">$1</span>").replace(/(``[^`\n]+``)/g, "<span class=\"hljs-code\">$1</span>").replace(/^(\s*\d+\.\s+)/gm, "<span class=\"hljs-bullet\">$1</span>");
 }
-var l = class extends t {
+var u = class extends t {
 	static get observedAttributes() {
 		return [
 			"repository",
@@ -43,7 +42,7 @@ var l = class extends t {
 		return null;
 	}
 	connectedCallback() {
-		super.connectedCallback(), this.classList.add("tp-markup-multi-pages-host"), this.style.display = "block", this.style.position = "fixed", this.style.insetBlock = "0", this.style.insetInline = "0.5rem", this.style.width = "auto", this.style.height = "auto", this.style.boxSizing = "border-box", this.style.overflow = "hidden", this.ensureGlobalStyle(a, i), this.shellRendered ||= (this.renderShell(), !0), !this.annotations && this.contentElement && (this.annotations = new n(), this.annotations.setAttribute("section", "start"), this.annotations.setTarget(this.contentElement), this.querySelector("[data-action=\"calculator\"]")?.after(this.annotations)), this.initialize(), window.addEventListener("hashchange", this.handleHashChange);
+		super.connectedCallback(), this.classList.add("tp-markup-multi-pages-host"), this.style.display = "block", this.style.position = "fixed", this.style.insetBlock = "0", this.style.insetInline = "0.5rem", this.style.width = "auto", this.style.height = "auto", this.style.boxSizing = "border-box", this.style.overflow = "hidden", this.ensureGlobalStyle(o, a), this.hasAttribute("data-tp-prerendered") && this.ensureGlobalStyle("tp-markdown-styles", e), this.shellRendered ||= (this.renderShell(), !0), !this.annotations && this.contentElement && (this.annotations = new r(), this.annotations.setAttribute("section", "start"), this.annotations.setTarget(this.contentElement), this.querySelector("[data-action=\"calculator\"]")?.after(this.annotations)), this.initialize(), window.addEventListener("hashchange", this.handleHashChange);
 	}
 	disconnectedCallback() {
 		this.annotations?.dispose(), this.annotations = null, this.contentElement?.removeEventListener("click", this.handleContentClick), window.removeEventListener("hashchange", this.handleHashChange);
@@ -113,7 +112,7 @@ var l = class extends t {
 		e instanceof HTMLElement && e.setAttribute("langs", this.langs), this.applyDocumentLocale();
 	}
 	applyDocumentLocale() {
-		let e = this.resolveCurrentLang(), t = r(e);
+		let e = this.resolveCurrentLang(), t = i(e);
 		for (let n of [this.sidebarElement, this.contentElement]) n?.setAttribute("lang", e), n?.setAttribute("dir", t);
 	}
 	resolveCurrentLang() {
@@ -159,12 +158,12 @@ var l = class extends t {
         <tp-toolbar class="tp-markup-multi-pages-toolbar" orientation="horizontal" placement="top">
           <tp-icon-button section="start" color="currentColor" data-action="home" name="home" label="Home"></tp-icon-button>
           <tp-icon-button section="start" color="currentColor" data-action="menu" name="menu" label="Menu"></tp-icon-button>
-          <tp-source section="start" url="${o(this.git)}"></tp-source>
+          <tp-source section="start" url="${s(this.git)}"></tp-source>
           <tp-icon-button section="start" color="currentColor" data-action="code" name="code" label="Code"></tp-icon-button>
           <tp-icon-button section="start" color="currentColor" data-action="calculator" name="calculator" library="components" label="Calculator"></tp-icon-button>
-          <span class="tp-markup-multi-pages-toolbar-label" section="center">${o(this.label)}</span>
+          <span class="tp-markup-multi-pages-toolbar-label" section="center">${s(this.label)}</span>
           <tp-clock section="end"></tp-clock>
-          <tp-lang section="end" langs="${o(this.langs)}"></tp-lang>
+          <tp-lang section="end" langs="${s(this.langs)}"></tp-lang>
           <tp-color section="end" data-role="brand"></tp-color>
           <tp-theme section="end"></tp-theme>
           <tp-fullscreen section="end"></tp-fullscreen>
@@ -192,8 +191,8 @@ var l = class extends t {
 	}
 	toggleCalculator() {
 		if (!this.calculatorDrawer) {
-			let t = new e();
-			t.setAttribute("label", "Calculator"), t.setAttribute("placement", "end"), t.setAttribute("width", "min(52rem, 100vw)"), t.dataset.role = "calculator-drawer", t.setContent(document.createElement("tp-calculator")), this.append(t), this.calculatorDrawer = t;
+			let e = new n();
+			e.setAttribute("label", "Calculator"), e.setAttribute("placement", "end"), e.setAttribute("width", "min(52rem, 100vw)"), e.dataset.role = "calculator-drawer", e.setContent(document.createElement("tp-calculator")), this.append(e), this.calculatorDrawer = e;
 		}
 		this.calculatorDrawer.hasAttribute("open") ? this.calculatorDrawer.hide() : this.calculatorDrawer.show();
 	}
@@ -265,7 +264,7 @@ var l = class extends t {
 		if (this.navigatingHref !== r) {
 			this.navigatingHref = r, this.annotations?.setPage("");
 			try {
-				let e = await this.fetchText(r);
+				let e = await this.fetchText(this.getRenderedHref(r));
 				if (e === null) {
 					await this.renderNotFoundPage(r);
 					return;
@@ -286,12 +285,11 @@ var l = class extends t {
 		let e = this.contentElement;
 		if (!(e === null || this.currentHref === "")) {
 			if (this.sourceMode = !this.sourceMode, this.annotations?.setPage(""), this.sourceMode) {
-				this.currentSource === "" && (this.currentSource = await this.fetchText(this.currentHref) ?? "");
-				let t = document.createElement("tp-markdown"), n = document.createElement("script");
-				n.type = "tp/markdown", n.textContent = s(this.currentSource, this.getSourceLanguage(this.currentHref)), t.append(n), this.detectLanguage(this.currentHref) === "restructuredtext" && t.addEventListener("tp-markdown-rendered", () => {
-					let e = t.querySelector("pre code");
-					e !== null && (e.innerHTML = c(this.currentSource), e.classList.remove("language-plaintext"), e.classList.add("hljs", "language-restructuredtext"), e.dataset.highlightRendered = "true");
-				}, { once: !0 }), e.replaceChildren(t);
+				let t = this.getRenderedHref(this.currentHref) === this.currentHref ? this.currentSource || await this.fetchText(this.currentHref) || "" : await this.fetchText(this.currentHref) ?? "", n = document.createElement("tp-markdown"), r = document.createElement("script");
+				r.type = "tp/markdown", r.textContent = c(t, this.getSourceLanguage(this.currentHref)), n.append(r), this.detectLanguage(this.currentHref, !0) === "restructuredtext" && n.addEventListener("tp-markdown-rendered", () => {
+					let e = n.querySelector("pre code");
+					e !== null && (e.innerHTML = l(t), e.classList.remove("language-plaintext"), e.classList.add("hljs", "language-restructuredtext"), e.dataset.highlightRendered = "true");
+				}, { once: !0 }), e.replaceChildren(n);
 				return;
 			}
 			e.replaceChildren(this.createMarkupViewer(this.currentHref, this.currentSource)), this.renderPageNavigation(this.currentHref), this.annotations?.setPage(new URL(this.currentHref, this.ownerDocument.baseURI).href);
@@ -300,8 +298,8 @@ var l = class extends t {
 	createMarkupViewer(e, t) {
 		let n = this.detectLanguage(e);
 		if (n === "html") {
-			let e = document.createElement("div");
-			return e.className = "tp-markup-multi-pages-html-output", e.innerHTML = t ?? "", e.setAttribute("data-tp-markup-multi-pages-rendered", ""), e;
+			let n = document.createElement("div");
+			return n.className = "tp-markup-multi-pages-html-output", n.setAttribute("data-tp-source", e), this.getRenderedHref(e) !== e && (n.classList.add("tp-markdown-output"), n.setAttribute("data-tp-markdown-source", e)), n.innerHTML = t ?? "", n.setAttribute("data-tp-markup-multi-pages-rendered", ""), n;
 		}
 		let r = document.createElement(this.getViewerTagName(n));
 		return r.setAttribute("src", e), r;
@@ -309,8 +307,8 @@ var l = class extends t {
 	createInlineMarkupViewer(e, t) {
 		let n = this.detectLanguage(e);
 		if (n === "html") {
-			let e = document.createElement("div");
-			return e.className = "tp-markup-multi-pages-html-output", e.innerHTML = t, e.setAttribute("data-tp-markup-multi-pages-rendered", ""), e;
+			let n = document.createElement("div");
+			return n.className = "tp-markup-multi-pages-html-output", n.setAttribute("data-tp-source", e), this.getRenderedHref(e) !== e && (n.classList.add("tp-markdown-output"), n.setAttribute("data-tp-markdown-source", e)), n.innerHTML = t, n.setAttribute("data-tp-markup-multi-pages-rendered", ""), n;
 		}
 		let r = document.createElement(this.getViewerTagName(n)), i = document.createElement("script");
 		return i.type = this.getInlineScriptType(n), i.textContent = t, r.append(i), r;
@@ -375,10 +373,23 @@ var l = class extends t {
 		let n = e.replace(/<script\b[\s\S]*?<\/script>/gi, " ").replace(/<style\b[\s\S]*?<\/style>/gi, " ").replace(/<[^>]+>/g, " ").replace(/^\s*(?:[#=*`>|:+\-.]+|\.\.\s+\w+::).*$/gm, " ").replace(/\[([^\]]+)]\([^)]+\)/g, "$1").replace(/[*_~`]/g, "").replace(/\s+/g, " ").trim(), r = n === "" ? t : n;
 		return r.length > 160 ? `${r.slice(0, 157).trimEnd()}…` : r;
 	}
-	detectLanguage(e) {
+	getRenderedHref(e) {
+		try {
+			let t = JSON.parse(this.getAttribute("data-tp-prerendered") ?? "{}");
+			if (!t || typeof t != "object") return e;
+			let n = new URL(e, this.ownerDocument.baseURI);
+			if (n.origin !== new URL(this.ownerDocument.baseURI).origin) return e;
+			let r = Reflect.get(t, n.pathname);
+			return typeof r == "string" && r.startsWith("/") && !r.startsWith("//") ? r : e;
+		} catch {
+			return e;
+		}
+	}
+	detectLanguage(e, t = !1) {
+		if (!t && this.getRenderedHref(e) !== e) return "html";
 		if (this.fixedLanguage !== null) return this.fixedLanguage;
-		let t = e.split(/[?#]/, 1)[0]?.toLowerCase() ?? "";
-		return t.endsWith(".html") || t.endsWith(".htm") ? "html" : t.endsWith(".adoc") || t.endsWith(".asciidoc") ? "asciidoc" : t.endsWith(".rst") || t.endsWith(".rest") ? "restructuredtext" : "markdown";
+		let n = e.split(/[?#]/, 1)[0]?.toLowerCase() ?? "";
+		return n.endsWith(".html") || n.endsWith(".htm") ? "html" : n.endsWith(".adoc") || n.endsWith(".asciidoc") ? "asciidoc" : n.endsWith(".rst") || n.endsWith(".rest") ? "restructuredtext" : "markdown";
 	}
 	getViewerTagName(e) {
 		return e === "asciidoc" ? "tp-asciidoc" : e === "restructuredtext" ? "tp-restructuredtext" : "tp-markdown";
@@ -396,7 +407,7 @@ var l = class extends t {
 		return e === "asciidoc" ? ":scope > .tp-asciidoc-output" : e === "restructuredtext" ? ":scope > .tp-restructuredtext-output" : e === "html" ? ":scope" : ":scope > .tp-markdown-output";
 	}
 	getSourceLanguage(e) {
-		let t = this.detectLanguage(e);
+		let t = this.detectLanguage(e, !0);
 		return t === "restructuredtext" ? "plaintext" : t === "asciidoc" ? "asciidoc" : t === "html" ? "html" : "markdown";
 	}
 	extractSidebarPageLinks(e) {
@@ -676,11 +687,11 @@ var l = class extends t {
 	}
 	createDefaultNotFoundSource(e) {
 		let t = this.fixedLanguage ?? this.detectLanguage(this.notFoundHref);
-		return t === "html" ? `<h1>Page not found</h1><p>The requested page could not be loaded: <code>${o(e)}</code></p>` : t === "asciidoc" ? `= Page not found\n\nThe requested page could not be loaded: \`${e}\`` : t === "restructuredtext" ? `Page not found\n==============\n\nThe requested page could not be loaded: \`${e}\`` : `# Page not found\n\nThe requested page could not be loaded \`${e}\``;
+		return t === "html" ? `<h1>Page not found</h1><p>The requested page could not be loaded: <code>${s(e)}</code></p>` : t === "asciidoc" ? `= Page not found\n\nThe requested page could not be loaded: \`${e}\`` : t === "restructuredtext" ? `Page not found\n==============\n\nThe requested page could not be loaded: \`${e}\`` : `# Page not found\n\nThe requested page could not be loaded \`${e}\``;
 	}
 	async fetchSpecialPage(e) {
 		for (let t of this.getSpecialPageHrefs(e)) {
-			let e = await this.fetchText(t);
+			let e = await this.fetchText(this.getRenderedHref(t));
 			if (e !== null) return {
 				href: t,
 				source: e
@@ -702,8 +713,8 @@ var l = class extends t {
 		]).map((t) => `${this.repositoryBasePath}${e}.${t}`);
 	}
 };
-customElements.get("tp-markup-multi-pages") || customElements.define("tp-markup-multi-pages", l);
+customElements.get("tp-markup-multi-pages") || customElements.define("tp-markup-multi-pages", u);
 //#endregion
-export { l as t };
+export { u as t };
 
 //# sourceMappingURL=markup-multi-pages.js.map

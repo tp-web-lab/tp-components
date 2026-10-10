@@ -1,4 +1,4 @@
-import { At as e, Yt as t, _t as n, jt as r, mt as i, pt as a, yt as o, z as s } from "../../chunks/lib/typescript/typescript.js";
+import { Nt as e, Pt as t, Qt as n, St as r, _t as i, bt as a, gt as o, z as s } from "../../chunks/lib/typescript/typescript.js";
 import { TpHtmlProject as c } from "./html-project.js";
 //#region src/components/html-playground/html-playground.ts
 function l(e) {
@@ -24,7 +24,7 @@ function d(e, t, n) {
 		return o === void 0 ? e : `${r}="${o}"`;
 	});
 }
-var f = class extends t {
+var f = class extends n {
 	get supportsTestExecution() {
 		return !0;
 	}
@@ -108,17 +108,17 @@ var f = class extends t {
 	resolveEntry(e) {
 		return typeof e.entry == "string" && e.findFile(e.entry) !== void 0 ? e.entry : e.files.find((e) => e.path.endsWith(".html"))?.path ?? e.files[0]?.path ?? null;
 	}
-	async buildExecutionDocument(t) {
-		let s = this.resolveEntry(t);
+	async buildExecutionDocument(n) {
+		let s = this.resolveEntry(n);
 		if (s === null) throw Error("No HTML entry file found.");
-		let c = t.findFile(s);
+		let c = n.findFile(s);
 		if (c === void 0) throw Error(`HTML entry file not found: ${s}`);
-		let u = o(t.files), f = await n(t.files, u, t.importmap), p = () => {
+		let u = r(n.files), f = await a(n.files, u, n.importmap), p = () => {
 			for (let e of u.values()) URL.revokeObjectURL(e);
 			for (let e of f.values()) URL.revokeObjectURL(e);
 		}, m = new Map([...u, ...f]), h = d(c.content, s, m);
-		return t.importmap !== void 0 && (h = r(h, l(t.importmap))), h = e(h, `
-${a()}
+		return n.importmap !== void 0 && (h = t(h, l(n.importmap))), h = e(h, `
+${o()}
 ${i()}
 `), {
 			html: h,

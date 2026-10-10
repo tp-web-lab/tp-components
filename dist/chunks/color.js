@@ -1,4 +1,4 @@
-import { qu as e, vr as t, yr as n } from "./lib/typescript/typescript.js";
+import { Cr as e, Sr as t, Zu as n } from "./lib/typescript/typescript.js";
 //#region src/components/color/color.css?inline
 var r = "tp-color{display:inline-flex;position:relative}tp-color>tp-icon-button>button{border:1px solid var(--tp-neutral-stroke-mid,#9ca3af);background:var(--tp-paper-color,#fff)}tp-color>tp-icon-button>button:hover{background:var(--tp-neutral-fill-soft,#e5e7eb)}tp-color>tp-dropdown{overscroll-behavior:contain;max-block-size:calc(100vh - 1rem);inline-size:max-content;min-inline-size:13rem;overflow-y:auto}tp-color>tp-dropdown>ul{grid-template-columns:1fr 1fr;inline-size:100%;margin:0;padding:.25rem;list-style:none;display:grid}tp-color .tp-color-option{cursor:pointer;border-radius:var(--tp-border-radius-sm,.25rem);align-items:center;gap:.45rem;padding:.3rem .5rem;display:flex}tp-color .tp-color-option:hover{background:var(--tp-neutral-fill-softer,#f3f4f6)}tp-color .tp-color-option[data-selected]{background:var(--tp-neutral-fill-soft,#e5e7eb)}tp-color .tp-color-option>tp-icon[name=check]{visibility:hidden}tp-color .tp-color-option[data-selected]>tp-icon[name=check]{visibility:visible}tp-color .tp-color-option>span{flex:1}tp-color .tp-color-separator{grid-column:1/-1;margin:0;padding:0;list-style:none}", i = [
 	"tp-default",
@@ -77,7 +77,7 @@ function f(e, t) {
 	let n = c.get(e);
 	if (n !== void 0) for (let e of n.controllers) e !== t && e.preset !== t.preset && e.syncToPreset(t.preset);
 }
-var p = class c extends e {
+var p = class c extends n {
 	static styleId = "tp-color-styles";
 	static changeEventName = "tp-color-change";
 	static presets = i;
@@ -114,8 +114,8 @@ var p = class c extends e {
 		this.setAttribute("anchor", e);
 	}
 	get variant() {
-		let e = this.getAttribute("variant") ?? "neutral";
-		return n(e) ? e : "neutral";
+		let t = this.getAttribute("variant") ?? "neutral";
+		return e(t) ? t : "neutral";
 	}
 	set variant(e) {
 		this.setAttribute("variant", e);

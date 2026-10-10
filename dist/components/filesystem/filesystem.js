@@ -1,2 +1,2 @@
-import { Tn as e } from "../../chunks/lib/typescript/typescript.js";
+import { On as e } from "../../chunks/lib/typescript/typescript.js";
 export { e as TpFilesystem };

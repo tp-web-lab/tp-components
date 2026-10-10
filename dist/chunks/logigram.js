@@ -1,8 +1,8 @@
-import { Fr as e, qu as t } from "./lib/typescript/typescript.js";
+import { Zu as e, zr as t } from "./lib/typescript/typescript.js";
 import "./checkbox-list.js";
 import { LogigramModel as n, readLogigramLists as r } from "../components/logigram/logigram-model.js";
 //#region src/components/logigram/logigram.css?inline
-var i = "tp-logigram{color:var(--tp-text-body);border:1px solid var(--tp-neutral-stroke-soft);border-radius:var(--tp-border-radius-md,.5rem);background:var(--tp-paper-color);padding:1rem;display:flow-root}tp-logigram .tp-logigram-header{flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.5rem;display:flex}tp-logigram .tp-logigram-title{margin:0;font-size:1.25rem;font-weight:700}tp-logigram .tp-logigram-puzzle-title{font-weight:600}tp-logigram .tp-logigram-controls{flex-wrap:nowrap;align-items:center;gap:.5rem;max-inline-size:100%;display:flex;overflow-x:auto}tp-logigram .tp-logigram-controls>*{flex:none}tp-logigram .tp-logigram-grids{max-inline-size:100%;padding:.25rem;overflow-x:auto}tp-logigram .tp-logigram-matrix{border-collapse:collapse;border:0;inline-size:auto;max-inline-size:none;margin:0;display:table}tp-logigram .tp-logigram-matrix :is(th,td){box-sizing:border-box;border:1px solid var(--tp-neutral-stroke-mid);text-align:center;background:0 0;padding:0}tp-logigram .tp-logigram-matrix th{font-weight:600}tp-logigram .tp-logigram-matrix .tp-logigram-empty{background:0 0;border:0}tp-logigram .tp-logigram-matrix .tp-logigram-category{border:2px solid var(--tp-neutral-stroke-mid);background:var(--tp-neutral-fill-soft);padding:.4rem}tp-logigram .tp-logigram-column{vertical-align:bottom;block-size:7rem}tp-logigram .tp-logigram-column span{writing-mode:vertical-rl;padding:.5rem .25rem;display:inline-block;transform:rotate(180deg)}tp-logigram .tp-logigram-row-category{inline-size:2rem;background:var(--tp-neutral-fill-soft)!important}tp-logigram .tp-logigram-row-category span{writing-mode:vertical-rl;padding:.5rem .25rem;display:inline-block;transform:rotate(180deg)}tp-logigram .tp-logigram-matrix .tp-logigram-row-label{text-align:start;overflow-wrap:anywhere;min-inline-size:6rem;max-inline-size:12rem;padding:.25rem .5rem}tp-logigram .tp-logigram-matrix .tp-logigram-group-start{border-inline-start-width:2px}tp-logigram .tp-logigram-matrix tbody tr:first-child>*{border-block-start-width:2px}tp-logigram .tp-logigram-matrix tbody tr:last-child>*{border-block-end-width:2px}tp-logigram .tp-logigram-matrix tbody tr>:last-child{border-inline-end-width:2px}tp-logigram .tp-logigram-matrix button{block-size:2.5rem;inline-size:2.5rem;color:inherit;cursor:pointer;background:0 0;border:0;border-radius:0;margin:0;padding:0;font:700 1.25rem system-ui;display:block}tp-logigram .tp-logigram-matrix button:hover{background:var(--tp-neutral-fill-soft)}tp-logigram .tp-logigram-matrix button[data-mark=\"1\"]{color:var(--tp-brand-text-colorful);background:var(--tp-brand-fill-soft)}tp-logigram .tp-logigram-matrix button[aria-invalid=true]{outline:2px solid var(--tp-danger-stroke-mid);outline-offset:-2px;color:var(--tp-danger-text-colorful)}tp-logigram .tp-logigram-matrix button:focus-visible{outline:3px solid var(--tp-focus-color,var(--tp-brand-stroke-mid));outline-offset:-3px}tp-logigram .tp-logigram-matrix button:disabled{opacity:.5;cursor:default}tp-logigram [data-success=true]{color:var(--tp-success-text-colorful);font-weight:600}tp-logigram .tp-logigram-assist{inline-size:auto;min-inline-size:0;max-inline-size:100%;font:inherit}tp-logigram .tp-logigram-matrix button[data-selected]{box-shadow:inset 0 0 0 3px var(--tp-brand-stroke-mid)}tp-logigram .tp-logigram-selection-hint{margin-block:.5rem 1rem;font-size:.875rem}", a = class extends t {
+var i = "tp-logigram{color:var(--tp-text-body);border:1px solid var(--tp-neutral-stroke-soft);border-radius:var(--tp-border-radius-md,.5rem);background:var(--tp-paper-color);padding:1rem;display:flow-root}tp-logigram .tp-logigram-header{flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.5rem;display:flex}tp-logigram .tp-logigram-title{margin:0;font-size:1.25rem;font-weight:700}tp-logigram .tp-logigram-puzzle-title{font-weight:600}tp-logigram .tp-logigram-controls{flex-wrap:nowrap;align-items:center;gap:.5rem;max-inline-size:100%;display:flex;overflow-x:auto}tp-logigram .tp-logigram-controls>*{flex:none}tp-logigram .tp-logigram-grids{max-inline-size:100%;padding:.25rem;overflow-x:auto}tp-logigram .tp-logigram-matrix{border-collapse:collapse;border:0;inline-size:auto;max-inline-size:none;margin:0;display:table}tp-logigram .tp-logigram-matrix :is(th,td){box-sizing:border-box;border:1px solid var(--tp-neutral-stroke-mid);text-align:center;background:0 0;padding:0}tp-logigram .tp-logigram-matrix th{font-weight:600}tp-logigram .tp-logigram-matrix .tp-logigram-empty{background:0 0;border:0}tp-logigram .tp-logigram-matrix .tp-logigram-category{border:2px solid var(--tp-neutral-stroke-mid);background:var(--tp-neutral-fill-soft);padding:.4rem}tp-logigram .tp-logigram-column{vertical-align:bottom;block-size:7rem}tp-logigram .tp-logigram-column span{writing-mode:vertical-rl;padding:.5rem .25rem;display:inline-block;transform:rotate(180deg)}tp-logigram .tp-logigram-row-category{inline-size:2rem;background:var(--tp-neutral-fill-soft)!important}tp-logigram .tp-logigram-row-category span{writing-mode:vertical-rl;padding:.5rem .25rem;display:inline-block;transform:rotate(180deg)}tp-logigram .tp-logigram-matrix .tp-logigram-row-label{text-align:start;overflow-wrap:anywhere;min-inline-size:6rem;max-inline-size:12rem;padding:.25rem .5rem}tp-logigram .tp-logigram-matrix .tp-logigram-group-start{border-inline-start-width:2px}tp-logigram .tp-logigram-matrix tbody tr:first-child>*{border-block-start-width:2px}tp-logigram .tp-logigram-matrix tbody tr:last-child>*{border-block-end-width:2px}tp-logigram .tp-logigram-matrix tbody tr>:last-child{border-inline-end-width:2px}tp-logigram .tp-logigram-matrix button{block-size:2.5rem;inline-size:2.5rem;color:inherit;cursor:pointer;background:0 0;border:0;border-radius:0;margin:0;padding:0;font:700 1.25rem system-ui;display:block}tp-logigram .tp-logigram-matrix button:hover{background:var(--tp-neutral-fill-soft)}tp-logigram .tp-logigram-matrix button[data-mark=\"1\"]{color:var(--tp-brand-text-colorful);background:var(--tp-brand-fill-soft)}tp-logigram .tp-logigram-matrix button[aria-invalid=true]{outline:2px solid var(--tp-danger-stroke-mid);outline-offset:-2px;color:var(--tp-danger-text-colorful)}tp-logigram .tp-logigram-matrix button:focus-visible{outline:3px solid var(--tp-focus-color,var(--tp-brand-stroke-mid));outline-offset:-3px}tp-logigram .tp-logigram-matrix button:disabled{opacity:.5;cursor:default}tp-logigram [data-success=true]{color:var(--tp-success-text-colorful);font-weight:600}tp-logigram .tp-logigram-assist{inline-size:auto;min-inline-size:0;max-inline-size:100%;font:inherit}tp-logigram .tp-logigram-matrix button[data-selected]{box-shadow:inset 0 0 0 3px var(--tp-brand-stroke-mid)}tp-logigram .tp-logigram-selection-hint{margin-block:.5rem 1rem;font-size:.875rem}", a = class extends e {
 	model = null;
 	original = null;
 	revision = 0;
@@ -75,26 +75,26 @@ var i = "tp-logigram{color:var(--tp-text-body);border:1px solid var(--tp-neutral
 		clearTimeout(this.timer), this.revision++, this.request?.abort(), this.timer = setTimeout(() => void this.load(), 0);
 	}
 	async load() {
-		let t = ++this.revision;
+		let e = ++this.revision;
 		this.request = new AbortController(), this.observer.disconnect(), this.original ??= this.innerHTML, this.setAttribute("aria-busy", "true");
 		try {
 			let i = this.original;
 			if (this.src) {
-				let t = await fetch(e(this, this.src), { signal: this.request.signal });
-				if (!t.ok) throw Error(`Unable to load puzzle (${t.status}).`);
-				let n = await t.text(), { renderMarkdownToHtml: r } = await import("../components/markdown/markdown.js");
+				let e = await fetch(t(this, this.src), { signal: this.request.signal });
+				if (!e.ok) throw Error(`Unable to load puzzle (${e.status}).`);
+				let n = await e.text(), { renderMarkdownToHtml: r } = await import("../components/markdown/markdown.js");
 				i = await r(n);
 			}
-			if (t !== this.revision || !this.isConnected) return;
+			if (e !== this.revision || !this.isConnected) return;
 			let a = document.createElement("template");
 			a.innerHTML = i, this.model = new n(r(a.content, this.label)), this.checked = !1, this.render();
-		} catch (e) {
-			if (t !== this.revision || !this.isConnected) return;
+		} catch (t) {
+			if (e !== this.revision || !this.isConnected) return;
 			this.model = null;
 			let n = document.createElement("p");
-			n.setAttribute("role", "alert"), n.textContent = e instanceof Error ? e.message : String(e), this.replaceChildren(n);
+			n.setAttribute("role", "alert"), n.textContent = t instanceof Error ? t.message : String(t), this.replaceChildren(n);
 		} finally {
-			t === this.revision && this.removeAttribute("aria-busy");
+			e === this.revision && this.removeAttribute("aria-busy");
 		}
 	}
 	move(e, t) {

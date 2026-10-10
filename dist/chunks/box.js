@@ -1,4 +1,4 @@
-import { qu as e } from "./lib/typescript/typescript.js";
+import { Zu as e } from "./lib/typescript/typescript.js";
 //#region src/components/box/box.css?inline
 var t = "tp-box{padding:var(--tp-box-padding,1rem);border:var(--tp-box-border-width,1px) solid currentColor;border-radius:var(--tp-box-border-radius,0px);color:var(--tp-box-color,var(--tp-text-body,inherit));background:var(--tp-box-background,var(--tp-paper-color,transparent));display:flow-root}tp-box :where(code,samp,tt){color:var(--tp-box-color,var(--tp-text-body,inherit))}tp-box>p:last-child{margin-block-end:0}tp-box[invert]{--tp-box-background:var(--tp-neutral-950);--tp-box-color:var(--tp-neutral-200);--lightningcss-light: ;--lightningcss-dark:initial;color-scheme:dark}.tp-dark tp-box[invert]{--tp-box-background:white;--tp-box-color:var(--tp-neutral-900);--lightningcss-light:initial;--lightningcss-dark: ;color-scheme:light}", n = class n extends e {
 	static styleId = "tp-box-styles";

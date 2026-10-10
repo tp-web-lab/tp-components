@@ -1,4 +1,4 @@
-import { qu as e } from "../../chunks/lib/typescript/typescript.js";
+import { Zu as e } from "../../chunks/lib/typescript/typescript.js";
 import { TpDeclarativeTextSource as t } from "../../utilities/declarative-text-source.js";
 //#region src/components/diagram/diagram.css?inline
 var n = ".tp-diagram{max-inline-size:100%;margin-block:1rem;display:block}.tp-diagram-output{max-inline-size:100%;overflow:auto}.tp-diagram-output svg{block-size:auto;max-inline-size:100%;margin-inline:auto;display:block}.tp-diagram-error{border:1px solid var(--tp-danger-stroke-soft,#e4a4ac);background:var(--tp-danger-fill-softer,#fff3f5);color:var(--tp-danger-text-on-soft,#7f1d2d);border-radius:.5rem;margin:0;padding:.9rem;overflow:auto}", r = "tp-diagram-styles", i = 0, a = null, o = Promise.resolve();

@@ -1,4 +1,4 @@
-import { qu as e } from "./lib/typescript/typescript.js";
+import { Zu as e } from "./lib/typescript/typescript.js";
 //#region src/components/chronometer/chronometer.css?inline
 var t = "tp-chronometer{--tp-chronometer-size:1rem;font-size:var(--tp-chronometer-size);border:1px solid #d1d5db;border-radius:.5em;align-items:center;gap:.4em;padding:.35em .5em;display:inline-flex}tp-chronometer>[data-tp-chronometer-display]{font-variant-numeric:tabular-nums;min-inline-size:8ch;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:1em}tp-chronometer>[data-tp-chronometer-icon]{--tp-icon-size:1.125em;color:currentColor}tp-chronometer>tp-icon-button>button{border:1px solid #d1d5db}", n = class n extends e {
 	static styleId = "tp-chronometer-styles";

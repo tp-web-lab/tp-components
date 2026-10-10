@@ -1,4 +1,4 @@
-import { Xn as e, qu as t } from "./lib/typescript/typescript.js";
+import { Zu as e, er as t } from "./lib/typescript/typescript.js";
 //#region src/components/matching/matching.css?inline
 var n = "tp-matching{grid-template-columns:repeat(var(--tp-matching-columns,2), minmax(0, 1fr));gap:1rem;min-inline-size:0;display:grid}tp-matching [data-matching-list]{min-inline-size:0;margin:0;padding:0;list-style:none}tp-matching [data-matching-list]>li{border:1px solid var(--tp-neutral-stroke-soft);border-radius:var(--tp-border-radius-m,.5rem);overflow-wrap:anywhere;margin:0 0 .75rem;padding:.75rem;list-style:none}tp-matching [data-matching-list]>li[data-matching-paired]{background:var(--tp-brand-fill-softer);color:var(--tp-brand-text-on-soft);border-color:var(--tp-brand-stroke-loud)}tp-matching [data-matching-list]>li[data-matching-paired]>.tp-matching-controls>span{background:var(--tp-brand-fill-soft);color:var(--tp-brand-text-on-soft);border:1px solid var(--tp-brand-stroke-loud);border-radius:var(--tp-border-radius-sm);padding:.125em .375em}tp-matching [data-matching-list]>li[data-matching-selected]{outline:2px solid var(--tp-brand-stroke-loud);outline-offset:2px}tp-matching [data-matching-list]>li>.tp-matching-controls{flex-wrap:wrap;align-items:center;gap:.5rem;margin-block-start:.5rem;display:flex}.tp-matching-content{min-inline-size:0}tp-matching .tp-matching-controls>.tp-matching-select{margin-inline-start:auto}.tp-matching-content :is(img,svg,video,audio){max-inline-size:100%}tp-matching>:is(.tp-matching-status,tp-callout){grid-column:1/-1}.tp-matching-column{min-inline-size:0}.tp-matching-column>h3{overflow-wrap:anywhere;margin-block:0 .75rem;font-size:1rem}@media (width<=45rem){tp-matching{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (width<=28rem){tp-matching{grid-template-columns:minmax(0,1fr)}}", r = [
 	"tp-blue",
@@ -30,7 +30,7 @@ function i(e, t, n, r = !1) {
 	}
 	return a;
 }
-var a = class a extends t {
+var a = class a extends e {
 	static nextHeading = 0;
 	lists = [];
 	originalLists = null;
@@ -45,7 +45,7 @@ var a = class a extends t {
 	observer = new MutationObserver(() => this.initialize());
 	static get observedAttributes() {
 		return [
-			...t.observedAttributes,
+			...e.observedAttributes,
 			"disabled",
 			"heading"
 		];
@@ -116,12 +116,12 @@ var a = class a extends t {
 	}
 	initialize() {
 		if (this.items.length) return;
-		let t = this.querySelector(":scope > dl"), n = [], i = !0, o = [...this.children].filter((e) => e instanceof HTMLElement && ["UL", "OL"].includes(e.tagName));
-		if (t) {
+		let e = this.querySelector(":scope > dl"), n = [], i = !0, o = [...this.children].filter((e) => e instanceof HTMLElement && ["UL", "OL"].includes(e.tagName));
+		if (e) {
 			i = o.length === 0 && this.querySelectorAll(":scope > dl").length === 1;
-			let e = [...t.children];
-			for (let t = 0; t < e.length; t += 2) {
-				let r = e[t], a = e[t + 1], s = a?.querySelectorAll(":scope > ul, :scope > ol");
+			let t = [...e.children];
+			for (let e = 0; e < t.length; e += 2) {
+				let r = t[e], a = t[e + 1], s = a?.querySelectorAll(":scope > ul, :scope > ol");
 				if (!(r instanceof HTMLElement) || r.tagName !== "DT" || !r.textContent?.trim() || a?.tagName !== "DD" || s?.length !== 1) {
 					i = !1;
 					break;
@@ -131,7 +131,7 @@ var a = class a extends t {
 			}
 		}
 		let s = [...o], c;
-		if (this.heading && !t) {
+		if (this.heading && !e) {
 			c = o.shift();
 			let e = [...c?.children ?? []].filter((e) => e instanceof HTMLElement && e.tagName === "LI");
 			i = i && e.length === o.length && e.every((e) => !!e.textContent?.trim()), n.push(...e);
@@ -141,7 +141,7 @@ var a = class a extends t {
 			this.error || (this.error = document.createElement("tp-callout"), this.error.setAttribute("variant", "warning"), this.error.textContent = "Provide at least two nonempty ul or ol lists with the same number of items. With heading, the first list must contain one nonempty title per remaining column. Alternatively, use a dl with one dt and one dd containing a list per column.", this.append(this.error));
 			return;
 		}
-		this.observer.disconnect(), this.error?.remove(), this.error = null, this.lists = o, t || (this.originalLists = s), this.style.setProperty("--tp-matching-columns", String(o.length)), o.forEach((e, t) => {
+		this.observer.disconnect(), this.error?.remove(), this.error = null, this.lists = o, e || (this.originalLists = s), this.style.setProperty("--tp-matching-columns", String(o.length)), o.forEach((e, t) => {
 			e.setAttribute("role", "list"), e.setAttribute("data-matching-list", "");
 			let r = n[t];
 			if (r) {
@@ -153,7 +153,7 @@ var a = class a extends t {
 					heading: n
 				}), e.setAttribute("aria-labelledby", n.id), t.append(n, e), this.append(t);
 			}
-		}), t?.remove(), c?.remove(), l.forEach((e, t) => {
+		}), e?.remove(), c?.remove(), l.forEach((e, t) => {
 			e.forEach((e, n) => {
 				let i = document.createElement("div");
 				i.className = "tp-matching-content", i.append(...e.childNodes);
@@ -174,7 +174,7 @@ var a = class a extends t {
 					authorColors: r.filter((t) => e.classList.contains(t))
 				});
 			});
-		}), this.status = document.createElement("p"), this.status.className = "tp-matching-status", this.status.setAttribute("role", "status"), this.drag = new e(), this.drag.adapter = {
+		}), this.status = document.createElement("p"), this.status.className = "tp-matching-status", this.status.setAttribute("role", "status"), this.drag = new t(), this.drag.adapter = {
 			root: this,
 			getItem: (e) => this.itemFromEvent(e)?.node ?? null,
 			canStart: (e) => !this.disabled && this.items.some((t) => e.target instanceof Node && t.select.contains(e.target)),

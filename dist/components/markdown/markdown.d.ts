@@ -1,7 +1,3 @@
-/**
- * @module components/markdown
- * @summary Markdown rendering component.
- */
 export { createTpMarkdownParser, parseMarkdownToTokens, renderMarkdownToHtml, } from "../../utilities/markdown-source.js";
 import { TpBase } from "../base/base.js";
 export declare function renderMarkdownInto(source: string, root: HTMLElement, path?: string): Promise<void>;
@@ -27,6 +23,4 @@ export declare class TpMarkdown extends TpBase {
     private readInlineSource;
     private renderMarkdownRuntime;
     private resolveIncludes;
-    private applyIncludePrefix;
-    private renderInclude;
 }

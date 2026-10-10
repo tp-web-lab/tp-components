@@ -1,4 +1,4 @@
-import { qu as e } from "./lib/typescript/typescript.js";
+import { Zu as e } from "./lib/typescript/typescript.js";
 import { DEFAULT_OPTIONS as t, readLoremType as n, readOptionalInteger as r, renderLorem as i } from "../components/lorem-ipsum/generator.js";
 //#region src/components/lorem-ipsum/lorem-ipsum.css?inline
 var a = "tp-lorem-ipsum{min-inline-size:0;display:flow-root}tp-lorem-ipsum:is([type=sentence],[type=title]){display:inline}", o = class extends e {

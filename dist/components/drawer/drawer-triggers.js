@@ -1,4 +1,4 @@
-import { nr as e } from "../../chunks/lib/typescript/typescript.js";
+import { or as e } from "../../chunks/lib/typescript/typescript.js";
 //#region src/components/drawer/drawer-triggers.ts
 var t = /* @__PURE__ */ new WeakMap();
 function n(e) {

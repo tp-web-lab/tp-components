@@ -1,4 +1,4 @@
-import { er as e } from "./lib/typescript/typescript.js";
+import { ir as e } from "./lib/typescript/typescript.js";
 import "../components/textfield/textfield.js";
 import "./box.js";
 import "./numberfield.js";

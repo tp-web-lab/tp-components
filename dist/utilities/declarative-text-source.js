@@ -1,4 +1,4 @@
-import { Fr as e, Xu as t } from "../chunks/lib/typescript/typescript.js";
+import { ed as e, zr as t } from "../chunks/lib/typescript/typescript.js";
 //#region src/utilities/declarative-text-source.ts
 var n = class {
 	host;
@@ -20,8 +20,8 @@ var n = class {
 	}
 	capture() {
 		if (this.snapshot !== null) return !0;
-		let e = new Set(this.options.scriptTypes), n = Array.from(this.host.querySelectorAll("script")).find((t) => e.has(t.type) && (!this.options.ignoreSelector || !t.closest(this.options.ignoreSelector)))?.textContent ?? (this.options.textContentFallback === !0 ? this.authorText() : null);
-		return n === null || n.trim() === "" ? !1 : (this.snapshot = t(n), !0);
+		let t = new Set(this.options.scriptTypes), n = Array.from(this.host.querySelectorAll("script")).find((e) => t.has(e.type) && (!this.options.ignoreSelector || !e.closest(this.options.ignoreSelector)))?.textContent ?? (this.options.textContentFallback === !0 ? this.authorText() : null);
+		return n === null || n.trim() === "" ? !1 : (this.snapshot = e(n), !0);
 	}
 	authorText() {
 		let e = this.options.ignoreSelector;
@@ -33,13 +33,13 @@ var n = class {
 	get inlineSource() {
 		return this.capture(), this.snapshot;
 	}
-	async read(t) {
+	async read(e) {
 		let n = (this.host.getAttribute("src") ?? "").trim();
 		if (n === "") {
 			let e = this.host.getAttribute("value") ?? "";
 			return e.trim() === "" ? this.inlineSource ?? "" : e;
 		}
-		let r = e(this.host, n), i = await fetch(r.href, t);
+		let r = t(this.host, n), i = await fetch(r.href, e);
 		if (!i.ok) throw Error(`Failed to fetch "${n}" (${String(i.status)})`);
 		return await i.text();
 	}

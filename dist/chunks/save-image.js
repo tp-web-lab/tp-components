@@ -1,4 +1,4 @@
-import { qu as e, vn as t, vr as n, yn as r, yr as i } from "./lib/typescript/typescript.js";
+import { Cr as e, Sn as t, Sr as n, Zu as r, xn as i } from "./lib/typescript/typescript.js";
 //#region src/components/save-image/save-image.css?inline
 var a = "tp-save-image{vertical-align:middle;display:inline-flex}tp-save-image>tp-icon-button{--tp-icon-button-size:2rem;--tp-icon-button-icon-size:1.15rem}tp-save-image>tp-icon-button>button{border:1px solid var(--tp-neutral-stroke-mid,#9ca3af);background:var(--tp-paper-color,#fff)}tp-save-image>tp-icon-button>button:hover{background:var(--tp-neutral-fill-soft,#e5e7eb)}tp-save-image>tp-dropdown{min-inline-size:7rem}tp-save-image>tp-dropdown>ul{margin:0;padding:.25rem;list-style:none}tp-save-image [data-format]{border-radius:var(--tp-border-radius-sm,.25rem);cursor:pointer;padding:.4rem .65rem}tp-save-image [data-format]:is(:hover,:focus-visible){background:var(--tp-neutral-fill-softer,#f3f4f6);outline:none}";
 //#endregion
@@ -6,7 +6,7 @@ var a = "tp-save-image{vertical-align:middle;display:inline-flex}tp-save-image>t
 function o(e) {
 	return e === "svg" || e === "png" || e === "webp";
 }
-var s = class s extends e {
+var s = class s extends r {
 	static styleId = "tp-save-image-styles";
 	static nextId = 0;
 	dropdownEl = null;
@@ -39,8 +39,8 @@ var s = class s extends e {
 		this.setAttribute("filename", e);
 	}
 	get variant() {
-		let e = this.getAttribute("variant") ?? "neutral";
-		return i(e) ? e : "neutral";
+		let t = this.getAttribute("variant") ?? "neutral";
+		return e(t) ? t : "neutral";
 	}
 	set variant(e) {
 		this.setAttribute("variant", e);
@@ -69,19 +69,19 @@ var s = class s extends e {
 		let n = this.resolveTarget();
 		if (!n) throw TypeError(`No image matches the anchor "${this.anchor}".`);
 		try {
-			let i = await t({
+			let r = await i({
 				suggestedName: `${this.safeFilename()}.${e}`,
 				description: `${e.toUpperCase()} image`,
 				mimeType: e === "svg" ? "image/svg+xml" : `image/${e}`,
 				extension: `.${e}`
 			});
-			if (!i) return;
-			await r(e === "svg" ? new Blob([await this.createSvg(n)], { type: "image/svg+xml" }) : await this.createRaster(n, e), i), this.dropdownEl?.removeAttribute("open"), this.dispatchEvent(new CustomEvent("tp-save-image-save", {
+			if (!r) return;
+			await t(e === "svg" ? new Blob([await this.createSvg(n)], { type: "image/svg+xml" }) : await this.createRaster(n, e), r), this.dropdownEl?.removeAttribute("open"), this.dispatchEvent(new CustomEvent("tp-save-image-save", {
 				bubbles: !0,
 				composed: !0,
 				detail: {
 					format: e,
-					filename: i.filename,
+					filename: r.filename,
 					anchor: this.anchor,
 					target: n
 				}

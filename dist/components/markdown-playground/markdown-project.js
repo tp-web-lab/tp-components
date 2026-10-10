@@ -1,4 +1,4 @@
-import { Xt as e } from "../../chunks/lib/typescript/typescript.js";
+import { $t as e } from "../../chunks/lib/typescript/typescript.js";
 //#region src/components/markdown-playground/markdown-project.ts
 var t = class t extends e {
 	extensions;

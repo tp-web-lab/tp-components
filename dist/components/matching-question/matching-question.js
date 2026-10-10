@@ -1,4 +1,4 @@
-import { H as e, V as t, an as n, fn as r, on as i, un as a } from "../../chunks/lib/typescript/typescript.js";
+import { H as e, V as t, cn as n, hn as r, ln as i, pn as a } from "../../chunks/lib/typescript/typescript.js";
 import { n as o, t as s } from "../../chunks/matching.js";
 //#region src/components/matching-question/matching-question.ts
 var c = a({

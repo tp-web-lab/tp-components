@@ -1,4 +1,4 @@
-import { qu as e } from "./lib/typescript/typescript.js";
+import { Zu as e } from "./lib/typescript/typescript.js";
 //#region src/components/code-comment/code-comment.css?inline
 var t = "tp-code-comment{min-inline-size:0;display:flow-root}tp-code-comment:not([open])>ol{display:none}tp-code-comment>ol>li{padding-inline-start:.25em;position:relative}tp-code-comment>ol>li:has(>[data-code-comment-number]:not([hidden]))::marker{color:#0000}tp-code-comment>ol>li>[data-code-comment-number]{color:var(--tp-text-body,CanvasText);position:absolute;inset-block-start:.15em;inset-inline-start:-1.5em}tp-code-comment [data-code-comment-number] svg>circle[fill=white]{fill:var(--tp-paper-color,Canvas)}", n = class extends e {
 	target = null;

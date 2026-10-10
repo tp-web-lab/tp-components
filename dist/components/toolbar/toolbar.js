@@ -1,2 +1,2 @@
-import { or as e } from "../../chunks/lib/typescript/typescript.js";
+import { ur as e } from "../../chunks/lib/typescript/typescript.js";
 export { e as TpToolbar };
