@@ -94,3 +94,10 @@ The shared setup uses four repository-specific read-only deploy keys:
 requests skip jobs that need these credentials. `TP_EXAMPLES_UPDATE_KEY` grants
 write access only to tp-examples and is used to update its runtime revision.
 GitHub Pages must use GitHub Actions, not the historical gh-pages branch.
+
+`pnpm build` also supplies `dist/renderers/markdown.js`, a publication-time
+Markdown converter sharing the browser component's source conversion. It is
+used with a DOM implementation by the examples build; it does not register web
+components or run their interactive rendering. Generated single-page documents
+can retain their author source with `data-tp-original-src`, used by the Code
+control and the annotation storage scope.

@@ -472,9 +472,11 @@ export class TpMarkupSinglePage extends TpBase {
 		drawer.show();
 		try {
 			let source = dedent(this.inlineSourceSnapshot?.source ?? "");
-			if (this.src.trim()) {
+			const originalSrc =
+				this.getAttribute("data-tp-original-src")?.trim() || this.src.trim();
+			if (originalSrc) {
 				const response = await fetch(
-					resolveComponentSourceUrl(this, this.src).href,
+					resolveComponentSourceUrl(this, originalSrc).href,
 				);
 				if (!response.ok)
 					throw new Error(`Unable to load source (${response.status}).`);
@@ -619,8 +621,10 @@ export class TpMarkupSinglePage extends TpBase {
 		src: string,
 	): void {
 		this.setAttribute("data-tp-markup-single-page-rendered", "");
-		const pageUrl = src
-			? resolveComponentSourceUrl(this, src).href
+		const originalSrc =
+			this.getAttribute("data-tp-original-src")?.trim() || src;
+		const pageUrl = originalSrc
+			? resolveComponentSourceUrl(this, originalSrc).href
 			: `${this.ownerDocument.location.href.split("#")[0]}#${this.id || `${this.localName}-${Array.from(this.ownerDocument.querySelectorAll(this.localName)).indexOf(this)}`}`;
 		this.pageUrl = pageUrl;
 		this.annotations?.setPage(pageUrl);

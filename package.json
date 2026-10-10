@@ -46,7 +46,7 @@
     "docs:api": "typedoc && node scripts/sync-typedoc-links.mjs",
     "docs:check-user-interactions": "node --test scripts/component-user-interactions.test.mjs",
     "dev": "pnpm docs:api && pnpm examples:manifest && vite dev --force",
-    "build": "pnpm docs:api && tsc --noEmit && vite build && pnpm build:types",
+    "build": "pnpm docs:api && tsc --noEmit && vite build && pnpm build:types && pnpm build:renderers",
     "preview": "vite preview",
     "test": "vitest run",
     "test:component": "node scripts/test-component.mjs",
@@ -153,7 +153,8 @@
     "type-check": "tsc --noEmit",
     "build:types": "tsc -p tsconfig.build.json",
     "release:check": "node scripts/check-release.mjs",
-    "prepack": "pnpm release:check"
+    "prepack": "pnpm release:check",
+    "build:renderers": "node scripts/build-markdown-renderer.mjs"
   },
   "keywords": [],
   "author": "",

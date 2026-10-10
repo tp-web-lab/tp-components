@@ -14,8 +14,19 @@
  */
 // tp-docgen:dependencies:end
 
-import { TpMarkdownParser } from "@tp/tp-markdown/markdown/engine/markdown";
+import type { TpMarkdownParser } from "@tp/tp-markdown/markdown/engine/markdown";
 import { executeAllowedScripts } from "@tp/tp-markdown/markdown/engine/markdown-execute-allowed-scripts";
+import {
+	createTpMarkdownParser,
+	renderProtectedMarkdown,
+} from "../../utilities/markdown-source.js";
+
+export {
+	createTpMarkdownParser,
+	parseMarkdownToTokens,
+	renderMarkdownToHtml,
+} from "../../utilities/markdown-source.js";
+
 import { dedent } from "../../utilities/code.js";
 import { labelMathSvg } from "../../utilities/math-accessibility.js";
 import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
@@ -34,80 +45,6 @@ type MarkdownRuntimeTask = () => Promise<void>;
 
 let markdownRuntimeQueue = Promise.resolve();
 
-interface ProtectedMarkdownSource {
-	source: string;
-	restore(html: string): string;
-}
-
-/** Keeps raw-text HTML elements intact while their parent web component is rendered as Markdown. */
-function protectMarkdownRawTextElements(
-	source: string,
-): ProtectedMarkdownSource {
-	const lines = source.replace(/\r\n?/g, "\n").split("\n");
-	const blocks: string[] = [];
-	const output: string[] = [];
-	let fence: { marker: string; length: number } | null = null;
-
-	for (let index = 0; index < lines.length; index += 1) {
-		const line = lines[index] ?? "";
-		const fenceMatch = line.match(/^(?:[ ]{0,3}:\s*)?[ ]{0,3}(`{3,}|~{3,})/);
-		if (fenceMatch?.[1] !== undefined) {
-			const marker = fenceMatch[1][0] ?? "";
-			if (fence === null) fence = { marker, length: fenceMatch[1].length };
-			else if (marker === fence.marker && fenceMatch[1].length >= fence.length)
-				fence = null;
-			output.push(line);
-			continue;
-		}
-
-		const opening =
-			fence === null
-				? line.match(/^ {0,3}<(script|style|textarea|template)\b/i)
-				: null;
-		const tag = opening?.[1]?.toLowerCase();
-		if (tag === undefined) {
-			output.push(line);
-			continue;
-		}
-
-		const blockLines = [line];
-		while (
-			!new RegExp(`</${tag}\\s*>`, "i").test(blockLines.at(-1) ?? "") &&
-			index + 1 < lines.length
-		) {
-			index += 1;
-			blockLines.push(lines[index] ?? "");
-		}
-		const blockIndex = blocks.push(blockLines.join("\n")) - 1;
-		output.push(`<!--tp-markdown-raw-text-${String(blockIndex)}-->`);
-	}
-
-	return {
-		source: output.join("\n"),
-		restore: (html: string): string =>
-			blocks.reduce(
-				(result, block, index) =>
-					result.replace(`<!--tp-markdown-raw-text-${String(index)}-->`, block),
-				html,
-			),
-	};
-}
-
-async function renderProtectedMarkdown(
-	parser: TpMarkdownParserInstance,
-	source: string,
-): Promise<string> {
-	const protectedSource = protectMarkdownRawTextElements(source);
-	const rendered = protectedSource.restore(
-		await parser.renderAsync(protectedSource.source),
-	);
-	return rendered.replace(
-		/<p(\s[^>]*)?>\s*<p>([\s\S]*?)<\/p>\s*<\/p>/gi,
-		(_match, attributes: string | undefined, content: string) =>
-			`<p${attributes ?? ""}>${content}</p>`,
-	);
-}
-
 function escapeHtml(value: string): string {
 	return value
 		.replaceAll("&", "&amp;")
@@ -115,30 +52,6 @@ function escapeHtml(value: string): string {
 		.replaceAll(">", "&gt;")
 		.replaceAll('"', "&quot;")
 		.replaceAll("'", "&#39;");
-}
-
-export function createTpMarkdownParser(
-	path = "/index.md",
-): TpMarkdownParserInstance {
-	return new TpMarkdownParser({
-		path,
-		pageNavRoot: false,
-	});
-}
-
-export async function renderMarkdownToHtml(
-	source: string,
-	path = "/index.md",
-): Promise<string> {
-	return renderProtectedMarkdown(createTpMarkdownParser(path), source);
-}
-
-export async function parseMarkdownToTokens(
-	source: string,
-	path = "/index.md",
-): Promise<unknown> {
-	const result = await createTpMarkdownParser(path).parseAsync(source);
-	return result.tokens;
 }
 
 export async function renderMarkdownInto(
