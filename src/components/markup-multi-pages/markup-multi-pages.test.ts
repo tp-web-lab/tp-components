@@ -136,6 +136,52 @@ describe("<tp-markup-multi-pages>", () => {
 		expect(element.querySelector("main tp-markdown")).toBeNull();
 	});
 
+	it("loads generated HTML while preserving routes, source and resource bases", async () => {
+		mockDocsFetch({
+			"/docs/sidebar.html":
+				'<ul><li><a href="cover.md">Home</a></li><li><a href="guide/page.md">Page</a></li></ul>',
+			"/docs/cover.html": "<h1>Static cover</h1>",
+			"/docs/cover.md": "# Original cover\n\n::include{part.md}",
+			"/docs/guide/page.html":
+				'<h1>Nested page</h1><tp-csv-table src="values.csv"></tp-csv-table>',
+		});
+		const element = new TpMarkupMultiPages();
+		element.setAttribute("repository", "/docs");
+		element.setAttribute("langs", "en");
+		element.setAttribute(
+			"data-tp-prerendered",
+			JSON.stringify({
+				"/docs/sidebar.md": "/docs/sidebar.html",
+				"/docs/cover.md": "/docs/cover.html",
+				"/docs/guide/page.md": "/docs/guide/page.html",
+			}),
+		);
+		document.body.append(element);
+		await waitFor(() => element.querySelector("main h1") !== null);
+		expect(element.querySelector("main h1")?.textContent).toBe("Static cover");
+		expect(element.querySelector("main tp-markdown")).toBeNull();
+		expect(
+			vi.mocked(fetch).mock.calls.some(([url]) => String(url).endsWith(".md")),
+		).toBe(false);
+		expect(
+			element.querySelector('aside a[href="#/guide/page.md"]'),
+		).not.toBeNull();
+		await invoke<Promise<void>>(element, "toggleSourceMode");
+		await waitFor(() => element.querySelector("main pre code") !== null);
+		expect(element.querySelector("main pre code")?.textContent).toContain(
+			"# Original cover",
+		);
+		await invoke<Promise<void>>(element, "toggleSourceMode");
+		expect(element.querySelector("main h1")?.textContent).toBe("Static cover");
+		await invoke<Promise<void>>(element, "navigate", "/docs/guide/page.md");
+		expect(
+			element
+				.querySelector("main [data-tp-source]")
+				?.getAttribute("data-tp-source"),
+		).toBe("/docs/guide/page.md");
+		expect(Reflect.get(element, "currentHref")).toBe("/docs/guide/page.md");
+	});
+
 	it("choisit le renderer selon l’extension du fichier", () => {
 		const element = new TpMarkupMultiPages();
 		const createMarkupViewer = (

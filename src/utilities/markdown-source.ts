@@ -100,3 +100,5 @@ export async function parseMarkdownToTokens(
 	const result = await createTpMarkdownParser(path).parseAsync(source);
 	return result.tokens;
 }
+
+export { resolveMarkdownIncludes } from "./markdown-includes.js";

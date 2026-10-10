@@ -77,6 +77,7 @@ import "../theme/theme.js";
 import "../tree/tree.js";
 import "../splitter/splitter.js";
 import { resolveTextDirection } from "../../utilities/text-direction.js";
+import markdownStyle from "../markdown/markdown.css?inline";
 import type { TpTree } from "../tree/tree.js";
 import style from "./markup-multi-pages.css?inline";
 import type {
@@ -102,13 +103,13 @@ export type TpMarkupMultiPagesLanguage =
 	| "restructuredtext";
 
 function wrapAsSourceCodeBlock(source: string, language: string): string {
-	const fenceRuns = source.match(/`{3,}/g) ?? [];
-	const longestFence = fenceRuns.reduce(
-		(max, run) => Math.max(max, run.length),
-		2,
+	// A literal HTML code block prevents Markdown includes inside the displayed
+	// source from being fetched and expanded by either rendering stage.
+	const literal = escapeHtml(source).replaceAll(
+		"::include",
+		"&#58;&#58;include",
 	);
-	const fence = "`".repeat(longestFence + 1);
-	return `${fence}${language}\n${source}\n${fence}`;
+	return `<pre><code class="language-${language}">${literal}</code></pre>`;
 }
 
 function highlightRestructuredTextSource(source: string): string {
@@ -170,6 +171,9 @@ export class TpMarkupMultiPages extends TpBase {
 		this.style.boxSizing = "border-box";
 		this.style.overflow = "hidden";
 		this.ensureGlobalStyle(STYLE_ID, style);
+		if (this.hasAttribute("data-tp-prerendered")) {
+			this.ensureGlobalStyle("tp-markdown-styles", markdownStyle);
+		}
 		if (!this.shellRendered) {
 			this.renderShell();
 			this.shellRendered = true;
@@ -625,7 +629,7 @@ export class TpMarkupMultiPages extends TpBase {
 		this.navigatingHref = documentHref;
 		this.annotations?.setPage("");
 		try {
-			const source = await this.fetchText(documentHref);
+			const source = await this.fetchText(this.getRenderedHref(documentHref));
 
 			if (source === null) {
 				await this.renderNotFoundPage(documentHref);
@@ -682,26 +686,27 @@ export class TpMarkupMultiPages extends TpBase {
 		this.annotations?.setPage("");
 
 		if (this.sourceMode) {
-			if (this.currentSource === "") {
-				this.currentSource = (await this.fetchText(this.currentHref)) ?? "";
-			}
+			const source =
+				this.getRenderedHref(this.currentHref) !== this.currentHref
+					? ((await this.fetchText(this.currentHref)) ?? "")
+					: this.currentSource ||
+						(await this.fetchText(this.currentHref)) ||
+						"";
 			const markdownViewer = document.createElement("tp-markdown");
 			const inlineScript = document.createElement("script");
 			inlineScript.type = "tp/markdown";
 			inlineScript.textContent = wrapAsSourceCodeBlock(
-				this.currentSource,
+				source,
 				this.getSourceLanguage(this.currentHref),
 			);
 			markdownViewer.append(inlineScript);
-			if (this.detectLanguage(this.currentHref) === "restructuredtext") {
+			if (this.detectLanguage(this.currentHref, true) === "restructuredtext") {
 				markdownViewer.addEventListener(
 					"tp-markdown-rendered",
 					() => {
 						const code = markdownViewer.querySelector<HTMLElement>("pre code");
 						if (code === null) return;
-						code.innerHTML = highlightRestructuredTextSource(
-							this.currentSource,
-						);
+						code.innerHTML = highlightRestructuredTextSource(source);
 						code.classList.remove("language-plaintext");
 						code.classList.add("hljs", "language-restructuredtext");
 						code.dataset.highlightRendered = "true";
@@ -728,6 +733,11 @@ export class TpMarkupMultiPages extends TpBase {
 		if (language === "html") {
 			const htmlViewer = document.createElement("div");
 			htmlViewer.className = "tp-markup-multi-pages-html-output";
+			htmlViewer.setAttribute("data-tp-source", href);
+			if (this.getRenderedHref(href) !== href) {
+				htmlViewer.classList.add("tp-markdown-output");
+				htmlViewer.setAttribute("data-tp-markdown-source", href);
+			}
 			htmlViewer.innerHTML = source ?? "";
 			htmlViewer.setAttribute("data-tp-markup-multi-pages-rendered", "");
 			return htmlViewer;
@@ -744,6 +754,11 @@ export class TpMarkupMultiPages extends TpBase {
 		if (language === "html") {
 			const htmlViewer = document.createElement("div");
 			htmlViewer.className = "tp-markup-multi-pages-html-output";
+			htmlViewer.setAttribute("data-tp-source", href);
+			if (this.getRenderedHref(href) !== href) {
+				htmlViewer.classList.add("tp-markdown-output");
+				htmlViewer.setAttribute("data-tp-markdown-source", href);
+			}
 			htmlViewer.innerHTML = source;
 			htmlViewer.setAttribute("data-tp-markup-multi-pages-rendered", "");
 			return htmlViewer;
@@ -887,7 +902,32 @@ export class TpMarkupMultiPages extends TpBase {
 			: description;
 	}
 
-	private detectLanguage(href: string): TpMarkupMultiPagesLanguage {
+	/** Build metadata maps original document URLs to pre-rendered HTML. */
+	private getRenderedHref(href: string): string {
+		try {
+			const manifest: unknown = JSON.parse(
+				this.getAttribute("data-tp-prerendered") ?? "{}",
+			);
+			if (!manifest || typeof manifest !== "object") return href;
+			const original = new URL(href, this.ownerDocument.baseURI);
+			if (original.origin !== new URL(this.ownerDocument.baseURI).origin)
+				return href;
+			const rendered: unknown = Reflect.get(manifest, original.pathname);
+			return typeof rendered === "string" &&
+				rendered.startsWith("/") &&
+				!rendered.startsWith("//")
+				? rendered
+				: href;
+		} catch {
+			return href;
+		}
+	}
+
+	private detectLanguage(
+		href: string,
+		original = false,
+	): TpMarkupMultiPagesLanguage {
+		if (!original && this.getRenderedHref(href) !== href) return "html";
 		if (this.fixedLanguage !== null) return this.fixedLanguage;
 		const path = href.split(/[?#]/, 1)[0]?.toLowerCase() ?? "";
 
@@ -934,7 +974,7 @@ export class TpMarkupMultiPages extends TpBase {
 	}
 
 	private getSourceLanguage(href: string): string {
-		const language = this.detectLanguage(href);
+		const language = this.detectLanguage(href, true);
 		if (language === "restructuredtext") return "plaintext";
 		if (language === "asciidoc") return "asciidoc";
 		if (language === "html") return "html";
@@ -1558,7 +1598,7 @@ export class TpMarkupMultiPages extends TpBase {
 		name: "cover" | "sidebar" | "page-not-found",
 	): Promise<{ href: string; source: string } | null> {
 		for (const href of this.getSpecialPageHrefs(name)) {
-			const source = await this.fetchText(href);
+			const source = await this.fetchText(this.getRenderedHref(href));
 			if (source !== null) return { href, source };
 		}
 

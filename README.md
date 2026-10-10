@@ -101,3 +101,5 @@ used with a DOM implementation by the examples build; it does not register web
 components or run their interactive rendering. Generated single-page documents
 can retain their author source with `data-tp-original-src`, used by the Code
 control and the annotation storage scope.
+
+For static multi-page publications, build tooling can add `data-tp-prerendered` to `tp-markup-multi-pages`: a JSON map of original document pathnames to generated HTML pathnames. Routes, navigation and annotation identities keep the original URLs. HTML is loaded for display; Code loads the original document only when requested. This is internal publication metadata, not required in authored pages. The Node renderer also exports `resolveMarkdownIncludes` so builds use the same recursive and raw include rules as `tp-markdown`.
