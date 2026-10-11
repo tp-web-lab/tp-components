@@ -1,4 +1,4 @@
-import { dt as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./markdown-style-registry.js";
 //#region ../tp-markdown/dist/markdown/extensions/handwriting/index.js
 var t = "tp-md-handwriting-styles", n = "\n.tp-md-handwriting-rendered {\n  font-size: 1.35em;\n  white-space: pre-wrap;\n}\n\n.tp-md-handwriting-block {\n  margin-block: 1rem;\n}\n\n.tp-md-handwriting-output {\n  padding: 1rem;\n  border-radius: 0.75rem;\n}\n\n.tp-md-handwriting-paper-ruled {\n  background-image:\n    repeating-linear-gradient(\n      to bottom,\n      transparent,\n      transparent calc(var(--tp-md-handwriting-line-height, 1.6) * 1em - 1px),\n      rgb(0 120 255 / 0.22) calc(var(--tp-md-handwriting-line-height, 1.6) * 1em - 1px),\n      rgb(0 120 255 / 0.22) calc(var(--tp-md-handwriting-line-height, 1.6) * 1em)\n    );\n}\n";
 function r(r) {

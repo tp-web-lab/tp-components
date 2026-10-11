@@ -1,4 +1,4 @@
-import { dt as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./markdown-style-registry.js";
 //#region ../tp-markdown/dist/markdown/extensions/xy-plot/index.js
 function t(e, t) {
 	if (!/^[0-9+\-*/().,\s_a-zA-Z]+$/.test(e)) throw Error(`Forbidden expression: ${e}`);

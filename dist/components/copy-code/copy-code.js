@@ -1,2 +1,2 @@
-import { Xn as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/copy-code.js";
 export { e as TpCopyCode };

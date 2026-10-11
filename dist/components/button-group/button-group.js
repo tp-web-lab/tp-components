@@ -1,2 +1,2 @@
-import { ar as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/button-group.js";
 export { e as TpButtonGroup };

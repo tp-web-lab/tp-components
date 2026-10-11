@@ -1,4 +1,4 @@
-import { rr as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/tooltip.js";
 //#region src/components/tooltip/tooltip-triggers.ts
 var t = /* @__PURE__ */ new WeakMap();
 function n(e) {

@@ -1,4 +1,4 @@
-import { yr as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/animation.js";
 //#region src/components/animation/animation-triggers.ts
 var t = /* @__PURE__ */ new WeakMap();
 function n(e) {

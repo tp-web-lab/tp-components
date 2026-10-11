@@ -1,4 +1,4 @@
-import { g as e, h as t, m as n } from "./lib/markdown-it/markdown-it.js";
+import { a as e, i as t, t as n } from "./rolldown-runtime2.js";
 //#region ../tp-markdown/dist/chunks/lib/mermaid/mermaid.js
 var r = Object.defineProperty, i = (e, t) => r(e, "name", {
 	value: t,

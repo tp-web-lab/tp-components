@@ -1,5 +1,5 @@
-import { V as e } from "../../chunks/lib/typescript/typescript.js";
 import "../textfield/textfield.js";
+import { t as e } from "../../chunks/question.js";
 import { getBlankFields as t } from "../fill-blank/fields.js";
 import "../../chunks/fill-blank.js";
 import { FillBlankQuestionSrcSchema as n } from "../question/question-src-schema.js";

@@ -1,8 +1,9 @@
-import { i as e, w as t } from "../../chunks/lib/typescript/typescript.js";
+import { TpPythonPlayground as e } from "../python-playground/python-playground.js";
+import { TpPlaygroundQuestion as t } from "../playground-question/playground-question.js";
 //#region src/components/python-playground-question/python-playground-question.ts
-var n = class extends e {
+var n = class extends t {
 	createPlayground() {
-		return new t();
+		return new e();
 	}
 };
 customElements.get("tp-python-playground-question") || customElements.define("tp-python-playground-question", n);

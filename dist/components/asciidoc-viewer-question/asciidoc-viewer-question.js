@@ -1,4 +1,4 @@
-import "../../chunks/lib/typescript/typescript.js";
+import "../asciidoc-viewer/asciidoc-viewer.js";
 import { TpMarkupViewerQuestion as e } from "../markup-viewer-question/markup-viewer-question.js";
 //#region src/components/asciidoc-viewer-question/asciidoc-viewer-question.ts
 var t = class extends e {

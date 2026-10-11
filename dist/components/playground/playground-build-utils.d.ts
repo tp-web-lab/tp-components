@@ -126,7 +126,7 @@ export declare function isTypescriptModuleFile(file: TpFile): boolean;
 /** Converts a TypeScript path to its JavaScript output path. */
 export declare function toJavaScriptPath(path: string): string;
 /** Transpiles TypeScript source to JavaScript. */
-export declare function transpileTypescript(source: string): string;
+export declare function transpileTypescript(source: string): Promise<string>;
 /** Creates Blob URLs for TypeScript module files. */
 export declare function createTypescriptModuleBlobUrls(files: readonly TpFile[], staticBlobUrls: ReadonlyMap<string, string>, importmap?: ImportMap): Promise<Map<string, string>>;
 /**

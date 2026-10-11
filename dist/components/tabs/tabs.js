@@ -1,2 +1,2 @@
-import { Cn as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/tabs.js";
 export { e as TpTabs };

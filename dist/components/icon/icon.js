@@ -1,2 +1,2 @@
-import { wr as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/icon.js";
 export { e as TpIcon };

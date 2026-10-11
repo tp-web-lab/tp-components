@@ -1,2 +1,2 @@
-import { ir as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/dropdown.js";
 export { e as TpDropdown };

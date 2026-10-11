@@ -1,4 +1,7 @@
-import { Zu as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
+import "./icon-button.js";
+import "./button-group.js";
+import "./dropdown.js";
 import { TpDeclarativeTextSource as t } from "../utilities/declarative-text-source.js";
 import { t as n } from "./speech-controls.js";
 import { readSpeechText as r } from "../utilities/speech-text.js";

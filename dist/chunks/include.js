@@ -1,5 +1,6 @@
-import { Zu as e, zr as t } from "./lib/typescript/typescript.js";
-import { t as n } from "./lib/dompurify/dompurify.js";
+import { t as e } from "./base.js";
+import { resolveComponentSourceUrl as t } from "../utilities/source-url.js";
+import { t as n } from "./purify.es.js";
 //#region src/components/include/include.css?inline
 var r = "tp-include{display:block}tp-include>[data-tp-include-loading]{font-style:italic}tp-include[mode=raw]>pre{white-space:pre;margin:0;overflow:auto}";
 //#endregion

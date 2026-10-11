@@ -1,2 +1,2 @@
-import { Qt as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/playground.js";
 export { e as TpPlayground };

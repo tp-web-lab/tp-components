@@ -1,6 +1,14 @@
-import { Sn as e, Zu as t, rd as n, xn as r } from "./lib/typescript/typescript.js";
+import { getCodeFromScript as e } from "../utilities/code.js";
+import { t } from "./base.js";
 import "./accordion.js";
+import "./icon-button.js";
+import "./button-group.js";
 import "./color.js";
+import "./dropdown.js";
+import "./fullscreen.js";
+import "./theme.js";
+import "./code-editor.js";
+import { chooseSaveTarget as n, saveBlob as r } from "../utilities/save-file.js";
 import "./save-image.js";
 import { TpGraphDocumentSchema as i, formatGraphSchemaError as a } from "../components/graph-editor/graph-schema.js";
 //#region src/components/graph-editor/graph-editor.css?inline
@@ -272,12 +280,12 @@ var T = {
 	}
 	scheduleInitialization() {
 		if (!(this.initialized || this.initializationScheduled)) {
-			if (this.initializationScheduled = !0, this.src !== "" || n("graph", this) !== null) {
+			if (this.initializationScheduled = !0, this.src !== "" || e("graph", this) !== null) {
 				this.initializeEditor();
 				return;
 			}
 			this.initializationObserver = new MutationObserver(() => {
-				n("graph", this) !== null && this.initializeEditor();
+				e("graph", this) !== null && this.initializeEditor();
 			}), this.initializationObserver.observe(this, { childList: !0 }), window.requestAnimationFrame(() => {
 				this.initializeEditor();
 			});
@@ -628,10 +636,10 @@ var T = {
 		this.validateGraph(t), this.setGraph(t);
 	}
 	readGraphSource() {
-		let e = n("graph", this);
-		if (e !== null) {
-			let t = e.value;
-			return t.trim() !== "" && (this.initialGraphSourceSnapshot = t), t;
+		let t = e("graph", this);
+		if (t !== null) {
+			let e = t.value;
+			return e.trim() !== "" && (this.initialGraphSourceSnapshot = e), e;
 		}
 		return this.initialGraphSourceSnapshot ?? "";
 	}
@@ -1648,13 +1656,13 @@ var T = {
 		}), t.addEventListener("blur", () => r(!0)), e.append(t), t.focus(), t.select();
 	}
 	async downloadJson() {
-		let t = await r({
+		let e = await n({
 			suggestedName: this.jsonExportFilename(),
 			description: "Graph JSON",
 			mimeType: "application/json",
 			extension: ".json"
 		});
-		t && (await e(new Blob([this.exportJson()], { type: "application/json" }), t), this.dispatchEvent(new CustomEvent("tp-graph-export", {
+		e && (await r(new Blob([this.exportJson()], { type: "application/json" }), e), this.dispatchEvent(new CustomEvent("tp-graph-export", {
 			bubbles: !0,
 			detail: { graph: this.value }
 		})));

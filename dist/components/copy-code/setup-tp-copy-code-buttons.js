@@ -1,4 +1,4 @@
-import "../../chunks/lib/typescript/typescript.js";
+import "../../chunks/copy-code.js";
 //#region src/components/copy-code/setup-tp-copy-code-buttons.ts
 function e(e) {
 	return e.querySelector(":scope > tp-copy-code[data-tp-copy-code-generated]") !== null;

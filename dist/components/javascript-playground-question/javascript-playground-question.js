@@ -1,4 +1,5 @@
-import { N as e, i as t } from "../../chunks/lib/typescript/typescript.js";
+import { TpJavascriptPlayground as e } from "../javascript-playground/javascript-playground.js";
+import { TpPlaygroundQuestion as t } from "../playground-question/playground-question.js";
 //#region src/components/javascript-playground-question/javascript-playground-question.ts
 var n = class extends t {
 	createPlayground() {

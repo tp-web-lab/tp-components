@@ -1,4 +1,4 @@
-import { g as e, h as t } from "./lib/markdown-it/markdown-it.js";
+import { a as e, i as t } from "./rolldown-runtime2.js";
 //#region ../tp-markdown/dist/chunks/lib/highlightjs/highlight.js
 var n = /* @__PURE__ */ t(((e, t) => {
 	function n(e) {

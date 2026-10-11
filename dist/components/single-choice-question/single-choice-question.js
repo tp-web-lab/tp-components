@@ -1,11 +1,13 @@
-import { V as e, st as t } from "../../chunks/lib/typescript/typescript.js";
+import { renderMarkdownToHtml as e } from "../../utilities/markdown-source.js";
+import "../markdown/markdown.js";
+import { t } from "../../chunks/question.js";
 import "../../chunks/radio-list.js";
 import { SingleChoiceQuestionSrcSchema as n } from "../question/question-src-schema.js";
 //#region src/components/single-choice-question/single-choice-question.ts
-var r = class extends e {
+var r = class extends t {
 	static get observedAttributes() {
 		return [
-			...e.observedAttributes ?? [],
+			...t.observedAttributes ?? [],
 			"answer",
 			"random",
 			"name",
@@ -73,14 +75,14 @@ var r = class extends e {
 		let e = this.consumeFeedbackListItems();
 		this.storeCorrectItem(), this.buildFeedbackMap(e), this.random && this.randomize();
 	}
-	async populateItemsFromSrc(e, n) {
+	async populateItemsFromSrc(t, n) {
 		let r = this.formContent;
 		if (r === null) return;
 		r.replaceChildren();
 		let i = document.createElement("ol");
-		for (let r of e) {
-			let e = document.createElement("li"), a = this.normalizeSrcMarkup(n);
-			a === "html" ? e.innerHTML = r : a === "none" ? e.textContent = r : e.innerHTML = await t(r), i.append(e);
+		for (let r of t) {
+			let t = document.createElement("li"), a = this.normalizeSrcMarkup(n);
+			a === "html" ? t.innerHTML = r : a === "none" ? t.textContent = r : t.innerHTML = await e(r), i.append(t);
 		}
 		let a = document.createElement("tp-radio-list");
 		this.name && a.setAttribute("name", this.name), this.orientation && a.setAttribute("orientation", this.orientation), this.value && a.setAttribute("value", this.value), a.append(i), r.append(a);

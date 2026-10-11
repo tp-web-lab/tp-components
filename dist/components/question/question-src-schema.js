@@ -1,40 +1,40 @@
-import { cn as e, dn as t, fn as n, gn as r, hn as i, ln as a, pn as o, un as s } from "../../chunks/lib/typescript/typescript.js";
+import { a as e, c as t, i as n, l as r, n as i, o as a, r as o, t as s } from "../../chunks/schemas.js";
 //#region src/components/question/question-src-schema.ts
-var c = e([
+var c = s([
 	"markdown",
 	"md",
 	"html",
 	"none"
-]), l = o({
-	title: i().optional(),
+]), l = a({
+	title: t().optional(),
 	markup: c.default("markdown").optional(),
-	prompt: i().min(1),
-	form: a(i().min(1)).min(2),
-	feedback: a(i()).optional(),
-	solution: i().optional()
-}), u = o({
-	answer: r([n().int().min(1), i().regex(/^\d+$/, "Expected a 1-based integer index")]),
-	random: s().optional(),
-	name: i().optional(),
-	orientation: i().optional(),
-	value: i().optional()
-}), d = l.extend({ attributes: u }), f = o({
+	prompt: t().min(1),
+	form: i(t().min(1)).min(2),
+	feedback: i(t()).optional(),
+	solution: t().optional()
+}), u = a({
+	answer: r([e().int().min(1), t().regex(/^\d+$/, "Expected a 1-based integer index")]),
+	random: o().optional(),
+	name: t().optional(),
+	orientation: t().optional(),
+	value: t().optional()
+}), d = l.extend({ attributes: u }), f = a({
 	answer: r([
-		t(""),
-		i().regex(/^\d+(,\s*\d+)*$/, "Expected comma-separated 1-based indexes"),
-		a(n().int().min(1))
+		n(""),
+		t().regex(/^\d+(,\s*\d+)*$/, "Expected comma-separated 1-based indexes"),
+		i(e().int().min(1))
 	]),
-	random: s().optional(),
-	name: i().optional(),
-	orientation: i().optional(),
-	value: i().optional()
-}), p = l.extend({ attributes: f }), m = o({ answer: r([i().min(1), a(i().min(1)).min(1)]) }), h = o({
-	title: i().optional(),
+	random: o().optional(),
+	name: t().optional(),
+	orientation: t().optional(),
+	value: t().optional()
+}), p = l.extend({ attributes: f }), m = a({ answer: r([t().min(1), i(t().min(1)).min(1)]) }), h = a({
+	title: t().optional(),
 	markup: c.default("markdown").optional(),
-	prompt: i().min(1),
-	form: i().min(1),
-	feedback: a(i()).optional(),
-	solution: i().optional(),
+	prompt: t().min(1),
+	form: t().min(1),
+	feedback: i(t()).optional(),
+	solution: t().optional(),
 	attributes: m
 });
 //#endregion

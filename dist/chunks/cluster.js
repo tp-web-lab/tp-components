@@ -1,4 +1,4 @@
-import { Zu as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
 //#region src/components/cluster/cluster.css?inline
 var t = "tp-cluster{align-items:center;gap:var(--tp-cluster-gap,1rem);flex-wrap:wrap;justify-content:flex-start;display:flex}", n = class n extends e {
 	static styleId = "tp-cluster-styles";

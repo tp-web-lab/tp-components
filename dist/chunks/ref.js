@@ -1,4 +1,5 @@
-import { Zu as e, rr as t } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
+import { t } from "./tooltip.js";
 import "./biblio.js";
 import "./glossary.js";
 import "./note.js";

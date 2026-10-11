@@ -1,2 +1,2 @@
-import { $ as e, Q as t, X as n, Z as r, et as i, tt as a } from "../../chunks/lib/typescript/typescript.js";
-export { n as TpRestructuredText, r as createTpRestructuredTextParser, t as dedentRestructuredTextSource, e as parseRestructuredTextToAst, i as renderRestructuredTextInto, a as renderRestructuredTextToHtml };
+import { a as e, i as t, n, o as r, r as i, t as a } from "../../chunks/restructuredtext.js";
+export { a as TpRestructuredText, n as createTpRestructuredTextParser, i as dedentRestructuredTextSource, t as parseRestructuredTextToAst, e as renderRestructuredTextInto, r as renderRestructuredTextToHtml };

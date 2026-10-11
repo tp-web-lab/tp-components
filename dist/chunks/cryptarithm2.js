@@ -1,4 +1,4 @@
-import { dt as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./markdown-style-registry.js";
 import { a as t, n, t as r } from "./cryptarithm-ui.js";
 //#region ../tp-markdown/dist/markdown/extensions/cryptarithm/index.js
 var i = "__tp_cryptarithm_installed";

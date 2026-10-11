@@ -1,2 +1,2 @@
-import { a as e, o as t } from "../../chunks/lib/typescript/typescript.js";
-export { e as TpNotebook, t as getNotebookLoaderUrl };
+import { n as e, t } from "../../chunks/notebook.js";
+export { t as TpNotebook, e as getNotebookLoaderUrl };

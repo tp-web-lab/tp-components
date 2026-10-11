@@ -1,4 +1,4 @@
-import { m as e } from "./lib/markdown-it/markdown-it.js";
+import { t as e } from "./rolldown-runtime2.js";
 //#region ../tp-markdown/dist/chunks/lib/vendor/vendor.js
 var t = /* @__PURE__ */ e({
 	ParseError: () => n,

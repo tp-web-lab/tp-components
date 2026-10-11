@@ -1,2 +1,2 @@
-import { or as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/drawer.js";
 export { e as TpDrawer };

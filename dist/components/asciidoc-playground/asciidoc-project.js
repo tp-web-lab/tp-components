@@ -1,4 +1,4 @@
-import { $t as e } from "../../chunks/lib/typescript/typescript.js";
+import { TpProject as e } from "../playground/project.js";
 //#region src/components/asciidoc-playground/asciidoc-project.ts
 var t = class t extends e {
 	attributes;

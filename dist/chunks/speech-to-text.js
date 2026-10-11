@@ -1,4 +1,4 @@
-import { dt as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./markdown-style-registry.js";
 //#region ../tp-markdown/dist/markdown/extensions/speech-to-text/index.js
 var t = "tp-md-speech-to-text-styles", n = "\n.tp-md-speech-to-text,\n.tp-md-speech-to-text-block {\n  display: grid;\n  gap: 0.5rem;\n}\n\n.tp-md-speech-to-text-block {\n  margin-block: 1rem;\n  padding: 1rem;\n  border: 1px solid color-mix(\n    in srgb,\n    CanvasText 20%,\n    transparent\n  );\n  border-radius: 0.75rem;\n}\n\n[data-stt-output] {\n  min-block-size: 3rem;\n  white-space: pre-wrap;\n}\n";
 function r(r) {

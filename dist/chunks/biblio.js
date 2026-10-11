@@ -1,4 +1,4 @@
-import { Zu as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
 //#region src/components/biblio/biblio.css?inline
 var t = "tp-biblio{display:none!important}", n = class extends e {
 	get ref() {

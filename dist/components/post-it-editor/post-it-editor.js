@@ -1,4 +1,4 @@
-import { Zu as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/base.js";
 import { n as t, t as n } from "../../chunks/personal-annotations.js";
 //#region src/components/post-it-editor/post-it-editor.ts
 var r = class extends e {

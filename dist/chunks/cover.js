@@ -1,4 +1,4 @@
-import { Zu as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
 //#region src/components/cover/cover.css?inline
 var t = "tp-cover{min-block-size:var(--tp-cover-min-height,100vh);padding:var(--tp-cover-padding,1rem);flex-direction:column;display:flex}tp-cover>*{margin-block:var(--tp-cover-gap,1rem)}", n = 0;
 function r(e) {

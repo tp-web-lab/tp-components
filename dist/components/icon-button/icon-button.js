@@ -1,2 +1,2 @@
-import { br as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/icon-button.js";
 export { e as TpIconButton };

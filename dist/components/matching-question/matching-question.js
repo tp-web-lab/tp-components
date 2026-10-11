@@ -1,22 +1,24 @@
-import { H as e, V as t, cn as n, hn as r, ln as i, pn as a } from "../../chunks/lib/typescript/typescript.js";
+import { c as e, n as t, o as n, t as r } from "../../chunks/schemas.js";
+import { t as i } from "../../chunks/question.js";
+import { t as a } from "../../chunks/callout.js";
 import { n as o, t as s } from "../../chunks/matching.js";
 //#region src/components/matching-question/matching-question.ts
-var c = a({
-	title: r().optional(),
-	prompt: r().min(1),
-	markup: n([
+var c = n({
+	title: e().optional(),
+	prompt: e().min(1),
+	markup: r([
 		"markdown",
 		"md",
 		"html",
 		"none"
 	]).optional(),
-	form: i(i(r().min(1)).min(1)).min(2).refine((e) => e.every((t) => t.length === e[0]?.length), "All lists must have the same number of items."),
-	headers: i(r().min(1)).optional(),
-	feedback: r().optional(),
-	solution: r().optional()
-}).refine((e) => !e.headers || e.headers.length === e.form.length, "Provide exactly one header per list."), l = class extends t {
+	form: t(t(e().min(1)).min(1)).min(2).refine((e) => e.every((t) => t.length === e[0]?.length), "All lists must have the same number of items."),
+	headers: t(e().min(1)).optional(),
+	feedback: e().optional(),
+	solution: e().optional()
+}).refine((e) => !e.headers || e.headers.length === e.form.length, "Provide exactly one header per list."), l = class extends i {
 	static get observedAttributes() {
-		return [...t.observedAttributes, "heading"];
+		return [...i.observedAttributes, "heading"];
 	}
 	get heading() {
 		return this.hasAttribute("heading");
@@ -34,13 +36,13 @@ var c = a({
 		super.connectedCallback(), this.ensureSelectionHelp(), this.findResponseWidget()?.toggleAttribute("heading", this.heading), this.src && this.loadSrc();
 	}
 	ensureSelectionHelp() {
-		let t = this.querySelector("[data-tp-question-feedback-output]");
-		if (t) {
+		let e = this.querySelector("[data-tp-question-feedback-output]");
+		if (e) {
 			if (!this.selectionHelp) {
-				let t = new e();
-				t.setAttribute("data-tp-matching-question-help", ""), t.setAttribute("variant", "info"), t.setAttribute("closable", ""), t.setAttribute("heading", "How to form a group"), t.innerHTML = "<p><strong>Mouse:</strong> Click a card or its link icon, then click one item in each other column to form a group. You can also drag a link icon onto an item in another column. Click the selected item again to cancel the selection.</p><p><strong>Keyboard:</strong> Use Tab or Shift+Tab to focus an item's Select button (link icon), then press Enter or Space to select it. Repeat for one item in each other column. Press Escape while focused inside an item to cancel the pending selection.</p><p>Items in the same group share a color and a number. Select an existing member to extend or change its group.</p>", this.selectionHelp = t;
+				let e = new a();
+				e.setAttribute("data-tp-matching-question-help", ""), e.setAttribute("variant", "info"), e.setAttribute("closable", ""), e.setAttribute("heading", "How to form a group"), e.innerHTML = "<p><strong>Mouse:</strong> Click a card or its link icon, then click one item in each other column to form a group. You can also drag a link icon onto an item in another column. Click the selected item again to cancel the selection.</p><p><strong>Keyboard:</strong> Use Tab or Shift+Tab to focus an item's Select button (link icon), then press Enter or Space to select it. Repeat for one item in each other column. Press Escape while focused inside an item to cancel the pending selection.</p><p>Items in the same group share a color and a number. Select an existing member to extend or change its group.</p>", this.selectionHelp = e;
 			}
-			this.selectionHelp.parentElement !== t && t.prepend(this.selectionHelp);
+			this.selectionHelp.parentElement !== e && e.prepend(this.selectionHelp);
 		}
 	}
 	disconnectedCallback() {

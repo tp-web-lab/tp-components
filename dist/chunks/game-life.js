@@ -1,4 +1,7 @@
-import { Zu as e, ed as t } from "./lib/typescript/typescript.js";
+import { dedent as e } from "../utilities/code.js";
+import { t } from "./base.js";
+import "./button.js";
+import "./button-group.js";
 //#region ../tp-utilities/dist/game-life/game-life.js
 function n(e, t, n = 0) {
 	if (!Number.isInteger(e) || e <= 0) throw Error(`Invalid width: ${e}`);
@@ -506,7 +509,7 @@ var I = ":where(tp-game-life){inline-size:fit-content;display:block}:where(tp-ga
 function R(e) {
 	return e.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'", "&#039;");
 }
-var z = class n extends e {
+var z = class n extends t {
 	static gameLifeStyleId = "tp-game-life-styles";
 	currentGrid = null;
 	renderToken = 0;
@@ -582,8 +585,8 @@ var z = class n extends e {
 		].join("\n");
 	}
 	async readProgramSource() {
-		let e = this.querySelector("script[type=\"tp/game-life\"]");
-		if (e?.textContent && e.textContent.trim() !== "") return t(e.textContent);
+		let t = this.querySelector("script[type=\"tp/game-life\"]");
+		if (t?.textContent && t.textContent.trim() !== "") return e(t.textContent);
 		if (this.getPresetName()) return this.buildPresetProgram();
 		throw Error("Missing program source. Provide <script type=\"tp/game-life\">...<\/script> or a valid preset attribute.");
 	}

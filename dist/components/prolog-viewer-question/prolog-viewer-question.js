@@ -1,4 +1,5 @@
-import { f as e, i as t } from "../../chunks/lib/typescript/typescript.js";
+import { TpPrologViewer as e } from "../prolog-viewer/prolog-viewer.js";
+import { TpPlaygroundQuestion as t } from "../playground-question/playground-question.js";
 //#region src/components/prolog-viewer-question/prolog-viewer-question.ts
 var n = class extends t {
 	createPlayground() {

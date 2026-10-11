@@ -1,4 +1,4 @@
-import { dt as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./markdown-style-registry.js";
 //#region ../tp-markdown/dist/markdown/extensions/typewriting/index.js
 var t = "tp-md-typewriting-styles", n = "\n.tp-md-typewriting {\n  display: inline-flex;\n  align-items: baseline;\n}\n\n.tp-md-typewriting-block {\n  margin-block: 1rem;\n}\n\n.blinking-cursor {\n  display: inline-block;\n  margin-inline-start: 0.1em;\n  animation: tp-md-typewriting-blink 0.8s steps(2, start) infinite;\n}\n\n@keyframes tp-md-typewriting-blink {\n  to {\n    visibility: hidden;\n  }\n}\n";
 function r(r) {

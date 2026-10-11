@@ -1,4 +1,9 @@
-import { vr as e } from "../../chunks/lib/typescript/typescript.js";
+import { labelMathSvg as e } from "../../utilities/math-accessibility.js";
+import "../../chunks/button.js";
+import "../../chunks/divider.js";
+import "../../chunks/button-group.js";
+import "../../chunks/dragdrop.js";
+import "../../chunks/callout.js";
 import { n as t } from "../../chunks/blank.js";
 import "../../chunks/sidebar.js";
 //#region src/components/fill-blank-question/closed-answers.ts

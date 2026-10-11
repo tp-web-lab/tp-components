@@ -1,2 +1,2 @@
-import { Qn as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/splitter.js";
 export { e as TpSplitter };

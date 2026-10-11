@@ -1,4 +1,4 @@
-import { Zu as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
 import "./biblio.js";
 import "./glossary.js";
 import "./note.js";

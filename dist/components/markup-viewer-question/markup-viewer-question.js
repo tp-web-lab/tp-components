@@ -1,4 +1,6 @@
-import { $t as e, B as t, z as n } from "../../chunks/lib/typescript/typescript.js";
+import { TpProject as e } from "../playground/project.js";
+import { TpEditorQuestion as t } from "../editor-question/editor-question.js";
+import { buildBrowserTestDocument as n } from "../playground/browser-test-document.js";
 //#region src/components/markup-viewer-question/markup-viewer-question.ts
 var r = class extends t {
 	sourceLoadedEvent = "tp-markup-viewer-src-load";

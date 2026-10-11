@@ -1,2 +1,2 @@
-import { V as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/question.js";
 export { e as TpQuestion };

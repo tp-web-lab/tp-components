@@ -1,5 +1,4 @@
-import { lt as e } from "./lib/typescript/typescript.js";
-import { l as t } from "./lib/markdown-it/markdown-it.js";
+import { r as e, t } from "./markdown2.js";
 //#region ../tp-markdown/dist/markdown/renderers/list-table.js
 var n = {
 	id: "list-table",
@@ -109,7 +108,7 @@ function h(e) {
 }
 function g(n) {
 	let r = n.markdownIt;
-	return r instanceof t ? r : new e().md;
+	return r instanceof e ? r : new t().md;
 }
 function _(e) {
 	let t = e.env;

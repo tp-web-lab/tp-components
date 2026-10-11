@@ -1,2 +1,2 @@
-import { Gn as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/badge.js";
 export { e as TpBadge };

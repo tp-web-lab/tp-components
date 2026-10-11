@@ -1,4 +1,4 @@
-import { Zu as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
 //#region src/components/center/center.css?inline
 var t = "tp-center{box-sizing:content-box;max-inline-size:var(--tp-center-width,60ch);margin-inline:auto;display:block}tp-center[intrinsic]{flex-direction:column;align-items:center;display:flex}", n = class n extends e {
 	static styleId = "tp-center-styles";

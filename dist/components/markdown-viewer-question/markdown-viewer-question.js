@@ -1,5 +1,5 @@
-import "../../chunks/lib/typescript/typescript.js";
 import { TpMarkupViewerQuestion as e } from "../markup-viewer-question/markup-viewer-question.js";
+import "../markdown-viewer/markdown-viewer.js";
 //#region src/components/markdown-viewer-question/markdown-viewer-question.ts
 var t = class extends e {
 	createViewer() {

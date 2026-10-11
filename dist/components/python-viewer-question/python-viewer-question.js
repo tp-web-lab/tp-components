@@ -1,4 +1,5 @@
-import { C as e, i as t } from "../../chunks/lib/typescript/typescript.js";
+import { TpPythonViewer as e } from "../python-viewer/python-viewer.js";
+import { TpPlaygroundQuestion as t } from "../playground-question/playground-question.js";
 //#region src/components/python-viewer-question/python-viewer-question.ts
 var n = class extends t {
 	createPlayground() {

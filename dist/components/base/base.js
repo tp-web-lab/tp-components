@@ -1,2 +1,2 @@
-import { Qu as e, Zu as t } from "../../chunks/lib/typescript/typescript.js";
+import { n as e, t } from "../../chunks/base.js";
 export { t as TpBase, e as ensureTpBaseStyles };

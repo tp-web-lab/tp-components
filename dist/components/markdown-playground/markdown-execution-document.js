@@ -1,17 +1,17 @@
-import { Dt as e, Vt as t, _t as n, gt as r } from "../../chunks/lib/typescript/typescript.js";
+import { E as e, f as t, n, t as r } from "../../chunks/playground-build-utils.js";
 //#region src/components/markdown-playground/markdown-execution-document.ts
 function i(e) {
 	return JSON.stringify(e).replaceAll("<\/script", "<\\/script");
 }
 async function a(a, o = {}) {
-	let s = t(a, {
+	let s = e(a, {
 		entry: o.entry,
 		priorityPaths: ["/index.md", "/main.md"],
 		extensions: [".md", ".markdown"],
 		fallbackToFirstFile: !1
 	});
 	if (s === void 0) throw Error("No Markdown entry file found.");
-	let c = e(a, "/index.html")?.content ?? "", l = i(Object.fromEntries(a.files.map((e) => [e.path, e.content]))), u = i(s.path);
+	let c = t(a, "/index.html")?.content ?? "", l = i(Object.fromEntries(a.files.map((e) => [e.path, e.content]))), u = i(s.path);
 	return { html: `
 <!doctype html>
 <html>

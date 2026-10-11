@@ -1,4 +1,7 @@
-import { Zu as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
+import "./button.js";
+import "./button-group.js";
+import "./callout.js";
 import { TpDeclarativeTextSource as t } from "../utilities/declarative-text-source.js";
 import "./save-image.js";
 //#region ../tp-utilities/dist/l-system/l-system-parser.js

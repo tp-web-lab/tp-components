@@ -1,56 +1,56 @@
-import { _n as e, cn as t, dn as n, fn as r, gn as i, hn as a, ln as o, mn as s, pn as c } from "../../chunks/lib/typescript/typescript.js";
+import { a as e, c as t, i as n, l as r, n as i, o as a, s as o, t as s, u as c } from "../../chunks/schemas.js";
 //#region src/components/graph-editor/graph-schema.ts
-var l = c({
-	x: r().finite(),
-	y: r().finite()
-}), u = t([
+var l = a({
+	x: e().finite(),
+	y: e().finite()
+}), u = s([
 	"north",
 	"east",
 	"south",
 	"west"
-]), d = c({
-	id: a().min(1),
-	label: a().optional(),
-	position: r().finite().min(0).max(1)
-}).passthrough(), f = c({
-	id: a().min(1),
-	type: a().min(1),
-	x: r().finite(),
-	y: r().finite(),
-	label: a().optional(),
-	data: s(a(), e()).optional(),
-	state: s(a(), e()).optional()
-}).passthrough(), p = c({
-	id: a().min(1),
-	source: a().min(1).optional(),
-	target: a().min(1).optional(),
+]), d = a({
+	id: t().min(1),
+	label: t().optional(),
+	position: e().finite().min(0).max(1)
+}).passthrough(), f = a({
+	id: t().min(1),
+	type: t().min(1),
+	x: e().finite(),
+	y: e().finite(),
+	label: t().optional(),
+	data: o(t(), c()).optional(),
+	state: o(t(), c()).optional()
+}).passthrough(), p = a({
+	id: t().min(1),
+	source: t().min(1).optional(),
+	target: t().min(1).optional(),
 	sourcePoint: l.optional(),
 	targetPoint: l.optional(),
 	sourcePort: u.optional(),
 	targetPort: u.optional(),
-	type: a().optional(),
-	direction: t([
+	type: t().optional(),
+	direction: s([
 		"none",
 		"forward",
 		"backward",
 		"both"
 	]).optional(),
-	routing: t(["straight", "orthogonal"]).optional(),
-	elbows: i([
+	routing: s(["straight", "orthogonal"]).optional(),
+	elbows: r([
 		n(1),
 		n(2),
 		n(3)
 	]).optional(),
-	departure: t(["horizontal", "vertical"]).optional(),
-	turns: t(["alternating", "same"]).optional(),
-	bendX: r().finite().optional(),
-	bendY: r().finite().optional(),
-	label: a().optional(),
-	data: s(a(), e()).optional(),
-	state: s(a(), e()).optional()
+	departure: s(["horizontal", "vertical"]).optional(),
+	turns: s(["alternating", "same"]).optional(),
+	bendX: e().finite().optional(),
+	bendY: e().finite().optional(),
+	label: t().optional(),
+	data: o(t(), c()).optional(),
+	state: o(t(), c()).optional()
 }).passthrough().superRefine((e, t) => {
 	if (e.data?.measurements !== void 0) {
-		let n = o(d).safeParse(e.data.measurements);
+		let n = i(d).safeParse(e.data.measurements);
 		n.success ? new Set(n.data.map((e) => e.id)).size !== n.data.length && t.addIssue({
 			code: "custom",
 			path: ["data", "measurements"],
@@ -70,12 +70,12 @@ var l = c({
 		path: ["target"],
 		message: "A target node or targetPoint is required."
 	});
-}), m = c({
+}), m = a({
 	version: n(1),
-	title: a().optional(),
-	nodes: o(f),
-	edges: o(p),
-	data: s(a(), e()).optional()
+	title: t().optional(),
+	nodes: i(f),
+	edges: i(p),
+	data: o(t(), c()).optional()
 }).passthrough().superRefine((e, t) => {
 	let n = /* @__PURE__ */ new Set(), r = new Map(e.nodes.map((e) => [e.id, e]));
 	for (let [r, i] of e.nodes.entries()) n.has(i.id) && t.addIssue({

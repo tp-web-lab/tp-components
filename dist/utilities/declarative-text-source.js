@@ -1,4 +1,5 @@
-import { ed as e, zr as t } from "../chunks/lib/typescript/typescript.js";
+import { dedent as e } from "./code.js";
+import { resolveComponentSourceUrl as t } from "./source-url.js";
 //#region src/utilities/declarative-text-source.ts
 var n = class {
 	host;

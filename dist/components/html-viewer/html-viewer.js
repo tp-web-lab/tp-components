@@ -1,2 +1,2 @@
-import { G as e, W as t } from "../../chunks/lib/typescript/typescript.js";
+import { n as e, t } from "../../chunks/html-viewer.js";
 export { t as TpHtmlViewer, e as buildIframeDocument };

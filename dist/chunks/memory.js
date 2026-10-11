@@ -1,4 +1,5 @@
-import { Zu as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
+import "./switcher.js";
 import "./chronometer.js";
 import "./flip-card.js";
 //#region src/components/memory/memory.css?inline

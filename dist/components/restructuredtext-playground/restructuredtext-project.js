@@ -1,4 +1,4 @@
-import { $t as e } from "../../chunks/lib/typescript/typescript.js";
+import { TpProject as e } from "../playground/project.js";
 //#region src/components/restructuredtext-playground/restructuredtext-project.ts
 var t = class t extends e {
 	libs;

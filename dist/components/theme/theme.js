@@ -1,2 +1,2 @@
-import { tr as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/theme.js";
 export { e as TpTheme };

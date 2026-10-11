@@ -1,4 +1,6 @@
-import { Zu as e, zr as t } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
+import { resolveComponentSourceUrl as t } from "../utilities/source-url.js";
+import "./button.js";
 import "./checkbox-list.js";
 import { LogigramModel as n, readLogigramLists as r } from "../components/logigram/logigram-model.js";
 //#region src/components/logigram/logigram.css?inline

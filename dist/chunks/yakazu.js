@@ -1,4 +1,4 @@
-import { Zu as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
 import { t } from "./board.js";
 //#region ../tp-utilities/dist/games/yakazu/yakazu-parser.js
 function n(e) {

@@ -1,11 +1,15 @@
-import { ir as e } from "./lib/typescript/typescript.js";
+import "./icon-button.js";
+import "./icon.js";
+import "./button.js";
 import "../components/textfield/textfield.js";
 import "./box.js";
+import "./button-group.js";
 import "./numberfield.js";
-import { t } from "./color.js";
+import { t as e } from "./color.js";
+import { t } from "./dropdown.js";
 import "./stack.js";
 import "./cluster.js";
-import { t as n } from "./lib/dompurify/dompurify.js";
+import { t as n } from "./purify.es.js";
 import { t as r } from "./post-it.js";
 //#region src/utilities/personal-annotations.css?inline
 var i = "tp-icon-button[data-action=annotations]>button{border:1px solid var(--tp-neutral-stroke-mid,#9ca3af);background:var(--tp-paper-color,#fff)}tp-icon-button[data-action=annotations]>button:hover{background:var(--tp-neutral-fill-soft,#e5e7eb)}[data-personal-annotation=panel]{box-sizing:border-box;max-block-size:calc(100dvh - 5rem);inline-size:min(36rem,100vw - 2rem);z-index:var(--tp-z-index-toast,1100);background:var(--tp-paper-color,Canvas);color:var(--tp-text-body,CanvasText);margin:0;position:fixed;inset:4rem 1rem auto auto;overflow:auto}[data-personal-annotation=panel][hidden]{display:none}[data-annotation-header]>h3{flex:1;align-items:center;gap:.35em;min-inline-size:0;margin:0;display:flex}[data-annotation-header]>h3>span{overflow-wrap:anywhere;min-inline-size:0}[data-annotation-header]>h3>tp-icon,[data-annotation-header]>tp-icon-button,[data-annotation-header]>tp-color{flex:none}[data-annotation-header]{gap:var(--tp-toolbar-section-gap,.25rem);border-block-end:1px solid var(--tp-brand-stroke-soft,currentColor);flex-wrap:nowrap;margin-block-end:var(--tp-space-xs,.5rem);padding-block-end:var(--tp-space-xs,.5rem)}[data-annotation-footer]>tp-cluster{gap:var(--tp-toolbar-section-gap,.25rem)}@media (width<=600px){[data-annotation-header]{flex-wrap:wrap}[data-annotation-header]>h3{flex-basis:100%}}[data-personal-annotation=panel]>p{margin-block:.5rem}[data-personal-annotation=panel]>p:empty{display:none}[data-annotation-editor]:not([hidden]){gap:.5rem;display:grid}[data-annotation-languages]>li{align-items:center;gap:var(--tp-space-xs,.5rem);display:flex}[data-annotation-languages] [data-language-check]{margin-inline-start:auto}[data-annotation-languages] [data-language-check][hidden]{display:none}[data-annotation-ranges]{flex-wrap:nowrap}[data-annotation-ranges]>tp-numberfield{flex:1;min-inline-size:0}[data-annotation-add]{margin-inline-end:var(--tp-space-xs,.5rem);font-size:2em}[data-annotation-header] tp-icon-button>button,[data-annotation-footer] tp-icon-button>button{border:1px solid var(--tp-brand-stroke-mid);border-radius:var(--tp-border-radius-circle)}[data-annotation-header] tp-icon-button>button:hover,[data-annotation-footer] tp-icon-button>button:hover{background:var(--tp-brand-fill-soft);color:var(--tp-brand-text-on-soft)}[data-annotation-footer]{border-block-start:1px solid var(--tp-brand-stroke-soft,currentColor);margin-block-start:var(--tp-space-xs,.5rem);padding-block-start:var(--tp-space-xs,.5rem)}[data-personal-annotation=panel]::backdrop{pointer-events:none}[data-annotation-selecting],[data-annotation-selecting] *{cursor:crosshair}[data-annotation-selecting] :is(p,li,h1,h2,h3,h4,h5,h6,figure,img,blockquote,pre):is(:hover,:focus-visible){outline-offset:2px;outline:2px dashed}", a = [
@@ -119,7 +123,7 @@ var m = class {
 	defaultLanguage = "txt";
 	languageItems = /* @__PURE__ */ new Map();
 	headingField = document.createElement("tp-textfield");
-	colorField = new t();
+	colorField = new e();
 	opacityField = document.createElement("tp-numberfield");
 	rotationField = document.createElement("tp-numberfield");
 	editor = document.createElement("div");
@@ -134,10 +138,10 @@ var m = class {
 	});
 	layoutRoot;
 	layoutObserver = typeof ResizeObserver > "u" ? null : new ResizeObserver(() => this.positionPanel());
-	constructor(t, n, r) {
-		if (this.host = t, this.root = n, this.onMarkupChange = r, this.layoutRoot = n.closest("main, [data-role=\"content\"]") ?? n.ownerDocument.documentElement, !t.ownerDocument.getElementById("tp-personal-annotations-style")) {
-			let e = t.ownerDocument.createElement("style");
-			e.id = "tp-personal-annotations-style", e.textContent = i, t.ownerDocument.head.append(e);
+	constructor(e, n, r) {
+		if (this.host = e, this.root = n, this.onMarkupChange = r, this.layoutRoot = n.closest("main, [data-role=\"content\"]") ?? n.ownerDocument.documentElement, !e.ownerDocument.getElementById("tp-personal-annotations-style")) {
+			let t = e.ownerDocument.createElement("style");
+			t.id = "tp-personal-annotations-style", t.textContent = i, e.ownerDocument.head.append(t);
 		}
 		this.button.setAttribute("name", "post-it-editor"), this.button.setAttribute("library", "components"), this.button.setAttribute("label", "Personal annotations"), this.button.setAttribute("section", "start"), this.button.setAttribute("data-action", "annotations"), this.button.addEventListener("click", () => {
 			this.showPanel(!!this.panel.hidden), this.panel.hidden || (this.renderList(), this.panel.focus());
@@ -171,7 +175,7 @@ var m = class {
 			opacity: 1,
 			rotation: 0
 		}))), this.editor.setAttribute("data-annotation-editor", ""), this.languageButton.id = `annotation-language-${crypto.randomUUID()}`, this.languageButton.setAttribute("label", "Annotation language"), this.languageButton.setAttribute("aria-label", "Annotation language"), this.languageButton.setAttribute("aria-haspopup", "menu"), this.languageButton.setAttribute("aria-expanded", "false");
-		let v = new e();
+		let v = new t();
 		v.setAttribute("anchor", `#${this.languageButton.id}`), v.setAttribute("outside-click", "");
 		let y = document.createElement("ul");
 		y.setAttribute("data-annotation-languages", "");

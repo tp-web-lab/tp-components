@@ -1,4 +1,5 @@
-import { Zu as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
+import "./callout.js";
 import { TpDeclarativeTextSource as t } from "../utilities/declarative-text-source.js";
 import { n } from "./math.js";
 //#region src/components/math/math.css?inline

@@ -1,4 +1,4 @@
-import { Qn as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/splitter.js";
 //#region src/components/splitter/splitter-triggers.ts
 var t = /* @__PURE__ */ new WeakMap();
 function n(e) {

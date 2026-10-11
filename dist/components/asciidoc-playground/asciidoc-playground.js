@@ -1,4 +1,4 @@
-import { Qt as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/playground.js";
 import { buildAsciidocExecutionDocument as t } from "./asciidoc-execution-document.js";
 import { TpAsciidocProject as n } from "./asciidoc-project.js";
 //#region src/components/asciidoc-playground/asciidoc-playground.ts

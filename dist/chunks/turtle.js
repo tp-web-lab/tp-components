@@ -1,4 +1,4 @@
-import { Zu as e } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
 import { TpDeclarativeTextSource as t } from "../utilities/declarative-text-source.js";
 //#region ../tp-utilities/dist/turtle/turtle.js
 function n(e) {

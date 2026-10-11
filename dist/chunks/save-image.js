@@ -1,4 +1,8 @@
-import { Cr as e, Sn as t, Sr as n, Zu as r, xn as i } from "./lib/typescript/typescript.js";
+import { t as e } from "./base.js";
+import "./icon-button.js";
+import { isTpSizeType as t, isTpVariantType as n } from "../components/base/base.types.js";
+import "./dropdown.js";
+import { chooseSaveTarget as r, saveBlob as i } from "../utilities/save-file.js";
 //#region src/components/save-image/save-image.css?inline
 var a = "tp-save-image{vertical-align:middle;display:inline-flex}tp-save-image>tp-icon-button{--tp-icon-button-size:2rem;--tp-icon-button-icon-size:1.15rem}tp-save-image>tp-icon-button>button{border:1px solid var(--tp-neutral-stroke-mid,#9ca3af);background:var(--tp-paper-color,#fff)}tp-save-image>tp-icon-button>button:hover{background:var(--tp-neutral-fill-soft,#e5e7eb)}tp-save-image>tp-dropdown{min-inline-size:7rem}tp-save-image>tp-dropdown>ul{margin:0;padding:.25rem;list-style:none}tp-save-image [data-format]{border-radius:var(--tp-border-radius-sm,.25rem);cursor:pointer;padding:.4rem .65rem}tp-save-image [data-format]:is(:hover,:focus-visible){background:var(--tp-neutral-fill-softer,#f3f4f6);outline:none}";
 //#endregion
@@ -6,7 +10,7 @@ var a = "tp-save-image{vertical-align:middle;display:inline-flex}tp-save-image>t
 function o(e) {
 	return e === "svg" || e === "png" || e === "webp";
 }
-var s = class s extends r {
+var s = class s extends e {
 	static styleId = "tp-save-image-styles";
 	static nextId = 0;
 	dropdownEl = null;
@@ -39,15 +43,15 @@ var s = class s extends r {
 		this.setAttribute("filename", e);
 	}
 	get variant() {
-		let t = this.getAttribute("variant") ?? "neutral";
-		return e(t) ? t : "neutral";
+		let e = this.getAttribute("variant") ?? "neutral";
+		return n(e) ? e : "neutral";
 	}
 	set variant(e) {
 		this.setAttribute("variant", e);
 	}
 	get size() {
 		let e = this.getAttribute("size") ?? "m";
-		return n(e) ? e : "m";
+		return t(e) ? e : "m";
 	}
 	set size(e) {
 		this.setAttribute("size", e);
@@ -66,24 +70,24 @@ var s = class s extends r {
 	}
 	async save(e) {
 		if (!o(e)) throw TypeError(`Unsupported image format: ${e}`);
-		let n = this.resolveTarget();
-		if (!n) throw TypeError(`No image matches the anchor "${this.anchor}".`);
+		let t = this.resolveTarget();
+		if (!t) throw TypeError(`No image matches the anchor "${this.anchor}".`);
 		try {
-			let r = await i({
+			let n = await r({
 				suggestedName: `${this.safeFilename()}.${e}`,
 				description: `${e.toUpperCase()} image`,
 				mimeType: e === "svg" ? "image/svg+xml" : `image/${e}`,
 				extension: `.${e}`
 			});
-			if (!r) return;
-			await t(e === "svg" ? new Blob([await this.createSvg(n)], { type: "image/svg+xml" }) : await this.createRaster(n, e), r), this.dropdownEl?.removeAttribute("open"), this.dispatchEvent(new CustomEvent("tp-save-image-save", {
+			if (!n) return;
+			await i(e === "svg" ? new Blob([await this.createSvg(t)], { type: "image/svg+xml" }) : await this.createRaster(t, e), n), this.dropdownEl?.removeAttribute("open"), this.dispatchEvent(new CustomEvent("tp-save-image-save", {
 				bubbles: !0,
 				composed: !0,
 				detail: {
 					format: e,
-					filename: r.filename,
+					filename: n.filename,
 					anchor: this.anchor,
-					target: n
+					target: t
 				}
 			}));
 		} catch (t) {

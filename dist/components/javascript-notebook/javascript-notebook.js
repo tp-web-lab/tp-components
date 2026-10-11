@@ -1,4 +1,4 @@
-import { a as e } from "../../chunks/lib/typescript/typescript.js";
+import { t as e } from "../../chunks/notebook.js";
 //#region src/components/javascript-notebook/javascript-notebook.ts
 var t = class extends e {
 	connectedCallback() {
