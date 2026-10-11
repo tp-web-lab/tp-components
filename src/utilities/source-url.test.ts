@@ -41,4 +41,27 @@ describe("component source URLs in isolated previews", () => {
 			"https://example.test/docs/components/python-playground/custom/file1.json",
 		);
 	});
+
+	it("resolves resources against nested Markdown rather than the outer published page", () => {
+		const { document: preview, component } = createPreview();
+		preview.body.setAttribute("data-tp-source", "/derivatives/docs/slope.md");
+		preview.body.setAttribute(
+			"data-tp-markdown-source",
+			"/derivatives/docs/slope.md",
+		);
+		const nested = preview.createElement("tp-markdown");
+		nested.setAttribute(
+			"data-tp-markdown-source",
+			"/derivatives/docs/examples/slope.solution.md",
+		);
+		preview.body.append(nested);
+		nested.append(component);
+		expect(resolveComponentSourceUrl(component, "slope.py").href).toBe(
+			"https://example.test/derivatives/docs/examples/slope.py",
+		);
+		component.setAttribute("data-tp-source", "custom/page.html");
+		expect(resolveComponentSourceUrl(component, "slope.py").href).toBe(
+			"https://example.test/derivatives/docs/examples/custom/slope.py",
+		);
+	});
 });

@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
+await import("./check-lazy-runtime.mjs");
+
 const root = resolve(import.meta.dirname, "..");
 const pkg = JSON.parse(await readFile(resolve(root, "package.json"), "utf8"));
 for (const [name, entry] of Object.entries(pkg.exports)) {

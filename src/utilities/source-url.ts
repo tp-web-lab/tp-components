@@ -2,24 +2,19 @@ export function getComponentSourceBaseUrl(element: Element): string {
 	// Components can be adopted into a preview document with its own <base>.
 	// Resolve there, not against the realm where this module was first loaded.
 	const documentBase = element.ownerDocument.baseURI;
-	const markdownSource = element
-		.closest("[data-tp-markdown-source]")
-		?.getAttribute("data-tp-markdown-source")
-		?.trim();
-	const markdownBase =
-		markdownSource === undefined || markdownSource === ""
-			? documentBase
-			: new URL(markdownSource, documentBase).href;
-	const explicitSource = element
-		.closest("[data-tp-source]")
-		?.getAttribute("data-tp-source")
-		?.trim();
-
-	if (explicitSource !== undefined && explicitSource !== "") {
-		return new URL(explicitSource, markdownBase).href;
-	}
-
-	return markdownBase;
+	const owner = element.closest("[data-tp-markdown-source], [data-tp-source]");
+	if (!owner) return documentBase;
+	const parentBase = owner.parentElement
+		? getComponentSourceBaseUrl(owner.parentElement)
+		: documentBase;
+	const markdownSource = owner.getAttribute("data-tp-markdown-source")?.trim();
+	const markdownBase = markdownSource
+		? new URL(markdownSource, parentBase).href
+		: parentBase;
+	const explicitSource = owner.getAttribute("data-tp-source")?.trim();
+	return explicitSource
+		? new URL(explicitSource, markdownBase).href
+		: markdownBase;
 }
 
 export function hasComponentMarkdownSourceBase(element: Element): boolean {

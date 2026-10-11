@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Resolve resources in nested Markdown against their own source, preserving
+  relative solution file links inside prerendered documentation pages.
+
+- Preserve lazy component loading in production bundles: shared documentation
+  components no longer pull in the TypeScript compiler and Markdown parser.
+  Load the TypeScript compiler only when compiling TypeScript source.
+
 - Restore theme-aware brand colours for inline code, including scoped colour
   presets, while preserving code-block syntax highlighting and link colours.
 

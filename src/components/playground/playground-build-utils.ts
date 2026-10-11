@@ -4,7 +4,6 @@
  */
 
 import { init, parse } from "es-module-lexer";
-import ts from "typescript";
 import { resolveSpecifier } from "../../utilities/importmap/importmap-resolver.js";
 import type { ImportMap } from "../../utilities/importmap/importmap-types.js";
 import type { TpFile } from "../filesystem/filesystem.types.js";
@@ -486,7 +485,8 @@ export function toJavaScriptPath(path: string): string {
 }
 
 /** Transpiles TypeScript source to JavaScript. */
-export function transpileTypescript(source: string): string {
+export async function transpileTypescript(source: string): Promise<string> {
+	const { default: ts } = await import("typescript");
 	return ts.transpileModule(source, {
 		compilerOptions: {
 			target: ts.ScriptTarget.ES2022,
@@ -548,7 +548,7 @@ export async function createTypescriptModuleBlobUrls(
 			}
 
 			const source = isTypescriptModuleFile(file)
-				? transpileTypescript(file.content)
+				? await transpileTypescript(file.content)
 				: file.content;
 
 			const rewrittenCode = await rewriteJavaScriptModuleImports(

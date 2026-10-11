@@ -4,7 +4,6 @@ import { glob } from "glob";
 import type { PreRenderedChunk } from "rolldown";
 import { defineConfig } from "vitest/config";
 // import dts from "unplugin-dts/vite";
-import dataPackage from "./package.json" with { type: "json" };
 import { componentApiPlugin } from "./scripts/component-api-plugin.js";
 
 function sanitizeChunkName(name: string): string {
@@ -174,67 +173,8 @@ export default defineConfig({
 						: `${sanitizeChunkName(chunk.name)}.js`,
 				chunkFileNames: (chunk: PreRenderedChunk) =>
 					`chunks/${sanitizeChunkName(chunk.name)}.js`,
-				manualChunks(id: string) {
-					for (const dependency of Object.keys(
-						dataPackage.dependencies ?? {},
-					)) {
-						if (id.includes(dependency)) {
-							if (dependency.match(/^lit/)) {
-								return `lib/lit/${dependency.replace("/", "-")}`;
-							}
-							if (dependency.match(/^abcjs/)) {
-								return `lib/abcjs/${dependency.replace("/", "-")}`;
-							}
-							if (dependency.match(/^katex/)) {
-								return `lib/katex/${dependency.replace("/", "-")}`;
-							}
-							if (dependency.includes("shiki")) {
-								return `lib/shiki/${dependency.replace("/", "-")}`;
-							}
-							if (dependency.includes("codemirror")) {
-								return `lib/codemirror/${dependency.replace("/", "-")}`;
-							}
-							if (dependency.includes("markdown-it")) {
-								return `lib/markdown-it/${dependency.replace("/", "-")}`;
-							}
-							if (
-								dependency.includes("@wc-toolkit") ||
-								dependency.includes("manifest")
-							) {
-								return `lib/manifest/${dependency.replace("/", "-")}`;
-							}
-							if (dependency.includes("nanoid")) {
-								return "lib/nanoid/nanoid";
-							}
-							if (dependency.includes("js-beautify")) {
-								return "lib/js-beautify/js-beautify";
-							}
-							if (dependency.includes("dompurify")) {
-								return "lib/dompurify/dompurify";
-							}
-							if (dependency.includes("@awesome.me")) {
-								return `lib/webawesome/${dependency
-									.replace("@awesome.me/", "")
-									.replace("/", "-")}`;
-							}
-							if (dependency.includes("front-matter")) {
-								return "lib/front-matter/front-matter";
-							}
-							if (dependency.includes("yaml")) {
-								return "lib/yaml/yaml";
-							}
-							if (dependency.includes("typescript")) {
-								return "lib/typescript/typescript";
-							}
-						}
-					}
-
-					if (id.includes("node_modules")) {
-						return "lib/vendor/vendor";
-					}
-
-					return undefined;
-				},
+				// Keep automatic chunk boundaries: broad vendor groups can merge
+				// lazy renderers and compilers into the core component graph.
 			},
 		},
 		sourcemap: true,
