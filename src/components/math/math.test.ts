@@ -44,6 +44,52 @@ afterEach(() => {
 });
 
 describe("tp-math", () => {
+	it("adopts published SVGs and clones without MathJax, but renders changed formulas", async () => {
+		const root = document.createElement("div");
+		root.innerHTML =
+			'<tp-math><span data-tp-math-output data-tp-math-source="x^2"><svg role="img" aria-label="x^2"></svg></span></tp-math>';
+		const output = root.querySelector("span");
+		output?.setAttribute(
+			"data-tp-math-key",
+			JSON.stringify(["x^2", "latexmath", false, ""]),
+		);
+		await TpMath.prepare(root);
+		const copy = root.cloneNode(true);
+		document.body.append(root, copy);
+		await settle();
+		expect(render).not.toHaveBeenCalled();
+		expect(root.querySelector("span")).toBe(output);
+		const formula = root.querySelector("tp-math");
+		if (!formula) throw new Error("Missing formula");
+		formula.value = "x^3";
+		await vi.waitFor(() =>
+			expect(formula.querySelector("svg")?.getAttribute("aria-label")).toBe(
+				"x^3",
+			),
+		);
+		formula.value = "";
+		await vi.waitFor(() =>
+			expect(formula.querySelector("svg")?.getAttribute("aria-label")).toBe(
+				"x^2",
+			),
+		);
+		expect(render).toHaveBeenCalledTimes(2);
+	});
+	it("rejects stale published metadata after a mode change", async () => {
+		const root = document.createElement("div");
+		root.innerHTML =
+			'<tp-math mode="asciimath"><span data-tp-math-output data-tp-math-source="x"><svg></svg></span></tp-math>';
+		root
+			.querySelector("span")
+			?.setAttribute(
+				"data-tp-math-key",
+				JSON.stringify(["x", "latexmath", false, ""]),
+			);
+		await TpMath.prepare(root);
+		expect(render).toHaveBeenCalledOnce();
+		expect(root.querySelector("[data-mathjax-asciimath]")).not.toBeNull();
+	});
+
 	it("prepares detached formulas and preserves their SVG on connection", async () => {
 		const root = document.createElement("div");
 		root.innerHTML =
@@ -330,5 +376,5 @@ it("retains formula sources when rendered notes are copied into lists or tooltip
 				?.getAttribute("data-tp-math-source"),
 		).toBe(String.raw`\dot{x}`);
 	}
-	expect(render).toHaveBeenCalledTimes(3);
+	expect(render).toHaveBeenCalledOnce();
 });

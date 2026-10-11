@@ -8,6 +8,8 @@ The custom `<tp-math>` element implements the Math functionality: renders LaTeX 
 
 ## Usage
 
+Published documents can include a pre-rendered SVG with the original expression and rendering parameters. Matching output is reused without downloading MathJax, including copies in notes and reference lists. Changing the expression or rendering parameters loads the renderer on demand. The source remains available when an attribute override is removed.
+
 ### User interactions
 
 #### Mouse interactions

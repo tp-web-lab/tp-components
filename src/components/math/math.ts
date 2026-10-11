@@ -53,6 +53,8 @@ export class TpMath extends TpBase {
 	private revision = 0;
 	/** Identifies the successful output so connecting a prepared formula is a no-op. */
 	private renderedKey = "";
+	/** Original inline expression retained when publication supplied an SVG. */
+	private publishedSource: string | null = null;
 	/** Prepare detached document formulas before their surrounding text is displayed. */
 	public static async prepare(root: HTMLElement): Promise<void> {
 		const formulas = Array.from(root.querySelectorAll("tp-math"));
@@ -149,6 +151,9 @@ export class TpMath extends TpBase {
 	private async render(allowDetached = false): Promise<void> {
 		const revision = this.revision;
 		this.source.capture();
+		const existing = this.querySelector(":scope > [data-tp-math-output]");
+		this.publishedSource ??=
+			existing?.getAttribute("data-tp-math-source") ?? null;
 		this.request = new AbortController();
 		const output = document.createElement("span");
 		output.setAttribute("data-tp-math-output", "");
@@ -156,9 +161,7 @@ export class TpMath extends TpBase {
 		try {
 			const value = (
 				(await this.source.read({ signal: this.request.signal })) ||
-				this.querySelector(":scope > [data-tp-math-output]")?.getAttribute(
-					"data-tp-math-source",
-				) ||
+				this.publishedSource ||
 				""
 			).trim();
 			if (revision !== this.revision || (!allowDetached && !this.isConnected))
@@ -169,8 +172,11 @@ export class TpMath extends TpBase {
 			const displaystyle = this.displaystyle;
 			const key = JSON.stringify([value, mode, displaystyle, this.label]);
 			if (
-				key === this.renderedKey &&
-				this.querySelector(":scope > [data-tp-math-output]")
+				(key === this.renderedKey ||
+					(existing?.getAttribute("data-tp-math-key") === key &&
+						existing.querySelector("svg") &&
+						!existing.querySelector('[data-mml-node="merror"]'))) &&
+				existing
 			)
 				return;
 			if (value) {
@@ -206,6 +212,7 @@ export class TpMath extends TpBase {
 				svg.removeAttribute("aria-hidden");
 				svg.removeAttribute("aria-labelledby");
 			}
+			output.setAttribute("data-tp-math-key", key);
 			this.replaceChildren(output);
 			this.renderedKey = key;
 			if (value)
