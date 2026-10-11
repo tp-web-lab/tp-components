@@ -1,5 +1,7 @@
 # Appendices
 
+- [Publishing the documentation](appendices/publication/index.md) explains local preparation, GitHub Pages deployment and automatic example updates.
+
 - [Design tokens](appendices/design-tokens/index.md) describes the shared visual values and their accessibility contracts.
 - [Component quality](appendices/component-quality/index.md) defines the test procedure, advisory coverage targets, and pilot results.
 - [Creating a component](appendices/component-authoring/index.md) explains the authoring procedure through the concrete `tp-text-to-speech` example.
