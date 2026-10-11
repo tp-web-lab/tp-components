@@ -12,6 +12,7 @@ var r = "tp-math{display:inline}tp-math[displaystyle]{text-align:center;max-inli
 	});
 	revision = 0;
 	renderedKey = "";
+	publishedSource = null;
 	static async prepare(e) {
 		let t = Array.from(e.querySelectorAll("tp-math"));
 		for (let e of t) customElements.upgrade(e);
@@ -75,50 +76,52 @@ var r = "tp-math{display:inline}tp-math[displaystyle]{text-align:center;max-inli
 	}
 	async render(e = !1) {
 		let t = this.revision;
-		this.source.capture(), this.request = new AbortController();
-		let r = document.createElement("span");
-		r.setAttribute("data-tp-math-output", ""), this.setAttribute("aria-busy", "true");
+		this.source.capture();
+		let r = this.querySelector(":scope > [data-tp-math-output]");
+		this.publishedSource ??= r?.getAttribute("data-tp-math-source") ?? null, this.request = new AbortController();
+		let a = document.createElement("span");
+		a.setAttribute("data-tp-math-output", ""), this.setAttribute("aria-busy", "true");
 		try {
-			let a = (await this.source.read({ signal: this.request.signal }) || this.querySelector(":scope > [data-tp-math-output]")?.getAttribute("data-tp-math-source") || "").trim();
+			let o = (await this.source.read({ signal: this.request.signal }) || this.publishedSource || "").trim();
 			if (t !== this.revision || !e && !this.isConnected) return;
-			r.setAttribute("data-tp-math-source", a);
-			let o = this.mode, s = this.displaystyle, c = JSON.stringify([
-				a,
+			a.setAttribute("data-tp-math-source", o);
+			let s = this.mode, c = this.displaystyle, l = JSON.stringify([
 				o,
 				s,
+				c,
 				this.label
 			]);
-			if (c === this.renderedKey && this.querySelector(":scope > [data-tp-math-output]")) return;
-			if (a) {
-				let c = document.createElement("span");
-				c.setAttribute(o === "asciimath" ? "data-mathjax-asciimath" : "data-mathjax-tex", a), c.setAttribute("data-mathjax-display", String(s)), r.append(c);
+			if ((l === this.renderedKey || r?.getAttribute("data-tp-math-key") === l && r.querySelector("svg") && !r.querySelector("[data-mml-node=\"merror\"]")) && r) return;
+			if (o) {
+				let r = document.createElement("span");
+				r.setAttribute(s === "asciimath" ? "data-mathjax-asciimath" : "data-mathjax-tex", o), r.setAttribute("data-mathjax-display", String(c)), a.append(r);
 				let l = i.queue.then(async () => {
 					try {
-						await n.render(r);
+						await n.render(a);
 					} finally {
-						window.MathJax?.typesetClear?.([r]);
+						window.MathJax?.typesetClear?.([a]);
 					}
 				});
 				if (i.queue = l.catch(() => void 0), await l, t !== this.revision || !e && !this.isConnected) return;
-				let u = r.querySelector("svg");
-				if (!u || r.querySelector("[data-mml-node=\"merror\"]")) throw Error("The mathematical expression could not be rendered as SVG.");
-				u.setAttribute("role", "img"), u.setAttribute("aria-label", this.label.trim() || a), u.removeAttribute("aria-hidden"), u.removeAttribute("aria-labelledby");
+				let u = a.querySelector("svg");
+				if (!u || a.querySelector("[data-mml-node=\"merror\"]")) throw Error("The mathematical expression could not be rendered as SVG.");
+				u.setAttribute("role", "img"), u.setAttribute("aria-label", this.label.trim() || o), u.removeAttribute("aria-hidden"), u.removeAttribute("aria-labelledby");
 			}
-			this.replaceChildren(r), this.renderedKey = c, a && this.dispatchEvent(new CustomEvent("tp-math-rendered", {
+			a.setAttribute("data-tp-math-key", l), this.replaceChildren(a), this.renderedKey = l, o && this.dispatchEvent(new CustomEvent("tp-math-rendered", {
 				bubbles: !0,
 				detail: {
-					value: a,
-					mode: o,
-					displaystyle: s
+					value: o,
+					mode: s,
+					displaystyle: c
 				}
 			}));
 		} catch (n) {
 			if (t !== this.revision || !e && !this.isConnected) return;
 			this.renderedKey = "";
-			let i = n instanceof Error ? n.message : "Unable to render the mathematical expression.", a = document.createElement("tp-callout");
-			a.setAttribute("variant", "warning"), a.textContent = i, r.replaceChildren(a), this.replaceChildren(r), this.dispatchEvent(new CustomEvent("tp-math-error", {
+			let r = n instanceof Error ? n.message : "Unable to render the mathematical expression.", i = document.createElement("tp-callout");
+			i.setAttribute("variant", "warning"), i.textContent = r, a.replaceChildren(i), this.replaceChildren(a), this.dispatchEvent(new CustomEvent("tp-math-error", {
 				bubbles: !0,
-				detail: { message: i }
+				detail: { message: r }
 			}));
 		} finally {
 			t === this.revision && this.removeAttribute("aria-busy");

@@ -41,6 +41,8 @@ export declare class TpMath extends TpBase {
     private revision;
     /** Identifies the successful output so connecting a prepared formula is a no-op. */
     private renderedKey;
+    /** Original inline expression retained when publication supplied an SVG. */
+    private publishedSource;
     /** Prepare detached document formulas before their surrounding text is displayed. */
     static prepare(root: HTMLElement): Promise<void>;
     /** Cancels an obsolete source request. */
