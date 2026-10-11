@@ -277,7 +277,10 @@ var u = class extends e {
 					await this.renderNotFoundPage(r);
 					return;
 				}
-				this.currentHref = r, this.currentSource = e, this.sourceMode = !1, await this.ensureLanguageRenderer(this.detectLanguage(r)), this.updateDocumentMetadata(r, e), n.replaceChildren(this.createMarkupViewer(r, e)), this.annotations?.setPage(new URL(r, this.ownerDocument.baseURI).href), this.renderPageNavigation(r), this.scrollToFragmentAfterRender(i), this.updateCurrentLink(r);
+				await this.ensureLanguageRenderer(this.detectLanguage(r));
+				let t = await this.prepareHtmlViewer(this.createMarkupViewer(r, e));
+				if (this.navigatingHref !== r) return;
+				this.currentHref = r, this.currentSource = e, this.sourceMode = !1, this.updateDocumentMetadata(r, e), n.replaceChildren(t), this.annotations?.setPage(new URL(r, this.ownerDocument.baseURI).href), this.renderPageNavigation(r), this.scrollToFragmentAfterRender(i), this.updateCurrentLink(r);
 			} finally {
 				this.navigatingHref === r && (this.navigatingHref = "");
 			}
@@ -287,7 +290,7 @@ var u = class extends e {
 		let t = this.contentElement;
 		if (t === null) return;
 		let n = await this.fetchSpecialPage("page-not-found"), r = n?.source.replaceAll("{{ href }}", e) ?? this.createDefaultNotFoundSource(e), i = n?.href ?? this.notFoundHref;
-		this.currentHref = e, this.currentSource = r, this.sourceMode = !1, await this.ensureLanguageRenderer(this.detectLanguage(i)), this.updateDocumentMetadata(e, r), t.replaceChildren(this.createInlineMarkupViewer(i, r)), this.updateCurrentLink(e);
+		this.currentHref = e, this.currentSource = r, this.sourceMode = !1, await this.ensureLanguageRenderer(this.detectLanguage(i)), this.updateDocumentMetadata(e, r), t.replaceChildren(await this.prepareHtmlViewer(this.createInlineMarkupViewer(i, r))), this.updateCurrentLink(e);
 	}
 	async toggleSourceMode() {
 		let e = this.contentElement;
@@ -300,8 +303,15 @@ var u = class extends e {
 				}, { once: !0 }), e.replaceChildren(n);
 				return;
 			}
-			e.replaceChildren(this.createMarkupViewer(this.currentHref, this.currentSource)), this.renderPageNavigation(this.currentHref), this.annotations?.setPage(new URL(this.currentHref, this.ownerDocument.baseURI).href);
+			e.replaceChildren(await this.prepareHtmlViewer(this.createMarkupViewer(this.currentHref, this.currentSource))), this.renderPageNavigation(this.currentHref), this.annotations?.setPage(new URL(this.currentHref, this.ownerDocument.baseURI).href);
 		}
+	}
+	async prepareHtmlViewer(e) {
+		if (e.classList.contains("tp-markup-multi-pages-html-output")) {
+			let { loadUsedTpComponents: t } = await import("../tp-loader.js");
+			await t(e);
+		}
+		return e;
 	}
 	createMarkupViewer(e, t) {
 		let n = this.detectLanguage(e);

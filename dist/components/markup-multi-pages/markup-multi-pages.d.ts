@@ -129,6 +129,8 @@ export declare class TpMarkupMultiPages extends TpBase {
     private navigate;
     private renderNotFoundPage;
     private toggleSourceMode;
+    /** Define HTML components while detached so their raw authoring content never flashes. */
+    private prepareHtmlViewer;
     private createMarkupViewer;
     private createInlineMarkupViewer;
     private renderSourceToHtml;

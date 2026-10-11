@@ -26,12 +26,16 @@ var a = class extends i {
 		this.cancelRun(), this.ownerDocument.defaultView?.removeEventListener("message", this.receiveResult), super.disconnectedCallback();
 	}
 	attributeChangedCallback(e, t, n) {
-		super.attributeChangedCallback(e, t, n), t !== n && this.isConnected && ["src", "test"].includes(e) && this.configure();
+		super.attributeChangedCallback(e, t, n), t !== n && this.isConnected && ["src", "test"].includes(e) && this.configure(), e === "open" && this.open && !this.control && this.isConnected && this.configure();
 	}
 	configure() {
 		this.cancelRun(), this.result.replaceChildren(), this.ready = !1, this.hasSpecificFeedback = !!this.test.trim(), this.updateFeedbackPlaceholder(), this.control = null;
 		let t = this.querySelector("[data-tp-question-form-content]");
 		if (!t) return;
+		if (!this.open) {
+			t.replaceChildren();
+			return;
+		}
 		let n = this.createEditor();
 		this.control = n, n.addEventListener(this.sourceLoadedEvent, () => {
 			this.control === n && (this.ready = !0);

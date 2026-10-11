@@ -19,6 +19,8 @@
 
 Title, Prompt and Solution use the normal question definition list. Form is the fixed language viewer. Feedback contains the test console and report. `tp-question-submit` exposes the current source string as `detail.value`.
 
+The response viewer is created when the question is first opened. Closing and reopening preserves its content; use `open` to initialize it immediately.
+
 ## Testing rendered HTML
 
 The current source is rendered again on each submission, even if the learner has not clicked Run. Tests use Mocha/Chai via `@tp/test`. Their `document` is an isolated HTML snapshot, not the documentation page or the viewer toolbar. Author scripts are removed from this test document; this workflow checks rendered markup, not application JavaScript or runtime-only extensions. Supply trusted sources and tests. Browser-side tests are formative, not secure grading, and have no execution timeout.
