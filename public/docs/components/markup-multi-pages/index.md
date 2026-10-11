@@ -37,6 +37,8 @@ Personal annotations are saved per document in this browser's localStorage, with
 
 ### Author directives
 
+For HTML pages, including pre-rendered Markdown pages, component definitions and `tp-math` formulas are prepared before the content is displayed. This avoids showing raw mathematical notation followed by successive layout shifts. Formula updates remain interactive after the page is displayed.
+
 Use `<tp-markup-multi-pages>` as shown below.
 
 ```html

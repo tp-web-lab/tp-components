@@ -44,6 +44,39 @@ afterEach(() => {
 });
 
 describe("tp-math", () => {
+	it("prepares detached formulas and preserves their SVG on connection", async () => {
+		const root = document.createElement("div");
+		root.innerHTML =
+			'<p>Before <tp-math>x^2</tp-math> after <tp-math mode="asciimath">sqrt(x)</tp-math></p>';
+		await TpMath.prepare(root);
+		expect(root.isConnected).toBe(false);
+		expect(root.querySelectorAll("svg")).toHaveLength(2);
+		const svg = root.querySelector("svg");
+		document.body.append(root);
+		await settle();
+		expect(root.querySelector("svg")).toBe(svg);
+		expect(render).toHaveBeenCalledTimes(2);
+		const formula = root.querySelector("tp-math");
+		if (!formula) throw new Error("Missing formula");
+		formula.value = "x^3";
+		await vi.waitFor(() =>
+			expect(formula.querySelector("svg")?.getAttribute("aria-label")).toBe(
+				"x^3",
+			),
+		);
+	});
+	it("finishes preparation with a warning when a formula fails", async () => {
+		render.mockRejectedValueOnce(new Error("Invalid expression"));
+		const root = document.createElement("div");
+		root.innerHTML = "<tp-math>invalid</tp-math><tp-math>x</tp-math>";
+		await TpMath.prepare(root);
+		expect(root.querySelector("tp-callout")?.textContent).toBe(
+			"Invalid expression",
+		);
+		expect(root.querySelectorAll("svg")).toHaveLength(1);
+		expect(root.querySelector("[aria-busy]")).toBeNull();
+	});
+
 	it("receives the complete derivative formula from an inline Markdown role", async () => {
 		const expression = String.raw`\displaystyle \lim_{x -> a} \frac{f(x)-f(a)}{x-a}`;
 		const source = `Oui, le nombre dérivé d’une fonction :tp-math:\`f\`{} en un point :tp-math:\`a\`{}, c’est :tp-math:\`${expression}\`{}. Enfin du moins quand c’est réel.`;

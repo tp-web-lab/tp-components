@@ -1177,3 +1177,41 @@ it("keeps raw HTML detached until its component definitions are ready", async ()
 	expect(await prepared).toBe(viewer);
 	load.mockRestore();
 });
+
+it("waits for detached mathematical content before presenting an HTML page", async () => {
+	const { TpMath } = await import("../math/math.js");
+	const loader = await import("../../tp-loader.js");
+	const load = vi.spyOn(loader, "loadUsedTpComponents").mockResolvedValueOnce();
+	let finish = () => {};
+	const gate = new Promise<void>((resolve) => {
+		finish = resolve;
+	});
+	const math = vi
+		.spyOn(TpMath, "prepare")
+		.mockImplementationOnce(async (root) => {
+			expect(root.isConnected).toBe(false);
+			await gate;
+		});
+	const element = new TpMarkupMultiPages();
+	const viewer = invoke<HTMLElement>(
+		element,
+		"createMarkupViewer",
+		"/docs/formula.html",
+		"<p>A formula: <tp-math>x^2</tp-math>.</p>",
+	);
+	let ready = false;
+	const prepared = invoke<Promise<HTMLElement>>(
+		element,
+		"prepareHtmlViewer",
+		viewer,
+	).then(() => {
+		ready = true;
+	});
+	await vi.waitFor(() => expect(math).toHaveBeenCalledWith(viewer));
+	expect(ready).toBe(false);
+	finish();
+	await prepared;
+	expect(ready).toBe(true);
+	math.mockRestore();
+	load.mockRestore();
+});

@@ -739,6 +739,10 @@ export class TpMarkupMultiPages extends TpBase {
 		if (viewer.classList.contains("tp-markup-multi-pages-html-output")) {
 			const { loadUsedTpComponents } = await import("../../tp-loader.js");
 			await loadUsedTpComponents(viewer);
+			if (viewer.querySelector("tp-math")) {
+				const { TpMath } = await import("../math/math.js");
+				await TpMath.prepare(viewer);
+			}
 		}
 		return viewer;
 	}

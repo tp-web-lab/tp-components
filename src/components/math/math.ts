@@ -51,6 +51,14 @@ export class TpMath extends TpBase {
 	});
 	/** Invalidates asynchronous work after updates or disconnection. */
 	private revision = 0;
+	/** Identifies the successful output so connecting a prepared formula is a no-op. */
+	private renderedKey = "";
+	/** Prepare detached document formulas before their surrounding text is displayed. */
+	public static async prepare(root: HTMLElement): Promise<void> {
+		const formulas = Array.from(root.querySelectorAll("tp-math"));
+		for (const formula of formulas) customElements.upgrade(formula);
+		await Promise.all(formulas.map((formula) => formula.render(true)));
+	}
 	/** Cancels an obsolete source request. */
 	private request: AbortController | null = null;
 	/** Defers initial reading until the HTML parser has supplied child content. */
@@ -138,7 +146,7 @@ export class TpMath extends TpBase {
 		}, 0);
 	}
 	/** Reads the common source contract and commits only the latest SVG or error. */
-	private async render(): Promise<void> {
+	private async render(allowDetached = false): Promise<void> {
 		const revision = this.revision;
 		this.source.capture();
 		this.request = new AbortController();
@@ -153,11 +161,18 @@ export class TpMath extends TpBase {
 				) ||
 				""
 			).trim();
-			if (revision !== this.revision || !this.isConnected) return;
+			if (revision !== this.revision || (!allowDetached && !this.isConnected))
+				return;
 			// Keep serialized copies (reference tooltips and lists) self-contained.
 			output.setAttribute("data-tp-math-source", value);
 			const mode = this.mode;
 			const displaystyle = this.displaystyle;
+			const key = JSON.stringify([value, mode, displaystyle, this.label]);
+			if (
+				key === this.renderedKey &&
+				this.querySelector(":scope > [data-tp-math-output]")
+			)
+				return;
 			if (value) {
 				const placeholder = document.createElement("span");
 				placeholder.setAttribute(
@@ -179,7 +194,8 @@ export class TpMath extends TpBase {
 				});
 				TpMath.queue = job.catch(() => undefined);
 				await job;
-				if (revision !== this.revision || !this.isConnected) return;
+				if (revision !== this.revision || (!allowDetached && !this.isConnected))
+					return;
 				const svg = output.querySelector("svg");
 				if (!svg || output.querySelector('[data-mml-node="merror"]'))
 					throw new Error(
@@ -191,6 +207,7 @@ export class TpMath extends TpBase {
 				svg.removeAttribute("aria-labelledby");
 			}
 			this.replaceChildren(output);
+			this.renderedKey = key;
 			if (value)
 				this.dispatchEvent(
 					new CustomEvent("tp-math-rendered", {
@@ -199,7 +216,9 @@ export class TpMath extends TpBase {
 					}),
 				);
 		} catch (error: unknown) {
-			if (revision !== this.revision || !this.isConnected) return;
+			if (revision !== this.revision || (!allowDetached && !this.isConnected))
+				return;
+			this.renderedKey = "";
 			const message =
 				error instanceof Error
 					? error.message
