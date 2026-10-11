@@ -225,6 +225,7 @@
         - [API]()
       - [Prompt AI]()
   - [Appendices](appendices.md)
+    - [Publishing the documentation](appendices/publication/index.md)
     - [Design tokens](appendices/design-tokens/index.md)
     - [DOM](appendices/dom/index.md)
     - [Tests](appendices/tests.md)
