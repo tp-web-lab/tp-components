@@ -309,7 +309,10 @@ var u = class extends e {
 	async prepareHtmlViewer(e) {
 		if (e.classList.contains("tp-markup-multi-pages-html-output")) {
 			let { loadUsedTpComponents: t } = await import("../tp-loader.js");
-			await t(e);
+			if (await t(e), e.querySelector("tp-math")) {
+				let { TpMath: t } = await import("../components/math/math.js");
+				await t.prepare(e);
+			}
 		}
 		return e;
 	}

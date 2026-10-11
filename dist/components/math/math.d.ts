@@ -39,6 +39,10 @@ export declare class TpMath extends TpBase {
     private readonly source;
     /** Invalidates asynchronous work after updates or disconnection. */
     private revision;
+    /** Identifies the successful output so connecting a prepared formula is a no-op. */
+    private renderedKey;
+    /** Prepare detached document formulas before their surrounding text is displayed. */
+    static prepare(root: HTMLElement): Promise<void>;
     /** Cancels an obsolete source request. */
     private request;
     /** Defers initial reading until the HTML parser has supplied child content. */
