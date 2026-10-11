@@ -36,6 +36,7 @@ it("tests freshly rendered edits, submits the source string and resets the viewe
 		),
 	);
 	const question = new TpHtmlViewerQuestion();
+	question.open = true;
 	question.setAttribute("src", "/heading.html");
 	question.setAttribute("test", "/heading.test.js");
 	document.body.append(question);
@@ -66,6 +67,7 @@ it("reports markup rendering failures without executing tests", async () => {
 		vi.fn(async () => new Response("tests")),
 	);
 	const question = new TpHtmlViewerQuestion();
+	question.open = true;
 	question.setAttribute("test", "/heading.test.js");
 	document.body.append(question);
 	const viewer = question.querySelector<TpHtmlViewer>("tp-html-viewer");

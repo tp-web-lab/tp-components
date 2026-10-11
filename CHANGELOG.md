@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Initialize programming question editors only when first opened, avoiding
+  Python runtime startup for collapsed exercises while retaining edits on reopen.
+- Define components in HTML documentation before inserting the page, preventing
+  raw question and reference content from flashing and shifting the layout.
+
 - Resolve resources in nested Markdown against their own source, preserving
   relative solution file links inside prerendered documentation pages.
 

@@ -636,13 +636,16 @@ export class TpMarkupMultiPages extends TpBase {
 				return;
 			}
 
+			await this.ensureLanguageRenderer(this.detectLanguage(documentHref));
+			const viewer = await this.prepareHtmlViewer(
+				this.createMarkupViewer(documentHref, source),
+			);
+			if (this.navigatingHref !== documentHref) return;
 			this.currentHref = documentHref;
 			this.currentSource = source;
 			this.sourceMode = false;
-
-			await this.ensureLanguageRenderer(this.detectLanguage(documentHref));
 			this.updateDocumentMetadata(documentHref, source);
-			content.replaceChildren(this.createMarkupViewer(documentHref, source));
+			content.replaceChildren(viewer);
 			this.annotations?.setPage(
 				new URL(documentHref, this.ownerDocument.baseURI).href,
 			);
@@ -673,7 +676,9 @@ export class TpMarkupMultiPages extends TpBase {
 		await this.ensureLanguageRenderer(this.detectLanguage(templateHref));
 		this.updateDocumentMetadata(href, source);
 		content.replaceChildren(
-			this.createInlineMarkupViewer(templateHref, source),
+			await this.prepareHtmlViewer(
+				this.createInlineMarkupViewer(templateHref, source),
+			),
 		);
 		this.updateCurrentLink(href);
 	}
@@ -719,12 +724,23 @@ export class TpMarkupMultiPages extends TpBase {
 		}
 
 		content.replaceChildren(
-			this.createMarkupViewer(this.currentHref, this.currentSource),
+			await this.prepareHtmlViewer(
+				this.createMarkupViewer(this.currentHref, this.currentSource),
+			),
 		);
 		this.renderPageNavigation(this.currentHref);
 		this.annotations?.setPage(
 			new URL(this.currentHref, this.ownerDocument.baseURI).href,
 		);
+	}
+
+	/** Define HTML components while detached so their raw authoring content never flashes. */
+	private async prepareHtmlViewer(viewer: HTMLElement): Promise<HTMLElement> {
+		if (viewer.classList.contains("tp-markup-multi-pages-html-output")) {
+			const { loadUsedTpComponents } = await import("../../tp-loader.js");
+			await loadUsedTpComponents(viewer);
+		}
+		return viewer;
 	}
 
 	private createMarkupViewer(href: string, source?: string): HTMLElement {

@@ -1142,3 +1142,38 @@ describe("<tp-markup-multi-pages>", () => {
 		expect(document.title).toBe("Page not found · tp-components");
 	});
 });
+
+it("keeps raw HTML detached until its component definitions are ready", async () => {
+	const loader = await import("../../tp-loader.js");
+	let finish = () => {};
+	const gate = new Promise<void>((resolve) => {
+		finish = resolve;
+	});
+	const load = vi
+		.spyOn(loader, "loadUsedTpComponents")
+		.mockImplementationOnce(async (root) => {
+			expect((root as HTMLElement).isConnected).toBe(false);
+			await gate;
+		});
+	const element = new TpMarkupMultiPages();
+	const viewer = invoke<HTMLElement>(
+		element,
+		"createMarkupViewer",
+		"/docs/test.html",
+		"<h1>Ready</h1>",
+	);
+	let ready = false;
+	const prepared = invoke<Promise<HTMLElement>>(
+		element,
+		"prepareHtmlViewer",
+		viewer,
+	).then((value) => {
+		ready = true;
+		return value;
+	});
+	await vi.waitFor(() => expect(load).toHaveBeenCalledWith(viewer));
+	expect(ready).toBe(false);
+	finish();
+	expect(await prepared).toBe(viewer);
+	load.mockRestore();
+});

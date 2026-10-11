@@ -97,6 +97,8 @@ export abstract class TpEditorQuestion<
 			["src", "test"].includes(name)
 		)
 			this.configure();
+		if (name === "open" && this.open && !this.control && this.isConnected)
+			this.configure();
 	}
 	/** Creates the selected library control and passes it the resolved initial source. */
 	private configure(): void {
@@ -108,6 +110,10 @@ export abstract class TpEditorQuestion<
 		this.control = null;
 		const form = this.querySelector("[data-tp-question-form-content]");
 		if (!form) return;
+		if (!this.open) {
+			form.replaceChildren();
+			return;
+		}
 		const control = this.createEditor();
 		this.control = control;
 		control.addEventListener(this.sourceLoadedEvent, () => {

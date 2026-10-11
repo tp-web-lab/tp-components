@@ -22,8 +22,9 @@ afterEach(() => {
 });
 
 /** Mounts a configured exercise through its public interface. */
-function mount(): TpJavascriptViewerQuestion {
+function mount(open = true): TpJavascriptViewerQuestion {
 	const question = new TpJavascriptViewerQuestion();
+	question.open = open;
 	question.setAttribute("test", "/double.test.js");
 	question.innerHTML =
 		"<dl><dt>Title</dt><dd>Double</dd><dt>Prompt</dt><dd>Complete the function.</dd></dl>";
@@ -43,7 +44,7 @@ it("uses inherited open handling and requires a test source", () => {
 	const question = new TpJavascriptViewerQuestion();
 	expect(question.test).toBe("");
 	document.body.append(question);
-	expect(question.querySelector("tp-javascript-viewer")).not.toBeNull();
+	expect(question.querySelector("tp-javascript-viewer")).toBeNull();
 	expect(question.querySelector("details")?.open).toBe(false);
 	question.open = true;
 	expect(question.querySelector("details")?.open).toBe(true);
@@ -156,4 +157,19 @@ it("disposes stale asynchronous builds after a reset", async () => {
 	finish?.({ html: "stale", cleanup });
 	await vi.waitFor(() => expect(cleanup).toHaveBeenCalledOnce());
 	expect(question.querySelector('[title="Test execution"]')).toBeNull();
+});
+
+it("starts a closed exercise only when opened and retains edits on reopening", async () => {
+	const question = mount(false);
+	question.setAttribute("src", "/double.js");
+	expect(question.querySelector("tp-javascript-viewer")).toBeNull();
+	expect(fetch).not.toHaveBeenCalled();
+	expect(TpPlayground.prototype.run).not.toHaveBeenCalled();
+	question.open = true;
+	const viewer = question.querySelector("tp-javascript-viewer");
+	expect(viewer).not.toBeNull();
+	await vi.waitFor(() => expect(fetch).toHaveBeenCalled());
+	question.open = false;
+	question.open = true;
+	expect(question.querySelector("tp-javascript-viewer")).toBe(viewer);
 });
