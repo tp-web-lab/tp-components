@@ -24,6 +24,8 @@
 
                - built-in
 
+               - canvas-only
+
                - grid
 
                - readonly
@@ -253,3 +255,10 @@
                segment AC = segment(A, C) color=blue
                comment slope = angle(AB, AC) color=blue
                comment surface = area(c) color=orange
+
+      .. example:: Interactive figure
+
+         .. tp-graph-geometry::
+            :canvas-only:
+            :grid:
+            :src: /docs/components/graph-geometry/examples/circle.geometry

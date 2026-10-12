@@ -372,6 +372,7 @@ export function describeExample(component, label) {
  if (component === "graph-geometry" && label === "Polygons") return "Move the defining points to reshape the irregular polygon or resize and rotate the regular pentagon. Use the built-in polygon tools to create more figures, then change their color and export the light fills with their outlines.";
  if (component === "graph-geometry" && label === "Direct constructions") return "Use the extra built-in tools to add midpoints, perpendiculars, parallels, bisectors and tangents. Drag P inside and outside the circle to see its tangents disappear and reappear.";
  if (component === "graph-geometry" && label === "From a file") return "Load a construction from a local text file, then move O or slide P along the circle. The file uses the same commands as the construction editor.";
+ if (component === "graph-geometry" && label === "Interactive figure") return "Drag O or slide P around its circle in canvas-only mode. Scroll to pan and use the corner theme switcher to change only this figure.";
  if (component === "graph-geometry" && label === "Basic usage") return basic[component];
  if (component === "graph-geometry" && label === "Attached points") return "Move the centre O and slide P around its circle or Q along its line. The fixed-radius circle and attached points keep their construction relationships.";
  if (component === "graph-geometry" && label === "Arc only") return "Inspect a single visible arc with its circle hidden, then drag the centre to move the arc.";

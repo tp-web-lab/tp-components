@@ -10,7 +10,7 @@
 
 
       <tp-stack>
-      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>built-in</li><li>grid</li><li>readonly</li></ul></tp-checkbox-list>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>built-in</li><li>canvas-only</li><li>grid</li><li>readonly</li></ul></tp-checkbox-list>
       <tp-radio-list data-setting="src" label="src" label-position="top" orientation="horizontal" value="1"><ul><li>Default</li><li>file1</li><li>file2</li><li>file-unknown</li></ul></tp-radio-list>
       <tp-cluster></tp-cluster>
       <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
@@ -143,7 +143,7 @@
     </div>
 
     <div role="example" label="Transform in place">
-      <tp-graph-geometry built-in grid>
+      <tp-graph-geometry built-in="" grid="">
       <script type="tp/geometry">
       point O = (0, 0)
       point A = (3, 0)
@@ -152,8 +152,9 @@
       </script>
       </tp-graph-geometry>
     </div>
+
     <div role="example" label="Measurements">
-      <tp-graph-geometry grid>
+      <tp-graph-geometry grid="">
       <script type="tp/geometry">
       point A = (-4, -1)
       point B = (0, -1)
@@ -170,6 +171,10 @@
       comment surface = area(c) color=orange
       </script>
       </tp-graph-geometry>
+    </div>
+
+    <div role="example" label="Interactive figure">
+      <tp-graph-geometry canvas-only grid src="/docs/components/graph-geometry/examples/circle.geometry"></tp-graph-geometry>
     </div>
   </template>
 </tp-html-viewer>

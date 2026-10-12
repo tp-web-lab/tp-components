@@ -64,3 +64,19 @@ tp-graph-geometry [data-objects] [data-tp-button-content] { display:flex; justif
 .tp-geometry-shape.has-color .polygon { fill:var(--tp-brand-seed); }
 .tp-geometry-shape.is-selected:not(.has-color) .polygon { fill:#c96523; }
 .tp-geometry-shape .shape-hit polygon { fill:transparent; }
+
+/* Compact interactive figures retain the same SVG and input handlers. */
+tp-graph-geometry { position:relative; }
+.tp-geometry-header > .tp-geometry-theme { margin-inline-start:auto; }
+.tp-geometry-header > tp-save-image { margin-inline-start:0; }
+tp-graph-geometry[canvas-only] > .tp-geometry-header { display:contents; }
+tp-graph-geometry[canvas-only] > .tp-geometry-header > :not(.tp-geometry-theme),
+tp-graph-geometry[canvas-only] > .tp-geometry-tools,
+tp-graph-geometry[canvas-only] > .tp-geometry-parameters,
+tp-graph-geometry[canvas-only] > .tp-geometry-hint,
+tp-graph-geometry[canvas-only] > .tp-geometry-source,
+tp-graph-geometry[canvas-only] > .tp-geometry-workspace > aside,
+tp-graph-geometry[canvas-only] .tp-geometry-view { display:none; }
+tp-graph-geometry[canvas-only] > .tp-geometry-workspace { grid-template-columns:minmax(0,1fr); border:0; }
+tp-graph-geometry[canvas-only] .tp-geometry-theme { position:absolute; inset-block-start:8px; inset-inline-end:8px; z-index:2; }
+tp-graph-geometry[canvas-only] > [data-status] { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); padding:0; min-height:0; }

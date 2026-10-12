@@ -40,6 +40,10 @@
  * @tp-dependency tp-textfield
  * @summary Single-line and automatically growing multiline text field.
  */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
 // tp-docgen:dependencies:end
 import {
 	chooseSaveTarget,
@@ -50,6 +54,7 @@ import type { TpButton } from "../button/button.js";
 import { choosePlaygroundFile } from "../playground/playground-local-file.js";
 import "../accordion/accordion.js";
 import "../callout/callout.js";
+import "../theme/theme.js";
 import { TpBase } from "../base/base.js";
 import "../button-group/button-group.js";
 import "../textfield/textfield.js";
@@ -189,6 +194,7 @@ const HINTS: Record<Tool, string> = {
  * @summary Constructs dynamic figures with a graduated ruler and compass.
  * @tagname tp-graph-geometry
  * @attr {string} src = "" - URL of a text file containing construction commands.
+ * @attr {boolean} canvas-only = false - Shows only the interactive drawing and its local theme switcher.
  * @attr {boolean} built-in = false - Offers direct midpoint, perpendicular, parallel, perpendicular bisector, angle bisector, tangent, polygon and transformation tools.
  * @attr {boolean} grid = false - Shows a light grid without axes or graduations.
  * @attr {boolean} readonly = false - Prevents changes to the construction.
@@ -239,7 +245,7 @@ export class TpGraphGeometry extends TpBase {
 		grab?: GeometryPoint;
 	} | null = null;
 	public static get observedAttributes(): string[] {
-		return ["readonly", "grid", "src", "built-in"];
+		return ["readonly", "grid", "src", "built-in", "canvas-only"];
 	}
 	public get src(): string {
 		return this.getAttribute("src") ?? "";
@@ -259,6 +265,12 @@ export class TpGraphGeometry extends TpBase {
 	}
 	public set grid(value: boolean) {
 		this.toggleAttribute("grid", value);
+	}
+	public get canvasOnly(): boolean {
+		return this.hasAttribute("canvas-only");
+	}
+	public set canvasOnly(value: boolean) {
+		this.toggleAttribute("canvas-only", value);
 	}
 	public get builtIn(): boolean {
 		return this.hasAttribute("built-in");
@@ -659,9 +671,11 @@ export class TpGraphGeometry extends TpBase {
 		this.setConstruction(`${this.value}\n${commands}`);
 	}
 	private render(): void {
+		const themeMode =
+			this.querySelector(".tp-geometry-theme")?.getAttribute("mode") ?? "auto";
 		this.objectListMarkup = "";
 		this.setAttribute("data-geometry-export", this.controlId);
-		this.innerHTML = `<div class="tp-geometry-header"><div><strong>Ruler & compass</strong><span>Geometric constructions</span></div><tp-save-image anchor='[data-geometry-export="${this.controlId}"]' filename="geometry"></tp-save-image><tp-button-group><tp-button type="button" outlined data-geometry-control data-action="example">Perpendicular bisector</tp-button><tp-button type="button" outlined data-geometry-control data-action="clear">New construction</tp-button></tp-button-group></div>
+		this.innerHTML = `<div class="tp-geometry-header"><div><strong>Ruler & compass</strong><span>Geometric constructions</span></div><tp-theme class="tp-geometry-theme" mode="${themeMode === "light" || themeMode === "dark" ? themeMode : "auto"}" anchor='[data-geometry-export="${this.controlId}"]'></tp-theme><tp-save-image anchor='[data-geometry-export="${this.controlId}"]' filename="geometry"></tp-save-image><tp-button-group><tp-button type="button" outlined data-geometry-control data-action="example">Perpendicular bisector</tp-button><tp-button type="button" outlined data-geometry-control data-action="clear">New construction</tp-button></tp-button-group></div>
       <tp-button-group class="tp-geometry-tools" aria-label="Construction tools">${Object.entries(
 				{ ...TOOLS, ...(this.builtIn ? BUILT_IN_TOOLS : {}) },
 			)
@@ -974,7 +988,8 @@ export class TpGraphGeometry extends TpBase {
 				return;
 			}
 			if (
-				this.tool === "pan" &&
+				(this.tool === "pan" ||
+					(this.canvasOnly && (!this.selected || this.readonly))) &&
 				["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)
 			) {
 				event.preventDefault();
