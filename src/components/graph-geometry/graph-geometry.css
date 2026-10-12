@@ -45,3 +45,13 @@ tp-graph-geometry aside > tp-button > button { white-space:normal; }
 tp-graph-geometry [data-objects] tp-button > button { inline-size:100%; }
 tp-graph-geometry [data-objects] [data-tp-button-content] { display:flex; justify-content:space-between; gap:.5rem; inline-size:100%; }
 .tp-geometry-board svg:focus-visible { outline:3px solid var(--tp-focus-color, Highlight); outline-offset:-3px; }
+
+.tp-geometry-shape .sector { fill:var(--tp-info-text-colorful, #447a94); fill-opacity:.12; }
+
+.tp-geometry-appearance { display:flex; flex-wrap:wrap; gap:.3rem; margin-bottom:.6rem; }
+.tp-geometry-swatch { display:inline-block; width:1em; height:1em; margin-inline-end:.5em; border:1px solid currentColor; border-radius:50%; background:var(--tp-brand-seed); }
+.tp-geometry-shape.stroke-dotted .shape-ink, .tp-geometry-shape.stroke-dotted .point { stroke-dasharray:1 6; stroke-linecap:round; }
+.tp-geometry-shape.stroke-dashed .shape-ink, .tp-geometry-shape.stroke-dashed .point { stroke-dasharray:10 6; }
+.tp-geometry-shape.has-color .shape-ink, .tp-geometry-shape.has-color .point { stroke:var(--tp-brand-seed); }
+.tp-geometry-shape.has-color .sector, .tp-geometry-shape.has-color .dependent, .tp-geometry-shape.has-color text { fill:var(--tp-brand-seed); }
+.tp-geometry-header > tp-save-image { margin-inline-start:auto; }

@@ -58,9 +58,9 @@ const overrides = {
 	"game-life/preset": alternatives(aliases.get("PresetName")),
 	"color/preset": [
 		...sources
-			.get("color/color.ts")
+			.get("color/color-presets.ts")
 			.text.match(/const TP_COLOR_PRESETS = \[([\s\S]*?)\]/)[1]
-			.matchAll(/'([^']+)'/g),
+			.matchAll(/["']([^"']+)["']/g),
 	].map((match) => match[1]),
 	"clock/type": ["digital", "analogic"],
 	"flip-card/button-position": [

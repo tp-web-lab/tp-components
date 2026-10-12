@@ -2,6 +2,7 @@ import { promises as fs } from "node:fs";
 import path, { resolve } from "node:path";
 import { glob } from "glob";
 import type { PreRenderedChunk } from "rolldown";
+import { searchForWorkspaceRoot } from "vite";
 import { defineConfig } from "vitest/config";
 // import dts from "unplugin-dts/vite";
 import { componentApiPlugin } from "./scripts/component-api-plugin.js";
@@ -116,6 +117,16 @@ const entries = Object.fromEntries(
 	}),
 );
 
+// Linked @tp packages can live outside this checkout's detected workspace.
+const linkedPackageRoots = await Promise.all(
+	[
+		"@tp/tp-asciidoc",
+		"@tp/tp-markdown",
+		"@tp/tp-restructuredtext",
+		"@tp/tp-utilities",
+	].map((name) => fs.realpath(resolve(__dirname, "node_modules", name))),
+);
+
 export default defineConfig({
 	root: resolve(__dirname),
 	plugins: [
@@ -185,6 +196,9 @@ export default defineConfig({
 		exclude: ["node:fs/promises", "node:path"],
 	},
 	server: {
+		fs: {
+			allow: [searchForWorkspaceRoot(__dirname), ...linkedPackageRoots],
+		},
 		host: "127.0.0.1",
 		open: "index.html",
 		port: 4173,

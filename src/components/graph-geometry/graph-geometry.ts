@@ -21,6 +21,14 @@
  * @summary CodeMirror-based code editor component.
  */
 /**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-save-image
+ * @summary Downloads an anchored image as SVG, PNG or WebP.
+ */
+/**
  * @tp-dependency tp-textfield
  * @summary Single-line and automatically growing multiline text field.
  */
@@ -41,12 +49,21 @@ import {
 	type GeometryPoint,
 	type GeometryResult,
 	intersections,
+	isLinear,
 	MEDIATRIX_CONSTRUCTION,
 	parameterAt,
 	parseGeometry,
 	serializeGeometry,
 } from "./geometry.js";
 import style from "./graph-geometry.css?inline";
+import "../save-image/save-image.js";
+import "../dropdown/dropdown.js";
+import type { TpDropdown } from "../dropdown/dropdown.js";
+import {
+	GEOMETRY_COLORS,
+	GEOMETRY_STYLES,
+	type GeometryStroke,
+} from "./geometry.js";
 
 export type {
 	GeometryObject,
@@ -74,28 +91,58 @@ const TOOLS = {
 	on: "Point on object",
 	segment: "Segment",
 	line: "Line",
+	fixedSegment: "Segment · length",
+	ray: "Ray",
+	vector: "Vector",
+	sector: "Angular sector",
+	comment: "Comment",
 	circle: "Circle · radius",
 	through: "Circle · through point",
 	arc: "Arc",
 	intersection: "Intersection",
 };
-type Tool = keyof typeof TOOLS;
+const BUILT_IN_TOOLS = {
+	midpoint: "Midpoint",
+	perpendicular: "Perpendicular",
+	parallel: "Parallel",
+	perpendicularBisector: "Perpendicular bisector · direct",
+	bisector: "Angle bisector",
+	tangent: "Tangents",
+};
+type Tool = keyof typeof TOOLS | keyof typeof BUILT_IN_TOOLS;
 const HINTS: Record<Tool, string> = {
 	pan: "Drag anywhere to move the whole figure. Scroll in either direction; arrow keys pan the view.",
 	move: "Drag a point to move it, or drag empty space to move the whole view. Scroll to pan; Shift+scroll pans horizontally.",
 	point: "Click the drawing to place a free point.",
-	on: "Click a line, segment, circle or arc to place a point attached to it.",
+	on: "Click a line, segment, ray, vector, circle or arc to place a point attached to it.",
 	segment: "Select two existing points.",
 	line: "Select two existing points.",
+	fixedSegment:
+		"Enter a positive length, then select the origin and a point giving its direction. The endpoint stays at the chosen length.",
+	ray: "Select the origin, then a point giving the ray direction.",
+	vector: "Select the starting point, then the endpoint.",
+	sector:
+		"Set start/end angles, then select a circle to draw its angular sector.",
+	comment: "Enter comment text, then select its anchor point.",
+	midpoint: "Select a segment to construct its midpoint.",
+	perpendicular: "Select a point, then a line, segment, ray or vector.",
+	parallel: "Select a point, then a line, segment, ray or vector.",
+	perpendicularBisector:
+		"Select a segment to construct its perpendicular bisector directly.",
+	bisector:
+		"Select three points: first arm, vertex, second arm. The internal angle bisector follows them.",
+	tangent:
+		"Select a point, then a circle. Creates two tangents outside, one on the circle, none inside.",
 	circle: "Enter a positive radius or distance(A, B), then select the centre.",
 	through: "Select the centre, then a point on the circle.",
 	arc: "Set start/end angles, then select a circle. Its outline will be hidden; its dependencies remain.",
-	intersection: "Select two lines, segments, circles or arcs.",
+	intersection: "Select two lines, segments, rays, vectors, circles or arcs.",
 };
 /**
  * @summary Constructs dynamic figures with a graduated ruler and compass.
  * @tagname tp-graph-geometry
  * @attr {string} src = "" - URL of a text file containing construction commands.
+ * @attr {boolean} built-in = false - Offers direct midpoint, perpendicular, parallel, perpendicular bisector, angle bisector and tangent tools.
  * @attr {boolean} grid = false - Shows a light grid without axes or graduations.
  * @attr {boolean} readonly = false - Prevents changes to the construction.
  * @event tp-geometry-change Fired after a construction change; detail contains source and undefined object names.
@@ -111,6 +158,8 @@ const HINTS: Record<Tool, string> = {
  * <tp-graph-geometry></tp-graph-geometry>
  */
 export class TpGraphGeometry extends TpBase {
+	private static nextId = 0;
+	private readonly controlId = `tp-geometry-${++TpGraphGeometry.nextId}`;
 	private objects: GeometryObject[] = [];
 	private result: GeometryResult = evaluateGeometry([]);
 	private initialized = false;
@@ -131,7 +180,7 @@ export class TpGraphGeometry extends TpBase {
 	private suppressCanvasClick = false;
 	private drag: { id: string; before: string; pointer: number } | null = null;
 	public static get observedAttributes(): string[] {
-		return ["readonly", "grid", "src"];
+		return ["readonly", "grid", "src", "built-in"];
 	}
 	public get src(): string {
 		return this.getAttribute("src") ?? "";
@@ -151,6 +200,12 @@ export class TpGraphGeometry extends TpBase {
 	}
 	public set grid(value: boolean) {
 		this.toggleAttribute("grid", value);
+	}
+	public get builtIn(): boolean {
+		return this.hasAttribute("built-in");
+	}
+	public set builtIn(value: boolean) {
+		this.toggleAttribute("built-in", value);
 	}
 	public get readonly(): boolean {
 		return this.hasAttribute("readonly");
@@ -342,6 +397,106 @@ export class TpGraphGeometry extends TpBase {
 		const status = this.querySelector("[data-status]");
 		if (status) status.textContent = message;
 	}
+	private readonly onExportError = (event: Event): void => {
+		this.report(
+			`Image export failed: ${String((event as CustomEvent<{ error: unknown }>).detail.error)}`,
+		);
+	};
+	private changeAppearance(stroke?: string, color?: string): void {
+		if (this.readonly || !this.selected) return;
+		const id = this.selected;
+		const next = parseGeometry(this.value);
+		const object = next.find((item) => item.id === id);
+		if (!object) return;
+		if (
+			stroke !== undefined &&
+			(GEOMETRY_STYLES as readonly string[]).includes(stroke)
+		) {
+			object.hidden = stroke === "hidden";
+			if (stroke !== "hidden") object.stroke = stroke as GeometryStroke;
+		}
+		if (color !== undefined && (!color || GEOMETRY_COLORS.includes(color))) {
+			if (color) object.color = color;
+			else delete object.color;
+		}
+		this.setConstruction(serializeGeometry(next));
+		this.selected = id;
+		this.draw();
+	}
+	/** Exports the current view as a standalone SVG, with resolved colors and no editing controls. */
+	public exportSvg(): string {
+		const canvas = this.querySelector<SVGSVGElement>(
+			"svg[data-geometry-canvas]",
+		);
+		if (!canvas) throw new Error("The construction is not ready.");
+		const clone = canvas.cloneNode(true) as SVGSVGElement;
+		clone.querySelectorAll(".shape-hit, .point-hit").forEach((element) => {
+			element.remove();
+		});
+		clone.querySelectorAll(".is-selected").forEach((element) => {
+			element.classList.remove("is-selected");
+		});
+		clone.style.cssText =
+			"position:fixed;left:-10000px;visibility:hidden;pointer-events:none";
+		(canvas.parentElement ?? this).append(clone);
+		try {
+			const properties = [
+				"fill",
+				"fill-opacity",
+				"stroke",
+				"stroke-width",
+				"stroke-opacity",
+				"stroke-dasharray",
+				"stroke-linecap",
+				"stroke-linejoin",
+				"font-family",
+				"font-size",
+				"font-weight",
+				"paint-order",
+				"opacity",
+			];
+			for (const element of clone.querySelectorAll<SVGElement>("*")) {
+				const computed = getComputedStyle(element);
+				const values = properties.map((name) => [
+					name,
+					computed.getPropertyValue(name),
+				]);
+				for (const [name, value] of values)
+					if (name && value) element.style.setProperty(name, value);
+			}
+			const background = document.createElementNS(
+				"http://www.w3.org/2000/svg",
+				"rect",
+			);
+			background.setAttribute("width", "900");
+			background.setAttribute("height", "560");
+			background.setAttribute(
+				"fill",
+				getComputedStyle(canvas.parentElement ?? this).backgroundColor,
+			);
+			clone.prepend(background);
+			for (const element of [clone, ...clone.querySelectorAll("*")]) {
+				for (const attribute of [...element.attributes])
+					if (
+						attribute.name.startsWith("data-") ||
+						attribute.name.startsWith("aria-") ||
+						["class", "tabindex", "role", "id"].includes(attribute.name)
+					)
+						element.removeAttribute(attribute.name);
+			}
+			clone.removeAttribute("style");
+			clone.setAttributeNS(
+				"http://www.w3.org/2000/xmlns/",
+				"xmlns",
+				"http://www.w3.org/2000/svg",
+			);
+			clone.setAttribute("width", "900");
+			clone.setAttribute("height", "560");
+			return new XMLSerializer().serializeToString(clone);
+		} finally {
+			clone.remove();
+		}
+	}
 	private name(prefix: string): string {
 		let i = 1;
 		let id = prefix;
@@ -360,19 +515,20 @@ export class TpGraphGeometry extends TpBase {
 	}
 	private render(): void {
 		this.objectListMarkup = "";
-		this.innerHTML = `<div class="tp-geometry-header"><div><strong>Ruler & compass</strong><span>Geometric constructions</span></div><tp-button-group><tp-button type="button" outlined data-geometry-control data-action="example">Perpendicular bisector</tp-button><tp-button type="button" outlined data-geometry-control data-action="clear">New construction</tp-button></tp-button-group></div>
+		this.setAttribute("data-geometry-export", this.controlId);
+		this.innerHTML = `<div class="tp-geometry-header"><div><strong>Ruler & compass</strong><span>Geometric constructions</span></div><tp-save-image anchor='[data-geometry-export="${this.controlId}"]' filename="geometry"></tp-save-image><tp-button-group><tp-button type="button" outlined data-geometry-control data-action="example">Perpendicular bisector</tp-button><tp-button type="button" outlined data-geometry-control data-action="clear">New construction</tp-button></tp-button-group></div>
       <tp-button-group class="tp-geometry-tools" aria-label="Construction tools">${Object.entries(
-				TOOLS,
+				{ ...TOOLS, ...(this.builtIn ? BUILT_IN_TOOLS : {}) },
 			)
 				.map(
 					([id, label]) =>
 						`<tp-button type="button" outlined data-geometry-control data-tool="${id}" aria-pressed="${id === this.tool}">${label}</tp-button>`,
 				)
 				.join("")}</tp-button-group>
-      <div class="tp-geometry-parameters"><tp-textfield data-field="radius" label="Radius / length" value="5"></tp-textfield><tp-textfield data-field="start" label="Start angle (°)" value="20"></tp-textfield><tp-textfield data-field="end" label="End angle (°)" value="100"></tp-textfield><span>Angles turn counterclockwise.</span></div>
+      <div class="tp-geometry-parameters"><tp-textfield data-field="radius" label="Radius / length" value="5"></tp-textfield><tp-textfield data-field="start" label="Start angle (°)" value="20"></tp-textfield><tp-textfield data-field="end" label="End angle (°)" value="100"></tp-textfield><tp-textfield data-field="comment" label="Comment text" value="Comment"></tp-textfield><span>Angles turn counterclockwise.</span></div>
       <p class="tp-geometry-hint" data-hint>${HINTS[this.tool]}</p>
       <div class="tp-geometry-workspace"><div class="tp-geometry-board"><svg data-geometry-canvas viewBox="0 0 900 560" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg><div class="tp-geometry-view"><tp-button type="button" outlined data-geometry-control data-action="undo">Undo</tp-button><tp-button type="button" outlined data-geometry-control data-action="redo">Redo</tp-button><tp-button type="button" outlined data-geometry-control data-action="out" aria-label="Zoom out">−</tp-button><tp-button type="button" outlined data-geometry-control data-action="in" aria-label="Zoom in">+</tp-button><tp-button type="button" outlined data-geometry-control data-action="fit">Fit</tp-button><tp-button type="button" outlined data-geometry-control data-action="grid" aria-pressed="${this.grid}">Grid</tp-button></div></div>
-      <aside><h3>Construction objects</h3><div data-objects></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Intersections are calculated.</p></aside></div>
+      <aside><h3>Construction objects</h3><p data-appearance-label>Select an object in Move mode to change its appearance.</p><div class="tp-geometry-appearance"><tp-button id="${this.controlId}-style" outlined data-geometry-control data-action="style-menu" aria-haspopup="menu"><span data-style-label>Style · solid</span></tp-button><tp-dropdown anchor="#${this.controlId}-style" outside-click data-style-menu><ul>${GEOMETRY_STYLES.map((value) => `<li data-stroke="${value}">${value}${value === "solid" ? " (default)" : ""}</li>`).join("")}</ul></tp-dropdown><tp-button id="${this.controlId}-color" outlined data-geometry-control data-action="color-menu" aria-haspopup="menu"><span data-color-label>Color · automatic</span></tp-button><tp-dropdown anchor="#${this.controlId}-color" outside-click data-color-menu><ul><li data-color="">Automatic</li>${GEOMETRY_COLORS.map((value) => `<li data-color="${value}"><span class="tp-geometry-swatch tp-${value}" aria-hidden="true"></span>${value}</li>`).join("")}</ul></tp-dropdown></div><div data-objects></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Constructed points are calculated.</p></aside></div>
       <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source"><dl><dt>Construction source</dt><dd><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor><tp-button type="button" outlined data-geometry-control data-action="apply">Apply construction</tp-button></dd></dl></tp-accordion>`;
 		if (this.readonly)
 			for (const button of this.querySelectorAll<TpButton>(
@@ -383,7 +539,41 @@ export class TpGraphGeometry extends TpBase {
 			"hidden",
 			this.readonly,
 		);
+		const defaultExport = this.querySelector(
+			'tp-save-image [data-format="svg"]',
+		);
+		if (defaultExport) defaultExport.textContent = "SVG (default)";
+		this.addEventListener("tp-save-image-error", this.onExportError);
+		for (const kind of ["style", "color"])
+			this.querySelector(`[data-${kind}-menu]`)?.addEventListener(
+				"tp-dropdown-toggle",
+				() => {
+					this.querySelector(`[data-action="${kind}-menu"]`)?.setAttribute(
+						"aria-expanded",
+						String(
+							this.querySelector(`[data-${kind}-menu]`)?.hasAttribute("open"),
+						),
+					);
+					this.syncButtonControls();
+				},
+			);
+		for (const item of this.querySelectorAll<HTMLElement>(
+			"[data-stroke], [data-color]",
+		))
+			item.addEventListener("keydown", (event) => {
+				if (event.key === "Enter" || event.key === " ") {
+					event.preventDefault();
+					this.changeAppearance(item.dataset.stroke, item.dataset.color);
+				}
+			});
 		this.onclick = (event) => {
+			const choice = (event.target as Element).closest<HTMLElement>(
+				"[data-stroke], [data-color]",
+			);
+			if (choice && this.contains(choice)) {
+				this.changeAppearance(choice.dataset.stroke, choice.dataset.color);
+				return;
+			}
 			const button = (event.target as Element).closest<TpButton>(
 				"tp-button[data-geometry-control]",
 			);
@@ -398,6 +588,11 @@ export class TpGraphGeometry extends TpBase {
 			}
 			if (button.dataset.object) this.selectObject(button.dataset.object);
 			const action = button.dataset.action;
+			if (action === "style-menu" || action === "color-menu") {
+				this.querySelector<TpDropdown>(
+					action === "style-menu" ? "[data-style-menu]" : "[data-color-menu]",
+				)?.toggle();
+			}
 			if (action === "in" || action === "out") {
 				this.scale = Math.max(
 					3,
@@ -638,7 +833,12 @@ export class TpGraphGeometry extends TpBase {
 				const native =
 					button.querySelector<HTMLButtonElement>(":scope > button");
 				if (!native) continue;
-				for (const name of ["aria-pressed", "aria-label"]) {
+				for (const name of [
+					"aria-pressed",
+					"aria-label",
+					"aria-haspopup",
+					"aria-expanded",
+				]) {
 					const value = button.getAttribute(name);
 					if (value !== null) native.setAttribute(name, value);
 					else native.removeAttribute(name);
@@ -675,9 +875,11 @@ export class TpGraphGeometry extends TpBase {
 		const p =
 			value?.kind === "point"
 				? value.point
-				: value?.kind === "circle" || value?.kind === "arc"
+				: value?.kind === "circle" ||
+						value?.kind === "arc" ||
+						value?.kind === "sector"
 					? { x: value.center.x + value.radius, y: value.center.y }
-					: value?.kind === "line" || value?.kind === "segment"
+					: value && isLinear(value)
 						? value.first
 						: { x: 0, y: 0 };
 		try {
@@ -697,16 +899,16 @@ export class TpGraphGeometry extends TpBase {
 		if (this.tool === "on") {
 			const t = parameterAt(value, p);
 			this.appendConstruction(
-				`point ${this.pointName()} = on(${id}, ${value.kind === "line" || value.kind === "segment" ? `t=${t}` : `angle=${(t * 180) / Math.PI}deg`})`,
+				`point ${this.pointName()} = on(${id}, ${isLinear(value) ? `t=${t}` : `angle=${(t * 180) / Math.PI}deg`})`,
 			);
 			return;
 		}
-		if (this.tool === "arc") {
+		if (this.tool === "arc" || this.tool === "sector") {
 			if (value.kind !== "circle") throw new Error("Select a circle.");
-			const source = `${this.value}\narc ${this.name("arc")} = arc(${id}, start=${this.field("start")}deg, end=${this.field("end")}deg)`;
+			const source = `${this.value}\n${this.tool} ${this.name(this.tool)} = ${this.tool}(${id}, start=${this.field("start")}deg, end=${this.field("end")}deg)`;
 			const next = parseGeometry(source);
 			const support = next.find((o) => o.id === id);
-			if (support) support.hidden = true;
+			if (support && this.tool === "arc") support.hidden = true;
 			this.setConstruction(serializeGeometry(next));
 			return;
 		}
@@ -717,24 +919,96 @@ export class TpGraphGeometry extends TpBase {
 			);
 			return;
 		}
-		if (this.tool !== "intersection" && value.kind !== "point")
-			throw new Error("Select a point.");
-		if (this.tool === "intersection" && value.kind === "point")
-			throw new Error("Select a line, segment, circle or arc.");
+		if (this.tool === "comment") {
+			if (value.kind !== "point") throw new Error("Select an anchor point.");
+			this.appendConstruction(
+				`comment ${this.name("note")} = comment(${id}, ${JSON.stringify(this.field("comment"))})`,
+			);
+			return;
+		}
+		if (this.tool === "midpoint" || this.tool === "perpendicularBisector") {
+			if (value.kind !== "segment") throw new Error("Select a segment.");
+			this.appendConstruction(
+				`${this.tool === "midpoint" ? "point" : "line"} ${this.name(this.tool === "midpoint" ? "M" : "m")} = ${this.tool}(${id})`,
+			);
+			return;
+		}
+		if (
+			this.tool === "parallel" ||
+			this.tool === "perpendicular" ||
+			this.tool === "tangent"
+		) {
+			if (!this.pending.length && value.kind !== "point")
+				throw new Error("Select a point first.");
+			if (
+				this.pending.length &&
+				(this.tool === "tangent" ? value.kind !== "circle" : !isLinear(value))
+			)
+				throw new Error(
+					this.tool === "tangent"
+						? "Select a circle."
+						: "Select a linear support.",
+				);
+		} else if (this.tool === "intersection") {
+			if (!isLinear(value) && value.kind !== "circle" && value.kind !== "arc")
+				throw new Error("Select a line, segment, ray, vector, circle or arc.");
+		} else if (value.kind !== "point") throw new Error("Select a point.");
 		if (this.pending.includes(id))
 			throw new Error("Select two different objects.");
 		this.pending.push(id);
-		if (this.pending.length < 2) {
+		if (this.pending.length < (this.tool === "bisector" ? 3 : 2)) {
 			this.updateTool();
 			return;
 		}
-		const [first = "", second = ""] = this.pending;
+		const [first = "", second = "", third = ""] = this.pending;
 		this.pending = [];
-		if (this.tool === "line" || this.tool === "segment")
+		if (
+			this.tool === "line" ||
+			this.tool === "segment" ||
+			this.tool === "fixedSegment" ||
+			this.tool === "ray" ||
+			this.tool === "vector"
+		) {
+			const kind = this.tool === "fixedSegment" ? "segment" : this.tool;
 			this.appendConstruction(
-				`${this.tool} ${this.name(this.tool === "line" ? "d" : "s")} = ${this.tool}(${first}, ${second})`,
+				`${kind} ${this.name(kind === "line" ? "d" : kind === "vector" ? "v" : kind === "ray" ? "r" : "s")} = ${kind}(${first}, ${second}${this.tool === "fixedSegment" ? `, length=${this.field("radius")}` : ""})`,
 			);
-		else if (this.tool === "through")
+		} else if (this.tool === "parallel" || this.tool === "perpendicular") {
+			this.appendConstruction(
+				`line ${this.name("d")} = ${this.tool}(${first}, ${second})`,
+			);
+		} else if (this.tool === "bisector") {
+			this.appendConstruction(
+				`line ${this.name("b")} = bisector(${first}, ${second}, ${third})`,
+			);
+		} else if (this.tool === "tangent") {
+			const source = `${this.value}\nline ${this.name("t")} = tangent(${first}, ${second}, branch=0)`;
+			const next = parseGeometry(source);
+			const diagnostics = evaluateGeometry(next);
+			const error = diagnostics.errors.get(this.name("t"));
+			if (error) throw new Error(error);
+			const p = this.result.values.get(first);
+			const c = this.result.values.get(second);
+			if (
+				p?.kind === "point" &&
+				c?.kind === "circle" &&
+				distance(p.point, c.center) > c.radius + 1e-9
+			) {
+				let i = 1;
+				while (next.some((o) => o.id === `t${i}`)) i++;
+				next.push({
+					id: `t${i}`,
+					hidden: false,
+					definition: {
+						kind: "tangent",
+						point: first,
+						circle: second,
+						branch: 1,
+					},
+				});
+			}
+			this.setConstruction(serializeGeometry(next));
+		} else if (this.tool === "through")
 			this.appendConstruction(
 				`circle ${this.name("c")} = circle(${first}, through=${second})`,
 			);
@@ -810,14 +1084,15 @@ export class TpGraphGeometry extends TpBase {
 			if (object.hidden) continue;
 			const v = this.result.values.get(object.id);
 			if (!v) continue;
-			if (v.kind === "point") points.push(v.point);
-			if (v.kind === "segment") points.push(v.first, v.second);
+			if (v.kind === "point" || v.kind === "comment") points.push(v.point);
+			if (isLinear(v)) points.push(v.first, v.second);
+			if (v.kind === "sector") points.push(v.center);
 			if (v.kind === "circle")
 				points.push(
 					{ x: v.center.x - v.radius, y: v.center.y - v.radius },
 					{ x: v.center.x + v.radius, y: v.center.y + v.radius },
 				);
-			if (v.kind === "arc")
+			if (v.kind === "arc" || v.kind === "sector")
 				for (let i = 0; i <= 32; i++)
 					points.push({
 						x: v.center.x + v.radius * Math.cos(v.start + (v.sweep * i) / 32),
@@ -856,7 +1131,7 @@ export class TpGraphGeometry extends TpBase {
 		for (const object of this.objects) {
 			const v = this.result.values.get(object.id);
 			if (!v || object.hidden) continue;
-			const attributes = `data-id="${object.id}" class="tp-geometry-shape ${this.selected === object.id || this.pending.includes(object.id) ? "is-selected" : ""}"`;
+			const attributes = `data-id="${object.id}" class="tp-geometry-shape ${object.color ? `has-color tp-${object.color}` : ""} stroke-${object.stroke ?? "solid"} ${this.selected === object.id || this.pending.includes(object.id) ? "is-selected" : ""}"`;
 			let shape = "";
 			if (v.kind === "point") {
 				points.push(
@@ -864,18 +1139,30 @@ export class TpGraphGeometry extends TpBase {
 				);
 				continue;
 			}
-			if (v.kind === "line" || v.kind === "segment") {
+			if (isLinear(v)) {
 				const length = distance(v.first, v.second);
 				const factor =
-					v.kind === "line"
+					v.kind === "line" || v.kind === "ray"
 						? (1800 / this.scale + distance(v.first, this.center)) / length
 						: 0;
 				const dx = v.second.x - v.first.x;
 				const dy = v.second.y - v.first.y;
-				shape = `<line x1="${x(v.first.x - dx * factor)}" y1="${y(v.first.y - dy * factor)}" x2="${x(v.second.x + dx * factor)}" y2="${y(v.second.y + dy * factor)}"/>`;
+				shape = `<line x1="${x(v.first.x - dx * (v.kind === "line" ? factor : 0))}" y1="${y(v.first.y - dy * (v.kind === "line" ? factor : 0))}" x2="${x(v.second.x + dx * factor)}" y2="${y(v.second.y + dy * factor)}"/>`;
+				if (v.kind === "vector") {
+					const ux = dx / length,
+						uy = -dy / length;
+					const ex = x(v.second.x),
+						ey = y(v.second.y);
+					shape += `<path d="M ${ex - 12 * ux + 5 * uy} ${ey - 12 * uy - 5 * ux} L ${ex} ${ey} L ${ex - 12 * ux - 5 * uy} ${ey - 12 * uy + 5 * ux}"/>`;
+				}
+			} else if (v.kind === "comment") {
+				points.push(
+					`<g ${attributes}><text x="${x(v.point.x) + 12}" y="${y(v.point.y) + 24}">${escapeHtml(v.text)}</text><title>${object.id}</title></g>`,
+				);
+				continue;
 			} else if (v.kind === "circle")
 				shape = `<circle cx="${x(v.center.x)}" cy="${y(v.center.y)}" r="${v.radius * this.scale}"/>`;
-			else if (v.kind === "arc") {
+			else if (v.kind === "arc" || v.kind === "sector") {
 				const start = {
 					x: v.center.x + v.radius * Math.cos(v.start),
 					y: v.center.y + v.radius * Math.sin(v.start),
@@ -884,7 +1171,7 @@ export class TpGraphGeometry extends TpBase {
 					x: v.center.x + v.radius * Math.cos(v.start + v.sweep),
 					y: v.center.y + v.radius * Math.sin(v.start + v.sweep),
 				};
-				shape = `<path d="M ${x(start.x)} ${y(start.y)} A ${v.radius * this.scale} ${v.radius * this.scale} 0 ${Math.abs(v.sweep) > Math.PI ? 1 : 0} ${v.sweep > 0 ? 0 : 1} ${x(end.x)} ${y(end.y)}"/>`;
+				shape = `<path d="${v.kind === "sector" ? `M ${x(v.center.x)} ${y(v.center.y)} L` : "M"} ${x(start.x)} ${y(start.y)} A ${v.radius * this.scale} ${v.radius * this.scale} 0 ${Math.abs(v.sweep) > Math.PI ? 1 : 0} ${v.sweep > 0 ? 0 : 1} ${x(end.x)} ${y(end.y)}${v.kind === "sector" ? " Z" : ""}"/>`;
 			}
 			shapes.push(
 				`<g ${attributes}><g class="shape-hit">${shape}</g><g class="shape-ink ${v.kind}">${shape}</g><title>${object.id}</title></g>`,
@@ -928,6 +1215,33 @@ export class TpGraphGeometry extends TpBase {
 				this.objectListMarkup = markup;
 			}
 		}
+		const selected = this.objects.find((object) => object.id === this.selected);
+		for (const action of ["style", "color"] as const) {
+			const button = this.querySelector<TpButton>(
+				`[data-action="${action}-menu"]`,
+			);
+			if (button) {
+				button.disabled = this.readonly || !selected;
+				const label = button.querySelector(`[data-${action}-label]`);
+				if (label)
+					label.textContent =
+						action === "style"
+							? `Style · ${selected?.hidden ? "hidden" : (selected?.stroke ?? "solid")}`
+							: `Color · ${selected?.color ?? "automatic"}`;
+				button.setAttribute(
+					"aria-expanded",
+					String(
+						this.querySelector(`[data-${action}-menu]`)?.hasAttribute("open") ??
+							false,
+					),
+				);
+			}
+		}
+		const appearanceLabel = this.querySelector("[data-appearance-label]");
+		if (appearanceLabel)
+			appearanceLabel.textContent = selected
+				? `Appearance of ${selected.id}`
+				: "Select an object in Move mode to change its appearance.";
 		this.syncButtonControls();
 		for (const action of ["undo", "redo", "delete"]) {
 			const button = this.querySelector<TpButton>(`[data-action="${action}"]`);

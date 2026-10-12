@@ -10,7 +10,7 @@
 
 
       <tp-stack>
-      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>grid</li><li>readonly</li></ul></tp-checkbox-list>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>built-in</li><li>grid</li><li>readonly</li></ul></tp-checkbox-list>
       <tp-radio-list data-setting="src" label="src" label-position="top" orientation="horizontal" value="1"><ul><li>Default</li><li>file1</li><li>file2</li><li>file-unknown</li></ul></tp-radio-list>
       <tp-cluster></tp-cluster>
       <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
@@ -48,6 +48,62 @@
 
     <div role="example" label="From a file">
       <tp-graph-geometry src="/docs/components/graph-geometry/examples/circle.geometry"></tp-graph-geometry>
+    </div>
+
+    <div role="example" label="Ruler primitives">
+      <tp-graph-geometry grid="">
+      <script type="tp/geometry">
+      point A = (-4, 0)
+      point B = (0, 3)
+      point O = (4, 0)
+      segment s = segment(A, B)
+      segment fixed = segment(A, B, length=3)
+      point E = on(fixed, t=1)
+      line d = line(B, O)
+      ray r = ray(A, O)
+      vector v = vector(O, B)
+      circle c = circle(O, 2)
+      circle through = circle(A, through=B) hidden
+      sector w = sector(c, start=20deg, end=100deg)
+      comment note = comment(E, "AE = 3 units")
+      </script>
+      </tp-graph-geometry>
+    </div>
+
+    <div role="example" label="Direct constructions">
+      <tp-graph-geometry built-in="" grid="">
+      <script type="tp/geometry">
+      point A = (-4, -2)
+      point B = (2, -2)
+      point O = (0, 1)
+      point P = (5, 4)
+      segment s = segment(A, B)
+      circle c = circle(O, 2)
+      point M = midpoint(s)
+      line m = perpendicularBisector(s)
+      line p = parallel(O, s)
+      line q = perpendicular(A, s)
+      line b = bisector(A, O, B)
+      line t0 = tangent(P, c, branch=0)
+      line t1 = tangent(P, c, branch=1)
+      comment note = comment(P, "Move P")
+      </script>
+      </tp-graph-geometry>
+    </div>
+
+    <div role="example" label="Styles and export">
+      <tp-graph-geometry grid>
+      <script type="tp/geometry">
+      point O = (0, 0)
+      point A = (-3, -2)
+      point B = (3, 2)
+      segment s = segment(A, B) style=dashed color=blue
+      circle c = circle(O, 3) style=dotted color=red
+      vector v = vector(O, B) color=green
+      circle hiddenCircle = circle(A, 2) style=hidden color=violet
+      comment note = comment(A, "Select an object to style it") color=blue
+      </script>
+      </tp-graph-geometry>
     </div>
   </template>
 </tp-html-viewer>

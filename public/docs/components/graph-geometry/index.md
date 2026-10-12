@@ -2,7 +2,7 @@
 
 <tp-toc position="end" expand-all open brand></tp-toc>
 
-The custom `<tp-graph-geometry>` element implements dynamic ruler and compass constructions. Points, lines, segments, circles and arcs preserve their construction dependencies when a point moves. No equations or function plots are exposed.
+The custom `<tp-graph-geometry>` element implements dynamic ruler and compass constructions. Points, lines, segments, rays, vectors, circles, arcs, angular sectors and comments preserve their construction dependencies when a point moves. No equations or function plots are exposed.
 
 <tp-graph-geometry></tp-graph-geometry>
 
@@ -14,17 +14,27 @@ The custom `<tp-graph-geometry>` element implements dynamic ruler and compass co
 
 | Control or gesture | Result |
 | --- | --- |
-| Move | Drag a free point freely or slide an attached point along its support. Drag empty space to pan the whole drawing. Intersection points are calculated and cannot be dragged. |
+| Move | Drag a free point freely or slide an attached point along its support. Drag empty space to pan the whole drawing. Intersection and midpoint constructions are calculated and cannot be dragged. |
 | Pan view | Drag anywhere, including over a point, to move the entire view without changing the construction. Middle-button dragging also pans in any tool. |
 | Scroll / Shift + scroll | Scroll vertically or horizontally with the mouse wheel or trackpad. Shift + vertical scrolling pans horizontally. Scrolling outside the drawing still scrolls the page. |
 | Grid | Toggle a light grid that follows panning and zooming, with no axes, origin marker or graduations. The grid starts hidden and does not snap points. |
 | Point | Click the drawing to create a free point. |
-| Point on object | Click a line, segment, circle or arc to create a sliding point. |
-| Segment / Line | Select two existing points, either in the drawing or in the object list. |
+| Point on object | Click a line, segment, ray, vector, circle or arc to create a sliding point. |
+| Segment / Line / Ray / Vector | Select two existing points, either in the drawing or in the object list. For a ray or vector, select the origin first. |
+| Segment · length | Enter a positive numeric length in Radius / length, then select the origin and a direction point. The segment endpoint follows that direction at the imposed distance. |
+| Angular sector | Enter start and end angles, then select a circle. A filled sector includes the centre, both radii and the circular boundary. |
+| Comment | Enter Comment text and select its anchor point. The annotation follows that point. |
+| Midpoint / Perpendicular bisector · direct (`built-in`) | Select a segment to construct its midpoint or perpendicular bisector. |
+| Perpendicular / Parallel (`built-in`) | Select a point, then a line, segment, ray or vector. |
+| Angle bisector (`built-in`) | Select three points in order: first arm, vertex, second arm. Construct the internal angle bisector as a line. |
+| Tangents (`built-in`) | Select a point, then a circle. Create two tangents outside, one on the circumference, or announce that none exists inside. |
 | Circle · radius | Enter a positive radius or a transferred length such as `distance(A, B)`, then select the centre point. |
 | Circle · through point | Select the centre, then a point the circle must pass through. |
 | Arc | Enter start and end angles, then select the supporting circle. The circle outline is hidden; further arcs can use that circle via the object list. |
 | Intersection | Select two supports. All currently existing distinct intersections are created. |
+| Save image | Open the format menu and save the current view as SVG (default, first item), PNG or WebP. The export includes the visible grid, colors and stroke styles. |
+| Style | In Move mode, select an object and choose hidden, dotted, dashed or solid (default). Hidden objects remain available in the object list and keep their dependencies. |
+| Color | Choose a library palette color for the selected object, or Automatic to restore its normal color. |
 | Object list | Select an object, including a hidden supporting circle. With a construction tool active, use the object as input to the tool. |
 | Delete selected + dependents | Remove the selected object and its dependent constructions as one undoable action. |
 | Undo / Redo | Undo or redo one construction change or point movement. |
@@ -41,6 +51,9 @@ The custom `<tp-graph-geometry>` element implements dynamic ruler and compass co
 | Arrow keys on the drawing | In Pan view, pan by 40 drawing pixels. Otherwise move the selected free or attached point by 0.2 units before projection onto its support. |
 | Shift + arrow keys | In Pan view, pan by 8 drawing pixels. Otherwise use a smaller point step of 0.02 units. |
 | Escape on the drawing | Cancel the pending selection and return to Move. |
+| ArrowUp / ArrowDown, Home / End in a menu | Move between export formats, stroke styles or colors. |
+| Enter / Space in a menu | Save the chosen format or apply the selected style or color. |
+| Escape in a menu | Close the menu. |
 | Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
 
 ### Author directives
@@ -73,20 +86,65 @@ Coordinates only place free points initially. Lengths are construction units, in
 | `point A = (0, 0)` | Free point. |
 | `line d = line(A, B)` | Infinite line through two points. |
 | `segment s = segment(A, B)` | Finite segment. |
+| `segment s = segment(A, B, length=5)` | Segment starting at A, directed towards B, with fixed length 5. B sets the direction; the computed endpoint need not coincide with B. |
+| `ray r = ray(A, B)` | Ray starting at A and passing through B. |
+| `vector v = vector(A, B)` | Directed segment with an arrow at B. |
 | `circle c = circle(O, 5)` | Fixed radius of five units. |
 | `circle c = circle(O, through=A)` | Circle through A, following both O and A. |
 | `circle c = circle(O, distance(A, B))` | Transfer the current length AB. |
 | `point P = on(c, angle=30deg)` | Sliding point on a circle or arc. |
-| `point Q = on(d, t=0.5)` | Sliding point halfway along the defining points. A line allows any parameter; a segment clamps it to 0–1. |
+| `point Q = on(d, t=0.5)` | Sliding point halfway along the defining points. A line allows any parameter; a segment or vector clamps it to 0–1, and a ray clamps it to 0 or greater. Use `t=1` to create the endpoint of a fixed-length segment. |
 | `arc a = arc(c, start=20deg, end=100deg)` | Counterclockwise arc of a supporting circle. Add `direction=cw` for clockwise. |
 | `arc a = arc(c, start=40deg, end=80deg, relative-to=s)` | Arc oriented relative to the segment from its first point to its second point. |
-| `point I = intersection(a, b, branch=0)` | Dependent intersection of lines, segments, circles or arcs. |
+| `sector w = sector(c, start=20deg, end=100deg)` | Filled circular sector. Supports the same `direction` and `relative-to` options as an arc. |
+| `comment note = comment(A, "Length AB")` | Visible text attached to A. Double-quoted text supports escaped quotes (`\"`), commas and `#`. |
+| `point I = intersection(a, b, branch=0)` | Dependent intersection of lines, segments, rays, vectors, circles or arcs. |
 
-Append `hidden` to keep an object as a support without drawing it. Use one command per line; `#` starts a comment. Names begin with a Latin letter and may contain letters, digits and underscores. Forward references are accepted; duplicate names, unknown supports and dependency cycles are rejected. Source is normalized after changes, so comments are not retained.
+Append `hidden` to keep an object as a support without drawing it. Use one command per line; `#` outside quoted text starts a source comment. Names begin with a Latin letter and may contain letters, digits and underscores. Forward references are accepted; duplicate names, unknown supports and dependency cycles are rejected. Source is normalized after changes, so source comments are not retained; visible `comment` objects are retained.
 
 `branch=0` and `branch=1` retain their identities when clipping to arcs or segments. For two circles, branch 0 lies to the left of the direction from the first centre to the second; branch 1 lies to its right. For a line and a circle, branch 0 comes first along the line's defining direction. A pair of lines only has branch 0. At a tangency both circular branches occupy the same point; the mouse tool creates it once. Coincident supports do not define a unique intersection.
 
-Undefined constructions and their dependents are hidden and listed with a diagnostic. They reappear when their supports permit the construction again. Arcs have distinct start/end angles and span less than a full turn. Arc endpoints defined by named points, automatic labels for lengths, and equation plotting are not part of this initial version.
+Undefined constructions and their dependents are hidden and listed with a diagnostic. They reappear when their supports permit the construction again. Arcs and sectors have distinct start/end angles and span less than a full turn. Arc endpoints defined by named points, automatic labels for lengths, and equation plotting are not part of this initial version.
+
+### Appearance and image export
+
+In Move mode, select an object in the drawing or the object list. Its Style and Color menus edit that object. New objects start with a solid stroke and their normal automatic color. Hidden objects are still selectable in the list: choose solid, dotted or dashed to show them again. Changes are undoable, update the source and survive loading from `src`.
+
+Append appearance options after a construction command:
+
+```text
+segment AB = segment(A, B) style=dashed color=blue
+circle c = circle(O, 5) style=dotted color=red
+line d = line(A, B) style=hidden
+comment note = comment(A, "Reference point") color=green
+```
+
+`style` accepts `hidden`, `dotted`, `dashed` and `solid` (default). The legacy `hidden` suffix remains supported. Hidden objects keep their mathematical role; they are absent from the drawing and exported image. Dotted and dashed affect strokes, including point outlines; comments remain readable text. Omit `color` for Automatic. Palette names are the shared `tp-color` presets without the `tp-` prefix: default, red, orange, amber, yellow, lime, green, emerald, teal, glaz, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose, zinc, ivory and stone. The `default` palette color is distinct from Automatic, which restores the normal color for each object kind.
+
+Save image uses `tp-save-image` and its `tp-dropdown`, with SVG offered first as the default, followed by PNG and WebP. It saves the current 900 × 560 view, including its background and optional grid, with colors resolved independently of the page stylesheet. Pan, zoom or Fit before saving to choose the framing. Selection highlights, invisible hit areas, menus and editing controls are excluded. Image export remains available in readonly mode; appearance editing does not. These files are images, not editable construction descriptions: retain the Construction source text to reopen a construction later.
+
+### Direct construction tools
+
+Add the boolean `built-in` attribute to offer the six direct tools in the toolbar. Adding or removing it updates the toolbar immediately and preserves the construction. Its absence keeps the ruler-and-compass tools available. As with other boolean attributes, `built-in="false"` still enables it; remove the attribute to disable it. `readonly` prevents the use of these tools as well.
+
+```html
+<tp-graph-geometry built-in></tp-graph-geometry>
+```
+
+The following commands can be loaded from source or a file with or without `built-in`. The attribute controls which tools are offered, not which saved constructions can be interpreted.
+
+| Command | Meaning |
+| --- | --- |
+| `point M = midpoint(s)` | Midpoint of segment s, including a fixed-length segment. |
+| `line p = perpendicular(P, d)` | Perpendicular through P to a line, segment, ray or vector d. |
+| `line q = parallel(P, d)` | Parallel through P to the same kinds of support. |
+| `line m = perpendicularBisector(s)` | Perpendicular bisector of segment s. |
+| `line b = bisector(A, O, B)` | Line bisecting the internal angle AOB, with vertex O. |
+| `line t = tangent(P, c, branch=0)` | Tangent from P to circle c; branch 1 selects the other tangent. |
+
+All these constructions follow their supports. Tangent branch 0 touches the circle to the left of the direction from its centre to P; branch 1 touches it to the right. At the circumference, both branches define the same line. Inside the circle they are undefined and reappear when P moves outside again. The Tangents tool creates all currently distinct tangents as one undoable action. A zero-length angle arm leaves the internal angle bisector undefined. A straight angle produces the perpendicular line through its vertex. Coincident points leave lines, rays, vectors and segments undefined until their direction becomes defined again.
+
+A sector is a filled annotation of part of a circle: attach points and construct intersections on its supporting circle or a matching arc. A comment is plain text, never HTML, and follows its anchor point with a fixed screen offset. Lengths and radii are numbers (or transferred distances for circles); there are no symbolic equations.
 
 ### Perpendicular bisector
 
@@ -109,6 +167,15 @@ Arc only
 
 From a file
 : Load a construction from a local text file, then move O or slide P along the circle. The file uses the same commands as the construction editor.
+
+Ruler primitives
+: Move A or B to compare a free segment with a fixed-length segment, a ray and a vector. The sector and comment follow their supports; use the toolbar to add another construction.
+
+Direct constructions
+: Use the extra built-in tools to add midpoints, perpendiculars, parallels, bisectors and tangents. Drag P inside and outside the circle to see its tangents disappear and reappear.
+
+Styles and export
+: Select an object in Move mode and change its stroke style or library color. Reveal the hidden circle from the object list, then use Save image to export the current view as SVG, PNG or WebP.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
@@ -137,6 +204,7 @@ Set `value` or call `setConstruction(source)` to replace a construction atomical
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
+  | <code>built-in</code> | <code>boolean</code> | <code>false</code> | Offers direct midpoint, perpendicular, parallel, perpendicular bisector, angle bisector and tangent tools. |
   | <code>grid</code> | <code>boolean</code> | <code>false</code> | Shows a light grid without axes or graduations. |
   | <code>readonly</code> | <code>boolean</code> | <code>false</code> | Prevents changes to the construction. |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a text file containing construction commands. |
@@ -146,6 +214,7 @@ Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
   | <code>analyze</code> | <code>analyze(): GeometryResult</code> | Returns a detached snapshot of computed objects and undefined-object diagnostics. |
+  | <code>exportSvg</code> | <code>exportSvg(): string</code> | Exports the current view as a standalone SVG, with resolved colors and no editing controls. |
   | <code>redo</code> | <code>redo(): void</code> | Redoes one construction change. |
   | <code>removeObject</code> | <code>removeObject(id: string): void</code> | Removes an object and every construction depending on it, as one undoable action. |
   | <code>setConstruction</code> | <code>setConstruction(source: string): void</code> | Atomically replaces the construction; invalid source leaves the previous figure intact. |
@@ -170,6 +239,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-geometry.TpGraphGeometry.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 ### Imports
 
@@ -226,6 +296,14 @@ All tp-components used by `<tp-graph-geometry>` are loaded automatically by this
 @summary CodeMirror-based code editor component.
 -->
 <!--
+@tp-dependency tp-dropdown
+@summary Dropdown menu component.
+-->
+<!--
+@tp-dependency tp-save-image
+@summary Downloads an anchored image as SVG, PNG or WebP.
+-->
+<!--
 @tp-dependency tp-textfield
 @summary Single-line and automatically growing multiline text field.
 -->
@@ -235,6 +313,8 @@ All tp-components used by `<tp-graph-geometry>` are loaded automatically by this
 - [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
 - [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
 - [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
+- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
+- [`<tp-save-image>`](../save-image/index.md) : Downloads an anchored image as SVG, PNG or WebP.
 - [`<tp-textfield>`](../textfield/index.md) : Single-line and automatically growing multiline text field.
 
 ### External

@@ -22,6 +22,8 @@
                :orientation: horizontal
                :value:
 
+               - built-in
+
                - grid
 
                - readonly
@@ -110,3 +112,66 @@
 
          .. tp-graph-geometry::
             :src: /docs/components/graph-geometry/examples/circle.geometry
+
+      .. example:: Ruler primitives
+
+         .. tp-graph-geometry::
+            :grid:
+
+            .. script::
+               :type: tp/geometry
+
+               point A = (-4, 0)
+               point B = (0, 3)
+               point O = (4, 0)
+               segment s = segment(A, B)
+               segment fixed = segment(A, B, length=3)
+               point E = on(fixed, t=1)
+               line d = line(B, O)
+               ray r = ray(A, O)
+               vector v = vector(O, B)
+               circle c = circle(O, 2)
+               circle through = circle(A, through=B) hidden
+               sector w = sector(c, start=20deg, end=100deg)
+               comment note = comment(E, "AE = 3 units")
+
+      .. example:: Direct constructions
+
+         .. tp-graph-geometry::
+            :built-in:
+            :grid:
+
+            .. script::
+               :type: tp/geometry
+
+               point A = (-4, -2)
+               point B = (2, -2)
+               point O = (0, 1)
+               point P = (5, 4)
+               segment s = segment(A, B)
+               circle c = circle(O, 2)
+               point M = midpoint(s)
+               line m = perpendicularBisector(s)
+               line p = parallel(O, s)
+               line q = perpendicular(A, s)
+               line b = bisector(A, O, B)
+               line t0 = tangent(P, c, branch=0)
+               line t1 = tangent(P, c, branch=1)
+               comment note = comment(P, "Move P")
+
+      .. example:: Styles and export
+
+         .. tp-graph-geometry::
+            :grid:
+
+            .. script::
+               :type: tp/geometry
+
+               point O = (0, 0)
+               point A = (-3, -2)
+               point B = (3, 2)
+               segment s = segment(A, B) style=dashed color=blue
+               circle c = circle(O, 3) style=dotted color=red
+               vector v = vector(O, B) color=green
+               circle hiddenCircle = circle(A, 2) style=hidden color=violet
+               comment note = comment(A, "Select an object to style it") color=blue

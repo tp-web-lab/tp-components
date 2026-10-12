@@ -364,6 +364,9 @@ const additional = {
 };
 
 export function describeExample(component, label) {
+ if (component === "graph-geometry" && label === "Styles and export") return "Select an object in Move mode and change its stroke style or library color. Reveal the hidden circle from the object list, then use Save image to export the current view as SVG, PNG or WebP.";
+ if (component === "graph-geometry" && label === "Ruler primitives") return "Move A or B to compare a free segment with a fixed-length segment, a ray and a vector. The sector and comment follow their supports; use the toolbar to add another construction.";
+ if (component === "graph-geometry" && label === "Direct constructions") return "Use the extra built-in tools to add midpoints, perpendiculars, parallels, bisectors and tangents. Drag P inside and outside the circle to see its tangents disappear and reappear.";
  if (component === "graph-geometry" && label === "From a file") return "Load a construction from a local text file, then move O or slide P along the circle. The file uses the same commands as the construction editor.";
  if (component === "graph-geometry" && label === "Basic usage") return basic[component];
  if (component === "graph-geometry" && label === "Attached points") return "Move the centre O and slide P around its circle or Q along its line. The fixed-radius circle and attached points keep their construction relationships.";
