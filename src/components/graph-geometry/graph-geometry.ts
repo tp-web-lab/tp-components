@@ -213,6 +213,8 @@ export class TpGraphGeometry extends TpBase {
 	private undoStack: string[] = [];
 	private redoStack: string[] = [];
 	private scale = 36;
+	private canvasHeight = 560;
+	private canvasObserver: ResizeObserver | null = null;
 	private center: GeometryPoint = { x: 0, y: 0 };
 	private pan: {
 		pointer: number;
@@ -368,6 +370,8 @@ export class TpGraphGeometry extends TpBase {
 	}
 	/** @internal */
 	public disconnectedCallback(): void {
+		this.canvasObserver?.disconnect();
+		this.canvasObserver = null;
 		this.sourceRequest?.abort();
 		this.sourceRequest = null;
 		this.drag = null;
@@ -521,7 +525,7 @@ export class TpGraphGeometry extends TpBase {
 				"rect",
 			);
 			background.setAttribute("width", "900");
-			background.setAttribute("height", "560");
+			background.setAttribute("height", String(this.canvasHeight));
 			background.setAttribute(
 				"fill",
 				getComputedStyle(canvas.parentElement ?? this).backgroundColor,
@@ -543,7 +547,7 @@ export class TpGraphGeometry extends TpBase {
 				"http://www.w3.org/2000/svg",
 			);
 			clone.setAttribute("width", "900");
-			clone.setAttribute("height", "560");
+			clone.setAttribute("height", String(this.canvasHeight));
 			return new XMLSerializer().serializeToString(clone);
 		} finally {
 			clone.remove();
@@ -583,9 +587,26 @@ export class TpGraphGeometry extends TpBase {
 				.join("")}</tp-button-group>
       <div class="tp-geometry-parameters"><tp-textfield data-field="radius" label="Radius / length" value="5"></tp-textfield><tp-textfield data-field="start" label="Start angle (°)" value="20"></tp-textfield><tp-textfield data-field="end" label="End angle (°)" value="100"></tp-textfield><tp-textfield data-field="comment" label="Comment text" value="Comment"></tp-textfield>${this.builtIn ? `<tp-radio-list data-transform-mode label="Transformation" label-position="top" orientation="horizontal" value="1"><ul><li>Create a copy</li><li>Transform the object</li></ul></tp-radio-list><tp-textfield data-field="ratio" label="Ratio" value="2"></tp-textfield><tp-textfield data-field="rotation" label="Rotation angle (°)" value="90"></tp-textfield><tp-textfield data-field="sides" label="Sides" value="5" ${this.readonly ? "readonly" : ""}></tp-textfield><tp-button outlined data-geometry-control data-action="finish-polygon">Finish polygon</tp-button>` : ""}<span>Angles turn counterclockwise.</span></div>
       <tp-callout class="tp-geometry-hint" variant="info" outlined><span data-hint>${HINTS[this.tool]}</span></tp-callout>
-      <div class="tp-geometry-workspace"><div class="tp-geometry-board"><svg data-geometry-canvas viewBox="0 0 900 560" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg><div class="tp-geometry-view"><tp-button type="button" outlined data-geometry-control data-action="undo">Undo</tp-button><tp-button type="button" outlined data-geometry-control data-action="redo">Redo</tp-button><tp-button type="button" outlined data-geometry-control data-action="out" aria-label="Zoom out">−</tp-button><tp-button type="button" outlined data-geometry-control data-action="in" aria-label="Zoom in">+</tp-button><tp-button type="button" outlined data-geometry-control data-action="fit">Fit</tp-button><tp-button type="button" outlined data-geometry-control data-action="grid" aria-pressed="${this.grid}">Grid</tp-button></div></div>
+      <div class="tp-geometry-workspace"><div class="tp-geometry-board"><div class="tp-geometry-canvas"><svg data-geometry-canvas viewBox="0 0 900 ${this.canvasHeight}" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg></div><div class="tp-geometry-view"><tp-button type="button" outlined data-geometry-control data-action="undo">Undo</tp-button><tp-button type="button" outlined data-geometry-control data-action="redo">Redo</tp-button><tp-button type="button" outlined data-geometry-control data-action="out" aria-label="Zoom out">−</tp-button><tp-button type="button" outlined data-geometry-control data-action="in" aria-label="Zoom in">+</tp-button><tp-button type="button" outlined data-geometry-control data-action="fit">Fit</tp-button><tp-button type="button" outlined data-geometry-control data-action="grid" aria-pressed="${this.grid}">Grid</tp-button></div></div>
       <aside><h3>Construction objects</h3><p data-appearance-label>Select an object in Move mode to change its appearance.</p><div class="tp-geometry-appearance"><tp-button id="${this.controlId}-style" outlined data-geometry-control data-action="style-menu" aria-haspopup="menu"><span data-style-label>Style · solid</span></tp-button><tp-dropdown anchor="#${this.controlId}-style" outside-click data-style-menu><ul>${GEOMETRY_STYLES.map((value) => `<li data-stroke="${value}">${value}${value === "solid" ? " (default)" : ""}</li>`).join("")}</ul></tp-dropdown><tp-button id="${this.controlId}-color" outlined data-geometry-control data-action="color-menu" aria-haspopup="menu"><span data-color-label>Color · automatic</span></tp-button><tp-dropdown anchor="#${this.controlId}-color" outside-click data-color-menu><ul><li data-color="">Automatic</li>${GEOMETRY_COLORS.map((value) => `<li data-color="${value}"><span class="tp-geometry-swatch tp-${value}" aria-hidden="true"></span>${value}</li>`).join("")}</ul></tp-dropdown></div><div data-objects></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Constructed points are calculated.</p></aside></div>
       <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source"><dl><dt>Construction source</dt><dd><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor><tp-button type="button" outlined data-geometry-control data-action="apply">Apply construction</tp-button></dd></dl></tp-accordion>`;
+		this.canvasObserver?.disconnect();
+		const canvas = this.querySelector<HTMLElement>(".tp-geometry-canvas");
+		if (canvas && typeof ResizeObserver !== "undefined") {
+			this.canvasObserver = new ResizeObserver(() => {
+				const rect = canvas.getBoundingClientRect();
+				if (rect.width <= 0 || rect.height <= 0) return;
+				const height = (900 * rect.height) / rect.width;
+				if (Math.abs(height - this.canvasHeight) < 0.01) return;
+				this.canvasHeight = height;
+				this.querySelector("svg[data-geometry-canvas]")?.setAttribute(
+					"viewBox",
+					`0 0 900 ${height}`,
+				);
+				this.draw();
+			});
+			this.canvasObserver.observe(canvas);
+		}
 		if (this.readonly)
 			for (const button of this.querySelectorAll<TpButton>(
 				'[data-tool]:not([data-tool="pan"]), [data-action="example"], [data-action="clear"], [data-action="delete"], [data-action="apply"]',
@@ -828,7 +849,7 @@ export class TpGraphGeometry extends TpBase {
 					event.deltaMode === 1
 						? 16
 						: event.deltaMode === 2
-							? rect.height || 560
+							? rect.height || this.canvasHeight
 							: 1;
 				const start = this.canvasPoint(event);
 				const end = this.canvasPoint({
@@ -1308,7 +1329,9 @@ export class TpGraphGeometry extends TpBase {
 		const rect = svg?.getBoundingClientRect();
 		return {
 			x: ((event.clientX - (rect?.left ?? 0)) * 900) / (rect?.width || 900),
-			y: ((event.clientY - (rect?.top ?? 0)) * 560) / (rect?.height || 560),
+			y:
+				((event.clientY - (rect?.top ?? 0)) * this.canvasHeight) /
+				(rect?.height || this.canvasHeight),
 		};
 	}
 	private world(event: MouseEvent): GeometryPoint {
@@ -1403,7 +1426,9 @@ export class TpGraphGeometry extends TpBase {
 				const length = distance(v.first, v.second);
 				const factor =
 					v.kind === "line" || v.kind === "ray"
-						? (1800 / this.scale + distance(v.first, this.center)) / length
+						? ((2 * Math.max(900, this.canvasHeight)) / this.scale +
+								distance(v.first, this.center)) /
+							length
 						: 0;
 				const dx = v.second.x - v.first.x;
 				const dy = v.second.y - v.first.y;
@@ -1497,8 +1522,12 @@ export class TpGraphGeometry extends TpBase {
 			const commands: string[] = [];
 			if (this.grid) {
 				for (let px = ((x(0) % step) + step) % step; px <= 900; px += step)
-					commands.push(`M ${px} 0 V 560`);
-				for (let py = ((y(0) % step) + step) % step; py <= 560; py += step)
+					commands.push(`M ${px} 0 V ${this.canvasHeight}`);
+				for (
+					let py = ((y(0) % step) + step) % step;
+					py <= this.canvasHeight;
+					py += step
+				)
 					commands.push(`M 0 ${py} H 900`);
 			}
 			grid.innerHTML = commands.length

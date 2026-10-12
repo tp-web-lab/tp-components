@@ -9,13 +9,15 @@ tp-graph-geometry { display:block; color:var(--tp-text-body, CanvasText); border
 .tp-geometry-parameters span { font-size:.8rem; }
 .tp-geometry-hint { margin:12px 16px; font-size:.85rem; }
 .tp-geometry-workspace { display:grid; grid-template-columns:minmax(0, 1fr) 220px; border-block:1px solid var(--tp-neutral-stroke-soft, #dbe4e6); }
-.tp-geometry-board { min-width:0; background:var(--tp-background-color, Canvas); }
-.tp-geometry-board svg { display:block; width:100%; height:auto; touch-action:none; }
+.tp-geometry-board { display:flex; flex-direction:column; min-width:0; background:var(--tp-background-color, Canvas); }
+.tp-geometry-canvas { position:relative; flex:1 0 auto; min-height:320px; }
+.tp-geometry-canvas::before { content:""; display:block; padding-top:62.222222%; }
+.tp-geometry-board svg { position:absolute; inset:0; display:block; width:100%; height:100%; touch-action:none; }
 .tp-geometry-view { display:flex; flex-wrap:wrap; align-items:center; gap:5px; padding:8px; }
 .tp-geometry-workspace aside { padding:12px; border-left:1px solid var(--tp-neutral-stroke-soft, #dbe4e6); }
 .tp-geometry-workspace h3 { font-size:.85rem; margin:0 0 12px; }
 .tp-geometry-workspace aside p { font-size:.8rem; line-height:1.5; opacity:.8; }
-tp-graph-geometry [data-objects] { max-height:330px; overflow:auto; margin-bottom:10px; }
+tp-graph-geometry [data-objects] { margin-bottom:10px; }
 tp-graph-geometry [data-objects] tp-button { display:flex; width:100%; justify-content:space-between; gap:8px; margin-bottom:5px; text-align:left; }
 tp-graph-geometry [data-objects] .object-kind { font-size:.75rem; }
 .tp-geometry-shape { cursor:pointer; }
@@ -32,7 +34,7 @@ tp-graph-geometry [data-objects] .object-kind { font-size:.75rem; }
 .tp-geometry-shape text { font:600 15px system-ui; fill:var(--tp-text-body, CanvasText); paint-order:stroke; stroke:var(--tp-background-color, Canvas); stroke-width:4px; }
 tp-graph-geometry [data-status] { margin:0; padding:10px 16px; font-size:.85rem; min-height:2em; }
 .tp-geometry-source { border-top:1px solid var(--tp-neutral-stroke-soft, #dbe4e6); padding:12px 16px; }
-@media(max-width:700px) { .tp-geometry-workspace { grid-template-columns:1fr; } .tp-geometry-workspace aside { border-left:0; border-top:1px solid var(--tp-neutral-stroke-soft, #dbe4e6); } .tp-geometry-header { flex-wrap:wrap; } tp-graph-geometry [data-objects] { max-height:150px; } }
+@media(max-width:700px) { .tp-geometry-workspace { grid-template-columns:1fr; } .tp-geometry-workspace aside { border-left:0; border-top:1px solid var(--tp-neutral-stroke-soft, #dbe4e6); } .tp-geometry-header { flex-wrap:wrap; } }
 
 tp-graph-geometry aside > tp-button { max-width:100%; }
 tp-graph-geometry aside > tp-button > button { white-space:normal; }
