@@ -1,4 +1,5 @@
 import "../accordion/accordion.js";
+import "../callout/callout.js";
 import { TpBase } from "../base/base.js";
 import "../button-group/button-group.js";
 import "../textfield/textfield.js";
@@ -23,7 +24,7 @@ export { evaluateGeometry, MEDIATRIX_CONSTRUCTION, parseGeometry, serializeGeome
  * @accessibility Uses library buttons, fields, an accordion and a code editor with native keyboard controls.
  * @accessibility Provides an object list as an alternative to pointer selection and announces undefined constructions.
  * @accessibilityresponsibility Provide a textual explanation of the figure when its visual relationships are needed to understand the lesson.
- * @keyboard {Arrow keys} Moves the selected point, or pans in Pan view; Shift reduces the step.
+ * @keyboard {Arrow keys} Moves the selected point or measurement label, or pans in Pan view; Shift reduces the step.
  * @keyboard {Escape} Cancels pending construction input and returns to Move.
  * @example
  * <tp-graph-geometry></tp-graph-geometry>

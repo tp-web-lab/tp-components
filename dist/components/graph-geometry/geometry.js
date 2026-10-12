@@ -152,6 +152,19 @@ function h(e, a = 0) {
 						circle: p(l),
 						branch: e
 					};
+				} else if (d === "comment" && (t === "length" || t === "area" || t === "angle")) {
+					let e = n.findIndex((e) => e.includes("=")), r = e < 0 ? n : n.slice(0, e);
+					if (g(r.length, ["dx", "dy"]), !(t === "angle" ? r.length === 3 || r.length === 2 : t === "length" ? r.length === 1 || r.length === 2 : r.length === 1)) throw Error("Invalid measurement arguments.");
+					let i = f(u.get("dx") ?? "0"), a = f(u.get("dy") ?? "0");
+					b = {
+						kind: "measure",
+						operation: t,
+						inputs: r.map(p),
+						...i || a ? { offset: {
+							x: i,
+							y: a
+						} } : {}
+					};
 				} else if (d === "comment" && t === "comment" && n.length === 2) {
 					let e = JSON.parse(l);
 					if (typeof e != "string" || !e.trim()) throw Error("A comment needs nonempty quoted text.");
@@ -281,7 +294,27 @@ function g(e) {
 				t.vertex,
 				t.second
 			]) s(e, ["point"]);
-			t.kind === "tangent" && (s(t.point, ["point"]), s(t.circle, ["circle"])), t.kind === "comment" && s(t.point, ["point"]);
+			if (t.kind === "tangent" && (s(t.point, ["point"]), s(t.circle, ["circle"])), t.kind === "measure") {
+				let e = t.operation === "angle" && t.inputs.length === 2 ? [
+					"segment",
+					"ray",
+					"vector",
+					"line"
+				] : t.operation === "angle" || t.inputs.length === 2 ? ["point"] : t.operation === "area" ? [
+					"polygon",
+					"circle",
+					"sector"
+				] : [
+					"segment",
+					"vector",
+					"circle",
+					"arc",
+					"polygon",
+					"sector"
+				];
+				for (let n of t.inputs) s(n, e);
+			}
+			t.kind === "comment" && s(t.point, ["point"]);
 		};
 		c(t.definition), r.delete(e), i.add(e);
 	};
@@ -289,7 +322,7 @@ function g(e) {
 	return t;
 }
 function _(e) {
-	return e.kind === "transform" ? e.output : e.kind === "regularPolygon" ? "polygon" : e.kind === "on" || e.kind === "intersection" || e.kind === "midpoint" ? "point" : [
+	return e.kind === "transform" ? e.output : e.kind === "regularPolygon" ? "polygon" : e.kind === "measure" ? "comment" : e.kind === "on" || e.kind === "intersection" || e.kind === "midpoint" ? "point" : [
 		"parallel",
 		"perpendicular",
 		"perpendicularBisector",
@@ -300,6 +333,7 @@ function _(e) {
 var v = /* @__PURE__ */ new WeakMap();
 function y(e) {
 	switch (e.kind) {
+		case "measure": return e.inputs;
 		case "transform": return [...typeof e.object == "string" ? [e.object] : y(e.object), e.support];
 		case "polygon": return e.vertices;
 		case "regularPolygon": return [e.first, e.second];
@@ -394,6 +428,22 @@ function w(e, t, n, r) {
 			};
 		};
 	}
+	if (e.kind === "comment" && e.angleMark) {
+		let t = e.angleMark, n = a(t.vertex), r = a({
+			x: t.vertex.x + Math.cos(t.start),
+			y: t.vertex.y + Math.sin(t.start)
+		});
+		return {
+			...e,
+			point: a(e.point),
+			angleMark: {
+				...t,
+				vertex: n,
+				start: Math.atan2(r.y - n.y, r.x - n.x),
+				sweep: t.sweep * c
+			}
+		};
+	}
 	if (e.kind === "point" || e.kind === "comment") return {
 		...e,
 		point: a(e.point)
@@ -425,7 +475,77 @@ function w(e, t, n, r) {
 		sweep: c * e.sweep
 	};
 }
-function T(e) {
+function T(e, t) {
+	let n = e.inputs.map(t), r = n[0];
+	if (!r) throw Error("Missing measurement support.");
+	let o = 0, s, d, f = (e) => ({
+		x: e.reduce((e, t) => e + t.x, 0) / e.length,
+		y: e.reduce((e, t) => e + t.y, 0) / e.length
+	});
+	if (e.operation === "angle" && n.length === 2) {
+		let e = n[1];
+		if (!b(r) || !e || !b(e)) throw Error("Select two linear sides.");
+		let t = [r.first, r.second].find((t) => c(t, e.first) < i || c(t, e.second) < i) ?? C(r, e).find((e) => e !== null);
+		if (!t) throw Error("The sides need a common vertex or intersection.");
+		let a = (e) => c(e.first, t) > c(e.second, t) ? e.first : e.second, f = a(r), p = a(e);
+		if (c(f, t) < i || c(p, t) < i) throw Error("The angle needs two nonzero arms.");
+		let m = u(f, t), h = u(p, t), g = Math.atan2(l(m, h), m.x * h.x + m.y * h.y);
+		o = Math.abs(g) * 180 / Math.PI, s = {
+			vertex: t,
+			start: Math.atan2(m.y, m.x),
+			sweep: g,
+			right: Math.abs(o - 90) < 1e-7
+		}, d = t;
+	} else if (e.operation === "angle" || n.length === 2) {
+		let [t, r, a] = n.map((e) => {
+			if (e.kind !== "point") throw Error("Select points.");
+			return e.point;
+		});
+		if (!t || !r) throw Error("Select two points.");
+		if (e.operation === "angle") {
+			if (!a || c(t, r) < i || c(a, r) < i) throw Error("The angle needs two nonzero arms.");
+			let e = u(t, r), n = u(a, r);
+			o = Math.atan2(Math.abs(l(e, n)), e.x * n.x + e.y * n.y) * 180 / Math.PI, d = r;
+		} else o = c(t, r), d = f([t, r]);
+	} else if (r.kind === "polygon") {
+		d = f(r.vertices);
+		let t = r.vertices;
+		if (e.operation === "area") for (let e = 0; e < t.length; e++) {
+			let n = t[e], r = t[(e + 1) % t.length];
+			if (!(!n || !r)) for (let a = e + 2; a < t.length; a++) {
+				if (e === 0 && a === t.length - 1) continue;
+				let o = t[a], s = t[(a + 1) % t.length];
+				if (!o || !s) continue;
+				let c = (e, t, n) => l(u(t, e), u(n, e)), d = (e, t, n) => Math.abs(c(e, t, n)) < i && n.x >= Math.min(e.x, t.x) - i && n.x <= Math.max(e.x, t.x) + i && n.y >= Math.min(e.y, t.y) - i && n.y <= Math.max(e.y, t.y) + i;
+				if (c(n, r, o) * c(n, r, s) < 0 && c(o, s, n) * c(o, s, r) < 0 || d(n, r, o) || d(n, r, s) || d(o, s, n) || d(o, s, r)) throw Error("Area requires a simple polygon without crossing edges.");
+			}
+		}
+		for (let n = 0; n < t.length; n++) {
+			let r = t[n], i = t[(n + 1) % t.length];
+			!r || !i || (o += e.operation === "area" ? l(u(r, t[0] ?? r), u(i, t[0] ?? r)) / 2 : c(r, i));
+		}
+		o = Math.abs(o);
+	} else if (r.kind === "segment" || r.kind === "vector") o = c(r.first, r.second), d = f([r.first, r.second]);
+	else if (r.kind === "circle" || r.kind === "arc" || r.kind === "sector") {
+		let t = r.kind === "circle" ? a : Math.abs(r.sweep);
+		o = e.operation === "area" ? r.radius ** 2 * t / 2 : r.radius * t + (r.kind === "sector" ? 2 * r.radius : 0), d = r.kind === "arc" ? {
+			x: r.center.x + r.radius * Math.cos(r.start + r.sweep / 2),
+			y: r.center.y + r.radius * Math.sin(r.start + r.sweep / 2)
+		} : r.center;
+	} else throw Error("Unsupported measurement support.");
+	if (!Number.isFinite(o)) throw Error("The measurement is undefined.");
+	let p = e.operation === "angle" ? "°" : e.operation === "area" ? " u²" : " u";
+	return {
+		kind: "comment",
+		point: {
+			x: d.x + (e.offset?.x ?? 0),
+			y: d.y + (e.offset?.y ?? 0)
+		},
+		text: s ? s.right ? "" : `${Number(o.toFixed(2))}°` : `${e.operation}(${e.inputs.join(", ")}) = ${Number(o.toFixed(2))}${p}`,
+		...s ? { angleMark: s } : {}
+	};
+}
+function E(e) {
 	let t = /* @__PURE__ */ new Map(), n = /* @__PURE__ */ new Map(), r = new Map(e.map((e) => [e.id, e])), o = /* @__PURE__ */ new Set(), l = (e) => {
 		if (t.has(e)) return t.get(e) ?? null;
 		if (o.has(e)) throw Error(`Circular dependency: ${e}`);
@@ -506,13 +626,13 @@ function T(e) {
 					};
 				} else if (e.kind === "on") {
 					let n = o(e.object), r;
-					if (b(n)) r = d(n.first, u(n.second, n.first), D(n, e.parameter));
+					if (b(n)) r = d(n.first, u(n.second, n.first), O(n, e.parameter));
 					else if (x(n)) {
 						let t = e.parameter;
 						n.kind === "arc" && !S(n, d(n.center, {
 							x: Math.cos(t),
 							y: Math.sin(t)
-						}, n.radius)) && (t = E(n, t)), r = d(n.center, {
+						}, n.radius)) && (t = D(n, t)), r = d(n.center, {
 							x: Math.cos(t),
 							y: Math.sin(t)
 						}, n.radius);
@@ -521,7 +641,8 @@ function T(e) {
 						kind: "point",
 						point: r
 					};
-				} else if (e.kind === "comment") t = {
+				} else if (e.kind === "measure") t = T(e, o);
+				else if (e.kind === "comment") t = {
 					kind: "comment",
 					point: f(e.point),
 					text: e.text
@@ -612,25 +733,25 @@ function T(e) {
 		errors: n
 	};
 }
-function E(e, t) {
+function D(e, t) {
 	let n = (e) => Math.abs(Math.atan2(Math.sin(e - t), Math.cos(e - t)));
 	return n(e.start) <= n(e.start + e.sweep) ? e.start : e.start + e.sweep;
 }
-function D(e, t) {
+function O(e, t) {
 	return e.kind === "segment" || e.kind === "vector" ? Math.max(0, Math.min(1, t)) : e.kind === "ray" ? Math.max(0, t) : t;
 }
-function O(e, t) {
+function k(e, t) {
 	if (x(e)) {
 		let n = Math.atan2(t.y - e.center.y, t.x - e.center.x);
-		return e.kind === "arc" && !S(e, t) ? E(e, n) : n;
+		return e.kind === "arc" && !S(e, t) ? D(e, n) : n;
 	}
 	if (b(e)) {
 		let n = u(e.second, e.first), r = u(t, e.first);
-		return D(e, (r.x * n.x + r.y * n.y) / (n.x ** 2 + n.y ** 2));
+		return O(e, (r.x * n.x + r.y * n.y) / (n.x ** 2 + n.y ** 2));
 	}
 	throw Error("Select a line, segment, circle or arc.");
 }
-function k(e) {
+function A(e) {
 	let t = (e) => String(Number(e.toPrecision(12)));
 	return e.map(({ id: n, hidden: r, stroke: i, color: a, definition: o }) => {
 		let s = _(o), c = (n) => {
@@ -650,6 +771,7 @@ function k(e) {
 			} else if (n.kind === "intersection") r = `intersection(${n.first}, ${n.second}, branch=${n.branch})`;
 			else if (n.kind === "line" || n.kind === "segment" || n.kind === "ray" || n.kind === "vector") r = `${n.kind}(${n.first}, ${n.second}${n.kind === "segment" && n.length !== void 0 ? `, length=${t(n.length)}` : ""})`;
 			else if (n.kind === "circle") r = `circle(${n.center}, ${typeof n.radius == "number" ? t(n.radius) : "through" in n.radius ? `through=${n.radius.through}` : `distance(${n.radius.distance.join(", ")})`})`;
+			else if (n.kind === "measure") r = `${n.operation}(${n.inputs.join(", ")}${n.offset ? `, dx=${t(n.offset.x)}, dy=${t(n.offset.y)}` : ""})`;
 			else if (n.kind === "comment") r = `comment(${n.point}, ${JSON.stringify(n.text)})`;
 			else if (n.kind === "midpoint" || n.kind === "perpendicularBisector") r = `${n.kind}(${n.segment})`;
 			else if (n.kind === "parallel" || n.kind === "perpendicular") r = `${n.kind}(${n.point}, ${n.support})`;
@@ -662,8 +784,8 @@ function k(e) {
 		return `${s} ${n} = ${c(o)}${i && i !== "solid" ? ` style=${i}` : ""}${a ? ` color=${a}` : ""}${r ? " hidden" : ""}`;
 	}).join("\n");
 }
-var A = "point A = (-3, 0)\npoint B = (3, 0)\nsegment AB = segment(A, B)\ncircle cA = circle(A, distance(A, B)) hidden\ncircle cB = circle(B, distance(A, B)) hidden\narc aC = arc(cA, start=40deg, end=80deg, relative-to=AB)\narc aD = arc(cA, start=280deg, end=320deg, relative-to=AB)\narc bC = arc(cB, start=100deg, end=140deg, relative-to=AB)\narc bD = arc(cB, start=220deg, end=260deg, relative-to=AB)\npoint C = intersection(aC, bC, branch=0)\npoint D = intersection(aD, bD, branch=1)\nline m = line(C, D)";
+var j = "point A = (-3, 0)\npoint B = (3, 0)\nsegment AB = segment(A, B)\ncircle cA = circle(A, distance(A, B)) hidden\ncircle cB = circle(B, distance(A, B)) hidden\narc aC = arc(cA, start=40deg, end=80deg, relative-to=AB)\narc aD = arc(cA, start=280deg, end=320deg, relative-to=AB)\narc bC = arc(cB, start=100deg, end=140deg, relative-to=AB)\narc bD = arc(cB, start=220deg, end=260deg, relative-to=AB)\npoint C = intersection(aC, bC, branch=0)\npoint D = intersection(aD, bD, branch=1)\nline m = line(C, D)";
 //#endregion
-export { t as GEOMETRY_COLORS, n as GEOMETRY_STYLES, r as GEOMETRY_TRANSFORMATIONS, A as MEDIATRIX_CONSTRUCTION, _ as constructionKind, S as contains, y as dependencies, c as distance, T as evaluateGeometry, C as intersections, b as isLinear, O as parameterAt, g as parseGeometry, k as serializeGeometry };
+export { t as GEOMETRY_COLORS, n as GEOMETRY_STYLES, r as GEOMETRY_TRANSFORMATIONS, j as MEDIATRIX_CONSTRUCTION, _ as constructionKind, S as contains, y as dependencies, c as distance, E as evaluateGeometry, C as intersections, b as isLinear, k as parameterAt, g as parseGeometry, A as serializeGeometry };
 
 //# sourceMappingURL=geometry.js.map

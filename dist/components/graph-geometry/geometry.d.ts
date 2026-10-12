@@ -8,6 +8,11 @@ export interface GeometryPoint {
 export declare const GEOMETRY_TRANSFORMATIONS: readonly ["axialSymmetry", "centralSymmetry", "homothety", "rotation", "translation"];
 export type GeometryTransformation = (typeof GEOMETRY_TRANSFORMATIONS)[number];
 export type GeometryDefinition = {
+    kind: "measure";
+    offset?: GeometryPoint;
+    operation: "length" | "area" | "angle";
+    inputs: string[];
+} | {
     kind: "transform";
     operation: GeometryTransformation;
     object: string | GeometryDefinition;
@@ -102,6 +107,12 @@ export type GeometryValue = {
     kind: "comment";
     point: GeometryPoint;
     text: string;
+    angleMark?: {
+        vertex: GeometryPoint;
+        start: number;
+        sweep: number;
+        right: boolean;
+    };
 } | {
     kind: "circle";
     center: GeometryPoint;
