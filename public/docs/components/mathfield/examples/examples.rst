@@ -109,6 +109,7 @@
          .. tp-divider::
 
          .. h3::
+            :id: mathfield-preview-heading
 
             Preview
 

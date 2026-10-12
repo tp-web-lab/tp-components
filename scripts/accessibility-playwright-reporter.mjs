@@ -36,6 +36,16 @@ export default class AccessibilityReporter {
     if (results.size === 0) return;
 
     const scans = [...results.values()];
+    // Always publish the current run, including partial failures. Never present
+    // the checked-in full report as evidence for a selective run.
+    const selectedComponents = process.env.TP_A11Y_COMPONENTS === undefined
+      ? [...expectedComponentNames] : JSON.parse(process.env.TP_A11Y_COMPONENTS).map(name => `tp-${name}`);
+    mkdirSync(join(root, 'config'), { recursive: true });
+    writeFileSync(join(root, 'config/accessibility-run-results.json'), JSON.stringify({
+      generatedAt: new Date().toISOString(), selectedComponents, scans,
+      expectedScans: selectedComponents.length * 3,
+      full: selectedComponents.length === expectedComponents,
+    }, null, 2) + '\n');
     if (scans.length < expectedComponents * 3) return;
 
     const browsers = ['chromium', 'firefox', 'webkit'].map((browser) => {

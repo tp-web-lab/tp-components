@@ -73,7 +73,9 @@ Reset defaults
 ::: tp-divider
 :::
 
-### Preview
+::: h3 { id="numberfield-preview-heading" }
+Preview
+:::
 
 :::: tp-box
 ::: tp-numberfield { id="numberfield-preview" }

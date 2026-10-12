@@ -16,9 +16,23 @@ const components = readdirSync(examplesRoot)
 	})
 	.sort();
 
-for (const component of components) {
+const selection =
+	process.env.TP_A11Y_COMPONENTS === undefined
+		? null
+		: new Set<string>(JSON.parse(process.env.TP_A11Y_COMPONENTS));
+if (selection)
+	for (const name of selection) {
+		if (!components.includes(name))
+			throw new Error(`Unknown accessibility component: ${name}`);
+	}
+for (const component of components.filter(
+	(name) => !selection || selection.has(name),
+)) {
 	test(`tp-${component}`, async ({ page }, testInfo) => {
 		if (component === "prose-editor") testInfo.setTimeout(120_000);
+		// Unicode catalogues render thousands of controls in both documentation examples.
+		if (["emoji-picker", "symbol-picker"].includes(component))
+			testInfo.setTimeout(180_000);
 		const markup = readFileSync(
 			join(examplesRoot, component, "examples/examples.html"),
 			"utf8",

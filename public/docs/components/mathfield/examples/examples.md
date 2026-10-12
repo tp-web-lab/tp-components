@@ -64,7 +64,9 @@ Reset defaults
 ::: tp-divider
 :::
 
-### Preview
+::: h3 { id="mathfield-preview-heading" }
+Preview
+:::
 
 :::: tp-box
 ::: tp-mathfield { id="mathfield-preview" }

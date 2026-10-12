@@ -36,3 +36,6 @@ node_modules
 
 # CI installs must use the committed lockfile
 !.github/ci/pnpm-lock.yaml
+
+# Per-run accessibility artifact (including selective audits)
+/config/accessibility-run-results.json

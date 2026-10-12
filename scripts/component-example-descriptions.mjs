@@ -4,6 +4,7 @@ import { describeAttributeControl } from "./interactive-attribute-examples.mjs";
 
 /** Editorial objectives for the existing examples; no descriptions are inferred from titles alone. */
 const basic = {
+ "graph-geometry": "Drag A or B and observe the arcs, intersections and perpendicular bisector follow the segment.",
  "calculator": "Enter 2+3*4 and evaluate it, then try sin(30) in degree mode. Use the scientific keys to transform a selected expression.",
  "note": "Hover or focus the reference to read its HTML content; inspect the same entry in the generated list.",
  "biblio": "Hover or focus the reference to read its HTML content; inspect the same entry in the generated list.",
@@ -363,6 +364,10 @@ const additional = {
 };
 
 export function describeExample(component, label) {
+ if (component === "graph-geometry" && label === "From a file") return "Load a construction from a local text file, then move O or slide P along the circle. The file uses the same commands as the construction editor.";
+ if (component === "graph-geometry" && label === "Basic usage") return basic[component];
+ if (component === "graph-geometry" && label === "Attached points") return "Move the centre O and slide P around its circle or Q along its line. The fixed-radius circle and attached points keep their construction relationships.";
+ if (component === "graph-geometry" && label === "Arc only") return "Inspect a single visible arc with its circle hidden, then drag the centre to move the arc.";
 	if (component === "markup-single-page" && label === "Toolbar controls") return "Compare the complete toolbar with a selection of Code, Calculator and Theme. Open a drawer or change the appearance without replacing the document.";
  if (["matching", "matching-question"].includes(component) && label === "Header list") return "Use the first list as English and French column headings. Match the three expressions; headings remain fixed and do not count as answers.";
  if (component === "multi-choice-question" && label === "No correct choices") return "Submit without checking a box to obtain full credit and unlock the solution. Reset, select a distractor and submit again to compare the feedback.";

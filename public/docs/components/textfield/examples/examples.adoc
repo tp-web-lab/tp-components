@@ -103,7 +103,7 @@ Reset defaults
 ====
 ====
 
-[h3]
+[h3,id="textfield-preview-heading"]
 ====
 Preview
 ====

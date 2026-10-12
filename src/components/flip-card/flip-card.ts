@@ -153,6 +153,7 @@ export class TpFlipCard extends TpBase {
 		scene.addEventListener("keydown", (event) => {
 			if (
 				this.normalizedButtonPosition()[0] === "none" &&
+				event.target === scene &&
 				(event.key === "Enter" || event.key === " ")
 			) {
 				event.preventDefault();
@@ -197,6 +198,14 @@ export class TpFlipCard extends TpBase {
 		const [block, inline] = this.normalizedButtonPosition();
 		const buttonHidden = block === "none";
 
+		if (recto) {
+			recto.tabIndex = this.flipped ? -1 : 0;
+			recto.inert = this.flipped;
+		}
+		if (verso) {
+			verso.tabIndex = this.flipped ? 0 : -1;
+			verso.inert = !this.flipped;
+		}
 		recto?.setAttribute("aria-hidden", String(this.flipped));
 		verso?.setAttribute("aria-hidden", String(!this.flipped));
 

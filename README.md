@@ -103,3 +103,15 @@ can retain their author source with `data-tp-original-src`, used by the Code
 control and the annotation storage scope.
 
 For static multi-page publications, build tooling can add `data-tp-prerendered` to `tp-markup-multi-pages`: a JSON map of original document pathnames to generated HTML pathnames. Routes, navigation and annotation identities keep the original URLs. HTML is loaded for display; Code loads the original document only when requested. This is internal publication metadata, not required in authored pages. The Node renderer also exports `resolveMarkdownIncludes` so builds use the same recursive and raw include rules as `tp-markdown`.
+
+## Accessibility checks
+
+The Accessibility workflow audits changed components and their transitive consumers on pushes to `main` and pull requests. Selection includes component code and documentation examples; dependencies are collected from manifests, imports and custom-element references. Shared styles, utilities, dependency changes, workflow changes and unknown executable paths trigger the complete suite. Navigation-only documentation changes skip the browser audit. Renames include both old and new paths. If the comparison revision is unavailable, the workflow falls back to a complete audit.
+
+Use **Run workflow** in GitHub Actions to request a complete audit, including the shared color-token contract. Local `pnpm test:a11y` also remains a full audit. For example, to check only two components in all three browsers:
+
+```sh
+TP_A11Y_COMPONENTS='["console","color-picker"]' pnpm test:a11y components.a11y.test.ts
+```
+
+The run summary lists the selected components. The `accessibility-report` artifact contains `config/accessibility-run-results.json` for that execution, including scan errors, and failure contexts. Partial runs do not overwrite or claim to refresh the transversal accessibility report. A complete run still updates it. The emoji and symbol catalogues retain their full contents and all axe rules, with a 180-second test limit because they render thousands of controls; other components retain their existing limits.

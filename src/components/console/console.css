@@ -171,7 +171,7 @@ tp-console {
   overflow: hidden;
 }
 
-[data-tp-console-object] > summary {
+tp-console [data-tp-console-object] > summary {
   cursor: pointer;
   list-style: none;
   padding: 0.45rem 0.6rem;

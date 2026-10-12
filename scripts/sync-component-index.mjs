@@ -46,7 +46,7 @@ const groupDescriptions = {
   Overlays: 'Dialogs, menus, popovers, and floating contextual content.',
   Pickers: 'Visual selection of colors, emoji, formulas, icons, and symbols.',
   Playgrounds: 'Interactive execution environments for languages and markup formats.',
-  Plots: 'Programmatic drawing and mathematical plotting.',
+  Plots: 'Geometric constructions, programmatic drawing and mathematical plotting.',
   Quizzes: 'Answer widgets and educational question workflows.',
   Questions: 'Quizzes and programming exercises using viewers or playgrounds.',
   References: 'Notes, bibliography, glossary, inline references and generated lists.',

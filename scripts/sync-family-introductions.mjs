@@ -15,7 +15,7 @@ const descriptions = {
   Overlays: "Overlay components display dialogs, menus and contextual information above the main content without requiring navigation to another page.",
   Pickers: "Picker components provide visual interfaces for selecting colors, emoji, mathematical formulas, icons and symbols.",
   Playgrounds: "Playground components combine project files, source editing, execution and preview tools into interactive workspaces for experimenting with code and markup.",
-  Plots: "Plot components display geographic maps and turn declarative source into diagrams, L-system fractals, turtle drawings and mathematical graphs.",
+  Plots: "Plot components display geographic maps and turn declarative source into diagrams, L-system fractals, turtle drawings, ruler and compass constructions and mathematical graphs.",
   Quizzes: "Quiz components collect answers to educational exercises through choices, text fields and draggable blanks, with feedback and solution workflows.",
   Questions: "Question components combine an answer form, submission controls, feedback and a solution in a shared exercise interface.",
   "Questions/Playgrounds": "Playground questions let learners edit a complete programming project and submit its current files to external tests.",

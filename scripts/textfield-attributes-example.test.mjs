@@ -23,6 +23,7 @@ for (const component of groupedFields) {
 					"Basic usage",
 					"Attributes",
 					...(component === "mathfield" ? ["Inline in prose"] : []),
+                    "Inline named field",
 				],
 			);
 			assert.ok(

@@ -1,0 +1,123 @@
+{
+  "tagname": "tp-graph-geometry",
+  "classname": "TpGraphGeometry",
+  "superclass": "TpBase",
+  "description": "Constructs dynamic figures with a graduated ruler and compass.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-graph-geometry></tp-graph-geometry>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "grid",
+      "description": "Shows a light grid without axes or graduations.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "readonly",
+      "description": "Prevents changes to the construction.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "URL of a text file containing construction commands.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "analyze(): GeometryResult",
+      "inherited": false,
+      "description": "Returns a detached snapshot of computed objects and undefined-object diagnostics."
+    },
+    {
+      "name": "redo(): void",
+      "inherited": false,
+      "description": "Redoes one construction change."
+    },
+    {
+      "name": "removeObject(id: string): void",
+      "inherited": false,
+      "description": "Removes an object and every construction depending on it, as one undoable action."
+    },
+    {
+      "name": "setConstruction(source: string): void",
+      "inherited": false,
+      "description": "Atomically replaces the construction; invalid source leaves the previous figure intact."
+    },
+    {
+      "name": "undo(): void",
+      "inherited": false,
+      "description": "Undoes one construction change."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-geometry-change",
+      "description": "Fired after a construction change; detail contains source and undefined object names.",
+      "detail": "{ source: string; undefined: string[] }"
+    },
+    {
+      "name": "tp-geometry-error",
+      "description": "Fired when a file cannot be loaded or source cannot be parsed; detail contains message.",
+      "detail": "{ message: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-accordion",
+      "summary": "Collapsible multi-panels element."
+    },
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-button-group",
+      "summary": "Button group component for organizing multiple buttons."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-textfield",
+      "summary": "Single-line and automatically growing multiline text field."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Geometry",
+    "introduction": "The custom `<tp-graph-geometry>` element implements dynamic ruler and compass constructions. Points, lines, segments, circles and arcs preserve their construction dependencies when a point moves. No equations or function plots are exposed.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Move | Drag a free point freely or slide an attached point along its support. Drag empty space to pan the whole drawing. Intersection points are calculated and cannot be dragged. |\n| Pan view | Drag anywhere, including over a point, to move the entire view without changing the construction. Middle-button dragging also pans in any tool. |\n| Scroll / Shift + scroll | Scroll vertically or horizontally with the mouse wheel or trackpad. Shift + vertical scrolling pans horizontally. Scrolling outside the drawing still scrolls the page. |\n| Grid | Toggle a light grid that follows panning and zooming, with no axes, origin marker or graduations. The grid starts hidden and does not snap points. |\n| Point | Click the drawing to create a free point. |\n| Point on object | Click a line, segment, circle or arc to create a sliding point. |\n| Segment / Line | Select two existing points, either in the drawing or in the object list. |\n| Circle · radius | Enter a positive radius or a transferred length such as `distance(A, B)`, then select the centre point. |\n| Circle · through point | Select the centre, then a point the circle must pass through. |\n| Arc | Enter start and end angles, then select the supporting circle. The circle outline is hidden; further arcs can use that circle via the object list. |\n| Intersection | Select two supports. All currently existing distinct intersections are created. |\n| Object list | Select an object, including a hidden supporting circle. With a construction tool active, use the object as input to the tool. |\n| Delete selected + dependents | Remove the selected object and its dependent constructions as one undoable action. |\n| Undo / Redo | Undo or redo one construction change or point movement. |\n| − / + / Fit | Zoom or fit the finite visible objects into the drawing. |\n| Perpendicular bisector / New construction | Load the example or start an empty construction. Undo restores the previous construction. |\n| Construction source / Apply construction | Edit and apply the construction commands. Invalid commands leave the previous figure unchanged. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between tools, parameters, object buttons, drawing and source controls. |\n| Enter / Space | Activate a focused button or expand/collapse the Construction source accordion. Selecting an object in Move mode focuses the drawing. |\n| Arrow keys on the drawing | In Pan view, pan by 40 drawing pixels. Otherwise move the selected free or attached point by 0.2 units before projection onto its support. |\n| Shift + arrow keys | In Pan view, pan by 8 drawing pixels. Otherwise use a smaller point step of 0.02 units. |\n| Escape on the drawing | Cancel the pending selection and return to Move. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "keyboard": [
+      {
+        "key": "Arrow keys",
+        "description": "Moves the selected point, or pans in Pan view; Shift reduces the step."
+      },
+      {
+        "key": "Escape",
+        "description": "Cancels pending construction input and returns to Move."
+      }
+    ]
+  }
+}

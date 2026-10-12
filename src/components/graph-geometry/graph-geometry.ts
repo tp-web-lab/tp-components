@@ -1,0 +1,953 @@
+/** @module components/graph-geometry @summary Dynamic ruler and compass constructions. */
+// tp-docgen:dependencies:start
+/**
+ * @tp-dependency tp-accordion
+ * @summary Collapsible multi-panels element.
+ */
+/**
+ * @tp-dependency tp-base
+ * @summary Shared base class for tp-* components.
+ */
+/**
+ * @tp-dependency tp-button
+ * @summary Button component that supports native button and link rendering.
+ */
+/**
+ * @tp-dependency tp-button-group
+ * @summary Button group component for organizing multiple buttons.
+ */
+/**
+ * @tp-dependency tp-code-editor
+ * @summary CodeMirror-based code editor component.
+ */
+/**
+ * @tp-dependency tp-textfield
+ * @summary Single-line and automatically growing multiline text field.
+ */
+// tp-docgen:dependencies:end
+import type { TpButton } from "../button/button.js";
+import "../accordion/accordion.js";
+import { TpBase } from "../base/base.js";
+import "../button-group/button-group.js";
+import "../textfield/textfield.js";
+import "../code-editor/code-editor.js";
+import type { TpCodeEditor } from "../code-editor/code-editor.js";
+import type { TpTextfield } from "../textfield/textfield.js";
+import {
+	dependencies,
+	distance,
+	evaluateGeometry,
+	type GeometryObject,
+	type GeometryPoint,
+	type GeometryResult,
+	intersections,
+	MEDIATRIX_CONSTRUCTION,
+	parameterAt,
+	parseGeometry,
+	serializeGeometry,
+} from "./geometry.js";
+import style from "./graph-geometry.css?inline";
+
+export type {
+	GeometryObject,
+	GeometryPoint,
+	GeometryResult,
+	GeometryValue,
+} from "./geometry.js";
+export {
+	evaluateGeometry,
+	MEDIATRIX_CONSTRUCTION,
+	parseGeometry,
+	serializeGeometry,
+} from "./geometry.js";
+
+const escapeHtml = (text: string): string =>
+	text
+		.replaceAll("&", "&amp;")
+		.replaceAll("<", "&lt;")
+		.replaceAll(">", "&gt;")
+		.replaceAll('"', "&quot;");
+const TOOLS = {
+	move: "Move",
+	pan: "Pan view",
+	point: "Point",
+	on: "Point on object",
+	segment: "Segment",
+	line: "Line",
+	circle: "Circle · radius",
+	through: "Circle · through point",
+	arc: "Arc",
+	intersection: "Intersection",
+};
+type Tool = keyof typeof TOOLS;
+const HINTS: Record<Tool, string> = {
+	pan: "Drag anywhere to move the whole figure. Scroll in either direction; arrow keys pan the view.",
+	move: "Drag a point to move it, or drag empty space to move the whole view. Scroll to pan; Shift+scroll pans horizontally.",
+	point: "Click the drawing to place a free point.",
+	on: "Click a line, segment, circle or arc to place a point attached to it.",
+	segment: "Select two existing points.",
+	line: "Select two existing points.",
+	circle: "Enter a positive radius or distance(A, B), then select the centre.",
+	through: "Select the centre, then a point on the circle.",
+	arc: "Set start/end angles, then select a circle. Its outline will be hidden; its dependencies remain.",
+	intersection: "Select two lines, segments, circles or arcs.",
+};
+/**
+ * @summary Constructs dynamic figures with a graduated ruler and compass.
+ * @tagname tp-graph-geometry
+ * @attr {string} src = "" - URL of a text file containing construction commands.
+ * @attr {boolean} grid = false - Shows a light grid without axes or graduations.
+ * @attr {boolean} readonly = false - Prevents changes to the construction.
+ * @event tp-geometry-change Fired after a construction change; detail contains source and undefined object names.
+ * @eventdetail tp-geometry-change { source: string; undefined: string[] }
+ * @event tp-geometry-error Fired when a file cannot be loaded or source cannot be parsed; detail contains message.
+ * @eventdetail tp-geometry-error { message: string }
+ * @accessibility Uses library buttons, fields, an accordion and a code editor with native keyboard controls.
+ * @accessibility Provides an object list as an alternative to pointer selection and announces undefined constructions.
+ * @accessibilityresponsibility Provide a textual explanation of the figure when its visual relationships are needed to understand the lesson.
+ * @keyboard {Arrow keys} Moves the selected point, or pans in Pan view; Shift reduces the step.
+ * @keyboard {Escape} Cancels pending construction input and returns to Move.
+ * @example
+ * <tp-graph-geometry></tp-graph-geometry>
+ */
+export class TpGraphGeometry extends TpBase {
+	private objects: GeometryObject[] = [];
+	private result: GeometryResult = evaluateGeometry([]);
+	private initialized = false;
+	private sourceRequest: AbortController | null = null;
+	private objectListMarkup = "";
+	private tool: Tool = "move";
+	private pending: string[] = [];
+	private selected: string | null = null;
+	private undoStack: string[] = [];
+	private redoStack: string[] = [];
+	private scale = 36;
+	private center: GeometryPoint = { x: 0, y: 0 };
+	private pan: {
+		pointer: number;
+		start: GeometryPoint;
+		center: GeometryPoint;
+	} | null = null;
+	private suppressCanvasClick = false;
+	private drag: { id: string; before: string; pointer: number } | null = null;
+	public static get observedAttributes(): string[] {
+		return ["readonly", "grid", "src"];
+	}
+	public get src(): string {
+		return this.getAttribute("src") ?? "";
+	}
+	public set src(value: string) {
+		if (value) this.setAttribute("src", value);
+		else this.removeAttribute("src");
+	}
+	public get value(): string {
+		return serializeGeometry(this.objects);
+	}
+	public set value(source: string) {
+		this.setConstruction(source);
+	}
+	public get grid(): boolean {
+		return this.hasAttribute("grid");
+	}
+	public set grid(value: boolean) {
+		this.toggleAttribute("grid", value);
+	}
+	public get readonly(): boolean {
+		return this.hasAttribute("readonly");
+	}
+	/** Returns a detached snapshot of computed objects and undefined-object diagnostics. */
+	public analyze(): GeometryResult {
+		return structuredClone(this.result);
+	}
+	/** Atomically replaces the construction; invalid source leaves the previous figure intact. */
+	public setConstruction(source: string): void {
+		const next = parseGeometry(source);
+		const previous = this.value;
+		this.objects = next;
+		this.initialized = true;
+		if (previous !== this.value) {
+			this.undoStack.push(previous);
+			this.redoStack = [];
+		}
+		this.pending = [];
+		this.selected = null;
+		this.recompute();
+		this.syncSource();
+		this.changed();
+	}
+	/** @summary Undoes one construction change. */
+	public undo(): void {
+		if (this.readonly) return;
+		const source = this.undoStack.pop();
+		if (source === undefined) return;
+		this.redoStack.push(this.value);
+		this.restore(source);
+	}
+	/** @summary Redoes one construction change. */
+	public redo(): void {
+		if (this.readonly) return;
+		const source = this.redoStack.pop();
+		if (source === undefined) return;
+		this.undoStack.push(this.value);
+		this.restore(source);
+	}
+	/** Removes an object and every construction depending on it, as one undoable action. */
+	public removeObject(id: string): void {
+		if (this.readonly) return;
+		const removed = new Set([id]);
+		let count: number;
+		do {
+			count = removed.size;
+			for (const object of this.objects)
+				if (dependencies(object.definition).some((ref) => removed.has(ref)))
+					removed.add(object.id);
+		} while (count !== removed.size);
+		this.setConstruction(
+			serializeGeometry(
+				this.objects.filter((object) => !removed.has(object.id)),
+			),
+		);
+	}
+	protected override connectedCallback(): void {
+		super.connectedCallback();
+		this.ensureGlobalStyle("tp-graph-geometry-style", style);
+		if (!this.initialized) {
+			const source =
+				this.querySelector('script[type="tp/geometry"]')?.textContent ??
+				this.textContent ??
+				"";
+			try {
+				this.objects = parseGeometry(
+					this.src.trim() ? "" : source.trim() || MEDIATRIX_CONSTRUCTION,
+				);
+				this.initialized = true;
+			} catch (error) {
+				this.innerHTML = `<p role="alert">${escapeHtml(String(error))}</p>`;
+				this.dispatchEvent(
+					new CustomEvent("tp-geometry-error", {
+						bubbles: true,
+						detail: { message: String(error) },
+					}),
+				);
+				return;
+			}
+		}
+		this.render();
+		this.recompute();
+		this.syncSource();
+		this.fitView();
+		void this.loadSource();
+	}
+	protected attributeChangedCallback(
+		name: string,
+		oldValue: string | null,
+		newValue: string | null,
+	): void {
+		if (oldValue === newValue) return;
+		if (name === "src") {
+			if (this.isConnected && this.initialized) void this.loadSource();
+			return;
+		}
+		if (name === "grid") {
+			if (this.isConnected) this.draw();
+			return;
+		}
+		if (this.isConnected && this.initialized) {
+			this.drag = null;
+			this.pan = null;
+			this.pending = [];
+			this.tool = "move";
+			this.render();
+			this.recompute();
+			this.syncSource();
+		}
+	}
+	/** @internal */
+	public disconnectedCallback(): void {
+		this.sourceRequest?.abort();
+		this.sourceRequest = null;
+		this.drag = null;
+		this.pan = null;
+	}
+	private async loadSource(): Promise<void> {
+		this.sourceRequest?.abort();
+		this.sourceRequest = null;
+		const src = this.src.trim();
+		if (!src) {
+			this.report("");
+			return;
+		}
+		const request = new AbortController();
+		this.sourceRequest = request;
+		this.report("Loading construction…");
+		try {
+			const response = await fetch(new URL(src, this.baseURI).href, {
+				signal: request.signal,
+			});
+			if (!response.ok)
+				throw new Error(`Cannot load construction: HTTP ${response.status}`);
+			const source = await response.text();
+			if (this.sourceRequest !== request || !this.isConnected) return;
+			this.setConstruction(source);
+			this.fitView();
+			this.report("Construction loaded.");
+		} catch (error) {
+			if (this.sourceRequest !== request || request.signal.aborted) return;
+			const message = String(error);
+			this.report(message);
+			this.dispatchEvent(
+				new CustomEvent("tp-geometry-error", {
+					bubbles: true,
+					detail: { message },
+				}),
+			);
+		} finally {
+			if (this.sourceRequest === request) this.sourceRequest = null;
+		}
+	}
+
+	private restore(source: string): void {
+		this.objects = parseGeometry(source);
+		this.pending = [];
+		this.selected = null;
+		this.recompute();
+		this.syncSource();
+		this.changed();
+	}
+	private recompute(): void {
+		this.result = evaluateGeometry(this.objects);
+		this.draw();
+	}
+	private changed(): void {
+		this.dispatchEvent(
+			new CustomEvent("tp-geometry-change", {
+				bubbles: true,
+				detail: {
+					source: this.value,
+					undefined: [...this.result.errors.keys()],
+				},
+			}),
+		);
+	}
+	private syncSource(): void {
+		const editor = this.querySelector<TpCodeEditor>("tp-code-editor");
+		if (editor) editor.value = this.value;
+	}
+	private field(name: string): string {
+		return (
+			this.querySelector<TpTextfield>(`[data-field="${name}"]`)?.value ?? ""
+		);
+	}
+	private report(message: string): void {
+		const status = this.querySelector("[data-status]");
+		if (status) status.textContent = message;
+	}
+	private name(prefix: string): string {
+		let i = 1;
+		let id = prefix;
+		while (this.objects.some((o) => o.id === id)) id = `${prefix}${i++}`;
+		return id;
+	}
+	private pointName(): string {
+		return (
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+				.split("")
+				.find((id) => !this.objects.some((o) => o.id === id)) ?? this.name("P")
+		);
+	}
+	private appendConstruction(commands: string): void {
+		this.setConstruction(`${this.value}\n${commands}`);
+	}
+	private render(): void {
+		this.objectListMarkup = "";
+		this.innerHTML = `<div class="tp-geometry-header"><div><strong>Ruler & compass</strong><span>Geometric constructions</span></div><tp-button-group><tp-button type="button" outlined data-geometry-control data-action="example">Perpendicular bisector</tp-button><tp-button type="button" outlined data-geometry-control data-action="clear">New construction</tp-button></tp-button-group></div>
+      <tp-button-group class="tp-geometry-tools" aria-label="Construction tools">${Object.entries(
+				TOOLS,
+			)
+				.map(
+					([id, label]) =>
+						`<tp-button type="button" outlined data-geometry-control data-tool="${id}" aria-pressed="${id === this.tool}">${label}</tp-button>`,
+				)
+				.join("")}</tp-button-group>
+      <div class="tp-geometry-parameters"><tp-textfield data-field="radius" label="Radius / length" value="5"></tp-textfield><tp-textfield data-field="start" label="Start angle (°)" value="20"></tp-textfield><tp-textfield data-field="end" label="End angle (°)" value="100"></tp-textfield><span>Angles turn counterclockwise.</span></div>
+      <p class="tp-geometry-hint" data-hint>${HINTS[this.tool]}</p>
+      <div class="tp-geometry-workspace"><div class="tp-geometry-board"><svg data-geometry-canvas viewBox="0 0 900 560" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg><div class="tp-geometry-view"><tp-button type="button" outlined data-geometry-control data-action="undo">Undo</tp-button><tp-button type="button" outlined data-geometry-control data-action="redo">Redo</tp-button><tp-button type="button" outlined data-geometry-control data-action="out" aria-label="Zoom out">−</tp-button><tp-button type="button" outlined data-geometry-control data-action="in" aria-label="Zoom in">+</tp-button><tp-button type="button" outlined data-geometry-control data-action="fit">Fit</tp-button><tp-button type="button" outlined data-geometry-control data-action="grid" aria-pressed="${this.grid}">Grid</tp-button></div></div>
+      <aside><h3>Construction objects</h3><div data-objects></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Intersections are calculated.</p></aside></div>
+      <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source"><dl><dt>Construction source</dt><dd><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor><tp-button type="button" outlined data-geometry-control data-action="apply">Apply construction</tp-button></dd></dl></tp-accordion>`;
+		if (this.readonly)
+			for (const button of this.querySelectorAll<TpButton>(
+				'[data-tool]:not([data-tool="pan"]), [data-action="example"], [data-action="clear"], [data-action="delete"], [data-action="apply"]',
+			))
+				button.disabled = true;
+		this.querySelector(".tp-geometry-parameters")?.toggleAttribute(
+			"hidden",
+			this.readonly,
+		);
+		this.onclick = (event) => {
+			const button = (event.target as Element).closest<TpButton>(
+				"tp-button[data-geometry-control]",
+			);
+			if (!button || button.disabled) return;
+			if (
+				button.dataset.tool &&
+				(!this.readonly || button.dataset.tool === "pan")
+			) {
+				this.tool = button.dataset.tool as Tool;
+				this.pending = [];
+				this.updateTool();
+			}
+			if (button.dataset.object) this.selectObject(button.dataset.object);
+			const action = button.dataset.action;
+			if (action === "in" || action === "out") {
+				this.scale = Math.max(
+					3,
+					Math.min(300, this.scale * (action === "in" ? 1.25 : 0.8)),
+				);
+				this.draw();
+			}
+			if (action === "fit") this.fitView();
+			if (action === "grid") this.grid = !this.grid;
+			if (this.readonly) return;
+			try {
+				if (action === "undo") this.undo();
+				if (action === "redo") this.redo();
+				if (action === "delete" && this.selected)
+					this.removeObject(this.selected);
+				if (action === "example") {
+					this.setConstruction(MEDIATRIX_CONSTRUCTION);
+					this.fitView();
+				}
+				if (action === "clear") this.setConstruction("");
+				if (action === "apply") {
+					this.setConstruction(
+						this.querySelector<TpCodeEditor>("tp-code-editor")?.value ?? "",
+					);
+					this.fitView();
+				}
+			} catch (error) {
+				this.report(String(error));
+				this.dispatchEvent(
+					new CustomEvent("tp-geometry-error", {
+						bubbles: true,
+						detail: { message: String(error) },
+					}),
+				);
+			}
+		};
+		const svg = this.querySelector<SVGSVGElement>("svg[data-geometry-canvas]");
+		if (!svg) return;
+		svg.addEventListener("pointerdown", (event) => {
+			if (this.drag || this.pan || event.button > 1) return;
+			this.suppressCanvasClick = false;
+			const id = (event.target as Element)
+				.closest("[data-id]")
+				?.getAttribute("data-id");
+			if (
+				event.button === 1 ||
+				this.tool === "pan" ||
+				(!id && this.tool === "move")
+			) {
+				this.pan = {
+					pointer: event.pointerId,
+					start: this.canvasPoint(event),
+					center: { ...this.center },
+				};
+				this.suppressCanvasClick = true;
+				svg.setPointerCapture?.(event.pointerId);
+				svg.focus({ preventScroll: true });
+				svg.classList.add("is-panning");
+				event.preventDefault();
+				return;
+			}
+			if (this.readonly || this.tool !== "move") return;
+			const object = this.objects.find((o) => o.id === id);
+			if (!object) return;
+			this.selected = object.id;
+			this.draw();
+			if (object.definition.kind !== "point" && object.definition.kind !== "on")
+				return;
+			this.drag = {
+				id: object.id,
+				before: this.value,
+				pointer: event.pointerId,
+			};
+			svg.setPointerCapture?.(event.pointerId);
+			svg.focus({ preventScroll: true });
+			event.preventDefault();
+		});
+		svg.addEventListener("pointermove", (event) => {
+			if (this.pan && event.pointerId === this.pan.pointer) {
+				const p = this.canvasPoint(event);
+				this.center = {
+					x: this.pan.center.x - (p.x - this.pan.start.x) / this.scale,
+					y: this.pan.center.y + (p.y - this.pan.start.y) / this.scale,
+				};
+				this.draw();
+				return;
+			}
+			if (this.drag && event.pointerId === this.drag.pointer)
+				this.movePoint(this.drag.id, this.world(event));
+		});
+		const finish = (event: PointerEvent): void => {
+			if (this.pan && event.pointerId === this.pan.pointer) {
+				if (event.type === "pointercancel") this.center = this.pan.center;
+				this.pan = null;
+				svg.classList.remove("is-panning");
+				this.draw();
+				return;
+			}
+			if (!this.drag || event.pointerId !== this.drag.pointer) return;
+			const before = this.drag.before;
+			this.drag = null;
+			if (event.type === "pointercancel") {
+				this.restore(before);
+				return;
+			}
+			if (before !== this.value) {
+				this.undoStack.push(before);
+				this.redoStack = [];
+				this.syncSource();
+				this.changed();
+				this.draw();
+			}
+		};
+		svg.addEventListener("pointerup", finish);
+		svg.addEventListener("pointercancel", finish);
+		svg.addEventListener("click", (event) => {
+			if (this.suppressCanvasClick) {
+				this.suppressCanvasClick = false;
+				return;
+			}
+			if (this.readonly || this.tool === "move" || this.tool === "pan") return;
+			const id =
+				(event.target as Element)
+					.closest("[data-id]")
+					?.getAttribute("data-id") ?? undefined;
+			try {
+				this.useTool(id, this.world(event));
+			} catch (error) {
+				this.pending = [];
+				this.report(String(error));
+			}
+		});
+		svg.addEventListener(
+			"wheel",
+			(event) => {
+				if (event.ctrlKey || event.metaKey || this.pan || this.drag) return;
+				event.preventDefault();
+				const rect = svg.getBoundingClientRect();
+				let dx = event.deltaX;
+				let dy = event.deltaY;
+				if (event.shiftKey && dx === 0) {
+					dx = dy;
+					dy = 0;
+				}
+				const multiplierX =
+					event.deltaMode === 1
+						? 16
+						: event.deltaMode === 2
+							? rect.width || 900
+							: 1;
+				const multiplierY =
+					event.deltaMode === 1
+						? 16
+						: event.deltaMode === 2
+							? rect.height || 560
+							: 1;
+				const start = this.canvasPoint(event);
+				const end = this.canvasPoint({
+					clientX: event.clientX + dx * multiplierX,
+					clientY: event.clientY + dy * multiplierY,
+				});
+				this.center.x += (end.x - start.x) / this.scale;
+				this.center.y -= (end.y - start.y) / this.scale;
+				this.draw();
+			},
+			{ passive: false },
+		);
+		svg.addEventListener("keydown", (event) => {
+			if (event.key === "Escape") {
+				this.pending = [];
+				this.tool = "move";
+				this.updateTool();
+				return;
+			}
+			if (
+				this.tool === "pan" &&
+				["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)
+			) {
+				event.preventDefault();
+				const step = (event.shiftKey ? 8 : 40) / this.scale;
+				this.center.x +=
+					event.key === "ArrowRight"
+						? step
+						: event.key === "ArrowLeft"
+							? -step
+							: 0;
+				this.center.y +=
+					event.key === "ArrowUp"
+						? step
+						: event.key === "ArrowDown"
+							? -step
+							: 0;
+				this.draw();
+				return;
+			}
+			if (
+				this.readonly ||
+				!this.selected ||
+				!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)
+			)
+				return;
+			const v = this.result.values.get(this.selected);
+			if (v?.kind !== "point") return;
+			event.preventDefault();
+			const before = this.value;
+			const step = event.shiftKey ? 0.02 : 0.2;
+			this.movePoint(this.selected, {
+				x:
+					v.point.x +
+					(event.key === "ArrowRight"
+						? step
+						: event.key === "ArrowLeft"
+							? -step
+							: 0),
+				y:
+					v.point.y +
+					(event.key === "ArrowUp"
+						? step
+						: event.key === "ArrowDown"
+							? -step
+							: 0),
+			});
+			if (before !== this.value) {
+				this.undoStack.push(before);
+				this.redoStack = [];
+				this.syncSource();
+				this.changed();
+				this.draw();
+			}
+		});
+	}
+	private syncButtonControls(): void {
+		queueMicrotask(() => {
+			if (!this.isConnected) return;
+			for (const button of this.querySelectorAll<TpButton>(
+				"tp-button[data-geometry-control]",
+			)) {
+				const native =
+					button.querySelector<HTMLButtonElement>(":scope > button");
+				if (!native) continue;
+				for (const name of ["aria-pressed", "aria-label"]) {
+					const value = button.getAttribute(name);
+					if (value !== null) native.setAttribute(name, value);
+					else native.removeAttribute(name);
+				}
+				const variant =
+					button.getAttribute("aria-pressed") === "true" ? "brand" : "neutral";
+				if (button.variant !== variant) button.variant = variant;
+			}
+		});
+	}
+	private updateTool(): void {
+		for (const button of this.querySelectorAll("[data-tool]"))
+			button.setAttribute(
+				"aria-pressed",
+				String((button as HTMLElement).dataset.tool === this.tool),
+			);
+		const hint = this.querySelector("[data-hint]");
+		if (hint) hint.textContent = HINTS[this.tool];
+		this.report(
+			this.pending.length
+				? `Selected: ${this.pending.join(", ")}. Select the next object.`
+				: "",
+		);
+		this.draw();
+	}
+	private selectObject(id: string): void {
+		if (this.tool === "move" || this.tool === "pan" || this.readonly) {
+			this.selected = id;
+			this.draw();
+			this.querySelector<SVGSVGElement>("svg[data-geometry-canvas]")?.focus();
+			return;
+		}
+		const value = this.result.values.get(id);
+		const p =
+			value?.kind === "point"
+				? value.point
+				: value?.kind === "circle" || value?.kind === "arc"
+					? { x: value.center.x + value.radius, y: value.center.y }
+					: value?.kind === "line" || value?.kind === "segment"
+						? value.first
+						: { x: 0, y: 0 };
+		try {
+			this.useTool(id, p);
+		} catch (error) {
+			this.pending = [];
+			this.report(String(error));
+		}
+	}
+	private useTool(id: string | undefined, p: GeometryPoint): void {
+		const value = id ? this.result.values.get(id) : null;
+		if (this.tool === "point") {
+			this.appendConstruction(`point ${this.pointName()} = (${p.x}, ${p.y})`);
+			return;
+		}
+		if (!id || !value) throw new Error("Select an existing, defined object.");
+		if (this.tool === "on") {
+			const t = parameterAt(value, p);
+			this.appendConstruction(
+				`point ${this.pointName()} = on(${id}, ${value.kind === "line" || value.kind === "segment" ? `t=${t}` : `angle=${(t * 180) / Math.PI}deg`})`,
+			);
+			return;
+		}
+		if (this.tool === "arc") {
+			if (value.kind !== "circle") throw new Error("Select a circle.");
+			const source = `${this.value}\narc ${this.name("arc")} = arc(${id}, start=${this.field("start")}deg, end=${this.field("end")}deg)`;
+			const next = parseGeometry(source);
+			const support = next.find((o) => o.id === id);
+			if (support) support.hidden = true;
+			this.setConstruction(serializeGeometry(next));
+			return;
+		}
+		if (this.tool === "circle") {
+			if (value.kind !== "point") throw new Error("Select the centre point.");
+			this.appendConstruction(
+				`circle ${this.name("c")} = circle(${id}, ${this.field("radius")})`,
+			);
+			return;
+		}
+		if (this.tool !== "intersection" && value.kind !== "point")
+			throw new Error("Select a point.");
+		if (this.tool === "intersection" && value.kind === "point")
+			throw new Error("Select a line, segment, circle or arc.");
+		if (this.pending.includes(id))
+			throw new Error("Select two different objects.");
+		this.pending.push(id);
+		if (this.pending.length < 2) {
+			this.updateTool();
+			return;
+		}
+		const [first = "", second = ""] = this.pending;
+		this.pending = [];
+		if (this.tool === "line" || this.tool === "segment")
+			this.appendConstruction(
+				`${this.tool} ${this.name(this.tool === "line" ? "d" : "s")} = ${this.tool}(${first}, ${second})`,
+			);
+		else if (this.tool === "through")
+			this.appendConstruction(
+				`circle ${this.name("c")} = circle(${first}, through=${second})`,
+			);
+		else {
+			const a = this.result.values.get(first);
+			const b = this.result.values.get(second);
+			if (!a || !b) return;
+			const points = intersections(a, b);
+			const branches = points
+				.map((point, index) =>
+					point &&
+					!(index === 1 && points[0] && distance(point, points[0]) < 1e-9)
+						? index
+						: -1,
+				)
+				.filter((index) => index >= 0);
+			if (!branches.length)
+				throw new Error("These objects have no distinct intersection.");
+			const next = [...this.objects];
+			for (const branch of branches) {
+				let i = 1;
+				let name = "I";
+				while (next.some((o) => o.id === name)) name = `I${i++}`;
+				next.push({
+					id: name,
+					hidden: false,
+					definition: { kind: "intersection", first, second, branch },
+				});
+			}
+			this.setConstruction(serializeGeometry(next));
+		}
+		this.updateTool();
+	}
+	private canvasPoint(
+		event: Pick<MouseEvent, "clientX" | "clientY">,
+	): GeometryPoint {
+		const svg = this.querySelector<SVGSVGElement>("svg[data-geometry-canvas]");
+		const matrix = svg?.getScreenCTM?.();
+		if (matrix && typeof DOMPoint !== "undefined") {
+			const p = new DOMPoint(event.clientX, event.clientY).matrixTransform(
+				matrix.inverse(),
+			);
+			return { x: p.x, y: p.y };
+		}
+		const rect = svg?.getBoundingClientRect();
+		return {
+			x: ((event.clientX - (rect?.left ?? 0)) * 900) / (rect?.width || 900),
+			y: ((event.clientY - (rect?.top ?? 0)) * 560) / (rect?.height || 560),
+		};
+	}
+	private world(event: MouseEvent): GeometryPoint {
+		const p = this.canvasPoint(event);
+		return {
+			x: (p.x - 450) / this.scale + this.center.x,
+			y: (280 - p.y) / this.scale + this.center.y,
+		};
+	}
+	private movePoint(id: string, p: GeometryPoint): void {
+		const d = this.objects.find((o) => o.id === id)?.definition;
+		if (!d) return;
+		if (d.kind === "point") {
+			d.x = p.x;
+			d.y = p.y;
+		} else if (d.kind === "on") {
+			const support = this.result.values.get(d.object);
+			if (support) d.parameter = parameterAt(support, p);
+		}
+		this.recompute();
+	}
+	private fitView(): void {
+		const points: GeometryPoint[] = [];
+		for (const object of this.objects) {
+			if (object.hidden) continue;
+			const v = this.result.values.get(object.id);
+			if (!v) continue;
+			if (v.kind === "point") points.push(v.point);
+			if (v.kind === "segment") points.push(v.first, v.second);
+			if (v.kind === "circle")
+				points.push(
+					{ x: v.center.x - v.radius, y: v.center.y - v.radius },
+					{ x: v.center.x + v.radius, y: v.center.y + v.radius },
+				);
+			if (v.kind === "arc")
+				for (let i = 0; i <= 32; i++)
+					points.push({
+						x: v.center.x + v.radius * Math.cos(v.start + (v.sweep * i) / 32),
+						y: v.center.y + v.radius * Math.sin(v.start + (v.sweep * i) / 32),
+					});
+		}
+		if (points.length) {
+			const xs = points.map((p) => p.x);
+			const ys = points.map((p) => p.y);
+			const minX = Math.min(...xs);
+			const maxX = Math.max(...xs);
+			const minY = Math.min(...ys);
+			const maxY = Math.max(...ys);
+			this.center = { x: (minX + maxX) / 2, y: (minY + maxY) / 2 };
+			this.scale = Math.max(
+				3,
+				Math.min(
+					70,
+					740 / Math.max(1, maxX - minX),
+					430 / Math.max(1, maxY - minY),
+				),
+			);
+		} else {
+			this.scale = 36;
+			this.center = { x: 0, y: 0 };
+		}
+		this.draw();
+	}
+	private draw(): void {
+		const group = this.querySelector("[data-drawing]");
+		if (!group) return;
+		const x = (n: number): number => 450 + (n - this.center.x) * this.scale;
+		const y = (n: number): number => 280 - (n - this.center.y) * this.scale;
+		const shapes: string[] = [];
+		const points: string[] = [];
+		for (const object of this.objects) {
+			const v = this.result.values.get(object.id);
+			if (!v || object.hidden) continue;
+			const attributes = `data-id="${object.id}" class="tp-geometry-shape ${this.selected === object.id || this.pending.includes(object.id) ? "is-selected" : ""}"`;
+			let shape = "";
+			if (v.kind === "point") {
+				points.push(
+					`<g ${attributes}><circle class="point-hit" cx="${x(v.point.x)}" cy="${y(v.point.y)}" r="13"/><circle class="point ${object.definition.kind === "point" ? "free" : "dependent"}" cx="${x(v.point.x)}" cy="${y(v.point.y)}" r="5"/><text x="${x(v.point.x) + 11}" y="${y(v.point.y) - 10}">${object.id}</text><title>${object.id} · ${object.definition.kind}</title></g>`,
+				);
+				continue;
+			}
+			if (v.kind === "line" || v.kind === "segment") {
+				const length = distance(v.first, v.second);
+				const factor =
+					v.kind === "line"
+						? (1800 / this.scale + distance(v.first, this.center)) / length
+						: 0;
+				const dx = v.second.x - v.first.x;
+				const dy = v.second.y - v.first.y;
+				shape = `<line x1="${x(v.first.x - dx * factor)}" y1="${y(v.first.y - dy * factor)}" x2="${x(v.second.x + dx * factor)}" y2="${y(v.second.y + dy * factor)}"/>`;
+			} else if (v.kind === "circle")
+				shape = `<circle cx="${x(v.center.x)}" cy="${y(v.center.y)}" r="${v.radius * this.scale}"/>`;
+			else if (v.kind === "arc") {
+				const start = {
+					x: v.center.x + v.radius * Math.cos(v.start),
+					y: v.center.y + v.radius * Math.sin(v.start),
+				};
+				const end = {
+					x: v.center.x + v.radius * Math.cos(v.start + v.sweep),
+					y: v.center.y + v.radius * Math.sin(v.start + v.sweep),
+				};
+				shape = `<path d="M ${x(start.x)} ${y(start.y)} A ${v.radius * this.scale} ${v.radius * this.scale} 0 ${Math.abs(v.sweep) > Math.PI ? 1 : 0} ${v.sweep > 0 ? 0 : 1} ${x(end.x)} ${y(end.y)}"/>`;
+			}
+			shapes.push(
+				`<g ${attributes}><g class="shape-hit">${shape}</g><g class="shape-ink ${v.kind}">${shape}</g><title>${object.id}</title></g>`,
+			);
+		}
+		group.innerHTML = `${shapes.join("")}${points.join("")}`;
+		const grid = this.querySelector("[data-grid]");
+		if (grid) {
+			const step =
+				this.scale * 10 ** Math.max(0, Math.ceil(Math.log10(18 / this.scale)));
+			const commands: string[] = [];
+			if (this.grid) {
+				for (let px = ((x(0) % step) + step) % step; px <= 900; px += step)
+					commands.push(`M ${px} 0 V 560`);
+				for (let py = ((y(0) % step) + step) % step; py <= 560; py += step)
+					commands.push(`M 0 ${py} H 900`);
+			}
+			grid.innerHTML = commands.length
+				? `<path d="${commands.join(" ")}"/>`
+				: "";
+		}
+		this.querySelector('[data-action="grid"]')?.setAttribute(
+			"aria-pressed",
+			String(this.grid),
+		);
+		this.querySelector("[data-geometry-canvas]")?.classList.toggle(
+			"pan-mode",
+			this.tool === "pan",
+		);
+		const list = this.querySelector("[data-objects]");
+		if (list) {
+			const markup =
+				this.objects
+					.map(
+						(o) =>
+							`<tp-button type="button" outlined data-geometry-control data-object="${o.id}" aria-pressed="${this.selected === o.id}" title="${escapeHtml(this.result.errors.get(o.id) ?? o.definition.kind)}"><b>${o.id}</b><span class="object-kind">${this.result.errors.has(o.id) ? "Undefined" : o.definition.kind}${o.hidden ? " · hidden" : ""}</span></tp-button>`,
+					)
+					.join("") || "<p>Place your first point.</p>";
+			if (markup !== this.objectListMarkup) {
+				list.innerHTML = markup;
+				this.objectListMarkup = markup;
+			}
+		}
+		this.syncButtonControls();
+		for (const action of ["undo", "redo", "delete"]) {
+			const button = this.querySelector<TpButton>(`[data-action="${action}"]`);
+			if (button)
+				button.disabled =
+					this.readonly ||
+					(action === "undo"
+						? !this.undoStack.length
+						: action === "redo"
+							? !this.redoStack.length
+							: !this.selected);
+		}
+		if (this.result.errors.size)
+			this.report(
+				[...this.result.errors]
+					.map(([id, error]) => `${id}: ${error}`)
+					.join(" "),
+			);
+		else if (!this.pending.length) this.report("");
+	}
+}
+if (!customElements.get("tp-graph-geometry"))
+	customElements.define("tp-graph-geometry", TpGraphGeometry);

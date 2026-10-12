@@ -26,7 +26,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | [Overlays](#overlays) | 7 | Dialogs, menus, popovers, and floating contextual content. |
 | [Pickers](#pickers) | 5 | Visual selection of colors, emoji, formulas, icons, and symbols. |
 | [Playgrounds](#playgrounds) | 9 | Interactive execution environments for languages and markup formats. |
-| [Plots](#plots) | 5 | Programmatic drawing and mathematical plotting. |
+| [Plots](#plots) | 6 | Geometric constructions, programmatic drawing and mathematical plotting. |
 | [Questions](#questions) | 16 | Quizzes and programming exercises using viewers or playgrounds. |
 | [References](#references) | 5 | Notes, bibliography, glossary, inline references and generated lists. |
 | [Simulators](#simulators) | 8 | Interactive automata, circuits, optics, and query simulations. |
@@ -217,6 +217,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | Component | Description |
 | --- | --- |
 | <tp-icon name="diagram" library="components" size="1.25em"></tp-icon> [`<tp-diagram>`](diagram/index.md) | Accessible diagrams rendered from Mermaid source. |
+| <tp-icon name="graph-geometry" library="components" size="1.25em"></tp-icon> [`<tp-graph-geometry>`](graph-geometry/index.md) | Dynamic ruler and compass constructions. |
 | <tp-icon name="lsystem" library="components" size="1.25em"></tp-icon> [`<tp-lsystem>`](lsystem/index.md) | L-system fractals. |
 | <tp-icon name="map" library="components" size="1.25em"></tp-icon> [`<tp-map>`](map/index.md) | Interactive [Leaflet](https://leafletjs.com)/[OpenStreetMap](https://www.openstreetmap.org/) with named markers and GPX routes or tracks. |
 | <tp-icon name="turtle" library="components" size="1.25em"></tp-icon> [`<tp-turtle>`](turtle/index.md) | SVG renderer for the tp turtle drawing language. |

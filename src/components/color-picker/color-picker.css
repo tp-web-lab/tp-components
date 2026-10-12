@@ -93,6 +93,7 @@ tp-color-picker [data-tp-color-picker-swatch] {
 }
 
 tp-color-picker [data-tp-color-picker-token-name] {
+	color: var(--tp-text-body);
 	grid-area: token;
 	font-size: 0.78rem;
 	line-height: 1.2;
@@ -147,6 +148,7 @@ tp-color-picker [data-tp-color-picker-class-chip] {
 }
 
 tp-color-picker [data-tp-color-picker-class-name] {
+	color: var(--tp-text-body);
 	font-size: 0.78rem;
 	line-height: 1.2;
 	word-break: break-word;

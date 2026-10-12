@@ -137,6 +137,7 @@
          .. tp-divider::
 
          .. h3::
+            :id: numberfield-preview-heading
 
             Preview
 

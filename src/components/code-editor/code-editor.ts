@@ -2128,6 +2128,7 @@ export class TpCodeEditor extends TpBase {
 				"aria-label": this.getAttribute("aria-label")?.trim() || "Code editor",
 				dir: "ltr",
 				spellcheck: "false",
+				tabindex: "0",
 			}),
 
 			EditorView.updateListener.of((update) => {

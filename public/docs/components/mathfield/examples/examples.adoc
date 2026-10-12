@@ -81,7 +81,7 @@ Reset defaults
 ====
 ====
 
-[h3]
+[h3,id="mathfield-preview-heading"]
 ====
 Preview
 ====

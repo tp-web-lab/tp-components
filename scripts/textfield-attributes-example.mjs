@@ -76,7 +76,7 @@ function buildAttributesExample(component = "textfield") {
   <tp-button id="textfield-reset" type="button">Reset defaults</tp-button>
 </tp-stack>
 <tp-divider></tp-divider>
-<h3>Preview</h3>
+<h3 id="textfield-preview-heading">Preview</h3>
 <tp-box><tp-${component} id="textfield-preview"></tp-${component}></tp-box>
 <tp-box id="textfield-readout" aria-live="polite">Reading native attributes…</tp-box>
 <tp-callout variant="info" heading="Things to try">${instructions[component]} Enable clearable to show the clear button; it is hidden otherwise.</tp-callout>
@@ -102,6 +102,9 @@ preview.after(ticks);
 
 function showNativeAttributes() {
   const input = preview.querySelector("input, textarea");
+  // The demo heading names an otherwise unlabelled preview without changing its attributes.
+  if (!preview.label && !input.getAttribute("aria-label")) input.setAttribute("aria-labelledby", "textfield-preview-heading");
+  else if (input.getAttribute("aria-labelledby") === "textfield-preview-heading") input.removeAttribute("aria-labelledby");
   readout.textContent = "Native " + input.localName
     + ": aria-label=" + JSON.stringify(input.getAttribute("aria-label"))
     + ", autocomplete=" + JSON.stringify(input.getAttribute("autocomplete"))
@@ -109,7 +112,7 @@ function showNativeAttributes() {
     + (input.localName === "input" ? ", type=" + JSON.stringify(input.type) : ", rows=" + input.rows)
     + (["date", "time", "number", "range"].includes(input.type) ? ", min=" + JSON.stringify(input.min) + ", max=" + JSON.stringify(input.max) + ", step=" + input.step + ", valid=" + input.validity.valid : "")
     + (preview.localName === "tp-mathfield" ? ", mode=" + preview.mode : "")
-    + (!preview.label && !input.getAttribute("aria-label") ? ". No accessible name: set a label before publishing." : "");
+    + (!preview.label && !input.getAttribute("aria-label") ? ". Named by the Preview heading; supply a label when using this field elsewhere." : "");
 }
 
 function apply(setting, value) {

@@ -1,0 +1,6 @@
+point O = (0, 0)
+point A = (6, 0)
+circle c = circle(O, 5)
+point P = on(c, angle=60deg)
+line d = line(O, A)
+point Q = on(d, t=0.5)

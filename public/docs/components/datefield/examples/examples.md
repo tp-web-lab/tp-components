@@ -63,7 +63,9 @@ Reset defaults
 ::: tp-divider
 :::
 
-### Preview
+::: h3 { id="datefield-preview-heading" }
+Preview
+:::
 
 :::: tp-box
 ::: tp-datefield { id="datefield-preview" }

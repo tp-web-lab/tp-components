@@ -1,7 +1,7 @@
 # Plots
 
 ::: tp-callout { variant="info" style="margin-bottom: 2em" }
-Plot components display geographic maps and turn declarative source into diagrams, L-system fractals, turtle drawings and mathematical graphs.
+Plot components display geographic maps and turn declarative source into diagrams, L-system fractals, turtle drawings, ruler and compass constructions and mathematical graphs.
 :::
 
 :::::: tp-grid { min-width="10rem" gap="1.5rem" }
@@ -10,6 +10,12 @@ Plot components display geographic maps and turn declarative source into diagram
 :tp-icon:{name="diagram" library="components" size="4em" aria-hidden="true"}
 
 [tp-diagram](diagram/index.md)
+:::
+
+::: tp-center { intrinsic }
+:tp-icon:{name="graph-geometry" library="components" size="4em" aria-hidden="true"}
+
+[tp-graph-geometry](graph-geometry/index.md)
 :::
 
 ::: tp-center { intrinsic }
@@ -31,7 +37,7 @@ Plot components display geographic maps and turn declarative source into diagram
 :::
 
 ::: tp-center { intrinsic }
-:tp-icon:{name="base" library="components" size="4em" aria-hidden="true"}
+:tp-icon:{name="xy-plot" library="components" size="4em" aria-hidden="true"}
 
 [tp-xy-plot](xy-plot/index.md)
 :::
