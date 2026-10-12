@@ -364,6 +364,7 @@ const additional = {
 };
 
 export function describeExample(component, label) {
+ if (component === "graph-geometry" && label === "Measurements") return "Drag A, B or C to update the length and marked angles: the right-angle square becomes an arc with its value when the sides are no longer perpendicular. Change the circle radius in Construction source to update its area. In Move mode, drag the measurement labels apart or select them and use the arrow keys. Use the three standard measurement tools to add distances, perimeters and areas without enabling built-in.";
  if (component === "graph-geometry" && label === "Styles and export") return "Select an object in Move mode and change its stroke style or library color. Reveal the hidden circle from the object list, then use Save image to export the current view as SVG, PNG or WebP.";
  if (component === "graph-geometry" && label === "Ruler primitives") return "Move A or B to compare a free segment with a fixed-length segment, a ray and a vector. The sector and comment follow their supports; use the toolbar to add another construction.";
  if (component === "graph-geometry" && label === "Transform in place") return "Choose Transform the object, select Rotation, then the circle c and centre O. The circle keeps its name and its attached point Q follows; Undo restores the original construction. Switch to Create a copy to compare both modes.";

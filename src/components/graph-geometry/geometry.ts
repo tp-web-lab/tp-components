@@ -17,6 +17,12 @@ export const GEOMETRY_TRANSFORMATIONS = [
 export type GeometryTransformation = (typeof GEOMETRY_TRANSFORMATIONS)[number];
 export type GeometryDefinition =
 	| {
+			kind: "measure";
+			offset?: GeometryPoint;
+			operation: "length" | "area" | "angle";
+			inputs: string[];
+	  }
+	| {
 			kind: "transform";
 			operation: GeometryTransformation;
 			object: string | GeometryDefinition;
@@ -64,7 +70,17 @@ export type GeometryValue =
 			first: GeometryPoint;
 			second: GeometryPoint;
 	  }
-	| { kind: "comment"; point: GeometryPoint; text: string }
+	| {
+			kind: "comment";
+			point: GeometryPoint;
+			text: string;
+			angleMark?: {
+				vertex: GeometryPoint;
+				start: number;
+				sweep: number;
+				right: boolean;
+			};
+	  }
 	| { kind: "circle"; center: GeometryPoint; radius: number }
 	| {
 			kind: "arc" | "sector";
@@ -303,6 +319,29 @@ function parseGeometryCommands(source: string, depth = 0): GeometryObject[] {
 					};
 				} else if (
 					type === "comment" &&
+					(fn === "length" || fn === "area" || fn === "angle")
+				) {
+					const optionIndex = args.findIndex((arg) => arg.includes("="));
+					const inputs = optionIndex < 0 ? args : args.slice(0, optionIndex);
+					named(inputs.length, ["dx", "dy"]);
+					if (
+						!(fn === "angle"
+							? inputs.length === 3 || inputs.length === 2
+							: fn === "length"
+								? inputs.length === 1 || inputs.length === 2
+								: inputs.length === 1)
+					)
+						throw new Error("Invalid measurement arguments.");
+					const x = number(options.get("dx") ?? "0"),
+						y = number(options.get("dy") ?? "0");
+					definition = {
+						kind: "measure",
+						operation: fn,
+						inputs: inputs.map(identifier),
+						...(x || y ? { offset: { x, y } } : {}),
+					};
+				} else if (
+					type === "comment" &&
 					fn === "comment" &&
 					args.length === 2
 				) {
@@ -497,6 +536,17 @@ export function parseGeometry(source: string): GeometryObject[] {
 				requireKind(d.point, ["point"]);
 				requireKind(d.circle, ["circle"]);
 			}
+			if (d.kind === "measure") {
+				const allowed =
+					d.operation === "angle" && d.inputs.length === 2
+						? ["segment", "ray", "vector", "line"]
+						: d.operation === "angle" || d.inputs.length === 2
+							? ["point"]
+							: d.operation === "area"
+								? ["polygon", "circle", "sector"]
+								: ["segment", "vector", "circle", "arc", "polygon", "sector"];
+				for (const ref of d.inputs) requireKind(ref, allowed);
+			}
 			if (d.kind === "comment") requireKind(d.point, ["point"]);
 		};
 		checkDefinition(object.definition);
@@ -510,6 +560,7 @@ export function parseGeometry(source: string): GeometryObject[] {
 export function constructionKind(d: GeometryDefinition): GeometryValue["kind"] {
 	if (d.kind === "transform") return d.output;
 	if (d.kind === "regularPolygon") return "polygon";
+	if (d.kind === "measure") return "comment";
 	if (d.kind === "on" || d.kind === "intersection" || d.kind === "midpoint")
 		return "point";
 	if (
@@ -527,6 +578,8 @@ export function constructionKind(d: GeometryDefinition): GeometryValue["kind"] {
 const parameterKinds = new WeakMap<GeometryDefinition, "linear" | "circular">();
 export function dependencies(d: GeometryDefinition): string[] {
 	switch (d.kind) {
+		case "measure":
+			return d.inputs;
 		case "transform":
 			return [
 				...(typeof d.object === "string" ? [d.object] : dependencies(d.object)),
@@ -710,6 +763,24 @@ function transformGeometry(
 			};
 		};
 	}
+	if (value.kind === "comment" && value.angleMark) {
+		const mark = value.angleMark;
+		const vertex = map(mark.vertex);
+		const tip = map({
+			x: mark.vertex.x + Math.cos(mark.start),
+			y: mark.vertex.y + Math.sin(mark.start),
+		});
+		return {
+			...value,
+			point: map(value.point),
+			angleMark: {
+				...mark,
+				vertex,
+				start: Math.atan2(tip.y - vertex.y, tip.x - vertex.x),
+				sweep: mark.sweep * orientation,
+			},
+		};
+	}
 	if (value.kind === "point" || value.kind === "comment")
 		return { ...value, point: map(value.point) };
 	if (isLinear(value))
@@ -729,6 +800,172 @@ function transformGeometry(
 		radius,
 		start: Math.atan2(start.y - center.y, start.x - center.x),
 		sweep: orientation * value.sweep,
+	};
+}
+/** Dynamic measurement labels use construction units and degrees. */
+function measureGeometry(
+	d: Extract<GeometryDefinition, { kind: "measure" }>,
+	get: (ref: string) => GeometryValue,
+): GeometryValue {
+	const values = d.inputs.map(get);
+	const first = values[0];
+	if (!first) throw new Error("Missing measurement support.");
+	let amount = 0;
+	let angleMark: Extract<GeometryValue, { kind: "comment" }>["angleMark"];
+	let anchor: GeometryPoint;
+	const average = (points: GeometryPoint[]): GeometryPoint => ({
+		x: points.reduce((sum, p) => sum + p.x, 0) / points.length,
+		y: points.reduce((sum, p) => sum + p.y, 0) / points.length,
+	});
+	if (d.operation === "angle" && values.length === 2) {
+		const second = values[1];
+		if (!isLinear(first) || !second || !isLinear(second))
+			throw new Error("Select two linear sides.");
+		const shared = [first.first, first.second].find(
+			(p) =>
+				distance(p, second.first) < EPS || distance(p, second.second) < EPS,
+		);
+		const vertex =
+			shared ?? intersections(first, second).find((p) => p !== null);
+		if (!vertex)
+			throw new Error("The sides need a common vertex or intersection.");
+		const tip = (side: typeof first): GeometryPoint =>
+			distance(side.first, vertex) > distance(side.second, vertex)
+				? side.first
+				: side.second;
+		const a = tip(first),
+			b = tip(second);
+		if (distance(a, vertex) < EPS || distance(b, vertex) < EPS)
+			throw new Error("The angle needs two nonzero arms.");
+		const u = subtract(a, vertex),
+			v = subtract(b, vertex);
+		const sweep = Math.atan2(cross(u, v), u.x * v.x + u.y * v.y);
+		amount = (Math.abs(sweep) * 180) / Math.PI;
+		angleMark = {
+			vertex,
+			start: Math.atan2(u.y, u.x),
+			sweep,
+			right: Math.abs(amount - 90) < 1e-7,
+		};
+		anchor = vertex;
+	} else if (d.operation === "angle" || values.length === 2) {
+		const points = values.map((v) => {
+			if (v.kind !== "point") throw new Error("Select points.");
+			return v.point;
+		});
+		const [a, b, c] = points;
+		if (!a || !b) throw new Error("Select two points.");
+		if (d.operation === "angle") {
+			if (!c || distance(a, b) < EPS || distance(c, b) < EPS)
+				throw new Error("The angle needs two nonzero arms.");
+			const u = subtract(a, b),
+				v = subtract(c, b);
+			amount =
+				(Math.atan2(Math.abs(cross(u, v)), u.x * v.x + u.y * v.y) * 180) /
+				Math.PI;
+			anchor = b;
+		} else {
+			amount = distance(a, b);
+			anchor = average([a, b]);
+		}
+	} else if (first.kind === "polygon") {
+		anchor = average(first.vertices);
+		const vertices = first.vertices;
+		if (d.operation === "area") {
+			// Crossing boundaries do not define a single simple polygon area.
+			for (let i = 0; i < vertices.length; i++) {
+				const a = vertices[i],
+					b = vertices[(i + 1) % vertices.length];
+				if (!a || !b) continue;
+				for (let j = i + 2; j < vertices.length; j++) {
+					if (i === 0 && j === vertices.length - 1) continue;
+					const c = vertices[j],
+						e = vertices[(j + 1) % vertices.length];
+					if (!c || !e) continue;
+					const orientation = (
+						p: GeometryPoint,
+						q: GeometryPoint,
+						r: GeometryPoint,
+					): number => cross(subtract(q, p), subtract(r, p));
+					const onEdge = (
+						p: GeometryPoint,
+						q: GeometryPoint,
+						r: GeometryPoint,
+					): boolean =>
+						Math.abs(orientation(p, q, r)) < EPS &&
+						r.x >= Math.min(p.x, q.x) - EPS &&
+						r.x <= Math.max(p.x, q.x) + EPS &&
+						r.y >= Math.min(p.y, q.y) - EPS &&
+						r.y <= Math.max(p.y, q.y) + EPS;
+					if (
+						(orientation(a, b, c) * orientation(a, b, e) < 0 &&
+							orientation(c, e, a) * orientation(c, e, b) < 0) ||
+						onEdge(a, b, c) ||
+						onEdge(a, b, e) ||
+						onEdge(c, e, a) ||
+						onEdge(c, e, b)
+					)
+						throw new Error(
+							"Area requires a simple polygon without crossing edges.",
+						);
+				}
+			}
+		}
+		for (let i = 0; i < vertices.length; i++) {
+			const a = vertices[i],
+				b = vertices[(i + 1) % vertices.length];
+			if (!a || !b) continue;
+			amount +=
+				d.operation === "area"
+					? cross(
+							subtract(a, vertices[0] ?? a),
+							subtract(b, vertices[0] ?? a),
+						) / 2
+					: distance(a, b);
+		}
+		amount = Math.abs(amount);
+	} else if (first.kind === "segment" || first.kind === "vector") {
+		amount = distance(first.first, first.second);
+		anchor = average([first.first, first.second]);
+	} else if (
+		first.kind === "circle" ||
+		first.kind === "arc" ||
+		first.kind === "sector"
+	) {
+		const sweep = first.kind === "circle" ? TAU : Math.abs(first.sweep);
+		amount =
+			d.operation === "area"
+				? (first.radius ** 2 * sweep) / 2
+				: first.radius * sweep +
+					(first.kind === "sector" ? 2 * first.radius : 0);
+		anchor =
+			first.kind === "arc"
+				? {
+						x:
+							first.center.x +
+							first.radius * Math.cos(first.start + first.sweep / 2),
+						y:
+							first.center.y +
+							first.radius * Math.sin(first.start + first.sweep / 2),
+					}
+				: first.center;
+	} else throw new Error("Unsupported measurement support.");
+	if (!Number.isFinite(amount))
+		throw new Error("The measurement is undefined.");
+	const unit =
+		d.operation === "angle" ? "°" : d.operation === "area" ? " u²" : " u";
+	return {
+		kind: "comment",
+		point: {
+			x: anchor.x + (d.offset?.x ?? 0),
+			y: anchor.y + (d.offset?.y ?? 0),
+		},
+		text: angleMark
+			? angleMark.right
+				? ""
+				: `${Number(amount.toFixed(2))}°`
+			: `${d.operation}(${d.inputs.join(", ")}) = ${Number(amount.toFixed(2))}${unit}`,
+		...(angleMark ? { angleMark } : {}),
 	};
 }
 export function evaluateGeometry(
@@ -872,6 +1109,8 @@ export function evaluateGeometry(
 						);
 					} else throw new Error("Expected a line or circle.");
 					value = { kind: "point", point: p };
+				} else if (d.kind === "measure") {
+					value = measureGeometry(d, get);
 				} else if (d.kind === "comment") {
 					value = { kind: "comment", point: point(d.point), text: d.text };
 				} else if (
@@ -1040,6 +1279,8 @@ export function serializeGeometry(objects: readonly GeometryObject[]): string {
 					expression = `${d.kind}(${d.first}, ${d.second}${d.kind === "segment" && d.length !== undefined ? `, length=${n(d.length)}` : ""})`;
 				else if (d.kind === "circle")
 					expression = `circle(${d.center}, ${typeof d.radius === "number" ? n(d.radius) : "through" in d.radius ? `through=${d.radius.through}` : `distance(${d.radius.distance.join(", ")})`})`;
+				else if (d.kind === "measure")
+					expression = `${d.operation}(${d.inputs.join(", ")}${d.offset ? `, dx=${n(d.offset.x)}, dy=${n(d.offset.y)}` : ""})`;
 				else if (d.kind === "comment")
 					expression = `comment(${d.point}, ${JSON.stringify(d.text)})`;
 				else if (d.kind === "midpoint" || d.kind === "perpendicularBisector")

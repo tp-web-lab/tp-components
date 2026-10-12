@@ -17,6 +17,10 @@
  * @summary Button group component for organizing multiple buttons.
  */
 /**
+ * @tp-dependency tp-callout
+ * @summary Callout component for highlighted contextual content.
+ */
+/**
  * @tp-dependency tp-code-editor
  * @summary CodeMirror-based code editor component.
  */
@@ -39,6 +43,7 @@
 // tp-docgen:dependencies:end
 import type { TpButton } from "../button/button.js";
 import "../accordion/accordion.js";
+import "../callout/callout.js";
 import { TpBase } from "../base/base.js";
 import "../button-group/button-group.js";
 import "../textfield/textfield.js";
@@ -104,6 +109,9 @@ const TOOLS = {
 	vector: "Vector",
 	sector: "Angular sector",
 	comment: "Comment",
+	length: "Measure length",
+	area: "Measure area",
+	angle: "Measure angle",
 	circle: "Circle · radius",
 	through: "Circle · through point",
 	arc: "Arc",
@@ -126,6 +134,11 @@ const BUILT_IN_TOOLS = {
 };
 type Tool = keyof typeof TOOLS | keyof typeof BUILT_IN_TOOLS;
 const HINTS: Record<Tool, string> = {
+	length:
+		"Select two points, or a segment, vector, circle, arc, polygon or sector. Closed shapes show their perimeter.",
+	area: "Select a circle, polygon or angular sector to measure its area.",
+	angle:
+		"Select two sides with a common vertex or intersection, or three points (vertex second). Two sides show an arc and value, or a square for a right angle.",
 	axialSymmetry:
 		"Select the object to copy, then a line, segment, ray or vector as the reflection axis.",
 	centralSymmetry: "Select the object to copy, then the centre point.",
@@ -180,7 +193,7 @@ const HINTS: Record<Tool, string> = {
  * @accessibility Uses library buttons, fields, an accordion and a code editor with native keyboard controls.
  * @accessibility Provides an object list as an alternative to pointer selection and announces undefined constructions.
  * @accessibilityresponsibility Provide a textual explanation of the figure when its visual relationships are needed to understand the lesson.
- * @keyboard {Arrow keys} Moves the selected point, or pans in Pan view; Shift reduces the step.
+ * @keyboard {Arrow keys} Moves the selected point or measurement label, or pans in Pan view; Shift reduces the step.
  * @keyboard {Escape} Cancels pending construction input and returns to Move.
  * @example
  * <tp-graph-geometry></tp-graph-geometry>
@@ -207,7 +220,12 @@ export class TpGraphGeometry extends TpBase {
 		center: GeometryPoint;
 	} | null = null;
 	private suppressCanvasClick = false;
-	private drag: { id: string; before: string; pointer: number } | null = null;
+	private drag: {
+		id: string;
+		before: string;
+		pointer: number;
+		grab?: GeometryPoint;
+	} | null = null;
 	public static get observedAttributes(): string[] {
 		return ["readonly", "grid", "src", "built-in"];
 	}
@@ -560,11 +578,11 @@ export class TpGraphGeometry extends TpBase {
 			)
 				.map(
 					([id, label]) =>
-						`<tp-button type="button" outlined data-geometry-control data-tool="${id}" aria-pressed="${id === this.tool}">${label}</tp-button>`,
+						`<tp-button type="button" ${id === this.tool ? "" : "outlined"} data-geometry-control data-tool="${id}" aria-pressed="${id === this.tool}">${label}</tp-button>`,
 				)
 				.join("")}</tp-button-group>
       <div class="tp-geometry-parameters"><tp-textfield data-field="radius" label="Radius / length" value="5"></tp-textfield><tp-textfield data-field="start" label="Start angle (°)" value="20"></tp-textfield><tp-textfield data-field="end" label="End angle (°)" value="100"></tp-textfield><tp-textfield data-field="comment" label="Comment text" value="Comment"></tp-textfield>${this.builtIn ? `<tp-radio-list data-transform-mode label="Transformation" label-position="top" orientation="horizontal" value="1"><ul><li>Create a copy</li><li>Transform the object</li></ul></tp-radio-list><tp-textfield data-field="ratio" label="Ratio" value="2"></tp-textfield><tp-textfield data-field="rotation" label="Rotation angle (°)" value="90"></tp-textfield><tp-textfield data-field="sides" label="Sides" value="5" ${this.readonly ? "readonly" : ""}></tp-textfield><tp-button outlined data-geometry-control data-action="finish-polygon">Finish polygon</tp-button>` : ""}<span>Angles turn counterclockwise.</span></div>
-      <p class="tp-geometry-hint" data-hint>${HINTS[this.tool]}</p>
+      <tp-callout class="tp-geometry-hint" variant="info" outlined><span data-hint>${HINTS[this.tool]}</span></tp-callout>
       <div class="tp-geometry-workspace"><div class="tp-geometry-board"><svg data-geometry-canvas viewBox="0 0 900 560" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg><div class="tp-geometry-view"><tp-button type="button" outlined data-geometry-control data-action="undo">Undo</tp-button><tp-button type="button" outlined data-geometry-control data-action="redo">Redo</tp-button><tp-button type="button" outlined data-geometry-control data-action="out" aria-label="Zoom out">−</tp-button><tp-button type="button" outlined data-geometry-control data-action="in" aria-label="Zoom in">+</tp-button><tp-button type="button" outlined data-geometry-control data-action="fit">Fit</tp-button><tp-button type="button" outlined data-geometry-control data-action="grid" aria-pressed="${this.grid}">Grid</tp-button></div></div>
       <aside><h3>Construction objects</h3><p data-appearance-label>Select an object in Move mode to change its appearance.</p><div class="tp-geometry-appearance"><tp-button id="${this.controlId}-style" outlined data-geometry-control data-action="style-menu" aria-haspopup="menu"><span data-style-label>Style · solid</span></tp-button><tp-dropdown anchor="#${this.controlId}-style" outside-click data-style-menu><ul>${GEOMETRY_STYLES.map((value) => `<li data-stroke="${value}">${value}${value === "solid" ? " (default)" : ""}</li>`).join("")}</ul></tp-dropdown><tp-button id="${this.controlId}-color" outlined data-geometry-control data-action="color-menu" aria-haspopup="menu"><span data-color-label>Color · automatic</span></tp-button><tp-dropdown anchor="#${this.controlId}-color" outside-click data-color-menu><ul><li data-color="">Automatic</li>${GEOMETRY_COLORS.map((value) => `<li data-color="${value}"><span class="tp-geometry-swatch tp-${value}" aria-hidden="true"></span>${value}</li>`).join("")}</ul></tp-dropdown></div><div data-objects></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Constructed points are calculated.</p></aside></div>
       <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source"><dl><dt>Construction source</dt><dd><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor><tp-button type="button" outlined data-geometry-control data-action="apply">Apply construction</tp-button></dd></dl></tp-accordion>`;
@@ -700,9 +718,23 @@ export class TpGraphGeometry extends TpBase {
 			if (!object) return;
 			this.selected = object.id;
 			this.draw();
-			if (object.definition.kind !== "point" && object.definition.kind !== "on")
+			if (
+				object.definition.kind !== "point" &&
+				object.definition.kind !== "on" &&
+				object.definition.kind !== "measure"
+			)
 				return;
+			const label = this.result.values.get(object.id);
+			const pointer = this.world(event);
 			this.drag = {
+				...(object.definition.kind === "measure" && label?.kind === "comment"
+					? {
+							grab: {
+								x: label.point.x - pointer.x,
+								y: label.point.y - pointer.y,
+							},
+						}
+					: {}),
 				id: object.id,
 				before: this.value,
 				pointer: event.pointerId,
@@ -721,8 +753,13 @@ export class TpGraphGeometry extends TpBase {
 				this.draw();
 				return;
 			}
-			if (this.drag && event.pointerId === this.drag.pointer)
-				this.movePoint(this.drag.id, this.world(event));
+			if (this.drag && event.pointerId === this.drag.pointer) {
+				const p = this.world(event);
+				this.movePoint(this.drag.id, {
+					x: p.x + (this.drag.grab?.x ?? 0),
+					y: p.y + (this.drag.grab?.y ?? 0),
+				});
+			}
 		});
 		const finish = (event: PointerEvent): void => {
 			if (this.pan && event.pointerId === this.pan.pointer) {
@@ -845,7 +882,15 @@ export class TpGraphGeometry extends TpBase {
 			)
 				return;
 			const v = this.result.values.get(this.selected);
-			if (v?.kind !== "point") return;
+			if (
+				v?.kind !== "point" &&
+				!(
+					v?.kind === "comment" &&
+					this.objects.find((o) => o.id === this.selected)?.definition.kind ===
+						"measure"
+				)
+			)
+				return;
 			event.preventDefault();
 			const before = this.value;
 			const step = event.shiftKey ? 0.02 : 0.2;
@@ -900,11 +945,11 @@ export class TpGraphGeometry extends TpBase {
 		});
 	}
 	private updateTool(): void {
-		for (const button of this.querySelectorAll("[data-tool]"))
-			button.setAttribute(
-				"aria-pressed",
-				String((button as HTMLElement).dataset.tool === this.tool),
-			);
+		for (const button of this.querySelectorAll("[data-tool]")) {
+			const active = (button as HTMLElement).dataset.tool === this.tool;
+			button.setAttribute("aria-pressed", String(active));
+			button.toggleAttribute("outlined", !active);
+		}
 		const hint = this.querySelector("[data-hint]");
 		if (hint) hint.textContent = HINTS[this.tool];
 		this.report(
@@ -1043,6 +1088,62 @@ export class TpGraphGeometry extends TpBase {
 				// Keep the original name: existing dependents follow the transformed object.
 				this.setConstruction(serializeGeometry(next));
 			} else this.setConstruction(serializeGeometry(candidate));
+			this.updateTool();
+			return;
+		}
+		if (
+			this.tool === "length" ||
+			this.tool === "area" ||
+			this.tool === "angle"
+		) {
+			if (this.tool === "angle" && isLinear(value)) {
+				if (
+					this.pending.length &&
+					!isLinear(
+						this.result.values.get(this.pending[0] ?? "") ?? {
+							kind: "point",
+							point: p,
+						},
+					)
+				)
+					throw new Error("Select another point, or restart with two sides.");
+				if (this.pending.includes(id))
+					throw new Error("Select two different sides.");
+				this.pending.push(id);
+				if (this.pending.length === 1) {
+					this.updateTool();
+					return;
+				}
+				this.appendConstruction(
+					`comment ${this.name("measure")} = angle(${this.pending.join(", ")})`,
+				);
+				this.updateTool();
+				return;
+			}
+			if (
+				this.tool === "angle" &&
+				this.pending.some(
+					(ref) => this.result.values.get(ref)?.kind !== "point",
+				)
+			)
+				throw new Error("Select another side.");
+			const pointInput =
+				this.tool === "angle" ||
+				(this.tool === "length" &&
+					(this.pending.length > 0 || value.kind === "point"));
+			if (pointInput) {
+				if (value.kind !== "point") throw new Error("Select a point.");
+				if (this.pending.includes(id))
+					throw new Error("Select a different point.");
+				this.pending.push(id);
+				if (this.pending.length < (this.tool === "angle" ? 3 : 2)) {
+					this.updateTool();
+					return;
+				}
+			}
+			this.appendConstruction(
+				`comment ${this.name("measure")} = ${this.tool}(${pointInput ? this.pending.join(", ") : id})`,
+			);
 			this.updateTool();
 			return;
 		}
@@ -1223,6 +1324,13 @@ export class TpGraphGeometry extends TpBase {
 		if (d.kind === "point") {
 			d.x = p.x;
 			d.y = p.y;
+		} else if (d.kind === "measure") {
+			const current = this.result.values.get(id);
+			if (current?.kind !== "comment") return;
+			const x = (d.offset?.x ?? 0) + p.x - current.point.x;
+			const y = (d.offset?.y ?? 0) + p.y - current.point.y;
+			if (x || y) d.offset = { x, y };
+			else delete d.offset;
 		} else if (d.kind === "on") {
 			const support = this.result.values.get(d.object);
 			if (support) d.parameter = parameterAt(support, p);
@@ -1310,6 +1418,28 @@ export class TpGraphGeometry extends TpBase {
 			} else if (v.kind === "polygon") {
 				shape = `<polygon points="${v.vertices.map((p) => `${x(p.x)},${y(p.y)}`).join(" ")}"/>`;
 			} else if (v.kind === "comment") {
+				if (v.angleMark) {
+					const mark = v.angleMark;
+					const r = mark.right ? 16 : 30;
+					const at = (angle: number, radius: number): GeometryPoint => ({
+						x: x(mark.vertex.x) + Math.cos(angle) * radius,
+						y: y(mark.vertex.y) - Math.sin(angle) * radius,
+					});
+					const a = at(mark.start, r),
+						b = at(mark.start + mark.sweep, r);
+					const corner = {
+						x: a.x + b.x - x(mark.vertex.x),
+						y: a.y + b.y - y(mark.vertex.y),
+					};
+					const path = mark.right
+						? `M ${a.x} ${a.y} L ${corner.x} ${corner.y} L ${b.x} ${b.y}`
+						: `M ${a.x} ${a.y} A ${r} ${r} 0 0 ${mark.sweep > 0 ? 0 : 1} ${b.x} ${b.y}`;
+					const label = at(mark.start + mark.sweep / 2, 46);
+					points.push(
+						`<g ${attributes}><g class="shape-hit"><path d="${path}"/></g><g class="shape-ink"><path data-angle-mark="${mark.right ? "right" : "arc"}" d="${path}"/></g>${mark.right ? "" : `<text text-anchor="middle" dominant-baseline="middle" x="${label.x + (v.point.x - mark.vertex.x) * this.scale}" y="${label.y - (v.point.y - mark.vertex.y) * this.scale}">${escapeHtml(v.text)}</text>`}<title>${object.id}${mark.right ? " · Right angle" : ""}</title></g>`,
+					);
+					continue;
+				}
 				points.push(
 					`<g ${attributes}><text x="${x(v.point.x) + 12}" y="${y(v.point.y) + 24}">${escapeHtml(v.text)}</text><title>${object.id}</title></g>`,
 				);

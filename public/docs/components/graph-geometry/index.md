@@ -14,7 +14,8 @@ The custom `<tp-graph-geometry>` element implements dynamic ruler and compass co
 
 | Control or gesture | Result |
 | --- | --- |
-| Move | Drag a free point freely or slide an attached point along its support. Drag empty space to pan the whole drawing. Intersection and midpoint constructions are calculated and cannot be dragged. |
+| Tool buttons | Select an action. Its button becomes filled while the other tools remain outlined; an outlined information callout explains how to use it. |
+| Move | Drag a measurement label to place it independently while keeping it attached to its supports. Drag a free point freely or slide an attached point along its support. Drag empty space to pan the whole drawing. Intersection and midpoint constructions are calculated and cannot be dragged. |
 | Pan view | Drag anywhere, including over a point, to move the entire view without changing the construction. Middle-button dragging also pans in any tool. |
 | Scroll / Shift + scroll | Scroll vertically or horizontally with the mouse wheel or trackpad. Shift + vertical scrolling pans horizontally. Scrolling outside the drawing still scrolls the page. |
 | Grid | Toggle a light grid that follows panning and zooming, with no axes, origin marker or graduations. The grid starts hidden and does not snap points. |
@@ -23,6 +24,9 @@ The custom `<tp-graph-geometry>` element implements dynamic ruler and compass co
 | Segment / Line / Ray / Vector | Select two existing points, either in the drawing or in the object list. For a ray or vector, select the origin first. |
 | Segment · length | Enter a positive numeric length in Radius / length, then select the origin and a direction point. The segment endpoint follows that direction at the imposed distance. |
 | Angular sector | Enter start and end angles, then select a circle. A filled sector includes the centre, both radii and the circular boundary. |
+| Measure length | Select two points, or select a segment, vector, arc, circle, polygon or sector. Closed shapes show their perimeter; an arc shows its curved length. |
+| Measure area | Select a circle, simple polygon or angular sector to display its enclosed area. |
+| Measure angle | Select two sides to mark their angle with an arc and its value, or a small square without a value for a right angle. Alternatively select three points: first arm, vertex, second arm, to display a numeric measurement. |
 | Comment | Enter Comment text and select its anchor point. The annotation follows that point. |
 | Midpoint / Perpendicular bisector · direct (`built-in`) | Select a segment to construct its midpoint or perpendicular bisector. |
 | Perpendicular / Parallel (`built-in`) | Select a point, then a line, segment, ray or vector. |
@@ -57,7 +61,7 @@ The custom `<tp-graph-geometry>` element implements dynamic ruler and compass co
 | --- | --- |
 | Tab / Shift+Tab | Move between tools, parameters, object buttons, drawing and source controls. |
 | Enter / Space | Activate a focused button or expand/collapse the Construction source accordion. Selecting an object in Move mode focuses the drawing. |
-| Arrow keys on the drawing | In Pan view, pan by 40 drawing pixels. Otherwise move the selected free or attached point by 0.2 units before projection onto its support. |
+| Arrow keys on the drawing | In Pan view, pan by 40 drawing pixels. Otherwise move the selected measurement label, free or attached point by 0.2 units before projection onto its support. |
 | Shift + arrow keys | In Pan view, pan by 8 drawing pixels. Otherwise use a smaller point step of 0.02 units. |
 | Enter on the drawing | Finish a pending irregular polygon with at least three vertices. |
 | Escape on the drawing | Cancel the pending selection, discard uncommitted polygon vertices and return to Move. |
@@ -114,7 +118,7 @@ Append `hidden` to keep an object as a support without drawing it. Use one comma
 
 `branch=0` and `branch=1` retain their identities when clipping to arcs or segments. For two circles, branch 0 lies to the left of the direction from the first centre to the second; branch 1 lies to its right. For a line and a circle, branch 0 comes first along the line's defining direction. A pair of lines only has branch 0. At a tangency both circular branches occupy the same point; the mouse tool creates it once. Coincident supports do not define a unique intersection.
 
-Undefined constructions and their dependents are hidden and listed with a diagnostic. They reappear when their supports permit the construction again. Arcs and sectors have distinct start/end angles and span less than a full turn. Arc endpoints defined by named points, automatic labels for lengths, and equation plotting are not part of this initial version.
+Undefined constructions and their dependents are hidden and listed with a diagnostic. They reappear when their supports permit the construction again. Arcs and sectors have distinct start/end angles and span less than a full turn. Arc endpoints defined by named points and equation plotting are not part of this initial version.
 
 ### Appearance and image export
 
@@ -202,6 +206,26 @@ The source object must have the declared result type. Axial symmetry uses the in
 
 The default example constructs four arcs with radius AB: two around A and two around B. Their intersections C and D define the bisector. All arc angles are relative to the oriented segment AB, so the construction also follows rotation. If A and B coincide, the dependent objects become undefined until the points separate.
 
+### Measurements
+
+The three measurement tools are standard: they do not require `built-in`. Their labels follow the supports and update when the construction changes. Lengths use construction units (`u`), areas use square units (`u²`), and angles use degrees. Displayed values are rounded to two decimal places; calculations retain full precision. Panning and zooming do not change measurements.
+
+In Move mode, drag a measurement label to avoid overlaps, or select it in the object list and use the arrow keys (Shift for a smaller step). Moving the label does not move its supports or change the measured value. Its offset is saved in construction units, follows its anchor during movement and zoom, and is preserved by source reload, image exports and Undo/Redo. Readonly prevents repositioning. Optional `dx` and `dy` parameters set the offset in the source; positive `dy` moves upwards. For example, `comment distanceAB = length(A, B, dx=1, dy=0.5)`. Omitting both restores the default placement.
+
+Two-side angles use `comment corner = angle(AB, BC)`. The sides must share an endpoint or intersect. At a shared endpoint the arms point along each side away from the vertex; at an interior intersection each arm points towards its farther defining endpoint (the second endpoint in a tie). The smaller angle is marked with an arc and its value. A right angle uses two sides of a small square without numeric text. The mark stays at the vertex; dragging its value only changes the label offset. When the sides move, the mark switches automatically between arc and square. Parallel disjoint sides leave the measurement undefined. Three-point measurements retain their numeric annotation.
+
+Measurements use dynamic comment commands in the construction source:
+
+```text
+comment distanceAB = length(A, B)
+comment segmentLength = length(AB)
+comment perimeter = length(c)
+comment surface = area(c)
+comment angleABC = angle(A, B, C)
+```
+
+`length` accepts two points, or one segment, vector, circle, arc, polygon or sector. For a sector, the perimeter includes both radii. `area` accepts a circle, simple polygon (including concave polygons) or sector. `angle` accepts two linear sides (segments, lines, rays or vectors), or three points with the vertex second; a zero-length arm makes the measurement undefined. Crossing polygon edges make the area undefined until the polygon becomes simple again. Infinite lines and rays have no finite length and cannot be measured. Measurement labels support the same color, visibility, deletion and undo controls as comments and appear in image exports.
+
 ## Examples
 
 <!-- tp-docgen:example-descriptions:start -->
@@ -237,6 +261,9 @@ Transformations
 
 Transform in place
 : Choose Transform the object, select Rotation, then the circle c and centre O. The circle keeps its name and its attached point Q follows; Undo restores the original construction. Switch to Create a copy to compare both modes.
+
+Measurements
+: Drag A, B or C to update the length and marked angles: the right-angle square becomes an arc with its value when the sides are no longer perpendicular. Change the circle radius in Construction source to update its area. In Move mode, drag the measurement labels apart or select them and use the arrow keys. Use the three standard measurement tools to add distances, perimeters and areas without enabling built-in.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
@@ -355,6 +382,10 @@ All tp-components used by `<tp-graph-geometry>` are loaded automatically by this
 @summary Button group component for organizing multiple buttons.
 -->
 <!--
+@tp-dependency tp-callout
+@summary Callout component for highlighted contextual content.
+-->
+<!--
 @tp-dependency tp-code-editor
 @summary CodeMirror-based code editor component.
 -->
@@ -379,6 +410,7 @@ All tp-components used by `<tp-graph-geometry>` are loaded automatically by this
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
 - [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
 - [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
+- [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
 - [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
 - [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
 - [`<tp-radio-list>`](../radio-list/index.md) : Transforms a list into a group of radio buttons.

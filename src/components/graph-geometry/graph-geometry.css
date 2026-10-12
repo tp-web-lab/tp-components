@@ -7,7 +7,7 @@ tp-graph-geometry { display:block; color:var(--tp-text-body, CanvasText); border
 .tp-geometry-parameters[hidden] { display:none; }
 .tp-geometry-parameters tp-textfield { width:160px; }
 .tp-geometry-parameters span { font-size:.8rem; }
-.tp-geometry-hint { margin:0; padding:12px 16px; font-size:.85rem; }
+.tp-geometry-hint { margin:12px 16px; font-size:.85rem; }
 .tp-geometry-workspace { display:grid; grid-template-columns:minmax(0, 1fr) 220px; border-block:1px solid var(--tp-neutral-stroke-soft, #dbe4e6); }
 .tp-geometry-board { min-width:0; background:var(--tp-background-color, Canvas); }
 .tp-geometry-board svg { display:block; width:100%; height:auto; touch-action:none; }

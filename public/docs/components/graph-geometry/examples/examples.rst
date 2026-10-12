@@ -231,3 +231,25 @@
                point A = (3, 0)
                circle c = circle(A, 1) color=blue
                point Q = on(c, angle=30deg)
+
+      .. example:: Measurements
+
+         .. tp-graph-geometry::
+            :grid:
+
+            .. script::
+               :type: tp/geometry
+
+               point A = (-4, -1)
+               point B = (0, -1)
+               point C = (0, 2)
+               segment AB = segment(A, B) color=blue
+               segment BC = segment(B, C) color=green
+               polygon triangle = polygon(A, B, C) color=blue
+               point O = (4, 1)
+               circle c = circle(O, 2) color=orange
+               comment side = length(AB) color=blue
+               comment corner = angle(AB, BC) color=green
+               segment AC = segment(A, C) color=blue
+               comment slope = angle(AB, AC) color=blue
+               comment surface = area(c) color=orange
