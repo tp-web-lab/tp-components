@@ -44,6 +44,8 @@ export declare class TpGraphGeometry extends TpBase {
     private undoStack;
     private redoStack;
     private scale;
+    private canvasHeight;
+    private canvasObserver;
     private center;
     private pan;
     private suppressCanvasClick;

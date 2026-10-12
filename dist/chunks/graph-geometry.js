@@ -9,7 +9,7 @@ import "./radio-list.js";
 import "./save-image.js";
 import { GEOMETRY_COLORS as t, GEOMETRY_STYLES as n, GEOMETRY_TRANSFORMATIONS as r, MEDIATRIX_CONSTRUCTION as i, dependencies as a, distance as o, evaluateGeometry as s, intersections as c, isLinear as l, parameterAt as u, parseGeometry as d, serializeGeometry as f } from "../components/graph-geometry/geometry.js";
 //#region src/components/graph-geometry/graph-geometry.css?inline
-var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid var(--tp-neutral-stroke-soft,#cdd9dc);background:var(--tp-paper-color,Canvas);border-radius:12px;font-family:system-ui,sans-serif;display:block;overflow:hidden}.tp-geometry-header{border-bottom:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);justify-content:space-between;align-items:center;gap:16px;padding:18px;display:flex}.tp-geometry-header strong{font-size:1.25rem;display:block}.tp-geometry-header span{opacity:.75;font-size:.85rem}.tp-geometry-tools{flex-wrap:wrap;gap:5px;padding:12px 16px;display:flex}.tp-geometry-parameters{flex-wrap:wrap;align-items:center;gap:12px;padding:0 16px;display:flex}.tp-geometry-parameters[hidden]{display:none}.tp-geometry-parameters tp-textfield{width:160px}.tp-geometry-parameters span{font-size:.8rem}.tp-geometry-hint{margin:12px 16px;font-size:.85rem}.tp-geometry-workspace{border-block:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);grid-template-columns:minmax(0,1fr) 220px;display:grid}.tp-geometry-board{background:var(--tp-background-color,Canvas);min-width:0}.tp-geometry-board svg{touch-action:none;width:100%;height:auto;display:block}.tp-geometry-view{flex-wrap:wrap;align-items:center;gap:5px;padding:8px;display:flex}.tp-geometry-workspace aside{border-left:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);padding:12px}.tp-geometry-workspace h3{margin:0 0 12px;font-size:.85rem}.tp-geometry-workspace aside p{opacity:.8;font-size:.8rem;line-height:1.5}tp-graph-geometry [data-objects]{max-height:330px;margin-bottom:10px;overflow:auto}tp-graph-geometry [data-objects] tp-button{text-align:left;justify-content:space-between;gap:8px;width:100%;margin-bottom:5px;display:flex}tp-graph-geometry [data-objects] .object-kind{font-size:.75rem}.tp-geometry-shape{cursor:pointer}.tp-geometry-shape .shape-hit{fill:none;stroke:#0000;stroke-width:15px}.tp-geometry-shape .shape-ink{fill:none;stroke:var(--tp-info-text-colorful,#447a94);stroke-width:2px;pointer-events:none}.tp-geometry-shape .line{stroke:var(--tp-warning-text-colorful,#ab573b)}.tp-geometry-shape .segment{stroke:var(--tp-text-body,CanvasText)}.tp-geometry-shape .arc{stroke:var(--tp-success-text-colorful,#248273)}.tp-geometry-shape.is-selected .shape-ink{stroke:#c96523;stroke-width:3px}.tp-geometry-shape .point-hit{fill:#0000}.tp-geometry-shape .point{fill:var(--tp-paper-color,Canvas);stroke:var(--tp-info-text-colorful,#1e5e85);stroke-width:2.5px}.tp-geometry-shape .dependent{fill:var(--tp-success-fill-loud,#268675);stroke:var(--tp-paper-color,Canvas)}.tp-geometry-shape.is-selected .point{fill:#df8c3e}.tp-geometry-shape text{fill:var(--tp-text-body,CanvasText);paint-order:stroke;stroke:var(--tp-background-color,Canvas);stroke-width:4px;font:600 15px system-ui}tp-graph-geometry [data-status]{min-height:2em;margin:0;padding:10px 16px;font-size:.85rem}.tp-geometry-source{border-top:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);padding:12px 16px}@media (width<=700px){.tp-geometry-workspace{grid-template-columns:1fr}.tp-geometry-workspace aside{border-left:0;border-top:1px solid var(--tp-neutral-stroke-soft,#dbe4e6)}.tp-geometry-header{flex-wrap:wrap}tp-graph-geometry [data-objects]{max-height:150px}}tp-graph-geometry aside>tp-button{max-width:100%}tp-graph-geometry aside>tp-button>button{white-space:normal}.tp-geometry-board [data-grid]{pointer-events:none}.tp-geometry-board [data-grid] path{fill:none;stroke:var(--tp-text-body,CanvasText);stroke-opacity:.13;stroke-width:1px;vector-effect:non-scaling-stroke}.tp-geometry-board svg.pan-mode,.tp-geometry-board svg.pan-mode .tp-geometry-shape{cursor:grab}.tp-geometry-board svg.is-panning,.tp-geometry-board svg.is-panning .tp-geometry-shape{cursor:grabbing}.tp-geometry-tools{--tp-button-group-gap:.3rem}.tp-geometry-header tp-button-group{--tp-button-group-gap:.4rem;flex-wrap:wrap}tp-graph-geometry [data-objects] tp-button>button{inline-size:100%}tp-graph-geometry [data-objects] [data-tp-button-content]{justify-content:space-between;gap:.5rem;inline-size:100%;display:flex}.tp-geometry-board svg:focus-visible{outline:3px solid var(--tp-focus-color,Highlight);outline-offset:-3px}.tp-geometry-shape .sector{fill:var(--tp-info-text-colorful,#447a94);fill-opacity:.12}.tp-geometry-appearance{flex-wrap:wrap;gap:.3rem;margin-bottom:.6rem;display:flex}.tp-geometry-swatch{background:var(--tp-brand-seed);border:1px solid;border-radius:50%;width:1em;height:1em;margin-inline-end:.5em;display:inline-block}.tp-geometry-shape.stroke-dotted .shape-ink,.tp-geometry-shape.stroke-dotted .point{stroke-dasharray:1 6;stroke-linecap:round}.tp-geometry-shape.stroke-dashed .shape-ink,.tp-geometry-shape.stroke-dashed .point{stroke-dasharray:10 6}.tp-geometry-shape.has-color .shape-ink,.tp-geometry-shape.has-color .point{stroke:var(--tp-brand-seed)}.tp-geometry-shape.has-color .sector,.tp-geometry-shape.has-color .dependent,.tp-geometry-shape.has-color text{fill:var(--tp-brand-seed)}.tp-geometry-header>tp-save-image{margin-inline-start:auto}.tp-geometry-preview{fill:none;stroke:var(--tp-info-text-colorful,#1e5e85);stroke-width:2px;stroke-dasharray:5 5;pointer-events:none}.tp-geometry-shape .polygon{fill:var(--tp-info-text-colorful,#447a94);fill-opacity:.15}.tp-geometry-shape.has-color .polygon{fill:var(--tp-brand-seed)}.tp-geometry-shape.is-selected:not(.has-color) .polygon{fill:#c96523}.tp-geometry-shape .shape-hit polygon{fill:#0000}", m = (e) => e.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;"), h = {
+var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid var(--tp-neutral-stroke-soft,#cdd9dc);background:var(--tp-paper-color,Canvas);border-radius:12px;font-family:system-ui,sans-serif;display:block;overflow:hidden}.tp-geometry-header{border-bottom:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);justify-content:space-between;align-items:center;gap:16px;padding:18px;display:flex}.tp-geometry-header strong{font-size:1.25rem;display:block}.tp-geometry-header span{opacity:.75;font-size:.85rem}.tp-geometry-tools{flex-wrap:wrap;gap:5px;padding:12px 16px;display:flex}.tp-geometry-parameters{flex-wrap:wrap;align-items:center;gap:12px;padding:0 16px;display:flex}.tp-geometry-parameters[hidden]{display:none}.tp-geometry-parameters tp-textfield{width:160px}.tp-geometry-parameters span{font-size:.8rem}.tp-geometry-hint{margin:12px 16px;font-size:.85rem}.tp-geometry-workspace{border-block:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);grid-template-columns:minmax(0,1fr) 220px;display:grid}.tp-geometry-board{background:var(--tp-background-color,Canvas);flex-direction:column;min-width:0;display:flex}.tp-geometry-canvas{flex:1 0 auto;min-height:320px;position:relative}.tp-geometry-canvas:before{content:\"\";padding-top:62.2222%;display:block}.tp-geometry-board svg{touch-action:none;width:100%;height:100%;display:block;position:absolute;inset:0}.tp-geometry-view{flex-wrap:wrap;align-items:center;gap:5px;padding:8px;display:flex}.tp-geometry-workspace aside{border-left:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);padding:12px}.tp-geometry-workspace h3{margin:0 0 12px;font-size:.85rem}.tp-geometry-workspace aside p{opacity:.8;font-size:.8rem;line-height:1.5}tp-graph-geometry [data-objects]{margin-bottom:10px}tp-graph-geometry [data-objects] tp-button{text-align:left;justify-content:space-between;gap:8px;width:100%;margin-bottom:5px;display:flex}tp-graph-geometry [data-objects] .object-kind{font-size:.75rem}.tp-geometry-shape{cursor:pointer}.tp-geometry-shape .shape-hit{fill:none;stroke:#0000;stroke-width:15px}.tp-geometry-shape .shape-ink{fill:none;stroke:var(--tp-info-text-colorful,#447a94);stroke-width:2px;pointer-events:none}.tp-geometry-shape .line{stroke:var(--tp-warning-text-colorful,#ab573b)}.tp-geometry-shape .segment{stroke:var(--tp-text-body,CanvasText)}.tp-geometry-shape .arc{stroke:var(--tp-success-text-colorful,#248273)}.tp-geometry-shape.is-selected .shape-ink{stroke:#c96523;stroke-width:3px}.tp-geometry-shape .point-hit{fill:#0000}.tp-geometry-shape .point{fill:var(--tp-paper-color,Canvas);stroke:var(--tp-info-text-colorful,#1e5e85);stroke-width:2.5px}.tp-geometry-shape .dependent{fill:var(--tp-success-fill-loud,#268675);stroke:var(--tp-paper-color,Canvas)}.tp-geometry-shape.is-selected .point{fill:#df8c3e}.tp-geometry-shape text{fill:var(--tp-text-body,CanvasText);paint-order:stroke;stroke:var(--tp-background-color,Canvas);stroke-width:4px;font:600 15px system-ui}tp-graph-geometry [data-status]{min-height:2em;margin:0;padding:10px 16px;font-size:.85rem}.tp-geometry-source{border-top:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);padding:12px 16px}@media (width<=700px){.tp-geometry-workspace{grid-template-columns:1fr}.tp-geometry-workspace aside{border-left:0;border-top:1px solid var(--tp-neutral-stroke-soft,#dbe4e6)}.tp-geometry-header{flex-wrap:wrap}}tp-graph-geometry aside>tp-button{max-width:100%}tp-graph-geometry aside>tp-button>button{white-space:normal}.tp-geometry-board [data-grid]{pointer-events:none}.tp-geometry-board [data-grid] path{fill:none;stroke:var(--tp-text-body,CanvasText);stroke-opacity:.13;stroke-width:1px;vector-effect:non-scaling-stroke}.tp-geometry-board svg.pan-mode,.tp-geometry-board svg.pan-mode .tp-geometry-shape{cursor:grab}.tp-geometry-board svg.is-panning,.tp-geometry-board svg.is-panning .tp-geometry-shape{cursor:grabbing}.tp-geometry-tools{--tp-button-group-gap:.3rem}.tp-geometry-header tp-button-group{--tp-button-group-gap:.4rem;flex-wrap:wrap}tp-graph-geometry [data-objects] tp-button>button{inline-size:100%}tp-graph-geometry [data-objects] [data-tp-button-content]{justify-content:space-between;gap:.5rem;inline-size:100%;display:flex}.tp-geometry-board svg:focus-visible{outline:3px solid var(--tp-focus-color,Highlight);outline-offset:-3px}.tp-geometry-shape .sector{fill:var(--tp-info-text-colorful,#447a94);fill-opacity:.12}.tp-geometry-appearance{flex-wrap:wrap;gap:.3rem;margin-bottom:.6rem;display:flex}.tp-geometry-swatch{background:var(--tp-brand-seed);border:1px solid;border-radius:50%;width:1em;height:1em;margin-inline-end:.5em;display:inline-block}.tp-geometry-shape.stroke-dotted .shape-ink,.tp-geometry-shape.stroke-dotted .point{stroke-dasharray:1 6;stroke-linecap:round}.tp-geometry-shape.stroke-dashed .shape-ink,.tp-geometry-shape.stroke-dashed .point{stroke-dasharray:10 6}.tp-geometry-shape.has-color .shape-ink,.tp-geometry-shape.has-color .point{stroke:var(--tp-brand-seed)}.tp-geometry-shape.has-color .sector,.tp-geometry-shape.has-color .dependent,.tp-geometry-shape.has-color text{fill:var(--tp-brand-seed)}.tp-geometry-header>tp-save-image{margin-inline-start:auto}.tp-geometry-preview{fill:none;stroke:var(--tp-info-text-colorful,#1e5e85);stroke-width:2px;stroke-dasharray:5 5;pointer-events:none}.tp-geometry-shape .polygon{fill:var(--tp-info-text-colorful,#447a94);fill-opacity:.15}.tp-geometry-shape.has-color .polygon{fill:var(--tp-brand-seed)}.tp-geometry-shape.is-selected:not(.has-color) .polygon{fill:#c96523}.tp-geometry-shape .shape-hit polygon{fill:#0000}", m = (e) => e.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;"), h = {
 	move: "Move",
 	pan: "Pan view",
 	point: "Point",
@@ -89,6 +89,8 @@ var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 	undoStack = [];
 	redoStack = [];
 	scale = 36;
+	canvasHeight = 560;
+	canvasObserver = null;
 	center = {
 		x: 0,
 		y: 0
@@ -186,7 +188,7 @@ var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 		}
 	}
 	disconnectedCallback() {
-		this.sourceRequest?.abort(), this.sourceRequest = null, this.drag = null, this.pan = null;
+		this.canvasObserver?.disconnect(), this.canvasObserver = null, this.sourceRequest?.abort(), this.sourceRequest = null, this.drag = null, this.pan = null;
 	}
 	async loadSource() {
 		this.sourceRequest?.abort(), this.sourceRequest = null;
@@ -278,14 +280,14 @@ var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 				for (let [t, n] of r) t && n && e.style.setProperty(t, n);
 			}
 			let r = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-			r.setAttribute("width", "900"), r.setAttribute("height", "560"), r.setAttribute("fill", getComputedStyle(e.parentElement ?? this).backgroundColor), t.prepend(r);
+			r.setAttribute("width", "900"), r.setAttribute("height", String(this.canvasHeight)), r.setAttribute("fill", getComputedStyle(e.parentElement ?? this).backgroundColor), t.prepend(r);
 			for (let e of [t, ...t.querySelectorAll("*")]) for (let t of [...e.attributes]) (t.name.startsWith("data-") || t.name.startsWith("aria-") || [
 				"class",
 				"tabindex",
 				"role",
 				"id"
 			].includes(t.name)) && e.removeAttribute(t.name);
-			return t.removeAttribute("style"), t.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", "http://www.w3.org/2000/svg"), t.setAttribute("width", "900"), t.setAttribute("height", "560"), new XMLSerializer().serializeToString(t);
+			return t.removeAttribute("style"), t.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", "http://www.w3.org/2000/svg"), t.setAttribute("width", "900"), t.setAttribute("height", String(this.canvasHeight)), new XMLSerializer().serializeToString(t);
 		} finally {
 			t.remove();
 		}
@@ -302,19 +304,26 @@ var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 		this.setConstruction(`${this.value}\n${e}`);
 	}
 	render() {
-		if (this.objectListMarkup = "", this.setAttribute("data-geometry-export", this.controlId), this.innerHTML = `<div class="tp-geometry-header"><div><strong>Ruler & compass</strong><span>Geometric constructions</span></div><tp-save-image anchor='[data-geometry-export="${this.controlId}"]' filename="geometry"></tp-save-image><tp-button-group><tp-button type="button" outlined data-geometry-control data-action="example">Perpendicular bisector</tp-button><tp-button type="button" outlined data-geometry-control data-action="clear">New construction</tp-button></tp-button-group></div>
+		this.objectListMarkup = "", this.setAttribute("data-geometry-export", this.controlId), this.innerHTML = `<div class="tp-geometry-header"><div><strong>Ruler & compass</strong><span>Geometric constructions</span></div><tp-save-image anchor='[data-geometry-export="${this.controlId}"]' filename="geometry"></tp-save-image><tp-button-group><tp-button type="button" outlined data-geometry-control data-action="example">Perpendicular bisector</tp-button><tp-button type="button" outlined data-geometry-control data-action="clear">New construction</tp-button></tp-button-group></div>
       <tp-button-group class="tp-geometry-tools" aria-label="Construction tools">${Object.entries({
 			...h,
 			...this.builtIn ? g : {}
 		}).map(([e, t]) => `<tp-button type="button" ${e === this.tool ? "" : "outlined"} data-geometry-control data-tool="${e}" aria-pressed="${e === this.tool}">${t}</tp-button>`).join("")}</tp-button-group>
       <div class="tp-geometry-parameters"><tp-textfield data-field="radius" label="Radius / length" value="5"></tp-textfield><tp-textfield data-field="start" label="Start angle (°)" value="20"></tp-textfield><tp-textfield data-field="end" label="End angle (°)" value="100"></tp-textfield><tp-textfield data-field="comment" label="Comment text" value="Comment"></tp-textfield>${this.builtIn ? `<tp-radio-list data-transform-mode label="Transformation" label-position="top" orientation="horizontal" value="1"><ul><li>Create a copy</li><li>Transform the object</li></ul></tp-radio-list><tp-textfield data-field="ratio" label="Ratio" value="2"></tp-textfield><tp-textfield data-field="rotation" label="Rotation angle (°)" value="90"></tp-textfield><tp-textfield data-field="sides" label="Sides" value="5" ${this.readonly ? "readonly" : ""}></tp-textfield><tp-button outlined data-geometry-control data-action="finish-polygon">Finish polygon</tp-button>` : ""}<span>Angles turn counterclockwise.</span></div>
       <tp-callout class="tp-geometry-hint" variant="info" outlined><span data-hint>${_[this.tool]}</span></tp-callout>
-      <div class="tp-geometry-workspace"><div class="tp-geometry-board"><svg data-geometry-canvas viewBox="0 0 900 560" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg><div class="tp-geometry-view"><tp-button type="button" outlined data-geometry-control data-action="undo">Undo</tp-button><tp-button type="button" outlined data-geometry-control data-action="redo">Redo</tp-button><tp-button type="button" outlined data-geometry-control data-action="out" aria-label="Zoom out">−</tp-button><tp-button type="button" outlined data-geometry-control data-action="in" aria-label="Zoom in">+</tp-button><tp-button type="button" outlined data-geometry-control data-action="fit">Fit</tp-button><tp-button type="button" outlined data-geometry-control data-action="grid" aria-pressed="${this.grid}">Grid</tp-button></div></div>
+      <div class="tp-geometry-workspace"><div class="tp-geometry-board"><div class="tp-geometry-canvas"><svg data-geometry-canvas viewBox="0 0 900 ${this.canvasHeight}" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg></div><div class="tp-geometry-view"><tp-button type="button" outlined data-geometry-control data-action="undo">Undo</tp-button><tp-button type="button" outlined data-geometry-control data-action="redo">Redo</tp-button><tp-button type="button" outlined data-geometry-control data-action="out" aria-label="Zoom out">−</tp-button><tp-button type="button" outlined data-geometry-control data-action="in" aria-label="Zoom in">+</tp-button><tp-button type="button" outlined data-geometry-control data-action="fit">Fit</tp-button><tp-button type="button" outlined data-geometry-control data-action="grid" aria-pressed="${this.grid}">Grid</tp-button></div></div>
       <aside><h3>Construction objects</h3><p data-appearance-label>Select an object in Move mode to change its appearance.</p><div class="tp-geometry-appearance"><tp-button id="${this.controlId}-style" outlined data-geometry-control data-action="style-menu" aria-haspopup="menu"><span data-style-label>Style · solid</span></tp-button><tp-dropdown anchor="#${this.controlId}-style" outside-click data-style-menu><ul>${n.map((e) => `<li data-stroke="${e}">${e}${e === "solid" ? " (default)" : ""}</li>`).join("")}</ul></tp-dropdown><tp-button id="${this.controlId}-color" outlined data-geometry-control data-action="color-menu" aria-haspopup="menu"><span data-color-label>Color · automatic</span></tp-button><tp-dropdown anchor="#${this.controlId}-color" outside-click data-color-menu><ul><li data-color="">Automatic</li>${t.map((e) => `<li data-color="${e}"><span class="tp-geometry-swatch tp-${e}" aria-hidden="true"></span>${e}</li>`).join("")}</ul></tp-dropdown></div><div data-objects></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Constructed points are calculated.</p></aside></div>
-      <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source"><dl><dt>Construction source</dt><dd><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor><tp-button type="button" outlined data-geometry-control data-action="apply">Apply construction</tp-button></dd></dl></tp-accordion>`, this.readonly) for (let e of this.querySelectorAll("[data-tool]:not([data-tool=\"pan\"]), [data-action=\"example\"], [data-action=\"clear\"], [data-action=\"delete\"], [data-action=\"apply\"]")) e.disabled = !0;
+      <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source"><dl><dt>Construction source</dt><dd><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor><tp-button type="button" outlined data-geometry-control data-action="apply">Apply construction</tp-button></dd></dl></tp-accordion>`, this.canvasObserver?.disconnect();
+		let e = this.querySelector(".tp-geometry-canvas");
+		if (e && typeof ResizeObserver < "u" && (this.canvasObserver = new ResizeObserver(() => {
+			let t = e.getBoundingClientRect();
+			if (t.width <= 0 || t.height <= 0) return;
+			let n = 900 * t.height / t.width;
+			Math.abs(n - this.canvasHeight) < .01 || (this.canvasHeight = n, this.querySelector("svg[data-geometry-canvas]")?.setAttribute("viewBox", `0 0 900 ${n}`), this.draw());
+		}), this.canvasObserver.observe(e)), this.readonly) for (let e of this.querySelectorAll("[data-tool]:not([data-tool=\"pan\"]), [data-action=\"example\"], [data-action=\"clear\"], [data-action=\"delete\"], [data-action=\"apply\"]")) e.disabled = !0;
 		this.querySelector(".tp-geometry-parameters")?.toggleAttribute("hidden", this.readonly);
-		let e = this.querySelector("tp-save-image [data-format=\"svg\"]");
-		e && (e.textContent = "SVG (default)"), this.addEventListener("tp-save-image-error", this.onExportError);
+		let r = this.querySelector("tp-save-image [data-format=\"svg\"]");
+		r && (r.textContent = "SVG (default)"), this.addEventListener("tp-save-image-error", this.onExportError);
 		for (let e of ["style", "color"]) this.querySelector(`[data-${e}-menu]`)?.addEventListener("tp-dropdown-toggle", () => {
 			this.querySelector(`[data-action="${e}-menu"]`)?.setAttribute("aria-expanded", String(this.querySelector(`[data-${e}-menu]`)?.hasAttribute("open"))), this.syncButtonControls();
 		});
@@ -340,9 +349,9 @@ var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 				}));
 			}
 		};
-		let r = this.querySelector("svg[data-geometry-canvas]");
-		if (!r) return;
-		r.addEventListener("pointerdown", (e) => {
+		let a = this.querySelector("svg[data-geometry-canvas]");
+		if (!a) return;
+		a.addEventListener("pointerdown", (e) => {
 			if (this.drag || this.pan || e.button > 1) return;
 			this.suppressCanvasClick = !1;
 			let t = e.target.closest("[data-id]")?.getAttribute("data-id");
@@ -351,23 +360,23 @@ var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 					pointer: e.pointerId,
 					start: this.canvasPoint(e),
 					center: { ...this.center }
-				}, this.suppressCanvasClick = !0, r.setPointerCapture?.(e.pointerId), r.focus({ preventScroll: !0 }), r.classList.add("is-panning"), e.preventDefault();
+				}, this.suppressCanvasClick = !0, a.setPointerCapture?.(e.pointerId), a.focus({ preventScroll: !0 }), a.classList.add("is-panning"), e.preventDefault();
 				return;
 			}
 			if (this.readonly || this.tool !== "move") return;
 			let n = this.objects.find((e) => e.id === t);
 			if (!n || (this.selected = n.id, this.draw(), n.definition.kind !== "point" && n.definition.kind !== "on" && n.definition.kind !== "measure")) return;
-			let i = this.result.values.get(n.id), a = this.world(e);
+			let r = this.result.values.get(n.id), i = this.world(e);
 			this.drag = {
-				...n.definition.kind === "measure" && i?.kind === "comment" ? { grab: {
-					x: i.point.x - a.x,
-					y: i.point.y - a.y
+				...n.definition.kind === "measure" && r?.kind === "comment" ? { grab: {
+					x: r.point.x - i.x,
+					y: r.point.y - i.y
 				} } : {},
 				id: n.id,
 				before: this.value,
 				pointer: e.pointerId
-			}, r.setPointerCapture?.(e.pointerId), r.focus({ preventScroll: !0 }), e.preventDefault();
-		}), r.addEventListener("pointermove", (e) => {
+			}, a.setPointerCapture?.(e.pointerId), a.focus({ preventScroll: !0 }), e.preventDefault();
+		}), a.addEventListener("pointermove", (e) => {
 			if (this.pan && e.pointerId === this.pan.pointer) {
 				let t = this.canvasPoint(e);
 				this.center = {
@@ -384,9 +393,9 @@ var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 				});
 			}
 		});
-		let a = (e) => {
+		let o = (e) => {
 			if (this.pan && e.pointerId === this.pan.pointer) {
-				e.type === "pointercancel" && (this.center = this.pan.center), this.pan = null, r.classList.remove("is-panning"), this.draw();
+				e.type === "pointercancel" && (this.center = this.pan.center), this.pan = null, a.classList.remove("is-panning"), this.draw();
 				return;
 			}
 			if (!this.drag || e.pointerId !== this.drag.pointer) return;
@@ -397,7 +406,7 @@ var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 			}
 			t !== this.value && (this.undoStack.push(t), this.redoStack = [], this.syncSource(), this.changed(), this.draw());
 		};
-		r.addEventListener("pointerup", a), r.addEventListener("pointercancel", a), r.addEventListener("click", (e) => {
+		a.addEventListener("pointerup", o), a.addEventListener("pointercancel", o), a.addEventListener("click", (e) => {
 			if (this.suppressCanvasClick) {
 				this.suppressCanvasClick = !1;
 				return;
@@ -405,21 +414,21 @@ var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 			if (this.readonly || this.tool === "move" || this.tool === "pan") return;
 			let t = e.target.closest("[data-id]")?.getAttribute("data-id") ?? void 0;
 			try {
-				r.focus({ preventScroll: !0 }), this.useTool(t, this.world(e));
+				a.focus({ preventScroll: !0 }), this.useTool(t, this.world(e));
 			} catch (e) {
 				this.pending = [], this.polygonDraft = [], this.updateTool(), this.report(String(e));
 			}
-		}), r.addEventListener("wheel", (e) => {
+		}), a.addEventListener("wheel", (e) => {
 			if (e.ctrlKey || e.metaKey || this.pan || this.drag) return;
 			e.preventDefault();
-			let t = r.getBoundingClientRect(), n = e.deltaX, i = e.deltaY;
-			e.shiftKey && n === 0 && (n = i, i = 0);
-			let a = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? t.width || 900 : 1, o = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? t.height || 560 : 1, s = this.canvasPoint(e), c = this.canvasPoint({
-				clientX: e.clientX + n * a,
-				clientY: e.clientY + i * o
+			let t = a.getBoundingClientRect(), n = e.deltaX, r = e.deltaY;
+			e.shiftKey && n === 0 && (n = r, r = 0);
+			let i = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? t.width || 900 : 1, o = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? t.height || this.canvasHeight : 1, s = this.canvasPoint(e), c = this.canvasPoint({
+				clientX: e.clientX + n * i,
+				clientY: e.clientY + r * o
 			});
 			this.center.x += (c.x - s.x) / this.scale, this.center.y -= (c.y - s.y) / this.scale, this.draw();
-		}, { passive: !1 }), r.addEventListener("keydown", (e) => {
+		}, { passive: !1 }), a.addEventListener("keydown", (e) => {
 			if (e.key === "Enter" && this.tool === "polygon") {
 				e.preventDefault(), this.finishPolygon();
 				return;
@@ -688,7 +697,7 @@ var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 		let r = t?.getBoundingClientRect();
 		return {
 			x: (e.clientX - (r?.left ?? 0)) * 900 / (r?.width || 900),
-			y: (e.clientY - (r?.top ?? 0)) * 560 / (r?.height || 560)
+			y: (e.clientY - (r?.top ?? 0)) * this.canvasHeight / (r?.height || this.canvasHeight)
 		};
 	}
 	world(e) {
@@ -758,7 +767,7 @@ var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 				continue;
 			}
 			if (l(a)) {
-				let e = o(a.first, a.second), r = a.kind === "line" || a.kind === "ray" ? (1800 / this.scale + o(a.first, this.center)) / e : 0, i = a.second.x - a.first.x, s = a.second.y - a.first.y;
+				let e = o(a.first, a.second), r = a.kind === "line" || a.kind === "ray" ? (2 * Math.max(900, this.canvasHeight) / this.scale + o(a.first, this.center)) / e : 0, i = a.second.x - a.first.x, s = a.second.y - a.first.y;
 				if (c = `<line x1="${t(a.first.x - i * (a.kind === "line" ? r : 0))}" y1="${n(a.first.y - s * (a.kind === "line" ? r : 0))}" x2="${t(a.second.x + i * r)}" y2="${n(a.second.y + s * r)}"/>`, a.kind === "vector") {
 					let r = i / e, o = -s / e, l = t(a.second.x), u = n(a.second.y);
 					c += `<path d="M ${l - 12 * r + 5 * o} ${u - 12 * o - 5 * r} L ${l} ${u} L ${l - 12 * r - 5 * o} ${u - 12 * o + 5 * r}"/>`;
@@ -805,8 +814,8 @@ var p = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 		if (u) {
 			let e = this.scale * 10 ** Math.max(0, Math.ceil(Math.log10(18 / this.scale))), r = [];
 			if (this.grid) {
-				for (let n = (t(0) % e + e) % e; n <= 900; n += e) r.push(`M ${n} 0 V 560`);
-				for (let t = (n(0) % e + e) % e; t <= 560; t += e) r.push(`M 0 ${t} H 900`);
+				for (let n = (t(0) % e + e) % e; n <= 900; n += e) r.push(`M ${n} 0 V ${this.canvasHeight}`);
+				for (let t = (n(0) % e + e) % e; t <= this.canvasHeight; t += e) r.push(`M 0 ${t} H 900`);
 			}
 			u.innerHTML = r.length ? `<path d="${r.join(" ")}"/>` : "";
 		}
