@@ -36,6 +36,10 @@ export declare class TpGraphGeometry extends TpBase {
     private result;
     private initialized;
     private sourceRequest;
+    private localFileRequest;
+    private sourceSaveTarget;
+    private sourceFilename;
+    private sourceFileBusy;
     private objectListMarkup;
     private tool;
     private polygonDraft;
@@ -79,6 +83,8 @@ export declare class TpGraphGeometry extends TpBase {
     private recompute;
     private changed;
     private syncSource;
+    private sourceFileAction;
+    private syncSourceFileButtons;
     private field;
     private report;
     private readonly onExportError;
