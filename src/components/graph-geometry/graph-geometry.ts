@@ -25,6 +25,10 @@
  * @summary Dropdown menu component.
  */
 /**
+ * @tp-dependency tp-radio-list
+ * @summary Transforms a list into a group of radio buttons.
+ */
+/**
  * @tp-dependency tp-save-image
  * @summary Downloads an anchored image as SVG, PNG or WebP.
  */
@@ -58,11 +62,15 @@ import {
 import style from "./graph-geometry.css?inline";
 import "../save-image/save-image.js";
 import "../dropdown/dropdown.js";
+import "../radio-list/radio-list.js";
 import type { TpDropdown } from "../dropdown/dropdown.js";
+import type { TpRadioList } from "../radio-list/radio-list.js";
 import {
 	GEOMETRY_COLORS,
 	GEOMETRY_STYLES,
+	GEOMETRY_TRANSFORMATIONS,
 	type GeometryStroke,
+	type GeometryTransformation,
 } from "./geometry.js";
 
 export type {
@@ -108,9 +116,29 @@ const BUILT_IN_TOOLS = {
 	perpendicularBisector: "Perpendicular bisector · direct",
 	bisector: "Angle bisector",
 	tangent: "Tangents",
+	polygon: "Polygon",
+	regularPolygon: "Regular polygon",
+	axialSymmetry: "Axial symmetry",
+	centralSymmetry: "Central symmetry",
+	homothety: "Homothety",
+	rotation: "Rotation",
+	translation: "Translation",
 };
 type Tool = keyof typeof TOOLS | keyof typeof BUILT_IN_TOOLS;
 const HINTS: Record<Tool, string> = {
+	axialSymmetry:
+		"Select the object to copy, then a line, segment, ray or vector as the reflection axis.",
+	centralSymmetry: "Select the object to copy, then the centre point.",
+	homothety:
+		"Set Ratio (nonzero), select the object to copy, then the centre point.",
+	rotation:
+		"Set Rotation angle (°), select the object to copy, then the centre point. Positive angles turn counterclockwise.",
+	translation:
+		"Select the object to copy, then a vector giving the displacement.",
+	polygon:
+		"Click to create vertices or select existing points. Click the first vertex or Finish polygon after at least three vertices. Escape cancels.",
+	regularPolygon:
+		"Set Sides (3–360), then click or select two consecutive vertices. The polygon turns counterclockwise from the first edge.",
 	pan: "Drag anywhere to move the whole figure. Scroll in either direction; arrow keys pan the view.",
 	move: "Drag a point to move it, or drag empty space to move the whole view. Scroll to pan; Shift+scroll pans horizontally.",
 	point: "Click the drawing to place a free point.",
@@ -142,7 +170,7 @@ const HINTS: Record<Tool, string> = {
  * @summary Constructs dynamic figures with a graduated ruler and compass.
  * @tagname tp-graph-geometry
  * @attr {string} src = "" - URL of a text file containing construction commands.
- * @attr {boolean} built-in = false - Offers direct midpoint, perpendicular, parallel, perpendicular bisector, angle bisector and tangent tools.
+ * @attr {boolean} built-in = false - Offers direct midpoint, perpendicular, parallel, perpendicular bisector, angle bisector, tangent, polygon and transformation tools.
  * @attr {boolean} grid = false - Shows a light grid without axes or graduations.
  * @attr {boolean} readonly = false - Prevents changes to the construction.
  * @event tp-geometry-change Fired after a construction change; detail contains source and undefined object names.
@@ -166,6 +194,7 @@ export class TpGraphGeometry extends TpBase {
 	private sourceRequest: AbortController | null = null;
 	private objectListMarkup = "";
 	private tool: Tool = "move";
+	private polygonDraft: GeometryObject[] = [];
 	private pending: string[] = [];
 	private selected: string | null = null;
 	private undoStack: string[] = [];
@@ -225,6 +254,7 @@ export class TpGraphGeometry extends TpBase {
 			this.redoStack = [];
 		}
 		this.pending = [];
+		this.polygonDraft = [];
 		this.selected = null;
 		this.recompute();
 		this.syncSource();
@@ -311,6 +341,7 @@ export class TpGraphGeometry extends TpBase {
 			this.drag = null;
 			this.pan = null;
 			this.pending = [];
+			this.polygonDraft = [];
 			this.tool = "move";
 			this.render();
 			this.recompute();
@@ -364,6 +395,7 @@ export class TpGraphGeometry extends TpBase {
 	private restore(source: string): void {
 		this.objects = parseGeometry(source);
 		this.pending = [];
+		this.polygonDraft = [];
 		this.selected = null;
 		this.recompute();
 		this.syncSource();
@@ -386,7 +418,7 @@ export class TpGraphGeometry extends TpBase {
 	}
 	private syncSource(): void {
 		const editor = this.querySelector<TpCodeEditor>("tp-code-editor");
-		if (editor) editor.value = this.value;
+		if (editor) editor.setValue(this.value);
 	}
 	private field(name: string): string {
 		return (
@@ -430,9 +462,11 @@ export class TpGraphGeometry extends TpBase {
 		);
 		if (!canvas) throw new Error("The construction is not ready.");
 		const clone = canvas.cloneNode(true) as SVGSVGElement;
-		clone.querySelectorAll(".shape-hit, .point-hit").forEach((element) => {
-			element.remove();
-		});
+		clone
+			.querySelectorAll(".shape-hit, .point-hit, [data-polygon-preview]")
+			.forEach((element) => {
+				element.remove();
+			});
 		clone.querySelectorAll(".is-selected").forEach((element) => {
 			element.classList.remove("is-selected");
 		});
@@ -500,14 +534,18 @@ export class TpGraphGeometry extends TpBase {
 	private name(prefix: string): string {
 		let i = 1;
 		let id = prefix;
-		while (this.objects.some((o) => o.id === id)) id = `${prefix}${i++}`;
+		while ([...this.objects, ...this.polygonDraft].some((o) => o.id === id))
+			id = `${prefix}${i++}`;
 		return id;
 	}
 	private pointName(): string {
 		return (
 			"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 				.split("")
-				.find((id) => !this.objects.some((o) => o.id === id)) ?? this.name("P")
+				.find(
+					(id) =>
+						![...this.objects, ...this.polygonDraft].some((o) => o.id === id),
+				) ?? this.name("P")
 		);
 	}
 	private appendConstruction(commands: string): void {
@@ -525,7 +563,7 @@ export class TpGraphGeometry extends TpBase {
 						`<tp-button type="button" outlined data-geometry-control data-tool="${id}" aria-pressed="${id === this.tool}">${label}</tp-button>`,
 				)
 				.join("")}</tp-button-group>
-      <div class="tp-geometry-parameters"><tp-textfield data-field="radius" label="Radius / length" value="5"></tp-textfield><tp-textfield data-field="start" label="Start angle (°)" value="20"></tp-textfield><tp-textfield data-field="end" label="End angle (°)" value="100"></tp-textfield><tp-textfield data-field="comment" label="Comment text" value="Comment"></tp-textfield><span>Angles turn counterclockwise.</span></div>
+      <div class="tp-geometry-parameters"><tp-textfield data-field="radius" label="Radius / length" value="5"></tp-textfield><tp-textfield data-field="start" label="Start angle (°)" value="20"></tp-textfield><tp-textfield data-field="end" label="End angle (°)" value="100"></tp-textfield><tp-textfield data-field="comment" label="Comment text" value="Comment"></tp-textfield>${this.builtIn ? `<tp-radio-list data-transform-mode label="Transformation" label-position="top" orientation="horizontal" value="1"><ul><li>Create a copy</li><li>Transform the object</li></ul></tp-radio-list><tp-textfield data-field="ratio" label="Ratio" value="2"></tp-textfield><tp-textfield data-field="rotation" label="Rotation angle (°)" value="90"></tp-textfield><tp-textfield data-field="sides" label="Sides" value="5" ${this.readonly ? "readonly" : ""}></tp-textfield><tp-button outlined data-geometry-control data-action="finish-polygon">Finish polygon</tp-button>` : ""}<span>Angles turn counterclockwise.</span></div>
       <p class="tp-geometry-hint" data-hint>${HINTS[this.tool]}</p>
       <div class="tp-geometry-workspace"><div class="tp-geometry-board"><svg data-geometry-canvas viewBox="0 0 900 560" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg><div class="tp-geometry-view"><tp-button type="button" outlined data-geometry-control data-action="undo">Undo</tp-button><tp-button type="button" outlined data-geometry-control data-action="redo">Redo</tp-button><tp-button type="button" outlined data-geometry-control data-action="out" aria-label="Zoom out">−</tp-button><tp-button type="button" outlined data-geometry-control data-action="in" aria-label="Zoom in">+</tp-button><tp-button type="button" outlined data-geometry-control data-action="fit">Fit</tp-button><tp-button type="button" outlined data-geometry-control data-action="grid" aria-pressed="${this.grid}">Grid</tp-button></div></div>
       <aside><h3>Construction objects</h3><p data-appearance-label>Select an object in Move mode to change its appearance.</p><div class="tp-geometry-appearance"><tp-button id="${this.controlId}-style" outlined data-geometry-control data-action="style-menu" aria-haspopup="menu"><span data-style-label>Style · solid</span></tp-button><tp-dropdown anchor="#${this.controlId}-style" outside-click data-style-menu><ul>${GEOMETRY_STYLES.map((value) => `<li data-stroke="${value}">${value}${value === "solid" ? " (default)" : ""}</li>`).join("")}</ul></tp-dropdown><tp-button id="${this.controlId}-color" outlined data-geometry-control data-action="color-menu" aria-haspopup="menu"><span data-color-label>Color · automatic</span></tp-button><tp-dropdown anchor="#${this.controlId}-color" outside-click data-color-menu><ul><li data-color="">Automatic</li>${GEOMETRY_COLORS.map((value) => `<li data-color="${value}"><span class="tp-geometry-swatch tp-${value}" aria-hidden="true"></span>${value}</li>`).join("")}</ul></tp-dropdown></div><div data-objects></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Constructed points are calculated.</p></aside></div>
@@ -584,6 +622,7 @@ export class TpGraphGeometry extends TpBase {
 			) {
 				this.tool = button.dataset.tool as Tool;
 				this.pending = [];
+				this.polygonDraft = [];
 				this.updateTool();
 			}
 			if (button.dataset.object) this.selectObject(button.dataset.object);
@@ -612,10 +651,12 @@ export class TpGraphGeometry extends TpBase {
 					this.setConstruction(MEDIATRIX_CONSTRUCTION);
 					this.fitView();
 				}
+				if (action === "finish-polygon") this.finishPolygon();
 				if (action === "clear") this.setConstruction("");
 				if (action === "apply") {
 					this.setConstruction(
-						this.querySelector<TpCodeEditor>("tp-code-editor")?.value ?? "",
+						this.querySelector<TpCodeEditor>("tp-code-editor")?.getValue() ??
+							"",
 					);
 					this.fitView();
 				}
@@ -719,9 +760,12 @@ export class TpGraphGeometry extends TpBase {
 					.closest("[data-id]")
 					?.getAttribute("data-id") ?? undefined;
 			try {
+				svg.focus({ preventScroll: true });
 				this.useTool(id, this.world(event));
 			} catch (error) {
 				this.pending = [];
+				this.polygonDraft = [];
+				this.updateTool();
 				this.report(String(error));
 			}
 		});
@@ -761,8 +805,14 @@ export class TpGraphGeometry extends TpBase {
 			{ passive: false },
 		);
 		svg.addEventListener("keydown", (event) => {
+			if (event.key === "Enter" && this.tool === "polygon") {
+				event.preventDefault();
+				this.finishPolygon();
+				return;
+			}
 			if (event.key === "Escape") {
 				this.pending = [];
+				this.polygonDraft = [];
 				this.tool = "move";
 				this.updateTool();
 				return;
@@ -886,16 +936,116 @@ export class TpGraphGeometry extends TpBase {
 			this.useTool(id, p);
 		} catch (error) {
 			this.pending = [];
+			this.polygonDraft = [];
+			this.updateTool();
 			this.report(String(error));
 		}
 	}
+	private finishPolygon(): void {
+		if (
+			this.readonly ||
+			!this.builtIn ||
+			this.tool !== "polygon" ||
+			this.pending.length < 3
+		)
+			return;
+		const commands = serializeGeometry(this.polygonDraft);
+		this.appendConstruction(
+			`${commands}\npolygon ${this.name("poly")} = polygon(${this.pending.join(", ")})`,
+		);
+		this.updateTool();
+	}
+	private polygonClick(id: string | undefined, p: GeometryPoint): void {
+		if (!this.builtIn || this.readonly) return;
+		const sides = Number(this.field("sides"));
+		if (
+			this.tool === "regularPolygon" &&
+			(!Number.isInteger(sides) || sides < 3 || sides > 360)
+		)
+			throw new Error("Sides must be an integer from 3 to 360.");
+		if (id && this.pending.includes(id)) {
+			if (
+				this.tool === "polygon" &&
+				id === this.pending[0] &&
+				this.pending.length >= 3
+			)
+				this.finishPolygon();
+			else
+				this.report(
+					"Select a different vertex; closing needs at least three vertices.",
+				);
+			return;
+		}
+		if (id) {
+			if (this.result.values.get(id)?.kind !== "point")
+				throw new Error("Select a point or click empty space.");
+		} else {
+			id = this.pointName();
+			this.polygonDraft.push({
+				id,
+				hidden: false,
+				definition: { kind: "point", x: p.x, y: p.y },
+			});
+		}
+		this.pending.push(id);
+		if (this.tool === "regularPolygon" && this.pending.length === 2) {
+			const commands = serializeGeometry(this.polygonDraft);
+			this.appendConstruction(
+				`${commands}\npolygon ${this.name("poly")} = regularPolygon(${this.pending.join(", ")}, sides=${sides})`,
+			);
+		}
+		this.updateTool();
+	}
 	private useTool(id: string | undefined, p: GeometryPoint): void {
+		if (this.tool === "polygon" || this.tool === "regularPolygon") {
+			this.polygonClick(id, p);
+			return;
+		}
 		const value = id ? this.result.values.get(id) : null;
 		if (this.tool === "point") {
 			this.appendConstruction(`point ${this.pointName()} = (${p.x}, ${p.y})`);
 			return;
 		}
 		if (!id || !value) throw new Error("Select an existing, defined object.");
+		if (
+			GEOMETRY_TRANSFORMATIONS.includes(this.tool as GeometryTransformation)
+		) {
+			if (!this.builtIn || this.readonly) return;
+			if (!this.pending.length) {
+				this.pending = [id];
+				this.updateTool();
+				return;
+			}
+			const original = this.objects.find((o) => o.id === this.pending[0]);
+			const originalValue = original && this.result.values.get(original.id);
+			if (!original || !originalValue)
+				throw new Error("Select a defined object first.");
+			const option =
+				this.tool === "homothety"
+					? `, ratio=${this.field("ratio")}`
+					: this.tool === "rotation"
+						? `, angle=${this.field("rotation")}deg`
+						: "";
+			const suffix = `${original.stroke ? ` style=${original.stroke}` : ""}${original.color ? ` color=${original.color}` : ""}`;
+			const candidate = parseGeometry(
+				`${this.value}\n${originalValue.kind} ${this.name(`${original.id}_image`)} = ${this.tool}(${original.id}, ${id}${option})${suffix}`,
+			);
+			const image = candidate[candidate.length - 1];
+			if (image?.definition.kind !== "transform")
+				throw new Error("Invalid transformation.");
+			if (
+				this.querySelector<TpRadioList>("[data-transform-mode]")?.value === "2"
+			) {
+				const next = structuredClone(this.objects);
+				const target = next.find((o) => o.id === original.id);
+				if (!target) return;
+				target.definition = { ...image.definition, object: target.definition };
+				// Keep the original name: existing dependents follow the transformed object.
+				this.setConstruction(serializeGeometry(next));
+			} else this.setConstruction(serializeGeometry(candidate));
+			this.updateTool();
+			return;
+		}
 		if (this.tool === "on") {
 			const t = parameterAt(value, p);
 			this.appendConstruction(
@@ -962,6 +1112,7 @@ export class TpGraphGeometry extends TpBase {
 		}
 		const [first = "", second = "", third = ""] = this.pending;
 		this.pending = [];
+		this.polygonDraft = [];
 		if (
 			this.tool === "line" ||
 			this.tool === "segment" ||
@@ -1087,6 +1238,7 @@ export class TpGraphGeometry extends TpBase {
 			if (v.kind === "point" || v.kind === "comment") points.push(v.point);
 			if (isLinear(v)) points.push(v.first, v.second);
 			if (v.kind === "sector") points.push(v.center);
+			if (v.kind === "polygon") points.push(...v.vertices);
 			if (v.kind === "circle")
 				points.push(
 					{ x: v.center.x - v.radius, y: v.center.y - v.radius },
@@ -1155,6 +1307,8 @@ export class TpGraphGeometry extends TpBase {
 						ey = y(v.second.y);
 					shape += `<path d="M ${ex - 12 * ux + 5 * uy} ${ey - 12 * uy - 5 * ux} L ${ex} ${ey} L ${ex - 12 * ux - 5 * uy} ${ey - 12 * uy + 5 * ux}"/>`;
 				}
+			} else if (v.kind === "polygon") {
+				shape = `<polygon points="${v.vertices.map((p) => `${x(p.x)},${y(p.y)}`).join(" ")}"/>`;
 			} else if (v.kind === "comment") {
 				points.push(
 					`<g ${attributes}><text x="${x(v.point.x) + 12}" y="${y(v.point.y) + 24}">${escapeHtml(v.text)}</text><title>${object.id}</title></g>`,
@@ -1177,7 +1331,35 @@ export class TpGraphGeometry extends TpBase {
 				`<g ${attributes}><g class="shape-hit">${shape}</g><g class="shape-ink ${v.kind}">${shape}</g><title>${object.id}</title></g>`,
 			);
 		}
-		group.innerHTML = `${shapes.join("")}${points.join("")}`;
+		const draftPoints = this.pending
+			.map((id) => {
+				const draft = this.polygonDraft.find((o) => o.id === id)?.definition;
+				const v = this.result.values.get(id);
+				return draft?.kind === "point"
+					? draft
+					: v?.kind === "point"
+						? v.point
+						: null;
+			})
+			.filter((p): p is GeometryPoint => p !== null);
+		const preview =
+			this.tool === "polygon" || this.tool === "regularPolygon"
+				? `<g data-polygon-preview><polyline class="tp-geometry-preview" points="${draftPoints.map((p) => `${x(p.x)},${y(p.y)}`).join(" ")}"/>${this.polygonDraft
+						.map((o) => {
+							const d = o.definition;
+							return d.kind === "point"
+								? `<g data-id="${o.id}" class="tp-geometry-shape"><circle class="point-hit" cx="${x(d.x)}" cy="${y(d.y)}" r="13"/><circle class="point" cx="${x(d.x)}" cy="${y(d.y)}" r="5"/><text x="${x(d.x) + 11}" y="${y(d.y) - 10}">${o.id}</text></g>`
+								: "";
+						})
+						.join("")}</g>`
+				: "";
+		group.innerHTML = `${shapes.join("")}${points.join("")}${preview}`;
+		const finish = this.querySelector<TpButton>(
+			'[data-action="finish-polygon"]',
+		);
+		if (finish)
+			finish.disabled =
+				this.readonly || this.tool !== "polygon" || this.pending.length < 3;
 		const grid = this.querySelector("[data-grid]");
 		if (grid) {
 			const step =

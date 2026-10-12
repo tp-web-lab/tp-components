@@ -56,7 +56,7 @@ test("shared setup uses the frozen CI lock and builds dependencies before report
   assert.doesNotMatch(build, /test:|quality:|lighthouse/);
 });
 
-test("all workflows share setup and collect artifacts relative to the workspace root", () => {
+test("report workflows share setup and collect artifacts relative to the workspace root", () => {
   for (const name of workflows) {
     const workflow = load(read(`.github/workflows/${name}.yml`));
     assert.equal(workflow.permissions.contents, "read");
@@ -66,7 +66,11 @@ test("all workflows share setup and collect artifacts relative to the workspace 
       assert.equal(job.steps[0].with.path, "tp-components");
       assert.equal(job.steps[1].uses, "./tp-components/.github/actions/setup-workspace");
       const upload = job.steps.find((step) => step.uses === "actions/upload-artifact@v6");
-      assert.equal(upload.if, "always()");
+      // Accessibility skips report collection when no component needs an audit.
+      const expectedCondition = name === "accessibility"
+        ? "always() && steps.scope.outputs.run == 'true'"
+        : "always()";
+      assert.equal(upload.if, expectedCondition, `${name}: report collection condition`);
       for (const path of upload.with.path.trim().split("\n")) assert.ok(path.startsWith("tp-components/"));
       assert.ok(!job.steps.some((step) => step.run?.startsWith("pnpm install")));
     }

@@ -2,7 +2,7 @@
 
 <tp-toc position="end" expand-all open brand></tp-toc>
 
-The custom `<tp-graph-geometry>` element implements dynamic ruler and compass constructions. Points, lines, segments, rays, vectors, circles, arcs, angular sectors and comments preserve their construction dependencies when a point moves. No equations or function plots are exposed.
+The custom `<tp-graph-geometry>` element implements dynamic ruler and compass constructions. Points, lines, segments, rays, vectors, circles, arcs, angular sectors, polygons and comments preserve their construction dependencies when a point moves. No equations or function plots are exposed.
 
 <tp-graph-geometry></tp-graph-geometry>
 
@@ -27,6 +27,15 @@ The custom `<tp-graph-geometry>` element implements dynamic ruler and compass co
 | Midpoint / Perpendicular bisector · direct (`built-in`) | Select a segment to construct its midpoint or perpendicular bisector. |
 | Perpendicular / Parallel (`built-in`) | Select a point, then a line, segment, ray or vector. |
 | Angle bisector (`built-in`) | Select three points in order: first arm, vertex, second arm. Construct the internal angle bisector as a line. |
+| Transformation (`built-in`) | Choose Create a copy (default) to add an image, or Transform the object to replace the selected object without adding another object. |
+| Axial symmetry (`built-in`) | Select an object, then a line, segment, ray or vector as its axis. Create a reflected image. |
+| Central symmetry (`built-in`) | Select an object, then its centre point. Create an image on the opposite side of that centre. |
+| Homothety (`built-in`) | Set Ratio (default 2, nonzero), select an object, then its centre point. Negative ratios also place the image on the opposite side. |
+| Rotation (`built-in`) | Set Rotation angle (°), default 90, select an object, then its centre point. Positive angles turn counterclockwise; negative angles turn clockwise. |
+| Translation (`built-in`) | Select an object, then a vector. Create its image with that displacement. |
+| Polygon (`built-in`) | Click empty space to create successive vertices, or select existing points. Close by selecting the first vertex after at least three vertices, or use Finish polygon. |
+| Regular polygon (`built-in`) | Set Sides to an integer from 3 to 360, then click or select two consecutive vertices. The polygon turns counterclockwise from this first edge. |
+| Finish polygon (`built-in`) | Complete the pending irregular polygon; enabled after three vertices. The new points and polygon form one undoable change. |
 | Tangents (`built-in`) | Select a point, then a circle. Create two tangents outside, one on the circumference, or announce that none exists inside. |
 | Circle · radius | Enter a positive radius or a transferred length such as `distance(A, B)`, then select the centre point. |
 | Circle · through point | Select the centre, then a point the circle must pass through. |
@@ -50,7 +59,8 @@ The custom `<tp-graph-geometry>` element implements dynamic ruler and compass co
 | Enter / Space | Activate a focused button or expand/collapse the Construction source accordion. Selecting an object in Move mode focuses the drawing. |
 | Arrow keys on the drawing | In Pan view, pan by 40 drawing pixels. Otherwise move the selected free or attached point by 0.2 units before projection onto its support. |
 | Shift + arrow keys | In Pan view, pan by 8 drawing pixels. Otherwise use a smaller point step of 0.02 units. |
-| Escape on the drawing | Cancel the pending selection and return to Move. |
+| Enter on the drawing | Finish a pending irregular polygon with at least three vertices. |
+| Escape on the drawing | Cancel the pending selection, discard uncommitted polygon vertices and return to Move. |
 | ArrowUp / ArrowDown, Home / End in a menu | Move between export formats, stroke styles or colors. |
 | Enter / Space in a menu | Save the chosen format or apply the selected style or color. |
 | Escape in a menu | Close the menu. |
@@ -125,7 +135,7 @@ Save image uses `tp-save-image` and its `tp-dropdown`, with SVG offered first as
 
 ### Direct construction tools
 
-Add the boolean `built-in` attribute to offer the six direct tools in the toolbar. Adding or removing it updates the toolbar immediately and preserves the construction. Its absence keeps the ruler-and-compass tools available. As with other boolean attributes, `built-in="false"` still enables it; remove the attribute to disable it. `readonly` prevents the use of these tools as well.
+Add the boolean `built-in` attribute to offer the direct construction and transformation tools in the toolbar. Adding or removing it updates the toolbar immediately and preserves the construction. Its absence keeps the ruler-and-compass tools available. As with other boolean attributes, `built-in="false"` still enables it; remove the attribute to disable it. `readonly` prevents the use of these tools as well.
 
 ```html
 <tp-graph-geometry built-in></tp-graph-geometry>
@@ -145,6 +155,48 @@ The following commands can be loaded from source or a file with or without `buil
 All these constructions follow their supports. Tangent branch 0 touches the circle to the left of the direction from its centre to P; branch 1 touches it to the right. At the circumference, both branches define the same line. Inside the circle they are undefined and reappear when P moves outside again. The Tangents tool creates all currently distinct tangents as one undoable action. A zero-length angle arm leaves the internal angle bisector undefined. A straight angle produces the perpendicular line through its vertex. Coincident points leave lines, rays, vectors and segments undefined until their direction becomes defined again.
 
 A sector is a filled annotation of part of a circle: attach points and construct intersections on its supporting circle or a matching arc. A comment is plain text, never HTML, and follows its anchor point with a fixed screen offset. Lengths and radii are numbers (or transferred distances for circles); there are no symbolic equations.
+
+### Polygons
+
+With `built-in`, Polygon creates an irregular polygon from successive clicks. Click empty space to create a vertex or select an existing point. A dashed preview shows the pending edges. Click the first vertex to close it, or use Finish polygon (Enter on the drawing). At least three distinct vertices are required. Escape, changing tools or removing `built-in` discards the unfinished polygon and its new points. Completion records the new points and polygon as one undoable change.
+
+Regular polygon uses two consecutive vertices, in the selected order, and Sides (an integer from 3 to 360, default 5). Both vertices can be created by clicking or selected from existing points. The remaining vertices are calculated counterclockwise from the first edge and follow its translation, rotation and length. Reverse the first two vertices to build on the other side. Calculated vertices are part of the polygon, not separately named point objects.
+
+```text
+point A = (-3, 0)
+point B = (0, 0)
+point C = (-2, 2)
+polygon triangle = polygon(A, B, C) color=blue
+polygon pentagon = regularPolygon(A, B, sides=5) color=green
+```
+
+Both polygon types have a closed outline and a light fill in the same color (15% opacity). The Color and Style menus, hidden state and image exports apply to the whole polygon. Irregular polygons follow their named vertices in order; concave and crossing outlines are allowed. Coincident consecutive vertices leave a polygon undefined until moved apart. Polygon edges are not individual segment objects or supports for attached points and intersections; create a segment between named vertices for those operations. Polygon commands load from source or `src` even without `built-in`; that attribute controls the tools offered in the interface.
+
+### Transformations
+
+With `built-in`, select a transformation tool, then the object to copy, then its reference (axis, centre or vector). Selection works in the drawing and in the object list, including hidden reference objects. Choose Create a copy (default) to add a new dependent image, or Transform the object to replace the selected object while preserving its name, appearance and visibility. Both modes record one undoable change. Move the source points or the transformation reference to update the image. Images can themselves be transformed or used as construction supports of their resulting kind. To move a transformed point, move its defining objects.
+
+The five operations support points, segments (including fixed lengths), lines, rays, vectors, circles, arcs, sectors, polygons and comments. Reflections reverse arc direction. Homotheties scale radii by the absolute ratio; negative ratios also reverse the position relative to the centre. A zero ratio is rejected to preserve the geometric kind. Comments move their anchor while their text stays upright. Copies created with the toolbar initially copy the source stroke style and color; their appearance can then be edited independently, including the light polygon fill. Copies are visible even when their source is hidden; transformation in place preserves the hidden state.
+
+Use the resulting object's type on the left of a source command:
+
+```text
+point reflected = axialSymmetry(A, axis)
+segment opposite = centralSymmetry(s, O)
+polygon enlarged = homothety(p, O, ratio=2)
+polygon turned = rotation(p, O, angle=90deg)
+circle shifted = translation(c, v)
+```
+
+In Transform the object mode, the object count stays unchanged and existing dependents keep referencing the same name. The object's original recipe is embedded in the transformation rather than retained as a separate hidden object. For example:
+
+```text
+polygon p = rotation(polygon(A, B, C), O, angle=90deg) color=blue
+```
+
+Applying another transformation nests another recipe. Source reload and Undo/Redo preserve this composition. The defining points A, B and C remain construction supports; they are not moved independently by transforming p. For a transformed point, move its supports or edit its source recipe. The transformation reference must not depend on the object being replaced: this would create a dependency cycle and is rejected without changing the figure. For example, translating A by a vector defined from A requires Create a copy, or an independent vector.
+
+The source object must have the declared result type. Axial symmetry uses the infinite supporting line of a line, segment, ray or vector. Translation requires a vector and follows its direction and length. Ratio and angle are fixed finite numbers recorded when the construction is created. Adjust them in Construction source to change an existing image. Source commands can be loaded with or without `built-in`, including through `src`. Deleting a source or reference removes dependent images; Undo restores them. Undefined supports temporarily hide their images. Exports include the visible transformed figures with their styles and fills.
 
 ### Perpendicular bisector
 
@@ -176,6 +228,15 @@ Direct constructions
 
 Styles and export
 : Select an object in Move mode and change its stroke style or library color. Reveal the hidden circle from the object list, then use Save image to export the current view as SVG, PNG or WebP.
+
+Polygons
+: Move the defining points to reshape the irregular polygon or resize and rotate the regular pentagon. Use the built-in polygon tools to create more figures, then change their color and export the light fills with their outlines.
+
+Transformations
+: Move the source triangle points, the centre or the translation vector endpoint and observe the five dependent images. Use the built-in transformation tools to add another image, then edit its color independently.
+
+Transform in place
+: Choose Transform the object, select Rotation, then the circle c and centre O. The circle keeps its name and its attached point Q follows; Undo restores the original construction. Switch to Create a copy to compare both modes.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
@@ -204,7 +265,7 @@ Set `value` or call `setConstruction(source)` to replace a construction atomical
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>built-in</code> | <code>boolean</code> | <code>false</code> | Offers direct midpoint, perpendicular, parallel, perpendicular bisector, angle bisector and tangent tools. |
+  | <code>built-in</code> | <code>boolean</code> | <code>false</code> | Offers direct midpoint, perpendicular, parallel, perpendicular bisector, angle bisector, tangent, polygon and transformation tools. |
   | <code>grid</code> | <code>boolean</code> | <code>false</code> | Shows a light grid without axes or graduations. |
   | <code>readonly</code> | <code>boolean</code> | <code>false</code> | Prevents changes to the construction. |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a text file containing construction commands. |
@@ -239,6 +300,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-geometry.TpGraphGeometry.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 
@@ -301,6 +363,10 @@ All tp-components used by `<tp-graph-geometry>` are loaded automatically by this
 @summary Dropdown menu component.
 -->
 <!--
+@tp-dependency tp-radio-list
+@summary Transforms a list into a group of radio buttons.
+-->
+<!--
 @tp-dependency tp-save-image
 @summary Downloads an anchored image as SVG, PNG or WebP.
 -->
@@ -315,6 +381,7 @@ All tp-components used by `<tp-graph-geometry>` are loaded automatically by this
 - [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
 - [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
 - [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
+- [`<tp-radio-list>`](../radio-list/index.md) : Transforms a list into a group of radio buttons.
 - [`<tp-save-image>`](../save-image/index.md) : Downloads an anchored image as SVG, PNG or WebP.
 - [`<tp-textfield>`](../textfield/index.md) : Single-line and automatically growing multiline text field.
 

@@ -55,3 +55,10 @@ tp-graph-geometry [data-objects] [data-tp-button-content] { display:flex; justif
 .tp-geometry-shape.has-color .shape-ink, .tp-geometry-shape.has-color .point { stroke:var(--tp-brand-seed); }
 .tp-geometry-shape.has-color .sector, .tp-geometry-shape.has-color .dependent, .tp-geometry-shape.has-color text { fill:var(--tp-brand-seed); }
 .tp-geometry-header > tp-save-image { margin-inline-start:auto; }
+
+.tp-geometry-preview { fill:none; stroke:var(--tp-info-text-colorful, #1e5e85); stroke-width:2; stroke-dasharray:5 5; pointer-events:none; }
+
+.tp-geometry-shape .polygon { fill:var(--tp-info-text-colorful, #447a94); fill-opacity:.15; }
+.tp-geometry-shape.has-color .polygon { fill:var(--tp-brand-seed); }
+.tp-geometry-shape.is-selected:not(.has-color) .polygon { fill:#c96523; }
+.tp-geometry-shape .shape-hit polygon { fill:transparent; }

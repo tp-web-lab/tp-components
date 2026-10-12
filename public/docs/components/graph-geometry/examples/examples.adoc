@@ -178,5 +178,61 @@ comment note = comment(A, "Select an object to style it") color=blue
 ====
 =====
 ======
+
+.Polygons
+======
+[tp-graph-geometry%built-in%grid]
+=====
+[script,type="tp/geometry"]
+====
+point A = (-5, -2)
+point B = (-2, -2)
+point C = (-3, 0)
+point D = (-5, 2)
+point E = (1, -2)
+point F = (4, -2)
+polygon irregular = polygon(A, B, C, D) color=blue
+polygon regular = regularPolygon(E, F, sides=5) color=green
+====
+=====
+======
+
+.Transformations
+======
+[tp-graph-geometry%built-in%grid]
+=====
+[script,type="tp/geometry"]
+====
+point O = (0, 0)
+point X = (0, 3)
+point A = (1, -1)
+point B = (2, -1)
+point C = (1, 0)
+point T = (3, 2)
+line axis = line(O, X) style=dashed color=zinc
+vector v = vector(O, T) color=zinc
+polygon original = polygon(A, B, C) color=orange
+polygon reflected = axialSymmetry(original, axis) color=blue
+polygon opposite = centralSymmetry(original, O) color=violet
+polygon enlarged = homothety(original, O, ratio=2) color=green
+polygon turned = rotation(original, O, angle=90deg) color=red
+polygon shifted = translation(original, v) color=teal
+====
+=====
+======
+
+.Transform in place
+======
+[tp-graph-geometry%built-in%grid]
+=====
+[script,type="tp/geometry"]
+====
+point O = (0, 0)
+point A = (3, 0)
+circle c = circle(A, 1) color=blue
+point Q = on(c, angle=30deg)
+====
+=====
+======
 ----
 =========

@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import type { TpCodeEditor } from "../code-editor/code-editor.js";
 import {
 	evaluateGeometry,
 	type GeometryPoint,
@@ -183,6 +184,33 @@ describe("<tp-graph-geometry>", () => {
 		expect(editor.querySelectorAll(".shape-ink.arc")).toHaveLength(4);
 		expect(editor.querySelectorAll(".shape-ink.circle")).toHaveLength(0);
 		expect(editor.querySelectorAll(".point")).toHaveLength(4);
+	});
+	it("applies the edited circle name and synchronizes source through undo and redo", () => {
+		const original =
+			"point O = (0, 0)\npoint A = (3, 0)\ncircle c = circle(O, through=A)";
+		const editor = mount(original);
+		const source = editor.querySelector<TpCodeEditor>("tp-code-editor");
+		if (!source) throw new Error("Missing construction editor");
+		source.setValue(original.replace("circle c =", "circle renamed ="));
+		click(editor, '[data-action="apply"]');
+		expect(editor.analyze().values.has("c")).toBe(false);
+		expect(editor.analyze().values.get("renamed")).toMatchObject({ radius: 3 });
+		expect(
+			editor.querySelector('[data-object="renamed"]')?.textContent,
+		).toContain("renamed");
+		expect(editor.querySelector('[data-object="c"]')).toBeNull();
+		editor.undo();
+		expect(source.getValue()).toBe(original);
+		expect(editor.querySelector('[data-object="c"]')).not.toBeNull();
+		editor.redo();
+		expect(source.getValue()).toContain("circle renamed =");
+		source.setValue("circle invalid = circle(missing, 3)");
+		click(editor, '[data-action="apply"]');
+		expect(editor.analyze().values.has("renamed")).toBe(true);
+		expect(source.getValue()).toContain("missing");
+		source.setValue("");
+		click(editor, '[data-action="apply"]');
+		expect(editor.analyze().values.size).toBe(0);
 	});
 	it("preserves the last valid figure after a source error", () => {
 		const editor = mount();
@@ -757,7 +785,7 @@ describe("extended toolbar", () => {
 		click(editor, `[data-tool="${tool}"]`);
 		for (const id of ids) click(editor, `[data-object="${id}"]`);
 	}
-	it("gates all six tools by attribute presence and preserves constructions on removal", () => {
+	it("gates all built-in tools by attribute presence and preserves constructions on removal", () => {
 		const editor = mount();
 		const builtIns = [
 			"midpoint",
@@ -766,6 +794,8 @@ describe("extended toolbar", () => {
 			"perpendicularBisector",
 			"bisector",
 			"tangent",
+			"polygon",
+			"regularPolygon",
 		];
 		for (const id of builtIns)
 			expect(editor.querySelector(`[data-tool="${id}"]`)).toBeNull();

@@ -7,7 +7,25 @@ export interface GeometryPoint {
 	x: number;
 	y: number;
 }
+export const GEOMETRY_TRANSFORMATIONS = [
+	"axialSymmetry",
+	"centralSymmetry",
+	"homothety",
+	"rotation",
+	"translation",
+] as const;
+export type GeometryTransformation = (typeof GEOMETRY_TRANSFORMATIONS)[number];
 export type GeometryDefinition =
+	| {
+			kind: "transform";
+			operation: GeometryTransformation;
+			object: string | GeometryDefinition;
+			support: string;
+			output: GeometryValue["kind"];
+			amount: number;
+	  }
+	| { kind: "polygon"; vertices: string[] }
+	| { kind: "regularPolygon"; first: string; second: string; sides: number }
 	| { kind: "point"; x: number; y: number }
 	| { kind: "on"; object: string; parameter: number }
 	| { kind: "intersection"; first: string; second: string; branch: number }
@@ -39,6 +57,7 @@ export interface GeometryObject {
 	definition: GeometryDefinition;
 }
 export type GeometryValue =
+	| { kind: "polygon"; vertices: GeometryPoint[] }
 	| { kind: "point"; point: GeometryPoint }
 	| {
 			kind: "line" | "segment" | "ray" | "vector";
@@ -113,7 +132,8 @@ function splitArguments(text: string): string[] {
 	return parts;
 }
 /** Parses construction commands only; no evaluation of JavaScript or equations. */
-export function parseGeometry(source: string): GeometryObject[] {
+function parseGeometryCommands(source: string, depth = 0): GeometryObject[] {
+	if (depth > 64) throw new Error("Too many nested transformations.");
 	const objects: GeometryObject[] = [];
 	const ids = new Set<string>();
 	for (const [index, raw] of source.split("\n").entries()) {
@@ -125,7 +145,7 @@ export function parseGeometry(source: string): GeometryObject[] {
 		if (!line) continue;
 		try {
 			const match =
-				/^(point|line|segment|ray|vector|circle|arc|sector|comment)\s+(\w+)\s*=\s*(.*?)(\s+(?:(?:style|color)=\w+|hidden)(?:\s+(?:(?:style|color)=\w+|hidden))*)?$/.exec(
+				/^(point|line|segment|ray|vector|circle|arc|sector|comment|polygon)\s+(\w+)\s*=\s*(.*?)(\s+(?:(?:style|color)=\w+|hidden)(?:\s+(?:(?:style|color)=\w+|hidden))*)?$/.exec(
 					line,
 				);
 			if (!match) throw new Error("Expected: type name = construction.");
@@ -159,7 +179,44 @@ export function parseGeometry(source: string): GeometryObject[] {
 						options.set(key, value);
 					}
 				};
-				if (type === "point" && fn === "on") {
+				if (GEOMETRY_TRANSFORMATIONS.includes(fn as GeometryTransformation)) {
+					const operation = fn as GeometryTransformation;
+					const option =
+						operation === "homothety"
+							? "ratio"
+							: operation === "rotation"
+								? "angle"
+								: null;
+					named(2, option ? [option] : []);
+					const amount = option
+						? number(
+								(options.get(option) ?? "").replace(
+									operation === "rotation" ? /deg$/ : /$^/,
+									"",
+								),
+							)
+						: 1;
+					if (operation === "homothety" && amount === 0)
+						throw new Error("The homothety ratio must be nonzero.");
+					definition = {
+						kind: "transform",
+						operation,
+						object: /^[A-Za-z][\w]*$/.test(a)
+							? identifier(a)
+							: (() => {
+									const nested = parseGeometryCommands(
+										`${type} nested = ${a}`,
+										depth + 1,
+									)[0];
+									if (!nested || nested.hidden || nested.color || nested.stroke)
+										throw new Error("Expected a construction expression.");
+									return nested.definition;
+								})(),
+						support: identifier(b),
+						output: type as GeometryValue["kind"],
+						amount,
+					};
+				} else if (type === "point" && fn === "on") {
 					named(1, ["angle", "t"]);
 					if (options.size !== 1) throw new Error("Use angle=…deg or t=… .");
 					const angle = options.get("angle");
@@ -186,6 +243,24 @@ export function parseGeometry(source: string): GeometryObject[] {
 						first: identifier(a),
 						second: identifier(b),
 						branch,
+					};
+				} else if (type === "polygon" && fn === "polygon") {
+					const vertices = args.map(identifier);
+					if (vertices.length < 3 || new Set(vertices).size !== vertices.length)
+						throw new Error(
+							"A polygon needs at least three distinct vertices.",
+						);
+					definition = { kind: "polygon", vertices };
+				} else if (type === "polygon" && fn === "regularPolygon") {
+					named(2, ["sides"]);
+					const sides = number(options.get("sides") ?? "");
+					if (!Number.isInteger(sides) || sides < 3 || sides > 360)
+						throw new Error("Sides must be an integer from 3 to 360.");
+					definition = {
+						kind: "regularPolygon",
+						first: identifier(a),
+						second: identifier(b),
+						sides,
 					};
 				} else if (type === "point" && fn === "midpoint" && args.length === 1) {
 					definition = { kind: "midpoint", segment: identifier(a) };
@@ -318,6 +393,11 @@ export function parseGeometry(source: string): GeometryObject[] {
 			);
 		}
 	}
+	return objects;
+}
+/** Parses construction commands and validates their dependency graph. */
+export function parseGeometry(source: string): GeometryObject[] {
+	const objects = parseGeometryCommands(source);
 	const byId = new Map(objects.map((o) => [o.id, o]));
 	const visiting = new Set<string>();
 	const visited = new Set<string>();
@@ -336,70 +416,90 @@ export function parseGeometry(source: string): GeometryObject[] {
 			if (!allowed.includes(kind(ref)))
 				throw new Error(`Invalid support ${ref} for ${id}.`);
 		};
-		const d = object.definition;
-		if (
-			d.kind === "line" ||
-			d.kind === "segment" ||
-			d.kind === "ray" ||
-			d.kind === "vector"
-		) {
-			requireKind(d.first, ["point"]);
-			requireKind(d.second, ["point"]);
-		}
-		if (d.kind === "circle") {
-			requireKind(d.center, ["point"]);
-			if (typeof d.radius !== "number") {
-				for (const ref of "through" in d.radius
-					? [d.radius.through]
-					: d.radius.distance)
+		const checkDefinition = (d: GeometryDefinition): void => {
+			if (d.kind === "transform") {
+				if (typeof d.object === "string") requireKind(d.object, [d.output]);
+				else {
+					checkDefinition(d.object);
+					if (constructionKind(d.object) !== d.output)
+						throw new Error(`Invalid nested construction for ${id}.`);
+				}
+				requireKind(
+					d.support,
+					d.operation === "axialSymmetry"
+						? ["line", "segment", "ray", "vector"]
+						: d.operation === "translation"
+							? ["vector"]
+							: ["point"],
+				);
+			}
+			if (d.kind === "polygon" || d.kind === "regularPolygon")
+				for (const ref of dependencies(d)) requireKind(ref, ["point"]);
+			if (
+				d.kind === "line" ||
+				d.kind === "segment" ||
+				d.kind === "ray" ||
+				d.kind === "vector"
+			) {
+				requireKind(d.first, ["point"]);
+				requireKind(d.second, ["point"]);
+			}
+			if (d.kind === "circle") {
+				requireKind(d.center, ["point"]);
+				if (typeof d.radius !== "number") {
+					for (const ref of "through" in d.radius
+						? [d.radius.through]
+						: d.radius.distance)
+						requireKind(ref, ["point"]);
+				}
+			}
+			if (d.kind === "on")
+				requireKind(
+					d.object,
+					parameterKinds.get(d) === "linear"
+						? ["line", "segment", "ray", "vector"]
+						: ["circle", "arc"],
+				);
+			if (d.kind === "arc" || d.kind === "sector") {
+				requireKind(d.circle, ["circle"]);
+				if (d.relativeTo)
+					requireKind(d.relativeTo, ["line", "segment", "ray", "vector"]);
+			}
+			if (d.kind === "intersection") {
+				requireKind(d.first, [
+					"line",
+					"segment",
+					"ray",
+					"vector",
+					"circle",
+					"arc",
+				]);
+				requireKind(d.second, [
+					"line",
+					"segment",
+					"ray",
+					"vector",
+					"circle",
+					"arc",
+				]);
+			}
+			if (d.kind === "midpoint" || d.kind === "perpendicularBisector")
+				requireKind(d.segment, ["segment"]);
+			if (d.kind === "parallel" || d.kind === "perpendicular") {
+				requireKind(d.point, ["point"]);
+				requireKind(d.support, ["line", "segment", "ray", "vector"]);
+			}
+			if (d.kind === "bisector") {
+				for (const ref of [d.first, d.vertex, d.second])
 					requireKind(ref, ["point"]);
 			}
-		}
-		if (d.kind === "on")
-			requireKind(
-				d.object,
-				parameterKinds.get(d) === "linear"
-					? ["line", "segment", "ray", "vector"]
-					: ["circle", "arc"],
-			);
-		if (d.kind === "arc" || d.kind === "sector") {
-			requireKind(d.circle, ["circle"]);
-			if (d.relativeTo)
-				requireKind(d.relativeTo, ["line", "segment", "ray", "vector"]);
-		}
-		if (d.kind === "intersection") {
-			requireKind(d.first, [
-				"line",
-				"segment",
-				"ray",
-				"vector",
-				"circle",
-				"arc",
-			]);
-			requireKind(d.second, [
-				"line",
-				"segment",
-				"ray",
-				"vector",
-				"circle",
-				"arc",
-			]);
-		}
-		if (d.kind === "midpoint" || d.kind === "perpendicularBisector")
-			requireKind(d.segment, ["segment"]);
-		if (d.kind === "parallel" || d.kind === "perpendicular") {
-			requireKind(d.point, ["point"]);
-			requireKind(d.support, ["line", "segment", "ray", "vector"]);
-		}
-		if (d.kind === "bisector") {
-			for (const ref of [d.first, d.vertex, d.second])
-				requireKind(ref, ["point"]);
-		}
-		if (d.kind === "tangent") {
-			requireKind(d.point, ["point"]);
-			requireKind(d.circle, ["circle"]);
-		}
-		if (d.kind === "comment") requireKind(d.point, ["point"]);
+			if (d.kind === "tangent") {
+				requireKind(d.point, ["point"]);
+				requireKind(d.circle, ["circle"]);
+			}
+			if (d.kind === "comment") requireKind(d.point, ["point"]);
+		};
+		checkDefinition(object.definition);
 		visiting.delete(id);
 		visited.add(id);
 	};
@@ -408,6 +508,8 @@ export function parseGeometry(source: string): GeometryObject[] {
 }
 /** Geometric kind produced by a construction, independent of its recipe. */
 export function constructionKind(d: GeometryDefinition): GeometryValue["kind"] {
+	if (d.kind === "transform") return d.output;
+	if (d.kind === "regularPolygon") return "polygon";
 	if (d.kind === "on" || d.kind === "intersection" || d.kind === "midpoint")
 		return "point";
 	if (
@@ -425,6 +527,15 @@ export function constructionKind(d: GeometryDefinition): GeometryValue["kind"] {
 const parameterKinds = new WeakMap<GeometryDefinition, "linear" | "circular">();
 export function dependencies(d: GeometryDefinition): string[] {
 	switch (d.kind) {
+		case "transform":
+			return [
+				...(typeof d.object === "string" ? [d.object] : dependencies(d.object)),
+				d.support,
+			];
+		case "polygon":
+			return d.vertices;
+		case "regularPolygon":
+			return [d.first, d.second];
 		case "point":
 			return [];
 		case "on":
@@ -551,6 +662,75 @@ export function intersections(
 	}
 	return points.map((p) => (contains(a, p) && contains(b, p) ? p : null));
 }
+/** Applies a similarity to any geometric value, preserving its kind. */
+function transformGeometry(
+	value: GeometryValue,
+	support: GeometryValue,
+	operation: GeometryTransformation,
+	amount: number,
+): GeometryValue {
+	let map: (p: GeometryPoint) => GeometryPoint;
+	let scale = 1;
+	let orientation = 1;
+	if (operation === "translation") {
+		if (support.kind !== "vector") throw new Error("Select a vector.");
+		const delta = subtract(support.second, support.first);
+		map = (p) => along(p, delta, 1);
+	} else if (operation === "axialSymmetry") {
+		if (!isLinear(support)) throw new Error("Select a linear axis.");
+		const delta = subtract(support.second, support.first);
+		const length2 = delta.x ** 2 + delta.y ** 2;
+		if (length2 < EPS * EPS) throw new Error("The axis is undefined.");
+		orientation = -1;
+		map = (p) => {
+			const v = subtract(p, support.first);
+			const projection = along(
+				support.first,
+				delta,
+				(v.x * delta.x + v.y * delta.y) / length2,
+			);
+			return { x: 2 * projection.x - p.x, y: 2 * projection.y - p.y };
+		};
+	} else {
+		if (support.kind !== "point") throw new Error("Select a centre point.");
+		const center = support.point;
+		const angle = operation === "rotation" ? rad(amount) : 0;
+		const factor =
+			operation === "homothety"
+				? amount
+				: operation === "centralSymmetry"
+					? -1
+					: 1;
+		scale = Math.abs(factor);
+		map = (p) => {
+			const v = subtract(p, center);
+			return {
+				x: center.x + factor * (v.x * Math.cos(angle) - v.y * Math.sin(angle)),
+				y: center.y + factor * (v.x * Math.sin(angle) + v.y * Math.cos(angle)),
+			};
+		};
+	}
+	if (value.kind === "point" || value.kind === "comment")
+		return { ...value, point: map(value.point) };
+	if (isLinear(value))
+		return { ...value, first: map(value.first), second: map(value.second) };
+	if (value.kind === "polygon")
+		return { ...value, vertices: value.vertices.map(map) };
+	const center = map(value.center);
+	const radius = value.radius * scale;
+	if (value.kind === "circle") return { kind: "circle", center, radius };
+	const start = map({
+		x: value.center.x + value.radius * Math.cos(value.start),
+		y: value.center.y + value.radius * Math.sin(value.start),
+	});
+	return {
+		...value,
+		center,
+		radius,
+		start: Math.atan2(start.y - center.y, start.x - center.x),
+		sweep: orientation * value.sweep,
+	};
+}
 export function evaluateGeometry(
 	objects: readonly GeometryObject[],
 ): GeometryResult {
@@ -575,176 +755,219 @@ export function evaluateGeometry(
 				if (v.kind !== "point") throw new Error(`Expected point: ${ref}`);
 				return v.point;
 			};
-			let value: GeometryValue;
-			if (d.kind === "point")
-				value = { kind: "point", point: { x: d.x, y: d.y } };
-			else if (
-				d.kind === "line" ||
-				d.kind === "segment" ||
-				d.kind === "ray" ||
-				d.kind === "vector"
-			) {
-				const first = point(d.first);
-				let second = point(d.second);
-				if (distance(first, second) < EPS)
-					throw new Error("The two points coincide.");
-				if (d.kind === "segment" && d.length !== undefined)
-					second = along(
-						first,
-						subtract(second, first),
-						d.length / distance(first, second),
+			const evaluateDefinition = (d: GeometryDefinition): GeometryValue => {
+				let value: GeometryValue;
+				if (d.kind === "transform")
+					value = transformGeometry(
+						typeof d.object === "string"
+							? get(d.object)
+							: evaluateDefinition(d.object),
+						get(d.support),
+						d.operation,
+						d.amount,
 					);
-				value = { kind: d.kind, first, second };
-			} else if (d.kind === "circle") {
-				const center = point(d.center);
-				const radius =
-					typeof d.radius === "number"
-						? d.radius
-						: "through" in d.radius
-							? distance(center, point(d.radius.through))
-							: distance(
-									point(d.radius.distance[0]),
-									point(d.radius.distance[1]),
-								);
-				if (radius < EPS) throw new Error("The radius is zero.");
-				value = { kind: "circle", center, radius };
-			} else if (d.kind === "arc" || d.kind === "sector") {
-				const circle = get(d.circle);
-				if (circle.kind !== "circle") throw new Error("Expected a circle.");
-				let offset = 0;
-				if (d.relativeTo) {
-					const line = get(d.relativeTo);
-					if (!isLinear(line)) throw new Error("Expected a direction.");
-					offset = Math.atan2(
-						line.second.y - line.first.y,
-						line.second.x - line.first.x,
-					);
-				}
-				value = {
-					...circle,
-					kind: d.kind,
-					start: d.start + offset,
-					sweep: d.clockwise ? -norm(d.start - d.end) : norm(d.end - d.start),
-				};
-			} else if (d.kind === "on") {
-				const support = get(d.object);
-				let p: GeometryPoint;
-				if (isLinear(support))
-					p = along(
-						support.first,
-						subtract(support.second, support.first),
-						linearParameter(support, d.parameter),
-					);
-				else if (isCircular(support)) {
-					let angle = d.parameter;
+				else if (d.kind === "polygon" || d.kind === "regularPolygon") {
+					let vertices: GeometryPoint[];
+					if (d.kind === "polygon") vertices = d.vertices.map(point);
+					else {
+						const a = point(d.first),
+							b = point(d.second);
+						vertices = [a, b];
+						const angle = TAU / d.sides;
+						let dx = b.x - a.x,
+							dy = b.y - a.y;
+						for (let i = 2; i < d.sides; i++) {
+							const nextX = dx * Math.cos(angle) - dy * Math.sin(angle);
+							dy = dx * Math.sin(angle) + dy * Math.cos(angle);
+							dx = nextX;
+							const last = vertices[i - 1] ?? b;
+							vertices.push({ x: last.x + dx, y: last.y + dy });
+						}
+					}
 					if (
-						support.kind === "arc" &&
-						!contains(
-							support,
-							along(
-								support.center,
-								{ x: Math.cos(angle), y: Math.sin(angle) },
-								support.radius,
-							),
+						vertices.some(
+							(p, i) =>
+								distance(p, vertices[(i + 1) % vertices.length] ?? p) < EPS,
 						)
 					)
-						angle = nearestArcAngle(support, angle);
-					p = along(
-						support.center,
-						{ x: Math.cos(angle), y: Math.sin(angle) },
-						support.radius,
+						throw new Error("Consecutive polygon vertices coincide.");
+					value = { kind: "polygon", vertices };
+				} else if (d.kind === "point")
+					value = { kind: "point", point: { x: d.x, y: d.y } };
+				else if (
+					d.kind === "line" ||
+					d.kind === "segment" ||
+					d.kind === "ray" ||
+					d.kind === "vector"
+				) {
+					const first = point(d.first);
+					let second = point(d.second);
+					if (distance(first, second) < EPS)
+						throw new Error("The two points coincide.");
+					if (d.kind === "segment" && d.length !== undefined)
+						second = along(
+							first,
+							subtract(second, first),
+							d.length / distance(first, second),
+						);
+					value = { kind: d.kind, first, second };
+				} else if (d.kind === "circle") {
+					const center = point(d.center);
+					const radius =
+						typeof d.radius === "number"
+							? d.radius
+							: "through" in d.radius
+								? distance(center, point(d.radius.through))
+								: distance(
+										point(d.radius.distance[0]),
+										point(d.radius.distance[1]),
+									);
+					if (radius < EPS) throw new Error("The radius is zero.");
+					value = { kind: "circle", center, radius };
+				} else if (d.kind === "arc" || d.kind === "sector") {
+					const circle = get(d.circle);
+					if (circle.kind !== "circle") throw new Error("Expected a circle.");
+					let offset = 0;
+					if (d.relativeTo) {
+						const line = get(d.relativeTo);
+						if (!isLinear(line)) throw new Error("Expected a direction.");
+						offset = Math.atan2(
+							line.second.y - line.first.y,
+							line.second.x - line.first.x,
+						);
+					}
+					value = {
+						...circle,
+						kind: d.kind,
+						start: d.start + offset,
+						sweep: d.clockwise ? -norm(d.start - d.end) : norm(d.end - d.start),
+					};
+				} else if (d.kind === "on") {
+					const support = get(d.object);
+					let p: GeometryPoint;
+					if (isLinear(support))
+						p = along(
+							support.first,
+							subtract(support.second, support.first),
+							linearParameter(support, d.parameter),
+						);
+					else if (isCircular(support)) {
+						let angle = d.parameter;
+						if (
+							support.kind === "arc" &&
+							!contains(
+								support,
+								along(
+									support.center,
+									{ x: Math.cos(angle), y: Math.sin(angle) },
+									support.radius,
+								),
+							)
+						)
+							angle = nearestArcAngle(support, angle);
+						p = along(
+							support.center,
+							{ x: Math.cos(angle), y: Math.sin(angle) },
+							support.radius,
+						);
+					} else throw new Error("Expected a line or circle.");
+					value = { kind: "point", point: p };
+				} else if (d.kind === "comment") {
+					value = { kind: "comment", point: point(d.point), text: d.text };
+				} else if (
+					d.kind === "midpoint" ||
+					d.kind === "perpendicularBisector"
+				) {
+					const segment = get(d.segment);
+					if (segment.kind !== "segment")
+						throw new Error("Expected a segment.");
+					const middle = along(
+						segment.first,
+						subtract(segment.second, segment.first),
+						0.5,
 					);
-				} else throw new Error("Expected a line or circle.");
-				value = { kind: "point", point: p };
-			} else if (d.kind === "comment") {
-				value = { kind: "comment", point: point(d.point), text: d.text };
-			} else if (d.kind === "midpoint" || d.kind === "perpendicularBisector") {
-				const segment = get(d.segment);
-				if (segment.kind !== "segment") throw new Error("Expected a segment.");
-				const middle = along(
-					segment.first,
-					subtract(segment.second, segment.first),
-					0.5,
-				);
-				const delta = subtract(segment.second, segment.first);
-				value =
-					d.kind === "midpoint"
-						? { kind: "point", point: middle }
-						: {
-								kind: "line",
-								first: middle,
-								second: along(middle, { x: -delta.y, y: delta.x }, 1),
-							};
-			} else if (d.kind === "parallel" || d.kind === "perpendicular") {
-				const support = get(d.support);
-				if (!isLinear(support)) throw new Error("Expected a linear support.");
-				const first = point(d.point);
-				const delta = subtract(support.second, support.first);
-				value = {
-					kind: "line",
-					first,
-					second: along(
-						first,
-						d.kind === "parallel" ? delta : { x: -delta.y, y: delta.x },
-						1,
-					),
-				};
-			} else if (d.kind === "bisector") {
-				const vertex = point(d.vertex);
-				const u = subtract(point(d.first), vertex);
-				const v = subtract(point(d.second), vertex);
-				const a = Math.hypot(u.x, u.y),
-					b = Math.hypot(v.x, v.y);
-				if (a < EPS || b < EPS)
-					throw new Error("The angle needs two nonzero arms.");
-				const delta = { x: u.x / a + v.x / b, y: u.y / a + v.y / b };
-				if (Math.hypot(delta.x, delta.y) < EPS) {
-					delta.x = -u.y / a;
-					delta.y = u.x / a;
-				}
-				value = {
-					kind: "line",
-					first: vertex,
-					second: along(vertex, delta, 1),
-				};
-			} else if (d.kind === "tangent") {
-				const circle = get(d.circle);
-				if (circle.kind !== "circle") throw new Error("Expected a circle.");
-				const first = point(d.point);
-				const delta = subtract(first, circle.center);
-				const length = distance(first, circle.center);
-				if (length < circle.radius - EPS)
-					throw new Error("No tangent from inside the circle.");
-				if (Math.abs(length - circle.radius) <= EPS) {
+					const delta = subtract(segment.second, segment.first);
+					value =
+						d.kind === "midpoint"
+							? { kind: "point", point: middle }
+							: {
+									kind: "line",
+									first: middle,
+									second: along(middle, { x: -delta.y, y: delta.x }, 1),
+								};
+				} else if (d.kind === "parallel" || d.kind === "perpendicular") {
+					const support = get(d.support);
+					if (!isLinear(support)) throw new Error("Expected a linear support.");
+					const first = point(d.point);
+					const delta = subtract(support.second, support.first);
 					value = {
 						kind: "line",
 						first,
 						second: along(
 							first,
-							{ x: -delta.y / length, y: delta.x / length },
+							d.kind === "parallel" ? delta : { x: -delta.y, y: delta.x },
 							1,
 						),
 					};
-				} else {
-					const base = along(
-						circle.center,
-						delta,
-						(circle.radius / length) ** 2,
-					);
-					const height =
-						circle.radius * Math.sqrt(1 - (circle.radius / length) ** 2);
-					const contact = along(
-						base,
-						{ x: -delta.y / length, y: delta.x / length },
-						d.branch === 0 ? height : -height,
-					);
-					value = { kind: "line", first, second: contact };
-				}
-			} else if (d.kind === "intersection") {
-				const p = intersections(get(d.first), get(d.second))[d.branch];
-				if (!p) throw new Error("This intersection does not exist.");
-				value = { kind: "point", point: p };
-			} else throw new Error("Unsupported construction.");
+				} else if (d.kind === "bisector") {
+					const vertex = point(d.vertex);
+					const u = subtract(point(d.first), vertex);
+					const v = subtract(point(d.second), vertex);
+					const a = Math.hypot(u.x, u.y),
+						b = Math.hypot(v.x, v.y);
+					if (a < EPS || b < EPS)
+						throw new Error("The angle needs two nonzero arms.");
+					const delta = { x: u.x / a + v.x / b, y: u.y / a + v.y / b };
+					if (Math.hypot(delta.x, delta.y) < EPS) {
+						delta.x = -u.y / a;
+						delta.y = u.x / a;
+					}
+					value = {
+						kind: "line",
+						first: vertex,
+						second: along(vertex, delta, 1),
+					};
+				} else if (d.kind === "tangent") {
+					const circle = get(d.circle);
+					if (circle.kind !== "circle") throw new Error("Expected a circle.");
+					const first = point(d.point);
+					const delta = subtract(first, circle.center);
+					const length = distance(first, circle.center);
+					if (length < circle.radius - EPS)
+						throw new Error("No tangent from inside the circle.");
+					if (Math.abs(length - circle.radius) <= EPS) {
+						value = {
+							kind: "line",
+							first,
+							second: along(
+								first,
+								{ x: -delta.y / length, y: delta.x / length },
+								1,
+							),
+						};
+					} else {
+						const base = along(
+							circle.center,
+							delta,
+							(circle.radius / length) ** 2,
+						);
+						const height =
+							circle.radius * Math.sqrt(1 - (circle.radius / length) ** 2);
+						const contact = along(
+							base,
+							{ x: -delta.y / length, y: delta.x / length },
+							d.branch === 0 ? height : -height,
+						);
+						value = { kind: "line", first, second: contact };
+					}
+				} else if (d.kind === "intersection") {
+					const p = intersections(get(d.first), get(d.second))[d.branch];
+					if (!p) throw new Error("This intersection does not exist.");
+					value = { kind: "point", point: p };
+				} else throw new Error("Unsupported construction.");
+				return value;
+			};
+			const value = evaluateDefinition(d);
 			values.set(id, value);
 			return value;
 		} catch (error) {
@@ -793,37 +1016,46 @@ export function serializeGeometry(objects: readonly GeometryObject[]): string {
 	return objects
 		.map(({ id, hidden, stroke, color, definition: d }) => {
 			const type = constructionKind(d);
-			let expression: string;
-			if (d.kind === "point") expression = `(${n(d.x)}, ${n(d.y)})`;
-			else if (d.kind === "on") {
-				const definition = objects.find((o) => o.id === d.object)?.definition;
-				const support = definition ? constructionKind(definition) : "";
-				expression = `on(${d.object}, ${["line", "segment", "ray", "vector"].includes(support) ? `t=${n(d.parameter)}` : `angle=${n((d.parameter * 180) / Math.PI)}deg`})`;
-			} else if (d.kind === "intersection") {
-				expression = `intersection(${d.first}, ${d.second}, branch=${d.branch})`;
-			} else if (
-				d.kind === "line" ||
-				d.kind === "segment" ||
-				d.kind === "ray" ||
-				d.kind === "vector"
-			)
-				expression = `${d.kind}(${d.first}, ${d.second}${d.kind === "segment" && d.length !== undefined ? `, length=${n(d.length)}` : ""})`;
-			else if (d.kind === "circle")
-				expression = `circle(${d.center}, ${typeof d.radius === "number" ? n(d.radius) : "through" in d.radius ? `through=${d.radius.through}` : `distance(${d.radius.distance.join(", ")})`})`;
-			else if (d.kind === "comment")
-				expression = `comment(${d.point}, ${JSON.stringify(d.text)})`;
-			else if (d.kind === "midpoint" || d.kind === "perpendicularBisector")
-				expression = `${d.kind}(${d.segment})`;
-			else if (d.kind === "parallel" || d.kind === "perpendicular")
-				expression = `${d.kind}(${d.point}, ${d.support})`;
-			else if (d.kind === "bisector")
-				expression = `bisector(${d.first}, ${d.vertex}, ${d.second})`;
-			else if (d.kind === "tangent")
-				expression = `tangent(${d.point}, ${d.circle}, branch=${d.branch})`;
-			else if (d.kind === "arc" || d.kind === "sector")
-				expression = `${d.kind}(${d.circle}, start=${n((d.start * 180) / Math.PI)}deg, end=${n((d.end * 180) / Math.PI)}deg, direction=${d.clockwise ? "cw" : "ccw"}${d.relativeTo ? `, relative-to=${d.relativeTo}` : ""})`;
-			else throw new Error("Unsupported construction.");
-			return `${type} ${id} = ${expression}${stroke && stroke !== "solid" ? ` style=${stroke}` : ""}${color ? ` color=${color}` : ""}${hidden ? " hidden" : ""}`;
+			const expressionOf = (d: GeometryDefinition): string => {
+				let expression: string;
+				if (d.kind === "transform")
+					expression = `${d.operation}(${typeof d.object === "string" ? d.object : expressionOf(d.object)}, ${d.support}${d.operation === "homothety" ? `, ratio=${n(d.amount)}` : d.operation === "rotation" ? `, angle=${n(d.amount)}deg` : ""})`;
+				else if (d.kind === "polygon")
+					expression = `polygon(${d.vertices.join(", ")})`;
+				else if (d.kind === "regularPolygon")
+					expression = `regularPolygon(${d.first}, ${d.second}, sides=${d.sides})`;
+				else if (d.kind === "point") expression = `(${n(d.x)}, ${n(d.y)})`;
+				else if (d.kind === "on") {
+					const definition = objects.find((o) => o.id === d.object)?.definition;
+					const support = definition ? constructionKind(definition) : "";
+					expression = `on(${d.object}, ${["line", "segment", "ray", "vector"].includes(support) ? `t=${n(d.parameter)}` : `angle=${n((d.parameter * 180) / Math.PI)}deg`})`;
+				} else if (d.kind === "intersection") {
+					expression = `intersection(${d.first}, ${d.second}, branch=${d.branch})`;
+				} else if (
+					d.kind === "line" ||
+					d.kind === "segment" ||
+					d.kind === "ray" ||
+					d.kind === "vector"
+				)
+					expression = `${d.kind}(${d.first}, ${d.second}${d.kind === "segment" && d.length !== undefined ? `, length=${n(d.length)}` : ""})`;
+				else if (d.kind === "circle")
+					expression = `circle(${d.center}, ${typeof d.radius === "number" ? n(d.radius) : "through" in d.radius ? `through=${d.radius.through}` : `distance(${d.radius.distance.join(", ")})`})`;
+				else if (d.kind === "comment")
+					expression = `comment(${d.point}, ${JSON.stringify(d.text)})`;
+				else if (d.kind === "midpoint" || d.kind === "perpendicularBisector")
+					expression = `${d.kind}(${d.segment})`;
+				else if (d.kind === "parallel" || d.kind === "perpendicular")
+					expression = `${d.kind}(${d.point}, ${d.support})`;
+				else if (d.kind === "bisector")
+					expression = `bisector(${d.first}, ${d.vertex}, ${d.second})`;
+				else if (d.kind === "tangent")
+					expression = `tangent(${d.point}, ${d.circle}, branch=${d.branch})`;
+				else if (d.kind === "arc" || d.kind === "sector")
+					expression = `${d.kind}(${d.circle}, start=${n((d.start * 180) / Math.PI)}deg, end=${n((d.end * 180) / Math.PI)}deg, direction=${d.clockwise ? "cw" : "ccw"}${d.relativeTo ? `, relative-to=${d.relativeTo}` : ""})`;
+				else throw new Error("Unsupported construction.");
+				return expression;
+			};
+			return `${type} ${id} = ${expressionOf(d)}${stroke && stroke !== "solid" ? ` style=${stroke}` : ""}${color ? ` color=${color}` : ""}${hidden ? " hidden" : ""}`;
 		})
 		.join("\n");
 }
