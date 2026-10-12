@@ -9641,7 +9641,8 @@ var Bh = g.fromClass(class {
 			b.contentAttributes.of({
 				"aria-label": this.getAttribute("aria-label")?.trim() || "Code editor",
 				dir: "ltr",
-				spellcheck: "false"
+				spellcheck: "false",
+				tabindex: "0"
 			}),
 			b.updateListener.of((e) => {
 				(e.docChanged || e.selectionSet) && this.syncCursorPosition(), e.docChanged && (this.currentValue = e.state.doc.toString(), this.scheduleSyncHeight(), !this.isApplyingExternalValue && (this.dispatchEvent(new CustomEvent("tp-code-editor-input", {

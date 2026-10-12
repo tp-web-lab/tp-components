@@ -4,56 +4,13 @@ import "./icon.js";
 import { isTpSizeType as t, isTpVariantType as n } from "../components/base/base.types.js";
 import "./divider.js";
 import "./dropdown.js";
+import { TP_COLOR_PRESETS as r, TP_COLOR_SWATCH as i } from "../components/color/color-presets.js";
 //#region src/components/color/color.css?inline
-var r = "tp-color{display:inline-flex;position:relative}tp-color>tp-icon-button>button{border:1px solid var(--tp-neutral-stroke-mid,#9ca3af);background:var(--tp-paper-color,#fff)}tp-color>tp-icon-button>button:hover{background:var(--tp-neutral-fill-soft,#e5e7eb)}tp-color>tp-dropdown{overscroll-behavior:contain;max-block-size:calc(100vh - 1rem);inline-size:max-content;min-inline-size:13rem;overflow-y:auto}tp-color>tp-dropdown>ul{grid-template-columns:1fr 1fr;inline-size:100%;margin:0;padding:.25rem;list-style:none;display:grid}tp-color .tp-color-option{cursor:pointer;border-radius:var(--tp-border-radius-sm,.25rem);align-items:center;gap:.45rem;padding:.3rem .5rem;display:flex}tp-color .tp-color-option:hover{background:var(--tp-neutral-fill-softer,#f3f4f6)}tp-color .tp-color-option[data-selected]{background:var(--tp-neutral-fill-soft,#e5e7eb)}tp-color .tp-color-option>tp-icon[name=check]{visibility:hidden}tp-color .tp-color-option[data-selected]>tp-icon[name=check]{visibility:visible}tp-color .tp-color-option>span{flex:1}tp-color .tp-color-separator{grid-column:1/-1;margin:0;padding:0;list-style:none}", i = [
-	"tp-default",
-	"tp-red",
-	"tp-orange",
-	"tp-amber",
-	"tp-yellow",
-	"tp-lime",
-	"tp-green",
-	"tp-emerald",
-	"tp-teal",
-	"tp-glaz",
-	"tp-cyan",
-	"tp-sky",
-	"tp-blue",
-	"tp-indigo",
-	"tp-violet",
-	"tp-purple",
-	"tp-fuchsia",
-	"tp-pink",
-	"tp-rose",
-	"tp-zinc",
-	"tp-ivory",
-	"tp-stone"
-], a = {
-	"tp-default": "#88B1A1",
-	"tp-red": "#ef5655",
-	"tp-orange": "#f08039",
-	"tp-amber": "#e89a26",
-	"tp-yellow": "#dcb31e",
-	"tp-lime": "#9abb28",
-	"tp-green": "#5dbb55",
-	"tp-emerald": "#47b873",
-	"tp-teal": "#37b995",
-	"tp-glaz": "#88B1A1",
-	"tp-cyan": "#20b8bc",
-	"tp-sky": "#1caedd",
-	"tp-blue": "#4a97f4",
-	"tp-indigo": "#6e85f8",
-	"tp-violet": "#927cfb",
-	"tp-purple": "#ae75f6",
-	"tp-fuchsia": "#d26ae8",
-	"tp-pink": "#e468b0",
-	"tp-rose": "#ee6383",
-	"tp-zinc": "#8b8c93",
-	"tp-ivory": "#fffff0",
-	"tp-stone": "#918c87"
-};
+var a = "tp-color{display:inline-flex;position:relative}tp-color>tp-icon-button>button{border:1px solid var(--tp-neutral-stroke-mid,#9ca3af);background:var(--tp-paper-color,#fff)}tp-color>tp-icon-button>button:hover{background:var(--tp-neutral-fill-soft,#e5e7eb)}tp-color>tp-dropdown{overscroll-behavior:contain;max-block-size:calc(100vh - 1rem);inline-size:max-content;min-inline-size:13rem;overflow-y:auto}tp-color>tp-dropdown>ul{grid-template-columns:1fr 1fr;inline-size:100%;margin:0;padding:.25rem;list-style:none;display:grid}tp-color .tp-color-option{cursor:pointer;border-radius:var(--tp-border-radius-sm,.25rem);align-items:center;gap:.45rem;padding:.3rem .5rem;display:flex}tp-color .tp-color-option:hover{background:var(--tp-neutral-fill-softer,#f3f4f6)}tp-color .tp-color-option[data-selected]{background:var(--tp-neutral-fill-soft,#e5e7eb)}tp-color .tp-color-option>tp-icon[name=check]{visibility:hidden}tp-color .tp-color-option[data-selected]>tp-icon[name=check]{visibility:visible}tp-color .tp-color-option>span{flex:1}tp-color .tp-color-separator{grid-column:1/-1;margin:0;padding:0;list-style:none}";
+//#endregion
+//#region src/components/color/color.ts
 function o(e) {
-	return i.includes(e);
+	return r.includes(e);
 }
 function s(e) {
 	return e.replace("tp-", "").replace("-", " ");
@@ -63,7 +20,7 @@ function l(e) {
 	let t = c.get(e);
 	return t === void 0 && (t = {
 		controllers: /* @__PURE__ */ new Set(),
-		initialPresetClasses: new Set(i.filter((t) => e.classList.contains(t)))
+		initialPresetClasses: new Set(r.filter((t) => e.classList.contains(t)))
 	}, c.set(e, t)), t;
 }
 function u(e, t) {
@@ -73,7 +30,7 @@ function u(e, t) {
 function d(e, t) {
 	let n = c.get(e);
 	if (n !== void 0 && (n.controllers.delete(t), !(n.controllers.size > 0))) {
-		e.classList.remove(...i);
+		e.classList.remove(...r);
 		for (let t of n.initialPresetClasses) e.classList.add(t);
 		c.delete(e);
 	}
@@ -85,7 +42,7 @@ function f(e, t) {
 var p = class c extends e {
 	static styleId = "tp-color-styles";
 	static changeEventName = "tp-color-change";
-	static presets = i;
+	static presets = r;
 	static get observedAttributes() {
 		return [
 			"preset",
@@ -139,7 +96,7 @@ var p = class c extends e {
 		this.toggleAttribute("disabled", e);
 	}
 	connectedCallback() {
-		super.connectedCallback(), this.ensureGlobalStyle(c.styleId, r), this.ensureControl(), this.updateControl(), this.applyPreset();
+		super.connectedCallback(), this.ensureGlobalStyle(c.styleId, a), this.ensureControl(), this.updateControl(), this.applyPreset();
 	}
 	attributeChangedCallback(e, t, n) {
 		this.isSyncing || ![
@@ -160,17 +117,17 @@ var p = class c extends e {
 		let t = this.queryElement(":scope > tp-dropdown");
 		t instanceof HTMLElement || (t = document.createElement("tp-dropdown"), this.append(t)), t.setAttribute("anchor", this.getDropdownAnchor(e.id)), t.setAttribute("placement", "bottom"), t.setAttribute("outside-click", "");
 		let n = t.querySelector("ul");
-		if (!n || n.querySelectorAll(".tp-color-option").length !== i.length || n.querySelector("tp-divider") === null) {
+		if (!n || n.querySelectorAll(".tp-color-option").length !== r.length || n.querySelector("tp-divider") === null) {
 			let e = document.createElement("ul");
-			for (let n of i) {
+			for (let n of r) {
 				let r = document.createElement("li");
 				r.className = "tp-color-option", r.setAttribute("data-preset", n);
-				let i = document.createElement("tp-icon");
-				i.setAttribute("name", "check");
+				let a = document.createElement("tp-icon");
+				a.setAttribute("name", "check");
 				let o = document.createElement("tp-icon");
-				o.className = "tp-color-swatch", o.setAttribute("name", "square-rounded"), o.setAttribute("size", "1.5em"), o.setAttribute("color", a[n]);
+				o.className = "tp-color-swatch", o.setAttribute("name", "square-rounded"), o.setAttribute("size", "1.5em"), o.setAttribute("color", i[n]);
 				let c = document.createElement("span");
-				if (c.textContent = s(n), r.append(i, o, c), r.addEventListener("click", () => {
+				if (c.textContent = s(n), r.append(a, o, c), r.addEventListener("click", () => {
 					this.preset = n, t.open = !1;
 				}), e.append(r), n === "tp-default") {
 					let t = document.createElement("li");
@@ -199,7 +156,7 @@ var p = class c extends e {
 	updateControl() {
 		this.ensureControl();
 		let e = this.preset;
-		if (this.triggerEl instanceof HTMLElement && (this.triggerEl.setAttribute("label", `Brand preset: ${s(e)}. Click to choose another color.`), this.triggerEl.style.setProperty("color", a[e])), this.dropdownEl instanceof HTMLElement) {
+		if (this.triggerEl instanceof HTMLElement && (this.triggerEl.setAttribute("label", `Brand preset: ${s(e)}. Click to choose another color.`), this.triggerEl.style.setProperty("color", i[e])), this.dropdownEl instanceof HTMLElement) {
 			let t = this.dropdownEl.querySelectorAll(".tp-color-option");
 			for (let n of t) n.getAttribute("data-preset") === e ? n.setAttribute("data-selected", "") : n.removeAttribute("data-selected");
 		}
@@ -231,7 +188,7 @@ var p = class c extends e {
 				}
 			}
 		}
-		t.classList.remove(...i), t.classList.add(e), this.emitChange(t), this.hasAppliedPreset = !0, f(t, this);
+		t.classList.remove(...r), t.classList.add(e), this.emitChange(t), this.hasAppliedPreset = !0, f(t, this);
 	}
 	emitChange(e) {
 		if (!this.hasAppliedPreset) return;

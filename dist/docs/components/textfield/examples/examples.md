@@ -82,7 +82,9 @@ Reset defaults
 ::: tp-divider
 :::
 
-### Preview
+::: h3 { id="textfield-preview-heading" }
+Preview
+:::
 
 :::: tp-box
 ::: tp-textfield { id="textfield-preview" }

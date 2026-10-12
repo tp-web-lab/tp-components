@@ -313,7 +313,7 @@ function p() {
 }
 //#endregion
 //#region src/components/cryptarithm/cryptarithm.css?inline
-var m = "tp-cryptarithm.tp-cryptarithm{box-sizing:border-box;color:var(--tp-fg,inherit);display:flow-root}.tp-cryptarithm-shell{gap:1rem;display:grid}.tp-cryptarithm-board{gap:.75rem;display:grid;overflow:auto}.tp-cryptarithm-status{min-height:1.25rem}.tp-cryptarithm-status.success{color:var(--tp-success,#1a7f37)}.tp-cryptarithm-status.info{color:var(--tp-info,#0969da)}.tp-cryptarithm-error{color:var(--tp-error,#d1242f);font-weight:600}.tp-cryptarithm-shell button,.tp-cryptarithm-shell select,.tp-cryptarithm-shell input{font:inherit}", h = class t extends e {
+var m = "tp-cryptarithm.tp-cryptarithm{box-sizing:border-box;color:var(--tp-fg,inherit);display:flow-root}.tp-cryptarithm-shell{gap:1rem;display:grid}.tp-cryptarithm-board{gap:.75rem;display:grid;overflow:auto}.tp-cryptarithm-status{min-height:1.25rem}.tp-cryptarithm-status.success{color:var(--tp-success,#1a7f37)}.tp-cryptarithm-status.info{color:var(--tp-info-text-on-soft,#173b65);background:var(--tp-info-fill-soft,#eff6ff)}.tp-cryptarithm-error{color:var(--tp-danger-text-on-soft,#721c24);background:var(--tp-danger-fill-softer,#f8d7da);font-weight:600}.tp-cryptarithm-shell button,.tp-cryptarithm-shell select,.tp-cryptarithm-shell input{font:inherit}", h = class t extends e {
 	static styleId = d;
 	engine = null;
 	boardElement = null;

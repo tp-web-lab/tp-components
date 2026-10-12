@@ -7,7 +7,7 @@ Simulator components let users construct and explore interactive models of autom
 :::::: tp-grid { min-width="10rem" gap="1.5rem" }
 
 ::: tp-center { intrinsic }
-:tp-icon:{name="base" library="components" size="4em" aria-hidden="true"}
+:tp-icon:{name="graph-analog-circuit" library="components" size="4em" aria-hidden="true"}
 
 [tp-graph-analog-circuit](graph-analog-circuit/index.md)
 :::
@@ -19,7 +19,7 @@ Simulator components let users construct and explore interactive models of autom
 :::
 
 ::: tp-center { intrinsic }
-:tp-icon:{name="base" library="components" size="4em" aria-hidden="true"}
+:tp-icon:{name="graph-geometric-optics" library="components" size="4em" aria-hidden="true"}
 
 [tp-graph-geometric-optics](graph-geometric-optics/index.md)
 :::
@@ -43,7 +43,7 @@ Simulator components let users construct and explore interactive models of autom
 :::
 
 ::: tp-center { intrinsic }
-:tp-icon:{name="base" library="components" size="4em" aria-hidden="true"}
+:tp-icon:{name="graph-query-tree" library="components" size="4em" aria-hidden="true"}
 
 [tp-graph-query-tree](graph-query-tree/index.md)
 :::

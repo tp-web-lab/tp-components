@@ -24,8 +24,8 @@
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between the available controls. |
-| Enter / Space | Flip the focused card or activate its flip button. |
+| Tab / Shift+Tab | Focus the flip control and the visible face to read or scroll its contents. The hidden face is excluded from keyboard navigation. |
+| Enter / Space | Flip the focused card or activate its flip button. Space on the focused face scrolls its content without flipping. |
 | Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
 
 ### Author directives
@@ -146,6 +146,9 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_flip-card.TpFlipCard.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
 
 
 

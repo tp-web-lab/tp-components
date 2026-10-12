@@ -1,0 +1,3 @@
+point O = (0, 0)
+circle c = circle(O, 5) hidden
+arc a = arc(c, start=20deg, end=140deg)

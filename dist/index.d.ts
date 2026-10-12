@@ -185,6 +185,8 @@ export { TpYakazu } from "./components/yakazu/yakazu.js";
 export { TpBiblio } from "./components/biblio/biblio.js";
 export { TpCalculator } from "./components/calculator/calculator.js";
 export { TpGlossary } from "./components/glossary/glossary.js";
+export type { GeometryObject, GeometryPoint, GeometryResult, GeometryValue, } from "./components/graph-geometry/graph-geometry.js";
+export { evaluateGeometry, MEDIATRIX_CONSTRUCTION, parseGeometry, serializeGeometry, TpGraphGeometry, } from "./components/graph-geometry/graph-geometry.js";
 export { TpListof } from "./components/listof/listof.js";
 export { TpLogigram } from "./components/logigram/logigram.js";
 export { TpNote } from "./components/note/note.js";

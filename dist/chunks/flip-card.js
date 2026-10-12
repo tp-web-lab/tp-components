@@ -63,7 +63,7 @@ var t = ".tp-flip-card{width:var(--tp-flip-card-width,12rem);max-width:100%;aspe
 		i.className = "tp-flip-card-scene", i.addEventListener("click", () => {
 			this.normalizedButtonPosition()[0] === "none" && this.flip();
 		}), i.addEventListener("keydown", (e) => {
-			this.normalizedButtonPosition()[0] === "none" && (e.key === "Enter" || e.key === " ") && (e.preventDefault(), this.flip());
+			this.normalizedButtonPosition()[0] === "none" && e.target === i && (e.key === "Enter" || e.key === " ") && (e.preventDefault(), this.flip());
 		});
 		let a = document.createElement("div");
 		a.className = "tp-flip-card-inner";
@@ -78,7 +78,7 @@ var t = ".tp-flip-card{width:var(--tp-flip-card-width,12rem);max-width:100%;aspe
 	}
 	syncState() {
 		let e = this.querySelector(".tp-flip-card-recto"), t = this.querySelector(".tp-flip-card-verso"), n = this.querySelector(".tp-flip-card-button"), r = this.querySelector(".tp-flip-card-scene"), [i, a] = this.normalizedButtonPosition(), o = i === "none";
-		e?.setAttribute("aria-hidden", String(this.flipped)), t?.setAttribute("aria-hidden", String(!this.flipped)), n && (n.dataset.block = i, n.dataset.inline = a, n.hidden = o, n.setAttribute("label", this.flipped ? "Show recto" : "Show verso"), n.setAttribute("aria-pressed", String(this.flipped)), n.toggleAttribute("disabled", this.disabled)), r && (r.toggleAttribute("role", o), o && r.setAttribute("role", "button"), r.tabIndex = o && !this.disabled ? 0 : -1, r.setAttribute("aria-disabled", String(this.disabled)), r.setAttribute("aria-label", this.flipped ? "Show recto" : "Show verso"));
+		e && (e.tabIndex = this.flipped ? -1 : 0, e.inert = this.flipped), t && (t.tabIndex = this.flipped ? 0 : -1, t.inert = !this.flipped), e?.setAttribute("aria-hidden", String(this.flipped)), t?.setAttribute("aria-hidden", String(!this.flipped)), n && (n.dataset.block = i, n.dataset.inline = a, n.hidden = o, n.setAttribute("label", this.flipped ? "Show recto" : "Show verso"), n.setAttribute("aria-pressed", String(this.flipped)), n.toggleAttribute("disabled", this.disabled)), r && (r.toggleAttribute("role", o), o && r.setAttribute("role", "button"), r.tabIndex = o && !this.disabled ? 0 : -1, r.setAttribute("aria-disabled", String(this.disabled)), r.setAttribute("aria-label", this.flipped ? "Show recto" : "Show verso"));
 	}
 	normalizedButtonPosition() {
 		let e = this.buttonPosition.trim().toLowerCase().split(/\s+/);

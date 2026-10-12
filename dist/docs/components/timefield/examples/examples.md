@@ -63,7 +63,9 @@ Reset defaults
 ::: tp-divider
 :::
 
-### Preview
+::: h3 { id="timefield-preview-heading" }
+Preview
+:::
 
 :::: tp-box
 ::: tp-timefield { id="timefield-preview" }

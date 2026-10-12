@@ -14,8 +14,7 @@ import { type TpSizeType, type TpVariantType } from "../base/base.types.js";
  * @summary Lists the available color preset class names.
  * @internal
  */
-declare const TP_COLOR_PRESETS: readonly ["tp-default", "tp-red", "tp-orange", "tp-amber", "tp-yellow", "tp-lime", "tp-green", "tp-emerald", "tp-teal", "tp-glaz", "tp-cyan", "tp-sky", "tp-blue", "tp-indigo", "tp-violet", "tp-purple", "tp-fuchsia", "tp-pink", "tp-rose", "tp-zinc", "tp-ivory", "tp-stone"];
-type TpColorPreset = (typeof TP_COLOR_PRESETS)[number];
+import { type TpColorPreset } from "./color-presets.js";
 /**
  * `<tp-color>` lets users pick one of the built-in brand presets from `tp.css`
  * and applies it to the containing element.
@@ -183,4 +182,3 @@ declare global {
         "tp-color": TpColor;
     }
 }
-export {};

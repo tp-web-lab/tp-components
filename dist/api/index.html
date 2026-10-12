@@ -92,6 +92,13 @@ components or run their interactive rendering. Generated single-page documents
 can retain their author source with <code>data-tp-original-src</code>, used by the Code
 control and the annotation storage scope.</p>
 <p>For static multi-page publications, build tooling can add <code>data-tp-prerendered</code> to <code>tp-markup-multi-pages</code>: a JSON map of original document pathnames to generated HTML pathnames. Routes, navigation and annotation identities keep the original URLs. HTML is loaded for display; Code loads the original document only when requested. This is internal publication metadata, not required in authored pages. The Node renderer also exports <code>resolveMarkdownIncludes</code> so builds use the same recursive and raw include rules as <code>tp-markdown</code>.</p>
+<h2 id="accessibility-checks" class="tsd-anchor-link">Accessibility checks<a href="#accessibility-checks" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>The Accessibility workflow audits changed components and their transitive consumers on pushes to <code>main</code> and pull requests. Selection includes component code and documentation examples; dependencies are collected from manifests, imports and custom-element references. Shared styles, utilities, dependency changes, workflow changes and unknown executable paths trigger the complete suite. Navigation-only documentation changes skip the browser audit. Renames include both old and new paths. If the comparison revision is unavailable, the workflow falls back to a complete audit.</p>
+<p>Use <strong>Run workflow</strong> in GitHub Actions to request a complete audit, including the shared color-token contract. Local <code>pnpm test:a11y</code> also remains a full audit. For example, to check only two components in all three browsers:</p>
+<pre><code class="sh"><span class="hl-9">TP_A11Y_COMPONENTS</span><span class="hl-1">=</span><span class="hl-2">&#39;[&quot;console&quot;,&quot;color-picker&quot;]&#39;</span><span class="hl-1"> </span><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">test:a11y</span><span class="hl-1"> </span><span class="hl-2">components.a11y.test.ts</span>
+</code><button type="button">Copy</button></pre>
+
+<p>The run summary lists the selected components. The <code>accessibility-report</code> artifact contains <code>config/accessibility-run-results.json</code> for that execution, including scan errors, and failure contexts. Partial runs do not overwrite or claim to refresh the transversal accessibility report. A complete run still updates it. The emoji and symbol catalogues retain their full contents and all axe rules, with a 180-second test limit because they render thousands of controls; other components retain their existing limits.</p>
 </div></div>
 <div class="col-sidebar">
 <div class="page-menu">
@@ -113,7 +120,8 @@ control and the annotation storage scope.</p>
 <li>
 <ul>
 <li><a href="#build-from-source"><span>Build from source</span></a></li></ul></li>
-<li><a href="#publishing-the-documentation"><span>Publishing the documentation</span></a></li></ul></div></details></div>
+<li><a href="#publishing-the-documentation"><span>Publishing the documentation</span></a></li>
+<li><a href="#accessibility-checks"><span>Accessibility checks</span></a></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="modules.html">@tp/tp-components API</a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container">
