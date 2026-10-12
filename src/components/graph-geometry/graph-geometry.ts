@@ -41,7 +41,13 @@
  * @summary Single-line and automatically growing multiline text field.
  */
 // tp-docgen:dependencies:end
+import {
+	chooseSaveTarget,
+	saveBlob,
+	type TpSaveTarget,
+} from "../../utilities/save-file.js";
 import type { TpButton } from "../button/button.js";
+import { choosePlaygroundFile } from "../playground/playground-local-file.js";
 import "../accordion/accordion.js";
 import "../callout/callout.js";
 import { TpBase } from "../base/base.js";
@@ -205,6 +211,10 @@ export class TpGraphGeometry extends TpBase {
 	private result: GeometryResult = evaluateGeometry([]);
 	private initialized = false;
 	private sourceRequest: AbortController | null = null;
+	private localFileRequest: AbortController | null = null;
+	private sourceSaveTarget: TpSaveTarget | null = null;
+	private sourceFilename = "construction.txt";
+	private sourceFileBusy = false;
 	private objectListMarkup = "";
 	private tool: Tool = "move";
 	private polygonDraft: GeometryObject[] = [];
@@ -350,6 +360,8 @@ export class TpGraphGeometry extends TpBase {
 	): void {
 		if (oldValue === newValue) return;
 		if (name === "src") {
+			this.sourceSaveTarget = null;
+			this.sourceFilename = "construction.txt";
 			if (this.isConnected && this.initialized) void this.loadSource();
 			return;
 		}
@@ -370,6 +382,7 @@ export class TpGraphGeometry extends TpBase {
 	}
 	/** @internal */
 	public disconnectedCallback(): void {
+		this.localFileRequest?.abort();
 		this.canvasObserver?.disconnect();
 		this.canvasObserver = null;
 		this.sourceRequest?.abort();
@@ -441,6 +454,78 @@ export class TpGraphGeometry extends TpBase {
 	private syncSource(): void {
 		const editor = this.querySelector<TpCodeEditor>("tp-code-editor");
 		if (editor) editor.setValue(this.value);
+	}
+	private async sourceFileAction(
+		action: "load" | "save" | "save-as",
+	): Promise<void> {
+		if (this.sourceFileBusy || (action === "load" && this.readonly)) return;
+		this.sourceFileBusy = true;
+		this.syncSourceFileButtons();
+		const previous = this.value;
+		try {
+			if (action === "load") {
+				const controller = new AbortController();
+				this.localFileRequest?.abort();
+				this.localFileRequest = controller;
+				const file = await choosePlaygroundFile(
+					this,
+					".txt,text/plain",
+					controller.signal,
+				);
+				if (!file) return;
+				const source = await file.text();
+				if (
+					controller.signal.aborted ||
+					!this.isConnected ||
+					this.readonly ||
+					this.value !== previous
+				)
+					return;
+				parseGeometry(source);
+				this.sourceRequest?.abort();
+				this.setConstruction(source);
+				this.sourceFilename = file.name.toLowerCase().endsWith(".txt")
+					? file.name
+					: `${file.name.replace(/\.[^.]+$/, "")}.txt`;
+				this.sourceSaveTarget = null;
+				this.fitView();
+				this.report(`Loaded ${file.name}.`);
+			} else {
+				const source =
+					this.querySelector<TpCodeEditor>("tp-code-editor")?.getValue() ??
+					this.value;
+				const target =
+					(action === "save" && this.sourceSaveTarget) ||
+					(await chooseSaveTarget({
+						suggestedName: this.sourceFilename,
+						description: "Geometry construction",
+						mimeType: "text/plain",
+						extension: ".txt",
+					}));
+				if (!target || !this.isConnected) return;
+				await saveBlob(
+					new Blob([source], { type: "text/plain;charset=utf-8" }),
+					target,
+				);
+				this.sourceSaveTarget = target;
+				this.sourceFilename = target.filename;
+				this.report(`Saved ${target.filename}.`);
+			}
+		} catch (error) {
+			this.report(
+				`Unable to ${action === "load" ? "load" : "save"} construction: ${String(error)}`,
+			);
+		} finally {
+			this.sourceFileBusy = false;
+			this.syncSourceFileButtons();
+		}
+	}
+	private syncSourceFileButtons(): void {
+		for (const button of this.querySelectorAll<TpButton>("[data-source-file]"))
+			button.disabled =
+				this.sourceFileBusy ||
+				(this.readonly && button.dataset.sourceFile === "load");
+		this.syncButtonControls();
 	}
 	private field(name: string): string {
 		return (
@@ -589,7 +674,7 @@ export class TpGraphGeometry extends TpBase {
       <tp-callout class="tp-geometry-hint" variant="info" outlined><span data-hint>${HINTS[this.tool]}</span></tp-callout>
       <div class="tp-geometry-workspace"><div class="tp-geometry-board"><div class="tp-geometry-canvas"><svg data-geometry-canvas viewBox="0 0 900 ${this.canvasHeight}" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg></div><div class="tp-geometry-view"><tp-button type="button" outlined data-geometry-control data-action="undo">Undo</tp-button><tp-button type="button" outlined data-geometry-control data-action="redo">Redo</tp-button><tp-button type="button" outlined data-geometry-control data-action="out" aria-label="Zoom out">−</tp-button><tp-button type="button" outlined data-geometry-control data-action="in" aria-label="Zoom in">+</tp-button><tp-button type="button" outlined data-geometry-control data-action="fit">Fit</tp-button><tp-button type="button" outlined data-geometry-control data-action="grid" aria-pressed="${this.grid}">Grid</tp-button></div></div>
       <aside><h3>Construction objects</h3><p data-appearance-label>Select an object in Move mode to change its appearance.</p><div class="tp-geometry-appearance"><tp-button id="${this.controlId}-style" outlined data-geometry-control data-action="style-menu" aria-haspopup="menu"><span data-style-label>Style · solid</span></tp-button><tp-dropdown anchor="#${this.controlId}-style" outside-click data-style-menu><ul>${GEOMETRY_STYLES.map((value) => `<li data-stroke="${value}">${value}${value === "solid" ? " (default)" : ""}</li>`).join("")}</ul></tp-dropdown><tp-button id="${this.controlId}-color" outlined data-geometry-control data-action="color-menu" aria-haspopup="menu"><span data-color-label>Color · automatic</span></tp-button><tp-dropdown anchor="#${this.controlId}-color" outside-click data-color-menu><ul><li data-color="">Automatic</li>${GEOMETRY_COLORS.map((value) => `<li data-color="${value}"><span class="tp-geometry-swatch tp-${value}" aria-hidden="true"></span>${value}</li>`).join("")}</ul></tp-dropdown></div><div data-objects></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Constructed points are calculated.</p></aside></div>
-      <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source"><dl><dt>Construction source</dt><dd><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor><tp-button type="button" outlined data-geometry-control data-action="apply">Apply construction</tp-button></dd></dl></tp-accordion>`;
+      <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source"><dl><dt>Construction source</dt><dd><p>Construction file (.txt)</p><tp-button-group attached aria-label="Construction files (.txt)"><tp-button outlined data-geometry-control data-source-file="load">Load</tp-button><tp-button outlined data-geometry-control data-source-file="save">Save</tp-button><tp-button outlined data-geometry-control data-source-file="save-as">Save as</tp-button></tp-button-group><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor><tp-button type="button" outlined data-geometry-control data-action="apply">Apply construction</tp-button></dd></dl></tp-accordion>`;
 		this.canvasObserver?.disconnect();
 		const canvas = this.querySelector<HTMLElement>(".tp-geometry-canvas");
 		if (canvas && typeof ResizeObserver !== "undefined") {
@@ -620,6 +705,7 @@ export class TpGraphGeometry extends TpBase {
 			'tp-save-image [data-format="svg"]',
 		);
 		if (defaultExport) defaultExport.textContent = "SVG (default)";
+		this.syncSourceFileButtons();
 		this.addEventListener("tp-save-image-error", this.onExportError);
 		for (const kind of ["style", "color"])
 			this.querySelector(`[data-${kind}-menu]`)?.addEventListener(
@@ -655,6 +741,12 @@ export class TpGraphGeometry extends TpBase {
 				"tp-button[data-geometry-control]",
 			);
 			if (!button || button.disabled) return;
+			if (button.dataset.sourceFile) {
+				void this.sourceFileAction(
+					button.dataset.sourceFile as "load" | "save" | "save-as",
+				);
+				return;
+			}
 			if (
 				button.dataset.tool &&
 				(!this.readonly || button.dataset.tool === "pan")
@@ -687,11 +779,17 @@ export class TpGraphGeometry extends TpBase {
 				if (action === "delete" && this.selected)
 					this.removeObject(this.selected);
 				if (action === "example") {
+					this.sourceSaveTarget = null;
+					this.sourceFilename = "construction.txt";
 					this.setConstruction(MEDIATRIX_CONSTRUCTION);
 					this.fitView();
 				}
 				if (action === "finish-polygon") this.finishPolygon();
-				if (action === "clear") this.setConstruction("");
+				if (action === "clear") {
+					this.sourceSaveTarget = null;
+					this.sourceFilename = "construction.txt";
+					this.setConstruction("");
+				}
 				if (action === "apply") {
 					this.setConstruction(
 						this.querySelector<TpCodeEditor>("tp-code-editor")?.getValue() ??
@@ -949,6 +1047,8 @@ export class TpGraphGeometry extends TpBase {
 				const native =
 					button.querySelector<HTMLButtonElement>(":scope > button");
 				if (!native) continue;
+				// Explicitly include actions in sequential keyboard navigation.
+				native.tabIndex = native.disabled ? -1 : 0;
 				for (const name of [
 					"aria-pressed",
 					"aria-label",

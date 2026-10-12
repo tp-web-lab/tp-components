@@ -1,7 +1,7 @@
 tp-graph-geometry { display:block; color:var(--tp-text-body, CanvasText); border:1px solid var(--tp-neutral-stroke-soft, #cdd9dc); border-radius:12px; overflow:hidden; background:var(--tp-paper-color, Canvas); font-family:system-ui,sans-serif; }
 .tp-geometry-header { display:flex; justify-content:space-between; gap:16px; padding:18px; align-items:center; border-bottom:1px solid var(--tp-neutral-stroke-soft, #dbe4e6); }
 .tp-geometry-header strong { display:block; font-size:1.25rem; }
-.tp-geometry-header span { font-size:.85rem; opacity:.75; }
+.tp-geometry-header > div > span { font-size:.85rem; opacity:.75; }
 .tp-geometry-tools { display:flex; flex-wrap:wrap; gap:5px; padding:12px 16px; }
 .tp-geometry-parameters { display:flex; flex-wrap:wrap; gap:12px; padding:0 16px; align-items:center; }
 .tp-geometry-parameters[hidden] { display:none; }
