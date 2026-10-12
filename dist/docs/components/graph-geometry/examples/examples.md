@@ -12,6 +12,8 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
 - built-in
 
+- canvas-only
+
 - grid
 
 - readonly
@@ -208,6 +210,11 @@ comment slope = angle(AB, AC) color=blue
 comment surface = area(c) color=orange
 :::
 ::::
+```
+
+``` example {label="Interactive figure"}
+::: tp-graph-geometry { canvas-only grid src="/docs/components/graph-geometry/examples/circle.geometry" }
+:::
 ```
 ::::::
 :::::::

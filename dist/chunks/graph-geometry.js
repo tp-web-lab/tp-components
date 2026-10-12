@@ -3,6 +3,7 @@ import "./accordion.js";
 import "../components/textfield/textfield.js";
 import "./button-group.js";
 import "./dropdown.js";
+import "./theme.js";
 import "./code-editor.js";
 import { chooseSaveTarget as t, saveBlob as n } from "../utilities/save-file.js";
 import { choosePlaygroundFile as r } from "../components/playground/playground-local-file.js";
@@ -11,7 +12,7 @@ import "./radio-list.js";
 import "./save-image.js";
 import { GEOMETRY_COLORS as i, GEOMETRY_STYLES as a, GEOMETRY_TRANSFORMATIONS as o, MEDIATRIX_CONSTRUCTION as s, dependencies as c, distance as l, evaluateGeometry as u, intersections as d, isLinear as f, parameterAt as p, parseGeometry as m, serializeGeometry as h } from "../components/graph-geometry/geometry.js";
 //#region src/components/graph-geometry/graph-geometry.css?inline
-var g = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid var(--tp-neutral-stroke-soft,#cdd9dc);background:var(--tp-paper-color,Canvas);border-radius:12px;font-family:system-ui,sans-serif;display:block;overflow:hidden}.tp-geometry-header{border-bottom:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);justify-content:space-between;align-items:center;gap:16px;padding:18px;display:flex}.tp-geometry-header strong{font-size:1.25rem;display:block}.tp-geometry-header>div>span{opacity:.75;font-size:.85rem}.tp-geometry-tools{flex-wrap:wrap;gap:5px;padding:12px 16px;display:flex}.tp-geometry-parameters{flex-wrap:wrap;align-items:center;gap:12px;padding:0 16px;display:flex}.tp-geometry-parameters[hidden]{display:none}.tp-geometry-parameters tp-textfield{width:160px}.tp-geometry-parameters span{font-size:.8rem}.tp-geometry-hint{margin:12px 16px;font-size:.85rem}.tp-geometry-workspace{border-block:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);grid-template-columns:minmax(0,1fr) 220px;display:grid}.tp-geometry-board{background:var(--tp-background-color,Canvas);flex-direction:column;min-width:0;display:flex}.tp-geometry-canvas{flex:1 0 auto;min-height:320px;position:relative}.tp-geometry-canvas:before{content:\"\";padding-top:62.2222%;display:block}.tp-geometry-board svg{touch-action:none;width:100%;height:100%;display:block;position:absolute;inset:0}.tp-geometry-view{flex-wrap:wrap;align-items:center;gap:5px;padding:8px;display:flex}.tp-geometry-workspace aside{border-left:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);padding:12px}.tp-geometry-workspace h3{margin:0 0 12px;font-size:.85rem}.tp-geometry-workspace aside p{opacity:.8;font-size:.8rem;line-height:1.5}tp-graph-geometry [data-objects]{margin-bottom:10px}tp-graph-geometry [data-objects] tp-button{text-align:left;justify-content:space-between;gap:8px;width:100%;margin-bottom:5px;display:flex}tp-graph-geometry [data-objects] .object-kind{font-size:.75rem}.tp-geometry-shape{cursor:pointer}.tp-geometry-shape .shape-hit{fill:none;stroke:#0000;stroke-width:15px}.tp-geometry-shape .shape-ink{fill:none;stroke:var(--tp-info-text-colorful,#447a94);stroke-width:2px;pointer-events:none}.tp-geometry-shape .line{stroke:var(--tp-warning-text-colorful,#ab573b)}.tp-geometry-shape .segment{stroke:var(--tp-text-body,CanvasText)}.tp-geometry-shape .arc{stroke:var(--tp-success-text-colorful,#248273)}.tp-geometry-shape.is-selected .shape-ink{stroke:#c96523;stroke-width:3px}.tp-geometry-shape .point-hit{fill:#0000}.tp-geometry-shape .point{fill:var(--tp-paper-color,Canvas);stroke:var(--tp-info-text-colorful,#1e5e85);stroke-width:2.5px}.tp-geometry-shape .dependent{fill:var(--tp-success-fill-loud,#268675);stroke:var(--tp-paper-color,Canvas)}.tp-geometry-shape.is-selected .point{fill:#df8c3e}.tp-geometry-shape text{fill:var(--tp-text-body,CanvasText);paint-order:stroke;stroke:var(--tp-background-color,Canvas);stroke-width:4px;font:600 15px system-ui}tp-graph-geometry [data-status]{min-height:2em;margin:0;padding:10px 16px;font-size:.85rem}.tp-geometry-source{border-top:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);padding:12px 16px}@media (width<=700px){.tp-geometry-workspace{grid-template-columns:1fr}.tp-geometry-workspace aside{border-left:0;border-top:1px solid var(--tp-neutral-stroke-soft,#dbe4e6)}.tp-geometry-header{flex-wrap:wrap}}tp-graph-geometry aside>tp-button{max-width:100%}tp-graph-geometry aside>tp-button>button{white-space:normal}.tp-geometry-board [data-grid]{pointer-events:none}.tp-geometry-board [data-grid] path{fill:none;stroke:var(--tp-text-body,CanvasText);stroke-opacity:.13;stroke-width:1px;vector-effect:non-scaling-stroke}.tp-geometry-board svg.pan-mode,.tp-geometry-board svg.pan-mode .tp-geometry-shape{cursor:grab}.tp-geometry-board svg.is-panning,.tp-geometry-board svg.is-panning .tp-geometry-shape{cursor:grabbing}.tp-geometry-tools{--tp-button-group-gap:.3rem}.tp-geometry-header tp-button-group{--tp-button-group-gap:.4rem;flex-wrap:wrap}tp-graph-geometry [data-objects] tp-button>button{inline-size:100%}tp-graph-geometry [data-objects] [data-tp-button-content]{justify-content:space-between;gap:.5rem;inline-size:100%;display:flex}.tp-geometry-board svg:focus-visible{outline:3px solid var(--tp-focus-color,Highlight);outline-offset:-3px}.tp-geometry-shape .sector{fill:var(--tp-info-text-colorful,#447a94);fill-opacity:.12}.tp-geometry-appearance{flex-wrap:wrap;gap:.3rem;margin-bottom:.6rem;display:flex}.tp-geometry-swatch{background:var(--tp-brand-seed);border:1px solid;border-radius:50%;width:1em;height:1em;margin-inline-end:.5em;display:inline-block}.tp-geometry-shape.stroke-dotted .shape-ink,.tp-geometry-shape.stroke-dotted .point{stroke-dasharray:1 6;stroke-linecap:round}.tp-geometry-shape.stroke-dashed .shape-ink,.tp-geometry-shape.stroke-dashed .point{stroke-dasharray:10 6}.tp-geometry-shape.has-color .shape-ink,.tp-geometry-shape.has-color .point{stroke:var(--tp-brand-seed)}.tp-geometry-shape.has-color .sector,.tp-geometry-shape.has-color .dependent,.tp-geometry-shape.has-color text{fill:var(--tp-brand-seed)}.tp-geometry-header>tp-save-image{margin-inline-start:auto}.tp-geometry-preview{fill:none;stroke:var(--tp-info-text-colorful,#1e5e85);stroke-width:2px;stroke-dasharray:5 5;pointer-events:none}.tp-geometry-shape .polygon{fill:var(--tp-info-text-colorful,#447a94);fill-opacity:.15}.tp-geometry-shape.has-color .polygon{fill:var(--tp-brand-seed)}.tp-geometry-shape.is-selected:not(.has-color) .polygon{fill:#c96523}.tp-geometry-shape .shape-hit polygon{fill:#0000}", _ = (e) => e.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;"), v = {
+var g = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid var(--tp-neutral-stroke-soft,#cdd9dc);background:var(--tp-paper-color,Canvas);border-radius:12px;font-family:system-ui,sans-serif;display:block;overflow:hidden}.tp-geometry-header{border-bottom:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);justify-content:space-between;align-items:center;gap:16px;padding:18px;display:flex}.tp-geometry-header strong{font-size:1.25rem;display:block}.tp-geometry-header>div>span{opacity:.75;font-size:.85rem}.tp-geometry-tools{flex-wrap:wrap;gap:5px;padding:12px 16px;display:flex}.tp-geometry-parameters{flex-wrap:wrap;align-items:center;gap:12px;padding:0 16px;display:flex}.tp-geometry-parameters[hidden]{display:none}.tp-geometry-parameters tp-textfield{width:160px}.tp-geometry-parameters span{font-size:.8rem}.tp-geometry-hint{margin:12px 16px;font-size:.85rem}.tp-geometry-workspace{border-block:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);grid-template-columns:minmax(0,1fr) 220px;display:grid}.tp-geometry-board{background:var(--tp-background-color,Canvas);flex-direction:column;min-width:0;display:flex}.tp-geometry-canvas{flex:1 0 auto;min-height:320px;position:relative}.tp-geometry-canvas:before{content:\"\";padding-top:62.2222%;display:block}.tp-geometry-board svg{touch-action:none;width:100%;height:100%;display:block;position:absolute;inset:0}.tp-geometry-view{flex-wrap:wrap;align-items:center;gap:5px;padding:8px;display:flex}.tp-geometry-workspace aside{border-left:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);padding:12px}.tp-geometry-workspace h3{margin:0 0 12px;font-size:.85rem}.tp-geometry-workspace aside p{opacity:.8;font-size:.8rem;line-height:1.5}tp-graph-geometry [data-objects]{margin-bottom:10px}tp-graph-geometry [data-objects] tp-button{text-align:left;justify-content:space-between;gap:8px;width:100%;margin-bottom:5px;display:flex}tp-graph-geometry [data-objects] .object-kind{font-size:.75rem}.tp-geometry-shape{cursor:pointer}.tp-geometry-shape .shape-hit{fill:none;stroke:#0000;stroke-width:15px}.tp-geometry-shape .shape-ink{fill:none;stroke:var(--tp-info-text-colorful,#447a94);stroke-width:2px;pointer-events:none}.tp-geometry-shape .line{stroke:var(--tp-warning-text-colorful,#ab573b)}.tp-geometry-shape .segment{stroke:var(--tp-text-body,CanvasText)}.tp-geometry-shape .arc{stroke:var(--tp-success-text-colorful,#248273)}.tp-geometry-shape.is-selected .shape-ink{stroke:#c96523;stroke-width:3px}.tp-geometry-shape .point-hit{fill:#0000}.tp-geometry-shape .point{fill:var(--tp-paper-color,Canvas);stroke:var(--tp-info-text-colorful,#1e5e85);stroke-width:2.5px}.tp-geometry-shape .dependent{fill:var(--tp-success-fill-loud,#268675);stroke:var(--tp-paper-color,Canvas)}.tp-geometry-shape.is-selected .point{fill:#df8c3e}.tp-geometry-shape text{fill:var(--tp-text-body,CanvasText);paint-order:stroke;stroke:var(--tp-background-color,Canvas);stroke-width:4px;font:600 15px system-ui}tp-graph-geometry [data-status]{min-height:2em;margin:0;padding:10px 16px;font-size:.85rem}.tp-geometry-source{border-top:1px solid var(--tp-neutral-stroke-soft,#dbe4e6);padding:12px 16px}@media (width<=700px){.tp-geometry-workspace{grid-template-columns:1fr}.tp-geometry-workspace aside{border-left:0;border-top:1px solid var(--tp-neutral-stroke-soft,#dbe4e6)}.tp-geometry-header{flex-wrap:wrap}}tp-graph-geometry aside>tp-button{max-width:100%}tp-graph-geometry aside>tp-button>button{white-space:normal}.tp-geometry-board [data-grid]{pointer-events:none}.tp-geometry-board [data-grid] path{fill:none;stroke:var(--tp-text-body,CanvasText);stroke-opacity:.13;stroke-width:1px;vector-effect:non-scaling-stroke}.tp-geometry-board svg.pan-mode,.tp-geometry-board svg.pan-mode .tp-geometry-shape{cursor:grab}.tp-geometry-board svg.is-panning,.tp-geometry-board svg.is-panning .tp-geometry-shape{cursor:grabbing}.tp-geometry-tools{--tp-button-group-gap:.3rem}.tp-geometry-header tp-button-group{--tp-button-group-gap:.4rem;flex-wrap:wrap}tp-graph-geometry [data-objects] tp-button>button{inline-size:100%}tp-graph-geometry [data-objects] [data-tp-button-content]{justify-content:space-between;gap:.5rem;inline-size:100%;display:flex}.tp-geometry-board svg:focus-visible{outline:3px solid var(--tp-focus-color,Highlight);outline-offset:-3px}.tp-geometry-shape .sector{fill:var(--tp-info-text-colorful,#447a94);fill-opacity:.12}.tp-geometry-appearance{flex-wrap:wrap;gap:.3rem;margin-bottom:.6rem;display:flex}.tp-geometry-swatch{background:var(--tp-brand-seed);border:1px solid;border-radius:50%;width:1em;height:1em;margin-inline-end:.5em;display:inline-block}.tp-geometry-shape.stroke-dotted .shape-ink,.tp-geometry-shape.stroke-dotted .point{stroke-dasharray:1 6;stroke-linecap:round}.tp-geometry-shape.stroke-dashed .shape-ink,.tp-geometry-shape.stroke-dashed .point{stroke-dasharray:10 6}.tp-geometry-shape.has-color .shape-ink,.tp-geometry-shape.has-color .point{stroke:var(--tp-brand-seed)}.tp-geometry-shape.has-color .sector,.tp-geometry-shape.has-color .dependent,.tp-geometry-shape.has-color text{fill:var(--tp-brand-seed)}.tp-geometry-preview{fill:none;stroke:var(--tp-info-text-colorful,#1e5e85);stroke-width:2px;stroke-dasharray:5 5;pointer-events:none}.tp-geometry-shape .polygon{fill:var(--tp-info-text-colorful,#447a94);fill-opacity:.15}.tp-geometry-shape.has-color .polygon{fill:var(--tp-brand-seed)}.tp-geometry-shape.is-selected:not(.has-color) .polygon{fill:#c96523}.tp-geometry-shape .shape-hit polygon{fill:#0000}tp-graph-geometry{position:relative}.tp-geometry-header>.tp-geometry-theme{margin-inline-start:auto}.tp-geometry-header>tp-save-image{margin-inline-start:0}tp-graph-geometry[canvas-only]>.tp-geometry-header{display:contents}tp-graph-geometry[canvas-only]>.tp-geometry-header>:not(.tp-geometry-theme),tp-graph-geometry[canvas-only]>.tp-geometry-tools,tp-graph-geometry[canvas-only]>.tp-geometry-parameters,tp-graph-geometry[canvas-only]>.tp-geometry-hint,tp-graph-geometry[canvas-only]>.tp-geometry-source,tp-graph-geometry[canvas-only]>.tp-geometry-workspace>aside,tp-graph-geometry[canvas-only] .tp-geometry-view{display:none}tp-graph-geometry[canvas-only]>.tp-geometry-workspace{border:0;grid-template-columns:minmax(0,1fr)}tp-graph-geometry[canvas-only] .tp-geometry-theme{z-index:2;position:absolute;inset-block-start:8px;inset-inline-end:8px}tp-graph-geometry[canvas-only]>[data-status]{clip-path:inset(50%);width:1px;height:1px;min-height:0;padding:0;position:absolute;overflow:hidden}", _ = (e) => e.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;"), v = {
 	move: "Move",
 	pan: "Pan view",
 	point: "Point",
@@ -109,7 +110,8 @@ var g = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 			"readonly",
 			"grid",
 			"src",
-			"built-in"
+			"built-in",
+			"canvas-only"
 		];
 	}
 	get src() {
@@ -129,6 +131,12 @@ var g = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 	}
 	set grid(e) {
 		this.toggleAttribute("grid", e);
+	}
+	get canvasOnly() {
+		return this.hasAttribute("canvas-only");
+	}
+	set canvasOnly(e) {
+		this.toggleAttribute("canvas-only", e);
 	}
 	get builtIn() {
 		return this.hasAttribute("built-in");
@@ -343,7 +351,8 @@ var g = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 		this.setConstruction(`${this.value}\n${e}`);
 	}
 	render() {
-		this.objectListMarkup = "", this.setAttribute("data-geometry-export", this.controlId), this.innerHTML = `<div class="tp-geometry-header"><div><strong>Ruler & compass</strong><span>Geometric constructions</span></div><tp-save-image anchor='[data-geometry-export="${this.controlId}"]' filename="geometry"></tp-save-image><tp-button-group><tp-button type="button" outlined data-geometry-control data-action="example">Perpendicular bisector</tp-button><tp-button type="button" outlined data-geometry-control data-action="clear">New construction</tp-button></tp-button-group></div>
+		let e = this.querySelector(".tp-geometry-theme")?.getAttribute("mode") ?? "auto";
+		this.objectListMarkup = "", this.setAttribute("data-geometry-export", this.controlId), this.innerHTML = `<div class="tp-geometry-header"><div><strong>Ruler & compass</strong><span>Geometric constructions</span></div><tp-theme class="tp-geometry-theme" mode="${e === "light" || e === "dark" ? e : "auto"}" anchor='[data-geometry-export="${this.controlId}"]'></tp-theme><tp-save-image anchor='[data-geometry-export="${this.controlId}"]' filename="geometry"></tp-save-image><tp-button-group><tp-button type="button" outlined data-geometry-control data-action="example">Perpendicular bisector</tp-button><tp-button type="button" outlined data-geometry-control data-action="clear">New construction</tp-button></tp-button-group></div>
       <tp-button-group class="tp-geometry-tools" aria-label="Construction tools">${Object.entries({
 			...v,
 			...this.builtIn ? y : {}
@@ -353,16 +362,16 @@ var g = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
       <div class="tp-geometry-workspace"><div class="tp-geometry-board"><div class="tp-geometry-canvas"><svg data-geometry-canvas viewBox="0 0 900 ${this.canvasHeight}" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg></div><div class="tp-geometry-view"><tp-button type="button" outlined data-geometry-control data-action="undo">Undo</tp-button><tp-button type="button" outlined data-geometry-control data-action="redo">Redo</tp-button><tp-button type="button" outlined data-geometry-control data-action="out" aria-label="Zoom out">−</tp-button><tp-button type="button" outlined data-geometry-control data-action="in" aria-label="Zoom in">+</tp-button><tp-button type="button" outlined data-geometry-control data-action="fit">Fit</tp-button><tp-button type="button" outlined data-geometry-control data-action="grid" aria-pressed="${this.grid}">Grid</tp-button></div></div>
       <aside><h3>Construction objects</h3><p data-appearance-label>Select an object in Move mode to change its appearance.</p><div class="tp-geometry-appearance"><tp-button id="${this.controlId}-style" outlined data-geometry-control data-action="style-menu" aria-haspopup="menu"><span data-style-label>Style · solid</span></tp-button><tp-dropdown anchor="#${this.controlId}-style" outside-click data-style-menu><ul>${a.map((e) => `<li data-stroke="${e}">${e}${e === "solid" ? " (default)" : ""}</li>`).join("")}</ul></tp-dropdown><tp-button id="${this.controlId}-color" outlined data-geometry-control data-action="color-menu" aria-haspopup="menu"><span data-color-label>Color · automatic</span></tp-button><tp-dropdown anchor="#${this.controlId}-color" outside-click data-color-menu><ul><li data-color="">Automatic</li>${i.map((e) => `<li data-color="${e}"><span class="tp-geometry-swatch tp-${e}" aria-hidden="true"></span>${e}</li>`).join("")}</ul></tp-dropdown></div><div data-objects></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Constructed points are calculated.</p></aside></div>
       <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source"><dl><dt>Construction source</dt><dd><p>Construction file (.txt)</p><tp-button-group attached aria-label="Construction files (.txt)"><tp-button outlined data-geometry-control data-source-file="load">Load</tp-button><tp-button outlined data-geometry-control data-source-file="save">Save</tp-button><tp-button outlined data-geometry-control data-source-file="save-as">Save as</tp-button></tp-button-group><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor><tp-button type="button" outlined data-geometry-control data-action="apply">Apply construction</tp-button></dd></dl></tp-accordion>`, this.canvasObserver?.disconnect();
-		let e = this.querySelector(".tp-geometry-canvas");
-		if (e && typeof ResizeObserver < "u" && (this.canvasObserver = new ResizeObserver(() => {
-			let t = e.getBoundingClientRect();
-			if (t.width <= 0 || t.height <= 0) return;
-			let n = 900 * t.height / t.width;
+		let t = this.querySelector(".tp-geometry-canvas");
+		if (t && typeof ResizeObserver < "u" && (this.canvasObserver = new ResizeObserver(() => {
+			let e = t.getBoundingClientRect();
+			if (e.width <= 0 || e.height <= 0) return;
+			let n = 900 * e.height / e.width;
 			Math.abs(n - this.canvasHeight) < .01 || (this.canvasHeight = n, this.querySelector("svg[data-geometry-canvas]")?.setAttribute("viewBox", `0 0 900 ${n}`), this.draw());
-		}), this.canvasObserver.observe(e)), this.readonly) for (let e of this.querySelectorAll("[data-tool]:not([data-tool=\"pan\"]), [data-action=\"example\"], [data-action=\"clear\"], [data-action=\"delete\"], [data-action=\"apply\"]")) e.disabled = !0;
+		}), this.canvasObserver.observe(t)), this.readonly) for (let e of this.querySelectorAll("[data-tool]:not([data-tool=\"pan\"]), [data-action=\"example\"], [data-action=\"clear\"], [data-action=\"delete\"], [data-action=\"apply\"]")) e.disabled = !0;
 		this.querySelector(".tp-geometry-parameters")?.toggleAttribute("hidden", this.readonly);
-		let t = this.querySelector("tp-save-image [data-format=\"svg\"]");
-		t && (t.textContent = "SVG (default)"), this.syncSourceFileButtons(), this.addEventListener("tp-save-image-error", this.onExportError);
+		let n = this.querySelector("tp-save-image [data-format=\"svg\"]");
+		n && (n.textContent = "SVG (default)"), this.syncSourceFileButtons(), this.addEventListener("tp-save-image-error", this.onExportError);
 		for (let e of ["style", "color"]) this.querySelector(`[data-${e}-menu]`)?.addEventListener("tp-dropdown-toggle", () => {
 			this.querySelector(`[data-action="${e}-menu"]`)?.setAttribute("aria-expanded", String(this.querySelector(`[data-${e}-menu]`)?.hasAttribute("open"))), this.syncButtonControls();
 		});
@@ -392,9 +401,9 @@ var g = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 				}));
 			}
 		};
-		let n = this.querySelector("svg[data-geometry-canvas]");
-		if (!n) return;
-		n.addEventListener("pointerdown", (e) => {
+		let r = this.querySelector("svg[data-geometry-canvas]");
+		if (!r) return;
+		r.addEventListener("pointerdown", (e) => {
 			if (this.drag || this.pan || e.button > 1) return;
 			this.suppressCanvasClick = !1;
 			let t = e.target.closest("[data-id]")?.getAttribute("data-id");
@@ -403,23 +412,23 @@ var g = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 					pointer: e.pointerId,
 					start: this.canvasPoint(e),
 					center: { ...this.center }
-				}, this.suppressCanvasClick = !0, n.setPointerCapture?.(e.pointerId), n.focus({ preventScroll: !0 }), n.classList.add("is-panning"), e.preventDefault();
+				}, this.suppressCanvasClick = !0, r.setPointerCapture?.(e.pointerId), r.focus({ preventScroll: !0 }), r.classList.add("is-panning"), e.preventDefault();
 				return;
 			}
 			if (this.readonly || this.tool !== "move") return;
-			let r = this.objects.find((e) => e.id === t);
-			if (!r || (this.selected = r.id, this.draw(), r.definition.kind !== "point" && r.definition.kind !== "on" && r.definition.kind !== "measure")) return;
-			let i = this.result.values.get(r.id), a = this.world(e);
+			let n = this.objects.find((e) => e.id === t);
+			if (!n || (this.selected = n.id, this.draw(), n.definition.kind !== "point" && n.definition.kind !== "on" && n.definition.kind !== "measure")) return;
+			let i = this.result.values.get(n.id), a = this.world(e);
 			this.drag = {
-				...r.definition.kind === "measure" && i?.kind === "comment" ? { grab: {
+				...n.definition.kind === "measure" && i?.kind === "comment" ? { grab: {
 					x: i.point.x - a.x,
 					y: i.point.y - a.y
 				} } : {},
-				id: r.id,
+				id: n.id,
 				before: this.value,
 				pointer: e.pointerId
-			}, n.setPointerCapture?.(e.pointerId), n.focus({ preventScroll: !0 }), e.preventDefault();
-		}), n.addEventListener("pointermove", (e) => {
+			}, r.setPointerCapture?.(e.pointerId), r.focus({ preventScroll: !0 }), e.preventDefault();
+		}), r.addEventListener("pointermove", (e) => {
 			if (this.pan && e.pointerId === this.pan.pointer) {
 				let t = this.canvasPoint(e);
 				this.center = {
@@ -436,9 +445,9 @@ var g = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 				});
 			}
 		});
-		let r = (e) => {
+		let o = (e) => {
 			if (this.pan && e.pointerId === this.pan.pointer) {
-				e.type === "pointercancel" && (this.center = this.pan.center), this.pan = null, n.classList.remove("is-panning"), this.draw();
+				e.type === "pointercancel" && (this.center = this.pan.center), this.pan = null, r.classList.remove("is-panning"), this.draw();
 				return;
 			}
 			if (!this.drag || e.pointerId !== this.drag.pointer) return;
@@ -449,7 +458,7 @@ var g = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 			}
 			t !== this.value && (this.undoStack.push(t), this.redoStack = [], this.syncSource(), this.changed(), this.draw());
 		};
-		n.addEventListener("pointerup", r), n.addEventListener("pointercancel", r), n.addEventListener("click", (e) => {
+		r.addEventListener("pointerup", o), r.addEventListener("pointercancel", o), r.addEventListener("click", (e) => {
 			if (this.suppressCanvasClick) {
 				this.suppressCanvasClick = !1;
 				return;
@@ -457,21 +466,21 @@ var g = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 			if (this.readonly || this.tool === "move" || this.tool === "pan") return;
 			let t = e.target.closest("[data-id]")?.getAttribute("data-id") ?? void 0;
 			try {
-				n.focus({ preventScroll: !0 }), this.useTool(t, this.world(e));
+				r.focus({ preventScroll: !0 }), this.useTool(t, this.world(e));
 			} catch (e) {
 				this.pending = [], this.polygonDraft = [], this.updateTool(), this.report(String(e));
 			}
-		}), n.addEventListener("wheel", (e) => {
+		}), r.addEventListener("wheel", (e) => {
 			if (e.ctrlKey || e.metaKey || this.pan || this.drag) return;
 			e.preventDefault();
-			let t = n.getBoundingClientRect(), r = e.deltaX, i = e.deltaY;
-			e.shiftKey && r === 0 && (r = i, i = 0);
+			let t = r.getBoundingClientRect(), n = e.deltaX, i = e.deltaY;
+			e.shiftKey && n === 0 && (n = i, i = 0);
 			let a = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? t.width || 900 : 1, o = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? t.height || this.canvasHeight : 1, s = this.canvasPoint(e), c = this.canvasPoint({
-				clientX: e.clientX + r * a,
+				clientX: e.clientX + n * a,
 				clientY: e.clientY + i * o
 			});
 			this.center.x += (c.x - s.x) / this.scale, this.center.y -= (c.y - s.y) / this.scale, this.draw();
-		}, { passive: !1 }), n.addEventListener("keydown", (e) => {
+		}, { passive: !1 }), r.addEventListener("keydown", (e) => {
 			if (e.key === "Enter" && this.tool === "polygon") {
 				e.preventDefault(), this.finishPolygon();
 				return;
@@ -480,7 +489,7 @@ var g = "tp-graph-geometry{color:var(--tp-text-body,CanvasText);border:1px solid
 				this.pending = [], this.polygonDraft = [], this.tool = "move", this.updateTool();
 				return;
 			}
-			if (this.tool === "pan" && [
+			if ((this.tool === "pan" || this.canvasOnly && (!this.selected || this.readonly)) && [
 				"ArrowLeft",
 				"ArrowRight",
 				"ArrowUp",

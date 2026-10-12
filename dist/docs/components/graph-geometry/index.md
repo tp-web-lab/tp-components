@@ -10,10 +10,13 @@ The custom `<tp-graph-geometry>` element implements dynamic ruler and compass co
 
 ### User interactions
 
+Use `canvas-only` to embed only the interactive drawing, with a local theme switcher in its top corner. Drag points or measurement labels and pan with empty-space dragging or scrolling as usual. Construction controls and the source editor are hidden. `readonly` still prevents construction changes. Removing `canvas-only` restores the editing interface.
+
 #### Mouse interactions
 
 | Control or gesture | Result |
 | --- | --- |
+| Theme | Choose Light, Dark or Auto for this component only. The switcher remains available in canvas-only mode. |
 | Tool buttons | Select an action. Its button becomes filled while the other tools remain outlined; an outlined information callout explains how to use it. |
 | Move | Drag a measurement label to place it independently while keeping it attached to its supports. Drag a free point freely or slide an attached point along its support. Drag empty space to pan the whole drawing. Intersection and midpoint constructions are calculated and cannot be dragged. |
 | Pan view | Drag anywhere, including over a point, to move the entire view without changing the construction. Middle-button dragging also pans in any tool. |
@@ -64,6 +67,7 @@ The custom `<tp-graph-geometry>` element implements dynamic ruler and compass co
 | --- | --- |
 | Tab / Shift+Tab | Move between tools, parameters, object buttons, drawing and source controls. |
 | Enter / Space | Activate a focused button or expand/collapse the Construction source accordion. Selecting an object in Move mode focuses the drawing. |
+| Arrow keys in canvas-only mode | Move the selected point or measurement; when nothing is selected, or in readonly mode, pan the view. |
 | Arrow keys on the drawing | In Pan view, pan by 40 drawing pixels. Otherwise move the selected measurement label, free or attached point by 0.2 units before projection onto its support. |
 | Shift + arrow keys | In Pan view, pan by 8 drawing pixels. Otherwise use a smaller point step of 0.02 units. |
 | Enter on the drawing | Finish a pending irregular polygon with at least three vertices. |
@@ -267,6 +271,9 @@ Transform in place
 
 Measurements
 : Drag A, B or C to update the length and marked angles: the right-angle square becomes an arc with its value when the sides are no longer perpendicular. Change the circle radius in Construction source to update its area. In Move mode, drag the measurement labels apart or select them and use the arrow keys. Use the three standard measurement tools to add distances, perimeters and areas without enabling built-in.
+
+Interactive figure
+: Drag O or slide P around its circle in canvas-only mode. Scroll to pan and use the corner theme switcher to change only this figure.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
@@ -296,6 +303,7 @@ Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
   | <code>built-in</code> | <code>boolean</code> | <code>false</code> | Offers direct midpoint, perpendicular, parallel, perpendicular bisector, angle bisector, tangent, polygon and transformation tools. |
+  | <code>canvas-only</code> | <code>boolean</code> | <code>false</code> | Shows only the interactive drawing and its local theme switcher. |
   | <code>grid</code> | <code>boolean</code> | <code>false</code> | Shows a light grid without axes or graduations. |
   | <code>readonly</code> | <code>boolean</code> | <code>false</code> | Prevents changes to the construction. |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a text file containing construction commands. |
@@ -409,6 +417,10 @@ All tp-components used by `<tp-graph-geometry>` are loaded automatically by this
 @tp-dependency tp-textfield
 @summary Single-line and automatically growing multiline text field.
 -->
+<!--
+@tp-dependency tp-theme
+@summary Parent-scoped light/dark/auto theme controller with embedded UI.
+-->
 
 - [`<tp-accordion>`](../accordion/index.md) : Collapsible multi-panels element.
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
@@ -420,6 +432,7 @@ All tp-components used by `<tp-graph-geometry>` are loaded automatically by this
 - [`<tp-radio-list>`](../radio-list/index.md) : Transforms a list into a group of radio buttons.
 - [`<tp-save-image>`](../save-image/index.md) : Downloads an anchored image as SVG, PNG or WebP.
 - [`<tp-textfield>`](../textfield/index.md) : Single-line and automatically growing multiline text field.
+- [`<tp-theme>`](../theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
 
 ### External
 

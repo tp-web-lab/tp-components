@@ -1,5 +1,6 @@
 import "../accordion/accordion.js";
 import "../callout/callout.js";
+import "../theme/theme.js";
 import { TpBase } from "../base/base.js";
 import "../button-group/button-group.js";
 import "../textfield/textfield.js";
@@ -14,6 +15,7 @@ export { evaluateGeometry, MEDIATRIX_CONSTRUCTION, parseGeometry, serializeGeome
  * @summary Constructs dynamic figures with a graduated ruler and compass.
  * @tagname tp-graph-geometry
  * @attr {string} src = "" - URL of a text file containing construction commands.
+ * @attr {boolean} canvas-only = false - Shows only the interactive drawing and its local theme switcher.
  * @attr {boolean} built-in = false - Offers direct midpoint, perpendicular, parallel, perpendicular bisector, angle bisector, tangent, polygon and transformation tools.
  * @attr {boolean} grid = false - Shows a light grid without axes or graduations.
  * @attr {boolean} readonly = false - Prevents changes to the construction.
@@ -61,6 +63,8 @@ export declare class TpGraphGeometry extends TpBase {
     set value(source: string);
     get grid(): boolean;
     set grid(value: boolean);
+    get canvasOnly(): boolean;
+    set canvasOnly(value: boolean);
     get builtIn(): boolean;
     set builtIn(value: boolean);
     get readonly(): boolean;
