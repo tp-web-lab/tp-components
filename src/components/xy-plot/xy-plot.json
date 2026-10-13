@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-xy-plot>\n  <script type=\"tp/xy-plot\">\n    xyFunctionGraph\n      title \"Functions\"\n      x-axis [-10,10]\n      y-axis [-5,5]\n      functions [[\"Sine\", \"2*sin(x)\"], [\"Line\", \"x/2\"]]\n  </script>\n</tp-xy-plot>"
+      "code": "<tp-xy-plot label=\"Functions\">\n  <script type=\"tp/xy-plot\">\n    label = \"Functions\"\n    x-axis = [-10, 10]\n    y-axis = [-5, 5]\n    curve Sine = function(x, 2*sin(x))\n    curve Line = function(x, x/2)\n  </script>\n</tp-xy-plot>"
     }
   ],
   "attributes": [
@@ -29,6 +29,15 @@
       "default": "\"both\""
     },
     {
+      "name": "label",
+      "description": "Title displayed at the left of the view toolbar.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
       "name": "no-legend",
       "description": "Hides curve legends.",
       "reflected": true,
@@ -39,7 +48,7 @@
     },
     {
       "name": "settings",
-      "description": "Shows a button for editing the graph definition in a panel below the plot.",
+      "description": "Shows interactive settings below the graph and its controls.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -60,17 +69,22 @@
     {
       "name": "anim(): string",
       "inherited": false,
-      "description": "Gets the comma-separated reveal order, or sets it and returns to the start."
+      "description": "Gets reveal order (JSON for groups), or sets comma-separated names, JSON or step arrays."
     },
     {
-      "name": "anim(names: string): void",
+      "name": "anim(names: string | XYAnimationStep[]): void",
       "inherited": false,
       "description": "Anim."
     },
     {
-      "name": "anim(names?: string): string | undefined",
+      "name": "anim(names?: string | XYAnimationStep[]): string | undefined",
       "inherited": false,
       "description": "Anim."
+    },
+    {
+      "name": "exportSvg(): string",
+      "inherited": false,
+      "description": "Exports the displayed graph with its current viewport, visibility and theme colors."
     },
     {
       "name": "goToEnd(): void",
@@ -99,7 +113,13 @@
     }
   ],
   "events": [],
-  "cssproperties": [],
+  "cssproperties": [
+    {
+      "name": "--tp-plot-height",
+      "default": "auto",
+      "description": "Height of the normal plot including its top and bottom controls; settings remain below."
+    }
+  ],
   "dependencies": [
     {
       "name": "tp-base",
@@ -122,6 +142,10 @@
       "summary": "CodeMirror-based code editor component."
     },
     {
+      "name": "tp-dropdown",
+      "summary": "Dropdown menu component."
+    },
+    {
       "name": "tp-icon-button",
       "summary": "Accessible icon button component."
     },
@@ -130,12 +154,20 @@
       "summary": "Transforms a list into a group of radio buttons."
     },
     {
+      "name": "tp-save-image",
+      "summary": "Downloads an anchored image as SVG, PNG or WebP."
+    },
+    {
       "name": "tp-stack",
       "summary": "Vertical stack layout component."
     },
     {
       "name": "tp-textfield",
       "summary": "Single-line and automatically growing multiline text field."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
     }
   ],
   "credits": [
@@ -148,7 +180,7 @@
   "userHelp": {
     "displayName": "XY plot",
     "introduction": "The custom `<tp-xy-plot>` element implements the <tp-icon name=\"xy-plot\" library=\"components\" size=\"1.25em\"></tp-icon> XY plot functionality: xY graph rendering component.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Zoom in (+) / Zoom out (−) | Magnify or widen the coordinate ranges around the graph center, in both the preview and enlarged view. Keep the current animation step. |\n| Reset view (refresh) | Restore the original scale and position without changing the animation step. |\n| Drag the graph (mouse or touch) | Move the drawing horizontally and vertically. Center a point of interest before zooming in. |\n| Graph settings (gear) | Show or hide the settings panel below the graph. |\n| Settings fields | Update the graph and enlarged view; invalid entries retain the last valid graph and show feedback. |\n| Start / Previous / Next / End | Return to zero revealed objects, hide the last revealed object, reveal the next object, or reveal all objects. The counter shows the current step and total. |\n| Reset | Restore the original graph definition and settings. |\n| Zoom graph (outward arrows) | Open the enlarged graph. |\n| Close zoomed graph (inward arrows) | Close the enlarged graph and return to the preview. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button, including Zoom in, Zoom out, Graph settings and Reset. |\n| Arrow keys on the focused graph | Move the drawing in the arrow direction by 10% of the visible range. |\n| Home on the focused graph | Restore the original scale and position. |\n| Escape | Close the enlarged graph. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |\n\n### Dynamic zoom\n\nThe + and − buttons change the scale around the center of the current graph. Each + click multiplies magnification by 1.25; − reverses one step. Twelve steps are available in either direction from the initial view. Curves are resampled and automatic ticks are recalculated, while labels keep their size. Explicit curve intervals remain respected; numeric datasets are never extrapolated.\n\nDrag the graph to place a point of interest at the center, then use + to zoom around it. The refresh button restores both the original scale and position. Keyboard users can focus the graph with Tab, pan with the arrow keys and reset with Home.\n\nBoth views share the same zoom, position and animation state. Applying a new graph definition or dataset resets the zoom. Returning to the initial scale restores any custom ticks. Explicit axes outside the visible range disappear, with graduations placed along the frame.\n\n### Display attributes\n\n`grid=\"both|horizontal|vertical|none\"` chooses grid directions (default `both`). When present, it overrides the graph definition’s `grid` directive; removing it restores that directive. `axis=\"both|horizontal|vertical|none\"` chooses visible axes (default `both`). Hiding an axis also hides its ticks, numeric graduations and axis label, independently of the grid. The plot frame remains visible.\n\nThe boolean `no-legend` attribute hides curve legends (default `false`). These attributes update both views immediately without changing the current animation step. JavaScript properties are `grid`, `axis` and `noLegend`.\n\n### Step-by-step reveal\n\nAdd `anim [\"A\", \"u\", \"Sine\"]` to reveal those named points, vectors or functions in that order. Objects not listed remain visible from initialization. At step `0 / 3`, all listed objects are hidden. Each Next action reveals one more; Previous hides the last one. Start returns to `0 / 3` and End reveals everything. Curve legend entries follow their curves, including in the enlarged view. Axes, colors and framing stay stable throughout.\n\nOmitting `anim`, or using `anim []`, displays everything without progression controls. Names must match labels exactly, be nonempty and occur only once in the list; unknown names are reported as errors. Objects sharing a label are revealed together. The list can span several lines. Applying a new definition in Graph settings restarts at step zero.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Zoom in (+) / Zoom out (−) | Magnify or widen the coordinate ranges around the graph center, in both the preview and enlarged view. Keep the current animation step. |\n| Save image | Save the current graph view as SVG, PNG or WebP, with its visible axes, grid, animation step and theme colors. |\n| Theme | Choose Light, Dark or Auto for this plot only; the enlarged view shares the same theme. |\n| Code (`</>`) | Replace the curves with Graph definition, or return to the curves, in either view. Draft edits are preserved; Play applies them. Closing zoom restores the previous normal view. |\n| Undo / Redo | Undo or redo an applied definition change (Play, file load, interactive settings or Reset). A new change clears the redo history. View navigation is independent. |\n| Drag the graph (mouse or touch) | Move the drawing horizontally and vertically. Center a point of interest before zooming in. |\n| Settings fields | Update the graph and enlarged view; invalid entries retain the last valid graph and show feedback. |\n| Start / Previous / Next / End | Return to zero revealed objects, hide the last revealed object, reveal the next object, or reveal all objects. The counter shows the current step and total. |\n| Graph definition | Expand or collapse the editable source in the code view, with or without settings. |\n| Graph definition > Files | Load a `.txt` definition, Save the draft, or Save as a new file. Valid loads update the graph and settings; invalid files preserve the current graph. |\n| Graph definition > F1 / Reset definition / Play | Toggle the editor toolbar / discard draft edits and restore the displayed graph definition / validate and apply the edited definition. |\n| Reset | Restore the original graph definition and settings. |\n| Zoom graph (outward arrows) | Open the enlarged graph. |\n| Close zoomed graph (inward arrows) | Close the enlarged graph and return to the preview. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| F1 in Graph definition | Show or hide the source editor toolbar. |\n| ArrowUp / ArrowDown, Home / End in the file menu | Navigate Load, Save and Save as; Enter/Space activates an action and Escape closes the menu. |\n| Enter / Space | Activate the focused button, including Code, Undo, Redo, Zoom in, Zoom out and Reset. |\n| Arrow keys on the focused graph | Move the drawing in the arrow direction by 10% of the visible range. |\n| Home on the focused graph | Restore the original scale and position. |\n| Escape | Close the enlarged graph. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |\n\n### Assignment syntax\n\nAll XY directives accept an optional equals sign: `x-axis`, `y-axis`, `x-ticks`, `y-ticks`, `legend-x`, `legend-y`, `grid`, `x-axis-at`, `y-axis-at`, `samples`, `anim`, `t-axis`, `theta-axis`, `functions`, `points` and `vectors`. Existing definitions without `=` remain valid, and both forms can be mixed. Lists may span multiple lines. Graph settings retain assignment syntax when editing such a source.\n\n```text\nxyFunctionGraph\nlabel = \"Parabola\"\nx-axis = [-2, 6]\ny-axis = [-2, 16]\nx-ticks = [-2, 0, 2, 4, 6]\nlegend-x = \"x\"\ngrid = both\nx-axis-at = 0\nsamples = 256\ncurve f = function(x, x*x)\npoint O = (0, 0)\npoint A = (3, 4)\nvector u = vector(O, A)\nanim = [\"f\", \"A\", \"u\"]\n```\n\nThe graph header may be omitted for Cartesian sources beginning with an assignment; named curves can also infer a polar or parametric kind. Use `xyPolarGraph` or `xyParametricGraph` to select the other graph kinds; use `theta-axis = [0, 2*PI]` or `t-axis = [0, 2*PI]` respectively. These plotting directives belong to XY plot; Geometry shares only the title, free-point and endpoint-vector declarations at this stage.\n\n### Named curves\n\nDefine one curve per line, with an identifier used by its legend and by `anim`:\n\n```text\ncurve f = function(x, sin(x))\ncurve r = polar(t, 2*cos(3*t))\ncurve c = parametric(t, cos(t), sin(t))\n```\n\nThese three lines illustrate three separate graph kinds; do not mix kinds in one plot. Cartesian curves use `x`; polar and parametric curves use `t`. Expressions are unquoted and use the same safe mathematical operators and functions as legacy curves. Each expression is independent; curve identifiers are not callable mathematical functions.\n\nThe optional last argument `range=[min, max]` limits sampling. Bounds may use expressions, must be finite and strictly increasing. Without a range, the graph's axis or parameter range is used. A Cartesian range is intersected with the visible horizontal range. Put `style=solid`, `style=dashed`, `style=dotted` or `style=dash-dot` after the call:\n\n```text\nlabel = \"Sine and cosine\"\nx-axis = [-4, 4]\ny-axis = [-2, 2]\ncurve f = function(x, sin(x), range=[-PI, PI]) style=dashed\ncurve g = function(x, cos(x)) style=dotted\nanim = [\"f\", \"g\"]\n```\n\nWhen the header is omitted, named curves determine the graph kind, even after title, point or axis declarations. An explicit `xyFunctionGraph`, `xyPolarGraph` or `xyParametricGraph` header must agree with every curve. Names must be unique across named curves, points, vectors and legacy objects. Existing `functions` lists remain supported and can accompany named curves of the same kind. Graph settings preserve named declarations; changing the graph kind starts a compatible named curve.\n\n### Dynamic zoom\n\nThe + and − buttons change the scale around the center of the current graph. Each + click multiplies magnification by 1.25; − reverses one step. Twelve steps are available in either direction from the initial view. Curves are resampled and automatic ticks are recalculated, while labels keep their size. Explicit curve intervals remain respected; numeric datasets are never extrapolated.\n\nDrag the graph to place a point of interest at the center, then use + to zoom around it. Keyboard users can focus the graph with Tab, pan with the arrow keys and reset with Home.\n\nBoth views share the same zoom, position and animation state. Applying a new graph definition or dataset resets the zoom. Returning to the initial scale restores any custom ticks. Explicit axes outside the visible range disappear, with graduations placed along the frame.\n\n### Display attributes\n\n`grid=\"both|horizontal|vertical|none\"` chooses grid directions (default `both`). When present, it overrides the graph definition’s `grid` directive; removing it restores that directive. `axis=\"both|horizontal|vertical|none\"` chooses visible axes (default `both`). Hiding an axis also hides its ticks, numeric graduations and axis label, independently of the grid. The plot frame remains visible.\n\nThe boolean `no-legend` attribute hides curve legends (default `false`). These attributes update both views immediately without changing the current animation step. JavaScript properties are `grid`, `axis` and `noLegend`.\n\n### Step-by-step reveal\n\nThe outer list defines the steps. A string reveals one named object; a nonempty list reveals all its objects simultaneously:\n\n```text\nanim = [\"A\", [\"f1\", \"f2\"], \"B\"]\n```\n\nThis sequence has **three steps**: A, then both curves f1 and f2, then B. At `0 / 3`, all four objects are hidden. Next reveals one whole step; Previous hides it again. Start hides every listed object and End reveals them all. Objects absent from the sequence stay visible. Curve legend entries follow their curves in both views, and zoom preserves the current step.\n\nNames must exist and occur only once across the entire sequence. Empty names, empty groups and deeper nesting are rejected. Lists may span multiple lines. Omitting `anim`, or using `anim = []`, displays everything without animation controls. Applying a new definition restarts at step zero.",
     "keyboard": []
   }
 }

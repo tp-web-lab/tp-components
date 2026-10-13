@@ -25,8 +25,16 @@
  * @summary CodeMirror-based code editor component.
  */
 /**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
  * @tp-dependency tp-dropdown
  * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
  */
 /**
  * @tp-dependency tp-radio-list
@@ -50,8 +58,11 @@ import {
 	saveBlob,
 	type TpSaveTarget,
 } from "../../utilities/save-file.js";
+import "../icon-button/icon-button.js";
+import "../divider/divider.js";
 import type { TpButton } from "../button/button.js";
 import { choosePlaygroundFile } from "../playground/playground-local-file.js";
+import { GEOMETRY_SHORTCUTS } from "./geometry-actions.js";
 import "../accordion/accordion.js";
 import "../callout/callout.js";
 import "../theme/theme.js";
@@ -68,12 +79,14 @@ import {
 	type GeometryObject,
 	type GeometryPoint,
 	type GeometryResult,
+	geometrySourceLabel,
 	intersections,
 	isLinear,
 	MEDIATRIX_CONSTRUCTION,
 	parameterAt,
 	parseGeometry,
 	serializeGeometry,
+	withGeometryLabel,
 } from "./geometry.js";
 import style from "./graph-geometry.css?inline";
 import "../save-image/save-image.js";
@@ -97,9 +110,11 @@ export type {
 } from "./geometry.js";
 export {
 	evaluateGeometry,
+	geometrySourceLabel,
 	MEDIATRIX_CONSTRUCTION,
 	parseGeometry,
 	serializeGeometry,
+	withGeometryLabel,
 } from "./geometry.js";
 
 const escapeHtml = (text: string): string =>
@@ -128,6 +143,14 @@ const TOOLS = {
 	arc: "Arc",
 	intersection: "Intersection",
 };
+const TOOL_GROUPS: (keyof typeof TOOLS)[][] = [
+	["move", "pan"],
+	["point", "on", "intersection"],
+	["line", "ray", "segment", "fixedSegment", "vector", "sector"],
+	["circle", "through", "arc"],
+	["length", "area", "angle"],
+	["comment"],
+];
 const BUILT_IN_TOOLS = {
 	midpoint: "Midpoint",
 	perpendicular: "Perpendicular",
@@ -143,6 +166,19 @@ const BUILT_IN_TOOLS = {
 	rotation: "Rotation",
 	translation: "Translation",
 };
+const BUILT_IN_TOOL_GROUPS: (keyof typeof BUILT_IN_TOOLS)[][] = [
+	[
+		"midpoint",
+		"perpendicular",
+		"parallel",
+		"perpendicularBisector",
+		"bisector",
+		"tangent",
+	],
+	["polygon", "regularPolygon"],
+	["axialSymmetry", "centralSymmetry"],
+	["homothety", "rotation", "translation"],
+];
 type Tool = keyof typeof TOOLS | keyof typeof BUILT_IN_TOOLS;
 const HINTS: Record<Tool, string> = {
 	length:
@@ -193,8 +229,10 @@ const HINTS: Record<Tool, string> = {
 /**
  * @summary Constructs dynamic figures with a graduated ruler and compass.
  * @tagname tp-graph-geometry
+ * @cssprop --tp-plot-height Height of the normal drawing including its top and bottom controls; other panels remain outside.
  * @attr {string} src = "" - URL of a text file containing construction commands.
- * @attr {boolean} canvas-only = false - Shows only the interactive drawing and its local theme switcher.
+ * @attr {string} label = "" - Title displayed above the drawing.
+ * @attr {boolean} canvas-only = false - Shows the interactive drawing with its action palette and view controls, with a source toggle and without the object list.
  * @attr {boolean} built-in = false - Offers direct midpoint, perpendicular, parallel, perpendicular bisector, angle bisector, tangent, polygon and transformation tools.
  * @attr {boolean} grid = false - Shows a light grid without axes or graduations.
  * @attr {boolean} readonly = false - Prevents changes to the construction.
@@ -206,6 +244,9 @@ const HINTS: Record<Tool, string> = {
  * @accessibility Provides an object list as an alternative to pointer selection and announces undefined constructions.
  * @accessibilityresponsibility Provide a textual explanation of the figure when its visual relationships are needed to understand the lesson.
  * @keyboard {Arrow keys} Moves the selected point or measurement label, or pans in Pan view; Shift reduces the step.
+ * @keyboard {Delete} Removes the selected object and its dependents as one undoable action.
+ * @keyboard {F1} Opens the action palette.
+ * @keyboard {Z} Enlarges or restores the interactive drawing.
  * @keyboard {Escape} Cancels pending construction input and returns to Move.
  * @example
  * <tp-graph-geometry></tp-graph-geometry>
@@ -219,7 +260,6 @@ export class TpGraphGeometry extends TpBase {
 	private sourceRequest: AbortController | null = null;
 	private localFileRequest: AbortController | null = null;
 	private sourceSaveTarget: TpSaveTarget | null = null;
-	private sourceFilename = "construction.txt";
 	private sourceFileBusy = false;
 	private objectListMarkup = "";
 	private tool: Tool = "move";
@@ -245,7 +285,7 @@ export class TpGraphGeometry extends TpBase {
 		grab?: GeometryPoint;
 	} | null = null;
 	public static get observedAttributes(): string[] {
-		return ["readonly", "grid", "src", "built-in", "canvas-only"];
+		return ["readonly", "grid", "src", "built-in", "canvas-only", "label"];
 	}
 	public get src(): string {
 		return this.getAttribute("src") ?? "";
@@ -255,7 +295,7 @@ export class TpGraphGeometry extends TpBase {
 		else this.removeAttribute("src");
 	}
 	public get value(): string {
-		return serializeGeometry(this.objects);
+		return withGeometryLabel(serializeGeometry(this.objects), this.label);
 	}
 	public set value(source: string) {
 		this.setConstruction(source);
@@ -265,6 +305,12 @@ export class TpGraphGeometry extends TpBase {
 	}
 	public set grid(value: boolean) {
 		this.toggleAttribute("grid", value);
+	}
+	public get label(): string {
+		return this.getAttribute("label") ?? "";
+	}
+	public set label(value: string) {
+		this.setAttribute("label", value);
 	}
 	public get canvasOnly(): boolean {
 		return this.hasAttribute("canvas-only");
@@ -288,8 +334,10 @@ export class TpGraphGeometry extends TpBase {
 	/** Atomically replaces the construction; invalid source leaves the previous figure intact. */
 	public setConstruction(source: string): void {
 		const next = parseGeometry(source);
+		const sourceLabel = geometrySourceLabel(source);
 		const previous = this.value;
 		this.objects = next;
+		if (sourceLabel !== undefined) this.label = sourceLabel;
 		this.initialized = true;
 		if (previous !== this.value) {
 			this.undoStack.push(previous);
@@ -299,7 +347,7 @@ export class TpGraphGeometry extends TpBase {
 		this.polygonDraft = [];
 		this.selected = null;
 		this.recompute();
-		this.syncSource();
+		this.syncSource(source);
 		this.changed();
 	}
 	/** @summary Undoes one construction change. */
@@ -347,6 +395,10 @@ export class TpGraphGeometry extends TpBase {
 				this.objects = parseGeometry(
 					this.src.trim() ? "" : source.trim() || MEDIATRIX_CONSTRUCTION,
 				);
+				if (!this.src.trim()) {
+					const sourceLabel = geometrySourceLabel(source);
+					if (sourceLabel !== undefined) this.label = sourceLabel;
+				}
 				this.initialized = true;
 			} catch (error) {
 				this.innerHTML = `<p role="alert">${escapeHtml(String(error))}</p>`;
@@ -371,9 +423,24 @@ export class TpGraphGeometry extends TpBase {
 		newValue: string | null,
 	): void {
 		if (oldValue === newValue) return;
+		if (name === "label") {
+			const title = this.querySelector<HTMLElement>("[data-figure-title]");
+			if (title) {
+				title.textContent = this.label;
+				title.hidden = !this.label;
+			}
+			const editor = this.querySelector<TpCodeEditor>("tp-code-editor");
+			if (editor) {
+				try {
+					editor.setValue(withGeometryLabel(editor.getValue(), this.label));
+				} catch {
+					/* Keep incomplete metadata editable until Play validates it. */
+				}
+			}
+			return;
+		}
 		if (name === "src") {
 			this.sourceSaveTarget = null;
-			this.sourceFilename = "construction.txt";
 			if (this.isConnected && this.initialized) void this.loadSource();
 			return;
 		}
@@ -394,6 +461,13 @@ export class TpGraphGeometry extends TpBase {
 	}
 	/** @internal */
 	public disconnectedCallback(): void {
+		for (const viewport of this.paletteViewports) {
+			viewport.removeEventListener("resize", this.constrainPalette);
+			viewport.removeEventListener("scroll", this.constrainPalette, true);
+		}
+		this.paletteViewports.clear();
+		window.removeEventListener("resize", this.constrainPalette);
+		window.removeEventListener("scroll", this.constrainPalette, true);
 		this.localFileRequest?.abort();
 		this.canvasObserver?.disconnect();
 		this.canvasObserver = null;
@@ -441,6 +515,7 @@ export class TpGraphGeometry extends TpBase {
 
 	private restore(source: string): void {
 		this.objects = parseGeometry(source);
+		this.label = geometrySourceLabel(source) ?? "";
 		this.pending = [];
 		this.polygonDraft = [];
 		this.selected = null;
@@ -463,9 +538,9 @@ export class TpGraphGeometry extends TpBase {
 			}),
 		);
 	}
-	private syncSource(): void {
+	private syncSource(source = this.value): void {
 		const editor = this.querySelector<TpCodeEditor>("tp-code-editor");
-		if (editor) editor.setValue(this.value);
+		if (editor) editor.setValue(source);
 	}
 	private async sourceFileAction(
 		action: "load" | "save" | "save-as",
@@ -496,20 +571,26 @@ export class TpGraphGeometry extends TpBase {
 				parseGeometry(source);
 				this.sourceRequest?.abort();
 				this.setConstruction(source);
-				this.sourceFilename = file.name.toLowerCase().endsWith(".txt")
-					? file.name
-					: `${file.name.replace(/\.[^.]+$/, "")}.txt`;
 				this.sourceSaveTarget = null;
 				this.fitView();
 				this.report(`Loaded ${file.name}.`);
 			} else {
-				const source =
+				let source =
 					this.querySelector<TpCodeEditor>("tp-code-editor")?.getValue() ??
 					this.value;
+				const label = geometrySourceLabel(source) ?? this.label;
+				source = withGeometryLabel(source, label);
+				const slug =
+					label
+						.normalize("NFKD")
+						.replace(/\p{M}/gu, "")
+						.toLowerCase()
+						.replace(/[^\p{L}\p{N}]+/gu, "-")
+						.replace(/^-+|-+$/g, "") || "construction";
 				const target =
 					(action === "save" && this.sourceSaveTarget) ||
 					(await chooseSaveTarget({
-						suggestedName: this.sourceFilename,
+						suggestedName: `${slug}.txt`,
 						description: "Geometry construction",
 						mimeType: "text/plain",
 						extension: ".txt",
@@ -520,7 +601,6 @@ export class TpGraphGeometry extends TpBase {
 					target,
 				);
 				this.sourceSaveTarget = target;
-				this.sourceFilename = target.filename;
 				this.report(`Saved ${target.filename}.`);
 			}
 		} catch (error) {
@@ -533,10 +613,15 @@ export class TpGraphGeometry extends TpBase {
 		}
 	}
 	private syncSourceFileButtons(): void {
-		for (const button of this.querySelectorAll<TpButton>("[data-source-file]"))
-			button.disabled =
+		for (const item of this.querySelectorAll<HTMLElement>(
+			"[data-source-file]",
+		)) {
+			const disabled =
 				this.sourceFileBusy ||
-				(this.readonly && button.dataset.sourceFile === "load");
+				(this.readonly && item.dataset.sourceFile === "load");
+			item.toggleAttribute("disabled", disabled);
+			item.setAttribute("aria-disabled", String(disabled));
+		}
 		this.syncButtonControls();
 	}
 	private field(name: string): string {
@@ -670,25 +755,235 @@ export class TpGraphGeometry extends TpBase {
 	private appendConstruction(commands: string): void {
 		this.setConstruction(`${this.value}\n${commands}`);
 	}
+
+	private toolGroups(): Tool[][] {
+		return [...TOOL_GROUPS, ...(this.builtIn ? BUILT_IN_TOOL_GROUPS : [])];
+	}
+	private readonly paletteViewports = new Set<Window>();
+	private readonly constrainPalette = (): void => {
+		queueMicrotask(() => {
+			const palette = this.querySelector<TpDropdown>("[data-tool-palette]");
+			if (!palette?.open) return;
+			let available = window.innerHeight - palette.getBoundingClientRect().top;
+			let top = palette.getBoundingClientRect().top;
+			let scale = 1;
+			let viewport: Window = window;
+			// Documentation previews may be taller than the visible parent viewport.
+			try {
+				while (viewport !== viewport.parent) {
+					const frame = viewport.frameElement;
+					if (!frame) break;
+					const rect = frame.getBoundingClientRect();
+					const factor =
+						rect.height / Math.max(1, (frame as HTMLElement).offsetHeight);
+					top = rect.top + top * factor;
+					scale *= factor;
+					viewport = viewport.parent;
+					available = Math.min(available, (viewport.innerHeight - top) / scale);
+					if (!this.paletteViewports.has(viewport)) {
+						viewport.addEventListener("resize", this.constrainPalette);
+						viewport.addEventListener("scroll", this.constrainPalette, true);
+						this.paletteViewports.add(viewport);
+					}
+				}
+			} catch {
+				/* Cross-origin parents retain the local viewport constraint. */
+			}
+			const height = Math.max(
+				48,
+				Math.min(512, window.innerHeight * 0.65, available - 8),
+			);
+			palette.style.setProperty("--tp-geometry-palette-height", `${height}px`);
+		});
+	};
+	private toolButton(id: string, label: string): string {
+		const key = GEOMETRY_SHORTCUTS[id];
+		return `<tp-icon-button library="geometry" name="${id}" label="${label}" title="${label} (${key})" aria-keyshortcuts="${key}" data-geometry-control data-tool="${id}" aria-pressed="${id === this.tool}"></tp-icon-button>`;
+	}
+	private actionButton(id: string, label: string, key: string): string {
+		const sharedIcons: Record<string, string> = {
+			palette: "keyboard-outline",
+			zoom: "zoom-out",
+			in: "plus",
+			out: "minus",
+			undo: "undo",
+			redo: "redo",
+		};
+		const name = sharedIcons[id] ?? id;
+		const library = id in sharedIcons ? "tp" : "geometry";
+		return `<tp-icon-button id="${this.controlId}-${id}" library="${library}" name="${name}" label="${label}" title="${label} (${key})" aria-keyshortcuts="${key}" data-geometry-control data-action="${id}"></tp-icon-button>`;
+	}
+	private chooseTool(tool: Tool): void {
+		if (this.readonly && tool !== "pan") return;
+		if (!(tool in TOOLS) && !this.builtIn) return;
+		this.tool = tool;
+		this.pending = [];
+		this.polygonDraft = [];
+		this.updateTool();
+		this.querySelector<SVGElement>("[data-geometry-canvas]")?.focus();
+	}
+	private shortcut(event: KeyboardEvent): void {
+		const target = event.target;
+		if (
+			!(target instanceof Element) ||
+			target.closest(
+				'input, textarea, select, [contenteditable="true"], tp-code-editor, tp-dropdown, tp-theme',
+			)
+		)
+			return;
+		if (event.defaultPrevented || event.altKey) return;
+		const key = event.key.toLowerCase();
+		if (key === "f1" && target.closest(".tp-geometry-source")) {
+			event.preventDefault();
+			this.querySelector<HTMLElement>(
+				'[data-action="source-toolbar"]',
+			)?.click();
+			return;
+		}
+		let action: string | undefined;
+		if (event.ctrlKey || event.metaKey) {
+			if (key === "z") action = event.shiftKey ? "redo" : "undo";
+			else return;
+		} else {
+			const tool = Object.entries(GEOMETRY_SHORTCUTS).find(
+				([, shortcut]) =>
+					shortcut.toLowerCase() === `${event.shiftKey ? "shift+" : ""}${key}`,
+			)?.[0];
+			if (tool) {
+				event.preventDefault();
+				this.chooseTool(tool as Tool);
+				return;
+			}
+			action = (
+				{
+					delete: "delete",
+					f1: "palette",
+					z: "zoom",
+					f: "fit",
+					g: "grid",
+					"+": "in",
+					"=": "in",
+					"-": "out",
+				} as Record<string, string>
+			)[key];
+		}
+		if (action) {
+			event.preventDefault();
+			this.querySelector<HTMLElement>(`[data-action="${action}"]`)?.click();
+		}
+	}
+	private toggleSourceView(): void {
+		if (!this.canvasOnly) return;
+		const board = this.querySelector(".tp-geometry-board");
+		if (!board) return;
+		const open = board.toggleAttribute("data-source-open");
+		if (open)
+			this.querySelector(".tp-geometry-source")?.setAttribute(
+				"open-indexes",
+				"0",
+			);
+		const button = this.querySelector('[data-action="source-view"]');
+		const label = open ? "Show drawing" : "Show construction source";
+		button?.setAttribute("aria-pressed", String(open));
+		button?.setAttribute("label", label);
+		button?.setAttribute("title", label);
+		this.syncButtonControls();
+	}
+	private toggleZoom(): void {
+		const dialog = this.querySelector<HTMLDialogElement>(".tp-geometry-dialog");
+		const board = this.querySelector(".tp-geometry-board");
+		if (!dialog || !board) return;
+		if (dialog.open) {
+			dialog.close();
+			return;
+		}
+		dialog.append(board);
+		dialog.showModal();
+		const button = this.querySelector('[data-action="zoom"]');
+		button?.setAttribute("name", "zoom-in");
+		button?.setAttribute("label", "Close zoomed drawing");
+		button?.setAttribute("title", "Close zoomed drawing (Z / Escape)");
+		this.querySelector<SVGElement>("[data-geometry-canvas]")?.focus();
+	}
+	private restoreBoard(): void {
+		const board = this.querySelector(".tp-geometry-board");
+		if (board) this.querySelector(".tp-geometry-workspace")?.prepend(board);
+		const button = this.querySelector<HTMLElement>('[data-action="zoom"]');
+		button?.setAttribute("name", "zoom-out");
+		button?.setAttribute("label", "Zoom drawing");
+		button?.setAttribute("title", "Zoom drawing (Z)");
+		button?.querySelector("button")?.focus();
+	}
 	private render(): void {
 		const themeMode =
 			this.querySelector(".tp-geometry-theme")?.getAttribute("mode") ?? "auto";
 		this.objectListMarkup = "";
 		this.setAttribute("data-geometry-export", this.controlId);
-		this.innerHTML = `<div class="tp-geometry-header"><div><strong>Ruler & compass</strong><span>Geometric constructions</span></div><tp-theme class="tp-geometry-theme" mode="${themeMode === "light" || themeMode === "dark" ? themeMode : "auto"}" anchor='[data-geometry-export="${this.controlId}"]'></tp-theme><tp-save-image anchor='[data-geometry-export="${this.controlId}"]' filename="geometry"></tp-save-image><tp-button-group><tp-button type="button" outlined data-geometry-control data-action="example">Perpendicular bisector</tp-button><tp-button type="button" outlined data-geometry-control data-action="clear">New construction</tp-button></tp-button-group></div>
-      <tp-button-group class="tp-geometry-tools" aria-label="Construction tools">${Object.entries(
-				{ ...TOOLS, ...(this.builtIn ? BUILT_IN_TOOLS : {}) },
-			)
-				.map(
-					([id, label]) =>
-						`<tp-button type="button" ${id === this.tool ? "" : "outlined"} data-geometry-control data-tool="${id}" aria-pressed="${id === this.tool}">${label}</tp-button>`,
+		this.innerHTML = `<div class="tp-geometry-header"><div><strong>Ruler & compass</strong><span>Geometric constructions</span></div><tp-button-group><tp-button type="button" outlined data-geometry-control data-action="clear">New construction</tp-button></tp-button-group></div>
+      <tp-button-group class="tp-geometry-tools" aria-label="Construction tools">${this.toolGroups()
+				.map((group) =>
+					group
+						.map((id) =>
+							this.toolButton(id, { ...TOOLS, ...BUILT_IN_TOOLS }[id]),
+						)
+						.join(""),
 				)
-				.join("")}</tp-button-group>
+				.join(
+					'<tp-divider orientation="vertical"></tp-divider>',
+				)}</tp-button-group>
       <div class="tp-geometry-parameters"><tp-textfield data-field="radius" label="Radius / length" value="5"></tp-textfield><tp-textfield data-field="start" label="Start angle (°)" value="20"></tp-textfield><tp-textfield data-field="end" label="End angle (°)" value="100"></tp-textfield><tp-textfield data-field="comment" label="Comment text" value="Comment"></tp-textfield>${this.builtIn ? `<tp-radio-list data-transform-mode label="Transformation" label-position="top" orientation="horizontal" value="1"><ul><li>Create a copy</li><li>Transform the object</li></ul></tp-radio-list><tp-textfield data-field="ratio" label="Ratio" value="2"></tp-textfield><tp-textfield data-field="rotation" label="Rotation angle (°)" value="90"></tp-textfield><tp-textfield data-field="sides" label="Sides" value="5" ${this.readonly ? "readonly" : ""}></tp-textfield><tp-button outlined data-geometry-control data-action="finish-polygon">Finish polygon</tp-button>` : ""}<span>Angles turn counterclockwise.</span></div>
-      <tp-callout class="tp-geometry-hint" variant="info" outlined><span data-hint>${HINTS[this.tool]}</span></tp-callout>
-      <div class="tp-geometry-workspace"><div class="tp-geometry-board"><div class="tp-geometry-canvas"><svg data-geometry-canvas viewBox="0 0 900 ${this.canvasHeight}" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg></div><div class="tp-geometry-view"><tp-button type="button" outlined data-geometry-control data-action="undo">Undo</tp-button><tp-button type="button" outlined data-geometry-control data-action="redo">Redo</tp-button><tp-button type="button" outlined data-geometry-control data-action="out" aria-label="Zoom out">−</tp-button><tp-button type="button" outlined data-geometry-control data-action="in" aria-label="Zoom in">+</tp-button><tp-button type="button" outlined data-geometry-control data-action="fit">Fit</tp-button><tp-button type="button" outlined data-geometry-control data-action="grid" aria-pressed="${this.grid}">Grid</tp-button></div></div>
+      <tp-callout class="tp-geometry-hint" variant="info" outlined heading="${escapeHtml({ ...TOOLS, ...BUILT_IN_TOOLS }[this.tool])}" icon="${this.tool}" library="geometry"><span data-hint>${HINTS[this.tool]}</span></tp-callout>
+      <div class="tp-geometry-workspace"><div class="tp-geometry-board"><div class="tp-geometry-board-heading"><strong data-figure-title ${this.label ? "" : "hidden"}>${escapeHtml(this.label)}</strong><div class="tp-geometry-board-actions">${this.actionButton("palette", "Actions", "F1")}<tp-save-image anchor='[data-geometry-export="${this.controlId}"]' filename="geometry"></tp-save-image><tp-theme class="tp-geometry-theme" mode="${themeMode === "light" || themeMode === "dark" ? themeMode : "auto"}" anchor='[data-geometry-export="${this.controlId}"]'></tp-theme>${this.actionButton("zoom", "Zoom drawing", "Z")}</div></div><tp-dropdown data-tool-palette anchor="#${this.controlId}-palette" outside-click><ul>${this.toolGroups()
+				.map((group) =>
+					group
+						.map(
+							(id) =>
+								`<li data-palette-tool="${id}" ${this.readonly && id !== "pan" ? 'aria-disabled="true"' : ""}><tp-icon library="geometry" name="${id}"></tp-icon><span>${{ ...TOOLS, ...BUILT_IN_TOOLS }[id]}</span><kbd>${GEOMETRY_SHORTCUTS[id]}</kbd></li>`,
+						)
+						.join(""),
+				)
+				.join(
+					'<tp-divider orientation="horizontal"></tp-divider>',
+				)}</ul></tp-dropdown><div class="tp-geometry-context"></div><div class="tp-geometry-canvas"><svg data-geometry-canvas viewBox="0 0 900 ${this.canvasHeight}" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg></div><div class="tp-geometry-view"><tp-icon-button library="tp" name="code" label="Show construction source" title="Show construction source" aria-pressed="false" data-geometry-control data-action="source-view"></tp-icon-button>${this.actionButton("undo", "Undo", "Ctrl+Z")}${this.actionButton("redo", "Redo", "Ctrl+Shift+Z")}${this.actionButton("out", "Zoom out", "-")}${this.actionButton("in", "Zoom in", "+")}${this.actionButton("fit", "Fit", "F")}${this.actionButton("grid", "Grid", "G")}</div></div>
       <aside><h3>Construction objects</h3><p data-appearance-label>Select an object in Move mode to change its appearance.</p><div class="tp-geometry-appearance"><tp-button id="${this.controlId}-style" outlined data-geometry-control data-action="style-menu" aria-haspopup="menu"><span data-style-label>Style · solid</span></tp-button><tp-dropdown anchor="#${this.controlId}-style" outside-click data-style-menu><ul>${GEOMETRY_STYLES.map((value) => `<li data-stroke="${value}">${value}${value === "solid" ? " (default)" : ""}</li>`).join("")}</ul></tp-dropdown><tp-button id="${this.controlId}-color" outlined data-geometry-control data-action="color-menu" aria-haspopup="menu"><span data-color-label>Color · automatic</span></tp-button><tp-dropdown anchor="#${this.controlId}-color" outside-click data-color-menu><ul><li data-color="">Automatic</li>${GEOMETRY_COLORS.map((value) => `<li data-color="${value}"><span class="tp-geometry-swatch tp-${value}" aria-hidden="true"></span>${value}</li>`).join("")}</ul></tp-dropdown></div><div data-objects></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Constructed points are calculated.</p></aside></div>
-      <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source"><dl><dt>Construction source</dt><dd><p>Construction file (.txt)</p><tp-button-group attached aria-label="Construction files (.txt)"><tp-button outlined data-geometry-control data-source-file="load">Load</tp-button><tp-button outlined data-geometry-control data-source-file="save">Save</tp-button><tp-button outlined data-geometry-control data-source-file="save-as">Save as</tp-button></tp-button-group><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor><tp-button type="button" outlined data-geometry-control data-action="apply">Apply construction</tp-button></dd></dl></tp-accordion>`;
+      <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source"><dl><dt>Construction source</dt><dd><div class="tp-geometry-source-toolbar"><div><tp-icon-button id="${this.controlId}-source-files" name="file-outline" label="Construction files (.txt)" title="Construction files (.txt)" aria-haspopup="menu" data-geometry-control data-action="source-files"></tp-icon-button><tp-dropdown anchor="#${this.controlId}-source-files" outside-click data-source-menu><ul><li data-source-file="load">Load (.txt)</li><li data-source-file="save">Save (.txt)</li><li data-source-file="save-as">Save as (.txt)</li></ul></tp-dropdown></div><div class="tp-geometry-source-actions"><tp-icon-button library="tp" name="keyboard-f1" label="F1 — Toggle editor toolbar" title="Toggle editor toolbar (F1)" data-geometry-control data-action="source-toolbar"></tp-icon-button><tp-icon-button name="refresh" label="Reset source" title="Reset source to the displayed construction" data-geometry-control data-action="source-reset"></tp-icon-button><tp-icon-button name="play" label="Play" title="Play — Apply construction source" data-geometry-control data-action="apply"></tp-icon-button></div></div><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor></dd></dl></tp-accordion><dialog class="tp-geometry-dialog" aria-label="Zoomed drawing"></dialog>`;
+
+		if (this.canvasOnly) {
+			const source = this.querySelector(".tp-geometry-source");
+			const footer = this.querySelector(".tp-geometry-view");
+			if (source && footer) footer.before(source);
+		}
+		const context = this.querySelector(".tp-geometry-context");
+		for (const selector of [".tp-geometry-hint", ".tp-geometry-parameters"]) {
+			const node = this.querySelector(selector);
+			if (node && context) context.append(node);
+		}
+		this.querySelector<HTMLDialogElement>(
+			".tp-geometry-dialog",
+		)?.addEventListener("close", () => this.restoreBoard());
+		for (const item of this.querySelectorAll<HTMLElement>(
+			"[data-palette-tool]",
+		)) {
+			const choose = () => {
+				if (item.getAttribute("aria-disabled") === "true") return;
+				this.chooseTool(item.dataset.paletteTool as Tool);
+				this.querySelector<TpDropdown>("[data-tool-palette]")?.hide();
+			};
+			item.addEventListener("click", choose);
+			item.addEventListener("keydown", (event) => {
+				if (event.key === "Enter" || event.key === " ") {
+					event.preventDefault();
+					choose();
+				}
+			});
+		}
+		this.querySelector("[data-tool-palette]")?.addEventListener(
+			"tp-dropdown-toggle",
+			this.constrainPalette,
+		);
+		window.addEventListener("resize", this.constrainPalette);
+		window.addEventListener("scroll", this.constrainPalette, true);
+		this.onkeydown = (event) => this.shortcut(event);
 		this.canvasObserver?.disconnect();
 		const canvas = this.querySelector<HTMLElement>(".tp-geometry-canvas");
 		if (canvas && typeof ResizeObserver !== "undefined") {
@@ -719,6 +1014,8 @@ export class TpGraphGeometry extends TpBase {
 			'tp-save-image [data-format="svg"]',
 		);
 		if (defaultExport) defaultExport.textContent = "SVG (default)";
+		this.dataset.activeTool = this.tool;
+		this.updateParameters();
 		this.syncSourceFileButtons();
 		this.addEventListener("tp-save-image-error", this.onExportError);
 		for (const kind of ["style", "color"])
@@ -743,6 +1040,23 @@ export class TpGraphGeometry extends TpBase {
 					this.changeAppearance(item.dataset.stroke, item.dataset.color);
 				}
 			});
+		for (const item of this.querySelectorAll<HTMLElement>(
+			"[data-source-file]",
+		)) {
+			const activate = () => {
+				if (item.getAttribute("aria-disabled") === "true") return;
+				void this.sourceFileAction(
+					item.dataset.sourceFile as "load" | "save" | "save-as",
+				);
+			};
+			item.addEventListener("click", activate);
+			item.addEventListener("keydown", (event) => {
+				if (event.key === "Enter" || event.key === " ") {
+					event.preventDefault();
+					activate();
+				}
+			});
+		}
 		this.onclick = (event) => {
 			const choice = (event.target as Element).closest<HTMLElement>(
 				"[data-stroke], [data-color]",
@@ -752,26 +1066,33 @@ export class TpGraphGeometry extends TpBase {
 				return;
 			}
 			const button = (event.target as Element).closest<TpButton>(
-				"tp-button[data-geometry-control]",
+				"tp-button[data-geometry-control], tp-icon-button[data-geometry-control]",
 			);
 			if (!button || button.disabled) return;
-			if (button.dataset.sourceFile) {
-				void this.sourceFileAction(
-					button.dataset.sourceFile as "load" | "save" | "save-as",
-				);
-				return;
-			}
+
 			if (
 				button.dataset.tool &&
 				(!this.readonly || button.dataset.tool === "pan")
 			) {
-				this.tool = button.dataset.tool as Tool;
-				this.pending = [];
-				this.polygonDraft = [];
-				this.updateTool();
+				this.chooseTool(button.dataset.tool as Tool);
 			}
 			if (button.dataset.object) this.selectObject(button.dataset.object);
 			const action = button.dataset.action;
+			if (action === "source-view") this.toggleSourceView();
+			if (action === "source-files")
+				this.querySelector<TpDropdown>("[data-source-menu]")?.toggle();
+			if (action === "source-toolbar") {
+				const editor = this.querySelector<TpCodeEditor>("tp-code-editor");
+				if (editor) editor.toolbar = !editor.toolbar;
+			}
+			if (action === "source-reset")
+				this.querySelector<TpCodeEditor>("tp-code-editor")?.setValue(
+					this.value,
+				);
+
+			if (action === "palette")
+				this.querySelector<TpDropdown>("[data-tool-palette]")?.toggle();
+			if (action === "zoom") this.toggleZoom();
 			if (action === "style-menu" || action === "color-menu") {
 				this.querySelector<TpDropdown>(
 					action === "style-menu" ? "[data-style-menu]" : "[data-color-menu]",
@@ -794,14 +1115,12 @@ export class TpGraphGeometry extends TpBase {
 					this.removeObject(this.selected);
 				if (action === "example") {
 					this.sourceSaveTarget = null;
-					this.sourceFilename = "construction.txt";
 					this.setConstruction(MEDIATRIX_CONSTRUCTION);
 					this.fitView();
 				}
 				if (action === "finish-polygon") this.finishPolygon();
 				if (action === "clear") {
 					this.sourceSaveTarget = null;
-					this.sourceFilename = "construction.txt";
 					this.setConstruction("");
 				}
 				if (action === "apply") {
@@ -1057,7 +1376,7 @@ export class TpGraphGeometry extends TpBase {
 		queueMicrotask(() => {
 			if (!this.isConnected) return;
 			for (const button of this.querySelectorAll<TpButton>(
-				"tp-button[data-geometry-control]",
+				"tp-button[data-geometry-control], tp-icon-button[data-geometry-control]",
 			)) {
 				const native =
 					button.querySelector<HTMLButtonElement>(":scope > button");
@@ -1065,12 +1384,15 @@ export class TpGraphGeometry extends TpBase {
 				// Explicitly include actions in sequential keyboard navigation.
 				native.tabIndex = native.disabled ? -1 : 0;
 				for (const name of [
+					"aria-keyshortcuts",
 					"aria-pressed",
 					"aria-label",
 					"aria-haspopup",
 					"aria-expanded",
 				]) {
 					const value = button.getAttribute(name);
+					if (name === "aria-label" && button.tagName === "TP-ICON-BUTTON")
+						continue;
 					if (value !== null) native.setAttribute(name, value);
 					else native.removeAttribute(name);
 				}
@@ -1080,12 +1402,55 @@ export class TpGraphGeometry extends TpBase {
 			}
 		});
 	}
+	private updateParameters(): void {
+		const visible: Record<string, boolean> = {
+			radius: ["circle", "fixedSegment"].includes(this.tool),
+			start: ["arc", "sector"].includes(this.tool),
+			end: ["arc", "sector"].includes(this.tool),
+			comment: this.tool === "comment",
+			ratio: this.tool === "homothety",
+			rotation: this.tool === "rotation",
+			sides: this.tool === "regularPolygon",
+		};
+		for (const field of this.querySelectorAll<HTMLElement>(
+			".tp-geometry-parameters [data-field]",
+		))
+			field.hidden = this.canvasOnly && !visible[field.dataset.field ?? ""];
+		const mode = this.querySelector<HTMLElement>("[data-transform-mode]");
+		if (mode)
+			mode.hidden =
+				this.canvasOnly &&
+				![
+					"axialSymmetry",
+					"centralSymmetry",
+					"homothety",
+					"rotation",
+					"translation",
+				].includes(this.tool);
+		const finish = this.querySelector<HTMLElement>(
+			'[data-action="finish-polygon"]',
+		);
+		if (finish) finish.hidden = this.canvasOnly && this.tool !== "polygon";
+		const note = this.querySelector<HTMLElement>(
+			".tp-geometry-parameters > span",
+		);
+		if (note)
+			note.hidden = this.canvasOnly && !["arc", "sector"].includes(this.tool);
+	}
 	private updateTool(): void {
 		for (const button of this.querySelectorAll("[data-tool]")) {
 			const active = (button as HTMLElement).dataset.tool === this.tool;
 			button.setAttribute("aria-pressed", String(active));
 			button.toggleAttribute("outlined", !active);
 		}
+		this.dataset.activeTool = this.tool;
+		this.updateParameters();
+		const callout = this.querySelector(".tp-geometry-hint");
+		callout?.setAttribute(
+			"heading",
+			{ ...TOOLS, ...BUILT_IN_TOOLS }[this.tool],
+		);
+		callout?.setAttribute("icon", this.tool);
 		const hint = this.querySelector("[data-hint]");
 		if (hint) hint.textContent = HINTS[this.tool];
 		this.report(

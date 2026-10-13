@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import type { TpCodeEditor } from "../code-editor/code-editor.js";
 import { TpXYPlot } from "./xy-plot.js";
 
 const source = `xyFunctionGraph
@@ -55,33 +56,30 @@ function field(
 }
 function edit(panel: HTMLElement, name: string, value: string): void {
 	const control = field(panel, name);
-	control.value = value;
+	if (control.tagName === "TP-CODE-EDITOR")
+		(control as TpCodeEditor).setValue(value);
+	else control.value = value;
 	control.dispatchEvent(new Event("input", { bubbles: true }));
 }
 function title(plot: TpXYPlot): string | undefined | null {
-	return plot.querySelector(".tp-xy-plot-preview > svg > text")?.textContent;
+	return plot.querySelector(".tp-xy-plot-toolbar [data-xy-label]")?.textContent;
 }
 
-it("adds settings only when requested and toggles a labelled panel", async () => {
+it("shows settings directly below the canvas only when requested", async () => {
 	const plot = await create(false);
-	expect(plot.querySelector(".tp-xy-plot-settings-button")).toBeNull();
-	plot.settings = true;
-	const button = plot.querySelector<HTMLButtonElement>(
-		".tp-xy-plot-settings-button > button",
-	);
-	expect(button?.getAttribute("aria-expanded")).toBe("false");
 	const panel = await open(plot);
-	expect(button?.getAttribute("aria-controls")).toBe(panel.id);
-	expect(button?.getAttribute("aria-expanded")).toBe("true");
-	expect(field(panel, "grid").value).toBe("2");
-	expect(field(panel, "functions").value).toContain("[0, 3]");
-	button?.click();
 	expect(panel.hidden).toBe(true);
-	button?.click();
+	plot.settings = true;
 	expect(panel.hidden).toBe(false);
-	plot.settings = false;
-	expect(plot.querySelector(".tp-xy-plot-settings")).toBeNull();
+	expect(field(panel, "grid").value).toBe("2");
+	expect((field(panel, "functions") as TpCodeEditor).getValue()).toContain(
+		"[0, 3]",
+	);
 	expect(plot.querySelector(".tp-xy-plot-settings-button")).toBeNull();
+	expect(panel.parentElement?.previousElementSibling?.tagName).toBe("DIALOG");
+	plot.settings = false;
+	expect(panel.hidden).toBe(true);
+	expect(plot.querySelector(".tp-xy-plot-definition")).not.toBeNull();
 });
 
 it("updates both plots without replacing controls and resets to the original definition", async () => {
@@ -92,7 +90,8 @@ it("updates both plots without replacing controls and resets to the original def
 	await vi.waitFor(() => expect(title(plot)).toBe("Changed"));
 	expect(field(panel, "title")).toBe(input);
 	expect(
-		plot.querySelector(".tp-xy-plot-dialog-content > svg > text")?.textContent,
+		plot.querySelector(".tp-xy-plot-dialog-header [data-xy-label]")
+			?.textContent,
 	).toBe("Changed");
 	edit(panel, "grid", "4");
 	await vi.waitFor(() =>
@@ -107,7 +106,9 @@ it("updates both plots without replacing controls and resets to the original def
 	panel.querySelector<HTMLElement>(".tp-xy-plot-settings-reset")?.click();
 	expect(title(plot)).toBe("Original");
 	expect(field(panel, "title").value).toBe("Original");
-	expect(field(panel, "functions").value).toContain("[0, 3]");
+	expect((field(panel, "functions") as TpCodeEditor).getValue()).toContain(
+		"[0, 3]",
+	);
 	expect(field(panel, "grid").value).toBe("2");
 });
 
@@ -117,17 +118,17 @@ it("retains the last valid drawing and recovers from invalid settings", async ()
 	const svg = plot.querySelector(".tp-xy-plot-preview")?.innerHTML;
 	edit(panel, "samples", "0");
 	await vi.waitFor(() =>
-		expect(panel.querySelector('[role="status"]')?.textContent).toContain(
-			"samples",
-		),
+		expect(
+			plot.querySelector('.tp-xy-plot-definition [role="status"]')?.textContent,
+		).toContain("samples"),
 	);
 	expect(plot.querySelector(".tp-xy-plot-preview")?.innerHTML).toBe(svg);
 	edit(panel, "samples", "64");
 	edit(panel, "x-axis", "[2, 2]");
 	await vi.waitFor(() =>
-		expect(panel.querySelector('[role="status"]')?.textContent).toContain(
-			"increasing",
-		),
+		expect(
+			plot.querySelector('.tp-xy-plot-definition [role="status"]')?.textContent,
+		).toContain("increasing"),
 	);
 	edit(panel, "x-axis", "[-2, 6]");
 	edit(panel, "title", "Recovered");
@@ -170,11 +171,7 @@ it("does not clear numeric data when settings changes", async () => {
 	document.body.append(plot);
 	plot.settings = true;
 	expect(title(plot)).toBe("Numeric");
-	expect(
-		plot.querySelector<HTMLButtonElement>(
-			".tp-xy-plot-settings-button > button",
-		)?.disabled,
-	).toBe(true);
+	expect(plot.querySelector(".tp-xy-plot-settings")).toBeNull();
 	plot.settings = false;
 	expect(title(plot)).toBe("Numeric");
 });
@@ -232,7 +229,9 @@ it("edits vectors alongside styled curves and allows removing all curves", async
 		expect(plot.querySelector(".tp-xy-plot-preview > svg > path")).toBeNull(),
 	);
 	expect(plot.querySelectorAll(".tp-md-xy-graph-vector")).toHaveLength(2);
-	expect(field(panel, "vectors").value).toContain('"dash-dot"');
+	expect((field(panel, "vectors") as TpCodeEditor).getValue()).toContain(
+		'"dash-dot"',
+	);
 	panel
 		.querySelector<HTMLButtonElement>(".tp-xy-plot-settings-reset > button")
 		?.click();

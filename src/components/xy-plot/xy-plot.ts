@@ -25,12 +25,20 @@
  * @summary CodeMirror-based code editor component.
  */
 /**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
  * @tp-dependency tp-icon-button
  * @summary Accessible icon button component.
  */
 /**
  * @tp-dependency tp-radio-list
  * @summary Transforms a list into a group of radio buttons.
+ */
+/**
+ * @tp-dependency tp-save-image
+ * @summary Downloads an anchored image as SVG, PNG or WebP.
  */
 /**
  * @tp-dependency tp-stack
@@ -41,6 +49,10 @@
  * @summary Single-line and automatically growing multiline text field.
  */
 /**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
+/**
  * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
  * @summary Shared parsers, games and rendering utilities.
  */
@@ -48,10 +60,12 @@
 
 import {
 	type AxisRange,
+	parseXYAnimation,
 	parseXYGraph,
 	renderXYGraphSvg,
 	type SampledCurve,
 	sampleXYGraph,
+	type XYAnimationStep,
 	type XYGraphDiagram,
 	type XYGrid,
 	type XYLineStyle,
@@ -61,7 +75,10 @@ import { TpDeclarativeTextSource } from "../../utilities/declarative-text-source
 import { TpBase } from "../base/base.js";
 import style from "./xy-plot.css?inline";
 import "../icon-button/icon-button.js";
+import "../save-image/save-image.js";
+import "../theme/theme.js";
 
+import type { TpCodeEditor } from "../code-editor/code-editor.js";
 import type { XYPlotSettings } from "./xy-plot-settings.js";
 
 let settingsId = 0;
@@ -104,15 +121,17 @@ function escapeHtml(value: string): string {
  * @attr {"both" | "horizontal" | "vertical" | "none"} grid = "both" - Visible grid directions; overrides the graph directive when present.
  * @attr {"both" | "horizontal" | "vertical" | "none"} axis = "both" - Visible axes and their ticks.
  * @attr {boolean} no-legend = false - Hides curve legends.
- * @attr {boolean} settings = false - Shows a button for editing the graph definition in a panel below the plot.
+ * @attr {string} label = "" - Title displayed at the left of the view toolbar.
+ * @cssprop --tp-plot-height Height of the normal plot including its top and bottom controls; settings remain below.
+ * @attr {boolean} settings = false - Shows interactive settings below the graph and its controls.
  * @example
- * <tp-xy-plot>
+ * <tp-xy-plot label="Functions">
  *   <script type="tp/xy-plot">
- *     xyFunctionGraph
- *       title "Functions"
- *       x-axis [-10,10]
- *       y-axis [-5,5]
- *       functions [["Sine", "2*sin(x)"], ["Line", "x/2"]]
+ *     label = "Functions"
+ *     x-axis = [-10, 10]
+ *     y-axis = [-5, 5]
+ *     curve Sine = function(x, 2*sin(x))
+ *     curve Line = function(x, x/2)
  *   </script>
  * </tp-xy-plot>
  */
@@ -121,7 +140,7 @@ export class TpXYPlot extends TpBase {
 	private data: TpXYPlotData | null = null;
 	/** Prevents an obsolete asynchronous source read from replacing new data. */
 	private revision = 0;
-	private animation: string[] = [];
+	private animation: XYAnimationStep[] = [];
 	/** Original bounds and samples remain unchanged by interactive zoom. */
 	private zoomDiagram: XYGraphDiagram | null = null;
 	private zoomCurves: SampledCurve[] | null = null;
@@ -142,18 +161,21 @@ export class TpXYPlot extends TpBase {
 		nextY: number;
 		viewBox: string;
 	} | null = null;
-	private animationOverride: string[] | null = null;
+	private animationOverride: XYAnimationStep[] | null = null;
 	private sourceGrid: XYGrid = "both";
 	private objectNames: Set<string> | null = null;
 	private animationStep = 0;
 	private currentSource: string | null = null;
 	private initialSource: string | null = null;
 	private settingsEditor: XYPlotSettings | null = null;
-	private settingsOpen = false;
+	private undoSources: string[] = [];
+	private redoSources: string[] = [];
+	private sourceHome: Element | null = null;
+	private sourceWasOpen = false;
 	private settingsRevision = 0;
 	private readonly settingsPanelId = `tp-xy-plot-settings-${++settingsId}`;
 
-	/** Whether the graph settings button is shown. @attr settings */
+	/** Whether interactive settings are shown below the graph. @attr settings */
 	public get settings(): boolean {
 		return this.hasAttribute("settings");
 	}
@@ -189,19 +211,28 @@ export class TpXYPlot extends TpBase {
 		this.toggleAttribute("no-legend", value);
 	}
 
-	/** Gets the comma-separated reveal order, or sets it and returns to the start. */
+	/** Gets reveal order (JSON for groups), or sets comma-separated names, JSON or step arrays. */
 	public anim(): string;
-	public anim(names: string): void;
-	public anim(names?: string): string | undefined {
-		if (names === undefined)
-			return (this.animationOverride ?? this.animation).join(",");
-		const list = names.trim()
-			? names.split(",").map((name) => name.trim())
-			: [];
-		if (list.some((name) => !name) || new Set(list).size !== list.length)
-			throw new Error("anim requires unique, nonempty names.");
+	public anim(names: string | XYAnimationStep[]): void;
+	public anim(names?: string | XYAnimationStep[]): string | undefined {
+		if (names === undefined) {
+			const sequence = this.animationOverride ?? this.animation;
+			return sequence.some(Array.isArray)
+				? JSON.stringify(sequence)
+				: sequence.join(",");
+		}
+		const list = parseXYAnimation(
+			typeof names === "string"
+				? names.trim().startsWith("[")
+					? JSON.parse(names)
+					: names.trim()
+						? names.split(",").map((name) => name.trim())
+						: []
+				: names,
+		);
+
 		if (this.objectNames) {
-			for (const name of list)
+			for (const name of list.flat())
 				if (!this.objectNames.has(name))
 					throw new Error(`Unknown anim object: ${name}`);
 		}
@@ -252,9 +283,22 @@ export class TpXYPlot extends TpBase {
 	}
 
 	public static get observedAttributes(): string[] {
-		return ["src", "settings", "grid", "axis", "no-legend"];
+		return ["src", "settings", "grid", "axis", "no-legend", "label"];
 	}
 
+	public get label(): string {
+		return this.getAttribute("label") ?? "";
+	}
+	public set label(value: string) {
+		this.setAttribute("label", value);
+	}
+	private syncLabel(): void {
+		for (const title of this.querySelectorAll<HTMLElement>("[data-xy-label]")) {
+			const text = this.label || this.zoomDiagram?.title || "";
+			title.textContent = text;
+			title.hidden = !text;
+		}
+	}
 	private readonly source = new TpDeclarativeTextSource(this, {
 		scriptTypes: ["tp/xy-plot"],
 		textContentFallback: true,
@@ -264,6 +308,7 @@ export class TpXYPlot extends TpBase {
 	protected override connectedCallback(): void {
 		super.connectedCallback();
 		this.classList.add("tp-xy-plot");
+		this.setAttribute("data-xy-export", this.settingsPanelId);
 		this.ensureGlobalStyle(STYLE_ID, style);
 		registerZoomButtons();
 		if (!this.data)
@@ -281,6 +326,10 @@ export class TpXYPlot extends TpBase {
 	}
 
 	protected attributeChangedCallback(name: string): void {
+		if (name === "label") {
+			this.syncLabel();
+			return;
+		}
 		if (["grid", "axis", "no-legend"].includes(name)) {
 			if (this.isConnected) this.syncPresentation();
 			return;
@@ -378,7 +427,7 @@ export class TpXYPlot extends TpBase {
 		curves: SampledCurve[] | null = null,
 	): string {
 		const svg = renderXYGraphSvg(
-			{ ...diagram, grid: "both" },
+			{ ...diagram, title: "", grid: "both" },
 			curves ?? sampleXYGraph(diagram),
 		);
 		this.zoomDiagram = diagram;
@@ -437,7 +486,7 @@ export class TpXYPlot extends TpBase {
 			grid: "both",
 		};
 		const svg = renderXYGraphSvg(
-			diagram,
+			{ ...diagram, title: "" },
 			this.zoomCurves ?? sampleXYGraph(diagram),
 		);
 		this.zoomLevel = level;
@@ -588,98 +637,99 @@ export class TpXYPlot extends TpBase {
 	}
 
 	private disposeSettings(): void {
+		this.restoreZoomSource();
 		this.settingsRevision++;
+		this.querySelector(".tp-xy-plot-definition")?.remove();
+		this.removeAttribute("data-source-open");
 		this.settingsEditor?.destroy();
 		this.settingsEditor = null;
-		this.settingsOpen = false;
+		this.undoSources = [];
+		this.redoSources = [];
 	}
 
 	private syncSettings(): void {
-		let toggle = this.querySelector<HTMLElement>(
-			":scope > .tp-xy-plot-toolbar > .tp-xy-plot-settings-button",
-		);
-		if (!this.settings) {
-			this.disposeSettings();
-			toggle?.remove();
-			return;
-		}
-		let toolbar = this.querySelector(":scope > .tp-xy-plot-toolbar");
-		if (!toolbar) {
-			toolbar = document.createElement("div");
-			toolbar.className = "tp-xy-plot-toolbar";
-			toolbar.setAttribute("data-xy-plot-output", "");
-			this.prepend(toolbar);
-		}
-		if (!toggle) {
-			toggle = document.createElement("tp-icon-button");
-			toggle.className = "tp-xy-plot-settings-button";
-			toggle.setAttribute("name", "settings");
-			toggle.setAttribute("library", "tp");
-			toggle.addEventListener("click", () => {
-				void this.toggleSettings();
-			});
-			toolbar.insertBefore(
-				toggle,
-				toolbar.querySelector(".tp-xy-plot-zoom-button"),
-			);
-		}
-		toggle.setAttribute(
-			"label",
-			this.data ? "Settings require a graph definition" : "Graph settings",
-		);
-		toggle.toggleAttribute(
-			"disabled",
-			this.data !== null || !this.currentSource,
-		);
-		const native = toggle.querySelector("button");
-		native?.setAttribute("aria-expanded", String(this.settingsOpen));
-		native?.setAttribute("aria-controls", this.settingsPanelId);
+		void this.ensureDefinition();
 		if (this.settingsEditor)
-			this.settingsEditor.element.hidden = !this.settingsOpen;
+			this.settingsEditor.element.hidden = !this.settings;
 	}
 
-	private async toggleSettings(): Promise<void> {
-		if (!this.settings || !this.currentSource || this.data) return;
-		this.settingsOpen = !this.settingsOpen;
-		this.syncSettings();
-		if (!this.settingsOpen || this.settingsEditor) return;
+	private applySource(source: string, remember = true): void {
+		const diagram = parseXYGraph(source);
+		const svg = this.initializeViewport(diagram);
+		if (remember && this.currentSource && source !== this.currentSource) {
+			this.undoSources.push(this.currentSource);
+			this.redoSources = [];
+		}
+		this.objectNames = new Set(
+			[
+				...diagram.functions,
+				...(diagram.points ?? []),
+				...(diagram.vectors ?? []),
+			].map((item) => item.label),
+		);
+		this.sourceGrid = diagram.grid ?? "both";
+		this.revision++;
+		this.currentSource = source;
+		this.commitSvg(svg, diagram.anim);
+	}
+
+	private navigateHistory(redo: boolean): void {
+		const from = redo ? this.redoSources : this.undoSources;
+		const to = redo ? this.undoSources : this.redoSources;
+		const source = from.at(-1);
+		if (source === undefined || !this.currentSource) return;
+		const current = this.currentSource;
+		this.applySource(source, false);
+		from.pop();
+		to.push(current);
+		this.settingsEditor?.initialize(source);
+		this.syncHistory();
+	}
+
+	private syncHistory(): void {
+		for (const button of this.querySelectorAll("[data-xy-history]")) {
+			button.toggleAttribute(
+				"disabled",
+				!(button.getAttribute("data-xy-history") === "redo"
+					? this.redoSources.length
+					: this.undoSources.length),
+			);
+		}
+	}
+	private async ensureDefinition(): Promise<void> {
+		if (!this.currentSource || this.data || this.settingsEditor) return;
 		const revision = this.settingsRevision;
 		try {
 			const { XYPlotSettings } = await import("./xy-plot-settings.js");
 			if (
 				revision !== this.settingsRevision ||
 				!this.isConnected ||
-				!this.settingsOpen ||
 				this.settingsEditor ||
 				!this.currentSource
 			)
 				return;
 			this.settingsEditor = new XYPlotSettings(
 				this.initialSource ?? this.currentSource,
-				(source) => {
-					const diagram = parseXYGraph(source);
-					this.objectNames = new Set(
-						[
-							...diagram.functions,
-							...(diagram.points ?? []),
-							...(diagram.vectors ?? []),
-						].map((item) => item.label),
-					);
-					this.sourceGrid = diagram.grid ?? "both";
-					const svg = this.initializeViewport(diagram);
-					this.revision++;
-					this.currentSource = source;
-					this.commitSvg(svg, diagram.anim);
-				},
+				(source) => this.applySource(source),
+				() => this.label,
 			);
 			this.settingsEditor.element.id = this.settingsPanelId;
-			this.append(this.settingsEditor.element);
+			this.append(this.settingsEditor.container);
 			this.settingsEditor.initialize(this.currentSource);
+			const definition =
+				this.settingsEditor.container.querySelector<HTMLDetailsElement>(
+					"details",
+				);
+			const slot = this.querySelector(
+				":scope > .tp-xy-plot-board > .tp-xy-plot-source",
+			);
+			if (definition && slot) {
+				definition.open = true;
+				this.moveDefinition(definition, slot);
+			}
 			this.syncSettings();
 		} catch (error) {
 			if (revision !== this.settingsRevision) return;
-			this.settingsOpen = false;
-			this.syncSettings();
 			const message = document.createElement("p");
 			message.setAttribute("role", "alert");
 			message.setAttribute("data-xy-plot-output", "");
@@ -689,34 +739,159 @@ export class TpXYPlot extends TpBase {
 		}
 	}
 
+	private async toggleZoomSource(): Promise<void> {
+		const dialog = this.querySelector<HTMLDialogElement>(".tp-xy-plot-dialog");
+		if (!dialog?.open) return;
+		if (this.sourceHome) {
+			this.restoreZoomSource();
+			return;
+		}
+		await this.ensureDefinition();
+		if (!dialog.open) return;
+		const definition = this.querySelector<HTMLDetailsElement>(
+			".tp-xy-plot-definition",
+		);
+		const slot = dialog.querySelector(".tp-xy-plot-dialog-source");
+		if (!definition || !slot) return;
+		this.sourceHome = definition.parentElement;
+		this.sourceWasOpen = definition.open;
+		definition.open = true;
+		this.moveDefinition(definition, slot);
+		dialog.setAttribute("data-source-open", "");
+		this.syncSourceToggle(true);
+	}
+	private moveDefinition(
+		definition: HTMLDetailsElement,
+		destination: Element,
+	): void {
+		const editor = definition.querySelector<TpCodeEditor>("tp-code-editor");
+		const draft = editor?.getValue();
+		destination.append(definition);
+		// Moving disconnects CodeMirror; restore live input rather than its initial source.
+		if (editor && draft !== undefined) editor.setValue(draft);
+	}
+	private async toggleSource(): Promise<void> {
+		await this.ensureDefinition();
+		if (!this.settingsEditor) return;
+		const open = this.toggleAttribute("data-source-open");
+		this.syncSourceToggle(open, false);
+	}
+	private syncSourceToggle(open: boolean, dialog = true): void {
+		const button = this.querySelector(
+			dialog
+				? ".tp-xy-plot-dialog [data-xy-source-toggle]"
+				: ":scope > .tp-xy-plot-board > .tp-xy-plot-footer [data-xy-source-toggle]",
+		);
+		button?.setAttribute("aria-pressed", String(open));
+		button?.setAttribute(
+			"label",
+			open ? "Show curves" : "Show graph definition",
+		);
+		button?.setAttribute(
+			"title",
+			open ? "Show curves" : "Show graph definition",
+		);
+	}
+	private restoreZoomSource(): void {
+		const definition = this.querySelector<HTMLDetailsElement>(
+			".tp-xy-plot-dialog-source > details",
+		);
+		if (definition && this.sourceHome) {
+			this.moveDefinition(definition, this.sourceHome);
+			definition.open = this.sourceWasOpen;
+		}
+		this.sourceHome = null;
+		this.querySelector(".tp-xy-plot-dialog")?.removeAttribute(
+			"data-source-open",
+		);
+		this.syncSourceToggle(false);
+	}
+	/** Exports the displayed graph with its current viewport, visibility and theme colors. */
+	public exportSvg(): string {
+		const svg = this.querySelector<SVGSVGElement>(".tp-xy-plot-preview > svg");
+		if (!svg) throw new Error("The graph is not ready.");
+		const clone = svg.cloneNode(true) as SVGSVGElement;
+		const originals = [svg, ...svg.querySelectorAll<SVGElement>("*")];
+		const copies = [clone, ...clone.querySelectorAll<SVGElement>("*")];
+		for (const [index, element] of originals.entries()) {
+			const copy = copies[index];
+			if (!copy) continue;
+			const style = getComputedStyle(element);
+			for (const property of [
+				"fill",
+				"stroke",
+				"stroke-width",
+				"stroke-dasharray",
+				"fill-opacity",
+				"stroke-opacity",
+				"opacity",
+				"display",
+				"visibility",
+				"font-family",
+				"font-size",
+				"font-weight",
+				"color",
+			]) {
+				const value = style.getPropertyValue(property);
+				if (value) copy.style.setProperty(property, value);
+			}
+		}
+		clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+		clone.removeAttribute("tabindex");
+		return new XMLSerializer().serializeToString(clone);
+	}
 	private commitSvg(
 		svg: string,
-		animation: string[] = [],
+		animation: XYAnimationStep[] = [],
 		preserveAnimation = false,
 	): void {
 		if (!preserveAnimation) {
 			this.animation = this.animationOverride ?? animation;
 			this.animationStep = 0;
 		}
-		if (!this.querySelector(":scope > .tp-xy-plot-preview")) {
+		if (
+			!this.querySelector(":scope > .tp-xy-plot-board > .tp-xy-plot-preview")
+		) {
+			const footer = `<tp-icon-button data-xy-source-toggle library="tp" name="code" label="Show graph definition" title="Show graph definition" aria-pressed="false"></tp-icon-button>
+ <tp-icon-button data-xy-history="undo" library="tp" name="undo" label="Undo" disabled></tp-icon-button>
+ <tp-icon-button data-xy-history="redo" library="tp" name="redo" label="Redo" disabled></tp-icon-button>
+ <tp-icon-button data-xy-zoom="out" name="minus" library="tp" label="Zoom out"></tp-icon-button>
+ <tp-icon-button data-xy-zoom="in" name="plus" library="tp" label="Zoom in"></tp-icon-button>`;
 			this.innerHTML = `
-<div class="tp-xy-plot-toolbar">
-  <tp-icon-button data-xy-zoom="in" name="plus" library="tp" label="Zoom in"></tp-icon-button>
-  <tp-icon-button data-xy-zoom="out" name="minus" library="tp" label="Zoom out"></tp-icon-button>
-  <tp-icon-button data-xy-zoom="reset" name="refresh" library="tp" label="Reset view"></tp-icon-button>
+<div class="tp-xy-plot-board"><div class="tp-xy-plot-toolbar"><strong data-xy-label hidden></strong>
+  <tp-save-image anchor='[data-xy-export="${this.settingsPanelId}"]' filename="graph"></tp-save-image><tp-theme anchor='[data-xy-export="${this.settingsPanelId}"]'></tp-theme>
   <tp-icon-button class="tp-xy-plot-zoom-button" name="zoom-out" library="tp" label="Zoom graph"></tp-icon-button>
 </div>
 <div class="tp-xy-plot-preview">${svg}</div>
+<div class="tp-xy-plot-source"></div>
+<div class="tp-xy-plot-footer">${footer}</div></div>
 <dialog class="tp-xy-plot-dialog" aria-label="Zoomed graph">
-  <form class="tp-xy-plot-dialog-header" method="dialog">
-  <tp-icon-button data-xy-zoom="in" name="plus" library="tp" label="Zoom in"></tp-icon-button>
-  <tp-icon-button data-xy-zoom="out" name="minus" library="tp" label="Zoom out"></tp-icon-button>
-  <tp-icon-button data-xy-zoom="reset" name="refresh" library="tp" label="Reset view"></tp-icon-button>
+  <form class="tp-xy-plot-dialog-header" method="dialog"><strong data-xy-label hidden></strong>
+  <tp-save-image anchor='[data-xy-export="${this.settingsPanelId}"]' filename="graph"></tp-save-image><tp-theme anchor='[data-xy-export="${this.settingsPanelId}"]'></tp-theme>
     <tp-icon-button type="submit" class="tp-xy-plot-close-button" name="zoom-in" library="tp" label="Close zoomed graph"></tp-icon-button>
   </form>
   <div class="tp-xy-plot-dialog-content">${svg}</div>
+ <div class="tp-xy-plot-dialog-source"></div>
+ <div class="tp-xy-plot-dialog-footer">${footer}</div>
 </dialog>
 `;
+			for (const button of this.querySelectorAll("[data-xy-source-toggle]")) {
+				button.addEventListener("click", () => {
+					if (button.hasAttribute("disabled")) return;
+					if (button.closest("dialog")) void this.toggleZoomSource();
+					else void this.toggleSource();
+				});
+			}
+			for (const button of this.querySelectorAll("[data-xy-history]")) {
+				button.addEventListener("click", () =>
+					this.navigateHistory(
+						button.getAttribute("data-xy-history") === "redo",
+					),
+				);
+			}
+			this.querySelector(".tp-xy-plot-dialog")?.addEventListener("close", () =>
+				this.restoreZoomSource(),
+			);
 			for (const button of this.querySelectorAll("[data-xy-zoom]")) {
 				button.addEventListener("click", () => {
 					if (button.hasAttribute("disabled")) return;
@@ -729,6 +904,11 @@ export class TpXYPlot extends TpBase {
 				});
 			}
 		}
+		this.syncLabel();
+		for (const button of this.querySelectorAll("[data-xy-source-toggle]")) {
+			button.toggleAttribute("disabled", !this.currentSource);
+		}
+		this.syncHistory();
 		for (const host of this.querySelectorAll<HTMLElement>(
 			".tp-xy-plot-preview, .tp-xy-plot-dialog-content",
 		)) {
@@ -743,7 +923,9 @@ export class TpXYPlot extends TpBase {
 							this.zoomLevel <= -12,
 			);
 		}
-		const preview = this.querySelector(":scope > .tp-xy-plot-preview");
+		const preview = this.querySelector(
+			":scope > .tp-xy-plot-board > .tp-xy-plot-preview",
+		);
 		const zoom = this.querySelector(
 			":scope > .tp-xy-plot-dialog > .tp-xy-plot-dialog-content",
 		);
@@ -820,12 +1002,12 @@ export class TpXYPlot extends TpBase {
 			});
 			controls.append(button);
 		}
-		this.querySelector(":scope > .tp-xy-plot-preview")?.after(controls);
+		this.querySelector(":scope > .tp-xy-plot-board")?.after(controls);
 		this.syncAnimation();
 	}
 
 	private syncAnimation(): void {
-		const hidden = new Set(this.animation.slice(this.animationStep));
+		const hidden = new Set(this.animation.slice(this.animationStep).flat());
 		for (const object of this.querySelectorAll<SVGElement>(
 			"[data-xy-object]",
 		)) {
@@ -854,7 +1036,7 @@ export class TpXYPlot extends TpBase {
 		const revision = ++this.revision;
 		try {
 			let svg: string;
-			let animation: string[] = [];
+			let animation: XYAnimationStep[] = [];
 			if (this.data) {
 				this.sourceGrid = "both";
 				svg = this.renderData(this.data);

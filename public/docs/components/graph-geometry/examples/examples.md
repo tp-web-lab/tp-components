@@ -29,8 +29,10 @@ Combine the attributes on one preview. Controls start at the published defaults.
 - file-unknown
 :::
 
-::: tp-cluster
+:::: tp-cluster
+::: tp-textfield { data-setting="label" label="label" value placeholder clearable }
 :::
+::::
 
 :::: tp-button-group
 ::: tp-button { id="attributes-reset" type="button" }
@@ -213,8 +215,21 @@ comment surface = area(c) color=orange
 ```
 
 ``` example {label="Interactive figure"}
-::: tp-graph-geometry { canvas-only grid src="/docs/components/graph-geometry/examples/circle.geometry" }
+::: tp-graph-geometry { label="Circle and attached points" canvas-only grid src="/docs/components/graph-geometry/examples/circle.geometry" }
 :::
+```
+
+``` example {label="Shared points and vectors"}
+Open the source and change A to (6, 2), then press Play. Vector u follows the two endpoints. The same source works in both plot components.
+
+:::: tp-graph-geometry { canvas-only style="--tp-plot-height:440px" }
+::: script { type="tp/geometry" }
+label = "Points and vectors"
+point O = (0, 0)
+point A = (3, 4)
+vector u = vector(O, A)
+:::
+::::
 ```
 ::::::
 :::::::

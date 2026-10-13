@@ -2,7 +2,7 @@
   position: relative;
   display: block;
   inline-size: min(100%, 900px);
-  margin-block: 0.25rem;
+  margin-block: 0;
   margin-inline: auto;
 }
 
@@ -112,4 +112,66 @@
 .tp-xy-plot-preview:focus-visible, .tp-xy-plot-dialog-content:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 2px;
+}
+
+.tp-xy-plot-toolbar, .tp-xy-plot-dialog-header { align-items:center; gap:.25rem; }
+.tp-xy-plot [data-xy-label] { margin-inline-end:auto; min-width:0; overflow-wrap:anywhere; }
+.tp-xy-plot [data-xy-label][hidden] { display:none; }
+.tp-xy-source-toolbar { display:flex; justify-content:space-between; align-items:center; gap:.5rem; margin-block:.5rem; }
+.tp-xy-source-actions { display:flex; align-items:center; gap:.25rem; }
+.tp-xy-plot-definition { min-width:0; }
+.tp-xy-plot-definition summary { cursor:pointer; }
+
+.tp-xy-plot-dialog-footer { display:flex; justify-content:flex-start; margin-block-start:.5rem; }
+.tp-xy-plot-dialog-source { display:none; min-width:0; }
+.tp-xy-plot-dialog[data-source-open] > .tp-xy-plot-dialog-content { display:none; }
+.tp-xy-plot-dialog[data-source-open] > .tp-xy-plot-dialog-source { display:block; }
+.tp-xy-plot-preview > svg, .tp-xy-plot-dialog-content > svg { color:var(--tp-text-body, CanvasText); }
+.tp-xy-plot-preview > svg > rect:first-child, .tp-xy-plot-dialog-content > svg > rect:first-child { fill:var(--tp-background-color, Canvas); }
+.tp-xy-plot-preview svg text:not([fill]), .tp-xy-plot-dialog-content svg text:not([fill]) { fill:var(--tp-text-body, CanvasText); }
+.tp-xy-plot [data-xy-grid] { stroke:var(--tp-neutral-stroke-soft, #ddd); }
+.tp-xy-plot line[data-xy-axis] { stroke:var(--tp-text-body, CanvasText); }
+.tp-xy-plot .tp-md-xy-graph-point { fill:var(--tp-text-body, CanvasText); stroke:var(--tp-background-color, Canvas); }
+.tp-xy-plot .tp-md-xy-graph-point-label { fill:var(--tp-text-body, CanvasText); }
+
+.tp-xy-plot-footer, .tp-xy-plot-dialog-footer { display:flex; align-items:center; gap:.25rem; }
+.tp-xy-plot [data-xy-source-toggle] { margin-inline-end:auto; }
+.tp-xy-plot-source { display:none; min-width:0; }
+.tp-xy-plot[data-source-open] > .tp-xy-plot-board > .tp-xy-plot-preview { display:none; }
+.tp-xy-plot[data-source-open] > .tp-xy-plot-board > .tp-xy-plot-source { display:block; }
+
+/* The optional height applies only to the normal drawing and its toolbars. */
+.tp-xy-plot-board {
+  display:flex;
+  flex-direction:column;
+  box-sizing:border-box;
+  block-size:var(--tp-plot-height, auto);
+  min-inline-size:0;
+  border:1px solid var(--tp-neutral-stroke-soft, #cdd9dc);
+  border-radius:12px;
+  overflow:hidden;
+  background:var(--tp-paper-color, Canvas);
+  color:var(--tp-text-body, CanvasText);
+}
+.tp-xy-plot-board > .tp-xy-plot-toolbar,
+.tp-xy-plot-board > .tp-xy-plot-footer { flex:none; }
+.tp-xy-plot-board > .tp-xy-plot-preview { flex:1 1 auto; min-block-size:0; }
+.tp-xy-plot-board > .tp-xy-plot-preview > svg { block-size:100%; }
+.tp-xy-plot-board > .tp-xy-plot-source { flex:1 1 auto; min-block-size:0; overflow:auto; }
+
+/* Match Geometry's spacing inside the frame. */
+.tp-xy-plot-board > .tp-xy-plot-toolbar {
+  gap:.5rem;
+  padding:.5rem;
+  min-height:2.5rem;
+  margin-block-end:0;
+}
+.tp-xy-plot-board > .tp-xy-plot-footer {
+  flex-wrap:wrap;
+  gap:5px;
+  padding:8px;
+}
+.tp-xy-plot-board > .tp-xy-plot-footer tp-icon-button {
+  --tp-icon-button-icon-size:24px;
+  --tp-icon-button-size:34px;
 }

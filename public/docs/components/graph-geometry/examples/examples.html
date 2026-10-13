@@ -12,7 +12,7 @@
       <tp-stack>
       <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>built-in</li><li>canvas-only</li><li>grid</li><li>readonly</li></ul></tp-checkbox-list>
       <tp-radio-list data-setting="src" label="src" label-position="top" orientation="horizontal" value="1"><ul><li>Default</li><li>file1</li><li>file2</li><li>file-unknown</li></ul></tp-radio-list>
-      <tp-cluster></tp-cluster>
+      <tp-cluster><tp-textfield data-setting="label" label="label" value="" placeholder="" clearable=""></tp-textfield></tp-cluster>
       <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
       </tp-stack>
       <tp-divider></tp-divider>
@@ -174,7 +174,19 @@
     </div>
 
     <div role="example" label="Interactive figure">
-      <tp-graph-geometry canvas-only grid src="/docs/components/graph-geometry/examples/circle.geometry"></tp-graph-geometry>
+      <tp-graph-geometry label="Circle and attached points" canvas-only="" grid="" src="/docs/components/graph-geometry/examples/circle.geometry"></tp-graph-geometry>
+    </div>
+
+    <div role="example" label="Shared points and vectors">
+      <p>Open the source and change A to (6, 2), then press Play. Vector u follows the two endpoints. The same source works in both plot components.</p>
+      <tp-graph-geometry canvas-only style="--tp-plot-height:440px">
+      <script type="tp/geometry">
+      label = "Points and vectors"
+      point O = (0, 0)
+      point A = (3, 4)
+      vector u = vector(O, A)
+      </script>
+      </tp-graph-geometry>
     </div>
   </template>
 </tp-html-viewer>

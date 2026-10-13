@@ -117,6 +117,34 @@ function number(text: string): number {
 	if (!Number.isFinite(value)) throw new Error("A number must be finite.");
 	return value;
 }
+/** Reads numeric angles; an omitted unit means radians. */
+function angleRadians(text: string): number {
+	const match = /^(.*?)(deg|rad|grad|turn)?$/.exec(text.trim());
+	const value = number(match?.[1] ?? "");
+	switch (match?.[2]) {
+		case "deg":
+			return rad(value);
+		case "grad":
+			return (value * Math.PI) / 200;
+		case "turn":
+			return value * TAU;
+		default:
+			return value;
+	}
+}
+function stripSourceComments(source: string): string {
+	return source.replace(
+		/"(?:[^"\\]|\\.)*"|#[^\r\n]*|<!--[\s\S]*?(?:-->|$)/g,
+		(token, offset: number) => {
+			if (token.startsWith('"')) return token;
+			if (token.startsWith("<!--") && !token.endsWith("-->"))
+				throw new Error(
+					`Line ${source.slice(0, offset).split("\n").length}: Unclosed source comment.`,
+				);
+			return token.replace(/[^\r\n]/g, " ");
+		},
+	);
+}
 function identifier(text: string): string {
 	if (!/^[A-Za-z][\w]*$/.test(text)) throw new Error(`Invalid name: ${text}`);
 	return text;
@@ -152,12 +180,10 @@ function parseGeometryCommands(source: string, depth = 0): GeometryObject[] {
 	if (depth > 64) throw new Error("Too many nested transformations.");
 	const objects: GeometryObject[] = [];
 	const ids = new Set<string>();
-	for (const [index, raw] of source.split("\n").entries()) {
-		const line = raw
-			.replace(/"(?:[^"\\]|\\.)*"|(#.*$)/g, (match, comment) =>
-				comment ? "" : match,
-			)
-			.trim();
+	for (const [index, raw] of stripSourceComments(source)
+		.split("\n")
+		.entries()) {
+		const line = raw.trim();
 		if (!line) continue;
 		try {
 			const match =
@@ -205,12 +231,9 @@ function parseGeometryCommands(source: string, depth = 0): GeometryObject[] {
 								: null;
 					named(2, option ? [option] : []);
 					const amount = option
-						? number(
-								(options.get(option) ?? "").replace(
-									operation === "rotation" ? /deg$/ : /$^/,
-									"",
-								),
-							)
+						? operation === "rotation"
+							? (angleRadians(options.get(option) ?? "") * 180) / Math.PI
+							: number(options.get(option) ?? "")
 						: 1;
 					if (operation === "homothety" && amount === 0)
 						throw new Error("The homothety ratio must be nonzero.");
@@ -242,7 +265,7 @@ function parseGeometryCommands(source: string, depth = 0): GeometryObject[] {
 						parameter:
 							angle === undefined
 								? number(options.get("t") ?? "")
-								: rad(number(angle.replace(/deg$/, ""))),
+								: angleRadians(angle),
 					};
 					// The selected parameter syntax also checks the referenced support below.
 					parameterKinds.set(
@@ -391,10 +414,8 @@ function parseGeometryCommands(source: string, depth = 0): GeometryObject[] {
 					definition = {
 						kind: type,
 						circle: identifier(a),
-						start: rad(
-							number((options.get("start") ?? "").replace(/deg$/, "")),
-						),
-						end: rad(number((options.get("end") ?? "").replace(/deg$/, ""))),
+						start: angleRadians(options.get("start") ?? ""),
+						end: angleRadians(options.get("end") ?? ""),
 						clockwise: direction === "cw",
 						...(options.has("relative-to")
 							? { relativeTo: identifier(options.get("relative-to") ?? "") }
@@ -434,9 +455,47 @@ function parseGeometryCommands(source: string, depth = 0): GeometryObject[] {
 	}
 	return objects;
 }
+/** Reads the optional quoted figure label (title is an alias). */
+export function geometrySourceLabel(source: string): string | undefined {
+	let label: string | undefined;
+	for (const [index, line] of stripSourceComments(source)
+		.split("\n")
+		.entries()) {
+		if (!/^\s*(?:label|title)\s*=/.test(line)) continue;
+		if (label !== undefined)
+			throw new Error(`Line ${index + 1}: Duplicate figure label.`);
+		const text = line.slice(line.indexOf("=") + 1).trim();
+		try {
+			const value: unknown = JSON.parse(text);
+			if (typeof value !== "string") throw new Error("Expected text");
+			label = value;
+		} catch {
+			throw new Error(`Line ${index + 1}: Use label = "Figure title".`);
+		}
+	}
+	return label;
+}
+/** Adds or updates figure metadata without changing commands or draft comments. */
+export function withGeometryLabel(source: string, label: string): string {
+	geometrySourceLabel(source);
+	const clean = stripSourceComments(source);
+	const match = /^\s*(?:label|title)\s*=\s*"(?:[^"\\]|\\.)*"/m.exec(clean);
+	const declaration = `label = ${JSON.stringify(label)}`;
+	if (match) {
+		const start = match.index + match[0].search(/(?:label|title)\s*=/);
+		const end = match.index + match[0].length;
+		return source.slice(0, start) + declaration + source.slice(end);
+	}
+	return label ? `${declaration}\n${source}` : source;
+}
 /** Parses construction commands and validates their dependency graph. */
 export function parseGeometry(source: string): GeometryObject[] {
-	const objects = parseGeometryCommands(source);
+	geometrySourceLabel(source);
+	const commands = stripSourceComments(source)
+		.split("\n")
+		.map((line) => (/^\s*(?:label|title)\s*=/.test(line) ? "" : line))
+		.join("\n");
+	const objects = parseGeometryCommands(commands);
 	const byId = new Map(objects.map((o) => [o.id, o]));
 	const visiting = new Set<string>();
 	const visited = new Set<string>();

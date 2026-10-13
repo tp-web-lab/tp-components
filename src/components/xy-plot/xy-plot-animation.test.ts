@@ -78,3 +78,63 @@ it("reveals objects and legends in order in both views, with reversible steps an
 it.each(["", "anim []"])("omits controls for %s", async (anim) => {
 	expect((await mount(anim)).querySelector(".tp-xy-plot-animation")).toBeNull();
 });
+
+it("reveals and hides a group atomically in both views and counts groups as steps", async () => {
+	const plot = await mount('anim = ["A", ["u", "Curve"]]');
+	const visible = (name: string) =>
+		[...plot.querySelectorAll<SVGElement>(`[data-xy-object="${name}"]`)].every(
+			(e) => e.style.visibility === "visible",
+		);
+	const hidden = (name: string) =>
+		[...plot.querySelectorAll<SVGElement>(`[data-xy-object="${name}"]`)].every(
+			(e) => e.style.visibility === "hidden",
+		);
+	const status = () =>
+		plot.querySelector('.tp-xy-plot-animation [role="status"]')?.textContent;
+	expect(status()).toBe("0 / 2");
+	plot.next();
+	expect(visible("A")).toBe(true);
+	expect(hidden("u")).toBe(true);
+	expect(hidden("Curve")).toBe(true);
+	plot.next();
+	expect(status()).toBe("2 / 2");
+	expect(visible("u")).toBe(true);
+	expect(visible("Curve")).toBe(true);
+	plot.querySelector<HTMLElement>('[data-xy-zoom="in"]')?.click();
+	expect(status()).toBe("2 / 2");
+	expect(visible("Curve")).toBe(true);
+	plot.previous();
+	expect(status()).toBe("1 / 2");
+	expect(hidden("u")).toBe(true);
+	expect(hidden("Curve")).toBe(true);
+	plot.goToEnd();
+	expect(visible("u")).toBe(true);
+	plot.goToStart();
+	expect(hidden("A")).toBe(true);
+	expect(hidden("u")).toBe(true);
+	expect(plot.anim()).toBe('["A",["u","Curve"]]');
+	plot.anim(plot.anim());
+	expect(status()).toBe("0 / 2");
+	const sequence: (string | string[])[] = [["A", "Curve"], "u"];
+	plot.anim(sequence);
+	(sequence[0] as string[]).push("Missing");
+	expect(plot.anim()).toBe('[["A","Curve"],"u"]');
+	plot.anim("A,u");
+	expect(plot.anim()).toBe("A,u");
+});
+it.each([
+	"[[]]",
+	'[["A", "A"]]',
+	'["A", ["A", "u"]]',
+	'[[["A"]]]',
+	'[["Missing"]]',
+	'[[""]]',
+	"[[1]]",
+])("rejects invalid animation groups %s", (value) => {
+	expect(() => parseXYGraph(`${source}\nanim = ${value}`)).toThrow();
+});
+it("parses multiline grouped animation without losing its structure", () => {
+	expect(
+		parseXYGraph(`${source}\nanim = [\n"A",\n["u", "Curve"]\n]`).anim,
+	).toEqual(["A", ["u", "Curve"]]);
+});

@@ -4,15 +4,15 @@
 ----
 .Basic usage
 ======
-[tp-xy-plot]
+[tp-xy-plot,label="Functions"]
 =====
 [script,type="tp/xy-plot"]
 ====
-xyFunctionGraph
-  title "Functions"
-  x-axis [-10,10]
-  y-axis [-5,5]
-  functions [["Sine", "2*sin(x)"], ["Line", "x/2"]]
+label = "Functions"
+x-axis = [-10, 10]
+y-axis = [-5, 5]
+curve Sine = function(x, 2*sin(x))
+curve Line = function(x, x/2)
 ====
 =====
 ======
@@ -64,8 +64,11 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ====
 
 [tp-cluster]
+=====
+[tp-textfield%value%placeholder%clearable,data-setting="label",label="label"]
 ====
 ====
+=====
 
 [tp-button-group]
 =====
@@ -108,26 +111,26 @@ File-loading attributes offer only Default, file1, file2 and file-unknown. The t
 
 .Author directives
 ======
-Open Graph settings below the graph to edit its definition. Try the grid, axis positions, curves and points, then use Reset to restore the original graph.
+Use the settings below the graph. Use the bottom-left Code button (also available without settings) to find the editable source, the .txt file menu, F1, Reset definition and Play.
 
-[tp-xy-plot%settings]
+[tp-xy-plot%settings,label="Editable graph"]
 =====
 [script,type="tp/xy-plot"]
 ====
-xyFunctionGraph
-  title "Editable graph"
-  legend-x "x"
-  legend-y "f(x)"
-  x-axis [-4, 6]
-  y-axis [-2, 10]
-  x-ticks [-4, -2, 0, 2, 4, 6]
-  y-ticks [-2, 0, 2, 4, 6, 8, 10]
-  grid both
-  x-axis-at 0
-  y-axis-at 0
-  samples 256
-  functions [["Parabola", "x*x", [-2, 3]], ["Line", "x+1"]]
-  points [["A", 2, 4, 10, -10]]
+label = "Editable graph"
+legend-x = "x"
+legend-y = "f(x)"
+x-axis = [-4, 6]
+y-axis = [-2, 10]
+x-ticks = [-4, -2, 0, 2, 4, 6]
+y-ticks = [-2, 0, 2, 4, 6, 8, 10]
+grid = both
+x-axis-at = 0
+y-axis-at = 0
+samples = 256
+curve Parabola = function(x, x*x, range=[-2, 3])
+curve Line = function(x, x+1)
+point A = (2, 4)
 ====
 =====
 ======
@@ -193,36 +196,43 @@ render();
 
 .Line styles and vectors
 ======
-Compare the four curve styles and their legend samples. Open Graph settings to change styles or the vector components.
+Compare the four curve styles and their legend samples. Use the settings below the graph to change styles or the vector endpoints.
 
 [tp-xy-plot%settings]
 =====
 [script,type="tp/xy-plot"]
 ====
-xyFunctionGraph
- title "Line styles and a vector"
- x-axis [-4, 4]
- y-axis [-4, 4]
- functions [["Solid", "sin(x)+2", "solid"], ["Dashed", "sin(x)", "dashed"], ["Dotted", "sin(x)-2", "dotted"], ["Dash-dot", "x/2", "dash-dot", [-3, 3]]]
- vectors [["u", -2, -3, 3, 2]]
+label = "Line styles and a vector"
+x-axis = [-4, 4]
+y-axis = [-4, 4]
+curve Solid = function(x, sin(x)+2) style=solid
+curve Dashed = function(x, sin(x)) style=dashed
+curve Dotted = function(x, sin(x)-2) style=dotted
+curve DashDot = function(x, x/2, range=[-3, 3]) style=dash-dot
+point A = (-2, -3)
+point B = (1, -1)
+vector u = vector(A, B)
 ====
 =====
 ======
 
 .Vectors only
 ======
-The vectors u and v are successive displacements; w is their resultant. Open Graph settings to change an origin or a component.
+The vectors u and v are successive displacements; w is their resultant. Use the settings below the graph to move an endpoint.
 
 [tp-xy-plot%settings]
 =====
 [script,type="tp/xy-plot"]
 ====
-xyFunctionGraph
- title "Vector addition"
- x-axis [-1, 5]
- y-axis [-1, 5]
- vectors [["u", 0, 0, 3, 1], ["v", 3, 1, -1, 3, "dashed"], ["w", 0, 0, 2, 4, "dotted"]]
- points [["O", 0, 0]]
+label = "Vector addition"
+x-axis = [-1, 5]
+y-axis = [-1, 5]
+point O = (0, 0)
+point A = (3, 1)
+point B = (2, 4)
+vector u = vector(O, A)
+vector v = vector(A, B)
+vector w = vector(O, B)
 ====
 =====
 ======
@@ -233,14 +243,80 @@ xyFunctionGraph
 =====
 [script,type="tp/xy-plot"]
 ====
-xyFunctionGraph
-  title "Step-by-step reveal"
-  x-axis [-2, 4]
-  y-axis [-2, 6]
-  functions [["Reference", "x", "dotted"], ["Parabola", "x*x"]]
-  points [["A", 1, 1]]
-  vectors [["u", 1, 1, 1, 2]]
-  anim ["A", "u", "Parabola"]
+label = "Step-by-step reveal"
+x-axis = [-2, 4]
+y-axis = [-2, 6]
+curve Reference = function(x, x) style=dotted
+curve f1 = function(x, x*x)
+curve f2 = function(x, 2*x)
+point A = (1, 1)
+point B = (2, 3)
+vector u = vector(A, B)
+anim = ["A", ["f1", "f2"], "B", "u"]
+====
+=====
+======
+
+.Shared points and vectors
+======
+Open the source and change A to (6, 2), then press Play. Vector u follows the two endpoints. The point, vector and title declarations also work in Geometry. Axis and sampling assignments are specific to XY plot.
+
+[tp-xy-plot%settings,style="--tp-plot-height:440px"]
+=====
+[script,type="tp/xy-plot"]
+====
+label = "Points and vectors"
+x-axis = [-2, 8]
+y-axis = [-2, 6]
+x-ticks = [-2, 0, 2, 4, 6, 8]
+y-ticks = [-2, 0, 2, 4, 6]
+legend-x = "x"
+legend-y = "y"
+x-axis-at = 0
+y-axis-at = 0
+grid = both
+samples = 128
+point O = (0, 0)
+point A = (3, 4)
+vector u = vector(O, A)
+====
+=====
+======
+
+.Named curves
+======
+Open Code to edit a named curve and press Play. Change its expression, range or style; the settings retain the declaration. Each graph uses its own coordinate kind.
+
+[tp-xy-plot%settings,style="--tp-plot-height:440px"]
+=====
+[script,type="tp/xy-plot"]
+====
+label = "Cartesian curve"
+x-axis = [-4, 4]
+y-axis = [-2, 2]
+curve f = function(x, sin(x), range=[-PI, PI]) style=dashed
+====
+=====
+
+[tp-xy-plot,style="--tp-plot-height:440px"]
+=====
+[script,type="tp/xy-plot"]
+====
+label = "Polar rose"
+x-axis = [-3, 3]
+y-axis = [-3, 3]
+curve r = polar(t, 2*cos(3*t), range=[0, 2*PI])
+====
+=====
+
+[tp-xy-plot,style="--tp-plot-height:440px"]
+=====
+[script,type="tp/xy-plot"]
+====
+label = "Parametric ellipse"
+x-axis = [-3, 3]
+y-axis = [-3, 3]
+curve c = parametric(t, 2*cos(t), sin(t), range=[0, 2*PI]) style=dotted
 ====
 =====
 ======

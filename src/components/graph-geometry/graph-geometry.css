@@ -12,7 +12,7 @@ tp-graph-geometry { display:block; color:var(--tp-text-body, CanvasText); border
 .tp-geometry-board { display:flex; flex-direction:column; min-width:0; background:var(--tp-background-color, Canvas); }
 .tp-geometry-canvas { position:relative; flex:1 0 auto; min-height:320px; }
 .tp-geometry-canvas::before { content:""; display:block; padding-top:62.222222%; }
-.tp-geometry-board svg { position:absolute; inset:0; display:block; width:100%; height:100%; touch-action:none; }
+.tp-geometry-canvas > svg { position:absolute; inset:0; display:block; width:100%; height:100%; touch-action:none; }
 .tp-geometry-view { display:flex; flex-wrap:wrap; align-items:center; gap:5px; padding:8px; }
 .tp-geometry-workspace aside { padding:12px; border-left:1px solid var(--tp-neutral-stroke-soft, #dbe4e6); }
 .tp-geometry-workspace h3 { font-size:.85rem; margin:0 0 12px; }
@@ -75,8 +75,68 @@ tp-graph-geometry[canvas-only] > .tp-geometry-tools,
 tp-graph-geometry[canvas-only] > .tp-geometry-parameters,
 tp-graph-geometry[canvas-only] > .tp-geometry-hint,
 tp-graph-geometry[canvas-only] > .tp-geometry-source,
-tp-graph-geometry[canvas-only] > .tp-geometry-workspace > aside,
-tp-graph-geometry[canvas-only] .tp-geometry-view { display:none; }
+tp-graph-geometry[canvas-only] > .tp-geometry-workspace > aside { display:none; }
 tp-graph-geometry[canvas-only] > .tp-geometry-workspace { grid-template-columns:minmax(0,1fr); border:0; }
-tp-graph-geometry[canvas-only] .tp-geometry-theme { position:absolute; inset-block-start:8px; inset-inline-end:8px; z-index:2; }
+
 tp-graph-geometry[canvas-only] > [data-status] { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); padding:0; min-height:0; }
+
+.tp-geometry-board { position:relative; }
+.tp-geometry-board-heading { display:flex; align-items:center; justify-content:space-between; gap:.5rem; padding:.5rem; min-height:2.5rem; }
+.tp-geometry-board-heading strong { overflow-wrap:anywhere; }
+.tp-geometry-board-actions { display:flex; align-items:center; gap:.3rem; margin-inline-start:auto; }
+.tp-geometry-view { justify-content:flex-end; }
+.tp-geometry-tools tp-icon-button, .tp-geometry-view tp-icon-button { --tp-icon-button-icon-size:24px; --tp-icon-button-size:34px; }
+.tp-geometry-tools tp-icon-button[aria-pressed="true"], .tp-geometry-view tp-icon-button[aria-pressed="true"] { background:var(--tp-brand-fill-loud); color:var(--tp-brand-text-on-loud); border-radius:.3rem; }
+/* Dropdown positioning sets inline overflow/height; retain scrolling at our tighter cap. */
+[data-tool-palette] { max-height:var(--tp-geometry-palette-height, min(65vh,32rem)) !important; max-block-size:var(--tp-geometry-palette-height, min(65vh,32rem)) !important; overflow-y:auto !important; overflow-x:hidden; overscroll-behavior:contain; min-width:18rem; }
+[data-tool-palette] > ul { overflow:visible; }
+.tp-geometry-tools > tp-divider { min-height:24px; align-self:center; }
+.tp-geometry-board-heading > [data-figure-title] { margin-inline-end:auto; min-width:0; }
+.tp-geometry-board-actions { flex-shrink:0; }
+[data-tool-palette] li:not([data-tp-dropdown-divider]) { display:flex; align-items:center; gap:.6rem; }
+[data-tool-palette] tp-icon { width:24px; height:24px; }
+[data-tool-palette] kbd { margin-inline-start:auto; font-size:.8em; }
+.tp-geometry-context { padding-bottom:.5rem; }
+tp-graph-geometry[canvas-only][data-active-tool="move"] .tp-geometry-context,
+tp-graph-geometry[canvas-only][data-active-tool="pan"] .tp-geometry-context { display:none; }
+.tp-geometry-dialog { width:94vw; max-width:94vw; height:92vh; max-height:92vh; padding:0; border:1px solid var(--tp-neutral-stroke-soft); background:var(--tp-background-color); color:var(--tp-text-body); border-radius:.75rem; }
+.tp-geometry-dialog::backdrop { background:#0008; }
+.tp-geometry-dialog > .tp-geometry-board { min-height:100%; }
+
+.tp-geometry-parameters > [hidden] { display:none; }
+.tp-geometry-dialog .tp-geometry-canvas::before { display:none; }
+.tp-geometry-dialog > .tp-geometry-board { height:100%; }
+
+.tp-geometry-source-toolbar { display:flex; justify-content:space-between; align-items:center; gap:.5rem; margin-bottom:.5rem; }
+.tp-geometry-source-actions { display:flex; align-items:center; gap:.25rem; }
+
+.tp-geometry-view > [data-action="source-view"] { display:none; margin-inline-end:auto; }
+tp-graph-geometry[canvas-only] .tp-geometry-view > [data-action="source-view"] { display:inline-flex; }
+.tp-geometry-board > .tp-geometry-source { display:none; min-width:0; }
+.tp-geometry-board[data-source-open] > .tp-geometry-source { display:block; }
+.tp-geometry-board[data-source-open] > .tp-geometry-canvas,
+.tp-geometry-board[data-source-open] > .tp-geometry-context { display:none; }
+.tp-geometry-dialog .tp-geometry-board[data-source-open] { height:auto; }
+
+/* Keep the dialog independent from the card's requested height. */
+tp-graph-geometry > .tp-geometry-workspace > .tp-geometry-board {
+  block-size:calc(var(--tp-plot-height, auto) - 2px);
+  min-block-size:0;
+}
+.tp-geometry-workspace > .tp-geometry-board > .tp-geometry-canvas {
+  flex:1 1 auto;
+  min-height:0;
+  overflow:hidden;
+}
+.tp-geometry-workspace > .tp-geometry-board > .tp-geometry-canvas::before {
+  box-sizing:border-box;
+  height:0;
+  min-height:320px;
+}
+.tp-geometry-workspace > .tp-geometry-board > .tp-geometry-board-heading,
+.tp-geometry-workspace > .tp-geometry-board > .tp-geometry-view { flex:none; }
+.tp-geometry-workspace > .tp-geometry-board > .tp-geometry-source {
+  flex:1 1 auto;
+  min-height:0;
+  overflow:auto;
+}

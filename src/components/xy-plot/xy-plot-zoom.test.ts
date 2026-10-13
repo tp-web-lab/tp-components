@@ -15,8 +15,18 @@ async function plot(extra = ""): Promise<TpXYPlot> {
 	return element;
 }
 function click(element: TpXYPlot, direction: string, dialog = false): void {
+	if (direction === "reset") {
+		element
+			.querySelector(
+				dialog ? ".tp-xy-plot-dialog-content" : ".tp-xy-plot-preview",
+			)
+			?.dispatchEvent(
+				new KeyboardEvent("keydown", { key: "Home", bubbles: true }),
+			);
+		return;
+	}
 	const button = element.querySelector<HTMLButtonElement>(
-		`${dialog ? ".tp-xy-plot-dialog-header" : ".tp-xy-plot-toolbar"} [data-xy-zoom="${direction}"] button`,
+		`${dialog ? ".tp-xy-plot-dialog-footer" : ".tp-xy-plot-footer"} [data-xy-zoom="${direction}"] button`,
 	);
 	if (!button) throw new Error("Missing zoom control");
 	button.click();
@@ -62,7 +72,7 @@ describe("dynamic XY zoom", () => {
 		expect(enlarged?.outerHTML).toBe(preview?.outerHTML);
 		expect(
 			element.querySelector<HTMLButtonElement>(
-				".tp-xy-plot-dialog-header [data-xy-zoom] button",
+				".tp-xy-plot-dialog-footer [data-xy-zoom] button",
 			)?.type,
 		).toBe("button");
 		click(element, "out", true);
