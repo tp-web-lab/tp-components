@@ -1,3 +1,5 @@
+/** @module scripts/generate-markup-languages-quality-report */
+
 /**
  * Generates the markup languages family quality report from its configuration and saved coverage
  * summaries.

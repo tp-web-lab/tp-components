@@ -1,3 +1,5 @@
+/** @module scripts/sync-inline-icon-examples */
+
 /**
  * Migrates empty icon blocks to native inline icons in Markdown, AsciiDoc and reStructuredText
  * examples.

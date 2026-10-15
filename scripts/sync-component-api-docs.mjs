@@ -1,3 +1,5 @@
+/** @module scripts/sync-component-api-docs */
+
 /**
  * Synchronizes generated API and Imports sections in component documentation from published JSON
  * manifests.

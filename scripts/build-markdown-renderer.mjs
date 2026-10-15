@@ -1,3 +1,5 @@
+/** @module scripts/build-markdown-renderer */
+
 /**
  * Bundles the Markdown source renderer for Node.js into dist/renderers/markdown.js.
  *

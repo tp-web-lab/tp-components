@@ -1,3 +1,5 @@
+/** @module scripts/sync-textfield-examples */
+
 /**
  * Regenerates the textfield grouped Attributes example while preserving Basic usage and
  * complementary examples.

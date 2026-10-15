@@ -1,3 +1,5 @@
+/** @module scripts/grouped-attribute-examples */
+
 /**
  * Builds grouped Attributes panels from component manifests and writes their runtime modules and
  * resource fixtures.

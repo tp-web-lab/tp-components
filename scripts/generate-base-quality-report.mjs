@@ -1,3 +1,5 @@
+/** @module scripts/generate-base-quality-report */
+
 /**
  * Generates the base family quality report from its configuration and saved coverage summaries.
  *

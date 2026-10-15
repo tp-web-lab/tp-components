@@ -1,3 +1,5 @@
+/** @module scripts/sync-component-doc-usage */
+
 /**
  * Synchronizes the User interactions and Author directives subsections of component
  * documentation.

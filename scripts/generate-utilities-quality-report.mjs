@@ -1,3 +1,5 @@
+/** @module scripts/generate-utilities-quality-report */
+
 /**
  * Generates the utilities family quality report from its configuration and saved coverage
  * summaries.

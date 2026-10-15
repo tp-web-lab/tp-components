@@ -1,3 +1,5 @@
+/** @module scripts/generate-pickers-quality-report */
+
 /**
  * Generates the pickers family quality report from its configuration and saved coverage
  * summaries.

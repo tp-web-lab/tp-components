@@ -1,3 +1,5 @@
+/** @module scripts/component-example-descriptions */
+
 /**
  * Provides curated English descriptions for component example titles and rejects unknown
  * examples.

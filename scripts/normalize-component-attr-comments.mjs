@@ -1,3 +1,5 @@
+/** @module scripts/normalize-component-attr-comments */
+
 /**
  * Rewrites component attribute JSDoc declarations into the standard type, default and
  * description format.

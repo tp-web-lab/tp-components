@@ -1,3 +1,5 @@
+/** @module scripts/generate-viewers-quality-report */
+
 /**
  * Generates the viewers family quality report from its configuration and saved coverage
  * summaries.

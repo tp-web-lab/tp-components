@@ -1,3 +1,5 @@
+/** @module scripts/build-example-manifests */
+
 /**
  * Generates index.json catalogues and .files.json file lists for examples beneath
  * public/examples that already contain project.json.

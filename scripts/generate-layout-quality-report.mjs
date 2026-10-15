@@ -1,3 +1,5 @@
+/** @module scripts/generate-layout-quality-report */
+
 /**
  * Generates the layout family quality report from its configuration and saved coverage
  * summaries.

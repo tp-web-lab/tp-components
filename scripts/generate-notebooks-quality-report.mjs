@@ -1,3 +1,5 @@
+/** @module scripts/generate-notebooks-quality-report */
+
 /**
  * Generates the notebooks family quality report from its configuration and saved coverage
  * summaries.

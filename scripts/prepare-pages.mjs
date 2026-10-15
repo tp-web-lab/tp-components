@@ -1,3 +1,5 @@
+/** @module scripts/prepare-pages */
+
 /**
  * Recreates .pages from dist, rewrites local URLs for a deployment base and removes source maps.
  *

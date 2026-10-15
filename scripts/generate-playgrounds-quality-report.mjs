@@ -1,3 +1,5 @@
+/** @module scripts/generate-playgrounds-quality-report */
+
 /**
  * Generates the playgrounds family quality report from its configuration and saved coverage
  * summaries.

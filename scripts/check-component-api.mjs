@@ -1,3 +1,5 @@
+/** @module scripts/check-component-api */
+
 /**
  * Checks public attributes, methods, events and CSS properties for consistency across component
  * sources, JSON manifests and documentation.

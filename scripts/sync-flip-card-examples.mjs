@@ -1,3 +1,5 @@
+/** @module scripts/sync-flip-card-examples */
+
 /**
  * Rebuilds flip-card examples in four languages, standardizes their structure and updates the
  * live introduction.

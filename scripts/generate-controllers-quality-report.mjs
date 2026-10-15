@@ -1,3 +1,5 @@
+/** @module scripts/generate-controllers-quality-report */
+
 /**
  * Generates the controllers family quality report from its configuration and saved coverage
  * summaries.

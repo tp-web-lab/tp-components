@@ -1,3 +1,5 @@
+/** @module scripts/component-doc-imports */
+
 /**
  * Builds and synchronizes the standard Imports section with script, ES-module and bundler
  * examples.

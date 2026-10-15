@@ -1,3 +1,5 @@
+/** @module scripts/test-a11y-component */
+
 /**
  * Runs Playwright accessibility checks for one component's HTML examples.
  *

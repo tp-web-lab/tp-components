@@ -1,3 +1,5 @@
+/** @module scripts/accessibility-playwright-reporter */
+
 /**
  * Collects Playwright accessibility attachments, saves browser and run results in config, and
  * refreshes the accessibility appendix.
@@ -52,11 +54,11 @@ export default class AccessibilityReporter {
     const selectedComponents = process.env.TP_A11Y_COMPONENTS === undefined
       ? [...expectedComponentNames] : JSON.parse(process.env.TP_A11Y_COMPONENTS).map(name => `tp-${name}`);
     mkdirSync(join(root, 'config'), { recursive: true });
-    writeFileSync(join(root, 'config/accessibility-run-results.json'), JSON.stringify({
+    writeFileSync(join(root, 'config/accessibility-run-results.json'), `${JSON.stringify({
       generatedAt: new Date().toISOString(), selectedComponents, scans,
       expectedScans: selectedComponents.length * 3,
       full: selectedComponents.length === expectedComponents,
-    }, null, 2) + '\n');
+    }, null, 2)}\n`);
     if (scans.length < expectedComponents * 3) return;
 
     const browsers = ['chromium', 'firefox', 'webkit'].map((browser) => {

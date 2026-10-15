@@ -1,3 +1,5 @@
+/** @module scripts/sync-component-dependencies */
+
 /**
  * Synchronizes internal dependencies and external credits across component sources, JSON
  * manifests and documentation.

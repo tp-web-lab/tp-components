@@ -1,3 +1,5 @@
+/** @module scripts/check-release */
+
 /**
  * Validates package entry points, type declarations, release documents and lazy production
  * dependencies.

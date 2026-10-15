@@ -1,3 +1,5 @@
+/** @module scripts/generate-quizzes-quality-report */
+
 /**
  * Generates the quizzes family quality report from its configuration and saved coverage
  * summaries.

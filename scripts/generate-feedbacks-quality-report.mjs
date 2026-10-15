@@ -1,3 +1,5 @@
+/** @module scripts/generate-feedbacks-quality-report */
+
 /**
  * Generates the feedbacks family quality report from its configuration and saved coverage
  * summaries.

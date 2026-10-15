@@ -1,3 +1,5 @@
+/** @module scripts/check-component-attributes */
+
 /**
  * Checks that component attribute metadata declares a type, default and description, and
  * validates source comment conventions.

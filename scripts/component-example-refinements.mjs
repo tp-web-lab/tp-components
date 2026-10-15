@@ -1,3 +1,5 @@
+/** @module scripts/component-example-refinements */
+
 /**
  * Exports curated replacements for generic complementary examples used by the refinement
  * generator.

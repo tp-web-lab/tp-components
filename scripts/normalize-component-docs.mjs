@@ -1,3 +1,5 @@
+/** @module scripts/normalize-component-docs */
+
 /**
  * Reorganizes component documentation into standard introduction, usage, examples, API, imports
  * and dependency sections.

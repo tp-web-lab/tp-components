@@ -1,3 +1,5 @@
+/** @module scripts/sync-numberfield-examples */
+
 /**
  * Regenerates numberfield Basic usage examples from the live introduction and rebuilds its
  * grouped Attributes panel.

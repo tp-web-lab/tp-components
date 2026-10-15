@@ -1,3 +1,5 @@
+/** @module scripts/component-basic-examples */
+
 /**
  * Parses and serializes named component examples and keeps Basic usage synchronized across
  * markup languages.

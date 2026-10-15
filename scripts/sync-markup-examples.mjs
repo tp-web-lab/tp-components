@@ -1,3 +1,5 @@
+/** @module scripts/sync-markup-examples */
+
 /**
  * Translates HTML component examples into native Markdown, AsciiDoc and reStructuredText,
  * writing extracted assets when required.

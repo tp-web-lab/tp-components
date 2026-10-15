@@ -1,3 +1,5 @@
+/** @module scripts/attributes-preview-test-helpers */
+
 /**
  * Provides a jsdom object-URL stub that tracks preview documents and revoked URLs.
  *

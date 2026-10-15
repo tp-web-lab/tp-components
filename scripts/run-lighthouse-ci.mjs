@@ -1,3 +1,5 @@
+/** @module scripts/run-lighthouse-ci */
+
 /**
  * Runs Lighthouse CI autorun with Playwright Chromium when available, otherwise using the host
  * Chrome installation.

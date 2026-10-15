@@ -1,3 +1,5 @@
+/** @module scripts/component-example-tabs */
+
 /**
  * Normalizes the delimiters surrounding component example language tabs to prevent collisions
  * with nested fences.

@@ -1,3 +1,5 @@
+/** @module scripts/component-attribute-examples */
+
 /**
  * Exports curated attribute values, component-specific overrides and objectives used by example
  * generators.

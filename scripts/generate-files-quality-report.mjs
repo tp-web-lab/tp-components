@@ -1,3 +1,5 @@
+/** @module scripts/generate-files-quality-report */
+
 /**
  * Generates the files family quality report from its configuration and saved coverage summaries.
  *

@@ -1,3 +1,5 @@
+/** @module scripts/sync-component-example-descriptions */
+
 /**
  * Synchronizes the example-description definition list before each component page's language
  * tabs.

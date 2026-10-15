@@ -1,3 +1,5 @@
+/** @module scripts/test-coverage-component */
+
 /**
  * Runs one component's Vitest tests with V8 coverage for its production sources.
  *

@@ -1,3 +1,5 @@
+/** @module scripts/generate-plots-quality-report */
+
 /**
  * Generates the plots family quality report from its configuration and saved coverage summaries.
  *

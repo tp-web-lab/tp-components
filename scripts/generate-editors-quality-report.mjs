@@ -1,3 +1,5 @@
+/** @module scripts/generate-editors-quality-report */
+
 /**
  * Generates the editors family quality report from its configuration and saved coverage
  * summaries.

@@ -1,3 +1,5 @@
+/** @module scripts/generate-overlays-quality-report */
+
 /**
  * Generates the overlays family quality report from its configuration and saved coverage
  * summaries.

@@ -1,3 +1,5 @@
+/** @module scripts/sync-component-index */
+
 /**
  * Rebuilds the component catalogue and family tables from documentation navigation and component
  * descriptions.

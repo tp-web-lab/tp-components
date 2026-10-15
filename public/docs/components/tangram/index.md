@@ -238,6 +238,8 @@ CSS properties
 [More details…](/api/classes/components_tangram.TpTangram.html)
 <!-- tp-docgen:typedoc:end -->
 
+
+
 ### Imports
 
 ::: tp-tabs

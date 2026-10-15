@@ -1,3 +1,5 @@
+/** @module scripts/component-test-target */
+
 /**
  * Validates component names and resolves the source directory and dedicated tests for targeted
  * test commands.

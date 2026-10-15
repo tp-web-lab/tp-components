@@ -1,3 +1,5 @@
+/** @module scripts/generate-simulators-quality-report */
+
 /**
  * Generates the simulators family quality report from its configuration and saved coverage
  * summaries.

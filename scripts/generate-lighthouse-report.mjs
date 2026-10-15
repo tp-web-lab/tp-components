@@ -1,3 +1,5 @@
+/** @module scripts/generate-lighthouse-report */
+
 /**
  * Converts representative saved Lighthouse CI runs into the Lighthouse documentation appendix.
  *

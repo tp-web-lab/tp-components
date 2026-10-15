@@ -1,3 +1,5 @@
+/** @module scripts/check-example-labels */
+
 /**
  * Checks that selectable example titles match across HTML, Markdown, AsciiDoc and
  * reStructuredText.

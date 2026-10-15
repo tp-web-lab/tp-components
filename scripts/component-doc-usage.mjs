@@ -1,3 +1,5 @@
+/** @module scripts/component-doc-usage */
+
 /**
  * Builds editorial User interactions and Author directives sections while preserving reviewed
  * content and fenced examples.

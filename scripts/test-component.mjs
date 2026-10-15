@@ -1,3 +1,5 @@
+/** @module scripts/test-component */
+
 /**
  * Runs the dedicated Vitest tests for one component.
  *

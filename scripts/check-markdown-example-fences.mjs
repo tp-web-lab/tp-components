@@ -1,3 +1,5 @@
+/** @module scripts/check-markdown-example-fences */
+
 /**
  * Checks nested fences in component Markdown examples for delimiters that close an enclosing
  * example too early.

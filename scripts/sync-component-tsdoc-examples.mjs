@@ -1,3 +1,5 @@
+/** @module scripts/sync-component-tsdoc-examples */
+
 /**
  * Synchronizes component class JSDoc examples with their documentation introductions.
  *

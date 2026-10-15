@@ -1,3 +1,5 @@
+/** @module scripts/generate-forms-quality-report */
+
 /**
  * Generates the forms family quality report from its configuration and saved coverage summaries.
  *

@@ -1,3 +1,5 @@
+/** @module scripts/generate-slides-quality-report */
+
 /**
  * Generates the slides family quality report from its configuration and saved coverage
  * summaries.

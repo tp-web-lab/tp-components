@@ -1,3 +1,5 @@
+/** @module scripts/generate-games-quality-report */
+
 /**
  * Generates the games family quality report from its configuration and saved coverage summaries.
  *

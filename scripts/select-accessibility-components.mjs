@@ -1,3 +1,5 @@
+/** @module scripts/select-accessibility-components */
+
 /**
  * Selects changed components and transitive dependents for an accessibility audit using a Git
  * comparison.

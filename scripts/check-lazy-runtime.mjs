@@ -1,3 +1,5 @@
+/** @module scripts/check-lazy-runtime */
+
 /**
  * Inspects production imports and source maps to verify that documentation parsers and
  * TypeScript compilation remain lazily loaded.

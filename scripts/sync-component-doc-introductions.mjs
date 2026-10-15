@@ -1,3 +1,5 @@
+/** @module scripts/sync-component-doc-introductions */
+
 /**
  * Synchronizes live component introductions with Basic usage examples in all four languages,
  * including preview frames where needed.

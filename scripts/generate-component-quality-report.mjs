@@ -1,3 +1,5 @@
+/** @module scripts/generate-component-quality-report */
+
 /**
  * Builds the component quality overview from configured components, saved coverage and available
  * execution results.

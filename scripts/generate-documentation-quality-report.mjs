@@ -1,3 +1,5 @@
+/** @module scripts/generate-documentation-quality-report */
+
 /**
  * Generates the documentation family quality report from its configuration and saved coverage
  * summaries.

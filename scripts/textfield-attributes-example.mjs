@@ -1,3 +1,5 @@
+/** @module scripts/textfield-attributes-example */
+
 /**
  * Builds shared grouped Attributes examples and runtime code for text, math, date, time and
  * number fields.

@@ -1,3 +1,5 @@
+/** @module scripts/typedoc-summary-plugin */
+
 /**
  * Makes summary-only TypeDoc comments visible and places example blocks before other tags.
  *

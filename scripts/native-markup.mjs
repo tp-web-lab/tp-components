@@ -1,3 +1,5 @@
+/** @module scripts/native-markup */
+
 /**
  * Converts HTML example fragments to native Markdown, AsciiDoc or reStructuredText with
  * component directives and inline roles.

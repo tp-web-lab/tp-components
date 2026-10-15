@@ -1,3 +1,5 @@
+/** @module scripts/check-native-markup */
+
 /**
  * Audits component examples for raw HTML in native markup and optionally regenerates native
  * examples and extracted assets.

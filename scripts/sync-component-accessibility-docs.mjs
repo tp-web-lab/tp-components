@@ -1,3 +1,5 @@
+/** @module scripts/sync-component-accessibility-docs */
+
 /**
  * Removes redundant Accessibility sections from component pages and checks explicit
  * accessibility metadata against the static-review baseline.

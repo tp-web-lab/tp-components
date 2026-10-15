@@ -1,3 +1,5 @@
+/** @module scripts/sync-typedoc-links */
+
 /**
  * Synchronizes links from component documentation pages to their generated TypeDoc class pages.
  *

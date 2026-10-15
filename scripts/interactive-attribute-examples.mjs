@@ -1,3 +1,5 @@
+/** @module scripts/interactive-attribute-examples */
+
 /**
  * Derives attribute control types and choices from component metadata and sources, and enhances
  * legacy attribute examples.

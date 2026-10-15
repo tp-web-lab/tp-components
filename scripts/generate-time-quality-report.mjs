@@ -1,3 +1,5 @@
+/** @module scripts/generate-time-quality-report */
+
 /**
  * Generates the time family quality report from its configuration and saved coverage summaries.
  *

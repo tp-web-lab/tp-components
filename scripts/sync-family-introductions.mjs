@@ -1,3 +1,5 @@
+/** @module scripts/sync-family-introductions */
+
 /**
  * Rebuilds family introduction pages and updates the documentation sidebar from component
  * metadata and curated family descriptions.

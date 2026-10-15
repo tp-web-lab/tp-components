@@ -1,3 +1,5 @@
+/** @module scripts/audit-component-introductions */
+
 /**
  * Audits isolated component introductions in Chromium and saves JSON reports and screenshots.
  *

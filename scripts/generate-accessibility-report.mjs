@@ -1,3 +1,5 @@
+/** @module scripts/generate-accessibility-report */
+
 /**
  * Builds the transversal accessibility appendix from component metadata, test sources and saved
  * browser audit results.

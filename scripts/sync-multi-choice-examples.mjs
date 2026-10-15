@@ -1,3 +1,5 @@
+/** @module scripts/sync-multi-choice-examples */
+
 /**
  * Rebuilds multi-choice question examples in all four languages, generates shared attributes and
  * updates the live introduction.

@@ -1,3 +1,5 @@
+/** @module scripts/component-quality-report-utils */
+
 /**
  * Provides shared coverage aggregation, static test counts and execution warnings for component
  * quality reports.

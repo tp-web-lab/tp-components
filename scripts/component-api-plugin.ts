@@ -1,3 +1,5 @@
+/** @module scripts/component-api-plugin */
+
 /**
  * Provides a Vite plugin that generates component JSON API manifests from TypeScript
  * declarations and documentation, refreshing them during development.

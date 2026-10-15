@@ -1,3 +1,5 @@
+/** @module scripts/refine-component-examples */
+
 /**
  * Applies curated complementary examples and removes generic additional examples across the four
  * markup languages.

@@ -1,3 +1,5 @@
+/** @module scripts/sync-single-choice-examples */
+
 /**
  * Rebuilds single-choice question examples, including mathematical choices and a polygon
  * exercise, in all four languages.

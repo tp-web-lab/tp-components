@@ -1,3 +1,5 @@
+/** @module scripts/standardize-component-examples */
+
 /**
  * Rebuilds component examples with Basic usage first, one grouped Attributes panel and retained
  * complementary examples.

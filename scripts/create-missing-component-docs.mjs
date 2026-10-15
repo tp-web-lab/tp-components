@@ -1,3 +1,5 @@
+/** @module scripts/create-missing-component-docs */
+
 /**
  * Writes documentation pages and Basic usage examples in four languages for the component
  * definitions embedded in this file.
