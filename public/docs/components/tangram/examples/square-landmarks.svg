@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 440" width="440" height="440" role="img" aria-labelledby="title"><title id="title">Square tangram with named boundary points A to I and center O</title><rect width="440" height="440" fill="#faf9f5"/>
+<polygon points="60,60 380,60 220,220" fill="#b84432" fill-opacity=".65" stroke="white" stroke-width="2"/>
+<polygon points="60,60 220,220 60,380" fill="#246c94" fill-opacity=".65" stroke="white" stroke-width="2"/>
+<polygon points="380,220 380,380 220,380" fill="#ba7b15" fill-opacity=".65" stroke="white" stroke-width="2"/>
+<polygon points="380,60 380,220 300,140" fill="#648237" fill-opacity=".65" stroke="white" stroke-width="2"/>
+<polygon points="220,220 300,300 140,300" fill="#925599" fill-opacity=".65" stroke="white" stroke-width="2"/>
+<polygon points="220,220 300,140 380,220 300,300" fill="#187f7c" fill-opacity=".65" stroke="white" stroke-width="2"/>
+<polygon points="60,380 220,380 300,300 140,300" fill="#b94574" fill-opacity=".65" stroke="white" stroke-width="2"/>
+<circle cx="60" cy="60" r="12" fill="white" stroke="#334155"/><text x="60" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#17212b">A</text>
+<circle cx="380" cy="60" r="12" fill="white" stroke="#334155"/><text x="380" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#17212b">B</text>
+<circle cx="380" cy="380" r="12" fill="white" stroke="#334155"/><text x="380" y="384" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#17212b">C</text>
+<circle cx="60" cy="380" r="12" fill="white" stroke="#334155"/><text x="60" y="384" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#17212b">D</text>
+<circle cx="220" cy="220" r="12" fill="white" stroke="#334155"/><text x="220" y="224" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#17212b">O</text>
+<circle cx="380" cy="220" r="12" fill="white" stroke="#334155"/><text x="380" y="224" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#17212b">E</text>
+<circle cx="220" cy="380" r="12" fill="white" stroke="#334155"/><text x="220" y="384" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#17212b">F</text>
+<circle cx="300" cy="140" r="12" fill="white" stroke="#334155"/><text x="300" y="144" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#17212b">G</text>
+<circle cx="300" cy="300" r="12" fill="white" stroke="#334155"/><text x="300" y="304" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#17212b">H</text>
+<circle cx="140" cy="300" r="12" fill="white" stroke="#334155"/><text x="140" y="304" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#17212b">I</text>
+</svg>

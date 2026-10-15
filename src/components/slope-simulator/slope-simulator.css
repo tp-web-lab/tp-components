@@ -1,0 +1,14 @@
+tp-slope-simulator { display: block; width: 100%; }
+tp-slope-simulator .tp-slope-ui { display: grid; gap: 2rem; color: var(--tp-text-color, #202b35); }
+tp-slope-simulator section { min-width: 0; }
+tp-slope-simulator h3 { margin: 0 0 1rem; }
+tp-slope-simulator p { font-size: .9em; }
+tp-slope-simulator .tp-slope-board { position: relative; width: 100%; }
+tp-slope-simulator svg { display: block; width: 100%; height: auto; overflow: visible; }
+tp-slope-simulator .tp-slope-route { fill: none; stroke: var(--tp-brand-text-colorful, #246c94); stroke-width: 4; vector-effect: non-scaling-stroke; }
+tp-slope-simulator .tp-slope-area { fill: var(--tp-brand-text-colorful, #246c94); opacity: .09; }
+tp-slope-simulator .tp-slope-point { position: absolute; transform: translate(-50%, -50%); width: 28px; height: 28px; min-height: 0; min-width: 0; padding: 0; border: 3px solid var(--tp-paper-color, white); border-radius: 50%; background: var(--tp-brand-text-colorful, #246c94); box-shadow: 0 0 0 1px currentColor; cursor: grab; touch-action: none; }
+tp-slope-simulator .tp-slope-point::after { content: ''; position: absolute; inset: -8px; }
+tp-slope-simulator .tp-slope-point:active { cursor: grabbing; }
+tp-slope-simulator .tp-slope-point:focus-visible { outline: 3px solid currentColor; outline-offset: 5px; }
+tp-slope-simulator .tp-slope-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem; font-variant-numeric: tabular-nums; }

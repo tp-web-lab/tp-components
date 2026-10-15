@@ -37,7 +37,7 @@ it.each([
 		).toEqual(["^method", "@book", "%ecosystem", "^weather", "^method"]);
 		expect(
 			Array.from(
-				document.querySelectorAll("tp-ref > button"),
+				document.querySelectorAll("tp-ref > tp-button"),
 				(e) => e.textContent,
 			),
 		).toEqual(["[1]", "[book]", "ecosystem", "[2]", "[1]"]);

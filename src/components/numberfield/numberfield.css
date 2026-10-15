@@ -40,21 +40,22 @@ tp-numberfield[range] [data-tp-numberfield-input] {
 tp-numberfield[range] [data-tp-numberfield-control] {
 	border: 0;
 }
-/* Custom global track/thumb skins hide native ticks in Firefox and WebKit.
-   Restore browser painting only when a datalist supplies graduations. */
-tp-numberfield[range] input[list]::-webkit-slider-runnable-track {
+/* The field uses native range painting. Reset the global custom track/thumb
+   skin as well: its negative thumb margin offsets the native thumb in WebKit.
+   This also preserves native datalist graduations in Firefox and WebKit. */
+tp-numberfield[range] input::-webkit-slider-runnable-track {
 	all: revert;
 }
-tp-numberfield[range] input[list]::-webkit-slider-thumb {
+tp-numberfield[range] input::-webkit-slider-thumb {
 	all: revert;
 }
-tp-numberfield[range] input[list]::-moz-range-track {
+tp-numberfield[range] input::-moz-range-track {
 	all: revert;
 }
-tp-numberfield[range] input[list]::-moz-range-thumb {
+tp-numberfield[range] input::-moz-range-thumb {
 	all: revert;
 }
-tp-numberfield[range] input[list]::-moz-range-progress {
+tp-numberfield[range] input::-moz-range-progress {
 	all: revert;
 }
 tp-numberfield [data-tp-numberfield-value] {

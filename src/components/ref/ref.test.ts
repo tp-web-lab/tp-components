@@ -13,6 +13,8 @@ it("resolves each prefix independently and shows HTML on hover, focus and activa
 	document.body.innerHTML = `<div data-tp-reference-scope><tp-ref href="^same"></tp-ref><tp-ref href="@same"></tp-ref><tp-ref href="%same"></tp-ref><tp-note ref="same"><p>A <strong>note</strong></p></tp-note><tp-biblio ref="same">A book</tp-biblio><tp-glossary ref="same" title="Term">A definition</tp-glossary></div>`;
 	await settle();
 	const refs = Array.from(document.querySelectorAll("tp-ref"));
+	expect(document.querySelectorAll("tp-ref > tp-button")).toHaveLength(3);
+	expect(document.querySelector("tp-ref > button")).toBeNull();
 	expect(refs.map((e) => e.querySelector("button")?.textContent)).toEqual([
 		"[1]",
 		"[same]",

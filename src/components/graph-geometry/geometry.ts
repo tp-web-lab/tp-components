@@ -15,7 +15,9 @@ export const GEOMETRY_TRANSFORMATIONS = [
 	"translation",
 ] as const;
 export type GeometryTransformation = (typeof GEOMETRY_TRANSFORMATIONS)[number];
+export type GeometryAnimationStep = string | string[];
 export type GeometryDefinition =
+	| { kind: "animation"; steps: GeometryAnimationStep[] }
 	| {
 			kind: "measure";
 			offset?: GeometryPoint;
@@ -41,7 +43,12 @@ export type GeometryDefinition =
 	| { kind: "parallel" | "perpendicular"; point: string; support: string }
 	| { kind: "bisector"; first: string; vertex: string; second: string }
 	| { kind: "tangent"; point: string; circle: string; branch: number }
-	| { kind: "comment"; point: string; text: string }
+	| {
+			kind: "comment";
+			point: string | GeometryPoint;
+			text: string;
+			offset?: GeometryPoint;
+	  }
 	| {
 			kind: "circle";
 			center: string;
@@ -56,6 +63,8 @@ export type GeometryDefinition =
 			relativeTo?: string;
 	  };
 export interface GeometryObject {
+	labelOffset?: GeometryPoint;
+	labelHidden?: boolean;
 	id: string;
 	hidden: boolean;
 	stroke?: GeometryStroke;
@@ -164,8 +173,8 @@ function splitArguments(text: string): string[] {
 			continue;
 		}
 		if (quoted) continue;
-		if (text[i] === "(") depth++;
-		if (text[i] === ")") depth--;
+		if (text[i] === "(" || text[i] === "[") depth++;
+		if (text[i] === ")" || text[i] === "]") depth--;
 		if (text[i] === "," && depth === 0) {
 			parts.push(text.slice(start, i).trim());
 			start = i + 1;
@@ -176,18 +185,59 @@ function splitArguments(text: string): string[] {
 	return parts;
 }
 /** Parses construction commands only; no evaluation of JavaScript or equations. */
+/** Reads a sequence of identifiers with one level of simultaneous groups. */
+function parseAnimationSteps(text: string): GeometryAnimationStep[] {
+	if (!text.startsWith("[") || !text.endsWith("]"))
+		throw new Error("Expected an animation list.");
+	const contents = text.slice(1, -1).trim();
+	if (!contents) return [];
+	const seen = new Set<string>();
+	const name = (value: string): string => {
+		const id = identifier(value);
+		if (seen.has(id)) throw new Error(`Duplicate animation object: ${id}`);
+		seen.add(id);
+		return id;
+	};
+	return splitArguments(contents).map((step) => {
+		if (step.startsWith("[") && step.endsWith("]")) {
+			const group = step.slice(1, -1).trim();
+			if (!group) throw new Error("Animation groups must not be empty.");
+			return splitArguments(group).map(name);
+		}
+		return name(step);
+	});
+}
+/** Joins multiline animation declarations, preserving other command lines. */
+function joinAnimationLines(source: string): string {
+	const lines = source.split("\n");
+	for (let i = 0; i < lines.length; i++) {
+		if (!/^\s*animation\s/.test(lines[i] ?? "")) continue;
+		let depth = 0;
+		let end = i;
+		do {
+			for (const ch of lines[end] ?? "")
+				depth += ch === "[" ? 1 : ch === "]" ? -1 : 0;
+			end++;
+		} while (depth > 0 && end < lines.length);
+		const joined = lines.slice(i, end).join(" ");
+		for (let j = i + 1; j < end; j++) lines[j] = "";
+		lines[i] = joined;
+		i = end - 1;
+	}
+	return lines.join("\n");
+}
 function parseGeometryCommands(source: string, depth = 0): GeometryObject[] {
 	if (depth > 64) throw new Error("Too many nested transformations.");
 	const objects: GeometryObject[] = [];
 	const ids = new Set<string>();
-	for (const [index, raw] of stripSourceComments(source)
+	for (const [index, raw] of joinAnimationLines(stripSourceComments(source))
 		.split("\n")
 		.entries()) {
 		const line = raw.trim();
 		if (!line) continue;
 		try {
 			const match =
-				/^(point|line|segment|ray|vector|circle|arc|sector|comment|polygon)\s+(\w+)\s*=\s*(.*?)(\s+(?:(?:style|color)=\w+|hidden)(?:\s+(?:(?:style|color)=\w+|hidden))*)?$/.exec(
+				/^(point|line|segment|ray|vector|circle|arc|sector|comment|polygon|animation)\s+(\w+)\s*=\s*(.*?)(\s+(?:(?:style|color)=\w+|label-[xy]=[^\s]+|label-hidden|hidden)(?:\s+(?:(?:style|color)=\w+|label-[xy]=[^\s]+|label-hidden|hidden))*)?$/.exec(
 					line,
 				);
 			if (!match) throw new Error("Expected: type name = construction.");
@@ -197,7 +247,16 @@ function parseGeometryCommands(source: string, depth = 0): GeometryObject[] {
 			ids.add(id);
 			let definition: GeometryDefinition;
 			const coordinate = /^\(([^,]+),([^,]+)\)$/.exec(expression);
-			if (type === "point" && coordinate)
+			if (type === "animation") {
+				if (appearance.trim())
+					throw new Error(
+						"Animation declarations do not accept appearance options.",
+					);
+				definition = {
+					kind: "animation",
+					steps: parseAnimationSteps(expression),
+				};
+			} else if (type === "point" && coordinate)
 				definition = {
 					kind: "point",
 					x: number(coordinate[1] ?? ""),
@@ -363,15 +422,30 @@ function parseGeometryCommands(source: string, depth = 0): GeometryObject[] {
 						inputs: inputs.map(identifier),
 						...(x || y ? { offset: { x, y } } : {}),
 					};
-				} else if (
-					type === "comment" &&
-					fn === "comment" &&
-					args.length === 2
-				) {
+				} else if (type === "comment" && fn === "comment" && args.length >= 2) {
+					named(2, ["dx", "dy"]);
 					const text: unknown = JSON.parse(b);
 					if (typeof text !== "string" || !text.trim())
 						throw new Error("A comment needs nonempty quoted text.");
-					definition = { kind: "comment", point: identifier(a), text };
+					const coordinates = /^\(([^,]+),([^,]+)\)$/.exec(a);
+					definition = {
+						kind: "comment",
+						point: coordinates
+							? {
+									x: number(coordinates[1] ?? ""),
+									y: number(coordinates[2] ?? ""),
+								}
+							: identifier(a),
+						text,
+						...(options.has("dx") || options.has("dy")
+							? {
+									offset: {
+										x: number(options.get("dx") ?? "0"),
+										y: number(options.get("dy") ?? "0"),
+									},
+								}
+							: {}),
+					};
 				} else if (
 					(type === "line" ||
 						type === "segment" ||
@@ -434,7 +508,11 @@ function parseGeometryCommands(source: string, depth = 0): GeometryObject[] {
 				if (seen.has(key))
 					throw new Error(`Duplicate appearance option: ${key}`);
 				seen.add(key);
-				if (key === "hidden") object.hidden = true;
+				if (key === "label-x" || key === "label-y") {
+					object.labelOffset ??= { x: 0, y: 0 };
+					object.labelOffset[key === "label-x" ? "x" : "y"] = number(value);
+				} else if (key === "label-hidden") object.labelHidden = true;
+				else if (key === "hidden") object.hidden = true;
 				else if (key === "style") {
 					if (!(GEOMETRY_STYLES as readonly string[]).includes(value))
 						throw new Error(`Unknown stroke style: ${value}`);
@@ -458,7 +536,7 @@ function parseGeometryCommands(source: string, depth = 0): GeometryObject[] {
 /** Reads the optional quoted figure label (title is an alias). */
 export function geometrySourceLabel(source: string): string | undefined {
 	let label: string | undefined;
-	for (const [index, line] of stripSourceComments(source)
+	for (const [index, line] of joinAnimationLines(stripSourceComments(source))
 		.split("\n")
 		.entries()) {
 		if (!/^\s*(?:label|title)\s*=/.test(line)) continue;
@@ -515,6 +593,14 @@ export function parseGeometry(source: string): GeometryObject[] {
 				throw new Error(`Invalid support ${ref} for ${id}.`);
 		};
 		const checkDefinition = (d: GeometryDefinition): void => {
+			if (d.kind === "animation") {
+				for (const name of d.steps.flat()) {
+					const target = byId.get(name);
+					if (!target) throw new Error(`Unknown animation object: ${name}`);
+					if (target.definition.kind === "animation")
+						throw new Error("Animations can only reveal geometric objects.");
+				}
+			}
 			if (d.kind === "transform") {
 				if (typeof d.object === "string") requireKind(d.object, [d.output]);
 				else {
@@ -606,7 +692,8 @@ export function parseGeometry(source: string): GeometryObject[] {
 								: ["segment", "vector", "circle", "arc", "polygon", "sector"];
 				for (const ref of d.inputs) requireKind(ref, allowed);
 			}
-			if (d.kind === "comment") requireKind(d.point, ["point"]);
+			if (d.kind === "comment" && typeof d.point === "string")
+				requireKind(d.point, ["point"]);
 		};
 		checkDefinition(object.definition);
 		visiting.delete(id);
@@ -616,7 +703,10 @@ export function parseGeometry(source: string): GeometryObject[] {
 	return objects;
 }
 /** Geometric kind produced by a construction, independent of its recipe. */
-export function constructionKind(d: GeometryDefinition): GeometryValue["kind"] {
+export function constructionKind(
+	d: GeometryDefinition,
+): GeometryValue["kind"] | "animation" {
+	if (d.kind === "animation") return "animation";
 	if (d.kind === "transform") return d.output;
 	if (d.kind === "regularPolygon") return "polygon";
 	if (d.kind === "measure") return "comment";
@@ -637,6 +727,8 @@ export function constructionKind(d: GeometryDefinition): GeometryValue["kind"] {
 const parameterKinds = new WeakMap<GeometryDefinition, "linear" | "circular">();
 export function dependencies(d: GeometryDefinition): string[] {
 	switch (d.kind) {
+		case "animation":
+			return [];
 		case "measure":
 			return d.inputs;
 		case "transform":
@@ -669,7 +761,7 @@ export function dependencies(d: GeometryDefinition): string[] {
 		case "tangent":
 			return [d.point, d.circle];
 		case "comment":
-			return [d.point];
+			return typeof d.point === "string" ? [d.point] : [];
 		case "sector":
 		case "arc":
 			return [d.circle, ...(d.relativeTo ? [d.relativeTo] : [])];
@@ -1171,7 +1263,15 @@ export function evaluateGeometry(
 				} else if (d.kind === "measure") {
 					value = measureGeometry(d, get);
 				} else if (d.kind === "comment") {
-					value = { kind: "comment", point: point(d.point), text: d.text };
+					const anchor = typeof d.point === "string" ? point(d.point) : d.point;
+					value = {
+						kind: "comment",
+						point: {
+							x: anchor.x + (d.offset?.x ?? 0),
+							y: anchor.y + (d.offset?.y ?? 0),
+						},
+						text: d.text,
+					};
 				} else if (
 					d.kind === "midpoint" ||
 					d.kind === "perpendicularBisector"
@@ -1276,7 +1376,8 @@ export function evaluateGeometry(
 			visiting.delete(id);
 		}
 	};
-	for (const object of objects) resolve(object.id);
+	for (const object of objects)
+		if (object.definition.kind !== "animation") resolve(object.id);
 	return { values, errors };
 }
 function nearestArcAngle(
@@ -1312,51 +1413,65 @@ export function parameterAt(support: GeometryValue, p: GeometryPoint): number {
 export function serializeGeometry(objects: readonly GeometryObject[]): string {
 	const n = (value: number): string => String(Number(value.toPrecision(12)));
 	return objects
-		.map(({ id, hidden, stroke, color, definition: d }) => {
-			const type = constructionKind(d);
-			const expressionOf = (d: GeometryDefinition): string => {
-				let expression: string;
-				if (d.kind === "transform")
-					expression = `${d.operation}(${typeof d.object === "string" ? d.object : expressionOf(d.object)}, ${d.support}${d.operation === "homothety" ? `, ratio=${n(d.amount)}` : d.operation === "rotation" ? `, angle=${n(d.amount)}deg` : ""})`;
-				else if (d.kind === "polygon")
-					expression = `polygon(${d.vertices.join(", ")})`;
-				else if (d.kind === "regularPolygon")
-					expression = `regularPolygon(${d.first}, ${d.second}, sides=${d.sides})`;
-				else if (d.kind === "point") expression = `(${n(d.x)}, ${n(d.y)})`;
-				else if (d.kind === "on") {
-					const definition = objects.find((o) => o.id === d.object)?.definition;
-					const support = definition ? constructionKind(definition) : "";
-					expression = `on(${d.object}, ${["line", "segment", "ray", "vector"].includes(support) ? `t=${n(d.parameter)}` : `angle=${n((d.parameter * 180) / Math.PI)}deg`})`;
-				} else if (d.kind === "intersection") {
-					expression = `intersection(${d.first}, ${d.second}, branch=${d.branch})`;
-				} else if (
-					d.kind === "line" ||
-					d.kind === "segment" ||
-					d.kind === "ray" ||
-					d.kind === "vector"
-				)
-					expression = `${d.kind}(${d.first}, ${d.second}${d.kind === "segment" && d.length !== undefined ? `, length=${n(d.length)}` : ""})`;
-				else if (d.kind === "circle")
-					expression = `circle(${d.center}, ${typeof d.radius === "number" ? n(d.radius) : "through" in d.radius ? `through=${d.radius.through}` : `distance(${d.radius.distance.join(", ")})`})`;
-				else if (d.kind === "measure")
-					expression = `${d.operation}(${d.inputs.join(", ")}${d.offset ? `, dx=${n(d.offset.x)}, dy=${n(d.offset.y)}` : ""})`;
-				else if (d.kind === "comment")
-					expression = `comment(${d.point}, ${JSON.stringify(d.text)})`;
-				else if (d.kind === "midpoint" || d.kind === "perpendicularBisector")
-					expression = `${d.kind}(${d.segment})`;
-				else if (d.kind === "parallel" || d.kind === "perpendicular")
-					expression = `${d.kind}(${d.point}, ${d.support})`;
-				else if (d.kind === "bisector")
-					expression = `bisector(${d.first}, ${d.vertex}, ${d.second})`;
-				else if (d.kind === "tangent")
-					expression = `tangent(${d.point}, ${d.circle}, branch=${d.branch})`;
-				else if (d.kind === "arc" || d.kind === "sector")
-					expression = `${d.kind}(${d.circle}, start=${n((d.start * 180) / Math.PI)}deg, end=${n((d.end * 180) / Math.PI)}deg, direction=${d.clockwise ? "cw" : "ccw"}${d.relativeTo ? `, relative-to=${d.relativeTo}` : ""})`;
-				else throw new Error("Unsupported construction.");
-				return expression;
-			};
-			return `${type} ${id} = ${expressionOf(d)}${stroke && stroke !== "solid" ? ` style=${stroke}` : ""}${color ? ` color=${color}` : ""}${hidden ? " hidden" : ""}`;
-		})
+		.map(
+			({
+				id,
+				hidden,
+				stroke,
+				color,
+				labelOffset,
+				labelHidden,
+				definition: d,
+			}) => {
+				const type = constructionKind(d);
+				const expressionOf = (d: GeometryDefinition): string => {
+					if (d.kind === "animation")
+						return `[${d.steps.map((step) => (Array.isArray(step) ? `[${step.join(", ")}]` : step)).join(", ")}]`;
+					let expression: string;
+					if (d.kind === "transform")
+						expression = `${d.operation}(${typeof d.object === "string" ? d.object : expressionOf(d.object)}, ${d.support}${d.operation === "homothety" ? `, ratio=${n(d.amount)}` : d.operation === "rotation" ? `, angle=${n(d.amount)}deg` : ""})`;
+					else if (d.kind === "polygon")
+						expression = `polygon(${d.vertices.join(", ")})`;
+					else if (d.kind === "regularPolygon")
+						expression = `regularPolygon(${d.first}, ${d.second}, sides=${d.sides})`;
+					else if (d.kind === "point") expression = `(${n(d.x)}, ${n(d.y)})`;
+					else if (d.kind === "on") {
+						const definition = objects.find(
+							(o) => o.id === d.object,
+						)?.definition;
+						const support = definition ? constructionKind(definition) : "";
+						expression = `on(${d.object}, ${["line", "segment", "ray", "vector"].includes(support) ? `t=${n(d.parameter)}` : `angle=${n((d.parameter * 180) / Math.PI)}deg`})`;
+					} else if (d.kind === "intersection") {
+						expression = `intersection(${d.first}, ${d.second}, branch=${d.branch})`;
+					} else if (
+						d.kind === "line" ||
+						d.kind === "segment" ||
+						d.kind === "ray" ||
+						d.kind === "vector"
+					)
+						expression = `${d.kind}(${d.first}, ${d.second}${d.kind === "segment" && d.length !== undefined ? `, length=${n(d.length)}` : ""})`;
+					else if (d.kind === "circle")
+						expression = `circle(${d.center}, ${typeof d.radius === "number" ? n(d.radius) : "through" in d.radius ? `through=${d.radius.through}` : `distance(${d.radius.distance.join(", ")})`})`;
+					else if (d.kind === "measure")
+						expression = `${d.operation}(${d.inputs.join(", ")}${d.offset ? `, dx=${n(d.offset.x)}, dy=${n(d.offset.y)}` : ""})`;
+					else if (d.kind === "comment")
+						expression = `comment(${typeof d.point === "string" ? d.point : `(${n(d.point.x)}, ${n(d.point.y)})`}, ${JSON.stringify(d.text)}${d.offset ? `, dx=${n(d.offset.x)}, dy=${n(d.offset.y)}` : ""})`;
+					else if (d.kind === "midpoint" || d.kind === "perpendicularBisector")
+						expression = `${d.kind}(${d.segment})`;
+					else if (d.kind === "parallel" || d.kind === "perpendicular")
+						expression = `${d.kind}(${d.point}, ${d.support})`;
+					else if (d.kind === "bisector")
+						expression = `bisector(${d.first}, ${d.vertex}, ${d.second})`;
+					else if (d.kind === "tangent")
+						expression = `tangent(${d.point}, ${d.circle}, branch=${d.branch})`;
+					else if (d.kind === "arc" || d.kind === "sector")
+						expression = `${d.kind}(${d.circle}, start=${n((d.start * 180) / Math.PI)}deg, end=${n((d.end * 180) / Math.PI)}deg, direction=${d.clockwise ? "cw" : "ccw"}${d.relativeTo ? `, relative-to=${d.relativeTo}` : ""})`;
+					else throw new Error("Unsupported construction.");
+					return expression;
+				};
+				return `${type} ${id} = ${expressionOf(d)}${stroke && stroke !== "solid" ? ` style=${stroke}` : ""}${color ? ` color=${color}` : ""}${hidden ? " hidden" : ""}${labelHidden ? " label-hidden" : ""}${labelOffset ? ` label-x=${n(labelOffset.x)} label-y=${n(labelOffset.y)}` : ""}`;
+			},
+		)
 		.join("\n");
 }
 export const MEDIATRIX_CONSTRUCTION = `point A = (-3, 0)
@@ -1371,3 +1486,57 @@ arc bD = arc(cB, start=220deg, end=260deg, relative-to=AB)
 point C = intersection(aC, bC, branch=0)
 point D = intersection(aD, bD, branch=1)
 line m = line(C, D)`;
+
+/** Renames an object and its references; a renamed comment displays its new name. */
+export function renameGeometry(
+	objects: readonly GeometryObject[],
+	from: string,
+	to: string,
+): GeometryObject[] {
+	identifier(to);
+	if (!objects.some((o) => o.id === from))
+		throw new Error(`Unknown object: ${from}`);
+	if (to !== from && objects.some((o) => o.id === to))
+		throw new Error(`Duplicate name: ${to}`);
+	const references = new Set([
+		"first",
+		"second",
+		"vertex",
+		"point",
+		"center",
+		"circle",
+		"segment",
+		"support",
+		"object",
+		"through",
+		"relativeTo",
+		"vertices",
+		"inputs",
+		"distance",
+		"steps",
+	]);
+	const replace = (value: unknown, key = ""): unknown => {
+		if (typeof value === "string")
+			return references.has(key) && value === from ? to : value;
+		if (Array.isArray(value)) return value.map((item) => replace(item, key));
+		if (value && typeof value === "object")
+			return Object.fromEntries(
+				Object.entries(value).map(([k, v]) => [k, replace(v, k)]),
+			);
+		return value;
+	};
+	return objects.map((o) => ({
+		...o,
+		id: o.id === from ? to : o.id,
+		definition:
+			o.id === from && o.definition.kind === "comment"
+				? {
+						...(replace(o.definition) as Extract<
+							GeometryDefinition,
+							{ kind: "comment" }
+						>),
+						text: to,
+					}
+				: (replace(o.definition) as GeometryDefinition),
+	}));
+}

@@ -8,6 +8,10 @@
  * @summary Defines a bibliography entry referenced by tp-ref.
  */
 /**
+ * @tp-dependency tp-button
+ * @summary an action button or navigation link with shared sizes, variants and loading states.
+ */
+/**
  * @tp-dependency tp-glossary
  * @summary Defines a glossary entry referenced by tp-ref.
  */
@@ -22,6 +26,7 @@
 // tp-docgen:dependencies:end
 
 import { TpBase } from "../base/base.js";
+import { TpButton } from "../button/button.js";
 import { TpTooltip } from "../tooltip/tooltip.js";
 import "../tooltip/tooltip.js";
 import "../note/note.js";
@@ -49,7 +54,8 @@ import style from "./ref.css?inline";
  * </div>
  */
 export class TpRef extends TpBase {
-	private link: HTMLButtonElement | null = null;
+	private link: TpButton | null = null;
+	private label: HTMLSpanElement | null = null;
 	private tooltip: TpTooltip | null = null;
 	private unsubscribe: (() => void) | null = null;
 	private original: Node[] | null = null;
@@ -71,18 +77,26 @@ export class TpRef extends TpBase {
 		if (this.closest("tp-tooltip, tp-note, tp-biblio, tp-glossary")) return;
 		if (!this.original) this.original = Array.from(this.childNodes);
 		if (!this.link) {
-			this.link = document.createElement("button");
+			this.link = new TpButton();
+			this.label = document.createElement("span");
+			this.link.append(this.label);
 			this.link.type = "button";
-			this.link.addEventListener("click", () => this.tooltip?.show());
+			this.link.addEventListener("click", () => {
+				if (!this.link?.disabled) this.tooltip?.show();
+			});
 			this.link.dataset.tpReferenceOutput = "";
 			referenceId(this.link);
 			this.append(this.link);
 			this.tooltip = new TpTooltip();
 			this.tooltip.dataset.tpReferenceOutput = "";
 			this.tooltip.classList.add("tp-ref-tooltip");
-			this.tooltip.setAttribute("anchor", `#${this.link.id}`);
 			this.append(this.tooltip);
 		}
+		// TpButton creates its native control in a microtask. Bind once it exists.
+		queueMicrotask(() => {
+			if (this.isConnected && this.link)
+				this.tooltip?.setAttribute("anchor", `#${this.link.id} > button`);
+		});
 		this.unsubscribe?.();
 		this.refresh();
 		this.unsubscribe = observeReferences(this, () => this.refresh());
@@ -95,7 +109,7 @@ export class TpRef extends TpBase {
 		if (this.isConnected) this.refresh();
 	}
 	private refresh(): void {
-		if (!this.link || !this.tooltip) return;
+		if (!this.link || !this.label || !this.tooltip) return;
 		const tag = (
 			{ "^": "tp-note", "@": "tp-biblio", "%": "tp-glossary" } as Record<
 				string,
@@ -119,14 +133,14 @@ export class TpRef extends TpBase {
 				? `[${id}]`
 				: id || "?";
 		if (
-			this.link.textContent !== text ||
-			Boolean(this.link.querySelector("sup")) !== note
+			this.label.textContent !== text ||
+			Boolean(this.label.querySelector("sup")) !== note
 		) {
 			if (note) {
 				const sup = document.createElement("sup");
 				sup.textContent = text;
-				this.link.replaceChildren(sup);
-			} else this.link.textContent = text;
+				this.label.replaceChildren(sup);
+			} else this.label.textContent = text;
 		}
 
 		this.link.disabled = !target;

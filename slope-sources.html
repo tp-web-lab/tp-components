@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slope simulator — custom profiles</title>
+<script type="module" src="/src/components/slope-simulator/slope-simulator.ts"></script>
+<style>body{max-width:1000px;margin:32px auto;padding:0 24px;font-family:system-ui}.controls{display:flex;flex-wrap:wrap;gap:12px}</style>
+<h1>Custom cycling profiles</h1>
+<p>Start with inline JSON at exactly ±20%. Load a file, replace profiles from JavaScript or try an invalid +21% segment.</p>
+<div class="controls">
+<tp-button id="file">Load file</tp-button>
+<tp-button id="program">Use JavaScript profile</tp-button>
+<tp-button id="invalid">Try slope +21%</tp-button>
+</div>
+<tp-slope-simulator id="simulator">
+<script type="tp/slope-simulator">
+{"profiles":[{"id":"limits","name":"Inline: ±20%","points":[[0,0],[1,200],[2,0]]}]}
+</script>
+</tp-slope-simulator>
+<script type="module">
+await customElements.whenDefined('tp-slope-simulator');
+const simulator=document.querySelector('#simulator');
+document.querySelector('#file').addEventListener('click',()=>{simulator.src='/docs/components/slope-simulator/examples/two-passes.json';});
+document.querySelector('#program').addEventListener('click',()=>simulator.setProfiles({profiles:[{id:'js',name:'JavaScript: my pass',points:[[0,200],[10,1000],[20,300]]}]}));
+document.querySelector('#invalid').addEventListener('click',()=>simulator.setProfiles({profiles:[{id:'too-steep',name:'Too steep',points:[[0,0],[1,210]]}]}));
+</script>
+</html>

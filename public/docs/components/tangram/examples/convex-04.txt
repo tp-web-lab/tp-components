@@ -1,0 +1,11 @@
+# Convex 04 — reference image, left to right, top to bottom
+# Grid spacing is the leg length of a small triangle.
+grid sqrt2
+
+triangle (0, 0) (1, 1) (0, 1)
+square (0, 1) (1, 1) (1, 2) (0, 2)
+triangle (1, 1) (2, 2) (1, 3)
+triangle (0, 2) (1, 2) (0, 3)
+parallelogram (0, 3) (1, 2) (1, 3) (0, 4)
+triangle (0, 4) (2, 2) (2, 4)
+triangle (0, 4) (2, 4) (2, 6)

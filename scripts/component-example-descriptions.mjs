@@ -4,6 +4,8 @@ import { describeAttributeControl } from "./interactive-attribute-examples.mjs";
 
 /** Editorial objectives for the existing examples; no descriptions are inferred from titles alone. */
 const basic = {
+ "slope-simulator": "Adjust the slope, drag either point or use arrow keys, then compare the three cycling profiles.",
+ "tangram": "Drag and rotate the seven pieces to cover the silhouette. Try Undo, Redo and Solution to inspect the dissection.",
  "graph-geometry": "Drag A or B and observe the arcs, intersections and perpendicular bisector follow the segment.",
  "calculator": "Enter 2+3*4 and evaluate it, then try sin(30) in degree mode. Use the scientific keys to transform a selected expression.",
  "note": "Hover or focus the reference to read its HTML content; inspect the same entry in the generated list.",
@@ -364,6 +366,9 @@ const additional = {
 };
 
 export function describeExample(component, label) {
+ if (component === "tangram" && label === "Exact orientation") return "Start the first convex figure with all seven pieces already oriented as in the solution. Translate them into place, or select one to try its local rotation and flip controls.";
+ if (component === "tangram" && /^Convex \d{2}$/.test(label)) return `Reproduce figure ${label.slice(-2)} from the numbered reference gallery. Use Solution to compare its exact dissection, then move and rotate the seven pieces to cover its convex silhouette.`;
+ if (component === "tangram" && label === "Named vertices") return "Open the source to see named corners and midpoint constructions. Show the solution to compare the seven pieces with their declared vertices, then play the puzzle.";
  if (component === "xy-plot" && label === "Shared points and vectors") return "Change a point and press Play to update its vector. Try the axis, grid and sampling assignments; the title, point and vector declarations are also accepted by Geometry.";
  if (["xy-plot", "graph-geometry"].includes(component) && label === "Shared points and vectors") return "Open the source, change point A and press Play. The vector follows its endpoints; the same title, point and vector declarations work in both components.";
  if (component === "xy-plot" && label === "Named curves") return "Compare Cartesian, polar and parametric named curves. Open Code, edit an expression, range or style, then press Play; the interactive settings preserve the named syntax.";

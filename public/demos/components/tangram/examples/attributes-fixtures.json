@@ -1,0 +1,20 @@
+{
+  "src": [
+    {
+      "label": "Default",
+      "value": ""
+    },
+    {
+      "label": "Square (text)",
+      "value": "/demos/components/tangram/examples/square.txt"
+    },
+    {
+      "label": "Diamond (JSON)",
+      "value": "/demos/components/tangram/examples/diamond.json"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/demos/components/tangram/examples/file-unknown.txt"
+    }
+  ]
+}

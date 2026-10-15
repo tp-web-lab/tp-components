@@ -72,6 +72,12 @@ Game components offer interactive puzzles and activities that exercise memory, l
 [tp-yakazu](yakazu/index.md)
 :::
 
+::: tp-center { intrinsic }
+:tp-icon:{name="tangram" library="components" size="4em" aria-hidden="true"}
+
+[tp-tangram](tangram/index.md)
+:::
+
 ::::::
 
 <!-- family-introduction:end -->

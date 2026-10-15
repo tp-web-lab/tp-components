@@ -48,7 +48,7 @@ Use `label="My figure"` to title the drawing. With `canvas-only`, the action pal
 | Measure length | Select two points, or select a segment, vector, arc, circle, polygon or sector. Closed shapes show their perimeter; an arc shows its curved length. |
 | Measure area | Select a circle, simple polygon or angular sector to display its enclosed area. |
 | Measure angle | Select two sides to mark their angle with an arc and its value, or a small square without a value for a right angle. Alternatively select three points: first arm, vertex, second arm, to display a numeric measurement. |
-| Comment | Enter Comment text and select its anchor point. The annotation follows that point. |
+| Comment | Enter Comment text and click anywhere to place a free annotation, or click a point to attach it. Drag the annotation in Move mode to reposition it. |
 | Midpoint / Perpendicular bisector · direct (`built-in`) | Select a segment to construct its midpoint or perpendicular bisector. |
 | Perpendicular / Parallel (`built-in`) | Select a point, then a line, segment, ray or vector. |
 | Angle bisector (`built-in`) | Select three points in order: first arm, vertex, second arm. Construct the internal angle bisector as a line. |
@@ -80,6 +80,12 @@ Use `label="My figure"` to title the drawing. With `canvas-only`, the action pal
 | `</>` in canvas-only mode | Replace the drawing with Construction source, or return to the drawing without applying draft edits. Play applies the source before returning to the drawing with `</>`. |
 | Construction source > F1 / Reset | Show or hide the editor toolbar / restore the source of the displayed construction without changing the figure. |
 | Construction source > Play | Edit and apply the construction commands. Invalid commands leave the previous figure unchanged. |
+| Double-click an object in Move or Pan view | Open an Object name field at the clicked position. |
+| Animation name | Choose a named animation and restart it at step zero. The first declared animation is selected initially. |
+| Start / Previous / Next / End animation | Return to the initial view, hide the last step, reveal the next step, or show the complete sequence. A grouped step is shown or hidden together. |
+| Hide name in Construction objects | Toggle visibility of the selected object’s name while keeping its geometry visible. Press again to show the name. |
+| Rename in Construction objects | Apply a unique object name and update dependent references. |
+| Drag an object name / Move name | Reposition the name independently of the object; Move name also enables arrow-key positioning. |
 
 #### Keyboard interactions
 
@@ -87,6 +93,10 @@ Tool shortcuts apply while focus is inside the figure and never intercept typing
 
 | Key or gesture | Result |
 | --- | --- |
+| Enter / Space on Rename, Move name or Hide name | Apply the edited name, enable name positioning, or toggle name visibility. |
+| Enter / Space on animation controls | Choose an animation or move through its steps; available in readonly mode. |
+| F2 on the drawing | Open the inline name field for the selected object. |
+| Enter / Escape in the inline name field | Rename the object / cancel editing. Leaving the field also cancels. Invalid or duplicate names keep the field open with an error. |
 | Tab / Shift+Tab | Move between tools, parameters, object buttons, drawing and source controls. |
 | Enter / Space | Activate a focused button or expand/collapse the Construction source accordion. Selecting an object in Move mode focuses the drawing. |
 | F1 | Inside Construction source, show or hide the editor toolbar. Elsewhere, open or close the action palette. Use Up/Down, Home/End to navigate and Enter/Space to choose a tool. |
@@ -94,8 +104,8 @@ Tool shortcuts apply while focus is inside the figure and never intercept typing
 | Delete | Remove the selected object and its dependent constructions as one undoable action (except in readonly mode). |
 | Ctrl/Cmd+Z / Ctrl/Cmd+Shift+Z | Undo / redo a construction change. |
 | − / + / F / G | Zoom out / zoom in / fit the drawing / toggle the grid. |
-| Arrow keys in canvas-only mode | Move the selected point or measurement; when nothing is selected, or in readonly mode, pan the view. |
-| Arrow keys on the drawing | In Pan view, pan by 40 drawing pixels. Otherwise move the selected measurement label, free or attached point by 0.2 units before projection onto its support. |
+| Arrow keys in canvas-only mode | Move the selected point, comment, measurement or name (with Move name enabled); when nothing is selected, or in readonly mode, pan the view. |
+| Arrow keys on the drawing | In Pan view, pan by 40 drawing pixels. With Move name enabled, move the selected object name. Otherwise move the selected comment, measurement label, free or attached point by 0.2 units before projection onto its support. |
 | Shift + arrow keys | In Pan view, pan by 8 drawing pixels. Otherwise use a smaller point step of 0.02 units. |
 | Enter on the drawing | Finish a pending irregular polygon with at least three vertices. |
 | Escape on the drawing | Cancel the pending selection, discard uncommitted polygon vertices and return to Move. |
@@ -189,6 +199,54 @@ Append `hidden` to keep an object as a support without drawing it. Use one comma
 
 Undefined constructions and their dependents are hidden and listed with a diagnostic. They reappear when their supports permit the construction again. Arcs and sectors have distinct start/end angles and span less than a full turn. Arc endpoints defined by named points and equation plotting are not part of this initial version.
 
+### Object names and free comments
+
+Select an object and activate **Hide name** in Construction objects to hide its name without hiding its geometry. Activate it again to restore the name at its saved position. The object list keeps the identifier and marks it as **name hidden**. This is saved with the `label-hidden` suffix (for example, `point A = (0, 0) label-hidden`), supports Undo/Redo and image export, and is disabled in readonly mode. Comment contents and measurement values remain visible; use the object’s hidden style to hide those annotations entirely.
+
+Double-click an object in Move or Pan view to rename it directly in the drawing. Press Enter to confirm, or Escape to cancel; leaving the field also cancels. F2 opens the same field for the selected object, including in canvas-only and zoomed views. Alternatively, select an object in **Construction objects**, edit **Object name**, and press **Rename**. Names must be valid, unique construction identifiers. Renaming updates dependent constructions. When renaming a comment, its visible text also becomes the new name; renaming an anchor point does not change the text of comments attached to it.
+
+Drag a name in Move mode to reposition it without moving its object. Alternatively, select the object, enable **Move name**, and use the arrow keys on the drawing (Shift for a smaller step). Disable Move name or select another object to return to moving points and comments. Offsets follow the object and are saved as `label-x` and `label-y` in construction units.
+
+With **Comment**, click empty space for a free annotation or click a point to attach it. Drag the comment in Move mode, or select it in Construction objects and use the arrow keys. Moving an attached comment keeps its anchor and updates its offset. These changes support Undo/Redo, source reload and image export; readonly disables editing.
+
+```text
+point A = (0, 0) label-x=0.5 label-y=0.3
+comment attached = comment(A, "Follows A", dx=1, dy=0.5)
+comment free = comment((3, 2), "Independent annotation")
+```
+
+### Step-by-step animation
+
+An animation is a named control object in Construction objects. Its list contains object identifiers without quotes; an inner list groups objects that appear simultaneously:
+
+```text
+point O = (0, -2)
+point A = (-2, 0)
+point B = (2, 0)
+segment s = segment(A, B)
+point P = midpoint(s)
+animation a = [[A, B], P, s]
+```
+
+Initially only O is visible. **Next** reveals A and B together, then P, then s. Previous steps remain visible. **Previous** hides the last revealed step; **Start** returns to step zero and **End** reveals the complete sequence. The counter counts outer-list steps, so this example has three steps. Objects absent from the selected animation are visible from initialization, even when they depend on objects not yet revealed. All objects continue to be calculated, and the drawing remains interactive. Explicit `hidden` styles and hidden names remain hidden when their step is reached.
+
+<tp-graph-geometry canvas-only label="Grouped construction animation">
+<script type="tp/geometry">
+point O = (0, -2)
+point A = (-2, 0)
+point B = (2, 0)
+segment s = segment(A, B)
+point P = midpoint(s)
+animation a = [[A, B], P, s]
+</script>
+</tp-graph-geometry>
+
+Animation controls appear above the drawing, including in canvas-only, zoomed and readonly views. Multiple declarations are allowed: use their name buttons or select the animation in Construction objects to choose one. Only the selected animation controls visibility. Switching animations starts at zero. An empty list `[]` hides nothing and has no available steps.
+
+Lists may span multiple lines and contain source comments. Object names must exist and occur only once within each animation; forward references are accepted. Inner groups must be nonempty, with only one grouping level. Animations cannot reference other animations or serve as geometric supports, and have no style or color options.
+
+Renaming an object updates animation references. Deleting objects removes their references and empty groups from every animation; Undo restores them. Deleting an animation keeps its objects. Applying or loading a construction, or Undo/Redo of construction edits, restarts at step zero. Stepping only changes the view: it does not modify source or create undo entries. Saved source retains animation declarations, while image export captures the current visible step.
+
 ### Appearance and image export
 
 In Move mode, select an object in the drawing or the object list. Its Style and Color menus edit that object. New objects start with a solid stroke and their normal automatic color. Hidden objects are still selectable in the list: choose solid, dotted or dashed to show them again. Changes are undoable, update the source and survive loading from `src`.
@@ -227,7 +285,7 @@ The following commands can be loaded from source or a file with or without `buil
 
 All these constructions follow their supports. Tangent branch 0 touches the circle to the left of the direction from its centre to P; branch 1 touches it to the right. At the circumference, both branches define the same line. Inside the circle they are undefined and reappear when P moves outside again. The Tangents tool creates all currently distinct tangents as one undoable action. A zero-length angle arm leaves the internal angle bisector undefined. A straight angle produces the perpendicular line through its vertex. Coincident points leave lines, rays, vectors and segments undefined until their direction becomes defined again.
 
-A sector is a filled annotation of part of a circle: attach points and construct intersections on its supporting circle or a matching arc. A comment is plain text, never HTML, and follows its anchor point with a fixed screen offset. Lengths and radii are numbers (or transferred distances for circles); there are no symbolic equations.
+A sector is a filled annotation of part of a circle: attach points and construct intersections on its supporting circle or a matching arc. A comment is plain text, never HTML. It can follow an anchor point or be placed freely at coordinates. Drag it in Move mode to change its position without moving the anchor. Lengths and radii are numbers (or transferred distances for circles); there are no symbolic equations.
 
 ### Polygons
 
@@ -404,6 +462,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-geometry.TpGraphGeometry.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

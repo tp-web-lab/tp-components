@@ -62,6 +62,7 @@ import "../icon-button/icon-button.js";
 import "../divider/divider.js";
 import type { TpButton } from "../button/button.js";
 import { choosePlaygroundFile } from "../playground/playground-local-file.js";
+import { renameGeometry } from "./geometry.js";
 import { GEOMETRY_SHORTCUTS } from "./geometry-actions.js";
 import "../accordion/accordion.js";
 import "../callout/callout.js";
@@ -200,7 +201,7 @@ const HINTS: Record<Tool, string> = {
 	regularPolygon:
 		"Set Sides (3–360), then click or select two consecutive vertices. The polygon turns counterclockwise from the first edge.",
 	pan: "Drag anywhere to move the whole figure. Scroll in either direction; arrow keys pan the view.",
-	move: "Drag a point to move it, or drag empty space to move the whole view. Scroll to pan; Shift+scroll pans horizontally.",
+	move: "Drag points, names or comments to move them. Drag empty space to move the view. Scroll to pan; Shift+scroll pans horizontally.",
 	point: "Click the drawing to place a free point.",
 	on: "Click a line, segment, ray, vector, circle or arc to place a point attached to it.",
 	segment: "Select two existing points.",
@@ -211,7 +212,8 @@ const HINTS: Record<Tool, string> = {
 	vector: "Select the starting point, then the endpoint.",
 	sector:
 		"Set start/end angles, then select a circle to draw its angular sector.",
-	comment: "Enter comment text, then select its anchor point.",
+	comment:
+		"Enter comment text, then click anywhere. Clicking a point attaches the comment to it. Move comments with Select / Move.",
 	midpoint: "Select a segment to construct its midpoint.",
 	perpendicular: "Select a point, then a line, segment, ray or vector.",
 	parallel: "Select a point, then a line, segment, ray or vector.",
@@ -248,6 +250,7 @@ const HINTS: Record<Tool, string> = {
  * @keyboard {F1} Opens the action palette.
  * @keyboard {Z} Enlarges or restores the interactive drawing.
  * @keyboard {Escape} Cancels pending construction input and returns to Move.
+ * @keyboard {F2} Opens the inline name field for the selected object.
  * @example
  * <tp-graph-geometry></tp-graph-geometry>
  */
@@ -255,6 +258,8 @@ export class TpGraphGeometry extends TpBase {
 	private static nextId = 0;
 	private readonly controlId = `tp-geometry-${++TpGraphGeometry.nextId}`;
 	private objects: GeometryObject[] = [];
+	private activeAnimation: string | null = null;
+	private animationStep = 0;
 	private result: GeometryResult = evaluateGeometry([]);
 	private initialized = false;
 	private sourceRequest: AbortController | null = null;
@@ -278,7 +283,10 @@ export class TpGraphGeometry extends TpBase {
 		center: GeometryPoint;
 	} | null = null;
 	private suppressCanvasClick = false;
+	private movingName = false;
+	private pointerObject: string | null = null;
 	private drag: {
+		label?: boolean;
 		id: string;
 		before: string;
 		pointer: number;
@@ -334,9 +342,11 @@ export class TpGraphGeometry extends TpBase {
 	/** Atomically replaces the construction; invalid source leaves the previous figure intact. */
 	public setConstruction(source: string): void {
 		const next = parseGeometry(source);
+		this.querySelector("[data-inline-rename]")?.remove();
 		const sourceLabel = geometrySourceLabel(source);
 		const previous = this.value;
 		this.objects = next;
+		this.animationStep = 0;
 		if (sourceLabel !== undefined) this.label = sourceLabel;
 		this.initialized = true;
 		if (previous !== this.value) {
@@ -346,6 +356,7 @@ export class TpGraphGeometry extends TpBase {
 		this.pending = [];
 		this.polygonDraft = [];
 		this.selected = null;
+		this.movingName = false;
 		this.recompute();
 		this.syncSource(source);
 		this.changed();
@@ -379,7 +390,29 @@ export class TpGraphGeometry extends TpBase {
 		} while (count !== removed.size);
 		this.setConstruction(
 			serializeGeometry(
-				this.objects.filter((object) => !removed.has(object.id)),
+				this.objects
+					.filter((object) => !removed.has(object.id))
+					.map((object) =>
+						object.definition.kind === "animation"
+							? {
+									...object,
+									definition: {
+										...object.definition,
+										steps: object.definition.steps
+											.map((step) =>
+												Array.isArray(step)
+													? step.filter((id) => !removed.has(id))
+													: removed.has(step)
+														? []
+														: step,
+											)
+											.filter(
+												(step) => !Array.isArray(step) || step.length > 0,
+											),
+									},
+								}
+							: object,
+					),
 			),
 		);
 	}
@@ -515,10 +548,12 @@ export class TpGraphGeometry extends TpBase {
 
 	private restore(source: string): void {
 		this.objects = parseGeometry(source);
+		this.animationStep = 0;
 		this.label = geometrySourceLabel(source) ?? "";
 		this.pending = [];
 		this.polygonDraft = [];
 		this.selected = null;
+		this.movingName = false;
 		this.recompute();
 		this.syncSource();
 		this.changed();
@@ -814,6 +849,7 @@ export class TpGraphGeometry extends TpBase {
 		return `<tp-icon-button id="${this.controlId}-${id}" library="${library}" name="${name}" label="${label}" title="${label} (${key})" aria-keyshortcuts="${key}" data-geometry-control data-action="${id}"></tp-icon-button>`;
 	}
 	private chooseTool(tool: Tool): void {
+		this.movingName = false;
 		if (this.readonly && tool !== "pan") return;
 		if (!(tool in TOOLS) && !this.builtIn) return;
 		this.tool = tool;
@@ -944,8 +980,8 @@ export class TpGraphGeometry extends TpBase {
 				)
 				.join(
 					'<tp-divider orientation="horizontal"></tp-divider>',
-				)}</ul></tp-dropdown><div class="tp-geometry-context"></div><div class="tp-geometry-canvas"><svg data-geometry-canvas viewBox="0 0 900 ${this.canvasHeight}" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg></div><div class="tp-geometry-view"><tp-icon-button library="tp" name="code" label="Show construction source" title="Show construction source" aria-pressed="false" data-geometry-control data-action="source-view"></tp-icon-button>${this.actionButton("undo", "Undo", "Ctrl+Z")}${this.actionButton("redo", "Redo", "Ctrl+Shift+Z")}${this.actionButton("out", "Zoom out", "-")}${this.actionButton("in", "Zoom in", "+")}${this.actionButton("fit", "Fit", "F")}${this.actionButton("grid", "Grid", "G")}</div></div>
-      <aside><h3>Construction objects</h3><p data-appearance-label>Select an object in Move mode to change its appearance.</p><div class="tp-geometry-appearance"><tp-button id="${this.controlId}-style" outlined data-geometry-control data-action="style-menu" aria-haspopup="menu"><span data-style-label>Style · solid</span></tp-button><tp-dropdown anchor="#${this.controlId}-style" outside-click data-style-menu><ul>${GEOMETRY_STYLES.map((value) => `<li data-stroke="${value}">${value}${value === "solid" ? " (default)" : ""}</li>`).join("")}</ul></tp-dropdown><tp-button id="${this.controlId}-color" outlined data-geometry-control data-action="color-menu" aria-haspopup="menu"><span data-color-label>Color · automatic</span></tp-button><tp-dropdown anchor="#${this.controlId}-color" outside-click data-color-menu><ul><li data-color="">Automatic</li>${GEOMETRY_COLORS.map((value) => `<li data-color="${value}"><span class="tp-geometry-swatch tp-${value}" aria-hidden="true"></span>${value}</li>`).join("")}</ul></tp-dropdown></div><div data-objects></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Constructed points are calculated.</p></aside></div>
+				)}</ul></tp-dropdown><div class="tp-geometry-context"></div><div data-animation-controls role="group" aria-label="Step-by-step construction" hidden></div><div class="tp-geometry-canvas"><svg data-geometry-canvas viewBox="0 0 900 ${this.canvasHeight}" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg></div><div class="tp-geometry-view"><tp-icon-button library="tp" name="code" label="Show construction source" title="Show construction source" aria-pressed="false" data-geometry-control data-action="source-view"></tp-icon-button>${this.actionButton("undo", "Undo", "Ctrl+Z")}${this.actionButton("redo", "Redo", "Ctrl+Shift+Z")}${this.actionButton("out", "Zoom out", "-")}${this.actionButton("in", "Zoom in", "+")}${this.actionButton("fit", "Fit", "F")}${this.actionButton("grid", "Grid", "G")}</div></div>
+      <aside><h3>Construction objects</h3><p data-appearance-label>Select an object in Move mode to change its appearance.</p><div class="tp-geometry-appearance"><tp-button id="${this.controlId}-style" outlined data-geometry-control data-action="style-menu" aria-haspopup="menu"><span data-style-label>Style · solid</span></tp-button><tp-dropdown anchor="#${this.controlId}-style" outside-click data-style-menu><ul>${GEOMETRY_STYLES.map((value) => `<li data-stroke="${value}">${value}${value === "solid" ? " (default)" : ""}</li>`).join("")}</ul></tp-dropdown><tp-button id="${this.controlId}-color" outlined data-geometry-control data-action="color-menu" aria-haspopup="menu"><span data-color-label>Color · automatic</span></tp-button><tp-dropdown anchor="#${this.controlId}-color" outside-click data-color-menu><ul><li data-color="">Automatic</li>${GEOMETRY_COLORS.map((value) => `<li data-color="${value}"><span class="tp-geometry-swatch tp-${value}" aria-hidden="true"></span>${value}</li>`).join("")}</ul></tp-dropdown></div><div class="tp-geometry-object-editor"><tp-textfield data-object-name label="Object name"></tp-textfield><tp-button outlined data-geometry-control data-action="rename">Rename</tp-button><tp-button outlined data-geometry-control data-action="move-name" aria-pressed="false">Move name</tp-button><tp-button outlined data-geometry-control data-action="hide-name" aria-pressed="false">Hide name</tp-button><p>Drag a name in the drawing, or enable Move name and use the arrow keys.</p></div><div data-objects></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Constructed points are calculated.</p></aside></div>
       <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source"><dl><dt>Construction source</dt><dd><div class="tp-geometry-source-toolbar"><div><tp-icon-button id="${this.controlId}-source-files" name="file-outline" label="Construction files (.txt)" title="Construction files (.txt)" aria-haspopup="menu" data-geometry-control data-action="source-files"></tp-icon-button><tp-dropdown anchor="#${this.controlId}-source-files" outside-click data-source-menu><ul><li data-source-file="load">Load (.txt)</li><li data-source-file="save">Save (.txt)</li><li data-source-file="save-as">Save as (.txt)</li></ul></tp-dropdown></div><div class="tp-geometry-source-actions"><tp-icon-button library="tp" name="keyboard-f1" label="F1 — Toggle editor toolbar" title="Toggle editor toolbar (F1)" data-geometry-control data-action="source-toolbar"></tp-icon-button><tp-icon-button name="refresh" label="Reset source" title="Reset source to the displayed construction" data-geometry-control data-action="source-reset"></tp-icon-button><tp-icon-button name="play" label="Play" title="Play — Apply construction source" data-geometry-control data-action="apply"></tp-icon-button></div></div><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor></dd></dl></tp-accordion><dialog class="tp-geometry-dialog" aria-label="Zoomed drawing"></dialog>`;
 
 		if (this.canvasOnly) {
@@ -1078,6 +1114,63 @@ export class TpGraphGeometry extends TpBase {
 			}
 			if (button.dataset.object) this.selectObject(button.dataset.object);
 			const action = button.dataset.action;
+			if (button.dataset.animation) {
+				this.activeAnimation = button.dataset.animation;
+				this.animationStep = 0;
+				this.draw();
+			}
+			if (action?.startsWith("animation-")) {
+				const animation = this.currentAnimation();
+				if (animation?.definition.kind === "animation") {
+					const count = animation.definition.steps.length;
+					this.animationStep =
+						action === "animation-start"
+							? 0
+							: action === "animation-end"
+								? count
+								: Math.max(
+										0,
+										Math.min(
+											count,
+											this.animationStep +
+												(action === "animation-next" ? 1 : -1),
+										),
+									);
+					this.querySelector("[data-inline-rename]")?.remove();
+					this.draw();
+				}
+			}
+			if (action === "rename" && !this.readonly && this.selected) {
+				try {
+					const name =
+						this.querySelector<TpTextfield>(
+							"[data-object-name]",
+						)?.value.trim() ?? "";
+					this.renameObject(this.selected, name);
+				} catch (error) {
+					this.report(String(error));
+				}
+			}
+			if (action === "hide-name" && !this.readonly && this.selected) {
+				const id = this.selected;
+				const next = parseGeometry(this.value);
+				const object = next.find((item) => item.id === id);
+				if (object) {
+					if (object.labelHidden) delete object.labelHidden;
+					else object.labelHidden = true;
+					this.setConstruction(serializeGeometry(next));
+					this.selected = id;
+					this.movingName = false;
+					this.draw();
+				}
+			}
+			if (action === "move-name" && !this.readonly && this.selected) {
+				this.movingName = !this.movingName;
+				this.tool = "move";
+				this.updateTool();
+				this.draw();
+				this.querySelector<SVGSVGElement>("[data-geometry-canvas]")?.focus();
+			}
 			if (action === "source-view") this.toggleSourceView();
 			if (action === "source-files")
 				this.querySelector<TpDropdown>("[data-source-menu]")?.toggle();
@@ -1148,6 +1241,7 @@ export class TpGraphGeometry extends TpBase {
 			const id = (event.target as Element)
 				.closest("[data-id]")
 				?.getAttribute("data-id");
+			this.pointerObject = id ?? null;
 			if (
 				event.button === 1 ||
 				this.tool === "pan" ||
@@ -1168,25 +1262,41 @@ export class TpGraphGeometry extends TpBase {
 			if (this.readonly || this.tool !== "move") return;
 			const object = this.objects.find((o) => o.id === id);
 			if (!object) return;
+			const movingLabel =
+				!!(event.target as Element).closest("[data-name-label]") ||
+				(this.movingName && object.id === this.selected);
 			this.selected = object.id;
-			this.draw();
+			this.movingName = movingLabel;
+			this.draw(true);
 			if (
 				object.definition.kind !== "point" &&
 				object.definition.kind !== "on" &&
-				object.definition.kind !== "measure"
+				object.definition.kind !== "measure" &&
+				object.definition.kind !== "comment" &&
+				!movingLabel
 			)
 				return;
 			const label = this.result.values.get(object.id);
 			const pointer = this.world(event);
 			this.drag = {
-				...(object.definition.kind === "measure" && label?.kind === "comment"
+				...(movingLabel
 					? {
 							grab: {
-								x: label.point.x - pointer.x,
-								y: label.point.y - pointer.y,
+								x: this.namePosition(object).x - pointer.x,
+								y: this.namePosition(object).y - pointer.y,
 							},
 						}
-					: {}),
+					: (object.definition.kind === "measure" ||
+								object.definition.kind === "comment") &&
+							label?.kind === "comment"
+						? {
+								grab: {
+									x: label.point.x - pointer.x,
+									y: label.point.y - pointer.y,
+								},
+							}
+						: {}),
+				label: movingLabel,
 				id: object.id,
 				before: this.value,
 				pointer: event.pointerId,
@@ -1207,7 +1317,10 @@ export class TpGraphGeometry extends TpBase {
 			}
 			if (this.drag && event.pointerId === this.drag.pointer) {
 				const p = this.world(event);
-				this.movePoint(this.drag.id, {
+				const move = this.drag.label
+					? this.moveName.bind(this)
+					: this.movePoint.bind(this);
+				move(this.drag.id, {
 					x: p.x + (this.drag.grab?.x ?? 0),
 					y: p.y + (this.drag.grab?.y ?? 0),
 				});
@@ -1215,10 +1328,13 @@ export class TpGraphGeometry extends TpBase {
 		});
 		const finish = (event: PointerEvent): void => {
 			if (this.pan && event.pointerId === this.pan.pointer) {
+				const unchanged =
+					this.center.x === this.pan.center.x &&
+					this.center.y === this.pan.center.y;
 				if (event.type === "pointercancel") this.center = this.pan.center;
 				this.pan = null;
 				svg.classList.remove("is-panning");
-				this.draw();
+				this.draw(unchanged);
 				return;
 			}
 			if (!this.drag || event.pointerId !== this.drag.pointer) return;
@@ -1236,6 +1352,17 @@ export class TpGraphGeometry extends TpBase {
 				this.draw();
 			}
 		};
+		svg.addEventListener("dblclick", (event) => {
+			if (this.readonly || (this.tool !== "move" && this.tool !== "pan"))
+				return;
+			const id =
+				(event.target as Element)
+					.closest("[data-id]")
+					?.getAttribute("data-id") ?? this.pointerObject;
+			if (!id) return;
+			event.preventDefault();
+			this.editObjectName(id, this.canvasPoint(event));
+		});
 		svg.addEventListener("pointerup", finish);
 		svg.addEventListener("pointercancel", finish);
 		svg.addEventListener("click", (event) => {
@@ -1294,6 +1421,11 @@ export class TpGraphGeometry extends TpBase {
 			{ passive: false },
 		);
 		svg.addEventListener("keydown", (event) => {
+			if (event.key === "F2" && this.selected && !this.readonly) {
+				event.preventDefault();
+				this.editObjectName(this.selected);
+				return;
+			}
 			if (event.key === "Enter" && this.tool === "polygon") {
 				event.preventDefault();
 				this.finishPolygon();
@@ -1334,20 +1466,27 @@ export class TpGraphGeometry extends TpBase {
 				!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)
 			)
 				return;
-			const v = this.result.values.get(this.selected);
+			const object = this.objects.find((o) => o.id === this.selected);
+			const actual = this.result.values.get(this.selected);
+			const v =
+				this.movingName && object
+					? { kind: "point" as const, point: this.namePosition(object) }
+					: actual;
 			if (
 				v?.kind !== "point" &&
 				!(
 					v?.kind === "comment" &&
-					this.objects.find((o) => o.id === this.selected)?.definition.kind ===
-						"measure"
+					["measure", "comment"].includes(object?.definition.kind ?? "")
 				)
 			)
 				return;
 			event.preventDefault();
 			const before = this.value;
 			const step = event.shiftKey ? 0.02 : 0.2;
-			this.movePoint(this.selected, {
+			const move = this.movingName
+				? this.moveName.bind(this)
+				: this.movePoint.bind(this);
+			move(this.selected, {
 				x:
 					v.point.x +
 					(event.key === "ArrowRight"
@@ -1460,9 +1599,92 @@ export class TpGraphGeometry extends TpBase {
 		);
 		this.draw();
 	}
+	private renameObject(id: string, name: string): void {
+		if (this.readonly) return;
+		const next = renameGeometry(this.objects, id, name);
+		if (this.activeAnimation === id) this.activeAnimation = name;
+		this.setConstruction(serializeGeometry(next));
+		this.selected = name;
+		this.draw();
+	}
+	private editObjectName(id: string, position?: GeometryPoint): void {
+		if (this.readonly || !this.objects.some((object) => object.id === id))
+			return;
+		const canvas = this.querySelector<HTMLElement>(".tp-geometry-canvas");
+		if (!canvas) return;
+		this.querySelector("[data-inline-rename]")?.remove();
+		this.selected = id;
+		this.draw();
+		const panel = document.createElement("div");
+		panel.setAttribute("data-inline-rename", "");
+		const field = document.createElement("tp-textfield") as TpTextfield;
+		field.label = "Object name";
+		field.value = id;
+		const hint = document.createElement("small");
+		hint.textContent = "Enter to rename · Escape to cancel";
+		const error = document.createElement("span");
+		error.setAttribute("role", "alert");
+		panel.append(field, hint, error);
+		const object = this.objects.find((object) => object.id === id);
+		if (!object) return;
+		const name = this.namePosition(object);
+		const p = position ?? {
+			x: 450 + (name.x - this.center.x) * this.scale,
+			y: 280 - (name.y - this.center.y) * this.scale,
+		};
+		panel.style.setProperty(
+			"--rename-left",
+			`${Math.max(0, Math.min(100, p.x / 9))}%`,
+		);
+		panel.style.top = `${Math.max(15, Math.min(85, (p.y / this.canvasHeight) * 100))}%`;
+		const close = () => {
+			panel.remove();
+			this.querySelector<SVGSVGElement>("[data-geometry-canvas]")?.focus({
+				preventScroll: true,
+			});
+		};
+		panel.addEventListener("keydown", (event) => {
+			event.stopPropagation();
+			if (event.key === "Escape") {
+				event.preventDefault();
+				close();
+			}
+			if (event.key === "Enter") {
+				event.preventDefault();
+				try {
+					this.renameObject(id, field.value.trim());
+					close();
+				} catch (reason) {
+					error.textContent =
+						reason instanceof Error ? reason.message : String(reason);
+					field.focus();
+				}
+			}
+		});
+		panel.addEventListener("focusout", () => {
+			queueMicrotask(() => {
+				if (panel.isConnected && !panel.contains(document.activeElement))
+					panel.remove();
+			});
+		});
+		canvas.append(panel);
+		field.focus({ preventScroll: true });
+		field.select();
+	}
 	private selectObject(id: string): void {
+		if (
+			this.objects.find((object) => object.id === id)?.definition.kind ===
+			"animation"
+		) {
+			this.activeAnimation = id;
+			this.animationStep = 0;
+			this.selected = id;
+			this.draw();
+			return;
+		}
 		if (this.tool === "move" || this.tool === "pan" || this.readonly) {
 			this.selected = id;
+			this.movingName = false;
 			this.draw();
 			this.querySelector<SVGSVGElement>("svg[data-geometry-canvas]")?.focus();
 			return;
@@ -1550,6 +1772,12 @@ export class TpGraphGeometry extends TpBase {
 		const value = id ? this.result.values.get(id) : null;
 		if (this.tool === "point") {
 			this.appendConstruction(`point ${this.pointName()} = (${p.x}, ${p.y})`);
+			return;
+		}
+		if (this.tool === "comment") {
+			this.appendConstruction(
+				`comment ${this.name("note")} = comment(${value?.kind === "point" ? id : `(${p.x}, ${p.y})`}, ${JSON.stringify(this.field("comment"))})`,
+			);
 			return;
 		}
 		if (!id || !value) throw new Error("Select an existing, defined object.");
@@ -1671,13 +1899,7 @@ export class TpGraphGeometry extends TpBase {
 			);
 			return;
 		}
-		if (this.tool === "comment") {
-			if (value.kind !== "point") throw new Error("Select an anchor point.");
-			this.appendConstruction(
-				`comment ${this.name("note")} = comment(${id}, ${JSON.stringify(this.field("comment"))})`,
-			);
-			return;
-		}
+
 		if (this.tool === "midpoint" || this.tool === "perpendicularBisector") {
 			if (value.kind !== "segment") throw new Error("Select a segment.");
 			this.appendConstruction(
@@ -1821,13 +2043,48 @@ export class TpGraphGeometry extends TpBase {
 			y: (280 - p.y) / this.scale + this.center.y,
 		};
 	}
+	private namePosition(object: GeometryObject, offset = true): GeometryPoint {
+		const v = this.result.values.get(object.id);
+		let p = { x: 0, y: 0 };
+		if (v?.kind === "point" || v?.kind === "comment") p = v.point;
+		else if (v && isLinear(v))
+			p = { x: (v.first.x + v.second.x) / 2, y: (v.first.y + v.second.y) / 2 };
+		else if (v?.kind === "polygon")
+			p = {
+				x: v.vertices.reduce((sum, p) => sum + p.x, 0) / v.vertices.length,
+				y: v.vertices.reduce((sum, p) => sum + p.y, 0) / v.vertices.length,
+			};
+		else if (v?.kind === "arc" || v?.kind === "sector")
+			p = {
+				x: v.center.x + v.radius * Math.cos(v.start + v.sweep / 2),
+				y: v.center.y + v.radius * Math.sin(v.start + v.sweep / 2),
+			};
+		else if (v && "center" in v)
+			p = { x: v.center.x + v.radius, y: v.center.y };
+		return offset
+			? {
+					x: p.x + (object.labelOffset?.x ?? 0) + 11 / this.scale,
+					y: p.y + (object.labelOffset?.y ?? 0) + 10 / this.scale,
+				}
+			: p;
+	}
+	private moveName(id: string, p: GeometryPoint): void {
+		const object = this.objects.find((o) => o.id === id);
+		if (!object) return;
+		const anchor = this.namePosition(object, false);
+		object.labelOffset = {
+			x: p.x - anchor.x - 11 / this.scale,
+			y: p.y - anchor.y - 10 / this.scale,
+		};
+		this.recompute();
+	}
 	private movePoint(id: string, p: GeometryPoint): void {
 		const d = this.objects.find((o) => o.id === id)?.definition;
 		if (!d) return;
 		if (d.kind === "point") {
 			d.x = p.x;
 			d.y = p.y;
-		} else if (d.kind === "measure") {
+		} else if (d.kind === "measure" || d.kind === "comment") {
 			const current = this.result.values.get(id);
 			if (current?.kind !== "comment") return;
 			const x = (d.offset?.x ?? 0) + p.x - current.point.x;
@@ -1884,7 +2141,64 @@ export class TpGraphGeometry extends TpBase {
 		}
 		this.draw();
 	}
-	private draw(): void {
+	private currentAnimation(): GeometryObject | undefined {
+		const animations = this.objects.filter(
+			(object) => object.definition.kind === "animation",
+		);
+		const active =
+			animations.find((object) => object.id === this.activeAnimation) ??
+			animations[0];
+		this.activeAnimation = active?.id ?? null;
+		return active;
+	}
+	private syncAnimationControls(): Set<string> {
+		const active = this.currentAnimation();
+		const steps =
+			active?.definition.kind === "animation" ? active.definition.steps : [];
+		this.animationStep = Math.min(this.animationStep, steps.length);
+		const controls = this.querySelector<HTMLElement>(
+			"[data-animation-controls]",
+		);
+		if (controls) {
+			controls.hidden = !active;
+			const names = this.objects
+				.filter((object) => object.definition.kind === "animation")
+				.map((object) => object.id);
+			const signature = JSON.stringify(names);
+			if (controls.dataset.names !== signature) {
+				controls.dataset.names = signature;
+				controls.innerHTML = `${names.map((id) => `<tp-button outlined data-geometry-control data-animation="${id}">${id}</tp-button>`).join("")}<tp-icon-button name="chevron-left-first" label="Start animation" title="Start animation" data-geometry-control data-action="animation-start"></tp-icon-button><tp-icon-button name="chevron-left" label="Previous animation step" title="Previous animation step" data-geometry-control data-action="animation-previous"></tp-icon-button><span data-animation-status role="status" aria-live="polite"></span><tp-icon-button name="chevron-right" label="Next animation step" title="Next animation step" data-geometry-control data-action="animation-next"></tp-icon-button><tp-icon-button name="chevron-right-last" label="Show complete animation" title="Show complete animation" data-geometry-control data-action="animation-end"></tp-icon-button>`;
+			}
+			for (const button of controls.querySelectorAll<TpButton>(
+				"[data-animation]",
+			)) {
+				button.setAttribute(
+					"aria-pressed",
+					String(button.dataset.animation === active?.id),
+				);
+				button.toggleAttribute(
+					"outlined",
+					button.dataset.animation !== active?.id,
+				);
+			}
+			const status = controls.querySelector("[data-animation-status]");
+			if (status)
+				status.textContent = `${this.animationStep} / ${steps.length}`;
+			for (const action of ["start", "previous", "next", "end"]) {
+				const button = controls.querySelector<TpButton>(
+					`[data-action="animation-${action}"]`,
+				);
+				if (button)
+					button.disabled =
+						action === "start" || action === "previous"
+							? this.animationStep === 0
+							: this.animationStep === steps.length;
+			}
+		}
+		return new Set(steps.slice(this.animationStep).flat());
+	}
+	private draw(preserveShapes = false): void {
+		const animationHidden = this.syncAnimationControls();
 		const group = this.querySelector("[data-drawing]");
 		if (!group) return;
 		const x = (n: number): number => 450 + (n - this.center.x) * this.scale;
@@ -1893,12 +2207,16 @@ export class TpGraphGeometry extends TpBase {
 		const points: string[] = [];
 		for (const object of this.objects) {
 			const v = this.result.values.get(object.id);
-			if (!v || object.hidden) continue;
+			if (!v || object.hidden || animationHidden.has(object.id)) continue;
 			const attributes = `data-id="${object.id}" class="tp-geometry-shape ${object.color ? `has-color tp-${object.color}` : ""} stroke-${object.stroke ?? "solid"} ${this.selected === object.id || this.pending.includes(object.id) ? "is-selected" : ""}"`;
+			const name = this.namePosition(object);
+			const nameLabel = object.labelHidden
+				? ""
+				: `<text data-name-label x="${x(name.x)}" y="${y(name.y)}">${object.id}</text>`;
 			let shape = "";
 			if (v.kind === "point") {
 				points.push(
-					`<g ${attributes}><circle class="point-hit" cx="${x(v.point.x)}" cy="${y(v.point.y)}" r="13"/><circle class="point ${object.definition.kind === "point" ? "free" : "dependent"}" cx="${x(v.point.x)}" cy="${y(v.point.y)}" r="5"/><text x="${x(v.point.x) + 11}" y="${y(v.point.y) - 10}">${object.id}</text><title>${object.id} · ${object.definition.kind}</title></g>`,
+					`<g ${attributes}><circle class="point-hit" cx="${x(v.point.x)}" cy="${y(v.point.y)}" r="13"/><circle class="point ${object.definition.kind === "point" ? "free" : "dependent"}" cx="${x(v.point.x)}" cy="${y(v.point.y)}" r="5"/>${nameLabel}<title>${object.id} · ${object.definition.kind}</title></g>`,
 				);
 				continue;
 			}
@@ -1941,12 +2259,12 @@ export class TpGraphGeometry extends TpBase {
 						: `M ${a.x} ${a.y} A ${r} ${r} 0 0 ${mark.sweep > 0 ? 0 : 1} ${b.x} ${b.y}`;
 					const label = at(mark.start + mark.sweep / 2, 46);
 					points.push(
-						`<g ${attributes}><g class="shape-hit"><path d="${path}"/></g><g class="shape-ink"><path data-angle-mark="${mark.right ? "right" : "arc"}" d="${path}"/></g>${mark.right ? "" : `<text text-anchor="middle" dominant-baseline="middle" x="${label.x + (v.point.x - mark.vertex.x) * this.scale}" y="${label.y - (v.point.y - mark.vertex.y) * this.scale}">${escapeHtml(v.text)}</text>`}<title>${object.id}${mark.right ? " · Right angle" : ""}</title></g>`,
+						`<g ${attributes}><g class="shape-hit"><path d="${path}"/></g><g class="shape-ink"><path data-angle-mark="${mark.right ? "right" : "arc"}" d="${path}"/></g>${mark.right ? "" : `<text text-anchor="middle" dominant-baseline="middle" x="${label.x + (v.point.x - mark.vertex.x) * this.scale}" y="${label.y - (v.point.y - mark.vertex.y) * this.scale}">${escapeHtml(v.text)}</text>`}${object.labelOffset || (this.movingName && this.selected === object.id) ? nameLabel : ""}<title>${object.id}${mark.right ? " · Right angle" : ""}</title></g>`,
 					);
 					continue;
 				}
 				points.push(
-					`<g ${attributes}><text x="${x(v.point.x) + 12}" y="${y(v.point.y) + 24}">${escapeHtml(v.text)}</text><title>${object.id}</title></g>`,
+					`<g ${attributes}><text x="${x(v.point.x) + 12}" y="${y(v.point.y) + 24}">${escapeHtml(v.text)}</text>${object.labelOffset || (this.movingName && this.selected === object.id) ? nameLabel : ""}<title>${object.id}</title></g>`,
 				);
 				continue;
 			} else if (v.kind === "circle")
@@ -1963,7 +2281,7 @@ export class TpGraphGeometry extends TpBase {
 				shape = `<path d="${v.kind === "sector" ? `M ${x(v.center.x)} ${y(v.center.y)} L` : "M"} ${x(start.x)} ${y(start.y)} A ${v.radius * this.scale} ${v.radius * this.scale} 0 ${Math.abs(v.sweep) > Math.PI ? 1 : 0} ${v.sweep > 0 ? 0 : 1} ${x(end.x)} ${y(end.y)}${v.kind === "sector" ? " Z" : ""}"/>`;
 			}
 			shapes.push(
-				`<g ${attributes}><g class="shape-hit">${shape}</g><g class="shape-ink ${v.kind}">${shape}</g><title>${object.id}</title></g>`,
+				`<g ${attributes}><g class="shape-hit">${shape}</g><g class="shape-ink ${v.kind}">${shape}</g>${nameLabel}<title>${object.id}</title></g>`,
 			);
 		}
 		const draftPoints = this.pending
@@ -1988,7 +2306,14 @@ export class TpGraphGeometry extends TpBase {
 						})
 						.join("")}</g>`
 				: "";
-		group.innerHTML = `${shapes.join("")}${points.join("")}${preview}`;
+		if (preserveShapes) {
+			for (const shape of group.querySelectorAll<SVGElement>("[data-id]"))
+				shape.classList.toggle(
+					"is-selected",
+					shape.dataset.id === this.selected ||
+						this.pending.includes(shape.dataset.id ?? ""),
+				);
+		} else group.innerHTML = `${shapes.join("")}${points.join("")}${preview}`;
 		const finish = this.querySelector<TpButton>(
 			'[data-action="finish-polygon"]',
 		);
@@ -2022,13 +2347,40 @@ export class TpGraphGeometry extends TpBase {
 			"pan-mode",
 			this.tool === "pan",
 		);
+		const nameField = this.querySelector<TpTextfield>("[data-object-name]");
+		if (nameField) {
+			if (
+				!nameField.contains(document.activeElement) &&
+				document.activeElement !== nameField
+			)
+				nameField.value = this.selected ?? "";
+			nameField.disabled = this.readonly || !this.selected;
+		}
+		for (const action of ["rename", "move-name", "hide-name"]) {
+			const button = this.querySelector<TpButton>(`[data-action="${action}"]`);
+			if (button)
+				button.disabled =
+					this.readonly ||
+					!this.selected ||
+					(action !== "rename" &&
+						this.objects.find((o) => o.id === this.selected)?.definition
+							.kind === "animation");
+		}
+		this.querySelector('[data-action="move-name"]')?.setAttribute(
+			"aria-pressed",
+			String(this.movingName),
+		);
+		this.querySelector('[data-action="move-name"]')?.toggleAttribute(
+			"outlined",
+			!this.movingName,
+		);
 		const list = this.querySelector("[data-objects]");
 		if (list) {
 			const markup =
 				this.objects
 					.map(
 						(o) =>
-							`<tp-button type="button" outlined data-geometry-control data-object="${o.id}" aria-pressed="${this.selected === o.id}" title="${escapeHtml(this.result.errors.get(o.id) ?? o.definition.kind)}"><b>${o.id}</b><span class="object-kind">${this.result.errors.has(o.id) ? "Undefined" : o.definition.kind}${o.hidden ? " · hidden" : ""}</span></tp-button>`,
+							`<tp-button type="button" outlined data-geometry-control data-object="${o.id}" aria-pressed="${this.selected === o.id}" title="${escapeHtml(this.result.errors.get(o.id) ?? o.definition.kind)}"><b>${o.id}</b><span class="object-kind">${this.result.errors.has(o.id) ? "Undefined" : o.definition.kind}${o.hidden ? " · hidden" : ""}${o.labelHidden ? " · name hidden" : ""}</span></tp-button>`,
 					)
 					.join("") || "<p>Place your first point.</p>";
 			if (markup !== this.objectListMarkup) {
@@ -2037,12 +2389,25 @@ export class TpGraphGeometry extends TpBase {
 			}
 		}
 		const selected = this.objects.find((object) => object.id === this.selected);
+		const hideName = this.querySelector('[data-action="hide-name"]');
+		hideName?.setAttribute("aria-pressed", String(!!selected?.labelHidden));
+		hideName?.toggleAttribute("outlined", !selected?.labelHidden);
+		const moveName = this.querySelector<TpButton>('[data-action="move-name"]');
+		if (moveName)
+			moveName.disabled =
+				this.readonly ||
+				!selected ||
+				!!selected.labelHidden ||
+				selected.definition.kind === "animation";
 		for (const action of ["style", "color"] as const) {
 			const button = this.querySelector<TpButton>(
 				`[data-action="${action}-menu"]`,
 			);
 			if (button) {
-				button.disabled = this.readonly || !selected;
+				button.disabled =
+					this.readonly ||
+					!selected ||
+					selected.definition.kind === "animation";
 				const label = button.querySelector(`[data-${action}-label]`);
 				if (label)
 					label.textContent =

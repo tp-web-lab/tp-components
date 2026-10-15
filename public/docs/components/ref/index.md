@@ -157,6 +157,7 @@ CSS properties
 
 
 
+
 ### Imports
 
 ::: tp-tabs
@@ -200,6 +201,10 @@ All tp-components used by `<tp-ref>` are loaded automatically by this component 
 @summary Defines a bibliography entry referenced by tp-ref.
 -->
 <!--
+@tp-dependency tp-button
+@summary an action button or navigation link with shared sizes, variants and loading states.
+-->
+<!--
 @tp-dependency tp-glossary
 @summary Defines a glossary entry referenced by tp-ref.
 -->
@@ -214,6 +219,7 @@ All tp-components used by `<tp-ref>` are loaded automatically by this component 
 
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
 - [`<tp-biblio>`](../biblio/index.md) : Defines a bibliography entry referenced by tp-ref.
+- [`<tp-button>`](../button/index.md) : an action button or navigation link with shared sizes, variants and loading states.
 - [`<tp-glossary>`](../glossary/index.md) : Defines a glossary entry referenced by tp-ref.
 - [`<tp-note>`](../note/index.md) : Defines an HTML note referenced by tp-ref.
 - [`<tp-tooltip>`](../tooltip/index.md) : Displays anchored tooltip content.

@@ -133,7 +133,9 @@ describe("geometry appearance and export", () => {
 		expect(svg).not.toMatch(
 			/is-selected|point-hit|shape-hit|data-id|tp-button|visibility: hidden/,
 		);
-		expect(doc.querySelector("text")?.textContent).toBe("A");
+		expect(
+			Array.from(doc.querySelectorAll("text"), (node) => node.textContent),
+		).toContain("A");
 		expect(doc.documentElement.textContent).toContain("<safe> & text");
 		expect(editor.value).toBe(before);
 		expect(editor.querySelectorAll("svg[data-geometry-canvas]")).toHaveLength(
