@@ -1,3 +1,14 @@
+/**
+ * Writes documentation pages and Basic usage examples in four languages for the component
+ * definitions embedded in this file.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. This generator
+ * overwrites its target pages and example files, even when they already exist.
+ *
+ * @example
+ * node scripts/create-missing-component-docs.mjs
+ */
+
 import { imports } from './component-doc-imports.mjs';
 import { componentUsage } from './component-doc-usage.mjs';
 import { exampleFile, markupExample } from './component-basic-examples.mjs';

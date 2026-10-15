@@ -1,3 +1,13 @@
+/**
+ * Tests Basic usage ordering, grouped Attributes panels and normalization idempotence.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/component-example-structure.test.mjs
+ */
+
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";

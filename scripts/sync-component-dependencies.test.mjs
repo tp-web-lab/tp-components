@@ -1,3 +1,13 @@
+/**
+ * Tests dependency synchronization, rendered list structure and unknown-component rejection.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/sync-component-dependencies.test.mjs
+ */
+
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';

@@ -1,3 +1,13 @@
+/**
+ * Regenerates numberfield Basic usage examples from the live introduction and rebuilds its
+ * grouped Attributes panel.
+ *
+ * Run from the tp-components package root with workspace dependencies installed.
+ *
+ * @example
+ * node scripts/sync-numberfield-examples.mjs
+ */
+
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { exampleFile, markupExample } from "./component-basic-examples.mjs";
 import { standardizeComponentExamples } from "./standardize-component-examples.mjs";

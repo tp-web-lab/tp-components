@@ -1,3 +1,13 @@
+/**
+ * Tests grouped controls, defaults, runtime modules and reviewed resource fixtures.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/interactive-attribute-examples.test.mjs
+ */
+
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";

@@ -1,3 +1,13 @@
+/**
+ * Tests raw-HTML detection, native conversion and repository example compliance.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/check-native-markup.test.mjs
+ */
+
 import assert from "node:assert/strict";
 import test from "node:test";
 import { auditNativeMarkup, rawMarkup } from "./check-native-markup.mjs";

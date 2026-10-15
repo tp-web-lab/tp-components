@@ -1,3 +1,14 @@
+/**
+ * Tests separation of user interactions and author directives while preserving reviewed prose
+ * and code fences.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/component-doc-usage.test.mjs
+ */
+
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';

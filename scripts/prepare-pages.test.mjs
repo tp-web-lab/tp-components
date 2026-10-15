@@ -1,3 +1,14 @@
+/**
+ * Tests deployment URL rewriting, output replacement, source preservation and Pages workflow
+ * configuration.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/prepare-pages.test.mjs
+ */
+
 import assert from "node:assert/strict";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";

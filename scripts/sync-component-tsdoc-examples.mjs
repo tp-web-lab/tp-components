@@ -1,3 +1,13 @@
+/**
+ * Synchronizes component class JSDoc examples with their documentation introductions.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Updates
+ * TypeScript sources so each class has one introductory example.
+ *
+ * @example
+ * node scripts/sync-component-tsdoc-examples.mjs
+ */
+
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import ts from 'typescript';

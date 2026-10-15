@@ -1,3 +1,14 @@
+/**
+ * Provides curated English descriptions for component example titles and rejects unknown
+ * examples.
+ *
+ * Import this helper from a Node.js ES module; it is not a standalone command.
+ *
+ * @example
+ * import { describeExample } from "./scripts/component-example-descriptions.mjs";
+ * const description = describeExample("button", "Basic usage");
+ */
+
 import { attributeObjectives } from "./component-attribute-examples.mjs";
 import { exampleRefinements } from "./component-example-refinements.mjs";
 import { describeAttributeControl } from "./interactive-attribute-examples.mjs";

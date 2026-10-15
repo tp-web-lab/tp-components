@@ -1,3 +1,17 @@
+/**
+ * Migrates empty icon blocks to native inline icons in Markdown, AsciiDoc and reStructuredText
+ * examples.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Preserves
+ * structured icon bodies. Use --check to report files needing migration without writing.
+ *
+ * @example
+ * node scripts/sync-inline-icon-examples.mjs
+ *
+ * @example
+ * node scripts/sync-inline-icon-examples.mjs --check
+ */
+
 import { existsSync, readdirSync, writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { exampleFile } from "./component-basic-examples.mjs";

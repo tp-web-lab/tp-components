@@ -1,3 +1,16 @@
+/**
+ * Parses and serializes named component examples and keeps Basic usage synchronized across
+ * markup languages.
+ *
+ * Import this helper from a Node.js ES module; it is not a standalone command.
+ *
+ * @example
+ * import { exampleFile } from "./scripts/component-basic-examples.mjs";
+ * const html = exampleFile("html", "tp-button", [
+ *   { label: "Basic usage", source: "<tp-button>Continue</tp-button>" },
+ * ]);
+ */
+
 import { parseFragment, serializeOuter } from "parse5";
 import { EXAMPLE_TABS_FENCE } from "./component-example-tabs.mjs";
 import { nativeMarkup } from "./native-markup.mjs";

@@ -1,3 +1,14 @@
+/**
+ * Builds editorial User interactions and Author directives sections while preserving reviewed
+ * content and fenced examples.
+ *
+ * Import this helper from a Node.js ES module; it is not a standalone command.
+ *
+ * @example
+ * import { componentUsage } from "./scripts/component-doc-usage.mjs";
+ * const usage = componentUsage("button", "");
+ */
+
 // Editorial descriptions: describe the rendered interface, never its construction.
 const interactions = new Map();
 function describe(names, text) {

@@ -1,3 +1,17 @@
+/**
+ * Synchronizes internal dependencies and external credits across component sources, JSON
+ * manifests and documentation.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Use --check for
+ * validation only, or --component NAME to restrict processing.
+ *
+ * @example
+ * node scripts/sync-component-dependencies.mjs
+ *
+ * @example
+ * node scripts/sync-component-dependencies.mjs --check --component button
+ */
+
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 

@@ -1,3 +1,13 @@
+/**
+ * Tests language-tab delimiter normalization and protection against nested fences.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/component-example-tabs.test.mjs
+ */
+
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import test from 'node:test';

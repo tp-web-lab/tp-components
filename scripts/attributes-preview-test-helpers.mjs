@@ -1,3 +1,14 @@
+/**
+ * Provides a jsdom object-URL stub that tracks preview documents and revoked URLs.
+ *
+ * Import this helper from a Node.js ES module; it is not a standalone command. Pass an existing
+ * jsdom window before initializing the preview code.
+ *
+ * @example
+ * import { trackPreviewDocuments } from "./scripts/attributes-preview-test-helpers.mjs";
+ * const preview = trackPreviewDocuments(dom.window);
+ */
+
 import { Blob } from "node:buffer";
 
 /** Emulates object URLs while keeping their documents readable in jsdom. */

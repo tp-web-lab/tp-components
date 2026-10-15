@@ -1,3 +1,17 @@
+/**
+ * Synchronizes live component introductions with Basic usage examples in all four languages,
+ * including preview frames where needed.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Use --check to
+ * report outdated generated content without writing files.
+ *
+ * @example
+ * node scripts/sync-component-doc-introductions.mjs
+ *
+ * @example
+ * node scripts/sync-component-doc-introductions.mjs --check
+ */
+
 import {
 	existsSync,
 	mkdirSync,

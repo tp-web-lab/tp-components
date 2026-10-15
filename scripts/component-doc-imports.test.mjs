@@ -1,3 +1,13 @@
+/**
+ * Tests generation and idempotent synchronization of Imports sections.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/component-doc-imports.test.mjs
+ */
+
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';

@@ -1,3 +1,14 @@
+/**
+ * Rebuilds the component catalogue and family tables from documentation navigation and component
+ * descriptions.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Writes
+ * public/docs/components/index.md.
+ *
+ * @example
+ * node scripts/sync-component-index.mjs
+ */
+
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 

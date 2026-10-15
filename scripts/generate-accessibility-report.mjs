@@ -1,3 +1,18 @@
+/**
+ * Builds the transversal accessibility appendix from component metadata, test sources and saved
+ * browser audit results.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Use --check to
+ * detect an outdated appendix without writing it. This script consumes results; it does not run
+ * browser audits.
+ *
+ * @example
+ * node scripts/generate-accessibility-report.mjs
+ *
+ * @example
+ * node scripts/generate-accessibility-report.mjs --check
+ */
+
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 

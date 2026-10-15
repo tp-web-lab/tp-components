@@ -1,3 +1,13 @@
+/**
+ * Tests mouse and keyboard interaction tables and code-editor command documentation.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/component-user-interactions.test.mjs
+ */
+
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { resolve } from "node:path";

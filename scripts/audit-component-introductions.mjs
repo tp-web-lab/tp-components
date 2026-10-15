@@ -1,3 +1,14 @@
+/**
+ * Audits isolated component introductions in Chromium and saves JSON reports and screenshots.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Start the
+ * documentation server first. TP_INTRO_AUDIT_OUTPUT is required; TP_INTRO_AUDIT_ORIGIN defaults
+ * to http://127.0.0.1:4173. Optional positional component names limit the audit.
+ *
+ * @example
+ * TP_INTRO_AUDIT_OUTPUT=/tmp/tp-introductions node scripts/audit-component-introductions.mjs button
+ */
+
 import {
 	existsSync,
 	mkdirSync,

@@ -1,3 +1,17 @@
+/**
+ * Recreates .pages from dist, rewrites local URLs for a deployment base and removes source maps.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Build dist
+ * first. The optional base must start and end with / and defaults to /tp-components/. The dist
+ * directory is preserved.
+ *
+ * @example
+ * node scripts/prepare-pages.mjs
+ *
+ * @example
+ * node scripts/prepare-pages.mjs /demo/
+ */
+
 import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { extname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";

@@ -1,3 +1,13 @@
+/**
+ * Synchronizes links from component documentation pages to their generated TypeDoc class pages.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Generate
+ * public/api first, for example with pnpm exec typedoc.
+ *
+ * @example
+ * node scripts/sync-typedoc-links.mjs
+ */
+
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 

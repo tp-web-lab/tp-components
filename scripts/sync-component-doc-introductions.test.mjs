@@ -1,3 +1,14 @@
+/**
+ * Tests live introductions, Basic usage consistency, preview layouts and synchronization
+ * idempotence.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/sync-component-doc-introductions.test.mjs
+ */
+
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";

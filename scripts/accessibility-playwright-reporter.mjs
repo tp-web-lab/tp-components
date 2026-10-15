@@ -1,3 +1,14 @@
+/**
+ * Collects Playwright accessibility attachments, saves browser and run results in config, and
+ * refreshes the accessibility appendix.
+ *
+ * Loaded as a reporter by playwright.a11y.config.ts. Use the targeted runner for one component;
+ * TP_A11Y_COMPONENTS can provide a JSON array of selected component names.
+ *
+ * @example
+ * node scripts/test-a11y-component.mjs button
+ */
+
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';

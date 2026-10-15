@@ -1,3 +1,17 @@
+/**
+ * Builds the component quality overview from configured components, saved coverage and available
+ * execution results.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Generate the
+ * required coverage data first. Use --check to compare the saved report without writing it.
+ *
+ * @example
+ * node scripts/generate-component-quality-report.mjs
+ *
+ * @example
+ * node scripts/generate-component-quality-report.mjs --check
+ */
+
 import { execFileSync } from "node:child_process";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { relative, resolve, sep } from "node:path";

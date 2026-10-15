@@ -1,3 +1,13 @@
+/**
+ * Rebuilds multi-choice question examples in all four languages, generates shared attributes and
+ * updates the live introduction.
+ *
+ * Run from the tp-components package root with workspace dependencies installed.
+ *
+ * @example
+ * node scripts/sync-multi-choice-examples.mjs
+ */
+
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { exampleFile, markupExample } from "./component-basic-examples.mjs";

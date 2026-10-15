@@ -1,3 +1,17 @@
+/**
+ * Synchronizes generated API and Imports sections in component documentation from published JSON
+ * manifests.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Use --check for
+ * validation only, or --component NAME to restrict processing.
+ *
+ * @example
+ * node scripts/sync-component-api-docs.mjs
+ *
+ * @example
+ * node scripts/sync-component-api-docs.mjs --check --component button
+ */
+
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { syncImports } from './component-doc-imports.mjs';

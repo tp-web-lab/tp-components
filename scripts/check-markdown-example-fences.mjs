@@ -1,3 +1,14 @@
+/**
+ * Checks nested fences in component Markdown examples for delimiters that close an enclosing
+ * example too early.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Throws when
+ * invalid nesting is found.
+ *
+ * @example
+ * node scripts/check-markdown-example-fences.mjs
+ */
+
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';

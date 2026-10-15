@@ -1,3 +1,13 @@
+/**
+ * Tests nested table-cell list conversion in Markdown, AsciiDoc and reStructuredText.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/native-markup-table.test.mjs
+ */
+
 import assert from "node:assert/strict";
 import test from "node:test";
 import { nativeMarkup } from "./native-markup.mjs";

@@ -1,3 +1,13 @@
+/**
+ * Converts representative saved Lighthouse CI runs into the Lighthouse documentation appendix.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Requires
+ * .lighthouseci/reports/manifest.json and the report files it references.
+ *
+ * @example
+ * node scripts/generate-lighthouse-report.mjs
+ */
+
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';

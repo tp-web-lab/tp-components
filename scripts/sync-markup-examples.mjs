@@ -1,3 +1,17 @@
+/**
+ * Translates HTML component examples into native Markdown, AsciiDoc and reStructuredText,
+ * writing extracted assets when required.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Optional
+ * positional component directory names restrict processing.
+ *
+ * @example
+ * node scripts/sync-markup-examples.mjs
+ *
+ * @example
+ * node scripts/sync-markup-examples.mjs button icon
+ */
+
 import {
 	existsSync,
 	mkdirSync,

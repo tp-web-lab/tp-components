@@ -1,3 +1,15 @@
+/**
+ * Validates package entry points, type declarations, release documents and lazy production
+ * dependencies.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Build the
+ * package first so dist and its source maps are available; failed assertions stop release
+ * validation.
+ *
+ * @example
+ * node scripts/check-release.mjs
+ */
+
 import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";

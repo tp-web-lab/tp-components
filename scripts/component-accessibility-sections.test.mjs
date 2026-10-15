@@ -1,3 +1,14 @@
+/**
+ * Tests the absence of redundant component Accessibility sections and presence of the
+ * transversal appendix.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/component-accessibility-sections.test.mjs
+ */
+
 import assert from "node:assert/strict";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { test } from "node:test";

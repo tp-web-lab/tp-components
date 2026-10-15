@@ -1,3 +1,14 @@
+/**
+ * Rebuilds family introduction pages and updates the documentation sidebar from component
+ * metadata and curated family descriptions.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Optional
+ * positional family paths from the sidebar restrict the families processed.
+ *
+ * @example
+ * node scripts/sync-family-introductions.mjs
+ */
+
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 const descriptions = {

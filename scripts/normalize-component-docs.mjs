@@ -1,3 +1,14 @@
+/**
+ * Reorganizes component documentation into standard introduction, usage, examples, API, imports
+ * and dependency sections.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Updates
+ * documentation pages and example files in place.
+ *
+ * @example
+ * node scripts/normalize-component-docs.mjs
+ */
+
 import { imports } from './component-doc-imports.mjs';
 import { componentUsage } from './component-doc-usage.mjs';
 import { exampleFile, markupExample } from './component-basic-examples.mjs';

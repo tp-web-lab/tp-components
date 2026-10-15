@@ -1,3 +1,14 @@
+/**
+ * Builds shared grouped Attributes examples and runtime code for text, math, date, time and
+ * number fields.
+ *
+ * Import this helper from a Node.js ES module; it is not a standalone command.
+ *
+ * @example
+ * import { textfieldAttributesExample } from "./scripts/textfield-attributes-example.mjs";
+ * const html = textfieldAttributesExample("textfield");
+ */
+
 import { readFileSync } from "node:fs";
 import { attributeControl } from "./interactive-attribute-examples.mjs";
 

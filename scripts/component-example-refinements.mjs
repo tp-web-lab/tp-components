@@ -1,3 +1,14 @@
+/**
+ * Exports curated replacements for generic complementary examples used by the refinement
+ * generator.
+ *
+ * Import this helper from a Node.js ES module; it is not a standalone command.
+ *
+ * @example
+ * import { exampleRefinements } from "./scripts/component-example-refinements.mjs";
+ * console.log(Object.keys(exampleRefinements));
+ */
+
 /** Curated replacements for redundant examples, with observable author-facing behavior. */
 export const exampleRefinements = {
  "post-it": [{

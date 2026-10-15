@@ -1,3 +1,14 @@
+/**
+ * Rewrites component attribute JSDoc declarations into the standard type, default and
+ * description format.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Updates
+ * TypeScript component sources in place using their JSON manifests.
+ *
+ * @example
+ * node scripts/normalize-component-attr-comments.mjs
+ */
+
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 

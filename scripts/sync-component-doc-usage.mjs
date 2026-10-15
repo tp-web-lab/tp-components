@@ -1,3 +1,17 @@
+/**
+ * Synchronizes the User interactions and Author directives subsections of component
+ * documentation.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Uses the
+ * editorial rules in component-doc-usage.mjs; --check reports outdated pages without writing.
+ *
+ * @example
+ * node scripts/sync-component-doc-usage.mjs
+ *
+ * @example
+ * node scripts/sync-component-doc-usage.mjs --check
+ */
+
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { componentUsage } from './component-doc-usage.mjs';

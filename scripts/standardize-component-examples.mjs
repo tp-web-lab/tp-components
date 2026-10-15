@@ -1,3 +1,18 @@
+/**
+ * Rebuilds component examples with Basic usage first, one grouped Attributes panel and retained
+ * complementary examples.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Updates
+ * examples and shared attribute modules. Use --check to validate structure without rewriting
+ * files. To limit generation, import standardizeComponentExamples with a component-name array.
+ *
+ * @example
+ * node scripts/standardize-component-examples.mjs
+ *
+ * @example
+ * node scripts/standardize-component-examples.mjs --check
+ */
+
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";

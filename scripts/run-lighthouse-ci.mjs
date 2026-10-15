@@ -1,3 +1,15 @@
+/**
+ * Runs Lighthouse CI autorun with Playwright Chromium when available, otherwise using the host
+ * Chrome installation.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Requires
+ * installed browser and Lighthouse CI dependencies; uses the repository Lighthouse
+ * configuration.
+ *
+ * @example
+ * node scripts/run-lighthouse-ci.mjs
+ */
+
 import { access } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import process from 'node:process';

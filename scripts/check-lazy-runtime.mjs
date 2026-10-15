@@ -1,3 +1,14 @@
+/**
+ * Inspects production imports and source maps to verify that documentation parsers and
+ * TypeScript compilation remain lazily loaded.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Build dist
+ * first; failed assertions indicate eager runtime dependencies.
+ *
+ * @example
+ * node scripts/check-lazy-runtime.mjs
+ */
+
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";

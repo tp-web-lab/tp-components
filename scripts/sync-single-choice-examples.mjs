@@ -1,3 +1,14 @@
+/**
+ * Rebuilds single-choice question examples, including mathematical choices and a polygon
+ * exercise, in all four languages.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Also
+ * standardizes the component's grouped Attributes example.
+ *
+ * @example
+ * node scripts/sync-single-choice-examples.mjs
+ */
+
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import {

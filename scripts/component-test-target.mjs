@@ -1,3 +1,14 @@
+/**
+ * Validates component names and resolves the source directory and dedicated tests for targeted
+ * test commands.
+ *
+ * Import this helper from a Node.js ES module; it is not a standalone command.
+ *
+ * @example
+ * import { getComponentTestTarget } from "./scripts/component-test-target.mjs";
+ * const target = getComponentTestTarget("tp-button");
+ */
+
 import { existsSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 

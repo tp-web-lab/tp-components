@@ -1,3 +1,14 @@
+/**
+ * Checks that component attribute metadata declares a type, default and description, and
+ * validates source comment conventions.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Reports invalid
+ * attributes and exits unsuccessfully on errors.
+ *
+ * @example
+ * node scripts/check-component-attributes.mjs
+ */
+
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import ts from 'typescript';

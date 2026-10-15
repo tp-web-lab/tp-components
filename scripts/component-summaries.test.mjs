@@ -1,3 +1,13 @@
+/**
+ * Tests concise component summaries without redundant tag names or implementation details.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/component-summaries.test.mjs
+ */
+
 import assert from "node:assert/strict";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { test } from "node:test";

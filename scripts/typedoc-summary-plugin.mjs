@@ -1,3 +1,13 @@
+/**
+ * Makes summary-only TypeDoc comments visible and places example blocks before other tags.
+ *
+ * TypeDoc loads the exported load hook through the plugin setting in typedoc.json; do not run
+ * this module as a CLI.
+ *
+ * @example
+ * pnpm exec typedoc
+ */
+
 import { Converter } from 'typedoc';
 
 /** Makes a lone @summary tag the visible TypeDoc description. */

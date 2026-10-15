@@ -1,3 +1,14 @@
+/**
+ * Builds and synchronizes the standard Imports section with script, ES-module and bundler
+ * examples.
+ *
+ * Import this helper from a Node.js ES module; it is not a standalone command.
+ *
+ * @example
+ * import { imports } from "./scripts/component-doc-imports.mjs";
+ * const markdown = imports("button");
+ */
+
 /* Shared Imports section for generated component documentation. */
 export function imports(directory) {
   return `::: tp-tabs

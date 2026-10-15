@@ -1,3 +1,13 @@
+/**
+ * Tests curated example labels, objectives and fence nesting across languages.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/component-example-refinements.test.mjs
+ */
+
 import assert from "node:assert/strict";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";

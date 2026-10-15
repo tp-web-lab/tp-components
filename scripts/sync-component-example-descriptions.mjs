@@ -1,3 +1,18 @@
+/**
+ * Synchronizes the example-description definition list before each component page's language
+ * tabs.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Uses exact
+ * example titles and curated descriptions; missing or duplicate titles are errors. Use --check
+ * to validate without writing.
+ *
+ * @example
+ * node scripts/sync-component-example-descriptions.mjs
+ *
+ * @example
+ * node scripts/sync-component-example-descriptions.mjs --check
+ */
+
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";

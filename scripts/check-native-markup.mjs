@@ -1,3 +1,17 @@
+/**
+ * Audits component examples for raw HTML in native markup and optionally regenerates native
+ * examples and extracted assets.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. The default is
+ * read-only; --fix writes converted examples. Remaining failures produce a nonzero exit status.
+ *
+ * @example
+ * node scripts/check-native-markup.mjs
+ *
+ * @example
+ * node scripts/check-native-markup.mjs --fix
+ */
+
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";

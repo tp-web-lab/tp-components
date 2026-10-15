@@ -1,3 +1,16 @@
+/**
+ * Builds grouped Attributes panels from component manifests and writes their runtime modules and
+ * resource fixtures.
+ *
+ * Import this helper from a Node.js ES module; it is not a standalone command. Use standardize-
+ * component-examples.mjs to generate complete panels; groupedAttributeExample may write
+ * generated assets.
+ *
+ * @example
+ * import { attributeSettings } from "./scripts/grouped-attribute-examples.mjs";
+ * const settings = attributeSettings("button");
+ */
+
 import {
 	cpSync,
 	existsSync,

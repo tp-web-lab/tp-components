@@ -1,3 +1,14 @@
+/**
+ * Applies curated complementary examples and removes generic additional examples across the four
+ * markup languages.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Updates
+ * component example files using component-example-refinements.mjs.
+ *
+ * @example
+ * node scripts/refine-component-examples.mjs
+ */
+
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import {

@@ -1,3 +1,18 @@
+/**
+ * Generates the controllers family quality report from its configuration and saved coverage
+ * summaries.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Generate the
+ * family coverage data first. Writes the corresponding Markdown appendix; --check reports a
+ * stale report without writing.
+ *
+ * @example
+ * node scripts/generate-controllers-quality-report.mjs
+ *
+ * @example
+ * node scripts/generate-controllers-quality-report.mjs --check
+ */
+
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve, sep } from "node:path";
 import { augmentQualityTable } from "./component-quality-report-utils.mjs";

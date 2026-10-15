@@ -1,3 +1,13 @@
+/**
+ * Tests grouped field examples and controls initialized to their documented defaults.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/textfield-attributes-example.test.mjs
+ */
+
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";

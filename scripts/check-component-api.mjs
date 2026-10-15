@@ -1,3 +1,14 @@
+/**
+ * Checks public attributes, methods, events and CSS properties for consistency across component
+ * sources, JSON manifests and documentation.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Reports
+ * inconsistencies and exits unsuccessfully when any are found.
+ *
+ * @example
+ * node scripts/check-component-api.mjs
+ */
+
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import ts from 'typescript';

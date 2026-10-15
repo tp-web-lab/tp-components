@@ -1,3 +1,13 @@
+/**
+ * Tests inline-icon generation and migration while preserving attributes and structured content.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/sync-inline-icon-examples.test.mjs
+ */
+
 import assert from "node:assert/strict";
 import test from "node:test";
 import { inlineIcons } from "./sync-inline-icon-examples.mjs";

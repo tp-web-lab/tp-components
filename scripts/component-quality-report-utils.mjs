@@ -1,3 +1,14 @@
+/**
+ * Provides shared coverage aggregation, static test counts and execution warnings for component
+ * quality reports.
+ *
+ * Import this helper from a Node.js ES module; it is not a standalone command.
+ *
+ * @example
+ * import { percentage } from "./scripts/component-quality-report-utils.mjs";
+ * const coverage = percentage(9, 10);
+ */
+
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve, sep } from "node:path";

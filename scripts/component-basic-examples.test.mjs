@@ -1,3 +1,13 @@
+/**
+ * Tests example parsing, serialization, native markup and Basic usage replacement.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/component-basic-examples.test.mjs
+ */
+
 import assert from "node:assert/strict";
 import test from "node:test";
 import {

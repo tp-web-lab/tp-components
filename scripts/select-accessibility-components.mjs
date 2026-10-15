@@ -1,3 +1,19 @@
+/**
+ * Selects changed components and transitive dependents for an accessibility audit using a Git
+ * comparison.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Set
+ * A11Y_BASE_SHA and A11Y_HEAD_SHA to full commit hashes; A11Y_EVENT=pull_request uses a merge-
+ * base comparison. Missing or invalid revisions select the full suite. Prints JSON and appends
+ * CI outputs when GITHUB_OUTPUT or GITHUB_STEP_SUMMARY is set.
+ *
+ * @example
+ * node scripts/select-accessibility-components.mjs
+ *
+ * @example
+ * A11Y_BASE_SHA=$(git rev-parse HEAD~1) A11Y_HEAD_SHA=$(git rev-parse HEAD) node scripts/select-accessibility-components.mjs
+ */
+
 import { execFileSync } from 'node:child_process';
 import { appendFileSync, existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';

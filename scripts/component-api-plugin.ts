@@ -1,3 +1,15 @@
+/**
+ * Provides a Vite plugin that generates component JSON API manifests from TypeScript
+ * declarations and documentation, refreshing them during development.
+ *
+ * Import componentApiPlugin into the package's Vite configuration. The default source directory
+ * is src/components; generation writes manifests alongside component sources.
+ *
+ * @example
+ * import { componentApiPlugin } from "./scripts/component-api-plugin";
+ * export default { plugins: [componentApiPlugin()] };
+ */
+
 import { promises as fs, readdirSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";

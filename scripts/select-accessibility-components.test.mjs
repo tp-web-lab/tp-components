@@ -1,3 +1,13 @@
+/**
+ * Tests changed-component selection, transitive dependencies and full-audit fallbacks.
+ *
+ * Run with the Node.js test runner from the tp-components package root after installing
+ * workspace dependencies.
+ *
+ * @example
+ * node --test scripts/select-accessibility-components.test.mjs
+ */
+
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { selectComponents } from './select-accessibility-components.mjs';

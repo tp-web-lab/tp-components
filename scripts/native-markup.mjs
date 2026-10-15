@@ -1,3 +1,15 @@
+/**
+ * Converts HTML example fragments to native Markdown, AsciiDoc or reStructuredText with
+ * component directives and inline roles.
+ *
+ * Import this helper from a Node.js ES module; it is not a standalone command. Use html to
+ * preserve HTML; an optional onAsset callback receives extracted assets.
+ *
+ * @example
+ * import { nativeMarkup } from "./scripts/native-markup.mjs";
+ * const markdown = nativeMarkup("md", "<tp-button>Continue</tp-button>");
+ */
+
 import { createHash } from "node:crypto";
 import { parseFragment, serializeOuter } from "parse5";
 

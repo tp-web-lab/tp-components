@@ -1,3 +1,14 @@
+/**
+ * Exports curated attribute values, component-specific overrides and objectives used by example
+ * generators.
+ *
+ * Import this helper from a Node.js ES module; it is not a standalone command.
+ *
+ * @example
+ * import { attributeValues } from "./scripts/component-attribute-examples.mjs";
+ * console.log(attributeValues.size);
+ */
+
 /** Explicit values for attributes not yet exercised by an existing example.
  * Keep values here intentional: never invent a URL or silently use an empty default.
  */

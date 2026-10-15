@@ -1,3 +1,14 @@
+/**
+ * Checks that selectable example titles match across HTML, Markdown, AsciiDoc and
+ * reStructuredText.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Throws when
+ * labels differ.
+ *
+ * @example
+ * node scripts/check-example-labels.mjs
+ */
+
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';

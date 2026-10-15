@@ -1,3 +1,18 @@
+/**
+ * Removes redundant Accessibility sections from component pages and checks explicit
+ * accessibility metadata against the static-review baseline.
+ *
+ * Run from the tp-components package root with workspace dependencies installed. Creates the
+ * baseline if missing in write mode. Use --check to report outdated pages or missing metadata
+ * without writing.
+ *
+ * @example
+ * node scripts/sync-component-accessibility-docs.mjs
+ *
+ * @example
+ * node scripts/sync-component-accessibility-docs.mjs --check
+ */
+
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 

@@ -1,3 +1,16 @@
+/**
+ * Enhances generated TypeDoc HTML examples with live component previews and loads the component
+ * runtime.
+ *
+ * Browser script configured as customJs in typedoc.json. Generate the API pages, serve the
+ * documentation and open a class page containing an HTML example.
+ *
+ * @example
+ * pnpm docs:api
+ * # Start the documentation server and open /api/ in a browser.
+ * pnpm dev
+ */
+
 function tpTypeDocLoadComponents() {
   document.documentElement.setAttribute('data-tp-preserve-document-styles', '');
 

@@ -1,3 +1,14 @@
+/**
+ * Derives attribute control types and choices from component metadata and sources, and enhances
+ * legacy attribute examples.
+ *
+ * Import this helper from a Node.js ES module; it is not a standalone command.
+ *
+ * @example
+ * import { attributeControl } from "./scripts/interactive-attribute-examples.mjs";
+ * const control = attributeControl("button", { name: "disabled", type: "boolean" });
+ */
+
 import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { parseFragment, serialize } from "parse5";

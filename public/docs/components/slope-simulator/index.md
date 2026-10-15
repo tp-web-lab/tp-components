@@ -1,4 +1,6 @@
-# Slope simulator
+# <tp-icon name="slope-simulator" library="components" size="1.25em"></tp-icon> Slope simulator
+
+<tp-toc position="end" expand-all open brand></tp-toc>
 
 Move a point along a straight slope and three fictional cycling stages. Equal mouse movements or arrow presses cover less distance uphill and more downhill, in either direction.
 
@@ -38,7 +40,9 @@ At +20% in the direction of travel, movement requires four times the flat-ground
 
 The internal slope control uses the library's `<tp-numberfield range clearable>`.
 
-### Custom profiles
+### Author directives
+
+#### Profile format
 
 Provide a JSON object with a nonempty `profiles` array. Each profile has a unique nonempty `id`, a nonempty `name` and at least two `points`. A point is `[distance in kilometres, altitude in metres]`. Distances must increase strictly; all values must be finite numbers. The first distance need not be zero, and negative elevations are allowed.
 
@@ -55,6 +59,8 @@ Provide a JSON object with a nonempty `profiles` array. Each profile has a uniqu
 ```
 
 Every segment must satisfy `abs(slope) <= 20%`, with `slope = (altitude2 - altitude1) / (distance2 - distance1) / 10`. Exactly +20% and −20% are accepted (only floating-point roundoff is tolerated). One invalid segment rejects the entire document, without clipping the slope or partially replacing profiles. Errors identify the profile and segment, numbered from 1.
+
+#### Loading profiles
 
 Load a file:
 
@@ -74,13 +80,15 @@ Or declare inert inline JSON:
 
 `src` takes precedence over the inline script. Changing `src` reloads the source; removing it restores inline profiles, or the defaults when there is no inline source. Inline data is captured at initialization, including parser-delayed insertion; use `setProfiles()` for subsequent updates. Supplied profiles replace the defaults and successful loading selects the first profile, resetting the stage point to 10%. The straight-slope control and point are unchanged.
 
+#### Updating profiles and handling errors
+
 ```js
 const simulator = document.querySelector("tp-slope-simulator");
-const accepted = simulator.setProfiles({
-  profiles: [{ id: "pass", name: "My pass", points: [[0,200],[10,1000],[20,300]] }]
-});
 simulator.addEventListener("tp-slope-simulator-error", (event) => {
   console.warn(event.detail.message);
+});
+const accepted = simulator.setProfiles({
+  profiles: [{ id: "pass", name: "My pass", points: [[0,200],[10,1000],[20,300]] }]
 });
 ```
 
@@ -97,18 +105,77 @@ Attributes
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-html
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
 : ::include{examples/examples.html}
 
-tp-asciidoc
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
 : ::include{examples/examples.adoc}
 
-tp-markdown
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
 : ::include{examples/examples.md}
 
-tp-restructuredtext
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
+
+## Programming
+
+### API
+
+<!-- tp-docgen:api TpSlopeSimulator -->
+::: tp-tabs
+Attributes
+: | Attribute | Type | Default | Description |
+  | --- | --- | --- | --- |
+  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | JSON file containing cycling profiles; takes precedence over the inline script. |
+  [Attributes of `<tp-slope-simulator>`]
+
+Methods
+: | Method | Signature | Description |
+  | --- | --- | --- |
+  | <code>setProfiles</code> | <code>setProfiles(data: TpSlopeProfiles \| string): boolean</code> | Replace profiles atomically. Returns false and emits an error for invalid data. |
+  [Public methods of `TpSlopeSimulator`]
+
+Events
+: | Event | Detail | Description |
+  | --- | --- | --- |
+  | <code>tp-slope-simulator-error</code> | <code>&#123; message: string &#125;</code> | Fired when a profile source fails validation or loading; detail contains message. |
+  [Events emitted by `<tp-slope-simulator>`]
+
+CSS properties
+: | CSS property | Default | Description |
+  | --- | --- | --- |
+  | None. |  |  |
+  [CSS properties of `<tp-slope-simulator>`]
+:::
+<!-- /tp-docgen:api -->
+
+### Imports
+
+::: tp-tabs
+script
+: Autoloading:
+
+  ```html
+  <script type="module" src="tp-loader.js"></script>
+  ```
+
+  Cherry picking:
+
+  ```html
+  <script type="module" src="/path/to/components/slope-simulator/slope-simulator.js"></script>
+  ```
+
+import
+: ```js
+  import "/path/to/components/slope-simulator/slope-simulator.js";
+  ```
+
+bundler
+: ```js
+  import "@tp/tp-components/components/slope-simulator/slope-simulator.js";
+  ```
+:::
 
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
