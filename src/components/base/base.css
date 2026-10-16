@@ -171,6 +171,11 @@ details[open] > summary {
 	background-color: var(--tp-brand-fill-softer);
 }
 
+details > summary {
+	padding-inline-start: 0.75em;
+	padding-inline-end: 2em;
+}
+
 details > summary > * {
 	margin-inline: 0.35em;
 	vertical-align: middle;

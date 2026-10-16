@@ -1,3 +1,15 @@
+import { readFileSync } from "node:fs";
+import { chooseSaveTarget, saveBlob } from "../../utilities/save-file.js";
+import { choosePlaygroundFile } from "../playground/playground-local-file.js";
+
+vi.mock("../../utilities/save-file.js", () => ({
+	chooseSaveTarget: vi.fn(),
+	saveBlob: vi.fn(),
+}));
+vi.mock("../playground/playground-local-file.js", () => ({
+	choosePlaygroundFile: vi.fn(),
+}));
+
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { advance, profiles, type Terrain } from "./motion.js";
 import "./slope-simulator.js";
@@ -6,6 +18,7 @@ import { parseProfiles } from "./profiles.js";
 afterEach(() => {
 	document.body.replaceChildren();
 	vi.unstubAllGlobals();
+	vi.clearAllMocks();
 });
 const uphill: Terrain = [
 	[0, 0],
@@ -407,5 +420,537 @@ it("rejects an empty external JSON file", async () => {
 	expect(el.querySelector("[role=alert]")?.hasAttribute("hidden")).toBe(false);
 	expect(el.querySelector("[data-profile-choices]")?.textContent).toContain(
 		"My pass",
+	);
+});
+
+describe("directional slope display", () => {
+	it.each([0, 1])(
+		"shows the signed slope in an XXL badge above route %s",
+		async (track) => {
+			const el = mount();
+			await settled();
+			const field = el.querySelector("tp-numberfield");
+			if (!field) throw new Error("Missing field");
+			field.value = "10";
+			field.dispatchEvent(new Event("input", { bubbles: true }));
+			const p = point(el, track);
+			const badge = el.querySelector(`[data-grade="${track}"]`);
+			const footer = el.querySelector(`[data-status="${track}"]`);
+			const slope = track === 0 ? "10.0" : "6.0";
+			expect(badge?.getAttribute("size")).toBe("xxl");
+			expect(badge?.textContent).toContain(`+${slope} %`);
+			p.dispatchEvent(
+				new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }),
+			);
+			expect(badge?.textContent).toContain(`−${slope} %`);
+			expect(footer?.textContent).toContain(`−${slope}% slope ← · Downhill`);
+			expect(p.getAttribute("aria-valuetext")).toBe(footer?.textContent);
+			right(p);
+			expect(badge?.textContent).toContain(`+${slope} %`);
+			expect(footer?.textContent).toContain(`+${slope}% slope → · Uphill`);
+		},
+	);
+	it("updates the sign when the pointer reverses and avoids negative zero on flat ground", async () => {
+		const el = mount();
+		await settled();
+		const p = point(el);
+		const field = el.querySelector("tp-numberfield");
+		if (!field || !p.parentElement) throw new Error("Missing controls");
+		field.value = "-10";
+		field.dispatchEvent(new Event("input", { bubbles: true }));
+		p.setPointerCapture = vi.fn();
+		p.hasPointerCapture = () => false;
+		vi.spyOn(p.parentElement, "getBoundingClientRect").mockReturnValue({
+			width: 1000,
+		} as DOMRect);
+		const pointer = (type: string, x: number) => {
+			const event = new Event(type, { bubbles: true });
+			Object.assign(event, { pointerId: 1, clientX: x, button: 0 });
+			p.dispatchEvent(event);
+		};
+		pointer("pointerdown", 100);
+		pointer("pointermove", 110);
+		expect(el.querySelector('[data-grade="0"]')?.textContent).toContain(
+			"−10.0 %",
+		);
+		pointer("pointermove", 100);
+		expect(el.querySelector('[data-grade="0"]')?.textContent).toContain(
+			"+10.0 %",
+		);
+		field.value = "0";
+		field.dispatchEvent(new Event("input", { bubbles: true }));
+		expect(el.querySelector('[data-grade="0"]')?.textContent).toContain(
+			"0.0 %",
+		);
+	});
+});
+
+describe("inline profile editor", () => {
+	it("applies only the selected profile and restores its original coordinates", async () => {
+		const el = mount();
+		await settled();
+		const editor = el.querySelector("tp-code-editor");
+		if (!editor) throw new Error("Missing editor");
+		const original = editor.getValue();
+		const selected = JSON.parse(original);
+		selected.profiles[0].name = "Edited stage";
+		selected.profiles[0].points = [
+			[5, 300],
+			[10, 800],
+			[20, 300],
+		];
+		editor.setValue(JSON.stringify(selected));
+		el.querySelector<HTMLElement>("[data-profile-play]")?.click();
+		expect(el.querySelector("[data-profile-choices]")?.textContent).toContain(
+			"Edited stage",
+		);
+		await settled();
+		expect(
+			el.querySelectorAll('tp-radio-list input[type="radio"]'),
+		).toHaveLength(3);
+		expect(el.querySelector('[data-grade="1"]')?.textContent).toContain(
+			"+10.0 %",
+		);
+		expect(JSON.parse(editor.getValue()).profiles[0].points).toEqual(
+			selected.profiles[0].points,
+		);
+		el.querySelector<HTMLElement>("[data-profile-reset]")?.click();
+		expect(editor.getValue()).toBe(original);
+		expect(el.querySelector('[data-grade="1"]')?.textContent).toContain(
+			"+6.0 %",
+		);
+	});
+	it("preserves invalid drafts and the curve, including when switching profiles", async () => {
+		const el = mount();
+		await settled();
+		const editor = el.querySelector("tp-code-editor");
+		if (!editor) throw new Error("Missing editor");
+		const curve = el
+			.querySelector('[data-board="1"] .tp-slope-route')
+			?.getAttribute("d");
+		const invalid = JSON.stringify({
+			profiles: [
+				{
+					id: "bad",
+					name: "Bad",
+					points: [
+						[0, 0],
+						[1, 201],
+					],
+				},
+			],
+		});
+		editor.setValue(invalid);
+		el.querySelector<HTMLElement>("[data-profile-play]")?.click();
+		expect(editor.getValue()).toBe(invalid);
+		expect(
+			el.querySelector('[data-board="1"] .tp-slope-route')?.getAttribute("d"),
+		).toBe(curve);
+		expect(el.querySelector("[data-source-error]")?.textContent).toContain(
+			"20%",
+		);
+		const radio = el.querySelector("tp-radio-list");
+		if (!radio) throw new Error("Missing profiles");
+		radio.value = "2";
+		expect(editor.getValue()).toContain("Mountain passes");
+		radio.value = "1";
+		expect(editor.getValue()).toBe(invalid);
+		el.querySelector<HTMLElement>("[data-profile-reset]")?.click();
+		expect(
+			el.querySelector("[data-source-error]")?.hasAttribute("hidden"),
+		).toBe(true);
+	});
+	it("preserves supplied units and replaces the reset baseline on new loading", async () => {
+		const el = mount();
+		await settled();
+		el.setProfiles(customProfiles);
+		const editor = el.querySelector("tp-code-editor");
+		if (!editor) throw new Error("Missing editor");
+		expect(JSON.parse(editor.getValue())).toEqual(customProfiles);
+		editor.setValue("{");
+		el.querySelector<HTMLElement>("[data-profile-play]")?.click();
+		expect(editor.getValue()).toBe("{");
+		el.querySelector<HTMLElement>("[data-profile-reset]")?.click();
+		expect(JSON.parse(editor.getValue())).toEqual(customProfiles);
+	});
+});
+
+describe("profile file commands", () => {
+	const action = (el: HTMLElement, name: string) =>
+		el.querySelector<HTMLElement>(`[data-profile-file="${name}"]`)?.click();
+	it("saves the current draft, reuses Save and selects a new Save as destination", async () => {
+		const el = mount();
+		await settled();
+		const editor = el.querySelector("tp-code-editor");
+		if (!editor) throw new Error("Missing editor");
+		vi.mocked(chooseSaveTarget)
+			.mockResolvedValueOnce({ filename: "first.json" })
+			.mockResolvedValueOnce({ filename: "second.json" });
+		vi.mocked(saveBlob).mockResolvedValue(undefined);
+		editor.setValue("draft one");
+		action(el, "save");
+		await settled();
+		expect(chooseSaveTarget).toHaveBeenCalledTimes(1);
+		expect(saveBlob).toHaveBeenLastCalledWith(expect.any(Blob), {
+			filename: "first.json",
+		});
+		editor.setValue("draft two");
+		action(el, "save");
+		await settled();
+		expect(chooseSaveTarget).toHaveBeenCalledTimes(1);
+		expect(vi.mocked(saveBlob).mock.calls[1]?.[0].size).toBe(9);
+		action(el, "save-as");
+		await settled();
+		expect(chooseSaveTarget).toHaveBeenCalledTimes(2);
+		expect(saveBlob).toHaveBeenLastCalledWith(expect.any(Blob), {
+			filename: "second.json",
+		});
+	});
+	it("loads validated collections and preserves existing data on invalid files or cancellation", async () => {
+		const el = mount();
+		await settled();
+		vi.mocked(choosePlaygroundFile).mockResolvedValueOnce({
+			text: async () => JSON.stringify(customProfiles),
+		} as File);
+		action(el, "load");
+		await settled();
+		expect(el.querySelector("[data-profile-choices]")?.textContent).toContain(
+			"My pass",
+		);
+		vi.mocked(choosePlaygroundFile).mockResolvedValueOnce({
+			text: async () =>
+				'{"profiles":[{"id":"bad","name":"Bad","points":[[0,0],[1,210]]}]}',
+		} as File);
+		action(el, "load");
+		await settled();
+		expect(el.querySelector("[data-source-error]")?.textContent).toContain(
+			"21.000000%",
+		);
+		expect(el.querySelector("[data-profile-choices]")?.textContent).toContain(
+			"My pass",
+		);
+		vi.mocked(choosePlaygroundFile).mockResolvedValueOnce(null);
+		action(el, "load");
+		await settled();
+		expect(el.querySelector("[data-profile-choices]")?.textContent).toContain(
+			"My pass",
+		);
+	});
+	it("toggles the editor toolbar with the F1 button", async () => {
+		const el = mount();
+		await settled();
+		const editor = el.querySelector("tp-code-editor");
+		expect(editor?.toolbar).toBe(false);
+		el.querySelector<HTMLElement>("[data-profile-toolbar]")?.click();
+		expect(editor?.toolbar).toBe(true);
+		el.querySelector<HTMLElement>("[data-profile-toolbar]")?.click();
+		expect(editor?.toolbar).toBe(false);
+	});
+	it("ignores a pending file when the selected profile changes", async () => {
+		const el = mount();
+		await settled();
+		let resolveFile: ((file: File) => void) | undefined;
+		vi.mocked(choosePlaygroundFile).mockReturnValueOnce(
+			new Promise((resolve) => {
+				resolveFile = resolve;
+			}),
+		);
+		action(el, "load");
+		const radio = el.querySelector("tp-radio-list");
+		if (!radio) throw new Error("Missing profiles");
+		radio.value = "2";
+		resolveFile?.({ text: async () => JSON.stringify(customProfiles) } as File);
+		await settled();
+		expect(el.querySelector("tp-code-editor")?.getValue()).toContain(
+			"Mountain passes",
+		);
+	});
+});
+
+it("accepts multiple profiles through Play and selects the first with a working selector", async () => {
+	const el = mount();
+	await settled();
+	el.setProfiles(customProfiles);
+	const editor = el.querySelector("tp-code-editor");
+	if (!editor) throw new Error("Missing editor");
+	const collection = {
+		profiles: [
+			{
+				id: "first",
+				name: "First route",
+				points: [
+					[0, 0],
+					[10, 1000],
+				],
+			},
+			{
+				id: "second",
+				name: "Second route",
+				points: [
+					[0, 1000],
+					[10, 0],
+				],
+			},
+		],
+	};
+	editor.setValue(JSON.stringify(collection));
+	el.querySelector<HTMLElement>("[data-profile-play]")?.click();
+	await settled();
+	expect(el.querySelector("[data-source-error]")?.hasAttribute("hidden")).toBe(
+		true,
+	);
+	const radio = el.querySelector("tp-radio-list");
+	expect(radio?.value).toBe("1");
+	expect(el.querySelectorAll('tp-radio-list input[type="radio"]')).toHaveLength(
+		2,
+	);
+	expect(JSON.parse(editor.getValue()).profiles[0].id).toBe("first");
+	expect(el.querySelector('[data-grade="1"]')?.textContent).toContain(
+		"+10.0 %",
+	);
+	if (!radio) throw new Error("Missing selector");
+	radio.value = "2";
+	expect(JSON.parse(editor.getValue()).profiles[0].id).toBe("second");
+	expect(el.querySelector('[data-grade="1"]')?.textContent).toContain(
+		"−10.0 %",
+	);
+	editor.setValue(
+		JSON.stringify({
+			profiles: [
+				...collection.profiles,
+				{
+					id: "bad",
+					name: "Bad",
+					points: [
+						[0, 0],
+						[1, 201],
+					],
+				},
+			],
+		}),
+	);
+	el.querySelector<HTMLElement>("[data-profile-play]")?.click();
+	await settled();
+	expect(el.querySelector("tp-radio-list")?.value).toBe("2");
+	expect(el.querySelectorAll('tp-radio-list input[type="radio"]')).toHaveLength(
+		2,
+	);
+	expect(el.querySelector('[data-grade="1"]')?.textContent).toContain(
+		"−10.0 %",
+	);
+});
+
+it.each([
+	["2026-lombardy-tour", 239.6],
+	["2026-alpe-huez", 170.9],
+])(
+	"loads %s within the slope limits and fits its elevation",
+	async (file, distance) => {
+		const source = readFileSync(
+			`public/docs/components/slope-simulator/examples/${file}.json`,
+			"utf8",
+		);
+		const parsed = parseProfiles(source);
+		expect(parsed).toHaveLength(1);
+		expect(parsed[0]?.source.points.at(-1)?.[0]).toBe(distance);
+		const el = mount();
+		await settled();
+		expect(el.setProfiles(source)).toBe(true);
+		const path = el
+			.querySelector('[data-board="1"] .tp-slope-route')
+			?.getAttribute("d");
+		const heights = Array.from(
+			path?.matchAll(/[ML][^, ]+,([^ ]+)/g) ?? [],
+			(match) => Number(match[1]),
+		);
+		expect(Math.min(...heights)).toBeCloseTo(30);
+		expect(Math.max(...heights)).toBeCloseTo(260);
+		expect(el.querySelector("tp-code-editor")?.getValue()).toContain(
+			String(distance),
+		);
+	},
+);
+
+it("toggles a grid in source units and refreshes it for edited and flat profiles", async () => {
+	const el = mount();
+	await settled();
+	const grid = () => el.querySelector('[data-board="1"] .tp-slope-grid');
+	const toggle = el.querySelector<HTMLElement>("[data-profile-grid]");
+	expect(grid()?.textContent).toBe("");
+	el.setProfiles({
+		profiles: [
+			{
+				id: "offset",
+				name: "Offset",
+				points: [
+					[10, -100],
+					[12, 100],
+					[14, -100],
+				],
+			},
+		],
+	});
+	const before = el
+		.querySelector('[data-board="1"] .tp-slope-route')
+		?.getAttribute("d");
+	toggle?.click();
+	expect(toggle?.getAttribute("aria-pressed")).toBe("true");
+	expect(grid()?.textContent).toContain("Distance (km)");
+	expect(grid()?.textContent).toContain("Height (m)");
+	const labels = Array.from(
+		grid()?.querySelectorAll("text") ?? [],
+		(node) => node.textContent,
+	);
+	expect(labels).toContain("10");
+	expect(labels).toContain("14");
+	expect(labels).toContain("-100");
+	expect(labels).toContain("100");
+	expect(
+		el.querySelector('[data-board="1"] .tp-slope-route')?.getAttribute("d"),
+	).toBe(before);
+	expect(point(el, 1).style.left).toBe(
+		`${((22 + 0.1 * 956 + 65) / 1080) * 100}%`,
+	);
+	el.setProfiles({
+		profiles: [
+			{
+				id: "flat",
+				name: "Flat",
+				points: [
+					[0, 500],
+					[0.5, 500],
+				],
+			},
+		],
+	});
+	expect(grid()?.textContent).toContain("500");
+	expect(grid()?.textContent).toContain("0.5");
+	expect(grid()?.innerHTML).not.toMatch(/NaN|Infinity/);
+	expect(toggle?.getAttribute("aria-pressed")).toBe("true");
+	toggle?.click();
+	expect(grid()?.textContent).toBe("");
+	expect(
+		el.querySelector('[data-board="1"] svg')?.getAttribute("viewBox"),
+	).toBe("0 0 1000 300");
+});
+
+it("shows constant-effort speed and clears it on release and inactivity", async () => {
+	const el = mount();
+	await settled();
+	vi.useFakeTimers();
+	try {
+		const badge = () => el.querySelector('[data-grade="0"]')?.textContent;
+		const p = point(el);
+		expect(badge()).toBe("0.0 % — 0.0 km/h");
+		right(p);
+		expect(badge()).toBe("0.0 % — 30.0 km/h");
+		const field = el.querySelector("tp-numberfield");
+		if (!field) throw new Error("Missing slope");
+		field.value = "20";
+		field.dispatchEvent(new Event("input", { bubbles: true }));
+		right(p);
+		expect(badge()).toBe("+20.0 % — 7.5 km/h");
+		p.dispatchEvent(
+			new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }),
+		);
+		expect(badge()).toBe("−20.0 % — 120.0 km/h");
+		p.dispatchEvent(
+			new KeyboardEvent("keyup", { key: "ArrowLeft", bubbles: true }),
+		);
+		expect(badge()).toBe("−20.0 % — 0.0 km/h");
+		right(p);
+		vi.advanceTimersByTime(600);
+		expect(badge()).toBe("+20.0 % — 0.0 km/h");
+		right(p);
+		el.querySelector<HTMLElement>('[data-reset="0"]')?.click();
+		expect(badge()).toBe("+20.0 % — 0.0 km/h");
+		el.remove();
+	} finally {
+		vi.useRealTimers();
+	}
+});
+
+it("supports speed-base precedence, live changes and editor round trips", async () => {
+	const el = mount();
+	await settled();
+	const data = {
+		"speed-base": 20,
+		profiles: [
+			{
+				id: "flat",
+				name: "Flat",
+				points: [
+					[0, 100],
+					[10, 100],
+				] as [number, number][],
+			},
+		],
+	};
+	expect(el.speedBase).toBe(30);
+	expect(el.setProfiles(data)).toBe(true);
+	expect(el.speedBase).toBe(20);
+	const editor = el.querySelector("tp-code-editor");
+	if (!editor) throw new Error("Missing editor");
+	expect(JSON.parse(editor.getValue())["speed-base"]).toBe(20);
+	right(point(el, 1));
+	expect(el.querySelector('[data-grade="1"]')?.textContent).toBe(
+		"0.0 % — 20.0 km/h",
+	);
+	el.setAttribute("speed-base", "40");
+	expect(el.speedBase).toBe(40);
+	expect(el.querySelector('[data-grade="1"]')?.textContent).toBe(
+		"0.0 % — 40.0 km/h",
+	);
+	expect(el.querySelector('[data-speed-note="0"]')?.textContent).toContain(
+		"40 km/h",
+	);
+	el.removeAttribute("speed-base");
+	expect(el.speedBase).toBe(20);
+	editor.setValue(JSON.stringify({ ...data, "speed-base": 25 }));
+	el.querySelector<HTMLElement>("[data-profile-play]")?.click();
+	expect(el.speedBase).toBe(25);
+	expect(JSON.parse(editor.getValue())["speed-base"]).toBe(25);
+	el.querySelector<HTMLElement>("[data-profile-reset]")?.click();
+	expect(el.speedBase).toBe(20);
+	for (const invalid of [0, -10, "40", null]) {
+		expect(
+			el.setProfiles(JSON.stringify({ ...data, "speed-base": invalid })),
+		).toBe(false);
+		expect(el.speedBase).toBe(20);
+	}
+	el.setAttribute("speed-base", "invalid");
+	expect(el.speedBase).toBe(20);
+	expect(el.setProfiles({ profiles: data.profiles })).toBe(true);
+	expect(el.speedBase).toBe(30);
+});
+
+it("loads an optional speed-base from src", async () => {
+	vi.stubGlobal(
+		"fetch",
+		vi.fn().mockResolvedValue({
+			ok: true,
+			text: async () =>
+				JSON.stringify({
+					"speed-base": 18,
+					profiles: [
+						{
+							id: "flat",
+							name: "Flat",
+							points: [
+								[0, 0],
+								[1, 0],
+							],
+						},
+					],
+				}),
+		}),
+	);
+	const el = document.createElement("tp-slope-simulator");
+	el.src = "speed.json";
+	document.body.append(el);
+	await settled();
+	expect(el.speedBase).toBe(18);
+	expect(el.querySelector('[data-speed-note="1"]')?.textContent).toContain(
+		"18 km/h",
 	);
 });

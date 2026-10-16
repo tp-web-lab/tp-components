@@ -379,6 +379,8 @@ const additional = {
 };
 
 export function describeExample(component, label) {
+ if (component === "slope-simulator" && label === "Alpe d’Huez 2026") return "Explore an approximate 170.9 km reconstruction through the Croix de Fer, Télégraphe, Galibier and Sarenne passes to Alpe d’Huez. Toggle the grid, compare uphill and downhill effort, and edit the profile JSON.";
+ if (component === "slope-simulator" && label === "Tour of Lombardy 2026") return "Explore an approximate 239.6 km reconstruction from the supplied route-profile image. Compare the climbs and descents, reverse direction to change the signed slope, and edit the JSON in Profile code.";
  if (component === "tangram" && label === "Exact orientation") return "Start the first convex figure with all seven pieces already oriented as in the solution. Translate them into place, or select one to try its local rotation and flip controls.";
  if (component === "tangram" && /^Convex \d{2}$/.test(label)) return `Reproduce figure ${label.slice(-2)} from the numbered reference gallery. Use Solution to compare its exact dissection, then move and rotate the seven pieces to cover its convex silhouette.`;
  if (component === "tangram" && label === "Named vertices") return "Open the source to see named corners and midpoint constructions. Show the solution to compare the seven pieces with their declared vertices, then play the puzzle.";

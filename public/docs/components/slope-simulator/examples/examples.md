@@ -19,8 +19,10 @@ Combine the attributes on one preview. Controls start at the published defaults.
 - file-unknown
 :::
 
-::: tp-cluster
+:::: tp-cluster
+::: tp-textfield { data-setting="speed-base" label="speed-base" value="30" placeholder="30" clearable }
 :::
+::::
 
 :::: tp-button-group
 ::: tp-button { id="attributes-reset" type="button" }
@@ -48,6 +50,20 @@ Preparing the preview…
 File-loading attributes offer only Default, file1, file2 and file-unknown. The two local fixtures preserve verified example formats (they may contain the same content); file-unknown deliberately exercises error handling. No arbitrary path can be entered.
 
 ::: script { type="module" src="/docs/components/slope-simulator/examples/attributes.js" }
+:::
+```
+
+``` example {label="Tour of Lombardy 2026"}
+Approximate reconstruction of the supplied Tour of Lombardy 2026 profile image (239.6 km). Distances and elevations are estimated for this interactive example, not official route or GPS data. Every segment stays within ±20%; vertical exaggeration affects only the drawing.
+
+::: tp-slope-simulator { src="/docs/components/slope-simulator/examples/2026-lombardy-tour.json" }
+:::
+```
+
+``` example {label="Alpe d’Huez 2026"}
+Approximate reconstruction of the supplied Alpe d’Huez 2026 stage profile image (170.9 km), from Le Bourg d’Oisans via the Croix de Fer, Télégraphe, Galibier and Sarenne passes. Labelled distances and elevations are taken from the image; intermediate points are estimated for this interactive example, not official GPS data. Every segment stays within ±20%; vertical exaggeration affects only the drawing.
+
+::: tp-slope-simulator { src="/docs/components/slope-simulator/examples/2026-alpe-huez.json" }
 :::
 ```
 ::::::

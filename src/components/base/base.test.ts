@@ -411,6 +411,54 @@ describe("<tp-base>", () => {
 		expect(helpSpy).toHaveBeenCalledTimes(1);
 	});
 
+	it.each([
+		{ key: ",", ctrlKey: true, shiftKey: true, metaKey: false, expected: true },
+		{
+			key: "M",
+			ctrlKey: true,
+			shiftKey: true,
+			metaKey: false,
+			expected: false,
+		},
+		{
+			key: ",",
+			ctrlKey: true,
+			shiftKey: false,
+			metaKey: false,
+			expected: false,
+		},
+		{
+			key: ",",
+			ctrlKey: false,
+			shiftKey: true,
+			metaKey: true,
+			expected: false,
+		},
+	])(
+		"handles French Mac KeyM without claiming other shortcuts: %o",
+		async ({ key, ctrlKey, shiftKey, metaKey, expected }) => {
+			document.body.innerHTML =
+				'<tp-base-fixture tabindex="0"></tp-base-fixture>';
+			await flush();
+			const fixture = required(
+				document.querySelector<TpBaseFixture>("tp-base-fixture"),
+			);
+			const help = vi.spyOn(fixture, "help").mockResolvedValue();
+			const event = new KeyboardEvent("keydown", {
+				key,
+				code: "KeyM",
+				ctrlKey,
+				shiftKey,
+				metaKey,
+				bubbles: true,
+				cancelable: true,
+			});
+			fixture.dispatchEvent(event);
+			expect(event.defaultPrevented).toBe(expected);
+			expect(help).toHaveBeenCalledTimes(expected ? 1 : 0);
+		},
+	);
+
 	it("prefers the hovered non-focusable box over the focused splitter", async () => {
 		await import("../box/box.js");
 		await import("../splitter/splitter.js");

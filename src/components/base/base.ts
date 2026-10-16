@@ -226,7 +226,11 @@ export class TpBase extends HTMLElement {
 
 		const isQuestionMark =
 			event.key === "?" ||
-			(event.shiftKey && (event.code === "Slash" || event.code === "Comma"));
+			(event.shiftKey &&
+				(event.code === "Slash" ||
+					event.code === "Comma" ||
+					// French Mac keyboards report a comma on KeyM with Ctrl+Shift.
+					(event.code === "KeyM" && event.key === ",")));
 		if (!isQuestionMark || event.altKey || !event.ctrlKey || event.metaKey) {
 			return;
 		}

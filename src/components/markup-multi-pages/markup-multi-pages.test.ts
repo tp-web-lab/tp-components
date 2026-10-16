@@ -271,7 +271,9 @@ describe("<tp-markup-multi-pages>", () => {
 		const controls = element.querySelector(
 			".tp-markup-multi-pages-sidebar-controls",
 		);
-		expect(controls?.querySelectorAll("tp-icon-button")).toHaveLength(2);
+		expect(controls?.querySelectorAll(":scope > tp-icon-button")).toHaveLength(
+			4,
+		);
 		expect(
 			controls?.querySelector('[name="sort-alphabetical-ascending"]'),
 		).toBeNull();

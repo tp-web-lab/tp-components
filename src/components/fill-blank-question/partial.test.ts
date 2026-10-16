@@ -99,3 +99,40 @@ it("uses case sensitivity when grading partially filled text fields", () => {
 		?.dispatchEvent(new Event("click"));
 	expect(field.getAttribute("data-tp-blank-result")).toBe("success");
 });
+
+it("highlights reading answers and updates partial grading without coloring empty blanks", async () => {
+	const { question, fields, submit } = fixture();
+	fields[0]?.setAnswer("1", document.createTextNode("A"));
+	fields[1]?.setAnswer("3", document.createTextNode("C"));
+	await Promise.resolve();
+	const reading = () => [
+		...question.querySelectorAll(
+			"[data-tp-closed-reading] [data-tp-reading-answer]",
+		),
+	];
+	expect(reading().map((node) => node.textContent)).toEqual(["A", "C"]);
+	expect(reading().every((node) => node.classList.contains("tp-ivory"))).toBe(
+		true,
+	);
+	expect(
+		reading().every((node) => !node.hasAttribute("data-tp-reading-result")),
+	).toBe(true);
+	question.partial = true;
+	submit();
+	await Promise.resolve();
+	expect(
+		reading().map((node) => node.getAttribute("data-tp-reading-result")),
+	).toEqual(["success", "danger"]);
+	fields[1]?.setAnswer("2", document.createTextNode("B"));
+	await Promise.resolve();
+	expect(reading()[1]?.textContent).toBe("B");
+	expect(reading()[1]?.hasAttribute("data-tp-reading-result")).toBe(false);
+	question.partial = false;
+	await Promise.resolve();
+	expect(
+		reading().every((node) => !node.hasAttribute("data-tp-reading-result")),
+	).toBe(true);
+	fields[0]?.clear();
+	await Promise.resolve();
+	expect(reading()).toHaveLength(1);
+});

@@ -49,6 +49,10 @@
  * @summary Splitter component with two resizable panels.
  */
 /**
+ * @tp-dependency tp-textfield
+ * @summary Single-line and automatically growing multiline text field.
+ */
+/**
  * @tp-dependency tp-theme
  * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
  */
@@ -63,6 +67,8 @@
 // tp-docgen:dependencies:end
 
 import { TpBase } from "../base/base.js";
+import sidebarToolsStyle from "../markup-multi-pages/sidebar-tools.css?inline";
+import { appendSidebarTools } from "../markup-multi-pages/sidebar-tools.js";
 import "../toolbar/toolbar.js";
 import "../calculator/calculator.js";
 import { TpDrawer } from "../drawer/drawer.js";
@@ -171,6 +177,7 @@ export class TpMarkupMultiPages extends TpBase {
 		this.style.boxSizing = "border-box";
 		this.style.overflow = "hidden";
 		this.ensureGlobalStyle(STYLE_ID, style);
+		this.ensureGlobalStyle("tp-multi-pages-sidebar-tools", sidebarToolsStyle);
 		if (this.hasAttribute("data-tp-prerendered")) {
 			this.ensureGlobalStyle("tp-markdown-styles", markdownStyle);
 		}
@@ -574,6 +581,7 @@ export class TpMarkupMultiPages extends TpBase {
 		);
 		controls.className = "tp-markup-multi-pages-sidebar-controls";
 		controls.append(expandButton, collapseButton);
+		appendSidebarTools(controls, tree);
 		return controls;
 	}
 

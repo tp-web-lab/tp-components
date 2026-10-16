@@ -157,6 +157,8 @@ export class ClosedAnswers {
 			subtree: true,
 			childList: true,
 			characterData: true,
+			attributes: true,
+			attributeFilter: ["data-tp-blank-result"],
 		});
 		this.readingObserver.observe(bank, { subtree: true, childList: true });
 	}
@@ -383,21 +385,31 @@ export class ClosedAnswers {
 			const field = originals[index];
 			if (!field?.value) {
 				copy.replaceWith(document.createTextNode("…"));
-			} else if (isTpBlank(field)) {
-				const content = document.createDocumentFragment();
-				for (const node of field.childNodes) {
-					if (
-						node instanceof Element &&
-						node.hasAttribute("data-tp-blank-tools")
-					)
-						continue;
-					content.append(node.cloneNode(true));
-				}
-				for (const paragraph of content.querySelectorAll("p"))
-					paragraph.replaceWith(...paragraph.childNodes);
-				copy.replaceWith(content);
 			} else {
-				copy.replaceWith(document.createTextNode(field.value));
+				const answer = document.createElement("span");
+				answer.className = "tp-ivory";
+				answer.setAttribute("data-tp-reading-answer", "");
+				const result = (
+					isTpBlank(field) ? field : field.querySelector("input")
+				)?.getAttribute("data-tp-blank-result");
+				if (result) answer.setAttribute("data-tp-reading-result", result);
+				if (isTpBlank(field)) {
+					const content = document.createDocumentFragment();
+					for (const node of field.childNodes) {
+						if (
+							node instanceof Element &&
+							node.hasAttribute("data-tp-blank-tools")
+						)
+							continue;
+						content.append(node.cloneNode(true));
+					}
+					for (const paragraph of content.querySelectorAll("p"))
+						paragraph.replaceWith(...paragraph.childNodes);
+					answer.append(content);
+				} else {
+					answer.textContent = field.value;
+				}
+				copy.replaceWith(answer);
 			}
 		}
 		this.normalizeReadingMath(template.content);

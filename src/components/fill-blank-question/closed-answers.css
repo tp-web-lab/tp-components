@@ -46,3 +46,21 @@ tp-fill-blank-question[partial] [data-tp-blank-result="success"] {
 tp-fill-blank-question[partial] [data-tp-blank-result="danger"] {
 	border-bottom-color: var(--tp-danger-stroke-mid);
 }
+
+/* Highlight only substituted answers, leaving the surrounding sentence intact. */
+tp-fill-blank-question [data-tp-reading-answer] {
+	padding: .1em .3em;
+	border-radius: .2em;
+	background: var(--tp-brand-fill-soft);
+	color: var(--tp-brand-text-on-soft);
+	box-decoration-break: clone;
+	-webkit-box-decoration-break: clone;
+}
+tp-fill-blank-question[partial] [data-tp-reading-result="success"] {
+	background: var(--tp-success-fill-soft);
+	color: var(--tp-success-text-on-soft);
+}
+tp-fill-blank-question[partial] [data-tp-reading-result="danger"] {
+	background: var(--tp-danger-fill-soft);
+	color: var(--tp-danger-text-on-soft);
+}

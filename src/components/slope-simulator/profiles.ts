@@ -8,9 +8,12 @@ export interface TpSlopeProfile {
 }
 /** Input shared by src, inline JSON and setProfiles(). */
 export interface TpSlopeProfiles {
+	"speed-base"?: number;
 	profiles: readonly TpSlopeProfile[];
 }
 export interface NormalizedProfile {
+	speedBase?: number;
+	source: TpSlopeProfile;
 	id: string;
 	name: string;
 	points: Terrain;
@@ -27,6 +30,16 @@ export function parseProfiles(input: unknown): NormalizedProfile[] {
 		!data.profiles.length
 	)
 		throw new Error("Expected a nonempty profiles array.");
+	const speedBase = "speed-base" in data ? data["speed-base"] : undefined;
+	if (
+		speedBase !== undefined &&
+		(typeof speedBase !== "number" ||
+			!Number.isFinite(speedBase) ||
+			speedBase <= 0)
+	)
+		throw new Error(
+			'Expected "speed-base" to be a finite positive number in km/h.',
+		);
 	const ids = new Set<string>();
 	return data.profiles.map((item: unknown, index: number) => {
 		if (
@@ -87,6 +100,8 @@ export function parseProfiles(input: unknown): NormalizedProfile[] {
 		)
 			throw new Error(`Profile "${item.id}": invalid distance span.`);
 		return {
+			speedBase,
+			source: { id: item.id, name: item.name, points },
 			id: item.id,
 			name: item.name,
 			points: points.map(([x, h]) => [

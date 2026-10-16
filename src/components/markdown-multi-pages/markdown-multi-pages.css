@@ -137,6 +137,7 @@ tp-markdown-multi-pages,
 }
 
 .tp-markdown-multi-pages-sidebar-controls {
+  flex-wrap: wrap;
   align-items: center;
   display: flex;
   gap: 0.25rem;

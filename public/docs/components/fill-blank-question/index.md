@@ -138,7 +138,7 @@ Drag an answer to a field, or click/tap an answer and then a field. With the key
 
 Each listed answer is a separate token, including duplicates. Assigning the same token elsewhere moves it rather than copying it; replacing a field's answer releases the previous token. The bank remains visible so answers can be reassigned. Scoring, feedback, and `case-sensitive` work as in open mode. For a question loaded from a file, put `closed` on the component itself.
 
-A reading preview beneath the form updates as answers are assigned, moved or cleared. It reproduces the sentences with the selected text, formulas and images in place of the interactive blanks; unanswered blanks appear as `…`. It does not display assignment commentary.
+A reading preview beneath the form updates as answers are assigned, moved or cleared. It reproduces the sentences with the selected text, formulas and images in place of the interactive blanks; unanswered blanks appear as `…`. Selected answers have an ivory background (`tp-ivory`). With `partial`, submitted answers use the `tp-success` background when correct and `tp-danger` when incorrect; editing clears that grading until the next submission. Empty blanks remain unhighlighted. It does not display assignment commentary.
 
 <tp-html-viewer lite>
   <template>
@@ -249,6 +249,8 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_fill-blank-question.TpFillBlankQuestion.html)
 <!-- tp-docgen:typedoc:end -->
+
+
 
 
 

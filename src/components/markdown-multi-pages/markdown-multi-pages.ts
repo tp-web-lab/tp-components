@@ -41,6 +41,10 @@
  * @summary Splitter component with two resizable panels.
  */
 /**
+ * @tp-dependency tp-textfield
+ * @summary Single-line and automatically growing multiline text field.
+ */
+/**
  * @tp-dependency tp-theme
  * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
  */
@@ -55,6 +59,8 @@
 // tp-docgen:dependencies:end
 
 import { TpBase } from "../base/base.js";
+import sidebarToolsStyle from "../markup-multi-pages/sidebar-tools.css?inline";
+import { appendSidebarTools } from "../markup-multi-pages/sidebar-tools.js";
 import "../toolbar/toolbar.js";
 import "../icon-button/icon-button.js";
 import "../clock/clock.js";
@@ -134,6 +140,7 @@ export class TpMarkdownMultiPages extends TpBase {
 		this.style.boxSizing = "border-box";
 		this.style.overflow = "hidden";
 		this.ensureGlobalStyle(STYLE_ID, style);
+		this.ensureGlobalStyle("tp-multi-pages-sidebar-tools", sidebarToolsStyle);
 		this.renderShell();
 		// this.applyBrand();
 		// this.applyTheme();
@@ -439,16 +446,10 @@ export class TpMarkdownMultiPages extends TpBase {
 				tree.collapseAll();
 			},
 		);
-		const sortButton = this.createSidebarTreeButton(
-			"sort-alphabetical-ascending",
-			"Sort",
-			() => {
-				tree.sortAll();
-			},
-		);
 
 		controls.className = "tp-markdown-multi-pages-sidebar-controls";
-		controls.append(expandButton, collapseButton, sortButton);
+		controls.append(expandButton, collapseButton);
+		appendSidebarTools(controls, tree);
 		return controls;
 	}
 
@@ -482,10 +483,6 @@ export class TpMarkdownMultiPages extends TpBase {
 						id: "collapse",
 						label: "Collapse",
 						disabled: !target.expanded,
-					},
-					{
-						id: "sort",
-						label: "Sort",
 					},
 				];
 			},
