@@ -67,6 +67,9 @@ Change several attributes on one preview. All controls start at their documented
 ::: tp-textfield { data-setting="placeholder" label="placeholder" value placeholder clearable }
 :::
 
+::: tp-textfield { data-setting="regexp" label="regexp" value placeholder clearable }
+:::
+
 ::: tp-textfield { data-setting="rows" label="rows" value="3" placeholder="3" clearable }
 :::
 

@@ -20,7 +20,7 @@
             :aria-label: Library logo
 
          .. tp-fill-blank-question::
-            :closed:
+            :mode: closed
 
             Title
                Match the answers
@@ -67,7 +67,26 @@
                :orientation: horizontal
                :value:
 
+               - closed
+
                - disabled
+
+            .. tp-radio-list::
+               :data-setting: type
+               :label: type
+               :label-position: top
+               :orientation: horizontal
+               :value: 1
+
+               - text
+
+               - number
+
+               - math
+
+               - date
+
+               - time
 
             .. tp-cluster::
 

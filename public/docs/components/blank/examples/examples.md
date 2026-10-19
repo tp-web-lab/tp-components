@@ -1,7 +1,7 @@
 ::::::: tp-markdown-viewer { label="tp-blank" allow-script }
 :::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
-::: tp-fill-blank-question { closed }
+::: tp-fill-blank-question { mode="closed" }
 Title
 :
   Match the answers
@@ -41,7 +41,21 @@ Combine the attributes on one preview. Controls start at the published defaults.
 
 ::::: tp-stack
 ::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
+- closed
+
 - disabled
+:::
+
+::: tp-radio-list { data-setting="type" label="type" label-position="top" orientation="horizontal" value="1" }
+- text
+
+- number
+
+- math
+
+- date
+
+- time
 :::
 
 :::: tp-cluster

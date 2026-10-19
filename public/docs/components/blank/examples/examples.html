@@ -1,7 +1,7 @@
 <tp-html-viewer label="tp-blank" allow-script>
   <template>
     <div role="example" label="Basic usage">
-      <tp-fill-blank-question closed="">
+      <tp-fill-blank-question mode="closed">
         <dl>
           <dt>Title</dt><dd>Match the answers</dd>
           <dt>Prompt</dt><dd>Choose an answer for each blank.</dd>
@@ -25,9 +25,12 @@
 
     <div role="example" label="Attributes">
       <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
-      <tp-stack>
-      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>disabled</li></ul></tp-checkbox-list>
 
+
+
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>closed</li><li>disabled</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="type" label="type" label-position="top" orientation="horizontal" value="1"><ul><li>text</li><li>number</li><li>math</li><li>date</li><li>time</li></ul></tp-radio-list>
       <tp-cluster><tp-textfield data-setting="aria-label" label="aria-label" value="" placeholder="" clearable></tp-textfield>
       <tp-textfield data-setting="name" label="name" value="" placeholder="" clearable></tp-textfield>
       <tp-textfield data-setting="placeholder" label="placeholder" value="…" placeholder="…" clearable></tp-textfield></tp-cluster>

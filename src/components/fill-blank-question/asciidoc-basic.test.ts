@@ -19,7 +19,7 @@ it("keeps both Basic usage sentences and feedback inside the AsciiDoc question",
 	const section = (name: string) =>
 		headings.find((node) => node.textContent?.trim() === name)
 			?.nextElementSibling;
-	expect(section("Form")?.querySelectorAll("tp-textfield")).toHaveLength(2);
+	expect(section("Form")?.querySelectorAll("tp-blank")).toHaveLength(2);
 	expect(section("Form")?.textContent).toContain("The capital of Italy is");
 	expect(section("Feedback")?.querySelectorAll("li")).toHaveLength(2);
 	document.body.append(template.content);

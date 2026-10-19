@@ -29,10 +29,6 @@
  * @summary Accessible icon button component.
  */
 /**
- * @tp-dependency tp-markdown
- * @summary Markdown rendering component.
- */
-/**
  * @tp-dependency tp-switcher
  * @summary Switches between horizontal and vertical layouts based on available space.
  */
@@ -164,7 +160,8 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
  *
  * @summary Semantic base container for question content.
  * @tagname tp-question
- * @attr {string} src = "" - URL of an external question definition.
+ * @attr {string} src = "" - URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition.
+ * @attr {string} mode = "mixed" - Blank mode: opened, closed, or mixed local choices.
  * @attr {boolean} open = false - Expands the question; absent by default, leaving only its title visible.
  * @event tp-question-submit - Fired when the submit icon button is activated.
  *   `detail: { value: unknown }`
@@ -181,7 +178,16 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
  */
 export class TpQuestion extends TpBase {
 	public static override get observedAttributes(): string[] {
-		return [...(TpBase.observedAttributes ?? []), "src", "open"];
+		return [...(TpBase.observedAttributes ?? []), "src", "open", "mode"];
+	}
+
+	/** Global blank policy; missing and invalid values use local choices. */
+	public get mode(): "opened" | "closed" | "mixed" {
+		const value = this.getAttribute("mode");
+		return value === "closed" || value === "opened" ? value : "mixed";
+	}
+	public set mode(value: "opened" | "closed" | "mixed") {
+		this.setAttribute("mode", value);
 	}
 
 	/** Whether the question is expanded. Boolean attributes use presence only. */
@@ -201,6 +207,11 @@ export class TpQuestion extends TpBase {
 		newValue: string | null,
 	): void {
 		super.attributeChangedCallback(name, oldValue, newValue);
+		if (name === "src" && oldValue !== newValue) {
+			this.sourceRevision++;
+			this.inlineSourceLoaded = false;
+			if (this.isConnected && this.formContent && newValue) void this.loadSrc();
+		}
 		if (name !== "open") return;
 		const details = this.querySelector<HTMLDetailsElement>(
 			":scope > details[data-tp-question-details]",
@@ -285,11 +296,18 @@ export class TpQuestion extends TpBase {
 	 */
 	private lastSubmittedValue: unknown = undefined;
 
+	private sourceRevision = 0;
+	private inlineSourceLoaded = false;
+
+	/** Whether the question still needs its external definition. */
+	protected get usesExternalData(): boolean {
+		return Boolean(this.src) && !this.inlineSourceLoaded;
+	}
+
 	// ── src attribute API ───────────────────────────────────────────────────────
 
 	/**
-	 * URL to an external JSON file providing question data (items, answer, feedback).
-	 * When set, the answer is never exposed in the HTML source.
+	 * URL to an external question definition; its extension selects the parser.
 	 *
 	 * @summary External question data URL.
 	 */
@@ -298,14 +316,15 @@ export class TpQuestion extends TpBase {
 	}
 
 	/**
-	 * Fetches and parses JSON from `src`. Returns the parsed data, or `null` on
-	 * error (error is automatically displayed inside the form section).
+	 * Loads JSON data or initializes markup from `src`. Returns JSON data, or `null` on
+	 * markup completion or error (errors appear inside the form section).
 	 *
 	 * @summary Loads external question data.
-	 * @param src URL of the JSON file.
+	 * @param src URL whose extension selects the source format.
 	 * @returns Parsed JSON or `null`.
 	 */
 	protected async fetchSrc(src: string): Promise<unknown | null> {
+		const revision = ++this.sourceRevision;
 		let url: string;
 		try {
 			url = resolveComponentSourceUrl(this, src).href;
@@ -316,11 +335,81 @@ export class TpQuestion extends TpBase {
 		try {
 			const response = await fetch(url);
 			if (!response.ok) throw new Error(`HTTP ${response.status}`);
-			return (await response.json()) as unknown;
+			const filename = new URL(url).pathname.split("/").pop() ?? "";
+			const extension = filename.includes(".")
+				? filename.split(".").pop()?.toLowerCase()
+				: "json";
+			const isCurrent = () =>
+				this.isConnected && revision === this.sourceRevision;
+			if (extension === "json" || !extension || !filename.includes(".")) {
+				const data: unknown = await response.json();
+				return isCurrent() ? data : null;
+			}
+			const source = await response.text();
+			let html: string;
+			switch (extension) {
+				case "html":
+				case "htm":
+					html = source;
+					break;
+				case "md":
+				case "markdown": {
+					const { renderMarkdownToHtml } = await import(
+						"../markdown/markdown.js"
+					);
+					html = await renderMarkdownToHtml(source, url);
+					break;
+				}
+				case "rst":
+				case "rest": {
+					const { renderRestructuredTextToHtml } = await import(
+						"../restructuredtext/restructuredtext.js"
+					);
+					html = await renderRestructuredTextToHtml(source);
+					break;
+				}
+				case "adoc":
+				case "asciidoc": {
+					const { renderAsciidocToHtml } = await import(
+						"../asciidoc/asciidoc.js"
+					);
+					html = await renderAsciidocToHtml(source);
+					break;
+				}
+				default:
+					throw new Error(`Unsupported question extension: ${extension}`);
+			}
+			if (isCurrent()) this.applySourceMarkup(html, url);
+			return null;
 		} catch (err) {
-			this.showSrcError(`Failed to load "${src}": ${String(err)}`);
+			if (this.isConnected && revision === this.sourceRevision)
+				this.showSrcError(`Failed to load "${src}": ${String(err)}`);
 			return null;
 		}
+	}
+
+	/** Initializes parsed markup through the same lifecycle as an inline question. */
+	private applySourceMarkup(html: string, url: string): void {
+		const template = document.createElement("template");
+		template.innerHTML = html;
+		const wrapper = template.content.querySelector(this.localName);
+		const list =
+			wrapper?.querySelector(":scope > dl") ??
+			template.content.querySelector("dl");
+		if (!list)
+			throw new Error("Question source must contain a definition list.");
+		list.setAttribute("data-tp-source", url);
+		for (const element of list.querySelectorAll("[src], a[href]")) {
+			if (element.localName.includes("-")) continue;
+			const name = element.hasAttribute("src") ? "src" : "href";
+			const value = element.getAttribute(name);
+			if (value && !value.startsWith("#"))
+				element.setAttribute(name, new URL(value, url).href);
+		}
+		this.disconnectedCallback();
+		this.inlineSourceLoaded = true;
+		this.replaceChildren(list);
+		this.connectedCallback();
 	}
 
 	/**
@@ -498,14 +587,28 @@ export class TpQuestion extends TpBase {
 
 	/**
 	 * Called after `fetchSrc` succeeds. Override in subclasses to validate and
-	 * apply the loaded JSON data. Default implementation is a no-op.
+	 * apply the loaded JSON data. The base implementation loads common sections.
 	 *
 	 * @summary Hook invoked when external src data is ready.
 	 * @param _data Parsed JSON data from the `src` file.
 	 */
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	protected async onSrcReady(_data: unknown): Promise<void> {
-		// no-op — override in subclasses
+	protected async onSrcReady(data: unknown): Promise<void> {
+		if (typeof data !== "object" || data === null) {
+			this.showSrcError("Question JSON must be an object.");
+			return;
+		}
+		const values = data as Record<string, unknown>;
+		this.srcMarkup = this.normalizeSrcMarkup(
+			typeof values.markup === "string" ? values.markup : "markdown",
+		);
+		if (typeof values.title === "string") this.updateSrcTitle(values.title);
+		if (typeof values.prompt === "string") this.updateSrcPrompt(values.prompt);
+		if (typeof values.solution === "string")
+			this.updateSrcSolution(values.solution);
+		if (typeof values.form === "string" && this.formContent)
+			this.replaceWithSrcContent(this.formContent, values.form);
+		if (typeof values.feedback === "string" && this.feedbackSourceEl)
+			this.replaceWithSrcContent(this.feedbackSourceEl, values.feedback);
 	}
 
 	/**
@@ -532,6 +635,8 @@ export class TpQuestion extends TpBase {
 		const list = this.ensureDefinitionList();
 		this.renderQuestionLayout(list);
 		this.bindActions();
+		if (this.localName === "tp-question" && this.usesExternalData)
+			void this.loadSrc();
 	}
 
 	/**
@@ -551,6 +656,7 @@ export class TpQuestion extends TpBase {
 	 * @summary Disconnects action listeners.
 	 */
 	public disconnectedCallback(): void {
+		this.sourceRevision++;
 		this.unbindActions();
 	}
 
@@ -1136,6 +1242,7 @@ export class TpQuestion extends TpBase {
 	 * @internal
 	 */
 	private handleResetClick = (): void => {
+		this.submissionRevision++;
 		this.clearMessage();
 		this.lastSubmittedValue = undefined;
 		const widget = this.findResponseWidget();
@@ -1198,7 +1305,13 @@ export class TpQuestion extends TpBase {
 	 * @summary Handles submit action.
 	 * @internal
 	 */
-	private handleSubmitClick = (): void => {
+	protected prepareSubmission(): void | Promise<void> {}
+
+	private preparingSubmission = false;
+	private submissionRevision = 0;
+
+	private handleSubmitClick = async (): Promise<void> => {
+		if (this.preparingSubmission) return;
 		this.clearMessage();
 		const value = this.readResponseValue();
 
@@ -1222,6 +1335,29 @@ export class TpQuestion extends TpBase {
 			return;
 		}
 
+		try {
+			const revision = this.submissionRevision;
+			const preparation = this.prepareSubmission();
+			if (preparation) {
+				this.preparingSubmission = true;
+				this.setAttribute("aria-busy", "true");
+				await preparation;
+				if (
+					!this.isConnected ||
+					revision !== this.submissionRevision ||
+					JSON.stringify(value) !== JSON.stringify(this.readResponseValue())
+				)
+					return;
+			}
+		} catch {
+			if (this.messageEl)
+				this.messageEl.textContent =
+					"Unable to check the answer. Please try again.";
+			return;
+		} finally {
+			this.preparingSubmission = false;
+			this.removeAttribute("aria-busy");
+		}
 		this.lastSubmittedValue = value;
 		this.tries++;
 		this.onSubmitAttempt(value);

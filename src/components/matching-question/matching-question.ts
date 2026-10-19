@@ -100,7 +100,7 @@ export class TpMatchingQuestion extends TpQuestion {
 		super.connectedCallback();
 		this.ensureSelectionHelp();
 		this.findResponseWidget()?.toggleAttribute("heading", this.heading);
-		if (this.src) void this.loadSrc();
+		if (this.usesExternalData) void this.loadSrc();
 	}
 	/** Shows initial mouse and keyboard guidance in the Feedback panel. */
 	private ensureSelectionHelp(): void {
@@ -130,7 +130,7 @@ export class TpMatchingQuestion extends TpQuestion {
 	}
 	/** Wraps author lists or titled columns before TpQuestion builds its form panel. */
 	protected override beforeQuestionLayout(): void {
-		if (this.src || this.findResponseWidget()) return;
+		if (this.usesExternalData || this.findResponseWidget()) return;
 		const form = this.response;
 		if (!form) return;
 		const existing = form.querySelector("tp-matching");

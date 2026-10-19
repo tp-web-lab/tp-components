@@ -43,14 +43,14 @@ it("keeps the info instructions under feedback and cleans them up", () => {
 		element.querySelectorAll("[data-tp-closed-instructions]"),
 	).toHaveLength(1);
 	expect(output?.nextElementSibling?.getAttribute("variant")).toBe("info");
-	element.closed = false;
+	element.mode = "opened";
 	expect(element.querySelector("[data-tp-closed-instructions]")).toBeNull();
 });
 
 /** Builds a two-blank question with independently assignable answer tokens. */
 function question(answer = "Paris,Rome") {
 	const element = document.createElement("tp-fill-blank-question");
-	element.closed = true;
+	element.mode = "closed";
 	element.innerHTML = `<dl><dt>Answers</dt><dd><ol>${answer
 		.split(",")
 		.map((value) => `<li>${value}</li>`)
@@ -110,11 +110,11 @@ it("shuffles the bank and keeps open mode unchanged when disabled", () => {
 	expect(
 		layout?.lastElementChild?.querySelector("tp-button-group"),
 	).not.toBeNull();
-	element.closed = false;
+	element.mode = "opened";
 	expect(element.querySelector("[data-tp-closed-answers]")).toBeNull();
 	expect(first.readOnly).toBe(false);
 	expect(first.hasAttribute("draggable")).toBe(false);
-	element.closed = true;
+	element.mode = "closed";
 	expect(element.querySelectorAll("tp-dragdrop")).toHaveLength(1);
 });
 
@@ -237,7 +237,7 @@ it("cancels the highlighted target without changing its value", () => {
 	input.dispatchEvent(
 		new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }),
 	);
-	element.closed = false;
+	element.mode = "opened";
 	expect(second.hasAttribute("data-tp-closed-target")).toBe(false);
 });
 
@@ -300,7 +300,7 @@ it("retains normal scoring after assignment", () => {
 
 it("preserves list order and commas in answers across reconnection", () => {
 	const element = document.createElement("tp-fill-blank-question");
-	element.closed = true;
+	element.mode = "closed";
 	element.innerHTML = `<dl><dt>Answers</dt><dd><ol><li>Paris, France</li><li>Rome</li></ol></dd>
 		<dt>Form</dt><dd><tp-textfield name="first"></tp-textfield><tp-textfield name="second"></tp-textfield></dd></dl>`;
 	document.body.append(element);
@@ -364,7 +364,7 @@ it("creates a closed bank after an asynchronous src load", async () => {
 	);
 	try {
 		const element = document.createElement("tp-fill-blank-question");
-		element.closed = true;
+		element.mode = "closed";
 		element.setAttribute("src", "/question.json");
 		document.body.append(element);
 		await vi.waitFor(() =>

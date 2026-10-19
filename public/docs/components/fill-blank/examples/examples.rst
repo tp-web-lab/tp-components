@@ -20,6 +20,7 @@
       .. example:: Selected answer with tp-blank
 
          .. role:: example-tp-blank-1(tp-blank)
+            :closed:
             :name: shape
             :aria-label: Shape with three sides
 

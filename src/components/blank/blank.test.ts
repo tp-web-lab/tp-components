@@ -7,6 +7,7 @@ afterEach(() => document.body.replaceChildren());
 
 it("supports properties, text, rich content, restoration and clearing", () => {
 	const blank = document.createElement("tp-blank");
+	blank.closed = true;
 	blank.name = "result";
 	blank.value = "initial";
 	expect(blank.name).toBe("result");
@@ -45,7 +46,7 @@ it("supports properties, text, rich content, restoration and clearing", () => {
 
 it("participates in form data and reset without counting rich content as fields", () => {
 	const form = document.createElement("tp-fill-blank");
-	form.innerHTML = '<tp-blank></tp-blank><input name="text">';
+	form.innerHTML = '<tp-blank closed></tp-blank><input name="text">';
 	document.body.append(form);
 	const blank = form.querySelector("tp-blank");
 	if (!blank) throw new Error("Missing blank");
@@ -63,7 +64,7 @@ it("participates in form data and reset without counting rich content as fields"
 
 it("assigns SVG by original list rank and retains the keyboard target", () => {
 	const question = document.createElement("tp-fill-blank-question");
-	question.closed = true;
+	question.mode = "closed";
 	question.innerHTML = `<dl><dt>Answers</dt><dd><ol><li><svg aria-label="Triangle" role="img"><path d="M0 10L5 0L10 10Z"/></svg></li><li>Paris</li></ol></dd><dt>Form</dt><dd><tp-blank name="shape" aria-label="Shape"></tp-blank><tp-textfield name="city"></tp-textfield></dd></dl>`;
 	document.body.append(question);
 	const blank = question.querySelector("tp-blank");

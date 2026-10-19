@@ -6,7 +6,7 @@ function fixture() {
 	const question = document.createElement("tp-fill-blank-question");
 	question.innerHTML = `<dl><dt>Answers</dt><dd><ol><li>A</li><li>B</li><li>C</li></ol></dd>
 	<dt>Form</dt><dd><tp-blank name="a"></tp-blank><tp-blank name="b"></tp-blank><tp-blank name="c"></tp-blank></dd></dl>`;
-	question.closed = true;
+	question.mode = "closed";
 	document.body.append(question);
 	const fields = [...question.querySelectorAll("tp-blank")];
 	const submit = () =>

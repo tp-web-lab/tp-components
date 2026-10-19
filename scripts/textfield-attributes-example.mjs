@@ -65,7 +65,7 @@ function buildAttributesExample(component = "textfield") {
 		textfield:
 			"Set label or aria-label to give the preview an accessible name. Choose type email and enter email in autocomplete, then focus the preview to try browser-managed suggestions (saved data and browser settings are required). Enable multiline to test rows. Type applies to single-line inputs only.",
 		mathfield:
-			"Set label, enter x^2 in value, then enable preview to see the rendered formula. Compare latexmath and asciimath, and try multiline. The formula preview button also updates the preview checkbox.",
+			"Set label, enter x^2 in value, then enable preview to see the rendered formula. Compare latexmath and asciimath, and try multiline. Enable mathlive in LaTeX mode and select the pencil icon to use the visual editor. The formula preview button also updates the preview checkbox.",
 		datefield:
 			"Set label and enter a date such as 2026-09-14 in value. Use YYYY-MM-DD for min and max; step is measured in days. Choose a date in the native field and observe the value setting update.",
 		timefield:

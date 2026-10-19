@@ -92,6 +92,10 @@ Attributes
   | <code>menu</code> | <code>boolean</code> | <code>false</code> | Controls the menu. |
   | <code>repository</code> | <code>string</code> | <code>&quot;/docs&quot;</code> | Controls the repository. |
   | <code>theme</code> | <code>TpMarkupMultiPagesTheme</code> | <code>&quot;&quot;</code> | Controls the theme. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-markup-multi-pages>`]
 
 Methods
@@ -117,6 +121,11 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markup-multi-pages.TpMarkupMultiPages.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
 
 
 

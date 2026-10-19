@@ -57,6 +57,7 @@ type TextControl = HTMLInputElement | HTMLTextAreaElement;
  * @attr {boolean} multiline = false - Uses an automatically growing textarea instead of an input.
  * @attr {string} label = "" - Visible label associated with the native input or textarea.
  * @attr {string} label-position = "top" - Label position (`top`, `bottom`, `start`, or `end`).
+ * @attr {string} regexp = "" - Optional full-answer regular expression for grading in an open fill-blank question; applied to trimmed text using the question case policy.
  * @attr {string} value = "" - Current field value.
  * @attr {string} name = "" - Name submitted with the containing form; defaults to the initial inline content when omitted.
  * @attr {string} placeholder = "" - Placeholder shown while the field is empty.
@@ -100,6 +101,7 @@ export class TpTextfield extends TpBase {
 			"label",
 			"label-position",
 			"value",
+			"regexp",
 			"name",
 			"placeholder",
 			"autocomplete",
@@ -112,6 +114,14 @@ export class TpTextfield extends TpBase {
 			"icon-library",
 			"aria-label",
 		];
+	}
+
+	/** Optional regular expression used by an open question to grade the whole answer. */
+	public get regexp(): string {
+		return this.getStringAttribute("regexp");
+	}
+	public set regexp(value: string) {
+		this.setStringAttribute("regexp", value);
 	}
 
 	/** Native input type used in single-line mode. */

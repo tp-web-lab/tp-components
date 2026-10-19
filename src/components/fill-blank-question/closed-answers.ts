@@ -1,5 +1,5 @@
 import "../button/button.js";
-import { labelMathSvg } from "../../utilities/math-accessibility.js";
+import { preserveRenderedMath } from "./answer-reading.js";
 import "../button-group/button-group.js";
 import "../callout/callout.js";
 import "../sidebar/sidebar.js";
@@ -7,6 +7,7 @@ import "../dragdrop/dragdrop.js";
 import "../divider/divider.js";
 import { isTpBlank, type TpBlank } from "../blank/blank.js";
 import type { TpDragDropDropDetail } from "../dragdrop/dragdrop.js";
+import { getBlankFields } from "../fill-blank/fields.js";
 import type { TpTextfield } from "../textfield/textfield.js";
 
 /** Text-entry and rich-content destinations share the assignment contract. */
@@ -41,14 +42,6 @@ export class ClosedAnswers {
 	private selected: Choice | null = null;
 	/** Blank retained while keyboard focus is in the answer bank. */
 	private targetField: ClosedField | null = null;
-	/** Readable author sentences with answers in place of interactive fields. */
-	private readonly reading = document.createElement("div");
-	/** Neutral presentation for the continuously reconstructed sentence. */
-	private readonly readingCallout = document.createElement("tp-callout");
-	/** Refreshes the reading when asynchronous math or icon rendering completes. */
-	private readonly readingObserver = new MutationObserver(() =>
-		this.updateReading(),
-	);
 	/** Persistent usage help beneath the feedback output. */
 	private readonly instructions = document.createElement("tp-callout");
 
@@ -58,6 +51,7 @@ export class ClosedAnswers {
 		answers: string[],
 		feedbackOutput: HTMLElement | null,
 		contents: Node[] = [],
+		closedIndices: number[] = answers.map((_, index) => index),
 	) {
 		this.container.id = `tp-closed-answers-${ClosedAnswers.nextId++}`;
 		this.layout.setAttribute("right-sidebar", "");
@@ -82,19 +76,21 @@ export class ClosedAnswers {
 			<dd>Tab to a blank, then press Right Arrow to reach the answers: the starting blank stays highlighted. Use Up/Down to choose an answer, then Enter or Space to fill the highlighted blank directly. Escape cancels and returns to that blank. Delete or Backspace clears a focused blank.</dd>
 		</dl>`;
 		feedbackOutput?.after(this.instructions);
-		this.reading.setAttribute("role", "status");
-		this.reading.setAttribute("data-tp-closed-reading", "");
-		this.readingCallout.setAttribute("variant", "neutral");
-		this.readingCallout.append(this.reading);
 		const buttons = document.createElement("tp-button-group");
 		buttons.setAttribute("orientation", "vertical");
 		buttons.style.setProperty("--tp-button-group-gap", "0.25rem");
 		buttons.setAttribute("aria-label", "Available answers");
-		const shuffled = answers.map((text, index) => ({
-			text,
-			rank: String(index + 1),
-			content: contents[index] ?? document.createTextNode(text),
-		}));
+		const shuffled = answers.flatMap((text, index) =>
+			closedIndices.includes(index)
+				? [
+						{
+							text,
+							rank: String(index + 1),
+							content: contents[index] ?? document.createTextNode(text),
+						},
+					]
+				: [],
+		);
 		for (let index = shuffled.length - 1; index > 0; index -= 1) {
 			const other = Math.floor(Math.random() * (index + 1));
 			const value = shuffled[index];
@@ -127,9 +123,15 @@ export class ClosedAnswers {
 			buttons.append(button);
 			this.choices.push({ text: label, button, field: null, rank, content });
 		}
-		for (const field of form.querySelectorAll<ClosedField>(
-			"tp-textfield, tp-blank",
-		)) {
+		const controls = getBlankFields(form);
+		for (const index of closedIndices) {
+			const control = controls[index];
+			const field =
+				control &&
+				(isTpBlank(control)
+					? control
+					: control.closest<TpTextfield>("tp-textfield"));
+			if (!field) continue;
 			this.fields.set(field, field.readOnly);
 			field.readOnly = true;
 			field.value = "";
@@ -138,7 +140,7 @@ export class ClosedAnswers {
 		answerColumn.append(heading, buttons);
 		bank.append(divider, answerColumn);
 		form.before(this.container);
-		this.container.append(this.layout, this.readingCallout);
+		this.container.append(this.layout);
 		this.layout.append(form, bank);
 		this.container.addEventListener("click", this.onClick);
 		this.container.addEventListener("input", this.onFieldInput);
@@ -152,20 +154,10 @@ export class ClosedAnswers {
 		this.dragdrop.addEventListener("tp-dragdrop-drop", this.onDrop);
 		this.container.append(this.dragdrop);
 		for (const choice of this.choices) choice.button.tabIndex = -1;
-		this.updateReading();
-		this.readingObserver.observe(this.form, {
-			subtree: true,
-			childList: true,
-			characterData: true,
-			attributes: true,
-			attributeFilter: ["data-tp-blank-result"],
-		});
-		this.readingObserver.observe(bank, { subtree: true, childList: true });
 	}
 
 	/** Restores the author form and removes all listeners and generated controls. */
 	public destroy(): void {
-		this.readingObserver.disconnect();
 		this.setTargetField(null);
 		this.instructions.remove();
 		this.dragdrop.remove();
@@ -312,7 +304,6 @@ export class ClosedAnswers {
 
 	/** Releases the assigned token when a rich blank is cleared through its own control. */
 	private readonly onFieldInput = (event: Event): void => {
-		this.updateReading();
 		const field = event.target;
 		if (!(field instanceof Element) || !isTpBlank(field) || field.value !== "")
 			return;
@@ -366,95 +357,9 @@ export class ClosedAnswers {
 				for (const node of control.childNodes)
 					content.append(node.cloneNode(true));
 			} else content.append(choice.content.cloneNode(true));
-			this.preserveRenderedMath(content);
+			preserveRenderedMath(content);
 			field.setAnswer(choice.rank, content);
 		} else this.write(field, choice.text);
-		this.updateReading();
-	}
-
-	/** Preserves rich formulas and images while removing field frames and controls. */
-	private updateReading(): void {
-		labelMathSvg(this.layout);
-		const template = document.createElement("template");
-		// Import into an inert document without reparsing nested answer paragraphs.
-		const formCopy = template.content.ownerDocument.importNode(this.form, true);
-		template.content.append(...formCopy.childNodes);
-		const originals = [...this.fields.keys()];
-		const copies = template.content.querySelectorAll("tp-textfield, tp-blank");
-		for (const [index, copy] of copies.entries()) {
-			const field = originals[index];
-			if (!field?.value) {
-				copy.replaceWith(document.createTextNode("…"));
-			} else {
-				const answer = document.createElement("span");
-				answer.className = "tp-ivory";
-				answer.setAttribute("data-tp-reading-answer", "");
-				const result = (
-					isTpBlank(field) ? field : field.querySelector("input")
-				)?.getAttribute("data-tp-blank-result");
-				if (result) answer.setAttribute("data-tp-reading-result", result);
-				if (isTpBlank(field)) {
-					const content = document.createDocumentFragment();
-					for (const node of field.childNodes) {
-						if (
-							node instanceof Element &&
-							node.hasAttribute("data-tp-blank-tools")
-						)
-							continue;
-						content.append(node.cloneNode(true));
-					}
-					for (const paragraph of content.querySelectorAll("p"))
-						paragraph.replaceWith(...paragraph.childNodes);
-					answer.append(content);
-				} else {
-					answer.textContent = field.value;
-				}
-				copy.replaceWith(answer);
-			}
-		}
-		this.normalizeReadingMath(template.content);
-		this.reading.replaceChildren(template.content);
-	}
-
-	/** Freezes rendered tp-math copies whose inline source lives only in the original instance. */
-	private preserveRenderedMath(content: DocumentFragment): void {
-		for (const formula of content.querySelectorAll("tp-math")) {
-			const output = formula.querySelector<HTMLElement>(
-				":scope > [data-tp-math-output]",
-			);
-			if (!output?.querySelector("svg")) continue;
-			if (formula.hasAttribute("displaystyle")) output.style.display = "block";
-			formula.replaceWith(output);
-		}
-	}
-
-	/** Keeps only the visual SVG and its accessible label, not MathJax rerendering sources. */
-	private normalizeReadingMath(content: DocumentFragment): void {
-		this.preserveRenderedMath(content);
-		for (const formula of content.querySelectorAll(
-			"mjx-container, .MathJax_SVG",
-		)) {
-			const graphics = formula.querySelectorAll(":scope > svg");
-			if (graphics.length === 0) continue;
-			const replacement = document.createElement("span");
-			replacement.setAttribute("data-tp-reading-math", "");
-			const label =
-				formula.getAttribute("aria-label") ||
-				formula.getAttribute("data-semantic-speech-none") ||
-				formula.querySelector("svg[aria-label]")?.getAttribute("aria-label") ||
-				formula.querySelector("math")?.textContent ||
-				"Mathematical expression";
-			replacement.setAttribute("role", "img");
-			replacement.setAttribute("aria-label", label);
-			for (const graphic of graphics)
-				graphic.setAttribute("aria-hidden", "true");
-			replacement.append(...graphics);
-			formula.replaceWith(replacement);
-		}
-		for (const source of content.querySelectorAll(
-			'.MathJax_Preview, script[type^="math/"], mjx-assistive-mml, .MJX_Assistive_MathML',
-		))
-			source.remove();
 	}
 
 	/** Marks assigned cities visually and describes their destination to assistive tools. */

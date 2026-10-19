@@ -8,8 +8,8 @@
           <dt>Prompt</dt><dd>Complete both sentences.</dd>
           <dt>Form</dt>
           <dd>
-            <p>The capital of France is <tp-textfield name="france-capital" placeholder="Capital" aria-label="Capital of France" clearable=""></tp-textfield>.</p>
-            <p>The capital of Italy is <tp-textfield name="italy-capital" placeholder="Capital" aria-label="Capital of Italy" clearable=""></tp-textfield>.</p>
+            <p>The capital of France is <tp-blank name="france-capital" placeholder="Capital" aria-label="Capital of France" clearable=""></tp-blank>.</p>
+            <p>The capital of Italy is <tp-blank name="italy-capital" placeholder="Capital" aria-label="Capital of Italy" clearable=""></tp-blank>.</p>
           </dd>
           <dt>Feedback</dt>
           <dd>
@@ -28,9 +28,10 @@
       <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
 
 
-      <tp-stack>
-      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>case-sensitive</li><li>closed</li><li>partial</li></ul></tp-checkbox-list>
 
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>case-sensitive</li><li>partial</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="mode" label="mode" label-position="top" orientation="horizontal" value="1"><ul><li>mixed</li><li>opened</li><li>closed</li></ul></tp-radio-list>
       <tp-cluster></tp-cluster>
       <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
       </tp-stack>
@@ -48,7 +49,7 @@
       <dt>Answers</dt><dd><ol><li>Paris</li><li>Berlin</li><li>Rome</li></ol></dd>
       <dt>Title</dt><dd>Geography</dd>
       <dt>Prompt</dt><dd>Complete the sentences with the capitals.</dd>
-      <dt>Form</dt><dd><p>The capital of France is <tp-textfield name="france" aria-label="Capital of France" placeholder="City name" clearable=""></tp-textfield>.</p><p>The capital of Germany is <tp-textfield name="germany" aria-label="Capital of Germany" placeholder="City name" clearable=""></tp-textfield>.</p><p>The capital of Italy is <tp-textfield name="italy" aria-label="Capital of Italy" placeholder="City name" clearable=""></tp-textfield>.</p></dd>
+      <dt>Form</dt><dd><p>The capital of France is <tp-blank name="france" aria-label="Capital of France" placeholder="City name" clearable=""></tp-blank>.</p><p>The capital of Germany is <tp-blank name="germany" aria-label="Capital of Germany" placeholder="City name" clearable=""></tp-blank>.</p><p>The capital of Italy is <tp-blank name="italy" aria-label="Capital of Italy" placeholder="City name" clearable=""></tp-blank>.</p></dd>
       <dt>Feedback</dt><dd>Check the capital of each country and its spelling.</dd>
       <dt>Solution</dt><dd>France: Paris. Germany: Berlin. Italy: Rome.</dd>
       </dl>
@@ -61,7 +62,7 @@
       <dt>Answers</dt><dd><ol><li>went</li><li>saw</li><li>took</li></ol></dd>
       <dt>Title</dt><dd>Irregular verbs</dd>
       <dt>Prompt</dt><dd>Complete each sentence with the past simple form of the verb shown in the blank.</dd>
-      <dt>Form</dt><dd><p>Yesterday, I <tp-textfield name="go" aria-label="Past simple of go" placeholder="go" clearable=""></tp-textfield> to school.</p><p>Last night, she <tp-textfield name="see" aria-label="Past simple of see" placeholder="see" clearable=""></tp-textfield> a shooting star.</p><p>Last Monday, we <tp-textfield name="take" aria-label="Past simple of take" placeholder="take" clearable=""></tp-textfield> the train.</p></dd>
+      <dt>Form</dt><dd><p>Yesterday, I <tp-blank name="go" aria-label="Past simple of go" placeholder="go" clearable=""></tp-blank> to school.</p><p>Last night, she <tp-blank name="see" aria-label="Past simple of see" placeholder="see" clearable=""></tp-blank> a shooting star.</p><p>Last Monday, we <tp-blank name="take" aria-label="Past simple of take" placeholder="take" clearable=""></tp-blank> the train.</p></dd>
       <dt>Feedback</dt><dd>These verbs are irregular: their past simple forms do not end in -ed.</dd>
       <dt>Solution</dt><dd>go → went; see → saw; take → took.</dd>
       </dl>
@@ -69,7 +70,7 @@
     </div>
 
     <div role="example" label="Baltic capitals and flags">
-      <tp-fill-blank-question closed="" lang="en">
+      <tp-fill-blank-question mode="closed" lang="en">
       <dl>
       <dt>Answers</dt><dd><ol><li>Tallinn</li><li><tp-icon name="ee" library="flags" aria-label="Flag of Estonia"></tp-icon></li><li>Riga</li><li><tp-icon name="lv" library="flags" aria-label="Flag of Latvia"></tp-icon></li><li>Vilnius</li><li><tp-icon name="lt" library="flags" aria-label="Flag of Lithuania"></tp-icon></li></ol></dd>
       <dt>Title</dt><dd>Baltic capitals and flags</dd>
@@ -82,7 +83,7 @@
     </div>
 
     <div role="example" label="Square root">
-      <tp-fill-blank-question closed="" lang="en">
+      <tp-fill-blank-question mode="closed" lang="en">
           <dl>
             <dt>Answers</dt>
             <dd>

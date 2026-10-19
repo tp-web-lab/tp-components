@@ -120,7 +120,8 @@ export class TpFillBlank extends TpBase {
 		const isBlank =
 			target instanceof HTMLInputElement ||
 			target instanceof HTMLSelectElement ||
-			(target instanceof Element && isTpBlank(target));
+			(target instanceof Element &&
+				(isTpBlank(target) || target.localName === "tp-mathfield"));
 		if (!isBlank) {
 			return;
 		}
@@ -209,12 +210,18 @@ export class TpFillBlank extends TpBase {
 	 */
 	private initializeBlanks(): void {
 		for (const blank of this.getBlanks()) {
+			// Authored custom fields may not have upgraded when their parent connects.
+			customElements.upgrade(blank);
 			if (blank.name.trim() === "") {
 				TpFillBlank.nextBlankId += 1;
 				blank.name = `blank-${String(TpFillBlank.nextBlankId)}`;
 			}
 
-			if (blank instanceof HTMLInputElement || isTpBlank(blank)) {
+			const textfield = blank.closest("tp-textfield");
+			if (textfield && !textfield.getAttribute("name"))
+				textfield.setAttribute("name", blank.name);
+
+			if (!(blank instanceof HTMLSelectElement)) {
 				blank.value = "";
 				continue;
 			}
@@ -314,7 +321,7 @@ export class TpFillBlank extends TpBase {
 	 * @internal
 	 */
 	private writeBlankValue(blank: TpFillBlankInput, value: string): void {
-		if (blank instanceof HTMLInputElement || isTpBlank(blank)) {
+		if (!(blank instanceof HTMLSelectElement)) {
 			blank.value = value;
 			return;
 		}

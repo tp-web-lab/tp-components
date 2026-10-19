@@ -225,6 +225,17 @@ ${basic.source.match(/<tp-toolbar\b[^>]*>[\s\S]*?<\/tp-toolbar>/)?.[0] ?? basic.
 	if (!targets.length)
 		throw new Error(`${component}: missing declarative preview`);
 	const target = targets[0];
+	if (component === "fill-blank-question") {
+		const firstBlank = walk(target).find(node => node.tagName === "tp-blank");
+		if (firstBlank && !firstBlank.attrs.some(item => item.name === "closed")) firstBlank.attrs.push({ name: "closed", value: "" });
+	}
+
+	if (component === "blank") {
+		for (const question of walk(tree).filter(node => node.tagName === "tp-fill-blank-question")) {
+			question.attrs = question.attrs.filter(item => item.name !== "closed");
+		}
+	}
+
 	// Provide a real ID target for the speech component's for control.
 	if (component === "text-to-speech") {
 		const helper = parseFragment('<tp-typewriting id="attributes-spoken-text" speed="0">This linked text follows the spoken words.</tp-typewriting><article id="attributes-reading"><p>This ordinary article is read without changing its appearance.</p></article>');

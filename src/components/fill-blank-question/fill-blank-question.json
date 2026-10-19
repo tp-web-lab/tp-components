@@ -20,13 +20,13 @@
       "default": "false"
     },
     {
-      "name": "closed",
-      "description": "Provides shuffled answers to assign to readonly tp-textfield blanks.",
+      "name": "mode",
+      "description": "Blank mode: opened, closed, or mixed local choices.",
       "reflected": true,
       "static": false,
       "inherited": false,
-      "type": "boolean",
-      "default": "false"
+      "type": "string",
+      "default": "\"mixed\""
     },
     {
       "name": "partial",
@@ -71,8 +71,8 @@
       "summary": "manages inline fields and rich blanks in the content."
     },
     {
-      "name": "tp-markdown",
-      "summary": "Markdown rendering component."
+      "name": "tp-mathfield",
+      "summary": "Mathematical expression field with live LaTeX or AsciiMath rendering."
     },
     {
       "name": "tp-question",
@@ -88,6 +88,11 @@
     }
   ],
   "credits": [
+    {
+      "name": "CortexJS Compute Engine",
+      "url": "https://mathlive.io/compute-engine/",
+      "summary": "Symbolic comparison of mathematical answers, loaded on demand."
+    },
     {
       "name": "Zod",
       "url": "https://zod.dev/",

@@ -64,3 +64,6 @@ tp-fill-blank-question[partial] [data-tp-reading-result="danger"] {
 	background: var(--tp-danger-fill-soft);
 	color: var(--tp-danger-text-on-soft);
 }
+tp-fill-blank-question[partial] [data-tp-blank-result="warning"] {
+	border-bottom-color: var(--tp-warning-stroke-mid);
+}

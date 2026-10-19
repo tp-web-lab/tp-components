@@ -18,7 +18,7 @@ it("preserves asynchronous math components in the dynamically loaded introductio
 	const template = document.createElement("template");
 	template.innerHTML = await renderMarkdownToHtml(source);
 	const question = template.content.querySelector(
-		"tp-fill-blank-question[closed]",
+		"tp-fill-blank-question[mode]",
 	);
 	expect(question?.querySelectorAll("tp-math[value]")).toHaveLength(8);
 	expect(question?.querySelector("tp-math[value]")?.getAttribute("value")).toBe(
@@ -44,6 +44,7 @@ it.each(["html", "md", "adoc", "rst"])(
 						: /\.\. example:: ([^\n]+)/g;
 		expect([...source.matchAll(expression)].map((match) => match[1])).toEqual([
 			"Basic usage",
+			"Attributes",
 			"Geography",
 			"Irregular verbs",
 			"Baltic capitals and flags",
@@ -57,7 +58,7 @@ it.each(["MathJax_SVG", "mjx-container"])(
 	(container) => {
 		const formula = (label: string) =>
 			`<p><span class="MathJax_Preview">${label}</span><${container === "mjx-container" ? "mjx-container" : 'span class="MathJax_SVG"'} aria-label="${label}"><svg viewBox="0 0 10 10"><path d="M0 0h10v10z" /></svg><span class="MJX_Assistive_MathML"><math>${label}</math></span></${container === "mjx-container" ? "mjx-container" : "span"}><script type="math/tex">${label}</script></p>`;
-		document.body.innerHTML = `<tp-fill-blank-question closed><dl>
+		document.body.innerHTML = `<tp-fill-blank-question mode="closed"><dl>
 		<dt>Answers</dt><dd><ol><li>${formula("R+")}</li><li>${formula("R*+")}</li></ol></dd>
 		<dt>Form</dt><dd><p>Defined on <tp-blank name="domain"></tp-blank> and differentiable on <tp-blank name="derivative"></tp-blank>.</p></dd>
 		</dl></tp-fill-blank-question>`;
@@ -113,7 +114,7 @@ it("keeps the HTML square root example executable after example extraction", () 
 });
 
 it("copies the rendered SVG into the reading after asynchronous formula rendering", async () => {
-	document.body.innerHTML = `<tp-fill-blank-question closed><dl>
+	document.body.innerHTML = `<tp-fill-blank-question mode="closed"><dl>
 		<dt>Answers</dt><dd><ol><li><span data-formula>LaTeX source</span></li></ol></dd>
 		<dt>Form</dt><dd>The domain is <tp-blank name="domain"></tp-blank>.</dd>
 		</dl></tp-fill-blank-question>`;
@@ -164,8 +165,8 @@ it.each([
 		);
 		const start =
 			extension === "md"
-				? ":::: tp-fill-blank-question { closed"
-				: "[tp-fill-blank-question%closed";
+				? ":::: tp-fill-blank-question { mode"
+				: '[tp-fill-blank-question,mode="closed"';
 		const content = source.slice(
 			source.indexOf(start, source.indexOf("Square root")),
 		);
@@ -265,10 +266,10 @@ it("declares the equivalent reStructuredText directive without requiring Pyodide
 		"public/docs/components/blank/examples/examples.rst",
 		"utf8",
 	);
-	expect(source).toContain(".. tp-blank::");
-	expect(source).toContain(":name: result");
-	expect(source).toContain(":placeholder: Choose an answer");
-	expect(source).toContain(":aria-label: Expected result");
+	expect(source).toContain("(tp-blank)");
+	expect(source).toContain(":name: capital");
+	expect(source).toContain(":mode: closed");
+	expect(source).toContain(":aria-label: Capital of France");
 });
 
 it.each([
@@ -286,9 +287,9 @@ it.each([
 		const inline = outer.querySelector("script")?.textContent;
 		if (!inline) throw new Error("Missing viewer script");
 		document.body.innerHTML = await render(inline);
-		const blank = document.querySelector('tp-blank[name="result"]');
-		expect(blank?.getAttribute("name")).toBe("result");
-		expect(blank?.getAttribute("aria-label")).toBe("Expected result");
+		const blank = document.querySelector('tp-blank[name="capital"]');
+		expect(blank?.getAttribute("name")).toBe("capital");
+		expect(blank?.getAttribute("aria-label")).toBe("Capital of France");
 	},
 );
 

@@ -42,6 +42,8 @@ const docsEnd = '<!-- tp-docgen:dependencies:end -->';
 const sourceBlockExpression = new RegExp(`${sourceStart.replaceAll('/', '\\/')}[\\s\\S]*?${sourceEnd.replaceAll('/', '\\/')}\\n?`);
 
 const credits = {
+  '@cortex-js/compute-engine': ['CortexJS Compute Engine', 'https://mathlive.io/compute-engine/', 'Symbolic comparison of mathematical answers, loaded on demand.'],
+  mathlive: ["MathLive", "https://mathlive.io/", "Visual LaTeX editing and mathematical keyboard, loaded on demand."],
   'leaflet': ['Leaflet', 'https://leafletjs.com/', 'Interactive geographic maps.'],
   'runtime:openstreetmap': ['OpenStreetMap', 'https://www.openstreetmap.org/copyright', 'Map tiles and geographic data; attribution required.'],
   '@codemirror': ['CodeMirror', 'https://codemirror.net/', 'Code editing and language support.'],
@@ -153,9 +155,17 @@ function creditKey(specifier) {
   return scoped ?? specifier.split('/')[0];
 }
 
+// Feature runtimes are documented separately from eager component dependencies.
+// MathJax is reached through the optional tp-markdown preview; the checker is
+// imported on demand and must not become a structural dependency of a field.
+const optionalRuntimeCredits = {
+  'tp-mathfield': ['mathlive', 'runtime:mathjax'],
+  'tp-fill-blank-question': ['@cortex-js/compute-engine'],
+};
+
 function analyze(entryFile, ownerTags) {
   const dependencies = new Set();
-  const externalCredits = new Set();
+  const externalCredits = new Set(ownerTags.flatMap((tag) => optionalRuntimeCredits[tag] ?? []));
   const visited = new Set();
   const visit = (file) => {
     if (visited.has(file)) return;

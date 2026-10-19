@@ -124,7 +124,7 @@ export class TpMultiChoiceQuestion extends TpQuestion {
 
 	protected override connectedCallback(): void {
 		super.connectedCallback();
-		if (this.src) {
+		if (this.usesExternalData) {
 			void this.loadSrc();
 		} else {
 			this.initInline();
@@ -132,7 +132,7 @@ export class TpMultiChoiceQuestion extends TpQuestion {
 	}
 
 	protected override beforeQuestionLayout(): void {
-		if (!this.src) {
+		if (!this.usesExternalData) {
 			this.ensureCheckboxList(); // only needed for inline path
 		}
 	}
@@ -395,7 +395,10 @@ export class TpMultiChoiceQuestion extends TpQuestion {
 			const li = document.createElement("li");
 			// Inline feedback is already HTML; only external content needs its declared parser.
 			li.append(
-				this.createSrcContentNode(feedback, this.src ? this.srcMarkup : "html"),
+				this.createSrcContentNode(
+					feedback,
+					this.usesExternalData ? this.srcMarkup : "html",
+				),
 			);
 			feedbackList.append(li);
 		}

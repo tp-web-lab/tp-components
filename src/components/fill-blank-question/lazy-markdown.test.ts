@@ -13,7 +13,7 @@ afterEach(() => {
 });
 
 it("loads Markdown only when a question actually uses Markdown content", async () => {
-	document.body.innerHTML = `<tp-fill-blank-question closed><dl>
+	document.body.innerHTML = `<tp-fill-blank-question mode="closed"><dl>
 		<dt>Answers</dt><dd><ol><li>Paris</li></ol></dd>
 		<dt>Form</dt><dd>Capital: <tp-blank name="capital"></tp-blank></dd>
 	</dl></tp-fill-blank-question>`;

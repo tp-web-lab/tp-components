@@ -5,6 +5,7 @@ afterEach(() => document.body.replaceChildren());
 
 it("keeps image content when the registered constructor predates a module reload", async () => {
 	const registered = document.createElement("tp-blank");
+	registered.closed = true;
 	registered.name = "logo";
 	document.body.append(registered);
 	expect(registered).toBeInstanceOf(TpBlank);

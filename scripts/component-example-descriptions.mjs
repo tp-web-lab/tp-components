@@ -455,7 +455,7 @@ export function describeExample(component, label) {
 			numberfield:
 				"Switch between number and range, test numeric bounds and increments, and observe native validation and the synchronized value.",
 			mathfield:
-				"Try the two notation modes, multiline editing and formula preview; changes made with the preview button are reflected in the checkbox.",
+				"Try the two notation modes, multiline editing and formula preview. Enable mathlive in LaTeX mode to open the visual editor; its edits update the source.",
 			datefield:
 				"Test date limits and the step in days using YYYY-MM-DD values; invalid settings leave the last valid value unchanged.",
 			timefield:

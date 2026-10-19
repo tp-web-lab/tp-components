@@ -33,8 +33,8 @@
  * @summary manages inline fields and rich blanks in the content.
  */
 /**
- * @tp-dependency tp-markdown
- * @summary Markdown rendering component.
+ * @tp-dependency tp-mathfield
+ * @summary Mathematical expression field with live LaTeX or AsciiMath rendering.
  */
 /**
  * @tp-dependency tp-question
@@ -49,16 +49,24 @@
  * @summary Single-line and automatically growing multiline text field.
  */
 /**
+ * @credit CortexJS Compute Engine https://mathlive.io/compute-engine/
+ * @summary Symbolic comparison of mathematical answers, loaded on demand.
+ */
+/**
  * @credit Zod https://zod.dev/
  * @summary Runtime schema validation.
  */
 // tp-docgen:dependencies:end
 
+import { isTpBlank } from "../blank/blank.js";
+import "../mathfield/mathfield.js";
 import { TpQuestion } from "../question/question.js";
 import { FillBlankQuestionSrcSchema } from "../question/question-src-schema.js";
+import type { MathChecker, MathTransformation } from "./math-checker.js";
 import "../fill-blank/fill-blank.js";
 import "../textfield/textfield.js";
 import { getBlankFields } from "../fill-blank/fields.js";
+import { AnswerReading } from "./answer-reading.js";
 import closedAnswersStyle from "./closed-answers.css?inline";
 import { ClosedAnswers } from "./closed-answers.js";
 
@@ -96,8 +104,9 @@ class StringValueProxy {
  * @tagname tp-fill-blank-question
  *
  * @attr {boolean} case-sensitive = false - Requires matching uppercase and lowercase letters in answers.
+ * @attr {string} mode = "mixed" - Blank mode: opened, closed, or mixed local choices.
  * @attr {boolean} partial = false - Allows incomplete submissions and marks filled blanks as correct or incorrect after feedback.
- * @attr {boolean} closed = false - Provides shuffled answers to assign to readonly tp-textfield blanks.
+
  * @example
  * <tp-fill-blank-question>
  *   <dl>
@@ -115,13 +124,22 @@ export class TpFillBlankQuestion extends TpQuestion {
 		return [
 			...(TpQuestion.observedAttributes ?? []),
 			"case-sensitive",
-			"closed",
+			"mode",
 			"partial",
 		];
 	}
 
 	/** Expected values in blank order. */
 	private answerValues: string[] = [];
+	private expectedValues: string[] = [];
+	private answerRules: {
+		math: boolean;
+		mode: string;
+	}[] = [];
+	private mathChecker: MathChecker | null = null;
+	private mathResults = new Map<number, boolean | undefined>();
+	private mathTransformations = new Map<number, MathTransformation>();
+	private updatingModes = false;
 	/** Ordered answers read from the author list (or from a JSON source). */
 	private listedAnswers: string[] | null = null;
 	/** Original answer presentations, retained independently of their expected rank. */
@@ -135,6 +153,7 @@ export class TpFillBlankQuestion extends TpQuestion {
 	private feedbackItems: string[] = [];
 	/** Optional closed-answer interaction, cleaned up on reset and disconnect. */
 	private closedAnswers: ClosedAnswers | null = null;
+	private answerReading: AnswerReading | null = null;
 
 	// ── Lifecycle ───────────────────────────────────────────────────────────────
 
@@ -145,16 +164,6 @@ export class TpFillBlankQuestion extends TpQuestion {
 	/** Enables or disables case-sensitive answer comparison. */
 	public set caseSensitive(value: boolean) {
 		this.setBooleanAttribute("case-sensitive", value);
-	}
-
-	/** Whether answers are selected from a shuffled bank instead of typed freely. */
-	public get closed(): boolean {
-		return this.hasAttribute("closed");
-	}
-
-	/** Enables or disables the closed-answer mode. */
-	public set closed(value: boolean) {
-		this.setBooleanAttribute("closed", value);
 	}
 
 	/** Whether incomplete submissions may receive feedback. */
@@ -170,7 +179,7 @@ export class TpFillBlankQuestion extends TpQuestion {
 		const target = event.target;
 		if (!(target instanceof Element) || !this.actualFillBlank) return;
 		for (const field of getBlankFields(this.actualFillBlank)) {
-			if (field === target || target.contains(field))
+			if (field === target || target.contains(field) || field.contains(target))
 				field.removeAttribute("data-tp-blank-result");
 		}
 	};
@@ -185,8 +194,11 @@ export class TpFillBlankQuestion extends TpQuestion {
 
 	/** Removes answer-bank listeners before disconnecting the base question. */
 	public override disconnectedCallback(): void {
+		this.removeEventListener("tp-blank-mode-change", this.onBlankModeChange);
 		this.removeEventListener("input", this.clearEditedResult);
 		this.removeEventListener("change", this.clearEditedResult);
+		this.answerReading?.destroy();
+		this.answerReading = null;
 		this.closedAnswers?.destroy();
 		this.closedAnswers = null;
 		super.disconnectedCallback();
@@ -199,9 +211,10 @@ export class TpFillBlankQuestion extends TpQuestion {
 			closedAnswersStyle,
 		);
 		this.updateCaseSensitiveNotice();
+		this.addEventListener("tp-blank-mode-change", this.onBlankModeChange);
 		this.addEventListener("input", this.clearEditedResult);
 		this.addEventListener("change", this.clearEditedResult);
-		if (this.src) {
+		if (this.usesExternalData) {
 			void this.loadSrc();
 			return;
 		}
@@ -210,7 +223,7 @@ export class TpFillBlankQuestion extends TpQuestion {
 	}
 
 	protected override beforeQuestionLayout(): void {
-		if (!this.src) {
+		if (!this.usesExternalData) {
 			this.readAnswerList();
 			this.ensureFillBlank(this.response);
 		}
@@ -223,6 +236,16 @@ export class TpFillBlankQuestion extends TpQuestion {
 		);
 		const content = heading?.nextElementSibling;
 		if (content?.localName !== "dd") return;
+		this.answerRules = Array.from(
+			content.querySelectorAll(":scope > ol > li"),
+			(item) => {
+				const math = item.querySelector("tp-math");
+				return {
+					math: !!math,
+					mode: math?.getAttribute("mode") ?? "latexmath",
+				};
+			},
+		);
 		this.answerContent = Array.from(
 			content.querySelectorAll(":scope > ol > li"),
 			(item) => {
@@ -234,7 +257,16 @@ export class TpFillBlankQuestion extends TpQuestion {
 		);
 		this.listedAnswers = Array.from(
 			content.querySelectorAll(":scope > ol > li"),
-			(item) => item.textContent?.trim() ?? "",
+			(item) => {
+				const math = item.querySelector("tp-math");
+				return (
+					math?.getAttribute("value") ||
+					math?.querySelector("script")?.textContent ||
+					math?.textContent ||
+					item.textContent ||
+					""
+				).trim();
+			},
 		);
 		heading?.remove();
 		content.remove();
@@ -248,7 +280,7 @@ export class TpFillBlankQuestion extends TpQuestion {
 	): void {
 		super.attributeChangedCallback(name, oldValue, newValue);
 		if (name === "case-sensitive") this.updateCaseSensitiveNotice();
-		if (name === "closed" && this.isConnected) this.updateClosedAnswers();
+		if (name === "mode" && this.isConnected) this.updateClosedAnswers();
 		if (name === "partial" && !this.partial) this.clearResults();
 	}
 
@@ -359,6 +391,26 @@ export class TpFillBlankQuestion extends TpQuestion {
 	}
 
 	protected override validateSubmit(_value: unknown): string | null {
+		if (this.mode !== "closed") {
+			for (let index = 0; index < this.answerValues.length; index += 1) {
+				const pattern = this.isClosedAnswer(index)
+					? null
+					: this.answerPattern(index);
+				if (pattern !== null) {
+					try {
+						// Validate the source before wrapping it: an open character class
+						// could otherwise consume the full-match suffix.
+						new RegExp(pattern, this.caseSensitive ? "u" : "iu");
+						new RegExp(
+							`^(?:${pattern})(?![\\s\\S])`,
+							this.caseSensitive ? "u" : "iu",
+						);
+					} catch {
+						return "Invalid answer pattern: the author must correct this question.";
+					}
+				}
+			}
+		}
 		const submittedValues = this.getSubmittedValues();
 		if (
 			submittedValues.length === 0 ||
@@ -390,23 +442,76 @@ export class TpFillBlankQuestion extends TpQuestion {
 		let score = 0;
 		for (let index = 0; index < total; index += 1) {
 			const submitted = this.normalizeAnswer(submittedValues[index] ?? "");
-			const expected = this.normalizeAnswer(this.answerValues[index] ?? "");
-			const correct =
-				submitted !== "" && expected !== "" && submitted === expected;
+			const correct = this.answerMatches(submittedValues[index] ?? "", index);
 			if (correct) score += 1;
 			if (this.partial && submitted !== "")
 				fields[index]?.setAttribute(
 					"data-tp-blank-result",
-					correct ? "success" : "danger",
+					correct
+						? "success"
+						: !this.isClosedAnswer(index) &&
+								this.isMathAnswer(index) &&
+								this.mathResults.get(index) === undefined
+							? "warning"
+							: "danger",
 				);
 		}
 		container.append(this.createAttemptSummaryLine(score, total));
+		for (const [index, transformation] of this.mathTransformations) {
+			if (this.mathResults.get(index) !== true) continue;
+			const notice = document.createElement("p");
+			notice.setAttribute("data-tp-math-transformation", transformation);
+			notice.setAttribute("data-tp-answer-index", String(index + 1));
+			const explanation = {
+				normalization: "correct after normalization (term order or notation).",
+				simplification:
+					"correct after algebraic simplification or rearrangement.",
+				equivalence: "correct: mathematical equivalence was established.",
+			}[transformation];
+			notice.textContent = `Answer ${index + 1}: ${explanation}`;
+			container.append(notice);
+			const expected = document.createElement("p");
+			expected.setAttribute("data-tp-expected-answer", String(index + 1));
+			expected.append("Expected answer: ");
+			const formula = document.createElement("tp-math");
+			formula.setAttribute("value", this.answerValues[index] ?? "");
+			expected.append(formula);
+			container.append(expected);
+		}
+
+		if (this.mode !== "closed") {
+			submittedValues.forEach((value, index) => {
+				if (
+					this.isClosedAnswer(index) ||
+					this.isMathAnswer(index) ||
+					this.answerPattern(index) === null ||
+					!this.answerMatches(value, index) ||
+					this.normalizeAnswer(value) ===
+						this.normalizeAnswer(this.answerValues[index] ?? "")
+				)
+					return;
+				const notice = document.createElement("p");
+				notice.setAttribute("data-tp-text-variant", String(index + 1));
+				notice.textContent = `Answer ${index + 1}: correct; an accepted wording variant was recognized.`;
+				const expected = document.createElement("p");
+				expected.setAttribute("data-tp-expected-answer", String(index + 1));
+				expected.textContent = `Expected answer: ${this.answerValues[index] ?? ""}`;
+				container.append(notice, expected);
+			});
+		}
 
 		if (isCorrect) {
 			const title = document.createElement("p");
 			title.textContent = "🎉 Congratulations, correct answer!";
 			container.append(title);
 			return container;
+		}
+		for (const [index, result] of this.mathResults) {
+			if (result !== undefined || !submittedValues[index]?.trim()) continue;
+			const notice = document.createElement("p");
+			notice.setAttribute("data-tp-unverified-answer", String(index + 1));
+			notice.textContent = `Answer ${index + 1}: this mathematical expression could not be verified automatically.`;
+			container.append(notice);
 		}
 		const generalFeedback = this.createGeneralFeedback();
 		if (generalFeedback) container.append(generalFeedback);
@@ -416,8 +521,10 @@ export class TpFillBlankQuestion extends TpQuestion {
 		let hasFeedbackRows = false;
 		for (let index = 0; index < total; index += 1) {
 			const submitted = this.normalizeAnswer(submittedValues[index] ?? "");
-			const expected = this.normalizeAnswer(this.answerValues[index] ?? "");
-			if (submitted === expected || (this.partial && submitted === "")) {
+			if (
+				this.answerMatches(submittedValues[index] ?? "", index) ||
+				(this.partial && submitted === "")
+			) {
 				continue;
 			}
 			const feedback = this.feedbackItems[index];
@@ -426,7 +533,7 @@ export class TpFillBlankQuestion extends TpQuestion {
 			}
 			hasFeedbackRows = true;
 			const item = document.createElement("li");
-			if (this.src) {
+			if (this.usesExternalData) {
 				item.append(this.createSrcContentNode(feedback));
 			} else {
 				item.innerHTML = feedback;
@@ -447,7 +554,9 @@ export class TpFillBlankQuestion extends TpQuestion {
 
 		// Check if any input or select exists in the dd
 		const hasInputsOrSelects =
-			formDd.querySelector("input, select, tp-textfield, tp-blank") !== null;
+			formDd.querySelector(
+				"input, select, tp-textfield, tp-blank, tp-mathfield",
+			) !== null;
 		if (!hasInputsOrSelects) {
 			// No inputs/selects found - clear the dd and show error
 			formDd.textContent = "";
@@ -505,36 +614,170 @@ export class TpFillBlankQuestion extends TpQuestion {
 		this.answerValues =
 			this.listedAnswers ??
 			(answerStr === "" ? [] : answerStr.split(",").map((s) => s.trim()));
+		this.expectedValues = [...this.answerValues];
 		this.updateClosedAnswers();
 	}
 
-	/** Rebuilds the shuffled bank while preserving the original question form. */
+	private readonly onBlankModeChange = (event: Event): void => {
+		if (
+			event.target instanceof Element &&
+			event.target.closest("[data-tp-question]") === this
+		)
+			this.updateClosedAnswers();
+	};
+
+	private isClosedAnswer(index: number): boolean {
+		const field = this.actualFillBlank
+			? getBlankFields(this.actualFillBlank)[index]
+			: null;
+		return field && isTpBlank(field)
+			? field.effectiveClosed
+			: this.mode === "closed";
+	}
+
+	/** Keeps author blanks in place and limits the bank to closed destinations. */
 	private updateClosedAnswers(): void {
-		this.clearResults();
-		this.closedAnswers?.destroy();
-		this.closedAnswers = null;
-		if (this.closed && this.actualFillBlank && this.isConnected) {
-			const texts = this.listedAnswers ?? this.answerValues;
+		if (this.updatingModes || !this.actualFillBlank || !this.isConnected)
+			return;
+		this.updatingModes = true;
+		const openValues = getBlankFields(this.actualFillBlank)
+			.filter(
+				(field, index) =>
+					!this.isClosedAnswer(index) &&
+					(!isTpBlank(field) || field.hasAttribute("data-tp-blank-open")),
+			)
+			.map((field) => [field, field.value] as const);
+		try {
+			this.mathResults.clear();
+			this.mathTransformations.clear();
+			this.clearResults();
+			this.answerReading?.destroy();
+			this.answerReading = null;
+			this.closedAnswers?.destroy();
+			this.closedAnswers = null;
 			const fields = getBlankFields(this.actualFillBlank);
+			for (const field of fields) if (isTpBlank(field)) field.syncMode();
+			const texts = this.expectedValues;
 			this.answerValues = texts.map((text, index) =>
-				fields[index]?.localName === "tp-blank" ? String(index + 1) : text,
+				fields[index]?.localName === "tp-blank" && this.isClosedAnswer(index)
+					? String(index + 1)
+					: text,
 			);
-			this.closedAnswers = new ClosedAnswers(
-				this.actualFillBlank,
-				texts,
-				this.querySelector<HTMLElement>("[data-tp-question-feedback-output]"),
-				this.answerContent,
+			const closedIndices = fields.flatMap((_, index) =>
+				this.isClosedAnswer(index) ? [index] : [],
+			);
+			if (closedIndices.length)
+				this.closedAnswers = new ClosedAnswers(
+					this.actualFillBlank,
+					texts,
+					this.querySelector<HTMLElement>("[data-tp-question-feedback-output]"),
+					this.answerContent,
+					closedIndices,
+				);
+		} finally {
+			for (const [field, value] of openValues) field.value = value;
+			this.answerReading = new AnswerReading(this.actualFillBlank);
+			this.updatingModes = false;
+		}
+	}
+
+	private isMathAnswer(index: number): boolean {
+		const field = this.actualFillBlank
+			? getBlankFields(this.actualFillBlank)[index]
+			: null;
+		return field && isTpBlank(field)
+			? field.type === "math"
+			: !!this.answerRules[index]?.math;
+	}
+
+	protected override prepareSubmission(): void | Promise<void> {
+		this.mathResults.clear();
+		this.mathTransformations.clear();
+		if (
+			!this.answerValues.some(
+				(_, index) => !this.isClosedAnswer(index) && this.isMathAnswer(index),
+			)
+		)
+			return;
+		return this.prepareMathResults();
+	}
+
+	private async prepareMathResults(): Promise<void> {
+		const values = this.getSubmittedValues();
+		if (!this.mathChecker) {
+			const { createMathChecker } = await import("./math-checker.js");
+			this.mathChecker = createMathChecker();
+		}
+		this.answerValues.forEach((_, index) => {
+			if (!this.isClosedAnswer(index) && this.isMathAnswer(index))
+				this.mathResults.set(
+					index,
+					(this.answerRules[index]?.mode ?? "latexmath") === "latexmath"
+						? this.mathChecker?.(
+								values[index] ?? "",
+								this.answerValues[index] ?? "",
+								(transformation) =>
+									this.mathTransformations.set(index, transformation),
+							)
+						: undefined,
+				);
+		});
+		if (this.mathTransformations.size > 0) {
+			await import("../math/math.js");
+		}
+	}
+
+	/** Read the current field regular expression. */
+	private answerPattern(index: number): string | null {
+		const field = this.actualFillBlank
+			? getBlankFields(this.actualFillBlank)[index]
+			: null;
+		return (
+			field?.getAttribute("regexp") ??
+			field?.closest("tp-textfield")?.getAttribute("regexp") ??
+			null
+		);
+	}
+
+	private answerMatches(value: string, index: number): boolean {
+		const expected = this.answerValues[index] ?? "";
+		if (!value.trim() || !expected.trim()) return false;
+		if (!this.isClosedAnswer(index) && this.isMathAnswer(index))
+			return this.mathResults.get(index) === true;
+		const pattern = this.isClosedAnswer(index)
+			? null
+			: this.answerPattern(index);
+		if (!this.isClosedAnswer(index) && pattern !== null) {
+			try {
+				return new RegExp(
+					`^(?:${pattern})(?![\\s\\S])`,
+					this.caseSensitive ? "u" : "iu",
+				).test(value.trim());
+			} catch {
+				return false;
+			}
+		}
+		const field = this.actualFillBlank
+			? getBlankFields(this.actualFillBlank)[index]
+			: null;
+		if (
+			!this.isClosedAnswer(index) &&
+			field &&
+			isTpBlank(field) &&
+			field.type === "number"
+		) {
+			return (
+				Number.isFinite(Number(value)) &&
+				Number.isFinite(Number(expected)) &&
+				Number(value) === Number(expected)
 			);
 		}
+		return this.normalizeAnswer(value) === this.normalizeAnswer(expected);
 	}
 
 	private matchesSubmittedValues(submittedValues: string[]): boolean {
 		if (submittedValues.length === 0) return false;
-		return submittedValues.every(
-			(v, i) =>
-				this.normalizeAnswer(v) ===
-				this.normalizeAnswer(this.answerValues[i] ?? ""),
-		);
+		return submittedValues.every((v, i) => this.answerMatches(v, i));
 	}
 
 	/** Applies the same whitespace and case policy to validation and per-blank scoring. */

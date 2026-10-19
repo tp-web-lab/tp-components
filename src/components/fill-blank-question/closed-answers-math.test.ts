@@ -17,7 +17,7 @@ vi.mock("@tp/tp-markdown/markdown/renderers/math", () => ({
 afterEach(() => document.body.replaceChildren());
 
 it("keeps rendered inline tp-math answers after dropping, moving and restoring them", async () => {
-	document.body.innerHTML = `<tp-fill-blank-question closed><dl>
+	document.body.innerHTML = `<tp-fill-blank-question mode="closed"><dl>
 		<dt>Answers</dt><dd><ol><li><tp-math>f'(a)</tp-math></li><li>text</li></ol></dd>
 		<dt>Form</dt><dd><tp-blank name="first"></tp-blank><tp-blank name="second"></tp-blank></dd>
 	</dl></tp-fill-blank-question>`;

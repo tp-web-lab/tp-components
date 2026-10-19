@@ -119,6 +119,15 @@
       "default": "false"
     },
     {
+      "name": "regexp",
+      "description": "Optional full-answer regular expression for grading in an open fill-blank question; applied to trimmed text using the question case policy.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
       "name": "required",
       "description": "Marks the field as required.",
       "reflected": true,

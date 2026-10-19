@@ -18,7 +18,7 @@ Select a shape or drag it onto the blank. Use its clear button to remove the ans
 
 [tp-fill-blank]
 ====
-A shape with three sides is [tp-blank,name="shape",aria-label="Shape with three sides"]#shape#.
+A shape with three sides is [tp-blank%closed,name="shape",aria-label="Shape with three sides"]#shape#.
 ====
 
 [tp-button-group,aria-label="Shape choices"]

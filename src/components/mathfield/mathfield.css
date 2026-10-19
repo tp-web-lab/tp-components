@@ -18,17 +18,30 @@ tp-mathfield[label-position="end"] {
 }
 
 tp-mathfield [data-tp-mathfield-editor] {
-	flex: 0 0 var(--tp-mathfield-inline-size, 28rem);
+	flex: 0 1 var(--tp-mathfield-inline-size, 28rem);
 	inline-size: var(--tp-mathfield-inline-size, 28rem);
+	max-inline-size: 100%;
 	min-inline-size: 0;
 }
 
+/* A formula paragraph fits beside floats while retaining inline prose layout. */
+.tp-markdown-output > p:has(> tp-mathfield) {
+	display: flow-root;
+}
+
+/* Standalone fields establish a block formatting context that fits beside floats. */
+.tp-markdown-output > tp-mathfield,
 tp-mathfield[multiline] {
-	display: block;
-	inline-size: var(--tp-mathfield-inline-size, 28rem);
+	display: flex;
+	inline-size: auto;
+}
+
+tp-mathfield[multiline] {
+	max-inline-size: min(100%, var(--tp-mathfield-inline-size, 28rem));
 }
 
 tp-mathfield[multiline] [data-tp-mathfield-editor] {
+	flex-basis: 100%;
 	inline-size: 100%;
 }
 
@@ -101,67 +114,14 @@ tp-mathfield [data-tp-mathfield-preview][hidden] {
 	display: none;
 }
 
-tp-mathfield [data-tp-mathfield-preview-mode] {
-	display: block;
-	flex: 0 0 auto;
-	font-size: 0.875em;
-}
-
-tp-mathfield [data-tp-mathfield-preview-divider] {
-	--tp-divider-color: var(
-		--tp-mathfield-preview-border-color,
-		var(--tp-neutral-stroke-soft)
-	);
-	--tp-divider-margin-inline: 0.75rem;
-}
-
-tp-mathfield [data-tp-mathfield-preview-content] {
-	text-align: start;
-}
-tp-mathfield [data-tp-mathfield-preview-mode] {
-	order: 1;
-}
-tp-mathfield [data-tp-mathfield-preview-divider] {
-	order: 2;
-}
-tp-mathfield [data-tp-mathfield-preview-content] {
-	order: 3;
-}
-tp-mathfield [data-tp-mathfield-render-copy] {
-	order: 4;
-	position: relative;
-	inset: auto;
-	min-block-size: 1.75rem;
-	min-inline-size: 1.75rem;
-}
-tp-mathfield[multiline] [data-tp-mathfield-preview-mode] {
-	align-self: center;
-	grid-column: 1;
-	grid-row: 1;
-}
-tp-mathfield[multiline] [data-tp-mathfield-render-copy] {
-	grid-column: 2;
-	grid-row: 1;
-}
-tp-mathfield[multiline] [data-tp-mathfield-preview-divider] {
-	--tp-divider-margin-block: 0.5rem;
-	--tp-divider-margin-inline: 0;
-}
-tp-mathfield[multiline] [data-tp-mathfield-preview-content] {
-	grid-column: 1 / -1;
-	grid-row: 3;
-	inline-size: 100%;
-	text-align: center;
-}
-
-tp-mathfield[multiline] [data-tp-mathfield-preview] {
-	grid-template-columns: minmax(0, 1fr) auto;
-}
-
-tp-mathfield[multiline] [data-tp-mathfield-preview-divider] {
-	grid-column: 1 / -1;
-	grid-row: 2;
-}
+tp-mathfield [data-tp-mathfield-preview] { gap: 0.75rem; }
+tp-mathfield[multiline] [data-tp-mathfield-preview] { grid-template-columns: minmax(0, 1fr) auto; }
+tp-mathfield [data-tp-mathfield-preview-content] { min-inline-size: 0; }
+tp-mathfield [data-tp-mathfield-render-copy] { position: relative; inset: auto; min-block-size: 1.75rem; min-inline-size: 1.75rem; }
+tp-mathfield [data-tp-mathfield-visual-button][hidden],
+tp-mathfield [data-tp-mathfield-visual-panel][hidden] { display: none; }
+tp-mathfield [data-tp-mathfield-visual-panel] { flex-basis: 100%; min-inline-size: 0; max-inline-size: 100%; }
+tp-mathfield math-field { display: block; box-sizing: border-box; width: 100%; min-width: 0; font-size: 1.25em; }
 
 tp-mathfield [data-tp-mathfield-preview] .tp-markdown-output > :first-child {
 	margin-block-start: 0;
@@ -174,3 +134,18 @@ tp-mathfield [data-tp-mathfield-mode-button] { position: absolute; inset-inline-
 tp-mathfield [data-tp-mathfield-mode-button]:focus-visible { outline: 2px solid var(--tp-brand-stroke); outline-offset: 2px; }
 tp-mathfield [data-tp-mathfield-mode-button]:disabled { cursor: not-allowed; }
 tp-mathfield [data-tp-mathfield-mode-menu] [data-mode-check] { display: inline-block; inline-size: 1.25em; }
+
+tp-mathfield[multiline] [data-tp-mathfield-preview-content] { text-align: center; }
+
+/* Reserve the visual editor action only when it is available. */
+tp-mathfield [data-tp-textfield-control] [data-tp-mathfield-visual-button] {
+ position: absolute;
+ inset-block-start: 50%;
+ inset-inline-end: 3.65rem;
+ margin: 0;
+ transform: translateY(-50%);
+}
+tp-mathfield [data-tp-textfield-control]:has([data-tp-mathfield-visual-button]:not([hidden])) [data-tp-mathfield-source-copy] { inset-inline-end: 5.4rem; }
+tp-mathfield [data-tp-textfield-control]:has([data-tp-mathfield-visual-button]:not([hidden])) [data-tp-textfield-clear] { inset-inline-end: 7.15rem; }
+tp-mathfield [data-tp-textfield-control]:has([data-tp-mathfield-visual-button]:not([hidden])) [data-tp-textfield-input] { padding-inline-end: calc(var(--tp-textfield-padding-inline, 0.75em) + 8.75rem); }
+tp-mathfield[multiline] [data-tp-textfield-control] [data-tp-mathfield-visual-button] { inset-block-start: 0.35em; transform: none; }

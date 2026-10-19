@@ -30,3 +30,9 @@ tp-blank > :is(svg, img) {
 	max-inline-size: 100%;
 	vertical-align: middle;
 }
+
+tp-blank[data-tp-blank-open] {
+ padding: 0;
+ border: 0;
+ max-inline-size: 100%;
+}

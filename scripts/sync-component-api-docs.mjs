@@ -39,9 +39,40 @@ const inlineType = (value = '') => String(value)
   .replace(/\s*[\r\n]+\s*/g, ' ')
   .trim();
 
+// Resolve inherited attributes from the same manifests used for local API tables.
+const manifestsByClass = new Map();
+for (const directory of readdirSync(componentsRoot)) {
+  const path = join(componentsRoot, directory, `${directory}.json`);
+  if (!existsSync(path)) continue;
+  try {
+    const manifest = JSON.parse(readFileSync(path, 'utf8'));
+    if (manifest.classname) manifestsByClass.set(manifest.classname, manifest);
+  } catch { /* Ignore unpublished or incomplete manifests. */ }
+}
+
+function effectiveAttributes(manifest) {
+  const attributes = new Map();
+  const visited = new Set();
+  let current = manifest;
+  while (current && !visited.has(current.classname)) {
+    visited.add(current.classname);
+    for (const item of current.attributes ?? []) {
+      if (!attributes.has(item.name)) {
+        attributes.set(item.name, {
+          ...item,
+          inheritedFrom: current === manifest ? null : current.tagname,
+        });
+      }
+    }
+    current = manifestsByClass.get(current.superclass);
+  }
+  return [...attributes.values()];
+}
+
 function apiBlock(manifest) {
-  const attributes = (manifest.attributes ?? []).map((item) =>
-    [code(item.name), code(inlineType(item.type)), code(item.default), cell(item.description)]);
+  const attributes = effectiveAttributes(manifest).map((item) =>
+    [code(item.name), code(inlineType(item.type)), code(item.default),
+      `${cell(item.description)}${item.inheritedFrom ? ` *(inherited from ${code(item.inheritedFrom)})*` : ''}`]);
   const methods = (manifest.methods ?? []).map((item) => {
     const signature = item.name ?? '';
     return [code(signature.split('(')[0]), code(signature), cell(item.description)];

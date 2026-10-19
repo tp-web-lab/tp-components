@@ -116,7 +116,7 @@ export class TpSingleChoiceQuestion extends TpQuestion {
 
 	protected override connectedCallback(): void {
 		super.connectedCallback();
-		if (this.src) {
+		if (this.usesExternalData) {
 			void this.loadSrc();
 		} else {
 			this.initInline();
@@ -124,7 +124,7 @@ export class TpSingleChoiceQuestion extends TpQuestion {
 	}
 
 	protected override beforeQuestionLayout(): void {
-		if (!this.src) {
+		if (!this.usesExternalData) {
 			this.ensureRadioList(); // only needed for inline path
 		}
 	}
@@ -343,7 +343,7 @@ export class TpSingleChoiceQuestion extends TpQuestion {
 				line.append(
 					this.createSrcContentNode(
 						feedback,
-						this.src ? this.srcMarkup : "html",
+						this.usesExternalData ? this.srcMarkup : "html",
 					),
 				);
 				container.append(line);

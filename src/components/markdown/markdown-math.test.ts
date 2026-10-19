@@ -59,7 +59,7 @@ it("finishes introductory formulas before an already defined question captures i
 				formula.replaceChildren(svg);
 			}
 		});
-	const source = `<tp-fill-blank-question closed>
+	const source = `<tp-fill-blank-question mode="closed">
   <dl>
 		<dt>Answers</dt><dd><ol>
 		<li><span data-mathjax-tex="a"></span></li>
@@ -77,7 +77,7 @@ it("finishes introductory formulas before an already defined question captures i
 	expect(runtime).toHaveBeenNthCalledWith(1, expect.any(DocumentFragment), {
 		only: ["math"],
 	});
-	const question = root.querySelector("tp-fill-blank-question[closed]");
+	const question = root.querySelector("tp-fill-blank-question[mode]");
 	expect(
 		question?.querySelectorAll("tp-button[data-tp-closed-item] svg"),
 	).toHaveLength(3);
@@ -107,7 +107,9 @@ it("displays the fill-blank documentation before the math runtime finishes loadi
 		expect(root.querySelector("h1")?.textContent).toContain(
 			"Fill blank question",
 		);
-		expect(root.querySelectorAll("tp-blank")).toHaveLength(3);
+		expect(
+			root.querySelectorAll('tp-fill-blank-question[mode="closed"] tp-blank'),
+		).toHaveLength(3);
 		expect(
 			root.querySelectorAll("tp-button[data-tp-closed-item] tp-math[value]"),
 		).toHaveLength(3);

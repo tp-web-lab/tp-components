@@ -13,10 +13,6 @@
  * @summary Copy-to-clipboard button component.
  */
 /**
- * @tp-dependency tp-divider
- * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
- */
-/**
  * @tp-dependency tp-dropdown
  * @summary Dropdown menu component.
  */
@@ -25,23 +21,29 @@
  * @summary Accessible icon button component.
  */
 /**
- * @tp-dependency tp-markdown
- * @summary Markdown rendering component.
- */
-/**
  * @tp-dependency tp-textfield
  * @summary Single-line and automatically growing multiline text field.
+ */
+/**
+ * @credit MathLive https://mathlive.io/
+ * @summary Visual LaTeX editing and mathematical keyboard, loaded on demand.
+ */
+/**
+ * @credit MathJax https://www.mathjax.org/
+ * @summary Mathematical notation rendering.
  */
 // tp-docgen:dependencies:end
 
 import { initializeFieldName } from "../../utilities/field-name.js";
+import { isInQuestion } from "../../utilities/question-context.js";
 import { TpDropdown } from "../dropdown/dropdown.js";
 import style from "./mathfield.css?inline";
 import "../copy-code/copy-code.js";
-import "../divider/divider.js";
 import "../icon-button/icon-button.js";
-import "../markdown/markdown.js";
+
 import "../textfield/textfield.js";
+
+import type { MathfieldElement } from "mathlive";
 import { TpBase } from "../base/base.js";
 
 export type TpMathfieldMode = "latexmath" | "asciimath";
@@ -52,6 +54,7 @@ export type TpMathfieldLabelPosition = "top" | "bottom" | "start" | "end";
  * @tagname tp-mathfield
  * @attr {string} mode = "latexmath" - Mathematical notation (`latexmath` or `asciimath`).
  * @attr {boolean} multiline = false - Uses a multiline editor and display-style rendering.
+ * @attr {boolean} mathlive = false - Offers a visual MathLive editor in LaTeX mode, loaded on first opening.
  * @attr {boolean} preview = false - Opens the rendered MathJax preview panel.
  * @attr {string} value = "" - Mathematical expression source.
  * @attr {string} label = "" - Visible label associated with the editing field.
@@ -82,11 +85,16 @@ export class TpMathfield extends TpBase {
 	private editor: HTMLElement | null = null;
 	private previewPanel: HTMLElement | null = null;
 	private previewButton: HTMLElement | null = null;
+	private visualButton: HTMLElement | null = null;
+	private visualPanel: HTMLElement | null = null;
+	private visualEditor: MathfieldElement | null = null;
+	private visualRevision = 0;
 	private sourceCopyButton: HTMLElement | null = null;
 
 	public static get observedAttributes(): string[] {
 		return [
 			"mode",
+			"mathlive",
 			"multiline",
 			"preview",
 			"value",
@@ -104,12 +112,19 @@ export class TpMathfield extends TpBase {
 
 	/** Mathematical notation used by the expression. */
 	public get mode(): TpMathfieldMode {
-		return this.getAttribute("mode") === "asciimath"
+		return !isInQuestion(this) && this.getAttribute("mode") === "asciimath"
 			? "asciimath"
 			: "latexmath";
 	}
 	public set mode(value: TpMathfieldMode) {
 		this.setStringAttribute("mode", value);
+	}
+	/** Whether a visual LaTeX editor can be opened. */
+	public get mathlive(): boolean {
+		return this.getBooleanAttribute("mathlive");
+	}
+	public set mathlive(value: boolean) {
+		this.setBooleanAttribute("mathlive", value);
 	}
 	/** Whether the editor and rendering use multiline display mode. */
 	public get multiline(): boolean {
@@ -235,6 +250,10 @@ export class TpMathfield extends TpBase {
 		return this.value;
 	}
 
+	protected disconnectedCallback(): void {
+		this.closeVisualEditor();
+	}
+
 	private renderStructure(): void {
 		this.editor = document.createElement("tp-textfield");
 		this.editor.setAttribute("data-tp-mathfield-editor", "");
@@ -312,7 +331,22 @@ export class TpMathfield extends TpBase {
 					?.focus();
 		});
 		// Connect the dropdown only after its trigger exists in the document.
-		this.replaceChildren(this.editor, this.previewPanel);
+		this.visualButton = document.createElement("tp-icon-button");
+		this.visualButton.setAttribute("type", "button");
+		this.visualButton.setAttribute("size", "s");
+		this.visualButton.setAttribute("data-tp-mathfield-visual-button", "");
+		this.visualButton.addEventListener("click", () => {
+			if (this.disabled || this.readOnly) return;
+			if (this.visualPanel && !this.visualPanel.hidden)
+				this.closeVisualEditor();
+			else void this.openVisualEditor();
+		});
+		this.visualPanel = document.createElement("div");
+		this.visualPanel.id = `${this.modeButton.id}-visual`;
+		this.visualPanel.setAttribute("data-tp-mathfield-visual-panel", "");
+		this.visualPanel.hidden = true;
+		this.visualButton.setAttribute("aria-controls", this.visualPanel.id);
+		this.replaceChildren(this.editor, this.previewPanel, this.visualPanel);
 		this.syncEditor();
 		this.append(this.modeDropdown);
 		this.renderPreview();
@@ -361,6 +395,7 @@ export class TpMathfield extends TpBase {
 			if (control !== null) {
 				if (this.sourceCopyButton !== null)
 					control.append(this.sourceCopyButton);
+				if (this.visualButton) control.append(this.visualButton);
 				control.append(this.previewButton);
 			}
 		}
@@ -373,7 +408,8 @@ export class TpMathfield extends TpBase {
 				marker.replaceWith(this.modeButton);
 				this.modeButton.replaceChildren(marker);
 			}
-			this.modeButton.disabled = this.disabled || this.readOnly;
+			this.modeButton.disabled =
+				this.disabled || this.readOnly || isInQuestion(this);
 			this.modeButton.setAttribute(
 				"aria-label",
 				`Mathematical notation: ${this.mode}`,
@@ -395,6 +431,7 @@ export class TpMathfield extends TpBase {
 				if (check) check.style.visibility = active ? "visible" : "hidden";
 			}
 		}
+		this.syncVisualEditor();
 		this.previewPanel?.toggleAttribute(
 			"hidden",
 			!this.previewVisible || this.value.trim() === "",
@@ -407,10 +444,8 @@ export class TpMathfield extends TpBase {
 		if (this.value.trim() === "") {
 			return;
 		}
+		void import("../markdown/markdown.js");
 		const markdown = document.createElement("tp-markdown");
-		const modeLabel = document.createElement("code");
-		modeLabel.setAttribute("data-tp-mathfield-preview-mode", "");
-		modeLabel.textContent = this.mode;
 		const content = document.createElement("div");
 		content.setAttribute("data-tp-mathfield-preview-content", "");
 		const renderCopyButton = document.createElement("tp-copy-code");
@@ -421,12 +456,6 @@ export class TpMathfield extends TpBase {
 		(
 			renderCopyButton as HTMLElement & { forElement: HTMLElement | null }
 		).forElement = content;
-		const divider = document.createElement("tp-divider");
-		divider.setAttribute("data-tp-mathfield-preview-divider", "");
-		divider.setAttribute(
-			"orientation",
-			this.multiline ? "horizontal" : "vertical",
-		);
 		const source = document.createElement("script");
 		source.type = "tp/markdown";
 		const expression = this.multiline
@@ -438,7 +467,88 @@ export class TpMathfield extends TpBase {
 			once: true,
 		});
 		content.append(markdown);
-		this.previewPanel.append(modeLabel, renderCopyButton, divider, content);
+		this.previewPanel.append(content, renderCopyButton);
+	}
+
+	private syncVisualEditor(): void {
+		const available = this.mathlive && this.mode === "latexmath";
+		if (!available || this.disabled || this.readOnly) this.closeVisualEditor();
+		if (this.visualButton) {
+			this.visualButton.hidden = !available;
+			this.visualButton.toggleAttribute(
+				"disabled",
+				this.disabled || this.readOnly,
+			);
+			const open = this.visualPanel?.hidden === false;
+			this.visualButton.setAttribute("name", open ? "pencil-off" : "pencil");
+			this.visualButton.setAttribute(
+				"label",
+				open ? "Close visual editor" : "Edit visually",
+			);
+			this.visualButton.setAttribute("aria-expanded", String(open));
+		}
+		if (this.visualEditor && this.visualEditor.value !== this.value) {
+			this.visualEditor.setValue(this.value, { silenceNotifications: true });
+		}
+	}
+
+	private closeVisualEditor(): void {
+		this.visualRevision += 1;
+		this.visualEditor?.executeCommand("hideVirtualKeyboard");
+		this.visualEditor = null;
+		if (this.visualPanel) {
+			this.visualPanel.hidden = true;
+			this.visualPanel.replaceChildren();
+		}
+		if (this.visualButton) {
+			this.visualButton.setAttribute("name", "pencil");
+			this.visualButton.setAttribute("label", "Edit visually");
+			this.visualButton.setAttribute("aria-expanded", "false");
+		}
+	}
+
+	private async openVisualEditor(): Promise<void> {
+		if (
+			!this.mathlive ||
+			this.mode !== "latexmath" ||
+			this.disabled ||
+			this.readOnly ||
+			!this.visualPanel
+		)
+			return;
+		const revision = ++this.visualRevision;
+		this.visualPanel.hidden = false;
+		this.visualPanel.textContent = "Loading visual editor…";
+		this.syncVisualEditor();
+		try {
+			const { createVisualMathfield } = await import("./mathlive-editor.js");
+			if (revision !== this.visualRevision || !this.isConnected) return;
+			const visual = createVisualMathfield();
+			visual.setAttribute("aria-label", this.label || "Visual formula editor");
+			visual.setValue(this.value, { silenceNotifications: true });
+			visual.addEventListener("input", (event) => {
+				event.stopPropagation();
+				if (this.disabled || this.readOnly) return;
+				this.value = visual.value;
+				this.dispatchEvent(
+					new Event("input", { bubbles: true, composed: true }),
+				);
+			});
+			visual.addEventListener("change", this.handleChange);
+			visual.addEventListener("keydown", (event) => {
+				if (event.key !== "Escape" || event.defaultPrevented) return;
+				event.stopPropagation();
+				this.closeVisualEditor();
+				this.visualButton?.focus();
+			});
+			this.visualEditor = visual;
+			this.visualPanel.replaceChildren(visual);
+			visual.focus();
+		} catch {
+			if (revision !== this.visualRevision) return;
+			this.visualPanel.textContent =
+				"The visual editor could not be loaded. Close it and try again, or continue editing the LaTeX source.";
+		}
 	}
 
 	private readonly handleInput = (event: Event): void => {

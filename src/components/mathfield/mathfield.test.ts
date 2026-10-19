@@ -50,14 +50,7 @@ describe("<tp-mathfield>", () => {
 				.querySelector("[data-mathjax-asciimath]")
 				?.getAttribute("data-mathjax-asciimath"),
 		).toBe("sum_(i=1)^n i");
-		expect(
-			field.querySelector("[data-tp-mathfield-preview-mode]")?.textContent,
-		).toBe("asciimath");
-		expect(
-			field
-				.querySelector("[data-tp-mathfield-preview-divider]")
-				?.getAttribute("orientation"),
-		).toBe("vertical");
+		expect(field.querySelector("[data-tp-mathfield-preview-mode]")).toBeNull();
 	});
 
 	it("uses a multiline editor and display rendering when requested", async () => {
@@ -77,11 +70,6 @@ describe("<tp-mathfield>", () => {
 				.querySelector("[data-mathjax-display]")
 				?.getAttribute("data-mathjax-display"),
 		).toBe("true");
-		expect(
-			field
-				.querySelector("[data-tp-mathfield-preview-divider]")
-				?.getAttribute("orientation"),
-		).toBe("horizontal");
 	});
 
 	it("forwards field attributes to tp-textfield", () => {
