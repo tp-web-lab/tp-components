@@ -593,3 +593,33 @@ describe("show then clear assistance sequence", () => {
 		).toBe(false);
 	});
 });
+
+it("dismisses local controls outside and with Escape while preserving the piece", async () => {
+	const el = await game();
+	const piece = el.querySelector<SVGElement>('[data-piece="parallelogram"]');
+	const local = () =>
+		el.querySelector<HTMLElement>(".tp-tangram-selection-tools");
+	piece?.focus();
+	const before = el.placements;
+	document.body.click();
+	expect(local()?.hidden).toBe(true);
+	expect(piece?.hasAttribute("data-selected")).toBe(true);
+	expect(el.placements).toEqual(before);
+	piece?.blur();
+	piece?.focus();
+	expect(local()?.hidden).toBe(false);
+	local()?.querySelector<HTMLElement>("button")?.focus();
+	local()?.dispatchEvent(
+		new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+	);
+	expect(local()?.hidden).toBe(true);
+	expect(document.activeElement).toBe(piece);
+	piece?.blur();
+	piece?.focus();
+	local()?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+	expect(local()?.hidden).toBe(false);
+	el.querySelector(".tp-tangram-board")?.dispatchEvent(
+		new MouseEvent("click", { bubbles: true }),
+	);
+	expect(local()?.hidden).toBe(true);
+});

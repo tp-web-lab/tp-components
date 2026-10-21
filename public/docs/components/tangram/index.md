@@ -14,6 +14,7 @@ The custom `<tp-tangram>` element presents seven rigid pieces and a central silh
 | --- | --- |
 | Drag a piece (mouse, pen or touch) | Place the piece anywhere, including incorrect positions and outside the silhouette. Only overlaps with other playing pieces are refused. Nearby vertices snap when this causes no overlap; the view expands if needed to keep every piece visible. |
 | Select a piece | Show rotation and flip icons beside that piece. |
+| Click outside the piece and its local controls | Close the local controls without moving or deselecting the piece. Select a piece again to reopen them. |
 | Local rotation / flip icons | Rotate or reflect the selected piece without returning to the main toolbar. Flip is available for the parallelogram only. |
 | Rotate −45° / Rotate +45° | Rotate the selected piece around its center. Only rotations that overlap another playing piece are refused. |
 | Flip | Reflect the selected parallelogram; available only for that piece. |
@@ -37,7 +38,7 @@ The custom `<tp-tangram>` element presents seven rigid pieces and a central silh
 | F on the parallelogram | Reflect it. |
 | Ctrl+Z / Ctrl+Shift+Z | Undo / redo. Command is also supported. |
 | Arrow Up / Down, Home / End in the assistance menu | Navigate menu items. Enter or Space activates an action; Escape closes the menu. |
-| Escape | Cancel a drag; the browser also uses Escape to leave fullscreen. |
+| Escape | Close the selected piece’s local controls and cancel a drag; the browser also uses Escape to leave fullscreen. |
 | Ctrl+? | Open User help for the component under the pointer, falling back to the focused component. Shift may be needed to type ?. |
 
 ## Authoring

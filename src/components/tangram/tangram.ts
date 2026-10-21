@@ -61,6 +61,7 @@ const copy = (p: Placement[]): Placement[] => p.map((v) => ({ ...v }));
  * @event tp-tangram-error Fired when loading a solution fails; detail contains message.
  * @keyboard Arrow keys Move the selected piece; Shift increases the step.
  * @keyboard R / Shift+R Rotate clockwise / counterclockwise by 45 degrees.
+ * @keyboard Escape Cancel a drag and close the selected piece controls.
  * @keyboard F Flip the selected parallelogram.
  * @keyboard Ctrl+Z / Ctrl+Shift+Z Undo / redo (Command also supported).
  * @example
@@ -76,6 +77,7 @@ export class TpTangram extends TpBase {
 	private cursor = 0;
 	private selected = "large-1";
 	private hasSelection = false;
+	private selectionToolsDismissed = false;
 	private resizeObserver?: ResizeObserver;
 	private showing = false;
 	private showingIncorrect = false;
@@ -113,6 +115,11 @@ export class TpTangram extends TpBase {
 		super.connectedCallback();
 		this.ensureGlobalStyle("tp-tangram-style", style);
 		this.source.capture();
+		this.ownerDocument.addEventListener(
+			"click",
+			this.dismissOutsideSelection,
+			true,
+		);
 		if (!this.ui) {
 			this.ui = document.createElement("div");
 			this.ui.className = "tp-tangram-ui";
@@ -129,6 +136,7 @@ export class TpTangram extends TpBase {
 				if (id) {
 					this.selected = id;
 					this.hasSelection = true;
+					this.selectionToolsDismissed = false;
 					this.updateButtons();
 				}
 			});
@@ -145,6 +153,11 @@ export class TpTangram extends TpBase {
 		void this.reload();
 	}
 	protected disconnectedCallback(): void {
+		this.ownerDocument.removeEventListener(
+			"click",
+			this.dismissOutsideSelection,
+			true,
+		);
 		this.token++;
 		this.abort?.abort();
 		this.source.disconnect();
@@ -399,6 +412,26 @@ export class TpTangram extends TpBase {
 			);
 		this.positionSelectionTools();
 	}
+	private dismissOutsideSelection = (event: MouseEvent): void => {
+		const target = event.target;
+		if (!(target instanceof Element)) return;
+		if (
+			this.ui?.contains(target) &&
+			target.closest("[data-piece], .tp-tangram-selection-tools")
+		)
+			return;
+		this.dismissSelectionTools();
+	};
+	private dismissSelectionTools(): void {
+		const tools = this.ui?.querySelector(".tp-tangram-selection-tools");
+		if (tools?.contains(this.ownerDocument.activeElement)) {
+			this.ui
+				?.querySelector<SVGElement>(`[data-piece="${this.selected}"]`)
+				?.focus({ preventScroll: true });
+		}
+		this.selectionToolsDismissed = true;
+		this.positionSelectionTools();
+	}
 	private positionSelectionTools(): void {
 		const tools = this.ui?.querySelector<HTMLElement>(
 			".tp-tangram-selection-tools",
@@ -406,7 +439,11 @@ export class TpTangram extends TpBase {
 		const board = this.ui?.querySelector<SVGSVGElement>(".tp-tangram-board");
 		const piece = this.state.find((p) => p.id === this.selected);
 		if (!tools || !board || !piece) return;
-		tools.hidden = this.showing || !this.hasSelection || !!this.drag;
+		tools.hidden =
+			this.showing ||
+			!this.hasSelection ||
+			this.selectionToolsDismissed ||
+			!!this.drag;
 		if (tools.hidden) return;
 		const bounds = board.getBoundingClientRect();
 		const scale = Math.min(bounds.width, bounds.height) / (2 * this.viewExtent);
@@ -549,6 +586,7 @@ export class TpTangram extends TpBase {
 		}
 		if (event.key === "Escape") {
 			this.cancel();
+			this.dismissSelectionTools();
 			return;
 		}
 		const id = (event.target as Element).getAttribute("data-piece");
@@ -604,6 +642,7 @@ export class TpTangram extends TpBase {
 		event.preventDefault();
 		this.selected = p.id;
 		this.hasSelection = true;
+		this.selectionToolsDismissed = false;
 		node?.focus({ preventScroll: true });
 		this.updateButtons();
 		this.drag = { id: event.pointerId, start, before: { ...p }, svg };
