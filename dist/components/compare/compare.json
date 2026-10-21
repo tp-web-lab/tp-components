@@ -91,7 +91,7 @@
   "userHelp": {
     "displayName": "Compare",
     "introduction": "The custom `<tp-compare>` element implements the <tp-icon name=\"compare\" library=\"components\" size=\"1.25em\"></tp-icon> Compare functionality: before-and-after comparison component.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Drag | Drag the comparison handle to reveal more of either image or panel. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus the comparison handle. |\n| Arrow keys | Moves the separator by 1%, or by 10% while Shift is held. |\n| Home / End | Moves the separator to its minimum or maximum position. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Drag | Drag the comparison handle to reveal more of either image or panel. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the comparison handle. |\n| Arrow keys | Moves the separator by 1%, or by 10% while <kbd>Shift</kbd> is held. |\n| <kbd>Home</kbd> / <kbd>End</kbd> | Moves the separator to its minimum or maximum position. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Arrow keys",

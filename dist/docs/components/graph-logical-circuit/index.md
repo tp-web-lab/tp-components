@@ -22,8 +22,8 @@ The custom `<tp-graph-logical-circuit>` element implements the <tp-icon name="gr
 
 | Key or gesture | Result |
 | --- | --- |
-| Enter / Space | Toggles the focused input or output terminal. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Toggles the focused input or output terminal. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

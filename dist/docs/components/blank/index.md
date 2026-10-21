@@ -42,13 +42,13 @@ The custom `<tp-blank>` element implements the blank functionality: displays a t
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab | Focus a target blank. |
-| Right Arrow | Move from the blank to the answer bank. |
-| Up / Down | Choose an answer. |
-| Enter / Space | Assign the chosen answer to the highlighted blank. |
-| Escape | Cancel. |
-| Delete / Backspace | Clear the focused blank. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> | Focus a target blank. |
+| <kbd>Right</kbd> Arrow | Move from the blank to the answer bank. |
+| <kbd>Up</kbd> / <kbd>Down</kbd> | Choose an answer. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Assign the chosen answer to the highlighted blank. |
+| <kbd>Escape</kbd> | Cancel. |
+| <kbd>Delete</kbd> / <kbd>Backspace</kbd> | Clear the focused blank. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

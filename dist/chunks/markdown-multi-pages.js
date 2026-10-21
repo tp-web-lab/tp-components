@@ -3,7 +3,10 @@ import "./icon-button.js";
 import { t } from "./sidebar-tools.js";
 import { appendSidebarTools as n } from "../components/markup-multi-pages/sidebar-tools.js";
 import "./toolbar.js";
+import "./calculator.js";
+import { t as r } from "./drawer.js";
 import "./color.js";
+import { TpPostItEditor as i } from "../components/post-it-editor/post-it-editor.js";
 import "./clock.js";
 import "./lang.js";
 import "./source.js";
@@ -11,19 +14,19 @@ import "./fullscreen.js";
 import "./theme.js";
 import "./tree.js";
 import "./splitter.js";
-import { resolveTextDirection as r } from "../utilities/text-direction.js";
-import { renderMarkdownToHtml as i } from "../utilities/markdown-source.js";
+import { resolveTextDirection as a } from "../utilities/text-direction.js";
+import { renderMarkdownToHtml as o } from "../utilities/markdown-source.js";
 import "../components/markdown/markdown.js";
 //#region src/components/markdown-multi-pages/markdown-multi-pages.css?inline
-var a = "tp-markdown-multi-pages,[tp-markdown-multi-pages-host],.tp-markdown-multi-pages-host{box-sizing:border-box;block-size:auto;inline-size:auto;display:block;position:fixed;inset-block:0;inset-inline:.5rem;overflow:hidden}.tp-markdown-multi-pages-root{box-sizing:border-box;border-radius:.75rem;grid-template-rows:auto minmax(0,1fr);block-size:100%;min-block-size:0;inline-size:100%;display:grid;overflow:hidden}.tp-markdown-multi-pages-toolbar{--tp-toolbar-size:auto;box-sizing:border-box;border:0;border-bottom:1px solid var(--tp-brand-stroke-soft);background:var(--tp-brand-fill-softer);min-block-size:3rem;inline-size:100%;max-inline-size:100%;color:var(--tp-text-body);background:var(--tp-paper-color);border-radius:.75rem .75rem 0 0;flex-wrap:wrap}.tp-markdown-multi-pages-toolbar>[data-toolbar-start],.tp-markdown-multi-pages-toolbar>[data-toolbar-center],.tp-markdown-multi-pages-toolbar>[data-toolbar-end]{min-inline-size:0}.tp-markdown-multi-pages-toolbar>[data-toolbar-end]{flex-wrap:wrap;flex:0 auto;justify-content:flex-end}.tp-markdown-multi-pages-toolbar .tp-markdown-multi-pages-toolbar-label{text-overflow:ellipsis;white-space:nowrap;min-inline-size:0;font-size:1.5rem;font-weight:600;display:block;overflow:hidden}.tp-markdown-multi-pages-toolbar tp-icon-button>button{color:inherit;border:1px solid var(--tp-brand-stroke-mid);border-radius:var(--tp-border-radius-circle)}.tp-markdown-multi-pages-toolbar tp-icon-button>button:hover{background:var(--tp-brand-fill-soft);color:var(--tp-brand-text-on-soft)}.tp-markdown-multi-pages{--tp-markdown-multi-pages-sidebar-width:12rem;--tp-splitter-divider-size:.625rem;box-sizing:border-box;border:0;border-radius:0 0 .75rem .75rem;block-size:100%;min-block-size:0;inline-size:100%;position:relative;overflow:hidden}.tp-markdown-multi-pages:not([sidebar-open])>dl{grid-template-columns:0 0 minmax(0,1fr)}.tp-markdown-multi-pages:not([sidebar-open]) [data-tp-splitter-divider]{display:none}.tp-markdown-multi-pages>dl,.tp-markdown-multi-pages-sidebar-panel,.tp-markdown-multi-pages-content-panel{block-size:100%;min-block-size:0;inline-size:100%;min-inline-size:0;overflow:hidden}.tp-markdown-multi-pages-sidebar{box-sizing:border-box;background:var(--tp-paper-color);block-size:100%;min-block-size:0;inline-size:100%;color:var(--tp-text-body);padding:.75rem;overflow:auto}.tp-markdown-multi-pages:not([sidebar-open]) .tp-markdown-multi-pages-sidebar{display:none}.tp-markdown-multi-pages-sidebar a[aria-current=page]{color:var(--tp-brand-text-colorful);font-weight:700}.tp-markdown-multi-pages-sidebar a{text-decoration:none}.tp-markdown-multi-pages-sidebar-controls{flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:.25rem;margin-block-end:.5rem;display:flex}.tp-markdown-multi-pages-sidebar-controls tp-icon-button>button{border:1px solid color-mix(in srgb, currentColor 18%, transparent);border-radius:var(--tp-border-radius-circle)}.tp-markdown-multi-pages-sidebar-tree{inline-size:100%}.tp-markdown-multi-pages-sidebar ul,.tp-markdown-multi-pages-sidebar ol{padding-inline-start:0;list-style:none}.tp-markdown-multi-pages-sidebar li{list-style:none}.tp-markdown-multi-pages-sidebar li::marker{content:\"\"}.tp-markdown-multi-pages-content{box-sizing:border-box;background:var(--tp-paper-color);block-size:100%;min-block-size:0;inline-size:100%;min-inline-size:0;color:var(--tp-text-body);padding:1rem;overflow:auto}.tp-markdown-multi-pages-page-nav{border-block-start:1px solid var(--tp-brand-stroke-soft);grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:.75rem;margin-block-start:2rem;padding-block-start:1rem;display:grid}.tp-markdown-multi-pages-page-nav-item{min-inline-size:0}.tp-markdown-multi-pages-page-nav-next{text-align:end}.tp-markdown-multi-pages-page-nav-top{text-align:center}.tp-markdown-multi-pages-page-nav-link{box-sizing:border-box;border:1px solid var(--tp-brand-stroke-soft);max-inline-size:100%;color:inherit;background:var(--tp-brand-fill-softer);border-radius:.5rem;flex-direction:column;gap:.2rem;padding:.65rem .75rem;text-decoration:none;display:inline-flex}.tp-markdown-multi-pages-page-nav-link:is(button){cursor:pointer;font:inherit}.tp-markdown-multi-pages-page-nav-link:hover{border-color:var(--tp-brand-stroke-mid);background:var(--tp-brand-fill-soft)}.tp-markdown-multi-pages-page-nav-meta{color:var(--tp-text-muted);font-size:.8rem;line-height:1.2}.tp-markdown-multi-pages-page-nav-title{text-overflow:ellipsis;white-space:nowrap;color:var(--tp-brand-text-colorful);font-weight:700;line-height:1.3;overflow:hidden}.tp-markdown-multi-pages-source pre{background:var(--tp-neutral-fill-loud);color:var(--tp-neutral-text-on-loud);border-radius:.5rem;margin:0;padding:.75rem;overflow:auto}.tp-markdown-multi-pages-results{border:1px solid var(--tp-neutral-stroke-soft);background:var(--tp-paper-color);max-block-size:50vh;inline-size:min(34rem,100% - 1.5rem);box-shadow:var(--tp-shadow-loud);z-index:5;border-radius:.5rem;padding:.5rem;position:absolute;inset-block-start:3rem;inset-inline-start:.75rem;overflow:auto}.tp-markdown-multi-pages-result{color:inherit;border-radius:.4rem;padding:.55rem;text-decoration:none;display:block}.tp-markdown-multi-pages-result:hover{background:var(--tp-brand-fill-softer)}.tp-markdown-multi-pages-result-title{margin-bottom:.15rem;font-weight:600}.tp-markdown-multi-pages-result-excerpt{color:var(--tp-text-muted);font-size:.9rem}@media (width<=48rem){.tp-markdown-multi-pages-toolbar{row-gap:.25rem}.tp-markdown-multi-pages-toolbar>[data-toolbar-start]{order:1}.tp-markdown-multi-pages-toolbar>[data-toolbar-end]{order:2;max-inline-size:calc(100% - 6rem)}.tp-markdown-multi-pages-toolbar>[data-toolbar-center]{border-inline-start:0;flex:1 0 100%;order:3;justify-content:flex-start;margin-inline-start:0;padding-inline-start:0}.tp-markdown-multi-pages-toolbar .tp-markdown-multi-pages-toolbar-label{font-size:1rem}.tp-markdown-multi-pages-page-nav{gap:.4rem}.tp-markdown-multi-pages-page-nav-link{padding:.5rem}.tp-markdown-multi-pages-page-nav-meta{font-size:.75rem}.tp-markdown-multi-pages-page-nav-title{font-size:.9rem}}@media (width<=24rem){.tp-markdown-multi-pages-page-nav{grid-template-columns:minmax(0,1fr)}.tp-markdown-multi-pages-page-nav-top,.tp-markdown-multi-pages-page-nav-next{text-align:start}.tp-markdown-multi-pages,.tp-markdown-multi-pages>dl{display:block}.tp-markdown-multi-pages [data-tp-splitter-divider],.tp-markdown-multi-pages:not([sidebar-open]) [data-tp-splitter-divider]{display:none}.tp-markdown-multi-pages .tp-markdown-multi-pages-sidebar-panel,.tp-markdown-multi-pages .tp-markdown-multi-pages-content-panel{margin:0;padding:0;display:block}.tp-markdown-multi-pages .tp-markdown-multi-pages-sidebar-panel{display:none}.tp-markdown-multi-pages[sidebar-open] .tp-markdown-multi-pages-sidebar-panel{z-index:2;pointer-events:none;display:block;position:absolute;inset:0}.tp-markdown-multi-pages .tp-markdown-multi-pages-content-panel{block-size:100%}.tp-markdown-multi-pages .tp-markdown-multi-pages-sidebar{inline-size:min(var(--tp-markdown-multi-pages-sidebar-width), 85%);border-inline-end:0;border-bottom:1px solid var(--tp-brand-stroke-soft);box-shadow:var(--tp-shadow-loud);pointer-events:auto;display:none;position:absolute;inset-block:0;inset-inline-start:0}.tp-markdown-multi-pages[sidebar-open] .tp-markdown-multi-pages-sidebar{border-inline-end:1px solid var(--tp-brand-stroke-soft);display:block}}@media (width<=32rem){.tp-markdown-multi-pages-toolbar tp-clock{display:none}}.tp-markdown-multi-pages-toolbar>tp-lang[hidden]{display:none!important}", o = "tp-markdown-multi-pages-styles";
-function s(e) {
+var s = "tp-markdown-multi-pages,[tp-markdown-multi-pages-host],.tp-markdown-multi-pages-host{box-sizing:border-box;block-size:auto;inline-size:auto;display:block;position:fixed;inset-block:0;inset-inline:.5rem;overflow:hidden}.tp-markdown-multi-pages-root{box-sizing:border-box;border-radius:.75rem;grid-template-rows:auto minmax(0,1fr);block-size:100%;min-block-size:0;inline-size:100%;display:grid;overflow:hidden}.tp-markdown-multi-pages-toolbar{--tp-toolbar-size:auto;box-sizing:border-box;border:0;border-bottom:1px solid var(--tp-brand-stroke-soft);background:var(--tp-brand-fill-softer);min-block-size:3rem;inline-size:100%;max-inline-size:100%;color:var(--tp-text-body);background:var(--tp-paper-color);border-radius:.75rem .75rem 0 0;flex-wrap:wrap}.tp-markdown-multi-pages-toolbar>[data-toolbar-start],.tp-markdown-multi-pages-toolbar>[data-toolbar-center],.tp-markdown-multi-pages-toolbar>[data-toolbar-end]{min-inline-size:0}.tp-markdown-multi-pages-toolbar>[data-toolbar-end]{flex-wrap:wrap;flex:0 auto;justify-content:flex-end}.tp-markdown-multi-pages-toolbar .tp-markdown-multi-pages-toolbar-label{text-overflow:ellipsis;white-space:nowrap;min-inline-size:0;font-size:1.5rem;font-weight:600;display:block;overflow:hidden}.tp-markdown-multi-pages-toolbar tp-icon-button>button{color:inherit;border:1px solid var(--tp-brand-stroke-mid);border-radius:var(--tp-border-radius-circle)}.tp-markdown-multi-pages-toolbar tp-icon-button>button:hover{background:var(--tp-brand-fill-soft);color:var(--tp-brand-text-on-soft)}.tp-markdown-multi-pages{--tp-markdown-multi-pages-sidebar-width:12rem;--tp-splitter-divider-size:.625rem;box-sizing:border-box;border:0;border-radius:0 0 .75rem .75rem;block-size:100%;min-block-size:0;inline-size:100%;position:relative;overflow:hidden}.tp-markdown-multi-pages:not([sidebar-open])>dl{grid-template-columns:0 0 minmax(0,1fr)}.tp-markdown-multi-pages:not([sidebar-open]) [data-tp-splitter-divider]{display:none}.tp-markdown-multi-pages>dl,.tp-markdown-multi-pages-sidebar-panel,.tp-markdown-multi-pages-content-panel{block-size:100%;min-block-size:0;inline-size:100%;min-inline-size:0;overflow:hidden}.tp-markdown-multi-pages-sidebar{box-sizing:border-box;background:var(--tp-paper-color);block-size:100%;min-block-size:0;inline-size:100%;color:var(--tp-text-body);padding:.75rem;overflow:auto}.tp-markdown-multi-pages:not([sidebar-open]) .tp-markdown-multi-pages-sidebar{display:none}.tp-markdown-multi-pages-sidebar a[aria-current=page]{color:var(--tp-brand-text-colorful);font-weight:700}.tp-markdown-multi-pages-sidebar a{text-decoration:none}.tp-markdown-multi-pages-sidebar-controls{flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:.25rem;margin-block-end:.5rem;display:flex}.tp-markdown-multi-pages-sidebar-controls tp-icon-button>button{border:1px solid color-mix(in srgb, currentColor 18%, transparent);border-radius:var(--tp-border-radius-circle)}.tp-markdown-multi-pages-sidebar-tree{inline-size:100%}.tp-markdown-multi-pages-sidebar ul,.tp-markdown-multi-pages-sidebar ol{padding-inline-start:0;list-style:none}.tp-markdown-multi-pages-sidebar li{list-style:none}.tp-markdown-multi-pages-sidebar li::marker{content:\"\"}.tp-markdown-multi-pages-content{box-sizing:border-box;background:var(--tp-paper-color);block-size:100%;min-block-size:0;inline-size:100%;min-inline-size:0;color:var(--tp-text-body);padding:1rem;overflow:auto}.tp-markdown-multi-pages-page-nav{border-block-start:1px solid var(--tp-brand-stroke-soft);grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:.75rem;margin-block-start:2rem;padding-block-start:1rem;display:grid}.tp-markdown-multi-pages-page-nav-item{min-inline-size:0}.tp-markdown-multi-pages-page-nav-next{text-align:end}.tp-markdown-multi-pages-page-nav-top{text-align:center}.tp-markdown-multi-pages-page-nav-link{box-sizing:border-box;border:1px solid var(--tp-brand-stroke-soft);max-inline-size:100%;color:inherit;background:var(--tp-brand-fill-softer);border-radius:.5rem;flex-direction:column;gap:.2rem;padding:.65rem .75rem;text-decoration:none;display:inline-flex}.tp-markdown-multi-pages-page-nav-link:is(button){cursor:pointer;font:inherit}.tp-markdown-multi-pages-page-nav-link:hover{border-color:var(--tp-brand-stroke-mid);background:var(--tp-brand-fill-soft)}.tp-markdown-multi-pages-page-nav-meta{color:var(--tp-text-muted);font-size:.8rem;line-height:1.2}.tp-markdown-multi-pages-page-nav-title{text-overflow:ellipsis;white-space:nowrap;color:var(--tp-brand-text-colorful);font-weight:700;line-height:1.3;overflow:hidden}.tp-markdown-multi-pages-source pre{background:var(--tp-neutral-fill-loud);color:var(--tp-neutral-text-on-loud);border-radius:.5rem;margin:0;padding:.75rem;overflow:auto}.tp-markdown-multi-pages-results{border:1px solid var(--tp-neutral-stroke-soft);background:var(--tp-paper-color);max-block-size:50vh;inline-size:min(34rem,100% - 1.5rem);box-shadow:var(--tp-shadow-loud);z-index:5;border-radius:.5rem;padding:.5rem;position:absolute;inset-block-start:3rem;inset-inline-start:.75rem;overflow:auto}.tp-markdown-multi-pages-result{color:inherit;border-radius:.4rem;padding:.55rem;text-decoration:none;display:block}.tp-markdown-multi-pages-result:hover{background:var(--tp-brand-fill-softer)}.tp-markdown-multi-pages-result-title{margin-bottom:.15rem;font-weight:600}.tp-markdown-multi-pages-result-excerpt{color:var(--tp-text-muted);font-size:.9rem}@media (width<=48rem){.tp-markdown-multi-pages-toolbar{row-gap:.25rem}.tp-markdown-multi-pages-toolbar>[data-toolbar-start]{order:1}.tp-markdown-multi-pages-toolbar>[data-toolbar-end]{order:2;max-inline-size:calc(100% - 6rem)}.tp-markdown-multi-pages-toolbar>[data-toolbar-center]{border-inline-start:0;flex:1 0 100%;order:3;justify-content:flex-start;margin-inline-start:0;padding-inline-start:0}.tp-markdown-multi-pages-toolbar .tp-markdown-multi-pages-toolbar-label{font-size:1rem}.tp-markdown-multi-pages-page-nav{gap:.4rem}.tp-markdown-multi-pages-page-nav-link{padding:.5rem}.tp-markdown-multi-pages-page-nav-meta{font-size:.75rem}.tp-markdown-multi-pages-page-nav-title{font-size:.9rem}}@media (width<=24rem){.tp-markdown-multi-pages-page-nav{grid-template-columns:minmax(0,1fr)}.tp-markdown-multi-pages-page-nav-top,.tp-markdown-multi-pages-page-nav-next{text-align:start}.tp-markdown-multi-pages,.tp-markdown-multi-pages>dl{display:block}.tp-markdown-multi-pages [data-tp-splitter-divider],.tp-markdown-multi-pages:not([sidebar-open]) [data-tp-splitter-divider]{display:none}.tp-markdown-multi-pages .tp-markdown-multi-pages-sidebar-panel,.tp-markdown-multi-pages .tp-markdown-multi-pages-content-panel{margin:0;padding:0;display:block}.tp-markdown-multi-pages .tp-markdown-multi-pages-sidebar-panel{display:none}.tp-markdown-multi-pages[sidebar-open] .tp-markdown-multi-pages-sidebar-panel{z-index:2;pointer-events:none;display:block;position:absolute;inset:0}.tp-markdown-multi-pages .tp-markdown-multi-pages-content-panel{block-size:100%}.tp-markdown-multi-pages .tp-markdown-multi-pages-sidebar{inline-size:min(var(--tp-markdown-multi-pages-sidebar-width), 85%);border-inline-end:0;border-bottom:1px solid var(--tp-brand-stroke-soft);box-shadow:var(--tp-shadow-loud);pointer-events:auto;display:none;position:absolute;inset-block:0;inset-inline-start:0}.tp-markdown-multi-pages[sidebar-open] .tp-markdown-multi-pages-sidebar{border-inline-end:1px solid var(--tp-brand-stroke-soft);display:block}}@media (width<=32rem){.tp-markdown-multi-pages-toolbar tp-clock{display:none}}.tp-markdown-multi-pages-toolbar>tp-lang[hidden]{display:none!important}", c = "tp-markdown-multi-pages-styles";
+function l(e) {
 	return e.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'", "&#39;");
 }
-function c(e) {
+function u(e) {
 	let t = (e.match(/`{3,}/g) ?? []).reduce((e, t) => Math.max(e, t.length), 2), n = "`".repeat(t + 1);
 	return `${n}markdown\n${e}\n${n}`;
 }
-var l = class extends e {
+var d = class extends e {
 	static get observedAttributes() {
 		return [
 			"repository",
@@ -36,16 +39,18 @@ var l = class extends e {
 	sidebarElement = null;
 	contentElement = null;
 	currentHref = "";
+	annotations = null;
+	calculatorDrawer = null;
 	currentSource = "";
 	navigatingHref = "";
 	sourceMode = !1;
 	pageLinks = [];
 	pageNavigationElement = null;
 	connectedCallback() {
-		super.connectedCallback(), this.classList.add("tp-markdown-multi-pages-host"), this.style.display = "block", this.style.position = "fixed", this.style.insetBlock = "0", this.style.insetInline = "0.5rem", this.style.width = "auto", this.style.height = "auto", this.style.boxSizing = "border-box", this.style.overflow = "hidden", this.ensureGlobalStyle(o, a), this.ensureGlobalStyle("tp-multi-pages-sidebar-tools", t), this.renderShell(), this.initialize(), window.addEventListener("hashchange", this.handleHashChange);
+		super.connectedCallback(), this.classList.add("tp-markdown-multi-pages-host"), this.style.display = "block", this.style.position = "fixed", this.style.insetBlock = "0", this.style.insetInline = "0.5rem", this.style.width = "auto", this.style.height = "auto", this.style.boxSizing = "border-box", this.style.overflow = "hidden", this.ensureGlobalStyle(c, s), this.ensureGlobalStyle("tp-multi-pages-sidebar-tools", t), this.renderShell(), this.contentElement && (this.annotations = new i(), this.annotations.setAttribute("section", "start"), this.annotations.setTarget(this.contentElement), this.querySelector("[data-action=\"calculator\"]")?.after(this.annotations)), this.initialize(), window.addEventListener("hashchange", this.handleHashChange);
 	}
 	disconnectedCallback() {
-		this.contentElement?.removeEventListener("click", this.handleContentClick), window.removeEventListener("hashchange", this.handleHashChange);
+		this.annotations?.dispose(), this.annotations = null, this.calculatorDrawer = null, this.contentElement?.removeEventListener("click", this.handleContentClick), window.removeEventListener("hashchange", this.handleHashChange);
 	}
 	attributeChangedCallback(e) {
 		if (this.isConnected) {
@@ -116,7 +121,7 @@ var l = class extends e {
 		this.applyDocumentLocale();
 	}
 	applyDocumentLocale() {
-		let e = this.resolveCurrentLang(), t = r(e);
+		let e = this.resolveCurrentLang(), t = a(e);
 		for (let n of [this.sidebarElement, this.contentElement]) n?.setAttribute("lang", e), n?.setAttribute("dir", t);
 	}
 	resolveCurrentLang() {
@@ -138,11 +143,12 @@ var l = class extends e {
         <tp-toolbar class="tp-markdown-multi-pages-toolbar" orientation="horizontal" placement="top">
           <tp-icon-button section="start" color="currentColor" data-action="home" name="home" label="Home"></tp-icon-button>
           <tp-icon-button section="start" color="currentColor" data-action="menu" name="menu" label="Menu"></tp-icon-button>
-          <tp-source section="start" url="${s(this.git)}"></tp-source>
           <tp-icon-button section="start" color="currentColor" data-action="code" name="code" label="Code"></tp-icon-button>
-          <span class="tp-markdown-multi-pages-toolbar-label" section="center">${s(this.label)}</span>
+          <tp-icon-button section="start" color="currentColor" data-action="calculator" name="calculator" library="components" label="Calculator"></tp-icon-button>
+          <tp-source section="start" url="${l(this.git)}"></tp-source>
+          <span class="tp-markdown-multi-pages-toolbar-label" section="center">${l(this.label)}</span>
           <tp-clock section="end"></tp-clock>
-          <tp-lang hidden section="end" langs="${s(this.langs)}"></tp-lang>
+          <tp-lang hidden section="end" langs="${l(this.langs)}"></tp-lang>
           <tp-color section="end" data-role="brand"></tp-color>
           <tp-theme section="end"></tp-theme>
           <tp-fullscreen section="end"></tp-fullscreen>
@@ -160,13 +166,20 @@ var l = class extends e {
           </dl>
         </tp-splitter>
       </div>
-    `, this.sidebarElement = this.querySelector("[data-role=\"sidebar\"]"), this.contentElement = this.querySelector("[data-role=\"content\"]"), this.applyLangs(), this.applyInitialSidebarState(), this.contentElement?.addEventListener("click", this.handleContentClick), this.querySelector("[data-action=\"home\"]")?.addEventListener("click", () => {
+    `, this.querySelector("[data-action=\"calculator\"]")?.addEventListener("click", () => this.toggleCalculator()), this.sidebarElement = this.querySelector("[data-role=\"sidebar\"]"), this.contentElement = this.querySelector("[data-role=\"content\"]"), this.applyLangs(), this.applyInitialSidebarState(), this.contentElement?.addEventListener("click", this.handleContentClick), this.querySelector("[data-action=\"home\"]")?.addEventListener("click", () => {
 			this.goTo(this.coverHref);
 		}), this.querySelector("[data-action=\"menu\"]")?.addEventListener("click", () => {
 			this.menu = !this.menu, this.applyMenuState();
 		}), this.querySelector("[data-action=\"code\"]")?.addEventListener("click", () => {
 			this.toggleSourceMode();
 		});
+	}
+	toggleCalculator() {
+		if (!this.calculatorDrawer) {
+			let e = new r();
+			e.setAttribute("label", "Calculator"), e.setAttribute("placement", "end"), e.setAttribute("width", "min(52rem, 100vw)"), e.dataset.role = "calculator-drawer", e.setContent(document.createElement("tp-calculator")), this.append(e), this.calculatorDrawer = e;
+		}
+		this.calculatorDrawer.hasAttribute("open") ? this.calculatorDrawer.hide() : this.calculatorDrawer.show();
 	}
 	applyInitialSidebarState() {
 		this.applyMenuState();
@@ -182,7 +195,7 @@ var l = class extends e {
 			this.sidebarElement.innerHTML = "<p>Sidebar not found.</p>", this.pageLinks = [];
 			return;
 		}
-		this.pageLinks = this.extractSidebarPageLinksFromMarkdown(e), this.sidebarElement.innerHTML = await i(e, "/sidebar.md"), this.pageLinks.length === 0 && (this.pageLinks = this.extractSidebarPageLinks(this.sidebarElement)), this.wrapSidebarListWithTree(this.sidebarElement), this.rewriteSidebarLinks(this.sidebarElement);
+		this.pageLinks = this.extractSidebarPageLinksFromMarkdown(e), this.sidebarElement.innerHTML = await o(e, "/sidebar.md"), this.pageLinks.length === 0 && (this.pageLinks = this.extractSidebarPageLinks(this.sidebarElement)), this.wrapSidebarListWithTree(this.sidebarElement), this.rewriteSidebarLinks(this.sidebarElement);
 	}
 	wrapSidebarListWithTree(e) {
 		let t = Array.from(e.children).filter((e) => e instanceof HTMLUListElement || e instanceof HTMLOListElement), n = t[0];
@@ -228,14 +241,14 @@ var l = class extends e {
 			return;
 		}
 		if (this.navigatingHref !== r) {
-			this.navigatingHref = r;
+			this.navigatingHref = r, this.annotations?.setPage("");
 			try {
 				let e = await this.fetchText(r);
 				if (e === null) {
 					await this.renderNotFoundPage(r);
 					return;
 				}
-				this.currentHref = r, this.currentSource = e, this.sourceMode = !1, n.replaceChildren(this.createMarkdownViewer(r)), this.renderPageNavigation(r), this.scrollToFragmentAfterRender(i), this.updateCurrentLink(r);
+				this.currentHref = r, this.currentSource = e, this.sourceMode = !1, n.replaceChildren(this.createMarkdownViewer(r)), this.annotations?.setPage(new URL(r, this.ownerDocument.baseURI).href), this.renderPageNavigation(r), this.scrollToFragmentAfterRender(i), this.updateCurrentLink(r);
 			} finally {
 				this.navigatingHref === r && (this.navigatingHref = "");
 			}
@@ -252,13 +265,13 @@ var l = class extends e {
 	async toggleSourceMode() {
 		let e = this.contentElement;
 		if (!(e === null || this.currentHref === "")) {
-			if (this.sourceMode = !this.sourceMode, this.sourceMode) {
+			if (this.sourceMode = !this.sourceMode, this.annotations?.setPage(""), this.sourceMode) {
 				this.currentSource === "" && (this.currentSource = await this.fetchText(this.currentHref) ?? "");
 				let t = document.createElement("tp-markdown"), n = document.createElement("script");
-				n.type = "tp/markdown", n.textContent = c(this.currentSource), t.append(n), e.replaceChildren(t);
+				n.type = "tp/markdown", n.textContent = u(this.currentSource), t.append(n), e.replaceChildren(t);
 				return;
 			}
-			e.replaceChildren(this.createMarkdownViewer(this.currentHref)), this.renderPageNavigation(this.currentHref);
+			e.replaceChildren(this.createMarkdownViewer(this.currentHref)), this.annotations?.setPage(new URL(this.currentHref, this.ownerDocument.baseURI).href), this.renderPageNavigation(this.currentHref);
 		}
 	}
 	createMarkdownViewer(e) {
@@ -525,8 +538,8 @@ var l = class extends e {
 		return `${this.repositoryBasePath}page-not-found.md`;
 	}
 };
-customElements.get("tp-markdown-multi-pages") || customElements.define("tp-markdown-multi-pages", l);
+customElements.get("tp-markdown-multi-pages") || customElements.define("tp-markdown-multi-pages", d);
 //#endregion
-export { l as t };
+export { d as t };
 
 //# sourceMappingURL=markdown-multi-pages.js.map

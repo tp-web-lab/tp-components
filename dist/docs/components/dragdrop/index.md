@@ -44,12 +44,12 @@ The custom `<tp-dragdrop>` element implements the <tp-icon name="dragdrop" libra
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between the available controls. |
-| Enter / Space on an item | Grab the item; press again to drop it. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on an item | Grab the item; press again to drop it. |
 | Arrow keys while grabbed | Choose the target item. |
-| Escape | Cancel dragging. |
-| Enter / Space on Move | Move the card to the other column, including when it is empty. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Escape</kbd> | Cancel dragging. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on Move | Move the card to the other column, including when it is empty. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

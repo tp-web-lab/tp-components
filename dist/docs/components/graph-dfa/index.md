@@ -20,8 +20,8 @@ The custom `<tp-graph-dfa>` element implements the <tp-icon name="graph-dfa" lib
 
 | Key or gesture | Result |
 | --- | --- |
-| Play | Enter a word in the toolbar below the canvas. **Play** consumes the next symbol and highlights the active transition and state. **Run word** reads the complete word automatically with a visible 600 ms interval between transitions. **Reset** returns to the initial state. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| Play | <kbd>Enter</kbd> a word in the toolbar below the canvas. **Play** consumes the next symbol and highlights the active transition and state. **Run word** reads the complete word automatically with a visible 600 ms interval between transitions. **Reset** returns to the initial state. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

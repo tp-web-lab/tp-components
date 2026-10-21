@@ -21,7 +21,7 @@ The custom `<tp-icon>` element implements the <tp-icon name="icon" library="comp
 | Key or gesture | Result |
 | --- | --- |
 | Component itself | No dedicated keyboard action. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

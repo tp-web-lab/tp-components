@@ -8,6 +8,8 @@ The custom `<tp-markdown-multi-pages>` element implements the <tp-icon name="mar
 
 The language selector appears only when `langs` declares at least two distinct comma-separated language codes (for example, `langs="fr,en"`). Without `langs`, or with a single language, it stays hidden. Changes to `langs` update the selector immediately; translation-file availability does not control its visibility.
 
+The default toolbar places Clock, Language (only when multiple languages are declared), Color, Theme and Fullscreen on the right, and Home, Menu, Code, Calculator and Personal annotations on the left, in that order. The document title stays between these groups.
+
 ## Usage
 
 ### User interactions
@@ -35,15 +37,15 @@ Personal annotations are saved per document in this browser's localStorage, with
 
 | Key or gesture | Result |
 | --- | --- |
-| Enter / Space on a sidebar button | Expand/collapse branches, toggle the sidebar width, or open/close search. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on a sidebar button | Expand/collapse branches, toggle the sidebar width, or open/close search. |
 | Typing in sidebar search | Update matching titles and open their ancestors. |
-| Enter in sidebar search | Scroll to the next result, wrapping to the first. |
-| Escape in sidebar search | Close and clear search, then return focus to its button. |
-| Selecting an annotation target | Tab to a paragraph, heading or other available target, then Enter to select it. Escape cancels. |
-| Annotation pin arrows | Move the folded annotation; Shift uses smaller steps. Enter or Space opens it. |
-| Tab / Shift+Tab | Move between the available controls. |
+| <kbd>Enter</kbd> in sidebar search | Scroll to the next result, wrapping to the first. |
+| <kbd>Escape</kbd> in sidebar search | Close and clear search, then return focus to its button. |
+| Selecting an annotation target | <kbd>Tab</kbd> to a paragraph, heading or other available target, then <kbd>Enter</kbd> to select it. <kbd>Escape</kbd> cancels. |
+| Annotation pin arrows | Move the folded annotation; <kbd>Shift</kbd> uses smaller steps. <kbd>Enter</kbd> or <kbd>Space</kbd> opens it. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
 | Focused controls | Use each control’s standard keyboard interaction.  |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 
@@ -437,12 +439,20 @@ All tp-components used by `<tp-markdown-multi-pages>` are loaded automatically b
 @summary Shared base class for tp-* components.
 -->
 <!--
+@tp-dependency tp-calculator
+@summary Scientific calculator with an editable expression and degree/radian modes.
+-->
+<!--
 @tp-dependency tp-clock
 @summary Live clock component with digital or analogic display and date tooltip.
 -->
 <!--
 @tp-dependency tp-color
 @summary Brand color preset controller scoped to the containing element.
+-->
+<!--
+@tp-dependency tp-drawer
+@summary Drawer overlay component.
 -->
 <!--
 @tp-dependency tp-fullscreen
@@ -459,6 +469,10 @@ All tp-components used by `<tp-markdown-multi-pages>` are loaded automatically b
 <!--
 @tp-dependency tp-markdown
 @summary Markdown rendering component.
+-->
+<!--
+@tp-dependency tp-post-it-editor
+@summary creates and edits persistent personal annotations attached to document elements.
 -->
 <!--
 @tp-dependency tp-source
@@ -486,12 +500,15 @@ All tp-components used by `<tp-markdown-multi-pages>` are loaded automatically b
 -->
 
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
+- [`<tp-calculator>`](../calculator/index.md) : Scientific calculator with an editable expression and degree/radian modes.
 - [`<tp-clock>`](../clock/index.md) : Live clock component with digital or analogic display and date tooltip.
 - [`<tp-color>`](../color/index.md) : Brand color preset controller scoped to the containing element.
+- [`<tp-drawer>`](../drawer/index.md) : Drawer overlay component.
 - [`<tp-fullscreen>`](../fullscreen/index.md) : Fullscreen controller button.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
 - [`<tp-lang>`](../lang/index.md) : Documentation language selector.
 - [`<tp-markdown>`](../markdown/index.md) : Markdown rendering component.
+- [`<tp-post-it-editor>`](../post-it-editor/index.md) : creates and edits persistent personal annotations attached to document elements.
 - [`<tp-source>`](../source/index.md) : Source repository link button.
 - [`<tp-splitter>`](../splitter/index.md) : Splitter component with two resizable panels.
 - [`<tp-textfield>`](../textfield/index.md) : Single-line and automatically growing multiline text field.

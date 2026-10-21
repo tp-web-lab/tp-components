@@ -26,8 +26,8 @@ The custom `<tp-dialog>` element implements the <tp-icon name="dialog" library="
 
 | Key or gesture | Result |
 | --- | --- |
-| Escape | Dismiss the panel when its settings allow it. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Escape</kbd> | Dismiss the panel when its settings allow it. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

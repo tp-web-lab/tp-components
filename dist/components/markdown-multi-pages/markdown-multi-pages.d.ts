@@ -7,12 +7,20 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-calculator
+ * @summary Scientific calculator with an editable expression and degree/radian modes.
+ */
+/**
  * @tp-dependency tp-clock
  * @summary Live clock component with digital or analogic display and date tooltip.
  */
 /**
  * @tp-dependency tp-color
  * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
  */
 /**
  * @tp-dependency tp-fullscreen
@@ -29,6 +37,10 @@
 /**
  * @tp-dependency tp-markdown
  * @summary Markdown rendering component.
+ */
+/**
+ * @tp-dependency tp-post-it-editor
+ * @summary creates and edits persistent personal annotations attached to document elements.
  */
 /**
  * @tp-dependency tp-source
@@ -54,6 +66,7 @@
  * @tp-dependency tp-tree
  * @summary Generic tree component for interactive hierarchical editing.
  */
+import "../calculator/calculator.js";
 import { TpBase } from "../base/base.js";
 import "../toolbar/toolbar.js";
 import "../icon-button/icon-button.js";
@@ -78,6 +91,8 @@ export declare class TpMarkdownMultiPages extends TpBase {
     private sidebarElement;
     private contentElement;
     private currentHref;
+    private annotations;
+    private calculatorDrawer;
     private currentSource;
     private navigatingHref;
     private sourceMode;
@@ -107,6 +122,7 @@ export declare class TpMarkdownMultiPages extends TpBase {
     private resolveCurrentLang;
     private initialize;
     private renderShell;
+    private toggleCalculator;
     private applyInitialSidebarState;
     private applyMenuState;
     private loadSidebar;

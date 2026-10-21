@@ -328,6 +328,7 @@ var s = class s extends e {
 			name: e,
 			library: "tp",
 			label: e === "input" ? "Answer form" : "Output",
+			"data-help-description": e === "input" ? "Hide/show the form." : "Hide/show the output.",
 			size: "s",
 			type: "button",
 			"aria-pressed": "true"

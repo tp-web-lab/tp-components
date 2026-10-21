@@ -28,7 +28,7 @@ The custom `<tp-csv-table>` element implements the CSV table functionality: crea
 | Key or gesture | Result |
 | --- | --- |
 | Table | No table-specific keyboard shortcut. Embedded links and controls retain their normal keyboard interactions. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

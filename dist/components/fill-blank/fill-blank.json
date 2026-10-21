@@ -39,7 +39,7 @@
   "userHelp": {
     "displayName": "Fill in blank",
     "introduction": "The custom `<tp-fill-blank>` element implements the <tp-icon name=\"fill-blank\" library=\"components\" size=\"1.25em\"></tp-icon> Fill in blank functionality: manages inline fields and rich blanks and exposes their values as `FormData`.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Answer choices in the example | Click a shape or drag it onto the blank to assign it. |\n| Using the component | Type in editable fields, or use the answer choices provided by the surrounding exercise for closed blanks. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Answer choices in the example | Click a shape or drag it onto the blank to assign it. |\n| Using the component | Type in editable fields, or use the answer choices provided by the surrounding exercise for closed blanks. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

@@ -24,8 +24,8 @@ The custom `<tp-typewriting>` element implements the Typewriting functionality: 
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab | Focus the animated component or a control inside it to reveal all text and stop repetition. No extra focus stop remains after completion. |
-| Ctrl+? | Open User Help for the component under the pointer, falling back to the focused component. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> | Focus the animated component or a control inside it to reveal all text and stop repetition. No extra focus stop remains after completion. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

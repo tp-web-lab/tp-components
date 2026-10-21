@@ -36,9 +36,9 @@ References and lists use the nearest `data-tp-reference-scope`, rendered markup 
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between generated links. |
-| Enter | Follow the focused link. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between generated links. |
+| <kbd>Enter</kbd> | Follow the focused link. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ## Examples
 

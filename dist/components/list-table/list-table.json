@@ -37,7 +37,7 @@
   "userHelp": {
     "displayName": "List table",
     "introduction": "The custom `<tp-list-table>` element implements the List table functionality: creates an HTML table from ordered or unordered lists while preserving cell content.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Table | Read and select the cell content. Wide tables can be scrolled horizontally. |\n| Embedded controls | Use the controls normally; conversion preserves their content and event listeners. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Table | No table-specific keyboard shortcut. Embedded links and controls retain their normal keyboard interactions. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Table | Read and select the cell content. Wide tables can be scrolled horizontally. |\n| Embedded controls | Use the controls normally; conversion preserves their content and event listeners. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Table | No table-specific keyboard shortcut. Embedded links and controls retain their normal keyboard interactions. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

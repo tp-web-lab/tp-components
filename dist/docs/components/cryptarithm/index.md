@@ -33,9 +33,9 @@ The custom `<tp-cryptarithm>` element implements the <tp-icon name="cryptarithm"
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Moves among assignments, assistance options, undo and redo controls. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Moves among assignments, assistance options, undo and redo controls. |
 | Number keys | Enters a digit in the focused letter assignment. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

@@ -41,11 +41,11 @@ The toolbar is optional. The interactions below are available only when the corr
 
 | Key or gesture | Result |
 | --- | --- |
-| Selecting an annotation target | Tab to a paragraph, heading or other available target, then Enter to select it. Escape cancels. |
-| Annotation pin arrows | Move the folded annotation; Shift uses smaller steps. Enter or Space opens it. |
-| Tab / Shift+Tab | Move between the available controls. |
+| Selecting an annotation target | <kbd>Tab</kbd> to a paragraph, heading or other available target, then <kbd>Enter</kbd> to select it. <kbd>Escape</kbd> cancels. |
+| Annotation pin arrows | Move the folded annotation; <kbd>Shift</kbd> uses smaller steps. <kbd>Enter</kbd> or <kbd>Space</kbd> opens it. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
 | Focused controls | Use each control’s standard keyboard interaction.  |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

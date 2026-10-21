@@ -21,7 +21,7 @@ The custom `<tp-lorem-ipsum>` element implements the Lorem ipsum functionality: 
 | Key or gesture | Result |
 | --- | --- |
 | Generated text | No component-specific keyboard shortcut or extra focus stop. |
-| Ctrl+? | Open User Help for the component under the pointer, falling back to the focused component. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

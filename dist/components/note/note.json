@@ -33,7 +33,7 @@
   "userHelp": {
     "displayName": "Note",
     "introduction": "The custom `<tp-note>` element defines a hidden HTML note for reference tooltips and generated lists.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| None | No component-specific mouse interaction; the definition is hidden. Its content is displayed through references and generated lists. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| None | No component-specific keyboard interaction. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| None | No component-specific mouse interaction; the definition is hidden. Its content is displayed through references and generated lists. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| None | No component-specific keyboard interaction. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

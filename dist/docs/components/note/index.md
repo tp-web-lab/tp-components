@@ -29,7 +29,7 @@ References and lists use the nearest `data-tp-reference-scope`, rendered markup 
 | Key or gesture | Result |
 | --- | --- |
 | None | No component-specific keyboard interaction. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ## Examples
 

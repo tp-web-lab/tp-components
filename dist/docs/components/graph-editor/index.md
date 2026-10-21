@@ -58,11 +58,11 @@ The custom `<tp-graph-editor>` element implements the <tp-icon name="graph-edito
 
 | Key or gesture | Result |
 | --- | --- |
-| Delete / Backspace | Remove the selected node, edge or measurement point. |
-| Ctrl/Cmd+C | Copy the selected element. |
-| Ctrl/Cmd+X | Cut the selected element. |
-| Ctrl/Cmd+V | Paste the copied or cut element. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Delete</kbd> / <kbd>Backspace</kbd> | Remove the selected node, edge or measurement point. |
+| <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>C</kbd> | Copy the selected element. |
+| <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>X</kbd> | Cut the selected element. |
+| <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>V</kbd> | Paste the copied or cut element. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

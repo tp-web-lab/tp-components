@@ -65,11 +65,11 @@ Click a card or its link icon to select it, then click a card in another column 
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move through association controls, embedded content, question actions and output tabs. |
-| Enter / Space | Activate the focused Select, Remove pair, Close callout, Reset, Submit or panel-toggle button. |
-| Escape inside an item | Cancel the pending selection without removing existing pairs. |
-| Arrow keys, Home / End on output tabs | Navigate the Feedback and Solution tabs using the standard tab controls. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move through association controls, embedded content, question actions and output tabs. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused Select, Remove pair, Close callout, Reset, Submit or panel-toggle button. |
+| <kbd>Escape</kbd> inside an item | Cancel the pending selection without removing existing pairs. |
+| Arrow keys, <kbd>Home</kbd> / <kbd>End</kbd> on output tabs | Navigate the Feedback and Solution tabs using the standard tab controls. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

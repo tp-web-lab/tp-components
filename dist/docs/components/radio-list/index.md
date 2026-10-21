@@ -23,10 +23,10 @@ The custom `<tp-radio-list>` element implements the <tp-icon name="radio-list" l
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Enter or leave the group. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | <kbd>Enter</kbd> or leave the group. |
 | Arrow keys | Move and select among enabled radio options. |
-| Space | Select the focused option. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Space</kbd> | Select the focused option. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

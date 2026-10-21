@@ -86,7 +86,7 @@
   "userHelp": {
     "displayName": "Timer",
     "introduction": "The custom `<tp-timer>` element implements the <tp-icon name=\"timer\" library=\"components\" size=\"1.25em\"></tp-icon> Timer functionality: countdown timer with stop control and optional ring.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Duration | Enter the countdown duration in seconds. |\n| Start timer | Begin the countdown. Completion sound depends on the page and browser. |\n| Stop timer | Stop the countdown. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Duration | Enter the countdown duration in seconds. |\n| Start timer | Begin the countdown. Completion sound depends on the page and browser. |\n| Stop timer | Stop the countdown. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

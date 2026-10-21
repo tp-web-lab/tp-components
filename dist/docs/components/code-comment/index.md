@@ -36,10 +36,10 @@ The custom `<tp-code-comment>` element implements the code annotation functional
 
 | Key or gesture | Result |
 | --- | --- |
-| Escape, then Tab from the editor | Leave code indentation mode and focus a numbered marker. Its explanation opens as on hover; Tab and Shift+Tab move between focusable controls. |
-| Escape while a tooltip is open | Close the tooltip without changing the source. |
+| <kbd>Escape</kbd>, then <kbd>Tab</kbd> from the editor | Leave code indentation mode and focus a numbered marker. Its explanation opens as on hover; <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> move between focusable controls. |
+| <kbd>Escape</kbd> while a tooltip is open | Close the tooltip without changing the source. |
 | Typing in the linked editor | Edit code using the editor's normal keyboard behavior. |
-| Ctrl+? | Open User help for the component under the pointer, falling back to the focused component. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

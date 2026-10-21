@@ -22,6 +22,8 @@ JSON uses this component's question schema. Other formats use the same definitio
 
 ### User interactions
 
+The user-help button legend groups commands by their location in the component and describes their effect briefly. Detailed gestures and keyboard behavior remain in the interaction tables below.
+
 #### Mouse interactions
 
 | Control or gesture | Result |
@@ -37,11 +39,11 @@ JSON uses this component's question schema. Other formats use the same definitio
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between the available controls. |
-| Enter / Space on the question title | Expand or collapse the question. |
-| Enter / Space | Activate the focused button. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on the question title | Expand or collapse the question. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |
 | Arrow keys in Output tabs | Move between Feedback and Solution. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

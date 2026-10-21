@@ -23,8 +23,8 @@ The custom `<tp-graph-petri>` element implements the <tp-icon name="graph-petri"
 
 | Key or gesture | Result |
 | --- | --- |
-| Enter / Space | Fires the focused enabled transition. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Fires the focused enabled transition. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

@@ -25,7 +25,7 @@ The custom `<tp-avatar-group>` element implements the Avatar group functionality
 | Key or gesture | Result |
 | --- | --- |
 | Component itself | No dedicated keyboard action. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

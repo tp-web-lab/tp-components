@@ -89,7 +89,7 @@
   "userHelp": {
     "displayName": "Table of contents",
     "introduction": "The custom `<tp-toc>` element implements the <tp-icon name=\"toc\" library=\"components\" size=\"1.25em\"></tp-icon> Table of contents functionality: table of contents generated from page headings.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Select | Select a heading in the table of contents to navigate to that section. |\n| Using the component | Expand or collapse branches to show or hide nested headings. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Select | Select a heading in the table of contents to navigate to that section. |\n| Using the component | Expand or collapse branches to show or hide nested headings. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

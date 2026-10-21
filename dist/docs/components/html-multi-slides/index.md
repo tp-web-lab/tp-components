@@ -24,12 +24,12 @@ The custom `<tp-html-multi-slides>` element implements the HTML multi-slides fun
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between the available controls. |
-| Enter / Space / Right Arrow outside editing controls | Reveal the next step or advance to the next slide. |
-| Left Arrow / Backspace outside editing controls | Hide the preceding step or return to the previous slide. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> / <kbd>Right</kbd> Arrow outside editing controls | Reveal the next step or advance to the next slide. |
+| <kbd>Left</kbd> Arrow / <kbd>Backspace</kbd> outside editing controls | Hide the preceding step or return to the previous slide. |
 | Arrow keys on the slide slider | Choose a slide. |
-| Home / End on the slide slider | Choose the first or last slide. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Home</kbd> / <kbd>End</kbd> on the slide slider | Choose the first or last slide. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

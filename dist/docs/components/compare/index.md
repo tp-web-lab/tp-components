@@ -23,10 +23,10 @@ The custom `<tp-compare>` element implements the <tp-icon name="compare" library
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Focus the comparison handle. |
-| Arrow keys | Moves the separator by 1%, or by 10% while Shift is held. |
-| Home / End | Moves the separator to its minimum or maximum position. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the comparison handle. |
+| Arrow keys | Moves the separator by 1%, or by 10% while <kbd>Shift</kbd> is held. |
+| <kbd>Home</kbd> / <kbd>End</kbd> | Moves the separator to its minimum or maximum position. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

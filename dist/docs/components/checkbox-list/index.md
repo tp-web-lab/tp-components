@@ -23,9 +23,9 @@ The custom `<tp-checkbox-list>` element implements the <tp-icon name="checkbox-l
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Focus a checkbox. |
-| Space | Select or clear the focused checkbox. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus a checkbox. |
+| <kbd>Space</kbd> | Select or clear the focused checkbox. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

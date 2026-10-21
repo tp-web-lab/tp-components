@@ -26,12 +26,12 @@ The custom `<tp-numberfield>` element implements the <tp-icon name="numberfield"
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between the available controls. |
-| Typing in number mode | Enter or edit the number. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
+| Typing in number mode | <kbd>Enter</kbd> or edit the number. |
 | Arrow keys | Adjust the number or the focused slider. |
-| Home / End in slider mode | Reach the minimum or maximum. |
-| Enter / Space on Clear | Activate the available clear/reset button. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Home</kbd> / <kbd>End</kbd> in slider mode | Reach the minimum or maximum. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on Clear | Activate the available clear/reset button. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

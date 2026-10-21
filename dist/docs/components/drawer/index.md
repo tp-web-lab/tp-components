@@ -29,12 +29,12 @@ The custom `<tp-drawer>` element implements the <tp-icon name="drawer" library="
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between the available controls. |
-| Enter / Space | Activate the focused button. |
-| Escape | Close the drawer at any time. |
-| ArrowLeft / ArrowRight | Moves the focused resize edge by 10 pixels; hold Shift for 50 pixels. |
-| Home / End | Sets the focused resize edge to the minimum or maximum drawer width. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |
+| <kbd>Escape</kbd> | Close the drawer at any time. |
+| <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> | Moves the focused resize edge by 10 pixels; hold <kbd>Shift</kbd> for 50 pixels. |
+| <kbd>Home</kbd> / <kbd>End</kbd> | Sets the focused resize edge to the minimum or maximum drawer width. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

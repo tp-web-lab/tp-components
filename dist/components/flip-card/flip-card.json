@@ -112,7 +112,7 @@
   "userHelp": {
     "displayName": "Flip card",
     "introduction": "",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Flip button | Switch between the front and back of the card. |\n| Card without a flip button | Click the card itself to flip it. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus the flip control and the visible face to read or scroll its contents. The hidden face is excluded from keyboard navigation. |\n| Enter / Space | Flip the focused card or activate its flip button. Space on the focused face scrolls its content without flipping. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Flip button | Switch between the front and back of the card. |\n| Card without a flip button | Click the card itself to flip it. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the flip control and the visible face to read or scroll its contents. The hidden face is excluded from keyboard navigation. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Flip the focused card or activate its flip button. <kbd>Space</kbd> on the focused face scrolls its content without flipping. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

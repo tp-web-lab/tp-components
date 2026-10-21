@@ -25,9 +25,9 @@ The custom `<tp-tooltip>` element implements the <tp-icon name="tooltip" library
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Focus the associated control to show its explanation. |
-| Escape | Closes the tooltip. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the associated control to show its explanation. |
+| <kbd>Escape</kbd> | Closes the tooltip. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

@@ -42,11 +42,11 @@ Click a card or its link icon to select it, then click a card in another column 
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move through the selection buttons, removal buttons and interactive content. |
-| Enter / Space on Select | Select the item, then activate Select in another column to extend its group. |
-| Enter / Space on Remove pair / Remove from group | Remove the member and return focus to its Select button. |
-| Escape | Cancel a pending selection while focus is inside an item. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move through the selection buttons, removal buttons and interactive content. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on Select | Select the item, then activate Select in another column to extend its group. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on Remove pair / Remove from group | Remove the member and return focus to its Select button. |
+| <kbd>Escape</kbd> | Cancel a pending selection while focus is inside an item. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

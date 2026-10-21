@@ -92,7 +92,7 @@
   "userHelp": {
     "displayName": "Checkbox list",
     "introduction": "The custom `<tp-checkbox-list>` element implements the <tp-icon name=\"checkbox-list\" library=\"components\" size=\"1.25em\"></tp-icon> Checkbox list functionality: transforms list items into checkbox options.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Option | Click to select or clear it; several options can be selected. |\n| Hover | Highlights an enabled option without changing its selection. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus a checkbox. |\n| Space | Select or clear the focused checkbox. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Option | Click to select or clear it; several options can be selected. |\n| Hover | Highlights an enabled option without changing its selection. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus a checkbox. |\n| <kbd>Space</kbd> | Select or clear the focused checkbox. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

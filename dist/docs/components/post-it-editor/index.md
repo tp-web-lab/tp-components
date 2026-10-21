@@ -34,12 +34,12 @@ A post-it can only be repositioned inside the element selected as the editor's d
 
 | Key | Result |
 | --- | --- |
-| Tab / Shift+Tab | Navigate editor controls and document targets during selection. |
-| Enter / Space | Activate a focused button. Enter selects a focused document target. |
-| Arrow keys in the language dropdown | Navigate language choices; Enter selects one. |
-| Arrow keys on a pin or header | Move the note by 10 pixels, or 1 pixel with Shift. |
-| Escape | Cancel target selection while keeping the editor open, or close the language dropdown. |
-| Ctrl+? | Open User Help for the hovered or focused component. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Navigate editor controls and document targets during selection. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused button. <kbd>Enter</kbd> selects a focused document target. |
+| Arrow keys in the language dropdown | Navigate language choices; <kbd>Enter</kbd> selects one. |
+| Arrow keys on a pin or header | Move the note by 10 pixels, or 1 pixel with <kbd>Shift</kbd>. |
+| <kbd>Escape</kbd> | Cancel target selection while keeping the editor open, or close the language dropdown. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the hovered or focused component. |
 
 ### Markup language
 

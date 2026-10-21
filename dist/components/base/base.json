@@ -61,7 +61,7 @@
   "userHelp": {
     "displayName": "Base",
     "introduction": "The custom `<tp-base>` element implements the <tp-icon name=\"base\" library=\"components\" size=\"1.25em\"></tp-icon> Base functionality: shared base for `tp-*` components.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Pointer over a component | Identifies the component whose help opens with Ctrl+?. This also works for non-focusable content such as boxes. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "Help lists only this component’s own commands. Functional subcomponents expose their internal commands through their own <kbd>Ctrl</kbd>+<kbd>?</kbd> help.\n\nThe user-help button legend groups commands by their location in the component and describes their effect briefly. Detailed gestures and keyboard behavior remain in the interaction tables below.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Pointer over a component | Identifies the component whose help opens with <kbd>Ctrl</kbd>+<kbd>?</kbd>. This also works for non-focusable content such as boxes. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

@@ -68,6 +68,8 @@ JSON uses this component's question schema. Other formats use the same definitio
 
 ### User interactions
 
+The user-help button legend groups commands by their location in the component and describes their effect briefly. Detailed gestures and keyboard behavior remain in the interaction tables below.
+
 #### Mouse interactions
 
 | Control or gesture | Result |
@@ -84,14 +86,14 @@ JSON uses this component's question schema. Other formats use the same definitio
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between the available controls. |
-| Right Arrow from a closed blank | Move to the answer bank. |
-| Up / Down in the answer bank | Choose an answer. |
-| Enter / Space in the answer bank | Place the chosen answer into the highlighted blank. |
-| Escape | Cancel answer selection. |
-| Delete on a blank | Clear its answer. |
-| Enter / Space | Activate the focused button. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
+| <kbd>Right</kbd> Arrow from a closed blank | Move to the answer bank. |
+| <kbd>Up</kbd> / <kbd>Down</kbd> in the answer bank | Choose an answer. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> in the answer bank | Place the chosen answer into the highlighted blank. |
+| <kbd>Escape</kbd> | Cancel answer selection. |
+| <kbd>Delete</kbd> on a blank | Clear its answer. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

@@ -90,7 +90,7 @@
   "userHelp": {
     "displayName": "Modal",
     "introduction": "The custom `<tp-modal>` element implements the <tp-icon name=\"modal\" library=\"components\" size=\"1.25em\"></tp-icon> Modal functionality: displays modal content above the page.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Activate the page's trigger to open the panel. |\n| Using the component | Use its controls or links, then close it with the available dismissal control. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab | Moves to the next focusable control and wraps inside the modal. |\n| Shift+Tab | Moves to the previous focusable control and wraps inside the modal. |\n| Escape | Closes the modal. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Activate the page's trigger to open the panel. |\n| Using the component | Use its controls or links, then close it with the available dismissal control. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> | Moves to the next focusable control and wraps inside the modal. |\n| <kbd>Shift</kbd>+<kbd>Tab</kbd> | Moves to the previous focusable control and wraps inside the modal. |\n| <kbd>Escape</kbd> | Closes the modal. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Tab",
