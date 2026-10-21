@@ -14,8 +14,12 @@
 
     <div role="example" label="Attributes">
       <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+
+
+
       <tp-stack>
       <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>open</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="mode" label="mode" label-position="top" orientation="horizontal" value="1"><ul><li>mixed</li><li>opened</li><li>closed</li></ul></tp-radio-list>
       <tp-radio-list data-setting="src" label="src" label-position="top" orientation="horizontal" value="1"><ul><li>Default</li><li>file1</li><li>file2</li><li>file-unknown</li></ul></tp-radio-list>
       <tp-cluster></tp-cluster>
       <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>

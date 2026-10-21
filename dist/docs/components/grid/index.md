@@ -72,6 +72,10 @@ Attributes
   | --- | --- | --- | --- |
   | <code>gap</code> | <code>string</code> | <code>&quot;1rem&quot;</code> | Gap between grid cells. When absent, uses the --tp-grid-gap CSS default. |
   | <code>min-width</code> | <code>string</code> | <code>&quot;250px&quot;</code> | Minimum column width used by the responsive grid template, limited to the available container width. When absent, uses the --tp-grid-min-width CSS default. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-grid>`]
 
 Methods
@@ -98,6 +102,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_grid.TpGrid.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

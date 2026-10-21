@@ -129,6 +129,10 @@ Attributes
   | <code>readonly</code> | <code>boolean</code> | <code>false</code> | Prevents the user from editing the prose. |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of an external document loaded into the editor. |
   | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Initial HTML content of the editor. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-prose-editor>`]
 
 Methods
@@ -166,6 +170,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_prose-editor.TpProseEditor.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

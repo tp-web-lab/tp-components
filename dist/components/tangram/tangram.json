@@ -1,0 +1,122 @@
+{
+  "tagname": "tp-tangram",
+  "classname": "TpTangram",
+  "superclass": "TpBase",
+  "description": "Seven-piece tangram with a life-size silhouette and collision-safe placement.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-tangram></tp-tangram>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "exact-orientation",
+      "description": "Starts every piece in its solution orientation, including reflection; changing it restarts the puzzle.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "Text or JSON file containing the seven solution placements.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "clearIncorrectPieces(): void",
+      "inherited": false,
+      "description": "Returns incorrect pieces outside the silhouette in one undoable operation."
+    },
+    {
+      "name": "fullscreen(): Promise<void>",
+      "inherited": false,
+      "description": "Toggles the browser fullscreen view."
+    },
+    {
+      "name": "place(id: string, x: number, y: number, angle?: number, flipped?: boolean): boolean",
+      "inherited": false,
+      "description": "Attempts an absolute placement. Rejected placements leave history unchanged."
+    },
+    {
+      "name": "redo(): void",
+      "inherited": false,
+      "description": "Redo."
+    },
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Restores the seven pieces around the target silhouette."
+    },
+    {
+      "name": "setSolution(solution: string | Placement[]): void",
+      "inherited": false,
+      "description": "Loads a validated solution; centers it and starts a fresh game."
+    },
+    {
+      "name": "showIncorrectPieces(show = true): void",
+      "inherited": false,
+      "description": "Highlights pieces that are not entirely inside the target silhouette."
+    },
+    {
+      "name": "showPiece(): void",
+      "inherited": false,
+      "description": "Reveals the selected piece in the supplied dissection without moving it."
+    },
+    {
+      "name": "showSolution(show = true): void",
+      "inherited": false,
+      "description": "Shows an isolated solution preview; hiding it restores the unchanged playing pieces."
+    },
+    {
+      "name": "undo(): void",
+      "inherited": false,
+      "description": "Undo."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-tangram-change",
+      "description": "Fired after an accepted edit; detail contains placements and solved.",
+      "detail": "{ placements: unknown; solved: unknown }"
+    },
+    {
+      "name": "tp-tangram-error",
+      "description": "Fired when loading a solution fails; detail contains message.",
+      "detail": "{ message: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button-group",
+      "summary": "Button group component for organizing multiple buttons."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Dropdown menu component."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Tangram",
+    "introduction": "The custom `<tp-tangram>` element presents seven rigid pieces and a central silhouette at exactly the same scale. Reproduce the silhouette without overlapping pieces.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Drag a piece (mouse, pen or touch) | Place the piece anywhere, including incorrect positions and outside the silhouette. Only overlaps with other playing pieces are refused. Nearby vertices snap when this causes no overlap; the view expands if needed to keep every piece visible. |\n| Select a piece | Show rotation and flip icons beside that piece. |\n| Click outside the piece and its local controls | Close the local controls without moving or deselecting the piece. Select a piece again to reopen them. |\n| Local rotation / flip icons | Rotate or reflect the selected piece without returning to the main toolbar. Flip is available for the parallelogram only. |\n| Rotate −45° / Rotate +45° | Rotate the selected piece around its center. Only rotations that overlap another playing piece are refused. |\n| Flip | Reflect the selected parallelogram; available only for that piece. |\n| Undo / Redo | Reverse or restore one accepted placement, rotation or reflection. |\n| Assistance (?) | Open the help menu. |\n| Show all incorrect pieces / Hide incorrect pieces | Mark pieces that are not entirely inside the silhouette with a red dashed outline. Valid alternative dissections are accepted. |\n| Clear the incorrect pieces | Close any solution or piece preview, then return incorrect pieces around the silhouette, preserving their orientation and leaving correct pieces in place. Undo restores the previous arrangement. |\n| Show the piece | Reveal the selected piece’s position in the supplied solution without moving it. Select a piece first. |\n| Show the solution / Hide the solution | Show an isolated preview of the seven solution pieces, each used once. Playing pieces are temporarily hidden to avoid mixing the two arrangements. Hide the solution to resume the unchanged game. |\n| Restart | Restore the surrounding pieces and clear the history. |\n| Fullscreen | Enter or leave fullscreen, when supported by the browser. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus toolbar buttons and individual pieces. Focusing a piece selects it. |\n| Enter / Space on a toolbar button | Activate the button. |\n| Arrow keys on a piece | Move by 0.05 units; Shift increases the step to 0.5 units. |\n| R / Shift+R on a piece | Rotate by +45° / −45°. |\n| F on the parallelogram | Reflect it. |\n| Ctrl+Z / Ctrl+Shift+Z | Undo / redo. Command is also supported. |\n| Arrow Up / Down, Home / End in the assistance menu | Navigate menu items. Enter or Space activates an action; Escape closes the menu. |\n| Escape | Close the selected piece’s local controls and cancel a drag; the browser also uses Escape to leave fullscreen. |\n| Ctrl+? | Open User help for the component under the pointer, falling back to the focused component. Shift may be needed to type ?. |",
+    "keyboard": []
+  }
+}

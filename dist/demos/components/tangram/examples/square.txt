@@ -1,0 +1,22 @@
+# Corners of a square of side 4
+point A = (0, 0)
+point B = (4, 0)
+point C = (4, 4)
+point D = (0, 4)
+
+# Shared landmarks
+point O = midpoint(A, C)
+point E = midpoint(B, C)
+point F = midpoint(C, D)
+point G = midpoint(B, O)
+point H = midpoint(O, C)
+point I = midpoint(O, D)
+
+# The seven pieces, described by their boundary vertices
+triangle A B O
+triangle A O D
+triangle E C F
+triangle B E G
+triangle O H I
+square O G E H
+parallelogram D F H I

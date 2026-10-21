@@ -23,12 +23,20 @@
  * @summary CodeMirror-based code editor component.
  */
 /**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
  * @tp-dependency tp-icon-button
  * @summary Accessible icon button component.
  */
 /**
  * @tp-dependency tp-radio-list
  * @summary Transforms a list into a group of radio buttons.
+ */
+/**
+ * @tp-dependency tp-save-image
+ * @summary Downloads an anchored image as SVG, PNG or WebP.
  */
 /**
  * @tp-dependency tp-stack
@@ -39,12 +47,18 @@
  * @summary Single-line and automatically growing multiline text field.
  */
 /**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
+/**
  * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
  * @summary Shared parsers, games and rendering utilities.
  */
-import { type XYGrid, type XYLineStyle, type XYVector } from "@tp/tp-utilities/xy-graph";
+import { type XYAnimationStep, type XYGrid, type XYLineStyle, type XYVector } from "@tp/tp-utilities/xy-graph";
 import { TpBase } from "../base/base.js";
 import "../icon-button/icon-button.js";
+import "../save-image/save-image.js";
+import "../theme/theme.js";
 /** Numeric series supplied directly instead of mathematical expressions. */
 export interface TpXYPlotData {
     vectors?: XYVector[];
@@ -80,15 +94,17 @@ export interface TpXYPlotData {
  * @attr {"both" | "horizontal" | "vertical" | "none"} grid = "both" - Visible grid directions; overrides the graph directive when present.
  * @attr {"both" | "horizontal" | "vertical" | "none"} axis = "both" - Visible axes and their ticks.
  * @attr {boolean} no-legend = false - Hides curve legends.
- * @attr {boolean} settings = false - Shows a button for editing the graph definition in a panel below the plot.
+ * @attr {string} label = "" - Title displayed at the left of the view toolbar.
+ * @cssprop --tp-plot-height Height of the normal plot including its top and bottom controls; settings remain below.
+ * @attr {boolean} settings = false - Shows interactive settings below the graph and its controls.
  * @example
- * <tp-xy-plot>
+ * <tp-xy-plot label="Functions">
  *   <script type="tp/xy-plot">
- *     xyFunctionGraph
- *       title "Functions"
- *       x-axis [-10,10]
- *       y-axis [-5,5]
- *       functions [["Sine", "2*sin(x)"], ["Line", "x/2"]]
+ *     label = "Functions"
+ *     x-axis = [-10, 10]
+ *     y-axis = [-5, 5]
+ *     curve Sine = function(x, 2*sin(x))
+ *     curve Line = function(x, x/2)
  *   </script>
  * </tp-xy-plot>
  */
@@ -113,10 +129,13 @@ export declare class TpXYPlot extends TpBase {
     private currentSource;
     private initialSource;
     private settingsEditor;
-    private settingsOpen;
+    private undoSources;
+    private redoSources;
+    private sourceHome;
+    private sourceWasOpen;
     private settingsRevision;
     private readonly settingsPanelId;
-    /** Whether the graph settings button is shown. @attr settings */
+    /** Whether interactive settings are shown below the graph. @attr settings */
     get settings(): boolean;
     set settings(value: boolean);
     private direction;
@@ -129,9 +148,9 @@ export declare class TpXYPlot extends TpBase {
     /** Whether curve legends are hidden. @attr no-legend */
     get noLegend(): boolean;
     set noLegend(value: boolean);
-    /** Gets the comma-separated reveal order, or sets it and returns to the start. */
+    /** Gets reveal order (JSON for groups), or sets comma-separated names, JSON or step arrays. */
     anim(): string;
-    anim(names: string): void;
+    anim(names: string | XYAnimationStep[]): void;
     /** Hides all objects in the reveal sequence. */
     goToStart(): void;
     /** Reveals all objects in the reveal sequence. */
@@ -142,6 +161,9 @@ export declare class TpXYPlot extends TpBase {
     next(): void;
     private syncPresentation;
     static get observedAttributes(): string[];
+    get label(): string;
+    set label(value: string);
+    private syncLabel;
     private readonly source;
     protected connectedCallback(): void;
     protected disconnectedCallback(): void;
@@ -166,7 +188,17 @@ export declare class TpXYPlot extends TpBase {
     private fitPlotViewBox;
     private disposeSettings;
     private syncSettings;
-    private toggleSettings;
+    private applySource;
+    private navigateHistory;
+    private syncHistory;
+    private ensureDefinition;
+    private toggleZoomSource;
+    private moveDefinition;
+    private toggleSource;
+    private syncSourceToggle;
+    private restoreZoomSource;
+    /** Exports the displayed graph with its current viewport, visibility and theme colors. */
+    exportSvg(): string;
     private commitSvg;
     private createAnimationControls;
     private syncAnimation;

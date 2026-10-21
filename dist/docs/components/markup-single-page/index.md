@@ -107,6 +107,10 @@ Attributes
   | <code>langs</code> | <code>string</code> | <code>&quot;en&quot;</code> | Candidate document languages. The first uses the source directory; others use language subdirectories. |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Source file. The extension selects the renderer. |
   | <code>toolbar</code> | <code>string \| null</code> | <code>null</code> | Optional comma-separated controls: code, calc, postit, clock, lang, color, theme, fullscreen. Empty enables all; absent hides the toolbar. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-markup-single-page>`]
 
 Methods
@@ -132,6 +136,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markup-single-page.TpMarkupSinglePage.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

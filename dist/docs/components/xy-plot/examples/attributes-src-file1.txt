@@ -1,5 +1,5 @@
-xyFunctionGraph
-  title "Functions"
-  x-axis [-10,10]
-  y-axis [-5,5]
-  functions [["Sine", "2*sin(x)"], ["Line", "x/2"]]
+label = "Functions"
+x-axis = [-10, 10]
+y-axis = [-5, 5]
+curve Sine = function(x, 2*sin(x))
+curve Line = function(x, x/2)

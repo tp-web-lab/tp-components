@@ -14,6 +14,7 @@ export type TpTextfieldLabelPosition = "top" | "bottom" | "start" | "end";
  * @attr {boolean} multiline = false - Uses an automatically growing textarea instead of an input.
  * @attr {string} label = "" - Visible label associated with the native input or textarea.
  * @attr {string} label-position = "top" - Label position (`top`, `bottom`, `start`, or `end`).
+ * @attr {string} regexp = "" - Optional full-answer regular expression for grading in an open fill-blank question; applied to trimmed text using the question case policy.
  * @attr {string} value = "" - Current field value.
  * @attr {string} name = "" - Name submitted with the containing form; defaults to the initial inline content when omitted.
  * @attr {string} placeholder = "" - Placeholder shown while the field is empty.
@@ -50,6 +51,9 @@ export declare class TpTextfield extends TpBase {
     private prefixIcon;
     private clearButton;
     static get observedAttributes(): string[];
+    /** Optional regular expression used by an open question to grade the whole answer. */
+    get regexp(): string;
+    set regexp(value: string);
     /** Native input type used in single-line mode. */
     get type(): TpTextfieldType;
     set type(value: TpTextfieldType);

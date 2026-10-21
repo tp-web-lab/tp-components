@@ -98,7 +98,15 @@ Basic usage
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | None. |  |  |  |
+  | <code>git</code> | <code>string</code> | <code>&quot;&quot;</code> | Repository URL. Adds a source link before Code when the toolbar is enabled. *(inherited from <code>tp-markup-single-page</code>)* |
+  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Text displayed in the center of the optional toolbar. *(inherited from <code>tp-markup-single-page</code>)* |
+  | <code>langs</code> | <code>string</code> | <code>&quot;en&quot;</code> | Candidate document languages. The first uses the source directory; others use language subdirectories. *(inherited from <code>tp-markup-single-page</code>)* |
+  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Source file. The extension selects the renderer. *(inherited from <code>tp-markup-single-page</code>)* |
+  | <code>toolbar</code> | <code>string \| null</code> | <code>null</code> | Optional comma-separated controls: code, calc, postit, clock, lang, color, theme, fullscreen. Empty enables all; absent hides the toolbar. *(inherited from <code>tp-markup-single-page</code>)* |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-restructuredtext-single-page>`]
 
 Methods
@@ -124,6 +132,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_restructuredtext-single-page.TpRestructuredTextSinglePage.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

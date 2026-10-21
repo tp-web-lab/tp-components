@@ -78,6 +78,10 @@ Attributes
   | <code>for</code> | <code>string</code> | <code>&quot;&quot;</code> | Identifiant de l’élément cible. |
   | <code>icon</code> | <code>string</code> | <code>copy</code> | Nom de l’icône affichée à l’état normal. Valeur par défaut : `copy`. |
   | <code>success-icon</code> | <code>string</code> | <code>check</code> | Nom de l’icône affichée après une copie réussie. Valeur par défaut : `check`. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-copy-code>`]
 
 Methods
@@ -105,6 +109,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_copy-code.TpCopyCode.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

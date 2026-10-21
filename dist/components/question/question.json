@@ -11,6 +11,15 @@
   ],
   "attributes": [
     {
+      "name": "mode",
+      "description": "Blank mode: opened, closed, or mixed local choices.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"mixed\""
+    },
+    {
       "name": "open",
       "description": "Expands the question; absent by default, leaving only its title visible.",
       "reflected": true,
@@ -21,7 +30,7 @@
     },
     {
       "name": "src",
-      "description": "URL of an external question definition.",
+      "description": "URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -62,10 +71,6 @@
     {
       "name": "tp-icon-button",
       "summary": "Accessible icon button component."
-    },
-    {
-      "name": "tp-markdown",
-      "summary": "Markdown rendering component."
     },
     {
       "name": "tp-switcher",

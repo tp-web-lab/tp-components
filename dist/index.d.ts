@@ -191,3 +191,5 @@ export { TpListof } from "./components/listof/listof.js";
 export { TpLogigram } from "./components/logigram/logigram.js";
 export { TpNote } from "./components/note/note.js";
 export { TpRef } from "./components/ref/ref.js";
+export { type TpSlopeProfile, type TpSlopeProfiles, TpSlopeSimulator, } from "./components/slope-simulator/slope-simulator.js";
+export { type TangramPlacement, TpTangram, } from "./components/tangram/tangram.js";

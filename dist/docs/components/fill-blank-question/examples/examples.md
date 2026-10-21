@@ -18,9 +18,9 @@ Prompt
 
 Form
 :
-  The capital of France is :tp-textfield:`france-capital`{name="france-capital" placeholder="Capital" aria-label="Capital of France" clearable}.
+  The capital of France is :tp-blank:`france-capital`{name="france-capital" placeholder="Capital" aria-label="Capital of France" clearable}.
 
-  The capital of Italy is :tp-textfield:`italy-capital`{name="italy-capital" placeholder="Capital" aria-label="Capital of Italy" clearable}.
+  The capital of Italy is :tp-blank:`italy-capital`{name="italy-capital" placeholder="Capital" aria-label="Capital of Italy" clearable}.
 
 Feedback
 :
@@ -43,9 +43,15 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
 - case-sensitive
 
-- closed
-
 - partial
+:::
+
+::: tp-radio-list { data-setting="mode" label="mode" label-position="top" orientation="horizontal" value="1" }
+- mixed
+
+- opened
+
+- closed
 :::
 
 ::: tp-cluster
@@ -94,11 +100,11 @@ Prompt
 
 Form
 :
-  The capital of France is :tp-textfield:`france`{name="france" aria-label="Capital of France" placeholder="City name" clearable}.
+  The capital of France is :tp-blank:`france`{name="france" aria-label="Capital of France" placeholder="City name" clearable}.
 
-  The capital of Germany is :tp-textfield:`germany`{name="germany" aria-label="Capital of Germany" placeholder="City name" clearable}.
+  The capital of Germany is :tp-blank:`germany`{name="germany" aria-label="Capital of Germany" placeholder="City name" clearable}.
 
-  The capital of Italy is :tp-textfield:`italy`{name="italy" aria-label="Capital of Italy" placeholder="City name" clearable}.
+  The capital of Italy is :tp-blank:`italy`{name="italy" aria-label="Capital of Italy" placeholder="City name" clearable}.
 
 Feedback
 : Check the capital of each country and its spelling.
@@ -124,11 +130,11 @@ Prompt
 
 Form
 :
-  Yesterday, I :tp-textfield:`go`{name="go" aria-label="Past simple of go" placeholder="go" clearable} to school.
+  Yesterday, I :tp-blank:`go`{name="go" aria-label="Past simple of go" placeholder="go" clearable} to school.
 
-  Last night, she :tp-textfield:`see`{name="see" aria-label="Past simple of see" placeholder="see" clearable} a shooting star.
+  Last night, she :tp-blank:`see`{name="see" aria-label="Past simple of see" placeholder="see" clearable} a shooting star.
 
-  Last Monday, we :tp-textfield:`take`{name="take" aria-label="Past simple of take" placeholder="take" clearable} the train.
+  Last Monday, we :tp-blank:`take`{name="take" aria-label="Past simple of take" placeholder="take" clearable} the train.
 
 Feedback
 : These verbs are irregular: their past simple forms do not end in -ed.
@@ -139,7 +145,7 @@ Solution
 ```
 
 ``` example {label="Baltic capitals and flags"}
-:::: tp-fill-blank-question { closed lang="en" }
+:::: tp-fill-blank-question { mode="closed" lang="en" }
 Answers
 :
   1. Tallinn
@@ -176,7 +182,7 @@ Solution
 extensions: [math]
 ---
 
-:::: tp-fill-blank-question { closed lang="en" }
+:::: tp-fill-blank-question { mode="closed" lang="en" }
 Answers
 :
   1. :latexmath:`\mathbb{R}_{+}`

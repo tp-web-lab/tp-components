@@ -45,8 +45,8 @@ function e(e, t) {
 function t(e) {
 	let t = [], n = "", r = 0;
 	for (let i of e) {
-		if (i === "(") r += 1;
-		else if (i === ")" && (--r, r < 0)) throw Error(`Parenthèse fermante inattendue : ${e}`);
+		if (i === "(" || i === "[") r += 1;
+		else if ((i === ")" || i === "]") && (--r, r < 0)) throw Error(`Parenthèse fermante inattendue : ${e}`);
 		i === "," && r === 0 ? (t.push(n.trim()), n = "") : n += i;
 	}
 	if (r !== 0) throw Error(`Parenthèse non fermée : ${e}`);
@@ -236,7 +236,74 @@ function h(e) {
 	return n;
 }
 function g(e) {
-	let t = h(e).map((e) => e.trim()).filter((e) => e.length > 0), a = t[0], o = {
+	let n = /^curve\s+([A-Za-z_]\w*)\s*=\s*(function|polar|parametric)\((.*)\)\s*(?:style\s*=\s*([\w-]+))?$/.exec(e);
+	if (!n) throw Error(`Invalid curve declaration: ${e}`);
+	let r = u(n, 1), a = u(n, 2), o = t(u(n, 3)), s = o.shift(), l = a === "function" ? "x" : "t";
+	if (s !== l) throw Error(`Curve ${r} requires parameter ${l}.`);
+	let d, f = o.at(-1);
+	if (f && /^range\s*=/.test(f)) {
+		o.pop();
+		let e = f.replace(/^range\s*=\s*/, "");
+		if (!/^\[[^[\]]*\]$/.test(e) || (d = i(e), !d.every(Number.isFinite) || d[0] >= d[1])) throw Error(`Invalid curve range: ${e}`);
+	}
+	if (o.length !== (a === "parametric" ? 2 : 1) || o.some((e) => !e || /[="']/.test(e))) throw Error(`Invalid expressions for curve ${r}.`);
+	let p = n[4], m = {
+		label: r,
+		...d ? { range: d } : {},
+		...p ? { lineStyle: c(p) } : {}
+	};
+	return a === "parametric" ? {
+		kind: "xyParametricGraph",
+		value: {
+			...m,
+			xExpression: o[0] ?? "",
+			yExpression: o[1] ?? ""
+		}
+	} : {
+		kind: a === "polar" ? "xyPolarGraph" : "xyFunctionGraph",
+		value: {
+			...m,
+			expression: o[0] ?? ""
+		}
+	};
+}
+function _(e) {
+	return e.replace(/^(\s*)(x-axis|y-axis|x-ticks|y-ticks|legend-x|legend-y|grid|x-axis-at|y-axis-at|samples|anim|t-axis|theta-axis|functions|points|vectors)\s*=\s*/gm, "$1$2 ");
+}
+function v(e) {
+	if (!Array.isArray(e)) throw Error("anim requires a list of names or name groups.");
+	let t = /* @__PURE__ */ new Set();
+	return e.map((e) => {
+		let n = Array.isArray(e) ? e : [e];
+		if (!n.length) throw Error("anim groups must not be empty.");
+		for (let e of n) {
+			if (typeof e != "string" || !e.trim() || t.has(e)) throw Error("anim requires unique, nonempty names across all steps.");
+			t.add(e);
+		}
+		return Array.isArray(e) ? [...n] : e;
+	});
+}
+function y(e) {
+	let t = "", n = !1;
+	for (let r = 0; r < e.length; r++) {
+		let i = e[r] ?? "";
+		if (n) t += i, i === "\\" && r + 1 < e.length ? t += e[++r] : i === "\"" && (n = !1);
+		else if (e.startsWith("<!--", r)) {
+			let n = e.indexOf("-->", r + 4);
+			if (n < 0) throw Error("Unterminated HTML comment: expected -->.");
+			t += e.slice(r, n + 3).replace(/[^\r\n]/g, " "), r = n + 2;
+		} else t += i, i === "\"" && (n = !0);
+	}
+	return t;
+}
+function b(e) {
+	e = y(e);
+	let a = h(_(e)).map((e) => e.trim()).filter((e) => e.length > 0);
+	(/^(?:label|title)\s*=|^(?:point|vector)\s/.test(a[0] ?? "") || /^\s*(?:x-axis|y-axis|x-ticks|y-ticks|legend-x|legend-y|grid|x-axis-at|y-axis-at|samples|anim|t-axis|theta-axis|functions|points|vectors)\s*=/.test(e.trimStart())) && a.unshift("xyFunctionGraph");
+	let o = a[0], c = a.filter((e) => /^curve\b/.test(e)).map(g);
+	!/^xy(?:Function|Polar|Parametric)Graph$/.test(e.trimStart().split("\n")[0]?.trim() ?? "") && c.length && (o === "xyFunctionGraph" || /^curve\b/.test(o ?? "")) && (o = c[0]?.kind, /^curve\b/.test(a[0] ?? "") && a.unshift(o ?? "xyFunctionGraph"));
+	for (let e of c) if (e.kind !== o) throw Error("All curves must use the graph coordinate kind.");
+	let f = [], b = [], x = !1, S = {
 		anim: [],
 		title: void 0,
 		legendX: void 0,
@@ -247,68 +314,114 @@ function g(e) {
 		yTicks: void 0,
 		points: [],
 		samples: 512
-	}, c = [0, Math.PI * 2], u = [0, Math.PI * 2], f = [], g = [];
-	for (let e of t.slice(1)) if (e.startsWith("title")) o.title = d(e);
-	else if (e.startsWith("legend-x")) o.legendX = d(e);
-	else if (e.startsWith("legend-y")) o.legendY = d(e);
+	}, C = [0, Math.PI * 2], w = [0, Math.PI * 2], T = [], E = [];
+	for (let e of a.slice(1)) if (!/^curve\b/.test(e)) if (/^(?:label|title)\s*=/.test(e)) {
+		if (x || S.title !== void 0) throw Error("Duplicate figure label.");
+		let t = JSON.parse(e.slice(e.indexOf("=") + 1).trim());
+		if (typeof t != "string") throw Error("Use label = \"Figure title\".");
+		S.title = t, x = !0;
+	} else if (/^point\b/.test(e)) {
+		let r = /^point\s+([A-Za-z_]\w*)\s*=\s*\((.*)\)$/.exec(e);
+		if (!r) throw Error(`Invalid point declaration: ${e}`);
+		let i = t(u(r, 2));
+		if (i.length !== 2) throw Error(`Expected two coordinates: ${e}`);
+		let [a, o] = i.map(n);
+		if (a === void 0 || o === void 0 || !Number.isFinite(a) || !Number.isFinite(o)) throw Error(`Invalid coordinates: ${e}`);
+		f.push({
+			label: u(r, 1),
+			x: a,
+			y: o
+		});
+	} else if (/^vector\b/.test(e)) {
+		let t = /^vector\s+([A-Za-z_]\w*)\s*=\s*vector\(\s*([A-Za-z_]\w*)\s*,\s*([A-Za-z_]\w*)\s*\)$/.exec(e);
+		if (!t) throw Error(`Use vector name = vector(A, B): ${e}`);
+		b.push({
+			label: u(t, 1),
+			from: u(t, 2),
+			to: u(t, 3)
+		});
+	} else if (e.startsWith("label")) throw Error("Use label = \"Figure title\".");
+	else if (e.startsWith("title")) {
+		if (x) throw Error("Duplicate figure label.");
+		S.title = d(e);
+	} else if (e.startsWith("legend-x")) S.legendX = d(e);
+	else if (e.startsWith("legend-y")) S.legendY = d(e);
 	else if (e.startsWith("grid")) {
 		let t = e.slice(4).trim();
 		if (t !== "both" && t !== "horizontal" && t !== "vertical" && t !== "none") throw Error(`Grille invalide : ${t}`);
-		o.grid = t;
-	} else if (e.startsWith("x-axis-at")) o.xAxisAt = n(e.slice(9).trim());
-	else if (e.startsWith("y-axis-at")) o.yAxisAt = n(e.slice(9).trim());
-	else if (e.startsWith("x-axis")) o.xAxis = i(e);
-	else if (e.startsWith("y-axis")) o.yAxis = i(e);
-	else if (e.startsWith("t-axis")) a === "xyPolarGraph" ? u = i(e) : c = i(e);
-	else if (e.startsWith("theta-axis")) u = i(e);
-	else if (e.startsWith("samples")) o.samples = Number(e.replace("samples", "").trim());
-	else if (e.startsWith("functions")) a === "xyParametricGraph" ? g = m(e) : f = p(e);
-	else if (/^anim\s/.test(e)) {
-		let t = JSON.parse(e.slice(4).trim());
-		if (!Array.isArray(t) || t.some((e) => typeof e != "string" || !e.trim()) || new Set(t).size !== t.length) throw Error("anim requires a list of unique, nonempty names.");
-		o.anim = t;
-	} else e.startsWith("vectors") ? o.vectors = l(e) : e.startsWith("points") ? o.points = s(e) : e.startsWith("x-ticks") ? o.xTicks = r(e) : e.startsWith("y-ticks") && (o.yTicks = r(e));
-	let _ = new Set([
-		...f,
-		...g,
-		...o.points ?? [],
-		...o.vectors ?? []
+		S.grid = t;
+	} else e.startsWith("x-axis-at") ? S.xAxisAt = n(e.slice(9).trim()) : e.startsWith("y-axis-at") ? S.yAxisAt = n(e.slice(9).trim()) : e.startsWith("x-axis") ? S.xAxis = i(e) : e.startsWith("y-axis") ? S.yAxis = i(e) : e.startsWith("t-axis") ? o === "xyPolarGraph" ? w = i(e) : C = i(e) : e.startsWith("theta-axis") ? w = i(e) : e.startsWith("samples") ? S.samples = Number(e.replace("samples", "").trim()) : e.startsWith("functions") ? o === "xyParametricGraph" ? E = m(e) : T = p(e) : /^anim\s/.test(e) ? S.anim = v(JSON.parse(e.slice(4).trim())) : e.startsWith("vectors") ? S.vectors = l(e) : e.startsWith("points") ? S.points = s(e) : e.startsWith("x-ticks") ? S.xTicks = r(e) : e.startsWith("y-ticks") && (S.yTicks = r(e));
+	let D = new Set([
+		...T,
+		...E,
+		...S.points ?? [],
+		...S.vectors ?? []
 	].map((e) => e.label));
-	for (let e of o.anim ?? []) if (!_.has(e)) throw Error(`Unknown anim object: ${e}`);
+	for (let e of [
+		...f,
+		...b,
+		...c.map((e) => e.value)
+	]) {
+		if (D.has(e.label)) throw Error(`Duplicate object name: ${e.label}`);
+		D.add(e.label);
+	}
+	for (let e of c) "expression" in e.value ? T.push(e.value) : E.push(e.value);
+	S.points = [...S.points ?? [], ...f];
+	let O = new Map(S.points.map((e) => [e.label, e]));
+	for (let e of b) {
+		let t = O.get(e.from), n = O.get(e.to);
+		if (!t || !n) throw Error(`Unknown endpoint for vector ${e.label}: ${t ? e.to : e.from}`);
+		let r = n.x - t.x, i = n.y - t.y;
+		if (![r, i].every(Number.isFinite)) throw Error(`Invalid vector: ${e.label}`);
+		S.vectors ??= [], S.vectors.push({
+			label: e.label,
+			x: t.x,
+			y: t.y,
+			dx: r,
+			dy: i
+		});
+	}
+	let k = new Set([
+		...T,
+		...E,
+		...S.points ?? [],
+		...S.vectors ?? []
+	].map((e) => e.label));
+	for (let e of (S.anim ?? []).flat()) if (!k.has(e)) throw Error(`Unknown anim object: ${e}`);
 	for (let [e, t, n] of [[
 		"x-axis-at",
-		o.xAxisAt,
-		o.yAxis
+		S.xAxisAt,
+		S.yAxis
 	], [
 		"y-axis-at",
-		o.yAxisAt,
-		o.xAxis
+		S.yAxisAt,
+		S.xAxis
 	]]) if (t !== void 0 && (!Number.isFinite(t) || t < Math.min(...n) || t > Math.max(...n))) throw Error(`Position invalide pour ${e} : ${t}`);
-	if (a === "xyFunctionGraph" && f.length === 0 && !o.vectors?.length) throw Error("Aucune fonction définie");
-	if (a === "xyParametricGraph" && g.length === 0 && !o.vectors?.length) throw Error("Aucune fonction paramétrique définie");
-	if (a === "xyPolarGraph" && f.length === 0 && !o.vectors?.length) throw Error("Aucune fonction polaire définie");
-	if (a === "xyFunctionGraph") return {
-		...o,
-		kind: a,
-		functions: f
+	if (o === "xyFunctionGraph" && T.length === 0 && !S.vectors?.length && !S.points?.length) throw Error("Aucune fonction définie");
+	if (o === "xyParametricGraph" && E.length === 0 && !S.vectors?.length && !S.points?.length) throw Error("Aucune fonction paramétrique définie");
+	if (o === "xyPolarGraph" && T.length === 0 && !S.vectors?.length && !S.points?.length) throw Error("Aucune fonction polaire définie");
+	if (o === "xyFunctionGraph") return {
+		...S,
+		kind: o,
+		functions: T
 	};
-	if (a === "xyParametricGraph") return {
-		...o,
-		kind: a,
-		tAxis: c,
-		functions: g
+	if (o === "xyParametricGraph") return {
+		...S,
+		kind: o,
+		tAxis: C,
+		functions: E
 	};
-	if (a === "xyPolarGraph") return {
-		...o,
-		kind: a,
-		thetaAxis: u,
-		functions: f
+	if (o === "xyPolarGraph") return {
+		...S,
+		kind: o,
+		thetaAxis: w,
+		functions: T
 	};
-	throw Error(`Type de graphe inconnu : ${a}`);
+	throw Error(`Type de graphe inconnu : ${o}`);
 }
 //#endregion
 //#region ../tp-utilities/dist/xy-graph/xy-graph-renderer.js
-function _(e = "solid") {
+function x(e = "solid") {
 	switch (e) {
 		case "solid": return "";
 		case "dashed": return "stroke-dasharray=\"6 4\"";
@@ -317,79 +430,79 @@ function _(e = "solid") {
 		default: throw Error(`Style de trait invalide : ${e}`);
 	}
 }
-var v = 900, y = 520, b = {
-	left: (v - y) / 2,
+var S = 900, C = 520, w = {
+	left: (S - C) / 2,
 	top: 70,
 	right: 710,
 	bottom: 590
-}, x = {
-	x: b.left,
-	y: b.bottom + 70,
+}, T = {
+	x: w.left,
+	y: w.bottom + 70,
 	lineHeight: 16,
 	itemGap: 8,
 	maxCharsPerLine: 100
-}, S = {
+}, E = {
 	radius: 4,
 	labelDx: 8,
 	labelDy: -8
-}, C = 9;
-function w(e) {
+}, D = 9;
+function O(e) {
 	return e.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;");
 }
-function T(e) {
+function k(e) {
 	return Math.abs(e) < 1e-10 ? "0" : Number(e.toFixed(2)).toString();
 }
-function E(e, t, n = C) {
+function A(e, t, n = D) {
 	return n < 2 ? [e] : Array.from({ length: n }, (r, i) => e + (t - e) * i / (n - 1));
 }
-function D(e) {
-	return e.xTicks ?? E(e.xAxis[0], e.xAxis[1]);
+function j(e) {
+	return e.xTicks ?? A(e.xAxis[0], e.xAxis[1]);
 }
-function O(e) {
-	return e.yTicks ?? E(e.yAxis[0], e.yAxis[1]);
-}
-function k(e, t) {
-	let [n, r] = t.xAxis;
-	return b.left + (e - n) / (r - n) * (b.right - b.left);
-}
-function A(e, t) {
-	let [n, r] = t.yAxis;
-	return b.bottom - (e - n) / (r - n) * (b.bottom - b.top);
-}
-function j(e, t) {
-	return e.x >= t.xAxis[0] && e.x <= t.xAxis[1] && e.y >= t.yAxis[0] && e.y <= t.yAxis[1];
-}
-function M(e, t) {
-	return e.kind === "xyPolarGraph" ? `r = ${t.expression}` : e.kind === "xyParametricGraph" ? t.expression : `y = ${t.expression}`;
+function M(e) {
+	return e.yTicks ?? A(e.yAxis[0], e.yAxis[1]);
 }
 function N(e, t) {
-	let n = M(e, t);
+	let [n, r] = t.xAxis;
+	return w.left + (e - n) / (r - n) * (w.right - w.left);
+}
+function P(e, t) {
+	let [n, r] = t.yAxis;
+	return w.bottom - (e - n) / (r - n) * (w.bottom - w.top);
+}
+function F(e, t) {
+	return e.x >= t.xAxis[0] && e.x <= t.xAxis[1] && e.y >= t.yAxis[0] && e.y <= t.yAxis[1];
+}
+function I(e, t) {
+	return e.kind === "xyPolarGraph" ? `r = ${t.expression}` : e.kind === "xyParametricGraph" ? t.expression : `y = ${t.expression}`;
+}
+function L(e, t) {
+	let n = I(e, t);
 	return t.label === t.expression || t.label === n ? n : `${t.label} : ${n}`;
 }
-function P(e) {
-	if (e.length <= x.maxCharsPerLine) return [e];
+function R(e) {
+	if (e.length <= T.maxCharsPerLine) return [e];
 	let t = e.replaceAll("; ", ";|").replaceAll(", ", ",|").replaceAll(" }", "|}").replaceAll(" [", "|[").replaceAll(" y=", "|y=").replaceAll(" r=", "|r=").replaceAll(" : ", " : |").split("|").filter((e) => e.length > 0), n = [], r = "";
 	for (let e of t) {
 		let t = r.length === 0 ? e : `${r} ${e}`;
-		t.length > x.maxCharsPerLine && r.length > 0 ? (n.push(r), r = e) : r = t;
+		t.length > T.maxCharsPerLine && r.length > 0 ? (n.push(r), r = e) : r = t;
 	}
 	return r.length > 0 && n.push(r), n.flatMap((e) => {
-		if (e.length <= x.maxCharsPerLine) return [e];
+		if (e.length <= T.maxCharsPerLine) return [e];
 		let t = [];
-		for (let n = 0; n < e.length; n += x.maxCharsPerLine) t.push(e.slice(n, n + x.maxCharsPerLine));
+		for (let n = 0; n < e.length; n += T.maxCharsPerLine) t.push(e.slice(n, n + T.maxCharsPerLine));
 		return t;
 	});
 }
-function F(e, t) {
-	return e.points.filter((e) => j(e, t)).map((e, n) => {
-		let r = k(e.x, t), i = A(e.y, t);
+function z(e, t) {
+	return e.points.filter((e) => F(e, t)).map((e, n) => {
+		let r = N(e.x, t), i = P(e.y, t);
 		return `${n === 0 ? "M" : "L"} ${r.toFixed(2)} ${i.toFixed(2)}`;
 	}).join(" ");
 }
-function I(e) {
-	let t = e.xAxisAt === void 0 ? b.bottom : A(e.xAxisAt, e), n = e.grid ?? "both";
-	return D(e).map((r) => {
-		let i = k(r, e);
+function B(e) {
+	let t = e.xAxisAt === void 0 ? w.bottom : P(e.xAxisAt, e), n = e.grid ?? "both";
+	return j(e).map((r) => {
+		let i = N(r, e);
 		return `
         <g>
           <line
@@ -402,9 +515,9 @@ function I(e) {
           ${n === "both" || n === "vertical" ? `
           <line
             x1="${i}"
-            y1="${b.top}"
+            y1="${w.top}"
             x2="${i}"
-            y2="${b.bottom}"
+            y2="${w.bottom}"
             data-xy-grid="vertical" stroke="#eee"
           />
           ` : ""}
@@ -413,15 +526,15 @@ function I(e) {
             y="${t + 22}"
             text-anchor="middle"
             font-size="11"
-          >${T(r)}</text>
+          >${k(r)}</text>
         </g>
       `;
 	}).join("");
 }
-function L(e) {
-	let t = e.yAxisAt === void 0 ? b.left : k(e.yAxisAt, e), n = e.grid ?? "both";
-	return O(e).map((r) => {
-		let i = A(r, e);
+function V(e) {
+	let t = e.yAxisAt === void 0 ? w.left : N(e.yAxisAt, e), n = e.grid ?? "both";
+	return M(e).map((r) => {
+		let i = P(r, e);
 		return `
         <g>
           <line
@@ -433,9 +546,9 @@ function L(e) {
           />
           ${n === "both" || n === "horizontal" ? `
           <line
-            x1="${b.left}"
+            x1="${w.left}"
             y1="${i}"
-            x2="${b.right}"
+            x2="${w.right}"
             y2="${i}"
             data-xy-grid="horizontal" stroke="#eee"
           />
@@ -445,22 +558,22 @@ function L(e) {
             y="${i + 4}"
             text-anchor="end"
             font-size="11"
-          >${T(r)}</text>
+          >${k(r)}</text>
         </g>
       `;
 	}).join("");
 }
-function R(e) {
-	return (e.points ?? []).filter((t) => j(t, e)).map((t) => {
-		let n = k(t.x, e), r = A(t.y, e), i = t.dx ?? S.labelDx, a = t.dy ?? S.labelDy, o = w(t.label);
+function H(e) {
+	return (e.points ?? []).filter((t) => F(t, e)).map((t) => {
+		let n = N(t.x, e), r = P(t.y, e), i = t.dx ?? E.labelDx, a = t.dy ?? E.labelDy, o = O(t.label);
 		return `
         <g class="tp-md-xy-graph-point-group" data-xy-object="${o}">
-          <title>${w(`${t.label} (${T(t.x)}, ${T(t.y)})`)}</title>
+          <title>${O(`${t.label} (${k(t.x)}, ${k(t.y)})`)}</title>
           <circle
             class="tp-md-xy-graph-point"
             cx="${n.toFixed(2)}"
             cy="${r.toFixed(2)}"
-            r="${S.radius}"
+            r="${E.radius}"
           />
           <text
             class="tp-md-xy-graph-point-label"
@@ -472,7 +585,7 @@ function R(e) {
       `;
 	}).join("");
 }
-function z(e, t) {
+function U(e, t) {
 	if (!e.vectors?.length) return "";
 	let n = e.vectors.map((n, r) => {
 		let { x: i, y: a, dx: o, dy: s } = n;
@@ -484,109 +597,109 @@ function z(e, t) {
 			i + o,
 			a + s
 		].every(Number.isFinite)) throw Error("Vecteur invalide");
-		let c = k(i, e), l = A(a, e), u = k(i + o, e), d = A(a + s, e), f = Math.hypot(u - c, d - l), p = Math.atan2(d - l, u - c) * 180 / Math.PI, m = Math.min(10, f / 2), h = `hsl(${(t + r) * 75 % 360} 70% 40%)`, g = _(n.lineStyle);
-		return `<g data-xy-object="${w(n.label)}" class="tp-md-xy-graph-vector" fill="${h}" stroke="${h}">
-   <title>${w(`${n.label}: (${i}, ${a}) → (${i + o}, ${a + s})`)}</title>
+		let c = N(i, e), l = P(a, e), u = N(i + o, e), d = P(a + s, e), f = Math.hypot(u - c, d - l), p = Math.atan2(d - l, u - c) * 180 / Math.PI, m = Math.min(10, f / 2), h = `hsl(${(t + r) * 75 % 360} 70% 40%)`, g = x(n.lineStyle);
+		return `<g data-xy-object="${O(n.label)}" class="tp-md-xy-graph-vector" fill="${h}" stroke="${h}">
+   <title>${O(`${n.label}: (${i}, ${a}) → (${i + o}, ${a + s})`)}</title>
    ${f === 0 ? `<circle cx="${c}" cy="${l}" r="3" />` : `<line x1="${c}" y1="${l}" x2="${u}" y2="${d}" stroke-width="2" ${g}/>
    <path d="M 0 0 L ${-m} ${-m / 2} L ${-m} ${m / 2} Z" transform="translate(${u} ${d}) rotate(${p})" stroke="none" />`}
-   <text x="${u + 8}" y="${d - 8}" font-size="12" stroke="none">${w(n.label)}</text>
+   <text x="${u + 8}" y="${d - 8}" font-size="12" stroke="none">${O(n.label)}</text>
   </g>`;
 	}).join("");
-	return `<svg x="${b.left}" y="${b.top}" width="${y}" height="${y}" viewBox="${b.left} ${b.top} ${y} ${y}" overflow="hidden">${n}</svg>`;
+	return `<svg x="${w.left}" y="${w.top}" width="${C}" height="${C}" viewBox="${w.left} ${w.top} ${C} ${C}" overflow="hidden">${n}</svg>`;
 }
-function B(e, t, n) {
-	let r = x.y;
+function W(e, t, n) {
+	let r = T.y;
 	for (let i of t.slice(0, n)) {
-		let t = P(N(e, i)).length;
-		r += t * x.lineHeight + x.itemGap;
+		let t = R(L(e, i)).length;
+		r += t * T.lineHeight + T.itemGap;
 	}
 	return r;
 }
-function V(e, t) {
+function G(e, t) {
 	return t.map((n, r) => {
-		let i = B(e, t, r), a = `hsl(${r * 75 % 360} 70% 40%)`, o = N(e, n), s = P(o).map((e, t) => `
+		let i = W(e, t, r), a = `hsl(${r * 75 % 360} 70% 40%)`, o = L(e, n), s = R(o).map((e, t) => `
             <text
-              x="${x.x + 42}"
-              y="${i + 4 + t * x.lineHeight}"
+              x="${T.x + 42}"
+              y="${i + 4 + t * T.lineHeight}"
               font-size="12"
-            >${w(e)}</text>
+            >${O(e)}</text>
           `).join("");
 		return `
-        <g data-xy-legend data-xy-object="${w(n.label)}">
-          <title>${w(o)}</title>
+        <g data-xy-legend data-xy-object="${O(n.label)}">
+          <title>${O(o)}</title>
           <line
-            x1="${x.x}"
+            x1="${T.x}"
             y1="${i}"
-            x2="${x.x + 32}"
+            x2="${T.x + 32}"
             y2="${i}"
             stroke="${a}"
             stroke-width="2"
-            ${_(n.lineStyle)}
+            ${x(n.lineStyle)}
           />
           ${s}
         </g>
       `;
 	}).join("");
 }
-function H(e, t) {
+function K(e, t) {
 	let n = e.xAxisAt ?? 0, r = e.yAxisAt ?? 0;
 	for (let [t, n] of [[e.xAxisAt, e.yAxis], [e.yAxisAt, e.xAxis]]) if (t !== void 0 && (!Number.isFinite(t) || t < Math.min(...n) || t > Math.max(...n))) throw Error("Position d'axe hors du domaine du graphe");
-	let i = k(r, e), a = A(n, e), o = e.yAxisAt === void 0 ? b.left : i, s = e.xAxisAt === void 0 ? b.bottom : a, c = t.map((t, n) => {
-		let r = F(t, e), i = `hsl(${n * 75 % 360} 70% 40%)`;
+	let i = N(r, e), a = P(n, e), o = e.yAxisAt === void 0 ? w.left : i, s = e.xAxisAt === void 0 ? w.bottom : a, c = t.map((t, n) => {
+		let r = z(t, e), i = `hsl(${n * 75 % 360} 70% 40%)`;
 		return `
-        <path data-xy-object="${w(t.label)}"
+        <path data-xy-object="${O(t.label)}"
           d="${r}"
           fill="none"
           stroke="${i}"
           stroke-width="2"
-            ${_(t.lineStyle)}
+            ${x(t.lineStyle)}
         />
       `;
-	}).join(""), l = o - 50, u = (b.top + b.bottom) / 2;
+	}).join(""), l = o - 50, u = (w.top + w.bottom) / 2;
 	return `
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 ${v} ${v}"
+      viewBox="0 0 ${S} ${S}"
       role="img"
     >
       <rect width="100%" height="100%" fill="white" />
 
-      ${e.title ? `<text x="${(b.left + b.right) / 2}" y="28" text-anchor="middle" font-size="36">${w(e.title)}</text>` : ""}
+      ${e.title ? `<text x="${(w.left + w.right) / 2}" y="28" text-anchor="middle" font-size="36">${O(e.title)}</text>` : ""}
 
       <rect
-        x="${b.left}"
-        y="${b.top}"
-        width="${b.right - b.left}"
-        height="${b.bottom - b.top}"
+        x="${w.left}"
+        y="${w.top}"
+        width="${w.right - w.left}"
+        height="${w.bottom - w.top}"
         fill="none"
         stroke="#999"
       />
 
-      ${I(e)}
-      ${L(e)}
+      ${B(e)}
+      ${V(e)}
 
-      ${e.yAxis[0] <= n && e.yAxis[1] >= n ? `<line data-xy-axis="horizontal" x1="${b.left}" y1="${a}" x2="${b.right}" y2="${a}" stroke="#aaa" />` : ""}
+      ${e.yAxis[0] <= n && e.yAxis[1] >= n ? `<line data-xy-axis="horizontal" x1="${w.left}" y1="${a}" x2="${w.right}" y2="${a}" stroke="#aaa" />` : ""}
 
-      ${e.xAxis[0] <= r && e.xAxis[1] >= r ? `<line data-xy-axis="vertical" x1="${i}" y1="${b.top}" x2="${i}" y2="${b.bottom}" stroke="#aaa" />` : ""}
+      ${e.xAxis[0] <= r && e.xAxis[1] >= r ? `<line data-xy-axis="vertical" x1="${i}" y1="${w.top}" x2="${i}" y2="${w.bottom}" stroke="#aaa" />` : ""}
 
       ${c}
-      ${z(e, t.length)}
-      ${R(e)}
+      ${U(e, t.length)}
+      ${H(e)}
 
-      ${e.legendX ? `<text data-xy-axis="horizontal" x="${(b.left + b.right) / 2}" y="${s + 44}" text-anchor="middle">${w(e.legendX)}</text>` : ""}
+      ${e.legendX ? `<text data-xy-axis="horizontal" x="${(w.left + w.right) / 2}" y="${s + 44}" text-anchor="middle">${O(e.legendX)}</text>` : ""}
 
       ${e.legendY ? `<text data-xy-axis="vertical"
               x="${l}"
               y="${u}"
               transform="rotate(-90 ${l} ${u})"
               text-anchor="middle"
-            >${w(e.legendY)}</text>` : ""}
+            >${O(e.legendY)}</text>` : ""}
 
-      ${V(e, t)}
+      ${G(e, t)}
     </svg>
   `;
 }
 //#endregion
-export { g as n, e as r, H as t };
+export { e as a, b as i, _ as n, v as r, K as t };
 
 //# sourceMappingURL=xy-graph.js.map

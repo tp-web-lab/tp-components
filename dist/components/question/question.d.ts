@@ -34,7 +34,8 @@ export interface TpQuestionSubmitDetail {
  *
  * @summary Semantic base container for question content.
  * @tagname tp-question
- * @attr {string} src = "" - URL of an external question definition.
+ * @attr {string} src = "" - URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition.
+ * @attr {string} mode = "mixed" - Blank mode: opened, closed, or mixed local choices.
  * @attr {boolean} open = false - Expands the question; absent by default, leaving only its title visible.
  * @event tp-question-submit - Fired when the submit icon button is activated.
  *   `detail: { value: unknown }`
@@ -51,6 +52,9 @@ export interface TpQuestionSubmitDetail {
  */
 export declare class TpQuestion extends TpBase {
     static get observedAttributes(): string[];
+    /** Global blank policy; missing and invalid values use local choices. */
+    get mode(): "opened" | "closed" | "mixed";
+    set mode(value: "opened" | "closed" | "mixed");
     /** Whether the question is expanded. Boolean attributes use presence only. */
     get open(): boolean;
     /** Expands or collapses the question without discarding answers. */
@@ -125,22 +129,27 @@ export declare class TpQuestion extends TpBase {
      * @summary Last submitted value.
      */
     private lastSubmittedValue;
+    private sourceRevision;
+    private inlineSourceLoaded;
+    /** Whether the question still needs its external definition. */
+    protected get usesExternalData(): boolean;
     /**
-     * URL to an external JSON file providing question data (items, answer, feedback).
-     * When set, the answer is never exposed in the HTML source.
+     * URL to an external question definition; its extension selects the parser.
      *
      * @summary External question data URL.
      */
     get src(): string;
     /**
-     * Fetches and parses JSON from `src`. Returns the parsed data, or `null` on
-     * error (error is automatically displayed inside the form section).
+     * Loads JSON data or initializes markup from `src`. Returns JSON data, or `null` on
+     * markup completion or error (errors appear inside the form section).
      *
      * @summary Loads external question data.
-     * @param src URL of the JSON file.
+     * @param src URL whose extension selects the source format.
      * @returns Parsed JSON or `null`.
      */
     protected fetchSrc(src: string): Promise<unknown | null>;
+    /** Initializes parsed markup through the same lifecycle as an inline question. */
+    private applySourceMarkup;
     /**
      * Displays an error message inside the form section and logs it to the console.
      * Called automatically by `fetchSrc` on network failure; also available for
@@ -222,12 +231,12 @@ export declare class TpQuestion extends TpBase {
     protected get formContent(): HTMLElement | null;
     /**
      * Called after `fetchSrc` succeeds. Override in subclasses to validate and
-     * apply the loaded JSON data. Default implementation is a no-op.
+     * apply the loaded JSON data. The base implementation loads common sections.
      *
      * @summary Hook invoked when external src data is ready.
      * @param _data Parsed JSON data from the `src` file.
      */
-    protected onSrcReady(_data: unknown): Promise<void>;
+    protected onSrcReady(data: unknown): Promise<void>;
     /**
      * Initiates the fetch → validate → apply pipeline when `src` is set.
      * Subclasses call this from their `connectedCallback` after `super.connectedCallback()`.
@@ -374,6 +383,9 @@ export declare class TpQuestion extends TpBase {
      * @summary Handles submit action.
      * @internal
      */
+    protected prepareSubmission(): void | Promise<void>;
+    private preparingSubmission;
+    private submissionRevision;
     private handleSubmitClick;
     /**
      * Validates the submitted value. Return a warning string to block submission, or null to allow.

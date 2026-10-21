@@ -71,6 +71,10 @@ Attributes
   | <code>pulse</code> | <code>boolean</code> | <code>false</code> | Makes the badge pulse to attract attention. |
   | <code>size</code> | <code>TpSizeType</code> | <code>m</code> | Badge size (`xxs`, `xs`, `s`, `m`, `l`, `xl`, or `xxl`). |
   | <code>variant</code> | <code>TpVariantType</code> | <code>neutral</code> | Visual variant (`success`, `danger`, `warning`, `info`, `neutral`, or `brand`). |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-badge>`]
 
 Methods
@@ -103,6 +107,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_badge.TpBadge.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -170,14 +170,14 @@ function ae$7(e) {
 function M$12(e) {
 	return e >= A$13.ZERO && e <= A$13.NINE;
 }
-function se$6(e) {
+function se$7(e) {
 	return e >= A$13.UPPER_A && e <= A$13.UPPER_F || e >= A$13.LOWER_A && e <= A$13.LOWER_F;
 }
-function ce$6(e) {
+function ce$7(e) {
 	return e >= A$13.UPPER_A && e <= A$13.UPPER_Z || e >= A$13.LOWER_A && e <= A$13.LOWER_Z || M$12(e);
 }
-function le$6(e) {
-	return e === A$13.EQUALS || ce$6(e);
+function le$7(e) {
+	return e === A$13.EQUALS || ce$7(e);
 }
 function de$6(e) {
 	let t = "", n = new ue$6(e, (e) => t += ie$7(e));
@@ -1695,7 +1695,7 @@ function Yr$2(e) {
 		"blockquote"
 	] });
 }
-var i$64, s$52, f$37, p$33, m$33, h$29, g$27, _$25, v$24, y$18, b$18, x$18, C$16, w$16, T$16, E$16, D$15, ee$7, O$15, te$7, k$14, ne$7, re$7, ie$7, A$13, oe$6, j$12, N$11, P$11, ue$6, pe$6, ge$6, L$11, xe$6, Se$6, Ce$6, Ee$5, De$5, Oe$5, Ae$5, Re$5, Ve$5, W$8, We$5, Ge$5, Qe$5, $e$5, et$5, tt$5, ot$5, st$5, ct$5, mt$5, gt$5, kt$5, At$5, jt$5, Mt$5, Lt$5, Vt$5, Wt$4, Yt$4, $t$4, nn$4, rn$4, un$4, dn$4, gn$3, _n$3, Dn$3, kn$3, An$3, jn$3, In$2, Vn$2, Z$6, Hn$2, Un$2, Wn$2, Gn$2, Kn$2, qn$2, Jn$2, Yn$2, Xn$2, Zn$2, Qn$2, $n$2, Q$6, er$2, tr$2, nr$2, rr$2, ir$2, ar$2, or$2, sr$2, cr$2, lr$2, ur$2, dr$2, fr$2, pr$2, hr$2, vr$2, yr$2, br$2, wr$2, Dr$2, Or$2, kr$2, Ar$2, Nr$2, Pr$2, Fr$2, Ir$2, Lr$2, Rr$2, zr$2, Br$2, Vr$2, Hr$2, Ur$2, Wr$2, Gr$2, Kr$2, qr$2, Jr$2, Xr$2, Zr$2;
+var i$64, s$52, f$37, p$33, m$33, h$29, g$27, _$25, v$24, y$18, b$18, x$18, C$16, w$16, T$16, E$16, D$15, ee$7, O$15, te$7, k$14, ne$7, re$7, ie$7, A$13, oe$7, j$12, N$11, P$11, ue$6, pe$6, ge$6, L$11, xe$6, Se$6, Ce$6, Ee$5, De$5, Oe$5, Ae$5, Re$5, Ve$5, W$8, We$5, Ge$5, Qe$5, $e$5, et$5, tt$5, ot$5, st$5, ct$5, mt$5, gt$5, kt$5, At$5, jt$5, Mt$5, Lt$5, Vt$5, Wt$4, Yt$4, $t$4, nn$4, rn$4, un$4, dn$4, gn$3, _n$3, Dn$3, kn$3, An$3, jn$3, In$2, Vn$2, Z$6, Hn$2, Un$2, Wn$2, Gn$2, Kn$2, qn$2, Jn$2, Yn$2, Xn$2, Zn$2, Qn$2, $n$2, Q$6, er$2, tr$2, nr$2, rr$2, ir$2, ar$2, or$2, sr$2, cr$2, lr$2, ur$2, dr$2, fr$2, pr$2, hr$2, vr$2, yr$2, br$2, wr$2, Dr$2, Or$2, kr$2, Ar$2, Nr$2, Pr$2, Fr$2, Ir$2, Lr$2, Rr$2, zr$2, Br$2, Vr$2, Hr$2, Ur$2, Wr$2, Gr$2, Kr$2, qr$2, Jr$2, Xr$2, Zr$2;
 var init_markdown_it = __esmMin((() => {
 	init_rolldown_runtime();
 	i$64 = {};
@@ -1852,7 +1852,7 @@ var init_markdown_it = __esmMin((() => {
 	(function(e) {
 		e[e.NUM = 35] = "NUM", e[e.SEMI = 59] = "SEMI", e[e.EQUALS = 61] = "EQUALS", e[e.ZERO = 48] = "ZERO", e[e.NINE = 57] = "NINE", e[e.LOWER_A = 97] = "LOWER_A", e[e.LOWER_F = 102] = "LOWER_F", e[e.LOWER_X = 120] = "LOWER_X", e[e.LOWER_Z = 122] = "LOWER_Z", e[e.UPPER_A = 65] = "UPPER_A", e[e.UPPER_F = 70] = "UPPER_F", e[e.UPPER_Z = 90] = "UPPER_Z";
 	})(A$13 ||= {});
-	oe$6 = 32;
+	oe$7 = 32;
 	(function(e) {
 		e[e.VALUE_LENGTH = 49152] = "VALUE_LENGTH", e[e.BRANCH_LENGTH = 16256] = "BRANCH_LENGTH", e[e.JUMP_TABLE = 127] = "JUMP_TABLE";
 	})(j$12 ||= {});
@@ -1879,7 +1879,7 @@ var init_markdown_it = __esmMin((() => {
 			}
 		}
 		stateNumericStart(e, t) {
-			return t >= e.length ? -1 : (e.charCodeAt(t) | oe$6) === A$13.LOWER_X ? (this.state = N$11.NumericHex, this.consumed += 1, this.stateNumericHex(e, t + 1)) : (this.state = N$11.NumericDecimal, this.stateNumericDecimal(e, t));
+			return t >= e.length ? -1 : (e.charCodeAt(t) | oe$7) === A$13.LOWER_X ? (this.state = N$11.NumericHex, this.consumed += 1, this.stateNumericHex(e, t + 1)) : (this.state = N$11.NumericDecimal, this.stateNumericDecimal(e, t));
 		}
 		addToNumericResult(e, t, n, r) {
 			if (t !== n) {
@@ -1891,7 +1891,7 @@ var init_markdown_it = __esmMin((() => {
 			let n = t;
 			for (; t < e.length;) {
 				let r = e.charCodeAt(t);
-				if (M$12(r) || se$6(r)) t += 1;
+				if (M$12(r) || se$7(r)) t += 1;
 				else return this.addToNumericResult(e, n, t, 16), this.emitNumericEntity(r, 3);
 			}
 			return this.addToNumericResult(e, n, t, 16), -1;
@@ -1916,7 +1916,7 @@ var init_markdown_it = __esmMin((() => {
 			let { decodeTree: n } = this, r = n[this.treeIndex], i = (r & j$12.VALUE_LENGTH) >> 14;
 			for (; t < e.length; t++, this.excess++) {
 				let a = e.charCodeAt(t);
-				if (this.treeIndex = fe$6(n, r, this.treeIndex + Math.max(1, i), a), this.treeIndex < 0) return this.result === 0 || this.decodeMode === P$11.Attribute && (i === 0 || le$6(a)) ? 0 : this.emitNotTerminatedNamedEntity();
+				if (this.treeIndex = fe$6(n, r, this.treeIndex + Math.max(1, i), a), this.treeIndex < 0) return this.result === 0 || this.decodeMode === P$11.Attribute && (i === 0 || le$7(a)) ? 0 : this.emitNotTerminatedNamedEntity();
 				if (r = n[this.treeIndex], i = (r & j$12.VALUE_LENGTH) >> 14, i !== 0) {
 					if (a === A$13.SEMI) return this.emitNamedEntityData(this.treeIndex, i, this.consumed + this.excess);
 					this.decodeMode !== P$11.Strict && (this.result = this.treeIndex, this.consumed += this.excess, this.excess = 0);
@@ -11579,7 +11579,7 @@ var init_speech_to_text$1 = __esmMin((() => {
 }));
 //#endregion
 //#region ../tp-markdown/dist/markdown/extensions/xy-plot/index.js
-var xy_plot_exports = /* @__PURE__ */ __exportAll({ default: () => $$5 });
+var xy_plot_exports = /* @__PURE__ */ __exportAll({ default: () => ie$6 });
 function t$36(e, t) {
 	if (!/^[0-9+\-*/().,\s_a-zA-Z]+$/.test(e)) throw Error(`Forbidden expression: ${e}`);
 	let n = {
@@ -11624,8 +11624,8 @@ function t$36(e, t) {
 function n$39(e) {
 	let t = [], n = "", r = 0;
 	for (let i of e) {
-		if (i === "(") r += 1;
-		else if (i === ")" && (--r, r < 0)) throw Error(`Parenthèse fermante inattendue : ${e}`);
+		if (i === "(" || i === "[") r += 1;
+		else if ((i === ")" || i === "]") && (--r, r < 0)) throw Error(`Parenthèse fermante inattendue : ${e}`);
 		i === "," && r === 0 ? (t.push(n.trim()), n = "") : n += i;
 	}
 	if (r !== 0) throw Error(`Parenthèse non fermée : ${e}`);
@@ -11815,7 +11815,74 @@ function g$16(e) {
 	return n;
 }
 function _$16(e) {
-	let t = g$16(e).map((e) => e.trim()).filter((e) => e.length > 0), n = t[0], o = {
+	let t = /^curve\s+([A-Za-z_]\w*)\s*=\s*(function|polar|parametric)\((.*)\)\s*(?:style\s*=\s*([\w-]+))?$/.exec(e);
+	if (!t) throw Error(`Invalid curve declaration: ${e}`);
+	let r = d$26(t, 1), i = d$26(t, 2), o = n$39(d$26(t, 3)), s = o.shift(), c = i === "function" ? "x" : "t";
+	if (s !== c) throw Error(`Curve ${r} requires parameter ${c}.`);
+	let u, f = o.at(-1);
+	if (f && /^range\s*=/.test(f)) {
+		o.pop();
+		let e = f.replace(/^range\s*=\s*/, "");
+		if (!/^\[[^[\]]*\]$/.test(e) || (u = a$38(e), !u.every(Number.isFinite) || u[0] >= u[1])) throw Error(`Invalid curve range: ${e}`);
+	}
+	if (o.length !== (i === "parametric" ? 2 : 1) || o.some((e) => !e || /[="']/.test(e))) throw Error(`Invalid expressions for curve ${r}.`);
+	let p = t[4], m = {
+		label: r,
+		...u ? { range: u } : {},
+		...p ? { lineStyle: l$30(p) } : {}
+	};
+	return i === "parametric" ? {
+		kind: "xyParametricGraph",
+		value: {
+			...m,
+			xExpression: o[0] ?? "",
+			yExpression: o[1] ?? ""
+		}
+	} : {
+		kind: i === "polar" ? "xyPolarGraph" : "xyFunctionGraph",
+		value: {
+			...m,
+			expression: o[0] ?? ""
+		}
+	};
+}
+function ee$6(e) {
+	return e.replace(/^(\s*)(x-axis|y-axis|x-ticks|y-ticks|legend-x|legend-y|grid|x-axis-at|y-axis-at|samples|anim|t-axis|theta-axis|functions|points|vectors)\s*=\s*/gm, "$1$2 ");
+}
+function v$16(e) {
+	if (!Array.isArray(e)) throw Error("anim requires a list of names or name groups.");
+	let t = /* @__PURE__ */ new Set();
+	return e.map((e) => {
+		let n = Array.isArray(e) ? e : [e];
+		if (!n.length) throw Error("anim groups must not be empty.");
+		for (let e of n) {
+			if (typeof e != "string" || !e.trim() || t.has(e)) throw Error("anim requires unique, nonempty names across all steps.");
+			t.add(e);
+		}
+		return Array.isArray(e) ? [...n] : e;
+	});
+}
+function y$12(e) {
+	let t = "", n = !1;
+	for (let r = 0; r < e.length; r++) {
+		let i = e[r] ?? "";
+		if (n) t += i, i === "\\" && r + 1 < e.length ? t += e[++r] : i === "\"" && (n = !1);
+		else if (e.startsWith("<!--", r)) {
+			let n = e.indexOf("-->", r + 4);
+			if (n < 0) throw Error("Unterminated HTML comment: expected -->.");
+			t += e.slice(r, n + 3).replace(/[^\r\n]/g, " "), r = n + 2;
+		} else t += i, i === "\"" && (n = !0);
+	}
+	return t;
+}
+function b$12(e) {
+	e = y$12(e);
+	let t = g$16(ee$6(e)).map((e) => e.trim()).filter((e) => e.length > 0);
+	(/^(?:label|title)\s*=|^(?:point|vector)\s/.test(t[0] ?? "") || /^\s*(?:x-axis|y-axis|x-ticks|y-ticks|legend-x|legend-y|grid|x-axis-at|y-axis-at|samples|anim|t-axis|theta-axis|functions|points|vectors)\s*=/.test(e.trimStart())) && t.unshift("xyFunctionGraph");
+	let o = t[0], s = t.filter((e) => /^curve\b/.test(e)).map(_$16);
+	!/^xy(?:Function|Polar|Parametric)Graph$/.test(e.trimStart().split("\n")[0]?.trim() ?? "") && s.length && (o === "xyFunctionGraph" || /^curve\b/.test(o ?? "")) && (o = s[0]?.kind, /^curve\b/.test(t[0] ?? "") && t.unshift(o ?? "xyFunctionGraph"));
+	for (let e of s) if (e.kind !== o) throw Error("All curves must use the graph coordinate kind.");
+	let l = [], p = [], b = !1, x = {
 		anim: [],
 		title: void 0,
 		legendX: void 0,
@@ -11826,66 +11893,112 @@ function _$16(e) {
 		yTicks: void 0,
 		points: [],
 		samples: 512
-	}, s = [0, Math.PI * 2], l = [0, Math.PI * 2], d = [], p = [];
-	for (let e of t.slice(1)) if (e.startsWith("title")) o.title = f$24(e);
-	else if (e.startsWith("legend-x")) o.legendX = f$24(e);
-	else if (e.startsWith("legend-y")) o.legendY = f$24(e);
+	}, S = [0, Math.PI * 2], C = [0, Math.PI * 2], w = [], T = [];
+	for (let e of t.slice(1)) if (!/^curve\b/.test(e)) if (/^(?:label|title)\s*=/.test(e)) {
+		if (b || x.title !== void 0) throw Error("Duplicate figure label.");
+		let t = JSON.parse(e.slice(e.indexOf("=") + 1).trim());
+		if (typeof t != "string") throw Error("Use label = \"Figure title\".");
+		x.title = t, b = !0;
+	} else if (/^point\b/.test(e)) {
+		let t = /^point\s+([A-Za-z_]\w*)\s*=\s*\((.*)\)$/.exec(e);
+		if (!t) throw Error(`Invalid point declaration: ${e}`);
+		let i = n$39(d$26(t, 2));
+		if (i.length !== 2) throw Error(`Expected two coordinates: ${e}`);
+		let [a, o] = i.map(r$38);
+		if (a === void 0 || o === void 0 || !Number.isFinite(a) || !Number.isFinite(o)) throw Error(`Invalid coordinates: ${e}`);
+		l.push({
+			label: d$26(t, 1),
+			x: a,
+			y: o
+		});
+	} else if (/^vector\b/.test(e)) {
+		let t = /^vector\s+([A-Za-z_]\w*)\s*=\s*vector\(\s*([A-Za-z_]\w*)\s*,\s*([A-Za-z_]\w*)\s*\)$/.exec(e);
+		if (!t) throw Error(`Use vector name = vector(A, B): ${e}`);
+		p.push({
+			label: d$26(t, 1),
+			from: d$26(t, 2),
+			to: d$26(t, 3)
+		});
+	} else if (e.startsWith("label")) throw Error("Use label = \"Figure title\".");
+	else if (e.startsWith("title")) {
+		if (b) throw Error("Duplicate figure label.");
+		x.title = f$24(e);
+	} else if (e.startsWith("legend-x")) x.legendX = f$24(e);
+	else if (e.startsWith("legend-y")) x.legendY = f$24(e);
 	else if (e.startsWith("grid")) {
 		let t = e.slice(4).trim();
 		if (t !== "both" && t !== "horizontal" && t !== "vertical" && t !== "none") throw Error(`Grille invalide : ${t}`);
-		o.grid = t;
-	} else if (e.startsWith("x-axis-at")) o.xAxisAt = r$38(e.slice(9).trim());
-	else if (e.startsWith("y-axis-at")) o.yAxisAt = r$38(e.slice(9).trim());
-	else if (e.startsWith("x-axis")) o.xAxis = a$38(e);
-	else if (e.startsWith("y-axis")) o.yAxis = a$38(e);
-	else if (e.startsWith("t-axis")) n === "xyPolarGraph" ? l = a$38(e) : s = a$38(e);
-	else if (e.startsWith("theta-axis")) l = a$38(e);
-	else if (e.startsWith("samples")) o.samples = Number(e.replace("samples", "").trim());
-	else if (e.startsWith("functions")) n === "xyParametricGraph" ? p = h$17(e) : d = m$21(e);
-	else if (/^anim\s/.test(e)) {
-		let t = JSON.parse(e.slice(4).trim());
-		if (!Array.isArray(t) || t.some((e) => typeof e != "string" || !e.trim()) || new Set(t).size !== t.length) throw Error("anim requires a list of unique, nonempty names.");
-		o.anim = t;
-	} else e.startsWith("vectors") ? o.vectors = u$27(e) : e.startsWith("points") ? o.points = c$31(e) : e.startsWith("x-ticks") ? o.xTicks = i$40(e) : e.startsWith("y-ticks") && (o.yTicks = i$40(e));
-	let _ = new Set([
-		...d,
-		...p,
-		...o.points ?? [],
-		...o.vectors ?? []
+		x.grid = t;
+	} else e.startsWith("x-axis-at") ? x.xAxisAt = r$38(e.slice(9).trim()) : e.startsWith("y-axis-at") ? x.yAxisAt = r$38(e.slice(9).trim()) : e.startsWith("x-axis") ? x.xAxis = a$38(e) : e.startsWith("y-axis") ? x.yAxis = a$38(e) : e.startsWith("t-axis") ? o === "xyPolarGraph" ? C = a$38(e) : S = a$38(e) : e.startsWith("theta-axis") ? C = a$38(e) : e.startsWith("samples") ? x.samples = Number(e.replace("samples", "").trim()) : e.startsWith("functions") ? o === "xyParametricGraph" ? T = h$17(e) : w = m$21(e) : /^anim\s/.test(e) ? x.anim = v$16(JSON.parse(e.slice(4).trim())) : e.startsWith("vectors") ? x.vectors = u$27(e) : e.startsWith("points") ? x.points = c$31(e) : e.startsWith("x-ticks") ? x.xTicks = i$40(e) : e.startsWith("y-ticks") && (x.yTicks = i$40(e));
+	let E = new Set([
+		...w,
+		...T,
+		...x.points ?? [],
+		...x.vectors ?? []
 	].map((e) => e.label));
-	for (let e of o.anim ?? []) if (!_.has(e)) throw Error(`Unknown anim object: ${e}`);
+	for (let e of [
+		...l,
+		...p,
+		...s.map((e) => e.value)
+	]) {
+		if (E.has(e.label)) throw Error(`Duplicate object name: ${e.label}`);
+		E.add(e.label);
+	}
+	for (let e of s) "expression" in e.value ? w.push(e.value) : T.push(e.value);
+	x.points = [...x.points ?? [], ...l];
+	let D = new Map(x.points.map((e) => [e.label, e]));
+	for (let e of p) {
+		let t = D.get(e.from), n = D.get(e.to);
+		if (!t || !n) throw Error(`Unknown endpoint for vector ${e.label}: ${t ? e.to : e.from}`);
+		let r = n.x - t.x, i = n.y - t.y;
+		if (![r, i].every(Number.isFinite)) throw Error(`Invalid vector: ${e.label}`);
+		x.vectors ??= [], x.vectors.push({
+			label: e.label,
+			x: t.x,
+			y: t.y,
+			dx: r,
+			dy: i
+		});
+	}
+	let O = new Set([
+		...w,
+		...T,
+		...x.points ?? [],
+		...x.vectors ?? []
+	].map((e) => e.label));
+	for (let e of (x.anim ?? []).flat()) if (!O.has(e)) throw Error(`Unknown anim object: ${e}`);
 	for (let [e, t, n] of [[
 		"x-axis-at",
-		o.xAxisAt,
-		o.yAxis
+		x.xAxisAt,
+		x.yAxis
 	], [
 		"y-axis-at",
-		o.yAxisAt,
-		o.xAxis
+		x.yAxisAt,
+		x.xAxis
 	]]) if (t !== void 0 && (!Number.isFinite(t) || t < Math.min(...n) || t > Math.max(...n))) throw Error(`Position invalide pour ${e} : ${t}`);
-	if (n === "xyFunctionGraph" && d.length === 0 && !o.vectors?.length) throw Error("Aucune fonction définie");
-	if (n === "xyParametricGraph" && p.length === 0 && !o.vectors?.length) throw Error("Aucune fonction paramétrique définie");
-	if (n === "xyPolarGraph" && d.length === 0 && !o.vectors?.length) throw Error("Aucune fonction polaire définie");
-	if (n === "xyFunctionGraph") return {
-		...o,
-		kind: n,
-		functions: d
+	if (o === "xyFunctionGraph" && w.length === 0 && !x.vectors?.length && !x.points?.length) throw Error("Aucune fonction définie");
+	if (o === "xyParametricGraph" && T.length === 0 && !x.vectors?.length && !x.points?.length) throw Error("Aucune fonction paramétrique définie");
+	if (o === "xyPolarGraph" && w.length === 0 && !x.vectors?.length && !x.points?.length) throw Error("Aucune fonction polaire définie");
+	if (o === "xyFunctionGraph") return {
+		...x,
+		kind: o,
+		functions: w
 	};
-	if (n === "xyParametricGraph") return {
-		...o,
-		kind: n,
-		tAxis: s,
-		functions: p
+	if (o === "xyParametricGraph") return {
+		...x,
+		kind: o,
+		tAxis: S,
+		functions: T
 	};
-	if (n === "xyPolarGraph") return {
-		...o,
-		kind: n,
-		thetaAxis: l,
-		functions: d
+	if (o === "xyPolarGraph") return {
+		...x,
+		kind: o,
+		thetaAxis: C,
+		functions: w
 	};
-	throw Error(`Type de graphe inconnu : ${n}`);
+	throw Error(`Type de graphe inconnu : ${o}`);
 }
-function v$16(e = "solid") {
+function x$12(e = "solid") {
 	switch (e) {
 		case "solid": return "";
 		case "dashed": return "stroke-dasharray=\"6 4\"";
@@ -11894,63 +12007,63 @@ function v$16(e = "solid") {
 		default: throw Error(`Style de trait invalide : ${e}`);
 	}
 }
-function T$11(e) {
+function O$11(e) {
 	return e.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;");
 }
-function E$11(e) {
+function k$10(e) {
 	return Math.abs(e) < 1e-10 ? "0" : Number(e.toFixed(2)).toString();
 }
-function D$11(e, t, n = w$11) {
+function A$10(e, t, n = D$11) {
 	return n < 2 ? [e] : Array.from({ length: n }, (r, i) => e + (t - e) * i / (n - 1));
 }
-function O$11(e) {
-	return e.xTicks ?? D$11(e.xAxis[0], e.xAxis[1]);
+function j$9(e) {
+	return e.xTicks ?? A$10(e.xAxis[0], e.xAxis[1]);
 }
-function k$10(e) {
-	return e.yTicks ?? D$11(e.yAxis[0], e.yAxis[1]);
-}
-function A$10(e, t) {
-	let [n, r] = t.xAxis;
-	return x$12.left + (e - n) / (r - n) * (x$12.right - x$12.left);
-}
-function j$9(e, t) {
-	let [n, r] = t.yAxis;
-	return x$12.bottom - (e - n) / (r - n) * (x$12.bottom - x$12.top);
-}
-function M$9(e, t) {
-	return e.x >= t.xAxis[0] && e.x <= t.xAxis[1] && e.y >= t.yAxis[0] && e.y <= t.yAxis[1];
+function M$9(e) {
+	return e.yTicks ?? A$10(e.yAxis[0], e.yAxis[1]);
 }
 function N$9(e, t) {
-	return e.kind === "xyPolarGraph" ? `r = ${t.expression}` : e.kind === "xyParametricGraph" ? t.expression : `y = ${t.expression}`;
+	let [n, r] = t.xAxis;
+	return w$11.left + (e - n) / (r - n) * (w$11.right - w$11.left);
 }
 function P$9(e, t) {
-	let n = N$9(e, t);
+	let [n, r] = t.yAxis;
+	return w$11.bottom - (e - n) / (r - n) * (w$11.bottom - w$11.top);
+}
+function F$9(e, t) {
+	return e.x >= t.xAxis[0] && e.x <= t.xAxis[1] && e.y >= t.yAxis[0] && e.y <= t.yAxis[1];
+}
+function te$6(e, t) {
+	return e.kind === "xyPolarGraph" ? `r = ${t.expression}` : e.kind === "xyParametricGraph" ? t.expression : `y = ${t.expression}`;
+}
+function I$9(e, t) {
+	let n = te$6(e, t);
 	return t.label === t.expression || t.label === n ? n : `${t.label} : ${n}`;
 }
-function F$9(e) {
-	if (e.length <= S$11.maxCharsPerLine) return [e];
+function L$9(e) {
+	if (e.length <= T$11.maxCharsPerLine) return [e];
 	let t = e.replaceAll("; ", ";|").replaceAll(", ", ",|").replaceAll(" }", "|}").replaceAll(" [", "|[").replaceAll(" y=", "|y=").replaceAll(" r=", "|r=").replaceAll(" : ", " : |").split("|").filter((e) => e.length > 0), n = [], r = "";
 	for (let e of t) {
 		let t = r.length === 0 ? e : `${r} ${e}`;
-		t.length > S$11.maxCharsPerLine && r.length > 0 ? (n.push(r), r = e) : r = t;
+		t.length > T$11.maxCharsPerLine && r.length > 0 ? (n.push(r), r = e) : r = t;
 	}
 	return r.length > 0 && n.push(r), n.flatMap((e) => {
-		if (e.length <= S$11.maxCharsPerLine) return [e];
+		if (e.length <= T$11.maxCharsPerLine) return [e];
 		let t = [];
-		for (let n = 0; n < e.length; n += S$11.maxCharsPerLine) t.push(e.slice(n, n + S$11.maxCharsPerLine));
+		for (let n = 0; n < e.length; n += T$11.maxCharsPerLine) t.push(e.slice(n, n + T$11.maxCharsPerLine));
 		return t;
 	});
 }
-function I$9(e, t) {
-	return e.points.filter((e) => M$9(e, t)).map((e, n) => {
-		let r = A$10(e.x, t), i = j$9(e.y, t);
+function R$8(e, t) {
+	return e.points.filter((e) => F$9(e, t)).map((e, n) => {
+		let r = N$9(e.x, t), i = P$9(e.y, t);
 		return `${n === 0 ? "M" : "L"} ${r.toFixed(2)} ${i.toFixed(2)}`;
 	}).join(" ");
 }
-function L$9(e) {
-	let t = e.xAxisAt === void 0 ? x$12.bottom : j$9(e.xAxisAt, e), n = e.grid ?? "both";
-	return O$11(e).map((r) => {
-		let i = A$10(r, e);
+function z$8(e) {
+	let t = e.xAxisAt === void 0 ? w$11.bottom : P$9(e.xAxisAt, e), n = e.grid ?? "both";
+	return j$9(e).map((r) => {
+		let i = N$9(r, e);
 		return `
         <g>
           <line
@@ -11963,9 +12076,9 @@ function L$9(e) {
           ${n === "both" || n === "vertical" ? `
           <line
             x1="${i}"
-            y1="${x$12.top}"
+            y1="${w$11.top}"
             x2="${i}"
-            y2="${x$12.bottom}"
+            y2="${w$11.bottom}"
             data-xy-grid="vertical" stroke="#eee"
           />
           ` : ""}
@@ -11974,15 +12087,15 @@ function L$9(e) {
             y="${t + 22}"
             text-anchor="middle"
             font-size="11"
-          >${E$11(r)}</text>
+          >${k$10(r)}</text>
         </g>
       `;
 	}).join("");
 }
-function R$8(e) {
-	let t = e.yAxisAt === void 0 ? x$12.left : A$10(e.yAxisAt, e), n = e.grid ?? "both";
-	return k$10(e).map((r) => {
-		let i = j$9(r, e);
+function B$8(e) {
+	let t = e.yAxisAt === void 0 ? w$11.left : N$9(e.yAxisAt, e), n = e.grid ?? "both";
+	return M$9(e).map((r) => {
+		let i = P$9(r, e);
 		return `
         <g>
           <line
@@ -11994,9 +12107,9 @@ function R$8(e) {
           />
           ${n === "both" || n === "horizontal" ? `
           <line
-            x1="${x$12.left}"
+            x1="${w$11.left}"
             y1="${i}"
-            x2="${x$12.right}"
+            x2="${w$11.right}"
             y2="${i}"
             data-xy-grid="horizontal" stroke="#eee"
           />
@@ -12006,22 +12119,22 @@ function R$8(e) {
             y="${i + 4}"
             text-anchor="end"
             font-size="11"
-          >${E$11(r)}</text>
+          >${k$10(r)}</text>
         </g>
       `;
 	}).join("");
 }
-function z$8(e) {
-	return (e.points ?? []).filter((t) => M$9(t, e)).map((t) => {
-		let n = A$10(t.x, e), r = j$9(t.y, e), i = t.dx ?? C$11.labelDx, a = t.dy ?? C$11.labelDy, o = T$11(t.label);
+function V$8(e) {
+	return (e.points ?? []).filter((t) => F$9(t, e)).map((t) => {
+		let n = N$9(t.x, e), r = P$9(t.y, e), i = t.dx ?? E$11.labelDx, a = t.dy ?? E$11.labelDy, o = O$11(t.label);
 		return `
         <g class="tp-md-xy-graph-point-group" data-xy-object="${o}">
-          <title>${T$11(`${t.label} (${E$11(t.x)}, ${E$11(t.y)})`)}</title>
+          <title>${O$11(`${t.label} (${k$10(t.x)}, ${k$10(t.y)})`)}</title>
           <circle
             class="tp-md-xy-graph-point"
             cx="${n.toFixed(2)}"
             cy="${r.toFixed(2)}"
-            r="${C$11.radius}"
+            r="${E$11.radius}"
           />
           <text
             class="tp-md-xy-graph-point-label"
@@ -12033,7 +12146,7 @@ function z$8(e) {
       `;
 	}).join("");
 }
-function B$8(e, t) {
+function H$7(e, t) {
 	if (!e.vectors?.length) return "";
 	let n = e.vectors.map((n, r) => {
 		let { x: i, y: a, dx: o, dy: s } = n;
@@ -12045,119 +12158,119 @@ function B$8(e, t) {
 			i + o,
 			a + s
 		].every(Number.isFinite)) throw Error("Vecteur invalide");
-		let c = A$10(i, e), l = j$9(a, e), u = A$10(i + o, e), d = j$9(a + s, e), f = Math.hypot(u - c, d - l), p = Math.atan2(d - l, u - c) * 180 / Math.PI, m = Math.min(10, f / 2), h = `hsl(${(t + r) * 75 % 360} 70% 40%)`, g = v$16(n.lineStyle);
-		return `<g data-xy-object="${T$11(n.label)}" class="tp-md-xy-graph-vector" fill="${h}" stroke="${h}">
-   <title>${T$11(`${n.label}: (${i}, ${a}) → (${i + o}, ${a + s})`)}</title>
+		let c = N$9(i, e), l = P$9(a, e), u = N$9(i + o, e), d = P$9(a + s, e), f = Math.hypot(u - c, d - l), p = Math.atan2(d - l, u - c) * 180 / Math.PI, m = Math.min(10, f / 2), h = `hsl(${(t + r) * 75 % 360} 70% 40%)`, g = x$12(n.lineStyle);
+		return `<g data-xy-object="${O$11(n.label)}" class="tp-md-xy-graph-vector" fill="${h}" stroke="${h}">
+   <title>${O$11(`${n.label}: (${i}, ${a}) → (${i + o}, ${a + s})`)}</title>
    ${f === 0 ? `<circle cx="${c}" cy="${l}" r="3" />` : `<line x1="${c}" y1="${l}" x2="${u}" y2="${d}" stroke-width="2" ${g}/>
    <path d="M 0 0 L ${-m} ${-m / 2} L ${-m} ${m / 2} Z" transform="translate(${u} ${d}) rotate(${p})" stroke="none" />`}
-   <text x="${u + 8}" y="${d - 8}" font-size="12" stroke="none">${T$11(n.label)}</text>
+   <text x="${u + 8}" y="${d - 8}" font-size="12" stroke="none">${O$11(n.label)}</text>
   </g>`;
 	}).join("");
-	return `<svg x="${x$12.left}" y="${x$12.top}" width="${b$12}" height="${b$12}" viewBox="${x$12.left} ${x$12.top} ${b$12} ${b$12}" overflow="hidden">${n}</svg>`;
+	return `<svg x="${w$11.left}" y="${w$11.top}" width="${C$11}" height="${C$11}" viewBox="${w$11.left} ${w$11.top} ${C$11} ${C$11}" overflow="hidden">${n}</svg>`;
 }
-function V$8(e, t, n) {
-	let r = S$11.y;
+function U$7(e, t, n) {
+	let r = T$11.y;
 	for (let i of t.slice(0, n)) {
-		let t = F$9(P$9(e, i)).length;
-		r += t * S$11.lineHeight + S$11.itemGap;
+		let t = L$9(I$9(e, i)).length;
+		r += t * T$11.lineHeight + T$11.itemGap;
 	}
 	return r;
 }
-function H$7(e, t) {
+function W$7(e, t) {
 	return t.map((n, r) => {
-		let i = V$8(e, t, r), a = `hsl(${r * 75 % 360} 70% 40%)`, o = P$9(e, n), s = F$9(o).map((e, t) => `
+		let i = U$7(e, t, r), a = `hsl(${r * 75 % 360} 70% 40%)`, o = I$9(e, n), s = L$9(o).map((e, t) => `
             <text
-              x="${S$11.x + 42}"
-              y="${i + 4 + t * S$11.lineHeight}"
+              x="${T$11.x + 42}"
+              y="${i + 4 + t * T$11.lineHeight}"
               font-size="12"
-            >${T$11(e)}</text>
+            >${O$11(e)}</text>
           `).join("");
 		return `
-        <g data-xy-legend data-xy-object="${T$11(n.label)}">
-          <title>${T$11(o)}</title>
+        <g data-xy-legend data-xy-object="${O$11(n.label)}">
+          <title>${O$11(o)}</title>
           <line
-            x1="${S$11.x}"
+            x1="${T$11.x}"
             y1="${i}"
-            x2="${S$11.x + 32}"
+            x2="${T$11.x + 32}"
             y2="${i}"
             stroke="${a}"
             stroke-width="2"
-            ${v$16(n.lineStyle)}
+            ${x$12(n.lineStyle)}
           />
           ${s}
         </g>
       `;
 	}).join("");
 }
-function U$7(e, t) {
+function G$7(e, t) {
 	let n = e.xAxisAt ?? 0, r = e.yAxisAt ?? 0;
 	for (let [t, n] of [[e.xAxisAt, e.yAxis], [e.yAxisAt, e.xAxis]]) if (t !== void 0 && (!Number.isFinite(t) || t < Math.min(...n) || t > Math.max(...n))) throw Error("Position d'axe hors du domaine du graphe");
-	let i = A$10(r, e), a = j$9(n, e), o = e.yAxisAt === void 0 ? x$12.left : i, s = e.xAxisAt === void 0 ? x$12.bottom : a, c = t.map((t, n) => {
-		let r = I$9(t, e), i = `hsl(${n * 75 % 360} 70% 40%)`;
+	let i = N$9(r, e), a = P$9(n, e), o = e.yAxisAt === void 0 ? w$11.left : i, s = e.xAxisAt === void 0 ? w$11.bottom : a, c = t.map((t, n) => {
+		let r = R$8(t, e), i = `hsl(${n * 75 % 360} 70% 40%)`;
 		return `
-        <path data-xy-object="${T$11(t.label)}"
+        <path data-xy-object="${O$11(t.label)}"
           d="${r}"
           fill="none"
           stroke="${i}"
           stroke-width="2"
-            ${v$16(t.lineStyle)}
+            ${x$12(t.lineStyle)}
         />
       `;
-	}).join(""), l = o - 50, u = (x$12.top + x$12.bottom) / 2;
+	}).join(""), l = o - 50, u = (w$11.top + w$11.bottom) / 2;
 	return `
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 ${y$12} ${y$12}"
+      viewBox="0 0 ${S$11} ${S$11}"
       role="img"
     >
       <rect width="100%" height="100%" fill="white" />
 
-      ${e.title ? `<text x="${(x$12.left + x$12.right) / 2}" y="28" text-anchor="middle" font-size="36">${T$11(e.title)}</text>` : ""}
+      ${e.title ? `<text x="${(w$11.left + w$11.right) / 2}" y="28" text-anchor="middle" font-size="36">${O$11(e.title)}</text>` : ""}
 
       <rect
-        x="${x$12.left}"
-        y="${x$12.top}"
-        width="${x$12.right - x$12.left}"
-        height="${x$12.bottom - x$12.top}"
+        x="${w$11.left}"
+        y="${w$11.top}"
+        width="${w$11.right - w$11.left}"
+        height="${w$11.bottom - w$11.top}"
         fill="none"
         stroke="#999"
       />
 
-      ${L$9(e)}
-      ${R$8(e)}
+      ${z$8(e)}
+      ${B$8(e)}
 
-      ${e.yAxis[0] <= n && e.yAxis[1] >= n ? `<line data-xy-axis="horizontal" x1="${x$12.left}" y1="${a}" x2="${x$12.right}" y2="${a}" stroke="#aaa" />` : ""}
+      ${e.yAxis[0] <= n && e.yAxis[1] >= n ? `<line data-xy-axis="horizontal" x1="${w$11.left}" y1="${a}" x2="${w$11.right}" y2="${a}" stroke="#aaa" />` : ""}
 
-      ${e.xAxis[0] <= r && e.xAxis[1] >= r ? `<line data-xy-axis="vertical" x1="${i}" y1="${x$12.top}" x2="${i}" y2="${x$12.bottom}" stroke="#aaa" />` : ""}
+      ${e.xAxis[0] <= r && e.xAxis[1] >= r ? `<line data-xy-axis="vertical" x1="${i}" y1="${w$11.top}" x2="${i}" y2="${w$11.bottom}" stroke="#aaa" />` : ""}
 
       ${c}
-      ${B$8(e, t.length)}
-      ${z$8(e)}
+      ${H$7(e, t.length)}
+      ${V$8(e)}
 
-      ${e.legendX ? `<text data-xy-axis="horizontal" x="${(x$12.left + x$12.right) / 2}" y="${s + 44}" text-anchor="middle">${T$11(e.legendX)}</text>` : ""}
+      ${e.legendX ? `<text data-xy-axis="horizontal" x="${(w$11.left + w$11.right) / 2}" y="${s + 44}" text-anchor="middle">${O$11(e.legendX)}</text>` : ""}
 
       ${e.legendY ? `<text data-xy-axis="vertical"
               x="${l}"
               y="${u}"
               transform="rotate(-90 ${l} ${u})"
               text-anchor="middle"
-            >${T$11(e.legendY)}</text>` : ""}
+            >${O$11(e.legendY)}</text>` : ""}
 
-      ${H$7(e, t)}
+      ${W$7(e, t)}
     </svg>
   `;
 }
-function W$7(e, t, n, r) {
+function K$6(e, t, n, r) {
 	return r <= 1 ? e : e + (t - e) * n / (r - 1);
 }
-function G$7(e, t) {
+function q$5(e, t) {
 	if (!e) return t;
 	if (e.length !== 2 || !e.every(Number.isFinite) || e[0] >= e[1]) throw Error("Intervalle de fonction invalide");
 	return e;
 }
-function K$6(e) {
+function J$5(e) {
 	return e.functions.map(({ label: n, expression: r, range: i, lineStyle: a }) => {
-		let o = [], s = G$7(i, e.xAxis), c = i ? Math.max(s[0], Math.min(...e.xAxis)) : s[0], l = i ? Math.min(s[1], Math.max(...e.xAxis)) : s[1];
+		let o = [], s = q$5(i, e.xAxis), c = i ? Math.max(s[0], Math.min(...e.xAxis)) : s[0], l = i ? Math.min(s[1], Math.max(...e.xAxis)) : s[1];
 		if (i && c > l) return {
 			label: n,
 			expression: r,
@@ -12165,7 +12278,7 @@ function K$6(e) {
 			...a ? { lineStyle: a } : {}
 		};
 		for (let n = 0; n < e.samples; n += 1) {
-			let i = W$7(c, l, n, e.samples);
+			let i = K$6(c, l, n, e.samples);
 			try {
 				let e = t$36(r, { x: i });
 				Number.isFinite(e) && o.push({
@@ -12182,11 +12295,11 @@ function K$6(e) {
 		};
 	});
 }
-function q$5(e) {
+function Y$5(e) {
 	return e.functions.map(({ label: n, xExpression: r, yExpression: i, range: a, lineStyle: o }) => {
-		let s = [], c = `{ x = ${r}; y = ${i} }`, l = G$7(a, e.tAxis);
+		let s = [], c = `{ x = ${r}; y = ${i} }`, l = q$5(a, e.tAxis);
 		for (let n = 0; n < e.samples; n += 1) {
-			let a = W$7(l[0], l[1], n, e.samples);
+			let a = K$6(l[0], l[1], n, e.samples);
 			try {
 				let e = t$36(r, { t: a }), n = t$36(i, { t: a });
 				Number.isFinite(e) && Number.isFinite(n) && s.push({
@@ -12203,11 +12316,11 @@ function q$5(e) {
 		};
 	});
 }
-function J$5(e) {
+function X$5(e) {
 	return e.functions.map(({ label: n, expression: r, range: i, lineStyle: a }) => {
-		let o = [], s = G$7(i, e.thetaAxis);
+		let o = [], s = q$5(i, e.thetaAxis);
 		for (let n = 0; n < e.samples; n += 1) {
-			let i = W$7(s[0], s[1], n, e.samples);
+			let i = K$6(s[0], s[1], n, e.samples);
 			try {
 				let e = t$36(r, { t: i }), n = e * Math.cos(i), a = e * Math.sin(i);
 				Number.isFinite(n) && Number.isFinite(a) && o.push({
@@ -12224,14 +12337,14 @@ function J$5(e) {
 		};
 	});
 }
-function Y$5(e) {
-	return e.kind === "xyFunctionGraph" ? K$6(e) : e.kind === "xyParametricGraph" ? q$5(e) : e.kind === "xyPolarGraph" ? J$5(e) : [];
+function Z$5(e) {
+	return e.kind === "xyFunctionGraph" ? J$5(e) : e.kind === "xyParametricGraph" ? Y$5(e) : e.kind === "xyPolarGraph" ? X$5(e) : [];
 }
-function $$5(t) {
-	t$56(X$5, Q$5), ee$6(), te$6(t);
+function ie$6(t) {
+	t$56(ne$6, re$6), ae$6(), $$5(t);
 }
-function ee$6() {
-	Z$5 || typeof document > "u" || (Z$5 = !0, document.addEventListener("click", (e) => {
+function ae$6() {
+	Q$5 || typeof document > "u" || (Q$5 = !0, document.addEventListener("click", (e) => {
 		let t = e.target;
 		if (!(t instanceof HTMLElement)) return;
 		let n = t.closest(".tp-md-xy-plot-zoom-button");
@@ -12242,16 +12355,16 @@ function ee$6() {
 		i instanceof HTMLDialogElement && i.showModal();
 	}));
 }
-function te$6(e) {
+function $$5(e) {
 	let t = e.renderer.rules.fence;
 	e.renderer.rules.fence = (e, n, r, i, a) => {
 		let o = e[n];
-		return o === void 0 ? "" : ie$6(o.info).name === "xy-plot" ? (o.attrJoin("class", "tp-md-xy-plot"), ne$6(o, a)) : typeof t == "function" ? t(e, n, r, i, a) : a.renderToken(e, n, r);
+		return o === void 0 ? "" : ce$6(o.info).name === "xy-plot" ? (o.attrJoin("class", "tp-md-xy-plot"), oe$6(o, a)) : typeof t == "function" ? t(e, n, r, i, a) : a.renderToken(e, n, r);
 	};
 }
-function ne$6(e, t) {
+function oe$6(e, t) {
 	try {
-		let n = _$16(e.content), r = U$7(n, Y$5(n));
+		let n = b$12(e.content), r = G$7(n, Z$5(n));
 		return `
 <figure${t.renderAttrs(e)}>
   <button
@@ -12278,17 +12391,17 @@ function ne$6(e, t) {
 	} catch (n) {
 		return `
 <figure${t.renderAttrs(e)}>
-  ${re$6(n)}
+  ${se$6(n)}
 </figure>
 `;
 	}
 }
-function re$6(e) {
+function se$6(e) {
 	return `
-<pre class="tp-md-xy-plot-error" role="alert"><code>${ae$6(e instanceof Error ? e.message : String(e))}</code></pre>
+<pre class="tp-md-xy-plot-error" role="alert"><code>${le$6(e instanceof Error ? e.message : String(e))}</code></pre>
 `;
 }
-function ie$6(e) {
+function ce$6(e) {
 	let t = e.trim(), n = t.search(/\s/);
 	return n === -1 ? {
 		name: t,
@@ -12298,36 +12411,36 @@ function ie$6(e) {
 		args: t.slice(n + 1).trim()
 	};
 }
-function ae$6(e) {
+function le$6(e) {
 	return e.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'", "&#39;");
 }
-var y$12, b$12, x$12, S$11, C$11, w$11, X$5, Z$5, Q$5;
+var S$11, C$11, w$11, T$11, E$11, D$11, ne$6, Q$5, re$6;
 var init_xy_plot = __esmMin((() => {
 	init_markdown_style_registry();
-	y$12 = 900;
-	b$12 = 520;
-	x$12 = {
-		left: (y$12 - b$12) / 2,
+	S$11 = 900;
+	C$11 = 520;
+	w$11 = {
+		left: (S$11 - C$11) / 2,
 		top: 70,
 		right: 710,
 		bottom: 590
 	};
-	S$11 = {
-		x: x$12.left,
-		y: x$12.bottom + 70,
+	T$11 = {
+		x: w$11.left,
+		y: w$11.bottom + 70,
 		lineHeight: 16,
 		itemGap: 8,
 		maxCharsPerLine: 100
 	};
-	C$11 = {
+	E$11 = {
 		radius: 4,
 		labelDx: 8,
 		labelDy: -8
 	};
-	w$11 = 9;
-	X$5 = "tp-md-xy-plot-styles";
-	Z$5 = !1;
-	Q$5 = "\n.tp-md-xy-plot {\n  position: relative;\n\n  display: block;\n  inline-size: min(100%, 900px);\n  margin-block: 1rem;\n  margin-inline: auto;\n}\n\n.tp-md-xy-plot-preview {\n  inline-size: 100%;\n}\n\n.tp-md-xy-plot svg {\n  display: block;\n  inline-size: 100%;\n  block-size: auto;\n}\n\n.tp-md-xy-plot .tp-md-xy-graph-point {\n  fill: #333;\n  stroke: white;\n  stroke-width: 1.5;\n}\n\n.tp-md-xy-plot .tp-md-xy-graph-point-label {\n  fill: #333;\n  font-size: 12px;\n  font-family: system-ui, sans-serif;\n}\n\n.tp-md-xy-plot-zoom-button {\n  position: absolute;\n  inset-block-start: 0.5rem;\n  inset-inline-end: 0.5rem;\n  z-index: 1;\n\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n\n  padding-block: 0.35rem;\n  padding-inline: 0.65rem;\n\n  border: 1px solid color-mix(in srgb, CanvasText 25%, transparent);\n  border-radius: 999px;\n\n  background: color-mix(in srgb, Canvas 88%, transparent);\n  color: CanvasText;\n\n  font: inherit;\n  font-size: 0.875rem;\n  line-height: 1.2;\n\n  cursor: pointer;\n}\n\n.tp-md-xy-plot-zoom-button:hover {\n  background: color-mix(in srgb, CanvasText 8%, Canvas 92%);\n}\n\n.tp-md-xy-plot-dialog {\n  inline-size: min(96vw, 1200px);\n  max-inline-size: 1200px;\n  max-block-size: 92vh;\n  padding: 1rem;\n\n  border: 1px solid color-mix(in srgb, CanvasText 18%, transparent);\n  border-radius: 1rem;\n\n  background: Canvas;\n  color: CanvasText;\n}\n\n.tp-md-xy-plot-dialog::backdrop {\n  background: color-mix(in srgb, black 55%, transparent);\n}\n\n.tp-md-xy-plot-dialog-header {\n  display: flex;\n  justify-content: flex-end;\n  margin-block-end: 0.75rem;\n}\n\n.tp-md-xy-plot-close-button {\n  padding-block: 0.35rem;\n  padding-inline: 0.65rem;\n\n  border: 1px solid color-mix(in srgb, CanvasText 25%, transparent);\n  border-radius: 999px;\n\n  background: Canvas;\n  color: CanvasText;\n\n  font: inherit;\n  font-size: 0.875rem;\n  line-height: 1.2;\n\n  cursor: pointer;\n}\n\n.tp-md-xy-plot-dialog-content {\n  overflow: auto;\n}\n\n.tp-md-xy-plot-dialog-content svg {\n  inline-size: 100%;\n  min-inline-size: 900px;\n  block-size: auto;\n}\n\n.tp-md-xy-plot-error {\n  margin: 0;\n  padding: 1rem;\n  overflow-x: auto;\n\n  border: 1px solid color-mix(in srgb, red 45%, transparent);\n  border-radius: 0.75rem;\n\n  background: color-mix(in srgb, red 8%, Canvas 92%);\n  color: CanvasText;\n}\n";
+	D$11 = 9;
+	ne$6 = "tp-md-xy-plot-styles";
+	Q$5 = !1;
+	re$6 = "\n.tp-md-xy-plot {\n  position: relative;\n\n  display: block;\n  inline-size: min(100%, 900px);\n  margin-block: 1rem;\n  margin-inline: auto;\n}\n\n.tp-md-xy-plot-preview {\n  inline-size: 100%;\n}\n\n.tp-md-xy-plot svg {\n  display: block;\n  inline-size: 100%;\n  block-size: auto;\n}\n\n.tp-md-xy-plot .tp-md-xy-graph-point {\n  fill: #333;\n  stroke: white;\n  stroke-width: 1.5;\n}\n\n.tp-md-xy-plot .tp-md-xy-graph-point-label {\n  fill: #333;\n  font-size: 12px;\n  font-family: system-ui, sans-serif;\n}\n\n.tp-md-xy-plot-zoom-button {\n  position: absolute;\n  inset-block-start: 0.5rem;\n  inset-inline-end: 0.5rem;\n  z-index: 1;\n\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n\n  padding-block: 0.35rem;\n  padding-inline: 0.65rem;\n\n  border: 1px solid color-mix(in srgb, CanvasText 25%, transparent);\n  border-radius: 999px;\n\n  background: color-mix(in srgb, Canvas 88%, transparent);\n  color: CanvasText;\n\n  font: inherit;\n  font-size: 0.875rem;\n  line-height: 1.2;\n\n  cursor: pointer;\n}\n\n.tp-md-xy-plot-zoom-button:hover {\n  background: color-mix(in srgb, CanvasText 8%, Canvas 92%);\n}\n\n.tp-md-xy-plot-dialog {\n  inline-size: min(96vw, 1200px);\n  max-inline-size: 1200px;\n  max-block-size: 92vh;\n  padding: 1rem;\n\n  border: 1px solid color-mix(in srgb, CanvasText 18%, transparent);\n  border-radius: 1rem;\n\n  background: Canvas;\n  color: CanvasText;\n}\n\n.tp-md-xy-plot-dialog::backdrop {\n  background: color-mix(in srgb, black 55%, transparent);\n}\n\n.tp-md-xy-plot-dialog-header {\n  display: flex;\n  justify-content: flex-end;\n  margin-block-end: 0.75rem;\n}\n\n.tp-md-xy-plot-close-button {\n  padding-block: 0.35rem;\n  padding-inline: 0.65rem;\n\n  border: 1px solid color-mix(in srgb, CanvasText 25%, transparent);\n  border-radius: 999px;\n\n  background: Canvas;\n  color: CanvasText;\n\n  font: inherit;\n  font-size: 0.875rem;\n  line-height: 1.2;\n\n  cursor: pointer;\n}\n\n.tp-md-xy-plot-dialog-content {\n  overflow: auto;\n}\n\n.tp-md-xy-plot-dialog-content svg {\n  inline-size: 100%;\n  min-inline-size: 900px;\n  block-size: auto;\n}\n\n.tp-md-xy-plot-error {\n  margin: 0;\n  padding: 1rem;\n  overflow-x: auto;\n\n  border: 1px solid color-mix(in srgb, red 45%, transparent);\n  border-radius: 0.75rem;\n\n  background: color-mix(in srgb, red 8%, Canvas 92%);\n  color: CanvasText;\n}\n";
 }));
 //#endregion
 //#region ../tp-markdown/dist/markdown/extensions/markdown-extension-loader.js

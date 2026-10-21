@@ -1,7 +1,7 @@
 import { t as e } from "./base.js";
 import "./icon-button.js";
-import "./button.js";
 import "../components/textfield/textfield.js";
+import "./button.js";
 import { calculate as t } from "../components/calculator/calculator-engine.js";
 //#region src/components/calculator/calculator.css?inline
 var n = "tp-calculator{box-sizing:border-box;border:1px solid var(--tp-neutral-stroke-soft);border-radius:var(--tp-border-radius-md);background:var(--tp-paper-color);max-inline-size:48rem;color:var(--tp-text-body);padding:1rem;display:flow-root}tp-calculator .tp-calculator-header{justify-content:space-between;align-items:center;gap:.75rem;margin-block-end:.75rem;display:flex}tp-calculator .tp-calculator-header h3{margin:0;font-size:1.25rem}tp-calculator .tp-calculator-pads{flex-wrap:wrap;gap:.75rem;display:flex}tp-calculator .tp-calculator-scientific,tp-calculator .tp-calculator-numeric{flex:14rem;grid-template-columns:repeat(4,minmax(0,1fr));gap:.35rem;min-inline-size:0;display:grid}tp-calculator[data-orientation=vertical]{max-inline-size:25rem}tp-calculator[data-orientation=vertical] .tp-calculator-pads{flex-direction:column}tp-calculator[data-orientation=vertical] .tp-calculator-pads>div{flex-basis:auto}tp-calculator tp-button{min-inline-size:0}tp-calculator tp-button button{min-block-size:2.5rem;inline-size:100%;padding-inline:.25rem}tp-calculator .tp-calculator-status{overflow-wrap:anywhere;min-block-size:1.5em;margin-block:.5rem}tp-calculator>tp-textfield{--tp-textfield-inline-size:100%}tp-calculator .tp-calculator-numeric tp-button:last-child{grid-column:span 2}", r = class extends e {

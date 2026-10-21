@@ -16,7 +16,7 @@
 </div>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-example">
-<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-1">&lt;</span><span class="hl-9">tp</span><span class="hl-1">-</span><span class="hl-9">xy</span><span class="hl-1">-</span><span class="hl-9">plot</span><span class="hl-1">&gt;</span><br/><span class="hl-1">  &lt;</span><span class="hl-9">script</span><span class="hl-1"> </span><span class="hl-9">type</span><span class="hl-1">=</span><span class="hl-2">&quot;tp/xy-plot&quot;</span><span class="hl-1">&gt;</span><br/><span class="hl-1">    </span><span class="hl-9">xyFunctionGraph</span><br/><span class="hl-1">      </span><span class="hl-9">title</span><span class="hl-1"> </span><span class="hl-2">&quot;Functions&quot;</span><br/><span class="hl-1">      </span><span class="hl-9">x</span><span class="hl-1">-</span><span class="hl-9">axis</span><span class="hl-1"> [-</span><span class="hl-15">10</span><span class="hl-1">,</span><span class="hl-15">10</span><span class="hl-1">]</span><br/><span class="hl-1">      </span><span class="hl-9">y</span><span class="hl-1">-</span><span class="hl-9">axis</span><span class="hl-1"> [-</span><span class="hl-15">5</span><span class="hl-1">,</span><span class="hl-15">5</span><span class="hl-1">]</span><br/><span class="hl-1">      </span><span class="hl-9">functions</span><span class="hl-1"> [[</span><span class="hl-2">&quot;Sine&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;2*sin(x)&quot;</span><span class="hl-1">], [</span><span class="hl-2">&quot;Line&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;x/2&quot;</span><span class="hl-1">]]</span><br/><span class="hl-1">  &lt;/</span><span class="hl-9">script</span><span class="hl-1">&gt;</span><br/><span class="hl-1">&lt;/</span><span class="hl-9">tp</span><span class="hl-1">-</span><span class="hl-9">xy</span><span class="hl-1">-</span><span class="hl-9">plot</span><span class="hl-1">&gt;</span>
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-1">&lt;</span><span class="hl-9">tp</span><span class="hl-1">-</span><span class="hl-9">xy</span><span class="hl-1">-</span><span class="hl-9">plot</span><span class="hl-1"> </span><span class="hl-9">label</span><span class="hl-1">=</span><span class="hl-2">&quot;Functions&quot;</span><span class="hl-1">&gt;</span><br/><span class="hl-1">  &lt;</span><span class="hl-9">script</span><span class="hl-1"> </span><span class="hl-9">type</span><span class="hl-1">=</span><span class="hl-2">&quot;tp/xy-plot&quot;</span><span class="hl-1">&gt;</span><br/><span class="hl-1">    </span><span class="hl-9">label</span><span class="hl-1"> = </span><span class="hl-2">&quot;Functions&quot;</span><br/><span class="hl-1">    </span><span class="hl-9">x</span><span class="hl-1">-</span><span class="hl-9">axis</span><span class="hl-1"> = [-</span><span class="hl-15">10</span><span class="hl-1">, </span><span class="hl-15">10</span><span class="hl-1">]</span><br/><span class="hl-1">    </span><span class="hl-9">y</span><span class="hl-1">-</span><span class="hl-9">axis</span><span class="hl-1"> = [-</span><span class="hl-15">5</span><span class="hl-1">, </span><span class="hl-15">5</span><span class="hl-1">]</span><br/><span class="hl-1">    </span><span class="hl-9">curve</span><span class="hl-1"> </span><span class="hl-0">Sine</span><span class="hl-1"> = </span><span class="hl-8">function</span><span class="hl-1">(</span><span class="hl-9">x</span><span class="hl-1">, 2*</span><span class="hl-9">sin</span><span class="hl-1">(</span><span class="hl-9">x</span><span class="hl-1">))</span><br/><span class="hl-1">    </span><span class="hl-0">curve</span><span class="hl-1"> </span><span class="hl-0">Line</span><span class="hl-1"> = </span><span class="hl-0">function</span><span class="hl-1">(</span><span class="hl-9">x</span><span class="hl-1">, </span><span class="hl-9">x</span><span class="hl-1">/2)</span><br/><span class="hl-1">  &lt;/</span><span class="hl-10">script</span><span class="hl-1">&gt;</span><br/><span class="hl-1">&lt;/</span><span class="hl-10">tp</span><span class="hl-1">-</span><span class="hl-10">xy</span><span class="hl-1">-</span><span class="hl-10">plot</span><span class="hl-1">&gt;</span>
 </code><button type="button">Copy</button></pre>
 
 </div>
@@ -33,16 +33,22 @@
 <h4 class="tsd-anchor-link" id="attr-2">Attr<a href="#attr-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>no-legend = false - Hides curve legends.</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-3">Attr<a href="#attr-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>settings = false - Shows a button for editing the graph definition in a panel below the plot.</p>
+<h4 class="tsd-anchor-link" id="attr-3">Attr<a href="#attr-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>label = &quot;&quot; - Title displayed at the left of the view toolbar.</p>
+</div>
+<div class="tsd-tag-cssprop">
+<h4 class="tsd-anchor-link" id="cssprop">Cssprop<a href="#cssprop" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>--tp-plot-height Height of the normal plot including its top and bottom controls; settings remain below.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-4">Attr<a href="#attr-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>settings = false - Shows interactive settings below the graph and its controls.</p>
 </div></div></section>
-<section class="tsd-panel tsd-hierarchy" data-refl="26136">
+<section class="tsd-panel tsd-hierarchy" data-refl="26919">
 <h4>Hierarchy (<a href="../hierarchy.html#components/xy-plot.TpXYPlot">View Summary</a>)</h4>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><a href="components_base.TpBase.html" class="tsd-signature-type tsd-kind-class">TpBase</a>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">TpXYPlot</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L119">tp-components/src/components/xy-plot/xy-plot.ts:119</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L138">tp-components/src/components/xy-plot/xy-plot.ts:138</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -56,6 +62,7 @@
 <h3 class="tsd-index-heading tsd-anchor-link" id="accessors">Accessors<a href="#accessors" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-index-list"><a href="#axis" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>axis</span></a>
 <a href="#grid" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>grid</span></a>
+<a href="#label" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>label</span></a>
 <a href="#nolegend" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>no<wbr/>Legend</span></a>
 <a href="#settings" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>settings</span></a>
 <a href="#observedattributes" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>observed<wbr/>Attributes</span></a>
@@ -69,6 +76,7 @@
 <a href="#disconnectedcallback" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>disconnected<wbr/>Callback</span></a>
 <a href="#ensurebasestyles" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Base<wbr/>Styles</span></a>
 <a href="#ensureglobalstyle" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Global<wbr/>Style</span></a>
+<a href="#exportsvg" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>export<wbr/>Svg</span></a>
 <a href="#getbooleanattribute" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Boolean<wbr/>Attribute</span></a>
 <a href="#getclosestskippingcontainers" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span></a>
 <a href="#getstringattribute" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>String<wbr/>Attribute</span></a>
@@ -110,10 +118,10 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">&quot;none&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;both&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;horizontal&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;vertical&quot;</span></h4>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-4">Attr<a href="#attr-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>axis</p>
+<h4 class="tsd-anchor-link" id="attr-5">Attr<a href="#attr-5" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>axis</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L178">tp-components/src/components/xy-plot/xy-plot.ts:178</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L200">tp-components/src/components/xy-plot/xy-plot.ts:200</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="axisaxis-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">axis</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">XYGrid</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -123,7 +131,7 @@
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">XYGrid</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L181">tp-components/src/components/xy-plot/xy-plot.ts:181</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L203">tp-components/src/components/xy-plot/xy-plot.ts:203</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="grid"><span>grid</span><a href="#grid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -135,10 +143,10 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">&quot;none&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;both&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;horizontal&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;vertical&quot;</span></h4>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-5">Attr<a href="#attr-5" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>grid</p>
+<h4 class="tsd-anchor-link" id="attr-6">Attr<a href="#attr-6" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>grid</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L171">tp-components/src/components/xy-plot/xy-plot.ts:171</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L193">tp-components/src/components/xy-plot/xy-plot.ts:193</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="gridgrid-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">grid</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">XYGrid</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -148,7 +156,26 @@
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">XYGrid</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L174">tp-components/src/components/xy-plot/xy-plot.ts:174</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L196">tp-components/src/components/xy-plot/xy-plot.ts:196</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="label"><span>label</span><a href="#label" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li>
+<div class="tsd-signature" id="labellabel"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">label</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L289">tp-components/src/components/xy-plot/xy-plot.ts:289</a></li></ul></aside></div></li>
+<li>
+<div class="tsd-signature" id="labellabel-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">label</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L292">tp-components/src/components/xy-plot/xy-plot.ts:292</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="nolegend"><span>no<wbr/>Legend</span><a href="#nolegend" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -160,10 +187,10 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-6">Attr<a href="#attr-6" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>no-legend</p>
+<h4 class="tsd-anchor-link" id="attr-7">Attr<a href="#attr-7" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>no-legend</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L185">tp-components/src/components/xy-plot/xy-plot.ts:185</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L207">tp-components/src/components/xy-plot/xy-plot.ts:207</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="nolegendnolegend-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">noLegend</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -173,22 +200,22 @@
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L188">tp-components/src/components/xy-plot/xy-plot.ts:188</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L210">tp-components/src/components/xy-plot/xy-plot.ts:210</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="settings"><span>settings</span><a href="#settings" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li>
 <div class="tsd-signature" id="settingssettings"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">settings</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Whether the graph settings button is shown.</p>
+<div class="tsd-comment tsd-typography"><p>Whether interactive settings are shown below the graph.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-7">Attr<a href="#attr-7" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>settings</p>
+<h4 class="tsd-anchor-link" id="attr-8">Attr<a href="#attr-8" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>settings</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L157">tp-components/src/components/xy-plot/xy-plot.ts:157</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L179">tp-components/src/components/xy-plot/xy-plot.ts:179</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="settingssettings-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">settings</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -198,7 +225,7 @@
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L160">tp-components/src/components/xy-plot/xy-plot.ts:160</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L182">tp-components/src/components/xy-plot/xy-plot.ts:182</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="observedattributes"><code class="tsd-tag">Static</code><span>observed<wbr/>Attributes</span><a href="#observedattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -215,7 +242,7 @@ these via spread when they also want to react to <code>dir</code> and <code>lang
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <p>Overrides TpBase.observedAttributes</p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L254">tp-components/src/components/xy-plot/xy-plot.ts:254</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L285">tp-components/src/components/xy-plot/xy-plot.ts:285</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -225,23 +252,23 @@ these via spread when they also want to react to <code>dir</code> and <code>lang
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="anim-1"><span class="tsd-kind-call-signature">anim</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><a href="#anim-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Gets the comma-separated reveal order, or sets it and returns to the start.</p>
+<div class="tsd-comment tsd-typography"><p>Gets reveal order (JSON for groups), or sets comma-separated names, JSON or step arrays.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L193">tp-components/src/components/xy-plot/xy-plot.ts:193</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L215">tp-components/src/components/xy-plot/xy-plot.ts:215</a></li></ul></aside></div></li>
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="anim-2"><span class="tsd-kind-call-signature">anim</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">names</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#anim-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="anim-2"><span class="tsd-kind-call-signature">anim</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">names</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">XYAnimationStep</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#anim-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Gets the comma-separated reveal order, or sets it and returns to the start.</p>
+<div class="tsd-comment tsd-typography"><p>Gets reveal order (JSON for groups), or sets comma-separated names, JSON or step arrays.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">names</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<li><span><span class="tsd-kind-parameter">names</span>: <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">XYAnimationStep</span><span class="tsd-signature-symbol">[]</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L194">tp-components/src/components/xy-plot/xy-plot.ts:194</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L216">tp-components/src/components/xy-plot/xy-plot.ts:216</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="attributechangedcallback"><code class="tsd-tag">Protected</code><span>attribute<wbr/>Changed<wbr/>Callback</span><a href="#attributechangedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -260,7 +287,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#attributechangedcallback">attributeChangedCallback</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L283">tp-components/src/components/xy-plot/xy-plot.ts:283</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L328">tp-components/src/components/xy-plot/xy-plot.ts:328</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="capturehelpsource"><code class="tsd-tag">Protected</code><span>capture<wbr/>Help<wbr/>Source</span><a href="#capturehelpsource" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -270,7 +297,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#capturehelpsource">captureHelpSource</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/base/base.ts#L883">tp-components/src/components/base/base.ts:883</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/base/base.ts#L887">tp-components/src/components/base/base.ts:887</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="connectedcallback"><code class="tsd-tag">Protected</code><span>connected<wbr/>Callback</span><a href="#connectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -288,7 +315,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#connectedcallback">connectedCallback</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L264">tp-components/src/components/xy-plot/xy-plot.ts:264</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L308">tp-components/src/components/xy-plot/xy-plot.ts:308</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="disconnectedcallback"><code class="tsd-tag">Protected</code><span>disconnected<wbr/>Callback</span><a href="#disconnectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -297,7 +324,7 @@ attribute changes.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L276">tp-components/src/components/xy-plot/xy-plot.ts:276</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L321">tp-components/src/components/xy-plot/xy-plot.ts:321</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="ensurebasestyles"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Base<wbr/>Styles</span><a href="#ensurebasestyles" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -313,7 +340,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#ensurebasestyles">ensureBaseStyles</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/base/base.ts#L306">tp-components/src/components/base/base.ts:306</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/base/base.ts#L310">tp-components/src/components/base/base.ts:310</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="ensureglobalstyle"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Global<wbr/>Style</span><a href="#ensureglobalstyle" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -336,7 +363,18 @@ if it does not already exist.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#ensureglobalstyle">ensureGlobalStyle</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/base/base.ts#L325">tp-components/src/components/base/base.ts:325</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/base/base.ts#L329">tp-components/src/components/base/base.ts:329</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="exportsvg"><span>export<wbr/>Svg</span><a href="#exportsvg" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="exportsvg-1"><span class="tsd-kind-call-signature">exportSvg</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><a href="#exportsvg-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Exports the displayed graph with its current viewport, visibility and theme colors.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L810">tp-components/src/components/xy-plot/xy-plot.ts:810</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getbooleanattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>Boolean<wbr/>Attribute</span><a href="#getbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -360,7 +398,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getbooleanattribute">getBooleanAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/base/base.ts#L352">tp-components/src/components/base/base.ts:352</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/base/base.ts#L356">tp-components/src/components/base/base.ts:356</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getclosestskippingcontainers"><code class="tsd-tag">Protected</code><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span><a href="#getclosestskippingcontainers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -381,7 +419,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getclosestskippingcontainers">getClosestSkippingContainers</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/base/base.ts#L450">tp-components/src/components/base/base.ts:450</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/base/base.ts#L454">tp-components/src/components/base/base.ts:454</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getstringattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>String<wbr/>Attribute</span><a href="#getstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -403,7 +441,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getstringattribute">getStringAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/base/base.ts#L386">tp-components/src/components/base/base.ts:386</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/base/base.ts#L390">tp-components/src/components/base/base.ts:390</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="gotoend"><span>go<wbr/>To<wbr/>End</span><a href="#gotoend" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -414,7 +452,7 @@ if it does not already exist.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L220">tp-components/src/components/xy-plot/xy-plot.ts:220</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L251">tp-components/src/components/xy-plot/xy-plot.ts:251</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="gotostart"><span>go<wbr/>To<wbr/>Start</span><a href="#gotostart" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -425,7 +463,7 @@ if it does not already exist.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L215">tp-components/src/components/xy-plot/xy-plot.ts:215</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L246">tp-components/src/components/xy-plot/xy-plot.ts:246</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="help"><span>help</span><a href="#help" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -440,7 +478,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#help">help</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/base/base.ts#L252">tp-components/src/components/base/base.ts:252</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/base/base.ts#L256">tp-components/src/components/base/base.ts:256</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="next"><span>next</span><a href="#next" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -451,7 +489,7 @@ the Vite component API plugin. A custom URL can be provided with
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L230">tp-components/src/components/xy-plot/xy-plot.ts:230</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L261">tp-components/src/components/xy-plot/xy-plot.ts:261</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="previous"><span>previous</span><a href="#previous" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -462,7 +500,7 @@ the Vite component API plugin. A custom URL can be provided with
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L225">tp-components/src/components/xy-plot/xy-plot.ts:225</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L256">tp-components/src/components/xy-plot/xy-plot.ts:256</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="queryelement"><code class="tsd-tag">Protected</code><span>query<wbr/>Element</span><a href="#queryelement" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -488,7 +526,7 @@ the Vite component API plugin. A custom URL can be provided with
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#queryelement">queryElement</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/base/base.ts#L431">tp-components/src/components/base/base.ts:431</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/base/base.ts#L435">tp-components/src/components/base/base.ts:435</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="removeattributes"><code class="tsd-tag">Protected</code><span>remove<wbr/>Attributes</span><a href="#removeattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -506,7 +544,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#removeattributes">removeAttributes</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/base/base.ts#L416">tp-components/src/components/base/base.ts:416</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/base/base.ts#L420">tp-components/src/components/base/base.ts:420</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="setbooleanattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>Boolean<wbr/>Attribute</span><a href="#setbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -532,7 +570,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#setbooleanattribute">setBooleanAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/base/base.ts#L368">tp-components/src/components/base/base.ts:368</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/base/base.ts#L372">tp-components/src/components/base/base.ts:372</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="setdata"><span>set<wbr/>Data</span><a href="#setdata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -547,7 +585,7 @@ the Vite component API plugin. A custom URL can be provided with
 <li><span><span class="tsd-kind-parameter">data</span>: <a href="../interfaces/components_xy-plot.TpXYPlotData.html" class="tsd-signature-type tsd-kind-interface">TpXYPlotData</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/xy-plot/xy-plot.ts#L301">tp-components/src/components/xy-plot/xy-plot.ts:301</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/xy-plot/xy-plot.ts#L350">tp-components/src/components/xy-plot/xy-plot.ts:350</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="setstringattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>String<wbr/>Attribute</span><a href="#setstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -569,7 +607,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#setstringattribute">setStringAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/70ab13c6e4d309018459f5b3942f5b977a552b47/src/components/base/base.ts#L400">tp-components/src/components/base/base.ts:400</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/edcb7d14baf02d4e7c195ed13a506f2c912f6b61/src/components/base/base.ts#L404">tp-components/src/components/base/base.ts:404</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -587,9 +625,9 @@ the Vite component API plugin. A custom URL can be provided with
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Constructors</summary>
 <div><a href="#constructor" class="tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor"><use href="../assets/icons.svg#icon-512"></use></svg><span>constructor</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Accessors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Accessors</summary>
-<div><a href="#axis"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>axis</span></a><a href="#grid"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>grid</span></a><a href="#nolegend"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>no<wbr/>Legend</span></a><a href="#settings"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>settings</span></a><a href="#observedattributes"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>observed<wbr/>Attributes</span></a></div></details>
+<div><a href="#axis"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>axis</span></a><a href="#grid"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>grid</span></a><a href="#label"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>label</span></a><a href="#nolegend"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>no<wbr/>Legend</span></a><a href="#settings"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>settings</span></a><a href="#observedattributes"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>observed<wbr/>Attributes</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Methods</summary>
-<div><a href="#anim"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>anim</span></a><a href="#attributechangedcallback" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>attribute<wbr/>Changed<wbr/>Callback</span></a><a href="#capturehelpsource" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>capture<wbr/>Help<wbr/>Source</span></a><a href="#connectedcallback" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>connected<wbr/>Callback</span></a><a href="#disconnectedcallback" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>disconnected<wbr/>Callback</span></a><a href="#ensurebasestyles" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Base<wbr/>Styles</span></a><a href="#ensureglobalstyle" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Global<wbr/>Style</span></a><a href="#getbooleanattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Boolean<wbr/>Attribute</span></a><a href="#getclosestskippingcontainers" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span></a><a href="#getstringattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>String<wbr/>Attribute</span></a><a href="#gotoend"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>go<wbr/>To<wbr/>End</span></a><a href="#gotostart"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>go<wbr/>To<wbr/>Start</span></a><a href="#help" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>help</span></a><a href="#next"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>next</span></a><a href="#previous"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>previous</span></a><a href="#queryelement" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>query<wbr/>Element</span></a><a href="#removeattributes" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>remove<wbr/>Attributes</span></a><a href="#setbooleanattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Boolean<wbr/>Attribute</span></a><a href="#setdata"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Data</span></a><a href="#setstringattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>String<wbr/>Attribute</span></a></div></details></div></details></div>
+<div><a href="#anim"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>anim</span></a><a href="#attributechangedcallback" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>attribute<wbr/>Changed<wbr/>Callback</span></a><a href="#capturehelpsource" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>capture<wbr/>Help<wbr/>Source</span></a><a href="#connectedcallback" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>connected<wbr/>Callback</span></a><a href="#disconnectedcallback" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>disconnected<wbr/>Callback</span></a><a href="#ensurebasestyles" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Base<wbr/>Styles</span></a><a href="#ensureglobalstyle" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Global<wbr/>Style</span></a><a href="#exportsvg"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>export<wbr/>Svg</span></a><a href="#getbooleanattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Boolean<wbr/>Attribute</span></a><a href="#getclosestskippingcontainers" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span></a><a href="#getstringattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>String<wbr/>Attribute</span></a><a href="#gotoend"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>go<wbr/>To<wbr/>End</span></a><a href="#gotostart"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>go<wbr/>To<wbr/>Start</span></a><a href="#help" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>help</span></a><a href="#next"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>next</span></a><a href="#previous"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>previous</span></a><a href="#queryelement" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>query<wbr/>Element</span></a><a href="#removeattributes" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>remove<wbr/>Attributes</span></a><a href="#setbooleanattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Boolean<wbr/>Attribute</span></a><a href="#setdata"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Data</span></a><a href="#setstringattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>String<wbr/>Attribute</span></a></div></details></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html">@tp/tp-components API</a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container">

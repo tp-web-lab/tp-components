@@ -77,6 +77,10 @@ Attributes
   | <code>intrinsic</code> | <code>boolean</code> | <code>false</code> | Sizes children intrinsically by centering them in a column flex layout. |
   | <code>max-inline-size</code> | <code>string</code> | <code>&quot;60ch&quot;</code> | Maximum inline size applied to the centered container. When absent, uses the --tp-center-width CSS default. |
   | <code>padding-inline</code> | <code>string</code> | <code>&quot;0px&quot;</code> | Symmetric inline padding applied to the centered container. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-center>`]
 
 Methods
@@ -102,6 +106,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_center.TpCenter.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

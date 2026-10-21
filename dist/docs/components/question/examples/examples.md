@@ -33,6 +33,14 @@ Combine the attributes on one preview. Controls start at the published defaults.
 - open
 :::
 
+::: tp-radio-list { data-setting="mode" label="mode" label-position="top" orientation="horizontal" value="1" }
+- mixed
+
+- opened
+
+- closed
+:::
+
 ::: tp-radio-list { data-setting="src" label="src" label-position="top" orientation="horizontal" value="1" }
 - Default
 

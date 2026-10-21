@@ -83,6 +83,10 @@ Attributes
   | <code>target</code> | <code>string</code> | <code>&quot;&quot;</code> | Attribute `target`. |
   | <code>type</code> | <code>TpButtonNativeType</code> | <code>button</code> | Attribute `type`. |
   | <code>variant</code> | <code>TpVariantType</code> | <code>neutral</code> | Attribute `variant`. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-button>`]
 
 Methods
@@ -119,6 +123,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_button.TpButton.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

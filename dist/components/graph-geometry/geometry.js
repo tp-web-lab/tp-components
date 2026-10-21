@@ -25,10 +25,26 @@ function f(e) {
 	return t;
 }
 function p(e) {
+	let t = /^(.*?)(deg|rad|grad|turn)?$/.exec(e.trim()), n = f(t?.[1] ?? "");
+	switch (t?.[2]) {
+		case "deg": return o(n);
+		case "grad": return n * Math.PI / 200;
+		case "turn": return n * a;
+		default: return n;
+	}
+}
+function m(e) {
+	return e.replace(/"(?:[^"\\]|\\.)*"|#[^\r\n]*|<!--[\s\S]*?(?:-->|$)/g, (t, n) => {
+		if (t.startsWith("\"")) return t;
+		if (t.startsWith("<!--") && !t.endsWith("-->")) throw Error(`Line ${e.slice(0, n).split("\n").length}: Unclosed source comment.`);
+		return t.replace(/[^\r\n]/g, " ");
+	});
+}
+function h(e) {
 	if (!/^[A-Za-z][\w]*$/.test(e)) throw Error(`Invalid name: ${e}`);
 	return e;
 }
-function m(e) {
+function g(e) {
 	let t = [], n = 0, r = 0, i = !1;
 	for (let a = 0; a < e.length; a++) {
 		if (i && e[a] === "\\") {
@@ -39,186 +55,239 @@ function m(e) {
 			i = !i;
 			continue;
 		}
-		i || (e[a] === "(" && n++, e[a] === ")" && n--, e[a] === "," && n === 0 && (t.push(e.slice(r, a).trim()), r = a + 1));
+		i || ((e[a] === "(" || e[a] === "[") && n++, (e[a] === ")" || e[a] === "]") && n--, e[a] === "," && n === 0 && (t.push(e.slice(r, a).trim()), r = a + 1));
 	}
 	if (n !== 0 || i) throw Error("Unbalanced parentheses.");
 	return t.push(e.slice(r).trim()), t;
 }
-function h(e, a = 0) {
+function _(e) {
+	if (!e.startsWith("[") || !e.endsWith("]")) throw Error("Expected an animation list.");
+	let t = e.slice(1, -1).trim();
+	if (!t) return [];
+	let n = /* @__PURE__ */ new Set(), r = (e) => {
+		let t = h(e);
+		if (n.has(t)) throw Error(`Duplicate animation object: ${t}`);
+		return n.add(t), t;
+	};
+	return g(t).map((e) => {
+		if (e.startsWith("[") && e.endsWith("]")) {
+			let t = e.slice(1, -1).trim();
+			if (!t) throw Error("Animation groups must not be empty.");
+			return g(t).map(r);
+		}
+		return r(e);
+	});
+}
+function v(e) {
+	let t = e.split("\n");
+	for (let e = 0; e < t.length; e++) {
+		if (!/^\s*animation\s/.test(t[e] ?? "")) continue;
+		let n = 0, r = e;
+		do {
+			for (let e of t[r] ?? "") n += e === "[" ? 1 : e === "]" ? -1 : 0;
+			r++;
+		} while (n > 0 && r < t.length);
+		let i = t.slice(e, r).join(" ");
+		for (let n = e + 1; n < r; n++) t[n] = "";
+		t[e] = i, e = r - 1;
+	}
+	return t.join("\n");
+}
+function y(e, a = 0) {
 	if (a > 64) throw Error("Too many nested transformations.");
-	let c = [], l = /* @__PURE__ */ new Set();
-	for (let [u, d] of e.split("\n").entries()) {
-		let e = d.replace(/"(?:[^"\\]|\\.)*"|(#.*$)/g, (e, t) => t ? "" : e).trim();
+	let o = [], c = /* @__PURE__ */ new Set();
+	for (let [l, u] of v(m(e)).split("\n").entries()) {
+		let e = u.trim();
 		if (e) try {
-			let u = /^(point|line|segment|ray|vector|circle|arc|sector|comment|polygon)\s+(\w+)\s*=\s*(.*?)(\s+(?:(?:style|color)=\w+|hidden)(?:\s+(?:(?:style|color)=\w+|hidden))*)?$/.exec(e);
-			if (!u) throw Error("Expected: type name = construction.");
-			let [, d = "", g = "", _ = "", y = ""] = u;
-			if (p(g), l.has(g)) throw Error(`Duplicate name: ${g}`);
-			l.add(g);
-			let b, x = /^\(([^,]+),([^,]+)\)$/.exec(_);
-			if (d === "point" && x) b = {
+			let l = /^(point|line|segment|ray|vector|circle|arc|sector|comment|polygon|animation)\s+(\w+)\s*=\s*(.*?)(\s+(?:(?:style|color)=\w+|label-[xy]=[^\s]+|label-hidden|hidden)(?:\s+(?:(?:style|color)=\w+|label-[xy]=[^\s]+|label-hidden|hidden))*)?$/.exec(e);
+			if (!l) throw Error("Expected: type name = construction.");
+			let [, u = "", d = "", m = "", v = ""] = l;
+			if (h(d), c.has(d)) throw Error(`Duplicate name: ${d}`);
+			c.add(d);
+			let b, x = /^\(([^,]+),([^,]+)\)$/.exec(m);
+			if (u === "animation") {
+				if (v.trim()) throw Error("Animation declarations do not accept appearance options.");
+				b = {
+					kind: "animation",
+					steps: _(m)
+				};
+			} else if (u === "point" && x) b = {
 				kind: "point",
 				x: f(x[1] ?? ""),
 				y: f(x[2] ?? "")
 			};
 			else {
-				let e = /^(\w+)\((.*)\)$/.exec(_);
+				let e = /^(\w+)\((.*)\)$/.exec(m);
 				if (!e) throw Error("Invalid construction.");
-				let t = e[1], n = m(e[2] ?? ""), c = n[0] ?? "", l = n[1] ?? "", u = /* @__PURE__ */ new Map(), g = (e, t) => {
+				let t = e[1], n = g(e[2] ?? ""), o = n[0] ?? "", c = n[1] ?? "", l = /* @__PURE__ */ new Map(), d = (e, t) => {
 					for (let r of n.slice(e)) {
 						let e = /^([\w-]+)=(.+)$/.exec(r), n = e?.[1] ?? "", i = e?.[2] ?? "";
-						if (!t.includes(n) || u.has(n)) throw Error(`Unexpected option: ${r}`);
-						u.set(n, i);
+						if (!t.includes(n) || l.has(n)) throw Error(`Unexpected option: ${r}`);
+						l.set(n, i);
 					}
 				};
 				if (r.includes(t)) {
 					let e = t, n = e === "homothety" ? "ratio" : e === "rotation" ? "angle" : null;
-					g(2, n ? [n] : []);
-					let r = n ? f((u.get(n) ?? "").replace(e === "rotation" ? /deg$/ : /$^/, "")) : 1;
+					d(2, n ? [n] : []);
+					let r = n ? e === "rotation" ? p(l.get(n) ?? "") * 180 / Math.PI : f(l.get(n) ?? "") : 1;
 					if (e === "homothety" && r === 0) throw Error("The homothety ratio must be nonzero.");
 					b = {
 						kind: "transform",
 						operation: e,
-						object: /^[A-Za-z][\w]*$/.test(c) ? p(c) : (() => {
-							let e = h(`${d} nested = ${c}`, a + 1)[0];
+						object: /^[A-Za-z][\w]*$/.test(o) ? h(o) : (() => {
+							let e = y(`${u} nested = ${o}`, a + 1)[0];
 							if (!e || e.hidden || e.color || e.stroke) throw Error("Expected a construction expression.");
 							return e.definition;
 						})(),
-						support: p(l),
-						output: d,
+						support: h(c),
+						output: u,
 						amount: r
 					};
-				} else if (d === "point" && t === "on") {
-					if (g(1, ["angle", "t"]), u.size !== 1) throw Error("Use angle=…deg or t=… .");
-					let e = u.get("angle");
+				} else if (u === "point" && t === "on") {
+					if (d(1, ["angle", "t"]), l.size !== 1) throw Error("Use angle=…deg or t=… .");
+					let e = l.get("angle");
 					b = {
 						kind: "on",
-						object: p(c),
-						parameter: e === void 0 ? f(u.get("t") ?? "") : o(f(e.replace(/deg$/, "")))
-					}, v.set(b, e === void 0 ? "linear" : "circular");
-				} else if (d === "point" && t === "intersection") {
-					g(2, ["branch"]);
-					let e = f(u.get("branch") ?? "0");
+						object: h(o),
+						parameter: e === void 0 ? f(l.get("t") ?? "") : p(e)
+					}, w.set(b, e === void 0 ? "linear" : "circular");
+				} else if (u === "point" && t === "intersection") {
+					d(2, ["branch"]);
+					let e = f(l.get("branch") ?? "0");
 					if (e !== 0 && e !== 1) throw Error("An intersection branch is 0 or 1.");
 					b = {
 						kind: "intersection",
-						first: p(c),
-						second: p(l),
+						first: h(o),
+						second: h(c),
 						branch: e
 					};
-				} else if (d === "polygon" && t === "polygon") {
-					let e = n.map(p);
+				} else if (u === "polygon" && t === "polygon") {
+					let e = n.map(h);
 					if (e.length < 3 || new Set(e).size !== e.length) throw Error("A polygon needs at least three distinct vertices.");
 					b = {
 						kind: "polygon",
 						vertices: e
 					};
-				} else if (d === "polygon" && t === "regularPolygon") {
-					g(2, ["sides"]);
-					let e = f(u.get("sides") ?? "");
+				} else if (u === "polygon" && t === "regularPolygon") {
+					d(2, ["sides"]);
+					let e = f(l.get("sides") ?? "");
 					if (!Number.isInteger(e) || e < 3 || e > 360) throw Error("Sides must be an integer from 3 to 360.");
 					b = {
 						kind: "regularPolygon",
-						first: p(c),
-						second: p(l),
+						first: h(o),
+						second: h(c),
 						sides: e
 					};
-				} else if (d === "point" && t === "midpoint" && n.length === 1) b = {
+				} else if (u === "point" && t === "midpoint" && n.length === 1) b = {
 					kind: "midpoint",
-					segment: p(c)
+					segment: h(o)
 				};
-				else if (d === "line" && t === "perpendicularBisector" && n.length === 1) b = {
+				else if (u === "line" && t === "perpendicularBisector" && n.length === 1) b = {
 					kind: "perpendicularBisector",
-					segment: p(c)
+					segment: h(o)
 				};
-				else if (d === "line" && (t === "parallel" || t === "perpendicular") && n.length === 2) b = {
+				else if (u === "line" && (t === "parallel" || t === "perpendicular") && n.length === 2) b = {
 					kind: t,
-					point: p(c),
-					support: p(l)
+					point: h(o),
+					support: h(c)
 				};
-				else if (d === "line" && t === "bisector" && n.length === 3) b = {
+				else if (u === "line" && t === "bisector" && n.length === 3) b = {
 					kind: "bisector",
-					first: p(c),
-					vertex: p(l),
-					second: p(n[2] ?? "")
+					first: h(o),
+					vertex: h(c),
+					second: h(n[2] ?? "")
 				};
-				else if (d === "line" && t === "tangent") {
-					g(2, ["branch"]);
-					let e = f(u.get("branch") ?? "0");
+				else if (u === "line" && t === "tangent") {
+					d(2, ["branch"]);
+					let e = f(l.get("branch") ?? "0");
 					if (e !== 0 && e !== 1) throw Error("A tangent branch is 0 or 1.");
 					b = {
 						kind: "tangent",
-						point: p(c),
-						circle: p(l),
+						point: h(o),
+						circle: h(c),
 						branch: e
 					};
-				} else if (d === "comment" && (t === "length" || t === "area" || t === "angle")) {
+				} else if (u === "comment" && (t === "length" || t === "area" || t === "angle")) {
 					let e = n.findIndex((e) => e.includes("=")), r = e < 0 ? n : n.slice(0, e);
-					if (g(r.length, ["dx", "dy"]), !(t === "angle" ? r.length === 3 || r.length === 2 : t === "length" ? r.length === 1 || r.length === 2 : r.length === 1)) throw Error("Invalid measurement arguments.");
-					let i = f(u.get("dx") ?? "0"), a = f(u.get("dy") ?? "0");
+					if (d(r.length, ["dx", "dy"]), !(t === "angle" ? r.length === 3 || r.length === 2 : t === "length" ? r.length === 1 || r.length === 2 : r.length === 1)) throw Error("Invalid measurement arguments.");
+					let i = f(l.get("dx") ?? "0"), a = f(l.get("dy") ?? "0");
 					b = {
 						kind: "measure",
 						operation: t,
-						inputs: r.map(p),
+						inputs: r.map(h),
 						...i || a ? { offset: {
 							x: i,
 							y: a
 						} } : {}
 					};
-				} else if (d === "comment" && t === "comment" && n.length === 2) {
-					let e = JSON.parse(l);
+				} else if (u === "comment" && t === "comment" && n.length >= 2) {
+					d(2, ["dx", "dy"]);
+					let e = JSON.parse(c);
 					if (typeof e != "string" || !e.trim()) throw Error("A comment needs nonempty quoted text.");
+					let t = /^\(([^,]+),([^,]+)\)$/.exec(o);
 					b = {
 						kind: "comment",
-						point: p(c),
-						text: e
+						point: t ? {
+							x: f(t[1] ?? ""),
+							y: f(t[2] ?? "")
+						} : h(o),
+						text: e,
+						...l.has("dx") || l.has("dy") ? { offset: {
+							x: f(l.get("dx") ?? "0"),
+							y: f(l.get("dy") ?? "0")
+						} } : {}
 					};
-				} else if ((d === "line" || d === "segment" || d === "ray" || d === "vector") && t === d) {
-					g(2, d === "segment" ? ["length"] : []);
-					let e = u.has("length") ? f(u.get("length") ?? "") : void 0;
+				} else if ((u === "line" || u === "segment" || u === "ray" || u === "vector") && t === u) {
+					d(2, u === "segment" ? ["length"] : []);
+					let e = l.has("length") ? f(l.get("length") ?? "") : void 0;
 					if (e !== void 0 && e <= 0) throw Error("The length must be positive.");
 					b = {
-						kind: d,
-						first: p(c),
-						second: p(l),
+						kind: u,
+						first: h(o),
+						second: h(c),
 						...e === void 0 ? {} : { length: e }
 					};
-				} else if (d === "circle" && t === "circle" && n.length === 2) {
-					let e = /^distance\((\w+),\s*(\w+)\)$/.exec(l), t = l.startsWith("through=") ? { through: p(l.slice(8)) } : e ? { distance: [p(e[1] ?? ""), p(e[2] ?? "")] } : f(l);
+				} else if (u === "circle" && t === "circle" && n.length === 2) {
+					let e = /^distance\((\w+),\s*(\w+)\)$/.exec(c), t = c.startsWith("through=") ? { through: h(c.slice(8)) } : e ? { distance: [h(e[1] ?? ""), h(e[2] ?? "")] } : f(c);
 					if (typeof t == "number" && t <= 0) throw Error("The radius must be positive.");
 					b = {
 						kind: "circle",
-						center: p(c),
+						center: h(o),
 						radius: t
 					};
-				} else if ((d === "arc" || d === "sector") && t === d) {
-					g(1, [
+				} else if ((u === "arc" || u === "sector") && t === u) {
+					d(1, [
 						"start",
 						"end",
 						"direction",
 						"relative-to"
 					]);
-					let e = u.get("direction") ?? "ccw";
+					let e = l.get("direction") ?? "ccw";
 					if (e !== "ccw" && e !== "cw") throw Error("Use direction=ccw or direction=cw.");
 					if (b = {
-						kind: d,
-						circle: p(c),
-						start: o(f((u.get("start") ?? "").replace(/deg$/, ""))),
-						end: o(f((u.get("end") ?? "").replace(/deg$/, ""))),
+						kind: u,
+						circle: h(o),
+						start: p(l.get("start") ?? ""),
+						end: p(l.get("end") ?? ""),
 						clockwise: e === "cw",
-						...u.has("relative-to") ? { relativeTo: p(u.get("relative-to") ?? "") } : {}
+						...l.has("relative-to") ? { relativeTo: h(l.get("relative-to") ?? "") } : {}
 					}, s(b.end - b.start) < i) throw Error("An arc must span more than 0 and less than 360 degrees.");
-				} else throw Error(`Unsupported ${d} construction: ${t}`);
+				} else throw Error(`Unsupported ${u} construction: ${t}`);
 			}
 			let S = {
-				id: g,
+				id: d,
 				hidden: !1,
 				definition: b
 			}, C = /* @__PURE__ */ new Set();
-			for (let e of y.trim().split(/\s+/).filter(Boolean)) {
+			for (let e of v.trim().split(/\s+/).filter(Boolean)) {
 				let [r = "", i = ""] = e.split("=");
 				if (C.has(r)) throw Error(`Duplicate appearance option: ${r}`);
-				if (C.add(r), r === "hidden") S.hidden = !0;
+				if (C.add(r), r === "label-x" || r === "label-y") S.labelOffset ??= {
+					x: 0,
+					y: 0
+				}, S.labelOffset[r === "label-x" ? "x" : "y"] = f(i);
+				else if (r === "label-hidden") S.labelHidden = !0;
+				else if (r === "hidden") S.hidden = !0;
 				else if (r === "style") {
 					if (!n.includes(i)) throw Error(`Unknown stroke style: ${i}`);
 					i === "hidden" ? S.hidden = !0 : i !== "solid" && (S.stroke = i);
@@ -227,30 +296,61 @@ function h(e, a = 0) {
 					S.color = i;
 				}
 			}
-			c.push(S);
+			o.push(S);
 		} catch (e) {
-			throw Error(`Line ${u + 1}: ${e instanceof Error ? e.message : e}`);
+			throw Error(`Line ${l + 1}: ${e instanceof Error ? e.message : e}`);
 		}
 	}
-	return c;
+	return o;
 }
-function g(e) {
-	let t = h(e), n = new Map(t.map((e) => [e.id, e])), r = /* @__PURE__ */ new Set(), i = /* @__PURE__ */ new Set(), a = (e) => {
+function b(e) {
+	let t;
+	for (let [n, r] of v(m(e)).split("\n").entries()) {
+		if (!/^\s*(?:label|title)\s*=/.test(r)) continue;
+		if (t !== void 0) throw Error(`Line ${n + 1}: Duplicate figure label.`);
+		let e = r.slice(r.indexOf("=") + 1).trim();
+		try {
+			let n = JSON.parse(e);
+			if (typeof n != "string") throw Error("Expected text");
+			t = n;
+		} catch {
+			throw Error(`Line ${n + 1}: Use label = "Figure title".`);
+		}
+	}
+	return t;
+}
+function x(e, t) {
+	b(e);
+	let n = m(e), r = /^\s*(?:label|title)\s*=\s*"(?:[^"\\]|\\.)*"/m.exec(n), i = `label = ${JSON.stringify(t)}`;
+	if (r) {
+		let t = r.index + r[0].search(/(?:label|title)\s*=/), n = r.index + r[0].length;
+		return e.slice(0, t) + i + e.slice(n);
+	}
+	return t ? `${i}\n${e}` : e;
+}
+function S(e) {
+	b(e);
+	let t = y(m(e).split("\n").map((e) => /^\s*(?:label|title)\s*=/.test(e) ? "" : e).join("\n")), n = new Map(t.map((e) => [e.id, e])), r = /* @__PURE__ */ new Set(), i = /* @__PURE__ */ new Set(), a = (e) => {
 		if (i.has(e)) return;
 		if (r.has(e)) throw Error(`Circular dependency: ${e}`);
 		let t = n.get(e);
 		if (!t) throw Error(`Unknown object: ${e}`);
 		r.add(e);
-		for (let e of y(t.definition)) a(e);
+		for (let e of T(t.definition)) a(e);
 		let o = (e) => {
 			let t = n.get(e)?.definition;
-			return t ? _(t) : "";
+			return t ? C(t) : "";
 		}, s = (t, n) => {
 			if (!n.includes(o(t))) throw Error(`Invalid support ${t} for ${e}.`);
 		}, c = (t) => {
+			if (t.kind === "animation") for (let e of t.steps.flat()) {
+				let t = n.get(e);
+				if (!t) throw Error(`Unknown animation object: ${e}`);
+				if (t.definition.kind === "animation") throw Error("Animations can only reveal geometric objects.");
+			}
 			if (t.kind === "transform") {
 				if (typeof t.object == "string") s(t.object, [t.output]);
-				else if (c(t.object), _(t.object) !== t.output) throw Error(`Invalid nested construction for ${e}.`);
+				else if (c(t.object), C(t.object) !== t.output) throw Error(`Invalid nested construction for ${e}.`);
 				s(t.support, t.operation === "axialSymmetry" ? [
 					"line",
 					"segment",
@@ -258,9 +358,9 @@ function g(e) {
 					"vector"
 				] : t.operation === "translation" ? ["vector"] : ["point"]);
 			}
-			if (t.kind === "polygon" || t.kind === "regularPolygon") for (let e of y(t)) s(e, ["point"]);
+			if (t.kind === "polygon" || t.kind === "regularPolygon") for (let e of T(t)) s(e, ["point"]);
 			if ((t.kind === "line" || t.kind === "segment" || t.kind === "ray" || t.kind === "vector") && (s(t.first, ["point"]), s(t.second, ["point"])), t.kind === "circle" && (s(t.center, ["point"]), typeof t.radius != "number")) for (let e of "through" in t.radius ? [t.radius.through] : t.radius.distance) s(e, ["point"]);
-			if (t.kind === "on" && s(t.object, v.get(t) === "linear" ? [
+			if (t.kind === "on" && s(t.object, w.get(t) === "linear" ? [
 				"line",
 				"segment",
 				"ray",
@@ -314,15 +414,15 @@ function g(e) {
 				];
 				for (let n of t.inputs) s(n, e);
 			}
-			t.kind === "comment" && s(t.point, ["point"]);
+			t.kind === "comment" && typeof t.point == "string" && s(t.point, ["point"]);
 		};
 		c(t.definition), r.delete(e), i.add(e);
 	};
 	for (let e of t) a(e.id);
 	return t;
 }
-function _(e) {
-	return e.kind === "transform" ? e.output : e.kind === "regularPolygon" ? "polygon" : e.kind === "measure" ? "comment" : e.kind === "on" || e.kind === "intersection" || e.kind === "midpoint" ? "point" : [
+function C(e) {
+	return e.kind === "animation" ? "animation" : e.kind === "transform" ? e.output : e.kind === "regularPolygon" ? "polygon" : e.kind === "measure" ? "comment" : e.kind === "on" || e.kind === "intersection" || e.kind === "midpoint" ? "point" : [
 		"parallel",
 		"perpendicular",
 		"perpendicularBisector",
@@ -330,11 +430,12 @@ function _(e) {
 		"tangent"
 	].includes(e.kind) ? "line" : e.kind;
 }
-var v = /* @__PURE__ */ new WeakMap();
-function y(e) {
+var w = /* @__PURE__ */ new WeakMap();
+function T(e) {
 	switch (e.kind) {
+		case "animation": return [];
 		case "measure": return e.inputs;
-		case "transform": return [...typeof e.object == "string" ? [e.object] : y(e.object), e.support];
+		case "transform": return [...typeof e.object == "string" ? [e.object] : T(e.object), e.support];
 		case "polygon": return e.vertices;
 		case "regularPolygon": return [e.first, e.second];
 		case "point": return [];
@@ -354,19 +455,19 @@ function y(e) {
 			e.second
 		];
 		case "tangent": return [e.point, e.circle];
-		case "comment": return [e.point];
+		case "comment": return typeof e.point == "string" ? [e.point] : [];
 		case "sector":
 		case "arc": return [e.circle, ...e.relativeTo ? [e.relativeTo] : []];
 		case "circle": return [e.center, ...typeof e.radius == "number" ? [] : "through" in e.radius ? [e.radius.through] : e.radius.distance];
 	}
 }
-function b(e) {
+function E(e) {
 	return e.kind === "line" || e.kind === "segment" || e.kind === "ray" || e.kind === "vector";
 }
-function x(e) {
+function D(e) {
 	return e.kind === "circle" || e.kind === "arc";
 }
-function S(e, t) {
+function O(e, t) {
 	if (e.kind === "arc") {
 		let n = Math.atan2(t.y - e.center.y, t.x - e.center.x);
 		return (e.sweep > 0 ? s(n - e.start) : s(e.start - n)) <= Math.abs(e.sweep) + i;
@@ -377,12 +478,12 @@ function S(e, t) {
 	}
 	return !0;
 }
-function C(e, t) {
+function k(e, t) {
 	let n = [];
-	if (b(e) && b(t)) {
+	if (E(e) && E(t)) {
 		let r = u(e.second, e.first), a = u(t.second, t.first), o = l(r, a);
 		Math.abs(o) > i && (n = [d(e.first, r, l(u(t.first, e.first), a) / o)]);
-	} else if (x(e) && x(t)) {
+	} else if (D(e) && D(t)) {
 		let r = u(t.center, e.center), a = c(e.center, t.center);
 		if (a > i && a <= e.radius + t.radius + i && a >= Math.abs(e.radius - t.radius) - i) {
 			let i = (e.radius ** 2 - t.radius ** 2 + a ** 2) / (2 * a), o = Math.sqrt(Math.max(0, e.radius ** 2 - i ** 2)), s = d(e.center, r, i / a), c = {
@@ -392,22 +493,22 @@ function C(e, t) {
 			n = [d(s, c, o), d(s, c, -o)];
 		}
 	} else {
-		let r = b(e) ? e : b(t) ? t : null, a = x(e) ? e : x(t) ? t : null;
+		let r = E(e) ? e : E(t) ? t : null, a = D(e) ? e : D(t) ? t : null;
 		if (r && a) {
 			let e = u(r.second, r.first), t = u(r.first, a.center), o = e.x ** 2 + e.y ** 2, s = 2 * (t.x * e.x + t.y * e.y), c = t.x ** 2 + t.y ** 2 - a.radius ** 2, l = s ** 2 - 4 * o * c;
 			l >= -1e-9 && o > i && (n = [d(r.first, e, (-s - Math.sqrt(Math.max(0, l))) / (2 * o)), d(r.first, e, (-s + Math.sqrt(Math.max(0, l))) / (2 * o))]);
 		}
 	}
-	return n.map((n) => S(e, n) && S(t, n) ? n : null);
+	return n.map((n) => O(e, n) && O(t, n) ? n : null);
 }
-function w(e, t, n, r) {
+function A(e, t, n, r) {
 	let a, s = 1, c = 1;
 	if (n === "translation") {
 		if (t.kind !== "vector") throw Error("Select a vector.");
 		let e = u(t.second, t.first);
 		a = (t) => d(t, e, 1);
 	} else if (n === "axialSymmetry") {
-		if (!b(t)) throw Error("Select a linear axis.");
+		if (!E(t)) throw Error("Select a linear axis.");
 		let e = u(t.second, t.first), n = e.x ** 2 + e.y ** 2;
 		if (n < i * i) throw Error("The axis is undefined.");
 		c = -1, a = (r) => {
@@ -448,7 +549,7 @@ function w(e, t, n, r) {
 		...e,
 		point: a(e.point)
 	};
-	if (b(e)) return {
+	if (E(e)) return {
 		...e,
 		first: a(e.first),
 		second: a(e.second)
@@ -475,7 +576,7 @@ function w(e, t, n, r) {
 		sweep: c * e.sweep
 	};
 }
-function T(e, t) {
+function j(e, t) {
 	let n = e.inputs.map(t), r = n[0];
 	if (!r) throw Error("Missing measurement support.");
 	let o = 0, s, d, f = (e) => ({
@@ -484,8 +585,8 @@ function T(e, t) {
 	});
 	if (e.operation === "angle" && n.length === 2) {
 		let e = n[1];
-		if (!b(r) || !e || !b(e)) throw Error("Select two linear sides.");
-		let t = [r.first, r.second].find((t) => c(t, e.first) < i || c(t, e.second) < i) ?? C(r, e).find((e) => e !== null);
+		if (!E(r) || !e || !E(e)) throw Error("Select two linear sides.");
+		let t = [r.first, r.second].find((t) => c(t, e.first) < i || c(t, e.second) < i) ?? k(r, e).find((e) => e !== null);
 		if (!t) throw Error("The sides need a common vertex or intersection.");
 		let a = (e) => c(e.first, t) > c(e.second, t) ? e.first : e.second, f = a(r), p = a(e);
 		if (c(f, t) < i || c(p, t) < i) throw Error("The angle needs two nonzero arms.");
@@ -545,7 +646,7 @@ function T(e, t) {
 		...s ? { angleMark: s } : {}
 	};
 }
-function E(e) {
+function M(e) {
 	let t = /* @__PURE__ */ new Map(), n = /* @__PURE__ */ new Map(), r = new Map(e.map((e) => [e.id, e])), o = /* @__PURE__ */ new Set(), l = (e) => {
 		if (t.has(e)) return t.get(e) ?? null;
 		if (o.has(e)) throw Error(`Circular dependency: ${e}`);
@@ -563,7 +664,7 @@ function E(e) {
 				return t.point;
 			}, p = (e) => {
 				let t;
-				if (e.kind === "transform") t = w(typeof e.object == "string" ? o(e.object) : p(e.object), o(e.support), e.operation, e.amount);
+				if (e.kind === "transform") t = A(typeof e.object == "string" ? o(e.object) : p(e.object), o(e.support), e.operation, e.amount);
 				else if (e.kind === "polygon" || e.kind === "regularPolygon") {
 					let n;
 					if (e.kind === "polygon") n = e.vertices.map(f);
@@ -615,7 +716,7 @@ function E(e) {
 					let r = 0;
 					if (e.relativeTo) {
 						let t = o(e.relativeTo);
-						if (!b(t)) throw Error("Expected a direction.");
+						if (!E(t)) throw Error("Expected a direction.");
 						r = Math.atan2(t.second.y - t.first.y, t.second.x - t.first.x);
 					}
 					t = {
@@ -626,13 +727,13 @@ function E(e) {
 					};
 				} else if (e.kind === "on") {
 					let n = o(e.object), r;
-					if (b(n)) r = d(n.first, u(n.second, n.first), O(n, e.parameter));
-					else if (x(n)) {
+					if (E(n)) r = d(n.first, u(n.second, n.first), P(n, e.parameter));
+					else if (D(n)) {
 						let t = e.parameter;
-						n.kind === "arc" && !S(n, d(n.center, {
+						n.kind === "arc" && !O(n, d(n.center, {
 							x: Math.cos(t),
 							y: Math.sin(t)
-						}, n.radius)) && (t = D(n, t)), r = d(n.center, {
+						}, n.radius)) && (t = N(n, t)), r = d(n.center, {
 							x: Math.cos(t),
 							y: Math.sin(t)
 						}, n.radius);
@@ -641,13 +742,18 @@ function E(e) {
 						kind: "point",
 						point: r
 					};
-				} else if (e.kind === "measure") t = T(e, o);
-				else if (e.kind === "comment") t = {
-					kind: "comment",
-					point: f(e.point),
-					text: e.text
-				};
-				else if (e.kind === "midpoint" || e.kind === "perpendicularBisector") {
+				} else if (e.kind === "measure") t = j(e, o);
+				else if (e.kind === "comment") {
+					let n = typeof e.point == "string" ? f(e.point) : e.point;
+					t = {
+						kind: "comment",
+						point: {
+							x: n.x + (e.offset?.x ?? 0),
+							y: n.y + (e.offset?.y ?? 0)
+						},
+						text: e.text
+					};
+				} else if (e.kind === "midpoint" || e.kind === "perpendicularBisector") {
 					let n = o(e.segment);
 					if (n.kind !== "segment") throw Error("Expected a segment.");
 					let r = d(n.first, u(n.second, n.first), .5), i = u(n.second, n.first);
@@ -664,7 +770,7 @@ function E(e) {
 					};
 				} else if (e.kind === "parallel" || e.kind === "perpendicular") {
 					let n = o(e.support);
-					if (!b(n)) throw Error("Expected a linear support.");
+					if (!E(n)) throw Error("Expected a linear support.");
 					let r = f(e.point), i = u(n.second, n.first);
 					t = {
 						kind: "line",
@@ -711,7 +817,7 @@ function E(e) {
 						};
 					}
 				} else if (e.kind === "intersection") {
-					let n = C(o(e.first), o(e.second))[e.branch];
+					let n = k(o(e.first), o(e.second))[e.branch];
 					if (!n) throw Error("This intersection does not exist.");
 					t = {
 						kind: "point",
@@ -727,41 +833,42 @@ function E(e) {
 			o.delete(e);
 		}
 	};
-	for (let t of e) l(t.id);
+	for (let t of e) t.definition.kind !== "animation" && l(t.id);
 	return {
 		values: t,
 		errors: n
 	};
 }
-function D(e, t) {
+function N(e, t) {
 	let n = (e) => Math.abs(Math.atan2(Math.sin(e - t), Math.cos(e - t)));
 	return n(e.start) <= n(e.start + e.sweep) ? e.start : e.start + e.sweep;
 }
-function O(e, t) {
+function P(e, t) {
 	return e.kind === "segment" || e.kind === "vector" ? Math.max(0, Math.min(1, t)) : e.kind === "ray" ? Math.max(0, t) : t;
 }
-function k(e, t) {
-	if (x(e)) {
+function F(e, t) {
+	if (D(e)) {
 		let n = Math.atan2(t.y - e.center.y, t.x - e.center.x);
-		return e.kind === "arc" && !S(e, t) ? D(e, n) : n;
+		return e.kind === "arc" && !O(e, t) ? N(e, n) : n;
 	}
-	if (b(e)) {
+	if (E(e)) {
 		let n = u(e.second, e.first), r = u(t, e.first);
-		return O(e, (r.x * n.x + r.y * n.y) / (n.x ** 2 + n.y ** 2));
+		return P(e, (r.x * n.x + r.y * n.y) / (n.x ** 2 + n.y ** 2));
 	}
 	throw Error("Select a line, segment, circle or arc.");
 }
-function A(e) {
+function I(e) {
 	let t = (e) => String(Number(e.toPrecision(12)));
-	return e.map(({ id: n, hidden: r, stroke: i, color: a, definition: o }) => {
-		let s = _(o), c = (n) => {
+	return e.map(({ id: n, hidden: r, stroke: i, color: a, labelOffset: o, labelHidden: s, definition: c }) => {
+		let l = C(c), u = (n) => {
+			if (n.kind === "animation") return `[${n.steps.map((e) => Array.isArray(e) ? `[${e.join(", ")}]` : e).join(", ")}]`;
 			let r;
-			if (n.kind === "transform") r = `${n.operation}(${typeof n.object == "string" ? n.object : c(n.object)}, ${n.support}${n.operation === "homothety" ? `, ratio=${t(n.amount)}` : n.operation === "rotation" ? `, angle=${t(n.amount)}deg` : ""})`;
+			if (n.kind === "transform") r = `${n.operation}(${typeof n.object == "string" ? n.object : u(n.object)}, ${n.support}${n.operation === "homothety" ? `, ratio=${t(n.amount)}` : n.operation === "rotation" ? `, angle=${t(n.amount)}deg` : ""})`;
 			else if (n.kind === "polygon") r = `polygon(${n.vertices.join(", ")})`;
 			else if (n.kind === "regularPolygon") r = `regularPolygon(${n.first}, ${n.second}, sides=${n.sides})`;
 			else if (n.kind === "point") r = `(${t(n.x)}, ${t(n.y)})`;
 			else if (n.kind === "on") {
-				let i = e.find((e) => e.id === n.object)?.definition, a = i ? _(i) : "";
+				let i = e.find((e) => e.id === n.object)?.definition, a = i ? C(i) : "";
 				r = `on(${n.object}, ${[
 					"line",
 					"segment",
@@ -772,7 +879,7 @@ function A(e) {
 			else if (n.kind === "line" || n.kind === "segment" || n.kind === "ray" || n.kind === "vector") r = `${n.kind}(${n.first}, ${n.second}${n.kind === "segment" && n.length !== void 0 ? `, length=${t(n.length)}` : ""})`;
 			else if (n.kind === "circle") r = `circle(${n.center}, ${typeof n.radius == "number" ? t(n.radius) : "through" in n.radius ? `through=${n.radius.through}` : `distance(${n.radius.distance.join(", ")})`})`;
 			else if (n.kind === "measure") r = `${n.operation}(${n.inputs.join(", ")}${n.offset ? `, dx=${t(n.offset.x)}, dy=${t(n.offset.y)}` : ""})`;
-			else if (n.kind === "comment") r = `comment(${n.point}, ${JSON.stringify(n.text)})`;
+			else if (n.kind === "comment") r = `comment(${typeof n.point == "string" ? n.point : `(${t(n.point.x)}, ${t(n.point.y)})`}, ${JSON.stringify(n.text)}${n.offset ? `, dx=${t(n.offset.x)}, dy=${t(n.offset.y)}` : ""})`;
 			else if (n.kind === "midpoint" || n.kind === "perpendicularBisector") r = `${n.kind}(${n.segment})`;
 			else if (n.kind === "parallel" || n.kind === "perpendicular") r = `${n.kind}(${n.point}, ${n.support})`;
 			else if (n.kind === "bisector") r = `bisector(${n.first}, ${n.vertex}, ${n.second})`;
@@ -781,11 +888,40 @@ function A(e) {
 			else throw Error("Unsupported construction.");
 			return r;
 		};
-		return `${s} ${n} = ${c(o)}${i && i !== "solid" ? ` style=${i}` : ""}${a ? ` color=${a}` : ""}${r ? " hidden" : ""}`;
+		return `${l} ${n} = ${u(c)}${i && i !== "solid" ? ` style=${i}` : ""}${a ? ` color=${a}` : ""}${r ? " hidden" : ""}${s ? " label-hidden" : ""}${o ? ` label-x=${t(o.x)} label-y=${t(o.y)}` : ""}`;
 	}).join("\n");
 }
-var j = "point A = (-3, 0)\npoint B = (3, 0)\nsegment AB = segment(A, B)\ncircle cA = circle(A, distance(A, B)) hidden\ncircle cB = circle(B, distance(A, B)) hidden\narc aC = arc(cA, start=40deg, end=80deg, relative-to=AB)\narc aD = arc(cA, start=280deg, end=320deg, relative-to=AB)\narc bC = arc(cB, start=100deg, end=140deg, relative-to=AB)\narc bD = arc(cB, start=220deg, end=260deg, relative-to=AB)\npoint C = intersection(aC, bC, branch=0)\npoint D = intersection(aD, bD, branch=1)\nline m = line(C, D)";
+var L = "point A = (-3, 0)\npoint B = (3, 0)\nsegment AB = segment(A, B)\ncircle cA = circle(A, distance(A, B)) hidden\ncircle cB = circle(B, distance(A, B)) hidden\narc aC = arc(cA, start=40deg, end=80deg, relative-to=AB)\narc aD = arc(cA, start=280deg, end=320deg, relative-to=AB)\narc bC = arc(cB, start=100deg, end=140deg, relative-to=AB)\narc bD = arc(cB, start=220deg, end=260deg, relative-to=AB)\npoint C = intersection(aC, bC, branch=0)\npoint D = intersection(aD, bD, branch=1)\nline m = line(C, D)";
+function R(e, t, n) {
+	if (h(n), !e.some((e) => e.id === t)) throw Error(`Unknown object: ${t}`);
+	if (n !== t && e.some((e) => e.id === n)) throw Error(`Duplicate name: ${n}`);
+	let r = /* @__PURE__ */ new Set([
+		"first",
+		"second",
+		"vertex",
+		"point",
+		"center",
+		"circle",
+		"segment",
+		"support",
+		"object",
+		"through",
+		"relativeTo",
+		"vertices",
+		"inputs",
+		"distance",
+		"steps"
+	]), i = (e, a = "") => typeof e == "string" ? r.has(a) && e === t ? n : e : Array.isArray(e) ? e.map((e) => i(e, a)) : e && typeof e == "object" ? Object.fromEntries(Object.entries(e).map(([e, t]) => [e, i(t, e)])) : e;
+	return e.map((e) => ({
+		...e,
+		id: e.id === t ? n : e.id,
+		definition: e.id === t && e.definition.kind === "comment" ? {
+			...i(e.definition),
+			text: n
+		} : i(e.definition)
+	}));
+}
 //#endregion
-export { t as GEOMETRY_COLORS, n as GEOMETRY_STYLES, r as GEOMETRY_TRANSFORMATIONS, j as MEDIATRIX_CONSTRUCTION, _ as constructionKind, S as contains, y as dependencies, c as distance, E as evaluateGeometry, C as intersections, b as isLinear, k as parameterAt, g as parseGeometry, A as serializeGeometry };
+export { t as GEOMETRY_COLORS, n as GEOMETRY_STYLES, r as GEOMETRY_TRANSFORMATIONS, L as MEDIATRIX_CONSTRUCTION, C as constructionKind, O as contains, T as dependencies, c as distance, M as evaluateGeometry, b as geometrySourceLabel, k as intersections, E as isLinear, F as parameterAt, S as parseGeometry, R as renameGeometry, I as serializeGeometry, x as withGeometryLabel };
 
 //# sourceMappingURL=geometry.js.map

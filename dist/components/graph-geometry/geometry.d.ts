@@ -7,7 +7,11 @@ export interface GeometryPoint {
 }
 export declare const GEOMETRY_TRANSFORMATIONS: readonly ["axialSymmetry", "centralSymmetry", "homothety", "rotation", "translation"];
 export type GeometryTransformation = (typeof GEOMETRY_TRANSFORMATIONS)[number];
+export type GeometryAnimationStep = string | string[];
 export type GeometryDefinition = {
+    kind: "animation";
+    steps: GeometryAnimationStep[];
+} | {
     kind: "measure";
     offset?: GeometryPoint;
     operation: "length" | "area" | "angle";
@@ -68,8 +72,9 @@ export type GeometryDefinition = {
     branch: number;
 } | {
     kind: "comment";
-    point: string;
+    point: string | GeometryPoint;
     text: string;
+    offset?: GeometryPoint;
 } | {
     kind: "circle";
     center: string;
@@ -87,6 +92,8 @@ export type GeometryDefinition = {
     relativeTo?: string;
 };
 export interface GeometryObject {
+    labelOffset?: GeometryPoint;
+    labelHidden?: boolean;
     id: string;
     hidden: boolean;
     stroke?: GeometryStroke;
@@ -129,10 +136,14 @@ export interface GeometryResult {
     errors: Map<string, string>;
 }
 export declare const distance: (a: GeometryPoint, b: GeometryPoint) => number;
+/** Reads the optional quoted figure label (title is an alias). */
+export declare function geometrySourceLabel(source: string): string | undefined;
+/** Adds or updates figure metadata without changing commands or draft comments. */
+export declare function withGeometryLabel(source: string, label: string): string;
 /** Parses construction commands and validates their dependency graph. */
 export declare function parseGeometry(source: string): GeometryObject[];
 /** Geometric kind produced by a construction, independent of its recipe. */
-export declare function constructionKind(d: GeometryDefinition): GeometryValue["kind"];
+export declare function constructionKind(d: GeometryDefinition): GeometryValue["kind"] | "animation";
 export declare function dependencies(d: GeometryDefinition): string[];
 export declare function isLinear(value: GeometryValue): value is Extract<GeometryValue, {
     kind: "line" | "segment" | "ray" | "vector";
@@ -144,3 +155,5 @@ export declare function evaluateGeometry(objects: readonly GeometryObject[]): Ge
 export declare function parameterAt(support: GeometryValue, p: GeometryPoint): number;
 export declare function serializeGeometry(objects: readonly GeometryObject[]): string;
 export declare const MEDIATRIX_CONSTRUCTION = "point A = (-3, 0)\npoint B = (3, 0)\nsegment AB = segment(A, B)\ncircle cA = circle(A, distance(A, B)) hidden\ncircle cB = circle(B, distance(A, B)) hidden\narc aC = arc(cA, start=40deg, end=80deg, relative-to=AB)\narc aD = arc(cA, start=280deg, end=320deg, relative-to=AB)\narc bC = arc(cB, start=100deg, end=140deg, relative-to=AB)\narc bD = arc(cB, start=220deg, end=260deg, relative-to=AB)\npoint C = intersection(aC, bC, branch=0)\npoint D = intersection(aD, bD, branch=1)\nline m = line(C, D)";
+/** Renames an object and its references; a renamed comment displays its new name. */
+export declare function renameGeometry(objects: readonly GeometryObject[], from: string, to: string): GeometryObject[];

@@ -87,6 +87,10 @@ Attributes
   | <code>align</code> | <code>&quot;normal&quot; \| &quot;stretch&quot; \| &quot;center&quot; \| &quot;start&quot; \| &quot;end&quot; \| &quot;flex-start&quot; \| &quot;flex-end&quot; \| &quot;self-start&quot; \| &quot;self-end&quot; \| &quot;baseline&quot; \| &quot;first baseline&quot; \| &quot;last baseline&quot;</code> | <code>&quot;center&quot;</code> | Cross-axis alignment applied to `align-items`. |
   | <code>gap</code> | <code>string</code> | <code>&quot;1rem&quot;</code> | Gap between clustered items. When absent, uses the --tp-cluster-gap CSS default. |
   | <code>justify</code> | <code>&quot;normal&quot; \| &quot;start&quot; \| &quot;end&quot; \| &quot;flex-start&quot; \| &quot;flex-end&quot; \| &quot;center&quot; \| &quot;left&quot; \| &quot;right&quot; \| &quot;space-between&quot; \| &quot;space-around&quot; \| &quot;space-evenly&quot; \| &quot;stretch&quot;</code> | <code>&quot;flex-start&quot;</code> | Main-axis alignment applied to `justify-content`. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-cluster>`]
 
 Methods
@@ -112,6 +116,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_cluster.TpCluster.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

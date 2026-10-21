@@ -6,6 +6,8 @@ The custom `<tp-markup-multi-pages>` element implements the <tp-icon name="marku
 
 <tp-iframe src="/docs/components/markup-multi-pages/examples/introduction-frame.html" title="tp-markup-multi-pages — Basic usage" style="display: flow-root; inline-size: auto; height: 32rem;"></tp-iframe>
 
+The language selector appears only when `langs` declares at least two distinct comma-separated language codes (for example, `langs="fr,en"`). Without `langs`, or with a single language, it stays hidden. Changes to `langs` update the selector immediately; translation-file availability does not control its visibility.
+
 ## Usage
 
 ### User interactions
@@ -16,6 +18,10 @@ Personal annotations are saved per document in this browser's localStorage, with
 
 | Control or gesture | Result |
 | --- | --- |
+| Expand all / Collapse all (sidebar) | Open or close every branch of the global table of contents. Page order stays unchanged. |
+| Widen table of contents / Restore width | Fit the sidebar to the longest title, including nested titles, on one line. Click again to restore the previous divider position. On small screens, width is limited to the viewport and long titles can scroll horizontally. |
+| Search (left of the sidebar controls) | Show or hide a clearable search field. Matching titles are highlighted, their ancestor branches open automatically, and the sidebar scrolls to the first result below the search controls; the displayed page does not change. Search ignores case and accents. A search with no matches displays “0 results” in the danger color. |
+| Clear search | Remove highlights and the result count; branches opened by the search remain open. |
 | Calculator (between Code and Personal annotations) | Open or close the scientific calculator. Calculations are retained when closing the panel or navigating between pages. |
 | Personal annotations (comment with pencil in the toolbar) | Open the annotation list. The button is immediately after Calculator. Use the large + button to add an annotation, select a document element, enter text and Save. The close icon is at the right of the panel title. |
 | Annotation pin | Click to open the note, or drag it to another document element. Its attachment is saved. |
@@ -29,6 +35,10 @@ Personal annotations are saved per document in this browser's localStorage, with
 
 | Key or gesture | Result |
 | --- | --- |
+| Enter / Space on a sidebar button | Expand/collapse branches, toggle the sidebar width, or open/close search. |
+| Typing in sidebar search | Update matching titles and open their ancestors. |
+| Enter in sidebar search | Scroll to the next result, wrapping to the first. |
+| Escape in sidebar search | Close and clear search, then return focus to its button. |
 | Selecting an annotation target | Tab to a paragraph, heading or other available target, then Enter to select it. Escape cancels. |
 | Annotation pin arrows | Move the folded annotation; Shift uses smaller steps. Enter or Space opens it. |
 | Tab / Shift+Tab | Move between the available controls. |
@@ -80,10 +90,14 @@ Attributes
   | <code>brand</code> | <code>string</code> | <code>&quot;tp-default&quot;</code> | Controls the brand. |
   | <code>git</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the git. |
   | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the label. |
-  | <code>langs</code> | <code>string</code> | <code>&quot;en,fr&quot;</code> | Controls the langs. |
+  | <code>langs</code> | <code>string</code> | <code>&quot;&quot;</code> | Comma-separated language codes. The selector is hidden when absent, empty or limited to one distinct language; otherwise it displays the declared languages. |
   | <code>menu</code> | <code>boolean</code> | <code>false</code> | Controls the menu. |
   | <code>repository</code> | <code>string</code> | <code>&quot;/docs&quot;</code> | Controls the repository. |
   | <code>theme</code> | <code>TpMarkupMultiPagesTheme</code> | <code>&quot;&quot;</code> | Controls the theme. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-markup-multi-pages>`]
 
 Methods
@@ -109,6 +123,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markup-multi-pages.TpMarkupMultiPages.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -453,6 +477,10 @@ All tp-components used by `<tp-markup-multi-pages>` are loaded automatically by 
 @summary Splitter component with two resizable panels.
 -->
 <!--
+@tp-dependency tp-textfield
+@summary Single-line and automatically growing multiline text field.
+-->
+<!--
 @tp-dependency tp-theme
 @summary Parent-scoped light/dark/auto theme controller with embedded UI.
 -->
@@ -476,6 +504,7 @@ All tp-components used by `<tp-markup-multi-pages>` are loaded automatically by 
 - [`<tp-post-it-editor>`](../post-it-editor/index.md) : creates and edits persistent personal annotations attached to document elements.
 - [`<tp-source>`](../source/index.md) : Source repository link button.
 - [`<tp-splitter>`](../splitter/index.md) : Splitter component with two resizable panels.
+- [`<tp-textfield>`](../textfield/index.md) : Single-line and automatically growing multiline text field.
 - [`<tp-theme>`](../theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
 - [`<tp-toolbar>`](../toolbar/index.md) : Sticky toolbar with start / center / end sections,
 - [`<tp-tree>`](../tree/index.md) : Generic tree component for interactive hierarchical editing.

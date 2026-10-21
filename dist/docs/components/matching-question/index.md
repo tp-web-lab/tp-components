@@ -19,6 +19,10 @@ The custom `<tp-matching-question>` element implements the Matching question fun
 
 ## Usage
 
+`src` selects the source format from the URL extension: `.json`, `.html`/`.htm`, `.md`/`.markdown`, `.rst`/`.rest`, or `.adoc`/`.asciidoc`. Extension matching ignores case, query parameters and fragments. URLs without a file extension retain the JSON behavior.
+
+JSON uses this component's question schema. Other formats use the same definition list and native component syntax as an inline question, either as a bare definition list or inside the matching question component. For example, `src="/docs/exercises/general.md"` loads a Markdown definition. Attributes on the receiving question, such as `mode` and `partial`, remain authoritative. Changing `src` reloads the question; unsupported extensions and loading errors appear in the form.
+
 With the boolean `heading` attribute (absent by default), the first list contains one title per following column. It is excluded from shuffling, associations and scoring; item ranks start at 1 in each remaining list. The title count must equal the number of columns, independently of their item count. Rich title content is preserved. Changing `heading` reinterprets the original lists and clears existing associations. A `dl` with named columns remains supported and already supplies its own headings.
 
 The question passes `heading` to its internal `tp-matching`. With a JSON source, the first `form` array supplies titles when `heading` is present and no separate `headers` array is supplied.
@@ -138,6 +142,13 @@ Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
   | <code>heading</code> | <code>boolean</code> | <code>false</code> | Passes heading to the matching widget; the first list supplies column titles. |
+  | <code>mode</code> | <code>string</code> | <code>&quot;mixed&quot;</code> | Blank mode: opened, closed, or mixed local choices. *(inherited from <code>tp-question</code>)* |
+  | <code>open</code> | <code>boolean</code> | <code>false</code> | Expands the question; absent by default, leaving only its title visible. *(inherited from <code>tp-question</code>)* |
+  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition. *(inherited from <code>tp-question</code>)* |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-matching-question>`]
 
 Methods
@@ -163,6 +174,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_matching-question.TpMatchingQuestion.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -22,9 +22,9 @@ Complete both sentences.
 
 Form::
 +
-The capital of France is [tp-textfield,clearable,name="france-capital",placeholder="Capital",aria-label="Capital of France"]#france-capital#.
+The capital of France is [tp-blank,clearable,name="france-capital",placeholder="Capital",aria-label="Capital of France"]#france-capital#.
 +
-The capital of Italy is [tp-textfield,clearable,name="italy-capital",placeholder="Capital",aria-label="Capital of Italy"]#italy-capital#.
+The capital of Italy is [tp-blank,clearable,name="italy-capital",placeholder="Capital",aria-label="Capital of Italy"]#italy-capital#.
 
 Feedback::
 +
@@ -50,9 +50,16 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ====
 * case-sensitive
 
-* closed
-
 * partial
+====
+
+[tp-radio-list,data-setting="mode",label="mode",label-position="top",orientation="horizontal",value="1"]
+====
+* mixed
+
+* opened
+
+* closed
 ====
 
 [tp-cluster]
@@ -112,11 +119,11 @@ Prompt:: Complete the sentences with the capitals.
 
 Form::
 +
-The capital of France is [tp-textfield,name="france",aria-label="Capital of France",placeholder="City name",clearable]#france#.
+The capital of France is [tp-blank,name="france",aria-label="Capital of France",placeholder="City name",clearable]#france#.
 +
-The capital of Germany is [tp-textfield,name="germany",aria-label="Capital of Germany",placeholder="City name",clearable]#germany#.
+The capital of Germany is [tp-blank,name="germany",aria-label="Capital of Germany",placeholder="City name",clearable]#germany#.
 +
-The capital of Italy is [tp-textfield,name="italy",aria-label="Capital of Italy",placeholder="City name",clearable]#italy#.
+The capital of Italy is [tp-blank,name="italy",aria-label="Capital of Italy",placeholder="City name",clearable]#italy#.
 
 Feedback:: Check the capital of each country and its spelling.
 
@@ -140,11 +147,11 @@ Prompt:: Complete each sentence with the past simple form of the verb shown in t
 
 Form::
 +
-Yesterday, I [tp-textfield,name="go",aria-label="Past simple of go",placeholder="go",clearable]#go# to school.
+Yesterday, I [tp-blank,name="go",aria-label="Past simple of go",placeholder="go",clearable]#go# to school.
 +
-Last night, she [tp-textfield,name="see",aria-label="Past simple of see",placeholder="see",clearable]#see# a shooting star.
+Last night, she [tp-blank,name="see",aria-label="Past simple of see",placeholder="see",clearable]#see# a shooting star.
 +
-Last Monday, we [tp-textfield,name="take",aria-label="Past simple of take",placeholder="take",clearable]#take# the train.
+Last Monday, we [tp-blank,name="take",aria-label="Past simple of take",placeholder="take",clearable]#take# the train.
 
 Feedback:: These verbs are irregular: their past simple forms do not end in -ed.
 
@@ -154,7 +161,7 @@ Solution:: go → went; see → saw; take → took.
 
 .Baltic capitals and flags
 ======
-[tp-fill-blank-question%closed,lang="en"]
+[tp-fill-blank-question,mode="closed",lang="en"]
 ====
 Answers::
 +
@@ -191,7 +198,7 @@ Solution:: Estonia: Tallinn; Latvia: Riga; Lithuania: Vilnius. Match each flag w
 
 .Square root
 ======
-[tp-fill-blank-question%closed,lang="en"]
+[tp-fill-blank-question,mode="closed",lang="en"]
 ====
 Answers::
 +

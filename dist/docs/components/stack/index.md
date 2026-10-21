@@ -78,6 +78,10 @@ Attributes
   | --- | --- | --- | --- |
   | <code>recursive</code> | <code>boolean</code> | <code>false</code> | Applies the stack gap recursively to descendant siblings instead of direct children only. |
   | <code>split-after</code> | <code>number \| null</code> | <code>&quot;&quot;</code> | One-based child index after which the stack inserts a flexible split. Absent by default: no flexible split (the splitAfter property returns null). Requires available height to separate the groups. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-stack>`]
 
 Methods
@@ -103,6 +107,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_stack.TpStack.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

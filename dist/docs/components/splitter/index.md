@@ -83,6 +83,10 @@ Attributes
   | <code>axis</code> | <code>TpSplitterAxis</code> | <code>horizontal</code> | Split direction (`horizontal` or `vertical`). |
   | <code>position</code> | <code>string</code> | <code>50%</code> | Divider position as a percentage. |
   | <code>storage-key</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional localStorage key used to save and restore the divider position. Empty by default: persistence is disabled. Use a distinct key for each independent splitter. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-splitter>`]
 
 Methods
@@ -110,6 +114,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_splitter.TpSplitter.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

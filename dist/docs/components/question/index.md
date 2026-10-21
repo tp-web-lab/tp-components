@@ -16,6 +16,10 @@ The custom `<tp-question>` element implements the <tp-icon name="question" libra
 
 ## Usage
 
+`src` selects the source format from the URL extension: `.json`, `.html`/`.htm`, `.md`/`.markdown`, `.rst`/`.rest`, or `.adoc`/`.asciidoc`. Extension matching ignores case, query parameters and fragments. URLs without a file extension retain the JSON behavior.
+
+JSON uses this component's question schema. Other formats use the same definition list and native component syntax as an inline question, either as a bare definition list or inside the matching question component. For example, `src="/docs/exercises/general.md"` loads a Markdown definition. Attributes on the receiving question, such as `mode` and `partial`, remain authoritative. Changing `src` reloads the question; unsupported extensions and loading errors appear in the form.
+
 ### User interactions
 
 #### Mouse interactions
@@ -40,6 +44,9 @@ The custom `<tp-question>` element implements the <tp-icon name="question" libra
 | Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
 
 ### Author directives
+
+`mode="mixed"` is the default policy for descendant `tp-blank` elements. Each blank follows its boolean `closed` attribute. Set `mode="closed"` to close every blank or `mode="opened"` to open every blank without changing those local choices. This policy does not convert other question widgets, such as radio lists.
+
 
 Structure the content as a definition list with `Title`, `Prompt`, `Form`, `Feedback`, and `Solution` entries. Specialized question components add validation.
 
@@ -95,8 +102,13 @@ Attributes
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
+  | <code>mode</code> | <code>string</code> | <code>&quot;mixed&quot;</code> | Blank mode: opened, closed, or mixed local choices. |
   | <code>open</code> | <code>boolean</code> | <code>false</code> | Expands the question; absent by default, leaving only its title visible. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of an external question definition. |
+  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-question>`]
 
 Methods
@@ -122,6 +134,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_question.TpQuestion.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -448,10 +470,6 @@ All tp-components used by `<tp-question>` are loaded automatically by this compo
 @summary Accessible icon button component.
 -->
 <!--
-@tp-dependency tp-markdown
-@summary Markdown rendering component.
--->
-<!--
 @tp-dependency tp-switcher
 @summary Switches between horizontal and vertical layouts based on available space.
 -->
@@ -466,7 +484,6 @@ All tp-components used by `<tp-question>` are loaded automatically by this compo
 - [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
 - [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-markdown>`](../markdown/index.md) : Markdown rendering component.
 - [`<tp-switcher>`](../switcher/index.md) : Switches between horizontal and vertical layouts based on available space.
 - [`<tp-tabs>`](../tabs/index.md) : Accessible tabs component with keyboard and reorder support.
 

@@ -72,6 +72,10 @@ Attributes
   | <code>gap</code> | <code>string</code> | <code>&quot;0.5rem&quot;</code> | Gap between children. When absent, uses the --tp-inline-gap CSS default. |
   | <code>justify</code> | <code>&quot;normal&quot; \| &quot;start&quot; \| &quot;end&quot; \| &quot;flex-start&quot; \| &quot;flex-end&quot; \| &quot;center&quot; \| &quot;left&quot; \| &quot;right&quot; \| &quot;space-between&quot; \| &quot;space-around&quot; \| &quot;space-evenly&quot; \| &quot;stretch&quot;</code> | <code>&quot;flex-start&quot;</code> | Main-axis alignment applied to justify-content. |
   | <code>stretch</code> | <code>boolean</code> | <code>false</code> | Indicates whether children can stretch. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-inline>`]
 
 Methods
@@ -97,6 +101,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_inline.TpInline.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

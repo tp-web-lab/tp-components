@@ -81,6 +81,10 @@ Attributes
   | <code>target</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the target. |
   | <code>threshold</code> | <code>string</code> | <code>&quot;0.1&quot;</code> | Seuil utilisé par IntersectionObserver.<br>Peut être un nombre unique ou une liste séparée par des virgules. |
   | <code>trigger</code> | <code>TpAnimationTrigger</code> | <code>&quot;load&quot;</code> | Controls the trigger. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-animation>`]
 
 Methods
@@ -113,6 +117,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_animation.TpAnimation.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

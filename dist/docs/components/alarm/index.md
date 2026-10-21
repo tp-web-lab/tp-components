@@ -69,6 +69,10 @@ Attributes
   | <code>silent</code> | <code>boolean</code> | <code>false</code> | Disables sound playback. |
   | <code>size</code> | <code>string</code> | <code>&quot;1rem&quot;</code> | Icon and text size. |
   | <code>time</code> | <code>string</code> | <code>&quot;07:00&quot;</code> | Alarm time in `HH:MM` or `HH:MM:SS`. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-alarm>`]
 
 Methods
@@ -97,6 +101,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_alarm.TpAlarm.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

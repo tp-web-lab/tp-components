@@ -68,6 +68,10 @@ Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
   | <code>href</code> | <code>string</code> | <code>&quot;&quot;</code> | Prefixed identifier selecting a note, bibliography or glossary entry. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-ref>`]
 
 Methods
@@ -93,6 +97,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_ref_ref.TpRef.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -201,6 +215,10 @@ All tp-components used by `<tp-ref>` are loaded automatically by this component 
 @summary Defines a bibliography entry referenced by tp-ref.
 -->
 <!--
+@tp-dependency tp-button
+@summary an action button or navigation link with shared sizes, variants and loading states.
+-->
+<!--
 @tp-dependency tp-glossary
 @summary Defines a glossary entry referenced by tp-ref.
 -->
@@ -215,6 +233,7 @@ All tp-components used by `<tp-ref>` are loaded automatically by this component 
 
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
 - [`<tp-biblio>`](../biblio/index.md) : Defines a bibliography entry referenced by tp-ref.
+- [`<tp-button>`](../button/index.md) : an action button or navigation link with shared sizes, variants and loading states.
 - [`<tp-glossary>`](../glossary/index.md) : Defines a glossary entry referenced by tp-ref.
 - [`<tp-note>`](../note/index.md) : Defines an HTML note referenced by tp-ref.
 - [`<tp-tooltip>`](../tooltip/index.md) : Displays anchored tooltip content.

@@ -33,6 +33,10 @@
       "summary": "Defines a bibliography entry referenced by tp-ref."
     },
     {
+      "name": "tp-button",
+      "summary": "an action button or navigation link with shared sizes, variants and loading states."
+    },
+    {
       "name": "tp-glossary",
       "summary": "Defines a glossary entry referenced by tp-ref."
     },

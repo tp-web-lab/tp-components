@@ -95,6 +95,10 @@ Attributes
   | <code>required</code> | <code>boolean</code> | <code>false</code> | Marks the field as required. |
   | <code>step</code> | <code>number</code> | <code>60</code> | Time interval in seconds. |
   | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Selected time in `HH:mm` or `HH:mm:ss` format. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-timefield>`]
 
 Methods
@@ -134,6 +138,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_timefield.TpTimefield.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

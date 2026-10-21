@@ -29,6 +29,8 @@
 
                - disabled
 
+               - mathlive
+
                - multiline
 
                - preview
@@ -128,7 +130,7 @@
             :variant: info
             :heading: Things to try
 
-            Set label, enter x^2 in value, then enable preview to see the rendered formula. Compare latexmath and asciimath, and try multiline. The formula preview button also updates the preview checkbox. Enable clearable to show the clear button; it is hidden otherwise.
+            Set label, enter x^2 in value, then enable preview to see the rendered formula. Compare latexmath and asciimath, and try multiline. Enable mathlive in LaTeX mode and select the pencil icon to use the visual editor. The formula preview button also updates the preview checkbox. Enable clearable to show the clear button; it is hidden otherwise.
 
          .. script::
             :type: module

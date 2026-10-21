@@ -100,6 +100,10 @@ Attributes
   | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Disables editing and recognition and stops any active session. |
   | <code>interim-results</code> | <code>boolean</code> | <code>false</code> | Displays provisional recognition separately from the final transcript. |
   | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Final transcript, editable without microphone access. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-speech-to-text>`]
 
 Methods
@@ -131,6 +135,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_speech-to-text.TpSpeechToText.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

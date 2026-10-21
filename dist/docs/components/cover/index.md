@@ -74,6 +74,10 @@ Attributes
   | <code>heading</code> | <code>string</code> | <code>&quot;&quot;</code> | Simple CSS selector (for example h2, .hero or #title) identifying a direct child to center vertically in the available space, not the heading text. Empty by default: no child is selected for centering. |
   | <code>min-height</code> | <code>string</code> | <code>&quot;100vh&quot;</code> | Minimum block size of the cover. When absent, uses the --tp-cover-min-height CSS default. |
   | <code>padding</code> | <code>string</code> | <code>&quot;1rem&quot;</code> | Padding applied inside the cover. When absent, uses the --tp-cover-padding CSS default. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-cover>`]
 
 Methods
@@ -101,6 +105,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_cover_cover.TpCover.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

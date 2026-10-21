@@ -133,6 +133,10 @@ Attributes
   | <code>preset</code> | <code>&quot;fractal-tree&quot;\|&quot;barnsley-fern&quot;\|&quot;koch-curve&quot;\|&quot;dragon-curve&quot;\|&quot;hilbert-curve&quot;\|&quot;peano-curve&quot;\|&quot;levy-c-curve&quot;\|&quot;gosper-curve&quot;\|&quot;pythagoras-tree&quot;\|&quot;sierpinski-triangle&quot;\|&quot;sierpinski-carpet&quot;\|&quot;sierpinski-arrowhead&quot;\|&quot;sierpinski-gasket&quot;\|&quot;sierpinski-tetrahedron&quot;</code> | <code>&quot;koch-curve&quot;</code> | Built-in definition used when no source is supplied. |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Source file; takes precedence over the internal script and preset. |
   | <code>step</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional positive drawing-step override; empty uses the definition. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-lsystem>`]
 
 Methods
@@ -162,6 +166,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_lsystem.TpLsystem.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

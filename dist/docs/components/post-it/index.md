@@ -111,6 +111,10 @@ Attributes
   | <code>lite</code> | <code>boolean</code> | <code>false</code> | Folds the note into its pushpin; click the pin to expand or fold it again. |
   | <code>opacity</code> | <code>number</code> | <code>1</code> | Opacity of the whole note, including its pin, clamped from 0 to 1; invalid or empty values use 1. |
   | <code>rotation</code> | <code>number</code> | <code>0</code> | Paper rotation in degrees, clamped from -12 to 12; invalid values use 0. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-post-it>`]
 
 Methods
@@ -144,6 +148,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_post-it.TpPostIt.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

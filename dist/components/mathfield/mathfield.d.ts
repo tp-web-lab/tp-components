@@ -3,9 +3,7 @@
  * @summary Mathematical expression field with live LaTeX or AsciiMath rendering.
  */
 import "../copy-code/copy-code.js";
-import "../divider/divider.js";
 import "../icon-button/icon-button.js";
-import "../markdown/markdown.js";
 import "../textfield/textfield.js";
 import { TpBase } from "../base/base.js";
 export type TpMathfieldMode = "latexmath" | "asciimath";
@@ -15,6 +13,7 @@ export type TpMathfieldLabelPosition = "top" | "bottom" | "start" | "end";
  * @tagname tp-mathfield
  * @attr {string} mode = "latexmath" - Mathematical notation (`latexmath` or `asciimath`).
  * @attr {boolean} multiline = false - Uses a multiline editor and display-style rendering.
+ * @attr {boolean} mathlive = false - Offers a visual MathLive editor in LaTeX mode, loaded on first opening.
  * @attr {boolean} preview = false - Opens the rendered MathJax preview panel.
  * @attr {string} value = "" - Mathematical expression source.
  * @attr {string} label = "" - Visible label associated with the editing field.
@@ -45,11 +44,18 @@ export declare class TpMathfield extends TpBase {
     private editor;
     private previewPanel;
     private previewButton;
+    private visualButton;
+    private visualPanel;
+    private visualEditor;
+    private visualRevision;
     private sourceCopyButton;
     static get observedAttributes(): string[];
     /** Mathematical notation used by the expression. */
     get mode(): TpMathfieldMode;
     set mode(value: TpMathfieldMode);
+    /** Whether a visual LaTeX editor can be opened. */
+    get mathlive(): boolean;
+    set mathlive(value: boolean);
     /** Whether the editor and rendering use multiline display mode. */
     get multiline(): boolean;
     set multiline(value: boolean);
@@ -94,9 +100,13 @@ export declare class TpMathfield extends TpBase {
     clear(): void;
     /** Returns the mathematical expression source. */
     getValue(): string;
+    protected disconnectedCallback(): void;
     private renderStructure;
     private syncEditor;
     private renderPreview;
+    private syncVisualEditor;
+    private closeVisualEditor;
+    private openVisualEditor;
     private readonly handleInput;
     private readonly handleChange;
     private readonly handleClear;

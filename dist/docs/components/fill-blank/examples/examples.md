@@ -11,7 +11,7 @@ The capital of France is :tp-textfield:`capital`{name="capital" placeholder="Cit
 Select a shape or drag it onto the blank. Use its clear button to remove the answer.
 
 ::: tp-fill-blank
-A shape with three sides is :tp-blank:`shape`{name="shape" aria-label="Shape with three sides"}.
+A shape with three sides is :tp-blank:`shape`{closed name="shape" aria-label="Shape with three sides"}.
 :::
 
 :::: tp-button-group { aria-label="Shape choices" }

@@ -56,8 +56,16 @@ var s = class s extends e {
 		return [
 			...e.observedAttributes ?? [],
 			"src",
-			"open"
+			"open",
+			"mode"
 		];
+	}
+	get mode() {
+		let e = this.getAttribute("mode");
+		return e === "closed" || e === "opened" ? e : "mixed";
+	}
+	set mode(e) {
+		this.setAttribute("mode", e);
 	}
 	get open() {
 		return this.hasAttribute("open");
@@ -66,7 +74,7 @@ var s = class s extends e {
 		this.toggleAttribute("open", e);
 	}
 	attributeChangedCallback(e, t, n) {
-		if (super.attributeChangedCallback(e, t, n), e !== "open") return;
+		if (super.attributeChangedCallback(e, t, n), e === "src" && t !== n && (this.sourceRevision++, this.inlineSourceLoaded = !1, this.isConnected && this.formContent && n && this.loadSrc()), e !== "open") return;
 		let r = this.querySelector(":scope > details[data-tp-question-details]");
 		r && (r.open = this.open);
 	}
@@ -84,23 +92,72 @@ var s = class s extends e {
 	srcMarkup = "markdown";
 	tries = 0;
 	lastSubmittedValue = void 0;
+	sourceRevision = 0;
+	inlineSourceLoaded = !1;
+	get usesExternalData() {
+		return !!this.src && !this.inlineSourceLoaded;
+	}
 	get src() {
 		return this.getAttribute("src") ?? "";
 	}
 	async fetchSrc(e) {
-		let n;
+		let n = ++this.sourceRevision, r;
 		try {
-			n = t(this, e).href;
+			r = t(this, e).href;
 		} catch {
 			return this.showSrcError(`Failed to load "${e}": invalid URL`), null;
 		}
 		try {
-			let e = await fetch(n);
+			let e = await fetch(r);
 			if (!e.ok) throw Error(`HTTP ${e.status}`);
-			return await e.json();
+			let t = new URL(r).pathname.split("/").pop() ?? "", i = t.includes(".") ? t.split(".").pop()?.toLowerCase() : "json", a = () => this.isConnected && n === this.sourceRevision;
+			if (i === "json" || !i || !t.includes(".")) {
+				let t = await e.json();
+				return a() ? t : null;
+			}
+			let o = await e.text(), s;
+			switch (i) {
+				case "html":
+				case "htm":
+					s = o;
+					break;
+				case "md":
+				case "markdown": {
+					let { renderMarkdownToHtml: e } = await import("../components/markdown/markdown.js");
+					s = await e(o, r);
+					break;
+				}
+				case "rst":
+				case "rest": {
+					let { renderRestructuredTextToHtml: e } = await import("../components/restructuredtext/restructuredtext.js");
+					s = await e(o);
+					break;
+				}
+				case "adoc":
+				case "asciidoc": {
+					let { renderAsciidocToHtml: e } = await import("../components/asciidoc/asciidoc.js");
+					s = await e(o);
+					break;
+				}
+				default: throw Error(`Unsupported question extension: ${i}`);
+			}
+			return a() && this.applySourceMarkup(s, r), null;
 		} catch (t) {
-			return this.showSrcError(`Failed to load "${e}": ${String(t)}`), null;
+			return this.isConnected && n === this.sourceRevision && this.showSrcError(`Failed to load "${e}": ${String(t)}`), null;
 		}
+	}
+	applySourceMarkup(e, t) {
+		let n = document.createElement("template");
+		n.innerHTML = e;
+		let r = n.content.querySelector(this.localName)?.querySelector(":scope > dl") ?? n.content.querySelector("dl");
+		if (!r) throw Error("Question source must contain a definition list.");
+		r.setAttribute("data-tp-source", t);
+		for (let e of r.querySelectorAll("[src], a[href]")) {
+			if (e.localName.includes("-")) continue;
+			let n = e.hasAttribute("src") ? "src" : "href", r = e.getAttribute(n);
+			r && !r.startsWith("#") && e.setAttribute(n, new URL(r, t).href);
+		}
+		this.disconnectedCallback(), this.inlineSourceLoaded = !0, this.replaceChildren(r), this.connectedCallback();
 	}
 	showSrcError(e) {
 		let t = this.querySelector("[data-tp-question-form-content]") ?? this.response;
@@ -157,7 +214,14 @@ var s = class s extends e {
 	get formContent() {
 		return this.querySelector("[data-tp-question-form-content]");
 	}
-	async onSrcReady(e) {}
+	async onSrcReady(e) {
+		if (typeof e != "object" || !e) {
+			this.showSrcError("Question JSON must be an object.");
+			return;
+		}
+		let t = e;
+		this.srcMarkup = this.normalizeSrcMarkup(typeof t.markup == "string" ? t.markup : "markdown"), typeof t.title == "string" && this.updateSrcTitle(t.title), typeof t.prompt == "string" && this.updateSrcPrompt(t.prompt), typeof t.solution == "string" && this.updateSrcSolution(t.solution), typeof t.form == "string" && this.formContent && this.replaceWithSrcContent(this.formContent, t.form), typeof t.feedback == "string" && this.feedbackSourceEl && this.replaceWithSrcContent(this.feedbackSourceEl, t.feedback);
+	}
 	async loadSrc() {
 		let e = await this.fetchSrc(this.src);
 		e !== null && await this.onSrcReady(e);
@@ -165,11 +229,11 @@ var s = class s extends e {
 	connectedCallback() {
 		super.connectedCallback(), this.setAttribute("data-tp-question", ""), this.ensureGlobalStyle(s.styleId, n), this.beforeQuestionLayout();
 		let e = this.ensureDefinitionList();
-		this.renderQuestionLayout(e), this.bindActions();
+		this.renderQuestionLayout(e), this.bindActions(), this.localName === "tp-question" && this.usesExternalData && this.loadSrc();
 	}
 	beforeQuestionLayout() {}
 	disconnectedCallback() {
-		this.unbindActions();
+		this.sourceRevision++, this.unbindActions();
 	}
 	get titleSection() {
 		return this.getSectionDd("title");
@@ -365,7 +429,7 @@ var s = class s extends e {
 		this.messageEl instanceof HTMLDivElement && (this.messageEl.removeAttribute("data-type"), this.messageEl.textContent = "");
 	}
 	handleResetClick = () => {
-		this.clearMessage(), this.lastSubmittedValue = void 0;
+		this.submissionRevision++, this.clearMessage(), this.lastSubmittedValue = void 0;
 		let e = this.findResponseWidget(), t = e?.reset;
 		typeof t == "function" && t.call(e), this.onReset(), this.messageEl instanceof HTMLDivElement && (this.messageEl.textContent = this.resetMessageText, setTimeout(() => {
 			this.messageEl instanceof HTMLDivElement && (this.messageEl.textContent = "");
@@ -383,7 +447,11 @@ var s = class s extends e {
 	get resetMessageText() {
 		return "Resetting the answer form…";
 	}
-	handleSubmitClick = () => {
+	prepareSubmission() {}
+	preparingSubmission = !1;
+	submissionRevision = 0;
+	handleSubmitClick = async () => {
+		if (this.preparingSubmission) return;
 		this.clearMessage();
 		let e = this.readResponseValue(), t = this.validateSubmit(e);
 		if (t !== null) {
@@ -393,6 +461,15 @@ var s = class s extends e {
 		if (JSON.stringify(e) === JSON.stringify(this.lastSubmittedValue) && !this.allowRepeatedSubmission) {
 			this.messageEl instanceof HTMLDivElement && (this.messageEl.setAttribute("data-type", "warning"), this.messageEl.textContent = "⚠ No change from previous submission.");
 			return;
+		}
+		try {
+			let t = this.submissionRevision, n = this.prepareSubmission();
+			if (n && (this.preparingSubmission = !0, this.setAttribute("aria-busy", "true"), await n, !this.isConnected || t !== this.submissionRevision || JSON.stringify(e) !== JSON.stringify(this.readResponseValue()))) return;
+		} catch {
+			this.messageEl && (this.messageEl.textContent = "Unable to check the answer. Please try again.");
+			return;
+		} finally {
+			this.preparingSubmission = !1, this.removeAttribute("aria-busy");
 		}
 		this.lastSubmittedValue = e, this.tries++, this.onSubmitAttempt(e);
 		let n = this.submitMessage(e);

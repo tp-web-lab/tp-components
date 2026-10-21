@@ -1,0 +1,6 @@
+//#region src/components/markup-multi-pages/sidebar-tools.css?inline
+var e = "[data-role=sidebar][data-tp-sidebar-wide] [data-tp-tree-row]{white-space:nowrap;max-inline-size:none}[data-tp-sidebar-search]{flex-basis:100%;min-inline-size:0}[data-tp-sidebar-search][hidden]{display:none}[data-tp-sidebar-search] tp-textfield{inline-size:100%;display:block}[data-tp-sidebar-search] [role=status]{font-size:.85em}[data-role=sidebar] [data-tp-tree-row][data-tp-sidebar-match]{background:var(--tp-warning-fill-soft);color:var(--tp-warning-text-on-soft);outline:1px solid var(--tp-warning-stroke-mid)}@media (width<=48rem){[data-role=sidebar][data-tp-sidebar-wide]{inline-size:min(var(--tp-sidebar-expanded-width), 90vw)}}.tp-markup-multi-pages-sidebar-controls,.tp-markdown-multi-pages-sidebar-controls{z-index:2;background:var(--tp-paper-color);padding-block:.5rem;position:sticky;inset-block-start:-.75rem}.tp-markup-multi-pages-sidebar-controls>tp-icon-button[name=search],.tp-markdown-multi-pages-sidebar-controls>tp-icon-button[name=search]{margin-inline-end:auto}[data-tp-sidebar-search] [data-tp-sidebar-no-results]{color:var(--tp-danger-text-colorful)}";
+//#endregion
+export { e as t };
+
+//# sourceMappingURL=sidebar-tools.js.map

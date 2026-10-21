@@ -7,13 +7,13 @@
 
       .. example:: Basic usage
 
-         .. role:: example-tp-textfield-1(tp-textfield)
+         .. role:: example-tp-blank-1(tp-blank)
             :name: france-capital
             :placeholder: Capital
             :aria-label: Capital of France
             :clearable:
 
-         .. role:: example-tp-textfield-2(tp-textfield)
+         .. role:: example-tp-blank-2(tp-blank)
             :name: italy-capital
             :placeholder: Capital
             :aria-label: Capital of Italy
@@ -34,9 +34,9 @@
                Complete both sentences.
 
             Form
-               The capital of France is :example-tp-textfield-1:`france-capital`.
+               The capital of France is :example-tp-blank-1:`france-capital`.
 
-               The capital of Italy is :example-tp-textfield-2:`italy-capital`.
+               The capital of Italy is :example-tp-blank-2:`italy-capital`.
 
             Feedback
                Check the spelling of each capital.
@@ -63,9 +63,20 @@
 
                - case-sensitive
 
-               - closed
-
                - partial
+
+            .. tp-radio-list::
+               :data-setting: mode
+               :label: mode
+               :label-position: top
+               :orientation: horizontal
+               :value: 1
+
+               - mixed
+
+               - opened
+
+               - closed
 
             .. tp-cluster::
 
@@ -107,19 +118,19 @@
 
       .. example:: Geography
 
-         .. role:: france-field(tp-textfield)
+         .. role:: france-field(tp-blank)
             :name: france
             :aria-label: Capital of France
             :placeholder: City name
             :clearable:
 
-         .. role:: germany-field(tp-textfield)
+         .. role:: germany-field(tp-blank)
             :name: germany
             :aria-label: Capital of Germany
             :placeholder: City name
             :clearable:
 
-         .. role:: italy-field(tp-textfield)
+         .. role:: italy-field(tp-blank)
             :name: italy
             :aria-label: Capital of Italy
             :placeholder: City name
@@ -154,19 +165,19 @@
 
       .. example:: Irregular verbs
 
-         .. role:: go-field(tp-textfield)
+         .. role:: go-field(tp-blank)
             :name: go
             :aria-label: Past simple of go
             :placeholder: go
             :clearable:
 
-         .. role:: see-field(tp-textfield)
+         .. role:: see-field(tp-blank)
             :name: see
             :aria-label: Past simple of see
             :placeholder: see
             :clearable:
 
-         .. role:: take-field(tp-textfield)
+         .. role:: take-field(tp-blank)
             :name: take
             :aria-label: Past simple of take
             :placeholder: take
@@ -241,7 +252,7 @@
             :aria-label: Flag of Lithuania
 
          .. tp-fill-blank-question::
-            :closed:
+            :mode: closed
             :lang: en
 
             Answers
@@ -286,7 +297,7 @@
             :aria-label: Derivative
 
          .. tp-fill-blank-question::
-            :closed:
+            :mode: closed
             :lang: en
 
             Answers

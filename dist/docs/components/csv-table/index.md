@@ -77,6 +77,10 @@ Attributes
   | <code>heading</code> | <code>boolean</code> | <code>false</code> | Uses the first row as column headings. |
   | <code>separator</code> | <code>string</code> | <code>&quot;,&quot;</code> | One-character field separator; use \t for a tab. |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | CSV file URL; takes precedence over inline source. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-csv-table>`]
 
 Methods
@@ -102,6 +106,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_csv-table.TpCsvTable.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -265,8 +279,6 @@ bundler
   import "@tp/tp-components/components/csv-table/csv-table.js";
   ```
 :::
-
-
 
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies

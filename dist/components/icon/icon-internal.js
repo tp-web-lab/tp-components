@@ -286,6 +286,7 @@ var e = " xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" view
 	paste: `<svg  ${e}><path fill="currentColor" d="M19 20H5V4h2v3h10V4h2m-7-2a1 1 0 0 1 1 1a1 1 0 0 1-1 1a1 1 0 0 1-1-1a1 1 0 0 1 1-1m7 0h-4.18C14.4.84 13.3 0 12 0c-1.3 0-2.4.84-2.82 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2"/></svg>`,
 	pause: `<svg  ${e}><path fill="currentColor" d="M14 19h4V5h-4M6 19h4V5H6z"/></svg>`,
 	pencil: `<svg ${e}><path fill="currentColor" d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>`,
+	"pencil-off": `<svg ${e}><path fill="currentColor" d="M18.66 2c-.26 0-.5.09-.69.28l-1.84 1.85l3.75 3.75l1.84-1.85c.39-.39.39-1.03 0-1.4l-2.34-2.35c-.2-.19-.47-.28-.72-.28M3.28 4L2 5.28l6.5 6.47l-4.5 4.5V20h3.75l4.5-4.5l6.47 6.5L20 20.72l-6.5-6.47l-3.75-3.75zm11.78 1.19l-4.03 4.03l3.75 3.75l4.03-4.03z"/></svg>`,
 	play: `<svg  ${e}><path fill="currentColor" d="M8 5.14v14l11-7z"/></svg>`,
 	"play-all": `<svg ${e}><path fill="currentColor" d="M7 5h3v14H7zm5 0l11 7l-11 7zM2 5h3v14H2z"/></svg>`,
 	"play-arrow": `<svg  ${e}><path fill="currentColor" d="M8 5.14v14l11-7z"/></svg>`,

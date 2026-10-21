@@ -14,7 +14,7 @@ var r = "tp-fill-blank{margin-bottom:1rem;display:block}tp-fill-blank input,tp-f
 	}
 	handleBlankChange = (e) => {
 		let n = e.target;
-		if (!(n instanceof HTMLInputElement || n instanceof HTMLSelectElement || n instanceof Element && t(n))) return;
+		if (!(n instanceof HTMLInputElement || n instanceof HTMLSelectElement || n instanceof Element && (t(n) || n.localName === "tp-mathfield"))) return;
 		let r = this.value;
 		this.dispatchEvent(new CustomEvent("tp-fill-blank-change", {
 			detail: {
@@ -49,7 +49,9 @@ var r = "tp-fill-blank{margin-bottom:1rem;display:block}tp-fill-blank input,tp-f
 	}
 	initializeBlanks() {
 		for (let e of this.getBlanks()) {
-			if (e.name.trim() === "" && (i.nextBlankId += 1, e.name = `blank-${String(i.nextBlankId)}`), e instanceof HTMLInputElement || t(e)) {
+			customElements.upgrade(e), e.name.trim() === "" && (i.nextBlankId += 1, e.name = `blank-${String(i.nextBlankId)}`);
+			let t = e.closest("tp-textfield");
+			if (t && !t.getAttribute("name") && t.setAttribute("name", e.name), !(e instanceof HTMLSelectElement)) {
 				e.value = "";
 				continue;
 			}
@@ -79,13 +81,13 @@ var r = "tp-fill-blank{margin-bottom:1rem;display:block}tp-fill-blank input,tp-f
 		for (let [n, r] of e.entries()) typeof r == "string" && (t[n] = r);
 		return t;
 	}
-	writeBlankValue(e, n) {
-		if (e instanceof HTMLInputElement || t(e)) {
-			e.value = n;
+	writeBlankValue(e, t) {
+		if (!(e instanceof HTMLSelectElement)) {
+			e.value = t;
 			return;
 		}
-		if (e.value = n, e.value !== n) {
-			if (n === "") {
+		if (e.value = t, e.value !== t) {
+			if (t === "") {
 				Array.from(e.options).find((e) => e.value === "") instanceof HTMLOptionElement ? e.value = "" : e.selectedIndex = -1;
 				return;
 			}

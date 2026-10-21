@@ -51,10 +51,10 @@ var r = class extends t {
 		this.setAttribute("value", e);
 	}
 	connectedCallback() {
-		super.connectedCallback(), this.src ? this.loadSrc() : this.initInline();
+		super.connectedCallback(), this.usesExternalData ? this.loadSrc() : this.initInline();
 	}
 	beforeQuestionLayout() {
-		this.src || this.ensureRadioList();
+		this.usesExternalData || this.ensureRadioList();
 	}
 	async onSrcReady(e) {
 		let t = n.safeParse(e);
@@ -133,7 +133,7 @@ var r = class extends t {
 			let e = Array.from(i.querySelectorAll(":scope > ul > li, :scope > ol > li"))[n - 1], r = e === void 0 ? void 0 : this.feedbackByItem.get(e);
 			if (typeof r == "string" && r.trim() !== "") {
 				let e = document.createElement("div");
-				e.append(this.createSrcContentNode(r, this.src ? this.srcMarkup : "html")), t.append(e);
+				e.append(this.createSrcContentNode(r, this.usesExternalData ? this.srcMarkup : "html")), t.append(e);
 			}
 		}
 		return t;

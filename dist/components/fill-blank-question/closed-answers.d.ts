@@ -23,16 +23,10 @@ export declare class ClosedAnswers {
     private selected;
     /** Blank retained while keyboard focus is in the answer bank. */
     private targetField;
-    /** Readable author sentences with answers in place of interactive fields. */
-    private readonly reading;
-    /** Neutral presentation for the continuously reconstructed sentence. */
-    private readonly readingCallout;
-    /** Refreshes the reading when asynchronous math or icon rendering completes. */
-    private readonly readingObserver;
     /** Persistent usage help beneath the feedback output. */
     private readonly instructions;
     /** Mounts the bank next to the existing form after its fields have upgraded. */
-    constructor(form: HTMLElement, answers: string[], feedbackOutput: HTMLElement | null, contents?: Node[]);
+    constructor(form: HTMLElement, answers: string[], feedbackOutput: HTMLElement | null, contents?: Node[], closedIndices?: number[]);
     /** Restores the author form and removes all listeners and generated controls. */
     destroy(): void;
     /** Selects an answer, or assigns the selected answer to a clicked blank. */
@@ -49,12 +43,6 @@ export declare class ClosedAnswers {
     private readonly onDrop;
     /** Moves an answer identity, returning any displaced answer to the bank. */
     private assign;
-    /** Preserves rich formulas and images while removing field frames and controls. */
-    private updateReading;
-    /** Freezes rendered tp-math copies whose inline source lives only in the original instance. */
-    private preserveRenderedMath;
-    /** Keeps only the visual SVG and its accessible label, not MathJax rerendering sources. */
-    private normalizeReadingMath;
     /** Marks assigned cities visually and describes their destination to assistive tools. */
     private updateAssignedChoices;
     /** Updates the library field and notifies the existing form/feedback machinery. */

@@ -7,6 +7,10 @@
  * @summary Defines a bibliography entry referenced by tp-ref.
  */
 /**
+ * @tp-dependency tp-button
+ * @summary an action button or navigation link with shared sizes, variants and loading states.
+ */
+/**
  * @tp-dependency tp-glossary
  * @summary Defines a glossary entry referenced by tp-ref.
  */
@@ -37,6 +41,7 @@ import "../glossary/glossary.js";
  */
 export declare class TpRef extends TpBase {
     private link;
+    private label;
     private tooltip;
     private unsubscribe;
     private original;

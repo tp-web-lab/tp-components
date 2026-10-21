@@ -75,6 +75,10 @@ Attributes
   | <code>sentences-per-paragraph</code> | <code>string</code> | <code>&quot;3-6&quot;</code> | Number or inclusive range of sentences per paragraph; applies only to p. |
   | <code>type</code> | <code>&quot;sentence&quot;\|&quot;title&quot;\|&quot;p&quot;\|&quot;dl&quot;\|&quot;ol&quot;\|&quot;ul&quot;</code> | <code>&quot;p&quot;</code> | Generated structure; title and sentence produce plain text. |
   | <code>words-per-sentence</code> | <code>string</code> | <code>&quot;4-16&quot;</code> | Number or inclusive range of words per sentence or title. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-lorem-ipsum>`]
 
 Methods
@@ -100,6 +104,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_lorem-ipsum.TpLoremIpsum.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -258,8 +272,6 @@ bundler
   import "@tp/tp-components/components/lorem-ipsum/lorem-ipsum.js";
   ```
 :::
-
-
 
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies

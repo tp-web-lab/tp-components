@@ -31,7 +31,7 @@ The custom `<tp-textfield>` element implements the <tp-icon name="textfield" lib
 
 ### Author directives
 
-All fields use the same inline convention: `:tp-textfield:\`identifier\`{value="Ada" placeholder="…"}`. The inline content initializes `name` only; it never sets `id`, `label` or `value`. An explicit `name` takes precedence. Use `value` for initial content and `placeholder` for a hint; omitting `value` keeps the component's normal default. The HTML equivalent is `<tp-textfield name="identifier" value="Ada" placeholder="…"></tp-textfield>`.
+All fields use the same inline convention: ``:tp-textfield:`identifier`{value="Ada" placeholder="…"}``. The inline content initializes `name` only; it never sets `id`, `label` or `value`. An explicit `name` takes precedence. Use `value` for initial content and `placeholder` for a hint; omitting `value` keeps the component's normal default. The HTML equivalent is `<tp-textfield name="identifier" value="Ada" placeholder="…"></tp-textfield>`.
 
 
 Use the component without `multiline` for an inline native text input. Its width follows its intrinsic content width and can be changed with `width`, `inline-size`, or `--tp-textfield-inline-size`. The `type` attribute accepts `text`, `email`, `password`, `search`, `tel`, and `url`.
@@ -59,6 +59,10 @@ A required field displays a colored `*` after its label. Without a label, the ma
 | Select the clear button | Clears the value and emits `input`, `change`, and `tp-clear`. |
 | Call `focus()` | Focuses the native input or textarea. |
 | Call `select()` | Selects the complete value. |
+
+### Answer matching in open questions
+
+Set `regexp="colou?r"` on a field in an open `tp-fill-blank-question` to accept either “color” or “colour”. Supply the expression without slash delimiters or flags. The question matches the whole trimmed response and applies its `case-sensitive` setting. Keep the expected solution in the question's Answers list for correction display. Without `regexp`, the question compares the trimmed response with that solution. An accepted wording variant receives a comment and the expected answer; differences only in ignored case or outer spaces do not add that comment. An invalid expression reports an author configuration error without grading the response. This attribute does not set native HTML `pattern` validation outside a question.
 
 ## Examples
 
@@ -107,10 +111,15 @@ Attributes
   | <code>name</code> | <code>string</code> | <code>&quot;&quot;</code> | Name submitted with the containing form; defaults to the initial inline content when omitted. |
   | <code>placeholder</code> | <code>string</code> | <code>&quot;&quot;</code> | Placeholder shown while the field is empty. |
   | <code>readonly</code> | <code>boolean</code> | <code>false</code> | Prevents value editing. |
+  | <code>regexp</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional full-answer regular expression for grading in an open fill-blank question; applied to trimmed text using the question case policy. |
   | <code>required</code> | <code>boolean</code> | <code>false</code> | Marks the field as required. |
   | <code>rows</code> | <code>number</code> | <code>3</code> | Minimum number of rows in multiline mode. |
   | <code>type</code> | <code>string</code> | <code>&quot;text&quot;</code> | Input type (`text`, `email`, `password`, `search`, `tel`, or `url`). |
   | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Current field value. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-textfield>`]
 
 Methods
@@ -150,6 +159,11 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_textfield.TpTextfield.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
 
 
 

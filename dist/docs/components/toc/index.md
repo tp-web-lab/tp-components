@@ -81,6 +81,10 @@ Attributes
   | <code>label</code> | <code>string</code> | <code>&quot;Contents&quot;</code> | Visible summary label. |
   | <code>open</code> | <code>boolean</code> | <code>false</code> | Opens the table of contents panel. |
   | <code>position</code> | <code>string</code> | <code>&quot;center&quot;</code> | Placement (`start`, `end`, `center`). |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-toc>`]
 
 Methods
@@ -108,6 +112,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_toc.TpToc.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,20 @@
+{
+  "src": [
+    {
+      "label": "Default",
+      "value": ""
+    },
+    {
+      "label": "Two passes",
+      "value": "/docs/components/slope-simulator/examples/two-passes.json"
+    },
+    {
+      "label": "Limit slopes",
+      "value": "/docs/components/slope-simulator/examples/limits.json"
+    },
+    {
+      "label": "file-unknown",
+      "value": "/docs/components/slope-simulator/examples/file-unknown.json"
+    }
+  ]
+}

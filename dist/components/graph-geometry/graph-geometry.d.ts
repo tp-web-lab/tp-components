@@ -1,3 +1,5 @@
+import "../icon-button/icon-button.js";
+import "../divider/divider.js";
 import "../accordion/accordion.js";
 import "../callout/callout.js";
 import "../theme/theme.js";
@@ -10,12 +12,14 @@ import "../save-image/save-image.js";
 import "../dropdown/dropdown.js";
 import "../radio-list/radio-list.js";
 export type { GeometryObject, GeometryPoint, GeometryResult, GeometryValue, } from "./geometry.js";
-export { evaluateGeometry, MEDIATRIX_CONSTRUCTION, parseGeometry, serializeGeometry, } from "./geometry.js";
+export { evaluateGeometry, geometrySourceLabel, MEDIATRIX_CONSTRUCTION, parseGeometry, serializeGeometry, withGeometryLabel, } from "./geometry.js";
 /**
  * @summary Constructs dynamic figures with a graduated ruler and compass.
  * @tagname tp-graph-geometry
+ * @cssprop --tp-plot-height Height of the normal drawing including its top and bottom controls; other panels remain outside.
  * @attr {string} src = "" - URL of a text file containing construction commands.
- * @attr {boolean} canvas-only = false - Shows only the interactive drawing and its local theme switcher.
+ * @attr {string} label = "" - Title displayed above the drawing.
+ * @attr {boolean} canvas-only = false - Shows the interactive drawing with its action palette and view controls, with a source toggle and without the object list.
  * @attr {boolean} built-in = false - Offers direct midpoint, perpendicular, parallel, perpendicular bisector, angle bisector, tangent, polygon and transformation tools.
  * @attr {boolean} grid = false - Shows a light grid without axes or graduations.
  * @attr {boolean} readonly = false - Prevents changes to the construction.
@@ -27,7 +31,11 @@ export { evaluateGeometry, MEDIATRIX_CONSTRUCTION, parseGeometry, serializeGeome
  * @accessibility Provides an object list as an alternative to pointer selection and announces undefined constructions.
  * @accessibilityresponsibility Provide a textual explanation of the figure when its visual relationships are needed to understand the lesson.
  * @keyboard {Arrow keys} Moves the selected point or measurement label, or pans in Pan view; Shift reduces the step.
+ * @keyboard {Delete} Removes the selected object and its dependents as one undoable action.
+ * @keyboard {F1} Opens the action palette.
+ * @keyboard {Z} Enlarges or restores the interactive drawing.
  * @keyboard {Escape} Cancels pending construction input and returns to Move.
+ * @keyboard {F2} Opens the inline name field for the selected object.
  * @example
  * <tp-graph-geometry></tp-graph-geometry>
  */
@@ -35,12 +43,13 @@ export declare class TpGraphGeometry extends TpBase {
     private static nextId;
     private readonly controlId;
     private objects;
+    private activeAnimation;
+    private animationStep;
     private result;
     private initialized;
     private sourceRequest;
     private localFileRequest;
     private sourceSaveTarget;
-    private sourceFilename;
     private sourceFileBusy;
     private objectListMarkup;
     private tool;
@@ -55,6 +64,8 @@ export declare class TpGraphGeometry extends TpBase {
     private center;
     private pan;
     private suppressCanvasClick;
+    private movingName;
+    private pointerObject;
     private drag;
     static get observedAttributes(): string[];
     get src(): string;
@@ -63,6 +74,8 @@ export declare class TpGraphGeometry extends TpBase {
     set value(source: string);
     get grid(): boolean;
     set grid(value: boolean);
+    get label(): string;
+    set label(value: string);
     get canvasOnly(): boolean;
     set canvasOnly(value: boolean);
     get builtIn(): boolean;
@@ -98,16 +111,33 @@ export declare class TpGraphGeometry extends TpBase {
     private name;
     private pointName;
     private appendConstruction;
+    private toolGroups;
+    private readonly paletteViewports;
+    private readonly constrainPalette;
+    private toolButton;
+    private actionButton;
+    private chooseTool;
+    private shortcut;
+    private toggleSourceView;
+    private toggleZoom;
+    private restoreBoard;
     private render;
     private syncButtonControls;
+    private updateParameters;
     private updateTool;
+    private renameObject;
+    private editObjectName;
     private selectObject;
     private finishPolygon;
     private polygonClick;
     private useTool;
     private canvasPoint;
     private world;
+    private namePosition;
+    private moveName;
     private movePoint;
     private fitView;
+    private currentAnimation;
+    private syncAnimationControls;
     private draw;
 }

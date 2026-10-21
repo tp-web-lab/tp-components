@@ -52,10 +52,10 @@ var r = class extends t {
 		this.setAttribute("value", e);
 	}
 	connectedCallback() {
-		super.connectedCallback(), this.src ? this.loadSrc() : this.initInline();
+		super.connectedCallback(), this.usesExternalData ? this.loadSrc() : this.initInline();
 	}
 	beforeQuestionLayout() {
-		this.src || this.ensureCheckboxList();
+		this.usesExternalData || this.ensureCheckboxList();
 	}
 	async onSrcReady(e) {
 		let t = n.safeParse(e);
@@ -142,7 +142,7 @@ var r = class extends t {
 			if (typeof n != "string" || n.trim() === "") continue;
 			u = !0;
 			let r = document.createElement("li");
-			r.append(this.createSrcContentNode(n, this.src ? this.srcMarkup : "html")), l.append(r);
+			r.append(this.createSrcContentNode(n, this.usesExternalData ? this.srcMarkup : "html")), l.append(r);
 		}
 		return u && t.append(l), t;
 	}

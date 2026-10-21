@@ -99,6 +99,10 @@ Attributes
   | --- | --- | --- | --- |
   | <code>back</code> | <code>string</code> | <code>&quot;&quot;</code> | Card-back URL, or blue/red for an OpenDecks back. |
   | <code>mismatch-delay</code> | <code>number</code> | <code>1000</code> | Delay before unmatched cards turn back, in milliseconds. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-memory>`]
 
 Methods
@@ -127,6 +131,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_memory.TpMemory.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

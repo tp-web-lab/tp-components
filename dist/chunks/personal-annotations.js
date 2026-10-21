@@ -1,7 +1,7 @@
 import "./icon-button.js";
 import "./icon.js";
-import "./button.js";
 import "../components/textfield/textfield.js";
+import "./button.js";
 import "./box.js";
 import "./button-group.js";
 import "./numberfield.js";

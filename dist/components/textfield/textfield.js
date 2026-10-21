@@ -28,6 +28,7 @@ var r = /* @__PURE__ */ new Set([
 			"label",
 			"label-position",
 			"value",
+			"regexp",
 			"name",
 			"placeholder",
 			"autocomplete",
@@ -40,6 +41,12 @@ var r = /* @__PURE__ */ new Set([
 			"icon-library",
 			"aria-label"
 		];
+	}
+	get regexp() {
+		return this.getStringAttribute("regexp");
+	}
+	set regexp(e) {
+		this.setStringAttribute("regexp", e);
 	}
 	get type() {
 		let e = this.getAttribute("type");

@@ -8,16 +8,34 @@ The custom `<tp-graph-geometry>` element implements dynamic ruler and compass co
 
 ## Usage
 
+### Shared points, vectors and title
+
+Both plot components accept this exact source:
+
+```text
+label = "Points and vectors"
+point O = (0, 0)
+point A = (3, 4)
+vector u = vector(O, A)
+```
+
+Use `label = "..."` (or `title = "..."`) for the figure title. Applying a source title updates the figure label, as with other Geometry constructions. Points use `point NAME = (x, y)`; vectors use `vector NAME = vector(START, END)`. Each name must be unique. Editing an endpoint and applying the source recomputes its vectors. This first shared subset covers free points and vectors between points; attached points and geometric constructions remain specific to Geometry.
+
+
+Set `style="--tp-plot-height:440px"` to give the normal plot a fixed height, including its top and bottom controls. Both plot components support this property, so figures in cards can share the same height. Settings and other authoring panels remain outside this area; the enlarged view keeps its own dimensions. The code view scrolls within the available area. Omit the property to keep automatic sizing.
+
 ### User interactions
 
-Use `canvas-only` to embed only the interactive drawing, with a local theme switcher in its top corner. Drag points or measurement labels and pan with empty-space dragging or scrolling as usual. Construction controls and the source editor are hidden. `readonly` still prevents construction changes. Removing `canvas-only` restores the editing interface.
+Use `label="My figure"` to title the drawing. With `canvas-only`, the action palette, Save image, local Theme and Zoom drawing controls remain at the top right; Undo, Redo, Zoom out, Zoom in, Fit and Grid stay at the bottom right. The object list and main tool strip are hidden. The `</>` button at the bottom left switches between the drawing and Construction source, including its file menu, F1, Reset and Play controls. Switching preserves the figure and unapplied editor text, including in the zoomed window. Choosing a construction tool reveals its help and parameters within the drawing panel. `readonly` still prevents construction changes.
 
 #### Mouse interactions
 
 | Control or gesture | Result |
 | --- | --- |
 | Theme | Choose Light, Dark or Auto for this component only. The switcher remains available in canvas-only mode. |
-| Tool buttons | Select an action. Its button becomes filled while the other tools remain outlined; an outlined information callout explains how to use it. |
+| Action icons | Select a construction tool. Each 24×24 SVG depicts the action; its tooltip gives the name and shortcut. The selected tool is highlighted. An outlined information callout shows the icon, action heading and instructions. |
+| Actions palette | Open the keyboard-icon menu of available tools, with icon, name and shortcut. Groups follow the tool strip order, separated by horizontal dividers. Scroll within the menu when space is limited. Extra tools require `built-in`. |
+| Zoom drawing | Enlarge the live drawing in a modal window; points, measurements, tools and view controls remain interactive. Close restores the same construction. |
 | Move | Drag a measurement label to place it independently while keeping it attached to its supports. Drag a free point freely or slide an attached point along its support. Drag empty space to pan the whole drawing. Intersection and midpoint constructions are calculated and cannot be dragged. |
 | Pan view | Drag anywhere, including over a point, to move the entire view without changing the construction. Middle-button dragging also pans in any tool. |
 | Scroll / Shift + scroll | Scroll vertically or horizontally with the mouse wheel or trackpad. Shift + vertical scrolling pans horizontally. Scrolling outside the drawing still scrolls the page. |
@@ -30,7 +48,7 @@ Use `canvas-only` to embed only the interactive drawing, with a local theme swit
 | Measure length | Select two points, or select a segment, vector, arc, circle, polygon or sector. Closed shapes show their perimeter; an arc shows its curved length. |
 | Measure area | Select a circle, simple polygon or angular sector to display its enclosed area. |
 | Measure angle | Select two sides to mark their angle with an arc and its value, or a small square without a value for a right angle. Alternatively select three points: first arm, vertex, second arm, to display a numeric measurement. |
-| Comment | Enter Comment text and select its anchor point. The annotation follows that point. |
+| Comment | Enter Comment text and click anywhere to place a free annotation, or click a point to attach it. Drag the annotation in Move mode to reposition it. |
 | Midpoint / Perpendicular bisector · direct (`built-in`) | Select a segment to construct its midpoint or perpendicular bisector. |
 | Perpendicular / Parallel (`built-in`) | Select a point, then a line, segment, ray or vector. |
 | Angle bisector (`built-in`) | Select three points in order: first arm, vertex, second arm. Construct the internal angle bisector as a line. |
@@ -55,26 +73,76 @@ Use `canvas-only` to embed only the interactive drawing, with a local theme swit
 | Delete selected + dependents | Remove the selected object and its dependent constructions as one undoable action. |
 | Undo / Redo | Undo or redo one construction change or point movement. |
 | − / + / Fit | Zoom or fit the finite visible objects into the drawing. |
-| Perpendicular bisector / New construction | Load the example or start an empty construction. Undo restores the previous construction. |
+| New construction | Start an empty construction. Undo restores the previous construction. |
 | Construction source > Load | Choose a local `.txt` construction file. A valid construction replaces the drawing and can be undone; invalid files leave it unchanged. Disabled in readonly mode. |
 | Construction source > Save | Save the current editor text, including edits not yet applied. The first save asks for a destination; later saves reuse it where supported, or download the file again. |
 | Construction source > Save as | Choose a new destination or download filename. Cancelling preserves the previous destination. |
-| Construction source / Apply construction | Edit and apply the construction commands. Invalid commands leave the previous figure unchanged. |
+| `</>` in canvas-only mode | Replace the drawing with Construction source, or return to the drawing without applying draft edits. Play applies the source before returning to the drawing with `</>`. |
+| Construction source > F1 / Reset | Show or hide the editor toolbar / restore the source of the displayed construction without changing the figure. |
+| Construction source > Play | Edit and apply the construction commands. Invalid commands leave the previous figure unchanged. |
+| Double-click an object in Move or Pan view | Open an Object name field at the clicked position. |
+| Animation name | Choose a named animation and restart it at step zero. The first declared animation is selected initially. |
+| Start / Previous / Next / End animation | Return to the initial view, hide the last step, reveal the next step, or show the complete sequence. A grouped step is shown or hidden together. |
+| Hide name in Construction objects | Toggle visibility of the selected object’s name while keeping its geometry visible. Press again to show the name. |
+| Rename in Construction objects | Apply a unique object name and update dependent references. |
+| Drag an object name / Move name | Reposition the name independently of the object; Move name also enables arrow-key positioning. |
 
 #### Keyboard interactions
 
+Tool shortcuts apply while focus is inside the figure and never intercept typing in fields or the source editor. They affect only the focused component.
+
 | Key or gesture | Result |
 | --- | --- |
+| Enter / Space on Rename, Move name or Hide name | Apply the edited name, enable name positioning, or toggle name visibility. |
+| Enter / Space on animation controls | Choose an animation or move through its steps; available in readonly mode. |
+| F2 on the drawing | Open the inline name field for the selected object. |
+| Enter / Escape in the inline name field | Rename the object / cancel editing. Leaving the field also cancels. Invalid or duplicate names keep the field open with an error. |
 | Tab / Shift+Tab | Move between tools, parameters, object buttons, drawing and source controls. |
 | Enter / Space | Activate a focused button or expand/collapse the Construction source accordion. Selecting an object in Move mode focuses the drawing. |
-| Arrow keys in canvas-only mode | Move the selected point or measurement; when nothing is selected, or in readonly mode, pan the view. |
-| Arrow keys on the drawing | In Pan view, pan by 40 drawing pixels. Otherwise move the selected measurement label, free or attached point by 0.2 units before projection onto its support. |
+| F1 | Inside Construction source, show or hide the editor toolbar. Elsewhere, open or close the action palette. Use Up/Down, Home/End to navigate and Enter/Space to choose a tool. |
+| Z / Escape in the zoomed window | Enlarge or restore the drawing with Z; Escape closes the window. |
+| Delete | Remove the selected object and its dependent constructions as one undoable action (except in readonly mode). |
+| Ctrl/Cmd+Z / Ctrl/Cmd+Shift+Z | Undo / redo a construction change. |
+| − / + / F / G | Zoom out / zoom in / fit the drawing / toggle the grid. |
+| Arrow keys in canvas-only mode | Move the selected point, comment, measurement or name (with Move name enabled); when nothing is selected, or in readonly mode, pan the view. |
+| Arrow keys on the drawing | In Pan view, pan by 40 drawing pixels. With Move name enabled, move the selected object name. Otherwise move the selected comment, measurement label, free or attached point by 0.2 units before projection onto its support. |
 | Shift + arrow keys | In Pan view, pan by 8 drawing pixels. Otherwise use a smaller point step of 0.02 units. |
 | Enter on the drawing | Finish a pending irregular polygon with at least three vertices. |
 | Escape on the drawing | Cancel the pending selection, discard uncommitted polygon vertices and return to Move. |
 | ArrowUp / ArrowDown, Home / End in a menu | Move between export formats, stroke styles or colors. |
 | Enter / Space in a menu | Save the chosen format or apply the selected style or color. |
 | Escape in a menu | Close the menu. |
+| V | Select Move. |
+| H | Select Pan view. |
+| P | Select Point. |
+| Shift+P | Select Point on object. |
+| S | Select Segment. |
+| L | Select Line. |
+| Shift+S | Select Segment · length. |
+| R | Select Ray. |
+| W | Select Vector. |
+| E | Select Angular sector. |
+| T | Select Comment. |
+| D | Select Measure length. |
+| A | Select Measure area. |
+| Shift+A | Select Measure angle. |
+| C | Select Circle · radius. |
+| Shift+C | Select Circle · through point. |
+| B | Select Arc. |
+| I | Select Intersection. |
+| M | Select Midpoint (requires `built-in`). |
+| Shift+L | Select Perpendicular (requires `built-in`). |
+| J | Select Parallel (requires `built-in`). |
+| Shift+M | Select Perpendicular bisector · direct (requires `built-in`). |
+| Shift+B | Select Angle bisector (requires `built-in`). |
+| Shift+T | Select Tangents (requires `built-in`). |
+| N | Select Polygon (requires `built-in`). |
+| Shift+N | Select Regular polygon (requires `built-in`). |
+| X | Select Axial symmetry (requires `built-in`). |
+| Shift+X | Select Central symmetry (requires `built-in`). |
+| K | Select Homothety (requires `built-in`). |
+| Shift+R | Select Rotation (requires `built-in`). |
+| Shift+W | Select Translation (requires `built-in`). |
 | Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
 
 ### Author directives
@@ -100,6 +168,10 @@ Use `src` to load a UTF-8 text file containing these same commands (without an H
 
 A nonempty `src` takes precedence over inline content at initialization. Relative URLs resolve against the document base URL. Changing `src` loads a new construction and fits the view; removing or clearing it cancels a pending load and keeps the current figure. Successful loads can be undone. HTTP, network and syntax errors are announced and emit `tp-geometry-error`; the last valid figure remains intact. Files served from another origin require CORS permission. File contents are parsed as construction commands, never executed as JavaScript.
 
+Angles in source accept `deg` (degrees), `rad` (radians), `grad` (gradians) and `turn` (turns). **An angle without a unit now means radians**: `angle=1.5707963267948966`, `angle=1.5707963267948966rad`, `angle=90deg`, `angle=100grad` and `angle=0.25turn` are equivalent. This applies to attached points, arcs, sectors and rotations. Older unitless angles interpreted as degrees must add `deg`. Interface fields and normalized source remain in degrees; expressions such as `pi/2` are not supported.
+
+Start the source with `label = "Médiatrice de AB"` to name the figure; `title = "Médiatrice de AB"` is an alias. Use a double-quoted string, with JSON escapes for quotes and newlines. Only one declaration is allowed. Play, Load and `src` restore this label, taking precedence over the HTML attribute. Without a declaration, the current label is kept; `label = ""` clears it. The normalized source and saved files include the label, so it travels with the construction. Saving an unapplied draft uses its declared label when present. The declaration is metadata, not an object or a visible figure comment.
+
 Coordinates only place free points initially. Lengths are construction units, independent of zoom. No axes or graduations are shown. The optional grid follows the construction plane without snapping points. Add the boolean `grid` attribute or use the Grid button to show it. The drawing area has a minimum height of 320 CSS pixels and grows with the adjacent object panel. Added space extends the grid downwards without recentering or rescaling existing objects. Removing objects lets the area shrink again. On narrow screens the object panel appears below the drawing. Panning and scrolling change only the view, never the construction source or its undo history. Fit restores a centred view. View navigation and the grid remain available in readonly mode.
 
 | Command | Meaning |
@@ -121,11 +193,59 @@ Coordinates only place free points initially. Lengths are construction units, in
 | `comment note = comment(A, "Length AB")` | Visible text attached to A. Double-quoted text supports escaped quotes (`\"`), commas and `#`. |
 | `point I = intersection(a, b, branch=0)` | Dependent intersection of lines, segments, rays, vectors, circles or arcs. |
 
-Append `hidden` to keep an object as a support without drawing it. Use one command per line; `#` outside quoted text starts a source comment. Names begin with a Latin letter and may contain letters, digits and underscores. Forward references are accepted; duplicate names, unknown supports and dependency cycles are rejected. Source is normalized after changes, so source comments are not retained; visible `comment` objects are retained.
+Append `hidden` to keep an object as a support without drawing it. Use one command per line; `#` outside quoted text starts a source comment. HTML-style `<!-- … -->` comments can span several lines and never create objects in the figure. Comment markers inside quoted figure text are literal. Names begin with a Latin letter and may contain letters, digits and underscores. Forward references are accepted; duplicate names, unknown supports and dependency cycles are rejected. Play and Load retain comments and the chosen angle units in the editor, so Save can preserve them. Graphical changes, Undo/Redo and Reset regenerate normalized source, discarding source comments and writing angles in degrees; visible `comment` objects are retained.
 
 `branch=0` and `branch=1` retain their identities when clipping to arcs or segments. For two circles, branch 0 lies to the left of the direction from the first centre to the second; branch 1 lies to its right. For a line and a circle, branch 0 comes first along the line's defining direction. A pair of lines only has branch 0. At a tangency both circular branches occupy the same point; the mouse tool creates it once. Coincident supports do not define a unique intersection.
 
 Undefined constructions and their dependents are hidden and listed with a diagnostic. They reappear when their supports permit the construction again. Arcs and sectors have distinct start/end angles and span less than a full turn. Arc endpoints defined by named points and equation plotting are not part of this initial version.
+
+### Object names and free comments
+
+Select an object and activate **Hide name** in Construction objects to hide its name without hiding its geometry. Activate it again to restore the name at its saved position. The object list keeps the identifier and marks it as **name hidden**. This is saved with the `label-hidden` suffix (for example, `point A = (0, 0) label-hidden`), supports Undo/Redo and image export, and is disabled in readonly mode. Comment contents and measurement values remain visible; use the object’s hidden style to hide those annotations entirely.
+
+Double-click an object in Move or Pan view to rename it directly in the drawing. Press Enter to confirm, or Escape to cancel; leaving the field also cancels. F2 opens the same field for the selected object, including in canvas-only and zoomed views. Alternatively, select an object in **Construction objects**, edit **Object name**, and press **Rename**. Names must be valid, unique construction identifiers. Renaming updates dependent constructions. When renaming a comment, its visible text also becomes the new name; renaming an anchor point does not change the text of comments attached to it.
+
+Drag a name in Move mode to reposition it without moving its object. Alternatively, select the object, enable **Move name**, and use the arrow keys on the drawing (Shift for a smaller step). Disable Move name or select another object to return to moving points and comments. Offsets follow the object and are saved as `label-x` and `label-y` in construction units.
+
+With **Comment**, click empty space for a free annotation or click a point to attach it. Drag the comment in Move mode, or select it in Construction objects and use the arrow keys. Moving an attached comment keeps its anchor and updates its offset. These changes support Undo/Redo, source reload and image export; readonly disables editing.
+
+```text
+point A = (0, 0) label-x=0.5 label-y=0.3
+comment attached = comment(A, "Follows A", dx=1, dy=0.5)
+comment free = comment((3, 2), "Independent annotation")
+```
+
+### Step-by-step animation
+
+An animation is a named control object in Construction objects. Its list contains object identifiers without quotes; an inner list groups objects that appear simultaneously:
+
+```text
+point O = (0, -2)
+point A = (-2, 0)
+point B = (2, 0)
+segment s = segment(A, B)
+point P = midpoint(s)
+animation a = [[A, B], P, s]
+```
+
+Initially only O is visible. **Next** reveals A and B together, then P, then s. Previous steps remain visible. **Previous** hides the last revealed step; **Start** returns to step zero and **End** reveals the complete sequence. The counter counts outer-list steps, so this example has three steps. Objects absent from the selected animation are visible from initialization, even when they depend on objects not yet revealed. All objects continue to be calculated, and the drawing remains interactive. Explicit `hidden` styles and hidden names remain hidden when their step is reached.
+
+<tp-graph-geometry canvas-only label="Grouped construction animation">
+<script type="tp/geometry">
+point O = (0, -2)
+point A = (-2, 0)
+point B = (2, 0)
+segment s = segment(A, B)
+point P = midpoint(s)
+animation a = [[A, B], P, s]
+</script>
+</tp-graph-geometry>
+
+Animation controls appear above the drawing, including in canvas-only, zoomed and readonly views. Multiple declarations are allowed: use their name buttons or select the animation in Construction objects to choose one. Only the selected animation controls visibility. Switching animations starts at zero. An empty list `[]` hides nothing and has no available steps.
+
+Lists may span multiple lines and contain source comments. Object names must exist and occur only once within each animation; forward references are accepted. Inner groups must be nonempty, with only one grouping level. Animations cannot reference other animations or serve as geometric supports, and have no style or color options.
+
+Renaming an object updates animation references. Deleting objects removes their references and empty groups from every animation; Undo restores them. Deleting an animation keeps its objects. Applying or loading a construction, or Undo/Redo of construction edits, restarts at step zero. Stepping only changes the view: it does not modify source or create undo entries. Saved source retains animation declarations, while image export captures the current visible step.
 
 ### Appearance and image export
 
@@ -142,7 +262,7 @@ comment note = comment(A, "Reference point") color=green
 
 `style` accepts `hidden`, `dotted`, `dashed` and `solid` (default). The legacy `hidden` suffix remains supported. Hidden objects keep their mathematical role; they are absent from the drawing and exported image. Dotted and dashed affect strokes, including point outlines; comments remain readable text. Omit `color` for Automatic. Palette names are the shared `tp-color` presets without the `tp-` prefix: default, red, orange, amber, yellow, lime, green, emerald, teal, glaz, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose, zinc, ivory and stone. The `default` palette color is distinct from Automatic, which restores the normal color for each object kind.
 
-Save image uses `tp-save-image` and its `tp-dropdown`, with SVG offered first as the default, followed by PNG and WebP. It saves the current view at a width of 900 drawing units and its dynamically calculated height, including its background and optional grid, with colors resolved independently of the page stylesheet. Pan, zoom or Fit before saving to choose the framing. Selection highlights, invisible hit areas, menus and editing controls are excluded. Image export remains available in readonly mode; appearance editing does not. These files are images. Use Load, Save and Save as inside Construction source for editable UTF-8 `.txt` descriptions, including styles and measurement offsets. The three file buttons form an attached group. The default filename is `construction.txt`, and Save as adds `.txt` when omitted. Save records the editor text without applying it; Apply construction updates the drawing. Browsers with direct file access reuse the chosen save destination. Other browsers ask for a filename and download the file; they cannot overwrite a local file directly. After Load, the next Save asks for a destination because opening a file does not grant write access. New construction, the built-in example and changes to src reset the save destination. Save and Save as remain available in readonly mode.
+Save image uses `tp-save-image` and its `tp-dropdown`, with SVG offered first as the default, followed by PNG and WebP. It saves the current view at a width of 900 drawing units and its dynamically calculated height, including its background and optional grid, with colors resolved independently of the page stylesheet. Pan, zoom or Fit before saving to choose the framing. Selection highlights, invisible hit areas, menus and editing controls are excluded. Image export remains available in readonly mode; appearance editing does not. These files are images. Use Load, Save and Save as inside Construction source for editable UTF-8 `.txt` descriptions, including styles and measurement offsets. The file menu is opened with the file icon. F1 toggles the editor toolbar; Reset discards draft edits and restores the displayed construction source; Play applies the editor text. The suggested filename is the slugified figure label (for example, `Médiatrice de AB` becomes `mediatrice-de-ab.txt`), or `construction.txt` without a label. Save keeps reusing an existing destination; Save as proposes the current label, and Save as adds `.txt` when omitted. Save records the editor text without applying it; Play updates the drawing. Browsers with direct file access reuse the chosen save destination. Other browsers ask for a filename and download the file; they cannot overwrite a local file directly. After Load, the next Save asks for a destination because opening a file does not grant write access. New construction, the built-in example and changes to src reset the save destination. Save and Save as remain available in readonly mode.
 
 ### Direct construction tools
 
@@ -165,7 +285,7 @@ The following commands can be loaded from source or a file with or without `buil
 
 All these constructions follow their supports. Tangent branch 0 touches the circle to the left of the direction from its centre to P; branch 1 touches it to the right. At the circumference, both branches define the same line. Inside the circle they are undefined and reappear when P moves outside again. The Tangents tool creates all currently distinct tangents as one undoable action. A zero-length angle arm leaves the internal angle bisector undefined. A straight angle produces the perpendicular line through its vertex. Coincident points leave lines, rays, vectors and segments undefined until their direction becomes defined again.
 
-A sector is a filled annotation of part of a circle: attach points and construct intersections on its supporting circle or a matching arc. A comment is plain text, never HTML, and follows its anchor point with a fixed screen offset. Lengths and radii are numbers (or transferred distances for circles); there are no symbolic equations.
+A sector is a filled annotation of part of a circle: attach points and construct intersections on its supporting circle or a matching arc. A comment is plain text, never HTML. It can follow an anchor point or be placed freely at coordinates. Drag it in Move mode to change its position without moving the anchor. Lengths and radii are numbers (or transferred distances for circles); there are no symbolic equations.
 
 ### Polygons
 
@@ -274,6 +394,9 @@ Measurements
 
 Interactive figure
 : Drag O or slide P around its circle in canvas-only mode. Scroll to pan and use the corner theme switcher to change only this figure.
+
+Shared points and vectors
+: Open the source, change point A and press Play. The vector follows its endpoints; the same title, point and vector declarations work in both components.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
@@ -303,10 +426,15 @@ Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
   | <code>built-in</code> | <code>boolean</code> | <code>false</code> | Offers direct midpoint, perpendicular, parallel, perpendicular bisector, angle bisector, tangent, polygon and transformation tools. |
-  | <code>canvas-only</code> | <code>boolean</code> | <code>false</code> | Shows only the interactive drawing and its local theme switcher. |
+  | <code>canvas-only</code> | <code>boolean</code> | <code>false</code> | Shows the interactive drawing with its action palette and view controls, with a source toggle and without the object list. |
   | <code>grid</code> | <code>boolean</code> | <code>false</code> | Shows a light grid without axes or graduations. |
+  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Title displayed above the drawing. |
   | <code>readonly</code> | <code>boolean</code> | <code>false</code> | Prevents changes to the construction. |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a text file containing construction commands. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-graph-geometry>`]
 
 Methods
@@ -330,7 +458,7 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | None. |  |  |
+  | <code>&#45;&#45;tp-plot-height</code> | <code>auto</code> | Height of the normal drawing including its top and bottom controls; other panels remain outside. |
   [CSS properties of `<tp-graph-geometry>`]
 :::
 <!-- /tp-docgen:api -->
@@ -338,6 +466,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-geometry.TpGraphGeometry.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -403,8 +541,16 @@ All tp-components used by `<tp-graph-geometry>` are loaded automatically by this
 @summary CodeMirror-based code editor component.
 -->
 <!--
+@tp-dependency tp-divider
+@summary Visual separator for menus, dropdowns, toolbars, and layouts.
+-->
+<!--
 @tp-dependency tp-dropdown
 @summary Dropdown menu component.
+-->
+<!--
+@tp-dependency tp-icon-button
+@summary Accessible icon button component.
 -->
 <!--
 @tp-dependency tp-radio-list
@@ -429,7 +575,9 @@ All tp-components used by `<tp-graph-geometry>` are loaded automatically by this
 - [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
 - [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
 - [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
+- [`<tp-divider>`](../divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
 - [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
+- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
 - [`<tp-radio-list>`](../radio-list/index.md) : Transforms a list into a group of radio buttons.
 - [`<tp-save-image>`](../save-image/index.md) : Downloads an anchored image as SVG, PNG or WebP.
 - [`<tp-textfield>`](../textfield/index.md) : Single-line and automatically growing multiline text field.

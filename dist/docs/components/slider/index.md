@@ -89,6 +89,10 @@ Attributes
   | <code>scrollbar</code> | <code>boolean</code> | <code>false</code> | Shows the scrollbar when present and hides it when absent, regardless of the attribute's text value. |
   | <code>scrollbar-track-color</code> | <code>string</code> | <code>&quot;transparent&quot;</code> | Scrollbar track color, using --tp-scrollbar-track-color when absent. |
   | <code>slider-height</code> | <code>string</code> | <code>&quot;auto&quot;</code> | Height of the scrolling area. By default, follows the content height. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-slider>`]
 
 Methods
@@ -116,6 +120,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_slider_slider.TpSlider.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

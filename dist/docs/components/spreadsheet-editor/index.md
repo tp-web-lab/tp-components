@@ -125,6 +125,10 @@ Attributes
   | <code>rows</code> | <code>number</code> | <code>20</code> | Number of rows (`20` by default). |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | CSV, JSON or XLSX file URL loaded on connection and whenever it changes. |
   | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | JSON-encoded two-dimensional array of raw cell values. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-spreadsheet-editor>`]
 
 Methods
@@ -162,6 +166,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_spreadsheet-editor.TpSpreadsheetEditor.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

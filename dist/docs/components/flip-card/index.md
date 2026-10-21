@@ -115,6 +115,10 @@ Attributes
   | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Prevents the card from being flipped. |
   | <code>fit-content</code> | <code>boolean</code> | <code>false</code> | Adapts the card dimensions to its verso content. |
   | <code>flipped</code> | <code>boolean</code> | <code>false</code> | Shows the verso when present. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-flip-card>`]
 
 Methods
@@ -146,6 +150,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_flip-card.TpFlipCard.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

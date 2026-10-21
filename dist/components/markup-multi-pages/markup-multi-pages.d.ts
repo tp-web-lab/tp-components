@@ -47,6 +47,10 @@
  * @summary Splitter component with two resizable panels.
  */
 /**
+ * @tp-dependency tp-textfield
+ * @summary Single-line and automatically growing multiline text field.
+ */
+/**
  * @tp-dependency tp-theme
  * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
  */
@@ -107,6 +111,7 @@ export declare class TpMarkupMultiPages extends TpBase {
     set label(value: string);
     get git(): string;
     set git(value: string);
+    /** Comma-separated language codes. The selector is hidden unless at least two distinct codes are declared. */
     get langs(): string;
     set langs(value: string);
     get menu(): boolean;
@@ -116,7 +121,6 @@ export declare class TpMarkupMultiPages extends TpBase {
     private applyDocumentLocale;
     private resolveCurrentLang;
     private initialize;
-    private updateLanguageVisibility;
     private renderShell;
     private toggleCalculator;
     private applyInitialSidebarState;

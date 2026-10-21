@@ -84,6 +84,10 @@ Change several attributes on one preview. All controls start at their documented
 ====
 ====
 
+[tp-textfield%value%placeholder%clearable,data-setting="regexp",label="regexp"]
+====
+====
+
 [tp-textfield%clearable,data-setting="rows",label="rows",value="3",placeholder="3"]
 ====
 ====

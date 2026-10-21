@@ -33,7 +33,7 @@ var c = n({
 	sourceVersion = 0;
 	selectionHelp = null;
 	connectedCallback() {
-		super.connectedCallback(), this.ensureSelectionHelp(), this.findResponseWidget()?.toggleAttribute("heading", this.heading), this.src && this.loadSrc();
+		super.connectedCallback(), this.ensureSelectionHelp(), this.findResponseWidget()?.toggleAttribute("heading", this.heading), this.usesExternalData && this.loadSrc();
 	}
 	ensureSelectionHelp() {
 		let e = this.querySelector("[data-tp-question-feedback-output]");
@@ -49,7 +49,7 @@ var c = n({
 		this.sourceVersion++, super.disconnectedCallback();
 	}
 	beforeQuestionLayout() {
-		if (this.src || this.findResponseWidget()) return;
+		if (this.usesExternalData || this.findResponseWidget()) return;
 		let e = this.response;
 		if (!e) return;
 		let t = e.querySelector("tp-matching");

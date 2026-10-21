@@ -77,6 +77,10 @@ Attributes
   | <code>shape</code> | <code>TpAvatarShape</code> | <code>&quot;circle&quot;</code> | Avatar shape (`circle` or `square`). |
   | <code>size</code> | <code>TpSizeType</code> | <code>&quot;m&quot;</code> | Avatar size (`xxs`, `xs`, `s`, `m`, `l`, `xl`, or `xxl`). |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Image URL; falls back to initials or an icon if loading fails. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
+  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
+  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-avatar>`]
 
 Methods
@@ -102,6 +106,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_avatar.TpAvatar.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,36 @@
+{
+  "profiles": [
+    {
+      "id": "limits",
+      "name": "Exactly \u00b120%",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          200
+        ],
+        [
+          2,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "summit",
+      "name": "Long summit climb",
+      "points": [
+        [
+          0,
+          100
+        ],
+        [
+          10,
+          2100
+        ]
+      ]
+    }
+  ]
+}

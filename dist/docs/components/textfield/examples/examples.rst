@@ -121,6 +121,13 @@
                   :clearable:
 
                .. tp-textfield::
+                  :data-setting: regexp
+                  :label: regexp
+                  :value:
+                  :placeholder:
+                  :clearable:
+
+               .. tp-textfield::
                   :data-setting: rows
                   :label: rows
                   :value: 3

@@ -162,6 +162,8 @@ Attributes
   | <code>toolbar</code> | <code>boolean</code> | <code>false</code> | Shows the editor UI panel. |
   | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Initial editor content. |
   | <code>word-wrap</code> | <code>boolean</code> | <code>false</code> | Enables soft wrapping. |
+  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
+  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   [Attributes of `<tp-code-editor>`]
 
 Methods
@@ -222,6 +224,16 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_code-editor.TpCodeEditor.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
 
 
 
