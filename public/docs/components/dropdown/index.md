@@ -26,12 +26,12 @@ The custom `<tp-dropdown>` element implements the <tp-icon name="dropdown" libra
 
 | Key or gesture | Result |
 | --- | --- |
-| ArrowDown / ArrowUp | Moves focus between menu items. |
-| ArrowRight / ArrowLeft | Opens or closes a submenu and moves focus appropriately. |
-| Home / End | Moves focus to the first or last item. |
-| Enter / Space | Activates an item or toggles its submenu. |
-| Escape | Closes the menu. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> | Moves focus between menu items. |
+| <kbd>ArrowRight</kbd> / <kbd>ArrowLeft</kbd> | Opens or closes a submenu and moves focus appropriately. |
+| <kbd>Home</kbd> / <kbd>End</kbd> | Moves focus to the first or last item. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activates an item or toggles its submenu. |
+| <kbd>Escape</kbd> | Closes the menu. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

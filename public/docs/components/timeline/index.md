@@ -38,9 +38,9 @@ The custom `<tp-timeline>` element implements the Timeline functionality: arrang
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab | Focuses the horizontal event list and any interactive event content. |
-| ArrowLeft / ArrowRight | Scrolls the focused horizontal event list left or right. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> | Focuses the horizontal event list and any interactive event content. |
+| <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> | Scrolls the focused horizontal event list left or right. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

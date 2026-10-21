@@ -27,13 +27,13 @@ Click the mathfield mark to choose `latexmath` or `asciimath`. A check marks the
 
 | Key or gesture | Result |
 | --- | --- |
-| Enter / Space on the mathfield mark | Open the notation menu. Use Up / Down to navigate, Enter / Space to select, and Escape to close it. |
-| Escape in the visual editor | Close the editor when no internal menu consumes Escape. |
-| Enter / Space on the pencil | Open the visual LaTeX editor. |
-| Tab / Shift+Tab | Move between the available controls. |
-| Typing | Enter or edit the value using the field controls; read-only and disabled fields cannot be edited. |
-| Enter / Space on Clear | Activate the clear button when available. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on the mathfield mark | Open the notation menu. Use <kbd>Up</kbd> / <kbd>Down</kbd> to navigate, <kbd>Enter</kbd> / <kbd>Space</kbd> to select, and <kbd>Escape</kbd> to close it. |
+| <kbd>Escape</kbd> in the visual editor | Close the editor when no internal menu consumes <kbd>Escape</kbd>. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on the pencil | Open the visual LaTeX editor. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
+| Typing | <kbd>Enter</kbd> or edit the value using the field controls; read-only and disabled fields cannot be edited. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on Clear | Activate the clear button when available. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

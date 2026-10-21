@@ -79,7 +79,7 @@
   "userHelp": {
     "displayName": "Lorem ipsum",
     "introduction": "The custom `<tp-lorem-ipsum>` element implements the Lorem ipsum functionality: generates placeholder sentences, titles, paragraphs or lists.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Generated text | Read, select or copy the placeholder text. There are no component-specific buttons or gestures. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Generated text | No component-specific keyboard shortcut or extra focus stop. |\n| Ctrl+? | Open User Help for the component under the pointer, falling back to the focused component. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Generated text | Read, select or copy the placeholder text. There are no component-specific buttons or gestures. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Generated text | No component-specific keyboard shortcut or extra focus stop. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

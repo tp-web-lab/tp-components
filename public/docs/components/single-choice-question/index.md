@@ -33,10 +33,10 @@ JSON uses this component's question schema. Other formats use the same definitio
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between the available controls. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
 | Arrow keys | Move between radio answers in a single-choice question. |
-| Enter / Space on Submit | Submit the selected answers. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on Submit | Submit the selected answers. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

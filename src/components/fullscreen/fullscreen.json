@@ -70,7 +70,7 @@
   "userHelp": {
     "displayName": "Fullscreen",
     "introduction": "The custom `<tp-fullscreen>` element implements the <tp-icon name=\"fullscreen\" library=\"components\" size=\"1.25em\"></tp-icon> Fullscreen functionality: fullscreen controller button.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Fullscreen button | Expand the associated content; activate again to leave fullscreen. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Browser fullscreen exit command | Leave fullscreen. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Fullscreen button | Expand the associated content; activate again to leave fullscreen. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| Browser fullscreen exit command | Leave fullscreen. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

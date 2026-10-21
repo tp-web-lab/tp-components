@@ -955,8 +955,8 @@ export class TpGraphGeometry extends TpBase {
 			this.querySelector(".tp-geometry-theme")?.getAttribute("mode") ?? "auto";
 		this.objectListMarkup = "";
 		this.setAttribute("data-geometry-export", this.controlId);
-		this.innerHTML = `<div class="tp-geometry-header"><div><strong>Ruler & compass</strong><span>Geometric constructions</span></div><tp-button-group><tp-button type="button" outlined data-geometry-control data-action="clear">New construction</tp-button></tp-button-group></div>
-      <tp-button-group class="tp-geometry-tools" aria-label="Construction tools">${this.toolGroups()
+		this.innerHTML = `<div class="tp-geometry-header" data-help-group="Construction"><div><strong>Ruler & compass</strong><span>Geometric constructions</span></div><tp-button-group><tp-button type="button" outlined data-geometry-control data-action="clear">New construction</tp-button></tp-button-group></div>
+      <tp-button-group class="tp-geometry-tools" data-help-group="Drawing tools" aria-label="Construction tools">${this.toolGroups()
 				.map((group) =>
 					group
 						.map((id) =>
@@ -969,7 +969,7 @@ export class TpGraphGeometry extends TpBase {
 				)}</tp-button-group>
       <div class="tp-geometry-parameters"><tp-textfield data-field="radius" label="Radius / length" value="5"></tp-textfield><tp-textfield data-field="start" label="Start angle (°)" value="20"></tp-textfield><tp-textfield data-field="end" label="End angle (°)" value="100"></tp-textfield><tp-textfield data-field="comment" label="Comment text" value="Comment"></tp-textfield>${this.builtIn ? `<tp-radio-list data-transform-mode label="Transformation" label-position="top" orientation="horizontal" value="1"><ul><li>Create a copy</li><li>Transform the object</li></ul></tp-radio-list><tp-textfield data-field="ratio" label="Ratio" value="2"></tp-textfield><tp-textfield data-field="rotation" label="Rotation angle (°)" value="90"></tp-textfield><tp-textfield data-field="sides" label="Sides" value="5" ${this.readonly ? "readonly" : ""}></tp-textfield><tp-button outlined data-geometry-control data-action="finish-polygon">Finish polygon</tp-button>` : ""}<span>Angles turn counterclockwise.</span></div>
       <tp-callout class="tp-geometry-hint" variant="info" outlined heading="${escapeHtml({ ...TOOLS, ...BUILT_IN_TOOLS }[this.tool])}" icon="${this.tool}" library="geometry"><span data-hint>${HINTS[this.tool]}</span></tp-callout>
-      <div class="tp-geometry-workspace"><div class="tp-geometry-board"><div class="tp-geometry-board-heading"><strong data-figure-title ${this.label ? "" : "hidden"}>${escapeHtml(this.label)}</strong><div class="tp-geometry-board-actions">${this.actionButton("palette", "Actions", "F1")}<tp-save-image anchor='[data-geometry-export="${this.controlId}"]' filename="geometry"></tp-save-image><tp-theme class="tp-geometry-theme" mode="${themeMode === "light" || themeMode === "dark" ? themeMode : "auto"}" anchor='[data-geometry-export="${this.controlId}"]'></tp-theme>${this.actionButton("zoom", "Zoom drawing", "Z")}</div></div><tp-dropdown data-tool-palette anchor="#${this.controlId}-palette" outside-click><ul>${this.toolGroups()
+      <div class="tp-geometry-workspace"><div class="tp-geometry-board"><div class="tp-geometry-board-heading"><strong data-figure-title ${this.label ? "" : "hidden"}>${escapeHtml(this.label)}</strong><div class="tp-geometry-board-actions" data-help-group="Drawing controls — top right">${this.actionButton("palette", "Actions", "F1")}<tp-save-image anchor='[data-geometry-export="${this.controlId}"]' filename="geometry"></tp-save-image><tp-theme class="tp-geometry-theme" mode="${themeMode === "light" || themeMode === "dark" ? themeMode : "auto"}" anchor='[data-geometry-export="${this.controlId}"]'></tp-theme>${this.actionButton("zoom", "Zoom drawing", "Z")}</div></div><tp-dropdown data-tool-palette anchor="#${this.controlId}-palette" outside-click><ul>${this.toolGroups()
 				.map((group) =>
 					group
 						.map(
@@ -980,9 +980,66 @@ export class TpGraphGeometry extends TpBase {
 				)
 				.join(
 					'<tp-divider orientation="horizontal"></tp-divider>',
-				)}</ul></tp-dropdown><div class="tp-geometry-context"></div><div data-animation-controls role="group" aria-label="Step-by-step construction" hidden></div><div class="tp-geometry-canvas"><svg data-geometry-canvas viewBox="0 0 900 ${this.canvasHeight}" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg></div><div class="tp-geometry-view"><tp-icon-button library="tp" name="code" label="Show construction source" title="Show construction source" aria-pressed="false" data-geometry-control data-action="source-view"></tp-icon-button>${this.actionButton("undo", "Undo", "Ctrl+Z")}${this.actionButton("redo", "Redo", "Ctrl+Shift+Z")}${this.actionButton("out", "Zoom out", "-")}${this.actionButton("in", "Zoom in", "+")}${this.actionButton("fit", "Fit", "F")}${this.actionButton("grid", "Grid", "G")}</div></div>
-      <aside><h3>Construction objects</h3><p data-appearance-label>Select an object in Move mode to change its appearance.</p><div class="tp-geometry-appearance"><tp-button id="${this.controlId}-style" outlined data-geometry-control data-action="style-menu" aria-haspopup="menu"><span data-style-label>Style · solid</span></tp-button><tp-dropdown anchor="#${this.controlId}-style" outside-click data-style-menu><ul>${GEOMETRY_STYLES.map((value) => `<li data-stroke="${value}">${value}${value === "solid" ? " (default)" : ""}</li>`).join("")}</ul></tp-dropdown><tp-button id="${this.controlId}-color" outlined data-geometry-control data-action="color-menu" aria-haspopup="menu"><span data-color-label>Color · automatic</span></tp-button><tp-dropdown anchor="#${this.controlId}-color" outside-click data-color-menu><ul><li data-color="">Automatic</li>${GEOMETRY_COLORS.map((value) => `<li data-color="${value}"><span class="tp-geometry-swatch tp-${value}" aria-hidden="true"></span>${value}</li>`).join("")}</ul></tp-dropdown></div><div class="tp-geometry-object-editor"><tp-textfield data-object-name label="Object name"></tp-textfield><tp-button outlined data-geometry-control data-action="rename">Rename</tp-button><tp-button outlined data-geometry-control data-action="move-name" aria-pressed="false">Move name</tp-button><tp-button outlined data-geometry-control data-action="hide-name" aria-pressed="false">Hide name</tp-button><p>Drag a name in the drawing, or enable Move name and use the arrow keys.</p></div><div data-objects></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Constructed points are calculated.</p></aside></div>
-      <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source"><dl><dt>Construction source</dt><dd><div class="tp-geometry-source-toolbar"><div><tp-icon-button id="${this.controlId}-source-files" name="file-outline" label="Construction files (.txt)" title="Construction files (.txt)" aria-haspopup="menu" data-geometry-control data-action="source-files"></tp-icon-button><tp-dropdown anchor="#${this.controlId}-source-files" outside-click data-source-menu><ul><li data-source-file="load">Load (.txt)</li><li data-source-file="save">Save (.txt)</li><li data-source-file="save-as">Save as (.txt)</li></ul></tp-dropdown></div><div class="tp-geometry-source-actions"><tp-icon-button library="tp" name="keyboard-f1" label="F1 — Toggle editor toolbar" title="Toggle editor toolbar (F1)" data-geometry-control data-action="source-toolbar"></tp-icon-button><tp-icon-button name="refresh" label="Reset source" title="Reset source to the displayed construction" data-geometry-control data-action="source-reset"></tp-icon-button><tp-icon-button name="play" label="Play" title="Play — Apply construction source" data-geometry-control data-action="apply"></tp-icon-button></div></div><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor></dd></dl></tp-accordion><dialog class="tp-geometry-dialog" aria-label="Zoomed drawing"></dialog>`;
+				)}</ul></tp-dropdown><div class="tp-geometry-context"></div><div data-animation-controls data-help-group="Animation" role="group" aria-label="Step-by-step construction" hidden></div><div class="tp-geometry-canvas"><svg data-geometry-canvas viewBox="0 0 900 ${this.canvasHeight}" role="group" aria-label="Geometric construction. Drag empty space or scroll to pan. In Pan view, arrow keys move the view." tabindex="0"><g data-grid aria-hidden="true"></g><g data-drawing></g></svg></div><div class="tp-geometry-view" data-help-group="View controls — bottom right"><tp-icon-button library="tp" name="code" label="Show construction source" title="Show construction source" aria-pressed="false" data-geometry-control data-action="source-view"></tp-icon-button>${this.actionButton("undo", "Undo", "Ctrl+Z")}${this.actionButton("redo", "Redo", "Ctrl+Shift+Z")}${this.actionButton("out", "Zoom out", "-")}${this.actionButton("in", "Zoom in", "+")}${this.actionButton("fit", "Fit", "F")}${this.actionButton("grid", "Grid", "G")}</div></div>
+      <aside data-help-group="Construction objects"><h3>Construction objects</h3><p data-appearance-label>Select an object in Move mode to change its appearance.</p><div class="tp-geometry-appearance"><tp-button id="${this.controlId}-style" outlined data-geometry-control data-action="style-menu" aria-haspopup="menu"><span data-style-label>Style · solid</span></tp-button><tp-dropdown anchor="#${this.controlId}-style" outside-click data-style-menu><ul>${GEOMETRY_STYLES.map((value) => `<li data-stroke="${value}">${value}${value === "solid" ? " (default)" : ""}</li>`).join("")}</ul></tp-dropdown><tp-button id="${this.controlId}-color" outlined data-geometry-control data-action="color-menu" aria-haspopup="menu"><span data-color-label>Color · automatic</span></tp-button><tp-dropdown anchor="#${this.controlId}-color" outside-click data-color-menu><ul><li data-color="">Automatic</li>${GEOMETRY_COLORS.map((value) => `<li data-color="${value}"><span class="tp-geometry-swatch tp-${value}" aria-hidden="true"></span>${value}</li>`).join("")}</ul></tp-dropdown></div><div class="tp-geometry-object-editor"><tp-textfield data-object-name label="Object name"></tp-textfield><tp-button outlined data-geometry-control data-action="rename">Rename</tp-button><tp-button outlined data-geometry-control data-action="move-name" aria-pressed="false">Move name</tp-button><tp-button outlined data-geometry-control data-action="hide-name" aria-pressed="false">Hide name</tp-button><p>Drag a name in the drawing, or enable Move name and use the arrow keys.</p></div><div data-objects data-help-ignore></div><tp-button type="button" outlined data-geometry-control data-action="delete">Delete selected + dependents</tp-button><p>Free points move freely. Attached points slide on their support. Constructed points are calculated.</p></aside></div>
+      <p data-status role="status" aria-live="polite"></p><tp-accordion class="tp-geometry-source" data-help-group="Construction source"><dl><dt>Construction source</dt><dd><div class="tp-geometry-source-toolbar"><div><tp-icon-button id="${this.controlId}-source-files" name="file-outline" label="Construction files (.txt)" title="Construction files (.txt)" aria-haspopup="menu" data-geometry-control data-action="source-files"></tp-icon-button><tp-dropdown anchor="#${this.controlId}-source-files" outside-click data-source-menu><ul><li data-source-file="load">Load (.txt)</li><li data-source-file="save">Save (.txt)</li><li data-source-file="save-as">Save as (.txt)</li></ul></tp-dropdown></div><div class="tp-geometry-source-actions"><tp-icon-button library="tp" name="keyboard-f1" label="F1 — Toggle editor toolbar" title="Toggle editor toolbar (F1)" data-geometry-control data-action="source-toolbar"></tp-icon-button><tp-icon-button name="refresh" label="Reset source" title="Reset source to the displayed construction" data-geometry-control data-action="source-reset"></tp-icon-button><tp-icon-button name="play" label="Play" title="Play — Apply construction source" data-geometry-control data-action="apply"></tp-icon-button></div></div><tp-code-editor language="text" line-numbers ${this.readonly ? "readonly" : ""}></tp-code-editor></dd></dl></tp-accordion><dialog class="tp-geometry-dialog" aria-label="Zoomed drawing"></dialog>`;
+
+		// Keep legend descriptions concise and independent of tooltip/shortcut wording.
+		const descriptions: Record<string, string> = {
+			palette: "Palette of controls.",
+			zoom: "Enlarge/restore the drawing.",
+			undo: "Revert the last change.",
+			redo: "Restore the last undone change.",
+			in: "Increase the drawing scale.",
+			out: "Decrease the drawing scale.",
+			fit: "Fit the construction in the drawing area.",
+			grid: "Hide/show the grid.",
+			clear: "Start an empty construction.",
+			"source-view": "Switch between drawing and source.",
+			"style-menu": "Choose the selected object’s line style.",
+			"color-menu": "Choose the selected object’s color.",
+			rename: "Apply the edited object name.",
+			"move-name": "Reposition the selected object’s label.",
+			"hide-name": "Hide/show the selected object’s name.",
+			delete: "Remove the selection and its dependent objects.",
+			"source-files": "Load or save a construction file.",
+			"source-toolbar": "Hide/show the editor toolbar.",
+			"source-reset": "Restore the source of the displayed construction.",
+			apply: "Apply the edited construction source.",
+			"finish-polygon": "Close the polygon through its selected vertices.",
+		};
+		for (const control of this.querySelectorAll<HTMLElement>("[data-action]")) {
+			const action = control.dataset.action ?? "";
+			if (descriptions[action])
+				control.dataset.helpDescription = descriptions[action];
+			if (action === "undo" || action === "redo")
+				control.dataset.helpGroup = "History — bottom right";
+		}
+		const toolDescriptions: Record<string, string> = {
+			move: "Move points, names or comments.",
+			pan: "Move the entire view.",
+			point: "Create a point.",
+			on: "Attach a point to an existing object.",
+			intersection: "Create the intersections of two objects.",
+			line: "Draw a line through two points.",
+			segment: "Join two points.",
+			fixedSegment: "Draw a segment of the specified length.",
+			ray: "Draw from an origin in a specified direction.",
+			vector: "Draw a directed segment.",
+			sector: "Fill part of a circle between two radii.",
+			circle: "Draw a circle with the specified radius.",
+			through: "Draw a circle through a point.",
+			arc: "Draw part of a circle.",
+			length: "Display a distance, length or perimeter.",
+			area: "Display an enclosed area.",
+			angle: "Display the angle between two sides.",
+			comment: "Add a text annotation.",
+		};
+		for (const control of this.querySelectorAll<HTMLElement>("[data-tool]")) {
+			const tool = control.dataset.tool as Tool;
+			control.dataset.helpDescription =
+				toolDescriptions[tool] ?? HINTS[tool]?.split(/(?<=[.!?])\s/)[0] ?? "";
+		}
 
 		if (this.canvasOnly) {
 			const source = this.querySelector(".tp-geometry-source");

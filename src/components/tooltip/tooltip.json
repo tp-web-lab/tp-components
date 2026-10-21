@@ -75,7 +75,7 @@
   "userHelp": {
     "displayName": "Tooltip",
     "introduction": "The custom `<tp-tooltip>` element implements the <tp-icon name=\"tooltip\" library=\"components\" size=\"1.25em\"></tp-icon> Tooltip functionality: displays anchored tooltip content.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Hover over the associated control | Show its explanation. The tooltip is not an actionable control. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus the associated control to show its explanation. |\n| Escape | Closes the tooltip. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Hover over the associated control | Show its explanation. The tooltip is not an actionable control. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the associated control to show its explanation. |\n| <kbd>Escape</kbd> | Closes the tooltip. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Escape",

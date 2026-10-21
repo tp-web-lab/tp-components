@@ -55,3 +55,15 @@ Order selectable examples identically in all four languages: Basic usage (the li
 In reStructuredText, indentation is structural: keep paragraph continuation lines at the same indentation, keep inline literals within their paragraph, and separate directive options from their indented content with a blank line. Validate syntax with the RST parser when changing generated indentation.
 
 Immediately before the language tabs in Examples, provide a native Markdown definition list (rendered as dl/dt/dd), with one entry per selectable example in the same order. Use its exact title as the term and one or two English sentences explaining the actions to try and the result to observe. Maintain the editorial descriptions in scripts/component-example-descriptions.mjs, run pnpm examples:sync-descriptions, then pnpm examples:check-descriptions and pnpm examples:check-labels. Review descriptions against the actual examples; do not invent behavior or describe a static example as interactive.
+
+# Button legends and keyboard notation
+
+User help for every component with button commands must include a Buttons table showing each command icon or text label with a short description. The shared help renderer builds this legend from the current controls; maintain concise, accurate descriptions in the Mouse interactions table, using the actual button labels. Do not duplicate live interactive controls in this legend.
+
+Whenever prose or interaction tables mention keyboard keys, wrap each key in `<kbd>` independently: `<kbd>Ctrl</kbd>+<kbd>?</kbd>`, `<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>`. Keep literal code examples and machine-readable shortcut metadata unchanged. Existing Mouse interactions and Keyboard interactions tables remain required; the generated Buttons legend is additional.
+
+All user-help tables must use the shared Markdown table presentation (`tp-md-table` inside `tp-markdown-output`), matching the geometry example’s Commands tables. Reuse this style rather than duplicating CSS; command legend icons use `2em`.
+
+Group help command tables by their location or panel, using `data-help-group` on a container (or control). Use `data-help-description` for a concise action description: describe the effect, not the label or shortcut. Keep detailed instructions in the interaction tables.
+
+Component help describes only its own commands. Stop command discovery at functional subcomponents; their internal controls belong to their own Ctrl+? help. Layout containers may carry the parent’s commands. Never annotate a subcomponent’s internal help descriptions from its parent.

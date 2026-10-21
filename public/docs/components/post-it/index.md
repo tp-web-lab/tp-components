@@ -33,11 +33,11 @@ The custom `<tp-post-it>` element displays a movable floating paper note that fo
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between the pin, reset, header and interactive content in the expanded note. In lite mode, only the pin remains in keyboard navigation. |
-| Enter / Space | Activate the focused reset or pin button. Reset restores the initial document position; the pin folds or expands the note. |
-| Arrow keys on the header, or on the pin in lite mode | Move the note by 10 pixels. Hold Shift for 1-pixel steps. |
-| Escape during a drag | Cancel the movement and restore the starting position. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the pin, reset, header and interactive content in the expanded note. In lite mode, only the pin remains in keyboard navigation. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused reset or pin button. Reset restores the initial document position; the pin folds or expands the note. |
+| Arrow keys on the header, or on the pin in lite mode | Move the note by 10 pixels. Hold <kbd>Shift</kbd> for 1-pixel steps. |
+| <kbd>Escape</kbd> during a drag | Cancel the movement and restore the starting position. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

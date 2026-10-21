@@ -28,7 +28,7 @@ export function extractComponentUserHelp(
 		interactions:
 			markdown
 				.match(
-					/^### User interactions\s*\n([\s\S]*?)(?=^### Author directives|^## |$(?![\s\S]))/m,
+					/^### User interactions\s*\n([\s\S]*?)(?=^### |^## |$(?![\s\S]))/m,
 				)?.[1]
 				?.trim() ?? "",
 		keyboard: [

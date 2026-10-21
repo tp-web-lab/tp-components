@@ -31,14 +31,14 @@ The custom `<tp-tabs>` element implements the <tp-icon name="tabs" library="comp
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between the tab list and focusable panel content. |
-| ArrowRight / ArrowDown | Moves focus to the next tab according to orientation. |
-| ArrowLeft / ArrowUp | Moves focus to the previous tab according to orientation. |
-| Home | Moves focus to the first tab. |
-| End | Moves focus to the last tab. |
-| Enter / Space | Activates the focused tab in manual activation mode. |
-| Delete | Requests closing a dynamically added tab. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the tab list and focusable panel content. |
+| <kbd>ArrowRight</kbd> / <kbd>ArrowDown</kbd> | Moves focus to the next tab according to orientation. |
+| <kbd>ArrowLeft</kbd> / <kbd>ArrowUp</kbd> | Moves focus to the previous tab according to orientation. |
+| <kbd>Home</kbd> | Moves focus to the first tab. |
+| <kbd>End</kbd> | Moves focus to the last tab. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activates the focused tab in manual activation mode. |
+| <kbd>Delete</kbd> | Requests closing a dynamically added tab. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

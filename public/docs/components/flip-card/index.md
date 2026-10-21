@@ -24,9 +24,9 @@
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Focus the flip control and the visible face to read or scroll its contents. The hidden face is excluded from keyboard navigation. |
-| Enter / Space | Flip the focused card or activate its flip button. Space on the focused face scrolls its content without flipping. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the flip control and the visible face to read or scroll its contents. The hidden face is excluded from keyboard navigation. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Flip the focused card or activate its flip button. <kbd>Space</kbd> on the focused face scrolls its content without flipping. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

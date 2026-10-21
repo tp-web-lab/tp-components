@@ -20,9 +20,9 @@ The custom `<tp-color-picker>` element implements the <tp-icon name="color-picke
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Focus a color choice. |
-| Enter / Space | Select the focused color and copy its CSS variable reference. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus a color choice. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Select the focused color and copy its CSS variable reference. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

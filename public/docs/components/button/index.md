@@ -21,10 +21,10 @@ The custom `<tp-button>` element implements the <tp-icon name="button" library="
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between the available controls. |
-| Enter | Activate the focused button or link. |
-| Space | Activate a focused action button; links use Enter. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
+| <kbd>Enter</kbd> | Activate the focused button or link. |
+| <kbd>Space</kbd> | Activate a focused action button; links use <kbd>Enter</kbd>. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

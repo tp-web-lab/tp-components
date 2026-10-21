@@ -188,7 +188,7 @@
   "userHelp": {
     "displayName": "Animation",
     "introduction": "The custom `<tp-animation>` element implements the <tp-icon name=\"animation\" library=\"components\" size=\"1.25em\"></tp-icon> Animation functionality: `<tp-animation>` applique une animation à une cible du DOM léger. Le composant utilise animate.css pour les noms d'animation et WAAPI pour le contrôle de lecture.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Content may animate when it appears, when you click it or when you move the pointer over it, depending on the page. |\n| Using the component | There is no separate animation toolbar. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Enter / Space | Starts a click-triggered animation when its target is not a native control. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Content may animate when it appears, when you click it or when you move the pointer over it, depending on the page. |\n| Using the component | There is no separate animation toolbar. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Starts a click-triggered animation when its target is not a native control. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Enter / Space",

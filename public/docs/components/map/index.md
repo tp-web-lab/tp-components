@@ -28,12 +28,12 @@ The component uses [Leaflet](https://leafletjs.com/) and [OpenStreetMap](https:/
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between toolbar buttons, the map, its marker and attribution links. |
-| Enter / Space | Activate a focused toolbar button or the profile's Zoom and Close buttons. Enter opens a focused marker's popup. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between toolbar buttons, the map, its marker and attribution links. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused toolbar button or the profile's Zoom and Close buttons. <kbd>Enter</kbd> opens a focused marker's popup. |
 | Arrow keys | Pan the focused map. |
 | + / - | Zoom the focused map in or out. |
-| Escape | Close an open popup or the enlarged elevation profile. |
-| Ctrl+? | Open User Help for the component under the pointer, falling back to the focused component. Include Shift if needed to type ?. |
+| <kbd>Escape</kbd> | Close an open popup or the enlarged elevation profile. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

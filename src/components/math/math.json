@@ -90,7 +90,7 @@
   "userHelp": {
     "displayName": "Math",
     "introduction": "The custom `<tp-math>` element implements the Math functionality: renders LaTeX or AsciiMath expressions as inline or display-style SVG.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Formula | Read the rendered expression. There are no component-specific buttons or editing controls. |\n| Wide display formula | Scroll horizontally when the expression exceeds the available width. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Formula | No component-specific keyboard interaction; the expression is not an editable field. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Formula | Read the rendered expression. There are no component-specific buttons or editing controls. |\n| Wide display formula | Scroll horizontally when the expression exceeds the available width. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Formula | No component-specific keyboard interaction; the expression is not an editable field. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

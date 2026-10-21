@@ -63,14 +63,14 @@ Use `label="My graph"` to display a title at the left of the view toolbar, inclu
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between the available controls. |
-| F1 in Graph definition | Show or hide the source editor toolbar. |
-| ArrowUp / ArrowDown, Home / End in the file menu | Navigate Load, Save and Save as; Enter/Space activates an action and Escape closes the menu. |
-| Enter / Space | Activate the focused button, including Code, Undo, Redo, Zoom in, Zoom out and Reset. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
+| <kbd>F1</kbd> in Graph definition | Show or hide the source editor toolbar. |
+| <kbd>ArrowUp</kbd> / <kbd>ArrowDown</kbd>, <kbd>Home</kbd> / <kbd>End</kbd> in the file menu | Navigate Load, Save and Save as; <kbd>Enter</kbd>/<kbd>Space</kbd> activates an action and <kbd>Escape</kbd> closes the menu. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button, including Code, Undo, Redo, Zoom in, Zoom out and Reset. |
 | Arrow keys on the focused graph | Move the drawing in the arrow direction by 10% of the visible range. |
-| Home on the focused graph | Restore the original scale and position. |
-| Escape | Close the enlarged graph. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Home</kbd> on the focused graph | Restore the original scale and position. |
+| <kbd>Escape</kbd> | Close the enlarged graph. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Assignment syntax
 

@@ -23,8 +23,8 @@ The custom `<tp-animation>` element implements the <tp-icon name="animation" lib
 
 | Key or gesture | Result |
 | --- | --- |
-| Enter / Space | Starts a click-triggered animation when its target is not a native control. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Starts a click-triggered animation when its target is not a native control. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

@@ -8,23 +8,27 @@ The custom `<tp-base>` element implements the <tp-icon name="base" library="comp
 
 `<tp-base>` installs the global reset, design tokens, and common tp-components styles once in the document. Every component that extends `TpBase` therefore starts from the same visual foundation without loading those styles again.
 
-It also provides the shared user help system. Press Ctrl+? on a focused or hovered component to open “tp-NAME User Help”: a direct preview of the current element followed by mouse and keyboard interactions. The preview is independent of the original element. Authoring controls, API tables and class inheritance are not shown.
+It also provides the shared user help system. Press <kbd>Ctrl</kbd>+<kbd>?</kbd> on a focused or hovered component to open “tp-NAME User Help”: a direct preview of the current element followed by a Buttons table with command icons or labels and short descriptions, then mouse and keyboard interactions. All help tables share the Markdown table style used by command legends: bordered cells, alternating row backgrounds and consistent spacing. Command icons use a size of 2em. The button legend reflects the controls available in the component when help opens. Each keyboard key is marked with `<kbd>`, for example <kbd>Ctrl</kbd>+<kbd>?</kbd>. The preview is independent of the original element. Authoring controls, API tables and class inheritance are not shown.
 
 ## Usage
 
 ### User interactions
 
+Help lists only this component’s own commands. Functional subcomponents expose their internal commands through their own <kbd>Ctrl</kbd>+<kbd>?</kbd> help.
+
+The user-help button legend groups commands by their location in the component and describes their effect briefly. Detailed gestures and keyboard behavior remain in the interaction tables below.
+
 #### Mouse interactions
 
 | Control or gesture | Result |
 | --- | --- |
-| Pointer over a component | Identifies the component whose help opens with Ctrl+?. This also works for non-focusable content such as boxes. |
+| Pointer over a component | Identifies the component whose help opens with <kbd>Ctrl</kbd>+<kbd>?</kbd>. This also works for non-focusable content such as boxes. |
 
 #### Keyboard interactions
 
 | Key or gesture | Result |
 | --- | --- |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

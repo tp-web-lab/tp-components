@@ -31,15 +31,15 @@ The custom `<tp-tangram>` element presents seven rigid pieces and a central silh
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Focus toolbar buttons and individual pieces. Focusing a piece selects it. |
-| Enter / Space on a toolbar button | Activate the button. |
-| Arrow keys on a piece | Move by 0.05 units; Shift increases the step to 0.5 units. |
-| R / Shift+R on a piece | Rotate by +45° / −45°. |
-| F on the parallelogram | Reflect it. |
-| Ctrl+Z / Ctrl+Shift+Z | Undo / redo. Command is also supported. |
-| Arrow Up / Down, Home / End in the assistance menu | Navigate menu items. Enter or Space activates an action; Escape closes the menu. |
-| Escape | Close the selected piece’s local controls and cancel a drag; the browser also uses Escape to leave fullscreen. |
-| Ctrl+? | Open User help for the component under the pointer, falling back to the focused component. Shift may be needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus toolbar buttons and individual pieces. Focusing a piece selects it. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on a toolbar button | Activate the button. |
+| Arrow keys on a piece | Move by 0.05 units; <kbd>Shift</kbd> increases the step to 0.5 units. |
+| <kbd>R</kbd> / <kbd>Shift</kbd>+<kbd>R</kbd> on a piece | Rotate by +45° / −45°. |
+| <kbd>F</kbd> on the parallelogram | Reflect it. |
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Undo / redo. <kbd>Command</kbd> is also supported. |
+| <kbd>Arrow Up</kbd> / <kbd>Down</kbd>, <kbd>Home</kbd> / <kbd>End</kbd> in the assistance menu | Navigate menu items. <kbd>Enter</kbd> or <kbd>Space</kbd> activates an action; <kbd>Escape</kbd> closes the menu. |
+| <kbd>Escape</kbd> | Close the selected piece’s local controls and cancel a drag; the browser also uses <kbd>Escape</kbd> to leave fullscreen. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |
 
 ## Authoring
 
@@ -51,7 +51,7 @@ Add the boolean `exact-orientation` attribute to start all seven scattered piece
 <tp-tangram exact-orientation src="/docs/components/tangram/examples/convex-01.txt"></tp-tangram>
 ```
 
-The main toolbar uses icons with tooltips and accessible labels. Selecting a piece displays a small local toolbar beside it with the same rotation commands and the parallelogram flip. Keyboard shortcuts R, Shift+R and F also work while the piece is focused.
+The main toolbar uses icons with tooltips and accessible labels. Selecting a piece displays a small local toolbar beside it with the same rotation commands and the parallelogram flip. Keyboard shortcuts <kbd>R</kbd>, <kbd>Shift</kbd>+<kbd>R</kbd> and <kbd>F</kbd> also work while the piece is focused.
 
 ### Solution source
 

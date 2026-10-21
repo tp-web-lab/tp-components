@@ -23,8 +23,8 @@ The custom `<tp-graph-nfa>` element implements the <tp-icon name="graph-nfa" lib
 
 | Key or gesture | Result |
 | --- | --- |
-| Read next character | Enter a word, then use **Read next character** or **Run word**. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| Read next character | <kbd>Enter</kbd> a word, then use **Read next character** or **Run word**. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

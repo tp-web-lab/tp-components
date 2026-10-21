@@ -54,31 +54,31 @@ Use F1 while the editor is focused to show or hide its toolbar. Mod means ⌘ on
 | Key or gesture | Result |
 | --- | --- |
 | Typing and cursor movement | Edit text and move the insertion point in the focused editor. Editing is unavailable in read-only mode. |
-| `Mod Z` | Reverts the last editor change. |
-| `Mod Shift Z` | Reapplies the last reverted editor change. |
-| `Mod C` | Copies the current selection. |
-| `Mod X` | Cuts the current selection. |
-| `Mod V` | Pastes clipboard text at the current selection. |
-| `Mod A` | Selects the whole editor content. |
+| <kbd>Mod</kbd>+<kbd>Z</kbd> | Reverts the last editor change. |
+| <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Reapplies the last reverted editor change. |
+| <kbd>Mod</kbd>+<kbd>C</kbd> | Copies the current selection. |
+| <kbd>Mod</kbd>+<kbd>X</kbd> | Cuts the current selection. |
+| <kbd>Mod</kbd>+<kbd>V</kbd> | Pastes clipboard text at the current selection. |
+| <kbd>Mod</kbd>+<kbd>A</kbd> | Selects the whole editor content. |
 | `Mod Alt ↓` | Folds the current foldable code block. |
 | `Mod Alt ↑` | Unfolds the current folded code block. |
-| `Mod Alt G` | Shows or hides the fold gutter. |
-| `Mod Alt L` | Shows or hides line numbers. |
+| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>G</kbd> | Shows or hides the fold gutter. |
+| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd> | Shows or hides line numbers. |
 | Focus in readonly mode | The code remains keyboard-focusable for reading, selection and scrolling. |
-| `Tab` | Indents the current line or selection. |
-| `Shift Tab` | Dedents the current line or selection. |
-| `Mod F` | Opens the search panel. |
-| `Mod Alt F` | Open the search and replacement panel. |
-| `Mod G` | Opens the go-to-line prompt. |
-| `Mod Alt C` | Toggles line comments for the current line or selection. |
-| `Mod Alt B` | Toggles block comments for the current selection. |
-| `Mod Shift P` | Opens or closes the command palette. |
-| `F1` | Opens or closes the toolbar. |
-| Up / Down in the open palette | Move between commands. |
-| Enter / Space in the open palette | Activate the focused command. |
-| Escape in the open palette | Close the palette. |
-| Focus a numbered comment marker / Escape | Show its explanation / close the tooltip without changing the code. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> | Indents the current line or selection. |
+| <kbd>Shift</kbd>+<kbd>Tab</kbd> | Dedents the current line or selection. |
+| <kbd>Mod</kbd>+<kbd>F</kbd> | Opens the search panel. |
+| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd> | Open the search and replacement panel. |
+| <kbd>Mod</kbd>+<kbd>G</kbd> | Opens the go-to-line prompt. |
+| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd> | Toggles line comments for the current line or selection. |
+| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> | Toggles block comments for the current selection. |
+| <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> | Opens or closes the command palette. |
+| <kbd>F1</kbd> | Opens or closes the toolbar. |
+| <kbd>Up</kbd> / <kbd>Down</kbd> in the open palette | Move between commands. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> in the open palette | Activate the focused command. |
+| <kbd>Escape</kbd> in the open palette | Close the palette. |
+| Focus a numbered comment marker / <kbd>Escape</kbd> | Show its explanation / close the tooltip without changing the code. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

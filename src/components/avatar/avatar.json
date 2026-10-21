@@ -91,7 +91,7 @@
   "userHelp": {
     "displayName": "Avatar",
     "introduction": "The custom `<tp-avatar>` element implements the Avatar functionality: displays an image, initials or an icon in a circle or square.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | An avatar identifies a person or entity. It is a static image, not a button: it has no mouse or keyboard action. Its accessible label is announced by screen readers when provided. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | An avatar identifies a person or entity. It is a static image, not a button: it has no mouse or keyboard action. Its accessible label is announced by screen readers when provided. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

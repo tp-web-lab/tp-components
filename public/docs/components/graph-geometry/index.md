@@ -26,6 +26,10 @@ Set `style="--tp-plot-height:440px"` to give the normal plot a fixed height, inc
 
 ### User interactions
 
+Help lists only this component’s own commands. Functional subcomponents expose their internal commands through their own <kbd>Ctrl</kbd>+<kbd>?</kbd> help.
+
+The user-help button legend groups commands by their location in the component and describes their effect briefly. Detailed gestures and keyboard behavior remain in the interaction tables below.
+
 Use `label="My figure"` to title the drawing. With `canvas-only`, the action palette, Save image, local Theme and Zoom drawing controls remain at the top right; Undo, Redo, Zoom out, Zoom in, Fit and Grid stay at the bottom right. The object list and main tool strip are hidden. The `</>` button at the bottom left switches between the drawing and Construction source, including its file menu, F1, Reset and Play controls. Switching preserves the figure and unapplied editor text, including in the zoomed window. Choosing a construction tool reveals its help and parameters within the drawing panel. `readonly` still prevents construction changes.
 
 #### Mouse interactions
@@ -93,57 +97,57 @@ Tool shortcuts apply while focus is inside the figure and never intercept typing
 
 | Key or gesture | Result |
 | --- | --- |
-| Enter / Space on Rename, Move name or Hide name | Apply the edited name, enable name positioning, or toggle name visibility. |
-| Enter / Space on animation controls | Choose an animation or move through its steps; available in readonly mode. |
-| F2 on the drawing | Open the inline name field for the selected object. |
-| Enter / Escape in the inline name field | Rename the object / cancel editing. Leaving the field also cancels. Invalid or duplicate names keep the field open with an error. |
-| Tab / Shift+Tab | Move between tools, parameters, object buttons, drawing and source controls. |
-| Enter / Space | Activate a focused button or expand/collapse the Construction source accordion. Selecting an object in Move mode focuses the drawing. |
-| F1 | Inside Construction source, show or hide the editor toolbar. Elsewhere, open or close the action palette. Use Up/Down, Home/End to navigate and Enter/Space to choose a tool. |
-| Z / Escape in the zoomed window | Enlarge or restore the drawing with Z; Escape closes the window. |
-| Delete | Remove the selected object and its dependent constructions as one undoable action (except in readonly mode). |
-| Ctrl/Cmd+Z / Ctrl/Cmd+Shift+Z | Undo / redo a construction change. |
-| − / + / F / G | Zoom out / zoom in / fit the drawing / toggle the grid. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on Rename, Move name or Hide name | Apply the edited name, enable name positioning, or toggle name visibility. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on animation controls | Choose an animation or move through its steps; available in readonly mode. |
+| <kbd>F2</kbd> on the drawing | Open the inline name field for the selected object. |
+| <kbd>Enter</kbd> / <kbd>Escape</kbd> in the inline name field | Rename the object / cancel editing. Leaving the field also cancels. Invalid or duplicate names keep the field open with an error. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between tools, parameters, object buttons, drawing and source controls. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused button or expand/collapse the Construction source accordion. Selecting an object in Move mode focuses the drawing. |
+| <kbd>F1</kbd> | Inside Construction source, show or hide the editor toolbar. Elsewhere, open or close the action palette. Use <kbd>Up</kbd>/<kbd>Down</kbd>, <kbd>Home</kbd>/<kbd>End</kbd> to navigate and <kbd>Enter</kbd>/<kbd>Space</kbd> to choose a tool. |
+| <kbd>Z</kbd> / <kbd>Escape</kbd> in the zoomed window | Enlarge or restore the drawing with Z; <kbd>Escape</kbd> closes the window. |
+| <kbd>Delete</kbd> | Remove the selected object and its dependent constructions as one undoable action (except in readonly mode). |
+| <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Undo / redo a construction change. |
+| − / + / <kbd>F</kbd> / <kbd>G</kbd> | Zoom out / zoom in / fit the drawing / toggle the grid. |
 | Arrow keys in canvas-only mode | Move the selected point, comment, measurement or name (with Move name enabled); when nothing is selected, or in readonly mode, pan the view. |
 | Arrow keys on the drawing | In Pan view, pan by 40 drawing pixels. With Move name enabled, move the selected object name. Otherwise move the selected comment, measurement label, free or attached point by 0.2 units before projection onto its support. |
-| Shift + arrow keys | In Pan view, pan by 8 drawing pixels. Otherwise use a smaller point step of 0.02 units. |
-| Enter on the drawing | Finish a pending irregular polygon with at least three vertices. |
-| Escape on the drawing | Cancel the pending selection, discard uncommitted polygon vertices and return to Move. |
-| ArrowUp / ArrowDown, Home / End in a menu | Move between export formats, stroke styles or colors. |
-| Enter / Space in a menu | Save the chosen format or apply the selected style or color. |
-| Escape in a menu | Close the menu. |
-| V | Select Move. |
-| H | Select Pan view. |
-| P | Select Point. |
-| Shift+P | Select Point on object. |
-| S | Select Segment. |
-| L | Select Line. |
-| Shift+S | Select Segment · length. |
-| R | Select Ray. |
-| W | Select Vector. |
-| E | Select Angular sector. |
-| T | Select Comment. |
-| D | Select Measure length. |
-| A | Select Measure area. |
-| Shift+A | Select Measure angle. |
-| C | Select Circle · radius. |
-| Shift+C | Select Circle · through point. |
-| B | Select Arc. |
-| I | Select Intersection. |
-| M | Select Midpoint (requires `built-in`). |
-| Shift+L | Select Perpendicular (requires `built-in`). |
-| J | Select Parallel (requires `built-in`). |
-| Shift+M | Select Perpendicular bisector · direct (requires `built-in`). |
-| Shift+B | Select Angle bisector (requires `built-in`). |
-| Shift+T | Select Tangents (requires `built-in`). |
-| N | Select Polygon (requires `built-in`). |
-| Shift+N | Select Regular polygon (requires `built-in`). |
-| X | Select Axial symmetry (requires `built-in`). |
-| Shift+X | Select Central symmetry (requires `built-in`). |
-| K | Select Homothety (requires `built-in`). |
-| Shift+R | Select Rotation (requires `built-in`). |
-| Shift+W | Select Translation (requires `built-in`). |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Shift</kbd> + arrow keys | In Pan view, pan by 8 drawing pixels. Otherwise use a smaller point step of 0.02 units. |
+| <kbd>Enter</kbd> on the drawing | Finish a pending irregular polygon with at least three vertices. |
+| <kbd>Escape</kbd> on the drawing | Cancel the pending selection, discard uncommitted polygon vertices and return to Move. |
+| <kbd>ArrowUp</kbd> / <kbd>ArrowDown</kbd>, <kbd>Home</kbd> / <kbd>End</kbd> in a menu | Move between export formats, stroke styles or colors. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> in a menu | Save the chosen format or apply the selected style or color. |
+| <kbd>Escape</kbd> in a menu | Close the menu. |
+| <kbd>V</kbd> | Select Move. |
+| <kbd>H</kbd> | Select Pan view. |
+| <kbd>P</kbd> | Select Point. |
+| <kbd>Shift</kbd>+<kbd>P</kbd> | Select Point on object. |
+| <kbd>S</kbd> | Select Segment. |
+| <kbd>L</kbd> | Select Line. |
+| <kbd>Shift</kbd>+<kbd>S</kbd> | Select Segment · length. |
+| <kbd>R</kbd> | Select Ray. |
+| <kbd>W</kbd> | Select Vector. |
+| <kbd>E</kbd> | Select Angular sector. |
+| <kbd>T</kbd> | Select Comment. |
+| <kbd>D</kbd> | Select Measure length. |
+| <kbd>A</kbd> | Select Measure area. |
+| <kbd>Shift</kbd>+<kbd>A</kbd> | Select Measure angle. |
+| <kbd>C</kbd> | Select Circle · radius. |
+| <kbd>Shift</kbd>+<kbd>C</kbd> | Select Circle · through point. |
+| <kbd>B</kbd> | Select Arc. |
+| <kbd>I</kbd> | Select Intersection. |
+| <kbd>M</kbd> | Select Midpoint (requires `built-in`). |
+| <kbd>Shift</kbd>+<kbd>L</kbd> | Select Perpendicular (requires `built-in`). |
+| <kbd>J</kbd> | Select Parallel (requires `built-in`). |
+| <kbd>Shift</kbd>+<kbd>M</kbd> | Select Perpendicular bisector · direct (requires `built-in`). |
+| <kbd>Shift</kbd>+<kbd>B</kbd> | Select Angle bisector (requires `built-in`). |
+| <kbd>Shift</kbd>+<kbd>T</kbd> | Select Tangents (requires `built-in`). |
+| <kbd>N</kbd> | Select Polygon (requires `built-in`). |
+| <kbd>Shift</kbd>+<kbd>N</kbd> | Select Regular polygon (requires `built-in`). |
+| <kbd>X</kbd> | Select Axial symmetry (requires `built-in`). |
+| <kbd>Shift</kbd>+<kbd>X</kbd> | Select Central symmetry (requires `built-in`). |
+| <kbd>K</kbd> | Select Homothety (requires `built-in`). |
+| <kbd>Shift</kbd>+<kbd>R</kbd> | Select Rotation (requires `built-in`). |
+| <kbd>Shift</kbd>+<kbd>W</kbd> | Select Translation (requires `built-in`). |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

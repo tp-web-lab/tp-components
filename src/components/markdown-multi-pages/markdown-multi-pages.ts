@@ -9,12 +9,20 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-calculator
+ * @summary Scientific calculator with an editable expression and degree/radian modes.
+ */
+/**
  * @tp-dependency tp-clock
  * @summary Live clock component with digital or analogic display and date tooltip.
  */
 /**
  * @tp-dependency tp-color
  * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
  */
 /**
  * @tp-dependency tp-fullscreen
@@ -31,6 +39,10 @@
 /**
  * @tp-dependency tp-markdown
  * @summary Markdown rendering component.
+ */
+/**
+ * @tp-dependency tp-post-it-editor
+ * @summary creates and edits persistent personal annotations attached to document elements.
  */
 /**
  * @tp-dependency tp-source
@@ -58,9 +70,12 @@
  */
 // tp-docgen:dependencies:end
 
+import "../calculator/calculator.js";
 import { TpBase } from "../base/base.js";
+import { TpDrawer } from "../drawer/drawer.js";
 import sidebarToolsStyle from "../markup-multi-pages/sidebar-tools.css?inline";
 import { appendSidebarTools } from "../markup-multi-pages/sidebar-tools.js";
+import { TpPostItEditor } from "../post-it-editor/post-it-editor.js";
 import "../toolbar/toolbar.js";
 import "../icon-button/icon-button.js";
 import "../clock/clock.js";
@@ -122,6 +137,8 @@ export class TpMarkdownMultiPages extends TpBase {
 	private sidebarElement: HTMLElement | null = null;
 	private contentElement: HTMLElement | null = null;
 	private currentHref = "";
+	private annotations: TpPostItEditor | null = null;
+	private calculatorDrawer: TpDrawer | null = null;
 	private currentSource = "";
 	private navigatingHref = "";
 	private sourceMode = false;
@@ -142,6 +159,12 @@ export class TpMarkdownMultiPages extends TpBase {
 		this.ensureGlobalStyle(STYLE_ID, style);
 		this.ensureGlobalStyle("tp-multi-pages-sidebar-tools", sidebarToolsStyle);
 		this.renderShell();
+		if (this.contentElement) {
+			this.annotations = new TpPostItEditor();
+			this.annotations.setAttribute("section", "start");
+			this.annotations.setTarget(this.contentElement);
+			this.querySelector('[data-action="calculator"]')?.after(this.annotations);
+		}
 		// this.applyBrand();
 		// this.applyTheme();
 		void this.initialize();
@@ -149,6 +172,9 @@ export class TpMarkdownMultiPages extends TpBase {
 	}
 
 	public disconnectedCallback(): void {
+		this.annotations?.dispose();
+		this.annotations = null;
+		this.calculatorDrawer = null;
 		this.contentElement?.removeEventListener("click", this.handleContentClick);
 		window.removeEventListener("hashchange", this.handleHashChange);
 	}
@@ -322,8 +348,9 @@ export class TpMarkdownMultiPages extends TpBase {
         <tp-toolbar class="tp-markdown-multi-pages-toolbar" orientation="horizontal" placement="top">
           <tp-icon-button section="start" color="currentColor" data-action="home" name="home" label="Home"></tp-icon-button>
           <tp-icon-button section="start" color="currentColor" data-action="menu" name="menu" label="Menu"></tp-icon-button>
-          <tp-source section="start" url="${escapeHtml(this.git)}"></tp-source>
           <tp-icon-button section="start" color="currentColor" data-action="code" name="code" label="Code"></tp-icon-button>
+          <tp-icon-button section="start" color="currentColor" data-action="calculator" name="calculator" library="components" label="Calculator"></tp-icon-button>
+          <tp-source section="start" url="${escapeHtml(this.git)}"></tp-source>
           <span class="tp-markdown-multi-pages-toolbar-label" section="center">${escapeHtml(this.label)}</span>
           <tp-clock section="end"></tp-clock>
           <tp-lang hidden section="end" langs="${escapeHtml(this.langs)}"></tp-lang>
@@ -346,6 +373,10 @@ export class TpMarkdownMultiPages extends TpBase {
       </div>
     `;
 
+		this.querySelector('[data-action="calculator"]')?.addEventListener(
+			"click",
+			() => this.toggleCalculator(),
+		);
 		this.sidebarElement = this.querySelector('[data-role="sidebar"]');
 		this.contentElement = this.querySelector('[data-role="content"]');
 		this.applyLangs();
@@ -371,6 +402,22 @@ export class TpMarkdownMultiPages extends TpBase {
 				void this.toggleSourceMode();
 			},
 		);
+	}
+
+	private toggleCalculator(): void {
+		if (!this.calculatorDrawer) {
+			const drawer = new TpDrawer();
+			drawer.setAttribute("label", "Calculator");
+			drawer.setAttribute("placement", "end");
+			drawer.setAttribute("width", "min(52rem, 100vw)");
+			drawer.dataset.role = "calculator-drawer";
+			drawer.setContent(document.createElement("tp-calculator"));
+			this.append(drawer);
+			this.calculatorDrawer = drawer;
+		}
+		if (this.calculatorDrawer.hasAttribute("open"))
+			this.calculatorDrawer.hide();
+		else this.calculatorDrawer.show();
 	}
 
 	private applyInitialSidebarState(): void {
@@ -513,6 +560,7 @@ export class TpMarkdownMultiPages extends TpBase {
 		if (this.navigatingHref === documentHref) return;
 
 		this.navigatingHref = documentHref;
+		this.annotations?.setPage("");
 		try {
 			const source = await this.fetchText(documentHref);
 
@@ -526,6 +574,9 @@ export class TpMarkdownMultiPages extends TpBase {
 			this.sourceMode = false;
 
 			content.replaceChildren(this.createMarkdownViewer(documentHref));
+			this.annotations?.setPage(
+				new URL(documentHref, this.ownerDocument.baseURI).href,
+			);
 			this.renderPageNavigation(documentHref);
 			this.scrollToFragmentAfterRender(fragment);
 			this.updateCurrentLink(documentHref);
@@ -563,6 +614,7 @@ export class TpMarkdownMultiPages extends TpBase {
 		if (content === null || this.currentHref === "") return;
 
 		this.sourceMode = !this.sourceMode;
+		this.annotations?.setPage("");
 
 		if (this.sourceMode) {
 			if (this.currentSource === "") {
@@ -578,6 +630,9 @@ export class TpMarkdownMultiPages extends TpBase {
 		}
 
 		content.replaceChildren(this.createMarkdownViewer(this.currentHref));
+		this.annotations?.setPage(
+			new URL(this.currentHref, this.ownerDocument.baseURI).href,
+		);
 		this.renderPageNavigation(this.currentHref);
 	}
 

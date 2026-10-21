@@ -35,11 +35,11 @@ The custom `<tp-javascript-viewer-question>` element implements the programming 
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between question and programming controls. |
-| Enter / Space | Activate the focused action or expand/collapse the title. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between question and programming controls. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused action or expand/collapse the title. |
 | Arrow keys in Output tabs | Navigate Feedback and Solution. |
 | Typing in the editor | Modify source code using the embedded editor's editing behavior. |
-| Ctrl+? | Open User help for the component under the pointer, falling back to the focused component. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

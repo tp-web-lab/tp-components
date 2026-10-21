@@ -278,7 +278,7 @@
   "userHelp": {
     "displayName": "Console",
     "introduction": "The custom `<tp-console>` element implements the <tp-icon name=\"console\" library=\"components\" size=\"1.25em\"></tp-icon> Console functionality: visual console for playground output.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Messages | Read output and errors. |\n| Structured values | Expand or collapse values to inspect their contents. |\n| Copy button | Copy the console text. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Enter / Space | Activate the focused button. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Messages | Read output and errors. |\n| Structured values | Expand or collapse values to inspect their contents. |\n| Copy button | Copy the console text. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

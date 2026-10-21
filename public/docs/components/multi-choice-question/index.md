@@ -31,10 +31,10 @@ JSON uses this component's question schema. Other formats use the same definitio
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between the available controls. |
-| Space | Select the focused answer; in a multiple-choice question, toggle its checkbox. |
-| Enter / Space on Submit | Submit the current selection, including no checked boxes. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
+| <kbd>Space</kbd> | Select the focused answer; in a multiple-choice question, toggle its checkbox. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on Submit | Submit the current selection, including no checked boxes. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

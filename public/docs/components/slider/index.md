@@ -25,10 +25,10 @@ The custom `<tp-slider>` element implements the <tp-icon name="slider" library="
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab | Moves focus to the slider, then to its focusable children. |
-| ArrowLeft / ArrowRight | Scrolls the focused slider left or right by 80% of its visible width. |
-| Home / End | Scrolls the focused slider to the start or end of its content, respecting text direction. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> | Moves focus to the slider, then to its focusable children. |
+| <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> | Scrolls the focused slider left or right by 80% of its visible width. |
+| <kbd>Home</kbd> / <kbd>End</kbd> | Scrolls the focused slider to the start or end of its content, respecting text direction. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

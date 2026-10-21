@@ -26,10 +26,10 @@ The custom `<tp-modal>` element implements the <tp-icon name="modal" library="co
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab | Moves to the next focusable control and wraps inside the modal. |
-| Shift+Tab | Moves to the previous focusable control and wraps inside the modal. |
-| Escape | Closes the modal. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> | Moves to the next focusable control and wraps inside the modal. |
+| <kbd>Shift</kbd>+<kbd>Tab</kbd> | Moves to the previous focusable control and wraps inside the modal. |
+| <kbd>Escape</kbd> | Closes the modal. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

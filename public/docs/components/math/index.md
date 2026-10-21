@@ -24,7 +24,7 @@ Published documents can include a pre-rendered SVG with the original expression 
 | Key or gesture | Result |
 | --- | --- |
 | Formula | No component-specific keyboard interaction; the expression is not an editable field. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

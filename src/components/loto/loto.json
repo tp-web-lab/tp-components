@@ -82,7 +82,7 @@
   "userHelp": {
     "displayName": "Loto",
     "introduction": "The custom `<tp-loto>` element implements the <tp-icon name=\"loto\" library=\"components\" size=\"1.25em\"></tp-icon> Loto functionality: displays a playable French loto game.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Draw numbers using the game control and compare them with the tickets. |\n| Using the component | The history shows numbers already drawn; the reset button starts a new game. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Draw numbers using the game control and compare them with the tickets. |\n| Using the component | The history shows numbers already drawn; the reset button starts a new game. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

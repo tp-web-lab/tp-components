@@ -34,7 +34,7 @@
   "userHelp": {
     "displayName": "Color picker",
     "introduction": "The custom `<tp-color-picker>` element implements the <tp-icon name=\"color-picker\" library=\"components\" size=\"1.25em\"></tp-icon> Color picker functionality: light-DOM viewer for base color tokens.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Select | Select a color to copy its CSS variable reference. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus a color choice. |\n| Enter / Space | Select the focused color and copy its CSS variable reference. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Select | Select a color to copy its CSS variable reference. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus a color choice. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Select the focused color and copy its CSS variable reference. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

@@ -10,6 +10,8 @@
 import { dedent } from "../../utilities/code.js";
 import { ensureCodeBlockCopyButtons } from "../../utilities/code-block-copy.js";
 import type { TpComponentUserHelp } from "../../utilities/component-user-help.js";
+import { createHelpButtonTable } from "../../utilities/help-buttons.js";
+import { formatHelpKeyboard } from "../../utilities/help-keyboard.js";
 import baseStyle from "./base.css?inline";
 import resetStyle from "./tp-reset.css?inline";
 import tokenStyle from "./tp-tokens.css?inline";
@@ -836,11 +838,18 @@ export class TpBase extends HTMLElement {
 		const instructions = document.createElement("tp-markdown");
 		const source = document.createElement("script");
 		source.type = "tp/markdown";
-		source.textContent =
+		source.textContent = formatHelpKeyboard(
 			api.userHelp?.interactions ||
-			"No user interaction instructions are available for this component.";
+				"No user interaction instructions are available for this component.",
+		);
 		instructions.append(source);
-		interactions.append(interactionTitle, instructions);
+		interactions.append(interactionTitle);
+		const buttons = createHelpButtonTable(
+			this,
+			api.userHelp?.interactions ?? "",
+		);
+		if (buttons) interactions.append(buttons);
+		interactions.append(instructions);
 		if (
 			api.userHelp?.keyboard.length &&
 			!/^#### Keyboard interactions\s*$/m.test(api.userHelp.interactions)
@@ -848,9 +857,12 @@ export class TpBase extends HTMLElement {
 			const keys = document.createElement("dl");
 			api.userHelp.keyboard.forEach((item) => {
 				const term = document.createElement("dt");
-				const key = document.createElement("kbd");
-				key.textContent = item.key;
-				term.append(key);
+				for (const [index, token] of item.key.split(/\+(?!$)/).entries()) {
+					if (index) term.append("+");
+					const key = document.createElement("kbd");
+					key.textContent = token;
+					term.append(key);
+				}
 				const description = document.createElement("dd");
 				description.textContent = item.description;
 				keys.append(term, description);

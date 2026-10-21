@@ -79,7 +79,7 @@
   "userHelp": {
     "displayName": "Splitter",
     "introduction": "The custom `<tp-splitter>` element implements the <tp-icon name=\"splitter\" library=\"components\" size=\"1.25em\"></tp-icon> Splitter functionality: splitter layout with two resizable panels.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Drag | Drag the separator to resize the two panels. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Focus the separator. |\n| Arrow keys | Moves the divider by 1%, or by 10% while Shift is held. |\n| Home / End | Moves the divider to its minimum or maximum position. |\n| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Drag | Drag the separator to resize the two panels. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the separator. |\n| Arrow keys | Moves the divider by 1%, or by 10% while <kbd>Shift</kbd> is held. |\n| <kbd>Home</kbd> / <kbd>End</kbd> | Moves the divider to its minimum or maximum position. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Arrow keys",

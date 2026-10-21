@@ -32,10 +32,10 @@ It reuses the grammar, presets, turtle interpreter and SVG renderer of `@tp/tp-u
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move between playback and export controls. |
-| Enter / Space | Activate the focused button. |
-| Escape | Close the image export menu. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between playback and export controls. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |
+| <kbd>Escape</kbd> | Close the image export menu. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

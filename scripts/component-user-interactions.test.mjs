@@ -31,7 +31,7 @@ test("every public component documents pointer and keyboard actions in two table
     assert.equal((interactions.match(/^#### Keyboard interactions$/gm) ?? []).length, 1, name);
     const tokens = markdown.parse(interactions, {});
     assert.equal(tokens.filter(token => token.type === "table_open").length, 2, name);
-    assert.match(interactions.split("#### Keyboard interactions")[1], /\| Ctrl\+\? \|/, name);
+    assert.match(interactions.split("#### Keyboard interactions")[1], /\| <kbd>Ctrl<\/kbd>\+<kbd>\?<\/kbd> \|/, name);
     const manifest = JSON.parse(readFileSync(resolve(root, `src/components/${name}/${name}.json`), "utf8"));
     assert.equal(manifest.userHelp.interactions, interactions.trim(), `${name}: refresh user-help metadata`);
   });
@@ -45,5 +45,5 @@ test("the code-editor help explains every palette command and distinguishes full
   commands.forEach(command => assert.ok(doc.includes(`Palette: ${command}`), command));
   assert.match(doc, /Copy the entire editor content/);
   assert.match(doc, /Copies the current selection/);
-  assert.match(doc, /\| `F1` \| Opens or closes the toolbar/);
+  assert.match(doc, /\| <kbd>F1<\/kbd> \| Opens or closes the toolbar/);
 });

@@ -26,7 +26,7 @@ The custom `<tp-grid>` element implements the <tp-icon name="grid" library="comp
 | --- | --- |
 | Component itself | No dedicated keyboard action. |
 | Embedded controls, when present | Use their normal keyboard interactions. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 

@@ -160,12 +160,12 @@ Each assistance action that changes the grid can be undone in one step. Click a 
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Move among clues, toolbar controls and cells. |
-| Enter / Space | Activate a focused cell or button; Space toggles a clue checkbox. |
-| Arrow keys in Assist… / Enter | Choose and apply an assistance action using the native menu. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move among clues, toolbar controls and cells. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused cell or button; <kbd>Space</kbd> toggles a clue checkbox. |
+| Arrow keys in Assist… / <kbd>Enter</kbd> | Choose and apply an assistance action using the native menu. |
 | Arrow keys in a matrix | Move to a neighbouring cell in the same matrix. |
-| Delete / Backspace in a cell | Clear its mark. |
-| Ctrl+? | Open User help for the component under the pointer, falling back to the focused component. Shift may be needed to type ?. |
+| <kbd>Delete</kbd> / <kbd>Backspace</kbd> in a cell | Clear its mark. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |
 
 ## Examples
 

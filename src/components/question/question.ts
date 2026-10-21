@@ -911,6 +911,8 @@ export class TpQuestion extends TpBase {
 					name,
 					library: "tp",
 					label: name === "input" ? "Answer form" : "Output",
+					"data-help-description":
+						name === "input" ? "Hide/show the form." : "Hide/show the output.",
 					size: "s",
 					type: "button",
 					"aria-pressed": "true",

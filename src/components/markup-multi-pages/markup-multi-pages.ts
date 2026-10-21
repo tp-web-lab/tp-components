@@ -379,9 +379,9 @@ export class TpMarkupMultiPages extends TpBase {
         <tp-toolbar class="tp-markup-multi-pages-toolbar" orientation="horizontal" placement="top">
           <tp-icon-button section="start" color="currentColor" data-action="home" name="home" label="Home"></tp-icon-button>
           <tp-icon-button section="start" color="currentColor" data-action="menu" name="menu" label="Menu"></tp-icon-button>
-          <tp-source section="start" url="${escapeHtml(this.git)}"></tp-source>
           <tp-icon-button section="start" color="currentColor" data-action="code" name="code" label="Code"></tp-icon-button>
           <tp-icon-button section="start" color="currentColor" data-action="calculator" name="calculator" library="components" label="Calculator"></tp-icon-button>
+          <tp-source section="start" url="${escapeHtml(this.git)}"></tp-source>
           <span class="tp-markup-multi-pages-toolbar-label" section="center">${escapeHtml(this.label)}</span>
           <tp-clock section="end"></tp-clock>
           <tp-lang hidden section="end" langs="${escapeHtml(this.langs)}"></tp-lang>

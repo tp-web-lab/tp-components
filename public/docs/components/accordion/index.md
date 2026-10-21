@@ -26,13 +26,13 @@ The custom `<tp-accordion>` element implements the <tp-icon name="accordion" lib
 
 | Key or gesture | Result |
 | --- | --- |
-| Tab / Shift+Tab | Focus a section heading. |
-| ArrowDown | Moves focus to the next header. |
-| ArrowUp | Moves focus to the previous header. |
-| Home | Moves focus to the first header. |
-| End | Moves focus to the last header. |
-| Enter / Space | Expands or collapses the focused section. |
-| Ctrl+? | Open User Help for the component under the pointer, or the focused component if none is hovered. Include Shift if needed to type ?. |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus a section heading. |
+| <kbd>ArrowDown</kbd> | Moves focus to the next header. |
+| <kbd>ArrowUp</kbd> | Moves focus to the previous header. |
+| <kbd>Home</kbd> | Moves focus to the first header. |
+| <kbd>End</kbd> | Moves focus to the last header. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Expands or collapses the focused section. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 
