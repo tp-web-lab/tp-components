@@ -39,12 +39,12 @@
     },
     {
       "name": "langs",
-      "description": "Controls the langs.",
+      "description": "Comma-separated language codes. The selector is hidden unless at least two distinct codes are declared.",
       "reflected": true,
       "static": false,
       "inherited": false,
       "type": "string",
-      "default": "\"en,fr\""
+      "default": "\"\""
     },
     {
       "name": "menu",

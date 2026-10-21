@@ -225,8 +225,9 @@ export class TpMarkdownMultiPages extends TpBase {
 		this.setAttribute("git", value);
 	}
 
+	/** Comma-separated language codes. The selector is hidden unless at least two distinct codes are declared. */
 	public get langs(): string {
-		return this.getAttribute("langs") ?? "en,fr";
+		return this.getAttribute("langs") ?? "";
 	}
 
 	public set langs(value: string) {
@@ -254,7 +255,16 @@ export class TpMarkdownMultiPages extends TpBase {
 	private applyLangs(): void {
 		const langElement = this.querySelector("tp-lang");
 		if (langElement instanceof HTMLElement) {
-			langElement.setAttribute("langs", this.langs);
+			const langs = [
+				...new Set(
+					this.langs
+						.split(",")
+						.map((lang) => lang.trim().toLowerCase())
+						.filter(Boolean),
+				),
+			];
+			langElement.setAttribute("langs", langs.join(","));
+			langElement.hidden = langs.length < 2;
 		}
 		this.applyDocumentLocale();
 	}
@@ -316,7 +326,7 @@ export class TpMarkdownMultiPages extends TpBase {
           <tp-icon-button section="start" color="currentColor" data-action="code" name="code" label="Code"></tp-icon-button>
           <span class="tp-markdown-multi-pages-toolbar-label" section="center">${escapeHtml(this.label)}</span>
           <tp-clock section="end"></tp-clock>
-          <tp-lang section="end" langs="${escapeHtml(this.langs)}"></tp-lang>
+          <tp-lang hidden section="end" langs="${escapeHtml(this.langs)}"></tp-lang>
           <tp-color section="end" data-role="brand"></tp-color>
           <tp-theme section="end"></tp-theme>
           <tp-fullscreen section="end"></tp-fullscreen>
@@ -338,7 +348,7 @@ export class TpMarkdownMultiPages extends TpBase {
 
 		this.sidebarElement = this.querySelector('[data-role="sidebar"]');
 		this.contentElement = this.querySelector('[data-role="content"]');
-		this.applyDocumentLocale();
+		this.applyLangs();
 		this.applyInitialSidebarState();
 		this.contentElement?.addEventListener("click", this.handleContentClick);
 

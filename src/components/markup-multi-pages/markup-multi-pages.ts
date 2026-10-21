@@ -276,8 +276,9 @@ export class TpMarkupMultiPages extends TpBase {
 		this.setAttribute("git", value);
 	}
 
+	/** Comma-separated language codes. The selector is hidden unless at least two distinct codes are declared. */
 	public get langs(): string {
-		return this.getAttribute("langs") ?? "en,fr";
+		return this.getAttribute("langs") ?? "";
 	}
 
 	public set langs(value: string) {
@@ -305,7 +306,16 @@ export class TpMarkupMultiPages extends TpBase {
 	private applyLangs(): void {
 		const langElement = this.querySelector("tp-lang");
 		if (langElement instanceof HTMLElement) {
-			langElement.setAttribute("langs", this.langs);
+			const langs = [
+				...new Set(
+					this.langs
+						.split(",")
+						.map((lang) => lang.trim().toLowerCase())
+						.filter(Boolean),
+				),
+			];
+			langElement.setAttribute("langs", langs.join(","));
+			langElement.hidden = langs.length < 2;
 		}
 		this.applyDocumentLocale();
 	}
@@ -346,7 +356,7 @@ export class TpMarkupMultiPages extends TpBase {
 
 	private async initialize(): Promise<void> {
 		this.applyDocumentLocale();
-		await this.updateLanguageVisibility();
+		this.applyLangs();
 		await this.loadSidebar();
 
 		const view = this.ownerDocument.defaultView;
@@ -363,48 +373,6 @@ export class TpMarkupMultiPages extends TpBase {
 		await this.navigate(initialHref);
 	}
 
-	private async updateLanguageVisibility(): Promise<void> {
-		const langElement = this.querySelector<HTMLElement>("tp-lang");
-		if (langElement === null) return;
-
-		const langs = this.langs
-			.split(",")
-			.map((lang) => lang.trim().toLowerCase())
-			.filter((lang) => lang !== "");
-		const defaultLang = langs[0];
-		const alternateLangs = langs.slice(1);
-		if (defaultLang === undefined || alternateLangs.length === 0) {
-			langElement.hidden = true;
-			return;
-		}
-
-		const repositorySegments = this.normalizeHref(this.repository)
-			.split("/")
-			.filter(Boolean);
-		if (alternateLangs.includes(repositorySegments.at(-1) ?? ""))
-			repositorySegments.pop();
-		const repositoryBase =
-			repositorySegments.length === 0
-				? "/"
-				: `/${repositorySegments.join("/")}/`;
-		const extensions = ["md", "html", "adoc", "asciidoc", "rst", "rest"];
-		const probes = alternateLangs.flatMap((lang) =>
-			extensions.flatMap((extension) => [
-				`${repositoryBase}${lang}/sidebar.${extension}`,
-				`${repositoryBase}${lang}/cover.${extension}`,
-			]),
-		);
-		// Only one translated entry page is needed. Do not request every
-		// alternate format after a valid translation has already been found.
-		for (const href of probes) {
-			if ((await this.fetchText(href)) !== null) {
-				langElement.hidden = false;
-				return;
-			}
-		}
-		langElement.hidden = true;
-	}
-
 	private renderShell(): void {
 		this.innerHTML = `
       <div class="tp-markup-multi-pages-root">
@@ -416,7 +384,7 @@ export class TpMarkupMultiPages extends TpBase {
           <tp-icon-button section="start" color="currentColor" data-action="calculator" name="calculator" library="components" label="Calculator"></tp-icon-button>
           <span class="tp-markup-multi-pages-toolbar-label" section="center">${escapeHtml(this.label)}</span>
           <tp-clock section="end"></tp-clock>
-          <tp-lang section="end" langs="${escapeHtml(this.langs)}"></tp-lang>
+          <tp-lang hidden section="end" langs="${escapeHtml(this.langs)}"></tp-lang>
           <tp-color section="end" data-role="brand"></tp-color>
           <tp-theme section="end"></tp-theme>
           <tp-fullscreen section="end"></tp-fullscreen>
@@ -443,7 +411,7 @@ export class TpMarkupMultiPages extends TpBase {
 
 		this.sidebarElement = this.querySelector('[data-role="sidebar"]');
 		this.contentElement = this.querySelector('[data-role="content"]');
-		this.applyDocumentLocale();
+		this.applyLangs();
 		this.applyInitialSidebarState();
 		this.contentElement?.addEventListener("click", this.handleContentClick);
 

@@ -6,6 +6,8 @@ The custom `<tp-markup-multi-pages>` element implements the <tp-icon name="marku
 
 <tp-iframe src="/docs/components/markup-multi-pages/examples/introduction-frame.html" title="tp-markup-multi-pages — Basic usage" style="display: flow-root; inline-size: auto; height: 32rem;"></tp-iframe>
 
+The language selector appears only when `langs` declares at least two distinct comma-separated language codes (for example, `langs="fr,en"`). Without `langs`, or with a single language, it stays hidden. Changes to `langs` update the selector immediately; translation-file availability does not control its visibility.
+
 ## Usage
 
 ### User interactions
@@ -88,7 +90,7 @@ Attributes
   | <code>brand</code> | <code>string</code> | <code>&quot;tp-default&quot;</code> | Controls the brand. |
   | <code>git</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the git. |
   | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the label. |
-  | <code>langs</code> | <code>string</code> | <code>&quot;en,fr&quot;</code> | Controls the langs. |
+  | <code>langs</code> | <code>string</code> | <code>&quot;&quot;</code> | Comma-separated language codes. The selector is hidden when absent, empty or limited to one distinct language; otherwise it displays the declared languages. |
   | <code>menu</code> | <code>boolean</code> | <code>false</code> | Controls the menu. |
   | <code>repository</code> | <code>string</code> | <code>&quot;/docs&quot;</code> | Controls the repository. |
   | <code>theme</code> | <code>TpMarkupMultiPagesTheme</code> | <code>&quot;&quot;</code> | Controls the theme. |

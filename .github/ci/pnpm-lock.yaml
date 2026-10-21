@@ -89,6 +89,9 @@ importers:
       '@codemirror/view':
         specifier: ^6.43.7
         version: 6.43.7
+      '@cortex-js/compute-engine':
+        specifier: 0.154.0
+        version: 0.154.0
       '@formulajs/formulajs':
         specifier: ^4.6.1
         version: 4.6.1
@@ -158,6 +161,9 @@ importers:
       markdown-it-sup:
         specifier: ^2.0.0
         version: 2.0.0
+      mathlive:
+        specifier: 0.111.1
+        version: 0.111.1
       mermaid:
         specifier: ^11.16.0
         version: 11.16.0
@@ -404,6 +410,9 @@ packages:
   '@antfu/install-pkg@1.1.0':
     resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
 
+  '@arnog/colors@0.7.3':
+    resolution: {integrity: sha512-D7h3f498cu68+pI54eNl1UIm5xbs1uX5ggBTuFpLs3YQ17lqlWAmJ6d+tuvyLvJEzciN2YYR6D+9K8NfBGJGkQ==}
+
   '@asamuzakjp/css-color@5.1.11':
     resolution: {integrity: sha512-KVw6qIiCTUQhByfTd78h2yD1/00waTmm9uy/R7Ck/ctUyAPj+AEDLkQIdJW0T8+qGgj3j5bpNKK7Q3G+LedJWg==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
@@ -564,6 +573,11 @@ packages:
 
   '@codemirror/view@6.43.7':
     resolution: {integrity: sha512-FZsExxkoxnAN+d9TgqXLg5g4A1oQwzX9WlkOT5i2PKkcW7xx3Bmu0vs90g6fo9Mpdsb/l96dnAraQ8932aO4/g==}
+
+  '@cortex-js/compute-engine@0.154.0':
+    resolution: {integrity: sha512-/zh/S38gnWLvglpdy4z85mK/aF4B6tyrv8D//EyRjJOx0WB9D+MoCAzR1sMI7CtIh2VzrjPBGO4QSod//dcmfw==}
+    engines: {node: '>=22.3.0', npm: '>=10.5.0'}
+    hasBin: true
 
   '@csstools/color-helpers@6.1.0':
     resolution: {integrity: sha512-064IFJdjTfUqnjpCVpMOdbr8FLQBhinbZj6yRv2An2E41O/pLEXqfFRWqGq/SxlE5PEUYTlvWsG2r8MswAVvkg==}
@@ -1890,6 +1904,9 @@ packages:
   compare-versions@6.1.1:
     resolution: {integrity: sha512-4hm4VPpIecmlg59CHXnRDnqGplJFrbLG4aFEl5vl6cK1u76ws3LLvX7ikFnTDl5vo39sjWD6AaDPYodJp/NNHg==}
 
+  complex.js@2.4.3:
+    resolution: {integrity: sha512-UrQVSUur14tNX6tiP4y8T4w4FeJAX3bi2cIv0pu/DTLFNxoq7z2Yh83Vfzztj6Px3X/lubqQ9IrPp7Bpn6p4MQ==}
+
   compressible@2.0.18:
     resolution: {integrity: sha512-AF3r7P5dWxL8MxyITRMlORQNaOA2IkAFaTr4k7BUumjPtRpGDTZpl0Pb1XCO6JeDCBdp126Cgs9sMxqSjgYyRg==}
     engines: {node: '>= 0.6'}
@@ -2914,6 +2931,9 @@ packages:
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
+
+  mathlive@0.111.1:
+    resolution: {integrity: sha512-RVaC7NO02Lmx3ZNUxOHR2xCRpcvTfBb2BtdgV60cTanAMufaUkWcPPB2VxChcsNeL+0rTQKqOPDYxXLPOXJI+A==}
 
   mdast-util-to-hast@13.2.1:
     resolution: {integrity: sha512-cctsq2wp5vTsLIcaymblUriiTcZd0CwWtCbLvrOzYCDZoWyMNV8sZ7krj09FSnsiJi3WVsHLM4k6Dq/yaPyCXA==}
@@ -4104,6 +4124,8 @@ snapshots:
       package-manager-detector: 1.8.0
       tinyexec: 1.2.4
 
+  '@arnog/colors@0.7.3': {}
+
   '@asamuzakjp/css-color@5.1.11':
     dependencies:
       '@asamuzakjp/generational-cache': 1.0.1
@@ -4315,6 +4337,11 @@ snapshots:
       crelt: 1.0.7
       style-mod: 4.1.3
       w3c-keyname: 2.2.8
+
+  '@cortex-js/compute-engine@0.154.0':
+    dependencies:
+      '@arnog/colors': 0.7.3
+      complex.js: 2.4.3
 
   '@csstools/color-helpers@6.1.0': {}
 
@@ -5679,6 +5706,8 @@ snapshots:
 
   compare-versions@6.1.1: {}
 
+  complex.js@2.4.3: {}
+
   compressible@2.0.18:
     dependencies:
       mime-db: 1.52.0
@@ -6761,6 +6790,8 @@ snapshots:
   marky@1.3.0: {}
 
   math-intrinsics@1.1.0: {}
+
+  mathlive@0.111.1: {}
 
   mdast-util-to-hast@13.2.1:
     dependencies:

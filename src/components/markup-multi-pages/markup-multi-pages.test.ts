@@ -218,7 +218,7 @@ describe("<tp-markup-multi-pages>", () => {
 		);
 	});
 
-	it("masque le sélecteur de langue sans répertoire de traduction", async () => {
+	it("masque le sélecteur de langue sans attribut langs", async () => {
 		mockDocsFetch({
 			"/docs/sidebar.md": "- [Home](cover.md)",
 			"/docs/cover.md": "# Cover",
@@ -232,29 +232,22 @@ describe("<tp-markup-multi-pages>", () => {
 		expect(element.querySelector<HTMLElement>("tp-lang")?.hidden).toBe(true);
 	});
 
-	it("affiche le sélecteur de langue lorsqu’une traduction existe", async () => {
+	it("affiche les langues déclarées sans rechercher de traductions", async () => {
 		mockDocsFetch({
 			"/docs/sidebar.md": "- [Home](cover.md)",
 			"/docs/cover.md": "# Cover",
-			"/docs/fr/sidebar.md": "- [Accueil](cover.md)",
-			"/docs/fr/cover.md": "# Accueil",
 		});
-
 		const element = document.createElement("tp-markup-multi-pages");
 		element.setAttribute("repository", "/docs");
+		element.setAttribute("langs", "fr,en");
 		document.body.append(element);
 		await waitFor(() => element.querySelector("main h1") !== null);
-
 		expect(element.querySelector<HTMLElement>("tp-lang")?.hidden).toBe(false);
-		const requestedPaths = vi
-			.mocked(fetch)
-			.mock.calls.map(
-				([input]) => new URL(String(input), window.location.href).pathname,
-			);
-		expect(requestedPaths).toContain("/docs/fr/sidebar.md");
 		expect(
-			requestedPaths.filter((path) => path.startsWith("/docs/fr/")),
-		).toEqual(["/docs/fr/sidebar.md"]);
+			vi
+				.mocked(fetch)
+				.mock.calls.some(([input]) => String(input).includes("/docs/en/")),
+		).toBe(false);
 	});
 
 	it("préserve l’ordre documentaire de la sidebar sans commande de tri", async () => {
@@ -472,7 +465,7 @@ describe("<tp-markup-multi-pages>", () => {
 				?.textContent,
 		).toBe("Guide");
 		expect(element.querySelector("tp-lang")?.getAttribute("langs")).toBe(
-			"fr, ar",
+			"fr,ar",
 		);
 		expect(
 			element

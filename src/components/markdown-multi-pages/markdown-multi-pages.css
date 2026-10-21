@@ -399,3 +399,7 @@ tp-markdown-multi-pages,
     display: none;
   }
 }
+
+.tp-markdown-multi-pages-toolbar > tp-lang[hidden] {
+  display: none !important;
+}
