@@ -19,7 +19,7 @@ runs:
     - uses: actions/checkout@v6
       with:
         repository: tp-web-lab/tp-utilities
-        ref: e8d72a81f4512335cb948470827bbae4e051fb96
+        ref: 6a5c2a78a4cc09a7907bbc79b6e59c7e30a010c5
         path: tp-utilities
         ssh-key: ${{ inputs.utilities-key }}
         persist-credentials: false
