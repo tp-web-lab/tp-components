@@ -1,0 +1,23 @@
+<tp-html-viewer label="tp-mask" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-textfield id="mask-answer" label="Answer" value="Thursday" clearable=""></tp-textfield>
+      <tp-mask anchor="#mask-answer" active="">The answer is hidden until the review.</tp-mask>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Enter <code>#mask-answer</code> in anchor, then enable active. Edit the answer before masking it and check that the value returns when active is unchecked. Clear anchor or use Reset defaults to restore the inactive defaults. Reload preview recreates the target with its initial value.</p>
+      <tp-stack>
+      <tp-checkbox-list id="mask-active" label="Boolean attributes" label-position="top" orientation="horizontal"><ul><li>active</li></ul></tp-checkbox-list>
+      <tp-textfield id="mask-anchor" label="anchor" label-position="top" placeholder="" clearable></tp-textfield>
+      <tp-button-group><tp-button id="mask-reset">Reset defaults</tp-button><tp-button id="mask-reload">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <tp-stack id="mask-preview">
+      <tp-textfield id="mask-answer" label="Answer" value="Thursday" clearable></tp-textfield>
+      <tp-mask>The answer is hidden until the review.</tp-mask>
+      </tp-stack>
+      <script type="module" src="/docs/components/mask/examples/attributes.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

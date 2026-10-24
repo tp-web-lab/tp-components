@@ -35,7 +35,7 @@ The custom `<tp-sql-playground>` element implements the <tp-icon name="sql-playg
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Arrow keys / <kbd>Enter</kbd> / <kbd>Space</kbd> / <kbd>Escape</kbd> | Navigate toolbar menus, activate an action, or close a submenu. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> / <kbd>Enter</kbd> / <kbd>Space</kbd> / <kbd>Escape</kbd> | Navigate toolbar menus, activate an action, or close a submenu. |
 | Focused controls | Use each control’s standard keyboard interaction.  |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
@@ -137,6 +137,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_sql-playground.TpSqlPlayground.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

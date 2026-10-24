@@ -333,7 +333,7 @@ export class TpFillBlankQuestion extends TpQuestion {
 			: 0;
 		if (blankCount === 0) {
 			this.showSrcError(
-				`Invalid question file "${this.src}": form must contain at least one <input> or <select>.`,
+				`Invalid question file "${this.src}": form must contain at least one <input>, <textarea> or <select>.`,
 			);
 			return;
 		}
@@ -370,6 +370,12 @@ export class TpFillBlankQuestion extends TpQuestion {
 	}
 
 	protected override onSubmitAttempt(value: unknown): void {
+		if (
+			this.solutionTabEl
+				?.closest("tp-tabs")
+				?.querySelector("[data-tp-question-solution-locked]")
+		)
+			return;
 		if (
 			this.solutionTabEl === null ||
 			!this.solutionTabEl.hasAttribute("disabled")
@@ -416,7 +422,9 @@ export class TpFillBlankQuestion extends TpQuestion {
 			submittedValues.length === 0 ||
 			(!this.partial && submittedValues.some((v) => v === ""))
 		) {
-			return "Please fill in all blanks.";
+			return submittedValues.length === 1
+				? "Please fill in the blank."
+				: "Please fill in all blanks.";
 		}
 		return null;
 	}
@@ -555,7 +563,7 @@ export class TpFillBlankQuestion extends TpQuestion {
 		// Check if any input or select exists in the dd
 		const hasInputsOrSelects =
 			formDd.querySelector(
-				"input, select, tp-textfield, tp-blank, tp-mathfield",
+				"input, textarea, select, tp-textfield, tp-blank, tp-mathfield",
 			) !== null;
 		if (!hasInputsOrSelects) {
 			// No inputs/selects found - clear the dd and show error
@@ -563,7 +571,7 @@ export class TpFillBlankQuestion extends TpQuestion {
 			const error = document.createElement("div");
 			error.setAttribute("style", "color: red; font-weight: bold;");
 			error.textContent =
-				"ERROR: tp-fill-blank-question requires <input> or <select> elements in the Form section.";
+				"ERROR: tp-fill-blank-question requires <input>, <textarea> or <select> elements in the Form section.";
 			formDd.append(error);
 			return;
 		}

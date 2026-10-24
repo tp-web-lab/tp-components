@@ -29,7 +29,7 @@ The custom `<tp-fill-blank>` element implements the <tp-icon name="fill-blank" l
 
 ### Author directives
 
-Use named `<tp-textfield>` controls (or other library fields exposing a light DOM input), selects or rich `<tp-blank>` controls inside the sentence. Missing names are generated automatically. On connection, blanks are cleared and selects receive an empty option if needed. The component collects values; it does not grade answers.
+Use named `<tp-textfield>` controls including `multiline` textfields (or other library fields exposing a light DOM input or textarea), selects or rich `<tp-blank>` controls inside the sentence. Missing names are generated automatically. On connection, blanks are cleared and selects receive an empty option if needed. The component collects values; it does not grade answers.
 
 `value` is a JavaScript property of type `FormData`, **not an HTML attribute**. See [Programming](#programming) to read or update the answers.
 
@@ -111,6 +111,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_fill-blank.TpFillBlank.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

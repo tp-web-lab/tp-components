@@ -26,7 +26,7 @@ The custom `<tp-splitter>` element implements the <tp-icon name="splitter" libra
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the separator. |
-| Arrow keys | Moves the divider by 1%, or by 10% while <kbd>Shift</kbd> is held. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Moves the divider by 1%, or by 10% while <kbd>Shift</kbd> is held. |
 | <kbd>Home</kbd> / <kbd>End</kbd> | Moves the divider to its minimum or maximum position. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
@@ -114,6 +114,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_splitter.TpSplitter.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

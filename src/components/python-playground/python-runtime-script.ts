@@ -1,3 +1,5 @@
+import { reportToolLoaded, toolLoadedScript } from "@tp/tp-utilities";
+
 /**
  * @module components/python-playground/python-runtime-script
  * @summary Shared Pyodide runtime script for Python playground documents.
@@ -70,9 +72,11 @@ export function createPyodideRuntimeScript(): string {
 
     runtime.pyodidePromise = (async () => {
       await loadPyodideScript();
-      return runtimeOwner.loadPyodide({
+      const pyodide = await runtimeOwner.loadPyodide({
         indexURL: ${JSON.stringify(PYODIDE_INDEX_URL)},
       });
+      ${toolLoadedScript("pyodide", "Pyodide", "pyodide.version")}
+      return pyodide;
     })().catch((error) => {
       runtime.pyodidePromise = null;
       throw error;
@@ -103,6 +107,7 @@ export function createPyodideRuntimeScript(): string {
 
     for (const name of missingPackages) {
       runtime.loadedPackages.add(name);
+      (${reportToolLoaded.toString()})("python-" + name, name);
     }
 
   };

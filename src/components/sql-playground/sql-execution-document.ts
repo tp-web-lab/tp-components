@@ -1,3 +1,4 @@
+import { toolLoadedScript } from "@tp/tp-utilities";
 import type { TpExecutionDocument } from "../playground/playground.js";
 
 import {
@@ -318,6 +319,7 @@ async function main() {
     const SQL = await initSqlJs({
       locateFile: (file) => '${SQL_WASM_BASE_URL}' + file,
     });
+    ${toolLoadedScript("sqljs", "sql.js", JSON.stringify("1.13.0"))}
 
     const shouldReset = localStorage.getItem(resetKey) === '1';
 

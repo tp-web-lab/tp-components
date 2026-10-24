@@ -25,9 +25,9 @@ The custom `<tp-markdown-multi-slides>` element implements the Markdown multi-sl
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> / <kbd>Right</kbd> Arrow outside editing controls | Reveal the next step or advance to the next slide. |
-| <kbd>Left</kbd> Arrow / <kbd>Backspace</kbd> outside editing controls | Hide the preceding step or return to the previous slide. |
-| Arrow keys on the slide slider | Choose a slide. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> / <kbd>ArrowRight</kbd> outside editing controls | Reveal the next step or advance to the next slide. |
+| <kbd>ArrowLeft</kbd> / <kbd>Backspace</kbd> outside editing controls | Hide the preceding step or return to the previous slide. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on the slide slider | Choose a slide. |
 | <kbd>Home</kbd> / <kbd>End</kbd> on the slide slider | Choose the first or last slide. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
@@ -102,6 +102,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markdown-multi-slides.TpMarkdownMultiSlides.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

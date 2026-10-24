@@ -1,3 +1,4 @@
+import { reportToolLoaded } from "@tp/tp-utilities";
 /**
  * @module components/restructuredtext
  * @summary reStructuredText rendering component.
@@ -177,6 +178,7 @@ function loadHighlightJs(ownerDocument: Document): Promise<HighlightJsApi> {
 					reject(new Error("Highlight.js did not initialize."));
 					return;
 				}
+				reportToolLoaded("highlightjs", "Highlight.js");
 				resolve(runtime.hljs);
 			},
 			{ once: true },

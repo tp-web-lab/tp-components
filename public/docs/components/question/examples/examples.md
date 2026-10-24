@@ -30,7 +30,7 @@ Combine the attributes on one preview. Controls start at the published defaults.
 
 ::::: tp-stack
 ::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- open
+- score
 :::
 
 ::: tp-radio-list { data-setting="mode" label="mode" label-position="top" orientation="horizontal" value="1" }
@@ -39,6 +39,16 @@ Combine the attributes on one preview. Controls start at the published defaults.
 - opened
 
 - closed
+:::
+
+::: tp-radio-list { data-setting="open" label="open" label-position="top" orientation="horizontal" value="1" }
+- Default (empty)
+
+- both
+
+- input
+
+- output
 :::
 
 ::: tp-radio-list { data-setting="src" label="src" label-position="top" orientation="horizontal" value="1" }
@@ -51,8 +61,10 @@ Combine the attributes on one preview. Controls start at the published defaults.
 - file-unknown
 :::
 
-::: tp-cluster
+:::: tp-cluster
+::: tp-textfield { data-setting="timing" label="timing" value placeholder clearable }
 :::
+::::
 
 :::: tp-button-group
 ::: tp-button { id="attributes-reset" type="button" }
@@ -81,6 +93,56 @@ File-loading attributes offer only Default, file1, file2 and file-unknown. The t
 
 ::: script { type="module" src="/docs/components/question/examples/attributes.js" }
 :::
+```
+
+``` example {label="Timed question"}
+:::: tp-question { timing="00:00:10" open }
+Title
+:
+  A timed reflection
+
+Prompt
+:
+  Name one reusable web component.
+
+Form
+:
+  ::: tp-textfield { clearable placeholder="Your answer" }
+  :::
+
+Solution
+:
+  A button, a timer or an audio recorder.
+::::
+```
+
+``` example {label="Optional score"}
+:::: tp-fill-blank-question { score open }
+Title
+:
+  An optional numerical score
+
+Answers
+:
+  1. blue
+
+Prompt
+:
+  Type blue, then submit.
+
+Form
+:
+  ::: tp-textfield { clearable label="Color" }
+  :::
+
+Feedback
+:
+  Use the word requested in the prompt.
+
+Solution
+:
+  blue
+::::
 ```
 ::::::
 :::::::

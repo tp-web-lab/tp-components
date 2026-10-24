@@ -38,6 +38,8 @@ JSON uses this component's question schema. Other formats use the same definitio
 
 ### Author directives
 
+Add the inherited boolean `score` attribute to display the numerical grade. It is hidden by default; correction messages and explanations remain available.
+
 Submitting without selecting a checkbox is allowed. Use `answer=""` when none of the choices is correct (or `attributes.answer: []` / `""` in an external JSON file). An empty submission is graded normally and counts as an attempt. Single-choice questions still require one selected answer.
 
 The `answer` attribute contains comma-separated, one-based indexes in the original list order. Add `random` to shuffle choices.
@@ -103,6 +105,8 @@ Attributes
   | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Value attribute passed to the underlying tp-checkbox-list. |
   | <code>mode</code> | <code>string</code> | <code>&quot;mixed&quot;</code> | Blank mode: opened, closed, or mixed local choices. *(inherited from <code>tp-question</code>)* |
   | <code>open</code> | <code>boolean</code> | <code>false</code> | Expands the question; absent by default, leaving only its title visible. *(inherited from <code>tp-question</code>)* |
+  | <code>score</code> | <code>boolean</code> | <code>false</code> | Displays the numerical score in submission feedback. *(inherited from <code>tp-question</code>)* |
+  | <code>timing</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional nonzero time limit in strict hh:mm:ss format. *(inherited from <code>tp-question</code>)* |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -132,6 +136,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_multi-choice-question.TpMultiChoiceQuestion.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

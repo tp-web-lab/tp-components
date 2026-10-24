@@ -34,11 +34,13 @@ JSON uses this component's question schema. Other formats use the same definitio
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Arrow keys | Move between radio answers in a single-choice question. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Move between radio answers in a single-choice question. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on Submit | Submit the selected answers. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
+
+Add the inherited boolean `score` attribute to display the numerical grade. It is hidden by default; correction messages and explanations remain available.
 
 The `answer` attribute is the one-based index of the correct item in the original list. Add `random` to shuffle choices.
 
@@ -102,6 +104,8 @@ Attributes
   | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Value attribute passed to the underlying tp-radio-list. |
   | <code>mode</code> | <code>string</code> | <code>&quot;mixed&quot;</code> | Blank mode: opened, closed, or mixed local choices. *(inherited from <code>tp-question</code>)* |
   | <code>open</code> | <code>boolean</code> | <code>false</code> | Expands the question; absent by default, leaving only its title visible. *(inherited from <code>tp-question</code>)* |
+  | <code>score</code> | <code>boolean</code> | <code>false</code> | Displays the numerical score in submission feedback. *(inherited from <code>tp-question</code>)* |
+  | <code>timing</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional nonzero time limit in strict hh:mm:ss format. *(inherited from <code>tp-question</code>)* |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -131,6 +135,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_single-choice-question.TpSingleChoiceQuestion.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

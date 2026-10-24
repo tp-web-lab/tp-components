@@ -34,14 +34,14 @@ Move a point along a straight slope and three fictional cycling stages. Equal mo
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the slope slider, clear button, points, profile choices and restart buttons. |
 | <kbd>Left</kbd> / <kbd>Right</kbd> on a point | Move left / right with slope-dependent effort. Holding a key repeats the movement. |
-| Arrow keys on the slope slider | Adjust the slope. |
-| Arrow keys on profile choices | Select another stage. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on the slope slider | Adjust the slope. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on profile choices | Select another stage. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on Grid | Show or hide the distance and elevation grid (hidden initially). |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on a button | Clear the slope, restart a route, apply the edited profile or restore its original code and curve. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on Profile code | Expand or collapse the editor. |
 | <kbd>F1</kbd> in the code editor | Show or hide its toolbar. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on a file-menu command | Load, save or save as JSON. |
-| Typing / arrow keys in the code editor | Edit JSON and move the caret without moving the route point. |
+| Typing / <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in the code editor | Edit JSON and move the caret without moving the route point. |
 | <kbd>Escape</kbd> | <kbd>End</kbd> a drag at the current position. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |
 
@@ -195,6 +195,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_slope-simulator.TpSlopeSimulator.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

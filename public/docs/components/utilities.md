@@ -7,6 +7,12 @@ Utility components supply reusable interaction and media features such as drag a
 :::::: tp-grid { min-width="10rem" gap="1.5rem" }
 
 ::: tp-center { intrinsic }
+:tp-icon:{name="audio-recorder" library="components" size="4em" aria-hidden="true"}
+
+[tp-audio-recorder](audio-recorder/index.md)
+:::
+
+::: tp-center { intrinsic }
 :tp-icon:{name="calculator" library="components" size="4em" aria-hidden="true"}
 
 [tp-calculator](calculator/index.md)

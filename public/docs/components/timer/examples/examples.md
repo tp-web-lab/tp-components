@@ -10,6 +10,10 @@ Combine the attributes on one preview. Controls start at the published defaults.
 
 ::::: tp-stack
 ::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
+- manual
+
+- no-controls
+
 - silent
 :::
 

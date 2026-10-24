@@ -282,6 +282,12 @@ export class TpMultiChoiceQuestion extends TpQuestion {
 
 	protected override onSubmitAttempt(value: unknown): void {
 		if (
+			this.solutionTabEl
+				?.closest("tp-tabs")
+				?.querySelector("[data-tp-question-solution-locked]")
+		)
+			return;
+		if (
 			this.solutionTabEl === null ||
 			!this.solutionTabEl.hasAttribute("disabled")
 		)

@@ -54,6 +54,7 @@ const overrides = {
 	"checkbox-list/label-position": ["top", "bottom", "start", "end"],
 	"base/dir": ["ltr", "rtl", "auto"],
 	"code-editor/dir": ["ltr", "rtl", "auto"],
+	"question/open": ["", "both", "input", "output"],
 	"question/mode": ["mixed", "opened", "closed"],
  "fill-blank-question/mode": ["mixed", "opened", "closed"],
  "blank/type": ["text", "number", "math", "date", "time"],

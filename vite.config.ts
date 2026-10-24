@@ -177,6 +177,10 @@ export default defineConfig({
 			},
 			external: [/^node:.*/],
 			output: {
+				// These ES modules are also served directly to browsers. Compact the
+				// output while retaining annotations for downstream tree shaking.
+				minify: true,
+				comments: { annotation: true, legal: true },
 				format: "es",
 				entryFileNames: (chunk: PreRenderedChunk) =>
 					chunk.name === "index"

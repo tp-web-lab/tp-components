@@ -7,6 +7,12 @@ Overlay components display dialogs, menus and contextual information above the m
 :::::: tp-grid { min-width="10rem" gap="1.5rem" }
 
 ::: tp-center { intrinsic }
+:tp-icon:{name="mask" library="components" size="4em" aria-hidden="true"}
+
+[tp-mask](mask/index.md)
+:::
+
+::: tp-center { intrinsic }
 :tp-icon:{name="base" library="components" size="4em" aria-hidden="true"}
 
 [tp-contextmenu](contextmenu/index.md)

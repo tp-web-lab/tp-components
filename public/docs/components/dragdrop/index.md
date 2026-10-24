@@ -46,7 +46,7 @@ The custom `<tp-dragdrop>` element implements the <tp-icon name="dragdrop" libra
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on an item | Grab the item; press again to drop it. |
-| Arrow keys while grabbed | Choose the target item. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> while grabbed | Choose the target item. |
 | <kbd>Escape</kbd> | Cancel dragging. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on Move | Move the card to the other column, including when it is empty. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
@@ -147,6 +147,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_dragdrop.TpDragdrop.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

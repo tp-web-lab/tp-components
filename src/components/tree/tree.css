@@ -54,6 +54,14 @@ tp-tree [data-tp-tree-row] {
   /*color: var(--tp-brand-text-on-soft);*/
 }
 
+/* Make the link itself a comfortable target, not only its surrounding row. */
+tp-tree [data-tp-tree-row] > a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 28px;
+  min-inline-size: 24px;
+}
+
 /* TOGGLE */
 
 tp-tree tp-icon-button[data-tp-tree-toggle] {

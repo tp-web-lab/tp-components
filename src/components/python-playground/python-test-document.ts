@@ -1,67 +1,67 @@
+import { reportToolLoaded } from "@tp/tp-utilities";
 /**
  * @module components/python-playground/python-test-document
  * @summary Python test document builder.
  */
 
-import type { TpExecutionDocument } from '../playground/playground.js';
-import type { TpProject } from '../playground/project.js';
-
+import type { TpExecutionDocument } from "../playground/playground.js";
 import {
-  createCommonRuntimeScript,
-  createConsoleBridgeScript,
-  findProjectFile,
-  resolveEntryFile,
-} from '../playground/playground-build-utils.js';
-import { createPyodideRuntimeScript } from './python-runtime-script.js';
+	createCommonRuntimeScript,
+	createConsoleBridgeScript,
+	findProjectFile,
+	resolveEntryFile,
+} from "../playground/playground-build-utils.js";
+import type { TpProject } from "../playground/project.js";
+import { createPyodideRuntimeScript } from "./python-runtime-script.js";
 
 /** Options for building a Python test document. */
 export interface BuildPythonTestDocumentOptions {
-  defaultTest?: string;
-  libs?: string[];
+	defaultTest?: string;
+	libs?: string[];
 }
 
 /** Removes script tags from an HTML fragment. */
 function stripScripts(html: string): string {
-  return html.replace(/<script\b[\s\S]*?<\/script>/gi, '');
+	return html.replace(/<script\b[\s\S]*?<\/script>/gi, "");
 }
 
 /** Builds the Python test execution document. */
 export async function buildPythonTestDocument(
-  project: TpProject,
-  options: BuildPythonTestDocumentOptions = {},
+	project: TpProject,
+	options: BuildPythonTestDocumentOptions = {},
 ): Promise<TpExecutionDocument> {
-  const explicitTestPath = project.test;
+	const explicitTestPath = project.test;
 
-  const testFile =
-    typeof explicitTestPath === 'string' && explicitTestPath !== ''
-      ? findProjectFile(project, explicitTestPath)
-      : resolveEntryFile(project, {
-          entry: options.defaultTest,
-          priorityPaths: ['/main.test.py', '/main.spec.py'],
-          extensions: ['.test.py', '.tests.py', '.spec.py'],
-          fallbackToFirstFile: false,
-          ignoreProjectEntry: true,
-        });
+	const testFile =
+		typeof explicitTestPath === "string" && explicitTestPath !== ""
+			? findProjectFile(project, explicitTestPath)
+			: resolveEntryFile(project, {
+					entry: options.defaultTest,
+					priorityPaths: ["/main.test.py", "/main.spec.py"],
+					extensions: [".test.py", ".tests.py", ".spec.py"],
+					fallbackToFirstFile: false,
+					ignoreProjectEntry: true,
+				});
 
-  if (testFile === undefined) {
-    throw new Error(
-      typeof explicitTestPath === 'string' && explicitTestPath !== ''
-        ? `Test file not found: ${explicitTestPath}.`
-        : 'No Python test file found.',
-    );
-  }
+	if (testFile === undefined) {
+		throw new Error(
+			typeof explicitTestPath === "string" && explicitTestPath !== ""
+				? `Test file not found: ${explicitTestPath}.`
+				: "No Python test file found.",
+		);
+	}
 
-  const htmlFile = findProjectFile(project, '/index.html');
-  const body = htmlFile ? stripScripts(htmlFile.content) : '';
+	const htmlFile = findProjectFile(project, "/index.html");
+	const body = htmlFile ? stripScripts(htmlFile.content) : "";
 
-  const filesJson = JSON.stringify(
-    Object.fromEntries(project.files.map((file) => [file.path, file.content])),
-  );
+	const filesJson = JSON.stringify(
+		Object.fromEntries(project.files.map((file) => [file.path, file.content])),
+	);
 
-  const testPathJson = JSON.stringify(testFile.path);
-  const libsJson = JSON.stringify(options.libs ?? []);
+	const testPathJson = JSON.stringify(testFile.path);
+	const libsJson = JSON.stringify(options.libs ?? []);
 
-  const setupPython = `
+	const setupPython = `
 import sys
 
 if "/project" not in sys.path:
@@ -98,7 +98,7 @@ for module_name in project_modules:
     sys.modules.pop(module_name, None)
 `;
 
-  const runPythonTests = `
+	const runPythonTests = `
 from pathlib import Path
 import importlib.util
 import unittest
@@ -183,8 +183,8 @@ else:
     )
 `;
 
-  return {
-    html: `
+	return {
+		html: `
 <!doctype html>
 <html>
 <head></head>
@@ -296,6 +296,9 @@ else:
         const source = files['/' + testPath] ?? files[testPath] ?? '';
 
         await pyodide.loadPackagesFromImports(source);
+ for (const name of Object.keys(pyodide.loadedPackages ?? {})) {
+ (${reportToolLoaded.toString()})("python-" + name, name);
+ }
         pyodide.globals.set('tp_console', console);
 
         await pyodide.runPythonAsync(${JSON.stringify(runPythonTests)});
@@ -309,5 +312,5 @@ else:
 </body>
 </html>
 `,
-  };
+	};
 }

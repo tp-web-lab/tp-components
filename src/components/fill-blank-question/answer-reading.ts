@@ -78,6 +78,12 @@ export class AnswerReading {
 				destination.replaceWith(answer);
 			}
 		}
+		// Recording controls are not part of the reconstructed answer. Do not
+		// reconnect a cloned recorder when rendering this reading preview.
+		for (const recorder of template.content.querySelectorAll(
+			"tp-audio-recorder",
+		))
+			recorder.remove();
 		this.normalizeReadingMath(template.content);
 		this.reading.replaceChildren(template.content);
 	}

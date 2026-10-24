@@ -41,6 +41,8 @@ type AudioContextLike = {
  * @attr {number} duration = 60 - Countdown duration in seconds.
  * @attr {string} size = "1rem" - Icon and text size.
  * @attr {boolean} silent = false - Disables sound playback.
+ * @attr {boolean} manual = false - Waits for start() instead of starting automatically.
+ * @attr {boolean} no-controls = false - Hides duration editing and buttons; displays hh:mm:ss.
  * @cssprop --tp-timer-size Icon and text size.
  * @event tp-timer-elapsed Emitted when the countdown reaches zero.
  * @eventdetail tp-timer-elapsed void
@@ -65,7 +67,7 @@ export class TpTimer extends TpBase {
 	 * @summary Returns the observed attributes.
 	 */
 	public static get observedAttributes(): string[] {
-		return ["duration", "size", "silent"];
+		return ["duration", "size", "silent", "manual", "no-controls"];
 	}
 
 	/**
@@ -142,7 +144,8 @@ export class TpTimer extends TpBase {
 		this.ensureGlobalStyle(TpTimer.styleId, style);
 		this.ensureDom();
 		this.resetCountdown();
-		this.startCountdown();
+		if (this.hasAttribute("manual")) this.setAttribute("data-stopped", "");
+		else this.startCountdown();
 	}
 
 	/**
@@ -155,6 +158,11 @@ export class TpTimer extends TpBase {
 	protected attributeChangedCallback(name: string): void {
 		if (!this.isConnected) {
 			return;
+		}
+
+		if (name === "manual") {
+			if (this.hasAttribute("manual")) this.reset();
+			else this.start();
 		}
 
 		if (name === "silent" && this.silent) {
@@ -222,14 +230,14 @@ export class TpTimer extends TpBase {
 		stopButton.setAttribute("name", "stop");
 		stopButton.setAttribute("label", "Stop timer");
 		stopButton.addEventListener("click", () => {
-			this.stopAndReset();
+			this.reset();
 		});
 
 		const playButton = document.createElement("tp-icon-button");
 		playButton.setAttribute("name", "play");
 		playButton.setAttribute("label", "Start timer");
 		playButton.addEventListener("click", () => {
-			this.startFromBeginning();
+			this.start();
 		});
 
 		this.replaceChildren(
@@ -313,7 +321,7 @@ export class TpTimer extends TpBase {
 	 *
 	 * @summary Stops and resets the timer.
 	 */
-	private stopAndReset(): void {
+	public reset(): void {
 		this.stopCountdown();
 		this.resetCountdown();
 		this.setAttribute("data-stopped", "");
@@ -324,7 +332,7 @@ export class TpTimer extends TpBase {
 	 *
 	 * @summary Starts a new countdown from the beginning.
 	 */
-	private startFromBeginning(): void {
+	public start(): void {
 		this.resetCountdown();
 		this.startCountdown();
 	}
@@ -422,7 +430,9 @@ export class TpTimer extends TpBase {
 		const totalSeconds = Math.ceil(this.remainingMs / 1000);
 		const minutes = Math.floor(totalSeconds / 60);
 		const seconds = totalSeconds % 60;
-		const timeText = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+		const timeText = this.hasAttribute("no-controls")
+			? `${String(Math.floor(totalSeconds / 3600)).padStart(2, "0")}:${String(minutes % 60).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+			: `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 
 		this.displayEl.textContent = timeText;
 		this.durationInputEl.value = String(this.duration);

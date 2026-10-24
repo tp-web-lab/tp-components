@@ -67,7 +67,7 @@ Use `label="My graph"` to display a title at the left of the view toolbar, inclu
 | <kbd>F1</kbd> in Graph definition | Show or hide the source editor toolbar. |
 | <kbd>ArrowUp</kbd> / <kbd>ArrowDown</kbd>, <kbd>Home</kbd> / <kbd>End</kbd> in the file menu | Navigate Load, Save and Save as; <kbd>Enter</kbd>/<kbd>Space</kbd> activates an action and <kbd>Escape</kbd> closes the menu. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button, including Code, Undo, Redo, Zoom in, Zoom out and Reset. |
-| Arrow keys on the focused graph | Move the drawing in the arrow direction by 10% of the visible range. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on the focused graph | Move the drawing in the arrow direction by 10% of the visible range. |
 | <kbd>Home</kbd> on the focused graph | Restore the original scale and position. |
 | <kbd>Escape</kbd> | Close the enlarged graph. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
@@ -387,6 +387,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_xy-plot.TpXYPlot.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

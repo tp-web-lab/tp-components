@@ -38,11 +38,13 @@ The custom `<tp-asciidoc-viewer-question>` element implements the markup exercis
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between question and programming controls. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused action or expand/collapse the title. |
-| Arrow keys in Output tabs | Navigate Feedback and Solution. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Output tabs | Navigate Feedback and Solution. |
 | Typing in the editor | Modify source code using the embedded editor's editing behavior. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
+
+The inherited `timing="hh:mm:ss"` attribute enables the [timed-question flow](../question/index.md). Start begins the countdown; Continue restores access after expiry without clearing the response.
 
 The tag fixes the language to AsciiDoc and embeds [tp-asciidoc-viewer](../asciidoc-viewer/index.md). Inherited `src` is one markup file, `test` is a trusted JavaScript test file; both default to an empty string. Inherited `open` is false when absent. Declare Title, Prompt and optional Solution with a definition list. Form and test Feedback are generated.
 
@@ -108,6 +110,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_asciidoc-viewer-question.TpAsciidocViewerQuestion.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

@@ -17,6 +17,8 @@ import { describeAttributeControl } from "./interactive-attribute-examples.mjs";
 
 /** Editorial objectives for the existing examples; no descriptions are inferred from titles alone. */
 const basic = {
+ "mask": "Read the replacement message hiding the answer field. The target remains in the document with its value preserved.",
+ "audio-recorder": "Record a short response, stop, replay it and download the audio. Clear removes the local recording.",
  "slope-simulator": "Adjust the slope, drag either point or use arrow keys, then compare the three cycling profiles.",
  "tangram": "Drag and rotate the seven pieces to cover the silhouette. Try Undo, Redo and Solution to inspect the dissection.",
  "graph-geometry": "Drag A or B and observe the arcs, intersections and perpendicular bisector follow the segment.",
@@ -49,7 +51,7 @@ const basic = {
  "csv-table": "Read the country and capital data converted from CSV. The first record supplies the column headings.",
  "list-table": "Read the country and capital data converted from nested lists. Each outer item is a row and each inner item is a cell.",
  math: "Read the Pythagorean identity inline with its surrounding sentence. The formula is rendered as SVG, not as editable source text.",
- "matching-question": "Associate the English expressions with their French translations, then submit to check the score. Try an incorrect response, correct it and compare the feedback; Reset clears and reshuffles the lists.",
+ "matching-question": "Associate the English expressions with their French translations, then submit to check the answer. Try an incorrect response, correct it and compare the feedback; Reset clears and reshuffles the lists.",
  matching: "Associate each English expression with its French translation using Select buttons or drag and drop. Remove or replace a pair and observe its shared pair number.",
  skeleton: "Inspect the fixed shaded patterns generated from the article HTML. Text, images and nested list content are not rendered.",
  "avatar-group": "Compare three overlapping avatars. Later avatars cover earlier ones while names remain in their original reading order.",
@@ -379,6 +381,9 @@ const additional = {
 };
 
 export function describeExample(component, label) {
+ if (component === "question" && label === "Optional score") return "Type blue and submit to see the numerical grade enabled by score. Remove score in the source and submit again: correction remains available, but the grade is hidden.";
+ if (component === "audio-recorder" && label === "Spoken answer") return "Record the word blue, then stop and review the transcription in the answer field. Submit checks that field as a single blank; you can also type or correct the answer.";
+ if (component === "question" && label === "Timed question") return "Open the question and select Start to reveal its content for ten seconds. The Solution tab stays disabled during the countdown. After expiry, select Continue to recover your answer and access the solution.";
  if (component === "slope-simulator" && label === "Alpe d’Huez 2026") return "Explore an approximate 170.9 km reconstruction through the Croix de Fer, Télégraphe, Galibier and Sarenne passes to Alpe d’Huez. Toggle the grid, compare uphill and downhill effort, and edit the profile JSON.";
  if (component === "slope-simulator" && label === "Tour of Lombardy 2026") return "Explore an approximate 239.6 km reconstruction from the supplied route-profile image. Compare the climbs and descents, reverse direction to change the signed slope, and edit the JSON in Profile code.";
  if (component === "tangram" && label === "Exact orientation") return "Start the first convex figure with all seven pieces already oriented as in the solution. Translate them into place, or select one to try its local rotation and flip controls.";
@@ -574,7 +579,7 @@ export function describeExample(component, label) {
 	if (component.endsWith("-multi-slides"))
 		objective = `Move between the slides rendered from the ${language} source.`;
 	if (component === "diagram" && label !== "Basic usage")
-		return `Inspect the ${label.toLowerCase()} rendered from its Mermaid source and compare the source with the resulting visual structure.`;
+		return `Compare the ${label.toLowerCase()} rendered from the same source: Mermaid first, then Pele (engine="pele").`;
 	if (label === "Explicit target")
 		return `Use the ${component} controller and observe that it affects the explicitly targeted content.`;
 	if (label === "Change event")

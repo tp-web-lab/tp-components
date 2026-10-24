@@ -25,6 +25,7 @@ export {
 export { TpAsciidocSinglePage } from "./components/asciidoc-single-page/asciidoc-single-page.js";
 export { TpAsciidocViewer } from "./components/asciidoc-viewer/asciidoc-viewer.js";
 export { TpAsciidocViewerQuestion } from "./components/asciidoc-viewer-question/asciidoc-viewer-question.js";
+export { TpAudioRecorder } from "./components/audio-recorder/audio-recorder.js";
 export {
 	TpAvatar,
 	type TpAvatarShape,
@@ -491,6 +492,7 @@ export {
 } from "./components/graph-geometry/graph-geometry.js";
 export { TpListof } from "./components/listof/listof.js";
 export { TpLogigram } from "./components/logigram/logigram.js";
+export { TpMask } from "./components/mask/mask.js";
 export { TpNote } from "./components/note/note.js";
 export { TpRef } from "./components/ref/ref.js";
 export {

@@ -33,7 +33,7 @@ The custom `<tp-tangram>` element presents seven rigid pieces and a central silh
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus toolbar buttons and individual pieces. Focusing a piece selects it. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on a toolbar button | Activate the button. |
-| Arrow keys on a piece | Move by 0.05 units; <kbd>Shift</kbd> increases the step to 0.5 units. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on a piece | Move by 0.05 units; <kbd>Shift</kbd> increases the step to 0.5 units. |
 | <kbd>R</kbd> / <kbd>Shift</kbd>+<kbd>R</kbd> on a piece | Rotate by +45° / −45°. |
 | <kbd>F</kbd> on the parallelogram | Reflect it. |
 | <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Undo / redo. <kbd>Command</kbd> is also supported. |
@@ -242,6 +242,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_tangram.TpTangram.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

@@ -38,7 +38,7 @@ type TpFillBlankSerializableValue = Record<string, string>;
  * `<tp-fill-blank>` manages blanks embedded in text content.
  *
  * Supported blanks:
- * - `<tp-textfield>` and other library fields exposing a light DOM `<input>`
+ * - `<tp-textfield>` and other library fields exposing a light DOM `<input>` or `<textarea>`
  * - `<input>` and `<select>`
  * - `<tp-blank>` for text, SVG or image answers
  *
@@ -119,9 +119,12 @@ export class TpFillBlank extends TpBase {
 		const target = event.target;
 		const isBlank =
 			target instanceof HTMLInputElement ||
+			target instanceof HTMLTextAreaElement ||
 			target instanceof HTMLSelectElement ||
 			(target instanceof Element &&
-				(isTpBlank(target) || target.localName === "tp-mathfield"));
+				(isTpBlank(target) ||
+					target.localName === "tp-mathfield" ||
+					target.localName === "tp-textfield"));
 		if (!isBlank) {
 			return;
 		}

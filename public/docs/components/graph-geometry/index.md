@@ -107,10 +107,10 @@ Tool shortcuts apply while focus is inside the figure and never intercept typing
 | <kbd>Z</kbd> / <kbd>Escape</kbd> in the zoomed window | Enlarge or restore the drawing with Z; <kbd>Escape</kbd> closes the window. |
 | <kbd>Delete</kbd> | Remove the selected object and its dependent constructions as one undoable action (except in readonly mode). |
 | <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Undo / redo a construction change. |
-| − / + / <kbd>F</kbd> / <kbd>G</kbd> | Zoom out / zoom in / fit the drawing / toggle the grid. |
-| Arrow keys in canvas-only mode | Move the selected point, comment, measurement or name (with Move name enabled); when nothing is selected, or in readonly mode, pan the view. |
-| Arrow keys on the drawing | In Pan view, pan by 40 drawing pixels. With Move name enabled, move the selected object name. Otherwise move the selected comment, measurement label, free or attached point by 0.2 units before projection onto its support. |
-| <kbd>Shift</kbd> + arrow keys | In Pan view, pan by 8 drawing pixels. Otherwise use a smaller point step of 0.02 units. |
+| <kbd>−</kbd> / <kbd>+</kbd> / <kbd>F</kbd> / <kbd>G</kbd> | Zoom out / zoom in / fit the drawing / toggle the grid. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in canvas-only mode | Move the selected point, comment, measurement or name (with Move name enabled); when nothing is selected, or in readonly mode, pan the view. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on the drawing | In Pan view, pan by 40 drawing pixels. With Move name enabled, move the selected object name. Otherwise move the selected comment, measurement label, free or attached point by 0.2 units before projection onto its support. |
+| <kbd>Shift</kbd> <kbd>+</kbd> <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | In Pan view, pan by 8 drawing pixels. Otherwise use a smaller point step of 0.02 units. |
 | <kbd>Enter</kbd> on the drawing | Finish a pending irregular polygon with at least three vertices. |
 | <kbd>Escape</kbd> on the drawing | Cancel the pending selection, discard uncommitted polygon vertices and return to Move. |
 | <kbd>ArrowUp</kbd> / <kbd>ArrowDown</kbd>, <kbd>Home</kbd> / <kbd>End</kbd> in a menu | Move between export formats, stroke styles or colors. |
@@ -470,6 +470,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-geometry.TpGraphGeometry.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

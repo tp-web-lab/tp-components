@@ -87,7 +87,7 @@ The user-help button legend groups commands by their location in the component a
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| <kbd>Right</kbd> Arrow from a closed blank | Move to the answer bank. |
+| <kbd>ArrowRight</kbd> from a closed blank | Move to the answer bank. |
 | <kbd>Up</kbd> / <kbd>Down</kbd> in the answer bank | Choose an answer. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> in the answer bank | Place the chosen answer into the highlighted blank. |
 | <kbd>Escape</kbd> | Cancel answer selection. |
@@ -96,6 +96,12 @@ The user-help button legend groups commands by their location in the component a
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
+
+Add the inherited boolean `score` attribute to display the numerical grade. It is hidden by default; correction messages and explanations remain available.
+
+An audio recorder can fill an answer field with `transcript="#answer-id"`. The field is checked like typed text; recorder controls are omitted from the reconstructed answer below the form. See the [Audio recorder spoken-answer example](../audio-recorder/index.md).
+
+Multiline `tp-textfield` controls and native `<textarea>` elements each count as one blank. A single empty answer prompts “Please fill in the blank.” For free writing with several valid answers and a self-assessment checklist, use [`tp-question`](../question/index.md); use `tp-fill-blank-question` when you provide an Answers list for automatic checking.
 
 Add `partial` to allow feedback before every blank is filled. After submitting, filled blanks receive a 4px success or danger underline; empty blanks remain neutral. Editing or clearing an answer removes its grading until the next submission. Reset or removing `partial` clears all grading. The score counts correct answers out of all blanks, including unanswered ones. Without `partial` (the default), every blank must be filled before submitting.
 
@@ -187,7 +193,7 @@ A reading preview beneath the form is available in all three modes (`opened`, `c
 
 ### Markup languages
 
-All four languages provide the same examples: Geography, Irregular verbs, Baltic capitals and flags, and Square root. Switching language keeps the selected example when the viewers have matching example lists. Each submission displays the attempt number, time and current score as a `correct/total` badge, using the same format as single- and multi-choice questions. A fully correct answer displays a success score and “🎉 Congratulations, correct answer!”; general and per-blank feedback are reserved for incorrect answers.
+All four languages provide the same examples: Geography, Irregular verbs, Baltic capitals and flags, and Square root. Switching language keeps the selected example when the viewers have matching example lists. Each submission displays the attempt number and time; with `score`, it also displays a `correct/total` badge, using the same format as single- and multi-choice questions. A fully correct answer displays “🎉 Congratulations, correct answer!”; general and per-blank feedback are reserved for incorrect answers.
 
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
@@ -235,7 +241,9 @@ Attributes
   | <code>mode</code> | <code>string</code> | <code>&quot;mixed&quot;</code> | Blank mode: opened, closed, or mixed local choices. |
   | <code>partial</code> | <code>boolean</code> | <code>false</code> | Allows incomplete submissions and marks filled blanks as correct or incorrect after feedback. |
   | <code>open</code> | <code>boolean</code> | <code>false</code> | Expands the question; absent by default, leaving only its title visible. *(inherited from <code>tp-question</code>)* |
+  | <code>score</code> | <code>boolean</code> | <code>false</code> | Displays the numerical score in submission feedback. *(inherited from <code>tp-question</code>)* |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition. *(inherited from <code>tp-question</code>)* |
+  | <code>timing</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional nonzero time limit in strict hh:mm:ss format. *(inherited from <code>tp-question</code>)* |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -265,6 +273,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_fill-blank-question.TpFillBlankQuestion.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

@@ -28,7 +28,7 @@ The custom `<tp-numberfield>` element implements the <tp-icon name="numberfield"
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
 | Typing in number mode | <kbd>Enter</kbd> or edit the number. |
-| Arrow keys | Adjust the number or the focused slider. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Adjust the number or the focused slider. |
 | <kbd>Home</kbd> / <kbd>End</kbd> in slider mode | Reach the minimum or maximum. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on Clear | Activate the available clear/reset button. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
@@ -132,6 +132,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_numberfield.TpNumberfield.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

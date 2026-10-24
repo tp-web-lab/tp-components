@@ -1,154 +1,182 @@
+import { toolLoadedScript } from "@tp/tp-utilities";
 /**
  * @module components/prolog-playground/prolog-execution-document
  * @summary Scryer Prolog execution document builder.
  */
 
-import type { TpExecutionDocument } from '../playground/playground.js';
+import type { TpExecutionDocument } from "../playground/playground.js";
 import {
-  createCommonRuntimeScript,
-  createConsoleBridgeScript,
-  escapeHtml,
-  findProjectFile,
-  resolveEntryFile,
-} from '../playground/playground-build-utils.js';
-import type { TpPrologProject } from './prolog-project.js';
+	createCommonRuntimeScript,
+	createConsoleBridgeScript,
+	escapeHtml,
+	findProjectFile,
+	resolveEntryFile,
+} from "../playground/playground-build-utils.js";
+import type { TpPrologProject } from "./prolog-project.js";
 import {
-  flattenLocalPrologModules,
-  getLocalPrologModuleNames,
-  PROLOG_DOM_MODULE_SOURCE,
-  usesPrologDomModule,
-} from './prolog-source.js';
+	flattenLocalPrologModules,
+	getLocalPrologModuleNames,
+	PROLOG_DOM_MODULE_SOURCE,
+	usesPrologDomModule,
+} from "./prolog-source.js";
 
-const SCRYER_MODULE_URL = 'https://esm.sh/scryer';
+const SCRYER_MODULE_URL = "https://esm.sh/scryer";
 
-interface PrologNotebookSource { path: string; content: string }
+interface PrologNotebookSource {
+	path: string;
+	content: string;
+}
 
 const notebookSources = new Map<string, Map<number, PrologNotebookSource[]>>();
 
 const BUILT_IN_PREDICATES = new Set([
-  'append', 'between', 'call', 'catch', 'fail', 'false', 'findall',
-  'forall', 'is', 'length', 'member', 'nl', 'once', 'phrase', 'read',
-  'repeat', 'throw', 'true', 'write', 'writeln',
+	"append",
+	"between",
+	"call",
+	"catch",
+	"fail",
+	"false",
+	"findall",
+	"forall",
+	"is",
+	"length",
+	"member",
+	"nl",
+	"once",
+	"phrase",
+	"read",
+	"repeat",
+	"throw",
+	"true",
+	"write",
+	"writeln",
 ]);
 
-function findUndefinedQueriesWithoutProgram(querySource: string): Array<[string, string]> {
-  return (querySource.match(/[^.]+(?:\.|$)/g) ?? []).flatMap((part) => {
-    const query = part.trim();
-    const match = query.match(/^([a-z][A-Za-z0-9_]*)\s*(?:\(|\.|$)/);
-    const name = match?.[1];
-    return name === undefined || BUILT_IN_PREDICATES.has(name)
-      ? []
-      : [[query, name]];
-  });
+function findUndefinedQueriesWithoutProgram(
+	querySource: string,
+): Array<[string, string]> {
+	return (querySource.match(/[^.]+(?:\.|$)/g) ?? []).flatMap((part) => {
+		const query = part.trim();
+		const match = query.match(/^([a-z][A-Za-z0-9_]*)\s*(?:\(|\.|$)/);
+		const name = match?.[1];
+		return name === undefined || BUILT_IN_PREDICATES.has(name)
+			? []
+			: [[query, name]];
+	});
 }
 
 /** Options for building a Prolog execution document. */
 export interface BuildPrologExecutionDocumentOptions {
-  /** Entry Prolog source file. */
-  entry?: string;
-  /** Query Prolog source file. */
-  query?: string;
-  scope?: string;
-  index?: number;
+	/** Entry Prolog source file. */
+	entry?: string;
+	/** Query Prolog source file. */
+	query?: string;
+	scope?: string;
+	index?: number;
 }
 
 function resolveQueryFile(
-  project: TpPrologProject,
-  query?: string,
+	project: TpPrologProject,
+	query?: string,
 ): { path: string; content: string } | undefined {
-  const queryPath = query ?? project.query;
+	const queryPath = query ?? project.query;
 
-  if (typeof queryPath === 'string' && queryPath !== '') {
-    const file = findProjectFile(project, queryPath);
+	if (typeof queryPath === "string" && queryPath !== "") {
+		const file = findProjectFile(project, queryPath);
 
-    if (file !== undefined) {
-      return file;
-    }
-  }
+		if (file !== undefined) {
+			return file;
+		}
+	}
 
-  return (
-    findProjectFile(project, '/query.pl') ??
-    project.files.find((file) => file.path.endsWith('.query.pl'))
-  );
+	return (
+		findProjectFile(project, "/query.pl") ??
+		project.files.find((file) => file.path.endsWith(".query.pl"))
+	);
 }
 
 /** Builds the Scryer Prolog execution document. */
 export async function buildPrologExecutionDocument(
-  project: TpPrologProject,
-  options: BuildPrologExecutionDocumentOptions = {},
+	project: TpPrologProject,
+	options: BuildPrologExecutionDocumentOptions = {},
 ): Promise<TpExecutionDocument> {
-  const entryFile = resolveEntryFile(project, {
-    entry: options.entry,
-    priorityPaths: ['/program.pl', '/main.pl'],
-    extensions: ['.pl'],
-    fallbackToFirstFile: false,
-  });
+	const entryFile = resolveEntryFile(project, {
+		entry: options.entry,
+		priorityPaths: ["/program.pl", "/main.pl"],
+		extensions: [".pl"],
+		fallbackToFirstFile: false,
+	});
 
-  const queryFile = resolveQueryFile(project, options.query);
-  const programEntryFile = entryFile?.path === queryFile?.path ? undefined : entryFile;
-  const htmlFile = findProjectFile(project, '/index.html');
-  const prologFiles = project.files.filter(
-    (file) =>
-      file.path.endsWith('.pl') &&
-      file.path !== queryFile?.path &&
-      file.path !== project.test,
-  );
+	const queryFile = resolveQueryFile(project, options.query);
+	const programEntryFile =
+		entryFile?.path === queryFile?.path ? undefined : entryFile;
+	const htmlFile = findProjectFile(project, "/index.html");
+	const prologFiles = project.files.filter(
+		(file) =>
+			file.path.endsWith(".pl") &&
+			file.path !== queryFile?.path &&
+			file.path !== project.test,
+	);
 
-  const orderedSources = [
-    ...prologFiles.filter((file) => file.path !== programEntryFile?.path),
-    ...(programEntryFile === undefined ? [] : [programEntryFile]),
-  ];
-  const localModules = getLocalPrologModuleNames(prologFiles);
-  const usesDomModule = prologFiles.some((file) =>
-    usesPrologDomModule(file.content),
-  );
+	const orderedSources = [
+		...prologFiles.filter((file) => file.path !== programEntryFile?.path),
+		...(programEntryFile === undefined ? [] : [programEntryFile]),
+	];
+	const localModules = getLocalPrologModuleNames(prologFiles);
+	const usesDomModule = prologFiles.some((file) =>
+		usesPrologDomModule(file.content),
+	);
 
-  const ownSources = [
-      ...(usesDomModule
-        ? [
-            {
-              path: '/library/dom.pl',
-              content: PROLOG_DOM_MODULE_SOURCE,
-            },
-          ]
-        : []),
-      ...orderedSources.map((file) => ({
-        path: file.path,
-        content: flattenLocalPrologModules(file.content, localModules),
-      })),
-    ];
-  let executionSources = ownSources;
-  if (options.scope !== undefined && options.scope !== '') {
-    const cells = notebookSources.get(options.scope) ?? new Map<number, PrologNotebookSource[]>();
-    cells.set(options.index ?? 0, ownSources);
-    notebookSources.set(options.scope, cells);
-    executionSources = Array.from(cells.entries())
-      .sort(([left], [right]) => left - right)
-      .flatMap(([, sources]) => sources);
-  }
-  const domSource = executionSources.find((source) => source.path === '/library/dom.pl');
-  const combinedProgram = executionSources
-    .filter((source) => source.path !== '/library/dom.pl')
-    .map((source) => source.content.trim())
-    .filter((source) => source !== '')
-    .join('\n\n');
-  const sourcesJson = JSON.stringify([
-    ...(domSource === undefined ? [] : [domSource]),
-    ...(combinedProgram === ''
-      ? []
-      : [{ path: '/notebook-program.pl', content: combinedProgram }]),
-  ]);
-  const queryJson = JSON.stringify(queryFile?.content ?? '');
-  const queryPathJson = JSON.stringify(queryFile?.path ?? '');
-  const undefinedQueriesJson = JSON.stringify(
-    combinedProgram === ''
-      ? findUndefinedQueriesWithoutProgram(queryFile?.content ?? '')
-      : [],
-  );
-  const body = htmlFile?.content ?? '<main id="prolog-output"></main>';
+	const ownSources = [
+		...(usesDomModule
+			? [
+					{
+						path: "/library/dom.pl",
+						content: PROLOG_DOM_MODULE_SOURCE,
+					},
+				]
+			: []),
+		...orderedSources.map((file) => ({
+			path: file.path,
+			content: flattenLocalPrologModules(file.content, localModules),
+		})),
+	];
+	let executionSources = ownSources;
+	if (options.scope !== undefined && options.scope !== "") {
+		const cells =
+			notebookSources.get(options.scope) ??
+			new Map<number, PrologNotebookSource[]>();
+		cells.set(options.index ?? 0, ownSources);
+		notebookSources.set(options.scope, cells);
+		executionSources = Array.from(cells.entries())
+			.sort(([left], [right]) => left - right)
+			.flatMap(([, sources]) => sources);
+	}
+	const domSource = executionSources.find(
+		(source) => source.path === "/library/dom.pl",
+	);
+	const combinedProgram = executionSources
+		.filter((source) => source.path !== "/library/dom.pl")
+		.map((source) => source.content.trim())
+		.filter((source) => source !== "")
+		.join("\n\n");
+	const sourcesJson = JSON.stringify([
+		...(domSource === undefined ? [] : [domSource]),
+		...(combinedProgram === ""
+			? []
+			: [{ path: "/notebook-program.pl", content: combinedProgram }]),
+	]);
+	const queryJson = JSON.stringify(queryFile?.content ?? "");
+	const queryPathJson = JSON.stringify(queryFile?.path ?? "");
+	const undefinedQueriesJson = JSON.stringify(
+		combinedProgram === ""
+			? findUndefinedQueriesWithoutProgram(queryFile?.content ?? "")
+			: [],
+	);
+	const body = htmlFile?.content ?? '<main id="prolog-output"></main>';
 
-  return {
-    html: `
+	return {
+		html: `
 <!doctype html>
 <html>
 <head>
@@ -198,6 +226,7 @@ export async function buildPrologExecutionDocument(
       try {
         const scryer = await import(scryerModuleUrl);
         await scryer.init();
+        ${toolLoadedScript("scryer", "Scryer Prolog")}
         return scryer;
       } finally {
         console.warn = originalWarn;
@@ -974,10 +1003,10 @@ export async function buildPrologExecutionDocument(
 </body>
 </html>
 `,
-  };
+	};
 }
 
 /** Returns a small escaped source preview for diagnostics. */
 export function createPrologSourcePreview(source: string): string {
-  return `<pre><code class="language-prolog">${escapeHtml(source)}</code></pre>`;
+	return `<pre><code class="language-prolog">${escapeHtml(source)}</code></pre>`;
 }

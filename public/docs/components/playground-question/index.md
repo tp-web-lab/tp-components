@@ -13,6 +13,8 @@ SQL is not included because its playground does not yet provide a test engine.
 
 ## Shared contract
 
+The inherited `timing="hh:mm:ss"` attribute enables the [timed-question flow](../question/index.md): Start reveals the exercise and begins the countdown; after expiry, Continue restores access without clearing the response.
+
 | Attribute | Default | Role |
 | --- | --- | --- |
 | `src` | <code>""</code> | Initial source file or JSON project passed to the response control. It is not a question-definition JSON file. |

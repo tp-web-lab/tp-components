@@ -11,6 +11,15 @@
   ],
   "attributes": [
     {
+      "name": "engine",
+      "description": "Rendering engine; only the explicit mermaid value loads Mermaid.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"mermaid\" | \"pele\"",
+      "default": "\"pele\""
+    },
+    {
       "name": "label",
       "description": "Accessible name applied to the rendered SVG.",
       "reflected": true,
@@ -33,7 +42,7 @@
   "events": [
     {
       "name": "tp-diagram-rendered",
-      "description": "Emitted after Mermaid has rendered the diagram.",
+      "description": "Emitted after the selected engine has rendered the diagram.",
       "detail": "{ src: string }"
     }
   ],

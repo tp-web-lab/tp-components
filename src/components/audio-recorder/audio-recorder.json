@@ -1,0 +1,53 @@
+{
+  "tagname": "tp-audio-recorder",
+  "classname": "TpAudioRecorder",
+  "superclass": "TpBase",
+  "description": "Local microphone recorder with playback and download.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-audio-recorder></tp-audio-recorder>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "transcript",
+      "description": "CSS selector of the element receiving recognized speech; fields receive their value, other elements receive text.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-audio-recorded",
+      "description": "Emitted when a recording is ready.",
+      "detail": "{ blob: Blob }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-button-group",
+      "summary": "Button group component for organizing multiple buttons."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Audio recorder",
+    "introduction": "The custom `<tp-audio-recorder>` element records a spoken response locally for replay and download, with optional speech transcription into another element.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Record | Request microphone access, capture a new response and transcribe it when configured. |\n| Stop | Finish capturing and prepare the audio for replay; allow final transcription results to arrive. |\n| Clear | Remove the current recording and cancel transcription; keep the written transcript. |\n| Playback controls | Listen, pause and seek in the recorded response. |\n| Download recording | Save the audio file on your device. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused button. Native playback shortcuts depend on the browser. |\n| <kbd>Enter</kbd> on Download recording | Save the audio file. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "keyboard": []
+  }
+}

@@ -22,6 +22,10 @@
                :orientation: horizontal
                :value:
 
+               - manual
+
+               - no-controls
+
                - silent
 
             .. tp-cluster::

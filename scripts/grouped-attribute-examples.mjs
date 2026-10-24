@@ -24,6 +24,7 @@ import {
 } from "node:fs";
 import { extname, resolve } from "node:path";
 import { parseFragment, serialize } from "parse5";
+import { maskAttributesExample } from "./mask-attribute-example.mjs";
 import { attributeControl } from "./interactive-attribute-examples.mjs";
 
 const root = resolve(import.meta.dirname, "..");
@@ -163,11 +164,14 @@ function fileChoices(component, setting, examples) {
 
 /** Build one isolated, restartable preview while retaining the author's content. */
 export function groupedAttributeExample(component, examples) {
-	const settings = attributeSettings(component);
+	if (component === "mask") return maskAttributesExample(`${root}/public/docs/components/mask/examples`);
+ const settings = attributeSettings(component);
 	const basic = examples.find((example) => example.label === "Basic usage");
 	if (!basic) throw new Error(`${component}: missing Basic usage`);
 	const tree = parseFragment(
-		component === "lsystem"
+		component === "audio-recorder"
+			? `${basic.source}<tp-textfield id="spoken-answer" multiline clearable label="Transcript"></tp-textfield>`
+		: component === "lsystem"
 			? '<p>Choose a preset or a reviewed source file. A file takes precedence over the preset; choose Default for src to return to presets. Empty iterations, angle and step use the definition values. Playback controls explore the selected definition.</p><tp-lsystem></tp-lsystem>'
 		: component === "toolbar"
 			? `<p>Choose top or bottom for a horizontal toolbar, and start or end for a vertical toolbar. The surrounding grid places the toolbar at the chosen edge; placement sets its sticky edge, not its position in normal document flow.</p>
@@ -310,6 +314,7 @@ ${basic.source.match(/<tp-toolbar\b[^>]*>[\s\S]*?<\/tp-toolbar>/)?.[0] ?? basic.
 	const fields = settings.filter((setting) => !setting.kind);
 	return `<p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
 ${["note", "biblio", "glossary", "ref", "listof"].includes(component) ? `<p>${component === "ref" ? "Enter ^detail in href to resolve the note." : component === "listof" ? "Enter figure in selector to list the two figures." : "Enter example in ref to connect the inline reference to this entry."} Clear the field to return to the empty default.</p>` : ""}
+${component === "audio-recorder" ? '<p>Enter <code>#spoken-answer</code> in transcript, then use Record and Stop in the preview. Final recognized speech fills the editable Transcript field. Browser support and microphone permission are required; recognition may use an online service.</p>' : ""}
 ${component === "code-comment" ? '<p>The preview code editor has <code>id="commented-function"</code>. Enter <code>commented-function</code> in <code>for</code> to link the comments, then enable <code>open</code> to display the list. Hover the numbered code markers to read their tooltips even when the list is hidden.</p>' : ""}
 ${component === "python-playground" ? '<p>Default displays a greeting in the HTML document and the console. For src, file1 displays 6 × 7 = 42; file2 displays the squares of 1 to 5. For repository, dir1 calculates 2 + 3; dir2 imports rectangle_area from geometry.py into main.py and displays the area of a rectangle. Both directories include index.html. Edit the Python files and press Run to update the result. Choose Default for src before testing repository: a nonempty src takes precedence. file-unknown and dir-unknown test loading errors: the console displays only the error, and the last valid project is retained.</p>' : ""}
 <tp-stack>

@@ -1,3 +1,4 @@
+import { reportToolLoaded } from "@tp/tp-utilities";
 /** @module components/map */
 // tp-docgen:dependencies:start
 /**
@@ -510,6 +511,7 @@ export class TpMap extends TpBase {
 		}
 		try {
 			const L = await import("leaflet");
+			reportToolLoaded("leaflet", "Leaflet", L.version);
 			if (revision !== this.revision || !this.isConnected || !this.viewport)
 				return;
 			this.viewport.setAttribute(

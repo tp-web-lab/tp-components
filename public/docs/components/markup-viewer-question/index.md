@@ -11,6 +11,8 @@
 
 ## Shared contract
 
+The inherited `timing="hh:mm:ss"` attribute enables the [timed-question flow](../question/index.md): Start reveals the exercise and begins the countdown; after expiry, Continue restores access without clearing the response.
+
 | Attribute | Default | Role |
 | --- | --- | --- |
 | `src` | <code>""</code> | One external markup source file to edit in the viewer. |

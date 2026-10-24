@@ -1,27 +1,28 @@
+import { toolLoadedScript } from "@tp/tp-utilities";
 /**
  * @module components/asciidoc-playground/asciidoc-execution-document
  * @summary AsciiDoc execution document builder.
  */
 
-import type { TpExecutionDocument } from '../playground/playground.js';
+import type { TpExecutionDocument } from "../playground/playground.js";
 
 import {
-  createCommonRuntimeScript,
-  createConsoleBridgeScript,
-  findProjectFile,
-  resolveEntryFile,
-} from '../playground/playground-build-utils.js';
+	createCommonRuntimeScript,
+	createConsoleBridgeScript,
+	findProjectFile,
+	resolveEntryFile,
+} from "../playground/playground-build-utils.js";
 
 import type {
-  TpAsciidocExtension,
-  TpAsciidocProject,
-} from './asciidoc-project.js';
+	TpAsciidocExtension,
+	TpAsciidocProject,
+} from "./asciidoc-project.js";
 
 const ASCIIDOCTOR_URL =
-  'https://cdn.jsdelivr.net/npm/@asciidoctor/core@3.0.4/dist/browser/asciidoctor.js';
+	"https://cdn.jsdelivr.net/npm/@asciidoctor/core@3.0.4/dist/browser/asciidoctor.js";
 
 function stripScripts(html: string): string {
-  return html.replace(/<script\b[\s\S]*?<\/script>/gi, '');
+	return html.replace(/<script\b[\s\S]*?<\/script>/gi, "");
 }
 
 /* function resolveProjectRelativePath(
@@ -55,45 +56,49 @@ function stripScripts(html: string): string {
 
 /** Options for building an AsciiDoc execution document. */
 export interface BuildAsciidocExecutionDocumentOptions {
-  entry?: string;
+	entry?: string;
 }
 
 /** Returns the enabled AsciiDoc extensions. */
 function getEnabledExtensions(
-  extensions: readonly TpAsciidocExtension[] | undefined,
+	extensions: readonly TpAsciidocExtension[] | undefined,
 ): TpAsciidocExtension[] {
-  return (extensions ?? []).filter((extension) => extension.enabled !== false);
+	return (extensions ?? []).filter((extension) => extension.enabled !== false);
 }
 
 /** Builds the AsciiDoc execution document. */
 export async function buildAsciidocExecutionDocument(
-  project: TpAsciidocProject,
-  options: BuildAsciidocExecutionDocumentOptions = {},
+	project: TpAsciidocProject,
+	options: BuildAsciidocExecutionDocumentOptions = {},
 ): Promise<TpExecutionDocument> {
-  const entryFile = resolveEntryFile(project, {
-    entry: options.entry,
-    priorityPaths: ['/index.adoc', '/main.adoc'],
-    extensions: ['.adoc', '.asciidoc'],
-    fallbackToFirstFile: false,
-  });
+	const entryFile = resolveEntryFile(project, {
+		entry: options.entry,
+		priorityPaths: ["/index.adoc", "/main.adoc"],
+		extensions: [".adoc", ".asciidoc"],
+		fallbackToFirstFile: false,
+	});
 
-  if (entryFile === undefined) {
-    throw new Error('No AsciiDoc entry file found.');
-  }
+	if (entryFile === undefined) {
+		throw new Error("No AsciiDoc entry file found.");
+	}
 
-  const htmlFile = findProjectFile(project, '/index.html');
-  const body = htmlFile ? stripScripts(htmlFile.content) : '<main id="app"></main>';
+	const htmlFile = findProjectFile(project, "/index.html");
+	const body = htmlFile
+		? stripScripts(htmlFile.content)
+		: '<main id="app"></main>';
 
-  const filesJson = JSON.stringify(
-    Object.fromEntries(project.files.map((file) => [file.path, file.content])),
-  );
+	const filesJson = JSON.stringify(
+		Object.fromEntries(project.files.map((file) => [file.path, file.content])),
+	);
 
-  const entryPathJson = JSON.stringify(entryFile.path);
-  const attributesJson = JSON.stringify(project.attributes ?? {});
-  const extensionsJson = JSON.stringify(getEnabledExtensions(project.extensions));
+	const entryPathJson = JSON.stringify(entryFile.path);
+	const attributesJson = JSON.stringify(project.attributes ?? {});
+	const extensionsJson = JSON.stringify(
+		getEnabledExtensions(project.extensions),
+	);
 
-  return {
-    html: `
+	return {
+		html: `
 <!doctype html>
 <html>
 <head>
@@ -285,6 +290,7 @@ if (typeof AsciidoctorFactory !== 'function') {
 }
 
 const asciidoctor = AsciidoctorFactory();
+${toolLoadedScript("asciidoctor", "Asciidoctor", "asciidoctor.getVersion?.()")}
 
     const files = ${filesJson};
     const entryPath = ${entryPathJson};
@@ -341,5 +347,5 @@ void main();
 </body>
 </html>
 `,
-  };
+	};
 }

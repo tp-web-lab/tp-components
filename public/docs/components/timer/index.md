@@ -28,6 +28,10 @@ The custom `<tp-timer>` element implements the <tp-icon name="timer" library="co
 
 ### Author directives
 
+By default, the countdown starts when connected. Add `manual` to wait for the Start timer button or the public `start()` method. `reset()` stops the countdown and restores the configured duration.
+
+Add `no-controls` to hide the duration input and buttons and display `hh:mm:ss`; this display has no direct mouse or keyboard interaction. Combine `manual no-controls silent` when another component controls the countdown, as in timed questions. The `tp-timer-elapsed` event fires when the countdown reaches zero.
+
 Use `<tp-timer>` as shown below.
 
 ```html
@@ -67,6 +71,8 @@ Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
   | <code>duration</code> | <code>number</code> | <code>60</code> | Countdown duration in seconds. |
+  | <code>manual</code> | <code>boolean</code> | <code>false</code> | Waits for start() instead of starting automatically. |
+  | <code>no-controls</code> | <code>boolean</code> | <code>false</code> | Hides duration editing and buttons; displays hh:mm:ss. |
   | <code>silent</code> | <code>boolean</code> | <code>false</code> | Disables sound playback. |
   | <code>size</code> | <code>string</code> | <code>&quot;1rem&quot;</code> | Icon and text size. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
@@ -78,7 +84,8 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | None. |  |  |
+  | <code>reset</code> | <code>reset(): void</code> | Stops and resets the timer. |
+  | <code>start</code> | <code>start(): void</code> | Starts a new countdown from the beginning. |
   [Public methods of `TpTimer`]
 
 Events
@@ -101,6 +108,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_timer.TpTimer.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

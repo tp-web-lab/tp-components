@@ -162,8 +162,8 @@ Each assistance action that changes the grid can be undone in one step. Click a 
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move among clues, toolbar controls and cells. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused cell or button; <kbd>Space</kbd> toggles a clue checkbox. |
-| Arrow keys in Assist… / <kbd>Enter</kbd> | Choose and apply an assistance action using the native menu. |
-| Arrow keys in a matrix | Move to a neighbouring cell in the same matrix. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Assist… / <kbd>Enter</kbd> | Choose and apply an assistance action using the native menu. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in a matrix | Move to a neighbouring cell in the same matrix. |
 | <kbd>Delete</kbd> / <kbd>Backspace</kbd> in a cell | Clear its mark. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |
 
@@ -242,6 +242,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_logigram.TpLogigram.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

@@ -37,11 +37,13 @@ The custom `<tp-typescript-playground-question>` element implements the programm
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between question and programming controls. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused action or expand/collapse the title. |
-| Arrow keys in Output tabs | Navigate Feedback and Solution. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Output tabs | Navigate Feedback and Solution. |
 | Typing in the editor | Modify source code using the embedded editor's editing behavior. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
+
+The inherited `timing="hh:mm:ss"` attribute enables the [timed-question flow](../question/index.md). Start begins the countdown; Continue restores access after expiry without clearing the response.
 
 The language and interface are fixed by the tag: this component always creates [`tp-typescript-playground`](../typescript-playground/index.md). There are no `language` or `mode` attributes. For the other interface, use [`tp-typescript-viewer-question`](../typescript-viewer-question/index.md).
 
@@ -109,6 +111,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_typescript-playground-question.TpTypescriptPlaygroundQuestion.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

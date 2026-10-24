@@ -1,106 +1,105 @@
+import { toolLoadedScript } from "@tp/tp-utilities";
 /**
  * @module components/prolog-playground/prolog-test-document
  * @summary Scryer Prolog test document builder.
  */
 
-import type { TpExecutionDocument } from '../playground/playground.js';
+import type { TpExecutionDocument } from "../playground/playground.js";
 import {
-  createCommonRuntimeScript,
-  createConsoleBridgeScript,
-  findProjectFile,
-  resolveEntryFile,
-} from '../playground/playground-build-utils.js';
-import type { TpPrologProject } from './prolog-project.js';
+	createCommonRuntimeScript,
+	createConsoleBridgeScript,
+	findProjectFile,
+	resolveEntryFile,
+} from "../playground/playground-build-utils.js";
+import type { TpPrologProject } from "./prolog-project.js";
 import {
-  flattenLocalPrologModules,
-  getLocalPrologModuleNames,
-  PROLOG_DOM_MODULE_SOURCE,
-  usesPrologDomModule,
-} from './prolog-source.js';
+	flattenLocalPrologModules,
+	getLocalPrologModuleNames,
+	PROLOG_DOM_MODULE_SOURCE,
+	usesPrologDomModule,
+} from "./prolog-source.js";
 
-const SCRYER_MODULE_URL = 'https://esm.sh/scryer';
+const SCRYER_MODULE_URL = "https://esm.sh/scryer";
 
 /** Options for building a Prolog test document. */
 export interface BuildPrologTestDocumentOptions {
-  /** Default test file path. */
-  defaultTest?: string;
+	/** Default test file path. */
+	defaultTest?: string;
 }
 
 function resolveTestFile(
-  project: TpPrologProject,
-  defaultTest?: string,
+	project: TpPrologProject,
+	defaultTest?: string,
 ): { path: string; content: string } | undefined {
-  if (typeof project.test === 'string' && project.test !== '') {
-    return findProjectFile(project, project.test);
-  }
+	if (typeof project.test === "string" && project.test !== "") {
+		return findProjectFile(project, project.test);
+	}
 
-  return resolveEntryFile(project, {
-    entry: defaultTest,
-    priorityPaths: ['/test.pl', '/program.test.pl'],
-    extensions: ['.test.pl', '.tests.pl', '.spec.pl'],
-    fallbackToFirstFile: false,
-    ignoreProjectEntry: true,
-  });
+	return resolveEntryFile(project, {
+		entry: defaultTest,
+		priorityPaths: ["/test.pl", "/program.test.pl"],
+		extensions: [".test.pl", ".tests.pl", ".spec.pl"],
+		fallbackToFirstFile: false,
+		ignoreProjectEntry: true,
+	});
 }
 
 /** Builds the Scryer Prolog test execution document. */
 export async function buildPrologTestDocument(
-  project: TpPrologProject,
-  options: BuildPrologTestDocumentOptions = {},
+	project: TpPrologProject,
+	options: BuildPrologTestDocumentOptions = {},
 ): Promise<TpExecutionDocument> {
-  const testFile = resolveTestFile(project, options.defaultTest);
+	const testFile = resolveTestFile(project, options.defaultTest);
 
-  if (testFile === undefined) {
-    throw new Error('No Prolog test file found.');
-  }
+	if (testFile === undefined) {
+		throw new Error("No Prolog test file found.");
+	}
 
-  const entryFile = resolveEntryFile(project, {
-    entry: project.entry,
-    priorityPaths: ['/program.pl', '/main.pl'],
-    extensions: ['.pl'],
-    fallbackToFirstFile: false,
-  });
+	const entryFile = resolveEntryFile(project, {
+		entry: project.entry,
+		priorityPaths: ["/program.pl", "/main.pl"],
+		extensions: [".pl"],
+		fallbackToFirstFile: false,
+	});
 
-  if (entryFile === undefined) {
-    throw new Error('No Prolog entry file found.');
-  }
+	if (entryFile === undefined) {
+		throw new Error("No Prolog entry file found.");
+	}
 
-  const htmlFile = findProjectFile(project, '/index.html');
-  const prologFiles = project.files.filter(
-    (file) =>
-      file.path.endsWith('.pl') &&
-      file.path !== testFile.path &&
-      file.path !== project.query,
-  );
-  const orderedSources = [
-    ...prologFiles.filter((file) => file.path !== entryFile.path),
-    entryFile,
-  ];
-  const localModules = getLocalPrologModuleNames(prologFiles);
-  const usesDomModule = prologFiles.some((file) =>
-    usesPrologDomModule(file.content),
-  );
-  const sourcesJson = JSON.stringify(
-    [
-      ...(usesDomModule
-        ? [
-            {
-              path: '/library/dom.pl',
-              content: PROLOG_DOM_MODULE_SOURCE,
-            },
-          ]
-        : []),
-      ...orderedSources.map((file) => ({
-        path: file.path,
-        content: flattenLocalPrologModules(file.content, localModules),
-      })),
-    ],
-  );
-  const testSourceJson = JSON.stringify(testFile.content);
-  const body = htmlFile?.content ?? '<main id="prolog-test-output"></main>';
+	const htmlFile = findProjectFile(project, "/index.html");
+	const prologFiles = project.files.filter(
+		(file) =>
+			file.path.endsWith(".pl") &&
+			file.path !== testFile.path &&
+			file.path !== project.query,
+	);
+	const orderedSources = [
+		...prologFiles.filter((file) => file.path !== entryFile.path),
+		entryFile,
+	];
+	const localModules = getLocalPrologModuleNames(prologFiles);
+	const usesDomModule = prologFiles.some((file) =>
+		usesPrologDomModule(file.content),
+	);
+	const sourcesJson = JSON.stringify([
+		...(usesDomModule
+			? [
+					{
+						path: "/library/dom.pl",
+						content: PROLOG_DOM_MODULE_SOURCE,
+					},
+				]
+			: []),
+		...orderedSources.map((file) => ({
+			path: file.path,
+			content: flattenLocalPrologModules(file.content, localModules),
+		})),
+	]);
+	const testSourceJson = JSON.stringify(testFile.content);
+	const body = htmlFile?.content ?? '<main id="prolog-test-output"></main>';
 
-  return {
-    html: `
+	return {
+		html: `
 <!doctype html>
 <html>
 <head>
@@ -148,6 +147,7 @@ export async function buildPrologTestDocument(
       try {
         const scryer = await import(scryerModuleUrl);
         await scryer.init();
+        ${toolLoadedScript("scryer", "Scryer Prolog")}
         return scryer;
       } finally {
         console.warn = originalWarn;
@@ -482,5 +482,5 @@ export async function buildPrologTestDocument(
 </body>
 </html>
 `,
-  };
+	};
 }

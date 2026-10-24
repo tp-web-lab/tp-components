@@ -57,9 +57,9 @@ Results use JavaScript floating-point arithmetic. Undefined real results, divisi
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the expression and keypad buttons. |
-| <kbd>Enter</kbd> / = in the expression | Evaluate the expression. |
+| <kbd>Enter</kbd> / <kbd>=</kbd> in the expression | Evaluate the expression. |
 | <kbd>Escape</kbd> in the expression | Clear the expression and message. |
-| Arrow keys, <kbd>Backspace</kbd>, <kbd>Delete</kbd> in the expression | Move the caret or edit text normally. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd>, <kbd>Backspace</kbd>, <kbd>Delete</kbd> in the expression | Move the caret or edit text normally. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on a button | Activate that key. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |
 
@@ -124,6 +124,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_calculator.TpCalculator.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

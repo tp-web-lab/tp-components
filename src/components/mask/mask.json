@@ -1,0 +1,48 @@
+{
+  "tagname": "tp-mask",
+  "classname": "TpMask",
+  "superclass": "TpBase",
+  "description": "Replaces an anchored element with its own content without destroying the target.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-textfield id=\"mask-answer\" label=\"Answer\" value=\"Thursday\" clearable></tp-textfield>\n<tp-mask anchor=\"#mask-answer\" active>The answer is hidden until the review.</tp-mask>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "active",
+      "description": "Hides the target and displays the mask content in its place.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "anchor",
+      "description": "CSS selector of the element to mask in the same document.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Mask",
+    "introduction": "The custom `<tp-mask>` element hides an anchored element and displays its own message in its place while active.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Mask message | Read the replacement message. The hidden target cannot be clicked. |\n| Using the component | There is no built-in dismiss button or component-specific pointer gesture. Author-provided controls may change its state. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Skip the hidden target. Any interactive content supplied in the message remains reachable. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "keyboard": []
+  }
+}

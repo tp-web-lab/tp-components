@@ -21,7 +21,16 @@
     },
     {
       "name": "open",
-      "description": "Expands the question; absent by default, leaving only its title visible.",
+      "description": "Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "score",
+      "description": "Displays the numerical score in submission feedback.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -31,6 +40,15 @@
     {
       "name": "src",
       "description": "URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "timing",
+      "description": "Optional nonzero time limit in strict hh:mm:ss format.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -57,6 +75,10 @@
       "summary": "Shared base class for tp-* components."
     },
     {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
       "name": "tp-button-group",
       "summary": "Button group component for organizing multiple buttons."
     },
@@ -73,19 +95,27 @@
       "summary": "Accessible icon button component."
     },
     {
+      "name": "tp-mask",
+      "summary": "Replaces an anchored element with a message while active."
+    },
+    {
       "name": "tp-switcher",
       "summary": "Switches between horizontal and vertical layouts based on available space."
     },
     {
       "name": "tp-tabs",
       "summary": "Accessible tabs component with keyboard and reorder support."
+    },
+    {
+      "name": "tp-timer",
+      "summary": "Countdown timer with stop control and optional ring."
     }
   ],
   "credits": [],
   "userHelp": {
     "displayName": "Question",
     "introduction": "The custom `<tp-question>` element implements the <tp-icon name=\"question\" library=\"components\" size=\"1.25em\"></tp-icon> Question functionality: semantic base container for question content.",
-    "interactions": "The user-help button legend groups commands by their location in the component and describes their effect briefly. Detailed gestures and keyboard behavior remain in the interaction tables below.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Question title | Expand or collapse the question. Questions start collapsed; answers are retained when collapsed. |\n| Input button | Show or hide the answer form without losing answers. At least one panel stays visible. |\n| Output button | Show or hide the output without losing feedback or the solution. Highlighted buttons indicate visible panels. |\n| Submit | Check the completed answer form. |\n| Feedback tab | Read feedback, or the message indicating that none is available. |\n| Solution tab | Read the solution, available even before submission, or the message indicating that none is available. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> on the question title | Expand or collapse the question. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| Arrow keys in Output tabs | Move between Feedback and Solution. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "The user-help button legend groups commands by their location in the component and describes their effect briefly. Detailed gestures and keyboard behavior remain in the interaction tables below.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Question title | Expand or collapse the question. Questions start collapsed; answers are retained when collapsed. |\n| Input button | Show or hide the answer form without losing answers. At least one panel stays visible. |\n| Output button | Show or hide the output without losing feedback or the solution. Highlighted buttons indicate visible panels. |\n| Start | Reveal the timed question and begin its countdown. |\n| Continue | Reveal the question again after the time limit, keeping existing answers. |\n| Submit | Check the completed answer form. |\n| Feedback tab | Read feedback, or the message indicating that none is available. |\n| Solution tab | Read the solution, or the message indicating that none is available. For timed questions, it becomes accessible only after Continue. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> on the question title | Expand or collapse the question. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Output tabs | Move between Feedback and Solution. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

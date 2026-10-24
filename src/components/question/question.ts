@@ -13,6 +13,10 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-button
+ * @summary Button component that supports native button and link rendering.
+ */
+/**
  * @tp-dependency tp-button-group
  * @summary Button group component for organizing multiple buttons.
  */
@@ -29,6 +33,10 @@
  * @summary Accessible icon button component.
  */
 /**
+ * @tp-dependency tp-mask
+ * @summary Replaces an anchored element with a message while active.
+ */
+/**
  * @tp-dependency tp-switcher
  * @summary Switches between horizontal and vertical layouts based on available space.
  */
@@ -36,9 +44,14 @@
  * @tp-dependency tp-tabs
  * @summary Accessible tabs component with keyboard and reorder support.
  */
+/**
+ * @tp-dependency tp-timer
+ * @summary Countdown timer with stop control and optional ring.
+ */
 // tp-docgen:dependencies:end
 
 import style from "./question.css?inline";
+import { QuestionTiming } from "./question-timing.js";
 
 import "../badge/badge.js";
 import "../button-group/button-group.js";
@@ -152,7 +165,7 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
  * renders an interactive layout with:
  * - `<details><summary>` from `Title`
  * - full-width prompt section
- * - input/output toggles at the end of the Prompt row; both panels start visible
+ * - input/output toggles at the end of the Prompt row; initial visibility follows the open attribute
  * - responsive two-panel area (form left, feedback/solution right)
  * - reset/submit actions and a message zone under the form
  *
@@ -162,7 +175,9 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
  * @tagname tp-question
  * @attr {string} src = "" - URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition.
  * @attr {string} mode = "mixed" - Blank mode: opened, closed, or mixed local choices.
- * @attr {boolean} open = false - Expands the question; absent by default, leaving only its title visible.
+ * @attr {string} timing = "" - Optional nonzero time limit in strict hh:mm:ss format.
+ * @attr {boolean} score = false - Displays the numerical score in submission feedback.
+ * @attr {string} open - Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.
  * @event tp-question-submit - Fired when the submit icon button is activated.
  *   `detail: { value: unknown }`
  * @example
@@ -177,8 +192,31 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
  *   </tp-question>
  */
 export class TpQuestion extends TpBase {
+	private readonly questionTiming = new QuestionTiming(this);
+	/** Whether numerical scores are displayed in feedback. */
+	public get score(): boolean {
+		return this.hasAttribute("score");
+	}
+	public set score(value: boolean) {
+		this.toggleAttribute("score", value);
+	}
+
+	/** Optional time limit; invalid and zero durations disable timing. */
+	public get timing(): string {
+		return this.getAttribute("timing") ?? "";
+	}
+	public set timing(value: string) {
+		this.setAttribute("timing", value);
+	}
 	public static override get observedAttributes(): string[] {
-		return [...(TpBase.observedAttributes ?? []), "src", "open", "mode"];
+		return [
+			...(TpBase.observedAttributes ?? []),
+			"src",
+			"open",
+			"mode",
+			"timing",
+			"score",
+		];
 	}
 
 	/** Global blank policy; missing and invalid values use local choices. */
@@ -190,14 +228,31 @@ export class TpQuestion extends TpBase {
 		this.setAttribute("mode", value);
 	}
 
-	/** Whether the question is expanded. Boolean attributes use presence only. */
-	public get open(): boolean {
-		return this.hasAttribute("open");
+	/** Initial panel selection; a bare attribute selects both panels. */
+	public get open(): "both" | "input" | "output" | false {
+		const value = this.getAttribute("open");
+		if (value === "") return "both";
+		return value === "both" || value === "input" || value === "output"
+			? value
+			: false;
 	}
 
-	/** Expands or collapses the question without discarding answers. */
-	public set open(value: boolean) {
-		this.toggleAttribute("open", value);
+	/** Selects panels without discarding answers; booleans remain supported in JavaScript. */
+	public set open(value: "both" | "input" | "output" | boolean) {
+		if (value === false) this.removeAttribute("open");
+		else this.setAttribute("open", value === true ? "both" : value);
+	}
+
+	private applyOpenPanels(): void {
+		const mode = this.open;
+		if (!mode) return;
+		for (const button of this.panelToggleButtons) {
+			button.setAttribute(
+				"aria-pressed",
+				String(mode === "both" || button.dataset.panelToggle === mode),
+			);
+		}
+		this.updatePanelVisibility();
 	}
 
 	/** Synchronizes declarative visibility changes with the native disclosure. */
@@ -207,16 +262,27 @@ export class TpQuestion extends TpBase {
 		newValue: string | null,
 	): void {
 		super.attributeChangedCallback(name, oldValue, newValue);
+		if (name === "score") {
+			for (const element of this.querySelectorAll<HTMLElement>(
+				"[data-tp-question-score]",
+			)) {
+				if (element.closest("[data-tp-question]") === this)
+					element.hidden = !this.score;
+			}
+		}
 		if (name === "src" && oldValue !== newValue) {
 			this.sourceRevision++;
 			this.inlineSourceLoaded = false;
 			if (this.isConnected && this.formContent && newValue) void this.loadSrc();
 		}
+		if (name === "timing" && this.isConnected && oldValue !== newValue)
+			this.questionTiming.configure();
 		if (name !== "open") return;
 		const details = this.querySelector<HTMLDetailsElement>(
 			":scope > details[data-tp-question-details]",
 		);
-		if (details) details.open = this.open;
+		if (details) details.open = Boolean(this.open);
+		this.applyOpenPanels();
 	}
 
 	/**
@@ -634,6 +700,7 @@ export class TpQuestion extends TpBase {
 		this.beforeQuestionLayout();
 		const list = this.ensureDefinitionList();
 		this.renderQuestionLayout(list);
+		this.questionTiming.configure();
 		this.bindActions();
 		if (this.localName === "tp-question" && this.usesExternalData)
 			void this.loadSrc();
@@ -656,6 +723,7 @@ export class TpQuestion extends TpBase {
 	 * @summary Disconnects action listeners.
 	 */
 	public disconnectedCallback(): void {
+		this.questionTiming.dispose();
 		this.sourceRevision++;
 		this.unbindActions();
 	}
@@ -840,9 +908,23 @@ export class TpQuestion extends TpBase {
 			() => {
 				const node = document.createElement("details");
 				node.setAttribute("data-tp-question-details", "");
-				node.open = this.open;
+				node.open = Boolean(this.open);
 				node.addEventListener("toggle", () => {
-					this.open = node.open;
+					// Native toggle events are asynchronous: do not overwrite a valid mode.
+					if (node.open === Boolean(this.open)) return;
+					if (!node.open) this.open = false;
+					else {
+						const selected = this.panelToggleButtons.filter(
+							(button) => button.getAttribute("aria-pressed") === "true",
+						);
+						this.open =
+							selected.length === 1 &&
+							selected[0]?.dataset.panelToggle === "input"
+								? "input"
+								: selected.length === 1
+									? "output"
+									: "both";
+					}
 				});
 				this.append(node);
 				return node;
@@ -951,6 +1033,7 @@ export class TpQuestion extends TpBase {
 			if (!panel.id) panel.id = `tp-question-panel-${++TpQuestion.nextPanelId}`;
 			this.panelToggleButtons[index]?.setAttribute("aria-controls", panel.id);
 		}
+		this.applyOpenPanels();
 		this.updatePanelVisibility();
 		const formFieldset = this.ensureChild(
 			formPanel,
@@ -1313,6 +1396,7 @@ export class TpQuestion extends TpBase {
 	private submissionRevision = 0;
 
 	private handleSubmitClick = async (): Promise<void> => {
+		this.activateFeedbackPanel();
 		if (this.preparingSubmission) return;
 		this.clearMessage();
 		const value = this.readResponseValue();
@@ -1421,6 +1505,11 @@ export class TpQuestion extends TpBase {
 	 * @summary Activates Feedback panel before writing output.
 	 */
 	protected activateFeedbackPanel(): void {
+		const outputToggle = this.panelToggleButtons.find(
+			(button) => button.dataset.panelToggle === "output",
+		);
+		outputToggle?.setAttribute("aria-pressed", "true");
+		this.updatePanelVisibility();
 		if (!(this.feedbackTabsEl instanceof HTMLElement)) {
 			return;
 		}
@@ -1468,6 +1557,7 @@ export class TpQuestion extends TpBase {
 		const button = document.createElement("button");
 		button.type = "button";
 		button.textContent = "See more in the solution...";
+		button.setAttribute("data-tp-question-open-solution", "");
 		button.addEventListener("click", () => this.openSolutionPanel());
 		if (this.solutionTabEl?.hasAttribute("disabled")) {
 			button.disabled = true;
@@ -1520,6 +1610,8 @@ export class TpQuestion extends TpBase {
 		const scoreBadge = document.createElement("tp-badge");
 		scoreBadge.setAttribute("variant", score === total ? "success" : "danger");
 		scoreBadge.setAttribute("size", "xs");
+		scoreBadge.setAttribute("data-tp-question-score", "");
+		scoreBadge.hidden = !this.score;
 		scoreBadge.textContent = `${String(score)}/${String(total)}`;
 		line.append(scoreBadge);
 		return line;
@@ -1539,6 +1631,8 @@ export class TpQuestion extends TpBase {
 	): HTMLParagraphElement {
 		const line = document.createElement("p");
 		line.style.margin = "0.5rem 0 0";
+		line.setAttribute("data-tp-question-score", "");
+		line.hidden = !this.score;
 		line.textContent = `${String(score)}/${String(total)}`;
 		return line;
 	}

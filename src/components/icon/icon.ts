@@ -15,7 +15,6 @@ import { TpBase } from "../base/base.js";
 import style from "./icon.css?inline";
 import { getTpIcon } from "./icon-registry.js";
 import { setupTpIcons } from "./icon-setup.js";
-import { registerTpIconLibraryFromGlob } from "./icon-vite.js";
 
 /**
  * @summary Initializes the internal icon library.
@@ -23,82 +22,28 @@ import { registerTpIconLibraryFromGlob } from "./icon-vite.js";
  */
 setupTpIcons();
 
-const languageIcons = import.meta.glob(
-	"/src/components/icon/icons/languages/*.svg",
-	{
-		query: "?raw",
-		import: "default",
-		eager: true,
-	},
-) as Record<string, string>;
+const builtinLibraries: Record<string, () => Promise<unknown>> = {
+	languages: () => import("./icon-library-languages.js"),
+	flags: () => import("./icon-library-flags.js"),
+	numbers: () => import("./icon-library-numbers.js"),
+	letters: () => import("./icon-library-letters.js"),
+	components: () => import("./icon-library-components.js"),
+};
+const pendingLibraries = new Map<string, Promise<unknown>>();
 
-registerTpIconLibraryFromGlob("languages", languageIcons, {
-	stripPrefix: "/src/components/icon/icons/languages/",
-	stripSuffix: ".svg",
-	namePrefix: "",
-	normalize: "none",
-});
-
-const flagIcons = import.meta.glob("/src/components/icon/icons/flags/*.svg", {
-	query: "?raw",
-	import: "default",
-	eager: true,
-}) as Record<string, string>;
-
-registerTpIconLibraryFromGlob("flags", flagIcons, {
-	stripPrefix: "/src/components/icon/icons/flags/",
-	stripSuffix: ".svg",
-	namePrefix: "cif-",
-	normalize: "none",
-});
-
-const numberIcons = import.meta.glob(
-	"/src/components/icon/icons/numbers/*.svg",
-	{
-		query: "?raw",
-		import: "default",
-		eager: true,
-	},
-) as Record<string, string>;
-
-registerTpIconLibraryFromGlob("numbers", numberIcons, {
-	stripPrefix: "/src/components/icon/icons/numbers/",
-	stripSuffix: ".svg",
-	namePrefix: "",
-	normalize: "none",
-});
-
-const letterIcons = import.meta.glob(
-	"/src/components/icon/icons/letters/*.svg",
-	{
-		query: "?raw",
-		import: "default",
-		eager: true,
-	},
-) as Record<string, string>;
-
-registerTpIconLibraryFromGlob("letters", letterIcons, {
-	stripPrefix: "/src/components/icon/icons/letters/",
-	stripSuffix: ".svg",
-	namePrefix: "",
-	normalize: "none",
-});
-
-const componentsIcons = import.meta.glob(
-	"/src/components/icon/icons/components/*.svg",
-	{
-		query: "?raw",
-		import: "default",
-		eager: true,
-	},
-) as Record<string, string>;
-
-registerTpIconLibraryFromGlob("components", componentsIcons, {
-	stripPrefix: "/src/components/icon/icons/components/",
-	stripSuffix: ".svg",
-	namePrefix: "",
-	normalize: "none",
-});
+async function loadBuiltinLibrary(library: string): Promise<void> {
+	const load = builtinLibraries[library];
+	if (!load) return;
+	let pending = pendingLibraries.get(library);
+	if (!pending) {
+		pending = load().catch((error: unknown) => {
+			pendingLibraries.delete(library);
+			throw error;
+		});
+		pendingLibraries.set(library, pending);
+	}
+	await pending;
+}
 /**
  * @summary API documentation summary.
  * @internal
@@ -600,6 +545,17 @@ export class TpIcon extends TpBase {
 
 		const name = this.name;
 		const library = this.library;
+
+		if (
+			Object.hasOwn(builtinLibraries, library) &&
+			getTpIcon(name, library) === null
+		) {
+			try {
+				await loadBuiltinLibrary(library);
+			} catch {
+				// Keep the existing fallback when a collection cannot be loaded.
+			}
+		}
 
 		if (name !== "" && name !== "*") {
 			const registrySvg = getTpIcon(name, library);

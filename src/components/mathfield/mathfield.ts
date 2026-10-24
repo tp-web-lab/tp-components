@@ -1,3 +1,4 @@
+import { reportToolLoaded } from "@tp/tp-utilities";
 /**
  * @module components/mathfield
  * @summary Mathematical expression field with live LaTeX or AsciiMath rendering.
@@ -522,6 +523,7 @@ export class TpMathfield extends TpBase {
 		this.syncVisualEditor();
 		try {
 			const { createVisualMathfield } = await import("./mathlive-editor.js");
+			reportToolLoaded("mathlive", "MathLive");
 			if (revision !== this.visualRevision || !this.isConnected) return;
 			const visual = createVisualMathfield();
 			visual.setAttribute("aria-label", this.label || "Visual formula editor");

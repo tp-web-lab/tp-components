@@ -30,6 +30,7 @@ const mocks = vi.hoisted(() => {
 	};
 });
 vi.mock("leaflet", () => ({
+	version: "1.9.4",
 	map: mocks.create,
 	marker: mocks.marker,
 	tileLayer: mocks.tileLayer,

@@ -1,3 +1,4 @@
+import { toolLoadedScript } from "@tp/tp-utilities";
 /**
  * @module components/playground/browser-test-document
  * @summary Browser test document builder for playground projects.
@@ -138,6 +139,8 @@ export const expect = api.expect;
   <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/chai@4/chai.js"></script>
 
 <script>
+  ${toolLoadedScript("mocha", "Mocha", "mocha.version")}
+  ${toolLoadedScript("chai", "Chai", "chai.version")}
   mocha.setup('bdd');
 
   window.__tp_test__ = {

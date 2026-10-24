@@ -68,10 +68,12 @@ Click a card or its link icon to select it, then click a card in another column 
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move through association controls, embedded content, question actions and output tabs. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused Select, Remove pair, Close callout, Reset, Submit or panel-toggle button. |
 | <kbd>Escape</kbd> inside an item | Cancel the pending selection without removing existing pairs. |
-| Arrow keys, <kbd>Home</kbd> / <kbd>End</kbd> on output tabs | Navigate the Feedback and Solution tabs using the standard tab controls. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd>, <kbd>Home</kbd> / <kbd>End</kbd> on output tabs | Navigate the Feedback and Solution tabs using the standard tab controls. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
+
+Add the inherited boolean `score` attribute to display the numerical grade. It is hidden by default; correction messages and explanations remain available.
 
 Use the same description-list sections as [tp-question](../question/index.md): Title, Prompt, Form, Feedback and Solution. In Form, provide two or more nonempty direct `ul`/`ol` lists with equal numbers of `li` items. The author must order all lists correctly: first with first, second with second, and so on. An explicitly authored `tp-matching` is also accepted in Form. To title the columns, use a `dl` inside it: each `dt` is a heading and its following `dd` contains a `ul` or `ol`. A bare titled `dl` is also accepted. Each complete group contains one item per column; incomplete groups cannot be submitted.
 
@@ -79,7 +81,7 @@ The question automatically wraps bare lists in [tp-matching](../matching/index.m
 
 Every list is independently shuffled on initialization and Reset by `tp-matching`. Randomization is always active; there is no `random` attribute. Reconnecting the same question preserves the current order and associations. A random shuffle can occasionally produce the same order.
 
-An answer is correct only when every complete group joins equal original ranks across all columns. Wrong answers show the score and general Feedback; fully correct answers show the score and congratulations without repeating remedial feedback. Supply Solution explicitly; it is not generated from item contents. This is a learning activity, not a secure examination mechanism: expected pairings remain available in the authored content or source file.
+An answer is correct only when every complete group joins equal original ranks across all columns. Wrong answers show general Feedback; fully correct answers show congratulations. The numerical grade is added only with `score` without repeating remedial feedback. Supply Solution explicitly; it is not generated from item contents. This is a learning activity, not a secure examination mechanism: expected pairings remain available in the authored content or source file.
 
 The inherited `src` attribute can load a reviewed JSON definition at initialization. Use two or more equally sized arrays for `form`; their corresponding entries define the correct groups. Optional `headers` contains one heading per list, in the same order. Optional `markup` accepts `markdown` (default), `md`, `html` or `none` and applies to strings. Only load trusted HTML. Recreate or reload the question to change its source definition.
 
@@ -98,7 +100,7 @@ The inherited `src` attribute can load a reviewed JSON definition at initializat
 
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
-: Associate the English expressions with their French translations, then submit to check the score. Try an incorrect response, correct it and compare the feedback; Reset clears and reshuffles the lists.
+: Associate the English expressions with their French translations, then submit to check the answer. Try an incorrect response, correct it and compare the feedback; Reset clears and reshuffles the lists.
 
 Attributes
 : Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
@@ -144,7 +146,9 @@ Attributes
   | <code>heading</code> | <code>boolean</code> | <code>false</code> | Passes heading to the matching widget; the first list supplies column titles. |
   | <code>mode</code> | <code>string</code> | <code>&quot;mixed&quot;</code> | Blank mode: opened, closed, or mixed local choices. *(inherited from <code>tp-question</code>)* |
   | <code>open</code> | <code>boolean</code> | <code>false</code> | Expands the question; absent by default, leaving only its title visible. *(inherited from <code>tp-question</code>)* |
+  | <code>score</code> | <code>boolean</code> | <code>false</code> | Displays the numerical score in submission feedback. *(inherited from <code>tp-question</code>)* |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition. *(inherited from <code>tp-question</code>)* |
+  | <code>timing</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional nonzero time limit in strict hh:mm:ss format. *(inherited from <code>tp-question</code>)* |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -174,6 +178,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_matching-question.TpMatchingQuestion.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

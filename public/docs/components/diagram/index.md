@@ -31,6 +31,12 @@ The custom `<tp-diagram>` element renders flowcharts, sequence diagrams, class d
 | Focused controls | Use each control’s standard keyboard interaction.  |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
+### Rendering engine
+
+Pele is the default renderer. Use `engine="mermaid"` to load Mermaid on demand, or `engine="pele"` to select Pele explicitly. Changing the attribute redraws the same source. Missing, empty or unsupported values use Pele and do not load Mermaid.
+
+Pele keeps Mermaid syntax but uses its own layout and CSS theme variables. Pele does not render arbitrary HTML labels or JavaScript callbacks; this component disables Pele links and images. Math labels require a typesetter and currently remain TeX source with Pele.
+
 ### Author directives
 
 ::: tp-tabs
@@ -60,7 +66,7 @@ Relative URLs are resolved from the containing documentation source, including d
 
 ## Examples
 
-The same examples are provided in every markup language and cover every diagram syntax exposed by the installed Mermaid version.
+The same examples are provided in every markup language and cover every diagram syntax exposed by the installed Mermaid version. Each specific diagram example displays the same source twice: Mermaid first with `engine="mermaid"`, then Pele with `engine="pele"`.
 
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
@@ -70,94 +76,91 @@ Attributes
 : Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
 
 Architecture diagram
-: Inspect the architecture diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the architecture diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Block diagram
-: Inspect the block diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the block diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 C4 diagram
-: Inspect the c4 diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the c4 diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Class diagram
-: Inspect the class diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the class diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Cynefin framework
-: Inspect the cynefin framework rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the cynefin framework rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Entity relationship diagram
-: Inspect the entity relationship diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the entity relationship diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Event modeling diagram
-: Inspect the event modeling diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the event modeling diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Flowchart
-: Inspect the flowchart rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the flowchart rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Gantt diagram
-: Inspect the gantt diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the gantt diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Git graph
-: Inspect the git graph rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the git graph rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Ishikawa diagram
-: Inspect the ishikawa diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the ishikawa diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Kanban diagram
-: Inspect the kanban diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the kanban diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Mind map
-: Inspect the mind map rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the mind map rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Packet diagram
-: Inspect the packet diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the packet diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Pie chart
-: Inspect the pie chart rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the pie chart rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Quadrant chart
-: Inspect the quadrant chart rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the quadrant chart rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Radar chart
-: Inspect the radar chart rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the radar chart rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Requirement diagram
-: Inspect the requirement diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the requirement diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Sankey diagram
-: Inspect the sankey diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the sankey diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Sequence diagram
-: Inspect the sequence diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the sequence diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 State diagram
-: Inspect the state diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the state diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Swimlanes diagram
-: Inspect the swimlanes diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the swimlanes diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Timeline
-: Inspect the timeline rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the timeline rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 TreeView diagram
-: Inspect the treeview diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the treeview diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Treemap
-: Inspect the treemap rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the treemap rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 User journey
-: Inspect the user journey rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the user journey rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Venn diagram
-: Inspect the venn diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the venn diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 Wardley map
-: Inspect the wardley map rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the wardley map rendered from the same source: Mermaid first, then Pele (engine="pele").
 
 XY chart
-: Inspect the xy chart rendered from its Mermaid source and compare the source with the resulting visual structure.
-
-ZenUML diagram
-: Inspect the zenuml diagram rendered from its Mermaid source and compare the source with the resulting visual structure.
+: Compare the xy chart rendered from the same source: Mermaid first, then Pele (engine="pele").
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
@@ -182,6 +185,7 @@ ZenUML diagram
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
+  | <code>engine</code> | <code>&quot;mermaid&quot; \| &quot;pele&quot;</code> | <code>&quot;pele&quot;</code> | Rendering engine; only the explicit mermaid value loads Mermaid. |
   | <code>label</code> | <code>string</code> | <code>&quot;Diagram&quot;</code> | Accessible name applied to the rendered SVG. |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Mermaid source file loaded relative to the containing document. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
@@ -199,7 +203,7 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-diagram-rendered</code> | <code>&#123; src: string &#125;</code> | Emitted after Mermaid has rendered the diagram. |
+  | <code>tp-diagram-rendered</code> | <code>&#123; src: string &#125;</code> | Emitted after the selected engine has rendered the diagram. |
   [Events emitted by `<tp-diagram>`]
 
 CSS properties
@@ -213,6 +217,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_diagram.TpDiagram.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

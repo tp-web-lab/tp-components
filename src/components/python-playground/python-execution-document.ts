@@ -1,54 +1,54 @@
+import { reportToolLoaded } from "@tp/tp-utilities";
 /**
  * @module components/python-playground/python-execution-document
  * @summary Python execution document builder.
  */
 
-import type { TpExecutionDocument } from '../playground/playground.js';
-import type { TpProject } from '../playground/project.js';
-
+import type { TpExecutionDocument } from "../playground/playground.js";
 import {
-  createCommonRuntimeScript,
-  createConsoleBridgeScript,
-  findProjectFile,
-  resolveEntryFile,
-} from '../playground/playground-build-utils.js';
-import { createPyodideRuntimeScript } from './python-runtime-script.js';
+	createCommonRuntimeScript,
+	createConsoleBridgeScript,
+	findProjectFile,
+	resolveEntryFile,
+} from "../playground/playground-build-utils.js";
+import type { TpProject } from "../playground/project.js";
+import { createPyodideRuntimeScript } from "./python-runtime-script.js";
 
 /** Options for building a Python execution document. */
 export interface BuildPythonExecutionDocumentOptions {
-  entry?: string;
-  libs?: string[];
-  scope?: string;
+	entry?: string;
+	libs?: string[];
+	scope?: string;
 }
 
 /** Builds the Python execution document. */
 export async function buildPythonExecutionDocument(
-  project: TpProject,
-  options: BuildPythonExecutionDocumentOptions = {},
+	project: TpProject,
+	options: BuildPythonExecutionDocumentOptions = {},
 ): Promise<TpExecutionDocument> {
-  const entryFile = resolveEntryFile(project, {
-    entry: options.entry,
-    priorityPaths: ['/main.py'],
-    extensions: ['.py'],
-    fallbackToFirstFile: false,
-  });
+	const entryFile = resolveEntryFile(project, {
+		entry: options.entry,
+		priorityPaths: ["/main.py"],
+		extensions: [".py"],
+		fallbackToFirstFile: false,
+	});
 
-  if (entryFile === undefined) {
-    throw new Error('No Python entry file found.');
-  }
+	if (entryFile === undefined) {
+		throw new Error("No Python entry file found.");
+	}
 
-  const htmlFile = findProjectFile(project, '/index.html');
-  const body = htmlFile?.content ?? '';
+	const htmlFile = findProjectFile(project, "/index.html");
+	const body = htmlFile?.content ?? "";
 
-  const filesJson = JSON.stringify(
-    Object.fromEntries(project.files.map((file) => [file.path, file.content])),
-  );
+	const filesJson = JSON.stringify(
+		Object.fromEntries(project.files.map((file) => [file.path, file.content])),
+	);
 
-  const entryPathJson = JSON.stringify(entryFile.path);
-  const libsJson = JSON.stringify(options.libs ?? []);
-  const scopeJson = JSON.stringify(options.scope ?? 'default');
+	const entryPathJson = JSON.stringify(entryFile.path);
+	const libsJson = JSON.stringify(options.libs ?? []);
+	const scopeJson = JSON.stringify(options.scope ?? "default");
 
-  const setupPython = `
+	const setupPython = `
 import sys
 
 if "tp_execution_namespaces" not in globals():
@@ -95,7 +95,7 @@ for module_name in project_modules:
     sys.modules.pop(module_name, None)
 `;
 
-  const runPython = `
+	const runPython = `
 from pathlib import Path
 
 entry = Path(tp_entry_path)
@@ -107,7 +107,7 @@ namespace["__file__"] = str(entry)
 exec(compile(entry.read_text(), str(entry), "exec"), namespace, namespace)
 `;
 
-  const setupMatplotlib = `
+	const setupMatplotlib = `
 from io import StringIO
 import matplotlib
 
@@ -133,8 +133,8 @@ def tp_show_matplotlib(*args, **kwargs):
 plt.show = tp_show_matplotlib
 `;
 
-  return {
-    html: `
+	return {
+		html: `
 <!doctype html>
 <html>
 <head></head>
@@ -256,6 +256,10 @@ plt.show = tp_show_matplotlib
             errorCallback: (message) => console.error(message),
           });
 
+          for (const name of Object.keys(pyodide.loadedPackages ?? {})) {
+ (${reportToolLoaded.toString()})("python-" + name, name);
+ }
+
           if (/(?:from|import)\\s+matplotlib(?:\\.|\\s|$)/m.test(source)) {
             pyodide.runPython(${JSON.stringify(setupMatplotlib)});
           }
@@ -272,5 +276,5 @@ plt.show = tp_show_matplotlib
 </body>
 </html>
 `,
-  };
+	};
 }

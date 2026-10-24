@@ -30,8 +30,8 @@ The component uses [Leaflet](https://leafletjs.com/) and [OpenStreetMap](https:/
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between toolbar buttons, the map, its marker and attribution links. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused toolbar button or the profile's Zoom and Close buttons. <kbd>Enter</kbd> opens a focused marker's popup. |
-| Arrow keys | Pan the focused map. |
-| + / - | Zoom the focused map in or out. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Pan the focused map. |
+| <kbd>+</kbd> / <kbd>-</kbd> | Zoom the focused map in or out. |
 | <kbd>Escape</kbd> | Close an open popup or the enlarged elevation profile. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
@@ -159,6 +159,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_map.TpMap.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

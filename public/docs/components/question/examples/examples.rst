@@ -40,7 +40,7 @@
                :orientation: horizontal
                :value:
 
-               - open
+               - score
 
             .. tp-radio-list::
                :data-setting: mode
@@ -54,6 +54,21 @@
                - opened
 
                - closed
+
+            .. tp-radio-list::
+               :data-setting: open
+               :label: open
+               :label-position: top
+               :orientation: horizontal
+               :value: 1
+
+               - Default (empty)
+
+               - both
+
+               - input
+
+               - output
 
             .. tp-radio-list::
                :data-setting: src
@@ -71,6 +86,13 @@
                - file-unknown
 
             .. tp-cluster::
+
+               .. tp-textfield::
+                  :data-setting: timing
+                  :label: timing
+                  :value:
+                  :placeholder:
+                  :clearable:
 
             .. tp-button-group::
 
@@ -109,3 +131,49 @@
          .. script::
             :type: module
             :src: /docs/components/question/examples/attributes.js
+
+      .. example:: Timed question
+
+         .. tp-question::
+            :timing: 00:00:10
+            :open:
+
+            Title
+               A timed reflection
+
+            Prompt
+               Name one reusable web component.
+
+            Form
+               .. tp-textfield::
+                  :clearable:
+                  :placeholder: Your answer
+
+            Solution
+               A button, a timer or an audio recorder.
+
+      .. example:: Optional score
+
+         .. tp-fill-blank-question::
+            :score:
+            :open:
+
+            Title
+               An optional numerical score
+
+            Answers
+               1. blue
+
+            Prompt
+               Type blue, then submit.
+
+            Form
+               .. tp-textfield::
+                  :clearable:
+                  :label: Color
+
+            Feedback
+               Use the word requested in the prompt.
+
+            Solution
+               blue

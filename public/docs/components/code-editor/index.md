@@ -60,8 +60,8 @@ Use F1 while the editor is focused to show or hide its toolbar. Mod means ⌘ on
 | <kbd>Mod</kbd>+<kbd>X</kbd> | Cuts the current selection. |
 | <kbd>Mod</kbd>+<kbd>V</kbd> | Pastes clipboard text at the current selection. |
 | <kbd>Mod</kbd>+<kbd>A</kbd> | Selects the whole editor content. |
-| `Mod Alt ↓` | Folds the current foldable code block. |
-| `Mod Alt ↑` | Unfolds the current folded code block. |
+| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>↓</kbd> | Folds the current foldable code block. |
+| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>↑</kbd> | Unfolds the current folded code block. |
 | <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>G</kbd> | Shows or hides the fold gutter. |
 | <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd> | Shows or hides line numbers. |
 | Focus in readonly mode | The code remains keyboard-focusable for reading, selection and scrolling. |
@@ -224,6 +224,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_code-editor.TpCodeEditor.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

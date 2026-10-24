@@ -24,7 +24,7 @@ The custom `<tp-compare>` element implements the <tp-icon name="compare" library
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the comparison handle. |
-| Arrow keys | Moves the separator by 1%, or by 10% while <kbd>Shift</kbd> is held. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Moves the separator by 1%, or by 10% while <kbd>Shift</kbd> is held. |
 | <kbd>Home</kbd> / <kbd>End</kbd> | Moves the separator to its minimum or maximum position. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
@@ -107,6 +107,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_compare.TpCompare.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

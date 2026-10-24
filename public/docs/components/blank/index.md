@@ -43,7 +43,7 @@ The custom `<tp-blank>` element implements the blank functionality: displays a t
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Tab</kbd> | Focus a target blank. |
-| <kbd>Right</kbd> Arrow | Move from the blank to the answer bank. |
+| <kbd>ArrowRight</kbd> | Move from the blank to the answer bank. |
 | <kbd>Up</kbd> / <kbd>Down</kbd> | Choose an answer. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Assign the chosen answer to the highlighted blank. |
 | <kbd>Escape</kbd> | Cancel. |
@@ -153,6 +153,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_blank_blank.TpBlank.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

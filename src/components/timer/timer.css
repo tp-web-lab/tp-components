@@ -53,3 +53,7 @@ tp-timer[data-elapsed] > [data-tp-timer-display] {
 tp-timer[data-stopped] > [data-tp-timer-display] {
   color: var(--tp-timer-muted);
 }
+
+/* Read-only countdowns can be embedded in a question summary. */
+tp-timer[no-controls] > [data-tp-timer-duration],
+tp-timer[no-controls] > tp-icon-button { display: none !important; }

@@ -1,0 +1,11 @@
+tp-mask { display: none !important; }
+tp-mask[active][data-tp-mask-visible] {
+ display: block !important;
+ box-sizing: border-box;
+ padding: var(--tp-space-md, 1rem);
+ color: var(--tp-text-color, CanvasText);
+ background: var(--tp-paper-color, Canvas);
+ border: 1px solid currentColor;
+ border-radius: var(--tp-border-radius, .25rem);
+ overflow-wrap: anywhere;
+}

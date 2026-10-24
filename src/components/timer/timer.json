@@ -20,6 +20,24 @@
       "default": "60"
     },
     {
+      "name": "manual",
+      "description": "Waits for start() instead of starting automatically.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "no-controls",
+      "description": "Hides duration editing and buttons; displays hh:mm:ss.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
       "name": "silent",
       "description": "Disables sound playback.",
       "reflected": true,
@@ -38,7 +56,18 @@
       "default": "\"1rem\""
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Stops and resets the timer."
+    },
+    {
+      "name": "start(): void",
+      "inherited": false,
+      "description": "Starts a new countdown from the beginning."
+    }
+  ],
   "events": [
     {
       "name": "tp-timer-elapsed",

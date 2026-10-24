@@ -9,7 +9,7 @@ async function flush(): Promise<void> {
 }
 
 describe("<tp-question>", () => {
-	it("starts collapsed and synchronizes the boolean open attribute and disclosure", async () => {
+	it("starts collapsed and synchronizes the open attribute and disclosure", async () => {
 		const question = new TpQuestion();
 		question.innerHTML = "<dl><dt>Title</dt><dd>Question</dd></dl>";
 		document.body.append(question);
@@ -18,7 +18,7 @@ describe("<tp-question>", () => {
 		if (!details) throw new Error("Missing question disclosure");
 		expect(details.open).toBe(false);
 		question.setAttribute("open", "false");
-		expect(details.open).toBe(true);
+		expect(details.open).toBe(false);
 		question.removeAttribute("open");
 		expect(details.open).toBe(false);
 		question.open = true;
@@ -29,6 +29,71 @@ describe("<tp-question>", () => {
 		details.open = true;
 		details.dispatchEvent(new Event("toggle"));
 		expect(question.hasAttribute("open")).toBe(true);
+	});
+
+	it.each([
+		[null, false, false, false],
+		["", true, true, true],
+		["both", true, true, true],
+		["input", true, true, false],
+		["output", true, false, true],
+		["false", false, false, false],
+		["true", false, false, false],
+		["invalid", false, false, false],
+	])("initializes open=%s", async (value, expanded, input, output) => {
+		const question = new TpQuestion();
+		if (value !== null) question.setAttribute("open", String(value));
+		document.body.append(question);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(question.querySelector("details")?.open).toBe(expanded);
+		for (const [name, visible] of [
+			["form", input],
+			["feedback", output],
+		] as const) {
+			const panel = question.querySelector<HTMLElement>(
+				`[data-tp-question-${name}-panel]`,
+			);
+			expect(Boolean(expanded && panel && !panel.hidden)).toBe(visible);
+		}
+		if (expanded) expect(question.open).toBe(value === "" ? "both" : value);
+	});
+
+	it("changes panel selection without clearing answers", () => {
+		const question = new TpQuestion();
+		question.innerHTML =
+			'<dl><dt>Form</dt><dd><input value="answer"></dd></dl>';
+		document.body.append(question);
+		for (const mode of ["input", "output", "both"] as const) {
+			question.open = mode;
+			expect(
+				question.querySelector<HTMLElement>("[data-tp-question-form-panel]")
+					?.hidden,
+			).toBe(mode === "output");
+			expect(
+				question.querySelector<HTMLElement>("[data-tp-question-feedback-panel]")
+					?.hidden,
+			).toBe(mode === "input");
+			expect(question.querySelector("input")?.value).toBe("answer");
+		}
+	});
+
+	it("retains output selection when the title is closed and reopened", async () => {
+		const question = new TpQuestion();
+		question.open = "output";
+		document.body.append(question);
+		const details = question.querySelector("details");
+		if (!details) throw new Error("Missing disclosure");
+		details.open = false;
+		details.dispatchEvent(new Event("toggle"));
+		expect(question.open).toBe(false);
+		details.open = true;
+		details.dispatchEvent(new Event("toggle"));
+		await flush();
+		expect(question.open).toBe("output");
+		expect(
+			question.querySelector<HTMLElement>("[data-tp-question-form-panel]")
+				?.hidden,
+		).toBe(true);
 	});
 
 	it("honors open when present before connection", async () => {
@@ -48,7 +113,8 @@ describe("<tp-question>", () => {
 		expect(panel?.querySelector("tp-callout")?.getAttribute("variant")).toBe(
 			"danger",
 		);
-		expect(panel?.textContent).toBe(
+		// The callout may also contain the decorative icon's fallback text.
+		expect(panel?.querySelector("tp-callout")?.textContent).toContain(
 			"No solution is available for this question.",
 		);
 		expect(
@@ -242,6 +308,39 @@ describe("<tp-question>", () => {
 		expect(resetButton?.getAttribute("name")).toBe("refresh");
 		expect(submitButton?.getAttribute("name")).toBe("play-arrow");
 		expect(message).not.toBeNull();
+	});
+
+	it("reveals output on every submission without hiding input or clearing answers", async () => {
+		const question = new TpQuestion();
+		question.open = "input";
+		question.innerHTML = '<dl><dt>Form</dt><dd><input value="A"></dd></dl>';
+		document.body.append(question);
+		const output = question.querySelector<HTMLElement>(
+			"[data-tp-question-feedback-panel]",
+		);
+		const input = question.querySelector<HTMLElement>(
+			"[data-tp-question-form-panel]",
+		);
+		const toggle = question.querySelector<HTMLElement>(
+			'[data-panel-toggle="output"]',
+		);
+		const submit = question.querySelector<HTMLElement>(
+			'[data-action="submit"]',
+		);
+		expect(output?.hidden).toBe(true);
+		for (let attempt = 0; attempt < 2; attempt++) {
+			submit?.click();
+			await flush();
+			expect(output?.hidden).toBe(false);
+			expect(input?.hidden).toBe(false);
+			expect(toggle?.getAttribute("aria-pressed")).toBe("true");
+			expect(
+				toggle?.querySelector("button")?.getAttribute("aria-pressed"),
+			).toBe("true");
+			expect(question.querySelector("input")?.value).toBe("A");
+			toggle?.click();
+			expect(output?.hidden).toBe(true);
+		}
 	});
 
 	it("renders submit feedback in feedback tab and activates feedback panel", async () => {

@@ -44,8 +44,8 @@ Set `src` to a CSV, JSON or XLSX URL to load initial data. Relative URLs resolve
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Left</kbd> / <kbd>Right</kbd> on a focused column resize handle | Decrease / increase column width by 8 pixels. Reach handles with <kbd>Tab</kbd>. |
-| <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>C</kbd> / <kbd>X</kbd> / V in a cell | Copy, cut or paste the active cell. Copying shifts relative formula references when pasted; cutting preserves them. |
-| <kbd>Shift</kbd> + Arrow keys | Extend or shrink the rectangular selection. |
+| <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>C</kbd> / <kbd>X</kbd> / <kbd>V</kbd> in a cell | Copy, cut or paste the active cell. Copying shifts relative formula references when pasted; cutting preserves them. |
+| <kbd>Shift</kbd> <kbd>+</kbd> <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Extend or shrink the rectangular selection. |
 | <kbd>Delete</kbd> / <kbd>Backspace</kbd> with multiple cells selected | Clear the selected cells in one undoable operation. With one cell selected, edit its text normally. |
 | <kbd>Escape</kbd> | Collapse the selection to the focused cell. |
 | Typing in a selected cell | Edit its value or enter a formula beginning with =. |
@@ -166,6 +166,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_spreadsheet-editor.TpSpreadsheetEditor.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

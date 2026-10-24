@@ -1,3 +1,4 @@
+import { reportToolLoaded } from "@tp/tp-utilities";
 /**
  * @module components/playground/playground-build-utils
  * @summary Shared utilities for building playground execution documents.
@@ -487,6 +488,7 @@ export function toJavaScriptPath(path: string): string {
 /** Transpiles TypeScript source to JavaScript. */
 export async function transpileTypescript(source: string): Promise<string> {
 	const { default: ts } = await import("typescript");
+	reportToolLoaded("typescript", "TypeScript", ts.version);
 	return ts.transpileModule(source, {
 		compilerOptions: {
 			target: ts.ScriptTarget.ES2022,

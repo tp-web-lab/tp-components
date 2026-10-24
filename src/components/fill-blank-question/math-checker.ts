@@ -4,6 +4,7 @@ import {
 	isFunction,
 	type MathJsonExpression,
 } from "@cortex-js/compute-engine";
+import { reportToolLoaded } from "@tp/tp-utilities";
 
 export type MathTransformation =
 	| "normalization"
@@ -19,6 +20,7 @@ export type MathChecker = (
 /** Each question owns its engine; this module is imported only for math grading. */
 export function createMathChecker(): MathChecker {
 	const ce = new ComputeEngine();
+	reportToolLoaded("compute-engine", "Compute Engine");
 	const functions = new Set<string>();
 	return (answer, expected, reportTransformation) => {
 		if (!answer.trim()) return false;

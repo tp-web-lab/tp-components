@@ -1,3 +1,4 @@
+import { reportToolLoaded } from "@tp/tp-utilities";
 /**
  * @module components/prose-editor
  * @summary ProseMirror-based rich text editor component.
@@ -2611,6 +2612,12 @@ export class TpProseEditor extends TpBase {
 				() => {
 					void Promise.resolve(currentWindow.MathJax?.startup?.promise).then(
 						() => {
+							reportToolLoaded(
+								"mathjax",
+								"MathJax",
+								String(currentWindow.MathJax?.version ?? "4"),
+								"SVG",
+							);
 							resolve();
 						},
 					);

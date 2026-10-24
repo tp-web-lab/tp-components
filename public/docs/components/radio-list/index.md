@@ -24,7 +24,7 @@ The custom `<tp-radio-list>` element implements the <tp-icon name="radio-list" l
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | <kbd>Enter</kbd> or leave the group. |
-| Arrow keys | Move and select among enabled radio options. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Move and select among enabled radio options. |
 | <kbd>Space</kbd> | Select the focused option. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
@@ -107,6 +107,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_radio-list.TpRadioList.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

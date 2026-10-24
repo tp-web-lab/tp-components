@@ -47,3 +47,16 @@ test("the code-editor help explains every palette command and distinguishes full
   assert.match(doc, /Copies the current selection/);
   assert.match(doc, /\| <kbd>F1<\/kbd> \| Opens or closes the toolbar/);
 });
+
+test("keyboard tables mark named keys and shortcut symbols with kbd", () => {
+  for (const name of pages) {
+    const source = readFileSync(resolve(root, `public/docs/components/${name}/index.md`), "utf8");
+    const keyboard = source.match(section)?.[1].split("#### Keyboard interactions")[1] ?? "";
+    const unmarked = keyboard.replace(/<kbd\b[^>]*>[\s\S]*?<\/kbd>/g, "");
+    for (const line of unmarked.split("\n").filter(line => line.startsWith("|"))) {
+      const cell = line.split("|")[1];
+      assert.doesNotMatch(cell, /\b(?:Ctrl|Shift|Alt|Cmd|Mod|Enter|Escape|Tab|Space|Home|End|Delete|Backspace|Arrow(?:Left|Right|Up|Down)|F(?:[1-9]|1[0-2]))\b/, `${name}: ${line}`);
+      assert.doesNotMatch(cell, /`(?:Mod|Ctrl|Alt|Shift)\b|[←↑→↓]/, `${name}: ${line}`);
+    }
+  }
+});

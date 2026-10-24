@@ -36,8 +36,8 @@ A post-it can only be repositioned inside the element selected as the editor's d
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Navigate editor controls and document targets during selection. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused button. <kbd>Enter</kbd> selects a focused document target. |
-| Arrow keys in the language dropdown | Navigate language choices; <kbd>Enter</kbd> selects one. |
-| Arrow keys on a pin or header | Move the note by 10 pixels, or 1 pixel with <kbd>Shift</kbd>. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in the language dropdown | Navigate language choices; <kbd>Enter</kbd> selects one. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on a pin or header | Move the note by 10 pixels, or 1 pixel with <kbd>Shift</kbd>. |
 | <kbd>Escape</kbd> | Cancel target selection while keeping the editor open, or close the language dropdown. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the hovered or focused component. |
 
@@ -130,6 +130,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_post-it-editor.TpPostItEditor.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 
