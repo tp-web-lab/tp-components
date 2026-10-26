@@ -6,4 +6,25 @@
   border-radius: 0.5rem;
 }
 
-.tp-text-to-speech-text { margin: 0; }
+.tp-text-to-speech-text { margin: 0; white-space: pre-line; }
+
+/* Keep long voice catalogues usable, including near the bottom of the viewport. */
+.tp-text-to-speech > tp-dropdown > ul {
+  max-block-size: min(20rem, calc(var(--tp-dropdown-available-height, 100dvh) - 2 * var(--tp-dropdown-padding, .25rem) - 2px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.tp-text-to-speech > tp-dropdown > ul > li[data-voice] {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.tp-text-to-speech > tp-dropdown > ul > li[data-voice] > tp-icon[name="check"] {
+  visibility: hidden;
+  flex-shrink: 0;
+}
+.tp-text-to-speech > tp-dropdown > ul > li[data-voice][aria-current="true"] > tp-icon[name="check"] {
+  visibility: visible;
+}

@@ -16,14 +16,14 @@ function source(extension: string): string {
 
 /** Checks the introduction, voice comparisons and linked speech example. */
 function checkExamples(allElements: Element[]): void {
-	expect(allElements).toHaveLength(5);
+	expect(allElements).toHaveLength(7);
 	const [intro, ...elements] = allElements;
 	expect(intro?.getAttribute("lang")).toBe("en-GB");
 	expect(intro?.hasAttribute("show-text")).toBe(true);
 	expect(intro?.querySelector('script[type="tp/txt"]')?.textContent).toContain(
 		"Welcome to tp-components. This example uses the browser speech synthesis service.",
 	);
-	expect(elements).toHaveLength(4);
+	expect(elements).toHaveLength(6);
 	expect(elements[0]?.id).toBe("voice-comparison");
 	expect(elements[0]?.getAttribute("lang")).toBe("en-US");
 	expect(elements[1]?.id).toBe("voice-comparison");
@@ -39,14 +39,21 @@ function checkExamples(allElements: Element[]): void {
 	expect(elements[3]?.getAttribute("for")).toBe("reading-article");
 	expect(elements[3]?.previousElementSibling?.tagName).toBe("ARTICLE");
 	expect(elements[3]?.previousElementSibling?.id).toBe("reading-article");
+	expect(elements[4]?.getAttribute("pause-between-lines")).toBe("800");
+	expect(elements[4]?.querySelector("script")?.textContent).toContain(
+		"[pause=1500]",
+	);
+	expect(elements[5]?.querySelector("script")?.textContent).toContain(
+		"[voice=Kate]",
+	);
 }
 
-it("keeps six equivalent HTML examples inside the viewer template", () => {
+it("keeps eight equivalent HTML examples inside the viewer template", () => {
 	const root = document.createElement("div");
 	root.innerHTML = source("html");
 	const template = root.querySelector("template");
 	expect(template?.content.querySelectorAll('[role="example"]')).toHaveLength(
-		6,
+		8,
 	);
 	checkExamples(
 		Array.from(template?.content.querySelectorAll("tp-text-to-speech") ?? []),
@@ -82,6 +89,8 @@ it.each(["md", "adoc"])(
 			"French voices",
 			"Synchronized speech",
 			"Read an element",
+			"Pauses",
+			"Dialogue",
 		]);
 		const output = document.createElement("div");
 		for (const example of examples)
@@ -91,7 +100,7 @@ it.each(["md", "adoc"])(
 	20_000,
 );
 
-it("preserves six named reStructuredText examples in its data script", () => {
+it("preserves eight named reStructuredText examples in its data script", () => {
 	const text = source("rst");
 	expect(text).toContain(":type: tp/restructuredtext");
 	const body = text.split(":type: tp/restructuredtext\n")[1] ?? "";
@@ -103,6 +112,8 @@ it("preserves six named reStructuredText examples in its data script", () => {
 		"French voices",
 		"Synchronized speech",
 		"Read an element",
+		"Pauses",
+		"Dialogue",
 	]);
 	const [intro, ...variants] = examples;
 	expect(intro?.source).toContain(":type: tp/txt");

@@ -54,6 +54,7 @@ export class TpSingleChoiceQuestion extends TpQuestion {
 
 	/** Reference to the correct <li> element, stored before any shuffle. */
 	private correctItemEl: HTMLLIElement | null = null;
+	private initializedInlineList: Element | null = null;
 	/** Maps each <li> element to its feedback text, keyed before any shuffle. */
 	private feedbackByItem: Map<HTMLLIElement, string> = new Map();
 	/** Internal answer value — NOT reflected back to the DOM attribute. */
@@ -181,6 +182,17 @@ export class TpSingleChoiceQuestion extends TpQuestion {
 	// ── Inline init ─────────────────────────────────────────────────────────────
 
 	private initInline(): void {
+		const list = this.findResponseWidget()?.querySelector(
+			":scope > ul, :scope > ol",
+		);
+		if (!list) return;
+		// Moving a question into an exercise reconnects it after its list was shuffled.
+		// Keep the original item identities and the already consumed feedback.
+		if (list === this.initializedInlineList) {
+			if (this.random) this.randomize();
+			return;
+		}
+		this.initializedInlineList = list;
 		const feedbackTexts = this.consumeFeedbackListItems();
 		this.storeCorrectItem();
 		this.buildFeedbackMap(feedbackTexts);
@@ -326,7 +338,6 @@ export class TpSingleChoiceQuestion extends TpQuestion {
 			title.textContent = "🎉 Well done, that’s the right answer!";
 			const button = this.createOpenSolutionButton();
 			container.append(title, button);
-			return container;
 		}
 
 		const radioList = this.findResponseWidget();

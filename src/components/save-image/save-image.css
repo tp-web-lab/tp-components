@@ -4,5 +4,8 @@ tp-save-image > tp-icon-button > button { border: 1px solid var(--tp-neutral-str
 tp-save-image > tp-icon-button > button:hover { background: var(--tp-neutral-fill-soft, #e5e7eb); }
 tp-save-image > tp-dropdown { min-inline-size: 7rem; }
 tp-save-image > tp-dropdown > ul { margin: 0; padding: .25rem; list-style: none; }
-tp-save-image [data-format] { padding: .4rem .65rem; border-radius: var(--tp-border-radius-sm, .25rem); cursor: pointer; }
+tp-save-image [data-format] { display: flex; align-items: center; gap: .5rem; padding: .4rem .65rem; border-radius: var(--tp-border-radius-sm, .25rem); cursor: pointer; }
 tp-save-image [data-format]:is(:hover, :focus-visible) { background: var(--tp-neutral-fill-softer, #f3f4f6); outline: none; }
+
+tp-save-image [data-format] > tp-icon[name="check"] { visibility: hidden; }
+tp-save-image [data-format][aria-current="true"] > tp-icon[name="check"] { visibility: visible; }

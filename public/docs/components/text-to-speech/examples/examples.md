@@ -34,6 +34,9 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ::: tp-textfield { data-setting="for" label="for" value placeholder clearable }
 :::
 
+::: tp-textfield { data-setting="pause-between-lines" label="pause-between-lines" value="0" placeholder="0" clearable }
+:::
+
 ::: tp-textfield { data-setting="pitch" label="pitch" value="1" placeholder="1" clearable }
 :::
 
@@ -113,6 +116,31 @@ You can pause the reading, resume it, or stop it whenever you want.
 
 ::: tp-text-to-speech { for="reading-article" lang="en" }
 :::
+```
+
+``` example {label="Pauses"}
+:::: tp-text-to-speech { lang="en-GB" show-text pause-between-lines="800" }
+::: script { type="tp/txt" }
+Look at the illustration. [pause=1500]
+A. A woman is placing [pause=300] a box on a table.
+B. Two people are boarding a train.
+C. A man is cleaning a window.
+D. Some chairs are being stacked.
+:::
+::::
+```
+
+``` example {label="Dialogue"}
+Voice names depend on your browser and system. This dialogue uses Daniel and Kate when available; otherwise it uses the component voice. Open Speech voice settings to see the available names for this language.
+
+:::: tp-text-to-speech { lang="en-GB" show-text pause-between-lines="400" }
+::: script { type="tp/txt" }
+[voice=Daniel] Hello! How are you?
+[voice=Kate] Very well, thank you. [pause=600]
+[voice=Daniel] Shall we begin?
+[voice=default] End of the dialogue.
+:::
+::::
 ```
 ::::::
 :::::::

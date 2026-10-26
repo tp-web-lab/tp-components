@@ -1,0 +1,15 @@
+tp-exercise { display: flow-root; margin-block: 1em; text-align: start; }
+tp-exercise > details { border: 1px solid var(--tp-brand-stroke-soft); border-radius: var(--tp-details-radius, .5rem); }
+tp-exercise > details > [data-tp-exercise-header] { cursor: pointer; font-weight: 600; padding-block: .5em; background: var(--tp-brand-fill-softer); color: var(--tp-brand-text-on-soft); }
+tp-exercise > details > [data-tp-exercise-header] > [data-tp-exercise-title] { margin: 0; display: inline-block; vertical-align: middle; }
+tp-exercise > details > [data-tp-exercise-header] > tp-icon { font-size: 1.25em; margin-inline: .35em; vertical-align: middle; }
+tp-exercise > details > [data-tp-exercise-layout] { padding: 1rem; min-inline-size: 0; }
+tp-exercise > details > [data-tp-exercise-layout] > dl { margin: 0; }
+tp-exercise > details > [data-tp-exercise-layout] > dl > dt { font-weight: bold; margin-block: .75rem .5rem; }
+tp-exercise > details > [data-tp-exercise-layout] > dl > dt:first-child { margin-block-start: 0; }
+tp-exercise > details > [data-tp-exercise-layout] > dl > dd { margin-inline: 0; }
+tp-exercise > details > [data-tp-exercise-layout] > dl > dd > ol { margin-block: 0; padding-inline-start: 1.75rem; }
+tp-exercise > details > [data-tp-exercise-layout] > dl > dd > ol > li + li { margin-block-start: 1rem; }
+tp-exercise > details > [data-tp-exercise-timing-mask] { padding: 1rem; }
+
+tp-exercise > details > summary > [data-tp-exercise-title] > * { margin-block: 0; }

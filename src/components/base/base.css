@@ -120,6 +120,16 @@ dd {
   min-inline-size: 0;
 }
 
+.tp-component-help > h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.tp-component-help > h2 > tp-icon {
+  flex: none;
+}
+
 .tp-component-help-preview {
   display: flow-root;
   contain: layout paint;
@@ -137,10 +147,11 @@ dd {
 
 /* details */
 details {
+	--tp-details-radius: 0.5rem;
 	/* Keep the box beside floated content, including a table of contents. */
 	display: flow-root;
 	border: 1px solid var(--tp-brand-fill-soft);
-	border-radius: 0.5em;
+	border-radius: var(--tp-details-radius);
 	padding-block-end: 0;
 	padding-inline: 0.75em;
 }
@@ -172,8 +183,16 @@ details[open] > summary {
 }
 
 details > summary {
+	/* Follow the frame without clipping focus outlines or popup content. */
+	border-start-start-radius: max(0px, calc(var(--tp-details-radius, 0.5rem) - 1px));
+	border-start-end-radius: max(0px, calc(var(--tp-details-radius, 0.5rem) - 1px));
 	padding-inline-start: 0.75em;
 	padding-inline-end: 2em;
+}
+
+details:not([open]) > summary {
+	border-end-start-radius: max(0px, calc(var(--tp-details-radius, 0.5rem) - 1px));
+	border-end-end-radius: max(0px, calc(var(--tp-details-radius, 0.5rem) - 1px));
 }
 
 details > summary > * {

@@ -27,7 +27,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | [Pickers](#pickers) | 5 | Visual selection of colors, emoji, formulas, icons, and symbols. |
 | [Playgrounds](#playgrounds) | 9 | Interactive execution environments for languages and markup formats. |
 | [Plots](#plots) | 6 | Geometric constructions, programmatic drawing and mathematical plotting. |
-| [Questions](#questions) | 16 | Quizzes and programming exercises using viewers or playgrounds. |
+| [Questions](#questions) | 17 | Quizzes and programming exercises using viewers or playgrounds. |
 | [References](#references) | 5 | Notes, bibliography, glossary, inline references and generated lists. |
 | [Simulators](#simulators) | 8 | Interactive automata, circuits, optics, and query simulations. |
 | [Slides](#slides) | 5 | Components in the Slides family. |
@@ -229,6 +229,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | Component | Description |
 | --- | --- |
 | <tp-icon name="asciidoc-viewer-question" library="components" size="1.25em"></tp-icon> [`<tp-asciidoc-viewer-question>`](asciidoc-viewer-question/index.md) | Checks rendered AsciiDoc using a viewer and external JavaScript DOM tests. |
+| <tp-icon name="exercise" library="components" size="1.25em"></tp-icon> [`<tp-exercise>`](exercise/index.md) | Shared context and ordered questions with an optional common timer. |
 | <tp-icon name="fill-blank-question" library="components" size="1.25em"></tp-icon> [`<tp-fill-blank-question>`](fill-blank-question/index.md) | Fill-in-the-blank open-ended or closed-ended question. |
 | <tp-icon name="html-viewer-question" library="components" size="1.25em"></tp-icon> [`<tp-html-viewer-question>`](html-viewer-question/index.md) | Checks rendered HTML using a viewer and external JavaScript DOM tests. |
 | <tp-icon name="javascript-playground-question" library="components" size="1.25em"></tp-icon> [`<tp-javascript-playground-question>`](javascript-playground-question/index.md) | JavaScript project using its playground and external tests. |
@@ -304,6 +305,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="list-table" library="components" size="1.25em"></tp-icon> [`<tp-list-table>`](list-table/index.md) | Creates an HTML table from ordered or unordered lists while preserving cell content. |
 | <tp-icon name="lorem-ipsum" library="components" size="1.25em"></tp-icon> [`<tp-lorem-ipsum>`](lorem-ipsum/index.md) | Generates placeholder sentences, titles, paragraphs or lists. |
 | <tp-icon name="math" library="components" size="1.25em"></tp-icon> [`<tp-math>`](math/index.md) | Renders LaTeX or AsciiMath expressions as inline or display-style SVG with [MathJax](https://www.mathjax.org). |
+| <tp-icon name="save-audio" library="components" size="1.25em"></tp-icon> [`<tp-save-audio>`](save-audio/index.md) | Saves audio as MP3, OGG or WAV through an associated component. |
 | <tp-icon name="save-image" library="components" size="1.25em"></tp-icon> [`<tp-save-image>`](save-image/index.md) | Downloads an anchored image as SVG, PNG, or WebP. |
 | <tp-icon name="skeleton" library="components" size="1.25em"></tp-icon> [`<tp-skeleton>`](skeleton/index.md) | Renders selected HTML elements as fixed shaded skeleton patterns without executing the source. |
 | <tp-icon name="source" library="components" size="1.25em"></tp-icon> [`<tp-source>`](source/index.md) | Source repository link button. |

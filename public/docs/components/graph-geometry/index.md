@@ -30,7 +30,7 @@ Help lists only this component’s own commands. Functional subcomponents expose
 
 The user-help button legend groups commands by their location in the component and describes their effect briefly. Detailed gestures and keyboard behavior remain in the interaction tables below.
 
-Use `label="My figure"` to title the drawing. With `canvas-only`, the action palette, Save image, local Theme and Zoom drawing controls remain at the top right; Undo, Redo, Zoom out, Zoom in, Fit and Grid stay at the bottom right. The object list and main tool strip are hidden. The `</>` button at the bottom left switches between the drawing and Construction source, including its file menu, F1, Reset and Play controls. Switching preserves the figure and unapplied editor text, including in the zoomed window. Choosing a construction tool reveals its help and parameters within the drawing panel. `readonly` still prevents construction changes.
+Use `label="My figure"` to title the drawing. With `canvas-only`, the action palette, Save image, local Theme and Zoom drawing controls remain at the top right; Undo, Redo, Zoom out, Zoom in, Fit and Grid stay at the bottom right. The object list is initially hidden and can be shown with Construction objects, immediately after Grid. The main tool strip stays hidden. The `</>` button at the bottom left shows Construction source below the drawing in normal mode. In canvas-only mode, it switches between the drawing and Construction source, including its file menu, F1, Reset and Play controls. Switching preserves the figure and unapplied editor text, including in the zoomed window. Choosing a construction tool reveals its help and parameters within the drawing panel. `readonly` still prevents construction changes.
 
 #### Mouse interactions
 
@@ -43,6 +43,7 @@ Use `label="My figure"` to title the drawing. With `canvas-only`, the action pal
 | Move | Drag a measurement label to place it independently while keeping it attached to its supports. Drag a free point freely or slide an attached point along its support. Drag empty space to pan the whole drawing. Intersection and midpoint constructions are calculated and cannot be dragged. |
 | Pan view | Drag anywhere, including over a point, to move the entire view without changing the construction. Middle-button dragging also pans in any tool. |
 | Scroll / Shift + scroll | Scroll vertically or horizontally with the mouse wheel or trackpad. Shift + vertical scrolling pans horizontally. Scrolling outside the drawing still scrolls the page. |
+| Construction objects | Show or hide the object panel using the button immediately after Grid. In canvas-only mode, this panel replaces the drawing, just like the source view. Click again to return to the drawing. The control is available in readonly mode. |
 | Grid | Toggle a light grid that follows panning and zooming, with no axes, origin marker or graduations. The grid starts hidden and does not snap points. |
 | Point | Click the drawing to create a free point. |
 | Point on object | Click a line, segment, ray, vector, circle or arc to create a sliding point. |
@@ -81,7 +82,7 @@ Use `label="My figure"` to title the drawing. With `canvas-only`, the action pal
 | Construction source > Load | Choose a local `.txt` construction file. A valid construction replaces the drawing and can be undone; invalid files leave it unchanged. Disabled in readonly mode. |
 | Construction source > Save | Save the current editor text, including edits not yet applied. The first save asks for a destination; later saves reuse it where supported, or download the file again. |
 | Construction source > Save as | Choose a new destination or download filename. Cancelling preserves the previous destination. |
-| `</>` in canvas-only mode | Replace the drawing with Construction source, or return to the drawing without applying draft edits. Play applies the source before returning to the drawing with `</>`. |
+| `</>` | Show or hide the source editor directly below the drawing. In canvas-only mode, the editor replaces the drawing; click again to return without applying draft edits. Play applies the edited source. |
 | Construction source > F1 / Reset | Show or hide the editor toolbar / restore the source of the displayed construction without changing the figure. |
 | Construction source > Play | Edit and apply the construction commands. Invalid commands leave the previous figure unchanged. |
 | Double-click an object in Move or Pan view | Open an Object name field at the clicked position. |
@@ -102,7 +103,7 @@ Tool shortcuts apply while focus is inside the figure and never intercept typing
 | <kbd>F2</kbd> on the drawing | Open the inline name field for the selected object. |
 | <kbd>Enter</kbd> / <kbd>Escape</kbd> in the inline name field | Rename the object / cancel editing. Leaving the field also cancels. Invalid or duplicate names keep the field open with an error. |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between tools, parameters, object buttons, drawing and source controls. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused button or expand/collapse the Construction source accordion. Selecting an object in Move mode focuses the drawing. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused button. Selecting an object in Move mode focuses the drawing. |
 | <kbd>F1</kbd> | Inside Construction source, show or hide the editor toolbar. Elsewhere, open or close the action palette. Use <kbd>Up</kbd>/<kbd>Down</kbd>, <kbd>Home</kbd>/<kbd>End</kbd> to navigate and <kbd>Enter</kbd>/<kbd>Space</kbd> to choose a tool. |
 | <kbd>Z</kbd> / <kbd>Escape</kbd> in the zoomed window | Enlarge or restore the drawing with Z; <kbd>Escape</kbd> closes the window. |
 | <kbd>Delete</kbd> | Remove the selected object and its dependent constructions as one undoable action (except in readonly mode). |

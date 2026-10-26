@@ -94,6 +94,7 @@ export {
 	type TpEmojiPickerItem,
 	type TpEmojiPickerMetadata,
 } from "./components/emoji-picker/emoji-picker.js";
+export { TpExercise } from "./components/exercise/exercise.js";
 export { TpFileTree } from "./components/file-tree/file-tree.js";
 export { TpFilesystem } from "./components/filesystem/filesystem.js";
 export { TpFillBlank } from "./components/fill-blank/fill-blank.js";
@@ -495,6 +496,11 @@ export { TpLogigram } from "./components/logigram/logigram.js";
 export { TpMask } from "./components/mask/mask.js";
 export { TpNote } from "./components/note/note.js";
 export { TpRef } from "./components/ref/ref.js";
+export {
+	type AudioSaveTarget,
+	TpSaveAudio,
+	type TpSaveAudioFormat,
+} from "./components/save-audio/save-audio.js";
 export {
 	type TpSlopeProfile,
 	type TpSlopeProfiles,

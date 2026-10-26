@@ -1,0 +1,122 @@
+{
+  "tagname": "tp-save-audio",
+  "classname": "TpSaveAudio",
+  "superclass": "TpBase",
+  "description": "Saves audio from an associated component in several formats.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<p>Audio saving is reserved for a future integration. No audio provider is currently connected.</p>\n<tp-save-audio disabled></tp-save-audio>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "anchor",
+      "description": "CSS selector of a component implementing saveAudio(format, filename).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "disabled",
+      "description": "Disables the trigger.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "filename",
+      "description": "Download filename without its extension.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"audio\""
+    },
+    {
+      "name": "format",
+      "description": "Initially selected audio format.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"mp3\" | \"ogg\" | \"wav\"",
+      "default": "\"mp3\""
+    },
+    {
+      "name": "name",
+      "description": "Icon used by the trigger.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"file-download\""
+    },
+    {
+      "name": "size",
+      "description": "Icon button size.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"m\""
+    },
+    {
+      "name": "variant",
+      "description": "Icon button variant.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"neutral\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "save(format: TpSaveAudioFormat = this.format): Promise<void>",
+      "inherited": false,
+      "description": "Save."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-save-audio-error",
+      "description": "Emitted when the target cannot be exported.",
+      "detail": "{ format: \"mp3\" | \"ogg\" | \"wav\"; error: unknown; anchor: string }"
+    },
+    {
+      "name": "tp-save-audio-save",
+      "description": "Emitted after an audio file has been saved.",
+      "detail": "{ format: \"mp3\" | \"ogg\" | \"wav\"; filename: string; anchor: string; target: Element }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Dropdown menu component."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Save audio",
+    "introduction": "The custom `<tp-save-audio>` element provides an audio download menu with MP3, OGG and WAV formats.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Save audio | Open or close the format menu. |\n| MP3 / OGG / WAV | Choose a filename and save in that format. A check marks the current format. |\n| Outside the menu | Close the menu. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused control or format. |\n| <kbd>Escape</kbd> | Close the menu. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to focus. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "keyboard": []
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "tagname": "tp-exercise",
+  "classname": "TpExercise",
+  "superclass": "TpBase",
+  "description": "Groups a shared context and an ordered list of independent questions.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-exercise open>\n  <dl>\n    <dt>Title</dt><dd>A day at the museum</dd>\n    <dt>Context</dt><dd>The museum opens at 9 a.m. Admission costs 8 euros.</dd>\n    <dt>Questions</dt><dd><ol class=\"questions\">\n      <li><tp-question open=\"input\"><dl>\n        <dt>Title</dt><dd>Opening time</dd>\n        <dt>Prompt</dt><dd>When does the museum open?</dd>\n        <dt>Form</dt><dd><tp-textfield label=\"Your answer\"></tp-textfield></dd>\n        <dt>Feedback</dt><dd>Compare your answer with the opening time in the context.</dd>\n        <dt>Solution</dt><dd>At 9 a.m.</dd>\n      </dl></tp-question></li>\n      <li><tp-question open=\"input\"><dl>\n        <dt>Title</dt><dd>Admission</dd>\n        <dt>Prompt</dt><dd>How much do two tickets cost?</dd>\n        <dt>Form</dt><dd><tp-textfield label=\"Your answer\"></tp-textfield></dd>\n        <dt>Feedback</dt><dd>Multiply the price of one ticket by two.</dd>\n        <dt>Solution</dt><dd>16 euros.</dd>\n      </dl></tp-question></li>\n    </ol></dd>\n  </dl>\n</tp-exercise>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "open",
+      "description": "Initially expand the exercise.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "timing",
+      "description": "Optional nonzero time limit in strict hh:mm:ss format.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component."
+    },
+    {
+      "name": "tp-question",
+      "summary": "Independent question container."
+    },
+    {
+      "name": "tp-timer",
+      "summary": "Countdown timer."
+    },
+    {
+      "name": "tp-mask",
+      "summary": "Masks content without discarding it."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Exercise",
+    "introduction": "The custom `<tp-exercise>` element groups a shared context and an ordered list of questions, with an optional countdown for the whole activity.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Exercise title | Expand or collapse the context and questions. |\n| Start | Reveal the context and questions and begin the shared countdown. |\n| Continue | Reveal the context and questions after expiry, preserving answers. |\n\nQuestion controls belong to each question and have their own User help.\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Expand or collapse the focused summary, or activate the focused Start or Continue button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type ?. |",
+    "keyboard": []
+  }
+}

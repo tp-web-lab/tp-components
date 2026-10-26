@@ -42,7 +42,7 @@ JSON uses this component's question schema. Other formats use the same definitio
 
 Add the inherited boolean `score` attribute to display the numerical grade. It is hidden by default; correction messages and explanations remain available.
 
-The `answer` attribute is the one-based index of the correct item in the original list. Add `random` to shuffle choices.
+The `answer` attribute is the one-based index of the correct item in the original list. Add `random` to shuffle choices. Each choice keeps its original answer and feedback association after shuffling, resetting or moving the question into an exercise. The selected choice’s authored feedback is shown for both correct and incorrect answers.
 
 ```html
 <tp-single-choice-question answer="1">

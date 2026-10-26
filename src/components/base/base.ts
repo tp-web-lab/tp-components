@@ -731,12 +731,19 @@ export class TpBase extends HTMLElement {
 		const content = document.createElement("section");
 		content.className = "tp-component-help";
 		const componentTitle = document.createElement("h2");
-		componentTitle.textContent =
+		const componentIcon = document.createElement("tp-icon");
+		componentIcon.setAttribute("name", api.tagname.replace(/^tp-/, ""));
+		componentIcon.setAttribute("library", "components");
+		componentIcon.setAttribute("aria-hidden", "true");
+		componentIcon.setAttribute("size", "1.25em");
+		const componentName = document.createElement("span");
+		componentName.textContent =
 			api.userHelp?.displayName?.trim() ||
 			api.tagname
 				.replace(/^tp-/, "")
 				.replaceAll("-", " ")
 				.replace(/^./, (letter) => letter.toUpperCase());
+		componentTitle.append(componentIcon, componentName);
 		content.append(componentTitle);
 		const current = document.createElement("section");
 		current.className = "tp-component-help-current";
@@ -829,7 +836,7 @@ export class TpBase extends HTMLElement {
 			source.type = "tp/markdown";
 			source.textContent = api.userHelp.introduction;
 			introduction.append(source);
-			current.append(introduction);
+			content.append(introduction);
 		}
 		current.append(preview);
 		const interactions = document.createElement("section");

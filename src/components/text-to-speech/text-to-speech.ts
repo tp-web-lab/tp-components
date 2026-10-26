@@ -14,7 +14,11 @@
  */
 /**
  * @tp-dependency tp-dropdown
- * @summary Displays an anchored dropdown menu.
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
  */
 /**
  * @tp-dependency tp-icon-button
@@ -34,8 +38,15 @@ import "../button-group/button-group.js";
 import type { TpDropdown } from "../dropdown/dropdown.js";
 import "../dropdown/dropdown.js";
 import "../icon-button/icon-button.js";
+import "../icon/icon.js";
 import type { TpTypewriting } from "../typewriting/typewriting.js";
 import "../typewriting/typewriting.js";
+import {
+	pauseMilliseconds,
+	speechSequence,
+	spokenSpeechText,
+	visibleSpeechText,
+} from "./speech-sequence.js";
 import style from "./text-to-speech.css?inline";
 
 type SpeechState = "idle" | "speaking" | "paused";
@@ -54,6 +65,7 @@ type SpeechGlobals = {
  * @attr {boolean} lite = false - Replaces playback controls with a single speak/stop icon button.
  * @attr {string} voice = "" - Preferred installed voice name or language tag.
  * @attr {number} rate = 1 - Speech rate from 0.1 to 10.
+ * @attr {number} pause-between-lines = 0 - Silence in milliseconds between nonempty lines; an explicit [pause=...] overrides it at a line boundary.
  * @attr {number} pitch = 1 - Speech pitch from 0 to 2.
  * @attr {number} volume = 1 - Speech volume from 0 to 1.
  * @attr {boolean} autoplay = false - Starts reading after the source is loaded when browser policy permits it.
@@ -67,8 +79,10 @@ type SpeechGlobals = {
  * @accessibilityresponsibility Do not use synthesized speech as the only way to provide information; retain equivalent visible text.
  * @keyboard {Enter / Space} Activates the native button inside each tp-button control.
  * @example
- * <tp-text-to-speech lang="en" show-text>
- *   <script type="tp/txt">Welcome to tp-components.</script>
+ * <tp-text-to-speech lang="en-GB" show-text>
+ *   <script type="tp/txt">
+ *     Welcome to tp-components. This example uses the browser speech synthesis service.
+ *   </script>
  * </tp-text-to-speech>
  */
 export class TpTextToSpeech extends TpBase {
@@ -97,6 +111,7 @@ export class TpTextToSpeech extends TpBase {
 			"pitch",
 			"volume",
 			"autoplay",
+			"pause-between-lines",
 		];
 	}
 
@@ -110,6 +125,19 @@ export class TpTextToSpeech extends TpBase {
 	private text = "";
 	/** Strong reference retained while the browser is speaking. */
 	private utterance: SpeechSynthesisUtterance | null = null;
+	private playbackId = 0;
+	private playbackActive = false;
+	private advancePlayback: (() => void) | null = null;
+	private pauseTimer: ReturnType<typeof setTimeout> | null = null;
+	private pauseRemaining = 0;
+	private pauseStarted = 0;
+	/** Silence between nonempty lines, in milliseconds. */
+	public get pauseBetweenLines(): number {
+		return pauseMilliseconds(this.getAttribute("pause-between-lines") ?? "0");
+	}
+	public set pauseBetweenLines(value: number) {
+		this.setAttribute("pause-between-lines", String(value));
+	}
 	/** Sequence used to discard stale asynchronous loads. */
 	private updateToken = 0;
 	/** Linked visual text, controlled only while this component owns it. */
@@ -273,7 +301,9 @@ export class TpTextToSpeech extends TpBase {
 		if (!this.isConnected) return;
 		if (name === "src" || name === "value" || name === "for")
 			void this.updateText();
+
 		if (name === "show-text") this.render();
+		if (name === "pause-between-lines") this.stop();
 		if (name === "lite") {
 			this.stop();
 			this.render();
@@ -313,70 +343,140 @@ export class TpTextToSpeech extends TpBase {
 		if (synthesis === undefined || Utterance === undefined || this.text === "")
 			return;
 		this.stop();
-		const utterance = new Utterance(this.text);
-		this.utterance = utterance;
-		const language = this.closest("[lang]")?.getAttribute("lang")?.trim();
-		if (language) utterance.lang = language;
-		utterance.rate = this.rate;
-		utterance.pitch = this.pitch;
-		utterance.volume = this.volume;
-		if (this.voice.trim() !== "") {
-			const voice = await this.selectVoice(synthesis);
-			if (voice !== null) utterance.voice = voice;
-		}
-		if (this.utterance !== utterance) return;
-		this.linkedTypewriting?.beginSpeech(this);
-		utterance.addEventListener("start", () => {
-			if (this.utterance !== utterance) return;
-			this.setState("speaking");
-			this.emit("tp-text-to-speech-start", { text: this.text });
-		});
-		utterance.addEventListener("boundary", (event) => {
-			if (
-				this.utterance !== utterance ||
-				this.dataset.state === "paused" ||
-				event.name === "sentence"
-			)
-				return;
-			this.linkedTypewriting?.revealSpeech(this, event.charIndex);
-		});
-		utterance.addEventListener("end", () => {
-			if (this.utterance !== utterance) return;
-			if (this.utterance === utterance) this.utterance = null;
-			this.linkedTypewriting?.endSpeech(this);
-			this.setState("idle");
-			this.emit("tp-text-to-speech-end", { text: this.text });
-		});
-		utterance.addEventListener("error", (event) => {
-			if (this.utterance !== utterance) return;
-			if (this.utterance === utterance) this.utterance = null;
-			this.linkedTypewriting?.endSpeech(this);
-			this.setState("idle");
-			this.reportError(event.error || "Speech synthesis failed.");
-		});
-		this.utterance = utterance;
+		const steps = speechSequence(this.text, this.pauseBetweenLines);
+		if (!steps.some((step) => "text" in step)) return;
+		const id = this.playbackId;
+		this.playbackActive = true;
 		this.setState("speaking");
-		synthesis.speak(utterance);
+		const voices =
+			this.voice.trim() ||
+			steps.some((step) => "text" in step && step.voice !== undefined)
+				? await this.loadVoices(synthesis)
+				: [];
+		const requested = this.voice.trim().toLowerCase();
+		const voice =
+			voices.find((candidate) => candidate.name.toLowerCase() === requested) ??
+			voices.find((candidate) => candidate.lang.toLowerCase() === requested) ??
+			null;
+		if (id !== this.playbackId) return;
+		this.linkedTypewriting?.beginSpeech(this);
+		let index = 0;
+		let started = false;
+		const finish = () => {
+			this.playbackActive = false;
+			this.advancePlayback = null;
+			this.linkedTypewriting?.endSpeech(this);
+			this.setState("idle");
+			this.emit("tp-text-to-speech-end", {
+				text: spokenSpeechText(this.text),
+			});
+		};
+		this.advancePlayback = () => {
+			if (id !== this.playbackId || this.dataset.state === "paused") return;
+			while (index < steps.length) {
+				const step = steps[index++];
+				if (!step) break;
+				if ("pause" in step) {
+					if (!step.pause) continue;
+					this.pauseRemaining = step.pause;
+					this.schedulePause();
+					return;
+				}
+				const utterance = new Utterance(step.text);
+				this.utterance = utterance;
+				const language = this.closest("[lang]")?.getAttribute("lang")?.trim();
+				if (language) utterance.lang = language;
+				utterance.rate = this.rate;
+				utterance.pitch = this.pitch;
+				utterance.volume = this.volume;
+				const namedVoice =
+					step.voice && step.voice.toLowerCase() !== "default"
+						? voices.find(
+								(candidate) =>
+									candidate.name.toLowerCase() === step.voice?.toLowerCase(),
+							)
+						: undefined;
+				const selectedVoice = namedVoice ?? voice;
+				if (selectedVoice) utterance.voice = selectedVoice;
+				if (namedVoice) utterance.lang = namedVoice.lang;
+				utterance.addEventListener("start", () => {
+					if (this.utterance !== utterance || started) return;
+					started = true;
+					this.emit("tp-text-to-speech-start", {
+						text: spokenSpeechText(this.text),
+					});
+				});
+				utterance.addEventListener("boundary", (event) => {
+					if (
+						this.utterance !== utterance ||
+						this.dataset.state === "paused" ||
+						event.name === "sentence"
+					)
+						return;
+					this.linkedTypewriting?.revealSpeech(
+						this,
+						step.offset + event.charIndex,
+					);
+				});
+				utterance.addEventListener("end", () => {
+					if (this.utterance !== utterance) return;
+					this.utterance = null;
+					this.advancePlayback?.();
+				});
+				utterance.addEventListener("error", (event) => {
+					if (this.utterance !== utterance) return;
+					this.stop();
+					this.reportError(event.error || "Speech synthesis failed.");
+				});
+				synthesis.speak(utterance);
+				return;
+			}
+			finish();
+		};
+		this.advancePlayback();
 	}
 
-	/** Pauses the current reading. */
+	/** Waits between utterances; user Pause freezes the remaining silence. */
+	private schedulePause(): void {
+		this.pauseStarted = Date.now();
+		this.pauseTimer = setTimeout(() => {
+			this.pauseTimer = null;
+			this.pauseRemaining = 0;
+			this.advancePlayback?.();
+		}, this.pauseRemaining);
+	}
+
+	/** Pauses speech or a scheduled silence. */
 	public pause(): void {
-		const synthesis = this.getSpeechGlobals().speechSynthesis;
-		if (synthesis?.speaking !== true) return;
-		synthesis.pause();
+		if (!this.playbackActive || this.dataset.state === "paused") return;
+		if (this.pauseTimer !== null) {
+			clearTimeout(this.pauseTimer);
+			this.pauseTimer = null;
+			this.pauseRemaining = Math.max(
+				0,
+				this.pauseRemaining - (Date.now() - this.pauseStarted),
+			);
+		} else if (this.utterance) this.getSpeechGlobals().speechSynthesis?.pause();
 		this.setState("paused");
 	}
 
-	/** Resumes a paused reading. */
+	/** Resumes speech or the remainder of a scheduled silence. */
 	public resume(): void {
-		const synthesis = this.getSpeechGlobals().speechSynthesis;
-		if (synthesis?.paused !== true) return;
-		synthesis.resume();
+		if (!this.playbackActive || this.dataset.state !== "paused") return;
 		this.setState("speaking");
+		if (this.utterance) this.getSpeechGlobals().speechSynthesis?.resume();
+		else if (this.pauseRemaining > 0) this.schedulePause();
+		else this.advancePlayback?.();
 	}
 
-	/** Stops the current reading. */
+	/** Cancels speech, queued segments and scheduled silence. */
 	public stop(): void {
+		this.playbackId++;
+		this.playbackActive = false;
+		this.advancePlayback = null;
+		if (this.pauseTimer !== null) clearTimeout(this.pauseTimer);
+		this.pauseTimer = null;
+		this.pauseRemaining = 0;
 		this.utterance = null;
 		this.getSpeechGlobals().speechSynthesis?.cancel();
 		this.linkedTypewriting?.endSpeech(this);
@@ -392,7 +492,7 @@ export class TpTextToSpeech extends TpBase {
 
 	/** Refreshes component state after resolving its current text. */
 	private async updateText(): Promise<void> {
-		if (this.utterance) this.stop();
+		if (this.playbackActive) this.stop();
 		const token = ++this.updateToken;
 		try {
 			const text = await this.getText();
@@ -433,23 +533,27 @@ export class TpTextToSpeech extends TpBase {
         <tp-button size="s" data-action="stop">Stop</tp-button>
         <span data-tp-speech-ui class="tp-text-to-speech-status tp-speech-status" data-role="status" role="status" aria-live="polite"></span>
       </tp-button-group>
-      <tp-dropdown data-tp-speech-ui id="${this.settingsId}-menu" anchor="#${this.settingsId}" outside-click><ul aria-label="Speech voice"></ul></tp-dropdown>`
+      <tp-dropdown data-tp-speech-ui id="${this.settingsId}-menu" anchor="#${this.settingsId}" outside-click><ul aria-label="Speech voice"></ul></tp-dropdown>
+`
 			}`;
 		const textElement = this.querySelector('[data-role="text"]');
-		if (textElement !== null) textElement.textContent = this.text;
+		if (textElement !== null)
+			textElement.textContent = visibleSpeechText(this.text);
 		const liteButton = this.querySelector<HTMLElement>(
 			'[data-action="toggle-speech"]',
 		);
 		liteButton?.toggleAttribute("disabled", !supported || this.text === "");
 		liteButton?.addEventListener("click", () => {
 			if (!supported || this.text === "") return;
-			if (this.utterance) this.stop();
+			if (this.playbackActive) this.stop();
 			else void this.speak();
 		});
 		const trigger = this.querySelector(
 			`tp-icon-button[id="${this.settingsId}"]`,
 		);
-		const dropdown = this.querySelector<TpDropdown>("tp-dropdown");
+		const dropdown = this.querySelector<TpDropdown>(
+			`:scope > tp-dropdown[id="${this.settingsId}-menu"]`,
+		);
 		trigger?.toggleAttribute("disabled", !supported);
 		trigger?.addEventListener("click", () => {
 			if (supported) dropdown?.toggle();
@@ -469,7 +573,7 @@ export class TpTextToSpeech extends TpBase {
 			);
 		}
 		this.setState(
-			this.utterance
+			this.playbackActive
 				? this.dataset.state === "paused"
 					? "paused"
 					: "speaking"
@@ -482,7 +586,9 @@ export class TpTextToSpeech extends TpBase {
 
 	/** Lists voices in the lang family without changing the author's language. */
 	private refreshVoiceMenu(): void {
-		const menu = this.querySelector("tp-dropdown > ul");
+		const menu = this.querySelector(
+			`:scope > tp-dropdown[id="${this.settingsId}-menu"] > ul`,
+		);
 		if (!menu) return;
 		const language =
 			this.closest("[lang]")?.getAttribute("lang")?.trim() ||
@@ -505,14 +611,21 @@ export class TpTextToSpeech extends TpBase {
 		];
 		const items = options.map((option) => {
 			const item = this.ownerDocument.createElement("li");
-			item.textContent = option.label;
+			const check = this.ownerDocument.createElement("tp-icon");
+			check.setAttribute("name", "check");
+			check.setAttribute("aria-hidden", "true");
+			const label = this.ownerDocument.createElement("span");
+			label.textContent = option.label;
+			item.append(check, label);
 			item.dataset.voice = option.name;
 			if (option.name.toLowerCase() === this.voice.trim().toLowerCase())
 				item.setAttribute("aria-current", "true");
 			item.addEventListener("click", () => {
 				this.stop();
 				this.voice = option.name;
-				this.querySelector<TpDropdown>("tp-dropdown")?.hide();
+				this.querySelector<TpDropdown>(
+					`:scope > tp-dropdown[id="${this.settingsId}-menu"]`,
+				)?.hide();
 				this.querySelector("tp-icon-button")?.querySelector("button")?.focus();
 			});
 			return item;
@@ -524,6 +637,10 @@ export class TpTextToSpeech extends TpBase {
 	private setState(state: SpeechState, message?: string): void {
 		this.dataset.state = state;
 		const liteButton = this.querySelector('[data-action="toggle-speech"]');
+		liteButton?.toggleAttribute(
+			"disabled",
+			!this.getSpeechGlobals().speechSynthesis || !this.text,
+		);
 		liteButton?.setAttribute(
 			"name",
 			state === "idle" ? "speakerphone" : "speakerphone-off",
@@ -536,19 +653,6 @@ export class TpTextToSpeech extends TpBase {
 				{ idle: "Ready.", speaking: "Speaking.", paused: "Paused." }[state];
 	}
 
-	/** Resolves an explicit voice name or locale, otherwise leaves the browser default. */
-	private async selectVoice(
-		synthesis: SpeechSynthesis,
-	): Promise<SpeechSynthesisVoice | null> {
-		const voices = await this.loadVoices(synthesis);
-		const requested = this.voice.trim().toLowerCase();
-		return (
-			voices.find((voice) => voice.name.toLowerCase() === requested) ??
-			voices.find((voice) => voice.lang.toLowerCase() === requested) ??
-			null
-		);
-	}
-
 	/** Waits for browsers that populate their voice list asynchronously. */
 	private async loadVoices(
 		synthesis: SpeechSynthesis,
@@ -556,10 +660,15 @@ export class TpTextToSpeech extends TpBase {
 		const available = synthesis.getVoices();
 		if (available.length > 0) return available;
 		return await new Promise((resolve) => {
+			const timeout = setTimeout(() => {
+				synthesis.removeEventListener("voiceschanged", handleVoicesChanged);
+				resolve(synthesis.getVoices());
+			}, 1000);
 			const handleVoicesChanged = (): void => {
 				const voices = synthesis.getVoices();
 				if (voices.length === 0) return;
 				synthesis.removeEventListener("voiceschanged", handleVoicesChanged);
+				clearTimeout(timeout);
 				resolve(voices);
 			};
 			synthesis.addEventListener("voiceschanged", handleVoicesChanged);

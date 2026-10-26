@@ -1,5 +1,5 @@
 const OPEN_OVERLAY_SELECTOR =
-  'tp-dropdown[open], tp-tooltip[open], tp-popover[open], tp-contextmenu[open], tp-menu li[aria-expanded="true"]';
+	'tp-dropdown[open], tp-tooltip[open], tp-popover[open], tp-contextmenu[open], tp-menu li[aria-expanded="true"]';
 
 /**
  * Lets same-origin iframe overlays use the top layer of the outer document.
@@ -10,139 +10,158 @@ const OPEN_OVERLAY_SELECTOR =
  * placeholder at its original position.
  */
 export class IframeOverlayBridge {
-  private mutationObserver: MutationObserver | null = null;
-  private placeholder: HTMLElement | null = null;
-  private transparencyStyle: HTMLStyleElement | null = null;
-  private originalStyle: string | null = null;
-  private promoted = false;
+	private mutationObserver: MutationObserver | null = null;
+	private placeholder: HTMLElement | null = null;
+	private transparencyStyle: HTMLStyleElement | null = null;
+	private originalStyle: string | null = null;
+	private promoted = false;
 
-  private readonly handleLoad = (): void => this.observeDocument();
-  private readonly handleViewportChange = (): void => this.updatePlacement();
+	private readonly handleLoad = (): void => this.observeDocument();
+	private readonly handleViewportChange = (): void => this.updatePlacement();
 
-  public constructor(private readonly iframe: HTMLIFrameElement) {}
+	public constructor(private readonly iframe: HTMLIFrameElement) {}
 
-  public connect(): void {
-    this.iframe.addEventListener('load', this.handleLoad);
-    this.observeDocument();
-  }
+	public connect(): void {
+		this.iframe.addEventListener("load", this.handleLoad);
+		this.observeDocument();
+	}
 
-  public disconnect(): void {
-    this.iframe.removeEventListener('load', this.handleLoad);
-    this.mutationObserver?.disconnect();
-    this.mutationObserver = null;
-    this.restore();
-  }
+	public disconnect(): void {
+		this.iframe.removeEventListener("load", this.handleLoad);
+		this.mutationObserver?.disconnect();
+		this.mutationObserver = null;
+		this.restore();
+	}
 
-  private observeDocument(): void {
-    this.mutationObserver?.disconnect();
-    this.mutationObserver = null;
+	private observeDocument(): void {
+		this.mutationObserver?.disconnect();
+		this.mutationObserver = null;
 
-    let documentNode: Document | null = null;
-    try {
-      documentNode = this.iframe.contentDocument;
-    } catch {
-      return;
-    }
-    if (documentNode === null || documentNode.documentElement === null || documentNode.body === null) return;
+		let documentNode: Document | null = null;
+		try {
+			documentNode = this.iframe.contentDocument;
+		} catch {
+			return;
+		}
+		if (
+			documentNode === null ||
+			documentNode.documentElement === null ||
+			documentNode.body === null
+		)
+			return;
 
-    const Observer = documentNode.defaultView?.MutationObserver ?? MutationObserver;
-    this.mutationObserver = new Observer(() => this.sync());
-    this.mutationObserver.observe(documentNode.documentElement, {
-      attributes: true,
-      attributeFilter: ['open', 'aria-expanded'],
-      childList: true,
-      subtree: true,
-    });
-    this.sync();
-  }
+		const Observer =
+			documentNode.defaultView?.MutationObserver ?? MutationObserver;
+		this.mutationObserver = new Observer(() => this.sync());
+		this.mutationObserver.observe(documentNode.documentElement, {
+			attributes: true,
+			attributeFilter: ["open", "aria-expanded"],
+			childList: true,
+			subtree: true,
+		});
+		this.sync();
+	}
 
-  private sync(): void {
-    let overlay: HTMLElement | null = null;
-    try {
-      overlay = this.iframe.contentDocument?.querySelector<HTMLElement>(OPEN_OVERLAY_SELECTOR) ?? null;
-    } catch {
-      return;
-    }
+	private sync(): void {
+		let overlay: HTMLElement | null = null;
+		try {
+			overlay =
+				this.iframe.contentDocument?.querySelector<HTMLElement>(
+					OPEN_OVERLAY_SELECTOR,
+				) ?? null;
+		} catch {
+			return;
+		}
 
-    if (overlay === null) {
-      this.restore();
-      return;
-    }
+		if (overlay === null) {
+			this.restore();
+			return;
+		}
 
-    this.promote();
-    this.updatePlacement();
-    requestAnimationFrame(() => this.updatePlacement());
-  }
+		this.promote();
+		this.updatePlacement();
+		requestAnimationFrame(() => this.updatePlacement());
+	}
 
-  private promote(): void {
-    if (this.promoted || typeof this.iframe.showPopover !== 'function') return;
+	private promote(): void {
+		if (this.promoted || typeof this.iframe.showPopover !== "function") return;
 
-    const rect = this.iframe.getBoundingClientRect();
-    const placeholder = document.createElement('span');
-    placeholder.setAttribute('data-tp-iframe-overlay-placeholder', '');
-    placeholder.style.display = 'block';
-    placeholder.style.flex = '1 1 auto';
-    placeholder.style.inlineSize = `${String(rect.width)}px`;
-    placeholder.style.blockSize = `${String(rect.height)}px`;
-    this.iframe.before(placeholder);
+		const rect = this.iframe.getBoundingClientRect();
+		const placeholder = document.createElement("span");
+		placeholder.setAttribute("data-tp-iframe-overlay-placeholder", "");
+		placeholder.style.display = "block";
+		placeholder.style.flex = "1 1 auto";
+		placeholder.style.inlineSize = `${String(rect.width)}px`;
+		placeholder.style.blockSize = `${String(rect.height)}px`;
+		this.iframe.before(placeholder);
 
-    this.placeholder = placeholder;
-    this.originalStyle = this.iframe.getAttribute('style');
-    this.prepareTransparentExtension(rect.height);
-    this.iframe.setAttribute('popover', 'manual');
-    this.promoted = true;
+		this.placeholder = placeholder;
+		this.originalStyle = this.iframe.getAttribute("style");
+		this.prepareTransparentExtension(rect.height);
+		this.iframe.setAttribute("popover", "manual");
+		this.promoted = true;
 
-    this.updatePlacement();
-    try {
-      this.iframe.showPopover();
-    } catch {
-      this.restore();
-      return;
-    }
+		this.updatePlacement();
+		try {
+			this.iframe.showPopover();
+		} catch {
+			this.restore();
+			return;
+		}
 
-    window.addEventListener('resize', this.handleViewportChange);
-    window.addEventListener('scroll', this.handleViewportChange, true);
-  }
+		window.addEventListener("resize", this.handleViewportChange);
+		window.addEventListener("scroll", this.handleViewportChange, true);
+	}
 
-  private updatePlacement(): void {
-    if (!this.promoted || this.placeholder === null) return;
+	private updatePlacement(): void {
+		if (!this.promoted || this.placeholder === null) return;
 
-    const rect = this.placeholder.getBoundingClientRect();
-    const requiredHeight = this.measureRequiredHeight(rect.height);
-    Object.assign(this.iframe.style, {
-      blockSize: `${String(requiredHeight)}px`,
-      background: 'transparent',
-      border: '0',
-      bottom: 'auto',
-      inlineSize: `${String(rect.width)}px`,
-      left: `${String(rect.left)}px`,
-      margin: '0',
-      maxBlockSize: 'none',
-      maxInlineSize: 'none',
-      padding: '0',
-      position: 'fixed',
-      right: 'auto',
-      top: `${String(rect.top)}px`,
-    });
-  }
+		const rect = this.placeholder.getBoundingClientRect();
+		const requiredHeight = this.measureRequiredHeight(rect.height);
+		Object.assign(this.iframe.style, {
+			blockSize: `${String(requiredHeight)}px`,
+			background: "transparent",
+			border: "0",
+			bottom: "auto",
+			inlineSize: `${String(rect.width)}px`,
+			left: `${String(rect.left)}px`,
+			margin: "0",
+			maxBlockSize: "none",
+			maxInlineSize: "none",
+			padding: "0",
+			position: "fixed",
+			right: "auto",
+			top: `${String(rect.top)}px`,
+		});
+	}
 
-  /** Keeps the original preview area opaque while the extra overlay area is transparent. */
-  private prepareTransparentExtension(originalHeight: number): void {
-    const documentNode = this.iframe.contentDocument;
-    if (documentNode === null || documentNode.head === null || documentNode.body === null) return;
+	/** Keeps the original preview area opaque while the extra overlay area is transparent. */
+	private prepareTransparentExtension(originalHeight: number): void {
+		const documentNode = this.iframe.contentDocument;
+		if (
+			documentNode === null ||
+			documentNode.head === null ||
+			documentNode.body === null
+		)
+			return;
 
-    const view = documentNode.defaultView;
-    const bodyColor = view?.getComputedStyle(documentNode.body).backgroundColor ?? '';
-    const rootColor = view?.getComputedStyle(documentNode.documentElement).backgroundColor ?? '';
-    const isTransparent = (value: string): boolean =>
-      value === '' || value === 'transparent' || value === 'rgba(0, 0, 0, 0)';
-    const background = !isTransparent(bodyColor)
-      ? bodyColor
-      : !isTransparent(rootColor) ? rootColor : 'Canvas';
+		const view = documentNode.defaultView;
+		const bodyColor =
+			view?.getComputedStyle(documentNode.body).backgroundColor ?? "";
+		const rootColor =
+			view?.getComputedStyle(documentNode.documentElement).backgroundColor ??
+			"";
+		const isTransparent = (value: string): boolean =>
+			value === "" || value === "transparent" || value === "rgba(0, 0, 0, 0)";
+		const background = !isTransparent(bodyColor)
+			? bodyColor
+			: !isTransparent(rootColor)
+				? rootColor
+				: "Canvas";
 
-    const style = documentNode.createElement('style');
-    style.setAttribute('data-tp-iframe-overlay-transparency', '');
-    style.textContent = `
+		const style = documentNode.createElement("style");
+		style.setAttribute("data-tp-iframe-overlay-transparency", "");
+		style.textContent = `
       html {
         background: transparent !important;
         overflow: hidden !important;
@@ -158,65 +177,87 @@ export class IframeOverlayBridge {
         overflow: hidden !important;
       }
     `;
-    documentNode.head.append(style);
-    this.transparencyStyle = style;
-  }
+		documentNode.head.append(style);
+		this.transparencyStyle = style;
+	}
 
-  private measureRequiredHeight(minimumHeight: number): number {
-    const documentNode = this.iframe.contentDocument;
-    if (documentNode === null) return minimumHeight;
+	private measureRequiredHeight(minimumHeight: number): number {
+		const documentNode = this.iframe.contentDocument;
+		if (documentNode === null) return minimumHeight;
 
-    let requiredHeight = minimumHeight;
-    for (const overlay of documentNode.querySelectorAll<HTMLElement>(OPEN_OVERLAY_SELECTOR)) {
-      const floatingElement = overlay.matches('tp-menu li[aria-expanded="true"]')
-        ? overlay.querySelector<HTMLElement>(':scope > ul') ?? overlay
-        : overlay;
-      const rect = floatingElement.getBoundingClientRect();
-      const height = Math.max(rect.height, floatingElement.scrollHeight);
-      requiredHeight = Math.max(requiredHeight, rect.top + height + 8);
+		let requiredHeight = minimumHeight;
+		for (const overlay of documentNode.querySelectorAll<HTMLElement>(
+			OPEN_OVERLAY_SELECTOR,
+		)) {
+			const floatingElement = overlay.matches(
+				'tp-menu li[aria-expanded="true"]',
+			)
+				? (overlay.querySelector<HTMLElement>(":scope > ul") ?? overlay)
+				: overlay;
+			const rect = floatingElement.getBoundingClientRect();
+			// A menu may scroll in its own list rather than on the overlay host.
+			// Measure its content, not the height already clipped by this iframe.
+			const menu = floatingElement.querySelector<HTMLElement>(":scope > ul");
+			const menuHeight =
+				menu === null ? 0 : rect.height - menu.clientHeight + menu.scrollHeight;
+			const height = Math.max(
+				rect.height,
+				floatingElement.scrollHeight,
+				menuHeight,
+			);
+			requiredHeight = Math.max(requiredHeight, rect.top + height + 8);
 
-      const selector = overlay.getAttribute('anchor')?.trim() ?? '';
-      if (selector === '') continue;
-      let anchor: Element | null = null;
-      try {
-        anchor = documentNode.querySelector(selector);
-      } catch {
-        // Invalid selectors are handled by the overlay component.
-      }
-      if (anchor === null) continue;
+			const selector = overlay.getAttribute("anchor")?.trim() ?? "";
+			if (selector === "") continue;
+			let anchor: Element | null = null;
+			try {
+				anchor = documentNode.querySelector(selector);
+			} catch {
+				// Invalid selectors are handled by the overlay component.
+			}
+			if (anchor === null) continue;
 
-      const anchorRect = anchor.getBoundingClientRect();
-      const offset = Number.parseFloat(overlay.getAttribute('offset') ?? '8') || 8;
-      const placement = overlay.getAttribute('placement') ?? 'bottom';
-      const bottom = placement === 'bottom'
-        ? anchorRect.bottom + offset + height
-        : anchorRect.top + (anchorRect.height + height) / 2;
-      requiredHeight = Math.max(requiredHeight, bottom + 8);
-    }
-    return Math.ceil(requiredHeight);
-  }
+			const anchorRect = anchor.getBoundingClientRect();
+			const offset =
+				Number.parseFloat(overlay.getAttribute("offset") ?? "8") || 8;
+			const placement = overlay.getAttribute("placement") ?? "bottom";
+			const bottom =
+				placement === "bottom"
+					? anchorRect.bottom + offset + height
+					: anchorRect.top + (anchorRect.height + height) / 2;
+			requiredHeight = Math.max(requiredHeight, bottom + 8);
+		}
+		const top =
+			this.placeholder?.getBoundingClientRect().top ??
+			this.iframe.getBoundingClientRect().top;
+		const availableHeight = Math.max(
+			minimumHeight,
+			window.innerHeight - top - 8,
+		);
+		return Math.ceil(Math.min(requiredHeight, availableHeight));
+	}
 
-  private restore(): void {
-    if (!this.promoted) return;
+	private restore(): void {
+		if (!this.promoted) return;
 
-    window.removeEventListener('resize', this.handleViewportChange);
-    window.removeEventListener('scroll', this.handleViewportChange, true);
-    if (typeof this.iframe.hidePopover === 'function') {
-      try {
-        this.iframe.hidePopover();
-      } catch {
-        // The iframe may already have left the top layer.
-      }
-    }
+		window.removeEventListener("resize", this.handleViewportChange);
+		window.removeEventListener("scroll", this.handleViewportChange, true);
+		if (typeof this.iframe.hidePopover === "function") {
+			try {
+				this.iframe.hidePopover();
+			} catch {
+				// The iframe may already have left the top layer.
+			}
+		}
 
-    if (this.originalStyle === null) this.iframe.removeAttribute('style');
-    else this.iframe.setAttribute('style', this.originalStyle);
-    this.iframe.removeAttribute('popover');
-    this.placeholder?.remove();
-    this.transparencyStyle?.remove();
-    this.placeholder = null;
-    this.transparencyStyle = null;
-    this.originalStyle = null;
-    this.promoted = false;
-  }
+		if (this.originalStyle === null) this.iframe.removeAttribute("style");
+		else this.iframe.setAttribute("style", this.originalStyle);
+		this.iframe.removeAttribute("popover");
+		this.placeholder?.remove();
+		this.transparencyStyle?.remove();
+		this.placeholder = null;
+		this.transparencyStyle = null;
+		this.originalStyle = null;
+		this.promoted = false;
+	}
 }

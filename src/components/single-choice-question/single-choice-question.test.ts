@@ -438,3 +438,51 @@ describe("tp-single-choice-question feedback", () => {
 		expect(after).not.toEqual(before);
 	});
 });
+
+it("preserves correct answer and all feedback after shuffled questions reconnect", async () => {
+	vi.spyOn(Math, "random").mockReturnValue(0);
+	document.body.innerHTML = `<tp-single-choice-question answer="3" random><dl>
+ <dt>Title</dt><dd>Conversation — 1</dd><dt>Form</dt><dd><ul>
+ <li>Cold room</li><li>Cancelled guests</li><li>Broken projector</li><li>Late workshop</li>
+ </ul></dd><dt>Feedback</dt><dd><ul><li>Feedback cold</li><li>Feedback cancelled</li><li><strong>Correct projector</strong></li><li>Feedback late</li></ul></dd>
+ <dt>Solution</dt><dd>The projector is broken.</dd></dl></tp-single-choice-question>`;
+	await flush();
+	const question = document.querySelector(
+		"tp-single-choice-question",
+	) as TpSingleChoiceQuestion;
+	const holder = document.createElement("div");
+	document.body.append(holder);
+	holder.append(question);
+	await flush();
+	const items = Array.from(
+		question.querySelectorAll<HTMLLIElement>("tp-radio-list > ul > li"),
+	);
+	for (const [label, feedback, score] of [
+		["Cold room", "Feedback cold", "0/1"],
+		["Broken projector", "Correct projector", "1/1"],
+		["Late workshop", "Feedback late", "0/1"],
+	]) {
+		const item = items.find((item) => item.textContent?.includes(label ?? ""));
+		item?.querySelector<HTMLInputElement>("input")?.click();
+		question.querySelector<HTMLElement>('[data-action="submit"]')?.click();
+		await flush();
+		const output = question.querySelector("[data-tp-question-feedback-output]");
+		expect(output?.textContent).toContain(feedback);
+		expect(output?.textContent).toContain(score);
+	}
+	question.querySelector<HTMLElement>('[data-action="reset"]')?.click();
+	await flush();
+	const correct = Array.from(
+		question.querySelectorAll<HTMLLIElement>("tp-radio-list > ul > li"),
+	).find((item) => item.textContent?.includes("Broken projector"));
+	correct?.querySelector<HTMLInputElement>("input")?.click();
+	question.querySelector<HTMLElement>('[data-action="submit"]')?.click();
+	await flush();
+	expect(
+		question.querySelector("[data-tp-question-feedback-output] strong")
+			?.textContent,
+	).toBe("Correct projector");
+	expect(
+		question.querySelector("[data-tp-question-feedback-output]")?.textContent,
+	).toContain("1/1");
+});

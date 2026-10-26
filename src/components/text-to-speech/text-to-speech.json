@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-text-to-speech lang=\"en\" show-text>\n  <script type=\"tp/txt\">Welcome to tp-components.</script>\n</tp-text-to-speech>"
+      "code": "<tp-text-to-speech lang=\"en-GB\" show-text>\n  <script type=\"tp/txt\">\n    Welcome to tp-components. This example uses the browser speech synthesis service.\n  </script>\n</tp-text-to-speech>"
     }
   ],
   "attributes": [
@@ -36,6 +36,15 @@
       "inherited": false,
       "type": "boolean",
       "default": "false"
+    },
+    {
+      "name": "pause-between-lines",
+      "description": "Silence in milliseconds between nonempty lines; an explicit [pause=...] overrides it at a line boundary.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "0"
     },
     {
       "name": "pitch",
@@ -105,12 +114,12 @@
     {
       "name": "pause(): void",
       "inherited": false,
-      "description": "Pauses the current reading."
+      "description": "Pauses speech or a scheduled silence."
     },
     {
       "name": "resume(): void",
       "inherited": false,
-      "description": "Resumes a paused reading."
+      "description": "Resumes speech or the remainder of a scheduled silence."
     },
     {
       "name": "speak(): Promise<void>",
@@ -120,7 +129,7 @@
     {
       "name": "stop(): void",
       "inherited": false,
-      "description": "Stops the current reading."
+      "description": "Cancels speech, queued segments and scheduled silence."
     }
   ],
   "events": [
@@ -152,7 +161,11 @@
     },
     {
       "name": "tp-dropdown",
-      "summary": "Displays an anchored dropdown menu."
+      "summary": "Dropdown menu component."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
     },
     {
       "name": "tp-icon-button",
@@ -167,7 +180,7 @@
   "userHelp": {
     "displayName": "Text to speech",
     "introduction": "The custom `<tp-text-to-speech>` element implements the <tp-icon name=\"text-to-speech\" library=\"components\" size=\"1.25em\"></tp-icon> Text to speech functionality: reads inline or external text aloud with browser speech synthesis.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Speak | Start reading the text aloud. |\n| Pause | Suspend reading. |\n| Resume | Continue paused reading. |\n| Stop | End reading. |\n| Settings | Choose a voice for the text language; Automatic lets the browser choose. Changing the voice stops reading. |\n| Compact speaker / stop button | Start or stop reading. Pause, Resume and voice settings are not available in this presentation. |\n| Status | Indicates whether speech is ready, playing, paused or unavailable. Voice availability depends on the browser and operating system. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Speak | Start reading the text aloud. |\n| Pause | Suspend speech or freeze the remaining scheduled silence. |\n| Resume | Continue paused speech or the remaining silence. |\n| Stop | End reading and cancel pending segments or pauses. |\n| Settings | Choose a voice for the text language; scroll the voice list when it exceeds the available space; Automatic lets the browser choose. Changing the voice stops reading. |\n| Compact speaker / stop button | Start or stop reading. Pause, Resume and voice settings are not available in this presentation. |\n| Status | Indicates whether speech is ready, playing, paused or unavailable. Voice availability depends on the browser and operating system. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Enter / Space",

@@ -610,7 +610,8 @@ describe("<tp-base>", () => {
 		expect(drawer.getAttribute("label")).toBe("User help");
 		expect(drawer.textContent).toContain("Current element");
 		expect(
-			drawer.querySelector(".tp-component-help > h2:first-child")?.textContent,
+			drawer.querySelector(".tp-component-help > h2:first-child > span")
+				?.textContent,
 		).toBe("Readable fixture");
 		expect(drawer.textContent).toContain("User interactions");
 		expect(drawer.textContent).toContain("Toggle the focused section.");
@@ -626,12 +627,18 @@ describe("<tp-base>", () => {
 		await vi.waitFor(() =>
 			expect(introduction.textContent).toContain("presents sample content"),
 		);
-		expect(introduction.previousElementSibling?.textContent).toBe(
-			"Current element",
-		);
+		expect(introduction.previousElementSibling?.tagName).toBe("H2");
+		const titleIcon =
+			introduction.previousElementSibling?.querySelector("tp-icon");
+		expect(titleIcon?.getAttribute("name")).toBe("base-fixture");
+		expect(titleIcon?.getAttribute("library")).toBe("components");
+		expect(titleIcon?.getAttribute("aria-hidden")).toBe("true");
 		expect(introduction.nextElementSibling?.className).toBe(
-			"tp-component-help-preview",
+			"tp-component-help-current",
 		);
+		expect(
+			introduction.nextElementSibling?.querySelector("h3")?.textContent,
+		).toBe("Current element");
 		expect(
 			drawer.querySelector(
 				"tp-html-viewer, tp-tabs, .tp-component-help-controls",

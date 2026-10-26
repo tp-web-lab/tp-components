@@ -17,6 +17,7 @@ import { describeAttributeControl } from "./interactive-attribute-examples.mjs";
 
 /** Editorial objectives for the existing examples; no descriptions are inferred from titles alone. */
 const basic = {
+ "exercise": "Read the shared museum context, answer both questions and submit each answer to inspect its feedback and solution.",
  "mask": "Read the replacement message hiding the answer field. The target remains in the document with its value preserved.",
  "audio-recorder": "Record a short response, stop, replay it and download the audio. Clear removes the local recording.",
  "slope-simulator": "Adjust the slope, drag either point or use arrow keys, then compare the three cycling profiles.",
@@ -158,7 +159,8 @@ const basic = {
 		"Write an answer, submit it and inspect the feedback and solution panels.",
 	"radio-list":
 		"Choose a theme option and observe that only one choice can be selected.",
-	"save-image":
+	"save-audio": "Inspect the disabled audio saving control, retained for a future audio provider.",
+ "save-image":
 		"Use the save control to export the heart icon in one of the offered image formats.",
 	sidebar:
 		"Resize the example to observe how the navigation and main content share the available space.",
@@ -381,6 +383,10 @@ const additional = {
 };
 
 export function describeExample(component, label) {
+ if (component === "exercise" && label === "Nested exercises") return "Answer a standalone question, then expand the nested exercise to read its own context and answer its question. Collapse and reopen either exercise: answers are preserved.";
+ if (component === "text-to-speech" && label === "Dialogue") return "Read a dialogue using named browser voices and pauses. Unavailable names fall back to the component voice; [voice=default] restores it explicitly.";
+ if (component === "text-to-speech" && label === "Pauses") return "Read the illustration prompt and four choices with 800-millisecond line pauses. The introduction uses a longer explicit pause and choice A adds a short inline pause. Try Pause, Resume and Stop during silence.";
+ if (component === "exercise" && label === "Timed exercise") return "Select Start to reveal the context and both questions for ten seconds. After expiry, select Continue to recover the answers without restarting the countdown.";
  if (component === "question" && label === "Optional score") return "Type blue and submit to see the numerical grade enabled by score. Remove score in the source and submit again: correction remains available, but the grade is hidden.";
  if (component === "audio-recorder" && label === "Spoken answer") return "Record the word blue, then stop and review the transcription in the answer field. Submit checks that field as a single blank; you can also type or correct the answer.";
  if (component === "question" && label === "Timed question") return "Open the question and select Start to reveal its content for ten seconds. The Solution tab stays disabled during the countdown. After expiry, select Continue to recover your answer and access the solution.";

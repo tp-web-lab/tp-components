@@ -18,15 +18,22 @@ export class QuestionTiming {
 	private configured: string | null = null;
 	private layout: HTMLElement | null = null;
 	private releaseSolution: (() => void) | null = null;
-	constructor(private readonly host: HTMLElement) {}
+	constructor(
+		private readonly host: HTMLElement,
+		private readonly kind: "question" | "exercise" = "question",
+	) {}
 
 	configure(): void {
 		const value = this.host.getAttribute("timing") ?? "";
 		const layout = this.host.querySelector<HTMLElement>(
-			":scope > details > [data-tp-question-layout]",
+			this.kind === "question"
+				? ":scope > details > [data-tp-question-layout]"
+				: ":scope > details > [data-tp-exercise-layout]",
 		);
 		const summary = this.host.querySelector<HTMLElement>(
-			":scope > details > summary",
+			this.kind === "question"
+				? ":scope > details > summary"
+				: ":scope > details > [data-tp-exercise-header]",
 		);
 		if (!layout || !summary) return;
 		if (this.configured === value && this.layout === layout) return;
@@ -35,25 +42,25 @@ export class QuestionTiming {
 		this.layout = layout;
 		const seconds = questionTimingSeconds(value);
 		if (!seconds) return;
-		this.lockSolution();
-		if (!layout.id) layout.id = `tp-question-timing-${crypto.randomUUID()}`;
+		if (this.kind === "question") this.lockSolution();
+		if (!layout.id) layout.id = `tp-${this.kind}-timing-${crypto.randomUUID()}`;
 		const timer = new TpTimer();
 		timer.setAttribute("manual", "");
 		timer.setAttribute("no-controls", "");
 		timer.setAttribute("silent", "");
 		timer.duration = seconds;
-		timer.setAttribute("data-tp-question-timer", "");
+		timer.setAttribute(`data-tp-${this.kind}-timer`, "");
 		timer.setAttribute("aria-label", "Time remaining");
 		timer.setAttribute("role", "timer");
 		this.timer = timer;
 		summary.append(timer);
 		const mask = new TpMask();
 		mask.anchor = `#${layout.id}`;
-		mask.setAttribute("data-tp-question-timing-mask", "");
+		mask.setAttribute(`data-tp-${this.kind}-timing-mask`, "");
 		this.mask = mask;
 		layout.after(mask);
 		this.message(
-			`Time-limited question: this section will close in ${value}`,
+			`Time-limited ${this.kind}: this section will close in ${value}`,
 			"Start",
 			() => {
 				mask.active = false;
@@ -136,8 +143,8 @@ export class QuestionTiming {
 		button.setAttribute(
 			"data-help-description",
 			label === "Start"
-				? "Reveal the question and begin the countdown."
-				: "Reveal the question after the time limit.",
+				? `Reveal the ${this.kind} and begin the countdown.`
+				: `Reveal the ${this.kind} after the time limit.`,
 		);
 		button.addEventListener("click", action, { once: true });
 		mask.replaceChildren(message, button);

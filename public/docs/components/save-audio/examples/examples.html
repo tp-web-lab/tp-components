@@ -1,0 +1,32 @@
+<tp-html-viewer label="tp-save-audio" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <p>Audio saving is reserved for a future integration. No audio provider is currently connected.</p>
+      <tp-save-audio disabled=""></tp-save-audio>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+
+
+
+
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>disabled</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="format" label="format" label-position="top" orientation="horizontal" value="1"><ul><li>mp3</li><li>ogg</li><li>wav</li></ul></tp-radio-list>
+      <tp-radio-list data-setting="size" label="size" label-position="top" orientation="horizontal" value="4"><ul><li>xxs</li><li>xs</li><li>s</li><li>m</li><li>l</li><li>xl</li><li>xxl</li></ul></tp-radio-list>
+      <tp-radio-list data-setting="variant" label="variant" label-position="top" orientation="horizontal" value="5"><ul><li>success</li><li>danger</li><li>warning</li><li>info</li><li>neutral</li><li>brand</li></ul></tp-radio-list>
+      <tp-cluster><tp-textfield data-setting="anchor" label="anchor" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="filename" label="filename" value="audio" placeholder="audio" clearable></tp-textfield>
+      <tp-textfield data-setting="name" label="name" value="file-download" placeholder="file-download" clearable></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="save-audio attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/docs/components/save-audio/examples/attributes.js"></script>
+    </div>
+  </template>
+</tp-html-viewer>

@@ -1,0 +1,99 @@
+<tp-html-viewer label="tp-exercise" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-exercise open="">
+        <dl>
+          <dt>Title</dt><dd>A day at the museum</dd>
+          <dt>Context</dt><dd>The museum opens at 9 a.m. Admission costs 8 euros.</dd>
+          <dt>Questions</dt><dd><ol class="questions">
+            <li><tp-question open="input"><dl>
+              <dt>Title</dt><dd>Opening time</dd>
+              <dt>Prompt</dt><dd>When does the museum open?</dd>
+              <dt>Form</dt><dd><tp-textfield label="Your answer"></tp-textfield></dd>
+              <dt>Feedback</dt><dd>Compare your answer with the opening time in the context.</dd>
+              <dt>Solution</dt><dd>At 9 a.m.</dd>
+            </dl></tp-question></li>
+            <li><tp-question open="input"><dl>
+              <dt>Title</dt><dd>Admission</dd>
+              <dt>Prompt</dt><dd>How much do two tickets cost?</dd>
+              <dt>Form</dt><dd><tp-textfield label="Your answer"></tp-textfield></dd>
+              <dt>Feedback</dt><dd>Multiply the price of one ticket by two.</dd>
+              <dt>Solution</dt><dd>16 euros.</dd>
+            </dl></tp-question></li>
+          </ol></dd>
+        </dl>
+      </tp-exercise>
+    </div>
+
+    <div role="example" label="Attributes">
+      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+
+
+
+
+      <tp-stack>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>open</li></ul></tp-checkbox-list>
+
+      <tp-cluster><tp-textfield data-setting="timing" label="timing" value="" placeholder="" clearable=""></tp-textfield></tp-cluster>
+      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
+      </tp-stack>
+      <tp-divider></tp-divider>
+      <h3>Preview</h3>
+      <tp-iframe id="attributes-frame" title="exercise attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
+      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+
+      <script type="module" src="/docs/components/exercise/examples/attributes.js"></script>
+    </div>
+
+    <div role="example" label="Timed exercise">
+      <tp-exercise timing="00:00:10" open="">
+        <dl>
+          <dt>Title</dt><dd>A day at the museum</dd>
+          <dt>Context</dt><dd>The museum opens at 9 a.m. Admission costs 8 euros.</dd>
+          <dt>Questions</dt><dd><ol class="questions">
+            <li><tp-question open="input"><dl>
+              <dt>Title</dt><dd>Opening time</dd>
+              <dt>Prompt</dt><dd>When does the museum open?</dd>
+              <dt>Form</dt><dd><tp-textfield label="Your answer"></tp-textfield></dd>
+              <dt>Feedback</dt><dd>Compare your answer with the opening time in the context.</dd>
+              <dt>Solution</dt><dd>At 9 a.m.</dd>
+            </dl></tp-question></li>
+            <li><tp-question open="input"><dl>
+              <dt>Title</dt><dd>Admission</dd>
+              <dt>Prompt</dt><dd>How much do two tickets cost?</dd>
+              <dt>Form</dt><dd><tp-textfield label="Your answer"></tp-textfield></dd>
+              <dt>Feedback</dt><dd>Multiply the price of one ticket by two.</dd>
+              <dt>Solution</dt><dd>16 euros.</dd>
+            </dl></tp-question></li>
+          </ol></dd>
+        </dl>
+      </tp-exercise>
+    </div>
+
+    <div role="example" label="Nested exercises">
+      <tp-exercise open><dl>
+      <dt>Title</dt><dd>A museum visit</dd>
+      <dt>Context</dt><dd>The museum opens at 9 a.m.</dd>
+      <dt>Questions</dt><dd><ol>
+      <li><tp-question open="input"><dl>
+      <dt>Title</dt><dd>Opening time</dd>
+      <dt>Prompt</dt><dd>When does the museum open?</dd>
+      <dt>Form</dt><dd><tp-textfield label="Your answer"></tp-textfield></dd>
+      <dt>Feedback</dt><dd>Compare your answer with the context.</dd>
+      <dt>Solution</dt><dd>At 9 a.m.</dd>
+      </dl></tp-question></li>
+      <li><tp-exercise><dl>
+      <dt>Title</dt><dd>The guided tour</dd>
+      <dt>Context</dt><dd>The tour starts at 10 a.m. and lasts one hour.</dd>
+      <dt>Questions</dt><dd><ol><li><tp-question open="input"><dl>
+      <dt>Title</dt><dd>End of the tour</dd>
+      <dt>Prompt</dt><dd>When does the tour finish?</dd>
+      <dt>Form</dt><dd><tp-textfield label="Your answer"></tp-textfield></dd>
+      <dt>Feedback</dt><dd>Compare your answer with the context.</dd>
+      <dt>Solution</dt><dd>At 11 a.m.</dd>
+      </dl></tp-question></li></ol></dd>
+      </dl></tp-exercise></li>
+      </ol></dd></dl></tp-exercise>
+    </div>
+  </template>
+</tp-html-viewer>

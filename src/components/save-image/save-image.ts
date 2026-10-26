@@ -29,6 +29,7 @@ import type { TpDropdown } from "../dropdown/dropdown.js";
 import style from "./save-image.css?inline";
 import "../dropdown/dropdown.js";
 import "../icon-button/icon-button.js";
+import "../icon/icon.js";
 import { chooseSaveTarget, saveBlob } from "../../utilities/save-file.js";
 
 export type TpSaveImageFormat = "svg" | "png" | "webp";
@@ -61,6 +62,7 @@ export class TpSaveImage extends TpBase {
 	private static readonly styleId = "tp-save-image-styles";
 	private static nextId = 0;
 	private dropdownEl: TpDropdown | null = null;
+	private currentFormat: TpSaveImageFormat = "svg";
 
 	public static get observedAttributes(): string[] {
 		return ["anchor", "name", "filename", "variant", "size", "disabled"];
@@ -134,6 +136,8 @@ export class TpSaveImage extends TpBase {
 					? new Blob([await this.createSvg(target)], { type: "image/svg+xml" })
 					: await this.createRaster(target, format);
 			await saveBlob(blob, saveTarget);
+			this.currentFormat = format;
+			this.syncCurrentFormat();
 			this.dropdownEl?.removeAttribute("open");
 			this.dispatchEvent(
 				new CustomEvent("tp-save-image-save", {
@@ -192,7 +196,12 @@ export class TpSaveImage extends TpBase {
 				item.dataset.format = format;
 				item.setAttribute("role", "menuitem");
 				item.tabIndex = 0;
-				item.textContent = format.toUpperCase();
+				const check = document.createElement("tp-icon");
+				check.setAttribute("name", "check");
+				check.setAttribute("aria-hidden", "true");
+				const label = document.createElement("span");
+				label.textContent = format.toUpperCase();
+				item.append(check, label);
 				item.addEventListener("click", () => {
 					void this.save(format).catch(() => undefined);
 				});
@@ -205,6 +214,15 @@ export class TpSaveImage extends TpBase {
 			dropdown.append(menu);
 		}
 		this.dropdownEl = dropdown;
+		this.syncCurrentFormat();
+	}
+
+	private syncCurrentFormat(): void {
+		for (const item of this.querySelectorAll<HTMLElement>("[data-format]")) {
+			if (item.dataset.format === this.currentFormat)
+				item.setAttribute("aria-current", "true");
+			else item.removeAttribute("aria-current");
+		}
 	}
 
 	private readonly handleTriggerClick = (): void => {

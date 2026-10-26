@@ -1,0 +1,11 @@
+tp-save-audio { display: inline-flex; vertical-align: middle; }
+tp-save-audio > tp-icon-button { --tp-icon-button-size: 2rem; --tp-icon-button-icon-size: 1.15rem; }
+tp-save-audio > tp-icon-button > button { border: 1px solid var(--tp-neutral-stroke-mid, #9ca3af); background: var(--tp-paper-color, #fff); }
+tp-save-audio > tp-icon-button > button:hover { background: var(--tp-neutral-fill-soft, #e5e7eb); }
+tp-save-audio > tp-dropdown { min-inline-size: 7rem; }
+tp-save-audio > tp-dropdown > ul { margin: 0; padding: .25rem; list-style: none; }
+tp-save-audio [data-format] { display: flex; align-items: center; gap: .5rem; padding: .4rem .65rem; border-radius: var(--tp-border-radius-sm, .25rem); cursor: pointer; }
+tp-save-audio [data-format]:is(:hover, :focus-visible) { background: var(--tp-neutral-fill-softer, #f3f4f6); outline: none; }
+
+tp-save-audio [data-format] > tp-icon[name="check"] { visibility: hidden; }
+tp-save-audio [data-format][aria-current="true"] > tp-icon[name="check"] { visibility: visible; }

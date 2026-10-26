@@ -6,7 +6,7 @@
 
 [data-tp-question] details[data-tp-question-details] {
 	border: 1px solid var(--tp-brand-stroke-soft);
-	border-radius: 0.5em;
+	border-radius: var(--tp-details-radius, 0.5rem);
 	padding-block-end: 0;
 }
 
