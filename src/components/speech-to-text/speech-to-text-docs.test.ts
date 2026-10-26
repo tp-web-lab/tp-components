@@ -15,16 +15,15 @@ function source(extension: string): string {
 }
 /** Checks that every language presents the same component attributes. */
 function check(elements: Element[]): void {
-	expect(elements).toHaveLength(5);
+	expect(elements).toHaveLength(3);
 	expect(elements[0]?.getAttribute("lang")).toBe("en-US");
 	expect(elements[0]?.hasAttribute("interim-results")).toBe(true);
-	expect(elements[1]?.getAttribute("lang")).toBe("en-US");
-	expect(elements[2]?.getAttribute("lang")).toBe("fr-FR");
-	expect(elements[3]?.hasAttribute("continuous")).toBe(true);
-	expect(elements[3]?.hasAttribute("interim-results")).toBe(true);
-	expect(elements[4]?.getAttribute("value")).toBe("My notes:");
+	expect(elements[1]?.getAttribute("lang")).toBe("fr-FR");
+	expect(elements[2]?.hasAttribute("continuous")).toBe(true);
+	expect(elements[2]?.hasAttribute("interim-results")).toBe(true);
+	expect(elements[2]?.hasAttribute("record")).toBe(true);
 }
-it("provides five HTML examples with Basic usage first", () => {
+it("provides HTML examples with Basic usage first", () => {
 	const root = document.createElement("template");
 	root.innerHTML = source("html");
 	check(
@@ -54,10 +53,9 @@ it.each(["md", "adoc"])("renders equivalent %s examples", async (extension) => {
 	const examples = api.extractExamples(api.readInlineSource());
 	expect(examples.map((example) => example.label)).toEqual([
 		"Basic usage",
-		"Basic",
+		"Attributes",
 		"French",
-		"Continuous",
-		"Initial text",
+		"Recording",
 	]);
 	const output = document.createElement("div");
 	for (const example of examples)
@@ -69,12 +67,11 @@ it("preserves the reStructuredText examples", () => {
 	const examples = extractRstViewerExamples(body.replace(/^ {6}/gm, "").trim());
 	expect(examples.map((example) => example.label)).toEqual([
 		"Basic usage",
-		"Basic",
+		"Attributes",
 		"French",
-		"Continuous",
-		"Initial text",
+		"Recording",
 	]);
 	expect(examples[2]?.source).toContain(":lang: fr-FR");
 	expect(examples[3]?.source).toContain(":interim-results:");
-	expect(examples[4]?.source).toContain(":value: My notes:");
+	expect(examples[3]?.source).toContain(":record:");
 });

@@ -16,9 +16,10 @@ The component uses the browser [**Web Speech API**](https://developer.mozilla.or
 
 | Control or gesture | Result |
 | --- | --- |
-| Start | Request microphone access and begin listening. |
-| Stop | Stop listening and let the browser finalize the transcript. |
-| Clear | Cancel listening and remove the transcript. |
+| Start | Request microphone access and begin listening; optionally record audio once recognition starts. |
+| Stop | Finish recognition and optional audio recording; allow final transcription results to arrive. |
+| Clear | Cancel listening and remove the transcript and optional recording. |
+| Audio player / Download recording | Replay or save the captured audio when recording is enabled. |
 | Transcript | Click to edit finalized text. Provisional text may change while you speak. |
 | Status | Read permission or service errors. Recognition depends on the browser and may send audio to an online service. |
 
@@ -32,6 +33,9 @@ The component uses the browser [**Web Speech API**](https://developer.mozilla.or
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
+
+Add the boolean `record` attribute to capture audio alongside recognition. This combination is temporarily enabled only in Safari. Other browsers show a warning and keep transcription alone, when their recognition API is available. Start begins recognition first and then requests audio capture when listening starts. Wait for the recording status before speaking. Stop, recognition ending, or disabling the component stops capture. Clear removes both outputs. Recording failure does not cancel transcription. Audio stays local and can be replayed or downloaded; recognition may use the browser’s online service. The attribute is absent by default.
+
 
 The inherited `lang` attribute determines recognition language. `continuous` requests multiple results within a session; the browser can still end that session. `interim-results` displays provisional text separately; only final text is committed to `value`. Each new session appends to the existing value. Editing `value`, typing in the field, changing recognition settings or disabling the component cancels active recognition to prevent stale results from overwriting edits.
 
@@ -56,7 +60,7 @@ Unlike `tp-text-to-speech`, this component acquires input from the microphone, n
 
 Recognition depends on the browser, operating system, language and service availability. The component detects `SpeechRecognition` and the prefixed `webkitSpeechRecognition`; if neither is present, it disables Start and retains keyboard input. An exposed API does not guarantee that its recognition service is usable. Permission denial, unavailable microphones and service/network failures are reported in the status and the error event.
 
-Use HTTPS or localhost and allow microphone access. Embedded examples may also need permission in their containing iframe. Depending on the browser, audio can be sent to a remote recognition service and an internet connection may be required. The component does not record or store an audio file and does not promise offline recognition. Inform users before they dictate sensitive content. See [SpeechRecognition compatibility and privacy notes](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition).
+Use HTTPS or localhost and allow microphone access. Embedded examples may also need permission in their containing iframe. Depending on the browser, audio can be sent to a remote recognition service and an internet connection may be required. Without `record`, the component does not store an audio file. Recognition is not guaranteed to work offline. Inform users before they dictate sensitive content. See [SpeechRecognition compatibility and privacy notes](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition).
 
 ## Examples
 
@@ -67,11 +71,11 @@ Basic usage
 Attributes
 : Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
 
-Basic
-: Start recognition, allow microphone access when requested and speak to inspect the transcript in a supported browser.
-
 French
 : Speak French and inspect the transcript with French recognition configured.
+
+Recording
+: In Safari, select Start, wait for audio capture, then speak and select Stop. Review the transcript and replay the recording. Other browsers show a warning and offer transcription alone.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
@@ -99,6 +103,8 @@ Attributes
   | <code>continuous</code> | <code>boolean</code> | <code>false</code> | Requests multiple recognition results in one session. |
   | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Disables editing and recognition and stops any active session. |
   | <code>interim-results</code> | <code>boolean</code> | <code>false</code> | Displays provisional recognition separately from the final transcript. |
+  | <code>legend</code> | <code>string</code> | <code>&quot;Speech to text&quot;</code> | Caption of the fieldset surrounding the controls. |
+  | <code>record</code> | <code>boolean</code> | <code>false</code> | Safari only (temporary): records audio alongside recognition for replay and download. |
   | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Final transcript, editable without microphone access. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
@@ -133,8 +139,9 @@ CSS properties
 <!-- /tp-docgen:api -->
 
 <!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_speech-to-text.TpSpeechToText.html)
+[More details…](/api/classes/components_speech-to-text_speech-to-text.TpSpeechToText.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 
@@ -392,6 +399,10 @@ bundler
 All tp-components used by `<tp-speech-to-text>` are loaded automatically by this component if they have not already been loaded by another component.
 
 <!--
+@tp-dependency tp-audio-recorder
+@summary Records microphone audio locally for replay and download.
+-->
+<!--
 @tp-dependency tp-base
 @summary Shared base class for tp-* components.
 -->
@@ -412,6 +423,7 @@ All tp-components used by `<tp-speech-to-text>` are loaded automatically by this
 @summary Single-line and automatically growing multiline text field.
 -->
 
+- [`<tp-audio-recorder>`](../audio-recorder/index.md) : Records microphone audio locally for replay and download.
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
 - [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
 - [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.

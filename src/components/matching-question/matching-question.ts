@@ -197,9 +197,10 @@ export class TpMatchingQuestion extends TpQuestion {
 				? `🎉 Well done, all ${noun} are correct!`
 				: `Some ${noun} do not match. Try again.`;
 		output.append(message);
-		if (score === this.pairCount)
+		if (score === this.pairCount) {
+			this.unlockCorrectSolution(output);
 			output.append(this.createOpenSolutionButton());
-		else {
+		} else {
 			const feedback =
 				this.sourceFeedback?.cloneNode(true) ?? this.createGeneralFeedback();
 			if (feedback) output.append(feedback);

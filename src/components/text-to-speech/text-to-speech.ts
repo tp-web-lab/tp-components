@@ -58,6 +58,7 @@ type SpeechGlobals = {
 /**
  * @tagname tp-text-to-speech
  * @summary Reads inline or external text aloud with browser speech synthesis.
+ * @attr {string} legend = "Text to speech" - Caption of the fieldset surrounding the controls.
  * @attr {string} src = "" - Text file loaded relative to the containing document.
  * @attr {string} value = "" - Text supplied directly as an attribute.
  * @attr {string} for = "" - ID of an element supplying readable text; overrides local sources and synchronizes word boundaries when the target is tp-typewriting.
@@ -101,6 +102,7 @@ export class TpTextToSpeech extends TpBase {
 	public static get observedAttributes(): string[] {
 		return [
 			...TpBase.observedAttributes,
+			"legend",
 			"src",
 			"for",
 			"value",
@@ -298,6 +300,12 @@ export class TpTextToSpeech extends TpBase {
 
 	/** Reacts to source and visible-text attribute changes after connection. */
 	protected attributeChangedCallback(name: string): void {
+		if (name === "legend") {
+			const legend = this.querySelector(":scope > fieldset > legend");
+			if (legend)
+				legend.textContent = this.getAttribute("legend") ?? "Text to speech";
+			return;
+		}
 		if (!this.isConnected) return;
 		if (name === "src" || name === "value" || name === "for")
 			void this.updateText();
@@ -517,7 +525,7 @@ export class TpTextToSpeech extends TpBase {
 		const supported =
 			globals.speechSynthesis !== undefined &&
 			globals.SpeechSynthesisUtterance !== undefined;
-		this.innerHTML = `
+		this.innerHTML = `<fieldset data-tp-speech-ui class="tp-speech-fieldset"><legend></legend>
       <p data-tp-speech-ui class="tp-text-to-speech-text" data-role="text"${this.showText ? "" : " hidden"}></p>
       ${
 				this.lite
@@ -535,7 +543,8 @@ export class TpTextToSpeech extends TpBase {
       </tp-button-group>
       <tp-dropdown data-tp-speech-ui id="${this.settingsId}-menu" anchor="#${this.settingsId}" outside-click><ul aria-label="Speech voice"></ul></tp-dropdown>
 `
-			}`;
+			}</fieldset>`;
+		this.attributeChangedCallback("legend");
 		const textElement = this.querySelector('[data-role="text"]');
 		if (textElement !== null)
 			textElement.textContent = visibleSpeechText(this.text);
@@ -552,7 +561,7 @@ export class TpTextToSpeech extends TpBase {
 			`tp-icon-button[id="${this.settingsId}"]`,
 		);
 		const dropdown = this.querySelector<TpDropdown>(
-			`:scope > tp-dropdown[id="${this.settingsId}-menu"]`,
+			`:scope > .tp-speech-fieldset > tp-dropdown[id="${this.settingsId}-menu"]`,
 		);
 		trigger?.toggleAttribute("disabled", !supported);
 		trigger?.addEventListener("click", () => {
@@ -587,7 +596,7 @@ export class TpTextToSpeech extends TpBase {
 	/** Lists voices in the lang family without changing the author's language. */
 	private refreshVoiceMenu(): void {
 		const menu = this.querySelector(
-			`:scope > tp-dropdown[id="${this.settingsId}-menu"] > ul`,
+			`:scope > .tp-speech-fieldset > tp-dropdown[id="${this.settingsId}-menu"] > ul`,
 		);
 		if (!menu) return;
 		const language =
@@ -624,7 +633,7 @@ export class TpTextToSpeech extends TpBase {
 				this.stop();
 				this.voice = option.name;
 				this.querySelector<TpDropdown>(
-					`:scope > tp-dropdown[id="${this.settingsId}-menu"]`,
+					`:scope > .tp-speech-fieldset > tp-dropdown[id="${this.settingsId}-menu"]`,
 				)?.hide();
 				this.querySelector("tp-icon-button")?.querySelector("button")?.focus();
 			});

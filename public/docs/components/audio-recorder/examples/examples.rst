@@ -20,6 +20,13 @@
             .. tp-cluster::
 
                .. tp-textfield::
+                  :data-setting: legend
+                  :label: legend
+                  :value: Audio recorder
+                  :placeholder: Audio recorder
+                  :clearable:
+
+               .. tp-textfield::
                   :data-setting: transcript
                   :label: transcript
                   :value:

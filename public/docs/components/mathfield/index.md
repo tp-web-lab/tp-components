@@ -154,8 +154,9 @@ CSS properties
 <!-- /tp-docgen:api -->
 
 <!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_mathfield.TpMathfield.html)
+[More details…](/api/classes/components_mathfield_mathfield.TpMathfield.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

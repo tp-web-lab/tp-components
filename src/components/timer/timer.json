@@ -78,18 +78,23 @@
   "cssproperties": [
     {
       "name": "--tp-timer-alert",
-      "default": "#b91c1c",
+      "default": "var(--tp-danger-text-on-soft)",
       "description": "Controls the alert."
     },
     {
       "name": "--tp-timer-alert-bg",
-      "default": "#fecaca",
+      "default": "var(--tp-danger-fill-softer)",
       "description": "Controls the alert bg."
     },
     {
       "name": "--tp-timer-muted",
-      "default": "#9ca3af",
+      "default": "var(--tp-neutral-text-on-soft)",
       "description": "Controls the muted."
+    },
+    {
+      "name": "--tp-timer-progress",
+      "default": "0%",
+      "description": "Controls the progress."
     },
     {
       "name": "--tp-timer-size",

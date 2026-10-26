@@ -509,6 +509,7 @@ export class TpFillBlankQuestion extends TpQuestion {
 		}
 
 		if (isCorrect) {
+			this.unlockCorrectSolution(container);
 			const title = document.createElement("p");
 			title.textContent = "🎉 Congratulations, correct answer!";
 			container.append(title);

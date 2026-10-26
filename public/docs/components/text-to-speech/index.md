@@ -193,6 +193,7 @@ Attributes
   | --- | --- | --- | --- |
   | <code>autoplay</code> | <code>boolean</code> | <code>false</code> | Starts reading after the source is loaded when browser policy permits it. |
   | <code>for</code> | <code>string</code> | <code>&quot;&quot;</code> | ID of an element supplying readable text; overrides local sources and synchronizes word boundaries when the target is tp-typewriting. |
+  | <code>legend</code> | <code>string</code> | <code>&quot;Text to speech&quot;</code> | Caption of the fieldset surrounding the controls. |
   | <code>lite</code> | <code>boolean</code> | <code>false</code> | Replaces playback controls with a single speak/stop icon button. |
   | <code>pause-between-lines</code> | <code>number</code> | <code>0</code> | Silence in milliseconds between nonempty lines; an explicit [pause=...] overrides it at a line boundary. |
   | <code>pitch</code> | <code>number</code> | <code>1</code> | Speech pitch from 0 to 2. |
@@ -236,6 +237,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_text-to-speech.TpTextToSpeech.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

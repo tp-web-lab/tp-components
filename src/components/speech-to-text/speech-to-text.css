@@ -1,0 +1,6 @@
+/* Recognition controls also control the optional audio recording. */
+tp-speech-to-text > .tp-speech-fieldset > tp-audio-recorder[data-speech-recording] > .tp-speech-fieldset > :is(legend, tp-button-group) { display: none; }
+tp-speech-to-text > .tp-speech-fieldset > tp-audio-recorder[data-speech-recording] { margin-block-start: .75rem; }
+
+tp-speech-to-text { display: block; min-inline-size: 0; }
+tp-speech-to-text > .tp-speech-fieldset > tp-audio-recorder[data-speech-recording] > .tp-speech-fieldset { border: 0; padding: 0; }

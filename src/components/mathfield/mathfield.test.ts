@@ -281,3 +281,17 @@ describe("<tp-mathfield>", () => {
 		expect(clear).toHaveBeenCalledOnce();
 	});
 });
+
+it("keeps a single source copy action in the embedded text field", () => {
+	const field = document.createElement("tp-mathfield");
+	document.body.append(field);
+	expect(
+		field.querySelectorAll("[data-tp-mathfield-source-copy]"),
+	).toHaveLength(1);
+	expect(field.querySelector("[data-tp-textfield-copy]")).toBeNull();
+	field.multiline = true;
+	expect(
+		field.querySelectorAll("[data-tp-mathfield-source-copy]"),
+	).toHaveLength(1);
+	expect(field.querySelector("[data-tp-textfield-copy]")).toBeNull();
+});

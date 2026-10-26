@@ -1362,6 +1362,24 @@ export class TpQuestion extends TpBase {
 	 */
 	protected onSubmitAttempt(_value: unknown): void {}
 
+	/** Makes the solution available after automatic grading confirms a correct answer. */
+	protected unlockCorrectSolution(feedback: HTMLElement): void {
+		const elapsed = QuestionTiming.elapsedFor(this);
+		if (elapsed !== null) {
+			const message = document.createElement("p");
+			message.setAttribute("data-tp-question-success-time", "");
+			message.textContent = `Bonne réponse trouvée en ${elapsed}.`;
+			feedback.append(message);
+		}
+		this.questionTiming.unlockSolution();
+		this.solutionTabEl =
+			this.feedbackTabsEl?.querySelector<HTMLElement>(
+				"[data-tp-question-solution-tab]",
+			) ?? this.solutionTabEl;
+		this.solutionTabEl?.removeAttribute("disabled");
+		this.solutionTabEl?.setAttribute("aria-disabled", "false");
+	}
+
 	/** Allows specialized asynchronous exercises to rerun an unchanged answer. */
 	protected get allowRepeatedSubmission(): boolean {
 		return false;

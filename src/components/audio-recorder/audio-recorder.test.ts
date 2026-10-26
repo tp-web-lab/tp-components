@@ -40,7 +40,11 @@ describe("audio recorder lifecycle", () => {
 		stop.mockClear();
 		getUserMedia = vi.fn().mockResolvedValue(stream);
 		vi.stubGlobal("MediaRecorder", RecorderMock);
-		vi.stubGlobal("navigator", { mediaDevices: { getUserMedia } });
+		vi.stubGlobal("navigator", {
+			userAgent:
+				"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15",
+			mediaDevices: { getUserMedia },
+		});
 		vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
 		vi.stubGlobal(
 			"URL",
@@ -116,12 +120,29 @@ describe("audio recorder lifecycle", () => {
 		expect(field.value).toBe("final words");
 		click(host, "Clear");
 		Recognition.current.result("late");
-		expect(field.value).toBe("final words");
+		expect(field.value).toBe("");
 		click(host, "Record");
 		await flush();
 		host.removeAttribute("transcript");
 		Recognition.current.result("after removal");
-		expect(field.value).toBe("final words");
+		expect(field.value).toBe("");
+	});
+
+	it("keeps recording available on Chrome while showing the Safari-only transcription warning", async () => {
+		vi.stubGlobal("navigator", {
+			userAgent: "Mozilla/5.0 AppleWebKit/537.36 Chrome/130.0 Safari/537.36",
+			mediaDevices: { getUserMedia },
+		});
+		const host = mount();
+		host.setAttribute("transcript", "#answer");
+		expect(host.textContent).toContain("only in Safari");
+		click(host, "Record");
+		await flush();
+		click(host, "Stop");
+		expect(host.querySelector("audio")?.hidden).toBe(false);
+		expect(host.textContent).toContain("only in Safari");
+		host.removeAttribute("transcript");
+		expect(host.textContent).not.toContain("only in Safari");
 	});
 	it("makes denial recoverable", async () => {
 		getUserMedia.mockRejectedValueOnce(new Error("denied"));

@@ -17,6 +17,7 @@ The custom `<tp-textfield>` element implements the <tp-icon name="textfield" lib
 | Control or gesture | Result |
 | --- | --- |
 | Using the component | Type or edit text in the field. |
+| Copy code | Copy the current text to the clipboard. |
 | Using the component | The trailing clear button removes its contents when clearing is available. |
 | Using the component | A required-field marker means you must provide a value before submitting the form. |
 
@@ -26,6 +27,7 @@ The custom `<tp-textfield>` element implements the <tp-icon name="textfield" lib
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
 | Typing | <kbd>Enter</kbd> or edit the value using the field controls; read-only and disabled fields cannot be edited. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on Copy code | Copy the current text to the clipboard. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on Clear | Activate the clear button when available. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
@@ -34,7 +36,7 @@ The custom `<tp-textfield>` element implements the <tp-icon name="textfield" lib
 All fields use the same inline convention: ``:tp-textfield:`identifier`{value="Ada" placeholder="…"}``. The inline content initializes `name` only; it never sets `id`, `label` or `value`. An explicit `name` takes precedence. Use `value` for initial content and `placeholder` for a hint; omitting `value` keeps the component's normal default. The HTML equivalent is `<tp-textfield name="identifier" value="Ada" placeholder="…"></tp-textfield>`.
 
 
-Use the component without `multiline` for an inline native text input. Its width follows its intrinsic content width and can be changed with `width`, `inline-size`, or `--tp-textfield-inline-size`. The `type` attribute accepts `text`, `email`, `password`, `search`, `tel`, and `url`.
+Use the component without `multiline` for an inline native text input. Its default width reserves space for text and the trailing buttons (`calc(20ch + 5rem)`) and can be changed with `width`, `inline-size`, or `--tp-textfield-inline-size`. The `type` attribute accepts `text`, `email`, `password`, `search`, `tel`, and `url`.
 
 Add `multiline` to create a textarea whose width fills its container and whose height follows its content. `rows` defines its initial minimum height.
 
@@ -127,6 +129,7 @@ Methods
   | --- | --- | --- |
   | <code>clear</code> | <code>clear(): void</code> | Clears the field and emits `input`, `change`, and `tp-clear`. |
   | <code>focus</code> | <code>focus(options?: FocusOptions): void</code> | Focuses the native input or textarea. |
+  | <code>getValue</code> | <code>getValue(): string</code> | Returns the current text for clipboard integration. |
   | <code>select</code> | <code>select(): void</code> | Selects the complete field value. |
   [Public methods of `TpTextfield`]
 
@@ -144,7 +147,7 @@ CSS properties
   | <code>&#45;&#45;tp-textfield-background</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Controls the background. |
   | <code>&#45;&#45;tp-textfield-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Controls the border color. |
   | <code>&#45;&#45;tp-textfield-focus-color</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Controls the focus color. |
-  | <code>&#45;&#45;tp-textfield-inline-size</code> | <code>20ch</code> | Controls the inline size. |
+  | <code>&#45;&#45;tp-textfield-inline-size</code> | <code>calc(20ch + 5rem)</code> | Controls the inline size. |
   | <code>&#45;&#45;tp-textfield-label-font-weight</code> | <code>500</code> | Controls the label font weight. |
   | <code>&#45;&#45;tp-textfield-label-gap</code> | <code>0.35em</code> | Controls the label gap. |
   | <code>&#45;&#45;tp-textfield-padding-block</code> | <code>0.6em</code> | Controls the padding block. |
@@ -159,6 +162,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_textfield.TpTextfield.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 
@@ -442,6 +446,10 @@ All tp-components used by `<tp-textfield>` are loaded automatically by this comp
 @summary Shared base class for tp-* components.
 -->
 <!--
+@tp-dependency tp-copy-code
+@summary Copy-to-clipboard button component.
+-->
+<!--
 @tp-dependency tp-icon
 @summary SVG icon component with inline, URL, and registry sources.
 -->
@@ -451,6 +459,7 @@ All tp-components used by `<tp-textfield>` are loaded automatically by this comp
 -->
 
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
+- [`<tp-copy-code>`](../copy-code/index.md) : Copy-to-clipboard button component.
 - [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
 

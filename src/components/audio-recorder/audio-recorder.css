@@ -1,3 +1,3 @@
 tp-audio-recorder { display: block; min-inline-size: 0; }
-tp-audio-recorder > audio { display: block; max-inline-size: 100%; margin-block: .75rem; }
-tp-audio-recorder > [hidden] { display: none; }
+tp-audio-recorder > .tp-speech-fieldset > audio { display: block; max-inline-size: 100%; margin-block: .75rem; }
+tp-audio-recorder > .tp-speech-fieldset > [hidden] { display: none; }

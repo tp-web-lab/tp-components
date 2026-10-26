@@ -8,6 +8,8 @@ The custom `<tp-timer>` element implements the <tp-icon name="timer" library="co
 
 ## Usage
 
+The timer starts with the theme’s green `success` background. As time elapses, the red `danger` color fills it from left to right while the green portion shrinks. At zero, the background is fully red. Stop or reset restores green; the numerical countdown remains visible throughout. This also applies to timers embedded in questions and exercises.
+
 ### User interactions
 
 #### Mouse interactions
@@ -108,6 +110,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_timer.TpTimer.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

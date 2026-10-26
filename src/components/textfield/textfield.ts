@@ -9,6 +9,10 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-copy-code
+ * @summary Copy-to-clipboard button component.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -23,6 +27,7 @@ import style from "./textfield.css?inline";
 import "../icon/icon.js";
 import "../icon-button/icon-button.js";
 import { TpBase } from "../base/base.js";
+import { TpCopyCode } from "../copy-code/copy-code.js";
 
 export type TpTextfieldType =
 	| "text"
@@ -75,7 +80,7 @@ type TextControl = HTMLInputElement | HTMLTextAreaElement;
  * @cssprop [--tp-textfield-background=var(--tp-paper-color)] Field background.
  * @cssprop [--tp-textfield-border-color=var(--tp-neutral-stroke-soft)] Field border color.
  * @cssprop [--tp-textfield-focus-color=var(--tp-brand-text-colorful)] Focus border color.
- * @cssprop [--tp-textfield-inline-size=20ch] Width of a single-line text field.
+ * @cssprop [--tp-textfield-inline-size=calc(20ch + 5rem)] Width of a single-line text field.
  * @cssprop [--tp-textfield-label-gap=0.35em] Space between the label and its field.
  * @cssprop [--tp-textfield-label-font-weight=500] Label font weight.
  * @cssprop [--tp-textfield-radius=var(--tp-border-radius-sm)] Field border radius.
@@ -122,6 +127,11 @@ export class TpTextfield extends TpBase {
 	}
 	public set regexp(value: string) {
 		this.setStringAttribute("regexp", value);
+	}
+
+	/** Returns the current text for clipboard integration. */
+	public getValue(): string {
+		return this.value;
 	}
 
 	/** Native input type used in single-line mode. */
@@ -322,6 +332,13 @@ export class TpTextfield extends TpBase {
 		typeMarker.setAttribute("size", "1.25em");
 		typeMarker.setAttribute("aria-hidden", "true");
 		wrapper.append(this.prefixIcon, this.field, this.clearButton, typeMarker);
+		if (!this.closest("tp-mathfield")) {
+			const copyButton = new TpCopyCode();
+			copyButton.setAttribute("data-tp-textfield-copy", "");
+			copyButton.setAttribute("copied-text", "Text copied!");
+			copyButton.forElement = this;
+			wrapper.append(copyButton);
+		}
 		if (this.label === "") this.replaceChildren(wrapper);
 		else {
 			const label = document.createElement("label");

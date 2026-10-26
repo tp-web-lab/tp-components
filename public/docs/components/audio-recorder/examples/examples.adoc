@@ -19,6 +19,10 @@ Enter `#spoken-answer` in transcript, then use Record and Stop in the preview. F
 ======
 [tp-cluster]
 =====
+[tp-textfield%clearable,data-setting="legend",label="legend",value="Audio recorder",placeholder="Audio recorder"]
+====
+====
+
 [tp-textfield%value%placeholder%clearable,data-setting="transcript",label="transcript"]
 ====
 ====

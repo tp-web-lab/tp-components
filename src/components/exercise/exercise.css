@@ -10,6 +10,18 @@ tp-exercise > details > [data-tp-exercise-layout] > dl > dt:first-child { margin
 tp-exercise > details > [data-tp-exercise-layout] > dl > dd { margin-inline: 0; }
 tp-exercise > details > [data-tp-exercise-layout] > dl > dd > ol { margin-block: 0; padding-inline-start: 1.75rem; }
 tp-exercise > details > [data-tp-exercise-layout] > dl > dd > ol > li + li { margin-block-start: 1rem; }
-tp-exercise > details > [data-tp-exercise-timing-mask] { padding: 1rem; }
+tp-exercise > details > tp-mask[data-tp-exercise-timing-mask] {
+  text-align: center;
+  margin: .75em;
+  padding: 1.5em;
+}
+[data-tp-exercise-timing-mask] > p { margin-block: 0 1em; }
 
 tp-exercise > details > summary > [data-tp-exercise-title] > * { margin-block: 0; }
+
+tp-exercise > details > summary > tp-timer[data-tp-exercise-timer] {
+  margin-inline-start: auto;
+  margin-inline-end: 2em;
+  flex-shrink: 0;
+  font-weight: normal;
+}

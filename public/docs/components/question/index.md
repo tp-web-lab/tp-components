@@ -55,7 +55,7 @@ The header pairs `--tp-brand-fill-softer` with `--tp-brand-text-on-soft`, and us
 
 Set `timing="00:05:00"` to allow five minutes. The strict `hh:mm:ss` format accepts hours from `00` to `99` and minutes/seconds from `00` to `59`. Missing, invalid and `00:00:00` values disable the time limit. A silent timer without controls appears beside the title, before the disclosure arrow.
 
-Opening a timed question shows a centered message and **Start**. The countdown begins only after Start reveals the content. At zero, a mask replaces the content with “Time limit has expired.” and **Continue**. The Solution tab is disabled during the timed session, including keyboard navigation and solution links in feedback. Continue restores access to the question and its solution without restarting the timer or clearing answers. Collapsing and reopening a question does not pause or restart its countdown. Changing `timing` starts a new waiting session; removing it reveals the content. These rules also apply to specialized questions.
+Opening a timed question shows a centered message and **Start**. The countdown begins only after Start reveals the content. At zero, a mask replaces the content with “Time limit has expired.” and **Continue**. The Solution tab is disabled during the timed session, including keyboard navigation and solution links in feedback, until automatic grading confirms a correct answer. A correct answer unlocks only that question’s solution immediately; the countdown continues. Continue restores access to the question and its solution without restarting the timer or clearing answers. Collapsing and reopening a question does not pause or restart its countdown. Changing `timing` starts a new waiting session; removing it reveals the content. These rules also apply to specialized questions.
 
 `mode="mixed"` is the default policy for descendant `tp-blank` elements. Each blank follows its boolean `closed` attribute. Set `mode="closed"` to close every blank or `mode="opened"` to open every blank without changing those local choices. This policy does not convert other question widgets, such as radio lists.
 
@@ -82,6 +82,8 @@ When no solution is provided, its panel displays “No solution is available for
 </tp-question>
 ```
 
+Successful automatically graded answers also show “Bonne réponse trouvée en hh:mm:ss.” in Feedback. Elapsed time is measured from Start on the question timer, or on the nearest enclosing exercise timer when the question has none.
+
 ## Examples
 
 <!-- tp-docgen:example-descriptions:start -->
@@ -92,7 +94,7 @@ Attributes
 : Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
 
 Timed question
-: Open the question and select Start to reveal its content for ten seconds. The Solution tab stays disabled during the countdown. After expiry, select Continue to recover your answer and access the solution.
+: Open the question and select Start to reveal its content for ten seconds. The Solution tab stays disabled during the countdown unless automatic grading confirms a correct answer. After expiry, select Continue to recover your answer and access the solution.
 
 Optional score
 : Type blue and submit to see the numerical grade enabled by score. Remove score in the source and submit again: correction remains available, but the grade is hidden.
@@ -154,6 +156,7 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_question.TpQuestion.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

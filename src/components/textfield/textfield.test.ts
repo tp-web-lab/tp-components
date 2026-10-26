@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import "./textfield.js";
+import type { TpCopyCode } from "../copy-code/copy-code.js";
 
 afterEach(() => document.body.replaceChildren());
 
@@ -212,4 +213,35 @@ describe("<tp-textfield>", () => {
 		expect(field.rows).toBe(3);
 		expect(field.iconLibrary).toBe("tp");
 	});
+});
+
+it("copies the live text after editing and switching to multiline", async () => {
+	const writeText = vi.fn().mockResolvedValue(undefined);
+	vi.stubGlobal("navigator", { clipboard: { writeText } });
+	try {
+		const field = document.createElement("tp-textfield");
+		field.value = "Initial text";
+		document.body.append(field);
+		const copy = () => {
+			const button = field.querySelector<TpCopyCode>(
+				"[data-tp-textfield-copy]",
+			);
+			if (!button) throw new Error("Missing copy button");
+			return button.copy();
+		};
+		await copy();
+		expect(writeText).toHaveBeenLastCalledWith("Initial text");
+		field.multiline = true;
+		const textarea = field.querySelector("textarea");
+		if (!textarea) throw new Error("Missing textarea");
+		textarea.value = "Edited\ntext";
+		textarea.dispatchEvent(new Event("input", { bubbles: true }));
+		await copy();
+		expect(writeText).toHaveBeenLastCalledWith("Edited\ntext");
+		field.readOnly = true;
+		await copy();
+		expect(writeText).toHaveBeenLastCalledWith("Edited\ntext");
+	} finally {
+		vi.unstubAllGlobals();
+	}
 });

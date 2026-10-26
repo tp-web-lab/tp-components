@@ -11,8 +11,17 @@
   ],
   "attributes": [
     {
+      "name": "legend",
+      "description": "Caption of the fieldset surrounding the controls.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"Audio recorder\""
+    },
+    {
       "name": "transcript",
-      "description": "CSS selector of the element receiving recognized speech; fields receive their value, other elements receive text.",
+      "description": "Safari only (temporary): CSS selector of the element receiving recognized speech; fields receive their value, other elements receive text.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -20,7 +29,23 @@
       "default": "\"\""
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "clear(cancelTranscript = true): void",
+      "inherited": false,
+      "description": "Removes the recording and optionally clears transcription."
+    },
+    {
+      "name": "start(): Promise<void>",
+      "inherited": false,
+      "description": "Starts local recording after an explicit action."
+    },
+    {
+      "name": "stop(): void",
+      "inherited": false,
+      "description": "Finishes the recording or cancels a pending microphone request."
+    }
+  ],
   "events": [
     {
       "name": "tp-audio-recorded",
@@ -47,7 +72,7 @@
   "userHelp": {
     "displayName": "Audio recorder",
     "introduction": "The custom `<tp-audio-recorder>` element records a spoken response locally for replay and download, with optional speech transcription into another element.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Record | Request microphone access, capture a new response and transcribe it when configured. |\n| Stop | Finish capturing and prepare the audio for replay; allow final transcription results to arrive. |\n| Clear | Remove the current recording and cancel transcription; keep the written transcript. |\n| Playback controls | Listen, pause and seek in the recorded response. |\n| Download recording | Save the audio file on your device. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused button. Native playback shortcuts depend on the browser. |\n| <kbd>Enter</kbd> on Download recording | Save the audio file. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Record | Request microphone access, capture a new response and transcribe it when configured. |\n| Stop | Finish capturing and prepare the audio for replay; allow final transcription results to arrive. |\n| Clear | Remove the current recording and clear the written transcript. |\n| Playback controls | Listen, pause and seek in the recorded response. |\n| Download recording | Save the audio file on your device. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused button. Native playback shortcuts depend on the browser. |\n| <kbd>Enter</kbd> on Download recording | Save the audio file. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

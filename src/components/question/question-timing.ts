@@ -13,10 +13,13 @@ export function questionTimingSeconds(value: string): number {
 
 /** Coordinates the shared timer and mask without changing question answers. */
 export class QuestionTiming {
+	private static readonly sessions = new WeakMap<HTMLElement, QuestionTiming>();
+	private startedAt: number | null = null;
 	private timer: TpTimer | null = null;
 	private mask: TpMask | null = null;
 	private configured: string | null = null;
 	private layout: HTMLElement | null = null;
+	private solutionPanel: HTMLElement | null = null;
 	private releaseSolution: (() => void) | null = null;
 	constructor(
 		private readonly host: HTMLElement,
@@ -36,10 +39,20 @@ export class QuestionTiming {
 				: ":scope > details > [data-tp-exercise-header]",
 		);
 		if (!layout || !summary) return;
-		if (this.configured === value && this.layout === layout) return;
+		const solutionPanel = layout.querySelector<HTMLElement>(
+			"[data-tp-question-solution-content]",
+		);
+		if (
+			this.configured === value &&
+			this.layout === layout &&
+			this.solutionPanel === solutionPanel
+		)
+			return;
 		this.dispose();
 		this.configured = value;
 		this.layout = layout;
+		this.solutionPanel = solutionPanel;
+		QuestionTiming.sessions.set(this.host, this);
 		const seconds = questionTimingSeconds(value);
 		if (!seconds) return;
 		if (this.kind === "question") this.lockSolution();
@@ -64,6 +77,7 @@ export class QuestionTiming {
 			"Start",
 			() => {
 				mask.active = false;
+				this.startedAt = Date.now();
 				timer.start();
 				this.focusContent();
 			},
@@ -78,11 +92,36 @@ export class QuestionTiming {
 			});
 		});
 	}
+	/** Returns elapsed time from the nearest started question or exercise timer. */
+	static elapsedFor(host: HTMLElement): string | null {
+		for (
+			let element: HTMLElement | null = host;
+			element;
+			element = element.parentElement
+		) {
+			const session = QuestionTiming.sessions.get(element);
+			if (session?.startedAt == null) continue;
+			const seconds = Math.floor((Date.now() - session.startedAt) / 1000);
+			return [
+				Math.floor(seconds / 3600),
+				Math.floor(seconds / 60) % 60,
+				seconds % 60,
+			]
+				.map((value) => String(value).padStart(2, "0"))
+				.join(":");
+		}
+		return null;
+	}
+	/** Releases the timed solution gate after a verified correct answer. */
+	unlockSolution(): void {
+		this.releaseSolution?.();
+		this.releaseSolution = null;
+	}
 	private lockSolution(): void {
-		const tab = this.layout?.querySelector<HTMLElement>(
+		let tab = this.layout?.querySelector<HTMLElement>(
 			"[data-tp-question-solution-tab]",
 		);
-		const panel = this.layout?.querySelector<HTMLElement>(
+		let panel = this.layout?.querySelector<HTMLElement>(
 			"[data-tp-question-solution-content]",
 		);
 		const tabs = tab?.closest("tp-tabs");
@@ -121,9 +160,18 @@ export class QuestionTiming {
 		tabs.addEventListener("keydown", guard, true);
 		this.releaseSolution = () => {
 			tabs.removeEventListener("keydown", guard, true);
+			// Tabs may rebuild their internal nodes when an enclosing exercise moves.
+			tab =
+				tabs.querySelector<HTMLElement>("[data-tp-question-solution-tab]") ??
+				tab;
+			panel =
+				tabs.querySelector<HTMLElement>(
+					"[data-tp-question-solution-content]",
+				) ?? panel;
+			if (!tab || !panel) return;
 			tab.toggleAttribute("disabled", wasDisabled);
 			tab.setAttribute("aria-disabled", String(wasDisabled));
-			panel.inert = wasInert;
+			panel.inert = wasInert ?? false;
 			panel.removeAttribute("data-tp-question-solution-locked");
 			for (const button of this.layout?.querySelectorAll<HTMLButtonElement>(
 				"[data-tp-question-open-solution]",
@@ -156,6 +204,8 @@ export class QuestionTiming {
 		this.layout.focus({ preventScroll: true });
 	}
 	dispose(): void {
+		this.startedAt = null;
+		QuestionTiming.sessions.delete(this.host);
 		this.releaseSolution?.();
 		this.releaseSolution = null;
 		this.timer?.remove();
@@ -164,5 +214,6 @@ export class QuestionTiming {
 		this.mask = null;
 		this.configured = null;
 		this.layout = null;
+		this.solutionPanel = null;
 	}
 }

@@ -215,8 +215,9 @@ CSS properties
 <!-- /tp-docgen:api -->
 
 <!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_diagram.TpDiagram.html)
+[More details…](/api/classes/components_diagram_diagram.TpDiagram.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

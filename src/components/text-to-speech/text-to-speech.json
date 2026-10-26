@@ -29,6 +29,15 @@
       "default": "\"\""
     },
     {
+      "name": "legend",
+      "description": "Caption of the fieldset surrounding the controls.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"Text to speech\""
+    },
+    {
       "name": "lite",
       "description": "Replaces playback controls with a single speak/stop icon button.",
       "reflected": true,

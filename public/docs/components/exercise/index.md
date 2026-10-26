@@ -35,7 +35,7 @@ The **Title** description supplies the summary beside the `exercise` icon from t
 
 Set `timing="00:05:00"` for a five-minute limit. As with questions, hours use two digits and minutes/seconds range from 00 to 59. Missing, invalid and zero durations disable timing. Start reveals the entire context and question list and begins a silent countdown. At expiry, the content is replaced by a message and Continue. Continue reveals the same content and answers without restarting the timer. Changing timing creates a new waiting session; removing it cancels the timer and reveals the content.
 
-The exercise timer controls access to the whole activity. Questions retain their own solution-access rules and optional timers; omit individual question timers when only a shared deadline is wanted. Removing and reconnecting the exercise starts a new waiting session.
+The exercise timer controls access to the whole activity. A verified correct answer gives access to that question’s solution immediately, including when the question has its own timer. Other questions remain subject to their own solution-access rules, and countdowns continue. Questions retain their optional timers; omit individual question timers when only a shared deadline is wanted. Removing and reconnecting the exercise starts a new waiting session.
 
 ### User interactions
 
@@ -56,6 +56,8 @@ Question controls belong to each question and have their own User help.
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between available controls. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Expand or collapse the focused summary, or activate the focused Start or Continue button. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type ?. |
+
+Successful automatically graded answers also show “Bonne réponse trouvée en hh:mm:ss.” in Feedback. Elapsed time is measured from Start on the question timer, or on the nearest enclosing exercise timer when the question has none.
 
 ## Examples
 
@@ -96,3 +98,7 @@ Attributes
   | `open` | boolean | absent | Initially expand the exercise. |
   | `timing` | string | empty | Optional nonzero time limit in strict hh:mm:ss format. |
 <!-- /tp-docgen:api -->
+
+<!-- tp-docgen:typedoc:start -->
+[More details…](/api/classes/components_exercise.TpExercise.html)
+<!-- tp-docgen:typedoc:end -->

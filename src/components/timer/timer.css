@@ -1,9 +1,16 @@
 tp-timer {
-  --tp-timer-alert: #b91c1c;
-  --tp-timer-alert-bg: #fecaca;
-  --tp-timer-muted: #9ca3af;
+  --tp-timer-alert: var(--tp-danger-text-on-soft);
+  --tp-timer-alert-bg: var(--tp-danger-fill-softer);
+  --tp-timer-muted: var(--tp-neutral-text-on-soft);
   --tp-timer-size: 1rem;
 
+  background-color: var(--tp-success-fill-softer);
+  background-image: linear-gradient(var(--tp-timer-alert-bg), var(--tp-timer-alert-bg));
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: var(--tp-timer-progress, 0%) 100%;
+  color: var(--tp-text-body);
+  transition: background-size 200ms linear;
   align-items: center;
   border: 1px solid #d1d5db;
   border-radius: 0.5em;
@@ -15,7 +22,7 @@ tp-timer {
 
 tp-timer[data-elapsed] {
   background-color: var(--tp-timer-alert-bg);
-  border-color: var(--tp-timer-alert);
+  border-color: var(--tp-danger-stroke-soft);
 }
 
 tp-timer > [data-tp-timer-duration] {
@@ -42,7 +49,7 @@ tp-timer > tp-icon-button > button {
 }
 
 tp-timer[data-elapsed] > tp-icon-button > button {
-  border-color: var(--tp-timer-alert);
+  border-color: var(--tp-danger-stroke-soft);
 }
 
 tp-timer[data-elapsed] > [data-tp-timer-display] {
@@ -57,3 +64,11 @@ tp-timer[data-stopped] > [data-tp-timer-display] {
 /* Read-only countdowns can be embedded in a question summary. */
 tp-timer[no-controls] > [data-tp-timer-duration],
 tp-timer[no-controls] > tp-icon-button { display: none !important; }
+
+/* Keep resets immediate and respect reduced-motion preferences. */
+tp-timer[data-stopped],
+tp-timer[data-elapsed] { transition: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  tp-timer { transition: none; }
+}

@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { TpQuestion } from "./question.js";
+import "../exercise/exercise.js";
 import "../single-choice-question/single-choice-question.js";
 import type { TpTimer } from "../timer/timer.js";
 import { questionTimingSeconds } from "./question-timing.js";
@@ -128,7 +129,7 @@ describe("question timing", () => {
 		const tabs = q.querySelector("tp-tabs");
 		action(q, "Start");
 		expect(tab?.getAttribute("aria-disabled")).toBe("true");
-		expect(panel?.inert).toBe(true);
+		expect(panel?.hasAttribute("data-tp-question-solution-locked")).toBe(true);
 		expect(panel?.hasAttribute("data-tp-question-solution-locked")).toBe(true);
 		tab?.click();
 		expect(tabs?.getAttribute("selected")).toBe("0");
@@ -156,6 +157,91 @@ describe("question timing", () => {
 		expect(tab?.hasAttribute("disabled")).toBe(false);
 		tab?.click();
 		expect(q.querySelector("tp-tabs")?.getAttribute("selected")).toBe("1");
+	});
+	it.each([false, true])(
+		"unlocks a correct answer before expiry (inside exercise: %s)",
+		async (nested) => {
+			const q = document.createElement("tp-single-choice-question");
+			q.setAttribute("answer", "2");
+			q.setAttribute("timing", "00:01:00");
+			q.setAttribute("open", "both");
+			q.innerHTML =
+				"<dl><dt>Title</dt><dd>Choose blue</dd><dt>Form</dt><dd><ul><li>Red</li><li>Blue</li><li>Green</li></ul></dd><dt>Solution</dt><dd>Blue is correct.</dd></dl>";
+			if (nested) {
+				const exercise = document.createElement("tp-exercise");
+				exercise.setAttribute("timing", "00:02:00");
+				exercise.innerHTML =
+					"<dl><dt>Title</dt><dd>Parent</dd><dt>Questions</dt><dd><ol><li></li></ol></dd></dl>";
+				exercise.querySelector("li")?.append(q);
+				document.body.append(exercise);
+				await vi.advanceTimersByTimeAsync(0);
+				action(exercise, "Start");
+			} else document.body.append(q);
+			await vi.advanceTimersByTimeAsync(0);
+			action(q, "Start");
+			const tab = q.querySelector<HTMLElement>(
+				"[data-tp-question-solution-tab]",
+			);
+			const panel = q.querySelector<HTMLElement>(
+				"[data-tp-question-solution-content]",
+			);
+			const submit = (index: number) => {
+				q.querySelectorAll<HTMLInputElement>(
+					'tp-radio-list input[type="radio"]',
+				)[index]?.click();
+				q.querySelector<HTMLElement>('[data-action="submit"]')?.click();
+			};
+			submit(0);
+			submit(2);
+			expect(tab?.hasAttribute("disabled")).toBe(true);
+			expect(panel?.hasAttribute("data-tp-question-solution-locked")).toBe(
+				true,
+			);
+			vi.advanceTimersByTime(3000);
+			submit(1);
+			expect(
+				q.querySelector("[data-tp-question-success-time]")?.textContent,
+			).toContain("00:00:03");
+			expect(tab?.hasAttribute("disabled")).toBe(false);
+			expect(tab?.getAttribute("aria-disabled")).toBe("false");
+			expect(panel?.inert).toBe(false);
+			expect(panel?.hasAttribute("data-tp-question-solution-locked")).toBe(
+				false,
+			);
+			const link = q.querySelector<HTMLButtonElement>(
+				"[data-tp-question-open-solution]",
+			);
+			expect(link?.disabled).toBe(false);
+			link?.click();
+			expect(tab?.closest("tp-tabs")?.getAttribute("selected")).toBe("1");
+			vi.advanceTimersByTime(1000);
+			expect(q.querySelector("[data-tp-timer-display]")?.textContent).toBe(
+				"00:00:56",
+			);
+			q.setAttribute("timing", "00:00:30");
+			expect(panel?.hasAttribute("data-tp-question-solution-locked")).toBe(
+				true,
+			);
+			expect(tab?.hasAttribute("disabled")).toBe(true);
+		},
+	);
+	it("reports elapsed time from the enclosing exercise when the question has no timer", async () => {
+		const exercise = document.createElement("tp-exercise");
+		exercise.setAttribute("timing", "01:05:00");
+		exercise.innerHTML =
+			'<dl><dt>Title</dt><dd>Timed exercise</dd><dt>Questions</dt><dd><tp-single-choice-question answer="1"><dl><dt>Title</dt><dd>Choice</dd><dt>Form</dt><dd><ul><li>Blue</li><li>Red</li></ul></dd><dt>Solution</dt><dd>Blue.</dd></dl></tp-single-choice-question></dd></dl>';
+		document.body.append(exercise);
+		await vi.advanceTimersByTimeAsync(0);
+		action(exercise, "Start");
+		vi.setSystemTime(Date.now() + 3723000);
+		const q = exercise.querySelector("tp-single-choice-question");
+		q?.querySelector<HTMLInputElement>(
+			'tp-radio-list input[type="radio"]',
+		)?.click();
+		q?.querySelector<HTMLElement>('[data-action="submit"]')?.click();
+		expect(
+			q?.querySelector("[data-tp-question-success-time]")?.textContent,
+		).toBe("Bonne réponse trouvée en 01:02:03.");
 	});
 	it("reflects the timing property", () => {
 		const q = new TpQuestion();

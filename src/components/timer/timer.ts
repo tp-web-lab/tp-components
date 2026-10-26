@@ -437,6 +437,11 @@ export class TpTimer extends TpBase {
 		this.displayEl.textContent = timeText;
 		this.durationInputEl.value = String(this.duration);
 		this.style.setProperty("--tp-timer-size", this.size);
+		const elapsed = Math.min(
+			1,
+			Math.max(0, 1 - this.remainingMs / (this.duration * 1000)),
+		);
+		this.style.setProperty("--tp-timer-progress", `${elapsed * 100}%`);
 	}
 }
 

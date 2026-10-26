@@ -60,6 +60,13 @@
                   :clearable:
 
                .. tp-textfield::
+                  :data-setting: legend
+                  :label: legend
+                  :value: Text to speech
+                  :placeholder: Text to speech
+                  :clearable:
+
+               .. tp-textfield::
                   :data-setting: pause-between-lines
                   :label: pause-between-lines
                   :value: 0

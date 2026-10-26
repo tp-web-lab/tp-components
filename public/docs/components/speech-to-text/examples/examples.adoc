@@ -22,10 +22,16 @@ Combine the attributes on one preview. Controls start at the published defaults.
 * disabled
 
 * interim-results
+
+* record
 ====
 
 [tp-cluster]
 =====
+[tp-textfield%clearable,data-setting="legend",label="legend",value="Speech to text",placeholder="Speech to text"]
+====
+====
+
 [tp-textfield%value%placeholder%clearable,data-setting="value",label="value"]
 ====
 ====
@@ -68,16 +74,16 @@ Preparing the preview…
 ====
 ========
 
-.Basic
+.French
 ======
-[tp-speech-to-text,lang="en-US"]
+[tp-speech-to-text,lang="fr-FR"]
 ====
 ====
 ======
 
-.French
+.Recording
 ======
-[tp-speech-to-text,lang="fr-FR"]
+[tp-speech-to-text%continuous%interim-results%record,lang="en-GB"]
 ====
 ====
 ======

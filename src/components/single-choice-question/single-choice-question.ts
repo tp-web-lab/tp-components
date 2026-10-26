@@ -334,6 +334,7 @@ export class TpSingleChoiceQuestion extends TpQuestion {
 		container.append(this.createAttemptSummaryLine(isCorrect ? 1 : 0, 1));
 
 		if (isCorrect) {
+			this.unlockCorrectSolution(container);
 			const title = document.createElement("p");
 			title.textContent = "🎉 Well done, that’s the right answer!";
 			const button = this.createOpenSolutionButton();

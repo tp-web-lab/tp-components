@@ -30,7 +30,16 @@
 
                - interim-results
 
+               - record
+
             .. tp-cluster::
+
+               .. tp-textfield::
+                  :data-setting: legend
+                  :label: legend
+                  :value: Speech to text
+                  :placeholder: Speech to text
+                  :clearable:
 
                .. tp-textfield::
                   :data-setting: value
@@ -75,12 +84,15 @@
             :type: module
             :src: /docs/components/speech-to-text/examples/attributes.js
 
-      .. example:: Basic
-
-         .. tp-speech-to-text::
-            :lang: en-US
-
       .. example:: French
 
          .. tp-speech-to-text::
             :lang: fr-FR
+
+      .. example:: Recording
+
+         .. tp-speech-to-text::
+            :lang: en-GB
+            :continuous:
+            :interim-results:
+            :record:

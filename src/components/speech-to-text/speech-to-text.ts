@@ -1,8 +1,13 @@
+import { isSafariBrowser } from "../../utilities/safari-browser.js";
 /**
  * @module components/speech-to-text
  * @summary Transcribes microphone speech using browser speech recognition.
  */
 // tp-docgen:dependencies:start
+/**
+ * @tp-dependency tp-audio-recorder
+ * @summary Records microphone audio locally for replay and download.
+ */
 /**
  * @tp-dependency tp-base
  * @summary Shared base class for tp-* components.
@@ -26,7 +31,9 @@
 // tp-docgen:dependencies:end
 
 import speechControlsStyle from "../../utilities/speech-controls.css?inline";
+import { TpAudioRecorder } from "../audio-recorder/audio-recorder.js";
 import { TpBase } from "../base/base.js";
+import recordingStyle from "./speech-to-text.css?inline";
 import "../button-group/button-group.js";
 import "../button/button.js";
 import "../stack/stack.js";
@@ -41,7 +48,9 @@ import type {
 /**
  * @tagname tp-speech-to-text
  * @summary transcribes microphone speech into editable text using the Web Speech API.
+ * @attr {string} legend = "Speech to text" - Caption of the fieldset surrounding the controls.
  * @attr {string} value = "" - Final transcript, editable without microphone access.
+ * @attr {boolean} record = false - Safari only (temporary): records audio alongside recognition for replay and download.
  * @attr {boolean} continuous = false - Requests multiple recognition results in one session.
  * @attr {boolean} interim-results = false - Displays provisional recognition separately from the final transcript.
  * @attr {boolean} disabled = false - Disables editing and recognition and stops any active session.
@@ -65,8 +74,10 @@ export class TpSpeechToText extends TpBase {
 	public static get observedAttributes(): string[] {
 		return [
 			...TpBase.observedAttributes,
+			"legend",
 			"value",
 			"continuous",
+			"record",
 			"interim-results",
 			"disabled",
 		];
@@ -84,6 +95,31 @@ export class TpSpeechToText extends TpBase {
 	/** Current lifecycle state, including pending permission and finalization. */
 	private state: "idle" | "starting" | "listening" | "stopping" = "idle";
 
+	private audioRecorder: TpAudioRecorder | null = null;
+
+	/** Enables optional local recording alongside transcription. */
+	public get record(): boolean {
+		return this.hasAttribute("record");
+	}
+	public set record(value: boolean) {
+		this.toggleAttribute("record", value);
+	}
+
+	private syncRecorder(): void {
+		if (!this.record || !isSafariBrowser()) {
+			this.audioRecorder?.remove();
+			this.audioRecorder = null;
+		} else if (!this.audioRecorder?.isConnected) {
+			this.audioRecorder = new TpAudioRecorder();
+			this.audioRecorder.setAttribute("data-speech-recording", "");
+			this.audioRecorder.addEventListener("tp-audio-recorded", () =>
+				this.updateUI(),
+			);
+			this.querySelector(":scope > .tp-speech-fieldset")?.append(
+				this.audioRecorder,
+			);
+		}
+	}
 	/** Final transcript, also usable as an initial value. */
 	public get value(): string {
 		return this.getAttribute("value") ?? "";
@@ -121,7 +157,8 @@ export class TpSpeechToText extends TpBase {
 	protected override connectedCallback(): void {
 		super.connectedCallback();
 		this.ensureGlobalStyle("tp-speech-controls-styles", speechControlsStyle);
-		this.innerHTML = `<tp-stack>
+		this.ensureGlobalStyle("tp-speech-recording-styles", recordingStyle);
+		this.innerHTML = `<fieldset class="tp-speech-fieldset"><legend></legend><tp-stack>
       <tp-button-group class="tp-speech-controls" role="group" aria-label="Speech recognition controls">
         <tp-button size="s" data-action="start">Start</tp-button>
         <tp-button size="s" data-action="stop">Stop</tp-button>
@@ -129,8 +166,10 @@ export class TpSpeechToText extends TpBase {
         <span class="tp-speech-status" data-role="status" role="status" aria-live="polite"></span>
       </tp-button-group>
       <tp-textfield multiline label="Transcript" data-role="transcript"></tp-textfield>
+      <p data-role="recording-warning" role="status" hidden></p>
       <p data-role="interim" aria-label="Provisional transcript" hidden></p>
-    </tp-stack>`;
+    </tp-stack></fieldset>`;
+		this.attributeChangedCallback("legend");
 		for (const action of ["start", "stop", "clear"] as const) {
 			this.querySelector(`[data-action="${action}"]`)?.addEventListener(
 				"click",
@@ -138,12 +177,20 @@ export class TpSpeechToText extends TpBase {
 			);
 		}
 		this.querySelector("tp-textfield")?.addEventListener("input", this.onInput);
+		this.syncRecorder();
 		this.updateUI();
 	}
 	/** Aborts before applying author edits or recognition setting changes. */
 	protected attributeChangedCallback(name: string): void {
+		if (name === "legend") {
+			const legend = this.querySelector(":scope > fieldset > legend");
+			if (legend)
+				legend.textContent = this.getAttribute("legend") ?? "Speech to text";
+			return;
+		}
 		if (this.writingResult) return;
 		if (
+			name === "record" ||
 			name === "value" ||
 			name === "lang" ||
 			name === "continuous" ||
@@ -151,7 +198,10 @@ export class TpSpeechToText extends TpBase {
 			this.disabled
 		)
 			this.abort();
-		if (this.isConnected) this.updateUI();
+		if (this.isConnected) {
+			if (name === "record") this.syncRecorder();
+			this.updateUI();
+		}
 	}
 	/** Releases the microphone and detaches all recognition listeners. */
 	public disconnectedCallback(): void {
@@ -190,6 +240,7 @@ export class TpSpeechToText extends TpBase {
 	/** Stops listening while allowing the browser to deliver a final result. */
 	public stop(): void {
 		if (!this.recognition || this.state === "stopping") return;
+		this.audioRecorder?.stop();
 		this.state = "stopping";
 		this.status = "Finishing transcription…";
 		this.updateUI();
@@ -201,6 +252,7 @@ export class TpSpeechToText extends TpBase {
 	}
 	/** Cancels recognition, discarding provisional text but retaining final text. */
 	public abort(): void {
+		this.audioRecorder?.stop();
 		const engine = this.release();
 		if (!engine) return;
 		try {
@@ -216,6 +268,9 @@ export class TpSpeechToText extends TpBase {
 	public clear(): void {
 		if (this.disabled) return;
 		this.abort();
+		this.audioRecorder?.remove();
+		this.audioRecorder = null;
+		this.syncRecorder();
 		this.value = "";
 		this.interim = "";
 		this.status = "Ready.";
@@ -236,6 +291,7 @@ export class TpSpeechToText extends TpBase {
 		if (this.state !== "stopping") {
 			this.state = "listening";
 			this.status = "Listening…";
+			void this.audioRecorder?.start();
 		}
 		this.updateUI();
 		this.emit("start", { value: this.value });
@@ -264,6 +320,7 @@ export class TpSpeechToText extends TpBase {
 	};
 	/** Ends the session without automatically opening the microphone again. */
 	private readonly onEnd = (): void => {
+		this.audioRecorder?.stop();
 		this.release();
 		this.status = "Ready.";
 		this.updateUI();
@@ -296,6 +353,15 @@ export class TpSpeechToText extends TpBase {
 	/** Synchronizes existing controls without replacing focused elements. */
 	private updateUI(): void {
 		const supported = Boolean(this.recognitionConstructor());
+		const recordingWarning = this.querySelector<HTMLElement>(
+			'[data-role="recording-warning"]',
+		);
+		if (recordingWarning) {
+			recordingWarning.hidden = !this.record || isSafariBrowser();
+			recordingWarning.textContent = recordingWarning.hidden
+				? ""
+				: "Recording during transcription is temporarily available only in Safari. Transcription remains available if supported by your browser.";
+		}
 		const field = this.querySelector("tp-textfield");
 		if (field) {
 			field.value = this.value;
@@ -311,7 +377,10 @@ export class TpSpeechToText extends TpBase {
 		);
 		this.querySelector('[data-action="clear"]')?.toggleAttribute(
 			"disabled",
-			this.disabled || (this.value === "" && this.state === "idle"),
+			this.disabled ||
+				(this.value === "" &&
+					this.state === "idle" &&
+					!this.audioRecorder?.querySelector("audio")?.hasAttribute("src")),
 		);
 		const status = this.querySelector('[data-role="status"]');
 		if (status)

@@ -34,6 +34,9 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ::: tp-textfield { data-setting="for" label="for" value placeholder clearable }
 :::
 
+::: tp-textfield { data-setting="legend" label="legend" value="Text to speech" placeholder="Text to speech" clearable }
+:::
+
 ::: tp-textfield { data-setting="pause-between-lines" label="pause-between-lines" value="0" placeholder="0" clearable }
 :::
 

@@ -12,6 +12,9 @@ Enter `#spoken-answer` in transcript, then use Record and Stop in the preview. F
 
 ::::: tp-stack
 :::: tp-cluster
+::: tp-textfield { data-setting="legend" label="legend" value="Audio recorder" placeholder="Audio recorder" clearable }
+:::
+
 ::: tp-textfield { data-setting="transcript" label="transcript" value placeholder clearable }
 :::
 ::::

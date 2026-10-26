@@ -27,7 +27,8 @@ import style from "./audio-recorder.css?inline";
 
 /**
  * Local microphone recorder with playback and download.
- * @attr {string} transcript = "" - CSS selector of the element receiving recognized speech; fields receive their value, other elements receive text.
+ * @attr {string} legend = "Audio recorder" - Caption of the fieldset surrounding the controls.
+ * @attr {string} transcript = "" - Safari only (temporary): CSS selector of the element receiving recognized speech; fields receive their value, other elements receive text.
  * @tagname tp-audio-recorder
  * @event tp-audio-recorded Emitted when a recording is ready.
  * @eventdetail tp-audio-recorded { blob: Blob }
@@ -36,7 +37,7 @@ import style from "./audio-recorder.css?inline";
  */
 export class TpAudioRecorder extends TpBase {
 	public static override get observedAttributes(): string[] {
-		return [...TpBase.observedAttributes, "transcript"];
+		return [...TpBase.observedAttributes, "legend", "transcript"];
 	}
 	/** CSS selector for the transcript destination. */
 	public get transcript(): string {
@@ -46,6 +47,12 @@ export class TpAudioRecorder extends TpBase {
 		this.setAttribute("transcript", value);
 	}
 	protected attributeChangedCallback(name: string): void {
+		if (name === "legend") {
+			const legend = this.querySelector(":scope > fieldset > legend");
+			if (legend)
+				legend.textContent = this.getAttribute("legend") ?? "Audio recorder";
+			return;
+		}
 		if (name === "transcript" || name === "lang") this.transcription.abort();
 	}
 	private transcriptStatus: HTMLElement | null = null;
@@ -74,6 +81,7 @@ export class TpAudioRecorder extends TpBase {
 		this.ensureGlobalStyle("tp-speech-controls-styles", speechControlsStyle);
 		this.ensureGlobalStyle("tp-audio-recorder-styles", style);
 		if (!this.status) this.render();
+		this.transcription.checkBrowser();
 		window.addEventListener("pagehide", this.onPageHide);
 		this.update();
 	}
@@ -111,7 +119,7 @@ export class TpAudioRecorder extends TpBase {
 		);
 		this.clearButton = button(
 			"Clear",
-			"Remove the current recording from this page.",
+			"Remove the current recording and transcript.",
 			() => this.clear(),
 		);
 		this.audio = document.createElement("audio");
@@ -128,13 +136,18 @@ export class TpAudioRecorder extends TpBase {
 		this.transcriptStatus = document.createElement("p");
 		this.transcriptStatus.setAttribute("role", "status");
 		this.transcriptStatus.hidden = true;
-		this.replaceChildren(
+		const fieldset = document.createElement("fieldset");
+		fieldset.className = "tp-speech-fieldset";
+		fieldset.append(
+			document.createElement("legend"),
 			controls,
 			this.audio,
 			this.download,
 			this.status,
 			this.transcriptStatus,
 		);
+		this.replaceChildren(fieldset);
+		this.attributeChangedCallback("legend");
 	}
 
 	private update(): void {
@@ -147,7 +160,8 @@ export class TpAudioRecorder extends TpBase {
 		);
 	}
 
-	private async start(): Promise<void> {
+	/** Starts local recording after an explicit action. */
+	public async start(): Promise<void> {
 		if (this.pending || this.recorder) return;
 		this.transcription.abort();
 		const generation = ++this.generation;
@@ -242,7 +256,13 @@ export class TpAudioRecorder extends TpBase {
 		}
 	}
 
-	private stop(): void {
+	/** Finishes the recording or cancels a pending microphone request. */
+	public stop(): void {
+		if (this.pending) {
+			++this.generation;
+			this.pending = false;
+			this.update();
+		}
 		this.transcription.stop();
 		if (this.recorder?.state === "recording") this.recorder.stop();
 		this.stream?.getTracks().forEach((t) => {
@@ -251,8 +271,9 @@ export class TpAudioRecorder extends TpBase {
 		this.stopButton?.setAttribute("disabled", "");
 	}
 
-	private clear(cancelTranscript = true): void {
-		if (cancelTranscript) this.transcription.abort();
+	/** Removes the recording and optionally clears transcription. */
+	public clear(cancelTranscript = true): void {
+		if (cancelTranscript) this.transcription.clear();
 		this.audio?.pause();
 		this.audio?.removeAttribute("src");
 		if (this.audio) this.audio.hidden = true;
@@ -275,7 +296,7 @@ export class TpAudioRecorder extends TpBase {
 			t.stop();
 		});
 		this.stream = null;
-		this.clear();
+		this.clear(false);
 	}
 }
 if (!customElements.get("tp-audio-recorder"))

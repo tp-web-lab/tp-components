@@ -168,8 +168,9 @@ CSS properties
 <!-- /tp-docgen:api -->
 
 <!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_prose-editor.TpProseEditor.html)
+[More details…](/api/classes/components_prose-editor_prose-editor.TpProseEditor.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

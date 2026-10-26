@@ -149,3 +149,6 @@ tp-mathfield [data-tp-textfield-control]:has([data-tp-mathfield-visual-button]:n
 tp-mathfield [data-tp-textfield-control]:has([data-tp-mathfield-visual-button]:not([hidden])) [data-tp-textfield-clear] { inset-inline-end: 7.15rem; }
 tp-mathfield [data-tp-textfield-control]:has([data-tp-mathfield-visual-button]:not([hidden])) [data-tp-textfield-input] { padding-inline-end: calc(var(--tp-textfield-padding-inline, 0.75em) + 8.75rem); }
 tp-mathfield[multiline] [data-tp-textfield-control] [data-tp-mathfield-visual-button] { inset-block-start: 0.35em; transform: none; }
+
+/* Keep the notation marker beside the top-row actions in multiline mode. */
+tp-mathfield[multiline] [data-tp-mathfield-mode-button] { inset-block-start: 0.35em; transform: none; }

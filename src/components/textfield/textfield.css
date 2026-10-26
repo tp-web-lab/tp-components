@@ -1,6 +1,6 @@
 tp-textfield {
 	display: inline-block;
-	inline-size: var(--tp-textfield-inline-size, 20ch);
+	inline-size: var(--tp-textfield-inline-size, calc(20ch + 5rem));
 	max-inline-size: 100%;
 	min-inline-size: 0;
 	vertical-align: middle;
@@ -159,7 +159,7 @@ tp-textfield input::-webkit-search-decoration {
 tp-textfield [data-tp-textfield-clear] {
 	position: absolute;
 	inset-block-start: 50%;
-	inset-inline-end: 1.75rem;
+	inset-inline-end: 3.5rem;
 	margin: 0;
 	transform: translateY(-50%);
 }
@@ -184,6 +184,21 @@ tp-textfield [data-tp-textfield-type] {
 	pointer-events: none;
 }
 
+tp-textfield [data-tp-textfield-copy] {
+    inset-block-start: 50%;
+    inset-inline-end: 1.75rem;
+    margin: 0;
+    min-block-size: 1.75rem;
+    min-inline-size: 1.75rem;
+    transform: translateY(-50%);
+}
+
+tp-textfield [data-tp-textfield-control]:has(> [data-tp-textfield-copy]) [data-tp-textfield-input] {
+    padding-inline-end: calc(var(--tp-textfield-padding-inline, 0.75em) + 5rem);
+}
+
+tp-textfield[multiline] [data-tp-textfield-type],
+tp-textfield[multiline] [data-tp-textfield-copy],
 tp-textfield[multiline] [data-tp-textfield-clear] {
 	inset-block-start: 0.35em;
 	transform: none;

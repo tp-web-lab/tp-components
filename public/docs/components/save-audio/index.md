@@ -77,6 +77,10 @@ CSS properties
 :::
 <!-- /tp-docgen:api -->
 
+<!-- tp-docgen:typedoc:start -->
+[More details…](/api/classes/components_save-audio.TpSaveAudio.html)
+<!-- tp-docgen:typedoc:end -->
+
 ### Imports
 
 ::: tp-tabs

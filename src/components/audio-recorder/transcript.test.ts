@@ -25,6 +25,10 @@ class RecognitionMock extends EventTarget {
 }
 beforeEach(() => {
 	RecognitionMock.instances = [];
+	vi.stubGlobal("navigator", {
+		userAgent:
+			"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15",
+	});
 	vi.stubGlobal("SpeechRecognition", RecognitionMock);
 	vi.stubGlobal("webkitSpeechRecognition", undefined);
 });
@@ -130,4 +134,84 @@ it("uses the prefixed API and reports errors", () => {
 		expect.stringContaining("not-allowed"),
 	);
 	expect(RecognitionMock.instances[0]?.abort).toHaveBeenCalledOnce();
+});
+
+it("resumes after a browser-ended segment without replacing earlier words", () => {
+	document.body.innerHTML = '<textarea id="answer"></textarea>';
+	const { session, report } = setup();
+	session.start();
+	const engine = RecognitionMock.instances[0];
+	expect(engine?.interimResults).toBe(true);
+	engine?.dispatchEvent(new Event("start"));
+	expect(report).toHaveBeenLastCalledWith("Listening… You can speak now.");
+	engine?.result("First sentence.");
+	engine?.dispatchEvent(new Event("end"));
+	expect(engine?.start).toHaveBeenCalledTimes(2);
+	engine?.result("Second", false);
+	expect(document.querySelector<HTMLTextAreaElement>("#answer")?.value).toBe(
+		"First sentence.",
+	);
+	engine?.result("Second sentence.");
+	expect(document.querySelector<HTMLTextAreaElement>("#answer")?.value).toBe(
+		"First sentence. Second sentence.",
+	);
+	session.stop();
+	engine?.result("Second sentence completed.");
+	engine?.dispatchEvent(new Event("end"));
+	expect(engine?.start).toHaveBeenCalledTimes(2);
+	expect(document.querySelector<HTMLTextAreaElement>("#answer")?.value).toBe(
+		"First sentence. Second sentence completed.",
+	);
+});
+
+it("does not repeatedly restart a recognition session that produces no words", () => {
+	document.body.innerHTML = '<textarea id="answer"></textarea>';
+	const { session, report } = setup();
+	session.start();
+	const engine = RecognitionMock.instances[0];
+	engine?.dispatchEvent(new Event("end"));
+	expect(engine?.start).toHaveBeenCalledOnce();
+	expect(report).toHaveBeenLastCalledWith(
+		expect.stringContaining("before recording stopped"),
+	);
+});
+
+it.each([
+	'<tp-textfield id="answer"></tp-textfield>',
+	'<textarea id="answer"></textarea>',
+	'<p id="answer"></p>',
+])("clears the transcript target and emits editing events: %s", (markup) => {
+	document.body.innerHTML = markup;
+	const { session } = setup();
+	const target = document.querySelector("#answer");
+	session.start();
+	const engine = RecognitionMock.instances[0];
+	engine?.result("Recorded words");
+	const input = vi.fn();
+	const change = vi.fn();
+	target?.addEventListener("input", input);
+	target?.addEventListener("change", change);
+	session.clear();
+	engine?.result("Late words");
+	expect(target && "value" in target ? target.value : target?.textContent).toBe(
+		"",
+	);
+	expect(input).toHaveBeenCalledOnce();
+	expect(change).toHaveBeenCalledOnce();
+});
+
+it("warns on Chrome without starting recognition or erasing existing text", () => {
+	vi.stubGlobal("navigator", {
+		userAgent: "Mozilla/5.0 AppleWebKit/537.36 Chrome/130.0 Safari/537.36",
+	});
+	document.body.innerHTML = '<textarea id="answer">Typed answer</textarea>';
+	const { session, report } = setup();
+	session.start();
+	expect(RecognitionMock.instances).toHaveLength(0);
+	expect(report).toHaveBeenLastCalledWith(
+		expect.stringContaining("only in Safari"),
+	);
+	expect(document.querySelector<HTMLTextAreaElement>("#answer")?.value).toBe(
+		"Typed answer",
+	);
 });

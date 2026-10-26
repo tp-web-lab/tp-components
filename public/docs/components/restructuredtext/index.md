@@ -190,8 +190,9 @@ CSS properties
 <!-- /tp-docgen:api -->
 
 <!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_restructuredtext.TpRestructuredText.html)
+[More details…](/api/classes/components_restructuredtext_restructuredtext.TpRestructuredText.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

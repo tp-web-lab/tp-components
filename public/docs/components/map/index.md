@@ -157,8 +157,9 @@ CSS properties
 <!-- /tp-docgen:api -->
 
 <!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_map.TpMap.html)
+[More details…](/api/classes/components_map_map.TpMap.html)
 <!-- tp-docgen:typedoc:end -->
+
 
 
 

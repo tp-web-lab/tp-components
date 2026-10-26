@@ -45,6 +45,10 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ====
 ====
 
+[tp-textfield%clearable,data-setting="legend",label="legend",value="Text to speech",placeholder="Text to speech"]
+====
+====
+
 [tp-textfield%clearable,data-setting="pause-between-lines",label="pause-between-lines",value="0",placeholder="0"]
 ====
 ====

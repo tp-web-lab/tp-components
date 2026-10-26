@@ -347,6 +347,7 @@ export class TpMultiChoiceQuestion extends TpQuestion {
 			correctIndexes.every((index, i) => index === submittedIndexes[i]);
 
 		if (isCorrect) {
+			this.unlockCorrectSolution(container);
 			const total =
 				correctIndexes.length ||
 				this.findResponseWidget()?.querySelectorAll(
