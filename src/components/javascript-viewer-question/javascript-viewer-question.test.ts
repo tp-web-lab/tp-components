@@ -15,6 +15,7 @@ it("creates only its fixed javascript viewer", async () => {
 	const question = new TpJavascriptViewerQuestion();
 	expectTypeOf(question).toExtend<TpPlaygroundQuestion<TpJavascriptViewer>>();
 	question.innerHTML = "<dl><dt>Title</dt><dd>Exercise</dd></dl>";
+	question.open = true;
 	document.body.append(question);
 	await Promise.resolve();
 	expect(question.querySelector("tp-javascript-viewer")).not.toBeNull();
@@ -23,7 +24,8 @@ it("creates only its fixed javascript viewer", async () => {
 	expect(TpJavascriptViewerQuestion.observedAttributes).not.toContain(
 		"language",
 	);
-	expect(TpJavascriptViewerQuestion.observedAttributes).not.toContain("mode");
+	expect(TpJavascriptViewerQuestion.observedAttributes).toContain("mode");
+	expect(question.mode).toBe("mixed");
 	expect(customElements.get("tp-javascript-viewer-question")).toBe(
 		TpJavascriptViewerQuestion,
 	);

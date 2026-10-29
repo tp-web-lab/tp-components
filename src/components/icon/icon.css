@@ -2,13 +2,15 @@ tp-icon {
   color: inherit;
   display: inline-block;
   inline-size: var(--tp-icon-size, 1em);
+  block-size: var(--tp-icon-size, 1em);
   line-height: 1;
   vertical-align: middle;
 }
 
 tp-icon > [data-tp-icon-container] {
   align-items: center;
-  display: inline-flex;
+  display: flex;
+  block-size: 100%;
   inline-size: 100%;
   justify-content: center;
   min-block-size: var(--tp-icon-size, 1em);
@@ -44,6 +46,7 @@ tp-icon[spin] > [data-tp-icon-container] > svg {
 
 tp-icon[data-tp-icon-catalog='true'] {
   display: block;
+  block-size: auto;
   inline-size: auto;
 }
 

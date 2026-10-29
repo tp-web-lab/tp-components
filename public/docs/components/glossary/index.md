@@ -10,12 +10,6 @@ The custom `<tp-glossary>` element defines a hidden glossary entry for reference
 
 ## Usage
 
-Use `ref="identifier"` to identify this entry. Its HTML blocks remain hidden at their original location. A `tp-ref` shows them in a tooltip, and `tp-listof` displays their full content where the list is placed. Note numbers follow the first occurrence of each note in the text; repeated references reuse that number. Bibliography and glossary terms use their `ref` identifier.
-
-The identifier does not include the prefix: use `^identifier` for `tp-note`, `@identifier` for `tp-biblio`, and `%identifier` for `tp-glossary` in a reference's `href`.
-
-References and lists use the nearest `data-tp-reference-scope`, rendered markup document, `article` or `main`, falling back to the page body. Nested document scopes are independent. Identifiers should be unique within each reference kind and scope; the first matching definition is used for duplicates. Changes to definitions, labels and selected elements update existing tooltips and lists automatically.
-
 ### User interactions
 
 #### Mouse interactions
@@ -30,6 +24,14 @@ References and lists use the nearest `data-tp-reference-scope`, rendered markup 
 | --- | --- |
 | None | No component-specific keyboard interaction. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
+
+### Author directives
+
+Use `ref="identifier"` to identify this entry. Its HTML blocks remain hidden at their original location. A `tp-ref` shows them in a tooltip, and `tp-listof` displays their full content where the list is placed. Note numbers follow the first occurrence of each note in the text; repeated references reuse that number. Bibliography and glossary terms use their `ref` identifier.
+
+The identifier does not include the prefix: use `^identifier` for `tp-note`, `@identifier` for `tp-biblio`, and `%identifier` for `tp-glossary` in a reference's `href`.
+
+References and lists use the nearest `data-tp-reference-scope`, rendered markup document, `article` or `main`, falling back to the page body. Nested document scopes are independent. Identifiers should be unique within each reference kind and scope; the first matching definition is used for duplicates. Changes to definitions, labels and selected elements update existing tooltips and lists automatically.
 
 ## Examples
 
@@ -93,6 +95,8 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_glossary_glossary.TpGlossary.html)
 <!-- tp-docgen:typedoc:end -->
+
+
 
 
 

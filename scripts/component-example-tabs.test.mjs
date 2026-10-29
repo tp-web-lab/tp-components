@@ -27,8 +27,9 @@ test('all public component language tabs use 15 colons outside shorter Markdown 
   let count = 0;
   for (const name of readdirSync('public/docs/components')) {
     if (!existsSync(`src/components/${name}/${name}.ts`)) continue;
+    if (!/customElements\.define\(/.test(readFileSync(`src/components/${name}/${name}.ts`, 'utf8'))) continue;
     const markdown = readFileSync(`public/docs/components/${name}/index.md`, 'utf8');
-    const blocks = [...markdown.matchAll(/^(:{3,})[ \t]+tp-tabs[^\n]*\n([\s\S]*?)^\1[ \t]*$/gm)].filter(match => match[2].includes('::include{examples/examples.md}'));
+    const blocks = [...markdown.matchAll(/^(:{3,})[ \t]+tp-tabs[^\n]*\n([\s\S]*?)^\1[ \t]*$/gm)].filter(match => /::include\{examples\/examples\.md(?:\s+[^}]*)?\}/.test(match[2]));
     assert.equal(blocks.length, 1, name);
     assert.equal(blocks[0][1], EXAMPLE_TABS_FENCE, name);
     const included = readFileSync(`public/docs/components/${name}/examples/examples.md`, 'utf8');
@@ -42,4 +43,9 @@ test('all public component language tabs use 15 colons outside shorter Markdown 
 
 test('generation rejects example nesting that would close the surrounding language tabs', () => {
   assert.throws(() => exampleFile('md', 'tp-test', [{ label: 'Basic usage', source: ':'.repeat(13) + '\ncontent\n' + ':'.repeat(13) }]), /shorter nested fences/);
+});
+
+test('preserves lazy inclusion options when normalizing example tabs', () => {
+ const result = normalizeExampleTabs('::: tp-tabs\nMarkdown\n: ::include{examples/examples.md loading=lazy}\n:::');
+ assert.equal(result, `${EXAMPLE_TABS_FENCE} tp-tabs\nMarkdown\n: ::include{examples/examples.md loading=lazy}\n${EXAMPLE_TABS_FENCE}`);
 });

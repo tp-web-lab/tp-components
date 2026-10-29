@@ -17,6 +17,7 @@ it("creates only its fixed restructuredtext viewer", async () => {
 		TpMarkupViewerQuestion<TpRestructuredTextViewer>
 	>();
 	question.innerHTML = "<dl><dt>Title</dt><dd>Exercise</dd></dl>";
+	question.open = true;
 	document.body.append(question);
 	await Promise.resolve();
 	expect(question.querySelector("tp-restructuredtext-viewer")).not.toBeNull();
@@ -25,9 +26,8 @@ it("creates only its fixed restructuredtext viewer", async () => {
 	expect(TpRestructuredTextViewerQuestion.observedAttributes).not.toContain(
 		"language",
 	);
-	expect(TpRestructuredTextViewerQuestion.observedAttributes).not.toContain(
-		"mode",
-	);
+	expect(TpRestructuredTextViewerQuestion.observedAttributes).toContain("mode");
+	expect(question.mode).toBe("mixed");
 	expect(customElements.get("tp-restructuredtext-viewer-question")).toBe(
 		TpRestructuredTextViewerQuestion,
 	);

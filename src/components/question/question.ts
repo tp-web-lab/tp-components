@@ -25,6 +25,10 @@
  * @summary Callout component for highlighted contextual content.
  */
 /**
+ * @tp-dependency tp-copy-code
+ * @summary Copy-to-clipboard button component.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -51,6 +55,7 @@
 // tp-docgen:dependencies:end
 
 import style from "./question.css?inline";
+import { QuestionAi, questionAiAssistant } from "./question-ai.js";
 import { QuestionTiming } from "./question-timing.js";
 
 import "../badge/badge.js";
@@ -175,6 +180,10 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
  * @tagname tp-question
  * @attr {string} src = "" - URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition.
  * @attr {string} mode = "mixed" - Blank mode: opened, closed, or mixed local choices.
+ * @attr {string} ai-explanation-src = "" - URL of a saved Markdown explanation; the companion .prompt.md must match the current prompt.
+ * @attr {boolean} ai-api = false - Allows sending AI prompts to the selected provider; without it, prompts are only copied.
+ * @attr {string} ai-assistant = "openai" - AI provider, optionally followed by /model; without a model, uses the server configuration. Providers: openai, anthropic, google, mistral.
+ * @attr {"none"|"feedback"|"solution"|"both"} ai-help = "none" - Optional AI assistance; solution and both enable solution explanations. Feedback assistance is reserved for a future release.
  * @attr {string} timing = "" - Optional nonzero time limit in strict hh:mm:ss format.
  * @attr {boolean} score = false - Displays the numerical score in submission feedback.
  * @attr {string} open - Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.
@@ -193,12 +202,18 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
  */
 export class TpQuestion extends TpBase {
 	private readonly questionTiming = new QuestionTiming(this);
+	private readonly questionAi = new QuestionAi(this);
 	/** Whether numerical scores are displayed in feedback. */
 	public get score(): boolean {
 		return this.hasAttribute("score");
 	}
 	public set score(value: boolean) {
 		this.toggleAttribute("score", value);
+	}
+
+	/** Sets an enclosing exercise's solution gate without displaying a local timer. */
+	public setExerciseTiming(exercise: HTMLElement, pending: boolean): void {
+		this.questionTiming.setExerciseTiming(exercise, pending);
 	}
 
 	/** Optional time limit; invalid and zero durations disable timing. */
@@ -215,8 +230,38 @@ export class TpQuestion extends TpBase {
 			"open",
 			"mode",
 			"timing",
+			"ai-help",
+			"ai-api",
+			"ai-assistant",
+			"ai-explanation-src",
 			"score",
 		];
+	}
+
+	/** Explicit permission to send prompts through the API. */
+	public get aiApi(): boolean {
+		return this.hasAttribute("ai-api");
+	}
+	public set aiApi(value: boolean) {
+		this.toggleAttribute("ai-api", value);
+	}
+	/** Selected AI provider; absent or invalid values use OpenAI. */
+	public get aiAssistant(): string {
+		return questionAiAssistant(this.getAttribute("ai-assistant")).value;
+	}
+	public set aiAssistant(value: string) {
+		this.setAttribute("ai-assistant", value);
+	}
+
+	/** Optional AI assistance; missing or invalid values disable it. */
+	public get aiHelp(): "none" | "feedback" | "solution" | "both" {
+		const value = this.getAttribute("ai-help");
+		return value === "feedback" || value === "solution" || value === "both"
+			? value
+			: "none";
+	}
+	public set aiHelp(value: "none" | "feedback" | "solution" | "both") {
+		this.setAttribute("ai-help", value);
 	}
 
 	/** Global blank policy; missing and invalid values use local choices. */
@@ -262,6 +307,13 @@ export class TpQuestion extends TpBase {
 		newValue: string | null,
 	): void {
 		super.attributeChangedCallback(name, oldValue, newValue);
+		if (
+			["ai-help", "ai-api", "ai-assistant", "ai-explanation-src"].includes(
+				name,
+			) &&
+			this.isConnected
+		)
+			this.questionAi.sync();
 		if (name === "score") {
 			for (const element of this.querySelectorAll<HTMLElement>(
 				"[data-tp-question-score]",
@@ -273,7 +325,8 @@ export class TpQuestion extends TpBase {
 		if (name === "src" && oldValue !== newValue) {
 			this.sourceRevision++;
 			this.inlineSourceLoaded = false;
-			if (this.isConnected && this.formContent && newValue) void this.loadSrc();
+			if (this.isConnected && this.formContent && this.usesExternalData)
+				void this.loadSrc();
 		}
 		if (name === "timing" && this.isConnected && oldValue !== newValue)
 			this.questionTiming.configure();
@@ -550,9 +603,11 @@ export class TpQuestion extends TpBase {
 		if (!(solutionDd instanceof HTMLElement)) return;
 		if (markdown.trim() === "") {
 			this.showMissingSolution(solutionDd);
+			this.questionAi.sync();
 			return;
 		}
 		this.replaceWithSrcContent(solutionDd, markdown, markup);
+		this.questionAi.sync();
 	}
 
 	/** Displays the same kind of absence notice as the Feedback panel. */
@@ -701,6 +756,7 @@ export class TpQuestion extends TpBase {
 		const list = this.ensureDefinitionList();
 		this.renderQuestionLayout(list);
 		this.questionTiming.configure();
+		this.questionAi.sync();
 		this.bindActions();
 		if (this.localName === "tp-question" && this.usesExternalData)
 			void this.loadSrc();
@@ -723,6 +779,7 @@ export class TpQuestion extends TpBase {
 	 * @summary Disconnects action listeners.
 	 */
 	public disconnectedCallback(): void {
+		this.questionAi.dispose();
 		this.questionTiming.dispose();
 		this.sourceRevision++;
 		this.unbindActions();

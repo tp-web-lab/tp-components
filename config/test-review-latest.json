@@ -1,0 +1,72 @@
+{
+  "generatedAt": "2026-10-29T10:15:55.510Z",
+  "initialVitest": {
+    "passed": 3420,
+    "failed": 26
+  },
+  "vitest": {
+    "files": 319,
+    "total": 3447,
+    "passed": 3447,
+    "failed": 0,
+    "pending": 0
+  },
+  "scripts": {
+    "passed": 93,
+    "failed": 0,
+    "skipped": 0
+  },
+  "playgrounds": {
+    "passed": 21,
+    "failed": 0,
+    "browsers": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ]
+  },
+  "accessibility": {
+    "componentScans": 555,
+    "violations": 0,
+    "scanErrors": 0,
+    "incompleteChecks": 407,
+    "colorContractTests": 3,
+    "geometryKeyboardTests": 3,
+    "geometryKeyboardValidatedBy": "targeted rerun after focus correction"
+  },
+  "coverageRecalculated": true,
+  "lighthouseRecalculated": true,
+  "coverageGeneratedAt": "2026-10-29T10:15:55.510Z",
+  "coverageScope": "src/components/**/*.ts excluding src/**/*.test.ts",
+  "coverage": {
+    "lines": 94.05,
+    "statements": 92.4,
+    "functions": 95.45,
+    "branches": 81.93
+  },
+  "lighthouseGeneratedAt": "2026-10-29T11:57:39.291Z",
+  "lighthouseSummary": "config/lighthouse-latest-run.json",
+  "lazyLoadingVerification": {
+    "unitTestsPassed": 84,
+    "browserLoadingAndAccessibilityTestsPassed": 6,
+    "browserSizingScenariosPassed": 12,
+    "typecheck": "passed",
+    "biome": "passed",
+    "coverageRecalculatedAfterChange": false
+  },
+  "viewerRenderingVerification": {
+    "unitTestsPassed": 65,
+    "browserTestsPassed": 18,
+    "typecheck": "passed",
+    "biome": "passed",
+    "coverageRecalculatedAfterChange": false
+  },
+  "initialDisplayVerification": {
+    "unitTestsPassed": 350,
+    "unitTestNote": "The 63-test Markdown integration file was rerun after correcting its deferred-inclusion expectation.",
+    "browserTestsPassed": 24,
+    "typecheck": "passed",
+    "biome": "passed",
+    "coverageRecalculatedAfterChange": false
+  }
+}

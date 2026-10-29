@@ -43,6 +43,8 @@ The custom `<tp-tangram>` element presents seven rigid pieces and a central silh
 
 ## Authoring
 
+### Author directives
+
 ### Initial orientation
 
 Add the boolean `exact-orientation` attribute to start all seven scattered pieces with the rotation and reflection used in the solution. A note below the board identifies this mode. Correctly oriented or positioned pieces remain freely movable, rotatable and flippable; the attribute is an initial aid, not a constraint. Adding or removing it restarts the current puzzle and clears undo/redo history. Loading another solution and Restart apply the attribute again. In JavaScript, use the boolean `exactOrientation` property.
@@ -242,6 +244,8 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_tangram.TpTangram.html)
 <!-- tp-docgen:typedoc:end -->
+
+
 
 
 

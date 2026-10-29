@@ -91,15 +91,12 @@ import { Compartment, EditorState, type Extension } from "@codemirror/state";
 import { TpBase } from "../base/base.js";
 import { codeCommentMarkers } from "./code-comment-markers.js";
 import style from "./code-editor.css?inline";
+import {
+	getLoadedLanguageSupport,
+	loadLanguageSupport,
+} from "./language-support.js";
 import "../dropdown/dropdown.js";
 import "../icon/icon.js";
-import { css } from "@codemirror/lang-css";
-import { html } from "@codemirror/lang-html";
-import { javascript } from "@codemirror/lang-javascript";
-import { json } from "@codemirror/lang-json";
-import { markdown } from "@codemirror/lang-markdown";
-import { python } from "@codemirror/lang-python";
-import { sql } from "@codemirror/lang-sql";
 import {
 	Decoration,
 	type DecorationSet,
@@ -937,6 +934,31 @@ export class TpCodeEditor extends TpBase {
 	>();
 	/** Reconfigures comment decorations without resetting code, selection or undo. */
 	private readonly commentCompartment = new Compartment();
+	private readonly languageCompartment = new Compartment();
+	private languageLoadRevision = 0;
+
+	private loadCurrentLanguage(): void {
+		const language = this.currentLanguage;
+		const revision = ++this.languageLoadRevision;
+		const request = loadLanguageSupport(language);
+		if (!request) return;
+		void request
+			.then((extension) => {
+				if (
+					!this.isConnected ||
+					!this.editor ||
+					revision !== this.languageLoadRevision ||
+					language !== this.currentLanguage
+				)
+					return;
+				this.editor.dispatch({
+					effects: this.languageCompartment.reconfigure(extension),
+				});
+			})
+			.catch((error) =>
+				console.warn(`Unable to load editor language ${language}`, error),
+			);
+	}
 
 	/** Registers a linked annotation list; an empty array removes only that owner's markers. */
 	public setCodeCommentNumbers(
@@ -1338,6 +1360,15 @@ export class TpCodeEditor extends TpBase {
 	 * @internal
 	 */
 	protected connectedCallback(): void {
+		this.currentLanguage = this.resolveLanguage(
+			getCodeFromScript(undefined, this)?.language,
+			this.readExplicitLanguage(),
+		);
+		if (this.hasAttribute("data-tp-editor-pending")) {
+			this.currentValue = getCodeFromScript(undefined, this)?.value ?? "";
+			this.querySelector(":scope > [data-tp-editor-preview]")?.remove();
+			this.removeAttribute("data-tp-editor-pending");
+		}
 		super.connectedCallback();
 		this.ensureStyles();
 		this.ensureThemeTargetId();
@@ -1412,6 +1443,7 @@ export class TpCodeEditor extends TpBase {
 	 * @internal
 	 */
 	public disconnectedCallback(): void {
+		this.languageLoadRevision++;
 		this.panelObserver?.disconnect();
 		this.panelObserver = null;
 		this.layoutObserver?.disconnect();
@@ -2102,6 +2134,9 @@ export class TpCodeEditor extends TpBase {
 
 		const extensions: Extension[] = [
 			this.commentCompartment.of(this.commentExtension()),
+			this.languageCompartment.of(
+				getLoadedLanguageSupport(this.currentLanguage),
+			),
 			customKeymap,
 			keymap.of([...defaultKeymap, ...historyKeymap, ...searchKeymap]),
 			history(),
@@ -2182,31 +2217,13 @@ export class TpCodeEditor extends TpBase {
 				extensions.push(asciidocLanguage);
 				extensions.push(asciidocHighlightStyle);
 				break;
-			case "json":
-				extensions.push(json());
-				break;
-			case "javascript":
-				extensions.push(javascript());
-				break;
-			case "typescript":
-				extensions.push(javascript({ typescript: true }));
-				break;
-			case "css":
-				extensions.push(css());
-				break;
-			case "python":
-				extensions.push(python());
-				break;
 			case "markdown":
-				extensions.push(markdown());
 				extensions.push(tpMarkdownSyntaxPlugin);
 				extensions.push(tpMarkdownSyntaxTheme);
 				break;
 			case "html":
-				extensions.push(html());
 				break;
 			case "sql":
-				extensions.push(sql());
 				extensions.push(autocompletion({ override: [sqlCompletion] }));
 				break;
 			case "prolog":
@@ -2236,6 +2253,7 @@ export class TpCodeEditor extends TpBase {
 			extensions.push(EditorView.lineWrapping);
 		}
 
+		this.loadCurrentLanguage();
 		return extensions;
 	}
 
@@ -2369,7 +2387,7 @@ export class TpCodeEditor extends TpBase {
 		if (badge instanceof HTMLElement) {
 			badge.setAttribute("size", "xs");
 			badge.setAttribute("outlined", "");
-			startSection.append(badge);
+			if (badge.parentElement !== startSection) startSection.append(badge);
 		}
 
 		this.languageBadgeEl =
@@ -2384,7 +2402,8 @@ export class TpCodeEditor extends TpBase {
 			cursorPosition.setAttribute("data-tp-code-editor-cursor-position", "");
 		}
 
-		startSection.append(cursorPosition);
+		if (cursorPosition.parentElement !== startSection)
+			startSection.append(cursorPosition);
 		this.cursorPositionEl = cursorPosition;
 
 		let copy = panel.querySelector("tp-copy-code[data-tp-code-editor-copy]");
@@ -2464,16 +2483,18 @@ export class TpCodeEditor extends TpBase {
 		}
 
 		if (keyboardButton instanceof HTMLElement) {
-			endSection.append(keyboardButton);
+			if (keyboardButton.parentElement !== endSection)
+				endSection.append(keyboardButton);
 		}
 		if (copy instanceof HTMLElement) {
-			endSection.append(copy);
+			if (copy.parentElement !== endSection) endSection.append(copy);
 		}
 		if (theme instanceof HTMLElement) {
-			endSection.append(theme);
+			if (theme.parentElement !== endSection) endSection.append(theme);
 		}
 		if (fullscreen instanceof HTMLElement) {
-			endSection.append(fullscreen);
+			if (fullscreen.parentElement !== endSection)
+				endSection.append(fullscreen);
 		}
 
 		if (centerSection.childElementCount === 0) {

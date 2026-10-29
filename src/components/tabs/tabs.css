@@ -69,6 +69,12 @@ tp-tabs > [data-tp-tablist] > [role='tab'] [data-tp-tab-label] {
   white-space: nowrap;
 }
 
+/* Tab labels use the tab's semantic foreground, including inline code. */
+tp-tabs > [data-tp-tablist] > [role='tab'] [data-tp-tab-label] code {
+  color: inherit;
+  background: transparent;
+}
+
 tp-tabs > [data-tp-tablist] > [role='tab'] [data-tp-tab-close] {
   flex: 0 0 auto;
   align-self: center;

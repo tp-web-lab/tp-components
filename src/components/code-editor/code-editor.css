@@ -343,3 +343,13 @@ tp-code-editor .tp-code-comment-marker:focus-visible {
 tp-code-editor .tp-code-comment-marker svg > circle[fill="white"] {
   fill: var(--tp-code-editor-surface);
 }
+
+/* A hidden toolbar must not retain its empty CodeMirror panel border or gap.
+   Search panels and source errors still participate in intrinsic sizing. */
+tp-code-editor:not([toolbar]) > [data-tp-code-editor-panels]:not(:has(
+  [data-tp-code-editor-source-error]:not([hidden]),
+  .cm-panel:not([data-tp-code-editor-action-panel])
+)) {
+  display: none !important; /* Override CodeMirror’s root display rule. */
+  margin-block-end: 0;
+}

@@ -200,7 +200,8 @@ The browser matrix uses [Playwright](https://playwright.dev/docs/accessibility-t
 
 Semantic foreground/background pairs are declared in \`config/accessibility-color-contract.json\` and checked in the light and dark themes by the same three browser engines. This prevents a shared token change from silently introducing contrast regressions across multiple components.
 
-Last axe scan: ${browserResults.generatedAt}  
+Last axe scan: ${browserResults.generatedAt}
+
 ${browserResults.validationWarning ? `\n> **Invalid component scan:** ${browserResults.validationWarning}\n` : ""}
 ${browserResults.rechecks ? `\n${browserResults.rechecks.passed} WebKit checks affected by browser navigation/teardown timeouts were rerun successfully in a fresh, single-worker process at ${browserResults.rechecks.generatedAt}: ${browserResults.rechecks.components.map((component) => `\`${component}\``).join(", ")}. Their actual axe results replace the missing scans.\n` : ""}
 Ruleset: ${browserResults.standard}. WebKit approximates Safari's rendering engine but does not replace periodic testing in Safari on macOS.

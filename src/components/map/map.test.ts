@@ -485,13 +485,16 @@ it("toggles an elevation profile without refetching, and clears it with the GPX 
 	element.elevationProfile = true;
 	await settle();
 	const plot = element.querySelector("tp-xy-plot");
-	expect(plot?.querySelectorAll("svg")).toHaveLength(2);
+	const profiles = plot?.querySelectorAll(
+		".tp-xy-plot-preview > svg, .tp-xy-plot-dialog-content > svg",
+	);
+	expect(profiles).toHaveLength(2);
 	expect(plot?.textContent).toContain("Elevation (m)");
 	expect(plot?.textContent).toContain("Min: 0 m");
 	expect(plot?.textContent).toContain("Max: 10 m");
 	expect(plot?.textContent).toContain("Mean: 5 m");
 	expect(plot?.textContent).toContain("Median: 5 m");
-	for (const svg of plot?.querySelectorAll("svg") ?? []) {
+	for (const svg of profiles ?? []) {
 		expect(svg.querySelectorAll('path[stroke-dasharray="6 4"]')).toHaveLength(
 			2,
 		);

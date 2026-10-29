@@ -15,6 +15,46 @@ export function questionTimingSeconds(value: string): number {
 export class QuestionTiming {
 	private static readonly sessions = new WeakMap<HTMLElement, QuestionTiming>();
 	private startedAt: number | null = null;
+	private pending = false;
+	private solved = false;
+	private readonly exerciseLocks = new Set<HTMLElement>();
+	private readonly notifiedQuestions = new Set<
+		HTMLElement & {
+			setExerciseTiming(exercise: HTMLElement, pending: boolean): void;
+		}
+	>();
+
+	/** Applies an exercise deadline without creating a question timer. */
+	setExerciseTiming(exercise: HTMLElement, pending: boolean): void {
+		if (pending) this.exerciseLocks.add(exercise);
+		else this.exerciseLocks.delete(exercise);
+		this.refreshSolutionLock();
+	}
+	private refreshSolutionLock(): void {
+		if (this.kind !== "question") return;
+		if (!this.solved && (this.pending || this.exerciseLocks.size > 0)) {
+			if (!this.releaseSolution) this.lockSolution();
+		} else {
+			this.releaseSolution?.();
+			this.releaseSolution = null;
+		}
+	}
+	private publishExerciseTiming(): void {
+		if (this.kind !== "exercise") return;
+		for (const question of this.host.querySelectorAll<
+			HTMLElement & {
+				setExerciseTiming?: (exercise: HTMLElement, pending: boolean) => void;
+			}
+		>("[data-tp-question]")) {
+			if (typeof question.setExerciseTiming !== "function") continue;
+			question.setExerciseTiming(this.host, this.pending);
+			this.notifiedQuestions.add(
+				question as HTMLElement & {
+					setExerciseTiming(exercise: HTMLElement, pending: boolean): void;
+				},
+			);
+		}
+	}
 	private timer: TpTimer | null = null;
 	private mask: TpMask | null = null;
 	private configured: string | null = null;
@@ -54,8 +94,24 @@ export class QuestionTiming {
 		this.solutionPanel = solutionPanel;
 		QuestionTiming.sessions.set(this.host, this);
 		const seconds = questionTimingSeconds(value);
+		this.pending = seconds > 0;
+		this.solved = false;
+		if (this.kind === "question") {
+			for (
+				let parent = this.host.parentElement;
+				parent;
+				parent = parent.parentElement
+			) {
+				const session = QuestionTiming.sessions.get(parent);
+				if (session?.kind === "exercise") {
+					this.setExerciseTiming(parent, session.pending);
+					session.publishExerciseTiming();
+				}
+			}
+		}
+		this.refreshSolutionLock();
+		this.publishExerciseTiming();
 		if (!seconds) return;
-		if (this.kind === "question") this.lockSolution();
 		if (!layout.id) layout.id = `tp-${this.kind}-timing-${crypto.randomUUID()}`;
 		const timer = new TpTimer();
 		timer.setAttribute("manual", "");
@@ -85,8 +141,9 @@ export class QuestionTiming {
 		timer.addEventListener("tp-timer-elapsed", () => {
 			if (this.timer !== timer) return;
 			this.message("Time limit has expired.", "Continue", () => {
-				this.releaseSolution?.();
-				this.releaseSolution = null;
+				this.pending = false;
+				this.refreshSolutionLock();
+				this.publishExerciseTiming();
 				mask.active = false;
 				this.focusContent();
 			});
@@ -114,8 +171,8 @@ export class QuestionTiming {
 	}
 	/** Releases the timed solution gate after a verified correct answer. */
 	unlockSolution(): void {
-		this.releaseSolution?.();
-		this.releaseSolution = null;
+		this.solved = true;
+		this.refreshSolutionLock();
 	}
 	private lockSolution(): void {
 		let tab = this.layout?.querySelector<HTMLElement>(
@@ -204,6 +261,11 @@ export class QuestionTiming {
 		this.layout.focus({ preventScroll: true });
 	}
 	dispose(): void {
+		this.pending = false;
+		for (const question of this.notifiedQuestions)
+			question.setExerciseTiming(this.host, false);
+		this.notifiedQuestions.clear();
+		this.exerciseLocks.clear();
 		this.startedAt = null;
 		QuestionTiming.sessions.delete(this.host);
 		this.releaseSolution?.();

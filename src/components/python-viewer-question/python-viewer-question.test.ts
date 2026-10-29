@@ -15,13 +15,15 @@ it("creates only its fixed python viewer", async () => {
 	const question = new TpPythonViewerQuestion();
 	expectTypeOf(question).toExtend<TpPlaygroundQuestion<TpPythonViewer>>();
 	question.innerHTML = "<dl><dt>Title</dt><dd>Exercise</dd></dl>";
+	question.open = true;
 	document.body.append(question);
 	await Promise.resolve();
 	expect(question.querySelector("tp-python-viewer")).not.toBeNull();
 	expect(TpPythonViewerQuestion.observedAttributes).toContain("src");
 	expect(TpPythonViewerQuestion.observedAttributes).toContain("test");
 	expect(TpPythonViewerQuestion.observedAttributes).not.toContain("language");
-	expect(TpPythonViewerQuestion.observedAttributes).not.toContain("mode");
+	expect(TpPythonViewerQuestion.observedAttributes).toContain("mode");
+	expect(question.mode).toBe("mixed");
 	expect(customElements.get("tp-python-viewer-question")).toBe(
 		TpPythonViewerQuestion,
 	);

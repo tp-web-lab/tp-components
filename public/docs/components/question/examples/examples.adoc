@@ -38,7 +38,20 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ======
 [tp-checkbox-list%value,id="attributes-booleans",label="Boolean attributes",label-position="top",orientation="horizontal"]
 ====
+* ai-api
+
 * score
+====
+
+[tp-radio-list,data-setting="ai-help",label="ai-help",label-position="top",orientation="horizontal",value="1"]
+====
+* none
+
+* feedback
+
+* solution
+
+* both
 ====
 
 [tp-radio-list,data-setting="mode",label="mode",label-position="top",orientation="horizontal",value="1"]
@@ -74,6 +87,14 @@ Combine the attributes on one preview. Controls start at the published defaults.
 
 [tp-cluster]
 =====
+[tp-textfield%clearable,data-setting="ai-assistant",label="ai-assistant",value="openai",placeholder="openai"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="ai-explanation-src",label="ai-explanation-src"]
+====
+====
+
 [tp-textfield%value%placeholder%clearable,data-setting="timing",label="timing"]
 ====
 ====

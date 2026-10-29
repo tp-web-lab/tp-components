@@ -44,7 +44,7 @@ const latestRunSection =
 
 Executed at ${latestRun.generatedAt}. The full Vitest suite reports **${latestRun.tests.passed} passed, ${latestRun.tests.failed} failed, ${latestRun.tests.pending} skipped/pending** out of ${latestRun.tests.total} tests, plus **${latestRun.unhandledErrors} unhandled errors**. These are execution results, not the static test counts in the family tables.
 
-Coverage below comes from a single complete-suite run over production files in \`src/components/\`, including components not yet assigned to a family report. Family tables retain their separate family-scoped measurements. The runner retains coverage even when tests fail; coverage alone does not demonstrate that tests passed.
+${latestRun.coverageGeneratedAt ? `Coverage below was measured at ${latestRun.coverageGeneratedAt}${latestRun.coverageGeneratedAt === latestRun.generatedAt ? " during this complete-suite execution over production files in `src/components/`" : " and was not recalculated during this execution"}. Family tables retain their separate historical family-scoped measurements.` : "Coverage below comes from a single complete-suite run over production files in `src/components/`, including components not yet assigned to a family report. Family tables retain their separate family-scoped measurements. The runner retains coverage even when tests fail; coverage alone does not demonstrate that tests passed."}
 
 ${
 	latestRun.familyRuns
@@ -364,6 +364,8 @@ const familyTotalRow = `| **Total (weighted averages)** | **${allComponents.leng
 const report = `# Component quality
 
 This appendix defines the common test procedure expected of every component. It complements the [accessibility review](../accessibility/index.md): accessibility is part of component quality, but code coverage alone neither proves accessibility nor product correctness.
+
+See [Tests](../tests.md) for the current suite inventory, commands and review results. Coverage measurements retain their own dates; a later test run without coverage does not refresh them.
 
 ## Procedure
 

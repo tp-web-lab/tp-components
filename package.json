@@ -7,6 +7,7 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "exports": {
+    "./vite-ai": "./server/question-ai.mjs",
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/tp-lib.js"
@@ -22,6 +23,7 @@
     "./tp-lib.css": "./dist/tp-lib.css"
   },
   "files": [
+    "server",
     "dist",
     "src",
     "CHANGELOG.md"
@@ -49,6 +51,10 @@
     "build": "pnpm docs:api && tsc --noEmit && vite build && pnpm build:types && pnpm build:renderers",
     "preview": "vite preview",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage.enabled --coverage.provider=v8 --coverage.reporter=json-summary --coverage.include='src/components/**/*.ts' --coverage.exclude='src/**/*.test.ts' --coverage.reportsDirectory=config/global-quality-coverage",
+    "test:scripts": "node --test scripts/*.test.mjs",
+    "test:playgrounds": "playwright test --config playwright.playgrounds.config.ts",
+    "test:all": "pnpm test && pnpm test:scripts && pnpm test:playgrounds && pnpm test:a11y",
     "test:component": "node scripts/test-component.mjs",
     "test:coverage:component": "node scripts/test-coverage-component.mjs",
     "test:a11y": "playwright test --config playwright.a11y.config.ts",
@@ -236,6 +242,7 @@
     "@types/sql.js": "^1.4.11",
     "@vitest/coverage-v8": "4.1.10",
     "glob": "^13.0.6",
+    "magic-string": "^0.30.21",
     "rolldown": "1.2.0",
     "tslib": "^2.8.1",
     "typedoc": "^0.28.20",

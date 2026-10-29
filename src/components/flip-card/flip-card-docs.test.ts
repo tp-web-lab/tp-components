@@ -115,7 +115,8 @@ it("supports disabled and fit-content on the shared preview", () => {
 	);
 });
 it("uses shared components for both playing-card faces without image paragraph wrappers", () => {
-	const root = example("King of hearts");
+	const root = example("Hearts suit");
+	expect(root.querySelectorAll("tp-flip-card")).toHaveLength(13);
 	document.body.append(root);
 	expect(
 		root.querySelector('.tp-flip-card-recto > tp-icon[src$="/hk.svg"]'),

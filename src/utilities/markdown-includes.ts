@@ -40,7 +40,13 @@ export async function resolveMarkdownIncludes(
 		parts.push(markdown.slice(lastIndex, index));
 		parts.push(
 			applyIncludePrefix(
-				await renderInclude(includePath, currentUrl, depth, include.mode),
+				await renderInclude(
+					includePath,
+					currentUrl,
+					depth,
+					include.mode,
+					include.lazy,
+				),
 				prefix,
 			),
 		);
@@ -89,9 +95,14 @@ export async function renderInclude(
 	currentUrl: URL,
 	depth: number,
 	mode: MarkdownIncludeMode,
+	lazy = false,
 ): Promise<string> {
 	const includeUrl = new URL(includePath, currentUrl);
 	const pathname = includeUrl.pathname.toLowerCase();
+
+	if (lazy && mode !== "raw" && pathname.endsWith(".md")) {
+		return `<tp-markdown src="${escapeHtml(includeUrl.href)}" data-tp-defer-visibility data-tp-include-depth="${depth + 1}"></tp-markdown>`;
+	}
 
 	if (mode === "raw") {
 		const response = await fetch(includeUrl.href, { cache: "no-store" });
@@ -134,7 +145,11 @@ export async function renderInclude(
 function parseMarkdownInclude(value: string): {
 	path: string;
 	mode: MarkdownIncludeMode;
+	lazy: boolean;
 } {
+	const lazy = /(?:^|\s)loading\s*=\s*["']?lazy["']?(?=\s|$)/i;
+	const deferred = lazy.test(value);
+	value = value.replace(lazy, "");
 	const modePattern =
 		/(?:^|\s)mode\s*=\s*(?:"(auto|raw)"|'(auto|raw)'|(auto|raw))(?=\s|$)/i;
 	const match = value.match(modePattern);
@@ -148,5 +163,6 @@ function parseMarkdownInclude(value: string): {
 	return {
 		path: (match === null ? value : value.replace(modePattern, "")).trim(),
 		mode: selectedMode === "raw" ? "raw" : "auto",
+		lazy: deferred,
 	};
 }

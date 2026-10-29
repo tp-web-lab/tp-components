@@ -17,6 +17,7 @@ it("creates only its fixed javascript playground", async () => {
 		TpPlaygroundQuestion<TpJavascriptPlayground>
 	>();
 	question.innerHTML = "<dl><dt>Title</dt><dd>Exercise</dd></dl>";
+	question.open = true;
 	document.body.append(question);
 	await Promise.resolve();
 	expect(question.querySelector("tp-javascript-playground")).not.toBeNull();
@@ -25,9 +26,8 @@ it("creates only its fixed javascript playground", async () => {
 	expect(TpJavascriptPlaygroundQuestion.observedAttributes).not.toContain(
 		"language",
 	);
-	expect(TpJavascriptPlaygroundQuestion.observedAttributes).not.toContain(
-		"mode",
-	);
+	expect(TpJavascriptPlaygroundQuestion.observedAttributes).toContain("mode");
+	expect(question.mode).toBe("mixed");
 	expect(customElements.get("tp-javascript-playground-question")).toBe(
 		TpJavascriptPlaygroundQuestion,
 	);

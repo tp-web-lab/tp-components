@@ -49,6 +49,39 @@ Solve a logic-grid puzzle by using written clues to match items across categorie
 
 ## Usage
 
+### User interactions
+
+#### Mouse interactions
+
+| Control or gesture | Result |
+| --- | --- |
+| Click a cell | Cycle unknown → no → yes → unknown. |
+| Right-click a cell | Mark yes. |
+| Ctrl-click / Command-click a cell | Clear its mark. |
+| Clue checkbox | Mark a clue as reviewed. |
+| Undo / Redo | Reverse or reapply a grid move. |
+| Assist… → Reset the game | Clear the grid; Undo can restore it. Clue reminders are retained. |
+| Assist… → Show all incorrect boxes | Show the score, highlight incorrect marks and announce a solved puzzle. |
+| Assist… → Clear the incorrect boxes | Clear incorrect marks while preserving correct ones. |
+| Assist… → Show the box | Reveal the last selected or focused cell. Select a cell first to enable this action. |
+| Assist… → Show the category pair | Reveal all cells in the selected cell’s category-pair block. |
+| Assist… → Show the solution | Reveal every pair and display the solved status. |
+
+Each assistance action that changes the grid can be undone in one step. Click a grid box or focus it with Tab to enable Show the box and Show the category pair. The selected box has a persistent outline, and the message below the toolbar identifies its two items. The selection is retained when you move to the menu. Revealing a box changes only that box, even when automatic exclusions are enabled.
+
+#### Keyboard interactions
+
+| Key or gesture | Result |
+| --- | --- |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move among clues, toolbar controls and cells. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused cell or button; <kbd>Space</kbd> toggles a clue checkbox. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Assist… / <kbd>Enter</kbd> | Choose and apply an assistance action using the native menu. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in a matrix | Move to a neighbouring cell in the same matrix. |
+| <kbd>Delete</kbd> / <kbd>Backspace</kbd> in a cell | Clear its mark. |
+| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |
+
+### Author directives
+
 The panel heading is always **Logigram**, with Undo, Redo and an Assist… menu grouped on its right. On narrow panels, the controls wrap below the heading. A custom `label` appears below the header as the puzzle title.
 
 ### Rules
@@ -136,37 +169,6 @@ Solution
 
 The same list structure works in HTML, AsciiDoc and reStructuredText. `src` loads a Markdown file containing the definition list with these four sections, without a surrounding `tp-logigram` directive. It overrides inline content; removing it restores the original inline puzzle. A changed source starts a fresh game. Labels and clues are displayed as text.
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Click a cell | Cycle unknown → no → yes → unknown. |
-| Right-click a cell | Mark yes. |
-| Ctrl-click / Command-click a cell | Clear its mark. |
-| Clue checkbox | Mark a clue as reviewed. |
-| Undo / Redo | Reverse or reapply a grid move. |
-| Assist… → Reset the game | Clear the grid; Undo can restore it. Clue reminders are retained. |
-| Assist… → Show all incorrect boxes | Show the score, highlight incorrect marks and announce a solved puzzle. |
-| Assist… → Clear the incorrect boxes | Clear incorrect marks while preserving correct ones. |
-| Assist… → Show the box | Reveal the last selected or focused cell. Select a cell first to enable this action. |
-| Assist… → Show the category pair | Reveal all cells in the selected cell’s category-pair block. |
-| Assist… → Show the solution | Reveal every pair and display the solved status. |
-
-Each assistance action that changes the grid can be undone in one step. Click a grid box or focus it with Tab to enable Show the box and Show the category pair. The selected box has a persistent outline, and the message below the toolbar identifies its two items. The selection is retained when you move to the menu. Revealing a box changes only that box, even when automatic exclusions are enabled.
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move among clues, toolbar controls and cells. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused cell or button; <kbd>Space</kbd> toggles a clue checkbox. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Assist… / <kbd>Enter</kbd> | Choose and apply an assistance action using the native menu. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in a matrix | Move to a neighbouring cell in the same matrix. |
-| <kbd>Delete</kbd> / <kbd>Backspace</kbd> in a cell | Clear its mark. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |
-
 ## Examples
 
 <!-- tp-docgen:example-descriptions:start -->
@@ -242,6 +244,8 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_logigram.TpLogigram.html)
 <!-- tp-docgen:typedoc:end -->
+
+
 
 
 

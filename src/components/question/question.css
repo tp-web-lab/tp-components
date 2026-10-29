@@ -242,3 +242,11 @@
 [data-tp-question-score][hidden] {
 	display: none !important;
 }
+
+[data-tp-question-ai] { margin-block-start: 1rem; }
+[data-tp-question-ai-output] { white-space: normal; }
+[data-tp-question-ai-output] textarea { box-sizing: border-box; inline-size: 100%; min-block-size: 12rem; }
+
+[data-tp-question-ai-prompt-box] { position: relative; }
+[data-tp-question-ai-prompt-box] > textarea { display: block; padding-inline-end: 3rem; }
+[data-tp-question-ai-prompt-box] > tp-copy-code { inset-block-start: .5rem; inset-inline-end: .5rem; }

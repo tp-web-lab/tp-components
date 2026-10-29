@@ -9,8 +9,10 @@
  */
 
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+import { cpSync, mkdtempSync, rmSync, symlinkSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
 import test from "node:test";
 import { describeExample } from "./component-example-descriptions.mjs";
 import {
@@ -18,7 +20,6 @@ import {
 	componentAttributes,
 	documentedComponents,
 	readExamples,
-	standardizeComponentExamples,
 } from "./standardize-component-examples.mjs";
 
 test("all components use Basic usage, grouped Attributes and complementary examples", () => {
@@ -29,7 +30,7 @@ test("every grouped panel has a documented objective and no per-attribute exampl
 		for (const language of ["html", "md", "adoc", "rst"]) {
 			const examples = readExamples(component, language);
 			assert.ok(
-				!examples.some((example) => /^Attributes?\\s*:/i.test(example.label)),
+				!examples.some((example) => /^Attributes?\s*:/i.test(example.label)),
 				component,
 			);
 			for (const example of examples)
@@ -43,34 +44,28 @@ test("every grouped panel has a documented objective and no per-attribute exampl
 	}
 });
 test("normalization is idempotent and preserves all Basic usage sources", () => {
-	const snapshot = () =>
-		createHash("sha256")
-			.update(
-				JSON.stringify(
-					documentedComponents().map((component) =>
-						["html", "md", "adoc", "rst"].map((language) =>
-							readFileSync(
-								new URL(
-									`../public/docs/components/${component}/examples/examples.${language}`,
-									import.meta.url,
-								),
-								"utf8",
-							),
-						),
-					),
-				),
-			)
-			.digest("hex");
-	const before = snapshot();
-	const introductions = documentedComponents().map(
-		(component) => readExamples(component, "html")[0],
-	);
-	assert.equal(standardizeComponentExamples().added, 0);
-	assert.equal(snapshot(), before);
-	assert.deepEqual(
-		documentedComponents().map(
-			(component) => readExamples(component, "html")[0],
-		),
-		introductions,
-	);
+	const root = resolve(import.meta.dirname, "..");
+	const temporary = mkdtempSync(join(tmpdir(), "tp-examples-test-"));
+	try {
+		for (const directory of ["scripts", "src", "public", "config"])
+			cpSync(join(root, directory), join(temporary, directory), { recursive: true });
+		symlinkSync(join(root, "node_modules"), join(temporary, "node_modules"), "dir");
+		execFileSync(process.execPath, ["--input-type=module", "-e", `
+			import assert from 'node:assert/strict';
+			import { readFileSync } from 'node:fs';
+			import { documentedComponents, languages, readExamples, standardizeComponentExamples } from './scripts/standardize-component-examples.mjs';
+			const components = documentedComponents();
+			const introductions = () => components.flatMap(c => languages.map(l => readExamples(c, l)[0]));
+			const snapshot = () => components.flatMap(c => languages.map(l => readFileSync('public/docs/components/' + c + '/examples/examples.' + l, 'utf8')));
+			const original = introductions();
+			standardizeComponentExamples();
+			assert.deepEqual(introductions(), original);
+			const first = snapshot();
+			standardizeComponentExamples();
+			assert.deepEqual(snapshot(), first);
+			assert.deepEqual(introductions(), original);
+		`], { cwd: temporary, stdio: "pipe" });
+	} finally {
+		rmSync(temporary, { recursive: true, force: true });
+	}
 });

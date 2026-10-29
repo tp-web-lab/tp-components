@@ -3,11 +3,11 @@
  * @summary Shared foundation for interactive markup viewers.
  */
 
+import { DeferredVisibility } from "../../utilities/deferred-visibility.js";
 import { IframeOverlayBridge } from "../../utilities/iframe-overlay-bridge.js";
 import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
 import { TpBase } from "../base/base.js";
 import type { TpCodeEditor } from "../code-editor/code-editor.js";
-import "../code-editor/code-editor.js";
 import "../divider/divider.js";
 import "../icon/icon.js";
 import "../icon-button/icon-button.js";
@@ -82,66 +82,58 @@ function measureIframeContentHeight(iframe: HTMLIFrameElement): number {
 	)
 		return 0;
 
-	// Measure the complete rendered subtree, not only direct body children.
-	// A custom-element host can remain inline or report a smaller box while its
-	// internal controls extend below it; measuring descendants prevents clipping.
-	const renderedContentHeight = Array.from(
-		documentNode.body.querySelectorAll("*"),
-	).reduce((height, element) => {
-		const rect = element.getBoundingClientRect();
-		const elementStyle = documentNode.defaultView?.getComputedStyle(element);
+	// Walk once, carrying ancestor clipping bounds into each subtree. Reading
+	// every ancestor again for every descendant makes deeply nested previews
+	// expensive, especially while their custom elements are upgrading.
+	let renderedContentHeight = 0;
+	const pending = Array.from(documentNode.body.children, (element) => ({
+		element,
+		clipTop: Number.NEGATIVE_INFINITY,
+		clipBottom: Number.POSITIVE_INFINITY,
+	}));
+	while (pending.length > 0) {
+		const item = pending.pop();
+		if (!item) break;
+		const { element, clipTop, clipBottom } = item;
+		const style = documentNode.defaultView?.getComputedStyle(element);
 		if (
-			elementStyle?.display === "none" ||
-			elementStyle?.position === "absolute" ||
-			elementStyle?.position === "fixed"
+			style?.display === "none" ||
+			style?.position === "absolute" ||
+			style?.position === "fixed"
 		)
-			return height;
-		const marginBottom =
-			elementStyle === undefined
-				? 0
-				: Number.parseFloat(elementStyle.marginBottom) || 0;
-		let visibleTop = rect.top;
-		let visibleBottom = rect.bottom + marginBottom;
-		// Transformed descendants (for example Leaflet's SVG paths) can extend
-		// far outside a fixed-size viewport. Their clipped geometry is not page
-		// content and must not enlarge the iframe. Keep measuring genuinely
-		// visible overflow, such as controls extending below an inline host.
-		for (
-			let ancestor = element.parentElement;
-			ancestor &&
-			ancestor !== documentNode.body &&
-			ancestor !== documentNode.documentElement;
-			ancestor = ancestor.parentElement
-		) {
-			// Closed details retain layout boxes for their skipped contents in
-			// browsers. Only the first summary participates in visible layout.
-			if (ancestor.localName === "details" && !ancestor.hasAttribute("open")) {
-				const summary = Array.from(ancestor.children).find(
-					(child) => child.localName === "summary",
-				);
-				if (!summary?.contains(element)) return height;
-			}
-			const ancestorStyle =
-				documentNode.defaultView?.getComputedStyle(ancestor);
-			// An overlay's descendants are out of document flow too. In
-			// particular, a fixed drawer follows the iframe viewport height;
-			// counting its children would grow that viewport on every resize.
-			if (
-				ancestorStyle?.display === "none" ||
-				ancestorStyle?.position === "fixed" ||
-				ancestorStyle?.position === "absolute"
-			)
-				return height;
-			const overflow = ancestorStyle?.overflowY || ancestorStyle?.overflow;
-			if (overflow && ["hidden", "clip", "auto", "scroll"].includes(overflow)) {
-				const bounds = ancestor.getBoundingClientRect();
-				visibleTop = Math.max(visibleTop, bounds.top);
-				visibleBottom = Math.min(visibleBottom, bounds.bottom);
-				if (visibleBottom <= visibleTop) return height;
-			}
+			continue;
+		const rect = element.getBoundingClientRect();
+		const marginBottom = Number.parseFloat(style?.marginBottom ?? "") || 0;
+		const visibleTop = Math.max(rect.top, clipTop);
+		const visibleBottom = Math.min(rect.bottom + marginBottom, clipBottom);
+		if (visibleBottom > visibleTop)
+			renderedContentHeight = Math.max(renderedContentHeight, visibleBottom);
+
+		const overflow = style?.overflowY || style?.overflow;
+		const clips =
+			overflow && ["hidden", "clip", "auto", "scroll"].includes(overflow);
+		const childTop = clips ? Math.max(clipTop, rect.top) : clipTop;
+		const childBottom = clips ? Math.min(clipBottom, rect.bottom) : clipBottom;
+		if (childBottom <= childTop) continue;
+		// Closed details expose only their first summary. Out-of-flow overlays
+		// and clipped map geometry must never expand the preview viewport.
+		const children =
+			element.localName === "details" && !element.hasAttribute("open")
+				? [
+						Array.from(element.children).find(
+							(child) => child.localName === "summary",
+						),
+					]
+				: element.children;
+		for (const child of children) {
+			if (child)
+				pending.push({
+					element: child,
+					clipTop: childTop,
+					clipBottom: childBottom,
+				});
 		}
-		return Math.max(height, visibleBottom);
-	}, 0);
+	}
 	const bodyStyle = documentNode.defaultView?.getComputedStyle(
 		documentNode.body,
 	);
@@ -169,17 +161,6 @@ function syncIframeHeight(iframe: HTMLIFrameElement): void {
 	else iframe.style.removeProperty("height");
 }
 
-function resyncIframeHeight(iframe: HTMLIFrameElement): void {
-	const sync = (): void => {
-		if (iframe.isConnected) syncIframeHeight(iframe);
-	};
-	sync();
-	queueMicrotask(sync);
-	requestAnimationFrame(sync);
-	setTimeout(sync, 0);
-	setTimeout(sync, 100);
-}
-
 /**
  * Abstract base class for interactive source/output markup viewers.
  *
@@ -196,6 +177,7 @@ export abstract class TpMarkupViewer<
 	private renderToken = 0;
 	/** Current source editor, including while its pane is hidden. */
 	private responseEditor: TpCodeEditor | null = null;
+	private readResponseSource: (() => string) | null = null;
 	/** Renders a snapshot without changing the visible preview. */
 	private renderResponse: (() => Promise<string>) | null = null;
 	/** Restores the selected example's initial source. */
@@ -203,7 +185,7 @@ export abstract class TpMarkupViewer<
 
 	/** Returns the current editable source, including unsaved preview changes. */
 	public getValue(): string {
-		return this.responseEditor?.getValue() ?? "";
+		return this.responseEditor?.getValue() ?? this.readResponseSource?.() ?? "";
 	}
 	/** Restores the selected example and refreshes its preview. */
 	public reset(): void {
@@ -214,6 +196,7 @@ export abstract class TpMarkupViewer<
 		if (!this.renderResponse) throw new Error("Wait for the source to load.");
 		return this.renderResponse();
 	}
+	private iframeObservationRevision = 0;
 	private iframeMutationObserver: MutationObserver | null = null;
 	private iframeResizeObserver: ResizeObserver | null = null;
 	private iframeVisibilityObserver:
@@ -323,7 +306,12 @@ export abstract class TpMarkupViewer<
 		if (this.isConnected) void this.renderViewer();
 	}
 
+	private readonly pendingVisibility = new DeferredVisibility(this, () =>
+		this.requestViewerRender(),
+	);
+
 	protected disconnectedCallback(): void {
+		this.pendingVisibility.disconnect();
 		this.renderToken += 1;
 		this.disconnectIframeResizeObserver();
 		this.disposeViewer();
@@ -331,7 +319,13 @@ export abstract class TpMarkupViewer<
 
 	private async renderViewer(): Promise<void> {
 		const token = ++this.renderToken;
+		// Parent tabs may still be moving panels and applying hidden in this turn.
+		await Promise.resolve();
+		if (token !== this.renderToken || !this.isConnected) return;
+		if (this.pendingVisibility.defer()) return;
+		this.removeAttribute("data-tp-viewer-ready");
 		this.responseEditor = null;
+		this.readResponseSource = null;
 		this.renderResponse = null;
 		this.resetResponse = null;
 
@@ -409,17 +403,12 @@ export abstract class TpMarkupViewer<
 
 			let currentMode = initialMode.value;
 
-			const editor = document.createElement("tp-code-editor") as TpCodeEditor;
-			editor.language = this.sourceLanguage;
-			editor.lineNumbers = false;
-			editor.wordWrap = true;
-			editor.readonly = false;
-			editor.setValue(currentExample.source);
-			this.responseEditor = editor;
+			let editor: TpCodeEditor | null = null;
+			this.readResponseSource = () => currentExample.source;
 			this.renderResponse = async () => {
 				const container = document.createElement("div");
 				await this.renderOutput(
-					editor.getValue(),
+					editor?.getValue() ?? currentExample.source,
 					initialMode.value,
 					container,
 					currentExample.context,
@@ -427,14 +416,31 @@ export abstract class TpMarkupViewer<
 				return container.querySelector("iframe")?.srcdoc ?? container.innerHTML;
 			};
 
-			const syncSourceEditor = (): void => {
+			const syncSourceEditor = async (): Promise<void> => {
 				if (this.dataset.layout === "output") {
-					editor.remove();
+					editor?.remove();
 					return;
+				}
+				await import("../code-editor/code-editor.js");
+				if (
+					token !== this.renderToken ||
+					!this.isConnected ||
+					this.dataset.layout === "output"
+				)
+					return;
+				if (!editor) {
+					editor = document.createElement("tp-code-editor") as TpCodeEditor;
+					editor.language = this.sourceLanguage;
+					editor.lineNumbers = false;
+					editor.wordWrap = true;
+					editor.readonly = false;
+					editor.setValue(currentExample.source);
+					this.responseEditor = editor;
 				}
 				if (editor.parentElement !== sourceContainer)
 					sourceContainer.replaceChildren(editor);
 				resyncEditorHeight(editor);
+				syncEditorToolbarControl();
 			};
 			const updateLayout = (): void => {
 				const showSource =
@@ -445,7 +451,7 @@ export abstract class TpMarkupViewer<
 					showSource && showOutput ? "both" : showSource ? "source" : "output";
 				editorActions?.toggleAttribute("hidden", !showSource);
 				outputActions?.toggleAttribute("hidden", !showOutput);
-				syncSourceEditor();
+				void syncSourceEditor();
 				queueMicrotask(syncEditorToolbarControl);
 			};
 			const updateOutput = async (): Promise<void> => {
@@ -502,7 +508,7 @@ export abstract class TpMarkupViewer<
 					if (selected === undefined) return;
 					shareViewerExample(this, exampleSelect);
 					currentExample = { ...selected };
-					editor.setValue(currentExample.source);
+					editor?.setValue(currentExample.source);
 					void update();
 				});
 			}
@@ -549,20 +555,22 @@ export abstract class TpMarkupViewer<
 				syncEditorToolbarControl();
 			});
 			runButton.addEventListener("click", () => {
-				currentExample.source = editor.getValue();
+				currentExample.source = editor?.getValue() ?? currentExample.source;
 				void updateOutput();
 			});
 			this.resetResponse = () => {
 				currentExample.source =
 					initialSourceByLabel.get(currentExample.label) ?? "";
-				editor.setValue(currentExample.source);
+				editor?.setValue(currentExample.source);
 				void update();
 			};
 			resetButton.addEventListener("click", () => this.reset());
 
 			await update();
-			if (token === this.renderToken)
+			if (token === this.renderToken) {
+				this.setAttribute("data-tp-viewer-ready", "");
 				this.dispatchEvent(new CustomEvent("tp-markup-viewer-src-load"));
+			}
 		} catch (error) {
 			if (token !== this.renderToken) return;
 			const message = error instanceof Error ? error.message : String(error);
@@ -616,8 +624,9 @@ export abstract class TpMarkupViewer<
 					});
 				}
 			}
-			resyncIframeHeight(iframe);
+			syncIframeHeight(iframe);
 			this.observeIframeDocument(iframe);
+			this.scheduleIframeHeightSync(iframe);
 			this.iframeOverlayBridge?.disconnect();
 			this.iframeOverlayBridge = new IframeOverlayBridge(iframe);
 			this.iframeOverlayBridge.connect();
@@ -669,18 +678,26 @@ export abstract class TpMarkupViewer<
 		)
 			return;
 
+		const revision = this.iframeObservationRevision;
+		const waitingTags = new Set<string>();
 		const synchronizeCustomElements = (root: ParentNode): void => {
 			const registry = documentNode.defaultView?.customElements;
 			if (registry === undefined) return;
-			const tags = new Set(
-				Array.from(root.querySelectorAll("*"))
-					.map((element) => element.localName)
-					.filter((tagName) => tagName.includes("-")),
-			);
-			for (const tagName of tags) {
-				void registry
-					.whenDefined(tagName)
-					.then(() => resyncIframeHeight(iframe));
+			const elements = Array.from(root.querySelectorAll(":not(:defined)"));
+			if (root instanceof ElementConstructor) elements.push(root);
+			for (const element of elements) {
+				const tagName = element.localName;
+				if (
+					!tagName.includes("-") ||
+					registry.get(tagName) ||
+					waitingTags.has(tagName)
+				)
+					continue;
+				waitingTags.add(tagName);
+				void registry.whenDefined(tagName).then(() => {
+					if (revision === this.iframeObservationRevision)
+						this.scheduleIframeHeightSync(iframe);
+				});
 			}
 		};
 
@@ -719,6 +736,7 @@ export abstract class TpMarkupViewer<
 	}
 
 	private disconnectIframeResizeObserver(): void {
+		this.iframeObservationRevision += 1;
 		if (this.iframeSyncFrame !== null)
 			cancelAnimationFrame(this.iframeSyncFrame);
 		this.iframeSyncFrame = null;

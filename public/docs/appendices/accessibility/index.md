@@ -10,25 +10,25 @@ It records static implementation evidence, not a certification. Keyboard paths, 
 
 | Measure | Result |
 | --- | --- |
-| Documented component pages | 175 |
-| Detailed accessibility contracts | 45 |
-| Static implementation reviews | 175 |
-| Component implementations with detected dedicated or shared test coverage | 173 |
-| Components containing keyboard handling | 28 |
+| Documented component pages | 189 |
+| Detailed accessibility contracts | 46 |
+| Static implementation reviews | 189 |
+| Component implementations with detected dedicated or shared test coverage | 187 |
+| Components containing keyboard handling | 37 |
 
 ### Source of semantics
 
-These categories are mutually exclusive and cover all 175 documented entries. Components in the first category may also use native or library controls.
+These categories are mutually exclusive and cover all 189 documented entries. Components in the first category may also use native or library controls.
 
 | Static classification | Components |
 | --- | ---: |
-| Explicit ARIA markup or state in the primary source | 88 |
+| Explicit ARIA markup or state in the primary source | 97 |
 | Native HTML or accessible library controls, without local ARIA | 13 |
-| Component-owned pointer interaction without detected semantics | 1 |
-| No direct component-owned pointer interaction or exposed control detected | 71 |
+| Component-owned pointer interaction without detected semantics | 3 |
+| No direct component-owned pointer interaction or exposed control detected | 74 |
 | Documentation aliases without a primary implementation file | 2 |
 
-For context, 77 components use a detected native HTML control or an accessible library control, including 64 that also contain explicit ARIA. ARIA is not a compliance score: native semantics should be preferred when sufficient, and delegated semantics may live in a composed component or dependency.
+For context, 86 components use a detected native HTML control or an accessible library control, including 73 that also contain explicit ARIA. ARIA is not a compliance score: native semantics should be preferred when sufficient, and delegated semantics may live in a composed component or dependency.
 
 Accessibility reporting is centralized in this appendix. Component pages do not repeat a generic Accessibility section. Source metadata retains implementation guarantees, consumer responsibilities, and keyboard behavior; automated checks do not replace human validation.
 
@@ -44,16 +44,17 @@ The browser matrix uses [Playwright](https://playwright.dev/docs/accessibility-t
 
 Semantic foreground/background pairs are declared in `config/accessibility-color-contract.json` and checked in the light and dark themes by the same three browser engines. This prevents a shared token change from silently introducing contrast regressions across multiple components.
 
-Last axe scan: 2026-09-20T11:13:35.695Z  
+Last axe scan: 2026-10-29T09:38:47.092Z
+
 
 
 Ruleset: WCAG 2.2 A and AA. WebKit approximates Safari's rendering engine but does not replace periodic testing in Safari on macOS.
 
 | Browser engine | Component examples | Complete | Violations | Incomplete checks | Scan errors |
 | --- | ---: | --- | ---: | ---: | ---: |
-| chromium | 171/171 | Yes | 6 | 123 | 0 |
-| firefox | 171/171 | No | 5 | 124 | 2 |
-| webkit | 171/171 | No | 6 | 118 | 1 |
+| chromium | 185/185 | Yes | 0 | 133 | 0 |
+| firefox | 185/185 | Yes | 0 | 137 | 0 |
+| webkit | 185/185 | Yes | 0 | 137 | 0 |
 
 ### Understanding incomplete checks
 
@@ -75,50 +76,12 @@ Run `pnpm test:a11y:colors` for the color-token contract or `pnpm test:a11y` for
 
 ### Detected violations
 
-::::::::: tp-tabs
-Chromium
-: | Component | Rule | Impact |
-  | --- | --- | --- |
-  | `tp-datefield` | [label](https://dequeuniversity.com/rules/axe/4.13/label?application=playwright) | critical |
-  | `tp-flip-card` | [scrollable-region-focusable](https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright) | serious |
-  | `tp-numberfield` | [label](https://dequeuniversity.com/rules/axe/4.13/label?application=playwright) | critical |
-  | `tp-restructuredtext-playground` | [scrollable-region-focusable](https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright) | serious |
-  | `tp-textfield` | [label](https://dequeuniversity.com/rules/axe/4.13/label?application=playwright) | critical |
-  | `tp-timefield` | [label](https://dequeuniversity.com/rules/axe/4.13/label?application=playwright) | critical |
-
-Firefox
-: | Component | Rule | Impact |
-  | --- | --- | --- |
-  | `tp-datefield` | [label](https://dequeuniversity.com/rules/axe/4.13/label?application=playwright) | critical |
-  | `tp-flip-card` | [scrollable-region-focusable](https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright) | serious |
-  | `tp-numberfield` | [label](https://dequeuniversity.com/rules/axe/4.13/label?application=playwright) | critical |
-  | `tp-textfield` | [label](https://dequeuniversity.com/rules/axe/4.13/label?application=playwright) | critical |
-  | `tp-timefield` | [label](https://dequeuniversity.com/rules/axe/4.13/label?application=playwright) | critical |
-
-WebKit
-: | Component | Rule | Impact |
-  | --- | --- | --- |
-  | `tp-datefield` | [label](https://dequeuniversity.com/rules/axe/4.13/label?application=playwright) | critical |
-  | `tp-flip-card` | [scrollable-region-focusable](https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright) | serious |
-  | `tp-markdown-playground` | [scrollable-region-focusable](https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright) | serious |
-  | `tp-numberfield` | [label](https://dequeuniversity.com/rules/axe/4.13/label?application=playwright) | critical |
-  | `tp-textfield` | [label](https://dequeuniversity.com/rules/axe/4.13/label?application=playwright) | critical |
-  | `tp-timefield` | [label](https://dequeuniversity.com/rules/axe/4.13/label?application=playwright) | critical |
-:::::::::
-
-### Scan errors
-
-| Component | Browser | Error |
-| --- | --- | --- |
-| `tp-emoji-picker` | firefox | Test timeout of 60000ms exceeded. |
-| `tp-emoji-picker` | webkit | Test timeout of 60000ms exceeded. |
-| `tp-symbol-picker` | firefox | Test timeout of 60000ms exceeded. |
+No automated WCAG A or AA violations were detected.
 
 ## Cross-cutting findings
 
 ### High priority
 
-- The axe browser matrix has not completed for every component example in Chromium, Firefox, and WebKit.
 - Image insertion in `tp-prose-editor` permits an empty alternative without recording a human-confirmed decorative decision.
 - Audio and video insertion does not establish captions, transcript, audio-description, or autoplay evidence.
 
@@ -126,9 +89,9 @@ WebKit
 
 Each queue groups components where the static review still detects a specific risk pattern: missing keyboard equivalence, unmitigated motion, a removed focus outline without a visible replacement, undersized text, or missing test coverage. An empty queue means that no corresponding source-code pattern remains detected; it does not replace browser, assistive-technology, or human validation.
 
-- Keyboard-equivalence review: [`tp-typewriting`](../../components/typewriting/index.md)
+- Keyboard-equivalence review: [`tp-listof`](../../components/listof/index.md), [`tp-ref`](../../components/ref/index.md), [`tp-typewriting`](../../components/typewriting/index.md)
 - Reduced-motion review: None identified.
-- Focus-indicator review: None identified.
+- Focus-indicator review: [`tp-tangram`](../../components/tangram/index.md)
 - Small-text review: [`tp-avatar`](../../components/avatar/index.md)
 - Missing detected component test coverage: None identified.
 
@@ -154,15 +117,18 @@ A new interactive component is not considered accessibility-reviewed until its d
 | [`tp-asciidoc-single-page`](../../components/asciidoc-single-page/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-asciidoc-viewer`](../../components/asciidoc-viewer/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-asciidoc-viewer-question`](../../components/asciidoc-viewer-question/index.md) | Detailed | Yes | no component-owned interaction detected | browser and human validation |
+| [`tp-audio-recorder`](../../components/audio-recorder/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-avatar`](../../components/avatar/index.md) | Detailed | Yes | ARIA | small text |
 | [`tp-avatar-group`](../../components/avatar-group/index.md) | Detailed | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-badge`](../../components/badge/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-base`](../../components/base/index.md) | Static | Yes | ARIA, keyboard handling | browser and human validation |
+| [`tp-biblio`](../../components/biblio/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-binary`](../../components/binary/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-blank`](../../components/blank/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-box`](../../components/box/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-button`](../../components/button/index.md) | Detailed | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-button-group`](../../components/button-group/index.md) | Static | Yes | native or library controls | browser and human validation |
+| [`tp-calculator`](../../components/calculator/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-callout`](../../components/callout/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-card`](../../components/card/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-center`](../../components/center/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
@@ -191,6 +157,7 @@ A new interactive component is not considered accessibility-reviewed until its d
 | [`tp-drawer`](../../components/drawer/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-dropdown`](../../components/dropdown/index.md) | Detailed | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-emoji-picker`](../../components/emoji-picker/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
+| [`tp-exercise`](../../components/exercise/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-file-tree`](../../components/file-tree/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-filesystem`](../../components/filesystem/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-fill-blank`](../../components/fill-blank/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
@@ -200,10 +167,12 @@ A new interactive component is not considered accessibility-reviewed until its d
 | [`tp-frame`](../../components/frame/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-fullscreen`](../../components/fullscreen/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-game-life`](../../components/game-life/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
+| [`tp-glossary`](../../components/glossary/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-graph-analog-circuit`](../../components/graph-analog-circuit/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-graph-dfa`](../../components/graph-dfa/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-graph-editor`](../../components/graph-editor/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-graph-geometric-optics`](../../components/graph-geometric-optics/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
+| [`tp-graph-geometry`](../../components/graph-geometry/index.md) | Detailed | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-graph-logical-circuit`](../../components/graph-logical-circuit/index.md) | Detailed | Yes | native or library controls, keyboard handling | browser and human validation |
 | [`tp-graph-nfa`](../../components/graph-nfa/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-graph-petri`](../../components/graph-petri/index.md) | Detailed | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
@@ -229,6 +198,8 @@ A new interactive component is not considered accessibility-reviewed until its d
 | [`tp-javascript-viewer-question`](../../components/javascript-viewer-question/index.md) | Detailed | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-lang`](../../components/lang/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-list-table`](../../components/list-table/index.md) | Detailed | Yes | no component-owned interaction detected | browser and human validation |
+| [`tp-listof`](../../components/listof/index.md) | Static | Yes | no component-owned interaction detected | keyboard equivalence |
+| [`tp-logigram`](../../components/logigram/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-lorem-ipsum`](../../components/lorem-ipsum/index.md) | Detailed | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-loto`](../../components/loto/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-lsystem`](../../components/lsystem/index.md) | Detailed | Yes | native or library controls, ARIA | browser and human validation |
@@ -242,19 +213,21 @@ A new interactive component is not considered accessibility-reviewed until its d
 | [`tp-markdown-viewer-question`](../../components/markdown-viewer-question/index.md) | Detailed | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-markup-multi-pages`](../../components/markup-multi-pages/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-markup-multi-slides`](../../components/markup-multi-slides/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
-| [`tp-markup-single-page`](../../components/markup-single-page/index.md) | Static | Yes | ARIA | browser and human validation |
+| [`tp-markup-single-page`](../../components/markup-single-page/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-markup-viewer-question`](../../components/markup-viewer-question/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
+| [`tp-mask`](../../components/mask/index.md) | Static | Yes | ARIA | browser and human validation |
 | [`tp-mastermind`](../../components/mastermind/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-matching`](../../components/matching/index.md) | Detailed | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-matching-question`](../../components/matching-question/index.md) | Detailed | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-math`](../../components/math/index.md) | Detailed | Yes | ARIA | browser and human validation |
-| [`tp-mathfield`](../../components/mathfield/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
+| [`tp-mathfield`](../../components/mathfield/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-memory`](../../components/memory/index.md) | Static | Yes | native or library controls | browser and human validation |
 | [`tp-menu`](../../components/menu/index.md) | Static | Yes | ARIA, keyboard handling | browser and human validation |
 | [`tp-modal`](../../components/modal/index.md) | Detailed | Yes | ARIA, keyboard handling | browser and human validation |
 | [`tp-multi-asciidoc`](../../components/multi-asciidoc/index.md) | Static | N/A | no component-owned interaction detected | documentation alias |
 | [`tp-multi-choice-question`](../../components/multi-choice-question/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-multi-restructuredtext`](../../components/multi-restructuredtext/index.md) | Static | N/A | no component-owned interaction detected | documentation alias |
+| [`tp-note`](../../components/note/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-notebook`](../../components/notebook/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-numberfield`](../../components/numberfield/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-object-tree`](../../components/object-tree/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
@@ -275,6 +248,7 @@ A new interactive component is not considered accessibility-reviewed until its d
 | [`tp-python-viewer-question`](../../components/python-viewer-question/index.md) | Detailed | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-question`](../../components/question/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-radio-list`](../../components/radio-list/index.md) | Static | Yes | native or library controls | browser and human validation |
+| [`tp-ref`](../../components/ref/index.md) | Static | Yes | no component-owned interaction detected | keyboard equivalence |
 | [`tp-restructuredtext`](../../components/restructuredtext/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-restructuredtext-multi-pages`](../../components/restructuredtext-multi-pages/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-restructuredtext-multi-slides`](../../components/restructuredtext-multi-slides/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
@@ -282,16 +256,18 @@ A new interactive component is not considered accessibility-reviewed until its d
 | [`tp-restructuredtext-single-page`](../../components/restructuredtext-single-page/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-restructuredtext-viewer`](../../components/restructuredtext-viewer/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-restructuredtext-viewer-question`](../../components/restructuredtext-viewer-question/index.md) | Detailed | Yes | no component-owned interaction detected | browser and human validation |
+| [`tp-save-audio`](../../components/save-audio/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-save-image`](../../components/save-image/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-sidebar`](../../components/sidebar/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-single-choice-question`](../../components/single-choice-question/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-skeleton`](../../components/skeleton/index.md) | Detailed | Yes | ARIA | browser and human validation |
 | [`tp-slider`](../../components/slider/index.md) | Static | Yes | keyboard handling | browser and human validation |
+| [`tp-slope-simulator`](../../components/slope-simulator/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-solitaire`](../../components/solitaire/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-source`](../../components/source/index.md) | Static | Yes | native or library controls | browser and human validation |
 | [`tp-speech-to-text`](../../components/speech-to-text/index.md) | Detailed | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-splitter`](../../components/splitter/index.md) | Detailed | Yes | ARIA, keyboard handling | browser and human validation |
-| [`tp-spreadsheet-editor`](../../components/spreadsheet-editor/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
+| [`tp-spreadsheet-editor`](../../components/spreadsheet-editor/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-sql-notebook`](../../components/sql-notebook/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-sql-playground`](../../components/sql-playground/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-sql-viewer`](../../components/sql-viewer/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
@@ -300,6 +276,7 @@ A new interactive component is not considered accessibility-reviewed until its d
 | [`tp-switcher`](../../components/switcher/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-symbol-picker`](../../components/symbol-picker/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-tabs`](../../components/tabs/index.md) | Detailed | Yes | ARIA, keyboard handling | browser and human validation |
+| [`tp-tangram`](../../components/tangram/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | focus indicator |
 | [`tp-text-to-speech`](../../components/text-to-speech/index.md) | Detailed | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-textfield`](../../components/textfield/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
 | [`tp-theme`](../../components/theme/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
@@ -317,5 +294,5 @@ A new interactive component is not considered accessibility-reviewed until its d
 | [`tp-typescript-viewer`](../../components/typescript-viewer/index.md) | Static | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-typescript-viewer-question`](../../components/typescript-viewer-question/index.md) | Detailed | Yes | no component-owned interaction detected | browser and human validation |
 | [`tp-typewriting`](../../components/typewriting/index.md) | Detailed | Yes | no component-owned interaction detected | keyboard equivalence |
-| [`tp-xy-plot`](../../components/xy-plot/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |
+| [`tp-xy-plot`](../../components/xy-plot/index.md) | Static | Yes | native or library controls, ARIA, keyboard handling | browser and human validation |
 | [`tp-yakazu`](../../components/yakazu/index.md) | Static | Yes | native or library controls, ARIA | browser and human validation |

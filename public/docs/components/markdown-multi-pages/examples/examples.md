@@ -43,7 +43,7 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ::: tp-textfield { data-setting="label" label="label" value placeholder clearable }
 :::
 
-::: tp-textfield { data-setting="langs" label="langs" value="en,fr" placeholder="en,fr" clearable }
+::: tp-textfield { data-setting="langs" label="langs" value placeholder clearable }
 :::
 ::::
 

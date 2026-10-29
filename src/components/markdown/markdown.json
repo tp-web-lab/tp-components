@@ -20,7 +20,13 @@
       "default": "\"\""
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "setSafeMarkdown(source: string): Promise<void>",
+      "inherited": false,
+      "description": "Renders generated Markdown with restricted formatting and source-backed formulas only."
+    }
+  ],
   "events": [
     {
       "name": "tp-markdown-rendered",

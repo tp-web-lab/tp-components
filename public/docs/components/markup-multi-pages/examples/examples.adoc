@@ -56,7 +56,7 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ====
 ====
 
-[tp-textfield%clearable,data-setting="langs",label="langs",value="en,fr",placeholder="en,fr"]
+[tp-textfield%value%placeholder%clearable,data-setting="langs",label="langs"]
 ====
 ====
 =====

@@ -10,20 +10,6 @@ The custom `<tp-listof>` element builds a list of reference entries or links to 
 
 ## Usage
 
-Set `selector` to any valid CSS selector, for example `tp-note`, `tp-biblio`, `tp-glossary`, `figure`, `table`, or `.illustration`. Elements must have at least one nonempty `ref`, `title`, `label`, `caption` or `figcaption` attribute, or a direct `caption` or `figcaption` child.
-
-Notes are rendered as an ordered list (`ol`), in first-citation order, with one number per note. Repeated citations do not duplicate a note. Uncited notes follow the cited notes in definition order. A selector that includes only some notes preserves their document numbers.
-
-Bibliography and glossary entries are rendered as description lists (`dl`, `dt`, `dd`) sorted alphabetically by their `ref` terms, ignoring case. Each bibliography term and description share one row in a two-column layout, with all descriptions aligned in the second column; glossary descriptions use the usual indentation. All three kinds retain their complete HTML content.
-
-Other elements form a linked unordered list in document order. Their label uses the first available value: `title`, `label`, `caption` attribute, `figcaption` attribute, caption child, then `ref`. Existing IDs are preserved and missing IDs are generated. A mixed selector produces separate note, bibliography, glossary and ordinary-element lists in that order.
-
-Place the list anywhere in the document, including before its entries or at the end.
-
-An empty selector produces no entries. An invalid selector empties the list and sets `data-invalid-selector` without throwing an error. Generated lists and tooltip copies are excluded from selection, so lists never include their own output.
-
-References and lists use the nearest `data-tp-reference-scope`, rendered markup document, `article` or `main`, falling back to the page body. Nested document scopes are independent. Identifiers should be unique within each reference kind and scope; the first matching definition is used for duplicates. Changes to definitions, labels and selected elements update existing tooltips and lists automatically.
-
 ### User interactions
 
 #### Mouse interactions
@@ -39,6 +25,22 @@ References and lists use the nearest `data-tp-reference-scope`, rendered markup 
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between generated links. |
 | <kbd>Enter</kbd> | Follow the focused link. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
+
+### Author directives
+
+Set `selector` to any valid CSS selector, for example `tp-note`, `tp-biblio`, `tp-glossary`, `figure`, `table`, or `.illustration`. Elements must have at least one nonempty `ref`, `title`, `label`, `caption` or `figcaption` attribute, or a direct `caption` or `figcaption` child.
+
+Notes are rendered as an ordered list (`ol`), in first-citation order, with one number per note. Repeated citations do not duplicate a note. Uncited notes follow the cited notes in definition order. A selector that includes only some notes preserves their document numbers.
+
+Bibliography and glossary entries are rendered as description lists (`dl`, `dt`, `dd`) sorted alphabetically by their `ref` terms, ignoring case. Each bibliography term and description share one row in a two-column layout, with all descriptions aligned in the second column; glossary descriptions use the usual indentation. All three kinds retain their complete HTML content.
+
+Other elements form a linked unordered list in document order. Their label uses the first available value: `title`, `label`, `caption` attribute, `figcaption` attribute, caption child, then `ref`. Existing IDs are preserved and missing IDs are generated. A mixed selector produces separate note, bibliography, glossary and ordinary-element lists in that order.
+
+Place the list anywhere in the document, including before its entries or at the end.
+
+An empty selector produces no entries. An invalid selector empties the list and sets `data-invalid-selector` without throwing an error. Generated lists and tooltip copies are excluded from selection, so lists never include their own output.
+
+References and lists use the nearest `data-tp-reference-scope`, rendered markup document, `article` or `main`, falling back to the page body. Nested document scopes are independent. Identifiers should be unique within each reference kind and scope; the first matching definition is used for duplicates. Changes to definitions, labels and selected elements update existing tooltips and lists automatically.
 
 ## Examples
 
@@ -105,6 +107,8 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_listof_listof.TpListof.html)
 <!-- tp-docgen:typedoc:end -->
+
+
 
 
 

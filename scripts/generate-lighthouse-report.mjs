@@ -26,6 +26,16 @@ function pageLabel(url) {
   return parsed.pathname.replace(/^\//, '');
 }
 
+function formatMeasuredAt(timestamp) {
+  const parts = Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Paris',
+    year: 'numeric', month: 'long', day: 'numeric',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    hourCycle: 'h23', timeZoneName: 'shortOffset',
+  }).formatToParts(new Date(timestamp)).map(({ type, value }) => [type, value]));
+  return `${parts.day} ${parts.month} ${parts.year} at ${parts.hour}:${parts.minute}:${parts.second} (Europe/Paris, ${parts.timeZoneName.replace('GMT', 'UTC')})`;
+}
+
 function percent(score) {
   return score === null || score === undefined ? 'n/a' : `${Math.round(score * 100)}%`;
 }
@@ -101,6 +111,8 @@ The four tested categories mean:
 The initial thresholds are advisory: 80% performance, 95% accessibility, 90% best practices, and 90% SEO. A warning identifies a regression candidate but does not fail the component-quality workflow.
 
 ## Category scores
+
+Last measured: ${formatMeasuredAt(runs.map(({ result }) => result.fetchTime).sort().at(-1))}. Lighthouse version: ${[...new Set(runs.map(({ result }) => result.lighthouseVersion))].join(', ')}. This execution collected ${manifest.length / representativeRuns.length} measurements per page; the table uses the representative run selected by Lighthouse CI.
 
 | Page | Performance | Accessibility | Best practices | SEO |
 | --- | ---: | ---: | ---: | ---: |

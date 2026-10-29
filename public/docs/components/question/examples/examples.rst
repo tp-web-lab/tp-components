@@ -40,7 +40,24 @@
                :orientation: horizontal
                :value:
 
+               - ai-api
+
                - score
+
+            .. tp-radio-list::
+               :data-setting: ai-help
+               :label: ai-help
+               :label-position: top
+               :orientation: horizontal
+               :value: 1
+
+               - none
+
+               - feedback
+
+               - solution
+
+               - both
 
             .. tp-radio-list::
                :data-setting: mode
@@ -86,6 +103,20 @@
                - file-unknown
 
             .. tp-cluster::
+
+               .. tp-textfield::
+                  :data-setting: ai-assistant
+                  :label: ai-assistant
+                  :value: openai
+                  :placeholder: openai
+                  :clearable:
+
+               .. tp-textfield::
+                  :data-setting: ai-explanation-src
+                  :label: ai-explanation-src
+                  :value:
+                  :placeholder:
+                  :clearable:
 
                .. tp-textfield::
                   :data-setting: timing

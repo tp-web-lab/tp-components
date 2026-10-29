@@ -15,13 +15,15 @@ it("creates only its fixed markdown viewer", async () => {
 	const question = new TpMarkdownViewerQuestion();
 	expectTypeOf(question).toExtend<TpMarkupViewerQuestion<TpMarkdownViewer>>();
 	question.innerHTML = "<dl><dt>Title</dt><dd>Exercise</dd></dl>";
+	question.open = true;
 	document.body.append(question);
 	await Promise.resolve();
 	expect(question.querySelector("tp-markdown-viewer")).not.toBeNull();
 	expect(TpMarkdownViewerQuestion.observedAttributes).toContain("src");
 	expect(TpMarkdownViewerQuestion.observedAttributes).toContain("test");
 	expect(TpMarkdownViewerQuestion.observedAttributes).not.toContain("language");
-	expect(TpMarkdownViewerQuestion.observedAttributes).not.toContain("mode");
+	expect(TpMarkdownViewerQuestion.observedAttributes).toContain("mode");
+	expect(question.mode).toBe("mixed");
 	expect(customElements.get("tp-markdown-viewer-question")).toBe(
 		TpMarkdownViewerQuestion,
 	);

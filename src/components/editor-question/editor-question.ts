@@ -66,6 +66,12 @@ export abstract class TpEditorQuestion<
 	/** Feedback root retained while asynchronous tests run. */
 	private result = document.createElement("div");
 
+	/** Keeps the inherited source loader from consuming editor project files. */
+	protected override get usesExternalData(): boolean {
+		// The editor owns src; it is not a question-definition document.
+		return false;
+	}
+
 	/** Builds the standard question layout before inserting the programming control. */
 	protected override connectedCallback(): void {
 		super.connectedCallback();

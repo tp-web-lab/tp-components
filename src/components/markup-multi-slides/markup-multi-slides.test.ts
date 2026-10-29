@@ -5,6 +5,7 @@ import "../markdown-multi-slides/markdown-multi-slides.js";
 import "../asciidoc-multi-slides/asciidoc-multi-slides.js";
 import "../restructuredtext-multi-slides/restructuredtext-multi-slides.js";
 import { renderMarkdownToHtml } from "../markdown/markdown.js";
+import type { TpNumberfield } from "../numberfield/numberfield.js";
 
 function invoke(target: object, name: string, event: Event): void {
 	const handler = Reflect.get(target, name) as (value: Event) => void;
@@ -72,8 +73,9 @@ describe("<tp-markup-multi-slides>", () => {
 				?.parentElement,
 		).toBe(presentation.querySelector("tp-splitter"));
 		expect(
-			presentation.querySelector<HTMLInputElement>('input[type="range"]')
-				?.value,
+			presentation.querySelector<HTMLInputElement>(
+				'.tp-markup-multi-slides-navigation input[type="range"]',
+			)?.value,
 		).toBe("1");
 		expect(
 			presentation.querySelector(".tp-markup-multi-slides-counter")
@@ -85,14 +87,18 @@ describe("<tp-markup-multi-slides>", () => {
 			),
 		).toHaveLength(2);
 
-		const slider = presentation.querySelector("tp-numberfield");
+		const slider = presentation.querySelector<TpNumberfield>(
+			".tp-markup-multi-slides-navigation tp-numberfield",
+		);
 		expect(slider?.range).toBe(true);
 		expect(slider?.clearable).toBe(false);
 		expect(slider?.min).toBe("1");
 		expect(slider?.max).toBe("2");
 		const native = slider?.querySelector("input");
 		if (!native) throw new Error("Missing slide slider");
-		expect(native.list).toBe(presentation.querySelector("datalist"));
+		expect(native.list).toBe(
+			presentation.querySelector(".tp-markup-multi-slides-navigation datalist"),
+		);
 		expect(
 			Array.from(native.list?.options ?? [], (option) => option.value),
 		).toEqual(["1", "2"]);
@@ -104,7 +110,11 @@ describe("<tp-markup-multi-slides>", () => {
 					?.textContent,
 			).toBe("2 / 2"),
 		);
-		expect(presentation.querySelector("tp-numberfield")).toBe(slider);
+		expect(
+			presentation.querySelector(
+				".tp-markup-multi-slides-navigation tp-numberfield",
+			),
+		).toBe(slider);
 		native.value = "1";
 		native.dispatchEvent(new Event("input", { bubbles: true }));
 		await vi.waitFor(() =>

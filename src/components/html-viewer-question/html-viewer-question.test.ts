@@ -15,13 +15,15 @@ it("creates only its fixed html viewer", async () => {
 	const question = new TpHtmlViewerQuestion();
 	expectTypeOf(question).toExtend<TpMarkupViewerQuestion<TpHtmlViewer>>();
 	question.innerHTML = "<dl><dt>Title</dt><dd>Exercise</dd></dl>";
+	question.open = true;
 	document.body.append(question);
 	await Promise.resolve();
 	expect(question.querySelector("tp-html-viewer")).not.toBeNull();
 	expect(TpHtmlViewerQuestion.observedAttributes).toContain("src");
 	expect(TpHtmlViewerQuestion.observedAttributes).toContain("test");
 	expect(TpHtmlViewerQuestion.observedAttributes).not.toContain("language");
-	expect(TpHtmlViewerQuestion.observedAttributes).not.toContain("mode");
+	expect(TpHtmlViewerQuestion.observedAttributes).toContain("mode");
+	expect(question.mode).toBe("mixed");
 	expect(customElements.get("tp-html-viewer-question")).toBe(
 		TpHtmlViewerQuestion,
 	);

@@ -15,6 +15,7 @@ it("creates only its fixed prolog playground", async () => {
 	const question = new TpPrologPlaygroundQuestion();
 	expectTypeOf(question).toExtend<TpPlaygroundQuestion<TpPrologPlayground>>();
 	question.innerHTML = "<dl><dt>Title</dt><dd>Exercise</dd></dl>";
+	question.open = true;
 	document.body.append(question);
 	await Promise.resolve();
 	expect(question.querySelector("tp-prolog-playground")).not.toBeNull();
@@ -23,7 +24,8 @@ it("creates only its fixed prolog playground", async () => {
 	expect(TpPrologPlaygroundQuestion.observedAttributes).not.toContain(
 		"language",
 	);
-	expect(TpPrologPlaygroundQuestion.observedAttributes).not.toContain("mode");
+	expect(TpPrologPlaygroundQuestion.observedAttributes).toContain("mode");
+	expect(question.mode).toBe("mixed");
 	expect(customElements.get("tp-prolog-playground-question")).toBe(
 		TpPrologPlaygroundQuestion,
 	);

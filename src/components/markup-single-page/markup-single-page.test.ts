@@ -227,20 +227,27 @@ describe("<tp-markup-single-page>", () => {
 });
 
 describe("single-page toolbar", () => {
-	function page(toolbar?: string) {
+	async function page(toolbar?: string) {
 		const page = document.createElement("tp-markup-single-page");
 		page.innerHTML =
 			'<script type="tp/html"><p>Keep this document</p></script>';
 		if (toolbar !== undefined) page.toolbar = toolbar;
 		document.body.append(page);
+		if (toolbar !== undefined)
+			await vi.waitFor(() =>
+				expect(page.querySelector("tp-toolbar")).not.toBeNull(),
+			);
 		return page;
 	}
 
-	it("is absent by default and updates without replacing the document", () => {
-		const element = page();
+	it("is absent by default and updates without replacing the document", async () => {
+		const element = await page();
 		const paragraph = element.querySelector("p");
 		expect(element.querySelector("tp-toolbar")).toBeNull();
 		element.toolbar = "theme, code,calc,code,unknown";
+		await vi.waitFor(() =>
+			expect(element.querySelector("tp-toolbar")).not.toBeNull(),
+		);
 		expect(
 			[
 				...element.querySelectorAll(
@@ -254,8 +261,8 @@ describe("single-page toolbar", () => {
 		expect(element.querySelector("p")).toBe(paragraph);
 	});
 
-	it("enables all controls in the requested sections when empty", () => {
-		const element = page("");
+	it("enables all controls in the requested sections when empty", async () => {
+		const element = await page("");
 		expect(
 			[
 				...element.querySelectorAll(
@@ -288,7 +295,7 @@ describe("single-page toolbar", () => {
 	});
 
 	it("shows literal source and opens a calculator, then disposes both drawers", async () => {
-		const element = page("code,calc");
+		const element = await page("code,calc");
 		element.querySelector<HTMLElement>('[data-action="code"]')?.click();
 		expect(
 			element.querySelector('[data-role="source-drawer"] code')?.textContent,

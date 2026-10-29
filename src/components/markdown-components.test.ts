@@ -393,11 +393,20 @@ import
 		expect(tabs?.querySelectorAll("tp-asciidoc")).toHaveLength(1);
 		expect(tabs?.querySelectorAll("tp-restructuredtext")).toHaveLength(1);
 		expect(panels.map((panel) => panel.textContent?.trim())).toEqual([
-			"Included /html-examples.html\nSecond line /html-examples.html",
-			"Included /adoc-examples.adoc\nSecond line /adoc-examples.adoc",
+			"",
+			"",
 			"Included /md-examples.md\nSecond line /md-examples.md",
 			"",
 		]);
+		// Neither optional renderer starts while the enclosing tabs are undefined.
+		expect(tabs?.querySelector("tp-asciidoc")?.getAttribute("src")).toBe(
+			"http://localhost:3000/adoc-examples.adoc",
+		);
+		expect(
+			fetchMock.mock.calls.some(([input]) =>
+				String(input).endsWith("adoc-examples.adoc"),
+			),
+		).toBe(false);
 		expect(
 			tabs?.querySelector("tp-restructuredtext")?.getAttribute("src"),
 		).toBe("http://localhost:3000/rst-examples.rst");
@@ -1532,7 +1541,7 @@ import
 		expect(iframe?.srcdoc).toContain("Show toast");
 	});
 
-	it("removes internal tp CSS variables from tp-html-viewer source display", async () => {
+	it("preserves authored tp CSS variables in tp-html-viewer source display", async () => {
 		const element = document.createElement("tp-html-viewer");
 		element.innerHTML = `
       <div role="example" label="Box">
@@ -1558,8 +1567,9 @@ import
 		};
 		const source = editor.getValue();
 
-		expect(source).toContain('<tp-box border-width="4px" style="color: red">');
-		expect(source).not.toContain("--tp-box-border-width");
+		expect(source).toContain(
+			'<tp-box border-width="4px" style="--tp-box-border-width: 4px; color: red">',
+		);
 	});
 
 	it("removes generated theme classes from component examples", async () => {
@@ -1619,7 +1629,7 @@ import
 		};
 		const source = editor.getValue();
 
-		expect(source).toContain("<section>");
+		expect(source).toMatch(/<section(?:\s[^>]*)?>/);
 		expect(source).toContain('<tp-theme mode="dark"></tp-theme>');
 		expect(source).not.toContain("<tp-icon-button");
 		expect(source).not.toContain("<tp-dropdown");

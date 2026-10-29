@@ -15,6 +15,7 @@
 // tp-docgen:dependencies:end
 
 import DOMPurify from "dompurify";
+import { DeferredVisibility } from "../../utilities/deferred-visibility.js";
 import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
 import { TpBase } from "../base/base.js";
 import style from "./include.css?inline";
@@ -58,6 +59,14 @@ export class TpInclude extends TpBase {
 	private static readonly styleId = "tp-include-styles";
 
 	private requestId = 0;
+	private readonly pendingVisibility = new DeferredVisibility(this, () => {
+		void this.loadContent();
+	});
+
+	protected disconnectedCallback(): void {
+		this.requestId++;
+		this.pendingVisibility.disconnect();
+	}
 
 	public static get observedAttributes(): string[] {
 		return [
@@ -237,6 +246,8 @@ export class TpInclude extends TpBase {
 
 	private async loadContent(): Promise<void> {
 		const currentRequestId = ++this.requestId;
+		if (!this.isConnected) return;
+		if (this.pendingVisibility.defer()) return;
 
 		if (this.src === "") {
 			this.replaceChildren();

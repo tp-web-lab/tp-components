@@ -15,6 +15,7 @@ it("creates only its fixed python playground", async () => {
 	const question = new TpPythonPlaygroundQuestion();
 	expectTypeOf(question).toExtend<TpPlaygroundQuestion<TpPythonPlayground>>();
 	question.innerHTML = "<dl><dt>Title</dt><dd>Exercise</dd></dl>";
+	question.open = true;
 	document.body.append(question);
 	await Promise.resolve();
 	expect(question.querySelector("tp-python-playground")).not.toBeNull();
@@ -23,7 +24,8 @@ it("creates only its fixed python playground", async () => {
 	expect(TpPythonPlaygroundQuestion.observedAttributes).not.toContain(
 		"language",
 	);
-	expect(TpPythonPlaygroundQuestion.observedAttributes).not.toContain("mode");
+	expect(TpPythonPlaygroundQuestion.observedAttributes).toContain("mode");
+	expect(question.mode).toBe("mixed");
 	expect(customElements.get("tp-python-playground-question")).toBe(
 		TpPythonPlaygroundQuestion,
 	);

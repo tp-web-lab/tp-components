@@ -15,13 +15,15 @@ it("creates only its fixed prolog viewer", async () => {
 	const question = new TpPrologViewerQuestion();
 	expectTypeOf(question).toExtend<TpPlaygroundQuestion<TpPrologViewer>>();
 	question.innerHTML = "<dl><dt>Title</dt><dd>Exercise</dd></dl>";
+	question.open = true;
 	document.body.append(question);
 	await Promise.resolve();
 	expect(question.querySelector("tp-prolog-viewer")).not.toBeNull();
 	expect(TpPrologViewerQuestion.observedAttributes).toContain("src");
 	expect(TpPrologViewerQuestion.observedAttributes).toContain("test");
 	expect(TpPrologViewerQuestion.observedAttributes).not.toContain("language");
-	expect(TpPrologViewerQuestion.observedAttributes).not.toContain("mode");
+	expect(TpPrologViewerQuestion.observedAttributes).toContain("mode");
+	expect(question.mode).toBe("mixed");
 	expect(customElements.get("tp-prolog-viewer-question")).toBe(
 		TpPrologViewerQuestion,
 	);

@@ -75,7 +75,7 @@ Attributes
 : ::include{examples/examples.adoc}
 
 <tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
+: ::include{examples/examples.md loading=lazy}
 
 <tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
 : ::include{examples/examples.rst}
@@ -125,6 +125,8 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markup-multi-pages.TpMarkupMultiPages.html)
 <!-- tp-docgen:typedoc:end -->
+
+
 
 
 

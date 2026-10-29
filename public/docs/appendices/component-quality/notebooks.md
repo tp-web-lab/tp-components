@@ -1,6 +1,6 @@
 # Notebooks component quality
 
-> Latest recorded executions: **1 distinct failing test affects this family** in the global run or its separate family reruns. Coverage was collected despite failures and is not evidence of a passing suite. See the [execution results](index.md#latest-global-execution) for both scopes.
+> Historical coverage execution (20 September 2026): **1 distinct failing test affects this family** in that global run or its separate family reruns. Coverage was collected despite those failures. These are historical results, not the current test status; see [Tests](../tests.md) for the latest review.
 
 This family report applies the [component quality procedure](index.md) to every component listed under **Notebooks** in the documentation. The generic notebook owns the shared loading, editing, execution, preview, import, and export behavior; the five specialized components constrain its programming language. Their 100% coverage is explained by this deliberately thin design: each specialized component only sets its default language, preserves an explicit language, and delegates every other behavior to `tp-notebook`, and its dedicated test exercises all of those component-specific paths.
 

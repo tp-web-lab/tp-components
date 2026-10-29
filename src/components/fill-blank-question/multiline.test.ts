@@ -35,10 +35,15 @@ it.each([
 	form.reset();
 	expect(field.value).toBe("");
 });
-it("keeps the timed solution locked after a correct submission", () => {
+it("unlocks the timed solution after a correct submission", () => {
 	vi.useFakeTimers();
 	document.body.innerHTML = `<tp-fill-blank-question open timing="00:00:02"><dl><dt>Answers</dt><dd><ol><li>${sentence}</li></ol></dd><dt>Form</dt><dd><tp-textfield multiline></tp-textfield></dd><dt>Solution</dt><dd>${sentence}</dd></dl></tp-fill-blank-question>`;
 	document.querySelector<HTMLElement>("tp-mask tp-button")?.click();
+	expect(
+		document
+			.querySelector("[data-tp-question-solution-tab]")
+			?.hasAttribute("disabled"),
+	).toBe(true);
 	const field = document.querySelector("textarea");
 	if (!field) throw new Error("Missing textarea");
 	field.value = sentence;
@@ -47,7 +52,7 @@ it("keeps the timed solution locked after a correct submission", () => {
 		document
 			.querySelector("[data-tp-question-solution-tab]")
 			?.hasAttribute("disabled"),
-	).toBe(true);
+	).toBe(false);
 	vi.advanceTimersByTime(2000);
 	document.querySelector<HTMLElement>("tp-mask tp-button")?.click();
 	expect(

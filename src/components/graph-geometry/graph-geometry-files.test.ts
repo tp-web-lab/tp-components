@@ -1,8 +1,11 @@
 import { afterEach, expect, it, vi } from "vitest";
+import { useFixedJSDOMLayout } from "../../test-helpers/jsdom-layout.js";
 import { chooseSaveTarget, saveBlob } from "../../utilities/save-file.js";
 import type { TpCodeEditor } from "../code-editor/code-editor.js";
 import { choosePlaygroundFile } from "../playground/playground-local-file.js";
 import { TpGraphGeometry } from "./graph-geometry.js";
+
+useFixedJSDOMLayout();
 
 vi.mock("../../utilities/save-file.js", () => ({
 	chooseSaveTarget: vi.fn(),

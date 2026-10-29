@@ -29,14 +29,6 @@ The custom `<tp-exercise>` element groups a shared context and an ordered list o
 
 ## Usage
 
-Use a direct definition list with **Title**, **Context** and **Questions** entries. Put rich content in the Context description, and an ordered list of `tp-question` elements, specialized questions or nested `tp-exercise` elements in Questions. Questions and sub-exercises can be mixed in the same list. Each nested exercise has its own Title, Context, Questions, disclosure state and optional timer. The parent countdown gates the entire activity; collapsing a parent does not pause nested timers. The original content and question elements are retained. Each question handles its own submission, feedback and solution; the exercise does not combine scores or submit answers automatically.
-
-The **Title** description supplies the summary beside the `exercise` icon from the `components` library. It supports rich content and defaults to Exercise when omitted. The exercise uses a native details/summary disclosure, initially collapsed unless the boolean `open` attribute is present. Collapsing it preserves answers and does not pause an active countdown.
-
-Set `timing="00:05:00"` for a five-minute limit. As with questions, hours use two digits and minutes/seconds range from 00 to 59. Missing, invalid and zero durations disable timing. Start reveals the entire context and question list and begins a silent countdown. At expiry, the content is replaced by a message and Continue. Continue reveals the same content and answers without restarting the timer. Changing timing creates a new waiting session; removing it cancels the timer and reveals the content.
-
-The exercise timer controls access to the whole activity. A verified correct answer gives access to that question’s solution immediately, including when the question has its own timer. Other questions remain subject to their own solution-access rules, and countdowns continue. Questions retain their optional timers; omit individual question timers when only a shared deadline is wanted. Removing and reconnecting the exercise starts a new waiting session.
-
 ### User interactions
 
 #### Mouse interactions
@@ -58,6 +50,16 @@ Question controls belong to each question and have their own User help.
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type ?. |
 
 Successful automatically graded answers also show “Bonne réponse trouvée en hh:mm:ss.” in Feedback. Elapsed time is measured from Start on the question timer, or on the nearest enclosing exercise timer when the question has none.
+
+### Author directives
+
+Use a direct definition list with **Title**, **Context** and **Questions** entries. Put rich content in the Context description, and an ordered list of `tp-question` elements, specialized questions or nested `tp-exercise` elements in Questions. Questions and sub-exercises can be mixed in the same list. Each nested exercise has its own Title, Context, Questions, disclosure state and optional timer. The parent countdown gates the entire activity; collapsing a parent does not pause nested timers. The original content and question elements are retained. Each question handles its own submission, feedback and solution; the exercise does not combine scores or submit answers automatically.
+
+The **Title** description supplies the summary beside the `exercise` icon from the `components` library. It supports rich content and defaults to Exercise when omitted. The exercise uses a native details/summary disclosure, initially collapsed unless the boolean `open` attribute is present. Collapsing it preserves answers and does not pause an active countdown.
+
+Set `timing="00:05:00"` for a five-minute limit. As with questions, hours use two digits and minutes/seconds range from 00 to 59. Missing, invalid and zero durations disable timing. Start reveals the entire context and question list and begins a silent countdown. At expiry, the content is replaced by a message and Continue. Continue reveals the same content and answers without restarting the timer. Changing timing creates a new waiting session; removing it cancels the timer and reveals the content.
+
+The exercise timer controls access to the whole activity. A verified correct answer gives access to that question’s solution immediately, including when the question has its own timer. All other questions keep their solutions locked until the exercise expires and Continue is selected. This shared restriction adds no timer to question headers. For nested exercises or questions with their own timer, all applicable deadlines must be released unless that question has a verified correct answer. Countdowns continue. Questions retain their optional timers; omit individual question timers when only a shared deadline is wanted. Removing and reconnecting the exercise starts a new waiting session.
 
 ## Examples
 

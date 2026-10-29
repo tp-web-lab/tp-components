@@ -19,11 +19,14 @@
 
 
       <tp-stack>
-      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>score</li></ul></tp-checkbox-list>
+      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>ai-api</li><li>score</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="ai-help" label="ai-help" label-position="top" orientation="horizontal" value="1"><ul><li>none</li><li>feedback</li><li>solution</li><li>both</li></ul></tp-radio-list>
       <tp-radio-list data-setting="mode" label="mode" label-position="top" orientation="horizontal" value="1"><ul><li>mixed</li><li>opened</li><li>closed</li></ul></tp-radio-list>
       <tp-radio-list data-setting="open" label="open" label-position="top" orientation="horizontal" value="1"><ul><li>Default (empty)</li><li>both</li><li>input</li><li>output</li></ul></tp-radio-list>
       <tp-radio-list data-setting="src" label="src" label-position="top" orientation="horizontal" value="1"><ul><li>Default</li><li>file1</li><li>file2</li><li>file-unknown</li></ul></tp-radio-list>
-      <tp-cluster><tp-textfield data-setting="timing" label="timing" value="" placeholder="" clearable></tp-textfield></tp-cluster>
+      <tp-cluster><tp-textfield data-setting="ai-assistant" label="ai-assistant" value="openai" placeholder="openai" clearable></tp-textfield>
+      <tp-textfield data-setting="ai-explanation-src" label="ai-explanation-src" value="" placeholder="" clearable></tp-textfield>
+      <tp-textfield data-setting="timing" label="timing" value="" placeholder="" clearable></tp-textfield></tp-cluster>
       <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
       </tp-stack>
       <tp-divider></tp-divider>

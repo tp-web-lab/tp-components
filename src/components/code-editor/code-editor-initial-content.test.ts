@@ -35,3 +35,15 @@ it("does not replace a newer API value with a pending file response", async () =
 	await new Promise((resolve) => setTimeout(resolve, 0));
 	expect(editor.getValue()).toBe("const answer = 42;");
 });
+
+it("replaces the document preview without capturing it as authored source", async () => {
+	const editor = document.createElement("tp-code-editor");
+	editor.setAttribute("data-tp-editor-pending", "");
+	editor.innerHTML =
+		'<script type="tp/javascript">const ready = true;</script><pre data-tp-editor-preview>Temporary preview</pre>';
+	document.body.append(editor);
+	await vi.waitFor(() => expect(editor.getValue()).toBe("const ready = true;"));
+	expect(editor.querySelector("[data-tp-editor-preview]")).toBeNull();
+	expect(editor.hasAttribute("data-tp-editor-pending")).toBe(false);
+	expect(editor.getAttribute("data-source")).not.toContain("Temporary preview");
+});

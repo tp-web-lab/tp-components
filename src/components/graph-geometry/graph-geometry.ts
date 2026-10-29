@@ -847,7 +847,7 @@ export class TpGraphGeometry extends TpBase {
 		const library = id in sharedIcons ? "tp" : "geometry";
 		return `<tp-icon-button id="${this.controlId}-${id}" library="${library}" name="${name}" label="${label}" title="${label} (${key})" aria-keyshortcuts="${key}" data-geometry-control data-action="${id}"></tp-icon-button>`;
 	}
-	private chooseTool(tool: Tool): void {
+	private chooseTool(tool: Tool, focusCanvas = true): void {
 		this.movingName = false;
 		if (this.readonly && tool !== "pan") return;
 		if (!(tool in TOOLS) && !this.builtIn) return;
@@ -855,7 +855,8 @@ export class TpGraphGeometry extends TpBase {
 		this.pending = [];
 		this.polygonDraft = [];
 		this.updateTool();
-		this.querySelector<SVGElement>("[data-geometry-canvas]")?.focus();
+		if (focusCanvas)
+			this.querySelector<SVGElement>("[data-geometry-canvas]")?.focus();
 	}
 	private shortcut(event: KeyboardEvent): void {
 		const target = event.target;
@@ -1195,7 +1196,8 @@ export class TpGraphGeometry extends TpBase {
 				button.dataset.tool &&
 				(!this.readonly || button.dataset.tool === "pan")
 			) {
-				this.chooseTool(button.dataset.tool as Tool);
+				// Keep keyboard focus in the tool strip so Tab can reach the next tool.
+				this.chooseTool(button.dataset.tool as Tool, false);
 			}
 			if (button.dataset.object) this.selectObject(button.dataset.object);
 			const action = button.dataset.action;

@@ -229,12 +229,18 @@ export class TpDropdown extends TpOverlayElement {
 	 * @summary Handles attribute changes.
 	 * @internal
 	 */
-	protected attributeChangedCallback(name: string): void {
+	protected attributeChangedCallback(
+		name: string,
+		oldValue: string | null,
+		newValue: string | null,
+	): void {
+		if (oldValue === newValue) return;
 		if (!this.isConnected) {
 			return;
 		}
 
-		if (name === "anchor") {
+		// The anchor may have been inserted after the closed menu (for example an editor toolbar).
+		if (name === "anchor" || name === "open") {
 			this.syncAnchor();
 		}
 

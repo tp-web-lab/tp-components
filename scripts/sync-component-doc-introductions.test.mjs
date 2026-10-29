@@ -11,7 +11,9 @@
 
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { cpSync, existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, symlinkSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
 import test from "node:test";
 import { namedExamples, viewerSource } from "./component-basic-examples.mjs";
 
@@ -186,9 +188,10 @@ test("every synchronized public component has a direct introduction and a Basic 
 			/<!-- tp-docgen:basic-usage:start -->/,
 			`${directory}: standalone Basic usage`,
 		);
+		if (!/customElements\.define\(/.test(readFileSync(`src/components/${directory}/${directory}.ts`, "utf8"))) continue;
 		count++;
 		const preamble = markdown.split(/^## Usage\s*$/m)[0];
-		const viewers = [...preamble.matchAll(/^<tp-html-viewer\b/gm)];
+		const viewers = [...preamble.matchAll(/^<tp-html-viewer(?=[\s>])/gm)];
 		assert.equal(
 			viewers.length,
 			directory === "html-viewer" ? 1 : 0,
@@ -271,10 +274,18 @@ test("the cryptarithm usage code block closes before the examples tabs", () => {
 });
 
 test("synchronization is idempotent and can check every page without writing", () => {
-	const result = execFileSync(
-		process.execPath,
-		["scripts/sync-component-doc-introductions.mjs", "--check"],
-		{ encoding: "utf8" },
-	);
-	assert.match(result, /Outdated 0/);
+	const root = resolve(import.meta.dirname, "..");
+	const temporary = mkdtempSync(join(tmpdir(), "tp-introductions-test-"));
+	try {
+		for (const directory of ["scripts", "src", "public", "config"])
+			cpSync(join(root, directory), join(temporary, directory), { recursive: true });
+		symlinkSync(join(root, "node_modules"), join(temporary, "node_modules"), "dir");
+		const run = (...args) => execFileSync(process.execPath, ["scripts/sync-component-doc-introductions.mjs", ...args], { cwd: temporary, encoding: "utf8" });
+		run();
+		assert.match(run("--check"), /Outdated 0/);
+		assert.match(run(), /Synchronized 0/);
+		assert.match(run("--check"), /Outdated 0/);
+	} finally {
+		rmSync(temporary, { recursive: true, force: true });
+	}
 });

@@ -82,8 +82,8 @@
                .. tp-textfield::
                   :data-setting: langs
                   :label: langs
-                  :value: en,fr
-                  :placeholder: en,fr
+                  :value:
+                  :placeholder:
                   :clearable:
 
             .. tp-button-group::

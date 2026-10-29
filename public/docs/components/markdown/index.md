@@ -133,7 +133,7 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | None. |  |  |
+  | <code>setSafeMarkdown</code> | <code>setSafeMarkdown(source: string): Promise&lt;void&gt;</code> | Renders generated Markdown with restricted formatting and source-backed formulas only. |
   [Public methods of `TpMarkdown`]
 
 Events
@@ -153,6 +153,8 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markdown_markdown.TpMarkdown.html)
 <!-- tp-docgen:typedoc:end -->
+
+
 
 
 

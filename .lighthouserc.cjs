@@ -1,9 +1,13 @@
-const baseUrl = 'http://127.0.0.1:4174';
+const port = Number(process.env.TP_LIGHTHOUSE_PORT ?? 4174);
+if (!Number.isInteger(port) || port < 1 || port > 65535) {
+  throw new Error('TP_LIGHTHOUSE_PORT must be an integer between 1 and 65535.');
+}
+const baseUrl = `http://127.0.0.1:${port}`;
 
 module.exports = {
   ci: {
     collect: {
-      startServerCommand: 'pnpm exec vite build && pnpm exec vite preview --host 127.0.0.1 --port 4174 --strictPort',
+      startServerCommand: `pnpm exec vite build && pnpm exec vite preview --host 127.0.0.1 --port ${port} --strictPort`,
       startServerReadyPattern: 'Local:',
       startServerReadyTimeout: 30000,
       numberOfRuns: process.env.CI ? 3 : 1,

@@ -1,0 +1,21 @@
+/* Match the editor's intrinsic line metrics without loading CodeMirror. */
+tp-code-editor[data-tp-editor-pending]:not(:defined) {
+ display: block;
+ visibility: visible;
+ border: 1px solid var(--tp-neutral-stroke-soft, #d1d5db);
+ box-sizing: border-box;
+ min-inline-size: 0;
+ overflow: hidden;
+}
+tp-code-editor > pre[data-tp-editor-preview] {
+ margin: 0;
+ padding: 4px 6px;
+ font-family: monospace;
+ font-size: inherit;
+ line-height: 1.5rem;
+ white-space: pre;
+ overflow: auto;
+ border: 0;
+ background: var(--tp-paper-color, #fff);
+ color: var(--tp-text-body, #111827);
+}

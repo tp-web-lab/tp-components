@@ -4,8 +4,10 @@ import { glob } from "glob";
 import type { PreRenderedChunk } from "rolldown";
 import { searchForWorkspaceRoot } from "vite";
 import { defineConfig } from "vitest/config";
-// import dts from "unplugin-dts/vite";
 import { componentApiPlugin } from "./scripts/component-api-plugin.js";
+// import dts from "unplugin-dts/vite";
+import { documentPreloadPlugin } from "./scripts/document-preload-plugin.mjs";
+import { questionAiPlugin } from "./server/question-ai.mjs";
 
 function sanitizeChunkName(name: string): string {
 	return name
@@ -131,6 +133,8 @@ export default defineConfig({
 	root: resolve(__dirname),
 	plugins: [
 		componentApiPlugin(),
+		documentPreloadPlugin(),
+		questionAiPlugin(),
 		rewriteDistDemoLoaderPlugin(),
 		copyComponentApiManifestsPlugin(),
 		previewIndexPlugin(),
@@ -225,7 +229,7 @@ export default defineConfig({
 		testTimeout: 20_000,
 		environment: "jsdom",
 		css: true,
-		include: ["src/**/*.test.ts"],
+		include: ["src/**/*.test.ts", "server/**/*.test.mjs"],
 		exclude: [
 			"src/**/*.browser.test.ts",
 			"src/**/*.playwright.test.ts",

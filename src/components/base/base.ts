@@ -1151,67 +1151,7 @@ function escapeHtml(value: string): string {
 		.replace(/"/g, "&quot;");
 }
 
-/**
- * Injects the shared tp-* styles and a default theme class eagerly.
- *
- * This avoids initial render flashes when static markup uses theme-dependent
- * tokens before any `<tp-theme>` or `<tp-color>` interaction occurs.
- *
- * @summary Ensures global tp-* styles are ready.
- * @internal
- */
-export function ensureTpBaseStyles(): void {
-	if (typeof document === "undefined") {
-		return;
-	}
-
-	ensureCodeBlockCopyButtons(document);
-	injectGlobalStyle("tp-token-styles", tokenStyle);
-	if (preservesDocumentStyles(document)) {
-		return;
-	}
-	injectGlobalStyle("tp-reset-styles", resetStyle);
-	injectGlobalStyle("tp-base-styles", baseStyle);
-
-	if (typeof window === "undefined") {
-		return;
-	}
-
-	const body = document.body;
-	if (!(body instanceof HTMLElement)) {
-		return;
-	}
-
-	if (
-		body.classList.contains("tp-light") ||
-		body.classList.contains("tp-dark")
-	) {
-		return;
-	}
-
-	const prefersDark =
-		window.matchMedia?.("(prefers-color-scheme: dark)").matches === true;
-	body.classList.add(prefersDark ? "tp-dark" : "tp-light");
-}
-
-/**
- * Injects a global stylesheet into `document.head` if needed.
- *
- * @summary Inserts a shared stylesheet once.
- * @param styleId Unique id of the style tag.
- * @param cssText CSS text to inject.
- * @internal
- */
-function injectGlobalStyle(styleId: string, cssText: string): void {
-	if (document.getElementById(styleId)) {
-		return;
-	}
-
-	const styleEl = document.createElement("style");
-	styleEl.id = styleId;
-	styleEl.textContent = cssText;
-	document.head.append(styleEl);
-}
+export { ensureTpBaseStyles } from "./base-styles.js";
 
 /**
  * Registers the `tp-base` custom element

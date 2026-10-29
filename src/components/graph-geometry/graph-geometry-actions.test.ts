@@ -1,7 +1,10 @@
 import { afterEach, expect, it, vi } from "vitest";
+import { useFixedJSDOMLayout } from "../../test-helpers/jsdom-layout.js";
 import type { TpCodeEditor } from "../code-editor/code-editor.js";
 import { GEOMETRY_SHORTCUTS } from "./geometry-actions.js";
 import { TpGraphGeometry } from "./graph-geometry.js";
+
+useFixedJSDOMLayout();
 
 afterEach(() => {
 	document.body.replaceChildren();
@@ -209,10 +212,11 @@ it("switches the same compact board between source and drawing without losing dr
 	editor.setValue(draft);
 	toggle.click();
 	expect(board?.hasAttribute("data-source-open")).toBe(true);
-	expect(source?.getAttribute("open-indexes")).toBe("0");
+	expect(source?.hasAttribute("hidden")).toBe(false);
 	expect(toggle.getAttribute("aria-pressed")).toBe("true");
 	toggle.click();
 	expect(board?.hasAttribute("data-source-open")).toBe(false);
+	expect(source?.hasAttribute("hidden")).toBe(true);
 	expect(editor.getValue()).toBe(draft);
 	expect(g.value).toBe(before);
 	expect(g.querySelector("[data-geometry-canvas]")).toBe(canvas);
@@ -223,5 +227,31 @@ it("switches the same compact board between source and drawing without losing dr
 	expect(f1?.getAttribute("name")).toBe("keyboard-f1");
 	expect(f1?.getAttribute("library")).toBe("tp");
 	g.canvasOnly = false;
-	expect(g.querySelector(".tp-geometry-board .tp-geometry-source")).toBeNull();
+	expect(
+		g.querySelector(".tp-geometry-board .tp-geometry-source"),
+	).not.toBeNull();
+	expect(
+		g
+			.querySelector<TpCodeEditor>(".tp-geometry-source tp-code-editor")
+			?.getValue(),
+	).toBe(g.value);
+});
+
+it("keeps focus on activated tool buttons while shortcuts focus the drawing", async () => {
+	const g = mount();
+	const pan = g.querySelector<HTMLButtonElement>('[data-tool="pan"] > button');
+	if (!pan) throw new Error("Missing pan button");
+	pan.focus();
+	pan.click();
+	await vi.waitFor(() => expect(pan.getAttribute("aria-pressed")).toBe("true"));
+	expect(document.activeElement).toBe(pan);
+	g.dispatchEvent(
+		new KeyboardEvent("keydown", {
+			key: GEOMETRY_SHORTCUTS.point,
+			bubbles: true,
+		}),
+	);
+	expect(document.activeElement).toBe(
+		g.querySelector("[data-geometry-canvas]"),
+	);
 });

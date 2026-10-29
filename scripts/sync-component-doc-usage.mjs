@@ -25,6 +25,7 @@ let changed = 0;
 for (const name of readdirSync(resolve(root, 'public/docs/components'))) {
   const path = resolve(root, 'public/docs/components', name, 'index.md');
   if (!existsSync(path) || !existsSync(resolve(root, 'src/components', name, `${name}.ts`))) continue;
+  if (!/customElements\.define\(/.test(readFileSync(resolve(root, 'src/components', name, `${name}.ts`), 'utf8'))) continue;
   const markdown = readFileSync(path, 'utf8');
   const start = markdown.indexOf('\n## Usage\n');
   const end = markdown.indexOf('\n## Examples\n', start);

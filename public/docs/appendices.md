@@ -1,5 +1,7 @@
 # Appendices
 
+- [Tests](appendices/tests.md) describes all test suites, reproducible commands and the distinction between execution results and coverage.
+
 - [Publishing the documentation](appendices/publication/index.md) explains local preparation, GitHub Pages deployment and automatic example updates.
 
 - [Design tokens](appendices/design-tokens/index.md) describes the shared visual values and their accessibility contracts.

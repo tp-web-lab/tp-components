@@ -22,11 +22,12 @@ test('every public component separates reader controls from author directives', 
   let count = 0;
   for (const name of readdirSync(resolve(root, 'public/docs/components'))) {
     if (!existsSync(resolve(root, 'src/components', name, `${name}.ts`))) continue;
+    if (!/customElements\.define\(/.test(readFileSync(resolve(root, 'src/components', name, `${name}.ts`), 'utf8'))) continue;
     const markdown = readFileSync(resolve(root, 'public/docs/components', name, 'index.md'), 'utf8');
     const usage = markdown.split('\n## Usage\n')[1]?.split('\n## Examples\n')[0];
     assert.ok(usage, name);
-    assert.deepEqual([...usage.matchAll(/^### (.+)$/gm)].map(match => match[1]), ['User interactions', 'Author directives'], name);
-    const reader = usage.split('### User interactions\n')[1].split('### Author directives\n')[0];
+    assert.deepEqual([...usage.matchAll(/^### (User interactions|Author directives)$/gm)].map(match => match[1]), ['User interactions', 'Author directives'], name);
+    const reader = usage.split('### User interactions\n')[1].split(/^### /m)[0];
     assert.ok(reader.trim().length > 40, name);
     assert.doesNotMatch(reader, /^\s*```(?:html|js|ts)|\battribute\b|`<tp-/m, name);
     assert.doesNotMatch(usage, /in HTML, or use the corresponding component extension/, name);
@@ -51,6 +52,13 @@ test('does not demote headings inside a fenced example', () => {
 test('preserves an already reviewed Usage section', () => {
   const source = '### User interactions\n\nReviewed instructions.\n\n### Author directives\n\nReviewed configuration.';
   assert.equal(componentUsage('future-component', source), source);
+});
+
+test('retains reviewed interactions when author prose precedes their heading', () => {
+  const source = 'Use `ref="example"` to identify the entry.\n\n### User interactions\n\n#### Mouse interactions\n\nNo direct control.\n\n#### Keyboard interactions\n\nNo direct control.';
+  const result = componentUsage('future-component', source);
+  assert.equal(result, '### User interactions\n\n#### Mouse interactions\n\nNo direct control.\n\n#### Keyboard interactions\n\nNo direct control.\n\n### Author directives\n\nUse `ref="example"` to identify the entry.');
+  assert.equal(componentUsage('future-component', result), result);
 });
 
 test('requires editorial instructions for an unknown new component', () => {

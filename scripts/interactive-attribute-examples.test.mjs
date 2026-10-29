@@ -38,6 +38,20 @@ test("grouped controls cover defaults, enums, booleans and external runtime in e
 			`public/docs/components/${component}/examples/attributes.js`,
 			"utf8",
 		);
+		if (component === "mask") {
+			const preview = nodes.find(node => get(node, "id") === "mask-preview");
+			assert.ok(preview);
+			for (const [id, tag] of [["mask-active", "tp-checkbox-list"], ["mask-anchor", "tp-textfield"], ["mask-reset", "tp-button"], ["mask-reload", "tp-button"]]) {
+				const control = nodes.find(node => get(node, "id") === id);
+				assert.equal(control?.tagName, tag);
+				assert.ok(!walk(preview).includes(control), `${id} stays outside the masked area`);
+			}
+			assert.equal(get(nodes.find(node => node.tagName === "tp-mask"), "active"), undefined);
+			assert.match(script, /preview\.anchor=anchor\.value;preview\.active=active\.value==='1'/);
+			assert.match(script, /active\.addEventListener\('tp-checkbox-list-change',apply\)/);
+			assert.match(script, /anchor\.addEventListener\('input',apply\)/);
+			continue;
+		}
 		const config = JSON.parse(
 			script.match(/initializeAttributes\(([\s\S]*)\);/)[1],
 		);
@@ -92,15 +106,21 @@ test("grouped controls cover defaults, enums, booleans and external runtime in e
 						`${component}/${setting.name}`,
 					);
 			} else {
-				assert.equal(control.tagName, "tp-textfield");
-				assert.equal(get(control, "value"), String(setting.value));
-				assert.equal(get(control, "placeholder"), String(setting.value));
+				assert.ok(["tp-textfield", "tp-numberfield"].includes(control.tagName), `${component}/${setting.name}: typed field`);
+				if (control.tagName === "tp-numberfield") assert.ok(Number.isFinite(Number(setting.value)), `${component}/${setting.name}: numeric default`);
+				assert.equal(get(control, "value"), String(setting.value), `${component}/${setting.name}: value`);
+				if (get(control, "range") === undefined)
+					assert.equal(get(control, "placeholder"), String(setting.value), `${component}/${setting.name}: placeholder`);
 			}
 			if (setting.kind === "file") {
+				const fixtures = JSON.parse(readFileSync(`public/docs/components/${component}/examples/attributes-fixtures.json`, "utf8"));
+				assert.equal(setting.choices.length, 4, `${component}/${setting.name}`);
 				assert.deepEqual(
-					setting.choices.map((choice) => choice.label),
-					["Default", "file1", "file2", "file-unknown"],
+					setting.choices,
+					fixtures[setting.name],
 				);
+				assert.equal(setting.choices[0].value, setting.value);
+				assert.ok(setting.choices.every(choice => choice.label.trim().length > 0));
 				for (const choice of setting.choices.slice(1, 3))
 					assert.ok(
 						existsSync(`public${choice.value}`),

@@ -235,6 +235,16 @@ describe("question timing", () => {
 		action(exercise, "Start");
 		vi.setSystemTime(Date.now() + 3723000);
 		const q = exercise.querySelector("tp-single-choice-question");
+		expect(
+			q?.querySelector("[data-tp-question-solution-locked]"),
+		).not.toBeNull();
+		q?.querySelectorAll<HTMLInputElement>(
+			'tp-radio-list input[type="radio"]',
+		)[1]?.click();
+		q?.querySelector<HTMLElement>('[data-action="submit"]')?.click();
+		expect(
+			q?.querySelector("[data-tp-question-solution-locked]"),
+		).not.toBeNull();
 		q?.querySelector<HTMLInputElement>(
 			'tp-radio-list input[type="radio"]',
 		)?.click();
@@ -242,6 +252,53 @@ describe("question timing", () => {
 		expect(
 			q?.querySelector("[data-tp-question-success-time]")?.textContent,
 		).toBe("Bonne réponse trouvée en 01:02:03.");
+		expect(q?.querySelector("[data-tp-question-solution-locked]")).toBeNull();
+		expect(q?.querySelector("tp-timer")).toBeNull();
+	});
+	it("locks exercise questions, including late arrivals, until Continue without adding timers", async () => {
+		const exercise = document.createElement("tp-exercise");
+		exercise.timing = "00:00:02";
+		exercise.innerHTML = "<dl><dt>Questions</dt><dd></dd></dl>";
+		document.body.append(exercise);
+		const q = mount("") as TpQuestion;
+		exercise.querySelector("dd")?.append(q);
+		await vi.advanceTimersByTimeAsync(0);
+		const locked = () =>
+			q
+				.querySelector("[data-tp-question-solution-content]")
+				?.hasAttribute("data-tp-question-solution-locked");
+		expect(locked()).toBe(true);
+		expect(q.querySelector("tp-timer")).toBeNull();
+		expect(q.querySelector("tp-mask")).toBeNull();
+		action(exercise, "Start");
+		expect(locked()).toBe(true);
+		vi.advanceTimersByTime(2000);
+		action(exercise, "Continue");
+		expect(locked()).toBe(false);
+		exercise.timing = "00:00:03";
+		expect(locked()).toBe(true);
+		exercise.removeAttribute("timing");
+		expect(locked()).toBe(false);
+	});
+	it("preserves other enclosing deadlines when a nested exercise finishes", async () => {
+		const outer = document.createElement("tp-exercise");
+		outer.timing = "00:00:10";
+		outer.innerHTML =
+			'<dl><dt>Questions</dt><dd><tp-exercise timing="00:00:02"><dl><dt>Questions</dt><dd><tp-question><dl><dt>Solution</dt><dd>Answer</dd></dl></tp-question></dd></dl></tp-exercise></dd></dl>';
+		document.body.append(outer);
+		await vi.advanceTimersByTimeAsync(0);
+		const inner = outer.querySelector("tp-exercise");
+		if (!inner) throw new Error("Missing nested exercise");
+		action(inner, "Start");
+		vi.advanceTimersByTime(2000);
+		action(inner, "Continue");
+		expect(
+			outer.querySelector("[data-tp-question-solution-locked]"),
+		).not.toBeNull();
+		outer.removeAttribute("timing");
+		expect(
+			outer.querySelector("[data-tp-question-solution-locked]"),
+		).toBeNull();
 	});
 	it("reflects the timing property", () => {
 		const q = new TpQuestion();

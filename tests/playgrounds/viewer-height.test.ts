@@ -28,84 +28,87 @@ async function expectFittedFrame(viewer: Locator): Promise<void> {
 		.toBe(true);
 }
 
-test("all markup viewers fit nested playgrounds when content grows, shrinks or changes", async ({
-	page,
-}) => {
-	await page.goto("/index.html#/components/python-playground/index.md");
-	const exampleTabs = page
-		.locator("tp-html-viewer")
-		.locator("xpath=ancestor::tp-tabs[1]");
-	const languages = ["html", "asciidoc", "markdown", "restructuredtext"];
-	for (const [index, language] of languages.entries()) {
-		await test.step(language, async () => {
-			await exampleTabs
-				.locator(':scope > [data-tp-tablist] > [role="tab"]')
-				.nth(index)
-				.click();
-			const viewer = page.locator(`tp-${language}-viewer`);
-			await viewer.locator("select").selectOption("Basic usage");
-			const content = viewer.frameLocator("iframe");
-			await expect(
-				content.locator("tp-python-playground tp-code-editor"),
-			).toBeVisible();
-			await expectFittedFrame(viewer);
-			const editor = content.locator("tp-python-playground tp-code-editor");
-			const original = await editor.evaluate((element) =>
-				(element as HTMLElement & { getValue(): string }).getValue(),
+for (const [index, language] of [
+	"html",
+	"asciidoc",
+	"markdown",
+	"restructuredtext",
+].entries()) {
+	test(`${language} viewer fits nested playgrounds when content grows, shrinks or changes`, async ({
+		page,
+	}) => {
+		await page.goto("/index.html#/components/python-playground/index.md");
+		await page
+			.locator('tp-include[src*="examples/examples.html"]')
+			.scrollIntoViewIfNeeded();
+		const exampleTabs = page
+			.locator("tp-html-viewer")
+			.locator("xpath=ancestor::tp-tabs[1]");
+		await exampleTabs
+			.locator(':scope > [data-tp-tablist] > [role="tab"]')
+			.nth(index)
+			.click();
+		const viewer = page.locator(`tp-${language}-viewer`);
+		await viewer.locator("select").selectOption("Basic usage");
+		const content = viewer.frameLocator("iframe");
+		await expect(
+			content.locator("tp-python-playground tp-code-editor"),
+		).toBeVisible();
+		await expectFittedFrame(viewer);
+		const editor = content.locator("tp-python-playground tp-code-editor");
+		const original = await editor.evaluate((element) =>
+			(element as HTMLElement & { getValue(): string }).getValue(),
+		);
+		await editor.evaluate((element) => {
+			(element as HTMLElement & { setValue(value: string): void }).setValue(
+				Array.from({ length: 60 }, (_, line) => `print(${line})`).join("\n"),
 			);
-			await editor.evaluate((element) => {
-				(element as HTMLElement & { setValue(value: string): void }).setValue(
-					Array.from({ length: 60 }, (_, line) => `print(${line})`).join("\n"),
-				);
-			});
-			await expect
-				.poll(() =>
-					editor.evaluate((element) => element.getBoundingClientRect().height),
-				)
-				.toBeGreaterThan(700);
-			await expectFittedFrame(viewer);
-			await editor.evaluate((element, value) => {
-				(element as HTMLElement & { setValue(value: string): void }).setValue(
-					value,
-				);
-			}, original);
-			await expect
-				.poll(() =>
-					editor.evaluate((element) => element.getBoundingClientRect().height),
-				)
-				.toBeLessThan(400);
-			await content
-				.locator("[data-tp-playground-editor-toolbar] button")
-				.click();
-			await expectFittedFrame(viewer);
-			await content.locator("body").evaluate((body) => {
-				setTimeout(() => {
-					const extra = body.ownerDocument.createElement("p");
-					extra.setAttribute("data-test-growth", "");
-					extra.style.height = "800px";
-					extra.textContent = "Asynchronously added content";
-					body.append(extra);
-				}, 20);
-			});
-			await expect(content.locator("[data-test-growth]")).toBeVisible();
-			await expectFittedFrame(viewer);
-			await content
-				.locator("[data-test-growth]")
-				.evaluate((element) => element.remove());
-			await expectFittedFrame(viewer);
-			await page.setViewportSize({ width: 800, height: 768 });
-			await expectFittedFrame(viewer);
-			await page.setViewportSize({ width: 1280, height: 720 });
-			await expectFittedFrame(viewer);
-			await viewer.locator("select").selectOption("Single source file");
-			await expect(content.locator("tp-python-playground")).toHaveAttribute(
-				"src",
-				/example\.py$/,
-			);
-			await expect(
-				content.locator("tp-python-playground tp-code-editor"),
-			).toBeVisible();
-			await expectFittedFrame(viewer);
 		});
-	}
-});
+		await expect
+			.poll(() =>
+				editor.evaluate((element) => element.getBoundingClientRect().height),
+			)
+			.toBeGreaterThan(700);
+		await expectFittedFrame(viewer);
+		await editor.evaluate((element, value) => {
+			(element as HTMLElement & { setValue(value: string): void }).setValue(
+				value,
+			);
+		}, original);
+		await expect
+			.poll(() =>
+				editor.evaluate((element) => element.getBoundingClientRect().height),
+			)
+			.toBeLessThan(400);
+		await content.locator("[data-tp-playground-editor-toolbar] button").click();
+		await expectFittedFrame(viewer);
+		await content.locator("body").evaluate((body) => {
+			setTimeout(() => {
+				const extra = body.ownerDocument.createElement("p");
+				extra.setAttribute("data-test-growth", "");
+				extra.style.height = "800px";
+				extra.textContent = "Asynchronously added content";
+				body.append(extra);
+			}, 20);
+		});
+		await expect(content.locator("[data-test-growth]")).toBeVisible();
+		await expectFittedFrame(viewer);
+		await content
+			.locator("[data-test-growth]")
+			.evaluate((element) => element.remove());
+		await expectFittedFrame(viewer);
+		await page.setViewportSize({ width: 800, height: 768 });
+		await expectFittedFrame(viewer);
+		await page.setViewportSize({ width: 1280, height: 720 });
+		await expectFittedFrame(viewer);
+		await viewer.locator("select").selectOption("Single source file");
+		await expect(content.locator("tp-python-playground")).toHaveAttribute(
+			"src",
+			/example\.py$/,
+		);
+		await expect(
+			content.locator("tp-python-playground tp-code-editor"),
+		).toBeVisible();
+		await expectFittedFrame(viewer);
+	});
+}

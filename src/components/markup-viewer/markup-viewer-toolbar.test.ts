@@ -37,6 +37,9 @@ class TestMarkupViewer extends TpMarkupViewer<"render" | "tree", URL> {
 	public resetSource(example: { label: string; source: string; context: URL }) {
 		return this.getResetSource(example);
 	}
+	public disconnectViewer() {
+		this.disconnectedCallback();
+	}
 	public requestRender() {
 		this.requestViewerRender();
 	}
@@ -62,14 +65,75 @@ beforeEach(() => {
 
 afterEach(() => {
 	document.body.replaceChildren();
+	vi.restoreAllMocks();
 	vi.unstubAllGlobals();
 });
 
 describe("markup viewer editor toolbar control", () => {
+	it("waits for a parent to hide a panel during synchronous initialization", async () => {
+		const fetchMock = vi.fn(async () => new Response("deferred source"));
+		vi.stubGlobal("fetch", fetchMock);
+		const panel = document.createElement("div");
+		document.body.append(panel);
+		const viewer = document.createElement(
+			"test-markup-viewer",
+		) as TestMarkupViewer;
+		viewer.setAttribute("src", "/deferred.txt");
+		panel.append(viewer);
+		panel.hidden = true;
+		await new Promise((resolve) => setTimeout(resolve, 20));
+		expect(fetchMock).not.toHaveBeenCalled();
+		panel.hidden = false;
+		await vi.waitFor(() =>
+			expect(viewer.textContent).toContain("render:deferred source"),
+		);
+	});
+	it("loads only the latest source when a hidden panel is opened", async () => {
+		const fetchMock = vi.fn(
+			async (_url: RequestInfo | URL) => new Response("latest source"),
+		);
+		vi.stubGlobal("fetch", fetchMock);
+		const panel = document.createElement("div");
+		panel.hidden = true;
+		const viewer = document.createElement(
+			"test-markup-viewer",
+		) as TestMarkupViewer;
+		viewer.setAttribute("src", "/old.txt");
+		panel.append(viewer);
+		document.body.append(panel);
+		viewer.setAttribute("src", "/latest.txt");
+		await new Promise((resolve) => setTimeout(resolve, 20));
+		expect(fetchMock).not.toHaveBeenCalled();
+		panel.hidden = false;
+		await vi.waitFor(() =>
+			expect(viewer.textContent).toContain("render:latest source"),
+		);
+		expect(fetchMock).toHaveBeenCalledTimes(1);
+		expect(String(fetchMock.mock.calls[0]?.[0])).toContain("/latest.txt");
+	});
+
+	it("cancels deferred loading when a hidden viewer is removed", async () => {
+		const fetchMock = vi.fn(async () => new Response("source"));
+		vi.stubGlobal("fetch", fetchMock);
+		const panel = document.createElement("div");
+		panel.hidden = true;
+		const viewer = document.createElement(
+			"test-markup-viewer",
+		) as TestMarkupViewer;
+		viewer.setAttribute("src", "/removed.txt");
+		panel.append(viewer);
+		document.body.append(panel);
+		viewer.remove();
+		panel.hidden = false;
+		await new Promise((resolve) => setTimeout(resolve, 20));
+		expect(fetchMock).not.toHaveBeenCalled();
+	});
 	it.each([false, true])(
 		"uses the viewer identity for its icon with lite=%s",
 		async (lite) => {
-			const viewer = document.createElement("test-markup-viewer");
+			const viewer = document.createElement(
+				"test-markup-viewer",
+			) as TestMarkupViewer;
 			viewer.toggleAttribute("lite", lite);
 			document.body.append(viewer);
 			await vi.waitFor(() => {
@@ -252,6 +316,74 @@ describe("markup viewer editor toolbar control", () => {
 		expect(api.readMode("unknown", "render")).toBe("render");
 	});
 
+	it("reads each element style once when measuring a deeply nested preview", () => {
+		const viewer = document.createElement(
+			"test-markup-viewer",
+		) as TestMarkupViewer;
+		const container = document.createElement("div");
+		const iframe = document.createElement("iframe");
+		container.append(iframe);
+		document.body.append(container);
+		const doc = iframe.contentDocument;
+		const view = doc?.defaultView;
+		if (!doc || !view) throw new Error("Missing iframe document");
+		let parent = doc.body;
+		for (let index = 0; index < 40; index += 1) {
+			const child = doc.createElement("div");
+			vi.spyOn(child, "getBoundingClientRect").mockReturnValue({
+				top: 0,
+				bottom: 100,
+				height: 100,
+			} as DOMRect);
+			parent.append(child);
+			parent = child;
+		}
+		const styles = vi.spyOn(view, "getComputedStyle");
+		const api = viewer as unknown as {
+			initializeOutputIframe(container: HTMLElement): void;
+		};
+		api.initializeOutputIframe(container);
+		expect(iframe.style.height).toBe("100px");
+		expect(styles.mock.calls.length).toBeLessThanOrEqual(41);
+		viewer.disconnectViewer();
+	});
+
+	it("coalesces newly defined iframe components and ignores stale upgrades", async () => {
+		const callbacks: FrameRequestCallback[] = [];
+		vi.stubGlobal(
+			"requestAnimationFrame",
+			vi.fn((callback: FrameRequestCallback) => {
+				callbacks.push(callback);
+				return callbacks.length;
+			}),
+		);
+		const viewer = document.createElement(
+			"test-markup-viewer",
+		) as TestMarkupViewer;
+		const iframe = document.createElement("iframe");
+		document.body.append(iframe);
+		const doc = iframe.contentDocument;
+		const view = doc?.defaultView;
+		if (!doc || !view) throw new Error("Missing iframe document");
+		doc.body.innerHTML =
+			"<tp-first></tp-first><tp-first></tp-first><tp-second></tp-second><tp-later></tp-later>";
+		const definitions = vi.spyOn(view.customElements, "whenDefined");
+		const api = viewer as unknown as {
+			observeIframeDocument(iframe: HTMLIFrameElement): void;
+		};
+		api.observeIframeDocument(iframe);
+		expect(definitions).toHaveBeenCalledTimes(3);
+		view.customElements.define("tp-first", class extends view.HTMLElement {});
+		view.customElements.define("tp-second", class extends view.HTMLElement {});
+		await Promise.resolve();
+		expect(callbacks).toHaveLength(1);
+		callbacks[0]?.(0);
+		viewer.disconnectViewer();
+		view.customElements.define("tp-later", class extends view.HTMLElement {});
+		await Promise.resolve();
+		expect(callbacks).toHaveLength(1);
+	});
+
 	it("initializes and measures an iframe output document", () => {
 		const viewer = document.createElement(
 			"test-markup-viewer",
@@ -319,6 +451,13 @@ describe("markup viewer editor toolbar control", () => {
 		document.body.append(container);
 		const body = iframe.contentDocument?.body;
 		if (!body) throw new Error("Missing iframe body");
+		const frameWindow = iframe.contentWindow;
+		if (!frameWindow) throw new Error("Missing iframe window");
+		// Geometry is mocked below. Use this fixture's inline styles rather than
+		// jsdom's unsupported inherited calc() font sizes in nested disclosures.
+		vi.spyOn(frameWindow, "getComputedStyle").mockImplementation(
+			(element) => (element as HTMLElement).style,
+		);
 		body.innerHTML =
 			"<details><summary><span>Question</span></summary><div>Answer</div><summary>Hidden second summary</summary></details>";
 		const details = body.querySelector("details");

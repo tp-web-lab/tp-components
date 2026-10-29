@@ -10,6 +10,7 @@
  */
 // tp-docgen:dependencies:end
 
+import { DeferredVisibility } from "../../utilities/deferred-visibility.js";
 import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
 import { TpBase } from "../base/base.js";
 import style from "./icon.css?inline";
@@ -22,25 +23,30 @@ import { setupTpIcons } from "./icon-setup.js";
  */
 setupTpIcons();
 
-const builtinLibraries: Record<string, () => Promise<unknown>> = {
+const builtinLibraries: Record<string, (name: string) => Promise<unknown>> = {
 	languages: () => import("./icon-library-languages.js"),
 	flags: () => import("./icon-library-flags.js"),
 	numbers: () => import("./icon-library-numbers.js"),
 	letters: () => import("./icon-library-letters.js"),
-	components: () => import("./icon-library-components.js"),
+	components: async (name) =>
+		(await import("./icon-component-source.js")).loadComponentIcon(name),
 };
 const pendingLibraries = new Map<string, Promise<unknown>>();
 
-async function loadBuiltinLibrary(library: string): Promise<void> {
+async function loadBuiltinLibrary(
+	library: string,
+	name: string,
+): Promise<void> {
 	const load = builtinLibraries[library];
 	if (!load) return;
-	let pending = pendingLibraries.get(library);
+	const key = library === "components" ? `${library}:${name}` : library;
+	let pending = pendingLibraries.get(key);
 	if (!pending) {
-		pending = load().catch((error: unknown) => {
-			pendingLibraries.delete(library);
+		pending = load(name).catch((error: unknown) => {
+			pendingLibraries.delete(key);
 			throw error;
 		});
-		pendingLibraries.set(library, pending);
+		pendingLibraries.set(key, pending);
 	}
 	await pending;
 }
@@ -156,6 +162,9 @@ export class TpIcon extends TpBase {
 	 * @internal
 	 */
 	private requestId = 0;
+	private readonly deferredVisibility = new DeferredVisibility(this, () => {
+		void this.update();
+	});
 
 	/**
 	 * @summary Declares observed attributes.
@@ -457,7 +466,8 @@ export class TpIcon extends TpBase {
 	}
 
 	public disconnectedCallback(): void {
-		super.connectedCallback();
+		this.requestId++;
+		this.deferredVisibility.disconnect();
 		window.removeEventListener(
 			"tp-icon-library-registered",
 			this.handleIconLibraryChange,
@@ -485,10 +495,19 @@ export class TpIcon extends TpBase {
 	private async update(): Promise<void> {
 		if (!this.container) return;
 
+		// Reserve the authored size before the asynchronous SVG request finishes.
+		this.applyStyle();
 		this.removeAttribute("data-tp-icon-catalog");
 
 		const id = ++this.requestId;
+		if (
+			Object.hasOwn(builtinLibraries, this.library) &&
+			getTpIcon(this.name, this.library) === null &&
+			this.deferredVisibility.defer()
+		)
+			return;
 
+		this.deferredVisibility.disconnect();
 		const { svg } = await this.resolve();
 
 		if (id !== this.requestId) return;
@@ -551,7 +570,7 @@ export class TpIcon extends TpBase {
 			getTpIcon(name, library) === null
 		) {
 			try {
-				await loadBuiltinLibrary(library);
+				await loadBuiltinLibrary(library, name);
 			} catch {
 				// Keep the existing fallback when a collection cannot be loaded.
 			}

@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { useFixedJSDOMLayout } from "../../test-helpers/jsdom-layout.js";
 import type { TpCodeEditor } from "../code-editor/code-editor.js";
 import {
 	evaluateGeometry,
@@ -11,6 +12,8 @@ import {
 	serializeGeometry,
 } from "./geometry.js";
 import { TpGraphGeometry } from "./graph-geometry.js";
+
+useFixedJSDOMLayout();
 
 function point(result: GeometryResult, id: string): GeometryPoint {
 	const value = result.values.get(id);
@@ -495,7 +498,9 @@ describe("<tp-graph-geometry>", () => {
 			editor.querySelectorAll("tp-button[data-geometry-control]").length,
 		).toBeGreaterThan(15);
 		expect(
-			editor.querySelector("tp-accordion.tp-geometry-source"),
+			editor.querySelector(
+				'section.tp-geometry-source[aria-label="Construction source"]',
+			),
 		).not.toBeNull();
 		const grid = editor.querySelector<HTMLButtonElement>(
 			'[data-action="grid"] > button',

@@ -67,25 +67,15 @@
 // tp-docgen:dependencies:end
 
 import { dedent } from "../../utilities/code.js";
-import { TpDrawer } from "../drawer/drawer.js";
-import "../calculator/calculator.js";
-import "../clock/clock.js";
-import "../lang/lang.js";
-import "../color/color.js";
-import "../theme/theme.js";
-import "../source/source.js";
-import "../fullscreen/fullscreen.js";
-import "../icon-button/icon-button.js";
-import { TpPostItEditor } from "../post-it-editor/post-it-editor.js";
-import "../toolbar/toolbar.js";
 import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
 import { TpBase } from "../base/base.js";
-import "../markdown/markdown.js";
-import "../asciidoc/asciidoc.js";
-import "../restructuredtext/restructuredtext.js";
+import type { TpDrawer } from "../drawer/drawer.js";
+import type { TpPostItEditor } from "../post-it-editor/post-it-editor.js";
 import style from "./markup-single-page.css?inline";
 
 const STYLE_ID = "tp-markup-single-page-styles";
+let toolbarComponentsReady = false;
+let toolbarComponentsLoading: Promise<void> | null = null;
 
 export type TpMarkupSinglePageLanguage =
 	| "html"
@@ -186,6 +176,7 @@ export class TpMarkupSinglePage extends TpBase {
 
 	private readonly outputElement = document.createElement("div");
 	private renderToken = 0;
+	private toolbarToken = 0;
 	private toolbarElement: HTMLElement | null = null;
 	private calculatorDrawer: TpDrawer | null = null;
 	private sourceDrawer: TpDrawer | null = null;
@@ -303,6 +294,7 @@ export class TpMarkupSinglePage extends TpBase {
 	}
 
 	private disposeToolbar(): void {
+		this.toolbarToken++;
 		this.sourceToken++;
 		this.languageToken++;
 		this.annotations?.dispose();
@@ -321,6 +313,23 @@ export class TpMarkupSinglePage extends TpBase {
 		this.disposeToolbar();
 		const value = this.toolbar;
 		if (value === null) return;
+		if (!toolbarComponentsReady) {
+			const token = this.toolbarToken;
+			toolbarComponentsLoading ??= import("./toolbar-components.js").then(
+				() => {
+					toolbarComponentsReady = true;
+				},
+			);
+			void toolbarComponentsLoading
+				.then(() => {
+					if (this.isConnected && token === this.toolbarToken)
+						this.renderToolbar();
+				})
+				.catch((error: unknown) =>
+					console.error("Unable to load document toolbar", error),
+				);
+			return;
+		}
 		const controls = [
 			"code",
 			"calc",
@@ -355,7 +364,7 @@ export class TpMarkupSinglePage extends TpBase {
 					else void this.toggleSource();
 				});
 			} else if (name === "postit") {
-				this.annotations = new TpPostItEditor();
+				this.annotations = document.createElement("tp-post-it-editor");
 				this.annotations.setTarget(this.outputElement);
 				this.annotations.setPage(this.pageUrl);
 				control = this.annotations;
@@ -456,7 +465,7 @@ export class TpMarkupSinglePage extends TpBase {
 
 	private toggleCalculator(): void {
 		if (!this.calculatorDrawer) {
-			const drawer = new TpDrawer();
+			const drawer = document.createElement("tp-drawer") as TpDrawer;
 			drawer.setAttribute("label", "Calculator");
 			drawer.setAttribute("placement", "end");
 			drawer.setAttribute("width", "min(52rem, 100vw)");
@@ -477,7 +486,7 @@ export class TpMarkupSinglePage extends TpBase {
 			return;
 		}
 		if (!this.sourceDrawer) {
-			this.sourceDrawer = new TpDrawer();
+			this.sourceDrawer = document.createElement("tp-drawer") as TpDrawer;
 			this.sourceDrawer.setAttribute("label", "Source code");
 			this.sourceDrawer.setAttribute("placement", "end");
 			this.sourceDrawer.setAttribute("width", "min(60rem, 100vw)");
@@ -600,7 +609,7 @@ export class TpMarkupSinglePage extends TpBase {
 		await this.renderMarkupElement(inline.language, token, "", inline.source);
 	}
 
-	private renderMarkupElement(
+	private async renderMarkupElement(
 		language: TpMarkupSinglePageLanguage,
 		token: number,
 		src = "",
@@ -610,6 +619,20 @@ export class TpMarkupSinglePage extends TpBase {
 		if (tagName === null) {
 			throw new Error(`Unsupported single-page language: ${language}`);
 		}
+		if (!customElements.get(tagName)) {
+			switch (language) {
+				case "markdown":
+					await import("../markdown/markdown.js");
+					break;
+				case "asciidoc":
+					await import("../asciidoc/asciidoc.js");
+					break;
+				case "restructuredtext":
+					await import("../restructuredtext/restructuredtext.js");
+					break;
+			}
+		}
+		if (token !== this.renderToken || !this.isConnected) return;
 
 		return new Promise((resolve) => {
 			const element = document.createElement(tagName);

@@ -132,7 +132,7 @@ it("defaults invalid modes to mixed independently of question expansion", async 
 	expect(blanks.every((blank) => !blank.querySelector("tp-textfield"))).toBe(
 		true,
 	);
-	expect(question.open).toBe(true);
+	expect(question.open).toBe("both");
 	question.removeAttribute("mode");
 	await Promise.resolve();
 	expect(question.mode).toBe("mixed");

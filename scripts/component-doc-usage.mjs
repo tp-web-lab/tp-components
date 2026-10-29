@@ -104,6 +104,11 @@ const movedHeadings = new Set(['Commands', 'Commands palette', 'Interactions', '
 export function componentUsage(name, original) {
   original = original.replace(/^Declare `<tp-[a-z0-9-]+>` in HTML, or use the corresponding component extension in `@tp\/tp-markdown`, `@tp\/tp-asciidoc` or `@tp\/tp-restructuredtext`\. See \[Examples\]\([^\n)]+\) for the markup-language variants and \[API\]\([^\n)]+\) for attributes and defaults\. Boolean attributes are enabled by their presence and disabled by their absence\.\n*/gm, '');
   if (/^### User interactions$/m.test(original) && /^### Author directives$/m.test(original)) return original.trim();
+  const reviewed = original.match(/^### User interactions\n([\s\S]*?)(?=^### |$(?![\s\S]))/m);
+  if (reviewed) {
+    const author = original.replace(reviewed[0], '').trim();
+    return `${reviewed[0].trim()}\n\n### Author directives\n\n${author || 'See Examples and API for declarations and configuration.'}`;
+  }
   // Hide code fences during structural edits so headings inside example source
   // are not mistaken for documentation subsections.
   const fences = [];

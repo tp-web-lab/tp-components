@@ -15,6 +15,7 @@ it("creates only its fixed typescript viewer", async () => {
 	const question = new TpTypescriptViewerQuestion();
 	expectTypeOf(question).toExtend<TpPlaygroundQuestion<TpTypescriptViewer>>();
 	question.innerHTML = "<dl><dt>Title</dt><dd>Exercise</dd></dl>";
+	question.open = true;
 	document.body.append(question);
 	await Promise.resolve();
 	expect(question.querySelector("tp-typescript-viewer")).not.toBeNull();
@@ -23,7 +24,8 @@ it("creates only its fixed typescript viewer", async () => {
 	expect(TpTypescriptViewerQuestion.observedAttributes).not.toContain(
 		"language",
 	);
-	expect(TpTypescriptViewerQuestion.observedAttributes).not.toContain("mode");
+	expect(TpTypescriptViewerQuestion.observedAttributes).toContain("mode");
+	expect(question.mode).toBe("mixed");
 	expect(customElements.get("tp-typescript-viewer-question")).toBe(
 		TpTypescriptViewerQuestion,
 	);

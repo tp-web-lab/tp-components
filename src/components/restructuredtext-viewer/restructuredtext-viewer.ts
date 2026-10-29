@@ -200,6 +200,7 @@ export class TpRestructuredTextViewer extends TpMarkupViewer<
 			return;
 		}
 
+		await import("../code-editor/code-editor.js");
 		const editor = document.createElement("tp-code-editor") as TpCodeEditor;
 		editor.language = "html";
 		editor.lineNumbers = false;

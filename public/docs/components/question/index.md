@@ -33,6 +33,7 @@ The user-help button legend groups commands by their location in the component a
 | Output button | Show or hide the output without losing feedback or the solution. Highlighted buttons indicate visible panels. |
 | Start | Reveal the timed question and begin its countdown. |
 | Continue | Reveal the question again after the time limit, keeping existing answers. |
+| Explain the solution | Copy a pedagogical prompt and request an explanation when ai-api is enabled and AI is configured. |
 | Submit | Check the completed answer form. |
 | Feedback tab | Read feedback, or the message indicating that none is available. |
 | Solution tab | Read the solution, or the message indicating that none is available. For timed questions, it becomes accessible only after Continue. |
@@ -45,7 +46,57 @@ The user-help button legend groups commands by their location in the component a
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on the question title | Expand or collapse the question. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |
 | <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Output tabs | Move between Feedback and Solution. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> on Explain the solution | Copy the prompt and request an explanation when ai-api is enabled and AI is configured. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
+
+### AI solution assistance
+
+Set `ai-help="solution"` (or `"both"`) to append **Explain the solution** to the Solution panel. The default is `"none"`; absent and unrecognized values disable assistance. `"feedback"` is reserved for future feedback assistance and currently adds no button.
+
+The generated prompt includes the exercise context, current question, answer choices and proposed solution. Mathematical sources are preserved for tp-math, Markdown/MathJax, math fields and MathML. Code editors supply their full current source, including off-screen lines; line breaks and indentation are preserved. Detected loading errors, pending resources or rendered formulas without recoverable sources prevent copying and submission and display a retry message. It asks for a concise pedagogical explanation of the reasoning in the exercise language, without repeating the visible solution, ending with the equivalent of “D’où la solution proposée.” A short extension is optional. Set `lang` on the exercise or question when its language differs from the page.
+
+The button respects the timed solution lock. Every click copies the prompt; when the boolean `ai-api` attribute is present and the selected provider has an API key configured, it also requests an explanation and displays it below the button. An AI failure keeps the copied prompt available. Results use two tp-tabs panels: AI explanation (with the provider model) and Prompt. The exact generated prompt is always available in the Prompt panel. A copy button at the top right of its text area copies the prompt again. Copy confirmation and preparation messages appear above the tabs; clipboard or prompt errors appear in Prompt, while relay and API errors appear in AI explanation. AI explanations are requested in Markdown and displayed through tp-markdown in restricted mode: paragraphs, lists, code blocks and source-backed mathematical formulas are supported; scripts, includes and interactive components are not executed.
+
+#### Saved explanations
+
+Set `ai-explanation-src="./explanations/slope.md"` to reuse an explanation. The path is relative to the source document, like other component resources. On each click, the component first fetches `slope.prompt.md` and compares it with the current prompt, normalizing only line endings. A matching pair displays `slope.md` through restricted Markdown, without contacting the relay and without requiring `ai-api`. Missing, empty or outdated files fall back to the API when authorized, or the copied prompt. The Prompt tab remains available and timed solution locks still apply.
+
+In Vite development, the first successful API response creates or refreshes both files. Use a unique file per question: `public/docs/explanations/slope.md` and `slope.prompt.md`, for example. Only same-origin `.md` destinations inside an `explanations` directory under Vite's public directory can be written; symlinks are rejected. API failures leave existing files unchanged. A save failure is reported next to the generated explanation. Preview and published sites never write files. Review and commit both files before publication; do not store secrets in exercise content or prompts.
+
+```html
+<tp-question ai-help="solution" ai-api ai-explanation-src="./explanations/slope.md">
+  <!-- Question definition list, including Solution -->
+</tp-question>
+```
+
+For local Vite development and preview, add `questionAiPlugin()` from `@tp/tp-components/vite-ai` to the Vite plugins. This is already enabled in the component documentation and TOEIC example. The server reads `.env` files in the project and its ancestor directories (including the shared `@tp/.env`); local configuration takes priority. Restart the server after changing configuration.
+
+`ai-api` is false by default: without the attribute, no relay request is made and the prompt is only copied. Boolean attributes are enabled by presence; do not write `ai-api="false"`.
+
+`ai-assistant` selects `openai` (default), `anthropic`, `google`, or `mistral`. Invalid values fall back to `openai`. Prompts are neutral and identical for all assistants, preserving the pedagogical, language, Markdown, mathematical and code-preservation instructions. Append `/model` to select a specific model, for example `openai/gpt-6-luna`. Only the first slash separates the provider from the model. Without a model (including a trailing slash), the relay uses that provider’s server-configured model, then its built-in fallback. An explicit model takes priority over the server configuration; the relay does not retry with another model if it is unavailable.
+
+```html
+<tp-question ai-help="solution" ai-api ai-assistant="openai/gpt-6-luna">
+  <!-- Question definition list, including Solution -->
+</tp-question>
+```
+
+Configure each provider independently in the server `.env`:
+
+| ai-assistant | API key | Optional base URL | Optional model (default) |
+| --- | --- | --- | --- |
+| openai | OPENAI_API_KEY | OPENAI_BASE_URL | OPENAI_MODEL (`gpt-4.1-mini`) |
+| anthropic | ANTHROPIC_API_KEY | ANTHROPIC_BASE_URL | ANTHROPIC_MODEL (`claude-sonnet-4-6`) |
+| google | GOOGLE_API_KEY | GOOGLE_BASE_URL | GOOGLE_MODEL (`gemini-2.5-flash-lite`) |
+| mistral | MISTRAL_API_KEY | MISTRAL_BASE_URL | MISTRAL_MODEL (`mistral-small-latest`) |
+
+The legacy `AI_API_KEY`, `AI_BASE_URL`, and `AI_MODEL` override the OpenAI settings only. Google also accepts `GEMINI_API_KEY`, `GEMINI_BASE_URL`, and `GEMINI_MODEL`. A missing provider key never falls back to another provider's key. Restart Vite after changing server settings.
+
+Default base URLs are `https://api.openai.com/v1`, `https://api.anthropic.com/v1`, `https://generativelanguage.googleapis.com/v1beta`, and `https://api.mistral.ai/v1`. The relay adapts requests to each provider's API.
+
+The key is never included in browser bundles. The local bridge accepts loopback clients only. A static published site uses clipboard mode; direct AI requests in production require a separately authenticated server implementing the same `/api/tp-question-ai` endpoint. GET with `?assistant=openai|anthropic|google|mistral` returns `{ "available": true|false }`; POST accepts `{ "prompt": "...", "assistant": "openai", "model": "gpt-6-luna", "aiApi": true }` and returns `{ "text": "...", "model": "..." }`. The explanation heading includes the model reported by the provider, falling back to the configured model when omitted.
+
+ Without an AI service, it copies the prompt for pasting into an assistant; if clipboard access is denied, a selectable prompt is displayed.
 
 ### Author directives
 
@@ -55,7 +106,7 @@ The header pairs `--tp-brand-fill-softer` with `--tp-brand-text-on-soft`, and us
 
 Set `timing="00:05:00"` to allow five minutes. The strict `hh:mm:ss` format accepts hours from `00` to `99` and minutes/seconds from `00` to `59`. Missing, invalid and `00:00:00` values disable the time limit. A silent timer without controls appears beside the title, before the disclosure arrow.
 
-Opening a timed question shows a centered message and **Start**. The countdown begins only after Start reveals the content. At zero, a mask replaces the content with “Time limit has expired.” and **Continue**. The Solution tab is disabled during the timed session, including keyboard navigation and solution links in feedback, until automatic grading confirms a correct answer. A correct answer unlocks only that question’s solution immediately; the countdown continues. Continue restores access to the question and its solution without restarting the timer or clearing answers. Collapsing and reopening a question does not pause or restart its countdown. Changing `timing` starts a new waiting session; removing it reveals the content. These rules also apply to specialized questions.
+Opening a timed question shows a centered message and **Start**. The countdown begins only after Start reveals the content. At zero, a mask replaces the content with “Time limit has expired.” and **Continue**. The Solution tab is disabled during the timed session, including keyboard navigation and solution links in feedback, until automatic grading confirms a correct answer. A correct answer unlocks only that question’s solution immediately; the countdown continues. Continue restores access to the question and its solution without restarting the timer or clearing answers. Collapsing and reopening a question does not pause or restart its countdown. Changing `timing` starts a new waiting session; removing it reveals the content. These rules also apply to specialized questions. Questions inside a timed `tp-exercise` inherit its solution lock without displaying an additional timer. The public `setExerciseTiming(exercise, pending)` method applies or releases one exercise’s lock; a verified correct answer overrides the locks for that question only.
 
 `mode="mixed"` is the default policy for descendant `tp-blank` elements. Each blank follows its boolean `closed` attribute. Set `mode="closed"` to close every blank or `mode="opened"` to open every blank without changing those local choices. This policy does not convert other question widgets, such as radio lists.
 
@@ -122,6 +173,10 @@ Optional score
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
+  | <code>ai-api</code> | <code>boolean</code> | <code>false</code> | Allows sending AI prompts to the selected provider; without it, prompts are only copied. |
+  | <code>ai-assistant</code> | <code>string</code> | <code>&quot;openai&quot;</code> | AI provider, optionally followed by /model; without a model, uses the server configuration. Providers: openai, anthropic, google, mistral. |
+  | <code>ai-explanation-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a saved Markdown explanation; the companion .prompt.md must match the current prompt. |
+  | <code>ai-help</code> | <code>&quot;none&quot;\|&quot;feedback&quot;\|&quot;solution&quot;\|&quot;both&quot;</code> | <code>&quot;none&quot;</code> | Optional AI assistance; solution and both enable solution explanations. Feedback assistance is reserved for a future release. |
   | <code>mode</code> | <code>string</code> | <code>&quot;mixed&quot;</code> | Blank mode: opened, closed, or mixed local choices. |
   | <code>open</code> | <code>string</code> | <code>&quot;&quot;</code> | Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question. |
   | <code>score</code> | <code>boolean</code> | <code>false</code> | Displays the numerical score in submission feedback. |
@@ -136,7 +191,7 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | None. |  |  |
+  | <code>setExerciseTiming</code> | <code>setExerciseTiming(exercise: HTMLElement, pending: boolean): void</code> | Sets an enclosing exercise's solution gate without displaying a local timer. |
   [Public methods of `TpQuestion`]
 
 Events
@@ -156,6 +211,8 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_question.TpQuestion.html)
 <!-- tp-docgen:typedoc:end -->
+
+
 
 
 
@@ -489,6 +546,10 @@ All tp-components used by `<tp-question>` are loaded automatically by this compo
 @summary Callout component for highlighted contextual content.
 -->
 <!--
+@tp-dependency tp-copy-code
+@summary Copy-to-clipboard button component.
+-->
+<!--
 @tp-dependency tp-icon
 @summary SVG icon component with inline, URL, and registry sources.
 -->
@@ -518,6 +579,7 @@ All tp-components used by `<tp-question>` are loaded automatically by this compo
 - [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
 - [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
 - [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
+- [`<tp-copy-code>`](../copy-code/index.md) : Copy-to-clipboard button component.
 - [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
 - [`<tp-mask>`](../mask/index.md) : Replaces an anchored element with a message while active.

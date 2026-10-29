@@ -41,7 +41,7 @@ const basicStart = "<!-- tp-docgen:basic-usage:start -->";
 const basicEnd = "<!-- tp-docgen:basic-usage:end -->";
 
 function balancedElement(source, tag, from = 0) {
-	const opening = new RegExp(`^[ \\t]*<${tag}\\b[^>]*>`, "img");
+	const opening = new RegExp(`^[ \\t]*<${tag}(?=[\\s>])[^>]*>`, "img");
 	opening.lastIndex = from;
 	const first = opening.exec(source);
 	if (first === null) return null;
@@ -290,3 +290,4 @@ console.log(
 	`${checkOnly ? "Outdated" : "Synchronized"} ${synchronized} component documentation introductions.`,
 );
 if (checkOnly && changed.length) process.exitCode = 1;
+if (checkOnly && changed.length) console.error(changed.map(path => path.slice(root.length + 1)).join("\n"));

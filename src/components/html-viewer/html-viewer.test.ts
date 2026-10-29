@@ -172,6 +172,7 @@ it("removes generated runtime markup while preserving authored HTML", async () =
       <tp-dropdown><button tabindex="0" aria-haspopup="menu" aria-expanded="false">Open</button></tp-dropdown>
     </div>`;
 	const element = document.createElement("tp-html-viewer") as HTMLElement & {
+		getValue(): string;
 		setSource(
 			source: string,
 			baseHref?: string | null,
@@ -180,14 +181,11 @@ it("removes generated runtime markup while preserving authored HTML", async () =
 	};
 	element.setSource(source, "https://example.test/examples/", "<p>reset</p>");
 	document.body.append(element);
-	await openViewerSource(element);
 	await vi.waitFor(() =>
-		expect(element.querySelector("tp-code-editor")).not.toBeNull(),
+		expect(element.hasAttribute("data-tp-viewer-ready")).toBe(true),
 	);
-	const editor = element.querySelector("tp-code-editor") as unknown as {
-		getValue(): string;
-	};
-	const value = editor.getValue();
+	expect(element.querySelector("tp-code-editor")).toBeNull();
+	const value = element.getValue();
 	expect(value).toContain("color: red");
 	expect(value).toContain('title="kept"');
 	expect(value).not.toContain("generated");

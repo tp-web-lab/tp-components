@@ -1,3 +1,4 @@
+import { DeferredVisibility } from "../../utilities/deferred-visibility.js";
 import { resolveMarkdownIncludes } from "../../utilities/markdown-includes.js";
 /**
  * @module components/markdown
@@ -29,6 +30,7 @@ export {
 } from "../../utilities/markdown-source.js";
 
 import { dedent } from "../../utilities/code.js";
+import { prepareDocumentLayout } from "../../utilities/document-layout.js";
 import { labelMathSvg } from "../../utilities/math-accessibility.js";
 import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
 import { TpBase } from "../base/base.js";
@@ -79,6 +81,7 @@ async function prepareMarkdownContent(
 		await parser.renderRuntime(template.content, { only: ["math"] });
 		labelMathSvg(template.content);
 	}
+	await prepareDocumentLayout(template.content);
 	return template.content;
 }
 
@@ -103,6 +106,13 @@ export class TpMarkdown extends TpBase {
 	private readonly outputElement = document.createElement("div");
 	private renderToken = 0;
 	private inlineSourceSnapshot = "";
+	private safeSource: string | null = null;
+
+	/** Renders generated Markdown with restricted formatting and source-backed formulas only. */
+	public async setSafeMarkdown(source: string): Promise<void> {
+		this.safeSource = source;
+		if (this.isConnected) await this.renderMarkdown();
+	}
 
 	protected override connectedCallback(): void {
 		super.connectedCallback();
@@ -131,13 +141,48 @@ export class TpMarkdown extends TpBase {
 		this.setAttribute("src", value);
 	}
 
+	private readonly pendingVisibility = new DeferredVisibility(this, () => {
+		void this.renderMarkdown();
+	});
+
+	protected disconnectedCallback(): void {
+		this.renderToken++;
+		this.pendingVisibility.disconnect();
+	}
+
 	private async renderMarkdown(): Promise<void> {
 		const token = ++this.renderToken;
+		await Promise.resolve();
+		if (token !== this.renderToken || !this.isConnected) return;
+		if (
+			this.hasAttribute("data-tp-defer-visibility") &&
+			this.pendingVisibility.defer()
+		)
+			return;
 		this.removeAttribute("data-tp-markdown-rendered");
 
 		try {
+			if (this.safeSource !== null) {
+				const { safeMarkdownContent } = await import(
+					"../../utilities/safe-markdown.js"
+				);
+				await import("../math/math.js");
+				if (token !== this.renderToken) return;
+				this.outputElement.replaceChildren(
+					safeMarkdownContent(this.safeSource),
+				);
+				this.setAttribute("data-tp-markdown-rendered", "");
+				this.dispatchEvent(
+					new CustomEvent("tp-markdown-rendered", { bubbles: true }),
+				);
+				return;
+			}
 			const { source, currentUrl } = await this.getMarkdownSource();
-			const resolvedSource = await this.resolveIncludes(source, currentUrl);
+			const resolvedSource = await this.resolveIncludes(
+				source,
+				currentUrl,
+				Number(this.getAttribute("data-tp-include-depth") ?? 0),
+			);
 
 			if (token !== this.renderToken) return;
 			this.setAttribute("data-tp-markdown-source", currentUrl.pathname);

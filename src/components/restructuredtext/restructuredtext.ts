@@ -28,6 +28,7 @@ import {
 	TpRestructuredTextParser,
 } from "@tp/tp-restructuredtext";
 import { dedent } from "../../utilities/code.js";
+import { DeferredVisibility } from "../../utilities/deferred-visibility.js";
 import {
 	getComponentSourceBaseUrl,
 	resolveComponentSourceUrl,
@@ -222,6 +223,14 @@ export class TpRestructuredText extends TpBase {
 
 	private readonly outputElement = document.createElement("div");
 	private renderToken = 0;
+	private readonly pendingVisibility = new DeferredVisibility(this, () => {
+		void this.renderRestructuredText();
+	});
+
+	public disconnectedCallback(): void {
+		this.renderToken++;
+		this.pendingVisibility.disconnect();
+	}
 	private inlineSourceSnapshot = "";
 
 	protected override connectedCallback(): void {
@@ -265,6 +274,9 @@ export class TpRestructuredText extends TpBase {
 
 	private async renderRestructuredText(): Promise<void> {
 		const token = ++this.renderToken;
+		await Promise.resolve();
+		if (token !== this.renderToken || !this.isConnected) return;
+		if (this.pendingVisibility.defer()) return;
 		this.removeAttribute("data-tp-restructuredtext-rendered");
 
 		try {

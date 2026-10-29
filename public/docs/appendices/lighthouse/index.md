@@ -15,11 +15,13 @@ The initial thresholds are advisory: 80% performance, 95% accessibility, 90% bes
 
 ## Category scores
 
+Last measured: 29 October 2026 at 15:43:31 (Europe/Paris, UTC+1). Lighthouse version: 12.6.1. This execution collected 3 measurements per page; the table uses the representative run selected by Lighthouse CI.
+
 | Page | Performance | Accessibility | Best practices | SEO |
 | --- | ---: | ---: | ---: | ---: |
-| lighthouse/single-page-accessibility.html | 48% | 100% | 100% | 100% |
-| lighthouse/single-page-code-editor.html | 27% | 97% | 79% | 100% |
-| lighthouse/single-page-markup-multi-pages.html | 27% | 100% | 79% | 100% |
+| lighthouse/single-page-accessibility.html | 85% | 100% | 100% | 100% |
+| lighthouse/single-page-code-editor.html | 80% | 100% | 100% | 100% |
+| lighthouse/single-page-markup-multi-pages.html | 83% | 100% | 100% | 100% |
 
 ## Triage by responsibility
 
@@ -29,7 +31,6 @@ The ownership classification is diagnostic, not contractual. `tp-*` covers compo
 | --- | --- | --- | --- |
 | `tp-*` | Performance | Avoid an excessive DOM size | lighthouse/single-page-accessibility.html |
 | `tp-*` | Performance | Avoid an excessive DOM size | lighthouse/single-page-code-editor.html |
-| `tp-*` | Performance | Avoid an excessive DOM size | lighthouse/single-page-markup-multi-pages.html |
 | `tp-*` | Performance | First Contentful Paint | lighthouse/single-page-accessibility.html |
 | `tp-*` | Performance | First Contentful Paint | lighthouse/single-page-code-editor.html |
 | `tp-*` | Performance | First Contentful Paint | lighthouse/single-page-markup-multi-pages.html |
@@ -39,42 +40,21 @@ The ownership classification is diagnostic, not contractual. `tp-*` covers compo
 | `tp-*` | Performance | Largest Contentful Paint element | lighthouse/single-page-accessibility.html |
 | `tp-*` | Performance | Largest Contentful Paint element | lighthouse/single-page-code-editor.html |
 | `tp-*` | Performance | Largest Contentful Paint element | lighthouse/single-page-markup-multi-pages.html |
-| `tp-*` | Performance | Max Potential First Input Delay | lighthouse/single-page-accessibility.html |
 | `tp-*` | Performance | Max Potential First Input Delay | lighthouse/single-page-code-editor.html |
 | `tp-*` | Performance | Max Potential First Input Delay | lighthouse/single-page-markup-multi-pages.html |
-| `tp-*` | Performance | Minimize main-thread work | lighthouse/single-page-code-editor.html |
-| `tp-*` | Performance | Minimize main-thread work | lighthouse/single-page-markup-multi-pages.html |
+| `tp-*` | Performance | Reduce unused JavaScript | lighthouse/single-page-accessibility.html |
+| `tp-*` | Performance | Reduce unused JavaScript | lighthouse/single-page-markup-multi-pages.html |
 | `tp-*` | Performance | Speed Index | lighthouse/single-page-accessibility.html |
 | `tp-*` | Performance | Speed Index | lighthouse/single-page-code-editor.html |
 | `tp-*` | Performance | Speed Index | lighthouse/single-page-markup-multi-pages.html |
 | `tp-*` | Performance | Time to Interactive | lighthouse/single-page-accessibility.html |
 | `tp-*` | Performance | Time to Interactive | lighthouse/single-page-code-editor.html |
 | `tp-*` | Performance | Time to Interactive | lighthouse/single-page-markup-multi-pages.html |
-| `tp-*` | Performance | Total Blocking Time | lighthouse/single-page-accessibility.html |
-| `tp-*` | Performance | Total Blocking Time | lighthouse/single-page-code-editor.html |
 | `tp-*` | Performance | Total Blocking Time | lighthouse/single-page-markup-multi-pages.html |
-| `tp-*` | Accessibility | Touch targets do not have sufficient size or spacing. | lighthouse/single-page-code-editor.html |
 | Hosting | Performance | Network dependency tree | lighthouse/single-page-accessibility.html |
 | Hosting | Performance | Network dependency tree | lighthouse/single-page-code-editor.html |
 | Hosting | Performance | Network dependency tree | lighthouse/single-page-markup-multi-pages.html |
-| Libraries | Performance | Avoid enormous network payloads | lighthouse/single-page-accessibility.html |
-| Libraries | Performance | Avoid enormous network payloads | lighthouse/single-page-code-editor.html |
-| Libraries | Performance | Avoid enormous network payloads | lighthouse/single-page-markup-multi-pages.html |
-| Libraries | Best Practices | Browser errors were logged to the console | lighthouse/single-page-code-editor.html |
-| Libraries | Best Practices | Browser errors were logged to the console | lighthouse/single-page-markup-multi-pages.html |
-| Libraries | Performance | Forced reflow | lighthouse/single-page-code-editor.html |
-| Libraries | Performance | Forced reflow | lighthouse/single-page-markup-multi-pages.html |
-| Libraries | Performance | Minify JavaScript | lighthouse/single-page-accessibility.html |
-| Libraries | Performance | Minify JavaScript | lighthouse/single-page-code-editor.html |
-| Libraries | Performance | Minify JavaScript | lighthouse/single-page-markup-multi-pages.html |
-| Libraries | Performance | Reduce JavaScript execution time | lighthouse/single-page-code-editor.html |
-| Libraries | Performance | Reduce JavaScript execution time | lighthouse/single-page-markup-multi-pages.html |
-| Libraries | Performance | Reduce the impact of third-party code | lighthouse/single-page-code-editor.html |
-| Libraries | Performance | Reduce the impact of third-party code | lighthouse/single-page-markup-multi-pages.html |
-| Libraries | Performance | Reduce unused JavaScript | lighthouse/single-page-accessibility.html |
 | Libraries | Performance | Reduce unused JavaScript | lighthouse/single-page-code-editor.html |
-| Libraries | Performance | Reduce unused JavaScript | lighthouse/single-page-markup-multi-pages.html |
-| Libraries | Best Practices | Uses deprecated APIs | lighthouse/single-page-code-editor.html |
-| Libraries | Best Practices | Uses deprecated APIs | lighthouse/single-page-markup-multi-pages.html |
+| Libraries | Performance | Remove duplicate modules in JavaScript bundles | lighthouse/single-page-markup-multi-pages.html |
 
 Run `pnpm lighthouse` to collect reports, apply advisory assertions and regenerate this page. Full HTML and JSON reports are written to `.lighthouseci/reports` and retained by CI as artifacts.

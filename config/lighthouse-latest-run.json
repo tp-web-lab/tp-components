@@ -1,0 +1,392 @@
+{
+  "generatedAt": "2026-10-29T14:43:31.782Z",
+  "runsPerPage": 3,
+  "pages": [
+    {
+      "page": "single-page-accessibility.html",
+      "measuredAt": "2026-10-29T14:42:47.752Z",
+      "version": "12.6.1",
+      "scores": {
+        "performance": 85,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "transferBytes": 300181,
+      "totalBlockingTimeMs": 12.5,
+      "firstContentfulPaintMs": 2296.2017499999997,
+      "largestContentfulPaintMs": 3955.882449999999,
+      "cumulativeLayoutShift": 0,
+      "initialPythonRuntimeRequests": 0,
+      "performanceSamples": [
+        84,
+        85,
+        85
+      ]
+    },
+    {
+      "page": "single-page-code-editor.html",
+      "measuredAt": "2026-10-29T14:42:58.822Z",
+      "version": "12.6.1",
+      "scores": {
+        "performance": 80,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "transferBytes": 535545,
+      "totalBlockingTimeMs": 46.5,
+      "firstContentfulPaintMs": 2643.146125,
+      "largestContentfulPaintMs": 4599.758000000002,
+      "cumulativeLayoutShift": 0,
+      "initialPythonRuntimeRequests": 0,
+      "performanceSamples": [
+        80,
+        77,
+        80
+      ]
+    },
+    {
+      "page": "single-page-markup-multi-pages.html",
+      "measuredAt": "2026-10-29T14:43:31.782Z",
+      "version": "12.6.1",
+      "scores": {
+        "performance": 83,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "transferBytes": 437433,
+      "totalBlockingTimeMs": 68.00000000000114,
+      "firstContentfulPaintMs": 2442.8060000000005,
+      "largestContentfulPaintMs": 4130.709000000001,
+      "cumulativeLayoutShift": 0,
+      "initialPythonRuntimeRequests": 0,
+      "performanceSamples": [
+        83,
+        82,
+        83
+      ]
+    }
+  ],
+  "thresholdsAreAdvisory": true,
+  "previousMeasurement": {
+    "generatedAt": "2026-10-29T10:21:51.671Z",
+    "runsPerPage": 1,
+    "pages": [
+      {
+        "page": "single-page-accessibility.html",
+        "measuredAt": "2026-10-29T10:21:25.071Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 52,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        }
+      },
+      {
+        "page": "single-page-code-editor.html",
+        "measuredAt": "2026-10-29T10:21:36.914Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 18,
+          "accessibility": 94,
+          "best-practices": 82,
+          "seo": 100
+        }
+      },
+      {
+        "page": "single-page-markup-multi-pages.html",
+        "measuredAt": "2026-10-29T10:21:51.671Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 25,
+          "accessibility": 100,
+          "best-practices": 82,
+          "seo": 100
+        }
+      }
+    ]
+  },
+  "viewerRenderingBaseline": {
+    "generatedAt": "2026-10-29T11:32:22.012Z",
+    "runsPerPage": 3,
+    "pages": [
+      {
+        "page": "single-page-accessibility.html",
+        "measuredAt": "2026-10-29T11:30:53.658Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 65,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 374442,
+        "totalBlockingTimeMs": 19,
+        "initialPythonRuntimeRequests": 0
+      },
+      {
+        "page": "single-page-code-editor.html",
+        "measuredAt": "2026-10-29T11:31:16.026Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 37,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 1464158,
+        "totalBlockingTimeMs": 756.5,
+        "initialPythonRuntimeRequests": 0
+      },
+      {
+        "page": "single-page-markup-multi-pages.html",
+        "measuredAt": "2026-10-29T11:32:22.012Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 35,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 1612643,
+        "totalBlockingTimeMs": 6202.000000000018,
+        "initialPythonRuntimeRequests": 0
+      }
+    ]
+  },
+  "initialDisplayBaseline": {
+    "generatedAt": "2026-10-29T11:46:04.997Z",
+    "runsPerPage": 3,
+    "pages": [
+      {
+        "page": "single-page-accessibility.html",
+        "measuredAt": "2026-10-29T11:45:07.155Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 65,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 374442,
+        "totalBlockingTimeMs": 12,
+        "largestContentfulPaintMs": 5144.616499999999,
+        "cumulativeLayoutShift": 0.2099205672941175,
+        "initialPythonRuntimeRequests": 0,
+        "firstContentfulPaintMs": 3022.3082499999996
+      },
+      {
+        "page": "single-page-code-editor.html",
+        "measuredAt": "2026-10-29T11:45:53.232Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 56,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 1464250,
+        "totalBlockingTimeMs": 225.9999999999991,
+        "largestContentfulPaintMs": 5645.295199999999,
+        "cumulativeLayoutShift": 0.25360801711396735,
+        "initialPythonRuntimeRequests": 0,
+        "firstContentfulPaintMs": 3199.9160499999994
+      },
+      {
+        "page": "single-page-markup-multi-pages.html",
+        "measuredAt": "2026-10-29T11:46:04.997Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 64,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 1612735,
+        "totalBlockingTimeMs": 206.99999999999818,
+        "largestContentfulPaintMs": 5934.289249999998,
+        "cumulativeLayoutShift": 0.12166676048475498,
+        "initialPythonRuntimeRequests": 0,
+        "firstContentfulPaintMs": 3267.1446249999995
+      }
+    ]
+  },
+  "deferredLoadingBaseline": {
+    "generatedAt": "2026-10-29T11:57:39.291Z",
+    "runsPerPage": 3,
+    "pages": [
+      {
+        "page": "single-page-accessibility.html",
+        "measuredAt": "2026-10-29T11:56:25.982Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 78,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 296261,
+        "totalBlockingTimeMs": 13.500000000000114,
+        "firstContentfulPaintMs": 2870.3105499999992,
+        "largestContentfulPaintMs": 4684.3717,
+        "cumulativeLayoutShift": 0,
+        "initialPythonRuntimeRequests": 0
+      },
+      {
+        "page": "single-page-code-editor.html",
+        "measuredAt": "2026-10-29T11:57:01.643Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 64,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 1419889,
+        "totalBlockingTimeMs": 257.5,
+        "firstContentfulPaintMs": 3689.8114749999995,
+        "largestContentfulPaintMs": 6479.384499999999,
+        "cumulativeLayoutShift": 0,
+        "initialPythonRuntimeRequests": 0
+      },
+      {
+        "page": "single-page-markup-multi-pages.html",
+        "measuredAt": "2026-10-29T11:57:39.291Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 72,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 1610558,
+        "totalBlockingTimeMs": 214,
+        "firstContentfulPaintMs": 2859.7107749999996,
+        "largestContentfulPaintMs": 5040.105649999999,
+        "cumulativeLayoutShift": 0,
+        "initialPythonRuntimeRequests": 0
+      }
+    ]
+  },
+  "progressiveFirstPaintBaseline": {
+    "generatedAt": "2026-10-29T13:49:02.704Z",
+    "runsPerPage": 3,
+    "pages": [
+      {
+        "page": "single-page-accessibility.html",
+        "measuredAt": "2026-10-29T13:47:44.446Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 77,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 297418,
+        "totalBlockingTimeMs": 12.5,
+        "firstContentfulPaintMs": 2857.940725,
+        "largestContentfulPaintMs": 4813.438149999999,
+        "cumulativeLayoutShift": 0,
+        "initialPythonRuntimeRequests": 0
+      },
+      {
+        "page": "single-page-code-editor.html",
+        "measuredAt": "2026-10-29T13:48:17.761Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 66,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 656991,
+        "totalBlockingTimeMs": 65,
+        "firstContentfulPaintMs": 4132.299625,
+        "largestContentfulPaintMs": 7360.528749999999,
+        "cumulativeLayoutShift": 0,
+        "initialPythonRuntimeRequests": 0
+      },
+      {
+        "page": "single-page-markup-multi-pages.html",
+        "measuredAt": "2026-10-29T13:49:02.704Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 76,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 601763,
+        "totalBlockingTimeMs": 32,
+        "firstContentfulPaintMs": 2964.8769999999995,
+        "largestContentfulPaintMs": 5101.803199999999,
+        "cumulativeLayoutShift": 0,
+        "initialPythonRuntimeRequests": 0
+      }
+    ]
+  },
+  "performance80Baseline": {
+    "generatedAt": "2026-10-29T14:03:34.128Z",
+    "runsPerPage": 3,
+    "pages": [
+      {
+        "page": "single-page-accessibility.html",
+        "measuredAt": "2026-10-29T14:02:37.421Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 80,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 299124,
+        "totalBlockingTimeMs": 18,
+        "firstContentfulPaintMs": 2642.709125,
+        "largestContentfulPaintMs": 4604.5525,
+        "cumulativeLayoutShift": 0,
+        "initialPythonRuntimeRequests": 0
+      },
+      {
+        "page": "single-page-code-editor.html",
+        "measuredAt": "2026-10-29T14:03:11.205Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 69,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 658531,
+        "totalBlockingTimeMs": 96,
+        "firstContentfulPaintMs": 3555.6982500000004,
+        "largestContentfulPaintMs": 6469.0740000000005,
+        "cumulativeLayoutShift": 0,
+        "initialPythonRuntimeRequests": 0
+      },
+      {
+        "page": "single-page-markup-multi-pages.html",
+        "measuredAt": "2026-10-29T14:03:34.128Z",
+        "version": "12.6.1",
+        "scores": {
+          "performance": 77,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "transferBytes": 603765,
+        "totalBlockingTimeMs": 55,
+        "firstContentfulPaintMs": 2820.4097999999994,
+        "largestContentfulPaintMs": 4885.970799999999,
+        "cumulativeLayoutShift": 0,
+        "initialPythonRuntimeRequests": 0
+      }
+    ]
+  },
+  "measurementWindowUtc": {
+    "first": "2026-10-29T14:42:25.062Z",
+    "last": "2026-10-29T14:43:54.914Z"
+  }
+}

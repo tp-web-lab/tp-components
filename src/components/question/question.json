@@ -11,6 +11,42 @@
   ],
   "attributes": [
     {
+      "name": "ai-api",
+      "description": "Allows sending AI prompts to the selected provider; without it, prompts are only copied.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "ai-assistant",
+      "description": "AI provider, optionally followed by /model; without a model, uses the server configuration. Providers: openai, anthropic, google, mistral.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"openai\""
+    },
+    {
+      "name": "ai-explanation-src",
+      "description": "URL of a saved Markdown explanation; the companion .prompt.md must match the current prompt.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "ai-help",
+      "description": "Optional AI assistance; solution and both enable solution explanations. Feedback assistance is reserved for a future release.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"none\"|\"feedback\"|\"solution\"|\"both\"",
+      "default": "\"none\""
+    },
+    {
       "name": "mode",
       "description": "Blank mode: opened, closed, or mixed local choices.",
       "reflected": true,
@@ -56,7 +92,13 @@
       "default": "\"\""
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "setExerciseTiming(exercise: HTMLElement, pending: boolean): void",
+      "inherited": false,
+      "description": "Sets an enclosing exercise's solution gate without displaying a local timer."
+    }
+  ],
   "events": [
     {
       "name": "tp-question-submit",
@@ -87,6 +129,10 @@
       "summary": "Callout component for highlighted contextual content."
     },
     {
+      "name": "tp-copy-code",
+      "summary": "Copy-to-clipboard button component."
+    },
+    {
       "name": "tp-icon",
       "summary": "SVG icon component with inline, URL, and registry sources."
     },
@@ -115,7 +161,7 @@
   "userHelp": {
     "displayName": "Question",
     "introduction": "The custom `<tp-question>` element implements the <tp-icon name=\"question\" library=\"components\" size=\"1.25em\"></tp-icon> Question functionality: semantic base container for question content.",
-    "interactions": "The user-help button legend groups commands by their location in the component and describes their effect briefly. Detailed gestures and keyboard behavior remain in the interaction tables below.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Question title | Expand or collapse the question. Questions start collapsed; answers are retained when collapsed. |\n| Input button | Show or hide the answer form without losing answers. At least one panel stays visible. |\n| Output button | Show or hide the output without losing feedback or the solution. Highlighted buttons indicate visible panels. |\n| Start | Reveal the timed question and begin its countdown. |\n| Continue | Reveal the question again after the time limit, keeping existing answers. |\n| Submit | Check the completed answer form. |\n| Feedback tab | Read feedback, or the message indicating that none is available. |\n| Solution tab | Read the solution, or the message indicating that none is available. For timed questions, it becomes accessible only after Continue. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> on the question title | Expand or collapse the question. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Output tabs | Move between Feedback and Solution. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "The user-help button legend groups commands by their location in the component and describes their effect briefly. Detailed gestures and keyboard behavior remain in the interaction tables below.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Question title | Expand or collapse the question. Questions start collapsed; answers are retained when collapsed. |\n| Input button | Show or hide the answer form without losing answers. At least one panel stays visible. |\n| Output button | Show or hide the output without losing feedback or the solution. Highlighted buttons indicate visible panels. |\n| Start | Reveal the timed question and begin its countdown. |\n| Continue | Reveal the question again after the time limit, keeping existing answers. |\n| Explain the solution | Copy a pedagogical prompt and request an explanation when ai-api is enabled and AI is configured. |\n| Submit | Check the completed answer form. |\n| Feedback tab | Read feedback, or the message indicating that none is available. |\n| Solution tab | Read the solution, or the message indicating that none is available. For timed questions, it becomes accessible only after Continue. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> on the question title | Expand or collapse the question. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Output tabs | Move between Feedback and Solution. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> on Explain the solution | Copy the prompt and request an explanation when ai-api is enabled and AI is configured. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

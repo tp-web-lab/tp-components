@@ -14,7 +14,9 @@
  */
 // tp-docgen:dependencies:end
 
-import { renderAdocViewers, TpAsciidocParser } from "@tp/tp-asciidoc";
+import type { TpAsciidocParser } from "@tp/tp-asciidoc";
+
+import { DeferredVisibility } from "../../utilities/deferred-visibility.js";
 import { labelMathSvg } from "../../utilities/math-accessibility.js";
 import {
 	getComponentSourceBaseUrl,
@@ -22,6 +24,13 @@ import {
 } from "../../utilities/source-url.js";
 import { TpBase } from "../base/base.js";
 import style from "./asciidoc.css?inline";
+
+async function renderAdocViewers(
+	...args: Parameters<typeof import("@tp/tp-asciidoc").renderAdocViewers>
+): Promise<void> {
+	const engine = await import("@tp/tp-asciidoc");
+	await engine.renderAdocViewers(...args);
+}
 
 const STYLE_ID = "tp-asciidoc-styles";
 
@@ -142,7 +151,8 @@ function serializeNode(value: unknown): AsciidocAstNode {
  *
  * @returns A new independent AsciiDoc parser.
  */
-export function createTpAsciidocParser(): TpAsciidocParserInstance {
+export async function createTpAsciidocParser(): Promise<TpAsciidocParserInstance> {
+	const { TpAsciidocParser } = await import("@tp/tp-asciidoc");
 	return new TpAsciidocParser();
 }
 
@@ -171,7 +181,7 @@ async function renderWithHtmlStyleAttributes(
  * @returns Generated semantic HTML.
  */
 export async function renderAsciidocToHtml(source: string): Promise<string> {
-	return renderWithHtmlStyleAttributes(createTpAsciidocParser(), source);
+	return renderWithHtmlStyleAttributes(await createTpAsciidocParser(), source);
 }
 
 /**
@@ -183,7 +193,7 @@ export async function renderAsciidocToHtml(source: string): Promise<string> {
 export async function parseAsciidocToAst(
 	source: string,
 ): Promise<AsciidocAstNode> {
-	return serializeNode(await createTpAsciidocParser().parse(source));
+	return serializeNode(await (await createTpAsciidocParser()).parse(source));
 }
 
 /**
@@ -196,7 +206,7 @@ export async function renderAsciidocInto(
 	source: string,
 	root: HTMLElement,
 ): Promise<void> {
-	const parser = createTpAsciidocParser();
+	const parser = await createTpAsciidocParser();
 	root.innerHTML = await renderWithHtmlStyleAttributes(parser, source);
 	await renderAdocViewers(root, { parser });
 	activateAsciidocBrowserAssets(root);
@@ -291,7 +301,7 @@ function initializeAsciidocBrowserAssets(
  * @param root Root node containing rendered AsciiDoc HTML.
  */
 export async function renderAsciidocRuntimeIn(root: ParentNode): Promise<void> {
-	await renderAdocViewers(root, { parser: createTpAsciidocParser() });
+	await renderAdocViewers(root, { parser: await createTpAsciidocParser() });
 }
 
 /**
@@ -302,7 +312,7 @@ export async function renderAsciidocRuntimeIn(root: ParentNode): Promise<void> {
  * @event tp-asciidoc-rendered Emitted after conversion and runtime initialization complete.
  * @eventdetail tp-asciidoc-rendered void
  * @example
- * <tp-box><tp-asciidoc><script type="tp/asciidoc">This paragraph uses *AsciiDoc*.</script></tp-asciidoc></tp-box> 
+ * <tp-box><tp-asciidoc><script type="tp/asciidoc">This paragraph uses *AsciiDoc*.</script></tp-asciidoc></tp-box>
  */
 export class TpAsciidoc extends TpBase {
 	/** Attributes that trigger a new source load and conversion. */
@@ -316,6 +326,9 @@ export class TpAsciidoc extends TpBase {
 		labelMathSvg(this.outputElement),
 	);
 	private renderToken = 0;
+	private readonly pendingVisibility = new DeferredVisibility(this, () => {
+		void this.renderAsciidoc();
+	});
 	private inlineSourceSnapshot = "";
 
 	protected override connectedCallback(): void {
@@ -334,6 +347,7 @@ export class TpAsciidoc extends TpBase {
 
 	/** Stops observing detached output and invalidates pending source requests. */
 	public disconnectedCallback(): void {
+		this.pendingVisibility.disconnect();
 		this.mathObserver.disconnect();
 		this.renderToken += 1;
 	}
@@ -360,13 +374,17 @@ export class TpAsciidoc extends TpBase {
 
 	private async renderAsciidoc(): Promise<void> {
 		const token = ++this.renderToken;
+		await Promise.resolve();
+		if (token !== this.renderToken || !this.isConnected) return;
+		if (this.pendingVisibility.defer()) return;
 		this.removeAttribute("data-tp-asciidoc-rendered");
 
 		try {
 			const { source, currentUrl } = await this.getAsciidocSource();
 			if (token !== this.renderToken) return;
 			this.setAttribute("data-tp-asciidoc-source", currentUrl.pathname);
-			const parser = createTpAsciidocParser();
+			const parser = await createTpAsciidocParser();
+			if (token !== this.renderToken || !this.isConnected) return;
 			parser.configure(getBrowserRenderOptions(currentUrl));
 			this.outputElement.innerHTML = await renderWithHtmlStyleAttributes(
 				parser,
