@@ -57,7 +57,7 @@
     },
     {
       "name": "src",
-      "description": "Controls the src.",
+      "description": "URL of a text file containing the XY graph definition; used instead of the inline tp/xy-plot script.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -69,17 +69,17 @@
     {
       "name": "anim(): string",
       "inherited": false,
-      "description": "Gets reveal order (JSON for groups), or sets comma-separated names, JSON or step arrays."
+      "description": "With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value."
     },
     {
       "name": "anim(names: string | XYAnimationStep[]): void",
       "inherited": false,
-      "description": "Anim."
+      "description": "With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value."
     },
     {
       "name": "anim(names?: string | XYAnimationStep[]): string | undefined",
       "inherited": false,
-      "description": "Anim."
+      "description": "With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value."
     },
     {
       "name": "exportSvg(): string",
@@ -126,44 +126,12 @@
       "summary": "Shared base class for tp-* components."
     },
     {
-      "name": "tp-button",
-      "summary": "Button component that supports native button and link rendering."
-    },
-    {
-      "name": "tp-callout",
-      "summary": "Callout component for highlighted contextual content."
-    },
-    {
-      "name": "tp-cluster",
-      "summary": "Flexible cluster layout component."
-    },
-    {
-      "name": "tp-code-editor",
-      "summary": "CodeMirror-based code editor component."
-    },
-    {
-      "name": "tp-dropdown",
-      "summary": "Dropdown menu component."
-    },
-    {
       "name": "tp-icon-button",
       "summary": "Accessible icon button component."
     },
     {
-      "name": "tp-radio-list",
-      "summary": "Transforms a list into a group of radio buttons."
-    },
-    {
       "name": "tp-save-image",
       "summary": "Downloads an anchored image as SVG, PNG or WebP."
-    },
-    {
-      "name": "tp-stack",
-      "summary": "Vertical stack layout component."
-    },
-    {
-      "name": "tp-textfield",
-      "summary": "Single-line and automatically growing multiline text field."
     },
     {
       "name": "tp-theme",

@@ -66,25 +66,39 @@ function escapeButtonAttribute(value: string): string {
 /**
  * @summary an action button or navigation link with shared sizes, variants and loading states.
  * @tagname tp-button
- * @attr {string} variant = "neutral" - Attribute `variant`.
- * @attr {string} size = "m" - Attribute `size`.
- * @attr {string} type = "button" - Attribute `type`.
- * @attr {boolean} outlined = false - Attribute `outlined`.
- * @attr {boolean} pill = false - Attribute `pill`.
- * @attr {boolean} disabled = false - Attribute `disabled`.
- * @attr {boolean} loading = false - Attribute `loading`.
- * @attr {string} href = "" - Attribute `href`.
- * @attr {string} target = "" - Attribute `target`.
- * @attr {string} rel = "" - Attribute `rel`.
- * @attr {string} download = "" - Attribute `download`.
- * @event click Event.
- * Colors are derived from the shared `tp.css` semantic tokens.
+ * @attr {TpButtonLoadingMode} loading-mode = replace - Spinner layout while loading: replace hides the label; inline keeps the label beside the spinner.
+ * @attr {string} variant = "neutral" - Color variant: neutral, brand, success, danger, warning or info.
+ * @attr {string} size = "m" - Button size preset: xxs, xs, s, m, l, xl or xxl; controls text size and padding.
+ * @attr {string} type = "button" - Native button action: button, submit or reset; ignored when href makes the control a link.
+ * @attr {boolean} outlined = false - Uses an outlined appearance instead of a filled background.
+ * @attr {boolean} pill = false - Rounds the button ends to form a pill.
+ * @attr {boolean} disabled = false - Prevents activation, including link navigation, and marks the control as disabled.
+ * @attr {boolean} loading = false - Displays a loading spinner and prevents activation while present.
+ * @attr {string} href = "" - Destination URL. A nonempty value renders a link instead of a native button.
+ * @attr {string} target = "" - Browsing context for href, such as _self, _blank or a named frame; ignored in native button mode.
+ * @attr {string} rel = "" - Space-separated relationship tokens forwarded to the link, for example noopener noreferrer; applies only with href.
+ * @attr {string} download = "" - Suggested download filename when href is set. A nonempty value requests a download; browser and server rules determine whether it is honored.
+
  * @accessibility Uses a native `button` or `a` element according to the configured action.
  * @accessibility Exposes disabled and loading states to assistive technology.
  * @accessibilityresponsibility Provide visible text that describes the action or destination.
  * @keyboard {Enter / Space} Uses the browser's native button activation behavior.
  * @example
  * <tp-button href="/#/components/button/index.md#usage">Read the usage guide</tp-button>
+ * @cssprop [--tp-button-accent=var(--tp-neutral-text-colorful)] Accent color used for outlined text and borders, and for the hover border; depends on variant.
+ * @cssprop [--tp-button-background=var(--tp-neutral-fill-loud)] Background color of the button or link; variant and outlined can change it.
+ * @cssprop [--tp-button-border-color=var(--tp-neutral-stroke-mid)] Border color of the button or link in its resting state.
+ * @cssprop [--tp-button-focus-ring-color=var(--tp-focus-color)] Color of the outer ring shown on keyboard focus and hover.
+ * @cssprop [--tp-button-font-size=0.875em] Font size of the button label; size presets also update this value.
+ * @cssprop [--tp-button-foreground=var(--tp-neutral-text-on-loud)] Text and icon color of the button or link.
+ * @cssprop [--tp-button-outline-background=var(--tp-neutral-fill-softer)] Background color of an enabled outlined button on hover.
+ * @cssprop [--tp-button-padding-block=0.35em] Inner spacing above and below the button content.
+ * @cssprop [--tp-button-padding-inline=0.7em] Inner spacing before and after the button content.
+ * @cssprop [--tp-button-radius=0.5em] Corner radius of the button or link; pill uses a fully rounded radius.
+ * @cssprop [--tp-button-spinner-border-width=2px] Stroke thickness of the circular loading indicator.
+ * @cssprop [--tp-button-spinner-size=1em] Width and height of the circular loading indicator.
+ * @event click Native click event bubbling from the inner button or link when activated by pointer or keyboard; disabled controls suppress activation. This is not a CustomEvent, so there is no custom detail payload.
+ * @eventdetail click void
  */
 export class TpButton extends TpBase {
 	/**
@@ -145,7 +159,7 @@ export class TpButton extends TpBase {
 	}
 
 	/**
-	 * @summary API documentation summary.
+	 * @summary Color variant: neutral, brand, success, danger, warning or info.
 	 * @attr variant
 	 * @default neutral
 	 */
@@ -159,7 +173,7 @@ export class TpButton extends TpBase {
 	}
 
 	/**
-	 * @summary API documentation summary.
+	 * @summary Button size preset: xxs, xs, s, m, l, xl or xxl; controls text size and padding.
 	 * @attr size
 	 * @default m
 	 */
@@ -173,7 +187,7 @@ export class TpButton extends TpBase {
 	}
 
 	/**
-	 * @summary API documentation summary.
+	 * @summary Native button action: button, submit or reset; ignored when href makes the control a link.
 	 * @attr type
 	 * @default button
 	 */
@@ -187,7 +201,7 @@ export class TpButton extends TpBase {
 	}
 
 	/**
-	 * @summary API documentation summary.
+	 * @summary Uses an outlined appearance instead of a filled background.
 	 * @attr outlined
 	 */
 	public get outlined(): boolean {
@@ -199,7 +213,7 @@ export class TpButton extends TpBase {
 	}
 
 	/**
-	 * @summary API documentation summary.
+	 * @summary Rounds the button ends to form a pill.
 	 * @attr pill
 	 */
 	public get pill(): boolean {
@@ -211,7 +225,7 @@ export class TpButton extends TpBase {
 	}
 
 	/**
-	 * @summary API documentation summary.
+	 * @summary Prevents activation, including link navigation, and marks the control as disabled.
 	 * @attr disabled
 	 */
 	public get disabled(): boolean {
@@ -223,7 +237,7 @@ export class TpButton extends TpBase {
 	}
 
 	/**
-	 * @summary API documentation summary.
+	 * @summary Displays a loading spinner and prevents activation while present.
 	 * @attr loading
 	 */
 	public get loading(): boolean {
@@ -235,7 +249,7 @@ export class TpButton extends TpBase {
 	}
 
 	/**
-	 * @summary API documentation summary.
+	 * @summary Spinner layout while loading: replace hides the label; inline keeps the label beside the spinner.
 	 * @attr loading-mode
 	 * @default replace
 	 */
@@ -253,7 +267,7 @@ export class TpButton extends TpBase {
 	}
 
 	/**
-	 * @summary API documentation summary.
+	 * @summary Destination URL. A nonempty value renders a link instead of a native button.
 	 * @attr href
 	 */
 	public get href(): string {
@@ -265,7 +279,7 @@ export class TpButton extends TpBase {
 	}
 
 	/**
-	 * @summary API documentation summary.
+	 * @summary Browsing context for href, such as _self, _blank or a named frame; ignored in native button mode.
 	 * @attr target
 	 */
 	public get target(): string {
@@ -277,7 +291,7 @@ export class TpButton extends TpBase {
 	}
 
 	/**
-	 * @summary API documentation summary.
+	 * @summary Space-separated relationship tokens forwarded to the link, for example noopener noreferrer; applies only with href.
 	 * @attr rel
 	 */
 	public get rel(): string {
@@ -289,7 +303,7 @@ export class TpButton extends TpBase {
 	}
 
 	/**
-	 * @summary API documentation summary.
+	 * @summary Suggested download filename when href is set. A nonempty value requests a download; browser and server rules determine whether it is honored.
 	 * @attr download
 	 */
 	public get download(): string {

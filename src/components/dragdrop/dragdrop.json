@@ -42,8 +42,8 @@
   "events": [
     {
       "name": "tp-dragdrop-drop",
-      "description": "Emitted when an item is dropped; consumers decide how to move it.",
-      "detail": "{ source: \"api\" | \"script\" | \"src\" | \"value\"; target: unknown; position: unknown }"
+      "description": "Emitted when a drop is requested by pointer or keyboard. The consumer must move source relative to target at position; the component does not move it automatically.",
+      "detail": "{ source: HTMLElement; target: HTMLElement | null; position: \"before\" | \"inside\" | \"after\" | null }"
     },
     {
       "name": "tp-dragdrop-end",
@@ -52,13 +52,13 @@
     },
     {
       "name": "tp-dragdrop-over",
-      "description": "Emitted when the drop target or position changes.",
-      "detail": "{ source: \"api\" | \"script\" | \"src\" | \"value\"; target: unknown; position: unknown }"
+      "description": "Emitted when the proposed target or relative insertion position changes; source and target identify HTML elements.",
+      "detail": "{ source: HTMLElement; target: HTMLElement | null; position: \"before\" | \"inside\" | \"after\" | null }"
     },
     {
       "name": "tp-dragdrop-start",
-      "description": "Emitted when a drag starts.",
-      "detail": "{ source: \"api\" | \"script\" | \"src\" | \"value\" }"
+      "description": "Emitted when an item is grabbed by pointer or keyboard; source is the dragged HTML element.",
+      "detail": "{ source: HTMLElement }"
     }
   ],
   "cssproperties": [],

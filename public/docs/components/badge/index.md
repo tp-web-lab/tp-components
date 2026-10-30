@@ -92,14 +92,14 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-badge-accent</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Accent color. |
-  | <code>&#45;&#45;tp-badge-background</code> | <code>transparent</code> | Background color. |
-  | <code>&#45;&#45;tp-badge-border-color</code> | <code>var(&#45;&#45;tp-badge-accent)</code> | Border color. |
-  | <code>&#45;&#45;tp-badge-font-size</code> | <code>1.125em</code> | Font size. |
-  | <code>&#45;&#45;tp-badge-foreground</code> | <code>var(&#45;&#45;tp-badge-accent)</code> | Text color. |
-  | <code>&#45;&#45;tp-badge-padding-block</code> | <code>0.6em</code> | Block padding. |
-  | <code>&#45;&#45;tp-badge-padding-inline</code> | <code>1em</code> | Inline padding. |
-  | <code>&#45;&#45;tp-badge-radius</code> | <code>999em</code> | Border radius. |
+  | <code>&#45;&#45;tp-badge-accent</code> | <code>var(&#45;&#45;tp-neutral-text-colorful)</code> | Accent color. |
+  | <code>&#45;&#45;tp-badge-background</code> | <code>var(&#45;&#45;tp-neutral-fill-softer)</code> | Background color. |
+  | <code>&#45;&#45;tp-badge-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Border color. |
+  | <code>&#45;&#45;tp-badge-font-size</code> | <code>0.875em</code> | Font size. |
+  | <code>&#45;&#45;tp-badge-foreground</code> | <code>var(&#45;&#45;tp-neutral-text-on-soft)</code> | Text color. |
+  | <code>&#45;&#45;tp-badge-padding-block</code> | <code>0.35em</code> | Block padding. |
+  | <code>&#45;&#45;tp-badge-padding-inline</code> | <code>0.7em</code> | Inline padding. |
+  | <code>&#45;&#45;tp-badge-radius</code> | <code>0.5em</code> | Border radius. |
   [CSS properties of `<tp-badge>`]
 :::
 <!-- /tp-docgen:api -->
@@ -107,6 +107,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_badge.TpBadge.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

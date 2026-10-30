@@ -106,9 +106,9 @@ export interface TpDragDropDropDetail {
  * @attr {string} items = "" - CSS selector for draggable items and drop targets within the root.
  * @attr {string} handle = "" - Optional CSS selector for a drag handle.
  *
- * @event tp-dragdrop-start Emitted when a drag starts.
- * @event tp-dragdrop-over Emitted when the drop target or position changes.
- * @event tp-dragdrop-drop Emitted when an item is dropped; consumers decide how to move it.
+
+
+
  * @event tp-dragdrop-end Emitted when a drag ends or a keyboard drag is cancelled.
  * @accessibility Adds a keyboard grab, navigation, drop and cancellation workflow to the configured items.
  * @accessibility Announces keyboard drag-and-drop state changes through a polite live region.
@@ -139,6 +139,12 @@ export interface TpDragDropDropDetail {
  *   <tp-dragdrop root="#dragdrop-board" items="[data-task]"></tp-dragdrop>
  *   <script src="/docs/components/dragdrop/examples/task-board.js"></script>
  * </tp-box>
+ * @event tp-dragdrop-start Emitted when an item is grabbed by pointer or keyboard; source is the dragged HTML element.
+ * @eventdetail tp-dragdrop-start { source: HTMLElement }
+ * @event tp-dragdrop-over Emitted when the proposed target or relative insertion position changes; source and target identify HTML elements.
+ * @eventdetail tp-dragdrop-over { source: HTMLElement; target: HTMLElement | null; position: "before" | "inside" | "after" | null }
+ * @event tp-dragdrop-drop Emitted when a drop is requested by pointer or keyboard. The consumer must move source relative to target at position; the component does not move it automatically.
+ * @eventdetail tp-dragdrop-drop { source: HTMLElement; target: HTMLElement | null; position: "before" | "inside" | "after" | null }
  */
 export class TpDragdrop extends TpBase {
 	/** Optional owning-component integration; standalone selector behavior is unchanged. */

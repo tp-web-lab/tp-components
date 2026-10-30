@@ -229,7 +229,11 @@ export default defineConfig({
 		testTimeout: 20_000,
 		environment: "jsdom",
 		css: true,
-		include: ["src/**/*.test.ts", "server/**/*.test.mjs"],
+		include: [
+			"src/**/*.test.ts",
+			"server/**/*.test.mjs",
+			"scripts/**/*.test.ts",
+		],
 		exclude: [
 			"src/**/*.browser.test.ts",
 			"src/**/*.playwright.test.ts",

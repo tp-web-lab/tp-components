@@ -11,7 +11,13 @@
   ],
   "attributes": [],
   "methods": [],
-  "events": [],
+  "events": [
+    {
+      "name": "tp-asciidoc-single-page-rendered",
+      "description": "Emitted after this page finishes rendering, immediately after tp-markup-single-page-rendered. language identifies the renderer and src is the resolved source used for this render.",
+      "detail": "{ language: \"html\" | \"markdown\" | \"asciidoc\" | \"restructuredtext\"; src: string }"
+    }
+  ],
   "cssproperties": [],
   "dependencies": [
     {

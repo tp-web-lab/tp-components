@@ -66,7 +66,7 @@ Attributes
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>size</code> | <code>string</code> | <code>&quot;1rem&quot;</code> | Icon and text size. |
+  | <code>size</code> | <code>string</code> | <code>&quot;1rem&quot;</code> | Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -98,6 +98,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_chronometer.TpChronometer.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

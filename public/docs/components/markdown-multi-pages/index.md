@@ -12,6 +12,8 @@ The default toolbar places Clock, Language (only when multiple languages are dec
 
 ## Usage
 
+Set `logo="/docs/medias/logos/logo-tp.svg"` to display a `tp-icon` at the start of the toolbar, at the default icon-button size (`2em`). Changing the attribute updates the logo; removing it or setting it to an empty value hides it. The logo is decorative and has no click action. Single-page documents also require the `toolbar` attribute.
+
 ### User interactions
 
 Personal annotations are saved per document in this browser's localStorage, without account synchronization. Clearing site data removes them. The [Post-it editor](../post-it-editor/index.md) offers an Annotation language dropdown: adoc, html, md, rst or txt (default). Source and language are saved together; rendered markup is sanitized and scripts are not executed. If a target changes or disappears, use Reattach from the annotations list; no guessed replacement is silently selected. Storage errors are displayed in the editor. Elements inside embedded iframes are outside this page's annotation scope.
@@ -87,13 +89,14 @@ Attributes
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>brand</code> | <code>string</code> | <code>&quot;tp-default&quot;</code> | Controls the brand. |
-  | <code>git</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the git. |
-  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the label. |
-  | <code>langs</code> | <code>string</code> | <code>&quot;&quot;</code> | Comma-separated language codes. The selector is hidden when absent, empty or limited to one distinct language; otherwise it displays the declared languages. |
-  | <code>menu</code> | <code>boolean</code> | <code>false</code> | Controls the menu. |
-  | <code>repository</code> | <code>string</code> | <code>&quot;/docs&quot;</code> | Controls the repository. |
-  | <code>theme</code> | <code>TpMarkdownMultiPagesTheme</code> | <code>&quot;&quot;</code> | Controls the theme. |
+  | <code>brand</code> | <code>string</code> | <code>&quot;tp-default&quot;</code> | Legacy brand preset property, such as tp-default. Attribute-driven styling is currently inactive; use the toolbar color control. |
+  | <code>git</code> | <code>string</code> | <code>&quot;&quot;</code> | Repository URL assigned to the toolbar source link when the document shell is created. Set before connecting the component. |
+  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Title displayed in the center of the document toolbar. |
+  | <code>langs</code> | <code>string</code> | <code>&quot;&quot;</code> | Comma-separated language codes. The selector is hidden unless at least two distinct codes are declared. |
+  | <code>logo</code> | <code>string</code> | <code>&quot;&quot;</code> | Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo. |
+  | <code>menu</code> | <code>boolean</code> | <code>false</code> | Opens the navigation sidebar when present; the toolbar Menu button toggles this attribute. |
+  | <code>repository</code> | <code>string</code> | <code>&quot;/docs&quot;</code> | Root path containing sidebar.md, cover.md and the linked Markdown pages. |
+  | <code>theme</code> | <code>TpMarkdownMultiPagesTheme</code> | <code>&quot;&quot;</code> | Legacy light, dark or auto property. Attribute-driven styling is currently inactive; use the toolbar theme control. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -115,7 +118,7 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-markdown-multi-pages-sidebar-width</code> | <code>12rem</code> | Controls the sidebar width. |
+  | <code>&#45;&#45;tp-markdown-multi-pages-sidebar-width</code> | <code>12rem</code> | Width of the overlay navigation sidebar on narrow screens, capped at 85% of its container; desktop sizing is controlled by the splitter. |
   [CSS properties of `<tp-markdown-multi-pages>`]
 :::
 <!-- /tp-docgen:api -->
@@ -123,6 +126,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markdown-multi-pages.TpMarkdownMultiPages.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 
@@ -462,6 +471,10 @@ All tp-components used by `<tp-markdown-multi-pages>` are loaded automatically b
 @summary Fullscreen controller button.
 -->
 <!--
+@tp-dependency tp-icon
+@summary SVG icon component with inline, URL, and registry sources.
+-->
+<!--
 @tp-dependency tp-icon-button
 @summary Accessible icon button component.
 -->
@@ -508,6 +521,7 @@ All tp-components used by `<tp-markdown-multi-pages>` are loaded automatically b
 - [`<tp-color>`](../color/index.md) : Brand color preset controller scoped to the containing element.
 - [`<tp-drawer>`](../drawer/index.md) : Drawer overlay component.
 - [`<tp-fullscreen>`](../fullscreen/index.md) : Fullscreen controller button.
+- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
 - [`<tp-lang>`](../lang/index.md) : Documentation language selector.
 - [`<tp-markdown>`](../markdown/index.md) : Markdown rendering component.

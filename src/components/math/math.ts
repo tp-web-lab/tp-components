@@ -28,7 +28,7 @@ export type TpMathMode = "latexmath" | "asciimath";
  * @tagname tp-math
  * @attr {string} value = "" - Expression without surrounding math delimiters.
  * @attr {string} src = "" - Expression file; takes precedence over value and inline content.
- * @attr {"latexmath" | "asciimath"} mode = "latexmath" - Mathematical input notation.
+ * @attr {"latexmath" | "asciimath"} mode = "latexmath" - Input notation: latexmath for LaTeX expressions or asciimath for ASCII math. Invalid values use latexmath.
  * @attr {boolean} displaystyle = false - Uses display-style mathematics in a centered block instead of inline mathematics.
  * @attr {string} label = "" - Accessible description of the formula; defaults to its source text.
  * @event tp-math-rendered Emitted after the current expression is rendered successfully.

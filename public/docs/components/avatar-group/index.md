@@ -94,8 +94,8 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-avatar-group-index</code> |  | Controls the index. |
-  | <code>&#45;&#45;tp-avatar-group-overlap</code> | <code>0.75rem</code> | Controls the overlap. |
+  | <code>&#45;&#45;tp-avatar-group-index</code> | <code>unset</code> | Stacking order of an individual avatar. Assigned internally on each child from its position and the order attribute; no static CSS default. |
+  | <code>&#45;&#45;tp-avatar-group-overlap</code> | <code>0.75rem</code> | Overlap distance between adjacent avatars along the current orientation; updated from the offset attribute. |
   [CSS properties of `<tp-avatar-group>`]
 :::
 <!-- /tp-docgen:api -->
@@ -103,6 +103,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_avatar-group.TpAvatarGroup.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

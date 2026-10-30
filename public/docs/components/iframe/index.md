@@ -71,16 +71,16 @@ Attributes
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>controls</code> | <code>boolean</code> | <code>false</code> | Affiche la barre de contrôles interne. |
-  | <code>fullscreen</code> | <code>boolean</code> | <code>false</code> | Autorise le mode plein écran. |
-  | <code>interaction</code> | <code>boolean</code> | <code>true</code> | Active ou désactive l’interaction pointeur avec l’iframe. Par défaut : `true`. |
-  | <code>loading</code> | <code>string</code> | <code>&quot;&quot;</code> | Politique de chargement : `lazy` ou `eager`. |
-  | <code>referrerpolicy</code> | <code>string</code> | <code>&quot;&quot;</code> | Politique `referrerpolicy`. |
-  | <code>sandbox</code> | <code>string</code> | <code>&quot;&quot;</code> | Valeur de l’attribut `sandbox` de l’iframe. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL du document à charger. |
-  | <code>srcdoc</code> | <code>string</code> | <code>&quot;&quot;</code> | Document HTML inline à afficher. |
-  | <code>zoom</code> | <code>number</code> | <code>1</code> | Niveau de zoom. Par défaut : `1`. |
-  | <code>zoom-levels</code> | <code>string</code> | <code>25% 50% 75% 100% 125% 150% 175% 200%</code> | Liste des niveaux de zoom disponibles. Par défaut : `25% 50% 75% 100% 125% 150% 175% 200%`. |
+  | <code>controls</code> | <code>boolean</code> | <code>false</code> | Shows the internal toolbar for zoom and frame actions; controls="false" hides it. |
+  | <code>fullscreen</code> | <code>boolean</code> | <code>false</code> | Allows the embedded document to request fullscreen when present. |
+  | <code>interaction</code> | <code>boolean</code> | <code>true</code> | Enables pointer interaction with the embedded document; interaction="false" blocks pointer events. Enabled by default. |
+  | <code>loading</code> | <code>string</code> | <code>&quot;&quot;</code> | Browser iframe loading policy: lazy defers offscreen loading; eager requests immediate loading. Absent leaves the browser default. |
+  | <code>referrerpolicy</code> | <code>string</code> | <code>&quot;&quot;</code> | Referrer policy forwarded to the iframe, for example no-referrer or strict-origin-when-cross-origin. Empty leaves the browser default. |
+  | <code>sandbox</code> | <code>string</code> | <code>&quot;&quot;</code> | Space-separated iframe sandbox permissions, for example allow-scripts. In this component, empty or absent removes the sandbox; an empty attribute does not enable the fully restricted native sandbox. |
+  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the document to embed; a nonempty srcdoc takes precedence. |
+  | <code>srcdoc</code> | <code>string</code> | <code>&quot;&quot;</code> | Inline HTML document to embed, taking precedence over src. |
+  | <code>zoom</code> | <code>number</code> | <code>1</code> | Nonnegative numeric magnification factor: 1 is 100%, 0.5 is 50%, and 2 is 200%. Invalid values use 1. |
+  | <code>zoom-levels</code> | <code>string</code> | <code>25% 50% 75% 100% 125% 150% 175% 200%</code> | Space-separated zoom choices offered in the toolbar, expressed as percentages, for example 50% 100% 150%. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -90,23 +90,23 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>getContentHeight</code> | <code>getContentHeight(): number</code> | Mesure la hauteur du contenu interne de l’iframe. |
-  | <code>resetZoom</code> | <code>resetZoom(value = 1): void</code> | Réinitialise le zoom. |
-  | <code>zoomIn</code> | <code>zoomIn(): void</code> | Augmente le zoom. |
-  | <code>zoomOut</code> | <code>zoomOut(): void</code> | Réduit le zoom. |
+  | <code>getContentHeight</code> | <code>getContentHeight(): number</code> | Returns the maximum scroll/offset height of the embedded document in CSS pixels. Returns 0 if its document is unavailable, including inaccessible cross-origin content. |
+  | <code>resetZoom</code> | <code>resetZoom(value = 1): void</code> | Sets the magnification factor to value; 1 restores 100%. Rejects negative or nonfinite values with TypeError. |
+  | <code>zoomIn</code> | <code>zoomIn(): void</code> | Selects the next larger configured zoom level, capped at the largest available level. |
+  | <code>zoomOut</code> | <code>zoomOut(): void</code> | Selects the next smaller configured zoom level, capped at the smallest available level. |
   [Public methods of `TpIframe`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-iframe-change</code> | <code>&#123; interaction: unknown; overflowWidth: unknown; scrollPosition: unknown; zoom: unknown; zoomText: unknown &#125;</code> | Émis quand l’état visible de l’iframe change. |
-  | <code>tp-iframe-load</code> | <code>&#123; contentHeight: unknown; hasSrcdoc: unknown; src: unknown &#125;</code> | Émis après le chargement de l’iframe interne. |
+  | <code>tp-iframe-change</code> | <code>&#123; interaction: boolean; overflowWidth: number; scrollPosition: number; zoom: number; zoomText: string &#125;</code> | Emitted when zoom, interaction or horizontal viewport state is refreshed. overflowWidth and scrollPosition are in CSS pixels, zoom is a scale factor, and zoomText is its percentage label. |
+  | <code>tp-iframe-load</code> | <code>&#123; contentHeight: number; hasSrcdoc: boolean; src: string &#125;</code> | Emitted after the inner iframe loads and its layout is refreshed. contentHeight is in CSS pixels (0 when inaccessible), hasSrcdoc indicates inline content, and src is the configured URL. |
   [Events emitted by `<tp-iframe>`]
 
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-iframe-zoom</code> | <code>1</code> | Controls the zoom. |
+  | <code>&#45;&#45;tp-iframe-zoom</code> | <code>1</code> | Unitless scale factor applied to iframe content (1 means 100%); synchronized with the zoom attribute. |
   [CSS properties of `<tp-iframe>`]
 :::
 <!-- /tp-docgen:api -->
@@ -114,6 +114,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_iframe.TpIframe.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

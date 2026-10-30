@@ -13,7 +13,12 @@
   "methods": [],
   "events": [],
   "cssproperties": [],
-  "dependencies": [],
+  "dependencies": [
+    {
+      "name": "tp-notebook",
+      "summary": "Interactive notebook combining markup and executable code cells."
+    }
+  ],
   "credits": [],
   "userHelp": {
     "displayName": "TypeScript Notebook",

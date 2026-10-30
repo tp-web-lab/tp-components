@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "background",
-      "description": "Controls the background.",
+      "description": "CSS color of the drawing background, or transparent.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -21,7 +21,7 @@
     },
     {
       "name": "download-name",
-      "description": "Controls the download name.",
+      "description": "Filename for SVG downloads. The .svg extension is appended when missing; empty uses turtle.svg.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -30,7 +30,7 @@
     },
     {
       "name": "height",
-      "description": "Controls the height.",
+      "description": "Drawing coordinate height as a number; also determines the SVG aspect ratio. Use a positive value for a visible drawing.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -39,7 +39,7 @@
     },
     {
       "name": "label",
-      "description": "Controls the label.",
+      "description": "Optional caption displayed below the drawing.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -48,7 +48,7 @@
     },
     {
       "name": "replay-label",
-      "description": "Controls the replay label.",
+      "description": "Text of the button that replays the drawing commands; empty uses Replay.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -57,7 +57,7 @@
     },
     {
       "name": "save-label",
-      "description": "Controls the save label.",
+      "description": "Text of the SVG download button; empty uses Save SVG.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -66,7 +66,7 @@
     },
     {
       "name": "src",
-      "description": "Controls the src.",
+      "description": "URL of a Turtle program; takes precedence over the inline tp/turtle script.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -75,7 +75,7 @@
     },
     {
       "name": "width",
-      "description": "Controls the width.",
+      "description": "Drawing coordinate width as a number; also determines the SVG aspect ratio. Use a positive value for a visible drawing. The SVG remains responsive.",
       "reflected": true,
       "static": false,
       "inherited": false,

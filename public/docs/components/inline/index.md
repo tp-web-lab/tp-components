@@ -93,7 +93,7 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-inline-gap</code> | <code>0.5rem</code> | Controls the gap. |
+  | <code>&#45;&#45;tp-inline-gap</code> | <code>0.5rem</code> | Space between adjacent items in the single horizontal row. |
   [CSS properties of `<tp-inline>`]
 :::
 <!-- /tp-docgen:api -->
@@ -101,6 +101,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_inline.TpInline.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

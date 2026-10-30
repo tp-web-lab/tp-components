@@ -8,10 +8,6 @@
  * @tp-dependency tp-base
  * @summary Shared base class for tp-* components.
  */
-/**
- * @credit tp-asciidoc https://www.npmjs.com/package/@tp/tp-asciidoc
- * @summary AsciiDoc parsing and rendering.
- */
 // tp-docgen:dependencies:end
 
 import type { TpAsciidocParser } from "@tp/tp-asciidoc";

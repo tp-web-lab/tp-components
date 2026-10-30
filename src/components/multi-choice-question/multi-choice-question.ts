@@ -33,10 +33,10 @@ import "../checkbox-list/checkbox-list.js";
  *
  * @attr {string} answer = "" - Comma-separated 1-based indexes of the correct answers in the original list order (e.g. `"1,3"`). An empty answer means none of the choices is correct. Not reflected back to the DOM when set via JS property — read from attribute only.
  * @attr {boolean} random = false - When present, items are shuffled on connect and after each reset.
- * @attr {string} name = "" - Name attribute passed to the underlying tp-checkbox-list.
- * @attr {string} orientation = "" - Orientation attribute passed to the underlying tp-checkbox-list.
- * @attr {string} value = "" - Value attribute passed to the underlying tp-checkbox-list.
- * @attr {string} src = "" - URL to an external JSON file describing items, answer, and feedback. When present, the answer is never exposed in the HTML source. Inherited from TpQuestion.
+ * @attr {string} name = "" - Form field name passed to the underlying choice list.
+ * @attr {string} orientation = "" - Arrangement of answer choices: horizontal or vertical.
+ * @attr {string} value = "" - Comma-separated 1-based indexes of the currently selected answers; empty means no selection.
+ * @attr {string} src = "" - URL of an external JSON, HTML, Markdown, AsciiDoc or reStructuredText question definition. Keeps the definition out of authored markup, but does not make downloaded answers confidential.
  * @example
  * <tp-multi-choice-question></tp-multi-choice-question>
  */

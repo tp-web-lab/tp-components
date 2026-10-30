@@ -92,14 +92,14 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-radio-list-change</code> | <code>&#123; value: string; label: unknown &#125;</code> | Emitted when selected value changes (`detail: { value, label }`). |
+  | <code>tp-radio-list-change</code> | <code>&#123; value: string; label: string &#125;</code> | Emitted after a selection change. value is the selected 1-based item index as a string; label is its visible label. Both are empty when nothing is selected. |
   [Events emitted by `<tp-radio-list>`]
 
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-radio-list-marker-gap</code> | <code>0.5em</code> | Controls the marker gap. |
-  | <code>&#45;&#45;tp-radio-list-marker-width</code> | <code>2ch</code> | Controls the marker width. |
+  | <code>&#45;&#45;tp-radio-list-marker-gap</code> | <code>0.5em</code> | Horizontal space between each selection marker and its item content. |
+  | <code>&#45;&#45;tp-radio-list-marker-width</code> | <code>2ch</code> | Width reserved for each selection marker; aligns the item content in both orientations. |
   [CSS properties of `<tp-radio-list>`]
 :::
 <!-- /tp-docgen:api -->
@@ -107,6 +107,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_radio-list.TpRadioList.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

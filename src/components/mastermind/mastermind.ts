@@ -14,7 +14,7 @@
  */
 /**
  * @tp-dependency tp-dropdown
- * @summary Displays an anchored dropdown menu.
+ * @summary Dropdown menu component.
  */
 /**
  * @tp-dependency tp-icon-button
@@ -334,9 +334,7 @@ export class TpMastermind extends TpBase {
 				const color = button.dataset.color as MastermindColor;
 				this.selectedColor = color;
 				const firstEmpty =
-					this.guesses[this.currentAttempt]?.findIndex(
-						(value) => value === null,
-					) ?? -1;
+					this.guesses[this.currentAttempt]?.indexOf(null) ?? -1;
 				if (firstEmpty >= 0) {
 					this.setPeg(firstEmpty, color);
 				} else {
@@ -445,7 +443,7 @@ export class TpMastermind extends TpBase {
 
 		if (action === "show-peg") {
 			const guess = this.guesses[this.currentAttempt];
-			const empty = guess?.findIndex((color) => color === null) ?? -1;
+			const empty = guess?.indexOf(null) ?? -1;
 			if (guess && empty >= 0) guess[empty] = this.solution[empty] ?? null;
 		} else if (action === "show-solution") {
 			this.guesses[this.currentAttempt] = [...this.solution];

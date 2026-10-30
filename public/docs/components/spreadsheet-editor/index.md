@@ -134,25 +134,25 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>deleteColumn</code> | <code>deleteColumn(): void</code> | Deletes column. |
-  | <code>deleteRow</code> | <code>deleteRow(): void</code> | Deletes row. |
-  | <code>exportFile</code> | <code>exportFile(format: TpSpreadsheetFileFormat, filename = &quot;spreadsheet&quot;, mode: TpSpreadsheetExportMode = &quot;formulas&quot;): void</code> | Exports file. |
-  | <code>getData</code> | <code>getData(): string[][]</code> | Returns data. |
-  | <code>importFile</code> | <code>importFile(file: File): Promise&lt;void&gt;</code> | Imports file. |
-  | <code>insertColumn</code> | <code>insertColumn(position: &quot;before&quot; \| &quot;after&quot; = &quot;after&quot;): void</code> | Inserts column. |
-  | <code>insertRow</code> | <code>insertRow(position: &quot;before&quot; \| &quot;after&quot; = &quot;after&quot;): void</code> | Inserts row. |
-  | <code>setData</code> | <code>setData(value: readonly (readonly unknown[])[]): void</code> | Sets data. |
+  | <code>deleteColumn</code> | <code>deleteColumn(): void</code> | Deletes the active column, adjusts selection, clears cell formatting and emits a structure-change event. Preserves the last remaining column. |
+  | <code>deleteRow</code> | <code>deleteRow(): void</code> | Deletes the active row, adjusts selection, clears cell formatting and emits a structure-change event. Preserves the last remaining row. |
+  | <code>exportFile</code> | <code>exportFile(format: TpSpreadsheetFileFormat, filename = &quot;spreadsheet&quot;, mode: TpSpreadsheetExportMode = &quot;formulas&quot;): void</code> | Downloads CSV, JSON or XLSX using filename plus the extension. The formulas mode preserves raw formulas; values exports calculated cell results. |
+  | <code>getData</code> | <code>getData(): string[][]</code> | Returns a row-by-row copy of raw cell strings, including formulas rather than calculated results. |
+  | <code>importFile</code> | <code>importFile(file: File): Promise&lt;void&gt;</code> | Loads CSV, JSON or the first XLSX sheet into the editor, records undo state and emits tp-spreadsheet-editor-import. Resolves after application; unsupported or invalid files reject. |
+  | <code>insertColumn</code> | <code>insertColumn(position: &quot;before&quot; \| &quot;after&quot; = &quot;after&quot;): void</code> | Inserts an empty column before or after the active cell, selects it, clears cell formatting and emits a structure-change event. Does nothing without a valid active cell. |
+  | <code>insertRow</code> | <code>insertRow(position: &quot;before&quot; \| &quot;after&quot; = &quot;after&quot;): void</code> | Inserts an empty row before or after the active cell, selects it, clears cell formatting and emits a structure-change event. Does nothing without a valid active cell. |
+  | <code>setData</code> | <code>setData(value: readonly (readonly unknown[])[]): void</code> | Replaces the matrix, converts values to strings and pads missing cells with empty strings. Updates rows, columns and value, retaining at least one row and column. |
   [Public methods of `TpSpreadsheetEditor`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-spreadsheet-editor-clipboard-error</code> | <code>&#123; command: unknown &#125;</code> | Emitted when spreadsheet editor clipboard error occurs. |
-  | <code>tp-spreadsheet-editor-error</code> | <code>&#123; src: unknown; error: unknown &#125;</code> | Emitted when loading src fails; detail contains src and error. |
-  | <code>tp-spreadsheet-editor-export</code> | <code>&#123; format: unknown; filename: string &#125;</code> | Emitted after a file is exported. |
-  | <code>tp-spreadsheet-editor-import</code> | <code>&#123; format: unknown; file: unknown &#125;</code> | Emitted after a file is imported. |
-  | <code>tp-spreadsheet-editor-input</code> | <code>&#123; cell: unknown; raw: unknown; value: string &#125;</code> | Emitted whenever a cell changes. |
-  | <code>tp-spreadsheet-editor-structure</code> | <code>&#123; action: unknown; index: unknown; rows: unknown; columns: unknown &#125;</code> | Emitted after rows or columns change. |
+  | <code>tp-spreadsheet-editor-clipboard-error</code> | <code>&#123; command: &quot;copy&quot; \| &quot;cut&quot; \| &quot;paste&quot; &#125;</code> | Emitted when a clipboard command fails; command identifies copy, cut or paste. |
+  | <code>tp-spreadsheet-editor-error</code> | <code>&#123; src: string; error: unknown &#125;</code> | Emitted when fetching or parsing src fails, except for aborted requests; src is the requested URL and error is the caught failure. |
+  | <code>tp-spreadsheet-editor-export</code> | <code>&#123; format: &quot;csv&quot; \| &quot;json&quot; \| &quot;xlsx&quot;; filename: string &#125;</code> | Emitted after a CSV, JSON or XLSX download is prepared; filename includes the extension. |
+  | <code>tp-spreadsheet-editor-import</code> | <code>&#123; format: string; file: File &#125;</code> | Emitted after an imported file replaces the sheet; format is the detected filename extension and file is the selected File object. |
+  | <code>tp-spreadsheet-editor-input</code> | <code>&#123; cell: string; raw: string; value: string \| number \| boolean \| Date &#125;</code> | Emitted for each edited or cleared cell. cell is its A1 reference, raw is the stored input or formula, and value is the evaluated result. |
+  | <code>tp-spreadsheet-editor-structure</code> | <code>&#123; action: &quot;insert-row&quot; \| &quot;delete-row&quot; \| &quot;insert-column&quot; \| &quot;delete-column&quot;; index: number; rows: number; columns: number &#125;</code> | Emitted after inserting or deleting a row or column. index is zero-based; rows and columns are the resulting dimensions. |
   [Events emitted by `<tp-spreadsheet-editor>`]
 
 CSS properties
@@ -166,6 +166,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_spreadsheet-editor.TpSpreadsheetEditor.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 
@@ -243,7 +249,7 @@ All tp-components used by `<tp-spreadsheet-editor>` are loaded automatically by 
 -->
 <!--
 @tp-dependency tp-dropdown
-@summary Displays an anchored dropdown menu.
+@summary Dropdown menu component.
 -->
 <!--
 @tp-dependency tp-formula-picker
@@ -272,7 +278,7 @@ All tp-components used by `<tp-spreadsheet-editor>` are loaded automatically by 
 
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
 - [`<tp-color>`](../color/index.md) : Brand color preset controller scoped to the containing element.
-- [`<tp-dropdown>`](../dropdown/index.md) : Displays an anchored dropdown menu.
+- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
 - [`<tp-formula-picker>`](../formula-picker/index.md) : Selects an Excel-compatible Formula.js function. *
 - [`<tp-fullscreen>`](../fullscreen/index.md) : Fullscreen controller button.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.

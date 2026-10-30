@@ -6,7 +6,7 @@
 // tp-docgen:dependencies:start
 /**
  * @tp-dependency tp-accordion
- * @summary Accessible accordion component with keyboard navigation and ARIA mapping.
+ * @summary Collapsible multi-panels element.
  */
 /**
  * @tp-dependency tp-base
@@ -26,7 +26,7 @@
  */
 /**
  * @tp-dependency tp-dropdown
- * @summary Displays an anchored dropdown menu.
+ * @summary Dropdown menu component.
  */
 /**
  * @tp-dependency tp-fullscreen
@@ -415,11 +415,23 @@ const ANNOTATION_PALETTE: TpGraphPalette = {
  * @attr {number} grid-size = 20 - Grid spacing in graph units.
  * @attr {boolean} ports-visible = false - Keeps attachment plots visible instead of showing them only on hover.
  * @attr {string} message = "" - Status message displayed by the graph editor.
- * @event tp-graph-change Fired after a user or API graph mutation.
- * @event tp-graph-selection-change Fired when the selection changes.
- * @event tp-graph-simulation-step Fired after a simulator step.
+
+
+
  * @example
  * <tp-graph-editor></tp-graph-editor>
+ * @event tp-graph-change Emitted after a recorded graph mutation, JSON edit, undo or redo. reason identifies the operation and graph contains the resulting snapshot.
+ * @eventdetail tp-graph-change { reason: string; graph: TpGraphDocument }
+ * @event tp-graph-error Emitted when loading src or creating/reconnecting an edge fails. operation identifies the failed action; src is included only for load-src.
+ * @eventdetail tp-graph-error { error: unknown; operation: "load-src" | "reconnect-edge" | "add-edge"; src?: string }
+ * @event tp-graph-export Emitted after the graph export has been saved; graph contains the exported graph snapshot.
+ * @eventdetail tp-graph-export { graph: TpGraphDocument }
+ * @event tp-graph-import Emitted after importJSON validates and installs a graph; graph contains the imported snapshot.
+ * @eventdetail tp-graph-import { graph: TpGraphDocument }
+ * @event tp-graph-selection-change Emitted when the selection is synchronized. id is the primary selection or null, and ids lists all selected element identifiers.
+ * @eventdetail tp-graph-selection-change { id: string | null; ids: string[] }
+ * @event tp-graph-simulation-step Emitted after a registered simulator step and its transition animation complete; simulator is its registered name and graph is the resulting snapshot.
+ * @eventdetail tp-graph-simulation-step { simulator: string; graph: TpGraphDocument }
  */
 export class TpGraphEditor extends TpBase {
 	private static readonly styleId = "tp-graph-editor-styles";
@@ -609,6 +621,9 @@ export class TpGraphEditor extends TpBase {
 		this.render();
 	}
 
+	/**
+	 * @summary Validates and clones the supplied graph, clears selection and rerenders it. After initialization, a changed graph is recorded in undo history; invalid graphs throw before replacement.
+	 */
 	public setGraph(graph: TpGraphDocument): void {
 		this.validateGraph(graph);
 		const previous = cloneGraph(this.graphValue);
@@ -627,6 +642,9 @@ export class TpGraphEditor extends TpBase {
 		if (this.isConnected) this.render();
 	}
 
+	/**
+	 * @summary Copies the selected graph elements and connecting edges into the editor-local clipboard. Returns false when nothing is selected; does not use the system clipboard.
+	 */
 	public copy(): boolean {
 		if (this.selectedIds.size === 0) return false;
 		const nodeIds = new Set(
@@ -652,6 +670,9 @@ export class TpGraphEditor extends TpBase {
 		return true;
 	}
 
+	/**
+	 * @summary Copies the selection into the editor-local clipboard, then removes it and connected edges as an undoable change. Returns false when readonly or nothing is selected.
+	 */
 	public cut(): boolean {
 		if (this.readonly || !this.copy()) return false;
 		const removedIds = new Set(this.selectedIds);
@@ -670,6 +691,9 @@ export class TpGraphEditor extends TpBase {
 		return true;
 	}
 
+	/**
+	 * @summary Duplicates the editor-local clipboard with new IDs and an offset, then selects the copies. Returns the first pasted ID, or null when readonly or no clipboard content is available.
+	 */
 	public paste(): string | null {
 		if (this.readonly || !this.clipboard) return null;
 		this.pasteCount += 1;
@@ -719,6 +743,9 @@ export class TpGraphEditor extends TpBase {
 		return pastedIds[0] ?? null;
 	}
 
+	/**
+	 * @summary Restores the preceding graph snapshot and returns true; returns false when undo history is empty.
+	 */
 	public undo(): boolean {
 		const graph = this.undoStack.pop();
 		if (!graph) return false;
@@ -727,6 +754,9 @@ export class TpGraphEditor extends TpBase {
 		return true;
 	}
 
+	/**
+	 * @summary Restores the next undone graph snapshot and returns true; returns false when redo history is empty.
+	 */
 	public redo(): boolean {
 		const graph = this.redoStack.pop();
 		if (!graph) return false;
@@ -735,6 +765,9 @@ export class TpGraphEditor extends TpBase {
 		return true;
 	}
 
+	/**
+	 * @summary Registers or replaces a shape palette by its ID and refreshes the palette UI. Requires a nonempty ID and at least one shape.
+	 */
 	public registerPalette(palette: TpGraphPalette): void {
 		if (!palette.id || palette.shapes.length === 0)
 			throw new TypeError("A palette needs an id and at least one shape.");
@@ -744,6 +777,9 @@ export class TpGraphEditor extends TpBase {
 		if (this.isConnected && this.initialized) this.render();
 	}
 
+	/**
+	 * @summary Removes the palette with the supplied ID and selects a remaining shape if needed; does not remove existing graph nodes.
+	 */
 	public unregisterPalette(id: string): void {
 		const removed = this.palettes.get(id);
 		this.palettes.delete(id);
@@ -754,10 +790,16 @@ export class TpGraphEditor extends TpBase {
 		if (this.isConnected && this.initialized) this.render();
 	}
 
+	/**
+	 * @summary Registers or replaces the simulator function associated with name for subsequent step(name) calls.
+	 */
 	public registerSimulator(name: string, simulator: TpGraphSimulator): void {
 		this.simulators.set(name, simulator);
 	}
 
+	/**
+	 * @summary Sets a positive finite magnification factor, clamped to the supported zoom range. A value of 1 means 100%; invalid inputs throw TypeError.
+	 */
 	public setZoom(value: number): void {
 		if (!Number.isFinite(value) || value <= 0)
 			throw new TypeError("The zoom must be a positive finite number.");
@@ -768,22 +810,37 @@ export class TpGraphEditor extends TpBase {
 		if (this.isConnected && this.initialized) this.render();
 	}
 
+	/**
+	 * @summary Increases magnification by the configured zoom factor, up to the supported maximum.
+	 */
 	public zoomIn(): void {
 		this.setZoom(this.zoomValue * TpGraphEditor.zoomFactor);
 	}
 
+	/**
+	 * @summary Decreases magnification by the configured zoom factor, down to the supported minimum.
+	 */
 	public zoomOut(): void {
 		this.setZoom(this.zoomValue / TpGraphEditor.zoomFactor);
 	}
 
+	/**
+	 * @summary Restores magnification to 1 (100%) without changing graph data.
+	 */
 	public resetZoom(): void {
 		this.setZoom(1);
 	}
 
+	/**
+	 * @summary Returns the graph serialized as JSON; pretty uses two-space indentation, while false produces compact JSON.
+	 */
 	public exportJson(pretty = true): string {
 		return JSON.stringify(this.value, null, pretty ? 2 : 0);
 	}
 
+	/**
+	 * @summary Returns a standalone SVG of the graph with resolved styles and content bounds; throws when the canvas is not ready.
+	 */
 	public exportSvg(): string {
 		const canvas = this.querySelector<SVGSVGElement>(".tp-graph-canvas");
 		if (!canvas) throw new Error("The graph canvas is not ready.");
@@ -938,6 +995,9 @@ export class TpGraphEditor extends TpBase {
 		};
 	}
 
+	/**
+	 * @summary Parses and validates a JSON graph, replaces the current graph and emits tp-graph-import. Invalid JSON or graph data throws before replacement.
+	 */
 	public importJson(source: string): void {
 		const parsed: unknown = JSON.parse(source);
 		this.validateGraph(parsed);
@@ -950,6 +1010,9 @@ export class TpGraphEditor extends TpBase {
 		);
 	}
 
+	/**
+	 * @summary Sets the trimmed label of a node, edge or measurement by ID; empty clears the label. Throws for an unknown element.
+	 */
 	public setElementLabel(id: string, label: string): void {
 		const measurement = this.measurement(id);
 		if (measurement) {
@@ -972,12 +1035,18 @@ export class TpGraphEditor extends TpBase {
 		this.changed("label");
 	}
 
+	/**
+	 * @summary Trims and stores the graph title, then records an undoable change; an empty string removes visible title text.
+	 */
 	public setTitle(title: string): void {
 		const normalized = title.trim();
 		this.graphValue.title = normalized;
 		this.changed("set-title");
 	}
 
+	/**
+	 * @summary Changes the color of a comment node and records the change; throws for an unknown comment or unsupported color.
+	 */
 	public setCommentColor(id: string, color: TpGraphCommentColor): void {
 		if (!GRAPH_COMMENT_COLORS.includes(color))
 			throw new TypeError(`Unsupported comment color: ${color}`);
@@ -988,6 +1057,9 @@ export class TpGraphEditor extends TpBase {
 		this.changed("set-comment-color");
 	}
 
+	/**
+	 * @summary Adds a node of type at graph coordinates point, snapped to the grid. Uses label or the palette default, records the change and returns a detached copy of the node.
+	 */
 	public addNode(
 		type: string,
 		point: TpGraphPoint,
@@ -1007,6 +1079,9 @@ export class TpGraphEditor extends TpBase {
 		return structuredClone(node);
 	}
 
+	/**
+	 * @summary Connects existing source and target node IDs using the requested type, ports, direction and routing. Rejects invalid connections, records the change and returns a detached edge copy.
+	 */
 	public addEdge(
 		source: string,
 		target: string,
@@ -1040,6 +1115,9 @@ export class TpGraphEditor extends TpBase {
 		return structuredClone(edge);
 	}
 
+	/**
+	 * @summary Adds a measurement marker to edgeId at a position clamped to 0..1 along the edge; returns its detached record. Throws for an unknown edge.
+	 */
 	public addMeasurement(
 		edgeId: string,
 		position = 0.5,
@@ -1062,6 +1140,9 @@ export class TpGraphEditor extends TpBase {
 		return structuredClone(measurement);
 	}
 
+	/**
+	 * @summary Moves the marker identified by id to a relative edge position clamped to 0..1; throws when the marker is unknown.
+	 */
 	public moveMeasurement(id: string, position: number): void {
 		const found = this.measurement(id);
 		if (!found) throw new TypeError(`Unknown graph measurement: ${id}`);
@@ -1073,6 +1154,9 @@ export class TpGraphEditor extends TpBase {
 		this.changed("move-measurement");
 	}
 
+	/**
+	 * @summary Moves the source or target endpoint of edgeId to nodeId and port after connection validation; returns a detached copy of the updated edge.
+	 */
 	public reconnectEdge(
 		edgeId: string,
 		endpoint: "source" | "target",
@@ -1112,6 +1196,9 @@ export class TpGraphEditor extends TpBase {
 		return structuredClone(edge);
 	}
 
+	/**
+	 * @summary Changes an existing edge direction and the default for new edges; throws for an unknown edge or a direction unsupported by this editor.
+	 */
 	public setEdgeDirection(
 		edgeId: string,
 		direction: TpGraphEdgeDirection,
@@ -1128,6 +1215,9 @@ export class TpGraphEditor extends TpBase {
 		this.changed("set-edge-direction");
 	}
 
+	/**
+	 * @summary Changes an existing edge routing mode and the default for new edges; throws for an unknown edge.
+	 */
 	public setEdgeRouting(edgeId: string, routing: TpGraphEdgeRouting): void {
 		const edge = this.graphValue.edges.find(
 			(candidate) => candidate.id === edgeId,
@@ -1138,6 +1228,9 @@ export class TpGraphEditor extends TpBase {
 		this.changed("set-edge-routing");
 	}
 
+	/**
+	 * @summary Uses orthogonal routing with 1, 2 or 3 elbows and a horizontal or vertical departure. The turns choice applies to two elbows; throws for an unknown edge.
+	 */
 	public setEdgeOrthogonal(
 		edgeId: string,
 		elbows: 1 | 2 | 3,
@@ -1172,6 +1265,9 @@ export class TpGraphEditor extends TpBase {
 		}
 	}
 
+	/**
+	 * @summary Removes the node, edge or measurement identified by id; removing a node also removes its connected edges. Updates selection and records an undoable change.
+	 */
 	public removeElement(id: string): void {
 		this.graphValue.nodes = this.graphValue.nodes.filter(
 			(node) => node.id !== id,
@@ -1185,6 +1281,9 @@ export class TpGraphEditor extends TpBase {
 		this.changed("remove");
 	}
 
+	/**
+	 * @summary Runs the simulator registered as simulatorName on a graph snapshot, awaits its animated transition and emits tp-graph-simulation-step. Throws for an unknown simulator.
+	 */
 	public async step(simulatorName: string): Promise<void> {
 		const simulator = this.simulators.get(simulatorName);
 		if (!simulator)
@@ -1199,6 +1298,9 @@ export class TpGraphEditor extends TpBase {
 		);
 	}
 
+	/**
+	 * @summary Applies node and edge patches to existing IDs, animates their appearance for transition.duration milliseconds (300 by default), then records the change. Resolves after that duration.
+	 */
 	public async animateTransition(transition: TpGraphTransition): Promise<void> {
 		for (const [id, patch] of Object.entries(transition.nodes ?? {})) {
 			const node = this.node(id);

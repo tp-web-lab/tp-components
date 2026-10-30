@@ -70,8 +70,8 @@ Attributes
   | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Disables the trigger. |
   | <code>filename</code> | <code>string</code> | <code>&quot;image&quot;</code> | Download filename without its extension. |
   | <code>name</code> | <code>string</code> | <code>&quot;image-download&quot;</code> | Icon used by the trigger. |
-  | <code>size</code> | <code>string</code> | <code>&quot;m&quot;</code> | Icon button size. |
-  | <code>variant</code> | <code>string</code> | <code>&quot;neutral&quot;</code> | Icon button variant. |
+  | <code>size</code> | <code>string</code> | <code>&quot;m&quot;</code> | Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl. |
+  | <code>variant</code> | <code>string</code> | <code>&quot;neutral&quot;</code> | Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -81,7 +81,7 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>save</code> | <code>save(format: TpSaveImageFormat): Promise&lt;void&gt;</code> | Save. |
+  | <code>save</code> | <code>save(format: TpSaveImageFormat): Promise&lt;void&gt;</code> | Saves the anchored image or exportable component as svg, png or webp using filename. Resolves after saving or cancellation; unsupported formats and missing targets reject. |
   [Public methods of `TpSaveImage`]
 
 Events
@@ -102,6 +102,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_save-image.TpSaveImage.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 
@@ -422,7 +428,11 @@ All tp-components used by `<tp-save-image>` are loaded automatically by this com
 -->
 <!--
 @tp-dependency tp-dropdown
-@summary Displays an anchored dropdown menu.
+@summary Dropdown menu component.
+-->
+<!--
+@tp-dependency tp-icon
+@summary SVG icon component with inline, URL, and registry sources.
 -->
 <!--
 @tp-dependency tp-icon-button
@@ -430,7 +440,8 @@ All tp-components used by `<tp-save-image>` are loaded automatically by this com
 -->
 
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-dropdown>`](../dropdown/index.md) : Displays an anchored dropdown menu.
+- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
+- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
 
 ### External

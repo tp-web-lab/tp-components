@@ -32,7 +32,7 @@ test('replaces a manual Imports section without touching adjacent content', () =
 });
 
 test('handles a final section and preserves a following heading', () => {
-  assert.equal(syncImports('### Imports\nOld', 'example'), `### Imports\n\n${imports('example')}\n\n`);
+  assert.equal(syncImports('### Imports\nOld', 'example'), `### Imports\n\n${imports('example')}\n`);
   assert.ok(syncImports('### Imports\nOld\n### Next\nKeep', 'example').endsWith('### Next\nKeep'));
 });
 
@@ -45,4 +45,12 @@ test('inserts missing Imports after the generated API', () => {
 test('the text-to-speech Imports section matches the shared generator', () => {
   const markdown = readFileSync(new URL('../public/docs/components/text-to-speech/index.md', import.meta.url), 'utf8');
   assert.equal(syncImports(markdown, 'text-to-speech'), markdown);
+});
+
+
+test('Imports synchronization preserves a following TypeDoc link', () => {
+  const link = '<!-- tp-docgen:typedoc:start -->\n[More details…](/api/classes/example.html)\n<!-- tp-docgen:typedoc:end -->\n';
+  const result = syncImports('### Imports\nOld imports\n\n' + link, 'example');
+  assert.ok(result.endsWith(link));
+  assert.equal(syncImports(result, 'example'), result);
 });

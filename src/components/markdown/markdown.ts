@@ -95,8 +95,11 @@ export async function renderMarkdownRuntimeIn(
 /**
  * @summary Markdown rendering component.
  * @tagname tp-markdown
+ * @attr {string} src = "" - URL of a Markdown source file to fetch and render; relative paths resolve against the containing source document when available.
  * @example
  * <tp-markdown><script type="tp/markdown">This paragraph uses **Markdown**.</script></tp-markdown>
+ * @event tp-markdown-rendered Emitted after Markdown and its runtime extensions are rendered, or after a source/conversion error is displayed. This event alone does not indicate successful conversion.
+ * @eventdetail tp-markdown-rendered void
  */
 export class TpMarkdown extends TpBase {
 	public static get observedAttributes(): string[] {

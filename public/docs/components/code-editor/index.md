@@ -504,6 +504,12 @@ CSS properties
 
 
 
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -556,7 +562,7 @@ All tp-components used by `<tp-code-editor>` are loaded automatically by this co
 -->
 <!--
 @tp-dependency tp-dropdown
-@summary Displays an anchored dropdown menu.
+@summary Dropdown menu component.
 -->
 <!--
 @tp-dependency tp-fullscreen
@@ -576,19 +582,19 @@ All tp-components used by `<tp-code-editor>` are loaded automatically by this co
 -->
 <!--
 @tp-dependency tp-tooltip
-@summary Displays anchored tooltip content.
+@summary Tooltip component.
 -->
 
 - [`<tp-badge>`](../badge/index.md) : Badge component for compact status labels.
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
 - [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
 - [`<tp-copy-code>`](../copy-code/index.md) : Copy-to-clipboard button component.
-- [`<tp-dropdown>`](../dropdown/index.md) : Displays an anchored dropdown menu.
+- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
 - [`<tp-fullscreen>`](../fullscreen/index.md) : Fullscreen controller button.
 - [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
 - [`<tp-theme>`](../theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
-- [`<tp-tooltip>`](../tooltip/index.md) : Displays anchored tooltip content.
+- [`<tp-tooltip>`](../tooltip/index.md) : Tooltip component.
 
 ### External
 

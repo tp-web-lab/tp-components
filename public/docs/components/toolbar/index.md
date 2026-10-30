@@ -94,7 +94,7 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>addButtonToSection</code> | <code>addButtonToSection(button: HTMLElement, section: string): void</code> | Adds button to section. |
+  | <code>addButtonToSection</code> | <code>addButtonToSection(button: HTMLElement, section: string): void</code> | Moves the supplied element into section start, center or end. Throws if the toolbar is not initialized or the section name is invalid. |
   [Public methods of `TpToolbar`]
 
 Events
@@ -106,11 +106,11 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-toolbar-gap</code> | <code>0.25rem</code> | Controls the gap. |
-  | <code>&#45;&#45;tp-toolbar-padding</code> | <code>0.25rem 0.5rem</code> | Controls the padding. |
-  | <code>&#45;&#45;tp-toolbar-section-gap</code> | <code>0.25rem</code> | Controls the section gap. |
-  | <code>&#45;&#45;tp-toolbar-size</code> | <code>3rem</code> | Controls the size. |
-  | <code>&#45;&#45;tp-toolbar-z-index</code> | <code>100</code> | Controls the z index. |
+  | <code>&#45;&#45;tp-toolbar-gap</code> | <code>0.25rem</code> | Space between the toolbar sections along its main axis. |
+  | <code>&#45;&#45;tp-toolbar-padding</code> | <code>0.25rem 0.5rem</code> | Inner spacing around the toolbar content. |
+  | <code>&#45;&#45;tp-toolbar-section-gap</code> | <code>0.25rem</code> | Space between controls within a section and around section separators. |
+  | <code>&#45;&#45;tp-toolbar-size</code> | <code>3rem</code> | Minimum toolbar thickness: height for a horizontal toolbar, width for a vertical toolbar. |
+  | <code>&#45;&#45;tp-toolbar-z-index</code> | <code>100</code> | Stacking level of the sticky toolbar relative to overlapping content. |
   [CSS properties of `<tp-toolbar>`]
 :::
 <!-- /tp-docgen:api -->
@@ -118,6 +118,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_toolbar.TpToolbar.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

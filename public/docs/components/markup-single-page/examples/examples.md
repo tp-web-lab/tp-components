@@ -19,6 +19,16 @@ This document is rendered as a single page.
 Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
 
 ::::: tp-stack
+::: tp-radio-list { data-setting="logo" label="logo" label-position="top" orientation="horizontal" value="1" }
+- Default
+
+- file1
+
+- file2
+
+- file-unknown
+:::
+
 ::: tp-radio-list { data-setting="src" label="src" label-position="top" orientation="horizontal" value="1" }
 - Default
 

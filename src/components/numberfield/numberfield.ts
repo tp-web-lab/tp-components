@@ -52,12 +52,23 @@ export type TpNumberfieldLabelPosition = TpChoiceLabelPosition;
  * @event input Emitted when the value changes during editing or clearing.
  * @event change Emitted when the value is committed or cleared.
  * @event tp-clear Emitted after clearing a number or resetting the slider.
- * @cssprop [--tp-numberfield-inline-size=20ch] Width of the field.
+ * @cssprop [--tp-numberfield-label-font-weight=500] Font weight of the field label.
+ * @cssprop [--tp-numberfield-label-gap=0.35em] Space between the label and the input control.
+ * @cssprop [--tp-numberfield-padding-block=0.6em] Inner spacing above and below the input value.
+ * @cssprop [--tp-numberfield-padding-inline=0.75em] Inner spacing before and after the input value; additional space is reserved for action buttons.
+ * @cssprop [--tp-numberfield-radius=var(--tp-border-radius-sm)] Corner radius of the input control.
+ * @cssprop [--tp-numberfield-required-color=var(--tp-danger-text-colorful)] Color of the asterisk marking a required field.
+ * @cssprop [--tp-numberfield-value-font-weight=400] Font weight of the displayed input value.
+ * @cssprop [--tp-numberfield-inline-size=calc(20ch + 5rem)] Preferred width of the numeric field, limited by available space.
  * @cssprop [--tp-numberfield-background=var(--tp-paper-color)] Field background.
  * @cssprop [--tp-numberfield-border-color=var(--tp-neutral-stroke-soft)] Field border color.
- * @cssprop [--tp-numberfield-focus-color=var(--tp-brand-text-colorful)] Focus indicator color.
+ * @cssprop [--tp-numberfield-focus-color=var(--tp-brand-text-colorful)] Border color and translucent outline tint while focus is inside the numeric control.
  * @example
  * <tp-numberfield label="Quantity" value="3" min="0" max="10" clearable></tp-numberfield>
+ * @accessibility Uses a native number or range input with an associated visible label or forwarded aria-label; forwards numeric constraints and native disabled or readonly behavior.
+ * @accessibility The optional clear button is labelled and unavailable when editing is blocked. Decorative markers and the duplicate slider readout are hidden from assistive technology.
+ * @accessibility A readonly range input is disabled for interaction while a hidden mirror preserves its submitted value.
+ * @accessibilityresponsibility Provide a meaningful label or aria-label and explain units, limits and step values where needed; do not use a placeholder as the only label.
  */
 export class TpNumberfield extends TpBase {
 	/** Native editor, retained when labels and modes change. */

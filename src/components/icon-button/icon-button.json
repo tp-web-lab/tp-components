@@ -21,7 +21,7 @@
     },
     {
       "name": "disabled",
-      "description": "Attribute `disabled`.",
+      "description": "Prevents button activation and marks the native button as disabled.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -48,7 +48,7 @@
     },
     {
       "name": "label",
-      "description": "Attribute `label`.",
+      "description": "Accessible button name and hover title. Provide the action, such as Close or Search, because the control has no visible text label.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -57,7 +57,7 @@
     },
     {
       "name": "library",
-      "description": "Attribute `library`.",
+      "description": "Icon registry used to resolve name, for example tp, components, languages or a custom registered library.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -66,7 +66,7 @@
     },
     {
       "name": "name",
-      "description": "Attribute `name`.",
+      "description": "Identifier of the icon displayed inside the button, resolved in library.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -93,7 +93,7 @@
     },
     {
       "name": "size",
-      "description": "Attribute `size`.",
+      "description": "Button and icon size preset: xxs, xs, s, m, l, xl or xxl.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -111,7 +111,7 @@
     },
     {
       "name": "type",
-      "description": "Attribute `type`.",
+      "description": "Native button action: button, submit or reset.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -120,7 +120,7 @@
     },
     {
       "name": "variant",
-      "description": "Attribute `variant`.",
+      "description": "Color variant: neutral, brand, success, danger, warning or info.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -132,13 +132,13 @@
     {
       "name": "focus(): void",
       "inherited": false,
-      "description": "API documentation summary."
+      "description": "Moves keyboard focus to the internal native button, when it exists."
     }
   ],
   "events": [
     {
       "name": "click",
-      "description": "Event.",
+      "description": "Native click event bubbling from the inner button when activated by pointer or keyboard; disabled controls suppress activation. This is not a CustomEvent, so there is no custom detail payload.",
       "detail": "void"
     }
   ],
@@ -146,27 +146,27 @@
     {
       "name": "--tp-icon-button-focus-ring",
       "default": "currentColor",
-      "description": "Controls the focus ring."
+      "description": "Color of the outline shown when the button receives keyboard focus."
     },
     {
       "name": "--tp-icon-button-hover-background",
       "default": "color-mix( in srgb, currentColor 10%, transparent )",
-      "description": "Controls the hover background."
+      "description": "Background color of the button on hover."
     },
     {
       "name": "--tp-icon-button-icon-size",
-      "default": "1.75em",
-      "description": "Controls the icon size."
+      "default": "1em",
+      "description": "Width and height of the icon inside the button; distinct from the clickable area."
     },
     {
       "name": "--tp-icon-button-radius",
       "default": "999rem",
-      "description": "Controls the radius."
+      "description": "Corner radius of the clickable button."
     },
     {
       "name": "--tp-icon-button-size",
-      "default": "3.25em",
-      "description": "Controls the size."
+      "default": "1.75em",
+      "description": "Minimum width and height of the clickable button; size presets also update this value."
     }
   ],
   "dependencies": [

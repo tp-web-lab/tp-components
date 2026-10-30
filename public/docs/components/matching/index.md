@@ -142,7 +142,7 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-matching-columns</code> | <code>2</code> | Controls the columns. |
+  | <code>&#45;&#45;tp-matching-columns</code> | <code>2</code> | Number of equal-width matching columns; set internally from the number of lists. Narrow-screen styles force two columns, then one. |
   [CSS properties of `<tp-matching>`]
 :::
 <!-- /tp-docgen:api -->
@@ -150,6 +150,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_matching_matching.TpMatching.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

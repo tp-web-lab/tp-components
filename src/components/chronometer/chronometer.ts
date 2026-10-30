@@ -29,7 +29,7 @@ import { TpBase } from "../base/base.js";
  * Chronometer component.
  *
  * @tagname tp-chronometer
- * @attr {string} size = "1rem" - Icon and text size.
+ * @attr {string} size = "1rem" - Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em.
  * @cssprop --tp-chronometer-size Icon and text size.
  * @example
  * <tp-chronometer></tp-chronometer>

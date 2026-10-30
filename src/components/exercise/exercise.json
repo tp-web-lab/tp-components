@@ -38,20 +38,24 @@
       "summary": "Shared base class for tp-* components."
     },
     {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
       "name": "tp-icon",
-      "summary": "SVG icon component."
-    },
-    {
-      "name": "tp-question",
-      "summary": "Independent question container."
-    },
-    {
-      "name": "tp-timer",
-      "summary": "Countdown timer."
+      "summary": "SVG icon component with inline, URL, and registry sources."
     },
     {
       "name": "tp-mask",
-      "summary": "Masks content without discarding it."
+      "summary": "Replaces an anchored element with a message while active."
+    },
+    {
+      "name": "tp-question",
+      "summary": "Base description-list container for question components."
+    },
+    {
+      "name": "tp-timer",
+      "summary": "Countdown timer with stop control and optional ring."
     }
   ],
   "credits": [],

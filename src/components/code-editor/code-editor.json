@@ -334,7 +334,7 @@
     },
     {
       "name": "tp-dropdown",
-      "summary": "Displays an anchored dropdown menu."
+      "summary": "Dropdown menu component."
     },
     {
       "name": "tp-fullscreen",
@@ -354,7 +354,7 @@
     },
     {
       "name": "tp-tooltip",
-      "summary": "Displays anchored tooltip content."
+      "summary": "Tooltip component."
     }
   ],
   "credits": [

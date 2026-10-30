@@ -136,11 +136,11 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-post-it-padding</code> | <code>0.75rem</code> | = 0.75rem Inner paper padding. |
-  | <code>&#45;&#45;tp-post-it-rotation</code> | <code>0deg</code> | Controls the rotation. |
-  | <code>&#45;&#45;tp-post-it-width</code> | <code>20rem</code> | = 20rem Preferred note width, limited by the available space. |
-  | <code>&#45;&#45;tp-post-it-x</code> | <code>8px</code> | Controls the x. |
-  | <code>&#45;&#45;tp-post-it-y</code> | <code>8px</code> | Controls the y. |
+  | <code>&#45;&#45;tp-post-it-padding</code> | <code>0.75rem</code> | Inner spacing around the paper content; lite mode removes this padding. |
+  | <code>&#45;&#45;tp-post-it-rotation</code> | <code>0deg</code> | Rotation angle of the paper around its top center, updated internally from rotation; ignored in lite mode. |
+  | <code>&#45;&#45;tp-post-it-width</code> | <code>20rem</code> | Preferred note width, limited by available space; lite mode uses its content width. |
+  | <code>&#45;&#45;tp-post-it-x</code> | <code>8px</code> | Horizontal viewport position of a floating note, updated internally when positioned or dragged. |
+  | <code>&#45;&#45;tp-post-it-y</code> | <code>8px</code> | Vertical viewport position of a floating note, updated internally when positioned or dragged. |
   [CSS properties of `<tp-post-it>`]
 :::
 <!-- /tp-docgen:api -->
@@ -148,6 +148,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_post-it.TpPostIt.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

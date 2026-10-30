@@ -41,7 +41,7 @@
     "api:normalize-attributes": "node scripts/normalize-component-attr-comments.mjs",
     "api:check-dependencies": "node scripts/sync-component-dependencies.mjs --check",
     "api:sync-dependencies": "node scripts/sync-component-dependencies.mjs",
-    "api:check": "node scripts/check-component-api.mjs && node scripts/sync-component-dependencies.mjs --check && node scripts/sync-component-api-docs.mjs --check && node scripts/sync-component-accessibility-docs.mjs --check && node scripts/generate-accessibility-report.mjs --check",
+    "api:check": "pnpm api:check-all && node scripts/check-component-api.mjs && node scripts/sync-component-dependencies.mjs --check && node scripts/sync-component-api-docs.mjs --check && node scripts/sync-component-accessibility-docs.mjs --check && node scripts/generate-accessibility-report.mjs --check",
     "api:sync-docs": "node scripts/sync-component-dependencies.mjs && node scripts/sync-component-api-docs.mjs && node scripts/sync-component-accessibility-docs.mjs && node scripts/generate-accessibility-report.mjs",
     "api:sync-examples": "node scripts/sync-component-tsdoc-examples.mjs",
     "docs:sync-intro-examples": "node scripts/sync-component-doc-introductions.mjs && pnpm api:sync-examples",
@@ -160,7 +160,11 @@
     "build:types": "tsc -p tsconfig.build.json",
     "release:check": "node scripts/check-release.mjs",
     "prepack": "pnpm release:check",
-    "build:renderers": "node scripts/build-markdown-renderer.mjs"
+    "build:renderers": "node scripts/build-markdown-renderer.mjs",
+    "api:check-methods": "node scripts/check-component-methods.mjs",
+    "api:check-css": "node scripts/check-component-css.mjs",
+    "api:check-events": "node scripts/check-component-events.mjs",
+    "api:check-all": "pnpm api:check-attributes && pnpm api:check-methods && pnpm api:check-css && pnpm api:check-events"
   },
   "keywords": [],
   "author": "",

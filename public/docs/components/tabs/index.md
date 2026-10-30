@@ -95,7 +95,7 @@ Attributes
   | --- | --- | --- | --- |
   | <code>activation</code> | <code>TpTabsActivation</code> | <code>auto</code> | Keyboard activation mode (`auto` or `manual`). |
   | <code>orientation</code> | <code>TpTabsOrientation</code> | <code>horizontal</code> | Tab list orientation (`horizontal` or `vertical`). |
-  | <code>selected</code> | <code>number</code> | <code>0</code> | Selected tab index. |
+  | <code>selected</code> | <code>number</code> | <code>0</code> | Zero-based index of the selected tab: 0 selects the first tab. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -126,13 +126,13 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-tabs-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Controls the border color. |
-  | <code>&#45;&#45;tp-tabs-border-selected-color</code> | <code>var(&#45;&#45;tp-brand-stroke-soft)</code> | Controls the border selected color. |
-  | <code>&#45;&#45;tp-tabs-panel-bg</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Controls the panel bg. |
-  | <code>&#45;&#45;tp-tabs-tab-bg</code> | <code>var(&#45;&#45;tp-neutral-fill-softer)</code> | Controls the tab bg. |
-  | <code>&#45;&#45;tp-tabs-tab-color</code> | <code>var(&#45;&#45;tp-text-body)</code> | Controls the tab color. |
-  | <code>&#45;&#45;tp-tabs-tab-selected-bg</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Controls the tab selected bg. |
-  | <code>&#45;&#45;tp-tabs-tab-selected-color</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Controls the tab selected color. |
+  | <code>&#45;&#45;tp-tabs-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Border color of inactive tab headers and the content panel. |
+  | <code>&#45;&#45;tp-tabs-border-selected-color</code> | <code>var(&#45;&#45;tp-brand-stroke-soft)</code> | Border color of the selected tab header. |
+  | <code>&#45;&#45;tp-tabs-panel-bg</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Background color of the tab content panel. |
+  | <code>&#45;&#45;tp-tabs-tab-bg</code> | <code>var(&#45;&#45;tp-neutral-fill-softer)</code> | Background color of inactive tab headers. |
+  | <code>&#45;&#45;tp-tabs-tab-color</code> | <code>var(&#45;&#45;tp-text-body)</code> | Text color of inactive tab headers. |
+  | <code>&#45;&#45;tp-tabs-tab-selected-bg</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Background color of the selected tab header. |
+  | <code>&#45;&#45;tp-tabs-tab-selected-color</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Text color of the selected tab header. |
   [CSS properties of `<tp-tabs>`]
 :::
 <!-- /tp-docgen:api -->
@@ -140,6 +140,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_tabs.TpTabs.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

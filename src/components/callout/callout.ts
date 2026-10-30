@@ -36,20 +36,20 @@ import "../icon-button/icon-button.js";
  * @attr {boolean} outlined = false - Removes the filled background.
  * @attr {string} title = "" - Native title text observed for authored callouts.
  * @method toast Displays the callout as a temporary toast notification in the top-right corner of the viewport.
- * @cssprop --tp-callout-accent Accent color. Default: `var(--tp-neutral-text-colorful)`.
- * @cssprop --tp-callout-background Background color. Default: `var(--tp-neutral-fill-softer)`.
- * @cssprop --tp-callout-foreground Text color. Default: `var(--tp-text-body)`.
- * @cssprop --tp-callout-border-color Border color. Default: `var(--tp-neutral-stroke-soft)`.
- * @cssprop --tp-callout-border-width Leading border width. Default: `4px`.
- * @cssprop --tp-callout-radius Border radius. Default: `0.75rem`.
- * @cssprop --tp-callout-padding-block Block padding. Default: `0.875rem`.
- * @cssprop --tp-callout-padding-inline Inline padding. Default: `1rem`.
- * @cssprop --tp-callout-heading-font-size Heading font size. Default: `1rem`.
- * @cssprop --tp-callout-heading-gap Gap below the heading. Default: `0.625rem`.
  * @example
  * <tp-callout variant="info" heading="Information">
  *  The workshop starts at 9:00.
  * </tp-callout>
+ * @cssprop [--tp-callout-accent=var(--tp-neutral-text-colorful)] Color of the leading emphasis border; depends on variant.
+ * @cssprop [--tp-callout-background=var(--tp-neutral-fill-softer)] Background color of the callout; depends on variant and appearance.
+ * @cssprop [--tp-callout-border-color=var(--tp-neutral-stroke-soft)] Color of the thin outer border, excluding the leading emphasis border.
+ * @cssprop [--tp-callout-border-width=4px] Thickness of the leading emphasis border.
+ * @cssprop [--tp-callout-foreground=var(--tp-text-body)] Text color of the heading and body.
+ * @cssprop [--tp-callout-heading-font-size=1rem] Font size of the callout heading.
+ * @cssprop [--tp-callout-heading-gap=0.625rem] Space between the heading and body.
+ * @cssprop [--tp-callout-padding-block=0.875rem] Inner spacing above and below the callout content.
+ * @cssprop [--tp-callout-padding-inline=1rem] Inner spacing before and after the callout content.
+ * @cssprop [--tp-callout-radius=0.75rem] Corner radius of the callout panel.
  */
 export class TpCallout extends TpBase {
 	/**
@@ -257,11 +257,7 @@ export class TpCallout extends TpBase {
 	}
 
 	/**
-	 * Displays the callout as a temporary toast notification in the top-right
-	 * corner of the viewport.
-	 *
-	 * @summary Displays the callout as a toast.
-	 * @param delay Time in milliseconds before closing the toast.
+	 * @summary Shows the callout as a status toast and closes it after delay milliseconds. A zero or negative delay keeps it open; calling again replaces the previous timeout.
 	 */
 	public toast(delay = 3000): void {
 		this.clearToastTimeout();

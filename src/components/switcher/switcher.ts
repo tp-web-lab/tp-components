@@ -31,8 +31,6 @@ function isPositiveInteger(value: string): boolean {
  * @attr {string} threshold = "30rem" - Available-width threshold below which the items stack vertically, using --tp-switcher-threshold when absent.
  *
  *
- * @cssprop --tp-switcher-gap Default gap between switcher items.
- * @cssprop --tp-switcher-threshold Default switch threshold.
  * @example
  * ```html
  * <tp-switcher threshold="35rem" gap="1rem">
@@ -43,6 +41,8 @@ function isPositiveInteger(value: string): boolean {
  *   <tp-box>5. Publish the result.</tp-box>
  * </tp-switcher>
  * ```
+ * @cssprop [--tp-switcher-gap=1rem] Default gap between switcher items.
+ * @cssprop [--tp-switcher-threshold=30rem] Container width below which items switch from a shared row to separate rows.
  */
 export class TpSwitcher extends TpBase {
 	/**

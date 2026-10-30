@@ -14,7 +14,7 @@
  */
 /**
  * @tp-dependency tp-dropdown
- * @summary Displays an anchored dropdown menu.
+ * @summary Dropdown menu component.
  */
 /**
  * @tp-dependency tp-formula-picker
@@ -370,14 +370,26 @@ class FormulaParser {
  * @attr {number} rows = 20 - Number of rows (`20` by default).
  * @attr {number} columns = 10 - Number of columns (`10` by default).
  * @attr {string} src = "" - CSV, JSON or XLSX file URL loaded on connection and whenever it changes.
- * @event tp-spreadsheet-editor-error Emitted when loading src fails; detail contains src and error.
+
  * @attr {string} value = "" - JSON-encoded two-dimensional array of raw cell values.
- * @event tp-spreadsheet-editor-input Emitted whenever a cell changes.
- * @event tp-spreadsheet-editor-import Emitted after a file is imported.
- * @event tp-spreadsheet-editor-export Emitted after a file is exported.
- * @event tp-spreadsheet-editor-structure Emitted after rows or columns change.
+
+
+
+
  * @example
  * <tp-spreadsheet-editor src="/docs/components/spreadsheet-editor/examples/budget.csv"></tp-spreadsheet-editor>
+ * @event tp-spreadsheet-editor-clipboard-error Emitted when a clipboard command fails; command identifies copy, cut or paste.
+ * @eventdetail tp-spreadsheet-editor-clipboard-error { command: "copy" | "cut" | "paste" }
+ * @event tp-spreadsheet-editor-error Emitted when fetching or parsing src fails, except for aborted requests; src is the requested URL and error is the caught failure.
+ * @eventdetail tp-spreadsheet-editor-error { src: string; error: unknown }
+ * @event tp-spreadsheet-editor-export Emitted after a CSV, JSON or XLSX download is prepared; filename includes the extension.
+ * @eventdetail tp-spreadsheet-editor-export { format: "csv" | "json" | "xlsx"; filename: string }
+ * @event tp-spreadsheet-editor-import Emitted after an imported file replaces the sheet; format is the detected filename extension and file is the selected File object.
+ * @eventdetail tp-spreadsheet-editor-import { format: string; file: File }
+ * @event tp-spreadsheet-editor-input Emitted for each edited or cleared cell. cell is its A1 reference, raw is the stored input or formula, and value is the evaluated result.
+ * @eventdetail tp-spreadsheet-editor-input { cell: string; raw: string; value: string | number | boolean | Date }
+ * @event tp-spreadsheet-editor-structure Emitted after inserting or deleting a row or column. index is zero-based; rows and columns are the resulting dimensions.
+ * @eventdetail tp-spreadsheet-editor-structure { action: "insert-row" | "delete-row" | "insert-column" | "delete-column"; index: number; rows: number; columns: number }
  */
 export class TpSpreadsheetEditor extends TpBase {
 	private static readonly styleId = "tp-spreadsheet-editor-styles";
@@ -431,9 +443,15 @@ export class TpSpreadsheetEditor extends TpBase {
 	public set value(value: string) {
 		this.setAttribute("value", value);
 	}
+	/**
+	 * @summary Returns a row-by-row copy of raw cell strings, including formulas rather than calculated results.
+	 */
 	public getData(): string[][] {
 		return this.data.map((row) => [...row]);
 	}
+	/**
+	 * @summary Replaces the matrix, converts values to strings and pads missing cells with empty strings. Updates rows, columns and value, retaining at least one row and column.
+	 */
 	public setData(value: readonly (readonly unknown[])[]): void {
 		const rows = Math.max(1, value.length);
 		const columns = Math.max(1, ...value.map((row) => row.length));
@@ -447,6 +465,9 @@ export class TpSpreadsheetEditor extends TpBase {
 		this.setAttribute("value", JSON.stringify(this.data));
 	}
 
+	/**
+	 * @summary Loads CSV, JSON or the first XLSX sheet into the editor, records undo state and emits tp-spreadsheet-editor-import. Resolves after application; unsupported or invalid files reject.
+	 */
 	public async importFile(file: File): Promise<void> {
 		this.sourceRequest?.abort();
 		this.applyImport(file, await this.parseFile(file));
@@ -504,6 +525,9 @@ export class TpSpreadsheetEditor extends TpBase {
 		);
 	}
 
+	/**
+	 * @summary Downloads CSV, JSON or XLSX using filename plus the extension. The formulas mode preserves raw formulas; values exports calculated cell results.
+	 */
 	public exportFile(
 		format: TpSpreadsheetFileFormat,
 		filename = "spreadsheet",
@@ -576,6 +600,9 @@ export class TpSpreadsheetEditor extends TpBase {
 		);
 	}
 
+	/**
+	 * @summary Inserts an empty row before or after the active cell, selects it, clears cell formatting and emits a structure-change event. Does nothing without a valid active cell.
+	 */
 	public insertRow(position: "before" | "after" = "after"): void {
 		const coordinates = cellCoordinates(this.activeReference);
 		if (coordinates === null) return;
@@ -594,6 +621,9 @@ export class TpSpreadsheetEditor extends TpBase {
 		this.emitStructureChange("insert-row", index);
 	}
 
+	/**
+	 * @summary Deletes the active row, adjusts selection, clears cell formatting and emits a structure-change event. Preserves the last remaining row.
+	 */
 	public deleteRow(): void {
 		if (this.rows <= 1) return;
 		const coordinates = cellCoordinates(this.activeReference);
@@ -609,6 +639,9 @@ export class TpSpreadsheetEditor extends TpBase {
 		this.emitStructureChange("delete-row", coordinates[0]);
 	}
 
+	/**
+	 * @summary Inserts an empty column before or after the active cell, selects it, clears cell formatting and emits a structure-change event. Does nothing without a valid active cell.
+	 */
 	public insertColumn(position: "before" | "after" = "after"): void {
 		const coordinates = cellCoordinates(this.activeReference);
 		if (coordinates === null) return;
@@ -623,6 +656,9 @@ export class TpSpreadsheetEditor extends TpBase {
 		this.emitStructureChange("insert-column", index);
 	}
 
+	/**
+	 * @summary Deletes the active column, adjusts selection, clears cell formatting and emits a structure-change event. Preserves the last remaining column.
+	 */
 	public deleteColumn(): void {
 		if (this.columns <= 1) return;
 		const coordinates = cellCoordinates(this.activeReference);

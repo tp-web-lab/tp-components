@@ -54,8 +54,8 @@ function isSaveAudioFormat(value: string): value is TpSaveAudioFormat {
  * @attr {string} anchor = "" - CSS selector of a component implementing saveAudio(format, filename).
  * @attr {string} name = "file-download" - Icon used by the trigger.
  * @attr {string} filename = "audio" - Download filename without its extension.
- * @attr {string} variant = "neutral" - Icon button variant.
- * @attr {string} size = "m" - Icon button size.
+ * @attr {string} variant = "neutral" - Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info.
+ * @attr {string} size = "m" - Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl.
  * @attr {boolean} disabled = false - Disables the trigger.
  * @event tp-save-audio-save Emitted after an audio file has been saved.
  * @eventdetail tp-save-audio-save { format: "mp3" | "ogg" | "wav"; filename: string; anchor: string; target: Element }
@@ -64,6 +64,9 @@ function isSaveAudioFormat(value: string): value is TpSaveAudioFormat {
  * @example
  * <p>Audio saving is reserved for a future integration. No audio provider is currently connected.</p>
  * <tp-save-audio disabled></tp-save-audio>
+ * @accessibility Provides a labelled icon trigger with aria-haspopup, aria-controls and synchronized aria-expanded; disables the trigger while saving or when disabled.
+ * @accessibility Format entries are focusable and respond to Enter or Space; decorative checkmarks are hidden and the most recently saved format is marked with aria-current.
+ * @accessibilityresponsibility Provide an informative trigger label, a compatible audio target and an accessible text alternative for audio content. Present tp-save-audio-error feedback to the user when export fails.
  */
 export class TpSaveAudio extends TpBase {
 	private static readonly styleId = "tp-save-audio-styles";
@@ -140,6 +143,9 @@ export class TpSaveAudio extends TpBase {
 		if (this.isConnected) this.ensureControl();
 	}
 
+	/**
+	 * @summary Requests the anchored component to save mp3, ogg or wav audio using filename. Resolves after completion or cancellation; does nothing when disabled or already saving. Invalid formats and incompatible targets reject.
+	 */
 	public async save(format: TpSaveAudioFormat = this.format): Promise<void> {
 		if (this.disabled || this.saving) return;
 		if (!isSaveAudioFormat(format))

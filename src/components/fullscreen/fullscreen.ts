@@ -46,8 +46,8 @@ function isCustomElement(element: HTMLElement): boolean {
  * @summary Fullscreen controller button.
  * @tagname tp-fullscreen
  * @attr {string} anchor = "" - CSS selector of the element to toggle fullscreen.
- * @attr {string} variant = "neutral" - Icon button variant.
- * @attr {string} size = "m" - Icon button size.
+ * @attr {string} variant = "neutral" - Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info.
+ * @attr {string} size = "m" - Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl.
  * @attr {boolean} disabled = false - Disables the fullscreen trigger.
  *
  * @event tp-fullscreen-change Emitted when the fullscreen state of the controlled target changes.

@@ -51,13 +51,13 @@
   "events": [
     {
       "name": "tp-emoji-picker-copy-error",
-      "description": "Emitted when the clipboard rejects a copy operation.",
-      "detail": "{ copy: unknown; value: string; error: unknown }"
+      "description": "Emitted when copying the selected emoji fails. The detail contains the requested clipboard text, selection metadata and the caught error.",
+      "detail": "{ emoji: string; name: string; group: string; subgroup: string; version: string; codepoints: string[]; copy: TpEmojiPickerCopyFormat; value: string; error: unknown }"
     },
     {
       "name": "tp-emoji-picker-select",
-      "description": "Emitted after an emoji is selected and copied.",
-      "detail": "{ copy: unknown; value: string }"
+      "description": "Emitted when a emoji is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success. value is null when the selected copy format has no representation.",
+      "detail": "{ emoji: string; name: string; group: string; subgroup: string; version: string; codepoints: string[]; copy: TpEmojiPickerCopyFormat; value: string | null }"
     }
   ],
   "cssproperties": [],

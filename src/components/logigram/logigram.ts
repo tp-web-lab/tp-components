@@ -71,6 +71,10 @@ import {
  * </dd>
  *   </dl>
  * </tp-logigram>
+ * @accessibility Uses a labelled table with category headers and native cell buttons whose accessible names include both matched items and the current yes, no or unknown state.
+ * @accessibility Arrow keys move between cells, Enter or Space changes a cell, and Delete or Backspace clears it; disabled state is forwarded to game controls.
+ * @accessibility Announces selection and checking feedback through status regions and exposes checked errors with aria-invalid.
+ * @accessibilityresponsibility Provide clear category names, item names and written clues; keep all information needed to solve the puzzle available as text.
  */
 export class TpLogigram extends TpBase {
 	private model: LogigramModel | null = null;

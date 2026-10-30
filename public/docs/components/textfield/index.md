@@ -101,7 +101,7 @@ Inline named field
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>aria-label</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the aria label. |
+  | <code>aria-label</code> | <code>string</code> | <code>&quot;&quot;</code> | Accessible name forwarded to the editing control; use it when the field has no visible label. |
   | <code>autocomplete</code> | <code>string</code> | <code>&quot;&quot;</code> | Native autocomplete hint. |
   | <code>clearable</code> | <code>boolean</code> | <code>false</code> | Shows the clear button; it is disabled when empty, readonly or disabled. |
   | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Disables the field and its clear button. |
@@ -144,17 +144,17 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-textfield-background</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Controls the background. |
-  | <code>&#45;&#45;tp-textfield-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Controls the border color. |
-  | <code>&#45;&#45;tp-textfield-focus-color</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Controls the focus color. |
-  | <code>&#45;&#45;tp-textfield-inline-size</code> | <code>calc(20ch + 5rem)</code> | Controls the inline size. |
-  | <code>&#45;&#45;tp-textfield-label-font-weight</code> | <code>500</code> | Controls the label font weight. |
-  | <code>&#45;&#45;tp-textfield-label-gap</code> | <code>0.35em</code> | Controls the label gap. |
-  | <code>&#45;&#45;tp-textfield-padding-block</code> | <code>0.6em</code> | Controls the padding block. |
-  | <code>&#45;&#45;tp-textfield-padding-inline</code> | <code>0.75em</code> | Controls the padding inline. |
-  | <code>&#45;&#45;tp-textfield-radius</code> | <code>var(&#45;&#45;tp-border-radius-sm)</code> | Controls the radius. |
-  | <code>&#45;&#45;tp-textfield-required-color</code> | <code>var(&#45;&#45;tp-danger-text-colorful)</code> | Controls the required color. |
-  | <code>&#45;&#45;tp-textfield-value-font-weight</code> | <code>400</code> | Controls the value font weight. |
+  | <code>&#45;&#45;tp-textfield-background</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Background of the input control, excluding its label. |
+  | <code>&#45;&#45;tp-textfield-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Border color of the input control when it is not focused. |
+  | <code>&#45;&#45;tp-textfield-focus-color</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Border color and translucent outline tint while focus is inside the control. |
+  | <code>&#45;&#45;tp-textfield-inline-size</code> | <code>calc(20ch + 5rem)</code> | Preferred width of the field, limited by the available container width. |
+  | <code>&#45;&#45;tp-textfield-label-font-weight</code> | <code>500</code> | Font weight of the field label. |
+  | <code>&#45;&#45;tp-textfield-label-gap</code> | <code>0.35em</code> | Space between the label and the input control. |
+  | <code>&#45;&#45;tp-textfield-padding-block</code> | <code>0.6em</code> | Inner spacing above and below the input value. |
+  | <code>&#45;&#45;tp-textfield-padding-inline</code> | <code>0.75em</code> | Inner spacing before and after the input value; additional space is reserved for action buttons. |
+  | <code>&#45;&#45;tp-textfield-radius</code> | <code>var(&#45;&#45;tp-border-radius-sm)</code> | Corner radius of the input control. |
+  | <code>&#45;&#45;tp-textfield-required-color</code> | <code>var(&#45;&#45;tp-danger-text-colorful)</code> | Color of the asterisk marking a required field. |
+  | <code>&#45;&#45;tp-textfield-value-font-weight</code> | <code>400</code> | Font weight of the displayed input value. |
   [CSS properties of `<tp-textfield>`]
 :::
 <!-- /tp-docgen:api -->
@@ -162,6 +162,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_textfield.TpTextfield.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

@@ -92,9 +92,9 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>close</code> | <code>close(index: number): void</code> | Closes a section by index. |
-  | <code>open</code> | <code>open(index: number): void</code> | Opens a section by index.<br><br>In single mode, this replaces the current open section. |
-  | <code>toggle</code> | <code>toggle(index: number): void</code> | Toggles open/closed state for a section by index. |
+  | <code>close</code> | <code>close(index: number): void</code> | Closes the section at the zero-based index without changing other sections. |
+  | <code>open</code> | <code>open(index: number): void</code> | Opens the section at the zero-based index; in single mode, closes the previously open section. |
+  | <code>toggle</code> | <code>toggle(index: number): void</code> | Toggles the section at the zero-based index, respecting the single/multiple opening mode. |
   [Public methods of `TpAccordion`]
 
 Events
@@ -115,6 +115,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_accordion.TpAccordion.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

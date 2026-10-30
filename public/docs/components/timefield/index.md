@@ -87,8 +87,8 @@ Attributes
   | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Disables the field and its action buttons. |
   | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Visible label associated with the native time input. |
   | <code>label-position</code> | <code>string</code> | <code>&quot;top&quot;</code> | Label position (`top`, `bottom`, `start`, or `end`). |
-  | <code>max</code> | <code>string</code> | <code>&quot;&quot;</code> | Latest selectable time. |
-  | <code>min</code> | <code>string</code> | <code>&quot;&quot;</code> | Earliest selectable time. |
+  | <code>max</code> | <code>string</code> | <code>&quot;&quot;</code> | Latest selectable time in HH:mm or HH:mm:ss format. |
+  | <code>min</code> | <code>string</code> | <code>&quot;&quot;</code> | Earliest selectable time in HH:mm or HH:mm:ss format. |
   | <code>name</code> | <code>string</code> | <code>&quot;&quot;</code> | Name submitted with the containing form; defaults to the initial inline content when omitted. |
   | <code>placeholder</code> | <code>string</code> | <code>&quot;&quot;</code> | Hint forwarded to the native input; browsers may ignore it for date and time controls. |
   | <code>readonly</code> | <code>boolean</code> | <code>false</code> | Prevents value editing. |
@@ -120,17 +120,17 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-timefield-background</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Controls the background. |
-  | <code>&#45;&#45;tp-timefield-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Controls the border color. |
-  | <code>&#45;&#45;tp-timefield-focus-color</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Controls the focus color. |
-  | <code>&#45;&#45;tp-timefield-inline-size</code> | <code>10.5em</code> | Controls the inline size. |
-  | <code>&#45;&#45;tp-timefield-label-font-weight</code> | <code>500</code> | Controls the label font weight. |
-  | <code>&#45;&#45;tp-timefield-label-gap</code> | <code>0.35em</code> | Controls the label gap. |
-  | <code>&#45;&#45;tp-timefield-padding-block</code> | <code>0.6em</code> | Controls the padding block. |
-  | <code>&#45;&#45;tp-timefield-padding-inline</code> | <code>0.75em</code> | Controls the padding inline. |
-  | <code>&#45;&#45;tp-timefield-radius</code> | <code>var(&#45;&#45;tp-border-radius-sm)</code> | Controls the radius. |
-  | <code>&#45;&#45;tp-timefield-required-color</code> | <code>var(&#45;&#45;tp-danger-text-colorful)</code> | Controls the required color. |
-  | <code>&#45;&#45;tp-timefield-value-font-weight</code> | <code>400</code> | Controls the value font weight. |
+  | <code>&#45;&#45;tp-timefield-background</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Background of the input control, excluding its label. |
+  | <code>&#45;&#45;tp-timefield-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Border color of the input control when it is not focused. |
+  | <code>&#45;&#45;tp-timefield-focus-color</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Border color and translucent outline tint while focus is inside the control. |
+  | <code>&#45;&#45;tp-timefield-inline-size</code> | <code>10.5em</code> | Preferred width of the field, limited by the available container width. |
+  | <code>&#45;&#45;tp-timefield-label-font-weight</code> | <code>500</code> | Font weight of the field label. |
+  | <code>&#45;&#45;tp-timefield-label-gap</code> | <code>0.35em</code> | Space between the label and the input control. |
+  | <code>&#45;&#45;tp-timefield-padding-block</code> | <code>0.6em</code> | Inner spacing above and below the input value. |
+  | <code>&#45;&#45;tp-timefield-padding-inline</code> | <code>0.75em</code> | Inner spacing before and after the input value; additional space is reserved for action buttons. |
+  | <code>&#45;&#45;tp-timefield-radius</code> | <code>var(&#45;&#45;tp-border-radius-sm)</code> | Corner radius of the input control. |
+  | <code>&#45;&#45;tp-timefield-required-color</code> | <code>var(&#45;&#45;tp-danger-text-colorful)</code> | Color of the asterisk marking a required field. |
+  | <code>&#45;&#45;tp-timefield-value-font-weight</code> | <code>400</code> | Font weight of the displayed input value. |
   [CSS properties of `<tp-timefield>`]
 :::
 <!-- /tp-docgen:api -->
@@ -138,6 +138,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_timefield.TpTimefield.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

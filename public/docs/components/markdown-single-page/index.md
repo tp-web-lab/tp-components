@@ -99,6 +99,7 @@ Attributes
   | <code>git</code> | <code>string</code> | <code>&quot;&quot;</code> | Repository URL. Adds a source link before Code when the toolbar is enabled. *(inherited from <code>tp-markup-single-page</code>)* |
   | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Text displayed in the center of the optional toolbar. *(inherited from <code>tp-markup-single-page</code>)* |
   | <code>langs</code> | <code>string</code> | <code>&quot;en&quot;</code> | Candidate document languages. The first uses the source directory; others use language subdirectories. *(inherited from <code>tp-markup-single-page</code>)* |
+  | <code>logo</code> | <code>string</code> | <code>&quot;&quot;</code> | Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo. *(inherited from <code>tp-markup-single-page</code>)* |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Source file. The extension selects the renderer. *(inherited from <code>tp-markup-single-page</code>)* |
   | <code>toolbar</code> | <code>string \| null</code> | <code>null</code> | Optional comma-separated controls: code, calc, postit, clock, lang, color, theme, fullscreen. Empty enables all; absent hides the toolbar. *(inherited from <code>tp-markup-single-page</code>)* |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
@@ -116,7 +117,7 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | None. |  |  |
+  | <code>tp-markdown-single-page-rendered</code> | <code>&#123; language: &quot;html&quot; \| &quot;markdown&quot; \| &quot;asciidoc&quot; \| &quot;restructuredtext&quot;; src: string &#125;</code> | Emitted after this page finishes rendering, immediately after tp-markup-single-page-rendered. language identifies the renderer and src is the resolved source used for this render. |
   [Events emitted by `<tp-markdown-single-page>`]
 
 CSS properties
@@ -130,6 +131,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markdown-single-page.TpMarkdownSinglePage.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

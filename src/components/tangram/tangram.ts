@@ -57,7 +57,7 @@ const copy = (p: Placement[]): Placement[] => p.map((v) => ({ ...v }));
  * @tagname tp-tangram
  * @attr {string} src = "" - Text or JSON file containing the seven solution placements.
  * @attr {boolean} exact-orientation = false - Starts every piece in its solution orientation, including reflection; changing it restarts the puzzle.
- * @event tp-tangram-change Fired after an accepted edit; detail contains placements and solved.
+
  * @event tp-tangram-error Fired when loading a solution fails; detail contains message.
  * @keyboard Arrow keys Move the selected piece; Shift increases the step.
  * @keyboard R / Shift+R Rotate clockwise / counterclockwise by 45 degrees.
@@ -66,6 +66,11 @@ const copy = (p: Placement[]): Placement[] => p.map((v) => ({ ...v }));
  * @keyboard Ctrl+Z / Ctrl+Shift+Z Undo / redo (Command also supported).
  * @example
  * <tp-tangram></tp-tangram>
+ * @event tp-tangram-change Emitted after an accepted piece edit; placements contains each piece ID, x/y position, angle and flip state, and solved reports whether the target is matched.
+ * @eventdetail tp-tangram-change { placements: Placement[]; solved: boolean }
+ * @accessibility Names the puzzle board and exposes playing pieces as labelled focusable SVG buttons; keyboard commands support moving, rotating, flipping, undoing and redoing placements.
+ * @accessibility Groups and labels toolbar and selected-piece controls, announces game status politely, and removes playing pieces from keyboard navigation during solution preview.
+ * @accessibilityresponsibility Provide a text description of the target and a suitable alternative activity when spatial visual manipulation is not usable; piece colors alone must not carry essential instructions.
  */
 export class TpTangram extends TpBase {
 	private source = new TpDeclarativeTextSource(this, {
@@ -287,6 +292,9 @@ export class TpTangram extends TpBase {
 		this.changed();
 		return true;
 	}
+	/**
+	 * @summary Restores the previous piece arrangement from undo history; does nothing when history is empty.
+	 */
 	public undo(): void {
 		this.cancel();
 		if (this.canUndo) {
@@ -294,6 +302,9 @@ export class TpTangram extends TpBase {
 			this.changed();
 		}
 	}
+	/**
+	 * @summary Restores the next undone piece arrangement; does nothing when redo history is empty.
+	 */
 	public redo(): void {
 		this.cancel();
 		if (this.canRedo) {

@@ -10,7 +10,11 @@
  */
 /**
  * @tp-dependency tp-dropdown
- * @summary Displays an anchored dropdown menu.
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
  */
 /**
  * @tp-dependency tp-icon-button
@@ -48,8 +52,8 @@ function isSaveImageFormat(value: string): value is TpSaveImageFormat {
  * @attr {string} anchor = "" - CSS selector of the image or exportable component.
  * @attr {string} name = "image-download" - Icon used by the trigger.
  * @attr {string} filename = "image" - Download filename without its extension.
- * @attr {string} variant = "neutral" - Icon button variant.
- * @attr {string} size = "m" - Icon button size.
+ * @attr {string} variant = "neutral" - Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info.
+ * @attr {string} size = "m" - Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl.
  * @attr {boolean} disabled = false - Disables the trigger.
  * @event tp-save-image-save Emitted after an image has been prepared for download.
  * @eventdetail tp-save-image-save { format: "svg" | "png" | "webp"; filename: string; anchor: string; target: Element }
@@ -117,6 +121,9 @@ export class TpSaveImage extends TpBase {
 		if (this.isConnected) this.ensureControl();
 	}
 
+	/**
+	 * @summary Saves the anchored image or exportable component as svg, png or webp using filename. Resolves after saving or cancellation; unsupported formats and missing targets reject.
+	 */
 	public async save(format: TpSaveImageFormat): Promise<void> {
 		if (!isSaveImageFormat(format))
 			throw new TypeError(`Unsupported image format: ${format}`);

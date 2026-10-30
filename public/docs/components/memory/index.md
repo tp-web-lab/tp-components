@@ -115,7 +115,7 @@ Events
 : | Event | Detail | Description |
   | --- | --- | --- |
   | <code>tp-memory-complete</code> | <code>void</code> | Emitted when every pair is matched. |
-  | <code>tp-memory-match</code> | <code>&#123; pair: unknown &#125;</code> | Emitted when a pair is matched. |
+  | <code>tp-memory-match</code> | <code>&#123; pair: number &#125;</code> | Emitted after two matching cards are revealed; pair is the zero-based identifier assigned to their original list item. |
   | <code>tp-memory-reset</code> | <code>void</code> | Emitted after the game is reset. |
   [Events emitted by `<tp-memory>`]
 
@@ -131,6 +131,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_memory.TpMemory.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

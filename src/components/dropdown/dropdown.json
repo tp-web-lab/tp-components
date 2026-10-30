@@ -65,7 +65,7 @@
     {
       "name": "show(): void",
       "inherited": false,
-      "description": "Show."
+      "description": "Opens the dropdown by setting its open state and positioning it relative to its anchor."
     },
     {
       "name": "toggle(): void",

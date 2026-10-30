@@ -123,7 +123,7 @@ Mathematical notation
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the src. |
+  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a Markdown source file to fetch and render; relative paths resolve against the containing source document when available. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -139,7 +139,7 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-markdown-rendered</code> | <code>void</code> | Emitted when markdown rendered occurs. |
+  | <code>tp-markdown-rendered</code> | <code>void</code> | Emitted after Markdown and its runtime extensions are rendered, or after a source/conversion error is displayed. This event alone does not indicate successful conversion. |
   [Events emitted by `<tp-markdown>`]
 
 CSS properties
@@ -153,6 +153,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markdown_markdown.TpMarkdown.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

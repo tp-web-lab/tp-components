@@ -56,14 +56,23 @@ type OpenField =
 /**
  * @summary displays a text, SVG or image answer in a focusable blank.
  * @tagname tp-blank
+ * @attr {string} aria-label = "" - Accessible name forwarded to the editing control; use it when the field has no visible label.
  * @attr {boolean} closed = false - Uses an answer-bank destination unless the question overrides the mode.
  * @attr {string} type = "text" - Open field type: text, number, math, date, or time.
  * @attr {string} name = "" - Name used by tp-fill-blank form data.
  * @attr {string} placeholder = "…" - Text displayed while the blank is empty.
  * @attr {boolean} disabled = false - Disables interaction.
- * @event input - Emitted when an answer is assigned or cleared.
+
  * @example
  * <tp-blank name="result" aria-label="Expected result"></tp-blank>
+ * @cssprop [--tp-blank-filled-border-color=var(--tp-brand-stroke-mid)] Bottom border color of a blank after an answer has been filled in.
+ * @event input Emitted when an answer is assigned or cleared; read the updated answer from value.
+ * @eventdetail input void
+ * @event tp-blank-mode-change Emitted when closed or type changes while connected, after the blank has been rendered in its new mode.
+ * @eventdetail tp-blank-mode-change void
+ * @accessibility Editable blanks delegate to the field matching their type and forward accessible naming attributes; closed blanks expose a named focusable group with aria-disabled reflecting availability.
+ * @accessibility Delete and Backspace clear an enabled focused closed blank; its clear control is disabled when clearing is unavailable.
+ * @accessibilityresponsibility Supply a descriptive label or aria-label for each answer location and text alternatives for image or SVG answers; do not rely on answer color or position alone.
  */
 export class TpBlank extends TpBase {
 	private editor: OpenField | null = null;

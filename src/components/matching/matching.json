@@ -47,7 +47,7 @@
     {
       "name": "--tp-matching-columns",
       "default": "2",
-      "description": "Controls the columns."
+      "description": "Number of equal-width matching columns; set internally from the number of lists. Narrow-screen styles force two columns, then one."
     }
   ],
   "dependencies": [

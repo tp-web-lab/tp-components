@@ -75,18 +75,18 @@ Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
   | <code>color</code> | <code>string</code> | <code>&quot;&quot;</code> | Color forwarded to the internal `<tp-icon>`. |
-  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Attribute `disabled`. |
+  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Prevents button activation and marks the native button as disabled. |
   | <code>flip-h</code> | <code>boolean</code> | <code>false</code> | Horizontal flip forwarded to the internal `<tp-icon>`. |
   | <code>flip-v</code> | <code>boolean</code> | <code>false</code> | Vertical flip forwarded to the internal `<tp-icon>`. |
-  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Attribute `label`. |
-  | <code>library</code> | <code>string</code> | <code>&quot;&quot;</code> | Attribute `library`. |
-  | <code>name</code> | <code>string</code> | <code>&quot;&quot;</code> | Attribute `name`. |
+  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Accessible button name and hover title. Provide the action, such as Close or Search, because the control has no visible text label. |
+  | <code>library</code> | <code>string</code> | <code>&quot;&quot;</code> | Icon registry used to resolve name, for example tp, components, languages or a custom registered library. |
+  | <code>name</code> | <code>string</code> | <code>&quot;&quot;</code> | Identifier of the icon displayed inside the button, resolved in library. |
   | <code>rotate</code> | <code>string</code> | <code>&quot;0deg&quot;</code> | Rotation forwarded to the internal `<tp-icon>`. |
   | <code>scale</code> | <code>number</code> | <code>1</code> | Scale forwarded to the internal `<tp-icon>`. |
-  | <code>size</code> | <code>TpSizeType</code> | <code>m</code> | Attribute `size`. |
+  | <code>size</code> | <code>TpSizeType</code> | <code>m</code> | Button and icon size preset: xxs, xs, s, m, l, xl or xxl. |
   | <code>spin</code> | <code>boolean</code> | <code>false</code> | Continuous spin forwarded to the internal `<tp-icon>`. |
-  | <code>type</code> | <code>TpIconButtonNativeType</code> | <code>button</code> | Attribute `type`. |
-  | <code>variant</code> | <code>TpVariantType</code> | <code>neutral</code> | Attribute `variant`. |
+  | <code>type</code> | <code>TpIconButtonNativeType</code> | <code>button</code> | Native button action: button, submit or reset. |
+  | <code>variant</code> | <code>TpVariantType</code> | <code>neutral</code> | Color variant: neutral, brand, success, danger, warning or info. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -96,23 +96,23 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>focus</code> | <code>focus(): void</code> | API documentation summary. |
+  | <code>focus</code> | <code>focus(): void</code> | Moves keyboard focus to the internal native button, when it exists. |
   [Public methods of `TpIconButton`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>click</code> | <code>void</code> | Event. |
+  | <code>click</code> | <code>void</code> | Native click event bubbling from the inner button when activated by pointer or keyboard; disabled controls suppress activation. This is not a CustomEvent, so there is no custom detail payload. |
   [Events emitted by `<tp-icon-button>`]
 
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-icon-button-focus-ring</code> | <code>currentColor</code> | Controls the focus ring. |
-  | <code>&#45;&#45;tp-icon-button-hover-background</code> | <code>color-mix( in srgb, currentColor 10%, transparent )</code> | Controls the hover background. |
-  | <code>&#45;&#45;tp-icon-button-icon-size</code> | <code>1.75em</code> | Controls the icon size. |
-  | <code>&#45;&#45;tp-icon-button-radius</code> | <code>999rem</code> | Controls the radius. |
-  | <code>&#45;&#45;tp-icon-button-size</code> | <code>3.25em</code> | Controls the size. |
+  | <code>&#45;&#45;tp-icon-button-focus-ring</code> | <code>currentColor</code> | Color of the outline shown when the button receives keyboard focus. |
+  | <code>&#45;&#45;tp-icon-button-hover-background</code> | <code>color-mix( in srgb, currentColor 10%, transparent )</code> | Background color of the button on hover. |
+  | <code>&#45;&#45;tp-icon-button-icon-size</code> | <code>1em</code> | Width and height of the icon inside the button; distinct from the clickable area. |
+  | <code>&#45;&#45;tp-icon-button-radius</code> | <code>999rem</code> | Corner radius of the clickable button. |
+  | <code>&#45;&#45;tp-icon-button-size</code> | <code>1.75em</code> | Minimum width and height of the clickable button; size presets also update this value. |
   [CSS properties of `<tp-icon-button>`]
 :::
 <!-- /tp-docgen:api -->
@@ -120,6 +120,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_icon-button.TpIconButton.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

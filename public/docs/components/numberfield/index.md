@@ -124,7 +124,17 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | None. |  |  |
+  | <code>&#45;&#45;tp-numberfield-background</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Field background. |
+  | <code>&#45;&#45;tp-numberfield-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Field border color. |
+  | <code>&#45;&#45;tp-numberfield-focus-color</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Border color and translucent outline tint while focus is inside the numeric control. |
+  | <code>&#45;&#45;tp-numberfield-inline-size</code> | <code>calc(20ch + 5rem)</code> | Preferred width of the numeric field, limited by available space. |
+  | <code>&#45;&#45;tp-numberfield-label-font-weight</code> | <code>500</code> | Font weight of the field label. |
+  | <code>&#45;&#45;tp-numberfield-label-gap</code> | <code>0.35em</code> | Space between the label and the input control. |
+  | <code>&#45;&#45;tp-numberfield-padding-block</code> | <code>0.6em</code> | Inner spacing above and below the input value. |
+  | <code>&#45;&#45;tp-numberfield-padding-inline</code> | <code>0.75em</code> | Inner spacing before and after the input value; additional space is reserved for action buttons. |
+  | <code>&#45;&#45;tp-numberfield-radius</code> | <code>var(&#45;&#45;tp-border-radius-sm)</code> | Corner radius of the input control. |
+  | <code>&#45;&#45;tp-numberfield-required-color</code> | <code>var(&#45;&#45;tp-danger-text-colorful)</code> | Color of the asterisk marking a required field. |
+  | <code>&#45;&#45;tp-numberfield-value-font-weight</code> | <code>400</code> | Font weight of the displayed input value. |
   [CSS properties of `<tp-numberfield>`]
 :::
 <!-- /tp-docgen:api -->
@@ -132,6 +142,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_numberfield.TpNumberfield.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

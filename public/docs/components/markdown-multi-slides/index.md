@@ -66,13 +66,14 @@ reStructuredText
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>brand</code> | <code>string</code> | <code>&quot;tp-default&quot;</code> | Controls the brand. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>git</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the git. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the label. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>langs</code> | <code>string</code> | <code>&quot;en,fr&quot;</code> | Controls the langs. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>menu</code> | <code>boolean</code> | <code>false</code> | Controls the menu. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>repository</code> | <code>string</code> | <code>&quot;/docs&quot;</code> | Controls the repository. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>theme</code> | <code>TpMarkupMultiPagesTheme</code> | <code>&quot;&quot;</code> | Controls the theme. *(inherited from <code>tp-markup-multi-pages</code>)* |
+  | <code>brand</code> | <code>string</code> | <code>&quot;tp-default&quot;</code> | Legacy brand preset property, such as tp-default. Attribute-driven styling is currently inactive; use the toolbar color control. *(inherited from <code>tp-markup-multi-pages</code>)* |
+  | <code>git</code> | <code>string</code> | <code>&quot;&quot;</code> | Repository URL assigned to the toolbar source link when the document shell is created. Set before connecting the component. *(inherited from <code>tp-markup-multi-pages</code>)* |
+  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Title displayed in the center of the document toolbar. *(inherited from <code>tp-markup-multi-pages</code>)* |
+  | <code>langs</code> | <code>string</code> | <code>&quot;&quot;</code> | Comma-separated language codes. The selector is hidden unless at least two distinct codes are declared. *(inherited from <code>tp-markup-multi-pages</code>)* |
+  | <code>logo</code> | <code>string</code> | <code>&quot;&quot;</code> | Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo. *(inherited from <code>tp-markup-multi-pages</code>)* |
+  | <code>menu</code> | <code>boolean</code> | <code>false</code> | Opens the navigation sidebar when present; the toolbar Menu button toggles this attribute. *(inherited from <code>tp-markup-multi-pages</code>)* |
+  | <code>repository</code> | <code>string</code> | <code>&quot;/docs&quot;</code> | Root path containing the sidebar, cover and linked documents. The component selects the corresponding HTML, Markdown, AsciiDoc or reStructuredText files. *(inherited from <code>tp-markup-multi-pages</code>)* |
+  | <code>theme</code> | <code>TpMarkupMultiPagesTheme</code> | <code>&quot;&quot;</code> | Legacy light, dark or auto property. Attribute-driven styling is currently inactive; use the toolbar theme control. *(inherited from <code>tp-markup-multi-pages</code>)* |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -102,6 +103,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markdown-multi-slides.TpMarkdownMultiSlides.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 
@@ -368,15 +375,10 @@ bundler
 All tp-components used by `<tp-markdown-multi-slides>` are loaded automatically by this component if they have not already been loaded by another component.
 
 <!--
-@tp-dependency tp-markup-multi-pages
-@summary Multi-page documentation with support for multiple markup languages.
--->
-<!--
 @tp-dependency tp-markup-multi-slides
 @summary presents multi-format pages as a responsive slide deck.
 -->
 
-- [`<tp-markup-multi-pages>`](../markup-multi-pages/index.md) : Multi-page documentation with support for multiple markup languages.
 - [`<tp-markup-multi-slides>`](../markup-multi-slides/index.md) : presents multi-format pages as a responsive slide deck.
 
 ### External

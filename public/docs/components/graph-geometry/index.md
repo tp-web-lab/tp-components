@@ -490,6 +490,12 @@ CSS properties
 
 
 
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -525,16 +531,8 @@ bundler
 All tp-components used by `<tp-graph-geometry>` are loaded automatically by this component if they have not already been loaded by another component.
 
 <!--
-@tp-dependency tp-accordion
-@summary Collapsible multi-panels element.
--->
-<!--
 @tp-dependency tp-base
 @summary Shared base class for tp-* components.
--->
-<!--
-@tp-dependency tp-button
-@summary Button component that supports native button and link rendering.
 -->
 <!--
 @tp-dependency tp-button-group
@@ -577,9 +575,7 @@ All tp-components used by `<tp-graph-geometry>` are loaded automatically by this
 @summary Parent-scoped light/dark/auto theme controller with embedded UI.
 -->
 
-- [`<tp-accordion>`](../accordion/index.md) : Collapsible multi-panels element.
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
 - [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
 - [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
 - [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.

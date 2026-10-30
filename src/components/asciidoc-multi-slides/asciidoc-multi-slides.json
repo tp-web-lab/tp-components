@@ -15,10 +15,6 @@
   "cssproperties": [],
   "dependencies": [
     {
-      "name": "tp-markup-multi-pages",
-      "summary": "Multi-page documentation with support for multiple markup languages."
-    },
-    {
       "name": "tp-markup-multi-slides",
       "summary": "presents multi-format pages as a responsive slide deck."
     }

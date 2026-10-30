@@ -139,16 +139,16 @@ Events
   | <code>change</code> | <code>void</code> | Emitted when the expression is committed or a different notation is selected in the menu. |
   | <code>input</code> | <code>void</code> | Emitted when the expression changes while editing. |
   | <code>tp-clear</code> | <code>void</code> | Emitted after the embedded button clears the expression. |
-  | <code>tp-math-rendered</code> | <code>&#123; mode: unknown; value: string &#125;</code> | Emitted after MathJax finishes rendering the expression. |
+  | <code>tp-math-rendered</code> | <code>&#123; mode: &quot;latexmath&quot; \| &quot;asciimath&quot;; value: string &#125;</code> | Emitted when the formula preview reports that rendering has finished; mode is the input notation and value is the current expression. |
   [Events emitted by `<tp-mathfield>`]
 
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-mathfield-inline-size</code> | <code>28rem</code> | Controls the inline size. |
-  | <code>&#45;&#45;tp-mathfield-preview-background</code> | <code>Canvas</code> | Controls the preview background. |
-  | <code>&#45;&#45;tp-mathfield-preview-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Controls the preview border color. |
-  | <code>&#45;&#45;tp-mathfield-preview-padding</code> | <code>0.75rem</code> | Controls the preview padding. |
+  | <code>&#45;&#45;tp-mathfield-inline-size</code> | <code>28rem</code> | Preferred width of the math editor, limited by available space; also caps the multiline component width. |
+  | <code>&#45;&#45;tp-mathfield-preview-background</code> | <code>Canvas</code> | Background color of the rendered formula preview. |
+  | <code>&#45;&#45;tp-mathfield-preview-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Border color of the rendered formula preview. |
+  | <code>&#45;&#45;tp-mathfield-preview-padding</code> | <code>0.75rem</code> | Inner spacing around the rendered formula preview. |
   [CSS properties of `<tp-mathfield>`]
 :::
 <!-- /tp-docgen:api -->
@@ -156,6 +156,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_mathfield_mathfield.TpMathfield.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 
@@ -464,6 +470,10 @@ All tp-components used by `<tp-mathfield>` are loaded automatically by this comp
 ### External
 
 <!--
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
+-->
+<!--
 @credit MathLive https://mathlive.io/
 @summary Visual LaTeX editing and mathematical keyboard, loaded on demand.
 -->
@@ -472,6 +482,7 @@ All tp-components used by `<tp-mathfield>` are loaded automatically by this comp
 @summary Mathematical notation rendering.
 -->
 
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 - [MathLive](https://mathlive.io/) : Visual LaTeX editing and mathematical keyboard, loaded on demand.
 - [MathJax](https://www.mathjax.org/) : Mathematical notation rendering.
 <!-- tp-docgen:dependencies:end -->

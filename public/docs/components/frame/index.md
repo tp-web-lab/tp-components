@@ -92,8 +92,8 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-frame-denominator</code> | <code>9</code> | Controls the denominator. |
-  | <code>&#45;&#45;tp-frame-numerator</code> | <code>16</code> | Controls the numerator. |
+  | <code>&#45;&#45;tp-frame-denominator</code> | <code>9</code> | Positive unitless height term of the width-to-height aspect ratio; updated by the ratio attribute. |
+  | <code>&#45;&#45;tp-frame-numerator</code> | <code>16</code> | Positive unitless width term of the width-to-height aspect ratio; updated by the ratio attribute. |
   [CSS properties of `<tp-frame>`]
 :::
 <!-- /tp-docgen:api -->
@@ -101,6 +101,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_frame_frame.TpFrame.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

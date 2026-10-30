@@ -97,7 +97,7 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-formula-picker-select</code> | <code>&#123; name: unknown; formula: unknown; selectionStart: unknown; selectionEnd: unknown &#125;</code> | Emitted when formula picker select occurs. |
+  | <code>tp-formula-picker-select</code> | <code>&#123; name: string; formula: string; selectionStart: number; selectionEnd: number &#125;</code> | Emitted when a spreadsheet function is selected. formula contains the leading = and argument placeholders; selectionStart and selectionEnd are zero-based string offsets delimiting the arguments to select. |
   [Events emitted by `<tp-formula-picker>`]
 
 CSS properties
@@ -111,6 +111,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_formula-picker.TpFormulaPicker.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

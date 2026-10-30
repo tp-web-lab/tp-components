@@ -51,73 +51,73 @@
     {
       "name": "addTableColumnAfter(): boolean",
       "inherited": false,
-      "description": "Adds table column after."
+      "description": "Adds a column after the selected table column; returns true when the command applies, or false when unavailable for the current editor state."
     },
     {
       "name": "addTableRowAfter(): boolean",
       "inherited": false,
-      "description": "Adds table row after."
+      "description": "Adds a row after the selected table row; returns true when the command applies, or false when unavailable for the current editor state."
     },
     {
       "name": "deleteTable(): boolean",
       "inherited": false,
-      "description": "Deletes table."
+      "description": "Deletes the table containing the current selection; returns true when the command applies, or false when unavailable for the current editor state."
     },
     {
       "name": "deleteTableColumn(): boolean",
       "inherited": false,
-      "description": "Deletes table column."
+      "description": "Deletes the selected table column; returns true when the command applies, or false when unavailable for the current editor state."
     },
     {
       "name": "deleteTableRow(): boolean",
       "inherited": false,
-      "description": "Deletes table row."
+      "description": "Deletes the selected table row; returns true when the command applies, or false when unavailable for the current editor state."
     },
     {
       "name": "findNext(value?: string): boolean",
       "inherited": false,
-      "description": "Finds next."
+      "description": "Finds and selects the next matching text, optionally replacing the current query with value. Returns whether a match was selected."
     },
     {
       "name": "findPrevious(value?: string): boolean",
       "inherited": false,
-      "description": "Finds previous."
+      "description": "Finds and selects the previous matching text, optionally replacing the current query with value. Returns whether a match was selected."
     },
     {
       "name": "focus(options?: FocusOptions): void",
       "inherited": false,
-      "description": "Focus."
+      "description": "Focuses the active editing surface, forwarding optional browser FocusOptions."
     },
     {
       "name": "getHTML(): string",
       "inherited": false,
-      "description": "Returns html."
+      "description": "Returns the current HTML from the active source, rendered or rich-text mode; before initialization, returns the configured initial HTML."
     },
     {
       "name": "insertTable(rows = 3, columns = 3): boolean",
       "inherited": false,
-      "description": "Inserts table."
+      "description": "Replaces the current selection with a table of rows by columns and focuses it. Returns false if no editor or valid table can be created."
     },
     {
       "name": "setHTML(value: string): void",
       "inherited": false,
-      "description": "Sets html."
+      "description": "Replaces the document from HTML, synchronizes active source/rendered views and reflects the supplied text in value."
     },
     {
       "name": "setSearchQuery(value: string, options: Omit<ConstructorParameters<typeof SearchQuery>[0], \"search\"> = {}): void",
       "inherited": false,
-      "description": "Sets search query."
+      "description": "Sets the search text and optional matching options on the rich-text editor; does nothing before initialization."
     }
   ],
   "events": [
     {
       "name": "tp-prose-editor-change",
-      "description": "Emitted when prose editor change occurs.",
+      "description": "Emitted immediately after tp-prose-editor-input for the same edit; it does not wait for blur. value contains the current HTML serialization.",
       "detail": "{ value: string }"
     },
     {
       "name": "tp-prose-editor-input",
-      "description": "Emitted when prose editor input occurs.",
+      "description": "Emitted after an editing transaction or editor command updates the document. value contains the current HTML serialization.",
       "detail": "{ value: string }"
     }
   ],
@@ -145,7 +145,7 @@
     },
     {
       "name": "tp-dropdown",
-      "summary": "Displays an anchored dropdown menu."
+      "summary": "Dropdown menu component."
     },
     {
       "name": "tp-emoji-picker",
@@ -193,6 +193,11 @@
     }
   ],
   "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    },
     {
       "name": "ProseMirror",
       "url": "https://prosemirror.net/",

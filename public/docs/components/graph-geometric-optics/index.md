@@ -80,17 +80,17 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>addEdge</code> | <code>addEdge(): TpGraphEdge</code> | Adds edge. |
-  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode</code> | Adds node. |
-  | <code>analyze</code> | <code>analyze(): TpOpticsAnalysis</code> | Analyze. |
-  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Sets graph. |
-  | <code>trace</code> | <code>trace(): void</code> | Trace. |
+  | <code>addEdge</code> | <code>addEdge(): TpGraphEdge</code> | Always throws TypeError: optical rays are computed from the scene and cannot be added as graph edges. |
+  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode</code> | Adds a supported optical component at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError. |
+  | <code>analyze</code> | <code>analyze(): TpOpticsAnalysis</code> | Returns the ray-tracing analysis computed from the current optical scene without replacing the graph. |
+  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph. |
+  | <code>trace</code> | <code>trace(): void</code> | Revalidates and redraws the current scene, then emits tp-optics-trace with its analysis and graph snapshot. |
   [Public methods of `TpGraphGeometricOptics`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-optics-trace</code> | <code>&#123; analysis: unknown; graph: unknown &#125;</code> | * |
+  | <code>tp-optics-trace</code> | <code>&#123; analysis: TpOpticsAnalysis; graph: TpGraphDocument &#125;</code> | Emitted after trace recomputes the displayed ray paths; analysis contains the optical-system analysis and graph is the resulting snapshot. |
   [Events emitted by `<tp-graph-geometric-optics>`]
 
 CSS properties
@@ -104,6 +104,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-geometric-optics.TpGraphGeometricOptics.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

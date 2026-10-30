@@ -44,8 +44,8 @@
     },
     {
       "name": "tp-memory-match",
-      "description": "Emitted when a pair is matched.",
-      "detail": "{ pair: unknown }"
+      "description": "Emitted after two matching cards are revealed; pair is the zero-based identifier assigned to their original list item.",
+      "detail": "{ pair: number }"
     },
     {
       "name": "tp-memory-reset",

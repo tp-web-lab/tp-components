@@ -89,7 +89,7 @@ Attributes
   | --- | --- | --- | --- |
   | <code>displaystyle</code> | <code>boolean</code> | <code>false</code> | Uses display-style mathematics in a centered block instead of inline mathematics. |
   | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Accessible description of the formula; defaults to its source text. |
-  | <code>mode</code> | <code>&quot;latexmath&quot; \| &quot;asciimath&quot;</code> | <code>&quot;latexmath&quot;</code> | Mathematical input notation. |
+  | <code>mode</code> | <code>&quot;latexmath&quot; \| &quot;asciimath&quot;</code> | <code>&quot;latexmath&quot;</code> | Input notation: latexmath for LaTeX expressions or asciimath for ASCII math. Invalid values use latexmath. |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Expression file; takes precedence over value and inline content. |
   | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Expression without surrounding math delimiters. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
@@ -122,6 +122,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_math.TpMath.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

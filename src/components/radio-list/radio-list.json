@@ -66,20 +66,20 @@
   "events": [
     {
       "name": "tp-radio-list-change",
-      "description": "Emitted when selected value changes (`detail: { value, label }`).",
-      "detail": "{ value: string; label: unknown }"
+      "description": "Emitted after a selection change. value is the selected 1-based item index as a string; label is its visible label. Both are empty when nothing is selected.",
+      "detail": "{ value: string; label: string }"
     }
   ],
   "cssproperties": [
     {
       "name": "--tp-radio-list-marker-gap",
       "default": "0.5em",
-      "description": "Controls the marker gap."
+      "description": "Horizontal space between each selection marker and its item content."
     },
     {
       "name": "--tp-radio-list-marker-width",
       "default": "2ch",
-      "description": "Controls the marker width."
+      "description": "Width reserved for each selection marker; aligns the item content in both orientations."
     }
   ],
   "dependencies": [

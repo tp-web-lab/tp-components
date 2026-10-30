@@ -156,47 +156,47 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = &quot;edge&quot;, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = this.activeEdgeDirection, routing: TpGraphEdgeRouting = this.activeEdgeRouting): TpGraphEdge</code> | Adds edge. |
-  | <code>addMeasurement</code> | <code>addMeasurement(edgeId: string, position = 0.5, label?: string): TpGraphMeasurement</code> | Adds measurement. |
-  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode</code> | Adds node. |
-  | <code>animateTransition</code> | <code>animateTransition(transition: TpGraphTransition): Promise&lt;void&gt;</code> | Animate transition. |
-  | <code>copy</code> | <code>copy(): boolean</code> | Copy. |
-  | <code>cut</code> | <code>cut(): boolean</code> | Cut. |
-  | <code>exportJson</code> | <code>exportJson(pretty = true): string</code> | Exports json. |
-  | <code>exportSvg</code> | <code>exportSvg(): string</code> | Exports svg. |
-  | <code>importJson</code> | <code>importJson(source: string): void</code> | Imports json. |
-  | <code>moveMeasurement</code> | <code>moveMeasurement(id: string, position: number): void</code> | Moves measurement. |
-  | <code>paste</code> | <code>paste(): string \| null</code> | Paste. |
-  | <code>reconnectEdge</code> | <code>reconnectEdge(edgeId: string, endpoint: &quot;source&quot; \| &quot;target&quot;, nodeId: string, port: TpGraphPort): TpGraphEdge</code> | Reconnect edge. |
-  | <code>redo</code> | <code>redo(): boolean</code> | Redo. |
-  | <code>registerPalette</code> | <code>registerPalette(palette: TpGraphPalette): void</code> | Registers palette. |
-  | <code>registerSimulator</code> | <code>registerSimulator(name: string, simulator: TpGraphSimulator): void</code> | Registers simulator. |
-  | <code>removeElement</code> | <code>removeElement(id: string): void</code> | Removes element. |
-  | <code>resetZoom</code> | <code>resetZoom(): void</code> | Resets zoom. |
-  | <code>setCommentColor</code> | <code>setCommentColor(id: string, color: TpGraphCommentColor): void</code> | Sets comment color. |
-  | <code>setEdgeDirection</code> | <code>setEdgeDirection(edgeId: string, direction: TpGraphEdgeDirection): void</code> | Sets edge direction. |
-  | <code>setEdgeOrthogonal</code> | <code>setEdgeOrthogonal(edgeId: string, elbows: 1 \| 2 \| 3, departure: &quot;horizontal&quot; \| &quot;vertical&quot;, turns: &quot;alternating&quot; \| &quot;same&quot; = &quot;alternating&quot;): void</code> | Sets edge orthogonal. |
-  | <code>setEdgeRouting</code> | <code>setEdgeRouting(edgeId: string, routing: TpGraphEdgeRouting): void</code> | Sets edge routing. |
-  | <code>setElementLabel</code> | <code>setElementLabel(id: string, label: string): void</code> | Sets element label. |
-  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Sets graph. |
-  | <code>setTitle</code> | <code>setTitle(title: string): void</code> | Sets title. |
-  | <code>setZoom</code> | <code>setZoom(value: number): void</code> | Sets zoom. |
-  | <code>step</code> | <code>step(simulatorName: string): Promise&lt;void&gt;</code> | Step. |
-  | <code>undo</code> | <code>undo(): boolean</code> | Undo. |
-  | <code>unregisterPalette</code> | <code>unregisterPalette(id: string): void</code> | Unregisters palette. |
-  | <code>zoomIn</code> | <code>zoomIn(): void</code> | Zoom in. |
-  | <code>zoomOut</code> | <code>zoomOut(): void</code> | Zoom out. |
+  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = &quot;edge&quot;, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = this.activeEdgeDirection, routing: TpGraphEdgeRouting = this.activeEdgeRouting): TpGraphEdge</code> | Connects existing source and target node IDs using the requested type, ports, direction and routing. Rejects invalid connections, records the change and returns a detached edge copy. |
+  | <code>addMeasurement</code> | <code>addMeasurement(edgeId: string, position = 0.5, label?: string): TpGraphMeasurement</code> | Adds a measurement marker to edgeId at a position clamped to 0..1 along the edge; returns its detached record. Throws for an unknown edge. |
+  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode</code> | Adds a node of type at graph coordinates point, snapped to the grid. Uses label or the palette default, records the change and returns a detached copy of the node. |
+  | <code>animateTransition</code> | <code>animateTransition(transition: TpGraphTransition): Promise&lt;void&gt;</code> | Applies node and edge patches to existing IDs, animates their appearance for transition.duration milliseconds (300 by default), then records the change. Resolves after that duration. |
+  | <code>copy</code> | <code>copy(): boolean</code> | Copies the selected graph elements and connecting edges into the editor-local clipboard. Returns false when nothing is selected; does not use the system clipboard. |
+  | <code>cut</code> | <code>cut(): boolean</code> | Copies the selection into the editor-local clipboard, then removes it and connected edges as an undoable change. Returns false when readonly or nothing is selected. |
+  | <code>exportJson</code> | <code>exportJson(pretty = true): string</code> | Returns the graph serialized as JSON; pretty uses two-space indentation, while false produces compact JSON. |
+  | <code>exportSvg</code> | <code>exportSvg(): string</code> | Returns a standalone SVG of the graph with resolved styles and content bounds; throws when the canvas is not ready. |
+  | <code>importJson</code> | <code>importJson(source: string): void</code> | Parses and validates a JSON graph, replaces the current graph and emits tp-graph-import. Invalid JSON or graph data throws before replacement. |
+  | <code>moveMeasurement</code> | <code>moveMeasurement(id: string, position: number): void</code> | Moves the marker identified by id to a relative edge position clamped to 0..1; throws when the marker is unknown. |
+  | <code>paste</code> | <code>paste(): string \| null</code> | Duplicates the editor-local clipboard with new IDs and an offset, then selects the copies. Returns the first pasted ID, or null when readonly or no clipboard content is available. |
+  | <code>reconnectEdge</code> | <code>reconnectEdge(edgeId: string, endpoint: &quot;source&quot; \| &quot;target&quot;, nodeId: string, port: TpGraphPort): TpGraphEdge</code> | Moves the source or target endpoint of edgeId to nodeId and port after connection validation; returns a detached copy of the updated edge. |
+  | <code>redo</code> | <code>redo(): boolean</code> | Restores the next undone graph snapshot and returns true; returns false when redo history is empty. |
+  | <code>registerPalette</code> | <code>registerPalette(palette: TpGraphPalette): void</code> | Registers or replaces a shape palette by its ID and refreshes the palette UI. Requires a nonempty ID and at least one shape. |
+  | <code>registerSimulator</code> | <code>registerSimulator(name: string, simulator: TpGraphSimulator): void</code> | Registers or replaces the simulator function associated with name for subsequent step(name) calls. |
+  | <code>removeElement</code> | <code>removeElement(id: string): void</code> | Removes the node, edge or measurement identified by id; removing a node also removes its connected edges. Updates selection and records an undoable change. |
+  | <code>resetZoom</code> | <code>resetZoom(): void</code> | Restores magnification to 1 (100%) without changing graph data. |
+  | <code>setCommentColor</code> | <code>setCommentColor(id: string, color: TpGraphCommentColor): void</code> | Changes the color of a comment node and records the change; throws for an unknown comment or unsupported color. |
+  | <code>setEdgeDirection</code> | <code>setEdgeDirection(edgeId: string, direction: TpGraphEdgeDirection): void</code> | Changes an existing edge direction and the default for new edges; throws for an unknown edge or a direction unsupported by this editor. |
+  | <code>setEdgeOrthogonal</code> | <code>setEdgeOrthogonal(edgeId: string, elbows: 1 \| 2 \| 3, departure: &quot;horizontal&quot; \| &quot;vertical&quot;, turns: &quot;alternating&quot; \| &quot;same&quot; = &quot;alternating&quot;): void</code> | Uses orthogonal routing with 1, 2 or 3 elbows and a horizontal or vertical departure. The turns choice applies to two elbows; throws for an unknown edge. |
+  | <code>setEdgeRouting</code> | <code>setEdgeRouting(edgeId: string, routing: TpGraphEdgeRouting): void</code> | Changes an existing edge routing mode and the default for new edges; throws for an unknown edge. |
+  | <code>setElementLabel</code> | <code>setElementLabel(id: string, label: string): void</code> | Sets the trimmed label of a node, edge or measurement by ID; empty clears the label. Throws for an unknown element. |
+  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Validates and clones the supplied graph, clears selection and rerenders it. After initialization, a changed graph is recorded in undo history; invalid graphs throw before replacement. |
+  | <code>setTitle</code> | <code>setTitle(title: string): void</code> | Trims and stores the graph title, then records an undoable change; an empty string removes visible title text. |
+  | <code>setZoom</code> | <code>setZoom(value: number): void</code> | Sets a positive finite magnification factor, clamped to the supported zoom range. A value of 1 means 100%; invalid inputs throw TypeError. |
+  | <code>step</code> | <code>step(simulatorName: string): Promise&lt;void&gt;</code> | Runs the simulator registered as simulatorName on a graph snapshot, awaits its animated transition and emits tp-graph-simulation-step. Throws for an unknown simulator. |
+  | <code>undo</code> | <code>undo(): boolean</code> | Restores the preceding graph snapshot and returns true; returns false when undo history is empty. |
+  | <code>unregisterPalette</code> | <code>unregisterPalette(id: string): void</code> | Removes the palette with the supplied ID and selects a remaining shape if needed; does not remove existing graph nodes. |
+  | <code>zoomIn</code> | <code>zoomIn(): void</code> | Increases magnification by the configured zoom factor, up to the supported maximum. |
+  | <code>zoomOut</code> | <code>zoomOut(): void</code> | Decreases magnification by the configured zoom factor, down to the supported minimum. |
   [Public methods of `TpGraphEditor`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-graph-change</code> | <code>&#123; reason: unknown; graph: unknown &#125;</code> | Fired after a user or API graph mutation. |
-  | <code>tp-graph-error</code> | <code>&#123; error: unknown; operation: &quot;add-edge&quot; &#125;</code> | Emitted when graph error occurs. |
-  | <code>tp-graph-export</code> | <code>&#123; graph: unknown &#125;</code> | Emitted when graph export occurs. |
-  | <code>tp-graph-import</code> | <code>&#123; graph: unknown &#125;</code> | Emitted when graph import occurs. |
-  | <code>tp-graph-selection-change</code> | <code>&#123; id: unknown; ids: unknown &#125;</code> | Fired when the selection changes. |
-  | <code>tp-graph-simulation-step</code> | <code>&#123; simulator: unknown; graph: unknown &#125;</code> | Fired after a simulator step. |
+  | <code>tp-graph-change</code> | <code>&#123; reason: string; graph: TpGraphDocument &#125;</code> | Emitted after a recorded graph mutation, JSON edit, undo or redo. reason identifies the operation and graph contains the resulting snapshot. |
+  | <code>tp-graph-error</code> | <code>&#123; error: unknown; operation: &quot;load-src&quot; \| &quot;reconnect-edge&quot; \| &quot;add-edge&quot;; src?: string &#125;</code> | Emitted when loading src or creating/reconnecting an edge fails. operation identifies the failed action; src is included only for load-src. |
+  | <code>tp-graph-export</code> | <code>&#123; graph: TpGraphDocument &#125;</code> | Emitted after the graph export has been saved; graph contains the exported graph snapshot. |
+  | <code>tp-graph-import</code> | <code>&#123; graph: TpGraphDocument &#125;</code> | Emitted after importJSON validates and installs a graph; graph contains the imported snapshot. |
+  | <code>tp-graph-selection-change</code> | <code>&#123; id: string \| null; ids: string[] &#125;</code> | Emitted when the selection is synchronized. id is the primary selection or null, and ids lists all selected element identifiers. |
+  | <code>tp-graph-simulation-step</code> | <code>&#123; simulator: string; graph: TpGraphDocument &#125;</code> | Emitted after a registered simulator step and its transition animation complete; simulator is its registered name and graph is the resulting snapshot. |
   [Events emitted by `<tp-graph-editor>`]
 
 CSS properties
@@ -210,6 +210,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-editor.TpGraphEditor.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 
@@ -526,7 +532,7 @@ All tp-components used by `<tp-graph-editor>` are loaded automatically by this c
 
 <!--
 @tp-dependency tp-accordion
-@summary Accessible accordion component with keyboard navigation and ARIA mapping.
+@summary Collapsible multi-panels element.
 -->
 <!--
 @tp-dependency tp-base
@@ -546,7 +552,7 @@ All tp-components used by `<tp-graph-editor>` are loaded automatically by this c
 -->
 <!--
 @tp-dependency tp-dropdown
-@summary Displays an anchored dropdown menu.
+@summary Dropdown menu component.
 -->
 <!--
 @tp-dependency tp-fullscreen
@@ -565,12 +571,12 @@ All tp-components used by `<tp-graph-editor>` are loaded automatically by this c
 @summary Parent-scoped light/dark/auto theme controller with embedded UI.
 -->
 
-- [`<tp-accordion>`](../accordion/index.md) : Accessible accordion component with keyboard navigation and ARIA mapping.
+- [`<tp-accordion>`](../accordion/index.md) : Collapsible multi-panels element.
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
 - [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
 - [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
 - [`<tp-color>`](../color/index.md) : Brand color preset controller scoped to the containing element.
-- [`<tp-dropdown>`](../dropdown/index.md) : Displays an anchored dropdown menu.
+- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
 - [`<tp-fullscreen>`](../fullscreen/index.md) : Fullscreen controller button.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
 - [`<tp-save-image>`](../save-image/index.md) : Downloads an anchored image as SVG, PNG or WebP.

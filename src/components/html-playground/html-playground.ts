@@ -22,15 +22,11 @@
  */
 /**
  * @tp-dependency tp-drawer
- * @summary Displays a sliding drawer panel.
+ * @summary Drawer overlay component.
  */
 /**
  * @tp-dependency tp-dropdown
- * @summary Displays an anchored dropdown menu.
- */
-/**
- * @tp-dependency tp-file-tree
- * @summary Displays an interactive file and folder tree.
+ * @summary Dropdown menu component.
  */
 /**
  * @tp-dependency tp-filesystem
@@ -69,6 +65,10 @@
  * @summary Sticky toolbar with start / center / end sections,
  */
 /**
+ * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+ * @summary Shared parsers, games and rendering utilities.
+ */
+/**
  * @credit es-module-lexer https://github.com/guybedford/es-module-lexer
  * @summary ECMAScript module import analysis.
  */
@@ -77,12 +77,12 @@
  * @summary Assertions in browser tests.
  */
 /**
- * @credit Mocha https://mochajs.org/
- * @summary Browser test execution.
+ * @credit Lit https://lit.dev/
+ * @summary Web-component examples and import maps.
  */
 /**
- * @credit TypeScript https://www.typescriptlang.org/
- * @summary TypeScript transpilation and language services.
+ * @credit Mocha https://mochajs.org/
+ * @summary Browser test execution.
  */
 /**
  * @credit Zod https://zod.dev/

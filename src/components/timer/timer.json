@@ -48,7 +48,7 @@
     },
     {
       "name": "size",
-      "description": "Icon and text size.",
+      "description": "Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -79,22 +79,22 @@
     {
       "name": "--tp-timer-alert",
       "default": "var(--tp-danger-text-on-soft)",
-      "description": "Controls the alert."
+      "description": "Text color of the time display when the countdown has elapsed."
     },
     {
       "name": "--tp-timer-alert-bg",
       "default": "var(--tp-danger-fill-softer)",
-      "description": "Controls the alert bg."
+      "description": "Background color of the elapsed portion of the countdown and of the whole timer once elapsed."
     },
     {
       "name": "--tp-timer-muted",
       "default": "var(--tp-neutral-text-on-soft)",
-      "description": "Controls the muted."
+      "description": "Text color of the time display while stopped."
     },
     {
       "name": "--tp-timer-progress",
       "default": "0%",
-      "description": "Controls the progress."
+      "description": "Elapsed portion of the countdown, as a percentage from 0% to 100%; updated internally as time passes."
     },
     {
       "name": "--tp-timer-size",

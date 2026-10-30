@@ -95,10 +95,10 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-box-background</code> | <code>white</code> | Default box background. |
+  | <code>&#45;&#45;tp-box-background</code> | <code>var(&#45;&#45;tp-paper-color, transparent)</code> | Default box background. |
   | <code>&#45;&#45;tp-box-border-radius</code> | <code>0px</code> | Default border radius. |
   | <code>&#45;&#45;tp-box-border-width</code> | <code>1px</code> | Default border width. |
-  | <code>&#45;&#45;tp-box-color</code> | <code>var(&#45;&#45;tp-neutral-900)</code> | Default box text color. |
+  | <code>&#45;&#45;tp-box-color</code> | <code>var(&#45;&#45;tp-text-body, inherit)</code> | Default box text color. |
   | <code>&#45;&#45;tp-box-padding</code> | <code>1rem</code> | Default inner padding. |
   [CSS properties of `<tp-box>`]
 :::
@@ -107,6 +107,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_box.TpBox.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

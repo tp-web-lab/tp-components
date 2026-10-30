@@ -14,82 +14,82 @@
     {
       "name": "addFile(file: TpFile): void",
       "inherited": false,
-      "description": "Adds a file."
+      "description": "Adds a copied file record and refreshes the tree; a duplicate normalized path is ignored."
     },
     {
       "name": "closeFile(path: string): void",
       "inherited": false,
-      "description": "Closes an open file."
+      "description": "Removes path from the open files; if it was active, activates another open file or clears the active path."
     },
     {
       "name": "deleteFile(path: string): void",
       "inherited": false,
-      "description": "Deletes a file."
+      "description": "Deletes an existing writable file and clears its open/dirty state; missing or readonly files are unchanged."
     },
     {
       "name": "getActivePath(): string | null",
       "inherited": false,
-      "description": "Returns the active file path."
+      "description": "Returns the active file path, or null when no file is active."
     },
     {
       "name": "getDirtyPaths(): string[]",
       "inherited": false,
-      "description": "Returns dirty file paths."
+      "description": "Returns a new array of paths currently marked as modified."
     },
     {
       "name": "getFiles(): TpFile[]",
       "inherited": false,
-      "description": "Returns all files."
+      "description": "Returns copies of all in-memory file records; modifying the returned array does not update the component."
     },
     {
       "name": "getState(): TpFilesystemState",
       "inherited": false,
-      "description": "Returns the full file system state."
+      "description": "Returns a snapshot of copied files and the current active, open and dirty paths."
     },
     {
       "name": "moveFile(oldPath: string, newPath: string): void",
       "inherited": false,
-      "description": "Moves a file."
+      "description": "Renames oldPath to newPath using renameFile(), then emits a move notification with the normalized paths."
     },
     {
       "name": "openFile(path: string, emitEvent = true): void",
       "inherited": false,
-      "description": "Opens a file and makes it active."
+      "description": "Marks an existing file as open and active. Set emitEvent to false to suppress open/active notifications."
     },
     {
       "name": "readFile(path: string): string | null",
       "inherited": false,
-      "description": "Reads a file."
+      "description": "Returns the content of the normalized file path, or null when no file exists at that path."
     },
     {
       "name": "renameFile(oldPath: string, newPath: string): void",
       "inherited": false,
-      "description": "Renames a file."
+      "description": "Changes the normalized path of a writable file and updates its tracked states. Missing, readonly or unchanged source paths are ignored."
     },
     {
       "name": "setActivePath(path: string | null, emitEvent = true): void",
       "inherited": false,
-      "description": "Sets the active file path."
+      "description": "Sets an existing file as active, or clears it with null. Set emitEvent to false to suppress the active-file notification."
     },
     {
       "name": "setDirtyPaths(paths: readonly string[]): void",
       "inherited": false,
-      "description": "Replaces dirty file paths."
+      "description": "Replaces the set of modified-file paths and refreshes the tree; unknown paths are discarded."
     },
     {
       "name": "setFiles(files: readonly TpFile[]): void",
       "inherited": false,
-      "description": "Replaces all files."
+      "description": "Replaces the in-memory files with copies, removes states for missing files, refreshes the tree and emits a change event."
     },
     {
       "name": "setState(state: TpFilesystemState): void",
       "inherited": false,
-      "description": "Replaces the full file system state."
+      "description": "Replaces files and active, open and dirty paths together; removes paths that no longer exist, refreshes the tree and emits change."
     },
     {
       "name": "writeFile(path: string, content: string): void",
       "inherited": false,
-      "description": "Writes file content."
+      "description": "Replaces an existing writable file content, marks it dirty and emits write/change events. Missing and readonly files are unchanged."
     }
   ],
   "events": [

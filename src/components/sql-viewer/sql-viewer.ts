@@ -5,10 +5,6 @@
  */
 // tp-docgen:dependencies:start
 /**
- * @tp-dependency tp-file-tree
- * @summary Displays an interactive file and folder tree.
- */
-/**
  * @tp-dependency tp-sql-playground
  * @summary SQL playground component.
  */

@@ -77,21 +77,21 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_LOGIC_WIRE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &#39;forward&#39;): TpGraphEdge</code> | Adds edge. |
-  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode</code> | Adds node. |
-  | <code>evaluate</code> | <code>evaluate(): void</code> | Evaluate. |
-  | <code>reconnectEdge</code> | <code>reconnectEdge(edgeId: string, endpoint: &#39;source&#39; \| &#39;target&#39;, nodeId: string, port: TpGraphPort): TpGraphEdge</code> | Reconnect edge. |
-  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Sets graph. |
-  | <code>toggle</code> | <code>toggle(id: string, propagate = true): boolean</code> | Toggle. |
-  | <code>toggleEquationNotation</code> | <code>toggleEquationNotation(): TpLogicalEquationNotation</code> | Toggles equation notation. |
-  | <code>toggleRepresentation</code> | <code>toggleRepresentation(): TpLogicGateRepresentation</code> | Toggles representation. |
+  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_LOGIC_WIRE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &quot;forward&quot;): TpGraphEdge</code> | Connects compatible logic nodes with a forward wire and returns its record. Validates input capacity and resolves the target input port; invalid connections throw. |
+  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode</code> | Adds a supported logic gate, input, output or comment at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError. |
+  | <code>evaluate</code> | <code>evaluate(): void</code> | Recomputes combinational logic, replaces the displayed graph and emits tp-logic-evaluate. |
+  | <code>reconnectEdge</code> | <code>reconnectEdge(edgeId: string, endpoint: &quot;source&quot; \| &quot;target&quot;, nodeId: string, port: TpGraphPort): TpGraphEdge</code> | Reconnects an existing wire endpoint after checking logic compatibility and available input capacity; returns the updated edge record. |
+  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph. |
+  | <code>toggle</code> | <code>toggle(id: string, propagate = true): boolean</code> | Inverts the Boolean state of input or output id and returns the new value. Input changes propagate through the circuit unless propagate is false; other node types throw. |
+  | <code>toggleEquationNotation</code> | <code>toggleEquationNotation(): TpLogicalEquationNotation</code> | Switches equations between electronic and mathematical notation, redraws results and returns the selected notation. |
+  | <code>toggleRepresentation</code> | <code>toggleRepresentation(): TpLogicGateRepresentation</code> | Switches gate symbols between iso and ansi, redraws the circuit and returns the selected representation. |
   [Public methods of `TpGraphLogicalCircuit`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-logic-evaluate</code> | <code>&#123; graph: unknown &#125;</code> | Emitted when logic evaluate occurs. |
-  | <code>tp-logic-toggle</code> | <code>&#123; id: unknown; value: string; graph: unknown &#125;</code> | Emitted when logic toggle occurs. |
+  | <code>tp-logic-evaluate</code> | <code>&#123; graph: TpGraphDocument &#125;</code> | Emitted after combinational outputs are recomputed; graph contains the resulting snapshot. |
+  | <code>tp-logic-toggle</code> | <code>&#123; id: string; value: boolean; graph: TpGraphDocument &#125;</code> | Emitted after an input node is toggled; id identifies the input, value is its new Boolean level, and graph contains the resulting snapshot. |
   [Events emitted by `<tp-graph-logical-circuit>`]
 
 CSS properties
@@ -105,6 +105,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-logical-circuit.TpGraphLogicalCircuit.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

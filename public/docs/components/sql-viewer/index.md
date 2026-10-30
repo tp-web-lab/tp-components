@@ -450,6 +450,12 @@ CSS properties
 
 
 
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -485,15 +491,10 @@ bundler
 All tp-components used by `<tp-sql-viewer>` are loaded automatically by this component if they have not already been loaded by another component.
 
 <!--
-@tp-dependency tp-file-tree
-@summary Displays an interactive file and folder tree.
--->
-<!--
 @tp-dependency tp-sql-playground
 @summary SQL playground component.
 -->
 
-- [`<tp-file-tree>`](../file-tree/index.md) : Displays an interactive file and folder tree.
 - [`<tp-sql-playground>`](../sql-playground/index.md) : SQL playground component.
 
 ### External

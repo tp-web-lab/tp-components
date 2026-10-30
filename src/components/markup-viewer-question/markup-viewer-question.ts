@@ -27,6 +27,9 @@ export interface MarkupQuestionViewer extends HTMLElement {
  *     <dt>Solution</dt><dd>Use the language's strong-emphasis syntax.</dd>
  *   </dl>
  * </tp-markdown-viewer-question>
+ * @accessibility Inherits question disclosure, submission and reset controls from the editor-question hierarchy; test results and loading failures are reported in its polite live feedback region.
+ * @accessibility The concrete markup viewer supplies editor and preview interaction; this abstract class does not add a separate focusable control.
+ * @accessibilityresponsibility Provide a descriptive question title and prompt, understandable assertion messages and accessible preview content. DOM test success alone does not establish accessibility of the learner's markup.
  */
 export abstract class TpMarkupViewerQuestion<
 	TViewer extends MarkupQuestionViewer,

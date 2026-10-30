@@ -104,12 +104,12 @@
     {
       "name": "--tp-map-height",
       "default": "24rem",
-      "description": "Controls the height."
+      "description": "Height of the map viewport, with a minimum of 10rem."
     },
     {
       "name": "--tp-map-width",
       "default": "100%",
-      "description": "Controls the width."
+      "description": "Preferred width of the map viewport and elevation profile, limited by the container width."
     }
   ],
   "dependencies": [
@@ -135,6 +135,11 @@
     }
   ],
   "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    },
     {
       "name": "Leaflet",
       "url": "https://leafletjs.com/",

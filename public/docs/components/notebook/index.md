@@ -461,6 +461,12 @@ CSS properties
 
 
 
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -513,7 +519,7 @@ All tp-components used by `<tp-notebook>` are loaded automatically by this compo
 -->
 <!--
 @tp-dependency tp-dropdown
-@summary Displays an anchored dropdown menu.
+@summary Dropdown menu component.
 -->
 <!--
 @tp-dependency tp-html-viewer
@@ -560,7 +566,7 @@ All tp-components used by `<tp-notebook>` are loaded automatically by this compo
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
 - [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
 - [`<tp-divider>`](../divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
-- [`<tp-dropdown>`](../dropdown/index.md) : Displays an anchored dropdown menu.
+- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
 - [`<tp-html-viewer>`](../html-viewer/index.md) : Interactive HTML viewer with editable source, live rendering, and DOM inspection.
 - [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.

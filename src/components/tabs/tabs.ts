@@ -106,7 +106,7 @@ let instanceCount = 0;
  * @tagname tp-tabs
  * @attr {string} activation = "auto" - Keyboard activation mode (`auto` or `manual`).
  * @attr {string} orientation = "horizontal" - Tab list orientation (`horizontal` or `vertical`).
- * @attr {number} selected = 0 - Selected tab index.
+ * @attr {number} selected = 0 - Zero-based index of the selected tab: 0 selects the first tab.
  * @event tp-tabs-close Emitted when a tab close button is activated.
  * @eventdetail tp-tabs-close { index: number; value: string }
  * @event tp-tabs-reorder Emitted after a tab is reordered by drag and drop.
@@ -136,6 +136,13 @@ let instanceCount = 0;
  *     <dd>Content of panel <tp-icon size="2em" name="numeric-4"></tp-icon></dd>
  *   </dl>
  * </tp-tabs>
+ * @cssprop [--tp-tabs-border-color=var(--tp-neutral-stroke-soft)] Border color of inactive tab headers and the content panel.
+ * @cssprop [--tp-tabs-border-selected-color=var(--tp-brand-stroke-soft)] Border color of the selected tab header.
+ * @cssprop [--tp-tabs-panel-bg=var(--tp-paper-color)] Background color of the tab content panel.
+ * @cssprop [--tp-tabs-tab-bg=var(--tp-neutral-fill-softer)] Background color of inactive tab headers.
+ * @cssprop [--tp-tabs-tab-color=var(--tp-text-body)] Text color of inactive tab headers.
+ * @cssprop [--tp-tabs-tab-selected-bg=var(--tp-paper-color)] Background color of the selected tab header.
+ * @cssprop [--tp-tabs-tab-selected-color=var(--tp-brand-text-colorful)] Text color of the selected tab header.
  */
 export class TpTabs extends TpBase {
 	/**
@@ -171,7 +178,7 @@ export class TpTabs extends TpBase {
 	}
 
 	/**
-	 * @summary Selected tab index.
+	 * @summary Zero-based index of the selected tab: 0 selects the first tab.
 	 * @attr selected
 	 * @default 0
 	 * @returns Return value.

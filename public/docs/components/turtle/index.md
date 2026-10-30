@@ -99,14 +99,14 @@ Attributes
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>background</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the background. |
-  | <code>download-name</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the download name. |
-  | <code>height</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the height. |
-  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the label. |
-  | <code>replay-label</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the replay label. |
-  | <code>save-label</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the save label. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the src. |
-  | <code>width</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the width. |
+  | <code>background</code> | <code>string</code> | <code>&quot;&quot;</code> | CSS color of the drawing background, or transparent. |
+  | <code>download-name</code> | <code>string</code> | <code>&quot;&quot;</code> | Filename for SVG downloads. The .svg extension is appended when missing; empty uses turtle.svg. |
+  | <code>height</code> | <code>string</code> | <code>&quot;&quot;</code> | Drawing coordinate height as a number; also determines the SVG aspect ratio. Use a positive value for a visible drawing. |
+  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional caption displayed below the drawing. |
+  | <code>replay-label</code> | <code>string</code> | <code>&quot;&quot;</code> | Text of the button that replays the drawing commands; empty uses Replay. |
+  | <code>save-label</code> | <code>string</code> | <code>&quot;&quot;</code> | Text of the SVG download button; empty uses Save SVG. |
+  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a Turtle program; takes precedence over the inline tp/turtle script. |
+  | <code>width</code> | <code>string</code> | <code>&quot;&quot;</code> | Drawing coordinate width as a number; also determines the SVG aspect ratio. Use a positive value for a visible drawing. The SVG remains responsive. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -136,6 +136,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_turtle.TpTurtle.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "alive-color",
-      "description": "Controls the alive color.",
+      "description": "SVG fill color for living cells.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -21,7 +21,7 @@
     },
     {
       "name": "autoplay",
-      "description": "Controls the autoplay.",
+      "description": "Starts automatic generation playback after initialization or reset when present.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -30,7 +30,7 @@
     },
     {
       "name": "background",
-      "description": "Controls the background.",
+      "description": "SVG background color behind the grid.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -39,7 +39,7 @@
     },
     {
       "name": "cell-radius",
-      "description": "Controls the cell radius.",
+      "description": "Corner radius of each cell in SVG units; negative values are clamped to zero.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -48,7 +48,7 @@
     },
     {
       "name": "cell-size",
-      "description": "Controls the cell size.",
+      "description": "Width and height of each cell in SVG units, clamped to at least 1.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -57,7 +57,7 @@
     },
     {
       "name": "dead-color",
-      "description": "Controls the dead color.",
+      "description": "SVG fill color for dead cells.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -66,7 +66,7 @@
     },
     {
       "name": "grid-color",
-      "description": "Controls the grid color.",
+      "description": "SVG stroke color of the cell grid lines.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -75,7 +75,7 @@
     },
     {
       "name": "grid-stroke-width",
-      "description": "Controls the grid stroke width.",
+      "description": "Width of the grid lines in SVG units, clamped to at least 0.1.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -84,7 +84,7 @@
     },
     {
       "name": "interval",
-      "description": "Controls the interval.",
+      "description": "Delay between automatic generations in milliseconds, clamped to at least 16.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -93,7 +93,7 @@
     },
     {
       "name": "label",
-      "description": "Controls the label.",
+      "description": "Optional title displayed above the game controls.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -102,7 +102,7 @@
     },
     {
       "name": "padding",
-      "description": "Controls the padding.",
+      "description": "Space around the grid in SVG units; negative values are clamped to zero.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -111,7 +111,7 @@
     },
     {
       "name": "preset",
-      "description": "Controls the preset.",
+      "description": "Built-in starting pattern: glider, blinker, toad, beacon or gosper-gun. An inline tp/game-life program takes precedence.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -120,7 +120,7 @@
     },
     {
       "name": "preset-height",
-      "description": "Controls the preset height.",
+      "description": "Positive number of grid rows when using preset; absent or invalid uses that preset's height.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -129,7 +129,7 @@
     },
     {
       "name": "preset-width",
-      "description": "Controls the preset width.",
+      "description": "Positive number of grid columns when using preset; absent or invalid uses that preset's width.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -138,7 +138,7 @@
     },
     {
       "name": "preset-x",
-      "description": "Controls the preset x.",
+      "description": "Integer horizontal offset of the preset pattern in grid cells; defaults to the preset position.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -147,7 +147,7 @@
     },
     {
       "name": "preset-y",
-      "description": "Controls the preset y.",
+      "description": "Integer vertical offset of the preset pattern in grid cells; defaults to the preset position.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -156,7 +156,7 @@
     },
     {
       "name": "steps",
-      "description": "Controls the steps.",
+      "description": "Number of generations to compute before the first display and after reset. Zero or a negative value keeps the starting grid.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -165,7 +165,7 @@
     },
     {
       "name": "wrap",
-      "description": "Controls the wrap.",
+      "description": "Connects opposite grid edges so cells at a boundary interact with cells on the opposite side.",
       "reflected": true,
       "static": false,
       "inherited": false,

@@ -38,6 +38,15 @@
       "default": "\"en\""
     },
     {
+      "name": "logo",
+      "description": "Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
       "name": "src",
       "description": "Source file. The extension selects the renderer.",
       "reflected": true,
@@ -73,64 +82,12 @@
   "cssproperties": [],
   "dependencies": [
     {
-      "name": "tp-asciidoc",
-      "summary": "Semantic AsciiDoc rendering component."
-    },
-    {
       "name": "tp-base",
       "summary": "Shared base class for tp-* components."
     },
     {
-      "name": "tp-calculator",
-      "summary": "Scientific calculator with an editable expression and degree/radian modes."
-    },
-    {
-      "name": "tp-clock",
-      "summary": "Live clock component with digital or analogic display and date tooltip."
-    },
-    {
-      "name": "tp-color",
-      "summary": "Brand color preset controller scoped to the containing element."
-    },
-    {
-      "name": "tp-drawer",
-      "summary": "Drawer overlay component."
-    },
-    {
-      "name": "tp-fullscreen",
-      "summary": "Fullscreen controller button."
-    },
-    {
-      "name": "tp-icon-button",
-      "summary": "Accessible icon button component."
-    },
-    {
-      "name": "tp-lang",
-      "summary": "Documentation language selector."
-    },
-    {
-      "name": "tp-markdown",
-      "summary": "Markdown rendering component."
-    },
-    {
-      "name": "tp-post-it-editor",
-      "summary": "creates and edits persistent personal annotations attached to document elements."
-    },
-    {
-      "name": "tp-restructuredtext",
-      "summary": "reStructuredText rendering component."
-    },
-    {
-      "name": "tp-source",
-      "summary": "Source repository link button."
-    },
-    {
-      "name": "tp-theme",
-      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
-    },
-    {
-      "name": "tp-toolbar",
-      "summary": "Sticky toolbar with start / center / end sections,"
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
     }
   ],
   "credits": [],

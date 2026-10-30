@@ -8,20 +8,24 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-button
+ * @summary Button component that supports native button and link rendering.
+ */
+/**
  * @tp-dependency tp-icon
- * @summary SVG icon component.
- */
-/**
- * @tp-dependency tp-question
- * @summary Independent question container.
- */
-/**
- * @tp-dependency tp-timer
- * @summary Countdown timer.
+ * @summary SVG icon component with inline, URL, and registry sources.
  */
 /**
  * @tp-dependency tp-mask
- * @summary Masks content without discarding it.
+ * @summary Replaces an anchored element with a message while active.
+ */
+/**
+ * @tp-dependency tp-question
+ * @summary Base description-list container for question components.
+ */
+/**
+ * @tp-dependency tp-timer
+ * @summary Countdown timer with stop control and optional ring.
  */
 // tp-docgen:dependencies:end
 import { TpBase } from "../base/base.js";
@@ -33,7 +37,7 @@ import style from "./exercise.css?inline";
 /**
  * @summary Groups a shared context and an ordered list of independent questions.
  * @tagname tp-exercise
- * @attr {boolean} open - Initially expand the exercise.
+ * @attr {boolean} open = false - Initially expand the exercise.
  * @attr {string} timing = "" - Optional nonzero time limit in strict hh:mm:ss format.
  * @example
  * <tp-exercise open>
@@ -58,6 +62,9 @@ import style from "./exercise.css?inline";
  *     </ol></dd>
  *   </dl>
  * </tp-exercise>
+ * @accessibility Uses native details and summary for disclosure, preserves the authored title content and ordered questions, and hides the decorative title icon from assistive technology.
+ * @accessibility Timed exercises use labelled start controls and tp-mask to make unavailable question content inert; individual questions retain their own controls and feedback.
+ * @accessibilityresponsibility Provide a descriptive title, clear instructions and accessible question content. Offer an untimed alternative or appropriate accommodation when imposing a countdown.
  */
 export class TpExercise extends TpBase {
 	private readonly exerciseTiming = new QuestionTiming(this, "exercise");

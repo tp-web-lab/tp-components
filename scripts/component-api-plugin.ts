@@ -495,7 +495,10 @@ function extractAttributes(parsed: ParsedSource): ComponentApiAttribute[] {
 				parsed.sourceFile,
 			);
 			const memberType =
-				"type" in member && member.type !== undefined
+				(ts.isPropertyDeclaration(member) ||
+					ts.isGetAccessorDeclaration(member) ||
+					ts.isMethodDeclaration(member)) &&
+				member.type !== undefined
 					? member.type.getText(parsed.sourceFile)
 					: "string";
 			const hasExplicitAttributeType = /@(?:attr|attribute)\s+\{[^}]+\}/.test(
@@ -846,7 +849,11 @@ function extractEvents(parsed: ParsedSource): ComponentApiEvent[] {
 	function visit(node: Ts.Node): void {
 		if (
 			ts.isNewExpression(node) &&
-			node.expression.getText(parsed.sourceFile) === "CustomEvent"
+			(node.expression.getText(parsed.sourceFile) === "CustomEvent" ||
+				(node.expression.getText(parsed.sourceFile) === "Event" &&
+					ts.isCallExpression(node.parent) &&
+					node.parent.expression.getText(parsed.sourceFile) ===
+						"this.dispatchEvent"))
 		) {
 			const name = getStringLiteralArgument(node, 0);
 			if (name !== undefined) {
@@ -929,19 +936,21 @@ function extractCssProperties(
 
 		properties.set(variable.name, {
 			name: variable.name,
-			default: variable.defaultValue,
+			default:
+				descriptions.get(variable.name)?.default ?? variable.defaultValue,
 			description:
-				descriptions.get(variable.name) ||
+				descriptions.get(variable.name)?.description ||
 				inferCssPropertyDescription(variable.name, componentName),
 		});
 	}
 
-	for (const [name, description] of descriptions) {
+	for (const [name, documented] of descriptions) {
+		const { description } = documented;
 		const property = properties.get(name);
 		if (property === undefined) {
 			properties.set(name, {
 				name,
-				default: '""',
+				default: documented.default ?? '""',
 				description,
 			});
 			continue;
@@ -1004,21 +1013,27 @@ function inferCssPropertyDescription(
 
 function extractCssPropertyDescriptions(
 	classNode: Ts.ClassDeclaration,
-): Map<string, string> {
-	const descriptions = new Map<string, string>();
-
+): Map<string, { description: string; default?: string }> {
+	const descriptions = new Map<
+		string,
+		{ description: string; default?: string }
+	>();
 	for (const tag of ts.getJSDocTags(classNode)) {
-		if (tag.tagName.text !== "cssprop" && tag.tagName.text !== "cssproperty") {
+		if (tag.tagName.text !== "cssprop" && tag.tagName.text !== "cssproperty")
 			continue;
-		}
-
 		const comment = normalizeTagComment(tag.comment);
-		const name = firstWord(comment);
-		if (name.startsWith("--")) {
-			descriptions.set(name, dropFirstWord(comment));
+		// Defaults may contain spaces, nested var() calls or color-mix() arguments.
+		const bracketed = /^\[(--[\w-]+)(?:=([^\]]*))?\]\s*(.*)$/.exec(comment);
+		const plain = /^(--[\w-]+)\s*(.*)$/.exec(comment);
+		if (bracketed?.[1]) {
+			descriptions.set(bracketed[1], {
+				description: bracketed[3]?.trim() ?? "",
+				...(bracketed[2] !== undefined ? { default: bracketed[2].trim() } : {}),
+			});
+		} else if (plain?.[1]) {
+			descriptions.set(plain[1], { description: plain[2]?.trim() ?? "" });
 		}
 	}
-
 	return descriptions;
 }
 

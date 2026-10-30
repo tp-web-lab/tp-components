@@ -17,6 +17,9 @@ import type { TpProject } from "../playground/project.js";
  *     <dt>Solution</dt><dd>Return value * 2.</dd>
  *   </dl>
  * </tp-javascript-viewer-question>
+ * @accessibility Inherits question disclosure, submission and reset controls from the editor-question hierarchy; test progress, results and failures are presented in its polite live feedback region.
+ * @accessibility Keyboard editing and project navigation are provided by the concrete playground; this abstract class adds no separate interactive surface.
+ * @accessibilityresponsibility Provide a descriptive title and prompt, understandable test messages and an editor configuration usable with the keyboard. Ensure any rendered program output has appropriate text alternatives.
  */
 export abstract class TpPlaygroundQuestion<
 	TPlayground extends TpPlayground<TpProject>,

@@ -462,6 +462,12 @@ CSS properties
 
 
 
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -501,10 +507,6 @@ All tp-components used by `<tp-markdown-viewer>` are loaded automatically by thi
 @summary Shared base class for tp-* components.
 -->
 <!--
-@tp-dependency tp-code-editor
-@summary CodeMirror-based code editor component.
--->
-<!--
 @tp-dependency tp-divider
 @summary Visual separator for menus, dropdowns, toolbars, and layouts.
 -->
@@ -534,7 +536,6 @@ All tp-components used by `<tp-markdown-viewer>` are loaded automatically by thi
 -->
 
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
 - [`<tp-divider>`](../divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
 - [`<tp-html-viewer>`](../html-viewer/index.md) : Interactive HTML viewer with editable source, live rendering, and DOM inspection.
 - [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.

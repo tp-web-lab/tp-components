@@ -76,7 +76,7 @@ Attributes
   | <code>manual</code> | <code>boolean</code> | <code>false</code> | Waits for start() instead of starting automatically. |
   | <code>no-controls</code> | <code>boolean</code> | <code>false</code> | Hides duration editing and buttons; displays hh:mm:ss. |
   | <code>silent</code> | <code>boolean</code> | <code>false</code> | Disables sound playback. |
-  | <code>size</code> | <code>string</code> | <code>&quot;1rem&quot;</code> | Icon and text size. |
+  | <code>size</code> | <code>string</code> | <code>&quot;1rem&quot;</code> | Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -99,9 +99,10 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-timer-alert</code> | <code>#b91c1c</code> | Controls the alert. |
-  | <code>&#45;&#45;tp-timer-alert-bg</code> | <code>#fecaca</code> | Controls the alert bg. |
-  | <code>&#45;&#45;tp-timer-muted</code> | <code>#9ca3af</code> | Controls the muted. |
+  | <code>&#45;&#45;tp-timer-alert</code> | <code>var(&#45;&#45;tp-danger-text-on-soft)</code> | Text color of the time display when the countdown has elapsed. |
+  | <code>&#45;&#45;tp-timer-alert-bg</code> | <code>var(&#45;&#45;tp-danger-fill-softer)</code> | Background color of the elapsed portion of the countdown and of the whole timer once elapsed. |
+  | <code>&#45;&#45;tp-timer-muted</code> | <code>var(&#45;&#45;tp-neutral-text-on-soft)</code> | Text color of the time display while stopped. |
+  | <code>&#45;&#45;tp-timer-progress</code> | <code>0%</code> | Elapsed portion of the countdown, as a percentage from 0% to 100%; updated internally as time passes. |
   | <code>&#45;&#45;tp-timer-size</code> | <code>1rem</code> | Icon and text size. |
   [CSS properties of `<tp-timer>`]
 :::
@@ -110,6 +111,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_timer.TpTimer.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

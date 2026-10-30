@@ -51,74 +51,74 @@
     {
       "name": "deleteColumn(): void",
       "inherited": false,
-      "description": "Deletes column."
+      "description": "Deletes the active column, adjusts selection, clears cell formatting and emits a structure-change event. Preserves the last remaining column."
     },
     {
       "name": "deleteRow(): void",
       "inherited": false,
-      "description": "Deletes row."
+      "description": "Deletes the active row, adjusts selection, clears cell formatting and emits a structure-change event. Preserves the last remaining row."
     },
     {
       "name": "exportFile(format: TpSpreadsheetFileFormat, filename = \"spreadsheet\", mode: TpSpreadsheetExportMode = \"formulas\"): void",
       "inherited": false,
-      "description": "Exports file."
+      "description": "Downloads CSV, JSON or XLSX using filename plus the extension. The formulas mode preserves raw formulas; values exports calculated cell results."
     },
     {
       "name": "getData(): string[][]",
       "inherited": false,
-      "description": "Returns data."
+      "description": "Returns a row-by-row copy of raw cell strings, including formulas rather than calculated results."
     },
     {
       "name": "importFile(file: File): Promise<void>",
       "inherited": false,
-      "description": "Imports file."
+      "description": "Loads CSV, JSON or the first XLSX sheet into the editor, records undo state and emits tp-spreadsheet-editor-import. Resolves after application; unsupported or invalid files reject."
     },
     {
       "name": "insertColumn(position: \"before\" | \"after\" = \"after\"): void",
       "inherited": false,
-      "description": "Inserts column."
+      "description": "Inserts an empty column before or after the active cell, selects it, clears cell formatting and emits a structure-change event. Does nothing without a valid active cell."
     },
     {
       "name": "insertRow(position: \"before\" | \"after\" = \"after\"): void",
       "inherited": false,
-      "description": "Inserts row."
+      "description": "Inserts an empty row before or after the active cell, selects it, clears cell formatting and emits a structure-change event. Does nothing without a valid active cell."
     },
     {
       "name": "setData(value: readonly (readonly unknown[])[]): void",
       "inherited": false,
-      "description": "Sets data."
+      "description": "Replaces the matrix, converts values to strings and pads missing cells with empty strings. Updates rows, columns and value, retaining at least one row and column."
     }
   ],
   "events": [
     {
       "name": "tp-spreadsheet-editor-clipboard-error",
-      "description": "Emitted when spreadsheet editor clipboard error occurs.",
-      "detail": "{ command: unknown }"
+      "description": "Emitted when a clipboard command fails; command identifies copy, cut or paste.",
+      "detail": "{ command: \"copy\" | \"cut\" | \"paste\" }"
     },
     {
       "name": "tp-spreadsheet-editor-error",
-      "description": "Emitted when loading src fails; detail contains src and error.",
-      "detail": "{ src: unknown; error: unknown }"
+      "description": "Emitted when fetching or parsing src fails, except for aborted requests; src is the requested URL and error is the caught failure.",
+      "detail": "{ src: string; error: unknown }"
     },
     {
       "name": "tp-spreadsheet-editor-export",
-      "description": "Emitted after a file is exported.",
-      "detail": "{ format: unknown; filename: string }"
+      "description": "Emitted after a CSV, JSON or XLSX download is prepared; filename includes the extension.",
+      "detail": "{ format: \"csv\" | \"json\" | \"xlsx\"; filename: string }"
     },
     {
       "name": "tp-spreadsheet-editor-import",
-      "description": "Emitted after a file is imported.",
-      "detail": "{ format: unknown; file: unknown }"
+      "description": "Emitted after an imported file replaces the sheet; format is the detected filename extension and file is the selected File object.",
+      "detail": "{ format: string; file: File }"
     },
     {
       "name": "tp-spreadsheet-editor-input",
-      "description": "Emitted whenever a cell changes.",
-      "detail": "{ cell: unknown; raw: unknown; value: string }"
+      "description": "Emitted for each edited or cleared cell. cell is its A1 reference, raw is the stored input or formula, and value is the evaluated result.",
+      "detail": "{ cell: string; raw: string; value: string | number | boolean | Date }"
     },
     {
       "name": "tp-spreadsheet-editor-structure",
-      "description": "Emitted after rows or columns change.",
-      "detail": "{ action: unknown; index: unknown; rows: unknown; columns: unknown }"
+      "description": "Emitted after inserting or deleting a row or column. index is zero-based; rows and columns are the resulting dimensions.",
+      "detail": "{ action: \"insert-row\" | \"delete-row\" | \"insert-column\" | \"delete-column\"; index: number; rows: number; columns: number }"
     }
   ],
   "cssproperties": [],
@@ -133,7 +133,7 @@
     },
     {
       "name": "tp-dropdown",
-      "summary": "Displays an anchored dropdown menu."
+      "summary": "Dropdown menu component."
     },
     {
       "name": "tp-formula-picker",

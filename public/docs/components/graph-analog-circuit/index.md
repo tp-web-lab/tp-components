@@ -91,18 +91,18 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_ANALOG_WIRE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &#39;none&#39;, routing: TpGraphEdgeRouting = &#39;straight&#39;): TpGraphEdge</code> | Adds edge. |
-  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, nodeLabel?: string): TpGraphNode</code> | Adds node. |
-  | <code>rotateSelected</code> | <code>rotateSelected(): void</code> | Rotate selected. |
-  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Sets graph. |
-  | <code>simulate</code> | <code>simulate(duration?: number, step?: number): TpAnalogSimulation</code> | Simulate. |
-  | <code>toggleSwitch</code> | <code>toggleSwitch(): void</code> | Toggles switch. |
+  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_ANALOG_WIRE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &quot;none&quot;, routing: TpGraphEdgeRouting = &quot;straight&quot;): TpGraphEdge</code> | Adds a non-directional wire between distinct existing component IDs using the requested ports and routing; returns its edge record. Arrows, self-links and unsupported wire types throw. |
+  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, nodeLabel?: string): TpGraphNode</code> | Adds a supported analog component at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError. |
+  | <code>rotateSelected</code> | <code>rotateSelected(): void</code> | Rotates the selected orientable component 90 degrees clockwise and rotates its connected ports. Does nothing when no eligible component is selected. |
+  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph. |
+  | <code>simulate</code> | <code>simulate(duration?: number, step?: number): TpAnalogSimulation</code> | Runs transient analysis with positive duration and time step in seconds (defaults: 0.02 and 0.0002), refreshes the graph and emits tp-analog-simulate. Returns sampled results; invalid circuits or timings throw. |
+  | <code>toggleSwitch</code> | <code>toggleSwitch(): void</code> | Toggles the selected analog switch between open and closed; does nothing when the selection is not a switch. |
   [Public methods of `TpGraphAnalogCircuit`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-analog-simulate</code> | <code>unknown</code> | Emitted when analog simulate occurs. |
+  | <code>tp-analog-simulate</code> | <code>&#123; samples: readonly TpAnalogSample[]; duration: number; step: number &#125;</code> | Emitted after transient simulation completes and updates the graph. samples contains time/value records keyed by measurement label or probe label/ID; time, duration and step are in seconds, with voltage in volts and current in amperes. |
   [Events emitted by `<tp-graph-analog-circuit>`]
 
 CSS properties
@@ -116,6 +116,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-analog-circuit.TpGraphAnalogCircuit.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

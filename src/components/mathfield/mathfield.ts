@@ -26,6 +26,10 @@ import { reportToolLoaded } from "@tp/tp-utilities";
  * @summary Single-line and automatically growing multiline text field.
  */
 /**
+ * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+ * @summary Shared parsers, games and rendering utilities.
+ */
+/**
  * @credit MathLive https://mathlive.io/
  * @summary Visual LaTeX editing and mathematical keyboard, loaded on demand.
  */
@@ -70,13 +74,15 @@ export type TpMathfieldLabelPosition = "top" | "bottom" | "start" | "end";
  * @event input Emitted when the expression changes while editing.
  * @event change Emitted when the expression is committed or a different notation is selected in the menu.
  * @event tp-clear Emitted after the embedded button clears the expression.
- * @event tp-math-rendered Emitted after MathJax finishes rendering the expression.
- * @cssprop [--tp-mathfield-inline-size=28rem] Component width.
- * @cssprop [--tp-mathfield-preview-background=Canvas] Preview panel background.
- * @cssprop [--tp-mathfield-preview-border-color=var(--tp-neutral-stroke-soft)] Preview border color.
- * @cssprop [--tp-mathfield-preview-padding=0.75rem] Preview padding.
+
  * @example
  * <tp-mathfield label="Formula" value="E = mc^2" clearable></tp-mathfield>
+ * @cssprop [--tp-mathfield-inline-size=28rem] Preferred width of the math editor, limited by available space; also caps the multiline component width.
+ * @cssprop [--tp-mathfield-preview-background=Canvas] Background color of the rendered formula preview.
+ * @cssprop [--tp-mathfield-preview-border-color=var(--tp-neutral-stroke-soft)] Border color of the rendered formula preview.
+ * @cssprop [--tp-mathfield-preview-padding=0.75rem] Inner spacing around the rendered formula preview.
+ * @event tp-math-rendered Emitted when the formula preview reports that rendering has finished; mode is the input notation and value is the current expression.
+ * @eventdetail tp-math-rendered { mode: "latexmath" | "asciimath"; value: string }
  */
 export class TpMathfield extends TpBase {
 	private static nextModeId = 0;

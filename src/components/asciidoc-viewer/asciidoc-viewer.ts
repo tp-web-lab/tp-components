@@ -13,10 +13,6 @@
  * @summary Shared base class for tp-* components.
  */
 /**
- * @tp-dependency tp-code-editor
- * @summary CodeMirror-based code editor component.
- */
-/**
  * @tp-dependency tp-divider
  * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
  */

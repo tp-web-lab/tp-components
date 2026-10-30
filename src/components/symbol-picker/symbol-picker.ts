@@ -78,10 +78,14 @@ export function parseHtmlSymbols(source: string): TpSymbolPickerItem[] {
  * @attr {string} group = "all" - Active symbol group (`all` by default).
  * @attr {string} copy = "symbol" - Clipboard format: `symbol`, `unicode`, `hexadecimal-html`, `decimal-html`, or `html-entity`.
  * @attr {boolean} compact = false - Shows only the title, filters, and a compact 2em symbol grid.
- * @event tp-symbol-picker-select Emitted after a symbol is selected and copied.
- * @event tp-symbol-picker-copy-error Emitted when the clipboard rejects a copy operation.
+
+
  * @example
  * <tp-symbol-picker></tp-symbol-picker>
+ * @event tp-symbol-picker-select Emitted when a symbol is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success. value is null when the selected copy format has no representation.
+ * @eventdetail tp-symbol-picker-select { symbol: string; name: string; group: string; entities: string[]; codepoints: string[]; copy: TpSymbolPickerCopyFormat; value: string | null }
+ * @event tp-symbol-picker-copy-error Emitted when copying the selected symbol fails. The detail contains the requested clipboard text, selection metadata and the caught error.
+ * @eventdetail tp-symbol-picker-copy-error { symbol: string; name: string; group: string; entities: string[]; codepoints: string[]; copy: TpSymbolPickerCopyFormat; value: string; error: unknown }
  */
 export class TpSymbolPicker extends TpBase {
 	private static readonly styleId = "tp-symbol-picker-styles";

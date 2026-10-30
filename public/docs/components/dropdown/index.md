@@ -84,7 +84,7 @@ Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
   | <code>closeAll</code> | <code>closeAll(): void</code> | Closes all submenus. |
-  | <code>show</code> | <code>show(): void</code> | Show. |
+  | <code>show</code> | <code>show(): void</code> | Opens the dropdown by setting its open state and positioning it relative to its anchor. |
   | <code>toggle</code> | <code>toggle(): void</code> | Toggles the dropdown. |
   [Public methods of `TpDropdown`]
 
@@ -106,6 +106,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_dropdown.TpDropdown.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

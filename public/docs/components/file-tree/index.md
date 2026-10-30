@@ -76,41 +76,41 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>beginRenamePath</code> | <code>beginRenamePath(path: string): void</code> | Démarre le renommage d’un chemin. |
-  | <code>collapseAll</code> | <code>collapseAll(): void</code> | Ferme tous les nœuds. |
-  | <code>expandAll</code> | <code>expandAll(): void</code> | Ouvre tous les nœuds. |
-  | <code>getNodes</code> | <code>getNodes(): TpFileTreeNode[]</code> | Retourne une copie triée des nœuds racine. |
-  | <code>setActivePath</code> | <code>setActivePath(path: string \| null): void</code> | Met à jour l’état actif logique. |
-  | <code>setDirtyPaths</code> | <code>setDirtyPaths(paths: readonly string[]): void</code> | Met à jour l’état dirty des fichiers. |
-  | <code>setNodes</code> | <code>setNodes(nodes: readonly TpFileTreeNode[]): void</code> | Charge une nouvelle liste de nœuds racine. |
-  | <code>setOpenPaths</code> | <code>setOpenPaths(paths: readonly string[]): void</code> | Met à jour l’état logique des chemins ouverts. |
-  | <code>setSelectedPath</code> | <code>setSelectedPath(path: string \| null): void</code> | Met à jour la sélection logique. |
-  | <code>setState</code> | <code>setState(state: TpFileTreeState): void</code> | Synchronise en une fois les nœuds et états visuels. |
+  | <code>beginRenamePath</code> | <code>beginRenamePath(path: string): void</code> | Starts inline renaming for the tree item matching path; does nothing for an empty or missing path. |
+  | <code>collapseAll</code> | <code>collapseAll(): void</code> | Collapses every directory in the displayed tree; has no effect before the internal tree is created. |
+  | <code>expandAll</code> | <code>expandAll(): void</code> | Expands every directory in the displayed tree; has no effect before the internal tree is created. |
+  | <code>getNodes</code> | <code>getNodes(): TpFileTreeNode[]</code> | Returns a detached, recursively sorted copy of the root nodes, with directories before files. |
+  | <code>setActivePath</code> | <code>setActivePath(path: string \| null): void</code> | Sets the active-file path; null clears the active marker without changing selection. |
+  | <code>setDirtyPaths</code> | <code>setDirtyPaths(paths: readonly string[]): void</code> | Replaces the set of file paths marked as modified; an empty array removes every modified marker. |
+  | <code>setNodes</code> | <code>setNodes(nodes: readonly TpFileTreeNode[]): void</code> | Replaces the root nodes with a recursively sorted copy while retaining selected, active, open and dirty paths. |
+  | <code>setOpenPaths</code> | <code>setOpenPaths(paths: readonly string[]): void</code> | Replaces the set of file paths marked as open; does not change the active or selected path. |
+  | <code>setSelectedPath</code> | <code>setSelectedPath(path: string \| null): void</code> | Sets the highlighted selected path; null clears selection. Retains the active path and file states. |
+  | <code>setState</code> | <code>setState(state: TpFileTreeState): void</code> | Replaces the displayed nodes and selected, active, open and dirty paths together; rerenders the tree and expands its directories. |
   [Public methods of `TpFileTree`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-file-tree-active</code> | <code>&#123; path: string &#125;</code> | Émis lorsqu’un fichier devient actif. |
-  | <code>tp-file-tree-add-request</code> | <code>&#123; path: string \| null; kind: &quot;file&quot; \| &quot;directory&quot; &#125;</code> | Émis lorsqu’un ajout de fichier ou dossier est demandé. |
-  | <code>tp-file-tree-clone-request</code> | <code>&#123; path: string &#125;</code> | Émis lorsqu’un clonage est demandé. |
-  | <code>tp-file-tree-copy-request</code> | <code>&#123; path: string &#125;</code> | Émis lorsqu’une copie de chemin est demandée. |
-  | <code>tp-file-tree-delete-request</code> | <code>&#123; path: string &#125;</code> | Émis lorsqu’une suppression est demandée. |
-  | <code>tp-file-tree-global-action</code> | <code>&#123; action: string &#125;</code> | Émis lorsqu’une action globale est choisie. |
-  | <code>tp-file-tree-move-request</code> | <code>&#123; sourcePath: string; destinationPath: string \| null; position: &quot;inside&quot; \| &quot;before&quot; \| &quot;after&quot; &#125;</code> | Émis lorsqu’un déplacement est demandé. |
-  | <code>tp-file-tree-open</code> | <code>&#123; path: string &#125;</code> | Émis lorsqu’un fichier est ouvert. |
-  | <code>tp-file-tree-rename-request</code> | <code>&#123; path: string; newName: string &#125;</code> | Émis lorsqu’un renommage est demandé. |
-  | <code>tp-file-tree-select</code> | <code>&#123; path: string &#125;</code> | Émis lorsqu’un chemin est sélectionné. |
+  | <code>tp-file-tree-active</code> | <code>&#123; path: string &#125;</code> | Emitted when selecting a file makes it active; path identifies the file. Selecting an already active file can emit it again. |
+  | <code>tp-file-tree-add-request</code> | <code>&#123; path: string \| null; kind: &quot;file&quot; \| &quot;directory&quot; &#125;</code> | Requests creation of a file or directory; path is the target path, or null for the root, and kind specifies the entry type. The consumer performs the creation. |
+  | <code>tp-file-tree-clone-request</code> | <code>&#123; path: string &#125;</code> | Requests duplication of the entry at path; the consumer performs the copy. |
+  | <code>tp-file-tree-copy-request</code> | <code>&#123; path: string &#125;</code> | Requests copying the selected path to the clipboard; the consumer performs the copy. |
+  | <code>tp-file-tree-delete-request</code> | <code>&#123; path: string &#125;</code> | Requests deletion of the entry at path; the consumer performs the deletion. |
+  | <code>tp-file-tree-global-action</code> | <code>&#123; actionId: &quot;expand-all&quot; \| &quot;collapse-all&quot; \| &quot;toggle-guides&quot; &#125;</code> | Emitted when a global context-menu action is chosen; actionId contains its identifier. |
+  | <code>tp-file-tree-move-request</code> | <code>&#123; sourcePath: string; destinationPath: string \| null; position: &quot;inside&quot; \| &quot;before&quot; \| &quot;after&quot; &#125;</code> | Requests moving sourcePath relative to destinationPath at position; a null destination denotes the root. The consumer performs the move. |
+  | <code>tp-file-tree-open</code> | <code>&#123; path: string &#125;</code> | Emitted when a file is selected for opening; path identifies the file. Selecting an already open file can emit it again. |
+  | <code>tp-file-tree-rename-request</code> | <code>&#123; path: string; newName: string &#125;</code> | Requests renaming the entry at path to newName; the consumer performs the rename. |
+  | <code>tp-file-tree-select</code> | <code>&#123; path: string &#125;</code> | Emitted after a file or directory row is selected; path identifies the selected entry. |
   [Events emitted by `<tp-file-tree>`]
 
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-file-tree-active-color</code> | <code>inherit</code> | Couleur du fichier actif. |
-  | <code>&#45;&#45;tp-file-tree-dirty-color</code> | <code>#d97706</code> | Couleur du marqueur dirty. |
-  | <code>&#45;&#45;tp-file-tree-icon-size</code> | <code>1rem</code> | Taille des icônes de fichiers. |
-  | <code>&#45;&#45;tp-file-tree-open-color</code> | <code>inherit</code> | Couleur des fichiers ouverts. |
-  | <code>&#45;&#45;tp-file-tree-selected-bg</code> | <code>color-mix(in srgb, currentColor 8%, transparent)</code> | Couleur de fond du chemin sélectionné. |
+  | <code>&#45;&#45;tp-file-tree-active-color</code> | <code>inherit</code> | Text color of the active file row. |
+  | <code>&#45;&#45;tp-file-tree-dirty-color</code> | <code>#d97706</code> | Color of the dot marking a file with unsaved changes. |
+  | <code>&#45;&#45;tp-file-tree-icon-size</code> | <code>1rem</code> | Width and height of file and directory icons. |
+  | <code>&#45;&#45;tp-file-tree-open-color</code> | <code>inherit</code> | Text color of rows whose paths are marked as open. |
+  | <code>&#45;&#45;tp-file-tree-selected-bg</code> | <code>color-mix(in srgb, currentColor 8%, transparent)</code> | Background color of the selected path row. |
   [CSS properties of `<tp-file-tree>`]
 :::
 <!-- /tp-docgen:api -->
@@ -118,6 +118,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_file-tree.TpFileTree.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

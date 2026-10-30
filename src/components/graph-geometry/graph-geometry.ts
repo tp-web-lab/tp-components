@@ -1,15 +1,8 @@
 /** @module components/graph-geometry @summary Dynamic ruler and compass constructions. */
 // tp-docgen:dependencies:start
 /**
- * @summary Collapsible multi-panels element.
- */
-/**
  * @tp-dependency tp-base
  * @summary Shared base class for tp-* components.
- */
-/**
- * @tp-dependency tp-button
- * @summary Button component that supports native button and link rendering.
  */
 /**
  * @tp-dependency tp-button-group

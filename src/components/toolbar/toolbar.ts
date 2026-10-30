@@ -88,6 +88,11 @@ function isTpToolbarPlacement(value: string): value is TpToolbarPlacement {
  *   </tp-toolbar>
  *   <tp-box border-width="0" style="min-block-size: 5rem; display: grid; place-items: center">Document area</tp-box>
  * </tp-box>
+ * @cssprop [--tp-toolbar-gap=0.25rem] Space between the toolbar sections along its main axis.
+ * @cssprop [--tp-toolbar-padding=0.25rem 0.5rem] Inner spacing around the toolbar content.
+ * @cssprop [--tp-toolbar-section-gap=0.25rem] Space between controls within a section and around section separators.
+ * @cssprop [--tp-toolbar-size=3rem] Minimum toolbar thickness: height for a horizontal toolbar, width for a vertical toolbar.
+ * @cssprop [--tp-toolbar-z-index=100] Stacking level of the sticky toolbar relative to overlapping content.
  */
 export class TpToolbar extends TpBase {
 	/** Identifier used for the injected component stylesheet. */
@@ -218,6 +223,9 @@ export class TpToolbar extends TpBase {
 		this.childObserver = null;
 	}
 
+	/**
+	 * @summary Moves the supplied element into section start, center or end. Throws if the toolbar is not initialized or the section name is invalid.
+	 */
 	public addButtonToSection(button: HTMLElement, section: string): void {
 		if (!this.startSection || !this.centerSection || !this.endSection) {
 			throw new Error("Toolbar sections are not initialized.");

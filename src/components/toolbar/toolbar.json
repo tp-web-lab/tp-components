@@ -33,7 +33,7 @@
     {
       "name": "addButtonToSection(button: HTMLElement, section: string): void",
       "inherited": false,
-      "description": "Adds button to section."
+      "description": "Moves the supplied element into section start, center or end. Throws if the toolbar is not initialized or the section name is invalid."
     }
   ],
   "events": [],
@@ -41,27 +41,27 @@
     {
       "name": "--tp-toolbar-gap",
       "default": "0.25rem",
-      "description": "Controls the gap."
+      "description": "Space between the toolbar sections along its main axis."
     },
     {
       "name": "--tp-toolbar-padding",
       "default": "0.25rem 0.5rem",
-      "description": "Controls the padding."
+      "description": "Inner spacing around the toolbar content."
     },
     {
       "name": "--tp-toolbar-section-gap",
       "default": "0.25rem",
-      "description": "Controls the section gap."
+      "description": "Space between controls within a section and around section separators."
     },
     {
       "name": "--tp-toolbar-size",
       "default": "3rem",
-      "description": "Controls the size."
+      "description": "Minimum toolbar thickness: height for a horizontal toolbar, width for a vertical toolbar."
     },
     {
       "name": "--tp-toolbar-z-index",
       "default": "100",
-      "description": "Controls the z index."
+      "description": "Stacking level of the sticky toolbar relative to overlapping content."
     }
   ],
   "dependencies": [

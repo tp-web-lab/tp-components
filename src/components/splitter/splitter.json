@@ -56,17 +56,17 @@
     {
       "name": "--tp-splitter-divider-color",
       "default": "var(--tp-brand-fill-mid, #2563eb)",
-      "description": "Controls the divider color."
+      "description": "Color of the divider grip and tint of its draggable track."
     },
     {
       "name": "--tp-splitter-divider-size",
       "default": "0.75rem",
-      "description": "Controls the divider size."
+      "description": "Thickness of the draggable divider track along the split axis."
     },
     {
       "name": "--tp-splitter-position",
       "default": "50%",
-      "description": "Controls the position."
+      "description": "Size of the first panel along the split axis, usually a percentage; synchronized with position and pointer or keyboard interaction."
     }
   ],
   "dependencies": [

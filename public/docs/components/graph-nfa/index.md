@@ -78,13 +78,13 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_NFA_TRANSITION, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &#39;forward&#39;): TpGraphEdge</code> | Adds edge. |
-  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode</code> | Adds node. |
-  | <code>generate</code> | <code>generate(source = this.regexSource): void</code> | Generate. |
-  | <code>readNext</code> | <code>readNext(duration = 500): Promise&lt;boolean&gt;</code> | Reads next. |
-  | <code>reset</code> | <code>reset(word = this.inputWord): void</code> | Reset. |
-  | <code>run</code> | <code>run(duration = 650): Promise&lt;boolean&gt;</code> | Run. |
-  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Sets graph. |
+  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_NFA_TRANSITION, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &quot;forward&quot;): TpGraphEdge</code> | Adds a forward transition between existing state IDs, using optional connection ports; returns the edge record. Unsupported types, directions or endpoints throw. |
+  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode</code> | Adds a NFA state or comment at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError. |
+  | <code>generate</code> | <code>generate(source = this.regexSource): void</code> | Builds an NFA from the regular-expression source and resets reading to the current word. Omitted source reuses the stored expression; invalid expressions throw. |
+  | <code>readNext</code> | <code>readNext(duration = 500): Promise&lt;boolean&gt;</code> | Consumes and animates one input symbol using duration milliseconds. Resolves to true if a symbol was processed, not whether the word is accepted; false means no further step is possible. |
+  | <code>reset</code> | <code>reset(word = this.inputWord): void</code> | Restarts reading word with the epsilon closure of the initial states and clears transition highlights; omitted word reuses the current input. |
+  | <code>run</code> | <code>run(duration = 650): Promise&lt;boolean&gt;</code> | Processes remaining symbols with duration milliseconds per step, stopping at the end or rejection. Resolves to whether the complete word is accepted; does not reset the input first. |
+  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph. |
   [Public methods of `TpGraphNfa`]
 
 Events
@@ -104,6 +104,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-nfa.TpGraphNfa.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

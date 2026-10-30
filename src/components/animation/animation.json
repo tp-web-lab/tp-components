@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "delay",
-      "description": "Controls the delay.",
+      "description": "Wait before each animation, with an explicit time unit such as 200ms or 0.5s.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -21,7 +21,7 @@
     },
     {
       "name": "duration",
-      "description": "Controls the duration.",
+      "description": "Duration of one animation cycle, with an explicit time unit such as 500ms or 2s.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -30,7 +30,7 @@
     },
     {
       "name": "easing",
-      "description": "Controls the easing.",
+      "description": "CSS timing function controlling the animation pace, for example linear, ease-in-out or cubic-bezier(0.4, 0, 0.2, 1).",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -39,7 +39,7 @@
     },
     {
       "name": "fill",
-      "description": "Controls the fill.",
+      "description": "Styles retained outside playback: none, forwards (after), backwards (during the delay), or both.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -48,7 +48,7 @@
     },
     {
       "name": "in",
-      "description": "Controls the in.",
+      "description": "Animate.css entrance animation name, such as fadeIn; empty means no entrance animation.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -57,7 +57,7 @@
     },
     {
       "name": "iterations",
-      "description": "Controls the iterations.",
+      "description": "Positive number of playback cycles, or infinite for continuous repetition. Invalid values use one cycle.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -66,7 +66,7 @@
     },
     {
       "name": "once",
-      "description": "Controls the once.",
+      "description": "Limits automatic click, hover/focus and intersection triggers to their first playback.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -75,7 +75,7 @@
     },
     {
       "name": "out",
-      "description": "Controls the out.",
+      "description": "Animate.css exit animation name used by playOut(), such as fadeOut; empty means no exit animation.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -84,7 +84,7 @@
     },
     {
       "name": "paused",
-      "description": "Controls the paused.",
+      "description": "Pauses playback when present; removing it allows the animation to resume.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -93,7 +93,7 @@
     },
     {
       "name": "root-margin",
-      "description": "Marge utilisée par IntersectionObserver.",
+      "description": "Viewport margin for the intersection trigger, using CSS margin syntax such as 100px or 0px 0px -20% 0px.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -102,7 +102,7 @@
     },
     {
       "name": "target",
-      "description": "Controls the target.",
+      "description": "CSS selector of a descendant to animate. When absent, the first child element is used.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -111,7 +111,7 @@
     },
     {
       "name": "threshold",
-      "description": "Seuil utilisé par IntersectionObserver.\nPeut être un nombre unique ou une liste séparée par des virgules.",
+      "description": "Visibility thresholds for the intersection trigger: one number from 0 to 1, or a comma-separated list. Invalid entries are ignored; the fallback is 0.1.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -120,7 +120,7 @@
     },
     {
       "name": "trigger",
-      "description": "Controls the trigger.",
+      "description": "Playback trigger: load, click, hover (also keyboard focus), intersection (entering the viewport), or manual (playIn()/playOut()).",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -132,49 +132,49 @@
     {
       "name": "cancel(): void",
       "inherited": false,
-      "description": "Cancel."
+      "description": "Cancels the current animation, clears its playback reference and emits tp-animation-cancel when an animation existed."
     },
     {
       "name": "pause(): void",
       "inherited": false,
-      "description": "Pause."
+      "description": "Pauses the current animation at its current time; does nothing when no animation exists."
     },
     {
       "name": "play(): Promise<void>",
       "inherited": false,
-      "description": "Play."
+      "description": "Starts the entrance animation from the beginning, like playIn(); resolves when playback finishes or is cancelled."
     },
     {
       "name": "playIn(): Promise<void>",
       "inherited": false,
-      "description": "Play in."
+      "description": "Cancels the current animation and plays the configured in animation. Resolves on completion or cancellation; does nothing if the target or animation name is missing."
     },
     {
       "name": "playOut(): Promise<void>",
       "inherited": false,
-      "description": "Play out."
+      "description": "Cancels the current animation and plays the configured out animation. Resolves on completion or cancellation; does nothing if the target or animation name is missing."
     },
     {
       "name": "restart(): Promise<void>",
       "inherited": false,
-      "description": "Restart."
+      "description": "Starts the configured entrance animation again from the beginning; returns the same completion promise as playIn()."
     }
   ],
   "events": [
     {
       "name": "tp-animation-cancel",
-      "description": "Emitted when animation cancel occurs.",
-      "detail": "{ in: unknown; out: unknown }"
+      "description": "Emitted when cancel() cancels an existing animation, including cancellation before starting another phase. The detail contains the configured entrance and exit animation names.",
+      "detail": "{ in: string; out: string }"
     },
     {
       "name": "tp-animation-finish",
-      "description": "Emitted when animation finish occurs.",
-      "detail": "{ in: unknown; out: unknown; phase: unknown }"
+      "description": "Emitted after an entrance or exit animation finishes normally; cancellation does not emit finish. The detail identifies the configured animation names and the phase.",
+      "detail": "{ in: string; out: string; phase: \"in\" | \"out\" }"
     },
     {
       "name": "tp-animation-start",
-      "description": "Emitted when animation start occurs.",
-      "detail": "{ in: unknown; out: unknown; phase: unknown }"
+      "description": "Emitted when an entrance or exit animation starts, including when immediately paused. The detail identifies the configured animation names and the phase.",
+      "detail": "{ in: string; out: string; phase: \"in\" | \"out\" }"
     }
   ],
   "cssproperties": [],

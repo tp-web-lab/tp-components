@@ -116,7 +116,7 @@ tp-restructuredtext
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>aria-label</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the aria label. |
+  | <code>aria-label</code> | <code>string</code> | <code>&quot;&quot;</code> | Accessible name forwarded to the editing control; use it when the field has no visible label. |
   | <code>closed</code> | <code>boolean</code> | <code>false</code> | Uses an answer-bank destination unless the question overrides the mode. |
   | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Disables interaction. |
   | <code>name</code> | <code>string</code> | <code>&quot;&quot;</code> | Name used by tp-fill-blank form data. |
@@ -139,13 +139,14 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>input</code> | <code>void</code> | - Emitted when an answer is assigned or cleared. |
+  | <code>input</code> | <code>void</code> | Emitted when an answer is assigned or cleared; read the updated answer from value. |
+  | <code>tp-blank-mode-change</code> | <code>void</code> | Emitted when closed or type changes while connected, after the blank has been rendered in its new mode. |
   [Events emitted by `<tp-blank>`]
 
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-blank-filled-border-color</code> | <code>var(&#45;&#45;tp-brand-stroke-mid)</code> | Controls the filled border color. |
+  | <code>&#45;&#45;tp-blank-filled-border-color</code> | <code>var(&#45;&#45;tp-brand-stroke-mid)</code> | Bottom border color of a blank after an answer has been filled in. |
   [CSS properties of `<tp-blank>`]
 :::
 <!-- /tp-docgen:api -->
@@ -153,6 +154,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_blank_blank.TpBlank.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

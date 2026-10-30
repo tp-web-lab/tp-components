@@ -103,8 +103,8 @@ Attributes
   | --- | --- | --- | --- |
   | <code>anchor</code> | <code>string</code> | <code>&quot;&quot;</code> | CSS selector of the element to toggle fullscreen. |
   | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Disables the fullscreen trigger. |
-  | <code>size</code> | <code>string</code> | <code>&quot;m&quot;</code> | Icon button size. |
-  | <code>variant</code> | <code>string</code> | <code>&quot;neutral&quot;</code> | Icon button variant. |
+  | <code>size</code> | <code>string</code> | <code>&quot;m&quot;</code> | Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl. |
+  | <code>variant</code> | <code>string</code> | <code>&quot;neutral&quot;</code> | Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -134,6 +134,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_fullscreen.TpFullscreen.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

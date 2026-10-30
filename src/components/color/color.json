@@ -39,7 +39,7 @@
     },
     {
       "name": "size",
-      "description": "Icon button size.",
+      "description": "Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -57,7 +57,7 @@
     },
     {
       "name": "variant",
-      "description": "Icon button variant.",
+      "description": "Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -91,7 +91,7 @@
     },
     {
       "name": "tp-dropdown",
-      "summary": "Displays an anchored dropdown menu."
+      "summary": "Dropdown menu component."
     },
     {
       "name": "tp-icon",

@@ -80,12 +80,12 @@ let instanceCount = 0;
  * @summary Affiche un menu contextuel accessible et réutilisable.
  * @tagname tp-contextmenu
  *
- * @attr {string} anchor = "" - Sélecteur CSS de l’élément servant d’ancrage au clic droit.
- * @attr {boolean} open = false - Ouvre ou ferme le menu.
+ * @attr {string} anchor = "" - CSS selector of the element whose context-menu action opens this menu.
+ * @attr {boolean} open = false - Shows the context menu when present; removing it closes the menu.
  *
  *
- * @event tp-contextmenu-select Émis quand un item terminal portant `data-action` est sélectionné.
- * @eventdetail tp-contextmenu-select { action: string; item: HTMLLIElement; label: string }
+
+
  *
  * @cssprop --tp-contextmenu-background Background color of the menu and submenus.
  * @cssprop --tp-contextmenu-foreground Text color of the menu.
@@ -109,6 +109,8 @@ let instanceCount = 0;
  * <li>Item 3</li>
  * </ul>
  * </tp-contextmenu>
+ * @event tp-contextmenu-select Emitted when a terminal menu item with data-action is activated. The detail contains its action identifier, li element and visible label.
+ * @eventdetail tp-contextmenu-select { action: string; item: HTMLLIElement; label: string }
  */
 export class TpContextmenu extends TpBase {
 	/**
@@ -223,8 +225,7 @@ export class TpContextmenu extends TpBase {
 	}
 
 	/**
-	 * Sélecteur CSS de l’élément servant d’ancrage.
-	 *
+	 * @summary CSS selector of the element whose context-menu action opens this menu.
 	 * @attr anchor
 	 */
 	public get anchor(): string {
@@ -241,8 +242,7 @@ export class TpContextmenu extends TpBase {
 	}
 
 	/**
-	 * Indique si le menu est ouvert.
-	 *
+	 * @summary Shows the context menu when present; removing it closes the menu.
 	 * @attr open
 	 */
 	public get open(): boolean {
@@ -312,11 +312,7 @@ export class TpContextmenu extends TpBase {
 	}
 
 	/**
-	 * Ouvre le menu à une position donnée.
-	 *
-	 * @summary Ouvre explicitement le menu à l’écran.
-	 * @param x Position horizontale en pixels.
-	 * @param y Position verticale en pixels.
+	 * @summary Opens the context menu at viewport coordinates x and y in CSS pixels.
 	 */
 	public showAt(x: number, y: number): void {
 		this.open = true;
@@ -324,9 +320,7 @@ export class TpContextmenu extends TpBase {
 	}
 
 	/**
-	 * Ferme le menu.
-	 *
-	 * @summary Ferme explicitement le menu.
+	 * @summary Closes the context menu by clearing its open state.
 	 */
 	public hide(): void {
 		this.open = false;
@@ -334,9 +328,7 @@ export class TpContextmenu extends TpBase {
 	}
 
 	/**
-	 * Ferme tous les sous-menus ouverts.
-	 *
-	 * @summary Réinitialise l’état d’ouverture des sous-menus.
+	 * @summary Collapses all expanded submenus without closing the context-menu container.
 	 */
 	public closeAll(): void {
 		const items = this.getMenuItems();

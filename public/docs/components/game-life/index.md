@@ -81,24 +81,24 @@ Attributes
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>alive-color</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the alive color. |
-  | <code>autoplay</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the autoplay. |
-  | <code>background</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the background. |
-  | <code>cell-radius</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the cell radius. |
-  | <code>cell-size</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the cell size. |
-  | <code>dead-color</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the dead color. |
-  | <code>grid-color</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the grid color. |
-  | <code>grid-stroke-width</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the grid stroke width. |
-  | <code>interval</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the interval. |
-  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the label. |
-  | <code>padding</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the padding. |
-  | <code>preset</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the preset. |
-  | <code>preset-height</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the preset height. |
-  | <code>preset-width</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the preset width. |
-  | <code>preset-x</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the preset x. |
-  | <code>preset-y</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the preset y. |
-  | <code>steps</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the steps. |
-  | <code>wrap</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the wrap. |
+  | <code>alive-color</code> | <code>string</code> | <code>&quot;&quot;</code> | SVG fill color for living cells. |
+  | <code>autoplay</code> | <code>string</code> | <code>&quot;&quot;</code> | Starts automatic generation playback after initialization or reset when present. |
+  | <code>background</code> | <code>string</code> | <code>&quot;&quot;</code> | SVG background color behind the grid. |
+  | <code>cell-radius</code> | <code>string</code> | <code>&quot;&quot;</code> | Corner radius of each cell in SVG units; negative values are clamped to zero. |
+  | <code>cell-size</code> | <code>string</code> | <code>&quot;&quot;</code> | Width and height of each cell in SVG units, clamped to at least 1. |
+  | <code>dead-color</code> | <code>string</code> | <code>&quot;&quot;</code> | SVG fill color for dead cells. |
+  | <code>grid-color</code> | <code>string</code> | <code>&quot;&quot;</code> | SVG stroke color of the cell grid lines. |
+  | <code>grid-stroke-width</code> | <code>string</code> | <code>&quot;&quot;</code> | Width of the grid lines in SVG units, clamped to at least 0.1. |
+  | <code>interval</code> | <code>string</code> | <code>&quot;&quot;</code> | Delay between automatic generations in milliseconds, clamped to at least 16. |
+  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional title displayed above the game controls. |
+  | <code>padding</code> | <code>string</code> | <code>&quot;&quot;</code> | Space around the grid in SVG units; negative values are clamped to zero. |
+  | <code>preset</code> | <code>string</code> | <code>&quot;&quot;</code> | Built-in starting pattern: glider, blinker, toad, beacon or gosper-gun. An inline tp/game-life program takes precedence. |
+  | <code>preset-height</code> | <code>string</code> | <code>&quot;&quot;</code> | Positive number of grid rows when using preset; absent or invalid uses that preset's height. |
+  | <code>preset-width</code> | <code>string</code> | <code>&quot;&quot;</code> | Positive number of grid columns when using preset; absent or invalid uses that preset's width. |
+  | <code>preset-x</code> | <code>string</code> | <code>&quot;&quot;</code> | Integer horizontal offset of the preset pattern in grid cells; defaults to the preset position. |
+  | <code>preset-y</code> | <code>string</code> | <code>&quot;&quot;</code> | Integer vertical offset of the preset pattern in grid cells; defaults to the preset position. |
+  | <code>steps</code> | <code>string</code> | <code>&quot;&quot;</code> | Number of generations to compute before the first display and after reset. Zero or a negative value keeps the starting grid. |
+  | <code>wrap</code> | <code>string</code> | <code>&quot;&quot;</code> | Connects opposite grid edges so cells at a boundary interact with cells on the opposite side. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -128,6 +128,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_game-life.TpGameLife.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

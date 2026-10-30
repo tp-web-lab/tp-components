@@ -51,7 +51,7 @@ function read(path) {
 }
 
 function classComment(source) {
-  const classIndex = source.search(/export\s+class\s+\w+/);
+  const classIndex = source.search(/export\s+(?:abstract\s+)?class\s+\w+/);
   if (classIndex < 0) return '';
   const start = source.lastIndexOf('/**', classIndex);
   const end = source.indexOf('*/', start);

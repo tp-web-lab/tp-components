@@ -217,19 +217,19 @@ Methods
   | <code>clearIncorrectPieces</code> | <code>clearIncorrectPieces(): void</code> | Returns incorrect pieces outside the silhouette in one undoable operation. |
   | <code>fullscreen</code> | <code>fullscreen(): Promise&lt;void&gt;</code> | Toggles the browser fullscreen view. |
   | <code>place</code> | <code>place(id: string, x: number, y: number, angle?: number, flipped?: boolean): boolean</code> | Attempts an absolute placement. Rejected placements leave history unchanged. |
-  | <code>redo</code> | <code>redo(): void</code> | Redo. |
+  | <code>redo</code> | <code>redo(): void</code> | Restores the next undone piece arrangement; does nothing when redo history is empty. |
   | <code>reset</code> | <code>reset(): void</code> | Restores the seven pieces around the target silhouette. |
   | <code>setSolution</code> | <code>setSolution(solution: string \| Placement[]): void</code> | Loads a validated solution; centers it and starts a fresh game. |
   | <code>showIncorrectPieces</code> | <code>showIncorrectPieces(show = true): void</code> | Highlights pieces that are not entirely inside the target silhouette. |
   | <code>showPiece</code> | <code>showPiece(): void</code> | Reveals the selected piece in the supplied dissection without moving it. |
   | <code>showSolution</code> | <code>showSolution(show = true): void</code> | Shows an isolated solution preview; hiding it restores the unchanged playing pieces. |
-  | <code>undo</code> | <code>undo(): void</code> | Undo. |
+  | <code>undo</code> | <code>undo(): void</code> | Restores the previous piece arrangement from undo history; does nothing when history is empty. |
   [Public methods of `TpTangram`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-tangram-change</code> | <code>&#123; placements: unknown; solved: unknown &#125;</code> | Fired after an accepted edit; detail contains placements and solved. |
+  | <code>tp-tangram-change</code> | <code>&#123; placements: Placement[]; solved: boolean &#125;</code> | Emitted after an accepted piece edit; placements contains each piece ID, x/y position, angle and flip state, and solved reports whether the target is matched. |
   | <code>tp-tangram-error</code> | <code>&#123; message: string &#125;</code> | Fired when loading a solution fails; detail contains message. |
   [Events emitted by `<tp-tangram>`]
 
@@ -244,6 +244,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_tangram.TpTangram.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

@@ -79,9 +79,6 @@ let instanceCount = 0;
  * @attr {string} axis = "horizontal" - Split direction (`horizontal` or `vertical`).
  * @attr {string} position = "50%" - Divider position as a percentage.
  * @attr {string} storage-key = "" - Optional localStorage key used to save and restore the divider position. Empty by default: persistence is disabled. Use a distinct key for each independent splitter.
- * @cssprop [--tp-splitter-position=50%] Divider position.
- * @cssprop [--tp-splitter-divider-color=var(--tp-brand-fill-mid, #2563eb)] Divider handle color.
- * @cssprop [--tp-splitter-divider-size=0.75rem] Divider hit area size.
  * @event tp-splitter-change Emitted when the divider position changes.
  * @eventdetail tp-splitter-change { axis: "horizontal" | "vertical"; position: string; storageKey: string }
  * @accessibility Exposes the divider as an adjustable ARIA separator with its current numeric value.
@@ -98,6 +95,9 @@ let instanceCount = 0;
  *   </dl>
  * </tp-splitter>
  * ```
+ * @cssprop [--tp-splitter-divider-color=var(--tp-brand-fill-mid, #2563eb)] Color of the divider grip and tint of its draggable track.
+ * @cssprop [--tp-splitter-divider-size=0.75rem] Thickness of the draggable divider track along the split axis.
+ * @cssprop [--tp-splitter-position=50%] Size of the first panel along the split axis, usually a percentage; synchronized with position and pointer or keyboard interaction.
  */
 export class TpSplitter extends TpBase {
 	/**

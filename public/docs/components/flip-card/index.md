@@ -130,7 +130,7 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-flip-card-change</code> | <code>&#123; flipped: unknown &#125;</code> | Emitted after the visible side changes. |
+  | <code>tp-flip-card-change</code> | <code>&#123; flipped: boolean &#125;</code> | Emitted when the visible side changes; flipped is true when the back face is visible. |
   [Events emitted by `<tp-flip-card>`]
 
 CSS properties
@@ -150,6 +150,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_flip-card.TpFlipCard.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

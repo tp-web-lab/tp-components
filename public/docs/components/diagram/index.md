@@ -448,6 +448,12 @@ CSS properties
 
 
 
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -492,7 +498,9 @@ All tp-components used by `<tp-diagram>` are loaded automatically by this compon
 ### External
 
 <!--
-@summary No external dependency.
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
 -->
-No external dependency
+
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 <!-- tp-docgen:dependencies:end -->

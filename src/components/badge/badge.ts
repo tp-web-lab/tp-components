@@ -28,19 +28,19 @@ import style from "./badge.css?inline";
  * @attr {boolean} outlined = false - Removes the filled background and uses the accent color for the border and text.
  * @attr {boolean} pill = false - Uses a fully rounded badge shape.
  * @attr {boolean} pulse = false - Makes the badge pulse to attract attention.
- * @cssprop --tp-badge-accent Accent color.
- * @cssprop --tp-badge-background Background color.
- * @cssprop --tp-badge-foreground Text color.
- * @cssprop --tp-badge-border-color Border color.
- * @cssprop --tp-badge-radius Border radius.
- * @cssprop --tp-badge-font-size Font size.
- * @cssprop --tp-badge-padding-block Block padding.
- * @cssprop --tp-badge-padding-inline Inline padding.
  * @example
  * <p>
  *   Build status: <tp-badge variant="success" pulse>Ready</tp-badge>
  *   <tp-badge outlined><tp-icon name="file_type_vite" library="languages"></tp-icon> Vite<tp-divider orientation="vertical"></tp-divider>8.1.5</tp-badge>
  * </p>
+ * @cssprop [--tp-badge-accent=var(--tp-neutral-text-colorful)] Accent color.
+ * @cssprop [--tp-badge-background=var(--tp-neutral-fill-softer)] Background color.
+ * @cssprop [--tp-badge-border-color=var(--tp-neutral-stroke-soft)] Border color.
+ * @cssprop [--tp-badge-font-size=0.875em] Font size.
+ * @cssprop [--tp-badge-foreground=var(--tp-neutral-text-on-soft)] Text color.
+ * @cssprop [--tp-badge-padding-block=0.35em] Block padding.
+ * @cssprop [--tp-badge-padding-inline=0.7em] Inline padding.
+ * @cssprop [--tp-badge-radius=0.5em] Border radius.
  */
 export class TpBadge extends TpBase {
 	/**

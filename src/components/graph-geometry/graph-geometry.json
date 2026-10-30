@@ -122,10 +122,6 @@
       "summary": "Shared base class for tp-* components."
     },
     {
-      "name": "tp-button",
-      "summary": "Button component that supports native button and link rendering."
-    },
-    {
       "name": "tp-button-group",
       "summary": "Button group component for organizing multiple buttons."
     },

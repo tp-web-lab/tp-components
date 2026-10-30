@@ -120,17 +120,17 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-datefield-background</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Controls the background. |
-  | <code>&#45;&#45;tp-datefield-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Controls the border color. |
-  | <code>&#45;&#45;tp-datefield-focus-color</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Controls the focus color. |
-  | <code>&#45;&#45;tp-datefield-inline-size</code> | <code>12.5em</code> | Controls the inline size. |
-  | <code>&#45;&#45;tp-datefield-label-font-weight</code> | <code>500</code> | Controls the label font weight. |
-  | <code>&#45;&#45;tp-datefield-label-gap</code> | <code>0.35em</code> | Controls the label gap. |
-  | <code>&#45;&#45;tp-datefield-padding-block</code> | <code>0.6em</code> | Controls the padding block. |
-  | <code>&#45;&#45;tp-datefield-padding-inline</code> | <code>0.75em</code> | Controls the padding inline. |
-  | <code>&#45;&#45;tp-datefield-radius</code> | <code>var(&#45;&#45;tp-border-radius-sm)</code> | Controls the radius. |
-  | <code>&#45;&#45;tp-datefield-required-color</code> | <code>var(&#45;&#45;tp-danger-text-colorful)</code> | Controls the required color. |
-  | <code>&#45;&#45;tp-datefield-value-font-weight</code> | <code>400</code> | Controls the value font weight. |
+  | <code>&#45;&#45;tp-datefield-background</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Background of the input control, excluding its label. |
+  | <code>&#45;&#45;tp-datefield-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Border color of the input control when it is not focused. |
+  | <code>&#45;&#45;tp-datefield-focus-color</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Border color and translucent outline tint while focus is inside the control. |
+  | <code>&#45;&#45;tp-datefield-inline-size</code> | <code>12.5em</code> | Preferred width of the field, limited by the available container width. |
+  | <code>&#45;&#45;tp-datefield-label-font-weight</code> | <code>500</code> | Font weight of the field label. |
+  | <code>&#45;&#45;tp-datefield-label-gap</code> | <code>0.35em</code> | Space between the label and the input control. |
+  | <code>&#45;&#45;tp-datefield-padding-block</code> | <code>0.6em</code> | Inner spacing above and below the input value. |
+  | <code>&#45;&#45;tp-datefield-padding-inline</code> | <code>0.75em</code> | Inner spacing before and after the input value; additional space is reserved for action buttons. |
+  | <code>&#45;&#45;tp-datefield-radius</code> | <code>var(&#45;&#45;tp-border-radius-sm)</code> | Corner radius of the input control. |
+  | <code>&#45;&#45;tp-datefield-required-color</code> | <code>var(&#45;&#45;tp-danger-text-colorful)</code> | Color of the asterisk marking a required field. |
+  | <code>&#45;&#45;tp-datefield-value-font-weight</code> | <code>400</code> | Font weight of the displayed input value. |
   [CSS properties of `<tp-datefield>`]
 :::
 <!-- /tp-docgen:api -->
@@ -138,6 +138,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_datefield.TpDatefield.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

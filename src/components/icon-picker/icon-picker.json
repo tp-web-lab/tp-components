@@ -51,13 +51,13 @@
   "events": [
     {
       "name": "tp-icon-picker-copy-error",
-      "description": "Emitted when the clipboard rejects a copy operation.",
-      "detail": "{ name: unknown; library: unknown; format: unknown; value: string; error: unknown }"
+      "description": "Emitted when copying the selected icon fails. The detail contains the requested clipboard text, selection metadata and the caught error.",
+      "detail": "{ name: string; library: string; format: TpIconPickerCopyFormat; value: string; error: unknown }"
     },
     {
       "name": "tp-icon-picker-select",
-      "description": "Emitted after an icon is selected.",
-      "detail": "{ name: unknown; library: unknown; sourcePath: unknown; format: unknown; value: string }"
+      "description": "Emitted when a icon is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success.",
+      "detail": "{ name: string; library: string; sourcePath: string; format: TpIconPickerCopyFormat; value: string }"
     }
   ],
   "cssproperties": [],

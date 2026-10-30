@@ -110,9 +110,9 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-slider-gap</code> | <code>1rem</code> | Controls the gap. |
-  | <code>&#45;&#45;tp-slider-item-width</code> | <code>auto</code> | Controls the item width. |
-  | <code>&#45;&#45;tp-slider-native-scrollbar-size</code> | <code>0px</code> | Controls the native scrollbar size. |
+  | <code>&#45;&#45;tp-slider-gap</code> | <code>1rem</code> | Horizontal space between adjacent slider items. |
+  | <code>&#45;&#45;tp-slider-item-width</code> | <code>auto</code> | Preferred width of each slider item; auto preserves its intrinsic width. |
+  | <code>&#45;&#45;tp-slider-native-scrollbar-size</code> | <code>0px</code> | Measured native scrollbar thickness, written internally to reserve space without duplicating the browser gutter. |
   [CSS properties of `<tp-slider>`]
 :::
 <!-- /tp-docgen:api -->
@@ -120,6 +120,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_slider_slider.TpSlider.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

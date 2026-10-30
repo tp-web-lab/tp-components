@@ -35,13 +35,7 @@
       "summary": "Shared base class for tp-* components."
     }
   ],
-  "credits": [
-    {
-      "name": "tp-asciidoc",
-      "url": "https://www.npmjs.com/package/@tp/tp-asciidoc",
-      "summary": "AsciiDoc parsing and rendering."
-    }
-  ],
+  "credits": [],
   "userHelp": {
     "displayName": "AsciiDoc",
     "introduction": "The custom `<tp-asciidoc>` element implements the <tp-icon name=\"asciidoc\" library=\"components\" size=\"1.25em\"></tp-icon> AsciiDoc functionality: semantic AsciiDoc rendering component.",

@@ -22,7 +22,7 @@
  */
 /**
  * @tp-dependency tp-dropdown
- * @summary Displays an anchored dropdown menu.
+ * @summary Dropdown menu component.
  */
 /**
  * @tp-dependency tp-fullscreen
@@ -42,7 +42,7 @@
  */
 /**
  * @tp-dependency tp-tooltip
- * @summary Displays anchored tooltip content.
+ * @summary Tooltip component.
  */
 /**
  * @credit CodeMirror https://codemirror.net/

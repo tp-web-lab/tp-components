@@ -71,18 +71,18 @@ Attributes
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Attribute `disabled`. |
-  | <code>download</code> | <code>string</code> | <code>&quot;&quot;</code> | Attribute `download`. |
-  | <code>href</code> | <code>string</code> | <code>&quot;&quot;</code> | Attribute `href`. |
-  | <code>loading</code> | <code>boolean</code> | <code>false</code> | Attribute `loading`. |
-  | <code>loading-mode</code> | <code>TpButtonLoadingMode</code> | <code>replace</code> | API documentation summary. |
-  | <code>outlined</code> | <code>boolean</code> | <code>false</code> | Attribute `outlined`. |
-  | <code>pill</code> | <code>boolean</code> | <code>false</code> | Attribute `pill`. |
-  | <code>rel</code> | <code>string</code> | <code>&quot;&quot;</code> | Attribute `rel`. |
-  | <code>size</code> | <code>TpSizeType</code> | <code>m</code> | Attribute `size`. |
-  | <code>target</code> | <code>string</code> | <code>&quot;&quot;</code> | Attribute `target`. |
-  | <code>type</code> | <code>TpButtonNativeType</code> | <code>button</code> | Attribute `type`. |
-  | <code>variant</code> | <code>TpVariantType</code> | <code>neutral</code> | Attribute `variant`. |
+  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Prevents activation, including link navigation, and marks the control as disabled. |
+  | <code>download</code> | <code>string</code> | <code>&quot;&quot;</code> | Suggested download filename when href is set. A nonempty value requests a download; browser and server rules determine whether it is honored. |
+  | <code>href</code> | <code>string</code> | <code>&quot;&quot;</code> | Destination URL. A nonempty value renders a link instead of a native button. |
+  | <code>loading</code> | <code>boolean</code> | <code>false</code> | Displays a loading spinner and prevents activation while present. |
+  | <code>loading-mode</code> | <code>TpButtonLoadingMode</code> | <code>replace</code> | Spinner layout while loading: replace hides the label; inline keeps the label beside the spinner. |
+  | <code>outlined</code> | <code>boolean</code> | <code>false</code> | Uses an outlined appearance instead of a filled background. |
+  | <code>pill</code> | <code>boolean</code> | <code>false</code> | Rounds the button ends to form a pill. |
+  | <code>rel</code> | <code>string</code> | <code>&quot;&quot;</code> | Space-separated relationship tokens forwarded to the link, for example noopener noreferrer; applies only with href. |
+  | <code>size</code> | <code>TpSizeType</code> | <code>m</code> | Button size preset: xxs, xs, s, m, l, xl or xxl; controls text size and padding. |
+  | <code>target</code> | <code>string</code> | <code>&quot;&quot;</code> | Browsing context for href, such as _self, _blank or a named frame; ignored in native button mode. |
+  | <code>type</code> | <code>TpButtonNativeType</code> | <code>button</code> | Native button action: button, submit or reset; ignored when href makes the control a link. |
+  | <code>variant</code> | <code>TpVariantType</code> | <code>neutral</code> | Color variant: neutral, brand, success, danger, warning or info. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -98,24 +98,24 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>click</code> | <code>void</code> | Event.<br>Colors are derived from the shared `tp.css` semantic tokens. |
+  | <code>click</code> | <code>void</code> | Native click event bubbling from the inner button or link when activated by pointer or keyboard; disabled controls suppress activation. This is not a CustomEvent, so there is no custom detail payload. |
   [Events emitted by `<tp-button>`]
 
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-button-accent</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Controls the accent. |
-  | <code>&#45;&#45;tp-button-background</code> | <code>transparent</code> | Controls the background. |
-  | <code>&#45;&#45;tp-button-border-color</code> | <code>var(&#45;&#45;tp-brand-stroke-mid)</code> | Controls the border color. |
-  | <code>&#45;&#45;tp-button-focus-ring-color</code> | <code>var(&#45;&#45;tp-focus-color)</code> | Controls the focus ring color. |
-  | <code>&#45;&#45;tp-button-font-size</code> | <code>1.125em</code> | Controls the font size. |
-  | <code>&#45;&#45;tp-button-foreground</code> | <code>var(&#45;&#45;tp-button-accent)</code> | Controls the foreground. |
-  | <code>&#45;&#45;tp-button-outline-background</code> | <code>var(&#45;&#45;tp-brand-fill-softer)</code> | Controls the outline background. |
-  | <code>&#45;&#45;tp-button-padding-block</code> | <code>0.6em</code> | Controls the padding block. |
-  | <code>&#45;&#45;tp-button-padding-inline</code> | <code>1em</code> | Controls the padding inline. |
-  | <code>&#45;&#45;tp-button-radius</code> | <code>999px</code> | Controls the radius. |
-  | <code>&#45;&#45;tp-button-spinner-border-width</code> | <code>1.5px</code> | Controls the spinner border width. |
-  | <code>&#45;&#45;tp-button-spinner-size</code> | <code>1.15em</code> | Controls the spinner size. |
+  | <code>&#45;&#45;tp-button-accent</code> | <code>var(&#45;&#45;tp-neutral-text-colorful)</code> | Accent color used for outlined text and borders, and for the hover border; depends on variant. |
+  | <code>&#45;&#45;tp-button-background</code> | <code>var(&#45;&#45;tp-neutral-fill-loud)</code> | Background color of the button or link; variant and outlined can change it. |
+  | <code>&#45;&#45;tp-button-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-mid)</code> | Border color of the button or link in its resting state. |
+  | <code>&#45;&#45;tp-button-focus-ring-color</code> | <code>var(&#45;&#45;tp-focus-color)</code> | Color of the outer ring shown on keyboard focus and hover. |
+  | <code>&#45;&#45;tp-button-font-size</code> | <code>0.875em</code> | Font size of the button label; size presets also update this value. |
+  | <code>&#45;&#45;tp-button-foreground</code> | <code>var(&#45;&#45;tp-neutral-text-on-loud)</code> | Text and icon color of the button or link. |
+  | <code>&#45;&#45;tp-button-outline-background</code> | <code>var(&#45;&#45;tp-neutral-fill-softer)</code> | Background color of an enabled outlined button on hover. |
+  | <code>&#45;&#45;tp-button-padding-block</code> | <code>0.35em</code> | Inner spacing above and below the button content. |
+  | <code>&#45;&#45;tp-button-padding-inline</code> | <code>0.7em</code> | Inner spacing before and after the button content. |
+  | <code>&#45;&#45;tp-button-radius</code> | <code>0.5em</code> | Corner radius of the button or link; pill uses a fully rounded radius. |
+  | <code>&#45;&#45;tp-button-spinner-border-width</code> | <code>2px</code> | Stroke thickness of the circular loading indicator. |
+  | <code>&#45;&#45;tp-button-spinner-size</code> | <code>1em</code> | Width and height of the circular loading indicator. |
   [CSS properties of `<tp-button>`]
 :::
 <!-- /tp-docgen:api -->
@@ -123,6 +123,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_button.TpButton.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

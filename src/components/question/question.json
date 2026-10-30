@@ -57,7 +57,7 @@
     },
     {
       "name": "open",
-      "description": "Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.",
+      "description": "Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.\n  `detail: { value: unknown }`",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -102,8 +102,8 @@
   "events": [
     {
       "name": "tp-question-submit",
-      "description": "- Fired when the submit icon button is activated.\n`detail: { value: unknown }`",
-      "detail": "{ value: string }"
+      "description": "Emitted after an answer passes submission validation and preparation. value is the response widget value, whose type depends on the question; invalid or blocked repeated submissions do not emit it.",
+      "detail": "{ value: unknown }"
     }
   ],
   "cssproperties": [],

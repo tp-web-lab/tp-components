@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "size",
-      "description": "Clock size.",
+      "description": "Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -35,7 +35,7 @@
     {
       "name": "--tp-clock-size",
       "default": "1rem",
-      "description": "Clock size."
+      "description": "Font size of the clock display, updated from the size attribute."
     }
   ],
   "dependencies": [
@@ -45,7 +45,7 @@
     },
     {
       "name": "tp-tooltip",
-      "summary": "Displays anchored tooltip content."
+      "summary": "Tooltip component."
     }
   ],
   "credits": [],

@@ -366,34 +366,54 @@ const FILE_TREE_CONTEXT_MENU_CONFIG: TpTreeContextMenuConfig = {
  * @summary Arbre spécialisé pour fichiers et dossiers.
  * @tagname tp-file-tree
  *
- * @cssprop --tp-file-tree-selected-bg Couleur de fond du chemin sélectionné.
- * @cssprop --tp-file-tree-active-color Couleur du fichier actif.
- * @cssprop --tp-file-tree-open-color Couleur des fichiers ouverts.
- * @cssprop --tp-file-tree-dirty-color Couleur du marqueur dirty.
- * @cssprop --tp-file-tree-icon-size Taille des icônes de fichiers.
  *
- * @event tp-file-tree-select Émis lorsqu’un chemin est sélectionné.
- * @eventdetail tp-file-tree-select { path: string }
- * @event tp-file-tree-open Émis lorsqu’un fichier est ouvert.
- * @eventdetail tp-file-tree-open { path: string }
- * @event tp-file-tree-active Émis lorsqu’un fichier devient actif.
- * @eventdetail tp-file-tree-active { path: string }
- * @event tp-file-tree-global-action Émis lorsqu’une action globale est choisie.
- * @eventdetail tp-file-tree-global-action { action: string }
- * @event tp-file-tree-add-request Émis lorsqu’un ajout de fichier ou dossier est demandé.
- * @eventdetail tp-file-tree-add-request { path: string | null; kind: "file" | "directory" }
- * @event tp-file-tree-clone-request Émis lorsqu’un clonage est demandé.
- * @eventdetail tp-file-tree-clone-request { path: string }
- * @event tp-file-tree-copy-request Émis lorsqu’une copie de chemin est demandée.
- * @eventdetail tp-file-tree-copy-request { path: string }
- * @event tp-file-tree-delete-request Émis lorsqu’une suppression est demandée.
- * @eventdetail tp-file-tree-delete-request { path: string }
- * @event tp-file-tree-rename-request Émis lorsqu’un renommage est demandé.
- * @eventdetail tp-file-tree-rename-request { path: string; newName: string }
- * @event tp-file-tree-move-request Émis lorsqu’un déplacement est demandé.
- * @eventdetail tp-file-tree-move-request { sourcePath: string; destinationPath: string | null; position: "inside" | "before" | "after" }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  * @example
  * <tp-file-tree></tp-file-tree>
+ * @cssprop [--tp-file-tree-active-color=inherit] Text color of the active file row.
+ * @cssprop [--tp-file-tree-dirty-color=#d97706] Color of the dot marking a file with unsaved changes.
+ * @cssprop [--tp-file-tree-icon-size=1rem] Width and height of file and directory icons.
+ * @cssprop [--tp-file-tree-open-color=inherit] Text color of rows whose paths are marked as open.
+ * @cssprop [--tp-file-tree-selected-bg=color-mix(in srgb, currentColor 8%, transparent)] Background color of the selected path row.
+ * @eventdetail tp-file-tree-active { path: string }
+ * @event tp-file-tree-active Emitted when selecting a file makes it active; path identifies the file. Selecting an already active file can emit it again.
+ * @eventdetail tp-file-tree-open { path: string }
+ * @event tp-file-tree-open Emitted when a file is selected for opening; path identifies the file. Selecting an already open file can emit it again.
+ * @eventdetail tp-file-tree-select { path: string }
+ * @event tp-file-tree-select Emitted after a file or directory row is selected; path identifies the selected entry.
+ * @eventdetail tp-file-tree-add-request { path: string | null; kind: "file" | "directory" }
+ * @event tp-file-tree-add-request Requests creation of a file or directory; path is the target path, or null for the root, and kind specifies the entry type. The consumer performs the creation.
+ * @eventdetail tp-file-tree-clone-request { path: string }
+ * @event tp-file-tree-clone-request Requests duplication of the entry at path; the consumer performs the copy.
+ * @eventdetail tp-file-tree-copy-request { path: string }
+ * @event tp-file-tree-copy-request Requests copying the selected path to the clipboard; the consumer performs the copy.
+ * @eventdetail tp-file-tree-delete-request { path: string }
+ * @event tp-file-tree-delete-request Requests deletion of the entry at path; the consumer performs the deletion.
+ * @eventdetail tp-file-tree-global-action { actionId: "expand-all" | "collapse-all" | "toggle-guides" }
+ * @event tp-file-tree-global-action Emitted when a global context-menu action is chosen; actionId contains its identifier.
+ * @eventdetail tp-file-tree-move-request { sourcePath: string; destinationPath: string | null; position: "inside" | "before" | "after" }
+ * @event tp-file-tree-move-request Requests moving sourcePath relative to destinationPath at position; a null destination denotes the root. The consumer performs the move.
+ * @eventdetail tp-file-tree-rename-request { path: string; newName: string }
+ * @event tp-file-tree-rename-request Requests renaming the entry at path to newName; the consumer performs the rename.
  */
 export class TpFileTree extends TpBase {
 	/**
@@ -471,14 +491,7 @@ export class TpFileTree extends TpBase {
 	}
 
 	/**
-	 * Définit complètement l’état affiché par le file tree.
-	 *
-	 * Cette méthode est le point d’entrée recommandé pour synchroniser
-	 * `<tp-file-tree>` depuis `<tp-filesystem>`, car elle évite plusieurs rendus
-	 * successifs (`setNodes`, puis `setSelectedPath`, etc.).
-	 *
-	 * @summary Synchronise en une fois les nœuds et états visuels.
-	 * @param state État complet à afficher.
+	 * @summary Replaces the displayed nodes and selected, active, open and dirty paths together; rerenders the tree and expands its directories.
 	 */
 	public setState(state: TpFileTreeState): void {
 		this.nodes = sortFileTreeNodes(state.nodes);
@@ -503,10 +516,7 @@ export class TpFileTree extends TpBase {
 	}
 
 	/**
-	 * Définit complètement l’arborescence à afficher.
-	 *
-	 * @summary Charge une nouvelle liste de nœuds racine.
-	 * @param nodes Nœuds racine.
+	 * @summary Replaces the root nodes with a recursively sorted copy while retaining selected, active, open and dirty paths.
 	 */
 	public setNodes(nodes: readonly TpFileTreeNode[]): void {
 		this.setState({
@@ -519,20 +529,14 @@ export class TpFileTree extends TpBase {
 	}
 
 	/**
-	 * Retourne les nœuds racine courants.
-	 *
-	 * @summary Retourne une copie triée des nœuds racine.
-	 * @returns Nœuds courants.
+	 * @summary Returns a detached, recursively sorted copy of the root nodes, with directories before files.
 	 */
 	public getNodes(): TpFileTreeNode[] {
 		return this.nodes.map((node) => sortFileTreeNode(node));
 	}
 
 	/**
-	 * Définit le chemin sélectionné.
-	 *
-	 * @summary Met à jour la sélection logique.
-	 * @param path Chemin sélectionné ou `null`.
+	 * @summary Sets the highlighted selected path; null clears selection. Retains the active path and file states.
 	 */
 	public setSelectedPath(path: string | null): void {
 		this.setState({
@@ -545,10 +549,7 @@ export class TpFileTree extends TpBase {
 	}
 
 	/**
-	 * Définit le chemin actif.
-	 *
-	 * @summary Met à jour l’état actif logique.
-	 * @param path Chemin actif ou `null`.
+	 * @summary Sets the active-file path; null clears the active marker without changing selection.
 	 */
 	public setActivePath(path: string | null): void {
 		this.setState({
@@ -561,10 +562,7 @@ export class TpFileTree extends TpBase {
 	}
 
 	/**
-	 * Définit l’ensemble des chemins ouverts.
-	 *
-	 * @summary Met à jour l’état logique des chemins ouverts.
-	 * @param paths Chemins ouverts.
+	 * @summary Replaces the set of file paths marked as open; does not change the active or selected path.
 	 */
 	public setOpenPaths(paths: readonly string[]): void {
 		this.setState({
@@ -577,10 +575,7 @@ export class TpFileTree extends TpBase {
 	}
 
 	/**
-	 * Définit l’ensemble des chemins modifiés.
-	 *
-	 * @summary Met à jour l’état dirty des fichiers.
-	 * @param paths Chemins modifiés.
+	 * @summary Replaces the set of file paths marked as modified; an empty array removes every modified marker.
 	 */
 	public setDirtyPaths(paths: readonly string[]): void {
 		this.setState({
@@ -593,28 +588,21 @@ export class TpFileTree extends TpBase {
 	}
 
 	/**
-	 * Déplie complètement l’arbre.
-	 *
-	 * @summary Ouvre tous les nœuds.
+	 * @summary Expands every directory in the displayed tree; has no effect before the internal tree is created.
 	 */
 	public expandAll(): void {
 		this.treeEl?.expandAll();
 	}
 
 	/**
-	 * Replie complètement l’arbre.
-	 *
-	 * @summary Ferme tous les nœuds.
+	 * @summary Collapses every directory in the displayed tree; has no effect before the internal tree is created.
 	 */
 	public collapseAll(): void {
 		this.treeEl?.collapseAll();
 	}
 
 	/**
-	 * Démarre le renommage inline d’un chemin.
-	 *
-	 * @summary Démarre le renommage d’un chemin.
-	 * @param path Chemin à renommer.
+	 * @summary Starts inline renaming for the tree item matching path; does nothing for an empty or missing path.
 	 */
 	public beginRenamePath(path: string): void {
 		const normalizedPath = path.trim();

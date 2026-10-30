@@ -57,7 +57,7 @@
     },
     {
       "name": "size",
-      "description": "Icon button size.",
+      "description": "Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -66,7 +66,7 @@
     },
     {
       "name": "variant",
-      "description": "Icon button variant.",
+      "description": "Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -78,7 +78,7 @@
     {
       "name": "save(format: TpSaveAudioFormat = this.format): Promise<void>",
       "inherited": false,
-      "description": "Save."
+      "description": "Requests the anchored component to save mp3, ogg or wav audio using filename. Resolves after completion or cancellation; does nothing when disabled or already saving. Invalid formats and incompatible targets reject."
     }
   ],
   "events": [

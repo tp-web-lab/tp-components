@@ -82,10 +82,10 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_QUERY_EDGE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &#39;forward&#39;): TpGraphEdge</code> | Adds edge. |
-  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, nodeLabel?: string): TpGraphNode</code> | Adds node. |
-  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Sets graph. |
-  | <code>toSql</code> | <code>toSql(): string</code> | To sql. |
+  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_QUERY_EDGE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &quot;forward&quot;): TpGraphEdge</code> | Adds a forward query-tree edge between compatible existing nodes and returns its record; unsupported directions or invalid connections throw. |
+  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, nodeLabel?: string): TpGraphNode</code> | Adds a query operator or comment at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError. |
+  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph. |
+  | <code>toSql</code> | <code>toSql(): string</code> | Returns the SQL query generated from the current query tree; invalid tree structure raises a validation error. |
   [Public methods of `TpGraphQueryTree`]
 
 Events
@@ -105,6 +105,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-query-tree.TpGraphQueryTree.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

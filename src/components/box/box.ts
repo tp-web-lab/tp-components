@@ -25,15 +25,15 @@ import style from "./box.css?inline";
  * @attr {string} padding = "1rem" - Padding applied inside the box. When absent, uses --tp-box-padding with a 1rem fallback.
  *
  *
- * @cssprop --tp-box-background Default box background.
- * @cssprop --tp-box-border-radius Default border radius.
- * @cssprop --tp-box-border-width Default border width.
- * @cssprop --tp-box-color Default box text color.
- * @cssprop --tp-box-padding Default inner padding.
  * @example
  * <tp-box>
  *   The custom HTML element <code>&lt;tp-box&gt;</code> wraps its content in various ways.
  * </tp-box>
+ * @cssprop [--tp-box-background=var(--tp-paper-color, transparent)] Default box background.
+ * @cssprop [--tp-box-border-radius=0px] Default border radius.
+ * @cssprop [--tp-box-border-width=1px] Default border width.
+ * @cssprop [--tp-box-color=var(--tp-text-body, inherit)] Default box text color.
+ * @cssprop [--tp-box-padding=1rem] Default inner padding.
  */
 export class TpBox extends TpBase {
 	/**

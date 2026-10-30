@@ -100,11 +100,11 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>addEntry</code> | <code>addEntry(kind: TpConsoleEntryKind, values: TpConsoleValue[]): TpConsoleEntry</code> | Adds an entry to the console. |
-  | <code>assert</code> | <code>assert(condition: unknown, ...values: TpConsoleValue[]): void</code> | Writes an assertion failure. |
+  | <code>addEntry</code> | <code>addEntry(kind: TpConsoleEntryKind, values: TpConsoleValue[]): TpConsoleEntry</code> | Appends an entry of kind containing values, rerenders the console and returns the created entry record. |
+  | <code>assert</code> | <code>assert(condition: unknown, ...values: TpConsoleValue[]): void</code> | Adds an assertion-failure entry only when condition is falsy, including the supplied values. |
   | <code>clear</code> | <code>clear(): void</code> | Removes all entries. |
-  | <code>count</code> | <code>count(label = &quot;default&quot;): void</code> | Writes a counter value. |
-  | <code>countReset</code> | <code>countReset(label = &quot;default&quot;): void</code> | Resets a counter. |
+  | <code>count</code> | <code>count(label = &quot;default&quot;): void</code> | Increments the counter associated with label and displays its new value; a new counter starts at one. |
+  | <code>countReset</code> | <code>countReset(label = &quot;default&quot;): void</code> | Resets the counter associated with label so its next count starts again at one. |
   | <code>error</code> | <code>error(...values: TpConsoleValue[]): void</code> | Writes an error entry. |
   | <code>getEntries</code> | <code>getEntries(): TpConsoleEntry[]</code> | Returns a copy of the displayed entries. |
   | <code>getValue</code> | <code>getValue(): string</code> | Returns the text copied by the toolbar copy button. |
@@ -113,12 +113,12 @@ Methods
   | <code>groupEnd</code> | <code>groupEnd(): void</code> | Ends the current group. |
   | <code>info</code> | <code>info(...values: TpConsoleValue[]): void</code> | Writes an informational entry. |
   | <code>log</code> | <code>log(...values: TpConsoleValue[]): void</code> | Writes a standard entry. |
-  | <code>redirectConsoleToSelf</code> | <code>redirectConsoleToSelf(): () =&gt; void</code> | Redirects global console calls to this component. |
+  | <code>redirectConsoleToSelf</code> | <code>redirectConsoleToSelf(): () =&gt; void</code> | Routes global console methods to this component and returns a cleanup function that restores the previous methods. |
   | <code>restoreConsole</code> | <code>restoreConsole(): void</code> | Restores the original global console methods. |
   | <code>table</code> | <code>table(...values: TpConsoleValue[]): void</code> | Writes tabular data. |
-  | <code>time</code> | <code>time(label = &quot;default&quot;): void</code> | Starts a timer. |
-  | <code>timeEnd</code> | <code>timeEnd(label = &quot;default&quot;): void</code> | Ends a timer. |
-  | <code>timeLog</code> | <code>timeLog(label = &quot;default&quot;, ...values: TpConsoleValue[]): void</code> | Writes a timer value. |
+  | <code>time</code> | <code>time(label = &quot;default&quot;): void</code> | Starts or restarts the elapsed-time measurement associated with label. |
+  | <code>timeEnd</code> | <code>timeEnd(label = &quot;default&quot;): void</code> | Displays elapsed milliseconds for label and removes the timer. |
+  | <code>timeLog</code> | <code>timeLog(label = &quot;default&quot;, ...values: TpConsoleValue[]): void</code> | Displays elapsed milliseconds for label with any additional values, without stopping the timer. |
   | <code>warn</code> | <code>warn(...values: TpConsoleValue[]): void</code> | Writes a warning entry. |
   [Public methods of `TpConsole`]
 
@@ -136,25 +136,25 @@ CSS properties
   | <code>&#45;&#45;tp-console-bigint-color</code> | <code>#bc8cff</code> | BigInt value color. |
   | <code>&#45;&#45;tp-console-boolean-color</code> | <code>#ffa657</code> | Boolean value color. |
   | <code>&#45;&#45;tp-console-border</code> | <code>#30363d</code> | Console border color. |
-  | <code>&#45;&#45;tp-console-circular-color</code> | <code>#f2cc60</code> | Controls the circular color. |
+  | <code>&#45;&#45;tp-console-circular-color</code> | <code>#f2cc60</code> | Text color of circular-reference markers in expanded objects. |
   | <code>&#45;&#45;tp-console-color</code> | <code>#e6edf3</code> | Console text color. |
-  | <code>&#45;&#45;tp-console-date-color</code> | <code>#7ee787</code> | Controls the date color. |
-  | <code>&#45;&#45;tp-console-depth</code> | <code>0</code> | Controls the depth. |
+  | <code>&#45;&#45;tp-console-date-color</code> | <code>#7ee787</code> | Text color of Date values in expanded objects. |
+  | <code>&#45;&#45;tp-console-depth</code> | <code>0</code> | Unitless group nesting depth of a log entry; each level adds 1rem of leading indentation. Assigned internally per entry. |
   | <code>&#45;&#45;tp-console-empty-color</code> | <code>#8b949e</code> | Empty state text color. |
-  | <code>&#45;&#45;tp-console-entry-bg</code> | <code>transparent</code> | Controls the entry bg. |
+  | <code>&#45;&#45;tp-console-entry-bg</code> | <code>transparent</code> | Background of an individual log entry. |
   | <code>&#45;&#45;tp-console-entry-border</code> | <code>#21262d</code> | Entry separator color. |
-  | <code>&#45;&#45;tp-console-error-color</code> | <code>#ff7b72</code> | Controls the error color. |
-  | <code>&#45;&#45;tp-console-function-color</code> | <code>#d2a8ff</code> | Controls the function color. |
-  | <code>&#45;&#45;tp-console-kind-accent</code> | <code>#ff7b72</code> | Controls the kind accent. |
+  | <code>&#45;&#45;tp-console-error-color</code> | <code>#ff7b72</code> | Text color of Error values in expanded objects. |
+  | <code>&#45;&#45;tp-console-function-color</code> | <code>#d2a8ff</code> | Text color of function summaries in expanded objects. |
+  | <code>&#45;&#45;tp-console-kind-accent</code> | <code>#8b949e</code> | Text color and background tint of the log-level badge; assigned by the entry level. |
   | <code>&#45;&#45;tp-console-nullish-color</code> | <code>#8b949e</code> | Null and undefined value color. |
   | <code>&#45;&#45;tp-console-number-color</code> | <code>#79c0ff</code> | Number value color. |
   | <code>&#45;&#45;tp-console-object-bg</code> | <code>#11161d</code> | Object preview background. |
   | <code>&#45;&#45;tp-console-object-border</code> | <code>#30363d</code> | Object preview border color. |
   | <code>&#45;&#45;tp-console-object-key-color</code> | <code>#c9d1d9</code> | Object key color. |
-  | <code>&#45;&#45;tp-console-object-marker-color</code> | <code>#8b949e</code> | Controls the object marker color. |
+  | <code>&#45;&#45;tp-console-object-marker-color</code> | <code>#8b949e</code> | Color of the triangle used to expand or collapse an object preview. |
   | <code>&#45;&#45;tp-console-object-panel-bg</code> | <code>#0f141a</code> | Object tree panel background. |
-  | <code>&#45;&#45;tp-console-object-separator-color</code> | <code>#8b949e</code> | Controls the object separator color. |
-  | <code>&#45;&#45;tp-console-object-summary-bg</code> | <code>#161b22</code> | Controls the object summary bg. |
+  | <code>&#45;&#45;tp-console-object-separator-color</code> | <code>#8b949e</code> | Color of the separator between a property name and its value in expanded objects. |
+  | <code>&#45;&#45;tp-console-object-summary-bg</code> | <code>#161b22</code> | Background of the clickable summary row of an object preview. |
   | <code>&#45;&#45;tp-console-object-summary-color</code> | <code>#c9d1d9</code> | Object summary text color. |
   | <code>&#45;&#45;tp-console-string-color</code> | <code>#a5d6ff</code> | String value color. |
   | <code>&#45;&#45;tp-console-time-color</code> | <code>#8b949e</code> | Timestamp color. |
@@ -165,6 +165,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_console.TpConsole.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

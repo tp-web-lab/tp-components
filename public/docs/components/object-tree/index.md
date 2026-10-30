@@ -161,24 +161,24 @@ Events
   | --- | --- | --- |
   | <code>tp-object-tree-error</code> | <code>&#123; message: string; source: &quot;script&quot; \| &quot;src&quot;; src: string &#125;</code> | Emitted when an external JSON file or inline JavaScript expression cannot be loaded. |
   | <code>tp-object-tree-load</code> | <code>&#123; source: &quot;script&quot; \| &quot;src&quot;; src: string; value: unknown &#125;</code> | Emitted after an external JSON file or inline JavaScript expression has been loaded. |
-  | <code>tp-tree-context-action</code> | <code>void</code> | Emitted when the user triggers a global tree action. |
+  | <code>tp-tree-context-action</code> | <code>&#123; actionId: string; scope: &quot;global&quot; \| &quot;node&quot;; target: TpTreeNodeTarget \| null &#125;</code> | Bubbles from the inner tree when a context-menu action is chosen. scope distinguishes global and node actions; target identifies the node or is null. |
   [Events emitted by `<tp-object-tree>`]
 
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-object-tree-boolean-color</code> | <code>#8250df</code> | Controls the boolean color. |
-  | <code>&#45;&#45;tp-object-tree-circular-color</code> | <code>#cf222e</code> | Controls the circular color. |
-  | <code>&#45;&#45;tp-object-tree-date-color</code> | <code>#116329</code> | Controls the date color. |
-  | <code>&#45;&#45;tp-object-tree-error-color</code> | <code>#cf222e</code> | Controls the error color. |
-  | <code>&#45;&#45;tp-object-tree-font-size</code> | <code>0.875rem</code> | Controls the font size. |
-  | <code>&#45;&#45;tp-object-tree-function-color</code> | <code>#953800</code> | Controls the function color. |
-  | <code>&#45;&#45;tp-object-tree-key-color</code> | <code>#6a737d</code> | Controls the key color. |
-  | <code>&#45;&#45;tp-object-tree-nullish-color</code> | <code>#8c959f</code> | Controls the nullish color. |
-  | <code>&#45;&#45;tp-object-tree-number-color</code> | <code>#0550ae</code> | Controls the number color. |
-  | <code>&#45;&#45;tp-object-tree-separator-color</code> | <code>#8c959f</code> | Controls the separator color. |
-  | <code>&#45;&#45;tp-object-tree-string-color</code> | <code>#0a7f3f</code> | Controls the string color. |
-  | <code>&#45;&#45;tp-object-tree-structure-color</code> | <code>#57606a</code> | Controls the structure color. |
+  | <code>&#45;&#45;tp-object-tree-boolean-color</code> | <code>#8250df</code> | Text color of Boolean values in the object tree. |
+  | <code>&#45;&#45;tp-object-tree-circular-color</code> | <code>#cf222e</code> | Text color of circular-reference markers in the object tree. |
+  | <code>&#45;&#45;tp-object-tree-date-color</code> | <code>#116329</code> | Text color of Date values in the object tree. |
+  | <code>&#45;&#45;tp-object-tree-error-color</code> | <code>#cf222e</code> | Text color of Error values in the object tree. |
+  | <code>&#45;&#45;tp-object-tree-font-size</code> | <code>0.875rem</code> | Font size of property names and value summaries in the object tree. |
+  | <code>&#45;&#45;tp-object-tree-function-color</code> | <code>#953800</code> | Text color of function summaries in the object tree. |
+  | <code>&#45;&#45;tp-object-tree-key-color</code> | <code>#6a737d</code> | Text color of object property names in the object tree. |
+  | <code>&#45;&#45;tp-object-tree-nullish-color</code> | <code>#8c959f</code> | Text color of null and undefined values in the object tree. |
+  | <code>&#45;&#45;tp-object-tree-number-color</code> | <code>#0550ae</code> | Text color of numeric values in the object tree. |
+  | <code>&#45;&#45;tp-object-tree-separator-color</code> | <code>#8c959f</code> | Text color of the separator between a property name and its value in the object tree. |
+  | <code>&#45;&#45;tp-object-tree-string-color</code> | <code>#0a7f3f</code> | Text color of string values in the object tree. |
+  | <code>&#45;&#45;tp-object-tree-structure-color</code> | <code>#57606a</code> | Text color of array and object summaries in the object tree. |
   [CSS properties of `<tp-object-tree>`]
 :::
 <!-- /tp-docgen:api -->
@@ -186,6 +186,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_object-tree.TpObjectTree.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

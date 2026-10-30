@@ -102,9 +102,9 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-toc-background</code> | <code>var(&#45;&#45;tp-brand-fill-softer)</code> | Panel background color. |
-  | <code>&#45;&#45;tp-toc-border-color</code> | <code>var(&#45;&#45;tp-brand-stroke-soft)</code> | Panel border color. |
-  | <code>&#45;&#45;tp-toc-color</code> | <code>var(&#45;&#45;tp-brand-text-on-soft)</code> | Panel text color. |
+  | <code>&#45;&#45;tp-toc-background</code> | <code>color-mix(in srgb, Canvas 94%, CanvasText 6%)</code> | Panel background color. |
+  | <code>&#45;&#45;tp-toc-border-color</code> | <code>color-mix(in srgb, CanvasText 12%, transparent)</code> | Panel border color. |
+  | <code>&#45;&#45;tp-toc-color</code> | <code>inherit</code> | Panel text color. |
   [CSS properties of `<tp-toc>`]
 :::
 <!-- /tp-docgen:api -->
@@ -112,6 +112,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_toc.TpToc.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

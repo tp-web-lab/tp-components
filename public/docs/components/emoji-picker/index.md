@@ -90,8 +90,8 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-emoji-picker-copy-error</code> | <code>&#123; copy: unknown; value: string; error: unknown &#125;</code> | Emitted when the clipboard rejects a copy operation. |
-  | <code>tp-emoji-picker-select</code> | <code>&#123; copy: unknown; value: string &#125;</code> | Emitted after an emoji is selected and copied. |
+  | <code>tp-emoji-picker-copy-error</code> | <code>&#123; emoji: string; name: string; group: string; subgroup: string; version: string; codepoints: string[]; copy: TpEmojiPickerCopyFormat; value: string; error: unknown &#125;</code> | Emitted when copying the selected emoji fails. The detail contains the requested clipboard text, selection metadata and the caught error. |
+  | <code>tp-emoji-picker-select</code> | <code>&#123; emoji: string; name: string; group: string; subgroup: string; version: string; codepoints: string[]; copy: TpEmojiPickerCopyFormat; value: string \| null &#125;</code> | Emitted when a emoji is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success. value is null when the selected copy format has no representation. |
   [Events emitted by `<tp-emoji-picker>`]
 
 CSS properties
@@ -105,6 +105,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_emoji-picker.TpEmojiPicker.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

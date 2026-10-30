@@ -75,9 +75,9 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>close</code> | <code>close(action: &#39;confirm&#39; \| &#39;cancel&#39; = &#39;cancel&#39;): void</code> | Closes the dialog. |
-  | <code>setContent</code> | <code>setContent(options: &#123;&lt;br&gt;    title?: string;&lt;br&gt;    body?: Node[];&lt;br&gt;    confirmText?: string;&lt;br&gt;    cancelText?: string;&lt;br&gt;  &#125;): void</code> | Replaces the dialog content. |
-  | <code>show</code> | <code>show(): void</code> | Opens the dialog. |
+  | <code>close</code> | <code>close(action: &quot;confirm&quot; \| &quot;cancel&quot; = &quot;cancel&quot;): void</code> | Closes the dialog with action confirm or cancel and emits tp-dialog-close carrying that action; defaults to cancel. |
+  | <code>setContent</code> | <code>setContent(options: &#123;&lt;br&gt;		title?: string;&lt;br&gt;		body?: Node[];&lt;br&gt;		confirmText?: string;&lt;br&gt;		cancelText?: string;&lt;br&gt;	&#125;): void</code> | Replaces the title, body nodes and button labels. Supplied nodes are moved into the dialog; omitted title/body become empty and button labels default to Confirm/Cancel. |
+  | <code>show</code> | <code>show(): void</code> | Opens the internal native dialog in modal mode, blocking interaction with the rest of the page. |
   [Public methods of `TpDialog`]
 
 Events
@@ -97,6 +97,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_dialog_dialog.TpDialog.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 
@@ -409,14 +415,10 @@ bundler
 
 ### Internal
 
-All tp-components used by `<tp-dialog>` are loaded automatically by this component if they have not already been loaded by another component.
-
 <!--
-@tp-dependency tp-button
-@summary Button component that supports native button and link rendering.
+@summary This component has no tp-components dependencies.
 -->
-
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
+No internal dependency
 
 ### External
 

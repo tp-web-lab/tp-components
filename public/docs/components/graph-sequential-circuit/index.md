@@ -78,21 +78,21 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>clockStep</code> | <code>clockStep(): void</code> | Clock step. |
-  | <code>evaluate</code> | <code>evaluate(): void</code> | Evaluate. |
-  | <code>resetSequentialState</code> | <code>resetSequentialState(): void</code> | Resets sequential state. |
-  | <code>run</code> | <code>run(period = 700): void</code> | Run. |
-  | <code>stop</code> | <code>stop(): void</code> | Stop. |
-  | <code>toggle</code> | <code>toggle(id: string, propagate = true): boolean</code> | Toggle. |
+  | <code>clockStep</code> | <code>clockStep(): void</code> | Advances a clock cycle, updates memory elements and combinational outputs, and records the resulting timeline samples. |
+  | <code>evaluate</code> | <code>evaluate(): void</code> | Recomputes combinational outputs without advancing the clock, records a timeline sample and emits tp-logic-evaluate. |
+  | <code>resetSequentialState</code> | <code>resetSequentialState(): void</code> | Restores memory elements to their initial Boolean states, clears the timeline, recomputes outputs and emits tp-sequential-reset. |
+  | <code>run</code> | <code>run(period = 700): void</code> | Starts repeated clock steps every period milliseconds, clamped to at least 100. Does nothing if already running; nonfinite periods use 700. |
+  | <code>stop</code> | <code>stop(): void</code> | Stops automatic clock stepping while preserving the current circuit state and timeline. |
+  | <code>toggle</code> | <code>toggle(id: string, propagate = true): boolean</code> | Inverts input or output id and returns its new Boolean value. Optionally propagates input changes through combinational logic and records a timeline sample; unsupported nodes throw. |
   [Public methods of `TpGraphSequentialCircuit`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-logic-evaluate</code> | <code>&#123; graph: unknown &#125;</code> | Emitted when logic evaluate occurs. |
-  | <code>tp-logic-toggle</code> | <code>&#123; id: unknown; value: string; graph: unknown &#125;</code> | Emitted when logic toggle occurs. |
-  | <code>tp-sequential-clock</code> | <code>&#123; values: unknown; graph: unknown &#125;</code> | Emitted when sequential clock occurs. |
-  | <code>tp-sequential-reset</code> | <code>&#123; graph: unknown &#125;</code> | Emitted when sequential reset occurs. |
+  | <code>tp-logic-evaluate</code> | <code>&#123; graph: TpGraphDocument &#125;</code> | Emitted after combinational outputs are recomputed without advancing the clock; graph contains the resulting snapshot. |
+  | <code>tp-logic-toggle</code> | <code>&#123; id: string; value: boolean; graph: TpGraphDocument &#125;</code> | Emitted after an input node is toggled; id identifies the input, value is its new Boolean level, and graph contains the resulting snapshot. |
+  | <code>tp-sequential-clock</code> | <code>&#123; values: Record&lt;string, boolean&gt;; graph: TpGraphDocument &#125;</code> | Emitted after a clock cycle has updated memory and settled combinational outputs. values maps memory-element IDs to their new Boolean states. |
+  | <code>tp-sequential-reset</code> | <code>&#123; graph: TpGraphDocument &#125;</code> | Emitted after memory elements return to their initial states and the timeline is cleared; graph contains the reset snapshot. |
   [Events emitted by `<tp-graph-sequential-circuit>`]
 
 CSS properties
@@ -106,6 +106,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-sequential-circuit.TpGraphSequentialCircuit.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 
@@ -421,15 +427,10 @@ bundler
 All tp-components used by `<tp-graph-sequential-circuit>` are loaded automatically by this component if they have not already been loaded by another component.
 
 <!--
-@tp-dependency tp-graph-editor
-@summary Extensible interactive graph editor.
--->
-<!--
 @tp-dependency tp-graph-logical-circuit
 @summary Interactive combinational logic circuit editor and simulator.
 -->
 
-- [`<tp-graph-editor>`](../graph-editor/index.md) : Extensible interactive graph editor.
 - [`<tp-graph-logical-circuit>`](../graph-logical-circuit/index.md) : Interactive combinational logic circuit editor and simulator.
 
 ### External

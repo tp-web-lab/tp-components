@@ -48,7 +48,7 @@
     {
       "name": "redo(): void",
       "inherited": false,
-      "description": "Redo."
+      "description": "Restores the next undone piece arrangement; does nothing when redo history is empty."
     },
     {
       "name": "reset(): void",
@@ -78,14 +78,14 @@
     {
       "name": "undo(): void",
       "inherited": false,
-      "description": "Undo."
+      "description": "Restores the previous piece arrangement from undo history; does nothing when history is empty."
     }
   ],
   "events": [
     {
       "name": "tp-tangram-change",
-      "description": "Fired after an accepted edit; detail contains placements and solved.",
-      "detail": "{ placements: unknown; solved: unknown }"
+      "description": "Emitted after an accepted piece edit; placements contains each piece ID, x/y position, angle and flip state, and solved reports whether the target is matched.",
+      "detail": "{ placements: Placement[]; solved: boolean }"
     },
     {
       "name": "tp-tangram-error",

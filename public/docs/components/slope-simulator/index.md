@@ -208,6 +208,12 @@ CSS properties
 
 
 
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -259,10 +265,6 @@ All tp-components used by `<tp-slope-simulator>` are loaded automatically by thi
 @summary CodeMirror-based code editor component.
 -->
 <!--
-@tp-dependency tp-dropdown
-@summary Dropdown menu component.
--->
-<!--
 @tp-dependency tp-icon-button
 @summary Accessible icon button component.
 -->
@@ -279,7 +281,6 @@ All tp-components used by `<tp-slope-simulator>` are loaded automatically by thi
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
 - [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
 - [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
-- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
 - [`<tp-numberfield>`](../numberfield/index.md) : Numeric field with an optional native range slider.
 - [`<tp-radio-list>`](../radio-list/index.md) : Transforms a list into a group of radio buttons.

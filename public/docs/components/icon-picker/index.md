@@ -99,8 +99,8 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-icon-picker-copy-error</code> | <code>&#123; name: unknown; library: unknown; format: unknown; value: string; error: unknown &#125;</code> | Emitted when the clipboard rejects a copy operation. |
-  | <code>tp-icon-picker-select</code> | <code>&#123; name: unknown; library: unknown; sourcePath: unknown; format: unknown; value: string &#125;</code> | Emitted after an icon is selected. |
+  | <code>tp-icon-picker-copy-error</code> | <code>&#123; name: string; library: string; format: TpIconPickerCopyFormat; value: string; error: unknown &#125;</code> | Emitted when copying the selected icon fails. The detail contains the requested clipboard text, selection metadata and the caught error. |
+  | <code>tp-icon-picker-select</code> | <code>&#123; name: string; library: string; sourcePath: string; format: TpIconPickerCopyFormat; value: string &#125;</code> | Emitted when a icon is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success. |
   [Events emitted by `<tp-icon-picker>`]
 
 CSS properties
@@ -114,6 +114,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_icon-picker.TpIconPicker.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

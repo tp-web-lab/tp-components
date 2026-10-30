@@ -10,7 +10,9 @@
 
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, mkdtempSync, mkdirSync, writeFileSync, copyFileSync, symlinkSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
 import test from 'node:test';
 import MarkdownIt from 'markdown-it';
 
@@ -50,4 +52,42 @@ test('text-to-speech dependencies stay synchronized with imports in source, JSON
 
 test('rejects an unknown component instead of updating every component', () => {
   assert.throws(() => execFileSync(process.execPath, ['scripts/sync-component-dependencies.mjs', '--component', 'does-not-exist'], { stdio: 'pipe' }));
+});
+
+
+test('only eager runtime imports and re-exports become dependencies', () => {
+  const root = mkdtempSync(join(tmpdir(), 'tp-dependencies-'));
+  try {
+    mkdirSync(join(root, 'scripts'), { recursive: true });
+    mkdirSync(join(root, 'src/utilities'), { recursive: true });
+    mkdirSync(join(root, 'public/docs/components'), { recursive: true });
+    symlinkSync(resolve('node_modules'), join(root, 'node_modules'), 'dir');
+    copyFileSync('scripts/sync-component-dependencies.mjs', join(root, 'scripts/sync-component-dependencies.mjs'));
+    for (const name of ['owner', 'eager', 'shared', 'exported', 'types', 'lazy', 'example']) {
+      const dir = join(root, 'src/components', name);
+      mkdirSync(dir, { recursive: true });
+      const imports = name === 'owner' ? `
+import '../eager/eager.js';
+import type { Types } from '../types/types.js';
+import { type Types } from '../types/types.js';
+export type { Types } from '../types/types.js';
+export { type Types } from '../types/types.js';
+export { value } from '../exported/exported.js';
+import { helper } from '../../utilities/helper.js';
+// import '../example/example.js';
+const example = "import '../example/example.js'";
+const load = () => import('../lazy/lazy.js');
+` : '';
+      writeFileSync(join(dir, `${name}.ts`), `${imports}\nclass Component {}\ncustomElements.define('tp-${name}', Component);\n`);
+      writeFileSync(join(dir, `${name}.json`), JSON.stringify({tagname:`tp-${name}`,classname:'Component'}));
+    }
+    writeFileSync(join(root, 'src/utilities/helper.ts'), "import '../components/shared/shared.js'; export const helper = 1;");
+    const script = join(root, 'scripts/sync-component-dependencies.mjs');
+    execFileSync(process.execPath, [script], {encoding:'utf8'});
+    const path = join(root, 'src/components/owner/owner.json');
+    const before = readFileSync(path, 'utf8');
+    assert.deepEqual(JSON.parse(before).dependencies.map(item => item.name), ['tp-eager', 'tp-exported', 'tp-shared']);
+    execFileSync(process.execPath, [script, '--check'], {encoding:'utf8'});
+    assert.equal(readFileSync(path, 'utf8'), before);
+  } finally { rmSync(root, {recursive:true, force:true}); }
 });

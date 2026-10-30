@@ -132,6 +132,7 @@ interface MatchingItem {
  *   <ul><li>Hello</li><li>Thank you</li><li>Goodbye</li></ul>
  *   <ol><li>Bonjour</li><li>Merci</li><li>Au revoir</li></ol>
  * </tp-matching>
+ * @cssprop [--tp-matching-columns=2] Number of equal-width matching columns; set internally from the number of lists. Narrow-screen styles force two columns, then one.
  */
 export class TpMatching extends TpBase {
 	/** Unique heading identifiers across instances. */

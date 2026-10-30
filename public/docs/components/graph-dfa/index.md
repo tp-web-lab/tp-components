@@ -77,19 +77,19 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_DFA_TRANSITION, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &#39;forward&#39;): TpGraphEdge</code> | Adds edge. |
-  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode</code> | Adds node. |
-  | <code>readNext</code> | <code>readNext(duration = 300): Promise&lt;boolean&gt;</code> | Reads next. |
-  | <code>reset</code> | <code>reset(word = this.inputWord): void</code> | Reset. |
-  | <code>run</code> | <code>run(duration = 600): Promise&lt;boolean&gt;</code> | Run. |
-  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Sets graph. |
+  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_DFA_TRANSITION, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &quot;forward&quot;): TpGraphEdge</code> | Adds a forward transition between existing state IDs, using optional connection ports; returns the edge record. Unsupported types, directions or endpoints throw. |
+  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode</code> | Adds a DFA state or comment at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError. |
+  | <code>readNext</code> | <code>readNext(duration = 300): Promise&lt;boolean&gt;</code> | Consumes and animates one input symbol using duration milliseconds. Resolves to true if a symbol was processed, not whether the word is accepted; false means no further step is possible. |
+  | <code>reset</code> | <code>reset(word = this.inputWord): void</code> | Restarts reading word at the initial state and clears rejection and transition highlights; omitted word reuses the current input. Emits tp-dfa-reset. |
+  | <code>run</code> | <code>run(duration = 600): Promise&lt;boolean&gt;</code> | Processes remaining symbols with duration milliseconds per step, stopping at the end or rejection. Resolves to whether the complete word is accepted; does not reset the input first. |
+  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph. |
   [Public methods of `TpGraphDfa`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-dfa-reset</code> | <code>&#123; word: unknown; stateId: unknown; graph: unknown &#125;</code> | Fired after the input and active state are reset. |
-  | <code>tp-dfa-step</code> | <code>&#123; symbol: unknown; position: unknown; stateId: unknown; accepted: unknown; rejected: unknown; graph: unknown &#125;</code> | Fired after one input symbol is consumed. |
+  | <code>tp-dfa-reset</code> | <code>&#123; word: string; stateId: string \| null; graph: TpGraphDocument &#125;</code> | Emitted after the input word, consumed-symbol count and active state are reset. stateId is null when no initial state is available; graph is the resulting snapshot. |
+  | <code>tp-dfa-step</code> | <code>&#123; symbol: string; position: number; stateId: string \| null; accepted: boolean; rejected: boolean; graph: TpGraphDocument &#125;</code> | Emitted after consuming one symbol and completing its transition animation. position is the number of consumed symbols; accepted and rejected describe the resulting state. |
   [Events emitted by `<tp-graph-dfa>`]
 
 CSS properties
@@ -103,6 +103,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-dfa.TpGraphDfa.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

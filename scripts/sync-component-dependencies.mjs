@@ -16,6 +16,7 @@
 
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
+import ts from 'typescript';
 
 const root = resolve(import.meta.dirname, '..');
 const componentsRoot = join(root, 'src/components');
@@ -130,11 +131,26 @@ function dependencySummary(tag) {
 }
 
 function importsOf(file) {
-  const source = readFileSync(file, 'utf8').replace(sourceBlockExpression, '');
-  // Component dependencies describe the modules needed when the component is
-  // loaded. Dynamic imports belong to an optional feature and must not turn a
-  // foundational component into a structural dependency of the imported one.
-  return [...source.matchAll(/(?:from\s*|import\s*)['"]([^'"]+)['"]/g)].map((match) => match[1]);
+  const source = ts.createSourceFile(file, readFileSync(file, 'utf8'), ts.ScriptTarget.Latest, true);
+  const imports = [];
+  // Only eager runtime imports belong here, not type references, examples or
+  // optional features loaded with import().
+  for (const statement of source.statements) {
+    if (ts.isImportDeclaration(statement)) {
+      const clause = statement.importClause;
+      if (clause?.isTypeOnly) continue;
+      const bindings = clause?.namedBindings;
+      if (!clause?.name && bindings && ts.isNamedImports(bindings) &&
+          bindings.elements.length > 0 && bindings.elements.every(item => item.isTypeOnly)) continue;
+      if (ts.isStringLiteral(statement.moduleSpecifier)) imports.push(statement.moduleSpecifier.text);
+    } else if (ts.isExportDeclaration(statement) && !statement.isTypeOnly && statement.moduleSpecifier) {
+      const clause = statement.exportClause;
+      if (clause && ts.isNamedExports(clause) && clause.elements.length > 0 &&
+          clause.elements.every(item => item.isTypeOnly)) continue;
+      if (ts.isStringLiteral(statement.moduleSpecifier)) imports.push(statement.moduleSpecifier.text);
+    }
+  }
+  return imports;
 }
 
 function resolveLocalImport(file, specifier) {

@@ -78,25 +78,25 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>addArc</code> | <code>addArc(source: string, target: string, weight = 1): TpGraphEdge</code> | Adds arc. |
-  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_PETRI_ARC, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &#39;forward&#39;): TpGraphEdge</code> | Adds edge. |
-  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode</code> | Adds node. |
-  | <code>addPlace</code> | <code>addPlace(point: TpGraphPoint, label = &#39;Place&#39;, initialTokens = 0): TpGraphNode</code> | Adds place. |
-  | <code>addTokens</code> | <code>addTokens(placeId: string, count = 1, updateInitial = true): void</code> | Adds tokens. |
-  | <code>addTransition</code> | <code>addTransition(point: TpGraphPoint, label = &#39;Transition&#39;): TpGraphNode</code> | Adds transition. |
-  | <code>fire</code> | <code>fire(transitionId: string, duration = 350): Promise&lt;void&gt;</code> | Fire. |
-  | <code>fireNext</code> | <code>fireNext(duration = 350): Promise&lt;string \| null&gt;</code> | Fire next. |
-  | <code>resetMarking</code> | <code>resetMarking(): void</code> | Resets marking. |
-  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Sets graph. |
+  | <code>addArc</code> | <code>addArc(source: string, target: string, weight = 1): TpGraphEdge</code> | Adds an arc between source and target IDs with a positive integer weight; returns its stored edge record. Invalid weight or incompatible endpoints throw. |
+  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_PETRI_ARC, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &quot;forward&quot;): TpGraphEdge</code> | Adds a Petri arc between a place and a transition, returning its edge record. Only forward/backward directions and the Petri arc type are accepted; invalid connections throw. |
+  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode</code> | Adds a Petri place, transition or comment at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError. |
+  | <code>addPlace</code> | <code>addPlace(point: TpGraphPoint, label = &quot;Place&quot;, initialTokens = 0): TpGraphNode</code> | Adds a place at graph coordinates point with the optional label and nonnegative integer initialTokens. Sets both current and initial marking and returns the node record. |
+  | <code>addTokens</code> | <code>addTokens(placeId: string, count = 1, updateInitial = true): void</code> | Adds a positive integer count to placeId without exceeding its capacity. Also increases its initial marking unless updateInitial is false; invalid inputs throw. |
+  | <code>addTransition</code> | <code>addTransition(point: TpGraphPoint, label = &quot;Transition&quot;): TpGraphNode</code> | Adds a Petri transition at graph coordinates point with label and returns its node record. |
+  | <code>fire</code> | <code>fire(transitionId: string, duration = 350): Promise&lt;void&gt;</code> | Fires the enabled transition identified by transitionId, animates for duration milliseconds and emits tp-petri-fire. Resolves after animation; invalid or disabled transitions reject. |
+  | <code>fireNext</code> | <code>fireNext(duration = 350): Promise&lt;string \| null&gt;</code> | Randomly chooses and fires an enabled transition with duration in milliseconds. Resolves to its ID, or null when no transition is enabled. |
+  | <code>resetMarking</code> | <code>resetMarking(): void</code> | Restores each place to its initial token count, clears fired-transition highlights and emits tp-petri-reset. |
+  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph. |
   [Public methods of `TpGraphPetri`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-graph-change</code> | <code>&#123; reason: &quot;add-token&quot;; graph: unknown &#125;</code> | Emitted when graph change occurs. |
-  | <code>tp-graph-error</code> | <code>&#123; error: unknown; operation: &quot;add-token&quot; &#125;</code> | Emitted when graph error occurs. |
-  | <code>tp-petri-fire</code> | <code>&#123; transitionId: unknown; marking: unknown; graph: unknown &#125;</code> | Fired after a transition is fired. |
-  | <code>tp-petri-reset</code> | <code>&#123; marking: unknown; graph: unknown &#125;</code> | Fired after the initial marking is restored. |
+  | <code>tp-graph-change</code> | <code>&#123; reason: string; graph: TpGraphDocument &#125;</code> | Emitted after adding a token, as well as for inherited graph mutations. reason identifies the operation and graph contains the resulting snapshot. |
+  | <code>tp-graph-error</code> | <code>&#123; error: unknown; operation: &quot;add-token&quot; \| &quot;load-src&quot; \| &quot;reconnect-edge&quot; \| &quot;add-edge&quot;; src?: string &#125;</code> | Emitted if adding a token from the UI fails, or for an inherited graph loading or edge-editing failure. operation identifies the failed action. |
+  | <code>tp-petri-fire</code> | <code>&#123; transitionId: string; marking: Record&lt;string, number&gt;; graph: TpGraphDocument &#125;</code> | Emitted after a transition fires and its animation finishes; marking maps each place ID to its remaining token count. |
+  | <code>tp-petri-reset</code> | <code>&#123; marking: Record&lt;string, number&gt;; graph: TpGraphDocument &#125;</code> | Emitted after the initial marking is restored; marking maps each place ID to its reset token count. |
   [Events emitted by `<tp-graph-petri>`]
 
 CSS properties
@@ -110,6 +110,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_graph-petri.TpGraphPetri.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

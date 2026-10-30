@@ -88,8 +88,8 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-symbol-picker-copy-error</code> | <code>&#123; copy: unknown; value: string; error: unknown &#125;</code> | Emitted when the clipboard rejects a copy operation. |
-  | <code>tp-symbol-picker-select</code> | <code>&#123; copy: unknown; value: string &#125;</code> | Emitted after a symbol is selected and copied. |
+  | <code>tp-symbol-picker-copy-error</code> | <code>&#123; symbol: string; name: string; group: string; entities: string[]; codepoints: string[]; copy: TpSymbolPickerCopyFormat; value: string; error: unknown &#125;</code> | Emitted when copying the selected symbol fails. The detail contains the requested clipboard text, selection metadata and the caught error. |
+  | <code>tp-symbol-picker-select</code> | <code>&#123; symbol: string; name: string; group: string; entities: string[]; codepoints: string[]; copy: TpSymbolPickerCopyFormat; value: string \| null &#125;</code> | Emitted when a symbol is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success. value is null when the selected copy format has no representation. |
   [Events emitted by `<tp-symbol-picker>`]
 
 CSS properties
@@ -103,6 +103,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_symbol-picker.TpSymbolPicker.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

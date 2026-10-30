@@ -138,25 +138,25 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>addTableColumnAfter</code> | <code>addTableColumnAfter(): boolean</code> | Adds table column after. |
-  | <code>addTableRowAfter</code> | <code>addTableRowAfter(): boolean</code> | Adds table row after. |
-  | <code>deleteTable</code> | <code>deleteTable(): boolean</code> | Deletes table. |
-  | <code>deleteTableColumn</code> | <code>deleteTableColumn(): boolean</code> | Deletes table column. |
-  | <code>deleteTableRow</code> | <code>deleteTableRow(): boolean</code> | Deletes table row. |
-  | <code>findNext</code> | <code>findNext(value?: string): boolean</code> | Finds next. |
-  | <code>findPrevious</code> | <code>findPrevious(value?: string): boolean</code> | Finds previous. |
-  | <code>focus</code> | <code>focus(options?: FocusOptions): void</code> | Focus. |
-  | <code>getHTML</code> | <code>getHTML(): string</code> | Returns html. |
-  | <code>insertTable</code> | <code>insertTable(rows = 3, columns = 3): boolean</code> | Inserts table. |
-  | <code>setHTML</code> | <code>setHTML(value: string): void</code> | Sets html. |
-  | <code>setSearchQuery</code> | <code>setSearchQuery(value: string, options: Omit&lt;ConstructorParameters&lt;typeof SearchQuery&gt;[0], &quot;search&quot;&gt; = &#123;&#125;): void</code> | Sets search query. |
+  | <code>addTableColumnAfter</code> | <code>addTableColumnAfter(): boolean</code> | Adds a column after the selected table column; returns true when the command applies, or false when unavailable for the current editor state. |
+  | <code>addTableRowAfter</code> | <code>addTableRowAfter(): boolean</code> | Adds a row after the selected table row; returns true when the command applies, or false when unavailable for the current editor state. |
+  | <code>deleteTable</code> | <code>deleteTable(): boolean</code> | Deletes the table containing the current selection; returns true when the command applies, or false when unavailable for the current editor state. |
+  | <code>deleteTableColumn</code> | <code>deleteTableColumn(): boolean</code> | Deletes the selected table column; returns true when the command applies, or false when unavailable for the current editor state. |
+  | <code>deleteTableRow</code> | <code>deleteTableRow(): boolean</code> | Deletes the selected table row; returns true when the command applies, or false when unavailable for the current editor state. |
+  | <code>findNext</code> | <code>findNext(value?: string): boolean</code> | Finds and selects the next matching text, optionally replacing the current query with value. Returns whether a match was selected. |
+  | <code>findPrevious</code> | <code>findPrevious(value?: string): boolean</code> | Finds and selects the previous matching text, optionally replacing the current query with value. Returns whether a match was selected. |
+  | <code>focus</code> | <code>focus(options?: FocusOptions): void</code> | Focuses the active editing surface, forwarding optional browser FocusOptions. |
+  | <code>getHTML</code> | <code>getHTML(): string</code> | Returns the current HTML from the active source, rendered or rich-text mode; before initialization, returns the configured initial HTML. |
+  | <code>insertTable</code> | <code>insertTable(rows = 3, columns = 3): boolean</code> | Replaces the current selection with a table of rows by columns and focuses it. Returns false if no editor or valid table can be created. |
+  | <code>setHTML</code> | <code>setHTML(value: string): void</code> | Replaces the document from HTML, synchronizes active source/rendered views and reflects the supplied text in value. |
+  | <code>setSearchQuery</code> | <code>setSearchQuery(value: string, options: Omit&lt;ConstructorParameters&lt;typeof SearchQuery&gt;[0], &quot;search&quot;&gt; = &#123;&#125;): void</code> | Sets the search text and optional matching options on the rich-text editor; does nothing before initialization. |
   [Public methods of `TpProseEditor`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-prose-editor-change</code> | <code>&#123; value: string &#125;</code> | Emitted when prose editor change occurs. |
-  | <code>tp-prose-editor-input</code> | <code>&#123; value: string &#125;</code> | Emitted when prose editor input occurs. |
+  | <code>tp-prose-editor-change</code> | <code>&#123; value: string &#125;</code> | Emitted immediately after tp-prose-editor-input for the same edit; it does not wait for blur. value contains the current HTML serialization. |
+  | <code>tp-prose-editor-input</code> | <code>&#123; value: string &#125;</code> | Emitted after an editing transaction or editor command updates the document. value contains the current HTML serialization. |
   [Events emitted by `<tp-prose-editor>`]
 
 CSS properties
@@ -170,6 +170,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_prose-editor_prose-editor.TpProseEditor.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 
@@ -506,7 +512,7 @@ All tp-components used by `<tp-prose-editor>` are loaded automatically by this c
 -->
 <!--
 @tp-dependency tp-dropdown
-@summary Displays an anchored dropdown menu.
+@summary Dropdown menu component.
 -->
 <!--
 @tp-dependency tp-emoji-picker
@@ -558,7 +564,7 @@ All tp-components used by `<tp-prose-editor>` are loaded automatically by this c
 - [`<tp-checkbox-list>`](../checkbox-list/index.md) : Transforms a list into a group of checkboxes.
 - [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
 - [`<tp-color>`](../color/index.md) : Brand color preset controller scoped to the containing element.
-- [`<tp-dropdown>`](../dropdown/index.md) : Displays an anchored dropdown menu.
+- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
 - [`<tp-emoji-picker>`](../emoji-picker/index.md) : Unicode Emoji 17.0 picker.
 - [`<tp-fullscreen>`](../fullscreen/index.md) : Fullscreen controller button.
 - [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
@@ -574,6 +580,10 @@ All tp-components used by `<tp-prose-editor>` are loaded automatically by this c
 ### External
 
 <!--
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
+-->
+<!--
 @credit ProseMirror https://prosemirror.net/
 @summary Rich-text editing.
 -->
@@ -582,6 +592,7 @@ All tp-components used by `<tp-prose-editor>` are loaded automatically by this c
 @summary Mathematical notation rendering.
 -->
 
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 - [ProseMirror](https://prosemirror.net/) : Rich-text editing.
 - [MathJax](https://www.mathjax.org/) : Mathematical notation rendering.
 <!-- tp-docgen:dependencies:end -->

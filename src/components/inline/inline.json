@@ -53,7 +53,7 @@
     {
       "name": "--tp-inline-gap",
       "default": "0.5rem",
-      "description": "Controls the gap."
+      "description": "Space between adjacent items in the single horizontal row."
     }
   ],
   "dependencies": [

@@ -97,7 +97,7 @@ CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
   | <code>&#45;&#45;tp-switcher-gap</code> | <code>1rem</code> | Default gap between switcher items. |
-  | <code>&#45;&#45;tp-switcher-threshold</code> | <code>30rem</code> | Default switch threshold. |
+  | <code>&#45;&#45;tp-switcher-threshold</code> | <code>30rem</code> | Container width below which items switch from a shared row to separate rows. |
   [CSS properties of `<tp-switcher>`]
 :::
 <!-- /tp-docgen:api -->
@@ -105,6 +105,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_switcher_switcher.TpSwitcher.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

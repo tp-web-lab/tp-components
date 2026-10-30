@@ -94,27 +94,27 @@
     {
       "name": "--tp-post-it-padding",
       "default": "0.75rem",
-      "description": "= 0.75rem Inner paper padding."
+      "description": "Inner spacing around the paper content; lite mode removes this padding."
     },
     {
       "name": "--tp-post-it-rotation",
       "default": "0deg",
-      "description": "Controls the rotation."
+      "description": "Rotation angle of the paper around its top center, updated internally from rotation; ignored in lite mode."
     },
     {
       "name": "--tp-post-it-width",
       "default": "20rem",
-      "description": "= 20rem Preferred note width, limited by the available space."
+      "description": "Preferred note width, limited by available space; lite mode uses its content width."
     },
     {
       "name": "--tp-post-it-x",
       "default": "8px",
-      "description": "Controls the x."
+      "description": "Horizontal viewport position of a floating note, updated internally when positioned or dragged."
     },
     {
       "name": "--tp-post-it-y",
       "default": "8px",
-      "description": "Controls the y."
+      "description": "Vertical viewport position of a floating note, updated internally when positioned or dragged."
     }
   ],
   "dependencies": [

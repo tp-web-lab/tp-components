@@ -71,11 +71,11 @@ Attributes
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>after-label</code> | <code>string</code> | <code>&#39;&#39;</code> | Optional label for the after layer. |
-  | <code>before-label</code> | <code>string</code> | <code>&#39;&#39;</code> | Optional label for the before layer. |
-  | <code>orientation</code> | <code>TpCompareOrientation</code> | <code>&#39;horizontal&#39;</code> | Comparator orientation.<br><br>- `horizontal` : séparation gauche / droite<br>- `vertical` : séparation haut / bas |
-  | <code>position</code> | <code>string</code> | <code>&#39;&#39;</code> | Separator position as a percentage. |
-  | <code>storage-key</code> | <code>string</code> | <code>&#39;&#39;</code> | Local persistence key for the position. |
+  | <code>after-label</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional label for the after layer. |
+  | <code>before-label</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional label for the before layer. |
+  | <code>orientation</code> | <code>TpCompareOrientation</code> | <code>&#39;horizontal&#39;</code> | Split direction: horizontal places the layers on the left and right; vertical places them above and below. |
+  | <code>position</code> | <code>string</code> | <code>&quot;&quot;</code> | Separator position as a percentage. |
+  | <code>storage-key</code> | <code>string</code> | <code>&quot;&quot;</code> | Local persistence key for the position. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -97,9 +97,9 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-compare-divider-size</code> | <code>2px</code> | Controls the divider size. |
-  | <code>&#45;&#45;tp-compare-handle-size</code> | <code>2.5rem</code> | Controls the handle size. |
-  | <code>&#45;&#45;tp-compare-position</code> | <code>50%</code> | Controls the position. |
+  | <code>&#45;&#45;tp-compare-divider-size</code> | <code>2px</code> | Thickness of the dividing line between the two layers. |
+  | <code>&#45;&#45;tp-compare-handle-size</code> | <code>2.5rem</code> | Width and height of the draggable comparison handle. |
+  | <code>&#45;&#45;tp-compare-position</code> | <code>50%</code> | Position of the divider along the comparison axis, usually a percentage; synchronized with position and pointer or keyboard interaction. |
   [CSS properties of `<tp-compare>`]
 :::
 <!-- /tp-docgen:api -->
@@ -107,6 +107,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_compare.TpCompare.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

@@ -33,6 +33,9 @@ for (const directory of readdirSync(componentsRoot)) {
         problems.push(`${manifestPath}: ${name} has no ${field}`);
       }
     }
+    if (/^(?:Attribute\s+.+|Controls the\s+.+|API documentation summary)\.?$/i.test(String(attribute.description).trim())) {
+      problems.push(`${manifestPath}: ${name} has a placeholder description; explain its behavior, accepted values or units`);
+    }
     if (/^=\s/.test(String(attribute.description).trim())) {
       problems.push(`${manifestPath}: ${name} embeds its default value in description`);
     }

@@ -58,6 +58,7 @@ type TextControl = HTMLInputElement | HTMLTextAreaElement;
 /**
  * @summary Single-line and automatically growing multiline text field.
  * @tagname tp-textfield
+ * @attr {string} aria-label = "" - Accessible name forwarded to the editing control; use it when the field has no visible label.
  * @attr {string} type = "text" - Input type (`text`, `email`, `password`, `search`, `tel`, or `url`).
  * @attr {boolean} multiline = false - Uses an automatically growing textarea instead of an input.
  * @attr {string} label = "" - Visible label associated with the native input or textarea.
@@ -77,21 +78,21 @@ type TextControl = HTMLInputElement | HTMLTextAreaElement;
  * @event input Emitted when the value changes while editing.
  * @event change Emitted when the edited value is committed.
  * @event tp-clear Emitted after the embedded button clears the value.
- * @cssprop [--tp-textfield-background=var(--tp-paper-color)] Field background.
- * @cssprop [--tp-textfield-border-color=var(--tp-neutral-stroke-soft)] Field border color.
- * @cssprop [--tp-textfield-focus-color=var(--tp-brand-text-colorful)] Focus border color.
- * @cssprop [--tp-textfield-inline-size=calc(20ch + 5rem)] Width of a single-line text field.
- * @cssprop [--tp-textfield-label-gap=0.35em] Space between the label and its field.
- * @cssprop [--tp-textfield-label-font-weight=500] Label font weight.
- * @cssprop [--tp-textfield-radius=var(--tp-border-radius-sm)] Field border radius.
- * @cssprop [--tp-textfield-required-color=var(--tp-danger-text-colorful)] Required marker color.
- * @cssprop [--tp-textfield-padding-block=0.6em] Vertical field padding.
- * @cssprop [--tp-textfield-padding-inline=0.75em] Horizontal field padding.
- * @cssprop [--tp-textfield-value-font-weight=400] Entered value and placeholder font weight.
  * @example
  * <tp-textfield label="Single line" placeholder="Type some text..." clearable></tp-textfield>
  *
  *     <tp-textfield label="Multiline" multiline placeholder="Type some text..." clearable value="An example of text that has already been entered in the field"></tp-textfield>
+ * @cssprop [--tp-textfield-background=var(--tp-paper-color)] Background of the input control, excluding its label.
+ * @cssprop [--tp-textfield-border-color=var(--tp-neutral-stroke-soft)] Border color of the input control when it is not focused.
+ * @cssprop [--tp-textfield-focus-color=var(--tp-brand-text-colorful)] Border color and translucent outline tint while focus is inside the control.
+ * @cssprop [--tp-textfield-inline-size=calc(20ch + 5rem)] Preferred width of the field, limited by the available container width.
+ * @cssprop [--tp-textfield-label-font-weight=500] Font weight of the field label.
+ * @cssprop [--tp-textfield-label-gap=0.35em] Space between the label and the input control.
+ * @cssprop [--tp-textfield-padding-block=0.6em] Inner spacing above and below the input value.
+ * @cssprop [--tp-textfield-padding-inline=0.75em] Inner spacing before and after the input value; additional space is reserved for action buttons.
+ * @cssprop [--tp-textfield-radius=var(--tp-border-radius-sm)] Corner radius of the input control.
+ * @cssprop [--tp-textfield-required-color=var(--tp-danger-text-colorful)] Color of the asterisk marking a required field.
+ * @cssprop [--tp-textfield-value-font-weight=400] Font weight of the displayed input value.
  */
 export class TpTextfield extends TpBase {
 	private static readonly textfieldStyleId = "tp-textfield-styles";

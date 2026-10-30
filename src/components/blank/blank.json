@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "aria-label",
-      "description": "Controls the aria label.",
+      "description": "Accessible name forwarded to the editing control; use it when the field has no visible label.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -85,7 +85,12 @@
   "events": [
     {
       "name": "input",
-      "description": "- Emitted when an answer is assigned or cleared.",
+      "description": "Emitted when an answer is assigned or cleared; read the updated answer from value.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-blank-mode-change",
+      "description": "Emitted when closed or type changes while connected, after the blank has been rendered in its new mode.",
       "detail": "void"
     }
   ],
@@ -93,7 +98,7 @@
     {
       "name": "--tp-blank-filled-border-color",
       "default": "var(--tp-brand-stroke-mid)",
-      "description": "Controls the filled border color."
+      "description": "Bottom border color of a blank after an answer has been filled in."
     }
   ],
   "dependencies": [

@@ -6,7 +6,7 @@ The test suites cover component behavior, shared utilities, the local question-a
 
 | Command | Scope |
 | --- | --- |
-| `pnpm test` | All Vitest tests: `src/**/*.test.ts` and `server/**/*.test.mjs`. Component tests use jsdom; server tests select the Node environment. |
+| `pnpm test` | All Vitest tests: `src/**/*.test.ts`, `scripts/**/*.test.ts` and `server/**/*.test.mjs`. Component tests use jsdom; server tests select the Node environment. |
 | `pnpm test:coverage` | The complete Vitest suite with V8 coverage of production TypeScript in `src/components/`; writes `config/global-quality-coverage/coverage-summary.json`. |
 | `pnpm test:scripts` | Node test runner tests in `scripts/*.test.mjs`: documentation, examples, generators, CI configuration and publication helpers. |
 | `pnpm test:playgrounds` | Functional Playwright tests in Chromium, Firefox and WebKit: local files, Python projects, and dynamic editor/iframe sizing. |
@@ -21,6 +21,21 @@ Install the three Playwright browsers with `pnpm exec playwright install` when t
 `pnpm test` does **not** run the Node script suite or Playwright. The server's `.test.mjs` file imports Vitest and belongs to `pnpm test`; do not execute it with `node --test`.
 
 The `test:quality:*` commands select overlapping parts of the Vitest suite and collect coverage; they do not introduce additional independent tests. Test files under `public/` are sample projects or learner exercise fixtures, executed by the embedded runners. Some deliberately fail for the initial answer, so they must not be collected as library regression tests.
+
+## Checking API documentation
+
+Run these read-only checks after regenerating the component manifests and documentation with `pnpm build` and `pnpm api:sync-docs` when source comments change.
+
+| Command | Scope |
+| --- | --- |
+| `pnpm api:check-attributes` | Attribute types, defaults, descriptions, source comment conventions and coverage of observed attributes. |
+| `pnpm api:check-methods` | Missing descriptions and descriptions that merely repeat a method name. |
+| `pnpm api:check-css` | Missing CSS property descriptions or defaults and generic placeholder descriptions. |
+| `pnpm api:check-events` | Event descriptions, payload declarations and coverage of directly dispatched events with literal names. |
+| `pnpm api:check-all` | All four checks above, stopping at the first failure. |
+| `pnpm api:check` | All four checks plus source/API consistency, dependency metadata, generated documentation and accessibility report consistency. |
+
+These checks catch omissions and placeholders; reviewing behavior against the implementation remains necessary. Dynamically named events and inherited behavior require explicit documentation. The generator regression tests run with `pnpm exec vitest run scripts/component-api.test.ts`.
 
 ## Reviewing a change
 

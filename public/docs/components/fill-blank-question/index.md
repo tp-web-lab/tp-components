@@ -240,7 +240,11 @@ Attributes
   | <code>case-sensitive</code> | <code>boolean</code> | <code>false</code> | Requires matching uppercase and lowercase letters in answers. |
   | <code>mode</code> | <code>string</code> | <code>&quot;mixed&quot;</code> | Blank mode: opened, closed, or mixed local choices. |
   | <code>partial</code> | <code>boolean</code> | <code>false</code> | Allows incomplete submissions and marks filled blanks as correct or incorrect after feedback. |
-  | <code>open</code> | <code>boolean</code> | <code>false</code> | Expands the question; absent by default, leaving only its title visible. *(inherited from <code>tp-question</code>)* |
+  | <code>ai-api</code> | <code>boolean</code> | <code>false</code> | Allows sending AI prompts to the selected provider; without it, prompts are only copied. *(inherited from <code>tp-question</code>)* |
+  | <code>ai-assistant</code> | <code>string</code> | <code>&quot;openai&quot;</code> | AI provider, optionally followed by /model; without a model, uses the server configuration. Providers: openai, anthropic, google, mistral. *(inherited from <code>tp-question</code>)* |
+  | <code>ai-explanation-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a saved Markdown explanation; the companion .prompt.md must match the current prompt. *(inherited from <code>tp-question</code>)* |
+  | <code>ai-help</code> | <code>&quot;none&quot;\|&quot;feedback&quot;\|&quot;solution&quot;\|&quot;both&quot;</code> | <code>&quot;none&quot;</code> | Optional AI assistance; solution and both enable solution explanations. Feedback assistance is reserved for a future release. *(inherited from <code>tp-question</code>)* |
+  | <code>open</code> | <code>string</code> | <code>&quot;&quot;</code> | Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.<br>  `detail: { value: unknown }` *(inherited from <code>tp-question</code>)* |
   | <code>score</code> | <code>boolean</code> | <code>false</code> | Displays the numerical score in submission feedback. *(inherited from <code>tp-question</code>)* |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition. *(inherited from <code>tp-question</code>)* |
   | <code>timing</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional nonzero time limit in strict hh:mm:ss format. *(inherited from <code>tp-question</code>)* |
@@ -273,6 +277,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_fill-blank-question.TpFillBlankQuestion.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

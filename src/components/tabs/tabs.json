@@ -30,7 +30,7 @@
     },
     {
       "name": "selected",
-      "description": "Selected tab index.",
+      "description": "Zero-based index of the selected tab: 0 selects the first tab.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -101,37 +101,37 @@
     {
       "name": "--tp-tabs-border-color",
       "default": "var(--tp-neutral-stroke-soft)",
-      "description": "Controls the border color."
+      "description": "Border color of inactive tab headers and the content panel."
     },
     {
       "name": "--tp-tabs-border-selected-color",
       "default": "var(--tp-brand-stroke-soft)",
-      "description": "Controls the border selected color."
+      "description": "Border color of the selected tab header."
     },
     {
       "name": "--tp-tabs-panel-bg",
       "default": "var(--tp-paper-color)",
-      "description": "Controls the panel bg."
+      "description": "Background color of the tab content panel."
     },
     {
       "name": "--tp-tabs-tab-bg",
       "default": "var(--tp-neutral-fill-softer)",
-      "description": "Controls the tab bg."
+      "description": "Background color of inactive tab headers."
     },
     {
       "name": "--tp-tabs-tab-color",
       "default": "var(--tp-text-body)",
-      "description": "Controls the tab color."
+      "description": "Text color of inactive tab headers."
     },
     {
       "name": "--tp-tabs-tab-selected-bg",
       "default": "var(--tp-paper-color)",
-      "description": "Controls the tab selected bg."
+      "description": "Background color of the selected tab header."
     },
     {
       "name": "--tp-tabs-tab-selected-color",
       "default": "var(--tp-brand-text-colorful)",
-      "description": "Controls the tab selected color."
+      "description": "Text color of the selected tab header."
     }
   ],
   "dependencies": [

@@ -14,6 +14,10 @@ import { reportToolLoaded } from "@tp/tp-utilities";
  * @summary reStructuredText parsing and rendering.
  */
 /**
+ * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+ * @summary Shared parsers, games and rendering utilities.
+ */
+/**
  * @credit highlight.js https://highlightjs.org/
  * @summary Source-code syntax highlighting.
  */

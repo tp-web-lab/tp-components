@@ -5,64 +5,12 @@
 
 // tp-docgen:dependencies:start
 /**
- * @tp-dependency tp-asciidoc
- * @summary Semantic AsciiDoc rendering component.
- */
-/**
  * @tp-dependency tp-base
  * @summary Shared base class for tp-* components.
  */
 /**
- * @tp-dependency tp-calculator
- * @summary Scientific calculator with an editable expression and degree/radian modes.
- */
-/**
- * @tp-dependency tp-clock
- * @summary Live clock component with digital or analogic display and date tooltip.
- */
-/**
- * @tp-dependency tp-color
- * @summary Brand color preset controller scoped to the containing element.
- */
-/**
- * @tp-dependency tp-drawer
- * @summary Drawer overlay component.
- */
-/**
- * @tp-dependency tp-fullscreen
- * @summary Fullscreen controller button.
- */
-/**
- * @tp-dependency tp-icon-button
- * @summary Accessible icon button component.
- */
-/**
- * @tp-dependency tp-lang
- * @summary Documentation language selector.
- */
-/**
- * @tp-dependency tp-markdown
- * @summary Markdown rendering component.
- */
-/**
- * @tp-dependency tp-post-it-editor
- * @summary creates and edits persistent personal annotations attached to document elements.
- */
-/**
- * @tp-dependency tp-restructuredtext
- * @summary reStructuredText rendering component.
- */
-/**
- * @tp-dependency tp-source
- * @summary Source repository link button.
- */
-/**
- * @tp-dependency tp-theme
- * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
- */
-/**
- * @tp-dependency tp-toolbar
- * @summary Sticky toolbar with start / center / end sections,
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
  */
 // tp-docgen:dependencies:end
 
@@ -71,6 +19,7 @@ import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
 import { TpBase } from "../base/base.js";
 import type { TpDrawer } from "../drawer/drawer.js";
 import type { TpPostItEditor } from "../post-it-editor/post-it-editor.js";
+import { updateDocumentLogo } from "../toolbar/document-logo.js";
 import style from "./markup-single-page.css?inline";
 
 const STYLE_ID = "tp-markup-single-page-styles";
@@ -171,7 +120,7 @@ function getRenderedEventName(language: TpMarkupSinglePageLanguage): string {
  */
 export class TpMarkupSinglePage extends TpBase {
 	public static get observedAttributes(): string[] {
-		return ["src", "toolbar", "langs", "label", "git"];
+		return ["src", "toolbar", "langs", "label", "git", "logo"];
 	}
 
 	private readonly outputElement = document.createElement("div");
@@ -231,6 +180,8 @@ export class TpMarkupSinglePage extends TpBase {
 		if (!this.isConnected) return;
 		if (name === "toolbar") this.renderToolbar();
 		else if (name === "git") this.updateGit();
+		else if (name === "logo")
+			updateDocumentLogo(this.toolbarElement, this.logo);
 		else if (name === "label") this.updateLabel();
 		else if (name === "langs") void this.updateLanguages();
 		else {
@@ -276,6 +227,20 @@ export class TpMarkupSinglePage extends TpBase {
 				source,
 			);
 		} else source.url = this.git;
+		updateDocumentLogo(toolbar, this.logo);
+	}
+
+	/**
+	 * @summary Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo.
+	 * @attr logo
+	 * @default ""
+	 */
+	public get logo(): string {
+		return this.getAttribute("logo") ?? "";
+	}
+
+	public set logo(value: string) {
+		this.setAttribute("logo", value);
 	}
 
 	public get label(): string {
@@ -382,6 +347,7 @@ export class TpMarkupSinglePage extends TpBase {
 		label.setAttribute("section", "center");
 		label.textContent = this.label;
 		toolbar.append(label);
+		updateDocumentLogo(toolbar, this.logo);
 		this.prepend(toolbar);
 		void this.updateLanguages();
 	}

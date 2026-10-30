@@ -263,22 +263,6 @@ function formatTimestamp(timestamp: number): string {
  * @eventdetail tp-console-entry-add { entry: TpConsoleEntry }
  * @event tp-console-clear Emitted when the console is cleared.
  * @eventdetail tp-console-clear { removedCount: number }
- * @cssprop --tp-console-bg Console background.
- * @cssprop --tp-console-color Console text color.
- * @cssprop --tp-console-border Console border color.
- * @cssprop --tp-console-entry-border Entry separator color.
- * @cssprop --tp-console-empty-color Empty state text color.
- * @cssprop --tp-console-string-color String value color.
- * @cssprop --tp-console-number-color Number value color.
- * @cssprop --tp-console-boolean-color Boolean value color.
- * @cssprop --tp-console-nullish-color Null and undefined value color.
- * @cssprop --tp-console-bigint-color BigInt value color.
- * @cssprop --tp-console-time-color Timestamp color.
- * @cssprop --tp-console-object-bg Object preview background.
- * @cssprop --tp-console-object-border Object preview border color.
- * @cssprop --tp-console-object-panel-bg Object tree panel background.
- * @cssprop --tp-console-object-key-color Object key color.
- * @cssprop --tp-console-object-summary-color Object summary text color.
  * @example
  * <tp-box data-intro-action="console" data-allow-script>
  *   <p>Inspect these example messages, then use Clear to empty the console.</p>
@@ -286,6 +270,32 @@ function formatTimestamp(timestamp: number): string {
  *   <p data-demo-status role="status"></p>
  *   <script src="/docs/components/_shared/introduction-actions.js"></script>
  * </tp-box>
+ * @cssprop [--tp-console-bg=#0d1117] Console background.
+ * @cssprop [--tp-console-bigint-color=#bc8cff] BigInt value color.
+ * @cssprop [--tp-console-boolean-color=#ffa657] Boolean value color.
+ * @cssprop [--tp-console-border=#30363d] Console border color.
+ * @cssprop [--tp-console-circular-color=#f2cc60] Text color of circular-reference markers in expanded objects.
+ * @cssprop [--tp-console-color=#e6edf3] Console text color.
+ * @cssprop [--tp-console-date-color=#7ee787] Text color of Date values in expanded objects.
+ * @cssprop [--tp-console-depth=0] Unitless group nesting depth of a log entry; each level adds 1rem of leading indentation. Assigned internally per entry.
+ * @cssprop [--tp-console-empty-color=#8b949e] Empty state text color.
+ * @cssprop [--tp-console-entry-bg=transparent] Background of an individual log entry.
+ * @cssprop [--tp-console-entry-border=#21262d] Entry separator color.
+ * @cssprop [--tp-console-error-color=#ff7b72] Text color of Error values in expanded objects.
+ * @cssprop [--tp-console-function-color=#d2a8ff] Text color of function summaries in expanded objects.
+ * @cssprop [--tp-console-kind-accent=#8b949e] Text color and background tint of the log-level badge; assigned by the entry level.
+ * @cssprop [--tp-console-nullish-color=#8b949e] Null and undefined value color.
+ * @cssprop [--tp-console-number-color=#79c0ff] Number value color.
+ * @cssprop [--tp-console-object-bg=#11161d] Object preview background.
+ * @cssprop [--tp-console-object-border=#30363d] Object preview border color.
+ * @cssprop [--tp-console-object-key-color=#c9d1d9] Object key color.
+ * @cssprop [--tp-console-object-marker-color=#8b949e] Color of the triangle used to expand or collapse an object preview.
+ * @cssprop [--tp-console-object-panel-bg=#0f141a] Object tree panel background.
+ * @cssprop [--tp-console-object-separator-color=#8b949e] Color of the separator between a property name and its value in expanded objects.
+ * @cssprop [--tp-console-object-summary-bg=#161b22] Background of the clickable summary row of an object preview.
+ * @cssprop [--tp-console-object-summary-color=#c9d1d9] Object summary text color.
+ * @cssprop [--tp-console-string-color=#a5d6ff] String value color.
+ * @cssprop [--tp-console-time-color=#8b949e] Timestamp color.
  */
 export class TpConsole extends TpBase {
 	/**
@@ -394,11 +404,7 @@ export class TpConsole extends TpBase {
 	}
 
 	/**
-	 * Writes an assertion failure when the condition is falsy.
-	 *
-	 * @summary Writes an assertion failure.
-	 * @param condition Assertion condition.
-	 * @param values Message values displayed when the condition is falsy.
+	 * @summary Adds an assertion-failure entry only when condition is falsy, including the supplied values.
 	 */
 	public assert(condition: unknown, ...values: TpConsoleValue[]): void {
 		if (condition) {
@@ -409,10 +415,7 @@ export class TpConsole extends TpBase {
 	}
 
 	/**
-	 * Increments and writes a named counter.
-	 *
-	 * @summary Writes a counter value.
-	 * @param label Counter label.
+	 * @summary Increments the counter associated with label and displays its new value; a new counter starts at one.
 	 */
 	public count(label = "default"): void {
 		const nextValue = (this.counters.get(label) ?? 0) + 1;
@@ -421,10 +424,7 @@ export class TpConsole extends TpBase {
 	}
 
 	/**
-	 * Resets a named counter.
-	 *
-	 * @summary Resets a counter.
-	 * @param label Counter label.
+	 * @summary Resets the counter associated with label so its next count starts again at one.
 	 */
 	public countReset(label = "default"): void {
 		if (!this.counters.has(label)) {
@@ -436,21 +436,14 @@ export class TpConsole extends TpBase {
 	}
 
 	/**
-	 * Starts a named timer.
-	 *
-	 * @summary Starts a timer.
-	 * @param label Timer label.
+	 * @summary Starts or restarts the elapsed-time measurement associated with label.
 	 */
 	public time(label = "default"): void {
 		this.timers.set(label, performance.now());
 	}
 
 	/**
-	 * Writes the current value of a named timer.
-	 *
-	 * @summary Writes a timer value.
-	 * @param label Timer label.
-	 * @param values Additional values to display.
+	 * @summary Displays elapsed milliseconds for label with any additional values, without stopping the timer.
 	 */
 	public timeLog(label = "default", ...values: TpConsoleValue[]): void {
 		const start = this.timers.get(label);
@@ -465,10 +458,7 @@ export class TpConsole extends TpBase {
 	}
 
 	/**
-	 * Ends a named timer and writes its duration.
-	 *
-	 * @summary Ends a timer.
-	 * @param label Timer label.
+	 * @summary Displays elapsed milliseconds for label and removes the timer.
 	 */
 	public timeEnd(label = "default"): void {
 		const start = this.timers.get(label);
@@ -537,12 +527,7 @@ export class TpConsole extends TpBase {
 	}
 
 	/**
-	 * Adds an arbitrary entry.
-	 *
-	 * @summary Adds an entry to the console.
-	 * @param kind Entry kind.
-	 * @param values Values to display.
-	 * @returns Added entry.
+	 * @summary Appends an entry of kind containing values, rerenders the console and returns the created entry record.
 	 */
 	public addEntry(
 		kind: TpConsoleEntryKind,
@@ -655,15 +640,7 @@ export class TpConsole extends TpBase {
 	}
 
 	/**
-	 * Redirects `window.console` calls to this component.
-	 *
-	 * The behavior:
-	 * - native methods are still called
-	 * - entries are duplicated in `<tp-console>`
-	 * - redirection is idempotent
-	 *
-	 * @summary Redirects global console calls to this component.
-	 * @returns Restore function.
+	 * @summary Routes global console methods to this component and returns a cleanup function that restores the previous methods.
 	 */
 	public redirectConsoleToSelf(): () => void {
 		if (this.isRedirecting) {

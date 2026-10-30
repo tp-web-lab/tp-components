@@ -361,10 +361,14 @@ const TP_COLOR_CLASS_ITEMS: readonly TpColorClassItem[] = [
  *
  * @summary Viewer for base color tokens.
  * @tagname tp-color-picker
- * @event tp-color-picker-select Emitted after a CSS variable reference is selected and copied.
- * @event tp-color-picker-copy-error Emitted when the clipboard rejects a copy operation.
+
+
  * @example
  * <tp-color-picker></tp-color-picker>
+ * @event tp-color-picker-select Emitted when a color token is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success.
+ * @eventdetail tp-color-picker-select { token: string; value: string }
+ * @event tp-color-picker-copy-error Emitted when copying the selected color token fails. The detail contains the requested clipboard text, selection metadata and the caught error.
+ * @eventdetail tp-color-picker-copy-error { token: string; value: string; error: unknown }
  */
 export class TpColorPicker extends TpBase {
 	/**

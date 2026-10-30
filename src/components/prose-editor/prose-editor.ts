@@ -27,7 +27,7 @@ import { reportToolLoaded } from "@tp/tp-utilities";
  */
 /**
  * @tp-dependency tp-dropdown
- * @summary Displays an anchored dropdown menu.
+ * @summary Dropdown menu component.
  */
 /**
  * @tp-dependency tp-emoji-picker
@@ -72,6 +72,10 @@ import { reportToolLoaded } from "@tp/tp-utilities";
 /**
  * @tp-dependency tp-toolbar
  * @summary Sticky toolbar with start / center / end sections,
+ */
+/**
+ * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+ * @summary Shared parsers, games and rendering utilities.
  */
 /**
  * @credit ProseMirror https://prosemirror.net/
@@ -1321,6 +1325,10 @@ function normalizeMarkdownBlockViewMode(value: unknown): MarkdownBlockViewMode {
  * @attr {string} value = "" - Initial HTML content of the editor.
  * @example
  * <tp-prose-editor></tp-prose-editor>
+ * @event tp-prose-editor-input Emitted after an editing transaction or editor command updates the document. value contains the current HTML serialization.
+ * @eventdetail tp-prose-editor-input { value: string }
+ * @event tp-prose-editor-change Emitted immediately after tp-prose-editor-input for the same edit; it does not wait for blur. value contains the current HTML serialization.
+ * @eventdetail tp-prose-editor-change { value: string }
  */
 export class TpProseEditor extends TpBase {
 	private static readonly styleId = "tp-prose-editor-styles";
@@ -1482,6 +1490,9 @@ export class TpProseEditor extends TpBase {
 		}
 	}
 
+	/**
+	 * @summary Focuses the active editing surface, forwarding optional browser FocusOptions.
+	 */
 	public focus(options?: FocusOptions): void {
 		if (this.htmlRenderMode) {
 			this.htmlRenderedElement?.focus(options);
@@ -1496,6 +1507,9 @@ export class TpProseEditor extends TpBase {
 		this.editorView?.focus();
 	}
 
+	/**
+	 * @summary Returns the current HTML from the active source, rendered or rich-text mode; before initialization, returns the configured initial HTML.
+	 */
 	public getHTML(): string {
 		if (this.htmlMode && this.htmlSourceElement !== null) {
 			return this.htmlSourceElement.value;
@@ -1512,6 +1526,9 @@ export class TpProseEditor extends TpBase {
 		return this.serializeDocument(this.editorView.state.doc);
 	}
 
+	/**
+	 * @summary Replaces the document from HTML, synchronizes active source/rendered views and reflects the supplied text in value.
+	 */
 	public setHTML(value: string): void {
 		this.replaceDocument(value);
 		if (this.htmlSourceElement !== null) {
@@ -1525,6 +1542,9 @@ export class TpProseEditor extends TpBase {
 		this.internalValueUpdate = false;
 	}
 
+	/**
+	 * @summary Replaces the current selection with a table of rows by columns and focuses it. Returns false if no editor or valid table can be created.
+	 */
 	public insertTable(rows = 3, columns = 3): boolean {
 		if (this.editorView === null) {
 			return false;
@@ -1544,26 +1564,44 @@ export class TpProseEditor extends TpBase {
 		return true;
 	}
 
+	/**
+	 * @summary Adds a row after the selected table row; returns true when the command applies, or false when unavailable for the current editor state.
+	 */
 	public addTableRowAfter(): boolean {
 		return this.runTableCommand(addRowAfter);
 	}
 
+	/**
+	 * @summary Adds a column after the selected table column; returns true when the command applies, or false when unavailable for the current editor state.
+	 */
 	public addTableColumnAfter(): boolean {
 		return this.runTableCommand(addColumnAfter);
 	}
 
+	/**
+	 * @summary Deletes the selected table row; returns true when the command applies, or false when unavailable for the current editor state.
+	 */
 	public deleteTableRow(): boolean {
 		return this.runTableCommand(deleteRow);
 	}
 
+	/**
+	 * @summary Deletes the selected table column; returns true when the command applies, or false when unavailable for the current editor state.
+	 */
 	public deleteTableColumn(): boolean {
 		return this.runTableCommand(deleteColumn);
 	}
 
+	/**
+	 * @summary Deletes the table containing the current selection; returns true when the command applies, or false when unavailable for the current editor state.
+	 */
 	public deleteTable(): boolean {
 		return this.runTableCommand(deleteTable);
 	}
 
+	/**
+	 * @summary Sets the search text and optional matching options on the rich-text editor; does nothing before initialization.
+	 */
 	public setSearchQuery(
 		value: string,
 		options: Omit<ConstructorParameters<typeof SearchQuery>[0], "search"> = {},
@@ -1577,10 +1615,16 @@ export class TpProseEditor extends TpBase {
 		this.editorView.dispatch(transaction);
 	}
 
+	/**
+	 * @summary Finds and selects the next matching text, optionally replacing the current query with value. Returns whether a match was selected.
+	 */
 	public findNext(value?: string): boolean {
 		return this.findSearchMatch(value, "next");
 	}
 
+	/**
+	 * @summary Finds and selects the previous matching text, optionally replacing the current query with value. Returns whether a match was selected.
+	 */
 	public findPrevious(value?: string): boolean {
 		return this.findSearchMatch(value, "previous");
 	}

@@ -150,8 +150,8 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-map-height</code> | <code>24rem</code> | Controls the height. |
-  | <code>&#45;&#45;tp-map-width</code> | <code>100%</code> | Controls the width. |
+  | <code>&#45;&#45;tp-map-height</code> | <code>24rem</code> | Height of the map viewport, with a minimum of 10rem. |
+  | <code>&#45;&#45;tp-map-width</code> | <code>100%</code> | Preferred width of the map viewport and elevation profile, limited by the container width. |
   [CSS properties of `<tp-map>`]
 :::
 <!-- /tp-docgen:api -->
@@ -159,6 +159,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_map_map.TpMap.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 
@@ -366,6 +372,10 @@ All tp-components used by `<tp-map>` are loaded automatically by this component 
 ### External
 
 <!--
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
+-->
+<!--
 @credit Leaflet https://leafletjs.com/
 @summary Interactive geographic maps.
 -->
@@ -374,6 +384,7 @@ All tp-components used by `<tp-map>` are loaded automatically by this component 
 @summary Map tiles and geographic data; attribution required.
 -->
 
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 - [Leaflet](https://leafletjs.com/) : Interactive geographic maps.
 - [OpenStreetMap](https://www.openstreetmap.org/copyright) : Map tiles and geographic data; attribution required.
 <!-- tp-docgen:dependencies:end -->

@@ -19,6 +19,8 @@ This document is rendered as a single page.
 
 ## Usage
 
+Set `logo="/docs/medias/logos/logo-tp.svg"` to display a `tp-icon` at the start of the toolbar, at the default icon-button size (`2em`). Changing the attribute updates the logo; removing it or setting it to an empty value hides it. The logo is decorative and has no click action. Single-page documents also require the `toolbar` attribute.
+
 ### User interactions
 
 The toolbar is optional. The interactions below are available only when the corresponding controls are displayed. Personal annotations are saved per document in this browser's localStorage, without account synchronization. Clearing site data removes them. The [Post-it editor](../post-it-editor/index.md) offers an Annotation language dropdown: adoc, html, md, rst or txt (default). Source and language are saved together; rendered markup is sanitized and scripts are not executed. If a target changes or disappears, use Reattach from the annotations list; no guessed replacement is silently selected. Storage errors are displayed in the editor. Elements inside embedded iframes are outside this page's annotation scope.
@@ -105,6 +107,7 @@ Attributes
   | <code>git</code> | <code>string</code> | <code>&quot;&quot;</code> | Repository URL. Adds a source link before Code when the toolbar is enabled. |
   | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Text displayed in the center of the optional toolbar. |
   | <code>langs</code> | <code>string</code> | <code>&quot;en&quot;</code> | Candidate document languages. The first uses the source directory; others use language subdirectories. |
+  | <code>logo</code> | <code>string</code> | <code>&quot;&quot;</code> | Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo. |
   | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Source file. The extension selects the renderer. |
   | <code>toolbar</code> | <code>string \| null</code> | <code>null</code> | Optional comma-separated controls: code, calc, postit, clock, lang, color, theme, fullscreen. Empty enables all; absent hides the toolbar. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
@@ -136,6 +139,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markup-single-page.TpMarkupSinglePage.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 
@@ -451,76 +460,16 @@ bundler
 All tp-components used by `<tp-markup-single-page>` are loaded automatically by this component if they have not already been loaded by another component.
 
 <!--
-@tp-dependency tp-asciidoc
-@summary Semantic AsciiDoc rendering component.
--->
-<!--
 @tp-dependency tp-base
 @summary Shared base class for tp-* components.
 -->
 <!--
-@tp-dependency tp-calculator
-@summary Scientific calculator with an editable expression and degree/radian modes.
--->
-<!--
-@tp-dependency tp-clock
-@summary Live clock component with digital or analogic display and date tooltip.
--->
-<!--
-@tp-dependency tp-color
-@summary Brand color preset controller scoped to the containing element.
--->
-<!--
-@tp-dependency tp-drawer
-@summary Drawer overlay component.
--->
-<!--
-@tp-dependency tp-fullscreen
-@summary Fullscreen controller button.
--->
-<!--
-@tp-dependency tp-icon-button
-@summary Accessible icon button component.
--->
-<!--
-@tp-dependency tp-lang
-@summary Documentation language selector.
--->
-<!--
-@tp-dependency tp-markdown
-@summary Markdown rendering component.
--->
-<!--
-@tp-dependency tp-post-it-editor
-@summary creates and edits persistent personal annotations attached to document elements.
--->
-<!--
-@tp-dependency tp-restructuredtext
-@summary reStructuredText rendering component.
--->
-<!--
-@tp-dependency tp-theme
-@summary Parent-scoped light/dark/auto theme controller with embedded UI.
--->
-<!--
-@tp-dependency tp-toolbar
-@summary Sticky toolbar with start / center / end sections,
+@tp-dependency tp-icon
+@summary SVG icon component with inline, URL, and registry sources.
 -->
 
-- [`<tp-asciidoc>`](../asciidoc/index.md) : Semantic AsciiDoc rendering component.
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-calculator>`](../calculator/index.md) : Scientific calculator with an editable expression and degree/radian modes.
-- [`<tp-clock>`](../clock/index.md) : Live clock component with digital or analogic display and date tooltip.
-- [`<tp-color>`](../color/index.md) : Brand color preset controller scoped to the containing element.
-- [`<tp-drawer>`](../drawer/index.md) : Drawer overlay component.
-- [`<tp-fullscreen>`](../fullscreen/index.md) : Fullscreen controller button.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-lang>`](../lang/index.md) : Documentation language selector.
-- [`<tp-markdown>`](../markdown/index.md) : Markdown rendering component.
-- [`<tp-post-it-editor>`](../post-it-editor/index.md) : creates and edits persistent personal annotations attached to document elements.
-- [`<tp-restructuredtext>`](../restructuredtext/index.md) : reStructuredText rendering component.
-- [`<tp-theme>`](../theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
-- [`<tp-toolbar>`](../toolbar/index.md) : Sticky toolbar with start / center / end sections,
+- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
 
 ### External
 

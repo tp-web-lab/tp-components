@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "size",
-      "description": "Icon and text size.",
+      "description": "Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em.",
       "reflected": true,
       "static": false,
       "inherited": false,

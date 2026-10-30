@@ -91,14 +91,14 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-checkbox-list-change</code> | <code>&#123; value: string; label: unknown &#125;</code> | Emitted when selection changes (`detail: { value, label }`). |
+  | <code>tp-checkbox-list-change</code> | <code>&#123; value: string; label: string &#125;</code> | Emitted after a selection change. value contains comma-separated 1-based item indexes; label contains their visible labels joined by comma and space. Both are empty when nothing is selected. |
   [Events emitted by `<tp-checkbox-list>`]
 
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-checkbox-list-marker-gap</code> | <code>0.5em</code> | Controls the marker gap. |
-  | <code>&#45;&#45;tp-checkbox-list-marker-width</code> | <code>2ch</code> | Controls the marker width. |
+  | <code>&#45;&#45;tp-checkbox-list-marker-gap</code> | <code>0.5em</code> | Horizontal space between each selection marker and its item content. |
+  | <code>&#45;&#45;tp-checkbox-list-marker-width</code> | <code>2ch</code> | Width reserved for each selection marker; aligns the item content in both orientations. |
   [CSS properties of `<tp-checkbox-list>`]
 :::
 <!-- /tp-docgen:api -->
@@ -106,6 +106,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_checkbox-list.TpCheckboxList.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

@@ -17,7 +17,7 @@
       "static": false,
       "inherited": false,
       "type": "string",
-      "default": "''"
+      "default": "\"\""
     },
     {
       "name": "before-label",
@@ -26,11 +26,11 @@
       "static": false,
       "inherited": false,
       "type": "string",
-      "default": "''"
+      "default": "\"\""
     },
     {
       "name": "orientation",
-      "description": "Comparator orientation.\n\n- `horizontal` : séparation gauche / droite\n- `vertical` : séparation haut / bas",
+      "description": "Split direction: horizontal places the layers on the left and right; vertical places them above and below.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -44,7 +44,7 @@
       "static": false,
       "inherited": false,
       "type": "string",
-      "default": "''"
+      "default": "\"\""
     },
     {
       "name": "storage-key",
@@ -53,7 +53,7 @@
       "static": false,
       "inherited": false,
       "type": "string",
-      "default": "''"
+      "default": "\"\""
     }
   ],
   "methods": [
@@ -68,17 +68,17 @@
     {
       "name": "--tp-compare-divider-size",
       "default": "2px",
-      "description": "Controls the divider size."
+      "description": "Thickness of the dividing line between the two layers."
     },
     {
       "name": "--tp-compare-handle-size",
       "default": "2.5rem",
-      "description": "Controls the handle size."
+      "description": "Width and height of the draggable comparison handle."
     },
     {
       "name": "--tp-compare-position",
       "default": "50%",
-      "description": "Controls the position."
+      "description": "Position of the divider along the comparison axis, usually a percentage; synchronized with position and pointer or keyboard interaction."
     }
   ],
   "dependencies": [

@@ -297,10 +297,8 @@ const OBJECT_TREE_CONTEXT_MENU_CONFIG: TpTreeContextMenuConfig = {
  * @event tp-object-tree-load Emitted after an external JSON file or inline JavaScript expression has been loaded.
  * @eventdetail tp-object-tree-error { message: string; source: "script" | "src"; src: string }
  * @eventdetail tp-object-tree-load { source: "script" | "src"; src: string; value: unknown }
- * @event tp-tree-context-action Emitted when the user triggers a global tree action.
+
  *
- * @cssprop [--tp-object-tree-font-size=0.875rem] Controls the tree text size consistently across rendering contexts.
- * @cssprop [--tp-tree-*] Inherits the CSS custom properties exposed by `<tp-tree>`.
  * @example
  * <tp-object-tree>
  *       <script type="tp/javascript">
@@ -314,6 +312,20 @@ const OBJECT_TREE_CONTEXT_MENU_CONFIG: TpTreeContextMenuConfig = {
  *         })
  *       </script>
  *     </tp-object-tree>
+ * @cssprop [--tp-object-tree-boolean-color=#8250df] Text color of Boolean values in the object tree.
+ * @cssprop [--tp-object-tree-circular-color=#cf222e] Text color of circular-reference markers in the object tree.
+ * @cssprop [--tp-object-tree-date-color=#116329] Text color of Date values in the object tree.
+ * @cssprop [--tp-object-tree-error-color=#cf222e] Text color of Error values in the object tree.
+ * @cssprop [--tp-object-tree-font-size=0.875rem] Font size of property names and value summaries in the object tree.
+ * @cssprop [--tp-object-tree-function-color=#953800] Text color of function summaries in the object tree.
+ * @cssprop [--tp-object-tree-key-color=#6a737d] Text color of object property names in the object tree.
+ * @cssprop [--tp-object-tree-nullish-color=#8c959f] Text color of null and undefined values in the object tree.
+ * @cssprop [--tp-object-tree-number-color=#0550ae] Text color of numeric values in the object tree.
+ * @cssprop [--tp-object-tree-separator-color=#8c959f] Text color of the separator between a property name and its value in the object tree.
+ * @cssprop [--tp-object-tree-string-color=#0a7f3f] Text color of string values in the object tree.
+ * @cssprop [--tp-object-tree-structure-color=#57606a] Text color of array and object summaries in the object tree.
+ * @event tp-tree-context-action Bubbles from the inner tree when a context-menu action is chosen. scope distinguishes global and node actions; target identifies the node or is null.
+ * @eventdetail tp-tree-context-action { actionId: string; scope: "global" | "node"; target: TpTreeNodeTarget | null }
  */
 export class TpObjectTree extends TpBase {
 	private static readonly styleId = "tp-object-tree-styles";

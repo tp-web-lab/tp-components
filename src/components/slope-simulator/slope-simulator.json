@@ -62,10 +62,6 @@
       "summary": "CodeMirror-based code editor component."
     },
     {
-      "name": "tp-dropdown",
-      "summary": "Dropdown menu component."
-    },
-    {
       "name": "tp-icon-button",
       "summary": "Accessible icon button component."
     },

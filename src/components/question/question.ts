@@ -186,8 +186,8 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
  * @attr {"none"|"feedback"|"solution"|"both"} ai-help = "none" - Optional AI assistance; solution and both enable solution explanations. Feedback assistance is reserved for a future release.
  * @attr {string} timing = "" - Optional nonzero time limit in strict hh:mm:ss format.
  * @attr {boolean} score = false - Displays the numerical score in submission feedback.
- * @attr {string} open - Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.
- * @event tp-question-submit - Fired when the submit icon button is activated.
+ * @attr {string} open = "" - Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.
+
  *   `detail: { value: unknown }`
  * @example
  * <tp-question>
@@ -199,6 +199,8 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
  *       <dt>Solution</dt><dd>They package reusable behavior behind a custom element.</dd>
  *     </dl>
  *   </tp-question>
+ * @event tp-question-submit Emitted after an answer passes submission validation and preparation. value is the response widget value, whose type depends on the question; invalid or blocked repeated submissions do not emit it.
+ * @eventdetail tp-question-submit { value: unknown }
  */
 export class TpQuestion extends TpBase {
 	private readonly questionTiming = new QuestionTiming(this);

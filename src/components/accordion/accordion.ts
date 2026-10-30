@@ -200,11 +200,7 @@ export class TpAccordion extends TpBase {
 	}
 
 	/**
-	 * Opens a section by index.
-	 *
-	 * In single mode, this replaces the current open section.
-	 *
-	 * @param index Target section index.
+	 * @summary Opens the section at the zero-based index; in single mode, closes the previously open section.
 	 */
 	public open(index: number): void {
 		if (!Number.isInteger(index) || index < 0) {
@@ -220,9 +216,7 @@ export class TpAccordion extends TpBase {
 	}
 
 	/**
-	 * Closes a section by index.
-	 *
-	 * @param index Target section index.
+	 * @summary Closes the section at the zero-based index without changing other sections.
 	 */
 	public close(index: number): void {
 		if (!Number.isInteger(index) || index < 0) {
@@ -233,9 +227,7 @@ export class TpAccordion extends TpBase {
 	}
 
 	/**
-	 * Toggles open/closed state for a section by index.
-	 *
-	 * @param index Target section index.
+	 * @summary Toggles the section at the zero-based index, respecting the single/multiple opening mode.
 	 */
 	public toggle(index: number): void {
 		if (!Number.isInteger(index) || index < 0) {

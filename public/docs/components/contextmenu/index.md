@@ -70,8 +70,8 @@ Attributes
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>anchor</code> | <code>string</code> | <code>&quot;&quot;</code> | Sélecteur CSS de l’élément servant d’ancrage au clic droit. |
-  | <code>open</code> | <code>boolean</code> | <code>false</code> | Ouvre ou ferme le menu. |
+  | <code>anchor</code> | <code>string</code> | <code>&quot;&quot;</code> | CSS selector of the element whose context-menu action opens this menu. |
+  | <code>open</code> | <code>boolean</code> | <code>false</code> | Shows the context menu when present; removing it closes the menu. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -81,15 +81,15 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>closeAll</code> | <code>closeAll(): void</code> | Réinitialise l’état d’ouverture des sous-menus. |
-  | <code>hide</code> | <code>hide(): void</code> | Ferme explicitement le menu. |
-  | <code>showAt</code> | <code>showAt(x: number, y: number): void</code> | Ouvre explicitement le menu à l’écran. |
+  | <code>closeAll</code> | <code>closeAll(): void</code> | Collapses all expanded submenus without closing the context-menu container. |
+  | <code>hide</code> | <code>hide(): void</code> | Closes the context menu by clearing its open state. |
+  | <code>showAt</code> | <code>showAt(x: number, y: number): void</code> | Opens the context menu at viewport coordinates x and y in CSS pixels. |
   [Public methods of `TpContextmenu`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-contextmenu-select</code> | <code>&#123; action: string; item: HTMLLIElement; label: string &#125;</code> | Émis quand un item terminal portant `data-action` est sélectionné. |
+  | <code>tp-contextmenu-select</code> | <code>&#123; action: string; item: HTMLLIElement; label: string &#125;</code> | Emitted when a terminal menu item with data-action is activated. The detail contains its action identifier, li element and visible label. |
   [Events emitted by `<tp-contextmenu>`]
 
 CSS properties
@@ -115,6 +115,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_contextmenu.TpContextmenu.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

@@ -175,7 +175,63 @@
       "detail": "void"
     }
   ],
-  "cssproperties": [],
+  "cssproperties": [
+    {
+      "name": "--tp-numberfield-background",
+      "default": "var(--tp-paper-color)",
+      "description": "Field background."
+    },
+    {
+      "name": "--tp-numberfield-border-color",
+      "default": "var(--tp-neutral-stroke-soft)",
+      "description": "Field border color."
+    },
+    {
+      "name": "--tp-numberfield-focus-color",
+      "default": "var(--tp-brand-text-colorful)",
+      "description": "Border color and translucent outline tint while focus is inside the numeric control."
+    },
+    {
+      "name": "--tp-numberfield-inline-size",
+      "default": "calc(20ch + 5rem)",
+      "description": "Preferred width of the numeric field, limited by available space."
+    },
+    {
+      "name": "--tp-numberfield-label-font-weight",
+      "default": "500",
+      "description": "Font weight of the field label."
+    },
+    {
+      "name": "--tp-numberfield-label-gap",
+      "default": "0.35em",
+      "description": "Space between the label and the input control."
+    },
+    {
+      "name": "--tp-numberfield-padding-block",
+      "default": "0.6em",
+      "description": "Inner spacing above and below the input value."
+    },
+    {
+      "name": "--tp-numberfield-padding-inline",
+      "default": "0.75em",
+      "description": "Inner spacing before and after the input value; additional space is reserved for action buttons."
+    },
+    {
+      "name": "--tp-numberfield-radius",
+      "default": "var(--tp-border-radius-sm)",
+      "description": "Corner radius of the input control."
+    },
+    {
+      "name": "--tp-numberfield-required-color",
+      "default": "var(--tp-danger-text-colorful)",
+      "description": "Color of the asterisk marking a required field."
+    },
+    {
+      "name": "--tp-numberfield-value-font-weight",
+      "default": "400",
+      "description": "Font weight of the displayed input value."
+    }
+  ],
   "dependencies": [
     {
       "name": "tp-base",

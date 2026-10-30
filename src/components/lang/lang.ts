@@ -86,8 +86,8 @@ function joinRepository(base: string, part: string): string {
  * @tagname tp-lang
  * @attr {string} langs = "en" - Comma-separated language codes.
  * @attr {string} repository = "" - Documentation repository root.
- * @attr {string} variant = "neutral" - Icon button variant.
- * @attr {string} size = "m" - Icon button size.
+ * @attr {string} variant = "neutral" - Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info.
+ * @attr {string} size = "m" - Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl.
  * @attr {boolean} disabled = false - Disables the language trigger.
  *
  *

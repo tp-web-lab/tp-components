@@ -75,9 +75,9 @@ Attributes
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>attached</code> | <code>boolean</code> | <code>false</code> | Attribute `attached`. |
-  | <code>orientation</code> | <code>string</code> | <code>horizontal</code> | Attribute `orientation`. |
-  | <code>stretch</code> | <code>boolean</code> | <code>false</code> | Attribute `stretch`. |
+  | <code>attached</code> | <code>boolean</code> | <code>false</code> | Joins adjacent buttons without gaps and removes their inner corner rounding. |
+  | <code>orientation</code> | <code>string</code> | <code>horizontal</code> | Arrangement of buttons: horizontal in a row, or vertical in a column. |
+  | <code>stretch</code> | <code>boolean</code> | <code>false</code> | Expands the group to the available width and gives its buttons equal flexible space. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -99,7 +99,7 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-button-group-gap</code> | <code>0</code> | Controls the gap. |
+  | <code>&#45;&#45;tp-button-group-gap</code> | <code>0</code> | Space between adjacent buttons in the group. |
   [CSS properties of `<tp-button-group>`]
 :::
 <!-- /tp-docgen:api -->
@@ -107,6 +107,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_button-group.TpButtonGroup.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

@@ -76,22 +76,22 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>addFile</code> | <code>addFile(file: TpFile): void</code> | Adds a file. |
-  | <code>closeFile</code> | <code>closeFile(path: string): void</code> | Closes an open file. |
-  | <code>deleteFile</code> | <code>deleteFile(path: string): void</code> | Deletes a file. |
-  | <code>getActivePath</code> | <code>getActivePath(): string \| null</code> | Returns the active file path. |
-  | <code>getDirtyPaths</code> | <code>getDirtyPaths(): string[]</code> | Returns dirty file paths. |
-  | <code>getFiles</code> | <code>getFiles(): TpFile[]</code> | Returns all files. |
-  | <code>getState</code> | <code>getState(): TpFilesystemState</code> | Returns the full file system state. |
-  | <code>moveFile</code> | <code>moveFile(oldPath: string, newPath: string): void</code> | Moves a file. |
-  | <code>openFile</code> | <code>openFile(path: string, emitEvent = true): void</code> | Opens a file and makes it active. |
-  | <code>readFile</code> | <code>readFile(path: string): string \| null</code> | Reads a file. |
-  | <code>renameFile</code> | <code>renameFile(oldPath: string, newPath: string): void</code> | Renames a file. |
-  | <code>setActivePath</code> | <code>setActivePath(path: string \| null, emitEvent = true): void</code> | Sets the active file path. |
-  | <code>setDirtyPaths</code> | <code>setDirtyPaths(paths: readonly string[]): void</code> | Replaces dirty file paths. |
-  | <code>setFiles</code> | <code>setFiles(files: readonly TpFile[]): void</code> | Replaces all files. |
-  | <code>setState</code> | <code>setState(state: TpFilesystemState): void</code> | Replaces the full file system state. |
-  | <code>writeFile</code> | <code>writeFile(path: string, content: string): void</code> | Writes file content. |
+  | <code>addFile</code> | <code>addFile(file: TpFile): void</code> | Adds a copied file record and refreshes the tree; a duplicate normalized path is ignored. |
+  | <code>closeFile</code> | <code>closeFile(path: string): void</code> | Removes path from the open files; if it was active, activates another open file or clears the active path. |
+  | <code>deleteFile</code> | <code>deleteFile(path: string): void</code> | Deletes an existing writable file and clears its open/dirty state; missing or readonly files are unchanged. |
+  | <code>getActivePath</code> | <code>getActivePath(): string \| null</code> | Returns the active file path, or null when no file is active. |
+  | <code>getDirtyPaths</code> | <code>getDirtyPaths(): string[]</code> | Returns a new array of paths currently marked as modified. |
+  | <code>getFiles</code> | <code>getFiles(): TpFile[]</code> | Returns copies of all in-memory file records; modifying the returned array does not update the component. |
+  | <code>getState</code> | <code>getState(): TpFilesystemState</code> | Returns a snapshot of copied files and the current active, open and dirty paths. |
+  | <code>moveFile</code> | <code>moveFile(oldPath: string, newPath: string): void</code> | Renames oldPath to newPath using renameFile(), then emits a move notification with the normalized paths. |
+  | <code>openFile</code> | <code>openFile(path: string, emitEvent = true): void</code> | Marks an existing file as open and active. Set emitEvent to false to suppress open/active notifications. |
+  | <code>readFile</code> | <code>readFile(path: string): string \| null</code> | Returns the content of the normalized file path, or null when no file exists at that path. |
+  | <code>renameFile</code> | <code>renameFile(oldPath: string, newPath: string): void</code> | Changes the normalized path of a writable file and updates its tracked states. Missing, readonly or unchanged source paths are ignored. |
+  | <code>setActivePath</code> | <code>setActivePath(path: string \| null, emitEvent = true): void</code> | Sets an existing file as active, or clears it with null. Set emitEvent to false to suppress the active-file notification. |
+  | <code>setDirtyPaths</code> | <code>setDirtyPaths(paths: readonly string[]): void</code> | Replaces the set of modified-file paths and refreshes the tree; unknown paths are discarded. |
+  | <code>setFiles</code> | <code>setFiles(files: readonly TpFile[]): void</code> | Replaces the in-memory files with copies, removes states for missing files, refreshes the tree and emits a change event. |
+  | <code>setState</code> | <code>setState(state: TpFilesystemState): void</code> | Replaces files and active, open and dirty paths together; removes paths that no longer exist, refreshes the tree and emits change. |
+  | <code>writeFile</code> | <code>writeFile(path: string, content: string): void</code> | Replaces an existing writable file content, marks it dirty and emits write/change events. Missing and readonly files are unchanged. |
   [Public methods of `TpFilesystem`]
 
 Events
@@ -120,6 +120,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_filesystem.TpFilesystem.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

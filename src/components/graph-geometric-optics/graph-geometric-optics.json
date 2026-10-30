@@ -14,34 +14,34 @@
     {
       "name": "addEdge(): TpGraphEdge",
       "inherited": false,
-      "description": "Adds edge."
+      "description": "Always throws TypeError: optical rays are computed from the scene and cannot be added as graph edges."
     },
     {
       "name": "addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode",
       "inherited": false,
-      "description": "Adds node."
+      "description": "Adds a supported optical component at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError."
     },
     {
       "name": "analyze(): TpOpticsAnalysis",
       "inherited": false,
-      "description": "Analyze."
+      "description": "Returns the ray-tracing analysis computed from the current optical scene without replacing the graph."
     },
     {
       "name": "setGraph(graph: TpGraphDocument): void",
       "inherited": false,
-      "description": "Sets graph."
+      "description": "Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph."
     },
     {
       "name": "trace(): void",
       "inherited": false,
-      "description": "Trace."
+      "description": "Revalidates and redraws the current scene, then emits tp-optics-trace with its analysis and graph snapshot."
     }
   ],
   "events": [
     {
       "name": "tp-optics-trace",
-      "description": "*",
-      "detail": "{ analysis: unknown; graph: unknown }"
+      "description": "Emitted after trace recomputes the displayed ray paths; analysis contains the optical-system analysis and graph is the resulting snapshot.",
+      "detail": "{ analysis: TpOpticsAnalysis; graph: TpGraphDocument }"
     }
   ],
   "cssproperties": [],

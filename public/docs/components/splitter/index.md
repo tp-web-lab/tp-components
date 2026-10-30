@@ -104,9 +104,9 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-splitter-divider-color</code> | <code>var(&#45;&#45;tp-brand-fill-mid, #2563eb)</code> | Controls the divider color. |
-  | <code>&#45;&#45;tp-splitter-divider-size</code> | <code>0.75rem</code> | Controls the divider size. |
-  | <code>&#45;&#45;tp-splitter-position</code> | <code>50%</code> | Controls the position. |
+  | <code>&#45;&#45;tp-splitter-divider-color</code> | <code>var(&#45;&#45;tp-brand-fill-mid, #2563eb)</code> | Color of the divider grip and tint of its draggable track. |
+  | <code>&#45;&#45;tp-splitter-divider-size</code> | <code>0.75rem</code> | Thickness of the draggable divider track along the split axis. |
+  | <code>&#45;&#45;tp-splitter-position</code> | <code>50%</code> | Size of the first panel along the split axis, usually a percentage; synchronized with position and pointer or keyboard interaction. |
   [CSS properties of `<tp-splitter>`]
 :::
 <!-- /tp-docgen:api -->
@@ -114,6 +114,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_splitter.TpSplitter.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

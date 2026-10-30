@@ -56,6 +56,11 @@
       "summary": "reStructuredText parsing and rendering."
     },
     {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    },
+    {
       "name": "highlight.js",
       "url": "https://highlightjs.org/",
       "summary": "Source-code syntax highlighting."

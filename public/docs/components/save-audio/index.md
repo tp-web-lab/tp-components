@@ -48,8 +48,8 @@ Attributes
   | <code>filename</code> | <code>string</code> | <code>&quot;audio&quot;</code> | Download filename without its extension. |
   | <code>format</code> | <code>&quot;mp3&quot; \| &quot;ogg&quot; \| &quot;wav&quot;</code> | <code>&quot;mp3&quot;</code> | Initially selected audio format. |
   | <code>name</code> | <code>string</code> | <code>&quot;file-download&quot;</code> | Icon used by the trigger. |
-  | <code>size</code> | <code>string</code> | <code>&quot;m&quot;</code> | Icon button size. |
-  | <code>variant</code> | <code>string</code> | <code>&quot;neutral&quot;</code> | Icon button variant. |
+  | <code>size</code> | <code>string</code> | <code>&quot;m&quot;</code> | Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl. |
+  | <code>variant</code> | <code>string</code> | <code>&quot;neutral&quot;</code> | Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -59,7 +59,7 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>save</code> | <code>save(format: TpSaveAudioFormat = this.format): Promise&lt;void&gt;</code> | Save. |
+  | <code>save</code> | <code>save(format: TpSaveAudioFormat = this.format): Promise&lt;void&gt;</code> | Requests the anchored component to save mp3, ogg or wav audio using filename. Resolves after completion or cancellation; does nothing when disabled or already saving. Invalid formats and incompatible targets reject. |
   [Public methods of `TpSaveAudio`]
 
 Events
@@ -80,6 +80,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_save-audio.TpSaveAudio.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

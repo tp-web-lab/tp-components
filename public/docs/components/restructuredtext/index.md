@@ -472,6 +472,12 @@ CSS properties
 
 
 
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -520,10 +526,15 @@ All tp-components used by `<tp-restructuredtext>` are loaded automatically by th
 @summary reStructuredText parsing and rendering.
 -->
 <!--
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
+-->
+<!--
 @credit highlight.js https://highlightjs.org/
 @summary Source-code syntax highlighting.
 -->
 
 - [tp-restructuredtext](https://www.npmjs.com/package/@tp/tp-restructuredtext) : reStructuredText parsing and rendering.
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 - [highlight.js](https://highlightjs.org/) : Source-code syntax highlighting.
 <!-- tp-docgen:dependencies:end -->

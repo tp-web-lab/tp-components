@@ -17,6 +17,8 @@ import style from "./note.css?inline";
  *   <tp-note ref="example" title="Example"><p>Additional information with <strong>HTML content</strong>.</p></tp-note>
  *   <tp-listof selector="tp-note"></tp-listof>
  * </div>
+ * @accessibility Stores note content in a hidden definition rather than adding an interactive control; tp-ref provides the citation and tp-listof can expose the content in a numbered list.
+ * @accessibilityresponsibility Supply understandable note text and accessible embedded content. Provide a visible notes list for essential information that should remain available independently of reference tooltips.
  */
 export class TpNote extends TpBase {
 	public get ref(): string {

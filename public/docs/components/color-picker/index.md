@@ -70,8 +70,8 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-color-picker-copy-error</code> | <code>&#123; token: unknown; value: string; error: unknown &#125;</code> | Emitted when the clipboard rejects a copy operation. |
-  | <code>tp-color-picker-select</code> | <code>&#123; token: unknown; value: string &#125;</code> | Emitted after a CSS variable reference is selected and copied. |
+  | <code>tp-color-picker-copy-error</code> | <code>&#123; token: string; value: string; error: unknown &#125;</code> | Emitted when copying the selected color token fails. The detail contains the requested clipboard text, selection metadata and the caught error. |
+  | <code>tp-color-picker-select</code> | <code>&#123; token: string; value: string &#125;</code> | Emitted when a color token is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success. |
   [Events emitted by `<tp-color-picker>`]
 
 CSS properties
@@ -85,6 +85,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_color-picker.TpColorPicker.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

@@ -73,11 +73,11 @@ Attributes
 Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
-  | <code>copied-text</code> | <code>string</code> | <code>Copied!</code> | Libellé accessible après une copie réussie. Valeur par défaut : `Copied!`. |
-  | <code>error-icon</code> | <code>string</code> | <code>warning</code> | Nom de l’icône affichée après une erreur. Valeur par défaut : `warning`. |
-  | <code>for</code> | <code>string</code> | <code>&quot;&quot;</code> | Identifiant de l’élément cible. |
-  | <code>icon</code> | <code>string</code> | <code>copy</code> | Nom de l’icône affichée à l’état normal. Valeur par défaut : `copy`. |
-  | <code>success-icon</code> | <code>string</code> | <code>check</code> | Nom de l’icône affichée après une copie réussie. Valeur par défaut : `check`. |
+  | <code>copied-text</code> | <code>string</code> | <code>Copied!</code> | Accessible feedback text after a successful copy; defaults to Copied!. |
+  | <code>error-icon</code> | <code>string</code> | <code>warning</code> | Icon name displayed after a failed clipboard copy; defaults to warning. |
+  | <code>for</code> | <code>string</code> | <code>&quot;&quot;</code> | ID of the element whose source text is copied, without a leading #. |
+  | <code>icon</code> | <code>string</code> | <code>copy</code> | Icon name displayed before copying; defaults to copy. |
+  | <code>success-icon</code> | <code>string</code> | <code>check</code> | Icon name displayed after a successful copy; defaults to check. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -87,21 +87,21 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>copy</code> | <code>copy(): Promise&lt;boolean&gt;</code> | Copie le contenu texte de la cible. |
+  | <code>copy</code> | <code>copy(): Promise&lt;boolean&gt;</code> | Copies the target source text to the clipboard. Resolves to true on success, or false when the target is missing or copying fails; updates feedback and emits the corresponding result event. |
   [Public methods of `TpCopyCode`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-copy-code-error</code> | <code>&#123; message: string &#125;</code> | Émis quand la copie a échoué. |
-  | <code>tp-copy-code-success</code> | <code>&#123; length: unknown; target: unknown &#125;</code> | Émis quand la copie a réussi. |
+  | <code>tp-copy-code-error</code> | <code>&#123; message: string &#125;</code> | Emitted when the target cannot be resolved or its contents cannot be copied; message explains the failure. |
+  | <code>tp-copy-code-success</code> | <code>&#123; length: number; target: HTMLElement &#125;</code> | Emitted after clipboard writing succeeds. The detail gives the copied text length in UTF-16 code units and the source element. |
   [Events emitted by `<tp-copy-code>`]
 
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-copy-code-error-color</code> | <code>red</code> | Controls the error color. |
-  | <code>&#45;&#45;tp-copy-code-success-color</code> | <code>green</code> | Controls the success color. |
+  | <code>&#45;&#45;tp-copy-code-error-color</code> | <code>red</code> | Color of the copy control while reporting a failed clipboard operation. |
+  | <code>&#45;&#45;tp-copy-code-success-color</code> | <code>green</code> | Color of the copy control while confirming a successful clipboard operation. |
   [CSS properties of `<tp-copy-code>`]
 :::
 <!-- /tp-docgen:api -->
@@ -109,6 +109,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_copy-code.TpCopyCode.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

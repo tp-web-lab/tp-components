@@ -33,8 +33,8 @@ const LABEL_POSITIONS = new Set<TpTimefieldLabelPosition>([
  * @attr {string} label = "" - Visible label associated with the native time input.
  * @attr {string} label-position = "top" - Label position (`top`, `bottom`, `start`, or `end`).
  * @attr {string} value = "" - Selected time in `HH:mm` or `HH:mm:ss` format.
- * @attr {string} min = "" - Earliest selectable time.
- * @attr {string} max = "" - Latest selectable time.
+ * @attr {string} min = "" - Earliest selectable time in HH:mm or HH:mm:ss format.
+ * @attr {string} max = "" - Latest selectable time in HH:mm or HH:mm:ss format.
  * @attr {number} step = 60 - Time interval in seconds.
  * @attr {string} placeholder = "" - Hint forwarded to the native input; browsers may ignore it for date and time controls.
  * @attr {string} name = "" - Name submitted with the containing form; defaults to the initial inline content when omitted.
@@ -46,19 +46,19 @@ const LABEL_POSITIONS = new Set<TpTimefieldLabelPosition>([
  * @event input Emitted when the selected time changes while editing.
  * @event change Emitted when the selected time is committed.
  * @event tp-clear Emitted after the embedded button clears the value.
- * @cssprop [--tp-timefield-background=var(--tp-paper-color)] Field background.
- * @cssprop [--tp-timefield-border-color=var(--tp-neutral-stroke-soft)] Field border color.
- * @cssprop [--tp-timefield-focus-color=var(--tp-brand-text-colorful)] Focus border color.
- * @cssprop [--tp-timefield-inline-size=10.5em] Field width.
- * @cssprop [--tp-timefield-label-font-weight=500] Label font weight.
- * @cssprop [--tp-timefield-label-gap=0.35em] Space between the label and its field.
- * @cssprop [--tp-timefield-padding-block=0.6em] Vertical field padding.
- * @cssprop [--tp-timefield-padding-inline=0.75em] Horizontal field padding.
- * @cssprop [--tp-timefield-radius=var(--tp-border-radius-sm)] Field border radius.
- * @cssprop [--tp-timefield-required-color=var(--tp-danger-text-colorful)] Required marker color.
- * @cssprop [--tp-timefield-value-font-weight=400] Selected value font weight.
  * @example
  * <tp-timefield label="Time" value="14:30" clearable></tp-timefield>
+ * @cssprop [--tp-timefield-background=var(--tp-paper-color)] Background of the input control, excluding its label.
+ * @cssprop [--tp-timefield-border-color=var(--tp-neutral-stroke-soft)] Border color of the input control when it is not focused.
+ * @cssprop [--tp-timefield-focus-color=var(--tp-brand-text-colorful)] Border color and translucent outline tint while focus is inside the control.
+ * @cssprop [--tp-timefield-inline-size=10.5em] Preferred width of the field, limited by the available container width.
+ * @cssprop [--tp-timefield-label-font-weight=500] Font weight of the field label.
+ * @cssprop [--tp-timefield-label-gap=0.35em] Space between the label and the input control.
+ * @cssprop [--tp-timefield-padding-block=0.6em] Inner spacing above and below the input value.
+ * @cssprop [--tp-timefield-padding-inline=0.75em] Inner spacing before and after the input value; additional space is reserved for action buttons.
+ * @cssprop [--tp-timefield-radius=var(--tp-border-radius-sm)] Corner radius of the input control.
+ * @cssprop [--tp-timefield-required-color=var(--tp-danger-text-colorful)] Color of the asterisk marking a required field.
+ * @cssprop [--tp-timefield-value-font-weight=400] Font weight of the displayed input value.
  */
 export class TpTimefield extends TpBase {
 	private static readonly styleId = "tp-timefield-styles";

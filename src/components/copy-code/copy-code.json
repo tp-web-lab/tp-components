@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "copied-text",
-      "description": "Libellé accessible après une copie réussie. Valeur par défaut : `Copied!`.",
+      "description": "Accessible feedback text after a successful copy; defaults to Copied!.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -21,7 +21,7 @@
     },
     {
       "name": "error-icon",
-      "description": "Nom de l’icône affichée après une erreur. Valeur par défaut : `warning`.",
+      "description": "Icon name displayed after a failed clipboard copy; defaults to warning.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -30,7 +30,7 @@
     },
     {
       "name": "for",
-      "description": "Identifiant de l’élément cible.",
+      "description": "ID of the element whose source text is copied, without a leading #.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -39,7 +39,7 @@
     },
     {
       "name": "icon",
-      "description": "Nom de l’icône affichée à l’état normal. Valeur par défaut : `copy`.",
+      "description": "Icon name displayed before copying; defaults to copy.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -48,7 +48,7 @@
     },
     {
       "name": "success-icon",
-      "description": "Nom de l’icône affichée après une copie réussie. Valeur par défaut : `check`.",
+      "description": "Icon name displayed after a successful copy; defaults to check.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -60,31 +60,31 @@
     {
       "name": "copy(): Promise<boolean>",
       "inherited": false,
-      "description": "Copie le contenu texte de la cible."
+      "description": "Copies the target source text to the clipboard. Resolves to true on success, or false when the target is missing or copying fails; updates feedback and emits the corresponding result event."
     }
   ],
   "events": [
     {
       "name": "tp-copy-code-error",
-      "description": "Émis quand la copie a échoué.",
+      "description": "Emitted when the target cannot be resolved or its contents cannot be copied; message explains the failure.",
       "detail": "{ message: string }"
     },
     {
       "name": "tp-copy-code-success",
-      "description": "Émis quand la copie a réussi.",
-      "detail": "{ length: unknown; target: unknown }"
+      "description": "Emitted after clipboard writing succeeds. The detail gives the copied text length in UTF-16 code units and the source element.",
+      "detail": "{ length: number; target: HTMLElement }"
     }
   ],
   "cssproperties": [
     {
       "name": "--tp-copy-code-error-color",
       "default": "red",
-      "description": "Controls the error color."
+      "description": "Color of the copy control while reporting a failed clipboard operation."
     },
     {
       "name": "--tp-copy-code-success-color",
       "default": "green",
-      "description": "Controls the success color."
+      "description": "Color of the copy control while confirming a successful clipboard operation."
     }
   ],
   "dependencies": [

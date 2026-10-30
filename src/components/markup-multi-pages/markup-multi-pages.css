@@ -72,7 +72,6 @@ tp-markup-multi-pages,
 }
 
 .tp-markup-multi-pages {
-  --tp-markup-multi-pages-sidebar-width: var(--tp-markup-multi-pages-sidebar-width, 12rem);
   --tp-splitter-divider-size: 0.625rem;
   box-sizing: border-box;
   inline-size: 100%;
@@ -396,7 +395,7 @@ tp-markup-multi-pages,
     position: absolute;
     inset-block: 0;
     inset-inline-start: 0;
-    inline-size: min(var(--tp-markup-multi-pages-sidebar-width), 85%);
+    inline-size: min(var(--tp-markup-multi-pages-sidebar-width, 12rem), 85%);
     border-inline-end: 0;
     border-bottom: 1px solid var(--tp-brand-stroke-soft);
     box-shadow: var(--tp-shadow-loud);

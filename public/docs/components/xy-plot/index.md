@@ -349,7 +349,7 @@ Attributes
   | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Title displayed at the left of the view toolbar. |
   | <code>no-legend</code> | <code>boolean</code> | <code>false</code> | Hides curve legends. |
   | <code>settings</code> | <code>boolean</code> | <code>false</code> | Shows interactive settings below the graph and its controls. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the src. |
+  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a text file containing the XY graph definition; used instead of the inline tp/xy-plot script. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -359,9 +359,9 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>anim</code> | <code>anim(): string</code> | Gets reveal order (JSON for groups), or sets comma-separated names, JSON or step arrays. |
-  | <code>anim</code> | <code>anim(names: string \| XYAnimationStep[]): void</code> | Anim. |
-  | <code>anim</code> | <code>anim(names?: string \| XYAnimationStep[]): string \| undefined</code> | Anim. |
+  | <code>anim</code> | <code>anim(): string</code> | With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value. |
+  | <code>anim</code> | <code>anim(names: string \| XYAnimationStep[]): void</code> | With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value. |
+  | <code>anim</code> | <code>anim(names?: string \| XYAnimationStep[]): string \| undefined</code> | With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value. |
   | <code>exportSvg</code> | <code>exportSvg(): string</code> | Exports the displayed graph with its current viewport, visibility and theme colors. |
   | <code>goToEnd</code> | <code>goToEnd(): void</code> | Reveals all objects in the reveal sequence. |
   | <code>goToStart</code> | <code>goToStart(): void</code> | Hides all objects in the reveal sequence. |
@@ -387,6 +387,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_xy-plot.TpXYPlot.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 
@@ -680,44 +686,12 @@ All tp-components used by `<tp-xy-plot>` are loaded automatically by this compon
 @summary Shared base class for tp-* components.
 -->
 <!--
-@tp-dependency tp-button
-@summary Button component that supports native button and link rendering.
--->
-<!--
-@tp-dependency tp-callout
-@summary Callout component for highlighted contextual content.
--->
-<!--
-@tp-dependency tp-cluster
-@summary Flexible cluster layout component.
--->
-<!--
-@tp-dependency tp-code-editor
-@summary CodeMirror-based code editor component.
--->
-<!--
-@tp-dependency tp-dropdown
-@summary Dropdown menu component.
--->
-<!--
 @tp-dependency tp-icon-button
 @summary Accessible icon button component.
 -->
 <!--
-@tp-dependency tp-radio-list
-@summary Transforms a list into a group of radio buttons.
--->
-<!--
 @tp-dependency tp-save-image
 @summary Downloads an anchored image as SVG, PNG or WebP.
--->
-<!--
-@tp-dependency tp-stack
-@summary Vertical stack layout component.
--->
-<!--
-@tp-dependency tp-textfield
-@summary Single-line and automatically growing multiline text field.
 -->
 <!--
 @tp-dependency tp-theme
@@ -725,16 +699,8 @@ All tp-components used by `<tp-xy-plot>` are loaded automatically by this compon
 -->
 
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
-- [`<tp-cluster>`](../cluster/index.md) : Flexible cluster layout component.
-- [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
-- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-radio-list>`](../radio-list/index.md) : Transforms a list into a group of radio buttons.
 - [`<tp-save-image>`](../save-image/index.md) : Downloads an anchored image as SVG, PNG or WebP.
-- [`<tp-stack>`](../stack/index.md) : Vertical stack layout component.
-- [`<tp-textfield>`](../textfield/index.md) : Single-line and automatically growing multiline text field.
 - [`<tp-theme>`](../theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
 
 ### External

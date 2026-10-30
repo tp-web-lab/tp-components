@@ -204,8 +204,7 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Replaces all files.
-	 * @param files Files to store.
+	 * @summary Replaces the in-memory files with copies, removes states for missing files, refreshes the tree and emits a change event.
 	 */
 	public setFiles(files: readonly TpFile[]): void {
 		this.files = cloneFiles(files);
@@ -215,16 +214,14 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Returns all files.
-	 * @returns Cloned files.
+	 * @summary Returns copies of all in-memory file records; modifying the returned array does not update the component.
 	 */
 	public getFiles(): TpFile[] {
 		return cloneFiles(this.files);
 	}
 
 	/**
-	 * @summary Replaces the full file system state.
-	 * @param state File system state.
+	 * @summary Replaces files and active, open and dirty paths together; removes paths that no longer exist, refreshes the tree and emits change.
 	 */
 	public setState(state: TpFilesystemState): void {
 		this.files = cloneFiles(state.files);
@@ -246,8 +243,7 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Returns the full file system state.
-	 * @returns Current file system state.
+	 * @summary Returns a snapshot of copied files and the current active, open and dirty paths.
 	 */
 	public getState(): TpFilesystemState {
 		return {
@@ -259,9 +255,7 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Reads a file.
-	 * @param path File path.
-	 * @returns File content, or `null` when the file does not exist.
+	 * @summary Returns the content of the normalized file path, or null when no file exists at that path.
 	 */
 	public readFile(path: string): string | null {
 		const normalizedPath = normalizePath(path);
@@ -272,9 +266,7 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Writes file content.
-	 * @param path File path.
-	 * @param content New file content.
+	 * @summary Replaces an existing writable file content, marks it dirty and emits write/change events. Missing and readonly files are unchanged.
 	 */
 	public writeFile(path: string, content: string): void {
 		const normalizedPath = normalizePath(path);
@@ -302,8 +294,7 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Adds a file.
-	 * @param file File to add.
+	 * @summary Adds a copied file record and refreshes the tree; a duplicate normalized path is ignored.
 	 */
 	public addFile(file: TpFile): void {
 		const nextFile = cloneFile(file);
@@ -328,8 +319,7 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Deletes a file.
-	 * @param path File path.
+	 * @summary Deletes an existing writable file and clears its open/dirty state; missing or readonly files are unchanged.
 	 */
 	public deleteFile(path: string): void {
 		const normalizedPath = normalizePath(path);
@@ -361,9 +351,7 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Renames a file.
-	 * @param oldPath Current file path.
-	 * @param newPath New file path.
+	 * @summary Changes the normalized path of a writable file and updates its tracked states. Missing, readonly or unchanged source paths are ignored.
 	 */
 	public renameFile(oldPath: string, newPath: string): void {
 		const normalizedOldPath = normalizePath(oldPath);
@@ -412,9 +400,7 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Moves a file.
-	 * @param oldPath Current file path.
-	 * @param newPath New file path.
+	 * @summary Renames oldPath to newPath using renameFile(), then emits a move notification with the normalized paths.
 	 */
 	public moveFile(oldPath: string, newPath: string): void {
 		const normalizedOldPath = normalizePath(oldPath);
@@ -434,9 +420,7 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Opens a file and makes it active.
-	 * @param path File path.
-	 * @param emitEvent Whether to emit open and active events.
+	 * @summary Marks an existing file as open and active. Set emitEvent to false to suppress open/active notifications.
 	 */
 	public openFile(path: string, emitEvent = true): void {
 		const normalizedPath = normalizePath(path);
@@ -465,8 +449,7 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Closes an open file.
-	 * @param path File path.
+	 * @summary Removes path from the open files; if it was active, activates another open file or clears the active path.
 	 */
 	public closeFile(path: string): void {
 		const normalizedPath = normalizePath(path);
@@ -481,9 +464,7 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Sets the active file path.
-	 * @param path Active file path, or `null`.
-	 * @param emitEvent Whether to emit the active event.
+	 * @summary Sets an existing file as active, or clears it with null. Set emitEvent to false to suppress the active-file notification.
 	 */
 	public setActivePath(path: string | null, emitEvent = true): void {
 		if (path === null) {
@@ -508,16 +489,14 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Returns the active file path.
-	 * @returns Active file path, or `null`.
+	 * @summary Returns the active file path, or null when no file is active.
 	 */
 	public getActivePath(): string | null {
 		return this.activePath;
 	}
 
 	/**
-	 * @summary Replaces dirty file paths.
-	 * @param paths Dirty file paths.
+	 * @summary Replaces the set of modified-file paths and refreshes the tree; unknown paths are discarded.
 	 */
 	public setDirtyPaths(paths: readonly string[]): void {
 		this.dirtyPaths.clear();
@@ -530,8 +509,7 @@ export class TpFilesystem extends TpBase {
 	}
 
 	/**
-	 * @summary Returns dirty file paths.
-	 * @returns Dirty file paths.
+	 * @summary Returns a new array of paths currently marked as modified.
 	 */
 	public getDirtyPaths(): string[] {
 		return Array.from(this.dirtyPaths);

@@ -9,44 +9,12 @@
  * @summary Shared base class for tp-* components.
  */
 /**
- * @tp-dependency tp-button
- * @summary Button component that supports native button and link rendering.
- */
-/**
- * @tp-dependency tp-callout
- * @summary Callout component for highlighted contextual content.
- */
-/**
- * @tp-dependency tp-cluster
- * @summary Flexible cluster layout component.
- */
-/**
- * @tp-dependency tp-code-editor
- * @summary CodeMirror-based code editor component.
- */
-/**
- * @tp-dependency tp-dropdown
- * @summary Dropdown menu component.
- */
-/**
  * @tp-dependency tp-icon-button
  * @summary Accessible icon button component.
  */
 /**
- * @tp-dependency tp-radio-list
- * @summary Transforms a list into a group of radio buttons.
- */
-/**
  * @tp-dependency tp-save-image
  * @summary Downloads an anchored image as SVG, PNG or WebP.
- */
-/**
- * @tp-dependency tp-stack
- * @summary Vertical stack layout component.
- */
-/**
- * @tp-dependency tp-textfield
- * @summary Single-line and automatically growing multiline text field.
  */
 /**
  * @tp-dependency tp-theme
@@ -118,6 +86,7 @@ function escapeHtml(value: string): string {
 /**
  * @summary XY graph rendering component.
  * @tagname tp-xy-plot
+ * @attr {string} src = "" - URL of a text file containing the XY graph definition; used instead of the inline tp/xy-plot script.
  * @attr {"both" | "horizontal" | "vertical" | "none"} grid = "both" - Visible grid directions; overrides the graph directive when present.
  * @attr {"both" | "horizontal" | "vertical" | "none"} axis = "both" - Visible axes and their ticks.
  * @attr {boolean} no-legend = false - Hides curve legends.
@@ -211,9 +180,17 @@ export class TpXYPlot extends TpBase {
 		this.toggleAttribute("no-legend", value);
 	}
 
-	/** Gets reveal order (JSON for groups), or sets comma-separated names, JSON or step arrays. */
+	/**
+	 * @summary With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value.
+	 */
 	public anim(): string;
+	/**
+	 * @summary With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value.
+	 */
 	public anim(names: string | XYAnimationStep[]): void;
+	/**
+	 * @summary With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value.
+	 */
 	public anim(names?: string | XYAnimationStep[]): string | undefined {
 		if (names === undefined) {
 			const sequence = this.animationOverride ?? this.animation;

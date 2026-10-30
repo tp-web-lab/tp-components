@@ -414,6 +414,12 @@ CSS properties
 
 
 
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -466,15 +472,11 @@ All tp-components used by `<tp-html-playground>` are loaded automatically by thi
 -->
 <!--
 @tp-dependency tp-drawer
-@summary Displays a sliding drawer panel.
+@summary Drawer overlay component.
 -->
 <!--
 @tp-dependency tp-dropdown
-@summary Displays an anchored dropdown menu.
--->
-<!--
-@tp-dependency tp-file-tree
-@summary Displays an interactive file and folder tree.
+@summary Dropdown menu component.
 -->
 <!--
 @tp-dependency tp-filesystem
@@ -517,9 +519,8 @@ All tp-components used by `<tp-html-playground>` are loaded automatically by thi
 - [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
 - [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
 - [`<tp-console>`](../console/index.md) : Displays structured console output.
-- [`<tp-drawer>`](../drawer/index.md) : Displays a sliding drawer panel.
-- [`<tp-dropdown>`](../dropdown/index.md) : Displays an anchored dropdown menu.
-- [`<tp-file-tree>`](../file-tree/index.md) : Displays an interactive file and folder tree.
+- [`<tp-drawer>`](../drawer/index.md) : Drawer overlay component.
+- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
 - [`<tp-filesystem>`](../filesystem/index.md) : In-memory file system component.
 - [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
@@ -533,6 +534,10 @@ All tp-components used by `<tp-html-playground>` are loaded automatically by thi
 ### External
 
 <!--
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
+-->
+<!--
 @credit es-module-lexer https://github.com/guybedford/es-module-lexer
 @summary ECMAScript module import analysis.
 -->
@@ -541,21 +546,22 @@ All tp-components used by `<tp-html-playground>` are loaded automatically by thi
 @summary Assertions in browser tests.
 -->
 <!--
-@credit Mocha https://mochajs.org/
-@summary Browser test execution.
+@credit Lit https://lit.dev/
+@summary Web-component examples and import maps.
 -->
 <!--
-@credit TypeScript https://www.typescriptlang.org/
-@summary TypeScript transpilation and language services.
+@credit Mocha https://mochajs.org/
+@summary Browser test execution.
 -->
 <!--
 @credit Zod https://zod.dev/
 @summary Runtime schema validation.
 -->
 
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 - [es-module-lexer](https://github.com/guybedford/es-module-lexer) : ECMAScript module import analysis.
 - [Chai](https://www.chaijs.com/) : Assertions in browser tests.
+- [Lit](https://lit.dev/) : Web-component examples and import maps.
 - [Mocha](https://mochajs.org/) : Browser test execution.
-- [TypeScript](https://www.typescriptlang.org/) : TypeScript transpilation and language services.
 - [Zod](https://zod.dev/) : Runtime schema validation.
 <!-- tp-docgen:dependencies:end -->

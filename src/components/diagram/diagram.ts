@@ -9,6 +9,10 @@ import { reportToolLoaded } from "@tp/tp-utilities";
  * @tp-dependency tp-base
  * @summary Shared base class for tp-* components.
  */
+/**
+ * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+ * @summary Shared parsers, games and rendering utilities.
+ */
 // tp-docgen:dependencies:end
 
 import { TpDeclarativeTextSource } from "../../utilities/declarative-text-source.js";

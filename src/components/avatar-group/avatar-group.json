@@ -43,13 +43,13 @@
   "cssproperties": [
     {
       "name": "--tp-avatar-group-index",
-      "default": "",
-      "description": "Controls the index."
+      "default": "unset",
+      "description": "Stacking order of an individual avatar. Assigned internally on each child from its position and the order attribute; no static CSS default."
     },
     {
       "name": "--tp-avatar-group-overlap",
       "default": "0.75rem",
-      "description": "Controls the overlap."
+      "description": "Overlap distance between adjacent avatars along the current orientation; updated from the offset attribute."
     }
   ],
   "dependencies": [

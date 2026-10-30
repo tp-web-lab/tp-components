@@ -29,6 +29,9 @@ const targets = new WeakMap<HTMLElement, TargetState>();
  * @example
  * <tp-textfield id="mask-answer" label="Answer" value="Thursday" clearable></tp-textfield>
  * <tp-mask anchor="#mask-answer" active>The answer is hidden until the review.</tp-mask>
+ * @accessibility An active mask hides its target with display:none, inert and aria-hidden, and moves focus to the replacement message if focus was inside the target.
+ * @accessibility Restores the target's previous display, inert and aria-hidden state when the last mask releases it; the target and its existing controls are preserved.
+ * @accessibilityresponsibility Provide a clear replacement message explaining why the content is unavailable and any available next action; label interactive controls placed in that message.
  */
 export class TpMask extends TpBase {
 	private target: HTMLElement | null = null;

@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "src",
-      "description": "Controls the src.",
+      "description": "URL of a Markdown source file to fetch and render; relative paths resolve against the containing source document when available.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -30,7 +30,7 @@
   "events": [
     {
       "name": "tp-markdown-rendered",
-      "description": "Emitted when markdown rendered occurs.",
+      "description": "Emitted after Markdown and its runtime extensions are rendered, or after a source/conversion error is displayed. This event alone does not indicate successful conversion.",
       "detail": "void"
     }
   ],

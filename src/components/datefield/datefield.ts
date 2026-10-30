@@ -46,19 +46,19 @@ const LABEL_POSITIONS = new Set<TpDatefieldLabelPosition>([
  * @event input Emitted when the selected date changes while editing.
  * @event change Emitted when the selected date is committed.
  * @event tp-clear Emitted after the embedded button clears the value.
- * @cssprop [--tp-datefield-background=var(--tp-paper-color)] Field background.
- * @cssprop [--tp-datefield-border-color=var(--tp-neutral-stroke-soft)] Field border color.
- * @cssprop [--tp-datefield-focus-color=var(--tp-brand-text-colorful)] Focus border color.
- * @cssprop [--tp-datefield-inline-size=12.5em] Field width.
- * @cssprop [--tp-datefield-label-font-weight=500] Label font weight.
- * @cssprop [--tp-datefield-label-gap=0.35em] Space between the label and its field.
- * @cssprop [--tp-datefield-padding-block=0.6em] Vertical field padding.
- * @cssprop [--tp-datefield-padding-inline=0.75em] Horizontal field padding.
- * @cssprop [--tp-datefield-radius=var(--tp-border-radius-sm)] Field border radius.
- * @cssprop [--tp-datefield-required-color=var(--tp-danger-text-colorful)] Required marker color.
- * @cssprop [--tp-datefield-value-font-weight=400] Selected value font weight.
  * @example
  * <tp-datefield label="Date" value="2026-09-03" clearable></tp-datefield>
+ * @cssprop [--tp-datefield-background=var(--tp-paper-color)] Background of the input control, excluding its label.
+ * @cssprop [--tp-datefield-border-color=var(--tp-neutral-stroke-soft)] Border color of the input control when it is not focused.
+ * @cssprop [--tp-datefield-focus-color=var(--tp-brand-text-colorful)] Border color and translucent outline tint while focus is inside the control.
+ * @cssprop [--tp-datefield-inline-size=12.5em] Preferred width of the field, limited by the available container width.
+ * @cssprop [--tp-datefield-label-font-weight=500] Font weight of the field label.
+ * @cssprop [--tp-datefield-label-gap=0.35em] Space between the label and the input control.
+ * @cssprop [--tp-datefield-padding-block=0.6em] Inner spacing above and below the input value.
+ * @cssprop [--tp-datefield-padding-inline=0.75em] Inner spacing before and after the input value; additional space is reserved for action buttons.
+ * @cssprop [--tp-datefield-radius=var(--tp-border-radius-sm)] Corner radius of the input control.
+ * @cssprop [--tp-datefield-required-color=var(--tp-danger-text-colorful)] Color of the asterisk marking a required field.
+ * @cssprop [--tp-datefield-value-font-weight=400] Font weight of the displayed input value.
  */
 export class TpDatefield extends TpBase {
 	private static readonly styleId = "tp-datefield-styles";

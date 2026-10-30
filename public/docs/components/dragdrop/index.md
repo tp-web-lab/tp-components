@@ -130,10 +130,10 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-dragdrop-drop</code> | <code>&#123; source: &quot;api&quot; \| &quot;script&quot; \| &quot;src&quot; \| &quot;value&quot;; target: unknown; position: unknown &#125;</code> | Emitted when an item is dropped; consumers decide how to move it. |
+  | <code>tp-dragdrop-drop</code> | <code>&#123; source: HTMLElement; target: HTMLElement \| null; position: &quot;before&quot; \| &quot;inside&quot; \| &quot;after&quot; \| null &#125;</code> | Emitted when a drop is requested by pointer or keyboard. The consumer must move source relative to target at position; the component does not move it automatically. |
   | <code>tp-dragdrop-end</code> | <code>void</code> | Emitted when a drag ends or a keyboard drag is cancelled. |
-  | <code>tp-dragdrop-over</code> | <code>&#123; source: &quot;api&quot; \| &quot;script&quot; \| &quot;src&quot; \| &quot;value&quot;; target: unknown; position: unknown &#125;</code> | Emitted when the drop target or position changes. |
-  | <code>tp-dragdrop-start</code> | <code>&#123; source: &quot;api&quot; \| &quot;script&quot; \| &quot;src&quot; \| &quot;value&quot; &#125;</code> | Emitted when a drag starts. |
+  | <code>tp-dragdrop-over</code> | <code>&#123; source: HTMLElement; target: HTMLElement \| null; position: &quot;before&quot; \| &quot;inside&quot; \| &quot;after&quot; \| null &#125;</code> | Emitted when the proposed target or relative insertion position changes; source and target identify HTML elements. |
+  | <code>tp-dragdrop-start</code> | <code>&#123; source: HTMLElement &#125;</code> | Emitted when an item is grabbed by pointer or keyboard; source is the dragged HTML element. |
   [Events emitted by `<tp-dragdrop>`]
 
 CSS properties
@@ -147,6 +147,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_dragdrop.TpDragdrop.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

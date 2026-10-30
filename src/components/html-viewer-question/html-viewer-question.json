@@ -15,79 +15,28 @@
   "cssproperties": [],
   "dependencies": [
     {
-      "name": "tp-base",
-      "summary": "Shared base class for tp-* components."
-    },
-    {
-      "name": "tp-button",
-      "summary": "Button component that supports native button and link rendering."
-    },
-    {
-      "name": "tp-code-editor",
-      "summary": "CodeMirror-based code editor component."
-    },
-    {
       "name": "tp-console",
       "summary": "Displays structured console output."
-    },
-    {
-      "name": "tp-drawer",
-      "summary": "Displays a sliding drawer panel."
-    },
-    {
-      "name": "tp-dropdown",
-      "summary": "Displays an anchored dropdown menu."
-    },
-    {
-      "name": "tp-file-tree",
-      "summary": "Displays an interactive file and folder tree."
-    },
-    {
-      "name": "tp-filesystem",
-      "summary": "In-memory file system component."
     },
     {
       "name": "tp-html-viewer",
       "summary": "Interactive HTML viewer with editable source, live rendering, and DOM inspection."
     },
     {
-      "name": "tp-icon",
-      "summary": "SVG icon component with inline, URL, and registry sources."
-    },
-    {
-      "name": "tp-icon-button",
-      "summary": "Accessible icon button component."
-    },
-    {
       "name": "tp-iframe",
       "summary": "Controlled iframe component."
     },
     {
-      "name": "tp-menu",
-      "summary": "Accessible menu component."
-    },
-    {
       "name": "tp-question",
       "summary": "Base description-list container for question components."
-    },
-    {
-      "name": "tp-splitter",
-      "summary": "Splitter component with two resizable panels."
-    },
-    {
-      "name": "tp-switcher",
-      "summary": "Switches between horizontal and vertical layouts based on available space."
-    },
-    {
-      "name": "tp-tabs",
-      "summary": "Accessible tabs component with keyboard and reorder support."
-    },
-    {
-      "name": "tp-toolbar",
-      "summary": "Sticky toolbar with start / center / end sections,"
     }
   ],
   "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    },
     {
       "name": "es-module-lexer",
       "url": "https://github.com/guybedford/es-module-lexer",
@@ -107,16 +56,6 @@
       "name": "Mocha",
       "url": "https://mochajs.org/",
       "summary": "Browser test execution."
-    },
-    {
-      "name": "TypeScript",
-      "url": "https://www.typescriptlang.org/",
-      "summary": "TypeScript transpilation and language services."
-    },
-    {
-      "name": "Zod",
-      "url": "https://zod.dev/",
-      "summary": "Runtime schema validation."
     }
   ],
   "userHelp": {

@@ -432,6 +432,12 @@ CSS properties
 
 
 
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -476,9 +482,7 @@ All tp-components used by `<tp-asciidoc>` are loaded automatically by this compo
 ### External
 
 <!--
-@credit tp-asciidoc https://www.npmjs.com/package/@tp/tp-asciidoc
-@summary AsciiDoc parsing and rendering.
+@summary No external dependency.
 -->
-
-- [tp-asciidoc](https://www.npmjs.com/package/@tp/tp-asciidoc) : AsciiDoc parsing and rendering.
+No external dependency
 <!-- tp-docgen:dependencies:end -->

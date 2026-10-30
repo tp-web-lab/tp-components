@@ -87,7 +87,7 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>toast</code> | <code>toast(delay = 3000): void</code> | Displays the callout as a toast. |
+  | <code>toast</code> | <code>toast(delay = 3000): void</code> | Shows the callout as a status toast and closes it after delay milliseconds. A zero or negative delay keeps it open; calling again replaces the previous timeout. |
   [Public methods of `TpCallout`]
 
 Events
@@ -99,16 +99,16 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-callout-accent</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Accent color. Default: `var(--tp-neutral-text-colorful)`. |
-  | <code>&#45;&#45;tp-callout-background</code> | <code>transparent</code> | Background color. Default: `var(--tp-neutral-fill-softer)`. |
-  | <code>&#45;&#45;tp-callout-border-color</code> | <code>var(&#45;&#45;tp-brand-stroke-soft)</code> | Border color. Default: `var(--tp-neutral-stroke-soft)`. |
-  | <code>&#45;&#45;tp-callout-border-width</code> | <code>4px</code> | Leading border width. Default: `4px`. |
-  | <code>&#45;&#45;tp-callout-foreground</code> | <code>var(&#45;&#45;tp-brand-text-on-soft)</code> | Text color. Default: `var(--tp-text-body)`. |
-  | <code>&#45;&#45;tp-callout-heading-font-size</code> | <code>1rem</code> | Heading font size. Default: `1rem`. |
-  | <code>&#45;&#45;tp-callout-heading-gap</code> | <code>0.625rem</code> | Gap below the heading. Default: `0.625rem`. |
-  | <code>&#45;&#45;tp-callout-padding-block</code> | <code>0.875rem</code> | Block padding. Default: `0.875rem`. |
-  | <code>&#45;&#45;tp-callout-padding-inline</code> | <code>1rem</code> | Inline padding. Default: `1rem`. |
-  | <code>&#45;&#45;tp-callout-radius</code> | <code>0.75rem</code> | Border radius. Default: `0.75rem`. |
+  | <code>&#45;&#45;tp-callout-accent</code> | <code>var(&#45;&#45;tp-neutral-text-colorful)</code> | Color of the leading emphasis border; depends on variant. |
+  | <code>&#45;&#45;tp-callout-background</code> | <code>var(&#45;&#45;tp-neutral-fill-softer)</code> | Background color of the callout; depends on variant and appearance. |
+  | <code>&#45;&#45;tp-callout-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Color of the thin outer border, excluding the leading emphasis border. |
+  | <code>&#45;&#45;tp-callout-border-width</code> | <code>4px</code> | Thickness of the leading emphasis border. |
+  | <code>&#45;&#45;tp-callout-foreground</code> | <code>var(&#45;&#45;tp-text-body)</code> | Text color of the heading and body. |
+  | <code>&#45;&#45;tp-callout-heading-font-size</code> | <code>1rem</code> | Font size of the callout heading. |
+  | <code>&#45;&#45;tp-callout-heading-gap</code> | <code>0.625rem</code> | Space between the heading and body. |
+  | <code>&#45;&#45;tp-callout-padding-block</code> | <code>0.875rem</code> | Inner spacing above and below the callout content. |
+  | <code>&#45;&#45;tp-callout-padding-inline</code> | <code>1rem</code> | Inner spacing before and after the callout content. |
+  | <code>&#45;&#45;tp-callout-radius</code> | <code>0.75rem</code> | Corner radius of the callout panel. |
   [CSS properties of `<tp-callout>`]
 :::
 <!-- /tp-docgen:api -->
@@ -116,6 +116,12 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_callout.TpCallout.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
 
 
 

@@ -273,6 +273,9 @@ export class TpDropdown extends TpOverlayElement {
 		this.open = !this.open;
 	}
 
+	/**
+	 * @summary Opens the dropdown by setting its open state and positioning it relative to its anchor.
+	 */
 	public override show(): void {
 		this.scrollTop = 0;
 		super.show();

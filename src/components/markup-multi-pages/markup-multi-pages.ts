@@ -29,6 +29,10 @@
  * @summary Fullscreen controller button.
  */
 /**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
  * @tp-dependency tp-icon-button
  * @summary Accessible icon button component.
  */
@@ -69,6 +73,7 @@
 import { TpBase } from "../base/base.js";
 import sidebarToolsStyle from "../markup-multi-pages/sidebar-tools.css?inline";
 import { appendSidebarTools } from "../markup-multi-pages/sidebar-tools.js";
+import { updateDocumentLogo } from "../toolbar/document-logo.js";
 import "../toolbar/toolbar.js";
 import "../calculator/calculator.js";
 import { TpDrawer } from "../drawer/drawer.js";
@@ -133,12 +138,20 @@ function highlightRestructuredTextSource(source: string): string {
 /**
  * @summary Multi-page documentation with support for multiple markup languages.
  * @tagname tp-markup-multi-pages
+ * @attr {string} repository = "/docs" - Root path containing the sidebar, cover and linked documents. The component selects the corresponding HTML, Markdown, AsciiDoc or reStructuredText files.
+ * @attr {boolean} menu = false - Opens the navigation sidebar when present; the toolbar Menu button toggles this attribute.
+ * @attr {string} label = "" - Title displayed in the center of the document toolbar.
+ * @attr {string} git = "" - Repository URL assigned to the toolbar source link when the document shell is created. Set before connecting the component.
+ * @attr {TpMarkupMultiPagesTheme} theme = "" - Legacy light, dark or auto property. Attribute-driven styling is currently inactive; use the toolbar theme control.
+ * @attr {string} brand = "tp-default" - Legacy brand preset property, such as tp-default. Attribute-driven styling is currently inactive; use the toolbar color control.
  * @example
  * <tp-markup-multi-pages></tp-markup-multi-pages>
+ * @cssprop [--tp-markup-multi-pages-sidebar-width=12rem] Width of the overlay navigation sidebar on narrow screens, capped at 85% of its container; desktop sizing is controlled by the splitter.
  */
 export class TpMarkupMultiPages extends TpBase {
 	public static get observedAttributes(): string[] {
 		return [
+			"logo",
 			"repository",
 			/*'theme', 'brand',*/ "label",
 			"git",
@@ -221,6 +234,10 @@ export class TpMarkupMultiPages extends TpBase {
 			void this.initialize();
 		}
 
+		if (name === "logo") {
+			updateDocumentLogo(this.querySelector("tp-toolbar"), this.logo);
+		}
+
 		if (name === "label") {
 			this.applyLabel();
 		}
@@ -258,6 +275,19 @@ export class TpMarkupMultiPages extends TpBase {
 
 	public set brand(value: string) {
 		this.setAttribute("brand", value);
+	}
+
+	/**
+	 * @summary Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo.
+	 * @attr logo
+	 * @default ""
+	 */
+	public get logo(): string {
+		return this.getAttribute("logo") ?? "";
+	}
+
+	public set logo(value: string) {
+		this.setAttribute("logo", value);
 	}
 
 	public get label(): string {
@@ -403,6 +433,7 @@ export class TpMarkupMultiPages extends TpBase {
         </tp-splitter>
       </div>
     `;
+		updateDocumentLogo(this.querySelector("tp-toolbar"), this.logo);
 
 		this.querySelector('[data-action="calculator"]')?.addEventListener(
 			"click",

@@ -51,15 +51,11 @@
     },
     {
       "name": "tp-drawer",
-      "summary": "Displays a sliding drawer panel."
+      "summary": "Drawer overlay component."
     },
     {
       "name": "tp-dropdown",
-      "summary": "Displays an anchored dropdown menu."
-    },
-    {
-      "name": "tp-file-tree",
-      "summary": "Displays an interactive file and folder tree."
+      "summary": "Dropdown menu component."
     },
     {
       "name": "tp-filesystem",
@@ -100,19 +96,24 @@
   ],
   "credits": [
     {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    },
+    {
       "name": "es-module-lexer",
       "url": "https://github.com/guybedford/es-module-lexer",
       "summary": "ECMAScript module import analysis."
     },
     {
+      "name": "Lit",
+      "url": "https://lit.dev/",
+      "summary": "Web-component examples and import maps."
+    },
+    {
       "name": "Pyodide",
       "url": "https://pyodide.org/",
       "summary": "Python execution in the browser."
-    },
-    {
-      "name": "TypeScript",
-      "url": "https://www.typescriptlang.org/",
-      "summary": "TypeScript transpilation and language services."
     },
     {
       "name": "Zod",

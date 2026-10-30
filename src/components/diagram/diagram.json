@@ -53,7 +53,13 @@
       "summary": "Shared base class for tp-* components."
     }
   ],
-  "credits": [],
+  "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    }
+  ],
   "userHelp": {
     "displayName": "Diagram",
     "introduction": "The custom `<tp-diagram>` element renders flowcharts, sequence diagrams, class diagrams and the other diagram types supported by [Mermaid](https://mermaid.js.org/).",
