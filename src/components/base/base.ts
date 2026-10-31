@@ -13,6 +13,7 @@ import type { TpComponentUserHelp } from "../../utilities/component-user-help.js
 import { createHelpButtonTable } from "../../utilities/help-buttons.js";
 import { formatHelpKeyboard } from "../../utilities/help-keyboard.js";
 import baseStyle from "./base.css?inline";
+import helpStyle from "./help.css?inline";
 import resetStyle from "./tp-reset.css?inline";
 import tokenStyle from "./tp-tokens.css?inline";
 
@@ -263,6 +264,8 @@ export class TpBase extends HTMLElement {
 
 		await import("../drawer/drawer.js");
 		await import("../markdown/markdown.js");
+		await import("../button/button.js");
+		this.ensureGlobalStyle("tp-component-help-styles", helpStyle);
 
 		const drawer = this.getOrCreateHelpDrawer();
 		drawer.setAttribute("label", "User help");
@@ -271,12 +274,44 @@ export class TpBase extends HTMLElement {
 		drawer.setAttribute("outside-click", "");
 		drawer.setAttribute("backdrop", "");
 
-		const content = this.renderHelpContent(api);
-		if (typeof drawer.setContent === "function") {
-			drawer.setContent(content);
-		} else {
-			drawer.replaceChildren(content);
+		const navigation = document.createElement("div");
+		navigation.className = "tp-component-help-navigation";
+		navigation.setAttribute("role", "group");
+		navigation.setAttribute("aria-label", "Help audience");
+		drawer.querySelector(".tp-component-help-navigation")?.remove();
+		drawer.querySelector("[data-tp-drawer-header]")?.prepend(navigation);
+		const views = new Map<string, HTMLElement>();
+		const labels = ["User help", "Author help", "Developer help"];
+		const select = (label: string): void => {
+			let content = views.get(label);
+			if (!content) {
+				content =
+					label === "User help"
+						? this.renderHelpContent(api)
+						: this.renderReferenceHelp(api, label === "Developer help");
+				views.set(label, content);
+			}
+			drawer.setAttribute("label", label);
+			for (const button of navigation.querySelectorAll("tp-button")) {
+				const selected = button.dataset.helpView === label;
+				button.setAttribute("variant", selected ? "brand" : "neutral");
+				button.toggleAttribute("outlined", !selected);
+				button
+					.querySelector("button")
+					?.setAttribute("aria-pressed", String(selected));
+			}
+			if (typeof drawer.setContent === "function") drawer.setContent(content);
+			else drawer.append(content);
+		};
+		for (const label of labels) {
+			const button = document.createElement("tp-button");
+			button.textContent = label;
+			button.dataset.helpView = label;
+			button.setAttribute("size", "s");
+			button.addEventListener("click", () => select(label));
+			navigation.append(button);
 		}
+		select("User help");
 
 		drawer.show?.();
 	}
@@ -724,6 +759,75 @@ export class TpBase extends HTMLElement {
 		drawer.id = "tp-component-help-drawer";
 		parent.append(drawer);
 		return drawer;
+	}
+
+	/** Resolves host-configured documentation roots while retaining deployment prefixes. */
+	private helpReferenceRoot(name: string, fallback: string): URL {
+		const configured = document.querySelector<HTMLMetaElement>(
+			`meta[name="${name}"]`,
+		)?.content;
+		const root = new URL(configured || fallback, document.baseURI);
+		if (!root.pathname.endsWith("/")) root.pathname += "/";
+		return root;
+	}
+
+	/** Builds the selected component's author guide or generated TypeDoc class reference. */
+	private renderReferenceHelp(
+		api: TpComponentApiManifest,
+		developer: boolean,
+	): HTMLElement {
+		const component = api.tagname.replace(/^tp-/, "");
+		const section = document.createElement("section");
+		section.className = "tp-component-reference-help";
+		const title = document.createElement("h2");
+		title.textContent = api.userHelp?.displayName || api.tagname;
+		section.append(title);
+		if (developer) {
+			const root = this.helpReferenceRoot("tp-components-api-root", "/api/");
+			const status = document.createElement("p");
+			status.setAttribute("role", "status");
+			status.textContent = "Loading API reference…";
+			section.append(status);
+			void this.loadDeveloperHelp(api, root, section, status);
+		} else {
+			const root = this.helpReferenceRoot(
+				"tp-components-docs-root",
+				"/docs/components/",
+			);
+			const guide = document.createElement("tp-markdown");
+			guide.setAttribute("src", new URL(`${component}/index.md`, root).href);
+			section.append(guide);
+		}
+		return section;
+	}
+
+	/** Uses the generated class-page map because TypeDoc filenames vary by module. */
+	private async loadDeveloperHelp(
+		api: TpComponentApiManifest,
+		root: URL,
+		section: HTMLElement,
+		status: HTMLElement,
+	): Promise<void> {
+		try {
+			const response = await fetch(new URL("component-pages.json", root));
+			if (!response.ok) throw new Error("API reference index is unavailable.");
+			const pages = (await response.json()) as Record<string, string>;
+			const path = pages[api.tagname];
+			if (typeof path !== "string" || !path.startsWith("classes/"))
+				throw new Error(`No API reference is available for ${api.tagname}.`);
+			await import("../iframe/iframe.js");
+			const frame = document.createElement("tp-iframe");
+			frame.setAttribute("src", new URL(path, root).href);
+			frame.setAttribute("title", `${api.classname} API reference`);
+			status.remove();
+			section.append(frame);
+		} catch (error) {
+			status.setAttribute("role", "alert");
+			status.textContent =
+				error instanceof Error
+					? error.message
+					: "Unable to load API reference.";
+		}
 	}
 
 	/** Builds reader help without author controls, source code or class metadata. */

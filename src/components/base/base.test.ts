@@ -521,6 +521,141 @@ describe("<tp-base>", () => {
 		expect(help).toHaveBeenCalledTimes(1);
 	});
 
+	it("switches help audiences for the selected component using configured reference roots", async () => {
+		const api = {
+			tagname: "tp-base-fixture",
+			classname: "TpBaseFixture",
+			examples: [],
+			attributes: [],
+			methods: [],
+			events: [],
+			cssproperties: [],
+		};
+		const fetchMock = vi.fn(async (input: string | URL) => {
+			const url = String(input);
+			if (url.endsWith("component-pages.json"))
+				return {
+					ok: true,
+					json: async () => ({
+						"tp-base-fixture": "classes/custom_module.TpBaseFixture.html",
+					}),
+				};
+			if (url.endsWith("index.md"))
+				return { ok: true, text: async () => "# Author guide" };
+			return { ok: true, json: async () => api };
+		});
+		vi.stubGlobal("fetch", fetchMock);
+		const metas = ["docs", "api"].map((kind) => {
+			const meta = document.createElement("meta");
+			meta.name = `tp-components-${kind}-root`;
+			meta.content = `/prefix/components/${kind}/`;
+			document.head.append(meta);
+			return meta;
+		});
+		try {
+			document.body.innerHTML =
+				'<tp-base-fixture data-tp-help-src="/help/fixture.json"></tp-base-fixture>';
+			const fixture = required(
+				document.querySelector<TpBaseFixture>("tp-base-fixture"),
+			);
+			await fixture.help();
+			const drawer = required(
+				document.getElementById("tp-component-help-drawer"),
+			);
+			const buttons = drawer.querySelectorAll<HTMLElement>(
+				".tp-component-help-navigation tp-button",
+			);
+			expect(Array.from(buttons, (button) => button.textContent)).toEqual([
+				"User help",
+				"Author help",
+				"Developer help",
+			]);
+			expect(
+				buttons[0]?.querySelector("button")?.getAttribute("aria-pressed"),
+			).toBe("true");
+			expect(
+				fetchMock.mock.calls.some(([url]) =>
+					String(url).includes("component-pages"),
+				),
+			).toBe(false);
+			buttons[1]?.click();
+			expect(
+				drawer.querySelector("tp-markdown[src]")?.getAttribute("src"),
+			).toBe(
+				new URL(
+					"/prefix/components/docs/base-fixture/index.md",
+					document.baseURI,
+				).href,
+			);
+			buttons[2]?.click();
+			await vi.waitFor(() =>
+				expect(drawer.querySelector("tp-iframe")?.getAttribute("src")).toBe(
+					new URL(
+						"/prefix/components/api/classes/custom_module.TpBaseFixture.html",
+						document.baseURI,
+					).href,
+				),
+			);
+			expect(
+				buttons[2]?.querySelector("button")?.getAttribute("aria-pressed"),
+			).toBe("true");
+			buttons[0]?.click();
+			expect(
+				drawer.querySelector(".tp-component-help-preview tp-base-fixture"),
+			).not.toBeNull();
+			expect(drawer.querySelector("tp-iframe")).toBeNull();
+			await fixture.help();
+			expect(
+				drawer.querySelectorAll(".tp-component-help-navigation"),
+			).toHaveLength(1);
+			expect(drawer.getAttribute("label")).toBe("User help");
+		} finally {
+			for (const meta of metas) meta.remove();
+		}
+	});
+
+	it("keeps user help available when the developer reference index is missing", async () => {
+		vi.stubGlobal(
+			"fetch",
+			vi.fn(async (input: string | URL) =>
+				String(input).endsWith("component-pages.json")
+					? { ok: false }
+					: {
+							ok: true,
+							json: async () => ({
+								tagname: "tp-base-fixture",
+								classname: "TpBaseFixture",
+								examples: [],
+								attributes: [],
+								methods: [],
+								events: [],
+								cssproperties: [],
+							}),
+						},
+			),
+		);
+		document.body.innerHTML =
+			'<tp-base-fixture data-tp-help-src="/help/fixture.json"></tp-base-fixture>';
+		await required(
+			document.querySelector<TpBaseFixture>("tp-base-fixture"),
+		).help();
+		const drawer = required(
+			document.getElementById("tp-component-help-drawer"),
+		);
+		required(
+			drawer.querySelector<HTMLElement>('[data-help-view="Developer help"]'),
+		).click();
+		await vi.waitFor(() =>
+			expect(drawer.querySelector('[role="alert"]')?.textContent).toContain(
+				"unavailable",
+			),
+		);
+		required(
+			drawer.querySelector<HTMLElement>('[data-help-view="User help"]'),
+		).click();
+		expect(drawer.querySelector(".tp-component-help-preview")).not.toBeNull();
+	});
+
 	it("does not duplicate keyboard metadata when reader help already contains its table", async () => {
 		const interactions =
 			"#### Mouse interactions\n\n| Control | Result |\n| --- | --- |\n| Heading | Toggle content. |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| Ctrl+? | Open User Help. |\n| Enter | Toggle content. |";

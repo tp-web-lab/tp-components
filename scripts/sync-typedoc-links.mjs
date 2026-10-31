@@ -1,3 +1,4 @@
+import { writeComponentApiMap } from './write-component-api-map.mjs';
 /** @module scripts/sync-typedoc-links */
 
 /**
@@ -65,3 +66,5 @@ for (const componentDirectory of readdirSync(componentsRoot)) {
 }
 
 console.log(`Linked ${linked} component pages to the generated TypeDoc API.`);
+
+writeComponentApiMap(componentsRoot, join(root, 'public/api'));

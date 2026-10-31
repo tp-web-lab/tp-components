@@ -1,0 +1,46 @@
+/* Keep audience navigation in the help drawer header while its content scrolls. */
+#tp-component-help-drawer [data-tp-drawer-title] {
+  display: none;
+}
+
+.tp-component-help-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.tp-component-reference-help {
+  min-inline-size: 0;
+}
+
+.tp-component-reference-help > tp-iframe {
+  display: block;
+  inline-size: 100%;
+  min-block-size: 0;
+}
+
+#tp-component-help-drawer[label="Developer help"] > [data-tp-drawer-header] {
+  flex-shrink: 0;
+}
+
+#tp-component-help-drawer[label="Developer help"] > [data-tp-drawer-content] {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#tp-component-help-drawer[label="Developer help"] .tp-component-reference-help {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-block-size: 0;
+}
+
+#tp-component-help-drawer[label="Developer help"] .tp-component-reference-help > h2 {
+  flex-shrink: 0;
+  margin-block-start: 0;
+}
+
+#tp-component-help-drawer[label="Developer help"] .tp-component-reference-help > tp-iframe {
+  flex: 1 1 0;
+}
