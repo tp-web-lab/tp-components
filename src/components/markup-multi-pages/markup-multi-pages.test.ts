@@ -136,6 +136,23 @@ describe("<tp-markup-multi-pages>", () => {
 		expect(element.querySelector("main tp-markdown")).toBeNull();
 	});
 
+	it("restores the current link when the sidebar reloads around an unchanged page", async () => {
+		mockDocsFetch({
+			"/docs/sidebar.md": "- [Home](cover.html)",
+			"/docs/cover.html": "<h1>Home</h1>",
+		});
+		const element = new TpMarkupMultiPages();
+		element.setAttribute("repository", "/docs");
+		document.body.append(element);
+		await waitFor(() => element.querySelector("main h1") !== null);
+		await invoke<Promise<void>>(element, "loadSidebar");
+		expect(element.querySelector("a[aria-current=page]")).toBeNull();
+		await invoke<Promise<void>>(element, "navigate", "/docs/cover.html");
+		expect(element.querySelector("a[aria-current=page]")?.textContent).toBe(
+			"Home",
+		);
+	});
+
 	it("loads generated HTML while preserving routes, source and resource bases", async () => {
 		mockDocsFetch({
 			"/docs/sidebar.html":

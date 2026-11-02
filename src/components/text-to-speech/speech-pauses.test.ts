@@ -25,6 +25,12 @@ async function mount(text: string, pause = 800) {
 	reader.setAttribute("value", text);
 	reader.setAttribute("show-text", "");
 	reader.pauseBetweenLines = pause;
+	// Isolate explicit commands and line gaps from the automatic punctuation defaults.
+	reader.pauseAfterComma = 0;
+	reader.pauseAfterSemicolon = 0;
+	reader.pauseAfterColon = 0;
+	reader.pauseAfterSentence = 0;
+	reader.pausePerBlankLine = 0;
 	document.body.append(reader);
 	for (let i = 0; i < 8; i++) await Promise.resolve();
 	return reader;

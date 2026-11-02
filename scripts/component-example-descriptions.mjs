@@ -17,6 +17,8 @@ import { describeAttributeControl } from "./interactive-attribute-examples.mjs";
 
 /** Editorial objectives for the existing examples; no descriptions are inferred from titles alone. */
 const basic = {
+ "slide-note": "Expand Speaker notes, read the transcript and try the inherited speech controls. Collapse the panel while narration continues.",
+ "video-player": "Play the three-second moving-shapes clip, pause it and seek with the native video controls.",
  "exercise": "Read the shared museum context, answer both questions and submit each answer to inspect its feedback and solution.",
  "mask": "Read the replacement message hiding the answer field. The target remains in the document with its value preserved.",
  "audio-recorder": "Record a short response, stop, replay it and download the audio. Clear removes the local recording.",
@@ -383,9 +385,15 @@ const additional = {
 };
 
 export function describeExample(component, label) {
+ if (component === 'text-to-speech' && label === 'Automatic pauses') return 'Press Speak to hear configurable punctuation and blank-line pauses without commands in the text. Pause freezes the remaining silence and Stop cancels it.';
+ if (component.endsWith('-multi-slides') && label === 'Automatic notes') return 'Press Play to read the speaker notes; each clic trigger reveals a step or opens the next slide. Try Pause, Resume and Stop.';
+ if (component.endsWith('-multi-slides') && label === 'Timed steps') return 'Press Play to reveal each progressive step and change slides every five seconds. Pause preserves the remaining interval; manual navigation stops playback.';
+ if (component === 'text-to-speech' && label === 'Named triggers') return 'Press Speak and watch the counter change exactly when each named trigger is reached. Pause and Stop prevent queued triggers from firing.';
+ if (component === "video-player" && label === "YouTube video") return "Play the author’s French virtual-reality introduction with the YouTube controls. Internet access and an embeddable video are required.";
  if (component === "speech-to-text" && label === "Recording") return "In Safari, select Start, wait for audio capture, then speak and select Stop. Review the transcript and replay the recording. Other browsers show a warning and offer transcription alone.";
  if (component === "exercise" && label === "Nested exercises") return "Answer a standalone question, then expand the nested exercise to read its own context and answer its question. Collapse and reopen either exercise: answers are preserved.";
- if (component === "text-to-speech" && label === "Dialogue") return "Read a dialogue using named browser voices and pauses. Unavailable names fall back to the component voice; [voice=default] restores it explicitly.";
+ if (component === "slide-note" && label === "External notes") return "Expand the notes loaded from a text file and start reading. The standard speech settings and pauses apply to this source too.";
+	if (component === "text-to-speech" && label === "Dialogue") return "Read a dialogue using named browser voices and pauses. Unavailable names fall back to the component voice; [voice=default] restores it explicitly.";
  if (component === "text-to-speech" && label === "Pauses") return "Read the illustration prompt and four choices with 800-millisecond line pauses. The introduction uses a longer explicit pause and choice A adds a short inline pause. Try Pause, Resume and Stop during silence.";
  if (component === "exercise" && label === "Timed exercise") return "Select Start to reveal the context and both questions for ten seconds. After expiry, select Continue to recover the answers without restarting the countdown.";
  if (component === "question" && label === "Optional score") return "Type blue and submit to see the numerical grade enabled by score. Remove score in the source and submit again: correction remains available, but the grade is hidden.";

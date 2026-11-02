@@ -67,13 +67,28 @@ type SpeechGlobals = {
  * @attr {string} voice = "" - Preferred installed voice name or language tag.
  * @attr {number} rate = 1 - Speech rate from 0.1 to 10.
  * @attr {number} pause-between-lines = 0 - Silence in milliseconds between nonempty lines; an explicit [pause=...] overrides it at a line boundary.
+ * @attr {number} pause-per-blank-line = 1000 - Additional milliseconds for each blank or whitespace-only line between spoken passages; consecutive blank lines accumulate.
+ * @attr {number} pause-after-comma = 200 - Additional silence in milliseconds after commas at a word boundary; zero preserves browser prosody without adding a timer.
+ * @attr {number} pause-after-semicolon = 400 - Additional silence in milliseconds after semicolons at a word boundary; zero preserves browser prosody without adding a timer.
+ * @attr {number} pause-after-colon = 400 - Additional silence in milliseconds after colons at a word boundary; zero preserves browser prosody without adding a timer.
+ * @attr {number} pause-after-sentence = 600 - Additional silence in milliseconds after sentence punctuation (. ! ? and ellipses) at a word boundary; zero preserves browser prosody without adding a timer.
  * @attr {number} pitch = 1 - Speech pitch from 0 to 2.
  * @attr {number} volume = 1 - Speech volume from 0 to 1.
  * @attr {boolean} autoplay = false - Starts reading after the source is loaded when browser policy permits it.
  * @event tp-text-to-speech-start Emitted when speech starts.
  * @eventdetail tp-text-to-speech-start { text: string }
- * @event tp-text-to-speech-end Emitted when speech ends or is stopped.
+ * @event tp-text-to-speech-end Emitted when the complete reading finishes.
  * @eventdetail tp-text-to-speech-end { text: string }
+ * @event tp-text-to-speech-trigger Emitted when a named trigger command is reached during playback; commands are never spoken or shown.
+ * @eventdetail tp-text-to-speech-trigger { name: string; offset: number }
+ * @event tp-text-to-speech-pause Emitted when active playback is paused.
+ * @eventdetail tp-text-to-speech-pause { }
+ * @event tp-text-to-speech-resume Emitted when paused playback resumes.
+ * @eventdetail tp-text-to-speech-resume { }
+ * @event tp-text-to-speech-stop Emitted when active playback is cancelled, including source changes.
+ * @eventdetail tp-text-to-speech-stop { }
+ * @event tp-text-to-speech-ready Emitted when the current source is loaded and the controls are ready.
+ * @eventdetail tp-text-to-speech-ready { }
  * @event tp-text-to-speech-error Emitted when loading or speech synthesis fails.
  * @eventdetail tp-text-to-speech-error { error: string }
  * @accessibility Uses labelled tp-button controls and announces its current state through a polite status region.
@@ -114,6 +129,11 @@ export class TpTextToSpeech extends TpBase {
 			"volume",
 			"autoplay",
 			"pause-between-lines",
+			"pause-per-blank-line",
+			"pause-after-comma",
+			"pause-after-semicolon",
+			"pause-after-colon",
+			"pause-after-sentence",
 		];
 	}
 
@@ -140,6 +160,52 @@ export class TpTextToSpeech extends TpBase {
 	public set pauseBetweenLines(value: number) {
 		this.setAttribute("pause-between-lines", String(value));
 	}
+	/** Additional milliseconds for each blank line between spoken passages. */
+	public get pausePerBlankLine(): number {
+		return pauseMilliseconds(
+			this.getAttribute("pause-per-blank-line") ?? "1000",
+		);
+	}
+	public set pausePerBlankLine(value: number) {
+		this.setAttribute("pause-per-blank-line", String(value));
+	}
+
+	/** Additional milliseconds after commas. */
+	public get pauseAfterComma(): number {
+		return pauseMilliseconds(this.getAttribute("pause-after-comma") ?? "200");
+	}
+	public set pauseAfterComma(value: number) {
+		this.setAttribute("pause-after-comma", String(value));
+	}
+
+	/** Additional milliseconds after semicolons. */
+	public get pauseAfterSemicolon(): number {
+		return pauseMilliseconds(
+			this.getAttribute("pause-after-semicolon") ?? "400",
+		);
+	}
+	public set pauseAfterSemicolon(value: number) {
+		this.setAttribute("pause-after-semicolon", String(value));
+	}
+
+	/** Additional milliseconds after colons. */
+	public get pauseAfterColon(): number {
+		return pauseMilliseconds(this.getAttribute("pause-after-colon") ?? "400");
+	}
+	public set pauseAfterColon(value: number) {
+		this.setAttribute("pause-after-colon", String(value));
+	}
+
+	/** Additional milliseconds after sentence punctuation (. ! ? and ellipses). */
+	public get pauseAfterSentence(): number {
+		return pauseMilliseconds(
+			this.getAttribute("pause-after-sentence") ?? "600",
+		);
+	}
+	public set pauseAfterSentence(value: number) {
+		this.setAttribute("pause-after-sentence", String(value));
+	}
+
 	/** Sequence used to discard stale asynchronous loads. */
 	private updateToken = 0;
 	/** Linked visual text, controlled only while this component owns it. */
@@ -301,7 +367,7 @@ export class TpTextToSpeech extends TpBase {
 	/** Reacts to source and visible-text attribute changes after connection. */
 	protected attributeChangedCallback(name: string): void {
 		if (name === "legend") {
-			const legend = this.querySelector(":scope > fieldset > legend");
+			const legend = this.querySelector(".tp-speech-fieldset > legend");
 			if (legend)
 				legend.textContent = this.getAttribute("legend") ?? "Text to speech";
 			return;
@@ -311,7 +377,12 @@ export class TpTextToSpeech extends TpBase {
 			void this.updateText();
 
 		if (name === "show-text") this.render();
-		if (name === "pause-between-lines") this.stop();
+		if (
+			name === "pause-between-lines" ||
+			name === "pause-per-blank-line" ||
+			name.startsWith("pause-after-")
+		)
+			this.stop();
 		if (name === "lite") {
 			this.stop();
 			this.render();
@@ -351,8 +422,14 @@ export class TpTextToSpeech extends TpBase {
 		if (synthesis === undefined || Utterance === undefined || this.text === "")
 			return;
 		this.stop();
-		const steps = speechSequence(this.text, this.pauseBetweenLines);
-		if (!steps.some((step) => "text" in step)) return;
+		const steps = speechSequence(this.text, this.pauseBetweenLines, {
+			blankLine: this.pausePerBlankLine,
+			comma: this.pauseAfterComma,
+			semicolon: this.pauseAfterSemicolon,
+			colon: this.pauseAfterColon,
+			sentence: this.pauseAfterSentence,
+		});
+		if (!steps.some((step) => "text" in step || "trigger" in step)) return;
 		const id = this.playbackId;
 		this.playbackActive = true;
 		this.setState("speaking");
@@ -384,6 +461,14 @@ export class TpTextToSpeech extends TpBase {
 			while (index < steps.length) {
 				const step = steps[index++];
 				if (!step) break;
+				if ("trigger" in step) {
+					this.emit("tp-text-to-speech-trigger", {
+						name: step.trigger,
+						offset: step.offset,
+					});
+					if (id !== this.playbackId || this.dataset.state === "paused") return;
+					continue;
+				}
 				if ("pause" in step) {
 					if (!step.pause) continue;
 					this.pauseRemaining = step.pause;
@@ -466,12 +551,16 @@ export class TpTextToSpeech extends TpBase {
 			);
 		} else if (this.utterance) this.getSpeechGlobals().speechSynthesis?.pause();
 		this.setState("paused");
+		this.emit("tp-text-to-speech-pause", {});
 	}
 
 	/** Resumes speech or the remainder of a scheduled silence. */
 	public resume(): void {
 		if (!this.playbackActive || this.dataset.state !== "paused") return;
 		this.setState("speaking");
+		this.emit("tp-text-to-speech-resume", {});
+		if (!this.playbackActive || this.getAttribute("data-state") !== "speaking")
+			return;
 		if (this.utterance) this.getSpeechGlobals().speechSynthesis?.resume();
 		else if (this.pauseRemaining > 0) this.schedulePause();
 		else this.advancePlayback?.();
@@ -479,6 +568,7 @@ export class TpTextToSpeech extends TpBase {
 
 	/** Cancels speech, queued segments and scheduled silence. */
 	public stop(): void {
+		const wasActive = this.playbackActive;
 		this.playbackId++;
 		this.playbackActive = false;
 		this.advancePlayback = null;
@@ -489,6 +579,7 @@ export class TpTextToSpeech extends TpBase {
 		this.getSpeechGlobals().speechSynthesis?.cancel();
 		this.linkedTypewriting?.endSpeech(this);
 		if (this.isConnected) this.setState("idle");
+		if (wasActive) this.emit("tp-text-to-speech-stop", {});
 	}
 
 	/** Returns text from the highest-priority declarative source. */
@@ -500,6 +591,7 @@ export class TpTextToSpeech extends TpBase {
 
 	/** Refreshes component state after resolving its current text. */
 	private async updateText(): Promise<void> {
+		this.removeAttribute("data-tp-speech-ready");
 		if (this.playbackActive) this.stop();
 		const token = ++this.updateToken;
 		try {
@@ -507,6 +599,8 @@ export class TpTextToSpeech extends TpBase {
 			if (token !== this.updateToken) return;
 			this.text = text;
 			this.render();
+			this.setAttribute("data-tp-speech-ready", "");
+			this.emit("tp-text-to-speech-ready", {});
 			if (this.autoplay) void this.speak();
 		} catch (error) {
 			if (token !== this.updateToken) return;
@@ -517,7 +611,7 @@ export class TpTextToSpeech extends TpBase {
 	}
 
 	/** Renders visible text, playback controls and the status region. */
-	private render(): void {
+	protected render(): void {
 		// Initial attribute callbacks may render before connectedCallback during upgrade.
 		// Preserve author content before replacing the light DOM in every render path.
 		this.source.capture();
@@ -561,7 +655,7 @@ export class TpTextToSpeech extends TpBase {
 			`tp-icon-button[id="${this.settingsId}"]`,
 		);
 		const dropdown = this.querySelector<TpDropdown>(
-			`:scope > .tp-speech-fieldset > tp-dropdown[id="${this.settingsId}-menu"]`,
+			`.tp-speech-fieldset > tp-dropdown[id="${this.settingsId}-menu"]`,
 		);
 		trigger?.toggleAttribute("disabled", !supported);
 		trigger?.addEventListener("click", () => {
@@ -596,7 +690,7 @@ export class TpTextToSpeech extends TpBase {
 	/** Lists voices in the lang family without changing the author's language. */
 	private refreshVoiceMenu(): void {
 		const menu = this.querySelector(
-			`:scope > .tp-speech-fieldset > tp-dropdown[id="${this.settingsId}-menu"] > ul`,
+			`.tp-speech-fieldset > tp-dropdown[id="${this.settingsId}-menu"] > ul`,
 		);
 		if (!menu) return;
 		const language =
@@ -633,7 +727,7 @@ export class TpTextToSpeech extends TpBase {
 				this.stop();
 				this.voice = option.name;
 				this.querySelector<TpDropdown>(
-					`:scope > .tp-speech-fieldset > tp-dropdown[id="${this.settingsId}-menu"]`,
+					`.tp-speech-fieldset > tp-dropdown[id="${this.settingsId}-menu"]`,
 				)?.hide();
 				this.querySelector("tp-icon-button")?.querySelector("button")?.focus();
 			});

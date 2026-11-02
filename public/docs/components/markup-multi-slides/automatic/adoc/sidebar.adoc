@@ -1,0 +1,2 @@
+* link:cover.adoc[First slide]
+* link:two.adoc[Second slide]

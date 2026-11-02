@@ -628,6 +628,7 @@ export class TpMarkupMultiPages extends TpBase {
 			this.resolveDocumentHref(href),
 		);
 		if (!force && this.currentHref === documentHref && !this.sourceMode) {
+			this.updateCurrentLink(documentHref);
 			this.scrollToFragment(fragment);
 			return;
 		}

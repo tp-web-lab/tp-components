@@ -42,7 +42,7 @@ const settle = async (): Promise<void> => {
 describe("<tp-text-to-speech>", () => {
 	it("reads ordinary document elements without changing their content or including controls", async () => {
 		document.body.innerHTML =
-			'<article id="article"><h2>A title</h2><p>Hello <strong>world</strong>.<br>Next line.</p><p hidden>Hidden</p><p style="display:none">Invisible</p><span aria-hidden="true">Decorative</span><button>Ignore button</button><script>ignoreScript()</script><tp-text-to-speech for="article" value="Ignored" show-text></tp-text-to-speech></article>';
+			'<article id="article"><h2>A title</h2><p>Hello <strong>world</strong>.<br>Next line.</p><p hidden>Hidden</p><p style="display:none">Invisible</p><span aria-hidden="true">Decorative</span><button>Ignore button</button><script>ignoreScript()</script><tp-text-to-speech pause-after-sentence="0" pause-per-blank-line="0" for="article" value="Ignored" show-text></tp-text-to-speech></article>';
 		const reader = document.querySelector("tp-text-to-speech");
 		const strong = document.querySelector("strong");
 		if (!reader) throw new Error("Missing reader");
@@ -116,7 +116,7 @@ describe("<tp-text-to-speech>", () => {
 	}
 	it("synchronizes linked formatted text, pause/resume, stop and stale utterances", async () => {
 		document.body.innerHTML =
-			'<tp-typewriting id="reading" speed="1000" loop><p>Hello <strong>world</strong> again.</p></tp-typewriting><tp-text-to-speech for="reading" value="Ignored"></tp-text-to-speech>';
+			'<tp-typewriting id="reading" speed="1000" loop><p>Hello <strong>world</strong> again.</p></tp-typewriting><tp-text-to-speech pause-after-sentence="0" for="reading" value="Ignored"></tp-text-to-speech>';
 		const reader = document.querySelector("tp-text-to-speech");
 		const target = document.querySelector("tp-typewriting");
 		if (!reader || !target) throw new Error("Missing fixture");
@@ -156,7 +156,7 @@ describe("<tp-text-to-speech>", () => {
 	});
 	it("keeps text readable without boundaries and handles content changes, errors and retargeting", async () => {
 		document.body.innerHTML =
-			'<tp-typewriting id="one"><p>A <strong>😀 word</strong></p><p>Next</p><button>Ignore</button></tp-typewriting><tp-typewriting id="two">Second</tp-typewriting><tp-text-to-speech for="one"></tp-text-to-speech>';
+			'<tp-typewriting id="one"><p>A <strong>😀 word</strong></p><p>Next</p><button>Ignore</button></tp-typewriting><tp-typewriting id="two">Second</tp-typewriting><tp-text-to-speech pause-per-blank-line="0" for="one"></tp-text-to-speech>';
 		const reader = document.querySelector("tp-text-to-speech");
 		const target = document.querySelector("tp-typewriting");
 		if (!reader || !target) throw new Error("Missing fixture");
@@ -246,7 +246,7 @@ describe("<tp-text-to-speech>", () => {
 		);
 	});
 	it("preserves the introductory script when an already connected element is upgraded", async () => {
-		document.body.innerHTML = `<tp-speech-upgrade-test lang="en-US" show-text>
+		document.body.innerHTML = `<tp-speech-upgrade-test pause-after-sentence="0" lang="en-US" show-text>
 		  <script type="tp/txt">Welcome to tp-components. This example uses the browser speech synthesis service.</script>
 		</tp-speech-upgrade-test>`;
 		const Base = customElements.get("tp-text-to-speech");
@@ -319,6 +319,7 @@ describe("<tp-text-to-speech>", () => {
 		const element = document.createElement("tp-text-to-speech");
 		element.setAttribute("lang", "en-US");
 		element.setAttribute("voice", "Demo voice");
+		element.setAttribute("pause-after-sentence", "0");
 		element.setAttribute("rate", "1.5");
 		element.setAttribute("pitch", "1.2");
 		element.setAttribute("volume", "0.8");

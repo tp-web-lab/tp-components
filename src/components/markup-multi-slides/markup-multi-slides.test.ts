@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import "./markup-multi-slides.js";
+import "../menu/menu.js";
 import "../html-multi-slides/html-multi-slides.js";
 import "../markdown-multi-slides/markdown-multi-slides.js";
 import "../asciidoc-multi-slides/asciidoc-multi-slides.js";
@@ -167,6 +168,20 @@ describe("<tp-markup-multi-slides>", () => {
 		expect(secondStep.hasAttribute("data-slide-fragment-hidden")).toBe(true);
 		expect(firstStep.getAttribute("aria-hidden")).toBe("true");
 
+		const modes = document.createElement("tp-menu");
+		modes.setAttribute("orientation", "horizontal");
+		modes.innerHTML = "<ul><li>Manual</li><li>Narration</li></ul>";
+		document.body.append(modes);
+		const modeItem = modes.querySelector("li");
+		for (const key of ["ArrowRight", "ArrowLeft", "Enter", " "]) {
+			modeItem?.dispatchEvent(
+				new KeyboardEvent("keydown", { key, bubbles: true, cancelable: true }),
+			);
+		}
+		expect(firstStep.hasAttribute("data-slide-fragment-hidden")).toBe(true);
+		expect(secondStep.hasAttribute("data-slide-fragment-hidden")).toBe(true);
+		modes.remove();
+
 		presentation
 			.querySelector<HTMLElement>('[data-slide-direction="next"]')
 			?.click();
@@ -244,6 +259,32 @@ describe("<tp-markup-multi-slides>", () => {
 		sync.call(presentation);
 		expect(ticks?.options.length).toBe(3);
 		expect(slider?.max).toBe("3");
+	});
+
+	it.each([
+		"tp-markup-multi-slides",
+		"tp-html-multi-slides",
+		"tp-markdown-multi-slides",
+		"tp-asciidoc-multi-slides",
+		"tp-restructuredtext-multi-slides",
+	] as const)("inherits opt-in auto and validated step timing in %s", (tag) => {
+		const presentation = document.createElement(tag);
+		expect(presentation.auto).toBe("");
+		expect(presentation.timing).toBe(5000);
+		presentation.setAttribute("auto", "notes");
+		expect(presentation.auto).toBe("notes");
+		presentation.auto = "timing";
+		expect(presentation.getAttribute("auto")).toBe("timing");
+		presentation.timing = 1250;
+		expect(presentation.timing).toBe(1250);
+		for (const value of ["0", "-1", "NaN", "Infinity", "1.5", "2147483648"]) {
+			presentation.setAttribute("timing", value);
+			expect(presentation.timing).toBe(5000);
+		}
+		presentation.setAttribute("auto", "unknown");
+		expect(presentation.auto).toBe("");
+		presentation.auto = "";
+		expect(presentation.hasAttribute("auto")).toBe(false);
 	});
 
 	it("preserves slide progression attributes on standard Markdown directives", async () => {

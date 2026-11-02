@@ -270,7 +270,8 @@ ${basic.source.match(/<tp-toolbar\b[^>]*>[\s\S]*?<\/tp-toolbar>/)?.[0] ?? basic.
 				"data-tp-help-src",
 				"data-tp-markdown-source",
 			].includes(setting.name) ||
-			(component === "memory" && setting.name === "back")
+			(component === "memory" && setting.name === "back") ||
+            (component === "video-player" && setting.name === "poster")
 		) {
 			setting.kind = "file";
 			setting.choices = fileChoices(component, setting, examples);

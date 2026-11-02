@@ -87,6 +87,38 @@ describe("<tp-menu>", () => {
 		expect(items[1]?.getAttribute("aria-expanded")).toBe("true");
 	});
 
+	it.each(["Enter", " "])("activates a leaf item with %j", (key) => {
+		const menu = createMenu();
+		const item = menu.querySelector("li");
+		let selected: HTMLLIElement | null = null;
+		menu.addEventListener("tp-menu-item-select", (event) => {
+			selected = (event as CustomEvent<{ item: HTMLLIElement }>).detail.item;
+		});
+		item?.dispatchEvent(
+			new KeyboardEvent("keydown", { key, bubbles: true, cancelable: true }),
+		);
+		expect(selected).toBe(item);
+	});
+	it("activates a leaf link once from the menu item's keyboard focus", () => {
+		const menu = createMenu();
+		const item = menu.querySelector("li");
+		if (!item) throw new Error("Missing item");
+		item.innerHTML = '<a href="/notes.html" target="_blank">Notes</a>';
+		let clicks = 0;
+		item.querySelector("a")?.addEventListener("click", (event) => {
+			event.preventDefault();
+			clicks++;
+		});
+		item.dispatchEvent(
+			new KeyboardEvent("keydown", {
+				key: "Enter",
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+		expect(clicks).toBe(1);
+	});
+
 	it("toggles submenu on Enter", () => {
 		const element = createMenu();
 		const items = element.querySelectorAll("li");

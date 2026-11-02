@@ -12,22 +12,136 @@
  * @tp-dependency tp-numberfield
  * @summary Numeric field with an optional native range slider.
  */
+/**
+ * @tp-dependency tp-slide-note
+ * @summary Collapsible speaker notes with speech playback and presentation docking.
+ */
+/**
+ * @tp-dependency tp-text-to-speech
+ * @summary Reads textual component content aloud with the Web Speech API.
+ */
 // tp-docgen:dependencies:end
 
 import { TpMarkupMultiPages } from "../markup-multi-pages/markup-multi-pages.js";
 import "../numberfield/numberfield.js";
+import "../slide-note/slide-note.js";
+import { TpTextToSpeech } from "../text-to-speech/text-to-speech.js";
 import style from "./markup-multi-slides.css?inline";
+import { type SlideAutoMode, SlidePlayback } from "./slide-playback.js";
 
 /**
  * Uses the complete multi-pages implementation and replaces only its rendered
  * previous/next navigation with slide controls.
  *
  * @summary presents multi-format pages as a responsive slide deck.
+ * @attr {"" | "notes" | "timing"} auto = "" - Enables automatic playback controls. notes follows the current tp-text-to-speech[data-slide-notes] and its [trigger=clic] commands; timing advances each progressive step on a clock. Absent or invalid values keep manual navigation.
+ * @attr {number} timing = 5000 - Positive integer milliseconds per progressive step in timing mode, also used when notes are absent or finished.
  * @tagname tp-markup-multi-slides
  * @example
  * <tp-markup-multi-slides repository="/slides"></tp-markup-multi-slides>
  */
 export class TpMarkupMultiSlides extends TpMarkupMultiPages {
+	public static override get observedAttributes(): string[] {
+		return [...TpMarkupMultiPages.observedAttributes, "auto", "timing"];
+	}
+
+	/** Configured playback mode; an empty value preserves manual navigation. */
+	public get auto(): SlideAutoMode {
+		const value = this.getAttribute("auto");
+		return value === "notes" || value === "timing" ? value : "";
+	}
+	public set auto(value: SlideAutoMode) {
+		if (value) this.setAttribute("auto", value);
+		else this.removeAttribute("auto");
+	}
+
+	/** Milliseconds before revealing the next step or moving to the next slide. */
+	public get timing(): number {
+		const value = this.getAttribute("timing") ?? "";
+		return /^\d+$/.test(value) &&
+			Number(value) > 0 &&
+			Number(value) <= 2_147_483_647
+			? Number(value)
+			: 5000;
+	}
+	public set timing(value: number) {
+		this.setAttribute("timing", String(value));
+	}
+
+	/** Starts or resumes the configured automatic playback after user activation. */
+	public playAuto(): void {
+		this.syncAutomatic();
+		this.playback.play();
+	}
+	/** Freezes the current voice or the remaining clock interval. */
+	public pauseAuto(): void {
+		this.playback.pause();
+	}
+	/** Cancels automatic playback while retaining the current slide and reveals. */
+	public stopAuto(): void {
+		this.automaticHash = null;
+		this.playback.stop();
+	}
+
+	private readonly playback = new SlidePlayback(
+		() => {
+			const step = this.progressIndex < this.progressSteps.length;
+			this.automaticNavigation = true;
+			const advanced = this.advanceProgress();
+			if (advanced && !step)
+				this.automaticHash =
+					this.ownerDocument.defaultView?.location.hash ?? null;
+			this.automaticNavigation = false;
+			return !advanced ? "end" : step ? "step" : "slide";
+		},
+		() => this.syncAutoControls(),
+		() => {
+			this.progressIndex = 0;
+			for (const element of this.progressElements) {
+				element.setAttribute("data-slide-fragment-hidden", "");
+				element.setAttribute("aria-hidden", "true");
+			}
+			this.updateArrowStates();
+		},
+	);
+	private automaticNavigation = false;
+	private automaticHash: string | null = null;
+	private handleAutoRoute = (): void => {
+		const hash = this.ownerDocument.defaultView?.location.hash;
+		if (hash === this.automaticHash) {
+			this.automaticHash = null;
+			return;
+		}
+		this.stopAuto();
+	};
+
+	protected override attributeChangedCallback(name: string): void {
+		super.attributeChangedCallback(name);
+		if (name === "repository" && this.playback) this.stopAuto();
+		if ((name === "auto" || name === "timing") && this.playback) {
+			this.playback.configure(this.auto, this.timing);
+			this.scheduleNavigationSync();
+		}
+	}
+
+	private handleManualNavigation = (event: Event): void => {
+		if (this.automaticNavigation) return;
+		const target = event.target;
+		if (
+			!(target instanceof Element) ||
+			target.closest(
+				"tp-text-to-speech, [data-slide-notes-panel], [data-slide-auto-action], summary",
+			)
+		)
+			return;
+		if (
+			target.closest(
+				".tp-markup-multi-pages-content, .tp-markup-multi-pages-sidebar a, [data-slide-direction], .tp-markup-multi-slides-navigation tp-numberfield, [data-action=home], [data-action=code]",
+			)
+		)
+			this.stopAuto();
+	};
+
 	/** Allocate a distinct datalist for each presentation in the same document. */
 	private static nextTicksId = 0;
 	/** Stable identifier retained across slide changes. */
@@ -49,11 +163,24 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 		this.ownerDocument.addEventListener("keydown", this.handleKeydown);
 		this.addEventListener("click", this.handleProgressClick);
 		this.addEventListener("contextmenu", this.handleProgressContextMenu);
+		this.addEventListener("click", this.handleManualNavigation, true);
+		this.addEventListener("input", this.handleManualNavigation, true);
+		this.ownerDocument.defaultView?.addEventListener(
+			"hashchange",
+			this.handleAutoRoute,
+		);
 		this.observeNavigation();
 		this.scheduleNavigationSync();
 	}
 
 	public override disconnectedCallback(): void {
+		this.playback.dispose();
+		this.ownerDocument.defaultView?.removeEventListener(
+			"hashchange",
+			this.handleAutoRoute,
+		);
+		this.removeEventListener("click", this.handleManualNavigation, true);
+		this.removeEventListener("input", this.handleManualNavigation, true);
 		this.navigationObserver?.disconnect();
 		this.navigationObserver = null;
 		this.ownerDocument.removeEventListener("keydown", this.handleKeydown);
@@ -64,6 +191,7 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 
 	private handleKeydown = (event: KeyboardEvent): void => {
 		if (
+			event.defaultPrevented ||
 			!["ArrowLeft", "ArrowRight", "Enter", " ", "Backspace"].includes(
 				event.key,
 			) ||
@@ -79,11 +207,12 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 		if (
 			target instanceof Element &&
 			target.closest(
-				"input, textarea, select, button, a, [contenteditable], tp-code-editor",
+				"input, textarea, select, button, a, tp-menu, [contenteditable], tp-code-editor, [data-slide-notes-panel], [data-slide-notes]",
 			) !== null
 		)
 			return;
 
+		this.stopAuto();
 		const handled =
 			event.key === "ArrowLeft" || event.key === "Backspace"
 				? this.rewindProgress()
@@ -101,7 +230,7 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 			return;
 		if (
 			target.closest(
-				"a, button, input, textarea, select, summary, [contenteditable], tp-code-editor",
+				"a, button, input, textarea, select, summary, [contenteditable], tp-code-editor, [data-slide-notes-panel], [data-slide-notes]",
 			) !== null
 		)
 			return;
@@ -117,10 +246,11 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 			return;
 		if (
 			target.closest(
-				"a, button, input, textarea, select, summary, [contenteditable], tp-code-editor",
+				"a, button, input, textarea, select, summary, [contenteditable], tp-code-editor, [data-slide-notes-panel], [data-slide-notes]",
 			) !== null
 		)
 			return;
+		this.stopAuto();
 		if (!this.rewindProgress()) return;
 		event.preventDefault();
 	};
@@ -182,7 +312,13 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 			childList: true,
 			subtree: true,
 			attributes: true,
-			attributeFilter: ["aria-current"],
+			attributeFilter: [
+				"aria-current",
+				"data-tp-markdown-rendered",
+				"data-tp-asciidoc-rendered",
+				"data-tp-restructuredtext-rendered",
+				"data-tp-speech-ready",
+			],
 		});
 	}
 
@@ -220,6 +356,7 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 		}
 
 		this.syncProgress();
+		this.syncAutomatic();
 
 		const signature = `${index}:${links.length}`;
 		if (existing?.dataset.signature === signature) return;
@@ -267,6 +404,7 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 		this.syncSlideTicks(navigation, links.length);
 		this.querySelector(".tp-markup-multi-pages")?.append(navigation);
 		this.updateArrowStates();
+		this.syncAutoControls();
 	}
 
 	/** Maintain one native tick mark per slide without recreating the slider. */
@@ -298,7 +436,11 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 			),
 		).filter((element) => {
 			const step = Number(element.dataset.slideStep);
-			return Number.isInteger(step) && step >= 1;
+			return (
+				Number.isInteger(step) &&
+				step >= 1 &&
+				element.closest("[data-slide-notes]") === null
+			);
 		});
 		const unchanged =
 			page === this.progressPage &&
@@ -327,6 +469,73 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 			}
 		}
 		this.revealPreviousSlideOnLoad = false;
+	}
+
+	private syncAutomatic(): void {
+		this.playback.configure(this.auto, this.timing);
+		const page = this.querySelector(
+			".tp-markup-multi-pages-content > :first-child",
+		);
+		const reader = page?.querySelector(
+			"tp-slide-note, tp-text-to-speech[data-slide-notes]",
+		);
+		const markup =
+			page?.matches("tp-markdown, tp-asciidoc, tp-restructuredtext") ?? false;
+		const ready =
+			page !== null &&
+			(!markup ||
+				page.matches(
+					"[data-tp-markdown-rendered], [data-tp-asciidoc-rendered], [data-tp-restructuredtext-rendered]",
+				));
+		this.playback.sync(
+			page,
+			reader instanceof TpTextToSpeech ? reader : null,
+			ready,
+		);
+		this.syncAutoControls();
+	}
+
+	private syncAutoControls(): void {
+		const controls = this.querySelector(".tp-markup-multi-slides-controls");
+		if (!controls) return;
+		let buttons = controls.querySelector(".tp-markup-multi-slides-auto");
+		if (!this.auto) {
+			buttons?.remove();
+			return;
+		}
+		if (!buttons) {
+			buttons = this.ownerDocument.createElement("span");
+			buttons.className = "tp-markup-multi-slides-auto";
+			buttons.setAttribute("data-help-group", "Automatic playback");
+			for (const action of ["play", "stop"] as const) {
+				const button = this.ownerDocument.createElement("tp-icon-button");
+				button.dataset.slideAutoAction = action;
+				button.setAttribute("name", action === "play" ? "play" : "stop");
+				button.setAttribute(
+					"label",
+					action === "play" ? "Play automatically" : "Stop automatic playback",
+				);
+				button.addEventListener("click", () => {
+					if (action === "stop") this.stopAuto();
+					else if (this.playback.state === "playing") this.pauseAuto();
+					else this.playAuto();
+				});
+				buttons.append(button);
+			}
+			controls.prepend(buttons);
+		}
+		const play = buttons.querySelector('[data-slide-auto-action="play"]');
+		const playing = this.playback.state === "playing";
+		play?.setAttribute("name", playing ? "pause" : "play");
+		play?.setAttribute(
+			"label",
+			playing ? "Pause automatic playback" : "Play automatically",
+		);
+		play?.setAttribute("aria-pressed", String(playing));
+		buttons
+			.querySelector('[data-slide-auto-action="stop"]')
+			?.toggleAttribute("disabled", this.playback.state === "stopped");
+		this.dataset.slidePlayback = this.playback.state;
 	}
 
 	private createArrow(

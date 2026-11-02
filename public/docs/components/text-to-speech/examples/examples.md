@@ -37,7 +37,22 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ::: tp-textfield { data-setting="legend" label="legend" value="Text to speech" placeholder="Text to speech" clearable }
 :::
 
+::: tp-textfield { data-setting="pause-after-colon" label="pause-after-colon" value="400" placeholder="400" clearable }
+:::
+
+::: tp-textfield { data-setting="pause-after-comma" label="pause-after-comma" value="200" placeholder="200" clearable }
+:::
+
+::: tp-textfield { data-setting="pause-after-semicolon" label="pause-after-semicolon" value="400" placeholder="400" clearable }
+:::
+
+::: tp-textfield { data-setting="pause-after-sentence" label="pause-after-sentence" value="600" placeholder="600" clearable }
+:::
+
 ::: tp-textfield { data-setting="pause-between-lines" label="pause-between-lines" value="0" placeholder="0" clearable }
+:::
+
+::: tp-textfield { data-setting="pause-per-blank-line" label="pause-per-blank-line" value="1000" placeholder="1000" clearable }
 :::
 
 ::: tp-textfield { data-setting="pitch" label="pitch" value="1" placeholder="1" clearable }
@@ -142,6 +157,34 @@ Voice names depend on your browser and system. This dialogue uses Daniel and Kat
 [voice=Kate] Very well, thank you. [pause=600]
 [voice=Daniel] Shall we begin?
 [voice=default] End of the dialogue.
+:::
+::::
+```
+
+``` example {label="Named triggers"}
+:::: tp-text-to-speech { data-trigger-demo lang="en-GB" show-text }
+::: script { type="tp/txt" }
+Listen to the first idea. [trigger=clic] Now the second idea. [pause=500] [trigger=clic] Finished.
+:::
+::::
+
+::: div { data-trigger-status role="status" }
+No trigger yet.
+:::
+
+::: script { type="module" src="/docs/components/text-to-speech/examples/triggers.js" }
+:::
+```
+
+``` example {label="Automatic pauses"}
+:::: tp-text-to-speech { lang="en-GB" show-text pause-after-comma="200" pause-after-semicolon="400" pause-after-colon="400" pause-after-sentence="600" pause-per-blank-line="1000" }
+::: script { type="tp/txt" }
+First, listen to this idea; then consider the next one: punctuation sets the pace. Do you hear the pauses? Good!
+
+A new paragraph follows one blank line.
+
+
+Two blank lines add a longer break.
 :::
 ::::
 ```

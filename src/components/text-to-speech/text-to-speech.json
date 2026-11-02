@@ -47,6 +47,42 @@
       "default": "false"
     },
     {
+      "name": "pause-after-colon",
+      "description": "Additional silence in milliseconds after colons at a word boundary; zero preserves browser prosody without adding a timer.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "400"
+    },
+    {
+      "name": "pause-after-comma",
+      "description": "Additional silence in milliseconds after commas at a word boundary; zero preserves browser prosody without adding a timer.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "200"
+    },
+    {
+      "name": "pause-after-semicolon",
+      "description": "Additional silence in milliseconds after semicolons at a word boundary; zero preserves browser prosody without adding a timer.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "400"
+    },
+    {
+      "name": "pause-after-sentence",
+      "description": "Additional silence in milliseconds after sentence punctuation (. ! ? and ellipses) at a word boundary; zero preserves browser prosody without adding a timer.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "600"
+    },
+    {
       "name": "pause-between-lines",
       "description": "Silence in milliseconds between nonempty lines; an explicit [pause=...] overrides it at a line boundary.",
       "reflected": true,
@@ -54,6 +90,15 @@
       "inherited": false,
       "type": "number",
       "default": "0"
+    },
+    {
+      "name": "pause-per-blank-line",
+      "description": "Additional milliseconds for each blank or whitespace-only line between spoken passages; consecutive blank lines accumulate.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1000"
     },
     {
       "name": "pitch",
@@ -144,7 +189,7 @@
   "events": [
     {
       "name": "tp-text-to-speech-end",
-      "description": "Emitted when speech ends or is stopped.",
+      "description": "Emitted when the complete reading finishes.",
       "detail": "{ text: string }"
     },
     {
@@ -153,9 +198,34 @@
       "detail": "{ error: string }"
     },
     {
+      "name": "tp-text-to-speech-pause",
+      "description": "Emitted when active playback is paused.",
+      "detail": "{ }"
+    },
+    {
+      "name": "tp-text-to-speech-ready",
+      "description": "Emitted when the current source is loaded and the controls are ready.",
+      "detail": "{ }"
+    },
+    {
+      "name": "tp-text-to-speech-resume",
+      "description": "Emitted when paused playback resumes.",
+      "detail": "{ }"
+    },
+    {
       "name": "tp-text-to-speech-start",
       "description": "Emitted when speech starts.",
       "detail": "{ text: string }"
+    },
+    {
+      "name": "tp-text-to-speech-stop",
+      "description": "Emitted when active playback is cancelled, including source changes.",
+      "detail": "{ }"
+    },
+    {
+      "name": "tp-text-to-speech-trigger",
+      "description": "Emitted when a named trigger command is reached during playback; commands are never spoken or shown.",
+      "detail": "{ name: string; offset: number }"
     }
   ],
   "cssproperties": [],

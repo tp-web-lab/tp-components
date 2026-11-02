@@ -1,0 +1,60 @@
+{
+  "tagname": "tp-slide-note",
+  "classname": "TpSlideNote",
+  "superclass": "TpTextToSpeech",
+  "description": "Presents collapsible speaker notes above a presentation's mode menu.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-slide-note legend=\"Speaker notes\" lang=\"en-GB\" show-text>\n  <script type=\"tp/txt\">Introduce the idea. [trigger=clic] Explain the next step.</script>\n</tp-slide-note>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "open",
+      "description": "Expands the notes panel; closing it does not stop narration.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-slide-note-anchor-bottom",
+      "default": "0px",
+      "description": "Controls the anchor bottom."
+    },
+    {
+      "name": "--tp-slide-note-gap",
+      "default": ".5rem",
+      "description": "= .5rem - Space between docked notes and the presentation menu."
+    },
+    {
+      "name": "--tp-slide-note-width",
+      "default": "36rem",
+      "description": "= 36rem - Maximum width of docked notes."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-text-to-speech",
+      "summary": "Reads textual component content aloud with the Web Speech API."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Slide note",
+    "introduction": "",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Notes summary | Expand or collapse the transcript and speech controls. Closing the panel keeps narration running. |\n| Speech controls | Use the text-to-speech component's Speak, Pause, Resume, Stop and voice settings. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the notes summary and available speech controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> on the summary | Expand or collapse the panel. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "keyboard": [
+      {
+        "key": "Enter / Space",
+        "description": "Expands or collapses the focused notes summary."
+      }
+    ]
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "tagname": "tp-video-player",
+  "classname": "TpVideoPlayer",
+  "superclass": "TpBase",
+  "description": "Plays native video files and YouTube videos with a common playback API.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-video-player src=\"/docs/components/video-player/examples/clip-1.mp4\" controls label=\"Moving shapes\"></tp-video-player>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "autoplay",
+      "description": "Requests playback when the source loads; browser autoplay restrictions still apply.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "controls",
+      "description": "Shows the provider's playback controls. YouTube may still display its initial Play button.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "label",
+      "description": "Accessible name for the native video or YouTube iframe.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"Video\""
+    },
+    {
+      "name": "loop",
+      "description": "Repeats the video; a looping video does not normally emit ended.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "muted",
+      "description": "Mutes the video, including when changed during playback.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "poster",
+      "description": "Image shown before native video playback; YouTube supplies its own preview.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "preload",
+      "description": "Native video preload hint. YouTube loading is controlled by its embedded player.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"none\" | \"metadata\" | \"auto\"",
+      "default": "\"metadata\""
+    },
+    {
+      "name": "src",
+      "description": "Native media URL or YouTube watch, share, shorts, live or embed URL. Changing it loads the new video from the beginning.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "pause(): void",
+      "inherited": false,
+      "description": "Pauses playback and cancels a queued playback request."
+    },
+    {
+      "name": "play(): Promise<void>",
+      "inherited": false,
+      "description": "Requests playback. YouTube requests made before readiness are queued; its autoplay-blocked event reports browser refusal."
+    },
+    {
+      "name": "seekTo(seconds: number): void",
+      "inherited": false,
+      "description": "Seeks to a nonnegative position, queuing the request while a provider loads."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-video-player-autoplay-blocked",
+      "description": "Emitted when YouTube blocks a playback request. Native play() rejects its promise when blocked.",
+      "detail": "{ src: string; provider: \"native\" | \"youtube\" | \"\" }"
+    },
+    {
+      "name": "tp-video-player-ended",
+      "description": "Emitted when a non-looping video reaches its end.",
+      "detail": "{ src: string; provider: \"native\" | \"youtube\" | \"\" }"
+    },
+    {
+      "name": "tp-video-player-error",
+      "description": "Emitted when a source is invalid, unavailable or playback fails.",
+      "detail": "{ src: string; provider: \"native\" | \"youtube\" | \"\"; message: string; code?: number }"
+    },
+    {
+      "name": "tp-video-player-pause",
+      "description": "Emitted when playback pauses.",
+      "detail": "{ src: string; provider: \"native\" | \"youtube\" | \"\" }"
+    },
+    {
+      "name": "tp-video-player-play",
+      "description": "Emitted when playback starts.",
+      "detail": "{ src: string; provider: \"native\" | \"youtube\" | \"\" }"
+    },
+    {
+      "name": "tp-video-player-ready",
+      "description": "Emitted when native metadata or the YouTube player is ready.",
+      "detail": "{ src: string; provider: \"native\" | \"youtube\" | \"\" }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-frame",
+      "summary": "displays content in a fixed-aspect-ratio frame."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Video player",
+    "introduction": "The custom `<tp-video-player>` element plays native video files and YouTube videos with a common playback API.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Play / Pause in the video | Start or pause playback. |\n| Progress bar in the video | Seek to another time when the provider allows seeking. |\n| Volume / Mute in the video | Change or mute the sound when the provider exposes this control. |\n| Fullscreen in the video | Show the video using the provider's fullscreen mode. |\n| Open video / Watch on YouTube | Open the source in a new browser tab. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available playback controls and the source link. |\n| Focused playback controls | Use the browser's or YouTube's standard keyboard interactions. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. Move focus out of the YouTube iframe first. |",
+    "keyboard": []
+  }
+}

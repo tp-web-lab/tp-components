@@ -413,6 +413,12 @@ export class TpMenu extends TpBase {
 					const firstChild = this.getDirectMenuItems(submenu)[0];
 					this.focusItem(firstChild);
 				}
+			} else {
+				const link = item.querySelector<HTMLAnchorElement>(
+					":scope > a[href], :scope > p > a[href]",
+				);
+				if (link) link.click();
+				else item.click();
 			}
 			event.preventDefault();
 			return;

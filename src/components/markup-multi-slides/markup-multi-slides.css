@@ -47,3 +47,15 @@
 	font-size: 0.75rem;
 	font-variant-numeric: tabular-nums;
 }
+
+.tp-markup-multi-slides-auto {
+	display: inline-flex;
+	align-items: center;
+	border-inline-end: 1px solid var(--tp-brand-fill-soft);
+	margin-inline-end: .25rem;
+	padding-inline-end: .25rem;
+}
+
+.tp-markup-multi-slides-host [data-slide-notes] {
+	font-size: 1rem;
+}

@@ -1,0 +1,9 @@
+tp-video-player { display:flow-root; min-inline-size:0; }
+tp-video-player > tp-frame { width:100%; background:#000; }
+tp-video-player > tp-frame > video,
+tp-video-player > tp-frame > iframe { display:block; inline-size:100%; block-size:100%; margin:0; border:0; object-fit:contain; }
+tp-video-player[data-provider="youtube"] > tp-frame { min-block-size:200px; }
+tp-video-player > [data-video-status] { margin-block:.5em; }
+tp-video-player > [hidden] { display:none !important; }
+
+tp-video-player[hidden] { display:none !important; }

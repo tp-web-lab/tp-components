@@ -1,0 +1,37 @@
+tp-slide-note { display: block; min-inline-size: 0; font-size: 1rem; }
+tp-slide-note > details {
+  border: 1px solid var(--tp-brand-fill-soft);
+  border-radius: .4rem;
+  background: var(--tp-paper-color, white);
+}
+tp-slide-note > details > summary {
+  padding: .4rem .75rem;
+  cursor: pointer;
+  color: var(--tp-brand-text-colorful, currentColor);
+}
+tp-slide-note > details > .tp-speech-fieldset {
+  box-sizing: border-box;
+  max-block-size: min(55dvh, calc(100dvh - var(--tp-slide-note-anchor-bottom, 0px) - 4rem));
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  margin: 0;
+  border: 0;
+}
+tp-slide-note.tp-slide-note-docked {
+  position: fixed;
+  z-index: 6;
+  inset-inline-end: 1rem;
+  inset-block-end: calc(var(--tp-slide-note-anchor-bottom, 4rem) + var(--tp-slide-note-gap, .5rem));
+  inline-size: min(var(--tp-slide-note-width, 36rem), calc(100vw - 2rem));
+}
+
+tp-slide-note > details > .tp-speech-fieldset > .tp-text-to-speech-text {
+  flex: 1 1 auto;
+  min-block-size: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+tp-slide-note > details > .tp-speech-fieldset > .tp-text-to-speech-controls {
+  flex: 0 0 auto;
+}

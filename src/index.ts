@@ -395,6 +395,7 @@ export {
 export { TpSidebar } from "./components/sidebar/sidebar.js";
 export { TpSingleChoiceQuestion } from "./components/single-choice-question/single-choice-question.js";
 export { TpSkeleton } from "./components/skeleton/skeleton.js";
+export { TpSlideNote } from "./components/slide-note/slide-note.js";
 export { TpSlider } from "./components/slider/slider.js";
 export { TpSolitaire } from "./components/solitaire/solitaire.js";
 export { TpSource } from "./components/source/source.js";
@@ -510,3 +511,9 @@ export {
 	type TangramPlacement,
 	TpTangram,
 } from "./components/tangram/tangram.js";
+
+export {
+	TpVideoPlayer,
+	type TpVideoPlayerErrorDetail,
+	type TpVideoPlayerEventDetail,
+} from "./components/video-player/video-player.js";

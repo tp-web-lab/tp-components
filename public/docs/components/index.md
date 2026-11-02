@@ -292,6 +292,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 
 | Component | Description |
 | --- | --- |
+| <tp-icon name="video-player" library="components" size="1.25em"></tp-icon> [`<tp-video-player>`](video-player/index.md) | Plays native video files and YouTube videos with a common playback API. |
 | <tp-icon name="audio-recorder" library="components" size="1.25em"></tp-icon> [`<tp-audio-recorder>`](audio-recorder/index.md) | Records microphone audio locally for replay and download. |
 | <tp-icon name="animation" library="components" size="1.25em"></tp-icon> [`<tp-animation>`](animation/index.md) | Applies an animation to a target element with [`animate.css`](https://animate.style) for animation names and the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Web_Animations_API_Concepts) for playback control. |
 | <tp-icon name="avatar" library="components" size="1.25em"></tp-icon> [`<tp-avatar>`](avatar/index.md) | Displays an image, initials or an icon in a circle or square. |
@@ -311,6 +312,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="source" library="components" size="1.25em"></tp-icon> [`<tp-source>`](source/index.md) | Source repository link button. |
 | <tp-icon name="speech-to-text" library="components" size="1.25em"></tp-icon> [`<tp-speech-to-text>`](speech-to-text/index.md) | Transcribes microphone speech into editable text using the [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API). |
 | <tp-icon name="text-to-speech" library="components" size="1.25em"></tp-icon> [`<tp-text-to-speech>`](text-to-speech/index.md) | Reads inline or external text aloud with browser speech synthesis. |
+| <tp-icon name="slide-note" library="components" size="1.25em"></tp-icon> [`<tp-slide-note>`](slide-note/index.md) | Presents collapsible speaker notes above a presentation's mode menu. |
 | <tp-icon name="typewriting" library="components" size="1.25em"></tp-icon> [`<tp-typewriting>`](typewriting/index.md) | Progressively reveals text one letter or one word at a time. |
 
 ## Viewers

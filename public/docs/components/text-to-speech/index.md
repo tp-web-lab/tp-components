@@ -76,6 +76,43 @@ Pauses and line breaks inside a speech-disabled passage do not add silence. Voic
 </tp-text-to-speech>
 ```
 
+### Automatic punctuation and blank-line pauses
+
+Punctuation and blank-line pauses apply automatically without attributes or commands in the source. Defaults are 200 ms after commas, 400 ms after semicolons and colons, 600 ms after sentence punctuation and 1,000 ms per blank line. Override any duration when needed:
+
+```html
+<tp-text-to-speech
+  pause-after-comma="200"
+  pause-after-semicolon="400"
+  pause-after-colon="400"
+  pause-after-sentence="600"
+  pause-per-blank-line="1000"
+  lang="en-GB" show-text
+>
+  <script type="tp/txt">
+    First, listen to this idea; then consider the next one: punctuation sets the pace.
+
+    A new paragraph follows one blank line.
+  </script>
+</tp-text-to-speech>
+```
+
+Set an attribute to `0` to disable its additional pause. Removing it restores its default duration. Durations are integer milliseconds from 0 to 2,147,483,647; invalid values use zero. These are additional silences after the browser finishes the preceding utterance, not an exact total duration including the voice's own natural prosody. Changing a pause setting cancels the current reading.
+
+`pause-after-sentence` applies to `.`, `!`, `?`, `…` and runs such as `...` or `?!`. A punctuation cluster produces one pause using its largest configured duration. Closing quotation marks and brackets stay with the preceding utterance. Boundaries require following whitespace or the end of the spoken passage, so punctuation inside decimals, clock times and ordinary URL tokens is not split. This is punctuation matching, not grammatical sentence analysis: abbreviations followed by whitespace also count as boundaries. An explicit `[pause=0]` can suppress a particular automatic pause.
+
+`pause-per-blank-line` counts each blank or whitespace-only line **between spoken passages**. One blank line adds its configured duration; two consecutive blank lines add twice that duration, capped at the maximum timer value. Leading and trailing blank lines add no delay. A normal line wrap does not count as a blank line; the existing `pause-between-lines` setting remains available for that.
+
+When punctuation, line and blank-line pauses coincide, the longest automatic duration is used instead of adding them together. An adjacent explicit `[pause=…]`, including zero, replaces that automatic pause. A configured final punctuation pause completes before the reader emits its end event. Pauses do not change the source, transcript, voice selection or linked word offsets. `speech-off` passages add no automatic pauses. A following `[trigger=clic]` is emitted only after the preceding silence has completed; Pause/Resume and Stop work during these silences just as they do for explicit pauses.
+
+### Named playback triggers
+
+Insert `[trigger=clic]` to emit a `tp-text-to-speech-trigger` event exactly at that point in the reading, after preceding speech and pauses and before following text. `event.detail` contains `name` and the zero-based `offset` of the command in the source. The command is neither spoken nor shown in the transcript. Names begin with an ASCII letter followed by letters, digits, underscores, dots, colons or hyphens; malformed commands remain literal. Leading, trailing, consecutive and trigger-only sources are supported. Commands in `speech-off` passages are suppressed; hiding a transcript passage does not suppress them.
+
+Pause postpones pending triggers, Resume continues from the same position, and Stop, source replacement or disconnection cancels remaining triggers. A listener may stop or pause playback synchronously at a trigger. `tp-*-multi-slides auto="notes"` uses the name `clic` to reveal the next step or navigate to the next slide. Other applications may use other names.
+
+The reader also emits `tp-text-to-speech-ready` after its source loads, `tp-text-to-speech-pause`, `tp-text-to-speech-resume` and `tp-text-to-speech-stop` for playback controls. `tp-text-to-speech-end` denotes natural completion of the entire reading.
+
 ### Author directives
 
 The source can be supplied through `value`, a `tp/txt` or `tp/text-to-speech` script, direct text, or an external file.
@@ -167,6 +204,12 @@ Pauses
 
 Dialogue
 : Read a dialogue using named browser voices and pauses. Unavailable names fall back to the component voice; [voice=default] restores it explicitly.
+
+Named triggers
+: Press Speak and watch the counter change exactly when each named trigger is reached. Pause and Stop prevent queued triggers from firing.
+
+Automatic pauses
+: Press Speak to hear configurable punctuation and blank-line pauses without commands in the text. Pause freezes the remaining silence and Stop cancels it.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
@@ -195,7 +238,12 @@ Attributes
   | <code>for</code> | <code>string</code> | <code>&quot;&quot;</code> | ID of an element supplying readable text; overrides local sources and synchronizes word boundaries when the target is tp-typewriting. |
   | <code>legend</code> | <code>string</code> | <code>&quot;Text to speech&quot;</code> | Caption of the fieldset surrounding the controls. |
   | <code>lite</code> | <code>boolean</code> | <code>false</code> | Replaces playback controls with a single speak/stop icon button. |
+  | <code>pause-after-colon</code> | <code>number</code> | <code>400</code> | Additional silence in milliseconds after colons at a word boundary; zero preserves browser prosody without adding a timer. |
+  | <code>pause-after-comma</code> | <code>number</code> | <code>200</code> | Additional silence in milliseconds after commas at a word boundary; zero preserves browser prosody without adding a timer. |
+  | <code>pause-after-semicolon</code> | <code>number</code> | <code>400</code> | Additional silence in milliseconds after semicolons at a word boundary; zero preserves browser prosody without adding a timer. |
+  | <code>pause-after-sentence</code> | <code>number</code> | <code>600</code> | Additional silence in milliseconds after sentence punctuation (. ! ? and ellipses) at a word boundary; zero preserves browser prosody without adding a timer. |
   | <code>pause-between-lines</code> | <code>number</code> | <code>0</code> | Silence in milliseconds between nonempty lines; an explicit [pause=...] overrides it at a line boundary. |
+  | <code>pause-per-blank-line</code> | <code>number</code> | <code>1000</code> | Additional milliseconds for each blank or whitespace-only line between spoken passages; consecutive blank lines accumulate. |
   | <code>pitch</code> | <code>number</code> | <code>1</code> | Speech pitch from 0 to 2. |
   | <code>rate</code> | <code>number</code> | <code>1</code> | Speech rate from 0.1 to 10. |
   | <code>show-text</code> | <code>boolean</code> | <code>false</code> | Displays the source text alongside the playback controls. |
@@ -221,9 +269,14 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-text-to-speech-end</code> | <code>&#123; text: string &#125;</code> | Emitted when speech ends or is stopped. |
+  | <code>tp-text-to-speech-end</code> | <code>&#123; text: string &#125;</code> | Emitted when the complete reading finishes. |
   | <code>tp-text-to-speech-error</code> | <code>&#123; error: string &#125;</code> | Emitted when loading or speech synthesis fails. |
+  | <code>tp-text-to-speech-pause</code> | <code>&#123; &#125;</code> | Emitted when active playback is paused. |
+  | <code>tp-text-to-speech-ready</code> | <code>&#123; &#125;</code> | Emitted when the current source is loaded and the controls are ready. |
+  | <code>tp-text-to-speech-resume</code> | <code>&#123; &#125;</code> | Emitted when paused playback resumes. |
   | <code>tp-text-to-speech-start</code> | <code>&#123; text: string &#125;</code> | Emitted when speech starts. |
+  | <code>tp-text-to-speech-stop</code> | <code>&#123; &#125;</code> | Emitted when active playback is cancelled, including source changes. |
+  | <code>tp-text-to-speech-trigger</code> | <code>&#123; name: string; offset: number &#125;</code> | Emitted when a named trigger command is reached during playback; commands are never spoken or shown. |
   [Events emitted by `<tp-text-to-speech>`]
 
 CSS properties
@@ -237,6 +290,14 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_text-to-speech.TpTextToSpeech.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
 
 
 
