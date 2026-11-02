@@ -16,6 +16,8 @@ import { TpBase } from "../base/base.js";
  * create a separate document or browsing context.
  * @example
  * <tp-frame></tp-frame>
+ * @cssprop [--tp-frame-denominator=9] Positive unitless height term of the width-to-height aspect ratio; updated by the ratio attribute.
+ * @cssprop [--tp-frame-numerator=16] Positive unitless width term of the width-to-height aspect ratio; updated by the ratio attribute.
  */
 export declare class TpFrame extends TpBase {
     /**

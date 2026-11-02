@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/yakazu.js";
-export { e as TpYakazu };
+import{t as e}from"../../chunks/yakazu2.js";export{e as TpYakazu};

@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/xy-plot.js";
-export { e as TpXYPlot };
+import{t as e}from"../../chunks/xy-plot2.js";export{e as TpXYPlot};

@@ -41,30 +41,42 @@ changement temporaire d’icône et animation.</p>
 <h4 class="tsd-anchor-link" id="tagname">Tagname<a href="#tagname" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>tp-copy-code</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr">Attr<a href="#attr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>for = &quot;&quot; - Identifiant de l’élément cible.</p>
+<h4 class="tsd-anchor-link" id="attr">Attr<a href="#attr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>for = &quot;&quot; - ID of the element whose source text is copied, without a leading #.</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-1">Attr<a href="#attr-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>icon = &quot;copy&quot; - Nom de l’icône affichée à l’état normal. Valeur par défaut : <code>copy</code>.</p>
+<h4 class="tsd-anchor-link" id="attr-1">Attr<a href="#attr-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>icon = &quot;copy&quot; - Icon name displayed before copying; defaults to copy.</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-2">Attr<a href="#attr-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>success-icon = &quot;check&quot; - Nom de l’icône affichée après une copie réussie. Valeur par défaut : <code>check</code>.</p>
+<h4 class="tsd-anchor-link" id="attr-2">Attr<a href="#attr-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>success-icon = &quot;check&quot; - Icon name displayed after a successful copy; defaults to check.</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-3">Attr<a href="#attr-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>error-icon = &quot;warning&quot; - Nom de l’icône affichée après une erreur. Valeur par défaut : <code>warning</code>.</p>
+<h4 class="tsd-anchor-link" id="attr-3">Attr<a href="#attr-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>error-icon = &quot;warning&quot; - Icon name displayed after a failed clipboard copy; defaults to warning.</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-4">Attr<a href="#attr-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>copied-text = &quot;Copied!&quot; - Libellé accessible après une copie réussie. Valeur par défaut : <code>Copied!</code>.</p>
-<p>tp-copy-code-success Émis quand la copie a réussi.
-tp-copy-code-error Émis quand la copie a échoué.</p>
+<h4 class="tsd-anchor-link" id="attr-4">Attr<a href="#attr-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>copied-text = &quot;Copied!&quot; - Accessible feedback text after a successful copy; defaults to Copied!.</p>
+</div>
+<div class="tsd-tag-cssprop">
+<h4 class="tsd-anchor-link" id="cssprop">Cssprop<a href="#cssprop" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>[--tp-copy-code-error-color=red] Color of the copy control while reporting a failed clipboard operation.</p>
+</div>
+<div class="tsd-tag-cssprop">
+<h4 class="tsd-anchor-link" id="cssprop-1">Cssprop<a href="#cssprop-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>[--tp-copy-code-success-color=green] Color of the copy control while confirming a successful clipboard operation.
+tp-copy-code-success Emitted after clipboard writing succeeds. The detail gives the copied text length in UTF-16 code units and the source element.</p>
+</div>
+<div class="tsd-tag-eventdetail">
+<h4 class="tsd-anchor-link" id="eventdetail">Eventdetail<a href="#eventdetail" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>tp-copy-code-success { length: number; target: HTMLElement }
+tp-copy-code-error Emitted when the target cannot be resolved or its contents cannot be copied; message explains the failure.</p>
+</div>
+<div class="tsd-tag-eventdetail">
+<h4 class="tsd-anchor-link" id="eventdetail-1">Eventdetail<a href="#eventdetail-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>tp-copy-code-error { message: string }</p>
 </div></div></section>
-<section class="tsd-panel tsd-hierarchy" data-refl="3760">
+<section class="tsd-panel tsd-hierarchy" data-refl="3949">
 <h4>Hierarchy (<a href="../hierarchy.html#components/copy-code.TpCopyCode">View Summary</a>)</h4>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><a href="components_base.TpBase.html" class="tsd-signature-type tsd-kind-class">TpBase</a>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">TpCopyCode</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L121">tp-components/src/components/copy-code/copy-code.ts:121</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L127">tp-components/src/components/copy-code/copy-code.ts:127</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -124,7 +136,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 <li>
 <div class="tsd-signature" id="copiedtextcopiedtext"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">copiedText</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Libellé accessible après une copie réussie.</p>
+<div class="tsd-comment tsd-typography"><p>Accessible feedback text after a successful copy; defaults to Copied!.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 <div class="tsd-comment tsd-typography">
@@ -137,7 +149,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L322">tp-components/src/components/copy-code/copy-code.ts:322</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L323">tp-components/src/components/copy-code/copy-code.ts:323</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="copiedtextcopiedtext-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">copiedText</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -151,14 +163,14 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L331">tp-components/src/components/copy-code/copy-code.ts:331</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L332">tp-components/src/components/copy-code/copy-code.ts:332</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="erroricon"><span>error<wbr/>Icon</span><a href="#erroricon" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li>
 <div class="tsd-signature" id="erroriconerroricon"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">errorIcon</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Nom de l’icône affichée après une erreur.</p>
+<div class="tsd-comment tsd-typography"><p>Icon name displayed after a failed clipboard copy; defaults to warning.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 <div class="tsd-comment tsd-typography">
@@ -171,7 +183,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L298">tp-components/src/components/copy-code/copy-code.ts:298</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L300">tp-components/src/components/copy-code/copy-code.ts:300</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="erroriconerroricon-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">errorIcon</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -185,7 +197,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L307">tp-components/src/components/copy-code/copy-code.ts:307</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L309">tp-components/src/components/copy-code/copy-code.ts:309</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="forelement"><span>for<wbr/>Element</span><a href="#forelement" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -197,7 +209,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L347">tp-components/src/components/copy-code/copy-code.ts:347</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L348">tp-components/src/components/copy-code/copy-code.ts:348</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="forelementforelement-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">forElement</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -211,14 +223,14 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L356">tp-components/src/components/copy-code/copy-code.ts:356</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L357">tp-components/src/components/copy-code/copy-code.ts:357</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="htmlfor"><span>html<wbr/>For</span><a href="#htmlfor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li>
 <div class="tsd-signature" id="htmlforhtmlfor"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">htmlFor</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Identifiant de l’élément cible.</p>
+<div class="tsd-comment tsd-typography"><p>ID of the element whose source text is copied, without a leading #.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 <div class="tsd-comment tsd-typography">
@@ -226,7 +238,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 <h4 class="tsd-anchor-link" id="attr-7">Attr<a href="#attr-7" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>for</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L226">tp-components/src/components/copy-code/copy-code.ts:226</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L231">tp-components/src/components/copy-code/copy-code.ts:231</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="htmlforhtmlfor-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">htmlFor</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -240,14 +252,14 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L235">tp-components/src/components/copy-code/copy-code.ts:235</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L240">tp-components/src/components/copy-code/copy-code.ts:240</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="icon"><span>icon</span><a href="#icon" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li>
 <div class="tsd-signature" id="iconicon"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">icon</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Nom de l’icône affichée à l’état normal.</p>
+<div class="tsd-comment tsd-typography"><p>Icon name displayed before copying; defaults to copy.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 <div class="tsd-comment tsd-typography">
@@ -260,7 +272,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L250">tp-components/src/components/copy-code/copy-code.ts:250</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L254">tp-components/src/components/copy-code/copy-code.ts:254</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="iconicon-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">icon</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -274,14 +286,14 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L259">tp-components/src/components/copy-code/copy-code.ts:259</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L263">tp-components/src/components/copy-code/copy-code.ts:263</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="successicon"><span>success<wbr/>Icon</span><a href="#successicon" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li>
 <div class="tsd-signature" id="successiconsuccessicon"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">successIcon</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Nom de l’icône affichée après une copie réussie.</p>
+<div class="tsd-comment tsd-typography"><p>Icon name displayed after a successful copy; defaults to check.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 <div class="tsd-comment tsd-typography">
@@ -294,7 +306,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L274">tp-components/src/components/copy-code/copy-code.ts:274</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L277">tp-components/src/components/copy-code/copy-code.ts:277</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="successiconsuccessicon-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">successIcon</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -308,7 +320,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L283">tp-components/src/components/copy-code/copy-code.ts:283</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L286">tp-components/src/components/copy-code/copy-code.ts:286</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="observedattributes"><code class="tsd-tag">Static</code><span>observed<wbr/>Attributes</span><a href="#observedattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -320,7 +332,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <p>Overrides TpBase.observedAttributes</p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L217">tp-components/src/components/copy-code/copy-code.ts:217</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L223">tp-components/src/components/copy-code/copy-code.ts:223</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -335,7 +347,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#attributechangedcallback">attributeChangedCallback</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L389">tp-components/src/components/copy-code/copy-code.ts:389</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L390">tp-components/src/components/copy-code/copy-code.ts:390</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="capturehelpsource"><code class="tsd-tag">Protected</code><span>capture<wbr/>Help<wbr/>Source</span><a href="#capturehelpsource" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -345,7 +357,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#capturehelpsource">captureHelpSource</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L899">tp-components/src/components/base/base.ts:899</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L1010">tp-components/src/components/base/base.ts:1010</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="connectedcallback"><code class="tsd-tag">Protected</code><span>connected<wbr/>Callback</span><a href="#connectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -357,19 +369,18 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#connectedcallback">connectedCallback</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L366">tp-components/src/components/copy-code/copy-code.ts:366</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L367">tp-components/src/components/copy-code/copy-code.ts:367</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="copy"><span>copy</span><a href="#copy" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="copy-1"><span class="tsd-kind-call-signature">copy</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><a href="#copy-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Copie dans le presse-papiers le contenu de la cible.</p>
+<div class="tsd-comment tsd-typography"><p>Copies the target source text to the clipboard. Resolves to true on success, or false when the target is missing or copying fails; updates feedback and emits the corresponding result event.</p>
 </div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><p><code>true</code> si la copie a réussi, sinon <code>false</code>.</p>
-<aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L421">tp-components/src/components/copy-code/copy-code.ts:421</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L419">tp-components/src/components/copy-code/copy-code.ts:419</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="disconnectedcallback"><span>disconnected<wbr/>Callback</span><a href="#disconnectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -380,7 +391,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/copy-code/copy-code.ts#L404">tp-components/src/components/copy-code/copy-code.ts:404</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/copy-code/copy-code.ts#L405">tp-components/src/components/copy-code/copy-code.ts:405</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="ensurebasestyles"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Base<wbr/>Styles</span><a href="#ensurebasestyles" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -396,7 +407,7 @@ tp-copy-code-error Émis quand la copie a échoué.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#ensurebasestyles">ensureBaseStyles</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L312">tp-components/src/components/base/base.ts:312</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L347">tp-components/src/components/base/base.ts:347</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="ensureglobalstyle"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Global<wbr/>Style</span><a href="#ensureglobalstyle" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -419,7 +430,7 @@ if it does not already exist.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#ensureglobalstyle">ensureGlobalStyle</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L331">tp-components/src/components/base/base.ts:331</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L366">tp-components/src/components/base/base.ts:366</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getbooleanattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>Boolean<wbr/>Attribute</span><a href="#getbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -443,7 +454,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getbooleanattribute">getBooleanAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L358">tp-components/src/components/base/base.ts:358</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L393">tp-components/src/components/base/base.ts:393</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getclosestskippingcontainers"><code class="tsd-tag">Protected</code><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span><a href="#getclosestskippingcontainers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -464,7 +475,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getclosestskippingcontainers">getClosestSkippingContainers</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L456">tp-components/src/components/base/base.ts:456</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L491">tp-components/src/components/base/base.ts:491</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getstringattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>String<wbr/>Attribute</span><a href="#getstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -486,7 +497,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getstringattribute">getStringAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L392">tp-components/src/components/base/base.ts:392</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L427">tp-components/src/components/base/base.ts:427</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="help"><span>help</span><a href="#help" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -501,7 +512,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#help">help</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L258">tp-components/src/components/base/base.ts:258</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L259">tp-components/src/components/base/base.ts:259</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="queryelement"><code class="tsd-tag">Protected</code><span>query<wbr/>Element</span><a href="#queryelement" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -527,7 +538,7 @@ the Vite component API plugin. A custom URL can be provided with
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#queryelement">queryElement</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L437">tp-components/src/components/base/base.ts:437</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L472">tp-components/src/components/base/base.ts:472</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="removeattributes"><code class="tsd-tag">Protected</code><span>remove<wbr/>Attributes</span><a href="#removeattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -545,7 +556,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#removeattributes">removeAttributes</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L422">tp-components/src/components/base/base.ts:422</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L457">tp-components/src/components/base/base.ts:457</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="setbooleanattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>Boolean<wbr/>Attribute</span><a href="#setbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -571,7 +582,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#setbooleanattribute">setBooleanAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L374">tp-components/src/components/base/base.ts:374</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L409">tp-components/src/components/base/base.ts:409</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="setstringattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>String<wbr/>Attribute</span><a href="#setstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -593,7 +604,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#setstringattribute">setStringAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L406">tp-components/src/components/base/base.ts:406</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L441">tp-components/src/components/base/base.ts:441</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

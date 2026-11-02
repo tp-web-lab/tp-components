@@ -1,21 +1,2 @@
-//#region ../tp-markdown/dist/markdown/renderers/tabs.js
-var e = {
-	id: "tabs",
-	async render(e) {
-		for (let n of e.querySelectorAll("[data-tabs]")) n instanceof HTMLElement && t(n);
-	}
-};
-function t(e) {
-	if (e.dataset.tabsBound === "true") return;
-	e.dataset.tabsBound = "true";
-	let t = Array.from(e.querySelectorAll("[data-tabs-tab]")), n = Array.from(e.querySelectorAll("[data-tabs-panel]"));
-	for (let e of t) e.addEventListener("click", () => {
-		let r = e.dataset.tabsIndex ?? "";
-		for (let n of t) n.setAttribute("aria-selected", String(n === e));
-		for (let e of n) e.hidden = e.dataset.tabsIndex !== r;
-	});
-}
-//#endregion
-export { e as default };
-
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M22 8h-6.5M9 4v4h6.5m0 0V4"/><path d="M2 17.714V6.286C2 5.023 2.995 4 4.222 4h15.556C21.005 4 22 5.023 22 6.286v11.428C22 18.977 21.005 20 19.778 20H4.222C2.995 20 2 18.977 2 17.714Z"/></g></svg>`;export{t as n,n as t};
 //# sourceMappingURL=tabs2.js.map

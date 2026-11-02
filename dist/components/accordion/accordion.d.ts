@@ -108,23 +108,15 @@ export declare class TpAccordion extends TpBase {
      */
     protected attributeChangedCallback(): void;
     /**
-     * Opens a section by index.
-     *
-     * In single mode, this replaces the current open section.
-     *
-     * @param index Target section index.
+     * @summary Opens the section at the zero-based index; in single mode, closes the previously open section.
      */
     open(index: number): void;
     /**
-     * Closes a section by index.
-     *
-     * @param index Target section index.
+     * @summary Closes the section at the zero-based index without changing other sections.
      */
     close(index: number): void;
     /**
-     * Toggles open/closed state for a section by index.
-     *
-     * @param index Target section index.
+     * @summary Toggles the section at the zero-based index, respecting the single/multiple opening mode.
      */
     toggle(index: number): void;
     /**

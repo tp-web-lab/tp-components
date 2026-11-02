@@ -30,8 +30,8 @@ The component uses [Leaflet](https://leafletjs.com/) and [OpenStreetMap](https:/
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between toolbar buttons, the map, its marker and attribution links. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused toolbar button or the profile's Zoom and Close buttons. <kbd>Enter</kbd> opens a focused marker's popup. |
-| Arrow keys | Pan the focused map. |
-| + / - | Zoom the focused map in or out. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Pan the focused map. |
+| <kbd>+</kbd> / <kbd>-</kbd> | Zoom the focused map in or out. |
 | <kbd>Escape</kbd> | Close an open popup or the enlarged elevation profile. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
@@ -150,15 +150,38 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-map-height</code> | <code>24rem</code> | Controls the height. |
-  | <code>&#45;&#45;tp-map-width</code> | <code>100%</code> | Controls the width. |
+  | <code>&#45;&#45;tp-map-height</code> | <code>24rem</code> | Height of the map viewport, with a minimum of 10rem. |
+  | <code>&#45;&#45;tp-map-width</code> | <code>100%</code> | Preferred width of the map viewport and elevation profile, limited by the container width. |
   [CSS properties of `<tp-map>`]
 :::
 <!-- /tp-docgen:api -->
 
 <!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_map.TpMap.html)
+[More details…](/api/classes/components_map_map.TpMap.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -363,6 +386,10 @@ All tp-components used by `<tp-map>` are loaded automatically by this component 
 ### External
 
 <!--
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
+-->
+<!--
 @credit Leaflet https://leafletjs.com/
 @summary Interactive geographic maps.
 -->
@@ -371,6 +398,7 @@ All tp-components used by `<tp-map>` are loaded automatically by this component 
 @summary Map tiles and geographic data; attribution required.
 -->
 
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 - [Leaflet](https://leafletjs.com/) : Interactive geographic maps.
 - [OpenStreetMap](https://www.openstreetmap.org/copyright) : Map tiles and geographic data; attribution required.
 <!-- tp-docgen:dependencies:end -->

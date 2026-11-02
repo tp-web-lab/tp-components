@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/memory.js";
-export { e as TpMemory };
+import{t as e}from"../../chunks/memory2.js";export{e as TpMemory};

@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/color.js";
-export { e as TpColor };
+import{t as e}from"../../chunks/color.js";export{e as TpColor};

@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/skeleton.js";
-export { e as TpSkeleton };
+import{t as e}from"../../chunks/skeleton2.js";export{e as TpSkeleton};

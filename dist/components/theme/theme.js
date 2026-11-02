@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/theme.js";
-export { e as TpTheme };
+import{t as e}from"../../chunks/theme.js";export{e as TpTheme};

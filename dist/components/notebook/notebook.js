@@ -1,2 +1,1 @@
-import { n as e, t } from "../../chunks/notebook.js";
-export { t as TpNotebook, e as getNotebookLoaderUrl };
+import{n as e,t}from"../../chunks/notebook2.js";export{t as TpNotebook,e as getNotebookLoaderUrl};

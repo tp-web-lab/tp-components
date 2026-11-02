@@ -1,0 +1,2 @@
+import{t as e}from"./base.js";var t=`tp-glossary{display:none!important}`,n=class extends e{get ref(){return this.getAttribute(`ref`)??``}set ref(e){this.setAttribute(`ref`,e)}connectedCallback(){super.connectedCallback(),this.ensureGlobalStyle(`tp-glossary-styles`,t)}};customElements.get(`tp-glossary`)||customElements.define(`tp-glossary`,n);export{n as t};
+//# sourceMappingURL=glossary2.js.map

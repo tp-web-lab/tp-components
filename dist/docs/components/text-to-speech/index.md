@@ -21,10 +21,10 @@ The component uses the browser [Web Speech API](https://developer.mozilla.org/en
 | Control or gesture | Result |
 | --- | --- |
 | Speak | Start reading the text aloud. |
-| Pause | Suspend reading. |
-| Resume | Continue paused reading. |
-| Stop | End reading. |
-| Settings | Choose a voice for the text language; Automatic lets the browser choose. Changing the voice stops reading. |
+| Pause | Suspend speech or freeze the remaining scheduled silence. |
+| Resume | Continue paused speech or the remaining silence. |
+| Stop | End reading and cancel pending segments or pauses. |
+| Settings | Choose a voice for the text language; scroll the voice list when it exceeds the available space; Automatic lets the browser choose. Changing the voice stops reading. |
 | Compact speaker / stop button | Start or stop reading. Pause, Resume and voice settings are not available in this presentation. |
 | Status | Indicates whether speech is ready, playing, paused or unavailable. Voice availability depends on the browser and operating system. |
 
@@ -35,6 +35,83 @@ The component uses the browser [Web Speech API](https://developer.mozilla.org/en
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
+
+### Voices in a dialogue
+
+Insert `[voice=Name]` anywhere in the source to use a named browser voice for the following text. Names may contain spaces and are matched without regard to case; surrounding spaces are ignored. The selected voice remains active across pauses until the next voice command. `[voice=default]` restores the component voice selected through the settings menu or the `voice` attribute. Each new reading starts with that component voice.
+
+Voice names depend on the browser and operating system. Open Speech voice settings to see names available for the current language. An unknown name falls back to the component voice, or to the browser default if none is selected. An explicitly named voice uses its own language. The command does not change the component's `voice` or `lang` attributes.
+
+Voice commands are neither spoken nor shown with `show-text`. Empty, whitespace-only or unclosed commands remain literal text. Combine them with `[pause=…]` and `pause-between-lines`; a voice change itself does not add a timed pause. If the voice catalogue is initially empty, playback waits up to one second before falling back to the available browser voice.
+
+### Showing selected passages
+
+With the `show-text` attribute, `[hide-text]` hides the following transcript text until `[show-text]` restores its visibility. Text before the first command is visible. Repeated commands simply keep the requested state; an unmatched `[hide-text]` hides the rest of the transcript. These commands affect the displayed transcript immediately, independently of playback progress.
+
+Unless disabled by `[speech-off]`, all passages are still read aloud, including hidden ones. The commands themselves are neither displayed nor spoken. Voice changes and pauses still apply inside hidden passages. Without the `show-text` attribute, the entire transcript remains hidden, even when it contains `[show-text]`. These commands only affect the component's own transcript, not a linked source element. Start/end events contain the enabled spoken text.
+
+```html
+<tp-text-to-speech lang="en-GB" show-text>
+  <script type="tp/txt">
+    Listen and answer the question.
+    [hide-text]The workshop starts at nine.[pause=500]
+    [show-text]What time does the workshop start?
+  </script>
+</tp-text-to-speech>
+```
+
+### Selecting spoken passages
+
+`[speech-off]` excludes the following text from speech until `[speech-on]` re-enables it. Speech starts enabled on every reading. Repeated commands keep the requested state; an unmatched `[speech-off]` excludes the remainder. These commands are neither shown nor pronounced, and do not change transcript visibility: use `[hide-text]` and `[show-text]` independently for that.
+
+Pauses and line breaks inside a speech-disabled passage do not add silence. Voice commands still select the voice to use when speech resumes. An explicit pause outside the disabled passage is retained. Source offsets are preserved for linked typewriting. If all text is disabled, no utterance or start/end event is produced. Malformed commands remain literal text.
+
+```html
+<tp-text-to-speech lang="en-GB" show-text>
+  <script type="tp/txt">
+    [speech-off]Instructions: listen, then select your answer.
+    [speech-on][hide-text]The workshop starts at nine.
+    [speech-off][show-text]What time does the workshop start?
+  </script>
+</tp-text-to-speech>
+```
+
+### Automatic punctuation and blank-line pauses
+
+Punctuation and blank-line pauses apply automatically without attributes or commands in the source. Defaults are 200 ms after commas, 400 ms after semicolons and colons, 600 ms after sentence punctuation and 1,000 ms per blank line. Override any duration when needed:
+
+```html
+<tp-text-to-speech
+  pause-after-comma="200"
+  pause-after-semicolon="400"
+  pause-after-colon="400"
+  pause-after-sentence="600"
+  pause-per-blank-line="1000"
+  lang="en-GB" show-text
+>
+  <script type="tp/txt">
+    First, listen to this idea; then consider the next one: punctuation sets the pace.
+
+    A new paragraph follows one blank line.
+  </script>
+</tp-text-to-speech>
+```
+
+Set an attribute to `0` to disable its additional pause. Removing it restores its default duration. Durations are integer milliseconds from 0 to 2,147,483,647; invalid values use zero. These are additional silences after the browser finishes the preceding utterance, not an exact total duration including the voice's own natural prosody. Changing a pause setting cancels the current reading.
+
+`pause-after-sentence` applies to `.`, `!`, `?`, `…` and runs such as `...` or `?!`. A punctuation cluster produces one pause using its largest configured duration. Closing quotation marks and brackets stay with the preceding utterance. Boundaries require following whitespace or the end of the spoken passage, so punctuation inside decimals, clock times and ordinary URL tokens is not split. This is punctuation matching, not grammatical sentence analysis: abbreviations followed by whitespace also count as boundaries. An explicit `[pause=0]` can suppress a particular automatic pause.
+
+`pause-per-blank-line` counts each blank or whitespace-only line **between spoken passages**. One blank line adds its configured duration; two consecutive blank lines add twice that duration, capped at the maximum timer value. Leading and trailing blank lines add no delay. A normal line wrap does not count as a blank line; the existing `pause-between-lines` setting remains available for that.
+
+When punctuation, line and blank-line pauses coincide, the longest automatic duration is used instead of adding them together. An adjacent explicit `[pause=…]`, including zero, replaces that automatic pause. A configured final punctuation pause completes before the reader emits its end event. Pauses do not change the source, transcript, voice selection or linked word offsets. `speech-off` passages add no automatic pauses. A following `[trigger=clic]` is emitted only after the preceding silence has completed; Pause/Resume and Stop work during these silences just as they do for explicit pauses.
+
+### Named playback triggers
+
+Insert `[trigger=clic]` to emit a `tp-text-to-speech-trigger` event exactly at that point in the reading, after preceding speech and pauses and before following text. `event.detail` contains `name` and the zero-based `offset` of the command in the source. The command is neither spoken nor shown in the transcript. Names begin with an ASCII letter followed by letters, digits, underscores, dots, colons or hyphens; malformed commands remain literal. Leading, trailing, consecutive and trigger-only sources are supported. Commands in `speech-off` passages are suppressed; hiding a transcript passage does not suppress them.
+
+Pause postpones pending triggers, Resume continues from the same position, and Stop, source replacement or disconnection cancels remaining triggers. A listener may stop or pause playback synchronously at a trigger. `tp-*-multi-slides auto="notes"` uses the name `clic` to reveal the next step or navigate to the next slide. Other applications may use other names.
+
+The reader also emits `tp-text-to-speech-ready` after its source loads, `tp-text-to-speech-pause`, `tp-text-to-speech-resume` and `tp-text-to-speech-stop` for playback controls. `tp-text-to-speech-end` denotes natural completion of the entire reading.
 
 ### Author directives
 
@@ -67,6 +144,13 @@ direct text
 :::
 
 The source text is hidden by default; add `show-text` to display it beside the controls.
+
+Set `pause-between-lines="800"` to insert 800 milliseconds of silence between nonempty lines. Its default is 0 (no added silence). Blank lines do not add extra pauses, and there is no automatic pause before the first or after the last line.
+
+Insert `[pause=1500]` anywhere in the source for an explicit 1500-millisecond pause, even without `pause-between-lines`. At a line boundary, an explicit pause replaces the automatic line pause instead of adding to it. `[pause=0]` suppresses that automatic pause. Durations are nonnegative integer milliseconds, up to 2147483647; invalid line durations disable automatic pauses, and malformed commands remain literal text.
+
+Valid pause commands are neither spoken nor displayed with `show-text`. Displayed text retains line breaks. Pause freezes both speech and the remaining silence; Resume continues from that point. Stop, a changed source, a changed `pause-between-lines` value, or removing the component cancels pending segments. Speak restarts from the beginning. Start/end events describe the entire reading, not each segment.
+
 
 Add the boolean `lite` attribute for a compact version with a single `tp-icon-button`: `speakerphone` starts reading and `speakerphone-off` stops it. The settings menu and Pause/Resume buttons are omitted; `show-text` remains available. The accessible button label changes between Speak and Stop, and the status remains available to assistive technology.
 
@@ -114,6 +198,18 @@ Synchronized speech
 
 Read an element
 : Press Speak to read the article referenced by its ID. Its paragraphs and formatting stay unchanged; Pause, Resume and Stop control speech only.
+
+Pauses
+: Read the illustration prompt and four choices with 800-millisecond line pauses. The introduction uses a longer explicit pause and choice A adds a short inline pause. Try Pause, Resume and Stop during silence.
+
+Dialogue
+: Read a dialogue using named browser voices and pauses. Unavailable names fall back to the component voice; [voice=default] restores it explicitly.
+
+Named triggers
+: Press Speak and watch the counter change exactly when each named trigger is reached. Pause and Stop prevent queued triggers from firing.
+
+Automatic pauses
+: Press Speak to hear configurable punctuation and blank-line pauses without commands in the text. Pause freezes the remaining silence and Stop cancels it.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
@@ -140,7 +236,14 @@ Attributes
   | --- | --- | --- | --- |
   | <code>autoplay</code> | <code>boolean</code> | <code>false</code> | Starts reading after the source is loaded when browser policy permits it. |
   | <code>for</code> | <code>string</code> | <code>&quot;&quot;</code> | ID of an element supplying readable text; overrides local sources and synchronizes word boundaries when the target is tp-typewriting. |
+  | <code>legend</code> | <code>string</code> | <code>&quot;Text to speech&quot;</code> | Caption of the fieldset surrounding the controls. |
   | <code>lite</code> | <code>boolean</code> | <code>false</code> | Replaces playback controls with a single speak/stop icon button. |
+  | <code>pause-after-colon</code> | <code>number</code> | <code>400</code> | Additional silence in milliseconds after colons at a word boundary; zero preserves browser prosody without adding a timer. |
+  | <code>pause-after-comma</code> | <code>number</code> | <code>200</code> | Additional silence in milliseconds after commas at a word boundary; zero preserves browser prosody without adding a timer. |
+  | <code>pause-after-semicolon</code> | <code>number</code> | <code>400</code> | Additional silence in milliseconds after semicolons at a word boundary; zero preserves browser prosody without adding a timer. |
+  | <code>pause-after-sentence</code> | <code>number</code> | <code>600</code> | Additional silence in milliseconds after sentence punctuation (. ! ? and ellipses) at a word boundary; zero preserves browser prosody without adding a timer. |
+  | <code>pause-between-lines</code> | <code>number</code> | <code>0</code> | Silence in milliseconds between nonempty lines; an explicit [pause=...] overrides it at a line boundary. |
+  | <code>pause-per-blank-line</code> | <code>number</code> | <code>1000</code> | Additional milliseconds for each blank or whitespace-only line between spoken passages; consecutive blank lines accumulate. |
   | <code>pitch</code> | <code>number</code> | <code>1</code> | Speech pitch from 0 to 2. |
   | <code>rate</code> | <code>number</code> | <code>1</code> | Speech rate from 0.1 to 10. |
   | <code>show-text</code> | <code>boolean</code> | <code>false</code> | Displays the source text alongside the playback controls. |
@@ -157,18 +260,23 @@ Attributes
 Methods
 : | Method | Signature | Description |
   | --- | --- | --- |
-  | <code>pause</code> | <code>pause(): void</code> | Pauses the current reading. |
-  | <code>resume</code> | <code>resume(): void</code> | Resumes a paused reading. |
+  | <code>pause</code> | <code>pause(): void</code> | Pauses speech or a scheduled silence. |
+  | <code>resume</code> | <code>resume(): void</code> | Resumes speech or the remainder of a scheduled silence. |
   | <code>speak</code> | <code>speak(): Promise&lt;void&gt;</code> | Uses the browser's voice for the language unless a voice is explicitly requested. |
-  | <code>stop</code> | <code>stop(): void</code> | Stops the current reading. |
+  | <code>stop</code> | <code>stop(): void</code> | Cancels speech, queued segments and scheduled silence. |
   [Public methods of `TpTextToSpeech`]
 
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-text-to-speech-end</code> | <code>&#123; text: string &#125;</code> | Emitted when speech ends or is stopped. |
+  | <code>tp-text-to-speech-end</code> | <code>&#123; text: string &#125;</code> | Emitted when the complete reading finishes. |
   | <code>tp-text-to-speech-error</code> | <code>&#123; error: string &#125;</code> | Emitted when loading or speech synthesis fails. |
+  | <code>tp-text-to-speech-pause</code> | <code>&#123; &#125;</code> | Emitted when active playback is paused. |
+  | <code>tp-text-to-speech-ready</code> | <code>&#123; &#125;</code> | Emitted when the current source is loaded and the controls are ready. |
+  | <code>tp-text-to-speech-resume</code> | <code>&#123; &#125;</code> | Emitted when paused playback resumes. |
   | <code>tp-text-to-speech-start</code> | <code>&#123; text: string &#125;</code> | Emitted when speech starts. |
+  | <code>tp-text-to-speech-stop</code> | <code>&#123; &#125;</code> | Emitted when active playback is cancelled, including source changes. |
+  | <code>tp-text-to-speech-trigger</code> | <code>&#123; name: string; offset: number &#125;</code> | Emitted when a named trigger command is reached during playback; commands are never spoken or shown. |
   [Events emitted by `<tp-text-to-speech>`]
 
 CSS properties
@@ -182,6 +290,29 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_text-to-speech.TpTextToSpeech.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -453,7 +584,11 @@ All tp-components used by `<tp-text-to-speech>` are loaded automatically by this
 -->
 <!--
 @tp-dependency tp-dropdown
-@summary Displays an anchored dropdown menu.
+@summary Dropdown menu component.
+-->
+<!--
+@tp-dependency tp-icon
+@summary SVG icon component with inline, URL, and registry sources.
 -->
 <!--
 @tp-dependency tp-icon-button
@@ -466,7 +601,8 @@ All tp-components used by `<tp-text-to-speech>` are loaded automatically by this
 
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
 - [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
-- [`<tp-dropdown>`](../dropdown/index.md) : Displays an anchored dropdown menu.
+- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
+- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
 - [`<tp-typewriting>`](../typewriting/index.md) : progressively reveals text one letter or one word at a time.
 

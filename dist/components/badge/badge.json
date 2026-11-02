@@ -61,42 +61,42 @@
   "cssproperties": [
     {
       "name": "--tp-badge-accent",
-      "default": "var(--tp-brand-text-colorful)",
+      "default": "var(--tp-neutral-text-colorful)",
       "description": "Accent color."
     },
     {
       "name": "--tp-badge-background",
-      "default": "transparent",
+      "default": "var(--tp-neutral-fill-softer)",
       "description": "Background color."
     },
     {
       "name": "--tp-badge-border-color",
-      "default": "var(--tp-badge-accent)",
+      "default": "var(--tp-neutral-stroke-soft)",
       "description": "Border color."
     },
     {
       "name": "--tp-badge-font-size",
-      "default": "1.125em",
+      "default": "0.875em",
       "description": "Font size."
     },
     {
       "name": "--tp-badge-foreground",
-      "default": "var(--tp-badge-accent)",
+      "default": "var(--tp-neutral-text-on-soft)",
       "description": "Text color."
     },
     {
       "name": "--tp-badge-padding-block",
-      "default": "0.6em",
+      "default": "0.35em",
       "description": "Block padding."
     },
     {
       "name": "--tp-badge-padding-inline",
-      "default": "1em",
+      "default": "0.7em",
       "description": "Inline padding."
     },
     {
       "name": "--tp-badge-radius",
-      "default": "999em",
+      "default": "0.5em",
       "description": "Border radius."
     }
   ],

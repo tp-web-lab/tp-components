@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/biblio.js";
-export { e as TpBiblio };
+import{t as e}from"../../chunks/biblio2.js";export{e as TpBiblio};

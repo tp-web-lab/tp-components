@@ -2,19 +2,7 @@
  * @module components/markup-single-page
  * @summary Single-page renderer selecting HTML, Markdown, AsciiDoc or reStructuredText.
  */
-import "../calculator/calculator.js";
-import "../clock/clock.js";
-import "../lang/lang.js";
-import "../color/color.js";
-import "../theme/theme.js";
-import "../source/source.js";
-import "../fullscreen/fullscreen.js";
-import "../icon-button/icon-button.js";
-import "../toolbar/toolbar.js";
 import { TpBase } from "../base/base.js";
-import "../markdown/markdown.js";
-import "../asciidoc/asciidoc.js";
-import "../restructuredtext/restructuredtext.js";
 export type TpMarkupSinglePageLanguage = "html" | "markdown" | "asciidoc" | "restructuredtext";
 /**
  * Renders one document with a parser selected from `src` or inline script type.
@@ -45,6 +33,7 @@ export declare class TpMarkupSinglePage extends TpBase {
     static get observedAttributes(): string[];
     private readonly outputElement;
     private renderToken;
+    private toolbarToken;
     private toolbarElement;
     private calculatorDrawer;
     private sourceDrawer;
@@ -74,6 +63,13 @@ export declare class TpMarkupSinglePage extends TpBase {
     get git(): string;
     set git(value: string);
     private updateGit;
+    /**
+     * @summary Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo.
+     * @attr logo
+     * @default ""
+     */
+    get logo(): string;
+    set logo(value: string);
     get label(): string;
     set label(value: string);
     private updateLabel;

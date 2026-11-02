@@ -78,60 +78,60 @@
     {
       "name": "toast(delay = 3000): void",
       "inherited": false,
-      "description": "Displays the callout as a toast."
+      "description": "Shows the callout as a status toast and closes it after delay milliseconds. A zero or negative delay keeps it open; calling again replaces the previous timeout."
     }
   ],
   "events": [],
   "cssproperties": [
     {
       "name": "--tp-callout-accent",
-      "default": "var(--tp-brand-text-colorful)",
-      "description": "Accent color. Default: `var(--tp-neutral-text-colorful)`."
+      "default": "var(--tp-neutral-text-colorful)",
+      "description": "Color of the leading emphasis border; depends on variant."
     },
     {
       "name": "--tp-callout-background",
-      "default": "transparent",
-      "description": "Background color. Default: `var(--tp-neutral-fill-softer)`."
+      "default": "var(--tp-neutral-fill-softer)",
+      "description": "Background color of the callout; depends on variant and appearance."
     },
     {
       "name": "--tp-callout-border-color",
-      "default": "var(--tp-brand-stroke-soft)",
-      "description": "Border color. Default: `var(--tp-neutral-stroke-soft)`."
+      "default": "var(--tp-neutral-stroke-soft)",
+      "description": "Color of the thin outer border, excluding the leading emphasis border."
     },
     {
       "name": "--tp-callout-border-width",
       "default": "4px",
-      "description": "Leading border width. Default: `4px`."
+      "description": "Thickness of the leading emphasis border."
     },
     {
       "name": "--tp-callout-foreground",
-      "default": "var(--tp-brand-text-on-soft)",
-      "description": "Text color. Default: `var(--tp-text-body)`."
+      "default": "var(--tp-text-body)",
+      "description": "Text color of the heading and body."
     },
     {
       "name": "--tp-callout-heading-font-size",
       "default": "1rem",
-      "description": "Heading font size. Default: `1rem`."
+      "description": "Font size of the callout heading."
     },
     {
       "name": "--tp-callout-heading-gap",
       "default": "0.625rem",
-      "description": "Gap below the heading. Default: `0.625rem`."
+      "description": "Space between the heading and body."
     },
     {
       "name": "--tp-callout-padding-block",
       "default": "0.875rem",
-      "description": "Block padding. Default: `0.875rem`."
+      "description": "Inner spacing above and below the callout content."
     },
     {
       "name": "--tp-callout-padding-inline",
       "default": "1rem",
-      "description": "Inline padding. Default: `1rem`."
+      "description": "Inner spacing before and after the callout content."
     },
     {
       "name": "--tp-callout-radius",
       "default": "0.75rem",
-      "description": "Border radius. Default: `0.75rem`."
+      "description": "Corner radius of the callout panel."
     }
   ],
   "dependencies": [

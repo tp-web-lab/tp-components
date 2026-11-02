@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/timer.js";
-export { e as TpTimer };
+import{t as e}from"../../chunks/timer.js";export{e as TpTimer};

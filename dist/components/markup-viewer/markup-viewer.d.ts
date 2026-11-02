@@ -4,7 +4,6 @@
  */
 import { TpBase } from "../base/base.js";
 import type { TpCodeEditor } from "../code-editor/code-editor.js";
-import "../code-editor/code-editor.js";
 import "../divider/divider.js";
 import "../icon/icon.js";
 import "../icon-button/icon-button.js";
@@ -37,6 +36,7 @@ export declare abstract class TpMarkupViewer<TMode extends string, TContext = un
     private renderToken;
     /** Current source editor, including while its pane is hidden. */
     private responseEditor;
+    private readResponseSource;
     /** Renders a snapshot without changing the visible preview. */
     private renderResponse;
     /** Restores the selected example's initial source. */
@@ -47,6 +47,7 @@ export declare abstract class TpMarkupViewer<TMode extends string, TContext = un
     reset(): void;
     /** Creates an independent HTML document from the current source for testing. */
     createRenderedDocument(): Promise<string>;
+    private iframeObservationRevision;
     private iframeMutationObserver;
     private iframeResizeObserver;
     private iframeVisibilityObserver;
@@ -89,6 +90,7 @@ export declare abstract class TpMarkupViewer<TMode extends string, TContext = un
     protected getResetSource(example: MarkupViewerExample<TContext>): string;
     /** Requests a complete reload after programmatic source changes. */
     protected requestViewerRender(): void;
+    private readonly pendingVisibility;
     protected disconnectedCallback(): void;
     private renderViewer;
     /**

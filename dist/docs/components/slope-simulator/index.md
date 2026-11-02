@@ -34,14 +34,14 @@ Move a point along a straight slope and three fictional cycling stages. Equal mo
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the slope slider, clear button, points, profile choices and restart buttons. |
 | <kbd>Left</kbd> / <kbd>Right</kbd> on a point | Move left / right with slope-dependent effort. Holding a key repeats the movement. |
-| Arrow keys on the slope slider | Adjust the slope. |
-| Arrow keys on profile choices | Select another stage. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on the slope slider | Adjust the slope. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on profile choices | Select another stage. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on Grid | Show or hide the distance and elevation grid (hidden initially). |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on a button | Clear the slope, restart a route, apply the edited profile or restore its original code and curve. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on Profile code | Expand or collapse the editor. |
 | <kbd>F1</kbd> in the code editor | Show or hide its toolbar. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on a file-menu command | Load, save or save as JSON. |
-| Typing / arrow keys in the code editor | Edit JSON and move the caret without moving the route point. |
+| Typing / <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in the code editor | Edit JSON and move the caret without moving the route point. |
 | <kbd>Escape</kbd> | <kbd>End</kbd> a drag at the current position. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |
 
@@ -205,6 +205,29 @@ CSS properties
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -256,10 +279,6 @@ All tp-components used by `<tp-slope-simulator>` are loaded automatically by thi
 @summary CodeMirror-based code editor component.
 -->
 <!--
-@tp-dependency tp-dropdown
-@summary Dropdown menu component.
--->
-<!--
 @tp-dependency tp-icon-button
 @summary Accessible icon button component.
 -->
@@ -276,7 +295,6 @@ All tp-components used by `<tp-slope-simulator>` are loaded automatically by thi
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
 - [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
 - [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
-- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
 - [`<tp-numberfield>`](../numberfield/index.md) : Numeric field with an optional native range slider.
 - [`<tp-radio-list>`](../radio-list/index.md) : Transforms a list into a group of radio buttons.

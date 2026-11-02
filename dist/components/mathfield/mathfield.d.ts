@@ -1,7 +1,3 @@
-/**
- * @module components/mathfield
- * @summary Mathematical expression field with live LaTeX or AsciiMath rendering.
- */
 import "../copy-code/copy-code.js";
 import "../icon-button/icon-button.js";
 import "../textfield/textfield.js";
@@ -28,13 +24,15 @@ export type TpMathfieldLabelPosition = "top" | "bottom" | "start" | "end";
  * @event input Emitted when the expression changes while editing.
  * @event change Emitted when the expression is committed or a different notation is selected in the menu.
  * @event tp-clear Emitted after the embedded button clears the expression.
- * @event tp-math-rendered Emitted after MathJax finishes rendering the expression.
- * @cssprop [--tp-mathfield-inline-size=28rem] Component width.
- * @cssprop [--tp-mathfield-preview-background=Canvas] Preview panel background.
- * @cssprop [--tp-mathfield-preview-border-color=var(--tp-neutral-stroke-soft)] Preview border color.
- * @cssprop [--tp-mathfield-preview-padding=0.75rem] Preview padding.
+
  * @example
  * <tp-mathfield label="Formula" value="E = mc^2" clearable></tp-mathfield>
+ * @cssprop [--tp-mathfield-inline-size=28rem] Preferred width of the math editor, limited by available space; also caps the multiline component width.
+ * @cssprop [--tp-mathfield-preview-background=Canvas] Background color of the rendered formula preview.
+ * @cssprop [--tp-mathfield-preview-border-color=var(--tp-neutral-stroke-soft)] Border color of the rendered formula preview.
+ * @cssprop [--tp-mathfield-preview-padding=0.75rem] Inner spacing around the rendered formula preview.
+ * @event tp-math-rendered Emitted when the formula preview reports that rendering has finished; mode is the input notation and value is the current expression.
+ * @eventdetail tp-math-rendered { mode: "latexmath" | "asciimath"; value: string }
  */
 export declare class TpMathfield extends TpBase {
     private static nextModeId;

@@ -23,16 +23,16 @@ The components in the `tp-components` library are grouped by their primary purpo
 | [Layouts](#layouts) | 21 | Page structure, spacing, alignment, and responsive composition. |
 | [Markup Languages](#markup-languages) | 3 | Markup-language rendering components. |
 | [Notebooks](#notebooks) | 6 | Components in the Notebooks family. |
-| [Overlays](#overlays) | 7 | Dialogs, menus, popovers, and floating contextual content. |
+| [Overlays](#overlays) | 8 | Dialogs, menus, popovers, and floating contextual content. |
 | [Pickers](#pickers) | 5 | Visual selection of colors, emoji, formulas, icons, and symbols. |
 | [Playgrounds](#playgrounds) | 9 | Interactive execution environments for languages and markup formats. |
 | [Plots](#plots) | 6 | Geometric constructions, programmatic drawing and mathematical plotting. |
-| [Questions](#questions) | 16 | Quizzes and programming exercises using viewers or playgrounds. |
+| [Questions](#questions) | 17 | Quizzes and programming exercises using viewers or playgrounds. |
 | [References](#references) | 5 | Notes, bibliography, glossary, inline references and generated lists. |
 | [Simulators](#simulators) | 8 | Interactive automata, circuits, optics, and query simulations. |
 | [Slides](#slides) | 5 | Components in the Slides family. |
 | [Time](#time) | 4 | Clocks, alarms, timers, and chronometers. |
-| [Utilities](#utilities) | 18 | Reusable interaction and media helpers. |
+| [Utilities](#utilities) | 19 | Reusable interaction and media helpers. |
 | [Viewers](#viewers) | 10 | Rendering and inspection of structured content. |
 | **Total** | **176** | |
 [Classification of the components in `tp-components` by main themes]
@@ -180,6 +180,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 
 | Component | Description |
 | --- | --- |
+| <tp-icon name="mask" library="components" size="1.25em"></tp-icon> [`<tp-mask>`](mask/index.md) | Replaces an anchored component with a message while active. |
 | <tp-icon name="contextmenu" library="components" size="1.25em"></tp-icon> [`<tp-contextmenu>`](contextmenu/index.md) | Context menu. |
 | <tp-icon name="dialog" library="components" size="1.25em"></tp-icon> [`<tp-dialog>`](dialog/index.md) | Confirm/cancel dialog. |
 | <tp-icon name="drawer" library="components" size="1.25em"></tp-icon> [`<tp-drawer>`](drawer/index.md) | Sliding drawer panel. |
@@ -228,6 +229,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | Component | Description |
 | --- | --- |
 | <tp-icon name="asciidoc-viewer-question" library="components" size="1.25em"></tp-icon> [`<tp-asciidoc-viewer-question>`](asciidoc-viewer-question/index.md) | Checks rendered AsciiDoc using a viewer and external JavaScript DOM tests. |
+| <tp-icon name="exercise" library="components" size="1.25em"></tp-icon> [`<tp-exercise>`](exercise/index.md) | Shared context and ordered questions with an optional common timer. |
 | <tp-icon name="fill-blank-question" library="components" size="1.25em"></tp-icon> [`<tp-fill-blank-question>`](fill-blank-question/index.md) | Fill-in-the-blank open-ended or closed-ended question. |
 | <tp-icon name="html-viewer-question" library="components" size="1.25em"></tp-icon> [`<tp-html-viewer-question>`](html-viewer-question/index.md) | Checks rendered HTML using a viewer and external JavaScript DOM tests. |
 | <tp-icon name="javascript-playground-question" library="components" size="1.25em"></tp-icon> [`<tp-javascript-playground-question>`](javascript-playground-question/index.md) | JavaScript project using its playground and external tests. |
@@ -290,6 +292,8 @@ The components in the `tp-components` library are grouped by their primary purpo
 
 | Component | Description |
 | --- | --- |
+| <tp-icon name="video-player" library="components" size="1.25em"></tp-icon> [`<tp-video-player>`](video-player/index.md) | Plays native video files and YouTube videos with a common playback API. |
+| <tp-icon name="audio-recorder" library="components" size="1.25em"></tp-icon> [`<tp-audio-recorder>`](audio-recorder/index.md) | Records microphone audio locally for replay and download. |
 | <tp-icon name="animation" library="components" size="1.25em"></tp-icon> [`<tp-animation>`](animation/index.md) | Applies an animation to a target element with [`animate.css`](https://animate.style) for animation names and the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Web_Animations_API_Concepts) for playback control. |
 | <tp-icon name="avatar" library="components" size="1.25em"></tp-icon> [`<tp-avatar>`](avatar/index.md) | Displays an image, initials or an icon in a circle or square. |
 | <tp-icon name="avatar-group" library="components" size="1.25em"></tp-icon> [`<tp-avatar-group>`](avatar-group/index.md) | Groups tp-avatar elements with configurable overlap, stacking order and orientation. |
@@ -302,11 +306,13 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="list-table" library="components" size="1.25em"></tp-icon> [`<tp-list-table>`](list-table/index.md) | Creates an HTML table from ordered or unordered lists while preserving cell content. |
 | <tp-icon name="lorem-ipsum" library="components" size="1.25em"></tp-icon> [`<tp-lorem-ipsum>`](lorem-ipsum/index.md) | Generates placeholder sentences, titles, paragraphs or lists. |
 | <tp-icon name="math" library="components" size="1.25em"></tp-icon> [`<tp-math>`](math/index.md) | Renders LaTeX or AsciiMath expressions as inline or display-style SVG with [MathJax](https://www.mathjax.org). |
+| <tp-icon name="save-audio" library="components" size="1.25em"></tp-icon> [`<tp-save-audio>`](save-audio/index.md) | Saves audio as MP3, OGG or WAV through an associated component. |
 | <tp-icon name="save-image" library="components" size="1.25em"></tp-icon> [`<tp-save-image>`](save-image/index.md) | Downloads an anchored image as SVG, PNG, or WebP. |
 | <tp-icon name="skeleton" library="components" size="1.25em"></tp-icon> [`<tp-skeleton>`](skeleton/index.md) | Renders selected HTML elements as fixed shaded skeleton patterns without executing the source. |
 | <tp-icon name="source" library="components" size="1.25em"></tp-icon> [`<tp-source>`](source/index.md) | Source repository link button. |
 | <tp-icon name="speech-to-text" library="components" size="1.25em"></tp-icon> [`<tp-speech-to-text>`](speech-to-text/index.md) | Transcribes microphone speech into editable text using the [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API). |
 | <tp-icon name="text-to-speech" library="components" size="1.25em"></tp-icon> [`<tp-text-to-speech>`](text-to-speech/index.md) | Reads inline or external text aloud with browser speech synthesis. |
+| <tp-icon name="slide-note" library="components" size="1.25em"></tp-icon> [`<tp-slide-note>`](slide-note/index.md) | Presents collapsible speaker notes above a presentation's mode menu. |
 | <tp-icon name="typewriting" library="components" size="1.25em"></tp-icon> [`<tp-typewriting>`](typewriting/index.md) | Progressively reveals text one letter or one word at a time. |
 
 ## Viewers

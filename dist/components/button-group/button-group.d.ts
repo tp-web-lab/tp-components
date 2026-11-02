@@ -2,24 +2,32 @@
  * @module components/button-group
  * @summary Button group component for organizing multiple buttons.
  */
-import { TpBase } from '../base/base.js';
-import '../button/button.js';
+/**
+ * @tp-dependency tp-base
+ * @summary Shared base class for tp-* components.
+ */
+/**
+ * @tp-dependency tp-button
+ * @summary Button component that supports native button and link rendering.
+ */
+import { TpBase } from "../base/base.js";
+import "../button/button.js";
 /**
  * @summary API documentation summary.
  */
-export type TpButtonGroupOrientation = 'horizontal' | 'vertical';
+export type TpButtonGroupOrientation = "horizontal" | "vertical";
 /**
  * @summary API documentation summary.
  * @tagname tp-button-group
- * @attr {string} orientation = "horizontal" - Attribute `orientation`.
- * @attr {boolean} attached = false - Attribute `attached`.
- * @attr {boolean} stretch = false - Attribute `stretch`.
- * @cssprop [--tp-button-group-gap=0] CSS custom property.
+ * @attr {string} orientation = "horizontal" - Arrangement of buttons: horizontal in a row, or vertical in a column.
+ * @attr {boolean} attached = false - Joins adjacent buttons without gaps and removes their inner corner rounding.
+ * @attr {boolean} stretch = false - Expands the group to the available width and gives its buttons equal flexible space.
  * @example
  * <tp-button-group>
  * <tp-button>Previous</tp-button>
  *   <tp-button data-next>Next</tp-button>
  * </tp-button-group>
+ * @cssprop [--tp-button-group-gap=0] Space between adjacent buttons in the group.
  */
 export declare class TpButtonGroup extends TpBase {
     /**
@@ -39,13 +47,13 @@ export declare class TpButtonGroup extends TpBase {
     get orientation(): TpButtonGroupOrientation;
     set orientation(value: TpButtonGroupOrientation);
     /**
-     * @summary API documentation summary.
+     * @summary Joins adjacent buttons without gaps and removes their inner corner rounding.
      * @attr attached
      */
     get attached(): boolean;
     set attached(value: boolean);
     /**
-     * @summary API documentation summary.
+     * @summary Expands the group to the available width and gives its buttons equal flexible space.
      * @attr stretch
      */
     get stretch(): boolean;
@@ -76,6 +84,6 @@ export declare class TpButtonGroup extends TpBase {
 }
 declare global {
     interface HTMLElementTagNameMap {
-        'tp-button-group': TpButtonGroup;
+        "tp-button-group": TpButtonGroup;
     }
 }

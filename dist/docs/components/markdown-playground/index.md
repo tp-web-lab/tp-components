@@ -32,7 +32,7 @@ The custom `<tp-markdown-playground>` element implements the <tp-icon name="mark
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Arrow keys / <kbd>Enter</kbd> / <kbd>Space</kbd> / <kbd>Escape</kbd> | Navigate toolbar menus, activate an action, or close a submenu. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> / <kbd>Enter</kbd> / <kbd>Space</kbd> / <kbd>Escape</kbd> | Navigate toolbar menus, activate an action, or close a submenu. |
 | Focused controls | Use each control’s standard keyboard interaction.  |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
@@ -411,6 +411,29 @@ CSS properties
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -463,15 +486,11 @@ All tp-components used by `<tp-markdown-playground>` are loaded automatically by
 -->
 <!--
 @tp-dependency tp-drawer
-@summary Displays a sliding drawer panel.
+@summary Drawer overlay component.
 -->
 <!--
 @tp-dependency tp-dropdown
-@summary Displays an anchored dropdown menu.
--->
-<!--
-@tp-dependency tp-file-tree
-@summary Displays an interactive file and folder tree.
+@summary Dropdown menu component.
 -->
 <!--
 @tp-dependency tp-filesystem
@@ -514,9 +533,8 @@ All tp-components used by `<tp-markdown-playground>` are loaded automatically by
 - [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
 - [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
 - [`<tp-console>`](../console/index.md) : Displays structured console output.
-- [`<tp-drawer>`](../drawer/index.md) : Displays a sliding drawer panel.
-- [`<tp-dropdown>`](../dropdown/index.md) : Displays an anchored dropdown menu.
-- [`<tp-file-tree>`](../file-tree/index.md) : Displays an interactive file and folder tree.
+- [`<tp-drawer>`](../drawer/index.md) : Drawer overlay component.
+- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
 - [`<tp-filesystem>`](../filesystem/index.md) : In-memory file system component.
 - [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
@@ -530,19 +548,24 @@ All tp-components used by `<tp-markdown-playground>` are loaded automatically by
 ### External
 
 <!--
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
+-->
+<!--
 @credit es-module-lexer https://github.com/guybedford/es-module-lexer
 @summary ECMAScript module import analysis.
 -->
 <!--
-@credit TypeScript https://www.typescriptlang.org/
-@summary TypeScript transpilation and language services.
+@credit Lit https://lit.dev/
+@summary Web-component examples and import maps.
 -->
 <!--
 @credit Zod https://zod.dev/
 @summary Runtime schema validation.
 -->
 
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 - [es-module-lexer](https://github.com/guybedford/es-module-lexer) : ECMAScript module import analysis.
-- [TypeScript](https://www.typescriptlang.org/) : TypeScript transpilation and language services.
+- [Lit](https://lit.dev/) : Web-component examples and import maps.
 - [Zod](https://zod.dev/) : Runtime schema validation.
 <!-- tp-docgen:dependencies:end -->

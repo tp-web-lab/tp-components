@@ -7,8 +7,8 @@
  * @tp-dependency tp-markdown
  * @summary Markdown rendering component.
  */
-import { TpGraphEditor, type TpGraphDocument, type TpGraphEdge, type TpGraphNode, type TpGraphPoint } from '../graph-editor/graph-editor.js';
-import '../markdown/markdown.js';
+import { type TpGraphDocument, type TpGraphEdge, TpGraphEditor, type TpGraphNode, type TpGraphPoint } from "../graph-editor/graph-editor.js";
+import "../markdown/markdown.js";
 export declare const TP_OPTICS_SOURCE = "optics-source";
 export declare const TP_OPTICS_POINT_SOURCE = "optics-point-source";
 export declare const TP_OPTICS_CONVERGING_LENS = "optics-converging-lens";
@@ -38,13 +38,15 @@ export interface TpOpticsAnalysis {
     stages: TpOpticsMatrixStage[];
     imageX: number | null;
     magnification: number | null;
-    imageKind: 'real' | 'virtual' | 'afocal';
-    orientation: 'upright' | 'inverted' | 'undefined';
+    imageKind: "real" | "virtual" | "afocal";
+    orientation: "upright" | "inverted" | "undefined";
 }
 export declare function validateGeometricOpticsGraph(graph: Readonly<TpGraphDocument>): void;
 export declare function analyzeGeometricOptics(graph: Readonly<TpGraphDocument>): TpOpticsAnalysis;
 /** @summary Edits and simulates a paraxial geometric-optics bench. @tagname tp-graph-geometric-optics @event tp-optics-trace * @example
  * <tp-graph-geometric-optics></tp-graph-geometric-optics>
+ * @event tp-optics-trace Emitted after trace recomputes the displayed ray paths; analysis contains the optical-system analysis and graph is the resulting snapshot.
+ * @eventdetail tp-optics-trace { analysis: TpOpticsAnalysis; graph: TpGraphDocument }
  */
 export declare class TpGraphGeometricOptics extends TpGraphEditor {
     private static readonly opticsStyleId;
@@ -53,8 +55,17 @@ export declare class TpGraphGeometricOptics extends TpGraphEditor {
     private selectedOpticsId;
     constructor();
     protected connectedCallback(): void;
+    /**
+     * @summary Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph.
+     */
     setGraph(graph: TpGraphDocument): void;
+    /**
+     * @summary Adds a supported optical component at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError.
+     */
     addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode;
+    /**
+     * @summary Always throws TypeError: optical rays are computed from the scene and cannot be added as graph edges.
+     */
     addEdge(): TpGraphEdge;
     protected edgeDirections(): readonly [];
     protected graphWorldBounds(): Readonly<{
@@ -63,7 +74,13 @@ export declare class TpGraphGeometricOptics extends TpGraphEditor {
         maxX: number;
         maxY: number;
     }>;
+    /**
+     * @summary Returns the ray-tracing analysis computed from the current optical scene without replacing the graph.
+     */
     analyze(): TpOpticsAnalysis;
+    /**
+     * @summary Revalidates and redraws the current scene, then emits tp-optics-trace with its analysis and graph snapshot.
+     */
     trace(): void;
     protected renderToolbarActions(): string;
     protected renderResults(): string;

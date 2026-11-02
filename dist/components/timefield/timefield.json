@@ -57,7 +57,7 @@
     },
     {
       "name": "max",
-      "description": "Latest selectable time.",
+      "description": "Latest selectable time in HH:mm or HH:mm:ss format.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -66,7 +66,7 @@
     },
     {
       "name": "min",
-      "description": "Earliest selectable time.",
+      "description": "Earliest selectable time in HH:mm or HH:mm:ss format.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -166,57 +166,57 @@
     {
       "name": "--tp-timefield-background",
       "default": "var(--tp-paper-color)",
-      "description": "Controls the background."
+      "description": "Background of the input control, excluding its label."
     },
     {
       "name": "--tp-timefield-border-color",
       "default": "var(--tp-neutral-stroke-soft)",
-      "description": "Controls the border color."
+      "description": "Border color of the input control when it is not focused."
     },
     {
       "name": "--tp-timefield-focus-color",
       "default": "var(--tp-brand-text-colorful)",
-      "description": "Controls the focus color."
+      "description": "Border color and translucent outline tint while focus is inside the control."
     },
     {
       "name": "--tp-timefield-inline-size",
       "default": "10.5em",
-      "description": "Controls the inline size."
+      "description": "Preferred width of the field, limited by the available container width."
     },
     {
       "name": "--tp-timefield-label-font-weight",
       "default": "500",
-      "description": "Controls the label font weight."
+      "description": "Font weight of the field label."
     },
     {
       "name": "--tp-timefield-label-gap",
       "default": "0.35em",
-      "description": "Controls the label gap."
+      "description": "Space between the label and the input control."
     },
     {
       "name": "--tp-timefield-padding-block",
       "default": "0.6em",
-      "description": "Controls the padding block."
+      "description": "Inner spacing above and below the input value."
     },
     {
       "name": "--tp-timefield-padding-inline",
       "default": "0.75em",
-      "description": "Controls the padding inline."
+      "description": "Inner spacing before and after the input value; additional space is reserved for action buttons."
     },
     {
       "name": "--tp-timefield-radius",
       "default": "var(--tp-border-radius-sm)",
-      "description": "Controls the radius."
+      "description": "Corner radius of the input control."
     },
     {
       "name": "--tp-timefield-required-color",
       "default": "var(--tp-danger-text-colorful)",
-      "description": "Controls the required color."
+      "description": "Color of the asterisk marking a required field."
     },
     {
       "name": "--tp-timefield-value-font-weight",
       "default": "400",
-      "description": "Controls the value font weight."
+      "description": "Font weight of the displayed input value."
     }
   ],
   "dependencies": [

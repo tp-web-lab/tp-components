@@ -1,27 +1,3 @@
-/**
- * @module components/speech-to-text
- * @summary Transcribes microphone speech using browser speech recognition.
- */
-/**
- * @tp-dependency tp-base
- * @summary Shared base class for tp-* components.
- */
-/**
- * @tp-dependency tp-button
- * @summary Button component that supports native button and link rendering.
- */
-/**
- * @tp-dependency tp-button-group
- * @summary Button group component for organizing multiple buttons.
- */
-/**
- * @tp-dependency tp-stack
- * @summary Vertical stack layout component.
- */
-/**
- * @tp-dependency tp-textfield
- * @summary Single-line and automatically growing multiline text field.
- */
 import { TpBase } from "../base/base.js";
 import "../button-group/button-group.js";
 import "../button/button.js";
@@ -30,7 +6,9 @@ import "../textfield/textfield.js";
 /**
  * @tagname tp-speech-to-text
  * @summary transcribes microphone speech into editable text using the Web Speech API.
+ * @attr {string} legend = "Speech to text" - Caption of the fieldset surrounding the controls.
  * @attr {string} value = "" - Final transcript, editable without microphone access.
+ * @attr {boolean} record = false - Safari only (temporary): records audio alongside recognition for replay and download.
  * @attr {boolean} continuous = false - Requests multiple recognition results in one session.
  * @attr {boolean} interim-results = false - Displays provisional recognition separately from the final transcript.
  * @attr {boolean} disabled = false - Disables editing and recognition and stops any active session.
@@ -64,6 +42,11 @@ export declare class TpSpeechToText extends TpBase {
     private status;
     /** Current lifecycle state, including pending permission and finalization. */
     private state;
+    private audioRecorder;
+    /** Enables optional local recording alongside transcription. */
+    get record(): boolean;
+    set record(value: boolean);
+    private syncRecorder;
     /** Final transcript, also usable as an initial value. */
     get value(): string;
     /** Replaces the final transcript and cancels any in-flight dictation. */

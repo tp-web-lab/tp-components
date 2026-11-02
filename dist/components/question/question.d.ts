@@ -26,7 +26,7 @@ export interface TpQuestionSubmitDetail {
  * renders an interactive layout with:
  * - `<details><summary>` from `Title`
  * - full-width prompt section
- * - input/output toggles at the end of the Prompt row; both panels start visible
+ * - input/output toggles at the end of the Prompt row; initial visibility follows the open attribute
  * - responsive two-panel area (form left, feedback/solution right)
  * - reset/submit actions and a message zone under the form
  *
@@ -36,8 +36,14 @@ export interface TpQuestionSubmitDetail {
  * @tagname tp-question
  * @attr {string} src = "" - URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition.
  * @attr {string} mode = "mixed" - Blank mode: opened, closed, or mixed local choices.
- * @attr {boolean} open = false - Expands the question; absent by default, leaving only its title visible.
- * @event tp-question-submit - Fired when the submit icon button is activated.
+ * @attr {string} ai-explanation-src = "" - URL of a saved Markdown explanation; the companion .prompt.md must match the current prompt.
+ * @attr {boolean} ai-api = false - Allows sending AI prompts to the selected provider; without it, prompts are only copied.
+ * @attr {string} ai-assistant = "openai" - AI provider, optionally followed by /model; without a model, uses the server configuration. Providers: openai, anthropic, google, mistral.
+ * @attr {"none"|"feedback"|"solution"|"both"} ai-help = "none" - Optional AI assistance; solution and both enable solution explanations. Feedback assistance is reserved for a future release.
+ * @attr {string} timing = "" - Optional nonzero time limit in strict hh:mm:ss format.
+ * @attr {boolean} score = false - Displays the numerical score in submission feedback.
+ * @attr {string} open = "" - Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.
+
  *   `detail: { value: unknown }`
  * @example
  * <tp-question>
@@ -49,16 +55,38 @@ export interface TpQuestionSubmitDetail {
  *       <dt>Solution</dt><dd>They package reusable behavior behind a custom element.</dd>
  *     </dl>
  *   </tp-question>
+ * @event tp-question-submit Emitted after an answer passes submission validation and preparation. value is the response widget value, whose type depends on the question; invalid or blocked repeated submissions do not emit it.
+ * @eventdetail tp-question-submit { value: unknown }
  */
 export declare class TpQuestion extends TpBase {
+    private readonly questionTiming;
+    private readonly questionAi;
+    /** Whether numerical scores are displayed in feedback. */
+    get score(): boolean;
+    set score(value: boolean);
+    /** Sets an enclosing exercise's solution gate without displaying a local timer. */
+    setExerciseTiming(exercise: HTMLElement, pending: boolean): void;
+    /** Optional time limit; invalid and zero durations disable timing. */
+    get timing(): string;
+    set timing(value: string);
     static get observedAttributes(): string[];
+    /** Explicit permission to send prompts through the API. */
+    get aiApi(): boolean;
+    set aiApi(value: boolean);
+    /** Selected AI provider; absent or invalid values use OpenAI. */
+    get aiAssistant(): string;
+    set aiAssistant(value: string);
+    /** Optional AI assistance; missing or invalid values disable it. */
+    get aiHelp(): "none" | "feedback" | "solution" | "both";
+    set aiHelp(value: "none" | "feedback" | "solution" | "both");
     /** Global blank policy; missing and invalid values use local choices. */
     get mode(): "opened" | "closed" | "mixed";
     set mode(value: "opened" | "closed" | "mixed");
-    /** Whether the question is expanded. Boolean attributes use presence only. */
-    get open(): boolean;
-    /** Expands or collapses the question without discarding answers. */
-    set open(value: boolean);
+    /** Initial panel selection; a bare attribute selects both panels. */
+    get open(): "both" | "input" | "output" | false;
+    /** Selects panels without discarding answers; booleans remain supported in JavaScript. */
+    set open(value: "both" | "input" | "output" | boolean);
+    private applyOpenPanels;
     /** Synchronizes declarative visibility changes with the native disclosure. */
     protected attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void;
     /**
@@ -367,6 +395,8 @@ export declare class TpQuestion extends TpBase {
      * @param _value Current value from the response widget.
      */
     protected onSubmitAttempt(_value: unknown): void;
+    /** Makes the solution available after automatic grading confirms a correct answer. */
+    protected unlockCorrectSolution(feedback: HTMLElement): void;
     /** Allows specialized asynchronous exercises to rerun an unchanged answer. */
     protected get allowRepeatedSubmission(): boolean;
     /** Reads the answer exposed by the response widget. */

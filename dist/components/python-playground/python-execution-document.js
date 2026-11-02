@@ -1,24 +1,12 @@
-import { E as e, f as t, n, t as r } from "../../chunks/playground-build-utils.js";
-import { createPyodideRuntimeScript as i } from "./python-runtime-script.js";
-//#region src/components/python-playground/python-execution-document.ts
-async function a(a, o = {}) {
-	let s = e(a, {
-		entry: o.entry,
-		priorityPaths: ["/main.py"],
-		extensions: [".py"],
-		fallbackToFirstFile: !1
-	});
-	if (s === void 0) throw Error("No Python entry file found.");
-	let c = t(a, "/index.html")?.content ?? "", l = JSON.stringify(Object.fromEntries(a.files.map((e) => [e.path, e.content]))), u = JSON.stringify(s.path), d = JSON.stringify(o.libs ?? []), f = JSON.stringify(o.scope ?? "default");
-	return { html: `
+import{t as e}from"../../chunks/tool-loading.js";import{E as t,f as n,n as r,t as i}from"../../chunks/playground-build-utils.js";import{createPyodideRuntimeScript as a}from"./python-runtime-script.js";async function o(o,s={}){let c=t(o,{entry:s.entry,priorityPaths:[`/main.py`],extensions:[`.py`],fallbackToFirstFile:!1});if(c===void 0)throw Error(`No Python entry file found.`);let l=n(o,`/index.html`)?.content??``,u=JSON.stringify(Object.fromEntries(o.files.map(e=>[e.path,e.content]))),d=JSON.stringify(c.path),f=JSON.stringify(s.libs??[]),p=JSON.stringify(s.scope??`default`);return{html:`
 <!doctype html>
 <html>
 <head></head>
 <body>
-  ${c}
-  ${r()}
-  ${n()}
+  ${l}
   ${i()}
+  ${r()}
+  ${a()}
 
   <script>
     function removeProjectPath(pyodide, path) {
@@ -97,7 +85,7 @@ async function a(a, o = {}) {
       const pyodide = await window.tpLoadPyodide();
 
       await window.tpRunWithPyodide(async () => {
-        const libs = ${d};
+        const libs = ${f};
 
         if (libs.length > 0) {
           await window.tpLoadPyodidePackages(pyodide, libs);
@@ -108,18 +96,63 @@ async function a(a, o = {}) {
         resetProjectDirectory(pyodide);
         pyodide.FS.chdir('/project');
 
-        const files = ${l};
-        const entryPath = ${u}.replace(/^\\//, '');
+        const files = ${u};
+        const entryPath = ${d}.replace(/^\\//, '');
 
         try {
           writeProjectFiles(pyodide, files);
 
           pyodide.globals.set('tp_entry_path', entryPath);
-          pyodide.globals.set('tp_execution_scope', ${f});
+          pyodide.globals.set('tp_execution_scope', ${p});
           pyodide.globals.set('tp_project_paths', Object.keys(files));
           pyodide.globals.set('tp_window', window);
 
-          pyodide.runPython(${JSON.stringify("\nimport sys\n\nif \"tp_execution_namespaces\" not in globals():\n    tp_execution_namespaces = {}\n\nif \"/project\" not in sys.path:\n    sys.path.insert(0, \"/project\")\n\nif \"\" not in sys.path:\n    sys.path.insert(0, \"\")\n\nimport types\n\nclass TpPreviewJsModule(types.ModuleType):\n    def __getattr__(self, name):\n        return getattr(tp_window, name)\n\nsys.modules[\"js\"] = TpPreviewJsModule(\"js\")\n\n# Matplotlib's browser backend keeps JavaScript references to the document in\n# which it was imported. The Pyodide runtime is shared between preview iframes,\n# so reload Matplotlib modules to bind a repeated run to the current iframe.\nfor module_name in tuple(sys.modules):\n    if module_name == \"matplotlib\" or module_name.startswith(\"matplotlib.\"):\n        sys.modules.pop(module_name, None)\n\nproject_modules = []\n\nfor path in tp_project_paths:\n    if not path.endswith(\".py\"):\n        continue\n\n    module_name = path.removeprefix(\"/\").removesuffix(\".py\").replace(\"/\", \".\")\n\n    if module_name == \"__init__\":\n        continue\n\n    if module_name.endswith(\".__init__\"):\n        module_name = module_name.removesuffix(\".__init__\")\n\n    project_modules.append(module_name)\n\nfor module_name in project_modules:\n    sys.modules.pop(module_name, None)\n")});
+          pyodide.runPython(${JSON.stringify(`
+import sys
+
+if "tp_execution_namespaces" not in globals():
+    tp_execution_namespaces = {}
+
+if "/project" not in sys.path:
+    sys.path.insert(0, "/project")
+
+if "" not in sys.path:
+    sys.path.insert(0, "")
+
+import types
+
+class TpPreviewJsModule(types.ModuleType):
+    def __getattr__(self, name):
+        return getattr(tp_window, name)
+
+sys.modules["js"] = TpPreviewJsModule("js")
+
+# Matplotlib's browser backend keeps JavaScript references to the document in
+# which it was imported. The Pyodide runtime is shared between preview iframes,
+# so reload Matplotlib modules to bind a repeated run to the current iframe.
+for module_name in tuple(sys.modules):
+    if module_name == "matplotlib" or module_name.startswith("matplotlib."):
+        sys.modules.pop(module_name, None)
+
+project_modules = []
+
+for path in tp_project_paths:
+    if not path.endswith(".py"):
+        continue
+
+    module_name = path.removeprefix("/").removesuffix(".py").replace("/", ".")
+
+    if module_name == "__init__":
+        continue
+
+    if module_name.endswith(".__init__"):
+        module_name = module_name.removesuffix(".__init__")
+
+    project_modules.append(module_name)
+
+for module_name in project_modules:
+    sys.modules.pop(module_name, None)
+`)});
 
           const source = files['/' + entryPath] ?? files[entryPath] ?? '';
 
@@ -132,11 +165,49 @@ async function a(a, o = {}) {
             errorCallback: (message) => console.error(message),
           });
 
+          for (const name of Object.keys(pyodide.loadedPackages ?? {})) {
+ (${e.toString()})("python-" + name, name);
+ }
+
           if (/(?:from|import)\\s+matplotlib(?:\\.|\\s|$)/m.test(source)) {
-            pyodide.runPython(${JSON.stringify("\nfrom io import StringIO\nimport matplotlib\n\nmatplotlib.use(\"svg\", force=True)\nimport matplotlib.pyplot as plt\n\ndef tp_show_matplotlib(*args, **kwargs):\n    container = tp_window.document.createElement(\"div\")\n    container.setAttribute(\"data-tp-python-plots\", \"\")\n    tp_window.document.body.appendChild(container)\n\n    for figure_number in plt.get_fignums():\n        figure = plt.figure(figure_number)\n        buffer = StringIO()\n        figure.savefig(buffer, format=\"svg\")\n        plot = tp_window.document.createElement(\"div\")\n        plot.setAttribute(\"data-tp-python-plot\", \"\")\n        plot.innerHTML = buffer.getvalue()\n        container.append(plot)\n\n    plt.close(\"all\")\n\nplt.show = tp_show_matplotlib\n")});
+            pyodide.runPython(${JSON.stringify(`
+from io import StringIO
+import matplotlib
+
+matplotlib.use("svg", force=True)
+import matplotlib.pyplot as plt
+
+def tp_show_matplotlib(*args, **kwargs):
+    container = tp_window.document.createElement("div")
+    container.setAttribute("data-tp-python-plots", "")
+    tp_window.document.body.appendChild(container)
+
+    for figure_number in plt.get_fignums():
+        figure = plt.figure(figure_number)
+        buffer = StringIO()
+        figure.savefig(buffer, format="svg")
+        plot = tp_window.document.createElement("div")
+        plot.setAttribute("data-tp-python-plot", "")
+        plot.innerHTML = buffer.getvalue()
+        container.append(plot)
+
+    plt.close("all")
+
+plt.show = tp_show_matplotlib
+`)});
           }
 
-          await pyodide.runPythonAsync(${JSON.stringify("\nfrom pathlib import Path\n\nentry = Path(tp_entry_path)\nnamespace = tp_execution_namespaces.setdefault(\n    tp_execution_scope,\n    {\"__name__\": \"__main__\", \"__builtins__\": __builtins__},\n)\nnamespace[\"__file__\"] = str(entry)\nexec(compile(entry.read_text(), str(entry), \"exec\"), namespace, namespace)\n")});
+          await pyodide.runPythonAsync(${JSON.stringify(`
+from pathlib import Path
+
+entry = Path(tp_entry_path)
+namespace = tp_execution_namespaces.setdefault(
+    tp_execution_scope,
+    {"__name__": "__main__", "__builtins__": __builtins__},
+)
+namespace["__file__"] = str(entry)
+exec(compile(entry.read_text(), str(entry), "exec"), namespace, namespace)
+`)});
         } catch (error) {
           console.error(error?.message ?? error);
         }
@@ -147,9 +218,5 @@ async function a(a, o = {}) {
   <\/script>
 </body>
 </html>
-` };
-}
-//#endregion
-export { a as buildPythonExecutionDocument };
-
+`}}export{o as buildPythonExecutionDocument};
 //# sourceMappingURL=python-execution-document.js.map

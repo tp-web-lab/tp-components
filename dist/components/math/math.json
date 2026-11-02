@@ -30,7 +30,7 @@
     },
     {
       "name": "mode",
-      "description": "Mathematical input notation.",
+      "description": "Input notation: latexmath for LaTeX expressions or asciimath for ASCII math. Invalid values use latexmath.",
       "reflected": true,
       "static": false,
       "inherited": false,

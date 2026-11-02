@@ -45,10 +45,6 @@
   "cssproperties": [],
   "dependencies": [
     {
-      "name": "tp-file-tree",
-      "summary": "Displays an interactive file and folder tree."
-    },
-    {
       "name": "tp-prolog-playground",
       "summary": "Prolog playground component."
     }

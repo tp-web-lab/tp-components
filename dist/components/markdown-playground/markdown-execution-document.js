@@ -1,18 +1,4 @@
-import { E as e, f as t, n, t as r } from "../../chunks/playground-build-utils.js";
-//#region src/components/markdown-playground/markdown-execution-document.ts
-function i(e) {
-	return JSON.stringify(e).replaceAll("<\/script", "<\\/script");
-}
-async function a(a, o = {}) {
-	let s = e(a, {
-		entry: o.entry,
-		priorityPaths: ["/index.md", "/main.md"],
-		extensions: [".md", ".markdown"],
-		fallbackToFirstFile: !1
-	});
-	if (s === void 0) throw Error("No Markdown entry file found.");
-	let c = t(a, "/index.html")?.content ?? "", l = i(Object.fromEntries(a.files.map((e) => [e.path, e.content]))), u = i(s.path);
-	return { html: `
+import{E as e,f as t,n,t as r}from"../../chunks/playground-build-utils.js";function i(e){return JSON.stringify(e).replaceAll(`<\/script`,`<\\/script`)}async function a(a,o={}){let s=e(a,{entry:o.entry,priorityPaths:[`/index.md`,`/main.md`],extensions:[`.md`,`.markdown`],fallbackToFirstFile:!1});if(s===void 0)throw Error(`No Markdown entry file found.`);let c=t(a,`/index.html`)?.content??``,l=i(Object.fromEntries(a.files.map(e=>[e.path,e.content]))),u=i(s.path);return{html:`
 <!doctype html>
 <html>
 <head>
@@ -127,9 +113,5 @@ async function a(a, o = {}) {
   <\/script>
 </body>
 </html>
-` };
-}
-//#endregion
-export { a as buildMarkdownExecutionDocument };
-
+`}}export{a as buildMarkdownExecutionDocument};
 //# sourceMappingURL=markdown-execution-document.js.map

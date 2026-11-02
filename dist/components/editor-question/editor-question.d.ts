@@ -48,6 +48,8 @@ export declare abstract class TpEditorQuestion<TEditor extends HTMLElement & {
     private report;
     /** Feedback root retained while asynchronous tests run. */
     private result;
+    /** Keeps the inherited source loader from consuming editor project files. */
+    protected get usesExternalData(): boolean;
     /** Builds the standard question layout before inserting the programming control. */
     protected connectedCallback(): void;
     /** Releases listeners, pending fetches and generated execution resources. */

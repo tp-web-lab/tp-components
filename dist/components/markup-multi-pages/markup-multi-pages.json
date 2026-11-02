@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "brand",
-      "description": "Controls the brand.",
+      "description": "Legacy brand preset property, such as tp-default. Attribute-driven styling is currently inactive; use the toolbar color control.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -21,7 +21,7 @@
     },
     {
       "name": "git",
-      "description": "Controls the git.",
+      "description": "Repository URL assigned to the toolbar source link when the document shell is created. Set before connecting the component.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -30,7 +30,7 @@
     },
     {
       "name": "label",
-      "description": "Controls the label.",
+      "description": "Title displayed in the center of the document toolbar.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -47,8 +47,17 @@
       "default": "\"\""
     },
     {
+      "name": "logo",
+      "description": "Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
       "name": "menu",
-      "description": "Controls the menu.",
+      "description": "Opens the navigation sidebar when present; the toolbar Menu button toggles this attribute.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -57,7 +66,7 @@
     },
     {
       "name": "repository",
-      "description": "Controls the repository.",
+      "description": "Root path containing the sidebar, cover and linked documents. The component selects the corresponding HTML, Markdown, AsciiDoc or reStructuredText files.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -66,7 +75,7 @@
     },
     {
       "name": "theme",
-      "description": "Controls the theme.",
+      "description": "Legacy light, dark or auto property. Attribute-driven styling is currently inactive; use the toolbar theme control.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -79,8 +88,8 @@
   "cssproperties": [
     {
       "name": "--tp-markup-multi-pages-sidebar-width",
-      "default": "var(--tp-markup-multi-pages-sidebar-width, 12rem)",
-      "description": "Controls the sidebar width."
+      "default": "12rem",
+      "description": "Width of the overlay navigation sidebar on narrow screens, capped at 85% of its container; desktop sizing is controlled by the splitter."
     }
   ],
   "dependencies": [
@@ -107,6 +116,10 @@
     {
       "name": "tp-fullscreen",
       "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
     },
     {
       "name": "tp-icon-button",

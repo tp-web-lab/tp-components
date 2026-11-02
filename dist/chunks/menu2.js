@@ -1,0 +1,2 @@
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>`;export{t as n,n as t};
+//# sourceMappingURL=menu2.js.map

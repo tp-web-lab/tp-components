@@ -2,17 +2,17 @@
   "tagname": "tp-icon",
   "classname": "TpIcon",
   "superclass": "TpBase",
-  "description": "API documentation summary.",
+  "description": "Displays SVG icons from inline markup, a URL or an icon library, with sizing, color, transforms and fallbacks.",
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-icon></tp-icon>"
+      "code": "<tp-icon name=\"heart\" size=\"3rem\" aria-label=\"Heart\"></tp-icon>"
     }
   ],
   "attributes": [
     {
       "name": "color",
-      "description": "Attribute `color`.",
+      "description": "CSS color applied to the SVG and its colorizable fills and strokes, for example red, #2563eb or var(--brand-color). Empty inherits the surrounding text color; explicit fixed SVG colors are preserved.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -21,7 +21,7 @@
     },
     {
       "name": "fallback",
-      "description": "Attribute `fallback`.",
+      "description": "Plain text displayed only when no SVG can be resolved, including fallback-icon. For example, use ? for an unavailable icon. Empty leaves the reserved icon area blank.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -30,7 +30,7 @@
     },
     {
       "name": "fallback-icon",
-      "description": "Attribute `fallback-icon`.",
+      "description": "Backup icon identifier used when inline SVG, src and name provide no icon. Looked up in the selected library, then in tp; if unavailable, fallback text is used.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -39,7 +39,7 @@
     },
     {
       "name": "flip-h",
-      "description": "Attribute `flip-h`.",
+      "description": "Mirrors the icon horizontally when present. Remove the attribute to restore its orientation; writing false still enables it.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -48,7 +48,7 @@
     },
     {
       "name": "flip-v",
-      "description": "Attribute `flip-v`.",
+      "description": "Mirrors the icon vertically when present. Can be combined with flip-h and rotate; writing false still enables it.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -57,7 +57,7 @@
     },
     {
       "name": "library",
-      "description": "Attribute `library`.",
+      "description": "Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters and components. Custom registered libraries are also accepted.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -66,7 +66,7 @@
     },
     {
       "name": "name",
-      "description": "Attribute `name`.",
+      "description": "Icon identifier in the selected library, for example heart or settings. Used when no inline SVG or successfully loaded src is available.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -75,7 +75,7 @@
     },
     {
       "name": "rotate",
-      "description": "Attribute `rotate`.",
+      "description": "Rotation angle: a number is interpreted in degrees; deg, rad and turn units are also accepted. Negative values rotate in the opposite direction. Invalid values use 0deg; spin overrides this fixed rotation.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -84,7 +84,7 @@
     },
     {
       "name": "scale",
-      "description": "Attribute `scale`.",
+      "description": "Positive numeric multiplier for size, for example 0.5 to halve it or 2 to double it. Zero, negative and invalid values use 1. Changes the space occupied by the icon.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -93,7 +93,7 @@
     },
     {
       "name": "size",
-      "description": "Attribute `size`.",
+      "description": "Base width and height as a CSS length, for example 24px, 2rem or 1.5em. The scale factor multiplies both dimensions; 1em follows the surrounding font size.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -102,7 +102,7 @@
     },
     {
       "name": "spin",
-      "description": "Attribute `spin`.",
+      "description": "Continuously rotates the SVG once per second when present, overriding rotate. Respects the reduced-motion preference. Remove the attribute to stop; writing false still enables it.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -111,7 +111,7 @@
     },
     {
       "name": "src",
-      "description": "Attribute `src`.",
+      "description": "URL of an SVG file to load. Relative URLs resolve against the containing source document when available, otherwise the page URL. Inline SVG takes precedence; a failed load falls back to name, then the fallback settings.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -125,7 +125,7 @@
     {
       "name": "--tp-icon-size",
       "default": "1em",
-      "description": "Controls the size."
+      "description": "Width and height of the rendered icon; assigned internally from size multiplied by scale."
     }
   ],
   "dependencies": [
@@ -137,7 +137,7 @@
   "credits": [],
   "userHelp": {
     "displayName": "Icons",
-    "introduction": "The custom `<tp-icon>` element implements the <tp-icon name=\"icon\" library=\"components\" size=\"1.25em\"></tp-icon> Icons functionality: aPI documentation summary.",
+    "introduction": "",
     "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component displays information and has no control to operate. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }

@@ -12,39 +12,39 @@
   "attributes": [],
   "methods": [
     {
-      "name": "addEdge(source: string, target: string, type = TP_NFA_TRANSITION, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = 'forward'): TpGraphEdge",
+      "name": "addEdge(source: string, target: string, type = TP_NFA_TRANSITION, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = \"forward\"): TpGraphEdge",
       "inherited": false,
-      "description": "Adds edge."
+      "description": "Adds a forward transition between existing state IDs, using optional connection ports; returns the edge record. Unsupported types, directions or endpoints throw."
     },
     {
       "name": "addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode",
       "inherited": false,
-      "description": "Adds node."
+      "description": "Adds a NFA state or comment at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError."
     },
     {
       "name": "generate(source = this.regexSource): void",
       "inherited": false,
-      "description": "Generate."
+      "description": "Builds an NFA from the regular-expression source and resets reading to the current word. Omitted source reuses the stored expression; invalid expressions throw."
     },
     {
       "name": "readNext(duration = 500): Promise<boolean>",
       "inherited": false,
-      "description": "Reads next."
+      "description": "Consumes and animates one input symbol using duration milliseconds. Resolves to true if a symbol was processed, not whether the word is accepted; false means no further step is possible."
     },
     {
       "name": "reset(word = this.inputWord): void",
       "inherited": false,
-      "description": "Reset."
+      "description": "Restarts reading word with the epsilon closure of the initial states and clears transition highlights; omitted word reuses the current input."
     },
     {
       "name": "run(duration = 650): Promise<boolean>",
       "inherited": false,
-      "description": "Run."
+      "description": "Processes remaining symbols with duration milliseconds per step, stopping at the end or rejection. Resolves to whether the complete word is accepted; does not reset the input first."
     },
     {
       "name": "setGraph(graph: TpGraphDocument): void",
       "inherited": false,
-      "description": "Sets graph."
+      "description": "Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph."
     }
   ],
   "events": [],

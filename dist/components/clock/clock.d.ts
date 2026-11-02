@@ -2,8 +2,8 @@
  * @module components/clock
  * @summary Live clock component with digital or analogic display and date tooltip.
  */
-import '../tooltip/tooltip.js';
-import { TpBase } from '../base/base.js';
+import "../tooltip/tooltip.js";
+import { TpBase } from "../base/base.js";
 /**
  * Live clock component.
  *
@@ -13,10 +13,10 @@ import { TpBase } from '../base/base.js';
  *
  * @tagname tp-clock
  * @attr {string} type = "digital" - Display type (`digital` or `analogic`).
- * @attr {string} size = "1rem" - Clock size.
- * @cssprop --tp-clock-size Clock size.
+ * @attr {string} size = "1rem" - Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em.
  * @example
  * <tp-clock></tp-clock>
+ * @cssprop [--tp-clock-size=1rem] Font size of the clock display, updated from the size attribute.
  */
 export declare class TpClock extends TpBase {
     private static readonly styleId;
@@ -32,21 +32,21 @@ export declare class TpClock extends TpBase {
      * Returns the list of attributes observed by the component.
      *
      * @summary Returns the observed attributes.
-    */
+     */
     static get observedAttributes(): string[];
     /**
      * Returns the configured clock display type.
      *
      * @summary Returns the current clock display type.
      */
-    get type(): 'digital' | 'analogic';
+    get type(): "digital" | "analogic";
     /**
      * Updates the configured clock display type.
      *
      * @summary Sets the clock display type.
      * @param value Display type to apply.
      */
-    set type(value: 'digital' | 'analogic');
+    set type(value: "digital" | "analogic");
     /**
      * Returns the configured component size.
      *
@@ -108,6 +108,6 @@ export declare class TpClock extends TpBase {
 }
 declare global {
     interface HTMLElementTagNameMap {
-        'tp-clock': TpClock;
+        "tp-clock": TpClock;
     }
 }

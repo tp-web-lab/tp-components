@@ -24,7 +24,7 @@ The custom `<tp-radio-list>` element implements the <tp-icon name="radio-list" l
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | <kbd>Enter</kbd> or leave the group. |
-| Arrow keys | Move and select among enabled radio options. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Move and select among enabled radio options. |
 | <kbd>Space</kbd> | Select the focused option. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
@@ -92,14 +92,14 @@ Methods
 Events
 : | Event | Detail | Description |
   | --- | --- | --- |
-  | <code>tp-radio-list-change</code> | <code>&#123; value: string; label: unknown &#125;</code> | Emitted when selected value changes (`detail: { value, label }`). |
+  | <code>tp-radio-list-change</code> | <code>&#123; value: string; label: string &#125;</code> | Emitted after a selection change. value is the selected 1-based item index as a string; label is its visible label. Both are empty when nothing is selected. |
   [Events emitted by `<tp-radio-list>`]
 
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-radio-list-marker-gap</code> | <code>0.5em</code> | Controls the marker gap. |
-  | <code>&#45;&#45;tp-radio-list-marker-width</code> | <code>2ch</code> | Controls the marker width. |
+  | <code>&#45;&#45;tp-radio-list-marker-gap</code> | <code>0.5em</code> | Horizontal space between each selection marker and its item content. |
+  | <code>&#45;&#45;tp-radio-list-marker-width</code> | <code>2ch</code> | Width reserved for each selection marker; aligns the item content in both orientations. |
   [CSS properties of `<tp-radio-list>`]
 :::
 <!-- /tp-docgen:api -->
@@ -107,6 +107,29 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_radio-list.TpRadioList.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

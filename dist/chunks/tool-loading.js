@@ -1,0 +1,2 @@
+function e(e,t,n,r){let i=globalThis;try{for(;i.window&&i.window.parent!==i.window;){let e=i.window.parent;e.document,i=e}}catch{}let a=Symbol.for(`@tp/loaded-tools`),o=Reflect.get(i,a);o||(o=new Set,Reflect.set(i,a,o)),!o.has(e)&&(o.add(e),i.console.info(`[tp-${e}] ${t}${n?` ${n}`:``} loaded${r?` (${r})`:``}.`))}function t(t,n,r=`undefined`){return`(${e.toString()})(${JSON.stringify(t)}, ${JSON.stringify(n)}, ${r});`}export{t as n,e as t};
+//# sourceMappingURL=tool-loading.js.map

@@ -1,14 +1,11 @@
-/**
- * @module components/diagram
- * @summary Accessible Mermaid diagram renderer.
- */
-import { TpBase } from '../base/base.js';
+import { TpBase } from "../base/base.js";
 /**
  * @summary Renders Mermaid source supplied inline or through a source URL.
  * @tagname tp-diagram
  * @attr {string} src = "" - Mermaid source file loaded relative to the containing document.
+ * @attr {"mermaid" | "pele"} engine = "pele" - Rendering engine; only the explicit mermaid value loads Mermaid.
  * @attr {string} label = "Diagram" - Accessible name applied to the rendered SVG.
- * @event tp-diagram-rendered Emitted after Mermaid has rendered the diagram.
+ * @event tp-diagram-rendered Emitted after the selected engine has rendered the diagram.
  * @eventdetail tp-diagram-rendered { src: string }
  * @accessibility Exposes the generated SVG as an image with the accessible name provided by label.
  * @accessibilityresponsibility Provide a label that communicates the diagram's purpose or content.
@@ -29,6 +26,8 @@ export declare class TpDiagram extends TpBase {
     private lifecycleReady;
     get src(): string;
     set src(value: string);
+    get engine(): "mermaid" | "pele";
+    set engine(value: "mermaid" | "pele");
     get label(): string;
     set label(value: string);
     protected connectedCallback(): void;
@@ -39,6 +38,6 @@ export declare class TpDiagram extends TpBase {
 }
 declare global {
     interface HTMLElementTagNameMap {
-        'tp-diagram': TpDiagram;
+        "tp-diagram": TpDiagram;
     }
 }

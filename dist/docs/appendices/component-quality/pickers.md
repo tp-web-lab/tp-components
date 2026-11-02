@@ -1,6 +1,6 @@
 # Pickers component quality
 
-> Latest recorded executions: **1 distinct failing test affects this family** in the global run or its separate family reruns. Coverage was collected despite failures and is not evidence of a passing suite. See the [execution results](index.md#latest-global-execution) for both scopes.
+> Historical coverage execution (20 September 2026): **1 distinct failing test affects this family** in that global run or its separate family reruns. Coverage was collected despite those failures. These are historical results, not the current test status; see [Tests](../tests.md) for the latest review.
 
 This family report applies the [component quality procedure](index.md) to every component listed under **Pickers** in the documentation.
 

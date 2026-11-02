@@ -21,7 +21,7 @@
     },
     {
       "name": "name",
-      "description": "Name attribute passed to the underlying tp-checkbox-list.",
+      "description": "Form field name passed to the underlying choice list.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -30,7 +30,7 @@
     },
     {
       "name": "orientation",
-      "description": "Orientation attribute passed to the underlying tp-checkbox-list.",
+      "description": "Arrangement of answer choices: horizontal or vertical.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -48,7 +48,7 @@
     },
     {
       "name": "src",
-      "description": "URL to an external JSON file describing items, answer, and feedback. When present, the answer is never exposed in the HTML source. Inherited from TpQuestion.",
+      "description": "URL of an external JSON, HTML, Markdown, AsciiDoc or reStructuredText question definition. Keeps the definition out of authored markup, but does not make downloaded answers confidential.",
       "reflected": false,
       "static": false,
       "inherited": false,
@@ -57,7 +57,7 @@
     },
     {
       "name": "value",
-      "description": "Value attribute passed to the underlying tp-checkbox-list.",
+      "description": "Comma-separated 1-based indexes of the currently selected answers; empty means no selection.",
       "reflected": true,
       "static": false,
       "inherited": false,

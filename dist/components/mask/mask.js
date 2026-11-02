@@ -1,0 +1,1 @@
+import{t as e}from"../../chunks/mask.js";export{e as TpMask};

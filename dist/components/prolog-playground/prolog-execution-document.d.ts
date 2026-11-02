@@ -2,8 +2,8 @@
  * @module components/prolog-playground/prolog-execution-document
  * @summary Scryer Prolog execution document builder.
  */
-import type { TpExecutionDocument } from '../playground/playground.js';
-import type { TpPrologProject } from './prolog-project.js';
+import type { TpExecutionDocument } from "../playground/playground.js";
+import type { TpPrologProject } from "./prolog-project.js";
 /** Options for building a Prolog execution document. */
 export interface BuildPrologExecutionDocumentOptions {
     /** Entry Prolog source file. */

@@ -20,7 +20,7 @@
  */
 /**
  * @tp-dependency tp-dropdown
- * @summary Displays an anchored dropdown menu.
+ * @summary Dropdown menu component.
  */
 /**
  * @tp-dependency tp-fullscreen
@@ -40,7 +40,7 @@
  */
 /**
  * @tp-dependency tp-tooltip
- * @summary Displays anchored tooltip content.
+ * @summary Tooltip component.
  */
 /**
  * @credit CodeMirror https://codemirror.net/
@@ -184,6 +184,9 @@ export declare class TpCodeEditor extends TpBase {
     private readonly commentContents;
     /** Reconfigures comment decorations without resetting code, selection or undo. */
     private readonly commentCompartment;
+    private readonly languageCompartment;
+    private languageLoadRevision;
+    private loadCurrentLanguage;
     /** Registers a linked annotation list; an empty array removes only that owner's markers. */
     setCodeCommentNumbers(owner: object, numbers: readonly number[], comments?: ReadonlyMap<number, HTMLElement>): void;
     /** Combines the marker numbers requested by all linked annotation lists. */

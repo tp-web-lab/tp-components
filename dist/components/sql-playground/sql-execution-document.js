@@ -1,31 +1,8 @@
-import { E as e, f as t, n, t as r } from "../../chunks/playground-build-utils.js";
-//#region src/components/sql-playground/sql-execution-document.ts
-var i = "https://cdn.jsdelivr.net/npm/sql.js@1.13.0/dist/sql-wasm.js", a = "https://cdn.jsdelivr.net/npm/sql.js@1.13.0/dist/";
-function o(e) {
-	return e.replace(/<script\b[\s\S]*?<\/script>/gi, "");
-}
-function s(e) {
-	return e.trim().toLowerCase().replaceAll(/[^a-z0-9]+/g, "-").replaceAll(/^-+|-+$/g, "") || "sql-project";
-}
-function c(e) {
-	return `tp-sql-db:${s(e.name ?? "sql-project")}`;
-}
-async function l(s, l = {}) {
-	let u = e(s, {
-		entry: l.entry,
-		priorityPaths: ["/query.sql", "/main.sql"],
-		extensions: [".sql"],
-		fallbackToFirstFile: !1
-	});
-	if (u === void 0) throw Error("No SQL entry file found.");
-	let d = s.getActiveDatabase() ?? null, f = (d?.type === "sql" ? t(s, d.path) : void 0) ?? (typeof s.setup == "string" && s.setup !== "" ? t(s, s.setup) : t(s, "/tables.sql") ?? t(s, "/setup.sql"));
-	if (typeof s.setup == "string" && s.setup !== "" && f === void 0) throw Error(`SQL setup file not found: ${s.setup}`);
-	let p = t(s, "/index.html"), m = p ? o(p.content) : "<div id=\"sql-output\"></div>", h = f?.content ?? "", g = u.content, _ = typeof l.scope == "string" && l.scope !== "" ? `tp-sql-notebook:${l.scope}` : typeof d?.storageKey == "string" ? d.storageKey : c(s);
-	return { html: `
+import{n as e}from"../../chunks/tool-loading.js";import{E as t,f as n,n as r,t as i}from"../../chunks/playground-build-utils.js";var a=`https://cdn.jsdelivr.net/npm/sql.js@1.13.0/dist/sql-wasm.js`,o=`https://cdn.jsdelivr.net/npm/sql.js@1.13.0/dist/`;function s(e){return e.replace(/<script\b[\s\S]*?<\/script>/gi,``)}function c(e){return e.trim().toLowerCase().replaceAll(/[^a-z0-9]+/g,`-`).replaceAll(/^-+|-+$/g,``)||`sql-project`}function l(e){return`tp-sql-db:${c(e.name??`sql-project`)}`}async function u(c,u={}){let d=t(c,{entry:u.entry,priorityPaths:[`/query.sql`,`/main.sql`],extensions:[`.sql`],fallbackToFirstFile:!1});if(d===void 0)throw Error(`No SQL entry file found.`);let f=c.getActiveDatabase()??null,p=(f?.type===`sql`?n(c,f.path):void 0)??(typeof c.setup==`string`&&c.setup!==``?n(c,c.setup):n(c,`/tables.sql`)??n(c,`/setup.sql`));if(typeof c.setup==`string`&&c.setup!==``&&p===void 0)throw Error(`SQL setup file not found: ${c.setup}`);let m=n(c,`/index.html`),h=m?s(m.content):`<div id="sql-output"></div>`,g=p?.content??``,_=d.content,v=typeof u.scope==`string`&&u.scope!==``?`tp-sql-notebook:${u.scope}`:typeof f?.storageKey==`string`?f.storageKey:l(c);return{html:`
 <!doctype html>
 <html>
 <head>
-  <script src="${i}"><\/script>
+  <script src="${a}"><\/script>
   <style>
     #sql-output {
       display: grid;
@@ -104,9 +81,9 @@ async function l(s, l = {}) {
   </style>
 </head>
 <body>
-  ${m}
+  ${h}
+  ${i()}
   ${r()}
-  ${n()}
 
 <script>
 function extractSchema(db) {
@@ -242,13 +219,14 @@ function render(results) {
 }
 
 async function main() {
-  const storageKey = ${JSON.stringify(_)};
+  const storageKey = ${JSON.stringify(v)};
   const resetKey = storageKey + ':reset';
 
   try {
     const SQL = await initSqlJs({
-      locateFile: (file) => '${a}' + file,
+      locateFile: (file) => '${o}' + file,
     });
+    ${e(`sqljs`,`sql.js`,JSON.stringify(`1.13.0`))}
 
     const shouldReset = localStorage.getItem(resetKey) === '1';
 
@@ -257,7 +235,7 @@ async function main() {
       localStorage.removeItem(resetKey);
     }
 
-    const database = ${JSON.stringify(d)};
+    const database = ${JSON.stringify(f)};
     let db = loadDb(SQL, storageKey);
 
     if (!db && database?.type === 'sqlite') {
@@ -270,7 +248,7 @@ async function main() {
       db = new SQL.Database();
 
       if (database?.type !== 'sqlite') {
-        const setupSql = ${JSON.stringify(h)};
+        const setupSql = ${JSON.stringify(g)};
 
         if (setupSql.trim() !== '') {
           db.run(setupSql);
@@ -283,7 +261,7 @@ async function main() {
     const schema = extractSchema(db);
     postSchema(schema);
 
-    const querySql = ${JSON.stringify(g)};
+    const querySql = ${JSON.stringify(_)};
     const statements = querySql
       .split(';')
       .map((statement) => statement.trim())
@@ -315,9 +293,5 @@ void main();
 <\/script>
 </body>
 </html>
-` };
-}
-//#endregion
-export { l as buildSqlExecutionDocument, c as createSqlStorageKey };
-
+`}}export{u as buildSqlExecutionDocument,l as createSqlStorageKey};
 //# sourceMappingURL=sql-execution-document.js.map

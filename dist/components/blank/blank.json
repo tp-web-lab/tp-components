@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "aria-label",
-      "description": "Controls the aria label.",
+      "description": "Accessible name forwarded to the editing control; use it when the field has no visible label.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -85,7 +85,12 @@
   "events": [
     {
       "name": "input",
-      "description": "- Emitted when an answer is assigned or cleared.",
+      "description": "Emitted when an answer is assigned or cleared; read the updated answer from value.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-blank-mode-change",
+      "description": "Emitted when closed or type changes while connected, after the blank has been rendered in its new mode.",
       "detail": "void"
     }
   ],
@@ -93,7 +98,7 @@
     {
       "name": "--tp-blank-filled-border-color",
       "default": "var(--tp-brand-stroke-mid)",
-      "description": "Controls the filled border color."
+      "description": "Bottom border color of a blank after an answer has been filled in."
     }
   ],
   "dependencies": [
@@ -130,7 +135,7 @@
   "userHelp": {
     "displayName": "Blank",
     "introduction": "The custom `<tp-blank>` element implements the blank functionality: displays a text, SVG or image answer in a focusable blank.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Open field | Enter an answer using the control selected by its type. |\n| Closed destination | Select an answer from the bank or drag it onto the blank. |\n| Answer then blank | Select an answer and click the destination, or drag the answer onto it. |\n| Clear | Release the assigned answer; unavailable when empty or disabled. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> | Focus a target blank. |\n| <kbd>Right</kbd> Arrow | Move from the blank to the answer bank. |\n| <kbd>Up</kbd> / <kbd>Down</kbd> | Choose an answer. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Assign the chosen answer to the highlighted blank. |\n| <kbd>Escape</kbd> | Cancel. |\n| <kbd>Delete</kbd> / <kbd>Backspace</kbd> | Clear the focused blank. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Open field | Enter an answer using the control selected by its type. |\n| Closed destination | Select an answer from the bank or drag it onto the blank. |\n| Answer then blank | Select an answer and click the destination, or drag the answer onto it. |\n| Clear | Release the assigned answer; unavailable when empty or disabled. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> | Focus a target blank. |\n| <kbd>ArrowRight</kbd> | Move from the blank to the answer bank. |\n| <kbd>Up</kbd> / <kbd>Down</kbd> | Choose an answer. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Assign the chosen answer to the highlighted blank. |\n| <kbd>Escape</kbd> | Cancel. |\n| <kbd>Delete</kbd> / <kbd>Backspace</kbd> | Clear the focused blank. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

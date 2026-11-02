@@ -15,9 +15,14 @@ Combine the attributes on one preview. Controls start at the published defaults.
 - disabled
 
 - interim-results
+
+- record
 :::
 
 :::: tp-cluster
+::: tp-textfield { data-setting="legend" label="legend" value="Speech to text" placeholder="Speech to text" clearable }
+:::
+
 ::: tp-textfield { data-setting="value" label="value" value placeholder clearable }
 :::
 ::::
@@ -49,13 +54,13 @@ Preparing the preview…
 :::
 ```
 
-``` example {label="Basic"}
-::: tp-speech-to-text { lang="en-US" }
+``` example {label="French"}
+::: tp-speech-to-text { lang="fr-FR" }
 :::
 ```
 
-``` example {label="French"}
-::: tp-speech-to-text { lang="fr-FR" }
+``` example {label="Recording"}
+::: tp-speech-to-text { lang="en-GB" continuous interim-results record }
 :::
 ```
 ::::::

@@ -1,2 +1,1 @@
-import { n as e, t } from "../../chunks/matching.js";
-export { t as TpMatching, e as normalizeMatchingValue };
+import{n as e,t}from"../../chunks/matching2.js";export{t as TpMatching,e as normalizeMatchingValue};

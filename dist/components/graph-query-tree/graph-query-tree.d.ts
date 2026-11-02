@@ -6,7 +6,7 @@
  * @tp-dependency tp-graph-editor
  * @summary Extensible interactive graph editor.
  */
-import { TpGraphEditor, type TpGraphDocument, type TpGraphEdge, type TpGraphEdgeDirection, type TpGraphNode, type TpGraphPoint, type TpGraphPort } from '../graph-editor/graph-editor.js';
+import { type TpGraphDocument, type TpGraphEdge, type TpGraphEdgeDirection, TpGraphEditor, type TpGraphNode, type TpGraphPoint, type TpGraphPort } from "../graph-editor/graph-editor.js";
 export declare const TP_QUERY_RELATION = "query-relation";
 export declare const TP_QUERY_SELECTION = "query-selection";
 export declare const TP_QUERY_PROJECTION = "query-projection";
@@ -33,9 +33,21 @@ export declare class TpGraphQueryTree extends TpGraphEditor {
     private selectedQueryId;
     constructor();
     protected connectedCallback(): void;
+    /**
+     * @summary Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph.
+     */
     setGraph(graph: TpGraphDocument): void;
+    /**
+     * @summary Adds a query operator or comment at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError.
+     */
     addNode(type: string, point: TpGraphPoint, nodeLabel?: string): TpGraphNode;
+    /**
+     * @summary Adds a forward query-tree edge between compatible existing nodes and returns its record; unsupported directions or invalid connections throw.
+     */
     addEdge(source: string, target: string, type?: string, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction?: TpGraphEdgeDirection): TpGraphEdge;
+    /**
+     * @summary Returns the SQL query generated from the current query tree; invalid tree structure raises a validation error.
+     */
     toSql(): string;
     protected edgeDirections(): readonly TpGraphEdgeDirection[];
     protected validateConnection(source: string, target: string, type: string): void;

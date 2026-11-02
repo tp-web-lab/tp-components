@@ -10,6 +10,7 @@ export { type TpAsciidocExtension, TpAsciidocPlayground, TpAsciidocProject, } fr
 export { TpAsciidocSinglePage } from "./components/asciidoc-single-page/asciidoc-single-page.js";
 export { TpAsciidocViewer } from "./components/asciidoc-viewer/asciidoc-viewer.js";
 export { TpAsciidocViewerQuestion } from "./components/asciidoc-viewer-question/asciidoc-viewer-question.js";
+export { TpAudioRecorder } from "./components/audio-recorder/audio-recorder.js";
 export { TpAvatar, type TpAvatarShape, type TpAvatarSize, } from "./components/avatar/avatar.js";
 export { TpAvatarGroup, type TpAvatarGroupOrder, type TpAvatarGroupOrientation, } from "./components/avatar-group/avatar-group.js";
 export { TpBadge } from "./components/badge/badge.js";
@@ -48,6 +49,7 @@ export { TpDropdown } from "./components/dropdown/dropdown.js";
 export { setupTpDropdownTriggers, teardownTpDropdownTriggers, } from "./components/dropdown/dropdown-triggers.js";
 export { TpEditorQuestion } from "./components/editor-question/editor-question.js";
 export { getEmojiMetadata, parseEmojiTestData, TpEmojiPicker, type TpEmojiPickerCopyFormat, type TpEmojiPickerItem, type TpEmojiPickerMetadata, } from "./components/emoji-picker/emoji-picker.js";
+export { TpExercise } from "./components/exercise/exercise.js";
 export { TpFileTree } from "./components/file-tree/file-tree.js";
 export { TpFilesystem } from "./components/filesystem/filesystem.js";
 export { TpFillBlank } from "./components/fill-blank/fill-blank.js";
@@ -147,6 +149,7 @@ export { TpSaveImage, type TpSaveImageFormat, } from "./components/save-image/sa
 export { TpSidebar } from "./components/sidebar/sidebar.js";
 export { TpSingleChoiceQuestion } from "./components/single-choice-question/single-choice-question.js";
 export { TpSkeleton } from "./components/skeleton/skeleton.js";
+export { TpSlideNote } from "./components/slide-note/slide-note.js";
 export { TpSlider } from "./components/slider/slider.js";
 export { TpSolitaire } from "./components/solitaire/solitaire.js";
 export { TpSource } from "./components/source/source.js";
@@ -189,7 +192,10 @@ export type { GeometryObject, GeometryPoint, GeometryResult, GeometryValue, } fr
 export { evaluateGeometry, MEDIATRIX_CONSTRUCTION, parseGeometry, serializeGeometry, TpGraphGeometry, } from "./components/graph-geometry/graph-geometry.js";
 export { TpListof } from "./components/listof/listof.js";
 export { TpLogigram } from "./components/logigram/logigram.js";
+export { TpMask } from "./components/mask/mask.js";
 export { TpNote } from "./components/note/note.js";
 export { TpRef } from "./components/ref/ref.js";
+export { type AudioSaveTarget, TpSaveAudio, type TpSaveAudioFormat, } from "./components/save-audio/save-audio.js";
 export { type TpSlopeProfile, type TpSlopeProfiles, TpSlopeSimulator, } from "./components/slope-simulator/slope-simulator.js";
 export { type TangramPlacement, TpTangram, } from "./components/tangram/tangram.js";
+export { TpVideoPlayer, type TpVideoPlayerErrorDetail, type TpVideoPlayerEventDetail, } from "./components/video-player/video-player.js";

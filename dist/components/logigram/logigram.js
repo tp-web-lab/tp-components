@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/logigram.js";
-export { e as TpLogigram };
+import{t as e}from"../../chunks/logigram2.js";export{e as TpLogigram};

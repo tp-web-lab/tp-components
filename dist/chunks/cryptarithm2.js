@@ -1,23 +1,2 @@
-import { t as e } from "./markdown-style-registry.js";
-import { a as t, n, t as r } from "./cryptarithm-ui.js";
-//#region ../tp-markdown/dist/markdown/extensions/cryptarithm/index.js
-var i = "__tp_cryptarithm_installed";
-function a(e) {
-	return e.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'", "&#039;");
-}
-function o(o) {
-	if (o[i]) return;
-	o[i] = !0, e(t, n);
-	let s = o.renderer.rules.fence;
-	o.renderer.rules.fence = function(e, t, n, i, o) {
-		let c = e[t];
-		if (!c) return "";
-		if (!(c.info || "").trim().startsWith("cryptarithm")) return s ? s.call(this, e, t, n, i, o) : "";
-		let l = r(c.content);
-		return `<div class="tp-cryptarithm" data-cryptarithm-equation="${a(l.equation)}" data-cryptarithm-solution="${a(l.solution)}"></div>`;
-	};
-}
-//#endregion
-export { o as cryptarithmExtension, o as default };
-
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:middle;display:inline;"><path fill="currentColor" d="M6 11a2 2 0 0 1 2 2v4H4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2zm-2 2v2h2v-2zm16 0v2h2v2h-2a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2v2zm-8-6v4h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V7zm0 8h2v-2h-2z"/></svg>`;export{t as n,n as t};
 //# sourceMappingURL=cryptarithm2.js.map

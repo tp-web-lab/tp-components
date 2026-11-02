@@ -16,7 +16,7 @@ import "../blank/blank.js";
  * `<tp-fill-blank>` manages blanks embedded in text content.
  *
  * Supported blanks:
- * - `<tp-textfield>` and other library fields exposing a light DOM `<input>`
+ * - `<tp-textfield>` and other library fields exposing a light DOM `<input>` or `<textarea>`
  * - `<input>` and `<select>`
  * - `<tp-blank>` for text, SVG or image answers
  *

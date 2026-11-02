@@ -10,12 +10,16 @@
 
     <div role="example" label="Attributes">
       <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+
+
+
+
       <tp-stack>
       <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>disabled</li></ul></tp-checkbox-list>
+      <tp-radio-list data-setting="preset" label="preset" label-position="top" orientation="horizontal" value="1"><ul><li>tp-default</li><li>tp-red</li><li>tp-orange</li><li>tp-amber</li><li>tp-yellow</li><li>tp-lime</li><li>tp-green</li><li>tp-emerald</li><li>tp-teal</li><li>tp-glaz</li><li>tp-cyan</li><li>tp-sky</li><li>tp-blue</li><li>tp-indigo</li><li>tp-violet</li><li>tp-purple</li><li>tp-fuchsia</li><li>tp-pink</li><li>tp-rose</li><li>tp-zinc</li><li>tp-ivory</li><li>tp-stone</li></ul></tp-radio-list>
       <tp-radio-list data-setting="size" label="size" label-position="top" orientation="horizontal" value="4"><ul><li>xxs</li><li>xs</li><li>s</li><li>m</li><li>l</li><li>xl</li><li>xxl</li></ul></tp-radio-list>
       <tp-radio-list data-setting="variant" label="variant" label-position="top" orientation="horizontal" value="5"><ul><li>success</li><li>danger</li><li>warning</li><li>info</li><li>neutral</li><li>brand</li></ul></tp-radio-list>
       <tp-cluster><tp-textfield data-setting="anchor" label="anchor" value="" placeholder="" clearable></tp-textfield>
-      <tp-textfield data-setting="preset" label="preset" value="tp-default" placeholder="tp-default" clearable></tp-textfield>
       <tp-textfield data-setting="ui-anchor" label="ui-anchor" value="" placeholder="" clearable></tp-textfield></tp-cluster>
       <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
       </tp-stack>

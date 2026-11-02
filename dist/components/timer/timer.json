@@ -20,6 +20,24 @@
       "default": "60"
     },
     {
+      "name": "manual",
+      "description": "Waits for start() instead of starting automatically.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "no-controls",
+      "description": "Hides duration editing and buttons; displays hh:mm:ss.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
       "name": "silent",
       "description": "Disables sound playback.",
       "reflected": true,
@@ -30,7 +48,7 @@
     },
     {
       "name": "size",
-      "description": "Icon and text size.",
+      "description": "Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -38,7 +56,18 @@
       "default": "\"1rem\""
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Stops and resets the timer."
+    },
+    {
+      "name": "start(): void",
+      "inherited": false,
+      "description": "Starts a new countdown from the beginning."
+    }
+  ],
   "events": [
     {
       "name": "tp-timer-elapsed",
@@ -49,18 +78,23 @@
   "cssproperties": [
     {
       "name": "--tp-timer-alert",
-      "default": "#b91c1c",
-      "description": "Controls the alert."
+      "default": "var(--tp-danger-text-on-soft)",
+      "description": "Text color of the time display when the countdown has elapsed."
     },
     {
       "name": "--tp-timer-alert-bg",
-      "default": "#fecaca",
-      "description": "Controls the alert bg."
+      "default": "var(--tp-danger-fill-softer)",
+      "description": "Background color of the elapsed portion of the countdown and of the whole timer once elapsed."
     },
     {
       "name": "--tp-timer-muted",
-      "default": "#9ca3af",
-      "description": "Controls the muted."
+      "default": "var(--tp-neutral-text-on-soft)",
+      "description": "Text color of the time display while stopped."
+    },
+    {
+      "name": "--tp-timer-progress",
+      "default": "0%",
+      "description": "Elapsed portion of the countdown, as a percentage from 0% to 100%; updated internally as time passes."
     },
     {
       "name": "--tp-timer-size",

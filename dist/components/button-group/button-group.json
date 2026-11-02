@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "attached",
-      "description": "Attribute `attached`.",
+      "description": "Joins adjacent buttons without gaps and removes their inner corner rounding.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -21,7 +21,7 @@
     },
     {
       "name": "orientation",
-      "description": "Attribute `orientation`.",
+      "description": "Arrangement of buttons: horizontal in a row, or vertical in a column.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -30,7 +30,7 @@
     },
     {
       "name": "stretch",
-      "description": "Attribute `stretch`.",
+      "description": "Expands the group to the available width and gives its buttons equal flexible space.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -44,7 +44,7 @@
     {
       "name": "--tp-button-group-gap",
       "default": "0",
-      "description": "Controls the gap."
+      "description": "Space between adjacent buttons in the group."
     }
   ],
   "dependencies": [

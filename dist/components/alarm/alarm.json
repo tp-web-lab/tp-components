@@ -21,7 +21,7 @@
     },
     {
       "name": "size",
-      "description": "Icon and text size.",
+      "description": "Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -50,17 +50,17 @@
     {
       "name": "--tp-alarm-alert",
       "default": "#b91c1c",
-      "description": "Controls the alert."
+      "description": "Text color of the time display when the alarm rings; also colors its border."
     },
     {
       "name": "--tp-alarm-alert-bg",
       "default": "#fecaca",
-      "description": "Controls the alert bg."
+      "description": "Background color while the alarm rings."
     },
     {
       "name": "--tp-alarm-muted",
       "default": "#9ca3af",
-      "description": "Controls the muted."
+      "description": "Text color of the time display while stopped."
     },
     {
       "name": "--tp-alarm-size",

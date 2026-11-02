@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/map.js";
-export { e as TpMap };
+import{t as e}from"../../chunks/map2.js";export{e as TpMap};

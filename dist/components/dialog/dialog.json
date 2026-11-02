@@ -12,19 +12,19 @@
   "attributes": [],
   "methods": [
     {
-      "name": "close(action: 'confirm' | 'cancel' = 'cancel'): void",
+      "name": "close(action: \"confirm\" | \"cancel\" = \"cancel\"): void",
       "inherited": false,
-      "description": "Closes the dialog."
+      "description": "Closes the dialog with action confirm or cancel and emits tp-dialog-close carrying that action; defaults to cancel."
     },
     {
-      "name": "setContent(options: {\n    title?: string;\n    body?: Node[];\n    confirmText?: string;\n    cancelText?: string;\n  }): void",
+      "name": "setContent(options: {\n\t\ttitle?: string;\n\t\tbody?: Node[];\n\t\tconfirmText?: string;\n\t\tcancelText?: string;\n\t}): void",
       "inherited": false,
-      "description": "Replaces the dialog content."
+      "description": "Replaces the title, body nodes and button labels. Supplied nodes are moved into the dialog; omitted title/body become empty and button labels default to Confirm/Cancel."
     },
     {
       "name": "show(): void",
       "inherited": false,
-      "description": "Opens the dialog."
+      "description": "Opens the internal native dialog in modal mode, blocking interaction with the rest of the page."
     }
   ],
   "events": [
@@ -35,12 +35,7 @@
     }
   ],
   "cssproperties": [],
-  "dependencies": [
-    {
-      "name": "tp-button",
-      "summary": "Button component that supports native button and link rendering."
-    }
-  ],
+  "dependencies": [],
   "credits": [],
   "userHelp": {
     "displayName": "Dialog",

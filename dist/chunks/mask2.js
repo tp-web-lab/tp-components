@@ -1,0 +1,3 @@
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M3 7h18v12H3z" fill="currentColor"/><path d="M8 11h8m-6 4h4" fill="none" stroke="var(--tp-paper-color, white)" stroke-width="1.5" stroke-linecap="round"/></svg>
+`;export{t as n,n as t};
+//# sourceMappingURL=mask2.js.map

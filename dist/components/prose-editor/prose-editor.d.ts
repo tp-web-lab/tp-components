@@ -1,7 +1,3 @@
-/**
- * @module components/prose-editor
- * @summary ProseMirror-based rich text editor component.
- */
 import { SearchQuery } from "prosemirror-search";
 import { TpBase } from "../base/base.js";
 import "../checkbox-list/checkbox-list.js";
@@ -28,6 +24,10 @@ import "../toolbar/toolbar.js";
  * @attr {string} value = "" - Initial HTML content of the editor.
  * @example
  * <tp-prose-editor></tp-prose-editor>
+ * @event tp-prose-editor-input Emitted after an editing transaction or editor command updates the document. value contains the current HTML serialization.
+ * @eventdetail tp-prose-editor-input { value: string }
+ * @event tp-prose-editor-change Emitted immediately after tp-prose-editor-input for the same edit; it does not wait for blur. value contains the current HTML serialization.
+ * @eventdetail tp-prose-editor-change { value: string }
  */
 export declare class TpProseEditor extends TpBase {
     private static readonly styleId;
@@ -82,17 +82,53 @@ export declare class TpProseEditor extends TpBase {
     protected connectedCallback(): void;
     disconnectedCallback(): void;
     protected attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void;
+    /**
+     * @summary Focuses the active editing surface, forwarding optional browser FocusOptions.
+     */
     focus(options?: FocusOptions): void;
+    /**
+     * @summary Returns the current HTML from the active source, rendered or rich-text mode; before initialization, returns the configured initial HTML.
+     */
     getHTML(): string;
+    /**
+     * @summary Replaces the document from HTML, synchronizes active source/rendered views and reflects the supplied text in value.
+     */
     setHTML(value: string): void;
+    /**
+     * @summary Replaces the current selection with a table of rows by columns and focuses it. Returns false if no editor or valid table can be created.
+     */
     insertTable(rows?: number, columns?: number): boolean;
+    /**
+     * @summary Adds a row after the selected table row; returns true when the command applies, or false when unavailable for the current editor state.
+     */
     addTableRowAfter(): boolean;
+    /**
+     * @summary Adds a column after the selected table column; returns true when the command applies, or false when unavailable for the current editor state.
+     */
     addTableColumnAfter(): boolean;
+    /**
+     * @summary Deletes the selected table row; returns true when the command applies, or false when unavailable for the current editor state.
+     */
     deleteTableRow(): boolean;
+    /**
+     * @summary Deletes the selected table column; returns true when the command applies, or false when unavailable for the current editor state.
+     */
     deleteTableColumn(): boolean;
+    /**
+     * @summary Deletes the table containing the current selection; returns true when the command applies, or false when unavailable for the current editor state.
+     */
     deleteTable(): boolean;
+    /**
+     * @summary Sets the search text and optional matching options on the rich-text editor; does nothing before initialization.
+     */
     setSearchQuery(value: string, options?: Omit<ConstructorParameters<typeof SearchQuery>[0], "search">): void;
+    /**
+     * @summary Finds and selects the next matching text, optionally replacing the current query with value. Returns whether a match was selected.
+     */
     findNext(value?: string): boolean;
+    /**
+     * @summary Finds and selects the previous matching text, optionally replacing the current query with value. Returns whether a match was selected.
+     */
     findPrevious(value?: string): boolean;
     private render;
     private createToolbarId;

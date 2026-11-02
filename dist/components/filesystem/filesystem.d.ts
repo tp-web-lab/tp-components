@@ -48,89 +48,67 @@ export declare class TpFilesystem extends TpBase {
      */
     disconnectedCallback(): void;
     /**
-     * @summary Replaces all files.
-     * @param files Files to store.
+     * @summary Replaces the in-memory files with copies, removes states for missing files, refreshes the tree and emits a change event.
      */
     setFiles(files: readonly TpFile[]): void;
     /**
-     * @summary Returns all files.
-     * @returns Cloned files.
+     * @summary Returns copies of all in-memory file records; modifying the returned array does not update the component.
      */
     getFiles(): TpFile[];
     /**
-     * @summary Replaces the full file system state.
-     * @param state File system state.
+     * @summary Replaces files and active, open and dirty paths together; removes paths that no longer exist, refreshes the tree and emits change.
      */
     setState(state: TpFilesystemState): void;
     /**
-     * @summary Returns the full file system state.
-     * @returns Current file system state.
+     * @summary Returns a snapshot of copied files and the current active, open and dirty paths.
      */
     getState(): TpFilesystemState;
     /**
-     * @summary Reads a file.
-     * @param path File path.
-     * @returns File content, or `null` when the file does not exist.
+     * @summary Returns the content of the normalized file path, or null when no file exists at that path.
      */
     readFile(path: string): string | null;
     /**
-     * @summary Writes file content.
-     * @param path File path.
-     * @param content New file content.
+     * @summary Replaces an existing writable file content, marks it dirty and emits write/change events. Missing and readonly files are unchanged.
      */
     writeFile(path: string, content: string): void;
     /**
-     * @summary Adds a file.
-     * @param file File to add.
+     * @summary Adds a copied file record and refreshes the tree; a duplicate normalized path is ignored.
      */
     addFile(file: TpFile): void;
     /**
-     * @summary Deletes a file.
-     * @param path File path.
+     * @summary Deletes an existing writable file and clears its open/dirty state; missing or readonly files are unchanged.
      */
     deleteFile(path: string): void;
     /**
-     * @summary Renames a file.
-     * @param oldPath Current file path.
-     * @param newPath New file path.
+     * @summary Changes the normalized path of a writable file and updates its tracked states. Missing, readonly or unchanged source paths are ignored.
      */
     renameFile(oldPath: string, newPath: string): void;
     /**
-     * @summary Moves a file.
-     * @param oldPath Current file path.
-     * @param newPath New file path.
+     * @summary Renames oldPath to newPath using renameFile(), then emits a move notification with the normalized paths.
      */
     moveFile(oldPath: string, newPath: string): void;
     /**
-     * @summary Opens a file and makes it active.
-     * @param path File path.
-     * @param emitEvent Whether to emit open and active events.
+     * @summary Marks an existing file as open and active. Set emitEvent to false to suppress open/active notifications.
      */
     openFile(path: string, emitEvent?: boolean): void;
     /**
-     * @summary Closes an open file.
-     * @param path File path.
+     * @summary Removes path from the open files; if it was active, activates another open file or clears the active path.
      */
     closeFile(path: string): void;
     /**
-     * @summary Sets the active file path.
-     * @param path Active file path, or `null`.
-     * @param emitEvent Whether to emit the active event.
+     * @summary Sets an existing file as active, or clears it with null. Set emitEvent to false to suppress the active-file notification.
      */
     setActivePath(path: string | null, emitEvent?: boolean): void;
     /**
-     * @summary Returns the active file path.
-     * @returns Active file path, or `null`.
+     * @summary Returns the active file path, or null when no file is active.
      */
     getActivePath(): string | null;
     /**
-     * @summary Replaces dirty file paths.
-     * @param paths Dirty file paths.
+     * @summary Replaces the set of modified-file paths and refreshes the tree; unknown paths are discarded.
      */
     setDirtyPaths(paths: readonly string[]): void;
     /**
-     * @summary Returns dirty file paths.
-     * @returns Dirty file paths.
+     * @summary Returns a new array of paths currently marked as modified.
      */
     getDirtyPaths(): string[];
     private ensureTree;

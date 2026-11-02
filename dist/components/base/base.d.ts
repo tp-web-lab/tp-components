@@ -203,6 +203,12 @@ export declare class TpBase extends HTMLElement {
     private getDocumentBaseCandidates;
     private isUsableDocumentUrl;
     private getOrCreateHelpDrawer;
+    /** Resolves host-configured documentation roots while retaining deployment prefixes. */
+    private helpReferenceRoot;
+    /** Builds the selected component's author guide or generated TypeDoc class reference. */
+    private renderReferenceHelp;
+    /** Uses the generated class-page map because TypeDoc filenames vary by module. */
+    private loadDeveloperHelp;
     /** Builds reader help without author controls, source code or class metadata. */
     private renderHelpContent;
     private getCurrentDocumentBaseHref;
@@ -223,16 +229,7 @@ export declare class TpBase extends HTMLElement {
     private isUserFacingDataAttribute;
     private getUserFacingAttributeValue;
 }
-/**
- * Injects the shared tp-* styles and a default theme class eagerly.
- *
- * This avoids initial render flashes when static markup uses theme-dependent
- * tokens before any `<tp-theme>` or `<tp-color>` interaction occurs.
- *
- * @summary Ensures global tp-* styles are ready.
- * @internal
- */
-export declare function ensureTpBaseStyles(): void;
+export { ensureTpBaseStyles } from "./base-styles.js";
 declare global {
     interface HTMLElementTagNameMap {
         "tp-base": TpBase;

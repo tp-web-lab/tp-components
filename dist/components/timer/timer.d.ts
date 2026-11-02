@@ -10,13 +10,19 @@ import { TpBase } from "../base/base.js";
  *
  * @tagname tp-timer
  * @attr {number} duration = 60 - Countdown duration in seconds.
- * @attr {string} size = "1rem" - Icon and text size.
+ * @attr {string} size = "1rem" - Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em.
  * @attr {boolean} silent = false - Disables sound playback.
- * @cssprop --tp-timer-size Icon and text size.
+ * @attr {boolean} manual = false - Waits for start() instead of starting automatically.
+ * @attr {boolean} no-controls = false - Hides duration editing and buttons; displays hh:mm:ss.
  * @event tp-timer-elapsed Emitted when the countdown reaches zero.
  * @eventdetail tp-timer-elapsed void
  * @example
  * <tp-timer></tp-timer>
+ * @cssprop [--tp-timer-alert=var(--tp-danger-text-on-soft)] Text color of the time display when the countdown has elapsed.
+ * @cssprop [--tp-timer-alert-bg=var(--tp-danger-fill-softer)] Background color of the elapsed portion of the countdown and of the whole timer once elapsed.
+ * @cssprop [--tp-timer-muted=var(--tp-neutral-text-on-soft)] Text color of the time display while stopped.
+ * @cssprop [--tp-timer-progress=0%] Elapsed portion of the countdown, as a percentage from 0% to 100%; updated internally as time passes.
+ * @cssprop [--tp-timer-size=1rem] Icon and text size.
  */
 export declare class TpTimer extends TpBase {
     private static readonly styleId;
@@ -130,13 +136,13 @@ export declare class TpTimer extends TpBase {
      *
      * @summary Stops and resets the timer.
      */
-    private stopAndReset;
+    reset(): void;
     /**
      * Restarts the timer from the configured duration.
      *
      * @summary Starts a new countdown from the beginning.
      */
-    private startFromBeginning;
+    start(): void;
     /**
      * Schedules the ringing sequence that plays after the countdown elapses.
      *

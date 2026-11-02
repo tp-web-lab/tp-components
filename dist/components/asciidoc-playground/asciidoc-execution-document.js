@@ -1,22 +1,4 @@
-import { E as e, f as t, n, t as r } from "../../chunks/playground-build-utils.js";
-//#region src/components/asciidoc-playground/asciidoc-execution-document.ts
-var i = "https://cdn.jsdelivr.net/npm/@asciidoctor/core@3.0.4/dist/browser/asciidoctor.js";
-function a(e) {
-	return e.replace(/<script\b[\s\S]*?<\/script>/gi, "");
-}
-function o(e) {
-	return (e ?? []).filter((e) => e.enabled !== !1);
-}
-async function s(s, c = {}) {
-	let l = e(s, {
-		entry: c.entry,
-		priorityPaths: ["/index.adoc", "/main.adoc"],
-		extensions: [".adoc", ".asciidoc"],
-		fallbackToFirstFile: !1
-	});
-	if (l === void 0) throw Error("No AsciiDoc entry file found.");
-	let u = t(s, "/index.html"), d = u ? a(u.content) : "<main id=\"app\"></main>", f = JSON.stringify(Object.fromEntries(s.files.map((e) => [e.path, e.content]))), p = JSON.stringify(l.path), m = JSON.stringify(s.attributes ?? {}), h = JSON.stringify(o(s.extensions));
-	return { html: `
+import{n as e}from"../../chunks/tool-loading.js";import{E as t,f as n,n as r,t as i}from"../../chunks/playground-build-utils.js";var a=`https://cdn.jsdelivr.net/npm/@asciidoctor/core@3.0.4/dist/browser/asciidoctor.js`;function o(e){return e.replace(/<script\b[\s\S]*?<\/script>/gi,``)}function s(e){return(e??[]).filter(e=>e.enabled!==!1)}async function c(c,l={}){let u=t(c,{entry:l.entry,priorityPaths:[`/index.adoc`,`/main.adoc`],extensions:[`.adoc`,`.asciidoc`],fallbackToFirstFile:!1});if(u===void 0)throw Error(`No AsciiDoc entry file found.`);let d=n(c,`/index.html`),f=d?o(d.content):`<main id="app"></main>`,p=JSON.stringify(Object.fromEntries(c.files.map(e=>[e.path,e.content]))),m=JSON.stringify(u.path),h=JSON.stringify(c.attributes??{}),g=JSON.stringify(s(c.extensions));return{html:`
 <!doctype html>
 <html>
 <head>
@@ -50,9 +32,9 @@ async function s(s, c = {}) {
   </style>
 </head>
 <body>
-  ${d}
+  ${f}
+  ${i()}
   ${r()}
-  ${n()}
 
 <script>
 async function loadCommonJsExtension(extension) {
@@ -87,7 +69,7 @@ function resolveProjectRelativePath(fromPath, relativePath) {
   const safeFromPath =
     typeof fromPath === 'string' && fromPath !== ''
       ? fromPath
-      : ${p};
+      : ${m};
 
   const safeRelativePath = String(relativePath);
 
@@ -124,7 +106,7 @@ function registerProjectIncludeProcessor(asciidoctor, registry, files) {
       const currentFile =
         typeof reader.file === 'string' && reader.file !== ''
           ? reader.file
-          : ${p};
+          : ${m};
 
       const path = resolveProjectRelativePath(currentFile, String(target));      const content = files[path];
 
@@ -197,7 +179,7 @@ function fixInternalAnchorLinks(root) {
 
 async function main() {
   try {
-const asciidoctorModule = await import(${JSON.stringify(i)});
+const asciidoctorModule = await import(${JSON.stringify(a)});
 const AsciidoctorFactory =
   asciidoctorModule.default ??
   asciidoctorModule.Asciidoctor ??
@@ -208,11 +190,12 @@ if (typeof AsciidoctorFactory !== 'function') {
 }
 
 const asciidoctor = AsciidoctorFactory();
+${e(`asciidoctor`,`Asciidoctor`,`asciidoctor.getVersion?.()`)}
 
-    const files = ${f};
-    const entryPath = ${p};
-    const attributes = ${m};
-    const extensions = ${h};
+    const files = ${p};
+    const entryPath = ${m};
+    const attributes = ${h};
+    const extensions = ${g};
 
     for (const extension of extensions) {
       await loadCommonJsExtension(extension);
@@ -263,9 +246,5 @@ void main();
 <\/script>
 </body>
 </html>
-` };
-}
-//#endregion
-export { s as buildAsciidocExecutionDocument };
-
+`}}export{c as buildAsciidocExecutionDocument};
 //# sourceMappingURL=asciidoc-execution-document.js.map

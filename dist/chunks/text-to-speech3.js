@@ -1,105 +1,70 @@
-//#region ../tp-markdown/dist/markdown/renderers/text-to-speech.js
-var e = {
-	lang: "fr-FR",
-	rate: 1,
-	pitch: 1,
-	volume: 1
-}, t = {
-	id: "text-to-speech",
-	render(e, t = {}) {
-		for (let n of e.querySelectorAll(".tp-md-text-to-speech")) n instanceof HTMLButtonElement && r(n, t);
-		for (let t of e.querySelectorAll(".tp-md-text-to-speech-stop")) t instanceof HTMLButtonElement && n(t);
-	}
-};
-function n(e) {
-	e.dataset.textToSpeechStopRendered !== "true" && (e.dataset.textToSpeechStopRendered = "true", e.addEventListener("click", () => {
-		"speechSynthesis" in window && window.speechSynthesis.cancel();
-	}));
+import{t as e}from"./markdown-style-registry.js";var t=`tp-md-text-to-speech-styles`,n=`
+.tp-md-text-to-speech,
+.tp-md-text-to-speech-block button {
+  cursor: pointer;
 }
-function r(e, t) {
-	e.dataset.textToSpeechRendered !== "true" && (e.dataset.textToSpeechRendered = "true", e.addEventListener("click", () => {
-		let n = e.dataset.textToSpeechText ?? "";
-		n.trim() !== "" && c(n, a(t, i(e)));
-	}));
-}
-function i(e) {
-	return {
-		lang: e.dataset.ttsLang,
-		voice: e.dataset.ttsVoice,
-		rate: s(e.dataset.ttsRate),
-		pitch: s(e.dataset.ttsPitch),
-		volume: s(e.dataset.ttsVolume)
-	};
-}
-function a(e, t) {
-	return {
-		...e,
-		...o(t)
-	};
-}
-function o(e) {
-	let t = {};
-	return e.lang !== void 0 && (t.lang = e.lang), e.voice !== void 0 && (t.voice = e.voice), e.rate !== void 0 && (t.rate = e.rate), e.pitch !== void 0 && (t.pitch = e.pitch), e.volume !== void 0 && (t.volume = e.volume), t;
-}
-function s(e) {
-	if (e === void 0) return;
-	let t = Number(e);
-	return Number.isFinite(t) ? t : void 0;
-}
-async function c(t, n) {
-	if (!("speechSynthesis" in window)) {
-		console.warn("Web Speech API is not available.");
-		return;
-	}
-	window.speechSynthesis.cancel();
-	let r = new SpeechSynthesisUtterance(t);
-	r.lang = n.lang ?? e.lang, r.rate = n.rate ?? e.rate, r.pitch = n.pitch ?? e.pitch, r.volume = n.volume ?? e.volume;
-	let i = await l(n.voice, r.lang);
-	i !== null && (r.voice = i), window.speechSynthesis.speak(r);
-}
-async function l(e, t) {
-	let n = await u();
-	if (e !== void 0 && e.trim() !== "") {
-		let t = n.find((t) => t.name === e);
-		if (t !== void 0) return t;
-	}
-	return n.find((e) => e.lang === t && !f(e)) ?? n.find((e) => e.lang.toLowerCase().startsWith(t.toLowerCase().slice(0, 2)) && !f(e)) ?? null;
-}
-async function u() {
-	let e = window.speechSynthesis, t = e.getVoices();
-	return t.length > 0 || (t = await new Promise((t) => {
-		let n = () => {
-			let r = e.getVoices();
-			r.length !== 0 && (e.removeEventListener("voiceschanged", n), t(r));
-		};
-		e.addEventListener("voiceschanged", n);
-	})), t;
-}
-var d = [
-	"Albert",
-	"Bahh",
-	"Boing",
-	"Bonnes nouvelles",
-	"Bouffon",
-	"Bulles",
-	"Cloches",
-	"Fred",
-	"Grandma",
-	"Grandpa",
-	"Junior",
-	"Mauvaises nouvelles",
-	"Murmure",
-	"Orgue",
-	"Ralph",
-	"Trinoïdes",
-	"Violoncelles",
-	"Wobble",
-	"Zarvox"
-];
-function f(e) {
-	return d.some((t) => e.name.includes(t));
-}
-//#endregion
-export { t as default };
 
+.tp-md-text-to-speech-block {
+  display: grid;
+  gap: 0.5rem;
+  margin-block: 1rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, CanvasText 18%, transparent);
+  border-radius: 0.75rem;
+}
+
+.tp-md-text-to-speech-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.tp-md-text-to-speech-stop {
+  opacity: 0.8;
+}
+
+.tp-md-text-to-speech-content {
+  white-space: pre-line;
+}
+`;function r(r){e(t,n),i(r),o(r)}function i(e){let t=e.inline,n=e.renderer;t===void 0||n===void 0||(t.ruler.before(`escape`,`text_to_speech_inline`,(e,t)=>{if(!e.src.startsWith(`:text-to-speech`,e.pos))return!1;let n=a(e.src,e.pos+15);if(n===null||n.source.trim()===``)return!1;if(!t){let t=e.push(`text_to_speech_inline`,``,0);t.meta={source:n.source.trim(),...c(n.args)}}return e.pos=n.end,!0}),n.rules.text_to_speech_inline=(e,t)=>{let n=s(e[t]);return`
+<button
+  type="button"
+  class="tp-md-text-to-speech"
+  data-text-to-speech-text="${g(n.source)}"
+  ${p(`data-tts-lang`,n.lang)}
+  ${p(`data-tts-voice`,n.voice)}
+  ${p(`data-tts-rate`,n.rate)}
+  ${p(`data-tts-pitch`,n.pitch)}
+  ${p(`data-tts-volume`,n.volume)}
+>🔊 ${h(n.source)}</button>
+`})}function a(e,t){let n=t,r=``;if(e[n]===`{`){let t=e.indexOf(`}`,n+1);if(t===-1)return null;r=e.slice(n+1,t),n=t+1}if(e[n]!==`:`||(n+=1,e[n]!=="`"))return null;let i=n+1,a=e.indexOf("`",i);return a===-1?null:{args:r,source:e.slice(i,a),end:a+1}}function o(e){let t=e.renderer,n=t.rules.fence;t.rules.fence=(e,t,r,i,a)=>{let o=e[t];if(o===void 0)return``;let s=u(o.info);if(s.name!==`text-to-speech`)return typeof n==`function`?n(e,t,r,i,a):a.renderToken(e,t,r);let d=c(`${s.args} ${l(o)}`.trim()),f=o.content.trim();return`
+<div
+  class="tp-md-text-to-speech-block"
+  ${p(`data-tts-lang`,d.lang)}
+  ${p(`data-tts-voice`,d.voice)}
+  ${p(`data-tts-rate`,d.rate)}
+  ${p(`data-tts-pitch`,d.pitch)}
+  ${p(`data-tts-volume`,d.volume)}
+>
+  <div class="tp-md-text-to-speech-content">${h(f)}</div>
+
+  <div class="tp-md-text-to-speech-controls">
+    <button
+      type="button"
+      class="tp-md-text-to-speech"
+      data-text-to-speech-text="${g(f)}"
+      ${p(`data-tts-lang`,d.lang)}
+      ${p(`data-tts-voice`,d.voice)}
+      ${p(`data-tts-rate`,d.rate)}
+      ${p(`data-tts-pitch`,d.pitch)}
+      ${p(`data-tts-volume`,d.volume)}
+    >Read</button>
+
+    <button
+      type="button"
+      class="tp-md-text-to-speech-stop"
+    >Stop</button>
+  </div>
+</div>
+`}}function s(e){let t=e?.meta;return typeof t==`object`&&t&&typeof t.source==`string`?t:{source:``}}function c(e){return{lang:d(e,`lang`)??void 0,voice:d(e,`voice`)??void 0,rate:f(e,`rate`),pitch:f(e,`pitch`),volume:f(e,`volume`)}}function l(e){return(e.attrs??[]).map(([e,t])=>t===``?e:`${e}=${JSON.stringify(t)}`).join(` `)}function u(e){let t=e.trim(),n=t.search(/\s/);return n===-1?{name:t,args:``}:{name:t.slice(0,n),args:t.slice(n+1).trim()}}function d(e,t){let n=RegExp(`${m(t)}=("[^"]+"|'[^']+'|\\S+)`),r=e.match(n);return r===null?null:(r[1]??``).replace(/^["']|["']$/g,``)}function f(e,t){let n=d(e,t);if(n===null)return;let r=Number(n);return Number.isFinite(r)?r:void 0}function p(e,t){return t===void 0?``:`${e}="${g(String(t))}"`}function m(e){return e.replace(/[.*+?^${}()|[\]\\]/g,`\\$&`)}function h(e){return e.replaceAll(`&`,`&amp;`).replaceAll(`<`,`&lt;`).replaceAll(`>`,`&gt;`).replaceAll(`"`,`&quot;`).replaceAll(`'`,`&#39;`)}function g(e){return h(e)}export{r as default};
 //# sourceMappingURL=text-to-speech3.js.map

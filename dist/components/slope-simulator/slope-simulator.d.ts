@@ -16,10 +16,6 @@
  * @summary CodeMirror-based code editor component.
  */
 /**
- * @tp-dependency tp-dropdown
- * @summary Dropdown menu component.
- */
-/**
  * @tp-dependency tp-icon-button
  * @summary Accessible icon button component.
  */
@@ -52,6 +48,9 @@ import "../graph-geometry/geometry-actions.js";
  * @keyboard F1 Toggle the toolbar while editing profile JSON.
  * @example
  * <tp-slope-simulator></tp-slope-simulator>
+ * @accessibility Represents each movable point as a labelled horizontal slider with current value and descriptive value text; Left and Right arrows provide a keyboard alternative to dragging.
+ * @accessibility Hides decorative route SVGs, labels the profile editor and controls, exposes the grid toggle state with aria-pressed and reports source failures in an alert region.
+ * @accessibilityresponsibility Provide clear profile labels and units, and a textual explanation of the route and effort relationship so the lesson does not depend only on the visual curve.
  */
 export declare class TpSlopeSimulator extends TpBase {
     private ui?;

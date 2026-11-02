@@ -1,3 +1,1 @@
-import "./chunk-KEIR6QF5.js";
-import { n as e } from "./chunk-BIQX33UG.js";
-export { e as createInfoServices };
+import"./chunk-KEIR6QF5.js";import{n as e}from"./chunk-BIQX33UG.js";export{e as createInfoServices};

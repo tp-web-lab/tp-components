@@ -34,13 +34,15 @@ JSON uses this component's question schema. Other formats use the same definitio
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Arrow keys | Move between radio answers in a single-choice question. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Move between radio answers in a single-choice question. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> on Submit | Submit the selected answers. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
 
-The `answer` attribute is the one-based index of the correct item in the original list. Add `random` to shuffle choices.
+Add the inherited boolean `score` attribute to display the numerical grade. It is hidden by default; correction messages and explanations remain available.
+
+The `answer` attribute is the one-based index of the correct item in the original list. Add `random` to shuffle choices. Each choice keeps its original answer and feedback association after shuffling, resetting or moving the question into an exercise. The selected choice’s authored feedback is shown for both correct and incorrect answers.
 
 ```html
 <tp-single-choice-question answer="1">
@@ -95,13 +97,19 @@ Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
   | <code>answer</code> | <code>number</code> | <code>0</code> | 1-based index of the correct answer in the original list order. Not reflected back to the DOM when set via JS property — read from attribute only. |
-  | <code>name</code> | <code>string</code> | <code>&quot;&quot;</code> | Name attribute passed to the underlying tp-radio-list. |
-  | <code>orientation</code> | <code>string</code> | <code>&quot;&quot;</code> | Orientation attribute passed to the underlying tp-radio-list. |
+  | <code>name</code> | <code>string</code> | <code>&quot;&quot;</code> | Form field name passed to the underlying choice list. |
+  | <code>orientation</code> | <code>string</code> | <code>&quot;&quot;</code> | Arrangement of answer choices: horizontal or vertical. |
   | <code>random</code> | <code>boolean</code> | <code>false</code> | When present, items are shuffled on connect and after each reset. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL to an external JSON file describing items, answer, and feedback. When present, the answer is never exposed in the HTML source. Inherited from TpQuestion. |
-  | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Value attribute passed to the underlying tp-radio-list. |
+  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of an external JSON, HTML, Markdown, AsciiDoc or reStructuredText question definition. Keeps the definition out of authored markup, but does not make downloaded answers confidential. |
+  | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | 1-based index of the currently selected answer; empty means no selection. |
+  | <code>ai-api</code> | <code>boolean</code> | <code>false</code> | Allows sending AI prompts to the selected provider; without it, prompts are only copied. *(inherited from <code>tp-question</code>)* |
+  | <code>ai-assistant</code> | <code>string</code> | <code>&quot;openai&quot;</code> | AI provider, optionally followed by /model; without a model, uses the server configuration. Providers: openai, anthropic, google, mistral. *(inherited from <code>tp-question</code>)* |
+  | <code>ai-explanation-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a saved Markdown explanation; the companion .prompt.md must match the current prompt. *(inherited from <code>tp-question</code>)* |
+  | <code>ai-help</code> | <code>&quot;none&quot;\|&quot;feedback&quot;\|&quot;solution&quot;\|&quot;both&quot;</code> | <code>&quot;none&quot;</code> | Optional AI assistance; solution and both enable solution explanations. Feedback assistance is reserved for a future release. *(inherited from <code>tp-question</code>)* |
   | <code>mode</code> | <code>string</code> | <code>&quot;mixed&quot;</code> | Blank mode: opened, closed, or mixed local choices. *(inherited from <code>tp-question</code>)* |
-  | <code>open</code> | <code>boolean</code> | <code>false</code> | Expands the question; absent by default, leaving only its title visible. *(inherited from <code>tp-question</code>)* |
+  | <code>open</code> | <code>string</code> | <code>&quot;&quot;</code> | Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.<br>  `detail: { value: unknown }` *(inherited from <code>tp-question</code>)* |
+  | <code>score</code> | <code>boolean</code> | <code>false</code> | Displays the numerical score in submission feedback. *(inherited from <code>tp-question</code>)* |
+  | <code>timing</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional nonzero time limit in strict hh:mm:ss format. *(inherited from <code>tp-question</code>)* |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
   | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
@@ -131,6 +139,29 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_single-choice-question.TpSingleChoiceQuestion.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,59 +1,12 @@
-//#region ../tp-markdown/dist/markdown/renderers/speech-to-text.js
-var e = {
-	lang: "fr-FR",
-	continuous: !0,
-	interimResults: !0
-}, t = {
-	id: "speech-to-text",
-	render(e, t = {}) {
-		for (let r of e.querySelectorAll(".tp-md-speech-to-text, .tp-md-speech-to-text-block")) r instanceof HTMLElement && n(r, t);
-	}
-};
-function n(t, n) {
-	if (t.dataset.sttRendered === "true") return;
-	t.dataset.sttRendered = "true";
-	let a = window.SpeechRecognition ?? window.webkitSpeechRecognition;
-	if (a === void 0) {
-		t.append(document.createTextNode(" Speech recognition is not available."));
-		return;
-	}
-	let o = i(n, r(t)), s = new a();
-	s.lang = o.lang ?? e.lang, s.continuous = o.continuous ?? e.continuous, s.interimResults = o.interimResults ?? e.interimResults;
-	let c = t.querySelector("[data-stt-start]"), l = t.querySelector("[data-stt-stop]"), u = t.querySelector("[data-stt-output]");
-	!(c instanceof HTMLButtonElement) || !(u instanceof HTMLElement) || (c.addEventListener("click", () => {
-		u.textContent = "", s.start();
-	}), l instanceof HTMLButtonElement && l.addEventListener("click", () => {
-		s.stop();
-	}), s.addEventListener("result", (e) => {
-		let t = e.results, n = "";
-		for (let e = 0; e < t.length; e += 1) n += t[e]?.[0]?.transcript ?? "";
-		u.textContent = n;
-	}));
-}
-function r(e) {
-	return {
-		lang: e.dataset.sttLang,
-		continuous: o(e.dataset.sttContinuous),
-		interimResults: o(e.dataset.sttInterimResults)
-	};
-}
-function i(e, t) {
-	return {
-		...e,
-		...a(t)
-	};
-}
-function a(e) {
-	let t = {};
-	return e.lang !== void 0 && (t.lang = e.lang), e.continuous !== void 0 && (t.continuous = e.continuous), e.interimResults !== void 0 && (t.interimResults = e.interimResults), t;
-}
-function o(e) {
-	if (e !== void 0) {
-		if (e === "true" || e === "1") return !0;
-		if (e === "false" || e === "0") return !1;
-	}
-}
-//#endregion
-export { t as default };
-
+import{t as e}from"./base.js";import"../components/textfield/textfield.js";import"./button.js";import"./button-group.js";import"./stack.js";import{t}from"./speech-controls.js";import{isSafariBrowser as n}from"../utilities/safari-browser.js";import{t as r}from"./audio-recorder.js";var i=`tp-speech-to-text>.tp-speech-fieldset>tp-audio-recorder[data-speech-recording]>.tp-speech-fieldset>:is(legend,tp-button-group){display:none}tp-speech-to-text>.tp-speech-fieldset>tp-audio-recorder[data-speech-recording]{margin-block-start:.75rem}tp-speech-to-text{min-inline-size:0;display:block}tp-speech-to-text>.tp-speech-fieldset>tp-audio-recorder[data-speech-recording]>.tp-speech-fieldset{border:0;padding:0}`,a=class extends e{static get observedAttributes(){return[...e.observedAttributes,`legend`,`value`,`continuous`,`record`,`interim-results`,`disabled`]}recognition=null;sessionPrefix=``;interim=``;writingResult=!1;status=`Ready.`;state=`idle`;audioRecorder=null;get record(){return this.hasAttribute(`record`)}set record(e){this.toggleAttribute(`record`,e)}syncRecorder(){!this.record||!n()?(this.audioRecorder?.remove(),this.audioRecorder=null):this.audioRecorder?.isConnected||(this.audioRecorder=new r,this.audioRecorder.setAttribute(`data-speech-recording`,``),this.audioRecorder.addEventListener(`tp-audio-recorded`,()=>this.updateUI()),this.querySelector(`:scope > .tp-speech-fieldset`)?.append(this.audioRecorder))}get value(){return this.getAttribute(`value`)??``}set value(e){this.setStringAttribute(`value`,e)}get continuous(){return this.hasAttribute(`continuous`)}set continuous(e){this.setBooleanAttribute(`continuous`,e)}get interimResults(){return this.hasAttribute(`interim-results`)}set interimResults(e){this.setBooleanAttribute(`interim-results`,e)}get disabled(){return this.hasAttribute(`disabled`)}set disabled(e){this.setBooleanAttribute(`disabled`,e)}connectedCallback(){super.connectedCallback(),this.ensureGlobalStyle(`tp-speech-controls-styles`,t),this.ensureGlobalStyle(`tp-speech-recording-styles`,i),this.innerHTML=`<fieldset class="tp-speech-fieldset"><legend></legend><tp-stack>
+      <tp-button-group class="tp-speech-controls" role="group" aria-label="Speech recognition controls">
+        <tp-button size="s" data-action="start">Start</tp-button>
+        <tp-button size="s" data-action="stop">Stop</tp-button>
+        <tp-button size="s" data-action="clear">Clear</tp-button>
+        <span class="tp-speech-status" data-role="status" role="status" aria-live="polite"></span>
+      </tp-button-group>
+      <tp-textfield multiline label="Transcript" data-role="transcript"></tp-textfield>
+      <p data-role="recording-warning" role="status" hidden></p>
+      <p data-role="interim" aria-label="Provisional transcript" hidden></p>
+    </tp-stack></fieldset>`,this.attributeChangedCallback(`legend`);for(let e of[`start`,`stop`,`clear`])this.querySelector(`[data-action="${e}"]`)?.addEventListener(`click`,()=>this[e]());this.querySelector(`tp-textfield`)?.addEventListener(`input`,this.onInput),this.syncRecorder(),this.updateUI()}attributeChangedCallback(e){if(e===`legend`){let e=this.querySelector(`:scope > fieldset > legend`);e&&(e.textContent=this.getAttribute(`legend`)??`Speech to text`);return}this.writingResult||((e===`record`||e===`value`||e===`lang`||e===`continuous`||e===`interim-results`||this.disabled)&&this.abort(),this.isConnected&&(e===`record`&&this.syncRecorder(),this.updateUI()))}disconnectedCallback(){this.abort()}start(){if(this.disabled||this.recognition||!this.isConnected)return;let e=this.recognitionConstructor();if(!e){this.fail(`Speech recognition is unavailable in this browser.`);return}try{let t=new e;this.recognition=t,this.sessionPrefix=this.value.trim(),this.interim=``;let n=this.closest(`[lang]`)?.getAttribute(`lang`)?.trim();n&&(t.lang=n),t.continuous=this.continuous,t.interimResults=this.interimResults,t.addEventListener(`start`,this.onStart),t.addEventListener(`result`,this.onResult),t.addEventListener(`error`,this.onError),t.addEventListener(`end`,this.onEnd),this.state=`starting`,this.status=`Waiting for microphone permission…`,this.updateUI(),t.start()}catch(e){this.fail(e instanceof Error?e.message:String(e))}}stop(){if(!(!this.recognition||this.state===`stopping`)){this.audioRecorder?.stop(),this.state=`stopping`,this.status=`Finishing transcription…`,this.updateUI();try{this.recognition.stop()}catch(e){this.fail(e instanceof Error?e.message:String(e))}}}abort(){this.audioRecorder?.stop();let e=this.release();if(e){try{e.abort()}catch{}this.status=`Stopped.`,this.updateUI(),this.emit(`end`,{value:this.value})}}clear(){this.disabled||(this.abort(),this.audioRecorder?.remove(),this.audioRecorder=null,this.syncRecorder(),this.value=``,this.interim=``,this.status=`Ready.`,this.updateUI())}recognitionConstructor(){let e=this.ownerDocument.defaultView;return e?.SpeechRecognition??e?.webkitSpeechRecognition}onStart=()=>{this.state!==`stopping`&&(this.state=`listening`,this.status=`Listening…`,this.audioRecorder?.start()),this.updateUI(),this.emit(`start`,{value:this.value})};onResult=e=>{let t=e.results,n=[this.sessionPrefix],r=[];for(let e=0;e<t.length;e+=1){let i=t[e];if(!i)continue;let a=i[0]?.transcript.trim()??``;(i.isFinal?n:r).push(a)}this.writingResult=!0,this.value=n.filter(Boolean).join(` `),this.writingResult=!1,this.interim=this.interimResults?r.filter(Boolean).join(` `):``,this.updateUI(),this.emit(`result`,{value:this.value,interim:this.interim})};onError=e=>{this.fail(e.error)};onEnd=()=>{this.audioRecorder?.stop(),this.release(),this.status=`Ready.`,this.updateUI(),this.emit(`end`,{value:this.value})};onInput=()=>{let e=this.querySelector(`tp-textfield`);e&&(this.value=e.value)};release(){let e=this.recognition;return this.recognition=null,e?.removeEventListener(`start`,this.onStart),e?.removeEventListener(`result`,this.onResult),e?.removeEventListener(`error`,this.onError),e?.removeEventListener(`end`,this.onEnd),this.state=`idle`,this.interim=``,e}fail(e){this.abort(),this.status=`Error: ${e}`,this.updateUI(),this.emit(`error`,{error:e})}updateUI(){let e=!!this.recognitionConstructor(),t=this.querySelector(`[data-role="recording-warning"]`);t&&(t.hidden=!this.record||n(),t.textContent=t.hidden?``:`Recording during transcription is temporarily available only in Safari. Transcription remains available if supported by your browser.`);let r=this.querySelector(`tp-textfield`);r&&(r.value=this.value,r.disabled=this.disabled),this.querySelector(`[data-action="start"]`)?.toggleAttribute(`disabled`,this.disabled||!e||this.state!==`idle`),this.querySelector(`[data-action="stop"]`)?.toggleAttribute(`disabled`,this.disabled||this.state===`idle`||this.state===`stopping`),this.querySelector(`[data-action="clear"]`)?.toggleAttribute(`disabled`,this.disabled||this.value===``&&this.state===`idle`&&!this.audioRecorder?.querySelector(`audio`)?.hasAttribute(`src`));let i=this.querySelector(`[data-role="status"]`);i&&(i.textContent=e?this.status:`Speech recognition is unavailable. You can type your transcript.`);let a=this.querySelector(`[data-role="interim"]`);a&&(a.textContent=this.interim,a.hidden=this.interim===``),this.dataset.state=this.state}emit(e,t){this.dispatchEvent(new CustomEvent(`tp-speech-to-text-${e}`,{detail:t,bubbles:!0}))}};customElements.get(`tp-speech-to-text`)||customElements.define(`tp-speech-to-text`,a);export{a as t};
 //# sourceMappingURL=speech-to-text2.js.map

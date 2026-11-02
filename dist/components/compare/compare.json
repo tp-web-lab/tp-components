@@ -17,7 +17,7 @@
       "static": false,
       "inherited": false,
       "type": "string",
-      "default": "''"
+      "default": "\"\""
     },
     {
       "name": "before-label",
@@ -26,11 +26,11 @@
       "static": false,
       "inherited": false,
       "type": "string",
-      "default": "''"
+      "default": "\"\""
     },
     {
       "name": "orientation",
-      "description": "Comparator orientation.\n\n- `horizontal` : séparation gauche / droite\n- `vertical` : séparation haut / bas",
+      "description": "Split direction: horizontal places the layers on the left and right; vertical places them above and below.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -44,7 +44,7 @@
       "static": false,
       "inherited": false,
       "type": "string",
-      "default": "''"
+      "default": "\"\""
     },
     {
       "name": "storage-key",
@@ -53,7 +53,7 @@
       "static": false,
       "inherited": false,
       "type": "string",
-      "default": "''"
+      "default": "\"\""
     }
   ],
   "methods": [
@@ -68,17 +68,17 @@
     {
       "name": "--tp-compare-divider-size",
       "default": "2px",
-      "description": "Controls the divider size."
+      "description": "Thickness of the dividing line between the two layers."
     },
     {
       "name": "--tp-compare-handle-size",
       "default": "2.5rem",
-      "description": "Controls the handle size."
+      "description": "Width and height of the draggable comparison handle."
     },
     {
       "name": "--tp-compare-position",
       "default": "50%",
-      "description": "Controls the position."
+      "description": "Position of the divider along the comparison axis, usually a percentage; synchronized with position and pointer or keyboard interaction."
     }
   ],
   "dependencies": [
@@ -91,7 +91,7 @@
   "userHelp": {
     "displayName": "Compare",
     "introduction": "The custom `<tp-compare>` element implements the <tp-icon name=\"compare\" library=\"components\" size=\"1.25em\"></tp-icon> Compare functionality: before-and-after comparison component.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Drag | Drag the comparison handle to reveal more of either image or panel. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the comparison handle. |\n| Arrow keys | Moves the separator by 1%, or by 10% while <kbd>Shift</kbd> is held. |\n| <kbd>Home</kbd> / <kbd>End</kbd> | Moves the separator to its minimum or maximum position. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Drag | Drag the comparison handle to reveal more of either image or panel. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the comparison handle. |\n| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Moves the separator by 1%, or by 10% while <kbd>Shift</kbd> is held. |\n| <kbd>Home</kbd> / <kbd>End</kbd> | Moves the separator to its minimum or maximum position. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Arrow keys",

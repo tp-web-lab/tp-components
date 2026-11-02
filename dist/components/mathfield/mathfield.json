@@ -172,30 +172,30 @@
     },
     {
       "name": "tp-math-rendered",
-      "description": "Emitted after MathJax finishes rendering the expression.",
-      "detail": "{ mode: unknown; value: string }"
+      "description": "Emitted when the formula preview reports that rendering has finished; mode is the input notation and value is the current expression.",
+      "detail": "{ mode: \"latexmath\" | \"asciimath\"; value: string }"
     }
   ],
   "cssproperties": [
     {
       "name": "--tp-mathfield-inline-size",
       "default": "28rem",
-      "description": "Controls the inline size."
+      "description": "Preferred width of the math editor, limited by available space; also caps the multiline component width."
     },
     {
       "name": "--tp-mathfield-preview-background",
       "default": "Canvas",
-      "description": "Controls the preview background."
+      "description": "Background color of the rendered formula preview."
     },
     {
       "name": "--tp-mathfield-preview-border-color",
       "default": "var(--tp-neutral-stroke-soft)",
-      "description": "Controls the preview border color."
+      "description": "Border color of the rendered formula preview."
     },
     {
       "name": "--tp-mathfield-preview-padding",
       "default": "0.75rem",
-      "description": "Controls the preview padding."
+      "description": "Inner spacing around the rendered formula preview."
     }
   ],
   "dependencies": [
@@ -221,6 +221,11 @@
     }
   ],
   "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    },
     {
       "name": "MathLive",
       "url": "https://mathlive.io/",

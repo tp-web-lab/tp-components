@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/mastermind.js";
-export { e as TpMastermind };
+import{t as e}from"../../chunks/mastermind2.js";export{e as TpMastermind};

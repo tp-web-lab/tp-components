@@ -1,6 +1,6 @@
 # Playgrounds component quality
 
-> Latest recorded executions: **1 distinct failing test affects this family** in the global run or its separate family reruns. Coverage was collected despite failures and is not evidence of a passing suite. See the [execution results](index.md#latest-global-execution) for both scopes.
+> Historical coverage execution (20 September 2026): **1 distinct failing test affects this family** in that global run or its separate family reruns. Coverage was collected despite those failures. These are historical results, not the current test status; see [Tests](../tests.md) for the latest review.
 
 This report covers the nine public components in the **Playgrounds** catalogue. Coverage includes every production TypeScript file owned by each component, including its project model and execution-document builders; shared integration suites are not attributed repeatedly in the Tests column.
 

@@ -8,7 +8,7 @@
  */
 /**
  * @tp-dependency tp-button
- * @summary an action button or navigation link with shared sizes, variants and loading states.
+ * @summary Button component that supports native button and link rendering.
  */
 /**
  * @tp-dependency tp-glossary
@@ -20,7 +20,7 @@
  */
 /**
  * @tp-dependency tp-tooltip
- * @summary Displays anchored tooltip content.
+ * @summary Tooltip component.
  */
 import { TpBase } from "../base/base.js";
 import "../tooltip/tooltip.js";
@@ -38,6 +38,9 @@ import "../glossary/glossary.js";
  *   <p>A useful detail <tp-ref href="^detail"></tp-ref>.</p>
  *   <tp-note ref="detail" title="Detail"><p>A note with <strong>formatted content</strong>.</p></tp-note>
  * </div>
+ * @accessibility Uses a native button supplied by tp-button for the citation; the anchored tp-tooltip supports hover, keyboard focus and activation, and Escape dismissal.
+ * @accessibility Disables unresolved citations and keeps note numbering synchronized with citation order.
+ * @accessibilityresponsibility Use meaningful bibliography and glossary identifiers and accessible referenced content. Put essential or interactive material in a persistent tp-listof rather than relying solely on a tooltip.
  */
 export declare class TpRef extends TpBase {
     private link;

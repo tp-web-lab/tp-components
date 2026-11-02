@@ -2,8 +2,12 @@
  * @module components/dropdown
  * @summary Dropdown menu component.
  */
-import { TpOverlayElement } from '../overlay/overlay.js';
-type TpDropdownPlacement = 'top' | 'end' | 'bottom' | 'start';
+/**
+ * @tp-dependency tp-base
+ * @summary Shared base class for tp-* components.
+ */
+import { TpOverlayElement } from "../overlay/overlay.js";
+type TpDropdownPlacement = "top" | "end" | "bottom" | "start";
 /**
  * `<tp-dropdown>` affiche un menu déroulant ancré à un élément cible,
  * sans utiliser de Shadow DOM.
@@ -114,7 +118,7 @@ export declare class TpDropdown extends TpOverlayElement {
      * @summary Handles attribute changes.
      * @internal
      */
-    protected attributeChangedCallback(name: string): void;
+    protected attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void;
     /**
      * Disconnects the dropdown from the document.
      *
@@ -128,6 +132,9 @@ export declare class TpDropdown extends TpOverlayElement {
      * @summary Toggles the dropdown.
      */
     toggle(): void;
+    /**
+     * @summary Opens the dropdown by setting its open state and positioning it relative to its anchor.
+     */
     show(): void;
     /**
      * Closes every nested submenu.

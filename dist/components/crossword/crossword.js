@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/crossword.js";
-export { e as TpCrossword };
+import{t as e}from"../../chunks/crossword.js";export{e as TpCrossword};

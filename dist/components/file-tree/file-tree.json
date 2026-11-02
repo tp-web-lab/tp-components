@@ -14,103 +14,103 @@
     {
       "name": "beginRenamePath(path: string): void",
       "inherited": false,
-      "description": "Démarre le renommage d’un chemin."
+      "description": "Starts inline renaming for the tree item matching path; does nothing for an empty or missing path."
     },
     {
       "name": "collapseAll(): void",
       "inherited": false,
-      "description": "Ferme tous les nœuds."
+      "description": "Collapses every directory in the displayed tree; has no effect before the internal tree is created."
     },
     {
       "name": "expandAll(): void",
       "inherited": false,
-      "description": "Ouvre tous les nœuds."
+      "description": "Expands every directory in the displayed tree; has no effect before the internal tree is created."
     },
     {
       "name": "getNodes(): TpFileTreeNode[]",
       "inherited": false,
-      "description": "Retourne une copie triée des nœuds racine."
+      "description": "Returns a detached, recursively sorted copy of the root nodes, with directories before files."
     },
     {
       "name": "setActivePath(path: string | null): void",
       "inherited": false,
-      "description": "Met à jour l’état actif logique."
+      "description": "Sets the active-file path; null clears the active marker without changing selection."
     },
     {
       "name": "setDirtyPaths(paths: readonly string[]): void",
       "inherited": false,
-      "description": "Met à jour l’état dirty des fichiers."
+      "description": "Replaces the set of file paths marked as modified; an empty array removes every modified marker."
     },
     {
       "name": "setNodes(nodes: readonly TpFileTreeNode[]): void",
       "inherited": false,
-      "description": "Charge une nouvelle liste de nœuds racine."
+      "description": "Replaces the root nodes with a recursively sorted copy while retaining selected, active, open and dirty paths."
     },
     {
       "name": "setOpenPaths(paths: readonly string[]): void",
       "inherited": false,
-      "description": "Met à jour l’état logique des chemins ouverts."
+      "description": "Replaces the set of file paths marked as open; does not change the active or selected path."
     },
     {
       "name": "setSelectedPath(path: string | null): void",
       "inherited": false,
-      "description": "Met à jour la sélection logique."
+      "description": "Sets the highlighted selected path; null clears selection. Retains the active path and file states."
     },
     {
       "name": "setState(state: TpFileTreeState): void",
       "inherited": false,
-      "description": "Synchronise en une fois les nœuds et états visuels."
+      "description": "Replaces the displayed nodes and selected, active, open and dirty paths together; rerenders the tree and expands its directories."
     }
   ],
   "events": [
     {
       "name": "tp-file-tree-active",
-      "description": "Émis lorsqu’un fichier devient actif.",
+      "description": "Emitted when selecting a file makes it active; path identifies the file. Selecting an already active file can emit it again.",
       "detail": "{ path: string }"
     },
     {
       "name": "tp-file-tree-add-request",
-      "description": "Émis lorsqu’un ajout de fichier ou dossier est demandé.",
+      "description": "Requests creation of a file or directory; path is the target path, or null for the root, and kind specifies the entry type. The consumer performs the creation.",
       "detail": "{ path: string | null; kind: \"file\" | \"directory\" }"
     },
     {
       "name": "tp-file-tree-clone-request",
-      "description": "Émis lorsqu’un clonage est demandé.",
+      "description": "Requests duplication of the entry at path; the consumer performs the copy.",
       "detail": "{ path: string }"
     },
     {
       "name": "tp-file-tree-copy-request",
-      "description": "Émis lorsqu’une copie de chemin est demandée.",
+      "description": "Requests copying the selected path to the clipboard; the consumer performs the copy.",
       "detail": "{ path: string }"
     },
     {
       "name": "tp-file-tree-delete-request",
-      "description": "Émis lorsqu’une suppression est demandée.",
+      "description": "Requests deletion of the entry at path; the consumer performs the deletion.",
       "detail": "{ path: string }"
     },
     {
       "name": "tp-file-tree-global-action",
-      "description": "Émis lorsqu’une action globale est choisie.",
-      "detail": "{ action: string }"
+      "description": "Emitted when a global context-menu action is chosen; actionId contains its identifier.",
+      "detail": "{ actionId: \"expand-all\" | \"collapse-all\" | \"toggle-guides\" }"
     },
     {
       "name": "tp-file-tree-move-request",
-      "description": "Émis lorsqu’un déplacement est demandé.",
+      "description": "Requests moving sourcePath relative to destinationPath at position; a null destination denotes the root. The consumer performs the move.",
       "detail": "{ sourcePath: string; destinationPath: string | null; position: \"inside\" | \"before\" | \"after\" }"
     },
     {
       "name": "tp-file-tree-open",
-      "description": "Émis lorsqu’un fichier est ouvert.",
+      "description": "Emitted when a file is selected for opening; path identifies the file. Selecting an already open file can emit it again.",
       "detail": "{ path: string }"
     },
     {
       "name": "tp-file-tree-rename-request",
-      "description": "Émis lorsqu’un renommage est demandé.",
+      "description": "Requests renaming the entry at path to newName; the consumer performs the rename.",
       "detail": "{ path: string; newName: string }"
     },
     {
       "name": "tp-file-tree-select",
-      "description": "Émis lorsqu’un chemin est sélectionné.",
+      "description": "Emitted after a file or directory row is selected; path identifies the selected entry.",
       "detail": "{ path: string }"
     }
   ],
@@ -118,27 +118,27 @@
     {
       "name": "--tp-file-tree-active-color",
       "default": "inherit",
-      "description": "Couleur du fichier actif."
+      "description": "Text color of the active file row."
     },
     {
       "name": "--tp-file-tree-dirty-color",
       "default": "#d97706",
-      "description": "Couleur du marqueur dirty."
+      "description": "Color of the dot marking a file with unsaved changes."
     },
     {
       "name": "--tp-file-tree-icon-size",
       "default": "1rem",
-      "description": "Taille des icônes de fichiers."
+      "description": "Width and height of file and directory icons."
     },
     {
       "name": "--tp-file-tree-open-color",
       "default": "inherit",
-      "description": "Couleur des fichiers ouverts."
+      "description": "Text color of rows whose paths are marked as open."
     },
     {
       "name": "--tp-file-tree-selected-bg",
       "default": "color-mix(in srgb, currentColor 8%, transparent)",
-      "description": "Couleur de fond du chemin sélectionné."
+      "description": "Background color of the selected path row."
     }
   ],
   "dependencies": [

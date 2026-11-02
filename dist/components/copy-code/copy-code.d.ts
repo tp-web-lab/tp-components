@@ -37,14 +37,14 @@ import "../icon/icon.js";
  * @summary Copies the textual content of a target component to the clipboard.
  * @tagname tp-copy-code
  *
- * @attr {string} for = "" - Identifiant de l’élément cible.
- * @attr {string} icon = "copy" - Nom de l’icône affichée à l’état normal. Valeur par défaut : `copy`.
- * @attr {string} success-icon = "check" - Nom de l’icône affichée après une copie réussie. Valeur par défaut : `check`.
- * @attr {string} error-icon = "warning" - Nom de l’icône affichée après une erreur. Valeur par défaut : `warning`.
- * @attr {string} copied-text = "Copied!" - Libellé accessible après une copie réussie. Valeur par défaut : `Copied!`.
+ * @attr {string} for = "" - ID of the element whose source text is copied, without a leading #.
+ * @attr {string} icon = "copy" - Icon name displayed before copying; defaults to copy.
+ * @attr {string} success-icon = "check" - Icon name displayed after a successful copy; defaults to check.
+ * @attr {string} error-icon = "warning" - Icon name displayed after a failed clipboard copy; defaults to warning.
+ * @attr {string} copied-text = "Copied!" - Accessible feedback text after a successful copy; defaults to Copied!.
  *
- * @event tp-copy-code-success Émis quand la copie a réussi.
- * @event tp-copy-code-error Émis quand la copie a échoué.
+
+
  *
  * @example
  * <tp-box>
@@ -53,6 +53,12 @@ import "../icon/icon.js";
  * </tp-box>
  * <tp-copy-code for="intro-copy-code"></tp-copy-code>
  * </tp-box>
+ * @cssprop [--tp-copy-code-error-color=red] Color of the copy control while reporting a failed clipboard operation.
+ * @cssprop [--tp-copy-code-success-color=green] Color of the copy control while confirming a successful clipboard operation.
+ * @event tp-copy-code-success Emitted after clipboard writing succeeds. The detail gives the copied text length in UTF-16 code units and the source element.
+ * @eventdetail tp-copy-code-success { length: number; target: HTMLElement }
+ * @event tp-copy-code-error Emitted when the target cannot be resolved or its contents cannot be copied; message explains the failure.
+ * @eventdetail tp-copy-code-error { message: string }
  */
 export declare class TpCopyCode extends TpBase {
     /**
@@ -133,8 +139,7 @@ export declare class TpCopyCode extends TpBase {
      */
     static get observedAttributes(): string[];
     /**
-     * Identifiant de l’élément cible.
-     *
+     * @summary ID of the element whose source text is copied, without a leading #.
      * @attr for
      */
     get htmlFor(): string;
@@ -145,8 +150,7 @@ export declare class TpCopyCode extends TpBase {
      */
     set htmlFor(value: string);
     /**
-     * Nom de l’icône affichée à l’état normal.
-     *
+     * @summary Icon name displayed before copying; defaults to copy.
      * @attr icon
      * @default copy
      */
@@ -158,8 +162,7 @@ export declare class TpCopyCode extends TpBase {
      */
     set icon(value: string);
     /**
-     * Nom de l’icône affichée après une copie réussie.
-     *
+     * @summary Icon name displayed after a successful copy; defaults to check.
      * @attr success-icon
      * @default check
      */
@@ -171,8 +174,7 @@ export declare class TpCopyCode extends TpBase {
      */
     set successIcon(value: string);
     /**
-     * Nom de l’icône affichée après une erreur.
-     *
+     * @summary Icon name displayed after a failed clipboard copy; defaults to warning.
      * @attr error-icon
      * @default warning
      */
@@ -184,8 +186,7 @@ export declare class TpCopyCode extends TpBase {
      */
     set errorIcon(value: string);
     /**
-     * Libellé accessible après une copie réussie.
-     *
+     * @summary Accessible feedback text after a successful copy; defaults to Copied!.
      * @attr copied-text
      * @default Copied!
      */
@@ -232,10 +233,7 @@ export declare class TpCopyCode extends TpBase {
      */
     disconnectedCallback(): void;
     /**
-     * Copie dans le presse-papiers le contenu de la cible.
-     *
-     * @summary Copie le contenu texte de la cible.
-     * @returns `true` si la copie a réussi, sinon `false`.
+     * @summary Copies the target source text to the clipboard. Resolves to true on success, or false when the target is missing or copying fails; updates feedback and emits the corresponding result event.
      */
     copy(): Promise<boolean>;
     /**

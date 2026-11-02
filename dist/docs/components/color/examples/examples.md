@@ -19,6 +19,52 @@ Combine the attributes on one preview. Controls start at the published defaults.
 - disabled
 :::
 
+::: tp-radio-list { data-setting="preset" label="preset" label-position="top" orientation="horizontal" value="1" }
+- tp-default
+
+- tp-red
+
+- tp-orange
+
+- tp-amber
+
+- tp-yellow
+
+- tp-lime
+
+- tp-green
+
+- tp-emerald
+
+- tp-teal
+
+- tp-glaz
+
+- tp-cyan
+
+- tp-sky
+
+- tp-blue
+
+- tp-indigo
+
+- tp-violet
+
+- tp-purple
+
+- tp-fuchsia
+
+- tp-pink
+
+- tp-rose
+
+- tp-zinc
+
+- tp-ivory
+
+- tp-stone
+:::
+
 ::: tp-radio-list { data-setting="size" label="size" label-position="top" orientation="horizontal" value="4" }
 - xxs
 
@@ -51,9 +97,6 @@ Combine the attributes on one preview. Controls start at the published defaults.
 
 :::: tp-cluster
 ::: tp-textfield { data-setting="anchor" label="anchor" value placeholder clearable }
-:::
-
-::: tp-textfield { data-setting="preset" label="preset" value="tp-default" placeholder="tp-default" clearable }
 :::
 
 ::: tp-textfield { data-setting="ui-anchor" label="ui-anchor" value placeholder clearable }

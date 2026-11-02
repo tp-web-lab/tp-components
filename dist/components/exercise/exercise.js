@@ -1,0 +1,1 @@
+import{t as e}from"../../chunks/exercise.js";export{e as TpExercise};

@@ -2,7 +2,7 @@
  * @module components/iframe
  * @summary Controlled iframe component.
  */
-import { TpBase } from '../base/base.js';
+import { TpBase } from "../base/base.js";
 /**
  * Affiche un `iframe` natif encapsulé dans un composant sans Shadow DOM,
  * avec prise en charge de :
@@ -13,24 +13,29 @@ import { TpBase } from '../base/base.js';
  * - interaction
  *
  * @tagname tp-iframe
+ * @attr {boolean} controls = false - Shows the internal toolbar for zoom and frame actions; controls="false" hides it.
  *
- * @attr {string} src = "" - URL du document à charger.
- * @attr {string} srcdoc = "" - Document HTML inline à afficher.
- * @attr {boolean} fullscreen = false - Autorise le mode plein écran.
- * @attr {string} loading = "" - Politique de chargement : `lazy` ou `eager`.
- * @attr {string} sandbox = "" - Valeur de l’attribut `sandbox` de l’iframe.
- * @attr {string} referrerpolicy = "" - Politique `referrerpolicy`.
- * @attr {boolean} interaction = true - Active ou désactive l’interaction pointeur avec l’iframe. Par défaut : `true`.
- * @attr {number} zoom = 1 - Niveau de zoom. Par défaut : `1`.
- * @attr {string} zoom-levels = "25% 50% 75% 100% 125% 150% 175% 200%" - Liste des niveaux de zoom disponibles. Par défaut : `25% 50% 75% 100% 125% 150% 175% 200%`.
+ * @attr {string} src = "" - URL of the document to embed; a nonempty srcdoc takes precedence.
+ * @attr {string} srcdoc = "" - Inline HTML document to embed, taking precedence over src.
+ * @attr {boolean} fullscreen = false - Allows the embedded document to request fullscreen when present.
+ * @attr {string} loading = "" - Browser iframe loading policy: lazy defers offscreen loading; eager requests immediate loading. Absent leaves the browser default.
+ * @attr {string} sandbox = "" - Space-separated iframe sandbox permissions, for example allow-scripts. In this component, empty or absent removes the sandbox; an empty attribute does not enable the fully restricted native sandbox.
+ * @attr {string} referrerpolicy = "" - Referrer policy forwarded to the iframe, for example no-referrer or strict-origin-when-cross-origin. Empty leaves the browser default.
+ * @attr {boolean} interaction = true - Enables pointer interaction with the embedded document; interaction="false" blocks pointer events. Enabled by default.
+ * @attr {number} zoom = 1 - Nonnegative numeric magnification factor: 1 is 100%, 0.5 is 50%, and 2 is 200%. Invalid values use 1.
+ * @attr {string} zoom-levels = "25% 50% 75% 100% 125% 150% 175% 200%" - Space-separated zoom choices offered in the toolbar, expressed as percentages, for example 50% 100% 150%.
  *
- * @cssprop [--tp-iframe-zoom=1] Niveau de zoom CSS appliqué au rendu.
  *
- * @event tp-iframe-change Émis quand l’état visible de l’iframe change.
- * @event tp-iframe-load Émis après le chargement de l’iframe interne.
+
+
  *
  * @example
  * <tp-iframe></tp-iframe>
+ * @cssprop [--tp-iframe-zoom=1] Unitless scale factor applied to iframe content (1 means 100%); synchronized with the zoom attribute.
+ * @event tp-iframe-change Emitted when zoom, interaction or horizontal viewport state is refreshed. overflowWidth and scrollPosition are in CSS pixels, zoom is a scale factor, and zoomText is its percentage label.
+ * @eventdetail tp-iframe-change { interaction: boolean; overflowWidth: number; scrollPosition: number; zoom: number; zoomText: string }
+ * @event tp-iframe-load Emitted after the inner iframe loads and its layout is refreshed. contentHeight is in CSS pixels (0 when inaccessible), hasSrcdoc indicates inline content, and src is the configured URL.
+ * @eventdetail tp-iframe-load { contentHeight: number; hasSrcdoc: boolean; src: string }
  */
 export declare class TpIframe extends TpBase {
     /**
@@ -102,8 +107,7 @@ export declare class TpIframe extends TpBase {
      */
     static get observedAttributes(): string[];
     /**
-     * URL du document à charger.
-     *
+     * @summary URL of the document to embed; a nonempty srcdoc takes precedence.
      * @attr src
      */
     get src(): string;
@@ -114,8 +118,7 @@ export declare class TpIframe extends TpBase {
      */
     set src(value: string);
     /**
-     * Document HTML inline affiché via `srcdoc`.
-     *
+     * @summary Inline HTML document to embed, taking precedence over src.
      * @attr srcdoc
      */
     get srcdoc(): string;
@@ -126,8 +129,7 @@ export declare class TpIframe extends TpBase {
      */
     set srcdoc(value: string);
     /**
-     * Autorise le mode plein écran.
-     *
+     * @summary Allows the embedded document to request fullscreen when present.
      * @attr fullscreen
      */
     get fullscreen(): boolean;
@@ -138,16 +140,14 @@ export declare class TpIframe extends TpBase {
      */
     set fullscreen(value: boolean);
     /**
-     * Affiche la barre de contrôles interne.
-     *
+     * @summary Shows the internal toolbar for zoom and frame actions; controls="false" hides it.
      * @attr controls
      * @default false
      */
     get controls(): boolean;
     set controls(value: boolean);
     /**
-     * Politique de chargement de l’iframe.
-     *
+     * @summary Browser iframe loading policy: lazy defers offscreen loading; eager requests immediate loading. Absent leaves the browser default.
      * @attr loading
      */
     get loading(): string;
@@ -159,8 +159,7 @@ export declare class TpIframe extends TpBase {
      */
     set loading(value: string);
     /**
-     * Valeur de l’attribut `sandbox`.
-     *
+     * @summary Space-separated iframe sandbox permissions, for example allow-scripts. In this component, empty or absent removes the sandbox; an empty attribute does not enable the fully restricted native sandbox.
      * @attr sandbox
      */
     get sandbox(): string;
@@ -171,8 +170,7 @@ export declare class TpIframe extends TpBase {
      */
     set sandbox(value: string);
     /**
-     * Politique de referrer.
-     *
+     * @summary Referrer policy forwarded to the iframe, for example no-referrer or strict-origin-when-cross-origin. Empty leaves the browser default.
      * @attr referrerpolicy
      */
     get referrerPolicy(): string;
@@ -183,8 +181,7 @@ export declare class TpIframe extends TpBase {
      */
     set referrerPolicy(value: string);
     /**
-     * Indique si l’interaction pointeur est active.
-     *
+     * @summary Enables pointer interaction with the embedded document; interaction="false" blocks pointer events. Enabled by default.
      * @attr interaction
      * @default true
      */
@@ -196,10 +193,7 @@ export declare class TpIframe extends TpBase {
      */
     set interaction(value: boolean);
     /**
-     * Niveau de zoom courant.
-     *
-     * Si l’attribut est absent, la valeur par défaut est `1`.
-     *
+     * @summary Nonnegative numeric magnification factor: 1 is 100%, 0.5 is 50%, and 2 is 200%. Invalid values use 1.
      * @attr zoom
      * @default 1
      */
@@ -212,8 +206,7 @@ export declare class TpIframe extends TpBase {
      */
     set zoom(value: number);
     /**
-     * Liste sérialisée des niveaux de zoom disponibles.
-     *
+     * @summary Space-separated zoom choices offered in the toolbar, expressed as percentages, for example 50% 100% 150%.
      * @attr zoom-levels
      * @default 25% 50% 75% 100% 125% 150% 175% 200%
      */
@@ -239,10 +232,7 @@ export declare class TpIframe extends TpBase {
      */
     get contentWindow(): Window | null;
     /**
-     * Retourne la hauteur réelle du document chargé.
-     *
-     * @summary Mesure la hauteur du contenu interne de l’iframe.
-     * @returns Hauteur du contenu en pixels.
+     * @summary Returns the maximum scroll/offset height of the embedded document in CSS pixels. Returns 0 if its document is unavailable, including inaccessible cross-origin content.
      */
     getContentHeight(): number;
     /**
@@ -267,22 +257,15 @@ export declare class TpIframe extends TpBase {
      */
     disconnectedCallback(): void;
     /**
-     * Passe au niveau de zoom supérieur disponible.
-     *
-     * @summary Augmente le zoom.
+     * @summary Selects the next larger configured zoom level, capped at the largest available level.
      */
     zoomIn(): void;
     /**
-     * Passe au niveau de zoom inférieur disponible.
-     *
-     * @summary Réduit le zoom.
+     * @summary Selects the next smaller configured zoom level, capped at the smallest available level.
      */
     zoomOut(): void;
     /**
-     * Réinitialise le zoom à une valeur donnée.
-     *
-     * @summary Réinitialise le zoom.
-     * @param value Valeur de zoom cible.
+     * @summary Sets the magnification factor to value; 1 restores 100%. Rejects negative or nonfinite values with TypeError.
      */
     resetZoom(value?: number): void;
     /**
@@ -372,6 +355,6 @@ export declare class TpIframe extends TpBase {
  */
 declare global {
     interface HTMLElementTagNameMap {
-        'tp-iframe': TpIframe;
+        "tp-iframe": TpIframe;
     }
 }

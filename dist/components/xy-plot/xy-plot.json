@@ -57,7 +57,7 @@
     },
     {
       "name": "src",
-      "description": "Controls the src.",
+      "description": "URL of a text file containing the XY graph definition; used instead of the inline tp/xy-plot script.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -69,17 +69,17 @@
     {
       "name": "anim(): string",
       "inherited": false,
-      "description": "Gets reveal order (JSON for groups), or sets comma-separated names, JSON or step arrays."
+      "description": "With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value."
     },
     {
       "name": "anim(names: string | XYAnimationStep[]): void",
       "inherited": false,
-      "description": "Anim."
+      "description": "With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value."
     },
     {
       "name": "anim(names?: string | XYAnimationStep[]): string | undefined",
       "inherited": false,
-      "description": "Anim."
+      "description": "With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value."
     },
     {
       "name": "exportSvg(): string",
@@ -126,44 +126,12 @@
       "summary": "Shared base class for tp-* components."
     },
     {
-      "name": "tp-button",
-      "summary": "Button component that supports native button and link rendering."
-    },
-    {
-      "name": "tp-callout",
-      "summary": "Callout component for highlighted contextual content."
-    },
-    {
-      "name": "tp-cluster",
-      "summary": "Flexible cluster layout component."
-    },
-    {
-      "name": "tp-code-editor",
-      "summary": "CodeMirror-based code editor component."
-    },
-    {
-      "name": "tp-dropdown",
-      "summary": "Dropdown menu component."
-    },
-    {
       "name": "tp-icon-button",
       "summary": "Accessible icon button component."
     },
     {
-      "name": "tp-radio-list",
-      "summary": "Transforms a list into a group of radio buttons."
-    },
-    {
       "name": "tp-save-image",
       "summary": "Downloads an anchored image as SVG, PNG or WebP."
-    },
-    {
-      "name": "tp-stack",
-      "summary": "Vertical stack layout component."
-    },
-    {
-      "name": "tp-textfield",
-      "summary": "Single-line and automatically growing multiline text field."
     },
     {
       "name": "tp-theme",
@@ -180,7 +148,7 @@
   "userHelp": {
     "displayName": "XY plot",
     "introduction": "The custom `<tp-xy-plot>` element implements the <tp-icon name=\"xy-plot\" library=\"components\" size=\"1.25em\"></tp-icon> XY plot functionality: xY graph rendering component.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Zoom in (+) / Zoom out (−) | Magnify or widen the coordinate ranges around the graph center, in both the preview and enlarged view. Keep the current animation step. |\n| Save image | Save the current graph view as SVG, PNG or WebP, with its visible axes, grid, animation step and theme colors. |\n| Theme | Choose Light, Dark or Auto for this plot only; the enlarged view shares the same theme. |\n| Code (`</>`) | Replace the curves with Graph definition, or return to the curves, in either view. Draft edits are preserved; Play applies them. Closing zoom restores the previous normal view. |\n| Undo / Redo | Undo or redo an applied definition change (Play, file load, interactive settings or Reset). A new change clears the redo history. View navigation is independent. |\n| Drag the graph (mouse or touch) | Move the drawing horizontally and vertically. Center a point of interest before zooming in. |\n| Settings fields | Update the graph and enlarged view; invalid entries retain the last valid graph and show feedback. |\n| Start / Previous / Next / End | Return to zero revealed objects, hide the last revealed object, reveal the next object, or reveal all objects. The counter shows the current step and total. |\n| Graph definition | Expand or collapse the editable source in the code view, with or without settings. |\n| Graph definition > Files | Load a `.txt` definition, Save the draft, or Save as a new file. Valid loads update the graph and settings; invalid files preserve the current graph. |\n| Graph definition > F1 / Reset definition / Play | Toggle the editor toolbar / discard draft edits and restore the displayed graph definition / validate and apply the edited definition. |\n| Reset | Restore the original graph definition and settings. |\n| Zoom graph (outward arrows) | Open the enlarged graph. |\n| Close zoomed graph (inward arrows) | Close the enlarged graph and return to the preview. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>F1</kbd> in Graph definition | Show or hide the source editor toolbar. |\n| <kbd>ArrowUp</kbd> / <kbd>ArrowDown</kbd>, <kbd>Home</kbd> / <kbd>End</kbd> in the file menu | Navigate Load, Save and Save as; <kbd>Enter</kbd>/<kbd>Space</kbd> activates an action and <kbd>Escape</kbd> closes the menu. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button, including Code, Undo, Redo, Zoom in, Zoom out and Reset. |\n| Arrow keys on the focused graph | Move the drawing in the arrow direction by 10% of the visible range. |\n| <kbd>Home</kbd> on the focused graph | Restore the original scale and position. |\n| <kbd>Escape</kbd> | Close the enlarged graph. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Zoom in (+) / Zoom out (−) | Magnify or widen the coordinate ranges around the graph center, in both the preview and enlarged view. Keep the current animation step. |\n| Save image | Save the current graph view as SVG, PNG or WebP, with its visible axes, grid, animation step and theme colors. |\n| Theme | Choose Light, Dark or Auto for this plot only; the enlarged view shares the same theme. |\n| Code (`</>`) | Replace the curves with Graph definition, or return to the curves, in either view. Draft edits are preserved; Play applies them. Closing zoom restores the previous normal view. |\n| Undo / Redo | Undo or redo an applied definition change (Play, file load, interactive settings or Reset). A new change clears the redo history. View navigation is independent. |\n| Drag the graph (mouse or touch) | Move the drawing horizontally and vertically. Center a point of interest before zooming in. |\n| Settings fields | Update the graph and enlarged view; invalid entries retain the last valid graph and show feedback. |\n| Start / Previous / Next / End | Return to zero revealed objects, hide the last revealed object, reveal the next object, or reveal all objects. The counter shows the current step and total. |\n| Graph definition | Expand or collapse the editable source in the code view, with or without settings. |\n| Graph definition > Files | Load a `.txt` definition, Save the draft, or Save as a new file. Valid loads update the graph and settings; invalid files preserve the current graph. |\n| Graph definition > F1 / Reset definition / Play | Toggle the editor toolbar / discard draft edits and restore the displayed graph definition / validate and apply the edited definition. |\n| Reset | Restore the original graph definition and settings. |\n| Zoom graph (outward arrows) | Open the enlarged graph. |\n| Close zoomed graph (inward arrows) | Close the enlarged graph and return to the preview. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>F1</kbd> in Graph definition | Show or hide the source editor toolbar. |\n| <kbd>ArrowUp</kbd> / <kbd>ArrowDown</kbd>, <kbd>Home</kbd> / <kbd>End</kbd> in the file menu | Navigate Load, Save and Save as; <kbd>Enter</kbd>/<kbd>Space</kbd> activates an action and <kbd>Escape</kbd> closes the menu. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button, including Code, Undo, Redo, Zoom in, Zoom out and Reset. |\n| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on the focused graph | Move the drawing in the arrow direction by 10% of the visible range. |\n| <kbd>Home</kbd> on the focused graph | Restore the original scale and position. |\n| <kbd>Escape</kbd> | Close the enlarged graph. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

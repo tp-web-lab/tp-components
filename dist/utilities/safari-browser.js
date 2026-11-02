@@ -1,0 +1,2 @@
+function e(e=navigator.userAgent){return/AppleWebKit\//i.test(e)&&/Version\/[\d.]+.*Safari\//i.test(e)&&!/Android/i.test(e)&&!/(Chrome|Chromium|CriOS|Firefox|FxiOS|Edg|OPR|OPiOS|Opera|SamsungBrowser|Electron|DuckDuckGo)\//i.test(e)}export{e as isSafariBrowser};
+//# sourceMappingURL=safari-browser.js.map

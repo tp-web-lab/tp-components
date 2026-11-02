@@ -2,10 +2,10 @@
  * @module components/memory
  * @summary Memory matching game generated from a list.
  */
-import '../chronometer/chronometer.js';
-import '../flip-card/flip-card.js';
-import '../switcher/switcher.js';
-import { TpBase } from '../base/base.js';
+import "../chronometer/chronometer.js";
+import "../flip-card/flip-card.js";
+import "../switcher/switcher.js";
+import { TpBase } from "../base/base.js";
 /**
  * Creates a memory game by duplicating every item of an ordered or unordered list.
  *
@@ -13,13 +13,15 @@ import { TpBase } from '../base/base.js';
  * @tagname tp-memory
  * @attr {string} back = "" - Card-back URL, or blue/red for an OpenDecks back.
  * @attr {number} mismatch-delay = 1000 - Delay before unmatched cards turn back, in milliseconds.
- * @event tp-memory-match Emitted when a pair is matched.
+
  * @event tp-memory-complete Emitted when every pair is matched.
  * @event tp-memory-reset Emitted after the game is reset.
  * @cssprop --tp-memory-card-max-width Maximum width of image and SVG cards.
  * @cssprop --tp-memory-gap Gap between cards.
  * @example
  * <tp-memory></tp-memory>
+ * @event tp-memory-match Emitted after two matching cards are revealed; pair is the zero-based identifier assigned to their original list item.
+ * @eventdetail tp-memory-match { pair: number }
  */
 export declare class TpMemory extends TpBase {
     private static readonly styleId;

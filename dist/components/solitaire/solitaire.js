@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/solitaire.js";
-export { e as TpSolitaire };
+import{t as e}from"../../chunks/solitaire2.js";export{e as TpSolitaire};

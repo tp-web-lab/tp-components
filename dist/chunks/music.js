@@ -1,31 +1,180 @@
-import { t as e } from "./markdown-style-registry.js";
-//#region ../tp-markdown/dist/markdown/extensions/music/index.js
-var t = "tp-md-music-styles", n = "\n.tp-md-music {\n  display: grid;\n  gap: 0.75rem;\n\n  margin-block: 1rem;\n  padding: 1rem;\n\n  border: 1px solid\n    color-mix(\n      in srgb,\n      CanvasText 18%,\n      transparent\n    );\n\n  border-radius: 0.75rem;\n\n  background:\n    color-mix(\n      in srgb,\n      Canvas 96%,\n      CanvasText 4%\n    );\n}\n\n.tp-md-music-notation {\n  position: relative;\n  overflow-x: auto;\n}\n\n.tp-md-music-audio:empty,\n.tp-md-music-tablature:empty {\n  display: none;\n}\n\n.tp-md-music-source {\n  margin: 0;\n  overflow-x: auto;\n}\n\n.tp-md-music-instrument {\n  min-inline-size: 10rem;\n}\n\n/* -------------------------------------------------------------------------- */\n/* Toolbar */\n/* -------------------------------------------------------------------------- */\n\n.tp-md-music-toolbar {\n  display: grid;\n\n  grid-template-columns:\n    minmax(10rem, max-content)\n    max-content\n    max-content\n    minmax(10rem, 1fr);\n\n  gap: 0.5rem;\n  align-items: center;\n\n  margin-block-start: 0.5rem;\n}\n\n.tp-md-music-toolbar select,\n.tp-md-music-toolbar button,\n.tp-md-music-toolbar input {\n  margin: 0 !important;\n}\n\n/* -------------------------------------------------------------------------- */\n/* Buttons */\n/* -------------------------------------------------------------------------- */\n\n.tp-md-music-toolbar button {\n  padding-inline: 0.75rem;\n  white-space: nowrap;\n}\n\n/* -------------------------------------------------------------------------- */\n/* Range */\n/* -------------------------------------------------------------------------- */\n\n.tp-md-music-toolbar input[type='range'] {\n  inline-size: 100%;\n\n  min-inline-size: 0;\n\n  padding: 0 !important;\n  margin: 0 !important;\n\n  border: none !important;\n\n  background: transparent !important;\n\n  appearance: auto !important;\n  accent-color: currentColor;\n\n  cursor: pointer;\n}\n\n/* -------------------------------------------------------------------------- */\n/* Cursor */\n/* -------------------------------------------------------------------------- */\n\n.tp-md-music-cursor {\n  position: absolute;\n\n  inline-size: 2px;\n\n  background: red;\n\n  opacity: 0.75;\n\n  pointer-events: none;\n\n  z-index: 10;\n}\n\n/* -------------------------------------------------------------------------- */\n/* abcjs fallback tempo input */\n/* -------------------------------------------------------------------------- */\n\n.tp-md-music-audio input.abcjs-midi-tempo[type='number'] {\n  position: static !important;\n\n  display: inline-flex !important;\n  align-items: center !important;\n\n  inline-size: 4rem !important;\n  block-size: 1.75rem !important;\n\n  min-block-size: 1.75rem !important;\n\n  padding: 0 0.35rem !important;\n  margin: 0 !important;\n\n  appearance: auto !important;\n\n  vertical-align: middle !important;\n\n  font: inherit !important;\n  line-height: 1 !important;\n\n  background: Canvas !important;\n  color: CanvasText !important;\n\n  border: 1px solid\n    color-mix(\n      in srgb,\n      CanvasText 20%,\n      transparent\n    ) !important;\n\n  border-radius: 0.35rem !important;\n\n  box-sizing: border-box !important;\n}\n\n/* -------------------------------------------------------------------------- */\n/* Responsive */\n/* -------------------------------------------------------------------------- */\n\n@media (width <= 720px) {\n  .tp-md-music-toolbar {\n    grid-template-columns: 1fr;\n  }\n\n  .tp-md-music-instrument {\n    min-inline-size: 0;\n  }\n}\n";
-function r(r) {
-	e(t, n), i(r);
+import{t as e}from"./markdown-style-registry.js";var t=`tp-md-music-styles`,n=`
+.tp-md-music {
+  display: grid;
+  gap: 0.75rem;
+
+  margin-block: 1rem;
+  padding: 1rem;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      CanvasText 18%,
+      transparent
+    );
+
+  border-radius: 0.75rem;
+
+  background:
+    color-mix(
+      in srgb,
+      Canvas 96%,
+      CanvasText 4%
+    );
 }
-function i(e) {
-	let t = e.renderer.rules.fence;
-	e.renderer.rules.fence = (e, n, r, i, u) => {
-		let d = e[n];
-		if (d === void 0) return "";
-		let f = s(d.info);
-		if (f.name !== "music") return typeof t == "function" ? t(e, n, r, i, u) : u.renderToken(e, n, r);
-		let p = `${f.args} ${o(d)}`.trim(), m = {
-			play: l(p, "play"),
-			tablature: l(p, "tablature"),
-			instrument: c(p, "instrument") ?? "guitar"
-		};
-		return a(d.content.trim(), m, n);
-	};
+
+.tp-md-music-notation {
+  position: relative;
+  overflow-x: auto;
 }
-function a(e, t, n) {
-	return `
+
+.tp-md-music-audio:empty,
+.tp-md-music-tablature:empty {
+  display: none;
+}
+
+.tp-md-music-source {
+  margin: 0;
+  overflow-x: auto;
+}
+
+.tp-md-music-instrument {
+  min-inline-size: 10rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Toolbar */
+/* -------------------------------------------------------------------------- */
+
+.tp-md-music-toolbar {
+  display: grid;
+
+  grid-template-columns:
+    minmax(10rem, max-content)
+    max-content
+    max-content
+    minmax(10rem, 1fr);
+
+  gap: 0.5rem;
+  align-items: center;
+
+  margin-block-start: 0.5rem;
+}
+
+.tp-md-music-toolbar select,
+.tp-md-music-toolbar button,
+.tp-md-music-toolbar input {
+  margin: 0 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Buttons */
+/* -------------------------------------------------------------------------- */
+
+.tp-md-music-toolbar button {
+  padding-inline: 0.75rem;
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Range */
+/* -------------------------------------------------------------------------- */
+
+.tp-md-music-toolbar input[type='range'] {
+  inline-size: 100%;
+
+  min-inline-size: 0;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  border: none !important;
+
+  background: transparent !important;
+
+  appearance: auto !important;
+  accent-color: currentColor;
+
+  cursor: pointer;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Cursor */
+/* -------------------------------------------------------------------------- */
+
+.tp-md-music-cursor {
+  position: absolute;
+
+  inline-size: 2px;
+
+  background: red;
+
+  opacity: 0.75;
+
+  pointer-events: none;
+
+  z-index: 10;
+}
+
+/* -------------------------------------------------------------------------- */
+/* abcjs fallback tempo input */
+/* -------------------------------------------------------------------------- */
+
+.tp-md-music-audio input.abcjs-midi-tempo[type='number'] {
+  position: static !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+
+  inline-size: 4rem !important;
+  block-size: 1.75rem !important;
+
+  min-block-size: 1.75rem !important;
+
+  padding: 0 0.35rem !important;
+  margin: 0 !important;
+
+  appearance: auto !important;
+
+  vertical-align: middle !important;
+
+  font: inherit !important;
+  line-height: 1 !important;
+
+  background: Canvas !important;
+  color: CanvasText !important;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      CanvasText 20%,
+      transparent
+    ) !important;
+
+  border-radius: 0.35rem !important;
+
+  box-sizing: border-box !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Responsive */
+/* -------------------------------------------------------------------------- */
+
+@media (width <= 720px) {
+  .tp-md-music-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .tp-md-music-instrument {
+    min-inline-size: 0;
+  }
+}
+`;function r(r){e(t,n),i(r)}function i(e){let t=e.renderer.rules.fence;e.renderer.rules.fence=(e,n,r,i,u)=>{let d=e[n];if(d===void 0)return``;let f=s(d.info);if(f.name!==`music`)return typeof t==`function`?t(e,n,r,i,u):u.renderToken(e,n,r);let p=`${f.args} ${o(d)}`.trim(),m={play:l(p,`play`),tablature:l(p,`tablature`),instrument:c(p,`instrument`)??`guitar`};return a(d.content.trim(),m,n)}}function a(e,t,n){return`
 <section
   class="tp-md-music"
   data-music-id="${f(`tp-md-music-${String(n)}`)}"
-  ${t.play ? "data-music-play" : ""}
-  ${t.tablature ? "data-music-tablature" : ""}
+  ${t.play?`data-music-play`:``}
+  ${t.tablature?`data-music-tablature`:``}
   data-music-instrument="${f(t.instrument)}"
 >
   <pre hidden class="tp-md-music-source">${d(e)}</pre>
@@ -38,38 +187,5 @@ function a(e, t, n) {
 
   <div class="tp-md-music-tablature"></div>
 </section>
-`;
-}
-function o(e) {
-	return (e.attrs ?? []).map(([e, t]) => t === "" ? e : `${e}=${JSON.stringify(t)}`).join(" ");
-}
-function s(e) {
-	let t = e.trim(), n = t.search(/\s/);
-	return n === -1 ? {
-		name: t,
-		args: ""
-	} : {
-		name: t.slice(0, n),
-		args: t.slice(n + 1).trim()
-	};
-}
-function c(e, t) {
-	let n = RegExp(`${t}=("[^"]+"|'[^']+'|\\S+)`), r = e.match(n);
-	return r === null ? null : (r[1] ?? "").replace(/^["']|["']$/g, "");
-}
-function l(e, t) {
-	return RegExp(`(^|\\s)${u(t)}(\\s|$)`).test(e);
-}
-function u(e) {
-	return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-function d(e) {
-	return e.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;");
-}
-function f(e) {
-	return e.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-}
-//#endregion
-export { r as default };
-
+`}function o(e){return(e.attrs??[]).map(([e,t])=>t===``?e:`${e}=${JSON.stringify(t)}`).join(` `)}function s(e){let t=e.trim(),n=t.search(/\s/);return n===-1?{name:t,args:``}:{name:t.slice(0,n),args:t.slice(n+1).trim()}}function c(e,t){let n=RegExp(`${t}=("[^"]+"|'[^']+'|\\S+)`),r=e.match(n);return r===null?null:(r[1]??``).replace(/^["']|["']$/g,``)}function l(e,t){return RegExp(`(^|\\s)${u(t)}(\\s|$)`).test(e)}function u(e){return e.replace(/[.*+?^${}()|[\]\\]/g,`\\$&`)}function d(e){return e.replaceAll(`&`,`&amp;`).replaceAll(`<`,`&lt;`).replaceAll(`>`,`&gt;`).replaceAll(`"`,`&quot;`)}function f(e){return e.replaceAll(`&`,`&amp;`).replaceAll(`"`,`&quot;`).replaceAll(`<`,`&lt;`).replaceAll(`>`,`&gt;`)}export{r as default};
 //# sourceMappingURL=music.js.map

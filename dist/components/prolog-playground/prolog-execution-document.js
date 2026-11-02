@@ -1,64 +1,6 @@
-import { E as e, f as t, n, t as r, u as i } from "../../chunks/playground-build-utils.js";
-import { PROLOG_DOM_MODULE_SOURCE as a, flattenLocalPrologModules as o, getLocalPrologModuleNames as s, usesPrologDomModule as c } from "./prolog-source.js";
-//#region src/components/prolog-playground/prolog-execution-document.ts
-var l = "https://esm.sh/scryer", u = /* @__PURE__ */ new Map(), d = /* @__PURE__ */ new Set([
-	"append",
-	"between",
-	"call",
-	"catch",
-	"fail",
-	"false",
-	"findall",
-	"forall",
-	"is",
-	"length",
-	"member",
-	"nl",
-	"once",
-	"phrase",
-	"read",
-	"repeat",
-	"throw",
-	"true",
-	"write",
-	"writeln"
-]);
-function f(e) {
-	return (e.match(/[^.]+(?:\.|$)/g) ?? []).flatMap((e) => {
-		let t = e.trim(), n = t.match(/^([a-z][A-Za-z0-9_]*)\s*(?:\(|\.|$)/)?.[1];
-		return n === void 0 || d.has(n) ? [] : [[t, n]];
-	});
-}
-function p(e, n) {
-	let r = n ?? e.query;
-	if (typeof r == "string" && r !== "") {
-		let n = t(e, r);
-		if (n !== void 0) return n;
-	}
-	return t(e, "/query.pl") ?? e.files.find((e) => e.path.endsWith(".query.pl"));
-}
-async function m(i, d = {}) {
-	let m = e(i, {
-		entry: d.entry,
-		priorityPaths: ["/program.pl", "/main.pl"],
-		extensions: [".pl"],
-		fallbackToFirstFile: !1
-	}), h = p(i, d.query), g = m?.path === h?.path ? void 0 : m, _ = t(i, "/index.html"), v = i.files.filter((e) => e.path.endsWith(".pl") && e.path !== h?.path && e.path !== i.test), y = [...v.filter((e) => e.path !== g?.path), ...g === void 0 ? [] : [g]], b = s(v), x = [...v.some((e) => c(e.content)) ? [{
-		path: "/library/dom.pl",
-		content: a
-	}] : [], ...y.map((e) => ({
-		path: e.path,
-		content: o(e.content, b)
-	}))], S = x;
-	if (d.scope !== void 0 && d.scope !== "") {
-		let e = u.get(d.scope) ?? /* @__PURE__ */ new Map();
-		e.set(d.index ?? 0, x), u.set(d.scope, e), S = Array.from(e.entries()).sort(([e], [t]) => e - t).flatMap(([, e]) => e);
-	}
-	let C = S.find((e) => e.path === "/library/dom.pl"), w = S.filter((e) => e.path !== "/library/dom.pl").map((e) => e.content.trim()).filter((e) => e !== "").join("\n\n"), T = JSON.stringify([...C === void 0 ? [] : [C], ...w === "" ? [] : [{
-		path: "/notebook-program.pl",
-		content: w
-	}]]), E = JSON.stringify(h?.content ?? ""), D = JSON.stringify(h?.path ?? ""), O = JSON.stringify(w === "" ? f(h?.content ?? "") : []);
-	return { html: `
+import{n as e}from"../../chunks/tool-loading.js";import{E as t,f as n,n as r,t as i,u as a}from"../../chunks/playground-build-utils.js";import{PROLOG_DOM_MODULE_SOURCE as o,flattenLocalPrologModules as s,getLocalPrologModuleNames as c,usesPrologDomModule as l}from"./prolog-source.js";var u=`https://esm.sh/scryer`,d=new Map,f=new Set([`append`,`between`,`call`,`catch`,`fail`,`false`,`findall`,`forall`,`is`,`length`,`member`,`nl`,`once`,`phrase`,`read`,`repeat`,`throw`,`true`,`write`,`writeln`]);function p(e){return(e.match(/[^.]+(?:\.|$)/g)??[]).flatMap(e=>{let t=e.trim(),n=t.match(/^([a-z][A-Za-z0-9_]*)\s*(?:\(|\.|$)/)?.[1];return n===void 0||f.has(n)?[]:[[t,n]]})}function m(e,t){let r=t??e.query;if(typeof r==`string`&&r!==``){let t=n(e,r);if(t!==void 0)return t}return n(e,`/query.pl`)??e.files.find(e=>e.path.endsWith(`.query.pl`))}async function h(a,f={}){let h=t(a,{entry:f.entry,priorityPaths:[`/program.pl`,`/main.pl`],extensions:[`.pl`],fallbackToFirstFile:!1}),g=m(a,f.query),_=h?.path===g?.path?void 0:h,v=n(a,`/index.html`),y=a.files.filter(e=>e.path.endsWith(`.pl`)&&e.path!==g?.path&&e.path!==a.test),b=[...y.filter(e=>e.path!==_?.path),..._===void 0?[]:[_]],x=c(y),S=[...y.some(e=>l(e.content))?[{path:`/library/dom.pl`,content:o}]:[],...b.map(e=>({path:e.path,content:s(e.content,x)}))],C=S;if(f.scope!==void 0&&f.scope!==``){let e=d.get(f.scope)??new Map;e.set(f.index??0,S),d.set(f.scope,e),C=Array.from(e.entries()).sort(([e],[t])=>e-t).flatMap(([,e])=>e)}let w=C.find(e=>e.path===`/library/dom.pl`),T=C.filter(e=>e.path!==`/library/dom.pl`).map(e=>e.content.trim()).filter(e=>e!==``).join(`
+
+`),E=JSON.stringify([...w===void 0?[]:[w],...T===``?[]:[{path:`/notebook-program.pl`,content:T}]]),D=JSON.stringify(g?.content??``),O=JSON.stringify(g?.path??``),k=JSON.stringify(T===``?p(g?.content??``):[]);return{html:`
 <!doctype html>
 <html>
 <head>
@@ -82,15 +24,15 @@ async function m(i, d = {}) {
   </style>
 </head>
 <body>
-  ${_?.content ?? "<main id=\"prolog-output\"></main>"}
+  ${v?.content??`<main id="prolog-output"></main>`}
+  ${i()}
   ${r()}
-  ${n()}
   <script type="module">
-    const sources = ${T};
-    const querySource = ${E};
-    const queryPath = ${D};
-    const undefinedQueries = new Map(${O});
-    const scryerModuleUrl = ${JSON.stringify(l)};
+    const sources = ${E};
+    const querySource = ${D};
+    const queryPath = ${O};
+    const undefinedQueries = new Map(${k});
+    const scryerModuleUrl = ${JSON.stringify(u)};
     const scryerInitWarning =
       'using deprecated parameters for the initialization function; pass a single object instead';
 
@@ -108,6 +50,7 @@ async function m(i, d = {}) {
       try {
         const scryer = await import(scryerModuleUrl);
         await scryer.init();
+        ${e(`scryer`,`Scryer Prolog`)}
         return scryer;
       } finally {
         console.warn = originalWarn;
@@ -883,12 +826,5 @@ async function m(i, d = {}) {
   <\/script>
 </body>
 </html>
-` };
-}
-function h(e) {
-	return `<pre><code class="language-prolog">${i(e)}</code></pre>`;
-}
-//#endregion
-export { m as buildPrologExecutionDocument, h as createPrologSourcePreview };
-
+`}}function g(e){return`<pre><code class="language-prolog">${a(e)}</code></pre>`}export{h as buildPrologExecutionDocument,g as createPrologSourcePreview};
 //# sourceMappingURL=prolog-execution-document.js.map

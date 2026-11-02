@@ -26,7 +26,7 @@ export type { Placement as TangramPlacement } from "./geometry.js";
  * @tagname tp-tangram
  * @attr {string} src = "" - Text or JSON file containing the seven solution placements.
  * @attr {boolean} exact-orientation = false - Starts every piece in its solution orientation, including reflection; changing it restarts the puzzle.
- * @event tp-tangram-change Fired after an accepted edit; detail contains placements and solved.
+
  * @event tp-tangram-error Fired when loading a solution fails; detail contains message.
  * @keyboard Arrow keys Move the selected piece; Shift increases the step.
  * @keyboard R / Shift+R Rotate clockwise / counterclockwise by 45 degrees.
@@ -35,6 +35,11 @@ export type { Placement as TangramPlacement } from "./geometry.js";
  * @keyboard Ctrl+Z / Ctrl+Shift+Z Undo / redo (Command also supported).
  * @example
  * <tp-tangram></tp-tangram>
+ * @event tp-tangram-change Emitted after an accepted piece edit; placements contains each piece ID, x/y position, angle and flip state, and solved reports whether the target is matched.
+ * @eventdetail tp-tangram-change { placements: Placement[]; solved: boolean }
+ * @accessibility Names the puzzle board and exposes playing pieces as labelled focusable SVG buttons; keyboard commands support moving, rotating, flipping, undoing and redoing placements.
+ * @accessibility Groups and labels toolbar and selected-piece controls, announces game status politely, and removes playing pieces from keyboard navigation during solution preview.
+ * @accessibilityresponsibility Provide a text description of the target and a suitable alternative activity when spatial visual manipulation is not usable; piece colors alone must not carry essential instructions.
  */
 export declare class TpTangram extends TpBase {
     private source;
@@ -78,7 +83,13 @@ export declare class TpTangram extends TpBase {
     reset(): void;
     /** Attempts an absolute placement. Rejected placements leave history unchanged. */
     place(id: string, x: number, y: number, angle?: number, flipped?: boolean): boolean;
+    /**
+     * @summary Restores the previous piece arrangement from undo history; does nothing when history is empty.
+     */
     undo(): void;
+    /**
+     * @summary Restores the next undone piece arrangement; does nothing when redo history is empty.
+     */
     redo(): void;
     /** Shows an isolated solution preview; hiding it restores the unchanged playing pieces. */
     showSolution(show?: boolean): void;

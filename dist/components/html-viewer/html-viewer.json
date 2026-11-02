@@ -62,10 +62,6 @@
       "summary": "Shared base class for tp-* components."
     },
     {
-      "name": "tp-code-editor",
-      "summary": "CodeMirror-based code editor component."
-    },
-    {
       "name": "tp-divider",
       "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
     },

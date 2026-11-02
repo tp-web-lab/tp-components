@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/listof.js";
-export { e as TpListof };
+import{t as e}from"../../chunks/listof2.js";export{e as TpListof};

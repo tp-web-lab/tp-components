@@ -63,12 +63,12 @@ export interface TpContextmenuSelectDetail {
  * @summary Affiche un menu contextuel accessible et réutilisable.
  * @tagname tp-contextmenu
  *
- * @attr {string} anchor = "" - Sélecteur CSS de l’élément servant d’ancrage au clic droit.
- * @attr {boolean} open = false - Ouvre ou ferme le menu.
+ * @attr {string} anchor = "" - CSS selector of the element whose context-menu action opens this menu.
+ * @attr {boolean} open = false - Shows the context menu when present; removing it closes the menu.
  *
  *
- * @event tp-contextmenu-select Émis quand un item terminal portant `data-action` est sélectionné.
- * @eventdetail tp-contextmenu-select { action: string; item: HTMLLIElement; label: string }
+
+
  *
  * @cssprop --tp-contextmenu-background Background color of the menu and submenus.
  * @cssprop --tp-contextmenu-foreground Text color of the menu.
@@ -92,6 +92,8 @@ export interface TpContextmenuSelectDetail {
  * <li>Item 3</li>
  * </ul>
  * </tp-contextmenu>
+ * @event tp-contextmenu-select Emitted when a terminal menu item with data-action is activated. The detail contains its action identifier, li element and visible label.
+ * @eventdetail tp-contextmenu-select { action: string; item: HTMLLIElement; label: string }
  */
 export declare class TpContextmenu extends TpBase {
     /**
@@ -167,8 +169,7 @@ export declare class TpContextmenu extends TpBase {
      */
     static get observedAttributes(): string[];
     /**
-     * Sélecteur CSS de l’élément servant d’ancrage.
-     *
+     * @summary CSS selector of the element whose context-menu action opens this menu.
      * @attr anchor
      */
     get anchor(): string;
@@ -179,8 +180,7 @@ export declare class TpContextmenu extends TpBase {
      */
     set anchor(value: string);
     /**
-     * Indique si le menu est ouvert.
-     *
+     * @summary Shows the context menu when present; removing it closes the menu.
      * @attr open
      */
     get open(): boolean;
@@ -215,23 +215,15 @@ export declare class TpContextmenu extends TpBase {
      */
     disconnectedCallback(): void;
     /**
-     * Ouvre le menu à une position donnée.
-     *
-     * @summary Ouvre explicitement le menu à l’écran.
-     * @param x Position horizontale en pixels.
-     * @param y Position verticale en pixels.
+     * @summary Opens the context menu at viewport coordinates x and y in CSS pixels.
      */
     showAt(x: number, y: number): void;
     /**
-     * Ferme le menu.
-     *
-     * @summary Ferme explicitement le menu.
+     * @summary Closes the context menu by clearing its open state.
      */
     hide(): void;
     /**
-     * Ferme tous les sous-menus ouverts.
-     *
-     * @summary Réinitialise l’état d’ouverture des sous-menus.
+     * @summary Collapses all expanded submenus without closing the context-menu container.
      */
     closeAll(): void;
     /**

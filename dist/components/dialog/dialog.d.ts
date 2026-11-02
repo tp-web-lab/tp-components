@@ -1,8 +1,4 @@
-/**
- * @tp-dependency tp-button
- * @summary Button component that supports native button and link rendering.
- */
-import { TpBase } from '../base/base';
+import { TpBase } from "../base/base";
 /**
  * Detail emitted when `<tp-dialog>` closes.
  *
@@ -12,7 +8,7 @@ export interface TpDialogCloseDetail {
     /**
      * Action used to close the dialog.
      */
-    action: 'confirm' | 'cancel';
+    action: "confirm" | "cancel";
 }
 /**
  * Dialog component.
@@ -41,9 +37,7 @@ export declare class TpDialog extends TpBase {
      */
     protected connectedCallback(): void;
     /**
-     * Replaces the dialog title, body, and button labels.
-     *
-     * @summary Replaces the dialog content.
+     * @summary Replaces the title, body nodes and button labels. Supplied nodes are moved into the dialog; omitted title/body become empty and button labels default to Confirm/Cancel.
      */
     setContent(options: {
         title?: string;
@@ -52,26 +46,22 @@ export declare class TpDialog extends TpBase {
         cancelText?: string;
     }): void;
     /**
-     * Opens the dialog as a modal dialog.
-     *
-     * @summary Opens the dialog.
+     * @summary Opens the internal native dialog in modal mode, blocking interaction with the rest of the page.
      */
     show(): void;
     /**
-     * Closes the dialog and emits `tp-dialog-close`.
-     *
-     * @summary Closes the dialog.
+     * @summary Closes the dialog with action confirm or cancel and emits tp-dialog-close carrying that action; defaults to cancel.
      */
-    close(action?: 'confirm' | 'cancel'): void;
+    close(action?: "confirm" | "cancel"): void;
     private setButtonText;
     private ensureStyles;
     private render;
 }
 declare global {
     interface HTMLElementTagNameMap {
-        'tp-dialog': TpDialog;
+        "tp-dialog": TpDialog;
     }
     interface HTMLElementEventMap {
-        'tp-dialog-close': CustomEvent<TpDialogCloseDetail>;
+        "tp-dialog-close": CustomEvent<TpDialogCloseDetail>;
     }
 }

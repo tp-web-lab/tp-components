@@ -13,6 +13,8 @@ SQL is not included because its playground does not yet provide a test engine.
 
 ## Shared contract
 
+The inherited `timing="hh:mm:ss"` attribute enables the [timed-question flow](../question/index.md): Start reveals the exercise and begins the countdown; after expiry, Continue restores access without clearing the response.
+
 | Attribute | Default | Role |
 | --- | --- | --- |
 | `src` | <code>""</code> | Initial source file or JSON project passed to the response control. It is not a question-definition JSON file. |
@@ -50,3 +52,40 @@ Import `TpPlaygroundQuestion` from `components/playground-question/playground-qu
 ## Migration
 
 `<tp-programming-question language="python" mode="viewer" ...>` becomes `<tp-python-viewer-question ...>`. Keep `src`, `test`, `open` and the definition-list content. Replace `mode="playground"` with the corresponding `tp-LANG-playground-question` tag. `TpProgrammingQuestion` and its old custom element are removed rather than retained as aliases.
+
+<!-- tp-docgen:dependencies:start -->
+## Dependencies
+
+### Internal
+
+All tp-components used by `<tp-javascript-viewer-question>` are loaded automatically by this component if they have not already been loaded by another component.
+
+<!--
+@tp-dependency tp-console
+@summary Displays structured console output.
+-->
+<!--
+@tp-dependency tp-iframe
+@summary Controlled iframe component.
+-->
+<!--
+@tp-dependency tp-javascript-viewer
+@summary Compact JavaScript code viewer and runner.
+-->
+<!--
+@tp-dependency tp-question
+@summary Base description-list container for question components.
+-->
+
+- [`<tp-console>`](../console/index.md) : Displays structured console output.
+- [`<tp-iframe>`](../iframe/index.md) : Controlled iframe component.
+- [`<tp-javascript-viewer>`](../javascript-viewer/index.md) : Compact JavaScript code viewer and runner.
+- [`<tp-question>`](../question/index.md) : Base description-list container for question components.
+
+### External
+
+<!--
+@summary No external dependency.
+-->
+No external dependency
+<!-- tp-docgen:dependencies:end -->

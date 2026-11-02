@@ -29,8 +29,6 @@ export type TpPostItColor = (typeof TpColor.presets)[number] extends `tp-${infer
  * @attr {boolean} lite = false - Folds the note into its pushpin; click the pin to expand or fold it again.
  * @attr {number} opacity = 1 - Opacity of the whole note, including its pin, clamped from 0 to 1; invalid or empty values use 1.
  * @attr {number} rotation = 0 - Paper rotation in degrees, clamped from -12 to 12; invalid values use 0.
- * @cssprop --tp-post-it-width = 20rem Preferred note width, limited by the available space.
- * @cssprop --tp-post-it-padding = 0.75rem Inner paper padding.
  * @event tp-post-it-toggle Emitted after the pin changes the folded state.
  * @eventdetail tp-post-it-toggle { lite: boolean }
  * @event tp-post-it-move Emitted after a pointer or keyboard move, or a position reset; attachment exposes the target and offsets.
@@ -51,6 +49,11 @@ export type TpPostItColor = (typeof TpColor.presets)[number] extends `tp-${infer
  *     </ul>
  *   </tp-post-it>
  * </tp-box>
+ * @cssprop [--tp-post-it-padding=0.75rem] Inner spacing around the paper content; lite mode removes this padding.
+ * @cssprop [--tp-post-it-rotation=0deg] Rotation angle of the paper around its top center, updated internally from rotation; ignored in lite mode.
+ * @cssprop [--tp-post-it-width=20rem] Preferred note width, limited by available space; lite mode uses its content width.
+ * @cssprop [--tp-post-it-x=8px] Horizontal viewport position of a floating note, updated internally when positioned or dragged.
+ * @cssprop [--tp-post-it-y=8px] Vertical viewport position of a floating note, updated internally when positioned or dragged.
  */
 export declare class TpPostIt extends TpBase {
     /** Available paper colors, derived from the shared color controller palette. */

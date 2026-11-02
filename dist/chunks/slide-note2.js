@@ -1,0 +1,2 @@
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="13" rx="2"/><path d="M9 21h6m-3-5v5M7 7h10M7 11h6"/><path d="m16 10 2 2-2 2"/></svg>`;export{t as n,n as t};
+//# sourceMappingURL=slide-note2.js.map

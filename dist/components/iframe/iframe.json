@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "controls",
-      "description": "Affiche la barre de contrôles interne.",
+      "description": "Shows the internal toolbar for zoom and frame actions; controls=\"false\" hides it.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -21,7 +21,7 @@
     },
     {
       "name": "fullscreen",
-      "description": "Autorise le mode plein écran.",
+      "description": "Allows the embedded document to request fullscreen when present.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -30,7 +30,7 @@
     },
     {
       "name": "interaction",
-      "description": "Active ou désactive l’interaction pointeur avec l’iframe. Par défaut : `true`.",
+      "description": "Enables pointer interaction with the embedded document; interaction=\"false\" blocks pointer events. Enabled by default.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -39,7 +39,7 @@
     },
     {
       "name": "loading",
-      "description": "Politique de chargement : `lazy` ou `eager`.",
+      "description": "Browser iframe loading policy: lazy defers offscreen loading; eager requests immediate loading. Absent leaves the browser default.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -48,7 +48,7 @@
     },
     {
       "name": "referrerpolicy",
-      "description": "Politique `referrerpolicy`.",
+      "description": "Referrer policy forwarded to the iframe, for example no-referrer or strict-origin-when-cross-origin. Empty leaves the browser default.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -57,7 +57,7 @@
     },
     {
       "name": "sandbox",
-      "description": "Valeur de l’attribut `sandbox` de l’iframe.",
+      "description": "Space-separated iframe sandbox permissions, for example allow-scripts. In this component, empty or absent removes the sandbox; an empty attribute does not enable the fully restricted native sandbox.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -66,7 +66,7 @@
     },
     {
       "name": "src",
-      "description": "URL du document à charger.",
+      "description": "URL of the document to embed; a nonempty srcdoc takes precedence.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -75,7 +75,7 @@
     },
     {
       "name": "srcdoc",
-      "description": "Document HTML inline à afficher.",
+      "description": "Inline HTML document to embed, taking precedence over src.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -84,7 +84,7 @@
     },
     {
       "name": "zoom",
-      "description": "Niveau de zoom. Par défaut : `1`.",
+      "description": "Nonnegative numeric magnification factor: 1 is 100%, 0.5 is 50%, and 2 is 200%. Invalid values use 1.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -93,7 +93,7 @@
     },
     {
       "name": "zoom-levels",
-      "description": "Liste des niveaux de zoom disponibles. Par défaut : `25% 50% 75% 100% 125% 150% 175% 200%`.",
+      "description": "Space-separated zoom choices offered in the toolbar, expressed as percentages, for example 50% 100% 150%.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -105,41 +105,41 @@
     {
       "name": "getContentHeight(): number",
       "inherited": false,
-      "description": "Mesure la hauteur du contenu interne de l’iframe."
+      "description": "Returns the maximum scroll/offset height of the embedded document in CSS pixels. Returns 0 if its document is unavailable, including inaccessible cross-origin content."
     },
     {
       "name": "resetZoom(value = 1): void",
       "inherited": false,
-      "description": "Réinitialise le zoom."
+      "description": "Sets the magnification factor to value; 1 restores 100%. Rejects negative or nonfinite values with TypeError."
     },
     {
       "name": "zoomIn(): void",
       "inherited": false,
-      "description": "Augmente le zoom."
+      "description": "Selects the next larger configured zoom level, capped at the largest available level."
     },
     {
       "name": "zoomOut(): void",
       "inherited": false,
-      "description": "Réduit le zoom."
+      "description": "Selects the next smaller configured zoom level, capped at the smallest available level."
     }
   ],
   "events": [
     {
       "name": "tp-iframe-change",
-      "description": "Émis quand l’état visible de l’iframe change.",
-      "detail": "{ interaction: unknown; overflowWidth: unknown; scrollPosition: unknown; zoom: unknown; zoomText: unknown }"
+      "description": "Emitted when zoom, interaction or horizontal viewport state is refreshed. overflowWidth and scrollPosition are in CSS pixels, zoom is a scale factor, and zoomText is its percentage label.",
+      "detail": "{ interaction: boolean; overflowWidth: number; scrollPosition: number; zoom: number; zoomText: string }"
     },
     {
       "name": "tp-iframe-load",
-      "description": "Émis après le chargement de l’iframe interne.",
-      "detail": "{ contentHeight: unknown; hasSrcdoc: unknown; src: unknown }"
+      "description": "Emitted after the inner iframe loads and its layout is refreshed. contentHeight is in CSS pixels (0 when inaccessible), hasSrcdoc indicates inline content, and src is the configured URL.",
+      "detail": "{ contentHeight: number; hasSrcdoc: boolean; src: string }"
     }
   ],
   "cssproperties": [
     {
       "name": "--tp-iframe-zoom",
       "default": "1",
-      "description": "Controls the zoom."
+      "description": "Unitless scale factor applied to iframe content (1 means 100%); synchronized with the zoom attribute."
     }
   ],
   "dependencies": [

@@ -1,0 +1,2 @@
+import"../icon/icon.js";function e(e,t){if(!e)return;let n=e.querySelector(`[data-document-logo]`);if(!t.trim()){n?.remove();return}n||(n=document.createElement(`tp-icon`),n.setAttribute(`data-document-logo`,``),n.setAttribute(`section`,`start`),n.setAttribute(`size`,`2em`),n.style.flexShrink=`0`),n.getAttribute(`src`)!==t&&n.setAttribute(`src`,t);let r=e.querySelector(`[data-toolbar-start]`)??e;r.firstElementChild!==n&&r.prepend(n)}export{e as updateDocumentLogo};
+//# sourceMappingURL=document-logo.js.map

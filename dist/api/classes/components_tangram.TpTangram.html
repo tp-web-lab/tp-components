@@ -16,7 +16,7 @@
 </div>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-example">
-<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-1">&lt;</span><span class="hl-9">tp</span><span class="hl-1">-</span><span class="hl-9">tangram</span><span class="hl-1">&gt;&lt;/</span><span class="hl-10">tp</span><span class="hl-1">-</span><span class="hl-10">tangram</span><span class="hl-1">&gt;</span>
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-1">&lt;</span><span class="hl-9">tp</span><span class="hl-1">-</span><span class="hl-9">tangram</span><span class="hl-1">&gt;&lt;/</span><span class="hl-10">tp</span><span class="hl-1">-</span><span class="hl-10">tangram</span><span class="hl-1">&gt;</span><br/><span class="hl-1">@</span><span class="hl-9">event</span><span class="hl-1"> </span><span class="hl-9">tp</span><span class="hl-1">-</span><span class="hl-9">tangram</span><span class="hl-1">-</span><span class="hl-9">change</span><span class="hl-1"> </span><span class="hl-9">Emitted</span><span class="hl-1"> </span><span class="hl-9">after</span><span class="hl-1"> </span><span class="hl-9">an</span><span class="hl-1"> </span><span class="hl-9">accepted</span><span class="hl-1"> </span><span class="hl-9">piece</span><span class="hl-1"> </span><span class="hl-9">edit</span><span class="hl-1">; </span><span class="hl-9">placements</span><span class="hl-1"> </span><span class="hl-9">contains</span><span class="hl-1"> </span><span class="hl-9">each</span><span class="hl-1"> </span><span class="hl-9">piece</span><span class="hl-1"> </span><span class="hl-11">ID</span><span class="hl-1">, </span><span class="hl-9">x</span><span class="hl-1">/</span><span class="hl-9">y</span><span class="hl-1"> </span><span class="hl-9">position</span><span class="hl-1">, </span><span class="hl-9">angle</span><span class="hl-1"> </span><span class="hl-9">and</span><span class="hl-1"> </span><span class="hl-9">flip</span><span class="hl-1"> </span><span class="hl-9">state</span><span class="hl-1">, </span><span class="hl-9">and</span><span class="hl-1"> </span><span class="hl-9">solved</span><span class="hl-1"> </span><span class="hl-9">reports</span><span class="hl-1"> </span><span class="hl-9">whether</span><span class="hl-1"> </span><span class="hl-9">the</span><span class="hl-1"> </span><span class="hl-9">target</span><span class="hl-1"> </span><span class="hl-9">is</span><span class="hl-1"> </span><span class="hl-9">matched</span><span class="hl-1">.</span>
 </code><button type="button">Copy</button></pre>
 
 </div>
@@ -27,9 +27,8 @@
 <h4 class="tsd-anchor-link" id="attr">Attr<a href="#attr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>src = &quot;&quot; - Text or JSON file containing the seven solution placements.</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-1">Attr<a href="#attr-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>exact-orientation = false - Starts every piece in its solution orientation, including reflection; changing it restarts the puzzle.
-tp-tangram-change Fired after an accepted edit; detail contains placements and solved.
-tp-tangram-error Fired when loading a solution fails; detail contains message.</p>
+<h4 class="tsd-anchor-link" id="attr-1">Attr<a href="#attr-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>exact-orientation = false - Starts every piece in its solution orientation, including reflection; changing it restarts the puzzle.</p>
+<p>tp-tangram-error Fired when loading a solution fails; detail contains message.</p>
 </div>
 <div class="tsd-tag-keyboard">
 <h4 class="tsd-anchor-link" id="keyboard">Keyboard<a href="#keyboard" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Arrow keys Move the selected piece; Shift increases the step.</p>
@@ -45,15 +44,27 @@ tp-tangram-error Fired when loading a solution fails; detail contains message.</
 </div>
 <div class="tsd-tag-keyboard">
 <h4 class="tsd-anchor-link" id="keyboard-4">Keyboard<a href="#keyboard-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Ctrl+Z / Ctrl+Shift+Z Undo / redo (Command also supported).</p>
+</div>
+<div class="tsd-tag-eventdetail">
+<h4 class="tsd-anchor-link" id="eventdetail">Eventdetail<a href="#eventdetail" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>tp-tangram-change { placements: Placement[]; solved: boolean }</p>
+</div>
+<div class="tsd-tag-accessibility">
+<h4 class="tsd-anchor-link" id="accessibility">Accessibility<a href="#accessibility" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Names the puzzle board and exposes playing pieces as labelled focusable SVG buttons; keyboard commands support moving, rotating, flipping, undoing and redoing placements.</p>
+</div>
+<div class="tsd-tag-accessibility">
+<h4 class="tsd-anchor-link" id="accessibility-1">Accessibility<a href="#accessibility-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Groups and labels toolbar and selected-piece controls, announces game status politely, and removes playing pieces from keyboard navigation during solution preview.</p>
+</div>
+<div class="tsd-tag-accessibilityresponsibility">
+<h4 class="tsd-anchor-link" id="accessibilityresponsibility">Accessibilityresponsibility<a href="#accessibilityresponsibility" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Provide a text description of the target and a suitable alternative activity when spatial visual manipulation is not usable; piece colors alone must not carry essential instructions.</p>
 </div></div></section>
-<section class="tsd-panel tsd-hierarchy" data-refl="24270">
+<section class="tsd-panel tsd-hierarchy" data-refl="25630">
 <h4>Hierarchy (<a href="../hierarchy.html#components/tangram.TpTangram">View Summary</a>)</h4>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><a href="components_base.TpBase.html" class="tsd-signature-type tsd-kind-class">TpBase</a>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">TpTangram</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L70">tp-components/src/components/tangram/tangram.ts:70</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L75">tp-components/src/components/tangram/tangram.ts:75</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -124,7 +135,7 @@ tp-tangram-error Fired when loading a solution fails; detail contains message.</
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L229">tp-components/src/components/tangram/tangram.ts:229</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L234">tp-components/src/components/tangram/tangram.ts:234</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="canundo"><span>can<wbr/>Undo</span><a href="#canundo" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -133,7 +144,7 @@ tp-tangram-error Fired when loading a solution fails; detail contains message.</
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L226">tp-components/src/components/tangram/tangram.ts:226</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L231">tp-components/src/components/tangram/tangram.ts:231</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="exactorientation"><span>exact<wbr/>Orientation</span><a href="#exactorientation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -144,7 +155,7 @@ tp-tangram-error Fired when loading a solution fails; detail contains message.</
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L101">tp-components/src/components/tangram/tangram.ts:101</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L106">tp-components/src/components/tangram/tangram.ts:106</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="exactorientationexactorientation-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">exactOrientation</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -154,7 +165,7 @@ tp-tangram-error Fired when loading a solution fails; detail contains message.</
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L104">tp-components/src/components/tangram/tangram.ts:104</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L109">tp-components/src/components/tangram/tangram.ts:109</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="issolved"><span>is<wbr/>Solved</span><a href="#issolved" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -163,7 +174,7 @@ tp-tangram-error Fired when loading a solution fails; detail contains message.</
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L223">tp-components/src/components/tangram/tangram.ts:223</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L228">tp-components/src/components/tangram/tangram.ts:228</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="placements"><span>placements</span><a href="#placements" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -174,7 +185,7 @@ tp-tangram-error Fired when loading a solution fails; detail contains message.</
 </div>
 <h4 class="tsd-returns-title">Returns <a href="../types/components_tangram_geometry.Placement.html" class="tsd-signature-type tsd-kind-type-alias">Placement</a><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L220">tp-components/src/components/tangram/tangram.ts:220</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L225">tp-components/src/components/tangram/tangram.ts:225</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="src"><span>src</span><a href="#src" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -185,7 +196,7 @@ tp-tangram-error Fired when loading a solution fails; detail contains message.</
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L108">tp-components/src/components/tangram/tangram.ts:108</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L113">tp-components/src/components/tangram/tangram.ts:113</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="srcsrc-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">src</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -195,7 +206,7 @@ tp-tangram-error Fired when loading a solution fails; detail contains message.</
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L111">tp-components/src/components/tangram/tangram.ts:111</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L116">tp-components/src/components/tangram/tangram.ts:116</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="observedattributes"><code class="tsd-tag">Static</code><span>observed<wbr/>Attributes</span><a href="#observedattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -212,7 +223,7 @@ these via spread when they also want to react to <code>dir</code> and <code>lang
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <p>Overrides TpBase.observedAttributes</p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L97">tp-components/src/components/tangram/tangram.ts:97</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L102">tp-components/src/components/tangram/tangram.ts:102</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -236,7 +247,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#attributechangedcallback">attributeChangedCallback</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L167">tp-components/src/components/tangram/tangram.ts:167</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L172">tp-components/src/components/tangram/tangram.ts:172</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="capturehelpsource"><code class="tsd-tag">Protected</code><span>capture<wbr/>Help<wbr/>Source</span><a href="#capturehelpsource" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -246,7 +257,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#capturehelpsource">captureHelpSource</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L899">tp-components/src/components/base/base.ts:899</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L1010">tp-components/src/components/base/base.ts:1010</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="clearincorrectpieces"><span>clear<wbr/>Incorrect<wbr/>Pieces</span><a href="#clearincorrectpieces" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -257,7 +268,7 @@ attribute changes.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L320">tp-components/src/components/tangram/tangram.ts:320</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L331">tp-components/src/components/tangram/tangram.ts:331</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="connectedcallback"><code class="tsd-tag">Protected</code><span>connected<wbr/>Callback</span><a href="#connectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -275,7 +286,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#connectedcallback">connectedCallback</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L114">tp-components/src/components/tangram/tangram.ts:114</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L119">tp-components/src/components/tangram/tangram.ts:119</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="disconnectedcallback"><code class="tsd-tag">Protected</code><span>disconnected<wbr/>Callback</span><a href="#disconnectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -284,7 +295,7 @@ attribute changes.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L155">tp-components/src/components/tangram/tangram.ts:155</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L160">tp-components/src/components/tangram/tangram.ts:160</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="ensurebasestyles"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Base<wbr/>Styles</span><a href="#ensurebasestyles" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -300,7 +311,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#ensurebasestyles">ensureBaseStyles</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L312">tp-components/src/components/base/base.ts:312</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L347">tp-components/src/components/base/base.ts:347</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="ensureglobalstyle"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Global<wbr/>Style</span><a href="#ensureglobalstyle" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -323,7 +334,7 @@ if it does not already exist.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#ensureglobalstyle">ensureGlobalStyle</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L331">tp-components/src/components/base/base.ts:331</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L366">tp-components/src/components/base/base.ts:366</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="fullscreen"><span>fullscreen</span><a href="#fullscreen" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -334,7 +345,7 @@ if it does not already exist.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L372">tp-components/src/components/tangram/tangram.ts:372</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L383">tp-components/src/components/tangram/tangram.ts:383</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getbooleanattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>Boolean<wbr/>Attribute</span><a href="#getbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -358,7 +369,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getbooleanattribute">getBooleanAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L358">tp-components/src/components/base/base.ts:358</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L393">tp-components/src/components/base/base.ts:393</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getclosestskippingcontainers"><code class="tsd-tag">Protected</code><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span><a href="#getclosestskippingcontainers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -379,7 +390,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getclosestskippingcontainers">getClosestSkippingContainers</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L456">tp-components/src/components/base/base.ts:456</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L491">tp-components/src/components/base/base.ts:491</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getstringattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>String<wbr/>Attribute</span><a href="#getstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -401,7 +412,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getstringattribute">getStringAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L392">tp-components/src/components/base/base.ts:392</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L427">tp-components/src/components/base/base.ts:427</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="help"><span>help</span><a href="#help" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -416,7 +427,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#help">help</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L258">tp-components/src/components/base/base.ts:258</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L259">tp-components/src/components/base/base.ts:259</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="place"><span>place</span><a href="#place" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -435,7 +446,7 @@ the Vite component API plugin. A custom URL can be provided with
 <li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">flipped</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L257">tp-components/src/components/tangram/tangram.ts:257</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L262">tp-components/src/components/tangram/tangram.ts:262</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="queryelement"><code class="tsd-tag">Protected</code><span>query<wbr/>Element</span><a href="#queryelement" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -461,16 +472,18 @@ the Vite component API plugin. A custom URL can be provided with
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#queryelement">queryElement</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L437">tp-components/src/components/base/base.ts:437</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L472">tp-components/src/components/base/base.ts:472</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="redo"><span>redo</span><a href="#redo" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="redo-1"><span class="tsd-kind-call-signature">redo</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#redo-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Restores the next undone piece arrangement; does nothing when redo history is empty.</p>
+</div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L297">tp-components/src/components/tangram/tangram.ts:297</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L308">tp-components/src/components/tangram/tangram.ts:308</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="removeattributes"><code class="tsd-tag">Protected</code><span>remove<wbr/>Attributes</span><a href="#removeattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -488,7 +501,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#removeattributes">removeAttributes</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L422">tp-components/src/components/base/base.ts:422</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L457">tp-components/src/components/base/base.ts:457</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="reset"><span>reset</span><a href="#reset" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -499,7 +512,7 @@ the Vite component API plugin. A custom URL can be provided with
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L233">tp-components/src/components/tangram/tangram.ts:233</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L238">tp-components/src/components/tangram/tangram.ts:238</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="setbooleanattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>Boolean<wbr/>Attribute</span><a href="#setbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -525,7 +538,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#setbooleanattribute">setBooleanAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L374">tp-components/src/components/base/base.ts:374</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L409">tp-components/src/components/base/base.ts:409</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="setsolution"><span>set<wbr/>Solution</span><a href="#setsolution" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -540,7 +553,7 @@ the Vite component API plugin. A custom URL can be provided with
 <li><span><span class="tsd-kind-parameter">solution</span>: <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <a href="../types/components_tangram_geometry.Placement.html" class="tsd-signature-type tsd-kind-type-alias">Placement</a><span class="tsd-signature-symbol">[]</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L199">tp-components/src/components/tangram/tangram.ts:199</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L204">tp-components/src/components/tangram/tangram.ts:204</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="setstringattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>String<wbr/>Attribute</span><a href="#setstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -562,7 +575,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#setstringattribute">setStringAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L406">tp-components/src/components/base/base.ts:406</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L441">tp-components/src/components/base/base.ts:441</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="showincorrectpieces"><span>show<wbr/>Incorrect<wbr/>Pieces</span><a href="#showincorrectpieces" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -577,7 +590,7 @@ the Vite component API plugin. A custom URL can be provided with
 <li><span><span class="tsd-kind-parameter">show</span>: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L312">tp-components/src/components/tangram/tangram.ts:312</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L323">tp-components/src/components/tangram/tangram.ts:323</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="showpiece"><span>show<wbr/>Piece</span><a href="#showpiece" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -588,7 +601,7 @@ the Vite component API plugin. A custom URL can be provided with
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L358">tp-components/src/components/tangram/tangram.ts:358</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L369">tp-components/src/components/tangram/tangram.ts:369</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="showsolution"><span>show<wbr/>Solution</span><a href="#showsolution" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -603,16 +616,18 @@ the Vite component API plugin. A custom URL can be provided with
 <li><span><span class="tsd-kind-parameter">show</span>: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L305">tp-components/src/components/tangram/tangram.ts:305</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L316">tp-components/src/components/tangram/tangram.ts:316</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="undo"><span>undo</span><a href="#undo" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="undo-1"><span class="tsd-kind-call-signature">undo</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#undo-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Restores the previous piece arrangement from undo history; does nothing when history is empty.</p>
+</div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/tangram/tangram.ts#L290">tp-components/src/components/tangram/tangram.ts:290</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/tangram/tangram.ts#L298">tp-components/src/components/tangram/tangram.ts:298</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

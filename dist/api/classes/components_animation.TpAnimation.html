@@ -18,12 +18,51 @@ et WAAPI pour le contrôle de lecture.</p>
 </div>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-example">
-<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-1">&lt;</span><span class="hl-9">tp</span><span class="hl-1">-</span><span class="hl-9">animation</span><span class="hl-1">&gt;&lt;/</span><span class="hl-10">tp</span><span class="hl-1">-</span><span class="hl-10">animation</span><span class="hl-1">&gt;</span>
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-1">&lt;</span><span class="hl-9">tp</span><span class="hl-1">-</span><span class="hl-9">animation</span><span class="hl-1">&gt;&lt;/</span><span class="hl-10">tp</span><span class="hl-1">-</span><span class="hl-10">animation</span><span class="hl-1">&gt;</span><br/><span class="hl-1">@</span><span class="hl-9">event</span><span class="hl-1"> </span><span class="hl-9">tp</span><span class="hl-1">-</span><span class="hl-9">animation</span><span class="hl-1">-</span><span class="hl-9">start</span><span class="hl-1"> </span><span class="hl-9">Emitted</span><span class="hl-1"> </span><span class="hl-9">when</span><span class="hl-1"> </span><span class="hl-9">an</span><span class="hl-1"> </span><span class="hl-9">entrance</span><span class="hl-1"> </span><span class="hl-9">or</span><span class="hl-1"> </span><span class="hl-9">exit</span><span class="hl-1"> </span><span class="hl-9">animation</span><span class="hl-1"> </span><span class="hl-9">starts</span><span class="hl-1">, </span><span class="hl-9">including</span><span class="hl-1"> </span><span class="hl-9">when</span><span class="hl-1"> </span><span class="hl-9">immediately</span><span class="hl-1"> </span><span class="hl-9">paused</span><span class="hl-1">. </span><span class="hl-9">The</span><span class="hl-1"> </span><span class="hl-9">detail</span><span class="hl-1"> </span><span class="hl-9">identifies</span><span class="hl-1"> </span><span class="hl-9">the</span><span class="hl-1"> </span><span class="hl-9">configured</span><span class="hl-1"> </span><span class="hl-9">animation</span><span class="hl-1"> </span><span class="hl-9">names</span><span class="hl-1"> </span><span class="hl-9">and</span><span class="hl-1"> </span><span class="hl-9">the</span><span class="hl-1"> </span><span class="hl-9">phase</span><span class="hl-1">.</span>
 </code><button type="button">Copy</button></pre>
 
 </div>
 <div class="tsd-tag-tagname">
 <h4 class="tsd-anchor-link" id="tagname">Tagname<a href="#tagname" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>tp-animation</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr">Attr<a href="#attr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>threshold = &quot;0.1&quot; - Visibility thresholds for the intersection trigger: one number from 0 to 1, or a comma-separated list. Invalid entries are ignored; the fallback is 0.1.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-1">Attr<a href="#attr-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>root-margin = &quot;0px&quot; - Viewport margin for the intersection trigger, using CSS margin syntax such as 100px or 0px 0px -20% 0px.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-2">Attr<a href="#attr-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>trigger = &quot;load&quot; - Playback trigger: load, click, hover (also keyboard focus), intersection (entering the viewport), or manual (playIn()/playOut()).</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-3">Attr<a href="#attr-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>target = &quot;&quot; - CSS selector of a descendant to animate. When absent, the first child element is used.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-4">Attr<a href="#attr-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>paused = false - Pauses playback when present; removing it allows the animation to resume.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-5">Attr<a href="#attr-5" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>once = false - Limits automatic click, hover/focus and intersection triggers to their first playback.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-6">Attr<a href="#attr-6" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>iterations = &quot;1&quot; - Positive number of playback cycles, or infinite for continuous repetition. Invalid values use one cycle.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-7">Attr<a href="#attr-7" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>out = &quot;&quot; - Animate.css exit animation name used by playOut(), such as fadeOut; empty means no exit animation.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-8">Attr<a href="#attr-8" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>in = &quot;&quot; - Animate.css entrance animation name, such as fadeIn; empty means no entrance animation.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-9">Attr<a href="#attr-9" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>fill = &quot;both&quot; - Styles retained outside playback: none, forwards (after), backwards (during the delay), or both.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-10">Attr<a href="#attr-10" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>easing = &quot;ease&quot; - CSS timing function controlling the animation pace, for example linear, ease-in-out or cubic-bezier(0.4, 0, 0.2, 1).</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-11">Attr<a href="#attr-11" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>duration = &quot;1s&quot; - Duration of one animation cycle, with an explicit time unit such as 500ms or 2s.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-12">Attr<a href="#attr-12" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>delay = &quot;0s&quot; - Wait before each animation, with an explicit time unit such as 200ms or 0.5s.</p>
 </div>
 <div class="tsd-tag-accessibility">
 <h4 class="tsd-anchor-link" id="accessibility">Accessibility<a href="#accessibility" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Mirrors hover activation on keyboard focus.</p>
@@ -39,6 +78,17 @@ et WAAPI pour le contrôle de lecture.</p>
 </div>
 <div class="tsd-tag-keyboard">
 <h4 class="tsd-anchor-link" id="keyboard">Keyboard<a href="#keyboard" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Starts a click-triggered animation when its target is not a native control.</p>
+</div>
+<div class="tsd-tag-eventdetail">
+<h4 class="tsd-anchor-link" id="eventdetail">Eventdetail<a href="#eventdetail" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>tp-animation-start { in: string; out: string; phase: &quot;in&quot; | &quot;out&quot; }
+tp-animation-finish Emitted after an entrance or exit animation finishes normally; cancellation does not emit finish. The detail identifies the configured animation names and the phase.</p>
+</div>
+<div class="tsd-tag-eventdetail">
+<h4 class="tsd-anchor-link" id="eventdetail-1">Eventdetail<a href="#eventdetail-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>tp-animation-finish { in: string; out: string; phase: &quot;in&quot; | &quot;out&quot; }
+tp-animation-cancel Emitted when cancel() cancels an existing animation, including cancellation before starting another phase. The detail contains the configured entrance and exit animation names.</p>
+</div>
+<div class="tsd-tag-eventdetail">
+<h4 class="tsd-anchor-link" id="eventdetail-2">Eventdetail<a href="#eventdetail-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>tp-animation-cancel { in: string; out: string }</p>
 </div></div></section>
 <section class="tsd-panel tsd-hierarchy" data-refl="199">
 <h4>Hierarchy (<a href="../hierarchy.html#components/animation.TpAnimation">View Summary</a>)</h4>
@@ -47,7 +97,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">TpAnimation</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L75">tp-components/src/components/animation/animation.ts:75</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L94">tp-components/src/components/animation/animation.ts:94</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -121,7 +171,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L151">tp-components/src/components/animation/animation.ts:151</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L170">tp-components/src/components/animation/animation.ts:170</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="delaydelay-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">delay</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -131,7 +181,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L155">tp-components/src/components/animation/animation.ts:155</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L174">tp-components/src/components/animation/animation.ts:174</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="duration"><span>duration</span><a href="#duration" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -140,7 +190,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L143">tp-components/src/components/animation/animation.ts:143</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L162">tp-components/src/components/animation/animation.ts:162</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="durationduration-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">duration</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -150,7 +200,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L147">tp-components/src/components/animation/animation.ts:147</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L166">tp-components/src/components/animation/animation.ts:166</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="easing"><span>easing</span><a href="#easing" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -159,7 +209,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L167">tp-components/src/components/animation/animation.ts:167</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L186">tp-components/src/components/animation/animation.ts:186</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="easingeasing-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">easing</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -169,7 +219,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L171">tp-components/src/components/animation/animation.ts:171</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L190">tp-components/src/components/animation/animation.ts:190</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="fill"><span>fill</span><a href="#fill" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -178,7 +228,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AnimationFillMode</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L175">tp-components/src/components/animation/animation.ts:175</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L194">tp-components/src/components/animation/animation.ts:194</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="fillfill-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">fill</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AnimationFillMode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -188,7 +238,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">AnimationFillMode</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L180">tp-components/src/components/animation/animation.ts:180</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L199">tp-components/src/components/animation/animation.ts:199</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="in"><span>in</span><a href="#in" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -197,7 +247,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L104">tp-components/src/components/animation/animation.ts:104</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L123">tp-components/src/components/animation/animation.ts:123</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="inin-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">in</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -207,7 +257,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L108">tp-components/src/components/animation/animation.ts:108</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L127">tp-components/src/components/animation/animation.ts:127</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="iterations"><span>iterations</span><a href="#iterations" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -216,7 +266,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L159">tp-components/src/components/animation/animation.ts:159</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L178">tp-components/src/components/animation/animation.ts:178</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="iterationsiterations-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">iterations</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -226,7 +276,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L163">tp-components/src/components/animation/animation.ts:163</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L182">tp-components/src/components/animation/animation.ts:182</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="once"><span>once</span><a href="#once" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -235,7 +285,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L206">tp-components/src/components/animation/animation.ts:206</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L225">tp-components/src/components/animation/animation.ts:225</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="onceonce-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">once</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -245,7 +295,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L210">tp-components/src/components/animation/animation.ts:210</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L229">tp-components/src/components/animation/animation.ts:229</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="out"><span>out</span><a href="#out" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -254,7 +304,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L117">tp-components/src/components/animation/animation.ts:117</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L136">tp-components/src/components/animation/animation.ts:136</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="outout-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">out</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -264,7 +314,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L121">tp-components/src/components/animation/animation.ts:121</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L140">tp-components/src/components/animation/animation.ts:140</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="paused"><span>paused</span><a href="#paused" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -273,7 +323,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L193">tp-components/src/components/animation/animation.ts:193</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L212">tp-components/src/components/animation/animation.ts:212</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="pausedpaused-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">paused</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -283,7 +333,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L197">tp-components/src/components/animation/animation.ts:197</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L216">tp-components/src/components/animation/animation.ts:216</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="rootmargin"><span>root<wbr/>Margin</span><a href="#rootmargin" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -294,7 +344,7 @@ et WAAPI pour le contrôle de lecture.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L222">tp-components/src/components/animation/animation.ts:222</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L241">tp-components/src/components/animation/animation.ts:241</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="rootmarginrootmargin-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">rootMargin</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -304,7 +354,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L226">tp-components/src/components/animation/animation.ts:226</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L245">tp-components/src/components/animation/animation.ts:245</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="target"><span>target</span><a href="#target" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -313,7 +363,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L130">tp-components/src/components/animation/animation.ts:130</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L149">tp-components/src/components/animation/animation.ts:149</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="targettarget-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">target</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -323,7 +373,7 @@ et WAAPI pour le contrôle de lecture.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L134">tp-components/src/components/animation/animation.ts:134</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L153">tp-components/src/components/animation/animation.ts:153</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="threshold"><span>threshold</span><a href="#threshold" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -335,7 +385,7 @@ Peut être un nombre unique ou une liste séparée par des virgules.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L234">tp-components/src/components/animation/animation.ts:234</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L253">tp-components/src/components/animation/animation.ts:253</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="thresholdthreshold-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">threshold</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -345,7 +395,7 @@ Peut être un nombre unique ou une liste séparée par des virgules.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L238">tp-components/src/components/animation/animation.ts:238</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L257">tp-components/src/components/animation/animation.ts:257</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="trigger"><span>trigger</span><a href="#trigger" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -354,7 +404,7 @@ Peut être un nombre unique ou une liste séparée par des virgules.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TpAnimationTrigger</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L184">tp-components/src/components/animation/animation.ts:184</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L203">tp-components/src/components/animation/animation.ts:203</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="triggertrigger-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">trigger</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TpAnimationTrigger</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -364,7 +414,7 @@ Peut être un nombre unique ou une liste séparée par des virgules.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">TpAnimationTrigger</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L189">tp-components/src/components/animation/animation.ts:189</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L208">tp-components/src/components/animation/animation.ts:208</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="observedattributes"><code class="tsd-tag">Static</code><span>observed<wbr/>Attributes</span><a href="#observedattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -381,7 +431,7 @@ these via spread when they also want to react to <code>dir</code> and <code>lang
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <p>Overrides TpBase.observedAttributes</p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L86">tp-components/src/components/animation/animation.ts:86</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L105">tp-components/src/components/animation/animation.ts:105</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -405,16 +455,18 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#attributechangedcallback">attributeChangedCallback</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L255">tp-components/src/components/animation/animation.ts:255</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L274">tp-components/src/components/animation/animation.ts:274</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="cancel"><span>cancel</span><a href="#cancel" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="cancel-1"><span class="tsd-kind-call-signature">cancel</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#cancel-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Cancels the current animation, clears its playback reference and emits tp-animation-cancel when an animation existed.</p>
+</div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L302">tp-components/src/components/animation/animation.ts:302</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L336">tp-components/src/components/animation/animation.ts:336</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="capturehelpsource"><code class="tsd-tag">Protected</code><span>capture<wbr/>Help<wbr/>Source</span><a href="#capturehelpsource" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -424,7 +476,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#capturehelpsource">captureHelpSource</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L899">tp-components/src/components/base/base.ts:899</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L1010">tp-components/src/components/base/base.ts:1010</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="connectedcallback"><code class="tsd-tag">Protected</code><span>connected<wbr/>Callback</span><a href="#connectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -442,7 +494,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#connectedcallback">connectedCallback</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L242">tp-components/src/components/animation/animation.ts:242</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L261">tp-components/src/components/animation/animation.ts:261</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="disconnectedcallback"><span>disconnected<wbr/>Callback</span><a href="#disconnectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -451,7 +503,7 @@ attribute changes.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L279">tp-components/src/components/animation/animation.ts:279</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L298">tp-components/src/components/animation/animation.ts:298</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="ensurebasestyles"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Base<wbr/>Styles</span><a href="#ensurebasestyles" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -467,7 +519,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#ensurebasestyles">ensureBaseStyles</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L312">tp-components/src/components/base/base.ts:312</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L347">tp-components/src/components/base/base.ts:347</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="ensureglobalstyle"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Global<wbr/>Style</span><a href="#ensureglobalstyle" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -490,7 +542,7 @@ if it does not already exist.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#ensureglobalstyle">ensureGlobalStyle</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L331">tp-components/src/components/base/base.ts:331</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L366">tp-components/src/components/base/base.ts:366</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getbooleanattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>Boolean<wbr/>Attribute</span><a href="#getbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -514,7 +566,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getbooleanattribute">getBooleanAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L358">tp-components/src/components/base/base.ts:358</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L393">tp-components/src/components/base/base.ts:393</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getclosestskippingcontainers"><code class="tsd-tag">Protected</code><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span><a href="#getclosestskippingcontainers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -535,7 +587,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getclosestskippingcontainers">getClosestSkippingContainers</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L456">tp-components/src/components/base/base.ts:456</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L491">tp-components/src/components/base/base.ts:491</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getstringattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>String<wbr/>Attribute</span><a href="#getstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -557,7 +609,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getstringattribute">getStringAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L392">tp-components/src/components/base/base.ts:392</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L427">tp-components/src/components/base/base.ts:427</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="help"><span>help</span><a href="#help" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -572,43 +624,51 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#help">help</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L258">tp-components/src/components/base/base.ts:258</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L259">tp-components/src/components/base/base.ts:259</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="pause"><span>pause</span><a href="#pause" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="pause-1"><span class="tsd-kind-call-signature">pause</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#pause-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Pauses the current animation at its current time; does nothing when no animation exists.</p>
+</div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L298">tp-components/src/components/animation/animation.ts:298</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L329">tp-components/src/components/animation/animation.ts:329</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="play"><span>play</span><a href="#play" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="play-1"><span class="tsd-kind-call-signature">play</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#play-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Starts the entrance animation from the beginning, like playIn(); resolves when playback finishes or is cancelled.</p>
+</div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L286">tp-components/src/components/animation/animation.ts:286</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L308">tp-components/src/components/animation/animation.ts:308</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="playin"><span>play<wbr/>In</span><a href="#playin" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="playin-1"><span class="tsd-kind-call-signature">playIn</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#playin-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Cancels the current animation and plays the configured in animation. Resolves on completion or cancellation; does nothing if the target or animation name is missing.</p>
+</div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L290">tp-components/src/components/animation/animation.ts:290</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L315">tp-components/src/components/animation/animation.ts:315</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="playout"><span>play<wbr/>Out</span><a href="#playout" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="playout-1"><span class="tsd-kind-call-signature">playOut</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#playout-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Cancels the current animation and plays the configured out animation. Resolves on completion or cancellation; does nothing if the target or animation name is missing.</p>
+</div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L294">tp-components/src/components/animation/animation.ts:294</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L322">tp-components/src/components/animation/animation.ts:322</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="queryelement"><code class="tsd-tag">Protected</code><span>query<wbr/>Element</span><a href="#queryelement" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -634,7 +694,7 @@ the Vite component API plugin. A custom URL can be provided with
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#queryelement">queryElement</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L437">tp-components/src/components/base/base.ts:437</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L472">tp-components/src/components/base/base.ts:472</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="removeattributes"><code class="tsd-tag">Protected</code><span>remove<wbr/>Attributes</span><a href="#removeattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -652,16 +712,18 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#removeattributes">removeAttributes</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L422">tp-components/src/components/base/base.ts:422</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L457">tp-components/src/components/base/base.ts:457</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="restart"><span>restart</span><a href="#restart" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="restart-1"><span class="tsd-kind-call-signature">restart</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#restart-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Starts the configured entrance animation again from the beginning; returns the same completion promise as playIn().</p>
+</div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/animation/animation.ts#L318">tp-components/src/components/animation/animation.ts:318</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/animation/animation.ts#L355">tp-components/src/components/animation/animation.ts:355</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="setbooleanattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>Boolean<wbr/>Attribute</span><a href="#setbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -687,7 +749,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#setbooleanattribute">setBooleanAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L374">tp-components/src/components/base/base.ts:374</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L409">tp-components/src/components/base/base.ts:409</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="setstringattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>String<wbr/>Attribute</span><a href="#setstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -709,7 +771,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#setstringattribute">setStringAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/cddb4c46f4776aacfa722a68509652b21e826a3d/src/components/base/base.ts#L406">tp-components/src/components/base/base.ts:406</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/d3a598aadcf0141d3fd29ba436fb5c17e47352e6/src/components/base/base.ts#L441">tp-components/src/components/base/base.ts:441</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

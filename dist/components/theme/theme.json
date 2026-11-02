@@ -39,7 +39,7 @@
     },
     {
       "name": "size",
-      "description": "Icon button size.",
+      "description": "Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -57,7 +57,7 @@
     },
     {
       "name": "variant",
-      "description": "Icon button variant.",
+      "description": "Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -77,6 +77,11 @@
       "name": "tp-theme-change",
       "description": "Emitted when the effective theme applied to a target changes.",
       "detail": "{ mode: \"light\" | \"dark\" | \"auto\"; theme: \"light\" | \"dark\"; anchor: string; target: HTMLElement }"
+    },
+    {
+      "name": "tp-theme-refresh",
+      "description": "Emitted when a controller asks other theme controllers to refresh their effective scope; source is the initiating controller and scope is its target element. This is a synchronization notification, distinct from tp-theme-change.",
+      "detail": "{ source: TpTheme; scope: HTMLElement }"
     }
   ],
   "cssproperties": [],
@@ -91,7 +96,7 @@
     },
     {
       "name": "tp-dropdown",
-      "summary": "Displays an anchored dropdown menu."
+      "summary": "Dropdown menu component."
     },
     {
       "name": "tp-icon",

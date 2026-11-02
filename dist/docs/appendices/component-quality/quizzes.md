@@ -1,6 +1,6 @@
 # Quizzes component quality
 
-> Latest recorded executions: **2 distinct failing tests affect this family** in the global run or its separate family reruns. Coverage was collected despite failures and is not evidence of a passing suite. See the [execution results](index.md#latest-global-execution) for both scopes.
+> Historical coverage execution (20 September 2026): **2 distinct failing tests affect this family** in that global run or its separate family reruns. Coverage was collected despite those failures. These are historical results, not the current test status; see [Tests](../tests.md) for the latest review.
 
 This family report applies the [component quality procedure](index.md) to the four implemented components listed under **Quizzes**.
 

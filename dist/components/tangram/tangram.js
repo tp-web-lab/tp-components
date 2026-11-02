@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/tangram.js";
-export { e as TpTangram };
+import{t as e}from"../../chunks/tangram2.js";export{e as TpTangram};

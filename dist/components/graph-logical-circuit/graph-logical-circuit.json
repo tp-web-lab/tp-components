@@ -12,56 +12,56 @@
   "attributes": [],
   "methods": [
     {
-      "name": "addEdge(source: string, target: string, type = TP_LOGIC_WIRE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = 'forward'): TpGraphEdge",
+      "name": "addEdge(source: string, target: string, type = TP_LOGIC_WIRE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = \"forward\"): TpGraphEdge",
       "inherited": false,
-      "description": "Adds edge."
+      "description": "Connects compatible logic nodes with a forward wire and returns its record. Validates input capacity and resolves the target input port; invalid connections throw."
     },
     {
       "name": "addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode",
       "inherited": false,
-      "description": "Adds node."
+      "description": "Adds a supported logic gate, input, output or comment at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError."
     },
     {
       "name": "evaluate(): void",
       "inherited": false,
-      "description": "Evaluate."
+      "description": "Recomputes combinational logic, replaces the displayed graph and emits tp-logic-evaluate."
     },
     {
-      "name": "reconnectEdge(edgeId: string, endpoint: 'source' | 'target', nodeId: string, port: TpGraphPort): TpGraphEdge",
+      "name": "reconnectEdge(edgeId: string, endpoint: \"source\" | \"target\", nodeId: string, port: TpGraphPort): TpGraphEdge",
       "inherited": false,
-      "description": "Reconnect edge."
+      "description": "Reconnects an existing wire endpoint after checking logic compatibility and available input capacity; returns the updated edge record."
     },
     {
       "name": "setGraph(graph: TpGraphDocument): void",
       "inherited": false,
-      "description": "Sets graph."
+      "description": "Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph."
     },
     {
       "name": "toggle(id: string, propagate = true): boolean",
       "inherited": false,
-      "description": "Toggle."
+      "description": "Inverts the Boolean state of input or output id and returns the new value. Input changes propagate through the circuit unless propagate is false; other node types throw."
     },
     {
       "name": "toggleEquationNotation(): TpLogicalEquationNotation",
       "inherited": false,
-      "description": "Toggles equation notation."
+      "description": "Switches equations between electronic and mathematical notation, redraws results and returns the selected notation."
     },
     {
       "name": "toggleRepresentation(): TpLogicGateRepresentation",
       "inherited": false,
-      "description": "Toggles representation."
+      "description": "Switches gate symbols between iso and ansi, redraws the circuit and returns the selected representation."
     }
   ],
   "events": [
     {
       "name": "tp-logic-evaluate",
-      "description": "Emitted when logic evaluate occurs.",
-      "detail": "{ graph: unknown }"
+      "description": "Emitted after combinational outputs are recomputed; graph contains the resulting snapshot.",
+      "detail": "{ graph: TpGraphDocument }"
     },
     {
       "name": "tp-logic-toggle",
-      "description": "Emitted when logic toggle occurs.",
-      "detail": "{ id: unknown; value: string; graph: unknown }"
+      "description": "Emitted after an input node is toggled; id identifies the input, value is its new Boolean level, and graph contains the resulting snapshot.",
+      "detail": "{ id: string; value: boolean; graph: TpGraphDocument }"
     }
   ],
   "cssproperties": [],

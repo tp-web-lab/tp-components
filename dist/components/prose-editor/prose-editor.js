@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/prose-editor.js";
-export { e as TpProseEditor };
+import{t as e}from"../../chunks/prose-editor2.js";export{e as TpProseEditor};

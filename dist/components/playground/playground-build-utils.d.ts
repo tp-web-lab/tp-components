@@ -1,7 +1,3 @@
-/**
- * @module components/playground/playground-build-utils
- * @summary Shared utilities for building playground execution documents.
- */
 import type { ImportMap } from "../../utilities/importmap/importmap-types.js";
 import type { TpFile } from "../filesystem/filesystem.types.js";
 import type { TpProject } from "./project.js";

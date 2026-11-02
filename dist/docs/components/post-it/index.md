@@ -35,7 +35,7 @@ The custom `<tp-post-it>` element displays a movable floating paper note that fo
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the pin, reset, header and interactive content in the expanded note. In lite mode, only the pin remains in keyboard navigation. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused reset or pin button. Reset restores the initial document position; the pin folds or expands the note. |
-| Arrow keys on the header, or on the pin in lite mode | Move the note by 10 pixels. Hold <kbd>Shift</kbd> for 1-pixel steps. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on the header, or on the pin in lite mode | Move the note by 10 pixels. Hold <kbd>Shift</kbd> for 1-pixel steps. |
 | <kbd>Escape</kbd> during a drag | Cancel the movement and restore the starting position. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
@@ -136,11 +136,11 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | <code>&#45;&#45;tp-post-it-padding</code> | <code>0.75rem</code> | = 0.75rem Inner paper padding. |
-  | <code>&#45;&#45;tp-post-it-rotation</code> | <code>0deg</code> | Controls the rotation. |
-  | <code>&#45;&#45;tp-post-it-width</code> | <code>20rem</code> | = 20rem Preferred note width, limited by the available space. |
-  | <code>&#45;&#45;tp-post-it-x</code> | <code>8px</code> | Controls the x. |
-  | <code>&#45;&#45;tp-post-it-y</code> | <code>8px</code> | Controls the y. |
+  | <code>&#45;&#45;tp-post-it-padding</code> | <code>0.75rem</code> | Inner spacing around the paper content; lite mode removes this padding. |
+  | <code>&#45;&#45;tp-post-it-rotation</code> | <code>0deg</code> | Rotation angle of the paper around its top center, updated internally from rotation; ignored in lite mode. |
+  | <code>&#45;&#45;tp-post-it-width</code> | <code>20rem</code> | Preferred note width, limited by available space; lite mode uses its content width. |
+  | <code>&#45;&#45;tp-post-it-x</code> | <code>8px</code> | Horizontal viewport position of a floating note, updated internally when positioned or dragged. |
+  | <code>&#45;&#45;tp-post-it-y</code> | <code>8px</code> | Vertical viewport position of a floating note, updated internally when positioned or dragged. |
   [CSS properties of `<tp-post-it>`]
 :::
 <!-- /tp-docgen:api -->
@@ -148,6 +148,29 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_post-it.TpPostIt.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

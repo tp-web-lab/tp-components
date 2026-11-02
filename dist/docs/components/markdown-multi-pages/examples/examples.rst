@@ -26,6 +26,21 @@
                - menu
 
             .. tp-radio-list::
+               :data-setting: logo
+               :label: logo
+               :label-position: top
+               :orientation: horizontal
+               :value: 1
+
+               - Default
+
+               - file1
+
+               - file2
+
+               - file-unknown
+
+            .. tp-radio-list::
                :data-setting: repository
                :label: repository
                :label-position: top
@@ -81,8 +96,8 @@
                .. tp-textfield::
                   :data-setting: langs
                   :label: langs
-                  :value: en,fr
-                  :placeholder: en,fr
+                  :value:
+                  :placeholder:
                   :clearable:
 
             .. tp-button-group::

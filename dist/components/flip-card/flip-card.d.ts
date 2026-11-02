@@ -13,7 +13,7 @@ import { TpBase } from "../base/base.js";
  * @attr {boolean} fit-content = false - Adapts the card dimensions to its verso content.
  * @attr {boolean} flipped = false - Shows the verso when present.
  * @attr {string} button-position = "bottom end" - Position of the overlaid flip button, or none to hide it.
- * @event tp-flip-card-change Emitted after the visible side changes.
+
  * @cssprop --tp-flip-card-aspect-ratio Card aspect ratio.
  * @cssprop --tp-flip-card-background Card face background.
  * @cssprop --tp-flip-card-border-color Card border color.
@@ -23,6 +23,8 @@ import { TpBase } from "../base/base.js";
  * @cssprop --tp-flip-card-width Card width.
  * @example
  * <tp-flip-card></tp-flip-card>
+ * @event tp-flip-card-change Emitted when the visible side changes; flipped is true when the back face is visible.
+ * @eventdetail tp-flip-card-change { flipped: boolean }
  */
 export declare class TpFlipCard extends TpBase {
     private static readonly styleId;

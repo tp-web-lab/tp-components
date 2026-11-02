@@ -1,28 +1,2 @@
-//#region ../tp-markdown/dist/markdown/extensions/diagram/index.js
-function e(e, n = {}) {
-	t(e, n);
-}
-function t(e, t) {
-	let r = e.renderer.rules.fence;
-	e.renderer.rules.fence = (e, a, o, s, c) => {
-		let l = e[a];
-		return l === void 0 ? "" : l.info.trim() === "diagram" ? `
-<div class="${i(t.className ?? "tp-md-diagram")}" data-md-diagram>
-  <template data-md-diagram-source>${n(l.content.trim())}</template>
-</div>
-` : typeof r == "function" ? r(e, a, o, s, c) : c.renderToken(e, a, o);
-	};
-}
-function n(e) {
-	return e.replaceAll("</template", "<\\/template");
-}
-function r(e) {
-	return e.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;");
-}
-function i(e) {
-	return r(e);
-}
-//#endregion
-export { e as default };
-
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M22 21H2V3h2v16h2v-2h4v2h2v-3h4v3h2v-2h4zm-4-7h4v2h-4zm-6-8h4v3h-4zm4 9h-4v-5h4zM6 10h4v2H6zm4 6H6v-3h4z"/></svg>`;export{t as n,n as t};
 //# sourceMappingURL=diagram.js.map

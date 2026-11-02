@@ -1,12 +1,2 @@
-import { t as e } from "../../chunks/notebook.js";
-//#region src/components/prolog-notebook/prolog-notebook.ts
-var t = class extends e {
-	connectedCallback() {
-		this.hasAttribute("language") || this.setAttribute("language", "prolog"), super.connectedCallback();
-	}
-};
-customElements.get("tp-prolog-notebook") || customElements.define("tp-prolog-notebook", t);
-//#endregion
-export { t as TpPrologNotebook };
-
+import{t as e}from"../../chunks/notebook2.js";var t=class extends e{connectedCallback(){this.hasAttribute(`language`)||this.setAttribute(`language`,`prolog`),super.connectedCallback()}};customElements.get(`tp-prolog-notebook`)||customElements.define(`tp-prolog-notebook`,t);export{t as TpPrologNotebook};
 //# sourceMappingURL=prolog-notebook.js.map

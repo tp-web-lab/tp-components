@@ -49,7 +49,7 @@
     {
       "name": "--tp-switcher-threshold",
       "default": "30rem",
-      "description": "Default switch threshold."
+      "description": "Container width below which items switch from a shared row to separate rows."
     }
   ],
   "dependencies": [

@@ -407,6 +407,29 @@ CSS properties
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -451,7 +474,7 @@ All tp-components used by `<tp-mastermind>` are loaded automatically by this com
 -->
 <!--
 @tp-dependency tp-dropdown
-@summary Displays an anchored dropdown menu.
+@summary Dropdown menu component.
 -->
 <!--
 @tp-dependency tp-icon-button
@@ -460,7 +483,7 @@ All tp-components used by `<tp-mastermind>` are loaded automatically by this com
 
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
 - [`<tp-chronometer>`](../chronometer/index.md) : Chronometer component with play, pause and stop controls.
-- [`<tp-dropdown>`](../dropdown/index.md) : Displays an anchored dropdown menu.
+- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
 - [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
 
 ### External

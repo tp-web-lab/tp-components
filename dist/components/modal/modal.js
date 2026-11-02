@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/modal.js";
-export { e as TpModal };
+import{t as e}from"../../chunks/modal2.js";export{e as TpModal};

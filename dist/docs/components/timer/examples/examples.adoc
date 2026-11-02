@@ -17,6 +17,10 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ======
 [tp-checkbox-list%value,id="attributes-booleans",label="Boolean attributes",label-position="top",orientation="horizontal"]
 ====
+* manual
+
+* no-controls
+
 * silent
 ====
 

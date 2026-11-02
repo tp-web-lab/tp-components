@@ -4,23 +4,23 @@
  */
 import { TpBase } from "../base/base.js";
 /**
- * @summary API documentation summary.
+ * @summary Displays SVG icons from inline markup, a URL or an icon library, with sizing, color, transforms and fallbacks.
  * @tagname tp-icon
- * @attr {string} name = "" - Attribute `name`.
- * @attr {string} library = "tp" - Attribute `library`.
- * @attr {string} src = "" - Attribute `src`.
- * @attr {string} size = "1em" - Attribute `size`.
- * @attr {string} color = "" - Attribute `color`.
- * @attr {number} scale = 1 - Attribute `scale`.
- * @attr {string} rotate = "0deg" - Attribute `rotate`.
- * @attr {boolean} flip-h = false - Attribute `flip-h`.
- * @attr {boolean} flip-v = false - Attribute `flip-v`.
- * @attr {boolean} spin = false - Attribute `spin`.
- * @attr {string} fallback = "" - Attribute `fallback`.
- * @attr {string} fallback-icon = "" - Attribute `fallback-icon`.
- * @cssprop [--tp-icon-size=1em] CSS custom property.
+ * @attr {string} name = "" - Icon identifier in the selected library, for example heart or settings. Used when no inline SVG or successfully loaded src is available.
+ * @attr {string} library = "tp" - Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters and components. Custom registered libraries are also accepted.
+ * @attr {string} src = "" - URL of an SVG file to load. Relative URLs resolve against the containing source document when available, otherwise the page URL. Inline SVG takes precedence; a failed load falls back to name, then the fallback settings.
+ * @attr {string} size = "1em" - Base width and height as a CSS length, for example 24px, 2rem or 1.5em. The scale factor multiplies both dimensions; 1em follows the surrounding font size.
+ * @attr {string} color = "" - CSS color applied to the SVG and its colorizable fills and strokes, for example red, #2563eb or var(--brand-color). Empty inherits the surrounding text color; explicit fixed SVG colors are preserved.
+ * @attr {number} scale = 1 - Positive numeric multiplier for size, for example 0.5 to halve it or 2 to double it. Zero, negative and invalid values use 1. Changes the space occupied by the icon.
+ * @attr {string} rotate = "0deg" - Rotation angle: a number is interpreted in degrees; deg, rad and turn units are also accepted. Negative values rotate in the opposite direction. Invalid values use 0deg; spin overrides this fixed rotation.
+ * @attr {boolean} flip-h = false - Mirrors the icon horizontally when present. Remove the attribute to restore its orientation; writing false still enables it.
+ * @attr {boolean} flip-v = false - Mirrors the icon vertically when present. Can be combined with flip-h and rotate; writing false still enables it.
+ * @attr {boolean} spin = false - Continuously rotates the SVG once per second when present, overriding rotate. Respects the reduced-motion preference. Remove the attribute to stop; writing false still enables it.
+ * @attr {string} fallback = "" - Plain text displayed only when no SVG can be resolved, including fallback-icon. For example, use ? for an unavailable icon. Empty leaves the reserved icon area blank.
+ * @attr {string} fallback-icon = "" - Backup icon identifier used when inline SVG, src and name provide no icon. Looked up in the selected library, then in tp; if unavailable, fallback text is used.
  * @example
- * <tp-icon></tp-icon>
+ * <tp-icon name="heart" size="3rem" aria-label="Heart"></tp-icon>
+ * @cssprop [--tp-icon-size=1em] Width and height of the rendered icon; assigned internally from size multiplied by scale.
  */
 export declare class TpIcon extends TpBase {
     /**
@@ -38,13 +38,14 @@ export declare class TpIcon extends TpBase {
      * @internal
      */
     private requestId;
+    private readonly deferredVisibility;
     /**
      * @summary Declares observed attributes.
      * @internal
      */
     static get observedAttributes(): string[];
     /**
-     * @summary API documentation summary.
+     * @summary Icon identifier in the selected library, for example heart or settings. Used when no inline SVG or successfully loaded src is available.
      * @attr name
      */
     get name(): string;
@@ -54,7 +55,7 @@ export declare class TpIcon extends TpBase {
      */
     set name(value: string);
     /**
-     * @summary API documentation summary.
+     * @summary Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters and components. Custom registered libraries are also accepted.
      * @attr library
      * @default tp
      */
@@ -65,7 +66,7 @@ export declare class TpIcon extends TpBase {
      */
     set library(value: string);
     /**
-     * @summary API documentation summary.
+     * @summary URL of an SVG file to load. Relative URLs resolve against the containing source document when available, otherwise the page URL. Inline SVG takes precedence; a failed load falls back to name, then the fallback settings.
      * @attr src
      */
     get src(): string;
@@ -75,7 +76,7 @@ export declare class TpIcon extends TpBase {
      */
     set src(value: string);
     /**
-     * @summary API documentation summary.
+     * @summary Base width and height as a CSS length, for example 24px, 2rem or 1.5em. The scale factor multiplies both dimensions; 1em follows the surrounding font size.
      * @attr size
      * @default 1em
      */
@@ -86,7 +87,7 @@ export declare class TpIcon extends TpBase {
      */
     set size(value: string);
     /**
-     * @summary API documentation summary.
+     * @summary CSS color applied to the SVG and its colorizable fills and strokes, for example red, #2563eb or var(--brand-color). Empty inherits the surrounding text color; explicit fixed SVG colors are preserved.
      * @attr color
      */
     get color(): string;
@@ -96,7 +97,7 @@ export declare class TpIcon extends TpBase {
      */
     set color(value: string);
     /**
-     * @summary API documentation summary.
+     * @summary Positive numeric multiplier for size, for example 0.5 to halve it or 2 to double it. Zero, negative and invalid values use 1. Changes the space occupied by the icon.
      * @attr scale
      * @default 1
      */
@@ -107,7 +108,7 @@ export declare class TpIcon extends TpBase {
      */
     set scale(value: number);
     /**
-     * @summary API documentation summary.
+     * @summary Rotation angle: a number is interpreted in degrees; deg, rad and turn units are also accepted. Negative values rotate in the opposite direction. Invalid values use 0deg; spin overrides this fixed rotation.
      * @attr rotate
      * @default 0deg
      */
@@ -118,7 +119,7 @@ export declare class TpIcon extends TpBase {
      */
     set rotate(value: string);
     /**
-     * @summary API documentation summary.
+     * @summary Mirrors the icon horizontally when present. Remove the attribute to restore its orientation; writing false still enables it.
      * @attr flip-h
      */
     get flipH(): boolean;
@@ -128,7 +129,7 @@ export declare class TpIcon extends TpBase {
      */
     set flipH(value: boolean);
     /**
-     * @summary API documentation summary.
+     * @summary Mirrors the icon vertically when present. Can be combined with flip-h and rotate; writing false still enables it.
      * @attr flip-v
      */
     get flipV(): boolean;
@@ -138,7 +139,7 @@ export declare class TpIcon extends TpBase {
      */
     set flipV(value: boolean);
     /**
-     * @summary API documentation summary.
+     * @summary Continuously rotates the SVG once per second when present, overriding rotate. Respects the reduced-motion preference. Remove the attribute to stop; writing false still enables it.
      * @attr spin
      */
     get spin(): boolean;
@@ -148,7 +149,7 @@ export declare class TpIcon extends TpBase {
      */
     set spin(value: boolean);
     /**
-     * @summary API documentation summary.
+     * @summary Plain text displayed only when no SVG can be resolved, including fallback-icon. For example, use ? for an unavailable icon. Empty leaves the reserved icon area blank.
      * @attr fallback
      */
     get fallback(): string;
@@ -158,7 +159,7 @@ export declare class TpIcon extends TpBase {
      */
     set fallback(value: string);
     /**
-     * @summary API documentation summary.
+     * @summary Backup icon identifier used when inline SVG, src and name provide no icon. Looked up in the selected library, then in tp; if unavailable, fallback text is used.
      * @attr fallback-icon
      */
     get fallbackIcon(): string;

@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/sidebar.js";
-export { e as TpSidebar };
+import{t as e}from"../../chunks/sidebar2.js";export{e as TpSidebar};

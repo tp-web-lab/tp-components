@@ -12,41 +12,41 @@
   "attributes": [],
   "methods": [
     {
-      "name": "addEdge(source: string, target: string, type = TP_ANALOG_WIRE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = 'none', routing: TpGraphEdgeRouting = 'straight'): TpGraphEdge",
+      "name": "addEdge(source: string, target: string, type = TP_ANALOG_WIRE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = \"none\", routing: TpGraphEdgeRouting = \"straight\"): TpGraphEdge",
       "inherited": false,
-      "description": "Adds edge."
+      "description": "Adds a non-directional wire between distinct existing component IDs using the requested ports and routing; returns its edge record. Arrows, self-links and unsupported wire types throw."
     },
     {
       "name": "addNode(type: string, point: TpGraphPoint, nodeLabel?: string): TpGraphNode",
       "inherited": false,
-      "description": "Adds node."
+      "description": "Adds a supported analog component at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError."
     },
     {
       "name": "rotateSelected(): void",
       "inherited": false,
-      "description": "Rotate selected."
+      "description": "Rotates the selected orientable component 90 degrees clockwise and rotates its connected ports. Does nothing when no eligible component is selected."
     },
     {
       "name": "setGraph(graph: TpGraphDocument): void",
       "inherited": false,
-      "description": "Sets graph."
+      "description": "Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph."
     },
     {
       "name": "simulate(duration?: number, step?: number): TpAnalogSimulation",
       "inherited": false,
-      "description": "Simulate."
+      "description": "Runs transient analysis with positive duration and time step in seconds (defaults: 0.02 and 0.0002), refreshes the graph and emits tp-analog-simulate. Returns sampled results; invalid circuits or timings throw."
     },
     {
       "name": "toggleSwitch(): void",
       "inherited": false,
-      "description": "Toggles switch."
+      "description": "Toggles the selected analog switch between open and closed; does nothing when the selection is not a switch."
     }
   ],
   "events": [
     {
       "name": "tp-analog-simulate",
-      "description": "Emitted when analog simulate occurs.",
-      "detail": "unknown"
+      "description": "Emitted after transient simulation completes and updates the graph. samples contains time/value records keyed by measurement label or probe label/ID; time, duration and step are in seconds, with voltage in volts and current in amperes.",
+      "detail": "{ samples: readonly TpAnalogSample[]; duration: number; step: number }"
     }
   ],
   "cssproperties": [],

@@ -231607,7 +231607,7 @@ async function resolveMarkdownIncludes(markdown, currentUrl, depth = 0) {
 		const includePath = include.path;
 		if (index === void 0 || includePath === void 0 || includePath === "") continue;
 		parts.push(markdown.slice(lastIndex, index));
-		parts.push(applyIncludePrefix(await renderInclude(includePath, currentUrl, depth, include.mode), prefix));
+		parts.push(applyIncludePrefix(await renderInclude(includePath, currentUrl, depth, include.mode, include.lazy), prefix));
 		lastIndex = index + match[0].length;
 	}
 	parts.push(markdown.slice(lastIndex));
@@ -231623,9 +231623,10 @@ function applyIncludePrefix(content, prefix) {
 	}
 	return content.split("\n").map((line) => `${prefix}${line}`).join("\n");
 }
-async function renderInclude(includePath, currentUrl, depth, mode) {
+async function renderInclude(includePath, currentUrl, depth, mode, lazy = false) {
 	const includeUrl = new URL(includePath, currentUrl);
 	const pathname = includeUrl.pathname.toLowerCase();
+	if (lazy && mode !== "raw" && pathname.endsWith(".md")) return `<tp-markdown src="${escapeHtml(includeUrl.href)}" data-tp-defer-visibility data-tp-include-depth="${depth + 1}"></tp-markdown>`;
 	if (mode === "raw") {
 		const response = await fetch(includeUrl.href, { cache: "no-store" });
 		if (!response.ok) return `Unable to include file: ${includeUrl.pathname} (${String(response.status)})`;
@@ -231642,12 +231643,16 @@ async function renderInclude(includePath, currentUrl, depth, mode) {
 	return `<pre><code>${escapeHtml(content)}</code></pre>`;
 }
 function parseMarkdownInclude(value) {
+	const lazy = /(?:^|\s)loading\s*=\s*["']?lazy["']?(?=\s|$)/i;
+	const deferred = lazy.test(value);
+	value = value.replace(lazy, "");
 	const modePattern = /(?:^|\s)mode\s*=\s*(?:"(auto|raw)"|'(auto|raw)'|(auto|raw))(?=\s|$)/i;
 	const match = value.match(modePattern);
 	const selectedMode = (match?.[1] ?? match?.[2] ?? match?.[3] ?? "auto").toLowerCase();
 	return {
 		path: (match === null ? value : value.replace(modePattern, "")).trim(),
-		mode: selectedMode === "raw" ? "raw" : "auto"
+		mode: selectedMode === "raw" ? "raw" : "auto",
+		lazy: deferred
 	};
 }
 //#endregion

@@ -12,46 +12,46 @@
   "attributes": [],
   "methods": [
     {
-      "name": "addEdge(source: string, target: string, type = TP_DFA_TRANSITION, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = 'forward'): TpGraphEdge",
+      "name": "addEdge(source: string, target: string, type = TP_DFA_TRANSITION, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = \"forward\"): TpGraphEdge",
       "inherited": false,
-      "description": "Adds edge."
+      "description": "Adds a forward transition between existing state IDs, using optional connection ports; returns the edge record. Unsupported types, directions or endpoints throw."
     },
     {
       "name": "addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode",
       "inherited": false,
-      "description": "Adds node."
+      "description": "Adds a DFA state or comment at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError."
     },
     {
       "name": "readNext(duration = 300): Promise<boolean>",
       "inherited": false,
-      "description": "Reads next."
+      "description": "Consumes and animates one input symbol using duration milliseconds. Resolves to true if a symbol was processed, not whether the word is accepted; false means no further step is possible."
     },
     {
       "name": "reset(word = this.inputWord): void",
       "inherited": false,
-      "description": "Reset."
+      "description": "Restarts reading word at the initial state and clears rejection and transition highlights; omitted word reuses the current input. Emits tp-dfa-reset."
     },
     {
       "name": "run(duration = 600): Promise<boolean>",
       "inherited": false,
-      "description": "Run."
+      "description": "Processes remaining symbols with duration milliseconds per step, stopping at the end or rejection. Resolves to whether the complete word is accepted; does not reset the input first."
     },
     {
       "name": "setGraph(graph: TpGraphDocument): void",
       "inherited": false,
-      "description": "Sets graph."
+      "description": "Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph."
     }
   ],
   "events": [
     {
       "name": "tp-dfa-reset",
-      "description": "Fired after the input and active state are reset.",
-      "detail": "{ word: unknown; stateId: unknown; graph: unknown }"
+      "description": "Emitted after the input word, consumed-symbol count and active state are reset. stateId is null when no initial state is available; graph is the resulting snapshot.",
+      "detail": "{ word: string; stateId: string | null; graph: TpGraphDocument }"
     },
     {
       "name": "tp-dfa-step",
-      "description": "Fired after one input symbol is consumed.",
-      "detail": "{ symbol: unknown; position: unknown; stateId: unknown; accepted: unknown; rejected: unknown; graph: unknown }"
+      "description": "Emitted after consuming one symbol and completing its transition animation. position is the number of consumed symbols; accepted and rejected describe the resulting state.",
+      "detail": "{ symbol: string; position: number; stateId: string | null; accepted: boolean; rejected: boolean; graph: TpGraphDocument }"
     }
   ],
   "cssproperties": [],

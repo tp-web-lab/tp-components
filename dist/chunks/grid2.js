@@ -1,0 +1,2 @@
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M19 2h-2v3h-4V2h-2v3H7V2H5v3H2v2h3v4H2v2h3v4H2v2h3v3h2v-3h4v3h2v-3h4v3h2v-3h3v-2h-3v-4h3v-2h-3V7h3V5h-3zm-8 9H7V7h4zm0 2v4H7v-4zm2 0h4v4h-4zm0-2V7h4v4z"/></svg>`;export{t as n,n as t};
+//# sourceMappingURL=grid2.js.map

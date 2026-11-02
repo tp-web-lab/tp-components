@@ -61,17 +61,17 @@
   "cssproperties": [
     {
       "name": "--tp-toc-background",
-      "default": "var(--tp-brand-fill-softer)",
+      "default": "color-mix(in srgb, Canvas 94%, CanvasText 6%)",
       "description": "Panel background color."
     },
     {
       "name": "--tp-toc-border-color",
-      "default": "var(--tp-brand-stroke-soft)",
+      "default": "color-mix(in srgb, CanvasText 12%, transparent)",
       "description": "Panel border color."
     },
     {
       "name": "--tp-toc-color",
-      "default": "var(--tp-brand-text-on-soft)",
+      "default": "inherit",
       "description": "Panel text color."
     }
   ],

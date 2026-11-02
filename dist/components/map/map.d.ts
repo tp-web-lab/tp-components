@@ -1,32 +1,3 @@
-/** @module components/map */
-/**
- * @tp-dependency tp-base
- * @summary Shared base class for tp-* components.
- */
-/**
- * @tp-dependency tp-button-group
- * @summary Button group component for organizing multiple buttons.
- */
-/**
- * @tp-dependency tp-callout
- * @summary Callout component for highlighted contextual content.
- */
-/**
- * @tp-dependency tp-icon-button
- * @summary Accessible icon button component.
- */
-/**
- * @tp-dependency tp-xy-plot
- * @summary XY graph rendering component.
- */
-/**
- * @credit Leaflet https://leafletjs.com/
- * @summary Interactive geographic maps.
- */
-/**
- * @credit OpenStreetMap https://www.openstreetmap.org/copyright
- * @summary Map tiles and geographic data; attribution required.
- */
 import { TpBase } from "../base/base.js";
 import "../button-group/button-group.js";
 import "../icon-button/icon-button.js";
@@ -44,8 +15,6 @@ import "../xy-plot/xy-plot.js";
  * @attr {boolean} fit-content = false - Fits markers and GPX geometry together; takes precedence over fit-markers.
  * @attr {string} src = "" - URL of a GPX file containing tracks, routes or waypoints.
  * @attr {boolean} elevation-profile = false - Shows GPX altitude in metres against cumulative distance in kilometres below the map.
- * @cssprop [--tp-map-height=24rem] Height of the map viewport.
- * @cssprop [--tp-map-width=100%] Width of the map viewport, limited to the available container width.
  * @accessibility Uses named tp-icon-button controls and a keyboard-focusable map region; preserves visible OpenStreetMap attribution.
  * @accessibilityresponsibility Provide meaningful location text alongside the map; do not rely on geography or a marker alone.
  * @keyboard {Arrow keys} Pans the focused map.
@@ -54,6 +23,8 @@ import "../xy-plot/xy-plot.js";
  * @keyboard {Escape} Closes an open popup.
  * @example
  * <tp-map lat="48.3904" lon="-4.4861" zoom="13" title="Brest, Brittany, France" marker></tp-map>
+ * @cssprop [--tp-map-height=24rem] Height of the map viewport, with a minimum of 10rem.
+ * @cssprop [--tp-map-width=100%] Preferred width of the map viewport and elevation profile, limited by the container width.
  */
 export declare class TpMap extends TpBase {
     /** Current Leaflet map instance, removed on disconnection. */

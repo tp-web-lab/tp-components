@@ -1,6 +1,5 @@
 import "../icon-button/icon-button.js";
 import "../divider/divider.js";
-import "../accordion/accordion.js";
 import "../callout/callout.js";
 import "../theme/theme.js";
 import { TpBase } from "../base/base.js";
@@ -27,7 +26,7 @@ export { evaluateGeometry, geometrySourceLabel, MEDIATRIX_CONSTRUCTION, parseGeo
  * @eventdetail tp-geometry-change { source: string; undefined: string[] }
  * @event tp-geometry-error Fired when a file cannot be loaded or source cannot be parsed; detail contains message.
  * @eventdetail tp-geometry-error { message: string }
- * @accessibility Uses library buttons, fields, an accordion and a code editor with native keyboard controls.
+ * @accessibility Uses library buttons, fields and a code editor with native keyboard controls.
  * @accessibility Provides an object list as an alternative to pointer selection and announces undefined constructions.
  * @accessibilityresponsibility Provide a textual explanation of the figure when its visual relationships are needed to understand the lesson.
  * @keyboard {Arrow keys} Moves the selected point or measurement label, or pans in Pan view; Shift reduces the step.
@@ -52,6 +51,7 @@ export declare class TpGraphGeometry extends TpBase {
     private sourceSaveTarget;
     private sourceFileBusy;
     private objectListMarkup;
+    private objectsPanelVisible;
     private tool;
     private polygonDraft;
     private pending;
@@ -119,6 +119,8 @@ export declare class TpGraphGeometry extends TpBase {
     private chooseTool;
     private shortcut;
     private toggleSourceView;
+    /** Updates visibility in place so editor text, selection and drawing survive switching. */
+    private syncPanelViews;
     private toggleZoom;
     private restoreBoard;
     private render;

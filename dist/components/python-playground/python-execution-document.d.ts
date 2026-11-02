@@ -2,8 +2,8 @@
  * @module components/python-playground/python-execution-document
  * @summary Python execution document builder.
  */
-import type { TpExecutionDocument } from '../playground/playground.js';
-import type { TpProject } from '../playground/project.js';
+import type { TpExecutionDocument } from "../playground/playground.js";
+import type { TpProject } from "../playground/project.js";
 /** Options for building a Python execution document. */
 export interface BuildPythonExecutionDocumentOptions {
     entry?: string;

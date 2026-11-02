@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "anchor",
-      "description": "Sélecteur CSS de l’élément servant d’ancrage au clic droit.",
+      "description": "CSS selector of the element whose context-menu action opens this menu.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -21,7 +21,7 @@
     },
     {
       "name": "open",
-      "description": "Ouvre ou ferme le menu.",
+      "description": "Shows the context menu when present; removing it closes the menu.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -33,23 +33,23 @@
     {
       "name": "closeAll(): void",
       "inherited": false,
-      "description": "Réinitialise l’état d’ouverture des sous-menus."
+      "description": "Collapses all expanded submenus without closing the context-menu container."
     },
     {
       "name": "hide(): void",
       "inherited": false,
-      "description": "Ferme explicitement le menu."
+      "description": "Closes the context menu by clearing its open state."
     },
     {
       "name": "showAt(x: number, y: number): void",
       "inherited": false,
-      "description": "Ouvre explicitement le menu à l’écran."
+      "description": "Opens the context menu at viewport coordinates x and y in CSS pixels."
     }
   ],
   "events": [
     {
       "name": "tp-contextmenu-select",
-      "description": "Émis quand un item terminal portant `data-action` est sélectionné.",
+      "description": "Emitted when a terminal menu item with data-action is activated. The detail contains its action identifier, li element and visible label.",
       "detail": "{ action: string; item: HTMLLIElement; label: string }"
     }
   ],

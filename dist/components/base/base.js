@@ -1,2 +1,1 @@
-import { n as e, t } from "../../chunks/base.js";
-export { t as TpBase, e as ensureTpBaseStyles };
+import{t as e}from"../../chunks/base-styles.js";import{t}from"../../chunks/base.js";export{t as TpBase,e as ensureTpBaseStyles};

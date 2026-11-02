@@ -3,10 +3,6 @@
  * @summary AsciiDoc slide presentation shell.
  */
 /**
- * @tp-dependency tp-markup-multi-pages
- * @summary Multi-page documentation with support for multiple markup languages.
- */
-/**
  * @tp-dependency tp-markup-multi-slides
  * @summary presents multi-format pages as a responsive slide deck.
  */

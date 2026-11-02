@@ -1,38 +1,4 @@
-import { E as e, f as t, n, t as r } from "../../chunks/playground-build-utils.js";
-import { PROLOG_DOM_MODULE_SOURCE as i, flattenLocalPrologModules as a, getLocalPrologModuleNames as o, usesPrologDomModule as s } from "./prolog-source.js";
-//#region src/components/prolog-playground/prolog-test-document.ts
-var c = "https://esm.sh/scryer";
-function l(n, r) {
-	return typeof n.test == "string" && n.test !== "" ? t(n, n.test) : e(n, {
-		entry: r,
-		priorityPaths: ["/test.pl", "/program.test.pl"],
-		extensions: [
-			".test.pl",
-			".tests.pl",
-			".spec.pl"
-		],
-		fallbackToFirstFile: !1,
-		ignoreProjectEntry: !0
-	});
-}
-async function u(u, d = {}) {
-	let f = l(u, d.defaultTest);
-	if (f === void 0) throw Error("No Prolog test file found.");
-	let p = e(u, {
-		entry: u.entry,
-		priorityPaths: ["/program.pl", "/main.pl"],
-		extensions: [".pl"],
-		fallbackToFirstFile: !1
-	});
-	if (p === void 0) throw Error("No Prolog entry file found.");
-	let m = t(u, "/index.html"), h = u.files.filter((e) => e.path.endsWith(".pl") && e.path !== f.path && e.path !== u.query), g = [...h.filter((e) => e.path !== p.path), p], _ = o(h), v = h.some((e) => s(e.content)), y = JSON.stringify([...v ? [{
-		path: "/library/dom.pl",
-		content: i
-	}] : [], ...g.map((e) => ({
-		path: e.path,
-		content: a(e.content, _)
-	}))]), b = JSON.stringify(f.content);
-	return { html: `
+import{n as e}from"../../chunks/tool-loading.js";import{E as t,f as n,n as r,t as i}from"../../chunks/playground-build-utils.js";import{PROLOG_DOM_MODULE_SOURCE as a,flattenLocalPrologModules as o,getLocalPrologModuleNames as s,usesPrologDomModule as c}from"./prolog-source.js";var l=`https://esm.sh/scryer`;function u(e,r){return typeof e.test==`string`&&e.test!==``?n(e,e.test):t(e,{entry:r,priorityPaths:[`/test.pl`,`/program.test.pl`],extensions:[`.test.pl`,`.tests.pl`,`.spec.pl`],fallbackToFirstFile:!1,ignoreProjectEntry:!0})}async function d(d,f={}){let p=u(d,f.defaultTest);if(p===void 0)throw Error(`No Prolog test file found.`);let m=t(d,{entry:d.entry,priorityPaths:[`/program.pl`,`/main.pl`],extensions:[`.pl`],fallbackToFirstFile:!1});if(m===void 0)throw Error(`No Prolog entry file found.`);let h=n(d,`/index.html`),g=d.files.filter(e=>e.path.endsWith(`.pl`)&&e.path!==p.path&&e.path!==d.query),_=[...g.filter(e=>e.path!==m.path),m],v=s(g),y=g.some(e=>c(e.content)),b=JSON.stringify([...y?[{path:`/library/dom.pl`,content:a}]:[],..._.map(e=>({path:e.path,content:o(e.content,v)}))]),x=JSON.stringify(p.content);return{html:`
 <!doctype html>
 <html>
 <head>
@@ -56,13 +22,13 @@ async function u(u, d = {}) {
   </style>
 </head>
 <body>
-  ${m?.content ?? "<main id=\"prolog-test-output\"></main>"}
+  ${h?.content??`<main id="prolog-test-output"></main>`}
+  ${i()}
   ${r()}
-  ${n()}
   <script type="module">
-    const sources = ${y};
-    const testSource = ${b};
-    const scryerModuleUrl = ${JSON.stringify(c)};
+    const sources = ${b};
+    const testSource = ${x};
+    const scryerModuleUrl = ${JSON.stringify(l)};
     const scryerInitWarning =
       'using deprecated parameters for the initialization function; pass a single object instead';
 
@@ -80,6 +46,7 @@ async function u(u, d = {}) {
       try {
         const scryer = await import(scryerModuleUrl);
         await scryer.init();
+        ${e(`scryer`,`Scryer Prolog`)}
         return scryer;
       } finally {
         console.warn = originalWarn;
@@ -413,9 +380,5 @@ async function u(u, d = {}) {
   <\/script>
 </body>
 </html>
-` };
-}
-//#endregion
-export { u as buildPrologTestDocument };
-
+`}}export{d as buildPrologTestDocument};
 //# sourceMappingURL=prolog-test-document.js.map

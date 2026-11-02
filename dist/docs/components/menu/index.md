@@ -28,7 +28,8 @@ The custom `<tp-menu>` element implements the <tp-icon name="menu" library="comp
 | Key or gesture | Result |
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Focused controls | Use each control’s standard keyboard interaction.  |
+| <kbd>←</kbd> / <kbd>→</kbd> in a horizontal menu, <kbd>↑</kbd> / <kbd>↓</kbd> in a vertical menu | Focus the preceding or following item. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused action or link, or open or close its submenu. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
@@ -105,6 +106,29 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_menu_menu.TpMenu.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

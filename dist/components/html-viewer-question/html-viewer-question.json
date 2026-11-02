@@ -15,79 +15,28 @@
   "cssproperties": [],
   "dependencies": [
     {
-      "name": "tp-base",
-      "summary": "Shared base class for tp-* components."
-    },
-    {
-      "name": "tp-button",
-      "summary": "Button component that supports native button and link rendering."
-    },
-    {
-      "name": "tp-code-editor",
-      "summary": "CodeMirror-based code editor component."
-    },
-    {
       "name": "tp-console",
       "summary": "Displays structured console output."
-    },
-    {
-      "name": "tp-drawer",
-      "summary": "Displays a sliding drawer panel."
-    },
-    {
-      "name": "tp-dropdown",
-      "summary": "Displays an anchored dropdown menu."
-    },
-    {
-      "name": "tp-file-tree",
-      "summary": "Displays an interactive file and folder tree."
-    },
-    {
-      "name": "tp-filesystem",
-      "summary": "In-memory file system component."
     },
     {
       "name": "tp-html-viewer",
       "summary": "Interactive HTML viewer with editable source, live rendering, and DOM inspection."
     },
     {
-      "name": "tp-icon",
-      "summary": "SVG icon component with inline, URL, and registry sources."
-    },
-    {
-      "name": "tp-icon-button",
-      "summary": "Accessible icon button component."
-    },
-    {
       "name": "tp-iframe",
       "summary": "Controlled iframe component."
     },
     {
-      "name": "tp-menu",
-      "summary": "Accessible menu component."
-    },
-    {
       "name": "tp-question",
       "summary": "Base description-list container for question components."
-    },
-    {
-      "name": "tp-splitter",
-      "summary": "Splitter component with two resizable panels."
-    },
-    {
-      "name": "tp-switcher",
-      "summary": "Switches between horizontal and vertical layouts based on available space."
-    },
-    {
-      "name": "tp-tabs",
-      "summary": "Accessible tabs component with keyboard and reorder support."
-    },
-    {
-      "name": "tp-toolbar",
-      "summary": "Sticky toolbar with start / center / end sections,"
     }
   ],
   "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    },
     {
       "name": "es-module-lexer",
       "url": "https://github.com/guybedford/es-module-lexer",
@@ -107,22 +56,12 @@
       "name": "Mocha",
       "url": "https://mochajs.org/",
       "summary": "Browser test execution."
-    },
-    {
-      "name": "TypeScript",
-      "url": "https://www.typescriptlang.org/",
-      "summary": "TypeScript transpilation and language services."
-    },
-    {
-      "name": "Zod",
-      "url": "https://zod.dev/",
-      "summary": "Runtime schema validation."
     }
   ],
   "userHelp": {
     "displayName": "HTML viewer question",
     "introduction": "The custom `<tp-html-viewer-question>` element implements the markup exercise functionality: checks rendered HTML using a viewer and external JavaScript DOM tests.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Question title | Expand or collapse the exercise without losing code. |\n| Input / Output | Show or hide the answer form or feedback panels. |\n| Code / Render | Show or hide editable markup and its output. |\n| Rendered HTML / Generated HTML / Tree, when available | Inspect the preview, generated HTML or parser structure. |\n| Editor toolbar | Show or hide the source editor tools. |\n| Run in the embedded toolbar | Refresh the preview from the edited markup without submitting. |\n| Embedded Reset | Restore the original project. |\n| Submit response | Run the external tests against the current code, including on repeated unchanged submissions. |\n| Reset response | Restore the original code and cancel or clear the current report. |\n| Feedback / Solution | Read test messages or the author's solution, available before submission. |\n| Console controls | Copy or clear execution messages. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between question and programming controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused action or expand/collapse the title. |\n| Arrow keys in Output tabs | Navigate Feedback and Solution. |\n| Typing in the editor | Modify source code using the embedded editor's editing behavior. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Question title | Expand or collapse the exercise without losing code. |\n| Input / Output | Show or hide the answer form or feedback panels. |\n| Code / Render | Show or hide editable markup and its output. |\n| Rendered HTML / Generated HTML / Tree, when available | Inspect the preview, generated HTML or parser structure. |\n| Editor toolbar | Show or hide the source editor tools. |\n| Run in the embedded toolbar | Refresh the preview from the edited markup without submitting. |\n| Embedded Reset | Restore the original project. |\n| Submit response | Run the external tests against the current code, including on repeated unchanged submissions. |\n| Reset response | Restore the original code and cancel or clear the current report. |\n| Feedback / Solution | Read test messages or the author's solution, available before submission. |\n| Console controls | Copy or clear execution messages. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between question and programming controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused action or expand/collapse the title. |\n| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Output tabs | Navigate Feedback and Solution. |\n| Typing in the editor | Modify source code using the embedded editor's editing behavior. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Enter / Space",

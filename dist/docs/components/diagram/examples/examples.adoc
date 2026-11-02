@@ -21,6 +21,13 @@ Combine the attributes on one preview. Controls start at the published defaults.
 
 [tp-stack]
 ======
+[tp-radio-list,data-setting="engine",label="engine",label-position="top",orientation="horizontal",value="2"]
+====
+* mermaid
+
+* pele
+====
+
 [tp-radio-list,data-setting="src",label="src",label-position="top",orientation="horizontal",value="1"]
 ====
 * Default
@@ -80,210 +87,609 @@ File-loading attributes offer only Default, file1, file2 and file-unknown. The t
 
 .Architecture diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/architecture.mmd",label="Architecture diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/architecture.mmd",label="Architecture diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/architecture.mmd",label="Architecture diagram",engine="pele"]
 ====
 ====
 ======
 
 .Block diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/block.mmd",label="Block diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/block.mmd",label="Block diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/block.mmd",label="Block diagram",engine="pele"]
 ====
 ====
 ======
 
 .C4 diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/c4.mmd",label="C4 diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/c4.mmd",label="C4 diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/c4.mmd",label="C4 diagram",engine="pele"]
 ====
 ====
 ======
 
 .Class diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/class.mmd",label="Class diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/class.mmd",label="Class diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/class.mmd",label="Class diagram",engine="pele"]
 ====
 ====
 ======
 
 .Cynefin framework
 ======
-[tp-diagram,src="/docs/components/diagram/examples/cynefin.mmd",label="Cynefin framework"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/cynefin.mmd",label="Cynefin framework",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/cynefin.mmd",label="Cynefin framework",engine="pele"]
 ====
 ====
 ======
 
 .Entity relationship diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/entity-relationship.mmd",label="Entity relationship diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/entity-relationship.mmd",label="Entity relationship diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/entity-relationship.mmd",label="Entity relationship diagram",engine="pele"]
 ====
 ====
 ======
 
 .Event modeling diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/event-modeling.mmd",label="Event modeling diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/event-modeling.mmd",label="Event modeling diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/event-modeling.mmd",label="Event modeling diagram",engine="pele"]
 ====
 ====
 ======
 
 .Flowchart
 ======
-[tp-diagram,src="/docs/components/diagram/examples/flowchart.mmd",label="Flowchart"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/flowchart.mmd",label="Flowchart",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/flowchart.mmd",label="Flowchart",engine="pele"]
 ====
 ====
 ======
 
 .Gantt diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/gantt.mmd",label="Gantt diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/gantt.mmd",label="Gantt diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/gantt.mmd",label="Gantt diagram",engine="pele"]
 ====
 ====
 ======
 
 .Git graph
 ======
-[tp-diagram,src="/docs/components/diagram/examples/git-graph.mmd",label="Git graph"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/git-graph.mmd",label="Git graph",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/git-graph.mmd",label="Git graph",engine="pele"]
 ====
 ====
 ======
 
 .Ishikawa diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/ishikawa.mmd",label="Ishikawa diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/ishikawa.mmd",label="Ishikawa diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/ishikawa.mmd",label="Ishikawa diagram",engine="pele"]
 ====
 ====
 ======
 
 .Kanban diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/kanban.mmd",label="Kanban diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/kanban.mmd",label="Kanban diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/kanban.mmd",label="Kanban diagram",engine="pele"]
 ====
 ====
 ======
 
 .Mind map
 ======
-[tp-diagram,src="/docs/components/diagram/examples/mindmap.mmd",label="Mind map"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/mindmap.mmd",label="Mind map",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/mindmap.mmd",label="Mind map",engine="pele"]
 ====
 ====
 ======
 
 .Packet diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/packet.mmd",label="Packet diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/packet.mmd",label="Packet diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/packet.mmd",label="Packet diagram",engine="pele"]
 ====
 ====
 ======
 
 .Pie chart
 ======
-[tp-diagram,src="/docs/components/diagram/examples/pie.mmd",label="Pie chart"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/pie.mmd",label="Pie chart",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/pie.mmd",label="Pie chart",engine="pele"]
 ====
 ====
 ======
 
 .Quadrant chart
 ======
-[tp-diagram,src="/docs/components/diagram/examples/quadrant.mmd",label="Quadrant chart"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/quadrant.mmd",label="Quadrant chart",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/quadrant.mmd",label="Quadrant chart",engine="pele"]
 ====
 ====
 ======
 
 .Radar chart
 ======
-[tp-diagram,src="/docs/components/diagram/examples/radar.mmd",label="Radar chart"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/radar.mmd",label="Radar chart",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/radar.mmd",label="Radar chart",engine="pele"]
 ====
 ====
 ======
 
 .Requirement diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/requirement.mmd",label="Requirement diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/requirement.mmd",label="Requirement diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/requirement.mmd",label="Requirement diagram",engine="pele"]
 ====
 ====
 ======
 
 .Sankey diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/sankey.mmd",label="Sankey diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/sankey.mmd",label="Sankey diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/sankey.mmd",label="Sankey diagram",engine="pele"]
 ====
 ====
 ======
 
 .Sequence diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/sequence.mmd",label="Sequence diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/sequence.mmd",label="Sequence diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/sequence.mmd",label="Sequence diagram",engine="pele"]
 ====
 ====
 ======
 
 .State diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/state.mmd",label="State diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/state.mmd",label="State diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/state.mmd",label="State diagram",engine="pele"]
 ====
 ====
 ======
 
 .Swimlanes diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/swimlanes.mmd",label="Swimlanes diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/swimlanes.mmd",label="Swimlanes diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/swimlanes.mmd",label="Swimlanes diagram",engine="pele"]
 ====
 ====
 ======
 
 .Timeline
 ======
-[tp-diagram,src="/docs/components/diagram/examples/timeline.mmd",label="Timeline"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/timeline.mmd",label="Timeline",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/timeline.mmd",label="Timeline",engine="pele"]
 ====
 ====
 ======
 
 .TreeView diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/tree-view.mmd",label="TreeView diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/tree-view.mmd",label="TreeView diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/tree-view.mmd",label="TreeView diagram",engine="pele"]
 ====
 ====
 ======
 
 .Treemap
 ======
-[tp-diagram,src="/docs/components/diagram/examples/treemap.mmd",label="Treemap"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/treemap.mmd",label="Treemap",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/treemap.mmd",label="Treemap",engine="pele"]
 ====
 ====
 ======
 
 .User journey
 ======
-[tp-diagram,src="/docs/components/diagram/examples/user-journey.mmd",label="User journey"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/user-journey.mmd",label="User journey",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/user-journey.mmd",label="User journey",engine="pele"]
 ====
 ====
 ======
 
 .Venn diagram
 ======
-[tp-diagram,src="/docs/components/diagram/examples/venn.mmd",label="Venn diagram"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/venn.mmd",label="Venn diagram",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/venn.mmd",label="Venn diagram",engine="pele"]
 ====
 ====
 ======
 
 .Wardley map
 ======
-[tp-diagram,src="/docs/components/diagram/examples/wardley.mmd",label="Wardley map"]
+[h6]
+====
+https://mermaid.ai[Mermaid]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/wardley.mmd",label="Wardley map",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/wardley.mmd",label="Wardley map",engine="pele"]
 ====
 ====
 ======
 
 .XY chart
 ======
-[tp-diagram,src="/docs/components/diagram/examples/xy-chart.mmd",label="XY chart"]
+[h6]
 ====
+https://mermaid.ai[Mermaid]
 ====
-======
 
-.ZenUML diagram
-======
-[tp-diagram,src="/docs/components/diagram/examples/zenuml.mmd",label="ZenUML diagram"]
+[tp-diagram,src="/docs/components/diagram/examples/xy-chart.mmd",label="XY chart",engine="mermaid"]
+====
+====
+
+[h6]
+====
+https://pele.run[Pele]
+====
+
+[tp-diagram,src="/docs/components/diagram/examples/xy-chart.mmd",label="XY chart",engine="pele"]
 ====
 ====
 ======

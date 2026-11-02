@@ -69,191 +69,191 @@
     {
       "name": "addEdge(source: string, target: string, type = \"edge\", sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = this.activeEdgeDirection, routing: TpGraphEdgeRouting = this.activeEdgeRouting): TpGraphEdge",
       "inherited": false,
-      "description": "Adds edge."
+      "description": "Connects existing source and target node IDs using the requested type, ports, direction and routing. Rejects invalid connections, records the change and returns a detached edge copy."
     },
     {
       "name": "addMeasurement(edgeId: string, position = 0.5, label?: string): TpGraphMeasurement",
       "inherited": false,
-      "description": "Adds measurement."
+      "description": "Adds a measurement marker to edgeId at a position clamped to 0..1 along the edge; returns its detached record. Throws for an unknown edge."
     },
     {
       "name": "addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode",
       "inherited": false,
-      "description": "Adds node."
+      "description": "Adds a node of type at graph coordinates point, snapped to the grid. Uses label or the palette default, records the change and returns a detached copy of the node."
     },
     {
       "name": "animateTransition(transition: TpGraphTransition): Promise<void>",
       "inherited": false,
-      "description": "Animate transition."
+      "description": "Applies node and edge patches to existing IDs, animates their appearance for transition.duration milliseconds (300 by default), then records the change. Resolves after that duration."
     },
     {
       "name": "copy(): boolean",
       "inherited": false,
-      "description": "Copy."
+      "description": "Copies the selected graph elements and connecting edges into the editor-local clipboard. Returns false when nothing is selected; does not use the system clipboard."
     },
     {
       "name": "cut(): boolean",
       "inherited": false,
-      "description": "Cut."
+      "description": "Copies the selection into the editor-local clipboard, then removes it and connected edges as an undoable change. Returns false when readonly or nothing is selected."
     },
     {
       "name": "exportJson(pretty = true): string",
       "inherited": false,
-      "description": "Exports json."
+      "description": "Returns the graph serialized as JSON; pretty uses two-space indentation, while false produces compact JSON."
     },
     {
       "name": "exportSvg(): string",
       "inherited": false,
-      "description": "Exports svg."
+      "description": "Returns a standalone SVG of the graph with resolved styles and content bounds; throws when the canvas is not ready."
     },
     {
       "name": "importJson(source: string): void",
       "inherited": false,
-      "description": "Imports json."
+      "description": "Parses and validates a JSON graph, replaces the current graph and emits tp-graph-import. Invalid JSON or graph data throws before replacement."
     },
     {
       "name": "moveMeasurement(id: string, position: number): void",
       "inherited": false,
-      "description": "Moves measurement."
+      "description": "Moves the marker identified by id to a relative edge position clamped to 0..1; throws when the marker is unknown."
     },
     {
       "name": "paste(): string | null",
       "inherited": false,
-      "description": "Paste."
+      "description": "Duplicates the editor-local clipboard with new IDs and an offset, then selects the copies. Returns the first pasted ID, or null when readonly or no clipboard content is available."
     },
     {
       "name": "reconnectEdge(edgeId: string, endpoint: \"source\" | \"target\", nodeId: string, port: TpGraphPort): TpGraphEdge",
       "inherited": false,
-      "description": "Reconnect edge."
+      "description": "Moves the source or target endpoint of edgeId to nodeId and port after connection validation; returns a detached copy of the updated edge."
     },
     {
       "name": "redo(): boolean",
       "inherited": false,
-      "description": "Redo."
+      "description": "Restores the next undone graph snapshot and returns true; returns false when redo history is empty."
     },
     {
       "name": "registerPalette(palette: TpGraphPalette): void",
       "inherited": false,
-      "description": "Registers palette."
+      "description": "Registers or replaces a shape palette by its ID and refreshes the palette UI. Requires a nonempty ID and at least one shape."
     },
     {
       "name": "registerSimulator(name: string, simulator: TpGraphSimulator): void",
       "inherited": false,
-      "description": "Registers simulator."
+      "description": "Registers or replaces the simulator function associated with name for subsequent step(name) calls."
     },
     {
       "name": "removeElement(id: string): void",
       "inherited": false,
-      "description": "Removes element."
+      "description": "Removes the node, edge or measurement identified by id; removing a node also removes its connected edges. Updates selection and records an undoable change."
     },
     {
       "name": "resetZoom(): void",
       "inherited": false,
-      "description": "Resets zoom."
+      "description": "Restores magnification to 1 (100%) without changing graph data."
     },
     {
       "name": "setCommentColor(id: string, color: TpGraphCommentColor): void",
       "inherited": false,
-      "description": "Sets comment color."
+      "description": "Changes the color of a comment node and records the change; throws for an unknown comment or unsupported color."
     },
     {
       "name": "setEdgeDirection(edgeId: string, direction: TpGraphEdgeDirection): void",
       "inherited": false,
-      "description": "Sets edge direction."
+      "description": "Changes an existing edge direction and the default for new edges; throws for an unknown edge or a direction unsupported by this editor."
     },
     {
       "name": "setEdgeOrthogonal(edgeId: string, elbows: 1 | 2 | 3, departure: \"horizontal\" | \"vertical\", turns: \"alternating\" | \"same\" = \"alternating\"): void",
       "inherited": false,
-      "description": "Sets edge orthogonal."
+      "description": "Uses orthogonal routing with 1, 2 or 3 elbows and a horizontal or vertical departure. The turns choice applies to two elbows; throws for an unknown edge."
     },
     {
       "name": "setEdgeRouting(edgeId: string, routing: TpGraphEdgeRouting): void",
       "inherited": false,
-      "description": "Sets edge routing."
+      "description": "Changes an existing edge routing mode and the default for new edges; throws for an unknown edge."
     },
     {
       "name": "setElementLabel(id: string, label: string): void",
       "inherited": false,
-      "description": "Sets element label."
+      "description": "Sets the trimmed label of a node, edge or measurement by ID; empty clears the label. Throws for an unknown element."
     },
     {
       "name": "setGraph(graph: TpGraphDocument): void",
       "inherited": false,
-      "description": "Sets graph."
+      "description": "Validates and clones the supplied graph, clears selection and rerenders it. After initialization, a changed graph is recorded in undo history; invalid graphs throw before replacement."
     },
     {
       "name": "setTitle(title: string): void",
       "inherited": false,
-      "description": "Sets title."
+      "description": "Trims and stores the graph title, then records an undoable change; an empty string removes visible title text."
     },
     {
       "name": "setZoom(value: number): void",
       "inherited": false,
-      "description": "Sets zoom."
+      "description": "Sets a positive finite magnification factor, clamped to the supported zoom range. A value of 1 means 100%; invalid inputs throw TypeError."
     },
     {
       "name": "step(simulatorName: string): Promise<void>",
       "inherited": false,
-      "description": "Step."
+      "description": "Runs the simulator registered as simulatorName on a graph snapshot, awaits its animated transition and emits tp-graph-simulation-step. Throws for an unknown simulator."
     },
     {
       "name": "undo(): boolean",
       "inherited": false,
-      "description": "Undo."
+      "description": "Restores the preceding graph snapshot and returns true; returns false when undo history is empty."
     },
     {
       "name": "unregisterPalette(id: string): void",
       "inherited": false,
-      "description": "Unregisters palette."
+      "description": "Removes the palette with the supplied ID and selects a remaining shape if needed; does not remove existing graph nodes."
     },
     {
       "name": "zoomIn(): void",
       "inherited": false,
-      "description": "Zoom in."
+      "description": "Increases magnification by the configured zoom factor, up to the supported maximum."
     },
     {
       "name": "zoomOut(): void",
       "inherited": false,
-      "description": "Zoom out."
+      "description": "Decreases magnification by the configured zoom factor, down to the supported minimum."
     }
   ],
   "events": [
     {
       "name": "tp-graph-change",
-      "description": "Fired after a user or API graph mutation.",
-      "detail": "{ reason: unknown; graph: unknown }"
+      "description": "Emitted after a recorded graph mutation, JSON edit, undo or redo. reason identifies the operation and graph contains the resulting snapshot.",
+      "detail": "{ reason: string; graph: TpGraphDocument }"
     },
     {
       "name": "tp-graph-error",
-      "description": "Emitted when graph error occurs.",
-      "detail": "{ error: unknown; operation: \"add-edge\" }"
+      "description": "Emitted when loading src or creating/reconnecting an edge fails. operation identifies the failed action; src is included only for load-src.",
+      "detail": "{ error: unknown; operation: \"load-src\" | \"reconnect-edge\" | \"add-edge\"; src?: string }"
     },
     {
       "name": "tp-graph-export",
-      "description": "Emitted when graph export occurs.",
-      "detail": "{ graph: unknown }"
+      "description": "Emitted after the graph export has been saved; graph contains the exported graph snapshot.",
+      "detail": "{ graph: TpGraphDocument }"
     },
     {
       "name": "tp-graph-import",
-      "description": "Emitted when graph import occurs.",
-      "detail": "{ graph: unknown }"
+      "description": "Emitted after importJSON validates and installs a graph; graph contains the imported snapshot.",
+      "detail": "{ graph: TpGraphDocument }"
     },
     {
       "name": "tp-graph-selection-change",
-      "description": "Fired when the selection changes.",
-      "detail": "{ id: unknown; ids: unknown }"
+      "description": "Emitted when the selection is synchronized. id is the primary selection or null, and ids lists all selected element identifiers.",
+      "detail": "{ id: string | null; ids: string[] }"
     },
     {
       "name": "tp-graph-simulation-step",
-      "description": "Fired after a simulator step.",
-      "detail": "{ simulator: unknown; graph: unknown }"
+      "description": "Emitted after a registered simulator step and its transition animation complete; simulator is its registered name and graph is the resulting snapshot.",
+      "detail": "{ simulator: string; graph: TpGraphDocument }"
     }
   ],
   "cssproperties": [],
   "dependencies": [
     {
       "name": "tp-accordion",
-      "summary": "Accessible accordion component with keyboard navigation and ARIA mapping."
+      "summary": "Collapsible multi-panels element."
     },
     {
       "name": "tp-base",
@@ -273,7 +273,7 @@
     },
     {
       "name": "tp-dropdown",
-      "summary": "Displays an anchored dropdown menu."
+      "summary": "Dropdown menu component."
     },
     {
       "name": "tp-fullscreen",

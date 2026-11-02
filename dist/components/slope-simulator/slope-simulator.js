@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/slope-simulator.js";
-export { e as TpSlopeSimulator };
+import{t as e}from"../../chunks/slope-simulator2.js";export{e as TpSlopeSimulator};

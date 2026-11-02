@@ -1,0 +1,3 @@
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="1" y="5" width="22" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="m10 8-2 8m7-8-2 8M6 10h12M5 14h12"/></svg>
+`;export{t as n,n as t};
+//# sourceMappingURL=numberfield2.js.map

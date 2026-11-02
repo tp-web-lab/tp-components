@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/loto.js";
-export { e as TpLoto };
+import{t as e}from"../../chunks/loto2.js";export{e as TpLoto};

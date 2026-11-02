@@ -14,62 +14,58 @@
     {
       "name": "clockStep(): void",
       "inherited": false,
-      "description": "Clock step."
+      "description": "Advances a clock cycle, updates memory elements and combinational outputs, and records the resulting timeline samples."
     },
     {
       "name": "evaluate(): void",
       "inherited": false,
-      "description": "Evaluate."
+      "description": "Recomputes combinational outputs without advancing the clock, records a timeline sample and emits tp-logic-evaluate."
     },
     {
       "name": "resetSequentialState(): void",
       "inherited": false,
-      "description": "Resets sequential state."
+      "description": "Restores memory elements to their initial Boolean states, clears the timeline, recomputes outputs and emits tp-sequential-reset."
     },
     {
       "name": "run(period = 700): void",
       "inherited": false,
-      "description": "Run."
+      "description": "Starts repeated clock steps every period milliseconds, clamped to at least 100. Does nothing if already running; nonfinite periods use 700."
     },
     {
       "name": "stop(): void",
       "inherited": false,
-      "description": "Stop."
+      "description": "Stops automatic clock stepping while preserving the current circuit state and timeline."
     },
     {
       "name": "toggle(id: string, propagate = true): boolean",
       "inherited": false,
-      "description": "Toggle."
+      "description": "Inverts input or output id and returns its new Boolean value. Optionally propagates input changes through combinational logic and records a timeline sample; unsupported nodes throw."
     }
   ],
   "events": [
     {
       "name": "tp-logic-evaluate",
-      "description": "Emitted when logic evaluate occurs.",
-      "detail": "{ graph: unknown }"
+      "description": "Emitted after combinational outputs are recomputed without advancing the clock; graph contains the resulting snapshot.",
+      "detail": "{ graph: TpGraphDocument }"
     },
     {
       "name": "tp-logic-toggle",
-      "description": "Emitted when logic toggle occurs.",
-      "detail": "{ id: unknown; value: string; graph: unknown }"
+      "description": "Emitted after an input node is toggled; id identifies the input, value is its new Boolean level, and graph contains the resulting snapshot.",
+      "detail": "{ id: string; value: boolean; graph: TpGraphDocument }"
     },
     {
       "name": "tp-sequential-clock",
-      "description": "Emitted when sequential clock occurs.",
-      "detail": "{ values: unknown; graph: unknown }"
+      "description": "Emitted after a clock cycle has updated memory and settled combinational outputs. values maps memory-element IDs to their new Boolean states.",
+      "detail": "{ values: Record<string, boolean>; graph: TpGraphDocument }"
     },
     {
       "name": "tp-sequential-reset",
-      "description": "Emitted when sequential reset occurs.",
-      "detail": "{ graph: unknown }"
+      "description": "Emitted after memory elements return to their initial states and the timeline is cleared; graph contains the reset snapshot.",
+      "detail": "{ graph: TpGraphDocument }"
     }
   ],
   "cssproperties": [],
   "dependencies": [
-    {
-      "name": "tp-graph-editor",
-      "summary": "Extensible interactive graph editor."
-    },
     {
       "name": "tp-graph-logical-circuit",
       "summary": "Interactive combinational logic circuit editor and simulator."

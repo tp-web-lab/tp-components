@@ -1,0 +1,1 @@
+import{t as e}from"../../chunks/base-styles.js";export{e as ensureTpBaseStyles};

@@ -14,12 +14,12 @@
     {
       "name": "addEntry(kind: TpConsoleEntryKind, values: TpConsoleValue[]): TpConsoleEntry",
       "inherited": false,
-      "description": "Adds an entry to the console."
+      "description": "Appends an entry of kind containing values, rerenders the console and returns the created entry record."
     },
     {
       "name": "assert(condition: unknown, ...values: TpConsoleValue[]): void",
       "inherited": false,
-      "description": "Writes an assertion failure."
+      "description": "Adds an assertion-failure entry only when condition is falsy, including the supplied values."
     },
     {
       "name": "clear(): void",
@@ -29,12 +29,12 @@
     {
       "name": "count(label = \"default\"): void",
       "inherited": false,
-      "description": "Writes a counter value."
+      "description": "Increments the counter associated with label and displays its new value; a new counter starts at one."
     },
     {
       "name": "countReset(label = \"default\"): void",
       "inherited": false,
-      "description": "Resets a counter."
+      "description": "Resets the counter associated with label so its next count starts again at one."
     },
     {
       "name": "error(...values: TpConsoleValue[]): void",
@@ -79,7 +79,7 @@
     {
       "name": "redirectConsoleToSelf(): () => void",
       "inherited": false,
-      "description": "Redirects global console calls to this component."
+      "description": "Routes global console methods to this component and returns a cleanup function that restores the previous methods."
     },
     {
       "name": "restoreConsole(): void",
@@ -94,17 +94,17 @@
     {
       "name": "time(label = \"default\"): void",
       "inherited": false,
-      "description": "Starts a timer."
+      "description": "Starts or restarts the elapsed-time measurement associated with label."
     },
     {
       "name": "timeEnd(label = \"default\"): void",
       "inherited": false,
-      "description": "Ends a timer."
+      "description": "Displays elapsed milliseconds for label and removes the timer."
     },
     {
       "name": "timeLog(label = \"default\", ...values: TpConsoleValue[]): void",
       "inherited": false,
-      "description": "Writes a timer value."
+      "description": "Displays elapsed milliseconds for label with any additional values, without stopping the timer."
     },
     {
       "name": "warn(...values: TpConsoleValue[]): void",
@@ -148,7 +148,7 @@
     {
       "name": "--tp-console-circular-color",
       "default": "#f2cc60",
-      "description": "Controls the circular color."
+      "description": "Text color of circular-reference markers in expanded objects."
     },
     {
       "name": "--tp-console-color",
@@ -158,12 +158,12 @@
     {
       "name": "--tp-console-date-color",
       "default": "#7ee787",
-      "description": "Controls the date color."
+      "description": "Text color of Date values in expanded objects."
     },
     {
       "name": "--tp-console-depth",
       "default": "0",
-      "description": "Controls the depth."
+      "description": "Unitless group nesting depth of a log entry; each level adds 1rem of leading indentation. Assigned internally per entry."
     },
     {
       "name": "--tp-console-empty-color",
@@ -173,7 +173,7 @@
     {
       "name": "--tp-console-entry-bg",
       "default": "transparent",
-      "description": "Controls the entry bg."
+      "description": "Background of an individual log entry."
     },
     {
       "name": "--tp-console-entry-border",
@@ -183,17 +183,17 @@
     {
       "name": "--tp-console-error-color",
       "default": "#ff7b72",
-      "description": "Controls the error color."
+      "description": "Text color of Error values in expanded objects."
     },
     {
       "name": "--tp-console-function-color",
       "default": "#d2a8ff",
-      "description": "Controls the function color."
+      "description": "Text color of function summaries in expanded objects."
     },
     {
       "name": "--tp-console-kind-accent",
-      "default": "#ff7b72",
-      "description": "Controls the kind accent."
+      "default": "#8b949e",
+      "description": "Text color and background tint of the log-level badge; assigned by the entry level."
     },
     {
       "name": "--tp-console-nullish-color",
@@ -223,7 +223,7 @@
     {
       "name": "--tp-console-object-marker-color",
       "default": "#8b949e",
-      "description": "Controls the object marker color."
+      "description": "Color of the triangle used to expand or collapse an object preview."
     },
     {
       "name": "--tp-console-object-panel-bg",
@@ -233,12 +233,12 @@
     {
       "name": "--tp-console-object-separator-color",
       "default": "#8b949e",
-      "description": "Controls the object separator color."
+      "description": "Color of the separator between a property name and its value in expanded objects."
     },
     {
       "name": "--tp-console-object-summary-bg",
       "default": "#161b22",
-      "description": "Controls the object summary bg."
+      "description": "Background of the clickable summary row of an object preview."
     },
     {
       "name": "--tp-console-object-summary-color",

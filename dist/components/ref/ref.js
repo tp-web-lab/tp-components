@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/ref.js";
-export { e as TpRef };
+import{t as e}from"../../chunks/ref2.js";export{e as TpRef};

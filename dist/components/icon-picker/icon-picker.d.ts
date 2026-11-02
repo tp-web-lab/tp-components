@@ -37,10 +37,14 @@ export type TpIconPickerCopyFormat = "name" | "svg" | "tp-icon" | "tp-icon-butto
  * @attr {string} library = "all" - Active library filter (`all` by default).
  * @attr {'name'|'svg'|'tp-icon'|'tp-icon-button'|'img'} copy = "name" - Clipboard output format (`name` by default).
  * @attr {boolean} compact = false - Shows only the title, filters, and a compact 2em icon grid.
- * @event tp-icon-picker-select Emitted after an icon is selected.
- * @event tp-icon-picker-copy-error Emitted when the clipboard rejects a copy operation.
+
+
  * @example
  * <tp-icon-picker></tp-icon-picker>
+ * @event tp-icon-picker-select Emitted when a icon is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success.
+ * @eventdetail tp-icon-picker-select { name: string; library: string; sourcePath: string; format: TpIconPickerCopyFormat; value: string }
+ * @event tp-icon-picker-copy-error Emitted when copying the selected icon fails. The detail contains the requested clipboard text, selection metadata and the caught error.
+ * @eventdetail tp-icon-picker-copy-error { name: string; library: string; format: TpIconPickerCopyFormat; value: string; error: unknown }
  */
 export declare class TpIconPicker extends TpBase {
     /**

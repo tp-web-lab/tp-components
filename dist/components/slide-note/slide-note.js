@@ -1,0 +1,1 @@
+import{t as e}from"../../chunks/slide-note.js";export{e as TpSlideNote};

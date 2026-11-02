@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/tree.js";
-export { e as TpTree };
+import{t as e}from"../../chunks/tree.js";export{e as TpTree};

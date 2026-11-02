@@ -55,70 +55,70 @@
     },
     {
       "name": "tp-tree-context-action",
-      "description": "Emitted when the user triggers a global tree action.",
-      "detail": "void"
+      "description": "Bubbles from the inner tree when a context-menu action is chosen. scope distinguishes global and node actions; target identifies the node or is null.",
+      "detail": "{ actionId: string; scope: \"global\" | \"node\"; target: TpTreeNodeTarget | null }"
     }
   ],
   "cssproperties": [
     {
       "name": "--tp-object-tree-boolean-color",
       "default": "#8250df",
-      "description": "Controls the boolean color."
+      "description": "Text color of Boolean values in the object tree."
     },
     {
       "name": "--tp-object-tree-circular-color",
       "default": "#cf222e",
-      "description": "Controls the circular color."
+      "description": "Text color of circular-reference markers in the object tree."
     },
     {
       "name": "--tp-object-tree-date-color",
       "default": "#116329",
-      "description": "Controls the date color."
+      "description": "Text color of Date values in the object tree."
     },
     {
       "name": "--tp-object-tree-error-color",
       "default": "#cf222e",
-      "description": "Controls the error color."
+      "description": "Text color of Error values in the object tree."
     },
     {
       "name": "--tp-object-tree-font-size",
       "default": "0.875rem",
-      "description": "Controls the font size."
+      "description": "Font size of property names and value summaries in the object tree."
     },
     {
       "name": "--tp-object-tree-function-color",
       "default": "#953800",
-      "description": "Controls the function color."
+      "description": "Text color of function summaries in the object tree."
     },
     {
       "name": "--tp-object-tree-key-color",
       "default": "#6a737d",
-      "description": "Controls the key color."
+      "description": "Text color of object property names in the object tree."
     },
     {
       "name": "--tp-object-tree-nullish-color",
       "default": "#8c959f",
-      "description": "Controls the nullish color."
+      "description": "Text color of null and undefined values in the object tree."
     },
     {
       "name": "--tp-object-tree-number-color",
       "default": "#0550ae",
-      "description": "Controls the number color."
+      "description": "Text color of numeric values in the object tree."
     },
     {
       "name": "--tp-object-tree-separator-color",
       "default": "#8c959f",
-      "description": "Controls the separator color."
+      "description": "Text color of the separator between a property name and its value in the object tree."
     },
     {
       "name": "--tp-object-tree-string-color",
       "default": "#0a7f3f",
-      "description": "Controls the string color."
+      "description": "Text color of string values in the object tree."
     },
     {
       "name": "--tp-object-tree-structure-color",
       "default": "#57606a",
-      "description": "Controls the structure color."
+      "description": "Text color of array and object summaries in the object tree."
     }
   ],
   "dependencies": [

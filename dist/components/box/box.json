@@ -52,7 +52,7 @@
   "cssproperties": [
     {
       "name": "--tp-box-background",
-      "default": "white",
+      "default": "var(--tp-paper-color, transparent)",
       "description": "Default box background."
     },
     {
@@ -67,7 +67,7 @@
     },
     {
       "name": "--tp-box-color",
-      "default": "var(--tp-neutral-900)",
+      "default": "var(--tp-text-body, inherit)",
       "description": "Default box text color."
     },
     {

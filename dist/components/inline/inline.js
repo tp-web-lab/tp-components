@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/inline.js";
-export { e as TpInline };
+import{t as e}from"../../chunks/inline2.js";export{e as TpInline};

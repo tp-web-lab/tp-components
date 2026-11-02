@@ -9,12 +9,6 @@ The custom `<tp-ref>` element displays an inline reference with the correspondin
 
 ## Usage
 
-The `href` begins with `^` for a note, `@` for a bibliography entry, or `%` for a glossary entry, followed by the exact `ref` identifier. Identifiers may contain punctuation and are not interpreted as CSS selectors. Ordinary URLs are not supported.
-
-Reference labels are generated from their kind: `^identifier` displays a superscript `[n]`, `@bib` displays `[bib]`, and `%entry` displays `entry` with a dotted underline. Authored child text does not override this format. Each distinct note receives a number at its first citation in the current document scope; later citations of the same note reuse it. Adding, moving, changing or removing citations updates both the numbers and the note lists. Missing entries display a disabled reference until a matching definition becomes available. Definitions can be placed before or after references. Their content is shown on hover, focus or activation, and Escape dismisses the tooltip. Keep interactive controls in a generated list rather than in a tooltip.
-
-References and lists use the nearest `data-tp-reference-scope`, rendered markup document, `article` or `main`, falling back to the page body. Nested document scopes are independent. Identifiers should be unique within each reference kind and scope; the first matching definition is used for duplicates. Changes to definitions, labels and selected elements update existing tooltips and lists automatically.
-
 ### User interactions
 
 #### Mouse interactions
@@ -31,6 +25,14 @@ References and lists use the nearest `data-tp-reference-scope`, rendered markup 
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Show the focused reference tooltip. |
 | <kbd>Escape</kbd> | Close the tooltip. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
+
+### Author directives
+
+The `href` begins with `^` for a note, `@` for a bibliography entry, or `%` for a glossary entry, followed by the exact `ref` identifier. Identifiers may contain punctuation and are not interpreted as CSS selectors. Ordinary URLs are not supported.
+
+Reference labels are generated from their kind: `^identifier` displays a superscript `[n]`, `@bib` displays `[bib]`, and `%entry` displays `entry` with a dotted underline. Authored child text does not override this format. Each distinct note receives a number at its first citation in the current document scope; later citations of the same note reuse it. Adding, moving, changing or removing citations updates both the numbers and the note lists. Missing entries display a disabled reference until a matching definition becomes available. Definitions can be placed before or after references. Their content is shown on hover, focus or activation, and Escape dismisses the tooltip. Keep interactive controls in a generated list rather than in a tooltip.
+
+References and lists use the nearest `data-tp-reference-scope`, rendered markup document, `article` or `main`, falling back to the page body. Nested document scopes are independent. Identifiers should be unique within each reference kind and scope; the first matching definition is used for duplicates. Changes to definitions, labels and selected elements update existing tooltips and lists automatically.
 
 ## Examples
 
@@ -172,6 +174,29 @@ CSS properties
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -216,7 +241,7 @@ All tp-components used by `<tp-ref>` are loaded automatically by this component 
 -->
 <!--
 @tp-dependency tp-button
-@summary an action button or navigation link with shared sizes, variants and loading states.
+@summary Button component that supports native button and link rendering.
 -->
 <!--
 @tp-dependency tp-glossary
@@ -228,15 +253,15 @@ All tp-components used by `<tp-ref>` are loaded automatically by this component 
 -->
 <!--
 @tp-dependency tp-tooltip
-@summary Displays anchored tooltip content.
+@summary Tooltip component.
 -->
 
 - [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
 - [`<tp-biblio>`](../biblio/index.md) : Defines a bibliography entry referenced by tp-ref.
-- [`<tp-button>`](../button/index.md) : an action button or navigation link with shared sizes, variants and loading states.
+- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
 - [`<tp-glossary>`](../glossary/index.md) : Defines a glossary entry referenced by tp-ref.
 - [`<tp-note>`](../note/index.md) : Defines an HTML note referenced by tp-ref.
-- [`<tp-tooltip>`](../tooltip/index.md) : Displays anchored tooltip content.
+- [`<tp-tooltip>`](../tooltip/index.md) : Tooltip component.
 
 ### External
 

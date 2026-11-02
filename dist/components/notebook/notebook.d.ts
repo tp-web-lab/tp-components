@@ -48,7 +48,7 @@
  */
 /**
  * @tp-dependency tp-dropdown
- * @summary Displays an anchored dropdown menu.
+ * @summary Dropdown menu component.
  */
 /**
  * @tp-dependency tp-html-viewer

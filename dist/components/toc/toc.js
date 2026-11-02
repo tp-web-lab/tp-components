@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/toc.js";
-export { e as TpToc };
+import{t as e}from"../../chunks/toc2.js";export{e as TpToc};

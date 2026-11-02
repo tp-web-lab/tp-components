@@ -12,24 +12,24 @@
   "attributes": [],
   "methods": [
     {
-      "name": "addEdge(source: string, target: string, type = TP_QUERY_EDGE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = 'forward'): TpGraphEdge",
+      "name": "addEdge(source: string, target: string, type = TP_QUERY_EDGE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = \"forward\"): TpGraphEdge",
       "inherited": false,
-      "description": "Adds edge."
+      "description": "Adds a forward query-tree edge between compatible existing nodes and returns its record; unsupported directions or invalid connections throw."
     },
     {
       "name": "addNode(type: string, point: TpGraphPoint, nodeLabel?: string): TpGraphNode",
       "inherited": false,
-      "description": "Adds node."
+      "description": "Adds a query operator or comment at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError."
     },
     {
       "name": "setGraph(graph: TpGraphDocument): void",
       "inherited": false,
-      "description": "Sets graph."
+      "description": "Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph."
     },
     {
       "name": "toSql(): string",
       "inherited": false,
-      "description": "To sql."
+      "description": "Returns the SQL query generated from the current query tree; invalid tree structure raises a validation error."
     }
   ],
   "events": [],

@@ -1,86 +1,34 @@
-//#region ../tp-markdown/dist/markdown/renderers/typewriting.js
-var e = {
-	id: "typewriting",
-	render(e, n = {}) {
-		for (let r of e.querySelectorAll(".tp-md-typewriting")) r instanceof HTMLElement && t(r, n);
-	}
-};
-function t(e, t) {
-	if (e.dataset.typewritingRendered === "true") return;
-	let r = n(e, t);
-	r.words.length !== 0 && (e.dataset.typewritingRendered = "true", new s(e, r));
+import{t as e}from"./markdown-style-registry.js";var t=`tp-md-typewriting-styles`,n=`
+.tp-md-typewriting {
+  display: inline-flex;
+  align-items: baseline;
 }
-function n(e, t) {
-	let n = r(e);
-	return {
-		words: o(e),
-		speed: n.speed ?? t.speed ?? 100,
-		delay: n.delay ?? t.delay ?? 1e3,
-		loop: n.loop ?? t.loop ?? !0
-	};
-}
-function r(e) {
-	return {
-		speed: i(e.dataset.typewritingSpeed),
-		delay: i(e.dataset.typewritingDelay),
-		loop: a(e.dataset.typewritingLoop)
-	};
-}
-function i(e) {
-	if (e === void 0) return;
-	let t = Number(e);
-	return Number.isFinite(t) ? t : void 0;
-}
-function a(e) {
-	if (e !== void 0) {
-		if (e === "true" || e === "1") return !0;
-		if (e === "false" || e === "0") return !1;
-	}
-}
-function o(e) {
-	let t = e.dataset.typewritingWords ?? "[]";
-	try {
-		let e = JSON.parse(t);
-		if (Array.isArray(e) && e.every((e) => typeof e == "string")) return e;
-	} catch {
-		return [];
-	}
-	return [];
-}
-var s = class {
-	element;
-	options;
-	char = "";
-	counter = 0;
-	isDeleting = !1;
-	timeoutId;
-	constructor(e, t) {
-		this.element = e, this.options = t, this.type();
-	}
-	type() {
-		let e = this.getCurrentWord();
-		if (e === void 0) return;
-		let t = this.options.speed;
-		if (this.isDeleting ? (t /= 2, this.char = e.substring(0, this.char.length - 1)) : this.char = e.substring(0, this.char.length + 1), this.render(), !this.isDeleting && this.char === e) {
-			if (!this.options.loop && this.counter >= this.options.words.length - 1) return;
-			this.isDeleting = !0, t = this.options.delay;
-		} else this.isDeleting && this.char === "" && (this.isDeleting = !1, this.counter += 1);
-		this.timeoutId = window.setTimeout(() => {
-			this.type();
-		}, t);
-	}
-	getCurrentWord() {
-		return this.options.loop ? this.options.words[this.counter % this.options.words.length] : this.options.words[this.counter];
-	}
-	render() {
-		let e = document.createElement("span"), t = document.createElement("span");
-		e.className = "write", e.textContent = this.char, t.className = "blinking-cursor", t.textContent = "|", this.element.replaceChildren(e, t);
-	}
-	destroy() {
-		this.timeoutId !== void 0 && window.clearTimeout(this.timeoutId);
-	}
-};
-//#endregion
-export { e as default };
 
+.tp-md-typewriting-block {
+  margin-block: 1rem;
+}
+
+.blinking-cursor {
+  display: inline-block;
+  margin-inline-start: 0.1em;
+  animation: tp-md-typewriting-blink 0.8s steps(2, start) infinite;
+}
+
+@keyframes tp-md-typewriting-blink {
+  to {
+    visibility: hidden;
+  }
+}
+`;function r(r){e(t,n),i(r),o(r)}function i(e){let t=e.inline,n=e.renderer;t===void 0||n===void 0||(t.ruler.before(`escape`,`typewriting_inline`,(e,t)=>{if(!e.src.startsWith(`:typewriting`,e.pos))return!1;let n=a(e.src,e.pos+12);if(n===null)return!1;let r=l(n.source);if(r.length===0)return!1;if(!t){let t=e.push(`typewriting_inline`,``,0);t.meta={words:r,...c(n.args)}}return e.pos=n.end,!0}),n.rules.typewriting_inline=(e,t)=>{let n=s(e[t]);return`<span class="tp-md-typewriting" data-typewriting-words="${v(JSON.stringify(n.words))}" ${h(`data-typewriting-speed`,n.speed)} ${h(`data-typewriting-delay`,n.delay)} ${h(`data-typewriting-loop`,n.loop)}></span>`})}function a(e,t){let n=t,r=``;if(e[n]===`{`){let t=e.indexOf(`}`,n+1);if(t===-1)return null;r=e.slice(n+1,t),n=t+1}if(e[n]!==`:`||(n+=1,e[n]!=="`"))return null;let i=n+1,a=e.indexOf("`",i);return a===-1?null:{args:r,source:e.slice(i,a),end:a+1}}function o(e){let t=e.renderer,n=t.rules.fence;t.rules.fence=(e,t,r,i,a)=>{let o=e[t];if(o===void 0)return``;let s=d(o.info);if(s.name!==`typewriting`)return typeof n==`function`?n(e,t,r,i,a):a.renderToken(e,t,r);let l=`${s.args} ${u(o)}`.trim(),f={words:o.content.split(`
+`).map(e=>e.trim()).filter(e=>e!==``),...c(l)};return`
+<div class="tp-md-typewriting-block">
+  <span
+    class="tp-md-typewriting"
+    data-typewriting-words="${v(JSON.stringify(f.words))}"
+    ${h(`data-typewriting-speed`,f.speed)}
+    ${h(`data-typewriting-delay`,f.delay)}
+    ${h(`data-typewriting-loop`,f.loop)}
+  ></span>
+</div>
+`}}function s(e){let t=e?.meta;return typeof t==`object`&&t&&Array.isArray(t.words)?t:{words:[]}}function c(e){return{speed:p(e,`speed`),delay:p(e,`delay`),loop:m(e,`loop`)}}function l(e){return e.split(`|`).map(e=>e.trim()).filter(e=>e!==``)}function u(e){return(e.attrs??[]).map(([e,t])=>t===``?e:`${e}=${JSON.stringify(t)}`).join(` `)}function d(e){let t=e.trim(),n=t.search(/\s/);return n===-1?{name:t,args:``}:{name:t.slice(0,n),args:t.slice(n+1).trim()}}function f(e,t){let n=RegExp(`${g(t)}=("[^"]+"|'[^']+'|\\S+)`),r=e.match(n);return r===null?null:(r[1]??``).replace(/^["']|["']$/g,``)}function p(e,t){let n=f(e,t);if(n===null)return;let r=Number(n);return Number.isFinite(r)?r:void 0}function m(e,t){let n=f(e,t);if(n!==null){if(n===`true`||n===`1`)return!0;if(n===`false`||n===`0`)return!1}}function h(e,t){return t===void 0?``:`${e}="${v(String(t))}"`}function g(e){return e.replace(/[.*+?^${}()|[\]\\]/g,`\\$&`)}function _(e){return e.replaceAll(`&`,`&amp;`).replaceAll(`<`,`&lt;`).replaceAll(`>`,`&gt;`).replaceAll(`"`,`&quot;`).replaceAll(`'`,`&#39;`)}function v(e){return _(e)}export{r as default};
 //# sourceMappingURL=typewriting3.js.map

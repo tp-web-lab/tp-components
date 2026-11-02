@@ -71,17 +71,17 @@
     {
       "name": "--tp-slider-gap",
       "default": "1rem",
-      "description": "Controls the gap."
+      "description": "Horizontal space between adjacent slider items."
     },
     {
       "name": "--tp-slider-item-width",
       "default": "auto",
-      "description": "Controls the item width."
+      "description": "Preferred width of each slider item; auto preserves its intrinsic width."
     },
     {
       "name": "--tp-slider-native-scrollbar-size",
       "default": "0px",
-      "description": "Controls the native scrollbar size."
+      "description": "Measured native scrollbar thickness, written internally to reserve space without duplicating the browser gutter."
     }
   ],
   "dependencies": [

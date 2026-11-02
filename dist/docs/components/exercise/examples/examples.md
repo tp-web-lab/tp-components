@@ -1,0 +1,247 @@
+::::::::: tp-markdown-viewer { label="tp-exercise" allow-script }
+:::::::: script { type="tp/markdown" }
+``` example {label="Basic usage"}
+::::::: tp-exercise { open }
+Title
+:
+  A day at the museum
+
+Context
+:
+  The museum opens at 9 a.m. Admission costs 8 euros.
+
+Questions
+:
+  :::::: ol { class="questions" }
+  ::::: li
+  :::: tp-question { open="input" }
+  Title
+  :
+    Opening time
+
+  Prompt
+  :
+    When does the museum open?
+
+  Form
+  :
+    ::: tp-textfield { label="Your answer" }
+    :::
+
+  Feedback
+  :
+    Compare your answer with the opening time in the context.
+
+  Solution
+  :
+    At 9 a.m.
+  ::::
+  :::::
+
+  ::::: li
+  :::: tp-question { open="input" }
+  Title
+  :
+    Admission
+
+  Prompt
+  :
+    How much do two tickets cost?
+
+  Form
+  :
+    ::: tp-textfield { label="Your answer" }
+    :::
+
+  Feedback
+  :
+    Multiply the price of one ticket by two.
+
+  Solution
+  :
+    16 euros.
+  ::::
+  :::::
+  ::::::
+:::::::
+```
+
+``` example {label="Attributes"}
+Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+
+::::: tp-stack
+::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
+- open
+:::
+
+:::: tp-cluster
+::: tp-textfield { data-setting="timing" label="timing" value placeholder clearable }
+:::
+::::
+
+:::: tp-button-group
+::: tp-button { id="attributes-reset" type="button" }
+Reset defaults
+:::
+
+::: tp-button { id="attributes-reload" type="button" }
+Reload preview
+:::
+::::
+:::::
+
+::: tp-divider
+:::
+
+### Preview
+
+::: tp-iframe { id="attributes-frame" title="exercise attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
+:::
+
+::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
+Preparing the preview…
+:::
+
+::: script { type="module" src="/docs/components/exercise/examples/attributes.js" }
+:::
+```
+
+``` example {label="Timed exercise"}
+::::::: tp-exercise { timing="00:00:10" open }
+Title
+:
+  A day at the museum
+
+Context
+:
+  The museum opens at 9 a.m. Admission costs 8 euros.
+
+Questions
+:
+  :::::: ol { class="questions" }
+  ::::: li
+  :::: tp-question { open="input" }
+  Title
+  :
+    Opening time
+
+  Prompt
+  :
+    When does the museum open?
+
+  Form
+  :
+    ::: tp-textfield { label="Your answer" }
+    :::
+
+  Feedback
+  :
+    Compare your answer with the opening time in the context.
+
+  Solution
+  :
+    At 9 a.m.
+  ::::
+  :::::
+
+  ::::: li
+  :::: tp-question { open="input" }
+  Title
+  :
+    Admission
+
+  Prompt
+  :
+    How much do two tickets cost?
+
+  Form
+  :
+    ::: tp-textfield { label="Your answer" }
+    :::
+
+  Feedback
+  :
+    Multiply the price of one ticket by two.
+
+  Solution
+  :
+    16 euros.
+  ::::
+  :::::
+  ::::::
+:::::::
+```
+
+``` example {label="Nested exercises"}
+:::::: tp-exercise { open }
+Title
+:
+  A museum visit
+
+Context
+:
+  The museum opens at 9 a.m.
+
+Questions
+:
+  1. :::: tp-question { open="input" }
+     Title
+     :
+       Opening time
+
+     Prompt
+     :
+       When does the museum open?
+
+     Form
+     :
+       ::: tp-textfield { label="Your answer" }
+       :::
+
+     Feedback
+     :
+       Compare your answer with the context.
+
+     Solution
+     :
+       At 9 a.m.
+     ::::
+
+  2. ::::: tp-exercise
+     Title
+     :
+       The guided tour
+
+     Context
+     :
+       The tour starts at 10 a.m. and lasts one hour.
+
+     Questions
+     :
+       1. :::: tp-question { open="input" }
+          Title
+          :
+            End of the tour
+
+          Prompt
+          :
+            When does the tour finish?
+
+          Form
+          :
+            ::: tp-textfield { label="Your answer" }
+            :::
+
+          Feedback
+          :
+            Compare your answer with the context.
+
+          Solution
+          :
+            At 11 a.m.
+          ::::
+     :::::
+::::::
+```
+::::::::
+:::::::::

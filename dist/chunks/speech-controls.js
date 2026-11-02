@@ -1,6 +1,2 @@
-//#region src/utilities/speech-controls.css?inline
-var e = ".tp-speech-controls{--tp-button-group-gap:var(--tp-space-xs,.5rem);flex-wrap:wrap}.tp-speech-status{color:var(--tp-text-muted,#374151);margin:0}";
-//#endregion
-export { e as t };
-
+var e=`.tp-speech-controls{--tp-button-group-gap:var(--tp-space-xs,.5rem);flex-wrap:wrap}.tp-speech-status{color:var(--tp-text-muted,#374151);margin:0}.tp-speech-fieldset{border:1px solid var(--tp-neutral-stroke-soft,#d0d7de);border-radius:.5rem;gap:.75rem;min-inline-size:0;margin:0;padding:.75rem;display:grid}.tp-speech-fieldset>legend{padding-inline:.35rem;font-weight:600}.tp-speech-fieldset>[hidden]{display:none}`;export{e as t};
 //# sourceMappingURL=speech-controls.js.map

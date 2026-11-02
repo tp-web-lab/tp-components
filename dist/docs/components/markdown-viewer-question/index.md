@@ -38,11 +38,13 @@ The custom `<tp-markdown-viewer-question>` element implements the markup exercis
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between question and programming controls. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused action or expand/collapse the title. |
-| Arrow keys in Output tabs | Navigate Feedback and Solution. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Output tabs | Navigate Feedback and Solution. |
 | Typing in the editor | Modify source code using the embedded editor's editing behavior. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Author directives
+
+The inherited `timing="hh:mm:ss"` attribute enables the [timed-question flow](../question/index.md). Start begins the countdown; Continue restores access after expiry without clearing the response.
 
 The tag fixes the language to Markdown and embeds [tp-markdown-viewer](../markdown-viewer/index.md). Inherited `src` is one markup file, `test` is a trusted JavaScript test file; both default to an empty string. Inherited `open` is false when absent. Declare Title, Prompt and optional Solution with a definition list. Form and test Feedback are generated.
 
@@ -209,6 +211,29 @@ CSS properties
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Imports
 
 ::: tp-tabs
@@ -244,44 +269,8 @@ bundler
 All tp-components used by `<tp-markdown-viewer-question>` are loaded automatically by this component if they have not already been loaded by another component.
 
 <!--
-@tp-dependency tp-base
-@summary Shared base class for tp-* components.
--->
-<!--
-@tp-dependency tp-button
-@summary Button component that supports native button and link rendering.
--->
-<!--
-@tp-dependency tp-code-editor
-@summary CodeMirror-based code editor component.
--->
-<!--
 @tp-dependency tp-console
 @summary Displays structured console output.
--->
-<!--
-@tp-dependency tp-drawer
-@summary Displays a sliding drawer panel.
--->
-<!--
-@tp-dependency tp-dropdown
-@summary Displays an anchored dropdown menu.
--->
-<!--
-@tp-dependency tp-file-tree
-@summary Displays an interactive file and folder tree.
--->
-<!--
-@tp-dependency tp-filesystem
-@summary In-memory file system component.
--->
-<!--
-@tp-dependency tp-icon
-@summary SVG icon component with inline, URL, and registry sources.
--->
-<!--
-@tp-dependency tp-icon-button
-@summary Accessible icon button component.
 -->
 <!--
 @tp-dependency tp-iframe
@@ -292,51 +281,21 @@ All tp-components used by `<tp-markdown-viewer-question>` are loaded automatical
 @summary Interactive Markdown viewer with editable source and parser outputs.
 -->
 <!--
-@tp-dependency tp-menu
-@summary Accessible menu component.
--->
-<!--
 @tp-dependency tp-question
 @summary Base description-list container for question components.
 -->
-<!--
-@tp-dependency tp-splitter
-@summary Splitter component with two resizable panels.
--->
-<!--
-@tp-dependency tp-switcher
-@summary Switches between horizontal and vertical layouts based on available space.
--->
-<!--
-@tp-dependency tp-tabs
-@summary Accessible tabs component with keyboard and reorder support.
--->
-<!--
-@tp-dependency tp-toolbar
-@summary Sticky toolbar with start / center / end sections,
--->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
 - [`<tp-console>`](../console/index.md) : Displays structured console output.
-- [`<tp-drawer>`](../drawer/index.md) : Displays a sliding drawer panel.
-- [`<tp-dropdown>`](../dropdown/index.md) : Displays an anchored dropdown menu.
-- [`<tp-file-tree>`](../file-tree/index.md) : Displays an interactive file and folder tree.
-- [`<tp-filesystem>`](../filesystem/index.md) : In-memory file system component.
-- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
 - [`<tp-iframe>`](../iframe/index.md) : Controlled iframe component.
 - [`<tp-markdown-viewer>`](../markdown-viewer/index.md) : Interactive Markdown viewer with editable source and parser outputs.
-- [`<tp-menu>`](../menu/index.md) : Accessible menu component.
 - [`<tp-question>`](../question/index.md) : Base description-list container for question components.
-- [`<tp-splitter>`](../splitter/index.md) : Splitter component with two resizable panels.
-- [`<tp-switcher>`](../switcher/index.md) : Switches between horizontal and vertical layouts based on available space.
-- [`<tp-tabs>`](../tabs/index.md) : Accessible tabs component with keyboard and reorder support.
-- [`<tp-toolbar>`](../toolbar/index.md) : Sticky toolbar with start / center / end sections,
 
 ### External
 
+<!--
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
+-->
 <!--
 @credit es-module-lexer https://github.com/guybedford/es-module-lexer
 @summary ECMAScript module import analysis.
@@ -353,19 +312,10 @@ All tp-components used by `<tp-markdown-viewer-question>` are loaded automatical
 @credit Mocha https://mochajs.org/
 @summary Browser test execution.
 -->
-<!--
-@credit TypeScript https://www.typescriptlang.org/
-@summary TypeScript transpilation and language services.
--->
-<!--
-@credit Zod https://zod.dev/
-@summary Runtime schema validation.
--->
 
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 - [es-module-lexer](https://github.com/guybedford/es-module-lexer) : ECMAScript module import analysis.
 - [Chai](https://www.chaijs.com/) : Assertions in browser tests.
 - [Lit](https://lit.dev/) : Web-component examples and import maps.
 - [Mocha](https://mochajs.org/) : Browser test execution.
-- [TypeScript](https://www.typescriptlang.org/) : TypeScript transpilation and language services.
-- [Zod](https://zod.dev/) : Runtime schema validation.
 <!-- tp-docgen:dependencies:end -->

@@ -32,6 +32,9 @@ import { TpBase } from "../base/base.js";
  *   </tp-slider>
  * </tp-box>
  * ```
+ * @cssprop [--tp-slider-gap=1rem] Horizontal space between adjacent slider items.
+ * @cssprop [--tp-slider-item-width=auto] Preferred width of each slider item; auto preserves its intrinsic width.
+ * @cssprop [--tp-slider-native-scrollbar-size=0px] Measured native scrollbar thickness, written internally to reserve space without duplicating the browser gutter.
  */
 export declare class TpSlider extends TpBase {
     private static readonly styleId;

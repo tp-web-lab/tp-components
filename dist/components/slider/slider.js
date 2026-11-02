@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/slider.js";
-export { e as TpSlider };
+import{t as e}from"../../chunks/slider2.js";export{e as TpSlider};

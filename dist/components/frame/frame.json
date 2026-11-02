@@ -26,12 +26,12 @@
     {
       "name": "--tp-frame-denominator",
       "default": "9",
-      "description": "Controls the denominator."
+      "description": "Positive unitless height term of the width-to-height aspect ratio; updated by the ratio attribute."
     },
     {
       "name": "--tp-frame-numerator",
       "default": "16",
-      "description": "Controls the numerator."
+      "description": "Positive unitless width term of the width-to-height aspect ratio; updated by the ratio attribute."
     }
   ],
   "dependencies": [

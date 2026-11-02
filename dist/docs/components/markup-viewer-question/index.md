@@ -11,6 +11,8 @@
 
 ## Shared contract
 
+The inherited `timing="hh:mm:ss"` attribute enables the [timed-question flow](../question/index.md): Start reveals the exercise and begins the countdown; after expiry, Continue restores access without clearing the response.
+
 | Attribute | Default | Role |
 | --- | --- | --- |
 | `src` | <code>""</code> | One external markup source file to edit in the viewer. |
@@ -38,3 +40,21 @@ describe("Semantic HTML", () => {
 Equivalent strong-emphasis syntax in HTML, Markdown, AsciiDoc or reStructuredText passes the same assertion. Tests can similarly inspect links, lists, tables or attributes without demanding one exact source spelling.
 
 Reset restores the original source. Reset, disconnection or source reconfiguration cancels pending work and prevents stale results from replacing a newer report. The implementation shares this lifecycle with [programming questions](../playground-question/index.md), while retaining separate viewer and playground type constraints.
+
+<!-- tp-docgen:dependencies:start -->
+## Dependencies
+
+### Internal
+
+<!--
+@summary This component has no tp-components dependencies.
+-->
+No internal dependency
+
+### External
+
+<!--
+@summary No external dependency.
+-->
+No external dependency
+<!-- tp-docgen:dependencies:end -->

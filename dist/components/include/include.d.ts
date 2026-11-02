@@ -32,6 +32,8 @@ type TpIncludeMode = "auto" | "raw";
 export declare class TpInclude extends TpBase {
     private static readonly styleId;
     private requestId;
+    private readonly pendingVisibility;
+    protected disconnectedCallback(): void;
     static get observedAttributes(): string[];
     /**
      * Location of the HTML file to include.

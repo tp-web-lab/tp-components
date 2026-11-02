@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/note.js";
-export { e as TpNote };
+import{t as e}from"../../chunks/note2.js";export{e as TpNote};

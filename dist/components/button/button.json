@@ -12,7 +12,7 @@
   "attributes": [
     {
       "name": "disabled",
-      "description": "Attribute `disabled`.",
+      "description": "Prevents activation, including link navigation, and marks the control as disabled.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -21,7 +21,7 @@
     },
     {
       "name": "download",
-      "description": "Attribute `download`.",
+      "description": "Suggested download filename when href is set. A nonempty value requests a download; browser and server rules determine whether it is honored.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -30,7 +30,7 @@
     },
     {
       "name": "href",
-      "description": "Attribute `href`.",
+      "description": "Destination URL. A nonempty value renders a link instead of a native button.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -39,7 +39,7 @@
     },
     {
       "name": "loading",
-      "description": "Attribute `loading`.",
+      "description": "Displays a loading spinner and prevents activation while present.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -48,7 +48,7 @@
     },
     {
       "name": "loading-mode",
-      "description": "API documentation summary.",
+      "description": "Spinner layout while loading: replace hides the label; inline keeps the label beside the spinner.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -57,7 +57,7 @@
     },
     {
       "name": "outlined",
-      "description": "Attribute `outlined`.",
+      "description": "Uses an outlined appearance instead of a filled background.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -66,7 +66,7 @@
     },
     {
       "name": "pill",
-      "description": "Attribute `pill`.",
+      "description": "Rounds the button ends to form a pill.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -75,7 +75,7 @@
     },
     {
       "name": "rel",
-      "description": "Attribute `rel`.",
+      "description": "Space-separated relationship tokens forwarded to the link, for example noopener noreferrer; applies only with href.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -84,7 +84,7 @@
     },
     {
       "name": "size",
-      "description": "Attribute `size`.",
+      "description": "Button size preset: xxs, xs, s, m, l, xl or xxl; controls text size and padding.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -93,7 +93,7 @@
     },
     {
       "name": "target",
-      "description": "Attribute `target`.",
+      "description": "Browsing context for href, such as _self, _blank or a named frame; ignored in native button mode.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -102,7 +102,7 @@
     },
     {
       "name": "type",
-      "description": "Attribute `type`.",
+      "description": "Native button action: button, submit or reset; ignored when href makes the control a link.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -111,7 +111,7 @@
     },
     {
       "name": "variant",
-      "description": "Attribute `variant`.",
+      "description": "Color variant: neutral, brand, success, danger, warning or info.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -123,70 +123,70 @@
   "events": [
     {
       "name": "click",
-      "description": "Event.\nColors are derived from the shared `tp.css` semantic tokens.",
+      "description": "Native click event bubbling from the inner button or link when activated by pointer or keyboard; disabled controls suppress activation. This is not a CustomEvent, so there is no custom detail payload.",
       "detail": "void"
     }
   ],
   "cssproperties": [
     {
       "name": "--tp-button-accent",
-      "default": "var(--tp-brand-text-colorful)",
-      "description": "Controls the accent."
+      "default": "var(--tp-neutral-text-colorful)",
+      "description": "Accent color used for outlined text and borders, and for the hover border; depends on variant."
     },
     {
       "name": "--tp-button-background",
-      "default": "transparent",
-      "description": "Controls the background."
+      "default": "var(--tp-neutral-fill-loud)",
+      "description": "Background color of the button or link; variant and outlined can change it."
     },
     {
       "name": "--tp-button-border-color",
-      "default": "var(--tp-brand-stroke-mid)",
-      "description": "Controls the border color."
+      "default": "var(--tp-neutral-stroke-mid)",
+      "description": "Border color of the button or link in its resting state."
     },
     {
       "name": "--tp-button-focus-ring-color",
       "default": "var(--tp-focus-color)",
-      "description": "Controls the focus ring color."
+      "description": "Color of the outer ring shown on keyboard focus and hover."
     },
     {
       "name": "--tp-button-font-size",
-      "default": "1.125em",
-      "description": "Controls the font size."
+      "default": "0.875em",
+      "description": "Font size of the button label; size presets also update this value."
     },
     {
       "name": "--tp-button-foreground",
-      "default": "var(--tp-button-accent)",
-      "description": "Controls the foreground."
+      "default": "var(--tp-neutral-text-on-loud)",
+      "description": "Text and icon color of the button or link."
     },
     {
       "name": "--tp-button-outline-background",
-      "default": "var(--tp-brand-fill-softer)",
-      "description": "Controls the outline background."
+      "default": "var(--tp-neutral-fill-softer)",
+      "description": "Background color of an enabled outlined button on hover."
     },
     {
       "name": "--tp-button-padding-block",
-      "default": "0.6em",
-      "description": "Controls the padding block."
+      "default": "0.35em",
+      "description": "Inner spacing above and below the button content."
     },
     {
       "name": "--tp-button-padding-inline",
-      "default": "1em",
-      "description": "Controls the padding inline."
+      "default": "0.7em",
+      "description": "Inner spacing before and after the button content."
     },
     {
       "name": "--tp-button-radius",
-      "default": "999px",
-      "description": "Controls the radius."
+      "default": "0.5em",
+      "description": "Corner radius of the button or link; pill uses a fully rounded radius."
     },
     {
       "name": "--tp-button-spinner-border-width",
-      "default": "1.5px",
-      "description": "Controls the spinner border width."
+      "default": "2px",
+      "description": "Stroke thickness of the circular loading indicator."
     },
     {
       "name": "--tp-button-spinner-size",
-      "default": "1.15em",
-      "description": "Controls the spinner size."
+      "default": "1em",
+      "description": "Width and height of the circular loading indicator."
     }
   ],
   "dependencies": [

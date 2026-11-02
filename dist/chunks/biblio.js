@@ -1,18 +1,2 @@
-import { t as e } from "./base.js";
-//#region src/components/biblio/biblio.css?inline
-var t = "tp-biblio{display:none!important}", n = class extends e {
-	get ref() {
-		return this.getAttribute("ref") ?? "";
-	}
-	set ref(e) {
-		this.setAttribute("ref", e);
-	}
-	connectedCallback() {
-		super.connectedCallback(), this.ensureGlobalStyle("tp-biblio-styles", t);
-	}
-};
-customElements.get("tp-biblio") || customElements.define("tp-biblio", n);
-//#endregion
-export { n as t };
-
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path fill="currentColor" d="M9 3v15h3V3zm3 2l4 13l3-1l-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>`;export{t as n,n as t};
 //# sourceMappingURL=biblio.js.map

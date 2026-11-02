@@ -1,0 +1,67 @@
+[tp-asciidoc-viewer%allow-script,label="tp-mask"]
+=========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-textfield%clearable,id="mask-answer",label="Answer",value="Thursday"]
+====
+====
+
+[tp-mask%active,anchor="#mask-answer"]
+====
+The answer is hidden until the review.
+====
+======
+
+.Attributes
+========
+Enter `#mask-answer` in anchor, then enable active. Edit the answer before masking it and check that the value returns when active is unchecked. Clear anchor or use Reset defaults to restore the inactive defaults. Reload preview recreates the target with its initial value.
+
+[tp-stack]
+======
+[tp-checkbox-list,id="mask-active",label="Boolean attributes",label-position="top",orientation="horizontal"]
+====
+* active
+====
+
+[tp-textfield%placeholder%clearable,id="mask-anchor",label="anchor",label-position="top"]
+====
+====
+
+[tp-button-group]
+=====
+[tp-button,id="mask-reset"]
+====
+Reset defaults
+====
+
+[tp-button,id="mask-reload"]
+====
+Reload preview
+====
+=====
+======
+
+[tp-divider]
+====
+====
+
+[tp-stack,id="mask-preview"]
+=====
+[tp-textfield%clearable,id="mask-answer",label="Answer",value="Thursday"]
+====
+====
+
+[tp-mask]
+====
+The answer is hidden until the review.
+====
+=====
+
+[script,type="module",src="/docs/components/mask/examples/attributes.js"]
+====
+====
+========
+----
+=========

@@ -6,11 +6,7 @@
  * @tp-dependency tp-base
  * @summary Shared base class for tp-* components.
  */
-/**
- * @credit tp-asciidoc https://www.npmjs.com/package/@tp/tp-asciidoc
- * @summary AsciiDoc parsing and rendering.
- */
-import { TpAsciidocParser } from "@tp/tp-asciidoc";
+import type { TpAsciidocParser } from "@tp/tp-asciidoc";
 import { TpBase } from "../base/base.js";
 /** A configured parser instance used by the component runtime. */
 type TpAsciidocParserInstance = InstanceType<typeof TpAsciidocParser>;
@@ -50,7 +46,7 @@ export declare function dedentAsciidocSource(source: string): string;
  *
  * @returns A new independent AsciiDoc parser.
  */
-export declare function createTpAsciidocParser(): TpAsciidocParserInstance;
+export declare function createTpAsciidocParser(): Promise<TpAsciidocParserInstance>;
 /**
  * Converts AsciiDoc source to embeddable semantic HTML.
  *
@@ -95,6 +91,7 @@ export declare class TpAsciidoc extends TpBase {
     /** Reapply names after MathJax's responsive line breaking replaces SVGs. */
     private readonly mathObserver;
     private renderToken;
+    private readonly pendingVisibility;
     private inlineSourceSnapshot;
     protected connectedCallback(): void;
     /** Stops observing detached output and invalidates pending source requests. */

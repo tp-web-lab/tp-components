@@ -190,8 +190,31 @@ CSS properties
 <!-- /tp-docgen:api -->
 
 <!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_restructuredtext.TpRestructuredText.html)
+[More details…](/api/classes/components_restructuredtext_restructuredtext.TpRestructuredText.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -517,10 +540,15 @@ All tp-components used by `<tp-restructuredtext>` are loaded automatically by th
 @summary reStructuredText parsing and rendering.
 -->
 <!--
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
+-->
+<!--
 @credit highlight.js https://highlightjs.org/
 @summary Source-code syntax highlighting.
 -->
 
 - [tp-restructuredtext](https://www.npmjs.com/package/@tp/tp-restructuredtext) : reStructuredText parsing and rendering.
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 - [highlight.js](https://highlightjs.org/) : Source-code syntax highlighting.
 <!-- tp-docgen:dependencies:end -->

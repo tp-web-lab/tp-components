@@ -1,59 +1,31 @@
-import { E as e, a as t, c as n, f as r, n as i, s as a, t as o } from "../../chunks/playground-build-utils.js";
-//#region src/components/playground/browser-test-document.ts
-function s(e) {
-	return e.replace(/<script\b[\s\S]*?<\/script>/gi, "");
+import{n as e}from"../../chunks/tool-loading.js";import{E as t,a as n,c as r,f as i,n as a,s as o,t as s}from"../../chunks/playground-build-utils.js";function c(e){return e.replace(/<script\b[\s\S]*?<\/script>/gi,``)}async function l(l,u={}){console.log(`browser test project.test`,l.test);let d=u.kind===`typescript`?[`.test.ts`,`.tests.ts`,`.spec.ts`,`.test.tsx`,`.tests.tsx`,`.spec.tsx`,`.test.js`,`.tests.js`,`.spec.js`]:[`.test.js`,`.tests.js`,`.spec.js`],f=l.test,p=typeof f==`string`&&f!==``?i(l,f):t(l,{entry:u.defaultTest,priorityPaths:u.kind===`typescript`?[`/main.test.ts`,`/main.test.tsx`,`/main.test.js`]:[`/main.test.js`],extensions:d,fallbackToFirstFile:!1,ignoreProjectEntry:!0});if(p===void 0)throw Error(typeof f==`string`&&f!==``?`Test file not found: ${f}.`:`No test file found.`);let m=URL.createObjectURL(new Blob([`
+const api = window.__tp_test__;
+
+if (!api) {
+  throw new Error('Mocha/Chai test API is not initialized.');
 }
-async function c(c, l = {}) {
-	console.log("browser test project.test", c.test);
-	let u = l.kind === "typescript" ? [
-		".test.ts",
-		".tests.ts",
-		".spec.ts",
-		".test.tsx",
-		".tests.tsx",
-		".spec.tsx",
-		".test.js",
-		".tests.js",
-		".spec.js"
-	] : [
-		".test.js",
-		".tests.js",
-		".spec.js"
-	], d = c.test, f = typeof d == "string" && d !== "" ? r(c, d) : e(c, {
-		entry: l.defaultTest,
-		priorityPaths: l.kind === "typescript" ? [
-			"/main.test.ts",
-			"/main.test.tsx",
-			"/main.test.js"
-		] : ["/main.test.js"],
-		extensions: u,
-		fallbackToFirstFile: !1,
-		ignoreProjectEntry: !0
-	});
-	if (f === void 0) throw Error(typeof d == "string" && d !== "" ? `Test file not found: ${d}.` : "No test file found.");
-	let p = URL.createObjectURL(new Blob(["\nconst api = window.__tp_test__;\n\nif (!api) {\n  throw new Error('Mocha/Chai test API is not initialized.');\n}\n\nexport const describe = api.describe;\nexport const it = api.it;\nexport const expect = api.expect;\n"], { type: "text/javascript" })), m = { imports: {
-		...l.importmap?.imports ?? {},
-		"@tp/test": p
-	} }, h = a(c.files), g = l.kind === "typescript" ? await n(c.files, h, m) : await t(c.files, h, m), _ = g.get(f.path);
-	if (_ === void 0) throw Error(`Test module not built: ${f.path}`);
-	let v = new Map([...h.entries(), ...g.entries()]), y = r(c, "/index.html");
-	return {
-		html: `
+
+export const describe = api.describe;
+export const it = api.it;
+export const expect = api.expect;
+`],{type:`text/javascript`})),h={imports:{...u.importmap?.imports??{},"@tp/test":m}},g=o(l.files),_=u.kind===`typescript`?await r(l.files,g,h):await n(l.files,g,h),v=_.get(p.path);if(v===void 0)throw Error(`Test module not built: ${p.path}`);let y=new Map([...g.entries(),..._.entries()]),b=i(l,`/index.html`);return{html:`
 <!doctype html>
 <html>
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mocha@10/mocha.css">
 </head>
 <body>
-  ${y ? s(y.content) : ""}
+  ${b?c(b.content):``}
   <div id="mocha"></div>
-  ${o()}
-  ${i()}
+  ${s()}
+  ${a()}
 
   <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/mocha@10/mocha.js"><\/script>
   <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/chai@4/chai.js"><\/script>
 
 <script>
+  ${e(`mocha`,`Mocha`,`mocha.version`)}
+  ${e(`chai`,`Chai`,`chai.version`)}
   mocha.setup('bdd');
 
   window.__tp_test__ = {
@@ -115,23 +87,14 @@ async function c(c, l = {}) {
   mocha.reporter(TpConsoleReporter);
 <\/script>
   <script type="importmap">
-${JSON.stringify(m, null, 2)}
+${JSON.stringify(h,null,2)}
   <\/script>
 
   <script type="module">
-    import ${JSON.stringify(_)};
+    import ${JSON.stringify(v)};
     mocha.run();
   <\/script>
 </body>
 </html>
-`,
-		cleanup: () => {
-			URL.revokeObjectURL(p);
-			for (let e of v.values()) URL.revokeObjectURL(e);
-		}
-	};
-}
-//#endregion
-export { c as buildBrowserTestDocument };
-
+`,cleanup:()=>{URL.revokeObjectURL(m);for(let e of y.values())URL.revokeObjectURL(e)}}}export{l as buildBrowserTestDocument};
 //# sourceMappingURL=browser-test-document.js.map

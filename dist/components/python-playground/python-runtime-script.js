@@ -1,13 +1,10 @@
-//#region src/components/python-playground/python-runtime-script.ts
-var e = "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/", t = `${e}pyodide.js`, n = 3;
-function r() {
-	let r = `
+import{n as e,t}from"../../chunks/tool-loading.js";var n=`https://cdn.jsdelivr.net/pyodide/v0.29.3/full/`,r=`${n}pyodide.js`,i=3;function a(){let a=`
 (() => {
   const runtimeOwner = window;
   const runtimeKey = '__tpPythonPlaygroundPyodideRuntime';
 
   const runtime = {
-    version: ${n},
+    version: ${i},
     executionQueue: Promise.resolve(),
     executionWindow: null,
     executionDocument: null,
@@ -35,7 +32,7 @@ function r() {
     runtime.loadPromise = new Promise((resolve, reject) => {
       const script = runtimeOwner.document.createElement('script');
 
-      script.src = ${JSON.stringify(t)};
+      script.src = ${JSON.stringify(r)};
       script.onload = () => resolve();
       script.onerror = () => {
         script.remove();
@@ -58,9 +55,11 @@ function r() {
 
     runtime.pyodidePromise = (async () => {
       await loadPyodideScript();
-      return runtimeOwner.loadPyodide({
-        indexURL: ${JSON.stringify(e)},
+      const pyodide = await runtimeOwner.loadPyodide({
+        indexURL: ${JSON.stringify(n)},
       });
+      ${e(`pyodide`,`Pyodide`,`pyodide.version`)}
+      return pyodide;
     })().catch((error) => {
       runtime.pyodidePromise = null;
       throw error;
@@ -91,6 +90,7 @@ function r() {
 
     for (const name of missingPackages) {
       runtime.loadedPackages.add(name);
+      (${t.toString()})("python-" + name, name);
     }
 
   };
@@ -115,8 +115,7 @@ function r() {
     return execution;
   };
 })();
-`;
-	return `
+`;return`
 <script>
 (() => {
   const runtimeOwner = window.parent !== window ? window.parent : window;
@@ -126,9 +125,9 @@ function r() {
   // instance must not hold up the next project, nor run concurrently with it.
   const abandonedExecution = previous?.executionDocument &&
     previous.executionWindow.document !== previous.executionDocument;
-  if (previous?.version !== ${n} || abandonedExecution) {
+  if (previous?.version !== ${i} || abandonedExecution) {
     const installer = runtimeOwner.document.createElement('script');
-    installer.textContent = ${JSON.stringify(r)};
+    installer.textContent = ${JSON.stringify(a)};
     runtimeOwner.document.head.append(installer);
     installer.remove();
   }
@@ -152,9 +151,5 @@ function r() {
   };
 })();
 <\/script>
-`;
-}
-//#endregion
-export { r as createPyodideRuntimeScript };
-
+`}export{a as createPyodideRuntimeScript};
 //# sourceMappingURL=python-runtime-script.js.map

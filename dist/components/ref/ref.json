@@ -34,7 +34,7 @@
     },
     {
       "name": "tp-button",
-      "summary": "an action button or navigation link with shared sizes, variants and loading states."
+      "summary": "Button component that supports native button and link rendering."
     },
     {
       "name": "tp-glossary",
@@ -46,7 +46,7 @@
     },
     {
       "name": "tp-tooltip",
-      "summary": "Displays anchored tooltip content."
+      "summary": "Tooltip component."
     }
   ],
   "credits": [],

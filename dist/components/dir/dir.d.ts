@@ -23,8 +23,8 @@ import { type TpDirType, type TpSizeType, type TpVariantType } from "../base/bas
  * @tagname tp-dir
  * @attr {string} mode = "auto" - Reading-direction mode (`ltr`, `rtl`, `auto`). In `auto`, RTL is inferred from language or supported region codes.
  * @attr {string} anchor = "" - CSS selector used as the explicit element that receives the selected direction.
- * @attr {string} variant = "neutral" - Icon button variant.
- * @attr {string} size = "m" - Icon button size.
+ * @attr {string} variant = "neutral" - Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info.
+ * @attr {string} size = "m" - Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl.
  * @attr {boolean} disabled = false - Disables the direction trigger.
  *
  * @event tp-dir-change Emitted when the reading direction applied to a target changes.

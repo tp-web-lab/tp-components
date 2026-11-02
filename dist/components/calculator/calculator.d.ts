@@ -29,6 +29,9 @@ import "../textfield/textfield.js";
  * @keyboard {Escape} Clears the expression while its field is focused.
  * @example
  * <tp-calculator></tp-calculator>
+ * @accessibility Provides a labelled expression field and labelled keypad buttons; Enter or = evaluates and Escape clears while the field is focused.
+ * @accessibility Reports results and calculation errors through a status region and marks an invalid expression with aria-invalid.
+ * @accessibilityresponsibility Give the calculation a clear context and explain units and angle mode when they affect the expected answer.
  */
 export declare class TpCalculator extends TpBase {
     private field;

@@ -1,2 +1,1 @@
-import { t as e } from "../../chunks/lsystem.js";
-export { e as TpLsystem };
+import{t as e}from"../../chunks/lsystem2.js";export{e as TpLsystem};

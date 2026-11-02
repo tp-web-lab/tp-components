@@ -24,14 +24,16 @@ type TpThemeMode = "light" | "dark" | "auto";
  * @attr {string} mode = "auto" - Theme mode (`light`, `dark`, `auto`)
  * @attr {string} anchor = "" - CSS selector used as the explicit element that receives the selected theme.
  * @attr {string} ui-anchor = "" - CSS selector used only to anchor the dropdown UI.
- * @attr {string} variant = "neutral" - Icon button variant.
- * @attr {string} size = "m" - Icon button size.
+ * @attr {string} variant = "neutral" - Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info.
+ * @attr {string} size = "m" - Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl.
  * @attr {boolean} disabled = false - Disables the theme trigger.
  *
  * @event tp-theme-change Emitted when the effective theme applied to a target changes.
  * @eventdetail tp-theme-change { mode: "light" | "dark" | "auto"; theme: "light" | "dark"; anchor: string; target: HTMLElement }
  * @example
  * <tp-theme></tp-theme>
+ * @event tp-theme-refresh Emitted when a controller asks other theme controllers to refresh their effective scope; source is the initiating controller and scope is its target element. This is a synchronization notification, distinct from tp-theme-change.
+ * @eventdetail tp-theme-refresh { source: TpTheme; scope: HTMLElement }
  */
 export declare class TpTheme extends TpBase {
     private static readonly styleId;

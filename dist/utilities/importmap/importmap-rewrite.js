@@ -1,10 +1,2 @@
-import { resolveSpecifier as e } from "./importmap-resolver.js";
-//#region src/utilities/importmap/importmap-rewrite.ts
-var t = /(?<=from\s+['"])([^'"]+)(?=['"])|(?<=import\s*\(\s*['"])([^'"]+)(?=['"]\s*\))/g;
-function n(n, r) {
-	return n.replace(t, (t) => e(t, r) ?? t);
-}
-//#endregion
-export { n as rewriteImports };
-
+import{resolveSpecifier as e}from"./importmap-resolver.js";var t=/(?<=from\s+['"])([^'"]+)(?=['"])|(?<=import\s*\(\s*['"])([^'"]+)(?=['"]\s*\))/g;function n(n,r){return n.replace(t,t=>e(t,r)??t)}export{n as rewriteImports};
 //# sourceMappingURL=importmap-rewrite.js.map

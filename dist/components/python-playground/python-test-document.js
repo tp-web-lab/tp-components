@@ -1,32 +1,12 @@
-import { E as e, f as t, n, t as r } from "../../chunks/playground-build-utils.js";
-import { createPyodideRuntimeScript as i } from "./python-runtime-script.js";
-//#region src/components/python-playground/python-test-document.ts
-function a(e) {
-	return e.replace(/<script\b[\s\S]*?<\/script>/gi, "");
-}
-async function o(o, s = {}) {
-	let c = o.test, l = typeof c == "string" && c !== "" ? t(o, c) : e(o, {
-		entry: s.defaultTest,
-		priorityPaths: ["/main.test.py", "/main.spec.py"],
-		extensions: [
-			".test.py",
-			".tests.py",
-			".spec.py"
-		],
-		fallbackToFirstFile: !1,
-		ignoreProjectEntry: !0
-	});
-	if (l === void 0) throw Error(typeof c == "string" && c !== "" ? `Test file not found: ${c}.` : "No Python test file found.");
-	let u = t(o, "/index.html"), d = u ? a(u.content) : "", f = JSON.stringify(Object.fromEntries(o.files.map((e) => [e.path, e.content]))), p = JSON.stringify(l.path), m = JSON.stringify(s.libs ?? []);
-	return { html: `
+import{t as e}from"../../chunks/tool-loading.js";import{E as t,f as n,n as r,t as i}from"../../chunks/playground-build-utils.js";import{createPyodideRuntimeScript as a}from"./python-runtime-script.js";function o(e){return e.replace(/<script\b[\s\S]*?<\/script>/gi,``)}async function s(s,c={}){let l=s.test,u=typeof l==`string`&&l!==``?n(s,l):t(s,{entry:c.defaultTest,priorityPaths:[`/main.test.py`,`/main.spec.py`],extensions:[`.test.py`,`.tests.py`,`.spec.py`],fallbackToFirstFile:!1,ignoreProjectEntry:!0});if(u===void 0)throw Error(typeof l==`string`&&l!==``?`Test file not found: ${l}.`:`No Python test file found.`);let d=n(s,`/index.html`),f=d?o(d.content):``,p=JSON.stringify(Object.fromEntries(s.files.map(e=>[e.path,e.content]))),m=JSON.stringify(u.path),h=JSON.stringify(c.libs??[]);return{html:`
 <!doctype html>
 <html>
 <head></head>
 <body>
-  ${d}
-  ${r()}
-  ${n()}
+  ${f}
   ${i()}
+  ${r()}
+  ${a()}
 
   <script>
     function removeProjectPath(pyodide, path) {
@@ -104,7 +84,7 @@ async function o(o, s = {}) {
     async function main() {
       const pyodide = await window.tpLoadPyodide();
 
-      const libs = ${m};
+      const libs = ${h};
 
       if (libs.length > 0) {
         await window.tpLoadPyodidePackages(pyodide, libs);
@@ -115,8 +95,8 @@ async function o(o, s = {}) {
       resetProjectDirectory(pyodide);
       pyodide.FS.chdir('/project');
 
-      const files = ${f};
-      const testPath = ${p}.replace(/^\\//, '');
+      const files = ${p};
+      const testPath = ${m}.replace(/^\\//, '');
 
       try {
         writeProjectFiles(pyodide, files);
@@ -125,14 +105,135 @@ async function o(o, s = {}) {
         pyodide.globals.set('tp_project_paths', Object.keys(files));
         pyodide.globals.set('tp_window', window);
 
-        pyodide.runPython(${JSON.stringify("\nimport sys\n\nif \"/project\" not in sys.path:\n    sys.path.insert(0, \"/project\")\n\nif \"\" not in sys.path:\n    sys.path.insert(0, \"\")\n\nimport types\n\nclass TpPreviewJsModule(types.ModuleType):\n    def __getattr__(self, name):\n        return getattr(tp_window, name)\n\nsys.modules[\"js\"] = TpPreviewJsModule(\"js\")\n\nproject_modules = []\n\nfor path in tp_project_paths:\n    if not path.endswith(\".py\"):\n        continue\n\n    module_name = path.removeprefix(\"/\").removesuffix(\".py\").replace(\"/\", \".\")\n\n    if module_name == \"__init__\":\n        continue\n\n    if module_name.endswith(\".__init__\"):\n        module_name = module_name.removesuffix(\".__init__\")\n\n    project_modules.append(module_name)\n\nfor module_name in project_modules:\n    sys.modules.pop(module_name, None)\n")});
+        pyodide.runPython(${JSON.stringify(`
+import sys
+
+if "/project" not in sys.path:
+    sys.path.insert(0, "/project")
+
+if "" not in sys.path:
+    sys.path.insert(0, "")
+
+import types
+
+class TpPreviewJsModule(types.ModuleType):
+    def __getattr__(self, name):
+        return getattr(tp_window, name)
+
+sys.modules["js"] = TpPreviewJsModule("js")
+
+project_modules = []
+
+for path in tp_project_paths:
+    if not path.endswith(".py"):
+        continue
+
+    module_name = path.removeprefix("/").removesuffix(".py").replace("/", ".")
+
+    if module_name == "__init__":
+        continue
+
+    if module_name.endswith(".__init__"):
+        module_name = module_name.removesuffix(".__init__")
+
+    project_modules.append(module_name)
+
+for module_name in project_modules:
+    sys.modules.pop(module_name, None)
+`)});
 
         const source = files['/' + testPath] ?? files[testPath] ?? '';
 
         await pyodide.loadPackagesFromImports(source);
+ for (const name of Object.keys(pyodide.loadedPackages ?? {})) {
+ (${e.toString()})("python-" + name, name);
+ }
         pyodide.globals.set('tp_console', console);
 
-        await pyodide.runPythonAsync(${JSON.stringify("\nfrom pathlib import Path\nimport importlib.util\nimport unittest\n\ntest_path = Path(tp_test_path)\n\nspec = importlib.util.spec_from_file_location(\"tp_test_module\", test_path)\n\nif spec is None or spec.loader is None:\n    raise RuntimeError(f\"Unable to load test module: {test_path}\")\n\nmodule = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(module)\n\nsuite = unittest.defaultTestLoader.loadTestsFromModule(module)\n\nclass TpTestResult(unittest.TestResult):\n    def __init__(self):\n        super().__init__()\n        self.current_class = None\n        self.pass_count = 0\n\n    def _class_name(self, test):\n        return test.__class__.__name__\n\n    def _method_name(self, test):\n        return getattr(test, \"_testMethodName\", str(test))\n\n    def startTest(self, test):\n        class_name = self._class_name(test)\n\n        if self.current_class != class_name:\n            if self.current_class is not None:\n                tp_console.groupEnd()\n\n            self.current_class = class_name\n            tp_console.group(class_name)\n\n        super().startTest(test)\n\n    def addSuccess(self, test):\n        super().addSuccess(test)\n        self.pass_count += 1\n        tp_console.info(\"%c✓ \" + self._method_name(test), \"color: green\")\n\n    def addFailure(self, test, err):\n        super().addFailure(test, err)\n        error_type, error_value, _ = err\n        tp_console.error(\n            \"%c✗ \" + self._method_name(test),\n            \"color: red; font-weight: bold;\",\n            f\"{error_type.__name__}: {error_value}\",\n        )\n\n    def addError(self, test, err):\n        super().addError(test, err)\n        error_type, error_value, _ = err\n        tp_console.error(\n            \"%c⚠ \" + self._method_name(test),\n            \"color: red; font-weight: bold;\",\n            f\"{error_type.__name__}: {error_value}\",\n        )\n\n    def stopTestRun(self):\n        if self.current_class is not None:\n            tp_console.groupEnd()\n\nresult = TpTestResult()\nsuite.run(result)\nresult.stopTestRun()\n\nprint(\"\")\n\nif result.wasSuccessful():\n    print(f\"Tests passed: {result.testsRun}\")\nelse:\n    passed = result.pass_count\n    print(\n        f\"Tests finished: {passed} passed, \"\n        f\"{len(result.failures)} failed, \"\n        f\"{len(result.errors)} errors\"\n    )\n")});
+        await pyodide.runPythonAsync(${JSON.stringify(`
+from pathlib import Path
+import importlib.util
+import unittest
+
+test_path = Path(tp_test_path)
+
+spec = importlib.util.spec_from_file_location("tp_test_module", test_path)
+
+if spec is None or spec.loader is None:
+    raise RuntimeError(f"Unable to load test module: {test_path}")
+
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+
+suite = unittest.defaultTestLoader.loadTestsFromModule(module)
+
+class TpTestResult(unittest.TestResult):
+    def __init__(self):
+        super().__init__()
+        self.current_class = None
+        self.pass_count = 0
+
+    def _class_name(self, test):
+        return test.__class__.__name__
+
+    def _method_name(self, test):
+        return getattr(test, "_testMethodName", str(test))
+
+    def startTest(self, test):
+        class_name = self._class_name(test)
+
+        if self.current_class != class_name:
+            if self.current_class is not None:
+                tp_console.groupEnd()
+
+            self.current_class = class_name
+            tp_console.group(class_name)
+
+        super().startTest(test)
+
+    def addSuccess(self, test):
+        super().addSuccess(test)
+        self.pass_count += 1
+        tp_console.info("%c✓ " + self._method_name(test), "color: green")
+
+    def addFailure(self, test, err):
+        super().addFailure(test, err)
+        error_type, error_value, _ = err
+        tp_console.error(
+            "%c✗ " + self._method_name(test),
+            "color: red; font-weight: bold;",
+            f"{error_type.__name__}: {error_value}",
+        )
+
+    def addError(self, test, err):
+        super().addError(test, err)
+        error_type, error_value, _ = err
+        tp_console.error(
+            "%c⚠ " + self._method_name(test),
+            "color: red; font-weight: bold;",
+            f"{error_type.__name__}: {error_value}",
+        )
+
+    def stopTestRun(self):
+        if self.current_class is not None:
+            tp_console.groupEnd()
+
+result = TpTestResult()
+suite.run(result)
+result.stopTestRun()
+
+print("")
+
+if result.wasSuccessful():
+    print(f"Tests passed: {result.testsRun}")
+else:
+    passed = result.pass_count
+    print(
+        f"Tests finished: {passed} passed, "
+        f"{len(result.failures)} failed, "
+        f"{len(result.errors)} errors"
+    )
+`)});
       } catch (error) {
         console.error(error?.message ?? error);
       }
@@ -142,9 +243,5 @@ async function o(o, s = {}) {
   <\/script>
 </body>
 </html>
-` };
-}
-//#endregion
-export { o as buildPythonTestDocument };
-
+`}}export{s as buildPythonTestDocument};
 //# sourceMappingURL=python-test-document.js.map

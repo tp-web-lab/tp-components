@@ -1,8 +1,2 @@
-Array.prototype.slice;
-function e(e) {
-	return typeof e == "object" && "length" in e ? e : Array.from(e);
-}
-//#endregion
-export { e as t };
-
+Array.prototype.slice;function e(e){return typeof e==`object`&&`length`in e?e:Array.from(e)}export{e as t};
 //# sourceMappingURL=array.js.map

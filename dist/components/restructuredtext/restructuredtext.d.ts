@@ -11,6 +11,10 @@
  * @summary reStructuredText parsing and rendering.
  */
 /**
+ * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+ * @summary Shared parsers, games and rendering utilities.
+ */
+/**
  * @credit highlight.js https://highlightjs.org/
  * @summary Source-code syntax highlighting.
  */
@@ -73,6 +77,8 @@ export declare class TpRestructuredText extends TpBase {
     static get observedAttributes(): string[];
     private readonly outputElement;
     private renderToken;
+    private readonly pendingVisibility;
+    disconnectedCallback(): void;
     private inlineSourceSnapshot;
     protected connectedCallback(): void;
     protected attributeChangedCallback(): void;
