@@ -59,6 +59,12 @@ A slide declares its own notes, for example in HTML:
 
 Use the equivalent native component syntax in Markdown, AsciiDoc and reStructuredText; the examples below supply each format.
 
+### Content sizing
+
+Slide content uses relative `em` dimensions for headings, code, tables, content spacing, figure padding, rounded corners, shadows and the default grid, cluster and stack gaps. These dimensions follow the responsive slide font size in all markup variants. The toolbar, slide navigation and speaker notes keep their interface sizing.
+
+For custom slide layouts, use `em` for image sizes, gaps and padding that should grow with the text, and `%` or viewport limits to keep content within the slide. Explicit author dimensions and component-specific sizes remain in effect; entering fullscreen does not replace them automatically. Global reset and design-token defaults remain unchanged outside slides.
+
 ### Author directives
 
 `<tp-markup-multi-slides>` specializes `<tp-markup-multi-pages>`. It uses the same toolbar, splitter, sidebar, parsers, source display, fallback page, attributes, and full-window layout. Each linked document is one slide and can contain any markup supported by its format. The sidebar is hidden by default; add `menu` to show it initially.
@@ -188,6 +194,8 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markup-multi-slides.TpMarkupMultiSlides.html)
 <!-- tp-docgen:typedoc:end -->
+
+
 
 
 

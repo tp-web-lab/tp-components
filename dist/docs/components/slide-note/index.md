@@ -134,6 +134,8 @@ CSS properties
 [More details…](/api/classes/components_slide-note.TpSlideNote.html)
 <!-- tp-docgen:typedoc:end -->
 
+
+
 ### Imports
 
 ::: tp-tabs

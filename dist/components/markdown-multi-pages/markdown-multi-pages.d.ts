@@ -11,6 +11,7 @@ import "../color/color.js";
 import "../lang/lang.js";
 import "../source/source.js";
 import "../fullscreen/fullscreen.js";
+import "../screen/screen.js";
 import "../theme/theme.js";
 import "../tree/tree.js";
 import "../splitter/splitter.js";

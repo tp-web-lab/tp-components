@@ -1,0 +1,146 @@
+{
+  "tagname": "tp-screen",
+  "classname": "TpScreen",
+  "superclass": "TpBase",
+  "description": "Previews and applies absolute device sizes or relative aspect ratios to the page.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-screen src=\"/docs/components/screen/examples/responsive.html\"></tp-screen>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "device",
+      "description": "Device preset in CSS pixels, or a ratio fitted to the available preview area.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpScreenDevice",
+      "default": "\"default\""
+    },
+    {
+      "name": "disabled",
+      "description": "Disables and closes the preview.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "size",
+      "description": "Trigger size.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpSizeType",
+      "default": "\"m\""
+    },
+    {
+      "name": "src",
+      "description": "Page URL to preview; empty uses the current document URL, including its route.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "variant",
+      "description": "Trigger color variant.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpVariantType",
+      "default": "\"neutral\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "close(): void",
+      "inherited": false,
+      "description": "Cancels the tentative choice and restores the last confirmed format."
+    },
+    {
+      "name": "confirm(): void",
+      "inherited": false,
+      "description": "Confirms the tentative format, or restores the original page for default."
+    },
+    {
+      "name": "show(): void",
+      "inherited": false,
+      "description": "Opens the format chooser, keeping the current applied page alive."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-screen-change",
+      "description": "Emitted when the preview opens or its viewport changes.",
+      "detail": "{ device: string; width: number; height: number }"
+    },
+    {
+      "name": "tp-screen-confirm",
+      "description": "Emitted after OK applies the selected format.",
+      "detail": "{ device: string }"
+    },
+    {
+      "name": "tp-screen-edit",
+      "description": "Emitted when screen edit occurs.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-screen-mode",
+      "description": "Emitted when screen mode occurs.",
+      "detail": "void"
+    },
+    {
+      "name": "tp-screen-ready",
+      "description": "Emitted when screen ready occurs.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-iframe",
+      "summary": "Controlled iframe component."
+    },
+    {
+      "name": "tp-menu",
+      "summary": "Accessible menu component."
+    },
+    {
+      "name": "tp-modal",
+      "summary": "Modal overlay component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Screen",
+    "introduction": "",
+    "interactions": "#### Mouse interactions\n\n| Control | Result |\n| --- | --- |\n| Screen preview | Hover to see the currently applied format and window width and height in CSS pixels; click to open the selected device viewport. |\n| Absolute formats / Relative formats | Preview a tentative format without reloading the page; the active choice is highlighted. |\n| OK | Apply the selected format; default restores the original page. |\n| Cancel / Close preview | Discard the tentative choice and restore the last confirmed format. |\n| Screen formats | Reopen the chooser from an applied page without its own Screen control. |\n\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move through controls within the modal preview. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button or device option. |\n| <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> | Move between device menu options. |\n| <kbd>Escape</kbd> | Cancel the chooser, or restore the original window from an applied view. For cross-origin content, focus an outer control first. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to focus. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |",
+    "keyboard": [
+      {
+        "key": "Enter / Space",
+        "description": "Opens the focused preview button or selects a focused device."
+      },
+      {
+        "key": "Escape",
+        "description": "Cancels the chooser; from an applied page, restores the original window."
+      }
+    ]
+  }
+}

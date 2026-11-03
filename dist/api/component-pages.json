@@ -146,6 +146,7 @@
   "tp-restructuredtext-viewer-question": "classes/components_restructuredtext-viewer-question.TpRestructuredTextViewerQuestion.html",
   "tp-save-audio": "classes/components_save-audio.TpSaveAudio.html",
   "tp-save-image": "classes/components_save-image.TpSaveImage.html",
+  "tp-screen": "classes/components_screen.TpScreen.html",
   "tp-sidebar": "classes/components_sidebar_sidebar.TpSidebar.html",
   "tp-single-choice-question": "classes/components_single-choice-question.TpSingleChoiceQuestion.html",
   "tp-skeleton": "classes/components_skeleton.TpSkeleton.html",

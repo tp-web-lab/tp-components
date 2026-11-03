@@ -28,6 +28,9 @@ export declare class TpFullscreen extends TpBase {
     private addedThemeClass;
     private lastFullscreenTarget;
     private lastFullscreenState;
+    private screenFrame;
+    private screenDocument;
+    private readonly handleScreenFullscreenChange;
     get anchor(): string;
     set anchor(value: string);
     get variant(): TpVariantType;
@@ -41,6 +44,7 @@ export declare class TpFullscreen extends TpBase {
     protected attributeChangedCallback(): void;
     private ensureControl;
     private updateControl;
+    private hasScreenFullscreen;
     private toggleFullscreen;
     private resolveFullscreenTarget;
     private resolveAnchoredTarget;

@@ -10,6 +10,7 @@
       - [Colors](components/color/index.md)
       - [Fullscreen](components/fullscreen/index.md)
       - [Languages](components/lang/index.md)
+      - [Screen](components/screen/index.md)
       - [Themes](components/theme/index.md)
     - [Documentations](components/documentations.md)
       - [Multi-pages](components/multi-pages.md)

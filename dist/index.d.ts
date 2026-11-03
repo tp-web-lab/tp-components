@@ -196,6 +196,7 @@ export { TpMask } from "./components/mask/mask.js";
 export { TpNote } from "./components/note/note.js";
 export { TpRef } from "./components/ref/ref.js";
 export { type AudioSaveTarget, TpSaveAudio, type TpSaveAudioFormat, } from "./components/save-audio/save-audio.js";
+export { TP_SCREEN_DEVICES, TpScreen, type TpScreenDevice, } from "./components/screen/screen.js";
 export { type TpSlopeProfile, type TpSlopeProfiles, TpSlopeSimulator, } from "./components/slope-simulator/slope-simulator.js";
 export { type TangramPlacement, TpTangram, } from "./components/tangram/tangram.js";
 export { TpVideoPlayer, type TpVideoPlayerErrorDetail, type TpVideoPlayerEventDetail, } from "./components/video-player/video-player.js";

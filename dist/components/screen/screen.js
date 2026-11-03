@@ -1,0 +1,1 @@
+import{n as e,t}from"../../chunks/screen.js";export{t as TP_SCREEN_DEVICES,e as TpScreen};

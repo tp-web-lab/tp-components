@@ -9,7 +9,7 @@ export type TpMarkupSinglePageLanguage = "html" | "markdown" | "asciidoc" | "res
  *
  * @tagname tp-markup-single-page
  * @attr {string} src = "" - Source file. The extension selects the renderer.
- * @attr {string | null} toolbar = null - Optional comma-separated controls: code, calc, postit, clock, lang, color, theme, fullscreen. Empty enables all; absent hides the toolbar.
+ * @attr {string | null} toolbar = null - Optional comma-separated controls: code, calc, postit, clock, lang, color, theme, screen, fullscreen. Empty enables all; absent hides the toolbar.
  * @attr {string} git = "" - Repository URL. Adds a source link before Code when the toolbar is enabled.
  * @attr {string} label = "" - Text displayed in the center of the optional toolbar.
  * @attr {string} langs = "en" - Candidate document languages. The first uses the source directory; others use language subdirectories.

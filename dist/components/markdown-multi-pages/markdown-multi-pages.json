@@ -138,6 +138,10 @@
       "summary": "creates and edits persistent personal annotations attached to document elements."
     },
     {
+      "name": "tp-screen",
+      "summary": "Responsive page preview in selectable device viewports."
+    },
+    {
       "name": "tp-source",
       "summary": "Source repository link button."
     },

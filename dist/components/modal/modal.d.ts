@@ -2,7 +2,11 @@
  * @module components/modal
  * @summary Modal overlay component.
  */
-import { TpOverlayElement } from '../overlay/overlay.js';
+/**
+ * @tp-dependency tp-base
+ * @summary Shared base class for tp-* components.
+ */
+import { TpOverlayElement } from "../overlay/overlay.js";
 /**
  * Modal overlay component.
  *
