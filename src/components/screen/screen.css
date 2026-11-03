@@ -1,0 +1,30 @@
+tp-screen { display: inline-flex; vertical-align: middle; }
+tp-screen[hidden] { display: none; }
+tp-screen > tp-icon-button { --tp-icon-button-size: 2rem; --tp-icon-button-icon-size: 1.15rem; }
+tp-screen > tp-icon-button > button { border: 1px solid var(--tp-neutral-stroke-mid); background: var(--tp-paper-color); }
+tp-modal.tp-screen-dialog {
+  width: calc(100dvw - 2rem); height: calc(100dvh - 2rem);
+  box-sizing: border-box; padding: .75rem; border-radius: .5rem;
+  background: var(--tp-paper-color); color: var(--tp-text-body);
+  overflow: hidden; flex-direction: column; gap: .5rem;
+}
+tp-modal.tp-screen-dialog[open] { display: flex; }
+.tp-screen-header { display: flex; align-items: start; gap: .5rem; flex: 0 0 auto; }
+.tp-screen-menus { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: .25rem; }
+.tp-screen-header tp-menu { min-width: 0; overflow-x: auto; }
+.tp-screen-header tp-menu > ul { flex-wrap: nowrap; white-space: nowrap; }
+.tp-screen-header [data-device] { padding: .3rem .5rem; border-radius: .25rem; }
+.tp-screen-header [aria-current="true"] { background: var(--tp-brand-fill-soft); color: var(--tp-brand-text-on-soft); font-weight: 700; }
+.tp-screen-status { flex: 0 0 auto; margin: 0; font-size: .85rem; }
+.tp-screen-stage { position: relative; flex: 1; min-height: 0; overflow: hidden; background: var(--tp-neutral-fill-softer); }
+.tp-screen-viewport { position: absolute; top: 50%; left: 50%; transform-origin: center; background: white; box-shadow: 0 0 0 1px var(--tp-neutral-stroke-mid); }
+.tp-screen-viewport > tp-iframe { width: 100%; height: 100%; }
+
+.tp-screen-actions { display: flex; justify-content: flex-end; gap: .5rem; flex: 0 0 auto; }
+tp-modal.tp-screen-dialog.tp-screen-applied { width: 100dvw; height: 100dvh; padding: 0; border: 0; border-radius: 0; gap: 0; }
+.tp-screen-applied > .tp-screen-header, .tp-screen-applied > .tp-screen-status, .tp-screen-applied > .tp-screen-actions { display: none; }
+
+.tp-screen-edit-control { display: none; position: absolute; right: .5rem; bottom: .5rem; z-index: 1; background: var(--tp-paper-color); border-radius: .25rem; }
+.tp-screen-applied:not([data-page-screen]) > .tp-screen-edit-control { display: inline-flex; }
+
+.tp-screen-menus [aria-label="Absolute formats"] [data-device] { padding: .15rem; }

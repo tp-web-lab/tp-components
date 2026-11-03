@@ -18,7 +18,7 @@ The custom `<tp-fullscreen>` element implements the <tp-icon name="fullscreen" l
 
 | Control or gesture | Result |
 | --- | --- |
-| Fullscreen button | Expand the associated content; activate again to leave fullscreen. |
+| Fullscreen button | Expand the associated content; activate again to leave fullscreen. In a same-origin Screen preview inside an already fullscreen page, Exit fullscreen leaves the outer fullscreen instead of opening a second fullscreen. |
 
 #### Keyboard interactions
 
@@ -134,6 +134,8 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_fullscreen.TpFullscreen.html)
 <!-- tp-docgen:typedoc:end -->
+
+
 
 
 

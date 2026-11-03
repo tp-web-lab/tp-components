@@ -17,6 +17,7 @@ import { describeAttributeControl } from "./interactive-attribute-examples.mjs";
 
 /** Editorial objectives for the existing examples; no descriptions are inferred from titles alone. */
 const basic = {
+ screen: "Try the absolute and relative format rows, then use OK to apply a format or Cancel to keep the last choice. Type into the field and reopen the chooser to check that the applied page keeps its state.",
  "slide-note": "Expand Speaker notes, read the transcript and try the inherited speech controls. Collapse the panel while narration continues.",
  "video-player": "Play the three-second moving-shapes clip, pause it and seek with the native video controls.",
  "exercise": "Read the shared museum context, answer both questions and submit each answer to inspect its feedback and solution.",

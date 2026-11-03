@@ -3,6 +3,67 @@
 	font-size: clamp(1rem, calc(0.65rem + 1.15vw), 2.5rem);
 }
 
+/* Relative geometry is scoped to slide content, not the presentation chrome.
+   Keep the root font size and viewport/media-query units independent of this scale. */
+:where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content {
+	--tp-content-spacing: 1.75em;
+	--tp-border-radius-xs: 0.1875em;
+	--tp-border-radius-sm: 0.25em;
+	--tp-border-radius-md: 0.375em;
+	--tp-border-radius-lg: 0.5625em;
+	--tp-border-radius-xl: 0.75em;
+	--tp-shadow-softer: 0 0.0625em 0.0625em color-mix(in oklab, transparent, var(--tp-shadow-color) 4%);
+	--tp-shadow-soft: 0 0.125em 0.1875em color-mix(in oklab, transparent, var(--tp-shadow-color) 8%);
+	--tp-shadow-mid: 0 0.1875em 0.375em color-mix(in oklab, transparent, var(--tp-shadow-color) 10%);
+	--tp-shadow-loud: 0 0.375em 0.75em color-mix(in oklab, transparent, var(--tp-shadow-color) 12%);
+	--tp-shadow-louder: 0 0.5em 1em color-mix(in oklab, transparent, var(--tp-shadow-color) 14%);
+	--tp-inset-shadow-softer: inset 0 0.125em 0.125em -0.125em color-mix(in oklab, black, transparent 94%);
+	--tp-inset-shadow-soft: inset 0 0.25em 0.25em -0.25em color-mix(in oklab, black, transparent 90%);
+	--tp-inset-shadow-mid: inset 0 0.5em 0.5em -0.5em color-mix(in oklab, black, transparent 88%);
+	--tp-inset-shadow-loud: inset 0 1em 1em -1em color-mix(in oklab, black, transparent 85%);
+	--tp-inset-shadow-louder: inset 0 1.5em 1.5em -1.5em color-mix(in oklab, black, transparent 82%);
+	--tp-grid-gap: 1em;
+	--tp-cluster-gap: 1em;
+	--stack-gap: 1em;
+}
+
+:where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content :where(pre, table):not(:where([data-slide-notes], [data-slide-notes] *)) {
+	font-size: 0.9375em;
+}
+
+:where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content :where(summary):not(:where([data-slide-notes], [data-slide-notes] *)) {
+	padding-block: 0.5em;
+}
+
+:where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content :where(fieldset):not(:where([data-slide-notes], [data-slide-notes] *)) {
+	padding: 1.5em;
+}
+
+/* Headings scale with slide typography; author styles can still override them. */
+:where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content :where(h1, .tp-h1) {
+	font-size: 2.488em;
+}
+
+:where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content :where(h2, .tp-h2) {
+	font-size: 2.074em;
+}
+
+:where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content :where(h3, .tp-h3) {
+	font-size: 1.728em;
+}
+
+:where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content :where(h4, .tp-h4) {
+	font-size: 1.44em;
+}
+
+:where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content :where(h5, .tp-h5) {
+	font-size: 1.2em;
+}
+
+:where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content :where(h6, .tp-h6) {
+	font-size: 1.125em;
+}
+
 .tp-markup-multi-slides-host [data-slide-step][data-slide-fragment-hidden] {
 	visibility: hidden;
 	pointer-events: none;

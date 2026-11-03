@@ -28,6 +28,7 @@ const builtinLibraries: Record<string, (name: string) => Promise<unknown>> = {
 	flags: () => import("./icon-library-flags.js"),
 	numbers: () => import("./icon-library-numbers.js"),
 	letters: () => import("./icon-library-letters.js"),
+	screens: () => import("./icon-library-screens.js"),
 	components: async (name) =>
 		(await import("./icon-component-source.js")).loadComponentIcon(name),
 };
@@ -129,7 +130,7 @@ const cache = new Map<string, string | null>();
  * @summary Displays SVG icons from inline markup, a URL or an icon library, with sizing, color, transforms and fallbacks.
  * @tagname tp-icon
  * @attr {string} name = "" - Icon identifier in the selected library, for example heart or settings. Used when no inline SVG or successfully loaded src is available.
- * @attr {string} library = "tp" - Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters and components. Custom registered libraries are also accepted.
+ * @attr {string} library = "tp" - Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters, screens and components. Custom registered libraries are also accepted.
  * @attr {string} src = "" - URL of an SVG file to load. Relative URLs resolve against the containing source document when available, otherwise the page URL. Inline SVG takes precedence; a failed load falls back to name, then the fallback settings.
  * @attr {string} size = "1em" - Base width and height as a CSS length, for example 24px, 2rem or 1.5em. The scale factor multiplies both dimensions; 1em follows the surrounding font size.
  * @attr {string} color = "" - CSS color applied to the SVG and its colorizable fills and strokes, for example red, #2563eb or var(--brand-color). Empty inherits the surrounding text color; explicit fixed SVG colors are preserved.
@@ -208,7 +209,7 @@ export class TpIcon extends TpBase {
 	}
 
 	/**
-	 * @summary Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters and components. Custom registered libraries are also accepted.
+	 * @summary Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters, screens and components. Custom registered libraries are also accepted.
 	 * @attr library
 	 * @default tp
 	 */

@@ -45,6 +45,10 @@
  * @summary creates and edits persistent personal annotations attached to document elements.
  */
 /**
+ * @tp-dependency tp-screen
+ * @summary Responsive page preview in selectable device viewports.
+ */
+/**
  * @tp-dependency tp-source
  * @summary Source repository link button.
  */
@@ -84,6 +88,7 @@ import "../color/color.js";
 import "../lang/lang.js";
 import "../source/source.js";
 import "../fullscreen/fullscreen.js";
+import "../screen/screen.js";
 import "../theme/theme.js";
 import "../tree/tree.js";
 import "../splitter/splitter.js";
@@ -391,7 +396,9 @@ export class TpMarkupMultiPages extends TpBase {
 
 		const view = this.ownerDocument.defaultView;
 		const ignoresInheritedRoute =
-			this.hasAttribute("repository") && view?.frameElement !== null;
+			this.hasAttribute("repository") &&
+			view?.frameElement !== null &&
+			!view?.frameElement?.hasAttribute("data-tp-screen-preview");
 		const initialHref = ignoresInheritedRoute ? null : this.readCurrentHref();
 		if (initialHref === null || initialHref === "") {
 			await this.navigate(
@@ -417,6 +424,7 @@ export class TpMarkupMultiPages extends TpBase {
           <tp-lang hidden section="end" langs="${escapeHtml(this.langs)}"></tp-lang>
           <tp-color section="end" data-role="brand"></tp-color>
           <tp-theme section="end"></tp-theme>
+          <tp-screen section="end"></tp-screen>
           <tp-fullscreen section="end"></tp-fullscreen>
         </tp-toolbar>
         <tp-splitter class="tp-markup-multi-pages" axis="horizontal" position="20%" storage-key="tp-markup-multi-pages-sidebar">

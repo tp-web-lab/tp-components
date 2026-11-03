@@ -57,7 +57,7 @@
     },
     {
       "name": "library",
-      "description": "Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters and components. Custom registered libraries are also accepted.",
+      "description": "Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters, screens and components. Custom registered libraries are also accepted.",
       "reflected": true,
       "static": false,
       "inherited": false,

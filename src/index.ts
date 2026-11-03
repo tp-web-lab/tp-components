@@ -503,6 +503,11 @@ export {
 	type TpSaveAudioFormat,
 } from "./components/save-audio/save-audio.js";
 export {
+	TP_SCREEN_DEVICES,
+	TpScreen,
+	type TpScreenDevice,
+} from "./components/screen/screen.js";
+export {
 	type TpSlopeProfile,
 	type TpSlopeProfiles,
 	TpSlopeSimulator,
@@ -511,7 +516,6 @@ export {
 	type TangramPlacement,
 	TpTangram,
 } from "./components/tangram/tangram.js";
-
 export {
 	TpVideoPlayer,
 	type TpVideoPlayerErrorDetail,

@@ -277,6 +277,7 @@ describe("single-page toolbar", () => {
 			"lang",
 			"color",
 			"theme",
+			"screen",
 			"fullscreen",
 		]);
 		for (const name of ["code", "calc", "postit"])
@@ -285,7 +286,14 @@ describe("single-page toolbar", () => {
 					.querySelector(`[data-action="${name}"]`)
 					?.getAttribute("section"),
 			).toBe("start");
-		for (const name of ["clock", "lang", "color", "theme", "fullscreen"])
+		for (const name of [
+			"clock",
+			"lang",
+			"color",
+			"theme",
+			"screen",
+			"fullscreen",
+		])
 			expect(
 				element
 					.querySelector(`[data-action="${name}"]`)

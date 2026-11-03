@@ -10,3 +10,5 @@ import "../fullscreen/fullscreen.js";
 import "../icon-button/icon-button.js";
 import "../post-it-editor/post-it-editor.js";
 import "../toolbar/toolbar.js";
+
+import "../screen/screen.js";

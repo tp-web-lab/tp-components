@@ -130,6 +130,11 @@ CSS properties
 :::
 <!-- /tp-docgen:api -->
 
+<!-- tp-docgen:typedoc:start -->
+[More details…](/api/classes/components_slide-note.TpSlideNote.html)
+<!-- tp-docgen:typedoc:end -->
+
+
 ### Imports
 
 ::: tp-tabs

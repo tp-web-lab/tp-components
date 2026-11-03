@@ -425,6 +425,8 @@ CSS properties
 
 
 
+
+
 ### Imports
 
 ::: tp-tabs
@@ -504,6 +506,10 @@ All tp-components used by `<tp-markdown-multi-pages>` are loaded automatically b
 @summary creates and edits persistent personal annotations attached to document elements.
 -->
 <!--
+@tp-dependency tp-screen
+@summary Responsive page preview in selectable device viewports.
+-->
+<!--
 @tp-dependency tp-source
 @summary Source repository link button.
 -->
@@ -539,6 +545,7 @@ All tp-components used by `<tp-markdown-multi-pages>` are loaded automatically b
 - [`<tp-lang>`](../lang/index.md) : Documentation language selector.
 - [`<tp-markdown>`](../markdown/index.md) : Markdown rendering component.
 - [`<tp-post-it-editor>`](../post-it-editor/index.md) : creates and edits persistent personal annotations attached to document elements.
+- [`<tp-screen>`](../screen/index.md) : Responsive page preview in selectable device viewports.
 - [`<tp-source>`](../source/index.md) : Source repository link button.
 - [`<tp-splitter>`](../splitter/index.md) : Splitter component with two resizable panels.
 - [`<tp-textfield>`](../textfield/index.md) : Single-line and automatically growing multiline text field.

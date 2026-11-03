@@ -67,6 +67,10 @@ export class TpFullscreen extends TpBase {
 	private addedThemeClass: "tp-light" | "tp-dark" | null = null;
 	private lastFullscreenTarget: HTMLElement | null = null;
 	private lastFullscreenState: boolean | null = null;
+	private screenFrame: Element | null = null;
+	private screenDocument: Document | null = null;
+	private readonly handleScreenFullscreenChange = (): void =>
+		this.updateControl();
 
 	public get anchor(): string {
 		return this.getAttribute("anchor") ?? "";
@@ -110,6 +114,19 @@ export class TpFullscreen extends TpBase {
 	protected override connectedCallback(): void {
 		super.connectedCallback();
 		this.ensureGlobalStyle(STYLE_ID, style);
+		try {
+			const frame = this.ownerDocument.defaultView?.frameElement;
+			if (frame?.hasAttribute("data-tp-screen-preview")) {
+				this.screenFrame = frame;
+				this.screenDocument = frame.ownerDocument;
+				this.screenDocument.addEventListener(
+					"fullscreenchange",
+					this.handleScreenFullscreenChange,
+				);
+			}
+		} catch {
+			/* Cross-origin documents cannot delegate fullscreen control. */
+		}
 		this.ensureControl();
 		this.updateControl();
 		this.ownerDocument.addEventListener(
@@ -119,6 +136,12 @@ export class TpFullscreen extends TpBase {
 	}
 
 	protected disconnectedCallback(): void {
+		this.screenDocument?.removeEventListener(
+			"fullscreenchange",
+			this.handleScreenFullscreenChange,
+		);
+		this.screenDocument = null;
+		this.screenFrame = null;
 		this.ownerDocument.removeEventListener(
 			"fullscreenchange",
 			this.handleFullscreenChange,
@@ -155,7 +178,8 @@ export class TpFullscreen extends TpBase {
 
 		const target = this.resolveFullscreenTarget();
 		const isFullscreen =
-			target !== null && this.ownerDocument.fullscreenElement === target;
+			this.hasScreenFullscreen() ||
+			(target !== null && this.ownerDocument.fullscreenElement === target);
 		const label = isFullscreen ? "Exit fullscreen" : "Fullscreen";
 
 		this.controlEl.setAttribute(
@@ -167,7 +191,19 @@ export class TpFullscreen extends TpBase {
 		this.controlEl.setAttribute("aria-pressed", String(isFullscreen));
 	}
 
+	private hasScreenFullscreen(): boolean {
+		return Boolean(
+			this.screenFrame &&
+				this.screenDocument?.fullscreenElement?.contains(this.screenFrame),
+		);
+	}
+
 	private async toggleFullscreen(): Promise<void> {
+		if (this.hasScreenFullscreen()) {
+			await this.screenDocument?.exitFullscreen();
+			this.updateControl();
+			return;
+		}
 		const target = this.resolveFullscreenTarget();
 		if (target === null) {
 			return;

@@ -57,7 +57,7 @@
     },
     {
       "name": "toolbar",
-      "description": "Optional comma-separated controls: code, calc, postit, clock, lang, color, theme, fullscreen. Empty enables all; absent hides the toolbar.",
+      "description": "Optional comma-separated controls: code, calc, postit, clock, lang, color, theme, screen, fullscreen. Empty enables all; absent hides the toolbar.",
       "reflected": true,
       "static": false,
       "inherited": false,

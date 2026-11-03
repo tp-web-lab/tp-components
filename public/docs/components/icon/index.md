@@ -68,7 +68,7 @@ Attributes
   | <code>fallback-icon</code> | <code>string</code> | <code>&quot;&quot;</code> | Backup icon identifier used when inline SVG, src and name provide no icon. Looked up in the selected library, then in tp; if unavailable, fallback text is used. |
   | <code>flip-h</code> | <code>boolean</code> | <code>false</code> | Mirrors the icon horizontally when present. Remove the attribute to restore its orientation; writing false still enables it. |
   | <code>flip-v</code> | <code>boolean</code> | <code>false</code> | Mirrors the icon vertically when present. Can be combined with flip-h and rotate; writing false still enables it. |
-  | <code>library</code> | <code>string</code> | <code>tp</code> | Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters and components. Custom registered libraries are also accepted. |
+  | <code>library</code> | <code>string</code> | <code>tp</code> | Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters, screens and components. Custom registered libraries are also accepted. |
   | <code>name</code> | <code>string</code> | <code>&quot;&quot;</code> | Icon identifier in the selected library, for example heart or settings. Used when no inline SVG or successfully loaded src is available. |
   | <code>rotate</code> | <code>string</code> | <code>0deg</code> | Rotation angle: a number is interpreted in degrees; deg, rad and turn units are also accepted. Negative values rotate in the opposite direction. Invalid values use 0deg; spin overrides this fixed rotation. |
   | <code>scale</code> | <code>number</code> | <code>1</code> | Positive numeric multiplier for size, for example 0.5 to halve it or 2 to double it. Zero, negative and invalid values use 1. Changes the space occupied by the icon. |
@@ -104,6 +104,8 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_icon.TpIcon.html)
 <!-- tp-docgen:typedoc:end -->
+
+
 
 
 
