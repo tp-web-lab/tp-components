@@ -117,6 +117,7 @@ export class TpSlideNote extends TpTextToSpeech {
 		if (!deck) return;
 		const scope = deck.parentElement ?? deck;
 		const anchor =
+			deck.querySelector<HTMLElement>("[data-slide-mode-menu]") ??
 			scope.querySelector<HTMLElement>("[data-slide-mode-menu]") ??
 			deck.querySelector<HTMLElement>(".tp-markup-multi-slides-navigation");
 		if (anchor !== this.anchor) {

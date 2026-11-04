@@ -13,7 +13,7 @@ vi.mock("../../utilities/youtube-player.js", () => ({
 type Options = ConstructorParameters<YouTubeAPI["Player"]>[1];
 const players: FakeYouTube[] = [];
 class FakeYouTube {
-	public readonly iframe = document.createElement("iframe");
+	public readonly iframe: HTMLIFrameElement;
 	public readonly events: Options["events"];
 	public playVideo = vi.fn();
 	public pauseVideo = vi.fn();
@@ -30,7 +30,9 @@ class FakeYouTube {
 		public options: Options,
 	) {
 		this.events = options.events;
-		target.replaceWith(this.iframe);
+		if (!(target instanceof HTMLIFrameElement))
+			throw new Error("Expected an existing embed");
+		this.iframe = target;
 		players.push(this);
 	}
 	public ready(): void {
@@ -244,14 +246,20 @@ describe("YouTube playback", () => {
 		const looping = players.at(-1);
 		if (!looping) throw new Error("Missing looping player");
 		expect(initial.destroy).toHaveBeenCalledOnce();
-		expect(looping.options.playerVars.loop).toBe(1);
-		expect(looping.options.playerVars.playlist).toBe("4n0M4YRAVjc");
+		expect(new URL(looping.iframe.src).searchParams.get("loop")).toBe("1");
+		expect(new URL(looping.iframe.src).searchParams.get("playlist")).toBe(
+			"4n0M4YRAVjc",
+		);
 		element.loop = false;
 		await tick();
-		expect(players.at(-1)?.options.playerVars).not.toHaveProperty("playlist");
+		expect(
+			new URL(element.querySelector("iframe")?.src ?? "").searchParams.has(
+				"playlist",
+			),
+		).toBe(false);
 	});
 
-	it("never mounts an iframe after disconnection or a later native source", async () => {
+	it("does not attach the API after disconnection", async () => {
 		let resolveAPI: ((value: YouTubeAPI) => void) | undefined;
 		vi.mocked(loadYouTubeAPI).mockReturnValue(
 			new Promise((resolve) => {
@@ -259,6 +267,11 @@ describe("YouTube playback", () => {
 			}),
 		);
 		const element = mount("https://youtu.be/4n0M4YRAVjc");
+		expect(element.querySelector("iframe")?.referrerPolicy).toBe(
+			"strict-origin-when-cross-origin",
+		);
+		expect(element.querySelector("iframe")?.src).toContain("enablejsapi=1");
+		expect(players).toHaveLength(0);
 		element.remove();
 		resolveAPI?.({ Player: FakeYouTube });
 		await tick();
@@ -272,5 +285,8 @@ describe("YouTube playback", () => {
 			"Offline",
 		);
 		expect(element.querySelector("tp-button[href]")).not.toBeNull();
+		expect(element.querySelector("iframe")?.src).toContain(
+			"/embed/4n0M4YRAVjc",
+		);
 	});
 });

@@ -198,6 +198,7 @@
       - [Timer](components/timer/index.md)
     - [Utilities](components/utilities.md)
       - [Video player](components/video-player/index.md)
+      - [Audio playlist](components/audio-playlist/index.md)
       - [Audio recorder](components/audio-recorder/index.md)
       - [Animation](components/animation/index.md)
       - [Avatar](components/avatar/index.md)

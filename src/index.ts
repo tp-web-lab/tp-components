@@ -476,6 +476,7 @@ export { TpYakazu } from "./components/yakazu/yakazu.js";
 
 console.log("tp-lib loaded");
 
+export { TpAudioPlaylist } from "./components/audio-playlist/audio-playlist.js";
 export { TpBiblio } from "./components/biblio/biblio.js";
 export { TpCalculator } from "./components/calculator/calculator.js";
 export { TpGlossary } from "./components/glossary/glossary.js";

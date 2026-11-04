@@ -1,6 +1,10 @@
 .tp-markup-multi-slides-host .tp-markup-multi-pages-content {
 	padding-block-end: 4rem;
-	font-size: clamp(1rem, calc(0.65rem + 1.15vw), 2.5rem);
+	max-inline-size: var(--tp-slide-content-width, 65em);
+    margin-inline: auto;
+    padding-inline: var(--tp-slide-content-padding, clamp(1em, 3vw, 3em));
+    font-size: var(--tp-slide-font-size, clamp(1rem, calc(0.65rem + 1.15vw), 2.5rem));
+    line-height: 1.4;
 }
 
 /* Relative geometry is scoped to slide content, not the presentation chrome.
@@ -41,7 +45,10 @@
 
 /* Headings scale with slide typography; author styles can still override them. */
 :where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content :where(h1, .tp-h1) {
-	font-size: 2.488em;
+	font-size: var(--tp-slide-title-size, 2.488em);
+    color: var(--tp-brand-text-colorful);
+    line-height: 1.15;
+    margin-block: .35em .7em;
 }
 
 :where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content :where(h2, .tp-h2) {
@@ -119,4 +126,56 @@
 
 .tp-markup-multi-slides-host [data-slide-notes] {
 	font-size: 1rem;
+}
+
+/* Shared presentation controls, inside the deck's color and fullscreen scope. */
+.tp-markup-multi-slides-mode-menu {
+  position: fixed;
+  inset-inline-end: 1rem;
+  inset-block-end: 4.3rem;
+  z-index: 5;
+  padding: .2rem .5rem;
+  max-inline-size: calc(100vw - 2rem);
+  font-size: .75rem;
+  color: var(--tp-brand-text-colorful);
+  background: var(--tp-paper-color);
+  border-radius: .3rem;
+}
+.tp-markup-multi-slides-mode-menu > ul { flex-wrap: wrap; }
+.tp-markup-multi-slides-mode-menu [data-mode] { padding: .15em .4em; border-radius: .25rem; }
+.tp-markup-multi-slides-mode-menu [aria-current="true"] {
+  color: var(--tp-brand-text-on-soft);
+  background: var(--tp-brand-fill-soft);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: .12em;
+  text-underline-offset: .2em;
+}
+.tp-markup-multi-slides-host tp-slide-note:not([open]) { display: none; }
+@media (max-width: 650px) {
+  .tp-markup-multi-slides-mode-menu { inset-block-end: 4rem; font-size: .7rem; }
+}
+
+/* Content defaults shared by every slide markup language. */
+:where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content :where(p):not(:where([data-slide-notes], [data-slide-notes] *)) {
+  margin-block: .45em;
+}
+:where(.tp-markup-multi-slides-host) .tp-markup-multi-pages-content :where(strong):not(:where([data-slide-notes], [data-slide-notes] *)) {
+  color: var(--tp-brand-text-colorful);
+}
+:where(.tp-markup-multi-slides-host .tp-markup-multi-pages-content img) {
+  max-inline-size: 100%;
+  max-block-size: var(--tp-slide-image-height, 13em);
+  object-fit: contain;
+}
+:where(.tp-markup-multi-slides-host .tp-markup-multi-pages-content tp-include svg) {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  max-block-size: var(--tp-slide-svg-height, 22em);
+}
+@media (max-width: 650px) {
+  :where(.tp-markup-multi-slides-host .tp-markup-multi-pages-content img) {
+    max-block-size: var(--tp-slide-image-height-small, 10em);
+  }
 }

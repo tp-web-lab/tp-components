@@ -1,0 +1,62 @@
+{
+  "tagname": "tp-audio-playlist",
+  "classname": "TpAudioPlaylist",
+  "superclass": "TpBase",
+  "description": "Audio playlist with playback controls and an elapsed-time seek bar.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-audio-playlist>\n<ol>\n<li>\n<a href=\"/docs/components/audio-playlist/examples/track-1.wav\">Morning melody</a>\n</li>\n<li>\n<a href=\"/docs/components/audio-playlist/examples/track-2.wav\">Evening melody</a>\n</li>\n</ol>\n</tp-audio-playlist>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "random",
+      "description": "Shuffle tracks without repetition; changing this attribute preserves the current track.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "HTML file containing a ul or ol playlist; overrides inline content. Track URLs resolve relative to the file.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-audio-playlist-progress",
+      "default": "0%",
+      "description": "Controls the progress."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-button-group",
+      "summary": "Button group component for organizing multiple buttons."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Audio playlist",
+    "introduction": "",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Play | Start from the first track in list order. |\n| Random | Start a newly shuffled playlist without repeating tracks. |\n| Track link | Play the selected track from the beginning. |\n| Previous / Next | Play the adjacent track in the current playback order. Disabled at the ends. |\n| Resume / Pause | Resume or pause the current track. |\n| Playback position | Seek within the current track. Dark indicates elapsed time; light indicates remaining time, independently of buffering. |\n| Mute / Unmute and Volume | Toggle sound or adjust its volume. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between track links and playback controls. |\n| <kbd>Enter</kbd> on a track | Play that track. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> on a button | Activate Play, Random, Previous or Next. Use the arrow keys on the position and volume sliders; Home and End select their minimum and maximum. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "keyboard": []
+  }
+}

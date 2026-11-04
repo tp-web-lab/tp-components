@@ -366,44 +366,43 @@ export class TpVideoPlayer extends TpBase {
 	): Promise<void> {
 		const videoId = this.source?.videoId;
 		if (!videoId) return;
+		// Mount the embed independently of the optional JavaScript control API.
+		const target = document.createElement("iframe");
+		target.title = this.label;
+		target.width = "100%";
+		target.height = "100%";
+		target.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+		target.allowFullscreen = true;
+		target.referrerPolicy = "strict-origin-when-cross-origin";
+		const url = new URL(`https://www.youtube.com/embed/${videoId}`);
+		url.searchParams.set("enablejsapi", "1");
+		url.searchParams.set("origin", window.location.origin);
+		url.searchParams.set("playsinline", "1");
+		url.searchParams.set("controls", this.controls ? "1" : "0");
+		url.searchParams.set("rel", "0");
+		if (this.muted) url.searchParams.set("mute", "1");
+		if (this.loop) {
+			url.searchParams.set("loop", "1");
+			url.searchParams.set("playlist", videoId);
+		}
+		target.src = url.href;
+		frame.append(target);
 		try {
 			const api = await loadYouTubeAPI();
 			if (generation !== this.generation || !this.isConnected) return;
-			const target = document.createElement("div");
-			frame.append(target);
 			this.readyTimer = setTimeout(() => {
 				if (generation === this.generation)
 					this.reportError(
-						"The YouTube player did not respond. Use Watch on YouTube.",
+						"YouTube controls are unavailable. You can still try playing directly in the embedded player.",
 					);
 			}, 15000);
 			this.youtube = new api.Player(target, {
-				videoId,
-				width: "100%",
-				height: "100%",
-				playerVars: {
-					origin: window.location.origin,
-					playsinline: 1,
-					controls: this.controls ? 1 : 0,
-					...(this.loop ? { loop: 1, playlist: videoId } : {}),
-					rel: 0,
-				},
 				events: {
 					onReady: (event) => {
 						if (generation !== this.generation) return;
 						clearTimeout(this.readyTimer);
 						this.youtube = event.target;
 						this.youtubeReady = true;
-						const iframe = this.youtube.getIframe();
-						iframe.setAttribute(
-							"allow",
-							"autoplay; encrypted-media; picture-in-picture; fullscreen",
-						);
-						iframe.setAttribute("allowfullscreen", "");
-						iframe.setAttribute(
-							"referrerpolicy",
-							"strict-origin-when-cross-origin",
-						);
 						this.applyOptions();
 						if (this.pendingSeek !== null) this.seekTo(this.pendingSeek);
 						if (this.pendingPlay) this.youtube.playVideo();

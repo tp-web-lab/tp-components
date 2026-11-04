@@ -1599,7 +1599,12 @@ export class TpMarkupMultiPages extends TpBase {
 	}
 
 	private get repositoryBasePath(): string {
-		const normalizedRepository = this.normalizeHref(this.repository);
+		const repository = this.repository.trim();
+		const path =
+			repository.startsWith("./") || repository.startsWith("../")
+				? new URL(repository, this.ownerDocument.baseURI).pathname
+				: repository;
+		const normalizedRepository = this.normalizeHref(path);
 		return normalizedRepository === "" ? "/" : `/${normalizedRepository}/`;
 	}
 

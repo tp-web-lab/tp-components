@@ -13,6 +13,12 @@ Utility components supply reusable interaction and media features such as drag a
 :::
 
 ::: tp-center { intrinsic }
+:tp-icon:{name="audio-playlist" library="components" size="4em" aria-hidden="true"}
+
+[tp-audio-playlist](audio-playlist/index.md)
+:::
+
+::: tp-center { intrinsic }
 :tp-icon:{name="audio-recorder" library="components" size="4em" aria-hidden="true"}
 
 [tp-audio-recorder](audio-recorder/index.md)

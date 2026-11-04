@@ -8,12 +8,16 @@ The custom `<tp-restructuredtext-multi-slides>` element implements the reStructu
 
 ## Usage
 
+The presentation always includes a horizontal **Manual / Timing / Narration / Note** menu, including in fullscreen. The selected mode follows the `auto` attribute: Manual removes it, Timing sets `auto="timing"`, and Narration sets `auto="notes"`. The URL parameter `mode=manual`, `mode=timing` or `mode=notes` restores the selected mode on loading; changing it through the menu updates this parameter without reloading. Other URL parameters and the slide route are preserved. Automatic playback still starts with Play. Note toggles only the current slide's `tp-slide-note` and is disabled when that slide has no note. Notes remain hidden until opened.
+
 ### User interactions
 
 #### Mouse interactions
 
 | Control or gesture | Result |
 | --- | --- |
+| Manual / Timing / Narration | Select manual navigation, timed steps or narrated notes; the active mode is highlighted. |
+| Note | Open or close the current slide's notes; unavailable on slides without notes. |
 | Next arrow / click in slide content | Reveal the next progressive step, then advance to the next slide. |
 | Previous arrow / right-click in slide content | Hide the previous step, or return to the preceding slide with its steps revealed. |
 | Play automatically / Pause automatic playback | When automatic mode is enabled, start playback or pause it without losing the current voice or remaining interval. |
@@ -139,6 +143,9 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_restructuredtext-multi-slides.TpRestructuredTextMultiSlides.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
 
 
 

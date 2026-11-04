@@ -45,3 +45,17 @@
 .tp-markup-single-page-toolbar tp-icon-button:is([data-action="code"], [data-action="calc"]) > button:hover {
   background: var(--tp-neutral-fill-soft, #e5e7eb);
 }
+
+/* Keep long source lines inside the drawer and scroll the code block itself. */
+tp-drawer[data-role="source-drawer"] > [data-tp-drawer-content] {
+  min-inline-size: 0;
+}
+
+tp-drawer[data-role="source-drawer"] pre {
+  padding-inline: 1rem;
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  overflow-x: auto;
+  white-space: pre;
+}

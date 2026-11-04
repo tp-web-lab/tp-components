@@ -20,6 +20,84 @@ describe("<tp-markup-multi-slides>", () => {
 		vi.restoreAllMocks();
 	});
 
+	it.each([
+		"tp-markup-multi-slides",
+		"tp-markdown-multi-slides",
+		"tp-asciidoc-multi-slides",
+		"tp-html-multi-slides",
+		"tp-restructuredtext-multi-slides",
+	])(
+		"provides presentation modes and current-note controls in %s",
+		async (tag) => {
+			vi.spyOn(globalThis, "fetch").mockImplementation(
+				async () => new Response("", { status: 404 }),
+			);
+			const deck = document.createElement(tag);
+			document.body.append(deck);
+			await new Promise((resolve) => setTimeout(resolve, 200));
+			const menu = deck.querySelector("[data-slide-mode-menu]");
+			expect(menu).not.toBeNull();
+			const select = (selector: string) =>
+				menu?.querySelector<HTMLElement>(selector)?.click();
+			expect(menu?.querySelector('[aria-current="true"]')?.textContent).toBe(
+				"Manual",
+			);
+			select('[data-mode="timing"]');
+			expect(deck.getAttribute("auto")).toBe("timing");
+			select('[data-mode="notes"]');
+			expect(deck.getAttribute("auto")).toBe("notes");
+			select('[data-mode="manual"]');
+			expect(deck.hasAttribute("auto")).toBe(false);
+			const noteItem = menu?.querySelector('[data-action="toggle-note"]');
+			expect(noteItem?.getAttribute("aria-disabled")).toBe("true");
+			const note = document.createElement("tp-slide-note");
+			deck
+				.querySelector(".tp-markup-multi-pages-content")
+				?.replaceChildren(note);
+			await new Promise((resolve) => setTimeout(resolve, 20));
+			expect(noteItem?.getAttribute("aria-disabled")).toBe("false");
+			select('[data-action="toggle-note"]');
+			expect(note.hasAttribute("open")).toBe(true);
+			expect(noteItem?.getAttribute("aria-expanded")).toBe("true");
+			select('[data-action="toggle-note"]');
+			expect(note.hasAttribute("open")).toBe(false);
+			note.remove();
+			await new Promise((resolve) => setTimeout(resolve, 20));
+			expect(noteItem?.getAttribute("aria-disabled")).toBe("true");
+			expect(deck.querySelectorAll("[data-slide-mode-menu]")).toHaveLength(1);
+		},
+	);
+
+	it("restores the URL mode and retains other URL parameters when changing it", async () => {
+		vi.spyOn(globalThis, "fetch").mockImplementation(
+			async () => new Response("", { status: 404 }),
+		);
+		window.history.replaceState(
+			{ retained: true },
+			"",
+			"/examples/demo/?mode=manual&theme=dark",
+		);
+		const deck = document.createElement("tp-markup-multi-slides");
+		deck.setAttribute("auto", "notes");
+		deck.setAttribute("repository", "./docs");
+		document.body.append(deck);
+		expect(deck.auto).toBe("");
+		expect(Reflect.get(deck, "repositoryBasePath")).toBe(
+			"/examples/demo/docs/",
+		);
+		await new Promise((resolve) => setTimeout(resolve, 200));
+		deck
+			.querySelector<HTMLElement>('[data-slide-mode-menu] [data-mode="timing"]')
+			?.click();
+		const url = new URL(document.URL);
+		expect(url.searchParams.get("mode")).toBe("timing");
+		expect(url.searchParams.get("theme")).toBe("dark");
+		expect(window.history.state).toEqual({ retained: true });
+		expect(deck.auto).toBe("timing");
+		deck.setAttribute("repository", "../slides");
+		expect(Reflect.get(deck, "repositoryBasePath")).toBe("/examples/slides/");
+	});
+
 	it("reuses multi-pages loading and replaces page links with slide controls", async () => {
 		vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
 			const url = String(input);

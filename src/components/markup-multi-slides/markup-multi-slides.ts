@@ -9,6 +9,10 @@
  * @summary Multi-page documentation with support for multiple markup languages.
  */
 /**
+ * @tp-dependency tp-menu
+ * @summary Accessible menu component.
+ */
+/**
  * @tp-dependency tp-numberfield
  * @summary Numeric field with an optional native range slider.
  */
@@ -24,6 +28,7 @@
 
 import { TpMarkupMultiPages } from "../markup-multi-pages/markup-multi-pages.js";
 import "../numberfield/numberfield.js";
+import "../menu/menu.js";
 import "../slide-note/slide-note.js";
 import { TpTextToSpeech } from "../text-to-speech/text-to-speech.js";
 import style from "./markup-multi-slides.css?inline";
@@ -34,6 +39,13 @@ import { type SlideAutoMode, SlidePlayback } from "./slide-playback.js";
  * previous/next navigation with slide controls.
  *
  * @summary presents multi-format pages as a responsive slide deck.
+ * @cssprop --tp-slide-content-width = 65em - Maximum content width.
+ * @cssprop --tp-slide-content-padding = clamp(1em, 3vw, 3em) - Inline content padding.
+ * @cssprop --tp-slide-font-size = clamp(1rem, calc(0.65rem + 1.15vw), 2.5rem) - Responsive slide content font size.
+ * @cssprop --tp-slide-title-size = 2.488em - Level-one title size relative to slide text.
+ * @cssprop --tp-slide-image-height = 13em - Maximum image height.
+ * @cssprop --tp-slide-image-height-small = 10em - Maximum image height below 650px.
+ * @cssprop --tp-slide-svg-height = 22em - Maximum height of included SVG illustrations.
  * @attr {"" | "notes" | "timing"} auto = "" - Enables automatic playback controls. notes follows the current tp-text-to-speech[data-slide-notes] and its [trigger=clic] commands; timing advances each progressive step on a clock. Absent or invalid values keep manual navigation.
  * @attr {number} timing = 5000 - Positive integer milliseconds per progressive step in timing mode, also used when notes are absent or finished.
  * @tagname tp-markup-multi-slides
@@ -157,6 +169,9 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 	private revealPreviousSlideOnLoad = false;
 
 	protected override connectedCallback(): void {
+		const mode = new URL(this.ownerDocument.URL).searchParams.get("mode");
+		if (mode === "manual") this.auto = "";
+		else if (mode === "notes" || mode === "timing") this.auto = mode;
 		super.connectedCallback();
 		this.classList.add("tp-markup-multi-slides-host");
 		this.ensureGlobalStyle(TpMarkupMultiSlides.styleId, style);
@@ -314,6 +329,7 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 			attributes: true,
 			attributeFilter: [
 				"aria-current",
+				"open",
 				"data-tp-markdown-rendered",
 				"data-tp-asciidoc-rendered",
 				"data-tp-restructuredtext-rendered",
@@ -332,6 +348,7 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 	}
 
 	private syncNavigation(): void {
+		this.syncModeMenu();
 		this.querySelectorAll(".tp-markup-multi-pages-page-nav").forEach(
 			(navigation) => {
 				navigation.remove();
@@ -493,6 +510,70 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 			ready,
 		);
 		this.syncAutoControls();
+	}
+
+	private syncModeMenu(): void {
+		const layout = this.querySelector(".tp-markup-multi-pages-root");
+		if (!layout) return;
+		let menu = layout.querySelector<HTMLElement>(
+			":scope > [data-slide-mode-menu]",
+		);
+		if (!menu) {
+			menu = this.ownerDocument.createElement("tp-menu");
+			menu.setAttribute("data-slide-mode-menu", "");
+			menu.className = "tp-markup-multi-slides-mode-menu";
+			menu.setAttribute("orientation", "horizontal");
+			menu.setAttribute("aria-label", "Presentation mode");
+			menu.innerHTML =
+				'<ul><li data-mode="manual">Manual</li><li data-mode="timing">Timing</li><li data-mode="notes">Narration</li><li data-action="toggle-note">Note</li></ul>';
+			menu.addEventListener("tp-menu-item-select", (event) => {
+				const item = (event as CustomEvent<{ item: HTMLElement }>).detail.item;
+				if (item.dataset.action === "toggle-note") {
+					this.querySelector(
+						".tp-markup-multi-pages-content tp-slide-note",
+					)?.toggleAttribute("open");
+				} else if (item.dataset.mode === "manual") this.auto = "";
+				else if (
+					item.dataset.mode === "notes" ||
+					item.dataset.mode === "timing"
+				)
+					this.auto = item.dataset.mode;
+				const mode = item.dataset.mode;
+				if (mode === "manual" || mode === "timing" || mode === "notes") {
+					const url = new URL(this.ownerDocument.URL);
+					url.searchParams.set("mode", mode);
+					if (["http:", "https:", "file:"].includes(url.protocol))
+						this.ownerDocument.defaultView?.history.replaceState(
+							this.ownerDocument.defaultView.history.state,
+							"",
+							url,
+						);
+				}
+				this.syncModeMenu();
+			});
+			layout.append(menu);
+		}
+		const selected = this.auto || "manual";
+		for (const item of menu.querySelectorAll<HTMLElement>("[data-mode]")) {
+			if (item.dataset.mode === selected) {
+				if (item.getAttribute("aria-current") !== "true")
+					item.setAttribute("aria-current", "true");
+			} else if (item.hasAttribute("aria-current"))
+				item.removeAttribute("aria-current");
+		}
+		const note = this.querySelector<HTMLElement>(
+			".tp-markup-multi-pages-content tp-slide-note",
+		);
+		const item = menu.querySelector('[data-action="toggle-note"]');
+		item?.setAttribute(
+			"aria-expanded",
+			String(note?.hasAttribute("open") ?? false),
+		);
+		item?.setAttribute("aria-disabled", String(!note));
+		if (note) {
+			if (!note.id) note.id = `${this.ticksId}-note`;
+			item?.setAttribute("aria-controls", note.id);
+		} else item?.removeAttribute("aria-controls");
 	}
 
 	private syncAutoControls(): void {

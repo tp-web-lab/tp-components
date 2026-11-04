@@ -22,6 +22,7 @@ const basic = {
  "video-player": "Play the three-second moving-shapes clip, pause it and seek with the native video controls.",
  "exercise": "Read the shared museum context, answer both questions and submit each answer to inspect its feedback and solution.",
  "mask": "Read the replacement message hiding the answer field. The target remains in the document with its value preserved.",
+ "audio-playlist": "Select a melody, use the native audio controls and advance with Previous or Next. Playback stops at the end of the list.",
  "audio-recorder": "Record a short response, stop, replay it and download the audio. Clear removes the local recording.",
  "slope-simulator": "Adjust the slope, drag either point or use arrow keys, then compare the three cycling profiles.",
  "tangram": "Drag and rotate the seven pieces to cover the silhouette. Try Undo, Redo and Solution to inspect the dissection.",
