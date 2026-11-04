@@ -24,6 +24,7 @@
   "events": [
     {
       "name": "tp-asciidoc-rendered",
+      "emitted": true,
       "description": "Emitted after conversion and runtime initialization complete.",
       "detail": "void"
     }

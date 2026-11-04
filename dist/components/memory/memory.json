@@ -39,16 +39,19 @@
   "events": [
     {
       "name": "tp-memory-complete",
+      "emitted": true,
       "description": "Emitted when every pair is matched.",
       "detail": "void"
     },
     {
       "name": "tp-memory-match",
+      "emitted": true,
       "description": "Emitted after two matching cards are revealed; pair is the zero-based identifier assigned to their original list item.",
       "detail": "{ pair: number }"
     },
     {
       "name": "tp-memory-reset",
+      "emitted": true,
       "description": "Emitted after the game is reset.",
       "detail": "void"
     }

@@ -63,6 +63,11 @@
       "description": "Closes all submenus."
     },
     {
+      "name": "reposition(): void",
+      "inherited": false,
+      "description": "Repositions an open menu after its anchor moves without resizing."
+    },
+    {
       "name": "show(): void",
       "inherited": false,
       "description": "Opens the dropdown by setting its open state and positioning it relative to its anchor."

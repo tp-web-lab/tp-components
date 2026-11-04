@@ -220,31 +220,37 @@
   "events": [
     {
       "name": "tp-graph-change",
+      "emitted": true,
       "description": "Emitted after a recorded graph mutation, JSON edit, undo or redo. reason identifies the operation and graph contains the resulting snapshot.",
       "detail": "{ reason: string; graph: TpGraphDocument }"
     },
     {
       "name": "tp-graph-error",
+      "emitted": true,
       "description": "Emitted when loading src or creating/reconnecting an edge fails. operation identifies the failed action; src is included only for load-src.",
       "detail": "{ error: unknown; operation: \"load-src\" | \"reconnect-edge\" | \"add-edge\"; src?: string }"
     },
     {
       "name": "tp-graph-export",
+      "emitted": true,
       "description": "Emitted after the graph export has been saved; graph contains the exported graph snapshot.",
       "detail": "{ graph: TpGraphDocument }"
     },
     {
       "name": "tp-graph-import",
+      "emitted": true,
       "description": "Emitted after importJSON validates and installs a graph; graph contains the imported snapshot.",
       "detail": "{ graph: TpGraphDocument }"
     },
     {
       "name": "tp-graph-selection-change",
+      "emitted": true,
       "description": "Emitted when the selection is synchronized. id is the primary selection or null, and ids lists all selected element identifiers.",
       "detail": "{ id: string | null; ids: string[] }"
     },
     {
       "name": "tp-graph-simulation-step",
+      "emitted": true,
       "description": "Emitted after a registered simulator step and its transition animation complete; simulator is its registered name and graph is the resulting snapshot.",
       "detail": "{ simulator: string; graph: TpGraphDocument }"
     }

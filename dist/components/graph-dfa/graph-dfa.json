@@ -45,11 +45,13 @@
   "events": [
     {
       "name": "tp-dfa-reset",
+      "emitted": true,
       "description": "Emitted after the input word, consumed-symbol count and active state are reset. stateId is null when no initial state is available; graph is the resulting snapshot.",
       "detail": "{ word: string; stateId: string | null; graph: TpGraphDocument }"
     },
     {
       "name": "tp-dfa-step",
+      "emitted": true,
       "description": "Emitted after consuming one symbol and completing its transition animation. position is the number of consumed symbols; accepted and rejected describe the resulting state.",
       "detail": "{ symbol: string; position: number; stateId: string | null; accepted: boolean; rejected: boolean; graph: TpGraphDocument }"
     }

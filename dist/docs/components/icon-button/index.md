@@ -19,7 +19,7 @@ The custom `<tp-icon-button>` element implements the <tp-icon name="icon-button"
 
 | Control or gesture | Result |
 | --- | --- |
-| Button | Click to perform the action identified by its label. Disabled controls cannot be activated. |
+| Button | Click to perform the action identified by its label. Disabled or loading controls cannot be activated. |
 | Navigation button | Click to open its destination. |
 
 #### Keyboard interactions
@@ -35,10 +35,12 @@ The custom `<tp-icon-button>` element implements the <tp-icon name="icon-button"
 
 <tp-icon-button name="delete" label="Delete" color="crimson"></tp-icon-button>
 
+Like `tp-button`, this component supports `href`, `target`, `rel`, `download`, `disabled`, `loading`, `loading-mode`, `outlined`, `pill`, `type`, `variant`, and `size`. A nonempty `href` creates a native link; removing it restores a native button. `loading-mode="replace"` replaces the icon with a spinner; `inline` keeps both visible.
+
 Always provide `label` for an accessible name. Icon attributes such as `library`, `color`, `size`, `scale`, `rotate`, `flip-h`, `flip-v`, and `spin` are forwarded to the internal icon.
 
 ```html
-<tp-icon-button name="refresh" label="Refresh"></tp-icon-button>
+<tp-icon-button name="home" href="./" label="Home"></tp-icon-button>
 <tp-icon-button name="delete" label="Delete" color="crimson"></tp-icon-button>
 ```
 
@@ -75,17 +77,27 @@ Attributes
 : | Attribute | Type | Default | Description |
   | --- | --- | --- | --- |
   | <code>color</code> | <code>string</code> | <code>&quot;&quot;</code> | Color forwarded to the internal `<tp-icon>`. |
-  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Prevents button activation and marks the native button as disabled. |
+  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Prevents activation, including link navigation, and marks the control as disabled. |
+  | <code>download</code> | <code>string</code> | <code>&quot;&quot;</code> | Suggested download filename when href is set. A nonempty value requests a download; browser and server rules determine whether it is honored. |
   | <code>flip-h</code> | <code>boolean</code> | <code>false</code> | Horizontal flip forwarded to the internal `<tp-icon>`. |
   | <code>flip-v</code> | <code>boolean</code> | <code>false</code> | Vertical flip forwarded to the internal `<tp-icon>`. |
+  | <code>href</code> | <code>string</code> | <code>&quot;&quot;</code> | Destination URL. A nonempty value renders a link instead of a native button. |
   | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Accessible button name and hover title. Provide the action, such as Close or Search, because the control has no visible text label. |
   | <code>library</code> | <code>string</code> | <code>&quot;&quot;</code> | Icon registry used to resolve name, for example tp, components, languages or a custom registered library. |
+  | <code>loading</code> | <code>boolean</code> | <code>false</code> | Displays a loading spinner and prevents activation while present. |
+  | <code>loading-mode</code> | <code>TpButtonLoadingMode</code> | <code>replace</code> | Spinner layout while loading: replace hides the label; inline keeps the label beside the spinner. |
   | <code>name</code> | <code>string</code> | <code>&quot;&quot;</code> | Identifier of the icon displayed inside the button, resolved in library. |
+  | <code>outlined</code> | <code>boolean</code> | <code>false</code> | Uses an outlined appearance instead of a filled background. |
+  | <code>pill</code> | <code>boolean</code> | <code>false</code> | Rounds the button ends to form a pill. |
+  | <code>rel</code> | <code>string</code> | <code>&quot;&quot;</code> | Space-separated relationship tokens forwarded to the link, for example noopener noreferrer; applies only with href. |
   | <code>rotate</code> | <code>string</code> | <code>&quot;0deg&quot;</code> | Rotation forwarded to the internal `<tp-icon>`. |
   | <code>scale</code> | <code>number</code> | <code>1</code> | Scale forwarded to the internal `<tp-icon>`. |
   | <code>size</code> | <code>TpSizeType</code> | <code>m</code> | Button and icon size preset: xxs, xs, s, m, l, xl or xxl. |
   | <code>spin</code> | <code>boolean</code> | <code>false</code> | Continuous spin forwarded to the internal `<tp-icon>`. |
-  | <code>type</code> | <code>TpIconButtonNativeType</code> | <code>button</code> | Native button action: button, submit or reset. |
+  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Image or SVG URL forwarded to the icon; takes precedence over name. |
+  | <code>target</code> | <code>string</code> | <code>&quot;&quot;</code> | Browsing context for href, such as _self, _blank or a named frame; ignored in native button mode. |
+  | <code>title</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the title. |
+  | <code>type</code> | <code>TpIconButtonNativeType</code> | <code>button</code> | Native button action: button, submit or reset; ignored when href is set. |
   | <code>variant</code> | <code>TpVariantType</code> | <code>neutral</code> | Color variant: neutral, brand, success, danger, warning or info. |
   | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
   | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
@@ -120,6 +132,13 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_icon-button.TpIconButton.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
 
 
 

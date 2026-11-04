@@ -126,46 +126,55 @@
   "events": [
     {
       "name": "tp-tree-context-action",
+      "emitted": true,
       "description": "Emitted when a context menu action is selected.",
       "detail": "{ actionId: string; scope: \"global\" | \"node\"; target: TpTreeNodeTarget | null }"
     },
     {
       "name": "tp-tree-context-close",
+      "emitted": true,
       "description": "Emitted when a context menu closes.",
       "detail": "{ scope: \"global\" | \"node\" | null }"
     },
     {
       "name": "tp-tree-context-open",
+      "emitted": true,
       "description": "Emitted when a context menu opens.",
       "detail": "{ scope: \"global\" | \"node\"; target: TpTreeNodeTarget | null }"
     },
     {
       "name": "tp-tree-node-add-request",
+      "emitted": true,
       "description": "Emitted when a node add action is requested.",
       "detail": "{ target: TpTreeNodeTarget | null; position: \"inside\" | \"before\" | \"after\"; actionId: \"add-leaf\" | \"add-node\" }"
     },
     {
       "name": "tp-tree-node-clone-request",
+      "emitted": true,
       "description": "Emitted when a node clone action is requested.",
       "detail": "{ target: TpTreeNodeTarget }"
     },
     {
       "name": "tp-tree-node-delete-request",
+      "emitted": true,
       "description": "Emitted when a node delete action is requested.",
       "detail": "{ target: TpTreeNodeTarget }"
     },
     {
       "name": "tp-tree-node-move-request",
+      "emitted": true,
       "description": "Emitted when a node move is requested.",
       "detail": "{ source: TpTreeNodeTarget; destination: TpTreeNodeTarget | null; position: \"inside\" | \"before\" | \"after\" }"
     },
     {
       "name": "tp-tree-node-rename-request",
+      "emitted": true,
       "description": "Emitted when a node rename is requested.",
       "detail": "{ target: TpTreeNodeTarget; oldLabel: string; newLabel: string }"
     },
     {
       "name": "tp-tree-select",
+      "emitted": true,
       "description": "Emitted when a node is selected.",
       "detail": "{ target: TpTreeNodeTarget }"
     }

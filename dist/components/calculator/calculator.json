@@ -24,6 +24,7 @@
   "events": [
     {
       "name": "tp-calculator-result",
+      "emitted": true,
       "description": "Emitted after a successful calculation.",
       "detail": "{ expression: string; result: number }"
     }

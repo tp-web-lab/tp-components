@@ -93,11 +93,13 @@
   "events": [
     {
       "name": "tp-include-error",
+      "emitted": true,
       "description": "Emitted when loading or injecting content fails.",
       "detail": "{ src: string; fetchMode: \"cors\" | \"no-cors\" | \"same-origin\"; allowScripts: boolean; allowStyles: boolean; sanitize: boolean; scriptsExecuted: false; error: string }"
     },
     {
       "name": "tp-include-load",
+      "emitted": true,
       "description": "Emitted after content is loaded and injected.",
       "detail": "{ src: string; fetchMode: \"cors\" | \"no-cors\" | \"same-origin\"; allowScripts: boolean; allowStyles: boolean; sanitize: boolean; scriptsExecuted: boolean }"
     }

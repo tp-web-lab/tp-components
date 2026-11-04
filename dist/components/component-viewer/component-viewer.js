@@ -1,0 +1,1 @@
+import{t as e}from"../../chunks/component-viewer.js";export{e as TpComponentViewer};

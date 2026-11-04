@@ -42,6 +42,7 @@
   "events": [
     {
       "name": "tp-diagram-rendered",
+      "emitted": true,
       "description": "Emitted after the selected engine has rendered the diagram.",
       "detail": "{ src: string }"
     }

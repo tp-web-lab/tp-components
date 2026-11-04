@@ -49,6 +49,7 @@
   "events": [
     {
       "name": "tp-audio-recorded",
+      "emitted": true,
       "description": "Emitted when a recording is ready.",
       "detail": "{ blob: Blob }"
     }

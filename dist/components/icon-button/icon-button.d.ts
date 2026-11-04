@@ -5,6 +5,7 @@
 import "../icon/icon.js";
 import { TpBase } from "../base/base.js";
 import { type TpSizeType, type TpVariantType } from "../base/base.types.js";
+import type { TpButtonLoadingMode } from "../button/button.js";
 /**
  * @summary API documentation summary.
  */
@@ -12,10 +13,19 @@ export type TpIconButtonNativeType = "button" | "submit" | "reset";
 /**
  * @summary Button icon accessible.
  * @tagname tp-icon-button
+ * @attr {boolean} outlined = false - Uses an outlined appearance instead of a filled background.
+ * @attr {boolean} pill = false - Rounds the button ends to form a pill.
+ * @attr {boolean} loading = false - Displays a loading spinner and prevents activation while present.
+ * @attr {TpButtonLoadingMode} loading-mode = replace - Spinner layout while loading: replace hides the label; inline keeps the label beside the spinner.
+ * @attr {string} href = "" - Destination URL. A nonempty value renders a link instead of a native button.
+ * @attr {string} target = "" - Browsing context for href, such as _self, _blank or a named frame; ignored in native button mode.
+ * @attr {string} rel = "" - Space-separated relationship tokens forwarded to the link, for example noopener noreferrer; applies only with href.
+ * @attr {string} download = "" - Suggested download filename when href is set. A nonempty value requests a download; browser and server rules determine whether it is honored.
  * @attr {string} name = "" - Identifier of the icon displayed inside the button, resolved in library.
+ * @attr {string} src = "" - Image or SVG URL forwarded to the icon; takes precedence over name.
  * @attr {string} library = "" - Icon registry used to resolve name, for example tp, components, languages or a custom registered library.
  * @attr {string} label = "" - Accessible button name and hover title. Provide the action, such as Close or Search, because the control has no visible text label.
- * @attr {string} type = "button" - Native button action: button, submit or reset.
+ * @attr {string} type = "button" - Native button action: button, submit or reset; ignored when href is set.
  * @attr {string} variant = "neutral" - Color variant: neutral, brand, success, danger, warning or info.
  * @attr {string} size = "m" - Button and icon size preset: xxs, xs, s, m, l, xl or xxl.
  * @attr {string} color = "" - Color forwarded to the internal `<tp-icon>`.
@@ -24,11 +34,11 @@ export type TpIconButtonNativeType = "button" | "submit" | "reset";
  * @attr {boolean} flip-h = false - Horizontal flip forwarded to the internal `<tp-icon>`.
  * @attr {boolean} flip-v = false - Vertical flip forwarded to the internal `<tp-icon>`.
  * @attr {boolean} spin = false - Continuous spin forwarded to the internal `<tp-icon>`.
- * @attr {boolean} disabled = false - Prevents button activation and marks the native button as disabled.
+ * @attr {boolean} disabled = false - Prevents activation, including link navigation, and marks the control as disabled.
 
- * @accessibility Uses a native button and hides the decorative icon from the accessible name.
+ * @accessibility Uses a native button or link and hides the decorative icon from the accessible name.
  * @accessibilityresponsibility Set `label` to a concise name that describes the action.
- * @keyboard {Enter / Space} Uses the browser's native button activation behavior.
+ * @keyboard {Enter / Space} Uses native button activation; links activate with Enter.
  * @example
  * <tp-icon-button></tp-icon-button>
  * @cssprop [--tp-icon-button-focus-ring=currentColor] Color of the outline shown when the button receives keyboard focus.
@@ -61,6 +71,62 @@ export declare class TpIconButton extends TpBase {
      */
     static get observedAttributes(): string[];
     /**
+     * @summary Uses an outlined appearance instead of a filled background.
+     * @attr outlined
+     */
+    get outlined(): boolean;
+    set outlined(value: boolean);
+    /**
+     * @summary Rounds the button ends to form a pill.
+     * @attr pill
+     */
+    get pill(): boolean;
+    set pill(value: boolean);
+    /**
+     * @summary Displays a loading spinner and prevents activation while present.
+     * @attr loading
+     */
+    get loading(): boolean;
+    set loading(value: boolean);
+    /**
+     * @summary Spinner layout while loading: replace hides the label; inline keeps the label beside the spinner.
+     * @attr loading-mode
+     * @default replace
+     */
+    get loadingMode(): TpButtonLoadingMode;
+    /**
+     * @summary API documentation summary.
+     * @param value Parameter.
+     */
+    set loadingMode(value: TpButtonLoadingMode);
+    /**
+     * @summary Destination URL. A nonempty value renders a link instead of a native button.
+     * @attr href
+     */
+    get href(): string;
+    set href(value: string);
+    /**
+     * @summary Browsing context for href, such as _self, _blank or a named frame; ignored in native button mode.
+     * @attr target
+     */
+    get target(): string;
+    set target(value: string);
+    /**
+     * @summary Space-separated relationship tokens forwarded to the link, for example noopener noreferrer; applies only with href.
+     * @attr rel
+     */
+    get rel(): string;
+    set rel(value: string);
+    /**
+     * @summary Suggested download filename when href is set. A nonempty value requests a download; browser and server rules determine whether it is honored.
+     * @attr download
+     */
+    get download(): string;
+    set download(value: string);
+    /** Image or SVG source displayed by the button. */
+    get src(): string;
+    set src(value: string);
+    /**
      * @summary Identifier of the icon displayed inside the button, resolved in library.
      * @attr name
      */
@@ -79,7 +145,7 @@ export declare class TpIconButton extends TpBase {
     get label(): string;
     set label(value: string);
     /**
-     * @summary Native button action: button, submit or reset.
+     * @summary Native button action: button, submit or reset; ignored when href is set.
      * @attr type
      * @default button
      */
@@ -112,7 +178,7 @@ export declare class TpIconButton extends TpBase {
     get spin(): boolean;
     set spin(value: boolean);
     /**
-     * @summary Prevents button activation and marks the native button as disabled.
+     * @summary Prevents activation, including link navigation, and marks the control as disabled.
      * @attr disabled
      */
     get disabled(): boolean;

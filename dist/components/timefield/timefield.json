@@ -148,16 +148,19 @@
   "events": [
     {
       "name": "change",
+      "emitted": false,
       "description": "Emitted when the selected time is committed.",
       "detail": "void"
     },
     {
       "name": "input",
+      "emitted": false,
       "description": "Emitted when the selected time changes while editing.",
       "detail": "void"
     },
     {
       "name": "tp-clear",
+      "emitted": true,
       "description": "Emitted after the embedded button clears the value.",
       "detail": "void"
     }

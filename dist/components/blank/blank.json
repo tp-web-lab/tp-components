@@ -85,11 +85,13 @@
   "events": [
     {
       "name": "input",
+      "emitted": false,
       "description": "Emitted when an answer is assigned or cleared; read the updated answer from value.",
       "detail": "void"
     },
     {
       "name": "tp-blank-mode-change",
+      "emitted": false,
       "description": "Emitted when closed or type changes while connected, after the blank has been rendered in its new mode.",
       "detail": "void"
     }

@@ -66,6 +66,7 @@
   "events": [
     {
       "name": "tp-checkbox-list-change",
+      "emitted": true,
       "description": "Emitted after a selection change. value contains comma-separated 1-based item indexes; label contains their visible labels joined by comma and space. Both are empty when nothing is selected.",
       "detail": "{ value: string; label: string }"
     }

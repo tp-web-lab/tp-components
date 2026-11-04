@@ -45,11 +45,13 @@
   "events": [
     {
       "name": "tp-object-tree-error",
+      "emitted": true,
       "description": "Emitted when an external JSON file or inline JavaScript expression cannot be loaded.",
       "detail": "{ message: string; source: \"script\" | \"src\"; src: string }"
     },
     {
       "name": "tp-object-tree-load",
+      "emitted": true,
       "description": "Emitted after an external JSON file or inline JavaScript expression has been loaded.",
       "detail": "{ source: \"script\" | \"src\"; src: string; value: unknown }"
     },

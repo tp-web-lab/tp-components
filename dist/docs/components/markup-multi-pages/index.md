@@ -24,6 +24,7 @@ Personal annotations are saved per document in this browser's localStorage, with
 
 | Control or gesture | Result |
 | --- | --- |
+| Local navigation link (right of the toolbar) | Open the linked document or website. The local navigation stays available when changing pages in a multipage document. |
 | Expand all / Collapse all (sidebar) | Open or close every branch of the global table of contents. Page order stays unchanged. |
 | Widen table of contents / Restore width | Fit the sidebar to the longest title, including nested titles, on one line. Click again to restore the previous divider position. On small screens, width is limited to the viewport and long titles can scroll horizontally. |
 | Search (left of the sidebar controls) | Show or hide a clearable search field. Matching titles are highlighted, their ancestor branches open automatically, and the sidebar scrolls to the first result below the search controls; the displayed page does not change. Search ignores case and accents. A search with no matches displays “0 results” in the danger color. |
@@ -51,6 +52,12 @@ Personal annotations are saved per document in this browser's localStorage, with
 | Focused controls | Use each control’s standard keyboard interaction.  |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
+### Toolbar selection
+
+Set `toolbar="home,menu,code,theme,fullscreen"` to select the visible commands. Supported names are `home`, `menu`, `code`, `calc`, `postit`, `clock`, `lang`, `color`, `theme`, `screen` and `fullscreen`. Names are comma-separated and case-insensitive; duplicates and unknown names are ignored. Controls keep their standard order.
+
+Unlike single-page documents, omitting `toolbar` keeps the complete multi-page toolbar for backward compatibility. An empty value also enables every command; `toolbar="none"` hides all commands. The title, logo and repository link remain available. The language selector additionally requires at least two configured languages. Changing the attribute updates visibility without reloading the current page or resetting the sidebar.
+
 ### Author directives
 
 For HTML pages, including pre-rendered Markdown pages, component definitions and `tp-math` formulas are prepared before the content is displayed. This avoids showing raw mathematical notation followed by successive layout shifts. Formula updates remain interactive after the page is displayed.
@@ -60,6 +67,23 @@ Use `<tp-markup-multi-pages>` as shown below.
 ```html
 <tp-markup-multi-pages repository="/docs/components/markup-multi-pages/docs"></tp-markup-multi-pages>
 ```
+
+### Local navigation bar
+
+An optional `navbar` file supplies a list of links displayed directly as buttons on the right of the main toolbar, before the vertical `tp-divider` and global controls. Authored `tp-button` and `tp-icon-button` elements are preserved; ordinary links become `tp-button` elements. No menu or list wrapper is added to the toolbar. Use `navbar.md`, `navbar.adoc`, `navbar.rst` or `navbar.html`, matching the document format. Both ordered and unordered lists are accepted. A missing file or a file without a list adds no controls.
+
+Place it at the root of `repository`, beside `sidebar` and `cover`. Internal document links use the existing page navigation and remain available on every page. Changing the repository reloads the navbar.
+
+For a Markdown navbar:
+
+```markdown
+- [Playlist](playlist/playlist.md)
+- [Scores](partitions/partitions.md)
+```
+
+### Linked toolbar logo
+
+Use `logo="logo.svg"` with `logo-href="https://example.org/"` to display the logo as a `tp-icon-button` that opens the associated website in the current tab. Relative destinations resolve against the page URL. When `logo-href` is omitted or empty, it defaults to `./` (the current directory). An invalid or non-HTTP(S) destination leaves the logo visible but inactive. Both attributes update immediately. Single-page documents also require `toolbar` to display the toolbar.
 
 ## Examples
 
@@ -130,6 +154,13 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markup-multi-pages.TpMarkupMultiPages.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
 
 
 

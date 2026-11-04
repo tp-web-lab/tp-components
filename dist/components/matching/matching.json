@@ -39,6 +39,7 @@
   "events": [
     {
       "name": "change",
+      "emitted": true,
       "description": "Emitted after associations change; ranks refer to the original lists.",
       "detail": "{ value: TpMatchingValue; complete: boolean }"
     }

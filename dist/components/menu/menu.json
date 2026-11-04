@@ -35,6 +35,7 @@
   "events": [
     {
       "name": "tp-menu-item-select",
+      "emitted": true,
       "description": "Emitted when a menu item without submenu is selected.",
       "detail": "{ item: HTMLLIElement }"
     }

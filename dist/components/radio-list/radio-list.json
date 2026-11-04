@@ -66,6 +66,7 @@
   "events": [
     {
       "name": "tp-radio-list-change",
+      "emitted": true,
       "description": "Emitted after a selection change. value is the selected 1-based item index as a string; label is its visible label. Both are empty when nothing is selected.",
       "detail": "{ value: string; label: string }"
     }

@@ -64,6 +64,12 @@ export declare class TpMarkupSinglePage extends TpBase {
     set git(value: string);
     private updateGit;
     /**
+     * Website opened in the current tab when activating the toolbar logo. Defaults to ./ when omitted or empty.
+     * @attr logo-href
+     */
+    get logoHref(): string;
+    set logoHref(value: string);
+    /**
      * @summary Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo.
      * @attr logo
      * @default ""
@@ -75,6 +81,7 @@ export declare class TpMarkupSinglePage extends TpBase {
     private updateLabel;
     private disposeToolbar;
     private renderToolbar;
+    private updateNavbar;
     /** Resolve the authored source for the currently selected generated page. */
     private getOriginalSource;
     private updateLanguages;

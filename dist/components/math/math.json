@@ -60,11 +60,13 @@
   "events": [
     {
       "name": "tp-math-error",
+      "emitted": true,
       "description": "Emitted when loading or rendering the current expression fails.",
       "detail": "{ message: string }"
     },
     {
       "name": "tp-math-rendered",
+      "emitted": true,
       "description": "Emitted after the current expression is rendered successfully.",
       "detail": "{ value: string; mode: TpMathMode; displaystyle: boolean }"
     }

@@ -39,6 +39,7 @@ export declare class TpBase extends HTMLElement {
     private static currentHelpElement;
     /** Pointer target is independent of focus, including non-focusable layout components. */
     private static hoveredHelpElement;
+    private static readonly helpHierarchyChoices;
     private initialHelpMarkup;
     private baseHelpListenerAttached;
     private readonly handleBaseHelpFocusIn;
@@ -83,6 +84,11 @@ export declare class TpBase extends HTMLElement {
      * @summary Opens generated component help.
      */
     help(): Promise<void>;
+    private static helpPresenter;
+    /** Chooses the target before opening help, without losing the original hover. */
+    private static showHelpHierarchy;
+    /** Presents contextual help in this window's drawer. */
+    private static showComponentHelp;
     /**
      * Lifecycle callback invoked when an observed attribute changes.
      *
@@ -202,15 +208,10 @@ export declare class TpBase extends HTMLElement {
     private getDocumentDirectoryUrl;
     private getDocumentBaseCandidates;
     private isUsableDocumentUrl;
-    private getOrCreateHelpDrawer;
+    private static getOrCreateHelpDrawer;
     /** Resolves host-configured documentation roots while retaining deployment prefixes. */
-    private helpReferenceRoot;
-    /** Builds the selected component's author guide or generated TypeDoc class reference. */
-    private renderReferenceHelp;
-    /** Uses the generated class-page map because TypeDoc filenames vary by module. */
-    private loadDeveloperHelp;
-    /** Builds reader help without author controls, source code or class metadata. */
-    private renderHelpContent;
+    /** Captures author content and current public attributes for an independent demo. */
+    private createHelpSnapshot;
     private getCurrentDocumentBaseHref;
     private captureInitialHelpMarkup;
     protected captureHelpSource(): void;

@@ -112,11 +112,13 @@
   "events": [
     {
       "name": "tp-prose-editor-change",
+      "emitted": true,
       "description": "Emitted immediately after tp-prose-editor-input for the same edit; it does not wait for blur. value contains the current HTML serialization.",
       "detail": "{ value: string }"
     },
     {
       "name": "tp-prose-editor-input",
+      "emitted": true,
       "description": "Emitted after an editing transaction or editor command updates the document. value contains the current HTML serialization.",
       "detail": "{ value: string }"
     }

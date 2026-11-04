@@ -39,16 +39,19 @@
   "events": [
     {
       "name": "tp-solitaire-move",
+      "emitted": true,
       "description": "Emitted after a valid move.",
       "detail": "void"
     },
     {
       "name": "tp-solitaire-reset",
+      "emitted": true,
       "description": "Emitted after the cards are reshuffled.",
       "detail": "void"
     },
     {
       "name": "tp-solitaire-win",
+      "emitted": true,
       "description": "Emitted when the game is won.",
       "detail": "void"
     }

@@ -8,6 +8,7 @@
  * @tp-dependency tp-base
  * @summary Shared base class for tp-* components.
  */
+import "../divider/divider.js";
 import { TpBase } from "../base/base.js";
 /** Reading-axis orientation of the toolbar. */
 export type TpToolbarOrientation = "horizontal" | "vertical";

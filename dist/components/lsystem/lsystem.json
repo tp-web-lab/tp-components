@@ -104,6 +104,7 @@
   "events": [
     {
       "name": "tp-lsystem-rendered",
+      "emitted": true,
       "description": "Emitted after an iteration has been drawn.",
       "detail": "{ iteration: number; iterations: number }"
     }

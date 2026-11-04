@@ -2,6 +2,80 @@
  * @module components/markdown-multi-pages
  * @summary Multi-page Markdown documentation.
  */
+/**
+ * @tp-dependency tp-base
+ * @summary Shared base class for tp-* components.
+ */
+/**
+ * @tp-dependency tp-calculator
+ * @summary Scientific calculator with an editable expression and degree/radian modes.
+ */
+/**
+ * @tp-dependency tp-clock
+ * @summary Live clock component with digital or analogic display and date tooltip.
+ */
+/**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
+ */
+/**
+ * @tp-dependency tp-lang
+ * @summary Documentation language selector.
+ */
+/**
+ * @tp-dependency tp-markdown
+ * @summary Markdown rendering component.
+ */
+/**
+ * @tp-dependency tp-post-it-editor
+ * @summary creates and edits persistent personal annotations attached to document elements.
+ */
+/**
+ * @tp-dependency tp-screen
+ * @summary Responsive page preview in selectable device viewports.
+ */
+/**
+ * @tp-dependency tp-source
+ * @summary Source repository link button.
+ */
+/**
+ * @tp-dependency tp-splitter
+ * @summary Splitter component with two resizable panels.
+ */
+/**
+ * @tp-dependency tp-textfield
+ * @summary Single-line and automatically growing multiline text field.
+ */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
+/**
+ * @tp-dependency tp-toolbar
+ * @summary Sticky toolbar with start / center / end sections,
+ */
+/**
+ * @tp-dependency tp-tree
+ * @summary Generic tree component for interactive hierarchical editing.
+ */
+import "../button/button.js";
+import "../icon/icon.js";
 import "../calculator/calculator.js";
 import { TpBase } from "../base/base.js";
 import "../toolbar/toolbar.js";
@@ -21,6 +95,7 @@ import type { TpMarkdownMultiPagesTheme } from "./markdown-multi-pages.types.js"
  * @summary Multi-page Markdown documentation.
  * @tagname tp-markdown-multi-pages
  * @attr {string} repository = "/docs" - Root path containing sidebar.md, cover.md and the linked Markdown pages.
+ * @attr {string | null} toolbar = null - Comma-separated controls: home, menu, code, calc, postit, clock, lang, color, theme, screen, fullscreen. Absent or empty keeps all controls; none hides commands. Updates immediately.
  * @attr {boolean} menu = false - Opens the navigation sidebar when present; the toolbar Menu button toggles this attribute.
  * @attr {string} label = "" - Title displayed in the center of the document toolbar.
  * @attr {string} git = "" - Repository URL assigned to the toolbar source link when the document shell is created. Set before connecting the component.
@@ -42,6 +117,7 @@ export declare class TpMarkdownMultiPages extends TpBase {
     private sourceMode;
     private pageLinks;
     private pageNavigationElement;
+    private stopOrientationObserver;
     protected connectedCallback(): void;
     disconnectedCallback(): void;
     protected attributeChangedCallback(name: string): void;
@@ -51,6 +127,12 @@ export declare class TpMarkdownMultiPages extends TpBase {
     set theme(value: TpMarkdownMultiPagesTheme);
     get brand(): string;
     set brand(value: string);
+    /**
+     * Website opened in the current tab when activating the toolbar logo. Defaults to ./ when omitted or empty.
+     * @attr logo-href
+     */
+    get logoHref(): string;
+    set logoHref(value: string);
     /**
      * @summary Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo.
      * @attr logo
@@ -68,6 +150,9 @@ export declare class TpMarkdownMultiPages extends TpBase {
     get menu(): boolean;
     set menu(value: boolean);
     private applyLabel;
+    /** Selects toolbar controls; null restores the full default toolbar. */
+    get toolbar(): string | null;
+    set toolbar(value: string | null);
     private applyLangs;
     private applyDocumentLocale;
     private resolveCurrentLang;

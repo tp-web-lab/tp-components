@@ -100,11 +100,13 @@
   "events": [
     {
       "name": "tp-geometry-change",
+      "emitted": true,
       "description": "Fired after a construction change; detail contains source and undefined object names.",
       "detail": "{ source: string; undefined: string[] }"
     },
     {
       "name": "tp-geometry-error",
+      "emitted": true,
       "description": "Fired when a file cannot be loaded or source cannot be parsed; detail contains message.",
       "detail": "{ message: string }"
     }

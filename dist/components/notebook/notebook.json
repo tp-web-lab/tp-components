@@ -51,11 +51,13 @@
   "events": [
     {
       "name": "tp-notebook-change",
+      "emitted": true,
       "description": "Emitted after the cell collection changes.",
       "detail": "{ cells: number }"
     },
     {
       "name": "tp-notebook-load",
+      "emitted": true,
       "description": "Emitted after inline, src, or repository cells are loaded.",
       "detail": "{ source: \"inline\" | \"src\" | \"repository\" | \"file\"; cells: number }"
     }

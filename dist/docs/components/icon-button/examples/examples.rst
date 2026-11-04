@@ -46,7 +46,24 @@
 
                - flip-v
 
+               - loading
+
+               - outlined
+
+               - pill
+
                - spin
+
+            .. tp-radio-list::
+               :data-setting: loading-mode
+               :label: loading-mode
+               :label-position: top
+               :orientation: horizontal
+               :value: 1
+
+               - replace
+
+               - inline
 
             .. tp-radio-list::
                :data-setting: size
@@ -68,6 +85,21 @@
                - xl
 
                - xxl
+
+            .. tp-radio-list::
+               :data-setting: src
+               :label: src
+               :label-position: top
+               :orientation: horizontal
+               :value: 1
+
+               - Default
+
+               - file1
+
+               - file2
+
+               - file-unknown
 
             .. tp-radio-list::
                :data-setting: type
@@ -111,6 +143,20 @@
                   :clearable:
 
                .. tp-textfield::
+                  :data-setting: download
+                  :label: download
+                  :value:
+                  :placeholder:
+                  :clearable:
+
+               .. tp-textfield::
+                  :data-setting: href
+                  :label: href
+                  :value:
+                  :placeholder:
+                  :clearable:
+
+               .. tp-textfield::
                   :data-setting: label
                   :label: label
                   :value:
@@ -132,6 +178,13 @@
                   :clearable:
 
                .. tp-textfield::
+                  :data-setting: rel
+                  :label: rel
+                  :value:
+                  :placeholder:
+                  :clearable:
+
+               .. tp-textfield::
                   :data-setting: rotate
                   :label: rotate
                   :value: 0deg
@@ -143,6 +196,20 @@
                   :label: scale
                   :value: 1
                   :placeholder: 1
+                  :clearable:
+
+               .. tp-textfield::
+                  :data-setting: target
+                  :label: target
+                  :value:
+                  :placeholder:
+                  :clearable:
+
+               .. tp-textfield::
+                  :data-setting: title
+                  :label: title
+                  :value:
+                  :placeholder:
                   :clearable:
 
             .. tp-button-group::
@@ -176,6 +243,8 @@
             :heading: Preview status
 
             Preparing the preview…
+
+         File-loading attributes offer only Default, file1, file2 and file-unknown. The two local fixtures preserve verified example formats (they may contain the same content); file-unknown deliberately exercises error handling. No arbitrary path can be entered.
 
          .. script::
             :type: module

@@ -30,6 +30,7 @@
   "events": [
     {
       "name": "tp-markdown-rendered",
+      "emitted": true,
       "description": "Emitted after Markdown and its runtime extensions are rendered, or after a source/conversion error is displayed. This event alone does not indicate successful conversion.",
       "detail": "void"
     }

@@ -71,6 +71,7 @@
   "events": [
     {
       "name": "tp-timer-elapsed",
+      "emitted": true,
       "description": "Emitted when the countdown reaches zero.",
       "detail": "void"
     }

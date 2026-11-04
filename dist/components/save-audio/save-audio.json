@@ -84,11 +84,13 @@
   "events": [
     {
       "name": "tp-save-audio-error",
+      "emitted": true,
       "description": "Emitted when the target cannot be exported.",
       "detail": "{ format: \"mp3\" | \"ogg\" | \"wav\"; error: unknown; anchor: string }"
     },
     {
       "name": "tp-save-audio-save",
+      "emitted": true,
       "description": "Emitted after an audio file has been saved.",
       "detail": "{ format: \"mp3\" | \"ogg\" | \"wav\"; filename: string; anchor: string; target: Element }"
     }

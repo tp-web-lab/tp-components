@@ -34,6 +34,7 @@
   "tp-color": "classes/components_color.TpColor.html",
   "tp-color-picker": "classes/components_color-picker.TpColorPicker.html",
   "tp-compare": "classes/components_compare.TpCompare.html",
+  "tp-component-viewer": "classes/components_component-viewer.TpComponentViewer.html",
   "tp-console": "classes/components_console.TpConsole.html",
   "tp-contextmenu": "classes/components_contextmenu.TpContextmenu.html",
   "tp-copy-code": "classes/components_copy-code.TpCopyCode.html",

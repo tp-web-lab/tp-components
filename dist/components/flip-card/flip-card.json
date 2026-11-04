@@ -57,6 +57,7 @@
   "events": [
     {
       "name": "tp-flip-card-change",
+      "emitted": true,
       "description": "Emitted when the visible side changes; flipped is true when the back face is visible.",
       "detail": "{ flipped: boolean }"
     }

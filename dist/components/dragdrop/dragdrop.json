@@ -42,21 +42,25 @@
   "events": [
     {
       "name": "tp-dragdrop-drop",
+      "emitted": true,
       "description": "Emitted when a drop is requested by pointer or keyboard. The consumer must move source relative to target at position; the component does not move it automatically.",
       "detail": "{ source: HTMLElement; target: HTMLElement | null; position: \"before\" | \"inside\" | \"after\" | null }"
     },
     {
       "name": "tp-dragdrop-end",
+      "emitted": true,
       "description": "Emitted when a drag ends or a keyboard drag is cancelled.",
       "detail": "void"
     },
     {
       "name": "tp-dragdrop-over",
+      "emitted": true,
       "description": "Emitted when the proposed target or relative insertion position changes; source and target identify HTML elements.",
       "detail": "{ source: HTMLElement; target: HTMLElement | null; position: \"before\" | \"inside\" | \"after\" | null }"
     },
     {
       "name": "tp-dragdrop-start",
+      "emitted": true,
       "description": "Emitted when an item is grabbed by pointer or keyboard; source is the dragged HTML element.",
       "detail": "{ source: HTMLElement }"
     }

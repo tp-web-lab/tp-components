@@ -40,6 +40,7 @@
   "events": [
     {
       "name": "tp-optics-trace",
+      "emitted": true,
       "description": "Emitted after trace recomputes the displayed ray paths; analysis contains the optical-system analysis and graph is the resulting snapshot.",
       "detail": "{ analysis: TpOpticsAnalysis; graph: TpGraphDocument }"
     }

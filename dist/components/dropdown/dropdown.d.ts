@@ -160,6 +160,8 @@ export declare class TpDropdown extends TpOverlayElement {
     private decorateMenu;
     private handleKey;
     private focusItem;
+    /** Repositions an open menu after its anchor moves without resizing. */
+    reposition(): void;
     private positionDropdown;
     private applyScrollableConstraints;
     private resetScrollableConstraints;

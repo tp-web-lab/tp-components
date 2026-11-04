@@ -27,7 +27,19 @@ Combine the attributes on one preview. Controls start at the published defaults.
 
 - flip-v
 
+- loading
+
+- outlined
+
+- pill
+
 - spin
+:::
+
+::: tp-radio-list { data-setting="loading-mode" label="loading-mode" label-position="top" orientation="horizontal" value="1" }
+- replace
+
+- inline
 :::
 
 ::: tp-radio-list { data-setting="size" label="size" label-position="top" orientation="horizontal" value="4" }
@@ -44,6 +56,16 @@ Combine the attributes on one preview. Controls start at the published defaults.
 - xl
 
 - xxl
+:::
+
+::: tp-radio-list { data-setting="src" label="src" label-position="top" orientation="horizontal" value="1" }
+- Default
+
+- file1
+
+- file2
+
+- file-unknown
 :::
 
 ::: tp-radio-list { data-setting="type" label="type" label-position="top" orientation="horizontal" value="1" }
@@ -72,6 +94,12 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ::: tp-textfield { data-setting="color" label="color" value placeholder clearable }
 :::
 
+::: tp-textfield { data-setting="download" label="download" value placeholder clearable }
+:::
+
+::: tp-textfield { data-setting="href" label="href" value placeholder clearable }
+:::
+
 ::: tp-textfield { data-setting="label" label="label" value placeholder clearable }
 :::
 
@@ -81,10 +109,19 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ::: tp-textfield { data-setting="name" label="name" value placeholder clearable }
 :::
 
+::: tp-textfield { data-setting="rel" label="rel" value placeholder clearable }
+:::
+
 ::: tp-textfield { data-setting="rotate" label="rotate" value="0deg" placeholder="0deg" clearable }
 :::
 
 ::: tp-textfield { data-setting="scale" label="scale" value="1" placeholder="1" clearable }
+:::
+
+::: tp-textfield { data-setting="target" label="target" value placeholder clearable }
+:::
+
+::: tp-textfield { data-setting="title" label="title" value placeholder clearable }
 :::
 ::::
 
@@ -110,6 +147,8 @@ Reload preview
 ::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
 Preparing the preview…
 :::
+
+File-loading attributes offer only Default, file1, file2 and file-unknown. The two local fixtures preserve verified example formats (they may contain the same content); file-unknown deliberately exercises error handling. No arbitrary path can be entered.
 
 ::: script { type="module" src="/docs/components/icon-button/examples/attributes.js" }
 :::
