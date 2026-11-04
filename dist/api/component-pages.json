@@ -9,6 +9,7 @@
   "tp-asciidoc-single-page": "classes/components_asciidoc-single-page.TpAsciidocSinglePage.html",
   "tp-asciidoc-viewer": "classes/components_asciidoc-viewer.TpAsciidocViewer.html",
   "tp-asciidoc-viewer-question": "classes/components_asciidoc-viewer-question.TpAsciidocViewerQuestion.html",
+  "tp-audio-playlist": "classes/components_audio-playlist.TpAudioPlaylist.html",
   "tp-audio-recorder": "classes/components_audio-recorder.TpAudioRecorder.html",
   "tp-avatar": "classes/components_avatar.TpAvatar.html",
   "tp-avatar-group": "classes/components_avatar-group.TpAvatarGroup.html",

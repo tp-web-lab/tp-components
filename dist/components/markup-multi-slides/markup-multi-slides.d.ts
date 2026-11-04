@@ -7,6 +7,10 @@
  * @summary Multi-page documentation with support for multiple markup languages.
  */
 /**
+ * @tp-dependency tp-menu
+ * @summary Accessible menu component.
+ */
+/**
  * @tp-dependency tp-numberfield
  * @summary Numeric field with an optional native range slider.
  */
@@ -20,6 +24,7 @@
  */
 import { TpMarkupMultiPages } from "../markup-multi-pages/markup-multi-pages.js";
 import "../numberfield/numberfield.js";
+import "../menu/menu.js";
 import "../slide-note/slide-note.js";
 import { type SlideAutoMode } from "./slide-playback.js";
 /**
@@ -27,6 +32,13 @@ import { type SlideAutoMode } from "./slide-playback.js";
  * previous/next navigation with slide controls.
  *
  * @summary presents multi-format pages as a responsive slide deck.
+ * @cssprop --tp-slide-content-width = 65em - Maximum content width.
+ * @cssprop --tp-slide-content-padding = clamp(1em, 3vw, 3em) - Inline content padding.
+ * @cssprop --tp-slide-font-size = clamp(1rem, calc(0.65rem + 1.15vw), 2.5rem) - Responsive slide content font size.
+ * @cssprop --tp-slide-title-size = 2.488em - Level-one title size relative to slide text.
+ * @cssprop --tp-slide-image-height = 13em - Maximum image height.
+ * @cssprop --tp-slide-image-height-small = 10em - Maximum image height below 650px.
+ * @cssprop --tp-slide-svg-height = 22em - Maximum height of included SVG illustrations.
  * @attr {"" | "notes" | "timing"} auto = "" - Enables automatic playback controls. notes follows the current tp-text-to-speech[data-slide-notes] and its [trigger=clic] commands; timing advances each progressive step on a clock. Absent or invalid values keep manual navigation.
  * @attr {number} timing = 5000 - Positive integer milliseconds per progressive step in timing mode, also used when notes are absent or finished.
  * @tagname tp-markup-multi-slides
@@ -80,6 +92,7 @@ export declare class TpMarkupMultiSlides extends TpMarkupMultiPages {
     private syncSlideTicks;
     private syncProgress;
     private syncAutomatic;
+    private syncModeMenu;
     private syncAutoControls;
     private createArrow;
     private updateArrowStates;

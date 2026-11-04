@@ -288,6 +288,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | Component | Description |
 | --- | --- |
 | <tp-icon name="animation" library="components" size="1.25em"></tp-icon> [`<tp-animation>`](animation/index.md) | Applies an animation to a target element with [`animate.css`](https://animate.style) for animation names and the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Web_Animations_API_Concepts) for playback control. |
+| <tp-icon name="audio-playlist" library="components" size="1.25em"></tp-icon> [`<tp-audio-playlist>`](audio-playlist/index.md) | Plays a list of audio tracks sequentially or in shuffled order. |
 | <tp-icon name="audio-recorder" library="components" size="1.25em"></tp-icon> [`<tp-audio-recorder>`](audio-recorder/index.md) | Records microphone audio locally for replay and download. |
 | <tp-icon name="avatar" library="components" size="1.25em"></tp-icon> [`<tp-avatar>`](avatar/index.md) | Displays an image, initials or an icon in a circle or square. |
 | <tp-icon name="avatar-group" library="components" size="1.25em"></tp-icon> [`<tp-avatar-group>`](avatar-group/index.md) | Groups tp-avatar elements with configurable overlap, stacking order and orientation. |

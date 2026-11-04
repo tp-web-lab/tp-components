@@ -17,10 +17,10 @@ export interface YouTubePlayerEvent {
 }
 export interface YouTubeAPI {
     Player: new (element: HTMLElement, options: {
-        videoId: string;
-        width: string;
-        height: string;
-        playerVars: Record<string, string | number>;
+        videoId?: string;
+        width?: string;
+        height?: string;
+        playerVars?: Record<string, string | number>;
         events: {
             onReady(event: YouTubePlayerEvent): void;
             onStateChange(event: YouTubePlayerEvent): void;

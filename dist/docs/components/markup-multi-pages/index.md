@@ -14,6 +14,8 @@ The default toolbar places Clock, Language (only when multiple languages are dec
 
 Set `logo="/docs/medias/logos/logo-tp.svg"` to display a `tp-icon` at the start of the toolbar, at the default icon-button size (`2em`). Changing the attribute updates the logo; removing it or setting it to an empty value hides it. The logo is decorative and has no click action. Single-page documents also require the `toolbar` attribute.
 
+Repository paths starting with `./` or `../` resolve relative to the document base URL, including when deployed under a subdirectory. Root paths such as `/docs` remain rooted at the site origin.
+
 ### User interactions
 
 Personal annotations are saved per document in this browser's localStorage, without account synchronization. Clearing site data removes them. The [Post-it editor](../post-it-editor/index.md) offers an Annotation language dropdown: adoc, html, md, rst or txt (default). Source and language are saved together; rendered markup is sanitized and scripts are not executed. If a target changes or disappears, use Reattach from the annotations list; no guessed replacement is silently selected. Storage errors are displayed in the editor. Elements inside embedded iframes are outside this page's annotation scope.
@@ -128,6 +130,9 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markup-multi-pages.TpMarkupMultiPages.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
 
 
 

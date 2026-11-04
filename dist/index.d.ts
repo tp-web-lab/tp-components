@@ -185,6 +185,7 @@ export { TpTypescriptViewerQuestion } from "./components/typescript-viewer-quest
 export { TpTypewriting } from "./components/typewriting/typewriting.js";
 export { TpXYPlot, type TpXYPlotData } from "./components/xy-plot/xy-plot.js";
 export { TpYakazu } from "./components/yakazu/yakazu.js";
+export { TpAudioPlaylist } from "./components/audio-playlist/audio-playlist.js";
 export { TpBiblio } from "./components/biblio/biblio.js";
 export { TpCalculator } from "./components/calculator/calculator.js";
 export { TpGlossary } from "./components/glossary/glossary.js";

@@ -8,12 +8,16 @@ The custom `<tp-markup-multi-slides>` element implements the <tp-icon name="mark
 
 ## Usage
 
+The presentation always includes a horizontal **Manual / Timing / Narration / Note** menu, including in fullscreen. The selected mode follows the `auto` attribute: Manual removes it, Timing sets `auto="timing"`, and Narration sets `auto="notes"`. The URL parameter `mode=manual`, `mode=timing` or `mode=notes` restores the selected mode on loading; changing it through the menu updates this parameter without reloading. Other URL parameters and the slide route are preserved. Automatic playback still starts with Play. Note toggles only the current slide's `tp-slide-note` and is disabled when that slide has no note. Notes remain hidden until opened.
+
 ### User interactions
 
 #### Mouse interactions
 
 | Control or gesture | Result |
 | --- | --- |
+| Manual / Timing / Narration | Select manual navigation, timed steps or narrated notes; the active mode is highlighted. |
+| Note | Open or close the current slide's notes; unavailable on slides without notes. |
 | Next arrow / click in slide content | Reveal the next progressive step, then advance to the next slide. |
 | Previous arrow / right-click in slide content | Hide the previous step, or return to the preceding slide with its steps revealed. |
 | Play automatically / Pause automatic playback | When automatic mode is enabled, start playback or pause it without losing the current voice or remaining interval. |
@@ -60,6 +64,10 @@ A slide declares its own notes, for example in HTML:
 Use the equivalent native component syntax in Markdown, AsciiDoc and reStructuredText; the examples below supply each format.
 
 ### Content sizing
+
+All slide variants share content width and padding, paragraph spacing, brand-colored titles and emphasis, and responsive limits for images and included SVGs. These rules are scoped to slide content; toolbar and note controls retain their own sizing. Content-specific compositions (logo galleries, comparisons, positioned diagrams) stay in the presentation stylesheet.
+
+Customize the shared defaults on the presentation with `--tp-slide-content-width`, `--tp-slide-content-padding`, `--tp-slide-font-size`, `--tp-slide-title-size`, `--tp-slide-image-height`, `--tp-slide-image-height-small` and `--tp-slide-svg-height`. The smaller image limit applies below 650px. Local figure and image styles can override these defaults.
 
 Slide content uses relative `em` dimensions for headings, code, tables, content spacing, figure padding, rounded corners, shadows and the default grid, cluster and stack gaps. These dimensions follow the responsive slide font size in all markup variants. The toolbar, slide navigation and speaker notes keep their interface sizing.
 
@@ -186,7 +194,13 @@ Events
 CSS properties
 : | CSS property | Default | Description |
   | --- | --- | --- |
-  | None. |  |  |
+  | <code>&#45;&#45;tp-slide-content-padding</code> | <code>clamp(1em, 3vw, 3em)</code> | = clamp(1em, 3vw, 3em) - Inline content padding. |
+  | <code>&#45;&#45;tp-slide-content-width</code> | <code>65em</code> | = 65em - Maximum content width. |
+  | <code>&#45;&#45;tp-slide-font-size</code> | <code>clamp(1rem, calc(0.65rem + 1.15vw), 2.5rem)</code> | = clamp(1rem, calc(0.65rem + 1.15vw), 2.5rem) - Responsive slide content font size. |
+  | <code>&#45;&#45;tp-slide-image-height</code> | <code>13em</code> | = 13em - Maximum image height. |
+  | <code>&#45;&#45;tp-slide-image-height-small</code> | <code>10em</code> | = 10em - Maximum image height below 650px. |
+  | <code>&#45;&#45;tp-slide-svg-height</code> | <code>22em</code> | = 22em - Maximum height of included SVG illustrations. |
+  | <code>&#45;&#45;tp-slide-title-size</code> | <code>2.488em</code> | = 2.488em - Level-one title size relative to slide text. |
   [CSS properties of `<tp-markup-multi-slides>`]
 :::
 <!-- /tp-docgen:api -->
@@ -194,6 +208,9 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_markup-multi-slides.TpMarkupMultiSlides.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
 
 
 
@@ -498,6 +515,10 @@ All tp-components used by `<tp-markup-multi-slides>` are loaded automatically by
 @summary Multi-page documentation with support for multiple markup languages.
 -->
 <!--
+@tp-dependency tp-menu
+@summary Accessible menu component.
+-->
+<!--
 @tp-dependency tp-numberfield
 @summary Numeric field with an optional native range slider.
 -->
@@ -511,6 +532,7 @@ All tp-components used by `<tp-markup-multi-slides>` are loaded automatically by
 -->
 
 - [`<tp-markup-multi-pages>`](../markup-multi-pages/index.md) : Multi-page documentation with support for multiple markup languages.
+- [`<tp-menu>`](../menu/index.md) : Accessible menu component.
 - [`<tp-numberfield>`](../numberfield/index.md) : Numeric field with an optional native range slider.
 - [`<tp-slide-note>`](../slide-note/index.md) : Collapsible speaker notes with speech playback and presentation docking.
 - [`<tp-text-to-speech>`](../text-to-speech/index.md) : Reads textual component content aloud with the Web Speech API.
