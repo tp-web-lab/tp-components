@@ -45,6 +45,7 @@
   "events": [
     {
       "name": "tp-analog-simulate",
+      "emitted": true,
       "description": "Emitted after transient simulation completes and updates the graph. samples contains time/value records keyed by measurement label or probe label/ID; time, duration and step are in seconds, with voltage in volts and current in amperes.",
       "detail": "{ samples: readonly TpAnalogSample[]; duration: number; step: number }"
     }

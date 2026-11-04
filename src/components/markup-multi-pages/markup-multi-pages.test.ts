@@ -811,13 +811,14 @@ describe("<tp-markup-multi-pages>", () => {
 			"/docs/two.md",
 		);
 		expect(
-			navigation.querySelector('[data-direction="previous"]')?.textContent,
+			navigation.querySelector('tp-button[data-direction="previous"]')
+				?.textContent,
 		).toContain("One");
 		expect(
-			navigation.querySelector('[data-direction="top"]')?.textContent,
+			navigation.querySelector('tp-button[data-direction="top"]')?.textContent,
 		).toContain("Two");
 		expect(
-			navigation.querySelector('[data-direction="next"]')?.textContent,
+			navigation.querySelector('tp-button[data-direction="next"]')?.textContent,
 		).toContain("Three");
 		expect(
 			invoke<HTMLElement>(

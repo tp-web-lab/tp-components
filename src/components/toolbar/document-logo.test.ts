@@ -31,7 +31,7 @@ it.each([
 	async (tag) => {
 		vi.stubGlobal(
 			"fetch",
-			vi.fn(async () => new Response("", { status: 200 })),
+			vi.fn(async () => new Response("", { status: 404 })),
 		);
 		const element = document.createElement(tag);
 		element.setAttribute("toolbar", "code");
@@ -45,9 +45,39 @@ it.each([
 		const toolbar = element.querySelector("tp-toolbar");
 		if (!toolbar) throw new Error("Missing toolbar");
 		const icon = toolbar.querySelector("[data-document-logo]");
-		expect(icon?.tagName).toBe("TP-ICON");
-		expect(icon?.getAttribute("size")).toBe("2em");
+		expect(icon?.tagName).toBe("TP-ICON-BUTTON");
+		expect(icon?.getAttribute("size")).toBe("m");
 		expect(icon?.getAttribute("src")).toBe("/first.svg");
+		expect(icon?.querySelector("tp-icon")?.getAttribute("src")).toBe(
+			"/first.svg",
+		);
+		expect(icon?.hasAttribute("disabled")).toBe(false);
+		expect(icon?.getAttribute("data-logo-href")).toBe(
+			new URL("./", document.baseURI).href,
+		);
+		element.setAttribute("logo-href", "https://example.com/site");
+		expect(icon?.getAttribute("data-logo-href")).toBe(
+			"https://example.com/site",
+		);
+		expect(icon?.hasAttribute("disabled")).toBe(false);
+		element.setAttribute("logo-href", "javascript:alert(1)");
+		expect(icon?.hasAttribute("disabled")).toBe(true);
+		element.setAttribute("logo-href", "/associated");
+		expect(icon?.getAttribute("data-logo-href")).toBe(
+			new URL("/associated", document.baseURI).href,
+		);
+		element.removeAttribute("logo-href");
+		expect(icon?.hasAttribute("disabled")).toBe(false);
+		expect(icon?.getAttribute("data-logo-href")).toBe(
+			new URL("./", document.baseURI).href,
+		);
+		for (const value of ["", "   "]) {
+			element.setAttribute("logo-href", value);
+			expect(icon?.getAttribute("data-logo-href")).toBe(
+				new URL("./", document.baseURI).href,
+			);
+			expect(icon?.hasAttribute("disabled")).toBe(false);
+		}
 		element.setAttribute("git", "https://example.com/repository");
 		element.setAttribute("logo", "/second.svg");
 		expect(

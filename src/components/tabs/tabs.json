@@ -83,16 +83,19 @@
   "events": [
     {
       "name": "tp-tabs-close",
+      "emitted": true,
       "description": "Emitted when a tab close button is activated.",
       "detail": "{ index: number; value: string }"
     },
     {
       "name": "tp-tabs-reorder",
+      "emitted": true,
       "description": "Emitted after a tab is reordered by drag and drop.",
       "detail": "{ fromIndex: number; toIndex: number; value: string }"
     },
     {
       "name": "tp-tabs-select",
+      "emitted": true,
       "description": "Emitted after a tab is selected.",
       "detail": "{ selected: number; value: string }"
     }

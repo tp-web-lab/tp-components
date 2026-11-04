@@ -72,11 +72,13 @@
   "events": [
     {
       "name": "tp-logigram-change",
+      "emitted": true,
       "description": "Emitted after a move, undo, redo or reset.",
       "detail": "{ value: number[] }"
     },
     {
       "name": "tp-logigram-check",
+      "emitted": true,
       "description": "Emitted after checking the grid.",
       "detail": "{ correct: number; total: number; errors: number[]; complete: boolean }"
     }

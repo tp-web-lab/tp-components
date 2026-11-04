@@ -12,6 +12,7 @@
  */
 // tp-docgen:dependencies:end
 
+import "../divider/divider.js";
 import { TpBase } from "../base/base.js";
 import style from "./toolbar.css?inline";
 
@@ -269,6 +270,19 @@ export class TpToolbar extends TpBase {
 			this.append(start, center, end);
 		}
 
+		for (const [name, section] of [
+			["center", center],
+			["end", end],
+		] as const) {
+			if (
+				!section ||
+				this.querySelector(`:scope > [data-toolbar-divider="${name}"]`)
+			)
+				continue;
+			const divider = document.createElement("tp-divider");
+			divider.dataset.toolbarDivider = name;
+			section.before(divider);
+		}
 		this.startSection = start;
 		this.centerSection = center;
 		this.endSection = end;
@@ -284,7 +298,8 @@ export class TpToolbar extends TpBase {
 			(el) =>
 				!el.hasAttribute("data-toolbar-start") &&
 				!el.hasAttribute("data-toolbar-center") &&
-				!el.hasAttribute("data-toolbar-end"),
+				!el.hasAttribute("data-toolbar-end") &&
+				!el.hasAttribute("data-toolbar-divider"),
 		);
 
 		for (const child of children) {
@@ -337,6 +352,14 @@ export class TpToolbar extends TpBase {
 	private updateDataAttributes(): void {
 		this.setAttribute("data-orientation", this.orientation);
 		this.setAttribute("data-placement", this.placement);
+		for (const divider of this.querySelectorAll(
+			":scope > [data-toolbar-divider]",
+		)) {
+			divider.setAttribute(
+				"orientation",
+				this.orientation === "horizontal" ? "vertical" : "horizontal",
+			);
+		}
 	}
 
 	/**
@@ -355,7 +378,8 @@ export class TpToolbar extends TpBase {
 					if (
 						node.hasAttribute("data-toolbar-start") ||
 						node.hasAttribute("data-toolbar-center") ||
-						node.hasAttribute("data-toolbar-end")
+						node.hasAttribute("data-toolbar-end") ||
+						node.hasAttribute("data-toolbar-divider")
 					) {
 						continue;
 					}

@@ -49,6 +49,7 @@
   "events": [
     {
       "name": "tp-contextmenu-select",
+      "emitted": true,
       "description": "Emitted when a terminal menu item with data-action is activated. The detail contains its action identifier, li element and visible label.",
       "detail": "{ action: string; item: HTMLLIElement; label: string }"
     }

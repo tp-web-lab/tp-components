@@ -9,11 +9,7 @@
 
 import { dedent } from "../../utilities/code.js";
 import { ensureCodeBlockCopyButtons } from "../../utilities/code-block-copy.js";
-import type { TpComponentUserHelp } from "../../utilities/component-user-help.js";
-import { createHelpButtonTable } from "../../utilities/help-buttons.js";
-import { formatHelpKeyboard } from "../../utilities/help-keyboard.js";
 import baseStyle from "./base.css?inline";
-import helpStyle from "./help.css?inline";
 import resetStyle from "./tp-reset.css?inline";
 import tokenStyle from "./tp-tokens.css?inline";
 
@@ -23,42 +19,6 @@ function preservesDocumentStyles(targetDocument: Document): boolean {
 	return targetDocument.documentElement.hasAttribute(
 		PRESERVE_DOCUMENT_STYLES_ATTRIBUTE,
 	);
-}
-
-interface TpComponentApiManifest {
-	userHelp?: TpComponentUserHelp;
-	tagname: string;
-	classname: string;
-	superclass: string;
-	description: string;
-	examples: Array<{
-		label: string;
-		code: string;
-	}>;
-	attributes: Array<{
-		name: string;
-		description: string;
-		reflected: boolean;
-		static: boolean;
-		inherited: boolean;
-		type: string;
-		default: string;
-	}>;
-	methods: Array<{
-		name: string;
-		inherited: boolean;
-		description: string;
-	}>;
-	events: Array<{
-		name: string;
-		description: string;
-		detail: string;
-	}>;
-	cssproperties: Array<{
-		name: string;
-		default: string;
-		description: string;
-	}>;
 }
 
 type TpHelpDrawerElement = HTMLElement & {
@@ -103,6 +63,10 @@ export class TpBase extends HTMLElement {
 	private static currentHelpElement: TpBase | null = null;
 	/** Pointer target is independent of focus, including non-focusable layout components. */
 	private static hoveredHelpElement: TpBase | null = null;
+	private static readonly helpHierarchyChoices = new WeakMap<
+		HTMLElement,
+		HTMLElement
+	>();
 	private initialHelpMarkup: string | null = null;
 	private baseHelpListenerAttached = false;
 	private readonly handleBaseHelpFocusIn = (): void => {
@@ -234,7 +198,7 @@ export class TpBase extends HTMLElement {
 					event.code === "Comma" ||
 					// French Mac keyboards report a comma on KeyM with Ctrl+Shift.
 					(event.code === "KeyM" && event.key === ",")));
-		if (!isQuestionMark || event.altKey || !event.ctrlKey || event.metaKey) {
+		if (!isQuestionMark || !event.ctrlKey || event.metaKey) {
 			return;
 		}
 
@@ -244,7 +208,8 @@ export class TpBase extends HTMLElement {
 			? TpBase.hoveredHelpElement
 			: target;
 		TpBase.currentHelpElement = selected;
-		void selected.help();
+		if (event.altKey) void TpBase.helpPresenter().showHelpHierarchy(selected);
+		else void selected.help();
 	}
 
 	/**
@@ -257,62 +222,200 @@ export class TpBase extends HTMLElement {
 	 * @summary Opens generated component help.
 	 */
 	public async help(): Promise<void> {
-		const api = await this.loadComponentApi();
-		if (api === null) {
+		const snapshot = this.createHelpSnapshot();
+		const apiSource = await this.loadComponentApi();
+		if (apiSource === null) {
 			return;
 		}
 
-		await import("../drawer/drawer.js");
-		await import("../markdown/markdown.js");
-		await import("../button/button.js");
-		this.ensureGlobalStyle("tp-component-help-styles", helpStyle);
+		const presenter = TpBase.helpPresenter();
+		await presenter.showComponentHelp(
+			this.localName,
+			new URL(apiSource, document.baseURI).href,
+			snapshot,
+		);
+	}
 
-		const drawer = this.getOrCreateHelpDrawer();
+	private static helpPresenter(): typeof TpBase {
+		// Use the outermost same-origin library host so an iframe cannot clip help.
+		let host: Window = window;
+		let presenter = TpBase;
+		try {
+			while (host.parent !== host && !host.document.fullscreenElement) {
+				const parent = host.parent;
+				const base = parent.customElements.get("tp-base") as
+					| typeof TpBase
+					| undefined;
+				if (!base?.showComponentHelp) break;
+				host = parent;
+				presenter = base;
+			}
+		} catch {
+			// Cross-origin parents cannot host this document's help.
+		}
+		return presenter;
+	}
+
+	/** Chooses the target before opening help, without losing the original hover. */
+	private static async showHelpHierarchy(selected: TpBase): Promise<void> {
+		const entries: Array<HTMLElement & { help?: () => Promise<void> }> = [];
+		let element: Element | null = selected;
+		while (element) {
+			if (element.localName.startsWith("tp-"))
+				entries.push(element as HTMLElement & { help?: () => Promise<void> });
+			const root = element.getRootNode();
+			if (element.parentElement) element = element.parentElement;
+			else if ("host" in root) element = (root as ShadowRoot).host;
+			else {
+				try {
+					element = element.ownerDocument.defaultView?.frameElement ?? null;
+				} catch {
+					element = null;
+				}
+			}
+		}
+		const focus = selected.ownerDocument.activeElement as HTMLElement | null;
+		const { TpDropdown } = await import("../dropdown/dropdown.js");
+		await import("../icon/icon.js");
+		(
+			document.getElementById("tp-help-hierarchy") as InstanceType<
+				typeof TpDropdown
+			> | null
+		)?.hide();
+		const parent = document.fullscreenElement ?? document.body;
+		const anchor = document.createElement("span");
+		anchor.id = "tp-help-hierarchy-anchor";
+		anchor.style.cssText =
+			"position:fixed;width:0;height:0;pointer-events:none";
+		const menu = new TpDropdown();
+		menu.id = "tp-help-hierarchy";
+		menu.setAttribute("anchor", `#${anchor.id}`);
+		menu.setAttribute("outside-click", "");
+		menu.setAttribute("aria-label", "Choose a component for help");
+		const windows = new Set<Window>();
+		let owner = selected.ownerDocument;
+		while (owner.defaultView) {
+			windows.add(owner.defaultView);
+			if (owner === document) break;
+			const frame = owner.defaultView.frameElement;
+			if (!frame) break;
+			owner = frame.ownerDocument;
+		}
+		const updateAnchor = (event?: Event): void => {
+			if (event?.target instanceof Node && menu.contains(event.target)) return;
+			if (!selected.isConnected) {
+				menu.hide();
+				return;
+			}
+			const rect = selected.getBoundingClientRect();
+			let x = rect.left;
+			let y = rect.bottom;
+			let owner = selected.ownerDocument;
+			while (owner !== document) {
+				const frame = owner.defaultView?.frameElement;
+				if (!frame) break;
+				const bounds = frame.getBoundingClientRect();
+				x += bounds.left;
+				y += bounds.top;
+				owner = frame.ownerDocument;
+			}
+			anchor.style.left = `${Math.max(8, Math.min(x, window.innerWidth - 16))}px`;
+			anchor.style.top = `${Math.max(8, Math.min(y, window.innerHeight - 16))}px`;
+			menu.reposition();
+		};
+		updateAnchor();
+		const list = document.createElement("ul");
+		const previous = TpBase.helpHierarchyChoices.get(selected);
+		const chosen = previous && entries.includes(previous) ? previous : selected;
+		entries.forEach((entry) => {
+			const item = document.createElement("li");
+			item.textContent = entry.localName + (entry.id ? ` #${entry.id}` : "");
+			const check = document.createElement("tp-icon");
+			check.setAttribute("name", "check");
+			check.setAttribute("size", "1em");
+			check.setAttribute("aria-hidden", "true");
+			check.style.visibility = entry === chosen ? "visible" : "hidden";
+			item.prepend(check, " ");
+			if (entry === chosen) item.setAttribute("aria-current", "true");
+			item.addEventListener("click", () => {
+				TpBase.helpHierarchyChoices.set(selected, entry);
+				menu.hide();
+				if (entry.isConnected) void entry.help?.();
+			});
+			item.addEventListener(
+				"keydown",
+				(event) => {
+					if (event.key !== "Enter" && event.key !== " ") return;
+					event.preventDefault();
+					event.stopImmediatePropagation();
+					item.click();
+				},
+				{ capture: true },
+			);
+			list.append(item);
+		});
+		menu.append(list);
+		parent.append(anchor, menu);
+		menu.addEventListener("tp-dropdown-toggle", () => {
+			if (menu.open) return;
+			for (const host of windows) {
+				host.removeEventListener("scroll", updateAnchor, true);
+				host.removeEventListener("resize", updateAnchor);
+			}
+			menu.remove();
+			anchor.remove();
+			if (focus?.isConnected) focus.focus();
+		});
+		for (const host of windows) {
+			host.addEventListener("scroll", updateAnchor, {
+				capture: true,
+				passive: true,
+			});
+			host.addEventListener("resize", updateAnchor);
+		}
+		menu.show();
+		list.querySelector("li")?.focus();
+	}
+
+	/** Presents contextual help in this window's drawer. */
+	private static async showComponentHelp(
+		tag: string,
+		apiSource: string,
+		snapshot: string,
+	): Promise<void> {
+		await import("../drawer/drawer.js");
+		await import("../component-viewer/component-viewer.js");
+		await import("../color/color.js");
+		await import("../theme/theme.js");
+
+		const drawer = TpBase.getOrCreateHelpDrawer();
 		drawer.setAttribute("label", "User help");
 		drawer.setAttribute("placement", "end");
 		drawer.setAttribute("width", "75%");
 		drawer.setAttribute("outside-click", "");
 		drawer.setAttribute("backdrop", "");
 
-		const navigation = document.createElement("div");
-		navigation.className = "tp-component-help-navigation";
-		navigation.setAttribute("role", "group");
-		navigation.setAttribute("aria-label", "Help audience");
-		drawer.querySelector(".tp-component-help-navigation")?.remove();
-		drawer.querySelector("[data-tp-drawer-header]")?.prepend(navigation);
-		const views = new Map<string, HTMLElement>();
-		const labels = ["User help", "Author help", "Developer help"];
-		const select = (label: string): void => {
-			let content = views.get(label);
-			if (!content) {
-				content =
-					label === "User help"
-						? this.renderHelpContent(api)
-						: this.renderReferenceHelp(api, label === "Developer help");
-				views.set(label, content);
-			}
-			drawer.setAttribute("label", label);
-			for (const button of navigation.querySelectorAll("tp-button")) {
-				const selected = button.dataset.helpView === label;
-				button.setAttribute("variant", selected ? "brand" : "neutral");
-				button.toggleAttribute("outlined", !selected);
-				button
-					.querySelector("button")
-					?.setAttribute("aria-pressed", String(selected));
-			}
-			if (typeof drawer.setContent === "function") drawer.setContent(content);
-			else drawer.append(content);
-		};
-		for (const label of labels) {
-			const button = document.createElement("tp-button");
-			button.textContent = label;
-			button.dataset.helpView = label;
-			button.setAttribute("size", "s");
-			button.addEventListener("click", () => select(label));
-			navigation.append(button);
+		const content = document.createElement("tp-component-viewer");
+		content.setAttribute("tag", tag);
+		content.setAttribute("api-src", apiSource);
+		const source = document.createElement("script");
+		source.type = "tp/html";
+		source.textContent = snapshot;
+		content.append(source);
+		if (typeof drawer.setContent === "function") {
+			drawer.setContent(content);
+		} else {
+			drawer.replaceChildren(content);
 		}
-		select("User help");
 
+		const actions = drawer.querySelector("[data-tp-drawer-actions]");
+		if (actions && !actions.querySelector("tp-color")) {
+			const color = document.createElement("tp-color");
+			const theme = document.createElement("tp-theme");
+			color.setAttribute("anchor", "#tp-component-help-drawer");
+			theme.setAttribute("anchor", "#tp-component-help-drawer");
+			actions.prepend(color, theme);
+		}
 		drawer.show?.();
 	}
 
@@ -522,7 +625,7 @@ export class TpBase extends HTMLElement {
 		return null;
 	}
 
-	private async loadComponentApi(): Promise<TpComponentApiManifest | null> {
+	private async loadComponentApi(): Promise<string | null> {
 		const sources = this.getComponentApiSources();
 
 		for (const source of sources) {
@@ -532,7 +635,8 @@ export class TpBase extends HTMLElement {
 					continue;
 				}
 
-				return (await response.json()) as TpComponentApiManifest;
+				const api = await response.json();
+				if (api.tagname === this.localName) return source;
 			} catch {
 				// Try the next candidate.
 			}
@@ -742,7 +846,7 @@ export class TpBase extends HTMLElement {
 		}
 	}
 
-	private getOrCreateHelpDrawer(): TpHelpDrawerElement {
+	private static getOrCreateHelpDrawer(): TpHelpDrawerElement {
 		const parent =
 			document.fullscreenElement instanceof HTMLElement
 				? document.fullscreenElement
@@ -762,99 +866,8 @@ export class TpBase extends HTMLElement {
 	}
 
 	/** Resolves host-configured documentation roots while retaining deployment prefixes. */
-	private helpReferenceRoot(name: string, fallback: string): URL {
-		const configured = document.querySelector<HTMLMetaElement>(
-			`meta[name="${name}"]`,
-		)?.content;
-		const root = new URL(configured || fallback, document.baseURI);
-		if (!root.pathname.endsWith("/")) root.pathname += "/";
-		return root;
-	}
-
-	/** Builds the selected component's author guide or generated TypeDoc class reference. */
-	private renderReferenceHelp(
-		api: TpComponentApiManifest,
-		developer: boolean,
-	): HTMLElement {
-		const component = api.tagname.replace(/^tp-/, "");
-		const section = document.createElement("section");
-		section.className = "tp-component-reference-help";
-		const title = document.createElement("h2");
-		title.textContent = api.userHelp?.displayName || api.tagname;
-		section.append(title);
-		if (developer) {
-			const root = this.helpReferenceRoot("tp-components-api-root", "/api/");
-			const status = document.createElement("p");
-			status.setAttribute("role", "status");
-			status.textContent = "Loading API reference…";
-			section.append(status);
-			void this.loadDeveloperHelp(api, root, section, status);
-		} else {
-			const root = this.helpReferenceRoot(
-				"tp-components-docs-root",
-				"/docs/components/",
-			);
-			const guide = document.createElement("tp-markdown");
-			guide.setAttribute("src", new URL(`${component}/index.md`, root).href);
-			section.append(guide);
-		}
-		return section;
-	}
-
-	/** Uses the generated class-page map because TypeDoc filenames vary by module. */
-	private async loadDeveloperHelp(
-		api: TpComponentApiManifest,
-		root: URL,
-		section: HTMLElement,
-		status: HTMLElement,
-	): Promise<void> {
-		try {
-			const response = await fetch(new URL("component-pages.json", root));
-			if (!response.ok) throw new Error("API reference index is unavailable.");
-			const pages = (await response.json()) as Record<string, string>;
-			const path = pages[api.tagname];
-			if (typeof path !== "string" || !path.startsWith("classes/"))
-				throw new Error(`No API reference is available for ${api.tagname}.`);
-			await import("../iframe/iframe.js");
-			const frame = document.createElement("tp-iframe");
-			frame.setAttribute("src", new URL(path, root).href);
-			frame.setAttribute("title", `${api.classname} API reference`);
-			status.remove();
-			section.append(frame);
-		} catch (error) {
-			status.setAttribute("role", "alert");
-			status.textContent =
-				error instanceof Error
-					? error.message
-					: "Unable to load API reference.";
-		}
-	}
-
-	/** Builds reader help without author controls, source code or class metadata. */
-	private renderHelpContent(api: TpComponentApiManifest): HTMLElement {
-		const content = document.createElement("section");
-		content.className = "tp-component-help";
-		const componentTitle = document.createElement("h2");
-		const componentIcon = document.createElement("tp-icon");
-		componentIcon.setAttribute("name", api.tagname.replace(/^tp-/, ""));
-		componentIcon.setAttribute("library", "components");
-		componentIcon.setAttribute("aria-hidden", "true");
-		componentIcon.setAttribute("size", "1.25em");
-		const componentName = document.createElement("span");
-		componentName.textContent =
-			api.userHelp?.displayName?.trim() ||
-			api.tagname
-				.replace(/^tp-/, "")
-				.replaceAll("-", " ")
-				.replace(/^./, (letter) => letter.toUpperCase());
-		componentTitle.append(componentIcon, componentName);
-		content.append(componentTitle);
-		const current = document.createElement("section");
-		current.className = "tp-component-help-current";
-		const title = document.createElement("h3");
-		title.textContent = "Current element";
-		const preview = document.createElement("div");
-		preview.className = "tp-component-help-preview";
+	/** Captures author content and current public attributes for an independent demo. */
+	private createHelpSnapshot(): string {
 		const template = document.createElement("template");
 		template.innerHTML = this.getStoredHelpMarkup();
 		const clone = template.content.firstElementChild;
@@ -869,7 +882,6 @@ export class TpBase extends HTMLElement {
 				.forEach((attribute) => {
 					clone.setAttribute(attribute.name, attribute.value);
 				});
-			clone.removeAttribute("autoplay");
 			const base = this.getCurrentDocumentBaseHref() ?? document.baseURI;
 			[clone, ...clone.querySelectorAll("*")].forEach((element) => {
 				[
@@ -930,58 +942,9 @@ export class TpBase extends HTMLElement {
 			});
 			const language = this.closest("[lang]")?.getAttribute("lang");
 			if (language) clone.setAttribute("lang", language);
-			preview.append(clone);
+			return clone.outerHTML;
 		}
-		current.append(title);
-		if (api.userHelp?.introduction) {
-			const introduction = document.createElement("tp-markdown");
-			introduction.className = "tp-component-help-introduction";
-			const source = document.createElement("script");
-			source.type = "tp/markdown";
-			source.textContent = api.userHelp.introduction;
-			introduction.append(source);
-			content.append(introduction);
-		}
-		current.append(preview);
-		const interactions = document.createElement("section");
-		const interactionTitle = document.createElement("h3");
-		interactionTitle.textContent = "User interactions";
-		const instructions = document.createElement("tp-markdown");
-		const source = document.createElement("script");
-		source.type = "tp/markdown";
-		source.textContent = formatHelpKeyboard(
-			api.userHelp?.interactions ||
-				"No user interaction instructions are available for this component.",
-		);
-		instructions.append(source);
-		interactions.append(interactionTitle);
-		const buttons = createHelpButtonTable(
-			this,
-			api.userHelp?.interactions ?? "",
-		);
-		if (buttons) interactions.append(buttons);
-		interactions.append(instructions);
-		if (
-			api.userHelp?.keyboard.length &&
-			!/^#### Keyboard interactions\s*$/m.test(api.userHelp.interactions)
-		) {
-			const keys = document.createElement("dl");
-			api.userHelp.keyboard.forEach((item) => {
-				const term = document.createElement("dt");
-				for (const [index, token] of item.key.split(/\+(?!$)/).entries()) {
-					if (index) term.append("+");
-					const key = document.createElement("kbd");
-					key.textContent = token;
-					term.append(key);
-				}
-				const description = document.createElement("dd");
-				description.textContent = item.description;
-				keys.append(term, description);
-			});
-			interactions.append(keys);
-		}
-		content.append(current, interactions);
-		return content;
+		return this.getStoredHelpMarkup();
 	}
 
 	private getCurrentDocumentBaseHref(): string | null {

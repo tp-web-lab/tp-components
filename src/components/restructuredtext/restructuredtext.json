@@ -33,11 +33,13 @@
   "events": [
     {
       "name": "tp-restructuredtext-doctest",
+      "emitted": true,
       "description": "Emitted after the document doctests have run.",
       "detail": "TpRestructuredTextDoctestResult"
     },
     {
       "name": "tp-restructuredtext-rendered",
+      "emitted": true,
       "description": "Emitted after conversion completes.",
       "detail": "void"
     }

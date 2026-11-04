@@ -19,35 +19,36 @@ Use F1 while the editor is focused to show or hide its toolbar. Mod means ⌘ on
 
 #### Mouse interactions
 
-| Control or gesture | Result |
-| --- | --- |
-| Editor text | Click to place the cursor; drag to select text. Editing does not execute the code. |
-| Numbered comment marker, when linked to tp-code-comment | Hover to read its formatted explanation in a tooltip. |
-| Keyboard button | Open or close the command palette listed below. |
-| Copy code button | Copy the entire editor content, unlike Copy in the palette, which copies the selection. |
-| Theme button | Choose light, dark or automatic appearance for this editor. |
-| Fullscreen button | Enter or leave fullscreen for this editor. |
-| Language badge / line and column | Display the current language and cursor position; these are indicators, not buttons. |
-| Palette: Undo | Reverts the last editor change. |
-| Palette: Redo | Reapplies the last reverted editor change. |
-| Palette: Copy | Copies the current selection. |
-| Palette: Cut | Cuts the current selection. |
-| Palette: Paste | Pastes clipboard text at the current selection. |
-| Palette: Select all | Selects the whole editor content. |
-| Palette: Fold code | Folds the current foldable code block. |
-| Palette: Unfold code | Unfolds the current folded code block. |
-| Palette: Toggle gutters | Shows or hides the fold gutter. |
-| Palette: Toggle line numbers | Shows or hides line numbers. |
-| Palette: Indent | Indents the current line or selection. |
-| Palette: Dedent | Dedents the current line or selection. |
-| Palette: Search | Opens the search panel. |
-| Palette: Replace | Opens search and runs replace-next. |
-| Palette: Go to line | Opens the go-to-line prompt. |
-| Palette: Toggle line comment | Toggles line comments for the current line or selection. |
-| Palette: Toggle block comment | Toggles block comments for the current selection. |
-| Palette: Toggle Command Palette | Opens or closes the command palette. |
-| Palette: Toggle toolbar | Opens or closes the toolbar. |
-| Clipboard permission | Paste may require browser permission. Read-only content cannot be edited. |
+| Control or gesture | Result | Shortcut |
+| --- | --- | --- |
+| Editor text | Click to place the cursor; drag to select text. Editing does not execute the code. |  |
+| Numbered comment marker, when linked to tp-code-comment | Hover to read its formatted explanation in a tooltip. |  |
+| Keyboard button | Open or close the command palette listed below. | Mod Shift P |
+| Copy code button | Copy the entire editor content, unlike Copy in the palette, which copies the selection. | — |
+| Theme button | Choose light, dark or automatic appearance for this editor. | — |
+| Fullscreen button | Enter or leave fullscreen for this editor. | — |
+| Language badge / line and column | Display the current language and cursor position; these are indicators, not buttons. |  |
+| Palette: Undo | Reverts the last editor change. | Mod Z |
+| Palette: Redo | Reapplies the last reverted editor change. | Mod Shift Z |
+| Palette: Copy | Copies the current selection. | Mod C |
+| Palette: Cut | Cuts the current selection. | Mod X |
+| Palette: Paste | Pastes clipboard text at the current selection. | Mod V |
+| Palette: Select all | Selects the whole editor content. | Mod A |
+| Palette: Fold code | Folds the current foldable code block. | Mod Alt ↓ |
+| Palette: Unfold code | Unfolds the current folded code block. | Mod Alt ↑ |
+| Palette: Toggle gutters | Shows or hides the fold gutter. | Mod Alt G |
+| Palette: Toggle line numbers | Shows or hides line numbers. | Mod Alt L |
+| Palette: Indent | Indents the current line or selection. | Tab |
+| Palette: Dedent | Dedents the current line or selection. | Shift Tab |
+| Palette: Search | Opens the search panel. | Mod F |
+| Palette: Replace | Opens search and runs replace-next. | Mod Alt F |
+| Palette: Go to line | Opens the go-to-line prompt. | Mod G |
+| Palette: Toggle line comment | Toggles line comments for the current line or selection. | Mod Alt C |
+| Palette: Toggle block comment | Toggles block comments for the current selection. | Mod Alt B |
+| Palette: Toggle Command Palette | Opens or closes the command palette. | Mod Shift P |
+| Palette: Toggle toolbar | Opens or closes the toolbar. | F1 |
+| Clipboard permission | Paste may require browser permission. Read-only content cannot be edited. |  |
+
 
 #### Keyboard interactions
 
@@ -224,6 +225,13 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_code-editor.TpCodeEditor.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
 
 
 

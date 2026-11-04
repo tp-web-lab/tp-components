@@ -479,6 +479,7 @@ console.log("tp-lib loaded");
 export { TpAudioPlaylist } from "./components/audio-playlist/audio-playlist.js";
 export { TpBiblio } from "./components/biblio/biblio.js";
 export { TpCalculator } from "./components/calculator/calculator.js";
+export * from "./components/component-viewer/component-viewer.js";
 export { TpGlossary } from "./components/glossary/glossary.js";
 export type {
 	GeometryObject,

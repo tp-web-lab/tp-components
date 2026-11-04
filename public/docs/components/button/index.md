@@ -12,10 +12,11 @@ The custom `<tp-button>` element implements the <tp-icon name="button" library="
 
 #### Mouse interactions
 
-| Control or gesture | Result |
-| --- | --- |
-| Button | Click to perform the action identified by its label. Disabled controls cannot be activated. |
-| Navigation button | Click to open its destination. |
+| Control or gesture | Result | Shortcut |
+| --- | --- | --- |
+| Button | Click to perform the action identified by its label. Disabled controls cannot be activated. |  |
+| Navigation button | Click to open its destination. |  |
+
 
 #### Keyboard interactions
 
@@ -123,6 +124,13 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_button.TpButton.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
 
 
 

@@ -556,6 +556,11 @@ export class TpDropdown extends TpOverlayElement {
 		item.focus();
 	}
 
+	/** Repositions an open menu after its anchor moves without resizing. */
+	public reposition(): void {
+		this.positionDropdown();
+	}
+
 	private positionDropdown(): void {
 		if (!this.open) {
 			return;

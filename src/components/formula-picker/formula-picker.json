@@ -14,6 +14,7 @@
   "events": [
     {
       "name": "tp-formula-picker-select",
+      "emitted": true,
       "description": "Emitted when a spreadsheet function is selected. formula contains the leading = and argument placeholders; selectionStart and selectionEnd are zero-based string offsets delimiting the arguments to select.",
       "detail": "{ name: string; formula: string; selectionStart: number; selectionEnd: number }"
     }

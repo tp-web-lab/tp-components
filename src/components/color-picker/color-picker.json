@@ -14,11 +14,13 @@
   "events": [
     {
       "name": "tp-color-picker-copy-error",
+      "emitted": true,
       "description": "Emitted when copying the selected color token fails. The detail contains the requested clipboard text, selection metadata and the caught error.",
       "detail": "{ token: string; value: string; error: unknown }"
     },
     {
       "name": "tp-color-picker-select",
+      "emitted": true,
       "description": "Emitted when a color token is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success.",
       "detail": "{ token: string; value: string }"
     }

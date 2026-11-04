@@ -1,0 +1,2788 @@
+{
+  "tp-accordion": {
+    "appearance": {
+      "values": [
+        "default",
+        "outlined",
+        "filled"
+      ]
+    }
+  },
+  "tp-alarm": {},
+  "tp-animation": {
+    "fill": {
+      "values": [
+        "none",
+        "forwards",
+        "backwards",
+        "both",
+        "auto"
+      ]
+    },
+    "trigger": {
+      "values": [
+        "load",
+        "click",
+        "hover",
+        "manual",
+        "intersection"
+      ]
+    }
+  },
+  "tp-asciidoc": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/asciidoc/examples/attributes-src-file1.adoc"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/asciidoc/examples/attributes-src-file2.adoc"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/asciidoc/examples/attributes-src-file-unknown.adoc"
+        }
+      ]
+    }
+  },
+  "tp-asciidoc-multi-pages": {},
+  "tp-asciidoc-multi-slides": {},
+  "tp-asciidoc-playground": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/asciidoc-playground/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/asciidoc-playground/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/asciidoc-playground/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/asciidoc-playground/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/asciidoc-playground/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/asciidoc-playground/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-asciidoc-single-page": {},
+  "tp-asciidoc-viewer": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/asciidoc-viewer/examples/attributes-src-file1.adoc"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/asciidoc-viewer/examples/attributes-src-file2.adoc"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/asciidoc-viewer/examples/attributes-src-file-unknown.adoc"
+        }
+      ]
+    }
+  },
+  "tp-asciidoc-viewer-question": {},
+  "tp-audio-playlist": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/audio-playlist/examples/playlist-1.html"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/audio-playlist/examples/playlist-2.html"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/audio-playlist/examples/file-unknown.html"
+        }
+      ]
+    }
+  },
+  "tp-audio-recorder": {},
+  "tp-avatar": {
+    "shape": {
+      "values": [
+        "circle",
+        "square"
+      ]
+    },
+    "size": {
+      "values": [
+        "xxs",
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl",
+        "xxl"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "No image (default)",
+          "value": ""
+        },
+        {
+          "label": "tp-components logo",
+          "value": "/docs/components/avatar/examples/attributes-src-file1.svg"
+        },
+        {
+          "label": "Portrait illustration",
+          "value": "/docs/components/avatar/examples/attributes-src-file2.svg"
+        },
+        {
+          "label": "Missing image (test fallback)",
+          "value": "/docs/components/avatar/examples/attributes-src-file-unknown.svg"
+        }
+      ]
+    }
+  },
+  "tp-avatar-group": {
+    "order": {
+      "values": [
+        "ltr",
+        "rtl"
+      ]
+    },
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
+  "tp-badge": {
+    "size": {
+      "values": [
+        "xxs",
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl",
+        "xxl"
+      ]
+    },
+    "variant": {
+      "values": [
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "neutral",
+        "brand"
+      ]
+    }
+  },
+  "tp-base": {
+    "data-tp-help-src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/base/examples/attributes-data-tp-help-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/base/examples/attributes-data-tp-help-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/base/examples/attributes-data-tp-help-src-file-unknown.json"
+        }
+      ]
+    },
+    "data-tp-markdown-source": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/base/examples/attributes-data-tp-markdown-source-file1.md"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/base/examples/attributes-data-tp-markdown-source-file2.md"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/base/examples/attributes-data-tp-markdown-source-file-unknown.md"
+        }
+      ]
+    },
+    "dir": {
+      "values": [
+        "ltr",
+        "rtl",
+        "auto"
+      ]
+    }
+  },
+  "tp-biblio": {},
+  "tp-binary": {},
+  "tp-blank": {
+    "type": {
+      "values": [
+        "text",
+        "number",
+        "math",
+        "date",
+        "time"
+      ]
+    }
+  },
+  "tp-box": {},
+  "tp-button": {
+    "loading-mode": {
+      "values": [
+        "replace",
+        "inline"
+      ]
+    },
+    "size": {
+      "values": [
+        "xxs",
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl",
+        "xxl"
+      ]
+    },
+    "type": {
+      "values": [
+        "button",
+        "submit",
+        "reset"
+      ]
+    },
+    "variant": {
+      "values": [
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "neutral",
+        "brand"
+      ]
+    }
+  },
+  "tp-button-group": {
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
+  "tp-calculator": {
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
+  "tp-callout": {
+    "variant": {
+      "values": [
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "neutral",
+        "brand"
+      ]
+    }
+  },
+  "tp-card": {},
+  "tp-center": {},
+  "tp-checkbox-list": {
+    "label-position": {
+      "values": [
+        "top",
+        "bottom",
+        "start",
+        "end"
+      ]
+    },
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
+  "tp-chronometer": {},
+  "tp-clock": {
+    "type": {
+      "values": [
+        "digital",
+        "analogic"
+      ]
+    }
+  },
+  "tp-cluster": {
+    "align": {
+      "values": [
+        "normal",
+        "stretch",
+        "center",
+        "start",
+        "end",
+        "flex-start",
+        "flex-end",
+        "self-start",
+        "self-end",
+        "baseline",
+        "first baseline",
+        "last baseline"
+      ]
+    },
+    "justify": {
+      "values": [
+        "normal",
+        "start",
+        "end",
+        "flex-start",
+        "flex-end",
+        "center",
+        "left",
+        "right",
+        "space-between",
+        "space-around",
+        "space-evenly",
+        "stretch"
+      ]
+    }
+  },
+  "tp-code-comment": {},
+  "tp-code-editor": {
+    "dir": {
+      "values": [
+        "ltr",
+        "rtl",
+        "auto"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/code-editor/examples/attributes-src-file1.txt"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/code-editor/examples/attributes-src-file2.txt"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/code-editor/examples/attributes-src-file-unknown.txt"
+        }
+      ]
+    }
+  },
+  "tp-color": {
+    "preset": {
+      "values": [
+        "tp-default",
+        "tp-red",
+        "tp-orange",
+        "tp-amber",
+        "tp-yellow",
+        "tp-lime",
+        "tp-green",
+        "tp-emerald",
+        "tp-teal",
+        "tp-glaz",
+        "tp-cyan",
+        "tp-sky",
+        "tp-blue",
+        "tp-indigo",
+        "tp-violet",
+        "tp-purple",
+        "tp-fuchsia",
+        "tp-pink",
+        "tp-rose",
+        "tp-zinc",
+        "tp-ivory",
+        "tp-stone"
+      ]
+    },
+    "size": {
+      "values": [
+        "xxs",
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl",
+        "xxl"
+      ]
+    },
+    "variant": {
+      "values": [
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "neutral",
+        "brand"
+      ]
+    }
+  },
+  "tp-color-picker": {},
+  "tp-compare": {
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
+  "tp-component-viewer": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/component-viewer/examples/attributes-src-file1.html"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/component-viewer/examples/attributes-src-file2.html"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/component-viewer/examples/attributes-src-file-unknown.html"
+        }
+      ]
+    }
+  },
+  "tp-console": {},
+  "tp-contextmenu": {},
+  "tp-copy-code": {},
+  "tp-cover": {},
+  "tp-crossword": {},
+  "tp-cryptarithm": {},
+  "tp-csv-table": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/csv-table/examples/countries.csv"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/csv-table/examples/scores.csv"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/csv-table/examples/file-unknown.csv"
+        }
+      ]
+    }
+  },
+  "tp-datefield": {
+    "label-position": {
+      "values": [
+        "top",
+        "bottom",
+        "start",
+        "end"
+      ]
+    }
+  },
+  "tp-diagram": {
+    "engine": {
+      "values": [
+        "mermaid",
+        "pele"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/diagram/examples/attributes-src-file1.mmd"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/diagram/examples/attributes-src-file2.mmd"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/diagram/examples/attributes-src-file-unknown.mmd"
+        }
+      ]
+    }
+  },
+  "tp-dialog": {},
+  "tp-dir": {
+    "mode": {
+      "values": [
+        "ltr",
+        "rtl",
+        "auto"
+      ]
+    },
+    "size": {
+      "values": [
+        "xxs",
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl",
+        "xxl"
+      ]
+    },
+    "variant": {
+      "values": [
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "neutral",
+        "brand"
+      ]
+    }
+  },
+  "tp-divider": {
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
+  "tp-dragdrop": {},
+  "tp-drawer": {
+    "placement": {
+      "values": [
+        "top",
+        "end",
+        "bottom",
+        "start"
+      ]
+    }
+  },
+  "tp-dropdown": {
+    "placement": {
+      "values": [
+        "top",
+        "end",
+        "bottom",
+        "start"
+      ]
+    }
+  },
+  "tp-emoji-picker": {
+    "copy": {
+      "values": [
+        "emoji",
+        "unicode",
+        "hexadecimal-html",
+        "decimal-html",
+        "html-entity"
+      ]
+    }
+  },
+  "tp-exercise": {},
+  "tp-file-tree": {},
+  "tp-filesystem": {},
+  "tp-fill-blank": {},
+  "tp-fill-blank-question": {
+    "mode": {
+      "values": [
+        "mixed",
+        "opened",
+        "closed"
+      ]
+    }
+  },
+  "tp-flip-card": {
+    "button-position": {
+      "values": [
+        "top start",
+        "top center",
+        "top end",
+        "bottom start",
+        "bottom center",
+        "bottom end",
+        "none"
+      ]
+    }
+  },
+  "tp-formula-picker": {},
+  "tp-frame": {},
+  "tp-fullscreen": {
+    "size": {
+      "values": [
+        "xxs",
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl",
+        "xxl"
+      ]
+    },
+    "variant": {
+      "values": [
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "neutral",
+        "brand"
+      ]
+    }
+  },
+  "tp-game-life": {
+    "preset": {
+      "values": [
+        "glider",
+        "blinker",
+        "toad",
+        "beacon",
+        "gosper-gun"
+      ]
+    }
+  },
+  "tp-glossary": {},
+  "tp-graph-analog-circuit": {},
+  "tp-graph-dfa": {},
+  "tp-graph-editor": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/graph-editor/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/graph-editor/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/graph-editor/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-graph-geometric-optics": {},
+  "tp-graph-geometry": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/graph-geometry/examples/circle.geometry"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/graph-geometry/examples/arc.geometry"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/graph-geometry/examples/file-unknown.geometry"
+        }
+      ]
+    }
+  },
+  "tp-graph-logical-circuit": {},
+  "tp-graph-nfa": {},
+  "tp-graph-petri": {},
+  "tp-graph-query-tree": {},
+  "tp-graph-sequential-circuit": {},
+  "tp-grid": {},
+  "tp-html-multi-pages": {},
+  "tp-html-multi-slides": {},
+  "tp-html-playground": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/html-playground/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/html-playground/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/html-playground/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/html-playground/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/html-playground/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/html-playground/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-html-single-page": {},
+  "tp-html-viewer": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/html-viewer/examples/attributes-src-file1.html"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/html-viewer/examples/attributes-src-file2.html"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/html-viewer/examples/attributes-src-file-unknown.html"
+        }
+      ]
+    }
+  },
+  "tp-html-viewer-question": {},
+  "tp-icon": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/icon/examples/attributes-src-file1.svg"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/icon/examples/attributes-src-file2.svg"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/icon/examples/attributes-src-file-unknown.svg"
+        }
+      ]
+    }
+  },
+  "tp-icon-button": {
+    "loading-mode": {
+      "values": [
+        "replace",
+        "inline"
+      ]
+    },
+    "size": {
+      "values": [
+        "xxs",
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl",
+        "xxl"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/icon/examples/attributes-src-file1.svg"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/icon/examples/attributes-src-file2.svg"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/icon/examples/attributes-src-file-unknown.svg"
+        }
+      ]
+    },
+    "type": {
+      "values": [
+        "button",
+        "submit",
+        "reset"
+      ]
+    },
+    "variant": {
+      "values": [
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "neutral",
+        "brand"
+      ]
+    }
+  },
+  "tp-icon-picker": {
+    "copy": {
+      "values": [
+        "name",
+        "svg",
+        "tp-icon",
+        "tp-icon-button",
+        "img"
+      ]
+    }
+  },
+  "tp-iframe": {
+    "loading": {
+      "values": [
+        "eager",
+        "lazy"
+      ]
+    },
+    "referrerpolicy": {
+      "values": [
+        "no-referrer",
+        "no-referrer-when-downgrade",
+        "origin",
+        "origin-when-cross-origin",
+        "same-origin",
+        "strict-origin",
+        "strict-origin-when-cross-origin",
+        "unsafe-url"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/iframe/examples/attributes-src-file1.html"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/iframe/examples/attributes-src-file2.html"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/iframe/examples/attributes-src-file-unknown.html"
+        }
+      ]
+    }
+  },
+  "tp-include": {
+    "fetch-mode": {
+      "values": [
+        "cors",
+        "no-cors",
+        "same-origin"
+      ]
+    },
+    "mode": {
+      "values": [
+        "auto",
+        "raw"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/include/examples/attributes-src-file1.html"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/include/examples/attributes-src-file2.html"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/include/examples/attributes-src-file-unknown.html"
+        }
+      ]
+    }
+  },
+  "tp-inline": {
+    "align": {
+      "values": [
+        "normal",
+        "stretch",
+        "center",
+        "start",
+        "end",
+        "flex-start",
+        "flex-end",
+        "self-start",
+        "self-end",
+        "baseline",
+        "first baseline",
+        "last baseline"
+      ]
+    },
+    "justify": {
+      "values": [
+        "normal",
+        "start",
+        "end",
+        "flex-start",
+        "flex-end",
+        "center",
+        "left",
+        "right",
+        "space-between",
+        "space-around",
+        "space-evenly",
+        "stretch"
+      ]
+    }
+  },
+  "tp-javascript-notebook": {},
+  "tp-javascript-playground": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/javascript-playground/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/javascript-playground/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/javascript-playground/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/javascript-playground/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/javascript-playground/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/javascript-playground/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-javascript-playground-question": {},
+  "tp-javascript-viewer": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/javascript-viewer/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/javascript-viewer/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/javascript-viewer/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/javascript-viewer/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/javascript-viewer/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/javascript-viewer/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-javascript-viewer-question": {},
+  "tp-lang": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/lang/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/lang/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/lang/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "size": {
+      "values": [
+        "xxs",
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl",
+        "xxl"
+      ]
+    },
+    "variant": {
+      "values": [
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "neutral",
+        "brand"
+      ]
+    }
+  },
+  "tp-list-table": {},
+  "tp-listof": {},
+  "tp-logigram": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/logigram/examples/attributes-src-file1.md"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/logigram/examples/attributes-src-file2.md"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/logigram/examples/file-unknown.md"
+        }
+      ]
+    }
+  },
+  "tp-lorem-ipsum": {
+    "type": {
+      "values": [
+        "sentence",
+        "title",
+        "p",
+        "dl",
+        "ol",
+        "ul"
+      ]
+    }
+  },
+  "tp-loto": {},
+  "tp-lsystem": {
+    "preset": {
+      "values": [
+        "fractal-tree",
+        "barnsley-fern",
+        "koch-curve",
+        "dragon-curve",
+        "hilbert-curve",
+        "peano-curve",
+        "levy-c-curve",
+        "gosper-curve",
+        "pythagoras-tree",
+        "sierpinski-triangle",
+        "sierpinski-carpet",
+        "sierpinski-arrowhead",
+        "sierpinski-gasket",
+        "sierpinski-tetrahedron"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/lsystem/examples/koch.lsys"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/lsystem/examples/tree.lsys"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/lsystem/examples/file-unknown.lsys"
+        }
+      ]
+    }
+  },
+  "tp-map": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/map/examples/brest-track.gpx"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/map/examples/ouessant-route.gpx"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/map/examples/file-unknown.gpx"
+        }
+      ]
+    }
+  },
+  "tp-markdown": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/markdown/examples/attributes-src-file1.md"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/markdown/examples/attributes-src-file2.md"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/markdown/examples/attributes-src-file-unknown.md"
+        }
+      ]
+    }
+  },
+  "tp-markdown-multi-pages": {
+    "logo": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/medias/logos/logo-tp.svg"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/medias/logos/logo-tp-markdown.svg"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/medias/logos/logo-unknown.svg"
+        }
+      ]
+    },
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": "/docs"
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/markup-multi-pages/docs"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/markdown-multi-pages/docs"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/markdown-multi-pages/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "theme": {
+      "values": [
+        "light",
+        "dark",
+        "auto"
+      ]
+    }
+  },
+  "tp-markdown-multi-slides": {},
+  "tp-markdown-playground": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/markdown-playground/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/markdown-playground/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/markdown-playground/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/markdown-playground/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/markdown-playground/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/markdown-playground/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-markdown-single-page": {},
+  "tp-markdown-viewer": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/markdown-viewer/examples/attributes-src-file1.md"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/markdown-viewer/examples/attributes-src-file2.md"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/markdown-viewer/examples/attributes-src-file-unknown.md"
+        }
+      ]
+    }
+  },
+  "tp-markdown-viewer-question": {},
+  "tp-markup-multi-pages": {
+    "logo": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/medias/logos/logo-tp.svg"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/medias/logos/logo-tp-markdown.svg"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/medias/logos/logo-unknown.svg"
+        }
+      ]
+    },
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": "/docs"
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/markup-multi-pages/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/markup-multi-pages/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/markup-multi-pages/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "theme": {
+      "values": [
+        "light",
+        "dark",
+        "auto"
+      ]
+    }
+  },
+  "tp-markup-multi-slides": {
+    "auto": {
+      "values": [
+        "",
+        "notes",
+        "timing"
+      ]
+    }
+  },
+  "tp-markup-single-page": {
+    "logo": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/medias/logos/logo-tp.svg"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/medias/logos/logo-tp-markdown.svg"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/medias/logos/logo-unknown.svg"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/markup-single-page/examples/attributes-src-file1.md"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/markup-single-page/examples/attributes-src-file2.md"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/markup-single-page/examples/attributes-src-file-unknown.md"
+        }
+      ]
+    }
+  },
+  "tp-mask": {},
+  "tp-mastermind": {},
+  "tp-matching": {},
+  "tp-matching-question": {},
+  "tp-math": {
+    "mode": {
+      "values": [
+        "latexmath",
+        "asciimath"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/math/examples/identity.txt"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/math/examples/sum.txt"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/math/examples/file-unknown.txt"
+        }
+      ]
+    }
+  },
+  "tp-mathfield": {
+    "label-position": {
+      "values": [
+        "top",
+        "bottom",
+        "start",
+        "end"
+      ]
+    },
+    "mode": {
+      "values": [
+        "latexmath",
+        "asciimath"
+      ]
+    }
+  },
+  "tp-memory": {
+    "back": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/memory/examples/attributes-back-file1.svg"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/memory/examples/attributes-back-file2.svg"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/memory/examples/attributes-back-file-unknown.svg"
+        }
+      ]
+    }
+  },
+  "tp-menu": {
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
+  "tp-modal": {},
+  "tp-multi-choice-question": {
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/multi-choice-question/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/multi-choice-question/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/multi-choice-question/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-note": {},
+  "tp-notebook": {
+    "language": {
+      "values": [
+        "javascript",
+        "typescript",
+        "python",
+        "prolog",
+        "sql"
+      ]
+    },
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/notebook/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/notebook/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/notebook/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/notebook/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/notebook/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/notebook/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-numberfield": {
+    "label-position": {
+      "values": [
+        "top",
+        "bottom",
+        "start",
+        "end"
+      ]
+    }
+  },
+  "tp-object-tree": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/object-tree/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/object-tree/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/object-tree/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-popover": {
+    "placement": {
+      "values": [
+        "top",
+        "end",
+        "bottom",
+        "start"
+      ]
+    }
+  },
+  "tp-post-it": {
+    "color": {
+      "values": [
+        "default",
+        "red",
+        "orange",
+        "amber",
+        "yellow",
+        "lime",
+        "green",
+        "emerald",
+        "teal",
+        "glaz",
+        "cyan",
+        "sky",
+        "blue",
+        "indigo",
+        "violet",
+        "purple",
+        "fuchsia",
+        "pink",
+        "rose",
+        "zinc",
+        "ivory",
+        "stone"
+      ]
+    }
+  },
+  "tp-post-it-editor": {
+    "markup": {
+      "values": [
+        "html",
+        "markdown",
+        "asciidoc",
+        "restructuredtext",
+        "none"
+      ]
+    }
+  },
+  "tp-prolog-notebook": {},
+  "tp-prolog-playground": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/prolog-playground/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/prolog-playground/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/prolog-playground/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/prolog-playground/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/prolog-playground/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/prolog-playground/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-prolog-playground-question": {},
+  "tp-prolog-viewer": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/prolog-viewer/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/prolog-viewer/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/prolog-viewer/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/prolog-viewer/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/prolog-viewer/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/prolog-viewer/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-prolog-viewer-question": {},
+  "tp-prose-editor": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/prose-editor/examples/attributes-src-file1.html"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/prose-editor/examples/attributes-src-file2.html"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/prose-editor/examples/attributes-src-file-unknown.html"
+        }
+      ]
+    }
+  },
+  "tp-python-notebook": {},
+  "tp-python-playground": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "dir1",
+          "value": "/docs/components/python-playground/examples/attributes-repository-dir1"
+        },
+        {
+          "label": "dir2",
+          "value": "/docs/components/python-playground/examples/attributes-repository-dir2"
+        },
+        {
+          "label": "dir-unknown",
+          "value": "/docs/components/python-playground/examples/attributes-repository-dir-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/python-playground/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/python-playground/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/python-playground/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-python-playground-question": {},
+  "tp-python-viewer": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/python-viewer/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/python-viewer/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/python-viewer/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/python-viewer/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/python-viewer/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/python-viewer/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-python-viewer-question": {},
+  "tp-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    },
+    "mode": {
+      "values": [
+        "mixed",
+        "opened",
+        "closed"
+      ]
+    },
+    "open": {
+      "values": [
+        "",
+        "both",
+        "input",
+        "output"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/question/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/question/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/question/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-radio-list": {
+    "label-position": {
+      "values": [
+        "top",
+        "bottom",
+        "start",
+        "end"
+      ]
+    },
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
+  "tp-ref": {},
+  "tp-restructuredtext": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/restructuredtext/examples/attributes-src-file1.rst"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/restructuredtext/examples/attributes-src-file2.rst"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/restructuredtext/examples/attributes-src-file-unknown.rst"
+        }
+      ]
+    }
+  },
+  "tp-restructuredtext-multi-pages": {},
+  "tp-restructuredtext-multi-slides": {},
+  "tp-restructuredtext-playground": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/restructuredtext-playground/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/restructuredtext-playground/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/restructuredtext-playground/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/restructuredtext-playground/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/restructuredtext-playground/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/restructuredtext-playground/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-restructuredtext-single-page": {},
+  "tp-restructuredtext-viewer": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/restructuredtext-viewer/examples/attributes-src-file1.rst"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/restructuredtext-viewer/examples/attributes-src-file2.rst"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/restructuredtext-viewer/examples/attributes-src-file-unknown.rst"
+        }
+      ]
+    }
+  },
+  "tp-restructuredtext-viewer-question": {},
+  "tp-save-audio": {
+    "format": {
+      "values": [
+        "mp3",
+        "ogg",
+        "wav"
+      ]
+    },
+    "size": {
+      "values": [
+        "xxs",
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl",
+        "xxl"
+      ]
+    },
+    "variant": {
+      "values": [
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "neutral",
+        "brand"
+      ]
+    }
+  },
+  "tp-save-image": {
+    "size": {
+      "values": [
+        "xxs",
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl",
+        "xxl"
+      ]
+    },
+    "variant": {
+      "values": [
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "neutral",
+        "brand"
+      ]
+    }
+  },
+  "tp-screen": {
+    "device": {
+      "values": [
+        "phone-portrait",
+        "phone-landscape",
+        "tablet-portrait",
+        "tablet-landscape",
+        "laptop",
+        "desktop",
+        "default",
+        "16:9",
+        "3:2",
+        "4:3",
+        "1:1",
+        "3:4",
+        "2:3",
+        "9:16"
+      ]
+    },
+    "size": {
+      "values": [
+        "xxs",
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl",
+        "xxl"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "Responsive cards",
+          "value": "/docs/components/screen/examples/responsive.html"
+        },
+        {
+          "label": "Alternative layout",
+          "value": "/docs/components/screen/examples/responsive-alt.html"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/screen/examples/file-unknown.html"
+        }
+      ]
+    },
+    "variant": {
+      "values": [
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "neutral",
+        "brand"
+      ]
+    }
+  },
+  "tp-sidebar": {},
+  "tp-single-choice-question": {
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/single-choice-question/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/single-choice-question/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/single-choice-question/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-skeleton": {
+    "src": {
+      "choices": [
+        {
+          "label": "Inline HTML (default)",
+          "value": ""
+        },
+        {
+          "label": "Article HTML",
+          "value": "/docs/components/skeleton/examples/article.html"
+        },
+        {
+          "label": "Reference HTML with iframe",
+          "value": "/docs/components/skeleton/examples/reference.html"
+        },
+        {
+          "label": "Missing HTML (test error)",
+          "value": "/docs/components/skeleton/examples/file-unknown.html"
+        }
+      ]
+    }
+  },
+  "tp-slide-note": {},
+  "tp-slider": {},
+  "tp-slope-simulator": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "Two passes",
+          "value": "/docs/components/slope-simulator/examples/two-passes.json"
+        },
+        {
+          "label": "Limit slopes",
+          "value": "/docs/components/slope-simulator/examples/limits.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/slope-simulator/examples/file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-solitaire": {
+    "back": {
+      "values": [
+        "blue",
+        "red"
+      ]
+    },
+    "deck-size": {
+      "values": [
+        "32",
+        "52"
+      ]
+    }
+  },
+  "tp-source": {},
+  "tp-speech-to-text": {},
+  "tp-splitter": {
+    "axis": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
+  "tp-spreadsheet-editor": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/spreadsheet-editor/examples/budget.csv"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/spreadsheet-editor/examples/scores.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/spreadsheet-editor/examples/file-unknown.csv"
+        }
+      ]
+    }
+  },
+  "tp-sql-notebook": {},
+  "tp-sql-playground": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/sql-playground/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/sql-playground/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/sql-playground/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/sql-playground/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/sql-playground/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/sql-playground/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-sql-viewer": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/sql-viewer/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/sql-viewer/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/sql-viewer/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/sql-viewer/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/sql-viewer/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/sql-viewer/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-stack": {},
+  "tp-sudoku": {},
+  "tp-switcher": {},
+  "tp-symbol-picker": {
+    "copy": {
+      "values": [
+        "symbol",
+        "unicode",
+        "hexadecimal-html",
+        "decimal-html",
+        "html-entity"
+      ]
+    }
+  },
+  "tp-tabs": {
+    "activation": {
+      "values": [
+        "auto",
+        "manual"
+      ]
+    },
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
+  "tp-tangram": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "Square (text)",
+          "value": "/docs/components/tangram/examples/square.txt"
+        },
+        {
+          "label": "Diamond (JSON)",
+          "value": "/docs/components/tangram/examples/diamond.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/tangram/examples/file-unknown.txt"
+        }
+      ]
+    }
+  },
+  "tp-text-to-speech": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/text-to-speech/examples/attributes-src-file1.txt"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/text-to-speech/examples/attributes-src-file2.txt"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/text-to-speech/examples/attributes-src-file-unknown.txt"
+        }
+      ]
+    }
+  },
+  "tp-textfield": {
+    "label-position": {
+      "values": [
+        "top",
+        "bottom",
+        "start",
+        "end"
+      ]
+    },
+    "type": {
+      "values": [
+        "text",
+        "email",
+        "password",
+        "search",
+        "tel",
+        "url"
+      ]
+    }
+  },
+  "tp-theme": {
+    "mode": {
+      "values": [
+        "light",
+        "dark",
+        "auto"
+      ]
+    },
+    "size": {
+      "values": [
+        "xxs",
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl",
+        "xxl"
+      ]
+    },
+    "variant": {
+      "values": [
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "neutral",
+        "brand"
+      ]
+    }
+  },
+  "tp-timefield": {
+    "label-position": {
+      "values": [
+        "top",
+        "bottom",
+        "start",
+        "end"
+      ]
+    }
+  },
+  "tp-timeline": {
+    "orientation": {
+      "values": [
+        "vertical",
+        "horizontal"
+      ]
+    }
+  },
+  "tp-timer": {},
+  "tp-toc": {
+    "position": {
+      "values": [
+        "start",
+        "end",
+        "center"
+      ]
+    }
+  },
+  "tp-toolbar": {
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    },
+    "placement": {
+      "values": [
+        "top",
+        "bottom",
+        "start",
+        "end"
+      ]
+    }
+  },
+  "tp-tooltip": {
+    "placement": {
+      "values": [
+        "top",
+        "end",
+        "bottom",
+        "start"
+      ]
+    }
+  },
+  "tp-tree": {},
+  "tp-turtle": {
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/turtle/examples/attributes-src-file1.txt"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/turtle/examples/attributes-src-file2.txt"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/turtle/examples/attributes-src-file-unknown.txt"
+        }
+      ]
+    }
+  },
+  "tp-typescript-notebook": {},
+  "tp-typescript-playground": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/typescript-playground/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/typescript-playground/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/typescript-playground/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/typescript-playground/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/typescript-playground/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/typescript-playground/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-typescript-playground-question": {},
+  "tp-typescript-viewer": {
+    "repository": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/typescript-viewer/examples/attributes-repository-file1"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/typescript-viewer/examples/attributes-repository-file2"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/typescript-viewer/examples/attributes-repository-file-unknown"
+        }
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/typescript-viewer/examples/attributes-src-file1.json"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/typescript-viewer/examples/attributes-src-file2.json"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/typescript-viewer/examples/attributes-src-file-unknown.json"
+        }
+      ]
+    }
+  },
+  "tp-typescript-viewer-question": {},
+  "tp-typewriting": {},
+  "tp-video-player": {
+    "poster": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/video-player/examples/poster-1.svg"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/video-player/examples/poster-2.svg"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/video-player/examples/file-unknown.svg"
+        }
+      ]
+    },
+    "preload": {
+      "values": [
+        "none",
+        "metadata",
+        "auto"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/video-player/examples/clip-1.mp4"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/video-player/examples/clip-2.mp4"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/video-player/examples/file-unknown.mp4"
+        }
+      ]
+    }
+  },
+  "tp-xy-plot": {
+    "axis": {
+      "values": [
+        "both",
+        "horizontal",
+        "vertical",
+        "none"
+      ]
+    },
+    "grid": {
+      "values": [
+        "both",
+        "horizontal",
+        "vertical",
+        "none"
+      ]
+    },
+    "src": {
+      "choices": [
+        {
+          "label": "Default",
+          "value": ""
+        },
+        {
+          "label": "file1",
+          "value": "/docs/components/xy-plot/examples/attributes-src-file1.txt"
+        },
+        {
+          "label": "file2",
+          "value": "/docs/components/xy-plot/examples/attributes-src-file2.txt"
+        },
+        {
+          "label": "file-unknown",
+          "value": "/docs/components/xy-plot/examples/attributes-src-file-unknown.txt"
+        }
+      ]
+    }
+  },
+  "tp-yakazu": {}
+}

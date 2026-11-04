@@ -65,21 +65,25 @@
   "events": [
     {
       "name": "tp-graph-change",
+      "emitted": true,
       "description": "Emitted after adding a token, as well as for inherited graph mutations. reason identifies the operation and graph contains the resulting snapshot.",
       "detail": "{ reason: string; graph: TpGraphDocument }"
     },
     {
       "name": "tp-graph-error",
+      "emitted": true,
       "description": "Emitted if adding a token from the UI fails, or for an inherited graph loading or edge-editing failure. operation identifies the failed action.",
       "detail": "{ error: unknown; operation: \"add-token\" | \"load-src\" | \"reconnect-edge\" | \"add-edge\"; src?: string }"
     },
     {
       "name": "tp-petri-fire",
+      "emitted": true,
       "description": "Emitted after a transition fires and its animation finishes; marking maps each place ID to its remaining token count.",
       "detail": "{ transitionId: string; marking: Record<string, number>; graph: TpGraphDocument }"
     },
     {
       "name": "tp-petri-reset",
+      "emitted": true,
       "description": "Emitted after the initial marking is restored; marking maps each place ID to its reset token count.",
       "detail": "{ marking: Record<string, number>; graph: TpGraphDocument }"
     }

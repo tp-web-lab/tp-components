@@ -27,6 +27,7 @@ The toolbar is optional. The interactions below are available only when the corr
 
 | Control or gesture | Result |
 | --- | --- |
+| Local navigation link (right of the toolbar) | Open the linked document or website. The local navigation stays available when changing pages in a multipage document. |
 | Source repository | Open the linked Git repository in a new tab. |
 | Code | Open or close the document source in a drawer, without replacing the rendered document. |
 | Calculator | Open or close the scientific calculator. |
@@ -66,6 +67,23 @@ Set `git="https://github.com/owner/repository"` to add a repository button at th
 The left group contains `code`, `calc`, `postit`; the right group contains `clock`, `lang`, `color`, `theme`, `fullscreen`, in that order regardless of the order in the attribute. Code displays the original source as text; Calculator opens a separate drawer.
 
 For translated external documents, provide `langs="en,fr,es"`. The first language uses the source directory (for example `guide.md`); the others use subdirectories with the same filename (`fr/guide.md`, `es/guide.md`). With no `langs`, only `en` is assumed and no translation requests are made. The language control is shown only when `lang` is selected and at least two versions are available. It is hidden for inline documents. A static server must return 404 for missing translation files instead of serving a fallback page.
+
+### Local navigation bar
+
+An optional `navbar` file supplies a list of links displayed directly as buttons on the right of the main toolbar, before the vertical `tp-divider` and global controls. Authored `tp-button` and `tp-icon-button` elements are preserved; ordinary links become `tp-button` elements. No menu or list wrapper is added to the toolbar. Use `navbar.md`, `navbar.adoc`, `navbar.rst` or `navbar.html`, matching the document format. Both ordered and unordered lists are accepted. A missing file or a file without a list adds no controls.
+
+Place it beside the `src` document (or beside the host page for inline content). Enable `toolbar` to show it. Links resolve relative to the navbar file. Changing the source or recreating the toolbar reloads the navbar.
+
+For a Markdown navbar:
+
+```markdown
+- [Playlist](playlist/playlist.md)
+- [Scores](partitions/partitions.md)
+```
+
+### Linked toolbar logo
+
+Use `logo="logo.svg"` with `logo-href="https://example.org/"` to display the logo as a `tp-icon-button` that opens the associated website in the current tab. Relative destinations resolve against the page URL. When `logo-href` is omitted or empty, it defaults to `./` (the current directory). An invalid or non-HTTP(S) destination leaves the logo visible but inactive. Both attributes update immediately. Single-page documents also require `toolbar` to display the toolbar.
 
 ## Examples
 
@@ -131,6 +149,13 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_asciidoc-single-page.TpAsciidocSinglePage.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
 
 
 

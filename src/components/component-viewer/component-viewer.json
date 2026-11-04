@@ -1,0 +1,58 @@
+{
+  "tagname": "tp-component-viewer",
+  "classname": "TpComponentViewer",
+  "superclass": "TpBase",
+  "description": "API tables and interactive attribute controls for a component preview.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-component-viewer tag=\"tp-button\"></tp-component-viewer>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "api-src",
+      "description": "Optional component API manifest URL.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "src",
+      "description": "HTML example file, resolved relative to the author document.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "tag",
+      "description": "Component tag; inferred from supplied HTML when omitted.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "resetDefaults(): void",
+      "inherited": false,
+      "description": "Restores documented attribute defaults and restarts the preview."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Component viewer",
+    "introduction": "",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Doc / Demo / API | Show the user documentation, interactive demo or complete API, and update the component title. |\n| API tabs | Display the selected API table. |\n| Boolean checkboxes | Add or remove attributes on the preview. |\n| Choice lists | Select a documented configuration value. |\n| Text fields | Edit a value and leave the field to apply it. Clear removes the attribute and leaves the field empty. |\n| Preview | Interact with the component; reflected attribute changes update the controls. |\n| Reset defaults | Restore the documented attribute defaults and restart the preview. |\n| Reload preview | Restart the preview with current settings, including initialization-only attributes. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move through configuration controls and the preview. Leaving an edited field applies its value. |\n| Arrow keys / Home / End on API tabs | Select the adjacent, first or last API tab. |\n| Space | Toggle the focused checkbox. |\n| Arrow keys | Change the selection in a focused radio list. |\n| Enter / Space | Activate the focused action button. |\n| Ctrl+? | Open User help for the component under the pointer, falling back to the focused component; Shift may be needed to type ?. |",
+    "keyboard": []
+  }
+}

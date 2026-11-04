@@ -39,6 +39,11 @@
   "events": [],
   "cssproperties": [
     {
+      "name": "--tp-toolbar-divider-size",
+      "default": "2em",
+      "description": "Controls the divider size."
+    },
+    {
       "name": "--tp-toolbar-gap",
       "default": "0.25rem",
       "description": "Space between the toolbar sections along its main axis."

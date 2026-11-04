@@ -48,6 +48,7 @@
   "events": [
     {
       "name": "tp-splitter-change",
+      "emitted": true,
       "description": "Emitted when the divider position changes.",
       "detail": "{ axis: \"horizontal\" | \"vertical\"; position: string; storageKey: string }"
     }

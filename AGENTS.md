@@ -22,7 +22,7 @@ In every component's Usage > User interactions, provide exactly two tables under
 
 Each `TpName` class must have only one `@example`, matching the complete introductory documentation example. Do not append additional class examples; put complementary scenarios in the documentation Examples section.
 
-Ctrl+? is end-user help, titled `User help`. Its content begins with an h2 containing the component's human-readable documentation name (for example, Code editor), then a direct independent preview and a User interactions section with mouse/keyboard tables, without source editors, author controls, API tables or inheritance. Keep `Usage > User interactions` specific and current: the component manifest includes this text and display name as `userHelp`, together with declared `@keyboard` shortcuts.
+Ctrl+? opens a tp-component-viewer in the drawer titled `User help`, with Doc, Demo and API panels. Capture the targeted instance when help is requested and use its author content and current public attributes for an independent demo. Keep `Usage > User interactions` specific and current: the component manifest includes this text and display name as `userHelp`, together with declared `@keyboard` shortcuts.
 
 Do not add an Accessibility section to component documentation pages. Keep accessibility reporting in the transversal appendix and relevant interaction instructions in Usage; retain accessibility source metadata and tests.
 

@@ -111,6 +111,7 @@ interface ComponentApiMethod {
 }
 
 interface ComponentApiEvent {
+	emitted?: boolean;
 	name: string;
 	description: string;
 	detail: string;
@@ -859,6 +860,7 @@ function extractEvents(parsed: ParsedSource): ComponentApiEvent[] {
 			if (name !== undefined) {
 				events.set(name, {
 					name,
+					emitted: node.expression.getText(parsed.sourceFile) === "CustomEvent",
 					description: descriptions.get(name) || inferEventDescription(name),
 					detail:
 						details.get(name) ??

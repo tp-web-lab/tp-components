@@ -20,6 +20,7 @@ import { TpBase } from "../base/base.js";
 import type { TpDrawer } from "../drawer/drawer.js";
 import type { TpPostItEditor } from "../post-it-editor/post-it-editor.js";
 import { updateDocumentLogo } from "../toolbar/document-logo.js";
+import { updateDocumentNavbar } from "../toolbar/document-navbar.js";
 import style from "./markup-single-page.css?inline";
 
 const STYLE_ID = "tp-markup-single-page-styles";
@@ -120,7 +121,7 @@ function getRenderedEventName(language: TpMarkupSinglePageLanguage): string {
  */
 export class TpMarkupSinglePage extends TpBase {
 	public static get observedAttributes(): string[] {
-		return ["src", "toolbar", "langs", "label", "git", "logo"];
+		return ["src", "toolbar", "langs", "label", "git", "logo", "logo-href"];
 	}
 
 	private readonly outputElement = document.createElement("div");
@@ -180,8 +181,8 @@ export class TpMarkupSinglePage extends TpBase {
 		if (!this.isConnected) return;
 		if (name === "toolbar") this.renderToolbar();
 		else if (name === "git") this.updateGit();
-		else if (name === "logo")
-			updateDocumentLogo(this.toolbarElement, this.logo);
+		else if (name === "logo" || name === "logo-href")
+			updateDocumentLogo(this.toolbarElement, this.logo, this.logoHref);
 		else if (name === "label") this.updateLabel();
 		else if (name === "langs") void this.updateLanguages();
 		else {
@@ -227,7 +228,18 @@ export class TpMarkupSinglePage extends TpBase {
 				source,
 			);
 		} else source.url = this.git;
-		updateDocumentLogo(toolbar, this.logo);
+		updateDocumentLogo(toolbar, this.logo, this.logoHref);
+	}
+
+	/**
+	 * Website opened in the current tab when activating the toolbar logo. Defaults to ./ when omitted or empty.
+	 * @attr logo-href
+	 */
+	public get logoHref(): string {
+		return this.getAttribute("logo-href")?.trim() || "./";
+	}
+	public set logoHref(value: string) {
+		this.setAttribute("logo-href", value);
 	}
 
 	/**
@@ -348,9 +360,31 @@ export class TpMarkupSinglePage extends TpBase {
 		label.setAttribute("section", "center");
 		label.textContent = this.label;
 		toolbar.append(label);
-		updateDocumentLogo(toolbar, this.logo);
+		updateDocumentLogo(toolbar, this.logo, this.logoHref);
 		this.prepend(toolbar);
+		this.updateNavbar();
 		void this.updateLanguages();
+	}
+
+	private updateNavbar(): void {
+		const source = this.getOriginalSource(this.src.trim());
+		const language =
+			this.fixedLanguage ??
+			getLanguageFromPath(source) ??
+			this.inlineSourceSnapshot?.language ??
+			"markdown";
+		const extension = {
+			html: "html",
+			markdown: "md",
+			asciidoc: "adoc",
+			restructuredtext: "rst",
+		}[language];
+		const base = source
+			? resolveComponentSourceUrl(this, source).href
+			: this.ownerDocument.baseURI;
+		void updateDocumentNavbar(this.toolbarElement, [
+			new URL(`navbar.${extension}`, base).href,
+		]);
 	}
 
 	/** Resolve the authored source for the currently selected generated page. */
@@ -499,6 +533,7 @@ export class TpMarkupSinglePage extends TpBase {
 	}
 
 	private async renderSinglePage(): Promise<void> {
+		this.updateNavbar();
 		const token = ++this.renderToken;
 		this.sourceToken++;
 		this.sourceDrawer?.hide();

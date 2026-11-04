@@ -42,6 +42,7 @@
   "events": [
     {
       "name": "tp-alarm-trigger",
+      "emitted": true,
       "description": "Emitted when the alarm is triggered.",
       "detail": "void"
     }

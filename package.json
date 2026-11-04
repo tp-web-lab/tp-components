@@ -48,7 +48,7 @@
     "docs:api": "typedoc && node scripts/sync-typedoc-links.mjs",
     "docs:check-user-interactions": "node --test scripts/component-user-interactions.test.mjs",
     "dev": "pnpm docs:api && pnpm examples:manifest && vite dev --force",
-    "build": "pnpm docs:api && tsc --noEmit && vite build && pnpm build:types && pnpm build:renderers",
+    "build": "pnpm viewer:sync-controls && pnpm docs:api && tsc --noEmit && vite build && pnpm build:types && pnpm build:renderers",
     "preview": "vite preview",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage.enabled --coverage.provider=v8 --coverage.reporter=json-summary --coverage.include='src/components/**/*.ts' --coverage.exclude='src/**/*.test.ts' --coverage.reportsDirectory=config/global-quality-coverage",
@@ -164,7 +164,9 @@
     "api:check-methods": "node scripts/check-component-methods.mjs",
     "api:check-css": "node scripts/check-component-css.mjs",
     "api:check-events": "node scripts/check-component-events.mjs",
-    "api:check-all": "pnpm api:check-attributes && pnpm api:check-methods && pnpm api:check-css && pnpm api:check-events"
+    "api:check-all": "pnpm api:check-attributes && pnpm api:check-methods && pnpm api:check-css && pnpm api:check-events",
+    "viewer:sync-controls": "node scripts/sync-component-viewer-controls.mjs",
+    "viewer:check-controls": "node scripts/sync-component-viewer-controls.mjs --check"
   },
   "keywords": [],
   "author": "",

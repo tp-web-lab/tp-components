@@ -95,23 +95,56 @@ tp-toolbar[data-orientation="vertical"] > [data-toolbar-end] {
   margin-block-start: auto;
 }
 
-/* ---- Divider between non-empty adjacent sections ---- */
-
-tp-toolbar > [data-toolbar-start]:not(:empty) + [data-toolbar-center]:not(:empty),
-tp-toolbar > [data-toolbar-center]:not(:empty) + [data-toolbar-end]:not(:empty),
-tp-toolbar > [data-toolbar-start]:not(:empty) + [data-toolbar-end]:not(:empty) {
-  border-inline-start: 1px solid var(--tp-brand-stroke-soft, #d1d5db);
-  padding-inline-start: var(--tp-toolbar-section-gap, 0.25rem);
-  margin-inline-start: var(--tp-toolbar-section-gap, 0.25rem);
+/* Real separators share the same geometry as the navbar separator. */
+tp-toolbar > tp-divider[data-toolbar-divider] { display: none; }
+tp-toolbar:has(> [data-toolbar-start] > :not([hidden])):has(> [data-toolbar-center] > :not([hidden])) > [data-toolbar-divider="center"],
+tp-toolbar:has(> :is([data-toolbar-start], [data-toolbar-center]) > :not([hidden])):has(> [data-toolbar-end] > :not([hidden])):not(:has(> [data-toolbar-end] > [data-document-navbar])) > [data-toolbar-divider="end"] {
+  display: block;
+}
+tp-toolbar > tp-divider[data-toolbar-divider],
+tp-toolbar tp-divider[data-document-navbar-divider] {
+  align-self: center;
+  --tp-divider-color: var(--tp-brand-stroke-soft, #d1d5db);
+  --tp-divider-margin-inline: var(--tp-toolbar-section-gap, 0.25rem);
+  --tp-divider-margin-block: 0;
+}
+tp-toolbar > tp-divider[data-toolbar-divider][orientation="vertical"],
+tp-toolbar tp-divider[data-document-navbar-divider][orientation="vertical"] {
+  block-size: var(--tp-toolbar-divider-size, 2em);
+}
+@media (max-width: 48rem) {
+  :is(.tp-markup-multi-pages-toolbar, .tp-markdown-multi-pages-toolbar) > [data-toolbar-divider="center"] { order: 1; }
+  :is(.tp-markup-multi-pages-toolbar, .tp-markdown-multi-pages-toolbar) > [data-toolbar-divider="end"] { order: 2; }
 }
 
-tp-toolbar[data-orientation="vertical"] > [data-toolbar-start]:not(:empty) + [data-toolbar-center]:not(:empty),
-tp-toolbar[data-orientation="vertical"] > [data-toolbar-center]:not(:empty) + [data-toolbar-end]:not(:empty),
-tp-toolbar[data-orientation="vertical"] > [data-toolbar-start]:not(:empty) + [data-toolbar-end]:not(:empty) {
-  border-inline-start: none;
-  padding-inline-start: 0;
-  margin-inline-start: 0;
-  border-block-start: 1px solid var(--tp-brand-stroke-soft, #d1d5db);
-  padding-block-start: var(--tp-toolbar-section-gap, 0.25rem);
-  margin-block-start: var(--tp-toolbar-section-gap, 0.25rem);
+/* Document logos keep their intrinsic aspect ratio instead of a square icon box. */
+tp-toolbar tp-icon-button[data-document-logo] {
+  flex: 0 0 auto;
+  inline-size: auto;
+  block-size: var(--tp-icon-button-size, 2em);
+}
+tp-toolbar tp-icon-button[data-document-logo] > button {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  min-inline-size: 0;
+  min-block-size: 0;
+  inline-size: auto;
+  block-size: 100%;
+}
+tp-toolbar tp-icon-button[data-document-logo] tp-icon,
+tp-toolbar tp-icon-button[data-document-logo] [data-tp-icon-container] {
+  inline-size: auto;
+  block-size: 100%;
+  min-block-size: 0;
+}
+tp-toolbar tp-icon-button[data-document-logo] [data-tp-icon-container] > svg {
+  inline-size: auto;
+  block-size: 100%;
+  max-block-size: 100%;
+  flex: 0 0 auto;
+}
+
+tp-toolbar tp-divider[data-document-navbar-divider]:not(:has(~ :not([hidden]))) {
+  display: none;
 }

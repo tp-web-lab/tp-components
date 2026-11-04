@@ -21,12 +21,21 @@
     },
     {
       "name": "disabled",
-      "description": "Prevents button activation and marks the native button as disabled.",
+      "description": "Prevents activation, including link navigation, and marks the control as disabled.",
       "reflected": true,
       "static": false,
       "inherited": false,
       "type": "boolean",
       "default": "false"
+    },
+    {
+      "name": "download",
+      "description": "Suggested download filename when href is set. A nonempty value requests a download; browser and server rules determine whether it is honored.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
     },
     {
       "name": "flip-h",
@@ -47,6 +56,15 @@
       "default": "false"
     },
     {
+      "name": "href",
+      "description": "Destination URL. A nonempty value renders a link instead of a native button.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
       "name": "label",
       "description": "Accessible button name and hover title. Provide the action, such as Close or Search, because the control has no visible text label.",
       "reflected": true,
@@ -65,8 +83,53 @@
       "default": "\"\""
     },
     {
+      "name": "loading",
+      "description": "Displays a loading spinner and prevents activation while present.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "loading-mode",
+      "description": "Spinner layout while loading: replace hides the label; inline keeps the label beside the spinner.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "TpButtonLoadingMode",
+      "default": "replace"
+    },
+    {
       "name": "name",
       "description": "Identifier of the icon displayed inside the button, resolved in library.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "outlined",
+      "description": "Uses an outlined appearance instead of a filled background.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "pill",
+      "description": "Rounds the button ends to form a pill.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "rel",
+      "description": "Space-separated relationship tokens forwarded to the link, for example noopener noreferrer; applies only with href.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -110,8 +173,35 @@
       "default": "false"
     },
     {
+      "name": "src",
+      "description": "Image or SVG URL forwarded to the icon; takes precedence over name.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "target",
+      "description": "Browsing context for href, such as _self, _blank or a named frame; ignored in native button mode.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "title",
+      "description": "Controls the title.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
       "name": "type",
-      "description": "Native button action: button, submit or reset.",
+      "description": "Native button action: button, submit or reset; ignored when href is set.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -183,11 +273,11 @@
   "userHelp": {
     "displayName": "Icon button",
     "introduction": "The custom `<tp-icon-button>` element implements the <tp-icon name=\"icon-button\" library=\"components\" size=\"1.25em\"></tp-icon> Icon button functionality: button icon accessible.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Button | Click to perform the action identified by its label. Disabled controls cannot be activated. |\n| Navigation button | Click to open its destination. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> | Activate the focused button or link. |\n| <kbd>Space</kbd> | Activate a focused action button; links use <kbd>Enter</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Button | Click to perform the action identified by its label. Disabled or loading controls cannot be activated. |\n| Navigation button | Click to open its destination. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> | Activate the focused button or link. |\n| <kbd>Space</kbd> | Activate a focused action button; links use <kbd>Enter</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Enter / Space",
-        "description": "Uses the browser's native button activation behavior."
+        "description": "Uses native button activation; links activate with Enter."
       }
     ]
   }

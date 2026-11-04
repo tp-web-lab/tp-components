@@ -8,7 +8,7 @@ The custom `<tp-base>` element implements the <tp-icon name="base" library="comp
 
 `<tp-base>` installs the global reset, design tokens, and common tp-components styles once in the document. Every component that extends `TpBase` therefore starts from the same visual foundation without loading those styles again.
 
-It also provides the shared user help system. Press <kbd>Ctrl</kbd>+<kbd>?</kbd> on a focused or hovered component to open the User help view: a direct preview of the current element followed by a Buttons table with command icons or labels and short descriptions, then mouse and keyboard interactions. All help tables share the Markdown table style used by command legends: bordered cells, alternating row backgrounds and consistent spacing. Command icons use a size of 2em. The button legend reflects the controls available in the component when help opens. Each keyboard key is marked with `<kbd>`, for example <kbd>Ctrl</kbd>+<kbd>?</kbd>. The preview is independent of the original element. Authoring controls, API tables and class inheritance are not shown in the User help view.
+It also provides the shared user help system. Press Ctrl+? on a hovered or focused component to open “User help” in a tp-component-viewer with Doc, Demo and API panels. The drawer opens in the outer page even when the target is inside an embedded preview. Its header provides color and theme selectors, Expand, Collapse and Close controls. The demo starts from an independent copy of the targeted instance, preserving its content and current attributes at the time help is requested.
 
 ## Usage
 
@@ -112,6 +112,13 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_base.TpBase.html)
 <!-- tp-docgen:typedoc:end -->
+
+
+
+
+
+
+
 
 
 

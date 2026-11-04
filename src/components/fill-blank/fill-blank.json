@@ -20,6 +20,7 @@
   "events": [
     {
       "name": "tp-fill-blank-change",
+      "emitted": true,
       "description": "Fired in response to an input or change event from a blank; bubbles and crosses shadow boundaries. The detail contains a plain object of values and a FormData snapshot. For duplicate names, the object keeps the last value while FormData preserves all entries.",
       "detail": "{ value: Record<string, string>; formData: FormData }"
     }

@@ -76,26 +76,31 @@
   "events": [
     {
       "name": "tp-screen-change",
+      "emitted": true,
       "description": "Emitted when the preview opens or its viewport changes.",
       "detail": "{ device: string; width: number; height: number }"
     },
     {
       "name": "tp-screen-confirm",
+      "emitted": true,
       "description": "Emitted after OK applies the selected format.",
       "detail": "{ device: string }"
     },
     {
       "name": "tp-screen-edit",
+      "emitted": true,
       "description": "Emitted when screen edit occurs.",
       "detail": "void"
     },
     {
       "name": "tp-screen-mode",
+      "emitted": true,
       "description": "Emitted when screen mode occurs.",
       "detail": "void"
     },
     {
       "name": "tp-screen-ready",
+      "emitted": true,
       "description": "Emitted when screen ready occurs.",
       "detail": "void"
     }

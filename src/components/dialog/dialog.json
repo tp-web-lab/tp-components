@@ -30,6 +30,7 @@
   "events": [
     {
       "name": "tp-dialog-close",
+      "emitted": true,
       "description": "Emitted when the dialog is closed from one of its actions.",
       "detail": "{ action: \"confirm\" | \"cancel\" }"
     }

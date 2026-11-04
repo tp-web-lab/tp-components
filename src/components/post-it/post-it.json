@@ -81,11 +81,13 @@
   "events": [
     {
       "name": "tp-post-it-move",
+      "emitted": true,
       "description": "Emitted after a pointer or keyboard move, or a position reset; attachment exposes the target and offsets.",
       "detail": "void"
     },
     {
       "name": "tp-post-it-toggle",
+      "emitted": true,
       "description": "Emitted after the pin changes the folded state.",
       "detail": "{ lite: boolean }"
     }

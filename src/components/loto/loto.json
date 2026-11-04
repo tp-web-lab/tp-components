@@ -35,16 +35,19 @@
   "events": [
     {
       "name": "tp-loto-draw",
+      "emitted": true,
       "description": "Emitted after a number is drawn.",
       "detail": "{ number: number }"
     },
     {
       "name": "tp-loto-reset",
+      "emitted": true,
       "description": "Emitted after a new ticket and draw are generated.",
       "detail": "void"
     },
     {
       "name": "tp-loto-win",
+      "emitted": true,
       "description": "Emitted when every displayed ticket number has been drawn.",
       "detail": "void"
     }

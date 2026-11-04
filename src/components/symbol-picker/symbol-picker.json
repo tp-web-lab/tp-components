@@ -51,11 +51,13 @@
   "events": [
     {
       "name": "tp-symbol-picker-copy-error",
+      "emitted": true,
       "description": "Emitted when copying the selected symbol fails. The detail contains the requested clipboard text, selection metadata and the caught error.",
       "detail": "{ symbol: string; name: string; group: string; entities: string[]; codepoints: string[]; copy: TpSymbolPickerCopyFormat; value: string; error: unknown }"
     },
     {
       "name": "tp-symbol-picker-select",
+      "emitted": true,
       "description": "Emitted when a symbol is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success. value is null when the selected copy format has no representation.",
       "detail": "{ symbol: string; name: string; group: string; entities: string[]; codepoints: string[]; copy: TpSymbolPickerCopyFormat; value: string | null }"
     }

@@ -157,21 +157,25 @@
   "events": [
     {
       "name": "change",
+      "emitted": false,
       "description": "Emitted when the expression is committed or a different notation is selected in the menu.",
       "detail": "void"
     },
     {
       "name": "input",
+      "emitted": false,
       "description": "Emitted when the expression changes while editing.",
       "detail": "void"
     },
     {
       "name": "tp-clear",
+      "emitted": true,
       "description": "Emitted after the embedded button clears the expression.",
       "detail": "void"
     },
     {
       "name": "tp-math-rendered",
+      "emitted": true,
       "description": "Emitted when the formula preview reports that rendering has finished; mode is the input notation and value is the current expression.",
       "detail": "{ mode: \"latexmath\" | \"asciimath\"; value: string }"
     }

@@ -163,16 +163,19 @@
   "events": [
     {
       "name": "tp-animation-cancel",
+      "emitted": true,
       "description": "Emitted when cancel() cancels an existing animation, including cancellation before starting another phase. The detail contains the configured entrance and exit animation names.",
       "detail": "{ in: string; out: string }"
     },
     {
       "name": "tp-animation-finish",
+      "emitted": true,
       "description": "Emitted after an entrance or exit animation finishes normally; cancellation does not emit finish. The detail identifies the configured animation names and the phase.",
       "detail": "{ in: string; out: string; phase: \"in\" | \"out\" }"
     },
     {
       "name": "tp-animation-start",
+      "emitted": true,
       "description": "Emitted when an entrance or exit animation starts, including when immediately paused. The detail identifies the configured animation names and the phase.",
       "detail": "{ in: string; out: string; phase: \"in\" | \"out\" }"
     }

@@ -92,31 +92,37 @@
   "events": [
     {
       "name": "tp-spreadsheet-editor-clipboard-error",
+      "emitted": true,
       "description": "Emitted when a clipboard command fails; command identifies copy, cut or paste.",
       "detail": "{ command: \"copy\" | \"cut\" | \"paste\" }"
     },
     {
       "name": "tp-spreadsheet-editor-error",
+      "emitted": true,
       "description": "Emitted when fetching or parsing src fails, except for aborted requests; src is the requested URL and error is the caught failure.",
       "detail": "{ src: string; error: unknown }"
     },
     {
       "name": "tp-spreadsheet-editor-export",
+      "emitted": true,
       "description": "Emitted after a CSV, JSON or XLSX download is prepared; filename includes the extension.",
       "detail": "{ format: \"csv\" | \"json\" | \"xlsx\"; filename: string }"
     },
     {
       "name": "tp-spreadsheet-editor-import",
+      "emitted": true,
       "description": "Emitted after an imported file replaces the sheet; format is the detected filename extension and file is the selected File object.",
       "detail": "{ format: string; file: File }"
     },
     {
       "name": "tp-spreadsheet-editor-input",
+      "emitted": true,
       "description": "Emitted for each edited or cleared cell. cell is its A1 reference, raw is the stored input or formula, and value is the evaluated result.",
       "detail": "{ cell: string; raw: string; value: string | number | boolean | Date }"
     },
     {
       "name": "tp-spreadsheet-editor-structure",
+      "emitted": true,
       "description": "Emitted after inserting or deleting a row or column. index is zero-based; rows and columns are the resulting dimensions.",
       "detail": "{ action: \"insert-row\" | \"delete-row\" | \"insert-column\" | \"delete-column\"; index: number; rows: number; columns: number }"
     }

@@ -133,13 +133,13 @@ describe("<tp-markdown-multi-pages>", () => {
 		);
 
 		const previous = element.querySelector<HTMLAnchorElement>(
-			".tp-markdown-multi-pages-page-nav-previous a",
+			".tp-markdown-multi-pages-page-nav-previous tp-button",
 		);
 		const top = element.querySelector<HTMLButtonElement>(
-			".tp-markdown-multi-pages-page-nav-top button",
+			".tp-markdown-multi-pages-page-nav-top tp-button",
 		);
 		const next = element.querySelector<HTMLAnchorElement>(
-			".tp-markdown-multi-pages-page-nav-next a",
+			".tp-markdown-multi-pages-page-nav-next tp-button",
 		);
 
 		expect(previous?.getAttribute("href")).toBe("#/intro.md");
@@ -154,7 +154,7 @@ describe("<tp-markdown-multi-pages>", () => {
 			button: 0,
 			cancelable: true,
 		});
-		next?.dispatchEvent(click);
+		next?.querySelector("a")?.dispatchEvent(click);
 
 		expect(click.defaultPrevented).toBe(true);
 		expect(window.location.hash).toBe("#/guide/next.md");
@@ -187,7 +187,7 @@ describe("<tp-markdown-multi-pages>", () => {
 		if (!content) throw new Error("Missing content");
 		content.scrollTo = scrollTo;
 		const top = element.querySelector<HTMLButtonElement>(
-			".tp-markdown-multi-pages-page-nav-top button",
+			".tp-markdown-multi-pages-page-nav-top tp-button",
 		);
 
 		expect(top?.textContent).toContain("Current page");
@@ -220,10 +220,10 @@ describe("<tp-markdown-multi-pages>", () => {
 		);
 
 		const previous = element.querySelector<HTMLAnchorElement>(
-			".tp-markdown-multi-pages-page-nav-previous a",
+			".tp-markdown-multi-pages-page-nav-previous tp-button",
 		);
 		const next = element.querySelector<HTMLAnchorElement>(
-			".tp-markdown-multi-pages-page-nav-next a",
+			".tp-markdown-multi-pages-page-nav-next tp-button",
 		);
 
 		expect(previous?.getAttribute("href")).toBe("#/cover.md");

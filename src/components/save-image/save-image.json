@@ -75,11 +75,13 @@
   "events": [
     {
       "name": "tp-save-image-error",
+      "emitted": true,
       "description": "Emitted when the target cannot be exported.",
       "detail": "{ format: \"svg\" | \"png\" | \"webp\"; error: unknown; anchor: string }"
     },
     {
       "name": "tp-save-image-save",
+      "emitted": true,
       "description": "Emitted after an image has been prepared for download.",
       "detail": "{ format: \"svg\" | \"png\" | \"webp\"; filename: string; anchor: string; target: Element }"
     }

@@ -459,6 +459,154 @@ describe("<tp-base>", () => {
 		},
 	);
 
+	it("offers hovered ancestors in DOM order and opens the chosen component", async () => {
+		document.body.innerHTML =
+			'<tp-base-fixture id="outer"><section><tp-base-fixture id="inner" tabindex="0">Target</tp-base-fixture></section></tp-base-fixture>';
+		const inner = required(document.querySelector<TpBaseFixture>("#inner"));
+		const outer = required(document.querySelector<TpBaseFixture>("#outer"));
+		const innerHelp = vi.spyOn(inner, "help").mockResolvedValue();
+		const outerHelp = vi.spyOn(outer, "help").mockResolvedValue();
+		inner.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+		outer.dispatchEvent(
+			new KeyboardEvent("keydown", {
+				key: "?",
+				ctrlKey: true,
+				altKey: true,
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+		await vi.waitFor(() =>
+			expect(document.querySelector("#tp-help-hierarchy[open]")).not.toBeNull(),
+		);
+		const items = document.querySelectorAll<HTMLElement>(
+			"#tp-help-hierarchy li",
+		);
+		expect([...items].map((item) => item.textContent?.trim())).toEqual([
+			"tp-base-fixture #inner",
+			"tp-base-fixture #outer",
+		]);
+		expect(items[0]?.querySelector('tp-icon[name="check"]')).not.toBeNull();
+		expect(items[1]?.querySelector('tp-icon[name="check"]')).not.toBeNull();
+		expect(
+			items[0]?.querySelector<HTMLElement>("tp-icon")?.style.visibility,
+		).toBe("visible");
+		expect(
+			items[1]?.querySelector<HTMLElement>("tp-icon")?.style.visibility,
+		).toBe("hidden");
+		expect(innerHelp).not.toHaveBeenCalled();
+		expect(outerHelp).not.toHaveBeenCalled();
+		items[1]?.dispatchEvent(
+			new KeyboardEvent("keydown", {
+				key: "Enter",
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+		expect(outerHelp).toHaveBeenCalledTimes(1);
+		expect(innerHelp).not.toHaveBeenCalled();
+		expect(document.querySelector("#tp-help-hierarchy")).toBeNull();
+		inner.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+		inner.dispatchEvent(
+			new KeyboardEvent("keydown", {
+				key: "?",
+				ctrlKey: true,
+				altKey: true,
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+		await vi.waitFor(() =>
+			expect(document.querySelector("#tp-help-hierarchy[open]")).not.toBeNull(),
+		);
+		const reopened = document.querySelectorAll<HTMLElement>(
+			"#tp-help-hierarchy li",
+		);
+		expect(
+			reopened[0]?.querySelector<HTMLElement>("tp-icon")?.style.visibility,
+		).toBe("hidden");
+		expect(
+			reopened[1]?.querySelector<HTMLElement>("tp-icon")?.style.visibility,
+		).toBe("visible");
+		expect(reopened[1]?.getAttribute("aria-current")).toBe("true");
+	});
+
+	it("moves the help menu anchor on scroll and stops tracking after closing", async () => {
+		document.body.innerHTML =
+			'<tp-base-fixture tabindex="0">Target</tp-base-fixture>';
+		const fixture = required(
+			document.querySelector<TpBaseFixture>("tp-base-fixture"),
+		);
+		let bottom = 300;
+		const measure = vi
+			.spyOn(fixture, "getBoundingClientRect")
+			.mockImplementation(() => ({ left: 40, bottom }) as DOMRect);
+		fixture.dispatchEvent(
+			new KeyboardEvent("keydown", {
+				key: "?",
+				ctrlKey: true,
+				altKey: true,
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+		await vi.waitFor(() =>
+			expect(document.querySelector("#tp-help-hierarchy[open]")).not.toBeNull(),
+		);
+		const anchor = required(
+			document.querySelector<HTMLElement>("#tp-help-hierarchy-anchor"),
+		);
+		expect(anchor.style.top).toBe("300px");
+		bottom = 160;
+		window.dispatchEvent(new Event("scroll"));
+		expect(anchor.style.top).toBe("160px");
+		bottom = 210;
+		window.dispatchEvent(new Event("resize"));
+		expect(anchor.style.top).toBe("210px");
+		document.querySelector("#tp-help-hierarchy li")?.dispatchEvent(
+			new KeyboardEvent("keydown", {
+				key: "Escape",
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+		measure.mockClear();
+		window.dispatchEvent(new Event("scroll"));
+		expect(measure).not.toHaveBeenCalled();
+	});
+
+	it("uses focus for the hierarchy and cancels without opening help", async () => {
+		document.body.innerHTML =
+			'<tp-base-fixture tabindex="0">Target</tp-base-fixture>';
+		const fixture = required(
+			document.querySelector<TpBaseFixture>("tp-base-fixture"),
+		);
+		const help = vi.spyOn(fixture, "help").mockResolvedValue();
+		fixture.focus();
+		fixture.dispatchEvent(
+			new KeyboardEvent("keydown", {
+				key: "?",
+				ctrlKey: true,
+				altKey: true,
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+		await vi.waitFor(() =>
+			expect(document.querySelector("#tp-help-hierarchy[open]")).not.toBeNull(),
+		);
+		document.querySelector("#tp-help-hierarchy li")?.dispatchEvent(
+			new KeyboardEvent("keydown", {
+				key: "Escape",
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+		expect(help).not.toHaveBeenCalled();
+		expect(document.querySelector("#tp-help-hierarchy-anchor")).toBeNull();
+		expect(document.activeElement).toBe(fixture);
+	});
+
 	it("prefers the hovered non-focusable box over the focused splitter", async () => {
 		await import("../box/box.js");
 		await import("../splitter/splitter.js");
@@ -521,142 +669,7 @@ describe("<tp-base>", () => {
 		expect(help).toHaveBeenCalledTimes(1);
 	});
 
-	it("switches help audiences for the selected component using configured reference roots", async () => {
-		const api = {
-			tagname: "tp-base-fixture",
-			classname: "TpBaseFixture",
-			examples: [],
-			attributes: [],
-			methods: [],
-			events: [],
-			cssproperties: [],
-		};
-		const fetchMock = vi.fn(async (input: string | URL) => {
-			const url = String(input);
-			if (url.endsWith("component-pages.json"))
-				return {
-					ok: true,
-					json: async () => ({
-						"tp-base-fixture": "classes/custom_module.TpBaseFixture.html",
-					}),
-				};
-			if (url.endsWith("index.md"))
-				return { ok: true, text: async () => "# Author guide" };
-			return { ok: true, json: async () => api };
-		});
-		vi.stubGlobal("fetch", fetchMock);
-		const metas = ["docs", "api"].map((kind) => {
-			const meta = document.createElement("meta");
-			meta.name = `tp-components-${kind}-root`;
-			meta.content = `/prefix/components/${kind}/`;
-			document.head.append(meta);
-			return meta;
-		});
-		try {
-			document.body.innerHTML =
-				'<tp-base-fixture data-tp-help-src="/help/fixture.json"></tp-base-fixture>';
-			const fixture = required(
-				document.querySelector<TpBaseFixture>("tp-base-fixture"),
-			);
-			await fixture.help();
-			const drawer = required(
-				document.getElementById("tp-component-help-drawer"),
-			);
-			const buttons = drawer.querySelectorAll<HTMLElement>(
-				".tp-component-help-navigation tp-button",
-			);
-			expect(Array.from(buttons, (button) => button.textContent)).toEqual([
-				"User help",
-				"Author help",
-				"Developer help",
-			]);
-			expect(
-				buttons[0]?.querySelector("button")?.getAttribute("aria-pressed"),
-			).toBe("true");
-			expect(
-				fetchMock.mock.calls.some(([url]) =>
-					String(url).includes("component-pages"),
-				),
-			).toBe(false);
-			buttons[1]?.click();
-			expect(
-				drawer.querySelector("tp-markdown[src]")?.getAttribute("src"),
-			).toBe(
-				new URL(
-					"/prefix/components/docs/base-fixture/index.md",
-					document.baseURI,
-				).href,
-			);
-			buttons[2]?.click();
-			await vi.waitFor(() =>
-				expect(drawer.querySelector("tp-iframe")?.getAttribute("src")).toBe(
-					new URL(
-						"/prefix/components/api/classes/custom_module.TpBaseFixture.html",
-						document.baseURI,
-					).href,
-				),
-			);
-			expect(
-				buttons[2]?.querySelector("button")?.getAttribute("aria-pressed"),
-			).toBe("true");
-			buttons[0]?.click();
-			expect(
-				drawer.querySelector(".tp-component-help-preview tp-base-fixture"),
-			).not.toBeNull();
-			expect(drawer.querySelector("tp-iframe")).toBeNull();
-			await fixture.help();
-			expect(
-				drawer.querySelectorAll(".tp-component-help-navigation"),
-			).toHaveLength(1);
-			expect(drawer.getAttribute("label")).toBe("User help");
-		} finally {
-			for (const meta of metas) meta.remove();
-		}
-	});
-
-	it("keeps user help available when the developer reference index is missing", async () => {
-		vi.stubGlobal(
-			"fetch",
-			vi.fn(async (input: string | URL) =>
-				String(input).endsWith("component-pages.json")
-					? { ok: false }
-					: {
-							ok: true,
-							json: async () => ({
-								tagname: "tp-base-fixture",
-								classname: "TpBaseFixture",
-								examples: [],
-								attributes: [],
-								methods: [],
-								events: [],
-								cssproperties: [],
-							}),
-						},
-			),
-		);
-		document.body.innerHTML =
-			'<tp-base-fixture data-tp-help-src="/help/fixture.json"></tp-base-fixture>';
-		await required(
-			document.querySelector<TpBaseFixture>("tp-base-fixture"),
-		).help();
-		const drawer = required(
-			document.getElementById("tp-component-help-drawer"),
-		);
-		required(
-			drawer.querySelector<HTMLElement>('[data-help-view="Developer help"]'),
-		).click();
-		await vi.waitFor(() =>
-			expect(drawer.querySelector('[role="alert"]')?.textContent).toContain(
-				"unavailable",
-			),
-		);
-		required(
-			drawer.querySelector<HTMLElement>('[data-help-view="User help"]'),
-		).click();
-		expect(drawer.querySelector(".tp-component-help-preview")).not.toBeNull();
-	});
-
-	it("does not duplicate keyboard metadata when reader help already contains its table", async () => {
+	it("opens the component viewer documentation instead of the legacy help layout", async () => {
 		const interactions =
 			"#### Mouse interactions\n\n| Control | Result |\n| --- | --- |\n| Heading | Toggle content. |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| Ctrl+? | Open User Help. |\n| Enter | Toggle content. |";
 		vi.stubGlobal(
@@ -688,15 +701,18 @@ describe("<tp-base>", () => {
 		const drawer = required(
 			document.getElementById("tp-component-help-drawer"),
 		);
-		expect(drawer.querySelector("section > dl")).toBeNull();
-		expect(drawer.textContent).not.toContain("Duplicate metadata");
 		await vi.waitFor(() =>
-			expect(drawer.querySelectorAll("table")).toHaveLength(2),
+			expect(drawer.querySelector("[data-component-title]")?.textContent).toBe(
+				"tp-base-fixture Doc",
+			),
 		);
-		expect(drawer.textContent).toContain("Ctrl+?");
+		expect(
+			drawer.querySelector("tp-component-viewer")?.getAttribute("api-src"),
+		).toContain("/help/tables.json");
+		expect(drawer.querySelector(".tp-component-help-current")).toBeNull();
 	});
 
-	it("opens reader help with a direct independent preview and keyboard instructions", async () => {
+	it("opens contextual help with an independent snapshot in the component viewer", async () => {
 		vi.stubGlobal(
 			"fetch",
 			vi.fn(async () => ({
@@ -736,61 +752,51 @@ describe("<tp-base>", () => {
 			bubbles: true,
 			cancelable: true,
 		});
+		fixture.setAttribute("label", "At request time");
 		fixture.dispatchEvent(event);
+		fixture.setAttribute("label", "Changed while loading");
 		await help.mock.results[0]?.value;
 		const drawer = required(
 			document.getElementById("tp-component-help-drawer"),
 		);
 		expect(event.defaultPrevented).toBe(true);
 		expect(drawer.getAttribute("label")).toBe("User help");
-		expect(drawer.textContent).toContain("Current element");
 		expect(
-			drawer.querySelector(".tp-component-help > h2:first-child > span")
-				?.textContent,
-		).toBe("Readable fixture");
-		expect(drawer.textContent).toContain("User interactions");
-		expect(drawer.textContent).toContain("Toggle the focused section.");
-		await vi.waitFor(() => {
-			expect(
-				drawer.querySelector("tp-markdown:not(.tp-component-help-introduction)")
-					?.textContent,
-			).toContain("Click a section");
-		});
-		const introduction = required(
-			drawer.querySelector(".tp-component-help-introduction"),
-		);
+			drawer
+				.querySelector("[data-tp-drawer-header] tp-color")
+				?.getAttribute("anchor"),
+		).toBe("#tp-component-help-drawer");
+		expect(
+			drawer
+				.querySelector("[data-tp-drawer-header] tp-theme")
+				?.getAttribute("anchor"),
+		).toBe("#tp-component-help-drawer");
+		expect(
+			drawer.querySelectorAll(
+				"[data-tp-drawer-header] > [data-tp-drawer-actions] > tp-icon-button",
+			),
+		).toHaveLength(3);
 		await vi.waitFor(() =>
-			expect(introduction.textContent).toContain("presents sample content"),
-		);
-		expect(introduction.previousElementSibling?.tagName).toBe("H2");
-		const titleIcon =
-			introduction.previousElementSibling?.querySelector("tp-icon");
-		expect(titleIcon?.getAttribute("name")).toBe("base-fixture");
-		expect(titleIcon?.getAttribute("library")).toBe("components");
-		expect(titleIcon?.getAttribute("aria-hidden")).toBe("true");
-		expect(introduction.nextElementSibling?.className).toBe(
-			"tp-component-help-current",
-		);
-		expect(
-			introduction.nextElementSibling?.querySelector("h3")?.textContent,
-		).toBe("Current element");
-		expect(
-			drawer.querySelector(
-				"tp-html-viewer, tp-tabs, .tp-component-help-controls",
+			expect(drawer.querySelector("[data-component-title]")?.textContent).toBe(
+				"tp-base-fixture Doc",
 			),
-		).toBeNull();
-		expect(drawer.textContent).not.toMatch(
-			/Author-facing|extends|Attributes|CSS properties/,
 		);
+		const viewer = required(drawer.querySelector("tp-component-viewer"));
+		expect(viewer.getAttribute("tag")).toBe("tp-base-fixture");
+		const markup =
+			new DOMParser()
+				.parseFromString(viewer.getAttribute("data-source") ?? "", "text/html")
+				.querySelector("script")?.textContent ?? "";
 		const clone = required(
-			drawer.querySelector<TpBaseFixture>(
-				".tp-component-help-preview > tp-base-fixture",
-			),
+			new DOMParser()
+				.parseFromString(markup, "text/html")
+				.querySelector("tp-base-fixture"),
 		);
 		expect(clone).not.toBe(fixture);
 		expect(clone.textContent).toContain("Preview content");
+		expect(clone.getAttribute("label")).toBe("At request time");
 		clone.setAttribute("label", "Clone only");
-		expect(fixture.hasAttribute("label")).toBe(false);
+		expect(fixture.getAttribute("label")).toBe("Changed while loading");
 	});
 
 	it("uses author source, resolves relative resources and avoids duplicate IDs", async () => {
@@ -821,10 +827,15 @@ describe("<tp-base>", () => {
 			'<tp-base-fixture><label for="field">Name</label><input id="field"><img src="./image.svg"><script>window.helpExecuted = true;</script><script type="tp/txt">Author content</script></tp-base-fixture>',
 		);
 		await fixture.help();
+		const viewer = required(document.querySelector("tp-component-viewer"));
+		const markup =
+			new DOMParser()
+				.parseFromString(viewer.getAttribute("data-source") ?? "", "text/html")
+				.querySelector("script")?.textContent ?? "";
 		const clone = required(
-			document.querySelector<HTMLElement>(
-				".tp-component-help-preview > tp-base-fixture",
-			),
+			new DOMParser()
+				.parseFromString(markup, "text/html")
+				.querySelector("tp-base-fixture"),
 		);
 		expect(clone.id).not.toBe("original");
 		expect(clone.querySelector("input")?.id).not.toBe("field");
@@ -925,6 +936,8 @@ describe("<tp-base>", () => {
 		expect(event.defaultPrevented).toBe(true);
 		expect(fetchSpy).toHaveBeenCalledWith("/help/hovered-fixture.json");
 		expect(drawer.getAttribute("label")).toBe("User help");
-		expect(drawer.textContent).toContain("User interactions");
+		expect(
+			drawer.querySelector("tp-component-viewer")?.getAttribute("tag"),
+		).toBe("tp-base-fixture");
 	});
 });

@@ -161,16 +161,19 @@
   "events": [
     {
       "name": "change",
+      "emitted": false,
       "description": "Emitted when the value is committed or cleared.",
       "detail": "void"
     },
     {
       "name": "input",
+      "emitted": false,
       "description": "Emitted when the value changes during editing or clearing.",
       "detail": "void"
     },
     {
       "name": "tp-clear",
+      "emitted": true,
       "description": "Emitted after clearing a number or resetting the slider.",
       "detail": "void"
     }

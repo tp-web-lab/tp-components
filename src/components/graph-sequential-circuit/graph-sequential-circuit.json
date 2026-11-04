@@ -45,21 +45,25 @@
   "events": [
     {
       "name": "tp-logic-evaluate",
+      "emitted": true,
       "description": "Emitted after combinational outputs are recomputed without advancing the clock; graph contains the resulting snapshot.",
       "detail": "{ graph: TpGraphDocument }"
     },
     {
       "name": "tp-logic-toggle",
+      "emitted": true,
       "description": "Emitted after an input node is toggled; id identifies the input, value is its new Boolean level, and graph contains the resulting snapshot.",
       "detail": "{ id: string; value: boolean; graph: TpGraphDocument }"
     },
     {
       "name": "tp-sequential-clock",
+      "emitted": true,
       "description": "Emitted after a clock cycle has updated memory and settled combinational outputs. values maps memory-element IDs to their new Boolean states.",
       "detail": "{ values: Record<string, boolean>; graph: TpGraphDocument }"
     },
     {
       "name": "tp-sequential-reset",
+      "emitted": true,
       "description": "Emitted after memory elements return to their initial states and the timeline is cleared; graph contains the reset snapshot.",
       "detail": "{ graph: TpGraphDocument }"
     }

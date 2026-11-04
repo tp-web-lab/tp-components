@@ -115,11 +115,13 @@
   "events": [
     {
       "name": "tp-console-clear",
+      "emitted": true,
       "description": "Emitted when the console is cleared.",
       "detail": "{ removedCount: number }"
     },
     {
       "name": "tp-console-entry-add",
+      "emitted": true,
       "description": "Emitted when an entry is added.",
       "detail": "{ entry: TpConsoleEntry }"
     }

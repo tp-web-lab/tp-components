@@ -126,11 +126,13 @@
   "events": [
     {
       "name": "tp-iframe-change",
+      "emitted": true,
       "description": "Emitted when zoom, interaction or horizontal viewport state is refreshed. overflowWidth and scrollPosition are in CSS pixels, zoom is a scale factor, and zoomText is its percentage label.",
       "detail": "{ interaction: boolean; overflowWidth: number; scrollPosition: number; zoom: number; zoomText: string }"
     },
     {
       "name": "tp-iframe-load",
+      "emitted": true,
       "description": "Emitted after the inner iframe loads and its layout is refreshed. contentHeight is in CSS pixels (0 when inaccessible), hasSrcdoc indicates inline content, and src is the configured URL.",
       "detail": "{ contentHeight: number; hasSrcdoc: boolean; src: string }"
     }

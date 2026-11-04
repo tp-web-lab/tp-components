@@ -106,6 +106,7 @@ tp-drawer[data-placement='bottom'][data-open='true'] {
 }
 
 tp-drawer > [data-tp-drawer-header] {
+  flex: 0 0 auto;
   align-items: center;
   display: grid;
   gap: 0.75rem;

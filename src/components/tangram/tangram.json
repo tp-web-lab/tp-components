@@ -84,11 +84,13 @@
   "events": [
     {
       "name": "tp-tangram-change",
+      "emitted": true,
       "description": "Emitted after an accepted piece edit; placements contains each piece ID, x/y position, angle and flip state, and solved reports whether the target is matched.",
       "detail": "{ placements: Placement[]; solved: boolean }"
     },
     {
       "name": "tp-tangram-error",
+      "emitted": true,
       "description": "Fired when loading a solution fails; detail contains message.",
       "detail": "{ message: string }"
     }

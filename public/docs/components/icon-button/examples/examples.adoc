@@ -35,7 +35,20 @@ Combine the attributes on one preview. Controls start at the published defaults.
 
 * flip-v
 
+* loading
+
+* outlined
+
+* pill
+
 * spin
+====
+
+[tp-radio-list,data-setting="loading-mode",label="loading-mode",label-position="top",orientation="horizontal",value="1"]
+====
+* replace
+
+* inline
 ====
 
 [tp-radio-list,data-setting="size",label="size",label-position="top",orientation="horizontal",value="4"]
@@ -53,6 +66,17 @@ Combine the attributes on one preview. Controls start at the published defaults.
 * xl
 
 * xxl
+====
+
+[tp-radio-list,data-setting="src",label="src",label-position="top",orientation="horizontal",value="1"]
+====
+* Default
+
+* file1
+
+* file2
+
+* file-unknown
 ====
 
 [tp-radio-list,data-setting="type",label="type",label-position="top",orientation="horizontal",value="1"]
@@ -85,6 +109,14 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ====
 ====
 
+[tp-textfield%value%placeholder%clearable,data-setting="download",label="download"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="href",label="href"]
+====
+====
+
 [tp-textfield%value%placeholder%clearable,data-setting="label",label="label"]
 ====
 ====
@@ -97,11 +129,23 @@ Combine the attributes on one preview. Controls start at the published defaults.
 ====
 ====
 
+[tp-textfield%value%placeholder%clearable,data-setting="rel",label="rel"]
+====
+====
+
 [tp-textfield%clearable,data-setting="rotate",label="rotate",value="0deg",placeholder="0deg"]
 ====
 ====
 
 [tp-textfield%clearable,data-setting="scale",label="scale",value="1",placeholder="1"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="target",label="target"]
+====
+====
+
+[tp-textfield%value%placeholder%clearable,data-setting="title",label="title"]
 ====
 ====
 =====
@@ -137,6 +181,8 @@ Preview
 ====
 Preparing the preview…
 ====
+
+File-loading attributes offer only Default, file1, file2 and file-unknown. The two local fixtures preserve verified example formats (they may contain the same content); file-unknown deliberately exercises error handling. No arbitrary path can be entered.
 
 [script,type="module",src="/docs/components/icon-button/examples/attributes.js"]
 ====

@@ -201,44 +201,10 @@ tp-markdown-multi-pages,
   text-align: center;
 }
 
-.tp-markdown-multi-pages-page-nav-link {
-  box-sizing: border-box;
-  display: inline-flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  max-inline-size: 100%;
-  padding: 0.65rem 0.75rem;
-  border: 1px solid var(--tp-brand-stroke-soft);
-  border-radius: 0.5rem;
-  color: inherit;
-  text-decoration: none;
-  background: var(--tp-brand-fill-softer);
-}
 
-.tp-markdown-multi-pages-page-nav-link:is(button) {
-  cursor: pointer;
-  font: inherit;
-}
 
-.tp-markdown-multi-pages-page-nav-link:hover {
-  border-color: var(--tp-brand-stroke-mid);
-  background: var(--tp-brand-fill-soft);
-}
 
-.tp-markdown-multi-pages-page-nav-meta {
-  color: var(--tp-text-muted);
-  font-size: 0.8rem;
-  line-height: 1.2;
-}
 
-.tp-markdown-multi-pages-page-nav-title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: var(--tp-brand-text-colorful);
-  font-weight: 700;
-  line-height: 1.3;
-}
 
 .tp-markdown-multi-pages-source pre {
   margin: 0;
@@ -317,18 +283,9 @@ tp-markdown-multi-pages,
     gap: 0.4rem;
   }
 
-  .tp-markdown-multi-pages-page-nav-link {
-    padding: 0.5rem;
+  
+  
   }
-
-  .tp-markdown-multi-pages-page-nav-meta {
-    font-size: 0.75rem;
-  }
-
-  .tp-markdown-multi-pages-page-nav-title {
-    font-size: 0.9rem;
-  }
-}
 
 @media (max-width: 24rem) {
   .tp-markdown-multi-pages-page-nav {
@@ -402,4 +359,21 @@ tp-markdown-multi-pages,
 
 .tp-markdown-multi-pages-toolbar > tp-lang[hidden] {
   display: none !important;
+}
+
+
+/* Keep navigation within its container, including portrait screen previews. */
+.tp-markdown-multi-pages-page-nav-link > :is(button, a) {
+  max-inline-size: 100%;
+  white-space: normal;
+}
+.tp-markdown-multi-pages-page-nav-link [data-tp-button-content] {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  align-items: center;
+}
+.tp-markdown-multi-pages-page-nav-link tp-icon { flex-shrink: 0; }
+@media (orientation: portrait) {
+  .tp-markdown-multi-pages-page-nav { grid-template-columns: minmax(0, 1fr); }
+  .tp-markdown-multi-pages-page-nav-item { text-align: center; }
 }

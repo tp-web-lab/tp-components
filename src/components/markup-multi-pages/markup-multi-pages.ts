@@ -74,10 +74,17 @@
  */
 // tp-docgen:dependencies:end
 
+import "../button/button.js";
+import "../icon/icon.js";
 import { TpBase } from "../base/base.js";
 import sidebarToolsStyle from "../markup-multi-pages/sidebar-tools.css?inline";
 import { appendSidebarTools } from "../markup-multi-pages/sidebar-tools.js";
 import { updateDocumentLogo } from "../toolbar/document-logo.js";
+import { updateDocumentNavbar } from "../toolbar/document-navbar.js";
+import {
+	observeMultiPagesOrientation,
+	updateMultiPagesToolbar,
+} from "../toolbar/multi-pages-controls.js";
 import "../toolbar/toolbar.js";
 import "../calculator/calculator.js";
 import { TpDrawer } from "../drawer/drawer.js";
@@ -144,6 +151,7 @@ function highlightRestructuredTextSource(source: string): string {
  * @summary Multi-page documentation with support for multiple markup languages.
  * @tagname tp-markup-multi-pages
  * @attr {string} repository = "/docs" - Root path containing the sidebar, cover and linked documents. The component selects the corresponding HTML, Markdown, AsciiDoc or reStructuredText files.
+ * @attr {string | null} toolbar = null - Comma-separated controls: home, menu, code, calc, postit, clock, lang, color, theme, screen, fullscreen. Absent or empty keeps all controls; none hides commands. Updates immediately.
  * @attr {boolean} menu = false - Opens the navigation sidebar when present; the toolbar Menu button toggles this attribute.
  * @attr {string} label = "" - Title displayed in the center of the document toolbar.
  * @attr {string} git = "" - Repository URL assigned to the toolbar source link when the document shell is created. Set before connecting the component.
@@ -157,6 +165,8 @@ export class TpMarkupMultiPages extends TpBase {
 	public static get observedAttributes(): string[] {
 		return [
 			"logo",
+			"logo-href",
+			"toolbar",
 			"repository",
 			/*'theme', 'brand',*/ "label",
 			"git",
@@ -183,6 +193,8 @@ export class TpMarkupMultiPages extends TpBase {
 		return null;
 	}
 
+	private stopOrientationObserver: (() => void) | null = null;
+
 	protected override connectedCallback(): void {
 		super.connectedCallback();
 		this.classList.add("tp-markup-multi-pages-host");
@@ -201,6 +213,8 @@ export class TpMarkupMultiPages extends TpBase {
 		}
 		if (!this.shellRendered) {
 			this.renderShell();
+			this.stopOrientationObserver?.();
+			this.stopOrientationObserver = observeMultiPagesOrientation(this);
 			this.shellRendered = true;
 		}
 		// this.applyBrand();
@@ -210,12 +224,15 @@ export class TpMarkupMultiPages extends TpBase {
 			this.annotations.setTarget(this.contentElement);
 			this.querySelector('[data-action="calculator"]')?.after(this.annotations);
 		}
+		updateMultiPagesToolbar(this);
 		// this.applyTheme();
 		void this.initialize();
 		window.addEventListener("hashchange", this.handleHashChange);
 	}
 
 	public disconnectedCallback(): void {
+		this.stopOrientationObserver?.();
+		this.stopOrientationObserver = null;
 		this.annotations?.dispose();
 		this.annotations = null;
 		this.contentElement?.removeEventListener("click", this.handleContentClick);
@@ -224,6 +241,11 @@ export class TpMarkupMultiPages extends TpBase {
 
 	protected attributeChangedCallback(name: string): void {
 		if (!this.isConnected) return;
+
+		if (name === "toolbar") {
+			updateMultiPagesToolbar(this);
+			return;
+		}
 
 		if (name === "brand") {
 			this.applyBrand();
@@ -239,8 +261,12 @@ export class TpMarkupMultiPages extends TpBase {
 			void this.initialize();
 		}
 
-		if (name === "logo") {
-			updateDocumentLogo(this.querySelector("tp-toolbar"), this.logo);
+		if (name === "logo" || name === "logo-href") {
+			updateDocumentLogo(
+				this.querySelector("tp-toolbar"),
+				this.logo,
+				this.logoHref,
+			);
 		}
 
 		if (name === "label") {
@@ -280,6 +306,17 @@ export class TpMarkupMultiPages extends TpBase {
 
 	public set brand(value: string) {
 		this.setAttribute("brand", value);
+	}
+
+	/**
+	 * Website opened in the current tab when activating the toolbar logo. Defaults to ./ when omitted or empty.
+	 * @attr logo-href
+	 */
+	public get logoHref(): string {
+		return this.getAttribute("logo-href")?.trim() || "./";
+	}
+	public set logoHref(value: string) {
+		this.setAttribute("logo-href", value);
 	}
 
 	/**
@@ -338,6 +375,15 @@ export class TpMarkupMultiPages extends TpBase {
 		}
 	}
 
+	/** Selects toolbar controls; null restores the full default toolbar. */
+	public get toolbar(): string | null {
+		return this.getAttribute("toolbar");
+	}
+	public set toolbar(value: string | null) {
+		if (value === null) this.removeAttribute("toolbar");
+		else this.setAttribute("toolbar", value);
+	}
+
 	private applyLangs(): void {
 		const langElement = this.querySelector("tp-lang");
 		if (langElement instanceof HTMLElement) {
@@ -353,6 +399,7 @@ export class TpMarkupMultiPages extends TpBase {
 			langElement.hidden = langs.length < 2;
 		}
 		this.applyDocumentLocale();
+		updateMultiPagesToolbar(this);
 	}
 
 	private applyDocumentLocale(): void {
@@ -390,6 +437,11 @@ export class TpMarkupMultiPages extends TpBase {
 	}
 
 	private async initialize(): Promise<void> {
+		void updateDocumentNavbar(
+			this.querySelector("tp-toolbar"),
+			this.getSpecialPageHrefs("navbar"),
+			(root) => this.rewriteSidebarLinks(root),
+		);
 		this.applyDocumentLocale();
 		this.applyLangs();
 		await this.loadSidebar();
@@ -441,7 +493,11 @@ export class TpMarkupMultiPages extends TpBase {
         </tp-splitter>
       </div>
     `;
-		updateDocumentLogo(this.querySelector("tp-toolbar"), this.logo);
+		updateDocumentLogo(
+			this.querySelector("tp-toolbar"),
+			this.logo,
+			this.logoHref,
+		);
 
 		this.querySelector('[data-action="calculator"]')?.addEventListener(
 			"click",
@@ -1197,23 +1253,17 @@ export class TpMarkupMultiPages extends TpBase {
 		wrapper.className =
 			"tp-markup-multi-pages-page-nav-item tp-markup-multi-pages-page-nav-top";
 
-		const button = document.createElement("button");
-		button.type = "button";
+		const button = document.createElement("tp-button");
+		button.setAttribute("type", "button");
+		button.setAttribute("outlined", "");
+		button.setAttribute("variant", "brand");
 		button.className = "tp-markup-multi-pages-page-nav-link";
 		button.dataset.direction = "top";
 		button.addEventListener("click", () => {
 			this.contentElement?.scrollTo({ top: 0, behavior: "smooth" });
 		});
 
-		const meta = document.createElement("span");
-		meta.className = "tp-markup-multi-pages-page-nav-meta";
-		meta.textContent = "Top";
-
-		const title = document.createElement("span");
-		title.className = "tp-markup-multi-pages-page-nav-title";
-		title.textContent = page.title;
-
-		button.append(meta, title);
+		button.textContent = `Top ${page.title}`;
 		wrapper.append(button);
 		return wrapper;
 	}
@@ -1230,32 +1280,46 @@ export class TpMarkupMultiPages extends TpBase {
 			return wrapper;
 		}
 
-		const link = document.createElement("a");
-		link.href = `#/${this.stripRepository(page.href)}`;
+		const link = document.createElement("tp-button");
+		link.setAttribute("outlined", "");
+		link.setAttribute("variant", "brand");
+		link.setAttribute("href", `#/${this.stripRepository(page.href)}`);
 		link.className = "tp-markup-multi-pages-page-nav-link";
 		link.dataset.direction = direction;
 
-		const meta = document.createElement("span");
-		meta.className = "tp-markup-multi-pages-page-nav-meta";
-		meta.textContent = direction === "previous" ? "Previous" : "Next";
-
-		const title = document.createElement("span");
-		title.className = "tp-markup-multi-pages-page-nav-title";
-		title.textContent = page.title;
-
-		link.append(meta, title);
+		const icon = document.createElement("tp-icon");
+		icon.setAttribute("name", direction);
+		icon.setAttribute("aria-hidden", "true");
+		if (direction === "previous") link.append(icon, ` ${page.title}`);
+		else link.append(`${page.title} `, icon);
 		wrapper.append(link);
 		return wrapper;
 	}
 
 	private rewriteSidebarLinks(root: ParentNode): void {
-		for (const link of root.querySelectorAll<HTMLAnchorElement>("a[href]")) {
+		for (const link of root.querySelectorAll<HTMLElement>(
+			"a[href], tp-button[href], tp-icon-button[href]",
+		)) {
+			if (link.matches("a") && link.closest("tp-button, tp-icon-button"))
+				continue;
 			const href = link.getAttribute("href") ?? "";
 			if (href === "" || !this.shouldHandleDocumentHref(href)) continue;
 			const resolved = this.resolveDocumentHref(href, this.repositoryBasePath);
 			link.setAttribute("href", `#/${this.stripRepository(resolved)}`);
 
 			link.addEventListener("click", (event) => {
+				if (
+					event.defaultPrevented ||
+					event.button !== 0 ||
+					event.ctrlKey ||
+					event.metaKey ||
+					event.shiftKey ||
+					event.altKey ||
+					link.hasAttribute("download") ||
+					(link.getAttribute("target") &&
+						link.getAttribute("target") !== "_self")
+				)
+					return;
 				event.preventDefault();
 				this.goTo(resolved, this.repositoryBasePath);
 			});
@@ -1636,7 +1700,7 @@ export class TpMarkupMultiPages extends TpBase {
 	}
 
 	private async fetchSpecialPage(
-		name: "cover" | "sidebar" | "page-not-found",
+		name: "cover" | "sidebar" | "navbar" | "page-not-found",
 	): Promise<{ href: string; source: string } | null> {
 		for (const href of this.getSpecialPageHrefs(name)) {
 			const source = await this.fetchText(this.getRenderedHref(href));
@@ -1647,13 +1711,13 @@ export class TpMarkupMultiPages extends TpBase {
 	}
 
 	private async resolveSpecialPageHref(
-		name: "cover" | "sidebar" | "page-not-found",
+		name: "cover" | "sidebar" | "navbar" | "page-not-found",
 	): Promise<string | null> {
 		return (await this.fetchSpecialPage(name))?.href ?? null;
 	}
 
 	private getSpecialPageHrefs(
-		name: "cover" | "sidebar" | "page-not-found",
+		name: "cover" | "sidebar" | "navbar" | "page-not-found",
 	): string[] {
 		const extensions =
 			this.fixedLanguage === "html"

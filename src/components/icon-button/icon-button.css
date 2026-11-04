@@ -49,7 +49,7 @@ tp-icon-button[size='xxl'] {
   --tp-icon-button-icon-size: 1.75em;
 }
 
-tp-icon-button > button {
+tp-icon-button > :is(button, a) {
   align-items: center;
   appearance: none;
   background: transparent;
@@ -66,21 +66,21 @@ tp-icon-button > button {
   padding: 0;
 }
 
-tp-icon-button > button:hover {
+tp-icon-button > :is(button, a):hover {
   background: var(--tp-icon-button-hover-background);
 }
 
-tp-icon-button > button:focus-visible {
+tp-icon-button > :is(button, a):focus-visible {
   outline: 2px solid var(--tp-icon-button-focus-ring);
   outline-offset: 2px;
 }
 
-tp-icon-button > button:disabled {
+tp-icon-button > :is(button, a)[aria-disabled="true"] {
   cursor: not-allowed;
   opacity: 0.45;
 }
 
-tp-icon-button > button:disabled:hover {
+tp-icon-button > :is(button, a)[aria-disabled="true"]:hover {
   background: transparent;
 }
 
@@ -110,4 +110,32 @@ tp-icon-button[variant='info'] {
 
 tp-icon-button[variant='neutral'] {
   color: var(--tp-button-neutral, currentColor);
+}
+
+/* Link mode retains the icon-only control geometry. */
+tp-icon-button > :is(button, a) {
+  position: relative;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+tp-icon-button[outlined] > :is(button, a) { border: 1px solid currentColor; }
+tp-icon-button[pill] > :is(button, a) { border-radius: 999px; }
+tp-icon-button[loading] > :is(button, a)::before {
+  content: "";
+  display: block;
+  inline-size: var(--tp-icon-button-icon-size);
+  block-size: var(--tp-icon-button-icon-size);
+  box-sizing: border-box;
+  border: 2px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+  animation: tp-icon-button-loading 0.8s linear infinite;
+  flex: 0 0 auto;
+}
+tp-icon-button[loading][loading-mode="replace"] > :is(button, a)::before { position: absolute; }
+tp-icon-button[loading][loading-mode="replace"] tp-icon { visibility: hidden; }
+tp-icon-button[loading][loading-mode="inline"] > :is(button, a) { gap: 0.25em; }
+@keyframes tp-icon-button-loading { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  tp-icon-button[loading] > :is(button, a)::before { animation: none; }
 }
