@@ -31,7 +31,9 @@ function protectMarkdownRawTextElements(
 
 		const opening =
 			fence === null
-				? line.match(/^ {0,3}<(script|style|textarea|template)\b/i)
+				? line.match(
+						/^ {0,3}(?:<[a-z][\w:-]*\b(?:[^>"']|"[^"]*"|'[^']*')*>\s*)*?<(script|style|textarea|template)\b/i,
+					)
 				: null;
 		const tag = opening?.[1]?.toLowerCase();
 		if (tag === undefined) {

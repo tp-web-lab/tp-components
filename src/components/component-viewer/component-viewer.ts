@@ -2,6 +2,73 @@
  * @module components/component-viewer
  * @summary API tables and interactive attribute controls for a component preview.
  */
+// tp-docgen:dependencies:start
+/**
+ * @tp-dependency tp-base
+ * @summary Shared base class for tp-* components.
+ */
+/**
+ * @tp-dependency tp-button
+ * @summary Button component that supports native button and link rendering.
+ */
+/**
+ * @tp-dependency tp-checkbox-list
+ * @summary Transforms a list into a group of checkboxes.
+ */
+/**
+ * @tp-dependency tp-cluster
+ * @summary Flexible cluster layout component.
+ */
+/**
+ * @tp-dependency tp-code-editor
+ * @summary CodeMirror-based code editor component.
+ */
+/**
+ * @tp-dependency tp-datefield
+ * @summary Native date field with labels, constraints, picker access, and clearing.
+ */
+/**
+ * @tp-dependency tp-html-viewer
+ * @summary Interactive HTML viewer with editable source, live rendering, and DOM inspection.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
+ */
+/**
+ * @tp-dependency tp-markdown
+ * @summary Markdown rendering component.
+ */
+/**
+ * @tp-dependency tp-numberfield
+ * @summary Numeric field with an optional native range slider.
+ */
+/**
+ * @tp-dependency tp-radio-list
+ * @summary Transforms a list into a group of radio buttons.
+ */
+/**
+ * @tp-dependency tp-tabs
+ * @summary Accessible tabs component with keyboard and reorder support.
+ */
+/**
+ * @tp-dependency tp-textfield
+ * @summary Single-line and automatically growing multiline text field.
+ */
+/**
+ * @tp-dependency tp-timefield
+ * @summary Native time field with labels, constraints, picker access, and clearing.
+ */
+// tp-docgen:dependencies:end
+
+import { type DefaultTreeAdapterTypes, parseFragment } from "parse5";
+import { createHelpButtonTable } from "../../utilities/help-buttons.js";
+import { latexMarkup } from "../../utilities/latex-markup.js";
+import { nativeMarkup } from "../../utilities/native-markup.js";
 import {
 	getComponentSourceBaseUrl,
 	resolveComponentSourceUrl,
@@ -18,6 +85,10 @@ import "../timefield/timefield.js";
 import "../cluster/cluster.js";
 import "../tabs/tabs.js";
 import "../html-viewer/html-viewer.js";
+import "../icon-button/icon-button.js";
+import "../code-editor/code-editor.js";
+import { formatHelpKeyboard } from "../../utilities/help-keyboard.js";
+import { renderMarkdownInto } from "../markdown/markdown.js";
 import style from "./component-viewer.css?inline";
 import catalog from "./controls.json";
 
@@ -33,6 +104,7 @@ type ApiItem = {
 type Api = {
 	classname?: string;
 	userHelp?: {
+		interactions?: string;
 		commands?: { button: string; description: string; shortcut: string }[];
 	};
 	tagname: string;
@@ -53,6 +125,40 @@ const escapeHtml = (value: string) =>
 		.replaceAll("&", "&amp;")
 		.replaceAll("<", "&lt;")
 		.replaceAll('"', "&quot;");
+/** Shorten boolean attributes without touching text, scripts or quoted values. */
+function booleanHtmlSource(
+	source: string,
+	tag: string,
+	attributes: ApiItem[],
+): string {
+	const names = new Set(
+		attributes
+			.filter((item) => item.type === "boolean")
+			.map((item) => item.name),
+	);
+	const edits: { start: number; end: number; name: string }[] = [];
+	const visit = (node: DefaultTreeAdapterTypes.Node): void => {
+		if ("tagName" in node && node.tagName === tag) {
+			for (const attribute of node.attrs) {
+				const location = node.sourceCodeLocation?.attrs?.[attribute.name];
+				if (names.has(attribute.name) && attribute.value === "" && location) {
+					edits.push({
+						start: location.startOffset,
+						end: location.endOffset,
+						name: attribute.name,
+					});
+				}
+			}
+		}
+		if ("childNodes" in node) node.childNodes.forEach(visit);
+		if ("content" in node) visit(node.content);
+	};
+	visit(parseFragment(source, { sourceCodeLocationInfo: true }));
+	for (const edit of edits.sort((left, right) => right.start - left.start)) {
+		source = source.slice(0, edit.start) + edit.name + source.slice(edit.end);
+	}
+	return source;
+}
 function defaultValue(item: ApiItem): string {
 	const value = item.default ?? "";
 	try {
@@ -90,7 +196,7 @@ function table(
 ): string {
 	const body = !items.length
 		? `<p>No ${title.toLowerCase()} declared by this component.</p>`
-		: `<div class="tp-component-viewer-table"><table><thead><tr>${columns.map((key) => `<th scope="col">${key[0]?.toUpperCase()}${key.slice(1)}</th>`).join("")}</tr></thead><tbody>${items.map((item) => `<tr>${columns.map((key) => `<td data-api-column="${key}">${escapeHtml(key === "description" ? description(item) : String(item[key] ?? ""))}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+		: `<div class="tp-component-viewer-table" data-api-table="${title.toLowerCase()}"><table><thead><tr>${columns.map((key) => `<th scope="col">${key[0]?.toUpperCase()}${key.slice(1)}</th>`).join("")}</tr></thead><tbody>${items.map((item) => `<tr>${columns.map((key) => `<td data-api-column="${key}">${escapeHtml(key === "description" ? description(item) : String(item[key] ?? ""))}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
 	return `<dt>${title}</dt><dd>${body}</dd>`;
 }
 function commandsTable(api: Api): string {
@@ -98,7 +204,7 @@ function commandsTable(api: Api): string {
 	const content = commands?.length
 		? `<p>Mod = ⌘ on macOS, Ctrl elsewhere. — = no assigned shortcut.</p><div class="tp-component-viewer-table"><table><thead><tr><th scope="col">Button / command</th><th scope="col">Action</th><th scope="col">Shortcut</th></tr></thead><tbody>${commands.map((command) => `<tr><td>${escapeHtml(command.button)}</td><td>${escapeHtml(command.description)}</td><td>${escapeHtml(command.shortcut)}</td></tr>`).join("")}</tbody></table></div>`
 		: `<p>${commands ? "No component-specific commands." : "No component-specific commands documented."}</p>`;
-	return `<dt>Commands</dt><dd>${content}</dd>`;
+	return `<dt>User interactions</dt><dd><div data-component-interactions><tp-tabs data-component-interaction-tabs><dl><dt>Buttons</dt><dd><div data-component-buttons>${content}</div></dd><dt>Mouse</dt><dd><div data-component-mouse></div></dd><dt>Keyboard</dt><dd><div data-component-keyboard></div></dd></dl></tp-tabs></div></dd>`;
 }
 
 function fieldTag(item: ApiItem): string {
@@ -116,9 +222,10 @@ function fieldTag(item: ApiItem): string {
 }
 
 /**
- * API reference beside an interactive component preview.
+ * The custom `<tp-component-viewer>` element documents a component and lets readers try its attributes on a live example.
+ *
  * @tagname tp-component-viewer
- * @summary API tables and interactive attribute controls for a component preview.
+ * @summary Documents a component and lets readers try its attributes on a live example.
  * @attr {string} tag = "" - Component tag; inferred from supplied HTML when omitted.
  * @attr {string} src = "" - HTML example file, resolved relative to the author document.
  * @attr {string} api-src = "" - Optional component API manifest URL.
@@ -128,6 +235,7 @@ function fieldTag(item: ApiItem): string {
 export class TpComponentViewer extends TpBase {
 	private inlineSource: string | null = null;
 	private source = "";
+	private contentOverride: string | null = null;
 	private baseUrl = "";
 	private componentTag = "";
 	private activePanel: "Doc" | "Demo" | "API" = "Doc";
@@ -216,6 +324,7 @@ export class TpComponentViewer extends TpBase {
 			if (revision !== this.revision) return;
 			this.api = api;
 			this.componentTag = tag;
+			this.contentOverride = null;
 			this.source = source || api.examples?.[0]?.code || `<${tag}></${tag}>`;
 			const original = new DOMParser()
 				.parseFromString(this.source, "text/html")
@@ -275,15 +384,26 @@ export class TpComponentViewer extends TpBase {
 		item: ApiItem,
 	): { label: string; value: string }[] | undefined {
 		const settings = controlsCatalog[this.componentTag]?.[item.name];
-		return (
+		const configured =
 			settings?.choices ??
-			settings?.values?.map((value) => ({ label: value, value }))
-		);
+			settings?.values?.map((value) => ({ label: value, value }));
+		if (configured) return configured;
+		// Closed string unions in a fresh API work before the catalog is rebuilt.
+		// Open unions (for example "small" | string) must remain editable fields.
+		const members = item.type?.split("|").map((member) => member.trim());
+		if (!members || members.length < 2) return undefined;
+		const values: string[] = [];
+		for (const member of members) {
+			const literal = member.match(/^(?:"([^"\\]*)"|'([^'\\]*)')$/);
+			if (!literal) return undefined;
+			values.push(literal[1] ?? literal[2] ?? "");
+		}
+		return [...new Set(values)].map((value) => ({ label: value, value }));
 	}
 	private render(): void {
 		const api = this.api;
 		if (!api) return;
-		this.innerHTML = `<header class="tp-component-viewer-header"><h2 data-component-title><tp-icon library="components" name="${escapeHtml(this.componentTag.slice(3))}" size="1.25em" aria-hidden="true"></tp-icon><span data-component-title-text>${escapeHtml(this.componentTag)} ${this.activePanel}</span></h2><tp-radio-list data-component-mode orientation="horizontal" aria-label="Displayed panel" value="${this.activePanel === "Doc" ? "1" : this.activePanel === "Demo" ? "2" : "3"}"><ul><li>Doc</li><li>Demo</li><li>API</li></ul></tp-radio-list></header><div class="tp-component-viewer-layout"><section class="tp-component-viewer-docs" aria-label="Component API"><tp-tabs><dl>${commandsTable(api)}${table("Attributes", this.attributesApi, ["name", "type", "default", "description"])}${table(
+		this.innerHTML = `<header class="tp-component-viewer-header"><h2 data-component-title><tp-icon library="components" name="${escapeHtml(this.componentTag.slice(3))}" size="1.25em" aria-hidden="true"></tp-icon><span data-component-title-text>${escapeHtml(this.componentTag)}</span></h2><tp-radio-list data-component-mode orientation="horizontal" aria-label="Displayed panel" value="${this.activePanel === "Doc" ? "1" : this.activePanel === "Demo" ? "2" : "3"}"><ul><li>Doc</li><li>Demo</li><li>API</li></ul></tp-radio-list></header><div class="tp-component-viewer-layout"><section class="tp-component-viewer-docs" aria-label="Component API"><tp-tabs><dl>${commandsTable(api)}${table("Attributes", this.attributesApi, ["name", "type", "default", "description"])}${table(
 			"Methods",
 			(api.methods ?? []).filter((item) => !item.inherited),
 			["name", "description"],
@@ -293,7 +413,68 @@ export class TpComponentViewer extends TpBase {
 				(item) => item.emitted === true && !item.inherited,
 			),
 			["name", "detail", "description"],
-		)}${table("CSS Properties", api.cssproperties ?? [], ["name", "default", "description"])}</dl></tp-tabs></section><section class="tp-component-viewer-demo" aria-label="Component demo"><div data-component-preview></div><h3>Configuration</h3><div data-component-controls></div><div class="tp-component-viewer-actions"><tp-button data-component-reset>Reset defaults</tp-button><tp-button data-component-reload>Reload preview</tp-button></div><p>Reload preview applies initialization-only settings.</p></section><section class="tp-component-viewer-api" aria-label="Full component API"></section></div>`;
+		)}${table("CSS Properties", api.cssproperties ?? [], ["name", "default", "description"])}</dl></tp-tabs></section><section class="tp-component-viewer-demo" aria-label="Component demo"><div data-component-preview></div><tp-icon-button data-component-source-toggle name="code" label="Show markup source" aria-pressed="false"></tp-icon-button><div data-component-source hidden></div><h3>Attributes setting</h3><div data-component-controls></div><h3>Content setting</h3><tp-textfield data-component-content label="Content (HTML)" clearable multiline rows="2"></tp-textfield><div class="tp-component-viewer-actions"><tp-button data-component-reset>Reset defaults</tp-button><tp-button data-component-reload>Reload preview</tp-button></div><p>Reload preview applies initialization-only settings.</p></section><section class="tp-component-viewer-api" aria-label="Full component API"></section></div>`;
+		const interactions = this.querySelector<HTMLElement>(
+			"[data-component-interactions]",
+		);
+		if (interactions && api.userHelp?.interactions) {
+			const rendered = document.createElement("div");
+			void renderMarkdownInto(
+				formatHelpKeyboard(api.userHelp.interactions),
+				rendered,
+			).then(() => {
+				if (!interactions.isConnected) return;
+				let destination = interactions.querySelector("[data-component-mouse]");
+				for (const node of Array.from(rendered.childNodes)) {
+					if (node instanceof HTMLElement && /^H[1-6]$/.test(node.tagName)) {
+						const title = node.textContent?.trim().toLowerCase();
+						if (title === "user interactions") continue;
+						if (
+							title === "mouse interactions" ||
+							title === "keyboard interactions"
+						) {
+							destination = interactions.querySelector(
+								title === "mouse interactions"
+									? "[data-component-mouse]"
+									: "[data-component-keyboard]",
+							);
+							continue;
+						}
+					}
+					destination?.append(node);
+				}
+				for (const panel of interactions.querySelectorAll<HTMLElement>(
+					"[data-component-mouse], [data-component-keyboard]",
+				))
+					panel.classList.add("tp-markdown-output");
+			});
+		}
+
+		const content = this.querySelector<ValueControl>(
+			"[data-component-content]",
+		);
+		if (content) {
+			content.value =
+				this.configuredDocument().querySelector(this.componentTag)?.innerHTML ??
+				"";
+			content.addEventListener("input", () => {
+				if (this.contentOverride === content.value) return;
+				this.contentOverride = content.value;
+				this.renderPreview();
+			});
+		}
+		const toggle = this.querySelector("[data-component-source-toggle]");
+		toggle?.addEventListener("click", () => {
+			const panel = this.querySelector<HTMLElement>("[data-component-source]");
+			if (!panel) return;
+			panel.hidden = !panel.hidden;
+			toggle.setAttribute("aria-pressed", String(!panel.hidden));
+			toggle.setAttribute(
+				"label",
+				panel.hidden ? "Show markup source" : "Hide markup source",
+			);
+			this.syncSource();
+		});
 		const mode = this.querySelector<ValueControl>("[data-component-mode]");
 		mode?.addEventListener("tp-radio-list-change", () => {
 			this.activePanel =
@@ -370,8 +551,6 @@ export class TpComponentViewer extends TpBase {
 		this.renderPreview();
 	}
 	private updatePanel(): void {
-		const title = this.querySelector("[data-component-title-text]");
-		if (title) title.textContent = `${this.componentTag} ${this.activePanel}`;
 		const docs = this.querySelector<HTMLElement>(".tp-component-viewer-docs");
 		const demo = this.querySelector<HTMLElement>(".tp-component-viewer-demo");
 		if (docs) docs.hidden = this.activePanel !== "Doc";
@@ -432,6 +611,7 @@ export class TpComponentViewer extends TpBase {
 		this.values.set(name, value);
 		if (value === null) this.preview?.removeAttribute(name);
 		else this.preview?.setAttribute(name, value);
+		this.syncSource();
 	}
 	private syncControls(): void {
 		const booleans = this.attributesApi.filter(
@@ -466,6 +646,14 @@ export class TpComponentViewer extends TpBase {
 	}
 	/** Restores documented attribute defaults and restarts the preview. */
 	public resetDefaults(): void {
+		this.contentOverride = null;
+		const content = this.querySelector<ValueControl>(
+			"[data-component-content]",
+		);
+		if (content)
+			content.value =
+				this.configuredDocument().querySelector(this.componentTag)?.innerHTML ??
+				"";
 		this.cleared.clear();
 		for (const item of this.attributesApi) {
 			const value = defaultValue(item);
@@ -481,16 +669,91 @@ export class TpComponentViewer extends TpBase {
 		this.syncControls();
 		this.renderPreview();
 	}
+	/** Serialize author content with current public attributes, excluding generated DOM. */
+	private configuredDocument(): Document {
+		const parsed = new DOMParser().parseFromString(this.source, "text/html");
+		const target = parsed.querySelector(this.componentTag);
+		if (target && this.contentOverride !== null)
+			target.innerHTML = this.contentOverride;
+		for (const [name, value] of this.values) {
+			if (value === null) target?.removeAttribute(name);
+			else target?.setAttribute(name, value);
+		}
+		return parsed;
+	}
+	private syncSource(): void {
+		const panel = this.querySelector<HTMLElement>("[data-component-source]");
+		if (!panel || panel.hidden) return;
+		const languages = [
+			["html", "HTML", "html"],
+			["adoc", "tp-asciidoc", "asciidoc"],
+			["latex", "tp-latex", "latex"],
+			["md", "tp-markdown", "markdown"],
+			["rst", "tp-restructuredtext", "restructuredtext"],
+		] as const;
+		if (!panel.querySelector("tp-tabs")) {
+			const tabs = document.createElement("tp-tabs");
+			const list = document.createElement("dl");
+			for (const [format, label, language] of languages) {
+				const term = document.createElement("dt");
+				term.textContent = label;
+				const content = document.createElement("dd");
+				const editor = document.createElement("tp-code-editor");
+				editor.dataset.componentSourceFormat = format;
+				editor.setAttribute("language", language);
+				for (const attribute of ["readonly", "line-numbers", "word-wrap"])
+					editor.setAttribute(attribute, "");
+				content.append(editor);
+				list.append(term, content);
+			}
+			tabs.append(list);
+			panel.append(tabs);
+		}
+		const parsed = this.configuredDocument();
+		const source = /<!doctype|<html[\s>]/i.test(this.source)
+			? `<!doctype html>\n${parsed.documentElement.outerHTML}`
+			: `${parsed.head.innerHTML}${parsed.body.innerHTML}`.trim();
+		for (const [format] of languages) {
+			const editor = panel.querySelector<
+				HTMLElementTagNameMap["tp-code-editor"]
+			>(`[data-component-source-format="${format}"]`);
+			const value =
+				format === "html"
+					? booleanHtmlSource(
+							source,
+							this.componentTag,
+							this.api?.attributes ?? [],
+						)
+					: format === "latex"
+						? `\\documentclass{article}\n\\begin{document}\n${latexMarkup(source)}\n\\end{document}\n`
+						: nativeMarkup(format, source);
+			if (editor && editor.value !== value) editor.value = value;
+		}
+	}
+
+	private syncButtonInteractions(): void {
+		const container = this.querySelector("[data-component-buttons]");
+		if (!container || !this.preview) return;
+		const legend = createHelpButtonTable(
+			this.preview as HTMLElement,
+			this.api?.userHelp?.interactions ?? "",
+		);
+		if (legend) {
+			for (const label of legend.querySelectorAll("h4"))
+				if (label.textContent === "Buttons") label.remove();
+			container.replaceChildren(legend);
+		} else {
+			const empty = document.createElement("p");
+			empty.textContent = "No component-specific buttons.";
+			container.replaceChildren(empty);
+		}
+	}
+
 	private renderPreview(): void {
 		this.previewObserver?.disconnect();
 		this.preview = null;
-		const parsed = new DOMParser().parseFromString(this.source, "text/html");
-		const target = parsed.querySelector(this.componentTag);
-		if (!target) return;
-		for (const [name, value] of this.values) {
-			if (value === null) target.removeAttribute(name);
-			else target.setAttribute(name, value);
-		}
+		const parsed = this.configuredDocument();
+		this.syncSource();
 		let base = parsed.querySelector("base");
 		if (!base) {
 			base = parsed.createElement("base");
@@ -500,6 +763,7 @@ export class TpComponentViewer extends TpBase {
 		const viewer = document.createElement("tp-html-viewer");
 		viewer.setAttribute("lite", "");
 		viewer.classList.add("tp-component-viewer-preview");
+		viewer.setAttribute("data-tp-render-eager", "");
 		const source = document.createElement("script");
 		source.type = "tp/html";
 		source.textContent = `<!doctype html>${parsed.documentElement.outerHTML}`;
@@ -526,9 +790,13 @@ export class TpComponentViewer extends TpBase {
 							this.cleared.delete(item.name);
 					}
 					this.syncControls();
+					this.syncSource();
+					this.syncButtonInteractions();
 				};
 				this.previewObserver = new MutationObserver(sync);
 				this.previewObserver.observe(preview, {
+					childList: true,
+					subtree: true,
 					attributes: true,
 					attributeFilter: this.attributesApi.map((item) => item.name),
 				});

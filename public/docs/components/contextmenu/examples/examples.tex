@@ -1,0 +1,10 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[data-intro-action=contextmenu,data-allow-script]{
+  \wcTpButton[id=intro-contextmenu-trigger,data-demo-trigger]{Right-click this button}
+  \rawhtml|<tp-contextmenu anchor="#intro-contextmenu-trigger" outside-click=""><ul><li><a href="/#/components/button/index.md">Buttons</a></li><li><a href="/#/components/tree/index.md">Trees</a></li></ul></tp-contextmenu>|
+  \wcP[data-demo-status,role=status]{Try the contextmenu using its trigger.}
+  \wcScript[src=/docs/components/_shared/introduction-actions.js]||
+}
+\end{document}

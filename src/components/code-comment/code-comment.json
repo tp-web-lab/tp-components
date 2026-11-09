@@ -2,7 +2,7 @@
   "tagname": "tp-code-comment",
   "classname": "TpCodeComment",
   "superclass": "TpBase",
-  "description": "associates an ordered annotation list with numbered comments in a code editor.",
+  "description": "Associates an ordered annotation list with numbered comments in a code editor.",
   "examples": [
     {
       "label": "Example 1",
@@ -53,8 +53,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Code comments",
-    "introduction": "The custom `<tp-code-comment>` element implements the code annotation functionality: associates an ordered annotation list with numbered comments in a code editor.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Hover a numbered icon in the code | Show its explanation in a tooltip, preserving the list item's formatting. |\n| Numbered icons in the explanation list | Match each explanation to the code marker with the same number. |\n| Editing the linked code | Update the markers as the source changes; the annotation list does not change the source text. |\n| Copy or save in the linked editor | Keep the original comments, including literal numbered markers. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Escape</kbd>, then <kbd>Tab</kbd> from the editor | Leave code indentation mode and focus a numbered marker. Its explanation opens as on hover; <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> move between focusable controls. |\n| <kbd>Escape</kbd> while a tooltip is open | Close the tooltip without changing the source. |\n| Typing in the linked editor | Edit code using the editor's normal keyboard behavior. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-code-comment>` element associates an ordered annotation list with numbered comments in a code editor.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Hover a numbered icon in the code | Show its explanation in a tooltip, preserving the list item's formatting. |\n| Numbered icons in the explanation list | Match each explanation to the code marker with the same number. |\n| Editing the linked code | Update the markers as the source changes; the annotation list does not change the source text. |\n| Copy or save in the linked editor | Keep the original comments, including literal numbered markers. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Escape</kbd>, then <kbd>Tab</kbd> from the editor | Leave code indentation mode and focus a numbered marker. Its explanation opens as on hover; <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> move between focusable controls. |\n| <kbd>Escape</kbd> while a tooltip is open | Close the tooltip without changing the source. |\n| Typing in the linked editor | Edit code using the editor's normal keyboard behavior. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

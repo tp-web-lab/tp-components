@@ -33,9 +33,9 @@ function readSourceIconName(url: string): TpSourceIconName {
 }
 
 /**
- * `<tp-source>` displays a source repository button when a URL is available.
+ * The custom `<tp-source>` element links to the project’s source repository.
  *
- * @summary Source repository link button.
+ * @summary Links to the project’s source repository.
  * @tagname tp-source
  * @attr {string} url = "" - Source repository URL.
  * @example

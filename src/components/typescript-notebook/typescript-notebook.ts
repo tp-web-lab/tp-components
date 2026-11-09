@@ -13,8 +13,10 @@
 import "../notebook/notebook.js";
 import { TpNotebook } from "../notebook/notebook.js";
 /**
+ * The custom `<tp-typescript-notebook>` element combines written explanations and executable TypeScript code in an interactive notebook.
+ *
  * @tp-dependency tp-notebook
- * @summary Interactive notebook combining markup and executable code cells.
+ * @summary Combines written explanations and executable TypeScript code in an interactive notebook.
  * @tagname tp-typescript-notebook
  * @summary Interactive TypeScript notebook with markup and code cells.
  * @example

@@ -1,0 +1,25 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpAsciidoc{
+  \wcScript[type=tp/asciidoc]|
+== A short document
+
+This paragraph uses *AsciiDoc*.
+
+* Write content
+* Add components
+* Publish the page
+  |
+}
+\end{document}
+
+% !tp-example Advanced example
+\documentclass{article}
+\begin{document}
+\wcTpAsciidoc{
+  \wcScript[type=tp/asciidoc]|
+          include::advanced-example.adoc[]
+        |
+}
+\end{document}

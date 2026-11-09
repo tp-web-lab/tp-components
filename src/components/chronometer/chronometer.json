@@ -2,7 +2,7 @@
   "tagname": "tp-chronometer",
   "classname": "TpChronometer",
   "superclass": "TpBase",
-  "description": "Chronometer component.",
+  "description": "Measures elapsed time.",
   "examples": [
     {
       "label": "Example 1",
@@ -62,8 +62,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Chronometer",
-    "introduction": "The custom `<tp-chronometer>` element implements the <tp-icon name=\"chronometer\" library=\"components\" size=\"1.25em\"></tp-icon> Chronometer functionality: chronometer component with play, pause and stop controls.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Start chronometer | Start or resume timing. |\n| Pause chronometer | Freeze the elapsed time. |\n| Stop chronometer | Stop timing and reset the display. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-chronometer>` element measures elapsed time.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Start chronometer | Start or resume timing. |\n| Pause chronometer | Freeze the elapsed time. |\n| Stop chronometer | Stop timing and reset the display. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

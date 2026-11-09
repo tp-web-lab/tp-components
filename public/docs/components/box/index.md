@@ -1,32 +1,40 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="box" library="components" size="1.25em"></tp-icon> Box
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-box>` element implements the <tp-icon name="box" library="components" size="1.25em"></tp-icon> Box functionality: wraps content in a configurable bordered box.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-box>` element wraps content in a configurable bordered box.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-box>
-  The custom HTML element <code>&lt;tp-box&gt;</code> wraps its content in various ways.
-</tp-box>
+      The custom HTML element <code>&lt;tp-box&gt;</code> wraps its content in various ways.
+    </tp-box>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-box" src="/docs/components/box/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Reading | This component organizes or presents content. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| Component itself | No dedicated keyboard action. |
-| Embedded controls, when present | Use their normal keyboard interactions. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 To border a fragment of HTML, simply wrap it in the `<tp-box>` element.
 
@@ -38,387 +46,7 @@ To border a fragment of HTML, simply wrap it in the `<tp-box>` element.
 </tp-box>
 ```
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Inspect how the box encloses its content with spacing and a border.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpBox -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>border-radius</code> | <code>string</code> | <code>&quot;0px&quot;</code> | Border radius applied to the box. When absent, uses --tp-box-border-radius with a 0px fallback. |
-  | <code>border-width</code> | <code>string</code> | <code>&quot;1px&quot;</code> | Border width applied to the box. When absent, uses --tp-box-border-width with a 1px fallback. |
-  | <code>invert</code> | <code>boolean</code> | <code>false</code> | Uses an inverted surface with contrasting text. |
-  | <code>padding</code> | <code>string</code> | <code>&quot;1rem&quot;</code> | Padding applied inside the box. When absent, uses --tp-box-padding with a 1rem fallback. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-box>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpBox`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-box>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-box-background</code> | <code>var(&#45;&#45;tp-paper-color, transparent)</code> | Default box background. |
-  | <code>&#45;&#45;tp-box-border-radius</code> | <code>0px</code> | Default border radius. |
-  | <code>&#45;&#45;tp-box-border-width</code> | <code>1px</code> | Default border width. |
-  | <code>&#45;&#45;tp-box-color</code> | <code>var(&#45;&#45;tp-text-body, inherit)</code> | Default box text color. |
-  | <code>&#45;&#45;tp-box-padding</code> | <code>1rem</code> | Default inner padding. |
-  [CSS properties of `<tp-box>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_box.TpBox.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -445,19 +73,45 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Inspect how the box encloses its content with spacing and a border.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-box>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
 @summary Shared base class for tp-* components.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 
 ### External
 

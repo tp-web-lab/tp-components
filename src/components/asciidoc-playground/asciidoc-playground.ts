@@ -113,7 +113,7 @@ const KNOWN_EXTENSIONS: TpAsciidocExtension[] = [
 ];
 
 /**
- * AsciiDoc playground component.
+ * The custom `<tp-asciidoc-playground>` element edits and renders an AsciiDoc project.
  *
  * Provides a file-based playground that renders AsciiDoc documents in the browser.
  *

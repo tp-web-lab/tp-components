@@ -1,0 +1,115 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpMatchingQuestion{
+  \begin{description}
+    \item[{Title}] English and French
+    \item[{Prompt}] Match each English expression with its French translation.
+    \item[{Form}] \begin{itemize}
+      \item Hello
+      \item Thank you
+      \item Goodbye
+    \end{itemize}     \begin{enumerate}
+      \item Bonjour
+      \item Merci
+      \item Au revoir
+    \end{enumerate}
+    \item[{Feedback}] Distinguish greetings, thanks and farewells.
+    \item[{Solution}] Hello — Bonjour; Thank you — Merci; Goodbye — Au revoir.
+  \end{description}
+}
+\end{document}
+
+% !tp-example Rich content
+\documentclass{article}
+\begin{document}
+\wcTpMatchingQuestion{
+  \begin{description}
+    \item[{Title}] Identify the media
+    \item[{Prompt}] Associate each flag, sound or scene with its description.
+    \item[{Form}] \begin{itemize}
+      \item \wcTpIcon[name=lt,library=flags,size=3em,role=img,aria-label=Flag to identify]{}
+      \item Listen to the sound.
+      \wcAudio[controls,src=/docs/medias/audios/glass-break.mp3,aria-label=Sound to identify]{}
+      \item Watch the scene.
+      \wcVideo[controls,width=240,src=/docs/medias/videos/chute-eau.mp4,aria-label=Scene to identify]{}
+    \end{itemize}     \begin{enumerate}
+      \item Lithuania
+      \item Breaking glass
+      \item A waterfall
+    \end{enumerate}
+    \item[{Feedback}] Observe the flag colors and distinguish the sound from the scene.
+    \item[{Solution}] The flag represents Lithuania; the sound is breaking glass; the video shows a waterfall.
+  \end{description}
+}
+\end{document}
+
+% !tp-example External definition
+\documentclass{article}
+\begin{document}
+\wcTpMatchingQuestion[src=/docs/components/matching-question/examples/translations.json]{}
+\end{document}
+
+% !tp-example Irregular verbs
+\documentclass{article}
+\begin{document}
+\wcTpMatchingQuestion{
+  \begin{description}
+    \item[{Title}] Irregular verbs
+    \item[{Prompt}] Associate each verb with its past simple, past participle and French translation.
+    \item[{Form}] \wcTpMatching{
+      \begin{description}
+        \item[{Base form}] \begin{itemize}
+          \item be
+          \item have
+          \item do
+        \end{itemize}
+        \item[{Past simple}] \begin{enumerate}
+          \item was
+          \item had
+          \item did
+        \end{enumerate}
+        \item[{Past participle}] \begin{itemize}
+          \item been
+          \item had
+          \item done
+        \end{itemize}
+        \item[{French}] \begin{enumerate}
+          \item être
+          \item avoir
+          \item faire
+        \end{enumerate}
+      \end{description}
+    }
+    \item[{Feedback}] Check all four members of each group before submitting again.
+    \item[{Solution}] \begin{itemize}
+      \item be — was — been — être
+      \item have — had — had — avoir
+      \item do — did — done — faire
+    \end{itemize}
+  \end{description}
+}
+\end{document}
+
+% !tp-example Header list
+\documentclass{article}
+\begin{document}
+\wcTpMatchingQuestion[heading]{
+  \begin{description}
+    \item[{Prompt}] Match each expression with its translation.
+    \item[{Form}] \begin{itemize}
+      \item English
+      \item French
+    \end{itemize}     \begin{itemize}
+      \item Hello
+      \item Thank you
+      \item Goodbye
+    \end{itemize}     \begin{enumerate}
+      \item Bonjour
+      \item Merci
+      \item Au revoir
+    \end{enumerate}
+    \item[{Solution}] Hello — Bonjour; Thank you — Merci; Goodbye — Au revoir.
+  \end{description}
+}
+\end{document}

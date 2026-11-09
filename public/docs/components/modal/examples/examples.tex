@@ -1,0 +1,14 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[data-intro-action=modal,data-allow-script]{
+  \wcTpButton[id=intro-modal-trigger,data-demo-trigger]{Open the modal}
+  \wcTpModal[backdrop,outside-click,aria-label=Example modal]{
+    This panel contains additional information.
+
+    \wcTpButton[data-demo-close]{Close}
+  }
+  \wcP[data-demo-status,role=status]{Try the modal using its trigger.}
+  \wcScript[src=/docs/components/_shared/introduction-actions.js]||
+}
+\end{document}

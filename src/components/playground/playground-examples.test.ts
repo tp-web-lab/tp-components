@@ -143,6 +143,28 @@ describe("TpPlayground example groups", () => {
 		expect(iframe.style.blockSize).toBe("60px");
 	});
 
+	it("keeps iframe-only drawings visible after their loading text disappears", async () => {
+		const fixture = new TpPlaygroundExampleFixture();
+		document.body.append(fixture);
+		await settle();
+		const iframe = required(fixture.querySelector("tp-iframe"));
+		const frameDocument = required(iframe.contentDocument);
+		frameDocument.body.innerHTML = "<div>Compiling TikZ…</div>";
+		iframe.hidden = true;
+		vi.spyOn(iframe, "getContentHeight").mockImplementation(() => {
+			expect(iframe.hidden).toBe(false);
+			return 180;
+		});
+		iframe.dispatchEvent(new CustomEvent("tp-iframe-load"));
+		frameDocument.body.innerHTML =
+			'<div><iframe title="TikZ drawing"></iframe></div>';
+		await settle();
+		expect(iframe.hidden).toBe(false);
+		expect(iframe.style.blockSize).toBe("180px");
+		frameDocument.body.replaceChildren();
+		await vi.waitFor(() => expect(iframe.hidden).toBe(true));
+	});
+
 	it("revives a hidden output before running the next document", async () => {
 		const fixture = new TpPlaygroundExampleFixture();
 		document.body.append(fixture);

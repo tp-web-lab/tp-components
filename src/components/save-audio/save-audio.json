@@ -2,17 +2,17 @@
   "tagname": "tp-save-audio",
   "classname": "TpSaveAudio",
   "superclass": "TpBase",
-  "description": "Saves audio from an associated component in several formats.",
+  "description": "Saves the associated audio in its original format.",
   "examples": [
     {
       "label": "Example 1",
-      "code": "<p>Audio saving is reserved for a future integration. No audio provider is currently connected.</p>\n<tp-save-audio disabled></tp-save-audio>"
+      "code": "<p>Listen to the sound of breaking glass, then save the MP3 file.</p>\n<audio id=\"save-audio-example\" controls preload=\"metadata\" aria-label=\"Sound of breaking glass\">\n  <source src=\"/docs/medias/audios/glass-break.mp3\" type=\"audio/mpeg\">\n</audio>\n<tp-save-audio anchor=\"#save-audio-example\" filename=\"glass-break\"></tp-save-audio>"
     }
   ],
   "attributes": [
     {
       "name": "anchor",
-      "description": "CSS selector of a component implementing saveAudio(format, filename).",
+      "description": "CSS selector of an audio element or a component implementing saveAudio(format, filename).",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -53,7 +53,7 @@
       "static": false,
       "inherited": false,
       "type": "string",
-      "default": "\"file-download\""
+      "default": "\"save-audio\""
     },
     {
       "name": "size",
@@ -117,8 +117,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Save audio",
-    "introduction": "The custom `<tp-save-audio>` element provides an audio download menu with MP3, OGG and WAV formats.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Save audio | Open or close the format menu. |\n| MP3 / OGG / WAV | Choose a filename and save in that format. A check marks the current format. |\n| Outside the menu | Close the menu. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused control or format. |\n| <kbd>Escape</kbd> | Close the menu. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to focus. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-save-audio>` element saves the associated audio in its original format.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Save audio | Open or close the format menu. |\n| MP3 / OGG / WAV | Choose an available format, then a filename, and save the audio. For an audio player, only the current source’s format is shown; unavailable formats are omitted. A check marks the current format. |\n| Outside the menu | Close the menu. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused control or format. |\n| <kbd>Escape</kbd> | Close the menu. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to focus. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

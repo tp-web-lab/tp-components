@@ -476,6 +476,7 @@ export { TpYakazu } from "./components/yakazu/yakazu.js";
 
 console.log("tp-lib loaded");
 
+export { TpAsciidocBlog } from "./components/asciidoc-blog/asciidoc-blog.js";
 export { TpAudioPlaylist } from "./components/audio-playlist/audio-playlist.js";
 export { TpBiblio } from "./components/biblio/biblio.js";
 export { TpCalculator } from "./components/calculator/calculator.js";
@@ -494,11 +495,24 @@ export {
 	serializeGeometry,
 	TpGraphGeometry,
 } from "./components/graph-geometry/graph-geometry.js";
+export { TpHtmlBlog } from "./components/html-blog/html-blog.js";
+export { TpLatex } from "./components/latex/latex.js";
+export {
+	TpLatexPlayground,
+	TpLatexProject,
+} from "./components/latex-playground/latex-playground.js";
+export { TpLatexViewer } from "./components/latex-viewer/latex-viewer.js";
 export { TpListof } from "./components/listof/listof.js";
 export { TpLogigram } from "./components/logigram/logigram.js";
+export { TpMarkdownBlog } from "./components/markdown-blog/markdown-blog.js";
+export {
+	type TpBlogLanguage,
+	TpMarkupBlog,
+} from "./components/markup-blog/markup-blog.js";
 export { TpMask } from "./components/mask/mask.js";
 export { TpNote } from "./components/note/note.js";
 export { TpRef } from "./components/ref/ref.js";
+export { TpRestructuredTextBlog } from "./components/restructuredtext-blog/restructuredtext-blog.js";
 export {
 	type AudioSaveTarget,
 	TpSaveAudio,
@@ -518,8 +532,11 @@ export {
 	type TangramPlacement,
 	TpTangram,
 } from "./components/tangram/tangram.js";
+export { TpTikz } from "./components/tikz/tikz.js";
 export {
 	TpVideoPlayer,
 	type TpVideoPlayerErrorDetail,
 	type TpVideoPlayerEventDetail,
 } from "./components/video-player/video-player.js";
+
+export { TpWordCloud } from "./components/word-cloud/word-cloud.js";

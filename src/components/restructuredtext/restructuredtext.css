@@ -141,3 +141,8 @@
 	overflow: auto;
 	color: inherit;
 }
+
+.tp-restructuredtext-viewer-output.tp-light {
+	color: var(--tp-text-body);
+	background: var(--tp-background-color);
+}

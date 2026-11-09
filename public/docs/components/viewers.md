@@ -7,6 +7,12 @@ Viewer components render source content and expose tools for inspecting, editing
 :::::: tp-grid { min-width="10rem" gap="1.5rem" }
 
 ::: tp-center { intrinsic }
+:tp-icon:{name="latex-viewer" library="components" size="4em" aria-hidden="true"}
+
+[tp-latex-viewer](latex-viewer/index.md)
+:::
+
+::: tp-center { intrinsic }
 :tp-icon:{name="asciidoc-viewer" library="components" size="4em" aria-hidden="true"}
 
 [tp-asciidoc-viewer](asciidoc-viewer/index.md)

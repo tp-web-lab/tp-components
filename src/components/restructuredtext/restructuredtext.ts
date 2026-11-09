@@ -200,11 +200,12 @@ function loadHighlightJs(ownerDocument: Document): Promise<HighlightJsApi> {
 }
 
 /**
- * Renders inline or external reStructuredText as HTML.
+ * The custom `<tp-restructuredtext>` element renders reStructuredText documents.
  *
  * The browser runtime and the Docutils package are loaded lazily when the first
  * document is rendered.
  *
+ * @summary Renders reStructuredText documents.
  * @tagname tp-restructuredtext
  * @attr {string} src = "" - URL of an external reStructuredText source file.
  * @attr {boolean} doctest = false - Runs standard Python doctest blocks and reports their result.

@@ -1,0 +1,129 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[id=dragdrop-board,data-dragdrop-demo,data-allow-script]{
+  Drag a task to \textbf{To do} or \textbf{Done}, including an empty column. The Move button sends a task to the other column without dragging.
+
+  Keyboard: focus a card, press Enter, use the arrow keys to choose another card, then press Enter to drop before or after it. Escape cancels.
+
+  \wcTpGrid[min-width=16rem,gap=1rem]{
+    \wcTpBox[data-zone=To do,role=group,aria-label=To do,style=min-height: 12rem;]{
+      \subsection*{To do}
+      \wcTpStack[gap=0.5rem,data-tasks]{
+        \wcTpBox[data-task,aria-label=Write the introduction]{
+          Write the introduction
+
+          \wcTpButton[data-move,size=s,aria-label=Move Write the introduction to the other column]{Move}
+        }
+        \wcTpBox[data-task,aria-label=Review the examples]{
+          Review the examples
+
+          \wcTpButton[data-move,size=s,aria-label=Move Review the examples to the other column]{Move}
+        }
+      }
+    }
+    \wcTpBox[data-zone=Done,role=group,aria-label=Done,style=min-height: 12rem;]{
+      \subsection*{Done}
+      \wcTpStack[gap=0.5rem,data-tasks]{
+        \wcTpBox[data-task,aria-label=Choose a title]{
+          Choose a title
+
+          \wcTpButton[data-move,size=s,aria-label=Move Choose a title to the other column]{Move}
+        }
+      }
+    }
+  }
+  \wcP[data-demo-status,role=status,aria-live=polite]{Move a task to change its column.}
+  \rawhtml|<tp-dragdrop root="#dragdrop-board" items="[data-task]"></tp-dragdrop>|
+  \wcScript[src=/docs/components/dragdrop/examples/task-board.js]||
+}
+\end{document}
+
+% !tp-example Sortable list
+\documentclass{article}
+\begin{document}
+\wcTpBox[id=dragdrop-sortable,data-sortable-demo,data-allow-script]{
+  Arrange these steps in the order you prefer. Drag an entry above or below another entry, or use its Up and Down buttons.
+
+  Keyboard: Tab to an entry, press Enter or Space to grab it, use the arrow keys to choose a position, then press Enter or Space to drop. Escape cancels.
+
+  \wcOl[aria-label=Publishing steps]{
+    \wcLi[aria-label=Publish the document]{
+      \wcTpBox{
+        \wcTpCluster[justify=space-between]{
+          \wcSpan*{Publish the document}
+          \wcTpButtonGroup{
+            \wcTpIconButton[name=arrow-up,data-direction=up,label=Move Publish the document up]{}
+            \wcTpIconButton[name=arrow-down,data-direction=down,label=Move Publish the document down]{}
+          }
+        }
+      }
+    }
+    \wcLi[aria-label=Write a draft]{
+      \wcTpBox{
+        \wcTpCluster[justify=space-between]{
+          \wcSpan*{Write a draft}
+          \wcTpButtonGroup{
+            \wcTpIconButton[name=arrow-up,data-direction=up,label=Move Write a draft up]{}
+            \wcTpIconButton[name=arrow-down,data-direction=down,label=Move Write a draft down]{}
+          }
+        }
+      }
+    }
+    \wcLi[aria-label=Review the content]{
+      \wcTpBox{
+        \wcTpCluster[justify=space-between]{
+          \wcSpan*{Review the content}
+          \wcTpButtonGroup{
+            \wcTpIconButton[name=arrow-up,data-direction=up,label=Move Review the content up]{}
+            \wcTpIconButton[name=arrow-down,data-direction=down,label=Move Review the content down]{}
+          }
+        }
+      }
+    }
+    \wcLi[aria-label=Plan the document]{
+      \wcTpBox{
+        \wcTpCluster[justify=space-between]{
+          \wcSpan*{Plan the document}
+          \wcTpButtonGroup{
+            \wcTpIconButton[name=arrow-up,data-direction=up,label=Move Plan the document up]{}
+            \wcTpIconButton[name=arrow-down,data-direction=down,label=Move Plan the document down]{}
+          }
+        }
+      }
+    }
+  }
+  \wcTpButton[data-reset,outlined]{Reset order}
+  \wcP[data-sort-status,role=status,aria-live=polite]{The list is ready to reorder.}
+  \rawhtml|<tp-dragdrop root="#dragdrop-sortable" items="ol > li"></tp-dragdrop>|
+  \wcScript[src=/docs/components/dragdrop/examples/sortable-list.js]||
+}
+\end{document}
+
+% !tp-example Tree drag and drop
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  Organize this project by dragging files or folders. Try moving \textbf{notes.md} into \textbf{Documentation}, then move \textbf{index.html} above \textbf{app.js}.
+
+  Drop in the middle of a folder row to move an item into it, or near the top or bottom of a row to insert it before or after that item. The tree highlights the destination. Moving a folder also moves its children.
+
+  Use the disclosure buttons to expand or collapse folders. Keyboard arrow keys navigate the tree; they do not perform drag and drop in this example.
+
+  \wcTpTree[draggable,selectable,guides,level=3,aria-label=Project files]{
+    \wcUl{
+      \wcLi[data-node-id=project]{Project \wcUl{
+  \wcLi[data-node-id=documentation]{Documentation \wcUl{
+  \wcLi[data-node-id=readme]{README.md}
+  \wcLi[data-node-id=guide]{guide.md}
+} }
+  \wcLi[data-node-id=source]{Source \wcUl{
+  \wcLi[data-node-id=app]{app.js}
+  \wcLi[data-node-id=index]{index.html}
+} }
+  \wcLi[data-node-id=notes]{notes.md}
+} }
+    }
+  }
+}
+\end{document}

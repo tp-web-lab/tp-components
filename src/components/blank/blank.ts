@@ -54,7 +54,9 @@ type OpenField =
 	| TpTimefield;
 
 /**
- * @summary displays a text, SVG or image answer in a focusable blank.
+ * The custom `<tp-blank>` element provides an answer slot for text, images or drawings.
+ *
+ * @summary Provides an answer slot for text, images or drawings.
  * @tagname tp-blank
  * @attr {string} aria-label = "" - Accessible name forwarded to the editing control; use it when the field has no visible label.
  * @attr {boolean} closed = false - Uses an answer-bank destination unless the question overrides the mode.
@@ -62,7 +64,7 @@ type OpenField =
  * @attr {string} name = "" - Name used by tp-fill-blank form data.
  * @attr {string} placeholder = "…" - Text displayed while the blank is empty.
  * @attr {boolean} disabled = false - Disables interaction.
-
+ *
  * @example
  * <tp-blank name="result" aria-label="Expected result"></tp-blank>
  * @cssprop [--tp-blank-filled-border-color=var(--tp-brand-stroke-mid)] Bottom border color of a blank after an answer has been filled in.

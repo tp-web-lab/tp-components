@@ -23,7 +23,9 @@ import { TpPlaygroundQuestion } from "../playground-question/playground-question
 import { TpPythonViewer } from "../python-viewer/python-viewer.js";
 
 /**
- * @summary checks a Python exercise using the viewer and an external test file.
+ * The custom `<tp-python-viewer-question>` element presents and grades Python programming exercises.
+ *
+ * @summary Presents and grades Python programming exercises.
  * @tagname tp-python-viewer-question
  * @accessibility Reuses TpQuestion's disclosure, actions and feedback tabs.
  * @keyboard {Enter / Space} Expands the question or activates a focused action.

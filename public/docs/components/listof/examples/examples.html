@@ -8,25 +8,6 @@
       </div>
     </div>
 
-    <div role="example" label="Attributes">
-      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
-      <p>Enter figure in selector to list the two figures. Clear the field to return to the empty default.</p>
-
-
-      <tp-stack>
-
-
-      <tp-cluster><tp-textfield data-setting="selector" label="selector" value="" placeholder="" clearable></tp-textfield></tp-cluster>
-      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
-      </tp-stack>
-      <tp-divider></tp-divider>
-      <h3>Preview</h3>
-      <tp-iframe id="attributes-frame" title="listof attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
-      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
-
-      <script type="module" src="/docs/components/listof/examples/attributes.js"></script>
-    </div>
-
     <div role="example" label="Notes, bibliography and glossary">
       <div data-tp-reference-scope="">
       <p>Read a note <tp-ref href="^method"></tp-ref>, consult a source <tp-ref href="@book"></tp-ref>, or look up <tp-ref href="%ecosystem"></tp-ref>. Compare another note <tp-ref href="^weather"></tp-ref>, then read the first note again <tp-ref href="^method"></tp-ref>.</p>

@@ -1,0 +1,10 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[data-intro-action=dialog,data-allow-script]{
+  \wcTpButton[id=intro-dialog-trigger,data-demo-trigger]{Open the confirmation dialog}
+  \wcTpDialog{}
+  \wcP[data-demo-status,role=status]{Try the dialog using its trigger.}
+  \wcScript[src=/docs/components/_shared/introduction-actions.js]||
+}
+\end{document}

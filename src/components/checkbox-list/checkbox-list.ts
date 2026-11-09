@@ -74,16 +74,16 @@ function toCounterStyle(value: string): TpCheckboxListCounterStyle | null {
 }
 
 /**
- * `<tp-checkbox-list>` turns a plain `<ul>` or `<ol>` into a checkbox list.
+ * The custom `<tp-checkbox-list>` element presents a list of independently selectable choices.
  *
- * @summary Transforms list items into checkbox options.
+ * @summary Presents a list of independently selectable choices.
  * @tagname tp-checkbox-list
  * @attr {string} name = "" - Checkbox group name used on generated inputs.
  * @attr {string} orientation = "vertical" - Item layout direction (`vertical` or `horizontal`).
  * @attr {string} label = "" - Visible accessible group label; no fieldset is created.
  * @attr {string} label-position = "top" - Group label position (`top`, `bottom`, `start`, or `end`).
  * @attr {string} value = "" - Comma-separated 1-based indexes of checked items (e.g. `"2,4"`).
-
+ *
  * @example
  * <tp-checkbox-list value="1,3">
  * <ul>

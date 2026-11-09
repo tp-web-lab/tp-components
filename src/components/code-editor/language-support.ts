@@ -2,7 +2,16 @@ import type { Extension } from "@codemirror/state";
 
 const loaded = new Map<string, Extension>();
 const pending = new Map<string, Promise<Extension>>();
+async function latexSupport(): Promise<Extension> {
+	const [{ StreamLanguage }, { stex }] = await Promise.all([
+		import("@codemirror/language"),
+		import("@codemirror/legacy-modes/mode/stex"),
+	]);
+	return StreamLanguage.define(stex);
+}
 const loaders: Record<string, () => Promise<Extension>> = {
+	latex: latexSupport,
+	stex: latexSupport,
 	css: async () => (await import("@codemirror/lang-css")).css(),
 	html: async () => (await import("@codemirror/lang-html")).html(),
 	javascript: async () =>

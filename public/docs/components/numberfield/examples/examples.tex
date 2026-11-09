@@ -1,0 +1,14 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpCluster{
+  \wcTpNumberfield[label=Quantity,value=3,min=0,max=10,clearable]{}
+  \wcTpNumberfield[label=Level,value=40,min=0,max=100,step=5,range,clearable]{}
+}
+\end{document}
+
+% !tp-example Inline named field
+\documentclass{article}
+\begin{document}
+Value: \wcTpNumberfield*[name=identifier,value=12,placeholder=Enter a value]{}
+\end{document}

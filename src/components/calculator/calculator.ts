@@ -27,7 +27,9 @@ import style from "./calculator.css?inline";
 import { calculate } from "./calculator-engine.js";
 
 /**
- * @summary Scientific calculator with an editable expression and degree/radian modes.
+ * The custom `<tp-calculator>` element provides a scientific calculator with an editable expression and degree/radian modes.
+ *
+ * @summary Provides a scientific calculator with an editable expression and degree/radian modes.
  * @tagname tp-calculator
  * @attr {"horizontal" | "vertical"} orientation = "horizontal" - Arrangement of the scientific and numeric keypads.
  * @event tp-calculator-result Emitted after a successful calculation.

@@ -14,7 +14,7 @@ import { TpBase } from "../base/base.js";
 import style from "./box.css?inline";
 
 /**
- * Simple box layout component, without Shadow DOM.
+ * The custom `<tp-box>` element wraps content in a configurable bordered box.
  *
  * @summary Wraps content in a configurable bordered box.
  * @tagname tp-box

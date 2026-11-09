@@ -163,8 +163,7 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
 }
 
 /**
- * `<tp-question>` is a base semantic container for question statements,
- * response widgets, feedback and solutions.
+ * The custom `<tp-question>` element organizes a question’s prompt, response, feedback and solution.
  *
  * The component enforces a `<dl><dt><dd>...</dd></dl>` source structure, then
  * renders an interactive layout with:
@@ -176,7 +175,7 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
  *
  * Panel toggles preserve content and keep at least one panel visible, as in the viewers.
  *
- * @summary Semantic base container for question content.
+ * @summary Organizes a question’s prompt, response, feedback and solution.
  * @tagname tp-question
  * @attr {string} src = "" - URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition.
  * @attr {string} mode = "mixed" - Blank mode: opened, closed, or mixed local choices.
@@ -187,7 +186,7 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
  * @attr {string} timing = "" - Optional nonzero time limit in strict hh:mm:ss format.
  * @attr {boolean} score = false - Displays the numerical score in submission feedback.
  * @attr {string} open = "" - Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.
-
+ *
  *   `detail: { value: unknown }`
  * @example
  * <tp-question>

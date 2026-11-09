@@ -1,0 +1,35 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  \wcTpCluster[justify=center,gap=0.5rem]{
+    \wcTpButton{Alpha}
+    \wcTpButton{Beta}
+    \wcTpButton{Gamma}
+  }
+}
+\end{document}
+
+% !tp-example Space between
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  \wcTpCluster[justify=space-between]{
+    \wcTpBadge{Start}
+    \wcTpBadge{End}
+  }
+}
+\end{document}
+
+% !tp-example Wrapping items
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=max-inline-size: 16rem]{
+  \wcTpCluster[gap=0.5rem]{
+    \wcTpButton{One}
+    \wcTpButton{Two}
+    \wcTpButton{Three}
+    \wcTpButton{Four}
+  }
+}
+\end{document}

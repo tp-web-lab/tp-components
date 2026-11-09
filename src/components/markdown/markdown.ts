@@ -93,7 +93,9 @@ export async function renderMarkdownRuntimeIn(
 }
 
 /**
- * @summary Markdown rendering component.
+ * The custom `<tp-markdown>` element renders Markdown documents.
+ *
+ * @summary Renders Markdown documents.
  * @tagname tp-markdown
  * @attr {string} src = "" - URL of a Markdown source file to fetch and render; relative paths resolve against the containing source document when available.
  * @example

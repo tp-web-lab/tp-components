@@ -113,7 +113,7 @@ import {
 export { TpRestructuredTextProject } from "./restructuredtext-project.js";
 
 /**
- * reStructuredText playground component.
+ * The custom `<tp-restructuredtext-playground>` element edits and renders a reStructuredText project.
  *
  * Provides a file-based playground that renders reStructuredText documents in the browser.
  *

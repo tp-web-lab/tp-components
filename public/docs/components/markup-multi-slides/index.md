@@ -1,42 +1,40 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="markup-multi-slides" library="components" size="1.25em"></tp-icon> Markup multi-slides
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-markup-multi-slides>` element implements the <tp-icon name="markup-multi-slides" library="components" size="1.25em"></tp-icon> Markup multi-slides functionality: presents multi-format pages as a responsive slide deck.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-markup-multi-slides>` element presents multi-format pages as a responsive slide deck.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-iframe src="/docs/components/markup-multi-slides/examples/introduction-frame.html" title="tp-markup-multi-slides — Basic usage" style="display: flow-root; inline-size: auto; height: 32rem;"></tp-iframe>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-markup-multi-slides" src="/docs/components/markup-multi-slides/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
+### Configuration
+
 The presentation always includes a horizontal **Manual / Timing / Narration / Note** menu, including in fullscreen. The selected mode follows the `auto` attribute: Manual removes it, Timing sets `auto="timing"`, and Narration sets `auto="notes"`. The URL parameter `mode=manual`, `mode=timing` or `mode=notes` restores the selected mode on loading; changing it through the menu updates this parameter without reloading. Other URL parameters and the slide route are preserved. Automatic playback still starts with Play. Note toggles only the current slide's `tp-slide-note` and is disabled when that slide has no note. Notes remain hidden until opened.
-
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Manual / Timing / Narration | Select manual navigation, timed steps or narrated notes; the active mode is highlighted. |
-| Note | Open or close the current slide's notes; unavailable on slides without notes. |
-| Next arrow / click in slide content | Reveal the next progressive step, then advance to the next slide. |
-| Previous arrow / right-click in slide content | Hide the previous step, or return to the preceding slide with its steps revealed. |
-| Play automatically / Pause automatic playback | When automatic mode is enabled, start playback or pause it without losing the current voice or remaining interval. |
-| Stop automatic playback | Cancel automatic playback and keep the current slide. |
-| Speaker notes, when supplied | Open the notes panel or use its speech controls without advancing the slide. |
-| Slide slider | Drag to select a slide directly; its progressive content starts again from the beginning. |
-| Navigation menu, when shown | Choose a slide directly and stop automatic playback. |
-| Links, buttons and fields inside slides | Keep their usual behavior; interacting with them does not advance the slide. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> / <kbd>ArrowRight</kbd> outside editing controls | Reveal the next step or advance to the next slide. |
-| <kbd>ArrowLeft</kbd> / <kbd>Backspace</kbd> outside editing controls | Hide the preceding step or return to the previous slide. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on the slide slider | Choose a slide. |
-| <kbd>Home</kbd> / <kbd>End</kbd> on the slide slider | Choose the first or last slide. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Automatic playback
 
@@ -73,7 +71,7 @@ Slide content uses relative `em` dimensions for headings, code, tables, content 
 
 For custom slide layouts, use `em` for image sizes, gaps and padding that should grow with the text, and `%` or viewport limits to keep content within the slide. Explicit author dimensions and component-specific sizes remain in effect; entering fullscreen does not replace them automatically. Global reset and design-token defaults remain unchanged outside slides.
 
-### Author directives
+### Authoring
 
 `<tp-markup-multi-slides>` specializes `<tp-markup-multi-pages>`. It uses the same toolbar, splitter, sidebar, parsers, source display, fallback page, attributes, and full-window layout. Each linked document is one slide and can contain any markup supported by its format. The sidebar is hidden by default; add `menu` to show it initially.
 
@@ -81,7 +79,7 @@ Its only visual differences are the responsive font size and the bottom navigati
 
 The slider has one native tick mark per slide, supplied by a `datalist` through the numberfield's `list` attribute. Marks update when the slide count changes; their appearance depends on the browser.
 
-#### Responsive content size
+### Responsive content size
 
 The content font size adapts continuously to the width of the presentation viewport:
 
@@ -99,7 +97,7 @@ The size is therefore limited to a minimum of `1rem` and a maximum of `2.5rem`. 
 
 CSS recalculates this value automatically whenever the presentation viewport changes size; no reload or JavaScript calculation is required. In an embedded example, `vw` follows the iframe viewport. In fullscreen mode, it follows the fullscreen viewport.
 
-#### Progressive content
+### Progressive content
 
 Add `data-slide-step` to content that must be revealed progressively. Elements without this attribute remain visible from the beginning. Step numbers determine the reveal order, and elements with the same number are revealed together.
 
@@ -120,369 +118,7 @@ A click in the slide content, the `Enter` key, the `Space` key, the right arrow 
 ></tp-markup-multi-slides>
 ```
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Move between the slides rendered from the markup source.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Slides navigation menu
-: Open the slide navigation menu and use it to move between the supplied slides.
-
-Automatic notes
-: Press Play to read the speaker notes; each clic trigger reveals a step or opens the next slide. Try Pause, Resume and Stop.
-
-Timed steps
-: Press Play to reveal each progressive step and change slides every five seconds. Pause preserves the remaining interval; manual navigation stops playback.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpMarkupMultiSlides -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>auto</code> | <code>&quot;&quot; \| &quot;notes&quot; \| &quot;timing&quot;</code> | <code>&quot;&quot;</code> | Enables automatic playback controls. notes follows the current tp-text-to-speech[data-slide-notes] and its [trigger=clic] commands; timing advances each progressive step on a clock. Absent or invalid values keep manual navigation. |
-  | <code>timing</code> | <code>number</code> | <code>5000</code> | Positive integer milliseconds per progressive step in timing mode, also used when notes are absent or finished. |
-  | <code>brand</code> | <code>string</code> | <code>&quot;tp-default&quot;</code> | Legacy brand preset property, such as tp-default. Attribute-driven styling is currently inactive; use the toolbar color control. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>git</code> | <code>string</code> | <code>&quot;&quot;</code> | Repository URL assigned to the toolbar source link when the document shell is created. Set before connecting the component. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Title displayed in the center of the document toolbar. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>langs</code> | <code>string</code> | <code>&quot;&quot;</code> | Comma-separated language codes. The selector is hidden unless at least two distinct codes are declared. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>logo</code> | <code>string</code> | <code>&quot;&quot;</code> | Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>menu</code> | <code>boolean</code> | <code>false</code> | Opens the navigation sidebar when present; the toolbar Menu button toggles this attribute. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>repository</code> | <code>string</code> | <code>&quot;/docs&quot;</code> | Root path containing the sidebar, cover and linked documents. The component selects the corresponding HTML, Markdown, AsciiDoc or reStructuredText files. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>theme</code> | <code>TpMarkupMultiPagesTheme</code> | <code>&quot;&quot;</code> | Legacy light, dark or auto property. Attribute-driven styling is currently inactive; use the toolbar theme control. *(inherited from <code>tp-markup-multi-pages</code>)* |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-markup-multi-slides>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>pauseAuto</code> | <code>pauseAuto(): void</code> | Freezes the current voice or the remaining clock interval. |
-  | <code>playAuto</code> | <code>playAuto(): void</code> | Starts or resumes the configured automatic playback after user activation. |
-  | <code>stopAuto</code> | <code>stopAuto(): void</code> | Cancels automatic playback while retaining the current slide and reveals. |
-  [Public methods of `TpMarkupMultiSlides`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-markup-multi-slides>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-slide-content-padding</code> | <code>clamp(1em, 3vw, 3em)</code> | = clamp(1em, 3vw, 3em) - Inline content padding. |
-  | <code>&#45;&#45;tp-slide-content-width</code> | <code>65em</code> | = 65em - Maximum content width. |
-  | <code>&#45;&#45;tp-slide-font-size</code> | <code>clamp(1rem, calc(0.65rem + 1.15vw), 2.5rem)</code> | = clamp(1rem, calc(0.65rem + 1.15vw), 2.5rem) - Responsive slide content font size. |
-  | <code>&#45;&#45;tp-slide-image-height</code> | <code>13em</code> | = 13em - Maximum image height. |
-  | <code>&#45;&#45;tp-slide-image-height-small</code> | <code>10em</code> | = 10em - Maximum image height below 650px. |
-  | <code>&#45;&#45;tp-slide-svg-height</code> | <code>22em</code> | = 22em - Maximum height of included SVG illustrations. |
-  | <code>&#45;&#45;tp-slide-title-size</code> | <code>2.488em</code> | = 2.488em - Level-one title size relative to slide text. |
-  [CSS properties of `<tp-markup-multi-slides>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_markup-multi-slides.TpMarkupMultiSlides.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -509,12 +145,47 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Move between the slides rendered from the markup source.
+
+Slides navigation menu
+: Open the slide navigation menu and use it to move between the supplied slides.
+
+Automatic notes
+: Press Play to read the speaker notes; each clic trigger reveals a step or opens the next slide. Try Pause, Resume and Stop.
+
+Timed steps
+: Press Play to reveal each progressive step and change slides every five seconds. Pause preserves the remaining interval; manual navigation stops playback.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-markup-multi-slides>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-markup-multi-pages
@@ -537,11 +208,11 @@ All tp-components used by `<tp-markup-multi-slides>` are loaded automatically by
 @summary Reads textual component content aloud with the Web Speech API.
 -->
 
-- [`<tp-markup-multi-pages>`](../markup-multi-pages/index.md) : Multi-page documentation with support for multiple markup languages.
-- [`<tp-menu>`](../menu/index.md) : Accessible menu component.
-- [`<tp-numberfield>`](../numberfield/index.md) : Numeric field with an optional native range slider.
-- [`<tp-slide-note>`](../slide-note/index.md) : Collapsible speaker notes with speech playback and presentation docking.
-- [`<tp-text-to-speech>`](../text-to-speech/index.md) : Reads textual component content aloud with the Web Speech API.
+- [`<tp-markup-multi-pages>`](#/components/markup-multi-pages/index.md) : Multi-page documentation with support for multiple markup languages.
+- [`<tp-menu>`](#/components/menu/index.md) : Accessible menu component.
+- [`<tp-numberfield>`](#/components/numberfield/index.md) : Numeric field with an optional native range slider.
+- [`<tp-slide-note>`](#/components/slide-note/index.md) : Collapsible speaker notes with speech playback and presentation docking.
+- [`<tp-text-to-speech>`](#/components/text-to-speech/index.md) : Reads textual component content aloud with the Web Speech API.
 
 ### External
 

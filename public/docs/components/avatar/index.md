@@ -1,33 +1,42 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="avatar" library="components" size="1.25em"></tp-icon> Avatar
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-avatar>` element implements the Avatar functionality: displays an image, initials or an icon in a circle or square.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-avatar>` element displays an image, initials or an icon in a circle or square.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-cluster>
   <tp-avatar src="/docs/medias/logos/logo-tp.svg" label="tp-components"></tp-avatar>
   <tp-avatar initials="AL" label="Ada Lovelace"></tp-avatar>
   <tp-avatar icon="user" shape="square" label="Guest"></tp-avatar>
 </tp-cluster>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-avatar" src="/docs/components/avatar/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Reading | An avatar identifies a person or entity. It is a static image, not a button: it has no mouse or keyboard action. Its accessible label is announced by screen readers when provided. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| Component itself | No dedicated keyboard action. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Set `src` for an image, `initials` for text, or `icon` and `library` for a `tp-icon`. The priority is image, initials, then icon. A failed image automatically falls back to initials or the icon (default: `user` from the `tp` library). Changing `src` retries image loading.
 
@@ -37,282 +46,7 @@ Use `shape="circle"` (default) or `shape="square"`. The shared sizes `xxs`, `xs`
 
 Provide `label` with the full name when the avatar conveys identity. Omit it when adjacent text already identifies the person: the avatar is then decorative. Initials are treated as plain text, not HTML. Content is configured through attributes; child nodes are reserved for the generated rendering.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Compare an image, initials and a fallback icon, displayed in circular and square avatars.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-HTML
-: ::include{examples/examples.html}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-
-<!-- tp-docgen:api TpAvatar -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>icon</code> | <code>string</code> | <code>&quot;user&quot;</code> | Fallback tp-icon name. |
-  | <code>initials</code> | <code>string</code> | <code>&quot;&quot;</code> | Initials displayed when no image is available. |
-  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Accessible name; without a label the avatar is decorative. |
-  | <code>library</code> | <code>string</code> | <code>&quot;tp&quot;</code> | Icon library. |
-  | <code>shape</code> | <code>TpAvatarShape</code> | <code>&quot;circle&quot;</code> | Avatar shape (`circle` or `square`). |
-  | <code>size</code> | <code>TpSizeType</code> | <code>&quot;m&quot;</code> | Avatar size (`xxs`, `xs`, `s`, `m`, `l`, `xl`, or `xxl`). |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Image URL; falls back to initials or an icon if loading fails. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-avatar>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpAvatar`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-avatar>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-avatar>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_avatar.TpAvatar.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -339,12 +73,41 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Compare an image, initials and a fallback icon, displayed in circular and square avatars.
+
+Initials fallback
+: Inspect the initials displayed when no portrait is supplied.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-avatar>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -355,8 +118,8 @@ All tp-components used by `<tp-avatar>` are loaded automatically by this compone
 @summary SVG icon component with inline, URL, and registry sources.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 
 ### External
 

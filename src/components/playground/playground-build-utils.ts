@@ -25,6 +25,7 @@ export type TpSourceKind =
 	| "css"
 	| "json"
 	| "markdown"
+	| "latex"
 	| "prolog"
 	| "text";
 
@@ -647,6 +648,8 @@ export function inferSourceKind(path: string): TpSourceKind {
 	if (hasExtension(path, [".json"])) {
 		return "json";
 	}
+
+	if (hasExtension(path, [".tex", ".latex"])) return "latex";
 
 	if (hasExtension(path, [".md"])) {
 		return "markdown";

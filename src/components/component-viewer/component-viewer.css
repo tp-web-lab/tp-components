@@ -22,3 +22,10 @@ tp-component-viewer .tp-component-viewer-demo [data-component-preview] > .tp-com
 .tp-component-viewer-layout > section[hidden] { display: none; }
 
 tp-component-viewer .tp-component-viewer-api > .tp-component-viewer-preview > :is(.tp-markup-viewer-toolbar, .tp-markup-viewer-lite-toolbar) { display: none; }
+
+.tp-component-viewer-demo > [data-component-source-toggle] { margin-block: .5rem; }
+.tp-component-viewer-demo > [data-component-source][hidden] { display: none; }
+.tp-component-viewer-demo > [data-component-source] { min-inline-size: 0; margin-block-end: 1rem; }
+
+.tp-component-viewer-table[data-api-table="methods"] table { display: table; table-layout: fixed; inline-size: 100%; }
+.tp-component-viewer-table[data-api-table="methods"] :is(th, td) { inline-size: 50%; white-space: normal; overflow-wrap: anywhere; }

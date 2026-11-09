@@ -35,7 +35,7 @@ type TpFillBlankInput = BlankField;
 type TpFillBlankSerializableValue = Record<string, string>;
 
 /**
- * `<tp-fill-blank>` manages blanks embedded in text content.
+ * The custom `<tp-fill-blank>` element collects answers in text fields and rich-content blanks.
  *
  * Supported blanks:
  * - `<tp-textfield>` and other library fields exposing a light DOM `<input>` or `<textarea>`
@@ -50,7 +50,7 @@ type TpFillBlankSerializableValue = Record<string, string>;
  * It is not an HTML attribute: `value="..."` on `<tp-fill-blank>` has no effect.
  * This component collects values; it does not grade answers.
  *
- * @summary manages inline fields and rich blanks and exposes their values as `FormData`.
+ * @summary Collects answers in text fields and rich-content blanks.
  * @tagname tp-fill-blank
  * @event tp-fill-blank-change Fired in response to an input or change event from a blank; bubbles and crosses shadow boundaries. The detail contains a plain object of values and a FormData snapshot. For duplicate names, the object keeps the last value while FormData preserves all entries.
  * @eventdetail tp-fill-blank-change { value: Record<string, string>; formData: FormData }

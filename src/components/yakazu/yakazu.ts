@@ -46,9 +46,9 @@ import { TpBase } from "../base/base.js";
 import style from "./yakazu.css?inline";
 
 /**
- * Web component for interactive Yakazu puzzles.
- * Uses lightDOM to maintain consistent styling with page content.
+ * The custom `<tp-yakazu>` element presents a Yakazu number puzzle with pencil marks, validation and undo controls.
  *
+ * @summary Presents a Yakazu number puzzle with pencil marks, validation and undo controls.
  * @element tp-yakazu
  * @tagname tp-yakazu
  * @example

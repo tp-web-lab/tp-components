@@ -1,35 +1,41 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="dir" library="components" size="1.25em"></tp-icon> Direction switcher
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-dir>` element implements the <tp-icon name="dir" library="components" size="1.25em"></tp-icon> Direction switcher functionality: parent-scoped reading-direction switcher.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
-<p>The reading direction of this section can be changed.</p>
-<p>اس حصے کی پڑھنے کی سمت تبدیل کی جا سکتی ہے۔</p>
+<div class="tp-component-doc-intro">
+
+The custom `<tp-dir>` element switches the reading direction of the surrounding content.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-box>
   <tp-dir></tp-dir>
   <p>Use the direction button to switch this paragraph between left-to-right and right-to-left layout.</p>
 </tp-box>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-dir" src="/docs/components/dir/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Using the component | Activate the direction button to change the reading direction of the associated content. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Focused controls | Use each control’s standard keyboard interaction.  |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 `<tp-dir>` displays a direction button and applies `dir="ltr"` or `dir="rtl"` to its target. In `auto` mode, it follows the document direction resolved from the root `<html>` `dir` and `lang` attributes. RTL detection supports language tags such as `ar` or `he`, and documentation region codes used as folders or flag codes, such as `ma`.
 
@@ -59,390 +65,7 @@ Use `anchor` to target a specific element:
 <tp-dir anchor="#direction-preview"></tp-dir>
 ```
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Switch the reading direction and observe the layout of the example text.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Auto mode
-: Observe the controller following the document’s reading direction in automatic mode.
-
-Change event
-: Change the dir setting and inspect the emitted tp-dir-change event.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpDir -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>anchor</code> | <code>string</code> | <code>&quot;&quot;</code> | CSS selector used as the explicit element that receives the selected direction. |
-  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Disables the direction trigger. |
-  | <code>mode</code> | <code>string</code> | <code>&quot;auto&quot;</code> | Reading-direction mode (`ltr`, `rtl`, `auto`). In `auto`, RTL is inferred from language or supported region codes. |
-  | <code>size</code> | <code>string</code> | <code>&quot;m&quot;</code> | Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl. |
-  | <code>variant</code> | <code>string</code> | <code>&quot;neutral&quot;</code> | Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-dir>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpDir`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-dir-change</code> | <code>&#123; mode: &quot;ltr&quot; \| &quot;rtl&quot; \| &quot;auto&quot;; dir: &quot;ltr&quot; \| &quot;rtl&quot;; anchor: string; target: HTMLElement &#125;</code> | Emitted when the reading direction applied to a target changes. |
-  [Events emitted by `<tp-dir>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-dir>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_dir.TpDir.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -469,12 +92,44 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Switch the reading direction and observe the layout of the example text.
+
+Auto mode
+: Observe the controller following the document’s reading direction in automatic mode.
+
+Change event
+: Change the dir setting and inspect the emitted tp-dir-change event.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-dir>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -497,11 +152,11 @@ All tp-components used by `<tp-dir>` are loaded automatically by this component 
 @summary Accessible icon button component.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-divider>`](../divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
-- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
-- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-divider>`](#/components/divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
+- [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
 
 ### External
 

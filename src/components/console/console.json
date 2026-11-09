@@ -2,7 +2,7 @@
   "tagname": "tp-console",
   "classname": "TpConsole",
   "superclass": "TpBase",
-  "description": "Visual console for playground output.",
+  "description": "Provides a visual console for playground output.",
   "examples": [
     {
       "label": "Example 1",
@@ -129,7 +129,7 @@
   "cssproperties": [
     {
       "name": "--tp-console-bg",
-      "default": "#0d1117",
+      "default": "var(--tp-paper-color)",
       "description": "Console background."
     },
     {
@@ -144,7 +144,7 @@
     },
     {
       "name": "--tp-console-border",
-      "default": "#30363d",
+      "default": "var(--tp-neutral-stroke-mid)",
       "description": "Console border color."
     },
     {
@@ -154,7 +154,7 @@
     },
     {
       "name": "--tp-console-color",
-      "default": "#e6edf3",
+      "default": "var(--tp-text-body)",
       "description": "Console text color."
     },
     {
@@ -179,7 +179,7 @@
     },
     {
       "name": "--tp-console-entry-border",
-      "default": "#21262d",
+      "default": "var(--tp-neutral-stroke-soft)",
       "description": "Entry separator color."
     },
     {
@@ -209,42 +209,37 @@
     },
     {
       "name": "--tp-console-object-bg",
-      "default": "#11161d",
+      "default": "var(--tp-paper-color)",
       "description": "Object preview background."
     },
     {
       "name": "--tp-console-object-border",
-      "default": "#30363d",
+      "default": "var(--tp-neutral-stroke-mid)",
       "description": "Object preview border color."
     },
     {
       "name": "--tp-console-object-key-color",
-      "default": "#c9d1d9",
+      "default": "var(--tp-text-body)",
       "description": "Object key color."
     },
     {
-      "name": "--tp-console-object-marker-color",
-      "default": "#8b949e",
-      "description": "Color of the triangle used to expand or collapse an object preview."
-    },
-    {
       "name": "--tp-console-object-panel-bg",
-      "default": "#0f141a",
+      "default": "var(--tp-paper-color)",
       "description": "Object tree panel background."
     },
     {
       "name": "--tp-console-object-separator-color",
-      "default": "#8b949e",
+      "default": "var(--tp-text-body)",
       "description": "Color of the separator between a property name and its value in expanded objects."
     },
     {
       "name": "--tp-console-object-summary-bg",
-      "default": "#161b22",
+      "default": "var(--tp-neutral-fill-softer)",
       "description": "Background of the clickable summary row of an object preview."
     },
     {
       "name": "--tp-console-object-summary-color",
-      "default": "#c9d1d9",
+      "default": "var(--tp-text-body)",
       "description": "Object summary text color."
     },
     {
@@ -274,13 +269,17 @@
     {
       "name": "tp-object-tree",
       "summary": "Specialized tree for inspecting JavaScript values."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
     }
   ],
   "credits": [],
   "userHelp": {
     "displayName": "Console",
-    "introduction": "The custom `<tp-console>` element implements the <tp-icon name=\"console\" library=\"components\" size=\"1.25em\"></tp-icon> Console functionality: visual console for playground output.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Messages | Read output and errors. |\n| Structured values | Expand or collapse values to inspect their contents. |\n| Copy button | Copy the console text. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-console>` element provides a visual console for playground output.",
+    "interactions": "The console starts in dark mode. Its Theme button selects light, dark or automatic appearance for this console only.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Messages | Read output and errors. |\n| Structured values | Expand or collapse values to inspect their contents. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

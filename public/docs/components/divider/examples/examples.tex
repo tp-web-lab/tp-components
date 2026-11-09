@@ -1,0 +1,45 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  Primary content group.
+
+  \wcTpDivider{}
+  Secondary content group.
+
+}
+\end{document}
+
+% !tp-example Custom style
+\documentclass{article}
+\begin{document}
+\rawhtml|<style>
+      .divider-custom-style tp-divider {
+        --tp-divider-color: var(--tp-brand-fill-mid);
+        --tp-divider-thickness: 4px;
+        --tp-divider-margin-block: 0.75rem;
+      }
+    </style>|
+
+\wcTpBox{
+  \wcDiv[class=divider-custom-style]{
+    Before the custom divider.
+
+    \wcTpDivider{}
+  }
+  After the custom divider.
+
+}
+\end{document}
+
+% !tp-example Dropdown menu
+\documentclass{article}
+\begin{document}
+\wcTpDropdown[open]{
+  \wcUl{
+    \wcLi{Load}
+    \wcTpDivider{}
+    \wcLi{Save}
+  }
+}
+\end{document}

@@ -1,0 +1,14 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[data-page-navigation,data-allow-script]{
+  Use the grouped buttons to change the current page.
+
+  \wcTpButtonGroup[attached,aria-label=Page navigation]{
+    \wcTpButton[data-previous,disabled]{Previous}
+    \wcTpButton[data-next]{Next}
+  }
+  \wcP[data-page-status,role=status]{Page 1 of 5}
+  \wcScript[src=/docs/components/button-group/examples/page-navigation.js]||
+}
+\end{document}

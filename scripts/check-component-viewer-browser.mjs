@@ -5,10 +5,10 @@ try {
  const page = await browser.newPage({viewport:{width:1440,height:1000}});
  await page.goto(`${process.env.TP_VIEWER_TEST_URL ?? 'http://127.0.0.1:4181'}/docs/components/component-viewer/demo.html`);
  await page.locator('[data-component-mode] input').first().waitFor();
- assert.equal(await page.locator('[data-component-title]').innerText(), 'tp-button Doc');
+ assert.equal(await page.locator('[data-component-title]').innerText(), 'tp-button');
  assert.equal(await page.locator('.tp-component-viewer-demo').isVisible(), false);
  await page.locator('[data-component-mode] input').nth(1).check();
- assert.equal(await page.locator('[data-component-title]').innerText(), 'tp-button Demo');
+ assert.equal(await page.locator('[data-component-title]').innerText(), 'tp-button');
  assert.equal(await page.locator('.tp-component-viewer-docs').isVisible(), false);
  const frame = page.frameLocator('tp-component-viewer iframe');
  await frame.locator('tp-button button, tp-button a').waitFor();
@@ -55,7 +55,7 @@ try {
  await page.screenshot({path:'/tmp/tp-component-viewer.png',fullPage:true});
  await page.locator('[data-component-mode] input').first().check();
  await page.locator('tp-component-viewer').evaluate(element => element.setAttribute('tag','tp-code-editor'));
- await page.getByRole('heading',{name:'tp-code-editor Doc',exact:true}).waitFor();
+ await page.getByRole('heading',{name:'tp-code-editor',exact:true}).waitFor();
  await page.locator('.tp-component-viewer-docs').getByRole('tab',{name:'Commands',exact:true}).click();
  const commandPanel = page.locator('.tp-component-viewer-docs [role="tabpanel"]:visible');
  assert.match(await commandPanel.innerText(), /Copy the entire editor content/);
@@ -64,7 +64,7 @@ try {
  assert.equal(await commandPanel.locator('tbody tr').count(), 23);
  await page.screenshot({path:'/tmp/tp-component-viewer-commands.png',fullPage:true});
  await page.locator('[data-component-mode] input').nth(2).check();
- assert.equal(await page.locator('[data-component-title]').innerText(), 'tp-code-editor API');
+ assert.equal(await page.locator('[data-component-title]').innerText(), 'tp-code-editor');
  const apiFrame = page.frameLocator('.tp-component-viewer-api iframe');
  await apiFrame.getByRole('heading', {name:'Class TpCodeEditor',exact:true}).waitFor();
  await page.locator('[data-component-mode] input').first().check();
@@ -90,7 +90,7 @@ try {
  await page.locator('#context-help-target').hover();
  await page.keyboard.press('Control+?');
  const help = page.locator('#tp-component-help-drawer tp-component-viewer');
- await help.getByRole('heading', {name:'tp-button Doc',exact:true}).waitFor();
+ await help.getByRole('heading', {name:'tp-button',exact:true}).waitFor();
  await help.locator('[data-component-mode] input').nth(1).check();
  const helpFrame = page.frameLocator('#tp-component-help-drawer tp-component-viewer iframe');
  await helpFrame.getByRole('button', {name:'My contextual instance',exact:true}).waitFor();
@@ -112,7 +112,7 @@ try {
  await page.locator('body > tp-component-viewer [data-component-mode] input').nth(1).check();
  const embedded = page.frameLocator('body > tp-component-viewer .tp-component-viewer-demo iframe');
  await embedded.getByRole('link', {name:'Read the usage guide'}).press('Control+?');
- await help.getByRole('heading',{name:'tp-button Doc',exact:true}).waitFor();
+ await help.getByRole('heading',{name:'tp-button',exact:true}).waitFor();
  assert.equal(await embedded.locator('#tp-component-help-drawer').count(), 0);
  for (const selector of ['tp-color','tp-theme','[data-tp-drawer-expand]','[data-tp-drawer-collapse]','[data-tp-drawer-close]']) {
    assert.equal(await page.locator('#tp-component-help-drawer [data-tp-drawer-header]').locator(selector).isVisible(), true);

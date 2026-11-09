@@ -37,7 +37,9 @@ function escapeHtml(value: string): string {
 }
 
 /**
- * @summary Turtle DSL rendering component.
+ * The custom `<tp-turtle>` element provides a turtle DSL rendering component.
+ *
+ * @summary Provides a turtle DSL rendering component.
  * @tagname tp-turtle
  * @attr {string} download-name = "" - Filename for SVG downloads. The .svg extension is appended when missing; empty uses turtle.svg.
  * @attr {string} save-label = "" - Text of the SVG download button; empty uses Save SVG.

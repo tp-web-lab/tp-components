@@ -80,7 +80,7 @@ const RANK_NAMES: Record<string, string> = {
 };
 
 /**
- * Displays a playable Klondike solitaire.
+ * The custom `<tp-solitaire>` element displays a playable Klondike solitaire.
  *
  * @summary Displays a playable Klondike solitaire.
  * @tagname tp-solitaire

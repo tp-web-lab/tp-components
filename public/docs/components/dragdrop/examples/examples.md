@@ -56,48 +56,6 @@ Move a task to change its column.
 ::::::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-::::: tp-stack
-:::: tp-cluster
-::: tp-textfield { data-setting="handle" label="handle" value placeholder clearable }
-:::
-
-::: tp-textfield { data-setting="items" label="items" value placeholder clearable }
-:::
-
-::: tp-textfield { data-setting="root" label="root" value placeholder clearable }
-:::
-::::
-
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
-
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="dragdrop attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/dragdrop/examples/attributes.js" }
-:::
-```
-
 ``` example {label="Sortable list"}
 ::::::::: tp-box { id="dragdrop-sortable" data-sortable-demo data-allow-script }
 Arrange these steps in the order you prefer. Drag an entry above or below another entry, or use its Up and Down buttons.

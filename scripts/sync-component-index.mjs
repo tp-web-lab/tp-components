@@ -26,6 +26,12 @@ for (const match of current.matchAll(/^\| (?:<tp-icon\b[^>]*><\/tp-icon> )?\[`<(
 }
 
 const updatedDescriptions = {
+  'markup-blog': 'Paginated mixed-markup articles with category and tag filters and a reader.',
+  'html-blog': 'Paginated html articles with category and tag filters and a reader.',
+  'markdown-blog': 'Paginated markdown articles with category and tag filters and a reader.',
+  'asciidoc-blog': 'Paginated asciidoc articles with category and tag filters and a reader.',
+  'restructuredtext-blog': 'Paginated restructuredtext articles with category and tag filters and a reader.',
+
   numberfield: 'Numeric field with an optional native range slider.',
   diagram: 'Accessible diagrams rendered from Mermaid source.',
   asciidoc: 'Semantic AsciiDoc rendering component.',
@@ -48,7 +54,7 @@ const updatedDescriptions = {
 const groupDescriptions = {
   Base: 'Shared foundations used to build higher-level components.',
   Controllers: 'Direction, color, language, fullscreen, and theme controls.',
-  Documentations: 'Single-page and multi-page documentation renderers.',
+  Documentations: 'Single-page and multi-page documentation renderers and markup blogs.',
   Editors: 'Interactive editors for code, prose, graphs, and spreadsheets.',
   Feedbacks: 'Status, messages, and runtime feedback.',
   Files: 'File trees, file systems, includes, and embedded documents.',
@@ -65,7 +71,8 @@ const groupDescriptions = {
   References: 'Notes, bibliography, glossary, inline references and generated lists.',
   Simulators: 'Interactive automata, circuits, optics, and query simulations.',
   Time: 'Clocks, alarms, timers, and chronometers.',
-  Utilities: 'Reusable interaction and media helpers.',
+  Medias: 'Audio and video playback, recording, image comparison, media export and speech tools.',
+  Utilities: 'Reusable interaction and content helpers.',
   Viewers: 'Rendering and inspection of structured content.',
 };
 

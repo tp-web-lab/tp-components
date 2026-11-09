@@ -1,7 +1,15 @@
 import { afterEach, expect, it, vi } from "vitest";
 import { TpSaveAudio } from "./save-audio.js";
 
-afterEach(() => document.body.replaceChildren());
+vi.mock("../../utilities/save-file.js", () => ({
+	chooseSaveTarget: vi.fn(),
+	saveBlob: vi.fn(),
+}));
+afterEach(() => {
+	document.body.replaceChildren();
+	vi.clearAllMocks();
+	vi.restoreAllMocks();
+});
 it("delegates to an anchored provider and marks only successful formats", async () => {
 	const target = document.createElement("div") as HTMLDivElement & {
 		saveAudio: ReturnType<typeof vi.fn>;
@@ -71,4 +79,83 @@ it.each(["Enter", " "])("saves with the %s key", async (key) => {
 		);
 	await vi.waitFor(() => expect(saveAudio).toHaveBeenCalledOnce());
 	expect(saveAudio).toHaveBeenCalledWith("wav", "audio");
+});
+
+it("uses the component icon by default and preserves custom trigger icons", () => {
+	const control = new TpSaveAudio();
+	document.body.append(control);
+	const trigger = control.querySelector("tp-icon-button");
+	expect(trigger?.getAttribute("name")).toBe("save-audio");
+	expect(trigger?.getAttribute("library")).toBe("components");
+	control.name = "heart";
+	expect(trigger?.getAttribute("name")).toBe("heart");
+	expect(trigger?.hasAttribute("library")).toBe(false);
+});
+
+it("downloads matching native sources without renaming unsupported formats", async () => {
+	const { chooseSaveTarget, saveBlob } = await import(
+		"../../utilities/save-file.js"
+	);
+	vi.mocked(chooseSaveTarget).mockResolvedValue({ filename: "sample.mp3" });
+	vi.mocked(saveBlob).mockResolvedValue();
+	const fetch = vi
+		.spyOn(globalThis, "fetch")
+		.mockResolvedValue(
+			new Response(new Blob(["audio"], { type: "audio/mpeg" })),
+		);
+	document.body.innerHTML =
+		'<audio id="sample"><source src="/sample.mp3" type="audio/mpeg"></audio>';
+	const control = new TpSaveAudio();
+	control.anchor = "#sample";
+	control.filename = "sample";
+	document.body.append(control);
+	expect(
+		control.querySelector('[data-format="wav"]')?.getAttribute("aria-disabled"),
+	).toBe("true");
+	expect(
+		control.querySelector('[data-format="wav"]')?.hasAttribute("hidden"),
+	).toBe(true);
+	expect(
+		control.querySelector('[data-format="ogg"]')?.hasAttribute("hidden"),
+	).toBe(true);
+	expect(
+		control.querySelector('[data-format="mp3"]')?.hasAttribute("hidden"),
+	).toBe(false);
+	await control.save("mp3");
+	expect(fetch).toHaveBeenCalledWith(
+		new URL("/sample.mp3", document.baseURI).href,
+	);
+	expect(saveBlob).toHaveBeenCalledOnce();
+	await expect(control.save("wav")).rejects.toThrow("No WAV source");
+	expect(fetch).toHaveBeenCalledTimes(1);
+	vi.mocked(chooseSaveTarget).mockResolvedValue(null);
+	await control.save("mp3");
+	expect(fetch).toHaveBeenCalledTimes(1);
+	vi.mocked(chooseSaveTarget).mockResolvedValue({ filename: "sample.mp3" });
+	fetch.mockResolvedValue(new Response(null, { status: 404 }));
+	await expect(control.save("mp3")).rejects.toThrow("404");
+	expect(saveBlob).toHaveBeenCalledOnce();
+	fetch.mockRestore();
+});
+
+it("shows only the playing source format and refreshes when the source changes", () => {
+	document.body.innerHTML =
+		'<audio id="sample"><source src="/sample.mp3" type="audio/mpeg"><source src="/sample.ogg" type="audio/ogg"></audio>';
+	const audio = document.querySelector("audio");
+	if (!audio) throw new Error("Missing audio fixture");
+	let current = new URL("/sample.ogg", document.baseURI).href;
+	Object.defineProperty(audio, "currentSrc", { get: () => current });
+	const control = new TpSaveAudio();
+	control.anchor = "#sample";
+	document.body.append(control);
+	const visible = () =>
+		[...control.querySelectorAll<HTMLElement>("[data-format]")]
+			.filter((item) => !item.hidden)
+			.map((item) => item.dataset.format);
+	expect(visible()).toEqual(["ogg"]);
+	current = new URL("/sample.mp3", document.baseURI).href;
+	control
+		.querySelector("tp-icon-button")
+		?.dispatchEvent(new MouseEvent("click"));
+	expect(visible()).toEqual(["mp3"]);
 });

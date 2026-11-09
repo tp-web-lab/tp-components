@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {chromium} from '@playwright/test';
+const browser=await chromium.launch();
+try {
+ const page=await browser.newPage({viewport:{width:850,height:420},acceptDownloads:true});
+ await page.addInitScript(()=>{window.showSaveFilePicker=undefined;});
+ await page.goto(`${process.env.TP_SAVE_AUDIO_TEST_URL ?? 'http://127.0.0.1:4197'}/docs/components/save-audio/examples/introduction.html`);
+ await page.evaluate(()=>import('/src/components/save-audio/save-audio.ts'));
+ await page.waitForFunction(()=>document.querySelector('audio')?.duration>0);
+ const trigger=page.locator('tp-save-audio > tp-icon-button');
+ await trigger.locator('svg').waitFor();
+ assert.equal(await trigger.getAttribute('name'),'save-audio');
+ assert.equal(await trigger.getAttribute('library'),'components');
+ const arrow='M21 15v4h3l-4 4l-4-4h3v-4z';
+ assert.equal(await trigger.locator(`path[d="${arrow}"]`).count(),1);
+ assert.ok(readFileSync('src/components/icon/icons/components/save-image.svg','utf8').includes(arrow));
+ await page.locator('audio').click({position:{x:20,y:25}});
+ await page.waitForFunction(()=>document.querySelector('audio').currentTime>0);
+ await trigger.click();
+ assert.equal(await page.locator('[data-format=ogg]').isVisible(),false);
+ assert.equal(await page.locator('[data-format=wav]').isVisible(),false);
+ page.once('dialog',dialog=>dialog.accept('glass-break'));
+ const downloading=page.waitForEvent('download');
+ await page.locator('[data-format=mp3]').click();
+ const download=await downloading;
+ assert.equal(download.suggestedFilename(),'glass-break.mp3');
+ assert.deepEqual(readFileSync(await download.path()),readFileSync('public/docs/medias/audios/glass-break.mp3'));
+ await page.waitForFunction(()=>document.querySelector('[data-format=mp3]').getAttribute('aria-current')==='true');
+ await page.screenshot({path:'/tmp/tp-save-audio-preview.png'});
+ console.log('Passed: matching arrow, default icon, playable audio, unsupported formats hidden and downloaded MP3 matches the source byte for byte.');
+} finally {await browser.close();}

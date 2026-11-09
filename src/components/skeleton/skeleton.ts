@@ -36,7 +36,9 @@ const leaves = new Set([
 ]);
 
 /**
- * @summary Renders selected HTML elements as fixed shaded skeleton patterns without executing the source.
+ * The custom `<tp-skeleton>` element displays a simplified placeholder representation of content.
+ *
+ * @summary Displays a simplified placeholder representation of content.
  * @tagname tp-skeleton
  * @attr {string} src = "" - HTML source URL, taking precedence over value and inline scripts.
  * @attr {string} value = "" - HTML source string, taking precedence over an inline script.

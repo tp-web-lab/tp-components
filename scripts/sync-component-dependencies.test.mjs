@@ -91,3 +91,12 @@ const load = () => import('../lazy/lazy.js');
     assert.equal(readFileSync(path, 'utf8'), before);
   } finally { rmSync(root, {recursive:true, force:true}); }
 });
+
+test('See also is generated from JSDoc without adding a runtime dependency', () => {
+  const markdown = readFileSync('public/docs/components/post-it/index.md', 'utf8');
+  assert.match(markdown, /### See also\n\n- \[.*tp-post-it-editor.*\]\(#\/components\/post-it-editor\/index.md\) : Create a post-it interactively and save it\./);
+  const manifest = JSON.parse(readFileSync('src/components/post-it/post-it.json', 'utf8'));
+  assert.ok(!manifest.dependencies.some(item => item.name === 'tp-post-it-editor'));
+  execFileSync(process.execPath, ['scripts/sync-component-dependencies.mjs', '--check', '--component', 'post-it']);
+  assert.doesNotMatch(readFileSync('public/docs/components/text-to-speech/index.md', 'utf8'), /### See also/);
+});

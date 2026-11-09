@@ -1,0 +1,10 @@
+.tp-markup-blog { display: block; min-inline-size: 0; color: var(--tp-text-body); }
+.tp-markup-blog > script { display: none; }
+.tp-markup-blog > [data-blog-ui] { display: grid; gap: 1rem; }
+.tp-blog-filters { display: grid; gap: .75rem; }
+.tp-blog-list { display: grid; gap: 1rem; }
+.tp-blog-list > article { border: 1px solid var(--tp-neutral-stroke-mid); border-radius: var(--tp-border-radius-sm); padding: 1rem; }
+.tp-blog-list h3 { margin-block: 0 .5rem; }
+.tp-blog-labels, .tp-markup-blog time { color: var(--tp-neutral-text-soft); }
+.tp-markup-blog nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; }
+.tp-blog-content { min-inline-size: 0; overflow-wrap: anywhere; }

@@ -1,0 +1,20 @@
+tp-latex{display:block;min-width:0}
+.tp-latex-output{overflow-wrap:anywhere}
+.tp-latex-output .title{text-align:center;font-size:1.7em;font-family:var(--tp-font-family-heading,inherit);font-weight:var(--tp-font-weight-bold,700)}
+.tp-latex-output .center{text-align:center}
+/* Standard lists are semantic HTML and inherit TP styles. These rules only
+   position explicit custom LaTeX item labels. */
+.tp-latex-output ul.list{list-style:none;padding-left:0}
+.tp-latex-output ul.list > li{list-style:none;position:relative;padding-left:1.6em;margin:.5em 0}
+.tp-latex-output ul.list > li > .itemlabel{position:absolute;left:0;top:0}
+.tp-latex-output ul.list > li > p{margin:0}
+.tp-latex-output tp-tikz{display:block;max-width:100%}
+
+/* LaTeX.js font commands and ordered-list presentation. */
+.tp-latex-output .bf{font-weight:var(--tp-font-weight-bold,700)}
+.tp-latex-output .it{font-style:italic}
+.tp-latex-output .tt{font-family:var(--tp-font-family-code,monospace)}
+.tp-latex-output ol.list{list-style:none;padding-left:0}
+.tp-latex-output ol.list > li{list-style:none;position:relative;padding-left:1.6em;margin:.5em 0}
+.tp-latex-output ol.list > li > .itemlabel{position:absolute;left:0;top:0}
+.tp-latex-output ol.list > li > p{margin:0}

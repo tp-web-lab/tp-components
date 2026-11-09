@@ -1,0 +1,33 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpMarkdownViewer{
+  \wcScript[type=tp/markdown]|
+        # Live Markdown
+
+        Edit this source and select **Run**.
+      |
+}
+\end{document}
+
+% !tp-example Multiple examples
+\documentclass{article}
+\begin{document}
+\wcTpMarkdownViewer{
+  \wcScript[type=tp/markdown]!
+        ``` example {label="Paragraph and list"}
+        A paragraph with **strong text** and *emphasis*.
+
+        - Alpha
+        - Beta
+        ```
+
+        ``` example {label="Table"}
+        | Language | Purpose |
+        | --- | --- |
+        | Markdown | Technical writing |
+        | HTML | Web documents |
+        ```
+      !
+}
+\end{document}

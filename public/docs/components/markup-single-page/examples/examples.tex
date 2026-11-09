@@ -1,0 +1,32 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpMarkupSinglePage{
+  \wcScript[type=tp/markdown]|
+## A short guide
+
+This document is rendered as a single page.
+
+### Getting started
+
+- Read the introduction
+- Try a component
+  |
+}
+\end{document}
+
+% !tp-example Toolbar controls
+\documentclass{article}
+\begin{document}
+\subsection*{Complete toolbar}
+
+\wcTpMarkupSinglePage[toolbar]{
+  \wcScript[type=tp/markdown]|## Reading tools
+Open the source, calculator or annotations; try the color and theme controls.|
+}
+
+\subsection*{Selected controls}
+
+\rawhtml|<tp-markup-single-page toolbar="code,calc,theme"><script type="tp/markdown">## A smaller toolbar
+Only Code, Calculator and Theme are available here.</script></tp-markup-single-page>|
+\end{document}

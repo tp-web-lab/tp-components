@@ -8,7 +8,6 @@
       .. example:: Basic usage
 
          .. role:: example-tp-textfield-1(tp-textfield)
-            :name: capital
             :placeholder: City name
             :aria-label: Capital of France
             :clearable:

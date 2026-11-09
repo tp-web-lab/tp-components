@@ -1315,9 +1315,9 @@ function normalizeMarkdownBlockViewMode(value: unknown): MarkdownBlockViewMode {
 }
 
 /**
- * Rich text editor backed by ProseMirror.
+ * The custom `<tp-prose-editor>` element edits rich text with formatting, lists, tables and embedded media.
  *
- * @summary ProseMirror-based rich text editor.
+ * @summary Edits rich text with formatting, lists, tables and embedded media.
  * @tagname tp-prose-editor
  * @attr {string} placeholder = "Type your prose..." - Text displayed while the editor is empty.
  * @attr {boolean} readonly = false - Prevents the user from editing the prose.

@@ -1,0 +1,79 @@
+{
+  "tagname": "tp-word-cloud",
+  "classname": "TpWordCloud",
+  "superclass": "TpBase",
+  "description": "Generates a responsive SVG word cloud inside a chosen silhouette.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-word-cloud shape=\"circle\" color=\"glaz\" bg-color=\"glaz\" scale=\"1\" rotate=\"0\">\n  <ol>\n    <li><tp-icon name=\"logo-tp\" aria-label=\"tp logo\"></tp-icon></li>\n    <li></li>\n    <li>quizzes, playgrounds, viewers, notebooks</li>\n    <li>simulators, plots, games</li>\n    <li></li>\n    <li>documentations, editors, pickers, controllers, feedbacks</li>\n    <li>markdown, asciidoc, latex, restructuredtext</li>\n    <li>forms, overlays, medias, times</li>\n    <li></li>\n    <li>utilities</li>\n  </ol>\n</tp-word-cloud>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "bg-color",
+      "description": "Brand palette for the shape background at level 100; an explicit empty value leaves it transparent.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"\"|\"default\"|\"red\"|\"orange\"|\"amber\"|\"yellow\"|\"lime\"|\"green\"|\"emerald\"|\"teal\"|\"glaz\"|\"cyan\"|\"sky\"|\"blue\"|\"indigo\"|\"violet\"|\"purple\"|\"fuchsia\"|\"pink\"|\"rose\"|\"zinc\"|\"ivory\"|\"stone\"",
+      "default": "\"glaz\""
+    },
+    {
+      "name": "color",
+      "description": "Brand palette, with varied levels for individual words.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"default\"|\"red\"|\"orange\"|\"amber\"|\"yellow\"|\"lime\"|\"green\"|\"emerald\"|\"teal\"|\"glaz\"|\"cyan\"|\"sky\"|\"blue\"|\"indigo\"|\"violet\"|\"purple\"|\"fuchsia\"|\"pink\"|\"rose\"|\"zinc\"|\"ivory\"|\"stone\"",
+      "default": "\"glaz\""
+    },
+    {
+      "name": "rotate",
+      "description": "Maximum word rotation in degrees, clamped to -90–90; orientations alternate between zero and both signs.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "0"
+    },
+    {
+      "name": "scale",
+      "description": "Positive font-size multiplier, clamped to 0.1–4; crowded clouds shrink together to fit.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1"
+    },
+    {
+      "name": "shape",
+      "description": "Outer silhouette, using English names only.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"circle\"|\"triangle\"|\"square\"|\"pentagon\"|\"hexagon\"|\"cloud\"|\"heart\"|\"puzzle\"",
+      "default": "\"circle\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Word cloud",
+    "introduction": "The custom `<tp-word-cloud>` element generates a responsive SVG word cloud inside a chosen silhouette.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Word cloud | No component-specific mouse interaction. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Word cloud | No component-specific keyboard interaction. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose which component in the enclosing hierarchy should receive contextual help. |",
+    "keyboard": []
+  }
+}

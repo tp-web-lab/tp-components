@@ -24,6 +24,7 @@ function introductoryHtml(directory, tag) {
   if (!existsSync(documentationPath)) return `<${tag}></${tag}>`;
 
   const markdown = readFileSync(documentationPath, 'utf8');
+  if (markdown.includes('<!-- tp-docgen:page-layout:v2 -->')) return readFileSync(join(docsRoot, directory, 'examples/introduction.html'), 'utf8').trim();
   const preambleEnd = markdown.search(/^##\s/m);
   const preamble = markdown.slice(0, preambleEnd < 0 ? markdown.length : preambleEnd);
   const viewer = /<tp-html-viewer\b[^>]*>([\s\S]*?)<\/tp-html-viewer>/m.exec(preamble)?.[1] ?? '';

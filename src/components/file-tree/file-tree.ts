@@ -288,6 +288,10 @@ function getFileIconName(path: string): string | null {
 		return "file_type_restructuredtext";
 	}
 
+	if (lowerPath.endsWith(".tex") || lowerPath.endsWith(".latex")) {
+		return "file_type_tex";
+	}
+
 	if (lowerPath.endsWith(".sql")) {
 		return "file_type_sql";
 	}
@@ -347,7 +351,7 @@ const FILE_TREE_CONTEXT_MENU_CONFIG: TpTreeContextMenuConfig = {
 };
 
 /**
- * `<tp-file-tree>` affiche une arborescence de fichiers via `<tp-tree>`.
+ * The custom `<tp-file-tree>` element displays folders and files as an expandable tree.
  *
  * Ce composant est un adaptateur spécialisé :
  *
@@ -363,30 +367,30 @@ const FILE_TREE_CONTEXT_MENU_CONFIG: TpTreeContextMenuConfig = {
  * clone, move ou add sont converties en événements afin qu’un composant parent
  * applique les changements.
  *
- * @summary Arbre spécialisé pour fichiers et dossiers.
+ * @summary Displays folders and files as an expandable tree.
  * @tagname tp-file-tree
  *
  *
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  * @example
  * <tp-file-tree></tp-file-tree>
  * @cssprop [--tp-file-tree-active-color=inherit] Text color of the active file row.

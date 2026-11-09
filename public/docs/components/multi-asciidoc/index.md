@@ -3,6 +3,8 @@
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
+
 ### Internal
 
 <!--

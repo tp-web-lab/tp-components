@@ -161,10 +161,16 @@ export function componentApiPlugin(
 
 			const pattern = path.join(resolvedRoot, componentsDir, "*", "*.{ts,css}");
 			const watcher = server.watcher.add(pattern);
-			watcher.add(path.join(resolvedRoot, "public/docs/components/*/index.md"));
+			watcher.add(
+				path.join(
+					resolvedRoot,
+					"public/docs/components/*/{index,interactions}.md",
+				),
+			);
 			watcher.on("change", async (filePath) => {
 				if (
-					filePath.endsWith(`${path.sep}index.md`) &&
+					(filePath.endsWith(`${path.sep}index.md`) ||
+						filePath.endsWith(`${path.sep}interactions.md`)) &&
 					filePath.includes(`${path.sep}docs${path.sep}components${path.sep}`)
 				) {
 					const name = path.basename(path.dirname(filePath));
@@ -256,7 +262,18 @@ async function generateComponentApiFile(
 	const documentation = await readOptionalFile(
 		path.join(rootDir, "public/docs/components", componentName, "index.md"),
 	);
-	api.userHelp = extractComponentUserHelp(documentation, sourceText);
+	const interactions = await readOptionalFile(
+		path.join(
+			rootDir,
+			"public/docs/components",
+			componentName,
+			"interactions.md",
+		),
+	);
+	api.userHelp = extractComponentUserHelp(
+		`${documentation}\n\n${interactions}`,
+		sourceText,
+	);
 	const nextContent = `${JSON.stringify(api, null, 2)}\n`;
 	const currentContent = await readOptionalFile(outputPath);
 

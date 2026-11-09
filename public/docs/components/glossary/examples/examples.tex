@@ -1,0 +1,13 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcDiv[data-tp-reference-scope]{
+  Read more \rawhtml*|<tp-ref href="%example"></tp-ref>|.
+
+  \wcTpGlossary[ref=example,title=Example]{
+    Additional information with \textbf{HTML content}.
+
+  }
+  \wcTpListof[selector=tp-glossary]{}
+}
+\end{document}

@@ -1,33 +1,38 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="button" library="components" size="1.25em"></tp-icon> Button
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-button>` element implements the <tp-icon name="button" library="components" size="1.25em"></tp-icon> Button functionality: an action button or navigation link with shared sizes, variants and loading states.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-button>` element provides an action button or navigation link, with configurable appearance and loading feedback.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-button href="/#/components/button/index.md#usage">Read the usage guide</tp-button>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-button" src="/docs/components/button/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result | Shortcut |
-| --- | --- | --- |
-| Button | Click to perform the action identified by its label. Disabled controls cannot be activated. |  |
-| Navigation button | Click to open its destination. |  |
-
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| <kbd>Enter</kbd> | Activate the focused button or link. |
-| <kbd>Space</kbd> | Activate a focused action button; links use <kbd>Enter</kbd>. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 <tp-button outlined>Cancel</tp-button>
 <tp-button href="#programming">Read the API</tp-button>
@@ -40,402 +45,7 @@ Without `href`, the component creates a native button. With `href`, it creates a
 <tp-button href="#programming">Read the API</tp-button>
 ```
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Activate the button to follow its documentation link.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpButton -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Prevents activation, including link navigation, and marks the control as disabled. |
-  | <code>download</code> | <code>string</code> | <code>&quot;&quot;</code> | Suggested download filename when href is set. A nonempty value requests a download; browser and server rules determine whether it is honored. |
-  | <code>href</code> | <code>string</code> | <code>&quot;&quot;</code> | Destination URL. A nonempty value renders a link instead of a native button. |
-  | <code>loading</code> | <code>boolean</code> | <code>false</code> | Displays a loading spinner and prevents activation while present. |
-  | <code>loading-mode</code> | <code>TpButtonLoadingMode</code> | <code>replace</code> | Spinner layout while loading: replace hides the label; inline keeps the label beside the spinner. |
-  | <code>outlined</code> | <code>boolean</code> | <code>false</code> | Uses an outlined appearance instead of a filled background. |
-  | <code>pill</code> | <code>boolean</code> | <code>false</code> | Rounds the button ends to form a pill. |
-  | <code>rel</code> | <code>string</code> | <code>&quot;&quot;</code> | Space-separated relationship tokens forwarded to the link, for example noopener noreferrer; applies only with href. |
-  | <code>size</code> | <code>TpSizeType</code> | <code>m</code> | Button size preset: xxs, xs, s, m, l, xl or xxl; controls text size and padding. |
-  | <code>target</code> | <code>string</code> | <code>&quot;&quot;</code> | Browsing context for href, such as _self, _blank or a named frame; ignored in native button mode. |
-  | <code>type</code> | <code>TpButtonNativeType</code> | <code>button</code> | Native button action: button, submit or reset; ignored when href makes the control a link. |
-  | <code>variant</code> | <code>TpVariantType</code> | <code>neutral</code> | Color variant: neutral, brand, success, danger, warning or info. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-button>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpButton`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>click</code> | <code>void</code> | Native click event bubbling from the inner button or link when activated by pointer or keyboard; disabled controls suppress activation. This is not a CustomEvent, so there is no custom detail payload. |
-  [Events emitted by `<tp-button>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-button-accent</code> | <code>var(&#45;&#45;tp-neutral-text-colorful)</code> | Accent color used for outlined text and borders, and for the hover border; depends on variant. |
-  | <code>&#45;&#45;tp-button-background</code> | <code>var(&#45;&#45;tp-neutral-fill-loud)</code> | Background color of the button or link; variant and outlined can change it. |
-  | <code>&#45;&#45;tp-button-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-mid)</code> | Border color of the button or link in its resting state. |
-  | <code>&#45;&#45;tp-button-focus-ring-color</code> | <code>var(&#45;&#45;tp-focus-color)</code> | Color of the outer ring shown on keyboard focus and hover. |
-  | <code>&#45;&#45;tp-button-font-size</code> | <code>0.875em</code> | Font size of the button label; size presets also update this value. |
-  | <code>&#45;&#45;tp-button-foreground</code> | <code>var(&#45;&#45;tp-neutral-text-on-loud)</code> | Text and icon color of the button or link. |
-  | <code>&#45;&#45;tp-button-outline-background</code> | <code>var(&#45;&#45;tp-neutral-fill-softer)</code> | Background color of an enabled outlined button on hover. |
-  | <code>&#45;&#45;tp-button-padding-block</code> | <code>0.35em</code> | Inner spacing above and below the button content. |
-  | <code>&#45;&#45;tp-button-padding-inline</code> | <code>0.7em</code> | Inner spacing before and after the button content. |
-  | <code>&#45;&#45;tp-button-radius</code> | <code>0.5em</code> | Corner radius of the button or link; pill uses a fully rounded radius. |
-  | <code>&#45;&#45;tp-button-spinner-border-width</code> | <code>2px</code> | Stroke thickness of the circular loading indicator. |
-  | <code>&#45;&#45;tp-button-spinner-size</code> | <code>1em</code> | Width and height of the circular loading indicator. |
-  [CSS properties of `<tp-button>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_button.TpButton.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -462,19 +72,51 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Activate the button to follow its documentation link.
+
+Navigation link
+: Open the destination in a new tab using a button rendered as a link.
+
+Unavailable action
+: Compare the disabled action with the active introductory button.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-button>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
 @summary Shared base class for tp-* components.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 
 ### External
 

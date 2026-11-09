@@ -35,10 +35,11 @@ type AudioContextLike = {
 };
 
 /**
- * Alarm component.
+ * The custom `<tp-alarm>` element signals when a specified time is reached.
  *
  * The alarm triggers when local time matches the `time` attribute.
  *
+ * @summary Signals when a specified time is reached.
  * @tagname tp-alarm
  * @attr {string} time = "07:00" - Alarm time in `HH:MM` or `HH:MM:SS`.
  * @attr {string} size = "1rem" - Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em.

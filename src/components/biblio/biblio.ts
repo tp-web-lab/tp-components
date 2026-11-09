@@ -8,7 +8,9 @@
 import { TpBase } from "../base/base.js";
 import style from "./biblio.css?inline";
 /**
- * @summary Defines a bibliography entry referenced by tp-ref.
+ * The custom `<tp-biblio>` element defines a hidden bibliography entry for reference tooltips and generated lists.
+ *
+ * @summary Defines a hidden bibliography entry for reference tooltips and generated lists.
  * @tagname tp-biblio
  * @attr {string} ref = "" - Identifier used by references in this document.
  * @example

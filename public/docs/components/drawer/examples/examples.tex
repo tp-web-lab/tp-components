@@ -1,0 +1,14 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[data-intro-action=drawer,data-allow-script]{
+  \wcTpButton[id=intro-drawer-trigger,data-demo-trigger]{Open the drawer}
+  \wcTpDrawer[label=Example drawer,backdrop,outside-click]{
+    This panel contains additional information.
+
+    \wcTpButton[data-demo-close]{Close}
+  }
+  \wcP[data-demo-status,role=status]{Try the drawer using its trigger.}
+  \wcScript[src=/docs/components/_shared/introduction-actions.js]||
+}
+\end{document}

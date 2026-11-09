@@ -4,6 +4,7 @@
       "asciidoc": "/examples/playgrounds/asciidoc-playground",
       "html": "/examples/playgrounds/html-playground",
       "js": "/examples/playgrounds/js-playground",
+      "latex": "/examples/playgrounds/latex-playground",
       "markdown": "/examples/playgrounds/markdown-playground",
       "prolog": "/examples/playgrounds/prolog-playground",
       "py": "/examples/playgrounds/py-playground",

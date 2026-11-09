@@ -1,20 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="logigram" library="components" size="1.25em"></tp-icon> Logigram
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-Solve a logic-grid puzzle by using written clues to match items across categories. Each item matches exactly one item in every other category.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
-<details class="tp-game-rules">
-<summary>Rules of the game</summary>
+<div class="tp-component-doc-intro">
 
-<p>Use the clues to match the items across categories. Every item belongs with exactly one item in each other category, and every clue must be satisfied.</p>
+The custom `<tp-logigram>` element solves logic-grid puzzles by matching items across categories using written clues.
 
-<p>Each block compares two categories. Mark a cell × to exclude a match, ✓ to confirm it, or leave it unknown. A confirmed match excludes the other cells in its block row and column. Matches must also agree across categories: if A matches B and B matches C, then A matches C.</p>
+<div class="tp-component-doc-example">
 
-<p>The puzzle is solved when all matching pairs in every block are marked ✓ and no marked cell contradicts the solution. You do not need to mark every excluded pair. Checking off a clue is only a personal reminder.</p>
-
-</details>
-
+<!-- tp-docgen:introduction:start -->
 <tp-logigram label="The reading club">
   <dl>
     <dt>Prompt</dt>
@@ -46,41 +46,23 @@ Solve a logic-grid puzzle by using written clues to match items across categorie
 </dd>
   </dl>
 </tp-logigram>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-logigram" src="/docs/components/logigram/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Click a cell | Cycle unknown → no → yes → unknown. |
-| Right-click a cell | Mark yes. |
-| Ctrl-click / Command-click a cell | Clear its mark. |
-| Clue checkbox | Mark a clue as reviewed. |
-| Undo / Redo | Reverse or reapply a grid move. |
-| Assist… → Reset the game | Clear the grid; Undo can restore it. Clue reminders are retained. |
-| Assist… → Show all incorrect boxes | Show the score, highlight incorrect marks and announce a solved puzzle. |
-| Assist… → Clear the incorrect boxes | Clear incorrect marks while preserving correct ones. |
-| Assist… → Show the box | Reveal the last selected or focused cell. Select a cell first to enable this action. |
-| Assist… → Show the category pair | Reveal all cells in the selected cell’s category-pair block. |
-| Assist… → Show the solution | Reveal every pair and display the solved status. |
-
-Each assistance action that changes the grid can be undone in one step. Click a grid box or focus it with Tab to enable Show the box and Show the category pair. The selected box has a persistent outline, and the message below the toolbar identifies its two items. The selection is retained when you move to the menu. Revealing a box changes only that box, even when automatic exclusions are enabled.
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move among clues, toolbar controls and cells. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused cell or button; <kbd>Space</kbd> toggles a clue checkbox. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Assist… / <kbd>Enter</kbd> | Choose and apply an assistance action using the native menu. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in a matrix | Move to a neighbouring cell in the same matrix. |
-| <kbd>Delete</kbd> / <kbd>Backspace</kbd> in a cell | Clear its mark. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 The panel heading is always **Logigram**, with Undo, Redo and an Assist… menu grouped on its right. On narrow panels, the controls wrap below the heading. A custom `label` appears below the header as the puzzle title.
 
@@ -169,142 +151,15 @@ Solution
 
 The same list structure works in HTML, AsciiDoc and reStructuredText. `src` loads a Markdown file containing the definition list with these four sections, without a surrounding `tp-logigram` directive. It overrides inline content; removing it restores the original inline puzzle. A changed source starts a fresh game. Labels and clues are displayed as text.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Match three readers with their books and drinks using the triangular grid, and use Assist… → Show all incorrect boxes to verify the matches.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Automatic exclusions
-: Solve the reading club puzzle across three matrices. Observe automatic exclusions and use Undo to reverse a move.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-html
-: ::include{examples/examples.html}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
+### Programming notes
 
 `value` returns a copy of the cell states (0 unknown, -1 no, 1 yes), grouped by category pair, then row and column. `reset()`, `undo()` and `redo()` modify the grid; `check()` returns `{ correct, total, errors, complete }`, or null when disabled or not ready. Errors are cell indexes. `tp-logigram-change` carries `{ value }`; `tp-logigram-check` carries the check result. Both events bubble. Disconnecting and reconnecting preserves the loaded game.
 
-## API
+### References
 
-<!-- tp-docgen:api TpLogigram -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>auto-exclude</code> | <code>boolean</code> | <code>false</code> | Marks other cells in the same pair row and column as no after a yes. |
-  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Prevents playing and using game controls. |
-  | <code>label</code> | <code>string</code> | <code>&quot;Logigram&quot;</code> | Puzzle title. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Markdown file containing Prompt, Categories, Clues and Solution definitions. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-logigram>`]
+Game principles: [integrammes.fr — help](https://integrammes.fr/?action=aide). The demonstration puzzles above are original examples.
 
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>check</code> | <code>check(): ReturnType&lt;LogigramModel[&quot;check&quot;]&gt; \| null</code> | Checks all marked cells and counts correct matches. Unknown negatives need not be filled. |
-  | <code>redo</code> | <code>redo(): void</code> | Reapplies an undone move. |
-  | <code>reset</code> | <code>reset(): void</code> | Clears the grid; the reset can be undone. |
-  | <code>undo</code> | <code>undo(): void</code> | Restores the preceding move, including automatic exclusions. |
-  [Public methods of `TpLogigram`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-logigram-change</code> | <code>&#123; value: number[] &#125;</code> | Emitted after a move, undo, redo or reset. |
-  | <code>tp-logigram-check</code> | <code>&#123; correct: number; total: number; errors: number[]; complete: boolean &#125;</code> | Emitted after checking the grid. |
-  [Events emitted by `<tp-logigram>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-logigram>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_logigram.TpLogigram.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -331,16 +186,41 @@ bundler
   ```
 :::
 
-## References
+<!-- -->
+## Examples
 
-Game principles: [integrammes.fr — help](https://integrammes.fr/?action=aide). The demonstration puzzles above are original examples.
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Match three readers with their books and drinks using the triangular grid, and use Assist… → Show all incorrect boxes to verify the matches.
 
+Automatic exclusions
+: Solve the reading club puzzle across three matrices. Observe automatic exclusions and use Undo to reverse a move.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-logigram>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -355,9 +235,9 @@ All tp-components used by `<tp-logigram>` are loaded automatically by this compo
 @summary Transforms a list into a group of checkboxes.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-checkbox-list>`](../checkbox-list/index.md) : Transforms a list into a group of checkboxes.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
+- [`<tp-checkbox-list>`](#/components/checkbox-list/index.md) : Transforms a list into a group of checkboxes.
 
 ### External
 

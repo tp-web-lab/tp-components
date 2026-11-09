@@ -104,20 +104,61 @@ export class TpExample {
 		assert.deepEqual(api.events, [
 			{
 				name: "tp-example-error",
+				emitted: true,
 				description: "Reports either loading or editing failures.",
 				detail: '{ operation: "load" | "edit"; error: unknown; src?: string }',
 			},
 			{
 				name: "tp-example-mode",
+				emitted: false,
 				description: "Emitted when the rendering mode changes.",
 				detail: "void",
 			},
 			{
 				name: "tp-example-undocumented",
+				emitted: false,
 				description: "Emitted when example undocumented occurs.",
 				detail: "void",
 			},
 		]);
+	} finally {
+		await rm(root, { recursive: true, force: true });
+	}
+});
+
+test("reader interactions are loaded from the dedicated help file and refreshed independently of Usage", async () => {
+	const root = await mkdtemp(join(tmpdir(), "tp-reader-help-"));
+	try {
+		const dir = join(root, "src/components/example");
+		const docs = join(root, "public/docs/components/example");
+		await mkdir(dir, { recursive: true });
+		await mkdir(docs, { recursive: true });
+		await writeFile(
+			join(dir, "example.ts"),
+			"/** @tagname tp-example */\nexport class TpExample {}",
+		);
+		await writeFile(
+			join(docs, "index.md"),
+			"# Example\n\nThe custom `<tp-example>` element displays a notice.\n\n## Usage\n\n### Importing\nImport the module.",
+		);
+		const help =
+			"### User interactions\n\n#### Mouse interactions\n\nClose the notice.\n\n#### Keyboard interactions\n\nCtrl+Alt+? chooses a parent.";
+		await writeFile(join(docs, "interactions.md"), help);
+		await generateComponentApiFiles(root, "src/components");
+		let api = JSON.parse(await readFile(join(dir, "example.json"), "utf8"));
+		assert.equal(api.userHelp.displayName, "Example");
+		assert.equal(
+			api.userHelp.interactions,
+			help.split("### User interactions\n\n")[1],
+		);
+		await writeFile(
+			join(docs, "interactions.md"),
+			help.replace("Close the notice.", "Dismiss the notice with Close."),
+		);
+		await generateComponentApiFiles(root, "src/components");
+		api = JSON.parse(await readFile(join(dir, "example.json"), "utf8"));
+		assert.match(api.userHelp.interactions, /Dismiss the notice with Close/);
+		assert.doesNotMatch(api.userHelp.interactions, /Import the module/);
 	} finally {
 		await rm(root, { recursive: true, force: true });
 	}

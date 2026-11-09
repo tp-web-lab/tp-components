@@ -2,7 +2,7 @@
   "tagname": "tp-audio-playlist",
   "classname": "TpAudioPlaylist",
   "superclass": "TpBase",
-  "description": "Audio playlist with playback controls and an elapsed-time seek bar.",
+  "description": "Provides an audio playlist with playback controls and an elapsed-time seek bar.",
   "examples": [
     {
       "label": "Example 1",
@@ -55,8 +55,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Audio playlist",
-    "introduction": "",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Play | Start from the first track in list order. |\n| Random | Start a newly shuffled playlist without repeating tracks. |\n| Track link | Play the selected track from the beginning. |\n| Previous / Next | Play the adjacent track in the current playback order. Disabled at the ends. |\n| Resume / Pause | Resume or pause the current track. |\n| Playback position | Seek within the current track. Dark indicates elapsed time; light indicates remaining time, independently of buffering. |\n| Mute / Unmute and Volume | Toggle sound or adjust its volume. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between track links and playback controls. |\n| <kbd>Enter</kbd> on a track | Play that track. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> on a button | Activate Play, Random, Previous or Next. Use the arrow keys on the position and volume sliders; Home and End select their minimum and maximum. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-audio-playlist>` element provides an audio playlist with playback controls and an elapsed-time seek bar.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Play | Start from the first track in list order. |\n| Random | Start a newly shuffled playlist without repeating tracks. |\n| Track link | Play the selected track from the beginning. |\n| Previous / Next | Play the adjacent track in the current playback order. Disabled at the ends. |\n| Resume / Pause | Resume or pause the current track. |\n| Playback position | Seek within the current track. Dark indicates elapsed time; light indicates remaining time, independently of buffering. |\n| Mute / Unmute and Volume | Toggle sound or adjust its volume. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between track links and playback controls. |\n| <kbd>Enter</kbd> on a track | Play that track. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> on a button | Activate Play, Random, Previous or Next. Use the arrow keys on the position and volume sliders; Home and End select their minimum and maximum. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

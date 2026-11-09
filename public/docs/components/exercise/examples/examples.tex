@@ -1,0 +1,108 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpExercise[open]{
+  \begin{description}
+    \item[{Title}] A day at the museum
+    \item[{Context}] The museum opens at 9 a.m. Admission costs 8 euros.
+    \item[{Questions}] \wcOl[class=questions]{
+      \wcLi{
+        \wcTpQuestion[open=input]{
+          \begin{description}
+            \item[{Title}] Opening time
+            \item[{Prompt}] When does the museum open?
+            \item[{Form}] \wcTpTextfield[label=Your answer]{}
+            \item[{Feedback}] Compare your answer with the opening time in the context.
+            \item[{Solution}] At 9 a.m.
+          \end{description}
+        }
+      }
+      \wcLi{
+        \wcTpQuestion[open=input]{
+          \begin{description}
+            \item[{Title}] Admission
+            \item[{Prompt}] How much do two tickets cost?
+            \item[{Form}] \wcTpTextfield[label=Your answer]{}
+            \item[{Feedback}] Multiply the price of one ticket by two.
+            \item[{Solution}] 16 euros.
+          \end{description}
+        }
+      }
+    }
+  \end{description}
+}
+\end{document}
+
+% !tp-example Timed exercise
+\documentclass{article}
+\begin{document}
+\wcTpExercise[timing=00:00:10,open]{
+  \begin{description}
+    \item[{Title}] A day at the museum
+    \item[{Context}] The museum opens at 9 a.m. Admission costs 8 euros.
+    \item[{Questions}] \wcOl[class=questions]{
+      \wcLi{
+        \wcTpQuestion[open=input]{
+          \begin{description}
+            \item[{Title}] Opening time
+            \item[{Prompt}] When does the museum open?
+            \item[{Form}] \wcTpTextfield[label=Your answer]{}
+            \item[{Feedback}] Compare your answer with the opening time in the context.
+            \item[{Solution}] At 9 a.m.
+          \end{description}
+        }
+      }
+      \wcLi{
+        \wcTpQuestion[open=input]{
+          \begin{description}
+            \item[{Title}] Admission
+            \item[{Prompt}] How much do two tickets cost?
+            \item[{Form}] \wcTpTextfield[label=Your answer]{}
+            \item[{Feedback}] Multiply the price of one ticket by two.
+            \item[{Solution}] 16 euros.
+          \end{description}
+        }
+      }
+    }
+  \end{description}
+}
+\end{document}
+
+% !tp-example Nested exercises
+\documentclass{article}
+\begin{document}
+\wcTpExercise[open]{
+  \begin{description}
+    \item[{Title}] A museum visit
+    \item[{Context}] The museum opens at 9 a.m.
+    \item[{Questions}] \begin{enumerate}
+      \item \wcTpQuestion[open=input]{
+        \begin{description}
+          \item[{Title}] Opening time
+          \item[{Prompt}] When does the museum open?
+          \item[{Form}] \wcTpTextfield[label=Your answer]{}
+          \item[{Feedback}] Compare your answer with the context.
+          \item[{Solution}] At 9 a.m.
+        \end{description}
+      }
+      \item \wcTpExercise{
+        \begin{description}
+          \item[{Title}] The guided tour
+          \item[{Context}] The tour starts at 10 a.m. and lasts one hour.
+          \item[{Questions}] \begin{enumerate}
+            \item \wcTpQuestion[open=input]{
+              \begin{description}
+                \item[{Title}] End of the tour
+                \item[{Prompt}] When does the tour finish?
+                \item[{Form}] \wcTpTextfield[label=Your answer]{}
+                \item[{Feedback}] Compare your answer with the context.
+                \item[{Solution}] At 11 a.m.
+              \end{description}
+            }
+          \end{enumerate}
+        \end{description}
+      }
+    \end{enumerate}
+  \end{description}
+}
+\end{document}

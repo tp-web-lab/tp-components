@@ -51,6 +51,7 @@
       ]
     }
   },
+  "tp-asciidoc-blog": {},
   "tp-asciidoc-multi-pages": {},
   "tp-asciidoc-multi-slides": {},
   "tp-asciidoc-playground": {
@@ -769,6 +770,7 @@
   "tp-graph-query-tree": {},
   "tp-graph-sequential-circuit": {},
   "tp-grid": {},
+  "tp-html-blog": {},
   "tp-html-multi-pages": {},
   "tp-html-multi-slides": {},
   "tp-html-playground": {
@@ -1165,6 +1167,9 @@
       ]
     }
   },
+  "tp-latex": {},
+  "tp-latex-playground": {},
+  "tp-latex-viewer": {},
   "tp-list-table": {},
   "tp-listof": {},
   "tp-logigram": {
@@ -1286,6 +1291,7 @@
       ]
     }
   },
+  "tp-markdown-blog": {},
   "tp-markdown-multi-pages": {
     "logo": {
       "choices": [
@@ -1402,6 +1408,16 @@
     }
   },
   "tp-markdown-viewer-question": {},
+  "tp-markup-blog": {
+    "language": {
+      "values": [
+        "html",
+        "markdown",
+        "asciidoc",
+        "restructuredtext"
+      ]
+    }
+  },
   "tp-markup-multi-pages": {
     "logo": {
       "choices": [
@@ -2022,6 +2038,7 @@
       ]
     }
   },
+  "tp-restructuredtext-blog": {},
   "tp-restructuredtext-multi-pages": {},
   "tp-restructuredtext-multi-slides": {},
   "tp-restructuredtext-playground": {
@@ -2532,6 +2549,7 @@
       ]
     }
   },
+  "tp-tikz": {},
   "tp-timefield": {
     "label-position": {
       "values": [
@@ -2743,6 +2761,73 @@
           "label": "file-unknown",
           "value": "/docs/components/video-player/examples/file-unknown.mp4"
         }
+      ]
+    }
+  },
+  "tp-word-cloud": {
+    "bg-color": {
+      "values": [
+        "",
+        "default",
+        "red",
+        "orange",
+        "amber",
+        "yellow",
+        "lime",
+        "green",
+        "emerald",
+        "teal",
+        "glaz",
+        "cyan",
+        "sky",
+        "blue",
+        "indigo",
+        "violet",
+        "purple",
+        "fuchsia",
+        "pink",
+        "rose",
+        "zinc",
+        "ivory",
+        "stone"
+      ]
+    },
+    "color": {
+      "values": [
+        "default",
+        "red",
+        "orange",
+        "amber",
+        "yellow",
+        "lime",
+        "green",
+        "emerald",
+        "teal",
+        "glaz",
+        "cyan",
+        "sky",
+        "blue",
+        "indigo",
+        "violet",
+        "purple",
+        "fuchsia",
+        "pink",
+        "rose",
+        "zinc",
+        "ivory",
+        "stone"
+      ]
+    },
+    "shape": {
+      "values": [
+        "circle",
+        "triangle",
+        "square",
+        "pentagon",
+        "hexagon",
+        "cloud",
+        "heart",
+        "puzzle"
       ]
     }
   },

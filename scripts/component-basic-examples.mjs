@@ -150,7 +150,7 @@ export function namedExamples(extension, source) {
 export const markupExample = nativeMarkup;
 
 export function exampleFile(extension, tag, examples) {
-	const fullWindow = /-multi-(pages|slides)$/.test(tag) || tag === "tp-post-it" || tag === "tp-post-it-editor";
+	const fullWindow = /-multi-(pages|slides)$/.test(tag) || tag === "tp-post-it-editor";
 	const frameMinHeight = tag === "tp-post-it-editor" ? "48rem" : "32rem";
 	const frameStyle =
 		extension === "html"

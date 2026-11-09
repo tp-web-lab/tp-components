@@ -22,6 +22,7 @@
  */
 // tp-docgen:dependencies:end
 
+import { chooseSaveTarget, saveBlob } from "../../utilities/save-file.js";
 import { TpBase } from "../base/base.js";
 import {
 	isTpSizeType,
@@ -46,13 +47,13 @@ function isSaveAudioFormat(value: string): value is TpSaveAudioFormat {
 }
 
 /**
- * Audio download controller with an embedded dropdown.
+ * The custom `<tp-save-audio>` element saves the associated audio in its original format.
  *
- * @summary Saves audio from an associated component in several formats.
+ * @summary Saves the associated audio in its original format.
  * @tagname tp-save-audio
  * @attr {"mp3" | "ogg" | "wav"} format = "mp3" - Initially selected audio format.
- * @attr {string} anchor = "" - CSS selector of a component implementing saveAudio(format, filename).
- * @attr {string} name = "file-download" - Icon used by the trigger.
+ * @attr {string} anchor = "" - CSS selector of an audio element or a component implementing saveAudio(format, filename).
+ * @attr {string} name = "save-audio" - Icon used by the trigger.
  * @attr {string} filename = "audio" - Download filename without its extension.
  * @attr {string} variant = "neutral" - Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info.
  * @attr {string} size = "m" - Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl.
@@ -62,8 +63,11 @@ function isSaveAudioFormat(value: string): value is TpSaveAudioFormat {
  * @event tp-save-audio-error Emitted when the target cannot be exported.
  * @eventdetail tp-save-audio-error { format: "mp3" | "ogg" | "wav"; error: unknown; anchor: string }
  * @example
- * <p>Audio saving is reserved for a future integration. No audio provider is currently connected.</p>
- * <tp-save-audio disabled></tp-save-audio>
+ * <p>Listen to the sound of breaking glass, then save the MP3 file.</p>
+ * <audio id="save-audio-example" controls preload="metadata" aria-label="Sound of breaking glass">
+ *   <source src="/docs/medias/audios/glass-break.mp3" type="audio/mpeg">
+ * </audio>
+ * <tp-save-audio anchor="#save-audio-example" filename="glass-break"></tp-save-audio>
  * @accessibility Provides a labelled icon trigger with aria-haspopup, aria-controls and synchronized aria-expanded; disables the trigger while saving or when disabled.
  * @accessibility Format entries are focusable and respond to Enter or Space; decorative checkmarks are hidden and the most recently saved format is marked with aria-current.
  * @accessibilityresponsibility Provide an informative trigger label, a compatible audio target and an accessible text alternative for audio content. Present tp-save-audio-error feedback to the user when export fails.
@@ -101,7 +105,7 @@ export class TpSaveAudio extends TpBase {
 		this.setAttribute("anchor", value);
 	}
 	public get name(): string {
-		return this.getAttribute("name")?.trim() || "file-download";
+		return this.getAttribute("name")?.trim() || "save-audio";
 	}
 	public set name(value: string) {
 		this.setAttribute("name", value);
@@ -155,15 +159,20 @@ export class TpSaveAudio extends TpBase {
 		this.dropdownEl?.hide();
 		try {
 			const target = this.target ?? this.resolveTarget();
-			if (
-				!target ||
-				!("saveAudio" in target) ||
-				typeof target.saveAudio !== "function"
-			)
-				throw new TypeError(
-					"The audio target must implement saveAudio(format, filename).",
-				);
-			const saved = await target.saveAudio(format, this.safeFilename());
+			let saved: boolean;
+			if (target instanceof HTMLAudioElement)
+				saved = await this.saveNativeAudio(target, format);
+			else {
+				if (
+					!target ||
+					!("saveAudio" in target) ||
+					typeof target.saveAudio !== "function"
+				)
+					throw new TypeError(
+						"The audio target must implement saveAudio(format, filename) or be an audio element.",
+					);
+				saved = await target.saveAudio(format, this.safeFilename());
+			}
 			if (!saved) return;
 			this.format = format;
 			this.dispatchEvent(
@@ -193,6 +202,61 @@ export class TpSaveAudio extends TpBase {
 		}
 	}
 
+	/** Resolve only a source actually supplied in the selected format; never relabel audio bytes. */
+	private audioSource(
+		audio: HTMLAudioElement,
+		format: TpSaveAudioFormat,
+	): string | null {
+		const mime = {
+			mp3: ["audio/mpeg", "audio/mp3"],
+			ogg: ["audio/ogg", "application/ogg"],
+			wav: ["audio/wav", "audio/wave", "audio/x-wav"],
+		}[format];
+		const candidates = audio.hasAttribute("src")
+			? [{ src: audio.getAttribute("src") ?? "", type: "" }]
+			: [...audio.querySelectorAll("source")].map((source) => ({
+					src: source.getAttribute("src") ?? "",
+					type: source.type.split(";")[0]?.trim().toLowerCase() ?? "",
+				}));
+		for (const candidate of candidates) {
+			if (!candidate.src) continue;
+			const url = new URL(candidate.src, audio.baseURI);
+			if (audio.currentSrc && url.href !== audio.currentSrc) continue;
+			if (
+				candidate.type
+					? mime.includes(candidate.type)
+					: url.pathname.toLowerCase().endsWith(`.${format}`)
+			)
+				return url.href;
+		}
+		return null;
+	}
+	private async saveNativeAudio(
+		audio: HTMLAudioElement,
+		format: TpSaveAudioFormat,
+	): Promise<boolean> {
+		const src = this.audioSource(audio, format);
+		if (!src)
+			throw new Error(
+				`No ${format.toUpperCase()} source is available for this audio.`,
+			);
+		const mimeType = { mp3: "audio/mpeg", ogg: "audio/ogg", wav: "audio/wav" }[
+			format
+		];
+		const destination = await chooseSaveTarget({
+			suggestedName: `${this.safeFilename()}.${format}`,
+			description: `${format.toUpperCase()} audio`,
+			mimeType,
+			extension: `.${format}`,
+		});
+		if (!destination) return false;
+		const response = await fetch(src);
+		if (!response.ok)
+			throw new Error(`Unable to load audio (${response.status}).`);
+		await saveBlob(await response.blob(), destination);
+		return true;
+	}
+
 	private ensureControl(): void {
 		let trigger = this.querySelector<HTMLElement>(":scope > tp-icon-button");
 		if (!trigger) {
@@ -204,10 +268,13 @@ export class TpSaveAudio extends TpBase {
 			trigger.id = `tp-save-audio-trigger-${TpSaveAudio.nextId}`;
 		}
 		trigger.setAttribute("name", this.name);
+		if (this.name === "save-audio")
+			trigger.setAttribute("library", "components");
+		else trigger.removeAttribute("library");
 		trigger.setAttribute("label", "Save audio");
 		trigger.setAttribute(
 			"data-help-description",
-			"Choose MP3, OGG or WAV and save the audio file.",
+			"Save the audio file in its available format.",
 		);
 		trigger.setAttribute("aria-haspopup", "menu");
 		trigger.setAttribute("variant", this.variant);
@@ -238,12 +305,14 @@ export class TpSaveAudio extends TpBase {
 				label.textContent = format.toUpperCase();
 				item.append(check, label);
 				item.addEventListener("click", () => {
-					void this.save(format).catch(() => undefined);
+					if (item.getAttribute("aria-disabled") !== "true")
+						void this.save(format).catch(() => undefined);
 				});
 				item.addEventListener("keydown", (event) => {
 					if (event.key === "Enter" || event.key === " ") {
 						event.preventDefault();
-						void this.save(format).catch(() => undefined);
+						if (item.getAttribute("aria-disabled") !== "true")
+							void this.save(format).catch(() => undefined);
 					}
 				});
 				menu.append(item);
@@ -256,6 +325,17 @@ export class TpSaveAudio extends TpBase {
 		dropdown.addEventListener("tp-dropdown-toggle", this.syncExpanded);
 		this.dropdownEl = dropdown;
 		this.syncCurrentFormat();
+		const target = this.target ?? this.resolveTarget();
+		for (const item of this.querySelectorAll<HTMLElement>("[data-format]")) {
+			const format = item.dataset.format ?? "";
+			const unavailable =
+				target instanceof HTMLAudioElement &&
+				isSaveAudioFormat(format) &&
+				!this.audioSource(target, format);
+			item.hidden = unavailable;
+			item.setAttribute("aria-disabled", String(unavailable));
+			item.tabIndex = unavailable ? -1 : 0;
+		}
 	}
 
 	private readonly syncExpanded = (): void => {
@@ -273,7 +353,10 @@ export class TpSaveAudio extends TpBase {
 	}
 
 	private readonly handleTriggerClick = (): void => {
-		if (!this.disabled && !this.saving) this.dropdownEl?.toggle();
+		if (!this.disabled && !this.saving) {
+			this.ensureControl();
+			this.dropdownEl?.toggle();
+		}
 	};
 
 	private resolveTarget(): Element | null {

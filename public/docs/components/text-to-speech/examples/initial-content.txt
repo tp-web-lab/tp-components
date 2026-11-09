@@ -1,0 +1,1 @@
+Welcome to tp-components. This example uses the browser speech synthesis service.

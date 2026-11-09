@@ -1,0 +1,16 @@
+[tp-asciidoc-viewer%allow-script,label="tp-latex-viewer"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-latex-viewer]
+=====
+[script,type="tp/latex"]
+====
+\section{Hello}A formula $x^2$.
+====
+=====
+======
+----
+========

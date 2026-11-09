@@ -10,15 +10,15 @@
  */
 // tp-docgen:dependencies:end
 
-import style from './card.css?inline';
-import { TpBase } from '../base/base.js';
+import { TpBase } from "../base/base.js";
+import style from "./card.css?inline";
 
-type CardSection = 'header' | 'main' | 'footer';
+type CardSection = "header" | "main" | "footer";
 
-const CARD_SECTIONS: CardSection[] = ['header', 'main', 'footer'];
+const CARD_SECTIONS: CardSection[] = ["header", "main", "footer"];
 
 /**
- * Displays structured header, main, and footer content as a card.
+ * The custom `<tp-card>` element displays a structured card.
  *
  * The source is a definition list whose terms are `header`, `main`, and `footer`.
  * Section order in the source does not affect the rendered card order.
@@ -45,113 +45,115 @@ const CARD_SECTIONS: CardSection[] = ['header', 'main', 'footer'];
  * </tp-card>
  */
 export class TpCard extends TpBase {
-  private static readonly styleId = 'tp-card-styles';
+	private static readonly styleId = "tp-card-styles";
 
-  protected override connectedCallback(): void {
-    super.connectedCallback();
-    this.ensureGlobalStyle(TpCard.styleId, style);
-    this.classList.add('tp-card');
+	protected override connectedCallback(): void {
+		super.connectedCallback();
+		this.ensureGlobalStyle(TpCard.styleId, style);
+		this.classList.add("tp-card");
 
-    if (this.dataset.tpCardRendered === 'true') {
-      return;
-    }
+		if (this.dataset.tpCardRendered === "true") {
+			return;
+		}
 
-    this.renderFromDefinitionList();
-  }
+		this.renderFromDefinitionList();
+	}
 
-  private renderFromDefinitionList(): void {
-    const definitionList = Array.from(this.children).find(
-      (child): child is HTMLDListElement => child.tagName === 'DL',
-    );
+	private renderFromDefinitionList(): void {
+		const definitionList = Array.from(this.children).find(
+			(child): child is HTMLDListElement => child.tagName === "DL",
+		);
 
-    if (!definitionList) {
-      this.renderError('tp-card requires a definition list');
-      return;
-    }
+		if (!definitionList) {
+			this.renderError("tp-card requires a definition list");
+			return;
+		}
 
-    const content = new Map<CardSection, Node[]>();
-    let currentSection: CardSection | null = null;
+		const content = new Map<CardSection, Node[]>();
+		let currentSection: CardSection | null = null;
 
-    for (const child of Array.from(definitionList.children)) {
-      if (child.tagName === 'DT') {
-        const key = child.textContent?.trim().toLowerCase() ?? '';
-        currentSection = CARD_SECTIONS.includes(key as CardSection)
-          ? key as CardSection
-          : null;
-        continue;
-      }
+		for (const child of Array.from(definitionList.children)) {
+			if (child.tagName === "DT") {
+				const key = child.textContent?.trim().toLowerCase() ?? "";
+				currentSection = CARD_SECTIONS.includes(key as CardSection)
+					? (key as CardSection)
+					: null;
+				continue;
+			}
 
-      if (child.tagName === 'DD' && currentSection) {
-        const nodes = content.get(currentSection) ?? [];
-        nodes.push(...Array.from(child.childNodes));
-        content.set(currentSection, nodes);
-      }
-    }
+			if (child.tagName === "DD" && currentSection) {
+				const nodes = content.get(currentSection) ?? [];
+				nodes.push(...Array.from(child.childNodes));
+				content.set(currentSection, nodes);
+			}
+		}
 
-    const fragment = document.createDocumentFragment();
-    for (const section of CARD_SECTIONS) {
-      const nodes = content.get(section);
-      if (!nodes || nodes.length === 0) {
-        continue;
-      }
+		const fragment = document.createDocumentFragment();
+		for (const section of CARD_SECTIONS) {
+			const nodes = content.get(section);
+			if (!nodes || nodes.length === 0) {
+				continue;
+			}
 
-      const element = document.createElement(section === 'main' ? 'div' : section);
-      element.className = `tp-card-${section}`;
-      const media = section === 'main'
-        && !content.has('header')
-        && !content.has('footer')
-        ? this.findOnlyMedia(nodes)
-        : null;
-      element.append(...(media ? [media] : nodes));
+			const element = document.createElement(
+				section === "main" ? "div" : section,
+			);
+			element.className = `tp-card-${section}`;
+			const media =
+				section === "main" && !content.has("header") && !content.has("footer")
+					? this.findOnlyMedia(nodes)
+					: null;
+			element.append(...(media ? [media] : nodes));
 
-      if (media) {
-        element.classList.add('tp-card-main-media');
-        this.classList.add('tp-card-media-only');
-      }
+			if (media) {
+				element.classList.add("tp-card-main-media");
+				this.classList.add("tp-card-media-only");
+			}
 
-      fragment.append(element);
-    }
+			fragment.append(element);
+		}
 
-    if (!fragment.hasChildNodes()) {
-      this.renderError('tp-card requires header, main, or footer content');
-      return;
-    }
+		if (!fragment.hasChildNodes()) {
+			this.renderError("tp-card requires header, main, or footer content");
+			return;
+		}
 
-    this.replaceChildren(fragment);
-    this.dataset.tpCardRendered = 'true';
-  }
+		this.replaceChildren(fragment);
+		this.dataset.tpCardRendered = "true";
+	}
 
-  private findOnlyMedia(nodes: Node[]): Element | null {
-    const significantNodes = nodes.filter(
-      (node) => node.nodeType !== Node.COMMENT_NODE
-        && !(node.nodeType === Node.TEXT_NODE && !node.textContent?.trim()),
-    );
-    if (significantNodes.length !== 1) {
-      return null;
-    }
+	private findOnlyMedia(nodes: Node[]): Element | null {
+		const significantNodes = nodes.filter(
+			(node) =>
+				node.nodeType !== Node.COMMENT_NODE &&
+				!(node.nodeType === Node.TEXT_NODE && !node.textContent?.trim()),
+		);
+		if (significantNodes.length !== 1) {
+			return null;
+		}
 
-    const candidate = significantNodes[0];
-    if (!(candidate instanceof Element)) {
-      return null;
-    }
-    if (['img', 'svg'].includes(candidate.localName)) {
-      return candidate;
-    }
-    if (!['figure', 'p', 'span'].includes(candidate.localName)) {
-      return null;
-    }
+		const candidate = significantNodes[0];
+		if (!(candidate instanceof Element)) {
+			return null;
+		}
+		if (["img", "svg"].includes(candidate.localName)) {
+			return candidate;
+		}
+		if (!["figure", "p", "span"].includes(candidate.localName)) {
+			return null;
+		}
 
-    return this.findOnlyMedia(Array.from(candidate.childNodes));
-  }
+		return this.findOnlyMedia(Array.from(candidate.childNodes));
+	}
 
-  private renderError(message: string): void {
-    const error = document.createElement('div');
-    error.className = 'tp-card-error';
-    error.textContent = `Error: ${message}`;
-    this.replaceChildren(error);
-  }
+	private renderError(message: string): void {
+		const error = document.createElement("div");
+		error.className = "tp-card-error";
+		error.textContent = `Error: ${message}`;
+		this.replaceChildren(error);
+	}
 }
 
-if (!customElements.get('tp-card')) {
-  customElements.define('tp-card', TpCard);
+if (!customElements.get("tp-card")) {
+	customElements.define("tp-card", TpCard);
 }

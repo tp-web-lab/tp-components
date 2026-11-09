@@ -267,11 +267,21 @@ it("groups API tables in API and command tabs and only shows custom events creat
 	const viewer = await mount();
 	const tabs = viewer.querySelector(".tp-component-viewer-docs tp-tabs");
 	expect(
-		[...(tabs?.querySelectorAll('[role="tab"]') ?? [])].map((tab) =>
-			tab.textContent?.trim(),
-		),
-	).toEqual(["Commands", "Attributes", "Methods", "Events", "CSS Properties"]);
-	const events = [...(tabs?.querySelectorAll('[role="tabpanel"]') ?? [])][3];
+		[...(tabs?.querySelectorAll('[role="tab"]') ?? [])]
+			.filter((tab) => tab.closest("tp-tabs") === tabs)
+			.map((tab) => tab.textContent?.trim()),
+	).toEqual([
+		"User interactions",
+		"Attributes",
+		"Methods",
+		"Events",
+		"CSS Properties",
+	]);
+	const events = [...(tabs?.querySelectorAll('[role="tabpanel"]') ?? [])].find(
+		(panel) =>
+			panel.closest("tp-tabs") === tabs &&
+			panel.textContent?.includes("tp-button-ready"),
+	);
 	expect(events?.textContent).toContain("tp-button-ready");
 	expect(events?.textContent).not.toContain("click");
 	expect(events?.textContent).not.toContain("tp-button-ghost");
@@ -341,14 +351,14 @@ it("suppresses boilerplate descriptions but preserves informative documentation"
 	expect(docs).toContain("Opens the linked resource when activated.");
 });
 
-it("starts with Doc and changes the title and visible panel without recreating the preview", async () => {
+it("starts with Doc and keeps the component title when changing panels without recreating the preview", async () => {
 	mockFetch();
 	const viewer = document.createElement("tp-component-viewer");
 	viewer.tag = "tp-button";
 	document.body.append(viewer);
 	await vi.waitFor(() =>
 		expect(viewer.querySelector("[data-component-title]")?.textContent).toBe(
-			"tp-button Doc",
+			"tp-button",
 		),
 	);
 	const docs = viewer.querySelector<HTMLElement>(".tp-component-viewer-docs");
@@ -360,7 +370,7 @@ it("starts with Doc and changes the title and visible panel without recreating t
 	);
 	choices[1]?.click();
 	expect(viewer.querySelector("[data-component-title]")?.textContent).toBe(
-		"tp-button Demo",
+		"tp-button",
 	);
 	expect(docs?.hidden).toBe(true);
 	expect(demo?.hidden).toBe(false);
@@ -429,7 +439,7 @@ it("loads the full API lazily and preserves it when changing panels", async () =
 	);
 	choices[2]?.click();
 	expect(viewer.querySelector("[data-component-title]")?.textContent).toBe(
-		"tp-button API",
+		"tp-button",
 	);
 	expect(
 		viewer.querySelector<HTMLElement>(".tp-component-viewer-docs")?.hidden,
@@ -455,4 +465,267 @@ it("loads the full API lazily and preserves it when changing panels", async () =
 	expect(viewer.querySelector(".tp-component-viewer-api tp-html-viewer")).toBe(
 		apiViewer,
 	);
+});
+
+it("shows the complete mouse and keyboard instructions in the first documentation tab", async () => {
+	vi.spyOn(globalThis, "fetch").mockImplementation(
+		async () =>
+			new Response(
+				JSON.stringify({
+					...api,
+					userHelp: {
+						interactions:
+							"#### Mouse interactions\n\n| Control | Result |\n| --- | --- |\n| Close | Dismiss the notice. |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a parent component. |",
+					},
+				}),
+			),
+	);
+	const viewer = await mount();
+	await vi.waitFor(() =>
+		expect(
+			viewer.querySelector("[data-component-interactions]")?.textContent,
+		).toContain("Choose a parent component."),
+	);
+	expect(
+		viewer.querySelector("[data-component-interactions]")?.textContent,
+	).toContain("Dismiss the notice.");
+	expect(
+		viewer.querySelectorAll("[data-component-interactions] table"),
+	).toHaveLength(2);
+	expect(
+		viewer.querySelectorAll("[data-component-interactions] kbd"),
+	).toHaveLength(3);
+});
+
+it("shows readonly author HTML and keeps it synchronized with controls, reflected changes and reset", async () => {
+	mockFetch();
+	const viewer = await mount(
+		'<tp-component-viewer><script type="tp/html"><tp-button variant="danger">Keep this label</tp-button></script></tp-component-viewer>',
+	);
+	const target = preview(viewer);
+	const toggle = viewer.querySelector<HTMLElement>(
+		"[data-component-source-toggle]",
+	);
+	expect(
+		viewer.querySelector("[data-component-source] tp-code-editor"),
+	).toBeNull();
+	toggle?.click();
+	const editor = viewer.querySelector<HTMLElementTagNameMap["tp-code-editor"]>(
+		"[data-component-source] tp-code-editor",
+	);
+	expect(editor?.hasAttribute("readonly")).toBe(true);
+	const editors = viewer.querySelectorAll<
+		HTMLElementTagNameMap["tp-code-editor"]
+	>("[data-component-source] tp-code-editor");
+	expect(editors).toHaveLength(5);
+	expect(
+		[...viewer.querySelectorAll("[data-component-source] [role=tab]")].map(
+			(tab) => tab.textContent?.trim(),
+		),
+	).toEqual([
+		"HTML",
+		"tp-asciidoc",
+		"tp-latex",
+		"tp-markdown",
+		"tp-restructuredtext",
+	]);
+	expect(Array.from(editors, (item) => item.getAttribute("language"))).toEqual([
+		"html",
+		"asciidoc",
+		"latex",
+		"markdown",
+		"restructuredtext",
+	]);
+	for (const item of editors) {
+		expect(item.hasAttribute("readonly")).toBe(true);
+		expect(item.value).toContain("Keep this label");
+	}
+	expect(editors[1]?.value).toContain("[tp-button]");
+	expect(editors[2]?.value).toContain("\\wcTpButton");
+	expect(editors[2]?.value).toContain("\\begin{document}");
+	expect(editors[3]?.value).toContain("::: tp-button");
+	expect(editors[4]?.value).toContain(".. tp-button::");
+
+	expect(editor?.value).toContain("Keep this label");
+	expect(editor?.value).not.toContain("data-tp-base-host");
+	viewer
+		.querySelector<HTMLInputElement>("[data-component-booleans] input")
+		?.click();
+	expect(editor?.value).toMatch(/<tp-button\b[^>]*\sdisabled(?:\s|>)/);
+	expect(editor?.value).not.toContain('disabled=""');
+	for (const item of editors) expect(item.value).toContain("disabled");
+	target.setAttribute("href", "next.html?a=1&b=2");
+	await vi.waitFor(() =>
+		expect(editor?.value).toContain('href="next.html?a=1&amp;b=2"'),
+	);
+	target.removeAttribute("disabled");
+	await vi.waitFor(() => expect(editor?.value).not.toContain("disabled"));
+	toggle?.click();
+	expect(
+		viewer.querySelector<HTMLElement>("[data-component-source]")?.hidden,
+	).toBe(true);
+	target.setAttribute("href", "another.html");
+	await vi.waitFor(() =>
+		expect(
+			viewer.querySelector<HTMLInputElement>(
+				'[data-component-setting="href"] input',
+			)?.value,
+		).toBe("another.html"),
+	);
+	toggle?.click();
+	expect(editor?.value).toContain("another.html");
+	for (const item of editors) expect(item.value).toContain("another.html");
+	viewer.resetDefaults();
+	expect(editor?.value).not.toContain("another.html");
+	for (const item of editors) expect(item.value).not.toContain("another.html");
+	expect(editor?.value).toContain("Keep this label");
+});
+
+it("shortens only declared boolean HTML attributes without changing text or script payloads", async () => {
+	const payload = JSON.stringify({ example: 'disabled=""' });
+	const source = `<tp-button disabled title="">Text disabled=""</tp-button><script type="application/json">${payload}</script>`;
+	mockFetch().mockImplementation(
+		async (input) =>
+			new Response(
+				String(input).endsWith(".html") ? source : JSON.stringify(api),
+			),
+	);
+	const viewer = await mount(
+		'<tp-component-viewer src="/example.html"></tp-component-viewer>',
+	);
+	viewer.querySelector<HTMLElement>("[data-component-source-toggle]")?.click();
+	const editor = viewer.querySelector<HTMLElementTagNameMap["tp-code-editor"]>(
+		'[data-component-source-format="html"]',
+	);
+	expect(editor?.value).toContain('<tp-button disabled title="">');
+	expect(editor?.value).toContain('Text disabled=""');
+	expect(editor?.value).toContain(
+		`<script type="application/json">${payload}</script>`,
+	);
+});
+
+it("edits, clears and resets author content while synchronizing all markup sources", async () => {
+	mockFetch();
+	const viewer = await mount(
+		'<tp-component-viewer><script type="tp/html"><tp-button>Original label</tp-button></script></tp-component-viewer>',
+	);
+	const content = viewer.querySelector<HTMLElementTagNameMap["tp-textfield"]>(
+		"[data-component-content]",
+	);
+	expect(content?.hasAttribute("clearable")).toBe(true);
+	expect(content?.value).toBe("Original label");
+	viewer.querySelector<HTMLElement>("[data-component-source-toggle]")?.click();
+	for (const value of ["Changed label", ""]) {
+		if (!content) throw new Error("Missing content field");
+		content.value = value;
+		content.dispatchEvent(new Event("input", { bubbles: true }));
+		const editors = viewer.querySelectorAll<
+			HTMLElementTagNameMap["tp-code-editor"]
+		>("[data-component-source] tp-code-editor");
+		for (const editor of editors) {
+			expect(editor.value).not.toContain("Original label");
+			if (value) expect(editor.value).toContain(value);
+			else expect(editor.value).not.toContain("Changed label");
+		}
+	}
+	viewer.resetDefaults();
+	expect(content?.value).toBe("Original label");
+	for (const editor of viewer.querySelectorAll<
+		HTMLElementTagNameMap["tp-code-editor"]
+	>("[data-component-source] tp-code-editor"))
+		expect(editor.value).toContain("Original label");
+});
+
+it("documents the live component's own buttons and refreshes the legend when controls change", async () => {
+	mockFetch().mockImplementation(
+		async () =>
+			new Response(
+				JSON.stringify({
+					...api,
+					tagname: "tp-console",
+					examples: [
+						{ code: "<tp-console><tp-button>Try me</tp-button></tp-console>" },
+					],
+				}),
+			),
+	);
+	const viewer = await mount(
+		'<tp-component-viewer tag="tp-console"><script type="tp/html"><tp-console><tp-button>Try me</tp-button></tp-console></script></tp-component-viewer>',
+	);
+	const frame = viewer.querySelector("iframe");
+	if (!frame?.contentDocument) throw new Error("Missing frame");
+	frame.contentDocument.body.innerHTML = "<tp-console></tp-console>";
+	frame.dispatchEvent(new Event("load"));
+	const target = frame.contentDocument.querySelector("tp-console");
+	if (!target) throw new Error("Missing console");
+	target.innerHTML =
+		'<tp-copy-code title="Copy console" data-help-description="Copy displayed messages."><button>Copy code</button></tp-copy-code><tp-icon-button label="Clear console" name="close" data-help-description="Remove displayed messages."></tp-icon-button>';
+	await vi.waitFor(() =>
+		expect(
+			viewer.querySelector("[data-component-buttons]")?.textContent,
+		).toContain("Clear console"),
+	);
+	const legend = viewer.querySelector("[data-component-buttons]");
+	expect(
+		Array.from(
+			viewer.querySelectorAll("[data-component-interaction-tabs] [role=tab]"),
+			(tab) => tab.textContent?.trim(),
+		),
+	).toEqual(["Buttons", "Mouse", "Keyboard"]);
+	expect(legend?.textContent).toContain("Copy displayed messages.");
+	expect(legend?.querySelectorAll("tbody tr")).toHaveLength(2);
+	expect(
+		legend?.querySelector("button, tp-copy-code, tp-icon-button"),
+	).toBeNull();
+	target.replaceChildren();
+	await vi.waitFor(() =>
+		expect(legend?.textContent).toContain("No component-specific buttons."),
+	);
+});
+
+it("offers closed API unions without catalog entries and keeps open unions editable", async () => {
+	vi.spyOn(globalThis, "fetch").mockImplementation(
+		async () =>
+			new Response(
+				JSON.stringify({
+					...api,
+					attributes: [
+						{ name: "bg-color", type: '"" | "teal" | "blue"', default: '""' },
+						{ name: "color", type: "'teal' | 'blue'", default: '"teal"' },
+						{
+							name: "shape",
+							type: '"circle" | "triangle" | "square" | "pentagon" | "hexagon"',
+							default: '"circle"',
+						},
+						{ name: "custom", type: '"small" | string', default: '""' },
+					],
+				}),
+			),
+	);
+	const viewer = await mount();
+	const target = preview(viewer);
+	for (const name of ["bg-color", "color", "shape"]) {
+		expect(
+			viewer.querySelector(`[data-component-setting="${name}"]`)?.localName,
+		).toBe("tp-radio-list");
+	}
+	expect(
+		viewer.querySelector('[data-component-setting="custom"]')?.localName,
+	).toBe("tp-textfield");
+	const background = viewer.querySelector(
+		'[data-component-setting="bg-color"]',
+	);
+	expect(
+		[...(background?.querySelectorAll("li") ?? [])].map(
+			(item) => item.textContent,
+		),
+	).toEqual(["Default", "teal", "blue"]);
+	background?.querySelectorAll<HTMLInputElement>("input")[2]?.click();
+	expect(target.getAttribute("bg-color")).toBe("blue");
+	background?.querySelectorAll<HTMLInputElement>("input")[0]?.click();
+	expect(target.hasAttribute("bg-color")).toBe(false);
+	const shapes = viewer.querySelector('[data-component-setting="shape"]');
+	expect(shapes?.querySelectorAll("input").length).toBe(5);
+	shapes?.querySelectorAll<HTMLInputElement>("input")[4]?.click();
+	expect(target.getAttribute("shape")).toBe("hexagon");
 });

@@ -15,6 +15,7 @@ it.each([
 	["sql", ".sql"],
 	["html", ".html,.htm"],
 	["markdown", ".md,.markdown"],
+	["latex", ".tex,.latex"],
 	["asciidoc", ".adoc,.asciidoc"],
 	["restructuredtext", ".rst"],
 ])(
@@ -49,6 +50,7 @@ it.each([
 	["sql", "sql"],
 	["prolog", "pl"],
 	["markdown", "md"],
+	["latex", "tex"],
 	["asciidoc", "adoc"],
 	["restructuredtext", "rst"],
 ])(

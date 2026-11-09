@@ -84,7 +84,9 @@ function escapeHtml(value: string): string {
 }
 
 /**
- * @summary XY graph rendering component.
+ * The custom `<tp-xy-plot>` element plots functions, points and curves on labelled coordinate axes.
+ *
+ * @summary Plots functions, points and curves on labelled coordinate axes.
  * @tagname tp-xy-plot
  * @attr {string} src = "" - URL of a text file containing the XY graph definition; used instead of the inline tp/xy-plot script.
  * @attr {"both" | "horizontal" | "vertical" | "none"} grid = "both" - Visible grid directions; overrides the graph directive when present.

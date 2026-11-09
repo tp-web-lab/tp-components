@@ -1,41 +1,40 @@
-# Speech to text
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
+# <tp-icon name="speech-to-text" library="components" size="1.25em"></tp-icon> Speech to text
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom **`<tp-speech-to-text>`** element implements the speech-to-text functionality: transcribes microphone speech into editable text using the Web Speech API.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
-The component uses the browser [**Web Speech API**](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API).
+<div class="tp-component-doc-intro">
 
-<tp-speech-to-text lang="en-US" interim-results></tp-speech-to-text>
+The custom `<tp-speech-to-text>` element transcribes speech from the microphone into editable text.
 
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
+<tp-speech-to-text lang="en-US" interim-results=""></tp-speech-to-text>
+<!-- tp-docgen:introduction:end -->
+
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-speech-to-text" src="/docs/components/speech-to-text/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Start | Request microphone access and begin listening; optionally record audio once recognition starts. |
-| Stop | Finish recognition and optional audio recording; allow final transcription results to arrive. |
-| Clear | Cancel listening and remove the transcript and optional recording. |
-| Audio player / Download recording | Replay or save the captured audio when recording is enabled. |
-| Transcript | Click to edit finalized text. Provisional text may change while you speak. |
-| Status | Read permission or service errors. Recognition depends on the browser and may send audio to an online service. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |
-| Typing in the transcript | Edit the recognized text. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Add the boolean `record` attribute to capture audio alongside recognition. This combination is temporarily enabled only in Safari. Other browsers show a warning and keep transcription alone, when their recognition API is available. Start begins recognition first and then requests audio capture when listening starts. Wait for the recording status before speaking. Stop, recognition ending, or disabling the component stops capture. Clear removes both outputs. Recording failure does not cancel transcription. Audio stays local and can be replayed or downloaded; recognition may use the browser’s online service. The attribute is absent by default.
-
 
 The inherited `lang` attribute determines recognition language. `continuous` requests multiple results within a session; the browser can still end that session. `interim-results` displays provisional text separately; only final text is committed to `value`. Each new session appends to the existing value. Editing `value`, typing in the field, changing recognition settings or disabling the component cancels active recognition to prevent stale results from overwriting edits.
 
@@ -56,348 +55,13 @@ JavaScript
 
 Unlike `tp-text-to-speech`, this component acquires input from the microphone, not from a script or `src` file. `value` can supply initial editable text. The public methods are `start()`, `stop()`, `abort()` and `clear()`. Call `start()` from a user action. `abort()` discards provisional results but retains committed text; removing the component also releases its microphone session.
 
-#### Browser support and privacy
+### Browser support and privacy
 
 Recognition depends on the browser, operating system, language and service availability. The component detects `SpeechRecognition` and the prefixed `webkitSpeechRecognition`; if neither is present, it disables Start and retains keyboard input. An exposed API does not guarantee that its recognition service is usable. Permission denial, unavailable microphones and service/network failures are reported in the status and the error event.
 
 Use HTTPS or localhost and allow microphone access. Embedded examples may also need permission in their containing iframe. Depending on the browser, audio can be sent to a remote recognition service and an internet connection may be required. Without `record`, the component does not store an audio file. Recognition is not guaranteed to work offline. Inform users before they dictate sensitive content. See [SpeechRecognition compatibility and privacy notes](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition).
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Start recognition, allow microphone access when requested and speak to inspect the transcript in a supported browser.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-French
-: Speak French and inspect the transcript with French recognition configured.
-
-Recording
-: In Safari, select Start, wait for audio capture, then speak and select Stop. Review the transcript and replay the recording. Other browsers show a warning and offer transcription alone.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_rest" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpSpeechToText -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>continuous</code> | <code>boolean</code> | <code>false</code> | Requests multiple recognition results in one session. |
-  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Disables editing and recognition and stops any active session. |
-  | <code>interim-results</code> | <code>boolean</code> | <code>false</code> | Displays provisional recognition separately from the final transcript. |
-  | <code>legend</code> | <code>string</code> | <code>&quot;Speech to text&quot;</code> | Caption of the fieldset surrounding the controls. |
-  | <code>record</code> | <code>boolean</code> | <code>false</code> | Safari only (temporary): records audio alongside recognition for replay and download. |
-  | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Final transcript, editable without microphone access. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-speech-to-text>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>abort</code> | <code>abort(): void</code> | Cancels recognition, discarding provisional text but retaining final text. |
-  | <code>clear</code> | <code>clear(): void</code> | Clears the transcript after cancelling active recognition. |
-  | <code>start</code> | <code>start(): void</code> | Starts recognition after an explicit user action; never retries automatically. |
-  | <code>stop</code> | <code>stop(): void</code> | Stops listening while allowing the browser to deliver a final result. |
-  [Public methods of `TpSpeechToText`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-speech-to-text-end</code> | <code>&#123; value: string &#125;</code> | Emitted when recognition ends or is aborted. |
-  | <code>tp-speech-to-text-error</code> | <code>&#123; error: string &#125;</code> | Emitted when recognition fails or is unavailable. |
-  | <code>tp-speech-to-text-result</code> | <code>&#123; value: string; interim: string &#125;</code> | Emitted when recognition updates its transcript. |
-  | <code>tp-speech-to-text-start</code> | <code>&#123; value: string &#125;</code> | Emitted when recognition starts listening. |
-  [Events emitted by `<tp-speech-to-text>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-speech-to-text>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_speech-to-text_speech-to-text.TpSpeechToText.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -424,12 +88,44 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Start recognition, allow microphone access when requested and speak to inspect the transcript in a supported browser.
+
+French
+: Speak French and inspect the transcript with French recognition configured.
+
+Recording
+: In Safari, select Start, wait for audio capture, then speak and select Stop. Review the transcript and replay the recording. Other browsers show a warning and offer transcription alone.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-speech-to-text>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-audio-recorder
@@ -456,12 +152,12 @@ All tp-components used by `<tp-speech-to-text>` are loaded automatically by this
 @summary Single-line and automatically growing multiline text field.
 -->
 
-- [`<tp-audio-recorder>`](../audio-recorder/index.md) : Records microphone audio locally for replay and download.
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
-- [`<tp-stack>`](../stack/index.md) : Vertical stack layout component.
-- [`<tp-textfield>`](../textfield/index.md) : Single-line and automatically growing multiline text field.
+- [`<tp-audio-recorder>`](#/components/audio-recorder/index.md) : Records microphone audio locally for replay and download.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
+- [`<tp-button-group>`](#/components/button-group/index.md) : Button group component for organizing multiple buttons.
+- [`<tp-stack>`](#/components/stack/index.md) : Vertical stack layout component.
+- [`<tp-textfield>`](#/components/textfield/index.md) : Single-line and automatically growing multiline text field.
 
 ### External
 

@@ -147,7 +147,9 @@ function filesToTreeNodes(files: readonly TpFile[]): TpFilesystemTreeNode[] {
 }
 
 /**
- * @summary In-memory file system with a file tree UI.
+ * The custom `<tp-filesystem>` element organizes project files and folders in an editable tree.
+ *
+ * @summary Organizes project files and folders in an editable tree.
  * @tagname tp-filesystem
  * @cssprop --tp-font-family Font family used by the file system.
  * @cssprop --tp-font-size Font size used by the file system.

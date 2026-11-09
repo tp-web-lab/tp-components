@@ -1,0 +1,35 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-splitter position="40%">
+  <dl>
+    <dt>start</dt><dd><tp-box>Drag the divider to resize this panel.</tp-box></dd>
+    <dt>end</dt><dd><tp-box>This panel uses the remaining space.</tp-box></dd>
+  </dl>
+</tp-splitter>|
+\end{document}
+
+% !tp-example Nested splitters
+\documentclass{article}
+\begin{document}
+Drag the outer divider left or right, then drag the inner divider up or down. Focus either divider to resize its panels with the arrow keys.
+
+
+\rawhtml|<tp-splitter axis="horizontal" position="30%" style="height: 20rem">
+  <dl>
+    <dt>start</dt>
+    <dd><tp-box><h3>Navigation</h3><p>This panel is resized by the outer divider.</p></tp-box></dd>
+    <dt>end</dt>
+    <dd>
+      <tp-splitter axis="vertical" position="55%" style="height: 100%">
+        <dl>
+          <dt>start</dt>
+          <dd><tp-box><h3>Editor</h3><p>The inner divider changes the height of this panel.</p></tp-box></dd>
+          <dt>end</dt>
+          <dd><tp-box><h3>Preview</h3><p>This panel uses the remaining height.</p></tp-box></dd>
+        </dl>
+      </tp-splitter>
+    </dd>
+  </dl>
+</tp-splitter>|
+\end{document}

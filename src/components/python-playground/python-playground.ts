@@ -99,7 +99,7 @@ import { buildPythonTestDocument } from "./python-test-document.js";
 export { TpPythonProject } from "./python-project.js";
 
 /**
- * Python playground component.
+ * The custom `<tp-python-playground>` element edits and runs a Python project.
  *
  * Provides a file-based playground that executes Python in the browser.
  *

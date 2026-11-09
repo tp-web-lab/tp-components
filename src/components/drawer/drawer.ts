@@ -35,7 +35,7 @@ function isPlacement(value: string): value is TpDrawerPlacement {
 }
 
 /**
- * Drawer overlay component.
+ * The custom `<tp-drawer>` element displays a sliding drawer panel.
  *
  * Displays a sliding panel from one edge of the viewport or containing element.
  *

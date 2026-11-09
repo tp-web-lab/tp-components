@@ -1,29 +1,38 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="lorem-ipsum" library="components" size="1.25em"></tp-icon> Lorem ipsum
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-lorem-ipsum>` element implements the Lorem ipsum functionality: generates placeholder sentences, titles, paragraphs or lists.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-lorem-ipsum>` element generates placeholder sentences, titles, paragraphs or lists.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-lorem-ipsum length="1" words-per-sentence="8" sentences-per-paragraph="2" seed="42"></tp-lorem-ipsum>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-lorem-ipsum" src="/docs/components/lorem-ipsum/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Generated text | Read, select or copy the placeholder text. There are no component-specific buttons or gestures. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| Generated text | No component-specific keyboard shortcut or extra focus stop. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Choose `type="p"` (default) for paragraphs, `ul` or `ol` for lists, or `dl` for term/definition pairs. `sentence` and `title` produce inline text, not a paragraph or a heading element. A sentence ends with a period; a title capitalizes each word without final punctuation.
 
@@ -35,252 +44,11 @@ Counts accept a fixed integer or an inclusive range such as `2-4`; reversed boun
 
 The dictionary and generation functions are copied from the `lorem-ipsum` extension of `@tp/tp-markdown`. The component does not invoke a Markdown parser: it generates the native HTML directly and reuses the library's paragraph and list styles. Tests compare seeded results with the extension for all six output types. Placeholder text is pseudo-Latin regardless of `lang`; replace it with meaningful content before publishing. Child content is replaced by the generated output.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Read a generated paragraph with two eight-word sentences. The fixed seed makes the output repeatable in all four markup languages.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-HTML
-: ::include{examples/examples.html}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
+### Programming notes
 
 Set `type`, `length`, `wordsPerSentence`, `sentencesPerParagraph` or `seed` to update the content. Consecutive attribute changes are grouped into one render. Call `regenerate()` for an immediate refresh; with a fixed seed, the same output is reproduced.
 
-### API
-
-<!-- tp-docgen:api TpLoremIpsum -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>length</code> | <code>string</code> | <code>&quot;3-5&quot;</code> | Number or inclusive range of paragraphs or list entries; ignored for title and sentence. |
-  | <code>seed</code> | <code>string</code> | <code>&quot;&quot;</code> | Integer seed for repeatable output; empty generates fresh random text. |
-  | <code>sentences-per-paragraph</code> | <code>string</code> | <code>&quot;3-6&quot;</code> | Number or inclusive range of sentences per paragraph; applies only to p. |
-  | <code>type</code> | <code>&quot;sentence&quot;\|&quot;title&quot;\|&quot;p&quot;\|&quot;dl&quot;\|&quot;ol&quot;\|&quot;ul&quot;</code> | <code>&quot;p&quot;</code> | Generated structure; title and sentence produce plain text. |
-  | <code>words-per-sentence</code> | <code>string</code> | <code>&quot;4-16&quot;</code> | Number or inclusive range of words per sentence or title. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-lorem-ipsum>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>regenerate</code> | <code>regenerate(): void</code> | Generates new content; the same seed and parameters always reproduce the same output. |
-  [Public methods of `TpLoremIpsum`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-lorem-ipsum>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-lorem-ipsum>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_lorem-ipsum.TpLoremIpsum.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -307,12 +75,38 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Read a generated paragraph with two eight-word sentences. The fixed seed makes the output repeatable in all four markup languages.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-lorem-ipsum>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -323,8 +117,8 @@ All tp-components used by `<tp-lorem-ipsum>` are loaded automatically by this co
 @summary Callout component for highlighted contextual content.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-callout>`](#/components/callout/index.md) : Callout component for highlighted contextual content.
 
 ### External
 

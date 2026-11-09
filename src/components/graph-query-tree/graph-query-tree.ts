@@ -234,7 +234,8 @@ function operatorShape(
 }
 
 /**
- * Relational query-tree specialization of `<tp-graph-editor>`.
+ * The custom `<tp-graph-query-tree>` element edits relational algebra trees and generates equivalent SQL.
+ *
  * @summary Edits relational algebra trees and generates equivalent SQL.
  * @tagname tp-graph-query-tree
  * @example

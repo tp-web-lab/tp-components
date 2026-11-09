@@ -1,0 +1,25 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpCsvTable[heading]{
+  \wcScript[type=tp/csv-table]|
+    Country,Capital
+    Estonia,Tallinn
+    Latvia,Riga
+    Lithuania,Vilnius
+  |
+}
+\end{document}
+
+% !tp-example Quoted fields
+\documentclass{article}
+\begin{document}
+\wcTpCsvTable[heading,separator=;]{
+  \wcScript[type=tp/csv-table]|
+Name;Note
+"Ada; Lovelace";"A quoted ""word"""
+Grace;"First line
+Second line"
+|
+}
+\end{document}

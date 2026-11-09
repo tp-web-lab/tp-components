@@ -112,7 +112,7 @@ export {
 } from "./markdown-project.js";
 
 /**
- * Markdown playground component.
+ * The custom `<tp-markdown-playground>` element edits and renders a Markdown project.
  *
  * Provides a file-based playground that renders Markdown documents in the browser.
  *

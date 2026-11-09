@@ -301,8 +301,9 @@ export async function renderAsciidocRuntimeIn(root: ParentNode): Promise<void> {
 }
 
 /**
- * Renders inline or external AsciiDoc as semantic HTML.
+ * The custom `<tp-asciidoc>` element renders AsciiDoc documents.
  *
+ * @summary Renders AsciiDoc documents.
  * @tagname tp-asciidoc
  * @attr {string} src = "" - URL of an external AsciiDoc source file.
  * @event tp-asciidoc-rendered Emitted after conversion and runtime initialization complete.

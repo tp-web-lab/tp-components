@@ -1,0 +1,10 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  \wcTpBox[id=intro-copy-code]{
+    \rawhtml|<pre><code>const answer = 6 * 7;</code></pre>|
+  }
+  \wcTpCopyCode[for=intro-copy-code]{}
+}
+\end{document}

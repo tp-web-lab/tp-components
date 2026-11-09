@@ -28,7 +28,9 @@ import { SingleChoiceQuestionSrcSchema } from "../question/question-src-schema.j
 import "../radio-list/radio-list.js";
 
 /**
- * @summary Single-choice question: wraps tp-question with radio-list validation.
+ * The custom `<tp-single-choice-question>` element presents and grades a question with one selectable answer.
+ *
+ * @summary Presents and grades a question with one selectable answer.
  * @tagname tp-single-choice-question
  *
  * @attr {number} answer = 0 - 1-based index of the correct answer in the original list order. Not reflected back to the DOM when set via JS property — read from attribute only.

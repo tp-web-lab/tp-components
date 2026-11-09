@@ -1,0 +1,41 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpAsciidocViewer{
+  \wcScript[type=tp/asciidoc]|
+          = Live AsciiDoc
+          :showtitle:
+
+          Edit this source and select *Run*.
+        |
+}
+\end{document}
+
+% !tp-example Multiple examples
+\documentclass{article}
+\begin{document}
+\wcTpAsciidocViewer{
+  \wcScript[type=tp/asciidoc]!
+          .Paragraph and list
+          ====
+          A paragraph with *strong text* and _emphasis_.
+
+          * Alpha
+          * Beta
+          ====
+
+          .Table
+          ====
+          |===
+          | Language | Purpose
+
+          | AsciiDoc
+          | Technical writing
+
+          | HTML
+          | Web documents
+          |===
+          ====
+        !
+}
+\end{document}

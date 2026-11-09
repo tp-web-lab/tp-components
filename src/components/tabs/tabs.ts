@@ -102,7 +102,9 @@ function isOrientation(value: string): value is TpTabsOrientation {
 let instanceCount = 0;
 
 /**
- * @summary Accessible tab group.
+ * The custom `<tp-tabs>` element provides an accessible tab group.
+ *
+ * @summary Provides an accessible tab group.
  * @tagname tp-tabs
  * @attr {string} activation = "auto" - Keyboard activation mode (`auto` or `manual`).
  * @attr {string} orientation = "horizontal" - Tab list orientation (`horizontal` or `vertical`).

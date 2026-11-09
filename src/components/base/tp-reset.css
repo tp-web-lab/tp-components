@@ -280,7 +280,6 @@
 
   mark {
     padding: 0.125em 0.25em;
-    border-radius: 0;
     border-radius: var(--tp-border-radius-sm);
     background-color: color-mix(in oklab, #f4dd01, transparent 75%);
     color: inherit;

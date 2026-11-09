@@ -67,7 +67,9 @@ import {
 import { TpBase } from "../base/base.js";
 
 /**
- * @summary creates and edits persistent personal annotations attached to document elements.
+ * The custom `<tp-post-it-editor>` element creates and edits persistent personal annotations attached to document elements.
+ *
+ * @summary Creates and edits persistent personal annotations attached to document elements.
  * @tagname tp-post-it-editor
  * @attr {string} for = "" - CSS selector of the document container to annotate; without it, use setTarget().
  * @attr {"html" | "markdown" | "asciidoc" | "restructuredtext" | "none"} markup = "none" - Default language for new notes; changes also apply to the active draft.

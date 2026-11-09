@@ -1,0 +1,28 @@
+[tp-asciidoc-viewer%allow-script,label="tp-latex-playground"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-latex-playground]
+=====
+[script,type="tp/latex"]
+====
+\section{Hello}A formula $x^2$.
+====
+=====
+======
+.A document in sections
+======
+[tp-latex-playground,repository="/examples/playgrounds/latex-playground/09-sectioned-document"]
+=====
+=====
+======
+.A document with a TikZ figure
+======
+[tp-latex-playground,repository="/examples/playgrounds/latex-playground/10-illustrated-document"]
+=====
+=====
+======
+----
+========

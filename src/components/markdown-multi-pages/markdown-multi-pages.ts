@@ -135,7 +135,9 @@ function wrapAsMarkdownCodeBlock(source: string): string {
 }
 
 /**
- * @summary Multi-page Markdown documentation.
+ * The custom `<tp-markdown-multi-pages>` element presents Markdown documents with navigation between pages.
+ *
+ * @summary Presents Markdown documents with navigation between pages.
  * @tagname tp-markdown-multi-pages
  * @attr {string} repository = "/docs" - Root path containing sidebar.md, cover.md and the linked Markdown pages.
  * @attr {string | null} toolbar = null - Comma-separated controls: home, menu, code, calc, postit, clock, lang, color, theme, screen, fullscreen. Absent or empty keeps all controls; none hides commands. Updates immediately.

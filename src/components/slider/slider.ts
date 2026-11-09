@@ -9,7 +9,7 @@ import { TpBase } from "../base/base.js";
 import style from "./slider.css?inline";
 
 /**
- * Arranges children in a horizontally scrollable row with keyboard navigation.
+ * The custom `<tp-slider>` element arranges content in a horizontally scrollable row.
  *
  * Reactive attributes:
  * - `slider-height`
@@ -18,7 +18,7 @@ import style from "./slider.css?inline";
  * - `scrollbar`
  * - `scrollbar-track-color`
  * - `scrollback-thumb-color`
- * @summary arranges content in a horizontally scrollable row with a configurable scrollbar.
+ * @summary Arranges content in a horizontally scrollable row.
  * @tagname tp-slider
  * @attr {string} gap = "1rem" - Gap between items, using --tp-slider-gap when absent.
  * @attr {string} item-width = "auto" - Preferred width of non-image items. By default, each item uses its own width or content-based size.

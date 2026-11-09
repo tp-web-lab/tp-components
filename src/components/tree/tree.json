@@ -2,7 +2,7 @@
   "tagname": "tp-tree",
   "classname": "TpTree",
   "superclass": "TpBase",
-  "description": "Interactive hierarchical tree.",
+  "description": "Provides an interactive hierarchical tree.",
   "examples": [
     {
       "label": "Example 1",
@@ -187,7 +187,7 @@
     },
     {
       "name": "--tp-tree-guide-midline",
-      "default": "calc( var(--tp-tree-row-padding-block, 0.125rem) + var(--tp-tree-toggle-half-size, 0.5rem) )",
+      "default": "calc( var(--tp-tree-row-padding-block, 0.125rem) + max(14px, var(--tp-tree-toggle-half-size, 0.5rem)) - 1.5px )",
       "description": "Block position of guide midlines."
     },
     {
@@ -223,8 +223,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Tree",
-    "introduction": "The custom `<tp-tree>` element implements the <tp-icon name=\"tree\" library=\"components\" size=\"1.25em\"></tp-icon> Tree functionality: interactive hierarchical tree.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Expand or collapse branches to inspect nested items. |\n| Select | Select available links or entries to use the actions provided by the surrounding page. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-tree>` element provides an interactive hierarchical tree.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Expand or collapse branches to inspect nested items. |\n| Select | Select available links or entries to use the actions provided by the surrounding page. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

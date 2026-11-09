@@ -1,48 +1,44 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="html-viewer-question" library="components" size="1.25em"></tp-icon> HTML viewer question
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-html-viewer-question>` element implements the markup exercise functionality: checks rendered HTML using a viewer and external JavaScript DOM tests.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
-<tp-html-viewer-question open src="/docs/components/markup-viewer-question/examples/emphasis.html" test="/docs/components/markup-viewer-question/examples/emphasis.test.js">
+<div class="tp-component-doc-intro">
+
+The custom `<tp-html-viewer-question>` element presents and grades exercises based on rendered HTML documents.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
+<tp-html-viewer-question open="" src="/docs/components/markup-viewer-question/examples/emphasis.html" test="/docs/components/markup-viewer-question/examples/emphasis.test.js">
   <dl>
     <dt>Title</dt><dd>Semantic emphasis</dd>
     <dt>Prompt</dt><dd>Mark Hello with strong emphasis. Open Code to edit, then submit.</dd>
     <dt>Solution</dt><dd>Use the language's strong-emphasis syntax.</dd>
   </dl>
 </tp-html-viewer-question>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-html-viewer-question" src="/docs/components/html-viewer-question/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Question title | Expand or collapse the exercise without losing code. |
-| Input / Output | Show or hide the answer form or feedback panels. |
-| Code / Render | Show or hide editable markup and its output. |
-| Rendered HTML / Generated HTML / Tree, when available | Inspect the preview, generated HTML or parser structure. |
-| Editor toolbar | Show or hide the source editor tools. |
-| Run in the embedded toolbar | Refresh the preview from the edited markup without submitting. |
-| Embedded Reset | Restore the original project. |
-| Submit response | Run the external tests against the current code, including on repeated unchanged submissions. |
-| Reset response | Restore the original code and cancel or clear the current report. |
-| Feedback / Solution | Read test messages or the author's solution, available before submission. |
-| Console controls | Copy or clear execution messages. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between question and programming controls. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused action or expand/collapse the title. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Output tabs | Navigate Feedback and Solution. |
-| Typing in the editor | Modify source code using the embedded editor's editing behavior. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 The inherited `timing="hh:mm:ss"` attribute enables the [timed-question flow](../question/index.md). Start begins the countdown; Continue restores access after expiry without clearing the response.
 
@@ -52,200 +48,11 @@ Tests use Mocha/Chai through `@tp/test` and query `document` in an isolated rend
 
 The initial paragraph deliberately fails both tests. Give Hello strong emphasis and submit again. Reset restores the paragraph. Every submission rerenders a snapshot without changing the visible viewer. Changing src or test discards edits. Browser-side tests are formative, not secure grading, and have no timeout for infinite loops. Source scripts are not executed in the test document.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Submit the initial paragraph to see two failures. Use the source editor to mark Hello with strong emphasis, then submit again to pass both DOM tests.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-HTML
-: ::include{examples/examples.html}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
+### Programming notes
 
 Extends `TpMarkupViewerQuestion<TpHtmlViewer>`. The inherited `tp-question-submit` event carries the current markup string in `detail.value`. Test loading, cancellation, output isolation and repeated submissions are shared with programming questions.
 
-### API
-
-<!-- tp-docgen:api TpHtmlViewerQuestion -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | None. |  |  |  |
-  [Attributes of `<tp-html-viewer-question>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpHtmlViewerQuestion`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-html-viewer-question>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-html-viewer-question>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_html-viewer-question.TpHtmlViewerQuestion.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -272,12 +79,38 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Submit the initial paragraph to see two failures. Use the source editor to mark Hello with strong emphasis, then submit again to pass both DOM tests.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-html-viewer-question>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-console
@@ -296,24 +129,20 @@ All tp-components used by `<tp-html-viewer-question>` are loaded automatically b
 @summary Base description-list container for question components.
 -->
 
-- [`<tp-console>`](../console/index.md) : Displays structured console output.
-- [`<tp-html-viewer>`](../html-viewer/index.md) : Interactive HTML viewer with editable source, live rendering, and DOM inspection.
-- [`<tp-iframe>`](../iframe/index.md) : Controlled iframe component.
-- [`<tp-question>`](../question/index.md) : Base description-list container for question components.
+- [`<tp-console>`](#/components/console/index.md) : Displays structured console output.
+- [`<tp-html-viewer>`](#/components/html-viewer/index.md) : Interactive HTML viewer with editable source, live rendering, and DOM inspection.
+- [`<tp-iframe>`](#/components/iframe/index.md) : Controlled iframe component.
+- [`<tp-question>`](#/components/question/index.md) : Base description-list container for question components.
 
 ### External
 
 <!--
-@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
-@summary Shared parsers, games and rendering utilities.
+@credit Chai https://www.chaijs.com/
+@summary Assertions in browser tests.
 -->
 <!--
 @credit es-module-lexer https://github.com/guybedford/es-module-lexer
 @summary ECMAScript module import analysis.
--->
-<!--
-@credit Chai https://www.chaijs.com/
-@summary Assertions in browser tests.
 -->
 <!--
 @credit Lit https://lit.dev/
@@ -323,10 +152,14 @@ All tp-components used by `<tp-html-viewer-question>` are loaded automatically b
 @credit Mocha https://mochajs.org/
 @summary Browser test execution.
 -->
+<!--
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
+-->
 
-- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
-- [es-module-lexer](https://github.com/guybedford/es-module-lexer) : ECMAScript module import analysis.
 - [Chai](https://www.chaijs.com/) : Assertions in browser tests.
+- [es-module-lexer](https://github.com/guybedford/es-module-lexer) : ECMAScript module import analysis.
 - [Lit](https://lit.dev/) : Web-component examples and import maps.
 - [Mocha](https://mochajs.org/) : Browser test execution.
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 <!-- tp-docgen:dependencies:end -->

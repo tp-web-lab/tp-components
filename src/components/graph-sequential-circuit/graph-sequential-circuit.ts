@@ -237,6 +237,8 @@ export function evaluateSequentialCombinational(
 }
 
 /**
+ * The custom `<tp-graph-sequential-circuit>` element edits and simulates synchronous sequential logic circuits.
+ *
  * @summary Edits and simulates synchronous sequential logic circuits.
  * @tagname tp-graph-sequential-circuit
  * @example

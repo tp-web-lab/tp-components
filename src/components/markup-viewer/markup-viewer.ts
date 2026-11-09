@@ -6,6 +6,7 @@
 import { DeferredVisibility } from "../../utilities/deferred-visibility.js";
 import { IframeOverlayBridge } from "../../utilities/iframe-overlay-bridge.js";
 import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
+import { createViewerFullscreen } from "../../utilities/viewer-fullscreen.js";
 import { TpBase } from "../base/base.js";
 import type { TpCodeEditor } from "../code-editor/code-editor.js";
 import "../divider/divider.js";
@@ -55,6 +56,8 @@ function languageLabel(language: string): string {
 	switch (language.toLowerCase()) {
 		case "html":
 			return "HTML";
+		case "stex":
+			return "LaTeX";
 		case "markdown":
 			return "Markdown";
 		case "asciidoc":
@@ -133,6 +136,21 @@ function measureIframeContentHeight(iframe: HTMLIFrameElement): number {
 					clipBottom: childBottom,
 				});
 		}
+	}
+	// Authored floating notes are demo content, unlike transient menus and tooltips.
+	for (const note of documentNode.querySelectorAll(
+		"tp-post-it[data-post-it-floating]",
+	)) {
+		if (note.getClientRects().length === 0) continue;
+		const rect = note.getBoundingClientRect();
+		const paper = note
+			.querySelector("[data-post-it-paper]")
+			?.getBoundingClientRect();
+		renderedContentHeight = Math.max(
+			renderedContentHeight,
+			rect.bottom + 8,
+			(paper?.bottom ?? 0) + 8,
+		);
 	}
 	const bodyStyle = documentNode.defaultView?.getComputedStyle(
 		documentNode.body,
@@ -634,6 +652,7 @@ export abstract class TpMarkupViewer<
 		iframe.addEventListener("load", initialize);
 
 		if (
+			!this.hasAttribute("data-tp-render-eager") &&
 			deferredDocument !== "" &&
 			iframe.getClientRects().length === 0 &&
 			(hiddenAncestor !== null || typeof IntersectionObserver !== "undefined")
@@ -678,6 +697,7 @@ export abstract class TpMarkupViewer<
 		)
 			return;
 
+		documentNode.documentElement.setAttribute("data-tp-auto-height", "");
 		const revision = this.iframeObservationRevision;
 		const waitingTags = new Set<string>();
 		const synchronizeCustomElements = (root: ParentNode): void => {
@@ -707,6 +727,10 @@ export abstract class TpMarkupViewer<
 				for (const node of Array.from(mutation.addedNodes)) {
 					if (node instanceof ElementConstructor) {
 						synchronizeCustomElements(node);
+						if (node.matches("tp-post-it"))
+							this.iframeResizeObserver?.observe(node);
+						for (const note of node.querySelectorAll("tp-post-it"))
+							this.iframeResizeObserver?.observe(note);
 					}
 				}
 			}
@@ -724,6 +748,8 @@ export abstract class TpMarkupViewer<
 				this.scheduleIframeHeightSync(iframe);
 			});
 			this.iframeResizeObserver.observe(documentNode.body);
+			for (const note of documentNode.querySelectorAll("tp-post-it"))
+				this.iframeResizeObserver.observe(note);
 		}
 	}
 
@@ -752,6 +778,7 @@ export abstract class TpMarkupViewer<
 
 	private createViewerMarkup(initialMode: TMode): string {
 		const prefix = escapeHtml(this.viewerClassName);
+		const fullscreen = createViewerFullscreen(this).outerHTML;
 		// A demo or subclass tag still uses its canonical viewer's component icon.
 		const iconName = escapeHtml(this.viewerClassName.replace(/^tp-/, ""));
 		if (this.lite) {
@@ -769,6 +796,7 @@ export abstract class TpMarkupViewer<
               <tp-icon-button data-role="reset" name="refresh" label="Reset" title="Reset" size="s"></tp-icon-button>
               <tp-icon-button data-role="run" name="play" label="Run" title="Run" size="s"></tp-icon-button>
             </span>
+            ${fullscreen}
           </span>
         </div>
         <tp-switcher class="tp-markup-viewer-layout ${prefix}-layout" gap="0" threshold="60rem">
@@ -781,7 +809,9 @@ export abstract class TpMarkupViewer<
         </tp-switcher>
       `;
 		}
-		const structuralMode = this.outputModes.at(-1) ?? this.outputModes[0];
+		const structuralMode = this.outputModes.find(
+			(mode) => mode.value !== initialMode && mode.value !== "html",
+		);
 		const htmlCodeMode = this.outputModes.find((mode) => mode.value === "html");
 
 		return `
@@ -796,7 +826,7 @@ export abstract class TpMarkupViewer<
           <span class="tp-markup-viewer-output-actions" data-role="output-actions">
             <tp-icon-button data-role="output-mode" data-mode="${escapeHtml(initialMode)}" name="language-html" library="tp" label="Rendered HTML" title="Rendered HTML" size="s" aria-pressed="true"></tp-icon-button>
             ${htmlCodeMode ? `<tp-icon-button data-role="output-mode" data-mode="${escapeHtml(htmlCodeMode.value)}" name="code" library="tp" label="Generated HTML" title="Generated HTML" size="s" aria-pressed="false"></tp-icon-button>` : ""}
-            <tp-icon-button data-role="output-mode" data-mode="${escapeHtml(structuralMode?.value ?? initialMode)}" name="tree" library="components" label="${escapeHtml(structuralMode?.label ?? "AST")}" title="${escapeHtml(structuralMode?.label ?? "AST")}" size="s" aria-pressed="false"></tp-icon-button>
+            ${structuralMode ? `<tp-icon-button data-role="output-mode" data-mode="${escapeHtml(structuralMode?.value ?? initialMode)}" name="tree" library="components" label="${escapeHtml(structuralMode?.label ?? "AST")}" title="${escapeHtml(structuralMode?.label ?? "AST")}" size="s" aria-pressed="false"></tp-icon-button>` : ""}
             <tp-divider orientation="vertical"></tp-divider>
           </span>
           <span class="tp-markup-viewer-editor-actions" data-role="editor-actions">
@@ -804,6 +834,7 @@ export abstract class TpMarkupViewer<
             <tp-icon-button data-role="reset" name="refresh" label="Reset" title="Reset" size="s"></tp-icon-button>
             <tp-icon-button data-role="run" name="play" label="Run" title="Run" size="s"></tp-icon-button>
           </span>
+          ${fullscreen}
         </span>
       </div>
       <tp-switcher class="tp-markup-viewer-layout ${prefix}-layout" gap="0" threshold="60rem">

@@ -42,7 +42,9 @@ import type { TpAsciidocViewer } from "../asciidoc-viewer/asciidoc-viewer.js";
 import "../asciidoc-viewer/asciidoc-viewer.js";
 import { TpMarkupViewerQuestion } from "../markup-viewer-question/markup-viewer-question.js";
 /**
- * @summary checks rendered AsciiDoc using a viewer and external JavaScript DOM tests.
+ * The custom `<tp-asciidoc-viewer-question>` element presents and grades exercises based on rendered AsciiDoc documents.
+ *
+ * @summary Presents and grades exercises based on rendered AsciiDoc documents.
  * @tagname tp-asciidoc-viewer-question
  * @accessibility Reuses question actions, feedback tabs and the editable markup viewer.
  * @keyboard {Enter / Space} Expands the question or activates a focused action.

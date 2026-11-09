@@ -143,3 +143,8 @@ tp-post-it[lite] [data-post-it-header] {
 		border: 1px solid CanvasText;
 	}
 }
+
+/* Auto-sized previews measure the full note, independently of their initial viewport. */
+html[data-tp-auto-height] tp-post-it [data-post-it-content] {
+	max-block-size: none;
+}

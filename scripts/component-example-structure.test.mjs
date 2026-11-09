@@ -1,5 +1,5 @@
 /**
- * Tests Basic usage ordering, grouped Attributes panels and normalization idempotence.
+ * Tests Basic usage ordering, complementary scenarios panels and normalization idempotence.
  *
  * Run with the Node.js test runner from the tp-components package root after installing
  * workspace dependencies.
@@ -22,7 +22,7 @@ import {
 	readExamples,
 } from "./standardize-component-examples.mjs";
 
-test("all components use Basic usage, grouped Attributes and complementary examples", () => {
+test("all components use Basic usage, complementary scenarios and complementary examples", () => {
 	assert.deepEqual(checkExampleStructure(), []);
 });
 test("every grouped panel has a documented objective and no per-attribute examples remain", () => {
@@ -38,8 +38,7 @@ test("every grouped panel has a documented objective and no per-attribute exampl
 					describeExample(component, example.label),
 					`${component}/${example.label}`,
 				);
-			if (componentAttributes(component).length)
-				assert.ok(examples[1].source.includes("attributes.js"), component);
+
 		}
 	}
 });

@@ -21,3 +21,9 @@ tp-fullscreen > tp-icon-button > button:hover {
   background: var(--tp-background-color, Canvas);
   color: var(--tp-text-body, CanvasText);
 }
+
+[data-tp-viewer-fullscreen]:fullscreen {
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}

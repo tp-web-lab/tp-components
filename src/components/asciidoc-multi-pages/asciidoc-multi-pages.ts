@@ -1,5 +1,5 @@
-/** @module components/asciidoc-multi-pages 
- * @summary Multi-page AsciiDoc documentation shell. 
+/** @module components/asciidoc-multi-pages
+ * @summary Multi-page AsciiDoc documentation shell.
  */
 
 // tp-docgen:dependencies:start
@@ -14,8 +14,15 @@ import {
 	type TpMarkupMultiPagesLanguage,
 } from "../markup-multi-pages/markup-multi-pages.js";
 
-/** @tagname tp-asciidoc-multi-pages @summary Renders a navigable repository with tp-asciidoc. * @example
- * <tp-asciidoc-multi-pages></tp-asciidoc-multi-pages>
+/**
+ * The custom `<tp-asciidoc-multi-pages>` element presents AsciiDoc documents with navigation between pages.
+ *
+ * @summary Presents AsciiDoc documents with navigation between pages.
+ * @tagname tp-asciidoc-multi-pages
+ * @example
+ * <tp-box style="position: relative; contain: layout; block-size: 32rem; padding: 0;">
+ *   <tp-asciidoc-multi-pages repository="/docs/components/_shared/intro-documents/asciidoc" label="A small guide" menu=""></tp-asciidoc-multi-pages>
+ * </tp-box>
  */
 export class TpAsciidocMultiPages extends TpMarkupMultiPages {
 	protected override get fixedLanguage(): TpMarkupMultiPagesLanguage {

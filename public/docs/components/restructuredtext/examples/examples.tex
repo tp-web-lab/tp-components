@@ -1,0 +1,15 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpRestructuredtext{
+  \wcScript[type=tp/restructuredtext]|
+    Hello, **Docutils**!
+  |
+}
+\end{document}
+
+% !tp-example External document
+\documentclass{article}
+\begin{document}
+\wcTpRestructuredtext[src=/docs/components/restructuredtext/examples/basic-usage.rst]{}
+\end{document}

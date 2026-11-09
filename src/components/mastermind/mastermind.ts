@@ -60,7 +60,7 @@ interface MastermindSnapshot {
 }
 
 /**
- * Displays an interactive Mastermind game.
+ * The custom `<tp-mastermind>` element displays an interactive Mastermind game.
  *
  * @summary Displays an interactive Mastermind game.
  * @tagname tp-mastermind

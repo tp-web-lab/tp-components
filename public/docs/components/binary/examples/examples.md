@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-binary" allow-script }
-:::::: script { type="tp/markdown" }
+::::: tp-markdown-viewer { label="tp-binary" allow-script }
+:::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-binary
 1. 1010110!0
@@ -17,42 +17,6 @@
 7. 0110!0!101
 
 8. 10!0101!10
-:::
-```
-
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-::::: tp-stack
-:::: tp-cluster
-::: tp-textfield { data-setting="puzzle" label="puzzle" value placeholder clearable }
-:::
-::::
-
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
-
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="binary attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/binary/examples/attributes.js" }
 :::
 ```
 
@@ -83,5 +47,5 @@ Preparing the preview…
 10. 101!10!10010
 :::
 ```
-::::::
-:::::::
+::::
+:::::

@@ -42,8 +42,9 @@ bundler
 
 /** Synchronizes only Imports, preserving subsequent sections and authored prose. */
 export function syncImports(markdown, directory) {
-  const pattern = /^### Imports[^\n]*\n[\s\S]*?(?=^#{1,3} |^<!-- tp-docgen:dependencies:start -->|^<!-- tp-docgen:typedoc:start -->|(?![\s\S]))/m;
-  const block = `### Imports\n\n${imports(directory)}\n\n`;
+  const pattern = /^### Import(?:s|ing)[^\n]*\n[\s\S]*?(?=^#{1,3} |^<!-- -->|^<!-- tp-docgen:dependencies:start -->|^<!-- tp-docgen:typedoc:start -->|(?![\s\S]))/m;
+  const heading = markdown.includes("<!-- tp-docgen:page-layout:v2 -->") ? "Importing" : "Imports";
+  const block = `### ${heading}\n\n${imports(directory)}\n\n`;
   if (pattern.test(markdown)) return markdown.replace(pattern, (match, offset) =>
     offset + match.length === markdown.length ? `${block.trimEnd()}\n` : block);
   const apiEnd = '<!-- /tp-docgen:api -->';

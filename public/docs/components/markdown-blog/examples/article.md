@@ -1,0 +1,5 @@
+Grow herbs in a sunny spot.
+
+### A simple start
+
+Try mint or basil, and check the soil each morning.

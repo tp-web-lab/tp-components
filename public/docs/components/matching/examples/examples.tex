@@ -1,0 +1,85 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpMatching{
+  \begin{itemize}
+    \item Hello
+    \item Thank you
+    \item Goodbye
+  \end{itemize}
+  \begin{enumerate}
+    \item Bonjour
+    \item Merci
+    \item Au revoir
+  \end{enumerate}
+}
+\end{document}
+
+% !tp-example Rich content
+\documentclass{article}
+\begin{document}
+\wcTpMatching{
+  \begin{itemize}
+    \item \wcTpIcon[name=lt,library=flags,size=3em,role=img,aria-label=Flag to identify]{}
+    \item Listen to the sound.
+    \wcAudio[controls,src=/docs/medias/audios/glass-break.mp3,aria-label=Sound to identify]{}
+    \item Watch the scene.
+    \wcVideo[controls,width=240,src=/docs/medias/videos/chute-eau.mp4,aria-label=Scene to identify]{}
+  \end{itemize}
+  \begin{enumerate}
+    \item Lithuania
+    \item Breaking glass
+    \item A waterfall
+  \end{enumerate}
+}
+\end{document}
+
+% !tp-example Irregular verbs
+\documentclass{article}
+\begin{document}
+\wcTpMatching{
+  \begin{description}
+    \item[{Base form}] \begin{itemize}
+      \item be
+      \item have
+      \item do
+    \end{itemize}
+    \item[{Past simple}] \begin{enumerate}
+      \item was
+      \item had
+      \item did
+    \end{enumerate}
+    \item[{Past participle}] \begin{itemize}
+      \item been
+      \item had
+      \item done
+    \end{itemize}
+    \item[{French}] \begin{enumerate}
+      \item être
+      \item avoir
+      \item faire
+    \end{enumerate}
+  \end{description}
+}
+\end{document}
+
+% !tp-example Header list
+\documentclass{article}
+\begin{document}
+\wcTpMatching[heading]{
+  \begin{itemize}
+    \item English
+    \item French
+  \end{itemize}
+  \begin{itemize}
+    \item Hello
+    \item Thank you
+    \item Goodbye
+  \end{itemize}
+  \begin{enumerate}
+    \item Bonjour
+    \item Merci
+    \item Au revoir
+  \end{enumerate}
+}
+\end{document}

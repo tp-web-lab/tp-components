@@ -8,7 +8,9 @@
 import { TpBase } from "../base/base.js";
 import style from "./note.css?inline";
 /**
- * @summary Defines an HTML note referenced by tp-ref.
+ * The custom `<tp-note>` element defines a hidden HTML note for reference tooltips and generated lists.
+ *
+ * @summary Defines a hidden HTML note for reference tooltips and generated lists.
  * @tagname tp-note
  * @attr {string} ref = "" - Identifier used by references in this document.
  * @example

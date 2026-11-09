@@ -389,6 +389,8 @@ function gateMarkup(
 }
 
 /**
+ * The custom `<tp-graph-logical-circuit>` element edits and simulates combinational logic circuits.
+ *
  * @summary Edits and simulates combinational logic circuits.
  * @tagname tp-graph-logical-circuit
  * @accessibility Makes logical input and output terminals operable by pointer and keyboard.

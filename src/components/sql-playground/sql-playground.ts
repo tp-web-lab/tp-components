@@ -105,7 +105,7 @@ export {
 } from "./sql-project.js";
 
 /**
- * SQL playground component.
+ * The custom `<tp-sql-playground>` element edits and runs a SQL project.
  *
  * Provides a file-based playground that executes SQL with SQLite in the browser.
  *

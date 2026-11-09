@@ -1,0 +1,11 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[data-intro-action=lang,data-allow-script]{
+  Choose English or French to change the message in this isolated example.
+
+  \rawhtml|<tp-lang langs="en,fr" repository="/docs/components/lang/examples"></tp-lang>|
+  \webcomponent[data-demo-translation]{h2}{Welcome to this example.}
+  \wcScript[src=/docs/components/_shared/introduction-actions.js]||
+}
+\end{document}

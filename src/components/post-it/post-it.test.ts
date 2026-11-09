@@ -515,3 +515,45 @@ it("moves by keyboard on the header, with Shift for fine movement", () => {
 	);
 	expect(note.style.getPropertyValue("--tp-post-it-x")).toBe("110px");
 });
+
+it("targets the note help from its paper and controls, but preserves author component help", async () => {
+	const note = fixture();
+	note.innerHTML +=
+		"<tp-box data-author-box><span>Author content</span></tp-box>";
+	await settle();
+	const help = vi.spyOn(note, "help").mockResolvedValue();
+	const shortcut = () =>
+		new KeyboardEvent("keydown", {
+			key: "?",
+			ctrlKey: true,
+			bubbles: true,
+			cancelable: true,
+		});
+	for (const selector of [
+		"[data-post-it-paper]",
+		"[data-post-it-header]",
+		"[data-post-it-pin] button",
+		"[data-post-it-reset] button",
+		"[data-post-it-content]",
+	]) {
+		const target = note.querySelector(selector);
+		expect(target).not.toBeNull();
+		target?.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+		document.dispatchEvent(shortcut());
+	}
+	expect(help).toHaveBeenCalledTimes(5);
+	window.dispatchEvent(new Event("blur"));
+	note.querySelector("[data-post-it-pin] button")?.dispatchEvent(shortcut());
+	expect(help).toHaveBeenCalledTimes(6);
+	const author =
+		note.querySelector<import("../box/box.js").TpBox>("[data-author-box]");
+	expect(author).not.toBeNull();
+	if (!author) return;
+	const authorHelp = vi.spyOn(author, "help").mockResolvedValue();
+	author
+		.querySelector("span")
+		?.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+	document.dispatchEvent(shortcut());
+	expect(authorHelp).toHaveBeenCalledTimes(1);
+	expect(help).toHaveBeenCalledTimes(6);
+});

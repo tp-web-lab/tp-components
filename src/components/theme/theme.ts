@@ -243,7 +243,7 @@ function syncThemeTargets(target: HTMLElement, source: TpTheme): void {
 }
 
 /**
- * `<tp-theme>` controls the visual theme of its parent element.
+ * The custom `<tp-theme>` element switches the visual theme of the surrounding content.
  *
  * It applies either `.tp-light` or `.tp-dark` on the parent that contains
  * `<tp-theme>`. In `auto` mode, it follows the system color scheme.
@@ -252,7 +252,7 @@ function syncThemeTargets(target: HTMLElement, source: TpTheme): void {
  * - a global theme when `<tp-theme>` is a direct child of `<body>`
  * - a local override by placing another `<tp-theme>` inside a nested container
  *
- * @summary Parent-scoped theme switcher.
+ * @summary Switches the visual theme of the surrounding content.
  * @tagname tp-theme
  * @attr {string} mode = "auto" - Theme mode (`light`, `dark`, `auto`)
  * @attr {string} anchor = "" - CSS selector used as the explicit element that receives the selected theme.
@@ -461,6 +461,10 @@ export class TpTheme extends TpBase {
 			this.prepend(control);
 		}
 
+		for (const host of [this, control]) {
+			host.setAttribute("data-help-label", "Choose theme");
+			host.setAttribute("data-help-icons", "moon sun");
+		}
 		control.setAttribute("name", "theme-light-dark");
 		control.setAttribute("variant", this.variant);
 		control.setAttribute("size", this.size);

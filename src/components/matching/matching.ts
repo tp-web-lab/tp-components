@@ -117,7 +117,9 @@ interface MatchingItem {
 }
 
 /**
- * @summary associates rich content from two or more optionally titled lists without grading the groups.
+ * The custom `<tp-matching>` element groups related items from two or more lists.
+ *
+ * @summary Groups related items from two or more lists.
  * @tagname tp-matching
  * @attr {boolean} heading = false - Uses the first list as column headings instead of matchable items.
  * @attr {boolean} disabled = false - Disables association controls without disabling embedded media.

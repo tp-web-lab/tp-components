@@ -45,7 +45,7 @@ function parseOpenIndexes(value: string | null): number[] {
 let instanceCount = 0;
 
 /**
- * Accessible accordion web component based on light-DOM `<dl>` markup.
+ * The custom `<tp-accordion>` element organizes content into sections that readers can expand and collapse.
  *
  * Expected structure:
  *
@@ -71,6 +71,7 @@ let instanceCount = 0;
  * - `open-indexes`: space-separated list of expanded item indexes
  * - `appearance`: visual treatment (`default`, `outlined`, or `filled`)
  *
+ * @summary Organizes content into sections that readers can expand and collapse.
  * @tagname tp-accordion
  * @attr {TpAccordionAppearance} appearance = "default" - Visual treatment of accordion items.
  * @cssprop --tp-accordion-content-gap Gap between an accordion heading and its content.

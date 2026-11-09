@@ -9,3 +9,5 @@ tp-save-audio [data-format]:is(:hover, :focus-visible) { background: var(--tp-ne
 
 tp-save-audio [data-format] > tp-icon[name="check"] { visibility: hidden; }
 tp-save-audio [data-format][aria-current="true"] > tp-icon[name="check"] { visibility: visible; }
+
+tp-save-audio [data-format][hidden] { display: none; }

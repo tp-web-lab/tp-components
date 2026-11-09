@@ -405,7 +405,7 @@ const ANNOTATION_PALETTE: TpGraphPalette = {
 };
 
 /**
- * Canvas editor for directed graphs, with pluggable palettes and simulators.
+ * The custom `<tp-graph-editor>` element edits and animates domain-specific graphs.
  *
  * @summary Edits and animates domain-specific graphs.
  * @tagname tp-graph-editor
@@ -415,9 +415,9 @@ const ANNOTATION_PALETTE: TpGraphPalette = {
  * @attr {number} grid-size = 20 - Grid spacing in graph units.
  * @attr {boolean} ports-visible = false - Keeps attachment plots visible instead of showing them only on hover.
  * @attr {string} message = "" - Status message displayed by the graph editor.
-
-
-
+ *
+ *
+ *
  * @example
  * <tp-graph-editor></tp-graph-editor>
  * @event tp-graph-change Emitted after a recorded graph mutation, JSON edit, undo or redo. reason identifies the operation and graph contains the resulting snapshot.

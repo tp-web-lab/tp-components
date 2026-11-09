@@ -1,9 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="code-comment" library="components" size="1.25em"></tp-icon> Code comments
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-code-comment>` element implements the code annotation functionality: associates an ordered annotation list with numbered comments in a code editor.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-code-comment>` element associates an ordered annotation list with numbered comments in a code editor.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-code-editor id="commented-function" language="typescript">
   <script type="tp/typescript">
     function f(x: number): number {
@@ -18,30 +29,23 @@ The custom `<tp-code-comment>` element implements the code annotation functional
     <li>Zero and negative values are multiplied by four.</li>
   </ol>
 </tp-code-comment>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-code-comment" src="/docs/components/code-comment/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Hover a numbered icon in the code | Show its explanation in a tooltip, preserving the list item's formatting. |
-| Numbered icons in the explanation list | Match each explanation to the code marker with the same number. |
-| Editing the linked code | Update the markers as the source changes; the annotation list does not change the source text. |
-| Copy or save in the linked editor | Keep the original comments, including literal numbered markers. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Escape</kbd>, then <kbd>Tab</kbd> from the editor | Leave code indentation mode and focus a numbered marker. Its explanation opens as on hover; <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> move between focusable controls. |
-| <kbd>Escape</kbd> while a tooltip is open | Close the tooltip without changing the source. |
-| Typing in the linked editor | Edit code using the editor's normal keyboard behavior. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 The explanation list is hidden by default. Add the boolean `open` attribute to display it, or remove it to hide it again. Numbered code markers and their tooltips remain available in both states; hiding the list does not remove its content or its association with the editor. Configuration warnings remain visible. The `open` JavaScript property reflects this attribute.
 
@@ -64,208 +68,13 @@ A typed script preserves literal source without HTML parsing:
 </tp-code-comment>
 ```
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Hover or focus a numbered code marker to read its explanation in a tooltip; press Escape to close it. Edit the code without changing how the original source is copied or saved.
-
-Attributes
-: Set for to commented-function to connect the list to the visible editor; toggle open to show or hide the list while its tooltips remain available. Clear for or enter an unknown ID to show the warning; Reset defaults restores the defaults.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-HTML
-: ::include{examples/examples.html}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
+### Programming notes
 
 `htmlFor` reflects the `for` attribute. The component registers its list numbers and author items with the editor through `setCodeCommentNumbers(owner, numbers, comments)`; passing an empty array releases that owner's decorations. Number decorations use CodeMirror rather than modifying its managed DOM or the author's source. Syntax-tree changes and document edits update the icons automatically, while reconfiguration preserves editing history and selection.
 
 The numbered code markers reuse `tp-tooltip` on hover and focus. Tooltips clone the current explanation, omit generated numbering, and update when the author item changes. Formatting and SVG references are preserved without duplicating IDs; interactive content remains usable in the original list. Tooltips and observers are removed when markers disappear or the component is disconnected. When several lists explain the same number, the last registered list supplies the tooltip.
 
-### API
-
-<!-- tp-docgen:api TpCodeComment -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>for</code> | <code>string</code> | <code>&quot;&quot;</code> | Exact ID, without #, of the tp-code-editor to annotate. |
-  | <code>open</code> | <code>boolean</code> | <code>false</code> | Show the explanation list; code markers and tooltips remain available when absent. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-code-comment>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpCodeComment`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-code-comment>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-code-comment>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_code-comment.TpCodeComment.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -292,12 +101,38 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Hover or focus a numbered code marker to read its explanation in a tooltip; press Escape to close it. Edit the code without changing how the original source is copied or saved.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-code-comment>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -316,10 +151,10 @@ All tp-components used by `<tp-code-comment>` are loaded automatically by this c
 @summary SVG icon component with inline, URL, and registry sources.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
-- [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
-- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-callout>`](#/components/callout/index.md) : Callout component for highlighted contextual content.
+- [`<tp-code-editor>`](#/components/code-editor/index.md) : CodeMirror-based code editor component.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 
 ### External
 

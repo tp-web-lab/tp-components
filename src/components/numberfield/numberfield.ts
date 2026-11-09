@@ -32,7 +32,9 @@ import style from "./numberfield.css?inline";
 export type TpNumberfieldLabelPosition = TpChoiceLabelPosition;
 
 /**
- * @summary numeric field with an optional native range slider.
+ * The custom `<tp-numberfield>` element provides a numeric field with an optional native range slider.
+ *
+ * @summary Provides a numeric field with an optional native range slider.
  * @tagname tp-numberfield
  * @attr {string} label = "" - Visible label associated with the native input.
  * @attr {string} label-position = "top" - Label position (`top`, `bottom`, `start`, or `end`).

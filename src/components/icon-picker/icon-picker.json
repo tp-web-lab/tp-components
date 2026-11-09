@@ -2,7 +2,7 @@
   "tagname": "tp-icon-picker",
   "classname": "TpIconPicker",
   "superclass": "TpBase",
-  "description": "Picker for predefined icons.",
+  "description": "Browses and selects icons from the available libraries.",
   "examples": [
     {
       "label": "Example 1",
@@ -80,8 +80,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Icon picker",
-    "introduction": "The custom `<tp-icon-picker>` element implements the <tp-icon name=\"icon-picker\" library=\"components\" size=\"1.25em\"></tp-icon> Icon picker functionality: light-DOM picker for predefined icons.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Browse or search the available items, then select one to copy it in the chosen format. |\n| Using the component | Use the displayed filters and format selector, when available, to narrow the list or change the copied representation. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-icon-picker>` element browses and selects icons from the available libraries.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Browse or search the available items, then select one to copy it in the chosen format. |\n| Using the component | Use the displayed filters and format selector, when available, to narrow the list or change the copied representation. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

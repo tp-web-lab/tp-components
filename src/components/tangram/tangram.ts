@@ -53,11 +53,13 @@ const COLORS = [
 let tangramCount = 0;
 const copy = (p: Placement[]): Placement[] => p.map((v) => ({ ...v }));
 /**
- * @summary Seven-piece tangram with a life-size silhouette and collision-safe placement.
+ * The custom `<tp-tangram>` element provides a seven-piece puzzle for assembling a target silhouette.
+ *
+ * @summary Provides a seven-piece puzzle for assembling a target silhouette.
  * @tagname tp-tangram
  * @attr {string} src = "" - Text or JSON file containing the seven solution placements.
  * @attr {boolean} exact-orientation = false - Starts every piece in its solution orientation, including reflection; changing it restarts the puzzle.
-
+ *
  * @event tp-tangram-error Fired when loading a solution fails; detail contains message.
  * @keyboard Arrow keys Move the selected piece; Shift increases the step.
  * @keyboard R / Shift+R Rotate clockwise / counterclockwise by 45 degrees.

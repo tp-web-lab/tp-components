@@ -6,7 +6,7 @@
 ======
 [tp-fill-blank]
 ====
-The capital of France is [tp-textfield,clearable,name="capital",placeholder="City name",aria-label="Capital of France"]#capital#.
+The capital of France is [tp-textfield,clearable,placeholder="City name",aria-label="Capital of France"]#capital#.
 ====
 ======
 

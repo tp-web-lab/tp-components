@@ -1,0 +1,99 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpLogigram[label=The reading club]{
+  \begin{description}
+    \item[{Prompt}] Three readers chose different books and drinks. Find every match.
+    \item[{Categories}] \begin{itemize}
+      \item Readers      \begin{itemize}
+        \item Ada
+        \item Ben
+        \item Cleo
+      \end{itemize}
+      \item Books      \begin{itemize}
+        \item Poetry
+        \item History
+        \item Science
+      \end{itemize}
+      \item Drinks      \begin{itemize}
+        \item Tea
+        \item Juice
+        \item Water
+      \end{itemize}
+    \end{itemize}
+    \item[{Clues}] \begin{enumerate}
+      \item Ada chose Poetry.
+      \item The History reader drank Juice.
+      \item Ben drank Water.
+      \item Cleo did not choose Poetry.
+    \end{enumerate}
+    \item[{Solution}] \begin{enumerate}
+      \item \begin{itemize}
+        \item Ada
+        \item Poetry
+        \item Tea
+      \end{itemize}
+      \item \begin{itemize}
+        \item Ben
+        \item Science
+        \item Water
+      \end{itemize}
+      \item \begin{itemize}
+        \item Cleo
+        \item History
+        \item Juice
+      \end{itemize}
+    \end{enumerate}
+  \end{description}
+}
+\end{document}
+
+% !tp-example Automatic exclusions
+\documentclass{article}
+\begin{document}
+\wcTpLogigram[label=The reading club,auto-exclude]{
+  \begin{description}
+    \item[{Prompt}] Three readers chose different books and drinks. Find every match.
+    \item[{Categories}] \begin{itemize}
+      \item Readers      \begin{itemize}
+        \item Ada
+        \item Ben
+        \item Cleo
+      \end{itemize}
+      \item Books      \begin{itemize}
+        \item Poetry
+        \item History
+        \item Science
+      \end{itemize}
+      \item Drinks      \begin{itemize}
+        \item Tea
+        \item Juice
+        \item Water
+      \end{itemize}
+    \end{itemize}
+    \item[{Clues}] \begin{enumerate}
+      \item Ada chose Poetry.
+      \item The History reader drank Juice.
+      \item Ben drank Water.
+      \item Cleo did not choose Poetry.
+    \end{enumerate}
+    \item[{Solution}] \begin{enumerate}
+      \item \begin{itemize}
+        \item Ada
+        \item Poetry
+        \item Tea
+      \end{itemize}
+      \item \begin{itemize}
+        \item Ben
+        \item Science
+        \item Water
+      \end{itemize}
+      \item \begin{itemize}
+        \item Cleo
+        \item History
+        \item Juice
+      \end{itemize}
+    \end{enumerate}
+  \end{description}
+}
+\end{document}

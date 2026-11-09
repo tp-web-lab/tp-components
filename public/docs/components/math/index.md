@@ -1,32 +1,42 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="math" library="components" size="1.25em"></tp-icon> Math
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-math>` element implements the Math functionality: renders LaTeX or AsciiMath expressions as inline or display-style SVG.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-math>` element displays mathematical expressions as inline formulas or separate equations.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <p>The identity <tp-math value="a^2 + b^2 = c^2" label="a squared plus b squared equals c squared"></tp-math> describes a right triangle.</p>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-math" src="/docs/components/math/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
+
+### Configuration
 
 Published documents can include a pre-rendered SVG with the original expression and rendering parameters. Matching output is reused without downloading MathJax, including copies in notes and reference lists. Changing the expression or rendering parameters loads the renderer on demand. The source remains available when an attribute override is removed.
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Formula | Read the rendered expression. There are no component-specific buttons or editing controls. |
-| Wide display formula | Scroll horizontally when the expression exceeds the available width. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| Formula | No component-specific keyboard interaction; the expression is not an editable field. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Use `mode="latexmath"` (default) for LaTeX, or `mode="asciimath"` for AsciiMath. Supply the expression without surrounding `$`, `\(`, `\[` or backtick delimiters. Unknown modes fall back to LaTeX. The default SVG stays inline with the surrounding sentence. Add the boolean `displaystyle` attribute for a centered block with display-style fractions, sums and integrals; remove it to return inline. Boolean attributes use presence=true, absence=false.
 
@@ -43,269 +53,11 @@ Source precedence follows [TpDeclarativeTextSource](../../../api/classes/utiliti
 
 For editing an expression, use [tp-mathfield](../mathfield/index.md). This component only displays it.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Read the Pythagorean identity inline with its surrounding sentence. The formula is rendered as SVG, not as editable source text.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Script and display style
-: Compare the same fraction in inline and display style, supplied by inert tp/math scripts. Display style enlarges the fraction and places it in a centered block.
-
-AsciiMath
-: Compare an AsciiMath square-root expression inline and in display style. Both formulas use the same source notation and SVG renderer.
-
-External expression
-: Read the identity loaded from a reviewed local text file. The file contains only the expression, without math delimiters.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-HTML
-: ::include{examples/examples.html}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
+### Programming notes
 
 Set `value`, `mode`, `displaystyle`, `label` or `src` to update the formula. Listen for `tp-math-rendered` after a successful nonempty render, or `tp-math-error` for a loading or rendering failure. Updates are asynchronous and consecutive attribute changes are grouped into one render.
 
-### API
-
-<!-- tp-docgen:api TpMath -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>displaystyle</code> | <code>boolean</code> | <code>false</code> | Uses display-style mathematics in a centered block instead of inline mathematics. |
-  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Accessible description of the formula; defaults to its source text. |
-  | <code>mode</code> | <code>&quot;latexmath&quot; \| &quot;asciimath&quot;</code> | <code>&quot;latexmath&quot;</code> | Input notation: latexmath for LaTeX expressions or asciimath for ASCII math. Invalid values use latexmath. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Expression file; takes precedence over value and inline content. |
-  | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Expression without surrounding math delimiters. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-math>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpMath`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-math-error</code> | <code>&#123; message: string &#125;</code> | Emitted when loading or rendering the current expression fails. |
-  | <code>tp-math-rendered</code> | <code>&#123; value: string; mode: TpMathMode; displaystyle: boolean &#125;</code> | Emitted after the current expression is rendered successfully. |
-  [Events emitted by `<tp-math>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-math>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_math.TpMath.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -332,12 +84,47 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Read the Pythagorean identity inline with its surrounding sentence. The formula is rendered as SVG, not as editable source text.
+
+Script and display style
+: Compare the same fraction in inline and display style, supplied by inert tp/math scripts. Display style enlarges the fraction and places it in a centered block.
+
+AsciiMath
+: Compare an AsciiMath square-root expression inline and in display style. Both formulas use the same source notation and SVG renderer.
+
+External expression
+: Read the identity loaded from a reviewed local text file. The file contains only the expression, without math delimiters.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-math>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -348,8 +135,8 @@ All tp-components used by `<tp-math>` are loaded automatically by this component
 @summary Callout component for highlighted contextual content.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-callout>`](#/components/callout/index.md) : Callout component for highlighted contextual content.
 
 ### External
 

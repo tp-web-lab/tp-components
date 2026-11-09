@@ -1,9 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="tabs" library="components" size="1.25em"></tp-icon> Tabs
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-tabs>` element implements the <tp-icon name="tabs" library="components" size="1.25em"></tp-icon> Tabs functionality: accessible tab group in light DOM.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-tabs>` element provides an accessible tab group.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-tabs>
         <dl>
           <dt>Tab 1</dt>
@@ -16,31 +27,23 @@ The custom `<tp-tabs>` element implements the <tp-icon name="tabs" library="comp
           <dd>Content of panel <tp-icon size="2em" name="numeric-4"></tp-icon></dd>
         </dl>
       </tp-tabs>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-tabs" src="/docs/components/tabs/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Tab | Click to display its panel. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the tab list and focusable panel content. |
-| <kbd>ArrowRight</kbd> / <kbd>ArrowDown</kbd> | Moves focus to the next tab according to orientation. |
-| <kbd>ArrowLeft</kbd> / <kbd>ArrowUp</kbd> | Moves focus to the previous tab according to orientation. |
-| <kbd>Home</kbd> | Moves focus to the first tab. |
-| <kbd>End</kbd> | Moves focus to the last tab. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activates the focused tab in manual activation mode. |
-| <kbd>Delete</kbd> | Requests closing a dynamically added tab. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Use `<tp-tabs>` as shown below.
 
@@ -61,397 +64,7 @@ Use `<tp-tabs>` as shown below.
 
 Authors keep the familiar `dl`/`dt`/`dd` structure and do not add ARIA roles themselves. At runtime, `tp-tabs` converts it into generic elements carrying the compatible `tablist`, `tab`, and `tabpanel` roles, relationships, selection state, and keyboard behavior.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Select the tabs to switch between their content panels.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpTabs -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>activation</code> | <code>TpTabsActivation</code> | <code>auto</code> | Keyboard activation mode (`auto` or `manual`). |
-  | <code>orientation</code> | <code>TpTabsOrientation</code> | <code>horizontal</code> | Tab list orientation (`horizontal` or `vertical`). |
-  | <code>selected</code> | <code>number</code> | <code>0</code> | Zero-based index of the selected tab: 0 selects the first tab. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-tabs>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>addTab</code> | <code>addTab(value: string, label: string): number</code> | Adds a tab and its empty panel. |
-  | <code>clearTabs</code> | <code>clearTabs(): void</code> | Removes all tabs and panels. |
-  | <code>getSelectedValue</code> | <code>getSelectedValue(): string \| null</code> | Returns the selected tab value. |
-  | <code>moveTab</code> | <code>moveTab(fromIndex: number, toIndex: number): void</code> | Moves a tab from one index to another. |
-  | <code>refresh</code> | <code>refresh(): void</code> | Rebuilds tab roles and selection state. |
-  | <code>removeTab</code> | <code>removeTab(value: string): void</code> | Removes a tab by value. |
-  | <code>select</code> | <code>select(index: number): void</code> | Selects a tab by its index. |
-  | <code>selectValue</code> | <code>selectValue(value: string): void</code> | Selects a tab by its `data-value`. |
-  [Public methods of `TpTabs`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-tabs-close</code> | <code>&#123; index: number; value: string &#125;</code> | Emitted when a tab close button is activated. |
-  | <code>tp-tabs-reorder</code> | <code>&#123; fromIndex: number; toIndex: number; value: string &#125;</code> | Emitted after a tab is reordered by drag and drop. |
-  | <code>tp-tabs-select</code> | <code>&#123; selected: number; value: string &#125;</code> | Emitted after a tab is selected. |
-  [Events emitted by `<tp-tabs>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-tabs-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Border color of inactive tab headers and the content panel. |
-  | <code>&#45;&#45;tp-tabs-border-selected-color</code> | <code>var(&#45;&#45;tp-brand-stroke-soft)</code> | Border color of the selected tab header. |
-  | <code>&#45;&#45;tp-tabs-panel-bg</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Background color of the tab content panel. |
-  | <code>&#45;&#45;tp-tabs-tab-bg</code> | <code>var(&#45;&#45;tp-neutral-fill-softer)</code> | Background color of inactive tab headers. |
-  | <code>&#45;&#45;tp-tabs-tab-color</code> | <code>var(&#45;&#45;tp-text-body)</code> | Text color of inactive tab headers. |
-  | <code>&#45;&#45;tp-tabs-tab-selected-bg</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Background color of the selected tab header. |
-  | <code>&#45;&#45;tp-tabs-tab-selected-color</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Text color of the selected tab header. |
-  [CSS properties of `<tp-tabs>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_tabs.TpTabs.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -478,12 +91,38 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Select the tabs to switch between their content panels.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-tabs>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -494,8 +133,8 @@ All tp-components used by `<tp-tabs>` are loaded automatically by this component
 @summary SVG icon component with inline, URL, and registry sources.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 
 ### External
 

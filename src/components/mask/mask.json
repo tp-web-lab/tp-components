@@ -2,7 +2,7 @@
   "tagname": "tp-mask",
   "classname": "TpMask",
   "superclass": "TpBase",
-  "description": "Replaces an anchored element with its own content without destroying the target.",
+  "description": "Hides an anchored element and displays its own message in its place while active.",
   "examples": [
     {
       "label": "Example 1",
@@ -42,7 +42,7 @@
   "userHelp": {
     "displayName": "Mask",
     "introduction": "The custom `<tp-mask>` element hides an anchored element and displays its own message in its place while active.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Mask message | Read the replacement message. The hidden target cannot be clicked. |\n| Using the component | There is no built-in dismiss button or component-specific pointer gesture. Author-provided controls may change its state. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Skip the hidden target. Any interactive content supplied in the message remains reachable. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Mask message | Read the replacement message. The hidden target cannot be clicked. |\n| Using the component | There is no built-in dismiss button or component-specific pointer gesture. Author-provided controls may change its state. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Skip the hidden target. Any interactive content supplied in the message remains reachable. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

@@ -14,8 +14,10 @@ import type { TpMarkupMultiPagesLanguage } from "../markup-multi-pages/markup-mu
 import { TpMarkupMultiSlides } from "../markup-multi-slides/markup-multi-slides.js";
 
 /**
+ * The custom `<tp-markdown-multi-slides>` element presents Markdown documents as a slide deck.
+ *
  * @tagname tp-markdown-multi-slides
- * @summary presents a navigable repository of Markdown slides.
+ * @summary Presents Markdown documents as a slide deck.
  * @example
  * <tp-markdown-multi-slides></tp-markdown-multi-slides>
  */

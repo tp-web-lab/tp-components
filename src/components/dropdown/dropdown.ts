@@ -39,8 +39,7 @@ function isCssLength(value: string): boolean {
 }
 
 /**
- * `<tp-dropdown>` affiche un menu déroulant ancré à un élément cible,
- * sans utiliser de Shadow DOM.
+ * The custom `<tp-dropdown>` element displays an anchored dropdown menu.
  *
  * Structure attendue :
  *

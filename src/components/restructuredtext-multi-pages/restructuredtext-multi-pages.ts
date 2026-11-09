@@ -11,8 +11,15 @@ import {
 	type TpMarkupMultiPagesLanguage,
 } from "../markup-multi-pages/markup-multi-pages.js";
 
-/** @tagname tp-restructuredtext-multi-pages @summary Renders a navigable repository with tp-restructuredtext. * @example
- * <tp-restructuredtext-multi-pages></tp-restructuredtext-multi-pages>
+/**
+ * The custom `<tp-restructuredtext-multi-pages>` element presents reStructuredText documents with navigation between pages.
+ *
+ * @summary Presents reStructuredText documents with navigation between pages.
+ * @tagname tp-restructuredtext-multi-pages
+ * @example
+ * <tp-box style="position: relative; contain: layout; block-size: 32rem; padding: 0;">
+ *   <tp-restructuredtext-multi-pages repository="/docs/components/_shared/intro-documents/restructuredtext" label="A small guide" menu=""></tp-restructuredtext-multi-pages>
+ * </tp-box>
  */
 export class TpRestructuredTextMultiPages extends TpMarkupMultiPages {
 	protected override get fixedLanguage(): TpMarkupMultiPagesLanguage {

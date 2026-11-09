@@ -1,0 +1,43 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=min-block-size: 20rem]{
+  Drag the note by its header to move it over the page. The pin folds and opens it.
+
+  \wcTpPostIt[heading=Remember]{
+    Keep examples \textbf{simple and meaningful}.
+
+    \begin{itemize}
+      \item Show a useful result.
+      \item Try the keyboard controls.
+    \end{itemize}
+  }
+}
+\end{document}
+
+% !tp-example Lite note
+\documentclass{article}
+\begin{document}
+\wcTpPostIt[heading=Reminder,lite]{
+  Keep examples \textbf{simple and meaningful}.
+
+}
+\end{document}
+
+% !tp-example Notes board
+\documentclass{article}
+\begin{document}
+\wcTpCluster[gap=2rem,style=padding: 1rem]{
+  \wcTpPostIt[heading=Plan,color=yellow,rotation=-2]{
+    Write one useful example.
+
+  }
+  \wcTpPostIt[heading=Review,color=blue,rotation=2]{
+    Check the result with the keyboard.
+
+  }
+  \wcTpPostIt[heading=Your reminder,color=pink]{
+    \wcTpTextfield[label=Reminder,placeholder=What comes next?,clearable]{}
+  }
+}
+\end{document}

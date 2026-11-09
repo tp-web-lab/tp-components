@@ -100,13 +100,15 @@ class StringValueProxy {
 }
 
 /**
- * @summary Fill-in-the-blank question: wraps tp-question with input/select validation.
+ * The custom `<tp-fill-blank-question>` element presents and grades a fill-in-the-blank question.
+ *
+ * @summary Presents and grades a fill-in-the-blank question.
  * @tagname tp-fill-blank-question
  *
  * @attr {boolean} case-sensitive = false - Requires matching uppercase and lowercase letters in answers.
  * @attr {string} mode = "mixed" - Blank mode: opened, closed, or mixed local choices.
  * @attr {boolean} partial = false - Allows incomplete submissions and marks filled blanks as correct or incorrect after feedback.
-
+ *
  * @example
  * <tp-fill-blank-question>
  *   <dl>

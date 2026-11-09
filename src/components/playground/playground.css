@@ -271,13 +271,15 @@ tp-prolog-viewer {
 }
 
 [data-tp-playground-panel='filesystem'] {
-  background: var(--tp-filesystem-bg, #fafafa);
+  background: var(--tp-filesystem-bg, var(--tp-paper-color, Canvas));
+  color: var(--tp-text-body, CanvasText);
   border-inline-end: 1px solid var(--tp-border-color, #ddd);
 }
 
 [data-tp-playground-panel='editor'] {
   align-self: start;
-  background: white;
+  background: var(--tp-paper-color, Canvas);
+  color: var(--tp-text-body, CanvasText);
 }
 
 tp-filesystem {

@@ -124,6 +124,7 @@ const linkedPackageRoots = await Promise.all(
 	[
 		"@tp/tp-asciidoc",
 		"@tp/tp-markdown",
+		"@tp/tp-latex",
 		"@tp/tp-restructuredtext",
 		"@tp/tp-utilities",
 	].map((name) => fs.realpath(resolve(__dirname, "node_modules", name))),
@@ -131,6 +132,11 @@ const linkedPackageRoots = await Promise.all(
 
 export default defineConfig({
 	root: resolve(__dirname),
+	experimental: {
+		renderBuiltUrl(_filename, { hostType }) {
+			if (hostType === "js") return { relative: true };
+		},
+	},
 	plugins: [
 		componentApiPlugin(),
 		documentPreloadPlugin(),

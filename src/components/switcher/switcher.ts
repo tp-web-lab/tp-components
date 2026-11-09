@@ -21,7 +21,7 @@ function isPositiveInteger(value: string): boolean {
 }
 
 /**
- * Switcher layout component, without Shadow DOM.
+ * The custom `<tp-switcher>` element switches between horizontal and vertical layouts based on available space.
  *
  * @summary Switches between horizontal and vertical layouts based on available space.
  * @tagname tp-switcher

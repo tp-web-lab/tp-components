@@ -44,7 +44,7 @@ import { TpBase } from "../base/base.js";
 import style from "./cryptarithm.css?inline";
 
 /**
- * Web component for interactive Cryptarithmetic puzzles.
+ * The custom `<tp-cryptarithm>` element displays an interactive cryptarithm puzzle.
  *
  * In cryptarithmetic, letters represent digits and must satisfy the displayed equation.
  * The puzzle is solved by finding the correct digit-to-letter mapping.

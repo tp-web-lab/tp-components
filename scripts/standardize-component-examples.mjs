@@ -1,7 +1,7 @@
 /** @module scripts/standardize-component-examples */
 
 /**
- * Rebuilds component examples with Basic usage first, one grouped Attributes panel and retained
+ * Rebuilds component examples with Basic usage first, retained
  * complementary examples.
  *
  * Run from the tp-components package root with workspace dependencies installed. Updates
@@ -24,12 +24,8 @@ import {
 	namedExamples,
 	viewerSource,
 } from "./component-basic-examples.mjs";
-import { groupedAttributeExample } from "./grouped-attribute-examples.mjs";
-import {
-	fieldAttributesScript,
-	groupedFields,
-	textfieldAttributesExample,
-} from "./textfield-attributes-example.mjs";
+
+import { componentDocScenarios } from "./component-doc-scenarios.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 export const languages = ["html", "md", "adoc", "rst"];
@@ -72,16 +68,6 @@ export function standardizeComponentExamples(
 				readExamples(component, language),
 			]),
 		);
-		const attributes = componentAttributes(component);
-		let source;
-		if (groupedFields.includes(component)) {
-			source = textfieldAttributesExample(component);
-			writeFileSync(
-				`${root}/public/docs/components/${component}/examples/attributes.js`,
-				fieldAttributesScript(component),
-			);
-		} else if (attributes.length)
-			source = groupedAttributeExample(component, examples.html);
 		for (const language of languages) {
 			const basic = examples[language].find(
 				(example) => example.label === "Basic usage",
@@ -92,17 +78,17 @@ export function standardizeComponentExamples(
 				(example) =>
 					example.label !== "Basic usage" &&
 					example.label !== "Attributes" &&
-					!/^Attributes?\s*:/i.test(example.label) &&
+					!/^Attributes?(?:\s*:|$)/i.test(example.label) &&
 					!/^Additional usage$/i.test(example.label) &&
 					example.source.trim() !== basic.source.trim(),
 			);
+			for (const scenario of componentDocScenarios[component] ?? []) {
+				if (!complementary.some(example => example.label === scenario.label)) complementary.push({ label: scenario.label, source: markupExample(language, scenario.source) });
+			}
 			writeFileSync(
 				`${root}/public/docs/components/${component}/examples/examples.${language}`,
 				exampleFile(language, `tp-${component}`, [
 					basic,
-					...(source
-						? [{ label: "Attributes", source: markupExample(language, source) }]
-						: []),
 					...complementary,
 				]),
 			);
@@ -114,11 +100,7 @@ export function standardizeComponentExamples(
 export function checkExampleStructure() {
 	const failures = [];
 	for (const component of documentedComponents()) {
-		const attributes = componentAttributes(component);
-		const expected = [
-			"Basic usage",
-			...(attributes.length ? ["Attributes"] : []),
-		];
+		const expected = ["Basic usage"];
 		const html = readExamples(component, "html");
 		for (const language of languages) {
 			const examples = readExamples(component, language);
@@ -128,14 +110,14 @@ export function checkExampleStructure() {
 				) !== JSON.stringify(expected)
 			)
 				failures.push(
-					`${component}/${language}: expected Basic usage followed by grouped Attributes`,
+					`${component}/${language}: expected Basic usage first`,
 				);
 			if (
 				JSON.stringify(examples.map((example) => example.label)) !==
 				JSON.stringify(html.map((example) => example.label))
 			)
 				failures.push(`${component}/${language}: different example order`);
-			if (examples.some((example) => /^Attributes?\s*:/i.test(example.label)))
+			if (examples.some((example) => /^Attributes?(?:\s*:|$)/i.test(example.label)))
 				failures.push(
 					`${component}/${language}: legacy attribute example remains`,
 				);
@@ -144,29 +126,6 @@ export function checkExampleStructure() {
 				examples.length
 			)
 				failures.push(`${component}/${language}: duplicate titles`);
-			if (!attributes.length) continue;
-			const grouped = examples.find(
-				(example) => example.label === "Attributes",
-			);
-			const scriptPath = `${root}/public/docs/components/${component}/examples/attributes.js`;
-			if (
-				!grouped?.source.includes(
-					`/docs/components/${component}/examples/attributes.js`,
-				) ||
-				!existsSync(scriptPath)
-			) {
-				failures.push(
-					`${component}/${language}: missing external Attributes script`,
-				);
-				continue;
-			}
-			const script = readFileSync(scriptPath, "utf8");
-			attributes.forEach((attribute) => {
-				if (!script.includes(`"name":"${attribute}"`))
-					failures.push(
-						`${component}/${language}: missing grouped control for ${attribute}`,
-					);
-			});
 		}
 	}
 	return failures;

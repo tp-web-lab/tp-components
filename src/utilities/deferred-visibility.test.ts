@@ -60,3 +60,15 @@ it("waits for each enclosing hidden panel to open", async () => {
 	expect(resume).toHaveBeenCalledTimes(3);
 	pending.disconnect();
 });
+
+it("prepares explicitly eager content even inside a hidden demo panel", () => {
+	const panel = document.createElement("section");
+	panel.hidden = true;
+	const host = document.createElement("div");
+	host.setAttribute("data-tp-render-eager", "");
+	panel.append(host);
+	document.body.append(panel);
+	const pending = new DeferredVisibility(host, vi.fn());
+	expect(pending.defer()).toBe(false);
+	pending.disconnect();
+});

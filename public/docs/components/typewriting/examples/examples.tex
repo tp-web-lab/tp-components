@@ -1,0 +1,22 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpTypewriting[speed=20]{
+  Welcome to \textbf{tp-components}. Make your words appear progressively.
+
+}
+\end{document}
+
+% !tp-example Synchronized speech
+\documentclass{article}
+\begin{document}
+Press Speak, then try Pause, Resume and Stop. Some voices do not report word boundaries; the full text remains visible in that case.
+
+
+\wcTpTypewriting[id=spoken-text,word]{
+  Welcome to \textbf{tp-components}. You can pause this reading and resume it whenever you want.
+
+}
+
+\wcTpTextToSpeech[for=spoken-text,lang=en]{}
+\end{document}

@@ -1,37 +1,43 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="icon-button" library="components" size="1.25em"></tp-icon> Icon button
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-icon-button>` element implements the <tp-icon name="icon-button" library="components" size="1.25em"></tp-icon> Icon button functionality: button icon accessible.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
-<tp-box data-intro-action="counter" data-allow-script>
+<div class="tp-component-doc-intro">
+
+The custom `<tp-icon-button>` element provides an icon action button with an accessible text label.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
+<tp-box data-intro-action="counter" data-allow-script="">
   <p>Activate the heart button to add a like.</p>
-  <tp-icon-button name="heart" label="Like this example" data-demo-trigger></tp-icon-button>
-  <p data-demo-status role="status">Likes: 0</p>
+  <tp-icon-button name="heart" label="Like this example" data-demo-trigger=""></tp-icon-button>
+  <p data-demo-status="" role="status">Likes: 0</p>
   <script src="/docs/components/_shared/introduction-actions.js"></script>
 </tp-box>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-icon-button" src="/docs/components/icon-button/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Button | Click to perform the action identified by its label. Disabled or loading controls cannot be activated. |
-| Navigation button | Click to open its destination. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| <kbd>Enter</kbd> | Activate the focused button or link. |
-| <kbd>Space</kbd> | Activate a focused action button; links use <kbd>Enter</kbd>. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 <tp-icon-button name="delete" label="Delete" color="crimson"></tp-icon-button>
 
@@ -44,406 +50,7 @@ Always provide `label` for an accessible name. Icon attributes such as `library`
 <tp-icon-button name="delete" label="Delete" color="crimson"></tp-icon-button>
 ```
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Activate the heart button and observe the updated like count.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpIconButton -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>color</code> | <code>string</code> | <code>&quot;&quot;</code> | Color forwarded to the internal `<tp-icon>`. |
-  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Prevents activation, including link navigation, and marks the control as disabled. |
-  | <code>download</code> | <code>string</code> | <code>&quot;&quot;</code> | Suggested download filename when href is set. A nonempty value requests a download; browser and server rules determine whether it is honored. |
-  | <code>flip-h</code> | <code>boolean</code> | <code>false</code> | Horizontal flip forwarded to the internal `<tp-icon>`. |
-  | <code>flip-v</code> | <code>boolean</code> | <code>false</code> | Vertical flip forwarded to the internal `<tp-icon>`. |
-  | <code>href</code> | <code>string</code> | <code>&quot;&quot;</code> | Destination URL. A nonempty value renders a link instead of a native button. |
-  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Accessible button name and hover title. Provide the action, such as Close or Search, because the control has no visible text label. |
-  | <code>library</code> | <code>string</code> | <code>&quot;&quot;</code> | Icon registry used to resolve name, for example tp, components, languages or a custom registered library. |
-  | <code>loading</code> | <code>boolean</code> | <code>false</code> | Displays a loading spinner and prevents activation while present. |
-  | <code>loading-mode</code> | <code>TpButtonLoadingMode</code> | <code>replace</code> | Spinner layout while loading: replace hides the label; inline keeps the label beside the spinner. |
-  | <code>name</code> | <code>string</code> | <code>&quot;&quot;</code> | Identifier of the icon displayed inside the button, resolved in library. |
-  | <code>outlined</code> | <code>boolean</code> | <code>false</code> | Uses an outlined appearance instead of a filled background. |
-  | <code>pill</code> | <code>boolean</code> | <code>false</code> | Rounds the button ends to form a pill. |
-  | <code>rel</code> | <code>string</code> | <code>&quot;&quot;</code> | Space-separated relationship tokens forwarded to the link, for example noopener noreferrer; applies only with href. |
-  | <code>rotate</code> | <code>string</code> | <code>&quot;0deg&quot;</code> | Rotation forwarded to the internal `<tp-icon>`. |
-  | <code>scale</code> | <code>number</code> | <code>1</code> | Scale forwarded to the internal `<tp-icon>`. |
-  | <code>size</code> | <code>TpSizeType</code> | <code>m</code> | Button and icon size preset: xxs, xs, s, m, l, xl or xxl. |
-  | <code>spin</code> | <code>boolean</code> | <code>false</code> | Continuous spin forwarded to the internal `<tp-icon>`. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Image or SVG URL forwarded to the icon; takes precedence over name. |
-  | <code>target</code> | <code>string</code> | <code>&quot;&quot;</code> | Browsing context for href, such as _self, _blank or a named frame; ignored in native button mode. |
-  | <code>title</code> | <code>string</code> | <code>&quot;&quot;</code> | Controls the title. |
-  | <code>type</code> | <code>TpIconButtonNativeType</code> | <code>button</code> | Native button action: button, submit or reset; ignored when href is set. |
-  | <code>variant</code> | <code>TpVariantType</code> | <code>neutral</code> | Color variant: neutral, brand, success, danger, warning or info. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-icon-button>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>focus</code> | <code>focus(): void</code> | Moves keyboard focus to the internal native button, when it exists. |
-  [Public methods of `TpIconButton`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>click</code> | <code>void</code> | Native click event bubbling from the inner button when activated by pointer or keyboard; disabled controls suppress activation. This is not a CustomEvent, so there is no custom detail payload. |
-  [Events emitted by `<tp-icon-button>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-icon-button-focus-ring</code> | <code>currentColor</code> | Color of the outline shown when the button receives keyboard focus. |
-  | <code>&#45;&#45;tp-icon-button-hover-background</code> | <code>color-mix( in srgb, currentColor 10%, transparent )</code> | Background color of the button on hover. |
-  | <code>&#45;&#45;tp-icon-button-icon-size</code> | <code>1em</code> | Width and height of the icon inside the button; distinct from the clickable area. |
-  | <code>&#45;&#45;tp-icon-button-radius</code> | <code>999rem</code> | Corner radius of the clickable button. |
-  | <code>&#45;&#45;tp-icon-button-size</code> | <code>1.75em</code> | Minimum width and height of the clickable button; size presets also update this value. |
-  [CSS properties of `<tp-icon-button>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_icon-button.TpIconButton.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -470,12 +77,38 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Activate the heart button and observe the updated like count.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-icon-button>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -486,8 +119,8 @@ All tp-components used by `<tp-icon-button>` are loaded automatically by this co
 @summary SVG icon component with inline, URL, and registry sources.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 
 ### External
 

@@ -1,0 +1,87 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpSingleChoiceQuestion[answer=1,random]{
+  \begin{description}
+    \item[{Title}] Geography
+    \item[{Prompt}] What is the capital of France?
+    \item[{Form}] \begin{itemize}
+      \item Paris
+      \item London
+      \item Berlin
+    \end{itemize}
+    \item[{Feedback}] \begin{itemize}
+      \item Correct.
+      \item London is in the UK.
+      \item Berlin is in Germany.
+    \end{itemize}
+    \item[{Solution}] Paris
+  \end{description}
+}
+\end{document}
+
+% !tp-example Derivative of tan(x)
+\documentclass{article}
+\begin{document}
+\wcTpSingleChoiceQuestion[answer=2,random,lang=en]{
+  \begin{description}
+    \item[{Title}] Derivative of the tangent function
+    \item[{Prompt}] What is the derivative of $f(x) = \tan(x)$ at a point where $\cos(x) \ne 0$?
+    \item[{Form}] \begin{itemize}
+      \item $\cos^{2}(x)$
+      \item $\displaystyle \frac{1}{\cos^{2}(x)}$
+      \item $\displaystyle -\frac{1}{\sin^{2}(x)}$
+      \item $\displaystyle \frac{1}{\tan^{2}(x)}$
+    \end{itemize}
+    \item[{Feedback}] \begin{itemize}
+      \item The square of the cosine belongs in the denominator.
+      \item Correct. Apply the quotient rule to sine divided by cosine.
+      \item This is the derivative of the cotangent, not the tangent.
+      \item The reciprocal square of the tangent is not its derivative.
+    \end{itemize}
+    \item[{Solution}] $\displaystyle f'(x) = \frac{1}{\cos^{2}(x)} = 1 + \tan^{2}(x)$, wherever $\cos(x) \ne 0$.
+  \end{description}
+}
+
+\wcScript|
+  // Wait for the question and its radio controls before typesetting the live content.
+  window.MathJax = {
+    svg: { fontCache: "local" },
+    startup: {
+      pageReady: async () => {
+        await customElements.whenDefined("tp-single-choice-question");
+        await customElements.whenDefined("tp-radio-list");
+        return MathJax.startup.defaultPageReady();
+      }
+    }
+  };
+|
+
+\wcScript[defer,src=https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js]||
+\end{document}
+
+% !tp-example Regular heptagon
+\documentclass{article}
+\begin{document}
+\wcTpSingleChoiceQuestion[answer=3,random,lang=en]{
+  \begin{description}
+    \item[{Title}] Recognize a regular heptagon
+    \item[{Prompt}] Which figure is a regular heptagon? Select the polygon with seven equal sides and seven equal interior angles.
+    \item[{Form}] \begin{itemize}
+      \item \wcImg*[src=/docs/components/single-choice-question/examples/pentagon.svg,alt=Regular polygon with 5 sides,width=120,height=120]{}
+      \item \wcImg*[src=/docs/components/single-choice-question/examples/hexagon.svg,alt=Regular polygon with 6 sides,width=120,height=120]{}
+      \item \wcImg*[src=/docs/components/single-choice-question/examples/heptagon.svg,alt=Regular polygon with 7 sides,width=120,height=120]{}
+      \item \wcImg*[src=/docs/components/single-choice-question/examples/octagon.svg,alt=Regular polygon with 8 sides,width=120,height=120]{}
+      \item \wcImg*[src=/docs/components/single-choice-question/examples/nonagon.svg,alt=Regular polygon with 9 sides,width=120,height=120]{}
+    \end{itemize}
+    \item[{Feedback}] \begin{itemize}
+      \item This pentagon has five sides.
+      \item This hexagon has six sides.
+      \item Correct. This heptagon has seven equal sides and seven equal interior angles.
+      \item This octagon has eight sides.
+      \item This nonagon has nine sides.
+    \end{itemize}
+    \item[{Solution}] The regular heptagon is the polygon with seven equal sides and seven equal interior angles.
+  \end{description}
+}
+\end{document}

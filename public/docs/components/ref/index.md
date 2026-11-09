@@ -1,32 +1,41 @@
-# Reference
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
+# <tp-icon name="ref" library="components" size="1.25em"></tp-icon> Reference
+
+<div class="tp-component-doc-overview">
+
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
+
+<div class="tp-component-doc-intro">
 
 The custom `<tp-ref>` element displays an inline reference with the corresponding HTML content in a tooltip.
 
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <div data-tp-reference-scope="">
   <p>A useful detail <tp-ref href="^detail"></tp-ref>.</p>
   <tp-note ref="detail" title="Detail"><p>A note with <strong>formatted content</strong>.</p></tp-note>
 </div>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-ref" src="/docs/components/ref/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Reference | Hover or click to read its content in a tooltip. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus a reference and show its tooltip. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Show the focused reference tooltip. |
-| <kbd>Escape</kbd> | Close the tooltip. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 The `href` begins with `^` for a note, `@` for a bibliography entry, or `%` for a glossary entry, followed by the exact `ref` identifier. Identifiers may contain punctuation and are not interpreted as CSS selectors. Ordinary URLs are not supported.
 
@@ -34,181 +43,7 @@ Reference labels are generated from their kind: `^identifier` displays a supersc
 
 References and lists use the nearest `data-tp-reference-scope`, rendered markup document, `article` or `main`, falling back to the page body. Nested document scopes are independent. Identifiers should be unique within each reference kind and scope; the first matching definition is used for duplicates. Changes to definitions, labels and selected elements update existing tooltips and lists automatically.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Hover or focus the reference to reveal a formatted note; press Escape to dismiss it.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Notes, bibliography and glossary
-: Compare repeated note citations sharing one superscript number, bibliography citations and dotted glossary terms. Read the numbered notes and alphabetically sorted description lists at the end.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-html
-: ::include{examples/examples.html}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpRef -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>href</code> | <code>string</code> | <code>&quot;&quot;</code> | Prefixed identifier selecting a note, bibliography or glossary entry. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-ref>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpRef`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-ref>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-ref>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_ref_ref.TpRef.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -235,12 +70,41 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Hover or focus the reference to reveal a formatted note; press Escape to dismiss it.
+
+Notes, bibliography and glossary
+: Compare repeated note citations sharing one superscript number, bibliography citations and dotted glossary terms. Read the numbered notes and alphabetically sorted description lists at the end.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-ref>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -248,7 +112,7 @@ All tp-components used by `<tp-ref>` are loaded automatically by this component 
 -->
 <!--
 @tp-dependency tp-biblio
-@summary Defines a bibliography entry referenced by tp-ref.
+@summary Component `<tp-biblio>`.
 -->
 <!--
 @tp-dependency tp-button
@@ -256,23 +120,23 @@ All tp-components used by `<tp-ref>` are loaded automatically by this component 
 -->
 <!--
 @tp-dependency tp-glossary
-@summary Defines a glossary entry referenced by tp-ref.
+@summary Component `<tp-glossary>`.
 -->
 <!--
 @tp-dependency tp-note
-@summary Defines an HTML note referenced by tp-ref.
+@summary Component `<tp-note>`.
 -->
 <!--
 @tp-dependency tp-tooltip
 @summary Tooltip component.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-biblio>`](../biblio/index.md) : Defines a bibliography entry referenced by tp-ref.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-glossary>`](../glossary/index.md) : Defines a glossary entry referenced by tp-ref.
-- [`<tp-note>`](../note/index.md) : Defines an HTML note referenced by tp-ref.
-- [`<tp-tooltip>`](../tooltip/index.md) : Tooltip component.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-biblio>`](#/components/biblio/index.md) : Component `<tp-biblio>`.
+- [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
+- [`<tp-glossary>`](#/components/glossary/index.md) : Component `<tp-glossary>`.
+- [`<tp-note>`](#/components/note/index.md) : Component `<tp-note>`.
+- [`<tp-tooltip>`](#/components/tooltip/index.md) : Tooltip component.
 
 ### External
 

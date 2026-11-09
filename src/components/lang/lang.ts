@@ -80,9 +80,9 @@ function joinRepository(base: string, part: string): string {
 }
 
 /**
- * `<tp-lang>` selects the documentation language and updates the nearest multi-page documentation shell.
+ * The custom `<tp-lang>` element provides a documentation language selector.
  *
- * @summary Documentation language selector.
+ * @summary Provides a documentation language selector.
  * @tagname tp-lang
  * @attr {string} langs = "en" - Comma-separated language codes.
  * @attr {string} repository = "" - Documentation repository root.

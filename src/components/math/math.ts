@@ -24,7 +24,9 @@ import style from "./math.css?inline";
 export type TpMathMode = "latexmath" | "asciimath";
 
 /**
- * @summary renders LaTeX or AsciiMath expressions as inline or display-style SVG.
+ * The custom `<tp-math>` element displays mathematical expressions as inline formulas or separate equations.
+ *
+ * @summary Displays mathematical expressions as inline formulas or separate equations.
  * @tagname tp-math
  * @attr {string} value = "" - Expression without surrounding math delimiters.
  * @attr {string} src = "" - Expression file; takes precedence over value and inline content.

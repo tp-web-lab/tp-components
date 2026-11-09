@@ -365,17 +365,19 @@ class FormulaParser {
 }
 
 /**
- * `<tp-spreadsheet-editor>` provides an editable grid with Excel-style formulas.
+ * The custom `<tp-spreadsheet-editor>` element provides an editable spreadsheet with Excel-style formulas, file import and export, cell selection and resizable columns.
+ *
+ * @summary Provides an editable spreadsheet with Excel-style formulas, file import and export, cell selection and resizable columns.
  * @tagname tp-spreadsheet-editor
  * @attr {number} rows = 20 - Number of rows (`20` by default).
  * @attr {number} columns = 10 - Number of columns (`10` by default).
  * @attr {string} src = "" - CSV, JSON or XLSX file URL loaded on connection and whenever it changes.
-
+ *
  * @attr {string} value = "" - JSON-encoded two-dimensional array of raw cell values.
-
-
-
-
+ *
+ *
+ *
+ *
  * @example
  * <tp-spreadsheet-editor src="/docs/components/spreadsheet-editor/examples/budget.csv"></tp-spreadsheet-editor>
  * @event tp-spreadsheet-editor-clipboard-error Emitted when a clipboard command fails; command identifies copy, cut or paste.

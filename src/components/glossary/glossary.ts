@@ -8,7 +8,9 @@
 import { TpBase } from "../base/base.js";
 import style from "./glossary.css?inline";
 /**
- * @summary Defines a glossary entry referenced by tp-ref.
+ * The custom `<tp-glossary>` element defines a hidden glossary entry for reference tooltips and generated lists.
+ *
+ * @summary Defines a hidden glossary entry for reference tooltips and generated lists.
  * @tagname tp-glossary
  * @attr {string} ref = "" - Identifier used by references in this document.
  * @example

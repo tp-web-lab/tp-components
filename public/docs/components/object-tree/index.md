@@ -1,9 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="object-tree" library="components" size="1.25em"></tp-icon> Object tree
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-object-tree>` element implements the <tp-icon name="object-tree" library="components" size="1.25em"></tp-icon> Object tree functionality: specialized tree for inspecting JavaScript values.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-object-tree>` element displays JavaScript values as an expandable tree.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-object-tree>
   <script type="tp/javascript">
     ({
@@ -16,29 +27,23 @@ The custom `<tp-object-tree>` element implements the <tp-icon name="object-tree"
     })
   </script>
 </tp-object-tree>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-object-tree" src="/docs/components/object-tree/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Using the component | Expand or collapse branches to inspect nested items. |
-| Select | Select available links or entries to use the actions provided by the surrounding page. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Focused controls | Use each control’s standard keyboard interaction.  |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
-
-#### Initial object content
+### Initial content
 
 ::: tp-tabs
 no content
@@ -102,369 +107,7 @@ JavaScript
 
 When both are present, `src` takes precedence over the internal script. `expandAll()`, `collapseAll()`, and `sortAll()` control the resulting tree.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Expand and collapse the object’s branches to inspect its nested values.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Internal script
-: Expand the object initialized from an embedded JSON script.
-
-JavaScript API
-: Inspect the object supplied through the component’s JavaScript API.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpObjectTree -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of an external JSON file to inspect. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-object-tree>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>collapseAll</code> | <code>collapseAll(): void</code> | Collapses all nodes. |
-  | <code>expandAll</code> | <code>expandAll(): void</code> | Expands all nodes. |
-  | <code>setValue</code> | <code>setValue(value: unknown): void</code> | Loads a new value into the tree. |
-  | <code>sortAll</code> | <code>sortAll(): void</code> | Sorts the current inspectable tree. |
-  [Public methods of `TpObjectTree`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-object-tree-error</code> | <code>&#123; message: string; source: &quot;script&quot; \| &quot;src&quot;; src: string &#125;</code> | Emitted when an external JSON file or inline JavaScript expression cannot be loaded. |
-  | <code>tp-object-tree-load</code> | <code>&#123; source: &quot;script&quot; \| &quot;src&quot;; src: string; value: unknown &#125;</code> | Emitted after an external JSON file or inline JavaScript expression has been loaded. |
-  | <code>tp-tree-context-action</code> | <code>&#123; actionId: string; scope: &quot;global&quot; \| &quot;node&quot;; target: TpTreeNodeTarget \| null &#125;</code> | Bubbles from the inner tree when a context-menu action is chosen. scope distinguishes global and node actions; target identifies the node or is null. |
-  [Events emitted by `<tp-object-tree>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-object-tree-boolean-color</code> | <code>#8250df</code> | Text color of Boolean values in the object tree. |
-  | <code>&#45;&#45;tp-object-tree-circular-color</code> | <code>#cf222e</code> | Text color of circular-reference markers in the object tree. |
-  | <code>&#45;&#45;tp-object-tree-date-color</code> | <code>#116329</code> | Text color of Date values in the object tree. |
-  | <code>&#45;&#45;tp-object-tree-error-color</code> | <code>#cf222e</code> | Text color of Error values in the object tree. |
-  | <code>&#45;&#45;tp-object-tree-font-size</code> | <code>0.875rem</code> | Font size of property names and value summaries in the object tree. |
-  | <code>&#45;&#45;tp-object-tree-function-color</code> | <code>#953800</code> | Text color of function summaries in the object tree. |
-  | <code>&#45;&#45;tp-object-tree-key-color</code> | <code>#6a737d</code> | Text color of object property names in the object tree. |
-  | <code>&#45;&#45;tp-object-tree-nullish-color</code> | <code>#8c959f</code> | Text color of null and undefined values in the object tree. |
-  | <code>&#45;&#45;tp-object-tree-number-color</code> | <code>#0550ae</code> | Text color of numeric values in the object tree. |
-  | <code>&#45;&#45;tp-object-tree-separator-color</code> | <code>#8c959f</code> | Text color of the separator between a property name and its value in the object tree. |
-  | <code>&#45;&#45;tp-object-tree-string-color</code> | <code>#0a7f3f</code> | Text color of string values in the object tree. |
-  | <code>&#45;&#45;tp-object-tree-structure-color</code> | <code>#57606a</code> | Text color of array and object summaries in the object tree. |
-  [CSS properties of `<tp-object-tree>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_object-tree.TpObjectTree.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -491,12 +134,44 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Expand and collapse the object’s branches to inspect its nested values.
+
+Internal script
+: Expand the object initialized from an embedded JSON script.
+
+JavaScript API
+: Inspect the object supplied through the component’s JavaScript API.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-object-tree>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -507,8 +182,8 @@ All tp-components used by `<tp-object-tree>` are loaded automatically by this co
 @summary Generic tree component for interactive hierarchical editing.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-tree>`](../tree/index.md) : Generic tree component for interactive hierarchical editing.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-tree>`](#/components/tree/index.md) : Generic tree component for interactive hierarchical editing.
 
 ### External
 

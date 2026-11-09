@@ -1,47 +1,38 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="game-life" library="components" size="1.25em"></tp-icon> Game of Life
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-game-life>` element implements the <tp-icon name="game-life" library="components" size="1.25em"></tp-icon> Game of Life functionality: conway's Game of Life component.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
-<details class="tp-game-rules">
-<summary>Rules of the game</summary>
+<div class="tp-component-doc-intro">
 
-<p>This is a cellular simulation rather than a competitive game. Choose an initial pattern of living cells, then advance through generations.</p>
+The custom `<tp-game-life>` element simulates Conway’s Game of Life on an editable grid.
 
-<p>Each cell has up to eight neighbours, including diagonals. A living cell survives with two or three living neighbours and dies otherwise. A dead cell becomes alive with exactly three living neighbours.</p>
+<div class="tp-component-doc-example">
 
-<p>All cells change simultaneously using the previous generation. Outside the board, cells are treated as dead; when wrapping is enabled, opposite edges are connected. Observe whether the pattern disappears, stabilizes, oscillates or keeps evolving.</p>
-
-</details>
-
+<!-- tp-docgen:introduction:start -->
 <tp-game-life preset="glider" label="Glider" cell-size="14"></tp-game-life>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-game-life" src="/docs/components/game-life/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Using the component | Toggle cells to prepare a pattern. |
-| Using the component | Step advances one generation; Play starts continuous evolution and changes to Pause. |
-| Using the component | Reset restores the starting state. |
-| Play / Pause | Starts or pauses the simulation. |
-| Step | Advances the simulation by one generation. |
-| Reset | Restores the initial pattern. |
-| Download | Saves the current pattern as a file. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Focused controls | Use each control’s standard keyboard interaction.  |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Start with `glider`, `blinker`, `toad`, `beacon`, or `gosper-gun`, or provide a program in `<script type="tp/game-life">`.
 
@@ -49,371 +40,7 @@ Start with `glider`, `blinker`, `toad`, `beacon`, or `gosper-gun`, or provide a 
 <tp-game-life preset="glider" label="Glider" cell-size="14"></tp-game-life>
 ```
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Run the cellular simulation and observe how the initial pattern evolves.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpGameLife -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>alive-color</code> | <code>string</code> | <code>&quot;&quot;</code> | SVG fill color for living cells. |
-  | <code>autoplay</code> | <code>string</code> | <code>&quot;&quot;</code> | Starts automatic generation playback after initialization or reset when present. |
-  | <code>background</code> | <code>string</code> | <code>&quot;&quot;</code> | SVG background color behind the grid. |
-  | <code>cell-radius</code> | <code>string</code> | <code>&quot;&quot;</code> | Corner radius of each cell in SVG units; negative values are clamped to zero. |
-  | <code>cell-size</code> | <code>string</code> | <code>&quot;&quot;</code> | Width and height of each cell in SVG units, clamped to at least 1. |
-  | <code>dead-color</code> | <code>string</code> | <code>&quot;&quot;</code> | SVG fill color for dead cells. |
-  | <code>grid-color</code> | <code>string</code> | <code>&quot;&quot;</code> | SVG stroke color of the cell grid lines. |
-  | <code>grid-stroke-width</code> | <code>string</code> | <code>&quot;&quot;</code> | Width of the grid lines in SVG units, clamped to at least 0.1. |
-  | <code>interval</code> | <code>string</code> | <code>&quot;&quot;</code> | Delay between automatic generations in milliseconds, clamped to at least 16. |
-  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional title displayed above the game controls. |
-  | <code>padding</code> | <code>string</code> | <code>&quot;&quot;</code> | Space around the grid in SVG units; negative values are clamped to zero. |
-  | <code>preset</code> | <code>string</code> | <code>&quot;&quot;</code> | Built-in starting pattern: glider, blinker, toad, beacon or gosper-gun. An inline tp/game-life program takes precedence. |
-  | <code>preset-height</code> | <code>string</code> | <code>&quot;&quot;</code> | Positive number of grid rows when using preset; absent or invalid uses that preset's height. |
-  | <code>preset-width</code> | <code>string</code> | <code>&quot;&quot;</code> | Positive number of grid columns when using preset; absent or invalid uses that preset's width. |
-  | <code>preset-x</code> | <code>string</code> | <code>&quot;&quot;</code> | Integer horizontal offset of the preset pattern in grid cells; defaults to the preset position. |
-  | <code>preset-y</code> | <code>string</code> | <code>&quot;&quot;</code> | Integer vertical offset of the preset pattern in grid cells; defaults to the preset position. |
-  | <code>steps</code> | <code>string</code> | <code>&quot;&quot;</code> | Number of generations to compute before the first display and after reset. Zero or a negative value keeps the starting grid. |
-  | <code>wrap</code> | <code>string</code> | <code>&quot;&quot;</code> | Connects opposite grid edges so cells at a boundary interact with cells on the opposite side. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-game-life>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpGameLife`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-game-life>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-game-life>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_game-life.TpGameLife.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -440,12 +67,38 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Run the cellular simulation and observe how the initial pattern evolves.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-game-life>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -460,9 +113,9 @@ All tp-components used by `<tp-game-life>` are loaded automatically by this comp
 @summary Button group component for organizing multiple buttons.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
+- [`<tp-button-group>`](#/components/button-group/index.md) : Button group component for organizing multiple buttons.
 
 ### External
 

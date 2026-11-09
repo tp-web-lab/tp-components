@@ -1,0 +1,65 @@
+Blog
+====
+
+A small garden
+--------------
+
+Id
+   garden
+
+Date
+   2026-06-03
+
+Summary
+   Three ideas for a greener balcony.
+
+Categories
+   Life
+
+Tags
+   plants, outdoors
+
+Source
+   article.rst
+
+Start with herbs, choose a sunny spot, and water regularly.
+
+Learning together
+-----------------
+
+Id
+   learning
+
+Date
+   2026-06-02
+
+Summary
+   Notes from our first workshop.
+
+Categories
+   Learning
+
+Tags
+   community, ideas
+
+A short shared exercise makes a good starting point for discussion.
+
+Welcome
+-------
+
+Id
+   welcome
+
+Date
+   2026-06-01
+
+Summary
+   What you will find in this blog.
+
+Categories
+   Life
+
+Tags
+   community
+
+We share practical ideas and small discoveries. Come back for the next article.

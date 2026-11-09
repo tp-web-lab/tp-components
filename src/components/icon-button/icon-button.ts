@@ -45,7 +45,9 @@ function isIconButtonNativeType(
 }
 
 /**
- * @summary Button icon accessible.
+ * The custom `<tp-icon-button>` element provides an icon action button with an accessible text label.
+ *
+ * @summary Provides an icon action button with an accessible text label.
  * @tagname tp-icon-button
  * @attr {boolean} outlined = false - Uses an outlined appearance instead of a filled background.
  * @attr {boolean} pill = false - Rounds the button ends to form a pill.
@@ -69,7 +71,7 @@ function isIconButtonNativeType(
  * @attr {boolean} flip-v = false - Vertical flip forwarded to the internal `<tp-icon>`.
  * @attr {boolean} spin = false - Continuous spin forwarded to the internal `<tp-icon>`.
  * @attr {boolean} disabled = false - Prevents activation, including link navigation, and marks the control as disabled.
-
+ *
  * @accessibility Uses a native button or link and hides the decorative icon from the accessible name.
  * @accessibilityresponsibility Set `label` to a concise name that describes the action.
  * @keyboard {Enter / Space} Uses native button activation; links activate with Enter.

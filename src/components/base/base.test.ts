@@ -531,6 +531,44 @@ describe("<tp-base>", () => {
 		expect(reopened[1]?.getAttribute("aria-current")).toBe("true");
 	});
 
+	it("anchors hierarchy help at the latest mouse position inside a tall component", async () => {
+		document.body.innerHTML = "<tp-base-fixture>Target</tp-base-fixture>";
+		const fixture = required(
+			document.querySelector<TpBaseFixture>("tp-base-fixture"),
+		);
+		let top = 20;
+		vi.spyOn(fixture, "getBoundingClientRect").mockImplementation(
+			() => ({ left: 10, top, bottom: top + 3000 }) as DOMRect,
+		);
+		fixture.dispatchEvent(
+			new MouseEvent("mousemove", {
+				clientX: 150,
+				clientY: 220,
+				bubbles: true,
+			}),
+		);
+		fixture.dispatchEvent(
+			new KeyboardEvent("keydown", {
+				key: "?",
+				ctrlKey: true,
+				altKey: true,
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+		await vi.waitFor(() =>
+			expect(document.querySelector("#tp-help-hierarchy[open]")).not.toBeNull(),
+		);
+		const anchor = required(
+			document.querySelector<HTMLElement>("#tp-help-hierarchy-anchor"),
+		);
+		expect(anchor.style.left).toBe("150px");
+		expect(anchor.style.top).toBe("220px");
+		top -= 50;
+		window.dispatchEvent(new Event("scroll"));
+		expect(anchor.style.top).toBe("170px");
+	});
+
 	it("moves the help menu anchor on scroll and stops tracking after closing", async () => {
 		document.body.innerHTML =
 			'<tp-base-fixture tabindex="0">Target</tp-base-fixture>';
@@ -703,7 +741,7 @@ describe("<tp-base>", () => {
 		);
 		await vi.waitFor(() =>
 			expect(drawer.querySelector("[data-component-title]")?.textContent).toBe(
-				"tp-base-fixture Doc",
+				"tp-base-fixture",
 			),
 		);
 		expect(
@@ -752,6 +790,10 @@ describe("<tp-base>", () => {
 			bubbles: true,
 			cancelable: true,
 		});
+		fixture.setAttribute("role", "note");
+		fixture.setAttribute("popover", "manual");
+		fixture.style.setProperty("--tp-post-it-x", "327px");
+		fixture.setAttribute("lang", "en");
 		fixture.setAttribute("label", "At request time");
 		fixture.dispatchEvent(event);
 		fixture.setAttribute("label", "Changed while loading");
@@ -778,7 +820,7 @@ describe("<tp-base>", () => {
 		).toHaveLength(3);
 		await vi.waitFor(() =>
 			expect(drawer.querySelector("[data-component-title]")?.textContent).toBe(
-				"tp-base-fixture Doc",
+				"tp-base-fixture",
 			),
 		);
 		const viewer = required(drawer.querySelector("tp-component-viewer"));
@@ -795,6 +837,10 @@ describe("<tp-base>", () => {
 		expect(clone).not.toBe(fixture);
 		expect(clone.textContent).toContain("Preview content");
 		expect(clone.getAttribute("label")).toBe("At request time");
+		for (const name of ["role", "popover", "style", "lang"]) {
+			expect(clone.hasAttribute(name)).toBe(false);
+		}
+		expect(clone.getAttribute("tabindex")).toBe("0");
 		clone.setAttribute("label", "Clone only");
 		expect(fixture.getAttribute("label")).toBe("Changed while loading");
 	});

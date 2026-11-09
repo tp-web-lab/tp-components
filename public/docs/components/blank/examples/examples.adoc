@@ -1,5 +1,5 @@
 [tp-asciidoc-viewer%allow-script,label="tp-blank"]
-=========
+========
 [script,type="tp/asciidoc"]
 ----
 .Basic usage
@@ -29,9 +29,9 @@ image::/docs/medias/logos/logo-tp.svg[tp-components logo,40,40]
 Form::
 +
 The capital of France: [tp-blank,name="capital",aria-label="Capital of France"]#capital#
-
++
 A shape with three sides: [tp-blank,name="shape",aria-label="Three-sided shape"]#shape#
-
++
 The library logo: [tp-blank,name="logo",aria-label="Library logo"]#logo#
 
 Feedback::
@@ -43,83 +43,5 @@ Solution::
 Paris; the triangle; the tp-components logo.
 ====
 ======
-
-.Attributes
-========
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-[tp-stack]
-======
-[tp-checkbox-list%value,id="attributes-booleans",label="Boolean attributes",label-position="top",orientation="horizontal"]
-====
-* closed
-
-* disabled
-====
-
-[tp-radio-list,data-setting="type",label="type",label-position="top",orientation="horizontal",value="1"]
-====
-* text
-
-* number
-
-* math
-
-* date
-
-* time
-====
-
-[tp-cluster]
-=====
-[tp-textfield%value%placeholder%clearable,data-setting="aria-label",label="aria-label"]
-====
-====
-
-[tp-textfield%value%placeholder%clearable,data-setting="name",label="name"]
-====
-====
-
-[tp-textfield%clearable,data-setting="placeholder",label="placeholder",value="…",placeholder="…"]
-====
-====
-=====
-
-[tp-button-group]
-=====
-[tp-button,id="attributes-reset",type="button"]
-====
-Reset defaults
-====
-
-[tp-button,id="attributes-reload",type="button"]
-====
-Reload preview
-====
-=====
-======
-
-[tp-divider]
-====
-====
-
-[h3]
-====
-Preview
-====
-
-[tp-iframe,id="attributes-frame",title="blank attribute preview",style="height: 24rem; display: flow-root; inline-size: auto;"]
-====
-====
-
-[tp-callout,id="attributes-status",variant="info",heading="Preview status"]
-====
-Preparing the preview…
-====
-
-[script,type="module",src="/docs/components/blank/examples/attributes.js"]
-====
-====
-========
 ----
-=========
+========

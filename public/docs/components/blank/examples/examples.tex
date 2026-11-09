@@ -1,0 +1,20 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpFillBlankQuestion[mode=closed]{
+  \begin{description}
+    \item[{Title}] Match the answers
+    \item[{Prompt}] Choose an answer for each blank.
+    \item[{Answers}] \begin{enumerate}
+      \item Paris
+      \item \rawhtml|<svg xmlns="http://www.w3.org/2000/svg" width="48" height="40" viewBox="0 0 48 40" role="img" aria-label="Triangle"><path d="M24 3 45 37H3Z" fill="none" stroke="currentColor" stroke-width="3"></path></svg>|
+      \item \wcImg*[src=/docs/medias/logos/logo-tp.svg,alt=tp-components logo,width=40,height=40]{}
+    \end{enumerate}
+    \item[{Form}] The capital of France: \wcTpBlank*[name=capital,aria-label=Capital of France]{}
+     A shape with three sides: \wcTpBlank*[name=shape,aria-label=Three-sided shape]{}
+     The library logo: \wcTpBlank*[name=logo,aria-label=Library logo]{}
+    \item[{Feedback}] Match each answer to its description.
+    \item[{Solution}] Paris; the triangle; the tp-components logo.
+  \end{description}
+}
+\end{document}

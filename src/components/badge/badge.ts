@@ -20,8 +20,9 @@ import {
 import style from "./badge.css?inline";
 
 /**
- * @summary Compact status label.
- * Colors are derived from the shared `tp.css` semantic tokens.
+ * The custom `<tp-badge>` element provides a compact status label.
+ *
+ * @summary Provides a compact status label.
  * @tagname tp-badge
  * @attr {string} variant = "neutral" - Visual variant (`success`, `danger`, `warning`, `info`, `neutral`, or `brand`).
  * @attr {string} size = "m" - Badge size (`xxs`, `xs`, `s`, `m`, `l`, `xl`, or `xxl`).
@@ -31,7 +32,6 @@ import style from "./badge.css?inline";
  * @example
  * <p>
  *   Build status: <tp-badge variant="success" pulse>Ready</tp-badge>
- *   <tp-badge outlined><tp-icon name="file_type_vite" library="languages"></tp-icon> Vite<tp-divider orientation="vertical"></tp-divider>8.1.5</tp-badge>
  * </p>
  * @cssprop [--tp-badge-accent=var(--tp-neutral-text-colorful)] Accent color.
  * @cssprop [--tp-badge-background=var(--tp-neutral-fill-softer)] Background color.

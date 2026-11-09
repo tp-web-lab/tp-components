@@ -1,0 +1,31 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpCard{
+  \begin{description}
+    \item[{header}] content header
+    \item[{footer}] content footer
+    \item[{main}] content body
+  \end{description}
+}
+\end{document}
+
+% !tp-example Image card
+\documentclass{article}
+\begin{document}
+\wcTpCard{
+  \begin{description}
+    \item[{main}] \rawhtml*|<img src="https://images.unsplash.com/photo-1559209172-0ff8f6d49ff7?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Seashore">|
+  \end{description}
+}
+\end{document}
+
+% !tp-example Icon card
+\documentclass{article}
+\begin{document}
+\wcTpCard{
+  \begin{description}
+    \item[{main}] \wcTpIcon[name=logo-tp-components,size=5em]{}
+  \end{description}
+}
+\end{document}

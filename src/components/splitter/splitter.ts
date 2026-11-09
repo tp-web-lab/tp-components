@@ -74,7 +74,9 @@ function parsePercentage(value: string): number | null {
 let instanceCount = 0;
 
 /**
- * @summary Splitter layout with two resizable panels.
+ * The custom `<tp-splitter>` element divides content into two resizable panels.
+ *
+ * @summary Divides content into two resizable panels.
  * @tagname tp-splitter
  * @attr {string} axis = "horizontal" - Split direction (`horizontal` or `vertical`).
  * @attr {string} position = "50%" - Divider position as a percentage.

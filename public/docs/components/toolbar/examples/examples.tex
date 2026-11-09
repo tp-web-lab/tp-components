@@ -1,0 +1,15 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[padding=0]{
+  \wcTpToolbar{
+    \wcTpIcon[section=start,name=home,aria-label=Home]{}
+    \wcTpIcon[section=start,name=menu,aria-label=Menu]{}
+    \wcSpan*[section=center]{Document}
+    \wcTpIcon[section=end,name=github,aria-label=GitHub]{}
+    \wcTpIcon[section=end,name=settings,aria-label=Settings]{}
+    \wcTpIcon[section=end,name=help,aria-label=Help]{}
+  }
+  \wcTpBox[border-width=0,style=min-block-size: 5rem; display: grid; place-items: center]{Document area}
+}
+\end{document}

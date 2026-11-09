@@ -2,7 +2,7 @@
   "tagname": "tp-inline",
   "classname": "TpInline",
   "superclass": "TpBase",
-  "description": "`<tp-inline>` aligne ses enfants sur une seule ligne, sans retour à la ligne,\nsans utiliser de Shadow DOM.\n\nBase styles:\n- `display: flex`\n- `flex-wrap: nowrap`\n- `gap: var(--tp-inline-gap, 0.5rem)`\n- `justify-content: flex-start`\n- `align-items: center`\n\nReactive attributes:\n- `gap` : espace entre les enfants\n- `justify` : valeur de `justify-content`\n- `align` : valeur de `align-items`\n- `stretch` : permet aux enfants de s'étirer (`flex: 1 1 0`)",
+  "description": "Arranges content side by side in a single row.",
   "examples": [
     {
       "label": "Example 1",
@@ -65,8 +65,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Inline",
-    "introduction": "The custom `<tp-inline>` element implements the <tp-icon name=\"inline\" library=\"components\" size=\"1.25em\"></tp-icon> Inline functionality: inline flex layout component.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-inline>` element arranges content side by side in a single row.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

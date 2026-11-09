@@ -36,7 +36,9 @@ function isButtonGroupOrientation(
 }
 
 /**
- * @summary API documentation summary.
+ * The custom `<tp-button-group>` element groups related buttons with optional attached borders and vertical layout.
+ *
+ * @summary Groups related buttons with optional attached borders and vertical layout.
  * @tagname tp-button-group
  * @attr {string} orientation = "horizontal" - Arrangement of buttons: horizontal in a row, or vertical in a column.
  * @attr {boolean} attached = false - Joins adjacent buttons without gaps and removes their inner corner rounding.

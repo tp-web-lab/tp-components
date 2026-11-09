@@ -1,31 +1,38 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="graph-logical-circuit" library="components" size="1.25em"></tp-icon> Logical circuit
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-graph-logical-circuit>` element implements the <tp-icon name="graph-logical-circuit" library="components" size="1.25em"></tp-icon> Logical circuit functionality: edits and simulates combinational logic circuits.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-graph-logical-circuit>` element edits and simulates combinational logic circuits.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-graph-logical-circuit id="logic-example" grid="" grid-size="20" src="/docs/components/graph-logical-circuit/examples/xor.json"></tp-graph-logical-circuit>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-graph-logical-circuit" src="/docs/components/graph-logical-circuit/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Click | Click an input to toggle it and immediately propagate the new signal through the circuit. |
-| Using the component | Inputs, outputs, and gates use `success` when their value is `true` and `danger` when it is `false`. |
-| Using the component | Outputs can also be clicked to inspect or override their displayed state; the next evaluation restores the value computed from their incoming wire. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Toggles the focused input or output terminal. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Use `<tp-graph-logical-circuit>` as shown below.
 
@@ -33,390 +40,7 @@ Use `<tp-graph-logical-circuit>` as shown below.
 <tp-graph-logical-circuit id="logic-example" grid grid-size="20" src="/docs/components/graph-logical-circuit/examples/xor.json"></tp-graph-logical-circuit>
 ```
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Inspect the supplied logic circuit and try the simulator’s available controls.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpGraphLogicalCircuit -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>grid</code> | <code>boolean</code> | <code>false</code> | Displays and uses the snapping grid. *(inherited from <code>tp-graph-editor</code>)* |
-  | <code>grid-size</code> | <code>number</code> | <code>20</code> | Grid spacing in graph units. *(inherited from <code>tp-graph-editor</code>)* |
-  | <code>message</code> | <code>string</code> | <code>&quot;&quot;</code> | Status message displayed by the graph editor. *(inherited from <code>tp-graph-editor</code>)* |
-  | <code>ports-visible</code> | <code>boolean</code> | <code>false</code> | Keeps attachment plots visible instead of showing them only on hover. *(inherited from <code>tp-graph-editor</code>)* |
-  | <code>readonly</code> | <code>boolean</code> | <code>false</code> | Prevents graph editing while keeping navigation available. *(inherited from <code>tp-graph-editor</code>)* |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a tp/graph JSON document loaded at initialization. *(inherited from <code>tp-graph-editor</code>)* |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-graph-logical-circuit>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_LOGIC_WIRE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &quot;forward&quot;): TpGraphEdge</code> | Connects compatible logic nodes with a forward wire and returns its record. Validates input capacity and resolves the target input port; invalid connections throw. |
-  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, label?: string): TpGraphNode</code> | Adds a supported logic gate, input, output or comment at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError. |
-  | <code>evaluate</code> | <code>evaluate(): void</code> | Recomputes combinational logic, replaces the displayed graph and emits tp-logic-evaluate. |
-  | <code>reconnectEdge</code> | <code>reconnectEdge(edgeId: string, endpoint: &quot;source&quot; \| &quot;target&quot;, nodeId: string, port: TpGraphPort): TpGraphEdge</code> | Reconnects an existing wire endpoint after checking logic compatibility and available input capacity; returns the updated edge record. |
-  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph. |
-  | <code>toggle</code> | <code>toggle(id: string, propagate = true): boolean</code> | Inverts the Boolean state of input or output id and returns the new value. Input changes propagate through the circuit unless propagate is false; other node types throw. |
-  | <code>toggleEquationNotation</code> | <code>toggleEquationNotation(): TpLogicalEquationNotation</code> | Switches equations between electronic and mathematical notation, redraws results and returns the selected notation. |
-  | <code>toggleRepresentation</code> | <code>toggleRepresentation(): TpLogicGateRepresentation</code> | Switches gate symbols between iso and ansi, redraws the circuit and returns the selected representation. |
-  [Public methods of `TpGraphLogicalCircuit`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-logic-evaluate</code> | <code>&#123; graph: TpGraphDocument &#125;</code> | Emitted after combinational outputs are recomputed; graph contains the resulting snapshot. |
-  | <code>tp-logic-toggle</code> | <code>&#123; id: string; value: boolean; graph: TpGraphDocument &#125;</code> | Emitted after an input node is toggled; id identifies the input, value is its new Boolean level, and graph contains the resulting snapshot. |
-  [Events emitted by `<tp-graph-logical-circuit>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-graph-logical-circuit>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_graph-logical-circuit.TpGraphLogicalCircuit.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -443,12 +67,38 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Inspect the supplied logic circuit and try the simulator’s available controls.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-graph-logical-circuit>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-graph-editor
@@ -459,8 +109,8 @@ All tp-components used by `<tp-graph-logical-circuit>` are loaded automatically 
 @summary Markdown rendering component.
 -->
 
-- [`<tp-graph-editor>`](../graph-editor/index.md) : Extensible interactive graph editor.
-- [`<tp-markdown>`](../markdown/index.md) : Markdown rendering component.
+- [`<tp-graph-editor>`](#/components/graph-editor/index.md) : Extensible interactive graph editor.
+- [`<tp-markdown>`](#/components/markdown/index.md) : Markdown rendering component.
 
 ### External
 

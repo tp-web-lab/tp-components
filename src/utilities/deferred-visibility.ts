@@ -12,6 +12,8 @@ export class DeferredVisibility {
 
 	defer(): boolean {
 		this.disconnect();
+		// Component documentation needs live controls before its Demo panel is opened.
+		if (this.host.hasAttribute("data-tp-render-eager")) return false;
 		const revision = this.revision;
 		if (this.host.closest("tp-tabs:not(:defined)")) {
 			void customElements.whenDefined("tp-tabs").then(() => {

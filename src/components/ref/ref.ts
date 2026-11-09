@@ -42,7 +42,9 @@ import {
 } from "../../utilities/references.js";
 import style from "./ref.css?inline";
 /**
- * @summary Displays inline references to notes, bibliography and glossary entries with HTML tooltips.
+ * The custom `<tp-ref>` element displays an inline reference with the corresponding HTML content in a tooltip.
+ *
+ * @summary Displays an inline reference with the corresponding HTML content in a tooltip.
  * @tagname tp-ref
  * @attr {string} href = "" - Prefixed identifier selecting a note, bibliography or glossary entry.
  * @keyboard {Enter / Space} Shows the reference tooltip.

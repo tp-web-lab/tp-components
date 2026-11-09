@@ -137,7 +137,7 @@ function createBody(project: TpJavascriptProject): string {
 }
 
 /**
- * JavaScript playground component.
+ * The custom `<tp-javascript-playground>` element edits and runs a JavaScript project.
  *
  * Provides a file-based playground that runs JavaScript modules in an isolated preview.
  *

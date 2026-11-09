@@ -67,8 +67,7 @@ import { TpBase } from "../base/base.js";
 import style from "./crossword.css?inline";
 
 /**
- * Web component for interactive crossword puzzles.
- * Uses lightDOM to parse definition list and initialize game.
+ * The custom `<tp-crossword>` element displays an interactive crossword puzzle.
  *
  * @summary Displays an interactive crossword puzzle.
  * @tagname tp-crossword

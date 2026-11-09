@@ -74,16 +74,16 @@ function toCounterStyle(value: string): TpRadioListCounterStyle | null {
 }
 
 /**
- * `<tp-radio-list>` turns a plain `<ul>` or `<ol>` into a radio list.
+ * The custom `<tp-radio-list>` element presents a list of mutually exclusive choices.
  *
- * @summary Transforms list items into grouped radio options.
+ * @summary Presents a list of mutually exclusive choices.
  * @tagname tp-radio-list
  * @attr {string} name = "" - Radio group name used on generated inputs.
  * @attr {string} orientation = "vertical" - Item layout direction (`vertical` or `horizontal`).
  * @attr {string} label = "" - Visible accessible group label; no fieldset is created.
  * @attr {string} label-position = "top" - Group label position (`top`, `bottom`, `start`, or `end`).
  * @attr {string} value = "" - 1-based index of the checked item (`""` for no selection).
-
+ *
  * @example
  * <tp-radio-list></tp-radio-list>
  * @cssprop [--tp-radio-list-marker-gap=0.5em] Horizontal space between each selection marker and its item content.

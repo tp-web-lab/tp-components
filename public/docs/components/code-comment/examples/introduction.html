@@ -1,0 +1,14 @@
+<tp-code-editor id="commented-function" language="typescript">
+  <script type="tp/typescript">
+    function f(x: number): number {
+      if (x > 0) { return 2 * x; } // <1>
+      else { return 4 * x; } // <2>
+    }
+  </script>
+</tp-code-editor>
+<tp-code-comment for="commented-function">
+  <ol>
+    <li>Positive values are doubled.</li>
+    <li>Zero and negative values are multiplied by four.</li>
+  </ol>
+</tp-code-comment>

@@ -167,6 +167,8 @@ function synchronize(path, next) {
 
 let synchronized = 0;
 for (const directory of readdirSync(docsRoot)) {
+	const selected = process.argv.indexOf("--component");
+	if (selected >= 0 && directory !== process.argv[selected + 1]) continue;
 	const manifestPath = join(componentsRoot, directory, `${directory}.json`);
 	const documentationPath = join(docsRoot, directory, "index.md");
 	if (!existsSync(documentationPath)) continue;
@@ -197,7 +199,9 @@ for (const directory of readdirSync(docsRoot)) {
 		"examples",
 		"introduction-frame.html",
 	);
-	const rawExample = existingViewer
+	const marked = preamble.match(/<!-- tp-docgen:introduction:start -->\n([\s\S]*?)\n<!-- tp-docgen:introduction:end -->/);
+	const canonical = join(docsRoot, directory, "examples", "introduction.html");
+	const rawExample = marked ? (isolated ? readFileSync(canonical, "utf8").trim() : marked[1]) : existingViewer
 		? unwrapViewer(existingViewer.value, directory, tag)
 		: (direct?.value ??
 			(frame && existsSync(framePath)
@@ -222,12 +226,13 @@ for (const directory of readdirSync(docsRoot)) {
 		liveExample = `<tp-iframe src="/docs/components/${directory}/examples/introduction-frame.html" title="${tag} — Basic usage" style="display: flow-root; inline-size: auto; height: 32rem;"></tp-iframe>`;
 	}
 	const previous = existingViewer ?? frame ?? direct;
-	if (previous)
+	if (previous && !marked)
 		preamble =
 			preamble.slice(0, previous.start) +
 			liveExample +
 			preamble.slice(previous.end);
 	let next = `${preamble}${markdown.slice(usageIndex)}`;
+	if (marked) synchronize(canonical, `${example.trim()}\n`);
 	const generated = new RegExp(`${basicStart}[\\s\\S]*?${basicEnd}\\n*`);
 	next = normalizeExampleTabs(next.replace(generated, ""));
 	const files = Object.fromEntries(

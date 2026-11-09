@@ -13,9 +13,9 @@ tp-console {
     monospace;
   font-size: 0.875rem;
   line-height: 1.45;
-  color: var(--tp-console-color, #e6edf3);
-  background: var(--tp-console-bg, #0d1117);
-  border: 1px solid var(--tp-console-border, #30363d);
+  color: var(--tp-console-color, var(--tp-text-body));
+  background: var(--tp-console-bg, var(--tp-paper-color));
+  border: 1px solid var(--tp-console-border, var(--tp-neutral-stroke-mid));
   border-radius: 0.5rem;
   overflow: hidden;
 }
@@ -50,7 +50,7 @@ tp-console {
   gap: 0.5rem 0.75rem;
   align-items: start;
   padding: 0.625rem 0.75rem;
-  border-block-end: 1px solid var(--tp-console-entry-border, #21262d);
+  border-block-end: 1px solid var(--tp-console-entry-border, var(--tp-neutral-stroke-soft));
   background: var(--tp-console-entry-bg, transparent);
   min-inline-size: 0;
 }
@@ -165,18 +165,18 @@ tp-console {
 [data-tp-console-object] {
   inline-size: 100%;
   min-inline-size: 0;
-  border: 1px solid var(--tp-console-object-border, #30363d);
+  border: 1px solid var(--tp-console-object-border, var(--tp-neutral-stroke-mid));
   border-radius: 0.375rem;
-  background: var(--tp-console-object-bg, #11161d);
+  background: var(--tp-console-object-bg, var(--tp-paper-color));
   overflow: hidden;
 }
 
 tp-console [data-tp-console-object] > summary {
   cursor: pointer;
   list-style: none;
-  padding: 0.45rem 0.6rem;
-  color: var(--tp-console-object-summary-color, #c9d1d9);
-  background: var(--tp-console-object-summary-bg, #161b22);
+  padding: 0.45rem 2rem 0.45rem 0.6rem;
+  color: var(--tp-console-object-summary-color, var(--tp-text-body));
+  background: var(--tp-console-object-summary-bg, var(--tp-neutral-fill-softer));
   user-select: none;
 }
 
@@ -184,26 +184,14 @@ tp-console [data-tp-console-object] > summary {
   display: none;
 }
 
-[data-tp-console-object] > summary::before {
-  content: "▶";
-  display: inline-block;
-  inline-size: 1rem;
-  color: var(--tp-console-object-marker-color, #8b949e);
-  transition: transform 120ms ease;
-}
-
-[data-tp-console-object][open] > summary::before {
-  transform: rotate(90deg);
-}
-
-[data-tp-console-object] > summary:hover {
-  background: color-mix(in srgb, #ffffff 4%, #161b22);
+tp-console [data-tp-console-object] > summary:hover {
+  background: var(--tp-neutral-fill-soft);
 }
 
 [data-tp-console-object] > tp-object-tree {
   display: block;
   padding: 0.5rem 0.6rem 0.6rem;
-  background: var(--tp-console-object-panel-bg, #0f141a);
+  background: var(--tp-console-object-panel-bg, var(--tp-paper-color));
 }
 
 /* OBJECT TREE INTEGRATION */
@@ -235,12 +223,12 @@ tp-console tp-object-tree [data-tp-object-tree-row] {
 }
 
 tp-console tp-object-tree [data-tp-object-tree-key] {
-  color: var(--tp-console-object-key-color, #c9d1d9);
+  color: var(--tp-console-object-key-color, var(--tp-text-body));
   font-weight: 600;
 }
 
 tp-console tp-object-tree [data-tp-object-tree-separator] {
-  color: var(--tp-console-object-separator-color, #8b949e);
+  color: var(--tp-console-object-separator-color, var(--tp-text-body));
 }
 
 tp-console tp-object-tree [data-tp-object-tree-summary] {
@@ -311,7 +299,7 @@ tp-console tp-object-tree[data-type="boolean"] { color: #f59e0b; }
   justify-content: space-between;
 
   padding: 0.25rem 0.5rem;
-  border-bottom: 1px solid var(--tp-color-border, #ddd);
+  border-bottom: 1px solid var(--tp-console-border, var(--tp-neutral-stroke-mid));
 }
 
 [data-tp-console-header-left] {

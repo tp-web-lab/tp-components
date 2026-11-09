@@ -27,6 +27,8 @@ for (const name of readdirSync(resolve(root, 'public/docs/components'))) {
   if (!existsSync(path) || !existsSync(resolve(root, 'src/components', name, `${name}.ts`))) continue;
   if (!/customElements\.define\(/.test(readFileSync(resolve(root, 'src/components', name, `${name}.ts`), 'utf8'))) continue;
   const markdown = readFileSync(path, 'utf8');
+  // Viewer-based pages keep reader instructions in interactions.md.
+  if (markdown.includes('<!-- tp-docgen:page-layout:v2 -->')) { total += 1; continue; }
   const start = markdown.indexOf('\n## Usage\n');
   const end = markdown.indexOf('\n## Examples\n', start);
   if (start < 0 || end < 0) throw new Error(`Missing Usage or Examples in ${name}`);

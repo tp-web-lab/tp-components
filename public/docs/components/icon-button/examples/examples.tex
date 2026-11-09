@@ -1,0 +1,11 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[data-intro-action=counter,data-allow-script]{
+  Activate the heart button to add a like.
+
+  \wcTpIconButton[name=heart,label=Like this example,data-demo-trigger]{}
+  \wcP[data-demo-status,role=status]{Likes: 0}
+  \wcScript[src=/docs/components/_shared/introduction-actions.js]||
+}
+\end{document}

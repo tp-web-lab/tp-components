@@ -1,35 +1,43 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="dialog" library="components" size="1.25em"></tp-icon> Dialog
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-dialog>` element implements the <tp-icon name="dialog" library="components" size="1.25em"></tp-icon> Dialog functionality: displays a confirm/cancel dialog.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
-<tp-box data-intro-action="dialog" data-allow-script>
-  <tp-button id="intro-dialog-trigger" data-demo-trigger>Open the confirmation dialog</tp-button>
+<div class="tp-component-doc-intro">
+
+The custom `<tp-dialog>` element displays a confirm/cancel dialog.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
+<tp-box data-intro-action="dialog" data-allow-script="">
+  <tp-button id="intro-dialog-trigger" data-demo-trigger="">Open the confirmation dialog</tp-button>
   <tp-dialog></tp-dialog>
-  <p data-demo-status role="status">Try the dialog using its trigger.</p>
+  <p data-demo-status="" role="status">Try the dialog using its trigger.</p>
   <script src="/docs/components/_shared/introduction-actions.js"></script>
 </tp-box>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-dialog" src="/docs/components/dialog/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Using the component | Activate the page's trigger to open the panel. |
-| Using the component | Use its controls or links, then close it with the available dismissal control. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Escape</kbd> | Dismiss the panel when its settings allow it. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Use `<tp-dialog>` as shown below.
 
@@ -37,378 +45,7 @@ Use `<tp-dialog>` as shown below.
 <tp-dialog></tp-dialog>
 ```
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Open the confirmation dialog and try its available actions.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpDialog -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-dialog>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>close</code> | <code>close(action: &quot;confirm&quot; \| &quot;cancel&quot; = &quot;cancel&quot;): void</code> | Closes the dialog with action confirm or cancel and emits tp-dialog-close carrying that action; defaults to cancel. |
-  | <code>setContent</code> | <code>setContent(options: &#123;&lt;br&gt;		title?: string;&lt;br&gt;		body?: Node[];&lt;br&gt;		confirmText?: string;&lt;br&gt;		cancelText?: string;&lt;br&gt;	&#125;): void</code> | Replaces the title, body nodes and button labels. Supplied nodes are moved into the dialog; omitted title/body become empty and button labels default to Confirm/Cancel. |
-  | <code>show</code> | <code>show(): void</code> | Opens the internal native dialog in modal mode, blocking interaction with the rest of the page. |
-  [Public methods of `TpDialog`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-dialog-close</code> | <code>&#123; action: &quot;confirm&quot; \| &quot;cancel&quot; &#125;</code> | Emitted when the dialog is closed from one of its actions. |
-  [Events emitted by `<tp-dialog>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-dialog>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_dialog_dialog.TpDialog.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -435,8 +72,36 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Open the confirmation dialog and try its available actions.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
+
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
 ### Internal
 

@@ -1,44 +1,44 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="mathfield" library="components" size="1.25em"></tp-icon> Math field
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-mathfield>` element implements the <tp-icon name="mathfield" library="components" size="1.25em"></tp-icon> Math field functionality: mathematical expression field with live LaTeX or AsciiMath rendering.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
-<tp-mathfield label="Formula" value="E = mc^2" clearable></tp-mathfield>
+<div class="tp-component-doc-intro">
 
+The custom `<tp-mathfield>` element provides a mathematical expression field with live LaTeX or AsciiMath rendering.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
+<tp-mathfield label="Formula" value="E = mc^2" clearable=""></tp-mathfield>
+<!-- tp-docgen:introduction:end -->
+
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-mathfield" src="/docs/components/mathfield/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
+
+### Configuration
 
 Click the mathfield mark to choose `latexmath` or `asciimath`. A check marks the active notation. Changing notation updates `mode` and the preview without converting the expression source; the selector is disabled when the field is readonly or disabled.
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Pencil / crossed-out pencil | Open or close the visual LaTeX editor when available. Its keyboard button opens the mathematical keyboard. |
-| Mathfield mark | Open the notation menu; choose latexmath or asciimath. A check identifies the active mode. |
-| Using the component | Use the trailing clear button when available to remove the expression. |
-| Using the component | A required-field marker means an answer is needed. |
-| Using the component | The formula copy button copies the mathematical source. |
-| Using the component | Eye opens or closes the rendered preview; its copy button copies the rendered SVG. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> on the mathfield mark | Open the notation menu. Use <kbd>Up</kbd> / <kbd>Down</kbd> to navigate, <kbd>Enter</kbd> / <kbd>Space</kbd> to select, and <kbd>Escape</kbd> to close it. |
-| <kbd>Escape</kbd> in the visual editor | Close the editor when no internal menu consumes <kbd>Escape</kbd>. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> on the pencil | Open the visual LaTeX editor. |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Typing | <kbd>Enter</kbd> or edit the value using the field controls; read-only and disabled fields cannot be edited. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> on Clear | Activate the clear button when available. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 All fields use the same inline convention: ``:tp-mathfield:`identifier`{value="E = mc^2" placeholder="…"}``. The inline content initializes `name` only; it never sets `id`, `label` or `value`. An explicit `name` takes precedence. Use `value` for initial content and `placeholder` for a hint; omitting `value` keeps the component's normal default. The HTML equivalent is `<tp-mathfield name="identifier" value="E = mc^2" placeholder="…"></tp-mathfield>`.
-
 
 The `mathfield-mark` icon on the right is a button that opens a `tp-dropdown` notation menu. Its `latexmath` and `asciimath` entries show a check before the active mode. The check also follows programmatic changes to `mode`. Add `clearable` to show its clear button; without this attribute the button is hidden. When visible, the button is disabled if the expression is empty, readonly or disabled. Preview and copy controls remain available alongside these markers.
 
@@ -52,8 +52,7 @@ Without `multiline`, the editor is single-line, the formula is rendered inline, 
 
 The field also supports `label`, `label-position`, `placeholder`, `required`, `readonly`, `disabled`, and `clearable` in the same way as `tp-textfield`.
 
-
-#### Events and programmatic interactions
+### Events and programmatic interactions
 
 | Interaction | Result |
 | --- | --- |
@@ -67,371 +66,7 @@ The field also supports `label`, `label-position`, `placeholder`, `required`, `r
 | Select the rendered copy button | Copies the generated MathJax SVG. |
 | MathJax finishes rendering | Emits `tp-math-rendered`. |
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Edit the expression, open the mathfield mark menu and choose latexmath or asciimath. Observe the active check and open the preview; changing notation preserves the source text.
-
-Attributes
-: Combine all attribute settings on one preview, initialized at the documented defaults, then use Reset defaults to restore them. Try the two notation modes, multiline editing and formula preview. Enable mathlive in LaTeX mode to open the visual editor; its edits update the source.
-
-Inline in prose
-: Edit the mathematical field embedded directly in a sentence.
-
-Inline named field
-: Edit the inline field. Its role content supplies the form name, while value supplies the initial data; inspect the source to compare the shared convention across markup languages.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpMathfield -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>autocomplete</code> | <code>string</code> | <code>&quot;&quot;</code> | Native autocomplete hint. |
-  | <code>clearable</code> | <code>boolean</code> | <code>false</code> | Shows the clear button; it is disabled when empty, readonly or disabled. |
-  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Disables the field. |
-  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Visible label associated with the editing field. |
-  | <code>label-position</code> | <code>string</code> | <code>&quot;top&quot;</code> | Label position (`top`, `bottom`, `start`, or `end`). |
-  | <code>mathlive</code> | <code>boolean</code> | <code>false</code> | Offers a visual MathLive editor in LaTeX mode, loaded on first opening. |
-  | <code>mode</code> | <code>string</code> | <code>&quot;latexmath&quot;</code> | Mathematical notation (`latexmath` or `asciimath`). |
-  | <code>multiline</code> | <code>boolean</code> | <code>false</code> | Uses a multiline editor and display-style rendering. |
-  | <code>name</code> | <code>string</code> | <code>&quot;&quot;</code> | Name submitted with the containing form; defaults to the initial inline content when omitted. |
-  | <code>placeholder</code> | <code>string</code> | <code>&quot;Type LaTeX formula...&quot;</code> | Placeholder shown while the field is empty; defaults to the active notation mode. |
-  | <code>preview</code> | <code>boolean</code> | <code>false</code> | Opens the rendered MathJax preview panel. |
-  | <code>readonly</code> | <code>boolean</code> | <code>false</code> | Prevents value editing. |
-  | <code>required</code> | <code>boolean</code> | <code>false</code> | Marks the field as required. |
-  | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Mathematical expression source. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-mathfield>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>clear</code> | <code>clear(): void</code> | Clears the expression and emits `input`, `change`, and `tp-clear`. |
-  | <code>focus</code> | <code>focus(options?: FocusOptions): void</code> | Focuses the expression editor. |
-  | <code>getValue</code> | <code>getValue(): string</code> | Returns the mathematical expression source. |
-  [Public methods of `TpMathfield`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>change</code> | <code>void</code> | Emitted when the expression is committed or a different notation is selected in the menu. |
-  | <code>input</code> | <code>void</code> | Emitted when the expression changes while editing. |
-  | <code>tp-clear</code> | <code>void</code> | Emitted after the embedded button clears the expression. |
-  | <code>tp-math-rendered</code> | <code>&#123; mode: &quot;latexmath&quot; \| &quot;asciimath&quot;; value: string &#125;</code> | Emitted when the formula preview reports that rendering has finished; mode is the input notation and value is the current expression. |
-  [Events emitted by `<tp-mathfield>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-mathfield-inline-size</code> | <code>28rem</code> | Preferred width of the math editor, limited by available space; also caps the multiline component width. |
-  | <code>&#45;&#45;tp-mathfield-preview-background</code> | <code>Canvas</code> | Background color of the rendered formula preview. |
-  | <code>&#45;&#45;tp-mathfield-preview-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Border color of the rendered formula preview. |
-  | <code>&#45;&#45;tp-mathfield-preview-padding</code> | <code>0.75rem</code> | Inner spacing around the rendered formula preview. |
-  [CSS properties of `<tp-mathfield>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_mathfield_mathfield.TpMathfield.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -458,12 +93,44 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Edit the expression, open the mathfield mark menu and choose latexmath or asciimath. Observe the active check and open the preview; changing notation preserves the source text.
+
+Inline in prose
+: Edit the mathematical field embedded directly in a sentence.
+
+Inline named field
+: Edit the inline field. Its role content supplies the form name, while value supplies the initial data; inspect the source to compare the shared convention across markup languages.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-mathfield>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -486,28 +153,28 @@ All tp-components used by `<tp-mathfield>` are loaded automatically by this comp
 @summary Single-line and automatically growing multiline text field.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-copy-code>`](../copy-code/index.md) : Copy-to-clipboard button component.
-- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-textfield>`](../textfield/index.md) : Single-line and automatically growing multiline text field.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-copy-code>`](#/components/copy-code/index.md) : Copy-to-clipboard button component.
+- [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-textfield>`](#/components/textfield/index.md) : Single-line and automatically growing multiline text field.
 
 ### External
 
 <!--
-@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
-@summary Shared parsers, games and rendering utilities.
+@credit MathJax https://www.mathjax.org/
+@summary Mathematical notation rendering.
 -->
 <!--
 @credit MathLive https://mathlive.io/
 @summary Visual LaTeX editing and mathematical keyboard, loaded on demand.
 -->
 <!--
-@credit MathJax https://www.mathjax.org/
-@summary Mathematical notation rendering.
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
 -->
 
-- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
-- [MathLive](https://mathlive.io/) : Visual LaTeX editing and mathematical keyboard, loaded on demand.
 - [MathJax](https://www.mathjax.org/) : Mathematical notation rendering.
+- [MathLive](https://mathlive.io/) : Visual LaTeX editing and mathematical keyboard, loaded on demand.
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 <!-- tp-docgen:dependencies:end -->

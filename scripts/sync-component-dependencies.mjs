@@ -43,6 +43,8 @@ const docsEnd = '<!-- tp-docgen:dependencies:end -->';
 const sourceBlockExpression = new RegExp(`${sourceStart.replaceAll('/', '\\/')}[\\s\\S]*?${sourceEnd.replaceAll('/', '\\/')}\\n?`);
 
 const credits = {
+  '@tp/tp-latex': ['tp-latex', 'https://www.npmjs.com/package/@tp/tp-latex', 'LaTeX.js conversion and patched TikZJax assets.'],
+  'runtime:tikzjax': ['TikZJax', 'https://tikzjax.com/', 'WebAssembly TeX engine, core dump and SVG conversion.'],
   '@cortex-js/compute-engine': ['CortexJS Compute Engine', 'https://mathlive.io/compute-engine/', 'Symbolic comparison of mathematical answers, loaded on demand.'],
   mathlive: ["MathLive", "https://mathlive.io/", "Visual LaTeX editing and mathematical keyboard, loaded on demand."],
   'leaflet': ['Leaflet', 'https://leafletjs.com/', 'Interactive geographic maps.'],
@@ -118,6 +120,7 @@ for (const [tag, file] of fileByTag) {
   if (summary !== undefined && summary !== '') summaryByTag.set(tag, summary);
 }
 for (const manifestPath of walk(componentsRoot).filter((path) => path.endsWith('.json'))) {
+  if (process.argv.includes("--docs-only")) continue;
   try {
     const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
     if (typeof manifest.tagname === 'string' && !summaryByTag.has(manifest.tagname) && typeof manifest.description === 'string') {
@@ -175,6 +178,7 @@ function creditKey(specifier) {
 // MathJax is reached through the optional tp-markdown preview; the checker is
 // imported on demand and must not become a structural dependency of a field.
 const optionalRuntimeCredits = {
+  'tp-tikz': ['@tp/tp-latex', 'runtime:tikzjax'],
   'tp-mathfield': ['mathlive', 'runtime:mathjax'],
   'tp-fill-blank-question': ['@cortex-js/compute-engine'],
 };
@@ -224,6 +228,7 @@ function replaceSourceBlock(source, block) {
 }
 
 for (const [file, tags] of tagsByFile) {
+  if (process.argv.includes("--docs-only")) continue;
   if (selected && !tags.includes(`tp-${selected}`)) continue;
   const source = readFileSync(file, 'utf8');
   const next = replaceSourceBlock(source, sourceBlock(analyze(file, tags)));
@@ -231,6 +236,7 @@ for (const [file, tags] of tagsByFile) {
 }
 
 for (const manifestPath of walk(componentsRoot).filter((path) => path.endsWith('.json'))) {
+  if (process.argv.includes("--docs-only")) continue;
   let manifest;
   try { manifest = JSON.parse(readFileSync(manifestPath, 'utf8')); } catch { continue; }
   const sourceFile = typeof manifest.tagname === 'string' ? fileByTag.get(manifest.tagname) : undefined;
@@ -250,7 +256,7 @@ for (const manifestPath of walk(componentsRoot).filter((path) => path.endsWith('
 
 function docsEntryForDependency(tag) {
   const directory = tag.slice(3);
-  const link = existsSync(join(docsRoot, directory, 'index.md')) ? `../${directory}/index.md` : null;
+  const link = existsSync(join(docsRoot, directory, 'index.md')) ? `#/components/${directory}/index.md` : null;
   const label = `\`<${tag}>\``;
   const summary = dependencySummary(tag);
   return {
@@ -264,9 +270,35 @@ function docsList(entries) {
   return entries.length === 0 ? '' : `${entries.map(entry => entry.metadata).join('\n')}\n\n${entries.map(entry => entry.item).join('\n')}`;
 }
 
+/** Optional related components, declared on the component class as @see tp-NAME - description. */
+function relatedComponents(tag) {
+  const file = fileByTag.get(tag);
+  if (!file) return [];
+  const source = ts.createSourceFile(file, readFileSync(file, 'utf8'), ts.ScriptTarget.Latest, true);
+  const entries = new Map();
+  for (const statement of source.statements) {
+    if (!ts.isClassDeclaration(statement)) continue;
+    const tags = ts.getJSDocTags(statement);
+    if (!tags.some(item => item.tagName.text === 'tagname' && ts.getTextOfJSDocComment(item.comment)?.trim() === tag)) continue;
+    for (const item of tags) {
+      if (item.tagName.text !== 'see') continue;
+      const text = [item.name?.getText(source), ts.getTextOfJSDocComment(item.comment)].filter(Boolean).join(' ');
+      const match = text.trim().match(/^(tp-[a-z0-9-]+)\s+-\s+(.+)$/s);
+      if (!match) continue;
+      const [, relatedTag, description] = match;
+      if (!fileByTag.has(relatedTag)) throw new Error(`Unknown related component ${relatedTag} in ${file}`);
+      if (relatedTag === tag) continue;
+      entries.set(relatedTag, `- [\`<${relatedTag}>\`](#/components/${relatedTag.slice(3)}/index.md) : ${description.replace(/\s+/g, ' ')}`);
+    }
+  }
+  return [...entries].sort(([a], [b]) => a.localeCompare(b)).map(([, entry]) => entry);
+}
+
 function docsBlock(data, tag) {
+  const related = relatedComponents(tag);
+  const seeAlso = related.length ? `\n\n### See also\n\n${related.join('\n')}` : '';
   const componentEntries = data.dependencies.map(docsEntryForDependency);
-  const creditEntries = data.credits.map((key) => {
+  const creditEntries = [...data.credits].sort((a, b) => credits[a][0].localeCompare(credits[b][0])).map((key) => {
     const [name, url, summary] = credits[key];
     return {
       metadata: `<!--\n@credit ${name} ${url}\n@summary ${summary}\n-->`,
@@ -275,11 +307,8 @@ function docsBlock(data, tag) {
   });
   const noComponents = '<!--\n@summary This component has no tp-components dependencies.\n-->\nNo internal dependency';
   const noCredits = '<!--\n@summary No external dependency.\n-->\nNo external dependency';
-  const componentPreamble = `All tp-components used by \`<${tag}>\` are loaded automatically by this component if they have not already been loaded by another component.`;
-  const internalDependencies = componentEntries.length === 0
-    ? noComponents
-    : `${componentPreamble}\n\n${docsList(componentEntries)}`;
-  return `${docsStart}\n## Dependencies\n\n### Internal\n\n${internalDependencies}\n\n### External\n\n${docsList(creditEntries) || noCredits}\n${docsEnd}`;
+  const internalDependencies = componentEntries.length === 0 ? noComponents : docsList(componentEntries);
+  return `${docsStart}\n## Dependencies\n\nAll tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.\n\n### Internal\n\n${internalDependencies}\n\n### External\n\n${docsList(creditEntries) || noCredits}${seeAlso}\n${docsEnd}`;
 }
 
 for (const doc of walk(docsRoot).filter((path) => path.endsWith('/index.md'))) {

@@ -219,6 +219,8 @@ HTML in TeX: :latexmath:`{\mathrm when\ } x=3, x^2 + 3x + 1 =
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
+
 ### Internal
 
 <!--

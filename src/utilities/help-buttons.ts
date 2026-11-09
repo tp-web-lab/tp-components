@@ -1,3 +1,5 @@
+import "../components/divider/divider.js";
+
 /** Builds a noninteractive legend from the component's currently available controls. */
 export function createHelpButtonTable(
 	host: HTMLElement,
@@ -17,11 +19,12 @@ export function createHelpButtonTable(
 		"tp-sidebar",
 		"tp-splitter",
 	]);
-	const selector = 'button, [role="button"], tp-icon-button, tp-button';
+	const selector =
+		'button, [role="button"], tp-icon-button, tp-button, tp-copy-code, tp-theme[data-help-description]';
 	const controls = [
 		...(host.matches(selector) ? [host] : []),
 		...host.querySelectorAll<HTMLElement>(
-			'button, [role="button"], tp-icon-button, tp-button',
+			'button, [role="button"], tp-icon-button, tp-button, tp-copy-code, tp-theme[data-help-description]',
 		),
 	];
 	const rows = instructions
@@ -94,8 +97,12 @@ export function createHelpButtonTable(
 		if (excluded) continue;
 		const native = control.querySelector("button, [role=button]");
 		const label =
+			control.getAttribute("data-help-label") ||
 			control.getAttribute("label") ||
 			control.getAttribute("aria-label") ||
+			(control.localName === "tp-copy-code"
+				? control.getAttribute("title")
+				: null) ||
 			native?.getAttribute("aria-label") ||
 			control.getAttribute("title") ||
 			control.textContent?.trim();
@@ -105,6 +112,13 @@ export function createHelpButtonTable(
 			: control.querySelector("tp-icon");
 		const name = icon?.getAttribute("name") ?? "";
 		const library = icon?.getAttribute("library") ?? "";
+		const names = [
+			...new Set(
+				(control.getAttribute("data-help-icons") ?? name)
+					.split(/[\s,]+/)
+					.filter(Boolean),
+			),
+		];
 		const groupHost = control.closest(
 			"[data-help-group], tp-button-group[aria-label], [role=toolbar][aria-label]",
 		);
@@ -114,12 +128,20 @@ export function createHelpButtonTable(
 					groupHost.getAttribute("aria-label") ||
 					"Buttons"
 				: "Buttons";
-		const identity = `${group}|${label}|${name}|${library}`;
+		const identity = `${group}|${label}|${names.join(",")}|${library}`;
 		if (seen.has(identity)) continue;
 		seen.add(identity);
 		const row = groupBody(group).insertRow();
 		const button = row.insertCell();
-		if (name) {
+		for (const [index, name] of names.entries()) {
+			if (index > 0) {
+				const divider = doc.createElement("tp-divider");
+				divider.setAttribute("orientation", "vertical");
+				divider.style.display = "inline-block";
+				divider.style.verticalAlign = "middle";
+				divider.setAttribute("aria-hidden", "true");
+				button.append(divider, " ");
+			}
 			const glyph = doc.createElement("tp-icon");
 			glyph.setAttribute("name", name);
 			if (library) glyph.setAttribute("library", library);

@@ -32,7 +32,9 @@ import {
 import { TpBase } from "../base/base.js";
 import style from "./listof.css?inline";
 /**
- * @summary Collects reference content or links to labelled elements matching a CSS selector.
+ * The custom `<tp-listof>` element builds a list of reference entries or links to labelled document elements.
+ *
+ * @summary Builds a list of reference entries or links to labelled document elements.
  * @tagname tp-listof
  * @attr {string} selector = "" - CSS selector for reference definitions or elements with a title, label or caption.
  * @keyboard {Enter} Follows the focused list link.

@@ -68,6 +68,14 @@
  * @summary Compact JavaScript code viewer and runner.
  */
 /**
+ * @tp-dependency tp-latex
+ * @summary Renders LaTeX documents with interactive components, MathJax formulas and TikZ figures.
+ */
+/**
+ * @tp-dependency tp-latex-viewer
+ * @summary Editable LaTeX documents with rendered HTML and generated source views.
+ */
+/**
  * @tp-dependency tp-markdown-viewer
  * @summary Interactive Markdown viewer with editable source and parser outputs.
  */
@@ -104,6 +112,8 @@ import "../divider/divider.js";
 import { setupTpDropdownTriggers } from "../dropdown/dropdown-triggers.js";
 import "../html-viewer/html-viewer.js";
 import "../asciidoc-viewer/asciidoc-viewer.js";
+import "../latex-viewer/latex-viewer.js";
+import "../latex/latex.js";
 import "../markdown-viewer/markdown-viewer.js";
 import "../restructuredtext-viewer/restructuredtext-viewer.js";
 import "../javascript-viewer/javascript-viewer.js";
@@ -112,7 +122,10 @@ import "../python-viewer/python-viewer.js";
 import "../prolog-viewer/prolog-viewer.js";
 import "../sql-viewer/sql-viewer.js";
 import { dedent } from "../../utilities/code.js";
-import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
+import {
+	getComponentSourceBaseUrl,
+	resolveComponentSourceUrl,
+} from "../../utilities/source-url.js";
 import { TpBase } from "../base/base.js";
 
 type NotebookLanguage =
@@ -121,7 +134,12 @@ type NotebookLanguage =
 	| "python"
 	| "prolog"
 	| "sql";
-type MarkupLanguage = "html" | "asciidoc" | "markdown" | "restructuredtext";
+type MarkupLanguage =
+	| "html"
+	| "asciidoc"
+	| "latex"
+	| "markdown"
+	| "restructuredtext";
 interface NotebookFile {
 	filename?: string;
 	content: string;
@@ -148,6 +166,7 @@ interface NotebookWritableFileHandle {
 const MARKUP_LANGUAGES: MarkupLanguage[] = [
 	"asciidoc",
 	"html",
+	"latex",
 	"markdown",
 	"restructuredtext",
 ];
@@ -161,6 +180,7 @@ const CODE_LANGUAGES: NotebookLanguage[] = [
 const LANGUAGE_ICONS: Record<MarkupLanguage | NotebookLanguage, string> = {
 	html: "file_type_html",
 	asciidoc: "file_type_asciidoc",
+	latex: "file_type_latex",
 	markdown: "file_type_markdown",
 	restructuredtext: "file_type_restructuredtext",
 	javascript: "file_type_javascript",
@@ -201,6 +221,8 @@ export function getNotebookLoaderUrl(
 }
 
 /**
+ * The custom `<tp-notebook>` element combines editable markup cells and executable programming-language cells.
+ *
  * @tagname tp-notebook
  * @summary Combines editable markup cells and executable programming-language cells.
  * @attr {string} language = "javascript" - Programming language enforced by a specialized notebook.
@@ -212,7 +234,62 @@ export function getNotebookLoaderUrl(
  * @event tp-notebook-change Emitted after the cell collection changes.
  * @eventdetail tp-notebook-change { cells: number }
  * @example
- * <tp-notebook></tp-notebook>
+ * <tp-notebook>
+ *   <script type="tp/markdown">
+ *     # Notebook example
+ *     Here is a notebook that combines AsciiDoc, HTML, LaTeX, Markdown and reStructuredText as markup languages, and Python and JavaScript as programming languages.
+ *
+ *     ## Calculation
+ *     We perform a simple multiplication in Python to demonstrate the calculation.
+ *   </script>
+ *   <script type="tp/python">
+ *     x = 6 * 7
+ *     print(x)
+ *   </script>
+ *   <script type="tp/restructuredtext" doctest="">
+ *     .. h2::
+ *
+ *        Verification
+ *
+ *     We use the doctest blocks in reStructuredText to verify the output of the Python code.
+ *
+ *     >>> print(6 * 7)
+ *     42
+ *   </script>
+ *   <script type="tp/html">
+ *     In JavaScript, we would have written the following code:
+ *   </script>
+ *   <script type="tp/javascript">
+ *     const x = 6 * 7;
+ *     console.log(x)
+ *   </script>
+ *   <script type="tp/asciidoc">
+ *     == Result
+ *     The result of the multiplication is displayed using Asciidoc and Mathjax:
+ *
+ *     latexmath:[x = 6 * 7 = 42]
+ *   </script>
+ *   <script type="tp/latex">
+ *     \section*{LaTeX and TP styles}
+ *     The same result can be written in LaTeX: $6 \times 7 = 42$.
+ *
+ *     \begin{itemize}
+ *       \item Ordinary lists use the shared TP styles.
+ *       \item Nested lists keep their hierarchy.
+ *         \begin{itemize}
+ *           \item This is a nested item.
+ *         \end{itemize}
+ *     \end{itemize}
+ *
+ *     \wcTpCallout[variant=info,heading=LaTeX inside a component]{
+ *       \textbf{The component controls its appearance.}
+ *       \begin{itemize}
+ *         \item Keep the LaTeX source readable.
+ *         \item Reuse the same TP typography and list styles.
+ *       \end{itemize}
+ *     }
+ *   </script>
+ * </tp-notebook>
  */
 export class TpNotebook extends TpBase {
 	private static readonly styleId = "tp-notebook-styles";
@@ -227,6 +304,8 @@ export class TpNotebook extends TpBase {
 	private fileHandle: NotebookWritableFileHandle | null = null;
 	private viewerObservers: MutationObserver[] = [];
 	private previewing = false;
+	private markupLanguage: MarkupLanguage = "markdown";
+	private codeLanguage: NotebookLanguage = "javascript";
 
 	public static override get observedAttributes(): string[] {
 		return [
@@ -416,40 +495,17 @@ export class TpNotebook extends TpBase {
 		this.configureDropdownTrigger(filesButton, filesMenu.id);
 		const spacer = document.createElement("span");
 		spacer.setAttribute("data-tp-notebook-toolbar-spacer", "");
-		const markupButton = this.button(
-			"markup-menu",
-			"plus-box-outline",
-			"Add markup block",
-		);
-		markupButton.id = `${this.instanceId}-markup`;
-		const markupMenu = this.languageMenu(markupButton.id);
-		markupMenu.id = `${this.instanceId}-markup-menu`;
-		this.configureDropdownTrigger(markupButton, markupMenu.id);
-		const languageControls: HTMLElement[] = [];
-		if (this.localName === "tp-notebook") {
-			const languageButton = this.button(
-				"language-menu",
-				"plus-box-outline",
-				"Add programming block",
-			);
-			languageButton.id = `${this.instanceId}-language`;
-			const languageMenu = this.languageMenu(languageButton.id, true);
-			languageMenu.id = `${this.instanceId}-language-menu`;
-			this.configureDropdownTrigger(languageButton, languageMenu.id);
-			languageControls.push(
-				this.menuTrigger("Language", languageButton),
-				languageMenu,
-			);
-		} else {
-			languageControls.push(this.restrictedLanguageButton());
-		}
+		const markupControls = this.languageControls(false);
+		const languageControls =
+			this.localName === "tp-notebook"
+				? this.languageControls(true)
+				: [this.restrictedLanguageButton()];
 		toolbar.append(
 			title,
 			this.menuTrigger("Files", filesButton),
 			filesMenu,
 			spacer,
-			this.menuTrigger("Markup", markupButton),
-			markupMenu,
+			...markupControls,
 			...languageControls,
 			this.button("up", "arrow-up", "Move selected block up"),
 			this.button("down", "arrow-down", "Move selected block down"),
@@ -508,7 +564,7 @@ export class TpNotebook extends TpBase {
 			else if (action === "import-html") this.chooseNotebookFile("html");
 			else if (action === "save") void this.saveNotebook(false);
 			else if (action === "save-as") void this.saveNotebook(true);
-			else if (action === "export-html") this.exportHtml();
+			else if (action === "export-html") void this.exportHtml();
 			if (action !== undefined) dropdown.hide?.();
 		});
 		return dropdown;
@@ -638,11 +694,70 @@ export class TpNotebook extends TpBase {
 		URL.revokeObjectURL(url);
 	}
 
-	private standaloneHtml(): string {
+	private async standaloneHtml(): Promise<string> {
+		// Snapshot global appearance before asynchronous markup rendering.
+		const globalScope =
+			this.closest(".tp-light, .tp-dark") ??
+			document.body.closest(".tp-light, .tp-dark");
+		const theme = globalScope?.classList.contains("tp-dark")
+			? "tp-dark"
+			: "tp-light";
+		const appearance = document.createElement("body");
+		appearance.className = theme;
+		const brand =
+			getComputedStyle(this).getPropertyValue("--tp-brand-seed").trim() ||
+			getComputedStyle(globalScope ?? document.body)
+				.getPropertyValue("--tp-brand-seed")
+				.trim() ||
+			getComputedStyle(document.body)
+				.getPropertyValue("--tp-brand-seed")
+				.trim() ||
+			getComputedStyle(document.documentElement)
+				.getPropertyValue("--tp-brand-seed")
+				.trim();
+		if (brand) appearance.style.setProperty("--tp-brand-seed", brand);
+		// Serialize the attribute through the DOM, including any necessary escaping.
+		const bodyOpening = appearance.outerHTML.replace("</body>", "");
 		this.captureAllCells();
-		const body = this.cells
-			.map((cell, index) => this.createRenderedCell(cell, index).outerHTML)
-			.join("\n");
+		const { notebookExportStyle, renderNotebookMarkup } = await import(
+			"./notebook-export.js"
+		);
+		const rendered = await Promise.all(
+			this.cells.map(async (cell, index) => {
+				if (cell.type === "markup")
+					return (await renderNotebookMarkup(cell.language, cell.content ?? ""))
+						.outerHTML;
+				const viewer = this.createRenderedCell(cell, index);
+				viewer.setAttribute("data-tp-notebook-code-viewer", "");
+				// JSON preserves literal closing script tags in code without breaking HTML parsing.
+				for (const script of viewer.querySelectorAll("script")) {
+					const type = script.type;
+					script.type = "application/json";
+					script.setAttribute("data-tp-export-type", type);
+					script.textContent = JSON.stringify(script.textContent).replaceAll(
+						"<",
+						"\\u003c",
+					);
+				}
+				const fallback = document.createElement("details");
+				fallback.setAttribute("data-tp-notebook-code-fallback", "");
+				const summary = document.createElement("summary");
+				summary.textContent = `${LANGUAGE_LABELS[cell.language as NotebookLanguage]} source`;
+				fallback.append(summary);
+				for (const file of cell.files ?? []) {
+					const pre = document.createElement("pre");
+					const code = document.createElement("code");
+					code.textContent = file.content;
+					pre.append(code);
+					fallback.append(pre);
+				}
+				return viewer.outerHTML + fallback.outerHTML;
+			}),
+		);
+		const body = rendered.join("\n");
+		const base = document.createElement("base");
+		base.href = getComponentSourceBaseUrl(this);
+
 		const loader =
 			document.querySelector<HTMLScriptElement>('script[src*="tp-loader"]')
 				?.src ?? getNotebookLoaderUrl();
@@ -658,17 +773,69 @@ export class TpNotebook extends TpBase {
 			cells: exportCells,
 		}).replaceAll("<", "\\u003c");
 		return `<!doctype html>
-<html lang="en">
+<html lang="en" class="${theme}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${title}</title>
+  ${base.outerHTML}
+  <style>${notebookExportStyle}</style>
   <script type="module" src="${loader}"></script>
   <script id="tp-notebook-data" type="application/json">${notebookData}</script>
-  <style>:root{color-scheme:light}body{background:#fff;box-sizing:border-box;color:#111827;margin-inline:auto;max-inline-size:80rem;padding:1rem}main{display:grid;gap:.75rem;min-inline-size:0}</style>
+  <style>body{background:var(--tp-background-color);color:var(--tp-text-body);box-sizing:border-box;margin-inline:auto;max-inline-size:80rem;padding:1rem}main{display:grid;gap:.75rem;min-inline-size:0}[data-tp-notebook-export-actions]{display:flex;justify-content:flex-end;gap:.5rem;margin-block-end:1rem}[data-tp-notebook-code-viewer]:defined + [data-tp-notebook-code-fallback]{display:none}</style>
 </head>
-<body>
+${bodyOpening}
+  <nav data-tp-notebook-export-actions aria-label="Notebook actions">
+    <tp-icon-button data-tp-notebook-export-reset name="refresh" label="Reset all" disabled title="Restore all code cells to their exported sources"></tp-icon-button>
+    <tp-icon-button data-tp-notebook-export-run name="play-all" label="Run all" disabled title="Run all code cells in document order"></tp-icon-button>
+  </nav>
   <main>${body}</main>
+  <script>
+    for (const source of document.querySelectorAll('script[data-tp-export-type]')) {
+      source.textContent = JSON.parse(source.textContent);
+      source.type = source.getAttribute('data-tp-export-type');
+      source.removeAttribute('data-tp-export-type');
+    }
+    const viewers = Array.from(document.querySelectorAll('main > [data-tp-notebook-code-viewer]'));
+    const resetAll = document.querySelector('[data-tp-notebook-export-reset]');
+    const runAll = document.querySelector('[data-tp-notebook-export-run]');
+    let busy = false;
+    const updateActions = () => {
+      const ready = viewers.length > 0 && viewers.every(viewer =>
+        viewer.querySelector('[data-tp-programming-viewer-code]') &&
+        viewer.querySelector('[data-tp-programming-viewer-output]') &&
+        typeof viewer.run === 'function' && typeof viewer.reset === 'function');
+      resetAll.toggleAttribute('disabled', busy || !ready);
+      runAll.toggleAttribute('disabled', busy || !ready);
+    };
+    const applyToAll = async (action) => {
+      if (busy || runAll.hasAttribute('disabled')) return;
+      busy = true;
+      updateActions();
+      try {
+        for (const viewer of viewers) await viewer[action]();
+      } finally {
+        busy = false;
+        updateActions();
+      }
+    };
+    resetAll.addEventListener('click', () => { void applyToAll('reset'); });
+    runAll.addEventListener('click', () => { void applyToAll('run'); });
+    for (const viewer of viewers) {
+      const openPanels = () => {
+        const code = viewer.querySelector('[data-tp-programming-viewer-code]');
+        const output = viewer.querySelector('[data-tp-programming-viewer-output]');
+        if (!code || !output) return;
+        observer.disconnect();
+        updateActions();
+        if (code.getAttribute('aria-pressed') === 'false') code.click();
+        if (output.getAttribute('aria-pressed') === 'false') output.click();
+      };
+      const observer = new MutationObserver(openPanels);
+      observer.observe(viewer, { childList: true, subtree: true });
+      openPanels();
+    }
+  </script>
 </body>
 </html>`;
 	}
@@ -705,8 +872,8 @@ export class TpNotebook extends TpBase {
 		return renderer;
 	}
 
-	private htmlBlob(): Blob {
-		return new Blob([this.standaloneHtml()], { type: "text/html" });
+	private async htmlBlob(): Promise<Blob> {
+		return new Blob([await this.standaloneHtml()], { type: "text/html" });
 	}
 
 	private togglePreview(): void {
@@ -751,8 +918,39 @@ export class TpNotebook extends TpBase {
 		button.setAttribute("aria-pressed", String(this.previewing));
 	}
 
-	private exportHtml(): void {
-		const url = URL.createObjectURL(this.htmlBlob());
+	private async exportHtml(): Promise<void> {
+		const picker = (
+			window as Window & {
+				showSaveFilePicker?: (
+					options: object,
+				) => Promise<NotebookWritableFileHandle>;
+			}
+		).showSaveFilePicker;
+		if (picker !== undefined) {
+			let handle: NotebookWritableFileHandle;
+			try {
+				// Open before rendering asynchronously to retain the click's user activation.
+				handle = await picker({
+					suggestedName: `${this.notebookName}.html`,
+					types: [
+						{
+							description: "Notebook HTML",
+							accept: { "text/html": [".html"] },
+						},
+					],
+				});
+			} catch (error) {
+				if (error instanceof DOMException && error.name === "AbortError")
+					return;
+				throw error;
+			}
+			const blob = await this.htmlBlob();
+			const writable = await handle.createWritable();
+			await writable.write(blob);
+			await writable.close();
+			return;
+		}
+		const url = URL.createObjectURL(await this.htmlBlob());
 		const link = document.createElement("a");
 		link.href = url;
 		link.download = `${this.notebookName}.html`;
@@ -780,6 +978,56 @@ export class TpNotebook extends TpBase {
 		return trigger;
 	}
 
+	private languageControls(programming: boolean): HTMLElement[] {
+		const type = programming ? "code" : "markup";
+		const name = programming ? "language" : "markup";
+		const group = document.createElement("span");
+		group.setAttribute("data-tp-notebook-menu-trigger", "");
+		const chooser = document.createElement("tp-button");
+		chooser.id = `${this.instanceId}-${name}`;
+		chooser.setAttribute("data-tp-notebook-language-choice", type);
+		chooser.setAttribute("size", "s");
+		chooser.setAttribute("outlined", "");
+		const label = document.createElement("span");
+		label.setAttribute("data-language-label", "");
+		const arrow = document.createElement("tp-icon");
+		arrow.setAttribute("name", "chevron-down");
+		arrow.setAttribute("aria-hidden", "true");
+		chooser.append(label, arrow);
+		const add = this.button(`add-${name}`, "plus", "Add cell");
+		group.append(chooser, add);
+		const menu = this.languageMenu(chooser.id, programming);
+		menu.id = `${this.instanceId}-${name}-menu`;
+		this.configureDropdownTrigger(chooser, menu.id);
+		this.updateLanguageControls(group, menu, programming);
+		return [group, menu];
+	}
+
+	private updateLanguageControls(
+		group: Element,
+		menu: Element,
+		programming: boolean,
+	): void {
+		const language = programming ? this.codeLanguage : this.markupLanguage;
+		const label = group.querySelector("[data-language-label]");
+		if (label) label.textContent = language;
+		group
+			.querySelector("[data-tp-notebook-language-choice]")
+			?.setAttribute(
+				"title",
+				`Choose ${programming ? "programming" : "markup"} language`,
+			);
+		const add = group.querySelector("[data-action]");
+		add?.setAttribute("label", `Add ${language} block`);
+		add?.setAttribute("title", `Add ${language} block`);
+		menu.querySelectorAll<HTMLElement>("[data-language]").forEach((item) => {
+			const selected = item.dataset.language === language;
+			item.setAttribute("aria-current", String(selected));
+			const check = item.querySelector<HTMLElement>("[data-language-check]");
+			if (check) check.style.visibility = selected ? "visible" : "hidden";
+		});
+	}
+
 	private languageMenu(anchorId: string, programming = false): HTMLElement {
 		const dropdown = document.createElement("tp-dropdown") as HTMLElement & {
 			hide?: () => void;
@@ -805,7 +1053,11 @@ export class TpNotebook extends TpBase {
 			icon.setAttribute("aria-hidden", "true");
 			const label = document.createElement("span");
 			label.textContent = language;
-			item.append(icon, label);
+			const check = document.createElement("tp-icon");
+			check.setAttribute("name", "check");
+			check.setAttribute("data-language-check", "");
+			check.setAttribute("aria-hidden", "true");
+			item.append(check, icon, label);
 			list.append(item);
 		}
 		dropdown.append(list);
@@ -816,7 +1068,13 @@ export class TpNotebook extends TpBase {
 			if (item === null || item === undefined) return;
 			const language = item.dataset.language;
 			if (language === undefined) return;
-			this.addCell(item.dataset.cellType as "markup" | "code", language);
+			if (this.readonly || this.previewing) return;
+			if (programming) this.codeLanguage = language as NotebookLanguage;
+			else this.markupLanguage = language as MarkupLanguage;
+			const group = this.querySelector(
+				`[data-tp-notebook-language-choice="${programming ? "code" : "markup"}"]`,
+			)?.parentElement;
+			if (group) this.updateLanguageControls(group, dropdown, programming);
 			dropdown.hide?.();
 		});
 		return dropdown;
@@ -836,7 +1094,7 @@ export class TpNotebook extends TpBase {
 		const label = document.createElement("span");
 		label.textContent = LANGUAGE_LABELS[this.language];
 		const plus = document.createElement("tp-icon");
-		plus.setAttribute("name", "plus-box-outline");
+		plus.setAttribute("name", "plus");
 		plus.setAttribute("size", "1.25rem");
 		plus.setAttribute("aria-hidden", "true");
 		button.append(languageIcon, label, plus);
@@ -922,7 +1180,7 @@ export class TpNotebook extends TpBase {
 		}
 		this.observeViewer(
 			viewer,
-			cell.type === "markup" && cell.showEditor === true,
+			!this.readonly,
 			cell.type === "markup" ? 1 : Math.max(1, scripts.length),
 		);
 		return viewer;
@@ -950,7 +1208,7 @@ export class TpNotebook extends TpBase {
 				});
 			if (!sourceOpened) {
 				const sourceButton = viewer.querySelector<HTMLElement>(
-					'[data-role="toggle-source"][aria-pressed="false"]',
+					'[data-role="toggle-source"][aria-pressed="false"], [data-tp-programming-viewer-code][aria-pressed="false"]',
 				);
 				if (sourceButton !== null) {
 					sourceOpened = true;
@@ -976,8 +1234,20 @@ export class TpNotebook extends TpBase {
 			!["run-all", "preview", "editor-toolbar"].includes(action)
 		)
 			return;
+		if (
+			this.previewing &&
+			(action === "add-language" || action === "add-markup")
+		)
+			return;
+		if (action === "add-markup") {
+			this.addCell("markup", this.markupLanguage);
+			return;
+		}
 		if (action === "add-language") {
-			this.addCell("code", this.language);
+			this.addCell(
+				"code",
+				this.localName === "tp-notebook" ? this.codeLanguage : this.language,
+			);
 			return;
 		}
 		if (action === "editor-toolbar") {
@@ -999,7 +1269,9 @@ export class TpNotebook extends TpBase {
 		const index = this.selectedIndex;
 		if (action === "run-all")
 			this.querySelectorAll<HTMLElement>(
-				"[data-tp-notebook-cell] [data-tp-playground-run]",
+				this.previewing
+					? "[data-tp-notebook-preview-content] > [execution-scope] [data-tp-playground-run]"
+					: "[data-tp-notebook-cell] [data-tp-playground-run]",
 			).forEach((button) => {
 				button.click();
 			});
@@ -1086,7 +1358,7 @@ export class TpNotebook extends TpBase {
 			duplicate: this.previewing || this.readonly || this.selectedIndex < 0,
 			delete: this.previewing || this.readonly || this.selectedIndex < 0,
 			reset: this.previewing || this.readonly,
-			"run-all": this.previewing,
+			"run-all": false,
 		};
 		for (const [action, disabled] of Object.entries(states)) {
 			this.querySelector<HTMLElement>(
@@ -1098,9 +1370,11 @@ export class TpNotebook extends TpBase {
 		).forEach((button) => {
 			button.toggleAttribute("disabled", this.previewing || this.readonly);
 		});
-		this.querySelector<HTMLElement>(
-			'[data-action="add-language"]',
-		)?.toggleAttribute("disabled", this.previewing || this.readonly);
+		this.querySelectorAll<HTMLElement>(
+			'[data-action="add-language"], [data-action="add-markup"]',
+		).forEach((button) => {
+			button.toggleAttribute("disabled", this.previewing || this.readonly);
+		});
 		this.syncReadonly();
 		this.syncEditorToolbarButton();
 	}
@@ -1139,11 +1413,13 @@ export class TpNotebook extends TpBase {
 	}
 
 	private captureAllCells(): void {
-		this.querySelectorAll<HTMLElement>("[data-tp-notebook-cell]").forEach(
-			(element, index) => {
-				this.captureCell(index, element);
-			},
-		);
+		const cells = this.previewing
+			? this.cellsEl?.querySelector("[data-tp-notebook-preview-content]")
+					?.children
+			: this.cellsEl?.children;
+		Array.from(cells ?? []).forEach((element, index) => {
+			this.captureCell(index, element as HTMLElement);
+		});
 	}
 
 	private captureCell(index: number, element: HTMLElement | null): void {

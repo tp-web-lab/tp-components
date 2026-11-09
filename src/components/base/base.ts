@@ -27,7 +27,7 @@ type TpHelpDrawerElement = HTMLElement & {
 };
 
 /**
- * Base class for `tp-*` components.
+ * The custom `<tp-base>` element provides shared styling, attributes and contextual help for the component library.
  *
  * This class factors out a few recurring behaviors:
  * - injecting a global stylesheet once
@@ -39,7 +39,7 @@ type TpHelpDrawerElement = HTMLElement & {
  * The `<tp-base>` component can also be used directly
  * as a neutral demo or test element.
  *
- * @summary Shared base for `tp-*` components.
+ * @summary Provides shared styling, attributes and contextual help for the component library.
  * @tagname tp-base
  * @attr {string} dir = "" - Text direction (`ltr`, `rtl`, or `auto`).
  * @attr {string} lang = "" - Language tag used by the component content.
@@ -63,6 +63,11 @@ export class TpBase extends HTMLElement {
 	private static currentHelpElement: TpBase | null = null;
 	/** Pointer target is independent of focus, including non-focusable layout components. */
 	private static hoveredHelpElement: TpBase | null = null;
+	private static helpPointer: {
+		target: TpBase | null;
+		x: number;
+		y: number;
+	} | null = null;
 	private static readonly helpHierarchyChoices = new WeakMap<
 		HTMLElement,
 		HTMLElement
@@ -139,12 +144,15 @@ export class TpBase extends HTMLElement {
 
 			TpBase.openHelpFromKeyboard(event, target);
 		});
-		document.addEventListener("pointerover", (event) => {
-			TpBase.hoveredHelpElement = TpBase.findHelpElement(event.target, event);
-		});
-		document.addEventListener("mouseover", (event) => {
-			TpBase.hoveredHelpElement = TpBase.findHelpElement(event.target, event);
-		});
+		const trackPointer = (event: MouseEvent): void => {
+			const target = TpBase.findHelpElement(event.target, event);
+			TpBase.hoveredHelpElement = target;
+			TpBase.helpPointer = { target, x: event.clientX, y: event.clientY };
+		};
+		document.addEventListener("pointerover", trackPointer);
+		document.addEventListener("mouseover", trackPointer);
+		document.addEventListener("pointermove", trackPointer);
+		document.addEventListener("mousemove", trackPointer);
 		document.addEventListener("pointerout", (event) => {
 			TpBase.hoveredHelpElement = TpBase.findHelpElement(event.relatedTarget);
 		});
@@ -157,19 +165,30 @@ export class TpBase extends HTMLElement {
 		TpBase.globalHelpKeydownAttached = true;
 	}
 
+	/** Generated chrome delegates contextual help to its owning component. */
+	private static helpOwner(host: TpBase): TpBase {
+		let current = host;
+		while (current.hasAttribute("data-tp-help-parent")) {
+			const parent = current.parentElement?.closest("[data-tp-base-host]");
+			if (!(parent instanceof TpBase)) break;
+			current = parent;
+		}
+		return current;
+	}
+
 	private static findHelpElement(
 		target: EventTarget | null,
 		event?: Event,
 	): TpBase | null {
 		for (const node of event?.composedPath() ?? []) {
 			if (node instanceof TpBase) {
-				return node;
+				return TpBase.helpOwner(node);
 			}
 
 			if (node instanceof Element) {
 				const host = node.closest("[data-tp-base-host]");
 				if (host instanceof TpBase) {
-					return host;
+					return TpBase.helpOwner(host);
 				}
 			}
 		}
@@ -180,7 +199,7 @@ export class TpBase extends HTMLElement {
 
 		const element = target instanceof Element ? target : target.parentElement;
 		const host = element?.closest("[data-tp-base-host]");
-		return host instanceof TpBase ? host : null;
+		return host instanceof TpBase ? TpBase.helpOwner(host) : null;
 	}
 
 	private static openHelpFromKeyboard(
@@ -206,10 +225,17 @@ export class TpBase extends HTMLElement {
 		event.stopPropagation();
 		const selected = TpBase.hoveredHelpElement?.isConnected
 			? TpBase.hoveredHelpElement
-			: target;
+			: TpBase.helpOwner(target);
 		TpBase.currentHelpElement = selected;
-		if (event.altKey) void TpBase.helpPresenter().showHelpHierarchy(selected);
-		else void selected.help();
+		if (event.altKey) {
+			const pointer = TpBase.helpPointer;
+			void TpBase.helpPresenter().showHelpHierarchy(
+				selected,
+				TpBase.hoveredHelpElement === selected && pointer?.target === selected
+					? pointer
+					: undefined,
+			);
+		} else void selected.help();
 	}
 
 	/**
@@ -257,11 +283,21 @@ export class TpBase extends HTMLElement {
 	}
 
 	/** Chooses the target before opening help, without losing the original hover. */
-	private static async showHelpHierarchy(selected: TpBase): Promise<void> {
+	private static async showHelpHierarchy(
+		selected: TpBase,
+		pointer?: { x: number; y: number },
+	): Promise<void> {
+		const initialRect = selected.getBoundingClientRect();
+		const offset = pointer
+			? { x: pointer.x - initialRect.left, y: pointer.y - initialRect.top }
+			: null;
 		const entries: Array<HTMLElement & { help?: () => Promise<void> }> = [];
 		let element: Element | null = selected;
 		while (element) {
-			if (element.localName.startsWith("tp-"))
+			if (
+				element.localName.startsWith("tp-") &&
+				!element.hasAttribute("data-tp-help-parent")
+			)
 				entries.push(element as HTMLElement & { help?: () => Promise<void> });
 			const root = element.getRootNode();
 			if (element.parentElement) element = element.parentElement;
@@ -308,8 +344,8 @@ export class TpBase extends HTMLElement {
 				return;
 			}
 			const rect = selected.getBoundingClientRect();
-			let x = rect.left;
-			let y = rect.bottom;
+			let x = rect.left + (offset?.x ?? 0);
+			let y = offset ? rect.top + offset.y : rect.bottom;
 			let owner = selected.ownerDocument;
 			while (owner !== document) {
 				const frame = owner.defaultView?.frameElement;
@@ -872,13 +908,28 @@ export class TpBase extends HTMLElement {
 		template.innerHTML = this.getStoredHelpMarkup();
 		const clone = template.content.firstElementChild;
 		if (clone instanceof HTMLElement) {
+			// Keep author styling and semantics; runtime chrome does not belong in example code.
+			const authoredGlobals = new Set([
+				"role",
+				"popover",
+				"style",
+				"class",
+				"lang",
+				"dir",
+				"tabindex",
+			]);
 			// Use author content, but preserve current public attribute values.
 			[...clone.attributes].forEach((attribute) => {
 				if (!this.hasAttribute(attribute.name))
 					clone.removeAttribute(attribute.name);
 			});
 			[...this.attributes]
-				.filter((attribute) => !this.isInternalSourceAttribute(attribute))
+				.filter(
+					(attribute) =>
+						!this.isInternalSourceAttribute(attribute) &&
+						!authoredGlobals.has(attribute.name) &&
+						!attribute.name.startsWith("aria-"),
+				)
 				.forEach((attribute) => {
 					clone.setAttribute(attribute.name, attribute.value);
 				});
@@ -940,8 +991,6 @@ export class TpBase extends HTMLElement {
 				if (href?.startsWith("#") && ids.has(href.slice(1)))
 					element.setAttribute("href", `#${ids.get(href.slice(1))}`);
 			});
-			const language = this.closest("[lang]")?.getAttribute("lang");
-			if (language) clone.setAttribute("lang", language);
 			return clone.outerHTML;
 		}
 		return this.getStoredHelpMarkup();

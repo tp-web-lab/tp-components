@@ -14,8 +14,10 @@ import { TpTextToSpeech } from "../text-to-speech/text-to-speech.js";
 import style from "./slide-note.css?inline";
 
 /**
+ * The custom `<tp-slide-note>` element displays collapsible speaker notes for a presentation.
+ *
  * @tagname tp-slide-note
- * @summary Presents collapsible speaker notes above a presentation's mode menu.
+ * @summary Displays collapsible speaker notes for a presentation.
  * @attr {boolean} open = false - Expands the notes panel; closing it does not stop narration.
  * @cssprop --tp-slide-note-width = 36rem - Maximum width of docked notes.
  * @cssprop --tp-slide-note-gap = .5rem - Space between docked notes and the presentation menu.

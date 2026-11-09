@@ -45,7 +45,7 @@ function isSaveImageFormat(value: string): value is TpSaveImageFormat {
 }
 
 /**
- * Image download controller with an embedded dropdown.
+ * The custom `<tp-save-image>` element saves an anchored image in several formats.
  *
  * @summary Saves an anchored image in several formats.
  * @tagname tp-save-image
@@ -60,7 +60,11 @@ function isSaveImageFormat(value: string): value is TpSaveImageFormat {
  * @event tp-save-image-error Emitted when the target cannot be exported.
  * @eventdetail tp-save-image-error { format: "svg" | "png" | "webp"; error: unknown; anchor: string }
  * @example
- * <tp-save-image></tp-save-image>
+ * <tp-box>
+ *   <p>Save this heart icon as an SVG, PNG or WebP image.</p>
+ *   <tp-icon id="intro-save-diagram" name="heart" size="5rem" aria-label="Heart"></tp-icon>
+ *   <tp-save-image anchor="#intro-save-diagram" filename="heart"></tp-save-image>
+ * </tp-box>
  */
 export class TpSaveImage extends TpBase {
 	private static readonly styleId = "tp-save-image-styles";

@@ -1,9 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="toolbar" library="components" size="1.25em"></tp-icon> Toolbar
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-toolbar>` element implements the <tp-icon name="toolbar" library="components" size="1.25em"></tp-icon> Toolbar functionality: sticky, zoned toolbar for tp-* components.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-toolbar>` element provides a sticky, zoned toolbar for tp-* components.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-box padding="0">
 <tp-toolbar>
   <tp-icon section="start" name="home" aria-label="Home"></tp-icon>
@@ -15,26 +26,23 @@ The custom `<tp-toolbar>` element implements the <tp-icon name="toolbar" library
 </tp-toolbar>
   <tp-box border-width="0" style="min-block-size: 5rem; display: grid; place-items: center">Document area</tp-box>
 </tp-box>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-toolbar" src="/docs/components/toolbar/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Reading | This component organizes or presents content. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| Component itself | No dedicated keyboard action. |
-| Embedded controls, when present | Use their normal keyboard interactions. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Assign children with `section="start"`, `section="center"`, or `section="end"`. Use `orientation` and `placement` to control the toolbar edge.
 
@@ -51,385 +59,7 @@ Use `top` or `bottom` with a horizontal toolbar, and `start` or `end` with a ver
 </tp-toolbar>
 ```
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Inspect the document toolbar and the placement of its controls.
-
-Attributes
-: Choose horizontal with top or bottom, or vertical with start or end, and compare the toolbar around the document area. The example grid places the toolbar at the chosen edge; placement controls its sticky edge.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpToolbar -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>orientation</code> | <code>string</code> | <code>&quot;horizontal&quot;</code> | `horizontal` (default) or `vertical`. |
-  | <code>placement</code> | <code>string</code> | <code>&quot;top (horizontal) / start (vertical)&quot;</code> | `top` (default for horizontal) \| `bottom` \| `start` \| `end`. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-toolbar>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>addButtonToSection</code> | <code>addButtonToSection(button: HTMLElement, section: string): void</code> | Moves the supplied element into section start, center or end. Throws if the toolbar is not initialized or the section name is invalid. |
-  [Public methods of `TpToolbar`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-toolbar>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-toolbar-gap</code> | <code>0.25rem</code> | Space between the toolbar sections along its main axis. |
-  | <code>&#45;&#45;tp-toolbar-padding</code> | <code>0.25rem 0.5rem</code> | Inner spacing around the toolbar content. |
-  | <code>&#45;&#45;tp-toolbar-section-gap</code> | <code>0.25rem</code> | Space between controls within a section and around section separators. |
-  | <code>&#45;&#45;tp-toolbar-size</code> | <code>3rem</code> | Minimum toolbar thickness: height for a horizontal toolbar, width for a vertical toolbar. |
-  | <code>&#45;&#45;tp-toolbar-z-index</code> | <code>100</code> | Stacking level of the sticky toolbar relative to overlapping content. |
-  [CSS properties of `<tp-toolbar>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_toolbar.TpToolbar.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -456,19 +86,50 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Inspect the document toolbar and the placement of its controls.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-toolbar>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
 @summary Shared base class for tp-* components.
 -->
+<!--
+@tp-dependency tp-divider
+@summary Visual separator for menus, dropdowns, toolbars, and layouts.
+-->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-divider>`](#/components/divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
 
 ### External
 

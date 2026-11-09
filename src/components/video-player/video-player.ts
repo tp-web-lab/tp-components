@@ -37,7 +37,9 @@ export interface TpVideoPlayerErrorDetail extends TpVideoPlayerEventDetail {
 }
 
 /**
- * @summary Plays native video files and YouTube videos with a common playback API.
+ * The custom `<tp-video-player>` element plays video files and YouTube videos.
+ *
+ * @summary Plays video files and YouTube videos.
  * @tagname tp-video-player
  * @attr {string} src = "" - Native media URL or YouTube watch, share, shorts, live or embed URL. Changing it loads the new video from the beginning.
  * @attr {string} poster = "" - Image shown before native video playback; YouTube supplies its own preview.

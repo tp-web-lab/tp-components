@@ -1,0 +1,22 @@
+<tp-box id="dragdrop-board" data-dragdrop-demo="" data-allow-script="">
+  <p>Drag a task to <strong>To do</strong> or <strong>Done</strong>, including an empty column. The Move button sends a task to the other column without dragging.</p>
+  <p>Keyboard: focus a card, press Enter, use the arrow keys to choose another card, then press Enter to drop before or after it. Escape cancels.</p>
+  <tp-grid min-width="16rem" gap="1rem">
+    <tp-box data-zone="To do" role="group" aria-label="To do" style="min-height: 12rem;">
+      <h3>To do</h3>
+      <tp-stack gap="0.5rem" data-tasks="">
+        <tp-box data-task="" aria-label="Write the introduction"><p>Write the introduction</p><tp-button data-move="" size="s" aria-label="Move Write the introduction to the other column">Move</tp-button></tp-box>
+        <tp-box data-task="" aria-label="Review the examples"><p>Review the examples</p><tp-button data-move="" size="s" aria-label="Move Review the examples to the other column">Move</tp-button></tp-box>
+      </tp-stack>
+    </tp-box>
+    <tp-box data-zone="Done" role="group" aria-label="Done" style="min-height: 12rem;">
+      <h3>Done</h3>
+      <tp-stack gap="0.5rem" data-tasks="">
+        <tp-box data-task="" aria-label="Choose a title"><p>Choose a title</p><tp-button data-move="" size="s" aria-label="Move Choose a title to the other column">Move</tp-button></tp-box>
+      </tp-stack>
+    </tp-box>
+  </tp-grid>
+  <p data-demo-status="" role="status" aria-live="polite">Move a task to change its column.</p>
+  <tp-dragdrop root="#dragdrop-board" items="[data-task]"></tp-dragdrop>
+  <script src="/docs/components/dragdrop/examples/task-board.js"></script>
+</tp-box>

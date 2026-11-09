@@ -1,9 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="blank" library="components" size="1.25em"></tp-icon> Blank
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-blank>` element implements the blank functionality: displays a text, SVG or image answer in a focusable blank.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-blank>` element provides an answer slot for text, images or drawings.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-fill-blank-question mode="closed">
   <dl>
     <dt>Title</dt><dd>Match the answers</dd>
@@ -11,7 +22,7 @@ The custom `<tp-blank>` element implements the blank functionality: displays a t
     <dt>Answers</dt>
     <dd><ol>
       <li>Paris</li>
-      <li><svg xmlns="http://www.w3.org/2000/svg" width="48" height="40" viewBox="0 0 48 40" role="img" aria-label="Triangle"><path d="M24 3 45 37H3Z" fill="none" stroke="currentColor" stroke-width="3"/></svg></li>
+      <li><svg xmlns="http://www.w3.org/2000/svg" width="48" height="40" viewBox="0 0 48 40" role="img" aria-label="Triangle"><path d="M24 3 45 37H3Z" fill="none" stroke="currentColor" stroke-width="3"></path></svg></li>
       <li><img src="/docs/medias/logos/logo-tp.svg" alt="tp-components logo" width="40" height="40"></li>
     </ol></dd>
     <dt>Form</dt>
@@ -24,33 +35,23 @@ The custom `<tp-blank>` element implements the blank functionality: displays a t
     <dt>Solution</dt><dd>Paris; the triangle; the tp-components logo.</dd>
   </dl>
 </tp-fill-blank-question>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-blank" src="/docs/components/blank/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Open field | Enter an answer using the control selected by its type. |
-| Closed destination | Select an answer from the bank or drag it onto the blank. |
-| Answer then blank | Select an answer and click the destination, or drag the answer onto it. |
-| Clear | Release the assigned answer; unavailable when empty or disabled. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> | Focus a target blank. |
-| <kbd>ArrowRight</kbd> | Move from the blank to the answer bank. |
-| <kbd>Up</kbd> / <kbd>Down</kbd> | Choose an answer. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Assign the chosen answer to the highlighted blank. |
-| <kbd>Escape</kbd> | Cancel. |
-| <kbd>Delete</kbd> / <kbd>Backspace</kbd> | Clear the focused blank. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 A dashed border distinguishes a closed-answer blank from editable fields. Its trailing controls show a clear button followed by `…`; they stay visible alongside assigned text, SVG or image content. Clearing a blank releases its answer in the bank. The clear button is disabled when the blank is empty or disabled.
 
@@ -70,7 +71,7 @@ An open blank uses `type="text"` by default. The other types are `number`, `math
 
 Keep the expected answers in the question's ordered `Answers` list, including answers to open blanks. Only closed blanks contribute choices to the bank. Text is trimmed and compared, or matched against a full-answer `regexp`; mathematical answers use CortexJS; numbers use numerical equality; dates and times use the field's normalized value. Numeric `step` is an input constraint, not a grading tolerance.
 
-#### Programmatic use
+### Programmatic use
 
 ```ts
 const blank = document.querySelector('tp-blank');
@@ -83,333 +84,7 @@ if (blank) {
 
 `setAnswer()` clones the supplied node and emits a bubbling `input` event. `clear()` empties the blank and emits the same event. Assigning `value` programmatically is silent; a previously assigned value restores its associated visual content. Unknown values display as plain text. `tp-fill-blank` includes the value under `name` in its `FormData` and clears the display on reset.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Assign text and image answers to the blanks in a closed question, then clear or replace them.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-HTML
-: ::include{examples/examples.html}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-
-<!-- tp-docgen:api TpBlank -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>aria-label</code> | <code>string</code> | <code>&quot;&quot;</code> | Accessible name forwarded to the editing control; use it when the field has no visible label. |
-  | <code>closed</code> | <code>boolean</code> | <code>false</code> | Uses an answer-bank destination unless the question overrides the mode. |
-  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Disables interaction. |
-  | <code>name</code> | <code>string</code> | <code>&quot;&quot;</code> | Name used by tp-fill-blank form data. |
-  | <code>placeholder</code> | <code>string</code> | <code>&quot;…&quot;</code> | Text displayed while the blank is empty. |
-  | <code>type</code> | <code>string</code> | <code>&quot;text&quot;</code> | Open field type: text, number, math, date, or time. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-blank>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>clear</code> | <code>clear(): void</code> | Empties the blank and notifies its form. |
-  | <code>setAnswer</code> | <code>setAnswer(value: string, content: Node): void</code> | Assigns an identity and clones its visual content without moving the source. |
-  | <code>syncMode</code> | <code>syncMode(): void</code> | Reconciles the local control with the nearest question without changing author attributes. |
-  [Public methods of `TpBlank`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>input</code> | <code>void</code> | Emitted when an answer is assigned or cleared; read the updated answer from value. |
-  | <code>tp-blank-mode-change</code> | <code>void</code> | Emitted when closed or type changes while connected, after the blank has been rendered in its new mode. |
-  [Events emitted by `<tp-blank>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-blank-filled-border-color</code> | <code>var(&#45;&#45;tp-brand-stroke-mid)</code> | Bottom border color of a blank after an answer has been filled in. |
-  [CSS properties of `<tp-blank>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_blank_blank.TpBlank.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -436,12 +111,38 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Assign text and image answers to the blanks in a closed question, then clear or replace them.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-blank>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -472,13 +173,13 @@ All tp-components used by `<tp-blank>` are loaded automatically by this componen
 @summary Native time field with labels, constraints, picker access, and clearing.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-datefield>`](../datefield/index.md) : Native date field with labels, constraints, picker access, and clearing.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-mathfield>`](../mathfield/index.md) : Mathematical expression field with live LaTeX or AsciiMath rendering.
-- [`<tp-numberfield>`](../numberfield/index.md) : Numeric field with an optional native range slider.
-- [`<tp-textfield>`](../textfield/index.md) : Single-line and automatically growing multiline text field.
-- [`<tp-timefield>`](../timefield/index.md) : Native time field with labels, constraints, picker access, and clearing.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-datefield>`](#/components/datefield/index.md) : Native date field with labels, constraints, picker access, and clearing.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-mathfield>`](#/components/mathfield/index.md) : Mathematical expression field with live LaTeX or AsciiMath rendering.
+- [`<tp-numberfield>`](#/components/numberfield/index.md) : Numeric field with an optional native range slider.
+- [`<tp-textfield>`](#/components/textfield/index.md) : Single-line and automatically growing multiline text field.
+- [`<tp-timefield>`](#/components/timefield/index.md) : Native time field with labels, constraints, picker access, and clearing.
 
 ### External
 

@@ -103,6 +103,15 @@ tp-tree[guides] li > ul {
   padding-inline-start: 0.9rem;
 }
 
+/* Link rows are at least 28px high; include the toggle's -1px offset
+   and center the one-pixel horizontal stroke on the icon. */
+tp-tree[guides] li:has(> [data-tp-tree-row] > a) {
+  --tp-tree-guide-midline: calc(
+    var(--tp-tree-row-padding-block, 0.125rem) +
+    max(14px, var(--tp-tree-toggle-half-size, 0.5rem)) - 1.5px
+  );
+}
+
 tp-tree[guides] li > ul > li::before {
   content: "";
   position: absolute;

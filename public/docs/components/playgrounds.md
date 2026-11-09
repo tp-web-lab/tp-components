@@ -7,6 +7,12 @@ Playground components combine project files, source editing, execution and previ
 :::::: tp-grid { min-width="10rem" gap="1.5rem" }
 
 ::: tp-center { intrinsic }
+:tp-icon:{name="latex-playground" library="components" size="4em" aria-hidden="true"}
+
+[tp-latex-playground](latex-playground/index.md)
+:::
+
+::: tp-center { intrinsic }
 :tp-icon:{name="asciidoc-playground" library="components" size="4em" aria-hidden="true"}
 
 [tp-asciidoc-playground](asciidoc-playground/index.md)

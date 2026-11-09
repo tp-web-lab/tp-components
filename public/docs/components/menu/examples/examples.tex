@@ -1,0 +1,44 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpMenu{
+  \begin{itemize}
+    \item \rawhtml*|<a href="/#/components/button/index.md">Buttons</a>|
+    \item \rawhtml*|<a href="/#/components/tabs/index.md">Tabs</a>|
+    \item \rawhtml*|<a href="/#/components/tree/index.md">Trees</a>|
+  \end{itemize}
+}
+
+\wcScript[src=/docs/components/menu/examples/navigation.js]||
+\end{document}
+
+% !tp-example Nested submenus
+\documentclass{article}
+\begin{document}
+Open Components, then Layout, then Rows to explore three submenu levels. Click a branch to open it, or focus Components and press Arrow Down, then Arrow Right twice. Arrow Left closes a submenu and returns focus to its parent. Links open the corresponding documentation page.
+
+
+\wcTpBox[style=min-height: 22rem]{
+  \wcTpMenu[orientation=horizontal]{
+    \begin{itemize}
+      \item Components      \begin{itemize}
+        \item Layout        \begin{itemize}
+          \item Rows          \begin{itemize}
+            \item \rawhtml*|<a href="/#/components/inline/index.md">Inline</a>|
+            \item \rawhtml*|<a href="/#/components/cluster/index.md">Cluster</a>|
+          \end{itemize}
+          \item \rawhtml*|<a href="/#/components/grid/index.md">Grid</a>|
+          \item \rawhtml*|<a href="/#/components/frame/index.md">Frame</a>|
+        \end{itemize}
+        \item Navigation        \begin{itemize}
+          \item \rawhtml*|<a href="/#/components/tabs/index.md">Tabs</a>|
+          \item \rawhtml*|<a href="/#/components/tree/index.md">Trees</a>|
+        \end{itemize}
+      \end{itemize}
+      \item \rawhtml*|<a href="/#/components/button/index.md">Buttons</a>|
+    \end{itemize}
+  }
+}
+
+\wcScript[src=/docs/components/menu/examples/navigation.js]||
+\end{document}

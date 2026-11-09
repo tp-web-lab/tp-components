@@ -32,7 +32,7 @@ function isFullHtmlDocument(html: string): boolean {
 }
 
 /**
- * `<tp-include>` charge un contenu HTML distant et l'injecte dans le DOM léger.
+ * The custom `<tp-include>` element loads remote HTML content.
  *
  * Handling:
  * - document HTML complet → injecte uniquement `<body>`

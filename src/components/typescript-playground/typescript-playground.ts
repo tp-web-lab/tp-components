@@ -133,7 +133,7 @@ function createBody(project: TpTypescriptProject): string {
 }
 
 /**
- * TypeScript playground component.
+ * The custom `<tp-typescript-playground>` element edits and runs a TypeScript project.
  *
  * Provides a file-based playground that transpiles and runs TypeScript in an isolated preview.
  *

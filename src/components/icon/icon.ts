@@ -127,7 +127,9 @@ function getScaledSize(size: string, scale: number): string {
 const cache = new Map<string, string | null>();
 
 /**
- * @summary Displays SVG icons from inline markup, a URL or an icon library, with sizing, color, transforms and fallbacks.
+ * The custom `<tp-icon>` element displays icons and vector images.
+ *
+ * @summary Displays icons and vector images.
  * @tagname tp-icon
  * @attr {string} name = "" - Icon identifier in the selected library, for example heart or settings. Used when no inline SVG or successfully loaded src is available.
  * @attr {string} library = "tp" - Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters, screens and components. Custom registered libraries are also accepted.
@@ -151,6 +153,7 @@ export class TpIcon extends TpBase {
 	 * @internal
 	 */
 	private static readonly styleId = "tp-icon-styles";
+	private static nextSvgId = 0;
 
 	/**
 	 * @summary Internal rendering container.
@@ -528,6 +531,37 @@ export class TpIcon extends TpBase {
 
 		const template = document.createElement("template");
 		template.innerHTML = svg;
+		// SVG references share the document namespace, including hidden menus.
+		const prefix = `tp-icon-svg-${++TpIcon.nextSvgId}-`;
+		const ids = new Map<string, string>();
+		for (const element of template.content.querySelectorAll("[id]")) {
+			const original = element.id;
+			const scoped = `${prefix}${ids.size}`;
+			ids.set(original, scoped);
+			element.id = scoped;
+		}
+		for (const element of template.content.querySelectorAll("*")) {
+			for (const attribute of Array.from(element.attributes)) {
+				let value = attribute.value.replace(
+					/url\(\s*(["']?)#([^\s"')]+)\1\s*\)/g,
+					(match, _quote: string, target: string) =>
+						ids.has(target) ? `url(#${ids.get(target)})` : match,
+				);
+				if (
+					["href", "xlink:href"].includes(attribute.name) &&
+					value.startsWith("#") &&
+					ids.has(value.slice(1))
+				)
+					value = `#${ids.get(value.slice(1))}`;
+				if (["aria-labelledby", "aria-describedby"].includes(attribute.name))
+					value = value
+						.split(/\s+/)
+						.map((target) => ids.get(target) ?? target)
+						.join(" ");
+				if (value !== attribute.value)
+					element.setAttribute(attribute.name, value);
+			}
+		}
 		this.container.replaceChildren(template.content.cloneNode(true));
 		this.applyStyle();
 	}

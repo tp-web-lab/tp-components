@@ -10,19 +10,19 @@
  */
 // tp-docgen:dependencies:end
 
-import style from './divider.css?inline';
-import { TpBase } from '../base/base.js';
+import { TpBase } from "../base/base.js";
+import style from "./divider.css?inline";
 
-export type TpDividerOrientation = 'horizontal' | 'vertical';
+export type TpDividerOrientation = "horizontal" | "vertical";
 
 function isTpDividerOrientation(value: string): value is TpDividerOrientation {
-  return value === 'horizontal' || value === 'vertical';
+	return value === "horizontal" || value === "vertical";
 }
 
 /**
- * `<tp-divider>` draws a compact horizontal or vertical separator.
+ * The custom `<tp-divider>` element provides a visual separator.
  *
- * @summary Visual separator.
+ * @summary Provides a visual separator.
  * @tagname tp-divider
  * @attr {string} orientation = "horizontal" - Divider orientation (`horizontal` or `vertical`).
  * @cssprop --tp-divider-color Divider line color.
@@ -33,64 +33,64 @@ function isTpDividerOrientation(value: string): value is TpDividerOrientation {
  * <tp-divider></tp-divider>
  */
 export class TpDivider extends TpBase {
-  private static readonly styleId = 'tp-divider-styles';
+	private static readonly styleId = "tp-divider-styles";
 
-  public static get observedAttributes(): string[] {
-    return ['orientation'];
-  }
+	public static get observedAttributes(): string[] {
+		return ["orientation"];
+	}
 
-  /**
-   * Returns the divider orientation.
-   *
-   * @summary Returns the configured orientation.
-   */
-  public get orientation(): TpDividerOrientation {
-    const value = this.getAttribute('orientation') ?? 'horizontal';
-    return isTpDividerOrientation(value) ? value : 'horizontal';
-  }
+	/**
+	 * Returns the divider orientation.
+	 *
+	 * @summary Returns the configured orientation.
+	 */
+	public get orientation(): TpDividerOrientation {
+		const value = this.getAttribute("orientation") ?? "horizontal";
+		return isTpDividerOrientation(value) ? value : "horizontal";
+	}
 
-  /**
-   * Updates the divider orientation.
-   *
-   * @summary Sets the configured orientation.
-   * @param value Divider orientation.
-   */
-  public set orientation(value: TpDividerOrientation) {
-    this.setAttribute('orientation', value);
-  }
+	/**
+	 * Updates the divider orientation.
+	 *
+	 * @summary Sets the configured orientation.
+	 * @param value Divider orientation.
+	 */
+	public set orientation(value: TpDividerOrientation) {
+		this.setAttribute("orientation", value);
+	}
 
-  protected connectedCallback(): void {
-    super.connectedCallback();
-    this.ensureGlobalStyle(TpDivider.styleId, style);
-    this.updateDivider();
-  }
+	protected connectedCallback(): void {
+		super.connectedCallback();
+		this.ensureGlobalStyle(TpDivider.styleId, style);
+		this.updateDivider();
+	}
 
-  protected attributeChangedCallback(): void {
-    if (!this.isConnected) {
-      return;
-    }
+	protected attributeChangedCallback(): void {
+		if (!this.isConnected) {
+			return;
+		}
 
-    this.updateDivider();
-  }
+		this.updateDivider();
+	}
 
-  private updateDivider(): void {
-    const orientation = this.orientation;
+	private updateDivider(): void {
+		const orientation = this.orientation;
 
-    if (this.getAttribute('orientation') !== orientation) {
-      this.setAttribute('orientation', orientation);
-    }
+		if (this.getAttribute("orientation") !== orientation) {
+			this.setAttribute("orientation", orientation);
+		}
 
-    this.setAttribute('role', 'separator');
-    this.setAttribute('aria-orientation', orientation);
-  }
+		this.setAttribute("role", "separator");
+		this.setAttribute("aria-orientation", orientation);
+	}
 }
 
-if (!customElements.get('tp-divider')) {
-  customElements.define('tp-divider', TpDivider);
+if (!customElements.get("tp-divider")) {
+	customElements.define("tp-divider", TpDivider);
 }
 
 declare global {
-  interface HTMLElementTagNameMap {
-    'tp-divider': TpDivider;
-  }
+	interface HTMLElementTagNameMap {
+		"tp-divider": TpDivider;
+	}
 }

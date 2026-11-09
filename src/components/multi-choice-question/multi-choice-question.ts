@@ -28,7 +28,9 @@ import { MultiChoiceQuestionSrcSchema } from "../question/question-src-schema.js
 import "../checkbox-list/checkbox-list.js";
 
 /**
- * @summary Multi-choice question: wraps tp-question with checkbox-list validation.
+ * The custom `<tp-multi-choice-question>` element presents and grades a question with multiple selectable answers.
+ *
+ * @summary Presents and grades a question with multiple selectable answers.
  * @tagname tp-multi-choice-question
  *
  * @attr {string} answer = "" - Comma-separated 1-based indexes of the correct answers in the original list order (e.g. `"1,3"`). An empty answer means none of the choices is correct. Not reflected back to the DOM when set via JS property — read from attribute only.

@@ -1,0 +1,52 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  \wcTpFullscreen{}
+  This box is the fullscreen target.
+
+  Press Esc to exit fullscreen mode.
+
+}
+\end{document}
+
+% !tp-example Toolbar control
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  \wcTpToolbar{
+    \wcTpFullscreen{}
+  }
+  The fullscreen button is in a toolbar.
+
+  The containing box is still the fullscreen target.
+
+}
+\end{document}
+
+% !tp-example Change event
+\documentclass{article}
+\begin{document}
+\wcTpBox[id=fullscreen-event-target]{
+  \rawhtml|<tp-fullscreen anchor="#fullscreen-event-target"></tp-fullscreen>|
+  Enter or exit fullscreen to emit \rawhtml*|<code>tp-fullscreen-change</code>|.
+
+}
+
+\wcTpConsole{}
+
+\wcScript[type=module]|
+      customElements.whenDefined('tp-console').then(() => {
+        const section = document.querySelector('#fullscreen-event-target');
+        const output = document.querySelector('tp-console');
+        output.redirectConsoleToSelf();
+        section?.addEventListener('tp-fullscreen-change', (event) => {
+        console.info('tp-fullscreen-change', {
+          fullscreen: event.detail.fullscreen,
+          anchor: event.detail.anchor,
+          target: event.detail.target?.id,
+        });
+        });
+      });
+    |
+\end{document}

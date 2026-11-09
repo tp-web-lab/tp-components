@@ -1,7 +1,7 @@
 <tp-notebook>
   <script type="tp/markdown">
     # Notebook example
-    Here is a notebook that combines Asciidoc, HTML, Markdown and reStructuredText as markup languages, and Python and JavaScript as programming languages.
+    Here is a notebook that combines AsciiDoc, HTML, LaTeX, Markdown and reStructuredText as markup languages, and Python and JavaScript as programming languages.
 
     ## Calculation
     We perform a simple multiplication in Python to demonstrate the calculation.
@@ -10,11 +10,11 @@
     x = 6 * 7
     print(x)
   </script>
-  <script type="tp/restructuredtext" doctest>
-    .. h2:: 
-       
+  <script type="tp/restructuredtext" doctest="">
+    .. h2::
+
        Verification
-       
+
     We use the doctest blocks in reStructuredText to verify the output of the Python code.
 
     >>> print(6 * 7)
@@ -32,5 +32,25 @@
     The result of the multiplication is displayed using Asciidoc and Mathjax:
 
     latexmath:[x = 6 * 7 = 42]
+  </script>
+  <script type="tp/latex">
+    \section*{LaTeX and TP styles}
+    The same result can be written in LaTeX: $6 \times 7 = 42$.
+
+    \begin{itemize}
+      \item Ordinary lists use the shared TP styles.
+      \item Nested lists keep their hierarchy.
+        \begin{itemize}
+          \item This is a nested item.
+        \end{itemize}
+    \end{itemize}
+
+    \wcTpCallout[variant=info,heading=LaTeX inside a component]{
+      \textbf{The component controls its appearance.}
+      \begin{itemize}
+        \item Keep the LaTeX source readable.
+        \item Reuse the same TP typography and list styles.
+      \end{itemize}
+    }
   </script>
 </tp-notebook>

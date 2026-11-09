@@ -177,7 +177,7 @@ function rewriteHtmlAssetUrls(
 }
 
 /**
- * HTML playground component.
+ * The custom `<tp-html-playground>` element edits and runs an HTML project.
  *
  * Provides a file-based playground that runs HTML, CSS, and JavaScript in an isolated preview.
  *

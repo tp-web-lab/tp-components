@@ -244,7 +244,7 @@ const OBJECT_TREE_CONTEXT_MENU_CONFIG: TpTreeContextMenuConfig = {
 };
 
 /**
- * `<tp-object-tree>` inspects a JavaScript value and renders it as a tree.
+ * The custom `<tp-object-tree>` element displays JavaScript values as an expandable tree.
  *
  * This component is a specialized wrapper around `<tp-tree>`:
  * - it converts an arbitrary JavaScript value into a tree structure
@@ -288,7 +288,7 @@ const OBJECT_TREE_CONTEXT_MENU_CONFIG: TpTreeContextMenuConfig = {
  *
  * ---
  *
- * @summary Specialized tree for inspecting JavaScript values.
+ * @summary Displays JavaScript values as an expandable tree.
  * @tagname tp-object-tree
  *
  * @attr {string} src = "" - URL of an external JSON file to inspect.
@@ -297,7 +297,7 @@ const OBJECT_TREE_CONTEXT_MENU_CONFIG: TpTreeContextMenuConfig = {
  * @event tp-object-tree-load Emitted after an external JSON file or inline JavaScript expression has been loaded.
  * @eventdetail tp-object-tree-error { message: string; source: "script" | "src"; src: string }
  * @eventdetail tp-object-tree-load { source: "script" | "src"; src: string; value: unknown }
-
+ *
  *
  * @example
  * <tp-object-tree>

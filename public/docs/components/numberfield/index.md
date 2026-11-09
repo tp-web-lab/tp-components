@@ -1,42 +1,43 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="numberfield" library="components" size="1.25em"></tp-icon> Number field
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-numberfield>` element implements the <tp-icon name="numberfield" library="components" size="1.25em"></tp-icon> Number field functionality: numeric field with an optional native range slider.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-numberfield>` element provides a numeric field with an optional native range slider.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-cluster>
-  <tp-numberfield label="Quantity" value="3" min="0" max="10" clearable></tp-numberfield>
-  <tp-numberfield label="Level" value="40" min="0" max="100" step="5" range clearable></tp-numberfield>
+  <tp-numberfield label="Quantity" value="3" min="0" max="10" clearable=""></tp-numberfield>
+  <tp-numberfield label="Level" value="40" min="0" max="100" step="5" range="" clearable=""></tp-numberfield>
 </tp-cluster>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-numberfield" src="/docs/components/numberfield/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Number field | Click to enter a number, or use the browser's increment/decrement controls. |
-| Slider | Drag the thumb to change the value shown next to the # marker. |
-| Clear button | Empty a number field; for a slider, restore the native midpoint rounded to an allowed step. |
-| Unavailable field | Read-only and disabled fields cannot be edited. Number formatting follows the browser's locale. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Typing in number mode | <kbd>Enter</kbd> or edit the number. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Adjust the number or the focused slider. |
-| <kbd>Home</kbd> / <kbd>End</kbd> in slider mode | Reach the minimum or maximum. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> on Clear | Activate the available clear/reset button. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 All fields use the same inline convention: `:tp-numberfield:\`identifier\`{value="12" placeholder="…"}`. The inline content initializes `name` only; it never sets `id`, `label` or `value`. An explicit `name` takes precedence. Use `value` for initial content and `placeholder` for a hint; omitting `value` keeps the component's normal default. The HTML equivalent is `<tp-numberfield name="identifier" value="12" placeholder="…"></tp-numberfield>`.
-
 
 Declare `<tp-numberfield>` in HTML or use the native component extension in `@tp/tp-markdown`, `@tp/tp-asciidoc` or `@tp/tp-restructuredtext`. See [Examples](#examples) for all four languages. Boolean attributes are true when present and false when absent.
 
@@ -48,353 +49,7 @@ Set `label` or `aria-label` for an accessible name, and optionally `label-positi
 
 Edits update `value` and emit `input`; committing an edit emits `change`. Clearing/resetting emits `input`, `change` and `tp-clear`. Programmatic assignments update the display without emitting user-edit events. The public `focus()` and `clear()` methods are also available.
 
-## Examples
-
-Set `list` to the ID of an external `<datalist>` to provide numeric suggestions or native slider tick marks. In the Attributes example, enter `numberfield-ticks` in `list` and enable `range` to show marks at 0, 25, 50, 75 and 100. Tick appearance follows the browser. Range mode has no surrounding border; its keyboard focus outline remains visible.
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Enter a quantity with the number field and adjust the level with the slider. Try the clear and reset controls.
-
-Attributes
-: Combine all attribute settings on one preview, initialized at the documented defaults, then use Reset defaults to restore them. Switch between number and range, test numeric bounds and increments, and observe native validation and the synchronized value.
-
-Inline named field
-: Edit the inline field. Its role content supplies the form name, while value supplies the initial data; inspect the source to compare the shared convention across markup languages.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpNumberfield -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>aria-label</code> | <code>string</code> | <code>&quot;&quot;</code> | Accessible name when a visible label is not supplied. |
-  | <code>clearable</code> | <code>boolean</code> | <code>false</code> | Shows a button that empties a number or resets a slider to its native midpoint. |
-  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Disables editing, clearing and form submission. |
-  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Visible label associated with the native input. |
-  | <code>label-position</code> | <code>string</code> | <code>&quot;top&quot;</code> | Label position (`top`, `bottom`, `start`, or `end`). |
-  | <code>list</code> | <code>string</code> | <code>&quot;&quot;</code> | ID of an external datalist supplying numeric suggestions or slider tick marks. |
-  | <code>max</code> | <code>string</code> | <code>&quot;&quot;</code> | Upper bound; native range inputs default to 100. |
-  | <code>min</code> | <code>string</code> | <code>&quot;&quot;</code> | Lower bound; native range inputs default to 0. |
-  | <code>name</code> | <code>string</code> | <code>&quot;&quot;</code> | Name submitted with the containing form; defaults to the initial inline content when omitted. |
-  | <code>placeholder</code> | <code>string</code> | <code>&quot;&quot;</code> | Hint shown by the empty number input; ignored in range mode. |
-  | <code>range</code> | <code>boolean</code> | <code>false</code> | Uses input type range instead of input type number. |
-  | <code>readonly</code> | <code>boolean</code> | <code>false</code> | Prevents editing; a readonly slider is disabled with a hidden submission mirror. |
-  | <code>required</code> | <code>boolean</code> | <code>false</code> | Requires a value in number mode; ignored by native range inputs. |
-  | <code>step</code> | <code>string</code> | <code>&quot;1&quot;</code> | Positive numeric increment, or `any` for unrestricted fractional values. |
-  | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Numeric value; range mode normalizes it to a nonempty value within its limits. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-numberfield>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>clear</code> | <code>clear(): void</code> | Empty a number or reset a slider to its native midpoint and notify consumers. |
-  | <code>focus</code> | <code>focus(options?: FocusOptions): void</code> | Focus the native number input or slider. |
-  [Public methods of `TpNumberfield`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>change</code> | <code>void</code> | Emitted when the value is committed or cleared. |
-  | <code>input</code> | <code>void</code> | Emitted when the value changes during editing or clearing. |
-  | <code>tp-clear</code> | <code>void</code> | Emitted after clearing a number or resetting the slider. |
-  [Events emitted by `<tp-numberfield>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-numberfield-background</code> | <code>var(&#45;&#45;tp-paper-color)</code> | Field background. |
-  | <code>&#45;&#45;tp-numberfield-border-color</code> | <code>var(&#45;&#45;tp-neutral-stroke-soft)</code> | Field border color. |
-  | <code>&#45;&#45;tp-numberfield-focus-color</code> | <code>var(&#45;&#45;tp-brand-text-colorful)</code> | Border color and translucent outline tint while focus is inside the numeric control. |
-  | <code>&#45;&#45;tp-numberfield-inline-size</code> | <code>calc(20ch + 5rem)</code> | Preferred width of the numeric field, limited by available space. |
-  | <code>&#45;&#45;tp-numberfield-label-font-weight</code> | <code>500</code> | Font weight of the field label. |
-  | <code>&#45;&#45;tp-numberfield-label-gap</code> | <code>0.35em</code> | Space between the label and the input control. |
-  | <code>&#45;&#45;tp-numberfield-padding-block</code> | <code>0.6em</code> | Inner spacing above and below the input value. |
-  | <code>&#45;&#45;tp-numberfield-padding-inline</code> | <code>0.75em</code> | Inner spacing before and after the input value; additional space is reserved for action buttons. |
-  | <code>&#45;&#45;tp-numberfield-radius</code> | <code>var(&#45;&#45;tp-border-radius-sm)</code> | Corner radius of the input control. |
-  | <code>&#45;&#45;tp-numberfield-required-color</code> | <code>var(&#45;&#45;tp-danger-text-colorful)</code> | Color of the asterisk marking a required field. |
-  | <code>&#45;&#45;tp-numberfield-value-font-weight</code> | <code>400</code> | Font weight of the displayed input value. |
-  [CSS properties of `<tp-numberfield>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_numberfield.TpNumberfield.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -421,12 +76,43 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+Set `list` to the ID of an external `<datalist>` to provide numeric suggestions or native slider tick marks. In the Attributes example, enter `numberfield-ticks` in `list` and enable `range` to show marks at 0, 25, 50, 75 and 100. Tick appearance follows the browser. Range mode has no surrounding border; its keyboard focus outline remains visible.
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Enter a quantity with the number field and adjust the level with the slider. Try the clear and reset controls.
+
+Inline named field
+: Edit the inline field. Its role content supplies the form name, while value supplies the initial data; inspect the source to compare the shared convention across markup languages.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-numberfield>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -441,9 +127,9 @@ All tp-components used by `<tp-numberfield>` are loaded automatically by this co
 @summary Accessible icon button component.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
 
 ### External
 

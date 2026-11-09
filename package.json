@@ -20,7 +20,23 @@
       "types": "./dist/tp-loader.d.ts",
       "import": "./dist/tp-loader.js"
     },
-    "./tp-lib.css": "./dist/tp-lib.css"
+    "./tp-lib.css": "./dist/tp-lib.css",
+    "./components/latex/latex.js": {
+      "types": "./dist/components/latex/latex.d.ts",
+      "import": "./dist/components/latex/latex.js"
+    },
+    "./components/tikz/tikz.js": {
+      "types": "./dist/components/tikz/tikz.d.ts",
+      "import": "./dist/components/tikz/tikz.js"
+    },
+    "./components/latex-viewer/latex-viewer.js": {
+      "types": "./dist/components/latex-viewer/latex-viewer.d.ts",
+      "import": "./dist/components/latex-viewer/latex-viewer.js"
+    },
+    "./components/latex-playground/latex-playground.js": {
+      "types": "./dist/components/latex-playground/latex-playground.d.ts",
+      "import": "./dist/components/latex-playground/latex-playground.js"
+    }
   },
   "files": [
     "server",
@@ -29,7 +45,9 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "examples:sync-structure": "node scripts/standardize-component-examples.mjs && pnpm examples:sync-descriptions",
+    "examples:sync-latex": "node scripts/sync-latex-examples.mjs",
+    "examples:check-latex": "node scripts/sync-latex-examples.mjs --check && node --test scripts/latex-examples.test.mjs",
+    "examples:sync-structure": "node scripts/standardize-component-examples.mjs && pnpm examples:sync-latex && pnpm examples:sync-descriptions",
     "examples:check-structure": "node scripts/standardize-component-examples.mjs --check",
     "examples:manifest": "tsx --tsconfig tsconfig.node.json scripts/build-example-manifests.ts",
     "examples:check-markdown-fences": "node scripts/check-markdown-example-fences.mjs",
@@ -166,7 +184,9 @@
     "api:check-events": "node scripts/check-component-events.mjs",
     "api:check-all": "pnpm api:check-attributes && pnpm api:check-methods && pnpm api:check-css && pnpm api:check-events",
     "viewer:sync-controls": "node scripts/sync-component-viewer-controls.mjs",
-    "viewer:check-controls": "node scripts/sync-component-viewer-controls.mjs --check"
+    "viewer:check-controls": "node scripts/sync-component-viewer-controls.mjs --check",
+    "docs:sync-layout": "node scripts/sync-component-doc-layout.mjs",
+    "docs:check-layout": "node scripts/sync-component-doc-layout.mjs --check"
   },
   "keywords": [],
   "author": "",
@@ -229,7 +249,8 @@
     "sql.js": "^1.14.1",
     "typescript": "^6.0.3",
     "xlsx": "^0.18.5",
-    "zod": "^4.4.3"
+    "zod": "^4.4.3",
+    "@tp/tp-latex": "workspace:*"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

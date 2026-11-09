@@ -2,7 +2,7 @@
 :::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-fill-blank
-The capital of France is :tp-textfield:`capital`{name="capital" placeholder="City name" aria-label="Capital of France" clearable}.
+The capital of France is :tp-textfield:`capital`{placeholder="City name" aria-label="Capital of France" clearable}.
 :::
 ```
 

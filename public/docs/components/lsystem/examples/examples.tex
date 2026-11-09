@@ -1,0 +1,28 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpLsystem[label=Koch curve]{
+  \wcScript[type=tp/lsystem]|
+    axiom: F
+    iterations: 3
+    angle: 60
+    rule: F => F+F--F+F
+  |
+}
+\end{document}
+
+% !tp-example Branching tree
+\documentclass{article}
+\begin{document}
+\wcTpLsystem[src=/docs/components/lsystem/examples/tree.lsys,label=Branching tree]{}
+\end{document}
+
+% !tp-example Preset gallery
+\documentclass{article}
+\begin{document}
+\wcTpGrid[min-width=16rem]{
+  \wcTpLsystem[preset=barnsley-fern,label=Barnsley fern]{}
+  \wcTpLsystem[preset=dragon-curve,label=Dragon curve]{}
+  \wcTpLsystem[preset=sierpinski-triangle,label=Sierpinski triangle]{}
+}
+\end{document}

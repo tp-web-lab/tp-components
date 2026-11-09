@@ -55,7 +55,9 @@ import "../xy-plot/xy-plot.js";
 import style from "./map.css?inline";
 
 /**
- * @summary displays an interactive OpenStreetMap with named markers and GPX routes or tracks.
+ * The custom `<tp-map>` element displays an interactive OpenStreetMap with named markers and GPX routes or tracks.
+ *
+ * @summary Displays an interactive OpenStreetMap with named markers and GPX routes or tracks.
  * @tagname tp-map
  * @attr {number} lat = 48.8566 - Latitude of the configured location, between -90 and 90.
  * @attr {number} lon = 2.3522 - Longitude of the configured location, between -180 and 180.

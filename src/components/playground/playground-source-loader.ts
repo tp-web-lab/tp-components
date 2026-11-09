@@ -17,6 +17,7 @@ const extensions: Record<string, readonly string[]> = {
 	sql: ["sql"],
 	html: ["html", "htm"],
 	markdown: ["md", "markdown"],
+	latex: ["tex", "latex"],
 	asciidoc: ["adoc", "asciidoc"],
 	restructuredtext: ["rst"],
 };

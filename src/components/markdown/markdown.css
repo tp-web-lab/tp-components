@@ -117,3 +117,38 @@
   max-width: none;
   max-inline-size: none;
 }
+
+/* A closed TOC leaves the full next row available to the introductory example. */
+.tp-component-doc-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: .5rem 1rem;
+  align-items: start;
+}
+.tp-component-doc-overview:has(.tp-component-doc-toc details[open]) {
+  grid-template-columns: minmax(0, 1fr) minmax(12rem, 18rem);
+}
+.tp-component-doc-toc { grid-column: 2; grid-row: 1; min-inline-size: 0; }
+.tp-component-doc-overview:has(.tp-component-doc-toc details[open]) > .tp-component-doc-toc { grid-row: 1; }
+.tp-component-doc-toc tp-toc[data-position='end'] { float: none; inline-size: 100%; margin: 0; }
+.tp-component-doc-toc tp-toc > [data-tp-toc-panel] { position: static; }
+.tp-component-doc-intro { display: contents; }
+.tp-component-doc-intro > p { grid-column: 1; grid-row: 1; margin-block: 0; }
+.tp-component-doc-example { grid-column: 1 / -1; grid-row: 2; min-inline-size: 0; }
+.tp-component-doc-overview:has(.tp-component-doc-toc details[open]) .tp-component-doc-intro { display: block; grid-column: 1; grid-row: 1; min-inline-size: 0; }
+.tp-component-doc-overview:has(.tp-component-doc-toc details[open]) .tp-component-doc-example { margin-block-start: .5rem; }
+@media (max-width: 48rem) {
+  .tp-component-doc-overview:has(.tp-component-doc-toc details[open]) { grid-template-columns: minmax(0, 1fr); }
+  .tp-component-doc-overview:has(.tp-component-doc-toc details[open]) > .tp-component-doc-toc { grid-column: 1; grid-row: 1; }
+  .tp-component-doc-overview:has(.tp-component-doc-toc details[open]) .tp-component-doc-intro { grid-row: 2; }
+  .tp-component-doc-overview:has(.tp-component-doc-toc details[open]) .tp-component-doc-example { grid-row: 3; }
+}
+
+/* Delimit the viewer's header and panels within component documentation. */
+.tp-markdown-output tp-component-viewer {
+  box-sizing: border-box;
+  max-inline-size: 100%;
+  padding: clamp(.5rem, 2vw, 1rem);
+  border: 1px solid var(--tp-brand-stroke-mid);
+  border-radius: .5rem;
+}

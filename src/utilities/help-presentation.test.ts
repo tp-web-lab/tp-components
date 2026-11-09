@@ -15,6 +15,34 @@ describe("help presentation", () => {
 		if (!theme) throw new Error("Missing theme");
 		expect(createHelpButtonTable(theme, "")?.textContent).toContain("Theme");
 	});
+	it("shows all declared state icons with a stable purpose label", () => {
+		const host = document.createElement("section");
+		host.innerHTML =
+			'<tp-icon-button name="moon" label="Theme: dark. Choose light, dark, or auto." data-help-label="Choose theme" data-help-icons="moon sun" data-help-description="Change the local theme."></tp-icon-button>';
+		for (const state of ["moon", "sun"]) {
+			host.firstElementChild?.setAttribute("name", state);
+			const legend = createHelpButtonTable(host, "");
+			expect(
+				Array.from(legend?.querySelectorAll("tp-icon") ?? [], (icon) =>
+					icon.getAttribute("name"),
+				),
+			).toEqual(["moon", "sun"]);
+			expect(
+				legend?.querySelectorAll('tp-divider[orientation="vertical"]'),
+			).toHaveLength(1);
+			expect(
+				Array.from(
+					legend?.querySelector("tbody td")?.children ?? [],
+					(item) => item.localName,
+				),
+			).toEqual(["tp-icon", "tp-divider", "tp-icon"]);
+			expect(legend?.querySelector("tbody td")?.textContent?.trim()).toBe(
+				"Choose theme",
+			);
+			expect(legend?.textContent).not.toContain("Theme: dark");
+		}
+	});
+
 	it("separates command locations and uses concise explicit effects", () => {
 		const host = document.createElement("section");
 		host.innerHTML =

@@ -137,12 +137,12 @@ export function createDfaStep(
 }
 
 /**
- * Deterministic finite automaton specialization of `<tp-graph-editor>`.
+ * The custom `<tp-graph-dfa>` element edits and simulates deterministic finite automata.
  *
  * @summary Edits and simulates deterministic finite automata.
  * @tagname tp-graph-dfa
-
-
+ *
+ *
  * @example
  * <tp-graph-dfa></tp-graph-dfa>
  * @event tp-dfa-reset Emitted after the input word, consumed-symbol count and active state are reset. stateId is null when no initial state is available; graph is the resulting snapshot.

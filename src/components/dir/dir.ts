@@ -175,7 +175,7 @@ function syncDirTargets(target: HTMLElement, source: TpDir): void {
 // ---------------------------------------------------------------------------
 
 /**
- * `<tp-dir>` controls the reading direction of its parent element.
+ * The custom `<tp-dir>` element switches the reading direction of the surrounding content.
  *
  * It applies the `dir` attribute (`ltr` or `rtl`) to the parent that contains
  * `<tp-dir>`. In `auto` mode, it follows the document direction by observing
@@ -185,7 +185,7 @@ function syncDirTargets(target: HTMLElement, source: TpDir): void {
  *
  * Multiple `<tp-dir>` controllers on the same parent stay synchronized.
  *
- * @summary Parent-scoped reading-direction switcher.
+ * @summary Switches the reading direction of the surrounding content.
  * @tagname tp-dir
  * @attr {string} mode = "auto" - Reading-direction mode (`ltr`, `rtl`, `auto`). In `auto`, RTL is inferred from language or supported region codes.
  * @attr {string} anchor = "" - CSS selector used as the explicit element that receives the selected direction.

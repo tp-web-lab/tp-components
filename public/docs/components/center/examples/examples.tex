@@ -1,0 +1,31 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpCenter[intrinsic]{
+  \wcTpBox{Centered content}
+}
+\end{document}
+
+% !tp-example Constrained region
+\documentclass{article}
+\begin{document}
+Compare the two centered regions: the narrow region wraps the same text onto more lines. Resize the preview to see both regions shrink when less space is available.
+
+
+\wcTpStack{
+  \wcTpBox{
+    \textbf{Maximum width: 18rem}
+
+    \wcTpCenter[max-inline-size=18rem]{
+      \wcTpBox[invert]{The same text appears in both regions. The maximum width controls the width of the region, not the alignment of its text. Equal space on either side keeps the region centered.}
+    }
+  }
+  \wcTpBox{
+    \textbf{Maximum width: 36rem}
+
+    \wcTpCenter[max-inline-size=36rem]{
+      \wcTpBox[invert]{The same text appears in both regions. The maximum width controls the width of the region, not the alignment of its text. Equal space on either side keeps the region centered.}
+    }
+  }
+}
+\end{document}

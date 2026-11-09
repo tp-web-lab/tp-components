@@ -2,7 +2,7 @@
   "tagname": "tp-component-viewer",
   "classname": "TpComponentViewer",
   "superclass": "TpBase",
-  "description": "API tables and interactive attribute controls for a component preview.",
+  "description": "Documents a component and lets readers try its attributes on a live example.",
   "examples": [
     {
       "label": "Example 1",
@@ -47,12 +47,73 @@
   ],
   "events": [],
   "cssproperties": [],
-  "dependencies": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-checkbox-list",
+      "summary": "Transforms a list into a group of checkboxes."
+    },
+    {
+      "name": "tp-cluster",
+      "summary": "Flexible cluster layout component."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-datefield",
+      "summary": "Native date field with labels, constraints, picker access, and clearing."
+    },
+    {
+      "name": "tp-html-viewer",
+      "summary": "Interactive HTML viewer with editable source, live rendering, and DOM inspection."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-markdown",
+      "summary": "Markdown rendering component."
+    },
+    {
+      "name": "tp-numberfield",
+      "summary": "Numeric field with an optional native range slider."
+    },
+    {
+      "name": "tp-radio-list",
+      "summary": "Transforms a list into a group of radio buttons."
+    },
+    {
+      "name": "tp-tabs",
+      "summary": "Accessible tabs component with keyboard and reorder support."
+    },
+    {
+      "name": "tp-textfield",
+      "summary": "Single-line and automatically growing multiline text field."
+    },
+    {
+      "name": "tp-timefield",
+      "summary": "Native time field with labels, constraints, picker access, and clearing."
+    }
+  ],
   "credits": [],
   "userHelp": {
     "displayName": "Component viewer",
-    "introduction": "",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Doc / Demo / API | Show the user documentation, interactive demo or complete API, and update the component title. |\n| API tabs | Display the selected API table. |\n| Boolean checkboxes | Add or remove attributes on the preview. |\n| Choice lists | Select a documented configuration value. |\n| Text fields | Edit a value and leave the field to apply it. Clear removes the attribute and leaves the field empty. |\n| Preview | Interact with the component; reflected attribute changes update the controls. |\n| Reset defaults | Restore the documented attribute defaults and restart the preview. |\n| Reload preview | Restart the preview with current settings, including initialization-only attributes. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Tab / Shift+Tab | Move through configuration controls and the preview. Leaving an edited field applies its value. |\n| Arrow keys / Home / End on API tabs | Select the adjacent, first or last API tab. |\n| Space | Toggle the focused checkbox. |\n| Arrow keys | Change the selection in a focused radio list. |\n| Enter / Space | Activate the focused action button. |\n| Ctrl+? | Open User help for the component under the pointer, falling back to the focused component; Shift may be needed to type ?. |",
+    "introduction": "The custom `<tp-component-viewer>` element documents a component and lets readers try its attributes on a live example.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Doc / Demo / API | Show the user documentation, interactive demo or complete API, while preserving the preview configuration. |\n| Documentation tabs | Display the selected interactions or API table. |\n| Content (HTML) | Edit the component’s inner content and update the preview and all five markup sources. Clear removes the content; Reset defaults restores the original content. |\n| Markup source (`</>`) | Show or hide readonly HTML, tp-asciidoc, tp-latex, tp-markdown and tp-restructuredtext tabs below the preview. Attribute edits, clearing, reset and changes reflected by the preview update this source. |\n| Boolean checkboxes | Add or remove attributes on the preview. |\n| Choice lists | Select a documented configuration value. |\n| Text fields | Edit a value and leave the field to apply it. Clear removes the attribute and leaves the field empty. |\n| Preview | Interact with the component; reflected attribute changes update the controls. |\n| Reset defaults | Restore the documented attribute defaults and restart the preview. |\n| Reload preview | Restart the preview with current settings, including initialization-only attributes. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move through configuration controls and the preview. Leaving an edited field applies its value. |\n| Arrow keys / <kbd>Home</kbd> / <kbd>End</kbd> on API tabs | Select the adjacent, first or last API tab. |\n| <kbd>Space</kbd> | Toggle the focused checkbox. |\n| Arrow keys | Change the selection in a focused radio list. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused action button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component; <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

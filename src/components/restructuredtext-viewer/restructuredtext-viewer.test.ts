@@ -119,6 +119,9 @@ it("covers public state, sources, examples and non-doctest output modes", async 
 	renderer?.dispatchEvent(new CustomEvent("tp-restructuredtext-rendered"));
 	await rendering;
 	expect(doctestOutput.textContent).toContain("1 + 1");
+	expect(doctestOutput.classList.contains("tp-light")).toBe(true);
+	await api.renderOutput("Title", "ast", doctestOutput, source.context);
+	expect(doctestOutput.classList.contains("tp-light")).toBe(false);
 
 	element.innerHTML = "<template> Template source </template>";
 	expect(api.readInlineSource().source).toContain("Template source");

@@ -33,8 +33,11 @@ const colors: readonly TpPostItColor[] = TpColor.presets.map(
 );
 
 /**
- * @summary displays a movable floating paper note that folds into a pushpin.
+ * The custom `<tp-post-it>` element displays a movable floating paper note that folds into a pushpin.
+ *
+ * @summary Displays a movable floating paper note that folds into a pushpin.
  * @tagname tp-post-it
+ * @see tp-post-it-editor - Create a post-it interactively and save it.
  * @attr {"default"|"red"|"orange"|"amber"|"yellow"|"lime"|"green"|"emerald"|"teal"|"glaz"|"cyan"|"sky"|"blue"|"indigo"|"violet"|"purple"|"fuchsia"|"pink"|"rose"|"zinc"|"ivory"|"stone"} color = "yellow" - Shared tp-color palette name without the tp- prefix; invalid values fall back to yellow.
  * @attr {string} heading = "" - Optional plain-text heading above the preserved content.
  * @attr {boolean} lite = false - Folds the note into its pushpin; click the pin to expand or fold it again.
@@ -73,7 +76,12 @@ export class TpPostIt extends TpBase {
 	public get attachment(): { element: Element; x: number; y: number } | null {
 		return this.anchor ? { ...this.anchor } : null;
 	}
-	/** Restores a pin attachment using pixel offsets from the target's top-left corner. */
+	/** Attaches the pin using pixel offsets from the target's top-left corner.
+	 * @param element Target element in the same document.
+	 * @param x Horizontal pin offset from the target's left edge, in pixels.
+	 * @param y Vertical pin offset from the target's top edge, in pixels.
+	 * @param initial When true, also saves this attachment as the destination of resetPosition(); false preserves the previous reset destination.
+	 */
 	public attachTo(
 		element: Element,
 		x: number,
@@ -236,8 +244,9 @@ export class TpPostIt extends TpBase {
 		if (!this.paper || this.paper.parentElement !== this) {
 			this.paper = this.ownerDocument.createElement("tp-box");
 			this.paper.setAttribute("data-post-it-paper", "");
+			this.paper.setAttribute("data-tp-help-parent", "");
 			this.paper.innerHTML =
-				'<div data-post-it-header tabindex="0" role="group" aria-label="Move note with arrow keys"><tp-icon-button data-post-it-pin name="pin" library="components" label="Fold note"></tp-icon-button><strong data-post-it-heading></strong><tp-icon-button data-post-it-reset name="refresh" label="Reset position"></tp-icon-button></div><div data-post-it-content></div>';
+				'<div data-post-it-header tabindex="0" role="group" aria-label="Move note with arrow keys"><tp-icon-button data-tp-help-parent data-post-it-pin name="pin" library="components" label="Fold note" data-help-label="Toggle postit" data-help-description="Pushpin folds or opens the postit."></tp-icon-button><strong data-post-it-heading></strong><tp-icon-button data-tp-help-parent data-post-it-reset name="refresh" label="Reset position" data-help-description="Restore the initial attachment without changing content or folded state."></tp-icon-button></div><div data-post-it-content></div>';
 			this.paper
 				.querySelector("[data-post-it-reset]")
 				?.addEventListener("click", () => this.resetPosition());
@@ -316,6 +325,16 @@ export class TpPostIt extends TpBase {
 	/** Promotes the note above stacking contexts without reparenting author nodes or blocking the page. */
 	private float(): void {
 		if (!this.isConnected) return;
+		// Hidden preview frames have no usable layout: capture the flow position only once visible.
+		const frame = this.ownerDocument.defaultView?.frameElement;
+		if (frame && frame.getClientRects().length === 0) {
+			if (this.floatingTimer !== null) clearTimeout(this.floatingTimer);
+			this.floatingTimer = setTimeout(() => {
+				this.floatingTimer = null;
+				this.float();
+			}, 100);
+			return;
+		}
 		// Snapshot sibling notes before any leaves normal flow, preserving their distinct starting positions.
 		this.ownerDocument.querySelectorAll("tp-post-it").forEach((note) => {
 			const rect = note.getBoundingClientRect();
@@ -433,6 +452,15 @@ export class TpPostIt extends TpBase {
 	/** Paints the position without pulling an offscreen note back into the viewport. */
 	private readonly keepVisible = (): void => {
 		if (!this.position) return;
+		// A growing preview must keep the whole paper measurable above its lower edge.
+		if (
+			this.ownerDocument.documentElement.hasAttribute("data-tp-auto-height")
+		) {
+			const paper = this.paper?.getBoundingClientRect();
+			const bounds = this.getBoundingClientRect();
+			const topOverflow = Math.max(0, bounds.top - (paper?.top ?? bounds.top));
+			this.position.y = Math.max(8 + topOverflow, this.position.y);
+		}
 		this.style.setProperty("--tp-post-it-x", `${this.position.x}px`);
 		this.style.setProperty("--tp-post-it-y", `${this.position.y}px`);
 	};

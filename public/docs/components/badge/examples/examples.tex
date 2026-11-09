@@ -1,0 +1,19 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+Build status: \wcTpBadge*[variant=success,pulse]{Ready}
+\end{document}
+
+% !tp-example With icon
+\documentclass{article}
+\begin{document}
+\wcTpBadge[outlined]{\wcTpIcon*[name=file_type_vite,library=languages]{} Vite\wcTpDivider*[orientation=vertical]{}8.1.5}
+\end{document}
+
+% !tp-example Status labels
+\documentclass{article}
+\begin{document}
+\wcTpBadge[variant=success]{Complete}
+
+\wcTpBadge[variant=warning]{Pending}
+\end{document}

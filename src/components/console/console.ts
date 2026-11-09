@@ -20,6 +20,10 @@
  * @tp-dependency tp-object-tree
  * @summary Specialized tree for inspecting JavaScript values.
  */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
 // tp-docgen:dependencies:end
 
 import { TpBase } from "../base/base.js";
@@ -28,6 +32,7 @@ import style from "./console.css?inline";
 import "../icon-button/icon-button.js";
 import "../copy-code/copy-code.js";
 import "../object-tree/object-tree.js";
+import "../theme/theme.js";
 
 import type { TpCopyCode } from "../copy-code/copy-code.js";
 import type { TpObjectTree } from "../object-tree/object-tree.js";
@@ -248,7 +253,7 @@ function formatTimestamp(timestamp: number): string {
 }
 
 /**
- * `<tp-console>` displays console output in light DOM.
+ * The custom `<tp-console>` element provides a visual console for playground output.
  *
  * The component:
  * - stores a list of entries
@@ -256,7 +261,7 @@ function formatTimestamp(timestamp: number): string {
  * - renders complex values with `<tp-object-tree>`
  * - exposes an API close to the browser console
  *
- * @summary Visual console for playground output.
+ * @summary Provides a visual console for playground output.
  * @tagname tp-console
  *
  * @event tp-console-entry-add Emitted when an entry is added.
@@ -270,30 +275,29 @@ function formatTimestamp(timestamp: number): string {
  *   <p data-demo-status role="status"></p>
  *   <script src="/docs/components/_shared/introduction-actions.js"></script>
  * </tp-box>
- * @cssprop [--tp-console-bg=#0d1117] Console background.
+ * @cssprop [--tp-console-bg=var(--tp-paper-color)] Console background.
  * @cssprop [--tp-console-bigint-color=#bc8cff] BigInt value color.
  * @cssprop [--tp-console-boolean-color=#ffa657] Boolean value color.
- * @cssprop [--tp-console-border=#30363d] Console border color.
+ * @cssprop [--tp-console-border=var(--tp-neutral-stroke-mid)] Console border color.
  * @cssprop [--tp-console-circular-color=#f2cc60] Text color of circular-reference markers in expanded objects.
- * @cssprop [--tp-console-color=#e6edf3] Console text color.
+ * @cssprop [--tp-console-color=var(--tp-text-body)] Console text color.
  * @cssprop [--tp-console-date-color=#7ee787] Text color of Date values in expanded objects.
  * @cssprop [--tp-console-depth=0] Unitless group nesting depth of a log entry; each level adds 1rem of leading indentation. Assigned internally per entry.
  * @cssprop [--tp-console-empty-color=#8b949e] Empty state text color.
  * @cssprop [--tp-console-entry-bg=transparent] Background of an individual log entry.
- * @cssprop [--tp-console-entry-border=#21262d] Entry separator color.
+ * @cssprop [--tp-console-entry-border=var(--tp-neutral-stroke-soft)] Entry separator color.
  * @cssprop [--tp-console-error-color=#ff7b72] Text color of Error values in expanded objects.
  * @cssprop [--tp-console-function-color=#d2a8ff] Text color of function summaries in expanded objects.
  * @cssprop [--tp-console-kind-accent=#8b949e] Text color and background tint of the log-level badge; assigned by the entry level.
  * @cssprop [--tp-console-nullish-color=#8b949e] Null and undefined value color.
  * @cssprop [--tp-console-number-color=#79c0ff] Number value color.
- * @cssprop [--tp-console-object-bg=#11161d] Object preview background.
- * @cssprop [--tp-console-object-border=#30363d] Object preview border color.
- * @cssprop [--tp-console-object-key-color=#c9d1d9] Object key color.
- * @cssprop [--tp-console-object-marker-color=#8b949e] Color of the triangle used to expand or collapse an object preview.
- * @cssprop [--tp-console-object-panel-bg=#0f141a] Object tree panel background.
- * @cssprop [--tp-console-object-separator-color=#8b949e] Color of the separator between a property name and its value in expanded objects.
- * @cssprop [--tp-console-object-summary-bg=#161b22] Background of the clickable summary row of an object preview.
- * @cssprop [--tp-console-object-summary-color=#c9d1d9] Object summary text color.
+ * @cssprop [--tp-console-object-bg=var(--tp-paper-color)] Object preview background.
+ * @cssprop [--tp-console-object-border=var(--tp-neutral-stroke-mid)] Object preview border color.
+ * @cssprop [--tp-console-object-key-color=var(--tp-text-body)] Object key color.
+ * @cssprop [--tp-console-object-panel-bg=var(--tp-paper-color)] Object tree panel background.
+ * @cssprop [--tp-console-object-separator-color=var(--tp-text-body)] Color of the separator between a property name and its value in expanded objects.
+ * @cssprop [--tp-console-object-summary-bg=var(--tp-neutral-fill-softer)] Background of the clickable summary row of an object preview.
+ * @cssprop [--tp-console-object-summary-color=var(--tp-text-body)] Object summary text color.
  * @cssprop [--tp-console-string-color=#a5d6ff] String value color.
  * @cssprop [--tp-console-time-color=#8b949e] Timestamp color.
  */
@@ -305,6 +309,7 @@ export class TpConsole extends TpBase {
 	 * @internal
 	 */
 	private static readonly styleId = "tp-console-styles";
+	private static nextThemeId = 0;
 
 	/**
 	 * Entrées actuellement affichées.
@@ -755,6 +760,10 @@ export class TpConsole extends TpBase {
 		const copyBtn = document.createElement("tp-copy-code") as TpCopyCode;
 		copyBtn.setAttribute("copied-text", "Console copied!");
 		copyBtn.setAttribute("title", "Copy console");
+		copyBtn.setAttribute(
+			"data-help-description",
+			"Copy all displayed console messages.",
+		);
 		copyBtn.forElement = this;
 
 		// 👉 bouton à droite
@@ -762,14 +771,30 @@ export class TpConsole extends TpBase {
 		clearBtn.setAttribute("name", "close");
 		clearBtn.setAttribute("label", "Clear console");
 		clearBtn.setAttribute("title", "Clear console");
+		clearBtn.setAttribute(
+			"data-help-description",
+			"Remove all displayed messages and reset counters and timers.",
+		);
 
 		clearBtn.addEventListener("click", (event) => {
 			event.stopPropagation();
 			this.clear();
 		});
 
+		const theme = document.createElement("tp-theme");
+		const themeId = String(++TpConsole.nextThemeId);
+		this.setAttribute("data-tp-console-theme", themeId);
+		theme.setAttribute(
+			"anchor",
+			`tp-console[data-tp-console-theme="${themeId}"]`,
+		);
+		theme.setAttribute("mode", "dark");
+		theme.setAttribute(
+			"data-help-description",
+			"Choose a light, dark or automatic theme for this console only.",
+		);
 		left.append(title);
-		right.append(copyBtn, clearBtn);
+		right.append(copyBtn, clearBtn, theme);
 
 		header.append(left, right);
 

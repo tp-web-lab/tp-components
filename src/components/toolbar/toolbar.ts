@@ -58,7 +58,7 @@ function isTpToolbarPlacement(value: string): value is TpToolbarPlacement {
 // ---------------------------------------------------------------------------
 
 /**
- * `<tp-toolbar>` renders a sticky toolbar with three zones: `start`, `center`, and `end`.
+ * The custom `<tp-toolbar>` element provides a sticky, zoned toolbar for tp-* components.
  *
  * Children are distributed into zones via their `section` attribute
  * (`section="start"` | `section="center"` | `section="end"`; default: `"start"`).
@@ -72,7 +72,7 @@ function isTpToolbarPlacement(value: string): value is TpToolbarPlacement {
  * `tp-alarm`, `tp-chronometer`, `tp-clock`, `tp-color`, `tp-dir`,
  * `tp-icon`, `tp-theme`, `tp-timer`.
  *
- * @summary Sticky, zoned toolbar for tp-* components.
+ * @summary Provides a sticky, zoned toolbar for tp-* components.
  * @tagname tp-toolbar
  * @attr {string} orientation = "horizontal" - `horizontal` (default) or `vertical`.
  * @attr {string} placement = "top (horizontal) / start (vertical)" - `top` (default for horizontal) | `bottom` | `start` | `end`.

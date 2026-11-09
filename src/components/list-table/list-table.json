@@ -2,7 +2,7 @@
   "tagname": "tp-list-table",
   "classname": "TpListTable",
   "superclass": "TpBase",
-  "description": "creates an HTML table from ordered or unordered lists while preserving cell content.",
+  "description": "Displays structured list content as a table.",
   "examples": [
     {
       "label": "Example 1",
@@ -36,8 +36,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "List table",
-    "introduction": "The custom `<tp-list-table>` element implements the List table functionality: creates an HTML table from ordered or unordered lists while preserving cell content.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Table | Read and select the cell content. Wide tables can be scrolled horizontally. |\n| Embedded controls | Use the controls normally; conversion preserves their content and event listeners. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Table | No table-specific keyboard shortcut. Embedded links and controls retain their normal keyboard interactions. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-list-table>` element displays structured list content as a table.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Table | Read and select the cell content. Wide tables can be scrolled horizontally. |\n| Embedded controls | Use the controls normally; conversion preserves their content and event listeners. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Table | No table-specific keyboard shortcut. Embedded links and controls retain their normal keyboard interactions. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

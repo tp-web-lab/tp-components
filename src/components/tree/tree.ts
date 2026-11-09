@@ -522,7 +522,9 @@ function isInsideMenu(
 }
 
 /**
- * @summary Interactive hierarchical tree.
+ * The custom `<tp-tree>` element provides an interactive hierarchical tree.
+ *
+ * @summary Provides an interactive hierarchical tree.
  * @tagname tp-tree
  * @attr {boolean} selectable = false - Enables node selection.
  * @attr {boolean} guides = false - Shows hierarchy guide lines.

@@ -1,52 +1,38 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="asciidoc-playground" library="components" size="1.25em"></tp-icon> AsciiDoc Playground
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-asciidoc-playground>` element implements the <tp-icon name="asciidoc-playground" library="components" size="1.25em"></tp-icon> AsciiDoc Playground functionality: edits and renders an AsciiDoc project.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-asciidoc-playground>` element edits and renders an AsciiDoc project.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-asciidoc-playground src="/docs/components/_shared/intro-projects/asciidoc.json"></tp-asciidoc-playground>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-asciidoc-playground" src="/docs/components/asciidoc-playground/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Select | Select a project file to edit it, then run the project to update the result. |
-| Using the component | Use the project and file menus to manage your work. |
-| Project | Creates, clears, imports, or exports a complete project. |
-| Project > Import from disk / Export to disk | Opens or saves a JSON project containing all files and project settings. Import replaces the current project. |
-| File > Open source file… | Opens a local source file, including in an empty playground, and creates its surrounding project automatically. This replaces the current project; choose Run to execute or render it. |
-| File > Save | Saves the active editor file, not the whole project. The first save asks for a destination; later saves reuse it where direct file access is supported, or download the file again otherwise. |
-| File > Save as… | Chooses a new destination or download filename for the active file. This does not rename files or change imports inside the project. Cancelling leaves the previous destination unchanged. |
-| Examples | Loads one of the bundled example projects. |
-| :tp-icon:{name="keyboard-f1" size="1.25em"} Editor toolbar | Shows or hides the active code editor toolbar. |
-| :tp-icon:{name="refresh" size="1.25em"} Reset | Restores the initially loaded project. |
-| :tp-icon:{name="test-tube" size="1.25em"} Test | Runs the project test file when one is available. |
-| :tp-icon:{name="play" size="1.25em"} Run | Executes or renders the current project. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> / <kbd>Enter</kbd> / <kbd>Space</kbd> / <kbd>Escape</kbd> | Navigate toolbar menus, activate an action, or close a submenu. |
-| Focused controls | Use each control’s standard keyboard interaction.  |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
-
-The `src` attribute accepts either a JSON project or a single asciidoc source file (`.adoc`). For a source file, the component creates a project using its filename as the entry point and adds an `index.html` containing `<main id="app"></main>`.
-
-```html
-<tp-asciidoc-playground src="/docs/components/_shared/single-source/example.adoc"></tp-asciidoc-playground>
-```
-
-Source contents are preserved. URL query parameters do not affect extension detection. Dependencies and companion files are not fetched automatically: use a JSON project or `repository` for multiple files. Source priority remains `src`, then `repository`, then internal content. Missing or incompatible files produce a console error. Existing JSON sources, including extensionless URLs, remain supported.
-
-#### Initial playground content
+### Initial content
 
 ::: tp-tabs
 no content
@@ -72,380 +58,17 @@ repository
   ```
 :::
 
-## Examples
+### Authoring
 
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Edit and run the supplied asciidoc example, then compare the source with its output.
+The `src` attribute accepts either a JSON project or a single asciidoc source file (`.adoc`). For a source file, the component creates a project using its filename as the entry point and adds an `index.html` containing `<main id="app"></main>`.
 
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
+```html
+<tp-asciidoc-playground src="/docs/components/_shared/single-source/example.adoc"></tp-asciidoc-playground>
+```
 
-Single source file
-: Load the standalone asciidoc file through src and inspect its output. Open the source editor to inspect the file used as the generated project's entry point.
-<!-- tp-docgen:example-descriptions:end -->
+Source contents are preserved. URL query parameters do not affect extension detection. Dependencies and companion files are not fetched automatically: use a JSON project or `repository` for multiple files. Source priority remains `src`, then `repository`, then internal content. Missing or incompatible files produce a console error. Existing JSON sources, including extensionless URLs, remain supported.
 
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpAsciidocPlayground -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>repository</code> | <code>string</code> | <code>&quot;&quot;</code> | Directory containing an AsciiDoc playground project to load at initialization. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | JSON project or asciidoc source file to load. |
-  [Attributes of `<tp-asciidoc-playground>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpAsciidocPlayground`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-asciidoc-playground>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-asciidoc-playground>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_asciidoc-playground.TpAsciidocPlayground.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -472,12 +95,41 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Edit and run the supplied asciidoc example, then compare the source with its output.
+
+Single source file
+: Load the standalone asciidoc file through src and inspect its output. Open the source editor to inspect the file used as the generated project's entry point.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-asciidoc-playground>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -529,7 +181,7 @@ All tp-components used by `<tp-asciidoc-playground>` are loaded automatically by
 -->
 <!--
 @tp-dependency tp-switcher
-@summary Switches between horizontal and vertical layouts based on available space.
+@summary Component `<tp-switcher>`.
 -->
 <!--
 @tp-dependency tp-tabs
@@ -540,48 +192,48 @@ All tp-components used by `<tp-asciidoc-playground>` are loaded automatically by
 @summary Sticky toolbar with start / center / end sections,
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
-- [`<tp-console>`](../console/index.md) : Displays structured console output.
-- [`<tp-drawer>`](../drawer/index.md) : Drawer overlay component.
-- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
-- [`<tp-filesystem>`](../filesystem/index.md) : In-memory file system component.
-- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-iframe>`](../iframe/index.md) : Controlled iframe component.
-- [`<tp-menu>`](../menu/index.md) : Accessible menu component.
-- [`<tp-splitter>`](../splitter/index.md) : Splitter component with two resizable panels.
-- [`<tp-switcher>`](../switcher/index.md) : Switches between horizontal and vertical layouts based on available space.
-- [`<tp-tabs>`](../tabs/index.md) : Accessible tabs component with keyboard and reorder support.
-- [`<tp-toolbar>`](../toolbar/index.md) : Sticky toolbar with start / center / end sections,
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
+- [`<tp-code-editor>`](#/components/code-editor/index.md) : CodeMirror-based code editor component.
+- [`<tp-console>`](#/components/console/index.md) : Displays structured console output.
+- [`<tp-drawer>`](#/components/drawer/index.md) : Drawer overlay component.
+- [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
+- [`<tp-filesystem>`](#/components/filesystem/index.md) : In-memory file system component.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-iframe>`](#/components/iframe/index.md) : Controlled iframe component.
+- [`<tp-menu>`](#/components/menu/index.md) : Accessible menu component.
+- [`<tp-splitter>`](#/components/splitter/index.md) : Splitter component with two resizable panels.
+- [`<tp-switcher>`](#/components/switcher/index.md) : Component `<tp-switcher>`.
+- [`<tp-tabs>`](#/components/tabs/index.md) : Accessible tabs component with keyboard and reorder support.
+- [`<tp-toolbar>`](#/components/toolbar/index.md) : Sticky toolbar with start / center / end sections,
 
 ### External
 
 <!--
-@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
-@summary Shared parsers, games and rendering utilities.
+@credit Asciidoctor.js https://asciidoctor.org/docs/asciidoctor.js/
+@summary AsciiDoc conversion in the browser.
 -->
 <!--
 @credit es-module-lexer https://github.com/guybedford/es-module-lexer
 @summary ECMAScript module import analysis.
 -->
 <!--
-@credit Asciidoctor.js https://asciidoctor.org/docs/asciidoctor.js/
-@summary AsciiDoc conversion in the browser.
--->
-<!--
 @credit Lit https://lit.dev/
 @summary Web-component examples and import maps.
+-->
+<!--
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
 -->
 <!--
 @credit Zod https://zod.dev/
 @summary Runtime schema validation.
 -->
 
-- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
-- [es-module-lexer](https://github.com/guybedford/es-module-lexer) : ECMAScript module import analysis.
 - [Asciidoctor.js](https://asciidoctor.org/docs/asciidoctor.js/) : AsciiDoc conversion in the browser.
+- [es-module-lexer](https://github.com/guybedford/es-module-lexer) : ECMAScript module import analysis.
 - [Lit](https://lit.dev/) : Web-component examples and import maps.
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 - [Zod](https://zod.dev/) : Runtime schema validation.
 <!-- tp-docgen:dependencies:end -->

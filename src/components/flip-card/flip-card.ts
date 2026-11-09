@@ -25,7 +25,7 @@ type FlipCardInlinePosition = "start" | "center" | "end" | "none";
 const FLIP_CARD_SIDES: FlipCardSide[] = ["recto", "verso"];
 
 /**
- * Displays a two-sided card that can be flipped.
+ * The custom `<tp-flip-card>` element displays a two-sided card.
  *
  * @summary Displays a two-sided card.
  * @tagname tp-flip-card
@@ -33,7 +33,7 @@ const FLIP_CARD_SIDES: FlipCardSide[] = ["recto", "verso"];
  * @attr {boolean} fit-content = false - Adapts the card dimensions to its verso content.
  * @attr {boolean} flipped = false - Shows the verso when present.
  * @attr {string} button-position = "bottom end" - Position of the overlaid flip button, or none to hide it.
-
+ *
  * @cssprop --tp-flip-card-aspect-ratio Card aspect ratio.
  * @cssprop --tp-flip-card-background Card face background.
  * @cssprop --tp-flip-card-border-color Card border color.

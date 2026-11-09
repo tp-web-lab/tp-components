@@ -20,7 +20,7 @@ function isOrientation(value: string): value is TpMenuOrientation {
 }
 
 /**
- * Turns a nested list into a keyboard-accessible menu.
+ * The custom `<tp-menu>` element turns a nested list into a keyboard-accessible menu.
  *
  * Expected structure:
  *

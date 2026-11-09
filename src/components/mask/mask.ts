@@ -22,7 +22,9 @@ type TargetState = {
 const targets = new WeakMap<HTMLElement, TargetState>();
 
 /**
- * Replaces an anchored element with its own content without destroying the target.
+ * The custom `<tp-mask>` element hides an anchored element and displays its own message in its place while active.
+ *
+ * @summary Hides an anchored element and displays its own message in its place while active.
  * @tagname tp-mask
  * @attr {string} anchor = "" - CSS selector of the element to mask in the same document.
  * @attr {boolean} active = false - Hides the target and displays the mask content in its place.

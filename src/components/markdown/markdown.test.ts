@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
 	applyIncludePrefix,
@@ -28,6 +29,28 @@ describe("<tp-markdown>", () => {
 		const root = document.createElement("div");
 		await renderMarkdownInto("**bold**", root);
 		expect(root.querySelector("strong")?.textContent).toBe("bold");
+	});
+
+	it("preserves inline-parent TikZ source in the introductory documentation", async () => {
+		const page = readFileSync("public/docs/components/tikz/index.md", "utf8");
+		const introduction = readFileSync(
+			"public/docs/components/tikz/examples/introduction.html",
+			"utf8",
+		);
+		const expected = document.createElement("template");
+		expected.innerHTML = introduction;
+		const rendered = document.createElement("template");
+		rendered.innerHTML = await renderMarkdownToHtml(page);
+		expect(rendered.content.querySelector("tp-tikz script")?.textContent).toBe(
+			expected.content.querySelector("tp-tikz script")?.textContent,
+		);
+		expect(
+			rendered.content.querySelector("tp-tikz script")?.textContent,
+		).toContain(String.raw`\end{tikzpicture}`);
+		const fenced = await renderMarkdownToHtml(
+			`\x60\x60\x60html\n${introduction}\n\x60\x60\x60`,
+		);
+		expect(fenced).toContain("&lt;tp-tikz");
 	});
 
 	it("renders inline, external and recursively included sources", async () => {

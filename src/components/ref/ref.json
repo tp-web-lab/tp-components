@@ -2,7 +2,7 @@
   "tagname": "tp-ref",
   "classname": "TpRef",
   "superclass": "TpBase",
-  "description": "Displays inline references to notes, bibliography and glossary entries with HTML tooltips.",
+  "description": "Displays an inline reference with the corresponding HTML content in a tooltip.",
   "examples": [
     {
       "label": "Example 1",
@@ -53,7 +53,7 @@
   "userHelp": {
     "displayName": "Reference",
     "introduction": "The custom `<tp-ref>` element displays an inline reference with the corresponding HTML content in a tooltip.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reference | Hover or click to read its content in a tooltip. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus a reference and show its tooltip. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Show the focused reference tooltip. |\n| <kbd>Escape</kbd> | Close the tooltip. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reference | Hover or click to read its content in a tooltip. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus a reference and show its tooltip. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Show the focused reference tooltip. |\n| <kbd>Escape</kbd> | Close the tooltip. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Enter / Space",

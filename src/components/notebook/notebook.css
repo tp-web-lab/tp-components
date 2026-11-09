@@ -129,3 +129,17 @@ tp-button[data-action='add-language'] {
   padding: 1rem;
   text-align: center;
 }
+
+[data-tp-notebook-language-choice] {
+  --tp-button-background: transparent;
+  --tp-button-foreground: currentColor;
+  --tp-button-font-size: 0.875rem;
+}
+
+[data-tp-notebook-menu-trigger]:has(> [data-tp-notebook-language-choice]) {
+  padding-inline-start: 0;
+}
+
+[data-tp-notebook-language-choice] + tp-icon-button {
+  border-inline-start: 1px solid var(--tp-border-color, #d1d5db);
+}

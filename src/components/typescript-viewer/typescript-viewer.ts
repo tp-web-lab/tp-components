@@ -13,6 +13,8 @@ import "../typescript-playground/typescript-playground.js";
 import { TpTypescriptPlayground } from "../typescript-playground/typescript-playground.js";
 
 /**
+ * The custom `<tp-typescript-viewer>` element displays and runs one TypeScript example in a compact interface.
+ *
  * @tagname tp-typescript-viewer
  * @summary Displays and runs one TypeScript example in a compact interface.
  * @attr {string} repository = "" - Directory containing a project to load.

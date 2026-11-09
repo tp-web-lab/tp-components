@@ -95,8 +95,9 @@ function getRenderedEventName(language: TpMarkupSinglePageLanguage): string {
 }
 
 /**
- * Renders one document with a parser selected from `src` or inline script type.
+ * The custom `<tp-markup-single-page>` element renders one Markdown, AsciiDoc, reStructuredText or HTML document.
  *
+ * @summary Renders one Markdown, AsciiDoc, reStructuredText or HTML document.
  * @tagname tp-markup-single-page
  * @attr {string} src = "" - Source file. The extension selects the renderer.
  * @attr {string | null} toolbar = null - Optional comma-separated controls: code, calc, postit, clock, lang, color, theme, screen, fullscreen. Empty enables all; absent hides the toolbar.

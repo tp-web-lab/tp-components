@@ -56,7 +56,9 @@ const LABEL_POSITIONS = new Set<TpTextfieldLabelPosition>([
 type TextControl = HTMLInputElement | HTMLTextAreaElement;
 
 /**
- * @summary Single-line and automatically growing multiline text field.
+ * The custom `<tp-textfield>` element provides a single-line and automatically growing multiline text field.
+ *
+ * @summary Provides a single-line and automatically growing multiline text field.
  * @tagname tp-textfield
  * @attr {string} aria-label = "" - Accessible name forwarded to the editing control; use it when the field has no visible label.
  * @attr {string} type = "text" - Input type (`text`, `email`, `password`, `search`, `tel`, or `url`).
@@ -97,6 +99,8 @@ type TextControl = HTMLInputElement | HTMLTextAreaElement;
 export class TpTextfield extends TpBase {
 	private static readonly textfieldStyleId = "tp-textfield-styles";
 	private field: TextControl | null = null;
+	private sizeObserver: ResizeObserver | null = null;
+	private lastWidth = -1;
 	private prefixIcon: HTMLElement | null = null;
 	private clearButton: HTMLElement | null = null;
 
@@ -267,6 +271,22 @@ export class TpTextfield extends TpBase {
 		super.connectedCallback();
 		this.ensureGlobalStyle(TpTextfield.textfieldStyleId, style);
 		this.render();
+		if (typeof ResizeObserver !== "undefined") {
+			this.sizeObserver?.disconnect();
+			this.sizeObserver = new ResizeObserver(([entry]) => {
+				const width = entry?.contentRect.width ?? 0;
+				if (width === this.lastWidth) return;
+				this.lastWidth = width;
+				this.resizeTextarea();
+			});
+			this.sizeObserver.observe(this);
+		}
+	}
+
+	public disconnectedCallback(): void {
+		this.sizeObserver?.disconnect();
+		this.sizeObserver = null;
+		this.lastWidth = -1;
 	}
 
 	protected attributeChangedCallback(

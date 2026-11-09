@@ -2,11 +2,11 @@
   "tagname": "tp-badge",
   "classname": "TpBadge",
   "superclass": "TpBase",
-  "description": "Compact status label.\nColors are derived from the shared `tp.css` semantic tokens.",
+  "description": "Provides a compact status label.",
   "examples": [
     {
       "label": "Example 1",
-      "code": "<p>\n  Build status: <tp-badge variant=\"success\" pulse>Ready</tp-badge>\n  <tp-badge outlined><tp-icon name=\"file_type_vite\" library=\"languages\"></tp-icon> Vite<tp-divider orientation=\"vertical\"></tp-divider>8.1.5</tp-badge>\n</p>"
+      "code": "<p>\n  Build status: <tp-badge variant=\"success\" pulse>Ready</tp-badge>\n</p>"
     }
   ],
   "attributes": [
@@ -109,8 +109,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Badge",
-    "introduction": "The custom `<tp-badge>` element implements the <tp-icon name=\"badge\" library=\"components\" size=\"1.25em\"></tp-icon> Badge functionality: compact status label.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-badge>` element provides a compact status label.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

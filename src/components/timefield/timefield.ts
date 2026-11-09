@@ -28,7 +28,9 @@ const LABEL_POSITIONS = new Set<TpTimefieldLabelPosition>([
 ]);
 
 /**
- * @summary Native time field with labels, constraints, picker access, and clearing.
+ * The custom `<tp-timefield>` element collects a time within optional limits.
+ *
+ * @summary Collects a time within optional limits.
  * @tagname tp-timefield
  * @attr {string} label = "" - Visible label associated with the native time input.
  * @attr {string} label-position = "top" - Label position (`top`, `bottom`, `start`, or `end`).

@@ -14,23 +14,24 @@ The components in the `tp-components` library are grouped by their primary purpo
 | --- | ---: | --- |
 | [Base](#base) | 2 | Shared foundations used to build higher-level components. |
 | [Controllers](#controllers) | 6 | Direction, color, language, fullscreen, and theme controls. |
-| [Documentations](#documentations) | 21 | Single-page and multi-page documentation renderers. |
+| [Documentations](#documentations) | 26 | Single-page and multi-page documentation renderers and markup blogs. |
 | [Editors](#editors) | 6 | Interactive editors for code, prose, graphs, and spreadsheets. |
 | [Feedbacks](#feedbacks) | 4 | Status, messages, and runtime feedback. |
 | [Files](#files) | 4 | File trees, file systems, includes, and embedded documents. |
 | [Forms](#forms) | 13 | Buttons and reusable form controls. |
 | [Games](#games) | 12 | Puzzle and game activities. |
 | [Layouts](#layouts) | 20 | Page structure, spacing, alignment, and responsive composition. |
-| [Markup Languages](#markup-languages) | 3 | Markup-language rendering components. |
+| [Markup Languages](#markup-languages) | 4 | Markup-language rendering components. |
+| [Medias](#medias) | 8 | Audio and video playback, recording, image comparison, media export and speech tools. |
 | [Overlays](#overlays) | 8 | Dialogs, menus, popovers, and floating contextual content. |
 | [Pickers](#pickers) | 5 | Visual selection of colors, emoji, formulas, icons, and symbols. |
-| [Plots](#plots) | 6 | Geometric constructions, programmatic drawing and mathematical plotting. |
+| [Plots](#plots) | 7 | Geometric constructions, programmatic drawing and mathematical plotting. |
 | [Programming](#programming) | 25 | Components in the Programming family. |
 | [Questions](#questions) | 17 | Quizzes and programming exercises using viewers or playgrounds. |
 | [Simulators](#simulators) | 9 | Interactive automata, circuits, optics, and query simulations. |
 | [Time](#time) | 4 | Clocks, alarms, timers, and chronometers. |
-| [Utilities](#utilities) | 23 | Reusable interaction and media helpers. |
-| **Total** | **188** | |
+| [Utilities](#utilities) | 16 | Reusable interaction and content helpers. |
+| **Total** | **196** | |
 [Classification of the components in `tp-components` by main themes]
 
 ## Base
@@ -55,23 +56,28 @@ The components in the `tp-components` library are grouped by their primary purpo
 
 | Component | Description |
 | --- | --- |
+| <tp-icon name="asciidoc-blog" library="components" size="1.25em"></tp-icon> [`<tp-asciidoc-blog>`](asciidoc-blog/index.md) | Paginated asciidoc articles with category and tag filters and a reader. |
 | <tp-icon name="asciidoc-multi-pages" library="components" size="1.25em"></tp-icon> [`<tp-asciidoc-multi-pages>`](asciidoc-multi-pages/index.md) | Renders a navigable repository with tp-asciidoc. |
 | <tp-icon name="asciidoc-multi-slides" library="components" size="1.25em"></tp-icon> [`<tp-asciidoc-multi-slides>`](asciidoc-multi-slides/index.md) | Navigable repository of AsciiDoc slides. |
 | <tp-icon name="asciidoc-single-page" library="components" size="1.25em"></tp-icon> [`<tp-asciidoc-single-page>`](asciidoc-single-page/index.md) | Renders one document with tp-asciidoc. |
 | <tp-icon name="biblio" library="components" size="1.25em"></tp-icon> [`<tp-biblio>`](biblio/index.md) | Defines a hidden bibliography entry for reference tooltips and generated lists. |
 | <tp-icon name="glossary" library="components" size="1.25em"></tp-icon> [`<tp-glossary>`](glossary/index.md) | Defines a hidden glossary entry for reference tooltips and generated lists. |
+| <tp-icon name="html-blog" library="components" size="1.25em"></tp-icon> [`<tp-html-blog>`](html-blog/index.md) | Paginated html articles with category and tag filters and a reader. |
 | <tp-icon name="html-multi-pages" library="components" size="1.25em"></tp-icon> [`<tp-html-multi-pages>`](html-multi-pages/index.md) | Renders a navigable repository as native browser HTML. |
 | <tp-icon name="html-multi-slides" library="components" size="1.25em"></tp-icon> [`<tp-html-multi-slides>`](html-multi-slides/index.md) | Navigable repository of native HTML slides. |
 | <tp-icon name="html-single-page" library="components" size="1.25em"></tp-icon> [`<tp-html-single-page>`](html-single-page/index.md) | Inserts one HTML document using the browser renderer. |
 | <tp-icon name="listof" library="components" size="1.25em"></tp-icon> [`<tp-listof>`](listof/index.md) | Builds a list of reference entries or links to labelled document elements. |
+| <tp-icon name="markdown-blog" library="components" size="1.25em"></tp-icon> [`<tp-markdown-blog>`](markdown-blog/index.md) | Paginated markdown articles with category and tag filters and a reader. |
 | <tp-icon name="markdown-multi-pages" library="components" size="1.25em"></tp-icon> [`<tp-markdown-multi-pages>`](markdown-multi-pages/index.md) | Renders a navigable repository of Markdown pages. |
 | <tp-icon name="markdown-multi-slides" library="components" size="1.25em"></tp-icon> [`<tp-markdown-multi-slides>`](markdown-multi-slides/index.md) | Navigable repository of Markdown slides. |
 | <tp-icon name="markdown-single-page" library="components" size="1.25em"></tp-icon> [`<tp-markdown-single-page>`](markdown-single-page/index.md) | Renders one document with tp-markdown |
+| <tp-icon name="markup-blog" library="components" size="1.25em"></tp-icon> [`<tp-markup-blog>`](markup-blog/index.md) | Paginated mixed-markup articles with category and tag filters and a reader. |
 | <tp-icon name="markup-multi-pages" library="components" size="1.25em"></tp-icon> [`<tp-markup-multi-pages>`](markup-multi-pages/index.md) | Renders navigable Markdown, AsciiDoc, reStructuredText and HTML pages, inspired by [docsify](https://docsify.js.org/). |
 | <tp-icon name="markup-multi-slides" library="components" size="1.25em"></tp-icon> [`<tp-markup-multi-slides>`](markup-multi-slides/index.md) | Multi-format pages as a responsive slide deck. |
 | <tp-icon name="markup-single-page" library="components" size="1.25em"></tp-icon> [`<tp-markup-single-page>`](markup-single-page/index.md) | Renders one Markdown, AsciiDoc, reStructuredText or HTML document. |
 | <tp-icon name="note" library="components" size="1.25em"></tp-icon> [`<tp-note>`](note/index.md) | Defines a hidden HTML note for reference tooltips and generated lists. |
 | <tp-icon name="ref" library="components" size="1.25em"></tp-icon> [`<tp-ref>`](ref/index.md) | Displays an inline reference with the corresponding HTML content in a tooltip. |
+| <tp-icon name="restructuredtext-blog" library="components" size="1.25em"></tp-icon> [`<tp-restructuredtext-blog>`](restructuredtext-blog/index.md) | Paginated restructuredtext articles with category and tag filters and a reader. |
 | <tp-icon name="restructuredtext-multi-pages" library="components" size="1.25em"></tp-icon> [`<tp-restructuredtext-multi-pages>`](restructuredtext-multi-pages/index.md) | Renders a navigable repository with tp-restructuredtext. |
 | <tp-icon name="restructuredtext-multi-slides" library="components" size="1.25em"></tp-icon> [`<tp-restructuredtext-multi-slides>`](restructuredtext-multi-slides/index.md) | Navigable repository of reStructuredText slides. |
 | <tp-icon name="restructuredtext-single-page" library="components" size="1.25em"></tp-icon> [`<tp-restructuredtext-single-page>`](restructuredtext-single-page/index.md) | Renders one document with tp-restructuredtext. |
@@ -171,8 +177,22 @@ The components in the `tp-components` library are grouped by their primary purpo
 | Component | Description |
 | --- | --- |
 | <tp-icon name="asciidoc" library="components" size="1.25em"></tp-icon> [`<tp-asciidoc>`](asciidoc/index.md) | Semantic AsciiDoc rendering component. |
+| <tp-icon name="latex" library="components" size="1.25em"></tp-icon> [`<tp-latex>`](latex/index.md) | The custom `<tp-latex>` element renders LaTeX documents with interactive components, MathJax formulas and TikZ drawings. |
 | <tp-icon name="markdown" library="components" size="1.25em"></tp-icon> [`<tp-markdown>`](markdown/index.md) | Markdown rendering component adapted from [`mardown-it`](https://github.com/markdown-it/markdown-it). |
 | <tp-icon name="restructuredtext" library="components" size="1.25em"></tp-icon> [`<tp-restructuredtext>`](restructuredtext/index.md) | reStructuredText rendering component. |
+
+## Medias
+
+| Component | Description |
+| --- | --- |
+| <tp-icon name="audio-playlist" library="components" size="1.25em"></tp-icon> [`<tp-audio-playlist>`](audio-playlist/index.md) | Plays a list of audio tracks sequentially or in shuffled order. |
+| <tp-icon name="audio-recorder" library="components" size="1.25em"></tp-icon> [`<tp-audio-recorder>`](audio-recorder/index.md) | Records microphone audio locally for replay and download. |
+| <tp-icon name="compare" library="components" size="1.25em"></tp-icon> [`<tp-compare>`](compare/index.md) | Before-and-after images comparison. |
+| <tp-icon name="save-audio" library="components" size="1.25em"></tp-icon> [`<tp-save-audio>`](save-audio/index.md) | Saves audio as MP3, OGG or WAV through an associated component. |
+| <tp-icon name="save-image" library="components" size="1.25em"></tp-icon> [`<tp-save-image>`](save-image/index.md) | Downloads an anchored image as SVG, PNG, or WebP. |
+| <tp-icon name="speech-to-text" library="components" size="1.25em"></tp-icon> [`<tp-speech-to-text>`](speech-to-text/index.md) | Transcribes microphone speech into editable text using the [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API). |
+| <tp-icon name="text-to-speech" library="components" size="1.25em"></tp-icon> [`<tp-text-to-speech>`](text-to-speech/index.md) | Reads inline or external text aloud with browser speech synthesis. |
+| <tp-icon name="video-player" library="components" size="1.25em"></tp-icon> [`<tp-video-player>`](video-player/index.md) | Plays native video files and YouTube videos with a common playback API. |
 
 ## Overlays
 
@@ -205,6 +225,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="graph-geometry" library="components" size="1.25em"></tp-icon> [`<tp-graph-geometry>`](graph-geometry/index.md) | Dynamic ruler and compass constructions. |
 | <tp-icon name="lsystem" library="components" size="1.25em"></tp-icon> [`<tp-lsystem>`](lsystem/index.md) | L-system fractals. |
 | <tp-icon name="map" library="components" size="1.25em"></tp-icon> [`<tp-map>`](map/index.md) | Interactive [Leaflet](https://leafletjs.com)/[OpenStreetMap](https://www.openstreetmap.org/) with named markers and GPX routes or tracks. |
+| <tp-icon name="tikz" library="components" size="1.25em"></tp-icon> [`<tp-tikz>`](tikz/index.md) | The custom `<tp-tikz>` element compiles TikZ drawings to SVG, including Unicode labels, text colors and standard directional fading. |
 | <tp-icon name="turtle" library="components" size="1.25em"></tp-icon> [`<tp-turtle>`](turtle/index.md) | SVG renderer for the tp turtle drawing language. |
 | <tp-icon name="xy-plot" library="components" size="1.25em"></tp-icon> [`<tp-xy-plot>`](xy-plot/index.md) | Interactive SVG plot generated from the tp XY graph language. |
 
@@ -288,12 +309,9 @@ The components in the `tp-components` library are grouped by their primary purpo
 | Component | Description |
 | --- | --- |
 | <tp-icon name="animation" library="components" size="1.25em"></tp-icon> [`<tp-animation>`](animation/index.md) | Applies an animation to a target element with [`animate.css`](https://animate.style) for animation names and the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Web_Animations_API_Concepts) for playback control. |
-| <tp-icon name="audio-playlist" library="components" size="1.25em"></tp-icon> [`<tp-audio-playlist>`](audio-playlist/index.md) | Plays a list of audio tracks sequentially or in shuffled order. |
-| <tp-icon name="audio-recorder" library="components" size="1.25em"></tp-icon> [`<tp-audio-recorder>`](audio-recorder/index.md) | Records microphone audio locally for replay and download. |
 | <tp-icon name="avatar" library="components" size="1.25em"></tp-icon> [`<tp-avatar>`](avatar/index.md) | Displays an image, initials or an icon in a circle or square. |
 | <tp-icon name="avatar-group" library="components" size="1.25em"></tp-icon> [`<tp-avatar-group>`](avatar-group/index.md) | Groups tp-avatar elements with configurable overlap, stacking order and orientation. |
 | <tp-icon name="calculator" library="components" size="1.25em"></tp-icon> [`<tp-calculator>`](calculator/index.md) | Calculate arithmetic and scientific expressions using the keypad or an editable expression field. |
-| <tp-icon name="compare" library="components" size="1.25em"></tp-icon> [`<tp-compare>`](compare/index.md) | Before-and-after images comparison. |
 | <tp-icon name="copy-code" library="components" size="1.25em"></tp-icon> [`<tp-copy-code>`](copy-code/index.md) | Copies the textual content of a target component to the clipboard. |
 | <tp-icon name="csv-table" library="components" size="1.25em"></tp-icon> [`<tp-csv-table>`](csv-table/index.md) | Creates an HTML table from CSV text or a CSV file. |
 | <tp-icon name="divider" library="components" size="1.25em"></tp-icon> [`<tp-divider>`](divider/index.md) | Horizontal or vertical visual separator. |
@@ -302,14 +320,9 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="list-table" library="components" size="1.25em"></tp-icon> [`<tp-list-table>`](list-table/index.md) | Creates an HTML table from ordered or unordered lists while preserving cell content. |
 | <tp-icon name="lorem-ipsum" library="components" size="1.25em"></tp-icon> [`<tp-lorem-ipsum>`](lorem-ipsum/index.md) | Generates placeholder sentences, titles, paragraphs or lists. |
 | <tp-icon name="math" library="components" size="1.25em"></tp-icon> [`<tp-math>`](math/index.md) | Renders LaTeX or AsciiMath expressions as inline or display-style SVG with [MathJax](https://www.mathjax.org). |
-| <tp-icon name="save-audio" library="components" size="1.25em"></tp-icon> [`<tp-save-audio>`](save-audio/index.md) | Saves audio as MP3, OGG or WAV through an associated component. |
-| <tp-icon name="save-image" library="components" size="1.25em"></tp-icon> [`<tp-save-image>`](save-image/index.md) | Downloads an anchored image as SVG, PNG, or WebP. |
 | <tp-icon name="skeleton" library="components" size="1.25em"></tp-icon> [`<tp-skeleton>`](skeleton/index.md) | Renders selected HTML elements as fixed shaded skeleton patterns without executing the source. |
 | <tp-icon name="slide-note" library="components" size="1.25em"></tp-icon> [`<tp-slide-note>`](slide-note/index.md) | Presents collapsible speaker notes above a presentation's mode menu. |
 | <tp-icon name="source" library="components" size="1.25em"></tp-icon> [`<tp-source>`](source/index.md) | Source repository link button. |
-| <tp-icon name="speech-to-text" library="components" size="1.25em"></tp-icon> [`<tp-speech-to-text>`](speech-to-text/index.md) | Transcribes microphone speech into editable text using the [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API). |
-| <tp-icon name="text-to-speech" library="components" size="1.25em"></tp-icon> [`<tp-text-to-speech>`](text-to-speech/index.md) | Reads inline or external text aloud with browser speech synthesis. |
 | <tp-icon name="typewriting" library="components" size="1.25em"></tp-icon> [`<tp-typewriting>`](typewriting/index.md) | Progressively reveals text one letter or one word at a time. |
-| <tp-icon name="video-player" library="components" size="1.25em"></tp-icon> [`<tp-video-player>`](video-player/index.md) | Plays native video files and YouTube videos with a common playback API. |
 
 [`tp-components` component library]

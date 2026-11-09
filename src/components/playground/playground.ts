@@ -3,6 +3,7 @@
  * @summary Shared playground base for interactive execution components.
  */
 
+import { createViewerFullscreen } from "../../utilities/viewer-fullscreen.js";
 import style from "./playground.css?inline";
 
 import "../base/base.js";
@@ -1054,6 +1055,7 @@ export abstract class TpPlayground<
 			resetButton,
 			testButton,
 			runButton,
+			createViewerFullscreen(this),
 		);
 
 		const main = document.createElement("tp-splitter");
@@ -1184,6 +1186,7 @@ export abstract class TpPlayground<
 			consoleButton,
 			spacer,
 			editorActions,
+			createViewerFullscreen(this),
 		);
 
 		const panels = document.createElement("tp-switcher");
@@ -1480,6 +1483,8 @@ export abstract class TpPlayground<
 
 			// Measure against a collapsed viewport so a previous run's height does
 			// not become the next document's minimum height.
+			// Reveal before measuring: hidden ancestors give shadow-DOM drawings zero height.
+			iframe.hidden = false;
 			iframe.style.blockSize = "1px";
 
 			const visualElements = Array.from(documentNode.body.children).filter(
@@ -1489,9 +1494,10 @@ export abstract class TpPlayground<
 			const hasVisualContent = visualElements.some(
 				(element) =>
 					(element.textContent?.trim() ?? "") !== "" ||
-					element.matches("img, svg, canvas, video, audio, picture") ||
-					element.querySelector("img, svg, canvas, video, audio, picture") !==
-						null ||
+					element.matches("img, svg, canvas, video, audio, picture, iframe") ||
+					element.querySelector(
+						"img, svg, canvas, video, audio, picture, iframe",
+					) !== null ||
 					// Elements belong to the iframe's realm, so a parent-window
 					// `instanceof HTMLElement` check would incorrectly reject them.
 					element.getBoundingClientRect().height > 0,

@@ -41,7 +41,7 @@ import { TpBase } from "../base/base.js";
 import style from "./binary.css?inline";
 
 /**
- * Web component for interactive Binary puzzles.
+ * The custom `<tp-binary>` element displays an interactive Binary puzzle.
  *
  * The Binary puzzle is a logical puzzle where grid cells must be filled with 0 or 1
  * following specific rules. This component provides a complete UI with grid rendering,

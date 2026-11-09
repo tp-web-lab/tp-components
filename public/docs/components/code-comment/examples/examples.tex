@@ -1,0 +1,19 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpCodeEditor[id=commented-function,language=typescript]{
+  \wcScript[type=tp/typescript]|
+    function f(x: number): number {
+      if (x > 0) { return 2 * x; } // <1>
+      else { return 4 * x; } // <2>
+    }
+  |
+}
+
+\wcTpCodeComment[for=commented-function]{
+  \begin{enumerate}
+    \item Positive values are doubled.
+    \item Zero and negative values are multiplied by four.
+  \end{enumerate}
+}
+\end{document}

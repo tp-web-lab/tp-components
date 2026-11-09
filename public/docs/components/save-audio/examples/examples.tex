@@ -1,0 +1,12 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+Listen to the sound of breaking glass, then save the MP3 file.
+
+
+\wcAudio[id=save-audio-example,controls,preload=metadata,aria-label=Sound of breaking glass]{
+  \wcSource[src=/docs/medias/audios/glass-break.mp3,type=audio/mpeg]{}
+}
+
+\rawhtml|<tp-save-audio anchor="#save-audio-example" filename="glass-break"></tp-save-audio>|
+\end{document}

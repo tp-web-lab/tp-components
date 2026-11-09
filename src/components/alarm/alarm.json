@@ -2,7 +2,7 @@
   "tagname": "tp-alarm",
   "classname": "TpAlarm",
   "superclass": "TpBase",
-  "description": "Alarm component.\n\nThe alarm triggers when local time matches the `time` attribute.",
+  "description": "Signals when a specified time is reached.",
   "examples": [
     {
       "label": "Example 1",
@@ -86,8 +86,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Alarm",
-    "introduction": "The custom `<tp-alarm>` element implements the <tp-icon name=\"alarm\" library=\"components\" size=\"1.25em\"></tp-icon> Alarm functionality: alarm component with stop control and optional ring.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Alarm time | Choose the time at which the alarm should ring. |\n| Start alarm | Start the alarm. Sound may require browser permission or an initial interaction. |\n| Stop alarm | Stop the alarm. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-alarm>` element signals when a specified time is reached.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Alarm time | Choose the time at which the alarm should ring. |\n| Start alarm | Start the alarm. Sound may require browser permission or an initial interaction. |\n| Stop alarm | Stop the alarm. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

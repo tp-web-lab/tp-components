@@ -812,7 +812,9 @@ function renderCircuitEquations(
 }
 
 /**
- * @summary Interactive analog-circuit editor and transient simulator.
+ * The custom `<tp-graph-analog-circuit>` element provides an interactive analog-circuit editor and transient simulator.
+ *
+ * @summary Provides an interactive analog-circuit editor and transient simulator.
  * @tagname tp-graph-analog-circuit
  * @example
  * <tp-graph-analog-circuit></tp-graph-analog-circuit>

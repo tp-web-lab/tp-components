@@ -24,9 +24,12 @@ const pages = readdirSync(resolve(root, "public/docs/components")).filter(name =
 test("every public component documents pointer and keyboard actions in two tables", () => {
   assert.ok(pages.length >= 147);
   pages.forEach(name => {
-    const source = readFileSync(resolve(root, `public/docs/components/${name}/index.md`), "utf8");
+    const source = readFileSync(resolve(root, `public/docs/components/${name}/interactions.md`), "utf8");
     const interactions = source.match(section)?.[1];
     assert.ok(interactions, name);
+    const page = readFileSync(resolve(root, `public/docs/components/${name}/index.md`), "utf8");
+    assert.doesNotMatch(page, /^### User interactions$/m, name);
+    assert.match(interactions, /<kbd>Ctrl<\/kbd>\+<kbd>Alt<\/kbd>\+<kbd>\?<\/kbd>/, name);
     assert.equal((interactions.match(/^#### Mouse interactions$/gm) ?? []).length, 1, name);
     assert.equal((interactions.match(/^#### Keyboard interactions$/gm) ?? []).length, 1, name);
     const tokens = markdown.parse(interactions, {});
@@ -39,7 +42,7 @@ test("every public component documents pointer and keyboard actions in two table
 
 test("the code-editor help explains every palette command and distinguishes full-copy from selection-copy", () => {
   const source = readFileSync(resolve(root, "src/components/code-editor/code-editor.ts"), "utf8");
-  const doc = readFileSync(resolve(root, "public/docs/components/code-editor/index.md"), "utf8").match(section)[1];
+  const doc = readFileSync(resolve(root, "public/docs/components/code-editor/interactions.md"), "utf8").match(section)[1];
   const commands = [...source.matchAll(/data-tp-code-editor-keyboard-action="[^"]+">\s*<span>([^<]+)<\/span>/g)].map(match => match[1]);
   assert.ok(commands.length >= 18);
   commands.forEach(command => assert.ok(doc.includes(`Palette: ${command}`), command));
@@ -50,7 +53,7 @@ test("the code-editor help explains every palette command and distinguishes full
 
 test("keyboard tables mark named keys and shortcut symbols with kbd", () => {
   for (const name of pages) {
-    const source = readFileSync(resolve(root, `public/docs/components/${name}/index.md`), "utf8");
+    const source = readFileSync(resolve(root, `public/docs/components/${name}/interactions.md`), "utf8");
     const keyboard = source.match(section)?.[1].split("#### Keyboard interactions")[1] ?? "";
     const unmarked = keyboard.replace(/<kbd\b[^>]*>[\s\S]*?<\/kbd>/g, "");
     for (const line of unmarked.split("\n").filter(line => line.startsWith("|"))) {

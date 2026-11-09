@@ -103,8 +103,9 @@ function extractFencedExamples(source: string): MarkupViewerExample[] {
 }
 
 /**
- * Interactive Markdown viewer component.
+ * The custom `<tp-markdown-viewer>` element provides an interactive Markdown viewer with editable source and parser outputs.
  *
+ * @summary Provides an interactive Markdown viewer with editable source and parser outputs.
  * @tagname tp-markdown-viewer
  * @attr {boolean} lite = false - Uses the compact single-example viewer with rendered HTML output.
  * @attr {string} src = "" - Comma-separated URLs of external Markdown example files.

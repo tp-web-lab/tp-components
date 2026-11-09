@@ -1,0 +1,17 @@
+[tp-asciidoc-viewer%allow-script,label="tp-latex"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-latex]
+=====
+[script,type="tp/latex"]
+====
+\section{A first document}
+The area of a circle is $A=\pi r^2$.
+====
+=====
+======
+----
+========

@@ -35,8 +35,9 @@ type AudioContextLike = {
 };
 
 /**
- * Countdown timer component.
+ * The custom `<tp-timer>` element counts down a duration and signals when it expires.
  *
+ * @summary Counts down a duration and signals when it expires.
  * @tagname tp-timer
  * @attr {number} duration = 60 - Countdown duration in seconds.
  * @attr {string} size = "1rem" - Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em.

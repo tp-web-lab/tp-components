@@ -838,7 +838,7 @@ export const tpMarkdownSyntaxTheme = EditorView.baseTheme({
 });
 
 /**
- * Code editor based on CodeMirror 6, without Shadow DOM.
+ * The custom `<tp-code-editor>` element displays and edits source code.
  *
  * Possible sources:
  * 1. content defined by `setValue()`
@@ -855,7 +855,7 @@ export const tpMarkdownSyntaxTheme = EditorView.baseTheme({
  * This panel is displayed when the `toolbar` attribute is present and can be
  * toggled with F1.
  *
- * @summary Displays a CodeMirror 6 based code editor.
+ * @summary Displays and edits source code.
  * @tagname tp-code-editor
  *
  * @attr {string} dir = "inherited" - Text direction inherited from HTMLElement (`ltr`, `rtl`, `auto`).
@@ -1360,6 +1360,12 @@ export class TpCodeEditor extends TpBase {
 	 * @internal
 	 */
 	protected connectedCallback(): void {
+		if (
+			!this.classList.contains("tp-light") &&
+			!this.classList.contains("tp-dark")
+		) {
+			this.classList.add("tp-dark");
+		}
 		this.currentLanguage = this.resolveLanguage(
 			getCodeFromScript(undefined, this)?.language,
 			this.readExplicitLanguage(),
@@ -1686,15 +1692,19 @@ export class TpCodeEditor extends TpBase {
 				return;
 
 			case "cut":
+				if (this.readonly) return;
 				document.execCommand("cut");
 				return;
 
 			case "paste": {
+				if (this.readonly) return;
 				try {
 					const text = await navigator.clipboard.readText();
+					if (this.readonly || this.editor !== view) return;
 					view.dispatch(view.state.replaceSelection(text));
 				} catch {
-					document.execCommand("paste");
+					if (!this.readonly && this.editor === view)
+						document.execCommand("paste");
 				}
 				return;
 			}
@@ -2031,6 +2041,7 @@ export class TpCodeEditor extends TpBase {
 			{
 				key: "Backspace",
 				run: () => {
+					if (this.readonly) return true;
 					if (!this.isCursorAtStart()) {
 						return false;
 					}
@@ -2051,6 +2062,7 @@ export class TpCodeEditor extends TpBase {
 			{
 				key: "Delete",
 				run: () => {
+					if (this.readonly) return true;
 					if (!this.isCursorAtEnd()) {
 						return false;
 					}
@@ -2238,7 +2250,17 @@ export class TpCodeEditor extends TpBase {
 		}
 
 		if (this.readonly) {
-			extensions.push(EditorView.editable.of(false));
+			extensions.push(
+				EditorView.editable.of(false),
+				EditorState.readOnly.of(true),
+				// Read-only commands and custom transactions must respect the same lock.
+				// External source updates remain allowed (for example, viewer attributes).
+				EditorState.transactionFilter.of((transaction) =>
+					transaction.docChanged && !this.isApplyingExternalValue
+						? []
+						: transaction,
+				),
+			);
 		}
 
 		if (this.lineNumbers) {
@@ -2512,8 +2534,10 @@ export class TpCodeEditor extends TpBase {
 
 		if (
 			!(keyboardDropdown instanceof TpDropdown) ||
-			!keyboardDropdown.isConnected
+			!keyboardDropdown.isConnected ||
+			keyboardDropdown.hasAttribute("data-readonly") !== this.readonly
 		) {
+			keyboardDropdown?.remove();
 			const dropdown = document.createElement("tp-dropdown") as TpDropdown;
 
 			dropdown.setAttribute("data-tp-code-editor-keyboard-dropdown", "");
@@ -2604,6 +2628,38 @@ export class TpCodeEditor extends TpBase {
       </ul>
     `;
 
+			dropdown.toggleAttribute("data-readonly", this.readonly);
+			if (this.readonly) {
+				const editingActions = new Set([
+					"undo",
+					"redo",
+					"cut",
+					"paste",
+					"indent",
+					"dedent",
+					"replace",
+					"toggle-line-comment",
+					"toggle-block-comment",
+				]);
+				for (const item of dropdown.querySelectorAll<HTMLElement>(
+					"[data-tp-code-editor-keyboard-action]",
+				)) {
+					if (editingActions.has(item.dataset.tpCodeEditorKeyboardAction ?? ""))
+						item.remove();
+				}
+				for (const divider of dropdown.querySelectorAll(
+					"[data-tp-dropdown-divider]",
+				)) {
+					if (
+						!divider.previousElementSibling ||
+						!divider.nextElementSibling ||
+						divider.previousElementSibling.hasAttribute(
+							"data-tp-dropdown-divider",
+						)
+					)
+						divider.remove();
+				}
+			}
 			document.body.append(dropdown);
 			keyboardDropdown = dropdown;
 		}

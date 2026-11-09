@@ -1,10 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="lsystem" library="components" size="1.25em"></tp-icon> L-system
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
+
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
+
+<div class="tp-component-doc-intro">
 
 The custom `<tp-lsystem>` element renders L-system fractals and explores their successive rewriting iterations.
-It reuses the grammar, presets, turtle interpreter and SVG renderer of `@tp/tp-utilities`, also used by the L-system extension of `@tp/tp-markdown`.
 
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-lsystem label="Koch curve">
   <script type="tp/lsystem">
     axiom: F
@@ -13,31 +23,49 @@ It reuses the grammar, presets, turtle interpreter and SVG renderer of `@tp/tp-u
     rule: F => F+F--F+F
   </script>
 </tp-lsystem>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-lsystem" src="/docs/components/lsystem/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
+### Initial content
 
-#### Mouse interactions
+::: tp-tabs
+no content
+: ```html
+  <tp-lsystem></tp-lsystem>
+  ```
 
-| Control or gesture | Result |
-| --- | --- |
-| Step | Pause and advance one rewriting iteration. After the final iteration, return to iteration zero. |
-| Play / Pause | Play successive iterations or pause on the current one. Starting from the final iteration restarts at zero; playback stops at the final iteration. |
-| Reset | Pause and display the axiom at iteration zero. |
-| Save image | Choose SVG, PNG or WebP to download the current drawing. |
-| Iteration counter | Read the current iteration and the definition's maximum. |
+internal script
+: ```html
+  <tp-lsystem label="Koch curve">
+    <script type="tp/lsystem">
+      axiom: F
+      iterations: 3
+      angle: 60
+      rule: F => F+F--F+F
+    </script>
+  </tp-lsystem>
+  ```
 
-#### Keyboard interactions
+external file
+: ```html
+  <tp-lsystem src="/docs/components/lsystem/examples/initial-content.txt"></tp-lsystem>
+  ```
+:::
 
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between playback and export controls. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |
-| <kbd>Escape</kbd> | Close the image export menu. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 ::: tp-tabs
 internal script
@@ -85,253 +113,11 @@ A nonempty `src` takes precedence over an internal script. The script uses the i
 
 To keep interactive rendering bounded, the component accepts at most 20,000 source characters, 256 characters per rule replacement, and 12 iterations. The shared engine additionally rejects expansions exceeding 200,000 characters. Complex combinations may reach this limit before iteration 12. Provide a descriptive `label` and nearby explanatory text for meaningful fractals.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Inspect the Koch curve produced by an internal definition. Reset to the initial segment, then use Step or Play to observe successive rewriting iterations; save the current drawing with Save image.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Branching tree
-: Load a branching tree from a local definition file. Reset, then play its four iterations to observe how saved turtle positions create branches.
-
-Preset gallery
-: Compare a fern, a dragon curve and a Sierpinski triangle. Each drawing has independent playback controls and can be exported separately.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-HTML
-: ::include{examples/examples.html}
-
-Asciidoc
-: ::include{examples/examples.adoc}
-
-Markdown
-: ::include{examples/examples.md}
-
-RST
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
+### Programming notes
 
 Use `step()`, `play()`, `pause()` and `reset()` to control progression. `exportSvg()` returns the current SVG, or an empty string before rendering or after an error. Listen for `tp-lsystem-rendered` to read `detail.iteration` and `detail.iterations`. Source requests and timers are cancelled when the component disconnects; reconnection restores the author definition.
 
-### API
-
-<!-- tp-docgen:api TpLsystem -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>angle</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional turning-angle override in degrees; empty uses the definition. |
-  | <code>interval</code> | <code>number</code> | <code>1000</code> | Milliseconds between playback iterations, at least 100. |
-  | <code>iterations</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional iteration override from 0 to 12; empty uses the source or preset value. |
-  | <code>label</code> | <code>string</code> | <code>&quot;L-system&quot;</code> | Visible caption and accessible SVG name. |
-  | <code>preset</code> | <code>&quot;fractal-tree&quot;\|&quot;barnsley-fern&quot;\|&quot;koch-curve&quot;\|&quot;dragon-curve&quot;\|&quot;hilbert-curve&quot;\|&quot;peano-curve&quot;\|&quot;levy-c-curve&quot;\|&quot;gosper-curve&quot;\|&quot;pythagoras-tree&quot;\|&quot;sierpinski-triangle&quot;\|&quot;sierpinski-carpet&quot;\|&quot;sierpinski-arrowhead&quot;\|&quot;sierpinski-gasket&quot;\|&quot;sierpinski-tetrahedron&quot;</code> | <code>&quot;koch-curve&quot;</code> | Built-in definition used when no source is supplied. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Source file; takes precedence over the internal script and preset. |
-  | <code>step</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional positive drawing-step override; empty uses the definition. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-lsystem>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>exportSvg</code> | <code>exportSvg(): string</code> | Returns the current standalone SVG for export integrations. |
-  | <code>pause</code> | <code>pause(): void</code> | Pauses playback without changing the displayed iteration. |
-  | <code>play</code> | <code>play(): void</code> | Starts user-requested playback, stopping at the final iteration without looping. |
-  | <code>reset</code> | <code>reset(): void</code> | Pauses and restores iteration zero, the unexpanded axiom. |
-  | <code>step</code> | <code>step(): void</code> | Advances one iteration; reaching the limit restarts at the axiom on the next step. |
-  [Public methods of `TpLsystem`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-lsystem-rendered</code> | <code>&#123; iteration: number; iterations: number &#125;</code> | Emitted after an iteration has been drawn. |
-  [Events emitted by `<tp-lsystem>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-lsystem>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_lsystem.TpLsystem.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -358,12 +144,44 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Inspect the Koch curve produced by an internal definition. Reset to the initial segment, then use Step or Play to observe successive rewriting iterations; save the current drawing with Save image.
+
+Branching tree
+: Load a branching tree from a local definition file. Reset, then play its four iterations to observe how saved turtle positions create branches.
+
+Preset gallery
+: Compare a fern, a dragon curve and a Sierpinski triangle. Each drawing has independent playback controls and can be exported separately.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-lsystem>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -386,11 +204,11 @@ All tp-components used by `<tp-lsystem>` are loaded automatically by this compon
 @summary Downloads an anchored image as SVG, PNG or WebP.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
-- [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
-- [`<tp-save-image>`](../save-image/index.md) : Downloads an anchored image as SVG, PNG or WebP.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
+- [`<tp-button-group>`](#/components/button-group/index.md) : Button group component for organizing multiple buttons.
+- [`<tp-callout>`](#/components/callout/index.md) : Callout component for highlighted contextual content.
+- [`<tp-save-image>`](#/components/save-image/index.md) : Downloads an anchored image as SVG, PNG or WebP.
 
 ### External
 

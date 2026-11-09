@@ -72,10 +72,11 @@ const OUTPUT_MODES: readonly MarkupViewerMode<RstViewerMode>[] = [
 ];
 
 /**
- * Interactive editor and viewer for one or more reStructuredText examples.
+ * The custom `<tp-restructuredtext-viewer>` element provides an interactive reStructuredText viewer with editable source and parser outputs.
  *
  * Consecutive examples can be declared with `.. example:: Label` blocks.
  *
+ * @summary Provides an interactive reStructuredText viewer with editable source and parser outputs.
  * @tagname tp-restructuredtext-viewer
  * @attr {boolean} lite = false - Uses the compact single-example viewer with rendered HTML output.
  * @attr {boolean} doctest = false - Runs standard Python doctest blocks in rendered output.
@@ -150,6 +151,8 @@ export class TpRestructuredTextViewer extends TpMarkupViewer<
 		context: URL,
 	): Promise<void> {
 		container.setAttribute("data-tp-source", context.href);
+		// Doctests render in the host document; keep their preview as light as an iframe.
+		container.classList.toggle("tp-light", mode === "render" && this.doctest);
 
 		if (mode === "render") {
 			container.classList.add("tp-restructuredtext-output");

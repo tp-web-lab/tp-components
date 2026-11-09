@@ -32,12 +32,13 @@ function isSvgLineElement(value: unknown): value is SVGElement {
 }
 
 /**
- * Live clock component.
+ * The custom `<tp-clock>` element displays the current time as a digital or analog clock.
  *
  * The component renders local time and keeps itself updated every second.
  * The `type` attribute controls whether the display is `digital` or `analogic`.
  * The date is exposed through an attached `<tp-tooltip>`.
  *
+ * @summary Displays the current time as a digital or analog clock.
  * @tagname tp-clock
  * @attr {string} type = "digital" - Display type (`digital` or `analogic`).
  * @attr {string} size = "1rem" - Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em.

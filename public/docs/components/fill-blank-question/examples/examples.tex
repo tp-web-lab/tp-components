@@ -1,0 +1,123 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpFillBlankQuestion[case-sensitive]{
+  \begin{description}
+    \item[{Answers}] \begin{enumerate}
+      \item Paris
+      \item Rome
+    \end{enumerate}
+    \item[{Title}] Geography
+    \item[{Prompt}] Complete both sentences.
+    \item[{Form}] The capital of France is \wcTpBlank*[name=france-capital,placeholder=Capital,aria-label=Capital of France,clearable]{}.
+     The capital of Italy is \wcTpBlank*[name=italy-capital,placeholder=Capital,aria-label=Capital of Italy,clearable]{}.
+    \item[{Feedback}] Check the spelling of each capital.
+     \begin{itemize}
+      \item The capital of France is home to the Eiffel Tower.
+      \item The capital of Italy is home to the Colosseum.
+    \end{itemize}
+    \item[{Solution}] The capital of France is Paris. The capital of Italy is Rome.
+  \end{description}
+}
+\end{document}
+
+% !tp-example Geography
+\documentclass{article}
+\begin{document}
+\wcTpFillBlankQuestion[lang=en]{
+  \begin{description}
+    \item[{Answers}] \begin{enumerate}
+      \item Paris
+      \item Berlin
+      \item Rome
+    \end{enumerate}
+    \item[{Title}] Geography
+    \item[{Prompt}] Complete the sentences with the capitals.
+    \item[{Form}] The capital of France is \wcTpBlank*[name=france,aria-label=Capital of France,placeholder=City name,clearable]{}.
+    The capital of Germany is \wcTpBlank*[name=germany,aria-label=Capital of Germany,placeholder=City name,clearable]{}.
+    The capital of Italy is \wcTpBlank*[name=italy,aria-label=Capital of Italy,placeholder=City name,clearable]{}.
+    \item[{Feedback}] Check the capital of each country and its spelling.
+    \item[{Solution}] France: Paris. Germany: Berlin. Italy: Rome.
+  \end{description}
+}
+\end{document}
+
+% !tp-example Irregular verbs
+\documentclass{article}
+\begin{document}
+\wcTpFillBlankQuestion[lang=en]{
+  \begin{description}
+    \item[{Answers}] \begin{enumerate}
+      \item went
+      \item saw
+      \item took
+    \end{enumerate}
+    \item[{Title}] Irregular verbs
+    \item[{Prompt}] Complete each sentence with the past simple form of the verb shown in the blank.
+    \item[{Form}] Yesterday, I \wcTpBlank*[name=go,aria-label=Past simple of go,placeholder=go,clearable]{} to school.
+    Last night, she \wcTpBlank*[name=see,aria-label=Past simple of see,placeholder=see,clearable]{} a shooting star.
+    Last Monday, we \wcTpBlank*[name=take,aria-label=Past simple of take,placeholder=take,clearable]{} the train.
+    \item[{Feedback}] These verbs are irregular: their past simple forms do not end in -ed.
+    \item[{Solution}] go → went; see → saw; take → took.
+  \end{description}
+}
+\end{document}
+
+% !tp-example Baltic capitals and flags
+\documentclass{article}
+\begin{document}
+\wcTpFillBlankQuestion[mode=closed,lang=en]{
+  \begin{description}
+    \item[{Answers}] \begin{enumerate}
+      \item Tallinn
+      \item \wcTpIcon[name=ee,library=flags,aria-label=Flag of Estonia]{}
+      \item Riga
+      \item \wcTpIcon[name=lv,library=flags,aria-label=Flag of Latvia]{}
+      \item Vilnius
+      \item \wcTpIcon[name=lt,library=flags,aria-label=Flag of Lithuania]{}
+    \end{enumerate}
+    \item[{Title}] Baltic capitals and flags
+    \item[{Prompt}] Match each country with its capital and national flag.
+    \item[{Form}] Estonia has \wcTpBlank*[name=estonia-capital,aria-label=Capital of Estonia]{} as its capital and \wcTpBlank*[name=estonia-flag,aria-label=Flag of Estonia]{} as its national flag.
+    Latvia has \wcTpBlank*[name=latvia-capital,aria-label=Capital of Latvia]{} as its capital and \wcTpBlank*[name=latvia-flag,aria-label=Flag of Latvia]{} as its national flag.
+    Lithuania has \wcTpBlank*[name=lithuania-capital,aria-label=Capital of Lithuania]{} as its capital and \wcTpBlank*[name=lithuania-flag,aria-label=Flag of Lithuania]{} as its national flag.
+    \item[{Feedback}] Check which country each capital and flag belongs to.
+    \item[{Solution}] Estonia: Tallinn; Latvia: Riga; Lithuania: Vilnius. Match each flag with its country.
+  \end{description}
+}
+\end{document}
+
+% !tp-example Square root
+\documentclass{article}
+\begin{document}
+\wcTpFillBlankQuestion[mode=closed,lang=en]{
+  \begin{description}
+    \item[{Answers}] \begin{enumerate}
+      \item \wcSpan*[aria-label=Nonnegative real numbers]{$\mathbb{R}_{+}$}
+      \item \wcSpan*[aria-label=Positive real numbers]{$\mathbb{R}_{+}^{*}$}
+      \item \wcSpan*[aria-label=One over twice the square root of x]{$\frac{1}{2\sqrt{x}}$}
+    \end{enumerate}
+    \item[{Title}] The square root function
+    \item[{Prompt}] Complete the sentence with the mathematical expressions.
+    \item[{Form}] The square root function $f(x) = \sqrt{x}$ is defined on \wcTpBlank*[name=domain,aria-label=Domain]{}, differentiable on \wcTpBlank*[name=differentiability,aria-label=Domain of differentiability]{}, and $f'(x) =$ \wcTpBlank*[name=derivative,aria-label=Derivative]{}.
+    \item[{Feedback}] Consider whether zero belongs to the domain and whether the derivative exists there.
+    \item[{Solution}] The domain is $\mathbb{R}_{+} = [0, +\infty)$. The function is differentiable on $\mathbb{R}_{+}^{*} = (0, +\infty)$, with $f'(x) = \frac{1}{2\sqrt{x}}$.
+  \end{description}
+}
+
+\wcScript|
+    // Wait for the question and its answer buttons before typesetting their content.
+    window.MathJax = {
+      svg: { fontCache: "local" },
+      startup: {
+        pageReady: async () => {
+          await customElements.whenDefined("tp-fill-blank-question");
+          await customElements.whenDefined("tp-button");
+          return MathJax.startup.defaultPageReady();
+        }
+      }
+    };
+  |
+
+\wcScript[defer,src=https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js]||
+\end{document}

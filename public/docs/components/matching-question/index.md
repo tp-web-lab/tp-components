@@ -1,9 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="matching-question" library="components" size="1.25em"></tp-icon> Matching question
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-matching-question>` element implements the Matching question functionality: checks groups across two or more optionally titled lists using tp-matching.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-matching-question>` element presents and grades a question that matches related items across lists.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-matching-question>
   <dl>
     <dt>Title</dt><dd>English and French</dd>
@@ -16,8 +27,23 @@ The custom `<tp-matching-question>` element implements the Matching question fun
     <dt>Solution</dt><dd>Hello — Bonjour; Thank you — Merci; Goodbye — Au revoir.</dd>
   </dl>
 </tp-matching-question>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-matching-question" src="/docs/components/matching-question/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
+
+### Configuration
 
 `src` selects the source format from the URL extension: `.json`, `.html`/`.htm`, `.md`/`.markdown`, `.rst`/`.rest`, or `.adoc`/`.asciidoc`. Extension matching ignores case, query parameters and fragments. URLs without a file extension retain the JSON behavior.
 
@@ -37,41 +63,7 @@ The question passes `heading` to its internal `tp-matching`. With a JSON source,
 </tp-matching-question>
 ```
 
-### User interactions
-
-An initial info callout in the Feedback panel explains how to form a group with the mouse or keyboard. Close it when you no longer need the instructions; resetting the answer does not reopen it.
-
-#### Mouse interactions
-
-Associated cards share a color and a group number, including incomplete groups. Colors cycle through blue, violet, amber, cyan, orange and indigo; they indicate membership, never correctness. The number remains the identifier when colors repeat. Completing or editing a group preserves its color.
-
-Click a card or its link icon to select it, then click a card in another column to associate them. Clicking the selected card again cancels the selection. Embedded links, fields, media players and other controls retain their own interactions without selecting the card. The link icon also remains the keyboard selection control and drag handle.
-
-| Control or gesture | Result |
-| --- | --- |
-| Close callout | Dismiss the introductory instructions without changing the associations. |
-| Click a card | Select it or associate it with the selected item from another column. Clicking it again cancels selection. Embedded controls do not select the card. |
-| Select | Select one item, then select its partner in the other list. Selecting the same item again cancels the pending selection. |
-| Drag a Select button | Drop it on an item in the opposite list to associate the pair. |
-| Remove pair / Remove from group (close icon) | Remove this member; the remaining group is retained if it still contains at least two members. Select any existing member to extend or revise a group. |
-| Embedded media or components | Use their controls normally; they do not select an answer. |
-| Submit | Submit all associations for checking. An incomplete response is rejected without counting an attempt. The result reports the number of correct pairs and, when needed, the author's feedback. An unchanged submission is not counted twice. |
-| Reset | Clear associations and independently reshuffle every list. |
-| Feedback / Solution tabs | Switch between the last result and the solution. The solution is available before submission; an empty solution displays a warning. |
-| Input / Output buttons beside Prompt | Show or hide the answer form or output panel, keeping at least one panel visible. |
-| Title | Expand or collapse the question. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move through association controls, embedded content, question actions and output tabs. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused Select, Remove pair, Close callout, Reset, Submit or panel-toggle button. |
-| <kbd>Escape</kbd> inside an item | Cancel the pending selection without removing existing pairs. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd>, <kbd>Home</kbd> / <kbd>End</kbd> on output tabs | Navigate the Feedback and Solution tabs using the standard tab controls. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Add the inherited boolean `score` attribute to display the numerical grade. It is hidden by default; correction messages and explanations remain available.
 
@@ -96,281 +88,11 @@ The inherited `src` attribute can load a reviewed JSON definition at initializat
 }
 ```
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Associate the English expressions with their French translations, then submit to check the answer. Try an incorrect response, correct it and compare the feedback; Reset clears and reshuffles the lists.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Rich content
-: Identify the flag, sound and video, associate each with its description and submit your answer. Media controls remain independent of association controls.
-
-External definition
-: Complete an animal-translation question loaded from a local JSON file. Submit to check the pairs and open the Solution tab to compare your answer.
-
-Irregular verbs
-: Associate each base form with its past simple, past participle and French translation across four headed columns. Complete or revise a group one member at a time.
-
-Header list
-: Use the first list as English and French column headings. Match the three expressions; headings remain fixed and do not count as answers.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-HTML
-: ::include{examples/examples.html}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
+### Programming notes
 
 The inherited `tp-question-submit` event exposes `event.detail.value` as an array of `{ left, right }` objects. Both ranks refer to the original author lists and are one-based. Only complete, changed responses emit this event, whether correct or incorrect. Read or restore the embedded `tp-matching.value` when needed; assigning it does not submit the question.
 
-### API
-
-<!-- tp-docgen:api TpMatchingQuestion -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>heading</code> | <code>boolean</code> | <code>false</code> | Passes heading to the matching widget; the first list supplies column titles. |
-  | <code>ai-api</code> | <code>boolean</code> | <code>false</code> | Allows sending AI prompts to the selected provider; without it, prompts are only copied. *(inherited from <code>tp-question</code>)* |
-  | <code>ai-assistant</code> | <code>string</code> | <code>&quot;openai&quot;</code> | AI provider, optionally followed by /model; without a model, uses the server configuration. Providers: openai, anthropic, google, mistral. *(inherited from <code>tp-question</code>)* |
-  | <code>ai-explanation-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a saved Markdown explanation; the companion .prompt.md must match the current prompt. *(inherited from <code>tp-question</code>)* |
-  | <code>ai-help</code> | <code>&quot;none&quot;\|&quot;feedback&quot;\|&quot;solution&quot;\|&quot;both&quot;</code> | <code>&quot;none&quot;</code> | Optional AI assistance; solution and both enable solution explanations. Feedback assistance is reserved for a future release. *(inherited from <code>tp-question</code>)* |
-  | <code>mode</code> | <code>string</code> | <code>&quot;mixed&quot;</code> | Blank mode: opened, closed, or mixed local choices. *(inherited from <code>tp-question</code>)* |
-  | <code>open</code> | <code>string</code> | <code>&quot;&quot;</code> | Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.<br>  `detail: { value: unknown }` *(inherited from <code>tp-question</code>)* |
-  | <code>score</code> | <code>boolean</code> | <code>false</code> | Displays the numerical score in submission feedback. *(inherited from <code>tp-question</code>)* |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition. *(inherited from <code>tp-question</code>)* |
-  | <code>timing</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional nonzero time limit in strict hh:mm:ss format. *(inherited from <code>tp-question</code>)* |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-matching-question>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpMatchingQuestion`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-matching-question>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-matching-question>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_matching-question.TpMatchingQuestion.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -397,12 +119,50 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Associate the English expressions with their French translations, then submit to check the answer. Try an incorrect response, correct it and compare the feedback; Reset clears and reshuffles the lists.
+
+Rich content
+: Identify the flag, sound and video, associate each with its description and submit your answer. Media controls remain independent of association controls.
+
+External definition
+: Complete an animal-translation question loaded from a local JSON file. Submit to check the pairs and open the Solution tab to compare your answer.
+
+Irregular verbs
+: Associate each base form with its past simple, past participle and French translation across four headed columns. Complete or revise a group one member at a time.
+
+Header list
+: Use the first list as English and French column headings. Match the three expressions; headings remain fixed and do not count as answers.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-matching-question>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-callout
@@ -410,16 +170,16 @@ All tp-components used by `<tp-matching-question>` are loaded automatically by t
 -->
 <!--
 @tp-dependency tp-matching
-@summary associates rich content from two or more optionally titled lists without grading the groups.
+@summary Component `<tp-matching>`.
 -->
 <!--
 @tp-dependency tp-question
 @summary Base description-list container for question components.
 -->
 
-- [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
-- [`<tp-matching>`](../matching/index.md) : associates rich content from two or more optionally titled lists without grading the groups.
-- [`<tp-question>`](../question/index.md) : Base description-list container for question components.
+- [`<tp-callout>`](#/components/callout/index.md) : Callout component for highlighted contextual content.
+- [`<tp-matching>`](#/components/matching/index.md) : Component `<tp-matching>`.
+- [`<tp-question>`](#/components/question/index.md) : Base description-list container for question components.
 
 ### External
 

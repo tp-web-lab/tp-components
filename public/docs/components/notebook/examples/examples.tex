@@ -1,0 +1,60 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpNotebook{
+  \wcScript[type=tp/markdown]|
+    # Notebook example
+    Here is a notebook that combines AsciiDoc, HTML, LaTeX, Markdown and reStructuredText as markup languages, and Python and JavaScript as programming languages.
+
+    ## Calculation
+    We perform a simple multiplication in Python to demonstrate the calculation.
+  |
+  \wcScript[type=tp/python]|
+    x = 6 * 7
+    print(x)
+  |
+  \wcScript[type=tp/restructuredtext,doctest]|
+    .. h2::
+
+       Verification
+
+    We use the doctest blocks in reStructuredText to verify the output of the Python code.
+
+    >>> print(6 * 7)
+    42
+  |
+  \wcScript[type=tp/html]|
+    In JavaScript, we would have written the following code:
+  |
+  \wcScript[type=tp/javascript]|
+    const x = 6 * 7;
+    console.log(x)
+  |
+  \wcScript[type=tp/asciidoc]|
+    == Result
+    The result of the multiplication is displayed using Asciidoc and Mathjax:
+
+    latexmath:[x = 6 * 7 = 42]
+  |
+  \wcScript[type=tp/latex]|
+    \section*{LaTeX and TP styles}
+    The same result can be written in LaTeX: $6 \times 7 = 42$.
+
+    \begin{itemize}
+      \item Ordinary lists use the shared TP styles.
+      \item Nested lists keep their hierarchy.
+        \begin{itemize}
+          \item This is a nested item.
+        \end{itemize}
+    \end{itemize}
+
+    \wcTpCallout[variant=info,heading=LaTeX inside a component]{
+      \textbf{The component controls its appearance.}
+      \begin{itemize}
+        \item Keep the LaTeX source readable.
+        \item Reuse the same TP typography and list styles.
+      \end{itemize}
+    }
+  |
+}
+\end{document}

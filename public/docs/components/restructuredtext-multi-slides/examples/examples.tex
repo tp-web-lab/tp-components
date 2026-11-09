@@ -1,0 +1,17 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpRestructuredtextMultiSlides[repository=/docs/components/restructuredtext-multi-pages/docs]{}
+\end{document}
+
+% !tp-example Automatic notes
+\documentclass{article}
+\begin{document}
+\wcTpRestructuredtextMultiSlides[repository=/docs/components/markup-multi-slides/automatic/rst,auto=notes,timing=5000,label=Automatic notes]{}
+\end{document}
+
+% !tp-example Timed steps
+\documentclass{article}
+\begin{document}
+\wcTpRestructuredtextMultiSlides[repository=/docs/components/markup-multi-slides/automatic/rst,auto=timing,timing=5000,label=Timed steps]{}
+\end{document}

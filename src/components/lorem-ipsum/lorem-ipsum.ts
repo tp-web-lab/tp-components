@@ -22,7 +22,9 @@ import {
 import style from "./lorem-ipsum.css?inline";
 
 /**
- * @summary generates placeholder sentences, titles, paragraphs or lists.
+ * The custom `<tp-lorem-ipsum>` element generates placeholder sentences, titles, paragraphs or lists.
+ *
+ * @summary Generates placeholder sentences, titles, paragraphs or lists.
  * @tagname tp-lorem-ipsum
  * @attr {"sentence"|"title"|"p"|"dl"|"ol"|"ul"} type = "p" - Generated structure; title and sentence produce plain text.
  * @attr {string} length = "3-5" - Number or inclusive range of paragraphs or list entries; ignored for title and sentence.
