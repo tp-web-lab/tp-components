@@ -5,5 +5,24 @@
             The custom HTML element <code>&lt;tp-box&gt;</code> wraps its content in various ways.
           </tp-box>
     </div>
+
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/box/box.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-box");
+      element1.append(document.createTextNode("\n      The custom HTML element "));
+
+      const element2 = document.createElement("code");
+      element2.append(document.createTextNode("\u003ctp-box>"));
+      element1.append(element2);
+      element1.append(document.createTextNode(" wraps its content in various ways.\n    "));
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
   </template>
 </tp-html-viewer>

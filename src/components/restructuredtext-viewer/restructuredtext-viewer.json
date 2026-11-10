@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-restructuredtext-viewer></tp-restructuredtext-viewer>"
+      "code": "<tp-restructuredtext-viewer>\n        <script type=\"tp/restructuredtext\">\n          Live reStructuredText\n          =====================\n\n          Edit this source and select **Run**.\n\n          * First item\n          * Second item\n        </script>\n      </tp-restructuredtext-viewer>"
     }
   ],
   "attributes": [

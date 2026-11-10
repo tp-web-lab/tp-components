@@ -10,13 +10,13 @@
 
 <div class="tp-component-doc-intro">
 
-The custom `<tp-slider>` element arranges content in a horizontally scrollable row.
+The custom `<tp-slider>` element arranges content in a horizontally or vertically scrollable strip.
 
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
 <tp-box style="max-inline-size: 28rem">
-  <tp-slider scrollbar="" item-width="10rem" gap="1rem">
+  <tp-slider scrollbar="" item-width="10rem" gap="1rem" style="max-block-size: 8rem">
     <tp-box>First</tp-box><tp-box>Second</tp-box><tp-box>Third</tp-box><tp-box>Fourth</tp-box>
   </tp-slider>
 </tp-box>
@@ -38,13 +38,15 @@ The custom `<tp-slider>` element arranges content in a horizontally scrollable r
 
 ### Authoring
 
-Set `item-width`, `gap`, and optionally `slider-height`. The `scrollbar` attribute controls whether the horizontal scrollbar is visible.
+Set `orientation="vertical"` and a `slider-height` to scroll vertically. The default orientation is `horizontal`. For one image at a time with Previous and Next buttons, use [tp-carousel](#/components/carousel/index.md).
 
-`tp-slider` arranges children in a horizontally scrolling row, with keyboard navigation and scrollbar visibility and color settings. It is neither a numeric range input nor an automatically advancing slideshow.
+Set `item-width`, `gap`, and optionally `slider-height`. The `scrollbar` attribute controls whether the scrollbar is visible.
+
+`tp-slider` arranges children in a scrolling strip, with keyboard navigation and scrollbar visibility and color settings. It is neither a numeric range input nor an automatically advancing slideshow.
 
 `tp-slider` replaces the removed `tp-reel` component. Replace `height` with `slider-height`, and the CSS properties `--tp-reel-gap`, `--tp-reel-item-width` and `--tp-reel-height` with `--tp-slider-gap`, `--tp-slider-item-width` and `block-size`, respectively. Add the boolean `scrollbar` attribute to display the scrollbar. With `slider-height`, direct images and videos follow the container height and keep their aspect ratio.
 
-The defaults are `gap="1rem"`, `item-width="auto"`, `slider-height="auto"`, a transparent scrollbar track and a neutral thumb using the shared theme color `var(--tp-neutral-fill-mid)`. `scrollbar` is a boolean attribute: add it to show the scrollbar and omit it to hide the scrollbar (the default). Do not write textual true/false values. Hiding the scrollbar does not disable horizontal scrolling. Browser and operating-system preferences can hide scrollbars until scrolling and limit their visual customization.
+The defaults are `gap="1rem"`, `item-width="auto"`, `slider-height="auto"`, a transparent scrollbar track and a neutral thumb using the shared theme color `var(--tp-neutral-fill-mid)`. `scrollbar` is a boolean attribute: add it to show the scrollbar and omit it to hide the scrollbar (the default). Do not write textual true/false values. Hiding the scrollbar does not disable scrolling. Browser and operating-system preferences can hide scrollbars until scrolling and limit their visual customization.
 
 ```html
 <tp-box style="max-inline-size: 28rem">
@@ -87,6 +89,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Scroll horizontally to reveal any of the four content panels that do not fit in the available width.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 
 Image gallery
 : Browse four captioned illustrations in a width-constrained gallery. Scroll horizontally or focus the slider and use Left/Right Arrow, Home and End to reach the images outside the visible area.

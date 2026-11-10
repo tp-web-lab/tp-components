@@ -1,0 +1,14 @@
+tp-puzzle { display: block; max-inline-size: 100%; color: var(--tp-color-text, #242c33); }
+tp-puzzle .tp-puzzle-ui { padding: 1rem; border: 1px solid var(--tp-neutral-border-normal, #ccc); border-radius: .75rem; background: var(--tp-color-background, #fff); }
+tp-puzzle .tp-puzzle-toolbar { display: flex; flex-wrap: wrap; gap: .4rem; }
+tp-puzzle .tp-puzzle-hint, tp-puzzle .tp-puzzle-status { margin-block: .75rem; font-size: .9em; }
+tp-puzzle .tp-puzzle-board { display: block; width: 100%; max-height: 75vh; background: var(--tp-neutral-fill-softer, #f3f4f6); border-radius: .5rem; touch-action: none; user-select: none; }
+tp-puzzle .tp-puzzle-target { fill: var(--tp-color-background, #fff); stroke: var(--tp-neutral-border-normal, #666); stroke-width: .035; }
+tp-puzzle .tp-puzzle-piece-background { fill: var(--tp-color-background, #fff); }
+tp-puzzle .tp-puzzle-outline { fill: none; stroke: var(--tp-neutral-text-normal, #555); stroke-width: .018; }
+tp-puzzle [data-piece] { cursor: grab; outline: none; }
+tp-puzzle [data-piece]:active { cursor: grabbing; }
+tp-puzzle [data-piece][data-selected] .tp-puzzle-outline { stroke: var(--tp-brand-text-colorful, #167084); stroke-width: .045; }
+tp-puzzle [data-piece]:focus-visible .tp-puzzle-outline { stroke: var(--tp-brand-text-colorful, #167084); stroke-width: .065; stroke-dasharray: .08 .04; }
+tp-puzzle .tp-puzzle-menu-anchor { position: fixed; width: 1px; height: 1px; pointer-events: none; }
+tp-puzzle tp-dropdown { min-width: 10rem; }

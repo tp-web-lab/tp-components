@@ -14,6 +14,26 @@ This paragraph uses *AsciiDoc*.
 ::::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/asciidoc/asciidoc.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-asciidoc");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/asciidoc");
+element2.textContent = "\n== A short document\n\nThis paragraph uses *AsciiDoc*.\n\n* Write content\n* Add components\n* Publish the page\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Advanced example"}
 :::: tp-asciidoc
 ::: script { type="tp/asciidoc" }

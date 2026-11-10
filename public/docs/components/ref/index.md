@@ -77,6 +77,9 @@ bundler
 Basic usage
 : Hover or focus the reference to reveal a formatted note; press Escape to dismiss it.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Notes, bibliography and glossary
 : Compare repeated note citations sharing one superscript number, bibliography citations and dotted glossary terms. Read the numbered notes and alphabetically sorted description lists at the end.
 <!-- tp-docgen:example-descriptions:end -->

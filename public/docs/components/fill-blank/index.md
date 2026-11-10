@@ -91,6 +91,9 @@ bundler
 Basic usage
 : Type a city name into the textfield to complete the sentence, then use its clear button to empty it.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Selected answer with tp-blank
 : Select the triangle or square, or drag its image onto the blank, then clear it. Observe each tp-fill-blank-change event, including the stored value and the FormData entries.
 <!-- tp-docgen:example-descriptions:end -->

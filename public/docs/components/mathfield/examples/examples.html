@@ -4,6 +4,23 @@
       <tp-mathfield label="Formula" value="E = mc^2" clearable=""></tp-mathfield>
     </div>
 
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/math/math.js";
+      import "/components/mathfield/mathfield.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-mathfield");
+      element1.setAttribute("label", "Formula");
+      element1.setAttribute("value", "E = mc^2");
+      element1.setAttribute("clearable", "");
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
     <div role="example" label="Inline in prose">
       <p>Einstein's equation <tp-mathfield name="energy" value="E = mc^2"></tp-mathfield> relates mass and energy.</p>
     </div>

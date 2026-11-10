@@ -505,14 +505,14 @@ export class TpLang extends TpBase {
 
 	private resolveMarkdownDoc(): HTMLElement | null {
 		const local = this.closest(
-			"tp-markdown-multi-pages, tp-asciidoc-multi-pages, tp-restructuredtext-multi-pages, tp-html-multi-pages, tp-markup-multi-pages",
+			"tp-markdown-multi-pages, tp-asciidoc-multi-pages, tp-latex-multi-pages, tp-restructuredtext-multi-pages, tp-html-multi-pages, tp-markup-multi-pages",
 		);
 		if (local instanceof HTMLElement) {
 			return local;
 		}
 
 		const doc = this.ownerDocument.querySelector(
-			"tp-markdown-multi-pages, tp-asciidoc-multi-pages, tp-restructuredtext-multi-pages, tp-html-multi-pages, tp-markup-multi-pages",
+			"tp-markdown-multi-pages, tp-asciidoc-multi-pages, tp-latex-multi-pages, tp-restructuredtext-multi-pages, tp-html-multi-pages, tp-markup-multi-pages",
 		);
 		return doc instanceof HTMLElement ? doc : null;
 	}

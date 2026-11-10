@@ -4,6 +4,22 @@
 \wcTpComponentViewer[tag=tp-button]{}
 \end{document}
 
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/component-viewer/component-viewer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-component-viewer");
+element1.setAttribute("tag", "tp-button");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
 % !tp-example Custom content
 \documentclass{article}
 \begin{document}

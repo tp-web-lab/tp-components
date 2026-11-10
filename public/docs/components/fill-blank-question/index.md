@@ -190,6 +190,9 @@ All four languages provide the same examples: Geography, Irregular verbs, Baltic
 Basic usage
 : Enter the capitals in the open blanks and submit the question to check the answers.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Geography
 : Complete the three European capitals and submit the open question to check the answers.
 

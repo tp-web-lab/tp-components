@@ -144,6 +144,9 @@ bundler
 Basic usage
 : Adjust the slope, drag either point or use arrow keys, then compare the three cycling profiles.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Tour of Lombardy 2026
 : Explore an approximate 239.6 km reconstruction from the supplied route-profile image. Compare the climbs and descents, reverse direction to change the signed slope, and edit the JSON in Profile code.
 

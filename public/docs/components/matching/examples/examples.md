@@ -16,6 +16,52 @@
 :::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/matching/matching.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-matching");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("ul");
+
+const element3 = document.createElement("li");
+element3.append(document.createTextNode("Hello"));
+element2.append(element3);
+
+const element4 = document.createElement("li");
+element4.append(document.createTextNode("Thank you"));
+element2.append(element4);
+
+const element5 = document.createElement("li");
+element5.append(document.createTextNode("Goodbye"));
+element2.append(element5);
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element6 = document.createElement("ol");
+
+const element7 = document.createElement("li");
+element7.append(document.createTextNode("Bonjour"));
+element6.append(element7);
+
+const element8 = document.createElement("li");
+element8.append(document.createTextNode("Merci"));
+element6.append(element8);
+
+const element9 = document.createElement("li");
+element9.append(document.createTextNode("Au revoir"));
+element6.append(element9);
+element1.append(element6);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Rich content"}
 ::: tp-matching
 - :tp-icon:{name="lt" library="flags" size="3em" role="img" aria-label="Flag to identify"}

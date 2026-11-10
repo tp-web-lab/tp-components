@@ -94,6 +94,7 @@ export class TpLatex extends TpBase {
 		this.request?.abort();
 		this.request = new AbortController();
 		this.setAttribute("aria-busy", "true");
+		this.removeAttribute("data-tp-latex-rendered");
 		try {
 			let source = this.value;
 			if (this.src.trim()) {
@@ -111,6 +112,7 @@ export class TpLatex extends TpBase {
 			holder.append(fragment);
 			const html = holder.innerHTML;
 			this.output.replaceChildren(...holder.childNodes);
+			this.setAttribute("data-tp-latex-rendered", "");
 			this.removeAttribute("aria-busy");
 			this.dispatchEvent(
 				new CustomEvent("tp-latex-rendered", {

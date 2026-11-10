@@ -97,6 +97,9 @@ bundler
 Basic usage
 : Read the shared museum context, answer both questions and submit each answer to inspect its feedback and solution.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Timed exercise
 : Select Start to reveal the context and both questions for ten seconds. After expiry, select Continue to recover the answers without restarting the countdown.
 

@@ -23,6 +23,50 @@ A food chain
 :::::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/listof/listof.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("div");
+element1.setAttribute("data-tp-reference-scope", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("tp-listof");
+element2.setAttribute("selector", "figure");
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("figure");
+
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("A diagram of the water cycle."));
+element3.append(element4);
+
+const element5 = document.createElement("figcaption");
+element5.append(document.createTextNode("The water cycle"));
+element3.append(element5);
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
+
+const element6 = document.createElement("figure");
+
+const element7 = document.createElement("p");
+element7.append(document.createTextNode("A diagram of a food chain."));
+element6.append(element7);
+
+const element8 = document.createElement("figcaption");
+element8.append(document.createTextNode("A food chain"));
+element6.append(element8);
+element1.append(element6);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Notes, bibliography and glossary"}
 :::: div { data-tp-reference-scope }
 Read a note :tp-ref:{href="^method"}, consult a source :tp-ref:{href="@book"}, or look up :tp-ref:{href="%ecosystem"}. Compare another note :tp-ref:{href="^weather"}, then read the first note again :tp-ref:{href="^method"}.

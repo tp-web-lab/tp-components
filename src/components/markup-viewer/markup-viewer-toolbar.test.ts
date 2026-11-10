@@ -797,3 +797,35 @@ describe("markup viewer editor toolbar control", () => {
 		expect(iframe.srcdoc).toContain("Deferred");
 	});
 });
+
+it("waits for the srcdoc document before observing it and ignores detached loads", () => {
+	const viewer = document.createElement(
+		"test-markup-viewer",
+	) as TestMarkupViewer;
+	const container = document.createElement("div");
+	const iframe = document.createElement("iframe");
+	iframe.srcdoc = "<p>Rendered content</p>";
+	container.append(iframe);
+	document.body.append(container);
+	const api = viewer as unknown as {
+		initializeOutputIframe(container: HTMLElement): void;
+		observeIframeDocument(iframe: HTMLIFrameElement): void;
+		disconnectIframeResizeObserver(): void;
+	};
+	const observe = vi
+		.spyOn(api, "observeIframeDocument")
+		.mockImplementation(() => undefined);
+	try {
+		api.initializeOutputIframe(container);
+		expect(observe).not.toHaveBeenCalled();
+		iframe.dispatchEvent(new Event("load"));
+		expect(observe).toHaveBeenCalledOnce();
+		iframe.remove();
+		iframe.dispatchEvent(new Event("load"));
+		expect(observe).toHaveBeenCalledOnce();
+	} finally {
+		api.disconnectIframeResizeObserver();
+		observe.mockRestore();
+		container.remove();
+	}
+});

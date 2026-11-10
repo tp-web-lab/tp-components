@@ -45,9 +45,11 @@
     "CHANGELOG.md"
   ],
   "scripts": {
+    "examples:sync-javascript": "node scripts/sync-javascript-examples.mjs && pnpm examples:sync-descriptions",
+    "examples:check-javascript": "node scripts/sync-javascript-examples.mjs --check",
     "examples:sync-latex": "node scripts/sync-latex-examples.mjs",
     "examples:check-latex": "node scripts/sync-latex-examples.mjs --check && node --test scripts/latex-examples.test.mjs",
-    "examples:sync-structure": "node scripts/standardize-component-examples.mjs && pnpm examples:sync-latex && pnpm examples:sync-descriptions",
+    "examples:sync-structure": "node scripts/standardize-component-examples.mjs && pnpm examples:sync-latex && pnpm examples:sync-javascript",
     "examples:check-structure": "node scripts/standardize-component-examples.mjs --check",
     "examples:manifest": "tsx --tsconfig tsconfig.node.json scripts/build-example-manifests.ts",
     "examples:check-markdown-fences": "node scripts/check-markdown-example-fences.mjs",
@@ -62,7 +64,7 @@
     "api:check": "pnpm api:check-all && node scripts/check-component-api.mjs && node scripts/sync-component-dependencies.mjs --check && node scripts/sync-component-api-docs.mjs --check && node scripts/sync-component-accessibility-docs.mjs --check && node scripts/generate-accessibility-report.mjs --check",
     "api:sync-docs": "node scripts/sync-component-dependencies.mjs && node scripts/sync-component-api-docs.mjs && node scripts/sync-component-accessibility-docs.mjs && node scripts/generate-accessibility-report.mjs",
     "api:sync-examples": "node scripts/sync-component-tsdoc-examples.mjs",
-    "docs:sync-intro-examples": "node scripts/sync-component-doc-introductions.mjs && pnpm api:sync-examples",
+    "docs:sync-intro-examples": "node scripts/sync-component-doc-introductions.mjs && pnpm examples:sync-javascript && pnpm api:sync-examples",
     "docs:api": "typedoc && node scripts/sync-typedoc-links.mjs",
     "docs:check-user-interactions": "node --test scripts/component-user-interactions.test.mjs",
     "dev": "pnpm docs:api && pnpm examples:manifest && vite dev --force",

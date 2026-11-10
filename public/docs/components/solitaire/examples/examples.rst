@@ -9,6 +9,20 @@
 
          .. tp-solitaire::
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/solitaire/solitaire.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-solitaire");
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: 32 cards with red back
 
          .. tp-solitaire::

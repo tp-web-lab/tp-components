@@ -19,7 +19,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | [Feedbacks](#feedbacks) | 4 | Status, messages, and runtime feedback. |
 | [Files](#files) | 4 | File trees, file systems, includes, and embedded documents. |
 | [Forms](#forms) | 13 | Buttons and reusable form controls. |
-| [Games](#games) | 12 | Puzzle and game activities. |
+| [Games](#games) | 14 | Puzzle and game activities. |
 | [Layouts](#layouts) | 20 | Page structure, spacing, alignment, and responsive composition. |
 | [Markup Languages](#markup-languages) | 4 | Markup-language rendering components. |
 | [Medias](#medias) | 8 | Audio and video playback, recording, image comparison, media export and speech tools. |
@@ -139,9 +139,11 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="cryptarithm" library="components" size="1.25em"></tp-icon> [`<tp-cryptarithm>`](cryptarithm/index.md) | Interactive cryptarithm puzzle. |
 | <tp-icon name="game-life" library="components" size="1.25em"></tp-icon> [`<tp-game-life>`](game-life/index.md) | Interactive Game of Life. |
 | <tp-icon name="logigram" library="components" size="1.25em"></tp-icon> [`<tp-logigram>`](logigram/index.md) | Solve a logic-grid puzzle by using written clues to match items across categories. Each item matches exactly one item in every other category. |
+| <tp-icon name="kakuro" library="components" size="1.25em"></tp-icon> [`<tp-kakuro>`](kakuro/index.md) | Interactive cross-sum puzzle. |
 | <tp-icon name="loto" library="components" size="1.25em"></tp-icon> [`<tp-loto>`](loto/index.md) | Interactive French loto game. |
 | <tp-icon name="mastermind" library="components" size="1.25em"></tp-icon> [`<tp-mastermind>`](mastermind/index.md) | Interactive Mastermind game. |
 | <tp-icon name="memory" library="components" size="1.25em"></tp-icon> [`<tp-memory>`](memory/index.md) | Interactive Memory matching game. |
+| <tp-icon name="puzzle" library="components" size="1.25em"></tp-icon> [`<tp-puzzle>`](puzzle/index.md) | Image puzzle with movable and rotatable pieces. |
 | <tp-icon name="solitaire" library="components" size="1.25em"></tp-icon> [`<tp-solitaire>`](solitaire/index.md) | Interactive Klondike solitaire. |
 | <tp-icon name="sudoku" library="components" size="1.25em"></tp-icon> [`<tp-sudoku>`](sudoku/index.md) | Interactive Sudoku puzzle. |
 | <tp-icon name="tangram" library="components" size="1.25em"></tp-icon> [`<tp-tangram>`](tangram/index.md) | The custom `<tp-tangram>` element presents seven rigid pieces and a central silhouette at exactly the same scale. Reproduce the silhouette without overlapping pieces. |

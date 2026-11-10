@@ -82,7 +82,17 @@ const OUTPUT_MODES: readonly MarkupViewerMode<RstViewerMode>[] = [
  * @attr {boolean} doctest = false - Runs standard Python doctest blocks in rendered output.
  * @attr {string} src = "" - Comma-separated URLs of external reStructuredText example files.
  * @example
- * <tp-restructuredtext-viewer></tp-restructuredtext-viewer>
+ * <tp-restructuredtext-viewer>
+ *         <script type="tp/restructuredtext">
+ *           Live reStructuredText
+ *           =====================
+ *
+ *           Edit this source and select **Run**.
+ *
+ *           * First item
+ *           * Second item
+ *         </script>
+ *       </tp-restructuredtext-viewer>
  */
 export class TpRestructuredTextViewer extends TpMarkupViewer<
 	RstViewerMode,

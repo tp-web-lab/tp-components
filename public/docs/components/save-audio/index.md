@@ -79,6 +79,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Play the local sound of breaking glass, then open Save audio and choose MP3 to download it. Only MP3 is shown, matching the recording’s format.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs

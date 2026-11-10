@@ -19,6 +19,26 @@ describe("<tp-slider>", () => {
 		vi.unstubAllGlobals();
 	});
 
+	it("scrolls vertically with Up, Down and End when orientation is vertical", () => {
+		const slider = document.createElement("tp-slider") as TpSlider;
+		slider.orientation = "vertical";
+		Object.defineProperties(slider, {
+			clientHeight: { value: 200 },
+			scrollHeight: { value: 800 },
+			clientWidth: { value: 300 },
+			scrollWidth: { value: 300 },
+		});
+		document.body.append(slider);
+		expect(slider.overflowing).toBe(true);
+		slider.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown" }));
+		expect(slider.scrollTop).toBe(160);
+		slider.dispatchEvent(new KeyboardEvent("keydown", { key: "End" }));
+		expect(slider.scrollTop).toBe(600);
+		slider.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp" }));
+		expect(slider.scrollTop).toBe(440);
+		slider.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight" }));
+		expect(slider.scrollTop).toBe(440);
+	});
 	it("extends HTMLElement", () => {
 		const element = document.createElement("tp-slider");
 

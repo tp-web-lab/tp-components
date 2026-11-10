@@ -12,13 +12,13 @@
 
 The custom `<tp-markup-multi-pages>` element presents documents in multiple markup languages with navigation between pages.
 
-<div class="tp-component-doc-example">
+<tp-box class="tp-component-doc-example" border-radius="0.5rem">
 
 <!-- tp-docgen:introduction:start -->
 <tp-iframe src="/docs/components/markup-multi-pages/examples/introduction-frame.html" title="tp-markup-multi-pages — Basic usage" style="display: flow-root; inline-size: auto; height: 32rem;"></tp-iframe>
 <!-- tp-docgen:introduction:end -->
 
-</div>
+</tp-box>
 
 </div>
 
@@ -108,6 +108,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Navigate between the markup documentation pages and observe dynamic page loading inside the isolated example.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs

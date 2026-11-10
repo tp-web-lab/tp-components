@@ -233,7 +233,11 @@ async function generateComponentApiForChangedFile(
 		return;
 	}
 
-	await generateComponentApiFile(rootDir, sourcePath);
+	if (/-multi-(pages|slides)$/.test(name)) {
+		await generateComponentApiFiles(rootDir, componentsDir);
+	} else {
+		await generateComponentApiFile(rootDir, sourcePath);
+	}
 }
 
 async function generateComponentApiFile(
@@ -259,6 +263,9 @@ async function generateComponentApiFile(
 	const cssText = await readOptionalFile(cssPath);
 	const outputPath = path.join(componentDirectory, `${componentName}.json`);
 	const api = buildComponentApi(parsed, cssText, componentName);
+	if (/-multi-(pages|slides)$/.test(componentName)) {
+		api.attributes = await documentAttributes(parsed, new Set());
+	}
 	const documentation = await readOptionalFile(
 		path.join(rootDir, "public/docs/components", componentName, "index.md"),
 	);
@@ -282,6 +289,47 @@ async function generateComponentApiFile(
 	}
 
 	await fs.writeFile(outputPath, nextContent);
+}
+
+/** Document shells expose their complete public interface, excluding generic base attributes. */
+async function documentAttributes(
+	parsed: ParsedSource,
+	seen: Set<string>,
+): Promise<ComponentApiAttribute[]> {
+	const own = extractAttributes(parsed);
+	const parent = extractSuperclass(parsed.classNode, parsed.sourceFile);
+	if (!parent || parent === "TpBase" || seen.has(parent)) return own;
+	seen.add(parent);
+	for (const statement of parsed.sourceFile.statements) {
+		if (
+			!ts.isImportDeclaration(statement) ||
+			!ts.isStringLiteral(statement.moduleSpecifier)
+		)
+			continue;
+		const bindings = statement.importClause?.namedBindings;
+		if (
+			!bindings ||
+			!ts.isNamedImports(bindings) ||
+			!bindings.elements.some((item) => item.name.text === parent)
+		)
+			continue;
+		const file = path.resolve(
+			path.dirname(parsed.sourceFile.fileName),
+			statement.moduleSpecifier.text.replace(/\.js$/, ".ts"),
+		);
+		const source = await readOptionalFile(file);
+		const base = source ? parseSource(file, source) : null;
+		if (!base) continue;
+		const attributes = new Map(
+			(await documentAttributes(base, seen)).map((item) => [
+				item.name,
+				{ ...item, inherited: true },
+			]),
+		);
+		for (const item of own) attributes.set(item.name, item);
+		return [...attributes.values()].sort(compareByName);
+	}
+	return own;
 }
 
 function isPrimaryComponentSource(relativePath: string): boolean {

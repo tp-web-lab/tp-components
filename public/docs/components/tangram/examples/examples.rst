@@ -9,6 +9,20 @@
 
          .. tp-tangram::
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/tangram/tangram.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-tangram");
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: Named vertices
 
          .. tp-tangram::

@@ -25,7 +25,27 @@ export async function updateDocumentNavbar(
 			if (!response.ok) continue;
 			const source = await response.text();
 			if (request.signal.aborted || !toolbar.isConnected) return;
+			// A development server may return its HTML shell with status 200 for
+			// absent optional files. Do not pass that shell to a markup parser.
+			if (
+				response.headers
+					.get("content-type")
+					?.toLowerCase()
+					.includes("text/html") &&
+				/<(?:!doctype\s+html|html|head|body)\b/i.test(source) &&
+				(/\.(md|markdown|adoc|asciidoc|rst|rest|tex|latex)$/i.test(
+					url.pathname,
+				) ||
+					/<script\b[^>]+src=["'][^"']*(?:tp-loader|\/src\/)|<tp-(?:markup|markdown|asciidoc|restructuredtext|latex|html)-multi-pages\b/i.test(
+						source,
+					))
+			)
+				continue;
 			let html = source;
+			if (/\.(tex|latex)$/i.test(url.pathname)) {
+				const { renderLatexToHtml } = await import("@tp/tp-latex");
+				html = renderLatexToHtml(source);
+			}
 			if (/\.(md|markdown)$/i.test(url.pathname)) {
 				const { renderMarkdownToHtml } = await import(
 					"../markdown/markdown.js"

@@ -151,6 +151,9 @@ bundler
 Basic usage
 : Inspect the Koch curve produced by an internal definition. Reset to the initial segment, then use Step or Play to observe successive rewriting iterations; save the current drawing with Save image.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Branching tree
 : Load a branching tree from a local definition file. Reset, then play its four iterations to observe how saved turtle positions create branches.
 

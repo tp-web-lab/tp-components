@@ -643,6 +643,16 @@ export class TpColor extends TpBase {
 			return null;
 		}
 
+		// A controller selector must not introduce a default brand scope just by
+		// showing its color control. Reuse the nearest existing palette so its
+		// controllers stay synchronized when the page brand changes.
+		if (this.closest("tp-control")) {
+			const inheritedScope = effectiveParent.closest<HTMLElement>(
+				TP_COLOR_PRESETS.map((preset) => `.${preset}`).join(","),
+			);
+			if (inheritedScope) return inheritedScope;
+		}
+
 		return effectiveParent;
 	}
 
@@ -681,6 +691,7 @@ export class TpColor extends TpBase {
 	private getEffectiveParent(): HTMLElement | null {
 		const containerTags = new Set([
 			"TP-TOOLBAR",
+			"TP-CONTROL",
 			"TP-MENU",
 			"TP-DROPDOWN",
 			"TP-BUTTON-GROUP",

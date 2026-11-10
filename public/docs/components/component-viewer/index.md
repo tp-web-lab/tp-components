@@ -77,6 +77,10 @@ The User interactions tab displays the complete Mouse interactions and Keyboard 
 
 Command metadata comes from the `Shortcut` column in the Mouse interactions table in `interactions.md`. Use an explicit shortcut for a command with a key binding, `—` for a command without one, and an empty cell for an ordinary gesture or indicator. Keep toolbar buttons and palette commands distinct. A component without specific commands, such as `tp-button`, has no command rows.
 
+### Documentation and live example
+
+Doc describes the component's general API and documented controls, independently of the example's current state. Optional commands remain documented even when the example does not display them. Demo uses the supplied example and reflects changes made to its attributes and content. Its preview height follows the rendered content, including asynchronous updates and changes in width.
+
 ### Importing
 
 ::: tp-tabs
@@ -110,6 +114,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Inspect the button documentation, then select Demo to change its configuration.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 
 Custom content
 : Load an outlined button from an HTML file, then change its variant or size while preserving its label.

@@ -4,6 +4,22 @@
       <tp-datefield label="Date" value="2026-09-03" clearable=""></tp-datefield>
     </div>
 
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/datefield/datefield.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-datefield");
+      element1.setAttribute("label", "Date");
+      element1.setAttribute("value", "2026-09-03");
+      element1.setAttribute("clearable", "");
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
     <div role="example" label="Inline named field">
       <p>Value: <tp-datefield name="identifier" value="2026-10-05" placeholder="Enter a value"></tp-datefield></p>
     </div>

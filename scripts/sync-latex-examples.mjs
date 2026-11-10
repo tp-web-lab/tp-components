@@ -35,7 +35,7 @@ export function synchronizeLatexExamples(check = false, selected = null) {
 			const tex = examples
 				.map(
 					({ label, source }) =>
-						`% !tp-example ${label}\n\\documentclass{article}\n\\begin{document}\n${latexMarkup(source)}\n\\end{document}\n`,
+						`% !tp-example ${label}\n\\documentclass{article}\n${component === "carousel" ? "\\usepackage{graphicx}\n" : ""}\\begin{document}\n${latexMarkup(source)}\n\\end{document}\n`,
 				)
 				.join("\n");
 			save(`${folder}/examples/examples.tex`, tex);

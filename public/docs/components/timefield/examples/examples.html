@@ -4,6 +4,22 @@
       <tp-timefield label="Time" value="14:30" clearable=""></tp-timefield>
     </div>
 
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/timefield/timefield.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-timefield");
+      element1.setAttribute("label", "Time");
+      element1.setAttribute("value", "14:30");
+      element1.setAttribute("clearable", "");
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
     <div role="example" label="Inline named field">
       <p>Value: <tp-timefield name="identifier" value="14:30" placeholder="Enter a value"></tp-timefield></p>
     </div>

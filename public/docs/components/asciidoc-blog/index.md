@@ -134,6 +134,9 @@ bundler
 Basic usage
 : Browse pages, combine the category and tag filters, and open an article before returning to the list.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 External articles
 : Open A small garden to load its complete article from a separate file relative to the index.
 <!-- tp-docgen:example-descriptions:end -->

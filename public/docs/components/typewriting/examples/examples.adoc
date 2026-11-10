@@ -10,6 +10,33 @@ Welcome to *tp-components*. Make your words appear progressively.
 ====
 ======
 
+.Javascript API
+======
+[script,type="module"]
+====
+import "/components/typewriting/typewriting.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-typewriting");
+element1.setAttribute("speed", "20");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("Welcome to "));
+
+const element3 = document.createElement("strong");
+element3.append(document.createTextNode("tp-components"));
+element2.append(element3);
+element2.append(document.createTextNode(". Make your words appear progressively."));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+====
+======
+
 .Synchronized speech
 ======
 Press Speak, then try Pause, Resume and Stop. Some voices do not report word boundaries; the full text remains visible in that case.

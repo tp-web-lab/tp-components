@@ -177,3 +177,37 @@ it.each(["markup", "markdown"])(
 		expect(window.location.hash).toBe("#/playlist/playlist.md");
 	},
 );
+
+it("skips HTML fallback responses before parsing optional markup navigation", async () => {
+	const rst = await import("../restructuredtext/restructuredtext.js");
+	const parse = vi.spyOn(rst, "renderRestructuredTextToHtml");
+	const toolbar = document.createElement("div");
+	document.body.append(toolbar);
+	vi.stubGlobal(
+		"fetch",
+		vi.fn(
+			async (input: string) =>
+				new Response(
+					String(input).endsWith("/real.html")
+						? '<ul><li><a href="next.html">Next</a></li></ul>'
+						: '<!doctype html><html><body><ul><li><a href="wrong.html">Wrong</a></li></ul><script src="/src/tp-loader.ts"></script></body></html>',
+					{ headers: { "content-type": "text/html" } },
+				),
+		),
+	);
+	try {
+		await updateDocumentNavbar(toolbar, [
+			"/navbar.rst",
+			"/navbar.rest",
+			"/navbar.html",
+			"/real.html",
+		]);
+		expect(parse).not.toHaveBeenCalled();
+		expect(toolbar.querySelectorAll("[data-document-navbar]")).toHaveLength(1);
+		expect(toolbar.querySelector("[data-document-navbar]")?.textContent).toBe(
+			"Next",
+		);
+	} finally {
+		parse.mockRestore();
+	}
+});

@@ -10,7 +10,7 @@
 
 <div class="tp-component-doc-intro">
 
-The custom `<tp-markup-single-page>` element renders one Markdown, AsciiDoc, reStructuredText or HTML document.
+The custom `<tp-markup-single-page>` element renders one Markdown, AsciiDoc, reStructuredText, LaTeX or HTML document.
 
 <div class="tp-component-doc-example">
 
@@ -143,6 +143,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Read the rendered markup document. The toolbar is hidden unless explicitly enabled.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 
 Toolbar controls
 : Compare the complete toolbar with a selection of Code, Calculator and Theme. Open a drawer or change the appearance without replacing the document.

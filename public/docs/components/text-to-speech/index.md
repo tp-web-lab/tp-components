@@ -239,6 +239,9 @@ In **English voices** and **French voices**, choose a regional language variant 
 Basic usage
 : Start reading the supplied text aloud and try the playback controls in a browser with speech synthesis.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 English voices
 : Choose among available English voices and compare their readings of the same text.
 

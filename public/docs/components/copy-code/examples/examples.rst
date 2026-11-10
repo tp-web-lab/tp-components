@@ -18,3 +18,36 @@
 
             .. tp-copy-code::
                :for: intro-copy-code
+
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/box/box.js";
+            import "/components/copy-code/copy-code.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-box");
+            element1.append(document.createTextNode("\n  "));
+
+            const element2 = document.createElement("tp-box");
+            element2.setAttribute("id", "intro-copy-code");
+
+            const element3 = document.createElement("pre");
+
+            const element4 = document.createElement("code");
+            element4.append(document.createTextNode("const answer = 6 * 7;"));
+            element3.append(element4);
+            element2.append(element3);
+            element1.append(element2);
+            element1.append(document.createTextNode("\n  "));
+
+            const element5 = document.createElement("tp-copy-code");
+            element5.setAttribute("for", "intro-copy-code");
+            element1.append(element5);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+
+            document.body.append(example);

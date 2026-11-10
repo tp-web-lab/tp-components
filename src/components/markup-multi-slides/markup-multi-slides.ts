@@ -332,6 +332,7 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 				"data-tp-markdown-rendered",
 				"data-tp-asciidoc-rendered",
 				"data-tp-restructuredtext-rendered",
+				"data-tp-latex-rendered",
 				"data-tp-speech-ready",
 			],
 		});
@@ -496,12 +497,14 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 			"tp-slide-note, tp-text-to-speech[data-slide-notes]",
 		);
 		const markup =
-			page?.matches("tp-markdown, tp-asciidoc, tp-restructuredtext") ?? false;
+			page?.matches(
+				"tp-markdown, tp-asciidoc, tp-restructuredtext, tp-latex",
+			) ?? false;
 		const ready =
 			page !== null &&
 			(!markup ||
 				page.matches(
-					"[data-tp-markdown-rendered], [data-tp-asciidoc-rendered], [data-tp-restructuredtext-rendered]",
+					"[data-tp-markdown-rendered], [data-tp-asciidoc-rendered], [data-tp-restructuredtext-rendered], [data-tp-latex-rendered]",
 				));
 		this.playback.sync(
 			page,

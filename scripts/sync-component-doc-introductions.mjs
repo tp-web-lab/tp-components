@@ -211,7 +211,7 @@ for (const directory of readdirSync(docsRoot)) {
 				: undefined));
 	if (!rawExample)
 		throw new Error(`Missing introductory example for ${directory}`);
-	const example = rawExample
+	const example = rawExample.replace(/^(`{3,}) raw html\n([\s\S]*?)\n\1$/, "$2")
 		.split("\n")
 		.map((line) => line.trimEnd())
 		.join("\n");

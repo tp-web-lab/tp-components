@@ -642,8 +642,19 @@ function sourceImportsTpLoader(source: string): boolean {
 	);
 }
 
+/** Explicit component imports opt out of autoloading in authored examples. */
+function sourceImportsComponents(source: string): boolean {
+	return /\bimport\s+(?:[^;\n]*?\s+from\s+)?["'][^"']*\/components\/[a-z0-9-]+\/[a-z0-9-]+\.(?:js|ts)["']/.test(
+		source,
+	);
+}
+
 function addTpLoaderImport(source: string): string {
-	if (!sourceContainsTpElement(source) || sourceImportsTpLoader(source)) {
+	if (
+		!sourceContainsTpElement(source) ||
+		sourceImportsTpLoader(source) ||
+		sourceImportsComponents(source)
+	) {
 		return source;
 	}
 
@@ -672,7 +683,11 @@ function isComponentImportOnlyScript(script: HTMLScriptElement): boolean {
 }
 
 function preferTpLoaderImport(source: string): string {
-	if (!sourceContainsTpElement(source) || sourceImportsTpLoader(source)) {
+	if (
+		!sourceContainsTpElement(source) ||
+		sourceImportsTpLoader(source) ||
+		sourceImportsComponents(source)
+	) {
 		return source;
 	}
 

@@ -1,0 +1,79 @@
+{
+  "tagname": "tp-kakuro",
+  "classname": "TpKakuro",
+  "superclass": "TpBase",
+  "description": "Displays an interactive Kakuro puzzle.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-kakuro>\n  <ol>\n    <li><code># 23/0 30/0 # # 27/0 12/0 16/0</code></li>\n    <li><code>0/16 . . # 17/24 . . .</code></li>\n    <li><code>0/17 . . 15/29 . . . .</code></li>\n    <li><code>0/35 . . . . . 12/0 #</code></li>\n    <li><code># 0/7 . . 7/8 . . 7/0</code></li>\n    <li><code># 11/0 10/16 . . . . .</code></li>\n    <li><code>0/21 . . . . 0/5 . .</code></li>\n    <li><code>0/6 . . . # 0/3 . .</code></li>\n  </ol>\n</tp-kakuro>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "puzzle",
+      "description": "Whitespace-separated cells in newline-separated rows: #, ., fixed digits or down/across clues. Overrides the initial list.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-kakuro-change",
+      "emitted": true,
+      "description": "Emitted after a move, assistance action, reset or history change.",
+      "detail": "{ values: number[][], complete: boolean }"
+    },
+    {
+      "name": "tp-kakuro-complete",
+      "emitted": true,
+      "description": "Emitted when the player reaches a valid completed grid.",
+      "detail": "{ values: number[][], complete: boolean }"
+    }
+  ],
+  "cssproperties": [
+    {
+      "name": "--tp-kakuro-cell-size",
+      "default": "3rem",
+      "description": "Maximum width of each square."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Kakuro",
+    "introduction": "The custom `<tp-kakuro>` element displays an interactive Kakuro puzzle.",
+    "interactions": "#### Mouse interactions\n\n| Action | Result |\n| --- | --- |\n| Select a white cell | Selects the cell and highlights its across and down runs. Fixed digits remain read-only. |\n| Notes | Toggles pencil marks; entering a digit adds or removes that note. |\n| Undo / Redo | Reverses or reapplies the last edit, including notes, reveals and reset. |\n| Check | Toggles highlighting for runs whose current entries contradict their sum or repeat a digit. |\n| Reveal cell | Fills the selected editable cell, or the first empty cell, using a computed solution. |\n| Reveal solution | Fills every editable cell with a valid solution of the original clues. |\n| Reset | Restores the fixed digits and clears entries and notes; Undo can restore the previous game state. |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Moves through controls and white cells. |\n| Arrow keys | Moves to the next white cell in the chosen direction, skipping blocked cells. |\n| <kbd>1</kbd>–<kbd>9</kbd> | Enters a digit or toggles a note in the selected editable cell. |\n| <kbd>Backspace</kbd> / <kbd>Delete</kbd> / <kbd>0</kbd> | Clears the selected editable cell and its notes. |\n| <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd> | Undoes or redoes a move while a cell is focused. <kbd>Command</kbd> is also accepted; <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> redoes. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activates the focused action button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Opens User help for the component under the pointer, falling back to focus. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Opens contextual component documentation. |",
+    "keyboard": [
+      {
+        "key": "Arrow keys",
+        "description": "Moves to the next white cell in the chosen direction."
+      },
+      {
+        "key": "1–9",
+        "description": "Enters a digit or toggles a pencil mark in Notes mode."
+      },
+      {
+        "key": "Backspace / Delete / 0",
+        "description": "Clears the selected editable cell."
+      },
+      {
+        "key": "Ctrl+Z / Ctrl+Y",
+        "description": "Undoes or redoes a move; Command is also accepted."
+      }
+    ]
+  }
+}

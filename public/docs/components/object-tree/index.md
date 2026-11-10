@@ -141,6 +141,9 @@ bundler
 Basic usage
 : Expand and collapse the object’s branches to inspect its nested values.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Internal script
 : Expand the object initialized from an embedded JSON script.
 

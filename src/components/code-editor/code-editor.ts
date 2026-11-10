@@ -518,6 +518,21 @@ export const tpCodeEditorHighlightStyle = syntaxHighlighting(
 	]),
 );
 
+const markdownHighlightStyle = syntaxHighlighting(
+	HighlightStyle.define([
+		{
+			tag: tags.heading,
+			color: "var(--tp-code-editor-token-number, #7c3aed)",
+			fontWeight: "700",
+		},
+		{
+			tag: tags.special(tags.list),
+			color: "var(--tp-code-editor-token-keyword, #2563eb)",
+			fontWeight: "700",
+		},
+	]),
+);
+
 export const tpCodeEditorTheme = EditorView.theme({
 	"&": {
 		backgroundColor:
@@ -1000,6 +1015,7 @@ export class TpCodeEditor extends TpBase {
 	private panelObserver: MutationObserver | null = null;
 	private layoutObserver: ResizeObserver | null = null;
 	private observedInlineSize = -1;
+	private layoutFrame: number | null = null;
 	private actionPanelEl: HTMLDivElement | null = null;
 
 	/**
@@ -1454,6 +1470,9 @@ export class TpCodeEditor extends TpBase {
 		this.panelObserver = null;
 		this.layoutObserver?.disconnect();
 		this.layoutObserver = null;
+		if (this.layoutFrame !== null) cancelAnimationFrame(this.layoutFrame);
+		this.layoutFrame = null;
+		this.observedInlineSize = -1;
 		this.keyboardDropdownEl?.removeEventListener(
 			"tp-dropdown-toggle",
 			this.handleKeyboardDropdownToggle,
@@ -1533,7 +1552,13 @@ export class TpCodeEditor extends TpBase {
 			const measuredContentHeight = Math.ceil(
 				renderedLinesHeight + paddingTop + paddingBottom,
 			);
-			return Math.max(logicalLinesHeight, measuredContentHeight);
+			// CodeMirror virtualizes long documents: DOM lines alone omit the
+			// offscreen content and can shrink the host after line wrapping.
+			return Math.max(
+				logicalLinesHeight,
+				measuredContentHeight,
+				Math.ceil(this.editor.contentHeight),
+			);
 		} finally {
 			this.style.blockSize = previousBlockSizes.host;
 			this.container.style.blockSize = previousBlockSizes.container;
@@ -2184,6 +2209,7 @@ export class TpCodeEditor extends TpBase {
 				}
 
 				if (!update.docChanged) {
+					if (update.geometryChanged) this.scheduleLayoutSync();
 					return;
 				}
 
@@ -2230,6 +2256,7 @@ export class TpCodeEditor extends TpBase {
 				extensions.push(asciidocHighlightStyle);
 				break;
 			case "markdown":
+				extensions.push(markdownHighlightStyle);
 				extensions.push(tpMarkdownSyntaxPlugin);
 				extensions.push(tpMarkdownSyntaxTheme);
 				break;
@@ -2865,6 +2892,16 @@ export class TpCodeEditor extends TpBase {
 	 * Re-measures CodeMirror when a hidden tab/viewer becomes visible or when
 	 * its available inline size changes.
 	 */
+	private scheduleLayoutSync(): void {
+		if (this.layoutFrame !== null) return;
+		this.layoutFrame = requestAnimationFrame(() => {
+			this.layoutFrame = null;
+			if (!this.isConnected) return;
+			this.editor?.requestMeasure();
+			this.scheduleSyncHeight();
+		});
+	}
+
 	private startLayoutObserver(): void {
 		if (typeof ResizeObserver === "undefined" || this.container === null) {
 			return;
@@ -2878,8 +2915,7 @@ export class TpCodeEditor extends TpBase {
 			}
 
 			this.observedInlineSize = inlineSize;
-			this.editor?.requestMeasure();
-			this.scheduleSyncHeight();
+			this.scheduleLayoutSync();
 		});
 		this.layoutObserver.observe(this.container);
 	}

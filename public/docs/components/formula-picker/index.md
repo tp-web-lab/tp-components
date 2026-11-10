@@ -91,6 +91,9 @@ bundler
 Basic usage
 : Browse the formulas and select one using the picker controls.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Selection event
 : Select a formula to copy the emitted formula text into a clearable textfield.
 <!-- tp-docgen:example-descriptions:end -->

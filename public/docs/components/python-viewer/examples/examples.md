@@ -5,6 +5,20 @@
 :::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/python-viewer/python-viewer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-python-viewer");
+element1.setAttribute("src", "/docs/components/_shared/intro-projects/python.json");
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="src"}
 ::: tp-python-viewer { src="/docs/components/python-viewer/examples/example.json" }
 :::

@@ -289,7 +289,13 @@ export class TpComponentViewer extends TpBase {
 		this.preview = null;
 	}
 	private get attributesApi(): ApiItem[] {
-		return this.api?.attributes.filter((item) => !item.inherited) ?? [];
+		const documentShell = /-multi-(pages|slides)$/.test(
+			this.api?.tagname ?? "",
+		);
+		return (
+			this.api?.attributes.filter((item) => documentShell || !item.inherited) ??
+			[]
+		);
 	}
 
 	private async load(): Promise<void> {
@@ -548,6 +554,7 @@ export class TpComponentViewer extends TpBase {
 			() => this.renderPreview(),
 		);
 		this.syncControls();
+		this.syncButtonInteractions();
 		this.renderPreview();
 	}
 	private updatePanel(): void {
@@ -733,10 +740,49 @@ export class TpComponentViewer extends TpBase {
 
 	private syncButtonInteractions(): void {
 		const container = this.querySelector("[data-component-buttons]");
-		if (!container || !this.preview) return;
+		if (!container) return;
+		const documented = document.createElement("section");
+		// The Doc panel describes the public controls, never the current demo state.
+		const instructions = this.api?.userHelp?.interactions ?? "";
+		if (!/-multi-pages$/.test(this.componentTag)) {
+			const mouse =
+				instructions
+					.split(/#{2,4} Mouse interactions/)[1]
+					?.split(/#{2,4} Keyboard interactions/)[0] ?? "";
+			for (const line of mouse.split("\n")) {
+				if (!line.startsWith("|")) continue;
+				const cells = line
+					.split("|")
+					.slice(1, -1)
+					.map((cell) => cell.trim());
+				if (
+					cells.length < 2 ||
+					/^(?:-+|Control or gesture|Control|Action)$/.test(cells[0] ?? "")
+				)
+					continue;
+				const entry = document.createElement("span");
+				entry.dataset.helpLabel = (cells[0] ?? "")
+					.replace(/:tp-icon:\{[^}]*\}|<[^>]*>|[*`]/g, "")
+					.trim();
+				entry.dataset.helpDescription = (cells[1] ?? "").replace(
+					/<[^>]*>|[*`]/g,
+					"",
+				);
+				const icon = /:tp-icon:\{[^}]*name="([^"]+)"/.exec(cells[0] ?? "");
+				if (icon) entry.dataset.helpIcons = icon[1];
+				documented.append(entry);
+			}
+		}
+		if (
+			!/-multi-pages$/.test(this.componentTag) &&
+			!documented.childElementCount
+		)
+			return;
 		const legend = createHelpButtonTable(
-			this.preview as HTMLElement,
-			this.api?.userHelp?.interactions ?? "",
+			/-multi-pages$/.test(this.componentTag)
+				? document.createElement(this.componentTag)
+				: documented,
+			instructions,
 		);
 		if (legend) {
 			for (const label of legend.querySelectorAll("h4"))
@@ -791,7 +837,6 @@ export class TpComponentViewer extends TpBase {
 					}
 					this.syncControls();
 					this.syncSource();
-					this.syncButtonInteractions();
 				};
 				this.previewObserver = new MutationObserver(sync);
 				this.previewObserver.observe(preview, {

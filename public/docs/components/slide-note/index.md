@@ -115,6 +115,9 @@ bundler
 Basic usage
 : Expand Speaker notes, read the transcript and try the inherited speech controls. Collapse the panel while narration continues.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 External notes
 : Expand the notes loaded from a text file and start reading. The standard speech settings and pauses apply to this source too.
 <!-- tp-docgen:example-descriptions:end -->

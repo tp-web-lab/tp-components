@@ -377,3 +377,20 @@ tp-markdown-multi-pages,
   .tp-markdown-multi-pages-page-nav { grid-template-columns: minmax(0, 1fr); }
   .tp-markdown-multi-pages-page-nav-item { text-align: center; }
 }
+
+/* Auto-sized previews must contribute their content height to the iframe. */
+html[data-tp-auto-height]:not(:has(:fullscreen, [data-tp-fullscreen-target])) :is(tp-markdown-multi-pages, [tp-markdown-multi-pages-host], .tp-markdown-multi-pages-host):not(:fullscreen):not([data-tp-fullscreen-target]) {
+  position: relative;
+  inset: auto;
+  inline-size: 100%;
+  block-size: auto;
+  overflow: visible;
+}
+html[data-tp-auto-height]:not(:has(:fullscreen, [data-tp-fullscreen-target])) .tp-markdown-multi-pages-root {
+  block-size: auto;
+  grid-template-rows: auto auto;
+}
+html[data-tp-auto-height]:not(:has(:fullscreen, [data-tp-fullscreen-target])) :is(.tp-markdown-multi-pages, .tp-markdown-multi-pages > dl, .tp-markdown-multi-pages-sidebar-panel, .tp-markdown-multi-pages-content-panel, .tp-markdown-multi-pages-sidebar, .tp-markdown-multi-pages-content) {
+  block-size: auto;
+  overflow: visible;
+}

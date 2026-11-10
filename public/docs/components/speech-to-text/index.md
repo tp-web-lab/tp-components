@@ -95,6 +95,9 @@ bundler
 Basic usage
 : Start recognition, allow microphone access when requested and speak to inspect the transcript in a supported browser.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 French
 : Speak French and inspect the transcript with French recognition configured.
 

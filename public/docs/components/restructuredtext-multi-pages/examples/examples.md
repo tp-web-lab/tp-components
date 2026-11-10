@@ -6,5 +6,29 @@
 :::
 ::::
 ```
+
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/box/box.js";
+import "/components/restructuredtext/restructuredtext.js";
+import "/components/restructuredtext-multi-pages/restructuredtext-multi-pages.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.setAttribute("style", "position: relative; contain: layout; block-size: 32rem; padding: 0;");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("tp-restructuredtext-multi-pages");
+element2.setAttribute("repository", "/docs/components/_shared/intro-documents/restructuredtext");
+element2.setAttribute("label", "A small guide");
+element2.setAttribute("menu", "");
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
 :::::
 ::::::

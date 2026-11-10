@@ -102,6 +102,9 @@ bundler
 Basic usage
 : Edit and run the supplied restructuredtext example, then compare the source with its output.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Single source file
 : Load the standalone restructuredtext file through src and inspect its output. Open the source editor to inspect the file used as the generated project's entry point.
 <!-- tp-docgen:example-descriptions:end -->

@@ -96,6 +96,12 @@ export function latexMarkup(html) {
 		) {
 			return `${pad}\\rawhtml${inline.has(tag) || inlineContext ? "*" : ""}${rawBody(serializeOuter(node))}`;
 		}
+		if (tag === "img" && node.parentNode?.tagName === "tp-carousel" &&
+			node.attrs.every(({name}) => ["src", "alt"].includes(name))) {
+			const src = node.attrs.find(({name}) => name === "src")?.value;
+			const alt = node.attrs.find(({name}) => name === "alt")?.value;
+			if (src) return `${pad}\\includegraphics${alt ? `[alt=${alt}]` : ""}{${src}}`;
+		}
 		if (tag === "script")
 			return `${pad}\\wcScript${attrs}${rawBody(
 				children(node)

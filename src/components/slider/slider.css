@@ -82,3 +82,13 @@ tp-slider:not([scrollbar])::-webkit-scrollbar {
 		scrollbar-width: auto;
 	}
 }
+
+/* Vertical strips retain the same native scrolling and scrollbar controls. */
+tp-slider[orientation="vertical"] { flex-direction: column; overflow-x: hidden; overflow-y: auto; }
+tp-slider[orientation="vertical"] > img { inline-size: 100%; block-size: auto; }
+tp-slider[orientation="vertical"]::-webkit-scrollbar { width: var(--tp-scrollbar-size); }
+tp-slider[orientation="vertical"]:not([scrollbar])::-webkit-scrollbar { width: 0; }
+tp-slider[orientation="vertical"][scrollbar].overflowing {
+ padding-block-end: 0;
+ padding-inline-end: max(0px, calc(var(--tp-scrollbar-size) - var(--tp-slider-native-scrollbar-size, 0px)));
+}

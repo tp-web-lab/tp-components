@@ -87,6 +87,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Edit double and submit to inspect failing tests, then correct addition to multiplication and submit again. Reset restores the initial code.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs

@@ -18,6 +18,8 @@ import { describeAttributeControl } from "./interactive-attribute-examples.mjs";
 
 /** Editorial objectives for the existing examples; no descriptions are inferred from titles alone. */
 const basic = {
+ puzzle: "Assemble the mountain-lake image from twelve interlocking pieces. Drag a piece, open its rotation menu with a right-click, and use Show image to compare the target.",
+ kakuro: "Complete the Wikipedia cross-sum grid with digits from 1 to 9, without repeating a digit within a run. Try Notes, Check and the reveal actions.",
  "word-cloud": "Compare the tp logo with the ranked word groups inside the circular silhouette. Empty list items create additional size steps between groups.",
  "latex-viewer": "Show the source, edit the section or formula and run it. Switch to Generated HTML to inspect the conversion.",
  "latex-playground": "Edit main.tex, then run the project to update the heading and MathJax formula. Reset restores the original source.",
@@ -181,6 +183,8 @@ const basic = {
 		"Resize the example to observe how the navigation and main content share the available space.",
 	"single-choice-question":
 		"Choose the capital of France and submit the question to inspect its feedback and solution.",
+	control: "Change Color or Theme and observe the inline code and background inside the box. Open Controllers to show or hide the available controls; the surrounding page keeps its colors.",
+	carousel: "Use Previous image and Next image to browse three illustrations, or focus the image viewport and use the arrow keys.",
 	slider: "Scroll horizontally to reveal any of the four content panels that do not fit in the available width.",
 	solitaire:
 		"Play the card layout using the game’s available moves and controls.",
@@ -216,6 +220,9 @@ const basic = {
 };
 
 const variants = {
+ "Triangular pieces": "Assemble equilateral triangles within their adapted board outline. Try the 60° rotation controls and Show image.",
+ "Hexagonal pieces": "Assemble regular hexagons in a honeycomb layout. The thirteen whole pieces preserve the requested count; rotations use 60° steps.",
+ "Square pieces": "Assemble nine square tiles that start upright. Compare this straight-edged layout with the interlocking pieces in Basic usage.",
 	"Derivatives of tan(x)":
 		"Select all correct derivatives of the tangent among five MathJax-rendered LaTeX expressions, then submit to compare the equivalent formulas and the distractors.",
 	"Markup languages":
@@ -398,6 +405,11 @@ const additional = {
 };
 
 export function describeExample(component, label) {
+ if (label === "Javascript API") return "Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.";
+ if (component === "control" && label === "All controllers") return "All seven entries start visible. Uncheck All controllers to hide them, then select individual entries.";
+ if (component === "control" && label === "Initially hidden") return "Only the Controllers button is initially visible. Open it and select the controllers you want to display.";
+ if (component === "carousel" && label === "Vertical navigation") return "Browse the images vertically using the buttons, a vertical swipe or the Up and Down arrow keys.";
+ if (component === "carousel" && label === "Looping navigation") return "Use Next image after the last illustration to return to the first; Previous image also wraps in the other direction.";
  if (component === "latex-playground" && label === "A document in sections") return "Edit the introduction, calculation or conclusion file, then run main.tex to assemble the document with input commands.";
  if (component === "latex-playground" && label === "A document with a TikZ figure") return "Edit the explanation and the separate TikZ figure, then run main.tex to render both in one document.";
  if (label === "Basic usage" && (component === "latex-viewer" || component === "latex-playground")) return basic[component];

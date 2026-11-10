@@ -4,6 +4,25 @@
 \rawhtml|<tp-mathfield label="Formula" value="E = mc^2" clearable=""></tp-mathfield>|
 \end{document}
 
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/math/math.js";
+import "/components/mathfield/mathfield.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-mathfield");
+element1.setAttribute("label", "Formula");
+element1.setAttribute("value", "E = mc^2");
+element1.setAttribute("clearable", "");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
 % !tp-example Inline in prose
 \documentclass{article}
 \begin{document}

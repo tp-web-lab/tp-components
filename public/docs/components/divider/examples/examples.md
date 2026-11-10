@@ -11,6 +11,35 @@ Secondary content group.
 ::::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/box/box.js";
+import "/components/divider/divider.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.append(document.createTextNode("\n      "));
+
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("Primary content group."));
+element1.append(element2);
+element1.append(document.createTextNode("\n      "));
+
+const element3 = document.createElement("tp-divider");
+element1.append(element3);
+element1.append(document.createTextNode("\n      "));
+
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("Secondary content group."));
+element1.append(element4);
+element1.append(document.createTextNode("\n    "));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Custom style"}
 .divider-custom-style tp-divider { --tp-divider-color: var(--tp-brand-fill-mid); --tp-divider-thickness: 4px; --tp-divider-margin-block: 0.75rem; }
 

@@ -88,6 +88,9 @@ bundler
 Basic usage
 : Record a short response, stop, replay it and download the audio. Clear removes the local recording.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Spoken answer
 : In Safari, record the word blue, then stop and review the transcription in the answer field. Other browsers record audio only and show a warning. Submit checks the editable answer as a single blank.
 <!-- tp-docgen:example-descriptions:end -->

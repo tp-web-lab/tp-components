@@ -4,6 +4,21 @@
 \wcTpSlopeSimulator{}
 \end{document}
 
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/slope-simulator/slope-simulator.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-slope-simulator");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
 % !tp-example Tour of Lombardy 2026
 \documentclass{article}
 \begin{document}

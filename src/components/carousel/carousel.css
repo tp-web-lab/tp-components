@@ -1,0 +1,12 @@
+/* Keep carousel sizing and contain fitting ahead of the slider defaults, regardless of load order. */
+tp-carousel { display: block; min-inline-size: 0; }
+tp-carousel > tp-slider[data-carousel-viewport] { inline-size: 100%; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; border-radius: var(--tp-border-radius-sm, .25rem); background: var(--tp-neutral-fill-softer); }
+tp-carousel > tp-slider[data-carousel-viewport][orientation="vertical"] { scroll-snap-type: y mandatory; overscroll-behavior-x: auto; overscroll-behavior-y: contain; }
+tp-carousel > tp-slider[data-carousel-viewport] > :is(img, picture, figure) { flex: 0 0 100%; inline-size: 100%; block-size: 100%; min-block-size: 0; max-inline-size: none; margin: 0; object-fit: contain; scroll-snap-align: start; scroll-snap-stop: always; }
+tp-carousel > tp-slider[data-carousel-viewport] > picture { display: block; }
+tp-carousel > tp-slider[data-carousel-viewport] > figure { display: flex; flex-direction: column; align-items: center; }
+tp-carousel > tp-slider[data-carousel-viewport] > :is(picture, figure) img { display: block; inline-size: 100%; block-size: 100%; min-block-size: 0; object-fit: contain; }
+tp-carousel > tp-slider[data-carousel-viewport] > figure img { flex: 1 1 0; }
+tp-carousel > tp-slider[data-carousel-viewport] > figure figcaption { flex: 0 0 auto; padding: .5rem; text-align: center; }
+tp-carousel > [data-carousel-controls] { display: flex; align-items: center; justify-content: center; gap: .75rem; padding-block: .5rem; }
+tp-carousel [data-carousel-counter] { font-variant-numeric: tabular-nums; min-inline-size: 4ch; text-align: center; }

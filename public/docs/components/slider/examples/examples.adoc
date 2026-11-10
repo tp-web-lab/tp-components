@@ -6,7 +6,7 @@
 ========
 [tp-box,style="max-inline-size: 28rem"]
 ======
-[tp-slider%scrollbar,item-width="10rem",gap="1rem"]
+[tp-slider%scrollbar,item-width="10rem",gap="1rem",style="max-block-size: 8rem"]
 =====
 [tp-box]
 ====
@@ -30,6 +30,50 @@ Fourth
 =====
 ======
 ========
+
+.Javascript API
+======
+[script,type="module"]
+====
+import "/components/box/box.js";
+import "/components/slider/slider.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.setAttribute("style", "max-inline-size: 28rem");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("tp-slider");
+element2.setAttribute("scrollbar", "");
+element2.setAttribute("item-width", "10rem");
+element2.setAttribute("gap", "1rem");
+element2.setAttribute("style", "max-block-size: 8rem");
+element2.append(document.createTextNode("\n    "));
+
+const element3 = document.createElement("tp-box");
+element3.append(document.createTextNode("First"));
+element2.append(element3);
+
+const element4 = document.createElement("tp-box");
+element4.append(document.createTextNode("Second"));
+element2.append(element4);
+
+const element5 = document.createElement("tp-box");
+element5.append(document.createTextNode("Third"));
+element2.append(element5);
+
+const element6 = document.createElement("tp-box");
+element6.append(document.createTextNode("Fourth"));
+element2.append(element6);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+====
+======
 
 .Image gallery
 =========

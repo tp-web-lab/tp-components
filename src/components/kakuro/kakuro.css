@@ -1,0 +1,16 @@
+tp-kakuro { display: block; margin-block: 1rem; max-inline-size: 100%; }
+tp-kakuro .tp-kakuro-game { display: grid; gap: 1rem; }
+tp-kakuro .tp-kakuro-toolbar { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+tp-kakuro .tp-kakuro-grid { display: grid; grid-template-columns: repeat(var(--columns), minmax(0,1fr)); inline-size: min(100%, calc(var(--columns) * var(--tp-kakuro-cell-size, 3rem))); border: 1px solid var(--tp-neutral-border-normal, #666); }
+tp-kakuro .tp-kakuro-cell { position: relative; aspect-ratio: 1; min-inline-size: 0; border: 1px solid var(--tp-neutral-border-normal, #666); box-sizing: border-box; background: var(--tp-neutral-fill-normal, #fff); color: var(--tp-neutral-text-normal, #222); }
+tp-kakuro .tp-kakuro-block { background: var(--tp-neutral-text-normal, #222); color: var(--tp-neutral-fill-normal, #fff); }
+tp-kakuro .tp-kakuro-clue { background-image: linear-gradient(45deg, transparent calc(50% - .5px), currentColor 50%, transparent calc(50% + .5px)); }
+tp-kakuro .tp-kakuro-down { position: absolute; bottom: 4%; left: 8%; font-size: .85em; }
+tp-kakuro .tp-kakuro-across { position: absolute; top: 4%; right: 8%; font-size: .85em; }
+tp-kakuro input { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; min-inline-size: 0; padding: 0; border: 0; border-radius: 0; box-sizing: border-box; text-align: center; font: 700 1.35em/1 system-ui; color: inherit; background: transparent; }
+tp-kakuro input:focus-visible { outline: 3px solid var(--tp-brand-border-normal, #27849a); outline-offset: -3px; z-index: 1; }
+tp-kakuro .tp-kakuro-related { background: var(--tp-brand-fill-softer, #eef7f8); }
+tp-kakuro .tp-kakuro-given input { font-weight: 900; color: var(--tp-brand-text-colorful, #246f81); }
+tp-kakuro input[aria-invalid=true] { background: var(--tp-danger-fill-softer, #ffe5e5); color: var(--tp-danger-text-colorful, #9f2525); }
+tp-kakuro .tp-kakuro-notes { position: absolute; inset: 3%; display: grid; grid-template-columns: repeat(3,1fr); pointer-events: none; font: .65em/1 system-ui; text-align: center; align-items: center; }
+tp-kakuro .tp-kakuro-status { margin: 0; }

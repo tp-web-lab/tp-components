@@ -20,6 +20,27 @@
                - Add components
                - Publish the page
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/markdown/markdown.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-markdown");
+            element1.append(document.createTextNode("\n  "));
+
+            const element2 = document.createElement("script");
+            element2.setAttribute("type", "tp/markdown");
+            element2.textContent = "\n## A short document\n\nThis paragraph uses **Markdown**.\n\n- Write content\n- Add components\n- Publish the page\n  ";
+            element1.append(element2);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: Mathematical notation
 
          .. tp-markdown::

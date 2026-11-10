@@ -3,6 +3,8 @@ import {chromium} from '@playwright/test';
 const browser=await chromium.launch();
 try {
  const page=await browser.newPage({viewport:{width:1200,height:900}});
+ const errors=[];
+ page.on('pageerror',error=>errors.push(error.message));
  await page.goto(`${process.env.TP_VIEWER_TEST_URL ?? 'http://127.0.0.1:4197'}/docs/components/component-viewer/demo.html`);
  await page.locator('[data-component-mode] input').nth(1).check();
  await page.locator('[data-component-source-toggle]').click();
@@ -40,5 +42,6 @@ try {
  await source.getByRole('tab',{name:'tp-latex',exact:true}).click();
  await page.waitForFunction(()=>document.querySelector('[data-component-source-format=latex]')?.value.includes('\\wcTpWordCloud'));
  assert.match(await editor.evaluate(el=>el.value),/\\wcTpIcon/);
+ assert.deepEqual(errors,[], 'Viewer operations must not produce browser errors');
  console.log('Passed: five named tabs, readonly LaTeX, live content, two component types, iframe growth/shrink, editor growth/shrink, tab switching and narrow width.');
 } finally {await browser.close();}

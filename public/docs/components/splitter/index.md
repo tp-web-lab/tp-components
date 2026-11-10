@@ -86,6 +86,9 @@ bundler
 Basic usage
 : Drag the divider to resize the two adjacent panels.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Nested splitters
 : Resize the side-by-side panels, then resize the vertically stacked panels inside the right-hand panel. Each divider works independently, with both pointer and keyboard controls.
 <!-- tp-docgen:example-descriptions:end -->

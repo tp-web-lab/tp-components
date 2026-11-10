@@ -8,7 +8,7 @@ tp-box {
 }
 
 tp-box :where(code, samp, tt) {
-  color: var(--tp-box-color, var(--tp-text-body, inherit));
+  color: var(--tp-box-color, var(--tp-brand-text-colorful, inherit));
 }
 
 /* The box padding supplies the final spacing, including for markup paragraphs. */

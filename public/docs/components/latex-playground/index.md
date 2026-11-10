@@ -80,6 +80,9 @@ bundler
 Basic usage
 : Edit main.tex, then run the project to update the heading and MathJax formula. Reset restores the original source.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 A document in sections
 : Edit the introduction, calculation or conclusion file, then run main.tex to assemble the document with input commands.
 

@@ -29,6 +29,7 @@ function mockFetch() {
 }
 async function mount(
 	source = '<tp-component-viewer tag="tp-button"></tp-component-viewer>',
+	expectedTag = "tp-button",
 ) {
 	document.body.innerHTML = source;
 	const viewer = document.querySelector(
@@ -45,7 +46,7 @@ async function mount(
 		.querySelectorAll<HTMLInputElement>("[data-component-mode] input")[1]
 		?.click();
 	await vi.waitFor(() =>
-		expect(viewer.querySelector("iframe")?.srcdoc).toContain("tp-button"),
+		expect(viewer.querySelector("iframe")?.srcdoc).toContain(expectedTag),
 	);
 	return viewer;
 }
@@ -490,7 +491,9 @@ it("shows the complete mouse and keyboard instructions in the first documentatio
 		viewer.querySelector("[data-component-interactions]")?.textContent,
 	).toContain("Dismiss the notice.");
 	expect(
-		viewer.querySelectorAll("[data-component-interactions] table"),
+		viewer.querySelectorAll(
+			"[data-component-mouse] table, [data-component-keyboard] table",
+		),
 	).toHaveLength(2);
 	expect(
 		viewer.querySelectorAll("[data-component-interactions] kbd"),
@@ -636,13 +639,17 @@ it("edits, clears and resets author content while synchronizing all markup sourc
 		expect(editor.value).toContain("Original label");
 });
 
-it("documents the live component's own buttons and refreshes the legend when controls change", async () => {
+it("documents all declared controls independently of changes in the demo", async () => {
 	mockFetch().mockImplementation(
 		async () =>
 			new Response(
 				JSON.stringify({
 					...api,
 					tagname: "tp-console",
+					userHelp: {
+						interactions:
+							"#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Copy console | Copy displayed messages. |\n| Clear console | Remove displayed messages. |\n\n#### Keyboard interactions",
+					},
 					examples: [
 						{ code: "<tp-console><tp-button>Try me</tp-button></tp-console>" },
 					],
@@ -679,7 +686,7 @@ it("documents the live component's own buttons and refreshes the legend when con
 	).toBeNull();
 	target.replaceChildren();
 	await vi.waitFor(() =>
-		expect(legend?.textContent).toContain("No component-specific buttons."),
+		expect(legend?.textContent).toContain("Clear console"),
 	);
 });
 
@@ -728,4 +735,41 @@ it("offers closed API unions without catalog entries and keeps open unions edita
 	expect(shapes?.querySelectorAll("input").length).toBe(5);
 	shapes?.querySelectorAll<HTMLInputElement>("input")[4]?.click();
 	expect(target.getAttribute("shape")).toBe("hexagon");
+});
+
+it("offers inherited multi-page attributes in slide demos", async () => {
+	vi.spyOn(globalThis, "fetch").mockImplementation(
+		async () =>
+			new Response(
+				JSON.stringify({
+					...api,
+					tagname: "tp-latex-multi-slides",
+					examples: [
+						{
+							code: '<tp-latex-multi-slides label="My slides"></tp-latex-multi-slides>',
+						},
+					],
+					attributes: [
+						{ name: "label", type: "string", default: '""', inherited: true },
+						{
+							name: "timing",
+							type: "number",
+							default: "5000",
+							inherited: true,
+						},
+					],
+				}),
+			),
+	);
+	const viewer = await mount(
+		'<tp-component-viewer tag="tp-latex-multi-slides"></tp-component-viewer>',
+		"tp-latex-multi-slides",
+	);
+	expect(
+		viewer.querySelector("[data-component-controls]")?.textContent,
+	).toContain("label");
+	expect(
+		viewer.querySelector("[data-component-controls]")?.textContent,
+	).toContain("timing");
+	expect(viewer.querySelector("iframe")?.srcdoc).toContain('label="My slides"');
 });

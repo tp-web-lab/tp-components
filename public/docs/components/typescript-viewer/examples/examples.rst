@@ -10,6 +10,21 @@
          .. tp-typescript-viewer::
             :src: /docs/components/_shared/intro-projects/typescript.json
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/typescript-viewer/typescript-viewer.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-typescript-viewer");
+            element1.setAttribute("src", "/docs/components/_shared/intro-projects/typescript.json");
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: src
 
          .. tp-typescript-viewer::

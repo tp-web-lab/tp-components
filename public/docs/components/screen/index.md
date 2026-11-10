@@ -82,6 +82,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Try the absolute and relative format rows, then use OK to apply a format or Cancel to keep the last choice. Type into the field and reopen the chooser to check that the applied page keeps its state.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs

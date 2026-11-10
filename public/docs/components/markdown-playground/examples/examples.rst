@@ -10,6 +10,22 @@
          .. tp-markdown-playground::
             :src: /docs/components/_shared/intro-projects/markdown.json
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/markdown/markdown.js";
+            import "/components/markdown-playground/markdown-playground.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-markdown-playground");
+            element1.setAttribute("src", "/docs/components/_shared/intro-projects/markdown.json");
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: Single source file
 
          .. tp-markdown-playground::

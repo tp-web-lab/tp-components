@@ -100,6 +100,9 @@ bundler
 Basic usage
 : Edit the expression, open the mathfield mark menu and choose latexmath or asciimath. Observe the active check and open the preview; changing notation preserves the source text.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Inline in prose
 : Edit the mathematical field embedded directly in a sentence.
 

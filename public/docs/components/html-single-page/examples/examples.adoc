@@ -15,5 +15,27 @@
 ====
 =====
 ======
+
+.Javascript API
+======
+[script,type="module"]
+====
+import "/components/html-single-page/html-single-page.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-html-single-page");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/html");
+element2.textContent = "\n\u003ch2>A short guide\u003c/h2>\n\u003cp>This document is rendered as a single page.\u003c/p>\n\u003ch3>Getting started\u003c/h3>\n\u003cul>\u003cli>Read the introduction\u003c/li>\u003cli>Try a component\u003c/li>\u003c/ul>\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+====
+======
 ----
 ========

@@ -110,6 +110,9 @@ bundler
 Basic usage
 : Inspect the placement of the card header, main content and footer.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Image card
 : Inspect the image and main content inside the card.
 

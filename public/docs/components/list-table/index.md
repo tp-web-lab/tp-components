@@ -83,6 +83,9 @@ bundler
 Basic usage
 : Read the country and capital data converted from nested lists. Each outer item is a row and each inner item is a cell.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Single column
 : Compare a simple ordered list with its one-column table. The first item becomes the heading.
 <!-- tp-docgen:example-descriptions:end -->

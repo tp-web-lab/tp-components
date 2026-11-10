@@ -110,6 +110,9 @@ bundler
 Basic usage
 : Fill the Sudoku grid while respecting its row, column and region constraints.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 sudoku ⭐⭐
 : Try the sudoku puzzle at the difficulty indicated by the stars and use its feedback to refine your answers.
 

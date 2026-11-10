@@ -471,6 +471,9 @@ bundler
 Basic usage
 : Read the Functions label at the left of the toolbar. Use the bottom-left Code button to edit, load or save the source and try F1, Reset definition and Play.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Author directives
 : Use the settings below the graph to change the graph kind, axes, grid, curves and points. Use Code at the bottom left to edit the source, load or save a .txt file, toggle the editor toolbar with F1 and apply with Play.
 

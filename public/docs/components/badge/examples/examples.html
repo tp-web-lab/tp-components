@@ -2,12 +2,33 @@
   <template>
     <div role="example" label="Basic usage">
       <p>
-        Build status: <tp-badge variant="success" pulse>Ready</tp-badge>
+        Build status: <tp-badge variant="success" pulse="">Ready</tp-badge>
       </p>
     </div>
 
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/badge/badge.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("p");
+      element1.append(document.createTextNode("\n  Build status: "));
+
+      const element2 = document.createElement("tp-badge");
+      element2.setAttribute("variant", "success");
+      element2.setAttribute("pulse", "");
+      element2.append(document.createTextNode("Ready"));
+      element1.append(element2);
+      element1.append(document.createTextNode("\n"));
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
     <div role="example" label="With icon">
-      <tp-badge outlined><tp-icon name="file_type_vite" library="languages"></tp-icon> Vite<tp-divider orientation="vertical"></tp-divider>8.1.5</tp-badge>
+      <tp-badge outlined=""><tp-icon name="file_type_vite" library="languages"></tp-icon> Vite<tp-divider orientation="vertical"></tp-divider>8.1.5</tp-badge>
     </div>
 
     <div role="example" label="Status labels">

@@ -79,6 +79,9 @@ bundler
 Basic usage
 : Activate the source link to open the configured repository.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Repository providers
 : Compare source links for GitHub, GitLab and a generic Git address. The generic example address is illustrative.
 <!-- tp-docgen:example-descriptions:end -->

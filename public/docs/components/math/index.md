@@ -91,6 +91,9 @@ bundler
 Basic usage
 : Read the Pythagorean identity inline with its surrounding sentence. The formula is rendered as SVG, not as editable source text.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Script and display style
 : Compare the same fraction in inline and display style, supplied by inert tp/math scripts. Display style enlarges the fraction and places it in a centered block.
 

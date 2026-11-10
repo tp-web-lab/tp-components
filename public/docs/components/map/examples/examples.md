@@ -5,6 +5,24 @@
 :::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/map/map.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-map");
+element1.setAttribute("lat", "48.3904");
+element1.setAttribute("lon", "-4.4861");
+element1.setAttribute("zoom", "13");
+element1.setAttribute("title", "Brest, Brittany, France");
+element1.setAttribute("marker", "");
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Multiple markers"}
 ::: tp-map { title="Cities in Brittany" fit-markers }
 Brest

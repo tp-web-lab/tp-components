@@ -10,6 +10,21 @@
          .. tp-javascript-playground::
             :src: /docs/components/_shared/intro-projects/javascript.json
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/javascript-playground/javascript-playground.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-javascript-playground");
+            element1.setAttribute("src", "/docs/components/_shared/intro-projects/javascript.json");
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: Single source file
 
          .. tp-javascript-playground::

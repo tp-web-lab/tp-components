@@ -163,3 +163,39 @@ test("reader interactions are loaded from the dedicated help file and refreshed 
 		await rm(root, { recursive: true, force: true });
 	}
 });
+
+test("document shells retain inherited attributes through multiple levels", async () => {
+	const root = await mkdtemp(join(tmpdir(), "tp-document-api-"));
+	try {
+		const sources: Record<string, string> = {
+			base: "/** @tagname tp-base\n * @attr {string} generic - Base only.\n */\nexport class TpBase {}",
+			"markup-multi-pages":
+				'import { TpBase } from "../base/base.js";\n/** @tagname tp-markup-multi-pages\n * @attr {string} repository = "/docs" - Root directory.\n * @attr {string} label = "" - Toolbar title.\n */\nexport class TpMarkupMultiPages extends TpBase {}',
+			"markup-multi-slides":
+				'import { TpMarkupMultiPages } from "../markup-multi-pages/markup-multi-pages.js";\n/** @tagname tp-markup-multi-slides\n * @attr {number} timing = 5000 - Step duration.\n */\nexport class TpMarkupMultiSlides extends TpMarkupMultiPages {}',
+			"latex-multi-slides":
+				'import { TpMarkupMultiSlides } from "../markup-multi-slides/markup-multi-slides.js";\n/** @tagname tp-latex-multi-slides\n * @attr {string} label = "Slides" - Custom title.\n */\nexport class TpLatexMultiSlides extends TpMarkupMultiSlides {}',
+		};
+		for (const [name, source] of Object.entries(sources)) {
+			const dir = join(root, "src/components", name);
+			await mkdir(dir, { recursive: true });
+			await writeFile(join(dir, `${name}.ts`), source);
+		}
+		await generateComponentApiFiles(root, "src/components");
+		const api = JSON.parse(
+			await readFile(
+				join(root, "src/components/latex-multi-slides/latex-multi-slides.json"),
+				"utf8",
+			),
+		);
+		assert.deepEqual(
+			api.attributes.map((a: { name: string }) => a.name),
+			["label", "repository", "timing"],
+		);
+		assert.equal(api.attributes[0].default, '"Slides"');
+		assert.equal(api.attributes[1].inherited, true);
+		assert.equal(api.attributes[2].default, "5000");
+	} finally {
+		await rm(root, { recursive: true, force: true });
+	}
+});

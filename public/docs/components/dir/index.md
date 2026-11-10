@@ -99,6 +99,9 @@ bundler
 Basic usage
 : Switch the reading direction and observe the layout of the example text.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Auto mode
 : Observe the controller following the document’s reading direction in automatic mode.
 

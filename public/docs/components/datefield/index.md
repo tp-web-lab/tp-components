@@ -85,6 +85,9 @@ bundler
 Basic usage
 : Choose or enter a date using the field and its date controls.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Inline named field
 : Edit the inline field. Its role content supplies the form name, while value supplies the initial data; inspect the source to compare the shared convention across markup languages.
 <!-- tp-docgen:example-descriptions:end -->

@@ -110,6 +110,9 @@ bundler
 Basic usage
 : Inspect the rendered output of the supplied typescript example and open the source panel to compare it with the code.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 src
 : Inspect the output produced by loading the external source file.
 

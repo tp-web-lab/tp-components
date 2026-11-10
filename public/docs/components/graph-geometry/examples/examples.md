@@ -5,6 +5,19 @@
 :::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/graph-geometry/graph-geometry.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-graph-geometry");
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Attached points"}
 :::: tp-graph-geometry
 ::: script { type="tp/geometry" }

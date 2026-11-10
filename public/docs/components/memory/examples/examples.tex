@@ -10,6 +10,39 @@
 }
 \end{document}
 
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/memory/memory.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-memory");
+element1.setAttribute("label", "Match the fruits");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("ol");
+
+const element3 = document.createElement("li");
+element3.append(document.createTextNode("Apple"));
+element2.append(element3);
+
+const element4 = document.createElement("li");
+element4.append(document.createTextNode("Pear"));
+element2.append(element4);
+
+const element5 = document.createElement("li");
+element5.append(document.createTextNode("Plum"));
+element2.append(element5);
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
 % !tp-example Numbers 0 to 9
 \documentclass{article}
 \begin{document}

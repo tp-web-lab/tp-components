@@ -758,11 +758,17 @@ export class TpTheme extends TpBase {
 		}
 
 		const parent = this.parentElement;
-		if (parent?.tagName === "TP-TOOLBAR") {
+		if (
+			parent?.tagName === "TP-TOOLBAR" &&
+			parent.parentElement?.tagName !== "TP-CONTROL"
+		) {
 			return parent.parentElement;
 		}
 
-		if (parent?.parentElement?.tagName === "TP-TOOLBAR") {
+		if (
+			parent?.parentElement?.tagName === "TP-TOOLBAR" &&
+			parent.parentElement.parentElement?.tagName !== "TP-CONTROL"
+		) {
 			return parent.parentElement.parentElement;
 		}
 
@@ -806,6 +812,7 @@ export class TpTheme extends TpBase {
 	private getEffectiveParent(): HTMLElement | null {
 		const containerTags = new Set([
 			"TP-TOOLBAR",
+			"TP-CONTROL",
 			"TP-MENU",
 			"TP-DROPDOWN",
 			"TP-BUTTON-GROUP",

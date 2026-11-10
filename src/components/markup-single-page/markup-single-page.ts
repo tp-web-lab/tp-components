@@ -31,7 +31,8 @@ export type TpMarkupSinglePageLanguage =
 	| "html"
 	| "markdown"
 	| "asciidoc"
-	| "restructuredtext";
+	| "restructuredtext"
+	| "latex";
 
 type InlineSource = {
 	language: TpMarkupSinglePageLanguage;
@@ -48,6 +49,8 @@ const LANGUAGE_BY_SCRIPT_TYPE: ReadonlyMap<string, TpMarkupSinglePageLanguage> =
 		["tp/adoc", "asciidoc"],
 		["tp/restructuredtext", "restructuredtext"],
 		["tp/rst", "restructuredtext"],
+		["tp/latex", "latex"],
+		["tp/tex", "latex"],
 	]);
 
 const SCRIPT_TYPE_BY_LANGUAGE: Record<TpMarkupSinglePageLanguage, string> = {
@@ -55,6 +58,7 @@ const SCRIPT_TYPE_BY_LANGUAGE: Record<TpMarkupSinglePageLanguage, string> = {
 	markdown: "tp/markdown",
 	asciidoc: "tp/asciidoc",
 	restructuredtext: "tp/restructuredtext",
+	latex: "tp/latex",
 };
 
 function escapeHtml(value: string): string {
@@ -68,6 +72,7 @@ function escapeHtml(value: string): string {
 
 function getLanguageFromPath(path: string): TpMarkupSinglePageLanguage | null {
 	const pathname = path.split(/[?#]/, 1)[0]?.toLowerCase() ?? "";
+	if (pathname.endsWith(".tex") || pathname.endsWith(".latex")) return "latex";
 	if (pathname.endsWith(".html") || pathname.endsWith(".htm")) return "html";
 	if (pathname.endsWith(".md") || pathname.endsWith(".markdown"))
 		return "markdown";
@@ -81,6 +86,7 @@ function getLanguageFromPath(path: string): TpMarkupSinglePageLanguage | null {
 function getRendererTagName(
 	language: TpMarkupSinglePageLanguage,
 ): string | null {
+	if (language === "latex") return "tp-latex";
 	if (language === "markdown") return "tp-markdown";
 	if (language === "asciidoc") return "tp-asciidoc";
 	if (language === "restructuredtext") return "tp-restructuredtext";
@@ -88,6 +94,7 @@ function getRendererTagName(
 }
 
 function getRenderedEventName(language: TpMarkupSinglePageLanguage): string {
+	if (language === "latex") return "tp-latex-rendered";
 	if (language === "markdown") return "tp-markdown-rendered";
 	if (language === "asciidoc") return "tp-asciidoc-rendered";
 	if (language === "restructuredtext") return "tp-restructuredtext-rendered";
@@ -95,9 +102,9 @@ function getRenderedEventName(language: TpMarkupSinglePageLanguage): string {
 }
 
 /**
- * The custom `<tp-markup-single-page>` element renders one Markdown, AsciiDoc, reStructuredText or HTML document.
+ * The custom `<tp-markup-single-page>` element renders one Markdown, AsciiDoc, reStructuredText, LaTeX or HTML document.
  *
- * @summary Renders one Markdown, AsciiDoc, reStructuredText or HTML document.
+ * @summary Renders one Markdown, AsciiDoc, reStructuredText, LaTeX or HTML document.
  * @tagname tp-markup-single-page
  * @attr {string} src = "" - Source file. The extension selects the renderer.
  * @attr {string | null} toolbar = null - Optional comma-separated controls: code, calc, postit, clock, lang, color, theme, screen, fullscreen. Empty enables all; absent hides the toolbar.
@@ -105,7 +112,7 @@ function getRenderedEventName(language: TpMarkupSinglePageLanguage): string {
  * @attr {string} label = "" - Text displayed in the center of the optional toolbar.
  * @attr {string} langs = "en" - Candidate document languages. The first uses the source directory; others use language subdirectories.
  * @event tp-markup-single-page-rendered Emitted after the selected renderer completes.
- * @eventdetail tp-markup-single-page-rendered { language: "html" | "markdown" | "asciidoc" | "restructuredtext"; src: string }
+ * @eventdetail tp-markup-single-page-rendered { language: "html" | "markdown" | "asciidoc" | "restructuredtext" | "latex"; src: string }
  * @example
  * <tp-markup-single-page>
  *   <script type="tp/markdown">
@@ -379,6 +386,7 @@ export class TpMarkupSinglePage extends TpBase {
 			markdown: "md",
 			asciidoc: "adoc",
 			restructuredtext: "rst",
+			latex: "tex",
 		}[language];
 		const base = source
 			? resolveComponentSourceUrl(this, source).href
@@ -624,6 +632,9 @@ export class TpMarkupSinglePage extends TpBase {
 		}
 		if (!customElements.get(tagName)) {
 			switch (language) {
+				case "latex":
+					await import("../latex/latex.js");
+					break;
 				case "markdown":
 					await import("../markdown/markdown.js");
 					break;

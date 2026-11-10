@@ -12,6 +12,24 @@
             :value: E = mc^2
             :clearable:
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/math/math.js";
+            import "/components/mathfield/mathfield.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-mathfield");
+            element1.setAttribute("label", "Formula");
+            element1.setAttribute("value", "E = mc^2");
+            element1.setAttribute("clearable", "");
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: Inline in prose
 
          .. role:: example-tp-mathfield-1(tp-mathfield)

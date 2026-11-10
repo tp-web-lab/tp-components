@@ -21,6 +21,27 @@
                  topics: ['HTML', 'CSS', 'JavaScript']
                })
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/object-tree/object-tree.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-object-tree");
+            element1.append(document.createTextNode("\n  "));
+
+            const element2 = document.createElement("script");
+            element2.setAttribute("type", "tp/javascript");
+            element2.textContent = "\n    ({\n      course: {\n        title: 'Web components',\n        lessons: 12,\n        published: true\n      },\n      topics: ['HTML', 'CSS', 'JavaScript']\n    })\n  ";
+            element1.append(element2);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: Internal script
 
          .. tp-object-tree::

@@ -93,6 +93,9 @@ bundler
 Basic usage
 : Drag the yellow reminder over the surrounding page using its header, or focus the header and use arrow keys. Click the pin to fold and reopen the note without losing its content.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Lite note
 : Drag the double-size pushpin or move it with arrow keys without opening the note. Click it or press Enter or Space to open the reminder and reveal its header and reset controls, then fold it again without deleting its content.
 

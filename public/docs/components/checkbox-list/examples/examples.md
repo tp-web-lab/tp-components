@@ -9,5 +9,37 @@
 - JavaScript
 :::
 ```
+
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/checkbox-list/checkbox-list.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-checkbox-list");
+element1.setAttribute("name", "topics");
+element1.setAttribute("value", "1,3");
+element1.append(document.createTextNode("\n    "));
+
+const element2 = document.createElement("ul");
+
+const element3 = document.createElement("li");
+element3.append(document.createTextNode("HTML"));
+element2.append(element3);
+
+const element4 = document.createElement("li");
+element4.append(document.createTextNode("CSS"));
+element2.append(element4);
+
+const element5 = document.createElement("li");
+element5.append(document.createTextNode("JavaScript"));
+element2.append(element5);
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
 ::::
 :::::

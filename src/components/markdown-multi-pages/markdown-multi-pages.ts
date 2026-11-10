@@ -180,14 +180,6 @@ export class TpMarkdownMultiPages extends TpBase {
 	protected override connectedCallback(): void {
 		super.connectedCallback();
 		this.classList.add("tp-markdown-multi-pages-host");
-		this.style.display = "block";
-		this.style.position = "fixed";
-		this.style.insetBlock = "0";
-		this.style.insetInline = "0.5rem";
-		this.style.width = "auto";
-		this.style.height = "auto";
-		this.style.boxSizing = "border-box";
-		this.style.overflow = "hidden";
 		this.ensureGlobalStyle(STYLE_ID, style);
 		this.ensureGlobalStyle("tp-multi-pages-sidebar-tools", sidebarToolsStyle);
 		this.renderShell();
@@ -896,6 +888,8 @@ export class TpMarkdownMultiPages extends TpBase {
 		const nav = document.createElement("nav");
 		nav.className = "tp-markdown-multi-pages-page-nav";
 		nav.setAttribute("aria-label", "Page navigation");
+		nav.dataset.helpGroup = "Bottom of page";
+		nav.dataset.helpOwner = this.localName;
 
 		nav.append(
 			this.createPageNavigationLink(previous, "previous"),
@@ -919,11 +913,17 @@ export class TpMarkdownMultiPages extends TpBase {
 		button.setAttribute("variant", "brand");
 		button.className = "tp-markdown-multi-pages-page-nav-link";
 		button.dataset.direction = "top";
+		button.dataset.helpLabel = "Top of page";
+		button.dataset.helpDescription = "Scroll to the top of the current page.";
 		button.addEventListener("click", () => {
 			this.contentElement?.scrollTo({ top: 0, behavior: "smooth" });
 		});
 
-		button.textContent = `Top ${page.title}`;
+		button.setAttribute("aria-label", `Top of page: ${page.title}`);
+		const icon = document.createElement("tp-icon");
+		icon.setAttribute("name", "top");
+		icon.setAttribute("aria-hidden", "true");
+		button.append(icon, ` ${page.title}`);
 		wrapper.append(button);
 		return wrapper;
 	}
@@ -946,6 +946,12 @@ export class TpMarkdownMultiPages extends TpBase {
 		link.setAttribute("href", `#/${this.stripRepository(page.href)}`);
 		link.className = "tp-markdown-multi-pages-page-nav-link";
 		link.dataset.direction = direction;
+		link.dataset.helpLabel =
+			direction === "previous" ? "Previous page" : "Next page";
+		link.dataset.helpDescription =
+			direction === "previous"
+				? "Open the previous page."
+				: "Open the next page.";
 
 		const icon = document.createElement("tp-icon");
 		icon.setAttribute("name", direction);

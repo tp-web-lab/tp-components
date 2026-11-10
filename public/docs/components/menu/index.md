@@ -81,6 +81,9 @@ bundler
 Basic usage
 : Select a documentation entry from the menu.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Nested submenus
 : Open Components, Layout and Rows to explore three submenu levels with the mouse or arrow keys. Arrow Left returns to the parent menu, and selecting a link opens its documentation page.
 <!-- tp-docgen:example-descriptions:end -->

@@ -178,7 +178,11 @@ describe("<tp-markup-multi-pages>", () => {
 		expect(element.querySelector("main h1")?.textContent).toBe("Static cover");
 		expect(element.querySelector("main tp-markdown")).toBeNull();
 		expect(
-			vi.mocked(fetch).mock.calls.some(([url]) => String(url).endsWith(".md")),
+			vi
+				.mocked(fetch)
+				.mock.calls.some(([url]) =>
+					/\/(?:cover|sidebar)\.md$/.test(String(url)),
+				),
 		).toBe(false);
 		expect(
 			element.querySelector('aside a[href="#/guide/page.md"]'),
@@ -852,6 +856,7 @@ describe("<tp-markup-multi-pages>", () => {
 			["asciidoc", "= Page"],
 			["restructuredtext", "Page not found"],
 			["markdown", "# Page"],
+			["latex", "\\section*{Page"],
 		]) {
 			Object.defineProperty(element, "fixedLanguage", {
 				configurable: true,
@@ -870,7 +875,7 @@ describe("<tp-markup-multi-pages>", () => {
 		});
 		expect(
 			invoke<string[]>(element, "getSpecialPageHrefs", "cover"),
-		).toHaveLength(6);
+		).toHaveLength(8);
 	});
 
 	it("handles successful, missing and rejected fetches", async () => {

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Mountain lake at sunrise">
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#70b8d4"/><stop offset="1" stop-color="#ffdfad"/></linearGradient><linearGradient id="lake" x2="0" y2="1"><stop stop-color="#6db8ba"/><stop offset="1" stop-color="#184d69"/></linearGradient></defs>
+<path fill="url(#sky)" d="M0 0h600v400H0z"/><circle cx="450" cy="95" r="46" fill="#fff0ad"/>
+<path fill="#7287a0" d="M0 230 145 65 300 240 430 110 600 245v155H0z"/><path fill="#eef5ef" d="m100 117 45-52 56 63-36-15-20 18-19-25zM399 142l31-32 32 35-27-8-14 12z"/>
+<path fill="#2a6b67" d="M0 235 100 165 260 260 355 185 520 245 600 195v205H0z"/>
+<path fill="url(#lake)" d="M0 265q180-35 300-5t300-12v152H0z"/>
+<g fill="none" stroke="#a7dbcc" stroke-width="3" opacity=".8"><path d="M40 297h125m125-17h80m40 38h130M100 351h175m35 25h160M345 342h54"/></g>
+<path fill="#193e46" d="m0 400 30-24 45 3 29-20 49 12 31 29zm600 0-29-36-42 12-30-15-45 39z"/>
+<g fill="#174b42"><path d="m43 217-26 63h52zm0 28-33 70h66zm490-46-28 66h56zm0 29-38 75h76z"/></g><g stroke="#614d37" stroke-width="7"><path d="M43 287v50m490-66v63"/></g>
+<g fill="#f8b665"><circle cx="116" cy="380" r="5"/><circle cx="136" cy="388" r="4"/><circle cx="499" cy="384" r="5"/></g>
+</svg>

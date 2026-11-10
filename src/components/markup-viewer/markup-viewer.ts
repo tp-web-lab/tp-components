@@ -622,7 +622,7 @@ export abstract class TpMarkupViewer<
 		const hiddenAncestor = iframe.closest<HTMLElement>("[hidden]");
 
 		const initialize = (): void => {
-			if (waitingForVisibility) return;
+			if (waitingForVisibility || !iframe.isConnected) return;
 			const documentNode = iframe.contentDocument;
 			if (documentNode !== null) {
 				this.ensureBaseStyles(documentNode);
@@ -682,7 +682,13 @@ export abstract class TpMarkupViewer<
 			return;
 		}
 
-		initialize();
+		// A new srcdoc iframe initially exposes an about:blank placeholder.
+		// Observe the rendered document after load, not that transient body.
+		if (
+			deferredDocument === "" ||
+			iframe.contentDocument?.URL === "about:srcdoc"
+		)
+			initialize();
 	}
 
 	private observeIframeDocument(iframe: HTMLIFrameElement): void {

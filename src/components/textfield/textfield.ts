@@ -101,6 +101,7 @@ export class TpTextfield extends TpBase {
 	private field: TextControl | null = null;
 	private sizeObserver: ResizeObserver | null = null;
 	private lastWidth = -1;
+	private resizeFrame: number | null = null;
 	private prefixIcon: HTMLElement | null = null;
 	private clearButton: HTMLElement | null = null;
 
@@ -277,7 +278,7 @@ export class TpTextfield extends TpBase {
 				const width = entry?.contentRect.width ?? 0;
 				if (width === this.lastWidth) return;
 				this.lastWidth = width;
-				this.resizeTextarea();
+				this.scheduleTextareaResize();
 			});
 			this.sizeObserver.observe(this);
 		}
@@ -286,6 +287,8 @@ export class TpTextfield extends TpBase {
 	public disconnectedCallback(): void {
 		this.sizeObserver?.disconnect();
 		this.sizeObserver = null;
+		if (this.resizeFrame !== null) cancelAnimationFrame(this.resizeFrame);
+		this.resizeFrame = null;
 		this.lastWidth = -1;
 	}
 
@@ -372,7 +375,7 @@ export class TpTextfield extends TpBase {
 		}
 		this.field.value = currentValue;
 		this.sync();
-		requestAnimationFrame(() => this.resizeTextarea());
+		this.scheduleTextareaResize();
 	}
 
 	private sync(): void {
@@ -437,6 +440,14 @@ export class TpTextfield extends TpBase {
 				new Event("change", { bubbles: true, composed: true }),
 			);
 		}
+	}
+
+	private scheduleTextareaResize(): void {
+		if (this.resizeFrame !== null) return;
+		this.resizeFrame = requestAnimationFrame(() => {
+			this.resizeFrame = null;
+			if (this.isConnected) this.resizeTextarea();
+		});
 	}
 
 	private resizeTextarea(): void {

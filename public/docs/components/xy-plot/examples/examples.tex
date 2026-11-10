@@ -12,6 +12,29 @@ curve Line = function(x, x/2)
 }
 \end{document}
 
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/xy-plot/xy-plot.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-xy-plot");
+element1.setAttribute("label", "Functions");
+element1.append(document.createTextNode("\n    "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/xy-plot");
+element2.textContent = "\nlabel = \"Functions\"\nx-axis = [-10, 10]\ny-axis = [-5, 5]\ncurve Sine = function(x, 2*sin(x))\ncurve Line = function(x, x/2)\n";
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
 % !tp-example Author directives
 \documentclass{article}
 \begin{document}

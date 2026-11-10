@@ -4,6 +4,23 @@
 \wcTpAsciidocMultiSlides[repository=/docs/components/asciidoc-multi-pages/docs]{}
 \end{document}
 
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/asciidoc/asciidoc.js";
+import "/components/asciidoc-multi-slides/asciidoc-multi-slides.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-asciidoc-multi-slides");
+element1.setAttribute("repository", "/docs/components/asciidoc-multi-pages/docs");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
 % !tp-example Automatic notes
 \documentclass{article}
 \begin{document}

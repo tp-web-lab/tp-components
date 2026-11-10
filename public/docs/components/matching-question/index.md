@@ -126,6 +126,9 @@ bundler
 Basic usage
 : Associate the English expressions with their French translations, then submit to check the answer. Try an incorrect response, correct it and compare the feedback; Reset clears and reshuffles the lists.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Rich content
 : Identify the flag, sound and video, associate each with its description and submit your answer. Media controls remain independent of association controls.
 

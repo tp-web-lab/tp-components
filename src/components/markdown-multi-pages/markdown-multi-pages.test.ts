@@ -144,7 +144,8 @@ describe("<tp-markdown-multi-pages>", () => {
 
 		expect(previous?.getAttribute("href")).toBe("#/intro.md");
 		expect(previous?.textContent).toContain("Introduction");
-		expect(top?.textContent).toContain("Top");
+		expect(top?.querySelector('tp-icon[name="top"]')).not.toBeNull();
+		expect(top?.getAttribute("aria-label")).toBe("Top of page: Current page");
 		expect(top?.textContent).toContain("Current page");
 		expect(next?.getAttribute("href")).toBe("#/guide/next.md");
 		expect(next?.textContent).toContain("Next page");
@@ -552,18 +553,19 @@ describe("<tp-markdown-multi-pages>", () => {
 		expect(layout?.querySelector("[data-tp-splitter-divider]")).toBeTruthy();
 	});
 
-	it("dimensionne le composant sur la fenêtre", async () => {
+	it("uses stylesheet sizing without overriding authored positioning", async () => {
 		mockViewportWidth(false);
 		const element = document.createElement("tp-markdown-multi-pages");
+		element.style.position = "relative";
 		document.body.append(element);
 		await flush();
 
-		expect(element.style.position).toBe("fixed");
-		expect(element.style.insetBlock).toBe("0px");
-		expect(element.style.insetInline).toBe("0.5rem");
-		expect(element.style.width).toBe("auto");
-		expect(element.style.height).toBe("auto");
-		expect(element.style.overflow).toBe("hidden");
+		expect(element.style.position).toBe("relative");
+		expect(element.style.insetBlock).toBe("");
+		expect(element.style.insetInline).toBe("");
+		expect(element.style.width).toBe("");
+		expect(element.style.height).toBe("");
+		expect(element.style.overflow).toBe("");
 		expect(multiMarkdownStyle).toContain("position: fixed;");
 		expect(multiMarkdownStyle).toContain("inset-block: 0;");
 		expect(multiMarkdownStyle).toContain("inset-inline: 0.5rem;");

@@ -109,6 +109,9 @@ bundler
 Basic usage
 : Read the country and capital data converted from CSV. The first record supplies the column headings.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Quoted fields
 : Read semicolon-separated records containing a separator, escaped quotes and a newline inside quoted cells.
 <!-- tp-docgen:example-descriptions:end -->

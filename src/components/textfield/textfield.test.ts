@@ -245,3 +245,63 @@ it("copies the live text after editing and switching to multiline", async () => 
 		vi.unstubAllGlobals();
 	}
 });
+
+it("defers observer-driven height changes and cancels them on disconnect", () => {
+	let observerCallback: ResizeObserverCallback | undefined;
+	const frames = new Map<number, FrameRequestCallback>();
+	let id = 0;
+	vi.stubGlobal("requestAnimationFrame", (callback: FrameRequestCallback) => {
+		frames.set(++id, callback);
+		return id;
+	});
+	vi.stubGlobal("cancelAnimationFrame", (frame: number) =>
+		frames.delete(frame),
+	);
+	vi.stubGlobal(
+		"ResizeObserver",
+		class {
+			constructor(callback: ResizeObserverCallback) {
+				observerCallback = callback;
+			}
+			observe() {}
+			disconnect() {}
+		},
+	);
+	const flush = () => {
+		const pending = [...frames.values()];
+		frames.clear();
+		for (const callback of pending) callback(0);
+	};
+	const field = document.createElement("tp-textfield");
+	field.multiline = true;
+	document.body.append(field);
+	const textarea = field.querySelector("textarea");
+	if (!textarea) throw new Error("Missing textarea");
+	let height = 96;
+	Object.defineProperty(textarea, "scrollHeight", { get: () => height });
+	try {
+		flush();
+		const resize = (width: number) =>
+			observerCallback?.(
+				[{ contentRect: { width } } as ResizeObserverEntry],
+				{} as ResizeObserver,
+			);
+		height = 180;
+		resize(200);
+		resize(190);
+		expect(textarea.style.height).toBe("96px");
+		expect(frames.size).toBe(1);
+		flush();
+		expect(textarea.style.height).toBe("180px");
+		height = 48;
+		resize(400);
+		flush();
+		expect(textarea.style.height).toBe("48px");
+		resize(300);
+		field.remove();
+		expect(frames.size).toBe(0);
+	} finally {
+		field.remove();
+		vi.unstubAllGlobals();
+	}
+});

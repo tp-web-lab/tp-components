@@ -3,6 +3,18 @@ import type { TpTree } from "../tree/tree.js";
 
 /** Shared navigation tools for both multi-page implementations. */
 export function appendSidebarTools(controls: HTMLElement, tree: TpTree): void {
+	controls.dataset.helpGroup = "Table of contents";
+	for (const control of controls.querySelectorAll<HTMLElement>(
+		"tp-icon-button",
+	)) {
+		const label = control.getAttribute("label");
+		if (label === "Expand all")
+			control.dataset.helpDescription =
+				"Reveal every nested heading in the table of contents.";
+		if (label === "Collapse all")
+			control.dataset.helpDescription =
+				"Fold every branch to show only the top-level entries.";
+	}
 	const button = (name: string, label: string) => {
 		const element = document.createElement("tp-icon-button");
 		element.name = name;
@@ -16,6 +28,8 @@ export function appendSidebarTools(controls: HTMLElement, tree: TpTree): void {
 		"arrow-expand-horizontal",
 		"Widen table of contents",
 	);
+	widthButton.dataset.helpDescription =
+		"Widen the sidebar to read long titles; click again to restore its previous width.";
 	widthButton.setAttribute("aria-pressed", "false");
 	widthButton.addEventListener("click", () => {
 		const sidebar = tree.closest<HTMLElement>('[data-role="sidebar"]');
@@ -61,6 +75,8 @@ export function appendSidebarTools(controls: HTMLElement, tree: TpTree): void {
 		widthButton.setAttribute("aria-pressed", String(expanded));
 	});
 	const searchButton = button("search", "Search table of contents");
+	searchButton.dataset.helpDescription =
+		"Show or hide a title search field. Matches are highlighted in the table of contents without changing the current page.";
 	controls.prepend(searchButton);
 	searchButton.setAttribute("aria-expanded", "false");
 	const search = document.createElement("div");

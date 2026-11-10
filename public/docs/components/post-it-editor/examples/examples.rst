@@ -18,3 +18,37 @@
          .. tp-post-it-editor::
             :for: #post-it-editor-example
             :page: post-it-editor-example
+
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/box/box.js";
+            import "/components/post-it/post-it.js";
+            import "/components/post-it-editor/post-it-editor.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-box");
+            element1.setAttribute("id", "post-it-editor-example");
+            element1.append(document.createTextNode("\n  "));
+
+            const element2 = document.createElement("p");
+            element2.append(document.createTextNode("Select this first paragraph to attach a note about the introduction."));
+            element1.append(element2);
+            element1.append(document.createTextNode("\n  "));
+
+            const element3 = document.createElement("p");
+            element3.append(document.createTextNode("Or select this second paragraph to attach a different note. Reload this page to restore saved notes."));
+            element1.append(element3);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+            example.append(document.createTextNode("\n"));
+
+            const element4 = document.createElement("tp-post-it-editor");
+            element4.setAttribute("for", "#post-it-editor-example");
+            element4.setAttribute("page", "post-it-editor-example");
+            example.append(element4);
+
+            document.body.append(example);

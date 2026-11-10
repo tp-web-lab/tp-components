@@ -67,6 +67,12 @@ Use the equivalent native component syntax in Markdown, AsciiDoc and reStructure
 <tp-html-multi-slides repository="/slides"></tp-html-multi-slides>
 ```
 
+### Shared document attributes
+
+This component accepts the same attributes as [`tp-html-multi-pages`](../html-multi-pages/index.md): `repository`, `toolbar`, `menu`, `label`, `git`, `langs`, `logo`, `logo-href`, `brand` and `theme`. They are also available in the Component viewer's Attributes tab and Demo controls. `brand` and `theme` retain their legacy behavior; use the toolbar controls to change the appearance.
+
+The additional `auto` and `timing` attributes configure automatic slide playback.
+
 ### Importing
 
 ::: tp-tabs
@@ -100,6 +106,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Move between the slides rendered from the html source.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 
 Automatic notes
 : Press Play to read the speaker notes; each clic trigger reveals a step or opens the next slide. Try Pause, Resume and Stop.

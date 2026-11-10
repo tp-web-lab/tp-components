@@ -11,6 +11,22 @@
             :solution: red blue green yellow
             :attempts: 8
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/mastermind/mastermind.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-mastermind");
+            element1.setAttribute("solution", "red blue green yellow");
+            element1.setAttribute("attempts", "8");
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: mastermind ⭐⭐
 
          .. tp-mastermind::

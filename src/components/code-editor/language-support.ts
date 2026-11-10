@@ -1,4 +1,5 @@
 import type { Extension } from "@codemirror/state";
+import { styleTags, tags } from "@lezer/highlight";
 
 const loaded = new Map<string, Extension>();
 const pending = new Map<string, Promise<Extension>>();
@@ -21,7 +22,12 @@ const loaders: Record<string, () => Promise<Extension>> = {
 			typescript: true,
 		}),
 	json: async () => (await import("@codemirror/lang-json")).json(),
-	markdown: async () => (await import("@codemirror/lang-markdown")).markdown(),
+	markdown: async () =>
+		(await import("@codemirror/lang-markdown")).markdown({
+			extensions: [
+				{ props: [styleTags({ ListMark: tags.special(tags.list) })] },
+			],
+		}),
 	python: async () => (await import("@codemirror/lang-python")).python(),
 	sql: async () => (await import("@codemirror/lang-sql")).sql(),
 };

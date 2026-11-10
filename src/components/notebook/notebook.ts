@@ -101,6 +101,7 @@
  */
 // tp-docgen:dependencies:end
 
+import { TP_COLOR_PRESETS } from "../color/color-presets.js";
 import style from "./notebook.css?inline";
 
 import "../base/base.js";
@@ -227,6 +228,8 @@ export function getNotebookLoaderUrl(
  * @summary Combines editable markup cells and executable programming-language cells.
  * @attr {string} language = "javascript" - Programming language enforced by a specialized notebook.
  * @attr {string} src = "" - JSON notebook file.
+ * @attr {string} label - Title displayed in the center of the exported HTML toolbar. Defaults to the notebook type name; an empty value hides it.
+ * @attr {string} logo - Icon name displayed at the start of the exported HTML toolbar. Defaults to the notebook type icon; an empty value hides it.
  * @attr {string} repository = "" - Directory containing project.json and .files.json.
  * @attr {boolean} readonly = false - Makes all notebook editors read-only and disables structural changes.
  * @event tp-notebook-load Emitted after inline, src, or repository cells are loaded.
@@ -322,6 +325,36 @@ export class TpNotebook extends TpBase {
 		return CODE_LANGUAGES.includes(value as NotebookLanguage)
 			? (value as NotebookLanguage)
 			: "javascript";
+	}
+
+	/** Title displayed in the center of the exported HTML toolbar. */
+	public get label(): string {
+		const titles: Record<string, string> = {
+			"tp-notebook": "Generic Notebook",
+			"tp-javascript-notebook": "Javascript Notebook",
+			"tp-prolog-notebook": "Prolog Notebook",
+			"tp-python-notebook": "Python Notebook",
+			"tp-sql-notebook": "SQL Notebook",
+			"tp-typescript-notebook": "Typescript Notebook",
+		};
+		return (
+			this.getAttribute("label") ?? titles[this.localName] ?? "Generic Notebook"
+		);
+	}
+
+	public set label(value: string) {
+		this.setAttribute("label", value);
+	}
+
+	/** Exported toolbar icon; defaults to the notebook type, with empty hiding it. */
+	public get logo(): string {
+		return (
+			this.getAttribute("logo")?.trim() ?? this.localName.replace(/^tp-/, "")
+		);
+	}
+
+	public set logo(value: string) {
+		this.setAttribute("logo", value);
 	}
 
 	public get readonly(): boolean {
@@ -704,6 +737,7 @@ export class TpNotebook extends TpBase {
 			: "tp-light";
 		const appearance = document.createElement("body");
 		appearance.className = theme;
+		appearance.setAttribute("data-tp-notebook-export", "");
 		const brand =
 			getComputedStyle(this).getPropertyValue("--tp-brand-seed").trim() ||
 			getComputedStyle(globalScope ?? document.body)
@@ -715,7 +749,9 @@ export class TpNotebook extends TpBase {
 			getComputedStyle(document.documentElement)
 				.getPropertyValue("--tp-brand-seed")
 				.trim();
-		if (brand) appearance.style.setProperty("--tp-brand-seed", brand);
+		// Keep the exported seed as a fallback so controller preset classes can override it.
+		if (brand)
+			appearance.style.setProperty("--tp-notebook-export-brand", brand);
 		// Serialize the attribute through the DOM, including any necessary escaping.
 		const bodyOpening = appearance.outerHTML.replace("</body>", "");
 		this.captureAllCells();
@@ -761,6 +797,16 @@ export class TpNotebook extends TpBase {
 		const loader =
 			document.querySelector<HTMLScriptElement>('script[src*="tp-loader"]')
 				?.src ?? getNotebookLoaderUrl();
+		const label = document.createElement("span");
+		label.setAttribute("section", "center");
+		label.className = "tp-notebook-export-toolbar-label";
+		label.textContent = this.label;
+		const logo = document.createElement("tp-icon");
+		logo.setAttribute("section", "start");
+		logo.setAttribute("name", this.logo);
+		if (!this.hasAttribute("logo")) logo.setAttribute("library", "components");
+		logo.setAttribute("size", "1.75em");
+		logo.setAttribute("aria-hidden", "true");
 		const title = this.notebookName
 			.replaceAll("&", "&amp;")
 			.replaceAll("<", "&lt;")
@@ -782,13 +828,17 @@ export class TpNotebook extends TpBase {
   <style>${notebookExportStyle}</style>
   <script type="module" src="${loader}"></script>
   <script id="tp-notebook-data" type="application/json">${notebookData}</script>
-  <style>body{background:var(--tp-background-color);color:var(--tp-text-body);box-sizing:border-box;margin-inline:auto;max-inline-size:80rem;padding:1rem}main{display:grid;gap:.75rem;min-inline-size:0}[data-tp-notebook-export-actions]{display:flex;justify-content:flex-end;gap:.5rem;margin-block-end:1rem}[data-tp-notebook-code-viewer]:defined + [data-tp-notebook-code-fallback]{display:none}</style>
+  <style>body:not(${TP_COLOR_PRESETS.map((preset) => `.${preset}`).join(",")}){--tp-brand-seed:var(--tp-notebook-export-brand)}body[data-tp-notebook-export]{background:var(--tp-background-color);color:var(--tp-text-body);box-sizing:border-box;margin-inline:auto;max-inline-size:80rem;margin-block:0;padding:0 1rem 1rem}main{display:grid;gap:.75rem;min-inline-size:0}[data-tp-notebook-export-actions]{position:sticky;top:0;z-index:100;background:var(--tp-background-color);box-sizing:border-box;--tp-toolbar-section-gap:.5rem;margin-block-end:1rem}[data-tp-notebook-export-actions]>[data-toolbar-center]{min-inline-size:0}[data-tp-notebook-code-viewer]:defined + [data-tp-notebook-code-fallback]{display:none}</style>
 </head>
 ${bodyOpening}
-  <nav data-tp-notebook-export-actions aria-label="Notebook actions">
-    <tp-icon-button data-tp-notebook-export-reset name="refresh" label="Reset all" disabled title="Restore all code cells to their exported sources"></tp-icon-button>
-    <tp-icon-button data-tp-notebook-export-run name="play-all" label="Run all" disabled title="Run all code cells in document order"></tp-icon-button>
-  </nav>
+  <tp-toolbar data-tp-notebook-export-actions aria-label="Notebook actions">
+    ${this.logo ? logo.outerHTML : ""}
+    ${this.label ? label.outerHTML : ""}
+    <tp-icon-button section="end" data-tp-notebook-export-reset name="refresh" label="Reset all" disabled title="Restore all code cells to their exported sources"></tp-icon-button>
+    <tp-icon-button section="end" data-tp-notebook-export-run name="play-all" label="Run all" disabled title="Run all code cells in document order"></tp-icon-button>
+    <tp-divider section="end" orientation="vertical" data-document-navbar-divider></tp-divider>
+    <tp-control section="end" value="clock"></tp-control>
+  </tp-toolbar>
   <main>${body}</main>
   <script>
     for (const source of document.querySelectorAll('script[data-tp-export-type]')) {

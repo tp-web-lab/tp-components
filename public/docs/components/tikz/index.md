@@ -99,6 +99,9 @@ These examples are taken from the official documentation for [tikz](https://tikz
 Basic usage
 : Compare the red linear function, blue sine function and orange exponential function on a shared grid with labeled axes.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Trie graph
 : Follow the red path through the trie and inspect the shared prefixes. This example loads graphs and arrows.meta and defines the pale yellow background used by edge labels.
 

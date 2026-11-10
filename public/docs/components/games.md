@@ -31,6 +31,12 @@ Game components offer interactive puzzles and activities that exercise memory, l
 :::
 
 ::: tp-center { intrinsic }
+:tp-icon:{name="kakuro" library="components" size="4em" aria-hidden="true"}
+
+[tp-kakuro](kakuro/index.md)
+:::
+
+::: tp-center { intrinsic }
 :tp-icon:{name="logigram" library="components" size="4em" aria-hidden="true"}
 
 [tp-logigram](logigram/index.md)
@@ -52,6 +58,12 @@ Game components offer interactive puzzles and activities that exercise memory, l
 :tp-icon:{name="memory" library="components" size="4em" aria-hidden="true"}
 
 [tp-memory](memory/index.md)
+:::
+
+::: tp-center { intrinsic }
+:tp-icon:{name="puzzle" library="components" size="4em" aria-hidden="true"}
+
+[tp-puzzle](puzzle/index.md)
 :::
 
 ::: tp-center { intrinsic }

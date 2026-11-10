@@ -1,4 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import "../javascript-notebook/javascript-notebook.js";
+import "../sql-notebook/sql-notebook.js";
+import "../typescript-notebook/typescript-notebook.js";
 import "../prolog-notebook/prolog-notebook.js";
 import "../python-notebook/python-notebook.js";
 import { getNotebookLoaderUrl } from "./notebook.js";
@@ -455,6 +458,78 @@ describe("<tp-notebook>", () => {
 					'<script id="tp-notebook-data" type="application/json">{}</script>',
 			} as File),
 		).rejects.toThrow("cells array");
+	});
+
+	it("exports an optional centered text label and a sticky toolbar", async () => {
+		const notebook = document.createElement("tp-notebook");
+		const api = internals(notebook);
+		expect(await api.standaloneHtml()).toContain(">Generic Notebook</span>");
+		notebook.setAttribute("label", "");
+		expect(await api.standaloneHtml()).not.toContain(
+			'class="tp-notebook-export-toolbar-label"',
+		);
+		notebook.setAttribute("label", 'My <notebook> & "examples"');
+		const html = await api.standaloneHtml();
+		const exported = new DOMParser().parseFromString(html, "text/html");
+		const label = exported.querySelector(".tp-notebook-export-toolbar-label");
+		expect(label?.textContent).toBe('My <notebook> & "examples"');
+		expect(label?.getAttribute("section")).toBe("center");
+		expect(label?.children).toHaveLength(0);
+		expect(html).toContain(
+			"[data-tp-notebook-export-actions]{position:sticky;top:0;",
+		);
+	});
+
+	it("exports type-specific, custom, and hidden logos for all notebooks", async () => {
+		for (const tag of [
+			"tp-notebook",
+			"tp-python-notebook",
+			"tp-prolog-notebook",
+			"tp-javascript-notebook",
+			"tp-sql-notebook",
+			"tp-typescript-notebook",
+		]) {
+			const notebook = document.createElement(tag);
+			const api = internals(notebook);
+			const exported = () =>
+				api
+					.standaloneHtml()
+					.then((html) => new DOMParser().parseFromString(html, "text/html"));
+			const selector = "[data-tp-notebook-export-actions] > tp-icon";
+			const defaultLogo = (await exported()).querySelector(selector);
+			expect(defaultLogo?.getAttribute("name")).toBe(tag.slice(3));
+			expect(defaultLogo?.getAttribute("library")).toBe("components");
+			notebook.setAttribute("logo", "logo-tp");
+			const logo = (await exported()).querySelector(selector);
+			expect(logo?.getAttribute("name")).toBe("logo-tp");
+			expect(logo?.getAttribute("section")).toBe("start");
+			expect(logo?.getAttribute("size")).toBe("1.75em");
+			notebook.setAttribute("logo", "");
+			expect((await exported()).querySelector(selector)).toBeNull();
+			notebook.removeAttribute("logo");
+			expect(
+				(await exported()).querySelector(selector)?.getAttribute("name"),
+			).toBe(tag.slice(3));
+		}
+	});
+
+	it("keeps the exported brand overridable by color controller presets", async () => {
+		const notebook = document.createElement("tp-notebook");
+		notebook.style.setProperty("--tp-brand-seed", "#123456");
+		document.body.append(notebook);
+		const html = await internals(notebook).standaloneHtml();
+		const exported = new DOMParser().parseFromString(html, "text/html");
+		expect(exported.body.style.getPropertyValue("--tp-brand-seed")).toBe("");
+		expect(
+			exported.body.style.getPropertyValue("--tp-notebook-export-brand"),
+		).toBe("#123456");
+		expect(html).toContain("body:not(.tp-default,");
+		expect(html).toContain(
+			"){--tp-brand-seed:var(--tp-notebook-export-brand)}",
+		);
+		expect(
+			exported.querySelector("[data-tp-notebook-export-actions] tp-control"),
+		).not.toBeNull();
 	});
 
 	it("serializes and saves JSON and standalone HTML through both save paths", async () => {

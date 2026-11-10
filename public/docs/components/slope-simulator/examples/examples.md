@@ -5,6 +5,19 @@
 :::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/slope-simulator/slope-simulator.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-slope-simulator");
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Tour of Lombardy 2026"}
 Approximate reconstruction of the supplied Tour of Lombardy 2026 profile image (239.6 km). Distances and elevations are estimated for this interactive example, not official route or GPS data. Every segment stays within ±20%; vertical exaggeration affects only the drawing.
 

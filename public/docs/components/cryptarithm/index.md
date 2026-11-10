@@ -77,6 +77,9 @@ bundler
 Basic usage
 : Assign digits to letters so that the displayed arithmetic equation is correct.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 UN + UN + NEUF = ONZE
 : Assign digits to letters to solve the equation UN + UN + NEUF = ONZE.
 

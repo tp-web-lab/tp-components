@@ -4,6 +4,23 @@
 \wcTpMarkdownMultiSlides[repository=/docs/components/markdown-multi-pages/docs]{}
 \end{document}
 
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/markdown/markdown.js";
+import "/components/markdown-multi-slides/markdown-multi-slides.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-markdown-multi-slides");
+element1.setAttribute("repository", "/docs/components/markdown-multi-pages/docs");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
 % !tp-example Automatic notes
 \documentclass{article}
 \begin{document}

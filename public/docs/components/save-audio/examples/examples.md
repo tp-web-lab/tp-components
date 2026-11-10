@@ -11,5 +11,40 @@ Listen to the sound of breaking glass, then save the MP3 file.
 ::: tp-save-audio { anchor="#save-audio-example" filename="glass-break" }
 :::
 ```
+
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/save-audio/save-audio.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("p");
+element1.append(document.createTextNode("Listen to the sound of breaking glass, then save the MP3 file."));
+example.append(element1);
+example.append(document.createTextNode("\n"));
+
+const element2 = document.createElement("audio");
+element2.setAttribute("id", "save-audio-example");
+element2.setAttribute("controls", "");
+element2.setAttribute("preload", "metadata");
+element2.setAttribute("aria-label", "Sound of breaking glass");
+element2.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("source");
+element3.setAttribute("src", "/docs/medias/audios/glass-break.mp3");
+element3.setAttribute("type", "audio/mpeg");
+element2.append(element3);
+element2.append(document.createTextNode("\n"));
+example.append(element2);
+example.append(document.createTextNode("\n"));
+
+const element4 = document.createElement("tp-save-audio");
+element4.setAttribute("anchor", "#save-audio-example");
+element4.setAttribute("filename", "glass-break");
+example.append(element4);
+
+document.body.append(example);
+:::
+```
 :::::
 ::::::

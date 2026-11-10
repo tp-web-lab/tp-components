@@ -123,7 +123,8 @@ export type TpMarkupMultiPagesLanguage =
 	| "html"
 	| "markdown"
 	| "asciidoc"
-	| "restructuredtext";
+	| "restructuredtext"
+	| "latex";
 
 function wrapAsSourceCodeBlock(source: string, language: string): string {
 	// A literal HTML code block prevents Markdown includes inside the displayed
@@ -200,14 +201,6 @@ export class TpMarkupMultiPages extends TpBase {
 	protected override connectedCallback(): void {
 		super.connectedCallback();
 		this.classList.add("tp-markup-multi-pages-host");
-		this.style.display = "block";
-		this.style.position = "fixed";
-		this.style.insetBlock = "0";
-		this.style.insetInline = "0.5rem";
-		this.style.width = "auto";
-		this.style.height = "auto";
-		this.style.boxSizing = "border-box";
-		this.style.overflow = "hidden";
 		this.ensureGlobalStyle(STYLE_ID, style);
 		this.ensureGlobalStyle("tp-multi-pages-sidebar-tools", sidebarToolsStyle);
 		if (this.hasAttribute("data-tp-prerendered")) {
@@ -873,6 +866,10 @@ export class TpMarkupMultiPages extends TpBase {
 		const language = this.detectLanguage(href);
 
 		if (language === "html") return source;
+		if (language === "latex") {
+			const { renderLatexToHtml } = await import("@tp/tp-latex");
+			return renderLatexToHtml(source);
+		}
 		if (language === "asciidoc") {
 			const { renderAsciidocToHtml } = await import("../asciidoc/asciidoc.js");
 			return renderAsciidocToHtml(source);
@@ -891,6 +888,10 @@ export class TpMarkupMultiPages extends TpBase {
 		language: TpMarkupMultiPagesLanguage,
 	): Promise<void> {
 		if (language === "html") return;
+		if (language === "latex") {
+			await import("../latex/latex.js");
+			return;
+		}
 		if (language === "asciidoc") {
 			await import("../asciidoc/asciidoc.js");
 			return;
@@ -943,6 +944,11 @@ export class TpMarkupMultiPages extends TpBase {
 				document.querySelector("h1")?.textContent?.trim() ||
 				document.querySelector("title")?.textContent?.trim();
 			if (title) return title;
+		} else if (language === "latex") {
+			const title = /\\(?:title|section)\*?\{([^{}]+)\}/
+				.exec(source)?.[1]
+				?.trim();
+			if (title) return this.cleanDocumentTitle(title);
 		} else if (language === "asciidoc") {
 			const title = /^=\s+(.+)$/m.exec(source)?.[1]?.trim();
 			if (title) return this.cleanDocumentTitle(title);
@@ -1025,6 +1031,7 @@ export class TpMarkupMultiPages extends TpBase {
 		if (this.fixedLanguage !== null) return this.fixedLanguage;
 		const path = href.split(/[?#]/, 1)[0]?.toLowerCase() ?? "";
 
+		if (path.endsWith(".tex") || path.endsWith(".latex")) return "latex";
 		if (path.endsWith(".html") || path.endsWith(".htm")) return "html";
 		if (path.endsWith(".adoc") || path.endsWith(".asciidoc")) return "asciidoc";
 		if (path.endsWith(".rst") || path.endsWith(".rest"))
@@ -1033,18 +1040,21 @@ export class TpMarkupMultiPages extends TpBase {
 	}
 
 	private getViewerTagName(language: TpMarkupMultiPagesLanguage): string {
+		if (language === "latex") return "tp-latex";
 		if (language === "asciidoc") return "tp-asciidoc";
 		if (language === "restructuredtext") return "tp-restructuredtext";
 		return "tp-markdown";
 	}
 
 	private getInlineScriptType(language: TpMarkupMultiPagesLanguage): string {
+		if (language === "latex") return "tp/latex";
 		if (language === "asciidoc") return "tp/asciidoc";
 		if (language === "restructuredtext") return "tp/restructuredtext";
 		return "tp/markdown";
 	}
 
 	private getRenderedAttribute(language: TpMarkupMultiPagesLanguage): string {
+		if (language === "latex") return "data-tp-latex-rendered";
 		if (language === "asciidoc") return "data-tp-asciidoc-rendered";
 		if (language === "restructuredtext")
 			return "data-tp-restructuredtext-rendered";
@@ -1053,6 +1063,7 @@ export class TpMarkupMultiPages extends TpBase {
 	}
 
 	private getRenderedEvent(language: TpMarkupMultiPagesLanguage): string {
+		if (language === "latex") return "tp-latex-rendered";
 		if (language === "asciidoc") return "tp-asciidoc-rendered";
 		if (language === "restructuredtext") return "tp-restructuredtext-rendered";
 		if (language === "html") return "tp-markup-multi-pages-rendered";
@@ -1060,6 +1071,7 @@ export class TpMarkupMultiPages extends TpBase {
 	}
 
 	private getOutputSelector(language: TpMarkupMultiPagesLanguage): string {
+		if (language === "latex") return ":scope > .tp-latex-output";
 		if (language === "asciidoc") return ":scope > .tp-asciidoc-output";
 		if (language === "restructuredtext")
 			return ":scope > .tp-restructuredtext-output";
@@ -1069,6 +1081,7 @@ export class TpMarkupMultiPages extends TpBase {
 
 	private getSourceLanguage(href: string): string {
 		const language = this.detectLanguage(href, true);
+		if (language === "latex") return "latex";
 		if (language === "restructuredtext") return "plaintext";
 		if (language === "asciidoc") return "asciidoc";
 		if (language === "html") return "html";
@@ -1179,7 +1192,7 @@ export class TpMarkupMultiPages extends TpBase {
 		this.pageNavigationElement = navigation;
 
 		const viewer = this.contentElement?.querySelector<HTMLElement>(
-			"tp-markdown, tp-asciidoc, tp-restructuredtext, .tp-markup-multi-pages-html-output",
+			"tp-markdown, tp-asciidoc, tp-restructuredtext, tp-latex, .tp-markup-multi-pages-html-output",
 		);
 		if (!(viewer instanceof HTMLElement)) {
 			this.contentElement?.append(navigation);
@@ -1238,6 +1251,8 @@ export class TpMarkupMultiPages extends TpBase {
 		const nav = document.createElement("nav");
 		nav.className = "tp-markup-multi-pages-page-nav";
 		nav.setAttribute("aria-label", "Page navigation");
+		nav.dataset.helpGroup = "Bottom of page";
+		nav.dataset.helpOwner = this.localName;
 
 		nav.append(
 			this.createPageNavigationLink(previous, "previous"),
@@ -1261,11 +1276,17 @@ export class TpMarkupMultiPages extends TpBase {
 		button.setAttribute("variant", "brand");
 		button.className = "tp-markup-multi-pages-page-nav-link";
 		button.dataset.direction = "top";
+		button.dataset.helpLabel = "Top of page";
+		button.dataset.helpDescription = "Scroll to the top of the current page.";
 		button.addEventListener("click", () => {
 			this.contentElement?.scrollTo({ top: 0, behavior: "smooth" });
 		});
 
-		button.textContent = `Top ${page.title}`;
+		button.setAttribute("aria-label", `Top of page: ${page.title}`);
+		const icon = document.createElement("tp-icon");
+		icon.setAttribute("name", "top");
+		icon.setAttribute("aria-hidden", "true");
+		button.append(icon, ` ${page.title}`);
 		wrapper.append(button);
 		return wrapper;
 	}
@@ -1288,6 +1309,12 @@ export class TpMarkupMultiPages extends TpBase {
 		link.setAttribute("href", `#/${this.stripRepository(page.href)}`);
 		link.className = "tp-markup-multi-pages-page-nav-link";
 		link.dataset.direction = direction;
+		link.dataset.helpLabel =
+			direction === "previous" ? "Previous page" : "Next page";
+		link.dataset.helpDescription =
+			direction === "previous"
+				? "Open the previous page."
+				: "Open the next page.";
 
 		const icon = document.createElement("tp-icon");
 		icon.setAttribute("name", direction);
@@ -1506,6 +1533,8 @@ export class TpMarkupMultiPages extends TpBase {
 		if (!isHtmlDocument) return false;
 
 		if (
+			lowerPath.endsWith(".tex") ||
+			lowerPath.endsWith(".latex") ||
 			lowerPath.endsWith(".md") ||
 			lowerPath.endsWith(".adoc") ||
 			lowerPath.endsWith(".asciidoc") ||
@@ -1526,7 +1555,7 @@ export class TpMarkupMultiPages extends TpBase {
 		return (
 			/<script\b[^>]+src=["'][^"']*(?:tp-loader|\/src\/)/i.test(source) ||
 			/\bimport\s*\(?\s*["'][^"']*(?:tp-loader|\/src\/)/i.test(source) ||
-			/<tp-(?:markup|markdown|asciidoc|restructuredtext|html)-multi-pages\b/i.test(
+			/<tp-(?:markup|markdown|asciidoc|restructuredtext|latex|html)-multi-pages\b/i.test(
 				source,
 			)
 		);
@@ -1595,7 +1624,7 @@ export class TpMarkupMultiPages extends TpBase {
 		if (fragment === "") return;
 
 		const viewer = this.contentElement?.querySelector<HTMLElement>(
-			"tp-markdown, tp-asciidoc, tp-restructuredtext, .tp-markup-multi-pages-html-output",
+			"tp-markdown, tp-asciidoc, tp-restructuredtext, tp-latex, .tp-markup-multi-pages-html-output",
 		);
 		if (!(viewer instanceof HTMLElement)) {
 			this.scrollToFragment(fragment);
@@ -1683,6 +1712,7 @@ export class TpMarkupMultiPages extends TpBase {
 	}
 
 	private get preferredExtension(): string {
+		if (this.fixedLanguage === "latex") return "tex";
 		if (this.fixedLanguage === "html") return "html";
 		if (this.fixedLanguage === "asciidoc") return "adoc";
 		if (this.fixedLanguage === "restructuredtext") return "rst";
@@ -1692,6 +1722,8 @@ export class TpMarkupMultiPages extends TpBase {
 	private createDefaultNotFoundSource(href: string): string {
 		const language =
 			this.fixedLanguage ?? this.detectLanguage(this.notFoundHref);
+		if (language === "latex")
+			return "\\section*{Page not found} The requested document could not be loaded.";
 		if (language === "html")
 			return `<h1>Page not found</h1><p>The requested page could not be loaded: <code>${escapeHtml(href)}</code></p>`;
 		if (language === "asciidoc")
@@ -1722,15 +1754,26 @@ export class TpMarkupMultiPages extends TpBase {
 		name: "cover" | "sidebar" | "navbar" | "page-not-found",
 	): string[] {
 		const extensions =
-			this.fixedLanguage === "html"
-				? ["html", "htm"]
-				: this.fixedLanguage === "asciidoc"
-					? ["adoc", "asciidoc"]
-					: this.fixedLanguage === "restructuredtext"
-						? ["rst", "rest"]
-						: this.fixedLanguage === "markdown"
-							? ["md", "markdown"]
-							: ["md", "html", "adoc", "asciidoc", "rst", "rest"];
+			this.fixedLanguage === "latex"
+				? ["tex", "latex"]
+				: this.fixedLanguage === "html"
+					? ["html", "htm"]
+					: this.fixedLanguage === "asciidoc"
+						? ["adoc", "asciidoc"]
+						: this.fixedLanguage === "restructuredtext"
+							? ["rst", "rest"]
+							: this.fixedLanguage === "markdown"
+								? ["md", "markdown"]
+								: [
+										"md",
+										"html",
+										"adoc",
+										"asciidoc",
+										"rst",
+										"rest",
+										"tex",
+										"latex",
+									];
 		return extensions.map((extension) => {
 			return `${this.repositoryBasePath}${name}.${extension}`;
 		});

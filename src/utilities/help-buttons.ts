@@ -1,10 +1,14 @@
 import "../components/divider/divider.js";
+import { documentHelpButtons } from "./document-help-buttons.js";
 
 /** Builds a noninteractive legend from the component's currently available controls. */
 export function createHelpButtonTable(
 	host: HTMLElement,
 	instructions: string,
 ): HTMLElement | null {
+	if (/^tp-.*-multi-pages$/.test(host.localName)) {
+		return createHelpButtonTable(documentHelpButtons(host), instructions);
+	}
 	const doc = host.ownerDocument;
 	// Layout wrappers contain commands owned by the surrounding component.
 	const layoutHosts = new Set([
@@ -20,11 +24,11 @@ export function createHelpButtonTable(
 		"tp-splitter",
 	]);
 	const selector =
-		'button, [role="button"], tp-icon-button, tp-button, tp-copy-code, tp-theme[data-help-description]';
+		'button, [role="button"], tp-icon-button, tp-button, tp-copy-code, [data-help-description]';
 	const controls = [
 		...(host.matches(selector) ? [host] : []),
 		...host.querySelectorAll<HTMLElement>(
-			'button, [role="button"], tp-icon-button, tp-button, tp-copy-code, tp-theme[data-help-description]',
+			'button, [role="button"], tp-icon-button, tp-button, tp-copy-code, [data-help-description]',
 		),
 	];
 	const rows = instructions
@@ -75,6 +79,10 @@ export function createHelpButtonTable(
 		// Only inspect ancestors within this component: documentation containers outside
 		// it must never hide its controls from the legend.
 		let excluded = false;
+		const ownedGroup = control.closest<HTMLElement>("[data-help-owner]");
+		const owned =
+			ownedGroup?.dataset.helpOwner === host.localName &&
+			host.contains(ownedGroup);
 		for (
 			let parent: HTMLElement | null = control;
 			parent && parent !== host;
@@ -82,9 +90,11 @@ export function createHelpButtonTable(
 		) {
 			if (
 				parent.matches(
-					'[hidden], [aria-hidden="true"], [data-help-ignore], [data-role="content"], .tp-component-help',
+					'[hidden], [aria-hidden="true"], [data-help-ignore], .tp-component-help',
 				) ||
+				(!owned && parent.matches('[data-role="content"]')) ||
 				(parent !== control &&
+					(!owned || ownedGroup?.contains(parent)) &&
 					(parent.matches(selector) ||
 						(parent.localName.startsWith("tp-") &&
 							!layoutHosts.has(parent.localName))))

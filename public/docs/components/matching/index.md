@@ -112,6 +112,9 @@ bundler
 Basic usage
 : Associate each English expression with its French translation using Select buttons or drag and drop. Remove or replace a pair and observe its shared pair number.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Rich content
 : Associate the flag, sound and video with their descriptions. Use the media controls independently of the Select buttons, then create or remove pairs.
 

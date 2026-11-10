@@ -1,0 +1,138 @@
+{
+  "tagname": "tp-latex-multi-slides",
+  "classname": "TpLatexMultiSlides",
+  "superclass": "TpMarkupMultiSlides",
+  "description": "Presents LaTeX documents as a slide deck.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-latex-multi-slides repository=\"/docs/components/_shared/intro-documents/latex\" label=\"A small guide\"></tp-latex-multi-slides>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "auto",
+      "description": "Enables automatic playback controls. notes follows the current tp-text-to-speech[data-slide-notes] and its [trigger=clic] commands; timing advances each progressive step on a clock. Absent or invalid values keep manual navigation.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "\"\" | \"notes\" | \"timing\"",
+      "default": "\"\""
+    },
+    {
+      "name": "brand",
+      "description": "Legacy brand preset property, such as tp-default. Attribute-driven styling is currently inactive; use the toolbar color control.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"tp-default\""
+    },
+    {
+      "name": "git",
+      "description": "Repository URL assigned to the toolbar source link when the document shell is created. Set before connecting the component.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label",
+      "description": "Title displayed in the center of the document toolbar.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "langs",
+      "description": "Comma-separated language codes. The selector is hidden unless at least two distinct codes are declared.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "logo",
+      "description": "Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "logo-href",
+      "description": "Website opened in the current tab when activating the toolbar logo. Defaults to ./ when omitted or empty.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "menu",
+      "description": "Opens the navigation sidebar when present; the toolbar Menu button toggles this attribute.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "repository",
+      "description": "Root path containing the sidebar, cover and linked documents. The component selects the corresponding HTML, Markdown, AsciiDoc or reStructuredText files.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"/docs\""
+    },
+    {
+      "name": "theme",
+      "description": "Legacy light, dark or auto property. Attribute-driven styling is currently inactive; use the toolbar theme control.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "TpMarkupMultiPagesTheme",
+      "default": "\"\""
+    },
+    {
+      "name": "timing",
+      "description": "Positive integer milliseconds per progressive step in timing mode, also used when notes are absent or finished.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "number",
+      "default": "5000"
+    },
+    {
+      "name": "toolbar",
+      "description": "Comma-separated controls: home, menu, code, calc, postit, clock, lang, color, theme, screen, fullscreen. Absent or empty keeps all controls; none hides commands. Updates immediately.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string | null",
+      "default": "null"
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-markup-multi-slides",
+      "summary": "presents multi-format pages as a responsive slide deck."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "LaTeX multi-slides",
+    "introduction": "The custom `<tp-latex-multi-slides>` element presents LaTeX documents as a slide deck.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Manual / Timing / Narration | Select manual navigation, timed steps or narrated notes; the active mode is highlighted. |\n| Note | Open or close the current slide's notes; unavailable on slides without notes. |\n| Next arrow / click in slide content | Reveal the next progressive step, then advance to the next slide. |\n| Previous arrow / right-click in slide content | Hide the previous step, or return to the preceding slide with its steps revealed. |\n| Play automatically / Pause automatic playback | When automatic mode is enabled, start playback or pause it without losing the current voice or remaining interval. |\n| Stop automatic playback | Cancel automatic playback and keep the current slide. |\n| Speaker notes, when supplied | Open the notes panel or use its speech controls without advancing the slide. |\n| Slide slider | Drag to select a slide directly; its progressive content starts again from the beginning. |\n| Navigation menu, when shown | Choose a slide directly and stop automatic playback. |\n| Links, buttons and fields inside slides | Keep their usual behavior; interacting with them does not advance the slide. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> / <kbd>ArrowRight</kbd> outside editing controls | Reveal the next step or advance to the next slide. |\n| <kbd>ArrowLeft</kbd> / <kbd>Backspace</kbd> outside editing controls | Hide the preceding step or return to the previous slide. |\n| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on the slide slider | Choose a slide. |\n| <kbd>Home</kbd> / <kbd>End</kbd> on the slide slider | Choose the first or last slide. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "keyboard": []
+  }
+}

@@ -8,6 +8,28 @@ Welcome to tp-components. This example uses the browser speech synthesis service
 ::::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/text-to-speech/text-to-speech.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-text-to-speech");
+element1.setAttribute("lang", "en-GB");
+element1.setAttribute("show-text", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/txt");
+element2.textContent = "\n    Welcome to tp-components. This example uses the browser speech synthesis service.\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="English voices"}
 ::: tp-text-to-speech { id="voice-comparison" value="Welcome to tp-components. You can pause this reading and resume it whenever you want." lang="en-US" show-text }
 :::

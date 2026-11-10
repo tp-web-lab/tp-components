@@ -8,8 +8,11 @@ import latexStyle from "../latex/latex.css?inline";
 import markdownStyle from "../markdown/markdown.css?inline";
 import rstStyle from "../restructuredtext/restructuredtext.css?inline";
 
+import documentLabelStyle from "../toolbar/document-label.css?inline";
+
 export const notebookExportStyle = [
 	tokenStyle,
+	documentLabelStyle,
 	resetStyle,
 	baseStyle,
 	markdownStyle,

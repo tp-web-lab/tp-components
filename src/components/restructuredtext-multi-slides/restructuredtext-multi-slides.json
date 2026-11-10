@@ -9,7 +9,116 @@
       "code": "<tp-restructuredtext-multi-slides></tp-restructuredtext-multi-slides>"
     }
   ],
-  "attributes": [],
+  "attributes": [
+    {
+      "name": "auto",
+      "description": "Enables automatic playback controls. notes follows the current tp-text-to-speech[data-slide-notes] and its [trigger=clic] commands; timing advances each progressive step on a clock. Absent or invalid values keep manual navigation.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "\"\" | \"notes\" | \"timing\"",
+      "default": "\"\""
+    },
+    {
+      "name": "brand",
+      "description": "Legacy brand preset property, such as tp-default. Attribute-driven styling is currently inactive; use the toolbar color control.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"tp-default\""
+    },
+    {
+      "name": "git",
+      "description": "Repository URL assigned to the toolbar source link when the document shell is created. Set before connecting the component.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label",
+      "description": "Title displayed in the center of the document toolbar.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "langs",
+      "description": "Comma-separated language codes. The selector is hidden unless at least two distinct codes are declared.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "logo",
+      "description": "Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "logo-href",
+      "description": "Website opened in the current tab when activating the toolbar logo. Defaults to ./ when omitted or empty.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "menu",
+      "description": "Opens the navigation sidebar when present; the toolbar Menu button toggles this attribute.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "repository",
+      "description": "Root path containing the sidebar, cover and linked documents. The component selects the corresponding HTML, Markdown, AsciiDoc or reStructuredText files.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"/docs\""
+    },
+    {
+      "name": "theme",
+      "description": "Legacy light, dark or auto property. Attribute-driven styling is currently inactive; use the toolbar theme control.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "TpMarkupMultiPagesTheme",
+      "default": "\"\""
+    },
+    {
+      "name": "timing",
+      "description": "Positive integer milliseconds per progressive step in timing mode, also used when notes are absent or finished.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "number",
+      "default": "5000"
+    },
+    {
+      "name": "toolbar",
+      "description": "Comma-separated controls: home, menu, code, calc, postit, clock, lang, color, theme, screen, fullscreen. Absent or empty keeps all controls; none hides commands. Updates immediately.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string | null",
+      "default": "null"
+    }
+  ],
   "methods": [],
   "events": [],
   "cssproperties": [],

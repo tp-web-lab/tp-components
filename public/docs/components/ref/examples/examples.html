@@ -7,6 +7,47 @@
       </div>
     </div>
 
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/note/note.js";
+      import "/components/ref/ref.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("div");
+      element1.setAttribute("data-tp-reference-scope", "");
+      element1.append(document.createTextNode("\n  "));
+
+      const element2 = document.createElement("p");
+      element2.append(document.createTextNode("A useful detail "));
+
+      const element3 = document.createElement("tp-ref");
+      element3.setAttribute("href", "^detail");
+      element2.append(element3);
+      element2.append(document.createTextNode("."));
+      element1.append(element2);
+      element1.append(document.createTextNode("\n  "));
+
+      const element4 = document.createElement("tp-note");
+      element4.setAttribute("ref", "detail");
+      element4.setAttribute("title", "Detail");
+
+      const element5 = document.createElement("p");
+      element5.append(document.createTextNode("A note with "));
+
+      const element6 = document.createElement("strong");
+      element6.append(document.createTextNode("formatted content"));
+      element5.append(element6);
+      element5.append(document.createTextNode("."));
+      element4.append(element5);
+      element1.append(element4);
+      element1.append(document.createTextNode("\n"));
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
     <div role="example" label="Notes, bibliography and glossary">
       <div data-tp-reference-scope="">
       <p>Read a note <tp-ref href="^method"></tp-ref>, consult a source <tp-ref href="@book"></tp-ref>, or look up <tp-ref href="%ecosystem"></tp-ref>. Compare another note <tp-ref href="^weather"></tp-ref>, then read the first note again <tp-ref href="^method"></tp-ref>.</p>

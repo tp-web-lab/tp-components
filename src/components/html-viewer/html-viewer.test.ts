@@ -69,7 +69,7 @@ it("covers document construction and all viewer output modes", async () => {
 		'<script type="module">import "/components/card/card.js";</script><tp-card></tp-card>',
 		null,
 	);
-	expect(imported).toContain("tp-loader");
+	expect(imported).not.toContain("tp-loader");
 	expect(imported).not.toContain("/dist/components/");
 	expect(
 		buildIframeDocument(

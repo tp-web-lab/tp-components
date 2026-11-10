@@ -83,6 +83,9 @@ bundler
 Basic usage
 : Propose combinations and use the feedback to find the hidden code.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 mastermind ⭐⭐
 : Try the mastermind puzzle at the difficulty indicated by the stars and use its feedback to refine your answers.
 

@@ -4,6 +4,23 @@
 \rawhtml|<tp-cryptarithm equation="SEND + MORE = MONEY" solution="9567 + 1085 = 10652"></tp-cryptarithm>|
 \end{document}
 
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/cryptarithm/cryptarithm.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-cryptarithm");
+element1.setAttribute("equation", "SEND + MORE = MONEY");
+element1.setAttribute("solution", "9567 + 1085 = 10652");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
 % !tp-example UN + UN + NEUF = ONZE
 \documentclass{article}
 \begin{document}

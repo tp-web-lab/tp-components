@@ -104,6 +104,9 @@ bundler
 Basic usage
 : Enter fullscreen for the target box, then leave fullscreen using the control or Escape.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Toolbar control
 : Enter and exit fullscreen from the toolbar while keeping the containing box as the target.
 

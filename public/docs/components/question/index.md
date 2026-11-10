@@ -165,6 +165,9 @@ bundler
 Basic usage
 : Write an answer, submit it and inspect the feedback and solution panels.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Timed question
 : Open the question and select Start to reveal its content for ten seconds. The Solution tab stays disabled during the countdown unless automatic grading confirms a correct answer. After expiry, select Continue to recover your answer and access the solution.
 

@@ -12,5 +12,38 @@
 :::
 ::::
 ```
+
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/avatar/avatar.js";
+import "/components/avatar-group/avatar-group.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-avatar-group");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("tp-avatar");
+element2.setAttribute("initials", "AL");
+element2.setAttribute("label", "Ada Lovelace");
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("tp-avatar");
+element3.setAttribute("initials", "GH");
+element3.setAttribute("label", "Grace Hopper");
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
+
+const element4 = document.createElement("tp-avatar");
+element4.setAttribute("initials", "KT");
+element4.setAttribute("label", "Katherine Johnson");
+element1.append(element4);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
 :::::
 ::::::

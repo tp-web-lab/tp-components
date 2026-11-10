@@ -130,7 +130,7 @@ export function nativeMarkup(
 			return language === "md"
 				? `[${body}](${attr(node, "href")})`
 				: language === "adoc"
-					? `${attr(node, "href")}[${body}]`
+					? `link:${attr(node, "href")}[${body}]`
 					: `\`${body} <${attr(node, "href")}>\`_`;
 		if (node.tagName === "br")
 			return language === "md" ? "  \n" : language === "adoc" ? " +\n" : "\n";

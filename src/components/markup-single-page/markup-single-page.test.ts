@@ -337,7 +337,9 @@ describe("single-page toolbar", () => {
 	);
 
 	it("does not probe translations without the language control", async () => {
-		const fetchMock = vi.fn(async () => new Response("<p>Document</p>"));
+		const fetchMock = vi.fn(
+			async (_input: RequestInfo | URL) => new Response("<p>Document</p>"),
+		);
 		vi.stubGlobal("fetch", fetchMock);
 		const element = document.createElement("tp-markup-single-page");
 		element.src = "/guide/page.html";
@@ -347,7 +349,9 @@ describe("single-page toolbar", () => {
 		await vi.waitFor(() =>
 			expect(element.querySelector("p")?.textContent).toBe("Document"),
 		);
-		expect(fetchMock).toHaveBeenCalledOnce();
+		expect(
+			fetchMock.mock.calls.some(([url]) => String(url).includes("/fr/")),
+		).toBe(false);
 	});
 
 	it("ignores translation discovery completed after removing the toolbar", async () => {

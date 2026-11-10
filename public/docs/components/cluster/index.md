@@ -88,6 +88,9 @@ bundler
 Basic usage
 : Resize the example to see how the items share a row and wrap when space runs out.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Space between
 : Inspect the items placed at opposite ends of the available row.
 

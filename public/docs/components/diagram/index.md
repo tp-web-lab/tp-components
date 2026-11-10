@@ -132,6 +132,9 @@ The same examples are provided in every markup language and cover every diagram 
 Basic usage
 : Inspect the diagram rendered from the embedded Mermaid source.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Architecture diagram
 : Compare the architecture diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
 

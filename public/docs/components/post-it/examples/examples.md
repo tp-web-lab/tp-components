@@ -14,6 +14,58 @@ Keep examples **simple and meaningful**.
 ::::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/box/box.js";
+import "/components/post-it/post-it.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.setAttribute("style", "min-block-size: 20rem");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("Drag the note by its header to move it over the page. The pin folds and opens it."));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("tp-post-it");
+element3.setAttribute("heading", "Remember");
+element3.append(document.createTextNode("\n    "));
+
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("Keep examples "));
+
+const element5 = document.createElement("strong");
+element5.append(document.createTextNode("simple and meaningful"));
+element4.append(element5);
+element4.append(document.createTextNode("."));
+element3.append(element4);
+element3.append(document.createTextNode("\n    "));
+
+const element6 = document.createElement("ul");
+element6.append(document.createTextNode("\n      "));
+
+const element7 = document.createElement("li");
+element7.append(document.createTextNode("Show a useful result."));
+element6.append(element7);
+element6.append(document.createTextNode("\n      "));
+
+const element8 = document.createElement("li");
+element8.append(document.createTextNode("Try the keyboard controls."));
+element6.append(element8);
+element6.append(document.createTextNode("\n    "));
+element3.append(element6);
+element3.append(document.createTextNode("\n  "));
+element1.append(element3);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Lite note"}
 ::: tp-post-it { heading="Reminder" lite }
 Keep examples **simple and meaningful**.

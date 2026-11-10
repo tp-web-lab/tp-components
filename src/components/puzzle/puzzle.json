@@ -1,0 +1,134 @@
+{
+  "tagname": "tp-puzzle",
+  "classname": "TpPuzzle",
+  "superclass": "TpBase",
+  "description": "Provides an image puzzle with movable and rotatable pieces.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-puzzle src=\"/docs/components/puzzle/examples/landscape.svg\" pieces=\"12\" alt=\"Mountain lake at sunrise\"></tp-puzzle>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "alt",
+      "description": "Description of the image; falls back to the initial img alternative text.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "exact-orientation",
+      "description": "Starts every piece upright instead of randomly rotated; changing it restarts the game.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "pieces",
+      "description": "Exact number of pieces, from 1 to 144. A factor grid is chosen to approximate the image aspect ratio.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "16"
+    },
+    {
+      "name": "shape",
+      "description": "Square, interlocking, equilateral triangle or regular hexagon pieces.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"square\" | \"puzzle\" | \"triangle\" | \"hexagon\"",
+      "default": "\"puzzle\""
+    },
+    {
+      "name": "src",
+      "description": "Image URL (SVG, PNG, WebP or JPEG); overrides an initial img child. Changing it starts a new game.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "place(id: number, x: number, y: number, angle?: number): boolean",
+      "inherited": false,
+      "description": "Places a piece in SVG cell units; angles must be multiples of the shape’s rotation step (90° or 60°). Snaps near its solution and clamps to the board."
+    },
+    {
+      "name": "redo(): void",
+      "inherited": false,
+      "description": "Reapplies the most recently undone move."
+    },
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Shuffles pieces into the tray and starts a fresh move history."
+    },
+    {
+      "name": "showImage(show = true): void",
+      "inherited": false,
+      "description": "Displays or hides the reference image in the target frame without changing placements."
+    },
+    {
+      "name": "undo(): void",
+      "inherited": false,
+      "description": "Restores the previous accepted move."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-puzzle-change",
+      "emitted": true,
+      "description": "Emitted after a placement, rotation, undo, redo or shuffle; placements are independent copies.",
+      "detail": "{ placements: PuzzlePlacement[]; solved: boolean }"
+    },
+    {
+      "name": "tp-puzzle-complete",
+      "emitted": true,
+      "description": "Emitted when a move first completes the current arrangement.",
+      "detail": "{ placements: PuzzlePlacement[]; solved: boolean }"
+    },
+    {
+      "name": "tp-puzzle-error",
+      "emitted": true,
+      "description": "Emitted when the configuration or image cannot be loaded.",
+      "detail": "{ message: string }"
+    },
+    {
+      "name": "tp-puzzle-load",
+      "emitted": true,
+      "description": "Emitted when the image is loaded and the pieces are ready.",
+      "detail": "{ pieces: number; rows: number; columns: number }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Dropdown menu component."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Puzzle",
+    "introduction": "The custom `<tp-puzzle>` element provides an image puzzle with movable and rotatable pieces.",
+    "interactions": "#### Mouse interactions\n\n| Action | Result |\n| --- | --- |\n| Drag a piece | Moves it with a mouse, pen or touch. An upright piece snaps near its correct target. |\n| Right-click a piece | Opens its rotation menu at the pointer. |\n| Rotate +90° / Rotate −90° or Rotate +60° / Rotate −60° | Rotates the selected piece clockwise or counterclockwise by 90° (square/interlocking) or 60° (triangle/hexagon), from the menu or toolbar. |\n| Show image | Toggles the reference image in the target frame without changing placements. |\n| Undo / Redo | Reverses or reapplies an accepted move or rotation. |\n| Shuffle | Rearranges every piece in the tray and clears move history. |\n| Click outside the rotation menu | Closes the menu. |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Moves focus through controls and pieces. |\n| Arrow keys | Moves the focused piece by 0.05 cell units; hold <kbd>Shift</kbd> for 0.25 units. |\n| <kbd>R</kbd> / <kbd>Shift</kbd>+<kbd>R</kbd> | Rotates the focused piece by ±90° (square/interlocking) or ±60° (triangle/hexagon). |\n| <kbd>ContextMenu</kbd> / <kbd>Shift</kbd>+<kbd>F10</kbd> | Opens the focused piece's rotation menu. |\n| <kbd>Escape</kbd> | Cancels a drag or closes the rotation menu and returns focus to the selected piece. |\n| <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Undoes or redoes a move while a piece is focused. <kbd>Command</kbd> is also accepted. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activates a focused toolbar button or menu action. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Opens User help for the component under the pointer, falling back to focus. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Opens contextual component documentation. |",
+    "keyboard": []
+  }
+}

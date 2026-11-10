@@ -94,6 +94,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Enter 2+3*4 and evaluate it, then try sin(30) in degree mode. Use the scientific keys to transform a selected expression.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs

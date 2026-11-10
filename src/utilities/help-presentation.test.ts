@@ -95,3 +95,63 @@ describe("help presentation", () => {
 		expect(createHelpButtonTable(document.createElement("div"), "")).toBeNull();
 	});
 });
+
+it("lists annotated document controllers and owned footer navigation without their internal commands", () => {
+	const host = document.createElement("tp-test-document");
+	host.innerHTML = `<tp-toolbar>
+ <tp-color data-help-label="Color" data-help-description="Choose an accent color." data-help-group="Toolbar — right"><tp-icon-button label="Choose glaz" name="palette"></tp-icon-button></tp-color>
+ <tp-source hidden data-help-description="Open repository." data-help-label="Repository"></tp-source>
+ </tp-toolbar>
+ <main data-role="content"><tp-markdown>
+ <tp-button>Author button</tp-button>
+ <nav data-help-owner="tp-test-document" data-help-group="Bottom of page">
+ <tp-button data-help-label="Next page" data-help-description="Open the next page.">Chapter</tp-button>
+ <tp-code-editor><button>Copy</button></tp-code-editor>
+ </nav></tp-markdown></main>`;
+	const legend = createHelpButtonTable(host, "");
+	expect(legend?.querySelectorAll("tbody tr")).toHaveLength(2);
+	expect(legend?.textContent).toContain("Choose an accent color.");
+	expect(legend?.textContent).toContain("Next page");
+	expect(legend?.textContent).not.toMatch(
+		/Choose glaz|Repository|Author button|Copy/,
+	);
+	expect(
+		[...(legend?.querySelectorAll("h4") ?? [])].map((h) => h.textContent),
+	).toEqual(["Toolbar — right", "Bottom of page"]);
+});
+
+it("documents optional multi-page commands and both fullscreen states even without rendered controls", () => {
+	for (const format of [
+		"markup",
+		"markdown",
+		"asciidoc",
+		"restructuredtext",
+		"html",
+		"latex",
+	]) {
+		const host = document.createElement(`tp-${format}-multi-pages`);
+		const legend = createHelpButtonTable(host, "");
+		for (const name of [
+			"Logo",
+			"Source repository (git)",
+			"Language",
+			"Previous page",
+			"Next page",
+			"Expand/Collapse branch",
+		])
+			expect(legend?.textContent).toContain(name);
+		const row = [...(legend?.querySelectorAll("tbody tr") ?? [])].find((row) =>
+			row.textContent?.includes("Fullscreen / Exit fullscreen"),
+		);
+		expect(
+			[...(row?.querySelectorAll("tp-icon") ?? [])].map((icon) =>
+				icon.getAttribute("name"),
+			),
+		).toEqual(["fullscreen", "fullscreen-exit"]);
+		expect(
+			row
+				?.querySelector('tp-divider[orientation="vertical"]')
+				?.getAttribute("style"),
+		).toContain("inline-block");
+	}
+});

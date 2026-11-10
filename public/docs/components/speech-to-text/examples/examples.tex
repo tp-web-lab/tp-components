@@ -4,6 +4,23 @@
 \wcTpSpeechToText[lang=en-US,interim-results]{}
 \end{document}
 
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/speech-to-text/speech-to-text.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-speech-to-text");
+element1.setAttribute("lang", "en-US");
+element1.setAttribute("interim-results", "");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
 % !tp-example French
 \documentclass{article}
 \begin{document}

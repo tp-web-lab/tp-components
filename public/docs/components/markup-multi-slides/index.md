@@ -118,6 +118,12 @@ A click in the slide content, the `Enter` key, the `Space` key, the right arrow 
 ></tp-markup-multi-slides>
 ```
 
+### Shared document attributes
+
+This component accepts the same attributes as [`tp-markup-multi-pages`](../markup-multi-pages/index.md): `repository`, `toolbar`, `menu`, `label`, `git`, `langs`, `logo`, `logo-href`, `brand` and `theme`. They are also available in the Component viewer's Attributes tab and Demo controls. `brand` and `theme` retain their legacy behavior; use the toolbar controls to change the appearance.
+
+The additional `auto` and `timing` attributes configure automatic slide playback.
+
 ### Importing
 
 ::: tp-tabs
@@ -151,6 +157,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Move between the slides rendered from the markup source.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 
 Slides navigation menu
 : Open the slide navigation menu and use it to move between the supplied slides.

@@ -15,6 +15,58 @@
             verso
                ...and here is the content **verso.**
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/flip-card/flip-card.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-flip-card");
+            element1.append(document.createTextNode("\n"));
+
+            const element2 = document.createElement("dl");
+            element2.append(document.createTextNode("\n  "));
+
+            const element3 = document.createElement("dt");
+            element3.append(document.createTextNode("recto"));
+            element2.append(element3);
+
+            const element4 = document.createElement("dd");
+
+            const element5 = document.createElement("p");
+            element5.append(document.createTextNode("This is the content "));
+
+            const element6 = document.createElement("strong");
+            element6.append(document.createTextNode("recto..."));
+            element5.append(element6);
+            element4.append(element5);
+            element2.append(element4);
+            element2.append(document.createTextNode("\n  "));
+
+            const element7 = document.createElement("dt");
+            element7.append(document.createTextNode("verso"));
+            element2.append(element7);
+
+            const element8 = document.createElement("dd");
+
+            const element9 = document.createElement("p");
+            element9.append(document.createTextNode("...and here is the content "));
+
+            const element10 = document.createElement("strong");
+            element10.append(document.createTextNode("verso."));
+            element9.append(element10);
+            element8.append(element9);
+            element2.append(element8);
+            element2.append(document.createTextNode("\n"));
+            element1.append(element2);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: Hearts suit
 
          .. role:: inline-tp-icon-26(tp-icon)

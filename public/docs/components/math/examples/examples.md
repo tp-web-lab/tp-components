@@ -4,6 +4,26 @@
 The identity :tp-math:`…`{value="a^2 + b^2 = c^2" label="a squared plus b squared equals c squared"} describes a right triangle.
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/math/math.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("p");
+element1.append(document.createTextNode("The identity "));
+
+const element2 = document.createElement("tp-math");
+element2.setAttribute("value", "a^2 + b^2 = c^2");
+element2.setAttribute("label", "a squared plus b squared equals c squared");
+element1.append(element2);
+element1.append(document.createTextNode(" describes a right triangle."));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Script and display style"}
 :::: tp-math
 ::: script { type="tp/math" }

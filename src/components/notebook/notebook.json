@@ -11,6 +11,15 @@
   ],
   "attributes": [
     {
+      "name": "label",
+      "description": "Title displayed in the center of the exported HTML toolbar. Defaults to the notebook type name; an empty value hides it.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
       "name": "language",
       "description": "Programming language enforced by a specialized notebook.",
       "reflected": true,
@@ -18,6 +27,15 @@
       "inherited": false,
       "type": "string",
       "default": "\"javascript\""
+    },
+    {
+      "name": "logo",
+      "description": "Icon name displayed at the start of the exported HTML toolbar. Defaults to the notebook type icon; an empty value hides it.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
     },
     {
       "name": "readonly",
@@ -62,7 +80,13 @@
       "detail": "{ source: \"inline\" | \"src\" | \"repository\" | \"file\"; cells: number }"
     }
   ],
-  "cssproperties": [],
+  "cssproperties": [
+    {
+      "name": "--tp-notebook-export-brand",
+      "default": "",
+      "description": "Controls the export brand."
+    }
+  ],
   "dependencies": [
     {
       "name": "tp-asciidoc-viewer",

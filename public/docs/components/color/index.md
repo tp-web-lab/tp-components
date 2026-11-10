@@ -123,6 +123,9 @@ bundler
 Basic usage
 : Choose a brand color and observe the content inside its color scope.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Local color scope
 : Change the brand color of the local box without targeting the whole page.
 

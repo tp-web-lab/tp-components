@@ -102,6 +102,9 @@ bundler
 Basic usage
 : Play the three-second moving-shapes clip, pause it and seek with the native video controls.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 YouTube video
 : Play the author’s French virtual-reality introduction with the YouTube controls. Internet access and an embeddable video are required.
 <!-- tp-docgen:example-descriptions:end -->

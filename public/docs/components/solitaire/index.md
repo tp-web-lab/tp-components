@@ -74,6 +74,9 @@ bundler
 Basic usage
 : Play the card layout using the game’s available moves and controls.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 32 cards with red back
 : Play solitaire using the 32-card red-backed deck.
 <!-- tp-docgen:example-descriptions:end -->

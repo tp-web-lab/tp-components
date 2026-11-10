@@ -119,6 +119,9 @@ bundler
 Basic usage
 : Flip the card to inspect its front and back content.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Hearts suit
 : Flip each of the thirteen hearts cards in the cluster by clicking it, or using Enter or Space when focused. Each card turns independently and the cluster wraps to fit the available width.
 <!-- tp-docgen:example-descriptions:end -->

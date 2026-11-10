@@ -293,6 +293,7 @@ export {
 export { TpJavascriptPlaygroundQuestion } from "./components/javascript-playground-question/javascript-playground-question.js";
 export { TpJavascriptViewer } from "./components/javascript-viewer/javascript-viewer.js";
 export { TpJavascriptViewerQuestion } from "./components/javascript-viewer-question/javascript-viewer-question.js";
+export { TpKakuro } from "./components/kakuro/kakuro.js";
 export { TpLang } from "./components/lang/lang.js";
 export { TpListTable } from "./components/list-table/list-table.js";
 export { TpLoremIpsum } from "./components/lorem-ipsum/lorem-ipsum.js";
@@ -361,6 +362,11 @@ export { TpPrologPlaygroundQuestion } from "./components/prolog-playground-quest
 export { TpPrologViewer } from "./components/prolog-viewer/prolog-viewer.js";
 export { TpPrologViewerQuestion } from "./components/prolog-viewer-question/prolog-viewer-question.js";
 export { TpProseEditor } from "./components/prose-editor/prose-editor.js";
+export {
+	type PuzzlePlacement,
+	type PuzzleShape,
+	TpPuzzle,
+} from "./components/puzzle/puzzle.js";
 export { TpPythonNotebook } from "./components/python-notebook/python-notebook.js";
 export {
 	TpPythonPlayground,
@@ -480,7 +486,9 @@ export { TpAsciidocBlog } from "./components/asciidoc-blog/asciidoc-blog.js";
 export { TpAudioPlaylist } from "./components/audio-playlist/audio-playlist.js";
 export { TpBiblio } from "./components/biblio/biblio.js";
 export { TpCalculator } from "./components/calculator/calculator.js";
+export { TpCarousel } from "./components/carousel/carousel.js";
 export * from "./components/component-viewer/component-viewer.js";
+export { TpControl } from "./components/control/control.js";
 export { TpGlossary } from "./components/glossary/glossary.js";
 export type {
 	GeometryObject,
@@ -497,10 +505,13 @@ export {
 } from "./components/graph-geometry/graph-geometry.js";
 export { TpHtmlBlog } from "./components/html-blog/html-blog.js";
 export { TpLatex } from "./components/latex/latex.js";
+export { TpLatexMultiPages } from "./components/latex-multi-pages/latex-multi-pages.js";
+export { TpLatexMultiSlides } from "./components/latex-multi-slides/latex-multi-slides.js";
 export {
 	TpLatexPlayground,
 	TpLatexProject,
 } from "./components/latex-playground/latex-playground.js";
+export { TpLatexSinglePage } from "./components/latex-single-page/latex-single-page.js";
 export { TpLatexViewer } from "./components/latex-viewer/latex-viewer.js";
 export { TpListof } from "./components/listof/listof.js";
 export { TpLogigram } from "./components/logigram/logigram.js";
@@ -538,5 +549,4 @@ export {
 	type TpVideoPlayerErrorDetail,
 	type TpVideoPlayerEventDetail,
 } from "./components/video-player/video-player.js";
-
 export { TpWordCloud } from "./components/word-cloud/word-cloud.js";

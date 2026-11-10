@@ -22,5 +22,45 @@ Select a file to see its path.
 ====
 =====
 ======
+
+.Javascript API
+======
+[script,type="module"]
+====
+import "/components/box/box.js";
+import "/components/file-tree/file-tree.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.setAttribute("data-intro-action", "file-tree");
+element1.setAttribute("data-allow-script", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("Expand the folders and select a file in this in-memory example."));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("tp-file-tree");
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
+
+const element4 = document.createElement("p");
+element4.setAttribute("data-demo-status", "");
+element4.setAttribute("role", "status");
+element4.append(document.createTextNode("Select a file to see its path."));
+element1.append(element4);
+element1.append(document.createTextNode("\n  "));
+
+const element5 = document.createElement("script");
+element5.setAttribute("src", "/docs/components/_shared/introduction-actions.js");
+element1.append(element5);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+====
+======
 ----
 ========

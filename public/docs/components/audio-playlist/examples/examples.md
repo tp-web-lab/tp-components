@@ -7,5 +7,46 @@
 2. [Evening melody](/docs/components/audio-playlist/examples/track-2.wav)
 :::
 ```
+
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/audio-playlist/audio-playlist.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-audio-playlist");
+element1.append(document.createTextNode("\n"));
+
+const element2 = document.createElement("ol");
+element2.append(document.createTextNode("\n"));
+
+const element3 = document.createElement("li");
+element3.append(document.createTextNode("\n"));
+
+const element4 = document.createElement("a");
+element4.setAttribute("href", "/docs/components/audio-playlist/examples/track-1.wav");
+element4.append(document.createTextNode("Morning melody"));
+element3.append(element4);
+element3.append(document.createTextNode("\n"));
+element2.append(element3);
+element2.append(document.createTextNode("\n"));
+
+const element5 = document.createElement("li");
+element5.append(document.createTextNode("\n"));
+
+const element6 = document.createElement("a");
+element6.setAttribute("href", "/docs/components/audio-playlist/examples/track-2.wav");
+element6.append(document.createTextNode("Evening melody"));
+element5.append(element6);
+element5.append(document.createTextNode("\n"));
+element2.append(element5);
+element2.append(document.createTextNode("\n"));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
 ::::
 :::::

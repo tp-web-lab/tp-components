@@ -18,6 +18,26 @@
 ::::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/tikz/tikz.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-tikz");
+element1.setAttribute("scale", "1.8");
+element1.setAttribute("label", "Linear, sine and exponential functions");
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/tikz");
+element2.textContent = "\\begin{tikzpicture}[domain=0:4]\n  \\draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);\n\n  \\draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};\n  \\draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};\n\n  \\draw[color=red]    plot (\\x,\\x)             node[right] {$f(x) =x$};\n  % \\x r means to convert '\\x' from degrees to _r_adians:\n  \\draw[color=blue]   plot (\\x,{sin(\\x r)})    node[right] {$f(x) = \\sin x$};\n  \\draw[color=orange] plot (\\x,{0.05*exp(\\x)}) node[right] {$f(x) = \\frac{1}{20} \\mathrm e^x$};\n\\end{tikzpicture}";
+element1.append(element2);
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Trie graph"}
 :::: tp-tikz { scale="1.8" label="Trie graph with a highlighted path" libraries="graphs,arrows.meta" }
 ::: script { type="tp/tikz" }

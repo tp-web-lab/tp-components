@@ -4,5 +4,22 @@
 ::: tp-graph-editor { grid grid-size="20" message="Graph message area" src="/docs/components/graph-editor/examples/graph-example.json" }
 :::
 ```
+
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/graph-editor/graph-editor.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-graph-editor");
+element1.setAttribute("grid", "");
+element1.setAttribute("grid-size", "20");
+element1.setAttribute("message", "Graph message area");
+element1.setAttribute("src", "/docs/components/graph-editor/examples/graph-example.json");
+example.append(element1);
+
+document.body.append(example);
+:::
+```
 ::::
 :::::

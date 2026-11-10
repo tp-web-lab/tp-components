@@ -68,6 +68,10 @@ repository
 
 The notebook remains a complete block editor. Preview and Export HTML turn markup cells into rendered HTML while preserving the interactive Python viewers.
 
+The exported HTML toolbar stays at the top of the window while scrolling. The clock is visible by default and can be hidden from the Controllers menu. Set `label="My notebook"` to display a title in its center; the default title is the notebook type name (for example, `Generic Notebook` or `Python Notebook`). Set `label=""` to hide it.
+
+Set `logo="logo-tp"` to display an icon at the left of the exported HTML toolbar, at the same height as its buttons. The value is a `tp-icon` name. By default, the icon of this notebook type is displayed. Set `logo=""` to hide it.
+
 ### Importing
 
 ::: tp-tabs
@@ -101,6 +105,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Run the python notebook cells and inspect their outputs.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs

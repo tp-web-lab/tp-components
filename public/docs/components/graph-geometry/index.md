@@ -295,6 +295,9 @@ bundler
 Basic usage
 : Drag A or B and observe the arcs, intersections and perpendicular bisector follow the segment.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Attached points
 : Move the centre O and slide P around its circle or Q along its line. The fixed-radius circle and attached points keep their construction relationships.
 

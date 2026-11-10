@@ -119,6 +119,9 @@ bundler
 Basic usage
 : Choose a theme and observe how the content inside its scope changes appearance.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Local theme scope
 : Change the theme of the local box without targeting the whole page.
 

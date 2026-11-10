@@ -2,11 +2,11 @@
   "tagname": "tp-slider",
   "classname": "TpSlider",
   "superclass": "TpBase",
-  "description": "Arranges content in a horizontally scrollable row.",
+  "description": "Arranges content in a horizontally or vertically scrollable strip.",
   "examples": [
     {
       "label": "Example 1",
-      "code": "```html\n<tp-box style=\"max-inline-size: 28rem\">\n  <tp-slider scrollbar item-width=\"10rem\" gap=\"1rem\">\n    <tp-box>First</tp-box><tp-box>Second</tp-box><tp-box>Third</tp-box><tp-box>Fourth</tp-box>\n  </tp-slider>\n</tp-box>\n```"
+      "code": "```html\n<tp-box style=\"max-inline-size: 28rem\">\n  <tp-slider scrollbar=\"\" item-width=\"10rem\" gap=\"1rem\" style=\"max-block-size: 8rem\">\n    <tp-box>First</tp-box><tp-box>Second</tp-box><tp-box>Third</tp-box><tp-box>Fourth</tp-box>\n  </tp-slider>\n</tp-box>\n```"
     }
   ],
   "attributes": [
@@ -27,6 +27,15 @@
       "inherited": false,
       "type": "string",
       "default": "\"auto\""
+    },
+    {
+      "name": "orientation",
+      "description": "Scrolling direction. Vertical sliders need a bounded slider-height.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"horizontal\" | \"vertical\"",
+      "default": "\"horizontal\""
     },
     {
       "name": "scrollback-thumb-color",
@@ -93,8 +102,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Slider",
-    "introduction": "The custom `<tp-slider>` element arranges content in a horizontally scrollable row.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Horizontal scrolling | Scroll to reveal items outside the visible area. |\n| Links and controls | Use embedded items normally. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> | Moves focus to the slider, then to its focusable children. |\n| <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> | Scrolls the focused slider left or right by 80% of its visible width. |\n| <kbd>Home</kbd> / <kbd>End</kbd> | Scrolls the focused slider to the start or end of its content, respecting text direction. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-slider>` element arranges content in a horizontally or vertically scrollable strip.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Horizontal or vertical scrolling | Scroll to reveal items outside the visible area. |\n| Links and controls | Use embedded items normally. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> | Moves focus to the slider, then to its focusable children. |\n| <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> | Scrolls the focused slider left or right by 80% of its visible width. |\n| <kbd>ArrowUp</kbd> / <kbd>ArrowDown</kbd> | Scrolls the focused vertical slider by 80% of its visible height. |\n| <kbd>Home</kbd> / <kbd>End</kbd> | Scrolls the focused slider to the start or end of its content, respecting text direction. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Tab",
@@ -103,6 +112,10 @@
       {
         "key": "ArrowLeft / ArrowRight",
         "description": "Scrolls the focused slider left or right by 80% of its visible width."
+      },
+      {
+        "key": "ArrowUp / ArrowDown",
+        "description": "Scrolls the focused vertical slider up or down by 80% of its visible height."
       },
       {
         "key": "Home / End",

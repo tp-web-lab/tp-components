@@ -18,6 +18,28 @@
                Latvia,Riga
                Lithuania,Vilnius
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/csv-table/csv-table.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-csv-table");
+            element1.setAttribute("heading", "");
+            element1.append(document.createTextNode("\n  "));
+
+            const element2 = document.createElement("script");
+            element2.setAttribute("type", "tp/csv-table");
+            element2.textContent = "\n    Country,Capital\n    Estonia,Tallinn\n    Latvia,Riga\n    Lithuania,Vilnius\n  ";
+            element1.append(element2);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: Quoted fields
 
          .. tp-csv-table::

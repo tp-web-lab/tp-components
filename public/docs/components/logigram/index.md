@@ -193,6 +193,9 @@ bundler
 Basic usage
 : Match three readers with their books and drinks using the triangular grid, and use Assist… → Show all incorrect boxes to verify the matches.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Automatic exclusions
 : Solve the reading club puzzle across three matrices. Observe automatic exclusions and use Undo to reverse a move.
 <!-- tp-docgen:example-descriptions:end -->

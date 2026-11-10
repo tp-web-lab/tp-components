@@ -33,6 +33,7 @@ export function updateDocumentLogo(
 	} catch {
 		/* An invalid destination leaves the logo inactive. */
 	}
+	icon.dataset.helpGroup = "Toolbar — left";
 	icon.dataset.logoHref = destination;
 	icon.toggleAttribute("disabled", !destination);
 	icon.setAttribute("label", destination ? "Visit associated website" : "Logo");

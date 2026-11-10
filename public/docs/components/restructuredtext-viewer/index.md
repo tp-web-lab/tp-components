@@ -15,6 +15,7 @@ The custom `<tp-restructuredtext-viewer>` element provides an interactive reStru
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-restructuredtext-viewer>
         <script type="tp/restructuredtext">
           Live reStructuredText
@@ -26,6 +27,7 @@ The custom `<tp-restructuredtext-viewer>` element provides an interactive reStru
           * Second item
         </script>
       </tp-restructuredtext-viewer>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>
@@ -176,6 +178,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Inspect the rendered output of the supplied restructuredtext example and open the source panel to compare it with the code.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 
 Multiple examples
 : Switch between the named examples and compare their source and rendered output.

@@ -5,6 +5,19 @@
 :::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/audio-recorder/audio-recorder.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-audio-recorder");
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Spoken answer"}
 :::: tp-fill-blank-question { open }
 Title

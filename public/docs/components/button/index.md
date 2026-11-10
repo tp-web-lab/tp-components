@@ -79,6 +79,9 @@ bundler
 Basic usage
 : Activate the button to follow its documentation link.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Navigation link
 : Open the destination in a new tab using a button rendered as a link.
 

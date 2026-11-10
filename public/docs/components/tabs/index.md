@@ -97,6 +97,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Select the tabs to switch between their content panels.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs

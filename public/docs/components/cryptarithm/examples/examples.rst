@@ -11,6 +11,22 @@
             :equation: SEND + MORE = MONEY
             :solution: 9567 + 1085 = 10652
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/cryptarithm/cryptarithm.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-cryptarithm");
+            element1.setAttribute("equation", "SEND + MORE = MONEY");
+            element1.setAttribute("solution", "9567 + 1085 = 10652");
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: UN + UN + NEUF = ONZE
 
          .. tp-cryptarithm::

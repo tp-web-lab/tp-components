@@ -110,6 +110,9 @@ For component integrations, the programmatic `adapter` property accepts a local 
 Basic usage
 : Move tasks between To do and Done, including an empty column, by dragging or using the Move buttons.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Sortable list
 : Reorder the publishing steps by dragging or using the Up and Down buttons, and observe the insertion indicator.
 

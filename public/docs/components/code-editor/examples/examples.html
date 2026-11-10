@@ -9,6 +9,28 @@
       </tp-code-editor>
     </div>
 
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/code-editor/code-editor.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-code-editor");
+      element1.setAttribute("language", "javascript");
+      element1.setAttribute("line-numbers", "");
+      element1.append(document.createTextNode("\n  "));
+
+      const element2 = document.createElement("script");
+      element2.setAttribute("type", "tp/javascript");
+      element2.textContent = "\nconst greeting = \"Hello, tp-components!\";\nconsole.log(greeting);\n  ";
+      element1.append(element2);
+      element1.append(document.createTextNode("\n"));
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
     <div role="example" label="Using an internal script">
       <tp-code-editor line-numbers="">
             <script type="tp/typescript">

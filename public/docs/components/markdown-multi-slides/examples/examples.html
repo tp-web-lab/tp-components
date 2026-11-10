@@ -4,6 +4,21 @@
       <tp-markdown-multi-slides repository="/docs/components/markdown-multi-pages/docs"></tp-markdown-multi-slides>
     </div>
 
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/markdown/markdown.js";
+      import "/components/markdown-multi-slides/markdown-multi-slides.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-markdown-multi-slides");
+      element1.setAttribute("repository", "/docs/components/markdown-multi-pages/docs");
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
     <div role="example" label="Automatic notes">
       <tp-markdown-multi-slides repository="/docs/components/markup-multi-slides/automatic/md" auto="notes" timing="5000" label="Automatic notes"></tp-markdown-multi-slides>
     </div>

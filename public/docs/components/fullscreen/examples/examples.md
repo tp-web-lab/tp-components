@@ -11,6 +11,35 @@ Press Esc to exit fullscreen mode.
 ::::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/box/box.js";
+import "/components/fullscreen/fullscreen.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.append(document.createTextNode("\n      "));
+
+const element2 = document.createElement("tp-fullscreen");
+element1.append(element2);
+element1.append(document.createTextNode("\n      "));
+
+const element3 = document.createElement("p");
+element3.append(document.createTextNode("This box is the fullscreen target."));
+element1.append(element3);
+element1.append(document.createTextNode("\n      "));
+
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("Press Esc to exit fullscreen mode."));
+element1.append(element4);
+element1.append(document.createTextNode("\n    "));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Toolbar control"}
 ::::: tp-box
 :::: tp-toolbar

@@ -9,6 +9,20 @@
 
          .. tp-formula-picker::
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/formula-picker/formula-picker.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-formula-picker");
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: Selection event
 
          .. tp-formula-picker::

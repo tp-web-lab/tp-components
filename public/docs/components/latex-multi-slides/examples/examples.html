@@ -1,0 +1,23 @@
+<tp-html-viewer label="tp-latex-multi-slides" allow-script style="--tp-html-viewer-frame-min-height: 32rem">
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-latex-multi-slides repository="/docs/components/_shared/intro-documents/latex" label="A small guide"></tp-latex-multi-slides>
+    </div>
+
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/latex/latex.js";
+      import "/components/latex-multi-slides/latex-multi-slides.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-latex-multi-slides");
+      element1.setAttribute("repository", "/docs/components/_shared/intro-documents/latex");
+      element1.setAttribute("label", "A small guide");
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+  </template>
+</tp-html-viewer>

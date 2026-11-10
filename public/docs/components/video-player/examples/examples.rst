@@ -12,6 +12,23 @@
             :controls:
             :label: Moving shapes
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/video-player/video-player.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-video-player");
+            element1.setAttribute("src", "/docs/components/video-player/examples/clip-1.mp4");
+            element1.setAttribute("controls", "");
+            element1.setAttribute("label", "Moving shapes");
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: YouTube video
 
          .. tp-video-player::

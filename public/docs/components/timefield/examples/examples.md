@@ -5,6 +5,22 @@
 :::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/timefield/timefield.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-timefield");
+element1.setAttribute("label", "Time");
+element1.setAttribute("value", "14:30");
+element1.setAttribute("clearable", "");
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Inline named field"}
 Value: :tp-timefield:`identifier`{value="14:30" placeholder="Enter a value"}
 ```

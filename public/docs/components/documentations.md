@@ -67,6 +67,24 @@ Documentation components turn HTML and markup documents into single-page or mult
 :::
 
 ::: tp-center { intrinsic }
+:tp-icon:{name="latex-multi-pages" library="components" size="4em" aria-hidden="true"}
+
+[tp-latex-multi-pages](latex-multi-pages/index.md)
+:::
+
+::: tp-center { intrinsic }
+:tp-icon:{name="latex-multi-slides" library="components" size="4em" aria-hidden="true"}
+
+[tp-latex-multi-slides](latex-multi-slides/index.md)
+:::
+
+::: tp-center { intrinsic }
+:tp-icon:{name="latex-single-page" library="components" size="4em" aria-hidden="true"}
+
+[tp-latex-single-page](latex-single-page/index.md)
+:::
+
+::: tp-center { intrinsic }
 :tp-icon:{name="listof" library="components" size="4em" aria-hidden="true"}
 
 [tp-listof](listof/index.md)

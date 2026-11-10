@@ -88,6 +88,9 @@ bundler
 Basic usage
 : Reveal cards and find matching pairs, remembering their positions.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Numbers 0 to 9
 : Find pairs of matching number cards.
 

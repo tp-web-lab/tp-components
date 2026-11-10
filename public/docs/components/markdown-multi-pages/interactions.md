@@ -6,9 +6,22 @@ Personal annotations are saved per document in this browser's localStorage, with
 
 | Control or gesture | Result |
 | --- | --- |
+| Logo (toolbar left, when present) | Open the associated website. |
+| Home (toolbar left) | Return to the first page of the documentation from any chapter. |
+| Menu (toolbar left) | Show or hide the table of contents used to choose a page. |
+| Code (toolbar left) | Display the source of the current page; click again to return to the rendered document. |
+| Source repository (toolbar left, when present) | Open the source repository. |
+| Language (toolbar right, when available) | Switch to the selected translation of the documentation. |
+| Color (toolbar right) | Choose the accent color used by the document controls and highlighted elements. |
+| Theme (toolbar right) | Choose a light or dark appearance, or follow the system setting with the automatic theme. |
+| Screen (toolbar right) | Preview the layout at a phone, tablet or desktop screen size; choose default to restore the available window size. |
+| Fullscreen (toolbar right) | Expand the document to fill the screen, or return to the normal window. |
+| Previous page / Next page (bottom of page) | Open the previous or next page in the navigation order. Only available directions are shown. |
+| Top of page (bottom of page) | Scroll to the top of the current page. |
 | Local navigation link (right of the toolbar) | Open the linked document or website. The local navigation stays available when changing pages in a multipage document. |
+| Expand/Collapse branch | Reveal or hide the child entries of a heading without changing the current page. |
 | Expand all / Collapse all (sidebar) | Open or close every branch of the global table of contents. Page order stays unchanged. |
-| Widen table of contents / Restore width | Fit the sidebar to the longest title, including nested titles, on one line. Click again to restore the previous divider position. On small screens, width is limited to the viewport and long titles can scroll horizontally. |
+| Widen/Restore width | Fit the sidebar to the longest title, including nested titles, on one line. Click again to restore the previous divider position. On small screens, width is limited to the viewport and long titles can scroll horizontally. |
 | Search (left of the sidebar controls) | Show or hide a clearable search field. Matching titles are highlighted, their ancestor branches open automatically, and the sidebar scrolls to the first result below the search controls; the displayed page does not change. Search ignores case and accents. A search with no matches displays “0 results” in the danger color. |
 | Clear search | Remove highlights and the result count; branches opened by the search remain open. |
 | Calculator (between Code and Personal annotations) | Open or close the scientific calculator. Calculations are retained when closing the panel or navigating between pages. |
@@ -16,9 +29,6 @@ Personal annotations are saved per document in this browser's localStorage, with
 | Annotation pin | Click to open the note, or drag it to another document element. Its attachment is saved. |
 | Edit / Reattach / Delete | Update the selected annotation, choose a new target, or remove it from this browser. Each note has pencil (Edit) and delete-outline (Delete) icon buttons in its bottom-right footer. |
 | Annotation appearance | Choose color, heading, opacity (0–1) and rotation (−12–12°). Save stores these settings with the text; Cancel discards edits. Reset appearance defaults restores yellow, an empty heading, opacity 1 and rotation 0 without changing the text. |
-| Using the component | Choose a page in the navigation menu or follow a document link. |
-| Using the component | The selected page replaces the current content. |
-| Using the component | Use the available table of contents and document controls to navigate within it. |
 
 #### Keyboard interactions
 

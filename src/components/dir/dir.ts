@@ -647,6 +647,7 @@ export class TpDir extends TpBase {
 	private getEffectiveParent(): HTMLElement | null {
 		const containerTags = new Set([
 			"TP-TOOLBAR",
+			"TP-CONTROL",
 			"TP-MENU",
 			"TP-DROPDOWN",
 			"TP-BUTTON-GROUP",

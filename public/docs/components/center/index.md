@@ -80,6 +80,9 @@ bundler
 Basic usage
 : Resize the available area and observe how the content remains centered.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Constrained region
 : Compare the same text in two visibly outlined containers with centered regions limited to 18rem and 36rem. The narrower region wraps onto more lines; resize the preview to see both regions adapt to the available width.
 <!-- tp-docgen:example-descriptions:end -->

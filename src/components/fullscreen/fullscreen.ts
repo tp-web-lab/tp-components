@@ -29,6 +29,7 @@ import {
 const STYLE_ID = "tp-fullscreen-styles";
 const CONTAINER_TAGS = new Set([
 	"TP-TOOLBAR",
+	"TP-CONTROL",
 	"TP-MENU",
 	"TP-DROPDOWN",
 	"TP-BUTTON-GROUP",

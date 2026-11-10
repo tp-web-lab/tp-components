@@ -9,6 +9,26 @@
 ::::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/html-viewer/html-viewer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-html-viewer");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/html");
+element2.textContent = "\n\u003ch2>Hello, HTML!\u003c/h2>\n\u003cp>This preview renders \u003cstrong>HTML content\u003c/strong>.\u003c/p>\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Multiple examples"}
 :::: tp-html-viewer
 ::: script { type="tp/html" }

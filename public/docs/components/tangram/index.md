@@ -152,6 +152,9 @@ The examples **Convex 01** through **Convex 13** reproduce the supplied referenc
 Basic usage
 : Drag and rotate the seven pieces to cover the silhouette. Try Undo, Redo and Solution to inspect the dissection.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Named vertices
 : Open the source to see named corners and midpoint constructions. Show the solution to compare the seven pieces with their declared vertices, then play the puzzle.
 

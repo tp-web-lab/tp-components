@@ -144,6 +144,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Inspect the fixed shaded patterns generated from the article HTML. Text, images and nested list content are not rendered.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs

@@ -25,6 +25,66 @@
 
             8. 10!0101!10
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/binary/binary.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-binary");
+            element1.append(document.createTextNode("\n        "));
+
+            const element2 = document.createElement("ol");
+            element2.append(document.createTextNode("\n          "));
+
+            const element3 = document.createElement("li");
+            element3.append(document.createTextNode("1010110!0"));
+            element2.append(element3);
+            element2.append(document.createTextNode("\n          "));
+
+            const element4 = document.createElement("li");
+            element4.append(document.createTextNode("01!01!0011!"));
+            element2.append(element4);
+            element2.append(document.createTextNode("\n          "));
+
+            const element5 = document.createElement("li");
+            element5.append(document.createTextNode("0010101!1!"));
+            element2.append(element5);
+            element2.append(document.createTextNode("\n          "));
+
+            const element6 = document.createElement("li");
+            element6.append(document.createTextNode("11!01!0100"));
+            element2.append(element6);
+            element2.append(document.createTextNode("\n          "));
+
+            const element7 = document.createElement("li");
+            element7.append(document.createTextNode("10011001!"));
+            element2.append(element7);
+            element2.append(document.createTextNode("\n          "));
+
+            const element8 = document.createElement("li");
+            element8.append(document.createTextNode("0!110!1010"));
+            element2.append(element8);
+            element2.append(document.createTextNode("\n          "));
+
+            const element9 = document.createElement("li");
+            element9.append(document.createTextNode("0110!0!101"));
+            element2.append(element9);
+            element2.append(document.createTextNode("\n          "));
+
+            const element10 = document.createElement("li");
+            element10.append(document.createTextNode("10!0101!10"));
+            element2.append(element10);
+            element2.append(document.createTextNode("\n        "));
+            element1.append(element2);
+            element1.append(document.createTextNode("\n      "));
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: binary ⭐⭐
 
          .. tp-binary::

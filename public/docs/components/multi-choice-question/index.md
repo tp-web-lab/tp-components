@@ -100,6 +100,9 @@ bundler
 Basic usage
 : Select the styling languages and submit the question to inspect the feedback and solution.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Derivatives of tan(x)
 : Select all correct derivatives of the tangent among five MathJax-rendered LaTeX expressions, then submit to compare the equivalent formulas and the distractors.
 

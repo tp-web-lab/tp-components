@@ -1,7 +1,7 @@
 # Medias
 
 ::: tp-callout { variant="info" style="margin-bottom: 2em" }
-Media components play, record and save audio or video, compare images, and convert between speech and text.
+Media components play, record and save audio or video, browse and compare images, and convert between speech and text.
 :::
 
 :::::: tp-grid { min-width="10rem" gap="1.5rem" }
@@ -16,6 +16,12 @@ Media components play, record and save audio or video, compare images, and conve
 :tp-icon:{name="audio-recorder" library="components" size="4em" aria-hidden="true"}
 
 [tp-audio-recorder](audio-recorder/index.md)
+:::
+
+::: tp-center { intrinsic }
+:tp-icon:{name="carousel" library="components" size="4em" aria-hidden="true"}
+
+[tp-carousel](carousel/index.md)
 :::
 
 ::: tp-center { intrinsic }

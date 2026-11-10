@@ -111,6 +111,9 @@ bundler
 Basic usage
 : Explore Brest by dragging the map or using its keyboard controls. Select the marker to read its location name; the location button requests permission before using your position.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Multiple markers
 : Explore Brest and Rennes on a map fitted to both places. Select each marker to read its own title; zooming and panning remain available after the initial framing.
 

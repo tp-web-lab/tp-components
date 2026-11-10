@@ -1,4 +1,5 @@
 /* Shared document title for single-page and multi-page toolbars. */
+.tp-notebook-export-toolbar-label,
 .tp-markup-single-page-toolbar .tp-markup-single-page-toolbar-label,
 .tp-markup-multi-pages-toolbar .tp-markup-multi-pages-toolbar-label {
   display: block;
@@ -11,7 +12,8 @@
 }
 
 @media (max-width: 48rem) {
-  .tp-markup-single-page-toolbar .tp-markup-single-page-toolbar-label,
+  .tp-notebook-export-toolbar-label,
+.tp-markup-single-page-toolbar .tp-markup-single-page-toolbar-label,
   .tp-markup-multi-pages-toolbar .tp-markup-multi-pages-toolbar-label {
     font-size: 1rem;
   }

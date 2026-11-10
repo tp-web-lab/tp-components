@@ -105,6 +105,9 @@ bundler
 Basic usage
 : Edit the sample code and try the editor controls.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Using an internal script
 : Edit code initialized from an embedded script.
 

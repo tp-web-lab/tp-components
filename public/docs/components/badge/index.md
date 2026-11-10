@@ -72,6 +72,9 @@ bundler
 Basic usage
 : Observe the pulsing badge indicating that the build is ready.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 With icon
 : Inspect the outlined Vite version badge, which combines an icon, text and a vertical divider.
 

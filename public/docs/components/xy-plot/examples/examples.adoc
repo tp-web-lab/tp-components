@@ -17,6 +17,29 @@ curve Line = function(x, x/2)
 =====
 ======
 
+.Javascript API
+======
+[script,type="module"]
+====
+import "/components/xy-plot/xy-plot.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-xy-plot");
+element1.setAttribute("label", "Functions");
+element1.append(document.createTextNode("\n    "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/xy-plot");
+element2.textContent = "\nlabel = \"Functions\"\nx-axis = [-10, 10]\ny-axis = [-5, 5]\ncurve Sine = function(x, 2*sin(x))\ncurve Line = function(x, x/2)\n";
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+example.append(element1);
+
+document.body.append(example);
+====
+======
+
 .Author directives
 ======
 Use the settings below the graph. Use the bottom-left Code button (also available without settings) to find the editable source, the .txt file menu, F1, Reset definition and Play.

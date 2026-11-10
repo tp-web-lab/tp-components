@@ -18,6 +18,28 @@
                angle: 60
                rule: F => F+F--F+F
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/lsystem/lsystem.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-lsystem");
+            element1.setAttribute("label", "Koch curve");
+            element1.append(document.createTextNode("\n  "));
+
+            const element2 = document.createElement("script");
+            element2.setAttribute("type", "tp/lsystem");
+            element2.textContent = "\n    axiom: F\n    iterations: 3\n    angle: 60\n    rule: F => F+F--F+F\n  ";
+            element1.append(element2);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: Branching tree
 
          .. tp-lsystem::

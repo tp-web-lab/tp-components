@@ -80,6 +80,9 @@ bundler
 Basic usage
 : Compare an image, initials and a fallback icon, displayed in circular and square avatars.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Initials fallback
 : Inspect the initials displayed when no portrait is supplied.
 <!-- tp-docgen:example-descriptions:end -->

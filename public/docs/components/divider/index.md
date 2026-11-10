@@ -99,6 +99,9 @@ bundler
 Basic usage
 : Inspect the horizontal separation between two content groups.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Custom style
 : Inspect a divider with customized visual styling.
 

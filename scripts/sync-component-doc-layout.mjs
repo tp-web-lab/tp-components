@@ -15,6 +15,13 @@ const parser = new MarkdownIt({ html: true }).use(deflist);
 const read = path => readFileSync(path, 'utf8');
 export const dependencyIntroduction = 'All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.';
 const clean = text => text.replace(/<!-- tp-docgen:dependencies:(?:start|end) -->/g, '').replace(/^<!-- -->\s*$/gm, '').replace(/\n(?:[ \t]*\n){2,}/g, '\n\n').trim();
+// Markdown HTML blocks end at blank lines; raw-text children must remain intact.
+export function liveIntroduction(source) {
+  if (!/<(?:script|style|textarea|template)\b/i.test(source)) return source;
+  const fence = '`'.repeat(Math.max(3, ...[...source.matchAll(/`+/g)].map(match => match[0].length + 1)));
+  return `${fence} raw html\n${source}\n${fence}`;
+}
+
 export function sections(source, level) {
   const lines = source.split('\n');
   const tokens = parser.parse(source, {});
@@ -116,7 +123,7 @@ export function transformPage(name, markdown, basic, labels) {
     .replace(/<!-- tp-docgen:dependencies:(?:start|end) -->/g, '').trim().replace(/^### Internal\s*\n/, '').trim();
   if (!dependencies) throw Error(`Missing dependency section: ${name}`);
   const examples = clean(get('Examples')).replace(/<!-- tp-docgen:dependencies:start -->\s*$/, '');
-  let next = `<!-- tp-docgen:page-layout:v2 -->\n<!-- -->\n# <tp-icon name="${name}" library="components" size="1.25em"></tp-icon> ${h1}\n\n<div class="tp-component-doc-overview">\n\n<div class="tp-component-doc-toc">\n<tp-toc position="end" expand-all></tp-toc>\n</div>\n\n<div class="tp-component-doc-intro">\n\n${summary(name, preamble)}\n\n<div class="tp-component-doc-example">\n\n<!-- tp-docgen:introduction:start -->\n${live}\n<!-- tp-docgen:introduction:end -->\n\n</div>\n\n</div>\n\n</div>\n\n<!-- -->\n## Component viewer\n\n<tp-component-viewer tag="tp-${name}" src="/docs/components/${name}/examples/introduction.html"></tp-component-viewer>\n\n<!-- -->\n## Usage\n\n${clean(usage)}\n\n### Importing\n\n${imports(name)}\n\n<!-- -->\n## Examples\n\n${examples}\n\n<!-- -->\n<!-- tp-docgen:dependencies:start -->\n## Dependencies\n\n${dependencyIntroduction}\n\n### Internal\n\n${dependencies}\n<!-- tp-docgen:dependencies:end -->\n`;
+  let next = `<!-- tp-docgen:page-layout:v2 -->\n<!-- -->\n# <tp-icon name="${name}" library="components" size="1.25em"></tp-icon> ${h1}\n\n<div class="tp-component-doc-overview">\n\n<div class="tp-component-doc-toc">\n<tp-toc position="end" expand-all></tp-toc>\n</div>\n\n<div class="tp-component-doc-intro">\n\n${summary(name, preamble)}\n\n${name.endsWith("-multi-pages") ? '<tp-box class="tp-component-doc-example" border-radius="0.5rem">' : '<div class="tp-component-doc-example">'}\n\n<!-- tp-docgen:introduction:start -->\n${liveIntroduction(live)}\n<!-- tp-docgen:introduction:end -->\n\n${name.endsWith("-multi-pages") ? "</tp-box>" : "</div>"}\n\n</div>\n\n</div>\n\n<!-- -->\n## Component viewer\n\n<tp-component-viewer tag="tp-${name}" src="/docs/components/${name}/examples/introduction.html"></tp-component-viewer>\n\n<!-- -->\n## Usage\n\n${clean(usage)}\n\n### Importing\n\n${imports(name)}\n\n<!-- -->\n## Examples\n\n${examples}\n\n<!-- -->\n<!-- tp-docgen:dependencies:start -->\n## Dependencies\n\n${dependencyIntroduction}\n\n### Internal\n\n${dependencies}\n<!-- tp-docgen:dependencies:end -->\n`;
   next = synchronizeDescriptions(next, name, labels);
   return next.replace(/\n(?:[ \t]*\n){2,}/g, '\n\n');
 }

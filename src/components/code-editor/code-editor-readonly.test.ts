@@ -146,3 +146,12 @@ it("offers only reading commands in readonly palettes and restores editing comma
 		).toBeNull();
 	}
 });
+
+it("measures virtualized document lines and follows their reduced height", async () => {
+	const { host, view } = await mount();
+	const height = vi.spyOn(view, "contentHeight", "get");
+	height.mockReturnValue(2400);
+	expect(host.getContentHeight()).toBeGreaterThanOrEqual(2400);
+	height.mockReturnValue(120);
+	expect(host.getContentHeight()).toBeLessThan(2400);
+});

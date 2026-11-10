@@ -13,6 +13,23 @@
 
             The workshop starts at 9:00.
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/callout/callout.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-callout");
+            element1.setAttribute("variant", "info");
+            element1.setAttribute("heading", "Information");
+            element1.append(document.createTextNode("\n  The workshop starts at 9:00.\n"));
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: Dismissible notice
 
          .. tp-callout::

@@ -80,6 +80,9 @@ bundler
 Basic usage
 : Inspect the highlighted workshop notice and its heading.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Dismissible notice
 : Dismiss the saved confirmation with its Close button.
 

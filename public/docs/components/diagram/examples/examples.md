@@ -10,6 +10,27 @@ flowchart LR
 ::::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/diagram/diagram.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-diagram");
+element1.setAttribute("label", "Request flow");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/diagram");
+element2.textContent = "\n    flowchart LR\n      Browser --> Server\n      Server --> Database\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Architecture diagram"}
 ###### [Mermaid](https://mermaid.ai)
 

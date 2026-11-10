@@ -100,6 +100,9 @@ All three examples use `random`: choices are shuffled when the question initiali
 Basic usage
 : Choose the capital of France and submit the question to inspect its feedback and solution.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Derivative of tan(x)
 : Choose the derivative of the tangent function from four MathJax-rendered LaTeX expressions, then submit the answer to inspect the feedback and solution.
 

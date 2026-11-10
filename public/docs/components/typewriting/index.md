@@ -86,6 +86,9 @@ The complete text stays visible until the first word boundary arrives. With voic
 Basic usage
 : Watch the sentence appear letter by letter while its bold formatting is preserved. Click or focus the component to show everything immediately.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Synchronized speech
 : Press Speak to reveal the words as the selected voice pronounces them. Try Pause, Resume and Stop; voices without word boundaries leave the full text visible.
 <!-- tp-docgen:example-descriptions:end -->

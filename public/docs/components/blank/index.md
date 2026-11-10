@@ -117,6 +117,9 @@ bundler
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
 : Assign text and image answers to the blanks in a closed question, then clear or replace them.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs

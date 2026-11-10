@@ -89,6 +89,9 @@ bundler
 Basic usage
 : Inspect the sample messages and use Clear to empty the console.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Values and tables
 : Inspect how the console displays structured values and tabular data.
 

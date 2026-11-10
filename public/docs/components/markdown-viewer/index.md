@@ -153,6 +153,9 @@ bundler
 Basic usage
 : Inspect the rendered output of the supplied markdown example and open the source panel to compare it with the code.
 
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
 Multiple examples
 : Switch between the named examples and compare their source and rendered output.
 <!-- tp-docgen:example-descriptions:end -->
