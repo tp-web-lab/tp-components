@@ -1,10 +1,21 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="list-table" library="components" size="1.25em"></tp-icon> List table
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-list-table>` element implements the List table functionality: creates an HTML table from ordered or unordered lists while preserving cell content.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
-<tp-list-table heading>
+<div class="tp-component-doc-intro">
+
+The custom `<tp-list-table>` element displays structured list content as a table.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
+<tp-list-table heading="">
   <ul>
     <li><ul><li>Country</li><li>Capital</li></ul></li>
     <li><ul><li>Estonia</li><li>Tallinn</li></ul></li>
@@ -12,282 +23,33 @@ The custom `<tp-list-table>` element implements the List table functionality: cr
     <li><ul><li>Lithuania</li><li>Vilnius</li></ul></li>
   </ul>
 </tp-list-table>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-list-table" src="/docs/components/list-table/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Table | Read and select the cell content. Wide tables can be scrolled horizontally. |
-| Embedded controls | Use the controls normally; conversion preserves their content and event listeners. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| Table | No table-specific keyboard shortcut. Embedded links and controls retain their normal keyboard interactions. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Supply one `ul` or `ol`. Each direct list item represents a row; a nested `ul` or `ol` supplies its cells. Mix ordered and unordered lists freely. A simple list produces one column. Cell content, including images and existing `tp-*` controls, is moved into the table without cloning. Keep each row limited to its cell list. The list is captured at initialization; recreate the component to replace its source structure.
 
 Add the boolean `heading` attribute to use the first row as column headings (`th scope="col"` in `thead`). Without it, all rows contain data cells. Boolean attributes are true when present and false when absent. Missing cells in shorter rows are padded with empty cells. Both components reuse the library’s native table styles.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Read the country and capital data converted from nested lists. Each outer item is a row and each inner item is a cell.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Single column
-: Compare a simple ordered list with its one-column table. The first item becomes the heading.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-HTML
-: ::include{examples/examples.html}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
+### Programming notes
 
 Change `heading` to update the header row.
 
-### API
-
-<!-- tp-docgen:api TpListTable -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>heading</code> | <code>boolean</code> | <code>false</code> | Uses the first row as column headings. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-list-table>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpListTable`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-list-table>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-list-table>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_list-table.TpListTable.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -314,12 +76,44 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Read the country and capital data converted from nested lists. Each outer item is a row and each inner item is a cell.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Single column
+: Compare a simple ordered list with its one-column table. The first item becomes the heading.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-list-table>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -330,8 +124,8 @@ All tp-components used by `<tp-list-table>` are loaded automatically by this com
 @summary Callout component for highlighted contextual content.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-callout>`](#/components/callout/index.md) : Callout component for highlighted contextual content.
 
 ### External
 

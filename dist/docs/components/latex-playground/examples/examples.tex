@@ -1,0 +1,40 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpLatexPlayground{
+  \wcScript[type=tp/latex]|\section{Hello}A formula $x^2$.|
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/latex/latex.js";
+import "/components/latex-playground/latex-playground.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-latex-playground");
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/latex");
+element2.textContent = "\\section{Hello}A formula $x^2$.";
+element1.append(element2);
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example A document in sections
+\documentclass{article}
+\begin{document}
+\wcTpLatexPlayground[repository=/examples/playgrounds/latex-playground/09-sectioned-document]{}
+\end{document}
+
+% !tp-example A document with a TikZ figure
+\documentclass{article}
+\begin{document}
+\wcTpLatexPlayground[repository=/examples/playgrounds/latex-playground/10-illustrated-document]{}
+\end{document}

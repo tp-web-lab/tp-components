@@ -1,9 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="markdown" library="components" size="1.25em"></tp-icon> Markdown component
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-markdown>` element implements the <tp-icon name="markdown" library="components" size="1.25em"></tp-icon> Markdown component functionality: markdown rendering component.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-markdown>` element renders Markdown documents.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-markdown>
   <script type="tp/markdown">
 ## A short document
@@ -15,31 +26,23 @@ This paragraph uses **Markdown**.
 - Publish the page
   </script>
 </tp-markdown>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-markdown" src="/docs/components/markdown/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Reading | Read the displayed content and use its links and embedded controls. |
-| Using the component | The component itself adds no editing or playback controls. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Focused controls | Use each control’s standard keyboard interaction.  |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
-
-TeX and AsciiMath formulas use MathJax 4 with SVG output, matching the AsciiDoc and reStructuredText components. The math runtime is loaded on demand and reused on the same page.
-
-#### Initial Markdown content
+### Initial content
 
 ::: tp-tabs
 no content
@@ -64,7 +67,7 @@ external file
   ```
 :::
 
-#### Mathematics
+### Mathematics
 
 AsciiMath
 : Inline equation: :asciimath:`x=(-b +- sqrt(b^2 – 4ac))/(2a)`
@@ -88,358 +91,95 @@ Latex
   \end{eqnarray}
   ```
 
-## Examples
+### Authoring
 
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Inspect how the embedded markdown source is rendered as a formatted document.
+TeX and AsciiMath formulas use MathJax 4 with SVG output, matching the AsciiDoc and reStructuredText components. The math runtime is loaded on demand and reused on the same page.
 
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
+### Extensions to markdown-it
 
-Mathematical notation
-: Compare inline and displayed mathematical notation written in AsciiMath and LaTeX.
-<!-- tp-docgen:example-descriptions:end -->
+`tp-markdown` uses markdown-it with additional plugins, TP syntax extensions and browser renderers. The syntax below is not part of unextended markdown-it or portable CommonMark. Ordinary headings, paragraphs, links and lists retain Markdown syntax.
 
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
+The default plugins add heading anchors, definition lists, attribute blocks and extended tables (including multiline cells, row spans and headerless tables). TP extensions also provide component containers, tabs, examples, references, section numbering, tables of contents, layout helpers and syntax highlighting. These features are configured by the adapter rather than by the document author installing markdown-it plugins.
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
+### Components and attributes
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
+Use a colon fence to create a component whose body is parsed as Markdown:
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpMarkdown -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a Markdown source file to fetch and render; relative paths resolve against the containing source document when available. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-markdown>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>setSafeMarkdown</code> | <code>setSafeMarkdown(source: string): Promise&lt;void&gt;</code> | Renders generated Markdown with restricted formatting and source-backed formulas only. |
-  [Public methods of `TpMarkdown`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-markdown-rendered</code> | <code>void</code> | Emitted after Markdown and its runtime extensions are rendered, or after a source/conversion error is displayed. This event alone does not indicate successful conversion. |
-  [Events emitted by `<tp-markdown>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-markdown>`]
+```markdown
+::: tp-callout {variant="info" heading="Information"}
+The workshop starts at **9:00**.
 :::
-<!-- /tp-docgen:api -->
+```
 
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_markdown_markdown.TpMarkdown.html)
-<!-- tp-docgen:typedoc:end -->
+Attributes use `{name="value" disabled}`; `#notice` and `.highlight` are shortcuts for an ID and a class. Boolean attributes are written without a value. For nested containers, use a longer outer fence so each closing fence identifies its own container.
 
+```markdown
+::::: tp-box
+::: tp-callout {variant="info"}
+A **nested** component.
+:::
+:::::
+```
 
+Inline elements use `:tag:content{attributes}`. Keep the final braces even when there are no attributes. An icon can have no content:
 
+```markdown
+Status: :tp-badge:Ready{variant="success"}.
+Choose :tp-icon:{name="check"} to confirm.
+```
 
+The same extension accepts standard HTML elements and third-party custom elements. It creates their markup; load custom-element definitions through the autoloader or explicit imports. Use an inline-capable component inside a paragraph.
 
+### Literal source and raw HTML
 
+A `script` container preserves its body without Markdown conversion. Use it to pass another language to a component, or JavaScript with `type="module"`:
 
+```markdown
+::::: tp-asciidoc
+::: script {type="tp/asciidoc"}
+A paragraph with *AsciiDoc* formatting.
+:::
+:::::
+```
 
+The block forms of `style`, `textarea` and `template` also preserve literal content. Their outer colon fences are delimiters, not part of the content; use fence lengths that do not collide with the embedded source.
 
+A code fence labelled `raw html` or `raw-html` inserts HTML instead of displaying source. An ordinary `html` code fence still displays code. Prefer native component containers when the body should be parsed as Markdown. Literal script preservation and script execution are separate: the receiving viewer's `allow-script` setting controls executable examples.
 
+### Front matter and optional extensions
 
+A YAML front matter block at the beginning of the document supplies metadata, expression variables and optional extension names. For example:
 
+```markdown
+---
+extensions:
+  - math
+---
 
+An inline formula: :latexmath:`E = mc^2`.
+```
 
+Optional extensions include mathematical notation, diagrams, music, maps, handwriting, slides, speech and typewriting. Their parsing and browser runtimes are additional TP features; a generic markdown-it renderer will not reproduce them. The component runs the associated browser renderers after conversion. YAML front matter is configuration and is not displayed as document text.
 
+### Included documents and tabs
 
+`::include{chapter.md}` includes a source file. In `tp-markdown`, relative include URLs resolve from the containing source document; nested includes are supported with a depth limit. The files must be available through browser requests.
 
+Tabs can contain a definition list, where each term names a tab and its definition supplies the content:
 
+```markdown
+::: tp-tabs
+First
+: Content of the first tab.
 
+Second
+: Content of the second tab.
+:::
+```
 
+Includes, interactive tabs and document navigation require the TP rendering environment. The standalone component does not add the navigation shell of [`tp-markdown-multi-pages`](#/components/markdown-multi-pages/index.md).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -466,19 +206,51 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Inspect how the embedded markdown source is rendered as a formatted document.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Mathematical notation
+: Compare inline and displayed mathematical notation written in AsciiMath and LaTeX.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-markdown>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
 @summary Shared base class for tp-* components.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 
 ### External
 

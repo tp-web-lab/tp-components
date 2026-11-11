@@ -1,0 +1,20 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpSymbolPicker{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/symbol-picker/symbol-picker.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-symbol-picker");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

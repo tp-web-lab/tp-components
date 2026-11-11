@@ -10,7 +10,7 @@
 import "../javascript-playground/javascript-playground.js";
 import { TpJavascriptPlayground } from "../javascript-playground/javascript-playground.js";
 /**
- * Compact viewer for editing and running one JavaScript example.
+ * The custom `<tp-javascript-viewer>` element displays and runs one JavaScript example in a compact interface.
  *
  * @tagname tp-javascript-viewer
  * @summary Displays and runs one JavaScript example in a compact interface.

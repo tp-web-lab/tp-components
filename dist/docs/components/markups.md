@@ -1,7 +1,7 @@
 # Markup Languages
 
 ::: tp-callout { variant="info" style="margin-bottom: 2em" }
-Markup components transform Markdown, AsciiDoc and reStructuredText source into rendered content with support for the library’s web-component extensions.
+Markup components transform LaTeX, Markdown, AsciiDoc and reStructuredText source into rendered content with support for the library’s web-component extensions.
 :::
 
 :::::: tp-grid { min-width="10rem" gap="1.5rem" }
@@ -10,6 +10,12 @@ Markup components transform Markdown, AsciiDoc and reStructuredText source into 
 :tp-icon:{name="asciidoc" library="components" size="4em" aria-hidden="true"}
 
 [tp-asciidoc](asciidoc/index.md)
+:::
+
+::: tp-center { intrinsic }
+:tp-icon:{name="latex" library="components" size="4em" aria-hidden="true"}
+
+[tp-latex](latex/index.md)
 :::
 
 ::: tp-center { intrinsic }

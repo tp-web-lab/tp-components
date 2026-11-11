@@ -3,7 +3,7 @@
  * @summary Shared base class for tp-* components.
  */
 /**
- * Base class for `tp-*` components.
+ * The custom `<tp-base>` element provides shared styling, attributes and contextual help for the component library.
  *
  * This class factors out a few recurring behaviors:
  * - injecting a global stylesheet once
@@ -15,7 +15,7 @@
  * The `<tp-base>` component can also be used directly
  * as a neutral demo or test element.
  *
- * @summary Shared base for `tp-*` components.
+ * @summary Provides shared styling, attributes and contextual help for the component library.
  * @tagname tp-base
  * @attr {string} dir = "" - Text direction (`ltr`, `rtl`, or `auto`).
  * @attr {string} lang = "" - Language tag used by the component content.
@@ -39,6 +39,7 @@ export declare class TpBase extends HTMLElement {
     private static currentHelpElement;
     /** Pointer target is independent of focus, including non-focusable layout components. */
     private static hoveredHelpElement;
+    private static helpPointer;
     private static readonly helpHierarchyChoices;
     private initialHelpMarkup;
     private baseHelpListenerAttached;
@@ -72,6 +73,8 @@ export declare class TpBase extends HTMLElement {
      */
     protected connectedCallback(): void;
     private static ensureGlobalHelpKeydown;
+    /** Generated chrome delegates contextual help to its owning component. */
+    private static helpOwner;
     private static findHelpElement;
     private static openHelpFromKeyboard;
     /**

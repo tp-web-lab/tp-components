@@ -106,6 +106,8 @@ export declare const TP_SCREEN_DEVICES: {
     };
 };
 /**
+ * The custom `<tp-screen>` element previews and applies absolute device sizes or relative aspect ratios to the page.
+ *
  * @tagname tp-screen
  * @summary Previews and applies absolute device sizes or relative aspect ratios to the page.
  * @attr {TpScreenDevice} device = "default" - Device preset in CSS pixels, or a ratio fitted to the available preview area.

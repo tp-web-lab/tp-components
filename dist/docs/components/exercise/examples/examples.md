@@ -66,43 +66,176 @@ Questions
 :::::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/exercise/exercise.js";
+import "/components/question/question.js";
+import "/components/textfield/textfield.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- open
-:::
+const example = document.createDocumentFragment();
 
-:::: tp-cluster
-::: tp-textfield { data-setting="timing" label="timing" value placeholder clearable }
-:::
-::::
+const element1 = document.createElement("tp-exercise");
+element1.setAttribute("open", "");
+element1.append(document.createTextNode("\n  "));
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element2 = document.createElement("dl");
+element2.append(document.createTextNode("\n    "));
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element3 = document.createElement("dt");
+element3.append(document.createTextNode("Title"));
+element2.append(element3);
 
-::: tp-divider
-:::
+const element4 = document.createElement("dd");
+element4.append(document.createTextNode("A day at the museum"));
+element2.append(element4);
+element2.append(document.createTextNode("\n    "));
 
-### Preview
+const element5 = document.createElement("dt");
+element5.append(document.createTextNode("Context"));
+element2.append(element5);
 
-::: tp-iframe { id="attributes-frame" title="exercise attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
+const element6 = document.createElement("dd");
+element6.append(document.createTextNode("The museum opens at 9 a.m. Admission costs 8 euros."));
+element2.append(element6);
+element2.append(document.createTextNode("\n    "));
 
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
+const element7 = document.createElement("dt");
+element7.append(document.createTextNode("Questions"));
+element2.append(element7);
 
-::: script { type="module" src="/docs/components/exercise/examples/attributes.js" }
+const element8 = document.createElement("dd");
+
+const element9 = document.createElement("ol");
+element9.setAttribute("class", "questions");
+element9.append(document.createTextNode("\n      "));
+
+const element10 = document.createElement("li");
+
+const element11 = document.createElement("tp-question");
+element11.setAttribute("open", "input");
+
+const element12 = document.createElement("dl");
+element12.append(document.createTextNode("\n        "));
+
+const element13 = document.createElement("dt");
+element13.append(document.createTextNode("Title"));
+element12.append(element13);
+
+const element14 = document.createElement("dd");
+element14.append(document.createTextNode("Opening time"));
+element12.append(element14);
+element12.append(document.createTextNode("\n        "));
+
+const element15 = document.createElement("dt");
+element15.append(document.createTextNode("Prompt"));
+element12.append(element15);
+
+const element16 = document.createElement("dd");
+element16.append(document.createTextNode("When does the museum open?"));
+element12.append(element16);
+element12.append(document.createTextNode("\n        "));
+
+const element17 = document.createElement("dt");
+element17.append(document.createTextNode("Form"));
+element12.append(element17);
+
+const element18 = document.createElement("dd");
+
+const element19 = document.createElement("tp-textfield");
+element19.setAttribute("label", "Your answer");
+element18.append(element19);
+element12.append(element18);
+element12.append(document.createTextNode("\n        "));
+
+const element20 = document.createElement("dt");
+element20.append(document.createTextNode("Feedback"));
+element12.append(element20);
+
+const element21 = document.createElement("dd");
+element21.append(document.createTextNode("Compare your answer with the opening time in the context."));
+element12.append(element21);
+element12.append(document.createTextNode("\n        "));
+
+const element22 = document.createElement("dt");
+element22.append(document.createTextNode("Solution"));
+element12.append(element22);
+
+const element23 = document.createElement("dd");
+element23.append(document.createTextNode("At 9 a.m."));
+element12.append(element23);
+element12.append(document.createTextNode("\n      "));
+element11.append(element12);
+element10.append(element11);
+element9.append(element10);
+element9.append(document.createTextNode("\n      "));
+
+const element24 = document.createElement("li");
+
+const element25 = document.createElement("tp-question");
+element25.setAttribute("open", "input");
+
+const element26 = document.createElement("dl");
+element26.append(document.createTextNode("\n        "));
+
+const element27 = document.createElement("dt");
+element27.append(document.createTextNode("Title"));
+element26.append(element27);
+
+const element28 = document.createElement("dd");
+element28.append(document.createTextNode("Admission"));
+element26.append(element28);
+element26.append(document.createTextNode("\n        "));
+
+const element29 = document.createElement("dt");
+element29.append(document.createTextNode("Prompt"));
+element26.append(element29);
+
+const element30 = document.createElement("dd");
+element30.append(document.createTextNode("How much do two tickets cost?"));
+element26.append(element30);
+element26.append(document.createTextNode("\n        "));
+
+const element31 = document.createElement("dt");
+element31.append(document.createTextNode("Form"));
+element26.append(element31);
+
+const element32 = document.createElement("dd");
+
+const element33 = document.createElement("tp-textfield");
+element33.setAttribute("label", "Your answer");
+element32.append(element33);
+element26.append(element32);
+element26.append(document.createTextNode("\n        "));
+
+const element34 = document.createElement("dt");
+element34.append(document.createTextNode("Feedback"));
+element26.append(element34);
+
+const element35 = document.createElement("dd");
+element35.append(document.createTextNode("Multiply the price of one ticket by two."));
+element26.append(element35);
+element26.append(document.createTextNode("\n        "));
+
+const element36 = document.createElement("dt");
+element36.append(document.createTextNode("Solution"));
+element26.append(element36);
+
+const element37 = document.createElement("dd");
+element37.append(document.createTextNode("16 euros."));
+element26.append(element37);
+element26.append(document.createTextNode("\n      "));
+element25.append(element26);
+element24.append(element25);
+element9.append(element24);
+element9.append(document.createTextNode("\n    "));
+element8.append(element9);
+element2.append(element8);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
 :::
 ```
 

@@ -8,7 +8,7 @@
  */
 import { TpOverlayElement } from "../overlay/overlay.js";
 /**
- * Modal overlay component.
+ * The custom `<tp-modal>` element displays modal content above the page.
  *
  * Displays centered content above the page, with optional backdrop and outside-click closing.
  *

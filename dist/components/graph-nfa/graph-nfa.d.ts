@@ -17,6 +17,8 @@ export declare function createNfaStep(graph: Readonly<TpGraphDocument>, activeSt
     transition: TpGraphTransition;
 };
 /**
+ * The custom `<tp-graph-nfa>` element edits, generates, and simulates nondeterministic finite automata.
+ *
  * @summary Edits, generates, and simulates nondeterministic finite automata.
  * @tagname tp-graph-nfa
  * @example

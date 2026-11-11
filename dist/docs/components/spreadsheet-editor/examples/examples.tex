@@ -1,0 +1,21 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpSpreadsheetEditor[src=/docs/components/spreadsheet-editor/examples/budget.csv]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/spreadsheet-editor/spreadsheet-editor.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-spreadsheet-editor");
+element1.setAttribute("src", "/docs/components/spreadsheet-editor/examples/budget.csv");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

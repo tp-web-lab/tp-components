@@ -56,9 +56,9 @@ Import `TpPlaygroundQuestion` from `components/playground-question/playground-qu
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-javascript-viewer-question>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-console
@@ -77,10 +77,10 @@ All tp-components used by `<tp-javascript-viewer-question>` are loaded automatic
 @summary Base description-list container for question components.
 -->
 
-- [`<tp-console>`](../console/index.md) : Displays structured console output.
-- [`<tp-iframe>`](../iframe/index.md) : Controlled iframe component.
-- [`<tp-javascript-viewer>`](../javascript-viewer/index.md) : Compact JavaScript code viewer and runner.
-- [`<tp-question>`](../question/index.md) : Base description-list container for question components.
+- [`<tp-console>`](#/components/console/index.md) : Displays structured console output.
+- [`<tp-iframe>`](#/components/iframe/index.md) : Controlled iframe component.
+- [`<tp-javascript-viewer>`](#/components/javascript-viewer/index.md) : Compact JavaScript code viewer and runner.
+- [`<tp-question>`](#/components/question/index.md) : Base description-list container for question components.
 
 ### External
 

@@ -6,9 +6,9 @@ import "../tree/tree.js";
 import { TpBase } from "../base/base.js";
 type TpTocPosition = "start" | "end" | "center";
 /**
- * `<tp-toc>` renders the current page table of contents as a `<tp-tree>`.
+ * The custom `<tp-toc>` element provides a table of contents generated from page headings.
  *
- * @summary Table of contents generated from page headings.
+ * @summary Provides a table of contents generated from page headings.
  * @tagname tp-toc
  * @attr {string} label = "Contents" - Visible summary label.
  * @attr {string} position = "center" - Placement (`start`, `end`, `center`).

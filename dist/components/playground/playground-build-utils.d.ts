@@ -6,7 +6,7 @@ import type { TpProject } from "./project.js";
  *
  * @summary Represents a simple source-file family.
  */
-export type TpSourceKind = "javascript" | "typescript" | "python" | "html" | "css" | "json" | "markdown" | "prolog" | "text";
+export type TpSourceKind = "javascript" | "typescript" | "python" | "html" | "css" | "json" | "markdown" | "latex" | "prolog" | "text";
 /**
  * Returns whether a module specifier should be left untouched.
  *

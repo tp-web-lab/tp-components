@@ -1,0 +1,8 @@
+\begin{tikzpicture}[scale=1.8,transform shape,every node/.style={opacity=1, black, above left}]
+  \draw [help lines] grid (3,2);
+  \draw [name path=ellipse] (2,0.5) ellipse [x radius=0.75cm, y radius=1cm];
+  \draw [name path=rectangle, rotate=10] (0.5,0.5) rectangle +(2,1);
+  \fill [red, opacity=0.5, name intersections={of=ellipse and rectangle}]
+    (intersection-1) circle [radius=2pt] node {1}
+    (intersection-2) circle [radius=2pt] node {2};
+\end{tikzpicture}

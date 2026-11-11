@@ -7,28 +7,39 @@
       </tp-cluster>
     </div>
 
-    <div role="example" label="Attributes">
-      <p>Change several attributes on one preview. All controls start at their documented defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Reset defaults fills the controls with their defaults again. Controls stay available when the preview is disabled or readonly.</p>
-      <tp-stack>
-        <tp-checkbox-list id="numberfield-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>clearable</li><li>disabled</li><li>range</li><li>readonly</li><li>required</li></ul></tp-checkbox-list>
-        <tp-radio-list data-setting="label-position" label="label-position" label-position="top" orientation="horizontal" value="1"><ul><li>top</li><li>bottom</li><li>start</li><li>end</li></ul></tp-radio-list>
-        <tp-cluster><tp-textfield data-setting="aria-label" label="aria-label" value="" placeholder="" clearable></tp-textfield>
-      <tp-textfield data-setting="label" label="label" value="" placeholder="" clearable></tp-textfield>
-      <tp-textfield data-setting="list" label="list" value="" placeholder="" clearable></tp-textfield>
-      <tp-textfield data-setting="max" label="max" value="" placeholder="" clearable></tp-textfield>
-      <tp-textfield data-setting="min" label="min" value="" placeholder="" clearable></tp-textfield>
-      <tp-textfield data-setting="name" label="name" value="" placeholder="" clearable></tp-textfield>
-      <tp-textfield data-setting="placeholder" label="placeholder" value="" placeholder="" clearable></tp-textfield>
-      <tp-textfield data-setting="step" label="step" value="1" placeholder="1" clearable></tp-textfield>
-      <tp-textfield data-setting="value" label="value" value="" placeholder="" clearable></tp-textfield></tp-cluster>
-        <tp-button id="numberfield-reset" type="button">Reset defaults</tp-button>
-      </tp-stack>
-      <tp-divider></tp-divider>
-      <h3 id="numberfield-preview-heading">Preview</h3>
-      <tp-box><tp-numberfield id="numberfield-preview"></tp-numberfield></tp-box>
-      <tp-box id="numberfield-readout" aria-live="polite">Reading native attributes…</tp-box>
-      <tp-callout variant="info" heading="Things to try">Set label and a numeric value, then try min, max and step (a positive number or any). Enable range to use a slider; its value is always nonempty and is clamped to its limits. Clear resets a slider to its midpoint. Changing the preview also updates these controls. Enable clearable to show the clear button; it is hidden otherwise.</tp-callout>
-      <script type="module" src="/docs/components/numberfield/examples/attributes.js"></script>
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/cluster/cluster.js";
+      import "/components/numberfield/numberfield.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-cluster");
+      element1.append(document.createTextNode("\n  "));
+
+      const element2 = document.createElement("tp-numberfield");
+      element2.setAttribute("label", "Quantity");
+      element2.setAttribute("value", "3");
+      element2.setAttribute("min", "0");
+      element2.setAttribute("max", "10");
+      element2.setAttribute("clearable", "");
+      element1.append(element2);
+      element1.append(document.createTextNode("\n  "));
+
+      const element3 = document.createElement("tp-numberfield");
+      element3.setAttribute("label", "Level");
+      element3.setAttribute("value", "40");
+      element3.setAttribute("min", "0");
+      element3.setAttribute("max", "100");
+      element3.setAttribute("step", "5");
+      element3.setAttribute("range", "");
+      element3.setAttribute("clearable", "");
+      element1.append(element3);
+      element1.append(document.createTextNode("\n"));
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
     </div>
 
     <div role="example" label="Inline named field">

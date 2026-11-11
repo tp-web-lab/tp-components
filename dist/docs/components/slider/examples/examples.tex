@@ -1,0 +1,100 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=max-inline-size: 28rem]{
+  \wcTpSlider[scrollbar,item-width=10rem,gap=1rem,style=max-block-size: 8rem]{
+    \wcTpBox{First}
+    \wcTpBox{Second}
+    \wcTpBox{Third}
+    \wcTpBox{Fourth}
+  }
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/slider/slider.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.setAttribute("style", "max-inline-size: 28rem");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("tp-slider");
+element2.setAttribute("scrollbar", "");
+element2.setAttribute("item-width", "10rem");
+element2.setAttribute("gap", "1rem");
+element2.setAttribute("style", "max-block-size: 8rem");
+element2.append(document.createTextNode("\n    "));
+
+const element3 = document.createElement("tp-box");
+element3.append(document.createTextNode("First"));
+element2.append(element3);
+
+const element4 = document.createElement("tp-box");
+element4.append(document.createTextNode("Second"));
+element2.append(element4);
+
+const element5 = document.createElement("tp-box");
+element5.append(document.createTextNode("Third"));
+element2.append(element5);
+
+const element6 = document.createElement("tp-box");
+element6.append(document.createTextNode("Fourth"));
+element2.append(element6);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Image gallery
+\documentclass{article}
+\begin{document}
+Browse the illustrations by scrolling horizontally. Press Tab to focus the gallery, then use Left/Right Arrow, Home or End.
+
+
+\wcTpBox[style=max-inline-size: 32rem]{
+  \wcTpSlider[scrollbar,item-width=14rem,gap=1rem,aria-label=Illustration gallery]{
+    \wcTpBox{
+      \wcTpStack[style=--stack-gap: 0.5rem]{
+        \wcImg*[src=/docs/medias/images/canoe.svg,alt=A red canoe on blue water,width=160,height=160]{}
+
+        Canoe
+
+      }
+    }
+    \wcTpBox{
+      \wcTpStack[style=--stack-gap: 0.5rem]{
+        \wcImg*[src=/docs/medias/images/basketball.svg,alt=An orange basketball,width=160,height=160]{}
+
+        Basketball
+
+      }
+    }
+    \wcTpBox{
+      \wcTpStack[style=--stack-gap: 0.5rem]{
+        \wcImg*[src=/docs/medias/images/walking-shoe.svg,alt=A walking shoe,width=160,height=160]{}
+
+        Walking shoe
+
+      }
+    }
+    \wcTpBox{
+      \wcTpStack[style=--stack-gap: 0.5rem]{
+        \wcImg*[src=/docs/medias/images/lightsaber.svg,alt=A lightsaber,width=160,height=160]{}
+
+        Lightsaber
+
+      }
+    }
+  }
+}
+\end{document}

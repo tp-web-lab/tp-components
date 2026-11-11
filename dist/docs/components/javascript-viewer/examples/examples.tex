@@ -1,0 +1,59 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpJavascriptViewer[src=/docs/components/_shared/intro-projects/javascript.json]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/javascript-viewer/javascript-viewer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-javascript-viewer");
+element1.setAttribute("src", "/docs/components/_shared/intro-projects/javascript.json");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example src
+\documentclass{article}
+\begin{document}
+\wcTpJavascriptViewer[src=/docs/components/javascript-viewer/examples/example.json]{}
+\end{document}
+
+% !tp-example script
+\documentclass{article}
+\begin{document}
+\wcTpJavascriptViewer{
+  \wcScript[type=tp/javascript]|
+        const app = document.querySelector('#app');
+
+        if (app instanceof HTMLElement) {
+          app.textContent = 'Hello JavaScript viewer';
+        }
+
+        console.log('Hello JavaScript');
+      |
+}
+\end{document}
+
+% !tp-example error
+\documentclass{article}
+\begin{document}
+\wcTpJavascriptViewer{
+  \wcScript[type=tp/javascript]|
+        console.error(new Error('Intentional JavaScript error'));
+      |
+}
+\end{document}
+
+% !tp-example Single source file
+\documentclass{article}
+\begin{document}
+\wcTpJavascriptViewer[src=/docs/components/_shared/single-source/example.js]{}
+\end{document}

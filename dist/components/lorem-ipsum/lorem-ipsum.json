@@ -2,7 +2,7 @@
   "tagname": "tp-lorem-ipsum",
   "classname": "TpLoremIpsum",
   "superclass": "TpBase",
-  "description": "generates placeholder sentences, titles, paragraphs or lists.",
+  "description": "Generates placeholder sentences, titles, paragraphs or lists.",
   "examples": [
     {
       "label": "Example 1",
@@ -78,8 +78,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Lorem ipsum",
-    "introduction": "The custom `<tp-lorem-ipsum>` element implements the Lorem ipsum functionality: generates placeholder sentences, titles, paragraphs or lists.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Generated text | Read, select or copy the placeholder text. There are no component-specific buttons or gestures. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Generated text | No component-specific keyboard shortcut or extra focus stop. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-lorem-ipsum>` element generates placeholder sentences, titles, paragraphs or lists.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Generated text | Read, select or copy the placeholder text. There are no component-specific buttons or gestures. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Generated text | No component-specific keyboard shortcut or extra focus stop. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

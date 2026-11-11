@@ -22,7 +22,8 @@ export declare const TP_QUERY_EDGE = "query-edge";
 export declare function validateQueryTree(graph: Readonly<TpGraphDocument>): void;
 export declare function queryTreeToSql(graph: Readonly<TpGraphDocument>): string;
 /**
- * Relational query-tree specialization of `<tp-graph-editor>`.
+ * The custom `<tp-graph-query-tree>` element edits relational algebra trees and generates equivalent SQL.
+ *
  * @summary Edits relational algebra trees and generates equivalent SQL.
  * @tagname tp-graph-query-tree
  * @example

@@ -80,63 +80,167 @@ Move a task to change its column.
 ==========
 ===========
 
-.Attributes
-========
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-[tp-stack]
+.Javascript API
 ======
-[tp-cluster]
-=====
-[tp-textfield%value%placeholder%clearable,data-setting="handle",label="handle"]
+[script,type="module"]
 ====
-====
+import "/components/box/box.js";
+import "/components/button/button.js";
+import "/components/dragdrop/dragdrop.js";
+import "/components/grid/grid.js";
+import "/components/stack/stack.js";
 
-[tp-textfield%value%placeholder%clearable,data-setting="items",label="items"]
-====
-====
+const example = document.createDocumentFragment();
 
-[tp-textfield%value%placeholder%clearable,data-setting="root",label="root"]
-====
-====
-=====
+const element1 = document.createElement("tp-box");
+element1.setAttribute("id", "dragdrop-board");
+element1.setAttribute("data-dragdrop-demo", "");
+element1.setAttribute("data-allow-script", "");
+element1.append(document.createTextNode("\n  "));
 
-[tp-button-group]
-=====
-[tp-button,id="attributes-reset",type="button"]
-====
-Reset defaults
-====
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("Drag a task to "));
 
-[tp-button,id="attributes-reload",type="button"]
+const element3 = document.createElement("strong");
+element3.append(document.createTextNode("To do"));
+element2.append(element3);
+element2.append(document.createTextNode(" or "));
+
+const element4 = document.createElement("strong");
+element4.append(document.createTextNode("Done"));
+element2.append(element4);
+element2.append(document.createTextNode(", including an empty column. The Move button sends a task to the other column without dragging."));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element5 = document.createElement("p");
+element5.append(document.createTextNode("Keyboard: focus a card, press Enter, use the arrow keys to choose another card, then press Enter to drop before or after it. Escape cancels."));
+element1.append(element5);
+element1.append(document.createTextNode("\n  "));
+
+const element6 = document.createElement("tp-grid");
+element6.setAttribute("min-width", "16rem");
+element6.setAttribute("gap", "1rem");
+element6.append(document.createTextNode("\n    "));
+
+const element7 = document.createElement("tp-box");
+element7.setAttribute("data-zone", "To do");
+element7.setAttribute("role", "group");
+element7.setAttribute("aria-label", "To do");
+element7.setAttribute("style", "min-height: 12rem;");
+element7.append(document.createTextNode("\n      "));
+
+const element8 = document.createElement("h3");
+element8.append(document.createTextNode("To do"));
+element7.append(element8);
+element7.append(document.createTextNode("\n      "));
+
+const element9 = document.createElement("tp-stack");
+element9.setAttribute("gap", "0.5rem");
+element9.setAttribute("data-tasks", "");
+element9.append(document.createTextNode("\n        "));
+
+const element10 = document.createElement("tp-box");
+element10.setAttribute("data-task", "");
+element10.setAttribute("aria-label", "Write the introduction");
+
+const element11 = document.createElement("p");
+element11.append(document.createTextNode("Write the introduction"));
+element10.append(element11);
+
+const element12 = document.createElement("tp-button");
+element12.setAttribute("data-move", "");
+element12.setAttribute("size", "s");
+element12.setAttribute("aria-label", "Move Write the introduction to the other column");
+element12.append(document.createTextNode("Move"));
+element10.append(element12);
+element9.append(element10);
+element9.append(document.createTextNode("\n        "));
+
+const element13 = document.createElement("tp-box");
+element13.setAttribute("data-task", "");
+element13.setAttribute("aria-label", "Review the examples");
+
+const element14 = document.createElement("p");
+element14.append(document.createTextNode("Review the examples"));
+element13.append(element14);
+
+const element15 = document.createElement("tp-button");
+element15.setAttribute("data-move", "");
+element15.setAttribute("size", "s");
+element15.setAttribute("aria-label", "Move Review the examples to the other column");
+element15.append(document.createTextNode("Move"));
+element13.append(element15);
+element9.append(element13);
+element9.append(document.createTextNode("\n      "));
+element7.append(element9);
+element7.append(document.createTextNode("\n    "));
+element6.append(element7);
+element6.append(document.createTextNode("\n    "));
+
+const element16 = document.createElement("tp-box");
+element16.setAttribute("data-zone", "Done");
+element16.setAttribute("role", "group");
+element16.setAttribute("aria-label", "Done");
+element16.setAttribute("style", "min-height: 12rem;");
+element16.append(document.createTextNode("\n      "));
+
+const element17 = document.createElement("h3");
+element17.append(document.createTextNode("Done"));
+element16.append(element17);
+element16.append(document.createTextNode("\n      "));
+
+const element18 = document.createElement("tp-stack");
+element18.setAttribute("gap", "0.5rem");
+element18.setAttribute("data-tasks", "");
+element18.append(document.createTextNode("\n        "));
+
+const element19 = document.createElement("tp-box");
+element19.setAttribute("data-task", "");
+element19.setAttribute("aria-label", "Choose a title");
+
+const element20 = document.createElement("p");
+element20.append(document.createTextNode("Choose a title"));
+element19.append(element20);
+
+const element21 = document.createElement("tp-button");
+element21.setAttribute("data-move", "");
+element21.setAttribute("size", "s");
+element21.setAttribute("aria-label", "Move Choose a title to the other column");
+element21.append(document.createTextNode("Move"));
+element19.append(element21);
+element18.append(element19);
+element18.append(document.createTextNode("\n      "));
+element16.append(element18);
+element16.append(document.createTextNode("\n    "));
+element6.append(element16);
+element6.append(document.createTextNode("\n  "));
+element1.append(element6);
+element1.append(document.createTextNode("\n  "));
+
+const element22 = document.createElement("p");
+element22.setAttribute("data-demo-status", "");
+element22.setAttribute("role", "status");
+element22.setAttribute("aria-live", "polite");
+element22.append(document.createTextNode("Move a task to change its column."));
+element1.append(element22);
+element1.append(document.createTextNode("\n  "));
+
+const element23 = document.createElement("tp-dragdrop");
+element23.setAttribute("root", "#dragdrop-board");
+element23.setAttribute("items", "[data-task]");
+element1.append(element23);
+element1.append(document.createTextNode("\n  "));
+
+const element24 = document.createElement("script");
+element24.setAttribute("src", "/docs/components/dragdrop/examples/task-board.js");
+element1.append(element24);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
 ====
-Reload preview
-====
-=====
 ======
-
-[tp-divider]
-====
-====
-
-[h3]
-====
-Preview
-====
-
-[tp-iframe,id="attributes-frame",title="dragdrop attribute preview",style="height: 24rem; display: flow-root; inline-size: auto;"]
-====
-====
-
-[tp-callout,id="attributes-status",variant="info",heading="Preview status"]
-====
-Preparing the preview…
-====
-
-[script,type="module",src="/docs/components/dragdrop/examples/attributes.js"]
-====
-====
-========
 
 .Sortable list
 ============

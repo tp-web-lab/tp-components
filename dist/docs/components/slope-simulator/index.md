@@ -1,49 +1,36 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="slope-simulator" library="components" size="1.25em"></tp-icon> Slope simulator
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-Move a point along a straight slope and three fictional cycling stages. Equal mouse movements or arrow presses cover less distance uphill and more downhill, in either direction.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-slope-simulator>` element shows how uphill and downhill gradients affect the effort needed to move a point.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-slope-simulator></tp-slope-simulator>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-slope-simulator" src="/docs/components/slope-simulator/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
-
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Slope slider | Set the straight slope between −20% and +20%. |
-| Clear slope | Restore a flat line (0%). |
-| Drag either point horizontally | Spend movement effort along the route. Release and grab again to continue; the point does not jump to the pointer. Mouse, pen and touch are supported. |
-| Stage profile | Select one of the available profiles; restart the stage point. A single supplied profile is shown as a label. |
-| Grid | Show or hide the cycling-stage grid, with distance in kilometres and absolute elevation in metres. Graduations adapt to the selected or edited profile. |
-| Restart | Return that route's point to 10% of the route. |
-| Profile code disclosure | Expand or collapse the profile editor and its point-unit / slope-limit legend. |
-| Profile files → Load (.json) | Choose a local JSON file, validate it and replace the collection; invalid files leave the current profiles unchanged. |
-| Profile files → Save / Save as (.json) | Save the selected profile’s current editor text. Save reuses its destination; Save as chooses another one. Browsers without direct file access download the file. |
-| F1 toolbar button | Show or hide the code editor toolbar. |
-| Profile code editor | Edit the selected profile JSON; changes remain a draft until applied. |
-| Play (Apply profile) | Validate and apply the selected profile, or replace the collection when the JSON contains multiple profiles; reset the point to 10%. Invalid JSON or a slope beyond ±20% keeps the curve and draft unchanged. |
-| Refresh (Restore original profile) | Restore the selected profile and its code as originally loaded, discarding its edits. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus the slope slider, clear button, points, profile choices and restart buttons. |
-| <kbd>Left</kbd> / <kbd>Right</kbd> on a point | Move left / right with slope-dependent effort. Holding a key repeats the movement. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on the slope slider | Adjust the slope. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on profile choices | Select another stage. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> on Grid | Show or hide the distance and elevation grid (hidden initially). |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> on a button | Clear the slope, restart a route, apply the edited profile or restore its original code and curve. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> on Profile code | Expand or collapse the editor. |
-| <kbd>F1</kbd> in the code editor | Show or hide its toolbar. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> on a file-menu command | Load, save or save as JSON. |
-| Typing / <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in the code editor | Edit JSON and move the caret without moving the route point. |
-| <kbd>Escape</kbd> | <kbd>End</kbd> a drag at the current position. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |
 
 ### Effort and profiles
 
@@ -65,15 +52,13 @@ The editor accepts the same `{ "profiles": [...] }` structure as external source
 
 The file menu follows Construction source: Load accepts the same profile-collection JSON as `src`, and establishes a new reset baseline. Save and Save as export the current editor text, including unapplied or invalid drafts; they do not apply it. Save destinations are remembered separately for each selected profile and cleared when loading another collection. F1, or the F1 icon button, toggles the code editor toolbar.
 
-### Author directives
-
-#### Base speed
+### Base speed
 
 Set `speed-base="25"` on the component to use a fictional flat-ground speed of 25 km/h. Changes apply immediately to both badges and their explanatory notes. The value must be a finite positive number in km/h.
 
 The JSON document can provide an optional top-level numeric field: `{"speed-base": 25, "profiles": [...]}`. This works with `src`, inline JSON, `setProfiles()`, Load and the profile editor. A valid component attribute takes precedence; otherwise the selected profile’s document value is used, falling back to 30. Removing the attribute restores that fallback. An empty or invalid attribute is ignored; an invalid JSON value rejects the document without changing the current profiles. The editor preserves the field on save and restores its original value with Refresh. Applying a single edited profile changes its base speed; applying a collection assigns its base speed to every profile.
 
-#### Profile format
+### Profile format
 
 Provide a JSON object with a nonempty `profiles` array. Each profile has a unique nonempty `id`, a nonempty `name` and at least two `points`. A point is `[distance in kilometres, altitude in metres]`. Distances must increase strictly; all values must be finite numbers. The first distance need not be zero, and negative elevations are allowed.
 
@@ -91,7 +76,7 @@ Provide a JSON object with a nonempty `profiles` array. Each profile has a uniqu
 
 Every segment must satisfy `abs(slope) <= 20%`, with `slope = (altitude2 - altitude1) / (distance2 - distance1) / 10`. Exactly +20% and −20% are accepted (only floating-point roundoff is tolerated). One invalid segment rejects the entire document, without clipping the slope or partially replacing profiles. Errors identify the profile and segment, numbered from 1.
 
-#### Loading profiles
+### Loading profiles
 
 Load a file:
 
@@ -111,7 +96,7 @@ Or declare inert inline JSON:
 
 `src` takes precedence over the inline script. Changing `src` reloads the source; removing it restores inline profiles, or the defaults when there is no inline source. Inline data is captured at initialization, including parser-delayed insertion; use `setProfiles()` for subsequent updates. Supplied profiles replace the defaults and successful loading selects the first profile, resetting the stage point to 10%. The straight-slope control and point are unchanged.
 
-#### Updating profiles and handling errors
+### Updating profiles and handling errors
 
 ```js
 const simulator = document.querySelector("tp-slope-simulator");
@@ -125,122 +110,7 @@ const accepted = simulator.setProfiles({
 
 `setProfiles(data)` accepts an object or JSON string and returns a boolean. A valid call cancels pending loads and takes effect immediately; a later `src` change resumes declarative loading. The exported types `TpSlopeProfile` and `TpSlopeProfiles` describe the input. Network, JSON and validation errors display a warning and emit `tp-slope-simulator-error` with `{message}`, preserving the last valid profiles and position. An initial failure retains the defaults. Stale responses and loads cancelled on disconnection cannot replace the current data.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Adjust the slope, drag either point or use arrow keys, then compare the three cycling profiles.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Tour of Lombardy 2026
-: Explore an approximate 239.6 km reconstruction from the supplied route-profile image. Compare the climbs and descents, reverse direction to change the signed slope, and edit the JSON in Profile code.
-
-Alpe d’Huez 2026
-: Explore an approximate 170.9 km reconstruction through the Croix de Fer, Télégraphe, Galibier and Sarenne passes to Alpe d’Huez. Toggle the grid, compare uphill and downhill effort, and edit the profile JSON.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-
-<!-- tp-docgen:api TpSlopeSimulator -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>speed-base</code> | <code>number</code> | <code>30</code> | Fictional flat-ground speed in km/h; a positive attribute overrides the optional JSON speed-base. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | JSON file containing cycling profiles; takes precedence over the inline script. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-slope-simulator>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>setProfiles</code> | <code>setProfiles(data: TpSlopeProfiles \| string): boolean</code> | Replace profiles atomically. Returns false and emits an error for invalid data. |
-  [Public methods of `TpSlopeSimulator`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-slope-simulator-error</code> | <code>&#123; message: string &#125;</code> | Fired when a profile source fails validation or loading; detail contains message. |
-  [Events emitted by `<tp-slope-simulator>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-slope-simulator>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_slope-simulator.TpSlopeSimulator.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -267,12 +137,47 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Adjust the slope, drag either point or use arrow keys, then compare the three cycling profiles.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Tour of Lombardy 2026
+: Explore an approximate 239.6 km reconstruction from the supplied route-profile image. Compare the climbs and descents, reverse direction to change the signed slope, and edit the JSON in Profile code.
+
+Alpe d’Huez 2026
+: Explore an approximate 170.9 km reconstruction through the Croix de Fer, Télégraphe, Galibier and Sarenne passes to Alpe d’Huez. Toggle the grid, compare uphill and downhill effort, and edit the profile JSON.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-slope-simulator>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-badge
@@ -303,13 +208,13 @@ All tp-components used by `<tp-slope-simulator>` are loaded automatically by thi
 @summary Transforms a list into a group of radio buttons.
 -->
 
-- [`<tp-badge>`](../badge/index.md) : Badge component for compact status labels.
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-numberfield>`](../numberfield/index.md) : Numeric field with an optional native range slider.
-- [`<tp-radio-list>`](../radio-list/index.md) : Transforms a list into a group of radio buttons.
+- [`<tp-badge>`](#/components/badge/index.md) : Badge component for compact status labels.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
+- [`<tp-code-editor>`](#/components/code-editor/index.md) : CodeMirror-based code editor component.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-numberfield>`](#/components/numberfield/index.md) : Numeric field with an optional native range slider.
+- [`<tp-radio-list>`](#/components/radio-list/index.md) : Transforms a list into a group of radio buttons.
 
 ### External
 

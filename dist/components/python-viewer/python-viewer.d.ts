@@ -10,6 +10,8 @@
 import "../python-playground/python-playground.js";
 import { TpPythonPlayground } from "../python-playground/python-playground.js";
 /**
+ * The custom `<tp-python-viewer>` element displays and runs one Python example in a compact interface.
+ *
  * @tagname tp-python-viewer
  * @summary Displays and runs one Python example in a compact interface.
  * @attr {string} repository = "" - Directory containing a project to load.

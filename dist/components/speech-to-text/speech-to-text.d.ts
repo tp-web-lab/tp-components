@@ -4,8 +4,10 @@ import "../button/button.js";
 import "../stack/stack.js";
 import "../textfield/textfield.js";
 /**
+ * The custom `<tp-speech-to-text>` element transcribes speech from the microphone into editable text.
+ *
  * @tagname tp-speech-to-text
- * @summary transcribes microphone speech into editable text using the Web Speech API.
+ * @summary Transcribes speech from the microphone into editable text.
  * @attr {string} legend = "Speech to text" - Caption of the fieldset surrounding the controls.
  * @attr {string} value = "" - Final transcript, editable without microphone access.
  * @attr {boolean} record = false - Safari only (temporary): records audio alongside recognition for replay and download.

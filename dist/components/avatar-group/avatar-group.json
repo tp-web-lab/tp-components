@@ -2,7 +2,7 @@
   "tagname": "tp-avatar-group",
   "classname": "TpAvatarGroup",
   "superclass": "TpBase",
-  "description": "Groups tp-avatar elements with configurable overlap, stacking order and orientation.",
+  "description": "Groups avatars into a compact visual collection.",
   "examples": [
     {
       "label": "Example 1",
@@ -65,8 +65,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Avatar group",
-    "introduction": "The custom `<tp-avatar-group>` element implements the Avatar group functionality: groups tp-avatar elements with configurable overlap, stacking order and orientation.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Read the people represented by the avatars. The group is static and has no mouse or keyboard controls. Overlap changes only their visual presentation: screen readers encounter each labelled avatar in its original reading order. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-avatar-group>` element groups avatars into a compact visual collection.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Read the people represented by the avatars. The group is static and has no mouse or keyboard controls. Overlap changes only their visual presentation: screen readers encounter each labelled avatar in its original reading order. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

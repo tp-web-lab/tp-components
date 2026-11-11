@@ -1,0 +1,2 @@
+import{t as e}from"../../chunks/markup-blog2.js";var t=class extends e{get fixedLanguage(){return`markdown`}};customElements.get(`tp-markdown-blog`)||customElements.define(`tp-markdown-blog`,t);export{t as TpMarkdownBlog};
+//# sourceMappingURL=markdown-blog.js.map

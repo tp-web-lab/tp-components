@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-matching-question" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-matching-question" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-matching-question
 Title
@@ -34,41 +34,100 @@ Solution
 :::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/matching/matching.js";
+import "/components/matching-question/matching-question.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- heading
-:::
+const example = document.createDocumentFragment();
 
-::: tp-cluster
-:::
+const element1 = document.createElement("tp-matching-question");
+element1.append(document.createTextNode("\n  "));
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element2 = document.createElement("dl");
+element2.append(document.createTextNode("\n    "));
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element3 = document.createElement("dt");
+element3.append(document.createTextNode("Title"));
+element2.append(element3);
 
-::: tp-divider
-:::
+const element4 = document.createElement("dd");
+element4.append(document.createTextNode("English and French"));
+element2.append(element4);
+element2.append(document.createTextNode("\n    "));
 
-### Preview
+const element5 = document.createElement("dt");
+element5.append(document.createTextNode("Prompt"));
+element2.append(element5);
 
-::: tp-iframe { id="attributes-frame" title="matching-question attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
+const element6 = document.createElement("dd");
+element6.append(document.createTextNode("Match each English expression with its French translation."));
+element2.append(element6);
+element2.append(document.createTextNode("\n    "));
 
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
+const element7 = document.createElement("dt");
+element7.append(document.createTextNode("Form"));
+element2.append(element7);
 
-::: script { type="module" src="/docs/components/matching-question/examples/attributes.js" }
+const element8 = document.createElement("dd");
+element8.append(document.createTextNode("\n      "));
+
+const element9 = document.createElement("ul");
+
+const element10 = document.createElement("li");
+element10.append(document.createTextNode("Hello"));
+element9.append(element10);
+
+const element11 = document.createElement("li");
+element11.append(document.createTextNode("Thank you"));
+element9.append(element11);
+
+const element12 = document.createElement("li");
+element12.append(document.createTextNode("Goodbye"));
+element9.append(element12);
+element8.append(element9);
+element8.append(document.createTextNode("\n      "));
+
+const element13 = document.createElement("ol");
+
+const element14 = document.createElement("li");
+element14.append(document.createTextNode("Bonjour"));
+element13.append(element14);
+
+const element15 = document.createElement("li");
+element15.append(document.createTextNode("Merci"));
+element13.append(element15);
+
+const element16 = document.createElement("li");
+element16.append(document.createTextNode("Au revoir"));
+element13.append(element16);
+element8.append(element13);
+element8.append(document.createTextNode("\n    "));
+element2.append(element8);
+element2.append(document.createTextNode("\n    "));
+
+const element17 = document.createElement("dt");
+element17.append(document.createTextNode("Feedback"));
+element2.append(element17);
+
+const element18 = document.createElement("dd");
+element18.append(document.createTextNode("Distinguish greetings, thanks and farewells."));
+element2.append(element18);
+element2.append(document.createTextNode("\n    "));
+
+const element19 = document.createElement("dt");
+element19.append(document.createTextNode("Solution"));
+element2.append(element19);
+
+const element20 = document.createElement("dd");
+element20.append(document.createTextNode("Hello — Bonjour; Thank you — Merci; Goodbye — Au revoir."));
+element2.append(element20);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
 :::
 ```
 
@@ -204,5 +263,5 @@ Solution
   Hello — Bonjour; Thank you — Merci; Goodbye — Au revoir.
 :::
 ```
+:::::
 ::::::
-:::::::

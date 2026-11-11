@@ -32,7 +32,7 @@ export interface TpLotoDrawDetail {
     number: number;
 }
 /**
- * Displays a French loto ticket and draws numbers from 1 to 90.
+ * The custom `<tp-loto>` element displays a playable French loto game.
  *
  * @summary Displays a playable French loto game.
  * @tagname tp-loto

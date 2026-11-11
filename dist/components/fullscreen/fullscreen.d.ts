@@ -6,9 +6,9 @@ import "../icon-button/icon-button.js";
 import { TpBase } from "../base/base.js";
 import { type TpSizeType, type TpVariantType } from "../base/base.types.js";
 /**
- * `<tp-fullscreen>` toggles fullscreen mode for an anchored or containing element.
+ * The custom `<tp-fullscreen>` element switches content between fullscreen and its normal display.
  *
- * @summary Fullscreen controller button.
+ * @summary Switches content between fullscreen and its normal display.
  * @tagname tp-fullscreen
  * @attr {string} anchor = "" - CSS selector of the element to toggle fullscreen.
  * @attr {string} variant = "neutral" - Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info.

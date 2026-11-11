@@ -30,7 +30,9 @@ import { TpBase } from "../base/base.js";
 import "../icon/icon.js";
 import "../question/question.js";
 /**
- * @summary Groups a shared context and an ordered list of independent questions.
+ * The custom `<tp-exercise>` element groups a shared context and an ordered list of questions, with an optional countdown for the whole activity.
+ *
+ * @summary Groups a shared context and an ordered list of questions, with an optional countdown for the whole activity.
  * @tagname tp-exercise
  * @attr {boolean} open = false - Initially expand the exercise.
  * @attr {string} timing = "" - Optional nonzero time limit in strict hh:mm:ss format.

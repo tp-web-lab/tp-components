@@ -2,11 +2,13 @@
  * @tp-dependency tp-notebook
  * @summary Interactive notebook combining markup and executable code cells.
  */
-import '../notebook/notebook.js';
-import { TpNotebook } from '../notebook/notebook.js';
+import "../notebook/notebook.js";
+import { TpNotebook } from "../notebook/notebook.js";
 /**
+ * The custom `<tp-javascript-notebook>` element combines written explanations and executable JavaScript code in an interactive notebook.
+ *
  * @tp-dependency tp-notebook
- * @summary Interactive notebook combining markup and executable code cells.
+ * @summary Combines written explanations and executable JavaScript code in an interactive notebook.
  * @tagname tp-javascript-notebook
  * @summary Interactive JavaScript notebook with markup and code cells.
  * @example
@@ -17,6 +19,6 @@ export declare class TpJavascriptNotebook extends TpNotebook {
 }
 declare global {
     interface HTMLElementTagNameMap {
-        'tp-javascript-notebook': TpJavascriptNotebook;
+        "tp-javascript-notebook": TpJavascriptNotebook;
     }
 }

@@ -1,9 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="diagram" library="components" size="1.25em"></tp-icon> Diagram
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
+
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
+
+<div class="tp-component-doc-intro">
 
 The custom `<tp-diagram>` element renders flowcharts, sequence diagrams, class diagrams and the other diagram types supported by [Mermaid](https://mermaid.js.org/).
 
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-diagram label="Request flow">
   <script type="tp/diagram">
     flowchart LR
@@ -11,25 +22,46 @@ The custom `<tp-diagram>` element renders flowcharts, sequence diagrams, class d
       Server --> Database
   </script>
 </tp-diagram>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-diagram" src="/docs/components/diagram/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
+### Initial content
 
-#### Mouse interactions
+::: tp-tabs
+no content
+: ```html
+  <tp-diagram></tp-diagram>
+  ```
 
-| Control or gesture | Result |
-| --- | --- |
-| Reading | Read the rendered diagram. |
-| Using the component | Any links in the diagram behave according to the page's security and interaction settings; the component does not provide a source editor. |
+internal script
+: ```html
+  <tp-diagram label="Request flow">
+    <script type="tp/diagram">
+      flowchart LR
+        Browser --> Server
+        Server --> Database
+    </script>
+  </tp-diagram>
+  ```
 
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Focused controls | Use each control’s standard keyboard interaction.  |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
+external file
+: ```html
+  <tp-diagram src="/docs/components/diagram/examples/initial-content.txt"></tp-diagram>
+  ```
+:::
 
 ### Rendering engine
 
@@ -37,7 +69,7 @@ Pele is the default renderer. Use `engine="mermaid"` to load Mermaid on demand, 
 
 Pele keeps Mermaid syntax but uses its own layout and CSS theme variables. Pele does not render arbitrary HTML labels or JavaScript callbacks; this component disables Pele links and images. Math labels require a typesetter and currently remain TeX source with Pele.
 
-### Author directives
+### Authoring
 
 ::: tp-tabs
 internal script
@@ -64,6 +96,34 @@ external file
 
 Relative URLs are resolved from the containing documentation source, including documents loaded through `tp-include`, `tp-markup-single-page`, or `tp-markup-multi-pages`.
 
+### Importing
+
+::: tp-tabs
+script
+: Autoloading:
+
+  ```html
+  <script type="module" src="tp-loader.js"></script>
+  ```
+
+  Cherry picking:
+
+  ```html
+  <script type="module" src="/path/to/components/diagram/diagram.js"></script>
+  ```
+
+import
+: ```js
+  import "/path/to/components/diagram/diagram.js";
+  ```
+
+bundler
+: ```js
+  import "@tp/tp-components/components/diagram/diagram.js";
+  ```
+:::
+
+<!-- -->
 ## Examples
 
 The same examples are provided in every markup language and cover every diagram syntax exposed by the installed Mermaid version. Each specific diagram example displays the same source twice: Mermaid first with `engine="mermaid"`, then Pele with `engine="pele"`.
@@ -72,8 +132,8 @@ The same examples are provided in every markup language and cover every diagram 
 Basic usage
 : Inspect the diagram rendered from the embedded Mermaid source.
 
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 
 Architecture diagram
 : Compare the architecture diagram rendered from the same source: Mermaid first, then Pele (engine="pele").
@@ -164,11 +224,14 @@ XY chart
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
 : ::include{examples/examples.html}
 
 <tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
 : ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
 
 <tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
 : ::include{examples/examples.md}
@@ -177,349 +240,20 @@ XY chart
 : ::include{examples/examples.rst}
 :::::::::::::::
 
-## Programming
-
-### API
-<!-- tp-docgen:api TpDiagram -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>engine</code> | <code>&quot;mermaid&quot; \| &quot;pele&quot;</code> | <code>&quot;pele&quot;</code> | Rendering engine; only the explicit mermaid value loads Mermaid. |
-  | <code>label</code> | <code>string</code> | <code>&quot;Diagram&quot;</code> | Accessible name applied to the rendered SVG. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Mermaid source file loaded relative to the containing document. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-diagram>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpDiagram`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-diagram-rendered</code> | <code>&#123; src: string &#125;</code> | Emitted after the selected engine has rendered the diagram. |
-  [Events emitted by `<tp-diagram>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-diagram>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_diagram_diagram.TpDiagram.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
-
-::: tp-tabs
-script
-: Autoloading:
-
-  ```html
-  <script type="module" src="tp-loader.js"></script>
-  ```
-
-  Cherry picking:
-
-  ```html
-  <script type="module" src="/path/to/components/diagram/diagram.js"></script>
-  ```
-
-import
-: ```js
-  import "/path/to/components/diagram/diagram.js";
-  ```
-
-bundler
-: ```js
-  import "@tp/tp-components/components/diagram/diagram.js";
-  ```
-:::
-
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-diagram>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
 @summary Shared base class for tp-* components.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 
 ### External
 

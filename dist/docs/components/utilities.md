@@ -1,37 +1,13 @@
 # Utilities
 
 ::: tp-callout { variant="info" style="margin-bottom: 2em" }
-Utility components supply reusable interaction and media features such as drag and drop, copying, animation, icons and speech input or output.
+Utility components supply reusable features such as drag and drop, copying, animation, icons and mathematical notation.
 :::
 
 :::::: tp-grid { min-width="10rem" gap="1.5rem" }
 
 ::: tp-center { intrinsic }
-:tp-icon:{name="video-player" library="components" size="4em" aria-hidden="true"}
-
-[tp-video-player](video-player/index.md)
-:::
-
-::: tp-center { intrinsic }
-:tp-icon:{name="audio-playlist" library="components" size="4em" aria-hidden="true"}
-
-[tp-audio-playlist](audio-playlist/index.md)
-:::
-
-::: tp-center { intrinsic }
-:tp-icon:{name="audio-recorder" library="components" size="4em" aria-hidden="true"}
-
-[tp-audio-recorder](audio-recorder/index.md)
-:::
-
-::: tp-center { intrinsic }
-:tp-icon:{name="calculator" library="components" size="4em" aria-hidden="true"}
-
-[tp-calculator](calculator/index.md)
-:::
-
-::: tp-center { intrinsic }
-:tp-icon:{name="base" library="components" size="4em" aria-hidden="true"}
+:tp-icon:{name="animation" library="components" size="4em" aria-hidden="true"}
 
 [tp-animation](animation/index.md)
 :::
@@ -49,13 +25,13 @@ Utility components supply reusable interaction and media features such as drag a
 :::
 
 ::: tp-center { intrinsic }
-:tp-icon:{name="base" library="components" size="4em" aria-hidden="true"}
+:tp-icon:{name="calculator" library="components" size="4em" aria-hidden="true"}
 
-[tp-compare](compare/index.md)
+[tp-calculator](calculator/index.md)
 :::
 
 ::: tp-center { intrinsic }
-:tp-icon:{name="base" library="components" size="4em" aria-hidden="true"}
+:tp-icon:{name="copy-code" library="components" size="4em" aria-hidden="true"}
 
 [tp-copy-code](copy-code/index.md)
 :::
@@ -67,7 +43,7 @@ Utility components supply reusable interaction and media features such as drag a
 :::
 
 ::: tp-center { intrinsic }
-:tp-icon:{name="base" library="components" size="4em" aria-hidden="true"}
+:tp-icon:{name="divider" library="components" size="4em" aria-hidden="true"}
 
 [tp-divider](divider/index.md)
 :::
@@ -79,7 +55,7 @@ Utility components supply reusable interaction and media features such as drag a
 :::
 
 ::: tp-center { intrinsic }
-:tp-icon:{name="base" library="components" size="4em" aria-hidden="true"}
+:tp-icon:{name="icon" library="components" size="4em" aria-hidden="true"}
 
 [tp-icon](icon/index.md)
 :::
@@ -103,33 +79,21 @@ Utility components supply reusable interaction and media features such as drag a
 :::
 
 ::: tp-center { intrinsic }
-:tp-icon:{name="base" library="components" size="4em" aria-hidden="true"}
-
-[tp-save-image](save-image/index.md)
-:::
-
-::: tp-center { intrinsic }
 :tp-icon:{name="skeleton" library="components" size="4em" aria-hidden="true"}
 
 [tp-skeleton](skeleton/index.md)
 :::
 
 ::: tp-center { intrinsic }
-:tp-icon:{name="base" library="components" size="4em" aria-hidden="true"}
+:tp-icon:{name="slide-note" library="components" size="4em" aria-hidden="true"}
+
+[tp-slide-note](slide-note/index.md)
+:::
+
+::: tp-center { intrinsic }
+:tp-icon:{name="source" library="components" size="4em" aria-hidden="true"}
 
 [tp-source](source/index.md)
-:::
-
-::: tp-center { intrinsic }
-:tp-icon:{name="speech-to-text" library="components" size="4em" aria-hidden="true"}
-
-[tp-speech-to-text](speech-to-text/index.md)
-:::
-
-::: tp-center { intrinsic }
-:tp-icon:{name="text-to-speech" library="components" size="4em" aria-hidden="true"}
-
-[tp-text-to-speech](text-to-speech/index.md)
 :::
 
 ::: tp-center { intrinsic }

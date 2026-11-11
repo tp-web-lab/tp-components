@@ -1,40 +1,68 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="text-to-speech" library="components" size="1.25em"></tp-icon> Text to speech
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-text-to-speech>` element implements the <tp-icon name="text-to-speech" library="components" size="1.25em"></tp-icon> Text to speech functionality: reads inline or external text aloud with browser speech synthesis.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
-The component uses the browser [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API).
+<div class="tp-component-doc-intro">
 
-<tp-text-to-speech lang="en-GB" show-text>
+The custom `<tp-text-to-speech>` element reads text aloud.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
+<tp-text-to-speech lang="en-GB" show-text="">
   <script type="tp/txt">
     Welcome to tp-components. This example uses the browser speech synthesis service.
   </script>
 </tp-text-to-speech>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-text-to-speech" src="/docs/components/text-to-speech/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
+### Initial content
 
-#### Mouse interactions
+::: tp-tabs
+no content
+: ```html
+  <tp-text-to-speech></tp-text-to-speech>
+  ```
 
-| Control or gesture | Result |
-| --- | --- |
-| Speak | Start reading the text aloud. |
-| Pause | Suspend speech or freeze the remaining scheduled silence. |
-| Resume | Continue paused speech or the remaining silence. |
-| Stop | End reading and cancel pending segments or pauses. |
-| Settings | Choose a voice for the text language; scroll the voice list when it exceeds the available space; Automatic lets the browser choose. Changing the voice stops reading. |
-| Compact speaker / stop button | Start or stop reading. Pause, Resume and voice settings are not available in this presentation. |
-| Status | Indicates whether speech is ready, playing, paused or unavailable. Voice availability depends on the browser and operating system. |
+`value` attribute
+: ```html
+  <tp-text-to-speech value="Welcome to tp-components. This example uses the browser speech synthesis service."></tp-text-to-speech>
+  ```
 
-#### Keyboard interactions
+internal script
+: ```html
+  <tp-text-to-speech lang="en-GB" show-text="">
+    <script type="tp/txt">
+      Welcome to tp-components. This example uses the browser speech synthesis service.
+    </script>
+  </tp-text-to-speech>
+  ```
 
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
+external file
+: ```html
+  <tp-text-to-speech src="/docs/components/text-to-speech/examples/initial-content.txt"></tp-text-to-speech>
+  ```
+:::
 
 ### Voices in a dialogue
 
@@ -113,7 +141,7 @@ Pause postpones pending triggers, Resume continues from the same position, and S
 
 The reader also emits `tp-text-to-speech-ready` after its source loads, `tp-text-to-speech-pause`, `tp-text-to-speech-resume` and `tp-text-to-speech-stop` for playback controls. `tp-text-to-speech-end` denotes natural completion of the entire reading.
 
-### Author directives
+### Authoring
 
 The source can be supplied through `value`, a `tp/txt` or `tp/text-to-speech` script, direct text, or an external file.
 
@@ -151,7 +179,6 @@ Insert `[pause=1500]` anywhere in the source for an explicit 1500-millisecond pa
 
 Valid pause commands are neither spoken nor displayed with `show-text`. Displayed text retains line breaks. Pause freezes both speech and the remaining silence; Resume continues from that point. Stop, a changed source, a changed `pause-between-lines` value, or removing the component cancels pending segments. Speak restarts from the beginning. Start/end events describe the entire reading, not each segment.
 
-
 Add the boolean `lite` attribute for a compact version with a single `tp-icon-button`: `speakerphone` starts reading and `speakerphone-off` stops it. The settings menu and Pause/Resume buttons are omitted; `show-text` remains available. The accessible button label changes between Speak and Stop, and the status remains available to assistive technology.
 
 ```html
@@ -168,6 +195,34 @@ Without `for`, the source order is imposed by the library: `src`, then `value`, 
 
 `for` accepts an element ID, without `#`, whether the target is a paragraph, article, list, container or web component. Put the target in the same document before the speech component. Ordinary elements are read without modifying their DOM or animating their contents; only `tp-typewriting` enables synchronized revealing. Paragraphs, list items, table cells and line breaks retain text separators. Scripts, styles, templates, hidden content and form controls are excluded. Images are not described, and closed shadow roots or iframe documents are not traversed. A reference to the speech component itself is rejected; a container containing it is supported, with the speech controls excluded. Editing the target stops playback and refreshes the text for the next reading.
 
+### Importing
+
+::: tp-tabs
+script
+: Autoloading:
+
+  ```html
+  <script type="module" src="tp-loader.js"></script>
+  ```
+
+  Cherry picking:
+
+  ```html
+  <script type="module" src="/path/to/components/text-to-speech/text-to-speech.js"></script>
+  ```
+
+import
+: ```js
+  import "/path/to/components/text-to-speech/text-to-speech.js";
+  ```
+
+bundler
+: ```js
+  import "@tp/tp-components/components/text-to-speech/text-to-speech.js";
+  ```
+:::
+
+<!-- -->
 ## Examples
 
 Set `for="spoken-text"` to read and progressively reveal a preceding `<tp-typewriting id="spoken-text">` in the same document. The linked text overrides all local speech sources. Speak restarts the reading; Pause and Resume suspend and continue the reveal; Stop, completion or errors show everything. The speech `rate`, not typewriting `speed`, controls playback; the target's `speed`, `delay`, `loop` and `word` are ignored while linked.
@@ -184,8 +239,8 @@ In **English voices** and **French voices**, choose a regional language variant 
 Basic usage
 : Start reading the supplied text aloud and try the playback controls in a browser with speech synthesis.
 
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 
 English voices
 : Choose among available English voices and compare their readings of the same text.
@@ -213,11 +268,14 @@ Automatic pauses
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
 : ::include{examples/examples.html}
 
 <tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
 : ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
 
 <tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
 : ::include{examples/examples.md}
@@ -226,365 +284,13 @@ Automatic pauses
 : ::include{examples/examples.rst}
 :::::::::::::::
 
-## Programming
-
-### API
-<!-- tp-docgen:api TpTextToSpeech -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>autoplay</code> | <code>boolean</code> | <code>false</code> | Starts reading after the source is loaded when browser policy permits it. |
-  | <code>for</code> | <code>string</code> | <code>&quot;&quot;</code> | ID of an element supplying readable text; overrides local sources and synchronizes word boundaries when the target is tp-typewriting. |
-  | <code>legend</code> | <code>string</code> | <code>&quot;Text to speech&quot;</code> | Caption of the fieldset surrounding the controls. |
-  | <code>lite</code> | <code>boolean</code> | <code>false</code> | Replaces playback controls with a single speak/stop icon button. |
-  | <code>pause-after-colon</code> | <code>number</code> | <code>400</code> | Additional silence in milliseconds after colons at a word boundary; zero preserves browser prosody without adding a timer. |
-  | <code>pause-after-comma</code> | <code>number</code> | <code>200</code> | Additional silence in milliseconds after commas at a word boundary; zero preserves browser prosody without adding a timer. |
-  | <code>pause-after-semicolon</code> | <code>number</code> | <code>400</code> | Additional silence in milliseconds after semicolons at a word boundary; zero preserves browser prosody without adding a timer. |
-  | <code>pause-after-sentence</code> | <code>number</code> | <code>600</code> | Additional silence in milliseconds after sentence punctuation (. ! ? and ellipses) at a word boundary; zero preserves browser prosody without adding a timer. |
-  | <code>pause-between-lines</code> | <code>number</code> | <code>0</code> | Silence in milliseconds between nonempty lines; an explicit [pause=...] overrides it at a line boundary. |
-  | <code>pause-per-blank-line</code> | <code>number</code> | <code>1000</code> | Additional milliseconds for each blank or whitespace-only line between spoken passages; consecutive blank lines accumulate. |
-  | <code>pitch</code> | <code>number</code> | <code>1</code> | Speech pitch from 0 to 2. |
-  | <code>rate</code> | <code>number</code> | <code>1</code> | Speech rate from 0.1 to 10. |
-  | <code>show-text</code> | <code>boolean</code> | <code>false</code> | Displays the source text alongside the playback controls. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | Text file loaded relative to the containing document. |
-  | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Text supplied directly as an attribute. |
-  | <code>voice</code> | <code>string</code> | <code>&quot;&quot;</code> | Preferred installed voice name or language tag. |
-  | <code>volume</code> | <code>number</code> | <code>1</code> | Speech volume from 0 to 1. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-text-to-speech>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>pause</code> | <code>pause(): void</code> | Pauses speech or a scheduled silence. |
-  | <code>resume</code> | <code>resume(): void</code> | Resumes speech or the remainder of a scheduled silence. |
-  | <code>speak</code> | <code>speak(): Promise&lt;void&gt;</code> | Uses the browser's voice for the language unless a voice is explicitly requested. |
-  | <code>stop</code> | <code>stop(): void</code> | Cancels speech, queued segments and scheduled silence. |
-  [Public methods of `TpTextToSpeech`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-text-to-speech-end</code> | <code>&#123; text: string &#125;</code> | Emitted when the complete reading finishes. |
-  | <code>tp-text-to-speech-error</code> | <code>&#123; error: string &#125;</code> | Emitted when loading or speech synthesis fails. |
-  | <code>tp-text-to-speech-pause</code> | <code>&#123; &#125;</code> | Emitted when active playback is paused. |
-  | <code>tp-text-to-speech-ready</code> | <code>&#123; &#125;</code> | Emitted when the current source is loaded and the controls are ready. |
-  | <code>tp-text-to-speech-resume</code> | <code>&#123; &#125;</code> | Emitted when paused playback resumes. |
-  | <code>tp-text-to-speech-start</code> | <code>&#123; text: string &#125;</code> | Emitted when speech starts. |
-  | <code>tp-text-to-speech-stop</code> | <code>&#123; &#125;</code> | Emitted when active playback is cancelled, including source changes. |
-  | <code>tp-text-to-speech-trigger</code> | <code>&#123; name: string; offset: number &#125;</code> | Emitted when a named trigger command is reached during playback; commands are never spoken or shown. |
-  [Events emitted by `<tp-text-to-speech>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-text-to-speech>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_text-to-speech.TpTextToSpeech.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
-
-::: tp-tabs
-script
-: Autoloading:
-
-  ```html
-  <script type="module" src="tp-loader.js"></script>
-  ```
-
-  Cherry picking:
-
-  ```html
-  <script type="module" src="/path/to/components/text-to-speech/text-to-speech.js"></script>
-  ```
-
-import
-: ```js
-  import "/path/to/components/text-to-speech/text-to-speech.js";
-  ```
-
-bundler
-: ```js
-  import "@tp/tp-components/components/text-to-speech/text-to-speech.js";
-  ```
-:::
-
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-text-to-speech>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -611,12 +317,12 @@ All tp-components used by `<tp-text-to-speech>` are loaded automatically by this
 @summary progressively reveals text one letter or one word at a time.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
-- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
-- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-typewriting>`](../typewriting/index.md) : progressively reveals text one letter or one word at a time.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-button-group>`](#/components/button-group/index.md) : Button group component for organizing multiple buttons.
+- [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-typewriting>`](#/components/typewriting/index.md) : progressively reveals text one letter or one word at a time.
 
 ### External
 

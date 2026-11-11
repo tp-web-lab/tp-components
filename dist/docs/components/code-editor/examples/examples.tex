@@ -1,0 +1,60 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpCodeEditor[language=javascript,line-numbers]{
+  \wcScript[type=tp/javascript]|
+const greeting = "Hello, tp-components!";
+console.log(greeting);
+  |
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/code-editor/code-editor.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-code-editor");
+element1.setAttribute("language", "javascript");
+element1.setAttribute("line-numbers", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/javascript");
+element2.textContent = "\nconst greeting = \"Hello, tp-components!\";\nconsole.log(greeting);\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Using an internal script
+\documentclass{article}
+\begin{document}
+\wcTpCodeEditor[line-numbers]{
+  \wcScript[type=tp/typescript]|
+        function f(x: number): string {
+          if (x < 0) { x = x + 1 }
+          else { x = x - 1 }
+          return `${2*x}`;
+        }
+      |
+}
+
+\wcScript[type=module]|
+      import '/components/code-editor/code-editor.js';
+    |
+\end{document}
+
+% !tp-example Read-only code
+\documentclass{article}
+\begin{document}
+\wcTpCodeEditor[language=javascript,readonly,line-numbers]{
+  \wcScript[type=tp/javascript]|const answer = 42;|
+}
+\end{document}

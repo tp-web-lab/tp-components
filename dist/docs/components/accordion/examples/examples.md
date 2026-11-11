@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-accordion" allow-script }
-:::::: script { type="tp/markdown" }
+::::: tp-markdown-viewer { label="tp-accordion" allow-script }
+:::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-accordion { open-indexes="1" }
 What is HTML?
@@ -16,58 +16,51 @@ What is Javascript?
 :::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/accordion/accordion.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- multiple
-:::
+const example = document.createDocumentFragment();
 
-::: tp-radio-list { data-setting="appearance" label="appearance" label-position="top" orientation="horizontal" value="1" }
-- default
+const element1 = document.createElement("tp-accordion");
+element1.setAttribute("open-indexes", "1");
+element1.append(document.createTextNode("\n    "));
 
-- outlined
+const element2 = document.createElement("dl");
+element2.append(document.createTextNode("\n      "));
 
-- filled
-:::
+const element3 = document.createElement("dt");
+element3.append(document.createTextNode("What is HTML?"));
+element2.append(element3);
 
-::: tp-checkbox-list { data-setting="open-indexes" label="open-indexes" label-position="top" orientation="horizontal" value }
-- 0
+const element4 = document.createElement("dd");
+element4.append(document.createTextNode("The language used to structure web pages."));
+element2.append(element4);
+element2.append(document.createTextNode("\n      "));
 
-- 1
+const element5 = document.createElement("dt");
+element5.append(document.createTextNode("What is CSS?"));
+element2.append(element5);
 
-- 2
-:::
+const element6 = document.createElement("dd");
+element6.append(document.createTextNode("The language used to style web pages."));
+element2.append(element6);
+element2.append(document.createTextNode("\n      "));
 
-::: tp-cluster
-:::
+const element7 = document.createElement("dt");
+element7.append(document.createTextNode("What is Javascript?"));
+element2.append(element7);
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element8 = document.createElement("dd");
+element8.append(document.createTextNode("The language used to define the behaviour of web pages."));
+element2.append(element8);
+element2.append(document.createTextNode("\n    "));
+element1.append(element2);
+element1.append(document.createTextNode("\n    "));
+example.append(element1);
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="accordion attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/accordion/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
-::::::
-:::::::
+::::
+:::::

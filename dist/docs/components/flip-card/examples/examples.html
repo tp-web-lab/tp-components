@@ -9,20 +9,55 @@
       </tp-flip-card>
     </div>
 
-    <div role="example" label="Attributes">
-      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
-      <tp-stack>
-      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>disabled</li><li>fit-content</li><li>flipped</li></ul></tp-checkbox-list>
-      <tp-radio-list data-setting="button-position" label="button-position" label-position="top" orientation="horizontal" value="6"><ul><li>top start</li><li>top center</li><li>top end</li><li>bottom start</li><li>bottom center</li><li>bottom end</li><li>none</li></ul></tp-radio-list>
-      <tp-cluster></tp-cluster>
-      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
-      </tp-stack>
-      <tp-divider></tp-divider>
-      <h3>Preview</h3>
-      <tp-iframe id="attributes-frame" title="flip-card attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
-      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/flip-card/flip-card.js";
 
-      <script type="module" src="/docs/components/flip-card/examples/attributes.js"></script>
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-flip-card");
+      element1.append(document.createTextNode("\n"));
+
+      const element2 = document.createElement("dl");
+      element2.append(document.createTextNode("\n  "));
+
+      const element3 = document.createElement("dt");
+      element3.append(document.createTextNode("recto"));
+      element2.append(element3);
+
+      const element4 = document.createElement("dd");
+
+      const element5 = document.createElement("p");
+      element5.append(document.createTextNode("This is the content "));
+
+      const element6 = document.createElement("strong");
+      element6.append(document.createTextNode("recto..."));
+      element5.append(element6);
+      element4.append(element5);
+      element2.append(element4);
+      element2.append(document.createTextNode("\n  "));
+
+      const element7 = document.createElement("dt");
+      element7.append(document.createTextNode("verso"));
+      element2.append(element7);
+
+      const element8 = document.createElement("dd");
+
+      const element9 = document.createElement("p");
+      element9.append(document.createTextNode("...and here is the content "));
+
+      const element10 = document.createElement("strong");
+      element10.append(document.createTextNode("verso."));
+      element9.append(element10);
+      element8.append(element9);
+      element2.append(element8);
+      element2.append(document.createTextNode("\n"));
+      element1.append(element2);
+      element1.append(document.createTextNode("\n"));
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
     </div>
 
     <div role="example" label="Hearts suit">

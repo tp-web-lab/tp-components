@@ -5,6 +5,21 @@
 :::
 ```
 
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/asciidoc/asciidoc.js";
+import "/components/asciidoc-multi-slides/asciidoc-multi-slides.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-asciidoc-multi-slides");
+element1.setAttribute("repository", "/docs/components/asciidoc-multi-pages/docs");
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
 ``` example {label="Automatic notes"}
 ::: tp-asciidoc-multi-slides { repository="/docs/components/markup-multi-slides/automatic/adoc" auto="notes" timing="5000" label="Automatic notes" }
 :::

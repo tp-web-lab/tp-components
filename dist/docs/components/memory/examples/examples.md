@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-memory" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-memory" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-memory { label="Match the fruits" }
 1. Apple
@@ -10,51 +10,34 @@
 :::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/memory/memory.js";
 
-::::: tp-stack
-::: tp-radio-list { data-setting="back" label="back" label-position="top" orientation="horizontal" value="1" }
-- Default
+const example = document.createDocumentFragment();
 
-- file1
+const element1 = document.createElement("tp-memory");
+element1.setAttribute("label", "Match the fruits");
+element1.append(document.createTextNode("\n  "));
 
-- file2
+const element2 = document.createElement("ol");
 
-- file-unknown
-:::
+const element3 = document.createElement("li");
+element3.append(document.createTextNode("Apple"));
+element2.append(element3);
 
-:::: tp-cluster
-::: tp-textfield { data-setting="mismatch-delay" label="mismatch-delay" value="1000" placeholder="1000" clearable }
-:::
-::::
+const element4 = document.createElement("li");
+element4.append(document.createTextNode("Pear"));
+element2.append(element4);
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element5 = document.createElement("li");
+element5.append(document.createTextNode("Plum"));
+element2.append(element5);
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="memory attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-File-loading attributes offer only Default, file1, file2 and file-unknown. The two local fixtures preserve verified example formats (they may contain the same content); file-unknown deliberately exercises error handling. No arbitrary path can be entered.
-
-::: script { type="module" src="/docs/components/memory/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
 
@@ -141,5 +124,5 @@ File-loading attributes offer only Default, file1, file2 and file-unknown. The t
   :::
 ::::
 ```
+:::::
 ::::::
-:::::::

@@ -9,8 +9,7 @@
 import { TpBase } from "../base/base.js";
 type TpCompareOrientation = "horizontal" | "vertical";
 /**
- * `<tp-compare>` compare deux contenus superposés, typiquement une image
- * before/after, without using Shadow DOM.
+ * The custom `<tp-compare>` element compares two views of content with an adjustable dividing line.
  *
  * Structure attendue :
  *
@@ -31,6 +30,7 @@ type TpCompareOrientation = "horizontal" | "vertical";
  * - `before-label`
  * - `after-label`
  * - `storage-key`
+ * @summary Compares two views of content with an adjustable dividing line.
  * @tagname tp-compare
  * @attr {TpCompareOrientation} orientation = 'horizontal' - Split direction: horizontal places the layers on the left and right; vertical places them above and below.
  * @accessibility Exposes the comparison handle as an adjustable ARIA separator.

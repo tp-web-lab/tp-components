@@ -67,6 +67,14 @@
  * @summary Compact JavaScript code viewer and runner.
  */
 /**
+ * @tp-dependency tp-latex
+ * @summary Renders LaTeX documents with interactive components, MathJax formulas and TikZ figures.
+ */
+/**
+ * @tp-dependency tp-latex-viewer
+ * @summary Editable LaTeX documents with rendered HTML and generated source views.
+ */
+/**
  * @tp-dependency tp-markdown-viewer
  * @summary Interactive Markdown viewer with editable source and parser outputs.
  */
@@ -98,6 +106,8 @@ import "../dropdown/dropdown.js";
 import "../divider/divider.js";
 import "../html-viewer/html-viewer.js";
 import "../asciidoc-viewer/asciidoc-viewer.js";
+import "../latex-viewer/latex-viewer.js";
+import "../latex/latex.js";
 import "../markdown-viewer/markdown-viewer.js";
 import "../restructuredtext-viewer/restructuredtext-viewer.js";
 import "../javascript-viewer/javascript-viewer.js";
@@ -110,10 +120,14 @@ type NotebookLanguage = "javascript" | "typescript" | "python" | "prolog" | "sql
 /** Resolves the loader used by a standalone notebook preview. */
 export declare function getNotebookLoaderUrl(moduleHref?: string): string;
 /**
+ * The custom `<tp-notebook>` element combines editable markup cells and executable programming-language cells.
+ *
  * @tagname tp-notebook
  * @summary Combines editable markup cells and executable programming-language cells.
  * @attr {string} language = "javascript" - Programming language enforced by a specialized notebook.
  * @attr {string} src = "" - JSON notebook file.
+ * @attr {string} label - Title displayed in the center of the exported HTML toolbar. Defaults to the notebook type name; an empty value hides it.
+ * @attr {string} logo - Icon name displayed at the start of the exported HTML toolbar. Defaults to the notebook type icon; an empty value hides it.
  * @attr {string} repository = "" - Directory containing project.json and .files.json.
  * @attr {boolean} readonly = false - Makes all notebook editors read-only and disables structural changes.
  * @event tp-notebook-load Emitted after inline, src, or repository cells are loaded.
@@ -121,7 +135,62 @@ export declare function getNotebookLoaderUrl(moduleHref?: string): string;
  * @event tp-notebook-change Emitted after the cell collection changes.
  * @eventdetail tp-notebook-change { cells: number }
  * @example
- * <tp-notebook></tp-notebook>
+ * <tp-notebook>
+ *   <script type="tp/markdown">
+ *     # Notebook example
+ *     Here is a notebook that combines AsciiDoc, HTML, LaTeX, Markdown and reStructuredText as markup languages, and Python and JavaScript as programming languages.
+ *
+ *     ## Calculation
+ *     We perform a simple multiplication in Python to demonstrate the calculation.
+ *   </script>
+ *   <script type="tp/python">
+ *     x = 6 * 7
+ *     print(x)
+ *   </script>
+ *   <script type="tp/restructuredtext" doctest="">
+ *     .. h2::
+ *
+ *        Verification
+ *
+ *     We use the doctest blocks in reStructuredText to verify the output of the Python code.
+ *
+ *     >>> print(6 * 7)
+ *     42
+ *   </script>
+ *   <script type="tp/html">
+ *     In JavaScript, we would have written the following code:
+ *   </script>
+ *   <script type="tp/javascript">
+ *     const x = 6 * 7;
+ *     console.log(x)
+ *   </script>
+ *   <script type="tp/asciidoc">
+ *     == Result
+ *     The result of the multiplication is displayed using Asciidoc and Mathjax:
+ *
+ *     latexmath:[x = 6 * 7 = 42]
+ *   </script>
+ *   <script type="tp/latex">
+ *     \section*{LaTeX and TP styles}
+ *     The same result can be written in LaTeX: $6 \times 7 = 42$.
+ *
+ *     \begin{itemize}
+ *       \item Ordinary lists use the shared TP styles.
+ *       \item Nested lists keep their hierarchy.
+ *         \begin{itemize}
+ *           \item This is a nested item.
+ *         \end{itemize}
+ *     \end{itemize}
+ *
+ *     \wcTpCallout[variant=info,heading=LaTeX inside a component]{
+ *       \textbf{The component controls its appearance.}
+ *       \begin{itemize}
+ *         \item Keep the LaTeX source readable.
+ *         \item Reuse the same TP typography and list styles.
+ *       \end{itemize}
+ *     }
+ *   </script>
+ * </tp-notebook>
  */
 export declare class TpNotebook extends TpBase {
     private static readonly styleId;
@@ -136,8 +205,16 @@ export declare class TpNotebook extends TpBase {
     private fileHandle;
     private viewerObservers;
     private previewing;
+    private markupLanguage;
+    private codeLanguage;
     static get observedAttributes(): string[];
     get language(): NotebookLanguage;
+    /** Title displayed in the center of the exported HTML toolbar. */
+    get label(): string;
+    set label(value: string);
+    /** Exported toolbar icon; defaults to the notebook type, with empty hiding it. */
+    get logo(): string;
+    set logo(value: string);
     get readonly(): boolean;
     set readonly(value: boolean);
     connectedCallback(): void;
@@ -162,6 +239,8 @@ export declare class TpNotebook extends TpBase {
     private exportHtml;
     private configureDropdownTrigger;
     private menuTrigger;
+    private languageControls;
+    private updateLanguageControls;
     private languageMenu;
     private restrictedLanguageButton;
     private button;

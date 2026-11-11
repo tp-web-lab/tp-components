@@ -1,0 +1,14 @@
+{
+  "examples": [
+    "01-basic-usage",
+    "02-trie-graph",
+    "03-text-decoration",
+    "04-path-intersections",
+    "05-orbital-animation",
+    "06-turtle-star",
+    "07-spy-magnification",
+    "08-lindenmayer-tree",
+    "09-sectioned-document",
+    "10-illustrated-document"
+  ]
+}

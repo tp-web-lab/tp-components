@@ -1,2 +1,3 @@
-import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l10-2v10M9 8l10-2"/><ellipse cx="6" cy="18" rx="3" ry="3"/><path d="M17 13v8m-3-3 3 3 3-3"/></svg>`;export{t as n,n as t};
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" transform="scale(.85)" d="M21 3v12.5a3.5 3.5 0 0 1-3.5 3.5a3.5 3.5 0 0 1-3.5-3.5a3.5 3.5 0 0 1 3.5-3.5c.54 0 1.05.12 1.5.34V6.47L9 8.6v8.9A3.5 3.5 0 0 1 5.5 21A3.5 3.5 0 0 1 2 17.5A3.5 3.5 0 0 1 5.5 14c.54 0 1.05.12 1.5.34V6z"/><path fill="currentColor" d="M21 15v4h3l-4 4l-4-4h3v-4z"/></svg>
+`;export{t as n,n as t};
 //# sourceMappingURL=save-audio.js.map

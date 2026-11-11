@@ -2,7 +2,7 @@
   "tagname": "tp-glossary",
   "classname": "TpGlossary",
   "superclass": "TpBase",
-  "description": "Defines a glossary entry referenced by tp-ref.",
+  "description": "Defines a hidden glossary entry for reference tooltips and generated lists.",
   "examples": [
     {
       "label": "Example 1",
@@ -33,7 +33,7 @@
   "userHelp": {
     "displayName": "Glossary",
     "introduction": "The custom `<tp-glossary>` element defines a hidden glossary entry for reference tooltips and generated lists.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| None | No component-specific mouse interaction; the definition is hidden. Its content is displayed through references and generated lists. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| None | No component-specific keyboard interaction. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| None | No component-specific mouse interaction; the definition is hidden. Its content is displayed through references and generated lists. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| None | No component-specific keyboard interaction. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

@@ -1,0 +1,1 @@
+import{t as e}from"../../chunks/kakuro2.js";export{e as TpKakuro};

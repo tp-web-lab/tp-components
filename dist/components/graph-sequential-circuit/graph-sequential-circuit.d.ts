@@ -17,6 +17,8 @@ export declare const TP_LOGIC_T_FLIP_FLOP = "logic-t-flip-flop";
 export declare function validateSequentialCircuit(graph: Readonly<TpGraphDocument>): void;
 export declare function evaluateSequentialCombinational(graph: Readonly<TpGraphDocument>): TpGraphDocument;
 /**
+ * The custom `<tp-graph-sequential-circuit>` element edits and simulates synchronous sequential logic circuits.
+ *
  * @summary Edits and simulates synchronous sequential logic circuits.
  * @tagname tp-graph-sequential-circuit
  * @example

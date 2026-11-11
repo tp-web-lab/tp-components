@@ -90,7 +90,7 @@ import type { TpExampleProjectMetadata } from "../playground/playground-example-
 import { TpSqlProject } from "./sql-project.js";
 export { type TpSqlDatabase, type TpSqlDatabaseType, TpSqlProject, } from "./sql-project.js";
 /**
- * SQL playground component.
+ * The custom `<tp-sql-playground>` element edits and runs a SQL project.
  *
  * Provides a file-based playground that executes SQL with SQLite in the browser.
  *

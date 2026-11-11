@@ -1,33 +1,42 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="avatar-group" library="components" size="1.25em"></tp-icon> Avatar group
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-avatar-group>` element implements the Avatar group functionality: groups tp-avatar elements with configurable overlap, stacking order and orientation.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-avatar-group>` element groups avatars into a compact visual collection.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-avatar-group>
   <tp-avatar initials="AL" label="Ada Lovelace"></tp-avatar>
   <tp-avatar initials="GH" label="Grace Hopper"></tp-avatar>
   <tp-avatar initials="KT" label="Katherine Johnson"></tp-avatar>
 </tp-avatar-group>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-avatar-group" src="/docs/components/avatar-group/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Reading | Read the people represented by the avatars. The group is static and has no mouse or keyboard controls. Overlap changes only their visual presentation: screen readers encounter each labelled avatar in its original reading order. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| Component itself | No dedicated keyboard action. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Place `tp-avatar` elements directly inside the group. Each avatar keeps its own image, initials, icon, label, shape and size. The group preserves the original nodes and automatically updates when avatars are added, removed or reordered.
 
@@ -37,278 +46,7 @@ Place `tp-avatar` elements directly inside the group. Each avatar keeps its own 
 
 In a right-to-left document, the horizontal row follows the inherited text direction. The `order` attribute still describes stacking relative to author order, independently of text direction. The group does not wrap.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Compare three overlapping avatars. Later avatars cover earlier ones while names remain in their original reading order.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-HTML
-: ::include{examples/examples.html}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-
-<!-- tp-docgen:api TpAvatarGroup -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>offset</code> | <code>string</code> | <code>&quot;0.75rem&quot;</code> | Overlap between adjacent avatars as a nonnegative CSS length; zero disables overlap. |
-  | <code>order</code> | <code>TpAvatarGroupOrder</code> | <code>&quot;ltr&quot;</code> | Stacking order: ltr places later avatars in front; rtl places earlier avatars in front. |
-  | <code>orientation</code> | <code>TpAvatarGroupOrientation</code> | <code>&quot;horizontal&quot;</code> | Layout axis (horizontal or vertical). |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-avatar-group>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpAvatarGroup`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-avatar-group>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-avatar-group-index</code> | <code>unset</code> | Stacking order of an individual avatar. Assigned internally on each child from its position and the order attribute; no static CSS default. |
-  | <code>&#45;&#45;tp-avatar-group-overlap</code> | <code>0.75rem</code> | Overlap distance between adjacent avatars along the current orientation; updated from the offset attribute. |
-  [CSS properties of `<tp-avatar-group>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_avatar-group.TpAvatarGroup.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -335,12 +73,41 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Compare three overlapping avatars. Later avatars cover earlier ones while names remain in their original reading order.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-avatar-group>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-avatar
@@ -351,8 +118,8 @@ All tp-components used by `<tp-avatar-group>` are loaded automatically by this c
 @summary Shared base class for tp-* components.
 -->
 
-- [`<tp-avatar>`](../avatar/index.md) : Visual identity using an image, initials or an icon.
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
+- [`<tp-avatar>`](#/components/avatar/index.md) : Visual identity using an image, initials or an icon.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 
 ### External
 

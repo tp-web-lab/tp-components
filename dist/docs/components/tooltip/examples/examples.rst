@@ -31,86 +31,46 @@
             .. script::
                :src: /docs/components/_shared/introduction-actions.js
 
-      .. example:: Attributes
-
-         Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-         .. tp-stack::
-
-            .. tp-checkbox-list::
-               :id: attributes-booleans
-               :label: Boolean attributes
-               :label-position: top
-               :orientation: horizontal
-               :value:
-
-               - open
-
-               - outside-click
-
-            .. tp-radio-list::
-               :data-setting: placement
-               :label: placement
-               :label-position: top
-               :orientation: horizontal
-               :value: 1
-
-               - top
-
-               - end
-
-               - bottom
-
-               - start
-
-            .. tp-cluster::
-
-               .. tp-textfield::
-                  :data-setting: anchor
-                  :label: anchor
-                  :value:
-                  :placeholder:
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: offset
-                  :label: offset
-                  :value: 8px
-                  :placeholder: 8px
-                  :clearable:
-
-            .. tp-button-group::
-
-               .. tp-button::
-                  :id: attributes-reset
-                  :type: button
-
-                  Reset defaults
-
-               .. tp-button::
-                  :id: attributes-reload
-                  :type: button
-
-                  Reload preview
-
-         .. tp-divider::
-
-         .. h3::
-
-            Preview
-
-         .. tp-iframe::
-            :id: attributes-frame
-            :title: tooltip attribute preview
-            :style: height: 24rem; display: flow-root; inline-size: auto;
-
-         .. tp-callout::
-            :id: attributes-status
-            :variant: info
-            :heading: Preview status
-
-            Preparing the preview…
+      .. example:: Javascript API
 
          .. script::
             :type: module
-            :src: /docs/components/tooltip/examples/attributes.js
+
+            import "/components/box/box.js";
+            import "/components/button/button.js";
+            import "/components/tooltip/tooltip.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-box");
+            element1.setAttribute("data-intro-action", "tooltip");
+            element1.setAttribute("data-allow-script", "");
+            element1.append(document.createTextNode("\n  "));
+
+            const element2 = document.createElement("tp-button");
+            element2.setAttribute("id", "intro-tooltip-trigger");
+            element2.setAttribute("data-demo-trigger", "");
+            element2.append(document.createTextNode("Hover or focus for help"));
+            element1.append(element2);
+            element1.append(document.createTextNode("\n  "));
+
+            const element3 = document.createElement("tp-tooltip");
+            element3.setAttribute("anchor", "#intro-tooltip-trigger");
+            element3.append(document.createTextNode("This help also appears when the trigger receives keyboard focus."));
+            element1.append(element3);
+            element1.append(document.createTextNode("\n  "));
+
+            const element4 = document.createElement("p");
+            element4.setAttribute("data-demo-status", "");
+            element4.setAttribute("role", "status");
+            element4.append(document.createTextNode("Try the tooltip using its trigger."));
+            element1.append(element4);
+            element1.append(document.createTextNode("\n  "));
+
+            const element5 = document.createElement("script");
+            element5.setAttribute("src", "/docs/components/_shared/introduction-actions.js");
+            element1.append(element5);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+
+            document.body.append(example);

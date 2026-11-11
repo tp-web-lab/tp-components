@@ -1,0 +1,60 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpPythonViewer[src=/docs/components/_shared/intro-projects/python.json]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/python-viewer/python-viewer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-python-viewer");
+element1.setAttribute("src", "/docs/components/_shared/intro-projects/python.json");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example src
+\documentclass{article}
+\begin{document}
+\wcTpPythonViewer[src=/docs/components/python-viewer/examples/example.json]{}
+\end{document}
+
+% !tp-example script
+\documentclass{article}
+\begin{document}
+\wcTpPythonViewer{
+  \wcScript[type=tp/python]|
+        message = "Hello Python viewer"
+        print(message)
+      |
+}
+\end{document}
+
+% !tp-example matplotlib
+\documentclass{article}
+\begin{document}
+\wcTpPythonViewer[src=/docs/components/python-viewer/examples/matplotlib.json]{}
+\end{document}
+
+% !tp-example error
+\documentclass{article}
+\begin{document}
+\wcTpPythonViewer{
+  \wcScript[type=tp/python]|
+        raise RuntimeError("Intentional Python error")
+      |
+}
+\end{document}
+
+% !tp-example Single source file
+\documentclass{article}
+\begin{document}
+\wcTpPythonViewer[src=/docs/components/_shared/single-source/example.py]{}
+\end{document}

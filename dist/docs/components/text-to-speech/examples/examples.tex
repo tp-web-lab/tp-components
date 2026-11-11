@@ -1,0 +1,129 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpTextToSpeech[lang=en-GB,show-text]{
+  \wcScript[type=tp/txt]|
+    Welcome to tp-components. This example uses the browser speech synthesis service.
+  |
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/text-to-speech/text-to-speech.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-text-to-speech");
+element1.setAttribute("lang", "en-GB");
+element1.setAttribute("show-text", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/txt");
+element2.textContent = "\n    Welcome to tp-components. This example uses the browser speech synthesis service.\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example English voices
+\documentclass{article}
+\begin{document}
+\wcTpTextToSpeech[id=voice-comparison,value=Welcome to tp-components. You can pause this reading and resume it whenever you want.,lang=en-US,show-text]{}
+
+\wcScript[type=module,src=/docs/components/text-to-speech/examples/voice-comparison.js]||
+\end{document}
+
+% !tp-example French voices
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-text-to-speech id="voice-comparison" value="Bienvenue dans tp-components. Vous pouvez mettre cette lecture en pause, puis la reprendre à votre rythme." lang="fr-FR" show-text=""></tp-text-to-speech>|
+
+\wcScript[type=module,src=/docs/components/text-to-speech/examples/voice-comparison.js]||
+\end{document}
+
+% !tp-example Synchronized speech
+\documentclass{article}
+\begin{document}
+Press Speak, then try Pause, Resume and Stop. Some voices do not report word boundaries; the full text remains visible in that case.
+
+
+\wcTpTypewriting[id=spoken-text,word]{
+  Welcome to \textbf{tp-components}. You can pause this reading and resume it whenever you want.
+
+}
+
+\wcTpTextToSpeech[for=spoken-text,lang=en]{}
+\end{document}
+
+% !tp-example Read an element
+\documentclass{article}
+\begin{document}
+\wcArticle[id=reading-article]{
+  Welcome to \textbf{tp-components}. This article stays visible while it is read aloud.
+
+  You can pause the reading, resume it, or stop it whenever you want.
+
+}
+
+\wcTpTextToSpeech[for=reading-article,lang=en]{}
+\end{document}
+
+% !tp-example Pauses
+\documentclass{article}
+\begin{document}
+\wcTpTextToSpeech[lang=en-GB,show-text,pause-between-lines=800]{
+  \wcScript[type=tp/txt]|
+    Look at the illustration. [pause=1500]
+    A. A woman is placing [pause=300] a box on a table.
+    B. Two people are boarding a train.
+    C. A man is cleaning a window.
+    D. Some chairs are being stacked.
+  |
+}
+\end{document}
+
+% !tp-example Dialogue
+\documentclass{article}
+\begin{document}
+Voice names depend on your browser and system. This dialogue uses Daniel and Kate when available; otherwise it uses the component voice. Open Speech voice settings to see the available names for this language.
+
+
+\wcTpTextToSpeech[lang=en-GB,show-text,pause-between-lines=400]{
+  \wcScript[type=tp/txt]|[voice=Daniel] Hello! How are you?
+[voice=Kate] Very well, thank you. [pause=600]
+[voice=Daniel] Shall we begin?
+[voice=default] End of the dialogue.|
+}
+\end{document}
+
+% !tp-example Named triggers
+\documentclass{article}
+\begin{document}
+\wcTpTextToSpeech[data-trigger-demo,lang=en-GB,show-text]{
+  \wcScript[type=tp/txt]|Listen to the first idea. [trigger=clic] Now the second idea. [pause=500] [trigger=clic] Finished.|
+}
+
+\wcDiv[data-trigger-status,role=status]{No trigger yet.}
+
+\wcScript[type=module,src=/docs/components/text-to-speech/examples/triggers.js]||
+\end{document}
+
+% !tp-example Automatic pauses
+\documentclass{article}
+\begin{document}
+\wcTpTextToSpeech[lang=en-GB,show-text,pause-after-comma=200,pause-after-semicolon=400,pause-after-colon=400,pause-after-sentence=600,pause-per-blank-line=1000]{
+  \wcScript[type=tp/txt]|First, listen to this idea; then consider the next one: punctuation sets the pace. Do you hear the pauses? Good!
+
+A new paragraph follows one blank line.
+
+
+Two blank lines add a longer break.|
+}
+\end{document}

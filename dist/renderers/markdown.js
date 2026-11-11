@@ -15657,12 +15657,12 @@ function p$13(e) {
 function m$13(e) {
 	return e.match(/^\s*---\r?\n[\s\S]*?\r?\n---\r?\n?/)?.[0].trimStart() ?? "";
 }
-function h$10(e) {
-	let n = e.match(/^\s*---\r?\n([\s\S]*?)\r?\n---/);
+function h$10(t) {
+	let n = t.match(/^\s*---\r?\n([\s\S]*?)\r?\n---/);
 	if (n === null) return {};
 	try {
-		let e = fn$3(n[1] ?? "");
-		return typeof e == "object" && e && !Array.isArray(e) ? e : {};
+		let t = fn$3(n[1] ?? "");
+		return typeof t == "object" && t && !Array.isArray(t) ? t : {};
 	} catch {
 		return {};
 	}
@@ -15741,9 +15741,9 @@ async function T$8(e) {
 function E$8(e) {
 	return e instanceof HTMLTemplateElement ? e.innerHTML.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&quot;", "\"").replaceAll("&#39;", "'").replaceAll("&amp;", "&") : e.textContent ?? "";
 }
-async function D$8(t, r, i, a, o, s, c) {
-	if (t.toggleAttribute("data-allow-script", c), O$8(r)) {
-		t.replaceChildren(j$7("Nested mdviewer rendering skipped.", "text"));
+async function D$8(e, r, i, a, o, s, c) {
+	if (e.toggleAttribute("data-allow-script", c), O$8(r)) {
+		e.replaceChildren(j$7("Nested mdviewer rendering skipped.", "text"));
 		return;
 	}
 	let l = new S({
@@ -15755,16 +15755,16 @@ async function D$8(t, r, i, a, o, s, c) {
 		}
 	});
 	if (s === "render") {
-		t.innerHTML = await l.renderAsync(r), await l.renderRuntime(t, { exclude: ["mdviewer"] }), e$17(t);
+		e.innerHTML = await l.renderAsync(r), await l.renderRuntime(e, { exclude: ["mdviewer"] }), e$17(e);
 		return;
 	}
 	if (s === "html") {
-		let e = await l.renderAsync(r);
-		t.replaceChildren(j$7(V$6(e), "html")), await l.renderRuntime(t, { only: ["highlight"] });
+		let t = await l.renderAsync(r);
+		e.replaceChildren(j$7(V$6(t), "html")), await l.renderRuntime(e, { only: ["highlight"] });
 		return;
 	}
 	let u = await l.parseAsync(r), d = JSON.stringify(u.tokens, null, 2);
-	t.replaceChildren(j$7(d, "json")), await l.renderRuntime(t, { only: ["highlight"] });
+	e.replaceChildren(j$7(d, "json")), await l.renderRuntime(e, { only: ["highlight"] });
 }
 function O$8(e) {
 	return /^(`{3,}|~{3,})[ \t]*mdviewer\b/m.test(e);
@@ -15860,8 +15860,8 @@ function K$4(e) {
 }
 var r$24, B$6;
 var init_mdviewer = __esmMin((() => {
-	init_markdown_execute_allowed_scripts();
 	init_yaml();
+	init_markdown_execute_allowed_scripts();
 	init_markdown();
 	r$24 = {
 		id: "mdviewer",
@@ -231677,7 +231677,7 @@ function protectMarkdownRawTextElements(source) {
 			output.push(line);
 			continue;
 		}
-		const tag = (fence === null ? line.match(/^ {0,3}<(script|style|textarea|template)\b/i) : null)?.[1]?.toLowerCase();
+		const tag = (fence === null ? line.match(/^ {0,3}(?:<[a-z][\w:-]*\b(?:[^>"']|"[^"]*"|'[^']*')*>\s*)*?<(script|style|textarea|template)\b/i) : null)?.[1]?.toLowerCase();
 		if (tag === void 0) {
 			output.push(line);
 			continue;

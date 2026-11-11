@@ -7,134 +7,54 @@
 
       .. example:: Basic usage
 
-         Audio saving is reserved for a future integration. No audio provider is currently connected.
+         Listen to the sound of breaking glass, then save the MP3 file.
+
+         .. audio::
+            :id: save-audio-example
+            :controls:
+            :preload: metadata
+            :aria-label: Sound of breaking glass
+
+            .. source::
+               :src: /docs/medias/audios/glass-break.mp3
+               :type: audio/mpeg
 
          .. tp-save-audio::
-            :disabled:
+            :anchor: #save-audio-example
+            :filename: glass-break
 
-      .. example:: Attributes
-
-         Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-         .. tp-stack::
-
-            .. tp-checkbox-list::
-               :id: attributes-booleans
-               :label: Boolean attributes
-               :label-position: top
-               :orientation: horizontal
-               :value:
-
-               - disabled
-
-            .. tp-radio-list::
-               :data-setting: format
-               :label: format
-               :label-position: top
-               :orientation: horizontal
-               :value: 1
-
-               - mp3
-
-               - ogg
-
-               - wav
-
-            .. tp-radio-list::
-               :data-setting: size
-               :label: size
-               :label-position: top
-               :orientation: horizontal
-               :value: 4
-
-               - xxs
-
-               - xs
-
-               - s
-
-               - m
-
-               - l
-
-               - xl
-
-               - xxl
-
-            .. tp-radio-list::
-               :data-setting: variant
-               :label: variant
-               :label-position: top
-               :orientation: horizontal
-               :value: 5
-
-               - success
-
-               - danger
-
-               - warning
-
-               - info
-
-               - neutral
-
-               - brand
-
-            .. tp-cluster::
-
-               .. tp-textfield::
-                  :data-setting: anchor
-                  :label: anchor
-                  :value:
-                  :placeholder:
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: filename
-                  :label: filename
-                  :value: audio
-                  :placeholder: audio
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: name
-                  :label: name
-                  :value: file-download
-                  :placeholder: file-download
-                  :clearable:
-
-            .. tp-button-group::
-
-               .. tp-button::
-                  :id: attributes-reset
-                  :type: button
-
-                  Reset defaults
-
-               .. tp-button::
-                  :id: attributes-reload
-                  :type: button
-
-                  Reload preview
-
-         .. tp-divider::
-
-         .. h3::
-
-            Preview
-
-         .. tp-iframe::
-            :id: attributes-frame
-            :title: save-audio attribute preview
-            :style: height: 24rem; display: flow-root; inline-size: auto;
-
-         .. tp-callout::
-            :id: attributes-status
-            :variant: info
-            :heading: Preview status
-
-            Preparing the preview…
+      .. example:: Javascript API
 
          .. script::
             :type: module
-            :src: /docs/components/save-audio/examples/attributes.js
+
+            import "/components/save-audio/save-audio.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("p");
+            element1.append(document.createTextNode("Listen to the sound of breaking glass, then save the MP3 file."));
+            example.append(element1);
+            example.append(document.createTextNode("\n"));
+
+            const element2 = document.createElement("audio");
+            element2.setAttribute("id", "save-audio-example");
+            element2.setAttribute("controls", "");
+            element2.setAttribute("preload", "metadata");
+            element2.setAttribute("aria-label", "Sound of breaking glass");
+            element2.append(document.createTextNode("\n  "));
+
+            const element3 = document.createElement("source");
+            element3.setAttribute("src", "/docs/medias/audios/glass-break.mp3");
+            element3.setAttribute("type", "audio/mpeg");
+            element2.append(element3);
+            element2.append(document.createTextNode("\n"));
+            example.append(element2);
+            example.append(document.createTextNode("\n"));
+
+            const element4 = document.createElement("tp-save-audio");
+            element4.setAttribute("anchor", "#save-audio-example");
+            element4.setAttribute("filename", "glass-break");
+            example.append(element4);
+
+            document.body.append(example);

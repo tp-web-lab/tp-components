@@ -1,0 +1,3 @@
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 17H6a4 4 0 0 1-1-7.87A7 7 0 0 1 18.6 8a4.5 4.5 0 0 1-.1 9H17" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 9h7M6 12h11M8 15h6M10 18h4" stroke="currentColor" stroke-width="1.5"/></svg>
+`;export{t as n,n as t};
+//# sourceMappingURL=word-cloud.js.map

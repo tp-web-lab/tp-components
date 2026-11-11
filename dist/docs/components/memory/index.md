@@ -1,45 +1,40 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="memory" library="components" size="1.25em"></tp-icon> Memory
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-memory>` element implements the <tp-icon name="memory" library="components" size="1.25em"></tp-icon> Memory functionality: creates a memory matching game.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
-<details class="tp-game-rules">
-<summary>Rules of the game</summary>
+<div class="tp-component-doc-intro">
 
-<p>The cards are placed face down in matching pairs. Reveal two different cards on each turn.</p>
+The custom `<tp-memory>` element creates a memory matching game.
 
-<p>If their contents match, the pair stays revealed. Otherwise, the cards turn face down again after a short delay.</p>
+<div class="tp-component-doc-example">
 
-<p>Remember the positions and find every pair to complete the game.</p>
-
-</details>
-
+<!-- tp-docgen:introduction:start -->
 <tp-memory label="Match the fruits">
   <ol><li>Apple</li><li>Pear</li><li>Plum</li></ol>
 </tp-memory>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-memory" src="/docs/components/memory/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Using the component | Reveal two cards and try to find matching pairs. |
-| Using the component | Unmatched cards turn back over; matched pairs remain revealed. |
-| Using the component | Reset starts a new game. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Focused controls | Use each control’s standard keyboard interaction.  |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Provide one `<li>` for each distinct pair. The list may be an `<ol>` or a `<ul>` and each item can contain text, images, SVG, or other `tp-*` components. With `n` items, `<tp-memory>` creates `2 × n` flip cards.
 
@@ -59,391 +54,7 @@ Cards adapt their width and height to their content. Images and SVGs retain thei
 
 The default card back is the blue OpenDecks SVG. Use `back="blue"` or `back="red"` for the two bundled playing-card backs, or provide an image URL such as a `logo-tp-*` SVG. Use `mismatch-delay` to change the 1000 ms delay.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Reveal cards and find matching pairs, remembering their positions.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Numbers 0 to 9
-: Find pairs of matching number cards.
-
-European Union flags
-: Find matching pairs of flag images.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpMemory -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>back</code> | <code>string</code> | <code>&quot;&quot;</code> | Card-back URL, or blue/red for an OpenDecks back. |
-  | <code>mismatch-delay</code> | <code>number</code> | <code>1000</code> | Delay before unmatched cards turn back, in milliseconds. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-memory>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>reset</code> | <code>reset(): void</code> | Resets the timer, hides and reshuffles every card. |
-  [Public methods of `TpMemory`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-memory-complete</code> | <code>void</code> | Emitted when every pair is matched. |
-  | <code>tp-memory-match</code> | <code>&#123; pair: number &#125;</code> | Emitted after two matching cards are revealed; pair is the zero-based identifier assigned to their original list item. |
-  | <code>tp-memory-reset</code> | <code>void</code> | Emitted after the game is reset. |
-  [Events emitted by `<tp-memory>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-memory-card-max-width</code> | <code>10rem</code> | Maximum width of image and SVG cards. |
-  | <code>&#45;&#45;tp-memory-gap</code> | <code>0.75rem</code> | Gap between cards. |
-  [CSS properties of `<tp-memory>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_memory.TpMemory.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -470,12 +81,47 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Reveal cards and find matching pairs, remembering their positions.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Numbers 0 to 9
+: Find pairs of matching number cards.
+
+European Union flags
+: Find matching pairs of flag images.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-memory>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -491,13 +137,13 @@ All tp-components used by `<tp-memory>` are loaded automatically by this compone
 -->
 <!--
 @tp-dependency tp-switcher
-@summary Switches between horizontal and vertical layouts based on available space.
+@summary Component `<tp-switcher>`.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-chronometer>`](../chronometer/index.md) : Chronometer component with play, pause and stop controls.
-- [`<tp-flip-card>`](../flip-card/index.md) : Two-sided card component.
-- [`<tp-switcher>`](../switcher/index.md) : Switches between horizontal and vertical layouts based on available space.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-chronometer>`](#/components/chronometer/index.md) : Chronometer component with play, pause and stop controls.
+- [`<tp-flip-card>`](#/components/flip-card/index.md) : Two-sided card component.
+- [`<tp-switcher>`](#/components/switcher/index.md) : Component `<tp-switcher>`.
 
 ### External
 

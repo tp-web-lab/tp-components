@@ -23,41 +23,47 @@ A food chain
 :::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/listof/listof.js";
 
-Enter figure in selector to list the two figures. Clear the field to return to the empty default.
+const example = document.createDocumentFragment();
 
-::::: tp-stack
-:::: tp-cluster
-::: tp-textfield { data-setting="selector" label="selector" value placeholder clearable }
-:::
-::::
+const element1 = document.createElement("div");
+element1.setAttribute("data-tp-reference-scope", "");
+element1.append(document.createTextNode("\n  "));
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element2 = document.createElement("tp-listof");
+element2.setAttribute("selector", "figure");
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element3 = document.createElement("figure");
 
-::: tp-divider
-:::
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("A diagram of the water cycle."));
+element3.append(element4);
 
-### Preview
+const element5 = document.createElement("figcaption");
+element5.append(document.createTextNode("The water cycle"));
+element3.append(element5);
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
 
-::: tp-iframe { id="attributes-frame" title="listof attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
+const element6 = document.createElement("figure");
 
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
+const element7 = document.createElement("p");
+element7.append(document.createTextNode("A diagram of a food chain."));
+element6.append(element7);
 
-::: script { type="module" src="/docs/components/listof/examples/attributes.js" }
+const element8 = document.createElement("figcaption");
+element8.append(document.createTextNode("A food chain"));
+element6.append(element8);
+element1.append(element6);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
 :::
 ```
 

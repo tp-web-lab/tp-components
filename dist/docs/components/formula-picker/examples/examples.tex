@@ -1,0 +1,35 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpFormulaPicker{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/formula-picker/formula-picker.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-formula-picker");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Selection event
+\documentclass{article}
+\begin{document}
+\wcTpFormulaPicker[id=formula-event-picker]{}
+
+\wcTpTextfield[id=formula-event-result,label=Selected formula,placeholder=Select a formula,clearable]{}
+
+\wcScript[type=module]|const picker = document.querySelector("#formula-event-picker");
+const result = document.querySelector("#formula-event-result");
+await customElements.whenDefined("tp-textfield");
+picker.addEventListener("tp-formula-picker-select", (event) => {
+  result.value = event.detail.formula;
+});|
+\end{document}

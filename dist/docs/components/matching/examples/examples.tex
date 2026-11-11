@@ -1,0 +1,133 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpMatching{
+  \begin{itemize}
+    \item Hello
+    \item Thank you
+    \item Goodbye
+  \end{itemize}
+  \begin{enumerate}
+    \item Bonjour
+    \item Merci
+    \item Au revoir
+  \end{enumerate}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/matching/matching.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-matching");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("ul");
+
+const element3 = document.createElement("li");
+element3.append(document.createTextNode("Hello"));
+element2.append(element3);
+
+const element4 = document.createElement("li");
+element4.append(document.createTextNode("Thank you"));
+element2.append(element4);
+
+const element5 = document.createElement("li");
+element5.append(document.createTextNode("Goodbye"));
+element2.append(element5);
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element6 = document.createElement("ol");
+
+const element7 = document.createElement("li");
+element7.append(document.createTextNode("Bonjour"));
+element6.append(element7);
+
+const element8 = document.createElement("li");
+element8.append(document.createTextNode("Merci"));
+element6.append(element8);
+
+const element9 = document.createElement("li");
+element9.append(document.createTextNode("Au revoir"));
+element6.append(element9);
+element1.append(element6);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Rich content
+\documentclass{article}
+\begin{document}
+\wcTpMatching{
+  \begin{itemize}
+    \item \wcTpIcon[name=lt,library=flags,size=3em,role=img,aria-label=Flag to identify]{}
+    \item Listen to the sound.
+    \wcAudio[controls,src=/docs/medias/audios/glass-break.mp3,aria-label=Sound to identify]{}
+    \item Watch the scene.
+    \wcVideo[controls,width=240,src=/docs/medias/videos/chute-eau.mp4,aria-label=Scene to identify]{}
+  \end{itemize}
+  \begin{enumerate}
+    \item Lithuania
+    \item Breaking glass
+    \item A waterfall
+  \end{enumerate}
+}
+\end{document}
+
+% !tp-example Irregular verbs
+\documentclass{article}
+\begin{document}
+\wcTpMatching{
+  \begin{description}
+    \item[{Base form}] \begin{itemize}
+      \item be
+      \item have
+      \item do
+    \end{itemize}
+    \item[{Past simple}] \begin{enumerate}
+      \item was
+      \item had
+      \item did
+    \end{enumerate}
+    \item[{Past participle}] \begin{itemize}
+      \item been
+      \item had
+      \item done
+    \end{itemize}
+    \item[{French}] \begin{enumerate}
+      \item être
+      \item avoir
+      \item faire
+    \end{enumerate}
+  \end{description}
+}
+\end{document}
+
+% !tp-example Header list
+\documentclass{article}
+\begin{document}
+\wcTpMatching[heading]{
+  \begin{itemize}
+    \item English
+    \item French
+  \end{itemize}
+  \begin{itemize}
+    \item Hello
+    \item Thank you
+    \item Goodbye
+  \end{itemize}
+  \begin{enumerate}
+    \item Bonjour
+    \item Merci
+    \item Au revoir
+  \end{enumerate}
+}
+\end{document}

@@ -2,11 +2,13 @@
  * @tp-dependency tp-notebook
  * @summary Interactive notebook combining markup and executable code cells.
  */
-import '../notebook/notebook.js';
-import { TpNotebook } from '../notebook/notebook.js';
+import "../notebook/notebook.js";
+import { TpNotebook } from "../notebook/notebook.js";
 /**
+ * The custom `<tp-python-notebook>` element combines written explanations and executable Python code in an interactive notebook.
+ *
  * @tp-dependency tp-notebook
- * @summary Interactive notebook combining markup and executable code cells.
+ * @summary Combines written explanations and executable Python code in an interactive notebook.
  * @tagname tp-python-notebook
  * @summary Interactive Python notebook with markup and code cells.
  * @example
@@ -17,6 +19,6 @@ export declare class TpPythonNotebook extends TpNotebook {
 }
 declare global {
     interface HTMLElementTagNameMap {
-        'tp-python-notebook': TpPythonNotebook;
+        "tp-python-notebook": TpPythonNotebook;
     }
 }

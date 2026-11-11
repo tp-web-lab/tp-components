@@ -2,7 +2,7 @@
   "tagname": "tp-frame",
   "classname": "TpFrame",
   "superclass": "TpBase",
-  "description": "displays content in a fixed-aspect-ratio frame.",
+  "description": "Displays content in a fixed-aspect-ratio frame.",
   "examples": [
     {
       "label": "Example 1",
@@ -43,8 +43,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Frame",
-    "introduction": "The custom `<tp-frame>` element implements the <tp-icon name=\"frame\" library=\"components\" size=\"1.25em\"></tp-icon> Frame functionality: displays content in a fixed-aspect-ratio frame.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-frame>` element displays content in a fixed-aspect-ratio frame.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | This component organizes or presents content. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Component itself | No dedicated keyboard action. |\n| Embedded controls, when present | Use their normal keyboard interactions. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

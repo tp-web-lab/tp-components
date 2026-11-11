@@ -1,0 +1,58 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-map lat="48.3904" lon="-4.4861" zoom="13" title="Brest, Brittany, France" marker=""></tp-map>|
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/map/map.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-map");
+element1.setAttribute("lat", "48.3904");
+element1.setAttribute("lon", "-4.4861");
+element1.setAttribute("zoom", "13");
+element1.setAttribute("title", "Brest, Brittany, France");
+element1.setAttribute("marker", "");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Multiple markers
+\documentclass{article}
+\begin{document}
+\wcTpMap[title=Cities in Brittany,fit-markers]{
+  \begin{description}
+    \item[{Brest}] 48.3904, -4.4861
+    \item[{Rennes}] 48.1173, -1.6778
+  \end{description}
+}
+\end{document}
+
+% !tp-example GPX track
+\documentclass{article}
+\begin{document}
+This illustrative Brest track has two separate recording segments. The gap is intentional; this synthetic route is not a navigation guide.
+
+
+\wcTpMap[title=Illustrative Brest track,src=/docs/components/map/examples/brest-track.gpx,fit-content]{
+  \begin{description}
+    \item[{Additional meeting point}] 48.3920, -4.4840
+  \end{description}
+}
+\end{document}
+
+% !tp-example GPX route
+\documentclass{article}
+\begin{document}
+This GPX file contains a recorded track in northeastern Ouessant with three recording segments. The profile plots elevation in metres against cumulative distance in kilometres, without joining recording gaps. The map does not provide navigation guidance.
+
+
+\wcTpMap[title=Northeastern Ouessant track,src=/docs/components/map/examples/ouessant-route.gpx,fit-content,elevation-profile]{}
+\end{document}

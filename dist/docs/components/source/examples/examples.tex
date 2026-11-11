@@ -1,0 +1,55 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  Open the source repository for this library.
+
+  \wcTpSource[url=https://github.com/tp-web-lab/tp-components]{}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/source/source.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("Open the source repository for this library."));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("tp-source");
+element3.setAttribute("url", "https://github.com/tp-web-lab/tp-components");
+element1.append(element3);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Repository providers
+\documentclass{article}
+\begin{document}
+GitHub
+
+
+\wcTpSource[url=https://github.com/tp-web-lab/tp-components]{}
+
+GitLab
+
+
+\wcTpSource[url=https://gitlab.com]{}
+
+Generic Git address (illustrative)
+
+
+\wcTpSource[url=https://example.com/project.git]{}
+\end{document}

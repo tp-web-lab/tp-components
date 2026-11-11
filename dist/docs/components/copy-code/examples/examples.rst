@@ -19,81 +19,35 @@
             .. tp-copy-code::
                :for: intro-copy-code
 
-      .. example:: Attributes
-
-         Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-         .. tp-stack::
-
-            .. tp-cluster::
-
-               .. tp-textfield::
-                  :data-setting: copied-text
-                  :label: copied-text
-                  :value: Copied!
-                  :placeholder: Copied!
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: error-icon
-                  :label: error-icon
-                  :value: warning
-                  :placeholder: warning
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: for
-                  :label: for
-                  :value:
-                  :placeholder:
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: icon
-                  :label: icon
-                  :value: copy
-                  :placeholder: copy
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: success-icon
-                  :label: success-icon
-                  :value: check
-                  :placeholder: check
-                  :clearable:
-
-            .. tp-button-group::
-
-               .. tp-button::
-                  :id: attributes-reset
-                  :type: button
-
-                  Reset defaults
-
-               .. tp-button::
-                  :id: attributes-reload
-                  :type: button
-
-                  Reload preview
-
-         .. tp-divider::
-
-         .. h3::
-
-            Preview
-
-         .. tp-iframe::
-            :id: attributes-frame
-            :title: copy-code attribute preview
-            :style: height: 24rem; display: flow-root; inline-size: auto;
-
-         .. tp-callout::
-            :id: attributes-status
-            :variant: info
-            :heading: Preview status
-
-            Preparing the preview…
+      .. example:: Javascript API
 
          .. script::
             :type: module
-            :src: /docs/components/copy-code/examples/attributes.js
+
+            import "/components/box/box.js";
+            import "/components/copy-code/copy-code.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-box");
+            element1.append(document.createTextNode("\n  "));
+
+            const element2 = document.createElement("tp-box");
+            element2.setAttribute("id", "intro-copy-code");
+
+            const element3 = document.createElement("pre");
+
+            const element4 = document.createElement("code");
+            element4.append(document.createTextNode("const answer = 6 * 7;"));
+            element3.append(element4);
+            element2.append(element3);
+            element1.append(element2);
+            element1.append(document.createTextNode("\n  "));
+
+            const element5 = document.createElement("tp-copy-code");
+            element5.setAttribute("for", "intro-copy-code");
+            element1.append(element5);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+
+            document.body.append(example);

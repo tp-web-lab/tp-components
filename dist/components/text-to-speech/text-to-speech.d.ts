@@ -9,8 +9,10 @@ import "../icon-button/icon-button.js";
 import "../icon/icon.js";
 import "../typewriting/typewriting.js";
 /**
+ * The custom `<tp-text-to-speech>` element reads text aloud.
+ *
  * @tagname tp-text-to-speech
- * @summary Reads inline or external text aloud with browser speech synthesis.
+ * @summary Reads text aloud.
  * @attr {string} legend = "Text to speech" - Caption of the fieldset surrounding the controls.
  * @attr {string} src = "" - Text file loaded relative to the containing document.
  * @attr {string} value = "" - Text supplied directly as an attribute.

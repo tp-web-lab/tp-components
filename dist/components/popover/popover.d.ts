@@ -2,11 +2,14 @@
  * @module components/popover
  * @summary Popover overlay component.
  */
-import { TpOverlayElement } from '../overlay/overlay.js';
-type TpPopoverPlacement = 'top' | 'end' | 'bottom' | 'start';
 /**
- * `<tp-popover>` affiche un contenu flottant ancré à un élément cible,
- * sans utiliser de Shadow DOM.
+ * @tp-dependency tp-base
+ * @summary Shared base class for tp-* components.
+ */
+import { TpOverlayElement } from "../overlay/overlay.js";
+type TpPopoverPlacement = "top" | "end" | "bottom" | "start";
+/**
+ * The custom `<tp-popover>` element displays anchored popover content.
  *
  * Exemple :
  *

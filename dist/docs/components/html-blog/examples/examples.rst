@@ -1,0 +1,72 @@
+.. tp-restructuredtext-viewer::
+   :label: tp-html-blog
+   :allow-script:
+
+   .. script::
+      :type: tp/restructuredtext
+
+      .. example:: Basic usage
+
+         .. tp-html-blog::
+            :page-size: 2
+
+            .. script::
+               :type: tp/html
+
+               <h2>A small garden</h2>
+               <dl>
+                 <dt>Id</dt><dd>garden</dd>
+                 <dt>Date</dt><dd>2026-06-03</dd>
+                 <dt>Summary</dt><dd>Three ideas for a greener balcony.</dd>
+                 <dt>Categories</dt><dd>Life</dd>
+                 <dt>Tags</dt><dd>plants, outdoors</dd>
+               </dl>
+               <p>Start with herbs, choose a sunny spot, and water regularly.</p>
+
+               <h2>Learning together</h2>
+               <dl>
+                 <dt>Id</dt><dd>learning</dd>
+                 <dt>Date</dt><dd>2026-06-02</dd>
+                 <dt>Summary</dt><dd>Notes from our first workshop.</dd>
+                 <dt>Categories</dt><dd>Learning</dd>
+                 <dt>Tags</dt><dd>community, ideas</dd>
+               </dl>
+               <p>A short shared exercise makes a good starting point for discussion.</p>
+
+               <h2>Welcome</h2>
+               <dl>
+                 <dt>Id</dt><dd>welcome</dd>
+                 <dt>Date</dt><dd>2026-06-01</dd>
+                 <dt>Summary</dt><dd>What you will find in this blog.</dd>
+                 <dt>Categories</dt><dd>Life</dd>
+                 <dt>Tags</dt><dd>community</dd>
+               </dl>
+               <p>We share practical ideas and small discoveries. Come back for the next article.</p>
+
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/html-blog/html-blog.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-html-blog");
+            element1.setAttribute("page-size", "2");
+            element1.append(document.createTextNode("\n  "));
+
+            const element2 = document.createElement("script");
+            element2.setAttribute("type", "tp/html");
+            element2.textContent = "\n    \u003ch2>A small garden\u003c/h2>\n    \u003cdl>\n      \u003cdt>Id\u003c/dt>\u003cdd>garden\u003c/dd>\n      \u003cdt>Date\u003c/dt>\u003cdd>2026-06-03\u003c/dd>\n      \u003cdt>Summary\u003c/dt>\u003cdd>Three ideas for a greener balcony.\u003c/dd>\n      \u003cdt>Categories\u003c/dt>\u003cdd>Life\u003c/dd>\n      \u003cdt>Tags\u003c/dt>\u003cdd>plants, outdoors\u003c/dd>\n    \u003c/dl>\n    \u003cp>Start with herbs, choose a sunny spot, and water regularly.\u003c/p>\n\n    \u003ch2>Learning together\u003c/h2>\n    \u003cdl>\n      \u003cdt>Id\u003c/dt>\u003cdd>learning\u003c/dd>\n      \u003cdt>Date\u003c/dt>\u003cdd>2026-06-02\u003c/dd>\n      \u003cdt>Summary\u003c/dt>\u003cdd>Notes from our first workshop.\u003c/dd>\n      \u003cdt>Categories\u003c/dt>\u003cdd>Learning\u003c/dd>\n      \u003cdt>Tags\u003c/dt>\u003cdd>community, ideas\u003c/dd>\n    \u003c/dl>\n    \u003cp>A short shared exercise makes a good starting point for discussion.\u003c/p>\n\n    \u003ch2>Welcome\u003c/h2>\n    \u003cdl>\n      \u003cdt>Id\u003c/dt>\u003cdd>welcome\u003c/dd>\n      \u003cdt>Date\u003c/dt>\u003cdd>2026-06-01\u003c/dd>\n      \u003cdt>Summary\u003c/dt>\u003cdd>What you will find in this blog.\u003c/dd>\n      \u003cdt>Categories\u003c/dt>\u003cdd>Life\u003c/dd>\n      \u003cdt>Tags\u003c/dt>\u003cdd>community\u003c/dd>\n    \u003c/dl>\n    \u003cp>We share practical ideas and small discoveries. Come back for the next article.\u003c/p>\n  ";
+            element1.append(element2);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+
+            document.body.append(example);
+
+      .. example:: External articles
+
+         .. tp-html-blog::
+            :page-size: 2
+            :src: /docs/components/html-blog/examples/articles.html

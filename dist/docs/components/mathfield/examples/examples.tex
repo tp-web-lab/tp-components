@@ -1,0 +1,36 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-mathfield label="Formula" value="E = mc^2" clearable=""></tp-mathfield>|
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/math/math.js";
+import "/components/mathfield/mathfield.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-mathfield");
+element1.setAttribute("label", "Formula");
+element1.setAttribute("value", "E = mc^2");
+element1.setAttribute("clearable", "");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Inline in prose
+\documentclass{article}
+\begin{document}
+Einstein's equation \rawhtml*|<tp-mathfield name="energy" value="E = mc^2"></tp-mathfield>| relates mass and energy.
+\end{document}
+
+% !tp-example Inline named field
+\documentclass{article}
+\begin{document}
+Value: \rawhtml*|<tp-mathfield name="identifier" value="E = mc^2" placeholder="Enter a value"></tp-mathfield>|
+\end{document}

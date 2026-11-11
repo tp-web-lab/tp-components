@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-mask" allow-script }
-:::::: script { type="tp/markdown" }
+::::: tp-markdown-viewer { label="tp-mask" allow-script }
+:::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-textfield { id="mask-answer" label="Answer" value="Thursday" clearable }
 :::
@@ -9,42 +9,29 @@ The answer is hidden until the review.
 :::
 ```
 
-``` example {label="Attributes"}
-Enter `#mask-answer` in anchor, then enable active. Edit the answer before masking it and check that the value returns when active is unchecked. Clear anchor or use Reset defaults to restore the inactive defaults. Reload preview recreates the target with its initial value.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/mask/mask.js";
+import "/components/textfield/textfield.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="mask-active" label="Boolean attributes" label-position="top" orientation="horizontal" }
-- active
-:::
+const example = document.createDocumentFragment();
 
-::: tp-textfield { id="mask-anchor" label="anchor" label-position="top" placeholder clearable }
-:::
+const element1 = document.createElement("tp-textfield");
+element1.setAttribute("id", "mask-answer");
+element1.setAttribute("label", "Answer");
+element1.setAttribute("value", "Thursday");
+element1.setAttribute("clearable", "");
+example.append(element1);
+example.append(document.createTextNode("\n"));
 
-:::: tp-button-group
-::: tp-button { id="mask-reset" }
-Reset defaults
-:::
+const element2 = document.createElement("tp-mask");
+element2.setAttribute("anchor", "#mask-answer");
+element2.setAttribute("active", "");
+element2.append(document.createTextNode("The answer is hidden until the review."));
+example.append(element2);
 
-::: tp-button { id="mask-reload" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-:::: tp-stack { id="mask-preview" }
-::: tp-textfield { id="mask-answer" label="Answer" value="Thursday" clearable }
-:::
-
-::: tp-mask
-The answer is hidden until the review.
-:::
-::::
-
-::: script { type="module" src="/docs/components/mask/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
-::::::
-:::::::
+::::
+:::::

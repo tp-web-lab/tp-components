@@ -90,7 +90,7 @@ import type { TpExampleProjectMetadata } from "../playground/playground-example-
 import { TpAsciidocProject } from "./asciidoc-project.js";
 export { type TpAsciidocExtension, TpAsciidocProject, } from "./asciidoc-project.js";
 /**
- * AsciiDoc playground component.
+ * The custom `<tp-asciidoc-playground>` element edits and renders an AsciiDoc project.
  *
  * Provides a file-based playground that renders AsciiDoc documents in the browser.
  *

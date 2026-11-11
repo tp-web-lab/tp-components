@@ -2,7 +2,7 @@
   "tagname": "tp-audio-recorder",
   "classname": "TpAudioRecorder",
   "superclass": "TpBase",
-  "description": "Local microphone recorder with playback and download.",
+  "description": "Records audio for playback, download and optional speech transcription.",
   "examples": [
     {
       "label": "Example 1",
@@ -72,8 +72,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Audio recorder",
-    "introduction": "The custom `<tp-audio-recorder>` element records a spoken response locally for replay and download, with optional speech transcription into another element.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Record | Request microphone access, capture a new response and transcribe it when configured. |\n| Stop | Finish capturing and prepare the audio for replay; allow final transcription results to arrive. |\n| Clear | Remove the current recording and clear the written transcript. |\n| Playback controls | Listen, pause and seek in the recorded response. |\n| Download recording | Save the audio file on your device. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused button. Native playback shortcuts depend on the browser. |\n| <kbd>Enter</kbd> on Download recording | Save the audio file. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-audio-recorder>` element records audio for playback, download and optional speech transcription.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Record | Request microphone access, capture a new response and transcribe it when configured. |\n| Stop | Finish capturing and prepare the audio for replay; allow final transcription results to arrive. |\n| Clear | Remove the current recording and clear the written transcript. |\n| Playback controls | Listen, pause and seek in the recorded response. |\n| Download recording | Save the audio file on your device. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused button. Native playback shortcuts depend on the browser. |\n| <kbd>Enter</kbd> on Download recording | Save the audio file. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

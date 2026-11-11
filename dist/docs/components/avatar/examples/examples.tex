@@ -1,0 +1,51 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpCluster{
+  \wcTpAvatar[src=/docs/medias/logos/logo-tp.svg,label=tp-components]{}
+  \wcTpAvatar[initials=AL,label=Ada Lovelace]{}
+  \wcTpAvatar[icon=user,shape=square,label=Guest]{}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/avatar/avatar.js";
+import "/components/cluster/cluster.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-cluster");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("tp-avatar");
+element2.setAttribute("src", "/docs/medias/logos/logo-tp.svg");
+element2.setAttribute("label", "tp-components");
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("tp-avatar");
+element3.setAttribute("initials", "AL");
+element3.setAttribute("label", "Ada Lovelace");
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
+
+const element4 = document.createElement("tp-avatar");
+element4.setAttribute("icon", "user");
+element4.setAttribute("shape", "square");
+element4.setAttribute("label", "Guest");
+element1.append(element4);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Initials fallback
+\documentclass{article}
+\begin{document}
+\wcTpAvatar[initials=AL,label=Ada Lovelace]{}
+\end{document}

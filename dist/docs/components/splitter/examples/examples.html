@@ -9,21 +9,49 @@
       </tp-splitter>
     </div>
 
-    <div role="example" label="Attributes">
-      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
-      <tp-stack>
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/box/box.js";
+      import "/components/splitter/splitter.js";
 
-      <tp-radio-list data-setting="axis" label="axis" label-position="top" orientation="horizontal" value="1"><ul><li>horizontal</li><li>vertical</li></ul></tp-radio-list>
-      <tp-cluster><tp-textfield data-setting="position" label="position" value="50%" placeholder="50%" clearable></tp-textfield>
-      <tp-textfield data-setting="storage-key" label="storage-key" value="" placeholder="" clearable></tp-textfield></tp-cluster>
-      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
-      </tp-stack>
-      <tp-divider></tp-divider>
-      <h3>Preview</h3>
-      <tp-iframe id="attributes-frame" title="splitter attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
-      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+      const example = document.createDocumentFragment();
 
-      <script type="module" src="/docs/components/splitter/examples/attributes.js"></script>
+      const element1 = document.createElement("tp-splitter");
+      element1.setAttribute("position", "40%");
+      element1.append(document.createTextNode("\n  "));
+
+      const element2 = document.createElement("dl");
+      element2.append(document.createTextNode("\n    "));
+
+      const element3 = document.createElement("dt");
+      element3.append(document.createTextNode("start"));
+      element2.append(element3);
+
+      const element4 = document.createElement("dd");
+
+      const element5 = document.createElement("tp-box");
+      element5.append(document.createTextNode("Drag the divider to resize this panel."));
+      element4.append(element5);
+      element2.append(element4);
+      element2.append(document.createTextNode("\n    "));
+
+      const element6 = document.createElement("dt");
+      element6.append(document.createTextNode("end"));
+      element2.append(element6);
+
+      const element7 = document.createElement("dd");
+
+      const element8 = document.createElement("tp-box");
+      element8.append(document.createTextNode("This panel uses the remaining space."));
+      element7.append(element8);
+      element2.append(element7);
+      element2.append(document.createTextNode("\n  "));
+      element1.append(element2);
+      element1.append(document.createTextNode("\n"));
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
     </div>
 
     <div role="example" label="Nested splitters">

@@ -18,7 +18,9 @@
 import { TpMatching } from "../matching/matching.js";
 import { TpQuestion } from "../question/question.js";
 /**
- * @summary checks groups across two or more optionally titled lists using tp-matching.
+ * The custom `<tp-matching-question>` element presents and grades a question that matches related items across lists.
+ *
+ * @summary Presents and grades a question that matches related items across lists.
  * @tagname tp-matching-question
  * @attr {boolean} heading = false - Passes heading to the matching widget; the first list supplies column titles.
  * @accessibility Reuses tp-matching keyboard controls and TpQuestion feedback, solution tabs and panel toggles.

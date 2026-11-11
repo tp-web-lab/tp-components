@@ -1,0 +1,49 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpTypewriting[speed=20]{
+  Welcome to \textbf{tp-components}. Make your words appear progressively.
+
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/typewriting/typewriting.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-typewriting");
+element1.setAttribute("speed", "20");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("Welcome to "));
+
+const element3 = document.createElement("strong");
+element3.append(document.createTextNode("tp-components"));
+element2.append(element3);
+element2.append(document.createTextNode(". Make your words appear progressively."));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Synchronized speech
+\documentclass{article}
+\begin{document}
+Press Speak, then try Pause, Resume and Stop. Some voices do not report word boundaries; the full text remains visible in that case.
+
+
+\wcTpTypewriting[id=spoken-text,word]{
+  Welcome to \textbf{tp-components}. You can pause this reading and resume it whenever you want.
+
+}
+
+\wcTpTextToSpeech[for=spoken-text,lang=en]{}
+\end{document}

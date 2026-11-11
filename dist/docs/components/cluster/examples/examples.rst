@@ -25,118 +25,44 @@
 
                   Gamma
 
-      .. example:: Attributes
-
-         Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-         .. tp-stack::
-
-            .. tp-radio-list::
-               :data-setting: align
-               :label: align
-               :label-position: top
-               :orientation: horizontal
-               :value: 3
-
-               - normal
-
-               - stretch
-
-               - center
-
-               - start
-
-               - end
-
-               - flex-start
-
-               - flex-end
-
-               - self-start
-
-               - self-end
-
-               - baseline
-
-               - first baseline
-
-               - last baseline
-
-            .. tp-radio-list::
-               :data-setting: justify
-               :label: justify
-               :label-position: top
-               :orientation: horizontal
-               :value: 4
-
-               - normal
-
-               - start
-
-               - end
-
-               - flex-start
-
-               - flex-end
-
-               - center
-
-               - left
-
-               - right
-
-               - space-between
-
-               - space-around
-
-               - space-evenly
-
-               - stretch
-
-            .. tp-cluster::
-
-               .. tp-textfield::
-                  :data-setting: gap
-                  :label: gap
-                  :value: 1rem
-                  :placeholder: 1rem
-                  :clearable:
-
-            .. tp-button-group::
-
-               .. tp-button::
-                  :id: attributes-reset
-                  :type: button
-
-                  Reset defaults
-
-               .. tp-button::
-                  :id: attributes-reload
-                  :type: button
-
-                  Reload preview
-
-         .. tp-divider::
-
-         .. h3::
-
-            Preview
-
-         .. tp-iframe::
-            :id: attributes-frame
-            :title: cluster attribute preview
-            :style: height: 24rem; display: flow-root; inline-size: auto;
-
-         .. tp-callout::
-            :id: attributes-status
-            :variant: info
-            :heading: Preview status
-
-            Preparing the preview…
+      .. example:: Javascript API
 
          .. script::
             :type: module
-            :src: /docs/components/cluster/examples/attributes.js
+
+            import "/components/box/box.js";
+            import "/components/button/button.js";
+            import "/components/cluster/cluster.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-box");
+            element1.append(document.createTextNode("\n      "));
+
+            const element2 = document.createElement("tp-cluster");
+            element2.setAttribute("justify", "center");
+            element2.setAttribute("gap", "0.5rem");
+            element2.append(document.createTextNode("\n        "));
+
+            const element3 = document.createElement("tp-button");
+            element3.append(document.createTextNode("Alpha"));
+            element2.append(element3);
+            element2.append(document.createTextNode("\n        "));
+
+            const element4 = document.createElement("tp-button");
+            element4.append(document.createTextNode("Beta"));
+            element2.append(element4);
+            element2.append(document.createTextNode("\n        "));
+
+            const element5 = document.createElement("tp-button");
+            element5.append(document.createTextNode("Gamma"));
+            element2.append(element5);
+            element2.append(document.createTextNode("\n      "));
+            element1.append(element2);
+            element1.append(document.createTextNode("\n    "));
+            example.append(element1);
+
+            document.body.append(example);
 
       .. example:: Space between
 

@@ -1,0 +1,35 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpTextfield[label=Single line,placeholder=Type some text...,clearable]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/textfield/textfield.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-textfield");
+element1.setAttribute("label", "Single line");
+element1.setAttribute("placeholder", "Type some text...");
+element1.setAttribute("clearable", "");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Inline named field
+\documentclass{article}
+\begin{document}
+Value: \wcTpTextfield*[name=identifier,value=Ada,placeholder=Enter a value]{}
+\end{document}
+
+% !tp-example Clearable search
+\documentclass{article}
+\begin{document}
+\wcTpTextfield[label=Search,value=Garden,clearable]{}
+\end{document}

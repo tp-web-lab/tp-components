@@ -1,0 +1,291 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[id=dragdrop-board,data-dragdrop-demo,data-allow-script]{
+  Drag a task to \textbf{To do} or \textbf{Done}, including an empty column. The Move button sends a task to the other column without dragging.
+
+  Keyboard: focus a card, press Enter, use the arrow keys to choose another card, then press Enter to drop before or after it. Escape cancels.
+
+  \wcTpGrid[min-width=16rem,gap=1rem]{
+    \wcTpBox[data-zone=To do,role=group,aria-label=To do,style=min-height: 12rem;]{
+      \subsection*{To do}
+      \wcTpStack[gap=0.5rem,data-tasks]{
+        \wcTpBox[data-task,aria-label=Write the introduction]{
+          Write the introduction
+
+          \wcTpButton[data-move,size=s,aria-label=Move Write the introduction to the other column]{Move}
+        }
+        \wcTpBox[data-task,aria-label=Review the examples]{
+          Review the examples
+
+          \wcTpButton[data-move,size=s,aria-label=Move Review the examples to the other column]{Move}
+        }
+      }
+    }
+    \wcTpBox[data-zone=Done,role=group,aria-label=Done,style=min-height: 12rem;]{
+      \subsection*{Done}
+      \wcTpStack[gap=0.5rem,data-tasks]{
+        \wcTpBox[data-task,aria-label=Choose a title]{
+          Choose a title
+
+          \wcTpButton[data-move,size=s,aria-label=Move Choose a title to the other column]{Move}
+        }
+      }
+    }
+  }
+  \wcP[data-demo-status,role=status,aria-live=polite]{Move a task to change its column.}
+  \rawhtml|<tp-dragdrop root="#dragdrop-board" items="[data-task]"></tp-dragdrop>|
+  \wcScript[src=/docs/components/dragdrop/examples/task-board.js]||
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/button/button.js";
+import "/components/dragdrop/dragdrop.js";
+import "/components/grid/grid.js";
+import "/components/stack/stack.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.setAttribute("id", "dragdrop-board");
+element1.setAttribute("data-dragdrop-demo", "");
+element1.setAttribute("data-allow-script", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("Drag a task to "));
+
+const element3 = document.createElement("strong");
+element3.append(document.createTextNode("To do"));
+element2.append(element3);
+element2.append(document.createTextNode(" or "));
+
+const element4 = document.createElement("strong");
+element4.append(document.createTextNode("Done"));
+element2.append(element4);
+element2.append(document.createTextNode(", including an empty column. The Move button sends a task to the other column without dragging."));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element5 = document.createElement("p");
+element5.append(document.createTextNode("Keyboard: focus a card, press Enter, use the arrow keys to choose another card, then press Enter to drop before or after it. Escape cancels."));
+element1.append(element5);
+element1.append(document.createTextNode("\n  "));
+
+const element6 = document.createElement("tp-grid");
+element6.setAttribute("min-width", "16rem");
+element6.setAttribute("gap", "1rem");
+element6.append(document.createTextNode("\n    "));
+
+const element7 = document.createElement("tp-box");
+element7.setAttribute("data-zone", "To do");
+element7.setAttribute("role", "group");
+element7.setAttribute("aria-label", "To do");
+element7.setAttribute("style", "min-height: 12rem;");
+element7.append(document.createTextNode("\n      "));
+
+const element8 = document.createElement("h3");
+element8.append(document.createTextNode("To do"));
+element7.append(element8);
+element7.append(document.createTextNode("\n      "));
+
+const element9 = document.createElement("tp-stack");
+element9.setAttribute("gap", "0.5rem");
+element9.setAttribute("data-tasks", "");
+element9.append(document.createTextNode("\n        "));
+
+const element10 = document.createElement("tp-box");
+element10.setAttribute("data-task", "");
+element10.setAttribute("aria-label", "Write the introduction");
+
+const element11 = document.createElement("p");
+element11.append(document.createTextNode("Write the introduction"));
+element10.append(element11);
+
+const element12 = document.createElement("tp-button");
+element12.setAttribute("data-move", "");
+element12.setAttribute("size", "s");
+element12.setAttribute("aria-label", "Move Write the introduction to the other column");
+element12.append(document.createTextNode("Move"));
+element10.append(element12);
+element9.append(element10);
+element9.append(document.createTextNode("\n        "));
+
+const element13 = document.createElement("tp-box");
+element13.setAttribute("data-task", "");
+element13.setAttribute("aria-label", "Review the examples");
+
+const element14 = document.createElement("p");
+element14.append(document.createTextNode("Review the examples"));
+element13.append(element14);
+
+const element15 = document.createElement("tp-button");
+element15.setAttribute("data-move", "");
+element15.setAttribute("size", "s");
+element15.setAttribute("aria-label", "Move Review the examples to the other column");
+element15.append(document.createTextNode("Move"));
+element13.append(element15);
+element9.append(element13);
+element9.append(document.createTextNode("\n      "));
+element7.append(element9);
+element7.append(document.createTextNode("\n    "));
+element6.append(element7);
+element6.append(document.createTextNode("\n    "));
+
+const element16 = document.createElement("tp-box");
+element16.setAttribute("data-zone", "Done");
+element16.setAttribute("role", "group");
+element16.setAttribute("aria-label", "Done");
+element16.setAttribute("style", "min-height: 12rem;");
+element16.append(document.createTextNode("\n      "));
+
+const element17 = document.createElement("h3");
+element17.append(document.createTextNode("Done"));
+element16.append(element17);
+element16.append(document.createTextNode("\n      "));
+
+const element18 = document.createElement("tp-stack");
+element18.setAttribute("gap", "0.5rem");
+element18.setAttribute("data-tasks", "");
+element18.append(document.createTextNode("\n        "));
+
+const element19 = document.createElement("tp-box");
+element19.setAttribute("data-task", "");
+element19.setAttribute("aria-label", "Choose a title");
+
+const element20 = document.createElement("p");
+element20.append(document.createTextNode("Choose a title"));
+element19.append(element20);
+
+const element21 = document.createElement("tp-button");
+element21.setAttribute("data-move", "");
+element21.setAttribute("size", "s");
+element21.setAttribute("aria-label", "Move Choose a title to the other column");
+element21.append(document.createTextNode("Move"));
+element19.append(element21);
+element18.append(element19);
+element18.append(document.createTextNode("\n      "));
+element16.append(element18);
+element16.append(document.createTextNode("\n    "));
+element6.append(element16);
+element6.append(document.createTextNode("\n  "));
+element1.append(element6);
+element1.append(document.createTextNode("\n  "));
+
+const element22 = document.createElement("p");
+element22.setAttribute("data-demo-status", "");
+element22.setAttribute("role", "status");
+element22.setAttribute("aria-live", "polite");
+element22.append(document.createTextNode("Move a task to change its column."));
+element1.append(element22);
+element1.append(document.createTextNode("\n  "));
+
+const element23 = document.createElement("tp-dragdrop");
+element23.setAttribute("root", "#dragdrop-board");
+element23.setAttribute("items", "[data-task]");
+element1.append(element23);
+element1.append(document.createTextNode("\n  "));
+
+const element24 = document.createElement("script");
+element24.setAttribute("src", "/docs/components/dragdrop/examples/task-board.js");
+element1.append(element24);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Sortable list
+\documentclass{article}
+\begin{document}
+\wcTpBox[id=dragdrop-sortable,data-sortable-demo,data-allow-script]{
+  Arrange these steps in the order you prefer. Drag an entry above or below another entry, or use its Up and Down buttons.
+
+  Keyboard: Tab to an entry, press Enter or Space to grab it, use the arrow keys to choose a position, then press Enter or Space to drop. Escape cancels.
+
+  \wcOl[aria-label=Publishing steps]{
+    \wcLi[aria-label=Publish the document]{
+      \wcTpBox{
+        \wcTpCluster[justify=space-between]{
+          \wcSpan*{Publish the document}
+          \wcTpButtonGroup{
+            \wcTpIconButton[name=arrow-up,data-direction=up,label=Move Publish the document up]{}
+            \wcTpIconButton[name=arrow-down,data-direction=down,label=Move Publish the document down]{}
+          }
+        }
+      }
+    }
+    \wcLi[aria-label=Write a draft]{
+      \wcTpBox{
+        \wcTpCluster[justify=space-between]{
+          \wcSpan*{Write a draft}
+          \wcTpButtonGroup{
+            \wcTpIconButton[name=arrow-up,data-direction=up,label=Move Write a draft up]{}
+            \wcTpIconButton[name=arrow-down,data-direction=down,label=Move Write a draft down]{}
+          }
+        }
+      }
+    }
+    \wcLi[aria-label=Review the content]{
+      \wcTpBox{
+        \wcTpCluster[justify=space-between]{
+          \wcSpan*{Review the content}
+          \wcTpButtonGroup{
+            \wcTpIconButton[name=arrow-up,data-direction=up,label=Move Review the content up]{}
+            \wcTpIconButton[name=arrow-down,data-direction=down,label=Move Review the content down]{}
+          }
+        }
+      }
+    }
+    \wcLi[aria-label=Plan the document]{
+      \wcTpBox{
+        \wcTpCluster[justify=space-between]{
+          \wcSpan*{Plan the document}
+          \wcTpButtonGroup{
+            \wcTpIconButton[name=arrow-up,data-direction=up,label=Move Plan the document up]{}
+            \wcTpIconButton[name=arrow-down,data-direction=down,label=Move Plan the document down]{}
+          }
+        }
+      }
+    }
+  }
+  \wcTpButton[data-reset,outlined]{Reset order}
+  \wcP[data-sort-status,role=status,aria-live=polite]{The list is ready to reorder.}
+  \rawhtml|<tp-dragdrop root="#dragdrop-sortable" items="ol > li"></tp-dragdrop>|
+  \wcScript[src=/docs/components/dragdrop/examples/sortable-list.js]||
+}
+\end{document}
+
+% !tp-example Tree drag and drop
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  Organize this project by dragging files or folders. Try moving \textbf{notes.md} into \textbf{Documentation}, then move \textbf{index.html} above \textbf{app.js}.
+
+  Drop in the middle of a folder row to move an item into it, or near the top or bottom of a row to insert it before or after that item. The tree highlights the destination. Moving a folder also moves its children.
+
+  Use the disclosure buttons to expand or collapse folders. Keyboard arrow keys navigate the tree; they do not perform drag and drop in this example.
+
+  \wcTpTree[draggable,selectable,guides,level=3,aria-label=Project files]{
+    \wcUl{
+      \wcLi[data-node-id=project]{Project \wcUl{
+  \wcLi[data-node-id=documentation]{Documentation \wcUl{
+  \wcLi[data-node-id=readme]{README.md}
+  \wcLi[data-node-id=guide]{guide.md}
+} }
+  \wcLi[data-node-id=source]{Source \wcUl{
+  \wcLi[data-node-id=app]{app.js}
+  \wcLi[data-node-id=index]{index.html}
+} }
+  \wcLi[data-node-id=notes]{notes.md}
+} }
+    }
+  }
+}
+\end{document}

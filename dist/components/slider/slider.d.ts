@@ -4,7 +4,7 @@
  */
 import { TpBase } from "../base/base.js";
 /**
- * Arranges children in a horizontally scrollable row with keyboard navigation.
+ * The custom `<tp-slider>` element arranges content in a horizontally or vertically scrollable strip.
  *
  * Reactive attributes:
  * - `slider-height`
@@ -13,8 +13,9 @@ import { TpBase } from "../base/base.js";
  * - `scrollbar`
  * - `scrollbar-track-color`
  * - `scrollback-thumb-color`
- * @summary arranges content in a horizontally scrollable row with a configurable scrollbar.
+ * @summary Arranges content in a horizontally or vertically scrollable strip.
  * @tagname tp-slider
+ * @attr {"horizontal" | "vertical"} orientation = "horizontal" - Scrolling direction. Vertical sliders need a bounded slider-height.
  * @attr {string} gap = "1rem" - Gap between items, using --tp-slider-gap when absent.
  * @attr {string} item-width = "auto" - Preferred width of non-image items. By default, each item uses its own width or content-based size.
  * @attr {string} slider-height = "auto" - Height of the scrolling area. By default, follows the content height.
@@ -23,11 +24,12 @@ import { TpBase } from "../base/base.js";
  * @attr {string} scrollback-thumb-color = "var(--tp-neutral-fill-mid)" - Scrollbar thumb color, using --tp-scrollbar-thumb-color when absent. Defaults to the theme's neutral scrollbar color.
  * @keyboard {Tab} Moves focus to the slider, then to its focusable children.
  * @keyboard {ArrowLeft / ArrowRight} Scrolls the focused slider left or right by 80% of its visible width.
+ * @keyboard {ArrowUp / ArrowDown} Scrolls the focused vertical slider up or down by 80% of its visible height.
  * @keyboard {Home / End} Scrolls the focused slider to the start or end of its content, respecting text direction.
  * @example
  * ```html
  * <tp-box style="max-inline-size: 28rem">
- *   <tp-slider scrollbar item-width="10rem" gap="1rem">
+ *   <tp-slider scrollbar="" item-width="10rem" gap="1rem" style="max-block-size: 8rem">
  *     <tp-box>First</tp-box><tp-box>Second</tp-box><tp-box>Third</tp-box><tp-box>Fourth</tp-box>
  *   </tp-slider>
  * </tp-box>
@@ -44,6 +46,8 @@ export declare class TpSlider extends TpBase {
     /** Scrolls only when the slider itself has focus, preserving child controls. */
     private readonly handleKeydown;
     static get observedAttributes(): string[];
+    get orientation(): "horizontal" | "vertical";
+    set orientation(value: "horizontal" | "vertical");
     get sliderHeight(): string;
     set sliderHeight(value: string);
     get itemWidth(): string;

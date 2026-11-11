@@ -1,0 +1,234 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpXyPlot[label=Functions]{
+  \wcScript[type=tp/xy-plot]|
+label = "Functions"
+x-axis = [-10, 10]
+y-axis = [-5, 5]
+curve Sine = function(x, 2*sin(x))
+curve Line = function(x, x/2)
+|
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/xy-plot/xy-plot.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-xy-plot");
+element1.setAttribute("label", "Functions");
+element1.append(document.createTextNode("\n    "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/xy-plot");
+element2.textContent = "\nlabel = \"Functions\"\nx-axis = [-10, 10]\ny-axis = [-5, 5]\ncurve Sine = function(x, 2*sin(x))\ncurve Line = function(x, x/2)\n";
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Author directives
+\documentclass{article}
+\begin{document}
+Use the settings below the graph. Use the bottom-left Code button (also available without settings) to find the editable source, the .txt file menu, F1, Reset definition and Play.
+
+
+\wcTpXyPlot[label=Editable graph,settings]{
+  \wcScript[type=tp/xy-plot]|
+label = "Editable graph"
+legend-x = "x"
+legend-y = "f(x)"
+x-axis = [-4, 6]
+y-axis = [-2, 10]
+x-ticks = [-4, -2, 0, 2, 4, 6]
+y-ticks = [-2, 0, 2, 4, 6, 8, 10]
+grid = both
+x-axis-at = 0
+y-axis-at = 0
+samples = 256
+curve Parabola = function(x, x*x, range=[-2, 3])
+curve Line = function(x, x+1)
+point A = (2, 4)
+|
+}
+\end{document}
+
+% !tp-example Numeric data (setData)
+\documentclass{article}
+\begin{document}
+Plot measured elevations with setData(). Add measurements to extend the profile and automatically adjust the axes; Reset restores the initial data. The dashed line connects the first and last measurements.
+
+
+\wcTpButtonGroup{
+  \wcTpButton[id=measurements-add,type=button]{Add measurements}
+  \wcTpButton[id=measurements-reset,type=button]{Reset}
+}
+
+\wcTpXyPlot[id=measurements-plot]{}
+
+\wcScript[type=module]|
+await customElements.whenDefined("tp-xy-plot");
+const plot = document.getElementById("measurements-plot");
+const add = document.getElementById("measurements-add");
+const reset = document.getElementById("measurements-reset");
+const initial = [
+  { x: 0, y: 120 },
+  { x: 1, y: 145 },
+  { x: 2, y: 135 },
+  { x: 3, y: 180 }
+];
+
+function render(extended = false) {
+  const measurements = extended
+    ? [...initial, { x: 4, y: 165 }, { x: 5, y: 210 }]
+    : initial;
+  const first = measurements[0];
+  const last = measurements[measurements.length - 1];
+  plot.setData({
+    title: "Measured elevation",
+    xLabel: "Distance (km)",
+    yLabel: "Elevation (m)",
+    series: [
+      { label: "Measurements", points: measurements },
+      { label: "First to last", points: [first, last], dashed: true }
+    ],
+    points: [{ ...last, label: "Last measurement", dx: -120, dy: -12 }]
+  });
+  add.toggleAttribute("disabled", extended);
+}
+
+add.addEventListener("click", () => render(true));
+reset.addEventListener("click", () => render());
+render();
+|
+\end{document}
+
+% !tp-example Line styles and vectors
+\documentclass{article}
+\begin{document}
+Compare the four curve styles and their legend samples. Use the settings below the graph to change styles or the vector endpoints.
+
+
+\wcTpXyPlot[settings]{
+  \wcScript[type=tp/xy-plot]|
+label = "Line styles and a vector"
+x-axis = [-4, 4]
+y-axis = [-4, 4]
+curve Solid = function(x, sin(x)+2) style=solid
+curve Dashed = function(x, sin(x)) style=dashed
+curve Dotted = function(x, sin(x)-2) style=dotted
+curve DashDot = function(x, x/2, range=[-3, 3]) style=dash-dot
+point A = (-2, -3)
+point B = (1, -1)
+vector u = vector(A, B)
+|
+}
+\end{document}
+
+% !tp-example Vectors only
+\documentclass{article}
+\begin{document}
+The vectors u and v are successive displacements; w is their resultant. Use the settings below the graph to move an endpoint.
+
+
+\wcTpXyPlot[settings]{
+  \wcScript[type=tp/xy-plot]|
+label = "Vector addition"
+x-axis = [-1, 5]
+y-axis = [-1, 5]
+point O = (0, 0)
+point A = (3, 1)
+point B = (2, 4)
+vector u = vector(O, A)
+vector v = vector(A, B)
+vector w = vector(O, B)
+|
+}
+\end{document}
+
+% !tp-example Step-by-step reveal
+\documentclass{article}
+\begin{document}
+\wcTpXyPlot[settings]{
+  \wcScript[type=tp/xy-plot]|
+label = "Step-by-step reveal"
+x-axis = [-2, 4]
+y-axis = [-2, 6]
+curve Reference = function(x, x) style=dotted
+curve f1 = function(x, x*x)
+curve f2 = function(x, 2*x)
+point A = (1, 1)
+point B = (2, 3)
+vector u = vector(A, B)
+anim = ["A", ["f1", "f2"], "B", "u"]
+|
+}
+\end{document}
+
+% !tp-example Shared points and vectors
+\documentclass{article}
+\begin{document}
+Open the source and change A to (6, 2), then press Play. Vector u follows the two endpoints. The point, vector and title declarations also work in Geometry. Axis and sampling assignments are specific to XY plot.
+
+
+\wcTpXyPlot[settings,style=--tp-plot-height:440px]{
+  \wcScript[type=tp/xy-plot]|
+label = "Points and vectors"
+x-axis = [-2, 8]
+y-axis = [-2, 6]
+x-ticks = [-2, 0, 2, 4, 6, 8]
+y-ticks = [-2, 0, 2, 4, 6]
+legend-x = "x"
+legend-y = "y"
+x-axis-at = 0
+y-axis-at = 0
+grid = both
+samples = 128
+point O = (0, 0)
+point A = (3, 4)
+vector u = vector(O, A)
+|
+}
+\end{document}
+
+% !tp-example Named curves
+\documentclass{article}
+\begin{document}
+Open Code to edit a named curve and press Play. Change its expression, range or style; the settings retain the declaration. Each graph uses its own coordinate kind.
+
+
+\wcTpXyPlot[settings,style=--tp-plot-height:440px]{
+  \wcScript[type=tp/xy-plot]|
+label = "Cartesian curve"
+x-axis = [-4, 4]
+y-axis = [-2, 2]
+curve f = function(x, sin(x), range=[-PI, PI]) style=dashed
+|
+}
+
+\wcTpXyPlot[style=--tp-plot-height:440px]{
+  \wcScript[type=tp/xy-plot]|
+label = "Polar rose"
+x-axis = [-3, 3]
+y-axis = [-3, 3]
+curve r = polar(t, 2*cos(3*t), range=[0, 2*PI])
+|
+}
+
+\wcTpXyPlot[style=--tp-plot-height:440px]{
+  \wcScript[type=tp/xy-plot]|
+label = "Parametric ellipse"
+x-axis = [-3, 3]
+y-axis = [-3, 3]
+curve c = parametric(t, 2*cos(t), sin(t), range=[0, 2*PI]) style=dotted
+|
+}
+\end{document}

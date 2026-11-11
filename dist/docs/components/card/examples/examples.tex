@@ -1,0 +1,79 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpCard{
+  \begin{description}
+    \item[{header}] content header
+    \item[{footer}] content footer
+    \item[{main}] content body
+  \end{description}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/card/card.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-card");
+element1.append(document.createTextNode("\n        "));
+
+const element2 = document.createElement("dl");
+element2.append(document.createTextNode("\n          "));
+
+const element3 = document.createElement("dt");
+element3.append(document.createTextNode("header"));
+element2.append(element3);
+
+const element4 = document.createElement("dd");
+element4.append(document.createTextNode("content header"));
+element2.append(element4);
+element2.append(document.createTextNode("\n          "));
+
+const element5 = document.createElement("dt");
+element5.append(document.createTextNode("footer"));
+element2.append(element5);
+
+const element6 = document.createElement("dd");
+element6.append(document.createTextNode("content footer"));
+element2.append(element6);
+element2.append(document.createTextNode("\n          "));
+
+const element7 = document.createElement("dt");
+element7.append(document.createTextNode("main"));
+element2.append(element7);
+
+const element8 = document.createElement("dd");
+element8.append(document.createTextNode("content body"));
+element2.append(element8);
+element2.append(document.createTextNode("\n        "));
+element1.append(element2);
+element1.append(document.createTextNode("\n      "));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Image card
+\documentclass{article}
+\begin{document}
+\wcTpCard{
+  \begin{description}
+    \item[{main}] \rawhtml*|<img src="https://images.unsplash.com/photo-1559209172-0ff8f6d49ff7?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Seashore">|
+  \end{description}
+}
+\end{document}
+
+% !tp-example Icon card
+\documentclass{article}
+\begin{document}
+\wcTpCard{
+  \begin{description}
+    \item[{main}] \wcTpIcon[name=logo-tp-components,size=5em]{}
+  \end{description}
+}
+\end{document}

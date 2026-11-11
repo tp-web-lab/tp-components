@@ -1,5 +1,5 @@
 [tp-asciidoc-viewer%allow-script,label="tp-mask"]
-=========
+========
 [script,type="tp/asciidoc"]
 ----
 .Basic usage
@@ -14,54 +14,31 @@ The answer is hidden until the review.
 ====
 ======
 
-.Attributes
-========
-Enter `#mask-answer` in anchor, then enable active. Edit the answer before masking it and check that the value returns when active is unchecked. Clear anchor or use Reset defaults to restore the inactive defaults. Reload preview recreates the target with its initial value.
-
-[tp-stack]
+.Javascript API
 ======
-[tp-checkbox-list,id="mask-active",label="Boolean attributes",label-position="top",orientation="horizontal"]
+[script,type="module"]
 ====
-* active
-====
+import "/components/mask/mask.js";
+import "/components/textfield/textfield.js";
 
-[tp-textfield%placeholder%clearable,id="mask-anchor",label="anchor",label-position="top"]
-====
-====
+const example = document.createDocumentFragment();
 
-[tp-button-group]
-=====
-[tp-button,id="mask-reset"]
-====
-Reset defaults
-====
+const element1 = document.createElement("tp-textfield");
+element1.setAttribute("id", "mask-answer");
+element1.setAttribute("label", "Answer");
+element1.setAttribute("value", "Thursday");
+element1.setAttribute("clearable", "");
+example.append(element1);
+example.append(document.createTextNode("\n"));
 
-[tp-button,id="mask-reload"]
+const element2 = document.createElement("tp-mask");
+element2.setAttribute("anchor", "#mask-answer");
+element2.setAttribute("active", "");
+element2.append(document.createTextNode("The answer is hidden until the review."));
+example.append(element2);
+
+document.body.append(example);
 ====
-Reload preview
-====
-=====
 ======
-
-[tp-divider]
-====
-====
-
-[tp-stack,id="mask-preview"]
-=====
-[tp-textfield%clearable,id="mask-answer",label="Answer",value="Thursday"]
-====
-====
-
-[tp-mask]
-====
-The answer is hidden until the review.
-====
-=====
-
-[script,type="module",src="/docs/components/mask/examples/attributes.js"]
-====
-====
-========
 ----
-=========
+========

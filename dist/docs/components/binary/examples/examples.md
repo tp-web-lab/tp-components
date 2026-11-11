@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-binary" allow-script }
-:::::: script { type="tp/markdown" }
+::::: tp-markdown-viewer { label="tp-binary" allow-script }
+:::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-binary
 1. 1010110!0
@@ -20,39 +20,62 @@
 :::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/binary/binary.js";
 
-::::: tp-stack
-:::: tp-cluster
-::: tp-textfield { data-setting="puzzle" label="puzzle" value placeholder clearable }
-:::
-::::
+const example = document.createDocumentFragment();
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element1 = document.createElement("tp-binary");
+element1.append(document.createTextNode("\n        "));
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element2 = document.createElement("ol");
+element2.append(document.createTextNode("\n          "));
 
-::: tp-divider
-:::
+const element3 = document.createElement("li");
+element3.append(document.createTextNode("1010110!0"));
+element2.append(element3);
+element2.append(document.createTextNode("\n          "));
 
-### Preview
+const element4 = document.createElement("li");
+element4.append(document.createTextNode("01!01!0011!"));
+element2.append(element4);
+element2.append(document.createTextNode("\n          "));
 
-::: tp-iframe { id="attributes-frame" title="binary attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
+const element5 = document.createElement("li");
+element5.append(document.createTextNode("0010101!1!"));
+element2.append(element5);
+element2.append(document.createTextNode("\n          "));
 
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
+const element6 = document.createElement("li");
+element6.append(document.createTextNode("11!01!0100"));
+element2.append(element6);
+element2.append(document.createTextNode("\n          "));
 
-::: script { type="module" src="/docs/components/binary/examples/attributes.js" }
+const element7 = document.createElement("li");
+element7.append(document.createTextNode("10011001!"));
+element2.append(element7);
+element2.append(document.createTextNode("\n          "));
+
+const element8 = document.createElement("li");
+element8.append(document.createTextNode("0!110!1010"));
+element2.append(element8);
+element2.append(document.createTextNode("\n          "));
+
+const element9 = document.createElement("li");
+element9.append(document.createTextNode("0110!0!101"));
+element2.append(element9);
+element2.append(document.createTextNode("\n          "));
+
+const element10 = document.createElement("li");
+element10.append(document.createTextNode("10!0101!10"));
+element2.append(element10);
+element2.append(document.createTextNode("\n        "));
+element1.append(element2);
+element1.append(document.createTextNode("\n      "));
+example.append(element1);
+
+document.body.append(example);
 :::
 ```
 
@@ -83,5 +106,5 @@ Preparing the preview…
 10. 101!10!10010
 :::
 ```
-::::::
-:::::::
+::::
+:::::

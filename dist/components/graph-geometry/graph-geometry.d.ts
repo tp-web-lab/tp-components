@@ -13,7 +13,9 @@ import "../radio-list/radio-list.js";
 export type { GeometryObject, GeometryPoint, GeometryResult, GeometryValue, } from "./geometry.js";
 export { evaluateGeometry, geometrySourceLabel, MEDIATRIX_CONSTRUCTION, parseGeometry, serializeGeometry, withGeometryLabel, } from "./geometry.js";
 /**
- * @summary Constructs dynamic figures with a graduated ruler and compass.
+ * The custom `<tp-graph-geometry>` element creates interactive geometric constructions whose dependent objects follow changes to their defining objects.
+ *
+ * @summary Creates interactive geometric constructions whose dependent objects follow changes to their defining objects.
  * @tagname tp-graph-geometry
  * @cssprop --tp-plot-height Height of the normal drawing including its top and bottom controls; other panels remain outside.
  * @attr {string} src = "" - URL of a text file containing construction commands.

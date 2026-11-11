@@ -1,0 +1,27 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpJavascriptPlayground[src=/docs/components/_shared/intro-projects/javascript.json]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/javascript-playground/javascript-playground.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-javascript-playground");
+element1.setAttribute("src", "/docs/components/_shared/intro-projects/javascript.json");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Single source file
+\documentclass{article}
+\begin{document}
+\wcTpJavascriptPlayground[src=/docs/components/_shared/single-source/example.js]{}
+\end{document}

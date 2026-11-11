@@ -16,48 +16,48 @@ end
 ::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/box/box.js";
+import "/components/splitter/splitter.js";
 
-::::: tp-stack
-::: tp-radio-list { data-setting="axis" label="axis" label-position="top" orientation="horizontal" value="1" }
-- horizontal
+const example = document.createDocumentFragment();
 
-- vertical
-:::
+const element1 = document.createElement("tp-splitter");
+element1.setAttribute("position", "40%");
+element1.append(document.createTextNode("\n  "));
 
-:::: tp-cluster
-::: tp-textfield { data-setting="position" label="position" value="50%" placeholder="50%" clearable }
-:::
+const element2 = document.createElement("dl");
+element2.append(document.createTextNode("\n    "));
 
-::: tp-textfield { data-setting="storage-key" label="storage-key" value placeholder clearable }
-:::
-::::
+const element3 = document.createElement("dt");
+element3.append(document.createTextNode("start"));
+element2.append(element3);
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element4 = document.createElement("dd");
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element5 = document.createElement("tp-box");
+element5.append(document.createTextNode("Drag the divider to resize this panel."));
+element4.append(element5);
+element2.append(element4);
+element2.append(document.createTextNode("\n    "));
 
-::: tp-divider
-:::
+const element6 = document.createElement("dt");
+element6.append(document.createTextNode("end"));
+element2.append(element6);
 
-### Preview
+const element7 = document.createElement("dd");
 
-::: tp-iframe { id="attributes-frame" title="splitter attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
+const element8 = document.createElement("tp-box");
+element8.append(document.createTextNode("This panel uses the remaining space."));
+element7.append(element8);
+element2.append(element7);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/splitter/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
 

@@ -1,0 +1,114 @@
+{
+  "tagname": "tp-carousel",
+  "classname": "TpCarousel",
+  "superclass": "TpBase",
+  "description": "Displays images one at a time in a horizontal or vertical carousel.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-carousel aria-label=\"Outdoor activities\" height=\"18rem\">\n  <img src=\"/docs/medias/images/canoe.svg\" alt=\"Canoe\">\n  <img src=\"/docs/medias/images/basketball.svg\" alt=\"Basketball\">\n  <img src=\"/docs/medias/images/walking-shoe.svg\" alt=\"Walking shoe\">\n</tp-carousel>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "height",
+      "description": "Height of the image viewport, in CSS units.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"20rem\""
+    },
+    {
+      "name": "index",
+      "description": "Zero-based index of the selected image, clamped to the available images.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "0"
+    },
+    {
+      "name": "loop",
+      "description": "Lets Previous and Next wrap between the first and last images.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "orientation",
+      "description": "Direction of image navigation.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"horizontal\" | \"vertical\"",
+      "default": "\"horizontal\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "goTo(index: number): void",
+      "inherited": false,
+      "description": "Selects an image by its zero-based index."
+    },
+    {
+      "name": "next(): void",
+      "inherited": false,
+      "description": "Selects the next image, wrapping when loop is enabled."
+    },
+    {
+      "name": "previous(): void",
+      "inherited": false,
+      "description": "Selects the previous image, wrapping when loop is enabled."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-carousel-change",
+      "emitted": true,
+      "description": "Emitted when the selected image changes.",
+      "detail": "{ index: number; count: number }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-slider",
+      "summary": "Arranges content in a horizontally or vertically scrollable strip."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Carousel",
+    "introduction": "The custom `<tp-carousel>` element displays images one at a time in a horizontal or vertical carousel.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Previous image | Shows the previous image; wraps to the last image when looping is enabled. |\n| Next image | Shows the next image; wraps to the first image when looping is enabled. |\n| Trackpad scrolling or touch swipe | Scrolls the images along the carousel direction and snaps to an image. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> | Moves focus to the image viewport and available navigation buttons. |\n| <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> | Selects the previous or next image in the focused horizontal viewport, respecting text direction. |\n| <kbd>ArrowUp</kbd> / <kbd>ArrowDown</kbd> | Selects the previous or next image in the focused vertical viewport. |\n| <kbd>Home</kbd> / <kbd>End</kbd> | Selects the first or last image in the focused viewport. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activates the focused navigation button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "keyboard": [
+      {
+        "key": "ArrowLeft / ArrowRight",
+        "description": "Selects the previous or next image in horizontal mode when the image viewport is focused."
+      },
+      {
+        "key": "ArrowUp / ArrowDown",
+        "description": "Selects the previous or next image in vertical mode when the image viewport is focused."
+      },
+      {
+        "key": "Home / End",
+        "description": "Selects the first or last image when the image viewport is focused."
+      },
+      {
+        "key": "Tab",
+        "description": "Moves focus between the image viewport and available navigation buttons."
+      }
+    ]
+  }
+}

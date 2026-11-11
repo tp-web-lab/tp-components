@@ -1,0 +1,3 @@
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M2 7v10m20-10v10M5 16l4-4 3 3 3-4 4 5"/><circle cx="10" cy="8" r="1"/></g></svg>
+`;export{t as n,n as t};
+//# sourceMappingURL=carousel.js.map

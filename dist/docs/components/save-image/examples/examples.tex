@@ -1,0 +1,47 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  Save this heart icon as an SVG, PNG or WebP image.
+
+  \wcTpIcon[id=intro-save-diagram,name=heart,size=5rem,aria-label=Heart]{}
+  \rawhtml|<tp-save-image anchor="#intro-save-diagram" filename="heart"></tp-save-image>|
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/icon/icon.js";
+import "/components/save-image/save-image.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("Save this heart icon as an SVG, PNG or WebP image."));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("tp-icon");
+element3.setAttribute("id", "intro-save-diagram");
+element3.setAttribute("name", "heart");
+element3.setAttribute("size", "5rem");
+element3.setAttribute("aria-label", "Heart");
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
+
+const element4 = document.createElement("tp-save-image");
+element4.setAttribute("anchor", "#intro-save-diagram");
+element4.setAttribute("filename", "heart");
+element1.append(element4);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

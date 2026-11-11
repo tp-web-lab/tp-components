@@ -7,7 +7,7 @@ import "../dragdrop/dragdrop.js";
 import "../icon-button/icon-button.js";
 import { TpBase } from "../base/base.js";
 /**
- * Displays a playable Klondike solitaire.
+ * The custom `<tp-solitaire>` element displays a playable Klondike solitaire.
  *
  * @summary Displays a playable Klondike solitaire.
  * @tagname tp-solitaire

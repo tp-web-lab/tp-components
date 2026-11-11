@@ -1,5 +1,5 @@
 [tp-asciidoc-viewer%allow-script,label="tp-markup-multi-pages",style="--tp-markup-viewer-frame-min-height: 32rem"]
-=========
+========
 [script,type="tp/asciidoc"]
 ----
 .Basic usage
@@ -9,106 +9,20 @@
 ====
 ======
 
-.Attributes
-========
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-[tp-stack]
+.Javascript API
 ======
-[tp-checkbox-list%value,id="attributes-booleans",label="Boolean attributes",label-position="top",orientation="horizontal"]
+[script,type="module"]
 ====
-* menu
-====
+import "/components/markup-multi-pages/markup-multi-pages.js";
 
-[tp-radio-list,data-setting="logo",label="logo",label-position="top",orientation="horizontal",value="1"]
-====
-* Default
+const example = document.createDocumentFragment();
 
-* file1
+const element1 = document.createElement("tp-markup-multi-pages");
+element1.setAttribute("repository", "/docs/components/markup-multi-pages/docs");
+example.append(element1);
 
-* file2
-
-* file-unknown
+document.body.append(example);
 ====
-
-[tp-radio-list,data-setting="repository",label="repository",label-position="top",orientation="horizontal",value="1"]
-====
-* Default
-
-* file1
-
-* file2
-
-* file-unknown
-====
-
-[tp-radio-list,data-setting="theme",label="theme",label-position="top",orientation="horizontal",value="1"]
-====
-* Default (empty)
-
-* light
-
-* dark
-
-* auto
-====
-
-[tp-cluster]
-=====
-[tp-textfield%clearable,data-setting="brand",label="brand",value="tp-default",placeholder="tp-default"]
-====
-====
-
-[tp-textfield%value%placeholder%clearable,data-setting="git",label="git"]
-====
-====
-
-[tp-textfield%value%placeholder%clearable,data-setting="label",label="label"]
-====
-====
-
-[tp-textfield%value%placeholder%clearable,data-setting="langs",label="langs"]
-====
-====
-=====
-
-[tp-button-group]
-=====
-[tp-button,id="attributes-reset",type="button"]
-====
-Reset defaults
-====
-
-[tp-button,id="attributes-reload",type="button"]
-====
-Reload preview
-====
-=====
 ======
-
-[tp-divider]
-====
-====
-
-[h3]
-====
-Preview
-====
-
-[tp-iframe,id="attributes-frame",title="markup-multi-pages attribute preview",style="height: 36rem; display: flow-root; inline-size: auto;"]
-====
-====
-
-[tp-callout,id="attributes-status",variant="info",heading="Preview status"]
-====
-Preparing the preview…
-====
-
-File-loading attributes offer only Default, file1, file2 and file-unknown. The two local fixtures preserve verified example formats (they may contain the same content); file-unknown deliberately exercises error handling. No arbitrary path can be entered.
-
-[script,type="module",src="/docs/components/markup-multi-pages/examples/attributes.js"]
-====
-====
-========
 ----
-=========
+========

@@ -1,0 +1,2 @@
+import{t as e}from"../../chunks/markup-multi-pages.js";var t=class extends e{get fixedLanguage(){return`latex`}};customElements.get(`tp-latex-multi-pages`)||customElements.define(`tp-latex-multi-pages`,t);export{t as TpLatexMultiPages};
+//# sourceMappingURL=latex-multi-pages.js.map

@@ -1,0 +1,259 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpFillBlankQuestion[case-sensitive]{
+  \begin{description}
+    \item[{Answers}] \begin{enumerate}
+      \item Paris
+      \item Rome
+    \end{enumerate}
+    \item[{Title}] Geography
+    \item[{Prompt}] Complete both sentences.
+    \item[{Form}] The capital of France is \wcTpBlank*[name=france-capital,placeholder=Capital,aria-label=Capital of France,clearable]{}.
+     The capital of Italy is \wcTpBlank*[name=italy-capital,placeholder=Capital,aria-label=Capital of Italy,clearable]{}.
+    \item[{Feedback}] Check the spelling of each capital.
+     \begin{itemize}
+      \item The capital of France is home to the Eiffel Tower.
+      \item The capital of Italy is home to the Colosseum.
+    \end{itemize}
+    \item[{Solution}] The capital of France is Paris. The capital of Italy is Rome.
+  \end{description}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/blank/blank.js";
+import "/components/fill-blank/fill-blank.js";
+import "/components/fill-blank-question/fill-blank-question.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-fill-blank-question");
+element1.setAttribute("case-sensitive", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("dl");
+element2.append(document.createTextNode("\n    "));
+
+const element3 = document.createElement("dt");
+element3.append(document.createTextNode("Answers"));
+element2.append(element3);
+
+const element4 = document.createElement("dd");
+
+const element5 = document.createElement("ol");
+
+const element6 = document.createElement("li");
+element6.append(document.createTextNode("Paris"));
+element5.append(element6);
+
+const element7 = document.createElement("li");
+element7.append(document.createTextNode("Rome"));
+element5.append(element7);
+element4.append(element5);
+element2.append(element4);
+element2.append(document.createTextNode("\n    "));
+
+const element8 = document.createElement("dt");
+element8.append(document.createTextNode("Title"));
+element2.append(element8);
+
+const element9 = document.createElement("dd");
+element9.append(document.createTextNode("Geography"));
+element2.append(element9);
+element2.append(document.createTextNode("\n    "));
+
+const element10 = document.createElement("dt");
+element10.append(document.createTextNode("Prompt"));
+element2.append(element10);
+
+const element11 = document.createElement("dd");
+element11.append(document.createTextNode("Complete both sentences."));
+element2.append(element11);
+element2.append(document.createTextNode("\n    "));
+
+const element12 = document.createElement("dt");
+element12.append(document.createTextNode("Form"));
+element2.append(element12);
+element2.append(document.createTextNode("\n    "));
+
+const element13 = document.createElement("dd");
+element13.append(document.createTextNode("\n      "));
+
+const element14 = document.createElement("p");
+element14.append(document.createTextNode("The capital of France is "));
+
+const element15 = document.createElement("tp-blank");
+element15.setAttribute("name", "france-capital");
+element15.setAttribute("placeholder", "Capital");
+element15.setAttribute("aria-label", "Capital of France");
+element15.setAttribute("clearable", "");
+element14.append(element15);
+element14.append(document.createTextNode("."));
+element13.append(element14);
+element13.append(document.createTextNode("\n      "));
+
+const element16 = document.createElement("p");
+element16.append(document.createTextNode("The capital of Italy is "));
+
+const element17 = document.createElement("tp-blank");
+element17.setAttribute("name", "italy-capital");
+element17.setAttribute("placeholder", "Capital");
+element17.setAttribute("aria-label", "Capital of Italy");
+element17.setAttribute("clearable", "");
+element16.append(element17);
+element16.append(document.createTextNode("."));
+element13.append(element16);
+element13.append(document.createTextNode("\n    "));
+element2.append(element13);
+element2.append(document.createTextNode("\n    "));
+
+const element18 = document.createElement("dt");
+element18.append(document.createTextNode("Feedback"));
+element2.append(element18);
+element2.append(document.createTextNode("\n    "));
+
+const element19 = document.createElement("dd");
+element19.append(document.createTextNode("\n      "));
+
+const element20 = document.createElement("p");
+element20.append(document.createTextNode("Check the spelling of each capital."));
+element19.append(element20);
+element19.append(document.createTextNode("\n      "));
+
+const element21 = document.createElement("ul");
+element21.append(document.createTextNode("\n        "));
+
+const element22 = document.createElement("li");
+element22.append(document.createTextNode("The capital of France is home to the Eiffel Tower."));
+element21.append(element22);
+element21.append(document.createTextNode("\n        "));
+
+const element23 = document.createElement("li");
+element23.append(document.createTextNode("The capital of Italy is home to the Colosseum."));
+element21.append(element23);
+element21.append(document.createTextNode("\n      "));
+element19.append(element21);
+element19.append(document.createTextNode("\n    "));
+element2.append(element19);
+element2.append(document.createTextNode("\n    "));
+
+const element24 = document.createElement("dt");
+element24.append(document.createTextNode("Solution"));
+element2.append(element24);
+
+const element25 = document.createElement("dd");
+element25.append(document.createTextNode("The capital of France is Paris. The capital of Italy is Rome."));
+element2.append(element25);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Geography
+\documentclass{article}
+\begin{document}
+\wcTpFillBlankQuestion[lang=en]{
+  \begin{description}
+    \item[{Answers}] \begin{enumerate}
+      \item Paris
+      \item Berlin
+      \item Rome
+    \end{enumerate}
+    \item[{Title}] Geography
+    \item[{Prompt}] Complete the sentences with the capitals.
+    \item[{Form}] The capital of France is \wcTpBlank*[name=france,aria-label=Capital of France,placeholder=City name,clearable]{}.
+    The capital of Germany is \wcTpBlank*[name=germany,aria-label=Capital of Germany,placeholder=City name,clearable]{}.
+    The capital of Italy is \wcTpBlank*[name=italy,aria-label=Capital of Italy,placeholder=City name,clearable]{}.
+    \item[{Feedback}] Check the capital of each country and its spelling.
+    \item[{Solution}] France: Paris. Germany: Berlin. Italy: Rome.
+  \end{description}
+}
+\end{document}
+
+% !tp-example Irregular verbs
+\documentclass{article}
+\begin{document}
+\wcTpFillBlankQuestion[lang=en]{
+  \begin{description}
+    \item[{Answers}] \begin{enumerate}
+      \item went
+      \item saw
+      \item took
+    \end{enumerate}
+    \item[{Title}] Irregular verbs
+    \item[{Prompt}] Complete each sentence with the past simple form of the verb shown in the blank.
+    \item[{Form}] Yesterday, I \wcTpBlank*[name=go,aria-label=Past simple of go,placeholder=go,clearable]{} to school.
+    Last night, she \wcTpBlank*[name=see,aria-label=Past simple of see,placeholder=see,clearable]{} a shooting star.
+    Last Monday, we \wcTpBlank*[name=take,aria-label=Past simple of take,placeholder=take,clearable]{} the train.
+    \item[{Feedback}] These verbs are irregular: their past simple forms do not end in -ed.
+    \item[{Solution}] go → went; see → saw; take → took.
+  \end{description}
+}
+\end{document}
+
+% !tp-example Baltic capitals and flags
+\documentclass{article}
+\begin{document}
+\wcTpFillBlankQuestion[mode=closed,lang=en]{
+  \begin{description}
+    \item[{Answers}] \begin{enumerate}
+      \item Tallinn
+      \item \wcTpIcon[name=ee,library=flags,aria-label=Flag of Estonia]{}
+      \item Riga
+      \item \wcTpIcon[name=lv,library=flags,aria-label=Flag of Latvia]{}
+      \item Vilnius
+      \item \wcTpIcon[name=lt,library=flags,aria-label=Flag of Lithuania]{}
+    \end{enumerate}
+    \item[{Title}] Baltic capitals and flags
+    \item[{Prompt}] Match each country with its capital and national flag.
+    \item[{Form}] Estonia has \wcTpBlank*[name=estonia-capital,aria-label=Capital of Estonia]{} as its capital and \wcTpBlank*[name=estonia-flag,aria-label=Flag of Estonia]{} as its national flag.
+    Latvia has \wcTpBlank*[name=latvia-capital,aria-label=Capital of Latvia]{} as its capital and \wcTpBlank*[name=latvia-flag,aria-label=Flag of Latvia]{} as its national flag.
+    Lithuania has \wcTpBlank*[name=lithuania-capital,aria-label=Capital of Lithuania]{} as its capital and \wcTpBlank*[name=lithuania-flag,aria-label=Flag of Lithuania]{} as its national flag.
+    \item[{Feedback}] Check which country each capital and flag belongs to.
+    \item[{Solution}] Estonia: Tallinn; Latvia: Riga; Lithuania: Vilnius. Match each flag with its country.
+  \end{description}
+}
+\end{document}
+
+% !tp-example Square root
+\documentclass{article}
+\begin{document}
+\wcTpFillBlankQuestion[mode=closed,lang=en]{
+  \begin{description}
+    \item[{Answers}] \begin{enumerate}
+      \item \wcSpan*[aria-label=Nonnegative real numbers]{$\mathbb{R}_{+}$}
+      \item \wcSpan*[aria-label=Positive real numbers]{$\mathbb{R}_{+}^{*}$}
+      \item \wcSpan*[aria-label=One over twice the square root of x]{$\frac{1}{2\sqrt{x}}$}
+    \end{enumerate}
+    \item[{Title}] The square root function
+    \item[{Prompt}] Complete the sentence with the mathematical expressions.
+    \item[{Form}] The square root function $f(x) = \sqrt{x}$ is defined on \wcTpBlank*[name=domain,aria-label=Domain]{}, differentiable on \wcTpBlank*[name=differentiability,aria-label=Domain of differentiability]{}, and $f'(x) =$ \wcTpBlank*[name=derivative,aria-label=Derivative]{}.
+    \item[{Feedback}] Consider whether zero belongs to the domain and whether the derivative exists there.
+    \item[{Solution}] The domain is $\mathbb{R}_{+} = [0, +\infty)$. The function is differentiable on $\mathbb{R}_{+}^{*} = (0, +\infty)$, with $f'(x) = \frac{1}{2\sqrt{x}}$.
+  \end{description}
+}
+
+\wcScript|
+    // Wait for the question and its answer buttons before typesetting their content.
+    window.MathJax = {
+      svg: { fontCache: "local" },
+      startup: {
+        pageReady: async () => {
+          await customElements.whenDefined("tp-fill-blank-question");
+          await customElements.whenDefined("tp-button");
+          return MathJax.startup.defaultPageReady();
+        }
+      }
+    };
+  |
+
+\wcScript[defer,src=https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js]||
+\end{document}

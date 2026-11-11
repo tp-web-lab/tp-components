@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-slide-note" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-slide-note" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-slide-note { legend="Speaker notes" lang="en-GB" show-text }
 ::: script { type="tp/txt" }
@@ -8,41 +8,26 @@ Introduce the idea. [trigger=clic] Explain the next step.
 ::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/slide-note/slide-note.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- open
-:::
+const example = document.createDocumentFragment();
 
-::: tp-cluster
-:::
+const element1 = document.createElement("tp-slide-note");
+element1.setAttribute("legend", "Speaker notes");
+element1.setAttribute("lang", "en-GB");
+element1.setAttribute("show-text", "");
+element1.append(document.createTextNode("\n  "));
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/txt");
+element2.textContent = "Introduce the idea. [trigger=clic] Explain the next step.";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="slide-note attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/slide-note/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
 
@@ -50,5 +35,5 @@ Preparing the preview…
 ::: tp-slide-note { legend="External notes" src="/docs/components/slide-note/examples/notes.txt" lang="en-GB" show-text }
 :::
 ```
+:::::
 ::::::
-:::::::

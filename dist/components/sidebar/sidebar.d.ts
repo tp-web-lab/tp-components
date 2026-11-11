@@ -1,6 +1,6 @@
 import { TpBase } from "../base/base";
 /**
- * Sidebar layout component, without Shadow DOM.
+ * The custom `<tp-sidebar>` element creates a two-column sidebar and content layout.
  *
  * @summary Creates a two-column sidebar and content layout.
  * @tagname tp-sidebar

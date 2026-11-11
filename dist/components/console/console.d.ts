@@ -18,10 +18,15 @@
  * @tp-dependency tp-object-tree
  * @summary Specialized tree for inspecting JavaScript values.
  */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
 import { TpBase } from "../base/base.js";
 import "../icon-button/icon-button.js";
 import "../copy-code/copy-code.js";
 import "../object-tree/object-tree.js";
+import "../theme/theme.js";
 /**
  * Niveaux de sortie supportés par la console.
  *
@@ -82,7 +87,7 @@ export interface TpConsoleClearDetail {
     removedCount: number;
 }
 /**
- * `<tp-console>` displays console output in light DOM.
+ * The custom `<tp-console>` element provides a visual console for playground output.
  *
  * The component:
  * - stores a list of entries
@@ -90,7 +95,7 @@ export interface TpConsoleClearDetail {
  * - renders complex values with `<tp-object-tree>`
  * - exposes an API close to the browser console
  *
- * @summary Visual console for playground output.
+ * @summary Provides a visual console for playground output.
  * @tagname tp-console
  *
  * @event tp-console-entry-add Emitted when an entry is added.
@@ -104,30 +109,29 @@ export interface TpConsoleClearDetail {
  *   <p data-demo-status role="status"></p>
  *   <script src="/docs/components/_shared/introduction-actions.js"></script>
  * </tp-box>
- * @cssprop [--tp-console-bg=#0d1117] Console background.
+ * @cssprop [--tp-console-bg=var(--tp-paper-color)] Console background.
  * @cssprop [--tp-console-bigint-color=#bc8cff] BigInt value color.
  * @cssprop [--tp-console-boolean-color=#ffa657] Boolean value color.
- * @cssprop [--tp-console-border=#30363d] Console border color.
+ * @cssprop [--tp-console-border=var(--tp-neutral-stroke-mid)] Console border color.
  * @cssprop [--tp-console-circular-color=#f2cc60] Text color of circular-reference markers in expanded objects.
- * @cssprop [--tp-console-color=#e6edf3] Console text color.
+ * @cssprop [--tp-console-color=var(--tp-text-body)] Console text color.
  * @cssprop [--tp-console-date-color=#7ee787] Text color of Date values in expanded objects.
  * @cssprop [--tp-console-depth=0] Unitless group nesting depth of a log entry; each level adds 1rem of leading indentation. Assigned internally per entry.
  * @cssprop [--tp-console-empty-color=#8b949e] Empty state text color.
  * @cssprop [--tp-console-entry-bg=transparent] Background of an individual log entry.
- * @cssprop [--tp-console-entry-border=#21262d] Entry separator color.
+ * @cssprop [--tp-console-entry-border=var(--tp-neutral-stroke-soft)] Entry separator color.
  * @cssprop [--tp-console-error-color=#ff7b72] Text color of Error values in expanded objects.
  * @cssprop [--tp-console-function-color=#d2a8ff] Text color of function summaries in expanded objects.
  * @cssprop [--tp-console-kind-accent=#8b949e] Text color and background tint of the log-level badge; assigned by the entry level.
  * @cssprop [--tp-console-nullish-color=#8b949e] Null and undefined value color.
  * @cssprop [--tp-console-number-color=#79c0ff] Number value color.
- * @cssprop [--tp-console-object-bg=#11161d] Object preview background.
- * @cssprop [--tp-console-object-border=#30363d] Object preview border color.
- * @cssprop [--tp-console-object-key-color=#c9d1d9] Object key color.
- * @cssprop [--tp-console-object-marker-color=#8b949e] Color of the triangle used to expand or collapse an object preview.
- * @cssprop [--tp-console-object-panel-bg=#0f141a] Object tree panel background.
- * @cssprop [--tp-console-object-separator-color=#8b949e] Color of the separator between a property name and its value in expanded objects.
- * @cssprop [--tp-console-object-summary-bg=#161b22] Background of the clickable summary row of an object preview.
- * @cssprop [--tp-console-object-summary-color=#c9d1d9] Object summary text color.
+ * @cssprop [--tp-console-object-bg=var(--tp-paper-color)] Object preview background.
+ * @cssprop [--tp-console-object-border=var(--tp-neutral-stroke-mid)] Object preview border color.
+ * @cssprop [--tp-console-object-key-color=var(--tp-text-body)] Object key color.
+ * @cssprop [--tp-console-object-panel-bg=var(--tp-paper-color)] Object tree panel background.
+ * @cssprop [--tp-console-object-separator-color=var(--tp-text-body)] Color of the separator between a property name and its value in expanded objects.
+ * @cssprop [--tp-console-object-summary-bg=var(--tp-neutral-fill-softer)] Background of the clickable summary row of an object preview.
+ * @cssprop [--tp-console-object-summary-color=var(--tp-text-body)] Object summary text color.
  * @cssprop [--tp-console-string-color=#a5d6ff] String value color.
  * @cssprop [--tp-console-time-color=#8b949e] Timestamp color.
  */
@@ -139,6 +143,7 @@ export declare class TpConsole extends TpBase {
      * @internal
      */
     private static readonly styleId;
+    private static nextThemeId;
     /**
      * Entrées actuellement affichées.
      *

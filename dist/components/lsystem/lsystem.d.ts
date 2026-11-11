@@ -29,7 +29,9 @@ import "../button-group/button-group.js";
 import "../callout/callout.js";
 import "../save-image/save-image.js";
 /**
- * @summary renders L-system fractals and explores their successive rewriting iterations.
+ * The custom `<tp-lsystem>` element renders L-system fractals and explores their successive rewriting iterations.
+ *
+ * @summary Renders L-system fractals and explores their successive rewriting iterations.
  * @tagname tp-lsystem
  * @attr {string} src = "" - Source file; takes precedence over the internal script and preset.
  * @attr {"fractal-tree"|"barnsley-fern"|"koch-curve"|"dragon-curve"|"hilbert-curve"|"peano-curve"|"levy-c-curve"|"gosper-curve"|"pythagoras-tree"|"sierpinski-triangle"|"sierpinski-carpet"|"sierpinski-arrowhead"|"sierpinski-gasket"|"sierpinski-tetrahedron"} preset = "koch-curve" - Built-in definition used when no source is supplied.

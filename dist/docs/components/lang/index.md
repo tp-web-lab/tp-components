@@ -1,31 +1,38 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="lang" library="components" size="1.25em"></tp-icon> Language
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-lang>` element implements the <tp-icon name="lang" library="components" size="1.25em"></tp-icon> Language functionality: documentation language selector.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-lang>` element provides a documentation language selector.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-iframe src="/docs/components/lang/examples/introduction-frame.html" title="tp-lang — Basic usage" style="display: flow-root; inline-size: auto; height: 32rem;"></tp-iframe>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-lang" src="/docs/components/lang/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Language button | Open the list of available languages. |
-| Language entry | Navigate to that language version of the documentation. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 `<tp-lang>` displays a flag button and a dropdown for switching documentation languages. It is primarily designed for `<tp-markup-multi-pages>` and changes the documentation repository used by the page.
 
@@ -39,7 +46,7 @@ The controller behaves like an icon button. Use `variant`, `size`, and
 <tp-lang langs="en,fr" disabled></tp-lang>
 ```
 
-#### Fixed documentation repository
+### Fixed documentation repository
 
 ```html
 <tp-lang langs="en,fr" repository="/docs"></tp-lang>
@@ -55,7 +62,7 @@ With `repository="/docs"` and `langs="en,fr"`:
 
 The component updates the `repository` attribute of the nearest `<tp-markup-multi-pages>`. If it is not inside one, it updates the first compatible multi-page documentation component found in the document.
 
-#### Language modes
+### Language modes
 
 The dropdown always exposes `auto` before the explicit languages. `auto` uses the browser language from `navigator.language`.
 
@@ -66,7 +73,7 @@ The dropdown always exposes `auto` before the explicit languages. `auto` uses th
 
 For example, with `langs="en,fr,es"` and `navigator.language` set to `fr-FR`, `auto` resolves to `fr`.
 
-#### Inferred repository
+### Inferred repository
 
 When `repository` is omitted, the base path is inferred from the directory that contains the current `index.html`.
 
@@ -77,7 +84,7 @@ When `repository` is omitted, the base path is inferred from the directory that 
 
 For a page served at `/guide/index.html`, French documentation is resolved as `/guide/fr`.
 
-#### Directory layout
+### Directory layout
 
 For `langs="en,fr"` and a default English documentation, a typical layout is:
 
@@ -99,7 +106,7 @@ docs/
 
 The translated tree should keep the same relative paths as the default documentation.
 
-#### Current page
+### Current page
 
 When `<tp-markup-multi-pages>` navigation uses hash URLs such as `#/components/callout/index.md`, changing the language keeps the current document path and only changes the repository.
 
@@ -108,385 +115,7 @@ When `<tp-markup-multi-pages>` navigation uses hash URLs such as `#/components/c
 /docs/fr + #/components/callout/index.md
 ```
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Choose English or French and observe the translated message in this isolated example.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpLang -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>disabled</code> | <code>boolean</code> | <code>false</code> | Disables the language trigger. |
-  | <code>langs</code> | <code>string</code> | <code>&quot;en&quot;</code> | Comma-separated language codes. |
-  | <code>repository</code> | <code>string</code> | <code>&quot;&quot;</code> | Documentation repository root. |
-  | <code>size</code> | <code>string</code> | <code>&quot;m&quot;</code> | Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl. |
-  | <code>variant</code> | <code>string</code> | <code>&quot;neutral&quot;</code> | Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-lang>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpLang`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-lang-change</code> | <code>&#123; choice: string; lang: string; repository: string; anchor: null; target: HTMLElement \| null &#125;</code> | Emitted when the selected documentation language changes. |
-  [Events emitted by `<tp-lang>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-lang>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_lang.TpLang.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -513,12 +142,41 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Choose English or French and observe the translated message in this isolated example.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-lang>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -541,11 +199,11 @@ All tp-components used by `<tp-lang>` are loaded automatically by this component
 @summary Accessible icon button component.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-divider>`](../divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
-- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
-- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-divider>`](#/components/divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
+- [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
 
 ### External
 

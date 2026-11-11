@@ -34,12 +34,12 @@ export interface TpPetriReachabilityGraph {
 export declare function getPetriIncidenceMatrix(graph: Readonly<TpGraphDocument>): TpPetriIncidenceMatrix;
 export declare function getPetriReachabilityGraph(graph: Readonly<TpGraphDocument>, maximumMarkings?: number): TpPetriReachabilityGraph;
 /**
- * Petri-net specialization of `<tp-graph-editor>`.
+ * The custom `<tp-graph-petri>` element edits and simulates place/transition Petri nets.
  *
  * @summary Edits and simulates place/transition Petri nets.
  * @tagname tp-graph-petri
-
-
+ *
+ *
  * @accessibility Exposes enabled transition controls as focusable buttons.
  * @keyboard {Enter / Space} Fires the focused enabled transition.
  * @example

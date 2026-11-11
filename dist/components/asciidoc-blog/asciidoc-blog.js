@@ -1,0 +1,2 @@
+import{t as e}from"../../chunks/markup-blog2.js";var t=class extends e{get fixedLanguage(){return`asciidoc`}};customElements.get(`tp-asciidoc-blog`)||customElements.define(`tp-asciidoc-blog`,t);export{t as TpAsciidocBlog};
+//# sourceMappingURL=asciidoc-blog.js.map

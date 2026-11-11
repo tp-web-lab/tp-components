@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-theme" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-theme" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: section
 ::: tp-theme
@@ -11,84 +11,31 @@ The selected theme is scoped to this section.
 ::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/theme/theme.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- disabled
-:::
+const example = document.createDocumentFragment();
 
-::: tp-radio-list { data-setting="mode" label="mode" label-position="top" orientation="horizontal" value="3" }
-- light
+const element1 = document.createElement("section");
+element1.append(document.createTextNode("\n      "));
 
-- dark
+const element2 = document.createElement("tp-theme");
+element1.append(element2);
+element1.append(document.createTextNode("\n      "));
 
-- auto
-:::
+const element3 = document.createElement("p");
+element3.append(document.createTextNode("The selected theme is scoped to this section."));
+element1.append(element3);
+element1.append(document.createTextNode("\n      "));
 
-::: tp-radio-list { data-setting="size" label="size" label-position="top" orientation="horizontal" value="4" }
-- xxs
+const element4 = document.createElement("code");
+element4.append(document.createTextNode("Inline code follows the selected theme."));
+element1.append(element4);
+element1.append(document.createTextNode("\n    "));
+example.append(element1);
 
-- xs
-
-- s
-
-- m
-
-- l
-
-- xl
-
-- xxl
-:::
-
-::: tp-radio-list { data-setting="variant" label="variant" label-position="top" orientation="horizontal" value="5" }
-- success
-
-- danger
-
-- warning
-
-- info
-
-- neutral
-
-- brand
-:::
-
-:::: tp-cluster
-::: tp-textfield { data-setting="anchor" label="anchor" value placeholder clearable }
-:::
-
-::: tp-textfield { data-setting="ui-anchor" label="ui-anchor" value placeholder clearable }
-:::
-::::
-
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
-
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="theme attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/theme/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
 
@@ -136,5 +83,5 @@ customElements.whenDefined('tp-console').then(() => {
 });
 :::
 ```
+:::::
 ::::::
-:::::::

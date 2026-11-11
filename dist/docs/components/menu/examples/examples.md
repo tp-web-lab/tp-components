@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-menu" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-menu" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-menu
 - [Buttons](/#/components/button/index.md)
@@ -13,43 +13,54 @@
 :::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/menu/menu.js";
 
-::::: tp-stack
-::: tp-radio-list { data-setting="orientation" label="orientation" label-position="top" orientation="horizontal" value="2" }
-- horizontal
+const example = document.createDocumentFragment();
 
-- vertical
-:::
+const element1 = document.createElement("tp-menu");
+element1.append(document.createTextNode("\n  "));
 
-::: tp-cluster
-:::
+const element2 = document.createElement("ul");
+element2.append(document.createTextNode("\n    "));
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element3 = document.createElement("li");
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element4 = document.createElement("a");
+element4.setAttribute("href", "/#/components/button/index.md");
+element4.append(document.createTextNode("Buttons"));
+element3.append(element4);
+element2.append(element3);
+element2.append(document.createTextNode("\n    "));
 
-::: tp-divider
-:::
+const element5 = document.createElement("li");
 
-### Preview
+const element6 = document.createElement("a");
+element6.setAttribute("href", "/#/components/tabs/index.md");
+element6.append(document.createTextNode("Tabs"));
+element5.append(element6);
+element2.append(element5);
+element2.append(document.createTextNode("\n    "));
 
-::: tp-iframe { id="attributes-frame" title="menu attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
+const element7 = document.createElement("li");
 
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
+const element8 = document.createElement("a");
+element8.setAttribute("href", "/#/components/tree/index.md");
+element8.append(document.createTextNode("Trees"));
+element7.append(element8);
+element2.append(element7);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+example.append(document.createTextNode("\n"));
 
-::: script { type="module" src="/docs/components/menu/examples/attributes.js" }
+const element9 = document.createElement("script");
+element9.setAttribute("src", "/docs/components/menu/examples/navigation.js");
+example.append(element9);
+
+document.body.append(example);
 :::
 ```
 
@@ -85,5 +96,5 @@ Open Components, then Layout, then Rows to explore three submenu levels. Click a
 ::: script { src="/docs/components/menu/examples/navigation.js" }
 :::
 ```
+:::::
 ::::::
-:::::::

@@ -12,69 +12,21 @@
             :repository: /docs/components/markup-multi-slides/docs
             :label: Mixed markup slides
 
-      .. example:: Attributes
-
-         Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-         .. tp-stack::
-
-            .. tp-radio-list::
-               :data-setting: auto
-               :label: auto
-               :label-position: top
-               :orientation: horizontal
-               :value: 1
-
-               - Default (empty)
-
-               - notes
-
-               - timing
-
-            .. tp-cluster::
-
-               .. tp-textfield::
-                  :data-setting: timing
-                  :label: timing
-                  :value: 5000
-                  :placeholder: 5000
-                  :clearable:
-
-            .. tp-button-group::
-
-               .. tp-button::
-                  :id: attributes-reset
-                  :type: button
-
-                  Reset defaults
-
-               .. tp-button::
-                  :id: attributes-reload
-                  :type: button
-
-                  Reload preview
-
-         .. tp-divider::
-
-         .. h3::
-
-            Preview
-
-         .. tp-iframe::
-            :id: attributes-frame
-            :title: markup-multi-slides attribute preview
-            :style: height: 36rem; display: flow-root; inline-size: auto;
-
-         .. tp-callout::
-            :id: attributes-status
-            :variant: info
-            :heading: Preview status
-
-            Preparing the preview…
+      .. example:: Javascript API
 
          .. script::
             :type: module
-            :src: /docs/components/markup-multi-slides/examples/attributes.js
+
+            import "/components/markup-multi-slides/markup-multi-slides.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-markup-multi-slides");
+            element1.setAttribute("repository", "/docs/components/markup-multi-slides/docs");
+            element1.setAttribute("label", "Mixed markup slides");
+            example.append(element1);
+
+            document.body.append(example);
 
       .. example:: Slides navigation menu
 

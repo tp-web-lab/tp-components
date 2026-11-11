@@ -1,9 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="question" library="components" size="1.25em"></tp-icon> Question
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-question>` element implements the <tp-icon name="question" library="components" size="1.25em"></tp-icon> Question functionality: semantic base container for question content.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-question>` element organizes a question’s prompt, response, feedback and solution.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-question>
     <dl>
       <dt>Title</dt><dd>Reflection</dd>
@@ -13,41 +24,27 @@ The custom `<tp-question>` element implements the <tp-icon name="question" libra
       <dt>Solution</dt><dd>They package reusable behavior behind a custom element.</dd>
     </dl>
   </tp-question>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-question" src="/docs/components/question/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
+
+### Configuration
 
 `src` selects the source format from the URL extension: `.json`, `.html`/`.htm`, `.md`/`.markdown`, `.rst`/`.rest`, or `.adoc`/`.asciidoc`. Extension matching ignores case, query parameters and fragments. URLs without a file extension retain the JSON behavior.
 
 JSON uses this component's question schema. Other formats use the same definition list and native component syntax as an inline question, either as a bare definition list or inside the matching question component. For example, `src="/docs/exercises/general.md"` loads a Markdown definition. Attributes on the receiving question, such as `mode` and `partial`, remain authoritative. Changing `src` reloads the question; unsupported extensions and loading errors appear in the form.
-
-### User interactions
-
-The user-help button legend groups commands by their location in the component and describes their effect briefly. Detailed gestures and keyboard behavior remain in the interaction tables below.
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Question title | Expand or collapse the question. Questions start collapsed; answers are retained when collapsed. |
-| Input button | Show or hide the answer form without losing answers. At least one panel stays visible. |
-| Output button | Show or hide the output without losing feedback or the solution. Highlighted buttons indicate visible panels. |
-| Start | Reveal the timed question and begin its countdown. |
-| Continue | Reveal the question again after the time limit, keeping existing answers. |
-| Explain the solution | Copy a pedagogical prompt and request an explanation when ai-api is enabled and AI is configured. |
-| Submit | Check the completed answer form. |
-| Feedback tab | Read feedback, or the message indicating that none is available. |
-| Solution tab | Read the solution, or the message indicating that none is available. For timed questions, it becomes accessible only after Continue. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> on the question title | Expand or collapse the question. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Output tabs | Move between Feedback and Solution. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> on Explain the solution | Copy the prompt and request an explanation when ai-api is enabled and AI is configured. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### AI solution assistance
 
@@ -98,7 +95,7 @@ The key is never included in browser bundles. The local bridge accepts loopback 
 
  Without an AI service, it copies the prompt for pasting into an assistant; if clipboard access is denied, a selectable prompt is displayed.
 
-### Author directives
+### Authoring
 
 Numerical scores are hidden by default. Add the boolean `score` attribute to show them in graded questions, for example `<tp-fill-blank-question score>`. Correctness messages, explanations and attempt counters remain available without it. Adding or removing `score` also updates existing feedback without submitting again. As with other boolean attributes, `score="false"` still enables it; omit the attribute to disable it.
 
@@ -109,7 +106,6 @@ Set `timing="00:05:00"` to allow five minutes. The strict `hh:mm:ss` format acce
 Opening a timed question shows a centered message and **Start**. The countdown begins only after Start reveals the content. At zero, a mask replaces the content with “Time limit has expired.” and **Continue**. The Solution tab is disabled during the timed session, including keyboard navigation and solution links in feedback, until automatic grading confirms a correct answer. A correct answer unlocks only that question’s solution immediately; the countdown continues. Continue restores access to the question and its solution without restarting the timer or clearing answers. Collapsing and reopening a question does not pause or restart its countdown. Changing `timing` starts a new waiting session; removing it reveals the content. These rules also apply to specialized questions. Questions inside a timed `tp-exercise` inherit its solution lock without displaying an additional timer. The public `setExerciseTiming(exercise, pending)` method applies or releases one exercise’s lock; a verified correct answer overrides the locks for that question only.
 
 `mode="mixed"` is the default policy for descendant `tp-blank` elements. Each blank follows its boolean `closed` attribute. Set `mode="closed"` to close every blank or `mode="opened"` to open every blank without changing those local choices. This policy does not convert other question widgets, such as radio lists.
-
 
 Structure the content as a definition list with `Title`, `Prompt`, `Form`, `Feedback`, and `Solution` entries. Specialized question components add validation.
 
@@ -135,395 +131,7 @@ When no solution is provided, its panel displays “No solution is available for
 
 Successful automatically graded answers also show “Bonne réponse trouvée en hh:mm:ss.” in Feedback. Elapsed time is measured from Start on the question timer, or on the nearest enclosing exercise timer when the question has none.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Write an answer, submit it and inspect the feedback and solution panels.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Timed question
-: Open the question and select Start to reveal its content for ten seconds. The Solution tab stays disabled during the countdown unless automatic grading confirms a correct answer. After expiry, select Continue to recover your answer and access the solution.
-
-Optional score
-: Type blue and submit to see the numerical grade enabled by score. Remove score in the source and submit again: correction remains available, but the grade is hidden.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpQuestion -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>ai-api</code> | <code>boolean</code> | <code>false</code> | Allows sending AI prompts to the selected provider; without it, prompts are only copied. |
-  | <code>ai-assistant</code> | <code>string</code> | <code>&quot;openai&quot;</code> | AI provider, optionally followed by /model; without a model, uses the server configuration. Providers: openai, anthropic, google, mistral. |
-  | <code>ai-explanation-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a saved Markdown explanation; the companion .prompt.md must match the current prompt. |
-  | <code>ai-help</code> | <code>&quot;none&quot;\|&quot;feedback&quot;\|&quot;solution&quot;\|&quot;both&quot;</code> | <code>&quot;none&quot;</code> | Optional AI assistance; solution and both enable solution explanations. Feedback assistance is reserved for a future release. |
-  | <code>mode</code> | <code>string</code> | <code>&quot;mixed&quot;</code> | Blank mode: opened, closed, or mixed local choices. |
-  | <code>open</code> | <code>string</code> | <code>&quot;&quot;</code> | Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.<br>  `detail: { value: unknown }` |
-  | <code>score</code> | <code>boolean</code> | <code>false</code> | Displays the numerical score in submission feedback. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a JSON, HTML, Markdown, reStructuredText, or AsciiDoc question definition. |
-  | <code>timing</code> | <code>string</code> | <code>&quot;&quot;</code> | Optional nonzero time limit in strict hh:mm:ss format. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-question>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>setExerciseTiming</code> | <code>setExerciseTiming(exercise: HTMLElement, pending: boolean): void</code> | Sets an enclosing exercise's solution gate without displaying a local timer. |
-  [Public methods of `TpQuestion`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-question-submit</code> | <code>&#123; value: unknown &#125;</code> | Emitted after an answer passes submission validation and preparation. value is the response widget value, whose type depends on the question; invalid or blocked repeated submissions do not emit it. |
-  [Events emitted by `<tp-question>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-question>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_question.TpQuestion.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -550,12 +158,47 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Write an answer, submit it and inspect the feedback and solution panels.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Timed question
+: Open the question and select Start to reveal its content for ten seconds. The Solution tab stays disabled during the countdown unless automatic grading confirms a correct answer. After expiry, select Continue to recover your answer and access the solution.
+
+Optional score
+: Type blue and submit to see the numerical grade enabled by score. Remove score in the source and submit again: correction remains available, but the grade is hidden.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-question>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-badge
@@ -595,7 +238,7 @@ All tp-components used by `<tp-question>` are loaded automatically by this compo
 -->
 <!--
 @tp-dependency tp-switcher
-@summary Switches between horizontal and vertical layouts based on available space.
+@summary Component `<tp-switcher>`.
 -->
 <!--
 @tp-dependency tp-tabs
@@ -606,18 +249,18 @@ All tp-components used by `<tp-question>` are loaded automatically by this compo
 @summary Countdown timer with stop control and optional ring.
 -->
 
-- [`<tp-badge>`](../badge/index.md) : Badge component for compact status labels.
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
-- [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
-- [`<tp-copy-code>`](../copy-code/index.md) : Copy-to-clipboard button component.
-- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-mask>`](../mask/index.md) : Replaces an anchored element with a message while active.
-- [`<tp-switcher>`](../switcher/index.md) : Switches between horizontal and vertical layouts based on available space.
-- [`<tp-tabs>`](../tabs/index.md) : Accessible tabs component with keyboard and reorder support.
-- [`<tp-timer>`](../timer/index.md) : Countdown timer with stop control and optional ring.
+- [`<tp-badge>`](#/components/badge/index.md) : Badge component for compact status labels.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
+- [`<tp-button-group>`](#/components/button-group/index.md) : Button group component for organizing multiple buttons.
+- [`<tp-callout>`](#/components/callout/index.md) : Callout component for highlighted contextual content.
+- [`<tp-copy-code>`](#/components/copy-code/index.md) : Copy-to-clipboard button component.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-mask>`](#/components/mask/index.md) : Replaces an anchored element with a message while active.
+- [`<tp-switcher>`](#/components/switcher/index.md) : Component `<tp-switcher>`.
+- [`<tp-tabs>`](#/components/tabs/index.md) : Accessible tabs component with keyboard and reorder support.
+- [`<tp-timer>`](#/components/timer/index.md) : Countdown timer with stop control and optional ring.
 
 ### External
 

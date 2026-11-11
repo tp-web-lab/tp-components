@@ -18,7 +18,9 @@
 import { TpPlaygroundQuestion } from "../playground-question/playground-question.js";
 import { TpPrologPlayground } from "../prolog-playground/prolog-playground.js";
 /**
- * @summary checks a Prolog exercise using the playground and an external test file.
+ * The custom `<tp-prolog-playground-question>` element presents and grades Prolog programming exercises.
+ *
+ * @summary Presents and grades Prolog programming exercises.
  * @tagname tp-prolog-playground-question
  * @accessibility Reuses TpQuestion's disclosure, actions and feedback tabs.
  * @keyboard {Enter / Space} Expands the question or activates a focused action.

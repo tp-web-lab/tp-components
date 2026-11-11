@@ -1,0 +1,2 @@
+import{t as e}from"../../chunks/markup-single-page.js";var t=class extends e{get fixedLanguage(){return`latex`}};customElements.get(`tp-latex-single-page`)||customElements.define(`tp-latex-single-page`,t);export{t as TpLatexSinglePage};
+//# sourceMappingURL=latex-single-page.js.map

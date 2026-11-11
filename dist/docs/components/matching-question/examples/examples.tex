@@ -1,0 +1,214 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpMatchingQuestion{
+  \begin{description}
+    \item[{Title}] English and French
+    \item[{Prompt}] Match each English expression with its French translation.
+    \item[{Form}] \begin{itemize}
+      \item Hello
+      \item Thank you
+      \item Goodbye
+    \end{itemize}     \begin{enumerate}
+      \item Bonjour
+      \item Merci
+      \item Au revoir
+    \end{enumerate}
+    \item[{Feedback}] Distinguish greetings, thanks and farewells.
+    \item[{Solution}] Hello — Bonjour; Thank you — Merci; Goodbye — Au revoir.
+  \end{description}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/matching/matching.js";
+import "/components/matching-question/matching-question.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-matching-question");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("dl");
+element2.append(document.createTextNode("\n    "));
+
+const element3 = document.createElement("dt");
+element3.append(document.createTextNode("Title"));
+element2.append(element3);
+
+const element4 = document.createElement("dd");
+element4.append(document.createTextNode("English and French"));
+element2.append(element4);
+element2.append(document.createTextNode("\n    "));
+
+const element5 = document.createElement("dt");
+element5.append(document.createTextNode("Prompt"));
+element2.append(element5);
+
+const element6 = document.createElement("dd");
+element6.append(document.createTextNode("Match each English expression with its French translation."));
+element2.append(element6);
+element2.append(document.createTextNode("\n    "));
+
+const element7 = document.createElement("dt");
+element7.append(document.createTextNode("Form"));
+element2.append(element7);
+
+const element8 = document.createElement("dd");
+element8.append(document.createTextNode("\n      "));
+
+const element9 = document.createElement("ul");
+
+const element10 = document.createElement("li");
+element10.append(document.createTextNode("Hello"));
+element9.append(element10);
+
+const element11 = document.createElement("li");
+element11.append(document.createTextNode("Thank you"));
+element9.append(element11);
+
+const element12 = document.createElement("li");
+element12.append(document.createTextNode("Goodbye"));
+element9.append(element12);
+element8.append(element9);
+element8.append(document.createTextNode("\n      "));
+
+const element13 = document.createElement("ol");
+
+const element14 = document.createElement("li");
+element14.append(document.createTextNode("Bonjour"));
+element13.append(element14);
+
+const element15 = document.createElement("li");
+element15.append(document.createTextNode("Merci"));
+element13.append(element15);
+
+const element16 = document.createElement("li");
+element16.append(document.createTextNode("Au revoir"));
+element13.append(element16);
+element8.append(element13);
+element8.append(document.createTextNode("\n    "));
+element2.append(element8);
+element2.append(document.createTextNode("\n    "));
+
+const element17 = document.createElement("dt");
+element17.append(document.createTextNode("Feedback"));
+element2.append(element17);
+
+const element18 = document.createElement("dd");
+element18.append(document.createTextNode("Distinguish greetings, thanks and farewells."));
+element2.append(element18);
+element2.append(document.createTextNode("\n    "));
+
+const element19 = document.createElement("dt");
+element19.append(document.createTextNode("Solution"));
+element2.append(element19);
+
+const element20 = document.createElement("dd");
+element20.append(document.createTextNode("Hello — Bonjour; Thank you — Merci; Goodbye — Au revoir."));
+element2.append(element20);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Rich content
+\documentclass{article}
+\begin{document}
+\wcTpMatchingQuestion{
+  \begin{description}
+    \item[{Title}] Identify the media
+    \item[{Prompt}] Associate each flag, sound or scene with its description.
+    \item[{Form}] \begin{itemize}
+      \item \wcTpIcon[name=lt,library=flags,size=3em,role=img,aria-label=Flag to identify]{}
+      \item Listen to the sound.
+      \wcAudio[controls,src=/docs/medias/audios/glass-break.mp3,aria-label=Sound to identify]{}
+      \item Watch the scene.
+      \wcVideo[controls,width=240,src=/docs/medias/videos/chute-eau.mp4,aria-label=Scene to identify]{}
+    \end{itemize}     \begin{enumerate}
+      \item Lithuania
+      \item Breaking glass
+      \item A waterfall
+    \end{enumerate}
+    \item[{Feedback}] Observe the flag colors and distinguish the sound from the scene.
+    \item[{Solution}] The flag represents Lithuania; the sound is breaking glass; the video shows a waterfall.
+  \end{description}
+}
+\end{document}
+
+% !tp-example External definition
+\documentclass{article}
+\begin{document}
+\wcTpMatchingQuestion[src=/docs/components/matching-question/examples/translations.json]{}
+\end{document}
+
+% !tp-example Irregular verbs
+\documentclass{article}
+\begin{document}
+\wcTpMatchingQuestion{
+  \begin{description}
+    \item[{Title}] Irregular verbs
+    \item[{Prompt}] Associate each verb with its past simple, past participle and French translation.
+    \item[{Form}] \wcTpMatching{
+      \begin{description}
+        \item[{Base form}] \begin{itemize}
+          \item be
+          \item have
+          \item do
+        \end{itemize}
+        \item[{Past simple}] \begin{enumerate}
+          \item was
+          \item had
+          \item did
+        \end{enumerate}
+        \item[{Past participle}] \begin{itemize}
+          \item been
+          \item had
+          \item done
+        \end{itemize}
+        \item[{French}] \begin{enumerate}
+          \item être
+          \item avoir
+          \item faire
+        \end{enumerate}
+      \end{description}
+    }
+    \item[{Feedback}] Check all four members of each group before submitting again.
+    \item[{Solution}] \begin{itemize}
+      \item be — was — been — être
+      \item have — had — had — avoir
+      \item do — did — done — faire
+    \end{itemize}
+  \end{description}
+}
+\end{document}
+
+% !tp-example Header list
+\documentclass{article}
+\begin{document}
+\wcTpMatchingQuestion[heading]{
+  \begin{description}
+    \item[{Prompt}] Match each expression with its translation.
+    \item[{Form}] \begin{itemize}
+      \item English
+      \item French
+    \end{itemize}     \begin{itemize}
+      \item Hello
+      \item Thank you
+      \item Goodbye
+    \end{itemize}     \begin{enumerate}
+      \item Bonjour
+      \item Merci
+      \item Au revoir
+    \end{enumerate}
+    \item[{Solution}] Hello — Bonjour; Thank you — Merci; Goodbye — Au revoir.
+  \end{description}
+}
+\end{document}

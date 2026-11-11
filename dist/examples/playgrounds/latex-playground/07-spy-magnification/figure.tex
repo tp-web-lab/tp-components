@@ -1,0 +1,13 @@
+\begin{tikzpicture}[scale=1.8,transform shape]
+  \begin{scope}
+    [spy using outlines={circle, magnification=3, size=2cm, connect spies}]
+
+    \draw [decoration=Koch curve type 1]
+      decorate{ decorate{ decorate{ (0,0) -- (2,0) }}};
+
+    \spy [red] on (1.6,0.3) in node (a) [left] at (3.5,-1.25);
+
+    \spy [blue, size=1cm] on (1,1) in node (b) [right] at (0,-1.25);
+  \end{scope}
+  \draw [ultra thick, green!50!black] (b) -- (a.north west);
+\end{tikzpicture}

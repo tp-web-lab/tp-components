@@ -20,7 +20,9 @@ import "../code-editor/code-editor.js";
 import "../icon/icon.js";
 import "../callout/callout.js";
 /**
- * @summary associates an ordered annotation list with numbered comments in a code editor.
+ * The custom `<tp-code-comment>` element associates an ordered annotation list with numbered comments in a code editor.
+ *
+ * @summary Associates an ordered annotation list with numbered comments in a code editor.
  * @tagname tp-code-comment
  * @attr {string} for = "" - Exact ID, without #, of the tp-code-editor to annotate.
  * @attr {boolean} open = false - Show the explanation list; code markers and tooltips remain available when absent.

@@ -12,7 +12,7 @@
 <li><a href="" aria-current="page">TpSlider</a></li></ul>
 <h1>Class TpSlider</h1></div>
 <section class="tsd-panel tsd-comment">
-<div class="tsd-comment tsd-typography"><p>Arranges children in a horizontally scrollable row with keyboard navigation.</p>
+<div class="tsd-comment tsd-typography"><p>The custom <code>&lt;tp-slider&gt;</code> element arranges content in a horizontally or vertically scrollable strip.</p>
 <p>Reactive attributes:</p>
 <ul>
 <li><code>slider-height</code></li>
@@ -25,7 +25,7 @@
 </div>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-example">
-<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="html"><span class="hl-3">&lt;</span><span class="hl-4">tp-box</span><span class="hl-1"> </span><span class="hl-6">style</span><span class="hl-1">=</span><span class="hl-7">&quot;max-inline-size: 28rem&quot;</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">tp-slider</span><span class="hl-1"> </span><span class="hl-6">scrollbar</span><span class="hl-1"> </span><span class="hl-6">item-width</span><span class="hl-1">=</span><span class="hl-7">&quot;10rem&quot;</span><span class="hl-1"> </span><span class="hl-6">gap</span><span class="hl-1">=</span><span class="hl-7">&quot;1rem&quot;</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;</span><span class="hl-1">First</span><span class="hl-3">&lt;/</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;</span><span class="hl-1">Second</span><span class="hl-3">&lt;/</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;</span><span class="hl-1">Third</span><span class="hl-3">&lt;/</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;</span><span class="hl-1">Fourth</span><span class="hl-3">&lt;/</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;/</span><span class="hl-4">tp-slider</span><span class="hl-3">&gt;</span><br/><span class="hl-3">&lt;/</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;</span>
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="html"><span class="hl-3">&lt;</span><span class="hl-4">tp-box</span><span class="hl-1"> </span><span class="hl-6">style</span><span class="hl-1">=</span><span class="hl-7">&quot;max-inline-size: 28rem&quot;</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">tp-slider</span><span class="hl-1"> </span><span class="hl-6">scrollbar</span><span class="hl-1">=</span><span class="hl-7">&quot;&quot;</span><span class="hl-1"> </span><span class="hl-6">item-width</span><span class="hl-1">=</span><span class="hl-7">&quot;10rem&quot;</span><span class="hl-1"> </span><span class="hl-6">gap</span><span class="hl-1">=</span><span class="hl-7">&quot;1rem&quot;</span><span class="hl-1"> </span><span class="hl-6">style</span><span class="hl-1">=</span><span class="hl-7">&quot;max-block-size: 8rem&quot;</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;</span><span class="hl-1">First</span><span class="hl-3">&lt;/</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;</span><span class="hl-1">Second</span><span class="hl-3">&lt;/</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;</span><span class="hl-1">Third</span><span class="hl-3">&lt;/</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;</span><span class="hl-1">Fourth</span><span class="hl-3">&lt;/</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;/</span><span class="hl-4">tp-slider</span><span class="hl-3">&gt;</span><br/><span class="hl-3">&lt;/</span><span class="hl-4">tp-box</span><span class="hl-3">&gt;</span>
 </code><button type="button">Copy</button></pre>
 
 </div>
@@ -33,22 +33,25 @@
 <h4 class="tsd-anchor-link" id="tagname">Tagname<a href="#tagname" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>tp-slider</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr">Attr<a href="#attr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>gap = &quot;1rem&quot; - Gap between items, using --tp-slider-gap when absent.</p>
+<h4 class="tsd-anchor-link" id="attr">Attr<a href="#attr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>orientation = &quot;horizontal&quot; - Scrolling direction. Vertical sliders need a bounded slider-height.</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-1">Attr<a href="#attr-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>item-width = &quot;auto&quot; - Preferred width of non-image items. By default, each item uses its own width or content-based size.</p>
+<h4 class="tsd-anchor-link" id="attr-1">Attr<a href="#attr-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>gap = &quot;1rem&quot; - Gap between items, using --tp-slider-gap when absent.</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-2">Attr<a href="#attr-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>slider-height = &quot;auto&quot; - Height of the scrolling area. By default, follows the content height.</p>
+<h4 class="tsd-anchor-link" id="attr-2">Attr<a href="#attr-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>item-width = &quot;auto&quot; - Preferred width of non-image items. By default, each item uses its own width or content-based size.</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-3">Attr<a href="#attr-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>scrollbar = false - Shows the scrollbar when present and hides it when absent, regardless of the attribute's text value.</p>
+<h4 class="tsd-anchor-link" id="attr-3">Attr<a href="#attr-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>slider-height = &quot;auto&quot; - Height of the scrolling area. By default, follows the content height.</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-4">Attr<a href="#attr-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>scrollbar-track-color = &quot;transparent&quot; - Scrollbar track color, using --tp-scrollbar-track-color when absent.</p>
+<h4 class="tsd-anchor-link" id="attr-4">Attr<a href="#attr-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>scrollbar = false - Shows the scrollbar when present and hides it when absent, regardless of the attribute's text value.</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-5">Attr<a href="#attr-5" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>scrollback-thumb-color = &quot;var(--tp-neutral-fill-mid)&quot; - Scrollbar thumb color, using --tp-scrollbar-thumb-color when absent. Defaults to the theme's neutral scrollbar color.</p>
+<h4 class="tsd-anchor-link" id="attr-5">Attr<a href="#attr-5" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>scrollbar-track-color = &quot;transparent&quot; - Scrollbar track color, using --tp-scrollbar-track-color when absent.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-6">Attr<a href="#attr-6" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>scrollback-thumb-color = &quot;var(--tp-neutral-fill-mid)&quot; - Scrollbar thumb color, using --tp-scrollbar-thumb-color when absent. Defaults to the theme's neutral scrollbar color.</p>
 </div>
 <div class="tsd-tag-keyboard">
 <h4 class="tsd-anchor-link" id="keyboard">Keyboard<a href="#keyboard" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Moves focus to the slider, then to its focusable children.</p>
@@ -57,7 +60,10 @@
 <h4 class="tsd-anchor-link" id="keyboard-1">Keyboard<a href="#keyboard-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Scrolls the focused slider left or right by 80% of its visible width.</p>
 </div>
 <div class="tsd-tag-keyboard">
-<h4 class="tsd-anchor-link" id="keyboard-2">Keyboard<a href="#keyboard-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Scrolls the focused slider to the start or end of its content, respecting text direction.</p>
+<h4 class="tsd-anchor-link" id="keyboard-2">Keyboard<a href="#keyboard-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Scrolls the focused vertical slider up or down by 80% of its visible height.</p>
+</div>
+<div class="tsd-tag-keyboard">
+<h4 class="tsd-anchor-link" id="keyboard-3">Keyboard<a href="#keyboard-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Scrolls the focused slider to the start or end of its content, respecting text direction.</p>
 </div>
 <div class="tsd-tag-cssprop">
 <h4 class="tsd-anchor-link" id="cssprop">Cssprop<a href="#cssprop" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>[--tp-slider-gap=1rem] Horizontal space between adjacent slider items.</p>
@@ -68,14 +74,14 @@
 <div class="tsd-tag-cssprop">
 <h4 class="tsd-anchor-link" id="cssprop-2">Cssprop<a href="#cssprop-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>[--tp-slider-native-scrollbar-size=0px] Measured native scrollbar thickness, written internally to reserve space without duplicating the browser gutter.</p>
 </div></div></section>
-<section class="tsd-panel tsd-hierarchy" data-refl="24246">
+<section class="tsd-panel tsd-hierarchy" data-refl="25891">
 <h4>Hierarchy (<a href="../hierarchy.html#components/slider/slider.TpSlider">View Summary</a>)</h4>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><a href="components_base.TpBase.html" class="tsd-signature-type tsd-kind-class">TpBase</a>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">TpSlider</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L44">tp-components/src/components/slider/slider.ts:44</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L46">tp-components/src/components/slider/slider.ts:46</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -89,6 +95,7 @@
 <h3 class="tsd-index-heading tsd-anchor-link" id="accessors">Accessors<a href="#accessors" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-index-list"><a href="#gap" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>gap</span></a>
 <a href="#itemwidth" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>item<wbr/>Width</span></a>
+<a href="#orientation" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>orientation</span></a>
 <a href="#overflowing" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>overflowing</span></a>
 <a href="#scrollbackthumbcolor" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>scrollback<wbr/>Thumb<wbr/>Color</span></a>
 <a href="#scrollbar" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>scrollbar</span></a>
@@ -137,7 +144,7 @@
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L130">tp-components/src/components/slider/slider.ts:130</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L158">tp-components/src/components/slider/slider.ts:158</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="gapgap-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">gap</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -147,7 +154,7 @@
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L134">tp-components/src/components/slider/slider.ts:134</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L162">tp-components/src/components/slider/slider.ts:162</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="itemwidth"><span>item<wbr/>Width</span><a href="#itemwidth" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -156,7 +163,7 @@
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L117">tp-components/src/components/slider/slider.ts:117</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L145">tp-components/src/components/slider/slider.ts:145</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="itemwidthitemwidth-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">itemWidth</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -166,7 +173,26 @@
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L121">tp-components/src/components/slider/slider.ts:121</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L149">tp-components/src/components/slider/slider.ts:149</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="orientation"><span>orientation</span><a href="#orientation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li>
+<div class="tsd-signature" id="orientationorientation"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">orientation</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;horizontal&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;vertical&quot;</span></div>
+<div class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">&quot;horizontal&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;vertical&quot;</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L122">tp-components/src/components/slider/slider.ts:122</a></li></ul></aside></div></li>
+<li>
+<div class="tsd-signature" id="orientationorientation-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">orientation</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;horizontal&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;vertical&quot;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">&quot;horizontal&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;vertical&quot;</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L128">tp-components/src/components/slider/slider.ts:128</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="overflowing"><span>overflowing</span><a href="#overflowing" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -175,7 +201,7 @@
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L177">tp-components/src/components/slider/slider.ts:177</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L205">tp-components/src/components/slider/slider.ts:205</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="scrollbackthumbcolor"><span>scrollback<wbr/>Thumb<wbr/>Color</span><a href="#scrollbackthumbcolor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -184,7 +210,7 @@
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L164">tp-components/src/components/slider/slider.ts:164</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L192">tp-components/src/components/slider/slider.ts:192</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="scrollbackthumbcolorscrollbackthumbcolor-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">scrollbackThumbColor</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -194,7 +220,7 @@
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L168">tp-components/src/components/slider/slider.ts:168</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L196">tp-components/src/components/slider/slider.ts:196</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="scrollbar"><span>scrollbar</span><a href="#scrollbar" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -203,7 +229,7 @@
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L143">tp-components/src/components/slider/slider.ts:143</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L171">tp-components/src/components/slider/slider.ts:171</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="scrollbarscrollbar-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">scrollbar</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -213,7 +239,7 @@
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L147">tp-components/src/components/slider/slider.ts:147</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L175">tp-components/src/components/slider/slider.ts:175</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="scrollbartrackcolor"><span>scrollbar<wbr/>Track<wbr/>Color</span><a href="#scrollbartrackcolor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -222,7 +248,7 @@
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L151">tp-components/src/components/slider/slider.ts:151</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L179">tp-components/src/components/slider/slider.ts:179</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="scrollbartrackcolorscrollbartrackcolor-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">scrollbarTrackColor</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -232,7 +258,7 @@
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L155">tp-components/src/components/slider/slider.ts:155</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L183">tp-components/src/components/slider/slider.ts:183</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="sliderheight"><span>slider<wbr/>Height</span><a href="#sliderheight" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -241,7 +267,7 @@
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L104">tp-components/src/components/slider/slider.ts:104</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L132">tp-components/src/components/slider/slider.ts:132</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="sliderheightsliderheight-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">sliderHeight</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -251,7 +277,7 @@
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L108">tp-components/src/components/slider/slider.ts:108</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L136">tp-components/src/components/slider/slider.ts:136</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="observedattributes"><code class="tsd-tag">Static</code><span>observed<wbr/>Attributes</span><a href="#observedattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -268,7 +294,7 @@ these via spread when they also want to react to <code>dir</code> and <code>lang
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <p>Overrides TpBase.observedAttributes</p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L93">tp-components/src/components/slider/slider.ts:93</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L110">tp-components/src/components/slider/slider.ts:110</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -286,7 +312,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#attributechangedcallback">attributeChangedCallback</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L192">tp-components/src/components/slider/slider.ts:192</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L222">tp-components/src/components/slider/slider.ts:222</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="capturehelpsource"><code class="tsd-tag">Protected</code><span>capture<wbr/>Help<wbr/>Source</span><a href="#capturehelpsource" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -296,7 +322,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#capturehelpsource">captureHelpSource</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L973">tp-components/src/components/base/base.ts:973</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L1022">tp-components/src/components/base/base.ts:1022</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="connectedcallback"><code class="tsd-tag">Protected</code><span>connected<wbr/>Callback</span><a href="#connectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -314,7 +340,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#connectedcallback">connectedCallback</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L181">tp-components/src/components/slider/slider.ts:181</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L211">tp-components/src/components/slider/slider.ts:211</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="disconnectedcallback"><span>disconnected<wbr/>Callback</span><a href="#disconnectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -323,7 +349,7 @@ attribute changes.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/slider/slider.ts#L197">tp-components/src/components/slider/slider.ts:197</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/slider/slider.ts#L227">tp-components/src/components/slider/slider.ts:227</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="ensurebasestyles"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Base<wbr/>Styles</span><a href="#ensurebasestyles" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -339,7 +365,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#ensurebasestyles">ensureBaseStyles</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L450">tp-components/src/components/base/base.ts:450</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L486">tp-components/src/components/base/base.ts:486</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="ensureglobalstyle"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Global<wbr/>Style</span><a href="#ensureglobalstyle" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -362,7 +388,7 @@ if it does not already exist.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#ensureglobalstyle">ensureGlobalStyle</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L469">tp-components/src/components/base/base.ts:469</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L505">tp-components/src/components/base/base.ts:505</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getbooleanattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>Boolean<wbr/>Attribute</span><a href="#getbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -386,7 +412,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getbooleanattribute">getBooleanAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L496">tp-components/src/components/base/base.ts:496</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L532">tp-components/src/components/base/base.ts:532</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getclosestskippingcontainers"><code class="tsd-tag">Protected</code><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span><a href="#getclosestskippingcontainers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -407,7 +433,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getclosestskippingcontainers">getClosestSkippingContainers</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L594">tp-components/src/components/base/base.ts:594</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L630">tp-components/src/components/base/base.ts:630</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getstringattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>String<wbr/>Attribute</span><a href="#getstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -429,7 +455,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getstringattribute">getStringAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L530">tp-components/src/components/base/base.ts:530</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L566">tp-components/src/components/base/base.ts:566</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="help"><span>help</span><a href="#help" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -444,7 +470,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#help">help</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L224">tp-components/src/components/base/base.ts:224</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L250">tp-components/src/components/base/base.ts:250</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="queryelement"><code class="tsd-tag">Protected</code><span>query<wbr/>Element</span><a href="#queryelement" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -470,7 +496,7 @@ the Vite component API plugin. A custom URL can be provided with
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#queryelement">queryElement</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L575">tp-components/src/components/base/base.ts:575</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L611">tp-components/src/components/base/base.ts:611</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="removeattributes"><code class="tsd-tag">Protected</code><span>remove<wbr/>Attributes</span><a href="#removeattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -488,7 +514,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#removeattributes">removeAttributes</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L560">tp-components/src/components/base/base.ts:560</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L596">tp-components/src/components/base/base.ts:596</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="setbooleanattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>Boolean<wbr/>Attribute</span><a href="#setbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -514,7 +540,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#setbooleanattribute">setBooleanAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L512">tp-components/src/components/base/base.ts:512</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L548">tp-components/src/components/base/base.ts:548</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="setstringattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>String<wbr/>Attribute</span><a href="#setstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -536,7 +562,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#setstringattribute">setStringAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L544">tp-components/src/components/base/base.ts:544</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L580">tp-components/src/components/base/base.ts:580</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -554,7 +580,7 @@ the Vite component API plugin. A custom URL can be provided with
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Constructors</summary>
 <div><a href="#constructor" class="tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor"><use href="../assets/icons.svg#icon-512"></use></svg><span>constructor</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Accessors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Accessors</summary>
-<div><a href="#gap"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>gap</span></a><a href="#itemwidth"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>item<wbr/>Width</span></a><a href="#overflowing"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>overflowing</span></a><a href="#scrollbackthumbcolor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>scrollback<wbr/>Thumb<wbr/>Color</span></a><a href="#scrollbar"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>scrollbar</span></a><a href="#scrollbartrackcolor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>scrollbar<wbr/>Track<wbr/>Color</span></a><a href="#sliderheight"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>slider<wbr/>Height</span></a><a href="#observedattributes"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>observed<wbr/>Attributes</span></a></div></details>
+<div><a href="#gap"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>gap</span></a><a href="#itemwidth"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>item<wbr/>Width</span></a><a href="#orientation"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>orientation</span></a><a href="#overflowing"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>overflowing</span></a><a href="#scrollbackthumbcolor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>scrollback<wbr/>Thumb<wbr/>Color</span></a><a href="#scrollbar"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>scrollbar</span></a><a href="#scrollbartrackcolor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>scrollbar<wbr/>Track<wbr/>Color</span></a><a href="#sliderheight"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>slider<wbr/>Height</span></a><a href="#observedattributes"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>observed<wbr/>Attributes</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Methods</summary>
 <div><a href="#attributechangedcallback" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>attribute<wbr/>Changed<wbr/>Callback</span></a><a href="#capturehelpsource" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>capture<wbr/>Help<wbr/>Source</span></a><a href="#connectedcallback" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>connected<wbr/>Callback</span></a><a href="#disconnectedcallback"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>disconnected<wbr/>Callback</span></a><a href="#ensurebasestyles" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Base<wbr/>Styles</span></a><a href="#ensureglobalstyle" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Global<wbr/>Style</span></a><a href="#getbooleanattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Boolean<wbr/>Attribute</span></a><a href="#getclosestskippingcontainers" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span></a><a href="#getstringattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>String<wbr/>Attribute</span></a><a href="#help" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>help</span></a><a href="#queryelement" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>query<wbr/>Element</span></a><a href="#removeattributes" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>remove<wbr/>Attributes</span></a><a href="#setbooleanattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Boolean<wbr/>Attribute</span></a><a href="#setstringattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>String<wbr/>Attribute</span></a></div></details></div></details></div>
 <div class="site-menu">

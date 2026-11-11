@@ -9,7 +9,7 @@ import { TpBase } from "../base/base.js";
  */
 type TpMenuOrientation = "horizontal" | "vertical";
 /**
- * Turns a nested list into a keyboard-accessible menu.
+ * The custom `<tp-menu>` element turns a nested list into a keyboard-accessible menu.
  *
  * Expected structure:
  *

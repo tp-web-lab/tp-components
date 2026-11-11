@@ -1,0 +1,41 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpSkeleton[label=Article layout preview]{
+  \wcScript[type=tp/html]|
+    <main>
+      <nav>Home · Articles · About</nav>
+      <h1>Building accessible interfaces</h1>
+      <p>An introduction to the article.</p>
+      <figure><img src="portrait.jpg" alt="Portrait"><figcaption>Caption</figcaption></figure>
+      <h2>Key ideas</h2>
+      <ul><li>Clear structure</li><li>Consistent interactions</li></ul>
+      <table><tr><th>Feature</th><th>Status</th></tr><tr><td>Keyboard</td><td>Ready</td></tr></table>
+      <blockquote>A useful quotation.</blockquote>
+    </main>
+  |
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/skeleton/skeleton.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-skeleton");
+element1.setAttribute("label", "Article layout preview");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/html");
+element2.textContent = "\n    \u003cmain>\n      \u003cnav>Home · Articles · About\u003c/nav>\n      \u003ch1>Building accessible interfaces\u003c/h1>\n      \u003cp>An introduction to the article.\u003c/p>\n      \u003cfigure>\u003cimg src=\"portrait.jpg\" alt=\"Portrait\">\u003cfigcaption>Caption\u003c/figcaption>\u003c/figure>\n      \u003ch2>Key ideas\u003c/h2>\n      \u003cul>\u003cli>Clear structure\u003c/li>\u003cli>Consistent interactions\u003c/li>\u003c/ul>\n      \u003ctable>\u003ctr>\u003cth>Feature\u003c/th>\u003cth>Status\u003c/th>\u003c/tr>\u003ctr>\u003ctd>Keyboard\u003c/td>\u003ctd>Ready\u003c/td>\u003c/tr>\u003c/table>\n      \u003cblockquote>A useful quotation.\u003c/blockquote>\n    \u003c/main>\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

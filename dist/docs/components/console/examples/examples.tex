@@ -1,0 +1,146 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[data-intro-action=console,data-allow-script]{
+  Inspect these example messages, then use Clear to empty the console.
+
+  \wcTpConsole{}
+  \wcP[data-demo-status,role=status]{}
+  \wcScript[src=/docs/components/_shared/introduction-actions.js]||
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/console/console.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.setAttribute("data-intro-action", "console");
+element1.setAttribute("data-allow-script", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("Inspect these example messages, then use Clear to empty the console."));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("tp-console");
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
+
+const element4 = document.createElement("p");
+element4.setAttribute("data-demo-status", "");
+element4.setAttribute("role", "status");
+element1.append(element4);
+element1.append(document.createTextNode("\n  "));
+
+const element5 = document.createElement("script");
+element5.setAttribute("src", "/docs/components/_shared/introduction-actions.js");
+element1.append(element5);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Values and tables
+\documentclass{article}
+\begin{document}
+\wcTpConsole[id=values-console]{}
+
+\wcScript|
+      {
+      const script = document.currentScript;
+      const output =
+        script?.closest('[data-role="output"]')?.querySelector('tp-console')
+        ?? script?.parentElement?.querySelector('tp-console');
+      customElements.whenDefined('tp-console').then(() => {
+      output.log('Primitive values', 42, true, null, undefined);
+      output.log('Nested object', {
+        name: 'Ada',
+        skills: ['math', 'programming'],
+        active: true,
+      });
+      output.table([
+        { name: 'Ada', score: 10 },
+        { name: 'Grace', score: 9 },
+      ]);
+      });
+      }
+    |
+\end{document}
+
+% !tp-example Groups and timers
+\documentclass{article}
+\begin{document}
+\wcTpConsole[id=group-console]{}
+
+\wcScript|
+      {
+      const script = document.currentScript;
+      const output =
+        script?.closest('[data-role="output"]')?.querySelector('tp-console')
+        ?? script?.parentElement?.querySelector('tp-console');
+      customElements.whenDefined('tp-console').then(() => {
+      output.group('Build');
+      output.log('Compile sources');
+      output.groupCollapsed('Details');
+      output.log({ files: 12, warnings: 0 });
+      output.groupEnd();
+      output.time('render');
+      output.timeLog('render', 'halfway');
+      output.timeEnd('render');
+      output.groupEnd();
+      });
+      }
+    |
+\end{document}
+
+% !tp-example Redirect global console
+\documentclass{article}
+\begin{document}
+\wcTpConsole[id=redirect-console]{}
+
+\wcScript|
+      {
+      const script = document.currentScript;
+      const output =
+        script?.closest('[data-role="output"]')?.querySelector('tp-console')
+        ?? script?.parentElement?.querySelector('tp-console');
+      customElements.whenDefined('tp-console').then(() => {
+      const restore = output.redirectConsoleToSelf();
+      console.log('Captured log');
+      console.warn('Captured warning');
+      console.error('Captured error');
+      restore();
+      });
+      }
+    |
+\end{document}
+
+% !tp-example Message levels
+\documentclass{article}
+\begin{document}
+\wcTpConsole[id=basic-console]{}
+
+\wcScript|
+      {
+      const script = document.currentScript;
+      const output =
+        script?.closest('[data-role="output"]')?.querySelector('tp-console')
+        ?? script?.parentElement?.querySelector('tp-console');
+      customElements.whenDefined('tp-console').then(() => {
+      output.log('Standard message');
+      output.info('Informative message', { type: 'info', count: 2 });
+      output.warn('Warning message');
+      output.error(new Error('Error message'));
+      });
+      }
+    |
+\end{document}

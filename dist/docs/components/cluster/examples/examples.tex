@@ -1,0 +1,75 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  \wcTpCluster[justify=center,gap=0.5rem]{
+    \wcTpButton{Alpha}
+    \wcTpButton{Beta}
+    \wcTpButton{Gamma}
+  }
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/button/button.js";
+import "/components/cluster/cluster.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.append(document.createTextNode("\n      "));
+
+const element2 = document.createElement("tp-cluster");
+element2.setAttribute("justify", "center");
+element2.setAttribute("gap", "0.5rem");
+element2.append(document.createTextNode("\n        "));
+
+const element3 = document.createElement("tp-button");
+element3.append(document.createTextNode("Alpha"));
+element2.append(element3);
+element2.append(document.createTextNode("\n        "));
+
+const element4 = document.createElement("tp-button");
+element4.append(document.createTextNode("Beta"));
+element2.append(element4);
+element2.append(document.createTextNode("\n        "));
+
+const element5 = document.createElement("tp-button");
+element5.append(document.createTextNode("Gamma"));
+element2.append(element5);
+element2.append(document.createTextNode("\n      "));
+element1.append(element2);
+element1.append(document.createTextNode("\n    "));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Space between
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  \wcTpCluster[justify=space-between]{
+    \wcTpBadge{Start}
+    \wcTpBadge{End}
+  }
+}
+\end{document}
+
+% !tp-example Wrapping items
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=max-inline-size: 16rem]{
+  \wcTpCluster[gap=0.5rem]{
+    \wcTpButton{One}
+    \wcTpButton{Two}
+    \wcTpButton{Three}
+    \wcTpButton{Four}
+  }
+}
+\end{document}

@@ -11,6 +11,8 @@ import "../sql-playground/sql-playground.js";
 import { TpSqlPlayground } from "../sql-playground/sql-playground.js";
 import type { TpSqlProject } from "../sql-playground/sql-project.js";
 /**
+ * The custom `<tp-sql-viewer>` element displays and runs one SQL example in a compact interface.
+ *
  * @tagname tp-sql-viewer
  * @summary Displays and runs one SQL example in a compact interface.
  * @attr {string} repository = "" - Directory containing a project to load.

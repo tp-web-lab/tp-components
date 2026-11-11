@@ -1,5 +1,5 @@
 [tp-asciidoc-viewer%allow-script,label="tp-compare"]
-=========
+========
 [script,type="tp/asciidoc"]
 ----
 .Basic usage
@@ -18,73 +18,39 @@ After: the updated design
 =====
 ======
 
-.Attributes
-========
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-[tp-stack]
+.Javascript API
 ======
-[tp-radio-list,data-setting="orientation",label="orientation",label-position="top",orientation="horizontal",value="1"]
+[script,type="module"]
 ====
-* horizontal
+import "/components/box/box.js";
+import "/components/compare/compare.js";
 
-* vertical
-====
+const example = document.createDocumentFragment();
 
-[tp-cluster]
-=====
-[tp-textfield%value%placeholder%clearable,data-setting="after-label",label="after-label"]
-====
-====
+const element1 = document.createElement("tp-compare");
+element1.setAttribute("position", "50%");
+element1.setAttribute("before-label", "Before");
+element1.setAttribute("after-label", "After");
+element1.setAttribute("style", "height: 12rem;");
+element1.append(document.createTextNode("\n  "));
 
-[tp-textfield%value%placeholder%clearable,data-setting="before-label",label="before-label"]
-====
-====
+const element2 = document.createElement("tp-box");
+element2.setAttribute("slot", "before");
+element2.setAttribute("style", "height: 100%; background: var(--tp-neutral-100);");
+element2.append(document.createTextNode("Before: the original design"));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
 
-[tp-textfield%value%placeholder%clearable,data-setting="position",label="position"]
-====
-====
+const element3 = document.createElement("tp-box");
+element3.setAttribute("slot", "after");
+element3.setAttribute("style", "height: 100%; background: var(--tp-brand-100);");
+element3.append(document.createTextNode("After: the updated design"));
+element1.append(element3);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-[tp-textfield%value%placeholder%clearable,data-setting="storage-key",label="storage-key"]
+document.body.append(example);
 ====
-====
-=====
-
-[tp-button-group]
-=====
-[tp-button,id="attributes-reset",type="button"]
-====
-Reset defaults
-====
-
-[tp-button,id="attributes-reload",type="button"]
-====
-Reload preview
-====
-=====
 ======
-
-[tp-divider]
-====
-====
-
-[h3]
-====
-Preview
-====
-
-[tp-iframe,id="attributes-frame",title="compare attribute preview",style="height: 24rem; display: flow-root; inline-size: auto;"]
-====
-====
-
-[tp-callout,id="attributes-status",variant="info",heading="Preview status"]
-====
-Preparing the preview…
-====
-
-[script,type="module",src="/docs/components/compare/examples/attributes.js"]
-====
-====
-========
 ----
-=========
+========

@@ -3,37 +3,36 @@
     <div role="example" label="Basic usage">
       <p>
         Build status: <tp-badge variant="success" pulse="">Ready</tp-badge>
-        <tp-badge outlined=""><tp-icon name="file_type_vite" library="languages"></tp-icon> Vite<tp-divider orientation="vertical"></tp-divider>8.1.5</tp-badge>
       </p>
     </div>
 
-    <div role="example" label="Attributes">
-      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
-      <tp-stack>
-      <tp-checkbox-list id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value=""><ul><li>outlined</li><li>pill</li><li>pulse</li></ul></tp-checkbox-list>
-      <tp-radio-list data-setting="size" label="size" label-position="top" orientation="horizontal" value="4"><ul><li>xxs</li><li>xs</li><li>s</li><li>m</li><li>l</li><li>xl</li><li>xxl</li></ul></tp-radio-list>
-      <tp-radio-list data-setting="variant" label="variant" label-position="top" orientation="horizontal" value="5"><ul><li>success</li><li>danger</li><li>warning</li><li>info</li><li>neutral</li><li>brand</li></ul></tp-radio-list>
-      <tp-cluster></tp-cluster>
-      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
-      </tp-stack>
-      <tp-divider></tp-divider>
-      <h3>Preview</h3>
-      <tp-iframe id="attributes-frame" title="badge attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;"></tp-iframe>
-      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/badge/badge.js";
 
-      <script type="module" src="/docs/components/badge/examples/attributes.js"></script>
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("p");
+      element1.append(document.createTextNode("\n  Build status: "));
+
+      const element2 = document.createElement("tp-badge");
+      element2.setAttribute("variant", "success");
+      element2.setAttribute("pulse", "");
+      element2.append(document.createTextNode("Ready"));
+      element1.append(element2);
+      element1.append(document.createTextNode("\n"));
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
     </div>
 
     <div role="example" label="With icon">
-      <p>Badges can contain inline content such as icons.</p>
-          <tp-badge variant="success" pill="">
-            <tp-icon name="check"></tp-icon>
-            Approved
-          </tp-badge>
-          <tp-badge variant="warning" pill="">
-            <tp-icon name="clock-outline"></tp-icon>
-            Waiting
-          </tp-badge>
+      <tp-badge outlined=""><tp-icon name="file_type_vite" library="languages"></tp-icon> Vite<tp-divider orientation="vertical"></tp-divider>8.1.5</tp-badge>
+    </div>
+
+    <div role="example" label="Status labels">
+      <tp-badge variant="success">Complete</tp-badge> <tp-badge variant="warning">Pending</tp-badge>
     </div>
   </template>
 </tp-html-viewer>

@@ -1,0 +1,32 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpAnimation[in=fadeIn,trigger=load,duration=800ms]{
+  \wcTpBox{Animated content}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/animation/animation.js";
+import "/components/box/box.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-animation");
+element1.setAttribute("in", "fadeIn");
+element1.setAttribute("trigger", "load");
+element1.setAttribute("duration", "800ms");
+element1.append(document.createTextNode("\n    "));
+
+const element2 = document.createElement("tp-box");
+element2.append(document.createTextNode("Animated content"));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

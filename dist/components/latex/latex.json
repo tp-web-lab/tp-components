@@ -1,0 +1,80 @@
+{
+  "tagname": "tp-latex",
+  "classname": "TpLatex",
+  "superclass": "TpBase",
+  "description": "Renders LaTeX documents, mathematical formulas and TikZ drawings.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-latex><script type=\"tp/latex\">\\section{A first document}\nThe area of a circle is $A=\\pi r^2$.</script></tp-latex>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "src",
+      "description": "URL of a LaTeX document; takes precedence over value and inline source.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "value",
+      "description": "LaTeX source; takes precedence over inline source when present.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-latex-error",
+      "emitted": true,
+      "description": "Emitted when loading or conversion fails.",
+      "detail": "{ message: string }"
+    },
+    {
+      "name": "tp-latex-rendered",
+      "emitted": true,
+      "description": "Emitted after document conversion. Nested formulas and figures may still be rendering.",
+      "detail": "{ html: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-math",
+      "summary": "renders LaTeX or AsciiMath expressions as inline or display-style SVG."
+    },
+    {
+      "name": "tp-tikz",
+      "summary": "Compiles TikZ drawings into SVG with Unicode text, colors and directional fading."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-latex",
+      "url": "https://www.npmjs.com/package/@tp/tp-latex",
+      "summary": "LaTeX.js conversion and patched TikZJax assets."
+    },
+    {
+      "name": "tp-latex",
+      "url": "https://www.npmjs.com/package/@tp/tp-latex",
+      "summary": "LaTeX.js conversion and patched TikZJax assets."
+    }
+  ],
+  "userHelp": {
+    "displayName": "LaTeX",
+    "introduction": "The custom `<tp-latex>` element renders LaTeX documents, mathematical formulas and TikZ drawings.",
+    "interactions": "",
+    "keyboard": []
+  }
+}

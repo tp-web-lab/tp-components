@@ -5,7 +5,9 @@ import { TpBase } from "../base/base.js";
 export type TpMathfieldMode = "latexmath" | "asciimath";
 export type TpMathfieldLabelPosition = "top" | "bottom" | "start" | "end";
 /**
- * @summary Mathematical expression field with live LaTeX or AsciiMath rendering.
+ * The custom `<tp-mathfield>` element provides a mathematical expression field with live LaTeX or AsciiMath rendering.
+ *
+ * @summary Provides a mathematical expression field with live LaTeX or AsciiMath rendering.
  * @tagname tp-mathfield
  * @attr {string} mode = "latexmath" - Mathematical notation (`latexmath` or `asciimath`).
  * @attr {boolean} multiline = false - Uses a multiline editor and display-style rendering.
@@ -24,7 +26,7 @@ export type TpMathfieldLabelPosition = "top" | "bottom" | "start" | "end";
  * @event input Emitted when the expression changes while editing.
  * @event change Emitted when the expression is committed or a different notation is selected in the menu.
  * @event tp-clear Emitted after the embedded button clears the expression.
-
+ *
  * @example
  * <tp-mathfield label="Formula" value="E = mc^2" clearable></tp-mathfield>
  * @cssprop [--tp-mathfield-inline-size=28rem] Preferred width of the math editor, limited by available space; also caps the multiline component width.

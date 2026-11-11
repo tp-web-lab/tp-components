@@ -1,5 +1,5 @@
 [tp-asciidoc-viewer%allow-script,label="tp-cryptarithm"]
-=========
+========
 [script,type="tp/asciidoc"]
 ----
 .Basic usage
@@ -9,59 +9,22 @@
 ====
 ======
 
-.Attributes
-========
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-[tp-stack]
+.Javascript API
 ======
-[tp-cluster]
-=====
-[tp-textfield%value%placeholder%clearable,data-setting="equation",label="equation"]
+[script,type="module"]
 ====
-====
+import "/components/cryptarithm/cryptarithm.js";
 
-[tp-textfield%value%placeholder%clearable,data-setting="solution",label="solution"]
-====
-====
-=====
+const example = document.createDocumentFragment();
 
-[tp-button-group]
-=====
-[tp-button,id="attributes-reset",type="button"]
-====
-Reset defaults
-====
+const element1 = document.createElement("tp-cryptarithm");
+element1.setAttribute("equation", "SEND + MORE = MONEY");
+element1.setAttribute("solution", "9567 + 1085 = 10652");
+example.append(element1);
 
-[tp-button,id="attributes-reload",type="button"]
+document.body.append(example);
 ====
-Reload preview
-====
-=====
 ======
-
-[tp-divider]
-====
-====
-
-[h3]
-====
-Preview
-====
-
-[tp-iframe,id="attributes-frame",title="cryptarithm attribute preview",style="height: 24rem; display: flow-root; inline-size: auto;"]
-====
-====
-
-[tp-callout,id="attributes-status",variant="info",heading="Preview status"]
-====
-Preparing the preview…
-====
-
-[script,type="module",src="/docs/components/cryptarithm/examples/attributes.js"]
-====
-====
-========
 
 .UN + UN + NEUF = ONZE
 ======
@@ -84,4 +47,4 @@ Preparing the preview…
 =====
 ======
 ----
-=========
+========

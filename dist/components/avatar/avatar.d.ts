@@ -18,6 +18,8 @@ export type TpAvatarShape = "circle" | "square";
 /** Supported avatar sizes. */
 export type TpAvatarSize = TpSizeType;
 /**
+ * The custom `<tp-avatar>` element displays an image, initials or an icon in a circle or square.
+ *
  * @summary Displays an image, initials or an icon in a circle or square.
  * @tagname tp-avatar
  * @attr {string} src = "" - Image URL; falls back to initials or an icon if loading fails.

@@ -1,22 +1,71 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="xy-plot" library="components" size="1.25em"></tp-icon> XY plot
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-xy-plot>` element implements the <tp-icon name="xy-plot" library="components" size="1.25em"></tp-icon> XY plot functionality: xY graph rendering component.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-xy-plot>` element plots functions, points and curves on labelled coordinate axes.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-xy-plot label="Functions">
-  <script type="tp/xy-plot">
-    label = "Functions"
-    x-axis = [-10, 10]
-    y-axis = [-5, 5]
-    curve Sine = function(x, 2*sin(x))
-    curve Line = function(x, x/2)
-  </script>
-</tp-xy-plot>
+    <script type="tp/xy-plot">
+label = "Functions"
+x-axis = [-10, 10]
+y-axis = [-5, 5]
+curve Sine = function(x, 2*sin(x))
+curve Line = function(x, x/2)
+</script>
+  </tp-xy-plot>
+<!-- tp-docgen:introduction:end -->
 
-The title **Functions** appears at the left of the toolbar. Use the bottom-left **Code** button to open **Graph definition** in place of the curves to use the `.txt` file menu, F1, Reset definition and Play.
+</div>
 
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-xy-plot" src="/docs/components/xy-plot/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
+
+### Initial content
+
+::: tp-tabs
+no content
+: ```html
+  <tp-xy-plot></tp-xy-plot>
+  ```
+
+internal script
+: ```html
+  <tp-xy-plot label="Functions">
+      <script type="tp/xy-plot">
+  label = "Functions"
+  x-axis = [-10, 10]
+  y-axis = [-5, 5]
+  curve Sine = function(x, 2*sin(x))
+  curve Line = function(x, x/2)
+  </script>
+    </tp-xy-plot>
+  ```
+
+external file
+: ```html
+  <tp-xy-plot src="/docs/components/xy-plot/examples/initial-content.txt"></tp-xy-plot>
+  ```
+:::
 
 ### Shared points, vectors and title
 
@@ -33,44 +82,9 @@ Use `label = "..."` (or `title = "..."`) for the figure title. A nonempty HTML `
 
 XY plot defaults to `xyFunctionGraph` when a source starts with these shared declarations. Its usual graph header and axis/curve directives can still be added. Existing `title "..."`, `points [...]` and `vectors [...]` definitions remain supported and can coexist with shared declarations, using distinct object names and only one title. Graph settings preserve shared point/vector declarations; their editors accept declaration lines in this mode.
 
-
 Set `style="--tp-plot-height:440px"` to give the normal plot a fixed height, including its top and bottom controls. Both plot components support this property, so figures in cards can share the same height. Settings and other authoring panels remain outside this area; the enlarged view keeps its own dimensions. The code view scrolls within the available area. Omit the property to keep automatic sizing.
 
 Use `label="My graph"` to display a title at the left of the view toolbar, including in the enlarged view. The source `title` directive is used when `label` is empty. The title appears only in the toolbar, never inside the SVG. Changing `label` preserves the graph, viewport and editor draft. The top right contains Save image, Theme, then Zoom graph. The bottom left contains Code; the bottom right contains Undo, Redo, Zoom out (−), then Zoom in (+). This layout is shared by the normal and enlarged views. Interactive settings, when enabled, appear below this block.
-
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Zoom in (+) / Zoom out (−) | Magnify or widen the coordinate ranges around the graph center, in both the preview and enlarged view. Keep the current animation step. |
-| Save image | Save the current graph view as SVG, PNG or WebP, with its visible axes, grid, animation step and theme colors. |
-| Theme | Choose Light, Dark or Auto for this plot only; the enlarged view shares the same theme. |
-| Code (`</>`) | Replace the curves with Graph definition, or return to the curves, in either view. Draft edits are preserved; Play applies them. Closing zoom restores the previous normal view. |
-| Undo / Redo | Undo or redo an applied definition change (Play, file load, interactive settings or Reset). A new change clears the redo history. View navigation is independent. |
-| Drag the graph (mouse or touch) | Move the drawing horizontally and vertically. Center a point of interest before zooming in. |
-| Settings fields | Update the graph and enlarged view; invalid entries retain the last valid graph and show feedback. |
-| Start / Previous / Next / End | Return to zero revealed objects, hide the last revealed object, reveal the next object, or reveal all objects. The counter shows the current step and total. |
-| Graph definition | Expand or collapse the editable source in the code view, with or without settings. |
-| Graph definition > Files | Load a `.txt` definition, Save the draft, or Save as a new file. Valid loads update the graph and settings; invalid files preserve the current graph. |
-| Graph definition > F1 / Reset definition / Play | Toggle the editor toolbar / discard draft edits and restore the displayed graph definition / validate and apply the edited definition. |
-| Reset | Restore the original graph definition and settings. |
-| Zoom graph (outward arrows) | Open the enlarged graph. |
-| Close zoomed graph (inward arrows) | Close the enlarged graph and return to the preview. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| <kbd>F1</kbd> in Graph definition | Show or hide the source editor toolbar. |
-| <kbd>ArrowUp</kbd> / <kbd>ArrowDown</kbd>, <kbd>Home</kbd> / <kbd>End</kbd> in the file menu | Navigate Load, Save and Save as; <kbd>Enter</kbd>/<kbd>Space</kbd> activates an action and <kbd>Escape</kbd> closes the menu. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button, including Code, Undo, Redo, Zoom in, Zoom out and Reset. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> on the focused graph | Move the drawing in the arrow direction by 10% of the visible range. |
-| <kbd>Home</kbd> on the focused graph | Restore the original scale and position. |
-| <kbd>Escape</kbd> | Close the enlarged graph. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
 
 ### Assignment syntax
 
@@ -146,11 +160,11 @@ This sequence has **three steps**: A, then both curves f1 and f2, then B. At `0 
 
 Names must exist and occur only once across the entire sequence. Empty names, empty groups and deeper nesting are rejected. Lists may span multiple lines. Omitting `anim`, or using `anim = []`, displays everything without animation controls. Applying a new definition restarts at step zero.
 
-### Author directives
+### Authoring
 
 A graph is a text definition, supplied in a `<script type="tp/xy-plot">` inside the component, as plain inline text, or through the component's `src` attribute. Named curves infer the graph kind; an optional first-line header selects it explicitly. Subsequent declarations define settings and objects. These are graph-language directives, not HTML attributes.
 
-#### Graph kind and coordinates
+### Graph kind and coordinates
 
 | First line | Curves | Expression variable | Default sampling domain |
 | --- | --- | --- | --- |
@@ -160,7 +174,7 @@ A graph is a text definition, supplied in a `<script type="tp/xy-plot">` inside 
 
 `x-axis` and `y-axis` always describe the visible Cartesian coordinate ranges, including for polar and parametric graphs.
 
-#### Available declarations
+### Available declarations
 
 For each item, the common syntax appears first and the legacy equivalent directly below it. Legacy forms remain readable; all declarative examples use the common syntax.
 
@@ -189,7 +203,7 @@ For each item, the common syntax appears first and the legacy equivalent directl
 
 Axis positions must be finite and within the visible range. Without explicit positions, ticks and labels stay on the bottom and left edges, with zero axes drawn when visible. Points outside the visible ranges are not drawn. Legacy point lists additionally support label offsets; legacy vector lists additionally support vector line styles. These options do not yet have equivalents in the shared point/vector declarations.
 
-#### Curves and optional intervals
+### Curves and optional intervals
 
 ```text
 curve Sine = function(x, sin(x))
@@ -211,7 +225,7 @@ curve Arc = parametric(t, 2*cos(t), 2*sin(t), range=[0, PI])
 
 Intervals must be finite and strictly increasing. Cartesian intervals are intersected with the visible horizontal range; polar and parametric curves otherwise use their global parameter range. Keep each named declaration on one line.
 
-#### Line styles
+### Line styles
 
 Place the style after the curve call: `solid` (default), `dashed`, `dotted` or `dash-dot`. The legend uses the same style.
 
@@ -220,7 +234,7 @@ curve Sine = function(x, sin(x)) style=dashed
 curve Cosine = function(x, cos(x), range=[0, PI]) style=dotted
 ```
 
-#### Vectors
+### Vectors
 
 Vectors reference two points. Changing an endpoint and applying the source recomputes every vector using that point. They may accompany curves or be displayed alone.
 
@@ -236,7 +250,7 @@ vector v = vector(A, B)
 
 Vectors are clipped to the visible plot; a zero-length vector appears as a dot. Edit the endpoint coordinates in the settings panel.
 
-#### Mathematical expressions
+### Mathematical expressions
 
 Curve expressions, range bounds, ticks, axis positions and point coordinates/offsets accept arithmetic (`+`, `-`, `*`, `/`, `**`, parentheses), constants `PI` and `E`, and these functions:
 
@@ -244,7 +258,7 @@ Curve expressions, range bounds, ticks, axis positions and point coordinates/off
 
 Angles are in radians; `log` is the natural logarithm. Write powers as `x*x`, `x**2`, or `pow(x, 2)`, not `x^2`. Only curve expressions have access to their variable (`x` or `t`). For `samples`, use a plain integer. Invalid or non-finite curve samples are skipped.
 
-#### Complete Cartesian example
+### Complete Cartesian example
 
 ```html
 <tp-xy-plot>
@@ -274,52 +288,7 @@ The **Graph definition** disclosure is always available for declarative graphs, 
 
 **Reset** restores the original inline or loaded definition. Changing `src` establishes a new original definition; hiding the panel or removing `settings` retains the current graph. Settings are local to each component. The panel supports declarative graphs; it is unavailable for numeric series supplied with `setData()`, whose Code button is disabled. Interactive sampling is limited to 4096 samples per curve, or the original sample count if higher.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Read the Functions label at the left of the toolbar. Use the bottom-left Code button to edit, load or save the source and try F1, Reset definition and Play.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Author directives
-: Use the settings below the graph to change the graph kind, axes, grid, curves and points. Use Code at the bottom left to edit the source, load or save a .txt file, toggle the editor toolbar with F1 and apply with Play.
-
-Numeric data (setData)
-: Plot numerical elevation measurements with setData(), a dashed reference line and a labelled marker. Add measurements to update the same graph and its automatic axis ranges, then use Reset to restore the initial data.
-
-Line styles and vectors
-: Compare solid, dashed, dotted and dash-dot curves with their legend samples and a displacement vector. Use the settings below the graph to edit curve styles, vector endpoints or curve intervals.
-
-Vectors only
-: Inspect two successive displacement vectors and their resultant without any function curves. Edit their endpoint coordinates in the settings below the graph.
-
-Step-by-step reveal
-: Use Next to reveal A, both curves f1 and f2 together, B, then vector u. Previous hides an entire step; the counter counts four steps and the reference curve stays visible.
-
-Shared points and vectors
-: Change a point and press Play to update its vector. Try the axis, grid and sampling assignments; the title, point and vector declarations are also accepted by Geometry.
-
-Named curves
-: Compare Cartesian, polar and parametric named curves. Open Code, edit an expression, range or style, then press Play; the interactive settings preserve the named syntax.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
+### Programming notes
 
 ```js
 plot.anim();                    // Get comma-separated names, or JSON for grouped steps.
@@ -335,415 +304,13 @@ Pass an array for grouped steps, for example `plot.anim(["A", ["f1", "f2"], "B"]
 
 Whitespace around names is ignored. Names must be unique and match object labels. The JavaScript sequence overrides the source `anim` directive and persists across rerenders. It can be set before connection. Previous and Next stop at the sequence boundaries. The buttons use these same methods.
 
-
 Call `setData({ title, xLabel, yLabel, series })` to plot numeric measurements without converting them into mathematical expressions. Each series contains a `label` and an array of finite `{ x, y }` points; optional `lineStyle` selects `solid`, `dashed`, `dotted`, or `dash-dot` for both the curve and legend. The existing `dashed: true` shorthand remains supported; an explicit `lineStyle` takes precedence. Separate series are never joined; a series with one point is shown as an isolated sample. Axis ranges are derived from the data. An optional `points` array adds labelled markers (`{ x, y, label, dx?, dy? }`), with label offsets in SVG pixels. An optional `vectors` array accepts `{ label, x, y, dx, dy, lineStyle? }`; both vector origins and endpoints contribute to automatic axis ranges. Use `series: []` to show only vectors. The data can be supplied before connection or updated later; setting `src` returns to declarative source rendering. `tp-map` uses this API for GPX elevation profiles and their minimum/maximum markers.
 
-### API
-<!-- tp-docgen:api TpXYPlot -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>axis</code> | <code>&quot;both&quot; \| &quot;horizontal&quot; \| &quot;vertical&quot; \| &quot;none&quot;</code> | <code>&quot;both&quot;</code> | Visible axes and their ticks. |
-  | <code>grid</code> | <code>&quot;both&quot; \| &quot;horizontal&quot; \| &quot;vertical&quot; \| &quot;none&quot;</code> | <code>&quot;both&quot;</code> | Visible grid directions; overrides the graph directive when present. |
-  | <code>label</code> | <code>string</code> | <code>&quot;&quot;</code> | Title displayed at the left of the view toolbar. |
-  | <code>no-legend</code> | <code>boolean</code> | <code>false</code> | Hides curve legends. |
-  | <code>settings</code> | <code>boolean</code> | <code>false</code> | Shows interactive settings below the graph and its controls. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a text file containing the XY graph definition; used instead of the inline tp/xy-plot script. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-xy-plot>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>anim</code> | <code>anim(): string</code> | With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value. |
-  | <code>anim</code> | <code>anim(names: string \| XYAnimationStep[]): void</code> | With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value. |
-  | <code>anim</code> | <code>anim(names?: string \| XYAnimationStep[]): string \| undefined</code> | With no argument, returns the reveal sequence as text (JSON for grouped steps). With names, replaces it from comma-separated names, JSON or a step array; the setter returns no value. |
-  | <code>exportSvg</code> | <code>exportSvg(): string</code> | Exports the displayed graph with its current viewport, visibility and theme colors. |
-  | <code>goToEnd</code> | <code>goToEnd(): void</code> | Reveals all objects in the reveal sequence. |
-  | <code>goToStart</code> | <code>goToStart(): void</code> | Hides all objects in the reveal sequence. |
-  | <code>next</code> | <code>next(): void</code> | Reveals the next object; stops at the end. |
-  | <code>previous</code> | <code>previous(): void</code> | Hides the last revealed object; stops at the start. |
-  | <code>setData</code> | <code>setData(data: TpXYPlotData): void</code> | Renders numeric series with automatic axis ranges; separate series preserve gaps. |
-  [Public methods of `TpXYPlot`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-xy-plot>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-plot-height</code> | <code>auto</code> | Height of the normal plot including its top and bottom controls; settings remain below. |
-  [CSS properties of `<tp-xy-plot>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_xy-plot.TpXYPlot.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
-
-::: tp-tabs
-script
-: Autoloading:
-
-  ```html
-  <script type="module" src="tp-loader.js"></script>
-  ```
-
-  Cherry picking:
-
-  ```html
-  <script type="module" src="/path/to/components/xy-plot/xy-plot.js"></script>
-  ```
-
-import
-: ```js
-  import "/path/to/components/xy-plot/xy-plot.js";
-  ```
-
-bundler
-: ```js
-  import "@tp/tp-components/components/xy-plot/xy-plot.js";
-  ```
-:::
-
-<!-- tp-docgen:dependencies:start -->
-## Dependencies
-
-### Internal
-
-All tp-components used by `<tp-xy-plot>` are loaded automatically by this component if they have not already been loaded by another component.
-
-<!--
-@tp-dependency tp-base
-@summary Shared base class for tp-* components.
--->
-<!--
-@tp-dependency tp-icon-button
-@summary Accessible icon button component.
--->
-<!--
-@tp-dependency tp-save-image
-@summary Downloads an anchored image as SVG, PNG or WebP.
--->
-<!--
-@tp-dependency tp-theme
-@summary Parent-scoped light/dark/auto theme controller with embedded UI.
--->
-
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-save-image>`](../save-image/index.md) : Downloads an anchored image as SVG, PNG or WebP.
-- [`<tp-theme>`](../theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
-
-### External
-
-<!--
-@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
-@summary Shared parsers, games and rendering utilities.
--->
-
-- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
-<!-- tp-docgen:dependencies:end -->
-
-## Appendix: EBNF grammar
+### Appendix: EBNF grammar
 
 This appendix specifies the documented source language accepted by `tp-xy-plot`, using only the common syntax. Older forms remain accepted by the parser but are intentionally excluded from this grammar. It describes authoring syntax, not the JavaScript `setData()` API. Historical parser tolerances (such as ignoring some unknown lines) are not part of this grammar. The semantic rules below are required in addition to the EBNF.
 
-### Source comments
+#### Source comments
 
 HTML-style comments `<!-- … -->` are ignored outside quoted strings. They may appear before the header, on their own lines, inside an animation list, or after a declaration, and may span several lines. The first `-->` closes the comment; comments do not nest. An unclosed comment produces an error. Comments act as whitespace and preserve line boundaries, so they cannot join tokens or split a single-line declaration across lines. Markers inside strings remain literal text.
 
@@ -754,7 +321,7 @@ commentText = ? any characters, including newlines, up to the first --> ? ;
 
 Comments are removed before applying the document grammar below. In HTML, put source in `<script type="tp/xy-plot">` to preserve comments when editing or saving the source; comments written directly as HTML child nodes are handled by the browser.
 
-### Notation and line structure
+#### Notation and line structure
 
 In the following grammar, `=` defines a production, `,` concatenates elements, `|` separates alternatives, `[ … ]` means optional, and `{ … }` means zero or more repetitions. Quoted text is literal; `? … ?` describes a lexical token. A semicolon ends an EBNF production; it is **not** a source-language separator.
 
@@ -771,7 +338,7 @@ lineEnd = ? logical line boundary ? ;
 
 The header is optional when the first declaration is `label =`, `title =`, `point`, `vector`, `curve`, or a setting written with `=`. Without a header, named curves determine the graph kind; otherwise it defaults to Cartesian. All curves in a document must use the same coordinate kind, consistent with any explicit header.
 
-### Common declarations and settings
+#### Common declarations and settings
 
 ```ebnf
 titleDeclaration = ( "label" | "title" ), "=", jsonString ;
@@ -806,7 +373,7 @@ range = "[", scalar, ",", scalar, "]" ;
 
 The constructor `function` selects Cartesian coordinates, `polar` selects polar coordinates, and `parametric` selects parametric coordinates. Polar expressions use the variable `t`; `theta-axis` sets its interval and `t-axis` is an alias in polar graphs. Parametric graphs use `t-axis`. Angles in mathematical expressions are in radians; there are no `deg` suffixes.
 
-### Expressions and lexical tokens
+#### Expressions and lexical tokens
 
 The expression grammar below describes the supported arithmetic subset. Function calls may be nested. `**` denotes exponentiation and associates to the right; `^` and `%` are not supported. A negative base must be parenthesized before exponentiation: `(-2)**2`. Avoid adjacent unary signs such as `--2`, which JavaScript interprets as an increment/decrement operator.
 
@@ -841,7 +408,7 @@ plainCharacter = ? any character except double quote, CR, or LF; no escape proce
 
 Names and keywords are case-sensitive. Named declarations use identifiers such as `A`, `f1`, or `velocity_2`. `label`, `title` assignments and `anim` use JSON strings; legends use plain double-quoted strings. Arrays do not have trailing commas.
 
-### Semantic rules and current limits
+#### Semantic rules and current limits
 
 - Scalar contexts (coordinates, ticks, ranges and axis crossings) use constants and mathematical functions, without `x` or `t`. Their results must be finite. Curve expressions use only `x` for Cartesian graphs or `t` for polar/parametric graphs. Object names do not introduce mathematical variables or callable functions.
 - Every range has two finite bounds with the lower bound strictly smaller than the upper bound. `samples` is an integer of at least two. `x-axis-at` is a y-coordinate within `y-axis`; `y-axis-at` is an x-coordinate within `x-axis`.
@@ -850,7 +417,7 @@ Names and keywords are case-sensitive. Named declarations use identifiers such a
 - A document must define at least one curve, point or vector. A points-only or vectors-only construction is valid.
 - Semicolon-separated declarations, user-defined variables/functions, and geometry constructions such as circles or intersections are not supported by this language. The shared syntax with `tp-graph-geometry` covers titles, free points and vectors; it does not make the two languages interchangeable.
 
-### Complete example
+#### Complete example
 
 This source uses the common syntax and reveals `A`, then both curves in the same step, then `B` and finally the vector. `O` remains visible because it is not listed in `anim`.
 
@@ -869,3 +436,119 @@ curve f1 = function(x, sin(x), range=[-PI, PI])
 curve f2 = function(x, cos(x), range=[-PI, PI]) style=dashed
 anim = ["A", ["f1", "f2"], "B", "u"]
 ```
+
+### Importing
+
+::: tp-tabs
+script
+: Autoloading:
+
+  ```html
+  <script type="module" src="tp-loader.js"></script>
+  ```
+
+  Cherry picking:
+
+  ```html
+  <script type="module" src="/path/to/components/xy-plot/xy-plot.js"></script>
+  ```
+
+import
+: ```js
+  import "/path/to/components/xy-plot/xy-plot.js";
+  ```
+
+bundler
+: ```js
+  import "@tp/tp-components/components/xy-plot/xy-plot.js";
+  ```
+:::
+
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Read the Functions label at the left of the toolbar. Use the bottom-left Code button to edit, load or save the source and try F1, Reset definition and Play.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Author directives
+: Use the settings below the graph to change the graph kind, axes, grid, curves and points. Use Code at the bottom left to edit the source, load or save a .txt file, toggle the editor toolbar with F1 and apply with Play.
+
+Numeric data (setData)
+: Plot numerical elevation measurements with setData(), a dashed reference line and a labelled marker. Add measurements to update the same graph and its automatic axis ranges, then use Reset to restore the initial data.
+
+Line styles and vectors
+: Compare solid, dashed, dotted and dash-dot curves with their legend samples and a displacement vector. Use the settings below the graph to edit curve styles, vector endpoints or curve intervals.
+
+Vectors only
+: Inspect two successive displacement vectors and their resultant without any function curves. Edit their endpoint coordinates in the settings below the graph.
+
+Step-by-step reveal
+: Use Next to reveal A, both curves f1 and f2 together, B, then vector u. Previous hides an entire step; the counter counts four steps and the reference curve stays visible.
+
+Shared points and vectors
+: Change a point and press Play to update its vector. Try the axis, grid and sampling assignments; the title, point and vector declarations are also accepted by Geometry.
+
+Named curves
+: Compare Cartesian, polar and parametric named curves. Open Code, edit an expression, range or style, then press Play; the interactive settings preserve the named syntax.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
+<!-- tp-docgen:dependencies:start -->
+## Dependencies
+
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
+
+### Internal
+
+<!--
+@tp-dependency tp-base
+@summary Shared base class for tp-* components.
+-->
+<!--
+@tp-dependency tp-icon-button
+@summary Accessible icon button component.
+-->
+<!--
+@tp-dependency tp-save-image
+@summary Downloads an anchored image as SVG, PNG or WebP.
+-->
+<!--
+@tp-dependency tp-theme
+@summary Parent-scoped light/dark/auto theme controller with embedded UI.
+-->
+
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-save-image>`](#/components/save-image/index.md) : Downloads an anchored image as SVG, PNG or WebP.
+- [`<tp-theme>`](#/components/theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
+
+### External
+
+<!--
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
+-->
+
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
+<!-- tp-docgen:dependencies:end -->

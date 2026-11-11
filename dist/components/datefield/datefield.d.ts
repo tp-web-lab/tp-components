@@ -6,7 +6,9 @@ import "../icon-button/icon-button.js";
 import { TpBase } from "../base/base.js";
 export type TpDatefieldLabelPosition = "top" | "bottom" | "start" | "end";
 /**
- * @summary Native date field with labels, constraints, picker access, and clearing.
+ * The custom `<tp-datefield>` element collects a date within optional limits.
+ *
+ * @summary Collects a date within optional limits.
  * @tagname tp-datefield
  * @attr {string} label = "" - Visible label associated with the native date input.
  * @attr {string} label-position = "top" - Label position (`top`, `bottom`, `start`, or `end`).

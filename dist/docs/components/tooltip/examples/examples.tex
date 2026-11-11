@@ -1,0 +1,55 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[data-intro-action=tooltip,data-allow-script]{
+  \wcTpButton[id=intro-tooltip-trigger,data-demo-trigger]{Hover or focus for help}
+  \rawhtml|<tp-tooltip anchor="#intro-tooltip-trigger">This help also appears when the trigger receives keyboard focus.</tp-tooltip>|
+  \wcP[data-demo-status,role=status]{Try the tooltip using its trigger.}
+  \wcScript[src=/docs/components/_shared/introduction-actions.js]||
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/button/button.js";
+import "/components/tooltip/tooltip.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.setAttribute("data-intro-action", "tooltip");
+element1.setAttribute("data-allow-script", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("tp-button");
+element2.setAttribute("id", "intro-tooltip-trigger");
+element2.setAttribute("data-demo-trigger", "");
+element2.append(document.createTextNode("Hover or focus for help"));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("tp-tooltip");
+element3.setAttribute("anchor", "#intro-tooltip-trigger");
+element3.append(document.createTextNode("This help also appears when the trigger receives keyboard focus."));
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
+
+const element4 = document.createElement("p");
+element4.setAttribute("data-demo-status", "");
+element4.setAttribute("role", "status");
+element4.append(document.createTextNode("Try the tooltip using its trigger."));
+element1.append(element4);
+element1.append(document.createTextNode("\n  "));
+
+const element5 = document.createElement("script");
+element5.setAttribute("src", "/docs/components/_shared/introduction-actions.js");
+element1.append(element5);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

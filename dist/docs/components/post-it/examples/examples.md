@@ -1,4 +1,4 @@
-::::::: tp-markdown-viewer { label="tp-post-it" allow-script style="--tp-markup-viewer-frame-min-height: 32rem" }
+::::::: tp-markdown-viewer { label="tp-post-it" allow-script }
 :::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-box { style="min-block-size: 20rem" }
@@ -14,95 +14,55 @@ Keep examples **simple and meaningful**.
 ::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/box/box.js";
+import "/components/post-it/post-it.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- lite
-:::
+const example = document.createDocumentFragment();
 
-::: tp-radio-list { data-setting="color" label="color" label-position="top" orientation="horizontal" value="5" }
-- default
+const element1 = document.createElement("tp-box");
+element1.setAttribute("style", "min-block-size: 20rem");
+element1.append(document.createTextNode("\n  "));
 
-- red
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("Drag the note by its header to move it over the page. The pin folds and opens it."));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
 
-- orange
+const element3 = document.createElement("tp-post-it");
+element3.setAttribute("heading", "Remember");
+element3.append(document.createTextNode("\n    "));
 
-- amber
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("Keep examples "));
 
-- yellow
+const element5 = document.createElement("strong");
+element5.append(document.createTextNode("simple and meaningful"));
+element4.append(element5);
+element4.append(document.createTextNode("."));
+element3.append(element4);
+element3.append(document.createTextNode("\n    "));
 
-- lime
+const element6 = document.createElement("ul");
+element6.append(document.createTextNode("\n      "));
 
-- green
+const element7 = document.createElement("li");
+element7.append(document.createTextNode("Show a useful result."));
+element6.append(element7);
+element6.append(document.createTextNode("\n      "));
 
-- emerald
+const element8 = document.createElement("li");
+element8.append(document.createTextNode("Try the keyboard controls."));
+element6.append(element8);
+element6.append(document.createTextNode("\n    "));
+element3.append(element6);
+element3.append(document.createTextNode("\n  "));
+element1.append(element3);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-- teal
-
-- glaz
-
-- cyan
-
-- sky
-
-- blue
-
-- indigo
-
-- violet
-
-- purple
-
-- fuchsia
-
-- pink
-
-- rose
-
-- zinc
-
-- ivory
-
-- stone
-:::
-
-:::: tp-cluster
-::: tp-textfield { data-setting="heading" label="heading" value placeholder clearable }
-:::
-
-::: tp-numberfield { data-setting="opacity" label="opacity" value="1" min="0" max="1" step="0.05" range }
-:::
-
-::: tp-numberfield { data-setting="rotation" label="rotation" value="0" min="-12" max="12" step="1" range }
-:::
-::::
-
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
-
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="post-it attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/post-it/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
 

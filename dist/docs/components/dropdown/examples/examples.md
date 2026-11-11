@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-dropdown" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-dropdown" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-box { data-intro-action="dropdown" data-allow-script }
 ::: tp-button { id="intro-dropdown-trigger" data-demo-trigger }
@@ -21,59 +21,66 @@ Try the dropdown using its trigger.
 ::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/box/box.js";
+import "/components/button/button.js";
+import "/components/dropdown/dropdown.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- open
+const example = document.createDocumentFragment();
 
-- outside-click
-:::
+const element1 = document.createElement("tp-box");
+element1.setAttribute("data-intro-action", "dropdown");
+element1.setAttribute("data-allow-script", "");
+element1.append(document.createTextNode("\n  "));
 
-::: tp-radio-list { data-setting="placement" label="placement" label-position="top" orientation="horizontal" value="3" }
-- top
+const element2 = document.createElement("tp-button");
+element2.setAttribute("id", "intro-dropdown-trigger");
+element2.setAttribute("data-demo-trigger", "");
+element2.append(document.createTextNode("Open the menu"));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
 
-- end
+const element3 = document.createElement("tp-dropdown");
+element3.setAttribute("anchor", "#intro-dropdown-trigger");
+element3.setAttribute("outside-click", "");
 
-- bottom
+const element4 = document.createElement("ul");
 
-- start
-:::
+const element5 = document.createElement("li");
 
-:::: tp-cluster
-::: tp-textfield { data-setting="anchor" label="anchor" value placeholder clearable }
-:::
+const element6 = document.createElement("a");
+element6.setAttribute("href", "/#/components/button/index.md");
+element6.append(document.createTextNode("Buttons"));
+element5.append(element6);
+element4.append(element5);
 
-::: tp-textfield { data-setting="offset" label="offset" value="8px" placeholder="8px" clearable }
-:::
-::::
+const element7 = document.createElement("li");
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element8 = document.createElement("a");
+element8.setAttribute("href", "/#/components/tree/index.md");
+element8.append(document.createTextNode("Trees"));
+element7.append(element8);
+element4.append(element7);
+element3.append(element4);
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element9 = document.createElement("p");
+element9.setAttribute("data-demo-status", "");
+element9.setAttribute("role", "status");
+element9.append(document.createTextNode("Try the dropdown using its trigger."));
+element1.append(element9);
+element1.append(document.createTextNode("\n  "));
 
-::: tp-divider
-:::
+const element10 = document.createElement("script");
+element10.setAttribute("src", "/docs/components/_shared/introduction-actions.js");
+element1.append(element10);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="dropdown attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/dropdown/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
+:::::
 ::::::
-:::::::

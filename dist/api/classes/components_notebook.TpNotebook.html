@@ -12,11 +12,11 @@
 <li><a href="" aria-current="page">TpNotebook</a></li></ul>
 <h1>Class TpNotebook</h1></div>
 <section class="tsd-panel tsd-comment">
-<div class="tsd-comment tsd-typography"><p>Combines editable markup cells and executable programming-language cells.</p>
+<div class="tsd-comment tsd-typography"><p>The custom <code>&lt;tp-notebook&gt;</code> element combines editable markup cells and executable programming-language cells.</p>
 </div>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-example">
-<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-1">&lt;</span><span class="hl-9">tp</span><span class="hl-1">-</span><span class="hl-9">notebook</span><span class="hl-1">&gt;&lt;/</span><span class="hl-10">tp</span><span class="hl-1">-</span><span class="hl-10">notebook</span><span class="hl-1">&gt;</span>
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-1">&lt;</span><span class="hl-9">tp</span><span class="hl-1">-</span><span class="hl-9">notebook</span><span class="hl-1">&gt;</span><br/><span class="hl-1">  &lt;</span><span class="hl-9">script</span><span class="hl-1"> </span><span class="hl-9">type</span><span class="hl-1">=</span><span class="hl-2">&quot;tp/markdown&quot;</span><span class="hl-1">&gt;</span><br/><span class="hl-1">    # </span><span class="hl-9">Notebook</span><span class="hl-1"> </span><span class="hl-9">example</span><br/><span class="hl-1">    </span><span class="hl-9">Here</span><span class="hl-1"> </span><span class="hl-9">is</span><span class="hl-1"> </span><span class="hl-9">a</span><span class="hl-1"> </span><span class="hl-9">notebook</span><span class="hl-1"> </span><span class="hl-9">that</span><span class="hl-1"> </span><span class="hl-9">combines</span><span class="hl-1"> </span><span class="hl-9">AsciiDoc</span><span class="hl-1">, </span><span class="hl-11">HTML</span><span class="hl-1">, </span><span class="hl-9">LaTeX</span><span class="hl-1">, </span><span class="hl-9">Markdown</span><span class="hl-1"> </span><span class="hl-9">and</span><span class="hl-1"> </span><span class="hl-9">reStructuredText</span><span class="hl-1"> </span><span class="hl-12">as</span><span class="hl-1"> </span><span class="hl-10">markup</span><span class="hl-1"> </span><span class="hl-10">languages</span><span class="hl-1">, </span><span class="hl-9">and</span><span class="hl-1"> </span><span class="hl-9">Python</span><span class="hl-1"> </span><span class="hl-9">and</span><span class="hl-1"> </span><span class="hl-9">JavaScript</span><span class="hl-1"> </span><span class="hl-12">as</span><span class="hl-1"> </span><span class="hl-10">programming</span><span class="hl-1"> </span><span class="hl-10">languages</span><span class="hl-1">.</span><br/><br/><span class="hl-1">    ## </span><span class="hl-9">Calculation</span><br/><span class="hl-1">    </span><span class="hl-9">We</span><span class="hl-1"> </span><span class="hl-9">perform</span><span class="hl-1"> </span><span class="hl-9">a</span><span class="hl-1"> </span><span class="hl-9">simple</span><span class="hl-1"> </span><span class="hl-9">multiplication</span><span class="hl-1"> </span><span class="hl-8">in</span><span class="hl-1"> </span><span class="hl-9">Python</span><span class="hl-1"> </span><span class="hl-9">to</span><span class="hl-1"> </span><span class="hl-9">demonstrate</span><span class="hl-1"> </span><span class="hl-9">the</span><span class="hl-1"> </span><span class="hl-9">calculation</span><span class="hl-1">.</span><br/><span class="hl-1">  &lt;/</span><span class="hl-9">script</span><span class="hl-1">&gt;</span><br/><span class="hl-1">  &lt;</span><span class="hl-9">script</span><span class="hl-1"> </span><span class="hl-9">type</span><span class="hl-1">=</span><span class="hl-2">&quot;tp/python&quot;</span><span class="hl-1">&gt;</span><br/><span class="hl-1">    </span><span class="hl-9">x</span><span class="hl-1"> = </span><span class="hl-14">6</span><span class="hl-1"> * </span><span class="hl-14">7</span><br/><span class="hl-1">    </span><span class="hl-0">print</span><span class="hl-1">(</span><span class="hl-9">x</span><span class="hl-1">)</span><br/><span class="hl-1">  &lt;/</span><span class="hl-9">script</span><span class="hl-1">&gt;</span><br/><span class="hl-1">  &lt;</span><span class="hl-9">script</span><span class="hl-1"> </span><span class="hl-9">type</span><span class="hl-1">=</span><span class="hl-2">&quot;tp/restructuredtext&quot;</span><span class="hl-1"> </span><span class="hl-9">doctest</span><span class="hl-1">=</span><span class="hl-2">&quot;&quot;</span><span class="hl-1">&gt;</span><br/><span class="hl-1">    .. </span><span class="hl-9">h2</span><span class="hl-1">::</span><br/><br/><span class="hl-1">       </span><span class="hl-9">Verification</span><br/><br/><span class="hl-1">    </span><span class="hl-9">We</span><span class="hl-1"> </span><span class="hl-9">use</span><span class="hl-1"> </span><span class="hl-9">the</span><span class="hl-1"> </span><span class="hl-9">doctest</span><span class="hl-1"> </span><span class="hl-9">blocks</span><span class="hl-1"> </span><span class="hl-8">in</span><span class="hl-1"> </span><span class="hl-9">reStructuredText</span><span class="hl-1"> </span><span class="hl-9">to</span><span class="hl-1"> </span><span class="hl-9">verify</span><span class="hl-1"> </span><span class="hl-9">the</span><span class="hl-1"> </span><span class="hl-9">output</span><span class="hl-1"> </span><span class="hl-8">of</span><span class="hl-1"> </span><span class="hl-9">the</span><span class="hl-1"> </span><span class="hl-9">Python</span><span class="hl-1"> </span><span class="hl-9">code</span><span class="hl-1">.</span><br/><br/><span class="hl-1">    &gt;&gt;&gt; </span><span class="hl-0">print</span><span class="hl-1">(</span><span class="hl-14">6</span><span class="hl-1"> * </span><span class="hl-14">7</span><span class="hl-1">)</span><br/><span class="hl-1">    </span><span class="hl-14">42</span><br/><span class="hl-1">  &lt;/</span><span class="hl-9">script</span><span class="hl-1">&gt;</span><br/><span class="hl-1">  &lt;</span><span class="hl-9">script</span><span class="hl-1"> </span><span class="hl-9">type</span><span class="hl-1">=</span><span class="hl-2">&quot;tp/html&quot;</span><span class="hl-1">&gt;</span><br/><span class="hl-1">    </span><span class="hl-9">In</span><span class="hl-1"> </span><span class="hl-9">JavaScript</span><span class="hl-1">, </span><span class="hl-9">we</span><span class="hl-1"> </span><span class="hl-9">would</span><span class="hl-1"> </span><span class="hl-9">have</span><span class="hl-1"> </span><span class="hl-9">written</span><span class="hl-1"> </span><span class="hl-9">the</span><span class="hl-1"> </span><span class="hl-9">following</span><span class="hl-1"> </span><span class="hl-13">code</span><span class="hl-1">:</span><br/><span class="hl-1">  &lt;/</span><span class="hl-9">script</span><span class="hl-1">&gt;</span><br/><span class="hl-1">  &lt;</span><span class="hl-9">script</span><span class="hl-1"> </span><span class="hl-9">type</span><span class="hl-1">=</span><span class="hl-2">&quot;tp/javascript&quot;</span><span class="hl-1">&gt;</span><br/><span class="hl-1">    </span><span class="hl-8">const</span><span class="hl-1"> </span><span class="hl-11">x</span><span class="hl-1"> = </span><span class="hl-14">6</span><span class="hl-1"> * </span><span class="hl-14">7</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-9">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-9">x</span><span class="hl-1">)</span><br/><span class="hl-1">  &lt;/</span><span class="hl-9">script</span><span class="hl-1">&gt;</span><br/><span class="hl-1">  &lt;</span><span class="hl-9">script</span><span class="hl-1"> </span><span class="hl-9">type</span><span class="hl-1">=</span><span class="hl-2">&quot;tp/asciidoc&quot;</span><span class="hl-1">&gt;</span><br/><span class="hl-1">    == </span><span class="hl-9">Result</span><br/><span class="hl-1">    </span><span class="hl-9">The</span><span class="hl-1"> </span><span class="hl-9">result</span><span class="hl-1"> </span><span class="hl-8">of</span><span class="hl-1"> </span><span class="hl-9">the</span><span class="hl-1"> </span><span class="hl-9">multiplication</span><span class="hl-1"> </span><span class="hl-9">is</span><span class="hl-1"> </span><span class="hl-9">displayed</span><span class="hl-1"> </span><span class="hl-8">using</span><span class="hl-1"> </span><span class="hl-11">Asciidoc</span><span class="hl-1"> and Mathjax:</span><br/><br/><span class="hl-1">    </span><span class="hl-10">latexmath</span><span class="hl-1">:[</span><span class="hl-10">x</span><span class="hl-1"> = </span><span class="hl-14">6</span><span class="hl-1"> * </span><span class="hl-14">7</span><span class="hl-1"> = </span><span class="hl-14">42</span><span class="hl-1">]</span><br/><span class="hl-1">  &lt;/</span><span class="hl-10">script</span><span class="hl-1">&gt;</span><br/><span class="hl-1">  &lt;</span><span class="hl-10">script</span><span class="hl-1"> </span><span class="hl-10">type</span><span class="hl-1">=</span><span class="hl-2">&quot;tp/latex&quot;</span><span class="hl-1">&gt;</span><br/><span class="hl-1">    \</span><span class="hl-10">section</span><span class="hl-1">*{</span><span class="hl-10">LaTeX</span><span class="hl-1"> </span><span class="hl-10">and</span><span class="hl-1"> </span><span class="hl-10">TP</span><span class="hl-1"> </span><span class="hl-9">styles</span><span class="hl-1">}</span><br/><span class="hl-1">    </span><span class="hl-10">The</span><span class="hl-1"> </span><span class="hl-10">same</span><span class="hl-1"> </span><span class="hl-10">result</span><span class="hl-1"> </span><span class="hl-10">can</span><span class="hl-1"> </span><span class="hl-10">be</span><span class="hl-1"> </span><span class="hl-10">written</span><span class="hl-1"> </span><span class="hl-10">in</span><span class="hl-1"> </span><span class="hl-10">LaTeX</span><span class="hl-1">: </span><span class="hl-10">$6</span><span class="hl-1"> \</span><span class="hl-10">times</span><span class="hl-1"> </span><span class="hl-14">7</span><span class="hl-1"> = 42</span><span class="hl-9">$</span><span class="hl-1">.</span><br/><br/><span class="hl-1">    \</span><span class="hl-9">begin</span><span class="hl-1">{</span><span class="hl-9">itemize</span><span class="hl-1">}</span><br/><span class="hl-1">      \</span><span class="hl-9">item</span><span class="hl-1"> </span><span class="hl-9">Ordinary</span><span class="hl-1"> </span><span class="hl-9">lists</span><span class="hl-1"> </span><span class="hl-9">use</span><span class="hl-1"> </span><span class="hl-9">the</span><span class="hl-1"> </span><span class="hl-9">shared</span><span class="hl-1"> </span><span class="hl-11">TP</span><span class="hl-1"> </span><span class="hl-9">styles</span><span class="hl-1">.</span><br/><span class="hl-1">      \</span><span class="hl-9">item</span><span class="hl-1"> </span><span class="hl-9">Nested</span><span class="hl-1"> </span><span class="hl-9">lists</span><span class="hl-1"> </span><span class="hl-9">keep</span><span class="hl-1"> </span><span class="hl-9">their</span><span class="hl-1"> </span><span class="hl-9">hierarchy</span><span class="hl-1">.</span><br/><span class="hl-1">        \</span><span class="hl-9">begin</span><span class="hl-1">{</span><span class="hl-9">itemize</span><span class="hl-1">}</span><br/><span class="hl-1">          \</span><span class="hl-9">item</span><span class="hl-1"> </span><span class="hl-9">This</span><span class="hl-1"> </span><span class="hl-9">is</span><span class="hl-1"> </span><span class="hl-9">a</span><span class="hl-1"> </span><span class="hl-9">nested</span><span class="hl-1"> </span><span class="hl-9">item</span><span class="hl-1">.</span><br/><span class="hl-1">        \</span><span class="hl-9">end</span><span class="hl-1">{</span><span class="hl-9">itemize</span><span class="hl-1">}</span><br/><span class="hl-1">    \</span><span class="hl-9">end</span><span class="hl-1">{</span><span class="hl-9">itemize</span><span class="hl-1">}</span><br/><br/><span class="hl-1">    \</span><span class="hl-9">wcTpCallout</span><span class="hl-1">[</span><span class="hl-9">variant</span><span class="hl-1">=</span><span class="hl-9">info</span><span class="hl-1">,</span><span class="hl-9">heading</span><span class="hl-1">=</span><span class="hl-9">LaTeX</span><span class="hl-1"> </span><span class="hl-9">inside</span><span class="hl-1"> </span><span class="hl-9">a</span><span class="hl-1"> </span><span class="hl-9">component</span><span class="hl-1">]{</span><br/><span class="hl-1">      \</span><span class="hl-9">textbf</span><span class="hl-1">{</span><span class="hl-9">The</span><span class="hl-1"> </span><span class="hl-9">component</span><span class="hl-1"> </span><span class="hl-9">controls</span><span class="hl-1"> </span><span class="hl-9">its</span><span class="hl-1"> </span><span class="hl-9">appearance</span><span class="hl-1">.}</span><br/><span class="hl-1">      \</span><span class="hl-9">begin</span><span class="hl-1">{</span><span class="hl-9">itemize</span><span class="hl-1">}</span><br/><span class="hl-1">        \</span><span class="hl-9">item</span><span class="hl-1"> </span><span class="hl-9">Keep</span><span class="hl-1"> </span><span class="hl-9">the</span><span class="hl-1"> </span><span class="hl-9">LaTeX</span><span class="hl-1"> </span><span class="hl-9">source</span><span class="hl-1"> </span><span class="hl-9">readable</span><span class="hl-1">.</span><br/><span class="hl-1">        \</span><span class="hl-9">item</span><span class="hl-1"> </span><span class="hl-9">Reuse</span><span class="hl-1"> </span><span class="hl-9">the</span><span class="hl-1"> </span><span class="hl-9">same</span><span class="hl-1"> </span><span class="hl-11">TP</span><span class="hl-1"> </span><span class="hl-9">typography</span><span class="hl-1"> </span><span class="hl-9">and</span><span class="hl-1"> </span><span class="hl-9">list</span><span class="hl-1"> </span><span class="hl-9">styles</span><span class="hl-1">.</span><br/><span class="hl-1">      \</span><span class="hl-9">end</span><span class="hl-1">{</span><span class="hl-9">itemize</span><span class="hl-1">}</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">  &lt;/</span><span class="hl-9">script</span><span class="hl-1">&gt;</span><br/><span class="hl-1">&lt;/</span><span class="hl-9">tp</span><span class="hl-1">-</span><span class="hl-9">notebook</span><span class="hl-1">&gt;</span>
 </code><button type="button">Copy</button></pre>
 
 </div>
@@ -30,10 +30,16 @@
 <h4 class="tsd-anchor-link" id="attr-1">Attr<a href="#attr-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>src = &quot;&quot; - JSON notebook file.</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-2">Attr<a href="#attr-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>repository = &quot;&quot; - Directory containing project.json and .files.json.</p>
+<h4 class="tsd-anchor-link" id="attr-2">Attr<a href="#attr-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>label - Title displayed in the center of the exported HTML toolbar. Defaults to the notebook type name; an empty value hides it.</p>
 </div>
 <div class="tsd-tag-attr">
-<h4 class="tsd-anchor-link" id="attr-3">Attr<a href="#attr-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>readonly = false - Makes all notebook editors read-only and disables structural changes.
+<h4 class="tsd-anchor-link" id="attr-3">Attr<a href="#attr-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>logo - Icon name displayed at the start of the exported HTML toolbar. Defaults to the notebook type icon; an empty value hides it.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-4">Attr<a href="#attr-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>repository = &quot;&quot; - Directory containing project.json and .files.json.</p>
+</div>
+<div class="tsd-tag-attr">
+<h4 class="tsd-anchor-link" id="attr-5">Attr<a href="#attr-5" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>readonly = false - Makes all notebook editors read-only and disables structural changes.
 tp-notebook-load Emitted after inline, src, or repository cells are loaded.</p>
 </div>
 <div class="tsd-tag-eventdetail">
@@ -43,7 +49,7 @@ tp-notebook-change Emitted after the cell collection changes.</p>
 <div class="tsd-tag-eventdetail">
 <h4 class="tsd-anchor-link" id="eventdetail-1">Eventdetail<a href="#eventdetail-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>tp-notebook-change { cells: number }</p>
 </div></div></section>
-<section class="tsd-panel tsd-hierarchy" data-refl="17510">
+<section class="tsd-panel tsd-hierarchy" data-refl="18816">
 <h4>Hierarchy (<a href="../hierarchy.html#components/notebook.TpNotebook">View Summary</a>)</h4>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><a href="components_base.TpBase.html" class="tsd-signature-type tsd-kind-class">TpBase</a>
@@ -56,7 +62,7 @@ tp-notebook-change Emitted after the cell collection changes.</p>
 <li class="tsd-hierarchy-item"><a href="components_sql-notebook_sql-notebook.TpSqlNotebook.html" class="tsd-signature-type tsd-kind-class">TpSqlNotebook</a></li>
 <li class="tsd-hierarchy-item"><a href="components_typescript-notebook.TpTypescriptNotebook.html" class="tsd-signature-type tsd-kind-class">TpTypescriptNotebook</a></li></ul></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/notebook/notebook.ts#L217">tp-components/src/components/notebook/notebook.ts:217</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/notebook/notebook.ts#L297">tp-components/src/components/notebook/notebook.ts:297</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -68,7 +74,9 @@ tp-notebook-change Emitted after the cell collection changes.</p>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading tsd-anchor-link" id="accessors">Accessors<a href="#accessors" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-index-list"><a href="#language" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>language</span></a>
+<div class="tsd-index-list"><a href="#label" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>label</span></a>
+<a href="#language" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>language</span></a>
+<a href="#logo" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>logo</span></a>
 <a href="#readonly" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>readonly</span></a>
 <a href="#observedattributes" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>observed<wbr/>Attributes</span></a>
 </div></section>
@@ -106,6 +114,27 @@ tp-notebook-change Emitted after the cell collection changes.</p>
 <h2 class="tsd-anchor-link" id="accessors-1">Accessors<a href="#accessors-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
 <section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="label"><span>label</span><a href="#label" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li>
+<div class="tsd-signature" id="labellabel"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">label</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Title displayed in the center of the exported HTML toolbar.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/notebook/notebook.ts#L331">tp-components/src/components/notebook/notebook.ts:331</a></li></ul></aside></div></li>
+<li>
+<div class="tsd-signature" id="labellabel-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">label</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/notebook/notebook.ts#L345">tp-components/src/components/notebook/notebook.ts:345</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="language"><span>language</span><a href="#language" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li>
@@ -113,7 +142,28 @@ tp-notebook-change Emitted after the cell collection changes.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">NotebookLanguage</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/notebook/notebook.ts#L241">tp-components/src/components/notebook/notebook.ts:241</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/notebook/notebook.ts#L323">tp-components/src/components/notebook/notebook.ts:323</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="logo"><span>logo</span><a href="#logo" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li>
+<div class="tsd-signature" id="logologo"><span class="tsd-signature-keyword">get</span> <span class="tsd-kind-get-signature">logo</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Exported toolbar icon; defaults to the notebook type, with empty hiding it.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/notebook/notebook.ts#L350">tp-components/src/components/notebook/notebook.ts:350</a></li></ul></aside></div></li>
+<li>
+<div class="tsd-signature" id="logologo-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">logo</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/notebook/notebook.ts#L356">tp-components/src/components/notebook/notebook.ts:356</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="readonly"><span>readonly</span><a href="#readonly" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -122,7 +172,7 @@ tp-notebook-change Emitted after the cell collection changes.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/notebook/notebook.ts#L248">tp-components/src/components/notebook/notebook.ts:248</a></li></ul></aside></div></li>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/notebook/notebook.ts#L360">tp-components/src/components/notebook/notebook.ts:360</a></li></ul></aside></div></li>
 <li>
 <div class="tsd-signature" id="readonlyreadonly-1"><span class="tsd-signature-keyword">set</span> <span class="tsd-kind-set-signature">readonly</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-description">
@@ -132,7 +182,7 @@ tp-notebook-change Emitted after the cell collection changes.</p>
 <li><span><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/notebook/notebook.ts#L252">tp-components/src/components/notebook/notebook.ts:252</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/notebook/notebook.ts#L364">tp-components/src/components/notebook/notebook.ts:364</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="observedattributes"><code class="tsd-tag">Static</code><span>observed<wbr/>Attributes</span><a href="#observedattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -149,7 +199,7 @@ these via spread when they also want to react to <code>dir</code> and <code>lang
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <p>Overrides TpBase.observedAttributes</p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/notebook/notebook.ts#L231">tp-components/src/components/notebook/notebook.ts:231</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/notebook/notebook.ts#L313">tp-components/src/components/notebook/notebook.ts:313</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -173,7 +223,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#attributechangedcallback">attributeChangedCallback</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/notebook/notebook.ts#L269">tp-components/src/components/notebook/notebook.ts:269</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/notebook/notebook.ts#L381">tp-components/src/components/notebook/notebook.ts:381</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="capturehelpsource"><code class="tsd-tag">Protected</code><span>capture<wbr/>Help<wbr/>Source</span><a href="#capturehelpsource" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -183,7 +233,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#capturehelpsource">captureHelpSource</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L973">tp-components/src/components/base/base.ts:973</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L1022">tp-components/src/components/base/base.ts:1022</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="connectedcallback"><span>connected<wbr/>Callback</span><a href="#connectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -201,7 +251,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#connectedcallback">connectedCallback</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/notebook/notebook.ts#L256">tp-components/src/components/notebook/notebook.ts:256</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/notebook/notebook.ts#L368">tp-components/src/components/notebook/notebook.ts:368</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="disconnectedcallback"><span>disconnected<wbr/>Callback</span><a href="#disconnectedcallback" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -210,7 +260,7 @@ attribute changes.</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/notebook/notebook.ts#L262">tp-components/src/components/notebook/notebook.ts:262</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/notebook/notebook.ts#L374">tp-components/src/components/notebook/notebook.ts:374</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="ensurebasestyles"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Base<wbr/>Styles</span><a href="#ensurebasestyles" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -226,7 +276,7 @@ attribute changes.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#ensurebasestyles">ensureBaseStyles</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L450">tp-components/src/components/base/base.ts:450</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L486">tp-components/src/components/base/base.ts:486</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="ensureglobalstyle"><code class="tsd-tag">Protected</code><span>ensure<wbr/>Global<wbr/>Style</span><a href="#ensureglobalstyle" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -249,7 +299,7 @@ if it does not already exist.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#ensureglobalstyle">ensureGlobalStyle</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L469">tp-components/src/components/base/base.ts:469</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L505">tp-components/src/components/base/base.ts:505</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getbooleanattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>Boolean<wbr/>Attribute</span><a href="#getbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -273,7 +323,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getbooleanattribute">getBooleanAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L496">tp-components/src/components/base/base.ts:496</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L532">tp-components/src/components/base/base.ts:532</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getclosestskippingcontainers"><code class="tsd-tag">Protected</code><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span><a href="#getclosestskippingcontainers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -294,7 +344,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getclosestskippingcontainers">getClosestSkippingContainers</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L594">tp-components/src/components/base/base.ts:594</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L630">tp-components/src/components/base/base.ts:630</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getstringattribute"><code class="tsd-tag">Protected</code><span>get<wbr/>String<wbr/>Attribute</span><a href="#getstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -316,7 +366,7 @@ if it does not already exist.</p>
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#getstringattribute">getStringAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L530">tp-components/src/components/base/base.ts:530</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L566">tp-components/src/components/base/base.ts:566</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="help"><span>help</span><a href="#help" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -331,7 +381,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#help">help</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L224">tp-components/src/components/base/base.ts:224</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L250">tp-components/src/components/base/base.ts:250</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="queryelement"><code class="tsd-tag">Protected</code><span>query<wbr/>Element</span><a href="#queryelement" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -357,7 +407,7 @@ the Vite component API plugin. A custom URL can be provided with
 <aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#queryelement">queryElement</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L575">tp-components/src/components/base/base.ts:575</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L611">tp-components/src/components/base/base.ts:611</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="removeattributes"><code class="tsd-tag">Protected</code><span>remove<wbr/>Attributes</span><a href="#removeattributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -375,7 +425,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#removeattributes">removeAttributes</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L560">tp-components/src/components/base/base.ts:560</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L596">tp-components/src/components/base/base.ts:596</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="setbooleanattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>Boolean<wbr/>Attribute</span><a href="#setbooleanattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -401,7 +451,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#setbooleanattribute">setBooleanAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L512">tp-components/src/components/base/base.ts:512</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L548">tp-components/src/components/base/base.ts:548</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="setstringattribute"><code class="tsd-tag">Protected</code><span>set<wbr/>String<wbr/>Attribute</span><a href="#setstringattribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -423,7 +473,7 @@ the Vite component API plugin. A custom URL can be provided with
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="components_base.TpBase.html">TpBase</a>.<a href="components_base.TpBase.html#setstringattribute">setStringAttribute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/ba024e69ebf8da084ca00d399b5774b6cb1c5e23/src/components/base/base.ts#L544">tp-components/src/components/base/base.ts:544</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/tp-web-lab/tp-components/blob/fb8523094ece2185adf5f3bb23fe589b5fd82e59/src/components/base/base.ts#L580">tp-components/src/components/base/base.ts:580</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -441,7 +491,7 @@ the Vite component API plugin. A custom URL can be provided with
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Constructors</summary>
 <div><a href="#constructor" class="tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor"><use href="../assets/icons.svg#icon-512"></use></svg><span>constructor</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Accessors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Accessors</summary>
-<div><a href="#language"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>language</span></a><a href="#readonly"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>readonly</span></a><a href="#observedattributes"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>observed<wbr/>Attributes</span></a></div></details>
+<div><a href="#label"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>label</span></a><a href="#language"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>language</span></a><a href="#logo"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>logo</span></a><a href="#readonly"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>readonly</span></a><a href="#observedattributes"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="../assets/icons.svg#icon-262144"></use></svg><span>observed<wbr/>Attributes</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Methods</summary>
 <div><a href="#attributechangedcallback" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>attribute<wbr/>Changed<wbr/>Callback</span></a><a href="#capturehelpsource" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>capture<wbr/>Help<wbr/>Source</span></a><a href="#connectedcallback"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>connected<wbr/>Callback</span></a><a href="#disconnectedcallback"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>disconnected<wbr/>Callback</span></a><a href="#ensurebasestyles" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Base<wbr/>Styles</span></a><a href="#ensureglobalstyle" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ensure<wbr/>Global<wbr/>Style</span></a><a href="#getbooleanattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Boolean<wbr/>Attribute</span></a><a href="#getclosestskippingcontainers" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Closest<wbr/>Skipping<wbr/>Containers</span></a><a href="#getstringattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>String<wbr/>Attribute</span></a><a href="#help" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>help</span></a><a href="#queryelement" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>query<wbr/>Element</span></a><a href="#removeattributes" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>remove<wbr/>Attributes</span></a><a href="#setbooleanattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Boolean<wbr/>Attribute</span></a><a href="#setstringattribute" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>String<wbr/>Attribute</span></a></div></details></div></details></div>
 <div class="site-menu">

@@ -1,0 +1,54 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpCenter[intrinsic]{
+  \wcTpBox{Centered content}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/center/center.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-center");
+element1.setAttribute("intrinsic", "");
+element1.append(document.createTextNode("\n      "));
+
+const element2 = document.createElement("tp-box");
+element2.append(document.createTextNode("Centered content"));
+element1.append(element2);
+element1.append(document.createTextNode("\n    "));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Constrained region
+\documentclass{article}
+\begin{document}
+Compare the two centered regions: the narrow region wraps the same text onto more lines. Resize the preview to see both regions shrink when less space is available.
+
+
+\wcTpStack{
+  \wcTpBox{
+    \textbf{Maximum width: 18rem}
+
+    \wcTpCenter[max-inline-size=18rem]{
+      \wcTpBox[invert]{The same text appears in both regions. The maximum width controls the width of the region, not the alignment of its text. Equal space on either side keeps the region centered.}
+    }
+  }
+  \wcTpBox{
+    \textbf{Maximum width: 36rem}
+
+    \wcTpCenter[max-inline-size=36rem]{
+      \wcTpBox[invert]{The same text appears in both regions. The maximum width controls the width of the region, not the alignment of its text. Equal space on either side keeps the region centered.}
+    }
+  }
+}
+\end{document}

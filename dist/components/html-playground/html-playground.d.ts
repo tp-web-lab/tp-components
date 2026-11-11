@@ -94,7 +94,7 @@ import type { TpExampleProjectMetadata } from "../playground/playground-example-
 import { TpHtmlProject } from "./html-project.js";
 export { TpHtmlProject } from "./html-project.js";
 /**
- * HTML playground component.
+ * The custom `<tp-html-playground>` element edits and runs an HTML project.
  *
  * Provides a file-based playground that runs HTML, CSS, and JavaScript in an isolated preview.
  *

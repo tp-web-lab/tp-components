@@ -1,9 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="skeleton" library="components" size="1.25em"></tp-icon> Skeleton
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-skeleton>` element implements the Skeleton functionality: renders selected HTML elements as fixed shaded skeleton patterns without executing the source.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-skeleton>` element displays a simplified placeholder representation of content.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-skeleton label="Article layout preview">
   <script type="tp/html">
     <main>
@@ -18,25 +29,60 @@ The custom `<tp-skeleton>` element implements the Skeleton functionality: render
     </main>
   </script>
 </tp-skeleton>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-skeleton" src="/docs/components/skeleton/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
+### Initial content
 
-#### Mouse interactions
+::: tp-tabs
+no content
+: ```html
+  <tp-skeleton></tp-skeleton>
+  ```
 
-| Control or gesture | Result |
-| --- | --- |
-| Reading | This is a static preview of a document's structure. Shaded patterns stand for headings, paragraphs, lists and other recognized elements. The preview has no mouse or keyboard controls, does not animate, and does not automatically replace itself with the original content. Screen readers announce the preview description rather than the decorative shapes. |
+`value` attribute
+: ```html
+  <tp-skeleton value="&lt;main>&#10;      &lt;nav>Home · Articles · About&lt;/nav>&#10;      &lt;h1>Building accessible interfaces&lt;/h1>&#10;      &lt;p>An introduction to the article.&lt;/p>&#10;      &lt;figure>&lt;img src=&quot;portrait.jpg&quot; alt=&quot;Portrait&quot;>&lt;figcaption>Caption&lt;/figcaption>&lt;/figure>&#10;      &lt;h2>Key ideas&lt;/h2>&#10;      &lt;ul>&lt;li>Clear structure&lt;/li>&lt;li>Consistent interactions&lt;/li>&lt;/ul>&#10;      &lt;table>&lt;tr>&lt;th>Feature&lt;/th>&lt;th>Status&lt;/th>&lt;/tr>&lt;tr>&lt;td>Keyboard&lt;/td>&lt;td>Ready&lt;/td>&lt;/tr>&lt;/table>&#10;      &lt;blockquote>A useful quotation.&lt;/blockquote>&#10;    &lt;/main>"></tp-skeleton>
+  ```
 
-#### Keyboard interactions
+internal script
+: ```html
+  <tp-skeleton label="Article layout preview">
+    <script type="tp/html">
+      <main>
+        <nav>Home · Articles · About</nav>
+        <h1>Building accessible interfaces</h1>
+        <p>An introduction to the article.</p>
+        <figure><img src="portrait.jpg" alt="Portrait"><figcaption>Caption</figcaption></figure>
+        <h2>Key ideas</h2>
+        <ul><li>Clear structure</li><li>Consistent interactions</li></ul>
+        <table><tr><th>Feature</th><th>Status</th></tr><tr><td>Keyboard</td><td>Ready</td></tr></table>
+        <blockquote>A useful quotation.</blockquote>
+      </main>
+    </script>
+  </tp-skeleton>
+  ```
 
-| Key or gesture | Result |
-| --- | --- |
-| Component itself | No dedicated keyboard action. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
+external file
+: ```html
+  <tp-skeleton src="/docs/components/skeleton/examples/initial-content.html"></tp-skeleton>
+  ```
+:::
 
-### Author directives
+### Authoring
 
 Supply HTML in a `script` of type `tp/html` or `tp/skeleton`, through the `value` attribute, or through a `src` URL. The library's precedence is `src`, then nonempty `value`, then the preserved inline script. The script stores HTML as inert source data; it is not executable JavaScript. There is no need to declare rectangles, shapes or individual skeleton bars.
 
@@ -65,276 +111,7 @@ When the source contains no representable elements, the rectangle says “No sup
 
 In Attributes, “Inline HTML” previews the introduction with navigation, a figure, a list, a table and a quotation. “Article HTML” is deliberately simpler: two headings and three paragraphs. “Reference HTML with iframe” shows lists and an embedded document. Changing only the text would not change the skeleton: the recognized element sequence determines its appearance.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Inspect the fixed shaded patterns generated from the article HTML. Text, images and nested list content are not rendered.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-HTML
-: ::include{examples/examples.html}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-
-<!-- tp-docgen:api TpSkeleton -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>label</code> | <code>string</code> | <code>&quot;Content layout preview&quot;</code> | Accessible description of the skeleton. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | HTML source URL, taking precedence over value and inline scripts. |
-  | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | HTML source string, taking precedence over an inline script. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-skeleton>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpSkeleton`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-skeleton>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-skeleton>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_skeleton.TpSkeleton.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -361,19 +138,48 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Inspect the fixed shaded patterns generated from the article HTML. Text, images and nested list content are not rendered.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-skeleton>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
 @summary Shared base class for tp-* components.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 
 ### External
 

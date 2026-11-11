@@ -1,75 +1,42 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="prose-editor" library="components" size="1.25em"></tp-icon> Prose-editor
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-prose-editor>` element implements the <tp-icon name="prose-editor" library="components" size="1.25em"></tp-icon> Prose-editor functionality: proseMirror-based rich text editor.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-prose-editor>` element edits rich text with formatting, lists, tables and embedded media.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-prose-editor>
   <h2>A short editable document</h2>
   <p>Select a word and use the toolbar to change its <strong>formatting</strong>.</p>
   <ul><li>Write a draft</li><li>Review the content</li></ul>
 </tp-prose-editor>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-prose-editor" src="/docs/components/prose-editor/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Using the component | Edit the document directly and use the toolbar to format text, insert content, undo or redo changes. |
-| :tp-icon:{name="file" size="1.25em"} Files | Creates, loads, saves, or exports the document. |
-| :tp-icon:{name="format-title" size="1.25em"} Types | Inserts paragraphs, headings, quotations, code, markup, math, and horizontal rules. |
-| :tp-icon:{name="letter-f" size="1.25em"} Format | Applies inline text, math, and link formatting. |
-| :tp-icon:{name="list-down" size="1.25em"} :tp-icon:{name="table" size="1.25em"} :tp-icon:{name="multimedia" size="1.25em"} Lists / Table / Media | Inserts and edits structured or media content. |
-| :tp-icon:{name="emoticon-happy-outline" size="1.25em"} :tp-icon:{name="shapes" size="1.25em"} :tp-icon:{name="symbol" size="1.25em"} Emoji / Icon / Symbol | Opens a compact picker and inserts the selected item inline. |
-| :tp-icon:{name="undo" size="1.25em"} :tp-icon:{name="redo" size="1.25em"} Undo / Redo | Navigates the editing history. |
-| :tp-icon:{name="copy" size="1.25em"} :tp-icon:{name="cut" size="1.25em"} :tp-icon:{name="paste" size="1.25em"} :tp-icon:{name="select-all" size="1.25em"} Copy / Cut / Paste / Select all | Applies the corresponding clipboard or selection operation. |
-| :tp-icon:{name="format-clear" size="1.25em"} Clear formatting | Removes formatting from the selection. |
-| :tp-icon:{name="language-html" size="1.25em"} HTML | Opens the HTML source and rendered views. |
-| :tp-icon:{name="search" size="1.25em"} Search | Finds and highlights matching text. |
-| :tp-icon:{name="dots-vertical" size="1.25em"} More | Shows or hides the secondary formatting toolbar. |
-| :tp-icon:{name="keyboard-f1" size="1.25em"} Editor toolbar | Shows or hides the toolbar of the visible code or markup block editor. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Focused controls | Use each control’s standard keyboard interaction.  |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
-
-#### Importing
-::: tp-tabs
-script
-: Autoloading:
-
-  ```html
-  <script type="module" src="tp-loader.js">
-  ```
-
-  Cherry picking:
-
-  ```html
-  <script type="module" src="/path/to/components/prose-editor/prose-editor.js">
-  ```
-
-
-import
-: ```js
-  import "/path/to/components/prose-editor/prose-editor.js";
-  ```
-
-bundler
-: ```js
-  import "@tp/tp-components/components/prose-editor/prose-editor.js";
-  ```
-:::
-
-#### Initial editor content
+### Initial content
 
 ::: tp-tabs
 no content
@@ -93,396 +60,7 @@ external file
   ```
 :::
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Edit the document and use the toolbar to format the selected text.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpProseEditor -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>placeholder</code> | <code>string</code> | <code>&quot;Type your prose...&quot;</code> | Text displayed while the editor is empty. |
-  | <code>readonly</code> | <code>boolean</code> | <code>false</code> | Prevents the user from editing the prose. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of an external document loaded into the editor. |
-  | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Initial HTML content of the editor. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-prose-editor>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>addTableColumnAfter</code> | <code>addTableColumnAfter(): boolean</code> | Adds a column after the selected table column; returns true when the command applies, or false when unavailable for the current editor state. |
-  | <code>addTableRowAfter</code> | <code>addTableRowAfter(): boolean</code> | Adds a row after the selected table row; returns true when the command applies, or false when unavailable for the current editor state. |
-  | <code>deleteTable</code> | <code>deleteTable(): boolean</code> | Deletes the table containing the current selection; returns true when the command applies, or false when unavailable for the current editor state. |
-  | <code>deleteTableColumn</code> | <code>deleteTableColumn(): boolean</code> | Deletes the selected table column; returns true when the command applies, or false when unavailable for the current editor state. |
-  | <code>deleteTableRow</code> | <code>deleteTableRow(): boolean</code> | Deletes the selected table row; returns true when the command applies, or false when unavailable for the current editor state. |
-  | <code>findNext</code> | <code>findNext(value?: string): boolean</code> | Finds and selects the next matching text, optionally replacing the current query with value. Returns whether a match was selected. |
-  | <code>findPrevious</code> | <code>findPrevious(value?: string): boolean</code> | Finds and selects the previous matching text, optionally replacing the current query with value. Returns whether a match was selected. |
-  | <code>focus</code> | <code>focus(options?: FocusOptions): void</code> | Focuses the active editing surface, forwarding optional browser FocusOptions. |
-  | <code>getHTML</code> | <code>getHTML(): string</code> | Returns the current HTML from the active source, rendered or rich-text mode; before initialization, returns the configured initial HTML. |
-  | <code>insertTable</code> | <code>insertTable(rows = 3, columns = 3): boolean</code> | Replaces the current selection with a table of rows by columns and focuses it. Returns false if no editor or valid table can be created. |
-  | <code>setHTML</code> | <code>setHTML(value: string): void</code> | Replaces the document from HTML, synchronizes active source/rendered views and reflects the supplied text in value. |
-  | <code>setSearchQuery</code> | <code>setSearchQuery(value: string, options: Omit&lt;ConstructorParameters&lt;typeof SearchQuery&gt;[0], &quot;search&quot;&gt; = &#123;&#125;): void</code> | Sets the search text and optional matching options on the rich-text editor; does nothing before initialization. |
-  [Public methods of `TpProseEditor`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-prose-editor-change</code> | <code>&#123; value: string &#125;</code> | Emitted immediately after tp-prose-editor-input for the same edit; it does not wait for blur. value contains the current HTML serialization. |
-  | <code>tp-prose-editor-input</code> | <code>&#123; value: string &#125;</code> | Emitted after an editing transaction or editor command updates the document. value contains the current HTML serialization. |
-  [Events emitted by `<tp-prose-editor>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-prose-editor>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_prose-editor_prose-editor.TpProseEditor.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -509,12 +87,41 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Edit the document and use the toolbar to format the selected text.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-prose-editor>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-asciidoc
@@ -585,40 +192,40 @@ All tp-components used by `<tp-prose-editor>` are loaded automatically by this c
 @summary Sticky toolbar with start / center / end sections,
 -->
 
-- [`<tp-asciidoc>`](../asciidoc/index.md) : Semantic AsciiDoc rendering component.
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-checkbox-list>`](../checkbox-list/index.md) : Transforms a list into a group of checkboxes.
-- [`<tp-code-editor>`](../code-editor/index.md) : CodeMirror-based code editor component.
-- [`<tp-color>`](../color/index.md) : Brand color preset controller scoped to the containing element.
-- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
-- [`<tp-emoji-picker>`](../emoji-picker/index.md) : Unicode Emoji 17.0 picker.
-- [`<tp-fullscreen>`](../fullscreen/index.md) : Fullscreen controller button.
-- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-icon-picker>`](../icon-picker/index.md) : Icon picker that lists built-in icons from `icon-internal`
-- [`<tp-markdown>`](../markdown/index.md) : Markdown rendering component.
-- [`<tp-menu>`](../menu/index.md) : Accessible menu component.
-- [`<tp-restructuredtext>`](../restructuredtext/index.md) : reStructuredText rendering component.
-- [`<tp-symbol-picker>`](../symbol-picker/index.md) : HTML named-character symbol picker.
-- [`<tp-theme>`](../theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
-- [`<tp-toolbar>`](../toolbar/index.md) : Sticky toolbar with start / center / end sections,
+- [`<tp-asciidoc>`](#/components/asciidoc/index.md) : Semantic AsciiDoc rendering component.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-checkbox-list>`](#/components/checkbox-list/index.md) : Transforms a list into a group of checkboxes.
+- [`<tp-code-editor>`](#/components/code-editor/index.md) : CodeMirror-based code editor component.
+- [`<tp-color>`](#/components/color/index.md) : Brand color preset controller scoped to the containing element.
+- [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
+- [`<tp-emoji-picker>`](#/components/emoji-picker/index.md) : Unicode Emoji 17.0 picker.
+- [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-icon-picker>`](#/components/icon-picker/index.md) : Icon picker that lists built-in icons from `icon-internal`
+- [`<tp-markdown>`](#/components/markdown/index.md) : Markdown rendering component.
+- [`<tp-menu>`](#/components/menu/index.md) : Accessible menu component.
+- [`<tp-restructuredtext>`](#/components/restructuredtext/index.md) : reStructuredText rendering component.
+- [`<tp-symbol-picker>`](#/components/symbol-picker/index.md) : HTML named-character symbol picker.
+- [`<tp-theme>`](#/components/theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
+- [`<tp-toolbar>`](#/components/toolbar/index.md) : Sticky toolbar with start / center / end sections,
 
 ### External
 
 <!--
-@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
-@summary Shared parsers, games and rendering utilities.
+@credit MathJax https://www.mathjax.org/
+@summary Mathematical notation rendering.
 -->
 <!--
 @credit ProseMirror https://prosemirror.net/
 @summary Rich-text editing.
 -->
 <!--
-@credit MathJax https://www.mathjax.org/
-@summary Mathematical notation rendering.
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
 -->
 
-- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
-- [ProseMirror](https://prosemirror.net/) : Rich-text editing.
 - [MathJax](https://www.mathjax.org/) : Mathematical notation rendering.
+- [ProseMirror](https://prosemirror.net/) : Rich-text editing.
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 <!-- tp-docgen:dependencies:end -->

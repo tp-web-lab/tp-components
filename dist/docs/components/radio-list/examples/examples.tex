@@ -1,0 +1,46 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpRadioList[name=theme,value=2,orientation=horizontal]{
+  \begin{itemize}
+    \item Light
+    \item Automatic
+    \item Dark
+  \end{itemize}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/radio-list/radio-list.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-radio-list");
+element1.setAttribute("name", "theme");
+element1.setAttribute("value", "2");
+element1.setAttribute("orientation", "horizontal");
+element1.append(document.createTextNode("\n    "));
+
+const element2 = document.createElement("ul");
+
+const element3 = document.createElement("li");
+element3.append(document.createTextNode("Light"));
+element2.append(element3);
+
+const element4 = document.createElement("li");
+element4.append(document.createTextNode("Automatic"));
+element2.append(element4);
+
+const element5 = document.createElement("li");
+element5.append(document.createTextNode("Dark"));
+element2.append(element5);
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-timeline" allow-script }
-:::::: script { type="tp/markdown" }
+::::: tp-markdown-viewer { label="tp-timeline" allow-script }
+:::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-timeline
 Time
@@ -40,44 +40,118 @@ Title
 :::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/icon/icon.js";
+import "/components/timeline/timeline.js";
 
-::::: tp-stack
-::: tp-radio-list { data-setting="orientation" label="orientation" label-position="top" orientation="horizontal" value="1" }
-- vertical
+const example = document.createDocumentFragment();
 
-- horizontal
-:::
+const element1 = document.createElement("tp-timeline");
+element1.append(document.createTextNode("\n  "));
 
-::: tp-cluster
-:::
+const element2 = document.createElement("dl");
+element2.append(document.createTextNode("\n    "));
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element3 = document.createElement("dt");
+element3.append(document.createTextNode("Time"));
+element2.append(element3);
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element4 = document.createElement("dd");
+element4.append(document.createTextNode("09:00"));
+element2.append(element4);
+element2.append(document.createTextNode("\n    "));
 
-::: tp-divider
-:::
+const element5 = document.createElement("dt");
+element5.append(document.createTextNode("Icon"));
+element2.append(element5);
 
-### Preview
+const element6 = document.createElement("dd");
 
-::: tp-iframe { id="attributes-frame" title="timeline attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
+const element7 = document.createElement("tp-icon");
+element7.setAttribute("name", "home");
+element6.append(element7);
+element2.append(element6);
+element2.append(document.createTextNode("\n    "));
 
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
+const element8 = document.createElement("dt");
+element8.append(document.createTextNode("Title"));
+element2.append(element8);
 
-::: script { type="module" src="/docs/components/timeline/examples/attributes.js" }
+const element9 = document.createElement("dd");
+element9.append(document.createTextNode("Welcome"));
+element2.append(element9);
+element2.append(document.createTextNode("\n    "));
+
+const element10 = document.createElement("dt");
+element10.append(document.createTextNode("Content"));
+element2.append(element10);
+
+const element11 = document.createElement("dd");
+element11.append(document.createTextNode("Meet the team and explore the project."));
+element2.append(element11);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element12 = document.createElement("dl");
+element12.append(document.createTextNode("\n    "));
+
+const element13 = document.createElement("dt");
+element13.append(document.createTextNode("Time"));
+element12.append(element13);
+
+const element14 = document.createElement("dd");
+element14.append(document.createTextNode("10:00"));
+element12.append(element14);
+element12.append(document.createTextNode("\n    "));
+
+const element15 = document.createElement("dt");
+element15.append(document.createTextNode("Title"));
+element12.append(element15);
+
+const element16 = document.createElement("dd");
+element16.append(document.createTextNode("Workshop"));
+element12.append(element16);
+element12.append(document.createTextNode("\n    "));
+
+const element17 = document.createElement("dt");
+element17.append(document.createTextNode("Content"));
+element12.append(element17);
+
+const element18 = document.createElement("dd");
+element18.append(document.createTextNode("Build your first component together."));
+element12.append(element18);
+element12.append(document.createTextNode("\n  "));
+element1.append(element12);
+element1.append(document.createTextNode("\n  "));
+
+const element19 = document.createElement("dl");
+element19.append(document.createTextNode("\n    "));
+
+const element20 = document.createElement("dt");
+element20.append(document.createTextNode("Time"));
+element19.append(element20);
+
+const element21 = document.createElement("dd");
+element21.append(document.createTextNode("12:00"));
+element19.append(element21);
+element19.append(document.createTextNode("\n    "));
+
+const element22 = document.createElement("dt");
+element22.append(document.createTextNode("Title"));
+element19.append(element22);
+
+const element23 = document.createElement("dd");
+element23.append(document.createTextNode("Closing session"));
+element19.append(element23);
+element19.append(document.createTextNode("\n  "));
+element1.append(element19);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
 :::
 ```
-::::::
-:::::::
+::::
+:::::

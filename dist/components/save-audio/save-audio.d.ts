@@ -2,22 +2,6 @@
  * @module components/save-audio
  * @summary Downloads an anchored audio as MP3, OGG or WAV.
  */
-/**
- * @tp-dependency tp-base
- * @summary Shared base class for tp-* components.
- */
-/**
- * @tp-dependency tp-dropdown
- * @summary Dropdown menu component.
- */
-/**
- * @tp-dependency tp-icon
- * @summary SVG icon component with inline, URL, and registry sources.
- */
-/**
- * @tp-dependency tp-icon-button
- * @summary Accessible icon button component.
- */
 import { TpBase } from "../base/base.js";
 import { type TpSizeType, type TpVariantType } from "../base/base.types.js";
 import "../dropdown/dropdown.js";
@@ -28,13 +12,13 @@ export interface AudioSaveTarget {
     saveAudio(format: TpSaveAudioFormat, filename: string): Promise<boolean>;
 }
 /**
- * Audio download controller with an embedded dropdown.
+ * The custom `<tp-save-audio>` element saves the associated audio in its original format.
  *
- * @summary Saves audio from an associated component in several formats.
+ * @summary Saves the associated audio in its original format.
  * @tagname tp-save-audio
  * @attr {"mp3" | "ogg" | "wav"} format = "mp3" - Initially selected audio format.
- * @attr {string} anchor = "" - CSS selector of a component implementing saveAudio(format, filename).
- * @attr {string} name = "file-download" - Icon used by the trigger.
+ * @attr {string} anchor = "" - CSS selector of an audio element or a component implementing saveAudio(format, filename).
+ * @attr {string} name = "save-audio" - Icon used by the trigger.
  * @attr {string} filename = "audio" - Download filename without its extension.
  * @attr {string} variant = "neutral" - Color variant forwarded to the trigger icon button: neutral, brand, success, danger, warning or info.
  * @attr {string} size = "m" - Size preset forwarded to the trigger icon button: xxs, xs, s, m, l, xl or xxl.
@@ -44,8 +28,11 @@ export interface AudioSaveTarget {
  * @event tp-save-audio-error Emitted when the target cannot be exported.
  * @eventdetail tp-save-audio-error { format: "mp3" | "ogg" | "wav"; error: unknown; anchor: string }
  * @example
- * <p>Audio saving is reserved for a future integration. No audio provider is currently connected.</p>
- * <tp-save-audio disabled></tp-save-audio>
+ * <p>Listen to the sound of breaking glass, then save the MP3 file.</p>
+ * <audio id="save-audio-example" controls preload="metadata" aria-label="Sound of breaking glass">
+ *   <source src="/docs/medias/audios/glass-break.mp3" type="audio/mpeg">
+ * </audio>
+ * <tp-save-audio anchor="#save-audio-example" filename="glass-break"></tp-save-audio>
  * @accessibility Provides a labelled icon trigger with aria-haspopup, aria-controls and synchronized aria-expanded; disables the trigger while saving or when disabled.
  * @accessibility Format entries are focusable and respond to Enter or Space; decorative checkmarks are hidden and the most recently saved format is marked with aria-current.
  * @accessibilityresponsibility Provide an informative trigger label, a compatible audio target and an accessible text alternative for audio content. Present tp-save-audio-error feedback to the user when export fails.
@@ -77,6 +64,9 @@ export declare class TpSaveAudio extends TpBase {
      * @summary Requests the anchored component to save mp3, ogg or wav audio using filename. Resolves after completion or cancellation; does nothing when disabled or already saving. Invalid formats and incompatible targets reject.
      */
     save(format?: TpSaveAudioFormat): Promise<void>;
+    /** Resolve only a source actually supplied in the selected format; never relabel audio bytes. */
+    private audioSource;
+    private saveNativeAudio;
     private ensureControl;
     private readonly syncExpanded;
     private syncCurrentFormat;

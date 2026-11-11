@@ -23,7 +23,7 @@ import "../chronometer/chronometer.js";
 import "../dropdown/dropdown.js";
 import "../icon-button/icon-button.js";
 /**
- * Displays an interactive Mastermind game.
+ * The custom `<tp-mastermind>` element displays an interactive Mastermind game.
  *
  * @summary Displays an interactive Mastermind game.
  * @tagname tp-mastermind

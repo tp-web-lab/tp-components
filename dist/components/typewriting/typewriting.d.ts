@@ -5,7 +5,9 @@
  */
 import { TpBase } from "../base/base.js";
 /**
- * @summary progressively reveals text one letter or one word at a time.
+ * The custom `<tp-typewriting>` element progressively reveals text one letter or one word at a time.
+ *
+ * @summary Progressively reveals text one letter or one word at a time.
  * @tagname tp-typewriting
  * @attr {number} speed = 20 - Letters per second, or words per second with word; zero pauses the reveal.
  * @attr {number} delay = 0 - Milliseconds before the first reveal and between repetitions.

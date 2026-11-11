@@ -4,10 +4,26 @@
  * @summary Single-page renderer selecting HTML, Markdown, AsciiDoc or reStructuredText.
  */
 import { TpMarkupSinglePage, type TpMarkupSinglePageLanguage } from "../markup-single-page/markup-single-page.js";
-/** @tagname tp-asciidoc-single-page @summary Renders one document with tp-asciidoc. * @example
- * <tp-asciidoc-single-page></tp-asciidoc-single-page>
+/**
+ * The custom `<tp-asciidoc-single-page>` element displays a single AsciiDoc document.
+ *
+ * @summary Displays a single AsciiDoc document.
+ * @tagname tp-asciidoc-single-page
  * @event tp-asciidoc-single-page-rendered Emitted after this page finishes rendering, immediately after tp-markup-single-page-rendered. language identifies the renderer and src is the resolved source used for this render.
  * @eventdetail tp-asciidoc-single-page-rendered { language: "html" | "markdown" | "asciidoc" | "restructuredtext"; src: string }
+ * @example
+ * <tp-asciidoc-single-page>
+ *   <script type="tp/asciidoc">
+ * == A short guide
+ *
+ * This document is rendered as a single page.
+ *
+ * === Getting started
+ *
+ * * Read the introduction
+ * * Try a component
+ *   </script>
+ * </tp-asciidoc-single-page>
  */
 export declare class TpAsciidocSinglePage extends TpMarkupSinglePage {
     protected get fixedLanguage(): TpMarkupSinglePageLanguage;

@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-matching" allow-script }
-:::::: script { type="tp/markdown" }
+::::: tp-markdown-viewer { label="tp-matching" allow-script }
+:::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-matching
 - Hello
@@ -16,43 +16,49 @@
 :::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/matching/matching.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- disabled
+const example = document.createDocumentFragment();
 
-- heading
-:::
+const element1 = document.createElement("tp-matching");
+element1.append(document.createTextNode("\n  "));
 
-::: tp-cluster
-:::
+const element2 = document.createElement("ul");
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element3 = document.createElement("li");
+element3.append(document.createTextNode("Hello"));
+element2.append(element3);
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element4 = document.createElement("li");
+element4.append(document.createTextNode("Thank you"));
+element2.append(element4);
 
-::: tp-divider
-:::
+const element5 = document.createElement("li");
+element5.append(document.createTextNode("Goodbye"));
+element2.append(element5);
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
 
-### Preview
+const element6 = document.createElement("ol");
 
-::: tp-iframe { id="attributes-frame" title="matching attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
+const element7 = document.createElement("li");
+element7.append(document.createTextNode("Bonjour"));
+element6.append(element7);
 
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
+const element8 = document.createElement("li");
+element8.append(document.createTextNode("Merci"));
+element6.append(element8);
 
-::: script { type="module" src="/docs/components/matching/examples/attributes.js" }
+const element9 = document.createElement("li");
+element9.append(document.createTextNode("Au revoir"));
+element6.append(element9);
+element1.append(element6);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
 :::
 ```
 
@@ -131,5 +137,5 @@ French
 3. Au revoir
 :::
 ```
-::::::
-:::::::
+::::
+:::::

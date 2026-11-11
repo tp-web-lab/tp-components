@@ -1,0 +1,65 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpSidebar[side-width=12rem,gap=1rem]{
+  \wcTpBox{
+    \subsection*{Navigation}
+    Overview
+
+    Examples
+
+  }
+  \wcTpBox{
+    \subsection*{Main content}
+    The sidebar stays beside this content while there is enough space.
+
+  }
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/sidebar/sidebar.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-sidebar");
+element1.setAttribute("side-width", "12rem");
+element1.setAttribute("gap", "1rem");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("tp-box");
+
+const element3 = document.createElement("h3");
+element3.append(document.createTextNode("Navigation"));
+element2.append(element3);
+
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("Overview"));
+element2.append(element4);
+
+const element5 = document.createElement("p");
+element5.append(document.createTextNode("Examples"));
+element2.append(element5);
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element6 = document.createElement("tp-box");
+
+const element7 = document.createElement("h3");
+element7.append(document.createTextNode("Main content"));
+element6.append(element7);
+
+const element8 = document.createElement("p");
+element8.append(document.createTextNode("The sidebar stays beside this content while there is enough space."));
+element6.append(element8);
+element1.append(element6);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

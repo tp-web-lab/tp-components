@@ -1,0 +1,78 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcSection{
+  \wcTpTheme{}
+  The selected theme is scoped to this section.
+
+  \rawhtml*|<code>Inline code follows the selected theme.</code>|
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/theme/theme.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("section");
+element1.append(document.createTextNode("\n      "));
+
+const element2 = document.createElement("tp-theme");
+element1.append(element2);
+element1.append(document.createTextNode("\n      "));
+
+const element3 = document.createElement("p");
+element3.append(document.createTextNode("The selected theme is scoped to this section."));
+element1.append(element3);
+element1.append(document.createTextNode("\n      "));
+
+const element4 = document.createElement("code");
+element4.append(document.createTextNode("Inline code follows the selected theme."));
+element1.append(element4);
+element1.append(document.createTextNode("\n    "));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Local theme scope
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  \wcTpTheme{}
+  \wcTpCallout{ The selected theme is scoped to this box. }
+}
+\end{document}
+
+% !tp-example Change event
+\documentclass{article}
+\begin{document}
+\wcSection[id=theme-event-target]{
+  \rawhtml|<tp-theme anchor="#theme-event-target"></tp-theme>|
+  Choose a different theme mode to emit \rawhtml*|<code>tp-theme-change</code>|.
+
+  \wcTpCallout{This callout follows the selected theme.}
+}
+
+\wcTpConsole{}
+
+\wcScript[type=module]|
+      customElements.whenDefined('tp-console').then(() => {
+        const section = document.querySelector('#theme-event-target');
+        const output = document.querySelector('tp-console');
+        output.redirectConsoleToSelf();
+        section?.addEventListener('tp-theme-change', (event) => {
+          console.info('tp-theme-change', {
+            mode: event.detail.mode,
+            theme: event.detail.theme,
+            anchor: event.detail.anchor,
+            target: event.detail.target?.id,
+          });
+        });
+      });
+    |
+\end{document}

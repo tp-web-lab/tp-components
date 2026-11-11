@@ -1,0 +1,112 @@
+[tp-asciidoc-viewer%allow-script,label="tp-kakuro"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-kakuro]
+====
+. `# 23/0 30/0 # # 27/0 12/0 16/0`
+
+. `0/16 . . # 17/24 . . .`
+
+. `0/17 . . 15/29 . . . .`
+
+. `0/35 . . . . . 12/0 #`
+
+. `# 0/7 . . 7/8 . . 7/0`
+
+. `# 11/0 10/16 . . . . .`
+
+. `0/21 . . . . 0/5 . .`
+
+. `0/6 . . . # 0/3 . .`
+====
+======
+
+.Javascript API
+======
+[script,type="module"]
+====
+import "/components/kakuro/kakuro.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-kakuro");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("ol");
+element2.append(document.createTextNode("\n    "));
+
+const element3 = document.createElement("li");
+
+const element4 = document.createElement("code");
+element4.append(document.createTextNode("# 23/0 30/0 # # 27/0 12/0 16/0"));
+element3.append(element4);
+element2.append(element3);
+element2.append(document.createTextNode("\n    "));
+
+const element5 = document.createElement("li");
+
+const element6 = document.createElement("code");
+element6.append(document.createTextNode("0/16 . . # 17/24 . . ."));
+element5.append(element6);
+element2.append(element5);
+element2.append(document.createTextNode("\n    "));
+
+const element7 = document.createElement("li");
+
+const element8 = document.createElement("code");
+element8.append(document.createTextNode("0/17 . . 15/29 . . . ."));
+element7.append(element8);
+element2.append(element7);
+element2.append(document.createTextNode("\n    "));
+
+const element9 = document.createElement("li");
+
+const element10 = document.createElement("code");
+element10.append(document.createTextNode("0/35 . . . . . 12/0 #"));
+element9.append(element10);
+element2.append(element9);
+element2.append(document.createTextNode("\n    "));
+
+const element11 = document.createElement("li");
+
+const element12 = document.createElement("code");
+element12.append(document.createTextNode("# 0/7 . . 7/8 . . 7/0"));
+element11.append(element12);
+element2.append(element11);
+element2.append(document.createTextNode("\n    "));
+
+const element13 = document.createElement("li");
+
+const element14 = document.createElement("code");
+element14.append(document.createTextNode("# 11/0 10/16 . . . . ."));
+element13.append(element14);
+element2.append(element13);
+element2.append(document.createTextNode("\n    "));
+
+const element15 = document.createElement("li");
+
+const element16 = document.createElement("code");
+element16.append(document.createTextNode("0/21 . . . . 0/5 . ."));
+element15.append(element16);
+element2.append(element15);
+element2.append(document.createTextNode("\n    "));
+
+const element17 = document.createElement("li");
+
+const element18 = document.createElement("code");
+element18.append(document.createTextNode("0/6 . . . # 0/3 . ."));
+element17.append(element18);
+element2.append(element17);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+====
+======
+----
+========

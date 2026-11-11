@@ -1,0 +1,76 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpPrologViewer[src=/docs/components/_shared/intro-projects/prolog.json]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/prolog-viewer/prolog-viewer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-prolog-viewer");
+element1.setAttribute("src", "/docs/components/_shared/intro-projects/prolog.json");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example src
+\documentclass{article}
+\begin{document}
+\wcTpPrologViewer[src=/docs/components/prolog-viewer/examples/example.json]{}
+\end{document}
+
+% !tp-example script without filename
+\documentclass{article}
+\begin{document}
+\wcTpPrologViewer{
+  \wcScript[type=tp/prolog]|
+        parent(ada, byron).
+        parent(byron, charles).
+
+        grandparent(Grandparent, Grandchild) :-
+          parent(Grandparent, Parent),
+          parent(Parent, Grandchild).
+      |
+}
+\end{document}
+
+% !tp-example scripts with filename
+\documentclass{article}
+\begin{document}
+\wcTpPrologViewer{
+  \wcScript[type=tp/prolog,filename=program.pl]|
+        parent(ada, byron).
+        parent(byron, charles).
+
+        grandparent(Grandparent, Grandchild) :-
+          parent(Grandparent, Parent),
+          parent(Parent, Grandchild).
+      |
+  \wcScript[type=tp/prolog,filename=query.pl]|
+        grandparent(ada, Grandchild).
+      |
+}
+\end{document}
+
+% !tp-example error
+\documentclass{article}
+\begin{document}
+\wcTpPrologViewer{
+  \wcScript[type=tp/prolog,filename=query.pl]|
+        unknown_predicate(X).
+      |
+}
+\end{document}
+
+% !tp-example Single source file
+\documentclass{article}
+\begin{document}
+\wcTpPrologViewer[src=/docs/components/_shared/single-source/example.pl]{}
+\end{document}

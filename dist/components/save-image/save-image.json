@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-save-image></tp-save-image>"
+      "code": "<tp-box>\n  <p>Save this heart icon as an SVG, PNG or WebP image.</p>\n  <tp-icon id=\"intro-save-diagram\" name=\"heart\" size=\"5rem\" aria-label=\"Heart\"></tp-icon>\n  <tp-save-image anchor=\"#intro-save-diagram\" filename=\"heart\"></tp-save-image>\n</tp-box>"
     }
   ],
   "attributes": [
@@ -108,8 +108,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Save image",
-    "introduction": "The custom `<tp-save-image>` element implements the <tp-icon name=\"save-image\" library=\"components\" size=\"1.25em\"></tp-icon> Save image functionality: saves an anchored image in several formats.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Save image button | Download the associated image. The browser handles the download. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-save-image>` element saves an anchored image in several formats.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Save image button | Download the associated image. The browser handles the download. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

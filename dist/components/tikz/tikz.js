@@ -1,0 +1,1 @@
+import{t as e}from"../../chunks/tikz2.js";export{e as TpTikz};

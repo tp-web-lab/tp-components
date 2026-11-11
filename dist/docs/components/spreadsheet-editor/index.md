@@ -1,59 +1,38 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="spreadsheet-editor" library="components" size="1.25em"></tp-icon> Spreadsheet editor
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
+
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
+
+<div class="tp-component-doc-intro">
 
 The custom `<tp-spreadsheet-editor>` element provides an editable spreadsheet with Excel-style formulas, file import and export, cell selection and resizable columns.
 
-<tp-spreadsheet-editor src="/docs/components/spreadsheet-editor/examples/budget.csv"></tp-spreadsheet-editor>
+<div class="tp-component-doc-example">
 
+<!-- tp-docgen:introduction:start -->
+<tp-spreadsheet-editor src="/docs/components/spreadsheet-editor/examples/budget.csv"></tp-spreadsheet-editor>
+<!-- tp-docgen:introduction:end -->
+
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-spreadsheet-editor" src="/docs/components/spreadsheet-editor/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-Set `src` to a CSV, JSON or XLSX URL to load initial data. Relative URLs resolve against the document base URL; the filename extension selects the format (query strings and fragments are ignored). The first XLSX worksheet is used, including formulas. A successful load replaces `value` and adjusts the grid dimensions. Changing `src` loads a new file; removing it cancels pending loading and keeps the current data. Failed loads keep the current data and emit `tp-spreadsheet-editor-error` with `{ src, error }`. Successful loads emit the same `tp-spreadsheet-editor-import` event as the File menu.
-
-```html
-<tp-spreadsheet-editor src="data/budget.xlsx"></tp-spreadsheet-editor>
-```
-
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Click a cell | Select the active cell and edit its content. The formula bar displays its raw value or formula. |
-| Shift + click a cell | Select the rectangle from the selection anchor to the clicked cell. A plain click starts a new selection. |
-| Clear selected cells | Clear selected values and formulas while preserving formatting. Undo restores the operation in one step. |
-| Drag the right edge of a column heading | Resize the column, with a minimum of 48 pixels and no upper limit. Wide sheets scroll horizontally; widths survive cell edits and formatting changes. |
-| Double-click a column resize handle | Restore the default width of 112 pixels. |
-| File → Import | Load a CSV, JSON or XLSX file. |
-| File → Export CSV / JSON / XLSX — formulas | Save the sheet with its raw formulas. |
-| File → Export CSV / JSON / XLSX — values | Save calculated results without changing formulas in the open sheet. |
-| Formula picker | Choose a function and replace the selected parameters in the formula bar. |
-| Format | Set General, Number, Currency, Percent or Date display for the active cell. |
-| Cell style | Toggle Bold, Italic, Underline or Strikethrough for the active cell. |
-| Clear formatting | Remove number and text formatting from the active cell. |
-| Table | Insert a row or column before or after the active cell, or delete its row or column. At least one row and column remain. |
-| Undo / Redo | Undo or redo cell edits, grouped clearing and structural changes. |
-| Copy / Cut / Paste | Use the system clipboard with the active cell. Copying shifts relative formula references when pasted; cutting preserves the formula. These actions operate on one cell, even when a range is selected. |
-| Search / Close search | Highlight matching cells, or clear the search and hide its field. |
-| Fullscreen | Toggle fullscreen for this spreadsheet. |
-| Color / Theme | Change the spreadsheet's local brand color or theme. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Left</kbd> / <kbd>Right</kbd> on a focused column resize handle | Decrease / increase column width by 8 pixels. Reach handles with <kbd>Tab</kbd>. |
-| <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>C</kbd> / <kbd>X</kbd> / <kbd>V</kbd> in a cell | Copy, cut or paste the active cell. Copying shifts relative formula references when pasted; cutting preserves them. |
-| <kbd>Shift</kbd> <kbd>+</kbd> <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Extend or shrink the rectangular selection. |
-| <kbd>Delete</kbd> / <kbd>Backspace</kbd> with multiple cells selected | Clear the selected cells in one undoable operation. With one cell selected, edit its text normally. |
-| <kbd>Escape</kbd> | Collapse the selection to the focused cell. |
-| Typing in a selected cell | Edit its value or enter a formula beginning with =. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
-
-#### Initial spreadsheet content
+### Initial content
 
 ::: tp-tabs
 no content
@@ -89,149 +68,15 @@ Formula.js implements most, but not every, Microsoft Excel function. Date functi
 
 Use `editor.exportFile("xlsx", "report", "values")` to export calculated values programmatically. The third argument defaults to `"formulas"`. JSON retains numbers and booleans; dates use ISO strings in CSV/JSON and date cells in XLSX.
 
-## Examples
+### Configuration
 
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Edit spreadsheet cells and inspect how the sheet presents the supplied data.
+Set `src` to a CSV, JSON or XLSX URL to load initial data. Relative URLs resolve against the document base URL; the filename extension selects the format (query strings and fragments are ignored). The first XLSX worksheet is used, including formulas. A successful load replaces `value` and adjusts the grid dimensions. Changing `src` loads a new file; removing it cancels pending loading and keeps the current data. Failed loads keep the current data and emit `tp-spreadsheet-editor-error` with `{ src, error }`. Successful loads emit the same `tp-spreadsheet-editor-import` event as the File menu.
 
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
+```html
+<tp-spreadsheet-editor src="data/budget.xlsx"></tp-spreadsheet-editor>
+```
 
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpSpreadsheetEditor -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>columns</code> | <code>number</code> | <code>10</code> | Number of columns (`10` by default). |
-  | <code>rows</code> | <code>number</code> | <code>20</code> | Number of rows (`20` by default). |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | CSV, JSON or XLSX file URL loaded on connection and whenever it changes. |
-  | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | JSON-encoded two-dimensional array of raw cell values. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-spreadsheet-editor>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>deleteColumn</code> | <code>deleteColumn(): void</code> | Deletes the active column, adjusts selection, clears cell formatting and emits a structure-change event. Preserves the last remaining column. |
-  | <code>deleteRow</code> | <code>deleteRow(): void</code> | Deletes the active row, adjusts selection, clears cell formatting and emits a structure-change event. Preserves the last remaining row. |
-  | <code>exportFile</code> | <code>exportFile(format: TpSpreadsheetFileFormat, filename = &quot;spreadsheet&quot;, mode: TpSpreadsheetExportMode = &quot;formulas&quot;): void</code> | Downloads CSV, JSON or XLSX using filename plus the extension. The formulas mode preserves raw formulas; values exports calculated cell results. |
-  | <code>getData</code> | <code>getData(): string[][]</code> | Returns a row-by-row copy of raw cell strings, including formulas rather than calculated results. |
-  | <code>importFile</code> | <code>importFile(file: File): Promise&lt;void&gt;</code> | Loads CSV, JSON or the first XLSX sheet into the editor, records undo state and emits tp-spreadsheet-editor-import. Resolves after application; unsupported or invalid files reject. |
-  | <code>insertColumn</code> | <code>insertColumn(position: &quot;before&quot; \| &quot;after&quot; = &quot;after&quot;): void</code> | Inserts an empty column before or after the active cell, selects it, clears cell formatting and emits a structure-change event. Does nothing without a valid active cell. |
-  | <code>insertRow</code> | <code>insertRow(position: &quot;before&quot; \| &quot;after&quot; = &quot;after&quot;): void</code> | Inserts an empty row before or after the active cell, selects it, clears cell formatting and emits a structure-change event. Does nothing without a valid active cell. |
-  | <code>setData</code> | <code>setData(value: readonly (readonly unknown[])[]): void</code> | Replaces the matrix, converts values to strings and pads missing cells with empty strings. Updates rows, columns and value, retaining at least one row and column. |
-  [Public methods of `TpSpreadsheetEditor`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-spreadsheet-editor-clipboard-error</code> | <code>&#123; command: &quot;copy&quot; \| &quot;cut&quot; \| &quot;paste&quot; &#125;</code> | Emitted when a clipboard command fails; command identifies copy, cut or paste. |
-  | <code>tp-spreadsheet-editor-error</code> | <code>&#123; src: string; error: unknown &#125;</code> | Emitted when fetching or parsing src fails, except for aborted requests; src is the requested URL and error is the caught failure. |
-  | <code>tp-spreadsheet-editor-export</code> | <code>&#123; format: &quot;csv&quot; \| &quot;json&quot; \| &quot;xlsx&quot;; filename: string &#125;</code> | Emitted after a CSV, JSON or XLSX download is prepared; filename includes the extension. |
-  | <code>tp-spreadsheet-editor-import</code> | <code>&#123; format: string; file: File &#125;</code> | Emitted after an imported file replaces the sheet; format is the detected filename extension and file is the selected File object. |
-  | <code>tp-spreadsheet-editor-input</code> | <code>&#123; cell: string; raw: string; value: string \| number \| boolean \| Date &#125;</code> | Emitted for each edited or cleared cell. cell is its A1 reference, raw is the stored input or formula, and value is the evaluated result. |
-  | <code>tp-spreadsheet-editor-structure</code> | <code>&#123; action: &quot;insert-row&quot; \| &quot;delete-row&quot; \| &quot;insert-column&quot; \| &quot;delete-column&quot;; index: number; rows: number; columns: number &#125;</code> | Emitted after inserting or deleting a row or column. index is zero-based; rows and columns are the resulting dimensions. |
-  [Events emitted by `<tp-spreadsheet-editor>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-spreadsheet-editor>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_spreadsheet-editor.TpSpreadsheetEditor.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -258,12 +103,41 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Edit spreadsheet cells and inspect how the sheet presents the supplied data.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-spreadsheet-editor>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -279,7 +153,7 @@ All tp-components used by `<tp-spreadsheet-editor>` are loaded automatically by 
 -->
 <!--
 @tp-dependency tp-formula-picker
-@summary Selects an Excel-compatible Formula.js function.  *
+@summary Component `<tp-formula-picker>`.
 -->
 <!--
 @tp-dependency tp-fullscreen
@@ -302,15 +176,15 @@ All tp-components used by `<tp-spreadsheet-editor>` are loaded automatically by 
 @summary Sticky toolbar with start / center / end sections,
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-color>`](../color/index.md) : Brand color preset controller scoped to the containing element.
-- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
-- [`<tp-formula-picker>`](../formula-picker/index.md) : Selects an Excel-compatible Formula.js function. *
-- [`<tp-fullscreen>`](../fullscreen/index.md) : Fullscreen controller button.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-menu>`](../menu/index.md) : Accessible menu component.
-- [`<tp-theme>`](../theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
-- [`<tp-toolbar>`](../toolbar/index.md) : Sticky toolbar with start / center / end sections,
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-color>`](#/components/color/index.md) : Brand color preset controller scoped to the containing element.
+- [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
+- [`<tp-formula-picker>`](#/components/formula-picker/index.md) : Component `<tp-formula-picker>`.
+- [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-menu>`](#/components/menu/index.md) : Accessible menu component.
+- [`<tp-theme>`](#/components/theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
+- [`<tp-toolbar>`](#/components/toolbar/index.md) : Sticky toolbar with start / center / end sections,
 
 ### External
 

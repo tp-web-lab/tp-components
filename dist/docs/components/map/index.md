@@ -1,41 +1,38 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="map" library="components" size="1.25em"></tp-icon> Map
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-map>` element implements the map functionality: displays an interactive OpenStreetMap with named markers and GPX routes or tracks.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
-<tp-map lat="48.3904" lon="-4.4861" zoom="13" title="Brest, Brittany, France" marker></tp-map>
+<div class="tp-component-doc-intro">
 
-The component uses [Leaflet](https://leafletjs.com/) and [OpenStreetMap](https://www.openstreetmap.org/).
+The custom `<tp-map>` element displays an interactive OpenStreetMap with named markers and GPX routes or tracks.
 
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
+<tp-map lat="48.3904" lon="-4.4861" zoom="13" title="Brest, Brittany, France" marker=""></tp-map>
+<!-- tp-docgen:introduction:end -->
+
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-map" src="/docs/components/map/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Drag the map | Explore the surrounding area without moving the configured marker. |
-| Zoom in / Zoom out | Change the map scale. Controls are disabled at the zoom limits. Double-click also zooms in; touch devices support pinch zoom. |
-| Use my location | Ask the browser for location permission and center the map on your position. Refusal or unavailability displays a warning and preserves the previous coordinates. |
-| Location marker | Open its title popup when a title is provided. Use the popup's close button to dismiss it. |
-| Mouse wheel | Scroll the page; it does not zoom the map. |
-| Route or track line | Follow the recorded path visually. Separate recording segments are not joined. Lines have no additional click action and do not provide navigation guidance. |
-| Elevation profile: Zoom / Close | Open the profile in a larger dialog, then close it to return to the map. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between toolbar buttons, the map, its marker and attribution links. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused toolbar button or the profile's Zoom and Close buttons. <kbd>Enter</kbd> opens a focused marker's popup. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Pan the focused map. |
-| <kbd>+</kbd> / <kbd>-</kbd> | Zoom the focused map in or out. |
-| <kbd>Escape</kbd> | Close an open popup or the enlarged elevation profile. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Supply `lat` and `lon` in decimal degrees, `zoom` from 0 to 19, and a meaningful `title`. The defaults show Paris at zoom 13. Invalid or empty numeric values use their defaults; finite values are clamped to their supported ranges and zoom is rounded down. The map projection cannot display the poles.
 
@@ -76,265 +73,11 @@ The options follow the map extension of `@tp/tp-markdown`, but this component do
 
 Leaflet is loaded on demand. Map tiles are requested from OpenStreetMap's public tile service, which receives the visitor's network information and the requested map area. Keep the visible attribution and comply with the [tile usage policy](https://operations.osmfoundation.org/policies/tiles/): no bulk downloading or offline prefetching. The service is best-effort; failed tile requests produce a warning. Account for these external requests in your site's privacy information. Do not disable the browser's Referer header for this service.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Explore Brest by dragging the map or using its keyboard controls. Select the marker to read its location name; the location button requests permission before using your position.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Multiple markers
-: Explore Brest and Rennes on a map fitted to both places. Select each marker to read its own title; zooming and panning remain available after the initial framing.
-
-GPX track
-: Load an illustrative Brest track with two disconnected recording segments and named waypoints, plus a marker declared in the page. The visible gap is preserved; this synthetic example is not a navigation guide.
-
-GPX route
-: Explore a recorded track in northeastern Ouessant and its altitude profile below the map. Compare elevation in metres against cumulative distance in kilometres; the three recording segments remain separate. Use the profile’s Zoom button for a larger chart.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-HTML
-: ::include{examples/examples.html}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
+### Programming notes
 
 Set `lat`, `lon`, `zoom`, `title` or `marker` to update the map. Consecutive attribute changes are grouped. `locate()` requests the visitor's position; obsolete responses are ignored after removal or a change of coordinates. Removing the component releases the map and its observers; reconnecting it creates a fresh map.
 
-### API
-
-<!-- tp-docgen:api TpMap -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>elevation-profile</code> | <code>boolean</code> | <code>false</code> | Shows GPX altitude in metres against cumulative distance in kilometres below the map. |
-  | <code>fit-content</code> | <code>boolean</code> | <code>false</code> | Fits markers and GPX geometry together; takes precedence over fit-markers. |
-  | <code>fit-markers</code> | <code>boolean</code> | <code>false</code> | Fits the viewport to the markers when their locations change or fitting is enabled. |
-  | <code>lat</code> | <code>number</code> | <code>48.8566</code> | Latitude of the configured location, between -90 and 90. |
-  | <code>lon</code> | <code>number</code> | <code>2.3522</code> | Longitude of the configured location, between -180 and 180. |
-  | <code>marker</code> | <code>boolean</code> | <code>false</code> | Shows a marker at the configured coordinates when no location list is supplied. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a GPX file containing tracks, routes or waypoints. |
-  | <code>title</code> | <code>string</code> | <code>&quot;&quot;</code> | Accessible map name and optional marker popup text. |
-  | <code>zoom</code> | <code>number</code> | <code>13</code> | Zoom level from 0 to 19. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-map>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>locate</code> | <code>locate(): void</code> | Requests geolocation only following an explicit user action; stale replies are ignored. |
-  [Public methods of `TpMap`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-map>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-map-height</code> | <code>24rem</code> | Height of the map viewport, with a minimum of 10rem. |
-  | <code>&#45;&#45;tp-map-width</code> | <code>100%</code> | Preferred width of the map viewport and elevation profile, limited by the container width. |
-  [CSS properties of `<tp-map>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_map_map.TpMap.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -361,12 +104,50 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Explore Brest by dragging the map or using its keyboard controls. Select the marker to read its location name; the location button requests permission before using your position.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Multiple markers
+: Explore Brest and Rennes on a map fitted to both places. Select each marker to read its own title; zooming and panning remain available after the initial framing.
+
+GPX track
+: Load an illustrative Brest track with two disconnected recording segments and named waypoints, plus a marker declared in the page. The visible gap is preserved; this synthetic example is not a navigation guide.
+
+GPX route
+: Explore a recorded track in northeastern Ouessant and its altitude profile below the map. Compare elevation in metres against cumulative distance in kilometres; the three recording segments remain separate. Use the profile’s Zoom button for a larger chart.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-map>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -389,18 +170,14 @@ All tp-components used by `<tp-map>` are loaded automatically by this component 
 @summary XY graph rendering component.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
-- [`<tp-callout>`](../callout/index.md) : Callout component for highlighted contextual content.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-xy-plot>`](../xy-plot/index.md) : XY graph rendering component.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-button-group>`](#/components/button-group/index.md) : Button group component for organizing multiple buttons.
+- [`<tp-callout>`](#/components/callout/index.md) : Callout component for highlighted contextual content.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-xy-plot>`](#/components/xy-plot/index.md) : XY graph rendering component.
 
 ### External
 
-<!--
-@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
-@summary Shared parsers, games and rendering utilities.
--->
 <!--
 @credit Leaflet https://leafletjs.com/
 @summary Interactive geographic maps.
@@ -409,8 +186,12 @@ All tp-components used by `<tp-map>` are loaded automatically by this component 
 @credit OpenStreetMap https://www.openstreetmap.org/copyright
 @summary Map tiles and geographic data; attribution required.
 -->
+<!--
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
+-->
 
-- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 - [Leaflet](https://leafletjs.com/) : Interactive geographic maps.
 - [OpenStreetMap](https://www.openstreetmap.org/copyright) : Map tiles and geographic data; attribution required.
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 <!-- tp-docgen:dependencies:end -->

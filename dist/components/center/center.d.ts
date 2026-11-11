@@ -8,13 +8,13 @@
  */
 import { TpBase } from "../base/base.js";
 /**
- * Centered content layout component, without Shadow DOM.
+ * The custom `<tp-center>` element centers content within a page or container.
  *
  * The component constrains its own inline size and centers itself in the
  * available horizontal space. It can also center text, add inline gutters, or
  * switch to intrinsic child sizing.
  *
- * @summary Centers content within a configurable maximum inline size.
+ * @summary Centers content within a page or container.
  * @tagname tp-center
  *
  * @attr {boolean} center-text = false - Centers inline text content with `text-align: center`.

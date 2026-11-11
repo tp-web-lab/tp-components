@@ -9,16 +9,27 @@ import "../object-tree/object-tree.js";
 type RstViewerMode = "render" | "html" | "ast";
 type RstViewerExample = MarkupViewerExample<URL>;
 /**
- * Interactive editor and viewer for one or more reStructuredText examples.
+ * The custom `<tp-restructuredtext-viewer>` element provides an interactive reStructuredText viewer with editable source and parser outputs.
  *
  * Consecutive examples can be declared with `.. example:: Label` blocks.
  *
+ * @summary Provides an interactive reStructuredText viewer with editable source and parser outputs.
  * @tagname tp-restructuredtext-viewer
  * @attr {boolean} lite = false - Uses the compact single-example viewer with rendered HTML output.
  * @attr {boolean} doctest = false - Runs standard Python doctest blocks in rendered output.
  * @attr {string} src = "" - Comma-separated URLs of external reStructuredText example files.
  * @example
- * <tp-restructuredtext-viewer></tp-restructuredtext-viewer>
+ * <tp-restructuredtext-viewer>
+ *         <script type="tp/restructuredtext">
+ *           Live reStructuredText
+ *           =====================
+ *
+ *           Edit this source and select **Run**.
+ *
+ *           * First item
+ *           * Second item
+ *         </script>
+ *       </tp-restructuredtext-viewer>
  */
 export declare class TpRestructuredTextViewer extends TpMarkupViewer<RstViewerMode, URL> {
     static get observedAttributes(): string[];

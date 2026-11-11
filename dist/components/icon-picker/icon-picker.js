@@ -1,1 +1,1 @@
-import{t as e}from"../../chunks/icon-picker2.js";export{e as TpIconPicker};
+import{t as e}from"../../chunks/icon-picker.js";export{e as TpIconPicker};

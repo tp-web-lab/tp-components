@@ -1,95 +1,49 @@
-::::::: tp-markdown-viewer { label="tp-badge" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-badge" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 Build status: :tp-badge:`Ready`{variant="success" pulse}
-
-::: tp-badge { outlined }
-:tp-icon:{name="file_type_vite" library="languages"} Vite :tp-divider:{orientation="vertical"} 8.1.5
-:::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/badge/badge.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- outlined
+const example = document.createDocumentFragment();
 
-- pill
+const element1 = document.createElement("p");
+element1.append(document.createTextNode("\n  Build status: "));
 
-- pulse
-:::
+const element2 = document.createElement("tp-badge");
+element2.setAttribute("variant", "success");
+element2.setAttribute("pulse", "");
+element2.append(document.createTextNode("Ready"));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-::: tp-radio-list { data-setting="size" label="size" label-position="top" orientation="horizontal" value="4" }
-- xxs
-
-- xs
-
-- s
-
-- m
-
-- l
-
-- xl
-
-- xxl
-:::
-
-::: tp-radio-list { data-setting="variant" label="variant" label-position="top" orientation="horizontal" value="5" }
-- success
-
-- danger
-
-- warning
-
-- info
-
-- neutral
-
-- brand
-:::
-
-::: tp-cluster
-:::
-
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
-
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="badge attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/badge/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
 
 ``` example {label="With icon"}
-Badges can contain inline content such as icons.
+:::: tp-badge { outlined }
+:tp-icon:{name="file_type_vite" library="languages"} Vite
 
-::: tp-badge { variant="success" pill }
-:tp-icon:{name="check"} Approved
+::: tp-divider { orientation="vertical" }
 :::
 
-::: tp-badge { variant="warning" pill }
-:tp-icon:{name="clock-outline"} Waiting
+8.1.5
+::::
+```
+
+``` example {label="Status labels"}
+::: tp-badge { variant="success" }
+Complete
+:::
+
+::: tp-badge { variant="warning" }
+Pending
 :::
 ```
+:::::
 ::::::
-:::::::

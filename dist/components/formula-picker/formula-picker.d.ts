@@ -2,7 +2,11 @@
 import { TpBase } from "../base/base.js";
 export declare const spreadsheetFormulaNames: string[];
 export declare function spreadsheetFormulaSignature(name: string): string;
-/** Selects an Excel-compatible Formula.js function.  * @tagname tp-formula-picker
+/**
+ * The custom `<tp-formula-picker>` element browses and selects spreadsheet functions.
+ *
+ * @summary Browses and selects spreadsheet functions.
+ * @tagname tp-formula-picker
  * @example
  * <tp-formula-picker></tp-formula-picker>
  * @event tp-formula-picker-select Emitted when a spreadsheet function is selected. formula contains the leading = and argument placeholders; selectionStart and selectionEnd are zero-based string offsets delimiting the arguments to select.

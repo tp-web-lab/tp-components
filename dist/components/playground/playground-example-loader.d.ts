@@ -2,8 +2,8 @@
  * @module components/playground/playground-example-loader
  * @summary Example catalog loading utilities for playground projects.
  */
-import type { TpFile } from '../filesystem/filesystem.types.js';
-import type { TpProject } from './project.js';
+import type { TpFile } from "../filesystem/filesystem.types.js";
+import type { TpProject } from "./project.js";
 /** Describes a playground example. */
 export interface TpPlaygroundExample {
     /** Example identifier. */

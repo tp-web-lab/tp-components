@@ -9,8 +9,7 @@
 import { TpOverlayElement } from "../overlay/overlay.js";
 type TpDropdownPlacement = "top" | "end" | "bottom" | "start";
 /**
- * `<tp-dropdown>` affiche un menu déroulant ancré à un élément cible,
- * sans utiliser de Shadow DOM.
+ * The custom `<tp-dropdown>` element displays an anchored dropdown menu.
  *
  * Structure attendue :
  *

@@ -1,0 +1,23 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpGameLife[preset=glider,label=Glider,cell-size=14]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/game-life/game-life.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-game-life");
+element1.setAttribute("preset", "glider");
+element1.setAttribute("label", "Glider");
+element1.setAttribute("cell-size", "14");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

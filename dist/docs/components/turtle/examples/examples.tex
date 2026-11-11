@@ -1,0 +1,41 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpTurtle[width=420,height=220,label=A square]{
+  \wcScript[type=tp/turtle]|
+      turtle x=0 y=0 heading=0 speed=6
+      forward 80
+      right 90
+      forward 80
+      right 90
+      forward 80
+      right 90
+      forward 80
+    |
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/turtle/turtle.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-turtle");
+element1.setAttribute("width", "420");
+element1.setAttribute("height", "220");
+element1.setAttribute("label", "A square");
+element1.append(document.createTextNode("\n    "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/turtle");
+element2.textContent = "\n      turtle x=0 y=0 heading=0 speed=6\n      forward 80\n      right 90\n      forward 80\n      right 90\n      forward 80\n      right 90\n      forward 80\n    ";
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

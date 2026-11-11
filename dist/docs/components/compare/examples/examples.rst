@@ -25,85 +25,36 @@
 
                After: the updated design
 
-      .. example:: Attributes
-
-         Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-         .. tp-stack::
-
-            .. tp-radio-list::
-               :data-setting: orientation
-               :label: orientation
-               :label-position: top
-               :orientation: horizontal
-               :value: 1
-
-               - horizontal
-
-               - vertical
-
-            .. tp-cluster::
-
-               .. tp-textfield::
-                  :data-setting: after-label
-                  :label: after-label
-                  :value:
-                  :placeholder:
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: before-label
-                  :label: before-label
-                  :value:
-                  :placeholder:
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: position
-                  :label: position
-                  :value:
-                  :placeholder:
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: storage-key
-                  :label: storage-key
-                  :value:
-                  :placeholder:
-                  :clearable:
-
-            .. tp-button-group::
-
-               .. tp-button::
-                  :id: attributes-reset
-                  :type: button
-
-                  Reset defaults
-
-               .. tp-button::
-                  :id: attributes-reload
-                  :type: button
-
-                  Reload preview
-
-         .. tp-divider::
-
-         .. h3::
-
-            Preview
-
-         .. tp-iframe::
-            :id: attributes-frame
-            :title: compare attribute preview
-            :style: height: 24rem; display: flow-root; inline-size: auto;
-
-         .. tp-callout::
-            :id: attributes-status
-            :variant: info
-            :heading: Preview status
-
-            Preparing the preview…
+      .. example:: Javascript API
 
          .. script::
             :type: module
-            :src: /docs/components/compare/examples/attributes.js
+
+            import "/components/box/box.js";
+            import "/components/compare/compare.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-compare");
+            element1.setAttribute("position", "50%");
+            element1.setAttribute("before-label", "Before");
+            element1.setAttribute("after-label", "After");
+            element1.setAttribute("style", "height: 12rem;");
+            element1.append(document.createTextNode("\n  "));
+
+            const element2 = document.createElement("tp-box");
+            element2.setAttribute("slot", "before");
+            element2.setAttribute("style", "height: 100%; background: var(--tp-neutral-100);");
+            element2.append(document.createTextNode("Before: the original design"));
+            element1.append(element2);
+            element1.append(document.createTextNode("\n  "));
+
+            const element3 = document.createElement("tp-box");
+            element3.setAttribute("slot", "after");
+            element3.setAttribute("style", "height: 100%; background: var(--tp-brand-100);");
+            element3.append(document.createTextNode("After: the updated design"));
+            element1.append(element3);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+
+            document.body.append(example);

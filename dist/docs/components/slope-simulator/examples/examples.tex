@@ -1,0 +1,38 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpSlopeSimulator{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/slope-simulator/slope-simulator.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-slope-simulator");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Tour of Lombardy 2026
+\documentclass{article}
+\begin{document}
+Approximate reconstruction of the supplied Tour of Lombardy 2026 profile image (239.6 km). Distances and elevations are estimated for this interactive example, not official route or GPS data. Every segment stays within ±20\%; vertical exaggeration affects only the drawing.
+
+
+\wcTpSlopeSimulator[src=/docs/components/slope-simulator/examples/2026-lombardy-tour.json]{}
+\end{document}
+
+% !tp-example Alpe d’Huez 2026
+\documentclass{article}
+\begin{document}
+Approximate reconstruction of the supplied Alpe d’Huez 2026 stage profile image (170.9 km), from Le Bourg d’Oisans via the Croix de Fer, Télégraphe, Galibier and Sarenne passes. Labelled distances and elevations are taken from the image; intermediate points are estimated for this interactive example, not official GPS data. Every segment stays within ±20\%; vertical exaggeration affects only the drawing.
+
+
+\wcTpSlopeSimulator[src=/docs/components/slope-simulator/examples/2026-alpe-huez.json]{}
+\end{document}

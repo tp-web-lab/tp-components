@@ -1,0 +1,87 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[padding=0]{
+  \wcTpToolbar{
+    \wcTpIcon[section=start,name=home,aria-label=Home]{}
+    \wcTpIcon[section=start,name=menu,aria-label=Menu]{}
+    \wcSpan*[section=center]{Document}
+    \wcTpIcon[section=end,name=github,aria-label=GitHub]{}
+    \wcTpIcon[section=end,name=settings,aria-label=Settings]{}
+    \wcTpIcon[section=end,name=help,aria-label=Help]{}
+  }
+  \wcTpBox[border-width=0,style=min-block-size: 5rem; display: grid; place-items: center]{Document area}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/icon/icon.js";
+import "/components/toolbar/toolbar.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.setAttribute("padding", "0");
+element1.append(document.createTextNode("\n"));
+
+const element2 = document.createElement("tp-toolbar");
+element2.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("tp-icon");
+element3.setAttribute("section", "start");
+element3.setAttribute("name", "home");
+element3.setAttribute("aria-label", "Home");
+element2.append(element3);
+element2.append(document.createTextNode("\n  "));
+
+const element4 = document.createElement("tp-icon");
+element4.setAttribute("section", "start");
+element4.setAttribute("name", "menu");
+element4.setAttribute("aria-label", "Menu");
+element2.append(element4);
+element2.append(document.createTextNode("\n  "));
+
+const element5 = document.createElement("span");
+element5.setAttribute("section", "center");
+element5.append(document.createTextNode("Document"));
+element2.append(element5);
+element2.append(document.createTextNode("\n  "));
+
+const element6 = document.createElement("tp-icon");
+element6.setAttribute("section", "end");
+element6.setAttribute("name", "github");
+element6.setAttribute("aria-label", "GitHub");
+element2.append(element6);
+element2.append(document.createTextNode("\n  "));
+
+const element7 = document.createElement("tp-icon");
+element7.setAttribute("section", "end");
+element7.setAttribute("name", "settings");
+element7.setAttribute("aria-label", "Settings");
+element2.append(element7);
+element2.append(document.createTextNode("\n  "));
+
+const element8 = document.createElement("tp-icon");
+element8.setAttribute("section", "end");
+element8.setAttribute("name", "help");
+element8.setAttribute("aria-label", "Help");
+element2.append(element8);
+element2.append(document.createTextNode("\n"));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element9 = document.createElement("tp-box");
+element9.setAttribute("border-width", "0");
+element9.setAttribute("style", "min-block-size: 5rem; display: grid; place-items: center");
+element9.append(document.createTextNode("Document area"));
+element1.append(element9);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

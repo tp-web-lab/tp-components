@@ -1,0 +1,38 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpSlideNote[legend=Speaker notes,lang=en-GB,show-text]{
+  \wcScript[type=tp/txt]|Introduce the idea. [trigger=clic] Explain the next step.|
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/slide-note/slide-note.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-slide-note");
+element1.setAttribute("legend", "Speaker notes");
+element1.setAttribute("lang", "en-GB");
+element1.setAttribute("show-text", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/txt");
+element2.textContent = "Introduce the idea. [trigger=clic] Explain the next step.";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example External notes
+\documentclass{article}
+\begin{document}
+\wcTpSlideNote[legend=External notes,src=/docs/components/slide-note/examples/notes.txt,lang=en-GB,show-text]{}
+\end{document}

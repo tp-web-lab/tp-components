@@ -4,24 +4,19 @@
       <tp-markup-multi-slides repository="/docs/components/markup-multi-slides/docs" label="Mixed markup slides"></tp-markup-multi-slides>
     </div>
 
-    <div role="example" label="Attributes">
-      <p>Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.</p>
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/markup-multi-slides/markup-multi-slides.js";
 
+      const example = document.createDocumentFragment();
 
+      const element1 = document.createElement("tp-markup-multi-slides");
+      element1.setAttribute("repository", "/docs/components/markup-multi-slides/docs");
+      element1.setAttribute("label", "Mixed markup slides");
+      example.append(element1);
 
-
-      <tp-stack>
-
-      <tp-radio-list data-setting="auto" label="auto" label-position="top" orientation="horizontal" value="1"><ul><li>Default (empty)</li><li>notes</li><li>timing</li></ul></tp-radio-list>
-      <tp-cluster><tp-textfield data-setting="timing" label="timing" value="5000" placeholder="5000" clearable></tp-textfield></tp-cluster>
-      <tp-button-group><tp-button id="attributes-reset" type="button">Reset defaults</tp-button><tp-button id="attributes-reload" type="button">Reload preview</tp-button></tp-button-group>
-      </tp-stack>
-      <tp-divider></tp-divider>
-      <h3>Preview</h3>
-      <tp-iframe id="attributes-frame" title="markup-multi-slides attribute preview" style="height: 36rem; display: flow-root; inline-size: auto;"></tp-iframe>
-      <tp-callout id="attributes-status" variant="info" heading="Preview status">Preparing the preview…</tp-callout>
-
-      <script type="module" src="/docs/components/markup-multi-slides/examples/attributes.js"></script>
+      document.body.append(example);
+      </script>
     </div>
 
     <div role="example" label="Slides navigation menu">

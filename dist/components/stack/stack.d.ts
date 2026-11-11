@@ -8,13 +8,13 @@
  */
 import { TpBase } from "../base/base.js";
 /**
- * Vertical stack layout component.
+ * The custom `<tp-stack>` element arranges content vertically with consistent spacing.
  *
  * Direct children are stacked vertically with a configurable gap. The gap can
  * optionally be applied recursively to all descendants, and one child can push
  * the following content to the opposite edge with `split-after`.
  *
- * @summary Stacks child elements vertically with an optional recursive gap and split point.
+ * @summary Arranges content vertically with consistent spacing.
  * @tagname tp-stack
  *
  * @attr {boolean} recursive = false - Applies the stack gap recursively to descendant siblings instead of direct children only.

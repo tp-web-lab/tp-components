@@ -8,15 +8,15 @@
  */
 import { TpBase } from "../base/base.js";
 /**
- * `<tp-color-picker>` displays base `tp.css` color tokens as swatches.
+ * The custom `<tp-color-picker>` element browses and selects colors from the available palettes.
  *
  * The component reads current CSS custom property values from computed styles,
  * so it reflects active presets/themes.
  *
- * @summary Viewer for base color tokens.
+ * @summary Browses and selects colors from the available palettes.
  * @tagname tp-color-picker
-
-
+ *
+ *
  * @example
  * <tp-color-picker></tp-color-picker>
  * @event tp-color-picker-select Emitted when a color token is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success.

@@ -14,109 +14,24 @@
             :title: Brest, Brittany, France
             :marker:
 
-      .. example:: Attributes
-
-         Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-         .. tp-stack::
-
-            .. tp-checkbox-list::
-               :id: attributes-booleans
-               :label: Boolean attributes
-               :label-position: top
-               :orientation: horizontal
-               :value:
-
-               - elevation-profile
-
-               - fit-content
-
-               - fit-markers
-
-               - marker
-
-            .. tp-radio-list::
-               :data-setting: src
-               :label: src
-               :label-position: top
-               :orientation: horizontal
-               :value: 1
-
-               - Default
-
-               - file1
-
-               - file2
-
-               - file-unknown
-
-            .. tp-cluster::
-
-               .. tp-textfield::
-                  :data-setting: lat
-                  :label: lat
-                  :value: 48.8566
-                  :placeholder: 48.8566
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: lon
-                  :label: lon
-                  :value: 2.3522
-                  :placeholder: 2.3522
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: title
-                  :label: title
-                  :value:
-                  :placeholder:
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: zoom
-                  :label: zoom
-                  :value: 13
-                  :placeholder: 13
-                  :clearable:
-
-            .. tp-button-group::
-
-               .. tp-button::
-                  :id: attributes-reset
-                  :type: button
-
-                  Reset defaults
-
-               .. tp-button::
-                  :id: attributes-reload
-                  :type: button
-
-                  Reload preview
-
-         .. tp-divider::
-
-         .. h3::
-
-            Preview
-
-         .. tp-iframe::
-            :id: attributes-frame
-            :title: map attribute preview
-            :style: height: 24rem; display: flow-root; inline-size: auto;
-
-         .. tp-callout::
-            :id: attributes-status
-            :variant: info
-            :heading: Preview status
-
-            Preparing the preview…
-
-         File-loading attributes offer only Default, file1, file2 and file-unknown. The two local fixtures preserve verified example formats (they may contain the same content); file-unknown deliberately exercises error handling. No arbitrary path can be entered.
+      .. example:: Javascript API
 
          .. script::
             :type: module
-            :src: /docs/components/map/examples/attributes.js
+
+            import "/components/map/map.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-map");
+            element1.setAttribute("lat", "48.3904");
+            element1.setAttribute("lon", "-4.4861");
+            element1.setAttribute("zoom", "13");
+            element1.setAttribute("title", "Brest, Brittany, France");
+            element1.setAttribute("marker", "");
+            example.append(element1);
+
+            document.body.append(example);
 
       .. example:: Multiple markers
 

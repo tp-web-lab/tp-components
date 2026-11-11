@@ -1,45 +1,31 @@
-::::::: tp-markdown-viewer { label="tp-frame" allow-script }
-:::::: script { type="tp/markdown" }
+::::: tp-markdown-viewer { label="tp-frame" allow-script }
+:::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-frame { aspect-ratio="16:9" style="max-width: 24rem;" }
 ![tp-components logo](/docs/medias/logos/logo-tp.svg)
 :::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/frame/frame.js";
 
-::::: tp-stack
-:::: tp-cluster
-::: tp-textfield { data-setting="aspect-ratio" label="aspect-ratio" value="16:9" placeholder="16:9" clearable }
-:::
-::::
+const example = document.createDocumentFragment();
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element1 = document.createElement("tp-frame");
+element1.setAttribute("aspect-ratio", "16:9");
+element1.setAttribute("style", "max-width: 24rem;");
+element1.append(document.createTextNode("\n  "));
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element2 = document.createElement("img");
+element2.setAttribute("src", "/docs/medias/logos/logo-tp.svg");
+element2.setAttribute("alt", "tp-components logo");
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="frame attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/frame/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
-::::::
-:::::::
+::::
+:::::

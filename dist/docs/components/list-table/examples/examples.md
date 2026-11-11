@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-list-table" allow-script }
-:::::: script { type="tp/markdown" }
+::::: tp-markdown-viewer { label="tp-list-table" allow-script }
+:::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-list-table { heading }
 - - Country
@@ -20,41 +20,83 @@
 :::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/list-table/list-table.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- heading
-:::
+const example = document.createDocumentFragment();
 
-::: tp-cluster
-:::
+const element1 = document.createElement("tp-list-table");
+element1.setAttribute("heading", "");
+element1.append(document.createTextNode("\n  "));
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element2 = document.createElement("ul");
+element2.append(document.createTextNode("\n    "));
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element3 = document.createElement("li");
 
-::: tp-divider
-:::
+const element4 = document.createElement("ul");
 
-### Preview
+const element5 = document.createElement("li");
+element5.append(document.createTextNode("Country"));
+element4.append(element5);
 
-::: tp-iframe { id="attributes-frame" title="list-table attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
+const element6 = document.createElement("li");
+element6.append(document.createTextNode("Capital"));
+element4.append(element6);
+element3.append(element4);
+element2.append(element3);
+element2.append(document.createTextNode("\n    "));
 
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
+const element7 = document.createElement("li");
 
-::: script { type="module" src="/docs/components/list-table/examples/attributes.js" }
+const element8 = document.createElement("ul");
+
+const element9 = document.createElement("li");
+element9.append(document.createTextNode("Estonia"));
+element8.append(element9);
+
+const element10 = document.createElement("li");
+element10.append(document.createTextNode("Tallinn"));
+element8.append(element10);
+element7.append(element8);
+element2.append(element7);
+element2.append(document.createTextNode("\n    "));
+
+const element11 = document.createElement("li");
+
+const element12 = document.createElement("ul");
+
+const element13 = document.createElement("li");
+element13.append(document.createTextNode("Latvia"));
+element12.append(element13);
+
+const element14 = document.createElement("li");
+element14.append(document.createTextNode("Riga"));
+element12.append(element14);
+element11.append(element12);
+element2.append(element11);
+element2.append(document.createTextNode("\n    "));
+
+const element15 = document.createElement("li");
+
+const element16 = document.createElement("ul");
+
+const element17 = document.createElement("li");
+element17.append(document.createTextNode("Lithuania"));
+element16.append(element17);
+
+const element18 = document.createElement("li");
+element18.append(document.createTextNode("Vilnius"));
+element16.append(element18);
+element15.append(element16);
+element2.append(element15);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
 :::
 ```
 
@@ -69,5 +111,5 @@ Preparing the preview…
 4. Compare the results
 :::
 ```
-::::::
-:::::::
+::::
+:::::

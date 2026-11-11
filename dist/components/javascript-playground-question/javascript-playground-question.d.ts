@@ -18,7 +18,9 @@
 import { TpJavascriptPlayground } from "../javascript-playground/javascript-playground.js";
 import { TpPlaygroundQuestion } from "../playground-question/playground-question.js";
 /**
- * @summary checks a JavaScript exercise using the playground and an external test file.
+ * The custom `<tp-javascript-playground-question>` element presents and grades JavaScript programming exercises.
+ *
+ * @summary Presents and grades JavaScript programming exercises.
  * @tagname tp-javascript-playground-question
  * @accessibility Reuses TpQuestion's disclosure, actions and feedback tabs.
  * @keyboard {Enter / Space} Expands the question or activates a focused action.

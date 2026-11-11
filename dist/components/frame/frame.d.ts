@@ -4,9 +4,9 @@
  */
 import { TpBase } from "../base/base.js";
 /**
- * Displays content in a fixed-aspect-ratio frame.
+ * The custom `<tp-frame>` element displays content in a fixed-aspect-ratio frame.
  *
- * @summary displays content in a fixed-aspect-ratio frame.
+ * @summary Displays content in a fixed-aspect-ratio frame.
  * @tagname tp-frame
  * @attr {string} aspect-ratio = "16:9" - Width-to-height ratio in numerator:denominator notation. When absent, uses the CSS defaults of 16 and 9.
  * @remarks

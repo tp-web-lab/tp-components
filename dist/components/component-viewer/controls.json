@@ -51,8 +51,32 @@
       ]
     }
   },
-  "tp-asciidoc-multi-pages": {},
-  "tp-asciidoc-multi-slides": {},
+  "tp-asciidoc-blog": {},
+  "tp-asciidoc-multi-pages": {
+    "theme": {
+      "values": [
+        "light",
+        "dark",
+        "auto"
+      ]
+    }
+  },
+  "tp-asciidoc-multi-slides": {
+    "auto": {
+      "values": [
+        "",
+        "notes",
+        "timing"
+      ]
+    },
+    "theme": {
+      "values": [
+        "light",
+        "dark",
+        "auto"
+      ]
+    }
+  },
   "tp-asciidoc-playground": {
     "repository": {
       "choices": [
@@ -346,6 +370,14 @@
     }
   },
   "tp-card": {},
+  "tp-carousel": {
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
   "tp-center": {},
   "tp-checkbox-list": {
     "label-position": {
@@ -518,6 +550,7 @@
   },
   "tp-console": {},
   "tp-contextmenu": {},
+  "tp-control": {},
   "tp-copy-code": {},
   "tp-cover": {},
   "tp-crossword": {},
@@ -769,8 +802,32 @@
   "tp-graph-query-tree": {},
   "tp-graph-sequential-circuit": {},
   "tp-grid": {},
-  "tp-html-multi-pages": {},
-  "tp-html-multi-slides": {},
+  "tp-html-blog": {},
+  "tp-html-multi-pages": {
+    "theme": {
+      "values": [
+        "light",
+        "dark",
+        "auto"
+      ]
+    }
+  },
+  "tp-html-multi-slides": {
+    "auto": {
+      "values": [
+        "",
+        "notes",
+        "timing"
+      ]
+    },
+    "theme": {
+      "values": [
+        "light",
+        "dark",
+        "auto"
+      ]
+    }
+  },
   "tp-html-playground": {
     "repository": {
       "choices": [
@@ -1122,6 +1179,7 @@
     }
   },
   "tp-javascript-viewer-question": {},
+  "tp-kakuro": {},
   "tp-lang": {
     "repository": {
       "choices": [
@@ -1165,6 +1223,35 @@
       ]
     }
   },
+  "tp-latex": {},
+  "tp-latex-multi-pages": {
+    "theme": {
+      "values": [
+        "light",
+        "dark",
+        "auto"
+      ]
+    }
+  },
+  "tp-latex-multi-slides": {
+    "auto": {
+      "values": [
+        "",
+        "notes",
+        "timing"
+      ]
+    },
+    "theme": {
+      "values": [
+        "light",
+        "dark",
+        "auto"
+      ]
+    }
+  },
+  "tp-latex-playground": {},
+  "tp-latex-single-page": {},
+  "tp-latex-viewer": {},
   "tp-list-table": {},
   "tp-listof": {},
   "tp-logigram": {
@@ -1286,6 +1373,7 @@
       ]
     }
   },
+  "tp-markdown-blog": {},
   "tp-markdown-multi-pages": {
     "logo": {
       "choices": [
@@ -1335,7 +1423,22 @@
       ]
     }
   },
-  "tp-markdown-multi-slides": {},
+  "tp-markdown-multi-slides": {
+    "auto": {
+      "values": [
+        "",
+        "notes",
+        "timing"
+      ]
+    },
+    "theme": {
+      "values": [
+        "light",
+        "dark",
+        "auto"
+      ]
+    }
+  },
   "tp-markdown-playground": {
     "repository": {
       "choices": [
@@ -1402,6 +1505,16 @@
     }
   },
   "tp-markdown-viewer-question": {},
+  "tp-markup-blog": {
+    "language": {
+      "values": [
+        "html",
+        "markdown",
+        "asciidoc",
+        "restructuredtext"
+      ]
+    }
+  },
   "tp-markup-multi-pages": {
     "logo": {
       "choices": [
@@ -1457,6 +1570,13 @@
         "",
         "notes",
         "timing"
+      ]
+    },
+    "theme": {
+      "values": [
+        "light",
+        "dark",
+        "auto"
       ]
     }
   },
@@ -1851,6 +1971,16 @@
       ]
     }
   },
+  "tp-puzzle": {
+    "shape": {
+      "values": [
+        "square",
+        "puzzle",
+        "triangle",
+        "hexagon"
+      ]
+    }
+  },
   "tp-python-notebook": {},
   "tp-python-playground": {
     "repository": {
@@ -2022,8 +2152,32 @@
       ]
     }
   },
-  "tp-restructuredtext-multi-pages": {},
-  "tp-restructuredtext-multi-slides": {},
+  "tp-restructuredtext-blog": {},
+  "tp-restructuredtext-multi-pages": {
+    "theme": {
+      "values": [
+        "light",
+        "dark",
+        "auto"
+      ]
+    }
+  },
+  "tp-restructuredtext-multi-slides": {
+    "auto": {
+      "values": [
+        "",
+        "notes",
+        "timing"
+      ]
+    },
+    "theme": {
+      "values": [
+        "light",
+        "dark",
+        "auto"
+      ]
+    }
+  },
   "tp-restructuredtext-playground": {
     "repository": {
       "choices": [
@@ -2256,7 +2410,14 @@
     }
   },
   "tp-slide-note": {},
-  "tp-slider": {},
+  "tp-slider": {
+    "orientation": {
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
   "tp-slope-simulator": {
     "src": {
       "choices": [
@@ -2532,6 +2693,7 @@
       ]
     }
   },
+  "tp-tikz": {},
   "tp-timefield": {
     "label-position": {
       "values": [
@@ -2743,6 +2905,73 @@
           "label": "file-unknown",
           "value": "/docs/components/video-player/examples/file-unknown.mp4"
         }
+      ]
+    }
+  },
+  "tp-word-cloud": {
+    "bg-color": {
+      "values": [
+        "",
+        "default",
+        "red",
+        "orange",
+        "amber",
+        "yellow",
+        "lime",
+        "green",
+        "emerald",
+        "teal",
+        "glaz",
+        "cyan",
+        "sky",
+        "blue",
+        "indigo",
+        "violet",
+        "purple",
+        "fuchsia",
+        "pink",
+        "rose",
+        "zinc",
+        "ivory",
+        "stone"
+      ]
+    },
+    "color": {
+      "values": [
+        "default",
+        "red",
+        "orange",
+        "amber",
+        "yellow",
+        "lime",
+        "green",
+        "emerald",
+        "teal",
+        "glaz",
+        "cyan",
+        "sky",
+        "blue",
+        "indigo",
+        "violet",
+        "purple",
+        "fuchsia",
+        "pink",
+        "rose",
+        "zinc",
+        "ivory",
+        "stone"
+      ]
+    },
+    "shape": {
+      "values": [
+        "circle",
+        "triangle",
+        "square",
+        "pentagon",
+        "hexagon",
+        "cloud",
+        "heart",
+        "puzzle"
       ]
     }
   },

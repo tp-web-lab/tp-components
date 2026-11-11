@@ -10,7 +10,7 @@ import { TpBase } from "../base/base.js";
 import { type TpSizeType, type TpVariantType } from "../base/base.types.js";
 type TpThemeMode = "light" | "dark" | "auto";
 /**
- * `<tp-theme>` controls the visual theme of its parent element.
+ * The custom `<tp-theme>` element switches the visual theme of the surrounding content.
  *
  * It applies either `.tp-light` or `.tp-dark` on the parent that contains
  * `<tp-theme>`. In `auto` mode, it follows the system color scheme.
@@ -19,7 +19,7 @@ type TpThemeMode = "light" | "dark" | "auto";
  * - a global theme when `<tp-theme>` is a direct child of `<body>`
  * - a local override by placing another `<tp-theme>` inside a nested container
  *
- * @summary Parent-scoped theme switcher.
+ * @summary Switches the visual theme of the surrounding content.
  * @tagname tp-theme
  * @attr {string} mode = "auto" - Theme mode (`light`, `dark`, `auto`)
  * @attr {string} anchor = "" - CSS selector used as the explicit element that receives the selected theme.

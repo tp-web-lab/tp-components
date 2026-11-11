@@ -1,0 +1,26 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox{ The custom HTML element \rawhtml*|<code>&lt;tp-box&gt;</code>| wraps its content in various ways. }
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.append(document.createTextNode("\n      The custom HTML element "));
+
+const element2 = document.createElement("code");
+element2.append(document.createTextNode("\u003ctp-box>"));
+element1.append(element2);
+element1.append(document.createTextNode(" wraps its content in various ways.\n    "));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

@@ -17,7 +17,9 @@ export type TpAvatarGroupOrder = "ltr" | "rtl";
 /** Axis along which avatars are arranged. */
 export type TpAvatarGroupOrientation = "horizontal" | "vertical";
 /**
- * @summary Groups tp-avatar elements with configurable overlap, stacking order and orientation.
+ * The custom `<tp-avatar-group>` element groups avatars into a compact visual collection.
+ *
+ * @summary Groups avatars into a compact visual collection.
  * @tagname tp-avatar-group
  * @attr {string} offset = "0.75rem" - Overlap between adjacent avatars as a nonnegative CSS length; zero disables overlap.
  * @attr {TpAvatarGroupOrder} order = "ltr" - Stacking order: ltr places later avatars in front; rtl places earlier avatars in front.

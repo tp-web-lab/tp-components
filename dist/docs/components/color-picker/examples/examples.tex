@@ -1,0 +1,21 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpColorPicker{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/color/color.js";
+import "/components/color-picker/color-picker.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-color-picker");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

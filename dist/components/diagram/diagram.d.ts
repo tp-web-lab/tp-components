@@ -1,6 +1,8 @@
 import { TpBase } from "../base/base.js";
 /**
- * @summary Renders Mermaid source supplied inline or through a source URL.
+ * The custom `<tp-diagram>` element renders flowcharts, sequence diagrams, class diagrams and the other diagram types supported by [Mermaid](https://mermaid.js.org/).
+ *
+ * @summary Renders flowcharts, sequence diagrams, class diagrams and the other diagram types supported by [Mermaid](https://mermaid.js.org/).
  * @tagname tp-diagram
  * @attr {string} src = "" - Mermaid source file loaded relative to the containing document.
  * @attr {"mermaid" | "pele"} engine = "pele" - Rendering engine; only the explicit mermaid value loads Mermaid.

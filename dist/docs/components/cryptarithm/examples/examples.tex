@@ -1,0 +1,40 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-cryptarithm equation="SEND + MORE = MONEY" solution="9567 + 1085 = 10652"></tp-cryptarithm>|
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/cryptarithm/cryptarithm.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-cryptarithm");
+element1.setAttribute("equation", "SEND + MORE = MONEY");
+element1.setAttribute("solution", "9567 + 1085 = 10652");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example UN + UN + NEUF = ONZE
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-cryptarithm equation="UN + UN + NEUF = ONZE" solution="81 + 81 + 1987 = 2149"></tp-cryptarithm>|
+\end{document}
+
+% !tp-example CINQ + CINQ + VINGT = TRENTE
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-cryptarithm equation="CINQ + CINQ + VINGT = TRENTE" solution="6483 + 6483 + 94851 = 107817"></tp-cryptarithm>|
+\end{document}
+
+% !tp-example ZERO + NEUF + NEUF + DOUZE = TRENTE
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-cryptarithm equation="ZERO + NEUF + NEUF + DOUZE = TRENTE" solution="9206 + 3257 + 3257 + 86592 = 102312"></tp-cryptarithm>|
+\end{document}

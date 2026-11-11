@@ -1,55 +1,20 @@
-::::::: tp-markdown-viewer { label="tp-slope-simulator" allow-script }
-:::::: script { type="tp/markdown" }
+::::: tp-markdown-viewer { label="tp-slope-simulator" allow-script }
+:::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-slope-simulator
 :::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/slope-simulator/slope-simulator.js";
 
-::::: tp-stack
-::: tp-radio-list { data-setting="src" label="src" label-position="top" orientation="horizontal" value="1" }
-- Default
+const example = document.createDocumentFragment();
 
-- Two passes
+const element1 = document.createElement("tp-slope-simulator");
+example.append(element1);
 
-- Limit slopes
-
-- file-unknown
-:::
-
-:::: tp-cluster
-::: tp-textfield { data-setting="speed-base" label="speed-base" value="30" placeholder="30" clearable }
-:::
-::::
-
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
-
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="slope-simulator attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-File-loading attributes offer only Default, file1, file2 and file-unknown. The two local fixtures preserve verified example formats (they may contain the same content); file-unknown deliberately exercises error handling. No arbitrary path can be entered.
-
-::: script { type="module" src="/docs/components/slope-simulator/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
 
@@ -66,5 +31,5 @@ Approximate reconstruction of the supplied Alpe d’Huez 2026 stage profile imag
 ::: tp-slope-simulator { src="/docs/components/slope-simulator/examples/2026-alpe-huez.json" }
 :::
 ```
-::::::
-:::::::
+::::
+:::::

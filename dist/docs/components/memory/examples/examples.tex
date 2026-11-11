@@ -1,0 +1,99 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpMemory[label=Match the fruits]{
+  \begin{enumerate}
+    \item Apple
+    \item Pear
+    \item Plum
+  \end{enumerate}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/memory/memory.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-memory");
+element1.setAttribute("label", "Match the fruits");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("ol");
+
+const element3 = document.createElement("li");
+element3.append(document.createTextNode("Apple"));
+element2.append(element3);
+
+const element4 = document.createElement("li");
+element4.append(document.createTextNode("Pear"));
+element2.append(element4);
+
+const element5 = document.createElement("li");
+element5.append(document.createTextNode("Plum"));
+element2.append(element5);
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Numbers 0 to 9
+\documentclass{article}
+\begin{document}
+\wcTpMemory[back=/medias/logos/logo-tp-components.svg]{
+  \begin{enumerate}
+    \item \wcTpIcon[name=0,library=numbers,size=5em]{}
+    \item \wcTpIcon[name=1,library=numbers,size=5em]{}
+    \item \wcTpIcon[name=2,library=numbers,size=5em]{}
+    \item \wcTpIcon[name=3,library=numbers,size=5em]{}
+    \item \wcTpIcon[name=4,library=numbers,size=5em]{}
+    \item \wcTpIcon[name=5,library=numbers,size=5em]{}
+    \item \wcTpIcon[name=6,library=numbers,size=5em]{}
+    \item \wcTpIcon[name=7,library=numbers,size=5em]{}
+    \item \wcTpIcon[name=8,library=numbers,size=5em]{}
+    \item \wcTpIcon[name=9,library=numbers,size=5em]{}
+  \end{enumerate}
+}
+\end{document}
+
+% !tp-example European Union flags
+\documentclass{article}
+\begin{document}
+\wcTpMemory[back=/medias/logos/logo-tp-markdown.svg]{
+  \begin{itemize}
+    \item \wcTpIcon[name=at,library=flags,size=5em,title=Austria]{}
+    \item \wcTpIcon[name=be,library=flags,size=5em,title=Belgium]{}
+    \item \wcTpIcon[name=bg,library=flags,size=5em,title=Bulgaria]{}
+    \item \wcTpIcon[name=hr,library=flags,size=5em,title=Croatia]{}
+    \item \wcTpIcon[name=cy,library=flags,size=5em,title=Cyprus]{}
+    \item \wcTpIcon[name=cz,library=flags,size=5em,title=Czechia]{}
+    \item \wcTpIcon[name=dk,library=flags,size=5em,title=Denmark]{}
+    \item \wcTpIcon[name=ee,library=flags,size=5em,title=Estonia]{}
+    \item \wcTpIcon[name=fi,library=flags,size=5em,title=Finland]{}
+    \item \wcTpIcon[name=fr,library=flags,size=5em,title=France]{}
+    \item \wcTpIcon[name=de,library=flags,size=5em,title=Germany]{}
+    \item \wcTpIcon[name=gr,library=flags,size=5em,title=Greece]{}
+    \item \wcTpIcon[name=hu,library=flags,size=5em,title=Hungary]{}
+    \item \wcTpIcon[name=ie,library=flags,size=5em,title=Ireland]{}
+    \item \wcTpIcon[name=it,library=flags,size=5em,title=Italy]{}
+    \item \wcTpIcon[name=lv,library=flags,size=5em,title=Latvia]{}
+    \item \wcTpIcon[name=lt,library=flags,size=5em,title=Lithuania]{}
+    \item \wcTpIcon[name=lu,library=flags,size=5em,title=Luxembourg]{}
+    \item \wcTpIcon[name=mt,library=flags,size=5em,title=Malta]{}
+    \item \wcTpIcon[name=nl,library=flags,size=5em,title=Netherlands]{}
+    \item \wcTpIcon[name=pl,library=flags,size=5em,title=Poland]{}
+    \item \wcTpIcon[name=pt,library=flags,size=5em,title=Portugal]{}
+    \item \wcTpIcon[name=ro,library=flags,size=5em,title=Romania]{}
+    \item \wcTpIcon[name=sk,library=flags,size=5em,title=Slovakia]{}
+    \item \wcTpIcon[name=si,library=flags,size=5em,title=Slovenia]{}
+    \item \wcTpIcon[name=es,library=flags,size=5em,title=Spain]{}
+    \item \wcTpIcon[name=se,library=flags,size=5em,title=Sweden]{}
+  \end{itemize}
+}
+\end{document}

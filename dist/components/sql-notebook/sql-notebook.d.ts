@@ -2,11 +2,13 @@
  * @tp-dependency tp-notebook
  * @summary Interactive notebook combining markup and executable code cells.
  */
-import '../notebook/notebook.js';
-import { TpNotebook } from '../notebook/notebook.js';
+import "../notebook/notebook.js";
+import { TpNotebook } from "../notebook/notebook.js";
 /**
+ * The custom `<tp-sql-notebook>` element combines written explanations and executable SQL code in an interactive notebook.
+ *
  * @tp-dependency tp-notebook
- * @summary Interactive notebook combining markup and executable code cells.
+ * @summary Combines written explanations and executable SQL code in an interactive notebook.
  * @tagname tp-sql-notebook
  * @summary Interactive SQL notebook with markup and code cells.
  * @example
@@ -17,6 +19,6 @@ export declare class TpSqlNotebook extends TpNotebook {
 }
 declare global {
     interface HTMLElementTagNameMap {
-        'tp-sql-notebook': TpSqlNotebook;
+        "tp-sql-notebook": TpSqlNotebook;
     }
 }

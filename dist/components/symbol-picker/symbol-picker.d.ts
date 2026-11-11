@@ -29,16 +29,16 @@ export type TpSymbolPickerCopyFormat = "symbol" | "unicode" | "hexadecimal-html"
 export declare function getSymbolMetadata(item: TpSymbolPickerItem): TpSymbolPickerMetadata;
 export declare function parseHtmlSymbols(source: string): TpSymbolPickerItem[];
 /**
- * `<tp-symbol-picker>` browses and copies HTML5 named character references.
+ * The custom `<tp-symbol-picker>` element lets readers browse and select HTML symbols.
  *
- * @summary HTML5 symbol picker.
+ * @summary Lets readers browse and select HTML symbols.
  * @tagname tp-symbol-picker
  * @attr {string} filter = "" - Free-text filter applied to symbol names and metadata.
  * @attr {string} group = "all" - Active symbol group (`all` by default).
  * @attr {string} copy = "symbol" - Clipboard format: `symbol`, `unicode`, `hexadecimal-html`, `decimal-html`, or `html-entity`.
  * @attr {boolean} compact = false - Shows only the title, filters, and a compact 2em symbol grid.
-
-
+ *
+ *
  * @example
  * <tp-symbol-picker></tp-symbol-picker>
  * @event tp-symbol-picker-select Emitted when a symbol is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success. value is null when the selected copy format has no representation.

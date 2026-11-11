@@ -1,0 +1,67 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpFillBlank{
+  The capital of France is \wcTpTextfield*[name=capital,placeholder=City name,aria-label=Capital of France,clearable]{}.
+
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/fill-blank/fill-blank.js";
+import "/components/textfield/textfield.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-fill-blank");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("The capital of France is "));
+
+const element3 = document.createElement("tp-textfield");
+element3.setAttribute("name", "capital");
+element3.setAttribute("placeholder", "City name");
+element3.setAttribute("aria-label", "Capital of France");
+element3.setAttribute("clearable", "");
+element2.append(element3);
+element2.append(document.createTextNode("."));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Selected answer with tp-blank
+\documentclass{article}
+\begin{document}
+\wcTpBox[id=selected-answer-demo]{
+  Select a shape or drag it onto the blank. Use its clear button to remove the answer.
+
+  \wcTpFillBlank{
+    A shape with three sides is \wcTpBlank*[closed,name=shape,aria-label=Shape with three sides]{}.
+
+  }
+  \wcTpButtonGroup[aria-label=Shape choices]{
+    \wcTpButton[data-answer=triangle,aria-label=Triangle]{
+      \wcImg*[src=/docs/medias/examples/36c2ceb2a29fc3ae.svg,alt=Triangle,width=48,height=40]{}
+    }
+    \wcTpButton[data-answer=square,aria-label=Square]{
+      \wcImg*[src=/docs/components/fill-blank/examples/square.svg,alt=Square,width=48,height=40]{}
+    }
+  }
+  \rawhtml|<tp-dragdrop root="#selected-answer-demo" items="tp-button[data-answer], tp-blank"></tp-dragdrop>|
+  The latest event is shown below. FormData is displayed as a list of name/value pairs.
+
+  \wcTpCallout[variant=neutral,heading=tp-fill-blank-change,aria-live=polite,aria-atomic=true]{
+    \wcDiv[data-event-output]{No change event yet.}
+  }
+}
+
+\wcScript[src=/docs/components/fill-blank/examples/selected-answer.js]||
+\end{document}

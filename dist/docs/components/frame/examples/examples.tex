@@ -1,0 +1,31 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpFrame[aspect-ratio=16:9,style=max-width: 24rem;]{
+  \wcImg*[src=/docs/medias/logos/logo-tp.svg,alt=tp-components logo]{}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/frame/frame.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-frame");
+element1.setAttribute("aspect-ratio", "16:9");
+element1.setAttribute("style", "max-width: 24rem;");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("img");
+element2.setAttribute("src", "/docs/medias/logos/logo-tp.svg");
+element2.setAttribute("alt", "tp-components logo");
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

@@ -1,0 +1,75 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpObjectTree{
+  \wcScript[type=tp/javascript]|
+    ({
+      course: {
+        title: 'Web components',
+        lessons: 12,
+        published: true
+      },
+      topics: ['HTML', 'CSS', 'JavaScript']
+    })
+  |
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/object-tree/object-tree.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-object-tree");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/javascript");
+element2.textContent = "\n    ({\n      course: {\n        title: 'Web components',\n        lessons: 12,\n        published: true\n      },\n      topics: ['HTML', 'CSS', 'JavaScript']\n    })\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Internal script
+\documentclass{article}
+\begin{document}
+\wcTpObjectTree{
+  \wcScript[type=tp/javascript]|
+        ({
+          component: 'tp-object-tree',
+          stable: true,
+          versions: [1, 2, 3]
+        })
+      |
+}
+\end{document}
+
+% !tp-example JavaScript API
+\documentclass{article}
+\begin{document}
+\wcTpObjectTree{}
+
+\wcScript|
+      {
+      const script = document.currentScript;
+      const output = script?.closest('[data-role="output"]');
+      const tree = output?.querySelector('tp-object-tree')
+        ?? script?.previousElementSibling;
+
+      customElements.whenDefined('tp-object-tree').then(() => {
+        tree?.setValue({
+          component: 'tp-object-tree',
+          stable: true,
+          versions: [1, 2, 3]
+        });
+      });
+      }
+    |
+\end{document}

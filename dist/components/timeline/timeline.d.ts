@@ -20,8 +20,8 @@ import "../icon/icon.js";
 /** Axis along which events are arranged. */
 export type TpTimelineOrientation = "vertical" | "horizontal";
 /**
- * Each direct `dl` describes one event using Time, Icon, Title and Content terms.
- * Icon and Content are optional. Author nodes are moved, not serialized or cloned.
+ * The custom `<tp-timeline>` element arranges chronological events on a vertical or horizontal timeline.
+ *
  * @summary Arranges chronological events on a vertical or horizontal timeline.
  * @tagname tp-timeline
  * @attr {string} orientation = "vertical" - Timeline orientation (`vertical` or `horizontal`).

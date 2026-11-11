@@ -39,7 +39,9 @@ import { TpMarkupViewerQuestion } from "../markup-viewer-question/markup-viewer-
 import type { TpRestructuredTextViewer } from "../restructuredtext-viewer/restructuredtext-viewer.js";
 import "../restructuredtext-viewer/restructuredtext-viewer.js";
 /**
- * @summary checks rendered reStructuredText using a viewer and external JavaScript DOM tests.
+ * The custom `<tp-restructuredtext-viewer-question>` element presents and grades exercises based on rendered reStructuredText documents.
+ *
+ * @summary Presents and grades exercises based on rendered reStructuredText documents.
  * @tagname tp-restructuredtext-viewer-question
  * @accessibility Reuses question actions, feedback tabs and the editable markup viewer.
  * @keyboard {Enter / Space} Expands the question or activates a focused action.

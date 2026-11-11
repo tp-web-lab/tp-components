@@ -78,22 +78,21 @@ export interface TpDragDropDropDetail {
     position: TpDragDropPosition | null;
 }
 /**
- * `<tp-dragdrop>` centralizes native drag-and-drop handling
- * using CSS selectors.
+ * The custom `<tp-dragdrop>` element enables content to be dragged and dropped between locations.
  *
  * The component does not move application content itself:
  * it only emits structured events.
  *
- * @summary provides a generic drag-and-drop controller.
+ * @summary Enables content to be dragged and dropped between locations.
  * @tagname tp-dragdrop
  *
  * @attr {string} root = "" - CSS selector for the observed root. Required to enable interaction.
  * @attr {string} items = "" - CSS selector for draggable items and drop targets within the root.
  * @attr {string} handle = "" - Optional CSS selector for a drag handle.
  *
-
-
-
+ *
+ *
+ *
  * @event tp-dragdrop-end Emitted when a drag ends or a keyboard drag is cancelled.
  * @accessibility Adds a keyboard grab, navigation, drop and cancellation workflow to the configured items.
  * @accessibility Announces keyboard drag-and-drop state changes through a polite live region.

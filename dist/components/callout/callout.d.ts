@@ -19,8 +19,9 @@ import { type TpVariantType } from "../base/base.types.js";
 import "../icon/icon.js";
 import "../icon-button/icon-button.js";
 /**
- * Highlighted contextual content block.
- * @summary Highlighted contextual content block.
+ * The custom `<tp-callout>` element highlights a short message with an optional heading, icon and close button.
+ *
+ * @summary Highlights a short message with an optional heading, icon and close button.
  * @tagname tp-callout
  * @attr {string} variant = "neutral" - Visual variant (`success`, `danger`, `warning`, `info`, `neutral`, or `brand`).
  * @attr {string} heading = "" - Optional heading displayed above the content.

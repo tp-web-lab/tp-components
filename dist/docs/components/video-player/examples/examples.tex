@@ -1,0 +1,29 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpVideoPlayer[src=/docs/components/video-player/examples/clip-1.mp4,controls,label=Moving shapes]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/video-player/video-player.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-video-player");
+element1.setAttribute("src", "/docs/components/video-player/examples/clip-1.mp4");
+element1.setAttribute("controls", "");
+element1.setAttribute("label", "Moving shapes");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example YouTube video
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-video-player src="https://www.youtube.com/watch?v=4n0M4YRAVjc" controls="" label="Virtual reality introduction"></tp-video-player>|
+\end{document}

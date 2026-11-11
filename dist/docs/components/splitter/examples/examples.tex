@@ -1,0 +1,82 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-splitter position="40%">
+  <dl>
+    <dt>start</dt><dd><tp-box>Drag the divider to resize this panel.</tp-box></dd>
+    <dt>end</dt><dd><tp-box>This panel uses the remaining space.</tp-box></dd>
+  </dl>
+</tp-splitter>|
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/splitter/splitter.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-splitter");
+element1.setAttribute("position", "40%");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("dl");
+element2.append(document.createTextNode("\n    "));
+
+const element3 = document.createElement("dt");
+element3.append(document.createTextNode("start"));
+element2.append(element3);
+
+const element4 = document.createElement("dd");
+
+const element5 = document.createElement("tp-box");
+element5.append(document.createTextNode("Drag the divider to resize this panel."));
+element4.append(element5);
+element2.append(element4);
+element2.append(document.createTextNode("\n    "));
+
+const element6 = document.createElement("dt");
+element6.append(document.createTextNode("end"));
+element2.append(element6);
+
+const element7 = document.createElement("dd");
+
+const element8 = document.createElement("tp-box");
+element8.append(document.createTextNode("This panel uses the remaining space."));
+element7.append(element8);
+element2.append(element7);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Nested splitters
+\documentclass{article}
+\begin{document}
+Drag the outer divider left or right, then drag the inner divider up or down. Focus either divider to resize its panels with the arrow keys.
+
+
+\rawhtml|<tp-splitter axis="horizontal" position="30%" style="height: 20rem">
+  <dl>
+    <dt>start</dt>
+    <dd><tp-box><h3>Navigation</h3><p>This panel is resized by the outer divider.</p></tp-box></dd>
+    <dt>end</dt>
+    <dd>
+      <tp-splitter axis="vertical" position="55%" style="height: 100%">
+        <dl>
+          <dt>start</dt>
+          <dd><tp-box><h3>Editor</h3><p>The inner divider changes the height of this panel.</p></tp-box></dd>
+          <dt>end</dt>
+          <dd><tp-box><h3>Preview</h3><p>This panel uses the remaining height.</p></tp-box></dd>
+        </dl>
+      </tp-splitter>
+    </dd>
+  </dl>
+</tp-splitter>|
+\end{document}

@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-sidebar" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-sidebar" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-sidebar { side-width="12rem" gap="1rem" }
 ::: tp-box
@@ -18,50 +18,49 @@ The sidebar stays beside this content while there is enough space.
 ::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/box/box.js";
+import "/components/sidebar/sidebar.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- right-sidebar
-:::
+const example = document.createDocumentFragment();
 
-:::: tp-cluster
-::: tp-textfield { data-setting="content-width" label="content-width" value="50%" placeholder="50%" clearable }
-:::
+const element1 = document.createElement("tp-sidebar");
+element1.setAttribute("side-width", "12rem");
+element1.setAttribute("gap", "1rem");
+element1.append(document.createTextNode("\n  "));
 
-::: tp-textfield { data-setting="gap" label="gap" value="1rem" placeholder="1rem" clearable }
-:::
+const element2 = document.createElement("tp-box");
 
-::: tp-textfield { data-setting="side-width" label="side-width" value="auto" placeholder="auto" clearable }
-:::
-::::
+const element3 = document.createElement("h3");
+element3.append(document.createTextNode("Navigation"));
+element2.append(element3);
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("Overview"));
+element2.append(element4);
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element5 = document.createElement("p");
+element5.append(document.createTextNode("Examples"));
+element2.append(element5);
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
 
-::: tp-divider
-:::
+const element6 = document.createElement("tp-box");
 
-### Preview
+const element7 = document.createElement("h3");
+element7.append(document.createTextNode("Main content"));
+element6.append(element7);
 
-::: tp-iframe { id="attributes-frame" title="sidebar attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
+const element8 = document.createElement("p");
+element8.append(document.createTextNode("The sidebar stays beside this content while there is enough space."));
+element6.append(element8);
+element1.append(element6);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/sidebar/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
+:::::
 ::::::
-:::::::

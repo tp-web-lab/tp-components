@@ -86,9 +86,11 @@ import "../theme/theme.js";
 import "../tree/tree.js";
 import "../splitter/splitter.js";
 import type { TpMarkupMultiPagesTheme } from "./markup-multi-pages.types.js";
-export type TpMarkupMultiPagesLanguage = "html" | "markdown" | "asciidoc" | "restructuredtext";
+export type TpMarkupMultiPagesLanguage = "html" | "markdown" | "asciidoc" | "restructuredtext" | "latex";
 /**
- * @summary Multi-page documentation with support for multiple markup languages.
+ * The custom `<tp-markup-multi-pages>` element presents documents in multiple markup languages with navigation between pages.
+ *
+ * @summary Presents documents in multiple markup languages with navigation between pages.
  * @tagname tp-markup-multi-pages
  * @attr {string} repository = "/docs" - Root path containing the sidebar, cover and linked documents. The component selects the corresponding HTML, Markdown, AsciiDoc or reStructuredText files.
  * @attr {string | null} toolbar = null - Comma-separated controls: home, menu, code, calc, postit, clock, lang, color, theme, screen, fullscreen. Absent or empty keeps all controls; none hides commands. Updates immediately.

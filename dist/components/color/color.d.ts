@@ -16,10 +16,9 @@ import { type TpSizeType, type TpVariantType } from "../base/base.types.js";
  */
 import { type TpColorPreset } from "./color-presets.js";
 /**
- * `<tp-color>` lets users pick one of the built-in brand presets from `tp.css`
- * and applies it to the containing element.
+ * The custom `<tp-color>` element changes the color scheme of the surrounding content.
  *
- * @summary Preset-based color controller.
+ * @summary Changes the color scheme of the surrounding content.
  * @tagname tp-color
  * @attr {string} preset = "tp-default" - Preset class name (e.g. `tp-default`, `tp-red`)
  * @attr {string} anchor = "" - CSS selector used as the explicit element that receives the selected preset.

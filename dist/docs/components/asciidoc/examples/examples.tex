@@ -1,0 +1,47 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpAsciidoc{
+  \wcScript[type=tp/asciidoc]|
+== A short document
+
+This paragraph uses *AsciiDoc*.
+
+* Write content
+* Add components
+* Publish the page
+  |
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/asciidoc/asciidoc.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-asciidoc");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/asciidoc");
+element2.textContent = "\n== A short document\n\nThis paragraph uses *AsciiDoc*.\n\n* Write content\n* Add components\n* Publish the page\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Advanced example
+\documentclass{article}
+\begin{document}
+\wcTpAsciidoc{
+  \wcScript[type=tp/asciidoc]|
+          include::advanced-example.adoc[]
+        |
+}
+\end{document}

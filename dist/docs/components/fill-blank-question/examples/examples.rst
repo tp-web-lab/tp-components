@@ -48,73 +48,140 @@
             Solution
                The capital of France is Paris. The capital of Italy is Rome.
 
-      .. example:: Attributes
-
-         Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-         .. tp-stack::
-
-            .. tp-checkbox-list::
-               :id: attributes-booleans
-               :label: Boolean attributes
-               :label-position: top
-               :orientation: horizontal
-               :value:
-
-               - case-sensitive
-
-               - partial
-
-            .. tp-radio-list::
-               :data-setting: mode
-               :label: mode
-               :label-position: top
-               :orientation: horizontal
-               :value: 1
-
-               - mixed
-
-               - opened
-
-               - closed
-
-            .. tp-cluster::
-
-            .. tp-button-group::
-
-               .. tp-button::
-                  :id: attributes-reset
-                  :type: button
-
-                  Reset defaults
-
-               .. tp-button::
-                  :id: attributes-reload
-                  :type: button
-
-                  Reload preview
-
-         .. tp-divider::
-
-         .. h3::
-
-            Preview
-
-         .. tp-iframe::
-            :id: attributes-frame
-            :title: fill-blank-question attribute preview
-            :style: height: 24rem; display: flow-root; inline-size: auto;
-
-         .. tp-callout::
-            :id: attributes-status
-            :variant: info
-            :heading: Preview status
-
-            Preparing the preview…
+      .. example:: Javascript API
 
          .. script::
             :type: module
-            :src: /docs/components/fill-blank-question/examples/attributes.js
+
+            import "/components/blank/blank.js";
+            import "/components/fill-blank/fill-blank.js";
+            import "/components/fill-blank-question/fill-blank-question.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-fill-blank-question");
+            element1.setAttribute("case-sensitive", "");
+            element1.append(document.createTextNode("\n  "));
+
+            const element2 = document.createElement("dl");
+            element2.append(document.createTextNode("\n    "));
+
+            const element3 = document.createElement("dt");
+            element3.append(document.createTextNode("Answers"));
+            element2.append(element3);
+
+            const element4 = document.createElement("dd");
+
+            const element5 = document.createElement("ol");
+
+            const element6 = document.createElement("li");
+            element6.append(document.createTextNode("Paris"));
+            element5.append(element6);
+
+            const element7 = document.createElement("li");
+            element7.append(document.createTextNode("Rome"));
+            element5.append(element7);
+            element4.append(element5);
+            element2.append(element4);
+            element2.append(document.createTextNode("\n    "));
+
+            const element8 = document.createElement("dt");
+            element8.append(document.createTextNode("Title"));
+            element2.append(element8);
+
+            const element9 = document.createElement("dd");
+            element9.append(document.createTextNode("Geography"));
+            element2.append(element9);
+            element2.append(document.createTextNode("\n    "));
+
+            const element10 = document.createElement("dt");
+            element10.append(document.createTextNode("Prompt"));
+            element2.append(element10);
+
+            const element11 = document.createElement("dd");
+            element11.append(document.createTextNode("Complete both sentences."));
+            element2.append(element11);
+            element2.append(document.createTextNode("\n    "));
+
+            const element12 = document.createElement("dt");
+            element12.append(document.createTextNode("Form"));
+            element2.append(element12);
+            element2.append(document.createTextNode("\n    "));
+
+            const element13 = document.createElement("dd");
+            element13.append(document.createTextNode("\n      "));
+
+            const element14 = document.createElement("p");
+            element14.append(document.createTextNode("The capital of France is "));
+
+            const element15 = document.createElement("tp-blank");
+            element15.setAttribute("name", "france-capital");
+            element15.setAttribute("placeholder", "Capital");
+            element15.setAttribute("aria-label", "Capital of France");
+            element15.setAttribute("clearable", "");
+            element14.append(element15);
+            element14.append(document.createTextNode("."));
+            element13.append(element14);
+            element13.append(document.createTextNode("\n      "));
+
+            const element16 = document.createElement("p");
+            element16.append(document.createTextNode("The capital of Italy is "));
+
+            const element17 = document.createElement("tp-blank");
+            element17.setAttribute("name", "italy-capital");
+            element17.setAttribute("placeholder", "Capital");
+            element17.setAttribute("aria-label", "Capital of Italy");
+            element17.setAttribute("clearable", "");
+            element16.append(element17);
+            element16.append(document.createTextNode("."));
+            element13.append(element16);
+            element13.append(document.createTextNode("\n    "));
+            element2.append(element13);
+            element2.append(document.createTextNode("\n    "));
+
+            const element18 = document.createElement("dt");
+            element18.append(document.createTextNode("Feedback"));
+            element2.append(element18);
+            element2.append(document.createTextNode("\n    "));
+
+            const element19 = document.createElement("dd");
+            element19.append(document.createTextNode("\n      "));
+
+            const element20 = document.createElement("p");
+            element20.append(document.createTextNode("Check the spelling of each capital."));
+            element19.append(element20);
+            element19.append(document.createTextNode("\n      "));
+
+            const element21 = document.createElement("ul");
+            element21.append(document.createTextNode("\n        "));
+
+            const element22 = document.createElement("li");
+            element22.append(document.createTextNode("The capital of France is home to the Eiffel Tower."));
+            element21.append(element22);
+            element21.append(document.createTextNode("\n        "));
+
+            const element23 = document.createElement("li");
+            element23.append(document.createTextNode("The capital of Italy is home to the Colosseum."));
+            element21.append(element23);
+            element21.append(document.createTextNode("\n      "));
+            element19.append(element21);
+            element19.append(document.createTextNode("\n    "));
+            element2.append(element19);
+            element2.append(document.createTextNode("\n    "));
+
+            const element24 = document.createElement("dt");
+            element24.append(document.createTextNode("Solution"));
+            element2.append(element24);
+
+            const element25 = document.createElement("dd");
+            element25.append(document.createTextNode("The capital of France is Paris. The capital of Italy is Rome."));
+            element2.append(element25);
+            element2.append(document.createTextNode("\n  "));
+            element1.append(element2);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+
+            document.body.append(example);
 
       .. example:: Geography
 

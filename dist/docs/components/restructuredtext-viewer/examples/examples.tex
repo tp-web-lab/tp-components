@@ -1,0 +1,62 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpRestructuredtextViewer{
+  \wcScript[type=tp/restructuredtext]|
+          Live reStructuredText
+          =====================
+
+          Edit this source and select **Run**.
+
+          * First item
+          * Second item
+        |
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/restructuredtext/restructuredtext.js";
+import "/components/restructuredtext-viewer/restructuredtext-viewer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-restructuredtext-viewer");
+element1.append(document.createTextNode("\n        "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/restructuredtext");
+element2.textContent = "\n          Live reStructuredText\n          =====================\n\n          Edit this source and select **Run**.\n\n          * First item\n          * Second item\n        ";
+element1.append(element2);
+element1.append(document.createTextNode("\n      "));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Multiple examples
+\documentclass{article}
+\begin{document}
+\wcTpRestructuredtextViewer{
+  \wcScript[type=tp/restructuredtext]|
+          .. example:: Paragraph and list
+
+             A paragraph with **strong text** and *emphasis*.
+
+             * Alpha
+             * Beta
+
+          .. example:: Table
+
+             ================  =================
+             Language          Purpose
+             ================  =================
+             reStructuredText  Technical writing
+             HTML              Web documents
+             ================  =================
+        |
+}
+\end{document}

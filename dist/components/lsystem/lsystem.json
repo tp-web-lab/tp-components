@@ -2,7 +2,7 @@
   "tagname": "tp-lsystem",
   "classname": "TpLsystem",
   "superclass": "TpBase",
-  "description": "renders L-system fractals and explores their successive rewriting iterations.",
+  "description": "Renders L-system fractals and explores their successive rewriting iterations.",
   "examples": [
     {
       "label": "Example 1",
@@ -141,8 +141,8 @@
   ],
   "userHelp": {
     "displayName": "L-system",
-    "introduction": "The custom `<tp-lsystem>` element renders L-system fractals and explores their successive rewriting iterations.\nIt reuses the grammar, presets, turtle interpreter and SVG renderer of `@tp/tp-utilities`, also used by the L-system extension of `@tp/tp-markdown`.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Step | Pause and advance one rewriting iteration. After the final iteration, return to iteration zero. |\n| Play / Pause | Play successive iterations or pause on the current one. Starting from the final iteration restarts at zero; playback stops at the final iteration. |\n| Reset | Pause and display the axiom at iteration zero. |\n| Save image | Choose SVG, PNG or WebP to download the current drawing. |\n| Iteration counter | Read the current iteration and the definition's maximum. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between playback and export controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Escape</kbd> | Close the image export menu. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-lsystem>` element renders L-system fractals and explores their successive rewriting iterations.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Step | Pause and advance one rewriting iteration. After the final iteration, return to iteration zero. |\n| Play / Pause | Play successive iterations or pause on the current one. Starting from the final iteration restarts at zero; playback stops at the final iteration. |\n| Reset | Pause and display the axiom at iteration zero. |\n| Save image | Choose SVG, PNG or WebP to download the current drawing. |\n| Iteration counter | Read the current iteration and the definition's maximum. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between playback and export controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Escape</kbd> | Close the image export menu. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

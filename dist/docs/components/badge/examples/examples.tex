@@ -1,0 +1,42 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+Build status: \wcTpBadge*[variant=success,pulse]{Ready}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/badge/badge.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("p");
+element1.append(document.createTextNode("\n  Build status: "));
+
+const element2 = document.createElement("tp-badge");
+element2.setAttribute("variant", "success");
+element2.setAttribute("pulse", "");
+element2.append(document.createTextNode("Ready"));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example With icon
+\documentclass{article}
+\begin{document}
+\wcTpBadge[outlined]{\wcTpIcon*[name=file_type_vite,library=languages]{} Vite\wcTpDivider*[orientation=vertical]{}8.1.5}
+\end{document}
+
+% !tp-example Status labels
+\documentclass{article}
+\begin{document}
+\wcTpBadge[variant=success]{Complete}
+
+\wcTpBadge[variant=warning]{Pending}
+\end{document}

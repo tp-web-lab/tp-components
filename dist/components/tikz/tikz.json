@@ -1,0 +1,99 @@
+{
+  "tagname": "tp-tikz",
+  "classname": "TpTikz",
+  "superclass": "TpBase",
+  "description": "Renders TikZ drawings.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-tikz scale=\"1.8\" label=\"Linear, sine and exponential functions\"><script type=\"tp/tikz\">\\begin{tikzpicture}[domain=0:4]\n  \\draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);\n\n  \\draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};\n  \\draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};\n\n  \\draw[color=red]    plot (\\x,\\x)             node[right] {$f(x) =x$};\n  % \\x r means to convert '\\x' from degrees to _r_adians:\n  \\draw[color=blue]   plot (\\x,{sin(\\x r)})    node[right] {$f(x) = \\sin x$};\n  \\draw[color=orange] plot (\\x,{0.05*exp(\\x)}) node[right] {$f(x) = \\frac{1}{20} \\mathrm e^x$};\n\\end{tikzpicture}</script></tp-tikz>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "label",
+      "description": "Accessible title for the drawing frame.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"TikZ drawing\""
+    },
+    {
+      "name": "libraries",
+      "description": "Comma-separated TikZ libraries to load before the drawing.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "scale",
+      "description": "Positive display scale for the complete drawing, constrained to the available width.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "\"1\""
+    },
+    {
+      "name": "src",
+      "description": "URL of a TikZ source file; takes precedence over value and inline source.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "value",
+      "description": "TikZ source; takes precedence over inline source when present.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-tikz-error",
+      "emitted": true,
+      "description": "Emitted when loading or compilation fails.",
+      "detail": "{ message: string }"
+    },
+    {
+      "name": "tp-tikz-rendered",
+      "emitted": true,
+      "description": "Emitted when the SVG drawing is ready.",
+      "detail": "void"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-latex",
+      "url": "https://www.npmjs.com/package/@tp/tp-latex",
+      "summary": "LaTeX.js conversion and patched TikZJax assets."
+    },
+    {
+      "name": "TikZJax",
+      "url": "https://tikzjax.com/",
+      "summary": "WebAssembly TeX engine, core dump and SVG conversion."
+    }
+  ],
+  "userHelp": {
+    "displayName": "TikZ",
+    "introduction": "The custom `<tp-tikz>` element renders TikZ drawings.",
+    "interactions": "",
+    "keyboard": []
+  }
+}

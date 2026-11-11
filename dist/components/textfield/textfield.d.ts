@@ -8,7 +8,9 @@ import { TpBase } from "../base/base.js";
 export type TpTextfieldType = "text" | "email" | "password" | "search" | "tel" | "url";
 export type TpTextfieldLabelPosition = "top" | "bottom" | "start" | "end";
 /**
- * @summary Single-line and automatically growing multiline text field.
+ * The custom `<tp-textfield>` element provides a single-line and automatically growing multiline text field.
+ *
+ * @summary Provides a single-line and automatically growing multiline text field.
  * @tagname tp-textfield
  * @attr {string} aria-label = "" - Accessible name forwarded to the editing control; use it when the field has no visible label.
  * @attr {string} type = "text" - Input type (`text`, `email`, `password`, `search`, `tel`, or `url`).
@@ -49,6 +51,9 @@ export type TpTextfieldLabelPosition = "top" | "bottom" | "start" | "end";
 export declare class TpTextfield extends TpBase {
     private static readonly textfieldStyleId;
     private field;
+    private sizeObserver;
+    private lastWidth;
+    private resizeFrame;
     private prefixIcon;
     private clearButton;
     static get observedAttributes(): string[];
@@ -103,6 +108,7 @@ export declare class TpTextfield extends TpBase {
     get iconLibrary(): string;
     set iconLibrary(value: string);
     protected connectedCallback(): void;
+    disconnectedCallback(): void;
     protected attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void;
     /** Focuses the native input or textarea. */
     focus(options?: FocusOptions): void;
@@ -116,6 +122,7 @@ export declare class TpTextfield extends TpBase {
     private readonly handleChange;
     private readonly handleClear;
     private setValue;
+    private scheduleTextareaResize;
     private resizeTextarea;
 }
 declare global {

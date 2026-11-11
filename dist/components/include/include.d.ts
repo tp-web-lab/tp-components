@@ -6,7 +6,7 @@ import { TpBase } from "../base/base.js";
 type TpIncludeFetchMode = "cors" | "no-cors" | "same-origin";
 type TpIncludeMode = "auto" | "raw";
 /**
- * `<tp-include>` charge un contenu HTML distant et l'injecte dans le DOM léger.
+ * The custom `<tp-include>` element loads remote HTML content.
  *
  * Handling:
  * - document HTML complet → injecte uniquement `<body>`

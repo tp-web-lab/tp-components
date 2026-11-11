@@ -12,7 +12,7 @@
 import { TpBase } from "../base/base.js";
 export type TpAccordionAppearance = "default" | "outlined" | "filled";
 /**
- * Accessible accordion web component based on light-DOM `<dl>` markup.
+ * The custom `<tp-accordion>` element organizes content into sections that readers can expand and collapse.
  *
  * Expected structure:
  *
@@ -38,6 +38,7 @@ export type TpAccordionAppearance = "default" | "outlined" | "filled";
  * - `open-indexes`: space-separated list of expanded item indexes
  * - `appearance`: visual treatment (`default`, `outlined`, or `filled`)
  *
+ * @summary Organizes content into sections that readers can expand and collapse.
  * @tagname tp-accordion
  * @attr {TpAccordionAppearance} appearance = "default" - Visual treatment of accordion items.
  * @cssprop --tp-accordion-content-gap Gap between an accordion heading and its content.

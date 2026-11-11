@@ -11,6 +11,22 @@
          .. tp-restructuredtext-multi-slides::
             :repository: /docs/components/restructuredtext-multi-pages/docs
 
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/restructuredtext/restructuredtext.js";
+            import "/components/restructuredtext-multi-slides/restructuredtext-multi-slides.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-restructuredtext-multi-slides");
+            element1.setAttribute("repository", "/docs/components/restructuredtext-multi-pages/docs");
+            example.append(element1);
+
+            document.body.append(example);
+
       .. example:: Automatic notes
 
          .. tp-restructuredtext-multi-slides::

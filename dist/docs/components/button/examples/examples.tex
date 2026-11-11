@@ -1,0 +1,34 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-button href="/#/components/button/index.md#usage">Read the usage guide</tp-button>|
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/button/button.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-button");
+element1.setAttribute("href", "/#/components/button/index.md#usage");
+element1.append(document.createTextNode("Read the usage guide"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Navigation link
+\documentclass{article}
+\begin{document}
+\wcTpButton[href=https://example.org,target=_blank,outlined,variant=brand]{Open example.org}
+\end{document}
+
+% !tp-example Unavailable action
+\documentclass{article}
+\begin{document}
+\wcTpButton[disabled]{Submit answer}
+\end{document}

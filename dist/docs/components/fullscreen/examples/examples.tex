@@ -1,0 +1,83 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  \wcTpFullscreen{}
+  This box is the fullscreen target.
+
+  Press Esc to exit fullscreen mode.
+
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/fullscreen/fullscreen.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.append(document.createTextNode("\n      "));
+
+const element2 = document.createElement("tp-fullscreen");
+element1.append(element2);
+element1.append(document.createTextNode("\n      "));
+
+const element3 = document.createElement("p");
+element3.append(document.createTextNode("This box is the fullscreen target."));
+element1.append(element3);
+element1.append(document.createTextNode("\n      "));
+
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("Press Esc to exit fullscreen mode."));
+element1.append(element4);
+element1.append(document.createTextNode("\n    "));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Toolbar control
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  \wcTpToolbar{
+    \wcTpFullscreen{}
+  }
+  The fullscreen button is in a toolbar.
+
+  The containing box is still the fullscreen target.
+
+}
+\end{document}
+
+% !tp-example Change event
+\documentclass{article}
+\begin{document}
+\wcTpBox[id=fullscreen-event-target]{
+  \rawhtml|<tp-fullscreen anchor="#fullscreen-event-target"></tp-fullscreen>|
+  Enter or exit fullscreen to emit \rawhtml*|<code>tp-fullscreen-change</code>|.
+
+}
+
+\wcTpConsole{}
+
+\wcScript[type=module]|
+      customElements.whenDefined('tp-console').then(() => {
+        const section = document.querySelector('#fullscreen-event-target');
+        const output = document.querySelector('tp-console');
+        output.redirectConsoleToSelf();
+        section?.addEventListener('tp-fullscreen-change', (event) => {
+        console.info('tp-fullscreen-change', {
+          fullscreen: event.detail.fullscreen,
+          anchor: event.detail.anchor,
+          target: event.detail.target?.id,
+        });
+        });
+      });
+    |
+\end{document}

@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-inline" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-inline" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-inline { gap="1rem" align="center" }
 ::: tp-button
@@ -16,96 +16,34 @@ Next
 ::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/button/button.js";
+import "/components/inline/inline.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- stretch
-:::
+const example = document.createDocumentFragment();
 
-::: tp-radio-list { data-setting="align" label="align" label-position="top" orientation="horizontal" value="3" }
-- normal
+const element1 = document.createElement("tp-inline");
+element1.setAttribute("gap", "1rem");
+element1.setAttribute("align", "center");
+element1.append(document.createTextNode("\n    "));
 
-- stretch
+const element2 = document.createElement("tp-button");
+element2.append(document.createTextNode("Previous"));
+element1.append(element2);
 
-- center
+const element3 = document.createElement("span");
+element3.append(document.createTextNode("Page 2 of 5"));
+element1.append(element3);
 
-- start
+const element4 = document.createElement("tp-button");
+element4.append(document.createTextNode("Next"));
+element1.append(element4);
+element1.append(document.createTextNode("\n  "));
+example.append(element1);
 
-- end
-
-- flex-start
-
-- flex-end
-
-- self-start
-
-- self-end
-
-- baseline
-
-- first baseline
-
-- last baseline
-:::
-
-::: tp-radio-list { data-setting="justify" label="justify" label-position="top" orientation="horizontal" value="4" }
-- normal
-
-- start
-
-- end
-
-- flex-start
-
-- flex-end
-
-- center
-
-- left
-
-- right
-
-- space-between
-
-- space-around
-
-- space-evenly
-
-- stretch
-:::
-
-:::: tp-cluster
-::: tp-textfield { data-setting="gap" label="gap" value="0.5rem" placeholder="0.5rem" clearable }
-:::
-::::
-
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
-
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="inline attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/inline/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
+:::::
 ::::::
-:::::::

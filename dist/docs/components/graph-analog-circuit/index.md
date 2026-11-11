@@ -1,45 +1,38 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="graph-analog-circuit" library="components" size="1.25em"></tp-icon> Analog circuits
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-graph-analog-circuit>` element implements the <tp-icon name="graph-analog-circuit" library="components" size="1.25em"></tp-icon> Analog circuits functionality: interactive analog-circuit editor and transient simulator.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-graph-analog-circuit>` element provides an interactive analog-circuit editor and transient simulator.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-graph-analog-circuit grid="" grid-size="20" message="Run the transient analysis and inspect Vin and Vout." src="/docs/components/graph-analog-circuit/examples/rc-filter.json"></tp-graph-analog-circuit>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-graph-analog-circuit" src="/docs/components/graph-analog-circuit/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Using the component | The introductory circuit is an RC low-pass filter driven by a square-wave voltage source. |
-| Using the component | Its named `Vin` and `Vout` measurement points are the oscilloscope channels. |
-| Measurement | Drag **Measurement** from the **Annotations** palette onto any wire, then give it a label to add another channel. |
-| Run transient analysis | Press **Run transient analysis** to refresh the oscilloscope. |
-| Using the component | Wires merge connected terminals into electrical nodes, and every simulatable circuit needs a ground reference. |
-| Hub | A four-port **Hub** creates an electrical junction for clean branch layouts; all four ports share exactly the same potential. |
-| Using the component | The oscilloscope header provides independent time and voltage calibration controls. |
-| Using the component | The displayed values use `ms/div` and `V/div`; the center button restores both automatic scales. |
-| Using the component | Use the `V / A` selector in the oscilloscope header to display either node voltage or signed branch current at every named measurement point. |
-| Using the component | Current mode changes the legend and vertical scale to amperes. |
-| Using the component | A current point placed on a direct component wire uses the component terminal as its sign reference; a point on an electrically ambiguous junction branch reports zero until it is moved to a wire adjoining a component. |
-| Links | The **Links** palette provides straight and orthogonal wires without arrowheads. |
-| Using the component | Analog self-links are rejected because a component terminal cannot be wired back to the same component through a single editor link. |
-| Hub | The **Hub** is the single four-way equipotential junction used to lay out branches. |
-| Open or close selected switch | A switch can be open or closed; select it and use **Open or close selected switch** in the lower toolbar. |
-| Using the component | An open switch has a very high resistance, while a closed switch behaves as an ideal conductor. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Focused controls | Use each control’s standard keyboard interaction.  |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Use `<tp-graph-analog-circuit>` as shown below.
 
@@ -47,388 +40,7 @@ Use `<tp-graph-analog-circuit>` as shown below.
 <tp-graph-analog-circuit grid grid-size="20" message="Run the transient analysis and inspect Vin and Vout." src="/docs/components/graph-analog-circuit/examples/rc-filter.json"></tp-graph-analog-circuit>
 ```
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Inspect the supplied analog circuit and try the simulator’s available controls.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpGraphAnalogCircuit -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>grid</code> | <code>boolean</code> | <code>false</code> | Displays and uses the snapping grid. *(inherited from <code>tp-graph-editor</code>)* |
-  | <code>grid-size</code> | <code>number</code> | <code>20</code> | Grid spacing in graph units. *(inherited from <code>tp-graph-editor</code>)* |
-  | <code>message</code> | <code>string</code> | <code>&quot;&quot;</code> | Status message displayed by the graph editor. *(inherited from <code>tp-graph-editor</code>)* |
-  | <code>ports-visible</code> | <code>boolean</code> | <code>false</code> | Keeps attachment plots visible instead of showing them only on hover. *(inherited from <code>tp-graph-editor</code>)* |
-  | <code>readonly</code> | <code>boolean</code> | <code>false</code> | Prevents graph editing while keeping navigation available. *(inherited from <code>tp-graph-editor</code>)* |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a tp/graph JSON document loaded at initialization. *(inherited from <code>tp-graph-editor</code>)* |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-graph-analog-circuit>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>addEdge</code> | <code>addEdge(source: string, target: string, type = TP_ANALOG_WIRE, sourcePort?: TpGraphPort, targetPort?: TpGraphPort, direction: TpGraphEdgeDirection = &quot;none&quot;, routing: TpGraphEdgeRouting = &quot;straight&quot;): TpGraphEdge</code> | Adds a non-directional wire between distinct existing component IDs using the requested ports and routing; returns its edge record. Arrows, self-links and unsupported wire types throw. |
-  | <code>addNode</code> | <code>addNode(type: string, point: TpGraphPoint, nodeLabel?: string): TpGraphNode</code> | Adds a supported analog component at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError. |
-  | <code>rotateSelected</code> | <code>rotateSelected(): void</code> | Rotates the selected orientable component 90 degrees clockwise and rotates its connected ports. Does nothing when no eligible component is selected. |
-  | <code>setGraph</code> | <code>setGraph(graph: TpGraphDocument): void</code> | Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph. |
-  | <code>simulate</code> | <code>simulate(duration?: number, step?: number): TpAnalogSimulation</code> | Runs transient analysis with positive duration and time step in seconds (defaults: 0.02 and 0.0002), refreshes the graph and emits tp-analog-simulate. Returns sampled results; invalid circuits or timings throw. |
-  | <code>toggleSwitch</code> | <code>toggleSwitch(): void</code> | Toggles the selected analog switch between open and closed; does nothing when the selection is not a switch. |
-  [Public methods of `TpGraphAnalogCircuit`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-analog-simulate</code> | <code>&#123; samples: readonly TpAnalogSample[]; duration: number; step: number &#125;</code> | Emitted after transient simulation completes and updates the graph. samples contains time/value records keyed by measurement label or probe label/ID; time, duration and step are in seconds, with voltage in volts and current in amperes. |
-  [Events emitted by `<tp-graph-analog-circuit>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-graph-analog-circuit>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_graph-analog-circuit.TpGraphAnalogCircuit.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -455,12 +67,41 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Inspect the supplied analog circuit and try the simulator’s available controls.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-graph-analog-circuit>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-graph-editor
@@ -471,8 +112,8 @@ All tp-components used by `<tp-graph-analog-circuit>` are loaded automatically b
 @summary Markdown rendering component.
 -->
 
-- [`<tp-graph-editor>`](../graph-editor/index.md) : Extensible interactive graph editor.
-- [`<tp-markdown>`](../markdown/index.md) : Markdown rendering component.
+- [`<tp-graph-editor>`](#/components/graph-editor/index.md) : Extensible interactive graph editor.
+- [`<tp-markdown>`](#/components/markdown/index.md) : Markdown rendering component.
 
 ### External
 

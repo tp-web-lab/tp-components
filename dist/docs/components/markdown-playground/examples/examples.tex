@@ -1,0 +1,28 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpMarkdownPlayground[src=/docs/components/_shared/intro-projects/markdown.json]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/markdown/markdown.js";
+import "/components/markdown-playground/markdown-playground.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-markdown-playground");
+element1.setAttribute("src", "/docs/components/_shared/intro-projects/markdown.json");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Single source file
+\documentclass{article}
+\begin{document}
+\wcTpMarkdownPlayground[src=/docs/components/_shared/single-source/example.md]{}
+\end{document}

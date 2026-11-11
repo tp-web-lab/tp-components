@@ -1,0 +1,20 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpChronometer{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/chronometer/chronometer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-chronometer");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

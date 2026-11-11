@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-prose-editor" allow-script }
-:::::: script { type="tp/markdown" }
+::::: tp-markdown-viewer { label="tp-prose-editor" allow-script }
+:::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-prose-editor
 ## A short editable document
@@ -12,59 +12,45 @@ Select a word and use the toolbar to change its **formatting**.
 :::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/prose-editor/prose-editor.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- readonly
-:::
+const example = document.createDocumentFragment();
 
-::: tp-radio-list { data-setting="src" label="src" label-position="top" orientation="horizontal" value="1" }
-- Default
+const element1 = document.createElement("tp-prose-editor");
+element1.append(document.createTextNode("\n  "));
 
-- file1
+const element2 = document.createElement("h2");
+element2.append(document.createTextNode("A short editable document"));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
 
-- file2
+const element3 = document.createElement("p");
+element3.append(document.createTextNode("Select a word and use the toolbar to change its "));
 
-- file-unknown
-:::
+const element4 = document.createElement("strong");
+element4.append(document.createTextNode("formatting"));
+element3.append(element4);
+element3.append(document.createTextNode("."));
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
 
-:::: tp-cluster
-::: tp-textfield { data-setting="placeholder" label="placeholder" value="Type your prose..." placeholder="Type your prose..." clearable }
-:::
+const element5 = document.createElement("ul");
 
-::: tp-textfield { data-setting="value" label="value" value placeholder clearable }
-:::
-::::
+const element6 = document.createElement("li");
+element6.append(document.createTextNode("Write a draft"));
+element5.append(element6);
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element7 = document.createElement("li");
+element7.append(document.createTextNode("Review the content"));
+element5.append(element7);
+element1.append(element5);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="prose-editor attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-File-loading attributes offer only Default, file1, file2 and file-unknown. The two local fixtures preserve verified example formats (they may contain the same content); file-unknown deliberately exercises error handling. No arbitrary path can be entered.
-
-::: script { type="module" src="/docs/components/prose-editor/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
-::::::
-:::::::
+::::
+:::::

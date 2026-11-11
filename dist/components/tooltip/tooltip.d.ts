@@ -2,11 +2,14 @@
  * @module components/tooltip
  * @summary Tooltip component.
  */
-import { TpOverlayElement } from '../overlay/overlay.js';
-type TpTooltipPlacement = 'top' | 'end' | 'bottom' | 'start';
 /**
- * `<tp-tooltip>` affiche un texte d'aide flottant ancré à un élément cible,
- * sans utiliser de Shadow DOM.
+ * @tp-dependency tp-base
+ * @summary Shared base class for tp-* components.
+ */
+import { TpOverlayElement } from "../overlay/overlay.js";
+type TpTooltipPlacement = "top" | "end" | "bottom" | "start";
+/**
+ * The custom `<tp-tooltip>` element displays anchored tooltip content.
  *
  * Exemple :
  *

@@ -4,6 +4,19 @@
       <tp-formula-picker></tp-formula-picker>
     </div>
 
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/formula-picker/formula-picker.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-formula-picker");
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
     <div role="example" label="Selection event">
       <tp-formula-picker id="formula-event-picker"></tp-formula-picker><tp-textfield id="formula-event-result" label="Selected formula" placeholder="Select a formula" clearable=""></tp-textfield><script type="module">const picker = document.querySelector("#formula-event-picker");
       const result = document.querySelector("#formula-event-result");

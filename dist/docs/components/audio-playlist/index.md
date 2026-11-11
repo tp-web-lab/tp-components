@@ -1,9 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="audio-playlist" library="components" size="1.25em"></tp-icon> Audio playlist
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-Play audio tracks from a list of links. Select a track or use the Resume control to begin; playback advances automatically and stops after the last track.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-audio-playlist>` element provides an audio playlist with playback controls and an elapsed-time seek bar.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-audio-playlist>
 <ol>
 <li>
@@ -14,33 +25,23 @@ Play audio tracks from a list of links. Select a track or use the Resume control
 </li>
 </ol>
 </tp-audio-playlist>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-audio-playlist" src="/docs/components/audio-playlist/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Play | Start from the first track in list order. |
-| Random | Start a newly shuffled playlist without repeating tracks. |
-| Track link | Play the selected track from the beginning. |
-| Previous / Next | Play the adjacent track in the current playback order. Disabled at the ends. |
-| Resume / Pause | Resume or pause the current track. |
-| Playback position | Seek within the current track. Dark indicates elapsed time; light indicates remaining time, independently of buffering. |
-| Mute / Unmute and Volume | Toggle sound or adjust its volume. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between track links and playback controls. |
-| <kbd>Enter</kbd> on a track | Play that track. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> on a button | Activate Play, Random, Previous or Next. Use the arrow keys on the position and volume sliders; Home and End select their minimum and maximum. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Provide a direct child `ul` or `ol`. Each `li` contains a link whose `href` points to a browser-supported audio file and whose text names the track. The first link in each item is used; other text may provide a description or transcript. Relative URLs resolve using the document's base URL. Streaming service pages and YouTube page URLs are not audio files.
 
@@ -71,81 +72,7 @@ Changing `random` keeps the current track: enabling it puts that track first and
 
 Playback never starts merely because the component is loaded. Browser restrictions and network errors are reported in the status area; a failed track is not silently skipped. Select another track or use the Resume control to retry.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Select a melody, use the audio controls and advance with Previous or Next. Playback stops at the end of the list.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-
-## Programming
-
-### API
-
-<!-- tp-docgen:api TpAudioPlaylist -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>random</code> | <code>boolean</code> | <code>false</code> | Shuffle tracks without repetition; changing this attribute preserves the current track. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | HTML file containing a ul or ol playlist; overrides inline content. Track URLs resolve relative to the file. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-audio-playlist>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpAudioPlaylist`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Events emitted by `<tp-audio-playlist>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-audio-playlist>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_audio-playlist.TpAudioPlaylist.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -172,29 +99,63 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Select a melody, use the native audio controls and advance with Previous or Next. Playback stops at the end of the list.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-audio-playlist>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
 @summary Shared base class for tp-* components.
 -->
 <!--
-@tp-dependency tp-button
-@summary Button component that supports native button and link rendering.
--->
-<!--
 @tp-dependency tp-button-group
 @summary Button group component for organizing multiple buttons.
 -->
+<!--
+@tp-dependency tp-icon-button
+@summary Accessible icon button component.
+-->
+<!--
+@tp-dependency tp-typewriting
+@summary progressively reveals text one letter or one word at a time.
+-->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-button-group>`](../button-group/index.md) : Button group component for organizing multiple buttons.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-button-group>`](#/components/button-group/index.md) : Button group component for organizing multiple buttons.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-typewriting>`](#/components/typewriting/index.md) : progressively reveals text one letter or one word at a time.
 
 ### External
 

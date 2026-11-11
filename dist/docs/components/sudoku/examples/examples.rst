@@ -27,56 +27,70 @@
 
             9. 54!3!1!9!6728
 
-      .. example:: Attributes
-
-         Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-         .. tp-stack::
-
-            .. tp-cluster::
-
-               .. tp-textfield::
-                  :data-setting: puzzle
-                  :label: puzzle
-                  :value:
-                  :placeholder:
-                  :clearable:
-
-            .. tp-button-group::
-
-               .. tp-button::
-                  :id: attributes-reset
-                  :type: button
-
-                  Reset defaults
-
-               .. tp-button::
-                  :id: attributes-reload
-                  :type: button
-
-                  Reload preview
-
-         .. tp-divider::
-
-         .. h3::
-
-            Preview
-
-         .. tp-iframe::
-            :id: attributes-frame
-            :title: sudoku attribute preview
-            :style: height: 24rem; display: flow-root; inline-size: auto;
-
-         .. tp-callout::
-            :id: attributes-status
-            :variant: info
-            :heading: Preview status
-
-            Preparing the preview…
+      .. example:: Javascript API
 
          .. script::
             :type: module
-            :src: /docs/components/sudoku/examples/attributes.js
+
+            import "/components/sudoku/sudoku.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-sudoku");
+            element1.append(document.createTextNode("\n        "));
+
+            const element2 = document.createElement("ol");
+            element2.append(document.createTextNode("\n          "));
+
+            const element3 = document.createElement("li");
+            element3.append(document.createTextNode("39465!7!1!8!2"));
+            element2.append(element3);
+            element2.append(document.createTextNode("\n          "));
+
+            const element4 = document.createElement("li");
+            element4.append(document.createTextNode("2!85913!4!67"));
+            element2.append(element4);
+            element2.append(document.createTextNode("\n          "));
+
+            const element5 = document.createElement("li");
+            element5.append(document.createTextNode("6!718!4!2395"));
+            element2.append(element5);
+            element2.append(document.createTextNode("\n          "));
+
+            const element6 = document.createElement("li");
+            element6.append(document.createTextNode("7!2!63!8!95!41!"));
+            element2.append(element6);
+            element2.append(document.createTextNode("\n          "));
+
+            const element7 = document.createElement("li");
+            element7.append(document.createTextNode("4!38!5612!79!"));
+            element2.append(element7);
+            element2.append(document.createTextNode("\n          "));
+
+            const element8 = document.createElement("li");
+            element8.append(document.createTextNode("159!27483!6!"));
+            element2.append(element8);
+            element2.append(document.createTextNode("\n          "));
+
+            const element9 = document.createElement("li");
+            element9.append(document.createTextNode("8674!2!5!913!"));
+            element2.append(element9);
+            element2.append(document.createTextNode("\n          "));
+
+            const element10 = document.createElement("li");
+            element10.append(document.createTextNode("9127!38654!"));
+            element2.append(element10);
+            element2.append(document.createTextNode("\n          "));
+
+            const element11 = document.createElement("li");
+            element11.append(document.createTextNode("54!3!1!9!6728"));
+            element2.append(element11);
+            element2.append(document.createTextNode("\n        "));
+            element1.append(element2);
+            element1.append(document.createTextNode("\n      "));
+            example.append(element1);
+
+            document.body.append(example);
 
       .. example:: sudoku ⭐⭐
 

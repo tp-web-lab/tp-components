@@ -8,5 +8,46 @@
         <script src="/docs/components/_shared/introduction-actions.js"></script>
       </tp-box>
     </div>
+
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/box/box.js";
+      import "/components/button/button.js";
+      import "/components/dialog/dialog.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-box");
+      element1.setAttribute("data-intro-action", "dialog");
+      element1.setAttribute("data-allow-script", "");
+      element1.append(document.createTextNode("\n  "));
+
+      const element2 = document.createElement("tp-button");
+      element2.setAttribute("id", "intro-dialog-trigger");
+      element2.setAttribute("data-demo-trigger", "");
+      element2.append(document.createTextNode("Open the confirmation dialog"));
+      element1.append(element2);
+      element1.append(document.createTextNode("\n  "));
+
+      const element3 = document.createElement("tp-dialog");
+      element1.append(element3);
+      element1.append(document.createTextNode("\n  "));
+
+      const element4 = document.createElement("p");
+      element4.setAttribute("data-demo-status", "");
+      element4.setAttribute("role", "status");
+      element4.append(document.createTextNode("Try the dialog using its trigger."));
+      element1.append(element4);
+      element1.append(document.createTextNode("\n  "));
+
+      const element5 = document.createElement("script");
+      element5.setAttribute("src", "/docs/components/_shared/introduction-actions.js");
+      element1.append(element5);
+      element1.append(document.createTextNode("\n"));
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
   </template>
 </tp-html-viewer>

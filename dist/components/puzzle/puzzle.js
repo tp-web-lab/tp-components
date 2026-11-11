@@ -1,0 +1,1 @@
+import{t as e}from"../../chunks/puzzle2.js";export{e as TpPuzzle};

@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-restructuredtext-viewer" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-restructuredtext-viewer" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-restructuredtext-viewer
 ::: script { type="tp/restructuredtext" }
@@ -14,55 +14,24 @@ Edit this source and select **Run**.
 ::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/restructuredtext/restructuredtext.js";
+import "/components/restructuredtext-viewer/restructuredtext-viewer.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- doctest
+const example = document.createDocumentFragment();
 
-- lite
-:::
+const element1 = document.createElement("tp-restructuredtext-viewer");
+element1.append(document.createTextNode("\n        "));
 
-::: tp-radio-list { data-setting="src" label="src" label-position="top" orientation="horizontal" value="1" }
-- Default
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/restructuredtext");
+element2.textContent = "\n          Live reStructuredText\n          =====================\n\n          Edit this source and select **Run**.\n\n          * First item\n          * Second item\n        ";
+element1.append(element2);
+element1.append(document.createTextNode("\n      "));
+example.append(element1);
 
-- file1
-
-- file2
-
-- file-unknown
-:::
-
-::: tp-cluster
-:::
-
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
-
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="restructuredtext-viewer attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-File-loading attributes offer only Default, file1, file2 and file-unknown. The two local fixtures preserve verified example formats (they may contain the same content); file-unknown deliberately exercises error handling. No arbitrary path can be entered.
-
-::: script { type="module" src="/docs/components/restructuredtext-viewer/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
 
@@ -87,5 +56,5 @@ File-loading attributes offer only Default, file1, file2 and file-unknown. The t
 :::
 ::::
 ```
+:::::
 ::::::
-:::::::

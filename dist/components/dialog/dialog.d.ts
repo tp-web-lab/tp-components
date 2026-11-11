@@ -11,7 +11,7 @@ export interface TpDialogCloseDetail {
     action: "confirm" | "cancel";
 }
 /**
- * Dialog component.
+ * The custom `<tp-dialog>` element displays a confirm/cancel dialog.
  *
  * Wraps a native `<dialog>` element and provides confirm/cancel controls.
  *

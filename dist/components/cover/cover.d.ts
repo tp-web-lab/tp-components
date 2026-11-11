@@ -4,7 +4,7 @@
  */
 import { TpBase } from "../base/base.js";
 /**
- * Cover layout component, without Shadow DOM.
+ * The custom `<tp-cover>` element creates a vertical cover layout with an optional centered heading element.
  *
  * @summary Creates a vertical cover layout with an optional centered heading element.
  * @tagname tp-cover

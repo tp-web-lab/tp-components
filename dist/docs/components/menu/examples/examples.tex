@@ -1,0 +1,97 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpMenu{
+  \begin{itemize}
+    \item \rawhtml*|<a href="/#/components/button/index.md">Buttons</a>|
+    \item \rawhtml*|<a href="/#/components/tabs/index.md">Tabs</a>|
+    \item \rawhtml*|<a href="/#/components/tree/index.md">Trees</a>|
+  \end{itemize}
+}
+
+\wcScript[src=/docs/components/menu/examples/navigation.js]||
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/menu/menu.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-menu");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("ul");
+element2.append(document.createTextNode("\n    "));
+
+const element3 = document.createElement("li");
+
+const element4 = document.createElement("a");
+element4.setAttribute("href", "/#/components/button/index.md");
+element4.append(document.createTextNode("Buttons"));
+element3.append(element4);
+element2.append(element3);
+element2.append(document.createTextNode("\n    "));
+
+const element5 = document.createElement("li");
+
+const element6 = document.createElement("a");
+element6.setAttribute("href", "/#/components/tabs/index.md");
+element6.append(document.createTextNode("Tabs"));
+element5.append(element6);
+element2.append(element5);
+element2.append(document.createTextNode("\n    "));
+
+const element7 = document.createElement("li");
+
+const element8 = document.createElement("a");
+element8.setAttribute("href", "/#/components/tree/index.md");
+element8.append(document.createTextNode("Trees"));
+element7.append(element8);
+element2.append(element7);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+example.append(document.createTextNode("\n"));
+
+const element9 = document.createElement("script");
+element9.setAttribute("src", "/docs/components/menu/examples/navigation.js");
+example.append(element9);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Nested submenus
+\documentclass{article}
+\begin{document}
+Open Components, then Layout, then Rows to explore three submenu levels. Click a branch to open it, or focus Components and press Arrow Down, then Arrow Right twice. Arrow Left closes a submenu and returns focus to its parent. Links open the corresponding documentation page.
+
+
+\wcTpBox[style=min-height: 22rem]{
+  \wcTpMenu[orientation=horizontal]{
+    \begin{itemize}
+      \item Components      \begin{itemize}
+        \item Layout        \begin{itemize}
+          \item Rows          \begin{itemize}
+            \item \rawhtml*|<a href="/#/components/inline/index.md">Inline</a>|
+            \item \rawhtml*|<a href="/#/components/cluster/index.md">Cluster</a>|
+          \end{itemize}
+          \item \rawhtml*|<a href="/#/components/grid/index.md">Grid</a>|
+          \item \rawhtml*|<a href="/#/components/frame/index.md">Frame</a>|
+        \end{itemize}
+        \item Navigation        \begin{itemize}
+          \item \rawhtml*|<a href="/#/components/tabs/index.md">Tabs</a>|
+          \item \rawhtml*|<a href="/#/components/tree/index.md">Trees</a>|
+        \end{itemize}
+      \end{itemize}
+      \item \rawhtml*|<a href="/#/components/button/index.md">Buttons</a>|
+    \end{itemize}
+  }
+}
+
+\wcScript[src=/docs/components/menu/examples/navigation.js]||
+\end{document}

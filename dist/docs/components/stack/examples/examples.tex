@@ -1,0 +1,41 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpStack{
+  \wcTpBox{Step 1: Write a draft.}
+  \wcTpBox{Step 2: Review the content.}
+  \wcTpBox{Step 3: Publish the document.}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/stack/stack.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-stack");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("tp-box");
+element2.append(document.createTextNode("Step 1: Write a draft."));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("tp-box");
+element3.append(document.createTextNode("Step 2: Review the content."));
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
+
+const element4 = document.createElement("tp-box");
+element4.append(document.createTextNode("Step 3: Publish the document."));
+element1.append(element4);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

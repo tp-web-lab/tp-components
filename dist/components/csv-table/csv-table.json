@@ -2,7 +2,7 @@
   "tagname": "tp-csv-table",
   "classname": "TpCsvTable",
   "superclass": "TpBase",
-  "description": "creates an HTML table from CSV text or a CSV file.",
+  "description": "Creates an HTML table from CSV text or a CSV file.",
   "examples": [
     {
       "label": "Example 1",
@@ -54,8 +54,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "CSV table",
-    "introduction": "The custom `<tp-csv-table>` element implements the CSV table functionality: creates an HTML table from CSV text or a CSV file.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Table | Read and select the cell content. Wide tables can be scrolled horizontally. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Table | No table-specific keyboard shortcut. Embedded links and controls retain their normal keyboard interactions. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-csv-table>` element creates an HTML table from CSV text or a CSV file.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Table | Read and select the cell content. Wide tables can be scrolled horizontally. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Table | No table-specific keyboard shortcut. Embedded links and controls retain their normal keyboard interactions. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

@@ -1,0 +1,83 @@
+{
+  "tagname": "tp-latex-viewer",
+  "classname": "TpLatexViewer",
+  "superclass": "TpMarkupViewer",
+  "description": "Presents editable LaTeX examples with rendered and generated HTML views.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-latex-viewer><script type=\"tp/latex\">\\section{Hello}A formula $x^2$.</script></tp-latex-viewer>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "allow-script",
+      "description": "Executes scripts in the generated HTML preview.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "lite",
+      "description": "Compact viewer with rendered output.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "Comma-separated URLs of LaTeX example files.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-html-viewer",
+      "summary": "Interactive HTML viewer with editable source, live rendering, and DOM inspection."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-switcher",
+      "summary": "Switches between horizontal and vertical layouts based on available space."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-latex",
+      "url": "https://www.npmjs.com/package/@tp/tp-latex",
+      "summary": "LaTeX.js conversion and patched TikZJax assets."
+    }
+  ],
+  "userHelp": {
+    "displayName": "LaTeX viewer",
+    "introduction": "The custom `<tp-latex-viewer>` element presents editable LaTeX examples with rendered and generated HTML views.",
+    "interactions": "",
+    "keyboard": []
+  }
+}

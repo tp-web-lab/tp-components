@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-divider" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-divider" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-box
 Primary content group.
@@ -11,43 +11,32 @@ Secondary content group.
 ::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/box/box.js";
+import "/components/divider/divider.js";
 
-::::: tp-stack
-::: tp-radio-list { data-setting="orientation" label="orientation" label-position="top" orientation="horizontal" value="1" }
-- horizontal
+const example = document.createDocumentFragment();
 
-- vertical
-:::
+const element1 = document.createElement("tp-box");
+element1.append(document.createTextNode("\n      "));
 
-::: tp-cluster
-:::
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("Primary content group."));
+element1.append(element2);
+element1.append(document.createTextNode("\n      "));
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element3 = document.createElement("tp-divider");
+element1.append(element3);
+element1.append(document.createTextNode("\n      "));
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("Secondary content group."));
+element1.append(element4);
+element1.append(document.createTextNode("\n    "));
+example.append(element1);
 
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="divider attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/divider/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
 
@@ -70,5 +59,5 @@ After the custom divider.
 - Save
 ::::
 ```
+:::::
 ::::::
-:::::::

@@ -7,13 +7,13 @@ import "../flip-card/flip-card.js";
 import "../switcher/switcher.js";
 import { TpBase } from "../base/base.js";
 /**
- * Creates a memory game by duplicating every item of an ordered or unordered list.
+ * The custom `<tp-memory>` element creates a memory matching game.
  *
  * @summary Creates a memory matching game.
  * @tagname tp-memory
  * @attr {string} back = "" - Card-back URL, or blue/red for an OpenDecks back.
  * @attr {number} mismatch-delay = 1000 - Delay before unmatched cards turn back, in milliseconds.
-
+ *
  * @event tp-memory-complete Emitted when every pair is matched.
  * @event tp-memory-reset Emitted after the game is reset.
  * @cssprop --tp-memory-card-max-width Maximum width of image and SVG cards.

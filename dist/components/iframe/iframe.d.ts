@@ -4,14 +4,9 @@
  */
 import { TpBase } from "../base/base.js";
 /**
- * Affiche un `iframe` natif encapsulé dans un composant sans Shadow DOM,
- * avec prise en charge de :
- * - `src`
- * - `srcdoc`
- * - zoom
- * - sandbox
- * - interaction
+ * The custom `<tp-iframe>` element embeds a web page or HTML content within the current page.
  *
+ * @summary Embeds a web page or HTML content within the current page.
  * @tagname tp-iframe
  * @attr {boolean} controls = false - Shows the internal toolbar for zoom and frame actions; controls="false" hides it.
  *
@@ -26,8 +21,8 @@ import { TpBase } from "../base/base.js";
  * @attr {string} zoom-levels = "25% 50% 75% 100% 125% 150% 175% 200%" - Space-separated zoom choices offered in the toolbar, expressed as percentages, for example 50% 100% 150%.
  *
  *
-
-
+ *
+ *
  *
  * @example
  * <tp-iframe></tp-iframe>

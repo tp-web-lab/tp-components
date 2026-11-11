@@ -22,8 +22,11 @@ import "../icon-button/icon-button.js";
 /** Supported paper colors from the shared palette. */
 export type TpPostItColor = (typeof TpColor.presets)[number] extends `tp-${infer Color}` ? Color : never;
 /**
- * @summary displays a movable floating paper note that folds into a pushpin.
+ * The custom `<tp-post-it>` element displays a movable floating paper note that folds into a pushpin.
+ *
+ * @summary Displays a movable floating paper note that folds into a pushpin.
  * @tagname tp-post-it
+ * @see tp-post-it-editor - Create a post-it interactively and save it.
  * @attr {"default"|"red"|"orange"|"amber"|"yellow"|"lime"|"green"|"emerald"|"teal"|"glaz"|"cyan"|"sky"|"blue"|"indigo"|"violet"|"purple"|"fuchsia"|"pink"|"rose"|"zinc"|"ivory"|"stone"} color = "yellow" - Shared tp-color palette name without the tp- prefix; invalid values fall back to yellow.
  * @attr {string} heading = "" - Optional plain-text heading above the preserved content.
  * @attr {boolean} lite = false - Folds the note into its pushpin; click the pin to expand or fold it again.
@@ -64,7 +67,12 @@ export declare class TpPostIt extends TpBase {
         x: number;
         y: number;
     } | null;
-    /** Restores a pin attachment using pixel offsets from the target's top-left corner. */
+    /** Attaches the pin using pixel offsets from the target's top-left corner.
+     * @param element Target element in the same document.
+     * @param x Horizontal pin offset from the target's left edge, in pixels.
+     * @param y Vertical pin offset from the target's top edge, in pixels.
+     * @param initial When true, also saves this attachment as the destination of resetPosition(); false preserves the previous reset destination.
+     */
     attachTo(element: Element, x: number, y: number, initial?: boolean): void;
     /** Unique identifiers connect each pin with its own content. */
     private static nextId;

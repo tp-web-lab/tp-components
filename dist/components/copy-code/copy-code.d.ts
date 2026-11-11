@@ -18,8 +18,7 @@ import { TpBase } from "../base/base.js";
 import "../animation/animation.js";
 import "../icon/icon.js";
 /**
- * Bouton de copie de code basé sur `<tp-icon>`, avec feedback visuel,
- * changement temporaire d’icône et animation.
+ * The custom `<tp-copy-code>` element copies the textual content of a target component to the clipboard.
  *
  * The target can be defined as:
  * - via l’attribut `for`, qui référence l’`id` d’un élément cible
@@ -43,8 +42,8 @@ import "../icon/icon.js";
  * @attr {string} error-icon = "warning" - Icon name displayed after a failed clipboard copy; defaults to warning.
  * @attr {string} copied-text = "Copied!" - Accessible feedback text after a successful copy; defaults to Copied!.
  *
-
-
+ *
+ *
  *
  * @example
  * <tp-box>

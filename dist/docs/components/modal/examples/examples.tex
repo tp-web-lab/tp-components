@@ -1,0 +1,69 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[data-intro-action=modal,data-allow-script]{
+  \wcTpButton[id=intro-modal-trigger,data-demo-trigger]{Open the modal}
+  \wcTpModal[backdrop,outside-click,aria-label=Example modal]{
+    This panel contains additional information.
+
+    \wcTpButton[data-demo-close]{Close}
+  }
+  \wcP[data-demo-status,role=status]{Try the modal using its trigger.}
+  \wcScript[src=/docs/components/_shared/introduction-actions.js]||
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/button/button.js";
+import "/components/modal/modal.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.setAttribute("data-intro-action", "modal");
+element1.setAttribute("data-allow-script", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("tp-button");
+element2.setAttribute("id", "intro-modal-trigger");
+element2.setAttribute("data-demo-trigger", "");
+element2.append(document.createTextNode("Open the modal"));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("tp-modal");
+element3.setAttribute("backdrop", "");
+element3.setAttribute("outside-click", "");
+element3.setAttribute("aria-label", "Example modal");
+
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("This panel contains additional information."));
+element3.append(element4);
+
+const element5 = document.createElement("tp-button");
+element5.setAttribute("data-demo-close", "");
+element5.append(document.createTextNode("Close"));
+element3.append(element5);
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
+
+const element6 = document.createElement("p");
+element6.setAttribute("data-demo-status", "");
+element6.setAttribute("role", "status");
+element6.append(document.createTextNode("Try the modal using its trigger."));
+element1.append(element6);
+element1.append(document.createTextNode("\n  "));
+
+const element7 = document.createElement("script");
+element7.setAttribute("src", "/docs/components/_shared/introduction-actions.js");
+element1.append(element7);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

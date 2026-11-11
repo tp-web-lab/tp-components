@@ -38,7 +38,9 @@ import "../code-editor/code-editor.js";
 import "../icon-button/icon-button.js";
 import "../graph-geometry/geometry-actions.js";
 /**
- * @summary Explore how uphill and downhill gradients change the effort needed to move a point.
+ * The custom `<tp-slope-simulator>` element shows how uphill and downhill gradients affect the effort needed to move a point.
+ *
+ * @summary Shows how uphill and downhill gradients affect the effort needed to move a point.
  * @tagname tp-slope-simulator
  * @attr {string} src = "" - JSON file containing cycling profiles; takes precedence over the inline script.
  * @attr {number} speed-base = 30 - Fictional flat-ground speed in km/h; a positive attribute overrides the optional JSON speed-base.

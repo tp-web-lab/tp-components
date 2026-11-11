@@ -1,0 +1,34 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpMastermind[solution=red blue green yellow,attempts=8]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/mastermind/mastermind.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-mastermind");
+element1.setAttribute("solution", "red blue green yellow");
+element1.setAttribute("attempts", "8");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example mastermind ⭐⭐
+\documentclass{article}
+\begin{document}
+\wcTpMastermind[solution=orange purple red green,attempts=8]{}
+\end{document}
+
+% !tp-example mastermind ⭐⭐⭐
+\documentclass{article}
+\begin{document}
+\wcTpMastermind[solution=yellow red purple blue orange,attempts=10]{}
+\end{document}

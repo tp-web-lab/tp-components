@@ -1,0 +1,20 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpLoto{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/loto/loto.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-loto");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

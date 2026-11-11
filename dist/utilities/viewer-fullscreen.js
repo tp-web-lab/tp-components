@@ -1,0 +1,2 @@
+import"../chunks/fullscreen.js";var e=0;function t(t){let n=`viewer-${++e}`;t.setAttribute(`data-tp-viewer-fullscreen`,n);let r=document.createElement(`tp-fullscreen`);return r.setAttribute(`anchor`,`[data-tp-viewer-fullscreen="${n}"]`),r.setAttribute(`size`,`s`),r.setAttribute(`section`,`end`),r}export{t as createViewerFullscreen};
+//# sourceMappingURL=viewer-fullscreen.js.map

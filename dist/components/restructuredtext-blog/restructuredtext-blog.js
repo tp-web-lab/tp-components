@@ -1,0 +1,2 @@
+import{t as e}from"../../chunks/markup-blog2.js";var t=class extends e{get fixedLanguage(){return`restructuredtext`}};customElements.get(`tp-restructuredtext-blog`)||customElements.define(`tp-restructuredtext-blog`,t);export{t as TpRestructuredTextBlog};
+//# sourceMappingURL=restructuredtext-blog.js.map

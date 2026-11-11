@@ -3,7 +3,9 @@ import { TpBase } from "../base/base.js";
 export declare function renderMarkdownInto(source: string, root: HTMLElement, path?: string): Promise<void>;
 export declare function renderMarkdownRuntimeIn(root: ParentNode, path?: string): Promise<void>;
 /**
- * @summary Markdown rendering component.
+ * The custom `<tp-markdown>` element renders Markdown documents.
+ *
+ * @summary Renders Markdown documents.
  * @tagname tp-markdown
  * @attr {string} src = "" - URL of a Markdown source file to fetch and render; relative paths resolve against the containing source document when available.
  * @example

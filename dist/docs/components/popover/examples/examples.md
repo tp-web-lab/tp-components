@@ -23,60 +23,55 @@ Try the popover using its trigger.
 :::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/box/box.js";
+import "/components/button/button.js";
+import "/components/popover/popover.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- backdrop
+const example = document.createDocumentFragment();
 
-- open
+const element1 = document.createElement("tp-box");
+element1.setAttribute("data-intro-action", "popover");
+element1.setAttribute("data-allow-script", "");
+element1.append(document.createTextNode("\n  "));
 
-- outside-click
-:::
+const element2 = document.createElement("tp-button");
+element2.setAttribute("id", "intro-popover-trigger");
+element2.setAttribute("data-demo-trigger", "");
+element2.append(document.createTextNode("Show more information"));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
 
-::: tp-radio-list { data-setting="placement" label="placement" label-position="top" orientation="horizontal" value="3" }
-- top
+const element3 = document.createElement("tp-popover");
+element3.setAttribute("anchor", "#intro-popover-trigger");
+element3.setAttribute("outside-click", "");
 
-- end
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("This panel contains additional information."));
+element3.append(element4);
 
-- bottom
+const element5 = document.createElement("tp-button");
+element5.setAttribute("data-demo-close", "");
+element5.append(document.createTextNode("Close"));
+element3.append(element5);
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
 
-- start
-:::
+const element6 = document.createElement("p");
+element6.setAttribute("data-demo-status", "");
+element6.setAttribute("role", "status");
+element6.append(document.createTextNode("Try the popover using its trigger."));
+element1.append(element6);
+element1.append(document.createTextNode("\n  "));
 
-:::: tp-cluster
-::: tp-textfield { data-setting="anchor" label="anchor" value placeholder clearable }
-:::
+const element7 = document.createElement("script");
+element7.setAttribute("src", "/docs/components/_shared/introduction-actions.js");
+element1.append(element7);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-::: tp-textfield { data-setting="offset" label="offset" value="8px" placeholder="8px" clearable }
-:::
-::::
-
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
-
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="popover attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/popover/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
 ::::::

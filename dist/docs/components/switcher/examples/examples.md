@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-switcher" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-switcher" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-switcher { threshold="35rem" gap="1rem" }
 ::: tp-box
@@ -24,46 +24,46 @@
 ::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/box/box.js";
+import "/components/switcher/switcher.js";
 
-::::: tp-stack
-:::: tp-cluster
-::: tp-textfield { data-setting="gap" label="gap" value="1rem" placeholder="1rem" clearable }
-:::
+const example = document.createDocumentFragment();
 
-::: tp-textfield { data-setting="max-horizontal" label="max-horizontal" value placeholder clearable }
-:::
+const element1 = document.createElement("tp-switcher");
+element1.setAttribute("threshold", "35rem");
+element1.setAttribute("gap", "1rem");
+element1.append(document.createTextNode("\n  "));
 
-::: tp-textfield { data-setting="threshold" label="threshold" value="30rem" placeholder="30rem" clearable }
-:::
-::::
+const element2 = document.createElement("tp-box");
+element2.append(document.createTextNode("1. Plan the content."));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element3 = document.createElement("tp-box");
+element3.append(document.createTextNode("2. Write a draft."));
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element4 = document.createElement("tp-box");
+element4.append(document.createTextNode("3. Review the text."));
+element1.append(element4);
+element1.append(document.createTextNode("\n  "));
 
-::: tp-divider
-:::
+const element5 = document.createElement("tp-box");
+element5.append(document.createTextNode("4. Add illustrations."));
+element1.append(element5);
+element1.append(document.createTextNode("\n  "));
 
-### Preview
+const element6 = document.createElement("tp-box");
+element6.append(document.createTextNode("5. Publish the result."));
+element1.append(element6);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-::: tp-iframe { id="attributes-frame" title="switcher attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/switcher/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
+:::::
 ::::::
-:::::::

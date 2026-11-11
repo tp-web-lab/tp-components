@@ -1,0 +1,47 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpHtmlViewer{
+  \wcScript[type=tp/html]|
+<h2>Hello, HTML!</h2>
+<p>This preview renders <strong>HTML content</strong>.</p>
+  |
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/html-viewer/html-viewer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-html-viewer");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/html");
+element2.textContent = "\n\u003ch2>Hello, HTML!\u003c/h2>\n\u003cp>This preview renders \u003cstrong>HTML content\u003c/strong>.\u003c/p>\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Multiple examples
+\documentclass{article}
+\begin{document}
+\wcTpHtmlViewer{
+  \wcScript[type=tp/html]|
+        <div role="example" label="Paragraph">
+          <p>A paragraph with <strong>strong text</strong>.</p>
+        </div>
+        <div role="example" label="Button">
+          <button type="button">Continue</button>
+        </div>
+      |
+}
+\end{document}

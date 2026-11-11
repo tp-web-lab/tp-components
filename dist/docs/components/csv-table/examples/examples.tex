@@ -1,0 +1,48 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpCsvTable[heading]{
+  \wcScript[type=tp/csv-table]|
+    Country,Capital
+    Estonia,Tallinn
+    Latvia,Riga
+    Lithuania,Vilnius
+  |
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/csv-table/csv-table.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-csv-table");
+element1.setAttribute("heading", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/csv-table");
+element2.textContent = "\n    Country,Capital\n    Estonia,Tallinn\n    Latvia,Riga\n    Lithuania,Vilnius\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Quoted fields
+\documentclass{article}
+\begin{document}
+\wcTpCsvTable[heading,separator=;]{
+  \wcScript[type=tp/csv-table]|
+Name;Note
+"Ada; Lovelace";"A quoted ""word"""
+Grace;"First line
+Second line"
+|
+}
+\end{document}

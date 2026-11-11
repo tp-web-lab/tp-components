@@ -1,0 +1,3 @@
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="1"/><path d="M2 9h20M2 15.5h20M9 2v20M15.5 2v20M2 2l7 7M9 2l6.5 7M2 9l7 6.5"/></g><path fill="currentColor" d="M2 2h7v7H2zm7 0h6.5v7zM2 9h7v6.5z"/></svg>
+`;export{t as n,n as t};
+//# sourceMappingURL=kakuro.js.map

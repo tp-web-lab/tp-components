@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-tree" allow-script }
-:::::: script { type="tp/markdown" }
+::::: tp-markdown-viewer { label="tp-tree" allow-script }
+:::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-tree { selectable guides level="2" }
 - Project
@@ -16,50 +16,63 @@
 :::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/tree/tree.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- draggable
+const example = document.createDocumentFragment();
 
-- editable
+const element1 = document.createElement("tp-tree");
+element1.setAttribute("selectable", "");
+element1.setAttribute("guides", "");
+element1.setAttribute("level", "2");
+element1.append(document.createTextNode("\n  "));
 
-- guides
+const element2 = document.createElement("ul");
+element2.append(document.createTextNode("\n    "));
 
-- selectable
-:::
+const element3 = document.createElement("li");
+element3.append(document.createTextNode("Project\n      "));
 
-:::: tp-cluster
-::: tp-textfield { data-setting="level" label="level" value="1" placeholder="1" clearable }
-:::
-::::
+const element4 = document.createElement("ul");
+element4.append(document.createTextNode("\n        "));
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element5 = document.createElement("li");
+element5.append(document.createTextNode("Documentation\n          "));
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element6 = document.createElement("ul");
 
-::: tp-divider
-:::
+const element7 = document.createElement("li");
+element7.append(document.createTextNode("Getting started"));
+element6.append(element7);
 
-### Preview
+const element8 = document.createElement("li");
+element8.append(document.createTextNode("Examples"));
+element6.append(element8);
+element5.append(element6);
+element5.append(document.createTextNode("\n        "));
+element4.append(element5);
+element4.append(document.createTextNode("\n        "));
 
-::: tp-iframe { id="attributes-frame" title="tree attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
+const element9 = document.createElement("li");
+element9.append(document.createTextNode("Source code"));
+element4.append(element9);
+element4.append(document.createTextNode("\n        "));
 
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
+const element10 = document.createElement("li");
+element10.append(document.createTextNode("README.md"));
+element4.append(element10);
+element4.append(document.createTextNode("\n      "));
+element3.append(element4);
+element3.append(document.createTextNode("\n    "));
+element2.append(element3);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-::: script { type="module" src="/docs/components/tree/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
-::::::
-:::::::
+::::
+:::::

@@ -1,89 +1,44 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="code-editor" library="components" size="1.25em"></tp-icon> Code editor
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-code-editor>` element implements the <tp-icon name="code-editor" library="components" size="1.25em"></tp-icon> Code editor functionality: displays a CodeMirror 6 based code editor.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
-<tp-code-editor language="javascript" line-numbers>
+<div class="tp-component-doc-intro">
+
+The custom `<tp-code-editor>` element displays and edits source code.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
+<tp-code-editor language="javascript" line-numbers="">
   <script type="tp/javascript">
 const greeting = "Hello, tp-components!";
 console.log(greeting);
   </script>
 </tp-code-editor>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-code-editor" src="/docs/components/code-editor/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
+### Initial content
 
-Use F1 while the editor is focused to show or hide its toolbar. Mod means ⌘ on macOS and Ctrl elsewhere; Shift and Alt are shown as ⇧ and ⌥ on macOS.
-
-#### Mouse interactions
-
-| Control or gesture | Result | Shortcut |
-| --- | --- | --- |
-| Editor text | Click to place the cursor; drag to select text. Editing does not execute the code. |  |
-| Numbered comment marker, when linked to tp-code-comment | Hover to read its formatted explanation in a tooltip. |  |
-| Keyboard button | Open or close the command palette listed below. | Mod Shift P |
-| Copy code button | Copy the entire editor content, unlike Copy in the palette, which copies the selection. | — |
-| Theme button | Choose light, dark or automatic appearance for this editor. | — |
-| Fullscreen button | Enter or leave fullscreen for this editor. | — |
-| Language badge / line and column | Display the current language and cursor position; these are indicators, not buttons. |  |
-| Palette: Undo | Reverts the last editor change. | Mod Z |
-| Palette: Redo | Reapplies the last reverted editor change. | Mod Shift Z |
-| Palette: Copy | Copies the current selection. | Mod C |
-| Palette: Cut | Cuts the current selection. | Mod X |
-| Palette: Paste | Pastes clipboard text at the current selection. | Mod V |
-| Palette: Select all | Selects the whole editor content. | Mod A |
-| Palette: Fold code | Folds the current foldable code block. | Mod Alt ↓ |
-| Palette: Unfold code | Unfolds the current folded code block. | Mod Alt ↑ |
-| Palette: Toggle gutters | Shows or hides the fold gutter. | Mod Alt G |
-| Palette: Toggle line numbers | Shows or hides line numbers. | Mod Alt L |
-| Palette: Indent | Indents the current line or selection. | Tab |
-| Palette: Dedent | Dedents the current line or selection. | Shift Tab |
-| Palette: Search | Opens the search panel. | Mod F |
-| Palette: Replace | Opens search and runs replace-next. | Mod Alt F |
-| Palette: Go to line | Opens the go-to-line prompt. | Mod G |
-| Palette: Toggle line comment | Toggles line comments for the current line or selection. | Mod Alt C |
-| Palette: Toggle block comment | Toggles block comments for the current selection. | Mod Alt B |
-| Palette: Toggle Command Palette | Opens or closes the command palette. | Mod Shift P |
-| Palette: Toggle toolbar | Opens or closes the toolbar. | F1 |
-| Clipboard permission | Paste may require browser permission. Read-only content cannot be edited. |  |
-
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| Typing and cursor movement | Edit text and move the insertion point in the focused editor. Editing is unavailable in read-only mode. |
-| <kbd>Mod</kbd>+<kbd>Z</kbd> | Reverts the last editor change. |
-| <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Reapplies the last reverted editor change. |
-| <kbd>Mod</kbd>+<kbd>C</kbd> | Copies the current selection. |
-| <kbd>Mod</kbd>+<kbd>X</kbd> | Cuts the current selection. |
-| <kbd>Mod</kbd>+<kbd>V</kbd> | Pastes clipboard text at the current selection. |
-| <kbd>Mod</kbd>+<kbd>A</kbd> | Selects the whole editor content. |
-| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>↓</kbd> | Folds the current foldable code block. |
-| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>↑</kbd> | Unfolds the current folded code block. |
-| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>G</kbd> | Shows or hides the fold gutter. |
-| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd> | Shows or hides line numbers. |
-| Focus in readonly mode | The code remains keyboard-focusable for reading, selection and scrolling. |
-| <kbd>Tab</kbd> | Indents the current line or selection. |
-| <kbd>Shift</kbd>+<kbd>Tab</kbd> | Dedents the current line or selection. |
-| <kbd>Mod</kbd>+<kbd>F</kbd> | Opens the search panel. |
-| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd> | Open the search and replacement panel. |
-| <kbd>Mod</kbd>+<kbd>G</kbd> | Opens the go-to-line prompt. |
-| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd> | Toggles line comments for the current line or selection. |
-| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> | Toggles block comments for the current selection. |
-| <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> | Opens or closes the command palette. |
-| <kbd>F1</kbd> | Opens or closes the toolbar. |
-| <kbd>Up</kbd> / <kbd>Down</kbd> in the open palette | Move between commands. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> in the open palette | Activate the focused command. |
-| <kbd>Escape</kbd> in the open palette | Close the palette. |
-| Focus a numbered comment marker / <kbd>Escape</kbd> | Show its explanation / close the tooltip without changing the code. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
-
-#### Initial editor content
 ::: tp-tabs
 no content
 : ``` html
@@ -116,428 +71,7 @@ external file
 
 Add the boolean `toolbar` attribute to display the editor toolbar initially.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Edit the sample code and try the editor controls.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-
-Using an internal script
-: Edit code initialized from an embedded script.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
-
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
-
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md loading=lazy}
-
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## Programming
-
-### API
-<!-- tp-docgen:api TpCodeEditor -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>dir</code> | <code>string</code> | <code>&quot;inherited&quot;</code> | Text direction inherited from HTMLElement (`ltr`, `rtl`, `auto`). |
-  | <code>filename</code> | <code>string</code> | <code>&quot;&quot;</code> | Logical filename associated with the current content. |
-  | <code>fold-gutter</code> | <code>boolean</code> | <code>false</code> | Shows fold markers in the gutter. |
-  | <code>lang</code> | <code>string</code> | <code>&quot;inherited&quot;</code> | Language tag inherited from HTMLElement. |
-  | <code>language</code> | <code>string</code> | <code>html</code> | Fallback editing language when it cannot be inferred from a `tp/LANGUAGE` script or `src` extension. |
-  | <code>line-numbers</code> | <code>boolean</code> | <code>false</code> | Shows line numbers. |
-  | <code>placeholder</code> | <code>string</code> | <code>&quot;Type some LANGUAGE code... or F1 to toggle the toolbar&quot;</code> | Text shown when the editor is empty. Defaults to `Type some LANGUAGE code... or F1 to toggle the toolbar` using the resolved language. |
-  | <code>readonly</code> | <code>boolean</code> | <code>false</code> | Enables read-only mode. |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of a source file to load. |
-  | <code>toolbar</code> | <code>boolean</code> | <code>false</code> | Shows the editor UI panel. |
-  | <code>value</code> | <code>string</code> | <code>&quot;&quot;</code> | Initial editor content. |
-  | <code>word-wrap</code> | <code>boolean</code> | <code>false</code> | Enables soft wrapping. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-code-editor>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | <code>focus</code> | <code>focus(): void</code> | Moves focus to the CodeMirror editor. |
-  | <code>getContentHeight</code> | <code>getContentHeight(): number</code> | Returns the computed height required by the current editor content, in pixels. |
-  | <code>getInitialValue</code> | <code>getInitialValue(): string</code> | Returns the value currently used as the reset target. |
-  | <code>getValue</code> | <code>getValue(): string</code> | Returns the current editor content. |
-  | <code>isCursorAtEnd</code> | <code>isCursorAtEnd(): boolean</code> | Returns `true` when the editor selection is collapsed at the end of the document. |
-  | <code>isCursorAtStart</code> | <code>isCursorAtStart(): boolean</code> | Returns `true` when the editor selection is collapsed at the start of the document. |
-  | <code>reload</code> | <code>reload(): void</code> | Reloads the content from `src`, when a source file is configured. |
-  | <code>reset</code> | <code>reset(): void</code> | Restores the editor content to the initial value and emits `tp-code-editor-reset`. |
-  | <code>setCodeCommentNumbers</code> | <code>setCodeCommentNumbers(owner: object, numbers: readonly number[], comments: ReadonlyMap&lt;number, HTMLElement&gt; = new Map()): void</code> | Registers a linked annotation list; an empty array removes only that owner's markers. |
-  | <code>setInitialValue</code> | <code>setInitialValue(value: string): void</code> | Sets the value used by `reset()` without changing the current editor content. |
-  | <code>setValue</code> | <code>setValue(code: string): void</code> | Replaces the current editor content and stores it as an explicit API-provided value. |
-  | <code>syncHeightToContent</code> | <code>syncHeightToContent(): void</code> | Recomputes the editor height from the current content and panels. |
-  [Public methods of `TpCodeEditor`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-code-editor-boundary</code> | <code>&#123; direction: &quot;before&quot; \| &quot;after&quot; &#125;</code> | Emitted when keyboard navigation reaches the editor boundary. |
-  | <code>tp-code-editor-change</code> | <code>&#123; filename: string; value: string &#125;</code> | Emitted when the editor content changes after user input. |
-  | <code>tp-code-editor-error</code> | <code>&#123; message: string &#125;</code> | Emitted when a source loading error occurs. |
-  | <code>tp-code-editor-input</code> | <code>&#123; filename: string; value: string &#125;</code> | Emitted on user input. |
-  | <code>tp-code-editor-load</code> | <code>&#123; filename: string; source: &quot;api&quot; \| &quot;script&quot; \| &quot;src&quot; \| &quot;value&quot;; valueLength: number &#125;</code> | Emitted after the editor source has been resolved and loaded. |
-  | <code>tp-code-editor-ready</code> | <code>void</code> | Emitted when the editor has been initialized. |
-  | <code>tp-code-editor-reset</code> | <code>&#123; value: string &#125;</code> | Emitted after `reset()` restores the initial value. |
-  [Events emitted by `<tp-code-editor>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | <code>&#45;&#45;tp-code-editor-active-line</code> | <code>var( &#45;&#45;tp-syntax-active-line, color-mix(in srgb, var(&#45;&#45;tp-neutral-fill-soft, #e5e7eb) 38%, transparent) )</code> | Background color of the active editor line. |
-  | <code>&#45;&#45;tp-code-editor-caret</code> | <code>var(&#45;&#45;tp-syntax-caret, var(&#45;&#45;tp-text-body, #111827))</code> | Caret color. |
-  | <code>&#45;&#45;tp-code-editor-fold-background</code> | <code>var( &#45;&#45;tp-syntax-fold-background, color-mix(in srgb, var(&#45;&#45;tp-neutral-fill-soft, #e5e7eb) 70%, transparent) )</code> | Background color of fold placeholders. |
-  | <code>&#45;&#45;tp-code-editor-foreground</code> | <code>var(&#45;&#45;tp-syntax-foreground, var(&#45;&#45;tp-text-body, #111827))</code> | Main editor text color. |
-  | <code>&#45;&#45;tp-code-editor-gutter-background</code> | <code>var( &#45;&#45;tp-syntax-gutter-background, color-mix(in srgb, var(&#45;&#45;tp-neutral-fill-softer, #f3f4f6) 88%, transparent) )</code> | Gutter background color. |
-  | <code>&#45;&#45;tp-code-editor-gutter-border</code> | <code>var(&#45;&#45;tp-syntax-gutter-border, var(&#45;&#45;tp-neutral-stroke-soft, #d1d5db))</code> | Gutter border color. |
-  | <code>&#45;&#45;tp-code-editor-gutter-foreground</code> | <code>var(&#45;&#45;tp-syntax-gutter-foreground, var(&#45;&#45;tp-text-muted, #6b7280))</code> | Gutter text and marker color. |
-  | <code>&#45;&#45;tp-code-editor-muted</code> | <code>var(&#45;&#45;tp-syntax-muted, var(&#45;&#45;tp-text-muted, #6b7280))</code> | Muted editor text color. |
-  | <code>&#45;&#45;tp-code-editor-selection</code> | <code>var( &#45;&#45;tp-syntax-selection, color-mix(in srgb, var(&#45;&#45;tp-brand-fill-mid, #60a5fa) 62%, transparent) )</code> | Selection background color. |
-  | <code>&#45;&#45;tp-code-editor-surface</code> | <code>var(&#45;&#45;tp-syntax-surface, var(&#45;&#45;tp-paper-color, #ffffff))</code> | Editor surface background color. |
-  | <code>&#45;&#45;tp-code-editor-token-comment</code> | <code>var(&#45;&#45;tp-syntax-token-comment, #6b7280)</code> | Syntax color for comments. |
-  | <code>&#45;&#45;tp-code-editor-token-function</code> | <code>var(&#45;&#45;tp-syntax-token-function, #1d4ed8)</code> | Syntax color for function names. |
-  | <code>&#45;&#45;tp-code-editor-token-keyword</code> | <code>var(&#45;&#45;tp-syntax-token-keyword, #2563eb)</code> | Syntax color for keywords. |
-  | <code>&#45;&#45;tp-code-editor-token-link</code> | <code>var(&#45;&#45;tp-syntax-token-link, #0284c7)</code> | Syntax color for links. |
-  | <code>&#45;&#45;tp-code-editor-token-number</code> | <code>var(&#45;&#45;tp-syntax-token-number, #7c3aed)</code> | Syntax color for numbers. |
-  | <code>&#45;&#45;tp-code-editor-token-property</code> | <code>var(&#45;&#45;tp-syntax-token-property, #0f766e)</code> | Syntax color for properties. |
-  | <code>&#45;&#45;tp-code-editor-token-string</code> | <code>var(&#45;&#45;tp-syntax-token-string, #b45309)</code> | Syntax color for strings. |
-  | <code>&#45;&#45;tp-code-editor-token-type</code> | <code>var(&#45;&#45;tp-syntax-token-type, #1d4ed8)</code> | Syntax color for types. |
-  | <code>&#45;&#45;tp-code-editor-token-variable</code> | <code>var(&#45;&#45;tp-syntax-token-variable, #0f766e)</code> | Syntax color for variables. |
-  [CSS properties of `<tp-code-editor>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_code-editor.TpCodeEditor.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -564,12 +98,47 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Edit the sample code and try the editor controls.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Using an internal script
+: Edit code initialized from an embedded script.
+
+Read-only code
+: Select and copy the code while editing is disabled.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md loading=lazy}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-code-editor>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-badge
@@ -612,16 +181,16 @@ All tp-components used by `<tp-code-editor>` are loaded automatically by this co
 @summary Tooltip component.
 -->
 
-- [`<tp-badge>`](../badge/index.md) : Badge component for compact status labels.
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-copy-code>`](../copy-code/index.md) : Copy-to-clipboard button component.
-- [`<tp-dropdown>`](../dropdown/index.md) : Dropdown menu component.
-- [`<tp-fullscreen>`](../fullscreen/index.md) : Fullscreen controller button.
-- [`<tp-icon>`](../icon/index.md) : SVG icon component with inline, URL, and registry sources.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-theme>`](../theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
-- [`<tp-tooltip>`](../tooltip/index.md) : Tooltip component.
+- [`<tp-badge>`](#/components/badge/index.md) : Badge component for compact status labels.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
+- [`<tp-copy-code>`](#/components/copy-code/index.md) : Copy-to-clipboard button component.
+- [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
+- [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-theme>`](#/components/theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
+- [`<tp-tooltip>`](#/components/tooltip/index.md) : Tooltip component.
 
 ### External
 

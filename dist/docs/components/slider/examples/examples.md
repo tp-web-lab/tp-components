@@ -2,7 +2,7 @@
 ::::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::::: tp-box { style="max-inline-size: 28rem" }
-:::: tp-slider { scrollbar item-width="10rem" gap="1rem" }
+:::: tp-slider { scrollbar item-width="10rem" gap="1rem" style="max-block-size: 8rem" }
 ::: tp-box
 First
 :::
@@ -22,55 +22,45 @@ Fourth
 :::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/box/box.js";
+import "/components/slider/slider.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- scrollbar
-:::
+const example = document.createDocumentFragment();
 
-:::: tp-cluster
-::: tp-textfield { data-setting="gap" label="gap" value="1rem" placeholder="1rem" clearable }
-:::
+const element1 = document.createElement("tp-box");
+element1.setAttribute("style", "max-inline-size: 28rem");
+element1.append(document.createTextNode("\n  "));
 
-::: tp-textfield { data-setting="item-width" label="item-width" value="auto" placeholder="auto" clearable }
-:::
+const element2 = document.createElement("tp-slider");
+element2.setAttribute("scrollbar", "");
+element2.setAttribute("item-width", "10rem");
+element2.setAttribute("gap", "1rem");
+element2.setAttribute("style", "max-block-size: 8rem");
+element2.append(document.createTextNode("\n    "));
 
-::: tp-textfield { data-setting="scrollback-thumb-color" label="scrollback-thumb-color" value="var(--tp-neutral-fill-mid)" placeholder="var(--tp-neutral-fill-mid)" clearable }
-:::
+const element3 = document.createElement("tp-box");
+element3.append(document.createTextNode("First"));
+element2.append(element3);
 
-::: tp-textfield { data-setting="scrollbar-track-color" label="scrollbar-track-color" value="transparent" placeholder="transparent" clearable }
-:::
+const element4 = document.createElement("tp-box");
+element4.append(document.createTextNode("Second"));
+element2.append(element4);
 
-::: tp-textfield { data-setting="slider-height" label="slider-height" value="auto" placeholder="auto" clearable }
-:::
-::::
+const element5 = document.createElement("tp-box");
+element5.append(document.createTextNode("Third"));
+element2.append(element5);
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element6 = document.createElement("tp-box");
+element6.append(document.createTextNode("Fourth"));
+element2.append(element6);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
-
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="slider attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/slider/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
 

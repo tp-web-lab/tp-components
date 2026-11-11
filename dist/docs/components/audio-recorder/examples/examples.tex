@@ -1,0 +1,36 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpAudioRecorder{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/audio-recorder/audio-recorder.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-audio-recorder");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Spoken answer
+\documentclass{article}
+\begin{document}
+\wcTpFillBlankQuestion[open]{
+  \begin{description}
+    \item[{Title}] A spoken answer
+    \item[{Answers}] \begin{enumerate}
+      \item blue
+    \end{enumerate}
+    \item[{Prompt}] Say the word “blue”. Stop recording, review the transcript and submit. Recognition may use an online service; you can also type the answer.
+    \item[{Form}] \rawhtml|<tp-audio-recorder transcript="#spoken-answer" lang="en-US"></tp-audio-recorder>|     \rawhtml|<tp-textfield id="spoken-answer" name="color" clearable="" regexp="blue[.!?]?" label="Your answer"></tp-textfield>|
+    \item[{Solution}] blue
+  \end{description}
+}
+\end{document}

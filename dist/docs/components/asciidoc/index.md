@@ -1,9 +1,20 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="asciidoc" library="components" size="1.25em"></tp-icon> AsciiDoc
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-The custom `<tp-asciidoc>` element implements the <tp-icon name="asciidoc" library="components" size="1.25em"></tp-icon> AsciiDoc functionality: semantic AsciiDoc rendering component.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-asciidoc>` element renders AsciiDoc documents.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-asciidoc>
   <script type="tp/asciidoc">
 == A short document
@@ -15,31 +26,24 @@ This paragraph uses *AsciiDoc*.
 * Publish the page
   </script>
 </tp-asciidoc>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-asciidoc" src="/docs/components/asciidoc/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
+### Initial content
 
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Reading | Read the displayed content and use its links and embedded controls. |
-| Using the component | The component itself adds no editing or playback controls. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
-| Focused controls | Use each control’s standard keyboard interaction.  |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |
-
-### Author directives
-
-TeX and AsciiMath formulas use MathJax 4 with SVG output, matching the Markdown and reStructuredText components. The component initializes MathJax for dynamically inserted content and reuses an already loaded instance.
-
-#### Initial AsciiDoc content
 ::: tp-tabs
 no content
 : ```html
@@ -73,7 +77,7 @@ external file
   current documentation source.
 :::
 
-#### Rendering from JavaScript
+### Rendering from JavaScript
 
 The module also exports helpers for rendering into an existing element or obtaining HTML directly.
 
@@ -87,384 +91,104 @@ const html = await renderAsciidocToHtml('Hello, *Asciidoctor*!');
 await renderAsciidocInto('== A section', document.querySelector('#output'));
 ```
 
-## Examples
+### Authoring
 
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Inspect how the embedded asciidoc source is rendered as a formatted document.
+TeX and AsciiMath formulas use MathJax 4 with SVG output, matching the Markdown and reStructuredText components. The component initializes MathJax for dynamically inserted content and reuses an already loaded instance.
 
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
+### Extensions to Asciidoctor.js
 
-Advanced example
-: Inspect the richer document supplied through the advanced asciidoc source example.
-<!-- tp-docgen:example-descriptions:end -->
+`tp-asciidoc` uses Asciidoctor.js with a semantic HTML converter and TP extensions. Ordinary AsciiDoc headings, lists, links, attributes and formatting remain available. The component syntax below is provided by the adapter and should not be assumed to work with an unextended Asciidoctor.js instance.
 
-::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> html
-: ::include{examples/examples.html}
+The converter removes presentational wrappers or replaces them with semantic elements. Its HTML structure therefore differs from the default Asciidoctor HTML5 output; styles that depend on Asciidoctor's wrapper hierarchy may need adapting. A CSS `style` attribute on a paragraph is preserved:
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
-: ::include{examples/examples.adoc}
+```asciidoc
+[style="margin-bottom:1rem;"]
+A paragraph with *AsciiDoc* formatting.
+```
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
-: ::include{examples/examples.md}
+### Components and attributes
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
+Name an element in the block attribute list, followed by a delimited body parsed as AsciiDoc:
 
-## Programming
+```asciidoc
+[tp-callout,variant=info,heading=Information]
+--
+The workshop starts at *9:00*.
+--
+```
 
-### API
-<!-- tp-docgen:api TpAsciidoc -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of an external AsciiDoc source file. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-asciidoc>`]
+Use named attributes such as `variant=info`, `.notice` for a class, `#notice` for an ID, and `%closable` for a boolean option. A bare open block without an element name becomes a `div`. Both standard HTML tags and custom-element names are supported.
 
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpAsciidoc`]
+Inline elements use `[tag,attributes]#content#`:
 
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-asciidoc-rendered</code> | <code>void</code> | Emitted after conversion and runtime initialization complete. |
-  [Events emitted by `<tp-asciidoc>`]
+```asciidoc
+Status: [tp-badge,variant=success,pill]#Ready#.
+Choose [tp-icon,name=check]#icon# to confirm.
+```
 
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-asciidoc>`]
-:::
-<!-- /tp-docgen:api -->
+Inline syntax requires content between the `#` delimiters. For `tp-icon`, use a placeholder such as `icon`; the component replaces it with its icon. HTML void elements such as `input` and `img` discard their placeholder rather than producing child content.
 
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_asciidoc.TpAsciidoc.html)
-<!-- tp-docgen:typedoc:end -->
+Creating component markup does not import its JavaScript definition. Load the components with the autoloader or explicit imports.
 
+### Nested components and literal source
 
+Use distinct delimiters for nested blocks. A `script` element preserves source literally instead of applying AsciiDoc substitutions:
 
+```asciidoc
+[tp-asciidoc]
+--
+[script,type="tp/asciidoc"]
+------
+== A section
 
+A paragraph with *AsciiDoc* formatting.
+------
+--
+```
 
+The same literal handling applies to block `style`, `textarea` and `template` elements. Use `[script,type=module]` for JavaScript. The delimiter lines do not become part of the source, and must not collide with lines inside it.
 
+Standard AsciiDoc passthrough blocks (`++++`) remain useful for authored HTML; prefer native component blocks when their bodies should be parsed as AsciiDoc. Preserving a script does not itself grant permission to execute it in a viewer; executable examples use the viewer's `allow-script` option.
 
+### Mathematics and source viewers
 
+AsciiDoc STEM syntax is retained, with rendering supplied by the shared MathJax runtime. Explicit `latexmath` and `asciimath` forms select the notation:
 
+```asciidoc
+Inline: latexmath:[E = mc^2].
 
+[asciimath]
+++++
+sum_(i=1)^n i
+++++
+```
 
+The `adocviewer` extension displays source together with its rendered result:
 
+```asciidoc
+[adocviewer]
+....
+A paragraph with *strong text*.
+....
+```
 
+Its viewer and math behavior require the browser runtime that `tp-asciidoc` initializes. They are not produced by the default Asciidoctor.js converter alone. For a component viewer with the usual TP controls, use [`tp-asciidoc-viewer`](#/components/asciidoc-viewer/index.md).
 
+### Generated placeholder text
 
+The added `lorem` block macro generates placeholder text or lists. Its target selects `sentence`, `title`, `p`, `dl`, `ol` or `ul`; `length` controls the amount and `seed` makes repeated generation reproducible.
 
+```asciidoc
+lorem::p[length=2,seed=42]
+```
 
+This macro is registered by the TP adapter, not by standard Asciidoctor.js.
 
+### Browser rendering limits
 
+The component renders an HTML fragment in the current page. It does not run a local Asciidoctor command, generate a PDF or provide access to the user's filesystem. Source files and linked resources must be available to the browser. Document navigation is provided separately by [`tp-asciidoc-multi-pages`](#/components/asciidoc-multi-pages/index.md).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -491,19 +215,51 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Inspect how the embedded asciidoc source is rendered as a formatted document.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Advanced example
+: Inspect the richer document supplied through the advanced asciidoc source example.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+: ::include{examples/examples.html}
+
+<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+: ::include{examples/examples.adoc}
+
+<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+: ::include{examples/examples-latex.html}
+
+<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+: ::include{examples/examples.md}
+
+<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-asciidoc>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
 @summary Shared base class for tp-* components.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 
 ### External
 

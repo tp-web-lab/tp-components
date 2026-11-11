@@ -8,9 +8,9 @@
  */
 import { TpBase } from "../base/base.js";
 /**
- * Responsive grid layout component, without Shadow DOM.
+ * The custom `<tp-grid>` element arranges content in a grid that adapts to the available width.
  *
- * @summary Creates an auto-fit responsive grid with configurable minimum column width and gap.
+ * @summary Arranges content in a grid that adapts to the available width.
  * @tagname tp-grid
  *
  * @attr {string} gap = "1rem" - Gap between grid cells. When absent, uses the --tp-grid-gap CSS default.

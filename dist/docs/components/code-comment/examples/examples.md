@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-code-comment" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-code-comment" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-code-editor { id="commented-function" language="typescript" }
 ::: script { type="tp/typescript" }
@@ -17,46 +17,48 @@ function f(x: number): number {
 :::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/code-comment/code-comment.js";
+import "/components/code-editor/code-editor.js";
 
-The preview code editor has `id="commented-function"`. Enter `commented-function` in `for` to link the comments, then enable `open` to display the list. Hover the numbered code markers to read their tooltips even when the list is hidden.
+const example = document.createDocumentFragment();
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- open
-:::
+const element1 = document.createElement("tp-code-editor");
+element1.setAttribute("id", "commented-function");
+element1.setAttribute("language", "typescript");
+element1.append(document.createTextNode("\n  "));
 
-:::: tp-cluster
-::: tp-textfield { data-setting="for" label="for" value placeholder clearable }
-:::
-::::
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/typescript");
+element2.textContent = "\n    function f(x: number): number {\n      if (x > 0) { return 2 * x; } // \u003c1>\n      else { return 4 * x; } // \u003c2>\n    }\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+example.append(document.createTextNode("\n"));
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element3 = document.createElement("tp-code-comment");
+element3.setAttribute("for", "commented-function");
+element3.append(document.createTextNode("\n  "));
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element4 = document.createElement("ol");
+element4.append(document.createTextNode("\n    "));
 
-::: tp-divider
-:::
+const element5 = document.createElement("li");
+element5.append(document.createTextNode("Positive values are doubled."));
+element4.append(element5);
+element4.append(document.createTextNode("\n    "));
 
-### Preview
+const element6 = document.createElement("li");
+element6.append(document.createTextNode("Zero and negative values are multiplied by four."));
+element4.append(element6);
+element4.append(document.createTextNode("\n  "));
+element3.append(element4);
+element3.append(document.createTextNode("\n"));
+example.append(element3);
 
-::: tp-iframe { id="attributes-frame" title="code-comment attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/code-comment/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
+:::::
 ::::::
-:::::::

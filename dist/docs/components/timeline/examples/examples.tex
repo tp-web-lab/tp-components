@@ -1,0 +1,137 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpTimeline{
+  \begin{description}
+    \item[{Time}] 09:00
+    \item[{Icon}] \wcTpIcon[name=home]{}
+    \item[{Title}] Welcome
+    \item[{Content}] Meet the team and explore the project.
+  \end{description}
+  \begin{description}
+    \item[{Time}] 10:00
+    \item[{Title}] Workshop
+    \item[{Content}] Build your first component together.
+  \end{description}
+  \begin{description}
+    \item[{Time}] 12:00
+    \item[{Title}] Closing session
+  \end{description}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/icon/icon.js";
+import "/components/timeline/timeline.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-timeline");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("dl");
+element2.append(document.createTextNode("\n    "));
+
+const element3 = document.createElement("dt");
+element3.append(document.createTextNode("Time"));
+element2.append(element3);
+
+const element4 = document.createElement("dd");
+element4.append(document.createTextNode("09:00"));
+element2.append(element4);
+element2.append(document.createTextNode("\n    "));
+
+const element5 = document.createElement("dt");
+element5.append(document.createTextNode("Icon"));
+element2.append(element5);
+
+const element6 = document.createElement("dd");
+
+const element7 = document.createElement("tp-icon");
+element7.setAttribute("name", "home");
+element6.append(element7);
+element2.append(element6);
+element2.append(document.createTextNode("\n    "));
+
+const element8 = document.createElement("dt");
+element8.append(document.createTextNode("Title"));
+element2.append(element8);
+
+const element9 = document.createElement("dd");
+element9.append(document.createTextNode("Welcome"));
+element2.append(element9);
+element2.append(document.createTextNode("\n    "));
+
+const element10 = document.createElement("dt");
+element10.append(document.createTextNode("Content"));
+element2.append(element10);
+
+const element11 = document.createElement("dd");
+element11.append(document.createTextNode("Meet the team and explore the project."));
+element2.append(element11);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element12 = document.createElement("dl");
+element12.append(document.createTextNode("\n    "));
+
+const element13 = document.createElement("dt");
+element13.append(document.createTextNode("Time"));
+element12.append(element13);
+
+const element14 = document.createElement("dd");
+element14.append(document.createTextNode("10:00"));
+element12.append(element14);
+element12.append(document.createTextNode("\n    "));
+
+const element15 = document.createElement("dt");
+element15.append(document.createTextNode("Title"));
+element12.append(element15);
+
+const element16 = document.createElement("dd");
+element16.append(document.createTextNode("Workshop"));
+element12.append(element16);
+element12.append(document.createTextNode("\n    "));
+
+const element17 = document.createElement("dt");
+element17.append(document.createTextNode("Content"));
+element12.append(element17);
+
+const element18 = document.createElement("dd");
+element18.append(document.createTextNode("Build your first component together."));
+element12.append(element18);
+element12.append(document.createTextNode("\n  "));
+element1.append(element12);
+element1.append(document.createTextNode("\n  "));
+
+const element19 = document.createElement("dl");
+element19.append(document.createTextNode("\n    "));
+
+const element20 = document.createElement("dt");
+element20.append(document.createTextNode("Time"));
+element19.append(element20);
+
+const element21 = document.createElement("dd");
+element21.append(document.createTextNode("12:00"));
+element19.append(element21);
+element19.append(document.createTextNode("\n    "));
+
+const element22 = document.createElement("dt");
+element22.append(document.createTextNode("Title"));
+element19.append(element22);
+
+const element23 = document.createElement("dd");
+element23.append(document.createTextNode("Closing session"));
+element19.append(element23);
+element19.append(document.createTextNode("\n  "));
+element1.append(element19);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}

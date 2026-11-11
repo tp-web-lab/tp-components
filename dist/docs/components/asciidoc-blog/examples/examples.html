@@ -1,0 +1,65 @@
+<tp-html-viewer label="tp-asciidoc-blog" allow-script>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-asciidoc-blog page-size="2">
+        <script type="tp/asciidoc">
+          == A small garden
+
+          Id:: garden
+          Date:: 2026-06-03
+          Summary:: Three ideas for a greener balcony.
+          Categories:: Life
+          Tags:: plants, outdoors
+
+          Start with herbs, choose a sunny spot, and water regularly.
+
+          == Learning together
+
+          Id:: learning
+          Date:: 2026-06-02
+          Summary:: Notes from our first workshop.
+          Categories:: Learning
+          Tags:: community, ideas
+
+          A short shared exercise makes a good starting point for discussion.
+
+          == Welcome
+
+          Id:: welcome
+          Date:: 2026-06-01
+          Summary:: What you will find in this blog.
+          Categories:: Life
+          Tags:: community
+
+          We share practical ideas and small discoveries. Come back for the next article.
+        </script>
+      </tp-asciidoc-blog>
+    </div>
+
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/asciidoc/asciidoc.js";
+      import "/components/asciidoc-blog/asciidoc-blog.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-asciidoc-blog");
+      element1.setAttribute("page-size", "2");
+      element1.append(document.createTextNode("\n  "));
+
+      const element2 = document.createElement("script");
+      element2.setAttribute("type", "tp/asciidoc");
+      element2.textContent = "\n    == A small garden\n\n    Id:: garden\n    Date:: 2026-06-03\n    Summary:: Three ideas for a greener balcony.\n    Categories:: Life\n    Tags:: plants, outdoors\n\n    Start with herbs, choose a sunny spot, and water regularly.\n\n    == Learning together\n\n    Id:: learning\n    Date:: 2026-06-02\n    Summary:: Notes from our first workshop.\n    Categories:: Learning\n    Tags:: community, ideas\n\n    A short shared exercise makes a good starting point for discussion.\n\n    == Welcome\n\n    Id:: welcome\n    Date:: 2026-06-01\n    Summary:: What you will find in this blog.\n    Categories:: Life\n    Tags:: community\n\n    We share practical ideas and small discoveries. Come back for the next article.\n  ";
+      element1.append(element2);
+      element1.append(document.createTextNode("\n"));
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
+    <div role="example" label="External articles">
+      <tp-asciidoc-blog page-size="2" src="/docs/components/asciidoc-blog/examples/articles.adoc"></tp-asciidoc-blog>
+    </div>
+  </template>
+</tp-html-viewer>

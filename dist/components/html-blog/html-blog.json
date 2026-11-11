@@ -1,0 +1,109 @@
+{
+  "tagname": "tp-html-blog",
+  "classname": "TpHtmlBlog",
+  "superclass": "TpMarkupBlog",
+  "description": "Lists dated articles with summaries, category and tag filters, pagination and a reader.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-html-blog page-size=\"2\">\n  <script type=\"tp/html\">\n    <h2>A small garden</h2>\n    <dl>\n      <dt>Id</dt><dd>garden</dd>\n      <dt>Date</dt><dd>2026-06-03</dd>\n      <dt>Summary</dt><dd>Three ideas for a greener balcony.</dd>\n      <dt>Categories</dt><dd>Life</dd>\n      <dt>Tags</dt><dd>plants, outdoors</dd>\n    </dl>\n    <p>Start with herbs, choose a sunny spot, and water regularly.</p>\n\n    <h2>Learning together</h2>\n    <dl>\n      <dt>Id</dt><dd>learning</dd>\n      <dt>Date</dt><dd>2026-06-02</dd>\n      <dt>Summary</dt><dd>Notes from our first workshop.</dd>\n      <dt>Categories</dt><dd>Learning</dd>\n      <dt>Tags</dt><dd>community, ideas</dd>\n    </dl>\n    <p>A short shared exercise makes a good starting point for discussion.</p>\n\n    <h2>Welcome</h2>\n    <dl>\n      <dt>Id</dt><dd>welcome</dd>\n      <dt>Date</dt><dd>2026-06-01</dd>\n      <dt>Summary</dt><dd>What you will find in this blog.</dd>\n      <dt>Categories</dt><dd>Life</dd>\n      <dt>Tags</dt><dd>community</dd>\n    </dl>\n    <p>We share practical ideas and small discoveries. Come back for the next article.</p>\n  </script>\n</tp-html-blog>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "article",
+      "description": "Article identifier to open; empty shows the filtered list.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "category",
+      "description": "Exact category filter; empty includes every category.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "page",
+      "description": "One-based list page, clamped to the filtered page count.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1"
+    },
+    {
+      "name": "page-size",
+      "description": "Maximum articles per list page; positive integers only, otherwise five.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "5"
+    },
+    {
+      "name": "src",
+      "description": "URL of the markup index; relative article paths resolve against this file.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "tag",
+      "description": "Exact tag filter; combined with the category filter.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "value",
+      "description": "Inline markup index, used when src is absent; takes precedence over the internal script.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [
+    {
+      "name": "tp-html-blog-error",
+      "description": "Emitted when loading or parsing fails; message describes the failure.",
+      "detail": "{ message: string }"
+    },
+    {
+      "name": "tp-html-blog-load",
+      "description": "Emitted after the index is parsed successfully; count is the number of articles.",
+      "detail": "{ count: number }"
+    },
+    {
+      "name": "tp-html-blog-open",
+      "description": "Emitted after an article is displayed; id identifies the article.",
+      "detail": "{ id: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-markup-blog",
+      "summary": "Paginated markup articles with category and tag filters."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "HTML blog",
+    "introduction": "The custom `<tp-html-blog>` element lists dated articles with summaries, category and tag filters, pagination and a reader.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Article title | Open the complete article in the reader. |\n| Categories and Tags | Filter the list; both filters apply together and reset pagination. All removes that filter. |\n| Previous / Next | Browse the filtered article pages. |\n| Back to articles | Return to the same filters and page. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between filters, article titles and page buttons. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button or filter option. |\n| Arrow keys in a radio group | Select another category or tag using the radio group's standard controls. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open help for the hovered component, falling back to focus; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component in the hovered or focused hierarchy before opening help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS. |",
+    "keyboard": []
+  }
+}

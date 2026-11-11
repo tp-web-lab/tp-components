@@ -1,0 +1,51 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpLsystem[label=Koch curve]{
+  \wcScript[type=tp/lsystem]|
+    axiom: F
+    iterations: 3
+    angle: 60
+    rule: F => F+F--F+F
+  |
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/lsystem/lsystem.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-lsystem");
+element1.setAttribute("label", "Koch curve");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/lsystem");
+element2.textContent = "\n    axiom: F\n    iterations: 3\n    angle: 60\n    rule: F => F+F--F+F\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Branching tree
+\documentclass{article}
+\begin{document}
+\wcTpLsystem[src=/docs/components/lsystem/examples/tree.lsys,label=Branching tree]{}
+\end{document}
+
+% !tp-example Preset gallery
+\documentclass{article}
+\begin{document}
+\wcTpGrid[min-width=16rem]{
+  \wcTpLsystem[preset=barnsley-fern,label=Barnsley fern]{}
+  \wcTpLsystem[preset=dragon-curve,label=Dragon curve]{}
+  \wcTpLsystem[preset=sierpinski-triangle,label=Sierpinski triangle]{}
+}
+\end{document}

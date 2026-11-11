@@ -2,7 +2,7 @@
   "tagname": "tp-icon-button",
   "classname": "TpIconButton",
   "superclass": "TpBase",
-  "description": "Button icon accessible.",
+  "description": "Provides an icon action button with an accessible text label.",
   "examples": [
     {
       "label": "Example 1",
@@ -272,8 +272,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Icon button",
-    "introduction": "The custom `<tp-icon-button>` element implements the <tp-icon name=\"icon-button\" library=\"components\" size=\"1.25em\"></tp-icon> Icon button functionality: button icon accessible.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Button | Click to perform the action identified by its label. Disabled or loading controls cannot be activated. |\n| Navigation button | Click to open its destination. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> | Activate the focused button or link. |\n| <kbd>Space</kbd> | Activate a focused action button; links use <kbd>Enter</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-icon-button>` element provides an icon action button with an accessible text label.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Button | Click to perform the action identified by its label. Disabled or loading controls cannot be activated. |\n| Navigation button | Click to open its destination. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> | Activate the focused button or link. |\n| <kbd>Space</kbd> | Activate a focused action button; links use <kbd>Enter</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Enter / Space",

@@ -25,8 +25,9 @@ type HtmlViewerExample = MarkupViewerExample<HtmlViewerContext>;
  */
 export declare function buildIframeDocument(source: string, baseHref: string | null, loadTpComponents?: boolean): string;
 /**
- * Interactive HTML viewer component.
+ * The custom `<tp-html-viewer>` element provides an interactive HTML viewer with editable source, live rendering, and DOM inspection.
  *
+ * @summary Provides an interactive HTML viewer with editable source, live rendering, and DOM inspection.
  * @tagname tp-html-viewer
  * @attr {boolean} allow-script = false - Allows executable scripts in the rendered example.
  * @attr {boolean} lite = false - Uses the compact single-example viewer with rendered HTML output.

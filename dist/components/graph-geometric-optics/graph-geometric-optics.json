@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-graph-geometric-optics></tp-graph-geometric-optics>"
+      "code": "<tp-graph-geometric-optics id=\"optics-example\" grid=\"\" grid-size=\"20\" message=\"Move the lens or screen and inspect the paraxial analysis.\" src=\"/docs/components/graph-geometric-optics/examples/converging-lens.json\"></tp-graph-geometric-optics>"
     }
   ],
   "attributes": [],
@@ -59,8 +59,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Geometric optics",
-    "introduction": "The custom `<tp-graph-geometric-optics>` element implements the <tp-icon name=\"graph-geometric-optics\" library=\"components\" size=\"1.25em\"></tp-icon> Geometric optics functionality: edits and simulates a paraxial geometric-optics bench.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Drag | Drag optical components from the palette and move them along the bench. |\n| Select | Select the object to edit its height, a lens to edit its signed focal length, a homogeneous medium to edit its refractive index, or a plane interface to edit its left and right indices. |\n| Using the component | Rays are computed automatically and are not graph edges. |\n| Using the component | Each thin lens participates in the trace only while its center is on the optical axis. |\n| Using the component | Moving one lens vertically away from the axis hides only its own focal points and optical effect; aligned lenses and plane interfaces remain active. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-graph-geometric-optics>` element edits and simulates a paraxial geometric-optics bench.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Drag | Drag optical components from the palette and move them along the bench. |\n| Select | Select the object to edit its height, a lens to edit its signed focal length, a homogeneous medium to edit its refractive index, or a plane interface to edit its left and right indices. |\n| Using the component | Rays are computed automatically and are not graph edges. |\n| Using the component | Each thin lens participates in the trace only while its center is on the optical axis. |\n| Using the component | Moving one lens vertically away from the axis hides only its own focal points and optical effect; aligned lenses and plane interfaces remain active. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

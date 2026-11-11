@@ -11,6 +11,8 @@ import "../prolog-playground/prolog-playground.js";
 import { TpPrologPlayground } from "../prolog-playground/prolog-playground.js";
 import { TpPrologProject } from "../prolog-playground/prolog-project.js";
 /**
+ * The custom `<tp-prolog-viewer>` element displays and runs one Prolog example in a compact interface.
+ *
  * @tagname tp-prolog-viewer
  * @summary Displays and runs one Prolog example in a compact interface.
  * @attr {string} repository = "" - Directory containing a project to load.

@@ -1,0 +1,106 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcDiv[data-tp-reference-scope]{
+  \wcTpListof[selector=figure]{}
+  \wcFigure{
+    A diagram of the water cycle.
+
+    \wcFigcaption{The water cycle}
+  }
+  \wcFigure{
+    A diagram of a food chain.
+
+    \wcFigcaption{A food chain}
+  }
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/listof/listof.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("div");
+element1.setAttribute("data-tp-reference-scope", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("tp-listof");
+element2.setAttribute("selector", "figure");
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element3 = document.createElement("figure");
+
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("A diagram of the water cycle."));
+element3.append(element4);
+
+const element5 = document.createElement("figcaption");
+element5.append(document.createTextNode("The water cycle"));
+element3.append(element5);
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
+
+const element6 = document.createElement("figure");
+
+const element7 = document.createElement("p");
+element7.append(document.createTextNode("A diagram of a food chain."));
+element6.append(element7);
+
+const element8 = document.createElement("figcaption");
+element8.append(document.createTextNode("A food chain"));
+element6.append(element8);
+element1.append(element6);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Notes, bibliography and glossary
+\documentclass{article}
+\begin{document}
+\wcDiv[data-tp-reference-scope]{
+  Read a note \rawhtml*|<tp-ref href="^method"></tp-ref>|, consult a source \wcTpRef*[href=@book]{}, or look up \rawhtml*|<tp-ref href="%ecosystem"></tp-ref>|. Compare another note \rawhtml*|<tp-ref href="^weather"></tp-ref>|, then read the first note again \rawhtml*|<tp-ref href="^method"></tp-ref>|.
+
+  \wcTpNote[ref=method,title=Method]{
+    Observe the habitat at \textbf{three different times} of day.
+
+    \begin{itemize}
+      \item Record the weather.
+      \item Compare your observations.
+    \end{itemize}
+  }
+  \wcTpBiblio[ref=book,title=Book]{
+    Alex Example. \emph{Field observation handbook}. Example Press, 2026.
+
+  }
+  \wcTpGlossary[ref=ecosystem,title=Ecosystem]{
+    A community of organisms interacting with their physical environment.
+
+  }
+  \wcTpNote[ref=weather]{
+    Record the temperature and cloud cover.
+
+  }
+  \wcTpBiblio[ref=atlas]{
+    Alex Example. \emph{A field atlas}. Example Press, 2025.
+
+  }
+  \wcTpGlossary[ref=community]{
+    A group of interacting populations.
+
+  }
+  \subsection*{Notes}
+  \wcTpListof[selector=tp-note]{}
+  \subsection*{Bibliography}
+  \wcTpListof[selector=tp-biblio]{}
+  \subsection*{Glossary}
+  \wcTpListof[selector=tp-glossary]{}
+}
+\end{document}

@@ -9,6 +9,43 @@
       </tp-box>
     </div>
 
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/box/box.js";
+      import "/components/console/console.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-box");
+      element1.setAttribute("data-intro-action", "console");
+      element1.setAttribute("data-allow-script", "");
+      element1.append(document.createTextNode("\n  "));
+
+      const element2 = document.createElement("p");
+      element2.append(document.createTextNode("Inspect these example messages, then use Clear to empty the console."));
+      element1.append(element2);
+      element1.append(document.createTextNode("\n  "));
+
+      const element3 = document.createElement("tp-console");
+      element1.append(element3);
+      element1.append(document.createTextNode("\n  "));
+
+      const element4 = document.createElement("p");
+      element4.setAttribute("data-demo-status", "");
+      element4.setAttribute("role", "status");
+      element1.append(element4);
+      element1.append(document.createTextNode("\n  "));
+
+      const element5 = document.createElement("script");
+      element5.setAttribute("src", "/docs/components/_shared/introduction-actions.js");
+      element1.append(element5);
+      element1.append(document.createTextNode("\n"));
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
     <div role="example" label="Values and tables">
       <tp-console id="values-console"></tp-console>
           <script>

@@ -29,8 +29,7 @@
  */
 import { TpBase } from "../base/base.js";
 /**
- * Web component for interactive Sudoku puzzles.
- * Uses lightDOM (no Shadow DOM) to maintain consistent styling with page.
+ * The custom `<tp-sudoku>` element displays an interactive Sudoku puzzle.
  *
  * The component supports both game mode (single entries) and note mode (pencil marks).
  *

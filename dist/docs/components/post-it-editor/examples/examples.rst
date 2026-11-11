@@ -19,77 +19,36 @@
             :for: #post-it-editor-example
             :page: post-it-editor-example
 
-      .. example:: Attributes
-
-         Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-         .. tp-stack::
-
-            .. tp-radio-list::
-               :data-setting: markup
-               :label: markup
-               :label-position: top
-               :orientation: horizontal
-               :value: 5
-
-               - html
-
-               - markdown
-
-               - asciidoc
-
-               - restructuredtext
-
-               - none
-
-            .. tp-cluster::
-
-               .. tp-textfield::
-                  :data-setting: for
-                  :label: for
-                  :value:
-                  :placeholder:
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: page
-                  :label: page
-                  :value:
-                  :placeholder:
-                  :clearable:
-
-            .. tp-button-group::
-
-               .. tp-button::
-                  :id: attributes-reset
-                  :type: button
-
-                  Reset defaults
-
-               .. tp-button::
-                  :id: attributes-reload
-                  :type: button
-
-                  Reload preview
-
-         .. tp-divider::
-
-         .. h3::
-
-            Preview
-
-         .. tp-iframe::
-            :id: attributes-frame
-            :title: post-it-editor attribute preview
-            :style: height: 24rem; display: flow-root; inline-size: auto;
-
-         .. tp-callout::
-            :id: attributes-status
-            :variant: info
-            :heading: Preview status
-
-            Preparing the preview…
+      .. example:: Javascript API
 
          .. script::
             :type: module
-            :src: /docs/components/post-it-editor/examples/attributes.js
+
+            import "/components/box/box.js";
+            import "/components/post-it/post-it.js";
+            import "/components/post-it-editor/post-it-editor.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-box");
+            element1.setAttribute("id", "post-it-editor-example");
+            element1.append(document.createTextNode("\n  "));
+
+            const element2 = document.createElement("p");
+            element2.append(document.createTextNode("Select this first paragraph to attach a note about the introduction."));
+            element1.append(element2);
+            element1.append(document.createTextNode("\n  "));
+
+            const element3 = document.createElement("p");
+            element3.append(document.createTextNode("Or select this second paragraph to attach a different note. Reload this page to restore saved notes."));
+            element1.append(element3);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+            example.append(document.createTextNode("\n"));
+
+            const element4 = document.createElement("tp-post-it-editor");
+            element4.setAttribute("for", "#post-it-editor-example");
+            element4.setAttribute("page", "post-it-editor-example");
+            example.append(element4);
+
+            document.body.append(example);

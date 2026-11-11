@@ -2,7 +2,7 @@
   "tagname": "tp-color-picker",
   "classname": "TpColorPicker",
   "superclass": "TpBase",
-  "description": "Viewer for base color tokens.",
+  "description": "Browses and selects colors from the available palettes.",
   "examples": [
     {
       "label": "Example 1",
@@ -35,8 +35,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Color picker",
-    "introduction": "The custom `<tp-color-picker>` element implements the <tp-icon name=\"color-picker\" library=\"components\" size=\"1.25em\"></tp-icon> Color picker functionality: light-DOM viewer for base color tokens.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Select | Select a color to copy its CSS variable reference. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus a color choice. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Select the focused color and copy its CSS variable reference. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-color-picker>` element browses and selects colors from the available palettes.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Select | Select a color to copy its CSS variable reference. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus a color choice. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Select the focused color and copy its CSS variable reference. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

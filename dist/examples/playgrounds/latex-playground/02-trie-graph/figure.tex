@@ -1,0 +1,27 @@
+\begin{tikzpicture}[scale=1.8,transform shape,>={To[sep]}, rotate=90, xscale=-1,
+       mark/.style={fill=black!50}, mark/.default=]
+\colorlet{graphicbackground}{yellow!10}
+\graph [trie, simple,
+          nodes={circle,draw},
+          edges={nodes={
+              inner sep=1pt, anchor=mid,
+              fill=graphicbackground}}, % yellowish background
+          put node text on incoming edges]
+    {
+      root[mark] -> {
+        a -> n -> {
+          g [mark],
+          f -> a -> n -> g [mark]
+        },
+        f -> a -> n -> g [mark],
+        g[mark],
+        n -> {
+          g[mark],
+          f -> a -> n -> g[mark]
+        }
+      },
+      { [edges=red] % highlight one path
+        root -> f -> a -> n
+      }
+    };
+\end{tikzpicture}

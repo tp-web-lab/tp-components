@@ -2,7 +2,7 @@
   "tagname": "tp-accordion",
   "classname": "TpAccordion",
   "superclass": "TpBase",
-  "description": "Accessible accordion web component based on light-DOM `<dl>` markup.\n\nExpected structure:\n\n```html\n<tp-accordion>\n  <dl>\n    <dt>Summary 1</dt>\n    <dd>Content 1</dd>\n\n    <dt>Summary 2</dt>\n    <dd>Content 2</dd>\n  </dl>\n</tp-accordion>\n```\n\nMapping rules:\n- `<dt>` nodes are treated as accordion headers\n- `<dd>` nodes are treated as accordion panels\n- headers/panels are paired by index order\n\nReactive attributes:\n- `multiple`: allows multiple expanded items\n- `open-indexes`: space-separated list of expanded item indexes\n- `appearance`: visual treatment (`default`, `outlined`, or `filled`)",
+  "description": "Organizes content into sections that readers can expand and collapse.",
   "examples": [
     {
       "label": "Example 1",
@@ -77,8 +77,8 @@
   "credits": [],
   "userHelp": {
     "displayName": "Accordion",
-    "introduction": "The custom `<tp-accordion>` element implements the <tp-icon name=\"accordion\" library=\"components\" size=\"1.25em\"></tp-icon> Accordion functionality: collapsible multi-panels element.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Section heading | Click to expand or collapse its content. Opening a section may close the previous section. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus a section heading. |\n| <kbd>ArrowDown</kbd> | Moves focus to the next header. |\n| <kbd>ArrowUp</kbd> | Moves focus to the previous header. |\n| <kbd>Home</kbd> | Moves focus to the first header. |\n| <kbd>End</kbd> | Moves focus to the last header. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Expands or collapses the focused section. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "introduction": "The custom `<tp-accordion>` element organizes content into sections that readers can expand and collapse.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Section heading | Click to expand or collapse its content. Opening a section may close the previous section. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Focus a section heading. |\n| <kbd>ArrowDown</kbd> | Moves focus to the next header. |\n| <kbd>ArrowUp</kbd> | Moves focus to the previous header. |\n| <kbd>Home</kbd> | Moves focus to the first header. |\n| <kbd>End</kbd> | Moves focus to the last header. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Expands or collapses the focused section. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "ArrowDown",

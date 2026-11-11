@@ -15,163 +15,34 @@
 
             ``Inline code uses the selected brand colour.``
 
-      .. example:: Attributes
-
-         Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
-
-         .. tp-stack::
-
-            .. tp-checkbox-list::
-               :id: attributes-booleans
-               :label: Boolean attributes
-               :label-position: top
-               :orientation: horizontal
-               :value:
-
-               - disabled
-
-            .. tp-radio-list::
-               :data-setting: preset
-               :label: preset
-               :label-position: top
-               :orientation: horizontal
-               :value: 1
-
-               - tp-default
-
-               - tp-red
-
-               - tp-orange
-
-               - tp-amber
-
-               - tp-yellow
-
-               - tp-lime
-
-               - tp-green
-
-               - tp-emerald
-
-               - tp-teal
-
-               - tp-glaz
-
-               - tp-cyan
-
-               - tp-sky
-
-               - tp-blue
-
-               - tp-indigo
-
-               - tp-violet
-
-               - tp-purple
-
-               - tp-fuchsia
-
-               - tp-pink
-
-               - tp-rose
-
-               - tp-zinc
-
-               - tp-ivory
-
-               - tp-stone
-
-            .. tp-radio-list::
-               :data-setting: size
-               :label: size
-               :label-position: top
-               :orientation: horizontal
-               :value: 4
-
-               - xxs
-
-               - xs
-
-               - s
-
-               - m
-
-               - l
-
-               - xl
-
-               - xxl
-
-            .. tp-radio-list::
-               :data-setting: variant
-               :label: variant
-               :label-position: top
-               :orientation: horizontal
-               :value: 5
-
-               - success
-
-               - danger
-
-               - warning
-
-               - info
-
-               - neutral
-
-               - brand
-
-            .. tp-cluster::
-
-               .. tp-textfield::
-                  :data-setting: anchor
-                  :label: anchor
-                  :value:
-                  :placeholder:
-                  :clearable:
-
-               .. tp-textfield::
-                  :data-setting: ui-anchor
-                  :label: ui-anchor
-                  :value:
-                  :placeholder:
-                  :clearable:
-
-            .. tp-button-group::
-
-               .. tp-button::
-                  :id: attributes-reset
-                  :type: button
-
-                  Reset defaults
-
-               .. tp-button::
-                  :id: attributes-reload
-                  :type: button
-
-                  Reload preview
-
-         .. tp-divider::
-
-         .. h3::
-
-            Preview
-
-         .. tp-iframe::
-            :id: attributes-frame
-            :title: color attribute preview
-            :style: height: 24rem; display: flow-root; inline-size: auto;
-
-         .. tp-callout::
-            :id: attributes-status
-            :variant: info
-            :heading: Preview status
-
-            Preparing the preview…
+      .. example:: Javascript API
 
          .. script::
             :type: module
-            :src: /docs/components/color/examples/attributes.js
+
+            import "/components/color/color.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("section");
+            element1.append(document.createTextNode("\n      "));
+
+            const element2 = document.createElement("tp-color");
+            element1.append(element2);
+            element1.append(document.createTextNode("\n      "));
+
+            const element3 = document.createElement("p");
+            element3.append(document.createTextNode("The selected brand color is scoped to this section."));
+            element1.append(element3);
+            element1.append(document.createTextNode("\n      "));
+
+            const element4 = document.createElement("code");
+            element4.append(document.createTextNode("Inline code uses the selected brand colour."));
+            element1.append(element4);
+            element1.append(document.createTextNode("\n    "));
+            example.append(element1);
+
+            document.body.append(example);
 
       .. example:: Local color scope
 

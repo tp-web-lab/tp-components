@@ -7,7 +7,7 @@ import "../divider/divider.js";
 import { TpOverlayElement } from "../overlay/overlay.js";
 type TpDrawerPlacement = "top" | "end" | "bottom" | "start";
 /**
- * Drawer overlay component.
+ * The custom `<tp-drawer>` element displays a sliding drawer panel.
  *
  * Displays a sliding panel from one edge of the viewport or containing element.
  *

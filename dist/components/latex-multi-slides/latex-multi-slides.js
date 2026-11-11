@@ -1,0 +1,2 @@
+import{t as e}from"../../chunks/markup-multi-slides.js";var t=class extends e{get fixedLanguage(){return`latex`}};customElements.get(`tp-latex-multi-slides`)||customElements.define(`tp-latex-multi-slides`,t);export{t as TpLatexMultiSlides};
+//# sourceMappingURL=latex-multi-slides.js.map

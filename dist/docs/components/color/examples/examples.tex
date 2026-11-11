@@ -1,0 +1,78 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcSection{
+  \wcTpColor{}
+  The selected brand color is scoped to this section.
+
+  \rawhtml*|<code>Inline code uses the selected brand colour.</code>|
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/color/color.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("section");
+element1.append(document.createTextNode("\n      "));
+
+const element2 = document.createElement("tp-color");
+element1.append(element2);
+element1.append(document.createTextNode("\n      "));
+
+const element3 = document.createElement("p");
+element3.append(document.createTextNode("The selected brand color is scoped to this section."));
+element1.append(element3);
+element1.append(document.createTextNode("\n      "));
+
+const element4 = document.createElement("code");
+element4.append(document.createTextNode("Inline code uses the selected brand colour."));
+element1.append(element4);
+element1.append(document.createTextNode("\n    "));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Local color scope
+\documentclass{article}
+\begin{document}
+\wcTpBox{
+  \wcTpColor{}
+  \wcTpCallout[variant=brand]{ The selected brand color is scoped to this box. }
+}
+\end{document}
+
+% !tp-example Change event
+\documentclass{article}
+\begin{document}
+\wcSection[id=color-event-target]{
+  \rawhtml|<tp-color anchor="#color-event-target"></tp-color>|
+  Choose a brand color to emit \rawhtml*|<code>tp-color-change</code>|.
+
+  \wcTpCallout[variant=brand]{This callout follows the selected brand color.}
+}
+
+\wcTpConsole{}
+
+\wcScript[type=module]|
+      customElements.whenDefined('tp-console').then(() => {
+        const section = document.querySelector('#color-event-target');
+        const output = document.querySelector('tp-console');
+        output.redirectConsoleToSelf();
+        section?.addEventListener('tp-color-change', (event) => {
+        console.info('tp-color-change', {
+          preset: event.detail.preset,
+          brand: event.detail.brand,
+          anchor: event.detail.anchor,
+          target: event.detail.target?.id,
+        });
+        });
+      });
+    |
+\end{document}

@@ -1,0 +1,33 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpHtmlMultiSlides[repository=/docs/components/html-multi-pages/docs]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/html-multi-slides/html-multi-slides.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-html-multi-slides");
+element1.setAttribute("repository", "/docs/components/html-multi-pages/docs");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Automatic notes
+\documentclass{article}
+\begin{document}
+\wcTpHtmlMultiSlides[repository=/docs/components/markup-multi-slides/automatic/html,auto=notes,timing=5000,label=Automatic notes]{}
+\end{document}
+
+% !tp-example Timed steps
+\documentclass{article}
+\begin{document}
+\wcTpHtmlMultiSlides[repository=/docs/components/markup-multi-slides/automatic/html,auto=timing,timing=5000,label=Timed steps]{}
+\end{document}

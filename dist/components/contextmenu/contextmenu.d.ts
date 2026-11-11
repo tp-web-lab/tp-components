@@ -27,7 +27,7 @@ export interface TpContextmenuSelectDetail {
     label: string;
 }
 /**
- * `<tp-contextmenu>` affiche un menu contextuel positionné à l’écran.
+ * The custom `<tp-contextmenu>` element opens a menu of actions at the pointer position.
  *
  * Le composant :
  * - peut être lié à un élément d’ancrage via `anchor`
@@ -60,15 +60,15 @@ export interface TpContextmenuSelectDetail {
  * - `anchor`
  * - `open`
  *
- * @summary Affiche un menu contextuel accessible et réutilisable.
+ * @summary Opens a menu of actions at the pointer position.
  * @tagname tp-contextmenu
  *
  * @attr {string} anchor = "" - CSS selector of the element whose context-menu action opens this menu.
  * @attr {boolean} open = false - Shows the context menu when present; removing it closes the menu.
  *
  *
-
-
+ *
+ *
  *
  * @cssprop --tp-contextmenu-background Background color of the menu and submenus.
  * @cssprop --tp-contextmenu-foreground Text color of the menu.

@@ -1,0 +1,212 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpGraphGeometry{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/graph-geometry/graph-geometry.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-graph-geometry");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Attached points
+\documentclass{article}
+\begin{document}
+\wcTpGraphGeometry{
+  \wcScript[type=tp/geometry]|
+point O = (0, 0)
+point A = (6, 0)
+circle c = circle(O, 5)
+point P = on(c, angle=60deg)
+line d = line(O, A)
+point Q = on(d, t=0.5)
+|
+}
+\end{document}
+
+% !tp-example Arc only
+\documentclass{article}
+\begin{document}
+\wcTpGraphGeometry{
+  \wcScript[type=tp/geometry]|
+point O = (0, 0)
+circle c = circle(O, 5) hidden
+arc a = arc(c, start=20deg, end=140deg)
+|
+}
+\end{document}
+
+% !tp-example From a file
+\documentclass{article}
+\begin{document}
+\wcTpGraphGeometry[src=/docs/components/graph-geometry/examples/circle.geometry]{}
+\end{document}
+
+% !tp-example Ruler primitives
+\documentclass{article}
+\begin{document}
+\wcTpGraphGeometry[grid]{
+  \wcScript[type=tp/geometry]|
+point A = (-4, 0)
+point B = (0, 3)
+point O = (4, 0)
+segment s = segment(A, B)
+segment fixed = segment(A, B, length=3)
+point E = on(fixed, t=1)
+line d = line(B, O)
+ray r = ray(A, O)
+vector v = vector(O, B)
+circle c = circle(O, 2)
+circle through = circle(A, through=B) hidden
+sector w = sector(c, start=20deg, end=100deg)
+comment note = comment(E, "AE = 3 units")
+|
+}
+\end{document}
+
+% !tp-example Direct constructions
+\documentclass{article}
+\begin{document}
+\wcTpGraphGeometry[built-in,grid]{
+  \wcScript[type=tp/geometry]|
+point A = (-4, -2)
+point B = (2, -2)
+point O = (0, 1)
+point P = (5, 4)
+segment s = segment(A, B)
+circle c = circle(O, 2)
+point M = midpoint(s)
+line m = perpendicularBisector(s)
+line p = parallel(O, s)
+line q = perpendicular(A, s)
+line b = bisector(A, O, B)
+line t0 = tangent(P, c, branch=0)
+line t1 = tangent(P, c, branch=1)
+comment note = comment(P, "Move P")
+|
+}
+\end{document}
+
+% !tp-example Styles and export
+\documentclass{article}
+\begin{document}
+\wcTpGraphGeometry[grid]{
+  \wcScript[type=tp/geometry]|
+point O = (0, 0)
+point A = (-3, -2)
+point B = (3, 2)
+segment s = segment(A, B) style=dashed color=blue
+circle c = circle(O, 3) style=dotted color=red
+vector v = vector(O, B) color=green
+circle hiddenCircle = circle(A, 2) style=hidden color=violet
+comment note = comment(A, "Select an object to style it") color=blue
+|
+}
+\end{document}
+
+% !tp-example Polygons
+\documentclass{article}
+\begin{document}
+\wcTpGraphGeometry[built-in,grid]{
+  \wcScript[type=tp/geometry]|
+point A = (-5, -2)
+point B = (-2, -2)
+point C = (-3, 0)
+point D = (-5, 2)
+point E = (1, -2)
+point F = (4, -2)
+polygon irregular = polygon(A, B, C, D) color=blue
+polygon regular = regularPolygon(E, F, sides=5) color=green
+|
+}
+\end{document}
+
+% !tp-example Transformations
+\documentclass{article}
+\begin{document}
+\wcTpGraphGeometry[built-in,grid]{
+  \wcScript[type=tp/geometry]|
+point O = (0, 0)
+point X = (0, 3)
+point A = (1, -1)
+point B = (2, -1)
+point C = (1, 0)
+point T = (3, 2)
+line axis = line(O, X) style=dashed color=zinc
+vector v = vector(O, T) color=zinc
+polygon original = polygon(A, B, C) color=orange
+polygon reflected = axialSymmetry(original, axis) color=blue
+polygon opposite = centralSymmetry(original, O) color=violet
+polygon enlarged = homothety(original, O, ratio=2) color=green
+polygon turned = rotation(original, O, angle=90deg) color=red
+polygon shifted = translation(original, v) color=teal
+|
+}
+\end{document}
+
+% !tp-example Transform in place
+\documentclass{article}
+\begin{document}
+\wcTpGraphGeometry[built-in,grid]{
+  \wcScript[type=tp/geometry]|
+point O = (0, 0)
+point A = (3, 0)
+circle c = circle(A, 1) color=blue
+point Q = on(c, angle=30deg)
+|
+}
+\end{document}
+
+% !tp-example Measurements
+\documentclass{article}
+\begin{document}
+\wcTpGraphGeometry[grid]{
+  \wcScript[type=tp/geometry]|
+point A = (-4, -1)
+point B = (0, -1)
+point C = (0, 2)
+segment AB = segment(A, B) color=blue
+segment BC = segment(B, C) color=green
+polygon triangle = polygon(A, B, C) color=blue
+point O = (4, 1)
+circle c = circle(O, 2) color=orange
+comment side = length(AB) color=blue
+comment corner = angle(AB, BC) color=green
+segment AC = segment(A, C) color=blue
+comment slope = angle(AB, AC) color=blue
+comment surface = area(c) color=orange
+|
+}
+\end{document}
+
+% !tp-example Interactive figure
+\documentclass{article}
+\begin{document}
+\wcTpGraphGeometry[label=Circle and attached points,canvas-only,grid,src=/docs/components/graph-geometry/examples/circle.geometry]{}
+\end{document}
+
+% !tp-example Shared points and vectors
+\documentclass{article}
+\begin{document}
+Open the source and change A to (6, 2), then press Play. Vector u follows the two endpoints. The same source works in both plot components.
+
+
+\wcTpGraphGeometry[canvas-only,style=--tp-plot-height:440px]{
+  \wcScript[type=tp/geometry]|
+label = "Points and vectors"
+point O = (0, 0)
+point A = (3, 4)
+vector u = vector(O, A)
+|
+}
+\end{document}

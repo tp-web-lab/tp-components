@@ -1,0 +1,135 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpTangram{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/tangram/tangram.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-tangram");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Named vertices
+\documentclass{article}
+\begin{document}
+\wcTpTangram{
+  \wcScript[type=tp/tangram]|
+# Corners of a square of side 4
+point A = (0, 0)
+point B = (4, 0)
+point C = (4, 4)
+point D = (0, 4)
+
+# Shared landmarks
+point O = midpoint(A, C)
+point E = midpoint(B, C)
+point F = midpoint(C, D)
+point G = midpoint(B, O)
+point H = midpoint(O, C)
+point I = midpoint(O, D)
+
+# The seven pieces, described by their boundary vertices
+triangle A B O
+triangle A O D
+triangle E C F
+triangle B E G
+triangle O H I
+square O G E H
+parallelogram D F H I
+|
+}
+\end{document}
+
+% !tp-example Exact orientation
+\documentclass{article}
+\begin{document}
+\wcTpTangram[exact-orientation,src=/docs/components/tangram/examples/convex-01.txt]{}
+\end{document}
+
+% !tp-example Convex 01
+\documentclass{article}
+\begin{document}
+\wcTpTangram[src=/docs/components/tangram/examples/convex-01.txt]{}
+\end{document}
+
+% !tp-example Convex 02
+\documentclass{article}
+\begin{document}
+\wcTpTangram[src=/docs/components/tangram/examples/convex-02.txt]{}
+\end{document}
+
+% !tp-example Convex 03
+\documentclass{article}
+\begin{document}
+\wcTpTangram[src=/docs/components/tangram/examples/convex-03.txt]{}
+\end{document}
+
+% !tp-example Convex 04
+\documentclass{article}
+\begin{document}
+\wcTpTangram[src=/docs/components/tangram/examples/convex-04.txt]{}
+\end{document}
+
+% !tp-example Convex 05
+\documentclass{article}
+\begin{document}
+\wcTpTangram[src=/docs/components/tangram/examples/convex-05.txt]{}
+\end{document}
+
+% !tp-example Convex 06
+\documentclass{article}
+\begin{document}
+\wcTpTangram[src=/docs/components/tangram/examples/convex-06.txt]{}
+\end{document}
+
+% !tp-example Convex 07
+\documentclass{article}
+\begin{document}
+\wcTpTangram[src=/docs/components/tangram/examples/convex-07.txt]{}
+\end{document}
+
+% !tp-example Convex 08
+\documentclass{article}
+\begin{document}
+\wcTpTangram[src=/docs/components/tangram/examples/convex-08.txt]{}
+\end{document}
+
+% !tp-example Convex 09
+\documentclass{article}
+\begin{document}
+\wcTpTangram[src=/docs/components/tangram/examples/convex-09.txt]{}
+\end{document}
+
+% !tp-example Convex 10
+\documentclass{article}
+\begin{document}
+\wcTpTangram[src=/docs/components/tangram/examples/convex-10.txt]{}
+\end{document}
+
+% !tp-example Convex 11
+\documentclass{article}
+\begin{document}
+\wcTpTangram[src=/docs/components/tangram/examples/convex-11.txt]{}
+\end{document}
+
+% !tp-example Convex 12
+\documentclass{article}
+\begin{document}
+\wcTpTangram[src=/docs/components/tangram/examples/convex-12.txt]{}
+\end{document}
+
+% !tp-example Convex 13
+\documentclass{article}
+\begin{document}
+\wcTpTangram[src=/docs/components/tangram/examples/convex-13.txt]{}
+\end{document}

@@ -18,7 +18,9 @@ import { TpBase } from "../base/base.js";
 import "../button/button.js";
 import "../button-group/button-group.js";
 /**
- * Local microphone recorder with playback and download.
+ * The custom `<tp-audio-recorder>` element records audio for playback, download and optional speech transcription.
+ *
+ * @summary Records audio for playback, download and optional speech transcription.
  * @attr {string} legend = "Audio recorder" - Caption of the fieldset surrounding the controls.
  * @attr {string} transcript = "" - Safari only (temporary): CSS selector of the element receiving recognized speech; fields receive their value, other elements receive text.
  * @tagname tp-audio-recorder

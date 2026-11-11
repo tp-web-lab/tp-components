@@ -43,10 +43,15 @@ export interface TpOpticsAnalysis {
 }
 export declare function validateGeometricOpticsGraph(graph: Readonly<TpGraphDocument>): void;
 export declare function analyzeGeometricOptics(graph: Readonly<TpGraphDocument>): TpOpticsAnalysis;
-/** @summary Edits and simulates a paraxial geometric-optics bench. @tagname tp-graph-geometric-optics @event tp-optics-trace * @example
- * <tp-graph-geometric-optics></tp-graph-geometric-optics>
+/**
+ * The custom `<tp-graph-geometric-optics>` element edits and simulates a paraxial geometric-optics bench.
+ *
+ * @summary Edits and simulates a paraxial geometric-optics bench.
+ * @tagname tp-graph-geometric-optics
  * @event tp-optics-trace Emitted after trace recomputes the displayed ray paths; analysis contains the optical-system analysis and graph is the resulting snapshot.
  * @eventdetail tp-optics-trace { analysis: TpOpticsAnalysis; graph: TpGraphDocument }
+ * @example
+ * <tp-graph-geometric-optics id="optics-example" grid="" grid-size="20" message="Move the lens or screen and inspect the paraxial analysis." src="/docs/components/graph-geometric-optics/examples/converging-lens.json"></tp-graph-geometric-optics>
  */
 export declare class TpGraphGeometricOptics extends TpGraphEditor {
     private static readonly opticsStyleId;

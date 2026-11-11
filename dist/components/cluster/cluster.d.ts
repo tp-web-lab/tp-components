@@ -8,9 +8,9 @@
  */
 import { TpBase } from "../base/base.js";
 /**
- * Flexible cluster layout component, without Shadow DOM.
+ * The custom `<tp-cluster>` element arranges content in rows that wrap to fit the available width.
  *
- * @summary Groups child elements in a wrapping flex row with configurable alignment and gap.
+ * @summary Arranges content in rows that wrap to fit the available width.
  * @tagname tp-cluster
  *
  * @attr {"normal" | "stretch" | "center" | "start" | "end" | "flex-start" | "flex-end" | "self-start" | "self-end" | "baseline" | "first baseline" | "last baseline"} align = "center" - Cross-axis alignment applied to `align-items`.

@@ -16,6 +16,8 @@ import "../button/button.js";
 import "../checkbox-list/checkbox-list.js";
 import { type LogigramMark, LogigramModel } from "./logigram-model.js";
 /**
+ * The custom `<tp-logigram>` element solves logic-grid puzzles by matching items across categories using written clues.
+ *
  * @summary Solves logic-grid puzzles by matching items across categories using written clues.
  * @tagname tp-logigram
  * @attr {string} label = "Logigram" - Puzzle title.

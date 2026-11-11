@@ -2,7 +2,35 @@
 :::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-fill-blank
-The capital of France is :tp-textfield:`capital`{name="capital" placeholder="City name" aria-label="Capital of France" clearable}.
+The capital of France is :tp-textfield:`capital`{placeholder="City name" aria-label="Capital of France" clearable}.
+:::
+```
+
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/fill-blank/fill-blank.js";
+import "/components/textfield/textfield.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-fill-blank");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("The capital of France is "));
+
+const element3 = document.createElement("tp-textfield");
+element3.setAttribute("name", "capital");
+element3.setAttribute("placeholder", "City name");
+element3.setAttribute("aria-label", "Capital of France");
+element3.setAttribute("clearable", "");
+element2.append(element3);
+element2.append(document.createTextNode("."));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
 :::
 ```
 

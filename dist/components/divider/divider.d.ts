@@ -2,12 +2,16 @@
  * @module components/divider
  * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
  */
-import { TpBase } from '../base/base.js';
-export type TpDividerOrientation = 'horizontal' | 'vertical';
 /**
- * `<tp-divider>` draws a compact horizontal or vertical separator.
+ * @tp-dependency tp-base
+ * @summary Shared base class for tp-* components.
+ */
+import { TpBase } from "../base/base.js";
+export type TpDividerOrientation = "horizontal" | "vertical";
+/**
+ * The custom `<tp-divider>` element provides a visual separator.
  *
- * @summary Visual separator.
+ * @summary Provides a visual separator.
  * @tagname tp-divider
  * @attr {string} orientation = "horizontal" - Divider orientation (`horizontal` or `vertical`).
  * @cssprop --tp-divider-color Divider line color.
@@ -39,6 +43,6 @@ export declare class TpDivider extends TpBase {
 }
 declare global {
     interface HTMLElementTagNameMap {
-        'tp-divider': TpDivider;
+        "tp-divider": TpDivider;
     }
 }

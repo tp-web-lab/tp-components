@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-toc" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-toc" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-box { data-tp-toc-scope }
 ::: tp-toc { label="On this page" open expand-all }
@@ -19,56 +19,55 @@ Add your first interactive component.
 ::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/box/box.js";
+import "/components/toc/toc.js";
 
-::::: tp-stack
-::: tp-checkbox-list { id="attributes-booleans" label="Boolean attributes" label-position="top" orientation="horizontal" value }
-- brand
+const example = document.createDocumentFragment();
 
-- expand-all
+const element1 = document.createElement("tp-box");
+element1.setAttribute("data-tp-toc-scope", "");
+element1.append(document.createTextNode("\n  "));
 
-- open
-:::
+const element2 = document.createElement("tp-toc");
+element2.setAttribute("label", "On this page");
+element2.setAttribute("open", "");
+element2.setAttribute("expand-all", "");
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
 
-::: tp-radio-list { data-setting="position" label="position" label-position="top" orientation="horizontal" value="3" }
-- start
+const element3 = document.createElement("h2");
+element3.append(document.createTextNode("Getting started"));
+element1.append(element3);
+element1.append(document.createTextNode("\n  "));
 
-- end
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("Choose a heading in the table of contents to jump to its section."));
+element1.append(element4);
+element1.append(document.createTextNode("\n  "));
 
-- center
-:::
+const element5 = document.createElement("h3");
+element5.append(document.createTextNode("Installation"));
+element1.append(element5);
 
-:::: tp-cluster
-::: tp-textfield { data-setting="label" label="label" value="Contents" placeholder="Contents" clearable }
-:::
-::::
+const element6 = document.createElement("p");
+element6.append(document.createTextNode("Install the library in your project."));
+element1.append(element6);
+element1.append(document.createTextNode("\n  "));
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element7 = document.createElement("h3");
+element7.append(document.createTextNode("First component"));
+element1.append(element7);
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element8 = document.createElement("p");
+element8.append(document.createTextNode("Add your first interactive component."));
+element1.append(element8);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-::: tp-divider
-:::
-
-### Preview
-
-::: tp-iframe { id="attributes-frame" title="toc attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
-
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/toc/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
+:::::
 ::::::
-:::::::

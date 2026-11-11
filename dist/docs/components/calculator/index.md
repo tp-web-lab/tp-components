@@ -1,48 +1,44 @@
+<!-- tp-docgen:page-layout:v2 -->
+<!-- -->
 # <tp-icon name="calculator" library="components" size="1.25em"></tp-icon> Calculator
 
-<tp-toc position="end" expand-all open brand></tp-toc>
+<div class="tp-component-doc-overview">
 
-Calculate arithmetic and scientific expressions using the keypad or an editable expression field.
+<div class="tp-component-doc-toc">
+<tp-toc position="end" expand-all></tp-toc>
+</div>
 
+<div class="tp-component-doc-intro">
+
+The custom `<tp-calculator>` element provides a scientific calculator with an editable expression and degree/radian modes.
+
+<div class="tp-component-doc-example">
+
+<!-- tp-docgen:introduction:start -->
 <tp-calculator></tp-calculator>
+<!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
+
+<!-- -->
+## Component viewer
+
+<tp-component-viewer tag="tp-calculator" src="/docs/components/calculator/examples/introduction.html"></tp-component-viewer>
+
+<!-- -->
 ## Usage
 
-### User interactions
-
-#### Mouse interactions
-
-| Control or gesture | Result |
-| --- | --- |
-| Orientation icon, top right | Switch between horizontal and vertical layouts. |
-| Expression field | Edit the expression or select a part to transform. |
-| Digits, dot, comma, parentheses and operators | Insert at the caret or replace the selection. |
-| Scientific function | Wrap the selection or expression in the chosen function. |
-| e / π / Rand | Insert a constant or a random number. |
-| Deg / Rad | Toggle the trigonometric angle unit. |
-| = | Evaluate and display the result, or explain an error. |
-| AC | Clear the expression and result message. |
-| ⌫ | Delete the selection or character before the caret. |
-| ± | Negate the selection or expression. |
-
-#### Keyboard interactions
-
-| Key or gesture | Result |
-| --- | --- |
-| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the expression and keypad buttons. |
-| <kbd>Enter</kbd> / <kbd>=</kbd> in the expression | Evaluate the expression. |
-| <kbd>Escape</kbd> in the expression | Clear the expression and message. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd>, <kbd>Backspace</kbd>, <kbd>Delete</kbd> in the expression | Move the caret or edit text normally. |
-| <kbd>Enter</kbd> / <kbd>Space</kbd> on a button | Activate that key. |
-| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |
-
-### Author directives
+### Authoring
 
 Use the icon button at the top right to switch orientation without clearing the calculation or changing Deg/Rad. The button updates the `orientation` attribute, and its icon and accessible label indicate the next orientation.
 
 The calculator starts in degree mode. Use Deg/Rad to switch the angle unit for sin, cos and tan. Hyperbolic functions always use their numeric argument directly. Horizontal orientation places scientific and numeric keys side by side when space permits; vertical orientation stacks them. Narrow horizontal panels also stack automatically.
 
-#### Expressions and functions
+### Expressions and functions
 
 Use parentheses and explicit multiplication (`2*pi`, not `2pi`). Powers are right-associative: `2^3^2` means `2^(3^2)`. Unary minus follows powers: `-2^2` is `-4`. Decimal numbers use a dot; the comma separates function arguments. Scientific notation such as `1e-3` is accepted.
 
@@ -65,129 +61,7 @@ A function key wraps the selected text, or the whole expression when no text is 
 
 Results use JavaScript floating-point arithmetic. Undefined real results, division by zero and overflow produce a message while preserving the expression for correction.
 
-## Examples
-
-<!-- tp-docgen:example-descriptions:start -->
-Basic usage
-: Enter 2+3*4 and evaluate it, then try sin(30) in degree mode. Use the scientific keys to transform a selected expression.
-
-Attributes
-: Combine all local attribute settings on one preview, starting at the published defaults. Use Reset defaults to restore them and Reload preview to restart initialization. Where present, file-loading controls offer only reviewed local fixtures and a deliberate missing-file case.
-<!-- tp-docgen:example-descriptions:end -->
-
-::::::::::::::: tp-tabs
-html
-: ::include{examples/examples.html}
-
-tp-asciidoc
-: ::include{examples/examples.adoc}
-
-tp-markdown
-: ::include{examples/examples.md}
-
-tp-restructuredtext
-: ::include{examples/examples.rst}
-:::::::::::::::
-
-## API
-
-<!-- tp-docgen:api TpCalculator -->
-::: tp-tabs
-Attributes
-: | Attribute | Type | Default | Description |
-  | --- | --- | --- | --- |
-  | <code>orientation</code> | <code>&quot;horizontal&quot; \| &quot;vertical&quot;</code> | <code>&quot;horizontal&quot;</code> | Arrangement of the scientific and numeric keypads. |
-  | <code>data-tp-help-src</code> | <code>string</code> | <code>&quot;&quot;</code> | URL of the component API manifest used by the help system. *(inherited from <code>tp-base</code>)* |
-  | <code>data-tp-markdown-source</code> | <code>string</code> | <code>&quot;&quot;</code> | Source document URL used to resolve relative resources in generated help. *(inherited from <code>tp-base</code>)* |
-  | <code>dir</code> | <code>string</code> | <code>&quot;&quot;</code> | Text direction (`ltr`, `rtl`, or `auto`). *(inherited from <code>tp-base</code>)* |
-  | <code>lang</code> | <code>string</code> | <code>&quot;&quot;</code> | Language tag used by the component content. *(inherited from <code>tp-base</code>)* |
-  [Attributes of `<tp-calculator>`]
-
-Methods
-: | Method | Signature | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [Public methods of `TpCalculator`]
-
-Events
-: | Event | Detail | Description |
-  | --- | --- | --- |
-  | <code>tp-calculator-result</code> | <code>&#123; expression: string; result: number &#125;</code> | Emitted after a successful calculation. |
-  [Events emitted by `<tp-calculator>`]
-
-CSS properties
-: | CSS property | Default | Description |
-  | --- | --- | --- |
-  | None. |  |  |
-  [CSS properties of `<tp-calculator>`]
-:::
-<!-- /tp-docgen:api -->
-
-<!-- tp-docgen:typedoc:start -->
-[More details…](/api/classes/components_calculator.TpCalculator.html)
-<!-- tp-docgen:typedoc:end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Imports
+### Importing
 
 ::: tp-tabs
 script
@@ -214,12 +88,41 @@ bundler
   ```
 :::
 
+<!-- -->
+## Examples
+
+<!-- tp-docgen:example-descriptions:start -->
+Basic usage
+: Enter 2+3*4 and evaluate it, then try sin(30) in degree mode. Use the scientific keys to transform a selected expression.
+
+Javascript API
+: Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+<!-- tp-docgen:example-descriptions:end -->
+
+::::::::::::::: tp-tabs
+HTML
+: ::include{examples/examples.html}
+
+tp-asciidoc
+: ::include{examples/examples.adoc}
+
+tp-latex
+: ::include{examples/examples-latex.html}
+
+tp-markdown
+: ::include{examples/examples.md}
+
+tp-restructuredtext
+: ::include{examples/examples.rst}
+:::::::::::::::
+
+<!-- -->
 <!-- tp-docgen:dependencies:start -->
 ## Dependencies
 
-### Internal
+All tp-components and external tools used by this component are loaded automatically by this component if they have not already been loaded by another component.
 
-All tp-components used by `<tp-calculator>` are loaded automatically by this component if they have not already been loaded by another component.
+### Internal
 
 <!--
 @tp-dependency tp-base
@@ -238,10 +141,10 @@ All tp-components used by `<tp-calculator>` are loaded automatically by this com
 @summary Single-line and automatically growing multiline text field.
 -->
 
-- [`<tp-base>`](../base/index.md) : Shared base class for tp-* components.
-- [`<tp-button>`](../button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-icon-button>`](../icon-button/index.md) : Accessible icon button component.
-- [`<tp-textfield>`](../textfield/index.md) : Single-line and automatically growing multiline text field.
+- [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-textfield>`](#/components/textfield/index.md) : Single-line and automatically growing multiline text field.
 
 ### External
 

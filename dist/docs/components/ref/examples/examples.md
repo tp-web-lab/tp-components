@@ -1,5 +1,5 @@
-::::::: tp-markdown-viewer { label="tp-ref" allow-script }
-:::::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-ref" allow-script }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: div { data-tp-reference-scope }
 A useful detail :tp-ref:{href="^detail"}.
@@ -10,41 +10,44 @@ A note with **formatted content**.
 ::::
 ```
 
-``` example {label="Attributes"}
-Combine the attributes on one preview. Controls start at the published defaults. Clear leaves a text field empty and removes the corresponding preview attribute; its default remains visible as a placeholder when nonempty. Some defaults intentionally show no content: use the controls to supply it. Reset defaults fills the controls with their defaults again; Reload preview restarts initialization with the current settings.
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/note/note.js";
+import "/components/ref/ref.js";
 
-Enter ^detail in href to resolve the note. Clear the field to return to the empty default.
+const example = document.createDocumentFragment();
 
-::::: tp-stack
-:::: tp-cluster
-::: tp-textfield { data-setting="href" label="href" value placeholder clearable }
-:::
-::::
+const element1 = document.createElement("div");
+element1.setAttribute("data-tp-reference-scope", "");
+element1.append(document.createTextNode("\n  "));
 
-:::: tp-button-group
-::: tp-button { id="attributes-reset" type="button" }
-Reset defaults
-:::
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("A useful detail "));
 
-::: tp-button { id="attributes-reload" type="button" }
-Reload preview
-:::
-::::
-:::::
+const element3 = document.createElement("tp-ref");
+element3.setAttribute("href", "^detail");
+element2.append(element3);
+element2.append(document.createTextNode("."));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
 
-::: tp-divider
-:::
+const element4 = document.createElement("tp-note");
+element4.setAttribute("ref", "detail");
+element4.setAttribute("title", "Detail");
 
-### Preview
+const element5 = document.createElement("p");
+element5.append(document.createTextNode("A note with "));
 
-::: tp-iframe { id="attributes-frame" title="ref attribute preview" style="height: 24rem; display: flow-root; inline-size: auto;" }
-:::
+const element6 = document.createElement("strong");
+element6.append(document.createTextNode("formatted content"));
+element5.append(element6);
+element5.append(document.createTextNode("."));
+element4.append(element5);
+element1.append(element4);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
 
-::: tp-callout { id="attributes-status" variant="info" heading="Preview status" }
-Preparing the preview…
-:::
-
-::: script { type="module" src="/docs/components/ref/examples/attributes.js" }
+document.body.append(example);
 :::
 ```
 
@@ -96,5 +99,5 @@ A group of interacting populations.
 :::
 ::::
 ```
+:::::
 ::::::
-:::::::

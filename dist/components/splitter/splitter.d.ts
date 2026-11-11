@@ -12,7 +12,9 @@ import { TpBase } from "../base/base.js";
  */
 type TpSplitterAxis = "horizontal" | "vertical";
 /**
- * @summary Splitter layout with two resizable panels.
+ * The custom `<tp-splitter>` element divides content into two resizable panels.
+ *
+ * @summary Divides content into two resizable panels.
  * @tagname tp-splitter
  * @attr {string} axis = "horizontal" - Split direction (`horizontal` or `vertical`).
  * @attr {string} position = "50%" - Divider position as a percentage.

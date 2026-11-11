@@ -7,6 +7,12 @@ Controller components let users adjust interface preferences such as language, d
 :::::: tp-grid { min-width="10rem" gap="1.5rem" }
 
 ::: tp-center { intrinsic }
+:tp-icon:{name="control" library="components" size="4em" aria-hidden="true"}
+
+[tp-control](control/index.md)
+:::
+
+::: tp-center { intrinsic }
 :tp-icon:{name="color" library="components" size="4em" aria-hidden="true"}
 
 [tp-color](color/index.md)

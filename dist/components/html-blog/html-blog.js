@@ -1,0 +1,2 @@
+import{t as e}from"../../chunks/markup-blog2.js";var t=class extends e{get fixedLanguage(){return`html`}};customElements.get(`tp-html-blog`)||customElements.define(`tp-html-blog`,t);export{t as TpHtmlBlog};
+//# sourceMappingURL=html-blog.js.map
