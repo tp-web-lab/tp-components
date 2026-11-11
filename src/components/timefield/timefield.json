@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-timefield label=\"Time\" value=\"14:30\" clearable></tp-timefield>"
+      "code": "<tp-timefield label=\"Time\" value=\"14:30\" clearable=\"\"></tp-timefield>"
     }
   ],
   "attributes": [

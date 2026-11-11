@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-turtle></tp-turtle>"
+      "code": "<tp-turtle width=\"420\" height=\"220\" label=\"A square\">\n    <script type=\"tp/turtle\">\n      turtle x=0 y=0 heading=0 speed=6\n      forward 80\n      right 90\n      forward 80\n      right 90\n      forward 80\n      right 90\n      forward 80\n    </script>\n  </tp-turtle>"
     }
   ],
   "attributes": [

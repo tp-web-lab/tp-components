@@ -15,6 +15,7 @@ The custom `<tp-html-blog>` element lists dated articles with summaries, categor
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-html-blog page-size="2">
   <script type="tp/html">
     <h2>A small garden</h2>
@@ -48,6 +49,7 @@ The custom `<tp-html-blog>` element lists dated articles with summaries, categor
     <p>We share practical ideas and small discoveries. Come back for the next article.</p>
   </script>
 </tp-html-blog>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

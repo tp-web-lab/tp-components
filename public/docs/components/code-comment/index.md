@@ -15,6 +15,7 @@ The custom `<tp-code-comment>` element associates an ordered annotation list wit
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-code-editor id="commented-function" language="typescript">
   <script type="tp/typescript">
     function f(x: number): number {
@@ -29,6 +30,7 @@ The custom `<tp-code-comment>` element associates an ordered annotation list wit
     <li>Zero and negative values are multiplied by four.</li>
   </ol>
 </tp-code-comment>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

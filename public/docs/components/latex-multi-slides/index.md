@@ -32,7 +32,6 @@ The custom `<tp-latex-multi-slides>` element presents LaTeX documents as a slide
 <!-- -->
 ## Usage
 
-
 ### LaTeX documents
 
 Set `repository` to the directory containing your `.tex` documents. `cover.tex` is the first page; `sidebar.tex` supplies the ordered navigation links. Declare `\usepackage{hyperref}` at the start of the source, then use native lists and `\href{chapter.tex}{Chapter title}` for links between documents. Each linked file supplies one slide.

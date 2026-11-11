@@ -23,7 +23,7 @@ import style from "./slide-note.css?inline";
  * @cssprop --tp-slide-note-gap = .5rem - Space between docked notes and the presentation menu.
  * @keyboard {Enter / Space} Expands or collapses the focused notes summary.
  * @example
- * <tp-slide-note legend="Speaker notes" lang="en-GB" show-text>
+ * <tp-slide-note legend="Speaker notes" lang="en-GB" show-text="">
  *   <script type="tp/txt">Introduce the idea. [trigger=clic] Explain the next step.</script>
  * </tp-slide-note>
  */

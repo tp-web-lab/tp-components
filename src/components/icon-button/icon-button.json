@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-icon-button></tp-icon-button>"
+      "code": "<tp-box data-intro-action=\"counter\" data-allow-script=\"\">\n  <p>Activate the heart button to add a like.</p>\n  <tp-icon-button name=\"heart\" label=\"Like this example\" data-demo-trigger=\"\"></tp-icon-button>\n  <p data-demo-status=\"\" role=\"status\">Likes: 0</p>\n  <script src=\"/docs/components/_shared/introduction-actions.js\"></script>\n</tp-box>"
     }
   ],
   "attributes": [

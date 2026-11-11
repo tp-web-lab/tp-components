@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-markup-multi-pages></tp-markup-multi-pages>"
+      "code": "<tp-markup-multi-pages repository=\"/docs/components/markup-multi-pages/docs\"></tp-markup-multi-pages>"
     }
   ],
   "attributes": [

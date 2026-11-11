@@ -101,15 +101,13 @@ let instanceCount = 0;
  * @cssprop --tp-contextmenu-item-padding-inline Inline padding for menu items.
  * @cssprop --tp-contextmenu-z-index Stacking level of the context menu.
  * @example
- * <tp-button id="intro-contextmenu-trigger" data-demo-trigger>Right-click this button</tp-button>
- * <tp-contextmenu anchor="#intro-contextmenu-trigger" outside-click>
- * <ul>
- * <li>Item 1</li>
- * <li>Item 2</li>
- * <li>Item 3</li>
- * </ul>
- * </tp-contextmenu>
- * @event tp-contextmenu-select Emitted when a terminal menu item with data-action is activated. The detail contains its action identifier, li element and visible label.
+ * <tp-box data-intro-action="contextmenu" data-allow-script="">
+ *   <tp-button id="intro-contextmenu-trigger" data-demo-trigger="">Right-click this button</tp-button>
+ *   <tp-contextmenu anchor="#intro-contextmenu-trigger" outside-click=""><ul><li><a href="/#/components/button/index.md">Buttons</a></li><li><a href="/#/components/tree/index.md">Trees</a></li></ul></tp-contextmenu>
+ *   <p data-demo-status="" role="status">Try the contextmenu using its trigger.</p>
+ *   <script src="/docs/components/_shared/introduction-actions.js"></script>
+ * </tp-box>
+ *  @event tp-contextmenu-select Emitted when a terminal menu item with data-action is activated. The detail contains its action identifier, li element and visible label.
  * @eventdetail tp-contextmenu-select { action: string; item: HTMLLIElement; label: string }
  */
 export class TpContextmenu extends TpBase {

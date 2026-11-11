@@ -1,72 +1,92 @@
 {
-  "generatedAt": "2026-10-29T10:15:55.510Z",
+  "generatedAt": "2026-11-11T17:28:32.731617+00:00",
+  "status": "completed-with-remaining-findings",
   "initialVitest": {
-    "passed": 3420,
-    "failed": 26
+    "files": 364,
+    "total": 3824,
+    "passed": 3793,
+    "failed": 31,
+    "unhandledErrors": 19
   },
   "vitest": {
-    "files": 319,
-    "total": 3447,
-    "passed": 3447,
-    "failed": 0,
-    "pending": 0
+    "files": 364,
+    "total": 3824,
+    "passed": 3817,
+    "failed": 7,
+    "pending": 0,
+    "unhandledErrors": 1,
+    "cleanFullRun": false
+  },
+  "targetedVitest": {
+    "files": 7,
+    "total": 182,
+    "passed": 178,
+    "failed": 4,
+    "unhandledErrors": 0,
+    "isolatedRerun": {
+      "files": 3,
+      "total": 50,
+      "passed": 50,
+      "failed": 0
+    },
+    "note": "All previously failed cases and teardown checks passed across targeted reruns. One new preview-loading regression is included. Counts overlap; this does not replace a clean full-suite run."
   },
   "scripts": {
-    "passed": 93,
-    "failed": 0,
-    "skipped": 0
+    "total": 111,
+    "passed": 110,
+    "failed": 1,
+    "skipped": 0,
+    "remainingFailure": null,
+    "ciConfigurationRerun": {
+      "passed": 5,
+      "failed": 0,
+      "node": "24.22.2",
+      "frozenInstall": "passed",
+      "dependencyBuilds": 5,
+      "latexRevision": "d6e8f598d4ca78153f5946765ef98ac20c96623e",
+      "configurationCommit": "fb85230"
+    }
   },
   "playgrounds": {
-    "passed": 21,
-    "failed": 0,
+    "status": "passed",
+    "total": 45,
     "browsers": [
       "chromium",
       "firefox",
       "webkit"
-    ]
+    ],
+    "passed": 45,
+    "failed": 0
   },
   "accessibility": {
-    "componentScans": 555,
-    "violations": 0,
+    "generatedAt": "2026-11-11T17:21:37.527Z",
+    "total": 636,
+    "passed": 633,
+    "failed": 3,
+    "componentScans": 630,
+    "violations": 7,
     "scanErrors": 0,
-    "incompleteChecks": 407,
+    "incompleteChecks": 490,
     "colorContractTests": 3,
     "geometryKeyboardTests": 3,
-    "geometryKeyboardValidatedBy": "targeted rerun after focus correction"
+    "lotoRerun": {
+      "passed": 3,
+      "failed": 0
+    },
+    "remainingFindings": "Three axe rule violations inside the external YouTube iframe in Chromium and WebKit (six findings). Original full report retained."
   },
-  "coverageRecalculated": true,
-  "lighthouseRecalculated": true,
-  "coverageGeneratedAt": "2026-10-29T10:15:55.510Z",
-  "coverageScope": "src/components/**/*.ts excluding src/**/*.test.ts",
-  "coverage": {
-    "lines": 94.05,
-    "statements": 92.4,
-    "functions": 95.45,
-    "branches": 81.93
+  "typecheck": "passed",
+  "changedTypeScriptBiome": "passed",
+  "examples": {
+    "structure": "passed",
+    "nativeMarkup": "passed",
+    "descriptions": "passed",
+    "labels": "passed",
+    "componentSets": 210,
+    "nativeExamples": 2022,
+    "descriptionsCount": 674
   },
-  "lighthouseGeneratedAt": "2026-10-29T11:57:39.291Z",
-  "lighthouseSummary": "config/lighthouse-latest-run.json",
-  "lazyLoadingVerification": {
-    "unitTestsPassed": 84,
-    "browserLoadingAndAccessibilityTestsPassed": 6,
-    "browserSizingScenariosPassed": 12,
-    "typecheck": "passed",
-    "biome": "passed",
-    "coverageRecalculatedAfterChange": false
-  },
-  "viewerRenderingVerification": {
-    "unitTestsPassed": 65,
-    "browserTestsPassed": 18,
-    "typecheck": "passed",
-    "biome": "passed",
-    "coverageRecalculatedAfterChange": false
-  },
-  "initialDisplayVerification": {
-    "unitTestsPassed": 350,
-    "unitTestNote": "The 63-test Markdown integration file was rerun after correcting its deferred-inclusion expectation.",
-    "browserTestsPassed": 24,
-    "typecheck": "passed",
-    "biome": "passed",
-    "coverageRecalculatedAfterChange": false
-  }
+  "coverageRecalculated": false,
+  "lighthouseRecalculated": false,
+  "previousReview": "config/test-review-2026-10-29.json"
 }

@@ -19,7 +19,7 @@ import { TpMarkupMultiSlides } from "../markup-multi-slides/markup-multi-slides.
  * @tagname tp-markdown-multi-slides
  * @summary Presents Markdown documents as a slide deck.
  * @example
- * <tp-markdown-multi-slides></tp-markdown-multi-slides>
+ * <tp-markdown-multi-slides repository="/docs/components/markdown-multi-pages/docs"></tp-markdown-multi-slides>
  */
 export class TpMarkdownMultiSlides extends TpMarkupMultiSlides {
 	protected override get fixedLanguage(): TpMarkupMultiPagesLanguage {

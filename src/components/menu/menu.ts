@@ -55,7 +55,6 @@ function isOrientation(value: string): value is TpMenuOrientation {
  *
  * @cssprop --tp-menu-gap Gap between root menu items.
  * @example
- * ```html
  * <tp-menu>
  *   <ul>
  *     <li><a href="/#/components/button/index.md">Buttons</a></li>
@@ -64,7 +63,6 @@ function isOrientation(value: string): value is TpMenuOrientation {
  *   </ul>
  * </tp-menu>
  * <script src="/docs/components/menu/examples/navigation.js"></script>
- * ```
  */
 export class TpMenu extends TpBase {
 	private static readonly styleId = "tp-menu-styles";

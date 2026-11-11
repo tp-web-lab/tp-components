@@ -118,8 +118,8 @@ function formatZoom(value: number): string {
  *
  *
  * @example
- * <tp-iframe></tp-iframe>
- * @cssprop [--tp-iframe-zoom=1] Unitless scale factor applied to iframe content (1 means 100%); synchronized with the zoom attribute.
+ * <tp-iframe src="/docs/components/iframe/examples/welcome.html" title="A document inside an iframe" style="height: 12rem;"></tp-iframe>
+ *  @cssprop [--tp-iframe-zoom=1] Unitless scale factor applied to iframe content (1 means 100%); synchronized with the zoom attribute.
  * @event tp-iframe-change Emitted when zoom, interaction or horizontal viewport state is refreshed. overflowWidth and scrollPosition are in CSS pixels, zoom is a scale factor, and zoomText is its percentage label.
  * @eventdetail tp-iframe-change { interaction: boolean; overflowWidth: number; scrollPosition: number; zoom: number; zoomText: string }
  * @event tp-iframe-load Emitted after the inner iframe loads and its layout is refreshed. contentHeight is in CSS pixels (0 when inaccessible), hasSrcdoc indicates inline content, and src is the configured URL.

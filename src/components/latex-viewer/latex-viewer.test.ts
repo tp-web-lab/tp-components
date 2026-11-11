@@ -26,9 +26,17 @@ it("converts all eight native TikZ documents without losing libraries or drawing
 	const examples = viewer.examples(
 		readFileSync("public/docs/components/tikz/examples/examples.tex", "utf8"),
 	);
-	expect(examples).toHaveLength(8);
+	expect(examples).toHaveLength(9);
 	expect(viewer.examples("Plain text")[0]?.source).toBe("Plain text");
 	for (const example of examples) {
+		if (example.label === "Javascript API") {
+			expect(
+				renderLatexToFragment(example.source).querySelector(
+					'script[type="module"]',
+				)?.textContent,
+			).toContain('createElement("tp-tikz")');
+			continue;
+		}
 		const output = renderLatexToFragment(example.source);
 		const drawings = output.querySelectorAll("tp-tikz");
 		expect(drawings, example.label).toHaveLength(1);

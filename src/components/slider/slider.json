@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "```html\n<tp-box style=\"max-inline-size: 28rem\">\n  <tp-slider scrollbar=\"\" item-width=\"10rem\" gap=\"1rem\" style=\"max-block-size: 8rem\">\n    <tp-box>First</tp-box><tp-box>Second</tp-box><tp-box>Third</tp-box><tp-box>Fourth</tp-box>\n  </tp-slider>\n</tp-box>\n```"
+      "code": "<tp-box style=\"max-inline-size: 28rem\">\n  <tp-slider scrollbar=\"\" item-width=\"10rem\" gap=\"1rem\" style=\"max-block-size: 8rem\">\n    <tp-box>First</tp-box><tp-box>Second</tp-box><tp-box>Third</tp-box><tp-box>Fourth</tp-box>\n  </tp-slider>\n</tp-box>"
     }
   ],
   "attributes": [

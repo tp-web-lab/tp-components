@@ -29,6 +29,42 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-chronometer
+ * @summary Chronometer component with play, pause and stop controls.
+ */
+/**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
+ */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
+/**
  * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
  * @summary Shared parsers, games and rendering utilities.
  */
@@ -40,7 +76,12 @@ import {
 	CryptarithmEngine,
 	createCryptarithmShellMarkup,
 } from "@tp/tp-utilities/games/cryptarithm";
+import {
+	gameActivity,
+	mountLegacyGameHeader,
+} from "../../utilities/game-header.js";
 import { TpBase } from "../base/base.js";
+import type { TpIconButton } from "../icon-button/icon-button.js";
 import style from "./cryptarithm.css?inline";
 
 /**
@@ -89,13 +130,13 @@ export class TpCryptarithm extends TpBase {
 	 * Button for undoing the last assignment.
 	 * @private
 	 */
-	private undoButton: HTMLButtonElement | null = null;
+	private undoButton: TpIconButton | null = null;
 
 	/**
 	 * Button for redoing the last undone assignment.
 	 * @private
 	 */
-	private redoButton: HTMLButtonElement | null = null;
+	private redoButton: TpIconButton | null = null;
 
 	/**
 	 * Dropdown menu for game assistance options.
@@ -221,14 +262,27 @@ export class TpCryptarithm extends TpBase {
       ${createCryptarithmShellMarkup()}
     `;
 
+		for (const action of ["undo", "redo"]) {
+			const old = this.querySelector<HTMLButtonElement>(
+				`.tp-cryptarithm-${action}`,
+			);
+			if (old) {
+				const button = document.createElement("tp-icon-button");
+				button.className = old.className;
+				button.setAttribute("name", action);
+				button.setAttribute("label", action);
+				button.toggleAttribute("disabled", old.disabled);
+				old.replaceWith(button);
+			}
+		}
 		this.boardElement = this.querySelector(".tp-cryptarithm-board");
 		this.statusElement = this.querySelector(".tp-cryptarithm-status");
 		this.undoButton = this.querySelector(
 			".tp-cryptarithm-undo",
-		) as HTMLButtonElement;
+		) as TpIconButton;
 		this.redoButton = this.querySelector(
 			".tp-cryptarithm-redo",
-		) as HTMLButtonElement;
+		) as TpIconButton;
 		this.assistSelect = this.querySelector(
 			".tp-cryptarithm-assist",
 		) as HTMLSelectElement;
@@ -240,6 +294,7 @@ export class TpCryptarithm extends TpBase {
 
 		this.engine.renderBoard(this.boardElement);
 		this.attachEventListeners();
+		mountLegacyGameHeader(this, "cryptarithm");
 		this.updateStatus();
 	}
 
@@ -346,6 +401,7 @@ export class TpCryptarithm extends TpBase {
 		}
 
 		const validation = this.engine.getValidation();
+		gameActivity(this, this.engine.canUndo(), validation.isComplete);
 		this.undoButton.disabled = !this.engine.canUndo();
 		this.redoButton.disabled = !this.engine.canRedo();
 		this.statusElement.className = "tp-cryptarithm-status";

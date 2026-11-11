@@ -58,8 +58,11 @@ function parsePercentage(value: string): number {
  * @keyboard {Arrow keys} Moves the separator by 1%, or by 10% while Shift is held.
  * @keyboard {Home / End} Moves the separator to its minimum or maximum position.
  * @example
- * <tp-compare></tp-compare>
- * @cssprop [--tp-compare-divider-size=2px] Thickness of the dividing line between the two layers.
+ * <tp-compare position="50%" before-label="Before" after-label="After" style="height: 12rem;">
+ *   <tp-box slot="before" style="height: 100%; background: var(--tp-neutral-100);">Before: the original design</tp-box>
+ *   <tp-box slot="after" style="height: 100%; background: var(--tp-brand-100);">After: the updated design</tp-box>
+ * </tp-compare>
+ *  @cssprop [--tp-compare-divider-size=2px] Thickness of the dividing line between the two layers.
  * @cssprop [--tp-compare-handle-size=2.5rem] Width and height of the draggable comparison handle.
  * @cssprop [--tp-compare-position=50%] Position of the divider along the comparison axis, usually a percentage; synchronized with position and pointer or keyboard interaction.
  */

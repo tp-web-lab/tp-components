@@ -123,7 +123,7 @@ export {
  * @attr {string} src = "" - JSON project or markdown source file to load.
  *
  * @example
- * <tp-markdown-playground></tp-markdown-playground>
+ * <tp-markdown-playground src="/docs/components/_shared/intro-projects/markdown.json"></tp-markdown-playground>
  */
 export class TpMarkdownPlayground extends TpPlayground<TpMarkdownProject> {
 	protected override createEmptyProject(): TpMarkdownProject {

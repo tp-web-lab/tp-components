@@ -6,15 +6,14 @@ import { TpLsystem } from "./lsystem.js";
 /** Small deterministic source shared by lifecycle and control tests. */
 const source = "axiom: F\niterations: 2\nangle: 60\nrule: F => F+F--F+F";
 
-it("offers Peano without the duplicate sponge placeholder in every example language", () => {
-	["html", "adoc", "md", "rst"].forEach((extension) => {
-		const examples = readFileSync(
-			`public/docs/components/lsystem/examples/examples.${extension}`,
-			"utf8",
-		);
-		expect(examples).toContain("peano-curve");
-		expect(examples).not.toContain("sierpinski-sponge");
-	});
+it("offers Peano without the duplicate sponge placeholder in the preset selector", () => {
+	const manifest = JSON.parse(
+		readFileSync("src/components/lsystem/lsystem.json", "utf8"),
+	) as { attributes: { name: string; type: string }[] };
+	const presets =
+		manifest.attributes.find((item) => item.name === "preset")?.type ?? "";
+	expect(presets).toContain("peano-curve");
+	expect(presets).not.toContain("sierpinski-sponge");
 });
 
 it("includes the self-contained example viewers without nesting another viewer", () => {

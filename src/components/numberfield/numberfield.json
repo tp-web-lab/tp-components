@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-numberfield label=\"Quantity\" value=\"3\" min=\"0\" max=\"10\" clearable></tp-numberfield>"
+      "code": "<tp-cluster>\n  <tp-numberfield label=\"Quantity\" value=\"3\" min=\"0\" max=\"10\" clearable=\"\"></tp-numberfield>\n  <tp-numberfield label=\"Level\" value=\"40\" min=\"0\" max=\"100\" step=\"5\" range=\"\" clearable=\"\"></tp-numberfield>\n</tp-cluster>"
     }
   ],
   "attributes": [

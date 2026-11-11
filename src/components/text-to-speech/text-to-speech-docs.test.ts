@@ -99,7 +99,7 @@ it.each(["md", "adoc"])(
 		const examples = api.extractExamples(api.readInlineSource());
 		expect(examples.map((example) => example.label)).toEqual([
 			"Basic usage",
-			"Attributes",
+			"Javascript API",
 			"English voices",
 			"French voices",
 			"Synchronized speech",
@@ -124,7 +124,7 @@ it("preserves ten named reStructuredText examples in its data script", () => {
 	const examples = extractRstViewerExamples(body.replace(/^ {6}/gm, "").trim());
 	expect(examples.map((example) => example.label)).toEqual([
 		"Basic usage",
-		"Attributes",
+		"Javascript API",
 		"English voices",
 		"French voices",
 		"Synchronized speech",
@@ -137,7 +137,9 @@ it("preserves ten named reStructuredText examples in its data script", () => {
 	const [intro, ...variants] = examples;
 	expect(intro?.source).toContain(":type: tp/txt");
 	expect(intro?.source).toContain(":show-text:");
-	expect(variants[0]?.source).toContain("for");
+	expect(variants[0]?.source).toContain(
+		'document.createElement("tp-text-to-speech")',
+	);
 	expect(variants[1]?.source).toContain(":lang: en-US");
 	expect(variants[2]?.source).toContain(":lang: fr-FR");
 	expect(variants[3]?.source).toContain(":for: spoken-text");

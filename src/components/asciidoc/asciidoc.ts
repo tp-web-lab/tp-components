@@ -309,7 +309,17 @@ export async function renderAsciidocRuntimeIn(root: ParentNode): Promise<void> {
  * @event tp-asciidoc-rendered Emitted after conversion and runtime initialization complete.
  * @eventdetail tp-asciidoc-rendered void
  * @example
- * <tp-box><tp-asciidoc><script type="tp/asciidoc">This paragraph uses *AsciiDoc*.</script></tp-asciidoc></tp-box>
+ * <tp-asciidoc>
+ *   <script type="tp/asciidoc">
+ * == A short document
+ *
+ * This paragraph uses *AsciiDoc*.
+ *
+ * * Write content
+ * * Add components
+ * * Publish the page
+ *   </script>
+ * </tp-asciidoc>
  */
 export class TpAsciidoc extends TpBase {
 	/** Attributes that trigger a new source load and conversion. */

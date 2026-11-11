@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-box data-intro-action=\"console\" data-allow-script>\n  <p>Inspect these example messages, then use Clear to empty the console.</p>\n  <tp-console></tp-console>\n  <p data-demo-status role=\"status\"></p>\n  <script src=\"/docs/components/_shared/introduction-actions.js\"></script>\n</tp-box>"
+      "code": "<tp-box data-intro-action=\"console\" data-allow-script=\"\">\n  <p>Inspect these example messages, then use Clear to empty the console.</p>\n  <tp-console></tp-console>\n  <p data-demo-status=\"\" role=\"status\"></p>\n  <script src=\"/docs/components/_shared/introduction-actions.js\"></script>\n</tp-box>"
     }
   ],
   "attributes": [],

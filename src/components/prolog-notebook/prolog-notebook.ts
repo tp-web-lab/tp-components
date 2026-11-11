@@ -15,7 +15,22 @@ import { TpNotebook } from "../notebook/notebook.js";
  * @tagname tp-prolog-notebook
  * @summary Interactive Prolog notebook with markup and code cells.
  * @example
- * <tp-prolog-notebook></tp-prolog-notebook>
+ * <tp-prolog-notebook>
+ *       <script type="tp/markdown">
+ *         # Family relations
+ *
+ *         Select **Run all cells** to execute the program. Use the code button in a cell to edit its source.
+ *       </script>
+ *       <script type="tp/prolog" filename="program.pl">
+ *         parent(ada, byron).
+ *         parent(byron, charles).
+ *
+ *         grandparent(X, Z) :- parent(X, Y), parent(Y, Z).
+ *       </script>
+ *       <script type="tp/prolog" filename="query.pl">
+ *         grandparent(ada, Grandchild).
+ *       </script>
+ *   </tp-prolog-notebook>
  */
 export class TpPrologNotebook extends TpNotebook {
 	public override connectedCallback(): void {

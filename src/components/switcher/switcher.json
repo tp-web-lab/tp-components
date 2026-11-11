@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "```html\n<tp-switcher threshold=\"35rem\" gap=\"1rem\">\n  <tp-box>1. Plan the content.</tp-box>\n  <tp-box>2. Write a draft.</tp-box>\n  <tp-box>3. Review the text.</tp-box>\n  <tp-box>4. Add illustrations.</tp-box>\n  <tp-box>5. Publish the result.</tp-box>\n</tp-switcher>\n```"
+      "code": "<tp-switcher threshold=\"35rem\" gap=\"1rem\">\n  <tp-box>1. Plan the content.</tp-box>\n  <tp-box>2. Write a draft.</tp-box>\n  <tp-box>3. Review the text.</tp-box>\n  <tp-box>4. Add illustrations.</tp-box>\n  <tp-box>5. Publish the result.</tp-box>\n</tp-switcher>"
     }
   ],
   "attributes": [

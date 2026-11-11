@@ -15,6 +15,7 @@ The custom `<tp-dragdrop>` element enables content to be dragged and dropped bet
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-box id="dragdrop-board" data-dragdrop-demo="" data-allow-script="">
   <p>Drag a task to <strong>To do</strong> or <strong>Done</strong>, including an empty column. The Move button sends a task to the other column without dragging.</p>
   <p>Keyboard: focus a card, press Enter, use the arrow keys to choose another card, then press Enter to drop before or after it. Escape cancels.</p>
@@ -37,6 +38,7 @@ The custom `<tp-dragdrop>` element enables content to be dragged and dropped bet
   <tp-dragdrop root="#dragdrop-board" items="[data-task]"></tp-dragdrop>
   <script src="/docs/components/dragdrop/examples/task-board.js"></script>
 </tp-box>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

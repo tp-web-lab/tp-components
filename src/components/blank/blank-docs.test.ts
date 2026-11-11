@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { afterEach, expect, it, vi } from "vitest";
+import { htmlExample } from "../../test-helpers/documentation.js";
 import { renderAsciidocToHtml } from "../asciidoc/asciidoc.js";
 import { renderMarkdownToHtml } from "../markdown/markdown.js";
 import "./blank.js";
@@ -7,12 +8,11 @@ import "../fill-blank-question/fill-blank-question.js";
 
 afterEach(() => document.body.replaceChildren());
 
-it("preserves asynchronous math components in the dynamically loaded introduction", async () => {
+it("preserves asynchronous math components in the Square root documentation example", async () => {
 	const source =
-		readFileSync(
-			"public/docs/components/fill-blank-question/index.md",
-			"utf8",
-		).split("## Usage")[0] ?? "";
+		"# Fill blank question\n\n``` raw html\n" +
+		htmlExample("fill-blank-question", "Square root").innerHTML +
+		"\n```";
 	expect(source).not.toContain("data-mathjax-tex");
 	expect(source).not.toContain("window.MathJax");
 	const template = document.createElement("template");
@@ -40,11 +40,11 @@ it.each(["html", "md", "adoc", "rst"])(
 				: extension === "md"
 					? /``` example \{label="([^"]+)"\}/g
 					: extension === "adoc"
-						? /^\.([^\n]+)\n=====/gm
+						? /^\.(\S[^\n]+)\n=====/gm
 						: /\.\. example:: ([^\n]+)/g;
 		expect([...source.matchAll(expression)].map((match) => match[1])).toEqual([
 			"Basic usage",
-			"Attributes",
+			"Javascript API",
 			"Geography",
 			"Irregular verbs",
 			"Baltic capitals and flags",
@@ -110,7 +110,8 @@ it("keeps the HTML square root example executable after example extraction", () 
 	expect(example?.querySelector('script[type^="tp/"]')).toBeNull();
 	expect(example?.querySelector("tp-fill-blank-question > dl")).not.toBeNull();
 	expect(example?.querySelectorAll("tp-blank")).toHaveLength(3);
-	expect(example?.querySelector('script[src*="mathjax"]')).not.toBeNull();
+	expect(example?.querySelectorAll("tp-math[value]")).toHaveLength(8);
+	expect(example?.querySelector('script[src*="mathjax"]')).toBeNull();
 });
 
 it("copies the rendered SVG into the reading after asynchronous formula rendering", async () => {
@@ -163,18 +164,13 @@ it.each([
 			`public/docs/components/fill-blank-question/examples/examples.${extension}`,
 			"utf8",
 		);
-		const start =
+		const body =
 			extension === "md"
-				? ":::: tp-fill-blank-question { mode"
-				: '[tp-fill-blank-question,mode="closed"';
-		const content = source.slice(
-			source.indexOf(start, source.indexOf("Square root")),
-		);
-		const end = extension === "md" ? "\n::::" : "\n====";
-		const body = content.slice(
-			0,
-			content.indexOf(end, content.indexOf("Answers")) + end.length,
-		);
+				? source.match(
+						/``` example \{label="Square root"\}\n([\s\S]*?)\n```/,
+					)?.[1]
+				: source.match(/^\.Square root\n(={4,})\n([\s\S]*?)^\1$/m)?.[2];
+		if (!body) throw new Error("Missing Square root example");
 		const rendered = await render(
 			extension === "md" ? `---\nextensions: [math]\n---\n${body}` : body,
 		);

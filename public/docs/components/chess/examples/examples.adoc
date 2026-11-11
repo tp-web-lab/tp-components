@@ -1,0 +1,50 @@
+[tp-asciidoc-viewer%allow-script,label="tp-chess"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-chess%draggable-pieces,position="8/8/3k4/8/3PK3/8/8/8"]
+====
+====
+======
+
+.Javascript API
+======
+[script,type="module"]
+====
+import "/components/chess/chess.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-chess");
+element1.setAttribute("position", "8/8/3k4/8/3PK3/8/8/8");
+element1.setAttribute("draggable-pieces", "");
+example.append(element1);
+
+document.body.append(example);
+====
+======
+
+.Black to move
+======
+[tp-chess%draggable-pieces,fen="8/8/3k4/8/3PK3/8/8/8 b - - 0 1",orientation="black"]
+====
+====
+======
+
+.Pawn promotion
+======
+[tp-chess%draggable-pieces,fen="7k/P7/8/8/8/8/8/4K3 w - - 0 1"]
+====
+====
+======
+
+.Rook endgame
+======
+[tp-chess%draggable-pieces,fen="7k/8/5K2/8/8/8/8/R7 w - - 0 1"]
+====
+====
+======
+----
+========

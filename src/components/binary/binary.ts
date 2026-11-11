@@ -31,13 +31,54 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-chronometer
+ * @summary Chronometer component with play, pause and stop controls.
+ */
+/**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
+ */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
+/**
  * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
  * @summary Shared parsers, games and rendering utilities.
  */
 // tp-docgen:dependencies:end
 
 import { BinaryEngine } from "@tp/tp-utilities/games/binary";
+import {
+	gameActivity,
+	mountLegacyGameHeader,
+} from "../../utilities/game-header.js";
 import { TpBase } from "../base/base.js";
+import type { TpIconButton } from "../icon-button/icon-button.js";
 import style from "./binary.css?inline";
 
 /**
@@ -53,7 +94,18 @@ import style from "./binary.css?inline";
  * @attr {string} puzzle = "" - Puzzle rows separated by newlines.
  *
  * @example
- * <tp-binary></tp-binary>
+ * <tp-binary>
+ *         <ol>
+ *           <li>1010110!0</li>
+ *           <li>01!01!0011!</li>
+ *           <li>0010101!1!</li>
+ *           <li>11!01!0100</li>
+ *           <li>10011001!</li>
+ *           <li>0!110!1010</li>
+ *           <li>0110!0!101</li>
+ *           <li>10!0101!10</li>
+ *         </ol>
+ *       </tp-binary>
  */
 export class TpBinary extends TpBase {
 	/**
@@ -82,13 +134,13 @@ export class TpBinary extends TpBase {
 	 * Button for undoing the last move.
 	 * @private
 	 */
-	private undoButton: HTMLButtonElement | null = null;
+	private undoButton: TpIconButton | null = null;
 
 	/**
 	 * Button for redoing the last undone move.
 	 * @private
 	 */
-	private redoButton: HTMLButtonElement | null = null;
+	private redoButton: TpIconButton | null = null;
 
 	/**
 	 * Dropdown menu for game assistance options.
@@ -174,8 +226,8 @@ export class TpBinary extends TpBase {
         <div class="tp-binary-header">
           <div class="tp-binary-title">Binary</div>
           <div class="tp-binary-controls">
-            <button class="tp-binary-undo" disabled>Undo</button>
-            <button class="tp-binary-redo" disabled>Redo</button>
+            <tp-icon-button class="tp-binary-undo" name="undo" label="Undo" disabled></tp-icon-button>
+            <tp-icon-button class="tp-binary-redo" name="redo" label="Redo" disabled></tp-icon-button>
             <select class="tp-binary-assist" aria-label="Assistance actions">
               <option value="">Assist…</option>
               <option value="reset-game">Reset the game</option>
@@ -194,12 +246,8 @@ export class TpBinary extends TpBase {
 
 		this.gridElement = this.querySelector(".tp-binary-grid");
 		this.statusElement = this.querySelector(".tp-binary-status");
-		this.undoButton = this.querySelector(
-			".tp-binary-undo",
-		) as HTMLButtonElement;
-		this.redoButton = this.querySelector(
-			".tp-binary-redo",
-		) as HTMLButtonElement;
+		this.undoButton = this.querySelector(".tp-binary-undo") as TpIconButton;
+		this.redoButton = this.querySelector(".tp-binary-redo") as TpIconButton;
 		this.assistSelect = this.querySelector(
 			".tp-binary-assist",
 		) as HTMLSelectElement;
@@ -208,6 +256,7 @@ export class TpBinary extends TpBase {
 
 		this.engine.renderGrid(this.gridElement);
 		this.attachEventListeners();
+		mountLegacyGameHeader(this, "binary");
 		this.updateStatus();
 	}
 
@@ -293,6 +342,7 @@ export class TpBinary extends TpBase {
 			return;
 
 		const validation = this.engine.getValidation();
+		gameActivity(this, this.engine.canUndo(), validation.isComplete);
 		this.undoButton.disabled = !this.engine.canUndo();
 		this.redoButton.disabled = !this.engine.canRedo();
 		this.statusElement.className = "tp-binary-status";

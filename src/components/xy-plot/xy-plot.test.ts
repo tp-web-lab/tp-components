@@ -1,4 +1,12 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import {
+	afterAll,
+	afterEach,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	vi,
+} from "vitest";
 import "./xy-plot.js";
 
 const source = `
@@ -135,4 +143,9 @@ describe("<tp-xy-plot>", () => {
 		expect(closeButton?.getAttribute("aria-label")).toBe("Close zoomed graph");
 		expect(closeButton?.form?.getAttribute("method")).toBe("dialog");
 	});
+});
+
+afterAll(async () => {
+	document.body.replaceChildren();
+	await vi.dynamicImportSettled();
 });

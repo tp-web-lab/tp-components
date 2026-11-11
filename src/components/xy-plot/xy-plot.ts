@@ -97,14 +97,14 @@ function escapeHtml(value: string): string {
  * @attr {boolean} settings = false - Shows interactive settings below the graph and its controls.
  * @example
  * <tp-xy-plot label="Functions">
- *   <script type="tp/xy-plot">
- *     label = "Functions"
- *     x-axis = [-10, 10]
- *     y-axis = [-5, 5]
- *     curve Sine = function(x, 2*sin(x))
- *     curve Line = function(x, x/2)
- *   </script>
- * </tp-xy-plot>
+ *     <script type="tp/xy-plot">
+ * label = "Functions"
+ * x-axis = [-10, 10]
+ * y-axis = [-5, 5]
+ * curve Sine = function(x, 2*sin(x))
+ * curve Line = function(x, x/2)
+ * </script>
+ *   </tp-xy-plot>
  */
 export class TpXYPlot extends TpBase {
 	/** Optional numeric data, retained when the component reconnects. */

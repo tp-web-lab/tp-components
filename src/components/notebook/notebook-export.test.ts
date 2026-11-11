@@ -84,7 +84,9 @@ it.each(["tp-light", "tp-dark"])(
 		);
 		expect(doc.documentElement.className).toBe(theme);
 		expect(doc.body.className).toBe(theme);
-		expect(doc.body.style.getPropertyValue("--tp-brand-seed")).toBe("#c12367");
+		expect(doc.body.style.getPropertyValue("--tp-notebook-export-brand")).toBe(
+			"#c12367",
+		);
 		expect(doc.head.textContent).toContain(
 			"background:var(--tp-background-color)",
 		);
@@ -143,7 +145,9 @@ it("captures the documentation container theme and brand instead of the body def
 		"text/html",
 	);
 	expect(doc.body.className).toBe("tp-dark");
-	expect(doc.body.style.getPropertyValue("--tp-brand-seed")).toBe("#4a97f4");
+	expect(doc.body.style.getPropertyValue("--tp-notebook-export-brand")).toBe(
+		"#4a97f4",
+	);
 });
 
 it("runs exported cells in order and resets their sources through the viewers", async () => {

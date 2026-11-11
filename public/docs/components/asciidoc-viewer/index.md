@@ -15,6 +15,7 @@ The custom `<tp-asciidoc-viewer>` element provides an interactive AsciiDoc viewe
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-asciidoc-viewer>
         <script type="tp/asciidoc">
           = Live AsciiDoc
@@ -23,6 +24,7 @@ The custom `<tp-asciidoc-viewer>` element provides an interactive AsciiDoc viewe
           Edit this source and select *Run*.
         </script>
       </tp-asciidoc-viewer>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

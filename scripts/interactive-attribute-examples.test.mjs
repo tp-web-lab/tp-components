@@ -9,8 +9,11 @@
  */
 
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, cpSync, mkdtempSync, rmSync, symlinkSync } from "node:fs";
 import test from "node:test";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 import { parseFragment } from "parse5";
 import { attributeSettings } from "./grouped-attribute-examples.mjs";
 import {
@@ -24,18 +27,25 @@ const walk = (node) => [node, ...(node.childNodes ?? []).flatMap(walk)];
 const get = (node, name) =>
 	node.attrs?.find((item) => item.name === name)?.value;
 
-test("grouped controls cover defaults, enums, booleans and external runtime in every component", () => {
+test("legacy grouped controls cover defaults, enums, booleans and external runtime", async (t) => {
+ const fixture = mkdtempSync(join(tmpdir(), "tp-attribute-fixtures-"));
+ t.after(() => rmSync(fixture, { recursive: true, force: true }));
+ for (const path of ["scripts", "public/docs/components", "src/components", "src/utilities"]) cpSync(path, join(fixture, path), { recursive: true });
+ symlinkSync(resolve("node_modules"), join(fixture, "node_modules"), "dir");
+ const { groupedAttributeExample } = await import(pathToFileURL(join(fixture, "scripts/grouped-attribute-examples.mjs")));
+
 	for (const component of documentedComponents()) {
 		if (
 			groupedFields.includes(component) ||
+ !existsSync(`public/docs/components/${component}/examples/attributes.js`) ||
 			!componentAttributes(component).length
 		)
 			continue;
-		const source = readExamples(component, "html")[1].source;
+		const source = groupedAttributeExample(component, readExamples(component, "html"));
 		const nodes = walk(parseFragment(source));
 		const settings = attributeSettings(component);
 		const script = readFileSync(
-			`public/docs/components/${component}/examples/attributes.js`,
+			join(fixture, `public/docs/components/${component}/examples/attributes.js`),
 			"utf8",
 		);
 		if (component === "mask") {
@@ -113,7 +123,7 @@ test("grouped controls cover defaults, enums, booleans and external runtime in e
 					assert.equal(get(control, "placeholder"), String(setting.value), `${component}/${setting.name}: placeholder`);
 			}
 			if (setting.kind === "file") {
-				const fixtures = JSON.parse(readFileSync(`public/docs/components/${component}/examples/attributes-fixtures.json`, "utf8"));
+				const fixtures = JSON.parse(readFileSync(join(fixture, `public/docs/components/${component}/examples/attributes-fixtures.json`), "utf8"));
 				assert.equal(setting.choices.length, 4, `${component}/${setting.name}`);
 				assert.deepEqual(
 					setting.choices,
@@ -123,10 +133,10 @@ test("grouped controls cover defaults, enums, booleans and external runtime in e
 				assert.ok(setting.choices.every(choice => choice.label.trim().length > 0));
 				for (const choice of setting.choices.slice(1, 3))
 					assert.ok(
-						existsSync(`public${choice.value}`),
+						existsSync(join(fixture, `public${choice.value}`)),
 						component + choice.value,
 					);
-				assert.ok(!existsSync(`public${setting.choices[3].value}`));
+				assert.ok(!existsSync(join(fixture, `public${setting.choices[3].value}`)));
 			}
 		}
 	}

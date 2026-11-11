@@ -48,6 +48,10 @@ Set `cards` to an integer from 1 to 4 to display several independently generated
 
 The chronometer starts with the first draw and pauses when the ticket is complete. Its controls are hidden. The refresh button resets the chronometer and generates both a new ticket and a new draw.
 
+### History
+
+Undo returns the last drawn number to the draw pile. Redo draws that same number again. Reset generates new tickets and clears the recorded draw.
+
 ### Importing
 
 ::: tp-tabs
@@ -120,6 +124,26 @@ All tp-components and external tools used by this component are loaded automatic
 @summary Chronometer component with play, pause and stop controls.
 -->
 <!--
+@tp-dependency tp-color
+@summary Brand color preset controller scoped to the containing element.
+-->
+<!--
+@tp-dependency tp-divider
+@summary Visual separator for menus, dropdowns, toolbars, and layouts.
+-->
+<!--
+@tp-dependency tp-drawer
+@summary Drawer overlay component.
+-->
+<!--
+@tp-dependency tp-dropdown
+@summary Dropdown menu component.
+-->
+<!--
+@tp-dependency tp-fullscreen
+@summary Fullscreen controller button.
+-->
+<!--
 @tp-dependency tp-icon
 @summary SVG icon component with inline, URL, and registry sources.
 -->
@@ -129,14 +153,24 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 <!--
 @tp-dependency tp-switcher
-@summary Component `<tp-switcher>`.
+@summary Switches between horizontal and vertical layouts based on available space.
+-->
+<!--
+@tp-dependency tp-theme
+@summary Parent-scoped light/dark/auto theme controller with embedded UI.
 -->
 
 - [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 - [`<tp-chronometer>`](#/components/chronometer/index.md) : Chronometer component with play, pause and stop controls.
+- [`<tp-color>`](#/components/color/index.md) : Brand color preset controller scoped to the containing element.
+- [`<tp-divider>`](#/components/divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
+- [`<tp-drawer>`](#/components/drawer/index.md) : Drawer overlay component.
+- [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
+- [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
 - [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
-- [`<tp-switcher>`](#/components/switcher/index.md) : Component `<tp-switcher>`.
+- [`<tp-switcher>`](#/components/switcher/index.md) : Switches between horizontal and vertical layouts based on available space.
+- [`<tp-theme>`](#/components/theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
 
 ### External
 

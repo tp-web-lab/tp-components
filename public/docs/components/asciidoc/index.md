@@ -15,6 +15,7 @@ The custom `<tp-asciidoc>` element renders AsciiDoc documents.
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-asciidoc>
   <script type="tp/asciidoc">
 == A short document
@@ -26,6 +27,7 @@ This paragraph uses *AsciiDoc*.
 * Publish the page
   </script>
 </tp-asciidoc>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

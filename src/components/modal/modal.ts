@@ -42,7 +42,12 @@ import style from "./modal.css?inline";
  * @keyboard {Shift+Tab} Moves to the previous focusable control and wraps inside the modal.
  * @keyboard {Escape} Closes the modal.
  * @example
- * <tp-modal></tp-modal>
+ * <tp-box data-intro-action="modal" data-allow-script="">
+ *   <tp-button id="intro-modal-trigger" data-demo-trigger="">Open the modal</tp-button>
+ *   <tp-modal backdrop="" outside-click="" aria-label="Example modal"><p>This panel contains additional information.</p><tp-button data-demo-close="">Close</tp-button></tp-modal>
+ *   <p data-demo-status="" role="status">Try the modal using its trigger.</p>
+ *   <script src="/docs/components/_shared/introduction-actions.js"></script>
+ * </tp-box>
  */
 export class TpModal extends TpOverlayElement {
 	protected readonly overlayName = "tp-modal";

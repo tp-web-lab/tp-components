@@ -47,7 +47,11 @@ function isCssLength(value: string): boolean {
  * @cssprop --tp-grid-gap Default gap between grid cells.
  * @cssprop --tp-grid-min-width Default minimum column width.
  * @example
- * <tp-grid></tp-grid>
+ * <tp-grid min-width="12rem" gap="1rem">
+ *   <tp-box>First column</tp-box>
+ *   <tp-box>Second column</tp-box>
+ *   <tp-box>Third column</tp-box>
+ * </tp-grid>
  */
 export class TpGrid extends TpBase {
 	private static readonly styleId = "tp-grid-styles";

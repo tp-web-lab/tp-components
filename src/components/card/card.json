@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-card style=\"width:300px;\">\n<dl>\n<dt>header</dt>\n<dd>content header</dd>\n<dt>footer</dt>\n<dd>content footer</dd>\n<dt>main</dt>\n<dd>content body</dd>\n</dl>\n</tp-card>"
+      "code": "<tp-card>\n        <dl>\n          <dt>header</dt><dd>content header</dd>\n          <dt>footer</dt><dd>content footer</dd>\n          <dt>main</dt><dd>content body</dd>\n        </dl>\n      </tp-card>"
     }
   ],
   "attributes": [],

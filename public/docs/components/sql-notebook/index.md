@@ -15,6 +15,7 @@ The custom `<tp-sql-notebook>` element combines written explanations and executa
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-sql-notebook>
     <script type="tp/markdown"># Interactive SQL
 
@@ -23,6 +24,7 @@ Select **Run all cells** to execute the program. Use the code button in a cell t
 INSERT INTO language VALUES ('SQL');</script>
     <script type="tp/sql" filename="query.sql">SELECT * FROM language;</script>
   </tp-sql-notebook>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

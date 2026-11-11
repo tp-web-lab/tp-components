@@ -217,10 +217,18 @@ describe("tp-puzzle", () => {
 				clientY: 60,
 			}),
 		);
-		expect(game.querySelector("tp-dropdown")?.hasAttribute("open")).toBe(true);
+		expect(
+			game
+				.querySelector('tp-dropdown[aria-label="Rotate selected piece"]')
+				?.hasAttribute("open"),
+		).toBe(true);
 		game.querySelector<HTMLElement>('[data-angle="90"]')?.click();
 		expect(game.placements[0]?.angle).toBe((angle + 90) % 360);
-		expect(game.querySelector("tp-dropdown")?.hasAttribute("open")).toBe(false);
+		expect(
+			game
+				.querySelector('tp-dropdown[aria-label="Rotate selected piece"]')
+				?.hasAttribute("open"),
+		).toBe(false);
 		piece?.dispatchEvent(
 			new KeyboardEvent("keydown", {
 				key: "R",

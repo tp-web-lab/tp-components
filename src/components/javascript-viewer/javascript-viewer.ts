@@ -24,7 +24,7 @@ import { TpJavascriptPlayground } from "../javascript-playground/javascript-play
  * @event tp-playground-repository-load Emitted after a project configured with `repository` has loaded.
  * @eventdetail tp-playground-repository-load { repository: string; project: TpProject }
  * @example
- * <tp-javascript-viewer></tp-javascript-viewer>
+ * <tp-javascript-viewer src="/docs/components/_shared/intro-projects/javascript.json"></tp-javascript-viewer>
  */
 export class TpJavascriptViewer extends TpJavascriptPlayground {
 	protected override get viewerMode(): boolean {

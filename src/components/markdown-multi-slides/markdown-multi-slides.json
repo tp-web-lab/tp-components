@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-markdown-multi-slides></tp-markdown-multi-slides>"
+      "code": "<tp-markdown-multi-slides repository=\"/docs/components/markdown-multi-pages/docs\"></tp-markdown-multi-slides>"
     }
   ],
   "attributes": [

@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "```html\n<tp-stack>\n  <tp-box>Step 1: Write a draft.</tp-box>\n  <tp-box>Step 2: Review the content.</tp-box>\n  <tp-box>Step 3: Publish the document.</tp-box>\n</tp-stack>\n```"
+      "code": "<tp-stack>\n  <tp-box>Step 1: Write a draft.</tp-box>\n  <tp-box>Step 2: Review the content.</tp-box>\n  <tp-box>Step 3: Publish the document.</tp-box>\n</tp-stack>"
     }
   ],
   "attributes": [

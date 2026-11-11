@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-text-to-speech lang=\"en-GB\" show-text>\n  <script type=\"tp/txt\">\n    Welcome to tp-components. This example uses the browser speech synthesis service.\n  </script>\n</tp-text-to-speech>"
+      "code": "<tp-text-to-speech lang=\"en-GB\" show-text=\"\">\n  <script type=\"tp/txt\">\n    Welcome to tp-components. This example uses the browser speech synthesis service.\n  </script>\n</tp-text-to-speech>"
     }
   ],
   "attributes": [
@@ -252,7 +252,7 @@
     },
     {
       "name": "tp-typewriting",
-      "summary": "progressively reveals text one letter or one word at a time."
+      "summary": "Progressively reveals text one letter or one word at a time."
     }
   ],
   "credits": [],

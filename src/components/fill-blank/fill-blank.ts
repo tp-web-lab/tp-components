@@ -56,7 +56,7 @@ type TpFillBlankSerializableValue = Record<string, string>;
  * @eventdetail tp-fill-blank-change { value: Record<string, string>; formData: FormData }
  * @example
  * <tp-fill-blank>
- *   <p>The capital of France is <tp-textfield name="capital" placeholder="City name" aria-label="Capital of France" clearable></tp-textfield>.</p>
+ *   <p>The capital of France is <tp-textfield name="capital" placeholder="City name" aria-label="Capital of France" clearable=""></tp-textfield>.</p>
  * </tp-fill-blank>
  */
 export class TpFillBlank extends TpBase {

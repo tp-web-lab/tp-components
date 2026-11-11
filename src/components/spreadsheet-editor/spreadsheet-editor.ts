@@ -380,7 +380,7 @@ class FormulaParser {
  *
  * @example
  * <tp-spreadsheet-editor src="/docs/components/spreadsheet-editor/examples/budget.csv"></tp-spreadsheet-editor>
- * @event tp-spreadsheet-editor-clipboard-error Emitted when a clipboard command fails; command identifies copy, cut or paste.
+ *  @event tp-spreadsheet-editor-clipboard-error Emitted when a clipboard command fails; command identifies copy, cut or paste.
  * @eventdetail tp-spreadsheet-editor-clipboard-error { command: "copy" | "cut" | "paste" }
  * @event tp-spreadsheet-editor-error Emitted when fetching or parsing src fails, except for aborted requests; src is the requested URL and error is the caught failure.
  * @eventdetail tp-spreadsheet-editor-error { src: string; error: unknown }

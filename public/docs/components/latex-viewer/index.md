@@ -15,7 +15,9 @@ The custom `<tp-latex-viewer>` element presents editable LaTeX examples with ren
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-latex-viewer><script type="tp/latex">\section{Hello}A formula $x^2$.</script></tp-latex-viewer>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

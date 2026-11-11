@@ -144,7 +144,7 @@ function createBody(project: TpTypescriptProject): string {
  * @attr {string} src = "" - JSON project or typescript source file to load.
  *
  * @example
- * <tp-typescript-playground></tp-typescript-playground>
+ * <tp-typescript-playground src="/docs/components/_shared/intro-projects/typescript.json"></tp-typescript-playground>
  */
 export class TpTypescriptPlayground extends TpPlayground<TpTypescriptProject> {
 	protected override get supportsTestExecution(): boolean {

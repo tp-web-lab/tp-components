@@ -96,7 +96,7 @@ const controllers = [
  * @keyboard {Escape} Closes the dropdown and returns focus to its trigger.
  * @accessibility Uses a labelled trigger, a labelled toolbar and native checkboxes; the All controllers checkbox exposes partial selection.
  * @example
- * <tp-box data-tp-color-scope>
+ * <tp-box data-tp-color-scope="">
  *   <tp-control value="color,theme"></tp-control>
  *   <p>Change the color or theme of this box. The inline code <code>hello(world)</code> uses the selected brand color.</p>
  * </tp-box>

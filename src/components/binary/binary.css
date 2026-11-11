@@ -5,13 +5,13 @@
 
   box-sizing: border-box;
   display: flow-root;
-  font-family: system-ui, -apple-system, sans-serif;
-  max-width: 600px;
+  font-family: var(--tp-font-family);
+  max-width: 100%;
   margin: 1rem 0;
   padding: 1rem;
-  background: #f9f9f9;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
+  background: var(--tp-paper-color);
+  border-radius: var(--tp-border-radius-lg);
+  border: var(--tp-border-width) var(--tp-border-style) var(--tp-neutral-stroke-soft);
 }
 
 .tp-binary *,
@@ -47,7 +47,7 @@
   align-items: center;
 }
 
-.tp-binary button {
+.tp-binary button:not(tp-icon-button > button):not(tp-button > button) {
   appearance: none;
   height: 2.25rem;
   padding: 0 0.9rem;
@@ -61,11 +61,11 @@
   box-sizing: border-box;
 }
 
-.tp-binary button:hover:not(:disabled) {
+.tp-binary button:not(tp-icon-button > button):not(tp-button > button):hover:not(:disabled) {
   background: #0056b3;
 }
 
-.tp-binary button:disabled {
+.tp-binary button:not(tp-icon-button > button):not(tp-button > button):disabled {
   background: #ccc;
   cursor: not-allowed;
 }
@@ -106,17 +106,17 @@
 }
 
 .tp-binary-cell.initial .tp-binary-input {
-  background: #dbe7ff;
-  color: #1d4f91;
+  background: var(--tp-brand-fill-soft);
+  color: var(--tp-brand-text-on-soft);
   font-weight: 800;
 }
 
 .tp-binary-cell.current-line .tp-binary-input {
-  background: #e6f0ff;
+  background: var(--tp-brand-fill-softer);
 }
 
 .tp-binary-cell.initial.current-line .tp-binary-input {
-  background: #cfe0ff;
+  background: var(--tp-brand-fill-soft);
 }
 
 .tp-binary-cell.incorrect .tp-binary-input {
@@ -155,9 +155,9 @@
 }
 
 .tp-binary-status.success {
-  background: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
+  background: var(--tp-success-fill-soft);
+  color: var(--tp-success-text-on-soft);
+  border: 1px solid var(--tp-success-stroke-soft);
 }
 
 .tp-binary-status.error {
@@ -167,9 +167,9 @@
 }
 
 .tp-binary-status.info {
-  background: #d1ecf1;
-  color: #0c5460;
-  border: 1px solid #bee5eb;
+  background: var(--tp-neutral-fill-soft);
+  color: var(--tp-neutral-text-on-soft);
+  border: 1px solid var(--tp-neutral-stroke-soft);
 }
 
 .tp-binary-error {
@@ -182,4 +182,27 @@
 
 @media (prefers-reduced-motion: reduce) {
   tp-binary, tp-binary * { transition-duration: 0.01ms !important; transition-delay: 0ms !important; }
+}
+
+/* Fit the available width without losing square cells or grid separators. */
+tp-binary .tp-binary-grid {
+  width: 100%;
+  min-width: 0;
+  overflow: visible;
+}
+tp-binary .tp-binary-cell {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 1;
+  container-type: inline-size;
+}
+tp-binary .tp-binary-input {
+  position: absolute;
+  inset: 0;
+  min-width: 0;
+  min-height: 0;
+  font-size: min(var(--tp-game-symbol-font-size), 55cqi);
 }

@@ -15,6 +15,7 @@ The custom `<tp-typescript-notebook>` element combines written explanations and 
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-typescript-notebook>
     <script type="tp/markdown"># Interactive TypeScript
 
@@ -22,6 +23,7 @@ Select **Run all cells** to execute the program. Use the code button in a cell t
     <script type="tp/typescript">const language: string = 'TypeScript';
 console.log(`Hello from ${language}`);</script>
   </tp-typescript-notebook>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

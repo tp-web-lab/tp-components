@@ -37,6 +37,7 @@ for (const Component of [
 				"tp-lang",
 				"tp-color",
 				"tp-theme",
+				"tp-screen",
 				"tp-fullscreen",
 			]);
 			expect(names("start")).toEqual([

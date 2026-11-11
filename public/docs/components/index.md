@@ -19,7 +19,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | [Feedbacks](#feedbacks) | 4 | Status, messages, and runtime feedback. |
 | [Files](#files) | 4 | File trees, file systems, includes, and embedded documents. |
 | [Forms](#forms) | 13 | Buttons and reusable form controls. |
-| [Games](#games) | 14 | Puzzle and game activities. |
+| [Games](#games) | 16 | Puzzle and game activities. |
 | [Layouts](#layouts) | 20 | Page structure, spacing, alignment, and responsive composition. |
 | [Markup Languages](#markup-languages) | 4 | Markup-language rendering components. |
 | [Medias](#medias) | 8 | Audio and video playback, recording, image comparison, media export and speech tools. |
@@ -28,7 +28,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | [Plots](#plots) | 7 | Geometric constructions, programmatic drawing and mathematical plotting. |
 | [Programming](#programming) | 25 | Components in the Programming family. |
 | [Questions](#questions) | 17 | Quizzes and programming exercises using viewers or playgrounds. |
-| [Simulators](#simulators) | 9 | Interactive automata, circuits, optics, and query simulations. |
+| [Simulators](#simulators) | 10 | Interactive automata, circuits, optics, and query simulations. |
 | [Time](#time) | 4 | Clocks, alarms, timers, and chronometers. |
 | [Utilities](#utilities) | 16 | Reusable interaction and content helpers. |
 | **Total** | **196** | |
@@ -135,9 +135,10 @@ The components in the `tp-components` library are grouped by their primary purpo
 | Component | Description |
 | --- | --- |
 | <tp-icon name="binary" library="components" size="1.25em"></tp-icon> [`<tp-binary>`](binary/index.md) | Interactive Binary puzzle. |
+| <tp-icon name="checkers" library="components" size="1.25em"></tp-icon> [`<tp-checkers>`](checkers/index.md) | International draughts positions and interactive endgames. |
+| <tp-icon name="chess" library="components" size="1.25em"></tp-icon> [`<tp-chess>`](chess/index.md) | Chess positions and interactive endgames. |
 | <tp-icon name="crossword" library="components" size="1.25em"></tp-icon> [`<tp-crossword>`](crossword/index.md) | Interactive crossword puzzle. |
 | <tp-icon name="cryptarithm" library="components" size="1.25em"></tp-icon> [`<tp-cryptarithm>`](cryptarithm/index.md) | Interactive cryptarithm puzzle. |
-| <tp-icon name="game-life" library="components" size="1.25em"></tp-icon> [`<tp-game-life>`](game-life/index.md) | Interactive Game of Life. |
 | <tp-icon name="logigram" library="components" size="1.25em"></tp-icon> [`<tp-logigram>`](logigram/index.md) | Solve a logic-grid puzzle by using written clues to match items across categories. Each item matches exactly one item in every other category. |
 | <tp-icon name="kakuro" library="components" size="1.25em"></tp-icon> [`<tp-kakuro>`](kakuro/index.md) | Interactive cross-sum puzzle. |
 | <tp-icon name="loto" library="components" size="1.25em"></tp-icon> [`<tp-loto>`](loto/index.md) | Interactive French loto game. |
@@ -147,6 +148,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="solitaire" library="components" size="1.25em"></tp-icon> [`<tp-solitaire>`](solitaire/index.md) | Interactive Klondike solitaire. |
 | <tp-icon name="sudoku" library="components" size="1.25em"></tp-icon> [`<tp-sudoku>`](sudoku/index.md) | Interactive Sudoku puzzle. |
 | <tp-icon name="tangram" library="components" size="1.25em"></tp-icon> [`<tp-tangram>`](tangram/index.md) | The custom `<tp-tangram>` element presents seven rigid pieces and a central silhouette at exactly the same scale. Reproduce the silhouette without overlapping pieces. |
+| <tp-icon name="wari" library="components" size="1.25em"></tp-icon> [`<tp-wari>`](wari/index.md) | Oware Abapa games and interactive endgames. |
 | <tp-icon name="yakazu" library="components" size="1.25em"></tp-icon> [`<tp-yakazu>`](yakazu/index.md) | Interactive Yakazu puzzle. |
 
 ## Layouts
@@ -287,6 +289,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 
 | Component | Description |
 | --- | --- |
+| <tp-icon name="game-life" library="components" size="1.25em"></tp-icon> [`<tp-game-life>`](game-life/index.md) | Interactive Game of Life. |
 | <tp-icon name="graph-analog-circuit" library="components" size="1.25em"></tp-icon> [`<tp-graph-analog-circuit>`](graph-analog-circuit/index.md) | Interactive analog-circuit editor and transient simulator. |
 | <tp-icon name="graph-dfa" library="components" size="1.25em"></tp-icon> [`<tp-graph-dfa>`](graph-dfa/index.md) | Interactive deterministic finite automata (DFA) simulator. |
 | <tp-icon name="graph-geometric-optics" library="components" size="1.25em"></tp-icon> [`<tp-graph-geometric-optics>`](graph-geometric-optics/index.md) | Interactive paraxial geometric-optics bench. |

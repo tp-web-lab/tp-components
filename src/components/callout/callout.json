@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-callout variant=\"info\" heading=\"Information\">\n The workshop starts at 9:00.\n</tp-callout>"
+      "code": "<tp-callout variant=\"info\" heading=\"Information\">\n  The workshop starts at 9:00.\n</tp-callout>"
     }
   ],
   "attributes": [

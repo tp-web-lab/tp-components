@@ -29,7 +29,7 @@ import { TpPlaygroundQuestion } from "../playground-question/playground-question
  * @accessibility Reuses TpQuestion's disclosure, actions and feedback tabs.
  * @keyboard {Enter / Space} Expands the question or activates a focused action.
  * @example
- * <tp-javascript-viewer-question open src="/docs/components/playground-question/examples/javascript/double.js" test="/docs/components/playground-question/examples/javascript/double.test.js">
+ * <tp-javascript-viewer-question open="" src="/docs/components/playground-question/examples/javascript/double.js" test="/docs/components/playground-question/examples/javascript/double.test.js">
  *   <dl>
  *     <dt>Title</dt><dd>Double a number</dd>
  *     <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Open Code to edit, then submit to run the tests.</dd>

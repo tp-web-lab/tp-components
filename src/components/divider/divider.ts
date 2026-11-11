@@ -30,7 +30,11 @@ function isTpDividerOrientation(value: string): value is TpDividerOrientation {
  * @cssprop --tp-divider-margin-block Block margin around the divider.
  * @cssprop --tp-divider-margin-inline Inline margin around the divider.
  * @example
- * <tp-divider></tp-divider>
+ * <tp-box>
+ *       <p>Primary content group.</p>
+ *       <tp-divider></tp-divider>
+ *       <p>Secondary content group.</p>
+ *     </tp-box>
  */
 export class TpDivider extends TpBase {
 	private static readonly styleId = "tp-divider-styles";

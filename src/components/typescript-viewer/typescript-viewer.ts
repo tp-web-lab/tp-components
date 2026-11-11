@@ -24,7 +24,7 @@ import { TpTypescriptPlayground } from "../typescript-playground/typescript-play
  * @event tp-playground-repository-load Emitted after a project configured with `repository` has loaded.
  * @eventdetail tp-playground-repository-load { repository: string; project: TpProject }
  * @example
- * <tp-typescript-viewer></tp-typescript-viewer>
+ * <tp-typescript-viewer src="/docs/components/_shared/intro-projects/typescript.json"></tp-typescript-viewer>
  */
 export class TpTypescriptViewer extends TpTypescriptPlayground {
 	protected override get viewerMode(): boolean {

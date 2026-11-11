@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-lang></tp-lang>"
+      "code": "<tp-box data-intro-action=\"lang\" data-allow-script=\"\">\n  <p>Choose English or French to change the message in this isolated example.</p>\n  <tp-lang langs=\"en,fr\" repository=\"/docs/components/lang/examples\"></tp-lang>\n  <h2 data-demo-translation=\"\">Welcome to this example.</h2>\n  <script src=\"/docs/components/_shared/introduction-actions.js\"></script>\n</tp-box>"
     }
   ],
   "attributes": [

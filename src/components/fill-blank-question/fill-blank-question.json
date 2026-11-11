@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-fill-blank-question>\n  <dl>\n    <dt>Answers</dt><dd><ol><li>Paris</li></ol></dd>\n    <dt>Title</dt><dd>Geography</dd>\n    <dt>Prompt</dt><dd>Complete the sentence.</dd>\n    <dt>Form</dt><dd>The capital of France is <tp-textfield name=\"capital\" placeholder=\"Capital\" aria-placeholder=\"Capital\" aria-label=\"Capital\" clearable></tp-textfield></dd>\n    <dt>Feedback</dt><dd>Check the spelling.</dd>\n    <dt>Solution</dt><dd>Paris</dd>\n  </dl>\n</tp-fill-blank-question>"
+      "code": "<tp-fill-blank-question case-sensitive=\"\">\n  <dl>\n    <dt>Answers</dt><dd><ol><li>Paris</li><li>Rome</li></ol></dd>\n    <dt>Title</dt><dd>Geography</dd>\n    <dt>Prompt</dt><dd>Complete both sentences.</dd>\n    <dt>Form</dt>\n    <dd>\n      <p>The capital of France is <tp-blank name=\"france-capital\" placeholder=\"Capital\" aria-label=\"Capital of France\" clearable=\"\"></tp-blank>.</p>\n      <p>The capital of Italy is <tp-blank name=\"italy-capital\" placeholder=\"Capital\" aria-label=\"Capital of Italy\" clearable=\"\"></tp-blank>.</p>\n    </dd>\n    <dt>Feedback</dt>\n    <dd>\n      <p>Check the spelling of each capital.</p>\n      <ul>\n        <li>The capital of France is home to the Eiffel Tower.</li>\n        <li>The capital of Italy is home to the Colosseum.</li>\n      </ul>\n    </dd>\n    <dt>Solution</dt><dd>The capital of France is Paris. The capital of Italy is Rome.</dd>\n  </dl>\n</tp-fill-blank-question>"
     }
   ],
   "attributes": [

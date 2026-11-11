@@ -26,10 +26,11 @@ test('every public component separates reader controls from author directives', 
     const markdown = readFileSync(resolve(root, 'public/docs/components', name, 'index.md'), 'utf8');
     const usage = markdown.split('\n## Usage\n')[1]?.split('\n## Examples\n')[0];
     assert.ok(usage, name);
-    assert.deepEqual([...usage.matchAll(/^### (User interactions|Author directives)$/gm)].map(match => match[1]), ['User interactions', 'Author directives'], name);
-    const reader = usage.split('### User interactions\n')[1].split(/^### /m)[0];
+    assert.doesNotMatch(usage, /^### User interactions$/m, name);
+    assert.match(markdown, new RegExp('<tp-component-viewer tag="tp-' + name + '"'), name);
+    const reader = readFileSync(resolve(root, 'public/docs/components', name, 'interactions.md'), 'utf8');
     assert.ok(reader.trim().length > 40, name);
-    assert.doesNotMatch(reader, /^\s*```(?:html|js|ts)|\battribute\b|`<tp-/m, name);
+    assert.doesNotMatch(reader, /^\s*```(?:html|js|ts)|`<tp-/m, name);
     assert.doesNotMatch(usage, /in HTML, or use the corresponding component extension/, name);
     count += 1;
   }

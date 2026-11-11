@@ -75,8 +75,8 @@ import style from "./map.css?inline";
  * @keyboard {Enter / Space} Activates toolbar buttons; Enter opens a focused marker popup.
  * @keyboard {Escape} Closes an open popup.
  * @example
- * <tp-map lat="48.3904" lon="-4.4861" zoom="13" title="Brest, Brittany, France" marker></tp-map>
- * @cssprop [--tp-map-height=24rem] Height of the map viewport, with a minimum of 10rem.
+ * <tp-map lat="48.3904" lon="-4.4861" zoom="13" title="Brest, Brittany, France" marker=""></tp-map>
+ *  @cssprop [--tp-map-height=24rem] Height of the map viewport, with a minimum of 10rem.
  * @cssprop [--tp-map-width=100%] Preferred width of the map viewport and elevation profile, limited by the container width.
  */
 export class TpMap extends TpBase {

@@ -69,7 +69,7 @@ import type {
  * @keyboard {Tab / Shift+Tab} Moves between playback controls and the transcript field.
  * @keyboard {Enter / Space} Activates a focused button.
  * @example
- * <tp-speech-to-text lang="en-US" interim-results></tp-speech-to-text>
+ * <tp-speech-to-text lang="en-US" interim-results=""></tp-speech-to-text>
  */
 export class TpSpeechToText extends TpBase {
 	/** Attributes affecting recognition configuration, editing and the transcript. */

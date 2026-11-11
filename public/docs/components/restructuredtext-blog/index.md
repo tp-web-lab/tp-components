@@ -15,6 +15,7 @@ The custom `<tp-restructuredtext-blog>` element lists dated articles with summar
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-restructuredtext-blog page-size="2">
   <script type="tp/restructuredtext">
     Blog
@@ -81,6 +82,7 @@ The custom `<tp-restructuredtext-blog>` element lists dated articles with summar
     We share practical ideas and small discoveries. Come back for the next article.
   </script>
 </tp-restructuredtext-blog>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

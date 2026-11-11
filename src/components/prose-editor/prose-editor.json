@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-prose-editor></tp-prose-editor>"
+      "code": "<tp-prose-editor>\n  <h2>A short editable document</h2>\n  <p>Select a word and use the toolbar to change its <strong>formatting</strong>.</p>\n  <ul><li>Write a draft</li><li>Review the content</li></ul>\n</tp-prose-editor>"
     }
   ],
   "attributes": [

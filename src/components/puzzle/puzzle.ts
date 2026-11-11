@@ -11,12 +11,50 @@
  * @summary Button component that supports native button and link rendering.
  */
 /**
+ * @tp-dependency tp-chronometer
+ * @summary Chronometer component with play, pause and stop controls.
+ */
+/**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
  * @tp-dependency tp-dropdown
  * @summary Dropdown menu component.
  */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
+ */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
 // tp-docgen:dependencies:end
 
+import {
+	gameActivity,
+	mountGameHeader,
+	updateGameHeader,
+} from "../../utilities/game-header.js";
 import { TpBase } from "../base/base.js";
+import type { TpIconButton } from "../icon-button/icon-button.js";
 import "../button/button.js";
 import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
 import type { TpButton } from "../button/button.js";
@@ -104,7 +142,7 @@ export class TpPuzzle extends TpBase {
 	private menu?: TpDropdown;
 	private anchor?: HTMLSpanElement;
 	private nodes = new Map<number, SVGGElement>();
-	private buttons = new Map<string, TpButton>();
+	private buttons = new Map<string, TpButton | TpIconButton>();
 	private drag?: {
 		pointer: number;
 		start: DOMPoint;
@@ -342,7 +380,11 @@ export class TpPuzzle extends TpBase {
 			["image", "Show image", () => this.showImage(!this.showingImage)],
 		];
 		for (const [id, label, action] of controls) {
-			const button = document.createElement("tp-button");
+			const button = document.createElement(
+				["reset", "undo", "redo"].includes(id) ? "tp-icon-button" : "tp-button",
+			);
+			button.setAttribute("name", id === "reset" ? "refresh" : id);
+			button.setAttribute("label", label);
 			button.dataset.action = id;
 			button.textContent = label;
 			button.setAttribute("size", "s");
@@ -506,6 +548,31 @@ export class TpPuzzle extends TpBase {
 		this.statusNode = status;
 		root.append(toolbar, hint, board, anchor, menu, status);
 		this.replaceChildren(root);
+		const header = document.createElement("div");
+		toolbar.before(header);
+		const reset = this.buttons.get("reset") as TpIconButton,
+			undo = this.buttons.get("undo") as TpIconButton,
+			redo = this.buttons.get("redo") as TpIconButton;
+		mountGameHeader(this, {
+			name: "Puzzle",
+			icon: "puzzle",
+			target: header,
+			reset: () => {},
+			undo: () => {},
+			redo: () => {},
+			controls: { reset, undo, redo },
+			canUndo: () => this.canUndo,
+			canRedo: () => this.canRedo,
+			help: () =>
+				["image"].map((id) => ({
+					id,
+					label: this.buttons.get(id)?.textContent ?? id,
+					run: () => this.buttons.get(id)?.click(),
+					disabled: () =>
+						this.buttons.get(id)?.hasAttribute("disabled") ?? false,
+				})),
+		});
+		for (const id of ["image"]) this.buttons.get(id)?.remove();
 	}
 	/** Shuffles pieces into the tray and starts a fresh move history. */
 	public reset(): void {
@@ -621,6 +688,8 @@ export class TpPuzzle extends TpBase {
 		this.completed = solved;
 	}
 	private update(): void {
+		updateGameHeader(this);
+		gameActivity(this, this.canUndo, this.isSolved);
 		const layout = this.layout;
 		if (!layout) return;
 		for (const p of this.state) {

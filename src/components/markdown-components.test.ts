@@ -892,8 +892,9 @@ import
 		expect(
 			element.querySelector<HTMLIFrameElement>("iframe")?.srcdoc,
 		).toContain("html > body { margin: 0; padding: 0.5rem;");
-		const iframeDocument =
-			element.querySelector<HTMLIFrameElement>("iframe")?.contentDocument;
+		const frame = element.querySelector<HTMLIFrameElement>("iframe");
+		frame?.dispatchEvent(new Event("load"));
+		const iframeDocument = frame?.contentDocument;
 		expect(iframeDocument?.getElementById("tp-token-styles")).not.toBeNull();
 		expect(iframeDocument?.getElementById("tp-reset-styles")).not.toBeNull();
 		expect(
@@ -1225,7 +1226,7 @@ import
 		expect(output?.textContent).toContain("Tree content");
 	});
 
-	it("prefers a commented tp-loader import over explicit component imports in tp-html-viewer source", async () => {
+	it("preserves explicit component imports in tp-html-viewer source", async () => {
 		const element = document.createElement("tp-html-viewer");
 		element.innerHTML = `
       <template>
@@ -1256,21 +1257,10 @@ import
 		const source = editor.getValue();
 
 		expect(iframe).not.toBeNull();
-		expect(source).toContain(
-			"<!-- Added by tp-html-viewer to load custom tp-* elements in the visualisation panel. -->",
-		);
-		expect(source).toContain(
-			"</tp-callout>\n\n<!-- Added by tp-html-viewer to load custom tp-* elements in the visualisation panel. -->",
-		);
-		expect(source).toContain("import '/tp-loader.js';");
-		expect(source).not.toContain("import '/components/callout/callout.js';");
-		expect(iframe?.srcdoc).not.toContain("'/components/callout/callout.js'");
-		expect(iframe?.srcdoc).toContain(
-			"Added by tp-html-viewer to load custom tp-* elements in the visualisation panel.",
-		);
-		expect(iframe?.srcdoc).toMatch(
-			/import '(?:https?:\/\/[^']+)?\/(?:src\/tp-loader\.ts|dist\/tp-loader\.js)'/,
-		);
+		expect(source).toContain("import '/components/callout/callout.js';");
+		expect(source).not.toContain("import '/tp-loader.js';");
+		expect(iframe?.srcdoc).toContain("/src/components/callout/callout.ts");
+		expect(iframe?.srcdoc).not.toContain("Added by tp-html-viewer");
 	});
 
 	it("adds a tp-loader import for tp-* elements in tp-html-viewer iframe source", async () => {
@@ -1630,7 +1620,7 @@ import
 		const source = editor.getValue();
 
 		expect(source).toMatch(/<section(?:\s[^>]*)?>/);
-		expect(source).toContain('<tp-theme mode="dark"></tp-theme>');
+		expect(source).toMatch(/<tp-theme\b[^>]*mode="dark"[^>]*><\/tp-theme>/);
 		expect(source).not.toContain("<tp-icon-button");
 		expect(source).not.toContain("<tp-dropdown");
 		expect(source).not.toContain("tp-theme-option");

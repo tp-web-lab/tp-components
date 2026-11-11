@@ -16,7 +16,8 @@ test('every component follows the requested layout and reuses its introductory e
     assert.equal(usage.at(-1).title, 'Importing', name);
     const initial = usage.findIndex(s => s.title === 'Initial content');
     assert.ok(initial === -1 || initial === 0, name);
-    assert.deepEqual(sections(parts[3].text, 3).map(s => s.title), ['Internal', 'External'], name);
+    const dependencySections = sections(parts[3].text, 3).map(s => s.title);
+    assert.deepEqual(dependencySections, dependencySections.includes('See also') ? ['Internal', 'External', 'See also'] : ['Internal', 'External'], name);
     assert.ok(parts[3].text.includes(dependencyIntroduction), name);
     for (const lang of ['html','adoc','md','rst']) assert.ok(parts[2].text.includes(`examples/examples.${lang}`), name);
     const examples = readExamples(name, 'html');

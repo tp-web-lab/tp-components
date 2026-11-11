@@ -188,7 +188,7 @@ function rewriteHtmlAssetUrls(
  * @attr {string} src = "" - JSON project or html source file to load.
  *
  * @example
- * <tp-html-playground></tp-html-playground>
+ * <tp-html-playground src="/docs/components/_shared/intro-projects/html.json"></tp-html-playground>
  */
 export class TpHtmlPlayground extends TpPlayground<TpHtmlProject> {
 	protected override get supportsTestExecution(): boolean {

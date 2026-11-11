@@ -53,7 +53,7 @@ it.each(["md", "adoc"])("renders equivalent %s examples", async (extension) => {
 	const examples = api.extractExamples(api.readInlineSource());
 	expect(examples.map((example) => example.label)).toEqual([
 		"Basic usage",
-		"Attributes",
+		"Javascript API",
 		"French",
 		"Recording",
 	]);
@@ -67,7 +67,7 @@ it("preserves the reStructuredText examples", () => {
 	const examples = extractRstViewerExamples(body.replace(/^ {6}/gm, "").trim());
 	expect(examples.map((example) => example.label)).toEqual([
 		"Basic usage",
-		"Attributes",
+		"Javascript API",
 		"French",
 		"Recording",
 	]);

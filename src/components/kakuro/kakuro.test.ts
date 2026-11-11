@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { gameHelp } from "../../utilities/game-header-test-helpers.js";
 import "./kakuro.js";
 import { kakuroConflicts, parseKakuro, solveKakuro } from "./kakuro-model.js";
 
@@ -30,7 +31,8 @@ function mount(puzzle = small) {
 	return element;
 }
 function action(element: HTMLElement, name: string) {
-	element.querySelector<HTMLElement>(`[data-action="${name}"]`)?.click();
+	if (["check", "hint", "solve"].includes(name)) gameHelp(element, name);
+	else element.querySelector<HTMLElement>(`[data-action="${name}"]`)?.click();
 }
 function digit(input: HTMLInputElement, key: string) {
 	input.dispatchEvent(
@@ -99,11 +101,20 @@ describe("tp-kakuro", () => {
 		const element = mount();
 		const input = inputAt(element);
 		input.focus();
+		expect(element.querySelector("[data-kakuro-mode-label]")?.textContent).toBe(
+			"Game",
+		);
 		action(element, "notes");
+		expect(element.querySelector("[data-kakuro-mode-label]")?.textContent).toBe(
+			"Note",
+		);
 		digit(input, "2");
 		expect(input.value).toBe("");
 		expect(input.title).toBe("Notes: 2");
 		action(element, "notes");
+		expect(element.querySelector("[data-kakuro-mode-label]")?.textContent).toBe(
+			"Game",
+		);
 		digit(input, "1");
 		expect(input.value).toBe("1");
 		expect(input.title).toBe("");
@@ -147,6 +158,9 @@ describe("tp-kakuro", () => {
 			Array.from(element.querySelectorAll("input"), (node) => node.value),
 		).toEqual(["1", "3", "2", "1"]);
 		expect(complete).toHaveBeenCalledTimes(1);
+		expect(
+			element.querySelector(".tp-kakuro-status")?.getAttribute("data-success"),
+		).toBe("true");
 		action(element, "check");
 		expect(complete).toHaveBeenCalledTimes(1);
 		const event = change.mock.calls.at(-1)?.[0];
@@ -157,9 +171,15 @@ describe("tp-kakuro", () => {
 		expect(input.value).toBe("1");
 		action(element, "reset");
 		expect(input.value).toBe("");
+		expect(
+			element.querySelector(".tp-kakuro-status")?.getAttribute("data-success"),
+		).toBe("false");
 		action(element, "undo");
 		expect(input.value).toBe("1");
 		expect(complete).toHaveBeenCalledTimes(2);
+		expect(
+			element.querySelector(".tp-kakuro-status")?.getAttribute("data-success"),
+		).toBe("true");
 	});
 	it("keeps fixed digits immutable and skips blocked cells with arrow navigation", () => {
 		const element = mount(small.replace("0/4 . .", "0/4 1 ."));

@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-drawer></tp-drawer>"
+      "code": "<tp-box data-intro-action=\"drawer\" data-allow-script=\"\">\n  <tp-button id=\"intro-drawer-trigger\" data-demo-trigger=\"\">Open the drawer</tp-button>\n  <tp-drawer label=\"Example drawer\" backdrop=\"\" outside-click=\"\"><p>This panel contains additional information.</p><tp-button data-demo-close=\"\">Close</tp-button></tp-drawer>\n  <p data-demo-status=\"\" role=\"status\">Try the drawer using its trigger.</p>\n  <script src=\"/docs/components/_shared/introduction-actions.js\"></script>\n</tp-box>"
     }
   ],
   "attributes": [

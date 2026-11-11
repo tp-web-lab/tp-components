@@ -63,7 +63,7 @@ const colors: readonly TpPostItColor[] = TpColor.presets.map(
  *     </ul>
  *   </tp-post-it>
  * </tp-box>
- * @cssprop [--tp-post-it-padding=0.75rem] Inner spacing around the paper content; lite mode removes this padding.
+ *  @cssprop [--tp-post-it-padding=0.75rem] Inner spacing around the paper content; lite mode removes this padding.
  * @cssprop [--tp-post-it-rotation=0deg] Rotation angle of the paper around its top center, updated internally from rotation; ignored in lite mode.
  * @cssprop [--tp-post-it-width=20rem] Preferred note width, limited by available space; lite mode uses its content width.
  * @cssprop [--tp-post-it-x=8px] Horizontal viewport position of a floating note, updated internally when positioned or dragged.

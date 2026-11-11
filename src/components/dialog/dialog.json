@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-dialog></tp-dialog>"
+      "code": "<tp-box data-intro-action=\"dialog\" data-allow-script=\"\">\n  <tp-button id=\"intro-dialog-trigger\" data-demo-trigger=\"\">Open the confirmation dialog</tp-button>\n  <tp-dialog></tp-dialog>\n  <p data-demo-status=\"\" role=\"status\">Try the dialog using its trigger.</p>\n  <script src=\"/docs/components/_shared/introduction-actions.js\"></script>\n</tp-box>"
     }
   ],
   "attributes": [],

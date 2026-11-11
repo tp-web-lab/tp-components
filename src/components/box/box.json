@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-box>\n  The custom HTML element <code>&lt;tp-box&gt;</code> wraps its content in various ways.\n</tp-box>"
+      "code": "<tp-box>\n      The custom HTML element <code>&lt;tp-box&gt;</code> wraps its content in various ways.\n    </tp-box>"
     }
   ],
   "attributes": [

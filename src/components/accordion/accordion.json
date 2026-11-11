@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-accordion open-indexes=\"1\">\n  <dl>\n    <dt>What is HTML?</dt><dd>The language used to structure web pages.</dd>\n    <dt>What is CSS?</dt><dd>The language used to style web pages.</dd>\n    <dt>What is Javascript?</dt><dd>The language used to define the behaviour of web pages.</dd>\n  </dl>\n</tp-accordion>"
+      "code": "<tp-accordion open-indexes=\"1\">\n    <dl>\n      <dt>What is HTML?</dt><dd>The language used to structure web pages.</dd>\n      <dt>What is CSS?</dt><dd>The language used to style web pages.</dd>\n      <dt>What is Javascript?</dt><dd>The language used to define the behaviour of web pages.</dd>\n    </dl>\n    </tp-accordion>"
     }
   ],
   "attributes": [

@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-xy-plot label=\"Functions\">\n  <script type=\"tp/xy-plot\">\n    label = \"Functions\"\n    x-axis = [-10, 10]\n    y-axis = [-5, 5]\n    curve Sine = function(x, 2*sin(x))\n    curve Line = function(x, x/2)\n  </script>\n</tp-xy-plot>"
+      "code": "<tp-xy-plot label=\"Functions\">\n    <script type=\"tp/xy-plot\">\nlabel = \"Functions\"\nx-axis = [-10, 10]\ny-axis = [-5, 5]\ncurve Sine = function(x, 2*sin(x))\ncurve Line = function(x, x/2)\n</script>\n  </tp-xy-plot>"
     }
   ],
   "attributes": [

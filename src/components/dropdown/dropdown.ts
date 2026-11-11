@@ -94,7 +94,12 @@ function isCssLength(value: string): boolean {
  * @keyboard {Enter / Space} Activates an item or toggles its submenu.
  * @keyboard {Escape} Closes the menu.
  * @example
- * <tp-dropdown></tp-dropdown>
+ * <tp-box data-intro-action="dropdown" data-allow-script="">
+ *   <tp-button id="intro-dropdown-trigger" data-demo-trigger="">Open the menu</tp-button>
+ *   <tp-dropdown anchor="#intro-dropdown-trigger" outside-click=""><ul><li><a href="/#/components/button/index.md">Buttons</a></li><li><a href="/#/components/tree/index.md">Trees</a></li></ul></tp-dropdown>
+ *   <p data-demo-status="" role="status">Try the dropdown using its trigger.</p>
+ *   <script src="/docs/components/_shared/introduction-actions.js"></script>
+ * </tp-box>
  */
 export class TpDropdown extends TpOverlayElement {
 	protected readonly overlayName = "tp-dropdown";
@@ -393,13 +398,21 @@ export class TpDropdown extends TpOverlayElement {
 
 	private getDirectMenuItems(menu: HTMLUListElement): HTMLLIElement[] {
 		return Array.from(menu.children).filter(
-			(element): element is HTMLLIElement => element instanceof HTMLLIElement,
+			(element): element is HTMLLIElement =>
+				element instanceof HTMLLIElement &&
+				!element.matches(
+					'[role="none"], [role="separator"], [aria-hidden="true"]',
+				),
 		);
 	}
 
 	private getMenuItems(): HTMLLIElement[] {
 		return Array.from(this.querySelectorAll("li")).filter(
-			(element): element is HTMLLIElement => element instanceof HTMLLIElement,
+			(element): element is HTMLLIElement =>
+				element instanceof HTMLLIElement &&
+				!element.matches(
+					'[role="none"], [role="separator"], [aria-hidden="true"]',
+				),
 		);
 	}
 

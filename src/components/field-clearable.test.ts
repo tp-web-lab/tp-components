@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import "./textfield/textfield.js";
 import "./mathfield/mathfield.js";
 import "./datefield/datefield.js";
@@ -43,3 +43,8 @@ describe.each([
 		});
 	},
 );
+
+afterAll(async () => {
+	document.body.replaceChildren();
+	await vi.dynamicImportSettled();
+});

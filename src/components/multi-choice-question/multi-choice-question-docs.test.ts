@@ -75,9 +75,9 @@ describe("multi-choice documentation", () => {
 		expect(rst.match(/:aria-label:/g)).toHaveLength(6);
 		expect(rst).not.toContain(":logo-");
 	});
-	it("keeps Basic usage, grouped Attributes and three complementary examples", () => {
+	it("keeps Basic usage, Javascript API and three complementary examples", () => {
 		expect(source.match(/role="example"/g)).toHaveLength(5);
-		expect(source).toContain('label="Attributes"');
+		expect(source).toContain('label="Javascript API"');
 		expect(source).not.toContain('label="Attribute:');
 		expect(source).not.toContain("Additional usage");
 		expect(source).toContain("mathjax@4/tex-svg.js");

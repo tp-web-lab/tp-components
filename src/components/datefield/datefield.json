@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-datefield label=\"Date\" value=\"2026-09-03\" clearable></tp-datefield>"
+      "code": "<tp-datefield label=\"Date\" value=\"2026-09-03\" clearable=\"\"></tp-datefield>"
     }
   ],
   "attributes": [

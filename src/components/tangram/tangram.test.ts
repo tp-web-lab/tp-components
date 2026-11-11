@@ -1,5 +1,9 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+	gameHelp,
+	gameHelpItem,
+} from "../../utilities/game-header-test-helpers.js";
+import {
 	area,
 	at,
 	intersection,
@@ -216,9 +220,9 @@ describe("tangram component", () => {
 		expect(
 			local()?.querySelector('[data-action="flip"]')?.hasAttribute("disabled"),
 		).toBe(true);
-		expect(el.querySelectorAll("tp-button-group tp-icon-button")).toHaveLength(
-			8,
-		);
+		expect(
+			el.querySelectorAll(".tp-game-header-actions > tp-icon-button"),
+		).toHaveLength(4);
 	});
 
 	it("uses the playing piece colors for solutions declared in a different order", async () => {
@@ -468,8 +472,7 @@ describe("tangram assistance", () => {
 	it("reveals the selected piece and full solution without changing placements", async () => {
 		const el = await game();
 		const before = el.placements;
-		const menuItem = () =>
-			el.querySelector<HTMLElement>('[data-assist="piece"]');
+		const menuItem = () => gameHelpItem(el, "piece");
 		expect(menuItem()?.getAttribute("aria-disabled")).toBe("true");
 		el.querySelector<SVGElement>('[data-piece="square"]')?.dispatchEvent(
 			new FocusEvent("focusin", { bubbles: true }),
@@ -480,7 +483,7 @@ describe("tangram assistance", () => {
 			el.querySelectorAll('.tp-tangram-target polygon[stroke="#fff"]'),
 		).toHaveLength(1);
 		expect(el.placements).toEqual(before);
-		el.querySelector<HTMLElement>('[data-assist="solution"]')?.click();
+		gameHelp(el, "solution");
 		expect(
 			el.querySelectorAll('.tp-tangram-target polygon[stroke="#fff"]'),
 		).toHaveLength(7);
@@ -560,8 +563,8 @@ describe("show then clear assistance sequence", () => {
 			el.querySelector<SVGElement>('[data-piece="square"]')?.dispatchEvent(
 				new FocusEvent("focusin", { bubbles: true }),
 			);
-			el.querySelector<HTMLElement>(`[data-assist="${action}"]`)?.click();
-			el.querySelector<HTMLElement>('[data-assist="clear"]')?.click();
+			gameHelp(el, action);
+			gameHelp(el, "clear");
 			expect(
 				el.querySelector(".tp-tangram-playing-pieces")?.hasAttribute("display"),
 			).toBe(false);

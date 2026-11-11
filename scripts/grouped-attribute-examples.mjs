@@ -265,7 +265,6 @@ ${basic.source.match(/<tp-toolbar\b[^>]*>[\s\S]*?<\/tp-toolbar>/)?.[0] ?? basic.
 		if (
 			[
 				"src",
-				"logo",
 				"repository",
 				"data-tp-help-src",
 				"data-tp-markdown-source",

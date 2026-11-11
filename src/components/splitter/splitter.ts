@@ -89,15 +89,13 @@ let instanceCount = 0;
  * @keyboard {Arrow keys} Moves the divider by 1%, or by 10% while Shift is held.
  * @keyboard {Home / End} Moves the divider to its minimum or maximum position.
  * @example
- * ```html
  * <tp-splitter position="40%">
  *   <dl>
  *     <dt>start</dt><dd><tp-box>Drag the divider to resize this panel.</tp-box></dd>
  *     <dt>end</dt><dd><tp-box>This panel uses the remaining space.</tp-box></dd>
  *   </dl>
  * </tp-splitter>
- * ```
- * @cssprop [--tp-splitter-divider-color=var(--tp-brand-fill-mid, #2563eb)] Color of the divider grip and tint of its draggable track.
+ *  @cssprop [--tp-splitter-divider-color=var(--tp-brand-fill-mid, #2563eb)] Color of the divider grip and tint of its draggable track.
  * @cssprop [--tp-splitter-divider-size=0.75rem] Thickness of the draggable divider track along the split axis.
  * @cssprop [--tp-splitter-position=50%] Size of the first panel along the split axis, usually a percentage; synchronized with position and pointer or keyboard interaction.
  */

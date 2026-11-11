@@ -53,7 +53,7 @@ function isFullHtmlDocument(html: string): boolean {
  * @event tp-include-error Emitted when loading or injecting content fails.
  * @eventdetail tp-include-error { src: string; fetchMode: "cors" | "no-cors" | "same-origin"; allowScripts: boolean; allowStyles: boolean; sanitize: boolean; scriptsExecuted: false; error: string }
  * @example
- * <tp-include></tp-include>
+ * <tp-include src="/docs/components/include/examples/welcome.html" loading="Loading the shared notice…"></tp-include>
  */
 export class TpInclude extends TpBase {
 	private static readonly styleId = "tp-include-styles";

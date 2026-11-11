@@ -20,7 +20,13 @@ import { TpNotebook } from "../notebook/notebook.js";
  * @tagname tp-typescript-notebook
  * @summary Interactive TypeScript notebook with markup and code cells.
  * @example
- * <tp-typescript-notebook></tp-typescript-notebook>
+ * <tp-typescript-notebook>
+ *     <script type="tp/markdown"># Interactive TypeScript
+ *
+ * Select **Run all cells** to execute the program. Use the code button in a cell to edit its source.</script>
+ *     <script type="tp/typescript">const language: string = 'TypeScript';
+ * console.log(`Hello from ${language}`);</script>
+ *   </tp-typescript-notebook>
  */
 export class TpTypescriptNotebook extends TpNotebook {
 	public override connectedCallback(): void {

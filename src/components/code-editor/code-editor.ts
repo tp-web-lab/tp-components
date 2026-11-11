@@ -922,7 +922,12 @@ export const tpMarkdownSyntaxTheme = EditorView.baseTheme({
  * @cssprop --tp-code-editor-token-type Syntax color for types.
  * @cssprop --tp-code-editor-token-variable Syntax color for variables.
  * @example
- * <tp-code-editor></tp-code-editor>
+ * <tp-code-editor language="javascript" line-numbers="">
+ *   <script type="tp/javascript">
+ * const greeting = "Hello, tp-components!";
+ * console.log(greeting);
+ *   </script>
+ * </tp-code-editor>
  */
 export class TpCodeEditor extends TpBase {
 	/**

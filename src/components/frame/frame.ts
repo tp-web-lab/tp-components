@@ -70,8 +70,10 @@ function parseAspectRatio(value: string): FrameAspectRatio | null {
  * while cropping when necessary. Unlike tp-iframe, this component does not
  * create a separate document or browsing context.
  * @example
- * <tp-frame></tp-frame>
- * @cssprop [--tp-frame-denominator=9] Positive unitless height term of the width-to-height aspect ratio; updated by the ratio attribute.
+ * <tp-frame aspect-ratio="16:9" style="max-width: 24rem;">
+ *   <img src="/docs/medias/logos/logo-tp.svg" alt="tp-components logo">
+ * </tp-frame>
+ *  @cssprop [--tp-frame-denominator=9] Positive unitless height term of the width-to-height aspect ratio; updated by the ratio attribute.
  * @cssprop [--tp-frame-numerator=16] Positive unitless width term of the width-to-height aspect ratio; updated by the ratio attribute.
  */
 export class TpFrame extends TpBase {

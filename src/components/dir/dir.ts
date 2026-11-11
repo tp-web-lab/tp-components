@@ -196,9 +196,10 @@ function syncDirTargets(target: HTMLElement, source: TpDir): void {
  * @event tp-dir-change Emitted when the reading direction applied to a target changes.
  * @eventdetail tp-dir-change { mode: "ltr" | "rtl" | "auto"; dir: "ltr" | "rtl"; anchor: string; target: HTMLElement }
  * @example
- * <p>The reading direction of this section can be changed.</p>
- *     <p>اس حصے کی پڑھنے کی سمت تبدیل کی جا سکتی ہے۔</p>
- *     <tp-dir></tp-dir>
+ * <tp-box>
+ *   <tp-dir></tp-dir>
+ *   <p>Use the direction button to switch this paragraph between left-to-right and right-to-left layout.</p>
+ * </tp-box>
  */
 export class TpDir extends TpBase {
 	private static readonly styleId = "tp-dir-styles";

@@ -15,6 +15,7 @@ The custom `<tp-xy-plot>` element plots functions, points and curves on labelled
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-xy-plot label="Functions">
     <script type="tp/xy-plot">
 label = "Functions"
@@ -24,6 +25,7 @@ curve Sine = function(x, 2*sin(x))
 curve Line = function(x, x/2)
 </script>
   </tp-xy-plot>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

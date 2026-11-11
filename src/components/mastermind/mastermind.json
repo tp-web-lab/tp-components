@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-mastermind></tp-mastermind>"
+      "code": "<tp-mastermind solution=\"red blue green yellow\" attempts=\"8\"></tp-mastermind>"
     }
   ],
   "attributes": [
@@ -51,19 +51,43 @@
       "summary": "Chronometer component with play, pause and stop controls."
     },
     {
+      "name": "tp-color",
+      "summary": "Brand color preset controller scoped to the containing element."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-drawer",
+      "summary": "Drawer overlay component."
+    },
+    {
       "name": "tp-dropdown",
       "summary": "Dropdown menu component."
     },
     {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
       "name": "tp-icon-button",
       "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
     }
   ],
   "credits": [],
   "userHelp": {
     "displayName": "Mastermind",
     "introduction": "The custom `<tp-mastermind>` element displays an interactive Mastermind game.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Choose colors for an attempt and check it. |\n| Using the component | Exact matches and misplaced colors help you refine the next attempt. |\n| Using the component | Use Undo or Redo to revisit changes, assistance for help, and the reset button to start with another code. |\n| Color | Selects the color used for the next peg. |\n| Play | Submits the current guess. |\n| :tp-icon:{name=\"undo\" size=\"1.25em\"} :tp-icon:{name=\"redo\" size=\"1.25em\"} Undo / Redo | Navigates changes made to the current game. |\n| :tp-icon:{name=\"refresh\" size=\"1.25em\"} Reset | Starts a game with a newly generated secret code. |\n| Reset the game | Restarts while retaining the current secret code. |\n| Show next peg | Reveals the next peg of the secret code. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "The header shows the game icon and name on the left. Rounded controls appear on the right, in this order: Reset, Undo, Redo, Help, chronometer, Color, Theme and Fullscreen. Additional game commands remain below the header.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| :tp-icon:{name=\"refresh\"} Reset | Restarts with the same secret code and resets the timer. Use Help → Start with another code to generate a new code. |\n| :tp-icon:{name=\"undo\"} Undo | Takes back the last move. |\n| :tp-icon:{name=\"redo\"} Redo | Replays the next undone move. Disabled when there is no recorded continuation. |\n| :tp-icon:{name=\"help\"} Help | Opens the dropdown of assistance actions specific to this game. |\n| Help → Show next peg | Reveals the next empty peg in the current attempt. |\n| Help → Show the solution | Fills the current attempt with the secret code. |\n| Help → Start with another code | Generates another secret code of the same length and resets the game. |\n| Help → Rules of the game | Opens a drawer with the rules of this game. |\n| Chronometer | Displays elapsed play time; starts with play and pauses on completion. Reset clears it. |\n| :tp-icon:{name=\"palette-swatch\"} Color | Changes the brand color of this game only. |\n| :tp-icon:{name=\"sun\"} :tp-icon:{name=\"moon\"} Theme | Changes the light, dark or automatic theme of this game only. |\n| :tp-icon:{name=\"fullscreen\"} :tp-icon:{name=\"fullscreen-exit\"} Fullscreen | Enters or leaves fullscreen for this game. |\n| Click a peg in the current attempt | Sets the peg to the selected palette color. |\n| Palette color | Selects the color used for the next peg. |\n| Play | Submits the current guess. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

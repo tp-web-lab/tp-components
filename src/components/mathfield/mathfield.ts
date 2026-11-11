@@ -78,8 +78,8 @@ export type TpMathfieldLabelPosition = "top" | "bottom" | "start" | "end";
  * @event tp-clear Emitted after the embedded button clears the expression.
  *
  * @example
- * <tp-mathfield label="Formula" value="E = mc^2" clearable></tp-mathfield>
- * @cssprop [--tp-mathfield-inline-size=28rem] Preferred width of the math editor, limited by available space; also caps the multiline component width.
+ * <tp-mathfield label="Formula" value="E = mc^2" clearable=""></tp-mathfield>
+ *  @cssprop [--tp-mathfield-inline-size=28rem] Preferred width of the math editor, limited by available space; also caps the multiline component width.
  * @cssprop [--tp-mathfield-preview-background=Canvas] Background color of the rendered formula preview.
  * @cssprop [--tp-mathfield-preview-border-color=var(--tp-neutral-stroke-soft)] Border color of the rendered formula preview.
  * @cssprop [--tp-mathfield-preview-padding=0.75rem] Inner spacing around the rendered formula preview.

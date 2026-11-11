@@ -15,6 +15,7 @@ The custom `<tp-turtle>` element provides a turtle DSL rendering component.
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-turtle width="420" height="220" label="A square">
     <script type="tp/turtle">
       turtle x=0 y=0 heading=0 speed=6
@@ -27,6 +28,7 @@ The custom `<tp-turtle>` element provides a turtle DSL rendering component.
       forward 80
     </script>
   </tp-turtle>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

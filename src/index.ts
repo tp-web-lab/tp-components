@@ -487,6 +487,22 @@ export { TpAudioPlaylist } from "./components/audio-playlist/audio-playlist.js";
 export { TpBiblio } from "./components/biblio/biblio.js";
 export { TpCalculator } from "./components/calculator/calculator.js";
 export { TpCarousel } from "./components/carousel/carousel.js";
+export {
+	type CheckersMove,
+	type CheckersPiece,
+	type CheckersPlayMode,
+	type CheckersPosition,
+	type CheckersSide,
+	TpCheckers,
+} from "./components/checkers/checkers.js";
+export {
+	type ChessPiece,
+	type ChessPlayMode,
+	type ChessPosition,
+	type ChessPromotion,
+	type ChessSide,
+	TpChess,
+} from "./components/chess/chess.js";
 export * from "./components/component-viewer/component-viewer.js";
 export { TpControl } from "./components/control/control.js";
 export { TpGlossary } from "./components/glossary/glossary.js";
@@ -549,4 +565,11 @@ export {
 	type TpVideoPlayerErrorDetail,
 	type TpVideoPlayerEventDetail,
 } from "./components/video-player/video-player.js";
+export {
+	TpWari,
+	type WariMove,
+	type WariPlayMode,
+	type WariPosition,
+	type WariSide,
+} from "./components/wari/wari.js";
 export { TpWordCloud } from "./components/word-cloud/word-cloud.js";

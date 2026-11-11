@@ -32,7 +32,6 @@ function isPositiveInteger(value: string): boolean {
  *
  *
  * @example
- * ```html
  * <tp-switcher threshold="35rem" gap="1rem">
  *   <tp-box>1. Plan the content.</tp-box>
  *   <tp-box>2. Write a draft.</tp-box>
@@ -40,8 +39,7 @@ function isPositiveInteger(value: string): boolean {
  *   <tp-box>4. Add illustrations.</tp-box>
  *   <tp-box>5. Publish the result.</tp-box>
  * </tp-switcher>
- * ```
- * @cssprop [--tp-switcher-gap=1rem] Default gap between switcher items.
+ *  @cssprop [--tp-switcher-gap=1rem] Default gap between switcher items.
  * @cssprop [--tp-switcher-threshold=30rem] Container width below which items switch from a shared row to separate rows.
  */
 export class TpSwitcher extends TpBase {

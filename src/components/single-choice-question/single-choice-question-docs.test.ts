@@ -60,10 +60,10 @@ afterEach(() => {
 });
 
 describe("single-choice documentation examples", () => {
-	it("keeps Basic usage, grouped Attributes and two complementary examples", () => {
+	it("keeps Basic usage, Javascript API and two complementary examples", () => {
 		expect(source).not.toContain('label="Additional usage"');
 		expect(source.match(/role="example"/g)).toHaveLength(4);
-		expect(source).toContain('label="Attributes"');
+		expect(source).toContain('label="Javascript API"');
 		expect(source).not.toContain('label="Attribute:');
 		expect(source).toContain("mathjax@4/tex-svg.js");
 		expect(source).toContain('customElements.whenDefined("tp-radio-list")');

@@ -188,6 +188,24 @@ it("keeps instances independent and reconnects without reading its generated UI 
 	);
 });
 
+it("preserves edits made before the preview finishes loading", async () => {
+	mockFetch();
+	const viewer = await mount();
+	const original = viewer.querySelector("iframe");
+	viewer
+		.querySelector<HTMLInputElement>('[data-component-setting="variant"] input')
+		?.click();
+	expect(viewer.querySelector("iframe")).toBe(original);
+	const target = preview(viewer);
+	expect(target.getAttribute("variant")).toBe("success");
+	expect(
+		(
+			viewer.querySelector(
+				'[data-component-setting="variant"]',
+			) as HTMLElement & { value: string }
+		).value,
+	).toBe("1");
+});
 it("reads values after native checkbox and radio change handlers have run", async () => {
 	mockFetch();
 	const viewer = await mount();
@@ -505,7 +523,7 @@ it("shows readonly author HTML and keeps it synchronized with controls, reflecte
 	const viewer = await mount(
 		'<tp-component-viewer><script type="tp/html"><tp-button variant="danger">Keep this label</tp-button></script></tp-component-viewer>',
 	);
-	const target = preview(viewer);
+	let target = preview(viewer);
 	const toggle = viewer.querySelector<HTMLElement>(
 		"[data-component-source-toggle]",
 	);
@@ -557,6 +575,7 @@ it("shows readonly author HTML and keeps it synchronized with controls, reflecte
 	expect(editor?.value).toMatch(/<tp-button\b[^>]*\sdisabled(?:\s|>)/);
 	expect(editor?.value).not.toContain('disabled=""');
 	for (const item of editors) expect(item.value).toContain("disabled");
+	target = preview(viewer);
 	target.setAttribute("href", "next.html?a=1&b=2");
 	await vi.waitFor(() =>
 		expect(editor?.value).toContain('href="next.html?a=1&amp;b=2"'),
@@ -772,4 +791,59 @@ it("offers inherited multi-page attributes in slide demos", async () => {
 		viewer.querySelector("[data-component-controls]")?.textContent,
 	).toContain("timing");
 	expect(viewer.querySelector("iframe")?.srcdoc).toContain('label="My slides"');
+});
+
+it("shows game button names and every state icon without listing mouse gestures", async () => {
+	mockFetch().mockImplementation(
+		async () =>
+			new Response(
+				JSON.stringify({
+					...api,
+					tagname: "tp-binary",
+					userHelp: {
+						interactions:
+							'#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| :tp-icon:{name="refresh"} Reset | Restores the puzzle. |\n| :tp-icon:{name="sun"} :tp-icon:{name="moon"} Theme | Changes the theme. |\n| :tp-icon:{name="binary" library="components"} Game | Shows the game. |\n| Help → Rules of the game | Opens the rules. |\n| Click a cell | Selects a cell. |\n\n#### Keyboard interactions',
+					},
+					examples: [{ code: "<tp-binary></tp-binary>" }],
+				}),
+			),
+	);
+	const viewer = await mount(
+		'<tp-component-viewer tag="tp-binary"></tp-component-viewer>',
+		"tp-binary",
+	);
+	await vi.waitFor(() =>
+		expect(
+			viewer.querySelector("[data-component-buttons]")?.textContent,
+		).toContain("Reset"),
+	);
+	const legend = viewer.querySelector("[data-component-buttons]");
+	const cells = Array.from(
+		legend?.querySelectorAll("tbody tr td:first-child") ?? [],
+	);
+	expect(cells.map((cell) => cell.textContent?.trim())).toEqual([
+		"Reset",
+		"Theme",
+		"Game",
+		"Help → Rules of the game",
+	]);
+	expect(
+		Array.from(cells[1]?.querySelectorAll("tp-icon") ?? [], (icon) =>
+			icon.getAttribute("name"),
+		),
+	).toEqual(["sun", "moon"]);
+	expect(cells[1]?.querySelector("tp-divider")).not.toBeNull();
+	expect(cells[2]?.querySelector("tp-icon")?.getAttribute("library")).toBe(
+		"components",
+	);
+	expect(legend?.textContent).not.toContain("Click a cell");
+	await vi.waitFor(() =>
+		expect(
+			viewer.querySelector("[data-component-mouse]")?.textContent,
+		).toContain("Click a cell"),
+	);
+	const mouse = viewer.querySelector("[data-component-mouse]");
+	expect(mouse?.textContent).not.toContain("Reset");
+	expect(mouse?.textContent).not.toContain("Rules of the game");
+	expect(mouse?.querySelectorAll("tbody tr")).toHaveLength(1);
 });

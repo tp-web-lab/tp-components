@@ -1,22 +1,29 @@
 ### User interactions
 
+The header shows the game icon and name on the left. Rounded controls appear on the right, in this order: Reset, Undo, Redo, Help, chronometer, Color, Theme and Fullscreen. Additional game commands remain below the header.
+
 #### Mouse interactions
 
 | Control or gesture | Result |
 | --- | --- |
+| :tp-icon:{name="refresh"} Reset | Restores the loaded position or puzzle and resets the timer. |
+| :tp-icon:{name="undo"} Undo | Takes back the last move. |
+| :tp-icon:{name="redo"} Redo | Replays the next undone move. Disabled when there is no recorded continuation. |
+| :tp-icon:{name="help"} Help | Opens the dropdown of assistance actions specific to this game. |
+| Help → Show all incorrect boxes | Highlights incorrect marks. |
+| Help → Clear the incorrect boxes | Clears incorrect marks. |
+| Help → Show the box | Reveals the selected match. |
+| Help → Show the category pair | Reveals the selected pair of categories. |
+| Help → Show the solution | Reveals all matches. |
+| Help → Rules of the game | Opens a drawer with the rules of this game. |
+| Chronometer | Displays elapsed play time; starts with play and pauses on completion. Reset clears it. |
+| :tp-icon:{name="palette-swatch"} Color | Changes the brand color of this game only. |
+| :tp-icon:{name="sun"} :tp-icon:{name="moon"} Theme | Changes the light, dark or automatic theme of this game only. |
+| :tp-icon:{name="fullscreen"} :tp-icon:{name="fullscreen-exit"} Fullscreen | Enters or leaves fullscreen for this game. |
 | Click a cell | Cycle unknown → no → yes → unknown. |
 | Right-click a cell | Mark yes. |
 | Ctrl-click / Command-click a cell | Clear its mark. |
 | Clue checkbox | Mark a clue as reviewed. |
-| Undo / Redo | Reverse or reapply a grid move. |
-| Assist… → Reset the game | Clear the grid; Undo can restore it. Clue reminders are retained. |
-| Assist… → Show all incorrect boxes | Show the score, highlight incorrect marks and announce a solved puzzle. |
-| Assist… → Clear the incorrect boxes | Clear incorrect marks while preserving correct ones. |
-| Assist… → Show the box | Reveal the last selected or focused cell. Select a cell first to enable this action. |
-| Assist… → Show the category pair | Reveal all cells in the selected cell’s category-pair block. |
-| Assist… → Show the solution | Reveal every pair and display the solved status. |
-
-Each assistance action that changes the grid can be undone in one step. Click a grid box or focus it with Tab to enable Show the box and Show the category pair. The selected box has a persistent outline, and the message below the toolbar identifies its two items. The selection is retained when you move to the menu. Revealing a box changes only that box, even when automatic exclusions are enabled.
 
 #### Keyboard interactions
 
@@ -24,7 +31,7 @@ Each assistance action that changes the grid can be undone in one step. Click a 
 | --- | --- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move among clues, toolbar controls and cells. |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused cell or button; <kbd>Space</kbd> toggles a clue checkbox. |
-| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Assist… / <kbd>Enter</kbd> | Choose and apply an assistance action using the native menu. |
+| <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in Help / <kbd>Enter</kbd> | Choose and apply an assistance action using the help dropdown. |
 | <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> in a matrix | Move to a neighbouring cell in the same matrix. |
 | <kbd>Delete</kbd> / <kbd>Backspace</kbd> in a cell | Clear its mark. |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |

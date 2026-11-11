@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-dropdown></tp-dropdown>"
+      "code": "<tp-box data-intro-action=\"dropdown\" data-allow-script=\"\">\n  <tp-button id=\"intro-dropdown-trigger\" data-demo-trigger=\"\">Open the menu</tp-button>\n  <tp-dropdown anchor=\"#intro-dropdown-trigger\" outside-click=\"\"><ul><li><a href=\"/#/components/button/index.md\">Buttons</a></li><li><a href=\"/#/components/tree/index.md\">Trees</a></li></ul></tp-dropdown>\n  <p data-demo-status=\"\" role=\"status\">Try the dropdown using its trigger.</p>\n  <script src=\"/docs/components/_shared/introduction-actions.js\"></script>\n</tp-box>"
     }
   ],
   "attributes": [

@@ -51,6 +51,7 @@ function escapeHtml(value: string): string {
  *   <script type="tp/diagram">
  *     flowchart LR
  *       Browser --> Server
+ *       Server --> Database
  *   </script>
  * </tp-diagram>
  */

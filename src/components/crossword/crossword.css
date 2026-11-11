@@ -5,13 +5,13 @@
 
   box-sizing: border-box;
   display: flow-root;
-  font-family: system-ui, -apple-system, sans-serif;
-  max-width: 980px;
+  font-family: var(--tp-font-family);
+  max-width: 100%;
   margin: 1rem 0;
   padding: 1rem;
-  background: #f9f9fb;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
+  background: var(--tp-paper-color);
+  border-radius: var(--tp-border-radius-lg);
+  border: var(--tp-border-width) var(--tp-border-style) var(--tp-neutral-stroke-soft);
 }
 
 .tp-crossword *,
@@ -51,7 +51,7 @@
   flex: 0 0 auto;
 }
 
-.tp-crossword button {
+.tp-crossword button:not(tp-icon-button > button):not(tp-button > button) {
   appearance: none;
   height: 2.25rem;
   padding: 0 0.9rem;
@@ -63,7 +63,7 @@
   box-sizing: border-box;
 }
 
-.tp-crossword button:disabled {
+.tp-crossword button:not(tp-icon-button > button):not(tp-button > button):disabled {
   background: #c3c7cf;
   cursor: not-allowed;
 }
@@ -150,14 +150,14 @@
 }
 
 .tp-crossword-cell.initial .tp-crossword-input {
-  background: #dbe7ff;
-  color: #1d4f91;
+  background: var(--tp-brand-fill-soft);
+  color: var(--tp-brand-text-on-soft);
   font-weight: 800;
 }
 
 .tp-crossword-cell.initial.current-word-primary .tp-crossword-input,
 .tp-crossword-cell.initial.current-word-secondary .tp-crossword-input {
-  background: #cfe0ff;
+  background: var(--tp-brand-fill-soft);
 }
 
 .tp-crossword-cell.incorrect .tp-crossword-input {
@@ -166,11 +166,11 @@
 }
 
 .tp-crossword-cell.current-word-primary .tp-crossword-input {
-  background: #dbeafe;
+  background: var(--tp-brand-fill-soft);
 }
 
 .tp-crossword-cell.current-word-secondary .tp-crossword-input {
-  background: #eef4ff;
+  background: var(--tp-brand-fill-softer);
 }
 
 .tp-crossword-cell.current-cell {
@@ -212,11 +212,11 @@
 }
 
 .tp-crossword-current-clue.primary {
-  background: #dbeafe;
+  background: var(--tp-brand-fill-soft);
 }
 
 .tp-crossword-current-clue.secondary {
-  background: #eef4ff;
+  background: var(--tp-brand-fill-softer);
 }
 
 .tp-crossword-clues h4 {
@@ -251,17 +251,17 @@
 
 .tp-crossword-clue-label.active-primary,
 .tp-crossword-clue-part.active-primary {
-  background: #dbeafe;
+  background: var(--tp-brand-fill-soft);
 }
 
 .tp-crossword-clue-label.active-secondary,
 .tp-crossword-clue-part.active-secondary {
-  background: #eef4ff;
+  background: var(--tp-brand-fill-softer);
 }
 
 .tp-crossword-clue-item[data-selected='true'],
 .tp-crossword-clue-item[data-active='true'] {
-  background: #eef4ff;
+  background: var(--tp-brand-fill-softer);
 }
 
 .tp-crossword-status {
@@ -272,13 +272,13 @@
 }
 
 .tp-crossword-status.success {
-  background: #d4edda;
-  color: #155724;
+  background: var(--tp-success-fill-soft);
+  color: var(--tp-success-text-on-soft);
 }
 
 .tp-crossword-status.info {
-  background: #dbeafe;
-  color: #1e3a8a;
+  background: var(--tp-neutral-fill-soft);
+  color: var(--tp-neutral-text-on-soft);
 }
 
 .tp-crossword-error {

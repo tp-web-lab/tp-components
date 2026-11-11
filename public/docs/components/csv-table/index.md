@@ -15,6 +15,7 @@ The custom `<tp-csv-table>` element creates an HTML table from CSV text or a CSV
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-csv-table heading="">
   <script type="tp/csv-table">
     Country,Capital
@@ -23,6 +24,7 @@ The custom `<tp-csv-table>` element creates an HTML table from CSV text or a CSV
     Lithuania,Vilnius
   </script>
 </tp-csv-table>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

@@ -1,0 +1,49 @@
+[tp-asciidoc-viewer%allow-script,label="tp-wari"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-wari%interactive]
+====
+====
+======
+
+.Javascript API
+======
+[script,type="module"]
+====
+import "/components/wari/wari.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-wari");
+element1.setAttribute("interactive", "");
+example.append(element1);
+
+document.body.append(example);
+====
+======
+
+.Capturing seeds
+======
+[tp-wari%interactive,position="S:4,0,0,0,3,0,1,2,1,0,0,0:18,19"]
+====
+====
+======
+
+.Feeding the opponent
+======
+[tp-wari%interactive,position="S:1,0,0,0,0,1,0,0,0,0,0,0:23,23"]
+====
+====
+======
+
+.Void grand slam
+======
+[tp-wari%interactive,position="S:1,0,0,0,0,1,1,0,0,0,0,0:22,23"]
+====
+====
+======
+----
+========

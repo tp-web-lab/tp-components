@@ -116,7 +116,10 @@ export {
  * @attr {string} src = "" - JSON project or sql source file to load.
  *
  * @example
- * <tp-sql-playground></tp-sql-playground>
+ * <tp-box>
+ *   <p>The query lists three European capitals. Expand the query in the result panel to see its rows.</p>
+ *   <tp-sql-playground src="/docs/components/_shared/intro-projects/sql.json"></tp-sql-playground>
+ * </tp-box>
  */
 export class TpSqlPlayground extends TpPlayground<TpSqlProject> {
 	protected override createEmptyProject(): TpSqlProject {

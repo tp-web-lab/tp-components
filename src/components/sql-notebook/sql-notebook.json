@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-sql-notebook></tp-sql-notebook>"
+      "code": "<tp-sql-notebook>\n    <script type=\"tp/markdown\"># Interactive SQL\n\nSelect **Run all cells** to execute the program. Use the code button in a cell to edit its source.</script>\n    <script type=\"tp/sql\" filename=\"tables.sql\">CREATE TABLE language (name TEXT);\nINSERT INTO language VALUES ('SQL');</script>\n    <script type=\"tp/sql\" filename=\"query.sql\">SELECT * FROM language;</script>\n  </tp-sql-notebook>"
     }
   ],
   "attributes": [],

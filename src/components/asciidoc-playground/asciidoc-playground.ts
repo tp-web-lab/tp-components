@@ -124,7 +124,7 @@ const KNOWN_EXTENSIONS: TpAsciidocExtension[] = [
  * @attr {string} src = "" - JSON project or asciidoc source file to load.
  *
  * @example
- * <tp-asciidoc-playground></tp-asciidoc-playground>
+ * <tp-asciidoc-playground src="/docs/components/_shared/intro-projects/asciidoc.json"></tp-asciidoc-playground>
  */
 export class TpAsciidocPlayground extends TpPlayground<TpAsciidocProject> {
 	protected override get exampleCategory(): string {

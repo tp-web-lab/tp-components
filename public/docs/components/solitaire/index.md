@@ -40,6 +40,10 @@ Choose `deck-size="32"` or `deck-size="52"`. The default is 52. Choose the bundl
 <tp-solitaire deck-size="52" back="blue"></tp-solitaire>
 ```
 
+### History
+
+Undo and Redo restore complete card positions, including stock recycling, face-up cards and foundations. Reset deals a new game and clears the recorded continuation.
+
 ### Importing
 
 ::: tp-tabs
@@ -115,18 +119,53 @@ All tp-components and external tools used by this component are loaded automatic
 @summary Chronometer component with play, pause and stop controls.
 -->
 <!--
+@tp-dependency tp-color
+@summary Brand color preset controller scoped to the containing element.
+-->
+<!--
+@tp-dependency tp-divider
+@summary Visual separator for menus, dropdowns, toolbars, and layouts.
+-->
+<!--
 @tp-dependency tp-dragdrop
 @summary Generic drag-and-drop controller for content.
+-->
+<!--
+@tp-dependency tp-drawer
+@summary Drawer overlay component.
+-->
+<!--
+@tp-dependency tp-dropdown
+@summary Dropdown menu component.
+-->
+<!--
+@tp-dependency tp-fullscreen
+@summary Fullscreen controller button.
+-->
+<!--
+@tp-dependency tp-icon
+@summary SVG icon component with inline, URL, and registry sources.
 -->
 <!--
 @tp-dependency tp-icon-button
 @summary Accessible icon button component.
 -->
+<!--
+@tp-dependency tp-theme
+@summary Parent-scoped light/dark/auto theme controller with embedded UI.
+-->
 
 - [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 - [`<tp-chronometer>`](#/components/chronometer/index.md) : Chronometer component with play, pause and stop controls.
+- [`<tp-color>`](#/components/color/index.md) : Brand color preset controller scoped to the containing element.
+- [`<tp-divider>`](#/components/divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
 - [`<tp-dragdrop>`](#/components/dragdrop/index.md) : Generic drag-and-drop controller for content.
+- [`<tp-drawer>`](#/components/drawer/index.md) : Drawer overlay component.
+- [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
+- [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-theme>`](#/components/theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
 
 ### External
 

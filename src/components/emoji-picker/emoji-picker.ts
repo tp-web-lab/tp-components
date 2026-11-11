@@ -138,7 +138,7 @@ export function parseEmojiTestData(source: string): TpEmojiPickerItem[] {
  *
  * @example
  * <tp-emoji-picker></tp-emoji-picker>
- * @event tp-emoji-picker-select Emitted when a emoji is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success. value is null when the selected copy format has no representation.
+ *  @event tp-emoji-picker-select Emitted when a emoji is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success. value is null when the selected copy format has no representation.
  * @eventdetail tp-emoji-picker-select { emoji: string; name: string; group: string; subgroup: string; version: string; codepoints: string[]; copy: TpEmojiPickerCopyFormat; value: string | null }
  * @event tp-emoji-picker-copy-error Emitted when copying the selected emoji fails. The detail contains the requested clipboard text, selection metadata and the caught error.
  * @eventdetail tp-emoji-picker-copy-error { emoji: string; name: string; group: string; subgroup: string; version: string; codepoints: string[]; copy: TpEmojiPickerCopyFormat; value: string; error: unknown }

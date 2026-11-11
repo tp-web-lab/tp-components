@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-center intrinsic>\n<tp-box>Centered content</tp-box>\n</tp-center>"
+      "code": "<tp-center intrinsic=\"\">\n      <tp-box>Centered content</tp-box>\n    </tp-center>"
     }
   ],
   "attributes": [

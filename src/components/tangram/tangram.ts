@@ -9,15 +9,48 @@
  * @summary Button group component for organizing multiple buttons.
  */
 /**
+ * @tp-dependency tp-chronometer
+ * @summary Chronometer component with play, pause and stop controls.
+ */
+/**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
  * @tp-dependency tp-dropdown
  * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
  */
 /**
  * @tp-dependency tp-icon-button
  * @summary Accessible icon button component.
  */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
 // tp-docgen:dependencies:end
 
+import {
+	gameActivity,
+	mountGameHeader,
+	resetGameClock,
+} from "../../utilities/game-header.js";
 import { TpBase } from "../base/base.js";
 import "../icon-button/icon-button.js";
 import "../button-group/button-group.js";
@@ -68,7 +101,7 @@ const copy = (p: Placement[]): Placement[] => p.map((v) => ({ ...v }));
  * @keyboard Ctrl+Z / Ctrl+Shift+Z Undo / redo (Command also supported).
  * @example
  * <tp-tangram></tp-tangram>
- * @event tp-tangram-change Emitted after an accepted piece edit; placements contains each piece ID, x/y position, angle and flip state, and solved reports whether the target is matched.
+ *  @event tp-tangram-change Emitted after an accepted piece edit; placements contains each piece ID, x/y position, angle and flip state, and solved reports whether the target is matched.
  * @eventdetail tp-tangram-change { placements: Placement[]; solved: boolean }
  * @accessibility Names the puzzle board and exposes playing pieces as labelled focusable SVG buttons; keyboard commands support moving, rotating, flipping, undoing and redoing placements.
  * @accessibility Groups and labels toolbar and selected-piece controls, announces game status politely, and removes playing pieces from keyboard navigation during solution preview.
@@ -238,6 +271,7 @@ export class TpTangram extends TpBase {
 	}
 	/** Restores the seven pieces around the target silhouette. */
 	public reset(): void {
+		resetGameClock(this);
 		this.cancel();
 		const r = this.extent - 2;
 		this.state = PIECES.map((p, i) => ({
@@ -540,6 +574,53 @@ export class TpTangram extends TpBase {
 				?.setAttribute("aria-expanded", String(menu.open));
 		});
 		this.updateButtons();
+		const target = this.ui.querySelector<HTMLElement>(".tp-tangram-heading");
+		if (target) {
+			const tools = document.createElement("div");
+			tools.className = "tp-game-piece-tools";
+			for (const id of ["left", "right", "flip"]) {
+				const b = target.querySelector<HTMLElement>(`[data-action="${id}"]`);
+				if (b) tools.append(b);
+			}
+			target.after(tools);
+			menu?.remove();
+			mountGameHeader(this, {
+				name: "Tangram",
+				icon: "tangram",
+				target,
+				reset: () => this.reset(),
+				undo: () => this.undo(),
+				redo: () => this.redo(),
+				canUndo: () => this.canUndo,
+				canRedo: () => this.canRedo,
+				help: () => [
+					{
+						id: "incorrect",
+						label: this.showingIncorrect
+							? "Hide incorrect pieces"
+							: "Show all incorrect pieces",
+						run: () => this.showIncorrectPieces(!this.showingIncorrect),
+					},
+					{
+						id: "clear",
+						label: "Clear the incorrect pieces",
+						run: () => this.clearIncorrectPieces(),
+					},
+					{
+						id: "piece",
+						label: "Show the piece",
+						run: () => this.showPiece(),
+						disabled: () => this.showing || !this.hasSelection,
+					},
+					{
+						id: "solution",
+						label: this.showing ? "Hide the solution" : "Show the solution",
+						run: () => this.showSolution(!this.showing),
+					},
+				],
+			});
+			gameActivity(this, this.canUndo, this.isSolved);
+		}
 		if (focusId)
 			this.ui
 				.querySelector<SVGElement>(`[data-piece="${focusId}"]`)

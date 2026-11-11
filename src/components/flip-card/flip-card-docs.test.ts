@@ -1,56 +1,53 @@
 import { readFileSync } from "node:fs";
 import { afterEach, expect, it } from "vitest";
+import { htmlExample } from "../../test-helpers/documentation.js";
 import { required } from "../../test-helpers/required.js";
 import type { TpFlipCard } from "./flip-card.js";
 import "./flip-card.js";
 
-/** Extracts a named HTML documentation example without executing scripts. */
-function example(label: string): HTMLElement {
-	const template = document.createElement("template");
-	template.innerHTML = readFileSync(
-		"public/docs/components/flip-card/examples/examples.html",
-		"utf8",
-	);
-	const content = required(template.content.querySelector("template")).content;
-	return required(
-		content.querySelector<HTMLElement>(`[role="example"][label="${label}"]`),
-	);
-}
 afterEach(() => document.body.replaceChildren());
 
 /** Read the generated configuration shared by all four markup panels. */
-function preview(): TpFlipCard {
+function configuration(): {
+	source: string;
+	settings: {
+		name: string;
+		kind: string;
+		value: string | boolean;
+		values?: string[];
+	}[];
+} {
 	const script = readFileSync(
 		"public/docs/components/flip-card/examples/attributes.js",
 		"utf8",
 	);
-	const config = JSON.parse(
+	return JSON.parse(
 		required(script.match(/initializeAttributes\(([\s\S]*)\);/)?.[1]),
-	) as { source: string };
+	);
+}
+function preview(): TpFlipCard {
+	const config = configuration();
 	const template = document.createElement("template");
 	template.innerHTML = config.source;
 	return required(template.content.querySelector("tp-flip-card"));
 }
 
-it("groups all attributes with one preview, external script and default controls", () => {
-	const root = example("Attributes");
-	expect(root.querySelectorAll("tp-iframe")).toHaveLength(1);
-	expect(root.querySelector('script[src$="/attributes.js"]')).not.toBeNull();
+it("publishes default attribute settings for the Component viewer", () => {
+	const settings = configuration().settings;
 	expect(
-		Array.from(
-			root.querySelectorAll("#attributes-booleans li"),
-			(item) => item.textContent,
-		),
-	).toEqual(["disabled", "fit-content", "flipped"]);
-	expect(
-		root.querySelector("#attributes-booleans")?.getAttribute("value"),
-	).toBe("");
-	expect(
-		root
-			.querySelector('[data-setting="button-position"]')
-			?.getAttribute("value"),
-	).toBe("6");
+		settings
+			.filter((item) => item.kind === "boolean")
+			.map((item) => [item.name, item.value]),
+	).toEqual([
+		["disabled", false],
+		["fit-content", false],
+		["flipped", false],
+	]);
+	expect(settings.find((item) => item.name === "button-position")?.value).toBe(
+		"bottom end",
+	);
 });
+
 it("keeps Basic usage faces in the default preview and supports flipping", () => {
 	const card = preview();
 	document.body.append(card);
@@ -73,12 +70,9 @@ it("supports every button position and keyboard activation on the shared preview
 		"bottom end",
 		"none",
 	];
-	const root = example("Attributes");
 	expect(
-		Array.from(
-			root.querySelectorAll('[data-setting="button-position"] li'),
-			(item) => item.textContent,
-		),
+		configuration().settings.find((item) => item.name === "button-position")
+			?.values,
 	).toEqual(positions);
 	const card = preview();
 	document.body.append(card);
@@ -115,7 +109,7 @@ it("supports disabled and fit-content on the shared preview", () => {
 	);
 });
 it("uses shared components for both playing-card faces without image paragraph wrappers", () => {
-	const root = example("Hearts suit");
+	const root = htmlExample("flip-card", "Hearts suit");
 	expect(root.querySelectorAll("tp-flip-card")).toHaveLength(13);
 	document.body.append(root);
 	expect(

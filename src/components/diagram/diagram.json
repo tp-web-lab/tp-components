@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-diagram label=\"Request flow\">\n  <script type=\"tp/diagram\">\n    flowchart LR\n      Browser --> Server\n  </script>\n</tp-diagram>"
+      "code": "<tp-diagram label=\"Request flow\">\n  <script type=\"tp/diagram\">\n    flowchart LR\n      Browser --> Server\n      Server --> Database\n  </script>\n</tp-diagram>"
     }
   ],
   "attributes": [

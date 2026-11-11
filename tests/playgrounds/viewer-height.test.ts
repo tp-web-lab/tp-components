@@ -28,12 +28,7 @@ async function expectFittedFrame(viewer: Locator): Promise<void> {
 		.toBe(true);
 }
 
-for (const [index, language] of [
-	"html",
-	"asciidoc",
-	"markdown",
-	"restructuredtext",
-].entries()) {
+for (const language of ["html", "asciidoc", "markdown", "restructuredtext"]) {
 	test(`${language} viewer fits nested playgrounds when content grows, shrinks or changes`, async ({
 		page,
 	}) => {
@@ -42,13 +37,13 @@ for (const [index, language] of [
 			.locator('tp-include[src*="examples/examples.html"]')
 			.scrollIntoViewIfNeeded();
 		const exampleTabs = page
-			.locator("tp-html-viewer")
+			.locator('tp-include[src*="examples/examples.html"] tp-html-viewer')
 			.locator("xpath=ancestor::tp-tabs[1]");
 		await exampleTabs
 			.locator(':scope > [data-tp-tablist] > [role="tab"]')
-			.nth(index)
+			.filter({ hasText: language === "html" ? "HTML" : `tp-${language}` })
 			.click();
-		const viewer = page.locator(`tp-${language}-viewer`);
+		const viewer = exampleTabs.locator(`tp-${language}-viewer`);
 		await viewer.locator("select").selectOption("Basic usage");
 		const content = viewer.frameLocator("iframe");
 		await expect(

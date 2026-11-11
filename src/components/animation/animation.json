@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-animation></tp-animation>"
+      "code": "<tp-animation in=\"fadeIn\" trigger=\"load\" duration=\"800ms\">\n    <tp-box>Animated content</tp-box>\n  </tp-animation>"
     }
   ],
   "attributes": [

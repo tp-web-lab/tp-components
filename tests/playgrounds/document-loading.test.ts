@@ -37,7 +37,9 @@ test("a single page loads only its selected markup engine and can switch languag
 	await document.evaluate((element) =>
 		element.setAttribute("src", "/lazy-document.adoc"),
 	);
-	await expect(document.locator("h2")).toHaveText("AsciiDoc on demand");
+	await expect(
+		document.getByRole("heading", { name: "AsciiDoc on demand", exact: true }),
+	).toHaveText("AsciiDoc on demand");
 	await document.evaluate((element) =>
 		element.setAttribute("src", "/lazy-document.md"),
 	);
@@ -49,12 +51,17 @@ test("documentation defers hidden runtimes and keeps mobile controls accessible"
 }) => {
 	const runtimes: string[] = [];
 	page.on("request", (request) => {
-		if (/pyodide|python_stdlib|docutils|pygments/.test(request.url()))
+		if (
+			/pyodide|python_stdlib|docutils|pygments/.test(request.url()) &&
+			!/\.svg(?:\?|$)/.test(request.url())
+		)
 			runtimes.push(request.url());
 	});
 	await page.setViewportSize({ width: 393, height: 851 });
 	await openDocument(page, "/docs/components/code-editor/index.md");
-	const viewer = page.locator("tp-html-viewer");
+	const viewer = page.locator(
+		'tp-include[src*="examples/examples.html"] tp-html-viewer',
+	);
 	await page
 		.locator('tp-include[src*="examples/examples.html"]')
 		.scrollIntoViewIfNeeded();
@@ -71,7 +78,7 @@ test("documentation defers hidden runtimes and keeps mobile controls accessible"
 	const tabs = viewer.locator("xpath=ancestor::tp-tabs[1]");
 	await tabs
 		.locator(':scope > [data-tp-tablist] > [role="tab"]')
-		.nth(3)
+		.filter({ hasText: "tp-restructuredtext" })
 		.click();
 	const rst = page.locator("tp-restructuredtext-viewer");
 	await expect(rst.locator("select").first()).toBeVisible();

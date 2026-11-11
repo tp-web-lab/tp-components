@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-game-life></tp-game-life>"
+      "code": "<tp-game-life preset=\"glider\" label=\"Glider\" cell-size=\"14\"></tp-game-life>"
     }
   ],
   "attributes": [

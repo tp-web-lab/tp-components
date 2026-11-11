@@ -34,13 +34,59 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-button
+ * @summary Button component that supports native button and link rendering.
+ */
+/**
+ * @tp-dependency tp-chronometer
+ * @summary Chronometer component with play, pause and stop controls.
+ */
+/**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
+ */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
+/**
  * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
  * @summary Shared parsers, games and rendering utilities.
  */
 // tp-docgen:dependencies:end
 
 import { SudokuEngine } from "@tp/tp-utilities/games/sudoku";
+import {
+	gameActivity,
+	mountLegacyGameHeader,
+} from "../../utilities/game-header.js";
 import { TpBase } from "../base/base.js";
+import "../button/button.js";
+import type { TpIconButton } from "../icon-button/icon-button.js";
 import style from "./sudoku.css?inline";
 
 /**
@@ -54,7 +100,19 @@ import style from "./sudoku.css?inline";
  * @attr {string} puzzle = "" - Puzzle rows separated by newlines.
  *
  * @example
- * <tp-sudoku></tp-sudoku>
+ * <tp-sudoku>
+ *         <ol>
+ *           <li>39465!7!1!8!2</li>
+ *           <li>2!85913!4!67</li>
+ *           <li>6!718!4!2395</li>
+ *           <li>7!2!63!8!95!41!</li>
+ *           <li>4!38!5612!79!</li>
+ *           <li>159!27483!6!</li>
+ *           <li>8674!2!5!913!</li>
+ *           <li>9127!38654!</li>
+ *           <li>54!3!1!9!6728</li>
+ *         </ol>
+ *       </tp-sudoku>
  */
 export class TpSudoku extends TpBase {
 	/**
@@ -83,19 +141,19 @@ export class TpSudoku extends TpBase {
 	 * Button for toggling between game and note entry modes.
 	 * @private
 	 */
-	private modeButton: HTMLButtonElement | null = null;
+	private modeButton: HTMLElement | null = null;
 
 	/**
 	 * Button for undoing the last move.
 	 * @private
 	 */
-	private undoButton: HTMLButtonElement | null = null;
+	private undoButton: TpIconButton | null = null;
 
 	/**
 	 * Button for redoing the last undone move.
 	 * @private
 	 */
-	private redoButton: HTMLButtonElement | null = null;
+	private redoButton: TpIconButton | null = null;
 
 	/**
 	 * Dropdown menu for game assistance options.
@@ -185,9 +243,9 @@ export class TpSudoku extends TpBase {
         <div class="tp-sudoku-header">
           <div class="tp-sudoku-title">Sudoku</div>
           <div class="tp-sudoku-controls">
-            <button class="tp-sudoku-mode" type="button">Game</button>
-            <button class="tp-sudoku-undo" disabled>Undo</button>
-            <button class="tp-sudoku-redo" disabled>Redo</button>
+            <tp-button class="tp-sudoku-mode" size="s" variant="neutral" label="Game"><span data-entry-mode-label>Game</span></tp-button>
+            <tp-icon-button class="tp-sudoku-undo" name="undo" label="Undo" disabled></tp-icon-button>
+            <tp-icon-button class="tp-sudoku-redo" name="redo" label="Redo" disabled></tp-icon-button>
             <select class="tp-sudoku-assist" aria-label="Assistance actions">
               <option value="">Assist…</option>
               <option value="reset-game">Reset the game</option>
@@ -206,15 +264,9 @@ export class TpSudoku extends TpBase {
 
 		this.gridElement = this.querySelector(".tp-sudoku-grid");
 		this.statusElement = this.querySelector(".tp-sudoku-status");
-		this.modeButton = this.querySelector(
-			".tp-sudoku-mode",
-		) as HTMLButtonElement;
-		this.undoButton = this.querySelector(
-			".tp-sudoku-undo",
-		) as HTMLButtonElement;
-		this.redoButton = this.querySelector(
-			".tp-sudoku-redo",
-		) as HTMLButtonElement;
+		this.modeButton = this.querySelector(".tp-sudoku-mode") as HTMLElement;
+		this.undoButton = this.querySelector(".tp-sudoku-undo") as TpIconButton;
+		this.redoButton = this.querySelector(".tp-sudoku-redo") as TpIconButton;
 		this.assistSelect = this.querySelector(
 			".tp-sudoku-assist",
 		) as HTMLSelectElement;
@@ -223,6 +275,7 @@ export class TpSudoku extends TpBase {
 
 		this.engine.renderGrid(this.gridElement);
 		this.attachEventListeners();
+		mountLegacyGameHeader(this, "sudoku");
 		this.updateStatus();
 	}
 
@@ -325,11 +378,19 @@ export class TpSudoku extends TpBase {
 			return;
 
 		const validation = this.engine.getValidation();
+		gameActivity(this, this.engine.canUndo(), validation.isComplete);
 
 		this.undoButton.disabled = !this.engine.canUndo();
 		this.redoButton.disabled = !this.engine.canRedo();
-		this.modeButton.textContent =
-			this.engine.getEntryMode() === "game" ? "Game" : "Note";
+		const noteMode = this.engine.getEntryMode() === "note";
+		const modeLabel = noteMode ? "Note" : "Game";
+		const modeText = this.modeButton.querySelector("[data-entry-mode-label]");
+		if (modeText) modeText.textContent = modeLabel;
+		this.modeButton.setAttribute("label", modeLabel);
+		this.modeButton.setAttribute("variant", noteMode ? "brand" : "neutral");
+		this.modeButton
+			.querySelector("button")
+			?.setAttribute("aria-pressed", String(noteMode));
 		this.modeButton.setAttribute(
 			"aria-label",
 			`Current entry mode: ${this.engine.getEntryMode()}`,

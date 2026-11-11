@@ -48,7 +48,7 @@ const textFontsURL = new URL(fontsAsset, import.meta.url).href;
  *   \draw[color=blue]   plot (\x,{sin(\x r)})    node[right] {$f(x) = \sin x$};
  *   \draw[color=orange] plot (\x,{0.05*exp(\x)}) node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
  * \end{tikzpicture}</script></tp-tikz>
- * @event tp-tikz-rendered Emitted when the SVG drawing is ready.
+ *  @event tp-tikz-rendered Emitted when the SVG drawing is ready.
  * @eventdetail tp-tikz-rendered void
  * @event tp-tikz-error Emitted when loading or compilation fails.
  * @eventdetail tp-tikz-error { message: string }

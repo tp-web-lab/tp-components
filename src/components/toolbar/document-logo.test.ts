@@ -1,4 +1,4 @@
-import { afterEach, expect, it, vi } from "vitest";
+import { afterAll, afterEach, expect, it, vi } from "vitest";
 import "../markup-single-page/markup-single-page.js";
 import "../markup-multi-pages/markup-multi-pages.js";
 import "../html-single-page/html-single-page.js";
@@ -97,3 +97,8 @@ it.each([
 		expect(toolbar.querySelector("[data-document-logo]")).toBeNull();
 	},
 );
+
+afterAll(async () => {
+	document.body.replaceChildren();
+	await vi.dynamicImportSettled();
+});

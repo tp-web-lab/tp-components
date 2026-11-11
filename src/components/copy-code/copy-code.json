@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-box>\n<tp-box id=\"intro-copy-code\" style=\"width:300px\">\n<pre><code>const answer = 6 * 7;</code></pre>\n</tp-box>\n<tp-copy-code for=\"intro-copy-code\"></tp-copy-code>\n</tp-box>"
+      "code": "<tp-box>\n  <tp-box id=\"intro-copy-code\"><pre><code>const answer = 6 * 7;</code></pre></tp-box>\n  <tp-copy-code for=\"intro-copy-code\"></tp-copy-code>\n</tp-box>"
     }
   ],
   "attributes": [

@@ -111,7 +111,7 @@ function escapeHtml(value: string): string {
  * @attr {string} dead-color = "" - SVG fill color for dead cells.
  * @attr {string} alive-color = "" - SVG fill color for living cells.
  * @example
- * <tp-game-life></tp-game-life>
+ * <tp-game-life preset="glider" label="Glider" cell-size="14"></tp-game-life>
  */
 export class TpGameLife extends TpBase {
 	private static readonly gameLifeStyleId = "tp-game-life-styles";

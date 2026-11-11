@@ -66,6 +66,11 @@
 // tp-docgen:dependencies:end
 
 import { type DefaultTreeAdapterTypes, parseFragment } from "parse5";
+import {
+	gameMouseInstructions,
+	isGameButtonLabel,
+	isGameComponent,
+} from "../../utilities/game-help.js";
 import { createHelpButtonTable } from "../../utilities/help-buttons.js";
 import { latexMarkup } from "../../utilities/latex-markup.js";
 import { nativeMarkup } from "../../utilities/native-markup.js";
@@ -246,6 +251,7 @@ export class TpComponentViewer extends TpBase {
 	private request: AbortController | null = null;
 	private previewObserver: MutationObserver | null = null;
 	private preview: Element | null = null;
+	private pendingPreviewValues = new Map<string, string | null>();
 
 	public static override get observedAttributes(): string[] {
 		return [...TpBase.observedAttributes, "tag", "src", "api-src"];
@@ -426,7 +432,9 @@ export class TpComponentViewer extends TpBase {
 		if (interactions && api.userHelp?.interactions) {
 			const rendered = document.createElement("div");
 			void renderMarkdownInto(
-				formatHelpKeyboard(api.userHelp.interactions),
+				formatHelpKeyboard(
+					gameMouseInstructions(this.componentTag, api.userHelp.interactions),
+				),
 				rendered,
 			).then(() => {
 				if (!interactions.isConnected) return;
@@ -616,6 +624,7 @@ export class TpComponentViewer extends TpBase {
 
 	private apply(name: string, value: string | null): void {
 		this.values.set(name, value);
+		if (!this.preview) this.pendingPreviewValues.set(name, value);
 		if (value === null) this.preview?.removeAttribute(name);
 		else this.preview?.setAttribute(name, value);
 		this.syncSource();
@@ -760,6 +769,11 @@ export class TpComponentViewer extends TpBase {
 					/^(?:-+|Control or gesture|Control|Action)$/.test(cells[0] ?? "")
 				)
 					continue;
+				if (
+					isGameComponent(this.componentTag) &&
+					!isGameButtonLabel(cells[0] ?? "")
+				)
+					continue;
 				const entry = document.createElement("span");
 				entry.dataset.helpLabel = (cells[0] ?? "")
 					.replace(/:tp-icon:\{[^}]*\}|<[^>]*>|[*`]/g, "")
@@ -768,8 +782,19 @@ export class TpComponentViewer extends TpBase {
 					/<[^>]*>|[*`]/g,
 					"",
 				);
-				const icon = /:tp-icon:\{[^}]*name="([^"]+)"/.exec(cells[0] ?? "");
-				if (icon) entry.dataset.helpIcons = icon[1];
+				const icons = Array.from(
+					(cells[0] ?? "").matchAll(/:tp-icon:\{([^}]*)\}/g),
+				);
+				const names = icons
+					.map((icon) => /name="([^"]+)"/.exec(icon[1] ?? "")?.[1])
+					.filter(Boolean);
+				if (names.length) entry.dataset.helpIcons = names.join(" ");
+				const library = /library="([^"]+)"/.exec(icons[0]?.[1] ?? "")?.[1];
+				if (library) {
+					const icon = document.createElement("tp-icon");
+					icon.setAttribute("library", library);
+					entry.append(icon);
+				}
 				documented.append(entry);
 			}
 		}
@@ -796,6 +821,7 @@ export class TpComponentViewer extends TpBase {
 	}
 
 	private renderPreview(): void {
+		this.pendingPreviewValues.clear();
 		this.previewObserver?.disconnect();
 		this.preview = null;
 		const parsed = this.configuredDocument();
@@ -817,13 +843,19 @@ export class TpComponentViewer extends TpBase {
 		viewer.addEventListener(
 			"load",
 			(event) => {
-				if (!(event.target instanceof HTMLIFrameElement)) return;
+				if (!viewer.isConnected || !(event.target instanceof HTMLIFrameElement))
+					return;
 				const preview = event.target.contentDocument?.querySelector(
 					this.componentTag,
 				);
 				if (!preview) return;
 				this.previewObserver?.disconnect();
 				this.preview = preview;
+				for (const [name, value] of this.pendingPreviewValues) {
+					if (value === null) preview.removeAttribute(name);
+					else preview.setAttribute(name, value);
+				}
+				this.pendingPreviewValues.clear();
 				const sync = () => {
 					for (const item of this.attributesApi) {
 						const value = preview.getAttribute(item.name);

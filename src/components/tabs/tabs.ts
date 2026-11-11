@@ -127,18 +127,18 @@ let instanceCount = 0;
  * @keyboard {Delete} Requests closing a dynamically added tab.
  * @example
  * <tp-tabs>
- *   <dl>
- *     <dt>Tab 1</dt>
- *     <dd>Content of panel <tp-icon size="2em" name="numeric-1"></tp-icon></dd>
- *     <dt>Tab 2</dt>
- *     <dd>Content of panel <tp-icon size="2em" name="numeric-2"></tp-icon></dd>
- *     <dt>Tab 3</dt>
- *     <dd>Content of panel <tp-icon size="2em" name="numeric-3"></tp-icon></dd>
- *     <dt>Tab 4</dt>
- *     <dd>Content of panel <tp-icon size="2em" name="numeric-4"></tp-icon></dd>
- *   </dl>
- * </tp-tabs>
- * @cssprop [--tp-tabs-border-color=var(--tp-neutral-stroke-soft)] Border color of inactive tab headers and the content panel.
+ *         <dl>
+ *           <dt>Tab 1</dt>
+ *           <dd>Content of panel <tp-icon size="2em" name="numeric-1"></tp-icon></dd>
+ *           <dt>Tab 2</dt>
+ *           <dd>Content of panel <tp-icon size="2em" name="numeric-2"></tp-icon></dd>
+ *           <dt>Tab 3</dt>
+ *           <dd>Content of panel <tp-icon size="2em" name="numeric-3"></tp-icon></dd>
+ *           <dt>Tab 4</dt>
+ *           <dd>Content of panel <tp-icon size="2em" name="numeric-4"></tp-icon></dd>
+ *         </dl>
+ *       </tp-tabs>
+ *  @cssprop [--tp-tabs-border-color=var(--tp-neutral-stroke-soft)] Border color of inactive tab headers and the content panel.
  * @cssprop [--tp-tabs-border-selected-color=var(--tp-brand-stroke-soft)] Border color of the selected tab header.
  * @cssprop [--tp-tabs-panel-bg=var(--tp-paper-color)] Background color of the tab content panel.
  * @cssprop [--tp-tabs-tab-bg=var(--tp-neutral-fill-softer)] Background color of inactive tab headers.

@@ -24,7 +24,7 @@ import { TpPythonPlayground } from "../python-playground/python-playground.js";
  * @event tp-playground-repository-load Emitted after a project configured with `repository` has loaded.
  * @eventdetail tp-playground-repository-load { repository: string; project: TpProject }
  * @example
- * <tp-python-viewer></tp-python-viewer>
+ * <tp-python-viewer src="/docs/components/_shared/intro-projects/python.json"></tp-python-viewer>
  */
 export class TpPythonViewer extends TpPythonPlayground {
 	protected override get viewerMode(): boolean {

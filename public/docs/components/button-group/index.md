@@ -15,6 +15,7 @@ The custom `<tp-button-group>` element groups related buttons with optional atta
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-box data-page-navigation="" data-allow-script="">
   <p>Use the grouped buttons to change the current page.</p>
   <tp-button-group attached="" aria-label="Page navigation">
@@ -24,6 +25,7 @@ The custom `<tp-button-group>` element groups related buttons with optional atta
   <p data-page-status="" role="status">Page 1 of 5</p>
   <script src="/docs/components/button-group/examples/page-navigation.js"></script>
 </tp-box>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

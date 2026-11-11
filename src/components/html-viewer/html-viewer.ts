@@ -875,7 +875,12 @@ function readExamples(
  * @attr {boolean} no-loader = false - Disables automatic tp-loader injection when the example manages its own imports.
  * @attr {string} src = "" - URL of the HTML file to load into the viewer.
  * @example
- * <tp-html-viewer></tp-html-viewer>
+ * <tp-html-viewer>
+ *   <script type="tp/html">
+ * <h2>Hello, HTML!</h2>
+ * <p>This preview renders <strong>HTML content</strong>.</p>
+ *   </script>
+ * </tp-html-viewer>
  */
 export class TpHtmlViewer extends TpMarkupViewer<
 	HtmlViewerMode,

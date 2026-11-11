@@ -15,6 +15,7 @@ The custom `<tp-html-single-page>` element displays a single HTML document.
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-html-single-page>
   <script type="tp/html">
 <h2>A short guide</h2>
@@ -23,6 +24,7 @@ The custom `<tp-html-single-page>` element displays a single HTML document.
 <ul><li>Read the introduction</li><li>Try a component</li></ul>
   </script>
 </tp-html-single-page>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

@@ -1,6 +1,6 @@
-import { readFileSync } from "node:fs";
 import { TpMarkdownParser } from "@tp/tp-markdown/markdown/engine/markdown";
 import { afterEach, expect, it, vi } from "vitest";
+import { htmlExample } from "../../test-helpers/documentation.js";
 import { renderMarkdownInto, renderMarkdownRuntimeIn } from "./markdown.js";
 import "../fill-blank-question/fill-blank-question.js";
 import "../blank/blank.js";
@@ -95,10 +95,9 @@ it("displays the fill-blank documentation before the math runtime finishes loadi
 		.spyOn(TpMarkdownParser.prototype, "renderRuntime")
 		.mockReturnValue(pendingRuntime);
 	const source =
-		readFileSync(
-			"public/docs/components/fill-blank-question/index.md",
-			"utf8",
-		).split("## Usage")[0] ?? "";
+		"# Fill blank question\n\n``` raw html\n" +
+		htmlExample("fill-blank-question", "Square root").innerHTML +
+		"\n```";
 	const root = document.createElement("div");
 	document.body.append(root);
 	const rendering = renderMarkdownInto(source, root);

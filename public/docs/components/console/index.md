@@ -15,12 +15,14 @@ The custom `<tp-console>` element provides a visual console for playground outpu
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-box data-intro-action="console" data-allow-script="">
   <p>Inspect these example messages, then use Clear to empty the console.</p>
   <tp-console></tp-console>
   <p data-demo-status="" role="status"></p>
   <script src="/docs/components/_shared/introduction-actions.js"></script>
 </tp-box>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

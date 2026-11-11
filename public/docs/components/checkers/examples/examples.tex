@@ -1,0 +1,40 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-checkers position="W:W32,34,K46:B17,19,K5" draggable-pieces=""></tp-checkers>|
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/checkers/checkers.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-checkers");
+element1.setAttribute("position", "W:W32,34,K46:B17,19,K5");
+element1.setAttribute("draggable-pieces", "");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Majority capture
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-checkers position="W:W32,34:B17,27,29" draggable-pieces=""></tp-checkers>|
+\end{document}
+
+% !tp-example Flying kings
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-checkers position="W:WK32:B27,38" draggable-pieces=""></tp-checkers>|
+\end{document}
+
+% !tp-example Crowning a man
+\documentclass{article}
+\begin{document}
+\wcTpCheckers[position=W:W7:B40,draggable-pieces]{}
+\end{document}

@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-graph-editor></tp-graph-editor>"
+      "code": "<tp-graph-editor grid=\"\" grid-size=\"20\" message=\"Graph message area\" src=\"/docs/components/graph-editor/examples/graph-example.json\"></tp-graph-editor>"
     }
   ],
   "attributes": [

@@ -19,7 +19,7 @@ import { TpMarkupMultiSlides } from "../markup-multi-slides/markup-multi-slides.
  * @tagname tp-asciidoc-multi-slides
  * @summary Presents AsciiDoc documents as a slide deck.
  * @example
- * <tp-asciidoc-multi-slides></tp-asciidoc-multi-slides>
+ * <tp-asciidoc-multi-slides repository="/docs/components/asciidoc-multi-pages/docs"></tp-asciidoc-multi-slides>
  */
 export class TpAsciidocMultiSlides extends TpMarkupMultiSlides {
 	protected override get fixedLanguage(): TpMarkupMultiPagesLanguage {

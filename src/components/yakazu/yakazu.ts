@@ -36,13 +36,59 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-button
+ * @summary Button component that supports native button and link rendering.
+ */
+/**
+ * @tp-dependency tp-chronometer
+ * @summary Chronometer component with play, pause and stop controls.
+ */
+/**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
+ */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
+/**
  * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
  * @summary Shared parsers, games and rendering utilities.
  */
 // tp-docgen:dependencies:end
 
 import { YakazuEngine } from "@tp/tp-utilities/games/yakazu";
+import {
+	gameActivity,
+	mountLegacyGameHeader,
+} from "../../utilities/game-header.js";
 import { TpBase } from "../base/base.js";
+import "../button/button.js";
+import type { TpIconButton } from "../icon-button/icon-button.js";
 import style from "./yakazu.css?inline";
 
 /**
@@ -52,7 +98,19 @@ import style from "./yakazu.css?inline";
  * @element tp-yakazu
  * @tagname tp-yakazu
  * @example
- * <tp-yakazu></tp-yakazu>
+ * <tp-yakazu>
+ *       <ol>
+ *       <li>25431#9#4!</li>
+ *       <li>1#1524673</li>
+ *       <li>#13!2#12#2</li>
+ *       <li>2#563274!1</li>
+ *       <li>12674385!#</li>
+ *       <li>34!21!5#1!2#</li>
+ *       <li>#1#412563</li>
+ *       <li>2!31#2!#312</li>
+ *       <li>1#21#2431</li>
+ *       </ol>
+ *       </tp-yakazu>
  */
 export class TpYakazu extends TpBase {
 	/**
@@ -81,19 +139,19 @@ export class TpYakazu extends TpBase {
 	 * Button for toggling between game and note entry modes.
 	 * @private
 	 */
-	private modeButton: HTMLButtonElement | null = null;
+	private modeButton: HTMLElement | null = null;
 
 	/**
 	 * Button for undoing the last move.
 	 * @private
 	 */
-	private undoButton: HTMLButtonElement | null = null;
+	private undoButton: TpIconButton | null = null;
 
 	/**
 	 * Button for redoing the last undone move.
 	 * @private
 	 */
-	private redoButton: HTMLButtonElement | null = null;
+	private redoButton: TpIconButton | null = null;
 
 	/**
 	 * Dropdown menu for game assistance options.
@@ -176,9 +234,9 @@ export class TpYakazu extends TpBase {
         <div class="tp-yakazu-header">
           <div class="tp-yakazu-title">Yakazu</div>
           <div class="tp-yakazu-controls">
-            <button class="tp-yakazu-mode" type="button">Game</button>
-            <button class="tp-yakazu-undo" disabled>Undo</button>
-            <button class="tp-yakazu-redo" disabled>Redo</button>
+            <tp-button class="tp-yakazu-mode" size="s" variant="neutral" label="Game"><span data-entry-mode-label>Game</span></tp-button>
+            <tp-icon-button class="tp-yakazu-undo" name="undo" label="Undo" disabled></tp-icon-button>
+            <tp-icon-button class="tp-yakazu-redo" name="redo" label="Redo" disabled></tp-icon-button>
             <select class="tp-yakazu-assist" aria-label="Assistance actions">
               <option value="">Assist…</option>
               <option value="reset-game">Reset the game</option>
@@ -197,15 +255,9 @@ export class TpYakazu extends TpBase {
 
 		this.gridElement = this.querySelector(".tp-yakazu-grid");
 		this.statusElement = this.querySelector(".tp-yakazu-status");
-		this.modeButton = this.querySelector(
-			".tp-yakazu-mode",
-		) as HTMLButtonElement;
-		this.undoButton = this.querySelector(
-			".tp-yakazu-undo",
-		) as HTMLButtonElement;
-		this.redoButton = this.querySelector(
-			".tp-yakazu-redo",
-		) as HTMLButtonElement;
+		this.modeButton = this.querySelector(".tp-yakazu-mode") as HTMLElement;
+		this.undoButton = this.querySelector(".tp-yakazu-undo") as TpIconButton;
+		this.redoButton = this.querySelector(".tp-yakazu-redo") as TpIconButton;
 		this.assistSelect = this.querySelector(
 			".tp-yakazu-assist",
 		) as HTMLSelectElement;
@@ -214,6 +266,7 @@ export class TpYakazu extends TpBase {
 
 		this.engine.renderGrid(this.gridElement);
 		this.attachEventListeners();
+		mountLegacyGameHeader(this, "yakazu");
 		this.updateStatus();
 	}
 
@@ -315,8 +368,16 @@ export class TpYakazu extends TpBase {
 			return;
 
 		const validation = this.engine.getValidation();
-		this.modeButton.textContent =
-			this.engine.getEntryMode() === "game" ? "Game" : "Note";
+		gameActivity(this, this.engine.canUndo(), validation.isComplete);
+		const noteMode = this.engine.getEntryMode() === "note";
+		const modeLabel = noteMode ? "Note" : "Game";
+		const modeText = this.modeButton.querySelector("[data-entry-mode-label]");
+		if (modeText) modeText.textContent = modeLabel;
+		this.modeButton.setAttribute("label", modeLabel);
+		this.modeButton.setAttribute("variant", noteMode ? "brand" : "neutral");
+		this.modeButton
+			.querySelector("button")
+			?.setAttribute("aria-pressed", String(noteMode));
 		this.modeButton.setAttribute(
 			"aria-label",
 			`Current entry mode: ${this.engine.getEntryMode()}`,

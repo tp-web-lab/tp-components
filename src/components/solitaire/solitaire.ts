@@ -13,15 +13,48 @@
  * @summary Chronometer component with play, pause and stop controls.
  */
 /**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
  * @tp-dependency tp-dragdrop
  * @summary Generic drag-and-drop controller for content.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
  */
 /**
  * @tp-dependency tp-icon-button
  * @summary Accessible icon button component.
  */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
 // tp-docgen:dependencies:end
 
+import {
+	gameActivity,
+	mountGameHeader,
+	updateGameHeader,
+} from "../../utilities/game-header.js";
 import style from "./solitaire.css?inline";
 import "../chronometer/chronometer.js";
 import "../dragdrop/dragdrop.js";
@@ -79,6 +112,13 @@ const RANK_NAMES: Record<string, string> = {
 	k: "King",
 };
 
+interface SolitaireSnapshot {
+	stock: SolitaireCard[];
+	waste: SolitaireCard[];
+	tableau: SolitaireCard[][];
+	foundations: SolitaireCard[][];
+}
+
 /**
  * The custom `<tp-solitaire>` element displays a playable Klondike solitaire.
  *
@@ -105,6 +145,8 @@ export class TpSolitaire extends TpBase {
 	private selection: Selection | null = null;
 	private chronometerStarted = false;
 	private rendered = false;
+	private history: SolitaireSnapshot[] = [];
+	private historyIndex = 0;
 
 	public static get observedAttributes(): string[] {
 		return [...TpBase.observedAttributes, "deck-size", "back"];
@@ -167,12 +209,47 @@ export class TpSolitaire extends TpBase {
 		this.selection = null;
 		this.chronometerStarted = false;
 		this.chronometer?.stop();
+		this.history = [this.snapshot()];
+		this.historyIndex = 0;
 		this.renderBoard();
 		this.dispatchEvent(
 			new CustomEvent("tp-solitaire-reset", { bubbles: true }),
 		);
 	}
 
+	private snapshot(): SolitaireSnapshot {
+		return structuredClone({
+			stock: this.stock,
+			waste: this.waste,
+			tableau: this.tableau,
+			foundations: this.foundations,
+		});
+	}
+	private restoreHistory(): void {
+		const value = this.history[this.historyIndex];
+		if (!value) return;
+		const state = structuredClone(value);
+		this.stock = state.stock;
+		this.waste = state.waste;
+		this.tableau = state.tableau;
+		this.foundations = state.foundations;
+		this.selection = null;
+		this.renderBoard();
+	}
+	/** Restores the position before the last draw, recycle or card move. */
+	public undo(): void {
+		if (this.historyIndex > 0) {
+			this.historyIndex--;
+			this.restoreHistory();
+		}
+	}
+	/** Restores the next recorded position, including face-up cards and foundations. */
+	public redo(): void {
+		if (this.historyIndex < this.history.length - 1) {
+			this.historyIndex++;
+			this.restoreHistory();
+		}
+	}
 	private get chronometer(): TpChronometer | null {
 		return this.querySelector<TpChronometer>(".tp-solitaire-chronometer");
 	}
@@ -199,6 +276,44 @@ export class TpSolitaire extends TpBase {
 				this.handleDrop((event as CustomEvent<TpDragDropDropDetail>).detail);
 			},
 		);
+		const target = this.querySelector<HTMLElement>(".tp-solitaire-header");
+		if (target)
+			mountGameHeader(this, {
+				name: "Solitaire",
+				icon: "solitaire",
+				target,
+				chronometer: this.chronometer ?? undefined,
+				reset: () => this.reset(),
+				undo: () => this.undo(),
+				redo: () => this.redo(),
+				canUndo: () => this.historyIndex > 0,
+				canRedo: () => this.historyIndex < this.history.length - 1,
+				help: () => [
+					{
+						label: "Show cards that can move to a foundation",
+						run: () => {
+							for (const el of this.querySelectorAll<HTMLElement>(
+								".tp-solitaire-card",
+							)) {
+								const pile = this.sourcePile(
+									el.dataset.source as Source,
+									Number(el.dataset.pile),
+								);
+								const card = pile[Number(el.dataset.index)];
+								el.toggleAttribute(
+									"data-game-hint",
+									Boolean(
+										card?.faceUp &&
+											pile.at(-1) === card &&
+											this.foundations[SUITS.indexOf(card.suit)]?.length ===
+												card.value,
+									),
+								);
+							}
+						},
+					},
+				],
+			});
 	}
 
 	private createDeck(): SolitaireCard[] {
@@ -230,6 +345,12 @@ export class TpSolitaire extends TpBase {
 	}
 
 	private renderBoard(): void {
+		updateGameHeader(this);
+		gameActivity(
+			this,
+			this.historyIndex > 0,
+			this.foundationCount() === this.deckSize,
+		);
 		const board = this.querySelector<HTMLElement>(".tp-solitaire-board");
 		if (!board) return;
 		board.innerHTML = `
@@ -507,6 +628,15 @@ export class TpSolitaire extends TpBase {
 	}
 
 	private afterMove(): void {
+		const snapshot = this.snapshot();
+		if (
+			JSON.stringify(snapshot) !==
+			JSON.stringify(this.history[this.historyIndex])
+		) {
+			this.history = this.history.slice(0, this.historyIndex + 1);
+			this.history.push(snapshot);
+			this.historyIndex++;
+		}
 		this.renderBoard();
 		this.dispatchEvent(new CustomEvent("tp-solitaire-move", { bubbles: true }));
 		if (this.foundationCount() === this.deckSize) {

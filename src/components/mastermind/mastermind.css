@@ -3,7 +3,7 @@
 
   box-sizing: border-box;
   display: flow-root;
-  max-width: 600px;
+  max-width: 100%;
   margin: 1rem 0;
   padding: 1rem;
   border: 1px solid #e0e0e0;
@@ -100,7 +100,7 @@
 }
 
 .tp-mastermind-row.current {
-  background: #e6f0ff;
+  background: var(--tp-brand-fill-softer);
 }
 
 .tp-mastermind-attempt {
@@ -162,15 +162,15 @@
   min-height: 1.5rem;
   padding: 0.75rem;
   border-radius: 4px;
-  background: #d1ecf1;
-  color: #0c5460;
+  background: var(--tp-neutral-fill-soft);
+  color: var(--tp-neutral-text-on-soft);
   text-align: center;
   font-weight: 600;
 }
 
 .tp-mastermind-status.won {
-  background: #d4edda;
-  color: #155724;
+  background: var(--tp-success-fill-soft);
+  color: var(--tp-success-text-on-soft);
 }
 
 .tp-mastermind-status.lost,

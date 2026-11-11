@@ -10,9 +10,51 @@
  * @tp-dependency tp-button
  * @summary Button component that supports native button and link rendering.
  */
+/**
+ * @tp-dependency tp-chronometer
+ * @summary Chronometer component with play, pause and stop controls.
+ */
+/**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
+ */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
 // tp-docgen:dependencies:end
 
+import {
+	gameActivity,
+	mountGameHeader,
+	updateGameHeader,
+} from "../../utilities/game-header.js";
 import { TpBase } from "../base/base.js";
+import type { TpIconButton } from "../icon-button/icon-button.js";
 import "../button/button.js";
 import type { TpButton } from "../button/button.js";
 import style from "./kakuro.css?inline";
@@ -38,11 +80,11 @@ interface Snapshot {
  * @event tp-kakuro-complete Emitted when the player reaches a valid completed grid.
  * @eventdetail tp-kakuro-complete { values: number[][], complete: boolean }
  * @keyboard {Arrow keys} Moves to the next white cell in the chosen direction.
- * @keyboard {1–9} Enters a digit or toggles a pencil mark in Notes mode.
+ * @keyboard {1–9} Enters a digit or toggles a pencil mark in Note mode.
  * @keyboard {Backspace / Delete / 0} Clears the selected editable cell.
  * @keyboard {Ctrl+Z / Ctrl+Y} Undoes or redoes a move; Command is also accepted.
  * @accessibility Cell labels include coordinates and across/down sums; status updates use a live region.
- * @cssprop [--tp-kakuro-cell-size=3rem] Maximum width of each square.
+ * @cssprop [--tp-kakuro-cell-size=4rem] Maximum width of each square.
  * @tp-dependency tp-base - Shared component behavior.
  * @tp-dependency tp-button - Game action buttons.
  * @see tp-sudoku - Another numeric grid puzzle with pencil marks.
@@ -77,7 +119,7 @@ export class TpKakuro extends TpBase {
 	private completed = false;
 	private inputs = new Map<number, HTMLInputElement>();
 	private status: HTMLElement | undefined;
-	private buttons = new Map<string, TpButton>();
+	private buttons = new Map<string, TpButton | TpIconButton>();
 	/** Puzzle source; assigning it starts a new game. */
 	public get puzzle(): string {
 		return this.getAttribute("puzzle") ?? this.initialSource ?? "";
@@ -139,7 +181,7 @@ export class TpKakuro extends TpBase {
 		const actions: [string, string, () => void][] = [
 			[
 				"notes",
-				"Notes",
+				"Game",
 				() => {
 					this.noteMode = !this.noteMode;
 					this.update();
@@ -169,8 +211,19 @@ export class TpKakuro extends TpBase {
 			],
 		];
 		for (const [action, label, handler] of actions) {
-			const button = document.createElement("tp-button");
-			button.textContent = label;
+			const button = document.createElement(
+				["reset", "undo", "redo"].includes(action)
+					? "tp-icon-button"
+					: "tp-button",
+			);
+			button.setAttribute("name", action === "reset" ? "refresh" : action);
+			button.setAttribute("label", label);
+			if (action === "notes") {
+				const text = document.createElement("span");
+				text.setAttribute("data-kakuro-mode-label", "");
+				text.textContent = label;
+				button.append(text);
+			} else button.textContent = label;
 			button.setAttribute("size", "s");
 			button.dataset.action = action;
 			button.addEventListener("click", handler);
@@ -246,8 +299,37 @@ export class TpKakuro extends TpBase {
 		status.setAttribute("role", "status");
 		status.setAttribute("aria-live", "polite");
 		this.status = status;
-		wrapper.append(toolbar, board, status);
+		const entryBoard = document.createElement("div");
+		entryBoard.className = "tp-kakuro-entry-board";
+		entryBoard.style.setProperty("--columns", String(grid.columns));
+		entryBoard.append(toolbar, board);
+		wrapper.append(entryBoard, status);
 		this.replaceChildren(wrapper);
+		const header = document.createElement("div");
+		entryBoard.before(header);
+		const reset = this.buttons.get("reset") as TpIconButton,
+			undo = this.buttons.get("undo") as TpIconButton,
+			redo = this.buttons.get("redo") as TpIconButton;
+		mountGameHeader(this, {
+			name: "Kakuro",
+			icon: "kakuro",
+			target: header,
+			reset: () => {},
+			undo: () => {},
+			redo: () => {},
+			controls: { reset, undo, redo },
+			canUndo: () => this.undoStack.length > 0,
+			canRedo: () => this.redoStack.length > 0,
+			help: () =>
+				["check", "hint", "solve"].map((id) => ({
+					id,
+					label: this.buttons.get(id)?.textContent ?? id,
+					run: () => this.buttons.get(id)?.click(),
+					disabled: () =>
+						this.buttons.get(id)?.hasAttribute("disabled") ?? false,
+				})),
+		});
+		for (const id of ["check", "hint", "solve"]) this.buttons.get(id)?.remove();
 		this.update();
 	}
 	private updateSelection(): void {
@@ -375,6 +457,8 @@ export class TpKakuro extends TpBase {
 		}
 	}
 	private update(emit = false): void {
+		updateGameHeader(this);
+		gameActivity(this, this.undoStack.length > 0, this.completed);
 		const grid = this.grid;
 		if (!grid) return;
 		const conflicts = kakuroConflicts(grid, this.values);
@@ -405,16 +489,22 @@ export class TpKakuro extends TpBase {
 			}
 		}
 		const complete = empty === 0 && conflicts.size === 0;
+		if (this.status) this.status.dataset.success = String(complete);
 		if (this.status)
 			this.status.textContent = complete
 				? "Solved! Every sum is correct."
-				: `${empty} empty cells${this.showingErrors ? `; ${conflicts.size} cells in conflicting runs` : ""}. ${this.noteMode ? "Notes" : "Digit"} mode.`;
+				: `${empty} empty cells${this.showingErrors ? `; ${conflicts.size} cells in conflicting runs` : ""}. ${this.noteMode ? "Note" : "Game"} mode.`;
 		this.buttons
 			.get("undo")
 			?.toggleAttribute("disabled", !this.undoStack.length);
 		this.buttons
 			.get("redo")
 			?.toggleAttribute("disabled", !this.redoStack.length);
+		const mode = this.buttons.get("notes");
+		const modeLabel = this.noteMode ? "Note" : "Game";
+		mode?.setAttribute("label", modeLabel);
+		const modeText = mode?.querySelector("[data-kakuro-mode-label]");
+		if (modeText) modeText.textContent = modeLabel;
 		for (const [action, pressed] of [
 			["notes", this.noteMode],
 			["check", this.showingErrors],

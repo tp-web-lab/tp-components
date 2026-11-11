@@ -13,15 +13,40 @@
  * @summary Chronometer component with play, pause and stop controls.
  */
 /**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
  * @tp-dependency tp-dropdown
  * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
  */
 /**
  * @tp-dependency tp-icon-button
  * @summary Accessible icon button component.
  */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
 // tp-docgen:dependencies:end
 
+import { mountGameHeader } from "../../utilities/game-header.js";
 import { TpBase } from "../base/base.js";
 import style from "./mastermind.css?inline";
 import "../chronometer/chronometer.js";
@@ -70,7 +95,7 @@ interface MastermindSnapshot {
  * @attr {number} attempts = 10 - Maximum number of guesses.
  *
  * @example
- * <tp-mastermind></tp-mastermind>
+ * <tp-mastermind solution="red blue green yellow" attempts="8"></tp-mastermind>
  */
 export class TpMastermind extends TpBase {
 	private static readonly styleId = "tp-mastermind-styles";
@@ -280,6 +305,40 @@ export class TpMastermind extends TpBase {
 		}
 
 		this.attachEventListeners();
+		const target = this.querySelector<HTMLElement>(
+			".tp-mastermind-header, .tp-game-header",
+		);
+		if (target)
+			mountGameHeader(this, {
+				name: "Mastermind",
+				icon: "mastermind",
+				target,
+				chronometer:
+					this.querySelector<TpChronometer>(".tp-mastermind-chronometer") ??
+					undefined,
+				reset: () => this.resetGame(),
+				undo: () => this.undo(),
+				redo: () => this.redo(),
+				canUndo: () => this.historyIndex > 0,
+				canRedo: () => this.historyIndex < this.history.length - 1,
+				help: () => [
+					{
+						id: "show-peg",
+						label: "Show next peg",
+						run: () => this.applyAssist("show-peg"),
+					},
+					{
+						id: "show-solution",
+						label: "Show the solution",
+						run: () => this.applyAssist("show-solution"),
+					},
+					{
+						id: "new-code",
+						label: "Start with another code",
+						run: () => this.resetWithNewCode(),
+					},
+				],
+			});
 	}
 
 	private renderRow(guess: Array<MastermindColor | null>, row: number): string {

@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-yakazu></tp-yakazu>"
+      "code": "<tp-yakazu>\n      <ol>\n      <li>25431#9#4!</li>\n      <li>1#1524673</li>\n      <li>#13!2#12#2</li>\n      <li>2#563274!1</li>\n      <li>12674385!#</li>\n      <li>34!21!5#1!2#</li>\n      <li>#1#412563</li>\n      <li>2!31#2!#312</li>\n      <li>1#21#2431</li>\n      </ol>\n      </tp-yakazu>"
     }
   ],
   "attributes": [],
@@ -17,6 +17,46 @@
     {
       "name": "tp-base",
       "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-chronometer",
+      "summary": "Chronometer component with play, pause and stop controls."
+    },
+    {
+      "name": "tp-color",
+      "summary": "Brand color preset controller scoped to the containing element."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-drawer",
+      "summary": "Drawer overlay component."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Dropdown menu component."
+    },
+    {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
     }
   ],
   "credits": [
@@ -29,7 +69,7 @@
   "userHelp": {
     "displayName": "Yakazu",
     "introduction": "The custom `<tp-yakazu>` element presents a Yakazu number puzzle with pencil marks, validation and undo controls.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Complete the puzzle using the editable cells; fixed clues cannot be changed. |\n| Using the component | Use the displayed assistance controls to check or reveal information when available. |\n| Using the component | The puzzle's messages indicate progress and completion. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "The header shows the game icon and name on the left. Rounded controls appear on the right, in this order: Reset, Undo, Redo, Help, chronometer, Color, Theme and Fullscreen. Additional game commands remain below the header.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| :tp-icon:{name=\"refresh\"} Reset | Restores the loaded position or puzzle and resets the timer. |\n| :tp-icon:{name=\"undo\"} Undo | Takes back the last move. |\n| :tp-icon:{name=\"redo\"} Redo | Replays the next undone move. Disabled when there is no recorded continuation. |\n| :tp-icon:{name=\"help\"} Help | Opens the dropdown of assistance actions specific to this game. |\n| Help → Show all incorrect boxes | Highlights incorrect entries. |\n| Help → Clear the incorrect boxes | Clears incorrect entries as one undoable action. |\n| Help → Show the box | Reveals the active box. |\n| Help → Show the solution | Reveals the solution. |\n| Help → Rules of the game | Opens a drawer with the rules of this game. |\n| Chronometer | Displays elapsed play time; starts with play and pauses on completion. Reset clears it. |\n| :tp-icon:{name=\"palette-swatch\"} Color | Changes the brand color of this game only. |\n| :tp-icon:{name=\"sun\"} :tp-icon:{name=\"moon\"} Theme | Changes the light, dark or automatic theme of this game only. |\n| :tp-icon:{name=\"fullscreen\"} :tp-icon:{name=\"fullscreen-exit\"} Fullscreen | Enters or leaves fullscreen for this game. |\n| Game / Note | Switches between entering a value and recording candidate notes. |\n| Click an editable cell | Selects the cell to enter a value. Fixed clues cannot be changed. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

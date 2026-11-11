@@ -3,10 +3,11 @@
   display: flow-root;
   margin: 1rem 0;
   padding: 1rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: #f9f9f9;
-  font-family: system-ui, -apple-system, sans-serif;
+  border: var(--tp-border-width) var(--tp-border-style) var(--tp-neutral-stroke-soft);
+  border-radius: var(--tp-border-radius-lg);
+  background: var(--tp-paper-color);
+  color: var(--tp-text-body);
+  font-family: var(--tp-font-family);
 }
 
 .tp-memory *,
@@ -33,7 +34,7 @@
 }
 
 .tp-memory-title {
-  color: #333;
+  color: var(--tp-text-body);
   font-size: 1.25rem;
   font-weight: 700;
 }
@@ -45,6 +46,8 @@
 .tp-memory-board > .tp-memory-card {
   flex: 0 0 auto;
   --tp-flip-card-padding: 0;
+  --tp-flip-card-background: var(--tp-neutral-fill-softer);
+  --tp-flip-card-border-color: var(--tp-neutral-stroke-mid);
 }
 
 .tp-memory-card .tp-flip-card-sizer > :is(img, svg) {

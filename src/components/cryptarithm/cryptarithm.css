@@ -1,7 +1,13 @@
 tp-cryptarithm.tp-cryptarithm {
   display: flow-root;
   box-sizing: border-box;
-  color: var(--tp-fg, inherit);
+  inline-size: 100%;
+  max-inline-size: 100%;
+  color: var(--tp-text-body);
+  font-family: var(--tp-font-family);
+  background: var(--tp-paper-color);
+  border: var(--tp-border-width) var(--tp-border-style) var(--tp-neutral-stroke-soft);
+  border-radius: var(--tp-border-radius-lg);
 }
 
 .tp-cryptarithm-shell {
@@ -20,12 +26,13 @@ tp-cryptarithm.tp-cryptarithm {
 }
 
 .tp-cryptarithm-status.success {
-  color: var(--tp-success, #1a7f37);
+  background: var(--tp-success-fill-soft);
+  color: var(--tp-success-text-on-soft);
 }
 
 .tp-cryptarithm-status.info {
-  color: var(--tp-info-text-on-soft, #173b65);
-  background: var(--tp-info-fill-soft, #eff6ff);
+  color: var(--tp-neutral-text-on-soft);
+  background: var(--tp-neutral-fill-soft);
 }
 
 .tp-cryptarithm-error {
@@ -38,4 +45,64 @@ tp-cryptarithm.tp-cryptarithm {
 .tp-cryptarithm-shell select,
 .tp-cryptarithm-shell input {
   font: inherit;
+}
+
+/* Override the shared renderer's fixed colors with theme-aware TP tokens. */
+.tp-cryptarithm .tp-cryptarithm-assignment {
+  background: var(--tp-neutral-fill-softer);
+  color: var(--tp-text-body);
+  border-color: var(--tp-neutral-stroke-soft);
+  border-radius: var(--tp-border-radius-md);
+}
+
+.tp-cryptarithm .tp-cryptarithm-assignment-label {
+  color: inherit;
+  font-family: var(--tp-font-family-code);
+}
+
+.tp-cryptarithm .tp-cryptarithm-assignment-input {
+  background: var(--tp-paper-color);
+  color: var(--tp-text-body);
+  border-color: var(--tp-neutral-stroke-mid);
+  border-radius: var(--tp-border-radius-sm);
+}
+
+.tp-cryptarithm .tp-cryptarithm-assignment.initial,
+.tp-cryptarithm .tp-cryptarithm-assignment.initial .tp-cryptarithm-assignment-input,
+.tp-cryptarithm .tp-cryptarithm-char-symbol {
+  background: var(--tp-brand-fill-soft);
+  color: var(--tp-brand-text-on-soft);
+  border-color: var(--tp-brand-stroke-soft);
+}
+.tp-cryptarithm .tp-cryptarithm-assignment.initial .tp-cryptarithm-assignment-label { color: var(--tp-brand-text-on-soft); }
+
+.tp-cryptarithm .tp-cryptarithm-assignment.current-letter {
+  border-color: var(--tp-brand-stroke-mid);
+  box-shadow: inset 0 0 0 1px var(--tp-brand-stroke-mid);
+}
+
+.tp-cryptarithm .tp-cryptarithm-assignment.incorrect,
+.tp-cryptarithm .tp-cryptarithm-assignment.incorrect .tp-cryptarithm-assignment-input {
+  background: var(--tp-danger-fill-soft);
+  color: var(--tp-danger-text-on-soft);
+  border-color: var(--tp-danger-stroke-mid);
+}
+
+.tp-cryptarithm .tp-cryptarithm-assignment-input:focus {
+  border-color: var(--tp-brand-stroke-mid);
+  box-shadow: 0 0 0 var(--tp-focus-width) var(--tp-focus-color);
+}
+
+.tp-cryptarithm .tp-cryptarithm-operator {
+  color: var(--tp-text-body);
+}
+
+.tp-cryptarithm .tp-cryptarithm-result-separator {
+  border-color: var(--tp-neutral-stroke-mid);
+}
+
+.tp-cryptarithm .tp-cryptarithm-preview {
+  background: var(--tp-neutral-fill-softer);
+  color: var(--tp-neutral-text-on-soft);
+  border-radius: var(--tp-border-radius-md);
 }

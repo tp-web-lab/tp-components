@@ -77,7 +77,7 @@
   "userHelp": {
     "displayName": "LaTeX viewer",
     "introduction": "The custom `<tp-latex-viewer>` element presents editable LaTeX examples with rendered and generated HTML views.",
-    "interactions": "",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Show code | Show or hide the editable LaTeX source. |\n| Show output | Show or hide the output. |\n| Example | Select a document from the loaded examples. |\n| Rendered HTML | Display the rendered document. |\n| Generated HTML | Display the generated HTML as read-only code. |\n| Toggle editor toolbar | Show or hide the editor toolbar. |\n| Reset | Restore the selected example's initial source. |\n| Run | Render the current source. |\n| Fullscreen / Exit fullscreen | Expand the entire component to fullscreen or return to its normal size. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy and open its help. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Esc</kbd> | Exit fullscreen. |",
     "keyboard": []
   }
 }

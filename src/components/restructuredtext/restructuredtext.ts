@@ -215,10 +215,10 @@ function loadHighlightJs(ownerDocument: Document): Promise<HighlightJsApi> {
  * @eventdetail tp-restructuredtext-doctest TpRestructuredTextDoctestResult
  * @example
  * <tp-restructuredtext>
- *       <script type="tp/restructuredtext">
- *         Hello, **Docutils**!
- *       </script>
- *     </tp-restructuredtext>
+ *   <script type="tp/restructuredtext">
+ *     Hello, **Docutils**!
+ *   </script>
+ * </tp-restructuredtext>
  */
 export class TpRestructuredText extends TpBase {
 	/** Attributes that trigger a new source load and conversion. */

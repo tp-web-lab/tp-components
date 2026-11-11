@@ -15,7 +15,12 @@ import { TpNotebook } from "../notebook/notebook.js";
  * @tagname tp-javascript-notebook
  * @summary Interactive JavaScript notebook with markup and code cells.
  * @example
- * <tp-javascript-notebook></tp-javascript-notebook>
+ * <tp-javascript-notebook>
+ *     <script type="tp/markdown"># Interactive JavaScript
+ *
+ * Select **Run all cells** to execute the program. Use the code button in a cell to edit its source.</script>
+ *     <script type="tp/javascript">console.log('Hello from JavaScript');</script>
+ *   </tp-javascript-notebook>
  */
 export class TpJavascriptNotebook extends TpNotebook {
 	public override connectedCallback(): void {

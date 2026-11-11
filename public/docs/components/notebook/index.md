@@ -15,6 +15,7 @@ The custom `<tp-notebook>` element combines editable markup cells and executable
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-notebook>
   <script type="tp/markdown">
     # Notebook example
@@ -71,6 +72,7 @@ The custom `<tp-notebook>` element combines editable markup cells and executable
     }
   </script>
 </tp-notebook>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>
@@ -86,8 +88,6 @@ The custom `<tp-notebook>` element combines editable markup cells and executable
 
 <!-- -->
 ## Usage
-
-The markup language menu includes LaTeX (`latex`), rendered by `tp-latex-viewer`. Inline LaTeX cells use `<script type="tp/latex">`; both document fragments and complete documents are supported. This option is also available in the specialized programming notebooks.
 
 ### Initial content
 
@@ -117,6 +117,10 @@ repository
 :::
 
 Add `readonly` to preserve rendering, execution, and navigation while preventing changes to programming cells.
+
+### Configuration
+
+The markup language menu includes LaTeX (`latex`), rendered by `tp-latex-viewer`. Inline LaTeX cells use `<script type="tp/latex">`; both document fragments and complete documents are supported. This option is also available in the specialized programming notebooks.
 
 ### Authoring
 

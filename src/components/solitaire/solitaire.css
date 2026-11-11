@@ -4,10 +4,11 @@
   margin: 1rem 0;
   padding: 1rem;
   overflow-x: auto;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: #f9f9f9;
-  font-family: system-ui, -apple-system, sans-serif;
+  border: var(--tp-border-width) var(--tp-border-style) var(--tp-neutral-stroke-soft);
+  border-radius: var(--tp-border-radius-lg);
+  background: var(--tp-paper-color);
+  color: var(--tp-text-body);
+  font-family: var(--tp-font-family);
 }
 
 .tp-solitaire *,
@@ -33,7 +34,7 @@
 }
 
 .tp-solitaire-title {
-  color: #333;
+  color: var(--tp-text-body);
   font-size: 1.25rem;
   font-weight: 700;
 }
@@ -62,8 +63,8 @@
   aspect-ratio: 512 / 717;
   padding: 0;
   overflow: hidden;
-  border: 1px solid #aeb5bf;
-  border-radius: 0.45rem;
+  border: 1px solid var(--tp-neutral-stroke-mid);
+  border-radius: var(--tp-border-radius-lg);
   background: transparent;
 }
 
@@ -84,7 +85,7 @@
   display: grid;
   height: 100%;
   place-items: center;
-  color: #77808c;
+  color: var(--tp-text-muted);
   font-size: 2rem;
 }
 
@@ -108,7 +109,7 @@
 }
 
 .tp-solitaire-card.selected {
-  outline: 3px solid #0b63ce;
+  outline: 3px solid var(--tp-brand-stroke-mid);
   outline-offset: -3px;
 }
 
@@ -119,5 +120,5 @@
 
 .tp-solitaire-status {
   margin-block-start: 1rem;
-  color: #526071;
+  color: var(--tp-text-body);
 }

@@ -12,8 +12,48 @@
  * @tp-dependency tp-checkbox-list
  * @summary Transforms a list into a group of checkboxes.
  */
+/**
+ * @tp-dependency tp-chronometer
+ * @summary Chronometer component with play, pause and stop controls.
+ */
+/**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
+ */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
 // tp-docgen:dependencies:end
 
+import {
+	gameActivity,
+	mountLegacyGameHeader,
+} from "../../utilities/game-header.js";
 import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
 import { TpBase } from "../base/base.js";
 import "../button/button.js";
@@ -24,6 +64,7 @@ import {
 	LogigramModel,
 	readLogigramLists,
 } from "./logigram-model.js";
+import { deriveLogigramResults } from "./logigram-results.js";
 
 /**
  * The custom `<tp-logigram>` element solves logic-grid puzzles by matching items across categories using written clues.
@@ -73,7 +114,7 @@ import {
  * </dd>
  *   </dl>
  * </tp-logigram>
- * @accessibility Uses a labelled table with category headers and native cell buttons whose accessible names include both matched items and the current yes, no or unknown state.
+ *  @accessibility Uses a labelled table with category headers and native cell buttons whose accessible names include both matched items and the current yes, no or unknown state.
  * @accessibility Arrow keys move between cells, Enter or Space changes a cell, and Delete or Backspace clears it; disabled state is forwarded to game controls.
  * @accessibility Announces selection and checking feedback through status regions and exposes checked errors with aria-invalid.
  * @accessibilityresponsibility Provide clear category names, item names and written clues; keep all information needed to solve the puzzle available as text.
@@ -87,6 +128,8 @@ export class TpLogigram extends TpBase {
 	private observer = new MutationObserver(() => this.schedule());
 	private cells: HTMLButtonElement[] = [];
 	private status: HTMLElement | null = null;
+	private resultsBody: HTMLTableSectionElement | null = null;
+	private resultsHint: HTMLParagraphElement | null = null;
 	private checked = false;
 	private selectedCell: number | undefined;
 	private selectedButton: HTMLButtonElement | undefined;
@@ -286,7 +329,10 @@ export class TpLogigram extends TpBase {
 			["undo", "Undo", () => this.undo()],
 			["redo", "Redo", () => this.redo()],
 		] as const) {
-			const button = document.createElement("tp-button");
+			const button = document.createElement("tp-icon-button");
+			button.className = `tp-logigram-${name}`;
+			button.setAttribute("name", name);
+			button.setAttribute("label", label);
 			button.textContent = label;
 			button.setAttribute("type", "button");
 			button.dataset.action = name;
@@ -418,6 +464,21 @@ export class TpLogigram extends TpBase {
 			}
 		}
 		grids.append(table);
+		const results = document.createElement("div");
+		results.className = "tp-logigram-results";
+		const summary = document.createElement("table");
+		summary.createCaption().textContent = "Results";
+		const summaryHead = summary.createTHead().insertRow();
+		for (const category of categories) {
+			const th = document.createElement("th");
+			th.scope = "col";
+			th.textContent = category.name;
+			summaryHead.append(th);
+		}
+		this.resultsBody = summary.createTBody();
+		this.resultsHint = document.createElement("p");
+		this.resultsHint.setAttribute("role", "status");
+		results.append(summary, this.resultsHint);
 		header.append(title, toolbar);
 		this.append(
 			header,
@@ -428,7 +489,9 @@ export class TpLogigram extends TpBase {
 			clues,
 			this.status,
 			grids,
+			results,
 		);
+		mountLegacyGameHeader(this, "logigram");
 		this.update();
 	}
 	private createCell(index: number, transposed: boolean): HTMLButtonElement {
@@ -501,8 +564,8 @@ export class TpLogigram extends TpBase {
 		this.selectedButton = selected;
 		if (this.selectionHint)
 			this.selectionHint.textContent = selected
-				? `Selected box: ${selected.dataset.label}. Use Assist… → Show the box or Show the category pair.`
-				: "Click a grid box or focus it with Tab to enable Assist… → Show the box and Show the category pair.";
+				? `Selected box: ${selected.dataset.label}. Use Help → Show the box or Show the category pair.`
+				: "Click a grid box or focus it with Tab to enable Help → Show the box and Show the category pair.";
 		for (const option of this.assistSelect.options) {
 			option.disabled =
 				(option.value === "show-cell" || option.value === "show-block") &&
@@ -515,7 +578,30 @@ export class TpLogigram extends TpBase {
 		if (!model) return;
 		this.updateAssistance();
 		const values = model.value;
+		const summary = deriveLogigramResults(
+			model.puzzle.categories,
+			model.cells,
+			values,
+		);
+		this.resultsBody?.replaceChildren();
+		for (const values of summary.rows) {
+			const row = this.resultsBody?.insertRow();
+			if (!row) continue;
+			for (const [index, value] of values.entries()) {
+				const cell = document.createElement(index === 0 ? "th" : "td");
+				if (index === 0) cell.setAttribute("scope", "row");
+				cell.textContent = value ?? "—";
+				row.append(cell);
+			}
+		}
+		if (this.resultsHint) {
+			this.resultsHint.textContent = summary.conflict
+				? "Conflicting marks: correct the grid to display the results."
+				: "Associations deduced from your marks. — means not yet determined.";
+			this.resultsHint.dataset.conflict = String(summary.conflict);
+		}
 		const result = model.check();
+		gameActivity(this, model.canUndo, result.complete);
 		this.cells.forEach((button, i) => {
 			const mark = values[i] ?? 0;
 			button.textContent = mark === 1 ? "✓" : mark === -1 ? "×" : "·";
@@ -531,7 +617,7 @@ export class TpLogigram extends TpBase {
 			);
 		});
 		for (const control of this.querySelectorAll<HTMLElement>(
-			"tp-button[data-action], tp-checkbox-list",
+			"tp-icon-button[data-action], tp-checkbox-list",
 		)) {
 			const action = control.dataset.action;
 			control.toggleAttribute(

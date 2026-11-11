@@ -26,7 +26,7 @@
  */
 /**
  * @tp-dependency tp-typewriting
- * @summary progressively reveals text one letter or one word at a time.
+ * @summary Progressively reveals text one letter or one word at a time.
  */
 // tp-docgen:dependencies:end
 
@@ -97,7 +97,7 @@ type SpeechGlobals = {
  * @accessibilityresponsibility Do not use synthesized speech as the only way to provide information; retain equivalent visible text.
  * @keyboard {Enter / Space} Activates the native button inside each tp-button control.
  * @example
- * <tp-text-to-speech lang="en-GB" show-text>
+ * <tp-text-to-speech lang="en-GB" show-text="">
  *   <script type="tp/txt">
  *     Welcome to tp-components. This example uses the browser speech synthesis service.
  *   </script>

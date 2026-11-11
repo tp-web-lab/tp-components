@@ -43,6 +43,7 @@ const docsEnd = '<!-- tp-docgen:dependencies:end -->';
 const sourceBlockExpression = new RegExp(`${sourceStart.replaceAll('/', '\\/')}[\\s\\S]*?${sourceEnd.replaceAll('/', '\\/')}\\n?`);
 
 const credits = {
+  'chess.js': ['chess.js', 'https://github.com/jhlywa/chess.js', 'Legal chess moves, FEN validation and game-end detection (BSD-2-Clause).'],
   '@tp/tp-latex': ['tp-latex', 'https://www.npmjs.com/package/@tp/tp-latex', 'LaTeX.js conversion and patched TikZJax assets.'],
   'runtime:tikzjax': ['TikZJax', 'https://tikzjax.com/', 'WebAssembly TeX engine, core dump and SVG conversion.'],
   '@cortex-js/compute-engine': ['CortexJS Compute Engine', 'https://mathlive.io/compute-engine/', 'Symbolic comparison of mathematical answers, loaded on demand.'],

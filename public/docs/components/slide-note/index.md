@@ -15,9 +15,11 @@ The custom `<tp-slide-note>` element displays collapsible speaker notes for a pr
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-slide-note legend="Speaker notes" lang="en-GB" show-text="">
   <script type="tp/txt">Introduce the idea. [trigger=clic] Explain the next step.</script>
 </tp-slide-note>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

@@ -64,7 +64,7 @@ export interface TpVideoPlayerErrorDetail extends TpVideoPlayerEventDetail {
  * @accessibility Retains native or YouTube controls and labels the active media surface.
  * @accessibilityresponsibility Supply captions in the video source/provider and a meaningful label.
  * @example
- * <tp-video-player src="/docs/components/video-player/examples/clip-1.mp4" controls label="Moving shapes"></tp-video-player>
+ * <tp-video-player src="/docs/components/video-player/examples/clip-1.mp4" controls="" label="Moving shapes"></tp-video-player>
  */
 export class TpVideoPlayer extends TpBase {
 	private source: VideoSource | null = null;

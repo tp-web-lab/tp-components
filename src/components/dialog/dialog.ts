@@ -29,7 +29,12 @@ export interface TpDialogCloseDetail {
  * @event tp-dialog-close Emitted when the dialog is closed from one of its actions.
  * @eventdetail tp-dialog-close { action: "confirm" | "cancel" }
  * @example
- * <tp-dialog></tp-dialog>
+ * <tp-box data-intro-action="dialog" data-allow-script="">
+ *   <tp-button id="intro-dialog-trigger" data-demo-trigger="">Open the confirmation dialog</tp-button>
+ *   <tp-dialog></tp-dialog>
+ *   <p data-demo-status="" role="status">Try the dialog using its trigger.</p>
+ *   <script src="/docs/components/_shared/introduction-actions.js"></script>
+ * </tp-box>
  */
 export class TpDialog extends TpBase {
 	private dialogEl: HTMLDialogElement | null = null;

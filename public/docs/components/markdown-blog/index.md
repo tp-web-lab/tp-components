@@ -15,6 +15,7 @@ The custom `<tp-markdown-blog>` element lists dated articles with summaries, cat
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-markdown-blog page-size="2">
   <script type="tp/markdown">
     ## A small garden
@@ -75,6 +76,7 @@ The custom `<tp-markdown-blog>` element lists dated articles with summaries, cat
     We share practical ideas and small discoveries. Come back for the next article.
   </script>
 </tp-markdown-blog>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

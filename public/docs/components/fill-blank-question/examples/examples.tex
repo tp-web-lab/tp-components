@@ -229,31 +229,15 @@ document.body.append(example);
 \wcTpFillBlankQuestion[mode=closed,lang=en]{
   \begin{description}
     \item[{Answers}] \begin{enumerate}
-      \item \wcSpan*[aria-label=Nonnegative real numbers]{$\mathbb{R}_{+}$}
-      \item \wcSpan*[aria-label=Positive real numbers]{$\mathbb{R}_{+}^{*}$}
-      \item \wcSpan*[aria-label=One over twice the square root of x]{$\frac{1}{2\sqrt{x}}$}
+      \item \rawhtml*|<tp-math aria-label="Nonnegative real numbers" value="\mathbb{R}_{+}"></tp-math>|
+      \item \rawhtml*|<tp-math aria-label="Positive real numbers" value="\mathbb{R}_{+}^{*}"></tp-math>|
+      \item \rawhtml*|<tp-math aria-label="One over twice the square root of x" value="\frac{1}{2\sqrt{x}}"></tp-math>|
     \end{enumerate}
     \item[{Title}] The square root function
     \item[{Prompt}] Complete the sentence with the mathematical expressions.
-    \item[{Form}] The square root function $f(x) = \sqrt{x}$ is defined on \wcTpBlank*[name=domain,aria-label=Domain]{}, differentiable on \wcTpBlank*[name=differentiability,aria-label=Domain of differentiability]{}, and $f'(x) =$ \wcTpBlank*[name=derivative,aria-label=Derivative]{}.
+    \item[{Form}] The square root function \rawhtml*|<tp-math value="f(x) = \sqrt{x}"></tp-math>| is defined on \wcTpBlank*[name=domain,aria-label=Domain]{}, differentiable on \wcTpBlank*[name=differentiability,aria-label=Domain of differentiability]{}, and \rawhtml*|<tp-math value="f'(x) ="></tp-math>| \wcTpBlank*[name=derivative,aria-label=Derivative]{}.
     \item[{Feedback}] Consider whether zero belongs to the domain and whether the derivative exists there.
-    \item[{Solution}] The domain is $\mathbb{R}_{+} = [0, +\infty)$. The function is differentiable on $\mathbb{R}_{+}^{*} = (0, +\infty)$, with $f'(x) = \frac{1}{2\sqrt{x}}$.
+    \item[{Solution}] The domain is \rawhtml*|<tp-math value="\mathbb{R}_{+} = [0, +\infty)"></tp-math>|. The function is differentiable on \rawhtml*|<tp-math value="\mathbb{R}_{+}^{*} = (0, +\infty)"></tp-math>|, with \rawhtml*|<tp-math value="f'(x) = \frac{1}{2\sqrt{x}}"></tp-math>|.
   \end{description}
 }
-
-\wcScript|
-    // Wait for the question and its answer buttons before typesetting their content.
-    window.MathJax = {
-      svg: { fontCache: "local" },
-      startup: {
-        pageReady: async () => {
-          await customElements.whenDefined("tp-fill-blank-question");
-          await customElements.whenDefined("tp-button");
-          return MathJax.startup.defaultPageReady();
-        }
-      }
-    };
-  |
-
-\wcScript[defer,src=https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js]||
 \end{document}

@@ -11,12 +11,12 @@ The test suites cover component behavior, shared utilities, the local question-a
 | `pnpm test:scripts` | Node test runner tests in `scripts/*.test.mjs`: documentation, examples, generators, CI configuration and publication helpers. |
 | `pnpm test:playgrounds` | Functional Playwright tests in Chromium, Firefox and WebKit: local files, Python projects, and dynamic editor/iframe sizing. |
 | `pnpm test:a11y` | Playwright accessibility scenarios in all three browser engines, including color contracts and geometry keyboard interaction. |
-| `pnpm test:all` | The four suites above, in order; execution stops at the first failing suite. |
+| `pnpm test:all` | `test`, `test:scripts`, `test:playgrounds`, then `test:a11y`; execution stops at the first failing suite. Coverage is not included. |
 | `pnpm test:component <name>` | Focused Vitest regression tests for one component. |
 | `pnpm test:a11y:component <name>` | Focused browser accessibility scenarios for one component. |
 | `pnpm exec tsc --noEmit` | Type checking, separate from test execution. |
 
-Install the three Playwright browsers with `pnpm exec playwright install` when they are not available. Browser suites start a local Vite server on port 4173; outside CI they may reuse an existing server, which must serve this checkout. Python integration tests also require the browser runtime resources to be available.
+Install the three Playwright browsers with `pnpm exec playwright install` when they are not available. Browser suites use a dedicated Vite server on port 4198 and the `node_modules/.vite-playwright` dependency cache. Hot reload is disabled during these runs. This keeps the development server on port 4173 and its optimized dependencies independent; outside CI, a running test server can be reused only if it serves this checkout. Python integration tests also require the browser runtime resources to be available. Run the suites sequentially, as `test:all` does. For concurrent browser suites, start the test server separately with `pnpm vite --config vite.playwright.config.ts`; otherwise the first suite to finish can stop a server still used by another suite.
 
 `pnpm test` does **not** run the Node script suite or Playwright. The server's `.test.mjs` file imports Vitest and belongs to `pnpm test`; do not execute it with `node --test`.
 
@@ -49,6 +49,29 @@ Changed TypeScript files, including tests, must pass `pnpm exec biome check <fil
 
 ## Execution results and coverage
 
+### Review of 11 November 2026
+
+The first full Vitest pass ran **3,824 tests in 364 files**: 3,793 passed and 31 failed, with 19 additional asynchronous teardown errors. The initial script suite had 17 failures. These are initial diagnostic results, not a successful final validation.
+
+The review updates regression tests for the current Component viewer Demo, Javascript API examples, five markup tabs, game headers and notebook export color scope. It also restores the Square root example's use of `tp-math` in all five markup formats and waits for asynchronous imports before disposing of test environments. Browser scenarios use a separate Vite server/cache to avoid stale optimized dependencies from the development server. The review also corrects contrast in chess/checkers coordinates, preformatted code in boxes and the Loto draw button, and preserves Demo attribute edits made before the preview finishes loading.
+
+Validation distinguishes complete runs from targeted reruns; the counts below must not be added together. Machine-readable results are stored in `config/test-review-latest.json`.
+
+| Suite or check | Result |
+| --- | --- |
+| Full Vitest rerun | **3,817 passed, 7 failed in 364 files**, plus one asynchronous teardown error. The AsciiDoc fixture was corrected after this run started. |
+| Targeted unit verification | **182 tests in seven files** cover the failed cases, asynchronous teardown and the new preview-loading regression. The four failures remaining under concurrent load were checked again in an isolated **50-test run: all passed**. This is not a new clean full-suite run. |
+| Node script tests | **110 passed, 1 failed**, no skips in the full run. After configuring the published LaTeX repository, the five CI workspace tests passed on a targeted rerun. |
+| Functional browser tests | **45 passed**, no failures: 15 scenarios in each of Chromium, Firefox and WebKit. |
+| Accessibility | **633 passed, 3 failed** across 636 scenarios: 630 component scans, three color-contract checks and three geometry keyboard checks. No scan errors. The corrected Loto scenario subsequently **passed in all three engines**. |
+| TypeScript and changed-file Biome checks | Passed. |
+| Example structure, native markup, descriptions and labels | Passed: 210 example sets, 2,022 native examples and 674 descriptions. |
+
+The isolated 50-test rerun retains the assertions and time limits of the preceding run. Run expensive DOM suites separately from browser audits to avoid resource contention. The full accessibility report preserves its original findings; the Loto rerun does not overwrite that report. Automated scans also contain 490 incomplete checks that require review; they are not equivalent to passed checks.
+
+The missing `chess.js` entry was restored in the frozen CI lockfile. The CI workspace now includes `tp-latex` at revision `d6e8f598d4ca78153f5946765ef98ac20c96623e`, with a dedicated read-only deploy key. The frozen installation and all five dependency builds passed in an isolated workspace under Node.js 24.22.2; the five CI configuration tests also passed. The browser audit also reports accessibility violations inside the external YouTube player used by the video-player example; these third-party findings remain visible in the results and cannot be fixed in the component’s own markup. Coverage and Lighthouse measurements below are historical and are not refreshed by ordinary test execution.
+
+
 ### Review of 29 October 2026
 
 The review inventories 319 Vitest files, including the local server suite, plus the separate Node and Playwright suites. No test is intentionally skipped or marked todo. The initial Vitest run reported 3,420 passed and 26 failed tests; the initial script run reported 84 passed and eight failed tests.
@@ -64,7 +87,7 @@ Final validation:
 | TypeScript and changed-file Biome checks | Passed. |
 | Example structure, native markup, descriptions and labels | Passed: 1,575 examples and 525 descriptions in 185 component pages. |
 
-Vitest completed at 2026-10-29T10:01:47.796Z. Machine-readable totals are stored in `config/test-review-latest.json`; current Vitest results are also recorded in `config/component-quality-latest-run.json`. Browser failures caused by the former combined sizing scenario were corrected by giving each language an independent scenario. A traced Firefox run also exceeded the local-file scenario's deadline; the final full browser run passed without tracing.
+Vitest completed at 2026-10-29T10:01:47.796Z. Machine-readable totals for that review are stored in `config/test-review-2026-10-29.json`; current Vitest results are also recorded in `config/component-quality-latest-run.json`. Browser failures caused by the former combined sizing scenario were corrected by giving each language an independent scenario. A traced Firefox run also exceeded the local-file scenario's deadline; the final full browser run passed without tracing.
 
 Coverage and Lighthouse were recalculated in the follow-ups below.
 

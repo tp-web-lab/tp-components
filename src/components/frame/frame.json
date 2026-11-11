@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-frame></tp-frame>"
+      "code": "<tp-frame aspect-ratio=\"16:9\" style=\"max-width: 24rem;\">\n  <img src=\"/docs/medias/logos/logo-tp.svg\" alt=\"tp-components logo\">\n</tp-frame>"
     }
   ],
   "attributes": [

@@ -15,12 +15,14 @@ The custom `<tp-python-notebook>` element combines written explanations and exec
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-python-notebook>
     <script type="tp/markdown"># Interactive Python
 
 Select **Run all cells** to execute the program. Use the code button in a cell to edit its source.</script>
     <script type="tp/python">print("Hello from Python")</script>
   </tp-python-notebook>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

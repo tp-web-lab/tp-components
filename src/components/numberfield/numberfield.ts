@@ -66,8 +66,11 @@ export type TpNumberfieldLabelPosition = TpChoiceLabelPosition;
  * @cssprop [--tp-numberfield-border-color=var(--tp-neutral-stroke-soft)] Field border color.
  * @cssprop [--tp-numberfield-focus-color=var(--tp-brand-text-colorful)] Border color and translucent outline tint while focus is inside the numeric control.
  * @example
- * <tp-numberfield label="Quantity" value="3" min="0" max="10" clearable></tp-numberfield>
- * @accessibility Uses a native number or range input with an associated visible label or forwarded aria-label; forwards numeric constraints and native disabled or readonly behavior.
+ * <tp-cluster>
+ *   <tp-numberfield label="Quantity" value="3" min="0" max="10" clearable=""></tp-numberfield>
+ *   <tp-numberfield label="Level" value="40" min="0" max="100" step="5" range="" clearable=""></tp-numberfield>
+ * </tp-cluster>
+ *  @accessibility Uses a native number or range input with an associated visible label or forwarded aria-label; forwards numeric constraints and native disabled or readonly behavior.
  * @accessibility The optional clear button is labelled and unavailable when editing is blocked. Decorative markers and the duplicate slider readout are hidden from assistive technology.
  * @accessibility A readonly range input is disabled for interaction while a hidden mirror preserves its submitted value.
  * @accessibilityresponsibility Provide a meaningful label or aria-label and explain units, limits and step values where needed; do not use a placeholder as the only label.

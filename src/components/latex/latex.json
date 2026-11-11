@@ -74,7 +74,7 @@
   "userHelp": {
     "displayName": "LaTeX",
     "introduction": "The custom `<tp-latex>` element renders LaTeX documents, mathematical formulas and TikZ drawings.",
-    "interactions": "",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Links and embedded components | Follow document links and use each embedded component’s controls. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open help for the component under the pointer, or the focused component. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component in the hierarchy and open its help. |",
     "keyboard": []
   }
 }

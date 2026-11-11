@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-graph-dfa></tp-graph-dfa>"
+      "code": "<tp-graph-dfa id=\"dfa-starts-with-ab\" grid=\"\" grid-size=\"20\" src=\"/docs/components/graph-dfa/examples/starts-with-ab.json\"></tp-graph-dfa>"
     }
   ],
   "attributes": [],

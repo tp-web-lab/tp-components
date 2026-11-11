@@ -1,23 +1,21 @@
 import { expect, test } from "@playwright/test";
 
-test("Attributes keeps Python runnable after switching sources and interrupting a preview", async ({
+test("Demo keeps Python runnable after switching sources and interrupting a preview", async ({
 	page,
 }) => {
 	await page.setViewportSize({ width: 800, height: 768 });
 	await page.goto("/index.html#/components/python-playground/index.md");
-	await page.locator("tp-html-viewer select").selectOption("Attributes");
-	const controls = page.frameLocator("tp-html-viewer iframe");
-	await expect(controls.locator("#attributes-status")).toContainText("Ready.");
-	// Safari rejects a third nested about:srcdoc; the Attributes wrapper must
-	// have a distinct document URL before the playground creates its renderer.
-	await expect(controls.locator("#attributes-frame iframe")).toHaveAttribute(
-		"src",
-		/^blob:/,
+	const controls = page.locator(
+		'tp-component-viewer[tag="tp-python-playground"]',
 	);
-	const preview = controls.frameLocator("#attributes-frame iframe");
+	await controls.getByRole("radio", { name: "Demo", exact: true }).check();
+	await expect(
+		controls.locator("[data-component-preview] iframe"),
+	).toHaveAttribute("srcdoc", /tp-python-playground/);
+	const preview = controls.frameLocator("[data-component-preview] iframe");
 	const output = preview.frameLocator("tp-python-playground tp-iframe iframe");
 	const run = preview.locator("[data-tp-playground-run] button");
-	const source = controls.locator('[data-setting="src"]');
+	const source = controls.locator('[data-component-setting="src"]');
 	const consoleOutput = preview.locator("tp-console");
 
 	await source.getByRole("radio", { name: "file1", exact: true }).check();
@@ -70,12 +68,17 @@ test("repository examples render distinct projects and reload edited Python impo
 	page,
 }) => {
 	await page.goto("/index.html#/components/python-playground/index.md");
-	await page.locator("tp-html-viewer select").selectOption("Attributes");
-	const controls = page.frameLocator("tp-html-viewer iframe");
-	await expect(controls.locator("#attributes-status")).toContainText("Ready.");
-	const preview = controls.frameLocator("#attributes-frame iframe");
+	const controls = page.locator(
+		'tp-component-viewer[tag="tp-python-playground"]',
+	);
+	await controls.getByRole("radio", { name: "Demo", exact: true }).check();
+	const preview = controls.frameLocator("[data-component-preview] iframe");
 	const output = preview.frameLocator("tp-python-playground tp-iframe iframe");
-	const repository = controls.locator('[data-setting="repository"]');
+	const repository = controls.locator('[data-component-setting="repository"]');
+	await controls
+		.locator('[data-component-setting="src"]')
+		.getByRole("radio", { name: "Default", exact: true })
+		.check();
 	const run = preview.locator("[data-tp-playground-run] button");
 	const consoleOutput = preview.locator("tp-console");
 	await repository.getByRole("radio", { name: "dir1", exact: true }).check();

@@ -94,7 +94,12 @@ function joinRepository(base: string, part: string): string {
  * @event tp-lang-change Emitted when the selected documentation language changes.
  * @eventdetail tp-lang-change { choice: string; lang: string; repository: string; anchor: null; target: HTMLElement | null }
  * @example
- * <tp-lang></tp-lang>
+ * <tp-box data-intro-action="lang" data-allow-script="">
+ *   <p>Choose English or French to change the message in this isolated example.</p>
+ *   <tp-lang langs="en,fr" repository="/docs/components/lang/examples"></tp-lang>
+ *   <h2 data-demo-translation="">Welcome to this example.</h2>
+ *   <script src="/docs/components/_shared/introduction-actions.js"></script>
+ * </tp-box>
  */
 export class TpLang extends TpBase {
 	private static readonly dropdownPlacement = "bottom";

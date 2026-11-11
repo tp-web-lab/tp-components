@@ -148,7 +148,7 @@ function wrapAsMarkdownCodeBlock(source: string): string {
  * @attr {string} brand = "tp-default" - Legacy brand preset property, such as tp-default. Attribute-driven styling is currently inactive; use the toolbar color control.
  * @example
  * <tp-markdown-multi-pages></tp-markdown-multi-pages>
- * @cssprop [--tp-markdown-multi-pages-sidebar-width=12rem] Width of the overlay navigation sidebar on narrow screens, capped at 85% of its container; desktop sizing is controlled by the splitter.
+ *  @cssprop [--tp-markdown-multi-pages-sidebar-width=12rem] Width of the overlay navigation sidebar on narrow screens, capped at 85% of its container; desktop sizing is controlled by the splitter.
  */
 export class TpMarkdownMultiPages extends TpBase {
 	public static get observedAttributes(): string[] {

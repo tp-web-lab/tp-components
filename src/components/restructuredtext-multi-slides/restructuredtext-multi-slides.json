@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-restructuredtext-multi-slides></tp-restructuredtext-multi-slides>"
+      "code": "<tp-restructuredtext-multi-slides repository=\"/docs/components/restructuredtext-multi-pages/docs\"></tp-restructuredtext-multi-slides>"
     }
   ],
   "attributes": [

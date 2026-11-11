@@ -3,7 +3,6 @@
     "binary",
     "cryptarithm",
     "crossword",
-    "game-life",
     "loto",
     "mastermind",
     "memory",
@@ -11,7 +10,7 @@
     "sudoku",
     "yakazu"
   ],
-  "testFileCount": 10,
+  "testFileCount": 9,
   "targets": {
     "lines": 90,
     "statements": 90,

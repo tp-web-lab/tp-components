@@ -118,7 +118,7 @@ bundler
 
 <!-- tp-docgen:example-descriptions:start -->
 Basic usage
-: Complete the Wikipedia cross-sum grid with digits from 1 to 9, without repeating a digit within a run. Try Notes, Check and the reveal actions.
+: Complete the Wikipedia cross-sum grid with digits from 1 to 9, without repeating a digit within a run. Try Game/Note mode, Check and the reveal actions.
 
 Javascript API
 : Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
@@ -157,9 +157,54 @@ All tp-components and external tools used by this component are loaded automatic
 @tp-dependency tp-button
 @summary Button component that supports native button and link rendering.
 -->
+<!--
+@tp-dependency tp-chronometer
+@summary Chronometer component with play, pause and stop controls.
+-->
+<!--
+@tp-dependency tp-color
+@summary Brand color preset controller scoped to the containing element.
+-->
+<!--
+@tp-dependency tp-divider
+@summary Visual separator for menus, dropdowns, toolbars, and layouts.
+-->
+<!--
+@tp-dependency tp-drawer
+@summary Drawer overlay component.
+-->
+<!--
+@tp-dependency tp-dropdown
+@summary Dropdown menu component.
+-->
+<!--
+@tp-dependency tp-fullscreen
+@summary Fullscreen controller button.
+-->
+<!--
+@tp-dependency tp-icon
+@summary SVG icon component with inline, URL, and registry sources.
+-->
+<!--
+@tp-dependency tp-icon-button
+@summary Accessible icon button component.
+-->
+<!--
+@tp-dependency tp-theme
+@summary Parent-scoped light/dark/auto theme controller with embedded UI.
+-->
 
 - [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 - [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
+- [`<tp-chronometer>`](#/components/chronometer/index.md) : Chronometer component with play, pause and stop controls.
+- [`<tp-color>`](#/components/color/index.md) : Brand color preset controller scoped to the containing element.
+- [`<tp-divider>`](#/components/divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
+- [`<tp-drawer>`](#/components/drawer/index.md) : Drawer overlay component.
+- [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
+- [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-theme>`](#/components/theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
 
 ### External
 

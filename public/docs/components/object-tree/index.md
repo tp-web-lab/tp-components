@@ -15,6 +15,7 @@ The custom `<tp-object-tree>` element displays JavaScript values as an expandabl
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-object-tree>
   <script type="tp/javascript">
     ({
@@ -27,6 +28,7 @@ The custom `<tp-object-tree>` element displays JavaScript values as an expandabl
     })
   </script>
 </tp-object-tree>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

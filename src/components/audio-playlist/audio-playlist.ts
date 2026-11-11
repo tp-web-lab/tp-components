@@ -42,7 +42,7 @@ import style from "./audio-playlist.css?inline";
  * </li>
  * </ol>
  * </tp-audio-playlist>
- * @accessibility Preserves list semantics and keyboard-operable track links, marks the current track with aria-current, and announces status changes.
+ *  @accessibility Preserves list semantics and keyboard-operable track links, marks the current track with aria-current, and announces status changes.
  * @accessibilityresponsibility Supply meaningful track titles and transcripts for spoken content.
  */
 export class TpAudioPlaylist extends TpBase {

@@ -13,6 +13,26 @@
  * @summary Chronometer component with play, pause and stop controls.
  */
 /**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -24,8 +44,17 @@
  * @tp-dependency tp-switcher
  * @summary Switches between horizontal and vertical layouts based on available space.
  */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
 // tp-docgen:dependencies:end
 
+import {
+	gameActivity,
+	mountGameHeader,
+	updateGameHeader,
+} from "../../utilities/game-header.js";
 import { TpBase } from "../base/base.js";
 import style from "./loto.css?inline";
 import "../chronometer/chronometer.js";
@@ -61,6 +90,7 @@ export class TpLoto extends TpBase {
 	private drawPile: number[] = [];
 	private drawnNumbers: number[] = [];
 	private chronometerStarted = false;
+	private undone: number[] = [];
 	private completed = false;
 	private rendered = false;
 
@@ -116,6 +146,7 @@ export class TpLoto extends TpBase {
 			Array.from({ length: 90 }, (_, index) => index + 1),
 		);
 		this.drawnNumbers = [];
+		this.undone = [];
 		this.chronometerStarted = false;
 		this.completed = false;
 		this.chronometer?.stop();
@@ -132,6 +163,7 @@ export class TpLoto extends TpBase {
 			this.chronometer?.play();
 			this.chronometerStarted = true;
 		}
+		this.undone = [];
 		this.drawnNumbers.push(number);
 		this.completed = this.ticketNumbers.every((ticketNumber) =>
 			this.drawnNumbers.includes(ticketNumber),
@@ -149,6 +181,23 @@ export class TpLoto extends TpBase {
 		return number;
 	}
 
+	/** Takes back the last draw, restoring its place in the draw pile. */
+	public undo(): void {
+		const n = this.drawnNumbers.pop();
+		if (n === undefined) return;
+		this.drawPile.push(n);
+		this.undone.push(n);
+		this.completed = false;
+		this.renderGame();
+	}
+	/** Replays the next undone draw without generating another number. */
+	public redo(): void {
+		if (!this.undone.length) return;
+		const remaining = this.undone.slice(0, -1);
+		this.draw();
+		this.undone = remaining;
+		updateGameHeader(this);
+	}
 	private get chronometer(): TpChronometer | null {
 		return this.querySelector<TpChronometer>(".tp-loto-chronometer");
 	}
@@ -180,9 +229,43 @@ export class TpLoto extends TpBase {
 		this.querySelector(".tp-loto-draw-button")?.addEventListener("click", () =>
 			this.draw(),
 		);
+		const target = this.querySelector<HTMLElement>(".tp-loto-header");
+		if (target)
+			mountGameHeader(this, {
+				name: "Loto",
+				icon: "loto",
+				target,
+				chronometer: this.chronometer ?? undefined,
+				reset: () => this.reset(),
+				undo: () => this.undo(),
+				redo: () => this.redo(),
+				canUndo: () => this.drawnNumbers.length > 0,
+				canRedo: () => this.undone.length > 0,
+				help: () => [
+					{
+						label: "Draw the next number",
+						run: () => {
+							this.draw();
+						},
+						disabled: () => this.completed,
+					},
+					{
+						label: "Highlight undrawn ticket numbers",
+						run: () => {
+							this.querySelectorAll<HTMLElement>(
+								".tp-loto-cell:not(.empty):not(.drawn)",
+							).forEach((cell) => {
+								cell.toggleAttribute("data-game-hint");
+							});
+						},
+					},
+				],
+			});
 	}
 
 	private renderGame(): void {
+		updateGameHeader(this);
+		gameActivity(this, this.drawnNumbers.length > 0, this.completed);
 		const drawn = new Set(this.drawnNumbers);
 		const tickets = this.querySelector(".tp-loto-tickets");
 		if (tickets) {
@@ -201,7 +284,7 @@ export class TpLoto extends TpBase {
                   class="tp-loto-cell${cell === null ? " empty" : ""}${cell !== null && drawn.has(cell) ? " drawn" : ""}"
                   role="gridcell"
                   aria-colindex="${columnIndex + 1}"
-                  ${cell !== null && drawn.has(cell) ? 'aria-label="' + cell + ', drawn"' : ""}
+                  ${cell !== null && drawn.has(cell) ? `aria-label="${cell}, drawn"` : ""}
                 >${cell ?? ""}</div>
               `,
 								)
@@ -221,7 +304,7 @@ export class TpLoto extends TpBase {
 			current.innerHTML =
 				currentNumber === undefined
 					? "—"
-					: `<tp-icon name="${currentNumber}" library="numbers" size="3.5rem"></tp-icon>`;
+					: `<tp-icon name="${currentNumber}" library="numbers" size="100%"></tp-icon>`;
 		}
 		const history = this.querySelector(".tp-loto-history");
 		if (history) {
@@ -229,7 +312,7 @@ export class TpLoto extends TpBase {
 				.map(
 					(number) => `
           <span class="tp-loto-ball" role="listitem" aria-label="${number}">
-            <tp-icon name="${number}" library="numbers" size="2.75rem"></tp-icon>
+            <tp-icon name="${number}" library="numbers" size="100%"></tp-icon>
           </span>
         `,
 				)

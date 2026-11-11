@@ -1,5 +1,9 @@
 import { readFileSync } from "node:fs";
 import { afterEach, expect, it, vi } from "vitest";
+import {
+	gameHelp,
+	gameHelpItem,
+} from "../../utilities/game-header-test-helpers.js";
 import { renderAsciidocToHtml } from "../asciidoc/asciidoc.js";
 import { renderMarkdownToHtml } from "../markdown/markdown.js";
 import { TpLogigram } from "./logigram.js";
@@ -89,7 +93,9 @@ it.each([
 			label: string;
 			source: string;
 		}[];
-		for (const example of examples.filter((e) => e.label !== "Attributes")) {
+		for (const example of examples.filter(
+			(e) => e.label !== "Attributes" && e.label !== "Javascript API",
+		)) {
 			document.body.innerHTML = await render(example.source);
 			const game = document.querySelector("tp-logigram");
 			expect(game).toBeInstanceOf(TpLogigram);
@@ -229,11 +235,14 @@ it("shares triangular headers and preserves matches and arrow directions in the 
 	const game = document.querySelector("tp-logigram");
 	if (!game) throw new Error("Missing game");
 	await vi.waitFor(() => expect(game.value).toHaveLength(27));
-	expect(game.querySelectorAll("table")).toHaveLength(1);
+	expect(game.querySelectorAll(".tp-logigram-matrix")).toHaveLength(1);
+	expect(game.querySelectorAll(".tp-logigram-results table")).toHaveLength(1);
 	expect(
-		[...game.querySelectorAll("tbody")].map(
-			(body) => body.querySelectorAll("button").length,
-		),
+		[
+			...game.querySelectorAll<HTMLTableSectionElement>(
+				".tp-logigram-matrix tbody",
+			),
+		].map((body) => body.querySelectorAll("button").length),
 	).toEqual([18, 9]);
 	expect(
 		[...game.querySelectorAll("th[scope=colgroup]")].map(
@@ -291,11 +300,15 @@ it.each(dimensions)(
 			categories.slice(1).map((c) => c.name),
 		);
 		expect(headers.every((h) => h.colSpan === size)).toBe(true);
-		const columnLabels = [...game.querySelectorAll("th[scope=col]")].map(
-			(h) => h.textContent,
-		);
+		const columnLabels = [
+			...game.querySelectorAll(".tp-logigram-matrix th[scope=col]"),
+		].map((h) => h.textContent);
 		expect(columnLabels).toEqual(categories.slice(1).flatMap((c) => c.items));
-		const bodies = [...game.querySelectorAll("tbody")];
+		const bodies = [
+			...game.querySelectorAll<HTMLTableSectionElement>(
+				".tp-logigram-matrix tbody",
+			),
+		];
 		expect(bodies).toHaveLength(count - 1);
 		const seenPairs = new Set<string>();
 		for (const [band, body] of bodies.entries()) {
@@ -405,17 +418,14 @@ it("offers assistance on the retained selection and respects disabled state", as
 	const game = document.querySelector("tp-logigram");
 	if (!game) throw new Error("Missing game");
 	await vi.waitFor(() => expect(game.value).toHaveLength(27));
-	const menu = game.querySelector<HTMLSelectElement>(
-		"select.tp-logigram-assist",
-	);
+	const menu = game.querySelector<HTMLElement>('[data-game-command="help"]');
 	const cell = game.querySelector<HTMLButtonElement>('button[data-cell="18"]');
 	if (!menu || !cell) throw new Error("Missing controls");
 	const run = (action: string) => {
-		menu.value = action;
-		menu.dispatchEvent(new Event("change", { bubbles: true }));
+		gameHelp(game, action);
 	};
 	expect(
-		menu.querySelector<HTMLOptionElement>('[value="show-cell"]')?.disabled,
+		gameHelpItem(game, "show-cell").getAttribute("aria-disabled") === "true",
 	).toBe(true);
 	cell.click();
 	menu.focus();
@@ -424,11 +434,11 @@ it("offers assistance on the retained selection and respects disabled state", as
 		game.querySelector(".tp-logigram-selection-hint")?.textContent,
 	).toContain("Selected box:");
 	expect(
-		menu.querySelector<HTMLOptionElement>('[value="show-cell"]')?.disabled,
+		gameHelpItem(game, "show-cell").getAttribute("aria-disabled") === "true",
 	).toBe(false);
 	run("show-cell");
 	expect(game.value[18]).toBe(1);
-	expect(menu.value).toBe("");
+	expect(game.querySelector(".tp-game-help")?.hasAttribute("open")).toBe(false);
 	game.undo();
 	expect(game.value[18]).toBe(-1);
 	run("show-block");
@@ -437,7 +447,9 @@ it("offers assistance on the retained selection and respects disabled state", as
 	game.reset();
 	expect(game.value.every((v) => v === 0)).toBe(true);
 	game.disabled = true;
-	expect(menu.disabled).toBe(true);
+	expect(
+		gameHelpItem(game, "show-solution").getAttribute("aria-disabled"),
+	).toBe("true");
 	run("show-solution");
 	expect(game.value.every((v) => v === 0)).toBe(true);
 	game.disabled = false;
@@ -447,4 +459,29 @@ it("offers assistance on the retained selection and respects disabled state", as
 	expect(game.value.every((v) => v === 0)).toBe(true);
 	game.undo();
 	expect(game.check()?.complete).toBe(true);
+});
+
+it("updates the results table from exclusions and restores it through history", async () => {
+	document.body.innerHTML = readFileSync(
+		"public/docs/components/logigram/examples/introduction.html",
+		"utf8",
+	);
+	const game = document.querySelector("tp-logigram");
+	if (!game) throw new Error("Missing game");
+	await vi.waitFor(() => expect(game.value).toHaveLength(27));
+	const result = () =>
+		Array.from(
+			game.querySelectorAll(".tp-logigram-results tbody tr:first-child > *"),
+			(cell) => cell.textContent,
+		);
+	expect(result()).toEqual(["Ada", "—", "—"]);
+	game.querySelector<HTMLButtonElement>('[data-cell="0"]')?.click();
+	game.querySelector<HTMLButtonElement>('[data-cell="1"]')?.click();
+	expect(result()).toEqual(["Ada", "Science", "—"]);
+	game.undo();
+	expect(result()).toEqual(["Ada", "—", "—"]);
+	game.redo();
+	expect(result()).toEqual(["Ada", "Science", "—"]);
+	game.reset();
+	expect(result()).toEqual(["Ada", "—", "—"]);
 });

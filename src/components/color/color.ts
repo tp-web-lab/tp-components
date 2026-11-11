@@ -192,10 +192,10 @@ function syncColorTargets(target: HTMLElement, source: TpColor): void {
  * @eventdetail tp-color-change { preset: string; brand: string; anchor: string; target: HTMLElement }
  * @example
  * <section>
- * <tp-color></tp-color>
- * <p>The selected brand color is scoped to this section.</p>
- * <p><code>Inline code</code> is displayed in the brand colour.</p>
- * </section>
+ *       <tp-color></tp-color>
+ *       <p>The selected brand color is scoped to this section.</p>
+ *       <code>Inline code uses the selected brand colour.</code>
+ *     </section>
  */
 export class TpColor extends TpBase {
 	private static readonly styleId = "tp-color-styles";

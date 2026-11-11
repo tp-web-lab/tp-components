@@ -144,8 +144,8 @@ export function createDfaStep(
  *
  *
  * @example
- * <tp-graph-dfa></tp-graph-dfa>
- * @event tp-dfa-reset Emitted after the input word, consumed-symbol count and active state are reset. stateId is null when no initial state is available; graph is the resulting snapshot.
+ * <tp-graph-dfa id="dfa-starts-with-ab" grid="" grid-size="20" src="/docs/components/graph-dfa/examples/starts-with-ab.json"></tp-graph-dfa>
+ *  @event tp-dfa-reset Emitted after the input word, consumed-symbol count and active state are reset. stateId is null when no initial state is available; graph is the resulting snapshot.
  * @eventdetail tp-dfa-reset { word: string; stateId: string | null; graph: TpGraphDocument }
  * @event tp-dfa-step Emitted after consuming one symbol and completing its transition animation. position is the number of consumed symbols; accepted and rejected describe the resulting state.
  * @eventdetail tp-dfa-step { symbol: string; position: number; stateId: string | null; accepted: boolean; rejected: boolean; graph: TpGraphDocument }

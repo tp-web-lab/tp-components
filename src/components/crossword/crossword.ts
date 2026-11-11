@@ -57,13 +57,54 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-chronometer
+ * @summary Chronometer component with play, pause and stop controls.
+ */
+/**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
+ */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
+/**
  * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
  * @summary Shared parsers, games and rendering utilities.
  */
 // tp-docgen:dependencies:end
 
 import { CrosswordEngine } from "@tp/tp-utilities/games/crossword";
+import {
+	gameActivity,
+	mountLegacyGameHeader,
+} from "../../utilities/game-header.js";
 import { TpBase } from "../base/base.js";
+import type { TpIconButton } from "../icon-button/icon-button.js";
 import style from "./crossword.css?inline";
 
 /**
@@ -78,35 +119,11 @@ import style from "./crossword.css?inline";
  *
  * @example
  * <tp-crossword>
- * <dl>
- *   <dt>solution</dt>
- *   <dd>
- *     <ol>
- *       <li>BALL</li>
- *       <li>AREA</li>
- *       <li>LEAD</li>
- *       <li>LADY</li>
- *     </ol>
- *    </dd>
- *   <dt>across</dt>
- *   <dd>
- *     <ol>
- *       <li>A. A round toy used in many sports</li>
- *       <li>B. The size of a surface</li>
- *       <li>C. A heavy metal</li>
- *       <li>D. A polite word for a woman</li>
- *     </ol>
- *   </dd>
- *   <dt>down</dt>
- *   <dd>
- *     <ol>
- *       <li>1. A round toy used in many sports</li>
- *        <li>2. The size of a surface</li>
- *        <li>3. A heavy metal</li>
- *        <li>4. A polite word for a woman</li>
- *      </ol>
- *    </dd>
- *  </dl>
+ *   <dl>
+ *     <dt>solution</dt><dd><ol><li>BALL</li><li>AREA</li><li>LEAD</li><li>LADY</li></ol></dd>
+ *     <dt>across</dt><dd><ol><li>A. A round toy used in many sports</li><li>B. The size of a surface</li><li>C. A heavy metal</li><li>D. A polite word for a woman</li></ol></dd>
+ *     <dt>down</dt><dd><ol><li>1. A round toy used in many sports</li><li>2. The size of a surface</li><li>3. A heavy metal</li><li>4. A polite word for a woman</li></ol></dd>
+ *   </dl>
  * </tp-crossword>
  */
 export class TpCrossword extends TpBase {
@@ -148,13 +165,13 @@ export class TpCrossword extends TpBase {
 	 * Button for undoing the last move.
 	 * @private
 	 */
-	private undoButton: HTMLButtonElement | null = null;
+	private undoButton: TpIconButton | null = null;
 
 	/**
 	 * Button for redoing the last undone move.
 	 * @private
 	 */
-	private redoButton: HTMLButtonElement | null = null;
+	private redoButton: TpIconButton | null = null;
 
 	/**
 	 * Dropdown menu for game assistance options.
@@ -313,8 +330,8 @@ export class TpCrossword extends TpBase {
         <div class="tp-crossword-header">
           <div class="tp-crossword-title">Crossword</div>
           <div class="tp-crossword-controls">
-            <button class="tp-crossword-undo" disabled>Undo</button>
-            <button class="tp-crossword-redo" disabled>Redo</button>
+            <tp-icon-button class="tp-crossword-undo" name="undo" label="Undo" disabled></tp-icon-button>
+            <tp-icon-button class="tp-crossword-redo" name="redo" label="Redo" disabled></tp-icon-button>
             <select class="tp-crossword-assist" aria-label="Assistance actions">
               <option value="">Assist…</option>
               <option value="reset-game">Reset the game</option>
@@ -343,12 +360,8 @@ export class TpCrossword extends TpBase {
 		);
 		this.cluesElement = this.querySelector(".tp-crossword-clues");
 		this.statusElement = this.querySelector(".tp-crossword-status");
-		this.undoButton = this.querySelector(
-			".tp-crossword-undo",
-		) as HTMLButtonElement;
-		this.redoButton = this.querySelector(
-			".tp-crossword-redo",
-		) as HTMLButtonElement;
+		this.undoButton = this.querySelector(".tp-crossword-undo") as TpIconButton;
+		this.redoButton = this.querySelector(".tp-crossword-redo") as TpIconButton;
 		this.assistSelect = this.querySelector(
 			".tp-crossword-assist",
 		) as HTMLSelectElement;
@@ -358,6 +371,7 @@ export class TpCrossword extends TpBase {
 		this.engine.renderGrid(this.gridElement);
 		this.renderClues();
 		this.attachEventListeners();
+		mountLegacyGameHeader(this, "crossword");
 		this.updateStatus();
 		this.updateClueHighlights();
 		this.updateCurrentClues();
@@ -824,6 +838,7 @@ export class TpCrossword extends TpBase {
 			return;
 
 		const validation = this.engine.getValidation();
+		gameActivity(this, this.engine.canUndo(), validation.isComplete);
 
 		this.undoButton.disabled = !this.engine.canUndo();
 		this.redoButton.disabled = !this.engine.canRedo();

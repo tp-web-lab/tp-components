@@ -15,12 +15,14 @@ The custom `<tp-dialog>` element displays a confirm/cancel dialog.
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-box data-intro-action="dialog" data-allow-script="">
   <tp-button id="intro-dialog-trigger" data-demo-trigger="">Open the confirmation dialog</tp-button>
   <tp-dialog></tp-dialog>
   <p data-demo-status="" role="status">Try the dialog using its trigger.</p>
   <script src="/docs/components/_shared/introduction-actions.js"></script>
 </tp-box>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

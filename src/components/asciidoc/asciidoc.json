@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-box><tp-asciidoc><script type=\"tp/asciidoc\">This paragraph uses *AsciiDoc*.</script></tp-asciidoc></tp-box>"
+      "code": "<tp-asciidoc>\n  <script type=\"tp/asciidoc\">\n== A short document\n\nThis paragraph uses *AsciiDoc*.\n\n* Write content\n* Add components\n* Publish the page\n  </script>\n</tp-asciidoc>"
     }
   ],
   "attributes": [

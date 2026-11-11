@@ -15,11 +15,13 @@ The custom `<tp-restructuredtext>` element renders reStructuredText documents.
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-restructuredtext>
   <script type="tp/restructuredtext">
     Hello, **Docutils**!
   </script>
 </tp-restructuredtext>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

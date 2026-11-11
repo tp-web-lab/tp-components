@@ -15,6 +15,7 @@ The custom `<tp-prolog-notebook>` element combines written explanations and exec
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-prolog-notebook>
       <script type="tp/markdown">
         # Family relations
@@ -31,6 +32,7 @@ The custom `<tp-prolog-notebook>` element combines written explanations and exec
         grandparent(ada, Grandchild).
       </script>
   </tp-prolog-notebook>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

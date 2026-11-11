@@ -38,7 +38,7 @@
   "cssproperties": [
     {
       "name": "--tp-kakuro-cell-size",
-      "default": "3rem",
+      "default": "4rem",
       "description": "Maximum width of each square."
     }
   ],
@@ -50,13 +50,49 @@
     {
       "name": "tp-button",
       "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-chronometer",
+      "summary": "Chronometer component with play, pause and stop controls."
+    },
+    {
+      "name": "tp-color",
+      "summary": "Brand color preset controller scoped to the containing element."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-drawer",
+      "summary": "Drawer overlay component."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Dropdown menu component."
+    },
+    {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
     }
   ],
   "credits": [],
   "userHelp": {
     "displayName": "Kakuro",
     "introduction": "The custom `<tp-kakuro>` element displays an interactive Kakuro puzzle.",
-    "interactions": "#### Mouse interactions\n\n| Action | Result |\n| --- | --- |\n| Select a white cell | Selects the cell and highlights its across and down runs. Fixed digits remain read-only. |\n| Notes | Toggles pencil marks; entering a digit adds or removes that note. |\n| Undo / Redo | Reverses or reapplies the last edit, including notes, reveals and reset. |\n| Check | Toggles highlighting for runs whose current entries contradict their sum or repeat a digit. |\n| Reveal cell | Fills the selected editable cell, or the first empty cell, using a computed solution. |\n| Reveal solution | Fills every editable cell with a valid solution of the original clues. |\n| Reset | Restores the fixed digits and clears entries and notes; Undo can restore the previous game state. |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Moves through controls and white cells. |\n| Arrow keys | Moves to the next white cell in the chosen direction, skipping blocked cells. |\n| <kbd>1</kbd>–<kbd>9</kbd> | Enters a digit or toggles a note in the selected editable cell. |\n| <kbd>Backspace</kbd> / <kbd>Delete</kbd> / <kbd>0</kbd> | Clears the selected editable cell and its notes. |\n| <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd> | Undoes or redoes a move while a cell is focused. <kbd>Command</kbd> is also accepted; <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> redoes. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activates the focused action button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Opens User help for the component under the pointer, falling back to focus. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Opens contextual component documentation. |",
+    "interactions": "The header shows the game icon and name on the left. Rounded controls appear on the right, in this order: Reset, Undo, Redo, Help, chronometer, Color, Theme and Fullscreen. Additional game commands remain below the header.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| :tp-icon:{name=\"refresh\"} Reset | Restores the loaded position or puzzle and resets the timer. |\n| :tp-icon:{name=\"undo\"} Undo | Takes back the last move. |\n| :tp-icon:{name=\"redo\"} Redo | Replays the next undone move. Disabled when there is no recorded continuation. |\n| :tp-icon:{name=\"help\"} Help | Opens the dropdown of assistance actions specific to this game. |\n| Help → Check | Shows or hides conflicting entries. |\n| Help → Reveal cell | Reveals the selected cell, or the first empty cell. |\n| Help → Reveal solution | Fills the solution. |\n| Help → Rules of the game | Opens a drawer with the rules of this game. |\n| Chronometer | Displays elapsed play time; starts with play and pauses on completion. Reset clears it. |\n| :tp-icon:{name=\"palette-swatch\"} Color | Changes the brand color of this game only. |\n| :tp-icon:{name=\"sun\"} :tp-icon:{name=\"moon\"} Theme | Changes the light, dark or automatic theme of this game only. |\n| :tp-icon:{name=\"fullscreen\"} :tp-icon:{name=\"fullscreen-exit\"} Fullscreen | Enters or leaves fullscreen for this game. |\n| Select a white cell | Selects the cell and highlights its across and down runs. Fixed digits remain read-only. |\n| Game / Note | Shows the current entry mode. Game enters a cell value; Note adds or removes a candidate digit. Click to switch modes. |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Moves through controls and white cells. |\n| Arrow keys | Moves to the next white cell in the chosen direction, skipping blocked cells. |\n| <kbd>1</kbd>–<kbd>9</kbd> | Enters a digit or toggles a note in the selected editable cell. |\n| <kbd>Backspace</kbd> / <kbd>Delete</kbd> / <kbd>0</kbd> | Clears the selected editable cell and its notes. |\n| <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd> | Undoes or redoes a move while a cell is focused. <kbd>Command</kbd> is also accepted; <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> redoes. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activates the focused action button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Opens User help for the component under the pointer, falling back to focus. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Opens contextual component documentation. |",
     "keyboard": [
       {
         "key": "Arrow keys",
@@ -64,7 +100,7 @@
       },
       {
         "key": "1–9",
-        "description": "Enters a digit or toggles a pencil mark in Notes mode."
+        "description": "Enters a digit or toggles a pencil mark in Note mode."
       },
       {
         "key": "Backspace / Delete / 0",

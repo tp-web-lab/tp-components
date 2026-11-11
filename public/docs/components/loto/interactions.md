@@ -1,11 +1,23 @@
 ### User interactions
 
+The header shows the game icon and name on the left. Rounded controls appear on the right, in this order: Reset, Undo, Redo, Help, chronometer, Color, Theme and Fullscreen. Additional game commands remain below the header.
+
 #### Mouse interactions
 
 | Control or gesture | Result |
 | --- | --- |
-| Using the component | Draw numbers using the game control and compare them with the tickets. |
-| Using the component | The history shows numbers already drawn; the reset button starts a new game. |
+| :tp-icon:{name="refresh"} Reset | Generates new tickets and a new draw, clears history and resets the timer. |
+| :tp-icon:{name="undo"} Undo | Takes back the last draw and returns that number to the draw pile. |
+| :tp-icon:{name="redo"} Redo | Replays the same undone draw. |
+| :tp-icon:{name="help"} Help | Opens the dropdown of assistance actions specific to this game. |
+| Help → Draw the next number | Draws the next number while the game remains active. |
+| Help → Highlight undrawn ticket numbers | Toggles outlines around ticket numbers not drawn yet. |
+| Help → Rules of the game | Opens a drawer with the rules of this game. |
+| Chronometer | Displays elapsed play time; starts with play and pauses on completion. Reset clears it. |
+| :tp-icon:{name="palette-swatch"} Color | Changes the brand color of this game only. |
+| :tp-icon:{name="sun"} :tp-icon:{name="moon"} Theme | Changes the light, dark or automatic theme of this game only. |
+| :tp-icon:{name="fullscreen"} :tp-icon:{name="fullscreen-exit"} Fullscreen | Enters or leaves fullscreen for this game. |
+| Draw a number | Draws the next number and marks matching numbers on all tickets. |
 
 #### Keyboard interactions
 

@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-code-editor></tp-code-editor>"
+      "code": "<tp-code-editor language=\"javascript\" line-numbers=\"\">\n  <script type=\"tp/javascript\">\nconst greeting = \"Hello, tp-components!\";\nconsole.log(greeting);\n  </script>\n</tp-code-editor>"
     }
   ],
   "attributes": [

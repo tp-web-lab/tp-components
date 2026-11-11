@@ -54,7 +54,11 @@ function isCustomElement(element: HTMLElement): boolean {
  * @event tp-fullscreen-change Emitted when the fullscreen state of the controlled target changes.
  * @eventdetail tp-fullscreen-change { fullscreen: boolean; anchor: string; target: HTMLElement }
  * @example
- * <tp-fullscreen></tp-fullscreen>
+ * <tp-box>
+ *       <tp-fullscreen></tp-fullscreen>
+ *       <p>This box is the fullscreen target.</p>
+ *       <p>Press Esc to exit fullscreen mode.</p>
+ *     </tp-box>
  */
 export class TpFullscreen extends TpBase {
 	private static readonly changeEventName = "tp-fullscreen-change";

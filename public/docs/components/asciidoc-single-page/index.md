@@ -15,6 +15,7 @@ The custom `<tp-asciidoc-single-page>` element displays a single AsciiDoc docume
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-asciidoc-single-page>
   <script type="tp/asciidoc">
 == A short guide
@@ -27,6 +28,7 @@ This document is rendered as a single page.
 * Try a component
   </script>
 </tp-asciidoc-single-page>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

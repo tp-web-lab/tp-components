@@ -25,7 +25,10 @@ import type { TpSqlProject } from "../sql-playground/sql-project.js";
  * @event tp-playground-repository-load Emitted after a project configured with `repository` has loaded.
  * @eventdetail tp-playground-repository-load { repository: string; project: TpProject }
  * @example
- * <tp-sql-viewer></tp-sql-viewer>
+ * <tp-box>
+ *   <p>The query lists three European capitals. Expand the query in the result panel to see its rows.</p>
+ *   <tp-sql-viewer src="/docs/components/_shared/intro-projects/sql.json"></tp-sql-viewer>
+ * </tp-box>
  */
 export class TpSqlViewer extends TpSqlPlayground {
 	protected override get viewerMode(): boolean {

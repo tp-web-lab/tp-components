@@ -8,10 +8,11 @@ export default defineConfig({
 	expect: { timeout: 30_000 },
 	workers: 1,
 	reporter: "list",
-	use: { baseURL: "http://127.0.0.1:4173" },
+	use: { baseURL: "http://127.0.0.1:4198" },
 	webServer: {
-		command: "pnpm vite --host 127.0.0.1 --port 4173",
-		url: "http://127.0.0.1:4173",
+		command:
+			"pnpm vite --config vite.playwright.config.ts --host 127.0.0.1 --port 4198",
+		url: "http://127.0.0.1:4198",
 		reuseExistingServer: !process.env.CI,
 	},
 	projects: [

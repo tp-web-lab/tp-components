@@ -15,6 +15,7 @@ The custom `<tp-restructuredtext-single-page>` element displays a single reStruc
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-restructuredtext-single-page>
   <script type="tp/restructuredtext">
 A short guide
@@ -29,6 +30,7 @@ Getting started
 * Try a component
   </script>
 </tp-restructuredtext-single-page>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

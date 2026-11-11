@@ -15,6 +15,7 @@ The custom `<tp-diagram>` element renders flowcharts, sequence diagrams, class d
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-diagram label="Request flow">
   <script type="tp/diagram">
     flowchart LR
@@ -22,6 +23,7 @@ The custom `<tp-diagram>` element renders flowcharts, sequence diagrams, class d
       Server --> Database
   </script>
 </tp-diagram>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

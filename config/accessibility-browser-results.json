@@ -1,33 +1,179 @@
 {
-  "generatedAt": "2026-10-29T09:38:47.092Z",
-  "expectedComponents": 185,
+  "generatedAt": "2026-11-11T17:21:37.527Z",
+  "expectedComponents": 210,
   "standard": "WCAG 2.2 A and AA",
   "browsers": [
     {
       "browser": "chromium",
-      "components": 185,
+      "components": 210,
       "complete": true,
       "scanErrors": 0,
-      "incomplete": 133,
-      "violations": 0
+      "incomplete": 162,
+      "violations": 4
     },
     {
       "browser": "firefox",
-      "components": 185,
+      "components": 210,
       "complete": true,
       "scanErrors": 0,
-      "incomplete": 137,
+      "incomplete": 166,
       "violations": 0
     },
     {
       "browser": "webkit",
-      "components": 185,
+      "components": 210,
       "complete": true,
       "scanErrors": 0,
-      "incomplete": 137,
-      "violations": 0
+      "incomplete": 162,
+      "violations": 3
     }
   ],
   "scanErrors": [],
-  "violations": []
+  "violations": [
+    {
+      "browser": "chromium",
+      "component": "tp-loto",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
+      "id": "color-contrast",
+      "impact": "serious",
+      "targets": [
+        ".tp-loto-draw-button"
+      ],
+      "details": [
+        {
+          "target": [
+            ".tp-loto-draw-button"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.89 (foreground color: #ffffff, background color: #68887b, font size: 13.5pt (18px), font weight: bold). Expected contrast ratio of 4.5:1"
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "component": "tp-video-player",
+      "help": "Elements must only use supported ARIA attributes",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-allowed-attr?application=playwright",
+      "id": "aria-allowed-attr",
+      "impact": "critical",
+      "targets": [
+        "#widget2",
+        ".ytmVideoInfoVideoTitle"
+      ],
+      "details": [
+        {
+          "target": [
+            "#widget2",
+            ".ytmVideoInfoVideoTitle"
+          ],
+          "summary": "Fix all of the following:\n  ARIA attribute is not allowed: aria-level=\"2\""
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "component": "tp-video-player",
+      "help": "Elements must only use permitted ARIA attributes",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-prohibited-attr?application=playwright",
+      "id": "aria-prohibited-attr",
+      "impact": "serious",
+      "targets": [
+        "#widget2",
+        "#movie_player"
+      ],
+      "details": [
+        {
+          "target": [
+            "#widget2",
+            "#movie_player"
+          ],
+          "summary": "Fix all of the following:\n  aria-label attribute cannot be used on a div with no valid role attribute."
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "component": "tp-video-player",
+      "help": "Buttons must have discernible text",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
+      "id": "button-name",
+      "impact": "critical",
+      "targets": [
+        "#widget2",
+        ".ytmVideoInfoChannelAvatar"
+      ],
+      "details": [
+        {
+          "target": [
+            "#widget2",
+            ".ytmVideoInfoChannelAvatar"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "browser": "webkit",
+      "component": "tp-video-player",
+      "help": "Elements must only use supported ARIA attributes",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-allowed-attr?application=playwright",
+      "id": "aria-allowed-attr",
+      "impact": "critical",
+      "targets": [
+        "#widget2",
+        ".ytmVideoInfoVideoTitle"
+      ],
+      "details": [
+        {
+          "target": [
+            "#widget2",
+            ".ytmVideoInfoVideoTitle"
+          ],
+          "summary": "Fix all of the following:\n  ARIA attribute is not allowed: aria-level=\"2\""
+        }
+      ]
+    },
+    {
+      "browser": "webkit",
+      "component": "tp-video-player",
+      "help": "Elements must only use permitted ARIA attributes",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-prohibited-attr?application=playwright",
+      "id": "aria-prohibited-attr",
+      "impact": "serious",
+      "targets": [
+        "#widget2",
+        "#movie_player"
+      ],
+      "details": [
+        {
+          "target": [
+            "#widget2",
+            "#movie_player"
+          ],
+          "summary": "Fix all of the following:\n  aria-label attribute cannot be used on a div with no valid role attribute."
+        }
+      ]
+    },
+    {
+      "browser": "webkit",
+      "component": "tp-video-player",
+      "help": "Buttons must have discernible text",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
+      "id": "button-name",
+      "impact": "critical",
+      "targets": [
+        "#widget2",
+        ".ytmVideoInfoChannelAvatar"
+      ],
+      "details": [
+        {
+          "target": [
+            "#widget2",
+            ".ytmVideoInfoChannelAvatar"
+          ],
+          "summary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    }
+  ]
 }

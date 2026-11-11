@@ -59,7 +59,12 @@ function isPlacement(value: string): value is TpDrawerPlacement {
  * @keyboard {ArrowLeft / ArrowRight} Moves the focused resize edge by 10 pixels; hold Shift for 50 pixels.
  * @keyboard {Home / End} Sets the focused resize edge to the minimum or maximum drawer width.
  * @example
- * <tp-drawer></tp-drawer>
+ * <tp-box data-intro-action="drawer" data-allow-script="">
+ *   <tp-button id="intro-drawer-trigger" data-demo-trigger="">Open the drawer</tp-button>
+ *   <tp-drawer label="Example drawer" backdrop="" outside-click=""><p>This panel contains additional information.</p><tp-button data-demo-close="">Close</tp-button></tp-drawer>
+ *   <p data-demo-status="" role="status">Try the drawer using its trigger.</p>
+ *   <script src="/docs/components/_shared/introduction-actions.js"></script>
+ * </tp-box>
  */
 export class TpDrawer extends TpOverlayElement {
 	/** Apply the outside-click setting to the backdrop as well. */

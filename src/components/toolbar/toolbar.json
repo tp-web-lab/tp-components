@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-box padding=\"0\">\n  <tp-toolbar>\n    <tp-icon section=\"start\" name=\"home\" aria-label=\"Home\"></tp-icon>\n    <tp-icon section=\"start\" name=\"menu\" aria-label=\"Menu\"></tp-icon>\n    <span section=\"center\">Document</span>\n    <tp-icon section=\"end\" name=\"github\" aria-label=\"GitHub\"></tp-icon>\n    <tp-icon section=\"end\" name=\"settings\" aria-label=\"Settings\"></tp-icon>\n    <tp-icon section=\"end\" name=\"help\" aria-label=\"Help\"></tp-icon>\n  </tp-toolbar>\n  <tp-box border-width=\"0\" style=\"min-block-size: 5rem; display: grid; place-items: center\">Document area</tp-box>\n</tp-box>"
+      "code": "<tp-box padding=\"0\">\n<tp-toolbar>\n  <tp-icon section=\"start\" name=\"home\" aria-label=\"Home\"></tp-icon>\n  <tp-icon section=\"start\" name=\"menu\" aria-label=\"Menu\"></tp-icon>\n  <span section=\"center\">Document</span>\n  <tp-icon section=\"end\" name=\"github\" aria-label=\"GitHub\"></tp-icon>\n  <tp-icon section=\"end\" name=\"settings\" aria-label=\"Settings\"></tp-icon>\n  <tp-icon section=\"end\" name=\"help\" aria-label=\"Help\"></tp-icon>\n</tp-toolbar>\n  <tp-box border-width=\"0\" style=\"min-block-size: 5rem; display: grid; place-items: center\">Document area</tp-box>\n</tp-box>"
     }
   ],
   "attributes": [

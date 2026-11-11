@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-divider></tp-divider>"
+      "code": "<tp-box>\n      <p>Primary content group.</p>\n      <tp-divider></tp-divider>\n      <p>Secondary content group.</p>\n    </tp-box>"
     }
   ],
   "attributes": [

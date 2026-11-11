@@ -81,10 +81,8 @@ type TextControl = HTMLInputElement | HTMLTextAreaElement;
  * @event change Emitted when the edited value is committed.
  * @event tp-clear Emitted after the embedded button clears the value.
  * @example
- * <tp-textfield label="Single line" placeholder="Type some text..." clearable></tp-textfield>
- *
- *     <tp-textfield label="Multiline" multiline placeholder="Type some text..." clearable value="An example of text that has already been entered in the field"></tp-textfield>
- * @cssprop [--tp-textfield-background=var(--tp-paper-color)] Background of the input control, excluding its label.
+ * <tp-textfield label="Single line" placeholder="Type some text..." clearable=""></tp-textfield>
+ *  @cssprop [--tp-textfield-background=var(--tp-paper-color)] Background of the input control, excluding its label.
  * @cssprop [--tp-textfield-border-color=var(--tp-neutral-stroke-soft)] Border color of the input control when it is not focused.
  * @cssprop [--tp-textfield-focus-color=var(--tp-brand-text-colorful)] Border color and translucent outline tint while focus is inside the control.
  * @cssprop [--tp-textfield-inline-size=calc(20ch + 5rem)] Preferred width of the field, limited by the available container width.

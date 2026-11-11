@@ -15,6 +15,7 @@ The custom `<tp-skeleton>` element displays a simplified placeholder representat
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-skeleton label="Article layout preview">
   <script type="tp/html">
     <main>
@@ -29,6 +30,7 @@ The custom `<tp-skeleton>` element displays a simplified placeholder representat
     </main>
   </script>
 </tp-skeleton>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

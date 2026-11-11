@@ -49,7 +49,7 @@ import { type SlideAutoMode, SlidePlayback } from "./slide-playback.js";
  * @attr {number} timing = 5000 - Positive integer milliseconds per progressive step in timing mode, also used when notes are absent or finished.
  * @tagname tp-markup-multi-slides
  * @example
- * <tp-markup-multi-slides repository="/slides"></tp-markup-multi-slides>
+ * <tp-markup-multi-slides repository="/docs/components/markup-multi-slides/docs" label="Mixed markup slides"></tp-markup-multi-slides>
  */
 export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 	public static override get observedAttributes(): string[] {

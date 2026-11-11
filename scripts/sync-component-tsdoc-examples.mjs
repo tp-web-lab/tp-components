@@ -17,6 +17,7 @@ import ts from 'typescript';
 const root = resolve(import.meta.dirname, '..');
 const componentsRoot = join(root, 'src/components');
 const docsRoot = join(root, 'public/docs/components');
+const checkOnly = process.argv.includes('--check');
 let synchronized = 0;
 
 function introductoryHtml(directory, tag) {
@@ -43,6 +44,7 @@ for (const directory of readdirSync(componentsRoot)) {
   if (!existsSync(sourcePath)) continue;
 
   let source = readFileSync(sourcePath, 'utf8');
+  const originalSource = source;
   const sourceFile = ts.createSourceFile(sourcePath, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
   const changes = [];
   const runtimeTags = new Map(
@@ -63,7 +65,7 @@ for (const directory of readdirSync(componentsRoot)) {
       const jsDoc = node.jsDoc?.at(-1);
       if (tagName.startsWith('tp-') && jsDoc === undefined) {
         const html = introductoryHtml(directory, tagName);
-        const lines = html.split(/\r?\n/).map((line) => ` * ${line}`).join('\n');
+        const lines = html.split(/\r?\n/).map((line) => line ? ` * ${line}` : ' *').join('\n');
         const summary = moduleSummary || `The \`<${tagName}>\` component.`;
         changes.push({
           start: node.getStart(sourceFile),
@@ -72,7 +74,7 @@ for (const directory of readdirSync(componentsRoot)) {
         });
       } else if (tagName.startsWith('tp-') && jsDoc !== undefined && !declaredTag) {
         const html = introductoryHtml(directory, tagName);
-        const lines = html.split(/\r?\n/).map((line) => ` * ${line}`).join('\n');
+        const lines = html.split(/\r?\n/).map((line) => line ? ` * ${line}` : ' *').join('\n');
         changes.push({
           start: jsDoc.end - 2,
           end: jsDoc.end - 2,
@@ -82,27 +84,20 @@ for (const directory of readdirSync(componentsRoot)) {
         const introductoryExamples = tags
           .filter((item) => item.tagName.text === 'example');
         const html = introductoryHtml(directory, tagName);
-        const lines = html.split(/\r?\n/).map((line) => ` * ${line}`).join('\n');
-        const text = `@example\n${lines}\n `;
-        const current = introductoryExamples[0];
-        for (const duplicate of introductoryExamples.slice(1)) {
-          changes.push({
-            start: source.lastIndexOf('\n', duplicate.getStart(sourceFile)) + 1,
-            end: source.lastIndexOf('\n', duplicate.end) + 1,
-            text: '',
-          });
-        }
-
-        if (current !== undefined) {
-          if (current.getFullText(sourceFile) !== text) {
-            const nextExample = introductoryExamples[1];
-            const end = nextExample
-              ? Math.min(current.end, source.lastIndexOf('\n', nextExample.getStart(sourceFile)) + 1)
-              : current.end;
-            changes.push({ start: current.getStart(sourceFile), end, text });
+        const lines = html.split(/\r?\n/).map((line) => line ? ` * ${line}` : ' *').join('\n');
+        const text = ` * @example
+${lines}
+`;
+        if (introductoryExamples.length) {
+          for (const [index, example] of introductoryExamples.entries()) {
+            const nextTag = tags.find(item => item.getStart(sourceFile) > example.getStart(sourceFile));
+            const start = source.lastIndexOf('\n', example.getStart(sourceFile)) + 1;
+            const end = source.lastIndexOf('\n', nextTag ? nextTag.getStart(sourceFile) : jsDoc.end - 2) + 1;
+            changes.push({ start, end, text: index === 0 ? text : '' });
           }
         } else {
-          changes.push({ start: jsDoc.end - 2, end: jsDoc.end - 2, text: `* ${text}` });
+          const start = source.lastIndexOf('\n', jsDoc.end - 2) + 1;
+          changes.push({ start, end: start, text });
         }
       }
     }
@@ -113,10 +108,11 @@ for (const directory of readdirSync(componentsRoot)) {
   for (const change of changes.sort((a, b) => b.start - a.start)) {
     source = `${source.slice(0, change.start)}${change.text}${source.slice(change.end)}`;
   }
-  if (changes.length > 0) {
-    writeFileSync(sourcePath, source);
-    synchronized += changes.length;
+  if (source !== originalSource) {
+    if (!checkOnly) writeFileSync(sourcePath, source);
+    synchronized += 1;
   }
 }
 
-console.log(`Synchronized ${synchronized} introductory TypeDoc examples from the documentation.`);
+console.log(`${checkOnly ? "Outdated" : "Synchronized"} ${synchronized} component class examples from the documentation.`);
+if (checkOnly && synchronized > 0) process.exitCode = 1;

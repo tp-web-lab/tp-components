@@ -2,9 +2,17 @@
 <!-- -->
 # <tp-icon name="save-image" library="components" size="1.25em"></tp-icon> Save image
 
+<div class="tp-component-doc-overview">
+
+<div class="tp-component-doc-toc">
 <tp-toc position="end" expand-all></tp-toc>
+</div>
+
+<div class="tp-component-doc-intro">
 
 The custom `<tp-save-image>` element saves an anchored image in several formats.
+
+<div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
 <tp-box>
@@ -14,6 +22,11 @@ The custom `<tp-save-image>` element saves an anchored image in several formats.
 </tp-box>
 <!-- tp-docgen:introduction:end -->
 
+</div>
+
+</div>
+
+</div>
 
 <!-- -->
 ## Component viewer

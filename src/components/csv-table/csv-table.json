@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-csv-table heading>\n<script type=\"tp/csv-table\">\nCountry,Capital\nEstonia,Tallinn\nLatvia,Riga\nLithuania,Vilnius\n</script>\n</tp-csv-table>"
+      "code": "<tp-csv-table heading=\"\">\n  <script type=\"tp/csv-table\">\n    Country,Capital\n    Estonia,Tallinn\n    Latvia,Riga\n    Lithuania,Vilnius\n  </script>\n</tp-csv-table>"
     }
   ],
   "attributes": [

@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "```html\n<tp-menu>\n  <ul>\n    <li><a href=\"/#/components/button/index.md\">Buttons</a></li>\n    <li><a href=\"/#/components/tabs/index.md\">Tabs</a></li>\n    <li><a href=\"/#/components/tree/index.md\">Trees</a></li>\n  </ul>\n</tp-menu>\n<script src=\"/docs/components/menu/examples/navigation.js\"></script>\n```"
+      "code": "<tp-menu>\n  <ul>\n    <li><a href=\"/#/components/button/index.md\">Buttons</a></li>\n    <li><a href=\"/#/components/tabs/index.md\">Tabs</a></li>\n    <li><a href=\"/#/components/tree/index.md\">Trees</a></li>\n  </ul>\n</tp-menu>\n<script src=\"/docs/components/menu/examples/navigation.js\"></script>"
     }
   ],
   "attributes": [

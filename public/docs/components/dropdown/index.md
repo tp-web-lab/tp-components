@@ -15,12 +15,14 @@ The custom `<tp-dropdown>` element displays an anchored dropdown menu.
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-box data-intro-action="dropdown" data-allow-script="">
   <tp-button id="intro-dropdown-trigger" data-demo-trigger="">Open the menu</tp-button>
   <tp-dropdown anchor="#intro-dropdown-trigger" outside-click=""><ul><li><a href="/#/components/button/index.md">Buttons</a></li><li><a href="/#/components/tree/index.md">Trees</a></li></ul></tp-dropdown>
   <p data-demo-status="" role="status">Try the dropdown using its trigger.</p>
   <script src="/docs/components/_shared/introduction-actions.js"></script>
 </tp-box>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

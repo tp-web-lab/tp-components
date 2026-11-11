@@ -15,6 +15,7 @@ import { parseFragment } from "parse5";
 import { readExamples } from "./standardize-component-examples.mjs";
 import {
 	fieldAttributesScript,
+ textfieldAttributesExample,
 	fieldSettings,
 	groupedFields,
 } from "./textfield-attributes-example.mjs";
@@ -24,24 +25,25 @@ const get = (node, name) =>
 	node.attrs?.find((item) => item.name === name)?.value;
 for (const component of groupedFields) {
 	const textfieldSettings = fieldSettings(component);
-	test(`${component} has Basic usage and grouped Attributes in all languages`, () => {
+	test(`${component} has Basic usage and Javascript API in all languages`, () => {
 		for (const language of ["html", "md", "adoc", "rst"]) {
 			const examples = readExamples(component, language);
 			assert.deepEqual(
 				examples.map((example) => example.label),
 				[
 					"Basic usage",
-					"Attributes",
+					"Javascript API",
 					...(component === "mathfield" ? ["Inline in prose"] : []),
                     "Inline named field",
+ ...(component === "textfield" ? ["Clearable search"] : []),
 				],
 			);
 			assert.ok(
-				examples[1].source.includes(
+				textfieldAttributesExample(component).includes(
 					`/docs/components/${component}/examples/attributes.js`,
 				),
 			);
-			assert.ok(!examples[1].source.includes("function synchronize"));
+			assert.ok(!textfieldAttributesExample(component).includes("function synchronize"));
 			const script = readFileSync(
 				`public/docs/components/${component}/examples/attributes.js`,
 				"utf8",
@@ -53,7 +55,7 @@ for (const component of groupedFields) {
 	});
 	test(`${component} settings start at documented defaults with one external control per attribute`, () => {
 		const nodes = walk(
-			parseFragment(readExamples(component, "html")[1].source),
+			parseFragment(textfieldAttributesExample(component)),
 		);
 		const bools = textfieldSettings.filter(
 			(setting) => setting.kind === "boolean",
