@@ -15,7 +15,9 @@ The custom `<tp-latex-playground>` element edits and previews LaTeX projects.
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-latex-playground><script type="tp/latex">\section{Hello}A formula $x^2$.</script></tp-latex-playground>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

@@ -130,18 +130,18 @@ export interface TpObjectTreeErrorDetail {
  *
  * @example
  * <tp-object-tree>
- *       <script type="tp/javascript">
- *         ({
- *           course: {
- *             title: 'Web components',
- *             lessons: 12,
- *             published: true
- *           },
- *           topics: ['HTML', 'CSS', 'JavaScript']
- *         })
- *       </script>
- *     </tp-object-tree>
- * @cssprop [--tp-object-tree-boolean-color=#8250df] Text color of Boolean values in the object tree.
+ *   <script type="tp/javascript">
+ *     ({
+ *       course: {
+ *         title: 'Web components',
+ *         lessons: 12,
+ *         published: true
+ *       },
+ *       topics: ['HTML', 'CSS', 'JavaScript']
+ *     })
+ *   </script>
+ * </tp-object-tree>
+ *  @cssprop [--tp-object-tree-boolean-color=#8250df] Text color of Boolean values in the object tree.
  * @cssprop [--tp-object-tree-circular-color=#cf222e] Text color of circular-reference markers in the object tree.
  * @cssprop [--tp-object-tree-date-color=#116329] Text color of Date values in the object tree.
  * @cssprop [--tp-object-tree-error-color=#cf222e] Text color of Error values in the object tree.

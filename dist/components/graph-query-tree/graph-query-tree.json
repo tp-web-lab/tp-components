@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-graph-query-tree></tp-graph-query-tree>"
+      "code": "<tp-graph-query-tree grid=\"\" grid-size=\"20\" message=\"Select an operator to edit its relational expression.\" src=\"/docs/components/graph-query-tree/examples/employees-departments.json\"></tp-graph-query-tree>"
     }
   ],
   "attributes": [],

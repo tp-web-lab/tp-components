@@ -15,12 +15,14 @@ The custom `<tp-drawer>` element displays a sliding drawer panel.
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-box data-intro-action="drawer" data-allow-script="">
   <tp-button id="intro-drawer-trigger" data-demo-trigger="">Open the drawer</tp-button>
   <tp-drawer label="Example drawer" backdrop="" outside-click=""><p>This panel contains additional information.</p><tp-button data-demo-close="">Close</tp-button></tp-drawer>
   <p data-demo-status="" role="status">Try the drawer using its trigger.</p>
   <script src="/docs/components/_shared/introduction-actions.js"></script>
 </tp-box>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

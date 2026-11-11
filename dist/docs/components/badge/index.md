@@ -16,7 +16,7 @@ The custom `<tp-badge>` element provides a compact status label.
 
 <!-- tp-docgen:introduction:start -->
 <p>
-  Build status: <tp-badge variant="success" pulse>Ready</tp-badge>
+  Build status: <tp-badge variant="success" pulse="">Ready</tp-badge>
 </p>
 <!-- tp-docgen:introduction:end -->
 

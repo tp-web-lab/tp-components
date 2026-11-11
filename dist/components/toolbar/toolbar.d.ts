@@ -36,17 +36,17 @@ export type TpToolbarPlacement = "top" | "bottom" | "start" | "end";
  *
  * @example
  * <tp-box padding="0">
- *   <tp-toolbar>
- *     <tp-icon section="start" name="home" aria-label="Home"></tp-icon>
- *     <tp-icon section="start" name="menu" aria-label="Menu"></tp-icon>
- *     <span section="center">Document</span>
- *     <tp-icon section="end" name="github" aria-label="GitHub"></tp-icon>
- *     <tp-icon section="end" name="settings" aria-label="Settings"></tp-icon>
- *     <tp-icon section="end" name="help" aria-label="Help"></tp-icon>
- *   </tp-toolbar>
+ * <tp-toolbar>
+ *   <tp-icon section="start" name="home" aria-label="Home"></tp-icon>
+ *   <tp-icon section="start" name="menu" aria-label="Menu"></tp-icon>
+ *   <span section="center">Document</span>
+ *   <tp-icon section="end" name="github" aria-label="GitHub"></tp-icon>
+ *   <tp-icon section="end" name="settings" aria-label="Settings"></tp-icon>
+ *   <tp-icon section="end" name="help" aria-label="Help"></tp-icon>
+ * </tp-toolbar>
  *   <tp-box border-width="0" style="min-block-size: 5rem; display: grid; place-items: center">Document area</tp-box>
  * </tp-box>
- * @cssprop [--tp-toolbar-gap=0.25rem] Space between the toolbar sections along its main axis.
+ *  @cssprop [--tp-toolbar-gap=0.25rem] Space between the toolbar sections along its main axis.
  * @cssprop [--tp-toolbar-padding=0.25rem 0.5rem] Inner spacing around the toolbar content.
  * @cssprop [--tp-toolbar-section-gap=0.25rem] Space between controls within a section and around section separators.
  * @cssprop [--tp-toolbar-size=3rem] Minimum toolbar thickness: height for a horizontal toolbar, width for a vertical toolbar.

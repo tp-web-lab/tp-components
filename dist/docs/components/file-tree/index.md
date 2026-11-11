@@ -15,12 +15,14 @@ The custom `<tp-file-tree>` element displays folders and files as an expandable 
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-box data-intro-action="file-tree" data-allow-script="">
   <p>Expand the folders and select a file in this in-memory example.</p>
   <tp-file-tree></tp-file-tree>
   <p data-demo-status="" role="status">Select a file to see its path.</p>
   <script src="/docs/components/_shared/introduction-actions.js"></script>
 </tp-box>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

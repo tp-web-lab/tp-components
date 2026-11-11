@@ -15,11 +15,13 @@ The custom `<tp-text-to-speech>` element reads text aloud.
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-text-to-speech lang="en-GB" show-text="">
   <script type="tp/txt">
     Welcome to tp-components. This example uses the browser speech synthesis service.
   </script>
 </tp-text-to-speech>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>
@@ -314,7 +316,7 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 <!--
 @tp-dependency tp-typewriting
-@summary progressively reveals text one letter or one word at a time.
+@summary Progressively reveals text one letter or one word at a time.
 -->
 
 - [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
@@ -322,7 +324,7 @@ All tp-components and external tools used by this component are loaded automatic
 - [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
 - [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
-- [`<tp-typewriting>`](#/components/typewriting/index.md) : progressively reveals text one letter or one word at a time.
+- [`<tp-typewriting>`](#/components/typewriting/index.md) : Progressively reveals text one letter or one word at a time.
 
 ### External
 

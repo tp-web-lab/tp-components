@@ -14,7 +14,7 @@ import { TpMarkupMultiSlides } from "../markup-multi-slides/markup-multi-slides.
  * @tagname tp-html-multi-slides
  * @summary Presents HTML documents as a slide deck.
  * @example
- * <tp-html-multi-slides></tp-html-multi-slides>
+ * <tp-html-multi-slides repository="/docs/components/html-multi-pages/docs"></tp-html-multi-slides>
  */
 export declare class TpHtmlMultiSlides extends TpMarkupMultiSlides {
     protected get fixedLanguage(): TpMarkupMultiPagesLanguage;

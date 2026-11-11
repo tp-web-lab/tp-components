@@ -15,6 +15,7 @@ The custom `<tp-markdown-single-page>` element displays a single Markdown docume
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-markdown-single-page>
   <script type="tp/markdown">
 ## A short guide
@@ -27,6 +28,7 @@ This document is rendered as a single page.
 - Try a component
   </script>
 </tp-markdown-single-page>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

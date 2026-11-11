@@ -26,8 +26,10 @@ type TpRadioListOrientation = "horizontal" | "vertical";
  * @attr {string} value = "" - 1-based index of the checked item (`""` for no selection).
  *
  * @example
- * <tp-radio-list></tp-radio-list>
- * @cssprop [--tp-radio-list-marker-gap=0.5em] Horizontal space between each selection marker and its item content.
+ * <tp-radio-list name="theme" value="2" orientation="horizontal">
+ *     <ul><li>Light</li><li>Automatic</li><li>Dark</li></ul>
+ *   </tp-radio-list>
+ *  @cssprop [--tp-radio-list-marker-gap=0.5em] Horizontal space between each selection marker and its item content.
  * @cssprop [--tp-radio-list-marker-width=2ch] Width reserved for each selection marker; aligns the item content in both orientations.
  * @event tp-radio-list-change Emitted after a selection change. value is the selected 1-based item index as a string; label is its visible label. Both are empty when nothing is selected.
  * @eventdetail tp-radio-list-change { value: string; label: string }

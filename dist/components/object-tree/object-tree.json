@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-object-tree>\n      <script type=\"tp/javascript\">\n        ({\n          course: {\n            title: 'Web components',\n            lessons: 12,\n            published: true\n          },\n          topics: ['HTML', 'CSS', 'JavaScript']\n        })\n      </script>\n    </tp-object-tree>"
+      "code": "<tp-object-tree>\n  <script type=\"tp/javascript\">\n    ({\n      course: {\n        title: 'Web components',\n        lessons: 12,\n        published: true\n      },\n      topics: ['HTML', 'CSS', 'JavaScript']\n    })\n  </script>\n</tp-object-tree>"
     }
   ],
   "attributes": [

@@ -22,19 +22,7 @@ import { TpPrologProject } from "../prolog-playground/prolog-project.js";
  * @event tp-playground-repository-load Emitted after a project configured with `repository` has loaded.
  * @eventdetail tp-playground-repository-load { repository: string; project: TpProject }
  * @example
- * <tp-prolog-viewer>
- *       <script type="tp/prolog" filename="program.pl">
- *         parent(ada, byron).
- *         parent(byron, charles).
- *
- *         grandparent(Grandparent, Grandchild) :-
- *           parent(Grandparent, Parent),
- *           parent(Parent, Grandchild).
- *       </script>
- *       <script type="tp/prolog" filename="query.pl">
- *         grandparent(ada, Grandchild).
- *       </script>
- *     </tp-prolog-viewer>
+ * <tp-prolog-viewer src="/docs/components/_shared/intro-projects/prolog.json"></tp-prolog-viewer>
  */
 export declare class TpPrologViewer extends TpPrologPlayground {
     protected get viewerMode(): boolean;

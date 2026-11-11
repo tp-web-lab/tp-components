@@ -7,6 +7,13 @@ Simulator components let users construct and explore interactive models of autom
 :::::: tp-grid { min-width="10rem" gap="1.5rem" }
 
 ::: tp-center { intrinsic }
+:tp-icon:{name="game-life" library="components" size="4em" aria-hidden="true"}
+
+[tp-game-life](game-life/index.md)
+:::
+
+
+::: tp-center { intrinsic }
 :tp-icon:{name="graph-analog-circuit" library="components" size="4em" aria-hidden="true"}
 
 [tp-graph-analog-circuit](graph-analog-circuit/index.md)

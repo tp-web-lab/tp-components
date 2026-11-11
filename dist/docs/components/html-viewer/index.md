@@ -15,12 +15,14 @@ The custom `<tp-html-viewer>` element provides an interactive HTML viewer with e
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-html-viewer>
   <script type="tp/html">
 <h2>Hello, HTML!</h2>
 <p>This preview renders <strong>HTML content</strong>.</p>
   </script>
 </tp-html-viewer>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

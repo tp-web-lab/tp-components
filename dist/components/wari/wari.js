@@ -1,0 +1,1 @@
+import{t as e}from"../../chunks/wari2.js";export{e as TpWari};

@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-grid></tp-grid>"
+      "code": "<tp-grid min-width=\"12rem\" gap=\"1rem\">\n  <tp-box>First column</tp-box>\n  <tp-box>Second column</tp-box>\n  <tp-box>Third column</tp-box>\n</tp-grid>"
     }
   ],
   "attributes": [

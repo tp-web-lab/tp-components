@@ -351,26 +351,55 @@
 
       .. example:: Square root
 
-         .. role:: domain-blank(tp-blank)
+         .. role:: example-tp-math-1(tp-math)
+            :aria-label: Nonnegative real numbers
+            :value: \mathbb{R}_{+}
+
+         .. role:: example-tp-math-2(tp-math)
+            :aria-label: Positive real numbers
+            :value: \mathbb{R}_{+}^{*}
+
+         .. role:: example-tp-math-3(tp-math)
+            :aria-label: One over twice the square root of x
+            :value: \frac{1}{2\sqrt{x}}
+
+         .. role:: example-tp-math-4(tp-math)
+            :value: f(x) = \sqrt{x}
+
+         .. role:: example-tp-blank-5(tp-blank)
             :name: domain
             :aria-label: Domain
 
-         .. role:: differentiability-blank(tp-blank)
+         .. role:: example-tp-blank-6(tp-blank)
             :name: differentiability
             :aria-label: Domain of differentiability
 
-         .. role:: derivative-blank(tp-blank)
+         .. role:: example-tp-math-7(tp-math)
+            :value: f'(x) =
+
+         .. role:: example-tp-blank-8(tp-blank)
             :name: derivative
             :aria-label: Derivative
+
+         .. role:: example-tp-math-9(tp-math)
+            :value: \mathbb{R}_{+} = [0, +\infty)
+
+         .. role:: example-tp-math-10(tp-math)
+            :value: \mathbb{R}_{+}^{*} = (0, +\infty)
+
+         .. role:: example-tp-math-11(tp-math)
+            :value: f'(x) = \frac{1}{2\sqrt{x}}
 
          .. tp-fill-blank-question::
             :mode: closed
             :lang: en
 
             Answers
-               1. :math:`\mathbb{R}_{+}`
-               2. :math:`\mathbb{R}_{+}^{*}`
-               3. :math:`\frac{1}{2\sqrt{x}}`
+               1. :example-tp-math-1:`…`
+
+               2. :example-tp-math-2:`…`
+
+               3. :example-tp-math-3:`…`
 
             Title
                The square root function
@@ -379,10 +408,10 @@
                Complete the sentence with the mathematical expressions.
 
             Form
-               The square root function :math:`f(x) = \sqrt{x}` is defined on :domain-blank:`…`, differentiable on :differentiability-blank:`…`, and :math:`f'(x) =` :derivative-blank:`…`.
+               The square root function :example-tp-math-4:`…` is defined on :example-tp-blank-5:`domain`, differentiable on :example-tp-blank-6:`differentiability`, and :example-tp-math-7:`…` :example-tp-blank-8:`derivative`.
 
             Feedback
                Consider whether zero belongs to the domain and whether the derivative exists there.
 
             Solution
-               The domain is :math:`\mathbb{R}_{+} = [0, +\infty)`. The function is differentiable on :math:`\mathbb{R}_{+}^{*} = (0, +\infty)`, with :math:`f'(x) = \frac{1}{2\sqrt{x}}`.
+               The domain is :example-tp-math-9:`…`. The function is differentiable on :example-tp-math-10:`…`, with :example-tp-math-11:`…`.

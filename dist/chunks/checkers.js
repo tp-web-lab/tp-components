@@ -1,0 +1,3 @@
+import{r as e}from"./rolldown-runtime.js";var t=e({default:()=>n}),n=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#fff" stroke="#222" stroke-width="1"/><circle cx="12" cy="12" r="6.5" fill="none" stroke="#555" stroke-width="1.1"/><path d="m7 10 3 2 2-5 2 5 3-2-1 6H8z" fill="#555"/></svg>
+`;export{t as n,n as t};
+//# sourceMappingURL=checkers.js.map

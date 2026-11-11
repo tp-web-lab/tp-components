@@ -264,33 +264,35 @@ Solution
 ```
 
 ``` example {label="Square root"}
----
-extensions: [math]
----
-
-:::: tp-fill-blank-question { mode="closed" lang="en" }
+::: tp-fill-blank-question { mode="closed" lang="en" }
 Answers
 :
-  1. :latexmath:`\mathbb{R}_{+}`
-  2. :latexmath:`\mathbb{R}_{+}^{*}`
-  3. :latexmath:`\frac{1}{2\sqrt{x}}`
+  1. :tp-math:`…`{aria-label="Nonnegative real numbers" value="\\mathbb{R}_{+}"}
+
+  2. :tp-math:`…`{aria-label="Positive real numbers" value="\\mathbb{R}_{+}^{*}"}
+
+  3. :tp-math:`…`{aria-label="One over twice the square root of x" value="\\frac{1}{2\\sqrt{x}}"}
 
 Title
-: The square root function
+:
+  The square root function
 
 Prompt
-: Complete the sentence with the mathematical expressions.
+:
+  Complete the sentence with the mathematical expressions.
 
 Form
 :
-  The square root function :latexmath:`f(x) = \sqrt{x}` is defined on :tp-blank:`domain`{name="domain" aria-label="Domain"}, differentiable on :tp-blank:`differentiability`{name="differentiability" aria-label="Domain of differentiability"}, and :latexmath:`f'(x) =` :tp-blank:`derivative`{name="derivative" aria-label="Derivative"}.
+  The square root function :tp-math:`…`{value="f(x) = \\sqrt{x}"} is defined on :tp-blank:`domain`{name="domain" aria-label="Domain"}, differentiable on :tp-blank:`differentiability`{name="differentiability" aria-label="Domain of differentiability"}, and :tp-math:`…`{value="f'(x) ="} :tp-blank:`derivative`{name="derivative" aria-label="Derivative"}.
 
 Feedback
-: Consider whether zero belongs to the domain and whether the derivative exists there.
+:
+  Consider whether zero belongs to the domain and whether the derivative exists there.
 
 Solution
-: The domain is :latexmath:`\mathbb{R}_{+} = [0, +\infty)`. The function is differentiable on :latexmath:`\mathbb{R}_{+}^{*} = (0, +\infty)`, with :latexmath:`f'(x) = \frac{1}{2\sqrt{x}}`.
-::::
+:
+  The domain is :tp-math:`…`{value="\\mathbb{R}_{+} = [0, +\\infty)"}. The function is differentiable on :tp-math:`…`{value="\\mathbb{R}_{+}^{*} = (0, +\\infty)"}, with :tp-math:`…`{value="f'(x) = \\frac{1}{2\\sqrt{x}}"}.
+:::
 ```
 :::::
 ::::::

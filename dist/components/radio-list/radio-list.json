@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-radio-list></tp-radio-list>"
+      "code": "<tp-radio-list name=\"theme\" value=\"2\" orientation=\"horizontal\">\n    <ul><li>Light</li><li>Automatic</li><li>Dark</li></ul>\n  </tp-radio-list>"
     }
   ],
   "attributes": [

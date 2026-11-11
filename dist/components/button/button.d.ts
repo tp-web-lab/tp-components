@@ -40,7 +40,7 @@ export type TpButtonLoadingMode = "replace" | "inline";
  * @keyboard {Enter / Space} Uses the browser's native button activation behavior.
  * @example
  * <tp-button href="/#/components/button/index.md#usage">Read the usage guide</tp-button>
- * @cssprop [--tp-button-accent=var(--tp-neutral-text-colorful)] Accent color used for outlined text and borders, and for the hover border; depends on variant.
+ *  @cssprop [--tp-button-accent=var(--tp-neutral-text-colorful)] Accent color used for outlined text and borders, and for the hover border; depends on variant.
  * @cssprop [--tp-button-background=var(--tp-neutral-fill-loud)] Background color of the button or link; variant and outlined can change it.
  * @cssprop [--tp-button-border-color=var(--tp-neutral-stroke-mid)] Border color of the button or link in its resting state.
  * @cssprop [--tp-button-focus-ring-color=var(--tp-focus-color)] Color of the outer ring shown on keyboard focus and hover.

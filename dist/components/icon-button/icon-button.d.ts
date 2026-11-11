@@ -42,8 +42,13 @@ export type TpIconButtonNativeType = "button" | "submit" | "reset";
  * @accessibilityresponsibility Set `label` to a concise name that describes the action.
  * @keyboard {Enter / Space} Uses native button activation; links activate with Enter.
  * @example
- * <tp-icon-button></tp-icon-button>
- * @cssprop [--tp-icon-button-focus-ring=currentColor] Color of the outline shown when the button receives keyboard focus.
+ * <tp-box data-intro-action="counter" data-allow-script="">
+ *   <p>Activate the heart button to add a like.</p>
+ *   <tp-icon-button name="heart" label="Like this example" data-demo-trigger=""></tp-icon-button>
+ *   <p data-demo-status="" role="status">Likes: 0</p>
+ *   <script src="/docs/components/_shared/introduction-actions.js"></script>
+ * </tp-box>
+ *  @cssprop [--tp-icon-button-focus-ring=currentColor] Color of the outline shown when the button receives keyboard focus.
  * @cssprop [--tp-icon-button-hover-background=color-mix( in srgb, currentColor 10%, transparent )] Background color of the button on hover.
  * @cssprop [--tp-icon-button-icon-size=1em] Width and height of the icon inside the button; distinct from the clickable area.
  * @cssprop [--tp-icon-button-radius=999rem] Corner radius of the clickable button.

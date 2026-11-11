@@ -31,10 +31,10 @@ import { type TpColorPreset } from "./color-presets.js";
  * @eventdetail tp-color-change { preset: string; brand: string; anchor: string; target: HTMLElement }
  * @example
  * <section>
- * <tp-color></tp-color>
- * <p>The selected brand color is scoped to this section.</p>
- * <p><code>Inline code</code> is displayed in the brand colour.</p>
- * </section>
+ *       <tp-color></tp-color>
+ *       <p>The selected brand color is scoped to this section.</p>
+ *       <code>Inline code uses the selected brand colour.</code>
+ *     </section>
  */
 export declare class TpColor extends TpBase {
     private static readonly styleId;

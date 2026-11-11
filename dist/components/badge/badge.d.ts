@@ -22,7 +22,7 @@ import { type TpSizeType, type TpVariantType } from "../base/base.types.js";
  * <p>
  *   Build status: <tp-badge variant="success" pulse>Ready</tp-badge>
  * </p>
- * @cssprop [--tp-badge-accent=var(--tp-neutral-text-colorful)] Accent color.
+ *  @cssprop [--tp-badge-accent=var(--tp-neutral-text-colorful)] Accent color.
  * @cssprop [--tp-badge-background=var(--tp-neutral-fill-softer)] Background color.
  * @cssprop [--tp-badge-border-color=var(--tp-neutral-stroke-soft)] Border color.
  * @cssprop [--tp-badge-font-size=0.875em] Font size.

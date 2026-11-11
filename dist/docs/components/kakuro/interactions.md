@@ -1,16 +1,25 @@
 ### User interactions
 
+The header shows the game icon and name on the left. Rounded controls appear on the right, in this order: Reset, Undo, Redo, Help, chronometer, Color, Theme and Fullscreen. Additional game commands remain below the header.
+
 #### Mouse interactions
 
-| Action | Result |
+| Control or gesture | Result |
 | --- | --- |
+| :tp-icon:{name="refresh"} Reset | Restores the loaded position or puzzle and resets the timer. |
+| :tp-icon:{name="undo"} Undo | Takes back the last move. |
+| :tp-icon:{name="redo"} Redo | Replays the next undone move. Disabled when there is no recorded continuation. |
+| :tp-icon:{name="help"} Help | Opens the dropdown of assistance actions specific to this game. |
+| Help → Check | Shows or hides conflicting entries. |
+| Help → Reveal cell | Reveals the selected cell, or the first empty cell. |
+| Help → Reveal solution | Fills the solution. |
+| Help → Rules of the game | Opens a drawer with the rules of this game. |
+| Chronometer | Displays elapsed play time; starts with play and pauses on completion. Reset clears it. |
+| :tp-icon:{name="palette-swatch"} Color | Changes the brand color of this game only. |
+| :tp-icon:{name="sun"} :tp-icon:{name="moon"} Theme | Changes the light, dark or automatic theme of this game only. |
+| :tp-icon:{name="fullscreen"} :tp-icon:{name="fullscreen-exit"} Fullscreen | Enters or leaves fullscreen for this game. |
 | Select a white cell | Selects the cell and highlights its across and down runs. Fixed digits remain read-only. |
-| Notes | Toggles pencil marks; entering a digit adds or removes that note. |
-| Undo / Redo | Reverses or reapplies the last edit, including notes, reveals and reset. |
-| Check | Toggles highlighting for runs whose current entries contradict their sum or repeat a digit. |
-| Reveal cell | Fills the selected editable cell, or the first empty cell, using a computed solution. |
-| Reveal solution | Fills every editable cell with a valid solution of the original clues. |
-| Reset | Restores the fixed digits and clears entries and notes; Undo can restore the previous game state. |
+| Game / Note | Shows the current entry mode. Game enters a cell value; Note adds or removes a candidate digit. Click to switch modes. |
 
 #### Keyboard interactions
 

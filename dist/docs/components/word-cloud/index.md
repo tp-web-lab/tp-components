@@ -103,7 +103,7 @@ Javascript API
 : Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
 <!-- tp-docgen:example-descriptions:end -->
 
-:::::::::::: tp-tabs
+::::::::::::::: tp-tabs
 HTML
 : ::include{examples/examples.html}
 
@@ -118,7 +118,7 @@ tp-markdown
 
 tp-restructuredtext
 : ::include{examples/examples.rst}
-::::::::::::
+:::::::::::::::
 
 <!-- -->
 <!-- tp-docgen:dependencies:start -->

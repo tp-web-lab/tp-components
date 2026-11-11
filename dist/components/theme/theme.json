@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-theme></tp-theme>"
+      "code": "<section>\n      <tp-theme></tp-theme>\n      <p>The selected theme is scoped to this section.</p>\n      <code>Inline code follows the selected theme.</code>\n    </section>"
     }
   ],
   "attributes": [

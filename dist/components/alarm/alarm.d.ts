@@ -19,7 +19,7 @@ import { TpBase } from "../base/base.js";
  * @eventdetail tp-alarm-trigger void
  * @example
  * <tp-alarm></tp-alarm>
- * @cssprop [--tp-alarm-alert=#b91c1c] Text color of the time display when the alarm rings; also colors its border.
+ *  @cssprop [--tp-alarm-alert=#b91c1c] Text color of the time display when the alarm rings; also colors its border.
  * @cssprop [--tp-alarm-alert-bg=#fecaca] Background color while the alarm rings.
  * @cssprop [--tp-alarm-muted=#9ca3af] Text color of the time display while stopped.
  * @cssprop [--tp-alarm-size=1rem] Icon and text size.

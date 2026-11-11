@@ -21,12 +21,12 @@ import { TpBase } from "../base/base.js";
  * @cssprop --tp-cluster-gap Default gap between clustered items.
  * @example
  * <tp-box>
- *   <tp-cluster justify="center" gap="0.5rem">
- *     <tp-button>Alpha</tp-button>
- *     <tp-button>Beta</tp-button>
- *     <tp-button>Gamma</tp-button>
- *   </tp-cluster>
- * </tp-box>
+ *       <tp-cluster justify="center" gap="0.5rem">
+ *         <tp-button>Alpha</tp-button>
+ *         <tp-button>Beta</tp-button>
+ *         <tp-button>Gamma</tp-button>
+ *       </tp-cluster>
+ *     </tp-box>
  */
 export declare class TpCluster extends TpBase {
     /**

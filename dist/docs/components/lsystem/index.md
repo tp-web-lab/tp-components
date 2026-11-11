@@ -15,6 +15,7 @@ The custom `<tp-lsystem>` element renders L-system fractals and explores their s
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-lsystem label="Koch curve">
   <script type="tp/lsystem">
     axiom: F
@@ -23,6 +24,7 @@ The custom `<tp-lsystem>` element renders L-system fractals and explores their s
     rule: F => F+F--F+F
   </script>
 </tp-lsystem>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

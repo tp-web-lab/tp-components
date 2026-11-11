@@ -28,8 +28,10 @@ import { TpBase } from "../base/base.js";
  * @attr {string} gap = "0.5rem" - Gap between children. When absent, uses the --tp-inline-gap CSS default.
  * @attr {"normal" | "start" | "end" | "flex-start" | "flex-end" | "center" | "left" | "right" | "space-between" | "space-around" | "space-evenly" | "stretch"} justify = "flex-start" - Main-axis alignment applied to justify-content.
  * @example
- * <tp-inline></tp-inline>
- * @cssprop [--tp-inline-gap=0.5rem] Space between adjacent items in the single horizontal row.
+ * <tp-inline gap="1rem" align="center">
+ *     <tp-button>Previous</tp-button><span>Page 2 of 5</span><tp-button>Next</tp-button>
+ *   </tp-inline>
+ *  @cssprop [--tp-inline-gap=0.5rem] Space between adjacent items in the single horizontal row.
  */
 export declare class TpInline extends TpBase {
     /**

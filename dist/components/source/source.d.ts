@@ -11,7 +11,10 @@ import { TpBase } from "../base/base.js";
  * @tagname tp-source
  * @attr {string} url = "" - Source repository URL.
  * @example
- * <tp-source></tp-source>
+ * <tp-box>
+ *   <p>Open the source repository for this library.</p>
+ *   <tp-source url="https://github.com/tp-web-lab/tp-components"></tp-source>
+ * </tp-box>
  */
 export declare class TpSource extends TpBase {
     static get observedAttributes(): string[];

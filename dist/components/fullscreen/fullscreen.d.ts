@@ -18,7 +18,11 @@ import { type TpSizeType, type TpVariantType } from "../base/base.types.js";
  * @event tp-fullscreen-change Emitted when the fullscreen state of the controlled target changes.
  * @eventdetail tp-fullscreen-change { fullscreen: boolean; anchor: string; target: HTMLElement }
  * @example
- * <tp-fullscreen></tp-fullscreen>
+ * <tp-box>
+ *       <tp-fullscreen></tp-fullscreen>
+ *       <p>This box is the fullscreen target.</p>
+ *       <p>Press Esc to exit fullscreen mode.</p>
+ *     </tp-box>
  */
 export declare class TpFullscreen extends TpBase {
     private static readonly changeEventName;

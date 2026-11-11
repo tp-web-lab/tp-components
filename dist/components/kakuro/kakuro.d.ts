@@ -9,6 +9,42 @@
  * @tp-dependency tp-button
  * @summary Button component that supports native button and link rendering.
  */
+/**
+ * @tp-dependency tp-chronometer
+ * @summary Chronometer component with play, pause and stop controls.
+ */
+/**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
+ */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
 import { TpBase } from "../base/base.js";
 import "../button/button.js";
 /**
@@ -22,11 +58,11 @@ import "../button/button.js";
  * @event tp-kakuro-complete Emitted when the player reaches a valid completed grid.
  * @eventdetail tp-kakuro-complete { values: number[][], complete: boolean }
  * @keyboard {Arrow keys} Moves to the next white cell in the chosen direction.
- * @keyboard {1–9} Enters a digit or toggles a pencil mark in Notes mode.
+ * @keyboard {1–9} Enters a digit or toggles a pencil mark in Note mode.
  * @keyboard {Backspace / Delete / 0} Clears the selected editable cell.
  * @keyboard {Ctrl+Z / Ctrl+Y} Undoes or redoes a move; Command is also accepted.
  * @accessibility Cell labels include coordinates and across/down sums; status updates use a live region.
- * @cssprop [--tp-kakuro-cell-size=3rem] Maximum width of each square.
+ * @cssprop [--tp-kakuro-cell-size=4rem] Maximum width of each square.
  * @tp-dependency tp-base - Shared component behavior.
  * @tp-dependency tp-button - Game action buttons.
  * @see tp-sudoku - Another numeric grid puzzle with pencil marks.

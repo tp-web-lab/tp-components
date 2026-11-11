@@ -25,15 +25,15 @@ export declare const TpGraphDocumentSchema: z.ZodObject<{
             y: z.ZodNumber;
         }, z.core.$strip>>;
         sourcePort: z.ZodOptional<z.ZodEnum<{
+            south: "south";
             north: "north";
             east: "east";
-            south: "south";
             west: "west";
         }>>;
         targetPort: z.ZodOptional<z.ZodEnum<{
+            south: "south";
             north: "north";
             east: "east";
-            south: "south";
             west: "west";
         }>>;
         type: z.ZodOptional<z.ZodString>;

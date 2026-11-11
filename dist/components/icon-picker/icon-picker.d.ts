@@ -41,7 +41,7 @@ export type TpIconPickerCopyFormat = "name" | "svg" | "tp-icon" | "tp-icon-butto
  *
  * @example
  * <tp-icon-picker></tp-icon-picker>
- * @event tp-icon-picker-select Emitted when a icon is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success.
+ *  @event tp-icon-picker-select Emitted when a icon is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success.
  * @eventdetail tp-icon-picker-select { name: string; library: string; sourcePath: string; format: TpIconPickerCopyFormat; value: string }
  * @event tp-icon-picker-copy-error Emitted when copying the selected icon fails. The detail contains the requested clipboard text, selection metadata and the caught error.
  * @eventdetail tp-icon-picker-copy-error { name: string; library: string; format: TpIconPickerCopyFormat; value: string; error: unknown }

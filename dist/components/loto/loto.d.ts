@@ -2,26 +2,6 @@
  * @module components/loto
  * @summary French loto game with a random ticket and number draw.
  */
-/**
- * @tp-dependency tp-base
- * @summary Shared base class for tp-* components.
- */
-/**
- * @tp-dependency tp-chronometer
- * @summary Chronometer component with play, pause and stop controls.
- */
-/**
- * @tp-dependency tp-icon
- * @summary SVG icon component with inline, URL, and registry sources.
- */
-/**
- * @tp-dependency tp-icon-button
- * @summary Accessible icon button component.
- */
-/**
- * @tp-dependency tp-switcher
- * @summary Switches between horizontal and vertical layouts based on available space.
- */
 import { TpBase } from "../base/base.js";
 import "../chronometer/chronometer.js";
 import "../icon/icon.js";
@@ -51,6 +31,7 @@ export declare class TpLoto extends TpBase {
     private drawPile;
     private drawnNumbers;
     private chronometerStarted;
+    private undone;
     private completed;
     private rendered;
     static get observedAttributes(): string[];
@@ -62,6 +43,10 @@ export declare class TpLoto extends TpBase {
     reset(): void;
     /** Draws and returns the next number, or null when the game is over. */
     draw(): number | null;
+    /** Takes back the last draw, restoring its place in the draw pile. */
+    undo(): void;
+    /** Replays the next undone draw without generating another number. */
+    redo(): void;
     private get chronometer();
     private get ticketNumbers();
     private renderShell;

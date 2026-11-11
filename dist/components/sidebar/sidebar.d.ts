@@ -15,7 +15,10 @@ import { TpBase } from "../base/base";
  * @cssprop --tp-sidebar-gap Default gap between sidebar and content.
  * @cssprop --tp-sidebar-side-width Default sidebar column width.
  * @example
- * <tp-sidebar></tp-sidebar>
+ * <tp-sidebar side-width="12rem" gap="1rem">
+ *   <tp-box><h3>Navigation</h3><p>Overview</p><p>Examples</p></tp-box>
+ *   <tp-box><h3>Main content</h3><p>The sidebar stays beside this content while there is enough space.</p></tp-box>
+ * </tp-sidebar>
  */
 export declare class TpSidebar extends TpBase {
     /**

@@ -14,7 +14,7 @@ import { TpMarkupMultiSlides } from "../markup-multi-slides/markup-multi-slides.
  * @tagname tp-restructuredtext-multi-slides
  * @summary Presents reStructuredText documents as a slide deck.
  * @example
- * <tp-restructuredtext-multi-slides></tp-restructuredtext-multi-slides>
+ * <tp-restructuredtext-multi-slides repository="/docs/components/restructuredtext-multi-pages/docs"></tp-restructuredtext-multi-slides>
  */
 export declare class TpRestructuredTextMultiSlides extends TpMarkupMultiSlides {
     protected get fixedLanguage(): TpMarkupMultiPagesLanguage;

@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-restructuredtext-viewer-question open src=\"/docs/components/markup-viewer-question/examples/emphasis.rst\" test=\"/docs/components/markup-viewer-question/examples/emphasis.test.js\">\n  <dl>\n    <dt>Title</dt><dd>Semantic emphasis</dd>\n    <dt>Prompt</dt><dd>Mark Hello with strong emphasis. Open Code to edit, then submit.</dd>\n    <dt>Solution</dt><dd>Use the language's strong-emphasis syntax.</dd>\n  </dl>\n</tp-restructuredtext-viewer-question>"
+      "code": "<tp-restructuredtext-viewer-question open=\"\" src=\"/docs/components/markup-viewer-question/examples/emphasis.rst\" test=\"/docs/components/markup-viewer-question/examples/emphasis.test.js\">\n  <dl>\n    <dt>Title</dt><dd>Semantic emphasis</dd>\n    <dt>Prompt</dt><dd>Mark Hello with strong emphasis. Open Code to edit, then submit.</dd>\n    <dt>Solution</dt><dd>Use the language's strong-emphasis syntax.</dd>\n  </dl>\n</tp-restructuredtext-viewer-question>"
     }
   ],
   "attributes": [],

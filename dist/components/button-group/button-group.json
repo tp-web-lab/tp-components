@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-button-group>\n<tp-button>Previous</tp-button>\n  <tp-button data-next>Next</tp-button>\n</tp-button-group>"
+      "code": "<tp-box data-page-navigation=\"\" data-allow-script=\"\">\n  <p>Use the grouped buttons to change the current page.</p>\n  <tp-button-group attached=\"\" aria-label=\"Page navigation\">\n    <tp-button data-previous=\"\" disabled=\"\">Previous</tp-button>\n    <tp-button data-next=\"\">Next</tp-button>\n  </tp-button-group>\n  <p data-page-status=\"\" role=\"status\">Page 1 of 5</p>\n  <script src=\"/docs/components/button-group/examples/page-navigation.js\"></script>\n</tp-box>"
     }
   ],
   "attributes": [

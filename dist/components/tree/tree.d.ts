@@ -285,7 +285,19 @@ export interface TpTreeNodeMoveRequestDetail {
  * @cssprop --tp-tree-guide-inline-start Inline position of guide lines.
  * @cssprop --tp-tree-guide-midline Block position of guide midlines.
  * @example
- * <tp-tree></tp-tree>
+ * <tp-tree selectable="" guides="" level="2">
+ *   <ul>
+ *     <li>Project
+ *       <ul>
+ *         <li>Documentation
+ *           <ul><li>Getting started</li><li>Examples</li></ul>
+ *         </li>
+ *         <li>Source code</li>
+ *         <li>README.md</li>
+ *       </ul>
+ *     </li>
+ *   </ul>
+ * </tp-tree>
  */
 export declare class TpTree extends TpBase {
     /**

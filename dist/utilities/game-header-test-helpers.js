@@ -1,0 +1,2 @@
+function e(e,t){let n=e.querySelector(`[data-game-command="${t}"]`);if(!n)throw Error(`Missing game command: ${t}`);n.click()}function t(t,n){t.querySelector(`.tp-game-help`)?.hasAttribute(`open`)&&e(t,`help`),e(t,`help`);let r=Array.from(t.querySelectorAll(`[data-game-help]`)).find(e=>e.dataset.gameHelp===n);if(!r)throw Error(`Missing game help: ${n}`);return r}function n(n,r){r===`reset-game`?e(n,`reset`):t(n,r).click()}export{e as gameCommand,n as gameHelp,t as gameHelpItem};
+//# sourceMappingURL=game-header-test-helpers.js.map

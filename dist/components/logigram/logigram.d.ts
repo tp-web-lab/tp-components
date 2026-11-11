@@ -11,6 +11,42 @@
  * @tp-dependency tp-checkbox-list
  * @summary Transforms a list into a group of checkboxes.
  */
+/**
+ * @tp-dependency tp-chronometer
+ * @summary Chronometer component with play, pause and stop controls.
+ */
+/**
+ * @tp-dependency tp-color
+ * @summary Brand color preset controller scoped to the containing element.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
+ * @tp-dependency tp-drawer
+ * @summary Drawer overlay component.
+ */
+/**
+ * @tp-dependency tp-dropdown
+ * @summary Dropdown menu component.
+ */
+/**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-icon
+ * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
+ */
+/**
+ * @tp-dependency tp-theme
+ * @summary Parent-scoped light/dark/auto theme controller with embedded UI.
+ */
 import { TpBase } from "../base/base.js";
 import "../button/button.js";
 import "../checkbox-list/checkbox-list.js";
@@ -63,7 +99,7 @@ import { type LogigramMark, LogigramModel } from "./logigram-model.js";
  * </dd>
  *   </dl>
  * </tp-logigram>
- * @accessibility Uses a labelled table with category headers and native cell buttons whose accessible names include both matched items and the current yes, no or unknown state.
+ *  @accessibility Uses a labelled table with category headers and native cell buttons whose accessible names include both matched items and the current yes, no or unknown state.
  * @accessibility Arrow keys move between cells, Enter or Space changes a cell, and Delete or Backspace clears it; disabled state is forwarded to game controls.
  * @accessibility Announces selection and checking feedback through status regions and exposes checked errors with aria-invalid.
  * @accessibilityresponsibility Provide clear category names, item names and written clues; keep all information needed to solve the puzzle available as text.
@@ -77,6 +113,8 @@ export declare class TpLogigram extends TpBase {
     private observer;
     private cells;
     private status;
+    private resultsBody;
+    private resultsHint;
     private checked;
     private selectedCell;
     private selectedButton;

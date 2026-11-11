@@ -100,8 +100,8 @@ export type TpMarkupMultiPagesLanguage = "html" | "markdown" | "asciidoc" | "res
  * @attr {TpMarkupMultiPagesTheme} theme = "" - Legacy light, dark or auto property. Attribute-driven styling is currently inactive; use the toolbar theme control.
  * @attr {string} brand = "tp-default" - Legacy brand preset property, such as tp-default. Attribute-driven styling is currently inactive; use the toolbar color control.
  * @example
- * <tp-markup-multi-pages></tp-markup-multi-pages>
- * @cssprop [--tp-markup-multi-pages-sidebar-width=12rem] Width of the overlay navigation sidebar on narrow screens, capped at 85% of its container; desktop sizing is controlled by the splitter.
+ * <tp-markup-multi-pages repository="/docs/components/markup-multi-pages/docs"></tp-markup-multi-pages>
+ *  @cssprop [--tp-markup-multi-pages-sidebar-width=12rem] Width of the overlay navigation sidebar on narrow screens, capped at 85% of its container; desktop sizing is controlled by the splitter.
  */
 export declare class TpMarkupMultiPages extends TpBase {
     static get observedAttributes(): string[];

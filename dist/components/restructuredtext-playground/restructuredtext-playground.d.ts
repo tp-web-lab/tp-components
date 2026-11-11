@@ -101,7 +101,7 @@ export { TpRestructuredTextProject } from "./restructuredtext-project.js";
  * @attr {string} src = "" - JSON project or restructuredtext source file to load.
  *
  * @example
- * <tp-restructuredtext-playground></tp-restructuredtext-playground>
+ * <tp-restructuredtext-playground src="/docs/components/_shared/intro-projects/restructuredtext.json"></tp-restructuredtext-playground>
  */
 export declare class TpRestructuredTextPlayground extends TpPlayground<TpRestructuredTextProject> {
     protected createEmptyProject(): TpRestructuredTextProject;

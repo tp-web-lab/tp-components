@@ -1,18 +1,26 @@
 ### User interactions
 
+The header shows the game icon and name on the left. Rounded controls appear on the right, in this order: Reset, Undo, Redo, Help, chronometer, Color, Theme and Fullscreen. Additional game commands remain below the header.
+
 #### Mouse interactions
 
 | Control or gesture | Result |
 | --- | --- |
-| Using the component | Choose colors for an attempt and check it. |
-| Using the component | Exact matches and misplaced colors help you refine the next attempt. |
-| Using the component | Use Undo or Redo to revisit changes, assistance for help, and the reset button to start with another code. |
-| Color | Selects the color used for the next peg. |
+| :tp-icon:{name="refresh"} Reset | Restarts with the same secret code and resets the timer. Use Help → Start with another code to generate a new code. |
+| :tp-icon:{name="undo"} Undo | Takes back the last move. |
+| :tp-icon:{name="redo"} Redo | Replays the next undone move. Disabled when there is no recorded continuation. |
+| :tp-icon:{name="help"} Help | Opens the dropdown of assistance actions specific to this game. |
+| Help → Show next peg | Reveals the next empty peg in the current attempt. |
+| Help → Show the solution | Fills the current attempt with the secret code. |
+| Help → Start with another code | Generates another secret code of the same length and resets the game. |
+| Help → Rules of the game | Opens a drawer with the rules of this game. |
+| Chronometer | Displays elapsed play time; starts with play and pauses on completion. Reset clears it. |
+| :tp-icon:{name="palette-swatch"} Color | Changes the brand color of this game only. |
+| :tp-icon:{name="sun"} :tp-icon:{name="moon"} Theme | Changes the light, dark or automatic theme of this game only. |
+| :tp-icon:{name="fullscreen"} :tp-icon:{name="fullscreen-exit"} Fullscreen | Enters or leaves fullscreen for this game. |
+| Click a peg in the current attempt | Sets the peg to the selected palette color. |
+| Palette color | Selects the color used for the next peg. |
 | Play | Submits the current guess. |
-| :tp-icon:{name="undo" size="1.25em"} :tp-icon:{name="redo" size="1.25em"} Undo / Redo | Navigates changes made to the current game. |
-| :tp-icon:{name="refresh" size="1.25em"} Reset | Starts a game with a newly generated secret code. |
-| Reset the game | Restarts while retaining the current secret code. |
-| Show next peg | Reveals the next peg of the secret code. |
 
 #### Keyboard interactions
 

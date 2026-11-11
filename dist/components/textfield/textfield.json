@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-textfield label=\"Single line\" placeholder=\"Type some text...\" clearable></tp-textfield>\n\n    <tp-textfield label=\"Multiline\" multiline placeholder=\"Type some text...\" clearable value=\"An example of text that has already been entered in the field\"></tp-textfield>"
+      "code": "<tp-textfield label=\"Single line\" placeholder=\"Type some text...\" clearable=\"\"></tp-textfield>"
     }
   ],
   "attributes": [

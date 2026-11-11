@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-tabs>\n  <dl>\n    <dt>Tab 1</dt>\n    <dd>Content of panel <tp-icon size=\"2em\" name=\"numeric-1\"></tp-icon></dd>\n    <dt>Tab 2</dt>\n    <dd>Content of panel <tp-icon size=\"2em\" name=\"numeric-2\"></tp-icon></dd>\n    <dt>Tab 3</dt>\n    <dd>Content of panel <tp-icon size=\"2em\" name=\"numeric-3\"></tp-icon></dd>\n    <dt>Tab 4</dt>\n    <dd>Content of panel <tp-icon size=\"2em\" name=\"numeric-4\"></tp-icon></dd>\n  </dl>\n</tp-tabs>"
+      "code": "<tp-tabs>\n        <dl>\n          <dt>Tab 1</dt>\n          <dd>Content of panel <tp-icon size=\"2em\" name=\"numeric-1\"></tp-icon></dd>\n          <dt>Tab 2</dt>\n          <dd>Content of panel <tp-icon size=\"2em\" name=\"numeric-2\"></tp-icon></dd>\n          <dt>Tab 3</dt>\n          <dd>Content of panel <tp-icon size=\"2em\" name=\"numeric-3\"></tp-icon></dd>\n          <dt>Tab 4</dt>\n          <dd>Content of panel <tp-icon size=\"2em\" name=\"numeric-4\"></tp-icon></dd>\n        </dl>\n      </tp-tabs>"
     }
   ],
   "attributes": [

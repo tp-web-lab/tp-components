@@ -17,6 +17,7 @@ import { TpBase } from "../base/base.js";
  *   <script type="tp/diagram">
  *     flowchart LR
  *       Browser --> Server
+ *       Server --> Database
  *   </script>
  * </tp-diagram>
  */

@@ -23,16 +23,13 @@ import { TpBase } from "../base/base.js";
  * @cssprop --tp-card-header-background Header background.
  * @cssprop --tp-card-padding Section padding.
  * @example
- * <tp-card style="width:300px;">
- * <dl>
- * <dt>header</dt>
- * <dd>content header</dd>
- * <dt>footer</dt>
- * <dd>content footer</dd>
- * <dt>main</dt>
- * <dd>content body</dd>
- * </dl>
- * </tp-card>
+ * <tp-card>
+ *         <dl>
+ *           <dt>header</dt><dd>content header</dd>
+ *           <dt>footer</dt><dd>content footer</dd>
+ *           <dt>main</dt><dd>content body</dd>
+ *         </dl>
+ *       </tp-card>
  */
 export declare class TpCard extends TpBase {
     private static readonly styleId;

@@ -21,9 +21,9 @@ import { TpBase } from "../base/base.js";
  *
  * @example
  * <tp-box>
- *   The custom HTML element <code>&lt;tp-box&gt;</code> wraps its content in various ways.
- * </tp-box>
- * @cssprop [--tp-box-background=var(--tp-paper-color, transparent)] Default box background.
+ *       The custom HTML element <code>&lt;tp-box&gt;</code> wraps its content in various ways.
+ *     </tp-box>
+ *  @cssprop [--tp-box-background=var(--tp-paper-color, transparent)] Default box background.
  * @cssprop [--tp-box-border-radius=0px] Default border radius.
  * @cssprop [--tp-box-border-width=1px] Default border width.
  * @cssprop [--tp-box-color=var(--tp-text-body, inherit)] Default box text color.

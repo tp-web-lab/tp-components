@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-markup-multi-slides repository=\"/slides\"></tp-markup-multi-slides>"
+      "code": "<tp-markup-multi-slides repository=\"/docs/components/markup-multi-slides/docs\" label=\"Mixed markup slides\"></tp-markup-multi-slides>"
     }
   ],
   "attributes": [

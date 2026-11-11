@@ -44,7 +44,6 @@ type TpMenuOrientation = "horizontal" | "vertical";
  *
  * @cssprop --tp-menu-gap Gap between root menu items.
  * @example
- * ```html
  * <tp-menu>
  *   <ul>
  *     <li><a href="/#/components/button/index.md">Buttons</a></li>
@@ -53,7 +52,6 @@ type TpMenuOrientation = "horizontal" | "vertical";
  *   </ul>
  * </tp-menu>
  * <script src="/docs/components/menu/examples/navigation.js"></script>
- * ```
  */
 export declare class TpMenu extends TpBase {
     private static readonly styleId;

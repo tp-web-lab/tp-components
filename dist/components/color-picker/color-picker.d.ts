@@ -19,7 +19,7 @@ import { TpBase } from "../base/base.js";
  *
  * @example
  * <tp-color-picker></tp-color-picker>
- * @event tp-color-picker-select Emitted when a color token is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success.
+ *  @event tp-color-picker-select Emitted when a color token is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success.
  * @eventdetail tp-color-picker-select { token: string; value: string }
  * @event tp-color-picker-copy-error Emitted when copying the selected color token fails. The detail contains the requested clipboard text, selection metadata and the caught error.
  * @eventdetail tp-color-picker-copy-error { token: string; value: string; error: unknown }

@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-slide-note legend=\"Speaker notes\" lang=\"en-GB\" show-text>\n  <script type=\"tp/txt\">Introduce the idea. [trigger=clic] Explain the next step.</script>\n</tp-slide-note>"
+      "code": "<tp-slide-note legend=\"Speaker notes\" lang=\"en-GB\" show-text=\"\">\n  <script type=\"tp/txt\">Introduce the idea. [trigger=clic] Explain the next step.</script>\n</tp-slide-note>"
     }
   ],
   "attributes": [

@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-mathfield label=\"Formula\" value=\"E = mc^2\" clearable></tp-mathfield>"
+      "code": "<tp-mathfield label=\"Formula\" value=\"E = mc^2\" clearable=\"\"></tp-mathfield>"
     }
   ],
   "attributes": [

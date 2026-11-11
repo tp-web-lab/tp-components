@@ -41,7 +41,7 @@ export declare function parseHtmlSymbols(source: string): TpSymbolPickerItem[];
  *
  * @example
  * <tp-symbol-picker></tp-symbol-picker>
- * @event tp-symbol-picker-select Emitted when a symbol is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success. value is null when the selected copy format has no representation.
+ *  @event tp-symbol-picker-select Emitted when a symbol is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success. value is null when the selected copy format has no representation.
  * @eventdetail tp-symbol-picker-select { symbol: string; name: string; group: string; entities: string[]; codepoints: string[]; copy: TpSymbolPickerCopyFormat; value: string | null }
  * @event tp-symbol-picker-copy-error Emitted when copying the selected symbol fails. The detail contains the requested clipboard text, selection metadata and the caught error.
  * @eventdetail tp-symbol-picker-copy-error { symbol: string; name: string; group: string; entities: string[]; codepoints: string[]; copy: TpSymbolPickerCopyFormat; value: string; error: unknown }

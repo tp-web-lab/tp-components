@@ -102,7 +102,7 @@ export { TpPrologProject } from "./prolog-project.js";
  * @attr {string} src = "" - JSON project or prolog source file to load.
  *
  * @example
- * <tp-prolog-playground></tp-prolog-playground>
+ * <tp-prolog-playground src="/docs/components/_shared/intro-projects/prolog.json"></tp-prolog-playground>
  */
 export declare class TpPrologPlayground extends TpPlayground<TpPrologProject> {
     protected get supportsTestExecution(): boolean;

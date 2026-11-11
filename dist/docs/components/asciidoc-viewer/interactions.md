@@ -14,7 +14,7 @@
 | :tp-icon:{name="play" size="1.25em"} Run | Renders the current source. |
 | Fullscreen / Exit fullscreen | Expand the entire component to fullscreen or return to its normal size. |
 
-### Keyboard interactions
+#### Keyboard interactions
 
 | Key or gesture | Result |
 | --- | --- |

@@ -17,7 +17,7 @@ import { TpBase } from "../base/base.js";
  * @attr {string} size = "1rem" - Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em.
  * @example
  * <tp-clock></tp-clock>
- * @cssprop [--tp-clock-size=1rem] Font size of the clock display, updated from the size attribute.
+ *  @cssprop [--tp-clock-size=1rem] Font size of the clock display, updated from the size attribute.
  */
 export declare class TpClock extends TpBase {
     private static readonly styleId;

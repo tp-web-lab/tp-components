@@ -12,7 +12,12 @@ import { TpNotebook } from "../notebook/notebook.js";
  * @tagname tp-python-notebook
  * @summary Interactive Python notebook with markup and code cells.
  * @example
- * <tp-python-notebook></tp-python-notebook>
+ * <tp-python-notebook>
+ *     <script type="tp/markdown"># Interactive Python
+ *
+ * Select **Run all cells** to execute the program. Use the code button in a cell to edit its source.</script>
+ *     <script type="tp/python">print("Hello from Python")</script>
+ *   </tp-python-notebook>
  */
 export declare class TpPythonNotebook extends TpNotebook {
     connectedCallback(): void;

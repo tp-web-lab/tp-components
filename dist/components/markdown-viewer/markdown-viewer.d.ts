@@ -15,7 +15,13 @@ type MdViewerMode = "render" | "html" | "ast";
  * @attr {boolean} lite = false - Uses the compact single-example viewer with rendered HTML output.
  * @attr {string} src = "" - Comma-separated URLs of external Markdown example files.
  * @example
- * <tp-markdown-viewer></tp-markdown-viewer>
+ * <tp-markdown-viewer>
+ *       <script type="tp/markdown">
+ *         # Live Markdown
+ *
+ *         Edit this source and select **Run**.
+ *       </script>
+ *     </tp-markdown-viewer>
  */
 export declare class TpMarkdownViewer extends TpMarkupViewer<MdViewerMode> {
     protected readonly sourceLanguage = "markdown";

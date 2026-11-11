@@ -109,7 +109,7 @@ export { TpJavascriptProject } from "./javascript-project.js";
  * @attr {string} src = "" - JSON project or javascript source file to load.
  *
  * @example
- * <tp-javascript-playground></tp-javascript-playground>
+ * <tp-javascript-playground src="/docs/components/_shared/intro-projects/javascript.json"></tp-javascript-playground>
  */
 export declare class TpJavascriptPlayground extends TpPlayground<TpJavascriptProject> {
     protected get supportsTestExecution(): boolean;

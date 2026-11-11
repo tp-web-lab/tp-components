@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-graph-analog-circuit></tp-graph-analog-circuit>"
+      "code": "<tp-graph-analog-circuit grid=\"\" grid-size=\"20\" message=\"Run the transient analysis and inspect Vin and Vout.\" src=\"/docs/components/graph-analog-circuit/examples/rc-filter.json\"></tp-graph-analog-circuit>"
     }
   ],
   "attributes": [],

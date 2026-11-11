@@ -1,12 +1,13 @@
-# TikZ
+### User interactions
 
-## Mouse interactions
+
+#### Mouse interactions
 
 | Control or gesture | Result |
 | --- | --- |
 | None | No component-specific mouse interaction; the drawing is static. |
 
-## Keyboard interactions
+#### Keyboard interactions
 
 | Key or gesture | Result |
 | --- | --- |

@@ -43,8 +43,8 @@ export declare function getPetriReachabilityGraph(graph: Readonly<TpGraphDocumen
  * @accessibility Exposes enabled transition controls as focusable buttons.
  * @keyboard {Enter / Space} Fires the focused enabled transition.
  * @example
- * <tp-graph-petri></tp-graph-petri>
- * @event tp-graph-change Emitted after adding a token, as well as for inherited graph mutations. reason identifies the operation and graph contains the resulting snapshot.
+ * <tp-graph-petri id="petri-intro" grid="" grid-size="20" src="/docs/components/graph-petri/examples/petri-intro.json"></tp-graph-petri>
+ *  @event tp-graph-change Emitted after adding a token, as well as for inherited graph mutations. reason identifies the operation and graph contains the resulting snapshot.
  * @eventdetail tp-graph-change { reason: string; graph: TpGraphDocument }
  * @event tp-graph-error Emitted if adding a token from the UI fails, or for an inherited graph loading or edge-editing failure. operation identifies the failed action.
  * @eventdetail tp-graph-error { error: unknown; operation: "add-token" | "load-src" | "reconnect-edge" | "add-edge"; src?: string }

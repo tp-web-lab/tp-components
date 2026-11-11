@@ -101,6 +101,7 @@ export declare class TpComponentViewer extends TpBase {
     private request;
     private previewObserver;
     private preview;
+    private pendingPreviewValues;
     static get observedAttributes(): string[];
     get tag(): string;
     set tag(value: string);

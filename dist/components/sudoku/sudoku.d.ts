@@ -28,6 +28,7 @@
  * </tp-sudoku>
  */
 import { TpBase } from "../base/base.js";
+import "../button/button.js";
 /**
  * The custom `<tp-sudoku>` element displays an interactive Sudoku puzzle.
  *
@@ -39,7 +40,19 @@ import { TpBase } from "../base/base.js";
  * @attr {string} puzzle = "" - Puzzle rows separated by newlines.
  *
  * @example
- * <tp-sudoku></tp-sudoku>
+ * <tp-sudoku>
+ *         <ol>
+ *           <li>39465!7!1!8!2</li>
+ *           <li>2!85913!4!67</li>
+ *           <li>6!718!4!2395</li>
+ *           <li>7!2!63!8!95!41!</li>
+ *           <li>4!38!5612!79!</li>
+ *           <li>159!27483!6!</li>
+ *           <li>8674!2!5!913!</li>
+ *           <li>9127!38654!</li>
+ *           <li>54!3!1!9!6728</li>
+ *         </ol>
+ *       </tp-sudoku>
  */
 export declare class TpSudoku extends TpBase {
     /**

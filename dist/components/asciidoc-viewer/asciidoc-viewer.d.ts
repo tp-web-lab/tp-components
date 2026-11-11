@@ -15,7 +15,14 @@ type AdocViewerMode = "render" | "html" | "ast";
  * @attr {boolean} lite = false - Uses the compact single-example viewer with rendered HTML output.
  * @attr {string} src = "" - Comma-separated URLs of external AsciiDoc example files.
  * @example
- * <tp-asciidoc-viewer></tp-asciidoc-viewer>
+ * <tp-asciidoc-viewer>
+ *         <script type="tp/asciidoc">
+ *           = Live AsciiDoc
+ *           :showtitle:
+ *
+ *           Edit this source and select *Run*.
+ *         </script>
+ *       </tp-asciidoc-viewer>
  */
 export declare class TpAsciidocViewer extends TpMarkupViewer<AdocViewerMode> {
     protected readonly sourceLanguage = "asciidoc";

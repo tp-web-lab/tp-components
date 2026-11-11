@@ -22,7 +22,7 @@ import { TpBase } from "../base/base.js";
  * @attr {string} fallback-icon = "" - Backup icon identifier used when inline SVG, src and name provide no icon. Looked up in the selected library, then in tp; if unavailable, fallback text is used.
  * @example
  * <tp-icon name="heart" size="3rem" aria-label="Heart"></tp-icon>
- * @cssprop [--tp-icon-size=1em] Width and height of the rendered icon; assigned internally from size multiplied by scale.
+ *  @cssprop [--tp-icon-size=1em] Width and height of the rendered icon; assigned internally from size multiplied by scale.
  */
 export declare class TpIcon extends TpBase {
     /**

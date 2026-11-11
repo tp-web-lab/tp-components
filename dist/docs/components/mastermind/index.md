@@ -47,7 +47,7 @@ Use `colors` to customize the available palette. Supported colors are `red`, `bl
 
 Select colors to fill the current guess, then choose **Play** on the right of the active row. A filled peg can be replaced by selecting a color and clicking that peg.
 
-The chronometer starts with the first peg and pauses when the code is cracked or the final attempt is used. Its controls are hidden. Undo and redo use icon buttons. The help icon opens an assistance dropdown: **Reset the game** keeps the current secret code, while the visible refresh button resets the game with a newly generated code of the same length.
+The chronometer starts with the first peg and pauses when the code is cracked or the final attempt is used. Its controls are hidden. Undo and redo use icon buttons. Reset keeps the current secret code. The Help dropdown offers **Show next peg**, **Show the solution**, and **Start with another code**, which generates a new code of the same length.
 
 ### Importing
 
@@ -127,18 +127,48 @@ All tp-components and external tools used by this component are loaded automatic
 @summary Chronometer component with play, pause and stop controls.
 -->
 <!--
+@tp-dependency tp-color
+@summary Brand color preset controller scoped to the containing element.
+-->
+<!--
+@tp-dependency tp-divider
+@summary Visual separator for menus, dropdowns, toolbars, and layouts.
+-->
+<!--
+@tp-dependency tp-drawer
+@summary Drawer overlay component.
+-->
+<!--
 @tp-dependency tp-dropdown
 @summary Dropdown menu component.
+-->
+<!--
+@tp-dependency tp-fullscreen
+@summary Fullscreen controller button.
+-->
+<!--
+@tp-dependency tp-icon
+@summary SVG icon component with inline, URL, and registry sources.
 -->
 <!--
 @tp-dependency tp-icon-button
 @summary Accessible icon button component.
 -->
+<!--
+@tp-dependency tp-theme
+@summary Parent-scoped light/dark/auto theme controller with embedded UI.
+-->
 
 - [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 - [`<tp-chronometer>`](#/components/chronometer/index.md) : Chronometer component with play, pause and stop controls.
+- [`<tp-color>`](#/components/color/index.md) : Brand color preset controller scoped to the containing element.
+- [`<tp-divider>`](#/components/divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
+- [`<tp-drawer>`](#/components/drawer/index.md) : Drawer overlay component.
 - [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
+- [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
+- [`<tp-theme>`](#/components/theme/index.md) : Parent-scoped light/dark/auto theme controller with embedded UI.
 
 ### External
 

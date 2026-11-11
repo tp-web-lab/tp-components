@@ -1,0 +1,1 @@
+import{t as e}from"../../chunks/chess2.js";export{e as TpChess};

@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-asciidoc-multi-slides></tp-asciidoc-multi-slides>"
+      "code": "<tp-asciidoc-multi-slides repository=\"/docs/components/asciidoc-multi-pages/docs\"></tp-asciidoc-multi-slides>"
     }
   ],
   "attributes": [

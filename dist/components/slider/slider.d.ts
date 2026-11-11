@@ -27,14 +27,12 @@ import { TpBase } from "../base/base.js";
  * @keyboard {ArrowUp / ArrowDown} Scrolls the focused vertical slider up or down by 80% of its visible height.
  * @keyboard {Home / End} Scrolls the focused slider to the start or end of its content, respecting text direction.
  * @example
- * ```html
  * <tp-box style="max-inline-size: 28rem">
  *   <tp-slider scrollbar="" item-width="10rem" gap="1rem" style="max-block-size: 8rem">
  *     <tp-box>First</tp-box><tp-box>Second</tp-box><tp-box>Third</tp-box><tp-box>Fourth</tp-box>
  *   </tp-slider>
  * </tp-box>
- * ```
- * @cssprop [--tp-slider-gap=1rem] Horizontal space between adjacent slider items.
+ *  @cssprop [--tp-slider-gap=1rem] Horizontal space between adjacent slider items.
  * @cssprop [--tp-slider-item-width=auto] Preferred width of each slider item; auto preserves its intrinsic width.
  * @cssprop [--tp-slider-native-scrollbar-size=0px] Measured native scrollbar thickness, written internally to reserve space without duplicating the browser gutter.
  */

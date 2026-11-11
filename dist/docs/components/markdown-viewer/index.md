@@ -15,6 +15,7 @@ The custom `<tp-markdown-viewer>` element provides an interactive Markdown viewe
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-markdown-viewer>
       <script type="tp/markdown">
         # Live Markdown
@@ -22,6 +23,7 @@ The custom `<tp-markdown-viewer>` element provides an interactive Markdown viewe
         Edit this source and select **Run**.
       </script>
     </tp-markdown-viewer>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

@@ -103,13 +103,13 @@ export interface TpConsoleClearDetail {
  * @event tp-console-clear Emitted when the console is cleared.
  * @eventdetail tp-console-clear { removedCount: number }
  * @example
- * <tp-box data-intro-action="console" data-allow-script>
+ * <tp-box data-intro-action="console" data-allow-script="">
  *   <p>Inspect these example messages, then use Clear to empty the console.</p>
  *   <tp-console></tp-console>
- *   <p data-demo-status role="status"></p>
+ *   <p data-demo-status="" role="status"></p>
  *   <script src="/docs/components/_shared/introduction-actions.js"></script>
  * </tp-box>
- * @cssprop [--tp-console-bg=var(--tp-paper-color)] Console background.
+ *  @cssprop [--tp-console-bg=var(--tp-paper-color)] Console background.
  * @cssprop [--tp-console-bigint-color=#bc8cff] BigInt value color.
  * @cssprop [--tp-console-boolean-color=#ffa657] Boolean value color.
  * @cssprop [--tp-console-border=var(--tp-neutral-stroke-mid)] Console border color.

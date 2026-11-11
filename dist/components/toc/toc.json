@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-box data-tp-toc-scope>\n  <tp-toc label=\"On this page\" open expand-all></tp-toc>\n  <h2>Getting started</h2>\n  <p>Choose a heading in the table of contents to jump to its section.</p>\n  <h3>Installation</h3><p>Install the library in your project.</p>\n  <h3>First component</h3><p>Add your first interactive component.</p>\n</tp-box>"
+      "code": "<tp-box data-tp-toc-scope=\"\">\n  <tp-toc label=\"On this page\" open=\"\" expand-all=\"\"></tp-toc>\n  <h2>Getting started</h2>\n  <p>Choose a heading in the table of contents to jump to its section.</p>\n  <h3>Installation</h3><p>Install the library in your project.</p>\n  <h3>First component</h3><p>Add your first interactive component.</p>\n</tp-box>"
     }
   ],
   "attributes": [

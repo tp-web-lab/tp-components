@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-box>\n  <tp-cluster justify=\"center\" gap=\"0.5rem\">\n    <tp-button>Alpha</tp-button>\n    <tp-button>Beta</tp-button>\n    <tp-button>Gamma</tp-button>\n  </tp-cluster>\n</tp-box>"
+      "code": "<tp-box>\n      <tp-cluster justify=\"center\" gap=\"0.5rem\">\n        <tp-button>Alpha</tp-button>\n        <tp-button>Beta</tp-button>\n        <tp-button>Gamma</tp-button>\n      </tp-cluster>\n    </tp-box>"
     }
   ],
   "attributes": [

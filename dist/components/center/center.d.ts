@@ -25,9 +25,9 @@ import { TpBase } from "../base/base.js";
  *
  * @cssprop --tp-center-width Default maximum inline size when `max-inline-size` is not set.
  * @example
- * <tp-center intrinsic>
- * <tp-box>Centered content</tp-box>
- * </tp-center>
+ * <tp-center intrinsic="">
+ *       <tp-box>Centered content</tp-box>
+ *     </tp-center>
  */
 export declare class TpCenter extends TpBase {
     /**

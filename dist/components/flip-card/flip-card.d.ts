@@ -22,8 +22,13 @@ import { TpBase } from "../base/base.js";
  * @cssprop --tp-flip-card-padding Card face padding.
  * @cssprop --tp-flip-card-width Card width.
  * @example
- * <tp-flip-card></tp-flip-card>
- * @event tp-flip-card-change Emitted when the visible side changes; flipped is true when the back face is visible.
+ * <tp-flip-card>
+ * <dl>
+ *   <dt>recto</dt><dd><p>This is the content <strong>recto...</strong></p></dd>
+ *   <dt>verso</dt><dd><p>...and here is the content <strong>verso.</strong></p></dd>
+ * </dl>
+ * </tp-flip-card>
+ *  @event tp-flip-card-change Emitted when the visible side changes; flipped is true when the back face is visible.
  * @eventdetail tp-flip-card-change { flipped: boolean }
  */
 export declare class TpFlipCard extends TpBase {

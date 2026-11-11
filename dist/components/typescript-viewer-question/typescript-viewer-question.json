@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-typescript-viewer-question open src=\"/docs/components/playground-question/examples/typescript/double.ts\" test=\"/docs/components/playground-question/examples/typescript/double.test.ts\">\n  <dl>\n    <dt>Title</dt><dd>Double a number</dd>\n    <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Open Code to edit, then submit to run the tests.</dd>\n    <dt>Solution</dt><dd>Return value * 2.</dd>\n  </dl>\n</tp-typescript-viewer-question>"
+      "code": "<tp-typescript-viewer-question open=\"\" src=\"/docs/components/playground-question/examples/typescript/double.ts\" test=\"/docs/components/playground-question/examples/typescript/double.test.ts\">\n  <dl>\n    <dt>Title</dt><dd>Double a number</dd>\n    <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Open Code to edit, then submit to run the tests.</dd>\n    <dt>Solution</dt><dd>Return value * 2.</dd>\n  </dl>\n</tp-typescript-viewer-question>"
     }
   ],
   "attributes": [],

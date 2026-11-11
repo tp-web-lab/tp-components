@@ -15,12 +15,14 @@ The custom `<tp-contextmenu>` element opens a menu of actions at the pointer pos
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-box data-intro-action="contextmenu" data-allow-script="">
   <tp-button id="intro-contextmenu-trigger" data-demo-trigger="">Right-click this button</tp-button>
   <tp-contextmenu anchor="#intro-contextmenu-trigger" outside-click=""><ul><li><a href="/#/components/button/index.md">Buttons</a></li><li><a href="/#/components/tree/index.md">Trees</a></li></ul></tp-contextmenu>
   <p data-demo-status="" role="status">Try the contextmenu using its trigger.</p>
   <script src="/docs/components/_shared/introduction-actions.js"></script>
 </tp-box>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

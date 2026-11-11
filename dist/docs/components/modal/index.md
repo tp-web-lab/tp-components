@@ -15,12 +15,14 @@ The custom `<tp-modal>` element displays modal content above the page.
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-box data-intro-action="modal" data-allow-script="">
   <tp-button id="intro-modal-trigger" data-demo-trigger="">Open the modal</tp-button>
   <tp-modal backdrop="" outside-click="" aria-label="Example modal"><p>This panel contains additional information.</p><tp-button data-demo-close="">Close</tp-button></tp-modal>
   <p data-demo-status="" role="status">Try the modal using its trigger.</p>
   <script src="/docs/components/_shared/introduction-actions.js"></script>
 </tp-box>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

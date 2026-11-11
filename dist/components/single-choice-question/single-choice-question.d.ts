@@ -17,7 +17,15 @@ import "../radio-list/radio-list.js";
  * @attr {string} value = "" - 1-based index of the currently selected answer; empty means no selection.
  * @attr {string} src = "" - URL of an external JSON, HTML, Markdown, AsciiDoc or reStructuredText question definition. Keeps the definition out of authored markup, but does not make downloaded answers confidential.
  * @example
- * <tp-single-choice-question></tp-single-choice-question>
+ * <tp-single-choice-question answer="1" random="">
+ *     <dl>
+ *       <dt>Title</dt><dd>Geography</dd>
+ *       <dt>Prompt</dt><dd>What is the capital of France?</dd>
+ *       <dt>Form</dt><dd><ul><li>Paris</li><li>London</li><li>Berlin</li></ul></dd>
+ *       <dt>Feedback</dt><dd><ul><li>Correct.</li><li>London is in the UK.</li><li>Berlin is in Germany.</li></ul></dd>
+ *       <dt>Solution</dt><dd>Paris</dd>
+ *     </dl>
+ *   </tp-single-choice-question>
  */
 export declare class TpSingleChoiceQuestion extends TpQuestion {
     static get observedAttributes(): string[];

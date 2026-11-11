@@ -19,7 +19,7 @@ import { TpBase } from "../base/base.js";
  * @eventdetail tp-timer-elapsed void
  * @example
  * <tp-timer></tp-timer>
- * @cssprop [--tp-timer-alert=var(--tp-danger-text-on-soft)] Text color of the time display when the countdown has elapsed.
+ *  @cssprop [--tp-timer-alert=var(--tp-danger-text-on-soft)] Text color of the time display when the countdown has elapsed.
  * @cssprop [--tp-timer-alert-bg=var(--tp-danger-fill-softer)] Background color of the elapsed portion of the countdown and of the whole timer once elapsed.
  * @cssprop [--tp-timer-muted=var(--tp-neutral-text-on-soft)] Text color of the time display while stopped.
  * @cssprop [--tp-timer-progress=0%] Elapsed portion of the countdown, as a percentage from 0% to 100%; updated internally as time passes.

@@ -15,12 +15,14 @@ The custom `<tp-icon-button>` element provides an icon action button with an acc
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-box data-intro-action="counter" data-allow-script="">
   <p>Activate the heart button to add a like.</p>
   <tp-icon-button name="heart" label="Like this example" data-demo-trigger=""></tp-icon-button>
   <p data-demo-status="" role="status">Likes: 0</p>
   <script src="/docs/components/_shared/introduction-actions.js"></script>
 </tp-box>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-tree></tp-tree>"
+      "code": "<tp-tree selectable=\"\" guides=\"\" level=\"2\">\n  <ul>\n    <li>Project\n      <ul>\n        <li>Documentation\n          <ul><li>Getting started</li><li>Examples</li></ul>\n        </li>\n        <li>Source code</li>\n        <li>README.md</li>\n      </ul>\n    </li>\n  </ul>\n</tp-tree>"
     }
   ],
   "attributes": [

@@ -17,7 +17,18 @@ import { TpBase } from "../base/base.js";
  * @attr {string} width = "" - Drawing coordinate width as a number; also determines the SVG aspect ratio. Use a positive value for a visible drawing. The SVG remains responsive.
  * @attr {string} src = "" - URL of a Turtle program; takes precedence over the inline tp/turtle script.
  * @example
- * <tp-turtle></tp-turtle>
+ * <tp-turtle width="420" height="220" label="A square">
+ *     <script type="tp/turtle">
+ *       turtle x=0 y=0 heading=0 speed=6
+ *       forward 80
+ *       right 90
+ *       forward 80
+ *       right 90
+ *       forward 80
+ *       right 90
+ *       forward 80
+ *     </script>
+ *   </tp-turtle>
  */
 export declare class TpTurtle extends TpBase {
     private abortController;

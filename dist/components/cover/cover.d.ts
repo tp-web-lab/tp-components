@@ -20,9 +20,9 @@ import { TpBase } from "../base/base.js";
  * @cssprop --tp-cover-padding Default inner padding.
  * @example
  * <tp-cover min-height="16rem" heading="h2">
- * <p>A short introduction</p>
- * <h2>A heading centered in the cover</h2>
- * <p>Supporting information stays below.</p>
+ *   <p>A short introduction</p>
+ *   <h2>A heading centered in the cover</h2>
+ *   <p>Supporting information stays below.</p>
  * </tp-cover>
  */
 export declare class TpCover extends TpBase {

@@ -15,6 +15,7 @@ The custom `<tp-markup-single-page>` element renders one Markdown, AsciiDoc, reS
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-markup-single-page>
   <script type="tp/markdown">
 ## A short guide
@@ -27,6 +28,7 @@ This document is rendered as a single page.
 - Try a component
   </script>
 </tp-markup-single-page>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

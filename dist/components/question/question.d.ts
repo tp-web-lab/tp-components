@@ -54,7 +54,7 @@ export interface TpQuestionSubmitDetail {
  *       <dt>Solution</dt><dd>They package reusable behavior behind a custom element.</dd>
  *     </dl>
  *   </tp-question>
- * @event tp-question-submit Emitted after an answer passes submission validation and preparation. value is the response widget value, whose type depends on the question; invalid or blocked repeated submissions do not emit it.
+ *  @event tp-question-submit Emitted after an answer passes submission validation and preparation. value is the response widget value, whose type depends on the question; invalid or blocked repeated submissions do not emit it.
  * @eventdetail tp-question-submit { value: unknown }
  */
 export declare class TpQuestion extends TpBase {

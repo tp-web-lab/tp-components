@@ -104,7 +104,7 @@ main
   <tp-icon name="binary" library="components" size="2em"></tp-icon>
   <tp-icon name="crossword" library="components" size="2em"></tp-icon>
   <tp-icon name="cryptarithm" library="components" size="2em"></tp-icon>
-  <tp-icon name="game-life" library="components" size="2em"></tp-icon>
+  <tp-icon name="chess" library="components" size="2em"></tp-icon>
   <tp-icon name="loto" library="components" size="2em"></tp-icon>
   <tp-icon name="mastermind" library="components" size="2em"></tp-icon>
   <tp-icon name="memory" library="components" size="2em"></tp-icon>

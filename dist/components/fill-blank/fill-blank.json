@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-fill-blank>\n  <p>The capital of France is <tp-textfield name=\"capital\" placeholder=\"City name\" aria-label=\"Capital of France\" clearable></tp-textfield>.</p>\n</tp-fill-blank>"
+      "code": "<tp-fill-blank>\n  <p>The capital of France is <tp-textfield name=\"capital\" placeholder=\"City name\" aria-label=\"Capital of France\" clearable=\"\"></tp-textfield>.</p>\n</tp-fill-blank>"
     }
   ],
   "attributes": [],

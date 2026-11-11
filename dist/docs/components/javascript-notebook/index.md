@@ -15,12 +15,14 @@ The custom `<tp-javascript-notebook>` element combines written explanations and 
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-javascript-notebook>
     <script type="tp/markdown"># Interactive JavaScript
 
 Select **Run all cells** to execute the program. Use the code button in a cell to edit its source.</script>
     <script type="tp/javascript">console.log('Hello from JavaScript');</script>
   </tp-javascript-notebook>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

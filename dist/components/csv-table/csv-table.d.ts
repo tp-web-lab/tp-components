@@ -12,13 +12,13 @@ import "../callout/callout.js";
  * @accessibility Uses native table structure and th scope="col" for the optional heading row.
  * @accessibilityresponsibility Provide meaningful column headings and surrounding context for the data.
  * @example
- * <tp-csv-table heading>
- * <script type="tp/csv-table">
- * Country,Capital
- * Estonia,Tallinn
- * Latvia,Riga
- * Lithuania,Vilnius
- * </script>
+ * <tp-csv-table heading="">
+ *   <script type="tp/csv-table">
+ *     Country,Capital
+ *     Estonia,Tallinn
+ *     Latvia,Riga
+ *     Lithuania,Vilnius
+ *   </script>
  * </tp-csv-table>
  */
 export declare class TpCsvTable extends TpBase {

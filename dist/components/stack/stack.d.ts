@@ -23,13 +23,11 @@ import { TpBase } from "../base/base.js";
  *
  * @cssprop --stack-gap Gap inserted between stacked items.
  * @example
- * ```html
  * <tp-stack>
  *   <tp-box>Step 1: Write a draft.</tp-box>
  *   <tp-box>Step 2: Review the content.</tp-box>
  *   <tp-box>Step 3: Publish the document.</tp-box>
  * </tp-stack>
- * ```
  */
 export declare class TpStack extends TpBase {
     /**

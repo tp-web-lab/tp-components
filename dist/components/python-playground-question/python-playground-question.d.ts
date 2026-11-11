@@ -25,7 +25,7 @@ import { TpPythonPlayground } from "../python-playground/python-playground.js";
  * @accessibility Reuses TpQuestion's disclosure, actions and feedback tabs.
  * @keyboard {Enter / Space} Expands the question or activates a focused action.
  * @example
- * <tp-python-playground-question open src="/docs/components/playground-question/examples/python/double.py" test="/docs/components/playground-question/examples/python/double.test.py">
+ * <tp-python-playground-question open="" src="/docs/components/playground-question/examples/python/double.py" test="/docs/components/playground-question/examples/python/double.test.py">
  *   <dl>
  *     <dt>Title</dt><dd>Double a number</dd>
  *     <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Edit the source, then submit to run the tests.</dd>

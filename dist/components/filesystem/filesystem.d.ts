@@ -30,7 +30,12 @@ import type { TpFile, TpFilesystemChangeDetail, TpFilesystemMoveDetail, TpFilesy
  * @event tp-filesystem-write Emitted when file content is written.
  * @eventdetail tp-filesystem-write { path: string; content: string }
  * @example
- * <tp-filesystem></tp-filesystem>
+ * <tp-box data-intro-action="filesystem" data-allow-script="">
+ *   <p>Expand the folders and select a file in this in-memory example.</p>
+ *   <tp-filesystem></tp-filesystem>
+ *   <p data-demo-status="" role="status">Select a file to see its path.</p>
+ *   <script src="/docs/components/_shared/introduction-actions.js"></script>
+ * </tp-box>
  */
 export declare class TpFilesystem extends TpBase {
     private static readonly styleId;

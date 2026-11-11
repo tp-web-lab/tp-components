@@ -15,6 +15,7 @@ The custom `<tp-markdown>` element renders Markdown documents.
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-markdown>
   <script type="tp/markdown">
 ## A short document
@@ -26,6 +27,7 @@ This paragraph uses **Markdown**.
 - Publish the page
   </script>
 </tp-markdown>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

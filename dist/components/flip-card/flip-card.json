@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-flip-card></tp-flip-card>"
+      "code": "<tp-flip-card>\n<dl>\n  <dt>recto</dt><dd><p>This is the content <strong>recto...</strong></p></dd>\n  <dt>verso</dt><dd><p>...and here is the content <strong>verso.</strong></p></dd>\n</dl>\n</tp-flip-card>"
     }
   ],
   "attributes": [

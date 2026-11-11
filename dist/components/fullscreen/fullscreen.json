@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-fullscreen></tp-fullscreen>"
+      "code": "<tp-box>\n      <tp-fullscreen></tp-fullscreen>\n      <p>This box is the fullscreen target.</p>\n      <p>Press Esc to exit fullscreen mode.</p>\n    </tp-box>"
     }
   ],
   "attributes": [

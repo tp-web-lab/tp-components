@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-prolog-notebook></tp-prolog-notebook>"
+      "code": "<tp-prolog-notebook>\n      <script type=\"tp/markdown\">\n        # Family relations\n\n        Select **Run all cells** to execute the program. Use the code button in a cell to edit its source.\n      </script>\n      <script type=\"tp/prolog\" filename=\"program.pl\">\n        parent(ada, byron).\n        parent(byron, charles).\n\n        grandparent(X, Z) :- parent(X, Y), parent(Y, Z).\n      </script>\n      <script type=\"tp/prolog\" filename=\"query.pl\">\n        grandparent(ada, Grandchild).\n      </script>\n  </tp-prolog-notebook>"
     }
   ],
   "attributes": [],

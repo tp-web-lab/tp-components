@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-textfield id=\"mask-answer\" label=\"Answer\" value=\"Thursday\" clearable></tp-textfield>\n<tp-mask anchor=\"#mask-answer\" active>The answer is hidden until the review.</tp-mask>"
+      "code": "<tp-textfield id=\"mask-answer\" label=\"Answer\" value=\"Thursday\" clearable=\"\"></tp-textfield>\n<tp-mask anchor=\"#mask-answer\" active=\"\">The answer is hidden until the review.</tp-mask>"
     }
   ],
   "attributes": [

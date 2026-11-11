@@ -1,12 +1,13 @@
-# LaTeX
+### User interactions
 
-## Mouse interactions
+
+#### Mouse interactions
 
 | Control or gesture | Result |
 | --- | --- |
 | Links and embedded components | Follow document links and use each embedded component’s controls. |
 
-## Keyboard interactions
+#### Keyboard interactions
 
 | Key or gesture | Result |
 | --- | --- |

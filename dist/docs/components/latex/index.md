@@ -15,8 +15,10 @@ The custom `<tp-latex>` element renders LaTeX documents, mathematical formulas a
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-latex><script type="tp/latex">\section{A first document}
 The area of a circle is $A=\pi r^2$.</script></tp-latex>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>
@@ -32,8 +34,6 @@ The area of a circle is $A=\pi r^2$.</script></tp-latex>
 
 <!-- -->
 ## Usage
-
-
 
 ### Initial content
 
@@ -232,7 +232,6 @@ A fragment can start with package declarations, such as `\usepackage{hyperref}`,
 \section*{Getting started}
 \href{cover.tex}{Back to the introduction}
 ```
-
 
 ### Importing
 

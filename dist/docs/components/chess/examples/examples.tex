@@ -1,0 +1,40 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpChess[position=8/8/3k4/8/3PK3/8/8/8,draggable-pieces]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/chess/chess.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-chess");
+element1.setAttribute("position", "8/8/3k4/8/3PK3/8/8/8");
+element1.setAttribute("draggable-pieces", "");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Black to move
+\documentclass{article}
+\begin{document}
+\wcTpChess[fen=8/8/3k4/8/3PK3/8/8/8 b - - 0 1,orientation=black,draggable-pieces]{}
+\end{document}
+
+% !tp-example Pawn promotion
+\documentclass{article}
+\begin{document}
+\wcTpChess[fen=7k/P7/8/8/8/8/8/4K3 w - - 0 1,draggable-pieces]{}
+\end{document}
+
+% !tp-example Rook endgame
+\documentclass{article}
+\begin{document}
+\wcTpChess[fen=7k/8/5K2/8/8/8/8/R7 w - - 0 1,draggable-pieces]{}
+\end{document}

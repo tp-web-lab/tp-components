@@ -15,12 +15,14 @@ The custom `<tp-code-editor>` element displays and edits source code.
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-code-editor language="javascript" line-numbers="">
   <script type="tp/javascript">
 const greeting = "Hello, tp-components!";
 console.log(greeting);
   </script>
 </tp-code-editor>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

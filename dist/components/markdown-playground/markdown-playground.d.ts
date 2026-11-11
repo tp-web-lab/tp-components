@@ -97,7 +97,7 @@ export { type TpMarkdownExtension, TpMarkdownProject, } from "./markdown-project
  * @attr {string} src = "" - JSON project or markdown source file to load.
  *
  * @example
- * <tp-markdown-playground></tp-markdown-playground>
+ * <tp-markdown-playground src="/docs/components/_shared/intro-projects/markdown.json"></tp-markdown-playground>
  */
 export declare class TpMarkdownPlayground extends TpPlayground<TpMarkdownProject> {
     protected createEmptyProject(): TpMarkdownProject;

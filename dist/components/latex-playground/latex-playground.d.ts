@@ -96,7 +96,7 @@ export { TpLatexProject } from "./latex-project.js";
  * @attr {string} repository = "" - Directory containing a playground project.
  * @example
  * <tp-latex-playground><script type="tp/latex">\section{Hello}A formula $x^2$.</script></tp-latex-playground>
- * @see tp-latex-viewer - Present editable examples with rendered and generated HTML views.
+ *  @see tp-latex-viewer - Present editable examples with rendered and generated HTML views.
  * @see tp-latex - Render LaTeX directly in a page.
  */
 export declare class TpLatexPlayground extends TpPlayground<TpLatexProject> {

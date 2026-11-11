@@ -1,4 +1,6 @@
-### Mouse interactions
+### User interactions
+
+#### Mouse interactions
 
 | Control or gesture | Result |
 | --- | --- |
@@ -12,7 +14,7 @@
 | Run | Render the current source. |
 | Fullscreen / Exit fullscreen | Expand the entire component to fullscreen or return to its normal size. |
 
-### Keyboard interactions
+#### Keyboard interactions
 
 | Key or gesture | Result |
 | --- | --- |

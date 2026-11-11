@@ -35,8 +35,10 @@ type AnimationFillMode = "none" | "forwards" | "backwards" | "both";
  * @accessibilityresponsibility Prefer a native interactive element, such as a button, for a click-triggered animation.
  * @keyboard {Enter / Space} Starts a click-triggered animation when its target is not a native control.
  * @example
- * <tp-animation></tp-animation>
- * @event tp-animation-start Emitted when an entrance or exit animation starts, including when immediately paused. The detail identifies the configured animation names and the phase.
+ * <tp-animation in="fadeIn" trigger="load" duration="800ms">
+ *     <tp-box>Animated content</tp-box>
+ *   </tp-animation>
+ *  @event tp-animation-start Emitted when an entrance or exit animation starts, including when immediately paused. The detail identifies the configured animation names and the phase.
  * @eventdetail tp-animation-start { in: string; out: string; phase: "in" | "out" }
  * @event tp-animation-finish Emitted after an entrance or exit animation finishes normally; cancellation does not emit finish. The detail identifies the configured animation names and the phase.
  * @eventdetail tp-animation-finish { in: string; out: string; phase: "in" | "out" }

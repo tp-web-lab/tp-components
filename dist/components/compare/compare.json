@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-compare></tp-compare>"
+      "code": "<tp-compare position=\"50%\" before-label=\"Before\" after-label=\"After\" style=\"height: 12rem;\">\n  <tp-box slot=\"before\" style=\"height: 100%; background: var(--tp-neutral-100);\">Before: the original design</tp-box>\n  <tp-box slot=\"after\" style=\"height: 100%; background: var(--tp-brand-100);\">After: the updated design</tp-box>\n</tp-compare>"
     }
   ],
   "attributes": [

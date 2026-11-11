@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-source></tp-source>"
+      "code": "<tp-box>\n  <p>Open the source repository for this library.</p>\n  <tp-source url=\"https://github.com/tp-web-lab/tp-components\"></tp-source>\n</tp-box>"
     }
   ],
   "attributes": [

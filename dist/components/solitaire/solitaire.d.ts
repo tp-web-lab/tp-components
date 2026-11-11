@@ -32,6 +32,8 @@ export declare class TpSolitaire extends TpBase {
     private selection;
     private chronometerStarted;
     private rendered;
+    private history;
+    private historyIndex;
     static get observedAttributes(): string[];
     get deckSize(): 32 | 52;
     set deckSize(value: 32 | 52);
@@ -41,6 +43,12 @@ export declare class TpSolitaire extends TpBase {
     attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void;
     /** Reshuffles and starts a new game. */
     reset(): void;
+    private snapshot;
+    private restoreHistory;
+    /** Restores the position before the last draw, recycle or card move. */
+    undo(): void;
+    /** Restores the next recorded position, including face-up cards and foundations. */
+    redo(): void;
     private get chronometer();
     private ensureShell;
     private createDeck;

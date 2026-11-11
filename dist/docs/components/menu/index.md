@@ -15,6 +15,7 @@ The custom `<tp-menu>` element turns a nested list into a keyboard-accessible me
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
+``` raw html
 <tp-menu>
   <ul>
     <li><a href="/#/components/button/index.md">Buttons</a></li>
@@ -23,6 +24,7 @@ The custom `<tp-menu>` element turns a nested list into a keyboard-accessible me
   </ul>
 </tp-menu>
 <script src="/docs/components/menu/examples/navigation.js"></script>
+```
 <!-- tp-docgen:introduction:end -->
 
 </div>

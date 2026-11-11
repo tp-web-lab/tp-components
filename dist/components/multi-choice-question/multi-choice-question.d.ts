@@ -17,7 +17,15 @@ import "../checkbox-list/checkbox-list.js";
  * @attr {string} value = "" - Comma-separated 1-based indexes of the currently selected answers; empty means no selection.
  * @attr {string} src = "" - URL of an external JSON, HTML, Markdown, AsciiDoc or reStructuredText question definition. Keeps the definition out of authored markup, but does not make downloaded answers confidential.
  * @example
- * <tp-multi-choice-question></tp-multi-choice-question>
+ * <tp-multi-choice-question answer="1,3,5" random="">
+ *   <dl>
+ *     <dt>Title</dt><dd>Web languages</dd>
+ *     <dt>Prompt</dt><dd>Select the styling languages, including CSS preprocessors.</dd>
+ *     <dt>Form</dt><dd><ul><li>CSS</li><li>HTML</li><li>Sass</li><li>JavaScript</li><li>Less</li></ul></dd>
+ *     <dt>Feedback</dt><dd><ul><li>Correct. CSS describes presentation.</li><li>HTML structures content.</li><li>Correct. Sass is a CSS preprocessor.</li><li>JavaScript is a programming language.</li><li>Correct. Less is a CSS preprocessor.</li></ul></dd>
+ *     <dt>Solution</dt><dd>CSS, Sass and Less are used to define styles.</dd>
+ *   </dl>
+ * </tp-multi-choice-question>
  */
 export declare class TpMultiChoiceQuestion extends TpQuestion {
     static get observedAttributes(): string[];

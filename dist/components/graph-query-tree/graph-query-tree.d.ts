@@ -27,7 +27,7 @@ export declare function queryTreeToSql(graph: Readonly<TpGraphDocument>): string
  * @summary Edits relational algebra trees and generates equivalent SQL.
  * @tagname tp-graph-query-tree
  * @example
- * <tp-graph-query-tree></tp-graph-query-tree>
+ * <tp-graph-query-tree grid="" grid-size="20" message="Select an operator to edit its relational expression." src="/docs/components/graph-query-tree/examples/employees-departments.json"></tp-graph-query-tree>
  */
 export declare class TpGraphQueryTree extends TpGraphEditor {
     private static readonly queryStyleId;

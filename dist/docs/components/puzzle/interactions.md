@@ -1,15 +1,24 @@
 ### User interactions
 
+The header shows the game icon and name on the left. Rounded controls appear on the right, in this order: Reset, Undo, Redo, Help, chronometer, Color, Theme and Fullscreen. Additional game commands remain below the header.
+
 #### Mouse interactions
 
-| Action | Result |
+| Control or gesture | Result |
 | --- | --- |
+| :tp-icon:{name="refresh"} Reset | Shuffles the puzzle pieces and resets the timer. |
+| :tp-icon:{name="undo"} Undo | Takes back the last move. |
+| :tp-icon:{name="redo"} Redo | Replays the next undone move. Disabled when there is no recorded continuation. |
+| :tp-icon:{name="help"} Help | Opens the dropdown of assistance actions specific to this game. |
+| Help → Show image | Shows or hides the reference image on the board. |
+| Help → Rules of the game | Opens a drawer with the rules of this game. |
+| Chronometer | Displays elapsed play time; starts with play and pauses on completion. Reset clears it. |
+| :tp-icon:{name="palette-swatch"} Color | Changes the brand color of this game only. |
+| :tp-icon:{name="sun"} :tp-icon:{name="moon"} Theme | Changes the light, dark or automatic theme of this game only. |
+| :tp-icon:{name="fullscreen"} :tp-icon:{name="fullscreen-exit"} Fullscreen | Enters or leaves fullscreen for this game. |
 | Drag a piece | Moves it with a mouse, pen or touch. An upright piece snaps near its correct target. |
 | Right-click a piece | Opens its rotation menu at the pointer. |
 | Rotate +90° / Rotate −90° or Rotate +60° / Rotate −60° | Rotates the selected piece clockwise or counterclockwise by 90° (square/interlocking) or 60° (triangle/hexagon), from the menu or toolbar. |
-| Show image | Toggles the reference image in the target frame without changing placements. |
-| Undo / Redo | Reverses or reapplies an accepted move or rotation. |
-| Shuffle | Rearranges every piece in the tray and clears move history. |
 | Click outside the rotation menu | Closes the menu. |
 
 #### Keyboard interactions

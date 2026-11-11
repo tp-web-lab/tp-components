@@ -28,6 +28,8 @@
   "tp-carousel": "classes/components_carousel_carousel.TpCarousel.html",
   "tp-center": "classes/components_center.TpCenter.html",
   "tp-checkbox-list": "classes/components_checkbox-list.TpCheckboxList.html",
+  "tp-checkers": "classes/components_checkers.TpCheckers.html",
+  "tp-chess": "classes/components_chess.TpChess.html",
   "tp-chronometer": "classes/components_chronometer.TpChronometer.html",
   "tp-clock": "classes/components_clock.TpClock.html",
   "tp-cluster": "classes/components_cluster.TpCluster.html",
@@ -203,6 +205,7 @@
   "tp-typescript-viewer-question": "classes/components_typescript-viewer-question.TpTypescriptViewerQuestion.html",
   "tp-typewriting": "classes/components_typewriting.TpTypewriting.html",
   "tp-video-player": "classes/components_video-player_video-player.TpVideoPlayer.html",
+  "tp-wari": "classes/components_wari.TpWari.html",
   "tp-word-cloud": "classes/components_word-cloud.TpWordCloud.html",
   "tp-xy-plot": "classes/components_xy-plot.TpXYPlot.html",
   "tp-yakazu": "classes/components_yakazu.TpYakazu.html"

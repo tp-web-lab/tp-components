@@ -29,11 +29,11 @@ export interface AudioSaveTarget {
  * @eventdetail tp-save-audio-error { format: "mp3" | "ogg" | "wav"; error: unknown; anchor: string }
  * @example
  * <p>Listen to the sound of breaking glass, then save the MP3 file.</p>
- * <audio id="save-audio-example" controls preload="metadata" aria-label="Sound of breaking glass">
+ * <audio id="save-audio-example" controls="" preload="metadata" aria-label="Sound of breaking glass">
  *   <source src="/docs/medias/audios/glass-break.mp3" type="audio/mpeg">
  * </audio>
  * <tp-save-audio anchor="#save-audio-example" filename="glass-break"></tp-save-audio>
- * @accessibility Provides a labelled icon trigger with aria-haspopup, aria-controls and synchronized aria-expanded; disables the trigger while saving or when disabled.
+ *  @accessibility Provides a labelled icon trigger with aria-haspopup, aria-controls and synchronized aria-expanded; disables the trigger while saving or when disabled.
  * @accessibility Format entries are focusable and respond to Enter or Space; decorative checkmarks are hidden and the most recently saved format is marked with aria-current.
  * @accessibilityresponsibility Provide an informative trigger label, a compatible audio target and an accessible text alternative for audio content. Present tp-save-audio-error feedback to the user when export fails.
  */

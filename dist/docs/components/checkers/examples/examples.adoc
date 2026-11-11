@@ -1,0 +1,50 @@
+[tp-asciidoc-viewer%allow-script,label="tp-checkers"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-checkers%draggable-pieces,position="W:W32,34,K46:B17,19,K5"]
+====
+====
+======
+
+.Javascript API
+======
+[script,type="module"]
+====
+import "/components/checkers/checkers.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-checkers");
+element1.setAttribute("position", "W:W32,34,K46:B17,19,K5");
+element1.setAttribute("draggable-pieces", "");
+example.append(element1);
+
+document.body.append(example);
+====
+======
+
+.Majority capture
+======
+[tp-checkers%draggable-pieces,position="W:W32,34:B17,27,29"]
+====
+====
+======
+
+.Flying kings
+======
+[tp-checkers%draggable-pieces,position="W:WK32:B27,38"]
+====
+====
+======
+
+.Crowning a man
+======
+[tp-checkers%draggable-pieces,position="W:W7:B40"]
+====
+====
+======
+----
+========

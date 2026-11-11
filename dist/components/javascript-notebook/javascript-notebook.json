@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-javascript-notebook></tp-javascript-notebook>"
+      "code": "<tp-javascript-notebook>\n    <script type=\"tp/markdown\"># Interactive JavaScript\n\nSelect **Run all cells** to execute the program. Use the code button in a cell to edit its source.</script>\n    <script type=\"tp/javascript\">console.log('Hello from JavaScript');</script>\n  </tp-javascript-notebook>"
     }
   ],
   "attributes": [],

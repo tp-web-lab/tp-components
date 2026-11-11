@@ -31,7 +31,7 @@ import "../tikz/tikz.js";
  * @example
  * <tp-latex><script type="tp/latex">\section{A first document}
  * The area of a circle is $A=\pi r^2$.</script></tp-latex>
- * @event tp-latex-rendered Emitted after document conversion. Nested formulas and figures may still be rendering.
+ *  @event tp-latex-rendered Emitted after document conversion. Nested formulas and figures may still be rendering.
  * @eventdetail tp-latex-rendered { html: string }
  * @event tp-latex-error Emitted when loading or conversion fails.
  * @eventdetail tp-latex-error { message: string }

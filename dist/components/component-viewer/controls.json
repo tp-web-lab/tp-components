@@ -395,6 +395,22 @@
       ]
     }
   },
+  "tp-checkers": {
+    "orientation": {
+      "values": [
+        "white",
+        "black"
+      ]
+    }
+  },
+  "tp-chess": {
+    "orientation": {
+      "values": [
+        "white",
+        "black"
+      ]
+    }
+  },
   "tp-chronometer": {},
   "tp-clock": {
     "type": {
@@ -2905,6 +2921,14 @@
           "label": "file-unknown",
           "value": "/docs/components/video-player/examples/file-unknown.mp4"
         }
+      ]
+    }
+  },
+  "tp-wari": {
+    "orientation": {
+      "values": [
+        "south",
+        "north"
       ]
     }
   },

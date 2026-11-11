@@ -25,7 +25,7 @@ import { TpTypescriptPlayground } from "../typescript-playground/typescript-play
  * @accessibility Reuses TpQuestion's disclosure, actions and feedback tabs.
  * @keyboard {Enter / Space} Expands the question or activates a focused action.
  * @example
- * <tp-typescript-playground-question open src="/docs/components/playground-question/examples/typescript/double.ts" test="/docs/components/playground-question/examples/typescript/double.test.ts">
+ * <tp-typescript-playground-question open="" src="/docs/components/playground-question/examples/typescript/double.ts" test="/docs/components/playground-question/examples/typescript/double.test.ts">
  *   <dl>
  *     <dt>Title</dt><dd>Double a number</dd>
  *     <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Edit the source, then submit to run the tests.</dd>

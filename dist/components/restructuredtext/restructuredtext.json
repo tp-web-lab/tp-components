@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-restructuredtext>\n      <script type=\"tp/restructuredtext\">\n        Hello, **Docutils**!\n      </script>\n    </tp-restructuredtext>"
+      "code": "<tp-restructuredtext>\n  <script type=\"tp/restructuredtext\">\n    Hello, **Docutils**!\n  </script>\n</tp-restructuredtext>"
     }
   ],
   "attributes": [

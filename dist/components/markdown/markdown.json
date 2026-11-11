@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-markdown><script type=\"tp/markdown\">This paragraph uses **Markdown**.</script></tp-markdown>"
+      "code": "<tp-markdown>\n  <script type=\"tp/markdown\">\n## A short document\n\nThis paragraph uses **Markdown**.\n\n- Write content\n- Add components\n- Publish the page\n  </script>\n</tp-markdown>"
     }
   ],
   "attributes": [

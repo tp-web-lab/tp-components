@@ -1,0 +1,1 @@
+import{t as e}from"../../chunks/checkers2.js";export{e as TpCheckers};

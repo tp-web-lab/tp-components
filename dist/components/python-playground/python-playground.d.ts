@@ -101,7 +101,7 @@ export { TpPythonProject } from "./python-project.js";
  * @attr {string} src = "" - JSON project or python source file to load.
  *
  * @example
- * <tp-python-playground></tp-python-playground>
+ * <tp-python-playground src="/docs/components/_shared/intro-projects/python.json"></tp-python-playground>
  */
 export declare class TpPythonPlayground extends TpPlayground<TpPythonProject> {
     private static nextExecutionScope;

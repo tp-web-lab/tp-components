@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-graph-logical-circuit></tp-graph-logical-circuit>"
+      "code": "<tp-graph-logical-circuit id=\"logic-example\" grid=\"\" grid-size=\"20\" src=\"/docs/components/graph-logical-circuit/examples/xor.json\"></tp-graph-logical-circuit>"
     }
   ],
   "attributes": [],

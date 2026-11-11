@@ -1,0 +1,218 @@
+{
+  "tagname": "tp-chess",
+  "classname": "TpChess",
+  "superclass": "TpBase",
+  "description": "Displays chess positions and plays out endgames.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-chess position=\"8/8/3k4/8/3PK3/8/8/8\" draggable-pieces=\"\"></tp-chess>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "draggable-pieces",
+      "description": "Enables human moves by dragging, clicking or keyboard. Also accepts the HTML spelling draggablePieces; the JavaScript property is draggablePieces.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "draggablepieces",
+      "description": "HTML-normalized alias of draggablePieces; use draggable-pieces for the canonical markup spelling.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "fen",
+      "description": "Full six-field FEN, synchronized after every move. Takes precedence over position on initial connection.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\""
+    },
+    {
+      "name": "orientation",
+      "description": "Side displayed at the bottom of the board.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"black\" | \"white\"",
+      "default": "\"white\""
+    },
+    {
+      "name": "position",
+      "description": "Piece placement or full FEN. Placement-only input defaults to White to move with no castling or en-passant rights.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "clear(): void",
+      "inherited": false,
+      "description": "Removes all pieces and stops automatic play; the empty board cannot play moves."
+    },
+    {
+      "name": "flip(): void",
+      "inherited": false,
+      "description": "Reverses the viewing orientation without changing the position or human side."
+    },
+    {
+      "name": "highlightLegalMove(square?: string): Square[]",
+      "inherited": false,
+      "description": "Highlights and returns legal destination squares. Omit the square to clear highlights."
+    },
+    {
+      "name": "legalMove(begin: string, end: string, promotion: ChessPromotion = \"q\"): boolean",
+      "inherited": false,
+      "description": "Tests a legal move for the side to move. Promotion defaults to queen; no state is changed."
+    },
+    {
+      "name": "move(begin: string, end: string, promotion: ChessPromotion = \"q\"): boolean",
+      "inherited": false,
+      "description": "Plays a legal move, returning false for an illegal move or a finished game. Promotion defaults to queen."
+    },
+    {
+      "name": "nextMove(): boolean",
+      "inherited": false,
+      "description": "Replays the next recorded half-move, or plays one random legal move at the end of the recording. Pauses automatic play."
+    },
+    {
+      "name": "pause(): void",
+      "inherited": false,
+      "description": "Pauses playback without losing the current position or recorded moves."
+    },
+    {
+      "name": "play(mode: ChessPlayMode = \"user/random\", userSide: ChessSide = \"white\", delay = 2000): boolean",
+      "inherited": false,
+      "description": "Starts user/random or random/random play from the current position. The human is White by default, independently of orientation. Default delay is 2000 ms; accepts 100–60000 ms."
+    },
+    {
+      "name": "playToEnd(): boolean",
+      "inherited": false,
+      "description": "Replays recorded moves and then continues with random legal moves until the game ends or is paused."
+    },
+    {
+      "name": "previousMove(): boolean",
+      "inherited": false,
+      "description": "Undoes one half-move and keeps it available for replay. Returns false at the beginning."
+    },
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Restores the most recently loaded position, preserving its turn and rights. Stops automatic play."
+    },
+    {
+      "name": "rewind(): void",
+      "inherited": false,
+      "description": "Returns to the loaded starting position while retaining played moves for replay. Pauses automatic play."
+    },
+    {
+      "name": "setPosition(value: string | ChessPosition): boolean",
+      "inherited": false,
+      "description": "Loads a FEN or square-to-piece map atomically. Returns false and emits an error if invalid. Empty maps clear the board; other positions need both kings."
+    },
+    {
+      "name": "start(): void",
+      "inherited": false,
+      "description": "Loads the classical starting position, with all castling rights. Stops automatic play."
+    },
+    {
+      "name": "stop(): void",
+      "inherited": false,
+      "description": "Stops the random opponent or autoplay. The current position remains on the board."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-chess-change",
+      "description": "Emitted after an accepted position change or legal move.",
+      "detail": "{ fen: string; position: string }"
+    },
+    {
+      "name": "tp-chess-end",
+      "description": "Emitted after a move ends the game by checkmate or a draw.",
+      "detail": "{ fen: string; result: string }"
+    },
+    {
+      "name": "tp-chess-error",
+      "description": "Emitted when a supplied position or play configuration is invalid; the previous position is preserved.",
+      "detail": "{ message: string }"
+    },
+    {
+      "name": "tp-chess-move",
+      "description": "Emitted after a legal move, including castling, en passant and promotion.",
+      "detail": "{ from: string; to: string; san: string; promotion?: string; fen: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
+      "name": "tp-chronometer",
+      "summary": "Chronometer component with play, pause and stop controls."
+    },
+    {
+      "name": "tp-color",
+      "summary": "Brand color preset controller scoped to the containing element."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-drawer",
+      "summary": "Drawer overlay component."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Dropdown menu component."
+    },
+    {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
+    }
+  ],
+  "credits": [
+    {
+      "name": "chess.js",
+      "url": "https://github.com/jhlywa/chess.js",
+      "summary": "Legal chess moves, FEN validation and game-end detection (BSD-2-Clause)."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Chess",
+    "introduction": "The custom `<tp-chess>` element displays chess positions and plays out endgames.",
+    "interactions": "The header shows the game icon and name on the left. Rounded controls appear on the right, in this order: Reset, Undo, Redo, Help, chronometer, Color, Theme and Fullscreen. Additional game commands remain below the header.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| :tp-icon:{name=\"refresh\"} Reset | Restores the loaded position or puzzle and resets the timer. |\n| :tp-icon:{name=\"undo\"} Undo | Takes back the last move. |\n| :tp-icon:{name=\"redo\"} Redo | Replays the next undone move. Disabled when there is no recorded continuation. |\n| :tp-icon:{name=\"help\"} Help | Opens the dropdown of assistance actions specific to this game. |\n| Help → Highlight all legal destinations | Marks the legal destinations for the active side. |\n| Help → Play one random legal move | Pauses and replays the next recorded move, or chooses a random legal move at the end of history. |\n| Help → Rules of the game | Opens a drawer with the rules of this game. |\n| Chronometer | Displays elapsed play time; starts with play and pauses on completion. Reset clears it. |\n| :tp-icon:{name=\"palette-swatch\"} Color | Changes the brand color of this game only. |\n| :tp-icon:{name=\"sun\"} :tp-icon:{name=\"moon\"} Theme | Changes the light, dark or automatic theme of this game only. |\n| :tp-icon:{name=\"fullscreen\"} :tp-icon:{name=\"fullscreen-exit\"} Fullscreen | Enters or leaves fullscreen for this game. |\n| Click a movable piece, then a marked square | Plays that legal move for the active side when human moves are enabled. Click the selected piece again to cancel. |\n| Drag a movable piece | Moves it to a legal destination with mouse, pen or touch. An illegal drop leaves the position unchanged. |\n| Queen / Rook / Bishop / Knight | Promotes a pawn to the chosen piece; shown only when a human pawn reaches the last rank. |\n| :tp-icon:{name=\"chevron-left-first\"} Back to beginning | Pauses and returns to the loaded starting position while keeping recorded moves for replay. |\n| :tp-icon:{name=\"previous\"} Previous move | Pauses and takes back one move, restoring any captured piece. |\n| :tp-icon:{name=\"next\"} Play one move | Pauses and replays the next recorded move, or chooses one random legal move if no recorded move remains. |\n| :tp-icon:{name=\"play\"} Play to end | Replays recorded moves and continues with random legal moves every two seconds until the game ends or Pause is pressed. |\n| :tp-icon:{name=\"pause\"} Pause | Pauses automatic play without discarding recorded moves. |\n| Start | Loads the classical starting position with all castling rights. |\n| Flip | Displays the other side at the bottom without changing the turn. |\n| Play vs random | Plays the side currently at the bottom against random legal replies. Enables human moves. |\n| Random vs random | Automatically plays random legal moves for both sides. |\n| Stop | Stops automatic play and preserves the current board. |\n| Clear | Removes all pieces and stops automatic play. |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Moves between the toolbar, board and available promotion choices. |\n| Arrow keys | Moves focus one square in the displayed direction, without wrapping across board edges. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Selects a piece or plays to the focused legal square when human moves are enabled; activates a focused toolbar or promotion button. |\n| <kbd>Escape</kbd> | Cancels a selection, drag or pending promotion without playing a move. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Opens User help for the component under the pointer, falling back to focus. <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Opens contextual component documentation. |",
+    "keyboard": []
+  }
+}

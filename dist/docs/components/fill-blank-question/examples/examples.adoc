@@ -275,21 +275,31 @@ Solution:: Estonia: Tallinn; Latvia: Riga; Lithuania: Vilnius. Match each flag w
 ====
 Answers::
 +
-. latexmath:[\mathbb{R}_{+}]
-. latexmath:[\mathbb{R}_{+}^{*}]
-. latexmath:[\frac{1}{2\sqrt{x}}]
+. [tp-math,aria-label="Nonnegative real numbers",value="\\mathbb{R}_{+}"]#…#
 
-Title:: The square root function
+. [tp-math,aria-label="Positive real numbers",value="\\mathbb{R}_{+}^{*}"]#…#
 
-Prompt:: Complete the sentence with the mathematical expressions.
+. [tp-math,aria-label="One over twice the square root of x",value="\\frac{1}{2\\sqrt{x}}"]#…#
+
+Title::
++
+The square root function
+
+Prompt::
++
+Complete the sentence with the mathematical expressions.
 
 Form::
 +
-The square root function latexmath:[f(x) = \sqrt{x}] is defined on [tp-blank,name="domain",aria-label="Domain"]#domain#, differentiable on [tp-blank,name="differentiability",aria-label="Domain of differentiability"]#differentiability#, and latexmath:[f'(x) =] [tp-blank,name="derivative",aria-label="Derivative"]#derivative#.
+The square root function [tp-math,value="f(x) = \\sqrt{x}"]#…# is defined on [tp-blank,name="domain",aria-label="Domain"]#domain#, differentiable on [tp-blank,name="differentiability",aria-label="Domain of differentiability"]#differentiability#, and [tp-math,value="f'(x) ="]#…# [tp-blank,name="derivative",aria-label="Derivative"]#derivative#.
 
-Feedback:: Consider whether zero belongs to the domain and whether the derivative exists there.
+Feedback::
++
+Consider whether zero belongs to the domain and whether the derivative exists there.
 
-Solution:: The domain is latexmath:[\mathbb{R}_{+} = \lbrack 0, +\infty)]. The function is differentiable on latexmath:[\mathbb{R}_{+}^{*} = (0, +\infty)], with latexmath:[f'(x) = \frac{1}{2\sqrt{x}}].
+Solution::
++
+The domain is [tp-math,value="\\mathbb{R}_{+} = [0, +\\infty)"]#…#. The function is differentiable on [tp-math,value="\\mathbb{R}_{+}^{*} = (0, +\\infty)"]#…#, with [tp-math,value="f'(x) = \\frac{1}{2\\sqrt{x}}"]#…#.
 ====
 ======
 ----

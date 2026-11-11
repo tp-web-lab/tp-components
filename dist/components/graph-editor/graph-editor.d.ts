@@ -101,8 +101,8 @@ export declare function graphEdgeMeasurements(edge: Readonly<TpGraphEdge>): TpGr
  *
  *
  * @example
- * <tp-graph-editor></tp-graph-editor>
- * @event tp-graph-change Emitted after a recorded graph mutation, JSON edit, undo or redo. reason identifies the operation and graph contains the resulting snapshot.
+ * <tp-graph-editor grid="" grid-size="20" message="Graph message area" src="/docs/components/graph-editor/examples/graph-example.json"></tp-graph-editor>
+ *  @event tp-graph-change Emitted after a recorded graph mutation, JSON edit, undo or redo. reason identifies the operation and graph contains the resulting snapshot.
  * @eventdetail tp-graph-change { reason: string; graph: TpGraphDocument }
  * @event tp-graph-error Emitted when loading src or creating/reconnecting an edge fails. operation identifies the failed action; src is included only for load-src.
  * @eventdetail tp-graph-error { error: unknown; operation: "load-src" | "reconnect-edge" | "add-edge"; src?: string }
