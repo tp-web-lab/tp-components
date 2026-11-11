@@ -217,6 +217,7 @@
     "@tp/tp-utilities": "workspace:*",
     "animate.css": "^4.1.1",
     "chai": "^6.2.2",
+    "chess.js": "^1.4.0",
     "dompurify": "^3.4.12",
     "es-module-lexer": "^2.3.1",
     "js-yaml": "^5.2.2",

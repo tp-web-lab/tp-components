@@ -31,6 +31,7 @@ jobs:
           markdown-key: ${{ secrets.TP_MARKDOWN_READ_KEY }}
           asciidoc-key: ${{ secrets.TP_ASCIIDOC_READ_KEY }}
           restructuredtext-key: ${{ secrets.TP_RESTRUCTUREDTEXT_READ_KEY }}
+          latex-key: ${{ secrets.TP_LATEX_READ_KEY }}
       - name: Select affected components
         id: scope
         env:

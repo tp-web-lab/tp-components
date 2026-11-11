@@ -4,3 +4,4 @@ packages:
   - tp-markdown
   - tp-asciidoc
   - tp-restructuredtext
+  - tp-latex

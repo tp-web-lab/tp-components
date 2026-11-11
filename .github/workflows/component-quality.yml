@@ -30,6 +30,7 @@ jobs:
           markdown-key: ${{ secrets.TP_MARKDOWN_READ_KEY }}
           asciidoc-key: ${{ secrets.TP_ASCIIDOC_READ_KEY }}
           restructuredtext-key: ${{ secrets.TP_RESTRUCTUREDTEXT_READ_KEY }}
+          latex-key: ${{ secrets.TP_LATEX_READ_KEY }}
       - name: Check native markup examples
         run: pnpm examples:check-native-markup
       - name: Run tests, coverage, and report

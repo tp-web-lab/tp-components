@@ -21,15 +21,18 @@ const lock = load(read(".github/ci/pnpm-lock.yaml"));
 const packages = load(read(".github/ci/pnpm-workspace.yaml")).packages;
 const workflows = ["accessibility", "component-quality", "lighthouse"];
 
-test("the CI workspace contains the component package and four pinned repositories", () => {
+test("the CI workspace contains the component package and five pinned repositories", () => {
   const checkouts = action.runs.steps.filter((step) => step.with?.repository);
-  assert.equal(checkouts.length, 4);
+  assert.equal(checkouts.length, 5);
   assert.deepEqual([...packages].sort(), ["tp-components", ...checkouts.map((step) => step.with.path)].sort());
   for (const { with: inputs } of checkouts) {
     assert.equal(inputs.repository, `tp-web-lab/${inputs.path}`);
     assert.match(inputs.ref, /^[a-f0-9]{40}$/);
     assert.equal(inputs["persist-credentials"], false);
     assert.ok(lock.importers[inputs.path]);
+    const key = `${inputs.path.slice(3)}-key`;
+    assert.equal(inputs["ssh-key"], "${{ inputs." + key + " }}");
+    assert.equal(action.inputs[key].required, true);
   }
 });
 
@@ -75,6 +78,11 @@ test("report workflows share setup and collect artifacts relative to the workspa
       assert.equal(job.steps[0].uses, "actions/checkout@v6");
       assert.equal(job.steps[0].with.path, "tp-components");
       assert.equal(job.steps[1].uses, "./tp-components/.github/actions/setup-workspace");
+      for (const name of packages.filter((name) => name !== "tp-components")) {
+        const input = `${name.slice(3)}-key`;
+        const secret = `${name.replaceAll("-", "_").toUpperCase()}_READ_KEY`;
+        assert.equal(job.steps[1].with[input], "${{ secrets." + secret + " }}");
+      }
       const upload = job.steps.find((step) => step.uses === "actions/upload-artifact@v6");
       // Accessibility skips report collection when no component needs an audit.
       const expectedCondition = name === "accessibility"

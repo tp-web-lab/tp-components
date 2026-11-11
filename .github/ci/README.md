@@ -2,7 +2,7 @@
 
 The Accessibility, Component quality and Lighthouse workflows use the same
 composite action in `../actions/setup-workspace/action.yml`. It checks out the
-four shared repositories at fixed commit SHAs, alongside the tested checkout of
+five shared repositories at fixed commit SHAs, alongside the tested checkout of
 `tp-components`. No sibling repository is taken from a developer's local machine.
 
 The runner layout is:
@@ -17,6 +17,7 @@ GITHUB_WORKSPACE/
   tp-markdown/
   tp-asciidoc/
   tp-restructuredtext/
+  tp-latex/
 ```
 
 The three root files are copied from this directory. This dedicated lockfile
@@ -44,9 +45,17 @@ accessibility, coverage or Lighthouse reports. Run steps execute inside
 4. Copy the resulting root lockfile back to `tp-components/.github/ci/pnpm-lock.yaml`
    and review its changes. Do not regenerate it from the real monorepo: unrelated
    packages or unpublished sibling changes must not enter the CI workspace.
-5. Verify `pnpm install --frozen-lockfile` and the four build commands from the
+5. Verify `pnpm install --frozen-lockfile` and the five build commands from the
    composite action under Node.js 24 in the temporary workspace.
 6. From `tp-components`, run `node --test scripts/ci-workspace.test.mjs`.
 
 Do not run the global reports solely to validate this setup. A full run on GitHub
 is still needed to validate the Linux runner and each workflow's actual tests.
+
+## Private repository access
+
+Each dependency checkout uses a dedicated read-only deploy key. For `tp-latex`,
+the public key is registered on `tp-web-lab/tp-latex`; its private counterpart
+is the `TP_LATEX_READ_KEY` Actions secret on `tp-web-lab/tp-components`.
+The three report workflows forward it as `latex-key`. Keys are not stored in
+this repository and checkout does not persist credentials.

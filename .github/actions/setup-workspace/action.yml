@@ -1,5 +1,5 @@
 name: Set up the pinned tp workspace
-description: Install the five-package workspace and build component dependencies without running reports.
+description: Install the six-package workspace and build component dependencies without running reports.
 inputs:
   utilities-key:
     description: Read-only deploy key for tp-utilities.
@@ -12,6 +12,9 @@ inputs:
     required: true
   restructuredtext-key:
     description: Read-only deploy key for tp-restructuredtext.
+    required: true
+  latex-key:
+    description: Read-only deploy key for tp-latex.
     required: true
 runs:
   using: composite
@@ -44,6 +47,13 @@ runs:
         path: tp-restructuredtext
         ssh-key: ${{ inputs.restructuredtext-key }}
         persist-credentials: false
+    - uses: actions/checkout@v6
+      with:
+        repository: tp-web-lab/tp-latex
+        ref: d6e8f598d4ca78153f5946765ef98ac20c96623e
+        path: tp-latex
+        ssh-key: ${{ inputs.latex-key }}
+        persist-credentials: false
     - name: Prepare the CI workspace
       shell: bash
       working-directory: ${{ github.workspace }}
@@ -71,6 +81,7 @@ runs:
         pnpm --filter @tp/tp-markdown build
         pnpm --filter @tp/tp-asciidoc build
         pnpm --filter @tp/tp-restructuredtext build
+        pnpm --filter @tp/tp-latex build
     - name: Check CI workspace configuration
       shell: bash
       working-directory: ${{ github.workspace }}/tp-components
