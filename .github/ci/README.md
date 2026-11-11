@@ -1,6 +1,6 @@
 # Reproducible CI workspace
 
-The Accessibility, Component quality and Lighthouse workflows use the same
+The Accessibility, Component quality, Lighthouse and Documentation Pages workflows use the same
 composite action in `../actions/setup-workspace/action.yml`. It checks out the
 five shared repositories at fixed commit SHAs, alongside the tested checkout of
 `tp-components`. No sibling repository is taken from a developer's local machine.
@@ -57,5 +57,5 @@ is still needed to validate the Linux runner and each workflow's actual tests.
 Each dependency checkout uses a dedicated read-only deploy key. For `tp-latex`,
 the public key is registered on `tp-web-lab/tp-latex`; its private counterpart
 is the `TP_LATEX_READ_KEY` Actions secret on `tp-web-lab/tp-components`.
-The three report workflows forward it as `latex-key`. Keys are not stored in
+The four workflows forward it as `latex-key`. Keys are not stored in
 this repository and checkout does not persist credentials.

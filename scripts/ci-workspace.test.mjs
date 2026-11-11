@@ -9,7 +9,7 @@
  */
 
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import test from "node:test";
 import { load } from "js-yaml";
@@ -93,4 +93,24 @@ test("report workflows share setup and collect artifacts relative to the workspa
       assert.ok(!job.steps.some((step) => step.run?.startsWith("pnpm install")));
     }
   }
+});
+
+
+test("every workflow using the shared workspace forwards all private dependency keys", () => {
+  const consumers = [];
+  for (const name of readdirSync(resolve(root, ".github/workflows")).filter(name => /\.ya?ml$/.test(name))) {
+    const workflow = load(read(`.github/workflows/${name}`));
+    for (const job of Object.values(workflow.jobs)) {
+      for (const step of job.steps ?? []) {
+        if (step.uses !== "./tp-components/.github/actions/setup-workspace") continue;
+        consumers.push(name);
+        for (const dependency of packages.filter(name => name !== "tp-components")) {
+          const input = `${dependency.slice(3)}-key`;
+          const secret = `${dependency.replaceAll("-", "_").toUpperCase()}_READ_KEY`;
+          assert.equal(step.with[input], "${{ secrets." + secret + " }}", `${name}: ${input}`);
+        }
+      }
+    }
+  }
+  assert.deepEqual(consumers.sort(), ["accessibility.yml", "component-quality.yml", "lighthouse.yml", "pages.yml"]);
 });
