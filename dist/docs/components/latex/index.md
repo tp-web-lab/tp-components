@@ -90,13 +90,37 @@ Your name: \wcInput*[type=text,aria-label=Name]{}.
 
 Inline bodies accept inline LaTeX, not sections or multiple paragraphs. Standard block elements cannot use the starred form; a custom component must also support inline layout. Elements without children, such as `input`, `img` and `br`, still require an empty `{}` body.
 
-### Literal HTML
+### Counter numbering
 
-`\rawhtml{...}` inserts a block of HTML without LaTeX interpretation. `\rawhtml*{...}` inserts HTML in the current paragraph. Characters such as `%`, `$`, `&`, `_`, `#` and backslashes are preserved.
+Use `\renewcommand{\thesubsection}{\Alph{subsection}}` to number subsections A, B, C. The adapter supports counter presentation with `Alph`, `alph`, `Roman`, `roman` and `arabic`, in the preamble or document body. Native labels and references use the same presentation; group scope and counter resets are preserved. Starred headings remain unnumbered. This supports counter-format declarations, not arbitrary macro redefinitions.
+
+For answers nested under an unnumbered problem heading:
 
 ```latex
-A \rawhtml*{<span class="highlight">highlighted word</span>} in a sentence.
+\renewcommand{\thesubsubsection}{\Alph{subsubsection}}
+\subsection*{Problem 1}
+\setcounter{subsubsection}{0}
+\subsubsection{First answer}
+\subsubsection{Second answer}
 ```
+
+### TP references
+
+TP reference prefixes are accepted directly in the `href` attribute of component commands:
+
+```latex
+\wcTpRef*[href=^note-1]{}
+\wcTpRef*[href=%term]{}
+\wcTpRef*[href=@MS19]{}
+```
+
+These refer to a note, a glossary entry and a bibliography entry respectively. The same syntax works with `\webcomponent`. Outside these `href` values, `%` still starts a LaTeX comment and `^` retains its mathematical meaning.
+
+### Literal HTML
+
+Prefer standard LaTeX and `\wc…` commands. Extend the adapter when a useful syntax is missing; reserve `\rawhtml` for content that genuinely requires literal HTML. For example, use `\wcSpan*[class=highlight]{highlighted word}` for an inline span and `\lbrack` / `\rbrack` for literal square brackets.
+
+`\rawhtml{...}` inserts a block of HTML without LaTeX interpretation. `\rawhtml*{...}` inserts HTML in the current paragraph. Characters such as `%`, `$`, `&`, `_`, `#` and backslashes are preserved.
 
 With braces, the body must have balanced braces. For content with unbalanced braces, choose a punctuation delimiter absent from the body:
 
