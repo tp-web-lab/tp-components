@@ -1,0 +1,2 @@
+import{TP_COLOR_PRESETS as e}from"../components/color/color-presets.js";var t=new WeakSet;function n(n,r){let i=[];for(let e=n;e;e=e.parentElement)i.push(e);let a=r.documentElement;if(!t.has(a)&&e.some(e=>a.classList.contains(e)))return()=>{};t.add(a);let o=()=>{let t=i.map(t=>e.find(e=>t.classList.contains(e))).find(Boolean);a.classList.remove(...e),t&&a.classList.add(t)},s=new MutationObserver(o);for(let e of i)s.observe(e,{attributes:!0,attributeFilter:[`class`]});return o(),()=>s.disconnect()}export{n as syncIframeColor};
+//# sourceMappingURL=iframe-color.js.map

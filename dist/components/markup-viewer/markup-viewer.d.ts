@@ -48,6 +48,8 @@ export declare abstract class TpMarkupViewer<TMode extends string, TContext = un
     /** Creates an independent HTML document from the current source for testing. */
     createRenderedDocument(): Promise<string>;
     private iframeObservationRevision;
+    private disconnectIframeLinks;
+    private disconnectIframeColor;
     private iframeMutationObserver;
     private iframeResizeObserver;
     private iframeVisibilityObserver;

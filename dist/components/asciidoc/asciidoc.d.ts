@@ -53,14 +53,14 @@ export declare function createTpAsciidocParser(): Promise<TpAsciidocParserInstan
  * @param source AsciiDoc source to convert.
  * @returns Generated semantic HTML.
  */
-export declare function renderAsciidocToHtml(source: string): Promise<string>;
+export declare function renderAsciidocToHtml(source: string, sourceUrl?: URL): Promise<string>;
 /**
  * Parses AsciiDoc source into a JSON-safe abstract syntax tree.
  *
  * @param source AsciiDoc source to parse.
  * @returns Serializable root document node.
  */
-export declare function parseAsciidocToAst(source: string): Promise<AsciidocAstNode>;
+export declare function parseAsciidocToAst(source: string, sourceUrl?: URL): Promise<AsciidocAstNode>;
 /**
  * Converts source into an element and initializes interactive `adocviewer` blocks.
  *

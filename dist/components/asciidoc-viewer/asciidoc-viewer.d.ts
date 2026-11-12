@@ -24,13 +24,13 @@ type AdocViewerMode = "render" | "html" | "ast";
  *         </script>
  *       </tp-asciidoc-viewer>
  */
-export declare class TpAsciidocViewer extends TpMarkupViewer<AdocViewerMode> {
+export declare class TpAsciidocViewer extends TpMarkupViewer<AdocViewerMode, URL | undefined> {
     protected readonly sourceLanguage = "asciidoc";
     protected readonly outputModes: readonly MarkupViewerMode<AdocViewerMode>[];
     protected readonly viewerClassName = "tp-asciidoc-viewer";
-    protected readInlineSource(): MarkupViewerExample;
-    protected extractExamples(example: MarkupViewerExample): MarkupViewerExample[];
-    protected createExternalContext(_url: URL): undefined;
-    protected renderOutput(source: string, mode: AdocViewerMode, container: HTMLElement): Promise<void>;
+    protected readInlineSource(): MarkupViewerExample<URL | undefined>;
+    protected extractExamples(example: MarkupViewerExample<URL | undefined>): MarkupViewerExample<URL | undefined>[];
+    protected createExternalContext(url: URL): URL;
+    protected renderOutput(source: string, mode: AdocViewerMode, container: HTMLElement, context: URL | undefined): Promise<void>;
 }
 export {};
