@@ -176,8 +176,13 @@ async function renderWithHtmlStyleAttributes(
  * @param source AsciiDoc source to convert.
  * @returns Generated semantic HTML.
  */
-export async function renderAsciidocToHtml(source: string): Promise<string> {
-	return renderWithHtmlStyleAttributes(await createTpAsciidocParser(), source);
+export async function renderAsciidocToHtml(
+	source: string,
+	sourceUrl?: URL,
+): Promise<string> {
+	const parser = await createTpAsciidocParser();
+	if (sourceUrl) parser.configure(getBrowserRenderOptions(sourceUrl));
+	return renderWithHtmlStyleAttributes(parser, source);
 }
 
 /**
@@ -188,8 +193,11 @@ export async function renderAsciidocToHtml(source: string): Promise<string> {
  */
 export async function parseAsciidocToAst(
 	source: string,
+	sourceUrl?: URL,
 ): Promise<AsciidocAstNode> {
-	return serializeNode(await (await createTpAsciidocParser()).parse(source));
+	const parser = await createTpAsciidocParser();
+	if (sourceUrl) parser.configure(getBrowserRenderOptions(sourceUrl));
+	return serializeNode(await parser.parse(source));
 }
 
 /**

@@ -53,12 +53,34 @@
 	field-sizing: content;
 }
 
-:where([data-tp-base-host] img),
+:where([data-tp-base-host] img:not(span.image img)),
 :where([data-tp-base-host] svg),
 :where([data-tp-base-host] canvas),
 :where([data-tp-base-host] video) {
 	display: block;
 	max-inline-size: 100%;
+}
+
+/* AsciiDoc image: macros remain inline; image:: blocks use the media rules. */
+span.image img {
+	display: inline-block;
+	max-inline-size: 100%;
+	vertical-align: middle;
+}
+
+/* AsciiDoc image positioning roles allow the surrounding text to wrap. */
+.image.right,
+.imageblock.right {
+	float: right;
+	margin-left: var(--tp-content-spacing);
+	margin-bottom: var(--tp-content-spacing);
+}
+
+.image.left,
+.imageblock.left {
+	float: left;
+	margin-right: var(--tp-content-spacing);
+	margin-bottom: var(--tp-content-spacing);
 }
 
 /* MathJax containers control inline versus display math; their SVG must keep
@@ -203,4 +225,17 @@ details > summary > * {
 /* Align game-rule headings with their paragraph content, preserving marker space. */
 details.tp-game-rules > :is(summary, p) {
 	padding-inline-start: 0.75rem;
+}
+
+/* Opt out of selecting AsciiDoc annotation markers with an explicit role. */
+pre.no-copy-callouts .conum {
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+/* The pre owns block padding; inline-code and highlight themes must not add it. */
+pre > code,
+pre > code.hljs,
+pre > code.hljs[data-highlighted] {
+	padding: 0;
 }

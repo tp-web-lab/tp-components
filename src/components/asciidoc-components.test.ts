@@ -129,6 +129,26 @@ Last paragraph.`);
 		expect(element.querySelector("pre")).toBeNull();
 	});
 
+	it("resolves viewer source includes and strips the selected region indentation", async () => {
+		const fetchMock = vi.fn(
+			async () =>
+				new Response(
+					'module Demo\n  # tag::main[]\n  def greet\n    puts "Hello"\n  end\n  # end::main[]\nend\n',
+				),
+		);
+		vi.stubGlobal("fetch", fetchMock);
+		const html = await renderAsciidocToHtml(
+			"[source,ruby]\n----\ninclude::lib/app.rb[tag=main,indent=0]\n----",
+			new URL("http://localhost:3000/examples/source.adoc"),
+		);
+		expect(fetchMock).toHaveBeenCalledWith(
+			"http://localhost:3000/examples/lib/app.rb",
+		);
+		expect(html).toContain('def greet\n  puts "Hello"\nend');
+		expect(html).not.toContain("module Demo");
+		expect(html).not.toContain("tag::main");
+	});
+
 	it("resolves browser includes from the containing documentation source", async () => {
 		const fetchMock = vi.fn(async (input: string | URL | Request) => {
 			expect(String(input)).toBe(

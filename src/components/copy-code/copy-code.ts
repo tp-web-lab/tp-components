@@ -606,6 +606,11 @@ export class TpCopyCode extends TpBase {
 			return target.getCode();
 		}
 
+		if (target.closest("pre.no-copy-callouts")) {
+			const clone = target.cloneNode(true) as HTMLElement;
+			for (const marker of clone.querySelectorAll(".conum")) marker.remove();
+			return clone.textContent ?? "";
+		}
 		return target.textContent ?? "";
 	}
 

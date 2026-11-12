@@ -4,6 +4,8 @@
  */
 
 import { DeferredVisibility } from "../../utilities/deferred-visibility.js";
+import { syncIframeColor } from "../../utilities/iframe-color.js";
+import { connectIframeLinks } from "../../utilities/iframe-links.js";
 import { IframeOverlayBridge } from "../../utilities/iframe-overlay-bridge.js";
 import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
 import { createViewerFullscreen } from "../../utilities/viewer-fullscreen.js";
@@ -215,6 +217,8 @@ export abstract class TpMarkupViewer<
 		return this.renderResponse();
 	}
 	private iframeObservationRevision = 0;
+	private disconnectIframeLinks: (() => void) | null = null;
+	private disconnectIframeColor: (() => void) | null = null;
 	private iframeMutationObserver: MutationObserver | null = null;
 	private iframeResizeObserver: ResizeObserver | null = null;
 	private iframeVisibilityObserver:
@@ -703,6 +707,8 @@ export abstract class TpMarkupViewer<
 		)
 			return;
 
+		this.disconnectIframeColor = syncIframeColor(this, documentNode);
+		this.disconnectIframeLinks = connectIframeLinks(this, documentNode);
 		documentNode.documentElement.setAttribute("data-tp-auto-height", "");
 		const revision = this.iframeObservationRevision;
 		const waitingTags = new Set<string>();
@@ -768,6 +774,10 @@ export abstract class TpMarkupViewer<
 	}
 
 	private disconnectIframeResizeObserver(): void {
+		this.disconnectIframeLinks?.();
+		this.disconnectIframeLinks = null;
+		this.disconnectIframeColor?.();
+		this.disconnectIframeColor = null;
 		this.iframeObservationRevision += 1;
 		if (this.iframeSyncFrame !== null)
 			cancelAnimationFrame(this.iframeSyncFrame);

@@ -39,6 +39,7 @@
 // tp-docgen:dependencies:end
 
 import { formatHtmlForDisplay } from "../../utilities/html-code.js";
+import { getComponentSourceBaseUrl } from "../../utilities/source-url.js";
 import {
 	dedentAsciidocSource,
 	parseAsciidocToAst,
@@ -114,12 +115,15 @@ function extractTitledExamples(source: string): MarkupViewerExample[] {
  *         </script>
  *       </tp-asciidoc-viewer>
  */
-export class TpAsciidocViewer extends TpMarkupViewer<AdocViewerMode> {
+export class TpAsciidocViewer extends TpMarkupViewer<
+	AdocViewerMode,
+	URL | undefined
+> {
 	protected readonly sourceLanguage = "asciidoc";
 	protected readonly outputModes = OUTPUT_MODES;
 	protected readonly viewerClassName = "tp-asciidoc-viewer";
 
-	protected readInlineSource(): MarkupViewerExample {
+	protected readInlineSource(): MarkupViewerExample<URL | undefined> {
 		const script = this.querySelector(
 			':scope > script:is([type="tp/asciidoc"], [type="tp/asciidoc-viewer"])',
 		);
@@ -144,21 +148,25 @@ export class TpAsciidocViewer extends TpMarkupViewer<AdocViewerMode> {
 	}
 
 	protected override extractExamples(
-		example: MarkupViewerExample,
-	): MarkupViewerExample[] {
+		example: MarkupViewerExample<URL | undefined>,
+	): MarkupViewerExample<URL | undefined>[] {
 		const titled = extractTitledExamples(example.source);
-		return titled.length > 0 ? titled : [example];
+		return titled.length > 0
+			? titled.map((item) => ({ ...item, context: example.context }))
+			: [example];
 	}
 
-	protected createExternalContext(_url: URL): undefined {
-		return undefined;
+	protected createExternalContext(url: URL): URL {
+		return url;
 	}
 
 	protected async renderOutput(
 		source: string,
 		mode: AdocViewerMode,
 		container: HTMLElement,
+		context: URL | undefined,
 	): Promise<void> {
+		const sourceUrl = context ?? new URL(getComponentSourceBaseUrl(this));
 		if (mode === "render") {
 			container.classList.add("tp-asciidoc-output");
 			const iframe = document.createElement("iframe");
@@ -168,7 +176,7 @@ export class TpAsciidocViewer extends TpMarkupViewer<AdocViewerMode> {
 			);
 			const renderedSource = needsRuntimeRenderer
 				? `<tp-asciidoc><script type="tp/asciidoc">${source.replace(/<\/script/gi, "<\\/script")}</script></tp-asciidoc>`
-				: await renderAsciidocToHtml(source);
+				: await renderAsciidocToHtml(source, sourceUrl);
 			iframe.srcdoc = buildIframeDocument(renderedSource, document.baseURI);
 			container.replaceChildren(iframe);
 			return;
@@ -176,7 +184,7 @@ export class TpAsciidocViewer extends TpMarkupViewer<AdocViewerMode> {
 
 		if (mode === "ast") {
 			const tree = document.createElement("tp-object-tree") as TpObjectTree;
-			tree.setValue(await parseAsciidocToAst(source));
+			tree.setValue(await parseAsciidocToAst(source, sourceUrl));
 			container.replaceChildren(tree);
 			return;
 		}
@@ -187,7 +195,9 @@ export class TpAsciidocViewer extends TpMarkupViewer<AdocViewerMode> {
 		editor.lineNumbers = false;
 		editor.wordWrap = true;
 		editor.readonly = true;
-		editor.setValue(formatHtmlForDisplay(await renderAsciidocToHtml(source)));
+		editor.setValue(
+			formatHtmlForDisplay(await renderAsciidocToHtml(source, sourceUrl)),
+		);
 		container.replaceChildren(editor);
 		this.resyncEditorHeight(editor);
 	}

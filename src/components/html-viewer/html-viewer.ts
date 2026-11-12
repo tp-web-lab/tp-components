@@ -510,15 +510,12 @@ function renderDomTree(source: string): HtmlDomTreeNode {
 }
 
 /**
- * Detects whether the current runtime is served by Vite dev.
+ * Detects whether TP components themselves are served from source.
  *
- * @returns Whether Vite client is present in the host document.
+ * @returns Whether the current module is a source module.
  */
 function isViteDevRuntime(): boolean {
-	return (
-		document.querySelector('script[src*="/@vite/client"]') !== null ||
-		new URL(import.meta.url).pathname.includes("/src/")
-	);
+	return new URL(import.meta.url).pathname.includes("/src/");
 }
 
 /**
@@ -651,7 +648,8 @@ function sourceImportsComponents(source: string): boolean {
 
 function addTpLoaderImport(source: string): string {
 	if (
-		!sourceContainsTpElement(source) ||
+		(!sourceContainsTpElement(source) &&
+			!/<pre\b[^>]*>\s*<code\b/i.test(source)) ||
 		sourceImportsTpLoader(source) ||
 		sourceImportsComponents(source)
 	) {

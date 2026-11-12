@@ -166,6 +166,11 @@
     }
   }
 
+  /* Lead paragraphs, including the AsciiDoc lead role. */
+  p.lead {
+    font-size: 1.25em;
+  }
+
   /* Block quotes */
   blockquote {
     position: relative;
@@ -197,7 +202,12 @@
   }
 
   /* Media */
-  img,
+  img:not(:where(span.image img)) {
+    display: block;
+    max-width: 100%;
+    border-radius: var(--tp-border-radius-md);
+  }
+
   iframe,
   picture,
   video,
@@ -294,7 +304,20 @@
     font-weight: var(--tp-font-weight-bold);
   }
 
-  u {
+  .line-through {
+    text-decoration-line: line-through;
+  }
+
+  .underline {
+    text-decoration-line: underline;
+  }
+
+  .line-through.underline {
+    text-decoration-line: line-through underline;
+  }
+
+  u,
+  .underline {
     text-decoration-thickness: 0.09375em;
     text-underline-offset: 0.125em;
   }
@@ -320,7 +343,7 @@
 
   pre {
     position: relative;
-    padding: 2px;/*calc(var(--tp-content-spacing) / 2);*/
+    padding: calc(var(--tp-content-spacing) / 2);
     border-radius: var(--tp-border-radius-md);
     background: var(--tp-neutral-fill-softer);
     color: var(--tp-neutral-text-on-soft);
@@ -427,8 +450,16 @@
     padding: 0;
   }
 
-  ul li {
+  ul {
     list-style-type: disc;
+  }
+
+  ul ul {
+    list-style-type: circle;
+  }
+
+  ul ul ul {
+    list-style-type: square;
   }
 
   li > ol,
@@ -443,14 +474,45 @@
 
   /* Figures */
   figure {
+    text-align: center;
     padding: calc(var(--tp-content-spacing) / 2);
     border: var(--tp-border-style) var(--tp-border-width) var(--tp-neutral-stroke-softer);
     border-radius: var(--tp-border-radius-md);
     box-shadow: var(--tp-shadow-softer);
   }
 
+  figure :where(img, svg, video, canvas, iframe, table) {
+    margin-inline: auto;
+  }
+
+  figure pre {
+    text-align: start;
+  }
+
   figcaption {
+    text-align: center;
     padding-block-start: calc(var(--tp-content-spacing) / 2);
+  }
+
+  /* A quotation and its attribution form one visual block. */
+  figure.quoteblock {
+    padding: calc(var(--tp-content-spacing) / 1.5) var(--tp-content-spacing);
+    border: none;
+    border-inline-start: var(--tp-border-style) calc(var(--tp-border-width) * 4) var(--tp-neutral-stroke-softer);
+    border-radius: 0;
+    box-shadow: none;
+    text-align: start;
+  }
+
+  figure.quoteblock > blockquote {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  figure.quoteblock > figcaption.attribution {
+    text-align: end;
+    color: var(--tp-text-muted);
   }
 
   /* Definition lists */
@@ -554,7 +616,9 @@
   /* Tables */
   table {
     width: 100%;
+    border: var(--tp-border-style) var(--tp-border-width) var(--tp-neutral-stroke-soft);
     border-spacing: 0;
+    border-collapse: collapse;
     font-size: 0.9375rem;
 
     caption {
@@ -565,11 +629,28 @@
     }
   }
 
+  th,
+  thead td {
+    background-color: var(--tp-neutral-fill-soft);
+    color: var(--tp-neutral-text-on-soft);
+    font-weight: var(--tp-font-weight-bold);
+  }
+
+  table > :is(thead, tbody, tfoot) > tr:hover > :is(th, td),
+  table > tr:hover > :is(th, td) {
+    background-color: var(--tp-neutral-fill-softer);
+    color: var(--tp-neutral-text-on-soft);
+  }
+
   thead th,
   thead td,
   tr:not(:last-of-type) th,
   tr:not(:last-of-type) td {
     border-bottom: var(--tp-border-style) var(--tp-border-width) var(--tp-neutral-stroke-softer);
+  }
+
+  tr > :is(th, td) {
+    border-inline-end: var(--tp-border-style) var(--tp-border-width) var(--tp-neutral-stroke-soft);
   }
 
   tfoot th,

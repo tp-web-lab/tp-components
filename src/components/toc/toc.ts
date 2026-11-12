@@ -330,7 +330,7 @@ export class TpToc extends TpBase {
 
 	private getTocScope(): HTMLElement {
 		const scope = this.closest<HTMLElement>(
-			"[data-tp-toc-scope], .tp-html-viewer-output, .tp-asciidoc-output, .tp-md-mdviewer-output, .tp-markdown-output, .tp-restructuredtext-output, article, main",
+			"[data-tp-toc-scope], .tp-html-viewer-output, .tp-asciidoc-output, .tp-md-mdviewer-output, .tp-markdown-output, .tp-restructuredtext-output, .tp-latex-output, article, main",
 		);
 		return scope ?? this.parentElement ?? document.body;
 	}

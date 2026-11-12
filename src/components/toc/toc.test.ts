@@ -5,6 +5,7 @@
 
 import { afterEach, describe, expect, it, vi } from "vitest";
 import "./toc.js";
+import { TpLatex } from "../latex/latex.js";
 
 async function flush(): Promise<void> {
 	await Promise.resolve();
@@ -338,4 +339,27 @@ it("excludes icon SVG titles and fallback text while preserving heading markup",
 	expect(document.querySelector("h1")?.id).toBe("javascript-viewer");
 	expect(document.querySelector("h1 tp-icon")).not.toBeNull();
 	expect(document.querySelector("h1 em")?.textContent).toBe("Viewer");
+});
+
+it("scopes a LaTeX TOC to its document inside a multi-page shell", async () => {
+	const shell = document.createElement("main");
+	shell.innerHTML = "<h1>Reader toolbar</h1>";
+	const latex = new TpLatex();
+	latex.value = String.raw`\wcTpToc[expand-all,position=end]{}\section{Chapter}\subsection{First}\wcTpBox{\section{Embedded example}}`;
+	shell.append(latex);
+	document.body.append(shell);
+	await flush();
+	const toc = latex.querySelector("tp-toc");
+	expect(toc?.getAttribute("position")).toBe("end");
+	expect(
+		Array.from(toc?.querySelectorAll("a") ?? [], (a) => a.textContent),
+	).toEqual(["1 Chapter", "1.1 First"]);
+	const heading = latex.querySelector("h3");
+	if (!heading) throw new Error("Missing LaTeX subsection");
+	heading.textContent = "Updated subsection";
+	await flush();
+	expect(toc?.textContent).toContain("Updated subsection");
+	expect(toc?.textContent).not.toContain("Embedded example");
+	expect(toc?.textContent).not.toContain("Reader toolbar");
+	shell.remove();
 });
