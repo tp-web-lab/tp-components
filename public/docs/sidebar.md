@@ -54,6 +54,7 @@
       - [Post-it](components/post-it-editor/index.md)
       - [Prose](components/prose-editor/index.md)
       - [Spreadsheet](components/spreadsheet-editor/index.md)
+      - [Table](components/table-editor/index.md)
     - [Feedbacks](components/feedbacks.md)
       - [Admonitions](components/callout/index.md)
       - [Badge](components/badge/index.md)

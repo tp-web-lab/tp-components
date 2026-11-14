@@ -28,6 +28,7 @@
  */
 // tp-docgen:dependencies:end
 
+import { syncIframeColor } from "../../utilities/iframe-color.js";
 import { TpBase } from "../base/base.js";
 import {
 	isTpSizeType,
@@ -91,6 +92,7 @@ export const TP_SCREEN_DEVICES = {
  * @summary Previews and applies absolute device sizes or relative aspect ratios to the page.
  * @attr {TpScreenDevice} device = "default" - Device preset in CSS pixels, or a ratio fitted to the available preview area.
  * @attr {string} src = "" - Page URL to preview; empty uses the current document URL, including its route.
+ * @attr {string} srcdoc = "" - Inline HTML document to preview, taking precedence over src.
  * @attr {boolean} disabled = false - Disables and closes the preview.
  * @attr {TpVariantType} variant = "neutral" - Trigger color variant.
  * @attr {TpSizeType} size = "m" - Trigger size.
@@ -105,7 +107,7 @@ export const TP_SCREEN_DEVICES = {
  */
 export class TpScreen extends TpBase {
 	public static get observedAttributes(): string[] {
-		return ["device", "src", "disabled", "variant", "size"];
+		return ["device", "src", "srcdoc", "disabled", "variant", "size"];
 	}
 	public get device(): TpScreenDevice {
 		const value = this.getAttribute("device") ?? "default";
@@ -122,6 +124,14 @@ export class TpScreen extends TpBase {
 	public set src(value: string) {
 		this.setAttribute("src", value);
 	}
+	/** Inline HTML document to preview, taking precedence over src. @attr srcdoc */
+	public get srcdoc(): string {
+		return this.getAttribute("srcdoc") ?? "";
+	}
+	public set srcdoc(value: string) {
+		this.setAttribute("srcdoc", value);
+	}
+	private stopPreviewColor: (() => void) | null = null;
 	public get disabled(): boolean {
 		return this.hasAttribute("disabled");
 	}
@@ -190,7 +200,7 @@ export class TpScreen extends TpBase {
 		this.renderTrigger();
 		if (this.disabled) this.reset();
 		else if (this.modal?.open) {
-			if (name === "src") this.loadPage();
+			if (name === "src" || name === "srcdoc") this.loadPage();
 			if (name === "device") {
 				this.draftDevice = this.device;
 				this.updateDevice();
@@ -392,6 +402,8 @@ export class TpScreen extends TpBase {
 		);
 	}
 	private loadPage(): void {
+		this.stopPreviewColor?.();
+		this.stopPreviewColor = null;
 		this.modal?.removeAttribute("data-page-screen");
 		this.previewDocument?.removeEventListener("keydown", this.escapePreview);
 		this.previewDocument = null;
@@ -402,8 +414,9 @@ export class TpScreen extends TpBase {
 			/* Invalid source is reported in the preview. */
 		}
 		this.sourceError =
-			!url || !["http:", "https:", "file:"].includes(url.protocol);
-		if (this.sourceError || !url) {
+			!this.srcdoc &&
+			(!url || !["http:", "https:", "file:"].includes(url.protocol));
+		if (this.sourceError) {
 			this.frame?.remove();
 			this.frame = null;
 			if (this.status)
@@ -425,6 +438,11 @@ export class TpScreen extends TpBase {
 				} catch {
 					this.previewDocument = null;
 				}
+				this.stopPreviewColor?.();
+				this.stopPreviewColor =
+					this.srcdoc && this.previewDocument
+						? syncIframeColor(this, this.previewDocument)
+						: null;
 				this.previewDocument?.addEventListener("keydown", this.escapePreview);
 				this.modal?.toggleAttribute(
 					"data-page-screen",
@@ -440,7 +458,11 @@ export class TpScreen extends TpBase {
 				this.modal?.setAttribute("data-page-screen", ""),
 			);
 		}
-		this.frame.src = url.href;
+		if (this.srcdoc) this.frame.srcdoc = this.srcdoc;
+		else {
+			this.frame.srcdoc = "";
+			this.frame.src = url?.href ?? "";
+		}
 	}
 	private readonly escapePreview = (event: KeyboardEvent): void => {
 		if (event.key === "Escape") {
@@ -525,6 +547,8 @@ export class TpScreen extends TpBase {
 		this.frame = null;
 	}
 	public disconnectedCallback(): void {
+		this.stopPreviewColor?.();
+		this.stopPreviewColor = null;
 		this.ownerDocument.defaultView?.removeEventListener(
 			"resize",
 			this.updateWindowTitle,

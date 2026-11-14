@@ -56,6 +56,15 @@
       "default": "html"
     },
     {
+      "name": "line-number-start",
+      "description": "First displayed line number (positive integer). Changes the gutter labels only.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "1"
+    },
+    {
       "name": "line-numbers",
       "description": "Shows line numbers.",
       "reflected": true,

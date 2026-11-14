@@ -42,6 +42,12 @@ Editor components let users create and modify code, rich text, graphs and spread
 [tp-spreadsheet-editor](spreadsheet-editor/index.md)
 :::
 
+::: tp-center { intrinsic }
+:tp-icon:{name="table-editor" library="components" size="4em" aria-hidden="true"}
+
+[tp-table-editor](table-editor/index.md)
+:::
+
 ::::::
 
 <!-- family-introduction:end -->

@@ -1,3 +1,5 @@
+import { LanguageDescription } from "@codemirror/language";
+import { languages } from "@codemirror/language-data";
 import type { Extension } from "@codemirror/state";
 import { styleTags, tags } from "@lezer/highlight";
 
@@ -32,32 +34,72 @@ const loaders: Record<string, () => Promise<Extension>> = {
 	sql: async () => (await import("@codemirror/lang-sql")).sql(),
 };
 
-export function getLoadedLanguageSupport(language: string): Extension {
-	return loaded.get(language) ?? [];
+// These modes are supplied directly by tp-code-editor; never replace them
+// with a generic catalog grammar. Plain text intentionally has no grammar.
+const localLanguages = new Set([
+	"abc",
+	"asciidoc",
+	"prolog",
+	"restructuredtext",
+	"plaintext",
+	"text",
+	"txt",
+]);
+
+function resolveLanguage(language: string): {
+	key: string;
+	load: () => Promise<Extension>;
+} | null {
+	const name = language.trim().toLowerCase();
+	if (localLanguages.has(name)) return null;
+	if (Object.hasOwn(loaders, name)) {
+		const load = loaders[name];
+		if (load) return { key: name, load };
+	}
+	const description =
+		LanguageDescription.matchLanguageName(languages, name, false) ??
+		languages.find((entry) => entry.extensions.includes(name));
+	if (!description) return null;
+	const key = description.name.toLowerCase();
+	if (localLanguages.has(key)) return null;
+	const preferred = Object.hasOwn(loaders, key) ? loaders[key] : undefined;
+	return { key, load: preferred ?? (() => description.load()) };
 }
 
-/** Share language downloads; a failed download remains retryable. */
+export function getLoadedLanguageSupport(language: string): Extension {
+	const resolved = resolveLanguage(language);
+	return resolved ? (loaded.get(resolved.key) ?? []) : [];
+}
+
+/** Share concurrent loads (including aliases); failures remain retryable. */
 export function loadLanguageSupport(
 	language: string,
 ): Promise<Extension> | null {
-	const loader = Object.hasOwn(loaders, language)
-		? loaders[language]
-		: undefined;
-	if (!loader || loaded.has(language)) return null;
-	let request = pending.get(language);
+	const resolved = resolveLanguage(language);
+	if (!resolved || loaded.has(resolved.key)) return null;
+	const { key, load } = resolved;
+	let request = pending.get(key);
 	if (!request) {
-		request = loader().then(
+		request = load().then(
 			(extension) => {
-				loaded.set(language, extension);
-				pending.delete(language);
+				loaded.set(key, extension);
+				pending.delete(key);
 				return extension;
 			},
 			(error) => {
-				pending.delete(language);
+				pending.delete(key);
 				throw error;
 			},
 		);
-		pending.set(language, request);
+		pending.set(key, request);
 	}
 	return request;
+}
+
+/** Complements TP's source-language detection with the catalog's file patterns. */
+export function getCatalogLanguageFromFilename(
+	filename: string,
+): string | undefined {
+	const path = filename.split(/[?#]/, 1)[0] ?? filename;
+	return LanguageDescription.matchFilename(languages, path)?.name.toLowerCase();
 }

@@ -3,9 +3,9 @@
  * @summary Tests du composant `<tp-contextmenu>`.
  */
 
-import { afterEach, describe, expect, it, vi } from 'vitest';
-import './contextmenu.js';
-import type { TpContextmenu } from './contextmenu.js';
+import { afterEach, describe, expect, it, vi } from "vitest";
+import "./contextmenu.js";
+import type { TpContextmenu } from "./contextmenu.js";
 
 /**
  * Attend la fin des micro-tâches en cours.
@@ -14,7 +14,7 @@ import type { TpContextmenu } from './contextmenu.js';
  * @returns Promesse résolue au prochain tour de micro-tâche.
  */
 async function flush(): Promise<void> {
-  await Promise.resolve();
+	await Promise.resolve();
 }
 
 /**
@@ -27,11 +27,11 @@ async function flush(): Promise<void> {
  * @throws {Error} Si la valeur est absente.
  */
 function expectDefined<T>(value: T | null | undefined, message: string): T {
-  if (value == null) {
-    throw new Error(message);
-  }
+	if (value == null) {
+		throw new Error(message);
+	}
 
-  return value;
+	return value;
 }
 
 /**
@@ -42,13 +42,13 @@ function expectDefined<T>(value: T | null | undefined, message: string): T {
  * @throws {Error} Si aucun composant n’est trouvé.
  */
 function getContextmenu(): TpContextmenu {
-  const element = document.querySelector('tp-contextmenu');
+	const element = document.querySelector("tp-contextmenu");
 
-  if (!(element instanceof HTMLElement)) {
-    throw new Error('tp-contextmenu not found');
-  }
+	if (!(element instanceof HTMLElement)) {
+		throw new Error("tp-contextmenu not found");
+	}
 
-  return element as TpContextmenu;
+	return element as TpContextmenu;
 }
 
 /**
@@ -58,41 +58,41 @@ function getContextmenu(): TpContextmenu {
  * @returns Liste des items.
  */
 function getMenuItems(): HTMLLIElement[] {
-  const menu = getContextmenu();
+	const menu = getContextmenu();
 
-  return Array.from(menu.querySelectorAll('li')).filter(
-    (element): element is HTMLLIElement => element instanceof HTMLLIElement,
-  );
+	return Array.from(menu.querySelectorAll("li")).filter(
+		(element): element is HTMLLIElement => element instanceof HTMLLIElement,
+	);
 }
 
-describe('<tp-contextmenu>', () => {
-  afterEach(() => {
-    document.body.innerHTML = '';
-  });
+describe("<tp-contextmenu>", () => {
+	afterEach(() => {
+		document.body.innerHTML = "";
+	});
 
-  it('est défini', () => {
-    expect(customElements.get('tp-contextmenu')).toBeDefined();
-  });
+	it("est défini", () => {
+		expect(customElements.get("tp-contextmenu")).toBeDefined();
+	});
 
-  it('déclare le rôle menu sur la liste racine', async () => {
-    document.body.innerHTML = `
+	it("déclare le rôle menu sur la liste racine", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu>
         <ul>
           <li data-action="rename">Rename</li>
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const menu = getContextmenu();
-    const root = menu.querySelector(':scope > ul');
+		const menu = getContextmenu();
+		const root = menu.querySelector(":scope > ul");
 
-    expect(root).toBeInstanceOf(HTMLUListElement);
-    expect(root?.getAttribute('role')).toBe('menu');
-  });
+		expect(root).toBeInstanceOf(HTMLUListElement);
+		expect(root?.getAttribute("role")).toBe("menu");
+	});
 
-  it('déclare le rôle menuitem sur chaque item', async () => {
-    document.body.innerHTML = `
+	it("déclare le rôle menuitem sur chaque item", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu>
         <ul>
           <li data-action="rename">Rename</li>
@@ -100,16 +100,16 @@ describe('<tp-contextmenu>', () => {
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const items = getMenuItems();
+		const items = getMenuItems();
 
-    expect(items[0]?.getAttribute('role')).toBe('menuitem');
-    expect(items[1]?.getAttribute('role')).toBe('menuitem');
-  });
+		expect(items[0]?.getAttribute("role")).toBe("menuitem");
+		expect(items[1]?.getAttribute("role")).toBe("menuitem");
+	});
 
-  it('déclare aria-haspopup sur un item ayant un sous-menu', async () => {
-    document.body.innerHTML = `
+	it("déclare aria-haspopup sur un item ayant un sous-menu", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu>
         <ul>
           <li>
@@ -121,50 +121,53 @@ describe('<tp-contextmenu>', () => {
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const parentItem = expectDefined(getMenuItems()[0], 'parent item not found');
+		const parentItem = expectDefined(
+			getMenuItems()[0],
+			"parent item not found",
+		);
 
-    expect(parentItem.getAttribute('aria-haspopup')).toBe('menu');
-    expect(parentItem.getAttribute('aria-expanded')).toBe('false');
-  });
+		expect(parentItem.getAttribute("aria-haspopup")).toBe("menu");
+		expect(parentItem.getAttribute("aria-expanded")).toBe("false");
+	});
 
-  it('ouvre le menu via showAt()', async () => {
-    document.body.innerHTML = `
+	it("ouvre le menu via showAt()", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu>
         <ul>
           <li data-action="rename">Rename</li>
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const menu = getContextmenu();
-    menu.showAt(120, 180);
+		const menu = getContextmenu();
+		menu.showAt(120, 180);
 
-    expect(menu.hasAttribute('open')).toBe(true);
-    expect(menu.style.left).toBe('120px');
-    expect(menu.style.top).toBe('180px');
-  });
+		expect(menu.hasAttribute("open")).toBe(true);
+		expect(menu.style.left).toBe("120px");
+		expect(menu.style.top).toBe("180px");
+	});
 
-  it('ferme le menu via hide()', async () => {
-    document.body.innerHTML = `
+	it("ferme le menu via hide()", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu open>
         <ul>
           <li data-action="rename">Rename</li>
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const menu = getContextmenu();
-    menu.hide();
+		const menu = getContextmenu();
+		menu.hide();
 
-    expect(menu.hasAttribute('open')).toBe(false);
-  });
+		expect(menu.hasAttribute("open")).toBe(false);
+	});
 
-  it('ferme le menu par clic extérieur', async () => {
-    document.body.innerHTML = `
+	it("ferme le menu par clic extérieur", async () => {
+		document.body.innerHTML = `
       <div id="outside"></div>
       <tp-contextmenu open>
         <ul>
@@ -172,39 +175,41 @@ describe('<tp-contextmenu>', () => {
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const outside = expectDefined(
-      document.getElementById('outside'),
-      'outside element not found',
-    );
+		const outside = expectDefined(
+			document.getElementById("outside"),
+			"outside element not found",
+		);
 
-    outside.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
-    await flush();
+		outside.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true }));
+		await flush();
 
-    const menu = getContextmenu();
-    expect(menu.hasAttribute('open')).toBe(false);
-  });
+		const menu = getContextmenu();
+		expect(menu.hasAttribute("open")).toBe(false);
+	});
 
-  it('ferme le menu avec Escape', async () => {
-    document.body.innerHTML = `
+	it("ferme le menu avec Escape", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu open>
         <ul>
           <li data-action="rename">Rename</li>
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
-    await flush();
+		document.dispatchEvent(
+			new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+		);
+		await flush();
 
-    const menu = getContextmenu();
-    expect(menu.hasAttribute('open')).toBe(false);
-  });
+		const menu = getContextmenu();
+		expect(menu.hasAttribute("open")).toBe(false);
+	});
 
-  it('ouvre un sous-menu au clic sur un item parent', async () => {
-    document.body.innerHTML = `
+	it("ouvre un sous-menu au clic sur un item parent", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu>
         <ul>
           <li>
@@ -216,116 +221,123 @@ describe('<tp-contextmenu>', () => {
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const parentItem = expectDefined(getMenuItems()[0], 'parent item not found');
-    parentItem.click();
-    await flush();
+		const parentItem = expectDefined(
+			getMenuItems()[0],
+			"parent item not found",
+		);
+		parentItem.click();
+		await flush();
 
-    expect(parentItem.getAttribute('aria-expanded')).toBe('true');
-  });
+		expect(parentItem.getAttribute("aria-expanded")).toBe("true");
+	});
 
-  it('émet tp-contextmenu-select lors du clic sur un item terminal avec data-action', async () => {
-    document.body.innerHTML = `
+	it("émet tp-contextmenu-select lors du clic sur un item terminal avec data-action", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu open>
         <ul>
           <li data-action="rename">Rename</li>
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const menu = getContextmenu();
-    const listener = vi.fn();
-    menu.addEventListener('tp-contextmenu-select', listener);
+		const menu = getContextmenu();
+		const listener = vi.fn();
+		menu.addEventListener("tp-contextmenu-select", listener);
 
-    const item = expectDefined(getMenuItems()[0], 'menu item not found');
-    item.click();
-    await flush();
+		const item = expectDefined(getMenuItems()[0], "menu item not found");
+		item.click();
+		await flush();
 
-    expect(listener).toHaveBeenCalledTimes(1);
+		expect(listener).toHaveBeenCalledTimes(1);
 
-    const event = listener.mock.calls[0]?.[0] as CustomEvent;
-    expect(event.detail.action).toBe('rename');
-    expect(event.detail.item).toBe(item);
-    expect(event.detail.label).toBe('Rename');
-    expect(menu.hasAttribute('open')).toBe(false);
-  });
+		const event = listener.mock.calls[0]?.[0] as CustomEvent;
+		expect(event.detail.action).toBe("rename");
+		expect(event.detail.item).toBe(item);
+		expect(event.detail.label).toBe("Rename");
+		expect(menu.hasAttribute("open")).toBe(false);
+	});
 
-  it('n’émet pas tp-contextmenu-select pour un item terminal sans data-action', async () => {
-    document.body.innerHTML = `
+	it("n’émet pas tp-contextmenu-select pour un item terminal sans data-action", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu open>
         <ul>
           <li>Plain item</li>
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const menu = getContextmenu();
-    const listener = vi.fn();
-    menu.addEventListener('tp-contextmenu-select', listener);
+		const menu = getContextmenu();
+		const listener = vi.fn();
+		menu.addEventListener("tp-contextmenu-select", listener);
 
-    const item = expectDefined(getMenuItems()[0], 'menu item not found');
-    item.click();
-    await flush();
+		const item = expectDefined(getMenuItems()[0], "menu item not found");
+		item.click();
+		await flush();
 
-    expect(listener).toHaveBeenCalledTimes(0);
-    expect(menu.hasAttribute('open')).toBe(false);
-  });
+		expect(listener).toHaveBeenCalledTimes(0);
+		expect(menu.hasAttribute("open")).toBe(false);
+	});
 
-  it('émet tp-contextmenu-select avec Enter sur un item terminal', async () => {
-    document.body.innerHTML = `
+	it("émet tp-contextmenu-select avec Enter sur un item terminal", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu open>
         <ul>
           <li data-action="delete">Delete</li>
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const menu = getContextmenu();
-    const listener = vi.fn();
-    menu.addEventListener('tp-contextmenu-select', listener);
+		const menu = getContextmenu();
+		const listener = vi.fn();
+		menu.addEventListener("tp-contextmenu-select", listener);
 
-    const item = expectDefined(getMenuItems()[0], 'menu item not found');
-    item.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
-    await flush();
+		const item = expectDefined(getMenuItems()[0], "menu item not found");
+		item.dispatchEvent(
+			new KeyboardEvent("keydown", { key: "Enter", bubbles: true }),
+		);
+		await flush();
 
-    expect(listener).toHaveBeenCalledTimes(1);
+		expect(listener).toHaveBeenCalledTimes(1);
 
-    const event = listener.mock.calls[0]?.[0] as CustomEvent;
-    expect(event.detail.action).toBe('delete');
-    expect(event.detail.label).toBe('Delete');
-  });
+		const event = listener.mock.calls[0]?.[0] as CustomEvent;
+		expect(event.detail.action).toBe("delete");
+		expect(event.detail.label).toBe("Delete");
+	});
 
-  it('émet tp-contextmenu-select avec Espace sur un item terminal', async () => {
-    document.body.innerHTML = `
+	it("émet tp-contextmenu-select avec Espace sur un item terminal", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu open>
         <ul>
           <li data-action="duplicate">Duplicate</li>
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const menu = getContextmenu();
-    const listener = vi.fn();
-    menu.addEventListener('tp-contextmenu-select', listener);
+		const menu = getContextmenu();
+		const listener = vi.fn();
+		menu.addEventListener("tp-contextmenu-select", listener);
 
-    const item = expectDefined(getMenuItems()[0], 'menu item not found');
-    item.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
-    await flush();
+		const item = expectDefined(getMenuItems()[0], "menu item not found");
+		item.dispatchEvent(
+			new KeyboardEvent("keydown", { key: " ", bubbles: true }),
+		);
+		await flush();
 
-    expect(listener).toHaveBeenCalledTimes(1);
+		expect(listener).toHaveBeenCalledTimes(1);
 
-    const event = listener.mock.calls[0]?.[0] as CustomEvent;
-    expect(event.detail.action).toBe('duplicate');
-    expect(event.detail.label).toBe('Duplicate');
-  });
+		const event = listener.mock.calls[0]?.[0] as CustomEvent;
+		expect(event.detail.action).toBe("duplicate");
+		expect(event.detail.label).toBe("Duplicate");
+	});
 
-  it('ouvre un sous-menu avec ArrowRight', async () => {
-    document.body.innerHTML = `
+	it("ouvre un sous-menu avec ArrowRight", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu open>
         <ul>
           <li>
@@ -337,17 +349,22 @@ describe('<tp-contextmenu>', () => {
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const parentItem = expectDefined(getMenuItems()[0], 'parent item not found');
-    parentItem.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
-    await flush();
+		const parentItem = expectDefined(
+			getMenuItems()[0],
+			"parent item not found",
+		);
+		parentItem.dispatchEvent(
+			new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }),
+		);
+		await flush();
 
-    expect(parentItem.getAttribute('aria-expanded')).toBe('true');
-  });
+		expect(parentItem.getAttribute("aria-expanded")).toBe("true");
+	});
 
-  it('ferme un sous-menu avec ArrowLeft depuis un item enfant', async () => {
-    document.body.innerHTML = `
+	it("ferme un sous-menu avec ArrowLeft depuis un item enfant", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu open>
         <ul>
           <li aria-expanded="true">
@@ -359,20 +376,22 @@ describe('<tp-contextmenu>', () => {
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const items = getMenuItems();
-    const parentItem = expectDefined(items[0], 'parent item not found');
-    const childItem = expectDefined(items[1], 'child item not found');
+		const items = getMenuItems();
+		const parentItem = expectDefined(items[0], "parent item not found");
+		const childItem = expectDefined(items[1], "child item not found");
 
-    childItem.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
-    await flush();
+		childItem.dispatchEvent(
+			new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }),
+		);
+		await flush();
 
-    expect(parentItem.getAttribute('aria-expanded')).toBe('false');
-  });
+		expect(parentItem.getAttribute("aria-expanded")).toBe("false");
+	});
 
-  it('met à jour les tabindex lors du focus clavier', async () => {
-    document.body.innerHTML = `
+	it("met à jour les tabindex lors du focus clavier", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu open>
         <ul>
           <li data-action="rename">Rename</li>
@@ -380,24 +399,26 @@ describe('<tp-contextmenu>', () => {
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const items = getMenuItems();
-    const first = expectDefined(items[0], 'first item not found');
-    const second = expectDefined(items[1], 'second item not found');
+		const items = getMenuItems();
+		const first = expectDefined(items[0], "first item not found");
+		const second = expectDefined(items[1], "second item not found");
 
-    expect(first.getAttribute('tabindex')).toBe('0');
-    expect(second.getAttribute('tabindex')).toBe('-1');
+		expect(first.getAttribute("tabindex")).toBe("0");
+		expect(second.getAttribute("tabindex")).toBe("-1");
 
-    first.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
-    await flush();
+		first.dispatchEvent(
+			new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }),
+		);
+		await flush();
 
-    expect(first.getAttribute('tabindex')).toBe('-1');
-    expect(second.getAttribute('tabindex')).toBe('0');
-  });
+		expect(first.getAttribute("tabindex")).toBe("-1");
+		expect(second.getAttribute("tabindex")).toBe("0");
+	});
 
-  it('s’ancre à un élément via anchor et s’ouvre au clic droit', async () => {
-    document.body.innerHTML = `
+	it("s’ancre à un élément via anchor et s’ouvre au clic droit", async () => {
+		document.body.innerHTML = `
       <button id="target">Target</button>
       <tp-contextmenu anchor="#target">
         <ul>
@@ -405,42 +426,42 @@ describe('<tp-contextmenu>', () => {
         </ul>
       </tp-contextmenu>
     `;
-    await flush();
+		await flush();
 
-    const target = expectDefined(
-      document.getElementById('target'),
-      'target element not found',
-    );
+		const target = expectDefined(
+			document.getElementById("target"),
+			"target element not found",
+		);
 
-    target.dispatchEvent(
-      new MouseEvent('contextmenu', {
-        bubbles: true,
-        cancelable: true,
-        clientX: 30,
-        clientY: 40,
-      }),
-    );
-    await flush();
+		target.dispatchEvent(
+			new MouseEvent("contextmenu", {
+				bubbles: true,
+				cancelable: true,
+				clientX: 30,
+				clientY: 40,
+			}),
+		);
+		await flush();
 
-    const menu = getContextmenu();
+		const menu = getContextmenu();
 
-    expect(menu.hasAttribute('open')).toBe(true);
-    expect(menu.style.left).toBe('30px');
-    expect(menu.style.top).toBe('40px');
-  });
+		expect(menu.hasAttribute("open")).toBe(true);
+		expect(menu.style.left).toBe("30px");
+		expect(menu.style.top).toBe("40px");
+	});
 
-  it('expose ses propriétés publiques', () => {
-    const menu = document.createElement('tp-contextmenu') as TpContextmenu;
-    menu.anchor = '#target';
-    menu.open = true;
-    expect(menu.anchor).toBe('#target');
-    expect(menu.open).toBe(true);
-    menu.open = false;
-    expect(menu.open).toBe(false);
-  });
+	it("expose ses propriétés publiques", () => {
+		const menu = document.createElement("tp-contextmenu") as TpContextmenu;
+		menu.anchor = "#target";
+		menu.open = true;
+		expect(menu.anchor).toBe("#target");
+		expect(menu.open).toBe(true);
+		menu.open = false;
+		expect(menu.open).toBe(false);
+	});
 
-  it('gère séparateurs, items désactivés et navigation extrême', async () => {
-    document.body.innerHTML = `
+	it("gère séparateurs, items désactivés et navigation extrême", async () => {
+		document.body.innerHTML = `
       <tp-contextmenu open>
         <ul>
           <li data-action="first">First</li>
@@ -449,32 +470,87 @@ describe('<tp-contextmenu>', () => {
           <li data-action="last">Last</li>
         </ul>
       </tp-contextmenu>`;
-    await flush();
-    const items = getMenuItems();
-    const first = expectDefined(items[0], 'first item missing');
-    const separator = expectDefined(items[1], 'separator missing');
-    const disabled = expectDefined(items[2], 'disabled item missing');
-    const last = expectDefined(items[3], 'last item missing');
-    expect(separator.hasAttribute('tabindex')).toBe(false);
-    disabled.click();
-    expect(getContextmenu().open).toBe(true);
-    disabled.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
-    disabled.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true }));
-    first.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
-    expect(last.tabIndex).toBe(0);
-    last.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
-    expect(first.tabIndex).toBe(0);
-    first.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
-    expect(last.tabIndex).toBe(0);
-  });
+		await flush();
+		const items = getMenuItems();
+		const first = expectDefined(items[0], "first item missing");
+		const separator = expectDefined(items[1], "separator missing");
+		const disabled = expectDefined(items[2], "disabled item missing");
+		const last = expectDefined(items[3], "last item missing");
+		expect(separator.hasAttribute("tabindex")).toBe(false);
+		disabled.click();
+		expect(getContextmenu().open).toBe(true);
+		disabled.dispatchEvent(
+			new KeyboardEvent("keydown", {
+				key: "Enter",
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+		disabled.dispatchEvent(
+			new KeyboardEvent("keydown", {
+				key: " ",
+				bubbles: true,
+				cancelable: true,
+			}),
+		);
+		first.dispatchEvent(
+			new KeyboardEvent("keydown", { key: "End", bubbles: true }),
+		);
+		expect(last.tabIndex).toBe(0);
+		last.dispatchEvent(
+			new KeyboardEvent("keydown", { key: "Home", bubbles: true }),
+		);
+		expect(first.tabIndex).toBe(0);
+		first.dispatchEvent(
+			new KeyboardEvent("keydown", { key: "ArrowUp", bubbles: true }),
+		);
+		expect(last.tabIndex).toBe(0);
+	});
 
-  it('ignore les interactions internes et un contenu sans menu racine', async () => {
-    document.body.innerHTML = '<tp-contextmenu open><span>Content</span></tp-contextmenu>';
-    await flush();
-    const menu = getContextmenu();
-    menu.querySelector('span')?.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
-    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
-    expect(menu.open).toBe(true);
-  });
+	it("ignore les interactions internes et un contenu sans menu racine", async () => {
+		document.body.innerHTML =
+			"<tp-contextmenu open><span>Content</span></tp-contextmenu>";
+		await flush();
+		const menu = getContextmenu();
+		menu
+			.querySelector("span")
+			?.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true }));
+		document.dispatchEvent(
+			new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }),
+		);
+		expect(menu.open).toBe(true);
+	});
+});
 
+describe("nested item activation", () => {
+	it.each(["click", "keyboard"])(
+		"does not reactivate the parent after a nested %s",
+		async (mode) => {
+			document.body.innerHTML =
+				'<tp-contextmenu><ul><li>Type<ul><li data-action="number"><span>Number</span></li></ul></li></ul></tp-contextmenu>';
+			await flush();
+			const menu = getContextmenu();
+			const parent = expectDefined(
+				menu.querySelector<HTMLLIElement>("li"),
+				"parent",
+			);
+			const item = expectDefined(
+				menu.querySelector<HTMLLIElement>('[data-action="number"]'),
+				"item",
+			);
+			const select = vi.fn();
+			menu.addEventListener("tp-contextmenu-select", select);
+			menu.showAt(0, 0);
+			parent.click();
+			if (mode === "click") item.querySelector("span")?.click();
+			else
+				item.dispatchEvent(
+					new KeyboardEvent("keydown", { key: "Enter", bubbles: true }),
+				);
+			expect(select).toHaveBeenCalledTimes(1);
+			expect(menu.open).toBe(false);
+			expect(parent.getAttribute("aria-expanded")).toBe("false");
+			document.body.replaceChildren();
+		},
+	);
 });

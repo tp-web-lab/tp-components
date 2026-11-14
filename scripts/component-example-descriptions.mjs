@@ -18,6 +18,7 @@ import { describeAttributeControl } from "./interactive-attribute-examples.mjs";
 
 /** Editorial objectives for the existing examples; no descriptions are inferred from titles alone. */
 const basic = {
+ "table-editor": "Edit the workshop schedule, insert a row or column, then export markup, spreadsheet data or an image.",
  wari: "Play an Oware Abapa game from the standard forty-eight-seed position. Sow a highlighted pit, inspect the scores and try the playback controls.",
  checkers: "Explore an international draughts endgame with men and kings. Select a piece to see its legal destinations, then play a complete turn or try random play.",
  chess: "Explore a king-and-pawn ending. Select a white piece to see its legal destinations, then play a move or try Play vs random.",
@@ -417,6 +418,11 @@ const additional = {
 };
 
 export function describeExample(component, label) {
+ if (component === "table-editor" && label === "Typed cells") return "Edit numbers, dates, times and mathematical source with their TP fields. Right-click a cell to change its type or insert a row or column before or after it.";
+ if (component === "table-editor" && label === "Empty table") return "Fill the empty four-row, three-column grid, then inspect the generated markup.";
+ if (component === "table-editor" && label === "Headerless table") return "Export ordinary data without column headings. Switch to Markdown to observe the empty heading row required by pipe tables.";
+ if (component === "table-editor" && label === "Read-only exports") return "Export markup, spreadsheet data or images from a table whose contents cannot be edited interactively.";
+
  if (label === "Javascript API") return "Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.";
  if (component === "control" && label === "All controllers") return "All seven entries start visible. Uncheck All controllers to hide them, then select individual entries.";
  if (component === "control" && label === "Initially hidden") return "Only the Controllers button is initially visible. Open it and select the controllers you want to display.";

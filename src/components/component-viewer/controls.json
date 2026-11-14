@@ -395,6 +395,22 @@
       ]
     }
   },
+  "tp-checkers": {
+    "orientation": {
+      "values": [
+        "white",
+        "black"
+      ]
+    }
+  },
+  "tp-chess": {
+    "orientation": {
+      "values": [
+        "white",
+        "black"
+      ]
+    }
+  },
   "tp-chronometer": {},
   "tp-clock": {
     "type": {
@@ -1179,6 +1195,7 @@
     }
   },
   "tp-javascript-viewer-question": {},
+  "tp-kakuro": {},
   "tp-lang": {
     "repository": {
       "choices": [
@@ -1970,6 +1987,16 @@
       ]
     }
   },
+  "tp-puzzle": {
+    "shape": {
+      "values": [
+        "square",
+        "puzzle",
+        "triangle",
+        "hexagon"
+      ]
+    }
+  },
   "tp-python-notebook": {},
   "tp-python-playground": {
     "repository": {
@@ -2574,6 +2601,17 @@
       ]
     }
   },
+  "tp-table-editor": {
+    "format": {
+      "values": [
+        "html",
+        "markdown",
+        "asciidoc",
+        "restructuredtext",
+        "latex"
+      ]
+    }
+  },
   "tp-tabs": {
     "activation": {
       "values": [
@@ -2894,6 +2932,14 @@
           "label": "file-unknown",
           "value": "/docs/components/video-player/examples/file-unknown.mp4"
         }
+      ]
+    }
+  },
+  "tp-wari": {
+    "orientation": {
+      "values": [
+        "south",
+        "north"
       ]
     }
   },

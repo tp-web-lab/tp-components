@@ -21,3 +21,21 @@ it("keeps lazy Markdown inclusions unfetched and propagates their depth", async 
 		),
 	).rejects.toThrow("Include depth exceeded");
 });
+
+it.each(["```", "~~~~"])(
+	"includes literal source inside %s fences",
+	async (fence) => {
+		const code = 'const greeting = "<hello>";';
+		vi.stubGlobal(
+			"fetch",
+			vi.fn().mockResolvedValue({ ok: true, text: async () => code }),
+		);
+		const result = await resolveMarkdownIncludes(
+			`${fence}javascript\n::include{greeting.js mode=raw}\n${fence}\n\n::include{greeting.js}`,
+			new URL("https://example.test/docs/page.md"),
+		);
+		expect(result).toBe(
+			`${fence}javascript\n${code}\n${fence}\n\n<pre><code>const greeting = &quot;&lt;hello&gt;&quot;;</code></pre>`,
+		);
+	},
+);

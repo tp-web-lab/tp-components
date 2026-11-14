@@ -254,7 +254,7 @@ export class TpMarkdown extends TpBase {
 
 		return {
 			source: this.inlineSourceSnapshot,
-			currentUrl: new URL(window.location.href, document.baseURI),
+			currentUrl: new URL(this.ownerDocument.baseURI),
 		};
 	}
 

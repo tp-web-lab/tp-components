@@ -1,0 +1,300 @@
+::::::::: tp-markdown-viewer { label="tp-table-editor" allow-script }
+:::::::: script { type="tp/markdown" }
+``` example {label="Basic usage"}
+::::::: tp-table-editor { caption="Workshop schedule" }
+:::::: table
+::::: thead
+:::: tr
+::: th
+Session
+:::
+
+::: th
+Duration (min)
+:::
+
+::: th
+Date
+:::
+
+::: th
+Formula
+:::
+::::
+:::::
+
+::::: tbody
+:::: tr
+::: td
+Introduction
+:::
+
+::: td { data-type="number" }
+20
+:::
+
+::: td { data-type="date" }
+2026-11-14
+:::
+
+::: td { data-type="math" }
+x^2 + y^2
+:::
+::::
+
+:::: tr
+::: td
+Practice
+:::
+
+::: td { data-type="number" }
+40
+:::
+
+::: td { data-type="date" }
+2026-11-15
+:::
+
+::: td { data-type="math" }
+E = mc^2
+:::
+::::
+:::::
+::::::
+:::::::
+```
+
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/table-editor/table-editor.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-table-editor");
+element1.setAttribute("caption", "Workshop schedule");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("table");
+element2.append(document.createTextNode("\n    "));
+
+const element3 = document.createElement("thead");
+
+const element4 = document.createElement("tr");
+
+const element5 = document.createElement("th");
+element5.append(document.createTextNode("Session"));
+element4.append(element5);
+
+const element6 = document.createElement("th");
+element6.append(document.createTextNode("Duration (min)"));
+element4.append(element6);
+
+const element7 = document.createElement("th");
+element7.append(document.createTextNode("Date"));
+element4.append(element7);
+
+const element8 = document.createElement("th");
+element8.append(document.createTextNode("Formula"));
+element4.append(element8);
+element3.append(element4);
+element2.append(element3);
+element2.append(document.createTextNode("\n    "));
+
+const element9 = document.createElement("tbody");
+element9.append(document.createTextNode("\n      "));
+
+const element10 = document.createElement("tr");
+
+const element11 = document.createElement("td");
+element11.append(document.createTextNode("Introduction"));
+element10.append(element11);
+
+const element12 = document.createElement("td");
+element12.setAttribute("data-type", "number");
+element12.append(document.createTextNode("20"));
+element10.append(element12);
+
+const element13 = document.createElement("td");
+element13.setAttribute("data-type", "date");
+element13.append(document.createTextNode("2026-11-14"));
+element10.append(element13);
+
+const element14 = document.createElement("td");
+element14.setAttribute("data-type", "math");
+element14.append(document.createTextNode("x^2 + y^2"));
+element10.append(element14);
+element9.append(element10);
+element9.append(document.createTextNode("\n      "));
+
+const element15 = document.createElement("tr");
+
+const element16 = document.createElement("td");
+element16.append(document.createTextNode("Practice"));
+element15.append(element16);
+
+const element17 = document.createElement("td");
+element17.setAttribute("data-type", "number");
+element17.append(document.createTextNode("40"));
+element15.append(element17);
+
+const element18 = document.createElement("td");
+element18.setAttribute("data-type", "date");
+element18.append(document.createTextNode("2026-11-15"));
+element15.append(element18);
+
+const element19 = document.createElement("td");
+element19.setAttribute("data-type", "math");
+element19.append(document.createTextNode("E = mc^2"));
+element15.append(element19);
+element9.append(element15);
+element9.append(document.createTextNode("\n    "));
+element2.append(element9);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
+``` example {label="Typed cells"}
+::::::: tp-table-editor { caption="Workshop details" }
+:::::: table
+::::: thead
+:::: tr
+::: th
+Topic
+:::
+
+::: th
+Seats
+:::
+
+::: th
+Date
+:::
+
+::: th
+Time
+:::
+
+::: th
+Expression
+:::
+::::
+:::::
+
+::::: tbody
+:::: tr
+::: td
+Mathematics
+:::
+
+::: td { data-type="number" }
+12
+:::
+
+::: td { data-type="date" }
+2026-11-14
+:::
+
+::: td { data-type="time" }
+09:30
+:::
+
+::: td { data-type="math" }
+x^2 + y^2
+:::
+::::
+:::::
+::::::
+:::::::
+```
+
+``` example {label="Empty table"}
+::: tp-table-editor { rows="4" columns="3" caption="My comparison" }
+:::
+```
+
+``` example {label="Headerless table"}
+::::::: tp-table-editor { no-header format="asciidoc" }
+:::::: table
+::::: tbody
+:::: tr
+::: td
+Monday
+:::
+
+::: td
+09:00
+:::
+::::
+
+:::: tr
+::: td
+Tuesday
+:::
+
+::: td
+14:00
+:::
+::::
+:::::
+::::::
+:::::::
+```
+
+``` example {label="Read-only exports"}
+::::::: tp-table-editor { readonly format="latex" caption="Workshop schedule" }
+:::::: table
+::::: thead
+:::: tr
+::: th
+Session
+:::
+
+::: th
+Duration
+:::
+
+::: th
+Room
+:::
+::::
+:::::
+
+::::: tbody
+:::: tr
+::: td
+Introduction
+:::
+
+::: td
+20 minutes
+:::
+
+::: td
+A1
+:::
+::::
+
+:::: tr
+::: td
+Practice
+:::
+
+::: td
+40 minutes
+:::
+
+::: td
+B2
+:::
+::::
+:::::
+::::::
+:::::::
+```
+::::::::
+:::::::::

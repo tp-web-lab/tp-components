@@ -210,9 +210,12 @@ export class TpSaveImage extends TpBase {
 				const check = document.createElement("tp-icon");
 				check.setAttribute("name", "check");
 				check.setAttribute("aria-hidden", "true");
+				const icon = document.createElement("tp-icon");
+				icon.setAttribute("name", `file-${format}`);
+				icon.setAttribute("aria-hidden", "true");
 				const label = document.createElement("span");
 				label.textContent = format.toUpperCase();
-				item.append(check, label);
+				item.append(check, icon, label);
 				item.addEventListener("click", () => {
 					void this.save(format).catch(() => undefined);
 				});

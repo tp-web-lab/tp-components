@@ -13,6 +13,23 @@ function create() {
 	return screen;
 }
 describe("tp-screen", () => {
+	it("previews inline HTML instead of the page and preserves it across device changes", () => {
+		const screen = create();
+		screen.srcdoc =
+			"<!doctype html><html><body><table><tr><td>Only the table</td></tr></table></body></html>";
+		screen.show();
+		const frame = document.querySelector("iframe");
+		expect(frame?.srcdoc).toBe(screen.srcdoc);
+		screen.device = "phone-portrait";
+		expect(document.querySelector("iframe")).toBe(frame);
+		expect(frame?.srcdoc).toContain("Only the table");
+		screen.srcdoc = "<p>Updated table</p>";
+		expect(frame?.srcdoc).toBe("<p>Updated table</p>");
+		screen.srcdoc = "";
+		expect(frame?.hasAttribute("srcdoc")).toBe(false);
+		expect(frame?.getAttribute("src")).toBe(screen.src);
+	});
+
 	it("opens only on demand with the requested page route", () => {
 		const screen = create();
 		expect(document.querySelector("iframe")).toBeNull();

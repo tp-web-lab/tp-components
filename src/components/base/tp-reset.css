@@ -208,6 +208,12 @@
     border-radius: var(--tp-border-radius-md);
   }
 
+  /* Images embedded in paragraph text remain part of the text flow. */
+  p img:not(:where(span.image img)) {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
   iframe,
   picture,
   video,
@@ -288,7 +294,8 @@
     vertical-align: baseline;
   }
 
-  mark {
+  mark,
+  .mark {
     padding: 0.125em 0.25em;
     border-radius: var(--tp-border-radius-sm);
     background-color: color-mix(in oklab, #f4dd01, transparent 75%);
@@ -302,6 +309,10 @@
 
   strong {
     font-weight: var(--tp-font-weight-bold);
+  }
+
+  .smallcaps {
+    font-variant-caps: small-caps;
   }
 
   .line-through {

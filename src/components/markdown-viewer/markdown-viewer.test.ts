@@ -88,3 +88,62 @@ it("covers inline sources, fenced examples and every output mode", async () => {
 	vi.resetModules();
 	await expect(import("./markdown-viewer.js")).resolves.toBeDefined();
 });
+
+it.each(["@source", "^note", "%term"])(
+	"renders %s references inside the iframe to initialize tooltip styles and behavior",
+	async (key) => {
+		const element = document.createElement("tp-markdown-viewer");
+		const api = element as unknown as {
+			renderOutput(
+				source: string,
+				mode: string,
+				container: HTMLElement,
+			): Promise<void>;
+		};
+		const source = `Reference [${key}].\n\n[${key}]: Definition.`;
+		const output = document.createElement("div");
+		await api.renderOutput(source, "render", output);
+		const iframeDocument = new DOMParser().parseFromString(
+			output.querySelector("iframe")?.srcdoc ?? "",
+			"text/html",
+		);
+		expect(
+			iframeDocument.querySelector('tp-markdown > script[type="tp/markdown"]')
+				?.textContent,
+		).toBe(source);
+		expect(iframeDocument.querySelector(".tp-md-reference-tooltip")).toBeNull();
+	},
+);
+
+it.each([
+	":math:`x^2`",
+	":latexmath:`x^2`",
+	":asciimath:`sqrt(x)`",
+	"```javascript\nconst answer = 42;\n```",
+	"    const answer = 42;",
+	'<pre><code class="language-css">body { color: red; }</code></pre>',
+	"::: div {.cluster}\nOne\n\nTwo\n:::",
+	"```tabs\nFirst\n: One\n\nSecond\n: Two\n```",
+	"```list-table\n- - Name\n  - Value\n- - A\n  - 1\n```",
+	"```mdviewer\n# Hello\n```",
+	"```htmlviewer\n<p>Hello</p>\n```",
+	" ```example label=Demo\n Hello\n ```",
+])("initializes the native Markdown runtime for %s", async (source) => {
+	const element = document.createElement("tp-markdown-viewer");
+	const api = element as unknown as {
+		renderOutput(
+			source: string,
+			mode: string,
+			container: HTMLElement,
+		): Promise<void>;
+	};
+	const output = document.createElement("div");
+	await api.renderOutput(source, "render", output);
+	const doc = new DOMParser().parseFromString(
+		output.querySelector("iframe")?.srcdoc ?? "",
+		"text/html",
+	);
+	expect(
+		doc.querySelector('tp-markdown > script[type="tp/markdown"]')?.textContent,
+	).toBe(source);
+});

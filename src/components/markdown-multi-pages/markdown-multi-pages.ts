@@ -78,6 +78,7 @@
  */
 // tp-docgen:dependencies:end
 
+import { followFragment } from "../../utilities/fragment-scroll.js";
 import "../button/button.js";
 import "../icon/icon.js";
 import { updateDocumentLogo } from "../toolbar/document-logo.js";
@@ -175,6 +176,8 @@ export class TpMarkdownMultiPages extends TpBase {
 	private pageLinks: TpMarkdownMultiPagesPageLink[] = [];
 	private pageNavigationElement: HTMLElement | null = null;
 
+	private stopFragmentScroll: (() => void) | null = null;
+
 	private stopOrientationObserver: (() => void) | null = null;
 
 	protected override connectedCallback(): void {
@@ -199,6 +202,8 @@ export class TpMarkdownMultiPages extends TpBase {
 	}
 
 	public disconnectedCallback(): void {
+		this.stopFragmentScroll?.();
+		this.stopFragmentScroll = null;
 		this.stopOrientationObserver?.();
 		this.stopOrientationObserver = null;
 		this.annotations?.dispose();
@@ -634,6 +639,8 @@ export class TpMarkdownMultiPages extends TpBase {
 	}
 
 	private async navigate(href: string, force = false): Promise<void> {
+		this.stopFragmentScroll?.();
+		this.stopFragmentScroll = null;
 		const content = this.contentElement;
 		if (content === null) return;
 
@@ -1242,7 +1249,12 @@ export class TpMarkdownMultiPages extends TpBase {
 		const target = this.contentElement?.querySelector<HTMLElement>(
 			`#${this.escapeCssIdentifier(id)}`,
 		);
+		this.stopFragmentScroll?.();
 		target?.scrollIntoView?.({ block: "start" });
+		this.stopFragmentScroll =
+			target && this.contentElement
+				? followFragment(this.contentElement, target)
+				: null;
 	}
 
 	private escapeCssIdentifier(value: string): string {

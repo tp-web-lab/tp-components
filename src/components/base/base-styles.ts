@@ -49,14 +49,18 @@ export function ensureTpBaseStyles(): void {
 
 	if (
 		body.classList.contains("tp-light") ||
-		body.classList.contains("tp-dark")
+		body.classList.contains("tp-dark") ||
+		document.documentElement.classList.contains("tp-light") ||
+		document.documentElement.classList.contains("tp-dark")
 	) {
 		return;
 	}
 
 	const prefersDark =
 		window.matchMedia?.("(prefers-color-scheme: dark)").matches === true;
-	body.classList.add(prefersDark ? "tp-dark" : "tp-light");
+	const defaultTheme = prefersDark ? "tp-dark" : "tp-light";
+	body.classList.add(defaultTheme);
+	body.dataset.tpDefaultTheme = defaultTheme;
 }
 
 /**

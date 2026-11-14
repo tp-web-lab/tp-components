@@ -1,0 +1,23 @@
+/* Let the preview scroll; keep native table layout and its complete border. */
+.tp-table-editor-preview[data-markup-preview] table {
+ display: table;
+ width: auto;
+ inline-size: auto;
+ min-inline-size: 0;
+ max-inline-size: 100%;
+ overflow: visible;
+ border: var(--tp-border-width, 1px) var(--tp-border-style, solid) var(--tp-neutral-stroke-soft);
+}
+.tp-table-editor-preview[data-markup-preview] figure:has(table) {
+ inline-size: fit-content;
+ max-inline-size: 100%;
+}
+
+/* tabular has no native heading-row marker; use the editor's header setting. */
+.tp-table-editor-preview[data-markup-preview][data-heading] tp-latex table > tr:first-child > td,
+.tp-table-editor-preview[data-markup-preview][data-heading] tp-latex table > tbody:first-child > tr:first-child > td {
+ background-color: var(--tp-neutral-fill-soft);
+ color: var(--tp-neutral-text-on-soft);
+ font-weight: var(--tp-font-weight-bold, 700);
+}
+

@@ -92,6 +92,7 @@ import { TpBase } from "../base/base.js";
 import { codeCommentMarkers } from "./code-comment-markers.js";
 import style from "./code-editor.css?inline";
 import {
+	getCatalogLanguageFromFilename,
 	getLoadedLanguageSupport,
 	loadLanguageSupport,
 } from "./language-support.js";
@@ -879,6 +880,7 @@ export const tpMarkdownSyntaxTheme = EditorView.baseTheme({
  * @attr {string} lang = "inherited" - Language tag inherited from HTMLElement.
  * @attr {string} language = "html" - Fallback editing language when it cannot be inferred from a `tp/LANGUAGE` script or `src` extension.
  * @attr {boolean} line-numbers = false - Shows line numbers.
+ * @attr {number} line-number-start = 1 - First displayed line number (positive integer). Changes the gutter labels only.
  * @attr {string} placeholder = "Type some LANGUAGE code... or F1 to toggle the toolbar" - Text shown when the editor is empty. Defaults to `Type some LANGUAGE code... or F1 to toggle the toolbar` using the resolved language.
  * @attr {boolean} readonly = false - Enables read-only mode.
  * @attr {string} src = "" - URL of a source file to load.
@@ -1153,6 +1155,7 @@ export class TpCodeEditor extends TpBase {
 			"readonly",
 			"toolbar",
 			"line-numbers",
+			"line-number-start",
 			"fold-gutter",
 			"word-wrap",
 		];
@@ -1281,6 +1284,20 @@ export class TpCodeEditor extends TpBase {
 		}
 
 		this.removeAttribute("line-numbers");
+	}
+
+	/**
+	 * First displayed gutter number; document positions still start at one.
+	 * Invalid, nonpositive and fractional values fall back to one.
+	 * @attr line-number-start
+	 */
+	public get lineNumberStart(): number {
+		const value = Number(this.getAttribute("line-number-start") ?? 1);
+		return Number.isSafeInteger(value) && value >= 1 ? value : 1;
+	}
+
+	public set lineNumberStart(value: number) {
+		this.setAttribute("line-number-start", String(value));
 	}
 
 	/**
@@ -1931,7 +1948,10 @@ export class TpCodeEditor extends TpBase {
 					: this.src;
 				const fromFile = await getCodeFromFile(source);
 				this.currentLanguage = this.resolveLanguage(
-					fromFile.language,
+					fromFile.language === "plaintext"
+						? (getCatalogLanguageFromFilename(fromFile.filename) ??
+								fromFile.language)
+						: fromFile.language,
 					explicitLanguage,
 				);
 				this.clearInlineSourceError();
@@ -2296,7 +2316,10 @@ export class TpCodeEditor extends TpBase {
 		}
 
 		if (this.lineNumbers) {
-			extensions.push(lineNumbers());
+			const start = this.lineNumberStart;
+			extensions.push(
+				lineNumbers({ formatNumber: (line) => String(line + start - 1) }),
+			);
 		}
 
 		if (this.foldGutter) {

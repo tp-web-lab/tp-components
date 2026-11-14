@@ -179,6 +179,7 @@ function creditKey(specifier) {
 // MathJax is reached through the optional tp-markdown preview; the checker is
 // imported on demand and must not become a structural dependency of a field.
 const optionalRuntimeCredits = {
+  'tp-table-editor': ['xlsx'],
   'tp-tikz': ['@tp/tp-latex', 'runtime:tikzjax'],
   'tp-mathfield': ['mathlive', 'runtime:mathjax'],
   'tp-fill-blank-question': ['@cortex-js/compute-engine'],

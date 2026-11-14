@@ -73,6 +73,33 @@ external file
 
 Add the boolean `toolbar` attribute to display the editor toolbar initially.
 
+### Line numbering and additional languages
+
+Add `line-numbers` to show the gutter. Set `line-number-start="100"` to display
+100, 101, 102, and so on. Its default is 1; invalid, fractional or nonpositive
+values fall back to 1. Changing it updates the display. It does not change the
+source, cursor positions, Go to line commands or code-comment line references.
+
+```html
+<tp-code-editor language="haskell" readonly line-numbers line-number-start="100">
+  <script type="tp/haskell">
+qsort []     = []
+qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
+               qsort (filter (>= x) xs)
+  </script>
+</tp-code-editor>
+```
+
+Additional languages use the [CodeMirror language catalog](https://github.com/codemirror/language-data).
+Their grammars are loaded only when requested and shared between editors.
+For example, `language="haskell"` (or `hs`), `rust`, `go`, `ruby`, `shell` and
+`yaml` select their corresponding grammar. Catalog names, aliases and file
+extensions are accepted as language identifiers. Additional file types such as
+`.hs` and `.rs` are also detected from `src`. Existing TP-specific modes
+remain available. An unknown language remains plain text; the component does
+not download arbitrary grammar URLs. Syntax highlighting does not execute code.
+
+
 ### Importing
 
 ::: tp-tabs

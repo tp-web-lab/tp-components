@@ -19,6 +19,18 @@ afterEach(() => {
 });
 
 describe("<tp-markdown>", () => {
+	it("resolves inline source against the document base in preview frames", async () => {
+		const element = document.createElement("tp-markdown") as TpMarkdown;
+		const previewDocument = document.implementation.createHTMLDocument();
+		const base = previewDocument.createElement("base");
+		base.href = "https://example.test/docs/";
+		previewDocument.head.append(base);
+		previewDocument.adoptNode(element);
+		const api = element as unknown as {
+			getMarkdownSource(): Promise<{ currentUrl: URL }>;
+		};
+		expect((await api.getMarkdownSource()).currentUrl.href).toBe(base.href);
+	});
 	it("renders raw-text blocks, fenced examples and tokens", async () => {
 		const html = await renderMarkdownToHtml(
 			"<tp-box>\n<script>const x = 1;</script>\n</tp-box>\n\n```html\n<style>x{}</style>\n```",

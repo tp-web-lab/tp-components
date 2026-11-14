@@ -32,6 +32,8 @@ The custom `<tp-screen>` element previews and applies absolute device sizes or r
 <!-- -->
 ## Usage
 
+Use `srcdoc` to preview a complete HTML document supplied as a string. It takes precedence over `src` and inherits the enclosing brand color and theme. Clear `srcdoc` to return to the URL selected by `src`.
+
 ### Configuration
 
 | Format | Viewport |

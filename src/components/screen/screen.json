@@ -47,6 +47,15 @@
       "default": "\"\""
     },
     {
+      "name": "srcdoc",
+      "description": "Inline HTML document to preview, taking precedence over src.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
       "name": "variant",
       "description": "Trigger color variant.",
       "reflected": true,

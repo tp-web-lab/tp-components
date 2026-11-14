@@ -176,15 +176,16 @@
     --tp-syntax-gutter-foreground: var(--tp-neutral-700);
     --tp-syntax-gutter-border: var(--tp-neutral-stroke-soft);
     --tp-syntax-fold-background: color-mix(in srgb, var(--tp-neutral-fill-soft) 70%, transparent);
-    --tp-syntax-token-keyword: var(--tp-info-800);
-    --tp-syntax-token-string: var(--tp-warning-900);
-    --tp-syntax-token-number: var(--tp-brand-800);
-    --tp-syntax-token-comment: var(--tp-neutral-700);
-    --tp-syntax-token-variable: var(--tp-info-800);
-    --tp-syntax-token-property: var(--tp-info-800);
-    --tp-syntax-token-type: var(--tp-brand-800);
-    --tp-syntax-token-function: var(--tp-warning-900);
-    --tp-syntax-token-link: var(--tp-info-800);
+    /* Distinct hues on light surfaces; independent of the selected brand. */
+    --tp-syntax-token-keyword: #005cc5;
+    --tp-syntax-token-string: #a31515;
+    --tp-syntax-token-number: #087443;
+    --tp-syntax-token-comment: #52616b;
+    --tp-syntax-token-variable: #174e80;
+    --tp-syntax-token-property: #9c3c00;
+    --tp-syntax-token-type: #6f42c1;
+    --tp-syntax-token-function: #795e26;
+    --tp-syntax-token-link: #005cc5;
 
     /* brand */
     --tp-brand-fill-softer: var(--tp-brand-100);

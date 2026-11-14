@@ -285,6 +285,27 @@ bundler
 :::
 
 <!-- -->
+### Basic tables
+
+Use `\begin{tabular}{|l|r|} ... \end{tabular}` for a table with left-, center- or right-aligned columns (`l`, `c`, `r`). Separate cells with `&`, rows with `\\`, and add `\hline` between rows for horizontal rules. Vertical rules use `|` in the column specification. Cells retain LaTeX formatting and inline mathematics. Advanced column specifications, spanning cells and nested tables are not supported.
+
+Wrap a captioned table in `\begin{table} ... \end{table}` and place `\caption{...}` after the `tabular`. The caption is centered below the table and accepts LaTeX formatting. `\centering` and placement hints such as `[ht]` are accepted; the web rendering remains in document order. Captions are not automatically numbered.
+
+```latex
+\begin{table}
+\centering
+\begin{tabular}{|l|r|}
+\hline
+Item & Quantity \\
+\hline
+Books & 12 \\
+\hline
+\end{tabular}
+\caption{Workshop supplies}
+\end{table}
+```
+
+
 ## Examples
 
 <!-- tp-docgen:example-descriptions:start -->

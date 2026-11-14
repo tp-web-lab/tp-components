@@ -541,7 +541,12 @@ export class TpContextmenu extends TpBase {
 				item.removeAttribute("aria-expanded");
 			}
 
-			item.onclick = () => {
+			item.onclick = (event) => {
+				if (
+					!(event.target instanceof Element) ||
+					event.target.closest('li[role="menuitem"]') !== item
+				)
+					return;
 				if (item.getAttribute("aria-disabled") === "true") {
 					return;
 				}
@@ -556,6 +561,11 @@ export class TpContextmenu extends TpBase {
 			};
 
 			item.onkeydown = (event) => {
+				if (
+					!(event.target instanceof Element) ||
+					event.target.closest('li[role="menuitem"]') !== item
+				)
+					return;
 				if (item.getAttribute("aria-disabled") === "true") {
 					if (event.key === "Enter" || event.key === " ") {
 						event.preventDefault();

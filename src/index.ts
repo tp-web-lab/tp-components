@@ -555,6 +555,13 @@ export {
 	type TpSlopeProfiles,
 	TpSlopeSimulator,
 } from "./components/slope-simulator/slope-simulator.js";
+export { TpTableEditor } from "./components/table-editor/table-editor.js";
+export type {
+	TableAlignment,
+	TableCellType,
+	TableData,
+	TableFormat,
+} from "./components/table-editor/table-markup.js";
 export {
 	type TangramPlacement,
 	TpTangram,

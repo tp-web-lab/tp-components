@@ -163,11 +163,21 @@ export class TpMarkdownViewer extends TpMarkupViewer<MdViewerMode> {
 			container.classList.add("tp-markdown-output");
 			const iframe = document.createElement("iframe");
 			iframe.title = "Markdown preview";
-			const needsRuntimeRenderer =
-				/^---[\s\S]*?^extensions:\s*[\s\S]*?^---/m.test(source);
+			let needsRuntimeRenderer =
+				/^---[\s\S]*?^extensions:\s*[\s\S]*?^---/m.test(source) ||
+				// Reference tooltips need their styles and runtime in the iframe.
+				/\[[@%^][^\]\n]+\]/.test(source);
+			const html = needsRuntimeRenderer
+				? ""
+				: await renderMarkdownToHtml(source);
+			// Highlighting, native widgets and layout styles initialize in the preview frame.
+			needsRuntimeRenderer ||=
+				/\bdata-mathjax-(?:tex|asciimath)=|<pre\b[^>]*>\s*<code\b|\bdata-md-renderer=|\bdata-tabs\b|class="[^"]*\b(?:tp-md-mdviewer|tp-htmlviewer|tp-md-example|stack|cluster|switcher|sidebar|cover|center|grid|reel|card)\b/.test(
+					html,
+				);
 			const renderedSource = needsRuntimeRenderer
 				? `<tp-markdown><script type="tp/markdown">${source.replace(/<\/script/gi, "<\\/script")}</script></tp-markdown>`
-				: await renderMarkdownToHtml(source);
+				: html;
 			iframe.srcdoc = buildIframeDocument(renderedSource, document.baseURI);
 			container.replaceChildren(iframe);
 			return;
