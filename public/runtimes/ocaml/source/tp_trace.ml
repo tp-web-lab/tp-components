@@ -64,6 +64,7 @@ let snapshot event first last line env returned error =
  let names env = arr (List.map (fun (n,_,_) -> str n) env) in
  let global_values = List.map (fun (n,t,get) -> n,t,get ()) !globals in
  let global_obj = values global_values in
+ let expression = match returned with Some (shape,value) when event="result" -> Some (obj ["value",encode 0 shape value]) | _ -> None in
  let frames = List.rev_map (fun (id,name,locals) ->
   let locals = match !stack with (top,_,_)::_ when top=id -> env | _ -> locals in
   let locals = match returned,!stack with Some (t,v),(top,_,_)::_ when top=id -> locals@["__return__",t,v] | _ -> locals in
@@ -73,6 +74,7 @@ let snapshot event first last line env returned error =
   let id = identity fn in
   if Hashtbl.mem seen id && env<>[] then Some (obj ["frame_id",str ("closure-"^string_of_int id);"func_name",str "Captured environment";"encoded_locals",values env;"ordered_varnames",names env]) else None) !captures in
  let fields = ["event",str event;"line",number line;"source_range",obj ["start",number first;"end",number last];"globals",global_obj;"ordered_globals",names global_values;"stack_to_render",arr frames;"heap",obj !heap] in
+ let fields = match expression with None -> fields | Some value -> ("expression",value)::fields in
  let fields = match error with None -> fields | Some e -> ("exception_msg",str e)::fields in
  ignore (call_js "tpOcamlSnapshot" [|obj fields|])
 let observe first last line shape env thunk =

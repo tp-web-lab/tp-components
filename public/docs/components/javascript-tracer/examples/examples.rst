@@ -84,3 +84,18 @@
 
          .. tp-javascript-tracer::
             :trace: /docs/components/javascript-tracer/examples/nested-arrays.trace.json
+
+      .. example:: Nested calls and a separate query
+
+         Record execution, then choose Start at query to skip the warmup calculation and reach fact(4), whose result is 24. Use Next to enter a nested call: Step over completes that call without visiting its body, while Step out returns from the active function to its caller. Use Previous to revisit the skipped steps; First also restores access to initialization. All steps remain available after saving and reloading the trace.
+
+         .. tp-javascript-tracer::
+            :src: /docs/components/javascript-tracer/examples/nested-calls.js
+            :query: console.log(fact(4));
+
+      .. example:: Constant expressions and intermediate values
+
+         Record execution and use Next to follow the highlighted operations and their Expression value until the result is 57. Previous revisits each calculation; Save trace and Load trace preserve the intermediate values without running the program again.
+
+         .. tp-javascript-tracer::
+            :src: /docs/components/javascript-tracer/examples/constant-expressions.js

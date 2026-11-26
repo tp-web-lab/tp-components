@@ -107,10 +107,10 @@ footer
 Components <tp-divider orientation="vertical"></tp-divider> 246
 ::::
 :::: tp-badge {variant=brand}
-Examples <tp-divider orientation="vertical"></tp-divider> 998
+Examples <tp-divider orientation="vertical"></tp-divider> 1008
 ::::
 :::: tp-badge {variant=brand}
-Tests <tp-divider orientation="vertical"></tp-divider> 5038
+Tests <tp-divider orientation="vertical"></tp-divider> 5049
 ::::
 
 Update 2026/11/26

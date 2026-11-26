@@ -89,7 +89,7 @@ Dependencies may end with an optional See also subsection for directly related t
 
 # Documentation cover inventory
 
-`pnpm dev` and `pnpm build` automatically run `pnpm docs:sync-cover` after API metadata generation and before Vite starts or builds. Keep this step in both scripts so the served and built documentation contain current badges and the update date.
+`pnpm build` automatically runs `pnpm docs:sync-cover` after API metadata generation and before Vite builds. Keep this step in the build script so the built documentation contains current badges and the update date. Do not run the inventory automatically during `pnpm dev`: collecting the full test inventory substantially delays development startup. Use the existing badges during development and run the dedicated command explicitly when needed.
 
 Whenever a component is created, complete its API metadata, documentation, examples and tests, then run `pnpm docs:sync-cover` before finishing the work. Also run this command when adding or removing documented examples or tests, or removing a component. It updates the Components, Examples and Tests badges at the bottom of `public/docs/cover.md` and sets its update date to the current Europe/Paris date in `yyyy/mm/dd` format.
 
@@ -102,3 +102,7 @@ Every user-facing button or menu action must have a documented, named public met
 # Components sidebar order
 
 Keep the entire Components subtree of `public/docs/sidebar.md` alphabetical at every depth. `pnpm docs:sync-sidebar` sorts sibling entries without changing their links or parents; `pnpm docs:check-sidebar` checks without writing. Both `pnpm dev` and `pnpm build` run the sorter automatically, and Vite also sorts sidebar edits while the development server is running. Keep the automatic hooks when changing documentation scripts. Add new entries under their intended parent; do not move entries to another category to achieve alphabetical order.
+
+# TypeDoc development cache
+
+`pnpm dev` uses `docs:api:dev`: regenerate TypeDoc only when source files, TypeDoc scripts/assets, configuration, dependency versions or generated API output have changed. The cache lives under `node_modules/.cache/tp-components` and is written only after successful generation. Keep documentation-link synchronization and example checks active even on a cache hit. `pnpm docs:api` and `pnpm build` force generation; do not remove this explicit rebuild path.

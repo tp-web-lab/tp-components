@@ -1,0 +1,68 @@
+{
+  "browser": "safari",
+  "checkedAt": "2026-11-26T12:32:30.332Z",
+  "checks": [
+    {
+      "language": "python",
+      "passed": true,
+      "recursiveCall": 9,
+      "buttons": true,
+      "steps": 73,
+      "replay": true,
+      "lightDark": true,
+      "queryIndex": 27,
+      "unchanged": true,
+      "milliseconds": 1855
+    },
+    {
+      "language": "javascript",
+      "passed": true,
+      "recursiveCall": 6,
+      "buttons": true,
+      "steps": 64,
+      "replay": true,
+      "lightDark": true,
+      "queryIndex": 23,
+      "unchanged": true,
+      "milliseconds": 286
+    },
+    {
+      "language": "typescript",
+      "passed": true,
+      "recursiveCall": 6,
+      "buttons": true,
+      "steps": 64,
+      "replay": true,
+      "lightDark": true,
+      "queryIndex": 23,
+      "unchanged": true,
+      "milliseconds": 336
+    },
+    {
+      "language": "scheme",
+      "passed": true,
+      "tailContinuation": true,
+      "recursiveCall": 13,
+      "steps": 97,
+      "buttons": true,
+      "replay": true,
+      "lightDark": true,
+      "queryIndex": 38,
+      "unchanged": true,
+      "milliseconds": 739
+    },
+    {
+      "language": "ocaml",
+      "passed": true,
+      "recursiveCall": 10,
+      "buttons": true,
+      "steps": 93,
+      "replay": true,
+      "lightDark": true,
+      "queryIndex": 34,
+      "unchanged": true,
+      "milliseconds": 567
+    }
+  ],
+  "version": "26.6.2"
+}

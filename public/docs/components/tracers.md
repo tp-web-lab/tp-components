@@ -2,6 +2,8 @@
 
 Tracers record a program's execution and let you inspect its source, output, variables, call stack and object references step by step. Save a recording as JSON to replay it without executing the program again.
 
+JavaScript, TypeScript, Python, Scheme and OCaml share **Step over**, **Step out** and **Start at query** commands. These navigate existing recordings without removing skipped steps. Provide a separate `query`, or open the trace from an interpreter, to retain the boundary between initialization and the query. [Browser verification](../appendices/tracer-semantic-navigation.md).
+
 ::: tp-center {intrinsic}
 :tp-icon:{name="javascript-tracer" library="components" size="4em"}
 
@@ -39,3 +41,5 @@ The Prolog tracer uses SWI-Prolog debugger events to show explored goals, clause
 
 [tp-prolog-tracer](prolog-tracer/index.md)
 :::
+
+[Expression values: cross-browser verification](../appendices/tracer-expression-values.md) covers intermediate results, source highlights, side effects and saved-trace replay.

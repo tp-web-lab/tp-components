@@ -474,9 +474,15 @@ The Component viewer tests check that Buttons contains declared icon/text comman
 
 Latest button-doc verification: 212 interaction pages audited, 204 statically declared icon/state occurrences covered, 35 Component viewer/help tests and 3 documentation tests passing. The browser fixture `/scripts/fixtures/component-buttons-audit.html` checks prose-editor, spreadsheet-editor, calculator, theme, word-cloud and latex-multi-pages, including language icon libraries, secondary tools, text-only keys and the absence of invented commands.
 
+## TypeDoc during development
+
+`pnpm dev` reuses the generated API documentation when source files and generation inputs are unchanged. The first run generates TypeDoc; subsequent runs compare file contents, including source files, configuration, TypeDoc plugins and assets, dependency versions and the generated API output. Missing or modified output triggers regeneration. Failed generation does not populate the local cache.
+
+Documentation links and introductory-example checks still run at every startup. Use `pnpm docs:api` to force regeneration; `pnpm build` also regenerates the API. The disposable cache is stored in `node_modules/.cache/tp-components`.
+
 ## Documentation cover inventory
 
-`pnpm dev` and `pnpm build` automatically refresh the cover badges and update date before starting the development server or building the site. This step collects the test inventory without executing test cases.
+`pnpm build` automatically refreshes the cover badges and update date before building the site. This step collects the test inventory without executing test cases. `pnpm dev` keeps the existing badges to avoid delaying startup with the full test inventory; refresh them explicitly when needed.
 
 Run `pnpm docs:sync-cover` after adding or removing a component, documented example or test. It updates the badges at the bottom of `cover.md` and the date in `yyyy/mm/dd` format using the Europe/Paris time zone.
 

@@ -10,7 +10,7 @@ Upstream source: https://github.com/ocsigen/js_of_ocaml/tree/6.5.0 and https://g
 
 `tracer.js` is a separate lazy-loaded build for `tp-ocaml-tracer`. It adds the compiler-based observer in `scripts/ocaml-runtime/tp_trace.ml`; the ordinary interpreter keeps using `toplevel.js`. Build with `scripts/ocaml-runtime/build-tracer.sh` in the same pinned OCaml/Js_of_ocaml environment. The matching source and build recipe are distributed in `source/`.
 
-The observer type-checks the original phrases, preserves their locations and instruments expressions, function calls and lexical bindings. Snapshots retain references and shared object identities. The Worker translates UTF-8 source offsets to JavaScript UTF-16 offsets and applies the shared visible-step grouping. Recording has a 1,000-event limit; replay never loads the compiler. Instrumentation is intended for teaching, not profiling, and does not preserve tail-call optimization. Unsupported language features are listed in the component documentation.
+The observer type-checks the original phrases, preserves their locations and instruments expressions, function calls and lexical bindings. Snapshots retain references and shared object identities, and include the typed value of each completed observed expression. The visualizer displays this value beneath Source, including during saved-trace replay. The Worker translates UTF-8 source offsets to JavaScript UTF-16 offsets and applies the shared visible-step grouping. Recording has a 1,000-event limit; replay never loads the compiler. Instrumentation is intended for teaching, not profiling, and does not preserve tail-call optimization. Unsupported language features are listed in the component documentation.
 
 ## Test runner
 

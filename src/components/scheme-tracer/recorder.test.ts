@@ -153,7 +153,7 @@ it("retains the failing call and line for errors", async () => {
 it("bounds infinite recursion and leaves a replayable trace", async () => {
 	const { last, result } = await record("(define (loop) (loop)) (loop)");
 	expect(last.event).toBe("instruction_limit_reached");
-	expect(result.trace.length).toBeLessThanOrEqual(1001);
+	expect(result.trace.length).toBe(12001);
 });
 it("handles an empty source and syntax errors", async () => {
 	expect((await record("; no program")).last.event).toBe("result");
@@ -202,6 +202,8 @@ it("separates setup results from query values without hiding explicit output", a
 		{ query: "(+ x 5)" },
 	);
 	expect(result.trace.at(-1)?.stdout).toBe("setup:3\n9\n");
+	expect(result.setup_stdout).toBe("setup:3\n");
+	expect(result.query_stdout).toBe("9\n");
 	expect(result.code).toBe(
 		'(display "setup:") (write 3) (newline) (+ 1 2) (define x 4)\n\n(+ x 5)',
 	);
@@ -248,7 +250,7 @@ it("highlights nested expressions on the same line and preserves their result", 
 				step.source_range &&
 				result.code.slice(step.source_range.start, step.source_range.end),
 		),
-	).toEqual([code, "(* 3 5)", "(- 10 6)", code]);
+	).toEqual([code, "(* 3 5)", "(* 3 5)", "(- 10 6)", "(- 10 6)", code, code]);
 	expect(result.trace.at(-1)?.stdout).toBe("19\n");
 });
 it("maps query columns and multiline expressions without confusing comments and strings", async () => {
@@ -289,4 +291,24 @@ it("keeps an error visible on the failing expression", async () => {
 		last?.source_range &&
 			result.code.slice(last.source_range.start, last.source_range.end),
 	).toBe("(car 42)");
+});
+
+it("completes cosine and sine/cosine fixed points within the recording budget", async () => {
+	const source = `(define (fixed-point f guess)
+  (let ((next (f guess)))
+    (if (< (abs (- guess next)) 0.00001) next (fixed-point f next))))`;
+	for (const [query, expected] of [
+		["(fixed-point cos 1.0)", 0.7390822985224023],
+		["(fixed-point (lambda (x) (+ (sin x) (cos x))) 1.0)", 1.2587315962971173],
+	] as const) {
+		const data = await recordScheme(source, { query });
+		expect(data.trace.some((step) => /exception|limit/.test(step.event))).toBe(
+			false,
+		);
+		expect(Number(data.trace.at(-1)?.stdout)).toBeCloseTo(expected, 14);
+		expect(data.trace.length).toBeLessThan(1001);
+		expect(
+			data.trace.some((step) => step.expression && step.source_range),
+		).toBe(true);
+	}
 });

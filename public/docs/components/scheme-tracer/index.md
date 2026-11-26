@@ -53,7 +53,7 @@ Non-void top-level expression results appear in Output, together with explicit `
 
 Consecutive steps with the same highlighted expression, variables, objects, call stack and output are grouped. An internal event-name change alone does not require another click. Calls, returns, mutations, output and errors remain separate whenever they change the displayed state. The compact recording is saved as JSON; grouped snapshots retain a `grouped_steps` count. Replaying an older recording also groups identical consecutive states, but retains whole-line highlighting if exact source positions were not recorded. Internally generated expressions without an original source position also fall back to line highlighting.
 
-Grouping changes presentation, not Scheme execution or safety limits: the recorder still counts up to 1,000 raw events before grouping and 100,000 internal operations. It does not skip repeated loop iterations when their state or evaluated expression changes.
+The budget accommodates numerical fixed-point iterations and the extra intermediate-value snapshots. Grouping changes presentation, not Scheme execution or safety limits: the recorder still counts up to 12,000 raw events before grouping and 20,000,000 internal operations. It does not skip repeated loop iterations when their state or evaluated expression changes.
 
 ### Program and query
 
@@ -61,7 +61,7 @@ The optional `query` attribute separates program loading from query evaluation. 
 
 For example, `<tp-scheme-tracer value="(+ 1 2) (define x 40)" query="(+ x 2)"></tp-scheme-tracer>` displays `42`, without the setup result `3`. A trace opened from `tp-scheme` automatically uses the current program and query separately. Saved recordings preserve this distinction for replay and re-recording.
 
-Reader primitives such as `read` may be stored in a primitive table or passed as values. Calling them remains unsupported, including calls through aliases, `apply` or callbacks. User-defined procedures named `read` are ordinary Scheme procedures. The recorder distinguishes the event-count limit from its 100,000 internal-operation limit; exceeding either yields an incomplete trace.
+Reader primitives such as `read` may be stored in a primitive table or passed as values. Calling them remains unsupported, including calls through aliases, `apply` or callbacks. User-defined procedures named `read` are ordinary Scheme procedures. The recorder distinguishes the event-count limit from its 20,000,000 internal-operation limit; exceeding either yields an incomplete trace.
 
 ### Procedures and environments
 
@@ -75,7 +75,9 @@ Hover a reference to highlight its arrow. Pair fields use horizontal arrow depar
 
 ### Saving and reloading
 
-Save trace opens Save as and stores every snapshot with the original Scheme source. Load trace and the `trace` attribute replay that JSON without loading the evaluator. Unexecuted editor changes do not replace the recorded source. The format contains `version: 1`, `language: "scheme"`, `code` and `trace`. Invalid files or recordings from another language leave the current recording available.
+Save trace opens Save as and stores every snapshot with the original Scheme source. Load trace and the `trace` attribute replay that JSON without loading the evaluator. Unexecuted editor changes do not replace the recorded source. Short recordings use version 1 with `language: "scheme"`, `code` and `trace`. Recordings exceeding 1,000 displayed steps use compact version 2 (`encoding: "tp-trace-pool-v1"`): repeated JSON values are stored once and referenced by index. This is lossless storage, not step filtering. Both versions are accepted on replay. `getCode()` and Save trace use the same format. The JSON panel still shows the complete current snapshot.
+
+When a separate query is supplied, `setup_stdout` and `query_stdout` preserve its output boundary. Output still displays the full history; the distinction allows a book or test harness to compare the query result without mistaking initialization messages for extra results. Invalid files or recordings from another language leave the current recording available.
 
 [Download the example recording](examples/recursion.trace.json).
 
@@ -91,7 +93,27 @@ The initial scope covers synchronous SICP-style programs: definitions, lambdas, 
 
 User-defined macros, continuations, multiple values, dynamic evaluation, external file loading, interactive input, DOM/JavaScript interoperability and asynchronous operations are outside this initial scope. Recognized unsupported operations produce an explicit error. This is not a full Scheme debugger or a security sandbox.
 
-Limits are 20,000 source characters, 1,000 snapshots plus a limit notification, 300 objects per snapshot, 200 vector elements and 100,000 output characters. Collections beyond these limits are truncated in the diagram. Execution stops after 10 seconds; source or trace loading after 30 seconds. Imported JSON is limited to 10 MB.
+Limits are 20,000 source characters, 12,000 snapshots plus a limit notification, 300 objects per snapshot, 200 vector elements and 100,000 output characters. Collections beyond these limits are truncated in the diagram. Execution stops after 30 seconds; source or trace loading after 30 seconds. Imported JSON is limited to 10 MB.
+
+### Semantic navigation
+
+**Step over** skips the internal steps of an invocation. On a Call step, it advances past that call; before a call, it stays in the current invocation until the called function returns. **Step out** advances until the current invocation returns to its caller. Recursive calls are identified separately, even when their names are identical. Retained closure environments are not active calls. A jump stops at an exception or recording-limit notification rather than silently hiding it.
+
+**Start at query** jumps to the first step of the explicitly supplied `query`. It does not rerun the program. The source initialization remains available through First and Previous. Interpreters provide the current source and query automatically when opening their trace drawer. A standalone tracer can also use `query` with its `src`, `value` or embedded script.
+
+These commands only change the displayed position: they do not delete or filter snapshots, returned values or output. Previous can revisit a skipped step; Save trace retains the same complete recording. Ordinary Next retains its existing grouping of consecutive states without visible changes. Calls and returns remain distinct navigation boundaries.
+
+Saved recordings with a query contain `source`, `query` and their combined `code`. Older recordings without this metadata keep normal navigation; Start at query is disabled because the boundary cannot be reliably guessed. Step out is disabled outside an identifiable call frame. Scheme tail calls are followed through their continuation; they do not create an artificial return to the caller.
+
+The corresponding public methods are `stepOver()`, `stepOut()` and `startQuery()`. They perform the same actions as the buttons and leave the recording unchanged.
+
+### Expression values
+
+After an observed expression finishes, Source highlights its original text and shows its **Expression value** below. Temporary objects remain inspectable through the same reference links as variables. Values are recorded once from the real evaluation: operands, calls and side effects are not repeated, and short-circuit branches stay unevaluated.
+
+Previous revisits intermediate values. Save trace and Load trace retain them without running the program; older recordings without expression values remain readable but cannot reconstruct them. Additional snapshots count toward the 12,000-event limit.
+
+The recorder observes completed source expressions through LIPS continuations, including evaluated branches of special forms. It does not rewrite the program or evaluate quoted data. The supported synchronous Scheme subset is unchanged.
 
 ### Importing
 
@@ -156,6 +178,12 @@ Error and call stack
 
 Replay a saved trace
 : Replay factorial from JSON without loading LIPS or executing Scheme. Save trace and Load trace save and reopen the complete recording.
+
+Nested calls and a separate query
+: Record execution, then choose Start at query to skip the warmup calculation and reach fact(4), whose result is 24. Use Next to enter a nested call: Step over completes that call without visiting its body, while Step out returns from the active function to its caller. Use Previous to revisit the skipped steps; First also restores access to initialization. All steps remain available after saving and reloading the trace.
+
+Constant expressions and intermediate values
+: Record execution and use Next to follow the highlighted operations and their Expression value until the result is 57. Previous revisits each calculation; Save trace and Load trace preserve the intermediate values without running the program again.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs

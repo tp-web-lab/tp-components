@@ -184,6 +184,19 @@ export class TpSchemeTracer extends TpBase {
 		this.runtime?.nextStep();
 	}
 
+	/** Advances past an invocation without deleting its recorded steps. */
+	stepOver(): void {
+		this.runtime?.stepOver();
+	}
+	/** Advances until the current invocation returns to its caller. */
+	stepOut(): void {
+		this.runtime?.stepOut();
+	}
+	/** Displays the first recorded query step, retaining initialization steps. */
+	startQuery(): void {
+		this.runtime?.startQuery();
+	}
+
 	/** Displays the final recorded step. */
 	lastStep(): void {
 		this.runtime?.lastStep();

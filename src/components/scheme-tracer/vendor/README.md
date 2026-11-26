@@ -7,7 +7,7 @@ LIPS **1.0.0-beta.23.1**, the version used by `tp-scheme`.
 - Project: https://github.com/jcubic/lips
 - License: MIT; see `LICENSE` and the retained source license headers.
 
-The optional observer is called at evaluator-state creation/continuation, before expression evaluation, after a lambda scope is bound, and when entering a Scheme procedure. The procedure-entry hook also supplies its original call expression so calls and returns can highlight the call site. The adapter reads the existing environments and continuation identities; it does not rewrite Scheme expressions, special forms or tail calls. Throwing from the observer aborts an over-limit recording. Each browser recording has its own Worker and engine instance.
+The optional observer is called at evaluator-state creation/continuation, before expression evaluation, after a lambda scope is bound, and when entering a Scheme procedure. The procedure-entry hook also supplies its original call expression so calls and returns can highlight the call site. The adapter also pairs source evaluation with the matching continuation return to record the already computed expression value. It reads the existing environments and continuation identities; it does not rewrite Scheme expressions, special forms or tail calls. Throwing from the observer aborts an over-limit recording. Each browser recording has its own Worker and engine instance.
 
 `std.xcb` is unchanged. `lips.js` differs from the official ES module only by these hook insertions and the observer setter. The generated observer is disabled by default and cleared after every recording. Standard-library implementation frames are omitted from source stepping.
 

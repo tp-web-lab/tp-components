@@ -736,6 +736,9 @@ class PGLogger(bdb.Bdb):
             if not self.done and frame.f_code.co_filename == '<string>':
                 import dis
                 opname = dis.opname[frame.f_code.co_code[frame.f_lasti]]
+                position = list(frame.f_code.co_positions())[frame.f_lasti // 2]
+                if opname.startswith(('BINARY_', 'UNARY_', 'CALL', 'COMPARE_')) and position in getattr(self, 'expression_positions', set()):
+                    return self.trace_dispatch
                 if opname.startswith(('BINARY_', 'UNARY_', 'CALL', 'COMPARE_', 'STORE_', 'RETURN_')):
                     self.interaction(frame, None, 'step_line')
             return self.trace_dispatch
@@ -1258,6 +1261,11 @@ class PGLogger(bdb.Bdb):
                 except:
                     pass # don't encode the value if there's been an error
 
+        expression = None
+        if getattr(self, 'pending_expression', None) is not None:
+            position, value = self.pending_expression
+            expression = dict(value=self.encoder.encode(value, self.get_parent_of_function))
+
         if self.show_only_outputs:
           trace_entry = dict(line=lineno,
                              event=event_type,
@@ -1292,6 +1300,12 @@ class PGLogger(bdb.Bdb):
               a, b = utf16_offset(first, start), utf16_offset(last, end)
               if a < b:
                 trace_entry['source_range'] = dict(start=a, end=b)
+
+        if expression is not None:
+            first, last, line = self.pending_expression[0]
+            trace_entry['expression'] = expression
+            trace_entry['source_range'] = dict(start=first, end=last)
+            trace_entry['line'] = line
 
         # optional column numbers for greater precision
         # (only relevant in Py2crazy, a hacked CPython that supports column numbers)
@@ -1361,6 +1375,66 @@ class PGLogger(bdb.Bdb):
 
         self.forget()
 
+
+    def instrument_expressions(self, source, user_globals):
+        """Observe evaluated operations, without re-evaluating operands or truth tests."""
+        import ast
+        tree = ast.parse(source, filename='<string>')
+        names = {node.id for node in ast.walk(tree) if isinstance(node, ast.Name)}
+        index = 0
+        while '__tp_expression_' + str(index) + '__' in names:
+            index += 1
+        name = '__tp_expression_' + str(index) + '__'
+        IGNORE_VARS.add(name)
+        self.expression_helper_name = name
+        lines = source.splitlines(keepends=True)
+        self.expression_positions = set()
+        def offset(row, column):
+            text = ''.join(lines[:row - 1]) + lines[row - 1].encode('utf-8')[:column].decode('utf-8')
+            return len(text.encode('utf-16-le')) // 2
+        class Expressions(ast.NodeTransformer):
+            # Type annotations and structural patterns are not evaluated expressions.
+            def visit_arg(visitor, node):
+                return node
+            def visit_AnnAssign(visitor, node):
+                node.target = visitor.visit(node.target)
+                if node.value is not None:
+                    node.value = visitor.visit(node.value)
+                return node
+            def visit_FunctionDef(visitor, node):
+                annotation = node.returns
+                node.returns = None
+                node = visitor.generic_visit(node)
+                node.returns = annotation
+                return node
+            visit_AsyncFunctionDef = visit_FunctionDef
+            def visit_MatchValue(visitor, node):
+                return node
+            def visit_TypeAlias(visitor, node):
+                return node
+            def generic_visit(visitor, node):
+                node = super().generic_visit(node)
+                if isinstance(node, (ast.BinOp, ast.UnaryOp, ast.BoolOp, ast.Compare, ast.IfExp)):
+                    self.expression_positions.add((node.lineno, node.end_lineno, node.col_offset, node.end_col_offset))
+                    position = (offset(node.lineno, node.col_offset), offset(node.end_lineno, node.end_col_offset), node.lineno)
+                    wrapped = ast.Call(func=ast.Name(id=name, ctx=ast.Load()), args=[ast.Constant(value=position), node], keywords=[])
+                    return ast.copy_location(wrapped, node)
+                return node
+        code = compile(ast.fix_missing_locations(Expressions().visit(tree)), '<string>', 'exec')
+        def record_expression(position, value):
+            caller = sys._getframe(1)
+            previous = sys.gettrace()
+            # Encoding snapshots must not generate extra trace events itself.
+            sys.settrace(None)
+            self.pending_expression = (position, value)
+            try:
+                self.interaction(caller, None, 'expression')
+            finally:
+                self.pending_expression = None
+                sys.settrace(previous)
+            return value
+        user_globals[name] = record_expression
+        return code
 
     def _runscript(self, script_str):
         self.executed_script = script_str
@@ -1588,9 +1662,10 @@ class PGLogger(bdb.Bdb):
           previous_opcodes = recorder_frame.f_trace_opcodes
           recorder_frame.f_trace_opcodes = True
           try:
-            self.run(script_str, user_globals, user_globals)
+            self.run(self.instrument_expressions(script_str, user_globals), user_globals, user_globals)
           finally:
             recorder_frame.f_trace_opcodes = previous_opcodes
+            IGNORE_VARS.discard(getattr(self, 'expression_helper_name', None))
         # sys.exit ...
         except SystemExit:
           #sys.exit(0)

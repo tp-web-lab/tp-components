@@ -1,7 +1,9 @@
+import {unpackTrace} from "./trace-codec.js";
 /** Validate complete recordings before replacing the displayed trace. */
 export function parseTrace(source) {
 	if (source.length > 10000000) throw new Error("File limit: 10 MB.");
-	const data = JSON.parse(source);
+	const data = unpackTrace(JSON.parse(source));
+ const maxSteps=data?.language==='scheme'?12001:1001;
 	const object = (value) =>
 		value !== null && typeof value === "object" && !Array.isArray(value);
 	const names = (value) =>
@@ -16,16 +18,17 @@ export function parseTrace(source) {
 		(data.language !== undefined &&
 			!["python", "javascript", "typescript", "scheme", "ocaml"].includes(data.language)) ||
 		typeof data.code !== "string" ||
+        !optionalText(data.setup_stdout) || !optionalText(data.query_stdout) ||
 		data.code.length > 20000 ||
         ((data.query !== undefined || data.source !== undefined) &&
-         (data.language !== "scheme" || typeof data.query !== "string" || typeof data.source !== "string" ||
+         (typeof data.query !== "string" || typeof data.source !== "string" ||
           data.code !== data.source.trimEnd() + "\n\n" + data.query)) ||
 		!Array.isArray(data.trace) ||
 		!data.trace.length ||
-		data.trace.length > 1001
+		data.trace.length > maxSteps
 	)
 		throw new Error(
-			"Expected a complete trace: version 1 (optional), code and 1–1,001 snapshots.",
+			"Expected a complete trace: version 1 or compact version 2, code and bounded snapshots.",
 		);
 	for (const [index, step] of data.trace.entries()) {
 		if (
@@ -37,10 +40,11 @@ export function parseTrace(source) {
 			!optionalText(step.stdout) ||
 			!optionalText(step.func_name) ||
 			!optionalText(step.exception_msg) ||
+            (step.expression !== undefined && (!object(step.expression) || !Object.hasOwn(step.expression, "value") || step.source_range === undefined)) ||
             (step.source_range !== undefined && (!object(step.source_range) ||
              !Number.isInteger(step.source_range.start) || !Number.isInteger(step.source_range.end) ||
              step.source_range.start < 0 || step.source_range.end <= step.source_range.start || step.source_range.end > data.code.length)) ||
-            (step.grouped_steps !== undefined && (!Number.isInteger(step.grouped_steps) || step.grouped_steps < 1 || step.grouped_steps > 1001)) ||
+            (step.grouped_steps !== undefined && (!Number.isInteger(step.grouped_steps) || step.grouped_steps < 1 || step.grouped_steps > maxSteps)) ||
 			(step.line != null && (!Number.isInteger(step.line) || step.line < 0))
 		)
 			throw new Error(`Invalid snapshot ${index + 1}.`);

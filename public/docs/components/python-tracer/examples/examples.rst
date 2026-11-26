@@ -102,3 +102,18 @@
 
          .. tp-python-tracer::
             :src: /docs/components/python-tracer/examples/nested-lists.py
+
+      .. example:: Nested calls and a separate query
+
+         Record execution, then choose Start at query to skip the warmup calculation and reach fact(4), whose result is 24. Use Next to enter a nested call: Step over completes that call without visiting its body, while Step out returns from the active function to its caller. Use Previous to revisit the skipped steps; First also restores access to initialization. All steps remain available after saving and reloading the trace.
+
+         .. tp-python-tracer::
+            :src: /docs/components/python-tracer/examples/nested-calls.py
+            :query: print(fact(4))
+
+      .. example:: Constant expressions and intermediate values
+
+         Record execution and use Next to follow the highlighted operations and their Expression value: 8, 8, 16, 48, 3, 9, then 57. Previous revisits each calculation; Save trace and Load trace preserve the intermediate values without running Python again.
+
+         .. tp-python-tracer::
+            :src: /docs/components/python-tracer/examples/constant-expressions.py

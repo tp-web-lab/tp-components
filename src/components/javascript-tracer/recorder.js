@@ -40,7 +40,7 @@ export function recordJavaScript(code, { maxSteps = 1000, language = "javascript
 		}
 	};
 	let sourceRange;
-	function snapshot(event, line, env, exception) {
+	function snapshot(event, line, env, exception, expression) {
 		if (stopped) throw limit;
 		if (trace.length >= maxSteps) {
 			stopped = true;
@@ -178,6 +178,7 @@ export function recordJavaScript(code, { maxSteps = 1000, language = "javascript
 			for (const [name, value] of localValues(current))
 				globalValues.set(name, value);
 		const globals = encodeValues(globalValues);
+        const expressionValue = expression ? { value: encode(expression.value) } : undefined;
 		const frames = stack.map((f) => {
 			const values = locals(f.current);
 			// Derived constructors acquire this only after super() has completed.
@@ -223,6 +224,7 @@ export function recordJavaScript(code, { maxSteps = 1000, language = "javascript
 			heap,
 			stdout,
 		};
+		if (expressionValue) step.expression = expressionValue;
 		if (exception) step.exception_msg = exception;
 		if (sourceRange) step.source_range = { ...sourceRange };
 		trace.push(step);
@@ -241,7 +243,7 @@ export function recordJavaScript(code, { maxSteps = 1000, language = "javascript
         at(start, end) { sourceRange = { start, end }; },
         value(value, line, env, start, end) {
             sourceRange = { start, end };
-            snapshot("step_line", line, env);
+            snapshot("expression", line, env, undefined, { value });
             return value;
         },
 		step(line, env, start, end) {

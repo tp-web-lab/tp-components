@@ -20,13 +20,16 @@ export const traceTemplate = (
 <tp-icon-button id="first" name="chevron-left-first" label="First step" disabled></tp-icon-button>
 <tp-icon-button id="previous" name="chevron-left" label="Previous step" disabled></tp-icon-button>
 <tp-icon-button id="next" name="chevron-right" label="Next step" disabled></tp-icon-button>
+<tp-icon-button id="over" name="arrow-right" label="Step over" disabled></tp-icon-button>
+<tp-icon-button id="out" name="arrow-up" label="Step out" disabled></tp-icon-button>
+<tp-icon-button id="query" name="play" label="Start at query" disabled></tp-icon-button>
 <tp-icon-button id="last" name="chevron-right-last" label="Last step" disabled></tp-icon-button>
 </div>
 <output id="status" aria-live="polite">Load ${title} source, then record execution.</output>
 </div>
 <p id="event" aria-live="polite"></p>
 <div class="panels">
-<section class="source-output"><h2>Source</h2><p>The highlight follows the evaluated expression. Next moves to the next visible change.</p><pre id="recorded"></pre><h2>Output</h2><pre id="stdout"></pre></section>
+<section class="source-output"><h2>Source</h2><p>The highlight follows the evaluated expression. Next moves to the next visible change.</p><pre id="recorded"></pre><div id="expression" hidden></div><h2>Output</h2><pre id="stdout"></pre></section>
 <div class="memory-scroll"><div id="memory"><div class="trace-column" id="frames"><h2>Variables</h2><div id="variables"></div><h2 class="call-stack-heading">Call stack</h2><div id="call-stack"></div></div>
 <div class="trace-column"><h2>Objects</h2><p>Arrows point to objects. Shared references converge on the same object. Hover or focus a dot to highlight its connection.</p><div id="heap"></div></div></div></div>
 </div>

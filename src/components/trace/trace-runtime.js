@@ -1,3 +1,5 @@
+import {unpackTrace,serializeTrace} from "./trace-codec.js";
+import {currentFrame, stepOverIndex, stepOutIndex, queryStepIndex} from "./semantic-navigation.js";
 import {compactTraceSteps} from "./visible-steps.js";
 import { chooseSaveTarget, saveBlob } from "../../utilities/save-file.js";
 import { createConnectors } from "./connectors.js";
@@ -24,6 +26,7 @@ export function createTraceRuntime(host, readSource, options) {
 	host.append(root);
 	const $ = (id) => root.querySelector(`[data-role="${id}"]`);
 	let loadedFilename = options.filename;
+ let outputMetadata={};
 	function updateFilename(name) {
 		if (name) loadedFilename = name;
 		const filename = host.getAttribute("filename") || loadedFilename;
@@ -161,6 +164,12 @@ export function createTraceRuntime(host, readSource, options) {
             if (rect.top < panel.top || rect.bottom > panel.bottom)
                 sourcePanel.scrollTop += rect.top - panel.top - 12;
         }
+        $("expression").hidden = !step.expression;
+        $("expression").replaceChildren();
+        if (step.expression && range) {
+            $("expression").append(text("strong", "Expression value"));
+            values($("expression"), [[recordedCode.slice(range.start, range.end), step.expression.value]]);
+        }
 		$("stdout").textContent = step.stdout ?? "";
 		$("variables").replaceChildren(
 			frame("Globals", step.globals ?? {}, step.ordered_globals),
@@ -234,8 +243,11 @@ export function createTraceRuntime(host, readSource, options) {
 		$("json").textContent = JSON.stringify(step, null, 2);
 		for (const id of ["first", "previous"])
 			$(id).toggleAttribute("disabled", position === 0);
-		for (const id of ["next", "last"])
+		for (const id of ["next", "last", "over"])
 			$(id).toggleAttribute("disabled", position === snapshots.length - 1);
+        $("out").toggleAttribute("disabled", !currentFrame(step) || position === snapshots.length-1);
+        const queryIndex=queryStepIndex(snapshots,recordedSource,recordedQuery);
+        $("query").toggleAttribute("disabled", queryIndex<0 || queryIndex===position);
 	}
 	function finish() {
 		clearTimeout(timer);
@@ -258,11 +270,13 @@ export function createTraceRuntime(host, readSource, options) {
 		cancelLoad();
 		finish();
 		snapshots = [];
+        outputMetadata={};
 		$("save").setAttribute("disabled", "");
 		scheduleArrows(true);
 		position = 0;
 		for (const id of [
 			"recorded",
+            "expression",
 			"variables",
 			"call-stack",
 			"heap",
@@ -271,10 +285,10 @@ export function createTraceRuntime(host, readSource, options) {
 			"event",
 		])
 			$(id).replaceChildren();
-		for (const id of ["first", "previous", "next", "last"])
+		for (const id of ["first", "previous", "next", "last", "over", "out", "query"])
 			$(id).setAttribute("disabled", "");
 		recordedSource = $("source").getValue();
-		recordedQuery = options.language === "scheme" ? (replayQuery ? replayQuery.query : host.getAttribute("query") ?? undefined) : undefined;
+		recordedQuery = replayQuery ? replayQuery.query : host.getAttribute("query") ?? undefined;
 		recordedCode = recordedQuery === undefined ? recordedSource : recordedSource.trimEnd() + "\n\n" + recordedQuery;
 		if (recordedCode.length > 20000) {
 			setStatus("Source limit: 20,000 characters.", true);
@@ -300,11 +314,13 @@ export function createTraceRuntime(host, readSource, options) {
 				);
 				timer = setTimeout(
 					() => fail("Execution timed out. The Worker was terminated."),
-					10000,
+					options.language === "scheme" ? 30000 : 10000,
 				);
 			} else if (data.type === "error") fail(data.message);
 			else if (data.type === "trace") {
-				snapshots = compactTraceSteps(data.result.trace);
+				const result=unpackTrace(data.result);
+                outputMetadata=typeof result.query_stdout==='string'?{setup_stdout:result.setup_stdout,query_stdout:result.query_stdout}:{};
+                snapshots = compactTraceSteps(result.trace);
 				finish();
 				if (!snapshots.length) {
 					setStatus("No trace events.");
@@ -313,7 +329,7 @@ export function createTraceRuntime(host, readSource, options) {
 				render();
 			}
 		};
-		current.postMessage({ code: recordedSource, ...(recordedQuery !== undefined ? {query:recordedQuery} : {}) });
+		current.postMessage({ code: options.language === "scheme" ? recordedSource : recordedCode, ...(recordedQuery !== undefined ? {query:recordedQuery} : {}) });
 	}
 	$("run").addEventListener("click", record);
 	const stopRecording = () => { if (worker) fail("Recording stopped."); };
@@ -327,12 +343,18 @@ export function createTraceRuntime(host, readSource, options) {
 	const previousStep = () => goTo(position - 1);
 	const nextStep = () => goTo(position + 1);
 	const lastStep = () => goTo(snapshots.length - 1);
+    const stepOver = () => { if (!worker) goTo(stepOverIndex(snapshots,position)); };
+    const stepOut = () => { if (!worker) goTo(stepOutIndex(snapshots,position)); };
+    const startQuery = () => {
+        const index=queryStepIndex(snapshots,recordedSource,recordedQuery);
+        if (!worker && index>=0) goTo(index);
+    };
 	const loadTrace = () => $("file").click();
 	const toggleJson = () => {
 		const details = $("json").closest("details");
 		details.open = !details.open;
 	};
-	for (const [role, action] of Object.entries({first:firstStep, previous:previousStep, next:nextStep, last:lastStep}))
+	for (const [role, action] of Object.entries({first:firstStep, previous:previousStep, next:nextStep, last:lastStep, over:stepOver, out:stepOut, query:startQuery}))
 		$(role).addEventListener("click", action);
 	window.addEventListener("pagehide", finish);
 
@@ -344,7 +366,8 @@ export function createTraceRuntime(host, readSource, options) {
 	}
 	function install(data) {
 		finish();
-		recordedCode = data.code;
+		outputMetadata=typeof data.query_stdout==='string'?{setup_stdout:data.setup_stdout,query_stdout:data.query_stdout}:{};
+        recordedCode = data.code;
 		recordedSource = data.source ?? data.code;
 		recordedQuery = data.query;
 		replayQuery = {query:data.query};
@@ -377,10 +400,12 @@ export function createTraceRuntime(host, readSource, options) {
 				recordedCode = "";
 					replayQuery = undefined;
 				snapshots = [];
+        outputMetadata={};
 				$("save").setAttribute("disabled", "");
 				position = 0;
 				for (const id of [
 					"recorded",
+            "expression",
 					"variables",
 					"call-stack",
 					"heap",
@@ -389,7 +414,7 @@ export function createTraceRuntime(host, readSource, options) {
 					"event",
 				])
 					$(id).replaceChildren();
-				for (const id of ["first", "previous", "next", "last"])
+				for (const id of ["first", "previous", "next", "last", "over", "out", "query"])
 					$(id).setAttribute("disabled", "");
 				scheduleArrows(true);
 				$("source").setValue(result.text);
@@ -442,8 +467,9 @@ export function createTraceRuntime(host, readSource, options) {
 		if (!snapshots.length) return;
 		// Capture the recording, not unexecuted edits currently in the source editor.
 		const content =
-			JSON.stringify(
+			serializeTrace(
 				{
+                    ...outputMetadata,
 					version: 1,
 					...(options.language !== "python"
 						? { language: options.language }
@@ -452,9 +478,7 @@ export function createTraceRuntime(host, readSource, options) {
 					...(recordedQuery !== undefined ? {source:recordedSource, query:recordedQuery} : {}),
 					trace: snapshots,
 				},
-				null,
-				2,
-			) + "\n";
+			);
 		try {
 			const target = await chooseSaveTarget({
 				suggestedName: traceFilename,
@@ -491,8 +515,9 @@ export function createTraceRuntime(host, readSource, options) {
 		saveAs,
 		stop: stopRecording,
 		getCode: () =>
-			JSON.stringify(
+			serializeTrace(
 				{
+                    ...outputMetadata,
 					version: 1,
 					...(options.language !== "python"
 						? { language: options.language }
@@ -501,10 +526,8 @@ export function createTraceRuntime(host, readSource, options) {
 					...(recordedQuery !== undefined ? {source:recordedSource, query:recordedQuery} : {}),
 					trace: snapshots,
 				},
-				null,
-				2,
-			) + "\n",
-		goTo, firstStep, previousStep, nextStep, lastStep, loadTrace, toggleJson,
+			),
+		goTo, firstStep, previousStep, nextStep, lastStep, stepOver, stepOut, startQuery, loadTrace, toggleJson,
 		loadAttributes,
 		get snapshots() {
 			return snapshots;

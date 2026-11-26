@@ -65,6 +65,7 @@ import "../fullscreen/fullscreen.js";
  * @attr {string} src = "" - OCaml source URL; loaded without executing the program.
  * @attr {string} trace = "" - Complete JSON recording URL; takes precedence over src and inline source without executing OCaml.
  * @attr {string} filename = "" - Display filename override; defaults to the loaded source or trace basename, or program.ml.
+ * @attr {string} query = "" - Optional query recorded after source initialization.
  * @attr {string} value = "" - OCaml source used when src and trace are absent.
  * @example
  * <tp-ocaml-tracer src="/docs/components/ocaml-tracer/examples/recursion.ml"></tp-ocaml-tracer>
@@ -76,7 +77,7 @@ export class TpOCamlTracer extends TpBase {
 		ignoreSelector: "[data-tp-ocaml-tracer-generated]",
 	});
 	static get observedAttributes(): string[] {
-		return ["src", "trace", "value", "filename"];
+		return ["src", "trace", "value", "filename", "query"];
 	}
 	/** OCaml source URL. */
 	get src(): string {
@@ -105,6 +106,14 @@ export class TpOCamlTracer extends TpBase {
 	}
 	set filename(value: string) {
 		this.setAttribute("filename", value);
+	}
+
+	/** Optional query evaluated after the source in the same recording. */
+	get query(): string {
+		return this.getAttribute("query") ?? "";
+	}
+	set query(value: string) {
+		this.setAttribute("query", value);
 	}
 
 	protected override connectedCallback(): void {
@@ -172,6 +181,19 @@ export class TpOCamlTracer extends TpBase {
 	/** Displays the following step. */
 	nextStep(): void {
 		this.runtime?.nextStep();
+	}
+
+	/** Advances past an invocation without deleting its recorded steps. */
+	stepOver(): void {
+		this.runtime?.stepOver();
+	}
+	/** Advances until the current invocation returns to its caller. */
+	stepOut(): void {
+		this.runtime?.stepOut();
+	}
+	/** Displays the first recorded query step, retaining initialization steps. */
+	startQuery(): void {
+		this.runtime?.startQuery();
 	}
 
 	/** Displays the final recorded step. */

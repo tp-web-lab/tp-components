@@ -14,9 +14,11 @@ it("preserves original TypeScript source and line numbers without stepping throu
 	const { result, step } = last(code);
 	expect(result.language).toBe("typescript");
 	expect(result.code).toBe(code);
-	expect(
-		result.trace.filter((s) => s.event === "step_line").map((s) => s.line),
-	).toEqual([3, 4]);
+	expect([
+		...new Set(
+			result.trace.filter((s) => s.event === "step_line").map((s) => s.line),
+		),
+	]).toEqual([3, 4]);
 	expect(step.stdout).toBe("7\n");
 	expect(Object.keys(step.globals)).toEqual(["point"]);
 });

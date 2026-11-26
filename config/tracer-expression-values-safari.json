@@ -1,0 +1,96 @@
+{
+  "browser": "safari",
+  "checkedAt": "2026-11-26T12:31:34.006Z",
+  "checks": [
+    {
+      "language": "javascript",
+      "passed": true,
+      "values": [
+        8,
+        8,
+        16,
+        48,
+        3,
+        9,
+        57
+      ],
+      "lightDark": true,
+      "replayWithoutWorker": true,
+      "sourceHighlights": true,
+      "sideEffects": true,
+      "previousNext": true,
+      "steps": 10,
+      "milliseconds": 632
+    },
+    {
+      "language": "typescript",
+      "passed": true,
+      "values": [
+        8,
+        8,
+        16,
+        48,
+        3,
+        9,
+        57
+      ],
+      "lightDark": true,
+      "replayWithoutWorker": true,
+      "sourceHighlights": true,
+      "sideEffects": true,
+      "previousNext": true,
+      "steps": 11,
+      "milliseconds": 566
+    },
+    {
+      "language": "scheme",
+      "passed": true,
+      "values": [
+        8,
+        8,
+        16,
+        48,
+        3,
+        9,
+        57
+      ],
+      "lightDark": true,
+      "replayWithoutWorker": true,
+      "sourceHighlights": true,
+      "sideEffects": true,
+      "previousNext": true,
+      "steps": 15,
+      "milliseconds": 786
+    },
+    {
+      "language": "ocaml",
+      "passed": true,
+      "values": [
+        3,
+        9,
+        8,
+        8,
+        16,
+        48,
+        57
+      ],
+      "lightDark": true,
+      "replayWithoutWorker": true,
+      "sourceHighlights": true,
+      "sideEffects": true,
+      "previousNext": true,
+      "steps": 17,
+      "ocamlExamples": [
+        "recursion.ml",
+        "same-line.ml",
+        "shared.ml",
+        "closures.ml",
+        "patterns.ml",
+        "caught.ml",
+        "error.ml"
+      ],
+      "milliseconds": 4966
+    }
+  ],
+  "version": "26.6.2"
+}

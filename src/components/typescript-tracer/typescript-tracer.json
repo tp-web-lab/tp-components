@@ -20,6 +20,15 @@
       "default": "\"\""
     },
     {
+      "name": "query",
+      "description": "Optional query recorded after source initialization.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
       "name": "src",
       "description": "TypeScript source URL; loaded without executing the program.",
       "reflected": true,
@@ -97,6 +106,21 @@
       "name": "saveAs(): Promise<void>",
       "inherited": false,
       "description": "Opens Save as for the complete recording, including its original source."
+    },
+    {
+      "name": "startQuery(): void",
+      "inherited": false,
+      "description": "Displays the first recorded query step, retaining initialization steps."
+    },
+    {
+      "name": "stepOut(): void",
+      "inherited": false,
+      "description": "Advances until the current invocation returns to its caller."
+    },
+    {
+      "name": "stepOver(): void",
+      "inherited": false,
+      "description": "Advances past an invocation without deleting its recorded steps."
     },
     {
       "name": "stop(): void",
@@ -204,6 +228,21 @@
         "shortcut": "—"
       },
       {
+        "button": ":tp-icon:{name=\"arrow-right\"} Step over",
+        "description": "Advance past an invocation without visiting its internal steps. Stop at an exception or recording limit.",
+        "shortcut": "—"
+      },
+      {
+        "button": ":tp-icon:{name=\"arrow-up\"} Step out",
+        "description": "Advance until the current invocation returns to its caller. Disabled outside a function.",
+        "shortcut": "—"
+      },
+      {
+        "button": ":tp-icon:{name=\"play\"} Start at query",
+        "description": "Jump to the first recorded query step, keeping initialization available through Previous and First. Disabled without a recorded query boundary.",
+        "shortcut": "—"
+      },
+      {
         "button": ":tp-icon:{name=\"chevron-right-last\"} Last step",
         "description": "Display the final recorded step.",
         "shortcut": "—"
@@ -241,7 +280,7 @@
     ],
     "displayName": "TypeScript tracer",
     "introduction": "The custom `<tp-typescript-tracer>` element records and replays TypeScript execution with variables, call frames and object references.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result | Shortcut |\n| --- | --- | --- |\n| :tp-icon:{name=\"code\"} Edit source | Show or hide the TypeScript editor without changing the recording. | — |\n| :tp-icon:{name=\"play\"} Record execution | Record the editor source in a fresh TypeScript session. | — |\n| :tp-icon:{name=\"stop\"} Stop recording | Terminate the active recording Worker. | — |\n| :tp-icon:{name=\"file-import\"} Load trace | Open a saved JSON recording without executing TypeScript. | — |\n| :tp-icon:{name=\"file-upload\"} Save trace | Choose a filename and save all snapshots and their source. | — |\n| :tp-icon:{name=\"chevron-left-first\"} First step | Display the first recorded step. | — |\n| :tp-icon:{name=\"chevron-left\"} Previous step | Display the preceding recorded step. | — |\n| :tp-icon:{name=\"chevron-right\"} Next step | Display the following recorded step. | — |\n| :tp-icon:{name=\"chevron-right-last\"} Last step | Display the final recorded step. | — |\n| Hover a reference dot | Highlight the object's reference arrow. | — |\n| Click a reference dot | Scroll to its object. | — |\n| Hover or focus a base-class link | Highlight the base class object box. | — |\n| Click a base-class link | Scroll to the base class object box. | — |\n| Scroll the memory diagram horizontally | Reveal objects and arrows outside the visible area. | — |\n| Trace JSON <!-- button --> | Expand or collapse the current snapshot's JSON. | — |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>Tab</kbd> | Focus commands and object references; a focused reference highlights its arrow. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused command. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component; <kbd>Shift</kbd> may be needed to type ?. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component in the containing hierarchy and open its User help. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result | Shortcut |\n| --- | --- | --- |\n| :tp-icon:{name=\"code\"} Edit source | Show or hide the TypeScript editor without changing the recording. | — |\n| :tp-icon:{name=\"play\"} Record execution | Record the editor source in a fresh TypeScript session. | — |\n| :tp-icon:{name=\"stop\"} Stop recording | Terminate the active recording Worker. | — |\n| :tp-icon:{name=\"file-import\"} Load trace | Open a saved JSON recording without executing TypeScript. | — |\n| :tp-icon:{name=\"file-upload\"} Save trace | Choose a filename and save all snapshots and their source. | — |\n| :tp-icon:{name=\"chevron-left-first\"} First step | Display the first recorded step. | — |\n| :tp-icon:{name=\"chevron-left\"} Previous step | Display the preceding recorded step. | — |\n| :tp-icon:{name=\"chevron-right\"} Next step | Display the following recorded step. | — |\n| :tp-icon:{name=\"arrow-right\"} Step over | Advance past an invocation without visiting its internal steps. Stop at an exception or recording limit. | — |\n| :tp-icon:{name=\"arrow-up\"} Step out | Advance until the current invocation returns to its caller. Disabled outside a function. | — |\n| :tp-icon:{name=\"play\"} Start at query | Jump to the first recorded query step, keeping initialization available through Previous and First. Disabled without a recorded query boundary. | — |\n| :tp-icon:{name=\"chevron-right-last\"} Last step | Display the final recorded step. | — |\n| Hover a reference dot | Highlight the object's reference arrow. | — |\n| Click a reference dot | Scroll to its object. | — |\n| Hover or focus a base-class link | Highlight the base class object box. | — |\n| Click a base-class link | Scroll to the base class object box. | — |\n| Scroll the memory diagram horizontally | Reveal objects and arrows outside the visible area. | — |\n| Trace JSON <!-- button --> | Expand or collapse the current snapshot's JSON. | — |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>Tab</kbd> | Focus commands and object references; a focused reference highlights its arrow. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused command. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component; <kbd>Shift</kbd> may be needed to type ?. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component in the containing hierarchy and open its User help. |",
     "keyboard": []
   }
 }

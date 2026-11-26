@@ -72,8 +72,6 @@
 # the unique_id is derived from id(), which allows us to capture aliasing
 
 
-# number of significant digits for floats
-FLOAT_PRECISION = 4
 
 
 from collections import defaultdict
@@ -132,9 +130,9 @@ def encode_primitive(dat):
     else:
       # render floats like 3.0 as '3.0' and not as 3
       if dat == int(dat):
-        return ['SPECIAL_FLOAT', '%.1f' % dat]
+        return ['SPECIAL_FLOAT', repr(dat)]
       else:
-        return round(dat, FLOAT_PRECISION)
+        return dat  # Keep the original IEEE-754 value in saved and replayed traces.
   elif t is str and (not is_python3):
     # hack only for Python 2 strings ... always turn into unicode
     # and display '?' when it's not valid unicode

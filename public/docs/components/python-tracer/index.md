@@ -76,6 +76,10 @@ An exception event shows its type and message in the danger color next to the cu
 
 A closure retains the frame containing its captured variables after the enclosing function returns. In **Closure with nonlocal**, inspect `count` in the retained `make_counter` frame: successive calls to `next_value` change it from 0 to 1, then 2. The variable belongs to that parent environment rather than the inner function's local variables.
 
+Anonymous functions appear as lambda frames. Their return value is shown in the active frame, independently of the display name; captured parent frames remain visible.
+
+Floating-point values retain their full Python precision in the recording and during replay. Small values are not rounded to zero. Existing recordings that already contain rounded values cannot recover the lost digits.
+
 ### Saving and reloading
 
 Save trace saves **all** snapshots and their recorded source, regardless of the selected step. It uses the common Save as interface: the browser's file picker where supported, otherwise a filename prompt and download. Unexecuted editor changes are not substituted for the source associated with the recording.
@@ -93,6 +97,24 @@ A complete recording contains `version: 1`, `code` (Python source) and `trace` (
 Recording loads Pyodide 0.29.3 from jsDelivr. Replaying a saved trace requires neither the Python runtime nor the original .py file. The tracer is adapted from Online Python Tutor (Philip J. Guo); its Python sources are bundled locally with the [MIT notice](/licenses/python-tracer/LICENSE.txt) and [provenance](/licenses/python-tracer/UPSTREAM.md). No request is sent to pythontutor.com and no external visualizer or advertising is embedded.
 
 Limits are 20,000 source characters, 1,000 events plus a final limit notification, and a 10 MB imported JSON file. Source/trace loading times out after 30 seconds; Python initialization after 60 seconds and execution after 10 seconds. A new recording can be started after a timeout. Arbitrary packages, DOM integration and asynchronous execution are outside the supported tracing model. The Worker isolates execution from the interface but is not a security sandbox for hostile programs.
+
+### Semantic navigation
+
+**Step over** skips the internal steps of an invocation. On a Call step, it advances past that call; before a call, it stays in the current invocation until the called function returns. **Step out** advances until the current invocation returns to its caller. Recursive calls are identified separately, even when their names are identical. Retained closure environments are not active calls. A jump stops at an exception or recording-limit notification rather than silently hiding it.
+
+**Start at query** jumps to the first step of the explicitly supplied `query`. It does not rerun the program. The source initialization remains available through First and Previous. Interpreters provide the current source and query automatically when opening their trace drawer. A standalone tracer can also use `query` with its `src`, `value` or embedded script.
+
+These commands only change the displayed position: they do not delete or filter snapshots, returned values or output. Previous can revisit a skipped step; Save trace retains the same complete recording. Ordinary Next retains its existing grouping of consecutive states without visible changes. Calls and returns remain distinct navigation boundaries.
+
+Saved recordings with a query contain `source`, `query` and their combined `code`. Older recordings without this metadata keep normal navigation; Start at query is disabled because the boundary cannot be reliably guessed. Step out is disabled outside an identifiable call frame. Scheme tail calls are followed through their continuation; they do not create an artificial return to the caller.
+
+The corresponding public methods are `stepOver()`, `stepOut()` and `startQuery()`. They perform the same actions as the buttons and leave the recording unchanged.
+
+### Expression values
+
+Arithmetic and unary operations, comparisons, Boolean expressions and conditional expressions are instrumented before Python compiles the program. This makes constant calculations visible too: the Source panel highlights the evaluated sub-expression and displays its **Expression value** immediately below. Operands are not evaluated again; short-circuit branches remain unevaluated. Referenced objects use the same object links as variables.
+
+Previous revisits intermediate values, and saved JSON retains them for replay. Older recordings without these values remain readable but cannot reconstruct them. Type annotations and structural pattern literals are not instrumented. Function calls retain their existing call/return steps. The additional snapshots count toward the existing 1,000-event recording limit; this is an execution aid, not a timing profiler.
 
 ### Importing
 
@@ -165,6 +187,12 @@ Closure with nonlocal
 
 Nested lists and shared references
 : Record execution and inspect the three arrows from rows: the first and third point to the same shared list. Step through append(5) to see both references reflect the change, while the middle list stays unchanged.
+
+Nested calls and a separate query
+: Record execution, then choose Start at query to skip the warmup calculation and reach fact(4), whose result is 24. Use Next to enter a nested call: Step over completes that call without visiting its body, while Step out returns from the active function to its caller. Use Previous to revisit the skipped steps; First also restores access to initialization. All steps remain available after saving and reloading the trace.
+
+Constant expressions and intermediate values
+: Record execution and use Next to follow the highlighted operations and their Expression value: 8, 8, 16, 48, 3, 9, then 57. Previous revisits each calculation; Save trace and Load trace preserve the intermediate values without running Python again.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs

@@ -1,0 +1,96 @@
+{
+  "browser": "chrome",
+  "checkedAt": "2026-11-26T12:31:33.999Z",
+  "checks": [
+    {
+      "language": "javascript",
+      "passed": true,
+      "values": [
+        8,
+        8,
+        16,
+        48,
+        3,
+        9,
+        57
+      ],
+      "sourceHighlights": true,
+      "previousNext": true,
+      "sideEffects": true,
+      "replayWithoutWorker": true,
+      "lightDark": true,
+      "steps": 10,
+      "milliseconds": 580
+    },
+    {
+      "language": "typescript",
+      "passed": true,
+      "values": [
+        8,
+        8,
+        16,
+        48,
+        3,
+        9,
+        57
+      ],
+      "sourceHighlights": true,
+      "previousNext": true,
+      "sideEffects": true,
+      "replayWithoutWorker": true,
+      "lightDark": true,
+      "steps": 11,
+      "milliseconds": 395
+    },
+    {
+      "language": "scheme",
+      "passed": true,
+      "values": [
+        8,
+        8,
+        16,
+        48,
+        3,
+        9,
+        57
+      ],
+      "sourceHighlights": true,
+      "previousNext": true,
+      "sideEffects": true,
+      "replayWithoutWorker": true,
+      "lightDark": true,
+      "steps": 15,
+      "milliseconds": 600
+    },
+    {
+      "language": "ocaml",
+      "passed": true,
+      "values": [
+        3,
+        9,
+        8,
+        8,
+        16,
+        48,
+        57
+      ],
+      "ocamlExamples": [
+        "recursion.ml",
+        "same-line.ml",
+        "shared.ml",
+        "closures.ml",
+        "patterns.ml",
+        "caught.ml",
+        "error.ml"
+      ],
+      "sourceHighlights": true,
+      "previousNext": true,
+      "sideEffects": true,
+      "replayWithoutWorker": true,
+      "lightDark": true,
+      "steps": 17,
+      "milliseconds": 3293
+    }
+  ],
+  "version": "158.0.8127.38"
+}

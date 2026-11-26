@@ -3,6 +3,7 @@ import { TpTraceableInterpreter } from "./traceable-interpreter.js";
 
 class Recorder extends HTMLElement {
 	value = "";
+	query = "";
 	filename = "";
 	record = vi.fn();
 	stop = vi.fn();
@@ -141,4 +142,14 @@ it("reconnects with a single enabled button and no old recording", async () => {
 	expect(host.querySelector("tp-drawer")).toBeNull();
 	await host.openTrace();
 	expect(host.querySelector("tp-drawer")?.hasAttribute("open")).toBe(true);
+});
+
+it("passes the source and current query separately to preserve the navigation boundary", async () => {
+	const host = mount(true);
+	host.query = "square(9)";
+	await host.openTrace();
+	const trace = host.querySelector<Recorder>("tp-javascript-tracer");
+	expect(trace?.value).toBe("function square(x) { return x*x; }");
+	expect(trace?.query).toBe("square(9)");
+	expect(trace?.record).toHaveBeenCalledOnce();
 });

@@ -4,14 +4,14 @@
  */
 export function traceVisibleState(step) {
  return JSON.stringify([step.source_range ?? step.line, step.globals ?? {}, step.ordered_globals,
-  step.stack_to_render ?? [], step.heap ?? {}, step.stdout ?? "", step.exception_msg]);
+  step.stack_to_render ?? [], step.heap ?? {}, step.stdout ?? "", step.exception_msg, step.expression]);
 }
 export function compactTraceSteps(steps) {
  const result=[];
  let previous;
  for (const step of steps) {
   const key=traceVisibleState(step), last=result.at(-1);
-  const important=s=>s && (s.exception_msg || ["exception","uncaught_exception","instruction_limit_reached"].includes(s.event));
+  const important=s=>s && (s.exception_msg || ["call","return","exception","uncaught_exception","instruction_limit_reached"].includes(s.event));
   if(last && key===previous && !important(last) && !important(step)) {
    const count=(last.grouped_steps ?? 1)+(step.grouped_steps ?? 1);
    result[result.length-1]={...step,grouped_steps:count};

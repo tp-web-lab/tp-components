@@ -22,7 +22,7 @@ export async function initializeSchemeRecorder(url, engine) { lips = engine; awa
  * @param {string} source
  * @param {{maxSteps?:number, query?:string}} options
  */
-export async function recordScheme(source, { maxSteps = 1000, query } = {}) {
+export async function recordScheme(source, { maxSteps = 12000, query } = {}) {
  const code = query === undefined ? source : source.trimEnd() + "\n\n" + query;
  if (code.length > 20000) throw new Error("Source limit: 20,000 characters.");
  let stdout = "", lastLine = 1, frameSerial = 0, objectSerial = 0, envSerial = 0;
@@ -31,7 +31,7 @@ export async function recordScheme(source, { maxSteps = 1000, query } = {}) {
  const expressionRange = object => object?.__file__ === filename ? ranges.get(`${object.__line__}:${object.__col__}`) : undefined;
  const trace = [], frames = [], identities = new WeakMap(), environments = new WeakMap(), scopes = new WeakMap();
  const limit = new Error(`Trace limit: ${maxSteps.toLocaleString("en-US")} recorded events (before grouping).`);
- let stopped = false, instructions = 0;
+ let stopped = false, instructions = 0, queryOutputStart;
  const port = new lips.OutputPort(value => {
   stdout += String(value);
   if (stdout.length > 100000) { stopped = true; throw limit; }
@@ -92,7 +92,7 @@ export async function recordScheme(source, { maxSteps = 1000, query } = {}) {
    const locals = new Map(chain.flatMap(bindings));
    if (extra.returnFrame === f) locals.set("return", extra.result);
    const values = encodeBindings([...locals]);
-   return { func_name:f.name, frame_id:f.id, encoded_locals:values, ordered_varnames:Object.keys(values), is_highlighted:index===frames.length-1 };
+   return { func_name:f.name, frame_id:f.id, continuation_id:f.continuationId, encoded_locals:values, ordered_varnames:Object.keys(values), is_highlighted:index===frames.length-1 };
   });
   if (!frames.length && state?.env !== root && descendant(state?.env)) {
    const entries = new Map();
@@ -102,6 +102,7 @@ export async function recordScheme(source, { maxSteps = 1000, query } = {}) {
    const values=encodeBindings([...entries]);
    stack.push({func_name:"Lexical scope",frame_id:`scope-${envId(state.env)}`,encoded_locals:values,ordered_varnames:Object.keys(values),is_highlighted:true});
   }
+  const expressionValue=extra.expression ? {value:encode(extra.result)} : undefined;
   const seen = new Set(frames.map(f=>f.env));
   for (const captured of retained) {
    for(let env=captured;env && env!==root && descendant(env);env=env.__parent__) {
@@ -111,24 +112,34 @@ export async function recordScheme(source, { maxSteps = 1000, query } = {}) {
     stack.unshift({func_name:`${scopes.get(env)?.__name__ || env.__name__ || "environment"} (captured)`,frame_id:`scope-${envId(env)}`,encoded_locals:values,ordered_varnames:Object.keys(values),is_parent:true,is_zombie:true});
    }
   }
-  trace.push({event,line:lastLine,...(lastRange ? {source_range:lastRange} : {}),func_name:frames.at(-1)?.name || "<program>",globals,ordered_globals:Object.keys(globals),stack_to_render:stack,heap,stdout,...(extra.error?{exception_msg:extra.error}:{})});
+  trace.push({event,line:lastLine,...(lastRange ? {source_range:lastRange} : {}),func_name:frames.at(-1)?.name || "<program>",globals,ordered_globals:Object.keys(globals),stack_to_render:stack,heap,stdout,...(expressionValue?{expression:expressionValue}:{}),...(extra.error?{exception_msg:extra.error}:{})});
  }
  function call(state, fn, expression) {
   if(!fn || !descendant(fn._env))return;
   // A tail call shares the caller's continuation: replace, do not grow, its frame.
-  if(frames.at(-1)?.state===state && frames.at(-1)?.cc===state.cc) frames.pop();
+  const replaced = frames.at(-1)?.state===state && frames.at(-1)?.cc===state.cc ? frames.pop() : undefined;
   lastRange=expressionRange(expression);
   lastLine=sourceLine(expression)||lastLine;
   const frame={line:lastLine,id:++frameSerial,name:String(fn.__name__ || "lambda"),env:state.env,current:state.env,range:lastRange,cc:state.cc,state};
+  frame.continuationId = replaced?.continuationId ?? frame.id;
   frames.push(frame);
   snapshot("call",state);
  }
+ const pendingExpressions = new WeakMap();
+ // LIPS macro expansion consumes many internal operations per visible user step.
+ // Bound both independently; the Worker also enforces its wall-clock deadline.
  function observe(event,state,fn) {
-  if(++instructions>100000) {stopped=true;throw new Error("Internal operation limit: 100,000 operations.");}
+  if(++instructions>20000000) {stopped=true;throw new Error("Internal operation limit: 20,000,000 operations.");}
   if(event==="scope") { if(descendant(fn?._env)) scopes.set(state.env,fn); return; }
   if(event==="start") { call(state,scopes.get(state.env)); return; }
   if(event==="call") { call(state,fn.fn,fn.expression); return; }
   if(event==="continue") {
+   const pending=pendingExpressions.get(state)||[];
+   while(pending.at(-1)?.cc===state.cc) {
+    const expression=pending.pop();
+    lastRange=expression.range;lastLine=expression.line;
+    snapshot("expression",{...state,env:expression.env},{expression:true,result:state.object});
+   }
    const frame=frames.at(-1);
    if(frame?.state===state && frame.cc===state.cc) {
     lastRange=frame.range;
@@ -152,7 +163,14 @@ export async function recordScheme(source, { maxSteps = 1000, query } = {}) {
   }
   if(frames.at(-1)?.state===state && descendant(state.env)) frames.at(-1).current=state.env;
   // Observe source expressions, not the stdlib's expansion machinery.
-  if(visibleExpression) snapshot("step_line",state);
+  if(visibleExpression) {
+   if(lastRange) {
+    let pending=pendingExpressions.get(state);
+    if(!pending)pendingExpressions.set(state,pending=[]);
+    pending.push({cc:state.cc,range:lastRange,line:lastLine,env:state.env});
+   }
+   snapshot("step_line",state);
+  }
  }
 
  try {
@@ -164,6 +182,7 @@ export async function recordScheme(source, { maxSteps = 1000, query } = {}) {
   lips.setTraceObserver(observe);
   if (!forms.length) snapshot("result", {env:root});
   for(const [index, form] of forms.entries()) {
+   if(query!==undefined && index===setupForms.length)queryOutputStart=stdout.length;
    lastLine=sourceLine(form)||lastLine;
    lastRange=expressionRange(form);
    const results=await interpreter.exec([form]);
@@ -182,5 +201,5 @@ export async function recordScheme(source, { maxSteps = 1000, query } = {}) {
    snapshot("exception",{env:frames.at(-1)?.current||root},{error:String(error.message||error).replace(/ at line \d+ and column \d+ in tp-scheme-tracer\.scm$/, "")});
   }
  } finally {lips.setTraceObserver(undefined);}
- return {version:1,language:"scheme",code,trace:compactSchemeSteps(trace)};
+ return {version:1,language:"scheme",code,...(queryOutputStart!==undefined?{setup_stdout:stdout.slice(0,queryOutputStart),query_stdout:stdout.slice(queryOutputStart)}:{}),trace:compactSchemeSteps(trace)};
 }

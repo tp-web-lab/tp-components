@@ -123,7 +123,14 @@ export class InterpreterTraceController {
 				`tp-${this.options.language}-tracer`,
 			) as ExecutionTracer;
 			trace.filename = this.host.filename;
-			trace.value = this.options.composeSource(source, query);
+			if (this.options.language !== "prolog") {
+				const command = query.trim();
+				const composed = this.options.composeSource(source, command);
+				trace.value = command
+					? composed.slice(0, -command.length).trimEnd()
+					: composed;
+				if (command) trace.query = command;
+			}
 			if (["scheme", "prolog"].includes(this.options.language)) {
 				trace.value = source;
 				trace.query =

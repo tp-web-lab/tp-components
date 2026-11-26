@@ -68,6 +68,7 @@ import "../fullscreen/fullscreen.js";
  * @attr {string} src = "" - Python source URL; loaded without executing the program.
  * @attr {string} trace = "" - Complete JSON recording URL; takes precedence over src and inline source without executing Python.
  * @attr {string} filename = "" - Display filename override; defaults to the loaded source or trace basename, or program.py.
+ * @attr {string} query = "" - Optional query recorded after source initialization.
  * @attr {string} value = "" - Python source used when src and trace are absent.
  * @example
  * <tp-python-tracer src="/docs/components/python-tracer/examples/students.py"></tp-python-tracer>
@@ -79,7 +80,7 @@ export class TpPythonTracer extends TpBase {
 		ignoreSelector: "[data-tp-python-tracer-generated]",
 	});
 	static get observedAttributes(): string[] {
-		return ["src", "trace", "value", "filename"];
+		return ["src", "trace", "value", "filename", "query"];
 	}
 	/** Python source URL. */
 	get src(): string {
@@ -108,6 +109,14 @@ export class TpPythonTracer extends TpBase {
 	}
 	set filename(value: string) {
 		this.setAttribute("filename", value);
+	}
+
+	/** Optional query evaluated after the source in the same recording. */
+	get query(): string {
+		return this.getAttribute("query") ?? "";
+	}
+	set query(value: string) {
+		this.setAttribute("query", value);
 	}
 
 	protected override connectedCallback(): void {
@@ -175,6 +184,19 @@ export class TpPythonTracer extends TpBase {
 	/** Displays the following step. */
 	nextStep(): void {
 		this.runtime?.nextStep();
+	}
+
+	/** Advances past an invocation without deleting its recorded steps. */
+	stepOver(): void {
+		this.runtime?.stepOver();
+	}
+	/** Advances until the current invocation returns to its caller. */
+	stepOut(): void {
+		this.runtime?.stepOut();
+	}
+	/** Displays the first recorded query step, retaining initialization steps. */
+	startQuery(): void {
+		this.runtime?.startQuery();
 	}
 
 	/** Displays the final recorded step. */
