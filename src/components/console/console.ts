@@ -262,19 +262,13 @@ function formatTimestamp(timestamp: number): string {
  * - exposes an API close to the browser console
  *
  * @summary Provides a visual console for playground output.
+ * @attr {"default" | "lite" | "simple"} mode = "default" - Presentation: full console, no toolbar, or results without toolbar, level labels and timestamps.
  * @tagname tp-console
  *
  * @event tp-console-entry-add Emitted when an entry is added.
  * @eventdetail tp-console-entry-add { entry: TpConsoleEntry }
  * @event tp-console-clear Emitted when the console is cleared.
  * @eventdetail tp-console-clear { removedCount: number }
- * @example
- * <tp-box data-intro-action="console" data-allow-script="">
- *   <p>Inspect these example messages, then use Clear to empty the console.</p>
- *   <tp-console></tp-console>
- *   <p data-demo-status="" role="status"></p>
- *   <script src="/docs/components/_shared/introduction-actions.js"></script>
- * </tp-box>
  *  @cssprop [--tp-console-bg=var(--tp-paper-color)] Console background.
  * @cssprop [--tp-console-bigint-color=#bc8cff] BigInt value color.
  * @cssprop [--tp-console-boolean-color=#ffa657] Boolean value color.
@@ -300,6 +294,13 @@ function formatTimestamp(timestamp: number): string {
  * @cssprop [--tp-console-object-summary-color=var(--tp-text-body)] Object summary text color.
  * @cssprop [--tp-console-string-color=#a5d6ff] String value color.
  * @cssprop [--tp-console-time-color=#8b949e] Timestamp color.
+ * @example
+ * <tp-box data-intro-action="console" data-allow-script="">
+ *   <p>Inspect these example messages, then use Clear to empty the console.</p>
+ *   <tp-console></tp-console>
+ *   <p data-demo-status="" role="status"></p>
+ *   <script src="/docs/components/_shared/introduction-actions.js"></script>
+ * </tp-box>
  */
 export class TpConsole extends TpBase {
 	/**
@@ -352,6 +353,7 @@ export class TpConsole extends TpBase {
 	private isRedirecting = false;
 
 	private maxEntries = 500;
+	private readonly stringValues = new Map<HTMLElement, string>();
 
 	private groupDepth = 0;
 	// private collapsedGroupDepths = new Set<number>();
@@ -366,7 +368,42 @@ export class TpConsole extends TpBase {
 	 * @internal
 	 */
 	public static get observedAttributes(): string[] {
-		return [];
+		return ["mode"];
+	}
+
+	/** Current console presentation. */
+	public get mode(): "default" | "lite" | "simple" {
+		const value = this.getAttribute("mode");
+		return value === "lite" || value === "simple" ? value : "default";
+	}
+
+	protected attributeChangedCallback(name: string): void {
+		if (name === "mode") this.updatePresentation();
+	}
+
+	private updatePresentation(): void {
+		const root = this.querySelector<HTMLElement>(
+			":scope > [data-tp-console-root]",
+		);
+		if (!root) return;
+		if (root.dataset.mode !== this.mode) {
+			root
+				.querySelector("tp-theme")
+				?.setAttribute("mode", this.mode === "simple" ? "light" : "dark");
+		}
+		for (const [element, value] of this.stringValues) {
+			element.textContent =
+				this.mode === "simple" ? value : formatPrimitive(value);
+		}
+		root.dataset.mode = this.mode;
+		root
+			.querySelector<HTMLElement>("[data-tp-console-header]")
+			?.toggleAttribute("hidden", this.mode !== "default");
+		root
+			.querySelectorAll<HTMLElement>("[data-tp-console-meta]")
+			.forEach((meta) => {
+				meta.toggleAttribute("hidden", this.mode === "simple");
+			});
 	}
 
 	/**
@@ -633,6 +670,7 @@ export class TpConsole extends TpBase {
 		this.ensureLayout();
 
 		if (this.entriesEl instanceof HTMLDivElement) {
+			this.stringValues.clear();
 			this.entriesEl.replaceChildren();
 		}
 
@@ -788,7 +826,7 @@ export class TpConsole extends TpBase {
 			"anchor",
 			`tp-console[data-tp-console-theme="${themeId}"]`,
 		);
-		theme.setAttribute("mode", "dark");
+		theme.setAttribute("mode", this.mode === "simple" ? "light" : "dark");
 		theme.setAttribute(
 			"data-help-description",
 			"Choose a light, dark or automatic theme for this console only.",
@@ -832,6 +870,7 @@ export class TpConsole extends TpBase {
 			return;
 		}
 
+		this.stringValues.clear();
 		this.entriesEl.replaceChildren();
 
 		let hiddenDepth: number | null = null;
@@ -858,6 +897,7 @@ export class TpConsole extends TpBase {
 			}
 		}
 
+		this.updatePresentation();
 		this.entriesEl.scrollTop = this.entriesEl.scrollHeight;
 	}
 
@@ -880,8 +920,7 @@ export class TpConsole extends TpBase {
 			line.setAttribute("data-tp-console-group-toggle", "");
 
 			line.addEventListener("click", () => {
-				entry.collapsed = !entry.collapsed;
-				this.render();
+				this.toggleGroup(entry.id);
 			});
 		}
 
@@ -967,6 +1006,7 @@ export class TpConsole extends TpBase {
 			el.setAttribute("data-tp-console-value", "");
 			el.setAttribute("data-kind", value === null ? "null" : typeof value);
 			el.textContent = formatPrimitive(value);
+			if (typeof value === "string") this.stringValues.set(el, value);
 			return el;
 		}
 
@@ -1001,6 +1041,7 @@ export class TpConsole extends TpBase {
 					const td = document.createElement("td");
 					const cell = (row as Record<string, unknown>)[key];
 					td.textContent = getValueSummary(cell);
+					if (typeof cell === "string") this.stringValues.set(td, cell);
 					tr.append(td);
 				}
 
@@ -1022,6 +1063,15 @@ export class TpConsole extends TpBase {
 
 		wrapper.append(summary, tree);
 		return wrapper;
+	}
+
+	/** Expands or collapses the existing console group identified by its entry id. */
+	toggleGroup(id: number): void {
+		const entry = this.entries.find((entry) => entry.id === id);
+		if (!entry || (entry.kind !== "group" && entry.kind !== "group-collapsed"))
+			return;
+		entry.collapsed = !entry.collapsed;
+		this.render();
 	}
 }
 

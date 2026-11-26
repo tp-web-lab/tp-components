@@ -1,0 +1,13 @@
+<tp-ocaml-notebook>
+  <script type="tp/markdown"># OCaml functions
+
+Run all cells in order. The second cell uses the function defined by the first.</script>
+  <script type="tp/ocaml" filename="functions.ml" query="square 3;;">
+    let square x = x * x;;
+  </script>
+  <script type="tp/markdown">## Use the function
+
+This cell uses the definition from the preceding cell.</script>
+  <script type="tp/ocaml" filename="example.ml" query="square 7;;">
+  </script>
+</tp-ocaml-notebook>

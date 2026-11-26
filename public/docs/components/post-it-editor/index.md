@@ -97,19 +97,19 @@ Javascript API
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -163,7 +163,7 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 <!--
 @tp-dependency tp-post-it
-@summary Component `<tp-post-it>`.
+@summary Displays a movable floating paper note that folds into a pushpin.
 -->
 <!--
 @tp-dependency tp-stack
@@ -184,7 +184,7 @@ All tp-components and external tools used by this component are loaded automatic
 - [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
 - [`<tp-numberfield>`](#/components/numberfield/index.md) : Numeric field with an optional native range slider.
-- [`<tp-post-it>`](#/components/post-it/index.md) : Component `<tp-post-it>`.
+- [`<tp-post-it>`](#/components/post-it/index.md) : Displays a movable floating paper note that folds into a pushpin.
 - [`<tp-stack>`](#/components/stack/index.md) : Vertical stack layout component.
 - [`<tp-textfield>`](#/components/textfield/index.md) : Single-line and automatically growing multiline text field.
 

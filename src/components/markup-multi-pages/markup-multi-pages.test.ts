@@ -997,7 +997,7 @@ describe("<tp-markup-multi-pages>", () => {
 		setInternal(element, "currentHref", "/docs/page.md");
 		window.location.hash = "#/page.md#part";
 		invoke<void>(element, "goToCurrentFragment", "#part");
-		expect(scrollToFragment).toHaveBeenCalledWith("#part");
+		expect(navigate).toHaveBeenLastCalledWith("/docs/page.md#part");
 		invoke<void>(element, "goToCurrentFragment", "#other");
 		expect(window.location.hash).toBe("#/page.md#other");
 

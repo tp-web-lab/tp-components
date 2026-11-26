@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-wari" allow-script }
+::::: tp-markdown-viewer { label="tp-wari" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-wari { interactive }

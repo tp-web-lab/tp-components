@@ -83,3 +83,66 @@ document.body.append(example);
 \begin{document}
 \wcTpSqlViewer[src=/docs/components/_shared/single-source/example.sql]{}
 \end{document}
+
+% !tp-example Compare presentation modes
+\documentclass{article}
+\begin{document}
+\wcSection{
+  \subsection*{mode="default" — Standard controls}
+  Open Code to edit the source, then click Run or press \wcKbd*{Shift}+\wcKbd*{Enter} in the editor.
+
+  Run the query to trigger an intentional missing-table error and open the console. Comment out the final SELECT and run again to display the successful query.
+
+  \wcTpSqlViewer[mode=default]{
+    \wcScript[type=tp/sql,filename=tables.sql]|
+-- No setup is needed for this calculation.
+  |
+    \wcScript[type=tp/sql,filename=query.sql]|
+SELECT 6 * 7 AS answer;
+
+-- Intentional error: comment out the next line to display the calculation.
+SELECT * FROM intentional_viewer_error;
+  |
+  }
+}
+
+\wcSection{
+  \subsection*{mode="lite" — Compact controls}
+  Open Code to edit the source, then click Run or press \wcKbd*{Shift}+\wcKbd*{Enter} in the editor.
+
+  Run the query to trigger an intentional missing-table error and open the console. Comment out the final SELECT and run again to display the successful query.
+
+  \wcTpSqlViewer[mode=lite]{
+    \wcScript[type=tp/sql,filename=tables.sql]|
+-- No setup is needed for this calculation.
+  |
+    \wcScript[type=tp/sql,filename=query.sql]|
+SELECT 6 * 7 AS answer;
+
+-- Intentional error: comment out the next line to display the calculation.
+SELECT * FROM intentional_viewer_error;
+  |
+  }
+}
+
+\wcSection{
+  \subsection*{mode="simple" — Editor and rendered output only}
+  Edit the code below, keep the cursor in the editor and press \wcKbd*{Shift}+\wcKbd*{Enter} (Return) to run it. This viewer has no Run button.
+
+  Run the query to trigger an intentional missing-table error and open the console. Comment out the final SELECT and run again to display the successful query.
+
+  \wcTpSqlViewer[mode=simple]{
+    \wcScript[type=tp/sql,filename=tables.sql]|
+-- No setup is needed for this calculation.
+  |
+    \wcScript[type=tp/sql,filename=query.sql]|
+SELECT 6 * 7 AS answer;
+
+-- Intentional error: comment out the next line to display the calculation.
+SELECT * FROM intentional_viewer_error;
+  |
+  }
+}
+
+Programming viewers already have compact controls, so default and lite look alike. The first run may load the language engine.
+\end{document}

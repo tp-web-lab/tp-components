@@ -1,21 +1,14 @@
-::::: tp-markdown-viewer { label="tp-list-table" allow-script }
+::::: tp-markdown-viewer { label="tp-list-table" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-list-table { heading }
 - - Country
-
   - Capital
-
 - - Estonia
-
   - Tallinn
-
 - - Latvia
-
   - Riga
-
 - - Lithuania
-
   - Vilnius
 :::
 ```

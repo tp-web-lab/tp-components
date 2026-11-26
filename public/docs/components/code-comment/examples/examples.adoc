@@ -18,7 +18,6 @@ function f(x: number): number {
 [tp-code-comment,for="commented-function"]
 ====
 . Positive values are doubled.
-
 . Zero and negative values are multiplied by four.
 ====
 ======

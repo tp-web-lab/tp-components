@@ -33,6 +33,10 @@
  * @summary In-memory file system component.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -123,6 +127,7 @@ const KNOWN_EXTENSIONS: TpAsciidocExtension[] = [
  * @attr {string} repository = "" - Directory containing an AsciiDoc playground project to load at initialization.
  * @attr {string} src = "" - JSON project or asciidoc source file to load.
  *
+ * @keyboard {Shift+Enter} Run the current project.
  * @example
  * <tp-asciidoc-playground src="/docs/components/_shared/intro-projects/asciidoc.json"></tp-asciidoc-playground>
  */
@@ -248,7 +253,7 @@ This section comes from another project file.
 
 	protected override handleAdditionalToolbarAction(action: string): boolean {
 		if (action === "asciidoc-extension-none") {
-			this.applyExtensions(undefined);
+			this.setExtensions(undefined);
 			return true;
 		}
 
@@ -265,7 +270,7 @@ This section comes from another project file.
 			return false;
 		}
 
-		this.applyExtensions([{ ...extension, enabled: true }]);
+		this.setExtensions([{ ...extension, enabled: true }]);
 		return true;
 	}
 
@@ -310,7 +315,10 @@ This section comes from another project file.
 		});
 	}
 
-	private applyExtensions(extensions: TpAsciidocExtension[] | undefined): void {
+	/** Replaces the enabled AsciiDoc extensions, retaining current file edits. */
+	public async setExtensions(
+		extensions: TpAsciidocExtension[] | undefined,
+	): Promise<void> {
 		this.syncProjectFromFilesystem();
 
 		const project = this.getProject();
@@ -326,7 +334,7 @@ This section comes from another project file.
 			}),
 		);
 
-		void this.run();
+		await this.run();
 	}
 }
 

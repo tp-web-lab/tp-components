@@ -1,0 +1,412 @@
+{
+  "date": "2026-11-23T07:08:39.538Z",
+  "sources": {
+    "html": "<template data-tp-numbering=\"\">{\"exercise\":{\"enabled\":true,\"start\":7,\"prefix\":\"2.\"},\"example\":{\"enabled\":true}}</template><p><strong id=\"exercise-a\" data-numbering=\"exercise\" data-tp-numbering-title=\"Exercise 2.7\"><span data-object-number=\"exercise\" data-tp-numbering-generated=\"exercise\">Exercise 2.7. </span><code> </code></strong> Compute the square of 5.</p>\n<p><strong id=\"example-a\" data-numbering=\"example\" data-tp-numbering-title=\"Example 1\"><span data-object-number=\"example\" data-tp-numbering-generated=\"example\">Example 1. </span><code> </code></strong> The square of 3 is 9.</p>\n<p><strong id=\"exercise-b\" data-numbering=\"exercise\" data-tp-numbering-title=\"Exercise 2.8\"><span data-object-number=\"exercise\" data-tp-numbering-generated=\"exercise\">Exercise 2.8. </span><code> </code></strong> Compute the square of 8.</p>\n<script data-tp-numbering-runtime=\"\">(()=>{const apply=function applyDocumentNumbering(root, initialConfig) {\n    let config = initialConfig;\n    // This function is self-contained so the same implementation can run in exported HTML.\n    const kinds = [\n        \"section\",\n        \"figure\",\n        \"table\",\n        \"code\",\n        \"exercise\",\n        \"example\",\n    ];\n    const positive = (n, fallback = 1) => Number.isSafeInteger(Number(n)) && Number(n) > 0 ? Number(n) : fallback;\n    if (!config) {\n        const template = root.querySelector(\"template[data-tp-numbering]\");\n        if (template) {\n            try {\n                config = JSON.parse(template.content.textContent || \"{}\");\n            }\n            catch {\n                return;\n            }\n        }\n    }\n    if (!config || !kinds.some((k) => config?.[k]?.enabled))\n        return;\n    for (const node of root.querySelectorAll(\"[data-tp-numbering-generated],template[data-tp-numbering]\"))\n        node.remove();\n    const doc = root.ownerDocument || document;\n    const meta = doc.createElement(\"template\");\n    meta.setAttribute(\"data-tp-numbering\", \"\");\n    meta.content.textContent = JSON.stringify(config);\n    root.prepend(meta);\n    const heading = config.section;\n    if (heading?.enabled) {\n        const rawMax = Number(heading.maxLevel);\n        const max = Math.min(6, Math.max(1, Number.isInteger(rawMax) ? rawMax : 6));\n        const candidate = Array.isArray(heading.start)\n            ? heading.start\n            : [positive(heading.start)];\n        const start = candidate.length > 0 &&\n            candidate.length <= max &&\n            candidate.every((n) => Number.isSafeInteger(n) && n > 0)\n            ? candidate\n            : [1];\n        const values = Array.from({ length: 6 }, (_, i) => positive(start[i], 0) - (i === start.length - 1 ? 1 : 0));\n        for (const h of root.querySelectorAll(\"h1,h2,h3,h4,h5,h6\")) {\n            const level = Number(h.localName[1]);\n            if (level > max || h.classList.contains(\"unnumbered\"))\n                continue;\n            values[level - 1] = (values[level - 1] || 0) + 1;\n            values.fill(0, level);\n            const number = (heading.prefix || \"\") +\n                values\n                    .slice(0, level)\n                    .filter((v) => v > 0)\n                    .join(\".\");\n            const span = doc.createElement(\"span\");\n            span.setAttribute(\"data-section-number\", \"\");\n            span.setAttribute(\"data-tp-numbering-generated\", \"section\");\n            span.textContent = `${number} `;\n            h.prepend(span);\n        }\n    }\n    const next = {\n        figure: positive(config.figure?.start),\n        table: positive(config.table?.start),\n        code: positive(config.code?.start),\n        exercise: positive(config.exercise?.start),\n        example: positive(config.example?.start),\n    };\n    for (const object of root.querySelectorAll('figure,table,[data-numbering=\"exercise\"],[data-numbering=\"example\"]')) {\n        const declared = object.getAttribute(\"data-numbering\");\n        const custom = declared === \"exercise\" || declared === \"example\";\n        const question = custom && object.localName.endsWith(\"-question\");\n        const caption = custom\n            ? (object.querySelector(\":scope > [data-numbering-caption]\") ?? object)\n            : object.querySelector(\":scope > caption,:scope > figcaption\");\n        if (!caption ||\n            object.classList.contains(\"unnumbered\") ||\n            caption.classList.contains(\"unnumbered\"))\n            continue;\n        const kind = declared === \"figure\" ||\n            declared === \"table\" ||\n            declared === \"code\" ||\n            declared === \"exercise\" ||\n            declared === \"example\"\n            ? declared\n            : object.localName === \"table\"\n                ? \"table\"\n                : object.querySelector(\":scope > pre\")\n                    ? \"code\"\n                    : \"figure\";\n        const rule = config[kind];\n        if (!rule?.enabled)\n            continue;\n        const value = positive(object.getAttribute(\"data-number\"), next[kind]);\n        next[kind] = value + 1;\n        const label = rule.label ?? kind[0].toUpperCase() + kind.slice(1);\n        const marker = doc.createElement(\"span\");\n        marker.setAttribute(\"data-object-number\", kind);\n        marker.setAttribute(\"data-tp-numbering-generated\", kind);\n        marker.textContent = `${(label ? `${label} ` : \"\") + (rule.prefix || \"\") + value}. `;\n        if (custom)\n            object.setAttribute(\"data-tp-numbering-title\", marker.textContent.trim().replace(/\\.$/, \"\"));\n        if (question) {\n            const label = marker.textContent.trim().replace(/\\.$/, \"\");\n            object.setAttribute(\"data-tp-numbering-title\", label);\n            object\n                .querySelector(\"[data-tp-question-title]\")\n                ?.replaceChildren(doc.createTextNode(label));\n            continue;\n        }\n        const first = caption.firstElementChild;\n        if (first?.localName === \"p\" &&\n            ![...caption.childNodes].some((n) => n.nodeType === 3 && n.textContent?.trim()))\n            first.prepend(marker);\n        else\n            caption.prepend(marker);\n    }\n};const root=document.body;const options={childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:[\"class\",\"data-number\",\"data-numbering\"]};const observer=new MutationObserver(()=>{observer.disconnect();apply(root);observer.observe(root,options);});apply(root);observer.observe(root,options);})();</script>",
+    "markdown": "---\nexerciseNumbering:\n  enabled: true\n  start: 7\n  prefix: \"2.\"\nexampleNumbering:\n  enabled: true\n---\n\n[**` `**]{id=\"exercise-a\" data-numbering=\"exercise\"} Compute the square of 5.\n\n[**` `**]{id=\"example-a\" data-numbering=\"example\"} The square of 3 is 9.\n\n[**` `**]{id=\"exercise-b\" data-numbering=\"exercise\"} Compute the square of 8.",
+    "asciidoc": ":exercise-numbering:\n:exercise-start: 7\n:exercise-caption: Exercise\n:exercise-prefix: \"2.\"\n:example-numbering:\n:example-start: 1\n:example-caption: Example\n:example-prefix: \"\"\n\n[strong,id=\"exercise-a\",data-numbering=\"exercise\"]#` `# Compute the square of 5.\n\n[strong,id=\"example-a\",data-numbering=\"example\"]#` `# The square of 3 is 9.\n\n[strong,id=\"exercise-b\",data-numbering=\"exercise\"]#` `# Compute the square of 8.",
+    "latex": "\\usepackage{hyperref}\n\n\\newcounter{exercise}\n\\newcommand{\\exercisename}{exercise}\n\\setcounter{exercise}{6}\n\\renewcommand{\\exercisename}{Exercise}\n\\renewcommand{\\theexercise}{2.\\arabic{exercise}}\n\\newcounter{example}\n\\newcommand{\\examplename}{example}\n\\setcounter{example}{0}\n\\renewcommand{\\examplename}{Example}\n\\renewcommand{\\theexample}{\\arabic{example}}\n\\hypertarget{exercise-a}{}\\tpAttributes*[data-numbering={exercise}]{\\textbf{\\texttt{ }}} Compute the square of 5.\n\n\\hypertarget{example-a}{}\\tpAttributes*[data-numbering={example}]{\\textbf{\\texttt{ }}} The square of 3 is 9.\n\n\\hypertarget{exercise-b}{}\\tpAttributes*[data-numbering={exercise}]{\\textbf{\\texttt{ }}} Compute the square of 8.\n\n",
+    "restructuredtext": ".. exercise-numbering::\n   :start: 7\n   :label: \"Exercise\"\n   :prefix: \"2.\"\n\n.. example-numbering::\n   :start: 1\n   :label: \"Example\"\n   :prefix: \"\"\n\n.. role:: example-strong-1(html-strong)\n   :id: exercise-a\n   :data-numbering: exercise\n\n.. role:: example-strong-2(html-strong)\n   :id: example-a\n   :data-numbering: example\n\n.. role:: example-strong-3(html-strong)\n   :id: exercise-b\n   :data-numbering: exercise\n\n:example-strong-1:`\\`\\` \\`\\`` Compute the square of 5.\n\n:example-strong-2:`\\`\\` \\`\\`` The square of 3 is 9.\n\n:example-strong-3:`\\`\\` \\`\\`` Compute the square of 8."
+  },
+  "checks": [
+    {
+      "from": "html",
+      "to": "html",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "html",
+      "to": "markdown",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "html",
+      "to": "asciidoc",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "html",
+      "to": "latex",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "html",
+      "to": "restructuredtext",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "markdown",
+      "to": "html",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "markdown",
+      "to": "markdown",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "markdown",
+      "to": "asciidoc",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "markdown",
+      "to": "latex",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "markdown",
+      "to": "restructuredtext",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "asciidoc",
+      "to": "html",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "asciidoc",
+      "to": "markdown",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "asciidoc",
+      "to": "asciidoc",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "asciidoc",
+      "to": "latex",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "asciidoc",
+      "to": "restructuredtext",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "latex",
+      "to": "html",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "latex",
+      "to": "markdown",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "latex",
+      "to": "asciidoc",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "latex",
+      "to": "latex",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "latex",
+      "to": "restructuredtext",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "restructuredtext",
+      "to": "html",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "restructuredtext",
+      "to": "markdown",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "restructuredtext",
+      "to": "asciidoc",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "restructuredtext",
+      "to": "latex",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    },
+    {
+      "from": "restructuredtext",
+      "to": "restructuredtext",
+      "labels": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "back": [
+        "Exercise 2.7.",
+        "Example 1.",
+        "Exercise 2.8."
+      ],
+      "ids": true,
+      "rules": true
+    }
+  ]
+}

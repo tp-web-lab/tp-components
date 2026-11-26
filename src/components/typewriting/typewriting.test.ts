@@ -206,3 +206,56 @@ it("accepts only the current speech owner and keeps reduced-motion text visible"
 	expect(pending(target)).toBe(0);
 	target.detachSpeech(owner);
 });
+
+it("starts in a revealed panel and restarts after hiding and reopening it", async () => {
+	const panel = document.createElement("section");
+	panel.hidden = true;
+	panel.innerHTML =
+		'<tp-typewriting loop speed="20">Visible panel text</tp-typewriting>';
+	document.body.append(panel);
+	const element = panel.querySelector("tp-typewriting");
+	if (!(element instanceof TpTypewriting)) throw new Error("Missing component");
+	await vi.advanceTimersByTimeAsync(5);
+	expect(pending(element)).toBe(0);
+	panel.hidden = false;
+	await vi.advanceTimersByTimeAsync(5);
+	const initial = pending(element);
+	expect(initial).toBeGreaterThan(0);
+	await vi.advanceTimersByTimeAsync(100);
+	expect(pending(element)).toBeLessThan(initial);
+	panel.style.display = "none";
+	await vi.advanceTimersByTimeAsync(5);
+	expect(pending(element)).toBe(0);
+	panel.style.display = "block";
+	await vi.advanceTimersByTimeAsync(5);
+	expect(pending(element)).toBe(initial);
+});
+
+it("pauses at the current fragment on hover and resumes the remaining delay", async () => {
+	const element = fixture("AB", 'speed="10" delay="100" loop');
+	await vi.advanceTimersByTimeAsync(41);
+	element.dispatchEvent(new MouseEvent("mouseenter"));
+	await vi.advanceTimersByTimeAsync(500);
+	expect(pending(element)).toBe(2);
+	element.dispatchEvent(new MouseEvent("mouseleave"));
+	await vi.advanceTimersByTimeAsync(59);
+	expect(pending(element)).toBe(1);
+	await vi.advanceTimersByTimeAsync(40);
+	element.dispatchEvent(new MouseEvent("mouseenter"));
+	await vi.advanceTimersByTimeAsync(500);
+	expect(pending(element)).toBe(1);
+	element.dispatchEvent(new MouseEvent("mouseleave"));
+	await vi.advanceTimersByTimeAsync(60);
+	expect(pending(element)).toBe(0);
+	element.dispatchEvent(new MouseEvent("mouseenter"));
+	await vi.advanceTimersByTimeAsync(500);
+	expect(pending(element)).toBe(0);
+	element.dispatchEvent(new MouseEvent("mouseleave"));
+	await vi.advanceTimersByTimeAsync(100);
+	expect(pending(element)).toBe(1);
+	element.dispatchEvent(new MouseEvent("mouseenter"));
+	element.dispatchEvent(new Event("pointerdown"));
+	element.dispatchEvent(new MouseEvent("mouseleave"));
+	await vi.advanceTimersByTimeAsync(500);
+	expect(pending(element)).toBe(0);
+});

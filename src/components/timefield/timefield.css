@@ -95,3 +95,11 @@ tp-timefield [data-tp-timefield-input] {
 tp-timefield input::-webkit-calendar-picker-indicator { display: none; }
 tp-timefield [data-tp-timefield-clear][hidden] { display: none; }
 tp-timefield[data-disabled] [data-tp-timefield-control] { cursor: not-allowed; opacity: 0.6; }
+
+tp-timefield[copy-code] [data-tp-timefield-control] {
+ grid-template-columns: minmax(0, 1fr) max-content max-content max-content;
+}
+tp-timefield [data-tp-timefield-copy] {
+ position: static; transform: none; margin: 0; grid-column: 4; grid-row: 1;
+ min-inline-size: 1.75rem; min-block-size: 1.75rem;
+}

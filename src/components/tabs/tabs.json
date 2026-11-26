@@ -117,6 +117,11 @@
       "description": "Background color of the tab content panel."
     },
     {
+      "name": "--tp-tabs-panel-color",
+      "default": "var(--tp-text-body)",
+      "description": "Text color of the tab content panel."
+    },
+    {
       "name": "--tp-tabs-tab-bg",
       "default": "var(--tp-neutral-fill-softer)",
       "description": "Background color of inactive tab headers."
@@ -133,7 +138,7 @@
     },
     {
       "name": "--tp-tabs-tab-selected-color",
-      "default": "var(--tp-brand-text-colorful)",
+      "default": "var(--tp-brand-text-on-soft)",
       "description": "Text color of the selected tab header."
     }
   ],

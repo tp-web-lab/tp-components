@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-cover" allow-script }
+::::: tp-markdown-viewer { label="tp-cover" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-cover { min-height="16rem" heading="h2" }

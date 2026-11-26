@@ -110,7 +110,9 @@ For a Markdown navbar:
 
 ### Linked toolbar logo
 
-Use `logo="logo.svg"` with `logo-href="https://example.org/"` to display the logo as a `tp-icon-button` that opens the associated website in the current tab. Relative destinations resolve against the page URL. When `logo-href` is omitted or empty, it defaults to `./` (the current directory). An invalid or non-HTTP(S) destination leaves the logo visible but inactive. Both attributes update immediately. Single-page documents also require `toolbar` to display the toolbar.
+Use `logo="logo.svg"` with `logo-href="https://example.org/"` to display the logo as a borderless `tp-button`, with a fixed height of `2em` and a width that follows the logo’s proportions, that opens the associated website in the current tab. Relative destinations resolve against the page URL. When `logo-href` is omitted or empty, it defaults to `./` (the current directory). An invalid or non-HTTP(S) destination leaves the logo visible but inactive. Both attributes update immediately. Single-page documents also require `toolbar` to display the toolbar.
+
+The `logo` attribute accepts an icon name from the `tp` library, such as `logo="logo-tp"`, or an SVG URL. An empty value hides the logo.
 
 ### Importing
 
@@ -154,19 +156,19 @@ Toolbar controls
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -191,6 +193,10 @@ All tp-components and external tools used by this component are loaded automatic
 @summary Visual separator for menus, dropdowns, toolbars, and layouts.
 -->
 <!--
+@tp-dependency tp-icon
+@summary SVG icon component with inline, URL, and registry sources.
+-->
+<!--
 @tp-dependency tp-icon-button
 @summary Accessible icon button component.
 -->
@@ -198,6 +204,7 @@ All tp-components and external tools used by this component are loaded automatic
 - [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 - [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
 - [`<tp-divider>`](#/components/divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
+- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
 
 ### External

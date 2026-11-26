@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-dir" allow-script }
+:::::: tp-markdown-viewer { label="tp-dir" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-box

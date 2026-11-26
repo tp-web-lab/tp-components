@@ -1,0 +1,247 @@
+{
+  "tagname": "tp-ocaml-tracer",
+  "classname": "TpOCamlTracer",
+  "superclass": "TpBase",
+  "description": "Records and replays OCaml execution with variables, call frames and object references.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-ocaml-tracer src=\"/docs/components/ocaml-tracer/examples/recursion.ml\"></tp-ocaml-tracer>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "filename",
+      "description": "Display filename override; defaults to the loaded source or trace basename, or program.ml.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "src",
+      "description": "OCaml source URL; loaded without executing the program.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "trace",
+      "description": "Complete JSON recording URL; takes precedence over src and inline source without executing OCaml.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "value",
+      "description": "OCaml source used when src and trace are absent.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "firstStep(): void",
+      "inherited": false,
+      "description": "Restores the first displayed step."
+    },
+    {
+      "name": "getCode(): string",
+      "inherited": false,
+      "description": "Returns the complete versioned JSON recording as a string."
+    },
+    {
+      "name": "goTo(index: number): void",
+      "inherited": false,
+      "description": "Displays a zero-based snapshot index, clamped to the available steps."
+    },
+    {
+      "name": "lastStep(): void",
+      "inherited": false,
+      "description": "Displays the final recorded step."
+    },
+    {
+      "name": "loadTrace(): void",
+      "inherited": false,
+      "description": "Opens the saved trace file chooser without starting the language engine."
+    },
+    {
+      "name": "nextStep(): void",
+      "inherited": false,
+      "description": "Displays the following step."
+    },
+    {
+      "name": "previousStep(): void",
+      "inherited": false,
+      "description": "Displays the preceding step."
+    },
+    {
+      "name": "record(): void",
+      "inherited": false,
+      "description": "Records the current editor source in a fresh OCaml Worker."
+    },
+    {
+      "name": "refresh(): Promise<void>",
+      "inherited": false,
+      "description": "Reloads the trace or source according to attribute precedence."
+    },
+    {
+      "name": "saveAs(): Promise<void>",
+      "inherited": false,
+      "description": "Opens Save as for the complete recording, including its original source."
+    },
+    {
+      "name": "stop(): void",
+      "inherited": false,
+      "description": "Terminates the current recording Worker."
+    },
+    {
+      "name": "toggleJson(): void",
+      "inherited": false,
+      "description": "Expands or collapses the trace JSON panel."
+    },
+    {
+      "name": "toggleSource(): void",
+      "inherited": false,
+      "description": "Shows or hides the OCaml editor without changing the recording."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-color",
+      "summary": "Brand color preset controller scoped to the containing element."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
+    },
+    {
+      "name": "tp-toolbar",
+      "summary": "Sticky toolbar with start / center / end sections,"
+    }
+  ],
+  "credits": [
+    {
+      "name": "Js_of_ocaml",
+      "url": "https://ocsigen.org/js_of_ocaml/",
+      "summary": "OCaml compilation and execution with observation hooks."
+    }
+  ],
+  "userHelp": {
+    "commands": [
+      {
+        "button": ":tp-icon:{name=\"code\"} Edit source",
+        "description": "Show or hide the OCaml editor without changing the recording.",
+        "shortcut": "—"
+      },
+      {
+        "button": ":tp-icon:{name=\"play\"} Record execution",
+        "description": "Record the editor source in a fresh OCaml session.",
+        "shortcut": "—"
+      },
+      {
+        "button": ":tp-icon:{name=\"stop\"} Stop recording",
+        "description": "Terminate the active recording Worker.",
+        "shortcut": "—"
+      },
+      {
+        "button": ":tp-icon:{name=\"file-import\"} Load trace",
+        "description": "Open a saved JSON recording without executing OCaml.",
+        "shortcut": "—"
+      },
+      {
+        "button": ":tp-icon:{name=\"file-upload\"} Save trace",
+        "description": "Choose a filename and save all snapshots and their source.",
+        "shortcut": "—"
+      },
+      {
+        "button": ":tp-icon:{name=\"chevron-left-first\"} First step",
+        "description": "Display the first recorded step.",
+        "shortcut": "—"
+      },
+      {
+        "button": ":tp-icon:{name=\"chevron-left\"} Previous step",
+        "description": "Display the preceding recorded step.",
+        "shortcut": "—"
+      },
+      {
+        "button": ":tp-icon:{name=\"chevron-right\"} Next step",
+        "description": "Display the following recorded step.",
+        "shortcut": "—"
+      },
+      {
+        "button": ":tp-icon:{name=\"chevron-right-last\"} Last step",
+        "description": "Display the final recorded step.",
+        "shortcut": "—"
+      },
+      {
+        "button": "Hover a reference dot",
+        "description": "Highlight the object's reference arrow.",
+        "shortcut": "—"
+      },
+      {
+        "button": "Click a reference dot",
+        "description": "Scroll to its object.",
+        "shortcut": "—"
+      },
+      {
+        "button": "Hover or focus a base-class link",
+        "description": "Highlight the base class object box.",
+        "shortcut": "—"
+      },
+      {
+        "button": "Click a base-class link",
+        "description": "Scroll to the base class object box.",
+        "shortcut": "—"
+      },
+      {
+        "button": "Scroll the memory diagram horizontally",
+        "description": "Reveal objects and arrows outside the visible area.",
+        "shortcut": "—"
+      },
+      {
+        "button": "Trace JSON <!-- button -->",
+        "description": "Expand or collapse the current snapshot's JSON.",
+        "shortcut": "—"
+      }
+    ],
+    "displayName": "OCaml tracer",
+    "introduction": "The custom `<tp-ocaml-tracer>` element records and replays OCaml execution with variables, call frames and object references.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result | Shortcut |\n| --- | --- | --- |\n| :tp-icon:{name=\"code\"} Edit source | Show or hide the OCaml editor without changing the recording. | — |\n| :tp-icon:{name=\"play\"} Record execution | Record the editor source in a fresh OCaml session. | — |\n| :tp-icon:{name=\"stop\"} Stop recording | Terminate the active recording Worker. | — |\n| :tp-icon:{name=\"file-import\"} Load trace | Open a saved JSON recording without executing OCaml. | — |\n| :tp-icon:{name=\"file-upload\"} Save trace | Choose a filename and save all snapshots and their source. | — |\n| :tp-icon:{name=\"chevron-left-first\"} First step | Display the first recorded step. | — |\n| :tp-icon:{name=\"chevron-left\"} Previous step | Display the preceding recorded step. | — |\n| :tp-icon:{name=\"chevron-right\"} Next step | Display the following recorded step. | — |\n| :tp-icon:{name=\"chevron-right-last\"} Last step | Display the final recorded step. | — |\n| Hover a reference dot | Highlight the object's reference arrow. | — |\n| Click a reference dot | Scroll to its object. | — |\n| Hover or focus a base-class link | Highlight the base class object box. | — |\n| Click a base-class link | Scroll to the base class object box. | — |\n| Scroll the memory diagram horizontally | Reveal objects and arrows outside the visible area. | — |\n| Trace JSON <!-- button --> | Expand or collapse the current snapshot's JSON. | — |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>Tab</kbd> | Focus commands and object references; a focused reference highlights its arrow. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused command. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to the focused component; <kbd>Shift</kbd> may be needed to type ?. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component in the containing hierarchy and open its User help. |",
+    "keyboard": []
+  }
+}

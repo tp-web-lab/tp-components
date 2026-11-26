@@ -154,7 +154,10 @@ export function createHelpButtonTable(
 			}
 			const glyph = doc.createElement("tp-icon");
 			glyph.setAttribute("name", name);
-			if (library) glyph.setAttribute("library", library);
+			const iconLibrary = control.hasAttribute("data-help-icon-libraries")
+				? control.getAttribute("data-help-icon-libraries")?.split(",")[index]
+				: library;
+			if (iconLibrary) glyph.setAttribute("library", iconLibrary);
 			glyph.setAttribute("aria-hidden", "true");
 			glyph.setAttribute("size", "2em");
 			button.append(glyph, " ");

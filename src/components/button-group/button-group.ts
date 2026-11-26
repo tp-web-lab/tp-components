@@ -43,6 +43,7 @@ function isButtonGroupOrientation(
  * @attr {string} orientation = "horizontal" - Arrangement of buttons: horizontal in a row, or vertical in a column.
  * @attr {boolean} attached = false - Joins adjacent buttons without gaps and removes their inner corner rounding.
  * @attr {boolean} stretch = false - Expands the group to the available width and gives its buttons equal flexible space.
+ *  @cssprop [--tp-button-group-gap=0] Space between adjacent buttons in the group.
  * @example
  * <tp-box data-page-navigation="" data-allow-script="">
  *   <p>Use the grouped buttons to change the current page.</p>
@@ -53,7 +54,6 @@ function isButtonGroupOrientation(
  *   <p data-page-status="" role="status">Page 1 of 5</p>
  *   <script src="/docs/components/button-group/examples/page-navigation.js"></script>
  * </tp-box>
- *  @cssprop [--tp-button-group-gap=0] Space between adjacent buttons in the group.
  */
 export class TpButtonGroup extends TpBase {
 	/**

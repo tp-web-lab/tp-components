@@ -9,31 +9,22 @@
 solution::
 +
 . BALL
-
 . AREA
-
 . LEAD
-
 . LADY
 
 across::
 +
 . A. A round toy used in many sports
-
 . B. The size of a surface
-
 . C. A heavy metal
-
 . D. A polite word for a woman
 
 down::
 +
 . 1. A round toy used in many sports
-
 . 2. The size of a surface
-
 . 3. A heavy metal
-
 . 4. A polite word for a woman
 ====
 ======

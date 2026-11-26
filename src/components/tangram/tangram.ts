@@ -1,3 +1,4 @@
+import { showGameRules, toggleGameHelp } from "../../utilities/game-header.js";
 /** @module components/tangram */
 // tp-docgen:dependencies:start
 /**
@@ -99,13 +100,13 @@ const copy = (p: Placement[]): Placement[] => p.map((v) => ({ ...v }));
  * @keyboard Escape Cancel a drag and close the selected piece controls.
  * @keyboard F Flip the selected parallelogram.
  * @keyboard Ctrl+Z / Ctrl+Shift+Z Undo / redo (Command also supported).
- * @example
- * <tp-tangram></tp-tangram>
  *  @event tp-tangram-change Emitted after an accepted piece edit; placements contains each piece ID, x/y position, angle and flip state, and solved reports whether the target is matched.
  * @eventdetail tp-tangram-change { placements: Placement[]; solved: boolean }
  * @accessibility Names the puzzle board and exposes playing pieces as labelled focusable SVG buttons; keyboard commands support moving, rotating, flipping, undoing and redoing placements.
  * @accessibility Groups and labels toolbar and selected-piece controls, announces game status politely, and removes playing pieces from keyboard navigation during solution preview.
  * @accessibilityresponsibility Provide a text description of the target and a suitable alternative activity when spatial visual manipulation is not usable; piece colors alone must not carry essential instructions.
+ * @example
+ * <tp-tangram></tp-tangram>
  */
 export class TpTangram extends TpBase {
 	private source = new TpDeclarativeTextSource(this, {
@@ -803,6 +804,38 @@ export class TpTangram extends TpBase {
 		node?.classList.remove("invalid");
 		this.positionSelectionTools();
 	};
+
+	/** Opens or closes the game assistance menu. */
+	toggleHelp(): void {
+		toggleGameHelp(this);
+	}
+
+	/** Opens the rules of this game in its drawer. */
+	showRules(): void {
+		showGameRules(this);
+	}
+
+	/** Rotates the selected piece counterclockwise by 45 degrees. */
+	rotateLeft(): void {
+		this.cancel();
+		const p = this.state.find((p) => p.id === this.selected);
+		if (p) this.place(p.id, p.x, p.y, p.angle - 45);
+	}
+
+	/** Rotates the selected piece clockwise by 45 degrees. */
+	rotateRight(): void {
+		this.cancel();
+		const p = this.state.find((p) => p.id === this.selected);
+		if (p) this.place(p.id, p.x, p.y, p.angle + 45);
+	}
+
+	/** Flips the selected parallelogram. Other pieces are unchanged. */
+	flipSelected(): void {
+		this.cancel();
+		const p = this.state.find((p) => p.id === this.selected);
+		if (p?.id === "parallelogram")
+			this.place(p.id, p.x, p.y, p.angle, !p.flipped);
+	}
 }
 if (!customElements.get("tp-tangram"))
 	customElements.define("tp-tangram", TpTangram);

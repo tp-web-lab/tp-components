@@ -395,12 +395,12 @@ function gateMarkup(
  * @tagname tp-graph-logical-circuit
  * @accessibility Makes logical input and output terminals operable by pointer and keyboard.
  * @keyboard {Enter / Space} Toggles the focused input or output terminal.
- * @example
- * <tp-graph-logical-circuit id="logic-example" grid="" grid-size="20" src="/docs/components/graph-logical-circuit/examples/xor.json"></tp-graph-logical-circuit>
  *  @event tp-logic-toggle Emitted after an input node is toggled; id identifies the input, value is its new Boolean level, and graph contains the resulting snapshot.
  * @eventdetail tp-logic-toggle { id: string; value: boolean; graph: TpGraphDocument }
  * @event tp-logic-evaluate Emitted after combinational outputs are recomputed; graph contains the resulting snapshot.
  * @eventdetail tp-logic-evaluate { graph: TpGraphDocument }
+ * @example
+ * <tp-graph-logical-circuit id="logic-example" grid="" grid-size="20" src="/docs/components/graph-logical-circuit/examples/xor.json"></tp-graph-logical-circuit>
  */
 export class TpGraphLogicalCircuit extends TpGraphEditor {
 	private static readonly logicStyleId = "tp-graph-logical-circuit-styles";

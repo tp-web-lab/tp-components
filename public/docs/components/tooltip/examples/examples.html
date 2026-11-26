@@ -1,4 +1,4 @@
-<tp-html-viewer label="tp-tooltip" allow-script>
+<tp-html-viewer label="tp-tooltip" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
       <tp-box data-intro-action="tooltip" data-allow-script="">
@@ -50,6 +50,32 @@
 
       document.body.append(example);
       </script>
+    </div>
+
+    <div role="example" label="Links and scrollable content">
+      <tp-box style="min-height: 20rem; padding: 1rem; display: flex; align-items: end;">
+        <tp-button id="scroll-tooltip-trigger" class="scroll-tooltip-trigger">Hover, then enter the tooltip</tp-button>
+        <tp-tooltip anchor=".scroll-tooltip-trigger" style="inline-size: 28rem; max-inline-size: calc(100vw - 2rem); padding: 0; border: 1px solid var(--tp-brand-stroke-soft); background: var(--tp-background-color); color: var(--tp-text-body);">
+          <div tabindex="0" aria-label="Scrollable tooltip guide" style="max-height: 10rem; overflow: auto; overscroll-behavior: contain; padding: 1rem;">
+            <p><strong>Try the interactive tooltip</strong></p>
+            <p>Move the pointer here, then <a href="#tooltip-example-details">open the details below</a> or scroll through this guide.</p>
+            <ol>
+              <li>Hover over the button to open the tooltip.</li>
+              <li>Move across the gap into the tooltip.</li>
+              <li>Keep the pointer inside: the tooltip stays open.</li>
+              <li>Select some text without closing it.</li>
+              <li>Use the mouse wheel or scrollbar to continue reading.</li>
+              <li>Use <kbd>Tab</kbd> to focus the scrollable guide.</li>
+              <li>Use the arrow keys to scroll while the guide has focus.</li>
+              <li>Follow the link at the end of the guide.</li>
+              <li>Move away from both areas to close the tooltip when it has no keyboard focus.</li>
+              <li>Press <kbd>Escape</kbd> to close it immediately.</li>
+            </ol>
+            <p><a href="#tooltip-example-details">Read the details</a></p>
+          </div>
+        </tp-tooltip>
+      </tp-box>
+      <p id="tooltip-example-details"><strong>Details:</strong> Links inside the tooltip work like ordinary links. Hover or focus the button again to reopen the guide.</p>
     </div>
   </template>
 </tp-html-viewer>

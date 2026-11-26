@@ -15,11 +15,11 @@
 
             .. tp-file-tree::
 
-            .. p::
+            .. attributes::
                :data-demo-status:
                :role: status
 
-               Select a file to see its path.
+            Select a file to see its path.
 
             .. script::
                :src: /docs/components/_shared/introduction-actions.js

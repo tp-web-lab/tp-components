@@ -70,6 +70,11 @@
       "name": "save(format: TpSaveImageFormat): Promise<void>",
       "inherited": false,
       "description": "Saves the anchored image or exportable component as svg, png or webp using filename. Resolves after saving or cancellation; unsupported formats and missing targets reject."
+    },
+    {
+      "name": "toggleMenu(): void",
+      "inherited": false,
+      "description": "Opens or closes the export format menu, respecting the disabled state."
     }
   ],
   "events": [
@@ -109,7 +114,7 @@
   "userHelp": {
     "displayName": "Save image",
     "introduction": "The custom `<tp-save-image>` element saves an anchored image in several formats.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Save image button | Download the associated image. The browser handles the download. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| :tp-icon:{name=\"save-image\" size=\"2em\"} Save image button | Download the associated image. The browser handles the download. |\n| :tp-icon:{name=\"file-svg\" size=\"2em\"} SVG | SVG. |\n| :tp-icon:{name=\"file-png\" size=\"2em\"} PNG | PNG. |\n| :tp-icon:{name=\"file-webp\" size=\"2em\"} WebP | WebP. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

@@ -32,3 +32,16 @@ test("RST retains the blank line and indentation required before a nested list",
   assert.match(output, /- ?\n\n     - A/);
   assert.doesNotMatch(output, /<ul>|<ol>/);
 });
+
+
+test("RST HTML tables use html-table without colliding with Docutils table", () => {
+ const output=nativeMarkup("rst",'<table><tr><td><strong>Bold</strong></td></tr></table>');
+ assert.match(output,/^\.\. html-table::/);
+ assert.doesNotMatch(output,/^\s*\.\. table::/m);
+ assert.match(output,/\*\*Bold\*\*/);
+});
+
+test("AsciiDoc rich cells use native image, video and audio macros", () => {
+ const output=nativeMarkup("adoc",'<table><tr><td><img src="image.svg"><video controls src="video.mp4"></video><audio controls src="audio.mp3"></audio></td></tr></table>');
+ for(const syntax of ["image::image.svg[", "video::video.mp4[", "audio::audio.mp3["]) assert(output.includes(syntax));
+});

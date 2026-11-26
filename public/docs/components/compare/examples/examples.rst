@@ -15,13 +15,13 @@
 
             .. tp-box::
                :slot: before
-               :style: height: 100%; background: var(--tp-neutral-100);
+               :style: height: 100%; background: var(--tp-neutral-fill-softer); color: var(--tp-neutral-text-on-soft);
 
                Before: the original design
 
             .. tp-box::
                :slot: after
-               :style: height: 100%; background: var(--tp-brand-100);
+               :style: height: 100%; background: var(--tp-brand-fill-softer); color: var(--tp-brand-text-on-soft);
 
                After: the updated design
 
@@ -44,14 +44,14 @@
 
             const element2 = document.createElement("tp-box");
             element2.setAttribute("slot", "before");
-            element2.setAttribute("style", "height: 100%; background: var(--tp-neutral-100);");
+            element2.setAttribute("style", "height: 100%; background: var(--tp-neutral-fill-softer); color: var(--tp-neutral-text-on-soft);");
             element2.append(document.createTextNode("Before: the original design"));
             element1.append(element2);
             element1.append(document.createTextNode("\n  "));
 
             const element3 = document.createElement("tp-box");
             element3.setAttribute("slot", "after");
-            element3.setAttribute("style", "height: 100%; background: var(--tp-brand-100);");
+            element3.setAttribute("style", "height: 100%; background: var(--tp-brand-fill-softer); color: var(--tp-brand-text-on-soft);");
             element3.append(document.createTextNode("After: the updated design"));
             element1.append(element3);
             element1.append(document.createTextNode("\n"));

@@ -1,0 +1,7 @@
+= Workshop notice
+:showtitle:
+
+Bring a *notebook* and read the _guide_ before the session.
+
+* Prepare your questions.
+* Try the examples.

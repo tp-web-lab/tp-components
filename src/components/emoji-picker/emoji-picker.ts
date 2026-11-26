@@ -136,12 +136,12 @@ export function parseEmojiTestData(source: string): TpEmojiPickerItem[] {
  * @attr {boolean} compact = false - Shows only the title, filters, and a compact 2em glyph grid.
  *
  *
- * @example
- * <tp-emoji-picker></tp-emoji-picker>
  *  @event tp-emoji-picker-select Emitted when a emoji is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success. value is null when the selected copy format has no representation.
  * @eventdetail tp-emoji-picker-select { emoji: string; name: string; group: string; subgroup: string; version: string; codepoints: string[]; copy: TpEmojiPickerCopyFormat; value: string | null }
  * @event tp-emoji-picker-copy-error Emitted when copying the selected emoji fails. The detail contains the requested clipboard text, selection metadata and the caught error.
  * @eventdetail tp-emoji-picker-copy-error { emoji: string; name: string; group: string; subgroup: string; version: string; codepoints: string[]; copy: TpEmojiPickerCopyFormat; value: string; error: unknown }
+ * @example
+ * <tp-emoji-picker></tp-emoji-picker>
  */
 export class TpEmojiPicker extends TpBase {
 	public static readonly unicodeVersion = "17.0";
@@ -406,7 +406,8 @@ export class TpEmojiPicker extends TpBase {
 		this.gridElement.replaceChildren(fragment);
 	}
 
-	private selectItem(item: TpEmojiPickerItem): void {
+	/** Selects the supplied item, updates its preview, requests copying in the chosen format and emits the selection event. */
+	selectItem(item: TpEmojiPickerItem): void {
 		const metadata = getEmojiMetadata(item);
 		if (this.selectedEmojiElement !== null)
 			this.selectedEmojiElement.textContent = item.emoji;

@@ -115,6 +115,12 @@ export interface TpDragDropDropDetail {
  * @keyboard {Enter / Space} Grabs the focused item, then drops it at the selected position.
  * @keyboard {Arrow keys} Selects the previous or next item as the drop target.
  * @keyboard {Escape} Cancels the current keyboard drag.
+ *  @event tp-dragdrop-start Emitted when an item is grabbed by pointer or keyboard; source is the dragged HTML element.
+ * @eventdetail tp-dragdrop-start { source: HTMLElement }
+ * @event tp-dragdrop-over Emitted when the proposed target or relative insertion position changes; source and target identify HTML elements.
+ * @eventdetail tp-dragdrop-over { source: HTMLElement; target: HTMLElement | null; position: "before" | "inside" | "after" | null }
+ * @event tp-dragdrop-drop Emitted when a drop is requested by pointer or keyboard. The consumer must move source relative to target at position; the component does not move it automatically.
+ * @eventdetail tp-dragdrop-drop { source: HTMLElement; target: HTMLElement | null; position: "before" | "inside" | "after" | null }
  * @example
  * <tp-box id="dragdrop-board" data-dragdrop-demo="" data-allow-script="">
  *   <p>Drag a task to <strong>To do</strong> or <strong>Done</strong>, including an empty column. The Move button sends a task to the other column without dragging.</p>
@@ -138,12 +144,6 @@ export interface TpDragDropDropDetail {
  *   <tp-dragdrop root="#dragdrop-board" items="[data-task]"></tp-dragdrop>
  *   <script src="/docs/components/dragdrop/examples/task-board.js"></script>
  * </tp-box>
- *  @event tp-dragdrop-start Emitted when an item is grabbed by pointer or keyboard; source is the dragged HTML element.
- * @eventdetail tp-dragdrop-start { source: HTMLElement }
- * @event tp-dragdrop-over Emitted when the proposed target or relative insertion position changes; source and target identify HTML elements.
- * @eventdetail tp-dragdrop-over { source: HTMLElement; target: HTMLElement | null; position: "before" | "inside" | "after" | null }
- * @event tp-dragdrop-drop Emitted when a drop is requested by pointer or keyboard. The consumer must move source relative to target at position; the component does not move it automatically.
- * @eventdetail tp-dragdrop-drop { source: HTMLElement; target: HTMLElement | null; position: "before" | "inside" | "after" | null }
  */
 export class TpDragdrop extends TpBase {
 	/** Optional owning-component integration; standalone selector behavior is unchanged. */

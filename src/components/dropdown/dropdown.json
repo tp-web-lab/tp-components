@@ -63,6 +63,11 @@
       "description": "Closes all submenus."
     },
     {
+      "name": "hide(): void",
+      "inherited": true,
+      "description": "Closes the overlay and removes its backdrop."
+    },
+    {
       "name": "reposition(): void",
       "inherited": false,
       "description": "Repositions an open menu after its anchor moves without resizing."

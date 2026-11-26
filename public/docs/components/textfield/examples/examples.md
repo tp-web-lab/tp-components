@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-textfield" allow-script }
+::::: tp-markdown-viewer { label="tp-textfield" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-textfield { label="Single line" placeholder="Type some text..." clearable }

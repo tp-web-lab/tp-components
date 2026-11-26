@@ -403,8 +403,7 @@ export class TpColor extends TpBase {
 
 				li.append(check, swatch, text);
 				li.addEventListener("click", () => {
-					this.preset = preset;
-					dropdown.open = false;
+					this.selectPreset(preset);
 				});
 
 				newUl.append(li);
@@ -508,7 +507,10 @@ export class TpColor extends TpBase {
 				"label",
 				`Brand preset: ${toPresetLabel(preset)}. Click to choose another color.`,
 			);
-			this.triggerEl.style.setProperty("color", TP_COLOR_SWATCH[preset]);
+			this.triggerEl.style.setProperty(
+				"color",
+				"var(--tp-brand-text-colorful)",
+			);
 		}
 
 		if (this.dropdownEl instanceof HTMLElement) {
@@ -721,6 +723,18 @@ export class TpColor extends TpBase {
 		}
 
 		return null;
+	}
+
+	/** Opens or closes the choices menu, unless this control is disabled. */
+	toggleMenu(): void {
+		this.onTriggerClick();
+	}
+
+	/** Applies the chosen brand preset and closes its menu, unless the controller is disabled. */
+	selectPreset(preset: TpColorPreset): void {
+		if (this.disabled) return;
+		this.preset = preset;
+		if (this.dropdownEl) this.dropdownEl.open = false;
 	}
 }
 

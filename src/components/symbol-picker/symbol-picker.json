@@ -47,7 +47,13 @@
       "default": "\"all\""
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "selectItem(item: TpSymbolPickerItem): void",
+      "inherited": false,
+      "description": "Selects the supplied item, updates its preview, requests copying in the chosen format and emits the selection event."
+    }
+  ],
   "events": [
     {
       "name": "tp-symbol-picker-copy-error",

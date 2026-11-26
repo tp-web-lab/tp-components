@@ -8,8 +8,8 @@ The toolbar is optional. The interactions below are available only when the corr
 | --- | --- |
 | Local navigation link (right of the toolbar) | Open the linked document or website. The local navigation stays available when changing pages in a multipage document. |
 | Source repository | Open the linked Git repository in a new tab. |
-| Code | Open or close the document source in a drawer, without replacing the rendered document. |
-| Calculator | Open or close the scientific calculator. |
+| :tp-icon:{name="code" size="2em"} Code | Open or close the document source in a drawer, without replacing the rendered document. |
+| :tp-icon:{name="calculator" size="2em"} Calculator | Open or close the scientific calculator. |
 | Clock | Read the time; hover to display the date. |
 | Language | Select an available translation of this document. |
 | Color / Theme | Change the brand color or the light/dark appearance. |

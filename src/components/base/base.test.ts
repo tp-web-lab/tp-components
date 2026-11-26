@@ -250,12 +250,12 @@ describe("<tp-base>", () => {
 		expect(document.body.classList.contains("tp-dark")).toBe(false);
 	});
 
-	it("injecte les couleurs globales pour le HTML généré par Highlight.js", () => {
+	it("injecte les couleurs communes du fond et du texte des blocs de code", () => {
 		ensureTpBaseStyles();
 
 		const resetStyleEl = document.getElementById("tp-reset-styles");
-		expect(resetStyleEl?.textContent).toContain(".hljs-tag");
-		expect(resetStyleEl?.textContent).toContain("--tp-syntax-token-string");
+		expect(resetStyleEl?.textContent).toContain("--tp-syntax-surface");
+		expect(resetStyleEl?.textContent).toContain("--tp-syntax-foreground");
 	});
 
 	it("recalcule l’échelle brand dans les presets locaux", () => {
@@ -272,7 +272,7 @@ describe("<tp-base>", () => {
 			/\.tp-default,[\s\S]*\.tp-blue,[\s\S]*--tp-brand-950:/,
 		);
 	});
-	it("provides a text-style alias for every brand palette in light and dark modes", () => {
+	it("provides a text-style alias for every brand palette", () => {
 		ensureTpBaseStyles();
 		const css = document.getElementById("tp-token-styles")?.textContent ?? "";
 		const palettes = [
@@ -280,7 +280,6 @@ describe("<tp-base>", () => {
 		].map((match) => match[1]);
 		expect(palettes).toHaveLength(22);
 		for (const palette of palettes) {
-			expect(css).toContain(`.tp-dark .${palette}-style`);
 			const textRule = css.slice(css.indexOf("/* Text-color shortcuts"));
 			expect(textRule).toContain(`.${palette}-style`);
 			expect(textRule).toContain("color: var(--tp-brand-text-colorful)");

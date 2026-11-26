@@ -31,14 +31,14 @@ export type TpAvatarGroupOrientation = "horizontal" | "vertical";
  * @attr {TpAvatarGroupOrder} order = "ltr" - Stacking order: ltr places later avatars in front; rtl places earlier avatars in front.
  * @attr {TpAvatarGroupOrientation} orientation = "horizontal" - Layout axis (horizontal or vertical).
  * @accessibility Preserves avatar labels and DOM reading order; the group adds no keyboard stop.
+ *  @cssprop [--tp-avatar-group-index=unset] Stacking order of an individual avatar. Assigned internally on each child from its position and the order attribute; no static CSS default.
+ * @cssprop [--tp-avatar-group-overlap=0.75rem] Overlap distance between adjacent avatars along the current orientation; updated from the offset attribute.
  * @example
  * <tp-avatar-group>
  *   <tp-avatar initials="AL" label="Ada Lovelace"></tp-avatar>
  *   <tp-avatar initials="GH" label="Grace Hopper"></tp-avatar>
  *   <tp-avatar initials="KT" label="Katherine Johnson"></tp-avatar>
  * </tp-avatar-group>
- *  @cssprop [--tp-avatar-group-index=unset] Stacking order of an individual avatar. Assigned internally on each child from its position and the order attribute; no static CSS default.
- * @cssprop [--tp-avatar-group-overlap=0.75rem] Overlap distance between adjacent avatars along the current orientation; updated from the offset attribute.
  */
 export class TpAvatarGroup extends TpBase {
 	/** Avatars whose private stacking property is managed by this group. */

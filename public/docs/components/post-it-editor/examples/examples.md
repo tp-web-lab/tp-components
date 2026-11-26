@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-post-it-editor" allow-script style="--tp-markup-viewer-frame-min-height: 48rem" }
+::::: tp-markdown-viewer { label="tp-post-it-editor" allow-script preserve-source style="--tp-markup-viewer-frame-min-height: 48rem" }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-box { id="post-it-editor-example" }

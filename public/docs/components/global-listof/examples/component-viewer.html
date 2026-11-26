@@ -1,0 +1,29 @@
+<div hidden>
+  <tp-global-listof data-demo-list selector="figure" title="List of figures"></tp-global-listof>
+</div>
+<tp-box style="position: relative; contain: layout; block-size: 32rem; padding: 0;">
+  <tp-html-multi-pages repository="/docs/components/global-listof/examples/guide" label="Global lists" menu=""></tp-html-multi-pages>
+</tp-box>
+<script type="module">
+import "/components/global-listof/global-listof.js";
+import "/components/html-multi-pages/html-multi-pages.js";
+
+const list = document.querySelector("tp-global-listof[data-demo-list]");
+const guide = document.querySelector("tp-html-multi-pages");
+
+// Keep the authored instance (and the Demo's attribute values) when the guide
+// loads List of figures, including after navigating back from a chapter.
+let openedAppendix = false;
+function mountList() {
+  if (!openedAppendix && guide.querySelector("#global-lists-overview")) {
+    openedAppendix = true;
+    guide.querySelector('[data-role="sidebar"] a[href="#/list-of-figures.html"]')?.click();
+  }
+  const placeholder = guide.querySelector("tp-global-listof:not([data-demo-list])");
+  if (placeholder?.getAttribute("selector") === "figure") placeholder.replaceWith(list);
+}
+const observer = new MutationObserver(mountList);
+observer.observe(guide, { childList: true, subtree: true });
+mountList();
+window.addEventListener("pagehide", () => observer.disconnect(), { once: true });
+</script>

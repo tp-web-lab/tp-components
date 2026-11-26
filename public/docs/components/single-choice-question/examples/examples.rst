@@ -19,16 +19,12 @@
 
             Form
                - Paris
-
                - London
-
                - Berlin
 
             Feedback
                - Correct.
-
                - London is in the UK.
-
                - Berlin is in Germany.
 
             Solution

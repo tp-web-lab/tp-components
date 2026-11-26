@@ -20,7 +20,53 @@
       "default": "\"\""
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "clearIncorrect(): void",
+      "inherited": false,
+      "description": "Applies the clear incorrect assistance action and updates the grid status."
+    },
+    {
+      "name": "redo(): void",
+      "inherited": false,
+      "description": "Restores the next grid state and updates the controls."
+    },
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Applies the reset game assistance action and updates the grid status."
+    },
+    {
+      "name": "revealCell(): void",
+      "inherited": false,
+      "description": "Applies the show cell assistance action and updates the grid status."
+    },
+    {
+      "name": "revealSolution(): void",
+      "inherited": false,
+      "description": "Applies the show solution assistance action and updates the grid status."
+    },
+    {
+      "name": "showIncorrect(): void",
+      "inherited": false,
+      "description": "Applies the show incorrect assistance action and updates the grid status."
+    },
+    {
+      "name": "showRules(): void",
+      "inherited": false,
+      "description": "Opens the rules of this game in its drawer."
+    },
+    {
+      "name": "toggleHelp(): void",
+      "inherited": false,
+      "description": "Opens or closes the game assistance menu."
+    },
+    {
+      "name": "undo(): void",
+      "inherited": false,
+      "description": "Restores the preceding grid state and updates the controls."
+    }
+  ],
   "events": [],
   "cssproperties": [],
   "dependencies": [

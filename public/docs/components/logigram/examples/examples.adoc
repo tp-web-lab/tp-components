@@ -14,56 +14,37 @@ Categories::
 +
 * Readers
 ** Ada
-
 ** Ben
-
 ** Cleo
-
 * Books
 ** Poetry
-
 ** History
-
 ** Science
-
 * Drinks
 ** Tea
-
 ** Juice
-
 ** Water
 
 Clues::
 +
 . Ada chose Poetry.
-
 . The History reader drank Juice.
-
 . Ben drank Water.
-
 . Cleo did not choose Poetry.
 
 Solution::
 +
 . {blank}
 ** Ada
-
 ** Poetry
-
 ** Tea
-
 . {blank}
 ** Ben
-
 ** Science
-
 ** Water
-
 . {blank}
 ** Cleo
-
 ** History
-
 ** Juice
 ====
 ======

@@ -53,3 +53,35 @@ example.append(element1);
 document.body.append(example);
 |
 \end{document}
+
+% !tp-example Links and scrollable content
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=min-height: 20rem; padding: 1rem; display: flex; align-items: end;]{
+  \wcTpButton[id=scroll-tooltip-trigger,class=scroll-tooltip-trigger]{Hover, then enter the tooltip}
+  \wcTpTooltip[anchor=.scroll-tooltip-trigger,style=inline-size: 28rem; max-inline-size: calc(100vw - 2rem); padding: 0; border: 1px solid var(--tp-brand-stroke-soft); background: var(--tp-background-color); color: var(--tp-text-body);]{
+    \wcDiv[tabindex=0,aria-label=Scrollable tooltip guide,style=max-height: 10rem; overflow: auto; overscroll-behavior: contain; padding: 1rem;]{
+      \textbf{Try the interactive tooltip}
+
+      Move the pointer here, then \rawhtml*|<a href="#tooltip-example-details">open the details below</a>| or scroll through this guide.
+
+      \begin{enumerate}
+        \item Hover over the button to open the tooltip.
+        \item Move across the gap into the tooltip.
+        \item Keep the pointer inside: the tooltip stays open.
+        \item Select some text without closing it.
+        \item Use the mouse wheel or scrollbar to continue reading.
+        \item Use         \wcKbd*{Tab} to focus the scrollable guide.
+        \item Use the arrow keys to scroll while the guide has focus.
+        \item Follow the link at the end of the guide.
+        \item Move away from both areas to close the tooltip when it has no keyboard focus.
+        \item Press         \wcKbd*{Escape} to close it immediately.
+      \end{enumerate}
+      \rawhtml*|<a href="#tooltip-example-details">Read the details</a>|
+
+    }
+  }
+}
+
+\wcP[id=tooltip-example-details]{\textbf{Details:} Links inside the tooltip work like ordinary links. Hover or focus the button again to reopen the guide.}
+\end{document}

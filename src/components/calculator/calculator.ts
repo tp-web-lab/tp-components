@@ -36,13 +36,15 @@ import { calculate } from "./calculator-engine.js";
  * @eventdetail tp-calculator-result { expression: string; result: number }
  * @keyboard {Enter / =} Evaluates the expression while its field is focused.
  * @keyboard {Escape} Clears the expression while its field is focused.
- * @example
- * <tp-calculator></tp-calculator>
  *  @accessibility Provides a labelled expression field and labelled keypad buttons; Enter or = evaluates and Escape clears while the field is focused.
  * @accessibility Reports results and calculation errors through a status region and marks an invalid expression with aria-invalid.
  * @accessibilityresponsibility Give the calculation a clear context and explain units and angle mode when they affect the expected answer.
+ * @example
+ * <tp-calculator></tp-calculator>
  */
 export class TpCalculator extends TpBase {
+	private toggleOrientationAction: () => void | Promise<void> = () => {};
+
 	private field: TpTextfield | null = null;
 	private status: HTMLElement | null = null;
 	private degreeButton: HTMLElement | null = null;
@@ -87,9 +89,12 @@ export class TpCalculator extends TpBase {
 		header.className = "tp-calculator-header";
 		this.orientationButton = document.createElement("tp-icon-button");
 		this.orientationButton.setAttribute("type", "button");
-		this.orientationButton.addEventListener("click", () => {
+		this.toggleOrientationAction = () => {
 			this.orientation =
 				this.orientation === "horizontal" ? "vertical" : "horizontal";
+		};
+		this.orientationButton.addEventListener("click", () => {
+			void this.toggleOrientation();
 		});
 		this.syncOrientation();
 		header.append(title, this.orientationButton);
@@ -259,7 +264,8 @@ export class TpCalculator extends TpBase {
 		input?.setSelectionRange(caret, caret);
 		this.clearStatus();
 	}
-	private insert(text: string): void {
+	/** Inserts a digit, operator or constant at the current selection. */
+	insert(text: string): void {
 		let value = this.field?.value ?? "";
 		if (this.evaluated && !/^[+*/^%!-]$/.test(text)) {
 			value = "";
@@ -289,18 +295,21 @@ export class TpCalculator extends TpBase {
 					: before.length + prefix.length;
 		this.write(result, caret);
 	}
-	private backspace(): void {
+	/** Deletes the selection or the preceding character. */
+	backspace(): void {
 		const value = this.field?.value ?? "";
 		const start =
 			this.start === this.end ? Math.max(0, this.start - 1) : this.start;
 		this.evaluated = false;
 		this.write(value.slice(0, start) + value.slice(this.end), start);
 	}
-	private clear(): void {
+	/** Clears the expression and its result. */
+	clear(): void {
 		this.evaluated = false;
 		this.write("");
 	}
-	private equals(): void {
+	/** Evaluates the current expression and displays its result or error. */
+	equals(): void {
 		const expression = this.field?.value ?? "";
 		try {
 			const result = calculate(expression, this.degrees);
@@ -319,6 +328,51 @@ export class TpCalculator extends TpBase {
 					error instanceof Error ? error.message : String(error);
 			this.field?.setAttribute("aria-invalid", "true");
 		}
+	}
+
+	/** Switches between horizontal and vertical keypad layouts. */
+	async toggleOrientation(): Promise<void> {
+		await this.toggleOrientationAction();
+	}
+
+	/** Switches between degrees and radians. */
+	toggleAngleUnit(): void {
+		this.degrees = !this.degrees;
+		const caption = this.degreeButton?.querySelector("[data-calculator-key]");
+		if (caption) caption.textContent = this.degrees ? "Deg" : "Rad";
+		this.degreeButton?.setAttribute(
+			"aria-label",
+			this.degrees
+				? "Degrees; switch to radians"
+				: "Radians; switch to degrees",
+		);
+	}
+
+	/** Negates the selection or expression. */
+	negate(): void {
+		this.wrap("-(", ")");
+	}
+
+	/** Inserts a random value between zero and one. */
+	insertRandom(): void {
+		this.insert(String(Math.random()));
+	}
+
+	/** Applies the selected scientific function to the current selection. */
+	applyFunction(
+		name:
+			| "ln"
+			| "log"
+			| "sin"
+			| "cos"
+			| "tan"
+			| "sinh"
+			| "cosh"
+			| "tanh"
+			| "sqrt"
+			| "exp",
+	): void {
+		this.wrap(`${name}(`, ")");
 	}
 }
 if (!customElements.get("tp-calculator"))

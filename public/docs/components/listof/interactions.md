@@ -6,6 +6,8 @@
 | --- | --- |
 | List link | Follow the link to its document element. |
 
+For an index, numbered links return to individual visible or silent occurrences; see/see also links lead to terms within this generated list.
+
 #### Keyboard interactions
 
 | Key or gesture | Result |

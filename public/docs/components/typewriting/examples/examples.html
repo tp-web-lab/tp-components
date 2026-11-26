@@ -1,4 +1,4 @@
-<tp-html-viewer label="tp-typewriting" allow-script>
+<tp-html-viewer label="tp-typewriting" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
       <tp-typewriting speed="20">
@@ -37,6 +37,21 @@
         <p>Welcome to <strong>tp-components</strong>. You can pause this reading and resume it whenever you want.</p>
       </tp-typewriting>
       <tp-text-to-speech for="spoken-text" lang="en"></tp-text-to-speech>
+    </div>
+
+    <div role="example" label="Initially hidden tab">
+      <tp-tabs>
+        <dl>
+          <dt>Instructions</dt>
+          <dd><p>Open Animated text to start the reveal. Return to Instructions, then reopen Animated text to start it again.</p></dd>
+          <dt>Animated text</dt>
+          <dd>
+            <tp-typewriting speed="15" delay="300">
+              <p>This sentence starts appearing only when you open this tab.</p>
+            </tp-typewriting>
+          </dd>
+        </dl>
+      </tp-tabs>
     </div>
   </template>
 </tp-html-viewer>

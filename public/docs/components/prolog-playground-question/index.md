@@ -15,10 +15,11 @@ The custom `<tp-prolog-playground-question>` element presents and grades Prolog 
 <div class="tp-component-doc-example">
 
 <!-- tp-docgen:introduction:start -->
-<tp-prolog-playground-question open="" src="/docs/components/playground-question/examples/prolog/double.pl" test="/docs/components/playground-question/examples/prolog/double.test.pl">
+<tp-prolog-playground-question open="" src="/docs/components/playground-question/examples/prolog/double.pl">
   <dl>
     <dt>Title</dt><dd>Double a number</dd>
     <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Edit the source, then submit to run the tests.</dd>
+    <dt>Feedback</dt><dd>/docs/components/playground-question/examples/prolog/double.test.pl</dd>
     <dt>Solution</dt><dd>Use Result is Value * 2.</dd>
   </dl>
 </tp-prolog-playground-question>
@@ -38,13 +39,23 @@ The custom `<tp-prolog-playground-question>` element presents and grades Prolog 
 <!-- -->
 ## Usage
 
+### External source (`src`)
+
+`src` is the URL of a source file or a JSON project to edit. It is forwarded to the embedded playground or viewer. `test` is the separate test file used when submitting the current program.
+
+The default is an empty string. Relative URLs are resolved from the containing document. Changing `src` loads a new exercise source and cancels the previous test report. A `.md` or `.markdown` file instead supplies the complete exercise as a definition list: **Title**, **Prompt**, **Solution**, plus **Program** (a fenced source block) or **Source** (a link to a program/project), **Query** and optionally **Feedback** (the test filename; **Test** remains a legacy alias). Without a test file, submission runs no tests and does not certify correctness. An optional **Context** link sets the original document base for resources in the prompt.
+
+Results, printed messages, JavaScript console calls (including `console.log`, warnings and errors), DOM event messages and asynchronous errors appear directly in the rendered output. There is no separate console.
+
+Engine versions and documentation links are displayed only in the Prolog interpreter, once per page.
+
 ### Authoring
 
 The inherited `timing="hh:mm:ss"` attribute enables the [timed-question flow](../question/index.md). Start begins the countdown; Continue restores access after expiry without clearing the response.
 
 The language and interface are fixed by the tag: this component always creates [`tp-prolog-playground`](../prolog-playground/index.md). There are no `language` or `mode` attributes. For the other interface, use [`tp-prolog-viewer-question`](../prolog-viewer-question/index.md).
 
-Inherit `src` and `test` from [TpPlaygroundQuestion](../playground-question/index.md): `src` is a Prolog source file or JSON project, and `test` is a Prolog test file. Both default to an empty string. Inherited `open` controls the initial disclosure state (closed when absent). Declare Title, Prompt and optional Solution with a definition list; Form and test Feedback are generated.
+Inherit `src` and `test` from [TpPlaygroundQuestion](../playground-question/index.md): `src` is a Prolog source file or JSON project, and `test` is a Prolog test file. Both default to an empty string. Inherited `open` controls the initial disclosure state (closed when absent). Declare Title, Prompt, an optional Feedback test filename and optional Solution with a definition list; the response editor and test report are generated.
 
 Tests use the existing Prolog `:- test(Name, Goal).` directives. The introductory source intentionally adds 1 instead of multiplying by 2: correct it and submit again to compare failing and passing reports.
 
@@ -53,6 +64,41 @@ Each submission fetches fresh tests and executes a project snapshot without repl
 ### Programming notes
 
 This class extends `TpPlaygroundQuestion<TpPrologPlayground>` and implements only the factory for its response control. Test loading, repeated submission, Feedback and cleanup are shared by the generic base. The inherited `tp-question-submit` event exposes a project snapshot in `detail.value`.
+
+### SWI-Prolog runtime
+
+Prolog runs on demand with SWI-Prolog WASM (distribution `swipl-wasm` 8.3.1). Execution uses the same runtime in viewers, playgrounds, notebooks, questions and exported HTML notebooks. Prolog source files retain their modules and relative `use_module`/`include` paths.
+
+Use `library(clpfd)` for integer constraints, including `ins`, `#=` and `labeling/2`; `library(clpq)` and `library(clpr)` provide rational and real constraints. Unlabelled answers retain their residual constraints. Programs written for the previous runtime should replace `library(clpz)` with `library(clpfd)`.
+
+`library(wasm)` provides direct JavaScript and DOM access through `:=/2`. `library(dom)` provides HTML creation and event bindings; its DOM is the execution iframe's document. This is SWI-Prolog's native DOM library, not the former TP DOM simulation. For Tau-style predicates such as `get_by_id/2` and `set_html/2`, use `library(dialect/tau/dom)` where supported. See the [SWI-Prolog WASM manual](https://www.swi-prolog.org/pldoc/man?section=wasm-version).
+
+Tests can use [PlUnit](https://www.swi-prolog.org/pldoc/package/plunit.html): load `library(plunit)`, declare a suite with `begin_tests/1` and `end_tests/1`, and write `test/1` or `test/2` clauses. The test command runs `run_tests/0` and reports success or failure. Existing TP `:- test(Name, Goal[, Expected]).` directives remain supported in files without a PlUnit suite.
+
+### Optional test feedback
+
+The Basic usage and Explicit Feedback file examples start with the same deliberate error in all six languages: `double(x)` computes `x + 1`. The tests check `double(3) = 6`, `double(0) = 0` and `double(-2) = -4`: all three initially fail, including zero. Change the calculation to `x * 2` and submit again; all three pass.
+
+The **Explicit Feedback file** example provides the editable program directly in a `script` with its `tp/` language type. Its **Feedback** entry gives the test filename or path. It uses neither `src` nor a `test` attribute. Submit, correct `double`, then submit again to compare failing and passing results.
+
+In the question's definition list, **Feedback** can contain the filename or path of an external test file. The file is optional. The existing `test` attribute and **Test** field are also accepted; the Feedback field takes precedence.
+
+```html
+<dt>Feedback</dt>
+<dd>double.test.pl</dd>
+```
+
+In a Markdown exercise loaded with `src`:
+
+```markdown
+Feedback
+: double.test.pl
+```
+
+Links are also accepted for compatibility. Relative filenames and links resolve from the document containing the question, or from the exercise file when it is loaded with `src`. Submit fetches the tests and runs them on a snapshot of the learner's current editor contents, including unsaved changes. It does not reload the initial program or use the Solution. Edits made while tests are loading belong to the next submission. Every submission starts a fresh test execution and replaces the previous report; Reset cancels an unfinished run.
+
+Feedback displays the test results and final summary in the console, without an additional table. Each test occupies one console line: its name, status and a concise failure reason when applicable. A single final line summarizes the suite. Loading or execution errors are reported in Feedback. Without a test file, Submit displays “No tests provided.” and does not mark the answer as correct.
+
 
 ### Importing
 
@@ -90,22 +136,25 @@ Basic usage
 
 Javascript API
 : Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Explicit Feedback file
+: Edit the program supplied in an inline script; the Feedback field explicitly names its test file, without src or a test attribute. Submit the initial program, correct double in the editor and submit again to compare failing and passing results.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

@@ -4,8 +4,8 @@
 
 | Control or gesture | Result | Shortcut |
 | --- | --- | --- |
-| Button | Click to perform the action identified by its label. Disabled controls cannot be activated. |  |
-| Navigation button | Click to open its destination. |  |
+| <!-- button --> Button | Click to perform the action identified by its label. Disabled controls cannot be activated. |  |
+| <!-- button --> Navigation button | Click to open its destination. |  |
 
 #### Keyboard interactions
 

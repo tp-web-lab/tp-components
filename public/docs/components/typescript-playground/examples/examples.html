@@ -1,4 +1,4 @@
-<tp-html-viewer label="tp-typescript-playground" allow-script>
+<tp-html-viewer label="tp-typescript-playground" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
       <tp-typescript-playground src="/docs/components/_shared/intro-projects/typescript.json"></tp-typescript-playground>
@@ -6,6 +6,7 @@
 
     <div role="example" label="Javascript API">
       <script type="module">
+      import "/components/typescript/typescript.js";
       import "/components/typescript-playground/typescript-playground.js";
 
       const example = document.createDocumentFragment();
@@ -20,6 +21,10 @@
 
     <div role="example" label="Single source file">
       <tp-typescript-playground src="/docs/components/_shared/single-source/example.ts"></tp-typescript-playground>
+    </div>
+
+    <div role="example" label="Mocha and Chai results">
+      <tp-typescript-playground src="/docs/components/typescript-playground/examples/framework-tests.json"></tp-typescript-playground>
     </div>
   </template>
 </tp-html-viewer>

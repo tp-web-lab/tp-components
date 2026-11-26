@@ -1,0 +1,23 @@
+# First chapter
+
+See note :tp-ref:{href="^local"}.
+
+:::: figure { id="diagram" }
+A diagram for First chapter.
+
+::: figcaption
+First chapter diagram
+:::
+::::
+
+:::: figure
+A second diagram.
+
+::: figcaption
+First chapter detail without an authored ID
+:::
+::::
+
+::: tp-note { ref="local" }
+A local note for First chapter.
+:::

@@ -1,0 +1,35 @@
+/* Logos retain their intrinsic width; only their toolbar height is constrained. */
+tp-toolbar tp-button[data-document-logo] {
+  --tp-document-logo-height: 2em;
+  flex: 0 0 auto;
+  block-size: var(--tp-document-logo-height);
+}
+tp-toolbar tp-button[data-document-logo] > :is(button, a),
+tp-toolbar tp-button[data-document-logo]:not([disabled]):not([loading]) > :is(button, a):is(:hover, :active) {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  padding: 0;
+  min-inline-size: 0;
+  min-block-size: 0;
+  inline-size: auto;
+  block-size: 100%;
+  transform: none;
+}
+tp-toolbar tp-button[data-document-logo] [data-tp-button-content],
+tp-toolbar tp-button[data-document-logo] tp-icon,
+tp-toolbar tp-button[data-document-logo] [data-tp-icon-container] {
+  display: flex;
+  inline-size: auto;
+  block-size: 100%;
+  min-block-size: 0;
+}
+tp-toolbar tp-button[data-document-logo] svg {
+  inline-size: auto;
+  block-size: 100%;
+  max-block-size: 100%;
+  flex: 0 0 auto;
+}
+

@@ -4,8 +4,8 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Copy button | Copy the associated text. On code blocks, the button appears at the top right on hover or keyboard focus. |
-| Check mark | Temporarily confirms that the copy succeeded. |
+| :tp-icon:{name="copy" size="2em"} Copy button | Copy the associated text. On code blocks, the button appears at the top right on hover or keyboard focus. |
+| :tp-icon:{name="check" size="2em"} Check mark | Temporarily confirms that the copy succeeded. |
 
 #### Keyboard interactions
 

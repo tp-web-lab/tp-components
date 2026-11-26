@@ -34,15 +34,19 @@ The custom `<tp-mathfield>` element provides a mathematical expression field wit
 
 ### Configuration
 
+Add the boolean attribute `copy-code` to show a `tp-copy-code` button that copies the current value. Copy buttons are hidden by default. The JavaScript property `copyCode` also enables or disables them dynamically. For `tp-mathfield`, this controls both source and rendered SVG copy buttons.
+
+### Configuration
+
 Click the mathfield mark to choose `latexmath` or `asciimath`. A check marks the active notation. Changing notation updates `mode` and the preview without converting the expression source; the selector is disabled when the field is readonly or disabled.
 
 ### Authoring
 
 All fields use the same inline convention: ``:tp-mathfield:`identifier`{value="E = mc^2" placeholder="…"}``. The inline content initializes `name` only; it never sets `id`, `label` or `value`. An explicit `name` takes precedence. Use `value` for initial content and `placeholder` for a hint; omitting `value` keeps the component's normal default. The HTML equivalent is `<tp-mathfield name="identifier" value="E = mc^2" placeholder="…"></tp-mathfield>`.
 
-The `mathfield-mark` icon on the right is a button that opens a `tp-dropdown` notation menu. Its `latexmath` and `asciimath` entries show a check before the active mode. The check also follows programmatic changes to `mode`. Add `clearable` to show its clear button; without this attribute the button is hidden. When visible, the button is disabled if the expression is empty, readonly or disabled. Preview and copy controls remain available alongside these markers.
+The `mathfield-mark` icon on the right is a button that opens a `tp-dropdown` notation menu. Its `latexmath` and `asciimath` entries show a check before the active mode. The check also follows programmatic changes to `mode`. Add `clearable` to show its clear button; without this attribute the button is hidden. When visible, the button is disabled if the expression is empty, readonly or disabled. Preview remains available alongside these markers; add `copy-code` to show copy controls.
 
-The default `mode="latexmath"` interprets the value as LaTeX and displays the placeholder `Type LaTeX formula...`. Set `mode="asciimath"` to enter an AsciiMath expression and use the corresponding default placeholder. The source remains editable in a `tp-textfield`. A `tp-copy-code` action copies the formula source between the optional Clear button and the always-visible Eye button. Select Eye, or set `preview`, to reveal a MathJax rendering prepared in advance through `tp-markdown`; its own copy action copies the generated SVG. The preview shows the formula and its copy action, without a notation prefix. With `multiline`, the panel appears below the field.
+The default `mode="latexmath"` interprets the value as LaTeX and displays the placeholder `Type LaTeX formula...`. Set `mode="asciimath"` to enter an AsciiMath expression and use the corresponding default placeholder. The source remains editable in a `tp-textfield`. With `copy-code`, a `tp-copy-code` action copies the formula source between the optional Clear button and the always-visible Eye button. Select Eye, or set `preview`, to reveal a MathJax rendering prepared in advance through `tp-markdown`; when `copy-code` is present, its own copy action copies the generated SVG. The preview shows the formula and its copy action, without a notation prefix. With `multiline`, the panel appears below the field.
 
 Add `mathlive` to offer a pencil icon button between source copy and Eye in LaTeX mode. It opens a MathLive `<math-field>` with a virtual keyboard; edits update the LaTeX source and preview immediately, and source edits update the visual editor. MathLive and its fonts load locally on the first opening. The icon changes to a crossed-out pencil while the editor is open. Close it using that icon or Escape. Changing to AsciiMath, removing `mathlive`, or making the field readonly or disabled closes it.
 
@@ -111,19 +115,19 @@ Inline named field
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

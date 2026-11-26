@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-text-to-speech" allow-script }
+:::::: tp-markdown-viewer { label="tp-text-to-speech" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-text-to-speech { lang="en-GB" show-text }

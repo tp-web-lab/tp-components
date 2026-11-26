@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-asciidoc-single-page" allow-script }
+:::::: tp-markdown-viewer { label="tp-asciidoc-single-page" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-asciidoc-single-page

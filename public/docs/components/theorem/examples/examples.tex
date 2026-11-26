@@ -1,0 +1,177 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpTheorem[type=theorem,heading=Nonnegativity,number=1,id=square]{
+  The square of every real number is nonnegative.
+
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/theorem/theorem.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-theorem");
+element1.setAttribute("type", "theorem");
+element1.setAttribute("heading", "Nonnegativity");
+element1.setAttribute("number", "1");
+element1.setAttribute("id", "square");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("The square of every real number is nonnegative."));
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Statement types
+\documentclass{article}
+\begin{document}
+\wcTpTheorem[type=theorem]{
+  A theorem with its usual label.
+
+}
+
+\wcTpTheorem[type=lemma]{
+  A lemma with its usual label.
+
+}
+
+\wcTpTheorem[type=proposition]{
+  A proposition with its usual label.
+
+}
+
+\wcTpTheorem[type=corollary]{
+  A corollary with its usual label.
+
+}
+
+\wcTpTheorem[type=definition]{
+  A definition with its usual label.
+
+}
+
+\wcTpTheorem[type=example]{
+  A example with its usual label.
+
+}
+
+\wcTpTheorem[type=remark]{
+  A remark with its usual label.
+
+}
+
+\wcTpTheorem[type=proof,qed=□]{
+  A proof with its usual label.
+
+}
+\end{document}
+
+% !tp-example Shared section counters
+\documentclass{article}
+\begin{document}
+\section*{First section}
+
+\wcTpTheorem[numbering=section,counter=results]{
+  The first statement.
+
+}
+
+\wcTpTheorem[type=lemma,numbering=section,counter=results]{
+  A supporting lemma.
+
+}
+
+\section*{Second section}
+
+\wcTpTheorem[numbering=section,counter=results]{
+  The counter restarts.
+
+}
+\end{document}
+
+% !tp-example Background variants
+\documentclass{article}
+\begin{document}
+\wcTpTheorem[type=remark,numbering=none,variant=none,heading=none]{
+  The default appearance has no border or background.
+
+}
+
+\wcTpTheorem[type=remark,numbering=none,variant=neutral,heading=neutral]{
+  The background follows TP theme tokens.
+
+}
+
+\wcTpTheorem[type=remark,numbering=none,variant=brand,heading=brand]{
+  The background follows TP theme tokens.
+
+}
+
+\wcTpTheorem[type=remark,numbering=none,variant=info,heading=info]{
+  The background follows TP theme tokens.
+
+}
+
+\wcTpTheorem[type=remark,numbering=none,variant=success,heading=success]{
+  The background follows TP theme tokens.
+
+}
+
+\wcTpTheorem[type=remark,numbering=none,variant=warning,heading=warning]{
+  The background follows TP theme tokens.
+
+}
+
+\wcTpTheorem[type=remark,numbering=none,variant=danger,heading=danger]{
+  The background follows TP theme tokens.
+
+}
+\end{document}
+
+% !tp-example Ending symbols
+\documentclass{article}
+\begin{document}
+\wcTpTheorem[type=theorem,qed=◆]{
+  A theorem with a diamond at its end.
+
+}
+
+\wcTpTheorem[type=definition,qed=∎]{
+  A definition with a filled square.
+
+}
+
+\wcTpTheorem[type=proof,qed=□]{
+  A proof with an explicit closing square.
+
+}
+
+\wcTpTheorem[type=proof,qed]{
+  The explicit empty value hides the closing square.
+
+}
+\end{document}
+
+% !tp-example Rich heading and citation
+\documentclass{article}
+\begin{document}
+\wcDiv[data-tp-reference-scope]{
+  \wcTpTheorem[type=proposition,number=2.1]{
+    \wcSpan*[slot=heading]{Companion input, \wcTpRef*[href=@guide]{}}
+    The conclusion follows from the cited result.
+
+  }
+  \rawhtml|<tp-biblio ref="guide" label="[1]"><p>Alex Example. <em>A guide to reconstruction</em>. 2026.</p></tp-biblio>|
+  \wcTpListof[selector=tp-biblio]{}
+}
+\end{document}

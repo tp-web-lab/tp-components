@@ -9,9 +9,8 @@
 
          .. tp-audio-playlist::
 
-            1. `Morning melody </docs/components/audio-playlist/examples/track-1.wav>`_
-
-            2. `Evening melody </docs/components/audio-playlist/examples/track-2.wav>`_
+            1. `Morning melody </docs/components/audio-playlist/examples/track-1.wav>`__
+            2. `Evening melody </docs/components/audio-playlist/examples/track-2.wav>`__
 
       .. example:: Javascript API
 

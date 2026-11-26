@@ -10,28 +10,21 @@
          .. tp-list-table::
             :heading:
 
-            -
+            - 
 
               - Country
-
               - Capital
-
-            -
+            - 
 
               - Estonia
-
               - Tallinn
-
-            -
+            - 
 
               - Latvia
-
               - Riga
-
-            -
+            - 
 
               - Lithuania
-
               - Vilnius
 
       .. example:: Javascript API

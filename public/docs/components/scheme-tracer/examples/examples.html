@@ -1,0 +1,58 @@
+<tp-html-viewer label="tp-scheme-tracer" allow-script preserve-source>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-scheme-tracer src="/docs/components/scheme-tracer/examples/recursion.scm"></tp-scheme-tracer>
+    </div>
+
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/scheme/scheme.js";
+      import "/components/scheme-tracer/scheme-tracer.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-scheme-tracer");
+      element1.setAttribute("src", "/docs/components/scheme-tracer/examples/recursion.scm");
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
+    <div role="example" label="Subexpressions on one line">
+      <tp-scheme-tracer src="/docs/components/scheme-tracer/examples/same-line.scm"></tp-scheme-tracer>
+    </div>
+
+    <div role="example" label="Tail recursion">
+      <tp-scheme-tracer src="/docs/components/scheme-tracer/examples/tail-recursion.scm"></tp-scheme-tracer>
+    </div>
+
+    <div role="example" label="Independent closures">
+      <tp-scheme-tracer src="/docs/components/scheme-tracer/examples/closures.scm"></tp-scheme-tracer>
+    </div>
+
+    <div role="example" label="Shared pairs and mutation">
+      <tp-scheme-tracer src="/docs/components/scheme-tracer/examples/shared-pairs.scm"></tp-scheme-tracer>
+    </div>
+
+    <div role="example" label="Cyclic pair">
+      <tp-scheme-tracer src="/docs/components/scheme-tracer/examples/cyclic-pair.scm"></tp-scheme-tracer>
+    </div>
+
+    <div role="example" label="Vectors and aliases">
+      <tp-scheme-tracer src="/docs/components/scheme-tracer/examples/vectors.scm"></tp-scheme-tracer>
+    </div>
+
+    <div role="example" label="Higher-order procedures">
+      <tp-scheme-tracer src="/docs/components/scheme-tracer/examples/higher-order.scm"></tp-scheme-tracer>
+    </div>
+
+    <div role="example" label="Error and call stack">
+      <tp-scheme-tracer src="/docs/components/scheme-tracer/examples/error.scm"></tp-scheme-tracer>
+    </div>
+
+    <div role="example" label="Replay a saved trace">
+      <tp-scheme-tracer trace="/docs/components/scheme-tracer/examples/recursion.trace.json"></tp-scheme-tracer>
+    </div>
+  </template>
+</tp-html-viewer>

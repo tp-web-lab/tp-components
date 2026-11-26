@@ -4,7 +4,7 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Theme button | Choose the light or dark appearance of the associated content. |
+| :tp-icon:{name="theme-light-dark" size="2em"} :tp-icon:{name="sun" size="2em"} :tp-icon:{name="moon" size="2em"} Theme button | Choose the light or dark appearance of the associated content. |
 
 #### Keyboard interactions
 

@@ -1,29 +1,22 @@
 [tp-asciidoc-viewer%allow-script,label="tp-toolbar"]
-=========
+========
 [script,type="tp/asciidoc"]
 ----
 .Basic usage
-========
-[tp-box,padding="0"]
 ======
+[tp-box,padding="0"]
+=====
 [tp-toolbar]
-=====
-[tp-icon,section="start",name="home",aria-label="Home"]#home# [tp-icon,section="start",name="menu",aria-label="Menu"]#menu#
-
-[span,section="center"]
 ====
-Document
+[tp-icon,section="start",name="home",aria-label="Home"]#home# [tp-icon,section="start",name="menu",aria-label="Menu"]#menu# [section="center"]##Document## [tp-icon,section="end",name="github",aria-label="GitHub"]#github# [tp-icon,section="end",name="settings",aria-label="Settings"]#settings# [tp-icon,section="end",name="help",aria-label="Help"]#help#
 ====
-
-[tp-icon,section="end",name="github",aria-label="GitHub"]#github# [tp-icon,section="end",name="settings",aria-label="Settings"]#settings# [tp-icon,section="end",name="help",aria-label="Help"]#help#
-=====
 
 [tp-box,border-width="0",style="min-block-size: 5rem; display: grid; place-items: center"]
 ====
 Document area
 ====
+=====
 ======
-========
 
 .Javascript API
 ======
@@ -97,4 +90,4 @@ document.body.append(example);
 ====
 ======
 ----
-=========
+========

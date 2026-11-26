@@ -5,8 +5,8 @@
 | Control or gesture | Result |
 | --- | --- |
 | Duration | Enter the countdown duration in seconds. |
-| Start timer | Begin the countdown. Completion sound depends on the page and browser. |
-| Stop timer | Stop the countdown. |
+| :tp-icon:{name="play" size="2em"} Start timer | Begin the countdown. Completion sound depends on the page and browser. |
+| :tp-icon:{name="stop" size="2em"} Stop timer | Stop the countdown. |
 
 #### Keyboard interactions
 

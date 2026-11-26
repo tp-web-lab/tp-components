@@ -12,7 +12,9 @@
             .. tp-box::
                :id: intro-copy-code
 
-               ::
+               .. code:: plaintext
+                  :literal-indent: 3
+                  :literal-lines: 1
 
                   const answer = 6 * 7;
 

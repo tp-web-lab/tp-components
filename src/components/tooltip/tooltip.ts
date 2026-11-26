@@ -71,7 +71,7 @@ function isCssLength(value: string): boolean {
  * @eventdetail tp-tooltip-toggle { backdrop: boolean; open: boolean; outsideClick: boolean; anchor: string; placement: "top" | "end" | "bottom" | "start" }
  * @accessibility Exposes `role="tooltip"` and connects the anchor with `aria-describedby`.
  * @accessibility Shows the tooltip when its anchor receives pointer hover or keyboard focus.
- * @accessibilityresponsibility Keep tooltip content brief and do not place interactive controls inside it.
+ * @accessibilityresponsibility Keep content concise and make any links or controls keyboard accessible.
  * @accessibilityresponsibility Ensure the anchor remains understandable without the tooltip.
  * @keyboard {Escape} Closes the tooltip.
  * @example
@@ -100,20 +100,55 @@ export class TpTooltip extends TpOverlayElement {
 		this.positionTooltip();
 	};
 
+	private closeTimer: ReturnType<typeof setTimeout> | null = null;
+	private anchorHovered = false;
+	private tooltipHovered = false;
+
+	private cancelClose(): void {
+		if (this.closeTimer !== null) clearTimeout(this.closeTimer);
+		this.closeTimer = null;
+	}
+
+	private scheduleClose(): void {
+		this.cancelClose();
+		// Allow the pointer to cross the gap between the anchor and the tooltip.
+		this.closeTimer = setTimeout(() => {
+			this.closeTimer = null;
+			const focused = this.ownerDocument.activeElement;
+			if (this.anchorHovered || this.tooltipHovered) return;
+			if (focused && this.isInsideInteractiveBoundary(focused)) return;
+			this.hide();
+		}, 250);
+	}
+
 	private readonly handleAnchorMouseEnter = (): void => {
+		this.anchorHovered = true;
+		this.cancelClose();
 		this.show();
 	};
 
 	private readonly handleAnchorMouseLeave = (): void => {
-		this.hide();
+		this.anchorHovered = false;
+		this.scheduleClose();
+	};
+
+	private readonly handleTooltipMouseEnter = (): void => {
+		this.tooltipHovered = true;
+		this.cancelClose();
+	};
+
+	private readonly handleTooltipMouseLeave = (): void => {
+		this.tooltipHovered = false;
+		this.scheduleClose();
 	};
 
 	private readonly handleAnchorFocus = (): void => {
+		this.cancelClose();
 		this.show();
 	};
 
 	private readonly handleAnchorBlur = (): void => {
-		this.hide();
+		this.scheduleClose();
 	};
 
 	/**
@@ -187,6 +222,10 @@ export class TpTooltip extends TpOverlayElement {
 	protected connectedCallback(): void {
 		super.connectedCallback();
 		this.ensureStyles();
+		this.addEventListener("mouseenter", this.handleTooltipMouseEnter);
+		this.addEventListener("mouseleave", this.handleTooltipMouseLeave);
+		this.addEventListener("focusin", this.handleAnchorFocus);
+		this.addEventListener("focusout", this.handleAnchorBlur);
 		this.syncAnchor();
 		this.observeLayout();
 		this.positionTooltip();
@@ -221,6 +260,12 @@ export class TpTooltip extends TpOverlayElement {
 	 */
 	public disconnectedCallback(): void {
 		super.disconnectedCallback();
+		this.cancelClose();
+		this.tooltipHovered = false;
+		this.removeEventListener("mouseenter", this.handleTooltipMouseEnter);
+		this.removeEventListener("mouseleave", this.handleTooltipMouseLeave);
+		this.removeEventListener("focusin", this.handleAnchorFocus);
+		this.removeEventListener("focusout", this.handleAnchorBlur);
 		this.unbindAnchorEvents();
 		this.resizeObserver?.disconnect();
 		this.resizeObserver = null;
@@ -279,13 +324,15 @@ export class TpTooltip extends TpOverlayElement {
 
 		anchor.addEventListener("mouseenter", this.handleAnchorMouseEnter);
 		anchor.addEventListener("mouseleave", this.handleAnchorMouseLeave);
-		anchor.addEventListener("focus", this.handleAnchorFocus);
-		anchor.addEventListener("blur", this.handleAnchorBlur);
+		anchor.addEventListener("focusin", this.handleAnchorFocus);
+		anchor.addEventListener("focusout", this.handleAnchorBlur);
 
 		this.updateAria();
 	}
 
 	private unbindAnchorEvents(): void {
+		this.cancelClose();
+		this.anchorHovered = false;
 		if (this.anchorEl === null) {
 			return;
 		}
@@ -298,8 +345,8 @@ export class TpTooltip extends TpOverlayElement {
 			"mouseleave",
 			this.handleAnchorMouseLeave,
 		);
-		this.anchorEl.removeEventListener("focus", this.handleAnchorFocus);
-		this.anchorEl.removeEventListener("blur", this.handleAnchorBlur);
+		this.anchorEl.removeEventListener("focusin", this.handleAnchorFocus);
+		this.anchorEl.removeEventListener("focusout", this.handleAnchorBlur);
 		this.anchorEl.removeAttribute("aria-describedby");
 
 		this.anchorEl = null;

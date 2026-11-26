@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-math" allow-script }
+:::::: tp-markdown-viewer { label="tp-math" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 The identity :tp-math:`…`{value="a^2 + b^2 = c^2" label="a squared plus b squared equals c squared"} describes a right triangle.

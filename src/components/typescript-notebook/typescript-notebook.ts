@@ -19,13 +19,14 @@ import { TpNotebook } from "../notebook/notebook.js";
  * @summary Combines written explanations and executable TypeScript code in an interactive notebook.
  * @tagname tp-typescript-notebook
  * @summary Interactive TypeScript notebook with markup and code cells.
+ * @keyboard {Shift+Enter} Reload changed source and execute the current cell query, or render the current markup cell.
  * @example
  * <tp-typescript-notebook>
  *     <script type="tp/markdown"># Interactive TypeScript
  *
- * Select **Run all cells** to execute the program. Use the code button in a cell to edit its source.</script>
- *     <script type="tp/typescript">const language: string = 'TypeScript';
- * console.log(`Hello from ${language}`);</script>
+ * Select **Run all cells** to execute the program. Edit the program directly in each cell; its query is prefilled.</script>
+ *     <script type="tp/typescript" query="language">const language: string = 'TypeScript';
+ * </script>
  *   </tp-typescript-notebook>
  */
 export class TpTypescriptNotebook extends TpNotebook {

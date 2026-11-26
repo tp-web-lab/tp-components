@@ -10,24 +10,18 @@
 ====
 ====
 
-[h2]
-====
-Getting started
-====
+[discrete]
+== Getting started
 
 Choose a heading in the table of contents to jump to its section.
 
-[h3]
-====
-Installation
-====
+[discrete]
+=== Installation
 
 Install the library in your project.
 
-[h3]
-====
-First component
-====
+[discrete]
+=== First component
 
 Add your first interactive component.
 =====

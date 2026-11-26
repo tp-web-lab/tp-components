@@ -55,6 +55,9 @@ export class TpMath extends TpBase {
 	private revision = 0;
 	/** Identifies the successful output so connecting a prepared formula is a no-op. */
 	private renderedKey = "";
+	private resizeObserver: ResizeObserver | null = null;
+	private layoutWidth = 0;
+	private fullWidthEquation = false;
 	/** Original inline expression retained when publication supplied an SVG. */
 	private publishedSource: string | null = null;
 	/** Prepare detached document formulas before their surrounding text is displayed. */
@@ -125,6 +128,15 @@ export class TpMath extends TpBase {
 		super.connectedCallback();
 		this.ensureGlobalStyle("tp-math-styles", style);
 		this.source.observe(() => this.schedule());
+		if (typeof ResizeObserver !== "undefined") {
+			this.resizeObserver = new ResizeObserver(() => {
+				const width = this.clientWidth;
+				if (width === this.layoutWidth) return;
+				this.layoutWidth = width;
+				if (this.fullWidthEquation) this.schedule();
+			});
+			this.resizeObserver.observe(this);
+		}
 		this.schedule();
 	}
 	/** Cancels pending work without losing the original expression. */
@@ -134,6 +146,8 @@ export class TpMath extends TpBase {
 		if (this.timer !== null) clearTimeout(this.timer);
 		this.timer = null;
 		this.source.disconnect();
+		this.resizeObserver?.disconnect();
+		this.resizeObserver = null;
 	}
 	/** Renders only connected elements, coalescing synchronous attribute changes. */
 	protected override attributeChangedCallback(): void {
@@ -172,7 +186,15 @@ export class TpMath extends TpBase {
 			output.setAttribute("data-tp-math-source", value);
 			const mode = this.mode;
 			const displaystyle = this.displaystyle;
-			const key = JSON.stringify([value, mode, displaystyle, this.label]);
+			const fullWidth = displaystyle && /\\begin\{flalign\*?\}/.test(value);
+			this.fullWidthEquation = fullWidth;
+			const key = JSON.stringify([
+				value,
+				mode,
+				displaystyle,
+				this.label,
+				...(fullWidth ? [this.clientWidth] : []),
+			]);
 			if (
 				(key === this.renderedKey ||
 					(existing?.getAttribute("data-tp-math-key") === key &&
@@ -191,7 +213,10 @@ export class TpMath extends TpBase {
 				output.append(placeholder);
 				const job = TpMath.queue.then(async () => {
 					try {
-						await mathRenderer.render(output);
+						await mathRenderer.render(
+							output,
+							fullWidth ? { container: this } : {},
+						);
 					} finally {
 						// AsciiMath typesetting tracks temporary nodes; do not retain detached jobs.
 						const runtime = window.MathJax as

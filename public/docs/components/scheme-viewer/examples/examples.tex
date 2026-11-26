@@ -1,0 +1,79 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpSchemeViewer[src=/docs/components/_shared/intro-projects/scheme.json]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/scheme/scheme.js";
+import "/components/scheme-viewer/scheme-viewer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-scheme-viewer");
+element1.setAttribute("src", "/docs/components/_shared/intro-projects/scheme.json");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Scheme tests
+\documentclass{article}
+\begin{document}
+\wcTpSchemeViewer[src=/docs/components/scheme-playground/examples/test-project.json]{}
+\end{document}
+
+% !tp-example Compare presentation modes
+\documentclass{article}
+\begin{document}
+\wcSection{
+  \subsection*{mode="default" — Standard controls}
+  Open Code to edit the source, then click Run or press \wcKbd*{Shift}+\wcKbd*{Enter} in the editor.
+
+  Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.
+
+  \wcTpSchemeViewer[mode=default]{
+    \wcScript[type=tp/scheme,filename=main.scm]|
+(display "Printed message before the intentional error.")
+(newline)
+(error "Intentional error: the error appears in the output.")
+  |
+  }
+}
+
+\wcSection{
+  \subsection*{mode="lite" — Compact controls}
+  Open Code to edit the source, then click Run or press \wcKbd*{Shift}+\wcKbd*{Enter} in the editor.
+
+  Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.
+
+  \wcTpSchemeViewer[mode=lite]{
+    \wcScript[type=tp/scheme,filename=main.scm]|
+(display "Printed message before the intentional error.")
+(newline)
+(error "Intentional error: the error appears in the output.")
+  |
+  }
+}
+
+\wcSection{
+  \subsection*{mode="simple" — Editor and rendered output only}
+  Edit the code below, keep the cursor in the editor and press \wcKbd*{Shift}+\wcKbd*{Enter} (Return) to run it. This viewer has no Run button.
+
+  Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.
+
+  \wcTpSchemeViewer[mode=simple]{
+    \wcScript[type=tp/scheme,filename=main.scm]|
+(display "Printed message before the intentional error.")
+(newline)
+(error "Intentional error: the error appears in the output.")
+  |
+  }
+}
+
+Programming viewers already have compact controls, so default and lite look alike. The first run may load the language engine.
+\end{document}

@@ -29,6 +29,15 @@
       "default": "false"
     },
     {
+      "name": "mode",
+      "description": "Viewer presentation: full controls, compact controls, or only source editor and rendered output.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "\"default\" | \"lite\" | \"simple\"",
+      "default": "\"default\""
+    },
+    {
       "name": "src",
       "description": "Comma-separated URLs of LaTeX example files.",
       "reflected": false,
@@ -38,7 +47,53 @@
       "default": "\"\""
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "createRenderedDocument(): Promise<string>",
+      "inherited": true,
+      "description": "Creates an independent HTML document from the current source for testing."
+    },
+    {
+      "name": "getValue(): string",
+      "inherited": true,
+      "description": "Returns the current editable source, including unsaved preview changes."
+    },
+    {
+      "name": "reset(): void",
+      "inherited": true,
+      "description": "Restores the selected example and refreshes its preview."
+    },
+    {
+      "name": "run(): Promise<void>",
+      "inherited": true,
+      "description": "Renders the edited source, unless the cancelable run event is handled by the parent."
+    },
+    {
+      "name": "selectOutputMode(value: string): Promise<void>",
+      "inherited": true,
+      "description": "Selects the rendered, generated HTML or structural output supported by this viewer."
+    },
+    {
+      "name": "setValue(source: string): Promise<void>",
+      "inherited": true,
+      "description": "Replaces the editable source and refreshes the preview without replacing the editor."
+    },
+    {
+      "name": "toggleCode(): Promise<void>",
+      "inherited": true,
+      "description": "Shows or hides the source while retaining a visible panel."
+    },
+    {
+      "name": "toggleEditorToolbar(): Promise<void>",
+      "inherited": true,
+      "description": "Shows or hides toolbars on the currently visible editors."
+    },
+    {
+      "name": "toggleOutput(): Promise<void>",
+      "inherited": true,
+      "description": "Shows or hides the output while retaining a visible panel."
+    }
+  ],
   "events": [],
   "cssproperties": [],
   "dependencies": [
@@ -49,6 +104,10 @@
     {
       "name": "tp-divider",
       "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
     },
     {
       "name": "tp-html-viewer",
@@ -72,12 +131,22 @@
       "name": "tp-latex",
       "url": "https://www.npmjs.com/package/@tp/tp-latex",
       "summary": "LaTeX.js conversion and patched TikZJax assets."
+    },
+    {
+      "name": "highlight.js",
+      "url": "https://highlightjs.org/",
+      "summary": "Source-code syntax highlighting."
     }
   ],
   "userHelp": {
     "displayName": "LaTeX viewer",
     "introduction": "The custom `<tp-latex-viewer>` element presents editable LaTeX examples with rendered and generated HTML views.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Show code | Show or hide the editable LaTeX source. |\n| Show output | Show or hide the output. |\n| Example | Select a document from the loaded examples. |\n| Rendered HTML | Display the rendered document. |\n| Generated HTML | Display the generated HTML as read-only code. |\n| Toggle editor toolbar | Show or hide the editor toolbar. |\n| Reset | Restore the selected example's initial source. |\n| Run | Render the current source. |\n| Fullscreen / Exit fullscreen | Expand the entire component to fullscreen or return to its normal size. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy and open its help. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Esc</kbd> | Exit fullscreen. |",
-    "keyboard": []
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| :tp-icon:{name=\"code\" size=\"2em\"} Show code | Show or hide the editable LaTeX source. |\n| :tp-icon:{name=\"eye-outline\" size=\"2em\"} Show output | Show or hide the output. |\n| Example | Select a document from the loaded examples. |\n| :tp-icon:{name=\"language-html\" library=\"tp\" size=\"2em\"} Rendered HTML | Display the rendered document. |\n| :tp-icon:{name=\"code\" library=\"tp\" size=\"2em\"} Generated HTML | Display the generated HTML as read-only code. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"2em\"} Toggle editor toolbar | Show or hide the editor toolbar. |\n| :tp-icon:{name=\"refresh\" size=\"2em\"} Reset | Restore the selected example's initial source. |\n| :tp-icon:{name=\"play\" size=\"2em\"} Run | Render the current source. |\n| Fullscreen / Exit fullscreen | Expand the entire component to fullscreen or return to its normal size. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Shift</kbd>+<kbd>Enter</kbd> | Run the current source from the viewer, including while editing code. |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate a focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open help for the component under the pointer, falling back to the focused component. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy and open its help. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Esc</kbd> | Exit fullscreen. |",
+    "keyboard": [
+      {
+        "key": "Shift+Enter",
+        "description": "Run the current source."
+      }
+    ]
   }
 }

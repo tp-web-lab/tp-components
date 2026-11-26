@@ -1,0 +1,47 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Native table widths audit</title>
+<button id="run">Check width conversions</button><p id="status">Ready</p><div id="stage" style="width:800px"></div><details open><summary>Results</summary><pre id="report"></pre></details>
+<script type="module">
+import '/src/tp-loader.ts';
+import {ensureTableColumnWidths} from '/src/utilities/table-column-widths.ts';
+ensureTableColumnWidths(document);
+import {applyTableWidths} from '@tp/tp-utilities';
+import {htmlToMarkup,markupToHtml} from '/src/utilities/markup-conversion.ts';
+const langs=['html','markdown','asciidoc','latex','restructuredtext'];
+const cases=['120px 240px','9em auto','120px 2* *','25% 8rem *'];
+const stage=document.querySelector('#stage');
+const canonical=html=>{const template=document.createElement('template');template.innerHTML=html;return {width:template.content.querySelector('table')?.style.width,widths:[...template.content.querySelectorAll('col')].map(col=>(col.getAttribute('data-tp-column-width')||col.style.width||col.getAttribute('width')||'auto').replace(/^\*$/,'1*')),cells:[...template.content.querySelectorAll('td')].map(cell=>cell.textContent.trim())};};
+const geometry=async html=>{stage.innerHTML=html;const dimensions=[];for(const width of [800,400]){stage.style.width=width+'px';await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))); dimensions.push([...stage.querySelectorAll('tr:first-child td')].map(cell=>cell.getBoundingClientRect().width));}return dimensions;};
+document.querySelector('#run').onclick=async()=>{
+const results=[];
+for(const widths of cases){
+ const html=applyTableWidths(`<table column-widths="${widths}" table-width="100%" table-layout="fixed"><tbody><tr><td>A</td><td>B</td>${widths.split(' ').length===3?'<td>C</td>':''}</tr></tbody></table>`);
+ const expected=canonical(html),baseline=await geometry(html);
+ for(const from of langs){
+  const original=htmlToMarkup(html,from);
+  for(const to of langs){
+   document.querySelector('#status').textContent=`Checking ${widths}: ${from} → ${to}`;
+   try {
+    const intermediate=await markupToHtml(original,from,location.href);
+    const source=htmlToMarkup(intermediate,to);
+    const output=await markupToHtml(source,to,location.href);
+    const actual=canonical(output),sizes=await geometry(output);
+    const native=!/::: table|\[table,|\\wcTable|\.\. html-table::/.test(source);
+    const weighted=widths!=='120px 2* *'||(sizes.every(row=>Math.abs(row[1]/row[2]-2)<0.02 && Math.abs(row[0]-120)<1)&&sizes[1][1]<sizes[0][1]*0.6);
+    const pass=weighted&&native&&JSON.stringify(expected)===JSON.stringify(actual)&&baseline.every((row,r)=>row.every((size,c)=>Math.abs(size-sizes[r][c])<1));
+    results.push({widths,from,to,pass,native,source,expected,actual,baseline,sizes});
+   }catch(error){results.push({widths,from,to,pass:false,error:String(error)});}
+   document.querySelector('#report').textContent=JSON.stringify(results,null,2);
+  }
+ }
+}
+let gridStatus='PASS';
+try {
+ const gridHtml='<table style="width:360px;table-layout:fixed"><colgroup><col style="width:120px"><col style="width:240px"></colgroup><tbody><tr><td colspan="2">Merged</td></tr><tr><td>A</td><td>B</td></tr></tbody></table>';
+ const source=htmlToMarkup(gridHtml,'restructuredtext');
+ const output=await markupToHtml(source,'restructuredtext',location.href);
+ const parsed=document.createElement('template');parsed.innerHTML=output;
+ if(!source.startsWith('.. table::')||source.includes('html-table')||!parsed.content.querySelector('td[colspan="2"]')||canonical(output).width!=='360px'||JSON.stringify(canonical(output).widths)!==JSON.stringify(['120px','240px']))gridStatus='FAILED';
+}catch(error){gridStatus=String(error);}
+document.querySelector('#status').textContent=`Complete: ${results.filter(result=>result.pass).length}/${results.length} width conversions passed at 800px and 400px. RST grid: ${gridStatus}`;
+};
+</script></html>

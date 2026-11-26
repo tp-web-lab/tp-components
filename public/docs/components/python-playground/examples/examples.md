@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-python-playground" allow-script }
+::::: tp-markdown-viewer { label="tp-python-playground" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-python-playground { src="/docs/components/_shared/intro-projects/python.json" }
@@ -7,6 +7,7 @@
 
 ``` example {label="Javascript API"}
 ::: script { type="module" }
+import "/components/python/python.js";
 import "/components/python-playground/python-playground.js";
 
 const example = document.createDocumentFragment();
@@ -21,6 +22,11 @@ document.body.append(example);
 
 ``` example {label="Single source file"}
 ::: tp-python-playground { src="/docs/components/_shared/single-source/example.py" }
+:::
+```
+
+``` example {label="unittest results"}
+::: tp-python-playground { src="/docs/components/python-playground/examples/framework-tests.json" }
 :::
 ```
 ::::

@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-asciidoc-blog" allow-script }
+:::::: tp-markdown-viewer { label="tp-asciidoc-blog" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-asciidoc-blog { page-size="2" }

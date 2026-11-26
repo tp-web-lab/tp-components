@@ -1,3 +1,10 @@
+import { importedTableBorders, tableBorderCss } from "./table-borders.js";
+import { cachedLatexData, prepareLatexData } from "./table-latex-embedded.js";
+import {
+	escapeTableHtml,
+	tableRichText,
+	tableSpreadsheetCells,
+} from "./table-markup.js";
 /** @module components/table-editor */
 // tp-docgen:dependencies:start
 /**
@@ -81,6 +88,10 @@
  * @summary Sticky toolbar with start / center / end sections,
  */
 /**
+ * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+ * @summary Shared parsers, games and rendering utilities.
+ */
+/**
  * @credit SheetJS https://sheetjs.com/
  * @summary XLSX workbook import and export.
  */
@@ -109,13 +120,13 @@ import "../save-image/save-image.js";
 import "../screen/screen.js";
 import { TpBase } from "../base/base.js";
 import type { TpScreen } from "../screen/screen.js";
-import { escapeTableHtml } from "./table-markup.js";
 import "../icon-button/icon-button.js";
 import "../icon/icon.js";
 import "../toolbar/toolbar.js";
 import "../color/color.js";
 import "../theme/theme.js";
 import "../fullscreen/fullscreen.js";
+import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
 import type { TpTextfield } from "../textfield/textfield.js";
 import style from "./table-editor.css?inline";
 import {
@@ -124,30 +135,92 @@ import {
 	type TableData,
 	type TableFormat,
 	type TableMerge,
+	type TableVerticalAlignment,
 	tableCellCovered,
+	tableCellText,
 	tableFileExtensions,
 	tableFormats,
 	tableMergeAt,
 	tableText,
 } from "./table-markup.js";
 import previewStyle from "./table-preview.css?inline";
+import { loadTableSource, parseTableSource } from "./table-source.js";
+import { tableSourceLayout } from "./table-source-layout.js";
+import { tableXlsx } from "./table-xlsx.js";
 
 const markupTabFormats: TableFormat[] = [
-	"asciidoc",
 	"html",
+	"asciidoc",
 	"latex",
 	"markdown",
 	"restructuredtext",
 ];
+interface ExportNotes {
+	exported: string;
+	notExported: string;
+}
+const exportNotes: Record<TableFormat | "csv" | "json" | "xlsx", ExportNotes> =
+	{
+		html: {
+			exported:
+				"cell text, line breaks, headings, caption, merged cells, horizontal alignment, vertical alignment, column widths, mathematical expressions, cell borders, rich content",
+			notExported: "none",
+		},
+		asciidoc: {
+			exported:
+				"cell text, line breaks, headings, caption, merged cells, horizontal alignment, vertical alignment, relative column widths, mathematical expressions, rich content",
+			notExported: "custom cell borders in native tables",
+		},
+		latex: {
+			exported:
+				"cell text, line breaks, bold headings, caption, merged cells, horizontal alignment, vertical alignment, column widths, mathematical expressions, cell border colors and styles, bold, italics, underlining, text colors, strikethrough, subscripts, superscripts, links, lists, images, video, audio, embedded markup content, multiple media sources, subtitle tracks",
+			notExported:
+				"interactive component behavior outside TP, CSS layout without a native LaTeX equivalent",
+		},
+		markdown: {
+			exported:
+				"cell text, line breaks, headings, caption, merged cells, horizontal alignment, vertical alignment, column widths, mathematical expressions, rich content",
+			notExported: "custom cell borders in pipe tables",
+		},
+		restructuredtext: {
+			exported:
+				"cell text, line breaks, headings, caption, merged cells, horizontal alignment, vertical alignment, column widths, mathematical expressions, rich content",
+			notExported: "custom cell borders in native tables",
+		},
+		csv: {
+			exported:
+				"cell text, row and column order, line breaks, mathematical source",
+			notExported:
+				"merged cells, alignment, heading formatting, colors, column widths, cell borders, caption, numeric and date types, rich text formatting, embedded media, embedded markup blocks",
+		},
+		json: {
+			exported:
+				"cell text, row and column order, line breaks, mathematical source",
+			notExported:
+				"merged cells, alignment, heading formatting, colors, column widths, cell borders, caption, numeric and date types, rich text formatting, embedded media, embedded markup blocks",
+		},
+		xlsx: {
+			exported:
+				"cell text, merged cells, horizontal alignment, vertical alignment, column widths, line breaks, cell borders, bold headings, gray heading background, mathematical source",
+			notExported:
+				"caption, numeric and date types, rendered mathematical expressions, rich text formatting, embedded media, embedded markup blocks",
+		},
+	};
+function exportDescription(format: keyof typeof exportNotes): string {
+	const note = exportNotes[format];
+	return `<dl class="tp-table-editor-format-note"><dt>Exported</dt><dd>${note.exported}</dd><dt>Not exported</dt><dd>${note.notExported}</dd></dl>`;
+}
+
 const markupTabLabels = [
-	"tp-asciidoc",
 	"html",
+	"tp-asciidoc",
 	"tp-latex",
 	"tp-markdown",
 	"tp-restructuredtext",
 ];
 
 const commandDescriptions: Record<string, string> = {
+	import: "Choose a local markup or spreadsheet file to replace the table.",
 	reset: "Restore the initial table.",
 	undo: "Undo the last table edit.",
 	redo: "Reapply the last undone edit.",
@@ -158,6 +231,7 @@ const commandDescriptions: Record<string, string> = {
 };
 
 const fieldSymbols: Record<TableCellType, [string, string]> = {
+	rich: ["prose-editor", "components"],
 	text: ["textfield-mark", "components"],
 	number: ["numberfield-mark", "components"],
 	math: ["mathfield-mark", "components"],
@@ -168,7 +242,28 @@ function fieldSymbol(type: TableCellType): string {
 	const [name, library] = fieldSymbols[type];
 	return `<tp-icon name="${name}" library="${library}" aria-hidden="true"></tp-icon>`;
 }
-const cellTypes: TableCellType[] = ["text", "number", "date", "time", "math"];
+const importFormats = [
+	{ name: "html", label: "HTML", accept: ".html,.htm" },
+	{ name: "asciidoc", label: "tp-asciidoc", accept: ".adoc,.asciidoc" },
+	{ name: "latex", label: "tp-latex", accept: ".tex,.latex" },
+	{ name: "markdown", label: "tp-markdown", accept: ".md,.markdown" },
+	{
+		name: "restructuredtext",
+		label: "tp-restructuredtext",
+		accept: ".rst,.rest",
+	},
+	{ name: "csv", label: "CSV", accept: ".csv" },
+	{ name: "json", label: "JSON", accept: ".json" },
+	{ name: "xlsx", label: "XLSX", accept: ".xlsx" },
+];
+const cellTypes: TableCellType[] = [
+	"text",
+	"number",
+	"date",
+	"time",
+	"math",
+	"rich",
+];
 
 const formatLabels: Record<TableFormat, string> = {
 	html: "HTML",
@@ -185,11 +280,17 @@ const formatLabels: Record<TableFormat, string> = {
  * @tagname tp-table-editor
  * @attr {number} rows = 3 - Number of rows, including the optional header; between 1 and 100.
  * @attr {number} columns = 3 - Number of columns; between 1 and 30.
+ * @attr {boolean} heading - Uses the first row as column headings; reflects the Heading checkbox.
  * @attr {boolean} no-header = false - Treats the first row as ordinary data instead of column headings.
  * @attr {string} caption = "" - Table caption included in exports.
+ * @attr {string} src = "" - URL of an HTML, Markdown, AsciiDoc, LaTeX, reStructuredText, CSV, JSON or XLSX table.
  * @attr {"html" | "markdown" | "asciidoc" | "restructuredtext" | "latex"} format = "markdown" - Selected export format.
  * @attr {boolean} readonly = false - Prevents interactive edits while keeping exports available.
  * @event tp-table-editor-change Emitted after a table edit, reset, undo or redo.
+ * @event tp-table-editor-load - Fired after a table file is imported.
+ * @eventdetail tp-table-editor-load { src: string, data: TableData }
+ * @event tp-table-editor-error - Fired when a table file cannot be imported.
+ * @eventdetail tp-table-editor-error { src: string, message: string }
  * @eventdetail tp-table-editor-change { data: TableData, markup: string }
  * @keyboard {Shift+F10 / ContextMenu} Open the focused cell menu.
  * @keyboard {Tab / Shift+Tab} Move between cell fields and controls.
@@ -202,8 +303,8 @@ const formatLabels: Record<TableFormat, string> = {
  *   <table>
  *     <thead><tr><th>Session</th><th>Duration (min)</th><th>Date</th><th>Formula</th></tr></thead>
  *     <tbody>
- *       <tr><td>Introduction</td><td data-type="number">20</td><td data-type="date">2026-11-14</td><td data-type="math">x^2 + y^2</td></tr>
- *       <tr><td>Practice</td><td data-type="number">40</td><td data-type="date">2026-11-15</td><td data-type="math">E = mc^2</td></tr>
+ *       <tr><td>Introduction</td><td data-type="number" style="vertical-align:middle">20</td><td data-type="date" style="vertical-align:middle">2026-11-14</td><td data-type="math"><script type="tp/latex">\begin{pmatrix}1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9\end{pmatrix}</script></td></tr>
+ *       <tr><td>Practice<br><br>Guided exercises</td><td data-type="number" style="vertical-align:middle">40</td><td data-type="date" style="vertical-align:middle">2026-11-15</td><td data-type="math">E = mc^2</td></tr>
  *     </tbody>
  *   </table>
  * </tp-table-editor>
@@ -220,6 +321,9 @@ export class TpTableEditor extends TpBase {
 	};
 	private initial: TableData | null = null;
 	private initialized = false;
+	private sourceRequest: AbortController | null = null;
+	private sourceRevision = 0;
+	private importFormat = "html";
 	private reflecting = false;
 	private row = 0;
 	private column = 0;
@@ -240,9 +344,11 @@ export class TpTableEditor extends TpBase {
 	public static override get observedAttributes(): string[] {
 		return [
 			...TpBase.observedAttributes,
+			"src",
 			"rows",
 			"columns",
 			"no-header",
+			"heading",
 			"caption",
 			"format",
 			"readonly",
@@ -286,6 +392,14 @@ export class TpTableEditor extends TpBase {
 	public set caption(value: string) {
 		this.setAttribute("caption", tableText(value));
 	}
+	/** Whether the first row contains column headings. @attr heading */
+	public get heading(): boolean {
+		return this.initialized ? this.data.header : this.hasAttribute("heading");
+	}
+	public set heading(value: boolean) {
+		this.toggleAttribute("heading", value);
+		if (this.initialized && this.data.header !== value) this.noHeader = !value;
+	}
 	/** Whether the first row contains ordinary data. @attr no-header */
 	public get noHeader(): boolean {
 		return this.hasAttribute("no-header");
@@ -300,6 +414,75 @@ export class TpTableEditor extends TpBase {
 	public set readonly(value: boolean) {
 		this.toggleAttribute("readonly", value);
 	}
+	/** URL of the table to import. @attr src */
+	public get src(): string {
+		return this.getAttribute("src") ?? "";
+	}
+	public set src(value: string) {
+		this.setAttribute("src", value);
+	}
+	private async loadSource(file?: File): Promise<void> {
+		const revision = ++this.sourceRevision;
+		this.sourceRequest?.abort();
+		this.removeAttribute("aria-busy");
+		if ((!file && !this.src.trim()) || !this.isConnected) return;
+		const sourceName = file?.name ?? this.src;
+		const request = new AbortController();
+		this.sourceRequest = request;
+		this.setAttribute("aria-busy", "true");
+		this.announce("Loading table…");
+		try {
+			const table = file
+				? await parseTableSource(
+						file.name.toLowerCase().endsWith(".xlsx")
+							? await file.arrayBuffer()
+							: await file.text(),
+						new URL(encodeURIComponent(file.name), this.ownerDocument.baseURI),
+						request.signal,
+					)
+				: await loadTableSource(
+						resolveComponentSourceUrl(this, this.src),
+						request.signal,
+					);
+			if (revision !== this.sourceRevision || !this.isConnected) return;
+			const previous = this.data;
+			try {
+				this.readInitialTable(table, true);
+			} catch (error) {
+				this.data = previous;
+				throw error;
+			}
+			this.initial = this.getData();
+			this.undoStack = [];
+			this.redoStack = [];
+			this.row = this.column = 0;
+			this.selectionEnd = null;
+			this.changed();
+			this.dispatchEvent(
+				new CustomEvent("tp-table-editor-load", {
+					bubbles: true,
+					detail: { src: sourceName, data: this.getData() },
+				}),
+			);
+		} catch (error) {
+			if (revision !== this.sourceRevision || !this.isConnected) return;
+			const message = error instanceof Error ? error.message : String(error);
+			this.announce(message);
+			this.dispatchEvent(
+				new CustomEvent("tp-table-editor-error", {
+					bubbles: true,
+					detail: { src: sourceName, message },
+				}),
+			);
+		} finally {
+			if (revision === this.sourceRevision) this.removeAttribute("aria-busy");
+		}
+	}
+	protected disconnectedCallback(): void {
+		this.sourceRequest?.abort();
+		this.sourceRevision++;
+		this.removeAttribute("aria-busy");
+	}
 	private dimension(name: string, max: number): number {
 		const value = Number(this.getAttribute(name) ?? 3);
 		return Number.isFinite(value)
@@ -310,95 +493,141 @@ export class TpTableEditor extends TpBase {
 		super.connectedCallback();
 		this.ensureGlobalStyle("tp-table-editor-styles", style);
 		this.ensureGlobalStyle("tp-table-editor-preview-styles", previewStyle);
-		if (!this.initialized) {
-			const source = this.querySelector("table");
-			const sourceCells: (HTMLTableCellElement | undefined)[][] = [];
-			const merges: TableMerge[] = [];
-			if (source?.rows.length) {
-				const occupied = new Set<string>();
-				Array.from(source.rows).forEach((row, r) => {
-					sourceCells[r] ??= [];
-					let column = 0;
-					for (const cell of Array.from(row.cells)) {
-						while (occupied.has(`${r}:${column}`)) column++;
-						const rowCells = sourceCells[r];
-						if (rowCells) rowCells[column] = cell;
-						const rowspan = Math.min(
-							cell.rowSpan || source.rows.length - r,
-							source.rows.length - r,
-						);
-						const colspan = cell.colSpan;
-						for (let y = r; y < r + rowspan; y++)
-							for (let x = column; x < column + colspan; x++)
-								occupied.add(`${y}:${x}`);
-						if (rowspan * colspan > 1)
-							merges.push({ row: r, column, rowspan, colspan });
-						column += colspan;
-					}
-				});
-			}
-			const width = Math.max(
-				1,
-				...sourceCells.map((row) => row.length),
-				...merges.map((m) => m.column + m.colspan),
-			);
-			const cells = source?.rows.length
-				? Array.from({ length: source.rows.length }, (_, r) =>
-						Array.from({ length: width }, (_, c) =>
-							tableText(sourceCells[r]?.[c]?.textContent?.trim() ?? ""),
-						),
-					)
-				: Array.from({ length: this.rows }, () =>
-						Array<string>(this.columns).fill(""),
-					);
-			this.data = this.normalizeData(cells);
-			if (source?.querySelector("[data-type]"))
-				this.data.cellTypes = cells.map((row, r) =>
-					row.map((value, c) => {
-						const type = sourceCells[r]?.[c]?.getAttribute(
-							"data-type",
-						) as TableCellType;
-						return cellTypes.includes(type) && this.acceptsType(value, type)
-							? type
-							: "text";
-					}),
-				);
-			if (source?.querySelector('[data-math-mode="asciimath"]'))
-				this.data.cellMathModes = cells.map((row, r) =>
-					row.map((_, c) =>
-						sourceCells[r]?.[c]?.getAttribute("data-math-mode") === "asciimath"
-							? "asciimath"
-							: "latexmath",
-					),
-				);
-			this.data.header = this.hasAttribute("no-header")
-				? false
-				: source?.rows.length
-					? !!source.rows[0]?.querySelector("th")
-					: true;
-			if (merges.length)
-				this.data.merges = merges.filter(
-					(m) => !(this.data.header && m.row === 0 && m.rowspan > 1),
-				);
-			this.data.caption =
-				this.caption || tableText(source?.caption?.textContent ?? "");
-			this.data.explicitAlignments = this.data.alignments.map((_, index) =>
-				["left", "center", "right"].includes(
-					sourceCells[0]?.[index]?.style.textAlign ?? "",
-				),
-			);
-			this.data.alignments = this.data.alignments.map((_, index) => {
-				const alignment = sourceCells[0]?.[index]?.style.textAlign;
-				return alignment === "right" || alignment === "center"
-					? alignment
-					: "left";
-			});
-			this.updateAutomaticAlignments();
-			this.initialized = true;
-		}
+		if (!this.initialized) this.readInitialTable(this.querySelector("table"));
 		this.initial ??= this.getData();
 		this.reflect();
 		this.render();
+		void this.loadSource();
+	}
+	private readInitialTable(
+		source: HTMLTableElement | null,
+		imported = false,
+	): void {
+		const sourceCells: (HTMLTableCellElement | undefined)[][] = [];
+		const merges: TableMerge[] = [];
+		if (source?.rows.length) {
+			const occupied = new Set<string>();
+			Array.from(source.rows).forEach((row, r) => {
+				sourceCells[r] ??= [];
+				let column = 0;
+				for (const cell of Array.from(row.cells)) {
+					while (occupied.has(`${r}:${column}`)) column++;
+					const rowCells = sourceCells[r];
+					if (rowCells) rowCells[column] = cell;
+					const rowspan = Math.min(
+						cell.rowSpan || source.rows.length - r,
+						source.rows.length - r,
+					);
+					const colspan = cell.colSpan;
+					for (let y = r; y < r + rowspan; y++)
+						for (let x = column; x < column + colspan; x++)
+							occupied.add(`${y}:${x}`);
+					if (rowspan * colspan > 1)
+						merges.push({ row: r, column, rowspan, colspan });
+					column += colspan;
+				}
+			});
+		}
+		const width = Math.max(
+			1,
+			...sourceCells.map((row) => row.length),
+			...merges.map((m) => m.column + m.colspan),
+		);
+		const importedWidths = source
+			? tableSourceLayout(source, width, this.clientWidth || width * 160)
+			: undefined;
+		const cells = source?.rows.length
+			? Array.from({ length: source.rows.length }, (_, r) =>
+					Array.from({ length: width }, (_, c) =>
+						this.readCellText(sourceCells[r]?.[c]),
+					),
+				)
+			: Array.from({ length: this.rows }, () =>
+					Array<string>(this.columns).fill(""),
+				);
+		this.data = this.normalizeData(cells);
+		for (const [r, row] of sourceCells.entries())
+			for (const [c, cell] of row.entries())
+				if (cell?.dataset.type === "rich")
+					this.data.cells[r]?.splice(c, 1, cell.innerHTML);
+		if (importedWidths) this.data.columnWidths = importedWidths;
+		if (source && importedTableBorders.has(source))
+			this.data.cellBorders = structuredClone(importedTableBorders.get(source));
+		if (source?.querySelector("[data-type]"))
+			this.data.cellTypes = cells.map((row, r) =>
+				row.map((value, c) => {
+					const type = sourceCells[r]?.[c]?.getAttribute(
+						"data-type",
+					) as TableCellType;
+					return cellTypes.includes(type) && this.acceptsType(value, type)
+						? type
+						: "text";
+				}),
+			);
+		if (source?.querySelector('[data-math-mode="asciimath"]'))
+			this.data.cellMathModes = cells.map((row, r) =>
+				row.map((_, c) =>
+					sourceCells[r]?.[c]?.getAttribute("data-math-mode") === "asciimath"
+						? "asciimath"
+						: "latexmath",
+				),
+			);
+		if (
+			sourceCells.some((row) => row.some((cell) => cell?.style.verticalAlign))
+		)
+			this.data.cellVerticalAlignments = cells.map((row, r) =>
+				row.map((_, c) => {
+					const alignment = sourceCells[r]?.[c]?.style.verticalAlign;
+					return alignment === "middle" || alignment === "bottom"
+						? alignment
+						: "top";
+				}),
+			);
+		this.data.header =
+			!imported && this.hasAttribute("heading")
+				? true
+				: !imported && this.hasAttribute("no-header")
+					? false
+					: source?.rows.length
+						? !!source.rows[0]?.querySelector("th")
+						: true;
+		if (merges.length)
+			this.data.merges = merges.filter(
+				(m) => !(this.data.header && m.row === 0 && m.rowspan > 1),
+			);
+		this.data.caption =
+			(!imported && this.caption) ||
+			tableText(source?.caption?.textContent ?? "");
+		this.data.explicitAlignments = this.data.alignments.map((_, index) =>
+			["left", "center", "right"].includes(
+				sourceCells.map((row) => row[index]?.style.textAlign).find(Boolean) ??
+					"",
+			),
+		);
+		this.data.alignments = this.data.alignments.map((_, index) => {
+			const alignment = sourceCells
+				.map((row) => row[index]?.style.textAlign)
+				.find(Boolean);
+			return alignment === "right" || alignment === "center"
+				? alignment
+				: "left";
+		});
+		const horizontal = cells.map((row, r) =>
+			row.map((_, c) => {
+				const value = sourceCells[r]?.[c]?.style.textAlign;
+				return value === "center" || value === "right" || value === "left"
+					? value
+					: (this.data.alignments[c] ?? "left");
+			}),
+		);
+		if (
+			horizontal.some((row) =>
+				row.some((value, c) => value !== this.data.alignments[c]),
+			)
+		)
+			this.data.cellHorizontalAlignments = horizontal;
+		this.updateAutomaticAlignments();
+		this.initialized = true;
 	}
 	protected override attributeChangedCallback(
 		name: string,
@@ -406,6 +635,10 @@ export class TpTableEditor extends TpBase {
 		newValue: string | null,
 	): void {
 		if (!this.initialized || this.reflecting || oldValue === newValue) return;
+		if (name === "src") {
+			void this.loadSource();
+			return;
+		}
 		if (name === "format") {
 			this.refresh();
 			return;
@@ -414,10 +647,12 @@ export class TpTableEditor extends TpBase {
 			this.render();
 			return;
 		}
-		if (!["rows", "columns", "caption", "no-header"].includes(name)) return;
+		if (!["rows", "columns", "caption", "no-header", "heading"].includes(name))
+			return;
 		this.remember();
 		if (name === "caption") this.data.caption = tableText(this.caption);
 		if (name === "no-header") this.data.header = !this.noHeader;
+		if (name === "heading") this.data.header = this.hasAttribute("heading");
 		if (name === "rows" || name === "columns") {
 			const rows =
 				name === "rows" ? this.dimension("rows", 100) : this.rows || 3;
@@ -443,6 +678,34 @@ export class TpTableEditor extends TpBase {
 						(_, c) => this.data.cellMathModes?.[r]?.[c] ?? "latexmath",
 					),
 				);
+			if (this.data.cellVerticalAlignments)
+				this.data.cellVerticalAlignments = Array.from(
+					{ length: rows },
+					(_, r) =>
+						Array.from(
+							{ length: columns },
+							(_, c) => this.data.cellVerticalAlignments?.[r]?.[c] ?? "top",
+						),
+				);
+			if (this.data.cellHorizontalAlignments)
+				this.data.cellHorizontalAlignments = Array.from(
+					{ length: rows },
+					(_, r) =>
+						Array.from(
+							{ length: columns },
+							(_, c) =>
+								this.data.cellHorizontalAlignments?.[r]?.[c] ??
+								this.data.alignments[c] ??
+								"left",
+						),
+				);
+			if (this.data.cellBorders)
+				this.data.cellBorders = Array.from({ length: rows }, (_, r) =>
+					Array.from(
+						{ length: columns },
+						(_, c) => this.data.cellBorders?.[r]?.[c] ?? {},
+					),
+				);
 			if (this.data.columnWidths)
 				this.data.columnWidths = Array.from(
 					{ length: columns },
@@ -464,7 +727,7 @@ export class TpTableEditor extends TpBase {
 	public getData(): TableData {
 		return structuredClone(this.data);
 	}
-	/** Replaces the table with rectangular, single-line text cells; short rows are padded. */
+	/** Replaces the table with rectangular text cells; short rows are padded. */
 	public setData(cells: string[][]): void {
 		const next = this.normalizeData(cells);
 		if (this.initialized) this.remember();
@@ -476,7 +739,26 @@ export class TpTableEditor extends TpBase {
 	public getMarkup(format: TableFormat = this.format): string {
 		if (!tableFormats.includes(format))
 			throw new TypeError("Unsupported table format");
-		return this.data.cells.length ? serializeTable(this.getData(), format) : "";
+		return this.data.cells.length
+			? serializeTable(
+					format === "latex"
+						? cachedLatexData(this.getData(), this.baseURI)
+						: this.getData(),
+					format,
+				)
+			: "";
+	}
+	/** Returns markup after rendering embedded source blocks for native LaTeX conversion. */
+	public async getMarkupAsync(
+		format: TableFormat = this.format,
+	): Promise<string> {
+		if (!tableFormats.includes(format))
+			throw new TypeError("Unsupported table format");
+		const data = this.getData();
+		if (format !== "latex") return this.getMarkup(format);
+		return data.cells.length
+			? serializeTable(await prepareLatexData(data, this.baseURI), format)
+			: "";
 	}
 	/** Creates a table only when the editor is empty; returns whether it was inserted. */
 	public insertTable(rows = 3, columns = 3): boolean {
@@ -678,6 +960,21 @@ export class TpTableEditor extends TpBase {
 			0,
 			Array(this.columns).fill("latexmath"),
 		);
+		this.data.cellVerticalAlignments?.splice(
+			this.row + (position === "after" ? 1 : 0),
+			0,
+			Array(this.columns).fill("top"),
+		);
+		this.data.cellHorizontalAlignments?.splice(
+			this.row + (position === "after" ? 1 : 0),
+			0,
+			[...this.data.alignments],
+		);
+		this.data.cellBorders?.splice(
+			this.row + (position === "after" ? 1 : 0),
+			0,
+			Array.from({ length: this.columns }, () => ({})),
+		);
 		if (position === "after") this.row++;
 		this.changed(true);
 	}
@@ -691,10 +988,15 @@ export class TpTableEditor extends TpBase {
 		this.adjustMerges("column", index, true);
 		for (const row of this.data.cells) row.splice(index, 0, "");
 		for (const row of this.data.cellTypes ?? []) row.splice(index, 0, "text");
+		for (const row of this.data.cellVerticalAlignments ?? [])
+			row.splice(index, 0, "top");
+		for (const row of this.data.cellHorizontalAlignments ?? [])
+			row.splice(index, 0, "left");
 		for (const row of this.data.cellMathModes ?? [])
 			row.splice(index, 0, "latexmath");
 		this.data.alignments.splice(index, 0, "left");
 		this.data.columnWidths?.splice(index, 0, 160);
+		for (const row of this.data.cellBorders ?? []) row.splice(index, 0, {});
 		this.data.explicitAlignments?.splice(index, 0, false);
 		if (position === "after") this.column++;
 		this.changed(true);
@@ -707,6 +1009,9 @@ export class TpTableEditor extends TpBase {
 		this.data.cells.splice(this.row, 1);
 		this.data.cellTypes?.splice(this.row, 1);
 		this.data.cellMathModes?.splice(this.row, 1);
+		this.data.cellVerticalAlignments?.splice(this.row, 1);
+		this.data.cellBorders?.splice(this.row, 1);
+		this.data.cellHorizontalAlignments?.splice(this.row, 1);
 		this.changed(true);
 	}
 	/** Removes the selected column, preserving at least one column. */
@@ -716,9 +1021,14 @@ export class TpTableEditor extends TpBase {
 		this.adjustMerges("column", this.column, false);
 		for (const row of this.data.cells) row.splice(this.column, 1);
 		for (const row of this.data.cellTypes ?? []) row.splice(this.column, 1);
+		for (const row of this.data.cellVerticalAlignments ?? [])
+			row.splice(this.column, 1);
 		for (const row of this.data.cellMathModes ?? []) row.splice(this.column, 1);
+		for (const row of this.data.cellHorizontalAlignments ?? [])
+			row.splice(this.column, 1);
 		this.data.alignments.splice(this.column, 1);
 		this.data.columnWidths?.splice(this.column, 1);
+		for (const row of this.data.cellBorders ?? []) row.splice(this.column, 1);
 		this.data.explicitAlignments?.splice(this.column, 1);
 		this.changed(true);
 	}
@@ -746,6 +1056,15 @@ export class TpTableEditor extends TpBase {
 			throw new TypeError("Unsupported cell type.");
 		if (current === type) return true;
 		this.remember();
+		const previous = this.data.cells[row]?.[column] ?? "";
+		if (type === "rich")
+			this.data.cells[row]?.splice(
+				column,
+				1,
+				escapeTableHtml(previous).replaceAll("\n", "<br>"),
+			);
+		else if (current === "rich")
+			this.data.cells[row]?.splice(column, 1, tableRichText(previous));
 		const cleared = !this.acceptsType(
 			this.data.cells[row]?.[column] ?? "",
 			type,
@@ -760,23 +1079,59 @@ export class TpTableEditor extends TpBase {
 		this.changed(true);
 		if (cleared)
 			this.announce(
-				`Cell changed to tp-${type}field. The incompatible value was cleared; Undo restores it.`,
+				`Cell changed to ${type}. The incompatible value was cleared; Undo restores it.`,
 			);
 		return true;
 	}
+	private readCellText(cell?: HTMLTableCellElement): string {
+		if (!cell) return "";
+		if (cell.dataset.type === "rich") return cell.innerHTML;
+		const content = cell.cloneNode(true) as HTMLTableCellElement;
+		for (const br of content.querySelectorAll("br")) br.replaceWith("\n");
+		return tableCellText(content.textContent?.trim() ?? "");
+	}
 	private acceptsType(value: string, type: TableCellType): boolean {
-		if (!value || type === "text" || type === "math") return true;
+		if (!value || type === "text" || type === "math" || type === "rich")
+			return true;
 		const input = this.ownerDocument.createElement("input");
 		input.type = type;
 		input.value = value;
 		return input.value === value;
 	}
-	private setColumnAlignment(alignment: TableAlignment): void {
+	/** Aligns the selected column horizontally. */
+	setColumnAlignment(alignment: TableAlignment): void {
+		if (
+			this.readonly ||
+			!this.rows ||
+			!this.columns ||
+			!["left", "center", "right"].includes(alignment)
+		)
+			return;
 		this.remember();
 		this.data.alignments[this.column] = alignment;
+		for (const row of this.data.cellHorizontalAlignments ?? [])
+			row[this.column] = alignment;
 		this.data.explicitAlignments ??= this.data.alignments.map(() => false);
 		this.data.explicitAlignments[this.column] = true;
 		this.changed();
+	}
+	private canAlignVertically(): boolean {
+		return this.rows > 0 && this.columns > 0;
+	}
+	/** Aligns the selected cells vertically. */
+	setVerticalAlignment(alignment: TableVerticalAlignment): void {
+		if (this.readonly || !this.rows || !this.canAlignVertically()) return;
+		if (!["top", "middle", "bottom"].includes(alignment)) return;
+		this.remember();
+		this.data.cellVerticalAlignments ??= this.data.cells.map((row) =>
+			row.map(() => "top"),
+		);
+		this.data.cellVerticalAlignments[this.row]?.splice(
+			this.column,
+			1,
+			alignment,
+		);
+		this.changed(true);
 	}
 	private createCellMenu(): void {
 		const menu = new TpContextmenu();
@@ -791,7 +1146,8 @@ export class TpTableEditor extends TpBase {
           <tp-divider></tp-divider>
           ${(["left", "center", "right"] as const).map((alignment) => `<li data-action="align-${alignment}"><tp-icon data-check name="check" aria-hidden="true"></tp-icon><tp-icon name="format-align-${alignment}" aria-hidden="true"></tp-icon>Align ${alignment}</li>`).join("")}
           <tp-divider></tp-divider>
-          <li aria-label="Cell type"><tp-icon name="symbol" aria-hidden="true"></tp-icon>Cell type<ul>${cellTypes.map((type) => `<li data-action="type-${type}"><tp-icon data-check name="check" aria-hidden="true"></tp-icon>${fieldSymbol(type)}tp-${type}field</li>`).join("")}</ul></li>
+          ${(["top", "middle", "bottom"] as const).map((alignment) => `<li data-action="vertical-${alignment}"><tp-icon data-check name="check" aria-hidden="true"></tp-icon><tp-icon name="format-align-${alignment}" aria-hidden="true"></tp-icon>Align ${alignment}</li>`).join("")}<tp-divider></tp-divider>
+          <li aria-label="Cell type"><tp-icon name="symbol" aria-hidden="true"></tp-icon>Cell type<ul>${cellTypes.map((type) => `<li data-action="type-${type}"><tp-icon data-check name="check" aria-hidden="true"></tp-icon>${fieldSymbol(type)}${type === "rich" ? "Rich content" : type}</li>`).join("")}</ul></li>
         </ul>`;
 		menu.addEventListener("tp-contextmenu-select", (event) => {
 			if (this.readonly) return;
@@ -805,6 +1161,8 @@ export class TpTableEditor extends TpBase {
 			else if (action === "remove-column") this.deleteColumn();
 			else if (action === "merge-cells") this.mergeCells();
 			else if (action === "split-cell") this.splitCell();
+			else if (action.startsWith("vertical-"))
+				this.setVerticalAlignment(action.slice(9) as TableVerticalAlignment);
 			else if (action.startsWith("align-"))
 				this.setColumnAlignment(action.slice(6) as TableAlignment);
 			else if (action.startsWith("type-"))
@@ -846,13 +1204,17 @@ export class TpTableEditor extends TpBase {
 				(action.startsWith("row-") && this.rows >= 100) ||
 				(action.startsWith("column-") && this.columns >= 30) ||
 				(action === "remove-row" && this.rows <= 1) ||
-				(action === "remove-column" && this.columns <= 1);
+				(action === "remove-column" && this.columns <= 1) ||
+				(action.startsWith("vertical-") && !this.canAlignVertically());
 			item.setAttribute("aria-disabled", String(disabled));
 			item.setAttribute(
 				"aria-current",
 				String(
 					action === `type-${this.getCellType(row, column)}` ||
-						action === `align-${this.data.alignments[column]}`,
+						action ===
+							`align-${this.data.cellHorizontalAlignments?.[row]?.[column] ?? this.data.alignments[column]}` ||
+						action ===
+							`vertical-${this.data.cellVerticalAlignments?.[row]?.[column] ?? "top"}`,
 				),
 			);
 		}
@@ -895,7 +1257,7 @@ export class TpTableEditor extends TpBase {
 	/** Copies the selected markup; returns false if clipboard access fails. */
 	public async copy(): Promise<boolean> {
 		try {
-			await navigator.clipboard.writeText(this.getMarkup());
+			await navigator.clipboard.writeText(await this.getMarkupAsync());
 			this.announce("Markup copied.");
 			return true;
 		} catch {
@@ -909,7 +1271,6 @@ export class TpTableEditor extends TpBase {
 	public async download(): Promise<void> {
 		if (!this.rows) return;
 		const format = this.format;
-		const source = this.getMarkup(format);
 		const extension = tableFileExtensions[format];
 		const target = await chooseSaveTarget({
 			suggestedName: `table.${extension}`,
@@ -917,11 +1278,12 @@ export class TpTableEditor extends TpBase {
 			mimeType: "text/plain",
 			description: formatLabels[format],
 		});
-		if (target)
-			await saveBlob(
-				new Blob([source], { type: "text/plain;charset=utf-8" }),
-				target,
-			);
+		if (!target) return;
+		const source = await this.getMarkupAsync(format);
+		await saveBlob(
+			new Blob([source], { type: "text/plain;charset=utf-8" }),
+			target,
+		);
 	}
 	/** Saves cell strings (including headings) as CSV, JSON or XLSX after choosing a filename. */
 	public async downloadSpreadsheet(
@@ -930,7 +1292,7 @@ export class TpTableEditor extends TpBase {
 		if (!["csv", "json", "xlsx"].includes(format))
 			throw new TypeError(`Unsupported spreadsheet format: ${format}`);
 		if (!this.rows) return;
-		const cells = this.getData().cells;
+		const cells = tableSpreadsheetCells(this.getData());
 		const mimeType =
 			format === "csv"
 				? "text/csv"
@@ -961,93 +1323,16 @@ export class TpTableEditor extends TpBase {
 					type: `${mimeType};charset=utf-8`,
 				});
 			else {
-				const workbook = XLSX.utils.book_new();
-				XLSX.utils.book_append_sheet(workbook, sheet, "Table");
-				blob = new Blob(
-					[XLSX.write(workbook, { bookType: "xlsx", type: "array" })],
-					{ type: mimeType },
-				);
+				blob = new Blob([await tableXlsx(this.getData())], { type: mimeType });
 			}
 		}
 		await saveBlob(blob, target);
 	}
-	/** Returns a standalone SVG of the table, using its current theme and column alignments. */
-	public exportSvg(): string {
+	/** Returns the rendered HTML table as a standalone SVG, including formulas and computed theme styles. */
+	public async exportSvg(): Promise<string> {
 		if (!this.rows) throw new Error("No table to export.");
-		const context = this.ownerDocument.createElement("canvas").getContext("2d");
-		if (!context) throw new Error("Text measurement is unavailable.");
-		context.font = "bold 14px sans-serif";
-		const widths = this.data.alignments.map((_, column) =>
-			Math.max(
-				80,
-				...this.data.cells.map(
-					(row) => context.measureText(row[column] ?? "").width + 24,
-				),
-			),
-		);
-		let width = widths.reduce((sum, value) => sum + value, 0);
-		if (this.data.caption) {
-			const extra = Math.max(
-				0,
-				context.measureText(this.data.caption).width + 24 - width,
-			);
-			widths[widths.length - 1] = (widths.at(-1) ?? 80) + extra;
-			width += extra;
-		}
-		const height = this.rows * 36 + (this.data.caption ? 40 : 0);
-		const style = getComputedStyle(this);
-		const header = this.surface?.querySelector("th");
-		const background = style.backgroundColor;
-		const foreground = style.color;
-		const stroke = this.surface?.querySelector("td,th");
-		const border = stroke
-			? getComputedStyle(stroke).borderTopColor
-			: foreground;
-		const parts = [
-			`<svg xmlns="http://www.w3.org/2000/svg" width="${width + 2}" height="${height + 2}" viewBox="-1 -1 ${width + 2} ${height + 2}"><rect x="-1" y="-1" width="${width + 2}" height="${height + 2}" fill="${escapeTableHtml(background)}"/>`,
-		];
-		this.data.cells.forEach((row, index) => {
-			let x = 0;
-			row.forEach((value, column) => {
-				const columnWidth = widths[column] ?? 80;
-				if (tableCellCovered(this.data, index, column)) {
-					x += columnWidth;
-					return;
-				}
-				const merge = tableMergeAt(this.data, index, column);
-				const w = widths
-					.slice(column, column + (merge?.colspan ?? 1))
-					.reduce((sum, width) => sum + width, 0);
-				const h = (merge?.rowspan ?? 1) * 36;
-				const alignment = this.data.alignments[column];
-				const tx =
-					x +
-					(alignment === "right"
-						? w - 12
-						: alignment === "center"
-							? w / 2
-							: 12);
-				const anchor =
-					alignment === "right"
-						? "end"
-						: alignment === "center"
-							? "middle"
-							: "start";
-				const fill =
-					index === 0 && this.data.header && header
-						? getComputedStyle(header).backgroundColor
-						: background;
-				parts.push(
-					`<rect x="${x}" y="${index * 36}" width="${w}" height="${h}" fill="${escapeTableHtml(fill)}" stroke="${escapeTableHtml(border)}"/><text x="${tx}" y="${index * 36 + h / 2 + 5}" text-anchor="${anchor}" font-family="sans-serif" font-size="14" font-weight="${index === 0 && this.data.header ? 700 : 400}" fill="${escapeTableHtml(foreground)}">${escapeTableHtml(value)}</text>`,
-				);
-				x += columnWidth;
-			});
-		});
-		if (this.data.caption)
-			parts.push(
-				`<text x="${width / 2}" y="${height - 12}" text-anchor="middle" font-family="sans-serif" font-size="14" fill="${escapeTableHtml(foreground)}">${escapeTableHtml(this.data.caption)}</text>`,
-			);
-		return `${parts.join("")}</svg>`;
+		const { tableImage } = await import("./table-image.js");
+		return tableImage(this, this.getMarkup("html"));
 	}
 
 	private normalizeData(cells: string[][]): TableData {
@@ -1066,7 +1351,7 @@ export class TpTableEditor extends TpBase {
 			throw new RangeError("A table supports at most 30 columns.");
 		return {
 			cells: cells.map((row) =>
-				Array.from({ length: columns }, (_, c) => tableText(row[c] ?? "")),
+				Array.from({ length: columns }, (_, c) => tableCellText(row[c] ?? "")),
 			),
 			header: true,
 			caption: "",
@@ -1084,6 +1369,7 @@ export class TpTableEditor extends TpBase {
 		this.columns = this.columns;
 		this.caption = this.data.caption;
 		this.noHeader = !this.data.header;
+		this.toggleAttribute("heading", this.data.header);
 		this.reflecting = false;
 	}
 	private updateAutomaticAlignments(): void {
@@ -1149,12 +1435,17 @@ export class TpTableEditor extends TpBase {
 			label: string,
 			choices: [string, string][],
 		): string =>
-			`<div ${key === "align" || key === "type" ? 'section="end"' : ""} class="tp-table-editor-choice">${key === "align" ? `<tp-icon-button id="${this.controlId}-${key}" data-trigger="${key}" label="Column alignment" aria-haspopup="menu" aria-expanded="false" data-help-description="Align the selected column left, center or right." pill></tp-icon-button>` : key === "type" ? `<tp-icon-button id="${this.controlId}-${key}" data-trigger="${key}" label="Cell type" aria-haspopup="menu" aria-expanded="false" data-help-description="Choose the selected cell’s field type." pill></tp-icon-button>` : `<tp-button id="${this.controlId}-${key}" data-trigger="${key}" aria-haspopup="menu" aria-expanded="false" outlined>${label}</tp-button>`}<tp-dropdown data-menu="${key}" anchor="#${this.controlId}-${key}" placement="bottom" outside-click><tp-menu><ul>${choices.map(([value, text]) => `<li data-choice="${value}"><tp-icon data-check name="check" aria-hidden="true"></tp-icon>${key === "type" ? fieldSymbol(value as TableCellType) : key === "align" ? `<tp-icon name="format-align-${value}" aria-hidden="true"></tp-icon>` : ""}<span>${text}</span></li>`).join("")}</ul></tp-menu></tp-dropdown></div>`;
+			`<div ${key === "align" || key === "vertical" || key === "type" ? 'section="end"' : ""} class="tp-table-editor-choice">${key === "align" || key === "vertical" ? `<tp-icon-button id="${this.controlId}-${key}" data-trigger="${key}" label="${label}" aria-haspopup="menu" aria-expanded="false" data-help-description="${key === "vertical" ? "Align the selected number, date or time field vertically." : "Align the selected column left, center or right."}" pill></tp-icon-button>` : key === "type" ? `<tp-icon-button id="${this.controlId}-${key}" data-trigger="${key}" label="Cell type" aria-haspopup="menu" aria-expanded="false" data-help-description="Choose the selected cell’s field type." pill></tp-icon-button>` : `<tp-button id="${this.controlId}-${key}" data-trigger="${key}" aria-haspopup="menu" aria-expanded="false" outlined>${label}</tp-button>`}<tp-dropdown data-menu="${key}" anchor="#${this.controlId}-${key}" placement="bottom" outside-click><tp-menu><ul>${choices.map(([value, text]) => `<li data-choice="${value}"><tp-icon data-check name="check" aria-hidden="true"></tp-icon>${key === "type" ? fieldSymbol(value as TableCellType) : key === "align" || key === "vertical" ? `<tp-icon name="format-align-${value}" aria-hidden="true"></tp-icon>` : ""}<span>${text}</span></li>`).join("")}</ul></tp-menu></tp-dropdown></div>`;
 		const button = (action: string, icon: string, label: string): string =>
 			`<tp-icon-button section="end" name="${icon}" label="${label}" data-action="${action}" data-help-description="${commandDescriptions[action] ?? label}" pill></tp-icon-button>`;
 		this.innerHTML = `<tp-toolbar data-help-group="Table editing">
    <span section="start" class="tp-table-editor-title"><tp-icon name="table-editor" library="components"></tp-icon> Table editor</span>
-   ${button("reset", "refresh", "Reset")}${button("undo", "undo", "Undo")}${button("redo", "redo", "Redo")}
+   <div section="end" class="tp-table-editor-choice">
+    <tp-icon-button id="${this.controlId}-import" data-action="import" name="file-import" label="Import table" aria-haspopup="menu" aria-expanded="false" data-help-description="Choose a markup or spreadsheet format, then select a file to import." pill></tp-icon-button>
+    <tp-dropdown data-import-menu anchor="#${this.controlId}-import" placement="bottom" outside-click><tp-menu><ul>
+     ${importFormats.map((format, index) => `${index === 5 ? "<tp-divider></tp-divider>" : ""}<li data-import-format="${format.name}" data-choice="${format.name}" aria-current="${format.name === this.importFormat}"><tp-icon data-check name="check" aria-hidden="true"></tp-icon><tp-icon name="${index < 5 ? `file_type_${format.name}` : `file-${format.name}`}" library="${index < 5 ? "languages" : "tp"}" aria-hidden="true"></tp-icon><span>${format.label}</span></li>`).join("")}
+    </ul></tp-menu></tp-dropdown>
+   </div>${button("reset", "refresh", "Reset")}${button("undo", "undo", "Undo")}${button("redo", "redo", "Redo")}
    <div section="end" class="tp-table-editor-choice">
     <tp-icon-button id="${this.controlId}-structure" data-trigger="structure" name="plus-minus" label="Insert or delete" aria-haspopup="menu" aria-expanded="false" data-help-description="Create or delete the table, or insert or delete rows and columns." pill></tp-icon-button>
     <tp-dropdown data-menu="structure" anchor="#${this.controlId}-structure" placement="bottom" outside-click><tp-menu><ul>
@@ -1175,15 +1466,21 @@ export class TpTableEditor extends TpBase {
 			["center", "Center"],
 			["right", "Right"],
 		])}
+   ${dropdown("vertical", "Vertical alignment", [
+			["top", "Top"],
+			["middle", "Middle"],
+			["bottom", "Bottom"],
+		])}
    ${dropdown(
 			"type",
 			"Type",
-			cellTypes.map((type) => [type, `tp-${type}field`]),
+			cellTypes.map((type) => [type, type === "rich" ? "Rich content" : type]),
 		)}
    <span section="end" class="tp-table-editor-image"><tp-save-image anchor="[data-table-export-id='${this.controlId}']" filename="table"></tp-save-image></span>
    <tp-divider section="end" orientation="vertical"></tp-divider>
    <tp-color section="end"></tp-color><tp-theme section="end"></tp-theme><tp-fullscreen section="end"></tp-fullscreen>
   </tp-toolbar>
+  <input type="file" data-import-file accept=".html,.htm,.md,.markdown,.adoc,.asciidoc,.tex,.latex,.rst,.rest,.csv,.json,.xlsx" hidden>
   <div class="tp-table-editor-settings" data-help-group="Table settings">
    <tp-textfield data-caption label="Caption" clearable></tp-textfield>
    <tp-checkbox-list data-heading orientation="horizontal"><ul><li>Heading</li></ul></tp-checkbox-list>
@@ -1198,7 +1495,7 @@ export class TpTableEditor extends TpBase {
 				(
 					format,
 					index,
-				) => `<dt>${markupTabLabels[index]}</dt><dd data-format-panel="${format}"><tp-tabs data-markup-tabs><dl>
+				) => `<dt><tp-icon library="languages" name="file_type_${format}" size="1.25em" aria-hidden="true"></tp-icon> ${markupTabLabels[index]}</dt><dd data-format-panel="${format}">${exportDescription(format)}<tp-tabs data-markup-tabs><dl>
     <dt>Code</dt><dd><div class="tp-table-editor-code-tools"><tp-icon-button data-save-markup="${format}" name="file-upload" label="Save ${formatLabels[format]} as" data-help-description="Choose a filename and save this markup source." pill></tp-icon-button></div><div data-markup aria-label="${formatLabels[format]} code"></div></dd>
     <dt>Render</dt><dd><div class="tp-table-editor-preview-tools"><tp-screen data-table-screen disabled></tp-screen></div><div class="tp-table-editor-preview" data-markup-preview></div></dd>
    </dl></tp-tabs></dd>`,
@@ -1206,7 +1503,7 @@ export class TpTableEditor extends TpBase {
 			.join("")}
   </dl></tp-tabs>
   <details data-spreadsheet-details><summary>Spreadsheet</summary><tp-tabs data-spreadsheet-tabs><dl>
-   ${["csv", "json", "xlsx"].map((format) => `<dt>${format}</dt><dd data-spreadsheet-panel="${format}"><div class="tp-table-editor-code-tools"><tp-icon-button data-save-spreadsheet="${format}" name="file-upload" label="Save ${format.toUpperCase()} as" data-help-description="Choose a filename and save the spreadsheet data." pill></tp-icon-button></div>${format === "xlsx" ? "<p>xl/worksheets/sheet1.xml — Save downloads the complete XLSX workbook.</p>" : ""}<div data-spreadsheet-code aria-label="${format.toUpperCase()} code"></div></dd>`).join("")}
+   ${(["csv", "json", "xlsx"] as const).map((format) => `<dt><tp-icon library="tp" name="file-${format}" size="1.25em" aria-hidden="true"></tp-icon> ${format}</dt><dd data-spreadsheet-panel="${format}">${exportDescription(format)}<tp-tabs data-spreadsheet-view-tabs><dl><dt>Code</dt><dd><div class="tp-table-editor-code-tools"><tp-icon-button data-save-spreadsheet="${format}" name="file-upload" label="Save ${format.toUpperCase()} as" data-help-description="Choose a filename and save the spreadsheet data." pill></tp-icon-button></div>${format === "xlsx" ? "<p>xl/worksheets/sheet1.xml — Save downloads the complete XLSX workbook.</p>" : ""}<div data-spreadsheet-code aria-label="${format.toUpperCase()} code"></div></dd><dt>Render</dt><dd><div class="tp-table-editor-preview" data-markup-preview data-spreadsheet-render aria-label="${format.toUpperCase()} table"></div></dd></dl></tp-tabs></dd>`).join("")}
   </dl></tp-tabs></details>
 `;
 		this.surface = this.querySelector(".tp-table-editor-surface");
@@ -1253,6 +1550,42 @@ export class TpTableEditor extends TpBase {
 			});
 		}
 		this.status = this.querySelector(".tp-table-editor-status");
+		const fileInput =
+			this.querySelector<HTMLInputElement>("[data-import-file]");
+		const importMenu = this.querySelector<TpDropdown>("[data-import-menu]");
+		const importTrigger = this.querySelector<HTMLElement>(
+			'[data-action="import"]',
+		);
+		importTrigger?.addEventListener("click", () => {
+			if (!this.readonly) importMenu?.toggle();
+		});
+		importMenu?.addEventListener("tp-dropdown-toggle", () =>
+			importTrigger?.setAttribute("aria-expanded", String(importMenu.open)),
+		);
+		importMenu?.addEventListener("tp-menu-item-select", (event) => {
+			if (this.readonly || !fileInput) return;
+			const item = (event as CustomEvent<{ item: HTMLElement }>).detail.item;
+			const format = importFormats.find(
+				(format) => format.name === item.dataset.importFormat,
+			);
+			if (!format) return;
+			this.importFormat = format.name;
+			for (const entry of importMenu.querySelectorAll<HTMLElement>(
+				"[data-import-format]",
+			))
+				entry.setAttribute(
+					"aria-current",
+					String(entry.dataset.importFormat === this.importFormat),
+				);
+			fileInput.accept = format.accept;
+			importMenu.hide();
+			fileInput.click();
+		});
+		fileInput?.addEventListener("change", () => {
+			const file = fileInput.files?.[0];
+			fileInput.value = "";
+			if (file && !this.readonly) void this.loadSource(file);
+		});
 		this.querySelector("tp-save-image")?.addEventListener(
 			"tp-save-image-error",
 			() => this.announce("Image export failed. Please try again."),
@@ -1330,6 +1663,8 @@ export class TpTableEditor extends TpBase {
 					else if (value === "split-cell") this.splitCell();
 				} else if (!this.readonly && key === "type")
 					this.setCellType(this.row, this.column, value as TableCellType);
+				else if (!this.readonly && key === "vertical")
+					this.setVerticalAlignment(value as TableVerticalAlignment);
 				else if (!this.readonly && key === "align") {
 					this.setColumnAlignment(value as TableAlignment);
 				}
@@ -1458,6 +1793,17 @@ export class TpTableEditor extends TpBase {
 					this.data.header && r === 0 ? "th" : "td",
 				);
 				if (cell.tagName === "TH") cell.setAttribute("scope", "col");
+				cell.style.cssText = tableBorderCss(this.data, r, c);
+				const vertical = this.data.cellVerticalAlignments?.[r]?.[c] ?? "top";
+				cell.style.verticalAlign = vertical;
+				cell.style.setProperty(
+					"--tp-table-cell-vertical",
+					vertical === "middle"
+						? "center"
+						: vertical === "bottom"
+							? "end"
+							: "start",
+				);
 				cell.dataset.gridRow = String(r);
 				cell.dataset.gridColumn = String(c);
 				if (merge) {
@@ -1481,9 +1827,18 @@ export class TpTableEditor extends TpBase {
 					}
 					this.refresh();
 				});
+				const rich = this.getCellType(r, c) === "rich";
+				if (rich)
+					void import("../prose-editor/prose-editor.js").catch(() =>
+						this.announce("Unable to load the rich content editor."),
+					);
 				const field = this.ownerDocument.createElement(
-					`tp-${this.getCellType(r, c)}field`,
+					rich ? "tp-prose-editor" : `tp-${this.getCellType(r, c)}field`,
 				);
+				if (["text", "math"].includes(this.getCellType(r, c))) {
+					field.setAttribute("multiline", "");
+					field.setAttribute("rows", "1");
+				}
 				field.dataset.row = String(r);
 				field.dataset.column = String(c);
 				field.setAttribute("aria-label", `Row ${r + 1}, column ${c + 1}`);
@@ -1508,11 +1863,32 @@ export class TpTableEditor extends TpBase {
 						this.emitEdit();
 					});
 				}
-				field.value = value;
-				field.readOnly = this.readonly;
+				if (rich) {
+					field.setAttribute("value", value);
+					field.style.textAlign =
+						this.data.cellHorizontalAlignments?.[r]?.[c] ??
+						this.data.alignments[c] ??
+						"left";
+					field.toggleAttribute("readonly", this.readonly);
+					field.addEventListener("tp-prose-editor-input", (event) => {
+						if (this.readonly || event.target !== field) return;
+						const next = (event as CustomEvent<{ value: string }>).detail.value;
+						if (this.data.cells[r]?.[c] === next) return;
+						this.remember();
+						this.data.cells[r]?.splice(c, 1, next);
+						this.refresh();
+						this.emitEdit();
+					});
+				} else {
+					(field as HTMLElement & { value: string }).value = value;
+					(field as HTMLElement & { readOnly: boolean }).readOnly =
+						this.readonly;
+				}
 				field.style.setProperty(
 					"--tp-table-cell-align",
-					this.data.alignments[c] ?? "left",
+					this.data.cellHorizontalAlignments?.[r]?.[c] ??
+						this.data.alignments[c] ??
+						"left",
 				);
 				field.addEventListener("focusin", () => {
 					if (this.row !== r || this.column !== c) this.selectionEnd = null;
@@ -1521,13 +1897,19 @@ export class TpTableEditor extends TpBase {
 					this.refresh();
 				});
 				field.addEventListener("input", () => {
+					if (rich) return;
 					if (
 						this.readonly ||
-						this.data.cells[r]?.[c] === tableText(field.value)
+						this.data.cells[r]?.[c] ===
+							tableCellText((field as HTMLElement & { value: string }).value)
 					)
 						return;
 					this.remember();
-					this.data.cells[r]?.splice(c, 1, tableText(field.value));
+					this.data.cells[r]?.splice(
+						c,
+						1,
+						tableCellText((field as HTMLElement & { value: string }).value),
+					);
 					this.refresh();
 					this.emitEdit();
 				});
@@ -1720,7 +2102,21 @@ export class TpTableEditor extends TpBase {
 		if (!target || tabs?.selected !== 1) return;
 		target.toggleAttribute("data-heading", this.data.header);
 		const format = this.format;
-		const source = this.getMarkup(format);
+		const snapshot = JSON.stringify(this.getData());
+		let source: string;
+		try {
+			source = await this.getMarkupAsync(format);
+		} catch {
+			target.textContent =
+				"Unable to convert embedded markup. Check its source and try again.";
+			return;
+		}
+		if (
+			format !== this.format ||
+			snapshot !== JSON.stringify(this.getData()) ||
+			!target.isConnected
+		)
+			return;
 		const key = `${format}:${source}`;
 		if (key === this.previewKey) return;
 		this.previewKey = key;
@@ -1793,10 +2189,37 @@ export class TpTableEditor extends TpBase {
 			`[data-spreadsheet-panel="${format}"] [data-spreadsheet-code]`,
 		);
 		if (!target) return;
-		const cells = this.getData().cells;
-		const key = `${format}:${JSON.stringify(cells)}:${JSON.stringify(this.data.merges)}`;
+		const data = this.getData();
+		const cells = tableSpreadsheetCells(data);
+		const key = `${format}:${JSON.stringify(data)}`;
 		if (key === this.spreadsheetKey) return;
 		this.spreadsheetKey = key;
+		const preview = details.querySelector<HTMLElement>(
+			`[data-spreadsheet-panel="${format}"] [data-spreadsheet-render]`,
+		);
+		if (preview) {
+			// Spreadsheet values are literal text, including mathematical source.
+			// CSV/JSON carry neither merges nor alignment metadata.
+			const rendered: TableData = {
+				cells,
+				header: format === "xlsx" && data.header,
+				caption: "",
+				alignments:
+					format === "xlsx"
+						? data.alignments
+						: (cells[0]?.map(() => "left") ?? []),
+				...(format === "xlsx"
+					? {
+							merges: data.merges,
+							columnWidths: data.columnWidths,
+							cellHorizontalAlignments: data.cellHorizontalAlignments,
+							cellBorders: data.cellBorders,
+							cellVerticalAlignments: data.cellVerticalAlignments,
+						}
+					: {}),
+			};
+			preview.innerHTML = cells.length ? serializeTable(rendered, "html") : "";
+		}
 		const revision = ++this.spreadsheetRevision;
 		target.textContent = "Loading source…";
 		try {
@@ -1813,12 +2236,7 @@ export class TpTableEditor extends TpBase {
 						}));
 					if (format === "csv") source = XLSX.utils.sheet_to_csv(sheet);
 					else {
-						const workbook = XLSX.utils.book_new();
-						XLSX.utils.book_append_sheet(workbook, sheet, "Table");
-						const bytes = XLSX.write(workbook, {
-							bookType: "xlsx",
-							type: "array",
-						});
+						const bytes = await tableXlsx(this.getData());
 						const archive = XLSX.read(bytes, {
 							type: "array",
 							bookFiles: true,
@@ -1866,6 +2284,22 @@ export class TpTableEditor extends TpBase {
 		))
 			button.toggleAttribute("disabled", !this.rows);
 		void this.refreshSpreadsheet();
+		if (this.format === "latex") {
+			const before = this.getMarkup("latex");
+			void this.getMarkupAsync("latex")
+				.then((source) => {
+					if (
+						this.isConnected &&
+						this.format === "latex" &&
+						source !== before &&
+						source === this.getMarkup("latex")
+					)
+						this.refresh();
+				})
+				.catch(() =>
+					this.announce("Unable to convert embedded markup to LaTeX."),
+				);
+		}
 		if (this.output) {
 			const source = this.getMarkup();
 			const key = `${this.format}:${source}`;
@@ -1904,25 +2338,36 @@ export class TpTableEditor extends TpBase {
 		);
 		if (headingInput) headingInput.disabled = this.readonly || !this.rows;
 
-		const alignment = this.data.alignments[this.column] ?? "left";
+		const alignment =
+			this.data.cellHorizontalAlignments?.[this.row]?.[this.column] ??
+			this.data.alignments[this.column] ??
+			"left";
 		const alignmentTrigger = this.querySelector('[data-trigger="align"]');
 		alignmentTrigger?.setAttribute("name", `format-align-${alignment}`);
 		alignmentTrigger?.setAttribute("label", `Column alignment: ${alignment}`);
 		const selectedType = this.rows
 			? this.getCellType(this.row, this.column)
 			: "text";
+		const vertical =
+			this.data.cellVerticalAlignments?.[this.row]?.[this.column] ?? "top";
+		const verticalTrigger = this.querySelector('[data-trigger="vertical"]');
+		verticalTrigger?.setAttribute("name", `format-align-${vertical}`);
+		verticalTrigger?.setAttribute("label", `Vertical alignment: ${vertical}`);
 		const typeTrigger = this.querySelector('[data-trigger="type"]');
 		const [typeIcon, typeLibrary] = fieldSymbols[selectedType];
 		typeTrigger?.setAttribute("name", typeIcon);
 		typeTrigger?.setAttribute("library", typeLibrary);
-		typeTrigger?.setAttribute("label", `Cell type: tp-${selectedType}field`);
+		typeTrigger?.setAttribute("label", `Cell type: ${selectedType}`);
 		for (const [key, value] of [
-			["align", this.data.alignments[this.column] ?? "left"],
+			["align", alignment],
 			["type", selectedType],
+			["vertical", vertical],
 		]) {
 			this.querySelector(`[data-trigger="${key}"]`)?.toggleAttribute(
 				"disabled",
-				!this.rows || this.readonly,
+				!this.rows ||
+					this.readonly ||
+					(key === "vertical" && !this.canAlignVertically()),
 			);
 			for (const item of this.querySelectorAll<HTMLElement>(
 				`[data-menu="${key}"] [data-choice]`,
@@ -2010,6 +2455,11 @@ export class TpTableEditor extends TpBase {
 					: `${this.rows} rows × ${this.columns} columns · Selected: row ${this.row + 1}, column ${this.column + 1}`
 				: "No table.",
 		);
+	}
+
+	/** Imports a supported table file, retaining the same validation as the file chooser. */
+	async importFile(file: File): Promise<void> {
+		if (!this.readonly) await this.loadSource(file);
 	}
 }
 if (!customElements.get("tp-table-editor"))

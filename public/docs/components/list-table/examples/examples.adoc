@@ -8,22 +8,15 @@
 ====
 * {blank}
 ** Country
-
 ** Capital
-
 * {blank}
 ** Estonia
-
 ** Tallinn
-
 * {blank}
 ** Latvia
-
 ** Riga
-
 * {blank}
 ** Lithuania
-
 ** Vilnius
 ====
 ======

@@ -48,7 +48,7 @@
     },
     {
       "name": "logo",
-      "description": "Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo.",
+      "description": "Icon name from the tp library or SVG URL displayed at the start of the toolbar, in a borderless button with a fixed height of 2em and proportional width. Empty hides the logo.",
       "reflected": true,
       "static": false,
       "inherited": true,
@@ -101,7 +101,68 @@
       "default": "null"
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "getGlobalListPages(): GlobalListPage[]",
+      "inherited": true,
+      "description": "Pages available to global lists, in navigation order, without external links."
+    },
+    {
+      "name": "globalListHref(href: string): string",
+      "inherited": true,
+      "description": "Creates a route to a page and its local fragment."
+    },
+    {
+      "name": "goToCover(): Promise<void>",
+      "inherited": true,
+      "description": "Navigates to the introduction using the document history."
+    },
+    {
+      "name": "navigateToFragment(fragment: string): void",
+      "inherited": true,
+      "description": "Navigates to a fragment in the current document while recording the preceding reading position."
+    },
+    {
+      "name": "nextPage(): void",
+      "inherited": true,
+      "description": "Opens the following page in the navigation order."
+    },
+    {
+      "name": "previousPage(): void",
+      "inherited": true,
+      "description": "Opens the preceding page in the navigation order."
+    },
+    {
+      "name": "scrollToTop(): void",
+      "inherited": true,
+      "description": "Scrolls the current page to its beginning."
+    },
+    {
+      "name": "toggleCalculator(): void",
+      "inherited": true,
+      "description": "Shows or hides the document calculator."
+    },
+    {
+      "name": "toggleMenu(): Promise<void>",
+      "inherited": true,
+      "description": "Shows or hides the navigation sidebar."
+    },
+    {
+      "name": "toggleSidebarSearch(): void",
+      "inherited": true,
+      "description": "Shows or hides the table-of-contents search field, clearing the query when hidden."
+    },
+    {
+      "name": "toggleSidebarWidth(): void",
+      "inherited": true,
+      "description": "Widens the table of contents or restores its previous width."
+    },
+    {
+      "name": "toggleSourceMode(): Promise<void>",
+      "inherited": true,
+      "description": "Switches between the document and its editable source."
+    }
+  ],
   "events": [],
   "cssproperties": [],
   "dependencies": [

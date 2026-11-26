@@ -1,0 +1,708 @@
+{
+  "date": "2026-11-25T15:23:47.969Z",
+  "browser": "native Safari",
+  "checks": [
+    {
+      "theme": "light",
+      "scenario": "passing",
+      "ms": 1977,
+      "status": "passed",
+      "passed": 8,
+      "actualTheme": "tp-light",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 8 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent querypassedStudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputpassed: Current query\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null,
+      "presentation": {
+        "colors": [
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "skipped",
+            "color": "oklab(0.266795 0.001496 0.00364)",
+            "background": "rgba(0, 0, 0, 0)"
+          }
+        ],
+        "logInitiallyClosed": true,
+        "tableWidth": 602.4999389648438,
+        "logOpened": true,
+        "theme": "<html class=\"tp-light\" style=\"--tp-selection-background-color: color-mix(in oklab, #ae75f6, white 47%); --tp-warning-100: color-mix(in oklab, #e89a26, white 87%); --tp-border-radius-md: 0.375rem; --tp-brand-stroke-softer: light-dark(color-mix(in oklab, color-mix(in oklab, #ae75f6, white 87%), black 3%), color-mix(in oklab, color-mix(in oklab, #ae75",
+        "viewport": 656,
+        "bodyBackground": "rgb(255, 255, 255)",
+        "liveThemeSwitch": true,
+        "publicMethodRerun": true
+      }
+    },
+    {
+      "theme": "light",
+      "scenario": "inferred",
+      "ms": 451,
+      "status": "passed",
+      "passed": 8,
+      "actualTheme": "tp-light",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 8 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent querypassedStudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputpassed: Current query\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null
+    },
+    {
+      "theme": "light",
+      "scenario": "query-change",
+      "ms": 1069,
+      "status": "failed",
+      "passed": 7,
+      "actualTheme": "tp-light",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 7 passed, 1 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent queryfailedExpected: [\n  {\n    \"columns\": [\n      \"name\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Ada\",\n        90\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Cara\",\n        null\n      ]\n    ]\n  }\n]\nActual: [\n  {\n    \"columns\": [\n      \"name\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Cara\",\n        null\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Ada\",\n        90\n      ]\n    ]\n  }\n]StudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputfailed: Current query\nExpected: [\n  {\n    \"columns\": [\n      \"name\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Ada\",\n        90\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Cara\",\n        null\n      ]\n    ]\n  }\n]\nActual: [\n  {\n    \"columns\": [\n      \"name\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Cara\",\n        null\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Ada\",\n        90\n      ]\n    ]\n  }\n]\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null,
+      "presentation": {
+        "colors": [
+          {
+            "status": "failed",
+            "color": "oklab(0.486588 0.12739 0.057357)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "oklab(0.525955 -0.096992 0.075368)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "skipped",
+            "color": "oklab(0.266795 0.001496 0.00364)",
+            "background": "rgba(0, 0, 0, 0)"
+          }
+        ],
+        "logInitiallyClosed": true,
+        "tableWidth": 602.4999389648438,
+        "logOpened": true,
+        "theme": "<html class=\"tp-light\" style=\"--tp-selection-background-color: color-mix(in oklab, #ae75f6, white 47%); --tp-warning-100: color-mix(in oklab, #e89a26, white 87%); --tp-border-radius-md: 0.375rem; --tp-brand-stroke-softer: light-dark(color-mix(in oklab, color-mix(in oklab, #ae75f6, white 87%), black 3%), color-mix(in oklab, color-mix(in oklab, #ae75",
+        "viewport": 656,
+        "bodyBackground": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "theme": "light",
+      "scenario": "columns",
+      "ms": 443,
+      "status": "failed",
+      "passed": 7,
+      "actualTheme": "tp-light",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 7 passed, 1 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent queryfailedExpected: [\n  {\n    \"columns\": [\n      \"NAME\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Ada\",\n        90\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Cara\",\n        null\n      ]\n    ]\n  }\n]\nActual: [\n  {\n    \"columns\": [\n      \"name\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Ada\",\n        90\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Cara\",\n        null\n      ]\n    ]\n  }\n]StudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputfailed: Current query\nExpected: [\n  {\n    \"columns\": [\n      \"NAME\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Ada\",\n        90\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Cara\",\n        null\n      ]\n    ]\n  }\n]\nActual: [\n  {\n    \"columns\": [\n      \"name\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Ada\",\n        90\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Cara\",\n        null\n      ]\n    ]\n  }\n]\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null
+    },
+    {
+      "theme": "light",
+      "scenario": "duplicates",
+      "ms": 428,
+      "status": "failed",
+      "passed": 7,
+      "actualTheme": "tp-light",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 7 passed, 1 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent querypassedStudentsUnordered rows with duplicatesfailedExpected: [\n  {\n    \"columns\": [\n      \"score\"\n    ],\n    \"values\": [\n      [\n        null\n      ],\n      [\n        90\n      ],\n      [\n        80\n      ]\n    ]\n  }\n]\nActual: [\n  {\n    \"columns\": [\n      \"score\"\n    ],\n    \"values\": [\n      [\n        90\n      ],\n      [\n        80\n      ],\n      [\n        null\n      ],\n      [\n        90\n      ]\n    ]\n  }\n]StudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputpassed: Current query\nfailed: Unordered rows with duplicates\nExpected: [\n  {\n    \"columns\": [\n      \"score\"\n    ],\n    \"values\": [\n      [\n        null\n      ],\n      [\n        90\n      ],\n      [\n        80\n      ]\n    ]\n  }\n]\nActual: [\n  {\n    \"columns\": [\n      \"score\"\n    ],\n    \"values\": [\n      [\n        90\n      ],\n      [\n        80\n      ],\n      [\n        null\n      ],\n      [\n        90\n      ]\n    ]\n  }\n]\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null
+    },
+    {
+      "theme": "light",
+      "scenario": "unexpected-error",
+      "ms": 433,
+      "status": "failed",
+      "passed": 7,
+      "actualTheme": "tp-light",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 7 passed, 1 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent queryfailedUnexpected SQL error: no such table: nonexistentStudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputfailed: Current query\nUnexpected SQL error: no such table: nonexistent\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null
+    },
+    {
+      "theme": "light",
+      "scenario": "wrong-error",
+      "ms": 438,
+      "status": "failed",
+      "passed": 7,
+      "actualTheme": "tp-light",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 7 passed, 1 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent querypassedStudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorfailedExpected error: different SQL error\nActual: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputpassed: Current query\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\nfailed: Expected SQL error\nExpected error: different SQL error\nActual: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null
+    },
+    {
+      "theme": "light",
+      "scenario": "setup-error",
+      "ms": 430,
+      "status": "failed",
+      "passed": 0,
+      "actualTheme": "tp-light",
+      "storedUnchanged": true,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCannot accept a setup errorfailedError: Database setup failed: Error: near \"invalid\": syntax errorEngine outputfailed: Cannot accept a setup error\nError: Database setup failed: Error: near \"invalid\": syntax error\n",
+      "sentinel": null
+    },
+    {
+      "theme": "light",
+      "scenario": "missing-source",
+      "ms": 431,
+      "status": "failed",
+      "passed": 0,
+      "actualTheme": "tp-light",
+      "storedUnchanged": true,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsMissing filefailedError: SQL project file not found: /missing.sqlEngine outputfailed: Missing file\nError: SQL project file not found: /missing.sql\n",
+      "sentinel": null
+    },
+    {
+      "theme": "light",
+      "scenario": "invalid-json",
+      "ms": 431,
+      "status": "failed",
+      "passed": 0,
+      "actualTheme": "tp-light",
+      "storedUnchanged": true,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsSQLiteExecution errorfailedSyntaxError: JSON Parse error: Expected '}'Engine outputSyntaxError: JSON Parse error: Expected '}'\n",
+      "sentinel": null
+    },
+    {
+      "theme": "light",
+      "scenario": "empty",
+      "ms": 432,
+      "status": "failed",
+      "passed": 0,
+      "actualTheme": "tp-light",
+      "storedUnchanged": true,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsSQLiteTest suitefailedNo tests executed.Engine output",
+      "sentinel": null
+    },
+    {
+      "theme": "light",
+      "scenario": "invalid-expectation",
+      "ms": 442,
+      "status": "failed",
+      "passed": 0,
+      "actualTheme": "tp-light",
+      "storedUnchanged": true,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsWrong shapefailedError: Provide expected result sets or a nonempty error substring.Engine outputfailed: Wrong shape\nError: Provide expected result sets or a nonempty error substring.\n",
+      "sentinel": null
+    },
+    {
+      "theme": "light",
+      "scenario": "sqlite",
+      "ms": 491,
+      "status": "failed",
+      "passed": 0,
+      "actualTheme": "tp-light",
+      "storedUnchanged": false,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsSQLiteExecution errorfailedError: SQLite database not found in localStorage: sql-tests-snapshotEngine outputError: SQLite database not found in localStorage: sql-tests-snapshot\n",
+      "sentinel": null,
+      "limitation": "Safari session storage disappeared before Test"
+    },
+    {
+      "theme": "dark",
+      "scenario": "passing",
+      "ms": 1920,
+      "status": "passed",
+      "passed": 8,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 8 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent querypassedStudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputpassed: Current query\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null,
+      "presentation": {
+        "colors": [
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "skipped",
+            "color": "oklab(0.892864 0.001081 0.002631)",
+            "background": "rgba(0, 0, 0, 0)"
+          }
+        ],
+        "logInitiallyClosed": true,
+        "tableWidth": 602.4999389648438,
+        "logOpened": true,
+        "theme": "<html class=\"tp-dark\" style=\"--tp-selection-background-color: color-mix(in oklab, #ae75f6, black 28.25%); --tp-warning-100: color-mix(in oklab, #e89a26, white 87%); --tp-border-radius-md: 0.375rem; --tp-brand-stroke-softer: light-dark(color-mix(in oklab, color-mix(in oklab, #ae75f6, white 87%), black 3%), color-mix(in oklab, color-mix(in oklab, #ae",
+        "viewport": 656,
+        "bodyBackground": "oklab(0.168756 0.000946 0.002302)",
+        "liveThemeSwitch": true,
+        "publicMethodRerun": true
+      }
+    },
+    {
+      "theme": "dark",
+      "scenario": "inferred",
+      "ms": 432,
+      "status": "passed",
+      "passed": 8,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 8 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent querypassedStudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputpassed: Current query\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null
+    },
+    {
+      "theme": "dark",
+      "scenario": "query-change",
+      "ms": 1033,
+      "status": "failed",
+      "passed": 7,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 7 passed, 1 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent queryfailedExpected: [\n  {\n    \"columns\": [\n      \"name\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Ada\",\n        90\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Cara\",\n        null\n      ]\n    ]\n  }\n]\nActual: [\n  {\n    \"columns\": [\n      \"name\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Cara\",\n        null\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Ada\",\n        90\n      ]\n    ]\n  }\n]StudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputfailed: Current query\nExpected: [\n  {\n    \"columns\": [\n      \"name\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Ada\",\n        90\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Cara\",\n        null\n      ]\n    ]\n  }\n]\nActual: [\n  {\n    \"columns\": [\n      \"name\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Cara\",\n        null\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Ada\",\n        90\n      ]\n    ]\n  }\n]\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null,
+      "presentation": {
+        "colors": [
+          {
+            "status": "failed",
+            "color": "rgb(239, 86, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "passed",
+            "color": "rgb(93, 187, 85)",
+            "background": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "status": "skipped",
+            "color": "oklab(0.892864 0.001081 0.002631)",
+            "background": "rgba(0, 0, 0, 0)"
+          }
+        ],
+        "logInitiallyClosed": true,
+        "tableWidth": 602.4999389648438,
+        "logOpened": true,
+        "theme": "<html class=\"tp-dark\" style=\"--tp-selection-background-color: color-mix(in oklab, #ae75f6, black 28.25%); --tp-warning-100: color-mix(in oklab, #e89a26, white 87%); --tp-border-radius-md: 0.375rem; --tp-brand-stroke-softer: light-dark(color-mix(in oklab, color-mix(in oklab, #ae75f6, white 87%), black 3%), color-mix(in oklab, color-mix(in oklab, #ae",
+        "viewport": 656,
+        "bodyBackground": "oklab(0.168756 0.000946 0.002302)"
+      }
+    },
+    {
+      "theme": "dark",
+      "scenario": "columns",
+      "ms": 434,
+      "status": "failed",
+      "passed": 7,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 7 passed, 1 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent queryfailedExpected: [\n  {\n    \"columns\": [\n      \"NAME\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Ada\",\n        90\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Cara\",\n        null\n      ]\n    ]\n  }\n]\nActual: [\n  {\n    \"columns\": [\n      \"name\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Ada\",\n        90\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Cara\",\n        null\n      ]\n    ]\n  }\n]StudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputfailed: Current query\nExpected: [\n  {\n    \"columns\": [\n      \"NAME\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Ada\",\n        90\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Cara\",\n        null\n      ]\n    ]\n  }\n]\nActual: [\n  {\n    \"columns\": [\n      \"name\",\n      \"score\"\n    ],\n    \"values\": [\n      [\n        \"Ada\",\n        90\n      ],\n      [\n        \"Bob\",\n        80\n      ],\n      [\n        \"Cara\",\n        null\n      ]\n    ]\n  }\n]\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null
+    },
+    {
+      "theme": "dark",
+      "scenario": "duplicates",
+      "ms": 431,
+      "status": "failed",
+      "passed": 7,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 7 passed, 1 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent querypassedStudentsUnordered rows with duplicatesfailedExpected: [\n  {\n    \"columns\": [\n      \"score\"\n    ],\n    \"values\": [\n      [\n        null\n      ],\n      [\n        90\n      ],\n      [\n        80\n      ]\n    ]\n  }\n]\nActual: [\n  {\n    \"columns\": [\n      \"score\"\n    ],\n    \"values\": [\n      [\n        90\n      ],\n      [\n        80\n      ],\n      [\n        null\n      ],\n      [\n        90\n      ]\n    ]\n  }\n]StudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputpassed: Current query\nfailed: Unordered rows with duplicates\nExpected: [\n  {\n    \"columns\": [\n      \"score\"\n    ],\n    \"values\": [\n      [\n        null\n      ],\n      [\n        90\n      ],\n      [\n        80\n      ]\n    ]\n  }\n]\nActual: [\n  {\n    \"columns\": [\n      \"score\"\n    ],\n    \"values\": [\n      [\n        90\n      ],\n      [\n        80\n      ],\n      [\n        null\n      ],\n      [\n        90\n      ]\n    ]\n  }\n]\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null
+    },
+    {
+      "theme": "dark",
+      "scenario": "unexpected-error",
+      "ms": 431,
+      "status": "failed",
+      "passed": 7,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 7 passed, 1 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent queryfailedUnexpected SQL error: no such table: nonexistentStudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputfailed: Current query\nUnexpected SQL error: no such table: nonexistent\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null
+    },
+    {
+      "theme": "dark",
+      "scenario": "wrong-error",
+      "ms": 431,
+      "status": "failed",
+      "passed": 7,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 7 passed, 1 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent querypassedStudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorfailedExpected error: different SQL error\nActual: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputpassed: Current query\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\nfailed: Expected SQL error\nExpected error: different SQL error\nActual: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": null
+    },
+    {
+      "theme": "dark",
+      "scenario": "setup-error",
+      "ms": 430,
+      "status": "failed",
+      "passed": 0,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": true,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCannot accept a setup errorfailedError: Database setup failed: Error: near \"invalid\": syntax errorEngine outputfailed: Cannot accept a setup error\nError: Database setup failed: Error: near \"invalid\": syntax error\n",
+      "sentinel": null
+    },
+    {
+      "theme": "dark",
+      "scenario": "missing-source",
+      "ms": 430,
+      "status": "failed",
+      "passed": 0,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": true,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsMissing filefailedError: SQL project file not found: /missing.sqlEngine outputfailed: Missing file\nError: SQL project file not found: /missing.sql\n",
+      "sentinel": null
+    },
+    {
+      "theme": "dark",
+      "scenario": "invalid-json",
+      "ms": 431,
+      "status": "failed",
+      "passed": 0,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": true,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsSQLiteExecution errorfailedSyntaxError: JSON Parse error: Expected '}'Engine outputSyntaxError: JSON Parse error: Expected '}'\n",
+      "sentinel": null
+    },
+    {
+      "theme": "dark",
+      "scenario": "empty",
+      "ms": 430,
+      "status": "failed",
+      "passed": 0,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": true,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsSQLiteTest suitefailedNo tests executed.Engine output",
+      "sentinel": null
+    },
+    {
+      "theme": "dark",
+      "scenario": "invalid-expectation",
+      "ms": 429,
+      "status": "failed",
+      "passed": 0,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": true,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsWrong shapefailedError: Provide expected result sets or a nonempty error substring.Engine outputfailed: Wrong shape\nError: Provide expected result sets or a nonempty error substring.\n",
+      "sentinel": null
+    },
+    {
+      "theme": "dark",
+      "scenario": "sqlite",
+      "ms": 480,
+      "status": "failed",
+      "passed": 0,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": false,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsSQLiteExecution errorfailedError: SQLite database not found in localStorage: sql-tests-snapshotEngine outputError: SQLite database not found in localStorage: sql-tests-snapshot\n",
+      "sentinel": null,
+      "limitation": "Safari session storage disappeared before Test"
+    }
+  ],
+  "limitations": [
+    "The CDN interruption scenario is covered by Playwright, not this native Safari run."
+  ],
+  "version": "26.6.2",
+  "storageProbe": {
+    "later": null,
+    "immediate": "test"
+  }
+}

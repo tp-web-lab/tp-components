@@ -6,13 +6,6 @@
   min-inline-size: 0;
 }
 
-.tp-asciidoc-output table {
-  display: block;
-  inline-size: auto;
-  max-inline-size: 100%;
-  overflow-x: auto;
-}
-
 .tp-asciidoc-output .stemblock svg,
 .tp-asciidoc-output .stem svg {
   display: inline-block;
@@ -35,3 +28,13 @@
   color: #8a1c2c;
   overflow: auto;
 }
+
+/* Asciidoctor table-cell vertical alignment specifiers (.<, .^ and .>). */
+.tp-asciidoc-output :is(th,td).valign-top { vertical-align: top; }
+.tp-asciidoc-output :is(th,td).valign-middle { vertical-align: middle; }
+.tp-asciidoc-output :is(th,td).valign-bottom { vertical-align: bottom; }
+
+/* Asciidoctor expresses horizontal alignment through table-cell classes. */
+.tp-asciidoc-output :is(th, td).halign-left { text-align: left; }
+.tp-asciidoc-output :is(th, td).halign-center { text-align: center; }
+.tp-asciidoc-output :is(th, td).halign-right { text-align: right; }

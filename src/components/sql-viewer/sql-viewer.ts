@@ -24,6 +24,8 @@ import type { TpSqlProject } from "../sql-playground/sql-project.js";
  * @eventdetail tp-playground-src-load { src: string; project: TpProject }
  * @event tp-playground-repository-load Emitted after a project configured with `repository` has loaded.
  * @eventdetail tp-playground-repository-load { repository: string; project: TpProject }
+ * @keyboard {Shift+Enter} Run the current source.
+ * @attr {"default" | "lite" | "simple"} mode = "default" - Viewer presentation: full controls, compact controls, or only source editor and rendered output.
  * @example
  * <tp-box>
  *   <p>The query lists three European capitals. Expand the query in the result panel to see its rows.</p>

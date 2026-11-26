@@ -1,10 +1,11 @@
-<tp-html-viewer label="tp-python-playground-question" allow-script>
+<tp-html-viewer label="tp-python-playground-question" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
-      <tp-python-playground-question open="" src="/docs/components/playground-question/examples/python/double.py" test="/docs/components/playground-question/examples/python/double.test.py">
+      <tp-python-playground-question open="" src="/docs/components/playground-question/examples/python/double.py">
         <dl>
           <dt>Title</dt><dd>Double a number</dd>
           <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Edit the source, then submit to run the tests.</dd>
+          <dt>Feedback</dt><dd>/docs/components/playground-question/examples/python/double.test.py</dd>
           <dt>Solution</dt><dd>Return value * 2.</dd>
         </dl>
       </tp-python-playground-question>
@@ -12,6 +13,7 @@
 
     <div role="example" label="Javascript API">
       <script type="module">
+      import "/components/python/python.js";
       import "/components/python-playground/python-playground.js";
       import "/components/python-playground-question/python-playground-question.js";
 
@@ -20,7 +22,6 @@
       const element1 = document.createElement("tp-python-playground-question");
       element1.setAttribute("open", "");
       element1.setAttribute("src", "/docs/components/playground-question/examples/python/double.py");
-      element1.setAttribute("test", "/docs/components/playground-question/examples/python/double.test.py");
       element1.append(document.createTextNode("\n  "));
 
       const element2 = document.createElement("dl");
@@ -45,12 +46,21 @@
       element2.append(document.createTextNode("\n    "));
 
       const element7 = document.createElement("dt");
-      element7.append(document.createTextNode("Solution"));
+      element7.append(document.createTextNode("Feedback"));
       element2.append(element7);
 
       const element8 = document.createElement("dd");
-      element8.append(document.createTextNode("Return value * 2."));
+      element8.append(document.createTextNode("/docs/components/playground-question/examples/python/double.test.py"));
       element2.append(element8);
+      element2.append(document.createTextNode("\n    "));
+
+      const element9 = document.createElement("dt");
+      element9.append(document.createTextNode("Solution"));
+      element2.append(element9);
+
+      const element10 = document.createElement("dd");
+      element10.append(document.createTextNode("Return value * 2."));
+      element2.append(element10);
       element2.append(document.createTextNode("\n  "));
       element1.append(element2);
       element1.append(document.createTextNode("\n"));
@@ -58,6 +68,21 @@
 
       document.body.append(example);
       </script>
+    </div>
+
+    <div role="example" label="Explicit Feedback file">
+      <tp-python-playground-question open="">
+        <script type="tp/python">
+          def double(value):
+              return value + 1
+        </script>
+        <dl>
+          <dt>Title</dt><dd>Double a number</dd>
+          <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Edit the source, then submit to run the tests.</dd>
+          <dt>Feedback</dt><dd>/docs/components/python-playground-question/examples/inline.test.py</dd>
+          <dt>Solution</dt><dd>Return value * 2.</dd>
+        </dl>
+      </tp-python-playground-question>
     </div>
   </template>
 </tp-html-viewer>

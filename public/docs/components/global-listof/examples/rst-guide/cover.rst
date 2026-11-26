@@ -1,0 +1,10 @@
+.. heading-level:: 1
+
+Global lists
+============
+
+Follow a figure or note link to its own page. Notes keep their local numbering.
+
+.. tp-global-listof::
+   :selector: figure, tp-note
+   :title: Across this guide

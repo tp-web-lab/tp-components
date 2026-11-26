@@ -1,7 +1,11 @@
 import { TpMarkdownParser } from "@tp/tp-markdown/markdown/engine/markdown";
 import { afterEach, expect, it, vi } from "vitest";
 import { htmlExample } from "../../test-helpers/documentation.js";
-import { renderMarkdownInto, renderMarkdownRuntimeIn } from "./markdown.js";
+import {
+	renderMarkdownFragment,
+	renderMarkdownInto,
+	renderMarkdownRuntimeIn,
+} from "./markdown.js";
 import "../fill-blank-question/fill-blank-question.js";
 import "../blank/blank.js";
 
@@ -117,4 +121,41 @@ it("displays the fill-blank documentation before the math runtime finishes loadi
 		finishRuntime?.();
 		await rendering;
 	}
+});
+
+it("prepares math in external exercise fields before they are copied", async () => {
+	const runtime = vi
+		.spyOn(TpMarkdownParser.prototype, "renderRuntime")
+		.mockImplementation(async (root) => {
+			for (const formula of root.querySelectorAll("[data-mathjax-tex]")) {
+				formula.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg"></svg>';
+			}
+		});
+	const content = await renderMarkdownFragment(
+		[
+			"---",
+			"math: latexmath",
+			"---",
+			"Title",
+			": Exercise 1.2",
+			"",
+			"Prompt",
+			":",
+			"    Translate :latexmath:`\\frac{5+4}{3(6-2)(2-7)}`",
+			"",
+			"Solution",
+			":",
+			"    :latexmath:`x^2`",
+			"",
+			"    ```scheme",
+			"    (+ 5 4)",
+			"    ```",
+		].join("\n"),
+		"/exercises/exercise-1-2.md",
+	);
+	expect(runtime).toHaveBeenCalledWith(content, { only: ["math"] });
+	expect(content.querySelectorAll("dd svg")).toHaveLength(2);
+	expect(content.querySelector("pre code")?.textContent?.trim()).toBe(
+		"(+ 5 4)",
+	);
 });

@@ -17,6 +17,7 @@ The header shows the game icon and name on the left. Rounded controls appear on 
 | :tp-icon:{name="sun"} :tp-icon:{name="moon"} Theme | Changes the light, dark or automatic theme of this game only. |
 | :tp-icon:{name="fullscreen"} :tp-icon:{name="fullscreen-exit"} Fullscreen | Enters or leaves fullscreen for this game. |
 | Click a face-down card | Reveals it. Reveal a second card to form a pair; unmatched cards turn back over and matched pairs stay revealed. |
+| :tp-icon:{name="refresh" size="2em"} Reset memory | Reset memory. |
 
 #### Keyboard interactions
 

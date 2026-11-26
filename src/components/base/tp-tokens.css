@@ -7,7 +7,12 @@
      * For best results, avoid using seed colors in your own stylesheets!
      */
 
-    --tp-brand-seed: #88B1A1;
+    --tp-code-font-size: 0.9375rem;
+    --tp-code-line-height: 1.5rem;
+    --tp-code-padding-block: 4px;
+    --tp-code-padding-inline: 6px;
+
+    --tp-brand-seed: #ae75f6;
     --tp-neutral-seed: #918c87;
     --tp-success-seed: #5dbb55;
     --tp-danger-seed: #ef5655;
@@ -144,7 +149,7 @@
     --tp-paper-color: white;
     --tp-text-body: var(--tp-neutral-900);
     --tp-text-muted: var(--tp-neutral-600);
-    --tp-focus-color: var(--tp-brand-fill-mid);
+    --tp-focus-color: var(--tp-brand-text-colorful);
     --tp-focus-ring: var(--tp-border-style) var(--tp-focus-width) var(--tp-focus-color);
     --tp-backdrop-color: rgb(0 0 0 / 0.25);
     --tp-selection-background-color: var(--tp-brand-300);
@@ -187,19 +192,7 @@
     --tp-syntax-token-function: #795e26;
     --tp-syntax-token-link: #005cc5;
 
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: var(--tp-brand-700);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    /* Brand semantics are inherited; light-dark follows the local color-scheme. */
 
     /* Neutral */
     --tp-neutral-fill-softer: var(--tp-neutral-100);
@@ -283,7 +276,7 @@
     --tp-paper-color: color-mix(in oklab, var(--tp-neutral-950), white 2.5%);
     --tp-text-body: var(--tp-neutral-200);
     --tp-text-muted: var(--tp-neutral-500);
-    --tp-focus-color: var(--tp-brand-fill-mid);
+    --tp-focus-color: var(--tp-brand-text-colorful);
     --tp-focus-ring: var(--tp-border-style) var(--tp-focus-width) var(--tp-focus-color);
     --tp-backdrop-color: rgb(0 0 0 / 0.5);
     --tp-selection-background-color: var(--tp-brand-700);
@@ -316,19 +309,7 @@
     --tp-syntax-token-function: color-mix(in oklab, var(--tp-warning-200), white 2%);
     --tp-syntax-token-link: color-mix(in oklab, var(--tp-info-300), white 8%);
 
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: var(--tp-brand-700);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
+    /* Brand semantics are inherited; light-dark follows the local color-scheme. */
 
     /* Neutral */
     --tp-neutral-fill-softer: color-mix(in oklab, var(--tp-neutral-900), white 1%);
@@ -433,7 +414,7 @@
 
   .tp-default,
   .tp-default-style {
-    --tp-brand-seed: #88B1A1;
+    --tp-brand-seed: #ae75f6;
   }
 
   .tp-red,
@@ -598,756 +579,360 @@
     --tp-brand-950: color-mix(in oklab, var(--tp-brand-seed), black 73.75%);
   }
 
-  /* Preset semantic tokens: light mode (default) */
+  /* Preset semantic colors follow the nearest color-scheme, including a
+     theme and preset on the same element and light sections inside dark pages. */
 
+  :root,
   .tp-default,
   .tp-default-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-mid: black;
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-red,
   .tp-red-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
     --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-orange,
   .tp-orange-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-mid: light-dark(black, white);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-amber,
   .tp-amber-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-mid: black;
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-yellow,
   .tp-yellow-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-mid: black;
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(var(--tp-brand-800), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-lime,
   .tp-lime-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-mid: black;
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-green,
   .tp-green-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-mid: black;
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-emerald,
   .tp-emerald-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-mid: light-dark(black, white);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-teal,
   .tp-teal-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-mid: light-dark(black, white);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-glaz,
   .tp-glaz-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-mid: black;
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-cyan,
   .tp-cyan-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-mid: black;
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-sky,
   .tp-sky-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-mid: light-dark(black, white);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-blue,
   .tp-blue-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
     --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-indigo,
   .tp-indigo-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
     --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-violet,
   .tp-violet-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
     --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-purple,
   .tp-purple-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
     --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-fuchsia,
   .tp-fuchsia-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
     --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-pink,
   .tp-pink-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
     --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-rose,
   .tp-rose-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
     --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-zinc,
   .tp-zinc-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
     --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-ivory,
   .tp-ivory-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-mid: black;
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(var(--tp-brand-800), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
   .tp-stone,
   .tp-stone-style {
-    /* brand */
-    --tp-brand-fill-softer: var(--tp-brand-100);
-    --tp-brand-fill-soft: var(--tp-brand-200);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 2.5%);
-    --tp-brand-fill-loud: var(--tp-brand-800);
-    --tp-brand-fill-louder: var(--tp-brand-900);
-    --tp-brand-text-on-soft: var(--tp-brand-900);
+    --tp-brand-fill-softer: light-dark(var(--tp-brand-100), color-mix(in oklab, var(--tp-brand-900), white 1%));
+    --tp-brand-fill-soft: light-dark(var(--tp-brand-200), var(--tp-brand-800));
+    --tp-brand-fill-mid: light-dark(color-mix(in oklab, var(--tp-brand-600), black 2.5%), color-mix(in oklab, var(--tp-brand-600), black 7.5%));
+    --tp-brand-fill-loud: light-dark(var(--tp-brand-800), var(--tp-brand-200));
+    --tp-brand-fill-louder: light-dark(var(--tp-brand-900), var(--tp-brand-100));
+    --tp-brand-text-on-soft: light-dark(var(--tp-brand-900), var(--tp-brand-100));
     --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: white;
-    --tp-brand-text-colorful: color-mix(in oklab, var(--tp-brand-600), black 12.5%);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-100), black 3%);
-    --tp-brand-stroke-soft: var(--tp-brand-300);
-    --tp-brand-stroke-mid: var(--tp-brand-500);
-  }
-
-  /* Preset semantic tokens: dark mode overrides */
-
-  .tp-dark .tp-default,
-  .tp-dark .tp-default-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-red,
-  .tp-dark .tp-red-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-orange,
-  .tp-dark .tp-orange-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-amber,
-  .tp-dark .tp-amber-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-yellow,
-  .tp-dark .tp-yellow-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-lime,
-  .tp-dark .tp-lime-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-green,
-  .tp-dark .tp-green-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-emerald,
-  .tp-dark .tp-emerald-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-teal,
-  .tp-dark .tp-teal-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-glaz,
-  .tp-dark .tp-glaz-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-cyan,
-  .tp-dark .tp-cyan-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-sky,
-  .tp-dark .tp-sky-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-blue,
-  .tp-dark .tp-blue-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-indigo,
-  .tp-dark .tp-indigo-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-violet,
-  .tp-dark .tp-violet-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-purple,
-  .tp-dark .tp-purple-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-fuchsia,
-  .tp-dark .tp-fuchsia-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-pink,
-  .tp-dark .tp-pink-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-rose,
-  .tp-dark .tp-rose-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-zinc,
-  .tp-dark .tp-zinc-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-ivory,
-  .tp-dark .tp-ivory-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
-  }
-
-  .tp-dark .tp-stone,
-  .tp-dark .tp-stone-style {
-    /* brand */
-    --tp-brand-fill-softer: color-mix(in oklab, var(--tp-brand-900), white 1%);
-    --tp-brand-fill-soft: var(--tp-brand-800);
-    --tp-brand-fill-mid: color-mix(in oklab, var(--tp-brand-600), black 7.5%);
-    --tp-brand-fill-loud: var(--tp-brand-200);
-    --tp-brand-fill-louder: var(--tp-brand-100);
-    --tp-brand-text-on-soft: var(--tp-brand-100);
-    --tp-brand-text-on-mid: white;
-    --tp-brand-text-on-loud: black;
-    --tp-brand-text-colorful: var(--tp-brand-500);
-    --tp-brand-stroke-softer: color-mix(in oklab, var(--tp-brand-900), white 7.5%);
-    --tp-brand-stroke-soft: var(--tp-brand-800);
-    --tp-brand-stroke-mid: var(--tp-brand-600);
+    --tp-brand-text-on-loud: light-dark(white, black);
+    --tp-brand-text-colorful: light-dark(color-mix(in oklab, var(--tp-brand-600), black 12.5%), var(--tp-brand-500));
+    --tp-brand-stroke-softer: light-dark(color-mix(in oklab, var(--tp-brand-100), black 3%), color-mix(in oklab, var(--tp-brand-900), white 7.5%));
+    --tp-brand-stroke-soft: light-dark(var(--tp-brand-300), var(--tp-brand-800));
+    --tp-brand-stroke-mid: light-dark(var(--tp-brand-500), var(--tp-brand-600));
   }
 
 }

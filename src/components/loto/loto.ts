@@ -1,3 +1,4 @@
+import { showGameRules, toggleGameHelp } from "../../utilities/game-header.js";
 /**
  * @module components/loto
  * @summary French loto game with a random ticket and number draw.
@@ -379,6 +380,16 @@ export class TpLoto extends TpBase {
 			];
 		}
 		return values;
+	}
+
+	/** Opens or closes the game assistance menu. */
+	toggleHelp(): void {
+		toggleGameHelp(this);
+	}
+
+	/** Opens the rules of this game in its drawer. */
+	showRules(): void {
+		showGameRules(this);
 	}
 }
 

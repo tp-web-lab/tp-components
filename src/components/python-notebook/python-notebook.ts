@@ -14,12 +14,13 @@ import { TpNotebook } from "../notebook/notebook.js";
  * @summary Combines written explanations and executable Python code in an interactive notebook.
  * @tagname tp-python-notebook
  * @summary Interactive Python notebook with markup and code cells.
+ * @keyboard {Shift+Enter} Reload changed source and execute the current cell query, or render the current markup cell.
  * @example
  * <tp-python-notebook>
  *     <script type="tp/markdown"># Interactive Python
  *
- * Select **Run all cells** to execute the program. Use the code button in a cell to edit its source.</script>
- *     <script type="tp/python">print("Hello from Python")</script>
+ * Select **Run all cells** to execute the program. Edit the program directly in each cell; its query is prefilled.</script>
+ *     <script type="tp/python" query="message">message = "Hello from Python"</script>
  *   </tp-python-notebook>
  */
 export class TpPythonNotebook extends TpNotebook {

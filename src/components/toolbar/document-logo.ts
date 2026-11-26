@@ -1,4 +1,6 @@
-import "../icon-button/icon-button.js";
+import "../button/button.js";
+import "../icon/icon.js";
+import { hasTpIcon } from "../icon/icon-registry.js";
 
 /** Keep an optional document logo before every toolbar control. */
 export function updateDocumentLogo(
@@ -13,19 +15,25 @@ export function updateDocumentLogo(
 		return;
 	}
 	if (!icon) {
-		icon = document.createElement("tp-icon-button");
+		icon = document.createElement("tp-button");
 		icon.setAttribute("data-document-logo", "");
 		icon.setAttribute("section", "start");
 		icon.setAttribute("size", "m");
-		icon.style.setProperty("--tp-icon-button-icon-size", "2em");
-		icon.addEventListener("click", (event) => {
-			const destination = (event.currentTarget as HTMLElement).dataset.logoHref;
-			if (destination && !event.defaultPrevented)
-				toolbar.ownerDocument.defaultView?.location.assign(destination);
-		});
+		icon.append(document.createElement("tp-icon"));
 		icon.style.flexShrink = "0";
 	}
-	if (icon.getAttribute("src") !== source) icon.setAttribute("src", source);
+	const image = icon.querySelector("tp-icon");
+	if (!image) return;
+	const name = source.trim();
+	if (hasTpIcon(name, "tp")) {
+		image.removeAttribute("src");
+		image.setAttribute("library", "tp");
+		image.setAttribute("name", name);
+	} else {
+		image.removeAttribute("name");
+		image.removeAttribute("library");
+		if (image.getAttribute("src") !== source) image.setAttribute("src", source);
+	}
 	let destination = "";
 	try {
 		const url = new URL(href.trim() || "./", toolbar.ownerDocument.baseURI);
@@ -36,7 +44,12 @@ export function updateDocumentLogo(
 	icon.dataset.helpGroup = "Toolbar — left";
 	icon.dataset.logoHref = destination;
 	icon.toggleAttribute("disabled", !destination);
-	icon.setAttribute("label", destination ? "Visit associated website" : "Logo");
+	if (destination) icon.setAttribute("href", destination);
+	else icon.removeAttribute("href");
+	icon.setAttribute(
+		"aria-label",
+		destination ? "Visit associated website" : "Logo",
+	);
 	icon.setAttribute(
 		"data-help-description",
 		"Open the website associated with this document.",

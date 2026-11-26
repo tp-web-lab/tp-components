@@ -1,5 +1,5 @@
-:::::: tp-markdown-viewer { label="tp-markdown-viewer" allow-script }
-::::: script { type="tp/markdown" }
+::::::: tp-markdown-viewer { label="tp-markdown-viewer" allow-script preserve-source }
+:::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-markdown-viewer
 ::: script { type="tp/markdown" }
@@ -50,5 +50,49 @@ A paragraph with **strong text** and *emphasis*.
 :::
 ::::
 ````
+
+``` example {label="Compare presentation modes"}
+::::: section
+### mode="default" — Standard controls
+
+Open Code to edit the source, then click Run or press :kbd:Shift{}+:kbd:Enter{} in the editor.
+
+:::: tp-markdown-viewer { mode="default" }
+::: script { type="tp/markdown" }
+## Viewer modes
+
+Change this **message**, then run the source.
+:::
+::::
 :::::
+
+::::: section
+### mode="lite" — Compact controls
+
+Open Code to edit the source, then click Run or press :kbd:Shift{}+:kbd:Enter{} in the editor.
+
+:::: tp-markdown-viewer { mode="lite" }
+::: script { type="tp/markdown" }
+## Viewer modes
+
+Change this **message**, then run the source.
+:::
+::::
+:::::
+
+::::: section
+### mode="simple" — Editor and rendered output only
+
+Edit the code below, keep the cursor in the editor and press :kbd:Shift{}+:kbd:Enter{} (Return) to run it. This viewer has no Run button.
+
+:::: tp-markdown-viewer { mode="simple" }
+::: script { type="tp/markdown" }
+## Viewer modes
+
+Change this **message**, then run the source.
+:::
+::::
+:::::
+```
 ::::::
+:::::::

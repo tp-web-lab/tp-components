@@ -44,15 +44,41 @@
       "detail": "{ html: string }"
     }
   ],
-  "cssproperties": [],
+  "cssproperties": [
+    {
+      "name": "--tp-latex-listing-tab-size",
+      "default": "2",
+      "description": "Controls the listing tab size."
+    }
+  ],
   "dependencies": [
     {
       "name": "tp-base",
       "summary": "Shared base class for tp-* components."
     },
     {
+      "name": "tp-biblio",
+      "summary": "Defines a hidden bibliography entry for reference tooltips and generated lists."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-listof",
+      "summary": "Builds a list of reference entries or links to labelled document elements."
+    },
+    {
       "name": "tp-math",
-      "summary": "renders LaTeX or AsciiMath expressions as inline or display-style SVG."
+      "summary": "Displays mathematical expressions as inline formulas or separate equations."
+    },
+    {
+      "name": "tp-ref",
+      "summary": "Displays an inline reference with the corresponding HTML content in a tooltip."
+    },
+    {
+      "name": "tp-theorem",
+      "summary": "Theorems, definitions, examples, remarks and proofs."
     },
     {
       "name": "tp-tikz",
@@ -64,6 +90,11 @@
       "name": "tp-latex",
       "url": "https://www.npmjs.com/package/@tp/tp-latex",
       "summary": "LaTeX.js conversion and patched TikZJax assets."
+    },
+    {
+      "name": "highlight.js",
+      "url": "https://highlightjs.org/",
+      "summary": "Source-code syntax highlighting."
     },
     {
       "name": "tp-latex",

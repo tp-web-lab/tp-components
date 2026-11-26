@@ -1,3 +1,4 @@
+import { showGameRules, toggleGameHelp } from "../../utilities/game-header.js";
 /**
  * @module components/cryptarithm
  * @summary Cryptarithmetic puzzle web component.
@@ -337,42 +338,17 @@ export class TpCryptarithm extends TpBase {
 		});
 
 		this.undoButton.addEventListener("click", () => {
-			this.engine?.undo();
-			this.updateStatus();
+			this.undo();
 		});
 
 		this.redoButton.addEventListener("click", () => {
-			this.engine?.redo();
-			this.updateStatus();
+			this.redo();
 		});
 
 		this.assistSelect.addEventListener("change", () => {
-			if (!this.engine || !this.assistSelect) {
-				return;
-			}
-
-			switch (this.assistSelect.value) {
-				case "reset-game":
-					this.engine.resetGame();
-					break;
-				case "show-incorrect":
-					this.engine.showIncorrectAssignments();
-					break;
-				case "clear-incorrect":
-					this.engine.clearIncorrectAssignments();
-					break;
-				case "show-letter":
-					this.engine.showLetter();
-					break;
-				case "show-solution":
-					this.engine.showSolution();
-					break;
-				default:
-					break;
-			}
-
+			if (!this.assistSelect) return;
+			this.applyAssistance(this.assistSelect.value);
 			this.assistSelect.value = "";
-			this.updateStatus();
 		});
 
 		for (const button of [this.undoButton, this.redoButton]) {
@@ -446,6 +422,77 @@ export class TpCryptarithm extends TpBase {
 	 */
 	private renderError(message: string): void {
 		this.innerHTML = `<div class="tp-cryptarithm-error">Error: ${message}</div>`;
+	}
+
+	/** Applies the reset game assistance action and updates the grid status. */
+	reset(): void {
+		this.applyAssistance("reset-game");
+	}
+
+	/** Applies the show incorrect assistance action and updates the grid status. */
+	showIncorrect(): void {
+		this.applyAssistance("show-incorrect");
+	}
+
+	/** Applies the clear incorrect assistance action and updates the grid status. */
+	clearIncorrect(): void {
+		this.applyAssistance("clear-incorrect");
+	}
+
+	/** Applies the show cell assistance action and updates the grid status. */
+	revealLetter(): void {
+		this.applyAssistance("show-letter");
+	}
+
+	/** Applies the show solution assistance action and updates the grid status. */
+	revealSolution(): void {
+		this.applyAssistance("show-solution");
+	}
+
+	/** Restores the preceding grid state and updates the controls. */
+	undo(): void {
+		this.engine?.undo();
+		this.updateStatus();
+	}
+
+	/** Restores the next grid state and updates the controls. */
+	redo(): void {
+		this.engine?.redo();
+		this.updateStatus();
+	}
+	private applyAssistance(action: string): void {
+		if (!this.engine) return;
+		switch (action) {
+			case "reset-game":
+				this.engine.resetGame();
+				break;
+			case "show-incorrect":
+				this.engine.showIncorrectAssignments();
+				break;
+			case "clear-incorrect":
+				this.engine.clearIncorrectAssignments();
+				break;
+			case "show-letter":
+				this.engine.showLetter();
+				break;
+			case "show-solution":
+				this.engine.showSolution();
+				break;
+			default:
+				break;
+		}
+
+		this.updateStatus();
+	}
+
+	/** Opens or closes the game assistance menu. */
+	toggleHelp(): void {
+		toggleGameHelp(this);
+	}
+
+	/** Opens the rules of this game in its drawer. */
+	showRules(): void {
+		showGameRules(this);
 	}
 }
 

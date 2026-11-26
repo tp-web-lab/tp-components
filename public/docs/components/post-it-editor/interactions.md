@@ -11,8 +11,11 @@
 | Heading, color, opacity and rotation | Customize the note before saving. The tp-color palette button is in the header, between the language trigger and Close. The choice affects only this draft until Save, not the document's colors. Cancel discards it and Reset appearance defaults restores yellow. |
 | Save / Cancel | Save locally or discard draft changes. |
 | Pin | Open or fold a note; drag it to move its attachment within the selected document container. A drop outside this area restores the previous attachment. |
-| Pencil / Delete | Edit or delete the chosen saved note. |
+| :tp-icon:{name="delete-outline" size="2em"} Pencil / Delete | Edit or delete the chosen saved note. |
 | Reattach | Choose a new target, including when the original target has disappeared. |
+| :tp-icon:{name="close" size="2em"} Close | Close. |
+| :tp-icon:{name="plus" size="2em"} Add annotation | Add annotation. |
+| :tp-icon:{name="pencil" size="2em"} Edit | Edit. |
 
 A post-it can only be repositioned inside the element selected as the editor's document container (`for` or `setTarget`). Its pin must be dropped on content inside that container, not elsewhere on the page. It may move between paragraphs within this area; the expanded note itself can overlap its edges.
 

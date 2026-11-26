@@ -46,12 +46,12 @@ type AudioContextLike = {
  * @attr {boolean} silent = false - Disables sound playback.
  * @event tp-alarm-trigger Emitted when the alarm is triggered.
  * @eventdetail tp-alarm-trigger void
- * @example
- * <tp-alarm></tp-alarm>
  *  @cssprop [--tp-alarm-alert=#b91c1c] Text color of the time display when the alarm rings; also colors its border.
  * @cssprop [--tp-alarm-alert-bg=#fecaca] Background color while the alarm rings.
  * @cssprop [--tp-alarm-muted=#9ca3af] Text color of the time display while stopped.
  * @cssprop [--tp-alarm-size=1rem] Icon and text size.
+ * @example
+ * <tp-alarm></tp-alarm>
  */
 export class TpAlarm extends TpBase {
 	private static readonly styleId = "tp-alarm-styles";
@@ -322,7 +322,8 @@ export class TpAlarm extends TpBase {
 	 *
 	 * @summary Restarts alarm monitoring.
 	 */
-	private startAlarm(): void {
+	/** Arms the alarm using the selected time. */
+	startAlarm(): void {
 		this.removeAttribute("data-stopped");
 		this.startChecking();
 	}
@@ -332,7 +333,8 @@ export class TpAlarm extends TpBase {
 	 *
 	 * @summary Stops the alarm and clears its active state.
 	 */
-	private stopAlarm(): void {
+	/** Disarms the alarm and stops its current alert. */
+	stopAlarm(): void {
 		this.stopChecking();
 		this.clearAlert();
 	}

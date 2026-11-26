@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-stack" allow-script }
+:::::: tp-markdown-viewer { label="tp-stack" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-stack

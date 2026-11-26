@@ -1,0 +1,91 @@
+{
+  "tagname": "tp-bibtex",
+  "classname": "TpBibtex",
+  "superclass": "TpBase",
+  "description": "Converts BibTeX or CSL-JSON entries into tp-biblio or standard LaTeX bibliography source code.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-bibtex src=\"/docs/components/bibtex/examples/books.bib\"></tp-bibtex>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "in",
+      "description": "Input format: bibtex or clsjson (CSL-JSON).",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"bibtex\" | \"clsjson\"",
+      "default": "\"bibtex\""
+    },
+    {
+      "name": "out",
+      "description": "Output format: tp-biblio or latex.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"tp-biblio\" | \"latex\"",
+      "default": "\"tp-biblio\""
+    },
+    {
+      "name": "src",
+      "description": "URL of a bibliography file; takes priority over the inline script.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "getCode(): string",
+      "inherited": false,
+      "description": "Return the latest successfully generated source, or an empty string while loading or after an error."
+    },
+    {
+      "name": "refresh(): Promise<void>",
+      "inherited": false,
+      "description": "Reload the source and update the code. Await this before calling getCode for a remote source. Fetch/parse errors are displayed and emitted through tp-bibtex-error."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-bibtex-error",
+      "emitted": true,
+      "description": "Emitted when fetching or parsing fails, with an error message.",
+      "detail": "{ error: string }"
+    },
+    {
+      "name": "tp-bibtex-load",
+      "emitted": true,
+      "description": "Emitted after conversion with the generated code and format.",
+      "detail": "{ code: string; in: string; out: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-latex",
+      "url": "https://www.npmjs.com/package/@tp/tp-latex",
+      "summary": "LaTeX.js conversion and patched TikZJax assets."
+    }
+  ],
+  "userHelp": {
+    "displayName": "BibTeX",
+    "introduction": "The custom `<tp-bibtex>` element converts BibTeX or CSL-JSON entries into tp-biblio or standard LaTeX bibliography source code.",
+    "interactions": "#### Mouse interactions\n\n| Action | Result |\n| --- | --- |\n| Select generated text | Select code in the embedded readonly editor. Its copy and save commands belong to tp-code-editor. |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open contextual help for the component under the pointer or with focus; Shift may be needed for ?. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Open the component viewer. |\n\nThere are no component-specific buttons or editing shortcuts. The embedded editor provides its own controls and help.",
+    "keyboard": []
+  }
+}

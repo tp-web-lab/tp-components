@@ -1,4 +1,4 @@
-:- use_module(library(clpz)).
+:- use_module(library(clpfd)).
 
 send_more_money([S,E,N,D,M,O,R,Y]) :-
   Vars = [S,E,N,D,M,O,R,Y],

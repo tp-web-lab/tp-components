@@ -8,14 +8,7 @@ tp-theme > tp-icon-button {
   --tp-icon-button-icon-size: 1.15rem;
 }
 
-tp-theme > tp-icon-button > button {
-  border: 1px solid var(--tp-neutral-stroke-mid, #9ca3af);
-  background: var(--tp-paper-color, #ffffff);
-}
 
-tp-theme > tp-icon-button > button:hover {
-  background: var(--tp-neutral-fill-soft, #e5e7eb);
-}
 
 tp-theme > tp-dropdown {
   inline-size: max-content;

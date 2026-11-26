@@ -49,6 +49,11 @@
   ],
   "methods": [
     {
+      "name": "addTableCaption(): boolean",
+      "inherited": false,
+      "description": "Adds or edits the selected table caption, respecting readonly mode."
+    },
+    {
       "name": "addTableColumnAfter(): boolean",
       "inherited": false,
       "description": "Adds a column after the selected table column; returns true when the command applies, or false when unavailable for the current editor state."
@@ -57,6 +62,26 @@
       "name": "addTableRowAfter(): boolean",
       "inherited": false,
       "description": "Adds a row after the selected table row; returns true when the command applies, or false when unavailable for the current editor state."
+    },
+    {
+      "name": "clearSearch(): void",
+      "inherited": false,
+      "description": "Clears the search query and matches."
+    },
+    {
+      "name": "clearSelectionFormatting(): void",
+      "inherited": false,
+      "description": "Removes formatting from the current selection."
+    },
+    {
+      "name": "copy(): Promise<void>",
+      "inherited": false,
+      "description": "Copies the current selection."
+    },
+    {
+      "name": "cut(): Promise<void>",
+      "inherited": false,
+      "description": "Cuts the current selection when editing is allowed."
     },
     {
       "name": "deleteTable(): boolean",
@@ -72,6 +97,26 @@
       "name": "deleteTableRow(): boolean",
       "inherited": false,
       "description": "Deletes the selected table row; returns true when the command applies, or false when unavailable for the current editor state."
+    },
+    {
+      "name": "downloadHTML(filename: string): void",
+      "inherited": false,
+      "description": "Downloads the current editor document as an HTML file."
+    },
+    {
+      "name": "downloadHTMLAs(): Promise<void>",
+      "inherited": false,
+      "description": "Prompts for a destination and saves the current document as HTML."
+    },
+    {
+      "name": "downloadMarkup(language: MarkupBlockLanguage): Promise<void>",
+      "inherited": false,
+      "description": "Saves the document in the requested markup language."
+    },
+    {
+      "name": "editLink(): void",
+      "inherited": false,
+      "description": "Applies the link action to the current editing selection."
     },
     {
       "name": "findNext(value?: string): boolean",
@@ -94,9 +139,139 @@
       "description": "Returns the current HTML from the active source, rendered or rich-text mode; before initialization, returns the configured initial HTML."
     },
     {
+      "name": "getMarkup(language: MarkupBlockLanguage = \"html\"): Promise<string>",
+      "inherited": false,
+      "description": "Converts the document to one of the five markup languages, preferring native syntax."
+    },
+    {
+      "name": "insertDefinitionListCommand(): void",
+      "inherited": false,
+      "description": "Applies the format list text action to the current editing selection."
+    },
+    {
+      "name": "insertHorizontalRuleCommand(): void",
+      "inherited": false,
+      "description": "Applies the insert horizontal rule action to the current editing selection."
+    },
+    {
+      "name": "insertInlineIcon(value: string): void",
+      "inherited": false,
+      "description": "Inserts an inline icon at the current selection."
+    },
+    {
+      "name": "insertInlineMathCommand(): void",
+      "inherited": false,
+      "description": "Applies the format math action to the current editing selection."
+    },
+    {
+      "name": "insertMarkup(language: MarkupBlockLanguage): void",
+      "inherited": false,
+      "description": "Inserts an editable block in the requested markup language."
+    },
+    {
+      "name": "insertMathBlockCommand(): void",
+      "inherited": false,
+      "description": "Applies the insert math block action to the current editing selection."
+    },
+    {
+      "name": "insertPickerText(value: string): void",
+      "inherited": false,
+      "description": "Inserts the selected symbol or emoji at the current selection."
+    },
+    {
       "name": "insertTable(rows = 3, columns = 3): boolean",
       "inherited": false,
       "description": "Replaces the current selection with a table of rows by columns and focuses it. Returns false if no editor or valid table can be created."
+    },
+    {
+      "name": "openAudioDialog(): void",
+      "inherited": false,
+      "description": "Applies the insert audio action to the current editing selection."
+    },
+    {
+      "name": "openEmojiPicker(): void",
+      "inherited": false,
+      "description": "Applies the emoji picker action to the current editing selection."
+    },
+    {
+      "name": "openFiles(): void",
+      "inherited": false,
+      "description": "Applies the files action to the current editing selection."
+    },
+    {
+      "name": "openFormat(): void",
+      "inherited": false,
+      "description": "Applies the format action to the current editing selection."
+    },
+    {
+      "name": "openIconPicker(): void",
+      "inherited": false,
+      "description": "Applies the icon picker action to the current editing selection."
+    },
+    {
+      "name": "openImageDialog(): void",
+      "inherited": false,
+      "description": "Applies the insert image action to the current editing selection."
+    },
+    {
+      "name": "openImport(language: MarkupBlockLanguage): void",
+      "inherited": false,
+      "description": "Opens the file chooser for the requested markup language."
+    },
+    {
+      "name": "openLists(): void",
+      "inherited": false,
+      "description": "Applies the list action to the current editing selection."
+    },
+    {
+      "name": "openMedia(): void",
+      "inherited": false,
+      "description": "Applies the media action to the current editing selection."
+    },
+    {
+      "name": "openSymbolPicker(): void",
+      "inherited": false,
+      "description": "Applies the symbol picker action to the current editing selection."
+    },
+    {
+      "name": "openTableMenu(): void",
+      "inherited": false,
+      "description": "Opens or closes the table insertion and editing menu."
+    },
+    {
+      "name": "openTypes(): void",
+      "inherited": false,
+      "description": "Applies the types action to the current editing selection."
+    },
+    {
+      "name": "openVideoDialog(): void",
+      "inherited": false,
+      "description": "Applies the insert video action to the current editing selection."
+    },
+    {
+      "name": "paste(): Promise<void>",
+      "inherited": false,
+      "description": "Pastes clipboard content at the current selection."
+    },
+    {
+      "name": "redo(): void",
+      "inherited": false,
+      "description": "Applies the redo action to the current editing selection."
+    },
+    {
+      "name": "selectAllContent(): void",
+      "inherited": false,
+      "description": "Selects the complete editable document."
+    },
+    {
+      "name": "setCodeBlock(): void",
+      "inherited": false,
+      "description": "Applies the format code block action to the current editing selection."
+    },
+    {
+      "name": "setHeading(level: 1 | 2 | 3 | 4 | 5 | 6): void",
+      "inherited": false,
+      "description": "Applies or removes the requested heading level."
     },
     {
       "name": "setHTML(value: string): void",
@@ -104,9 +279,104 @@
       "description": "Replaces the document from HTML, synchronizes active source/rendered views and reflects the supplied text in value."
     },
     {
+      "name": "setParagraph(): void",
+      "inherited": false,
+      "description": "Applies the format text action to the current editing selection."
+    },
+    {
       "name": "setSearchQuery(value: string, options: Omit<ConstructorParameters<typeof SearchQuery>[0], \"search\"> = {}): void",
       "inherited": false,
       "description": "Sets the search text and optional matching options on the rich-text editor; does nothing before initialization."
+    },
+    {
+      "name": "showEditor(): void",
+      "inherited": false,
+      "description": "Returns from the HTML preview to editing."
+    },
+    {
+      "name": "showHtmlCode(): void",
+      "inherited": false,
+      "description": "Shows the generated HTML source."
+    },
+    {
+      "name": "showRenderedHtml(): void",
+      "inherited": false,
+      "description": "Shows the rendered HTML document."
+    },
+    {
+      "name": "toggleBold(): void",
+      "inherited": false,
+      "description": "Applies the format bold action to the current editing selection."
+    },
+    {
+      "name": "toggleCode(): void",
+      "inherited": false,
+      "description": "Applies the format code action to the current editing selection."
+    },
+    {
+      "name": "toggleHtml(): void",
+      "inherited": false,
+      "description": "Applies the html action to the current editing selection."
+    },
+    {
+      "name": "toggleItalic(): void",
+      "inherited": false,
+      "description": "Applies the format italic action to the current editing selection."
+    },
+    {
+      "name": "toggleSearch(): void",
+      "inherited": false,
+      "description": "Opens or closes search."
+    },
+    {
+      "name": "toggleSecondaryToolbar(): void",
+      "inherited": false,
+      "description": "Minimizes or restores the secondary toolbar."
+    },
+    {
+      "name": "toggleStrikethrough(): void",
+      "inherited": false,
+      "description": "Applies the format strikethrough action to the current editing selection."
+    },
+    {
+      "name": "toggleSubscript(): void",
+      "inherited": false,
+      "description": "Applies the format subscript action to the current editing selection."
+    },
+    {
+      "name": "toggleSuperscript(): void",
+      "inherited": false,
+      "description": "Applies the format superscript action to the current editing selection."
+    },
+    {
+      "name": "toggleToolbar(): Promise<void>",
+      "inherited": false,
+      "description": "Minimizes or restores all editing tools without changing the document."
+    },
+    {
+      "name": "toggleUnderline(): void",
+      "inherited": false,
+      "description": "Applies the format underline action to the current editing selection."
+    },
+    {
+      "name": "undo(): void",
+      "inherited": false,
+      "description": "Applies the undo action to the current editing selection."
+    },
+    {
+      "name": "wrapBlockquote(): void",
+      "inherited": false,
+      "description": "Applies the format quote open action to the current editing selection."
+    },
+    {
+      "name": "wrapOrderedList(): void",
+      "inherited": false,
+      "description": "Applies the format list numbered action to the current editing selection."
+    },
+    {
+      "name": "wrapUnorderedList(): void",
+      "inherited": false,
+      "description": "Applies the format list bulleted action to the current editing selection."
     }
   ],
   "events": [
@@ -115,6 +385,12 @@
       "emitted": true,
       "description": "Emitted immediately after tp-prose-editor-input for the same edit; it does not wait for blur. value contains the current HTML serialization.",
       "detail": "{ value: string }"
+    },
+    {
+      "name": "tp-prose-editor-error",
+      "emitted": true,
+      "description": "Emitted when prose editor error occurs.",
+      "detail": "{ error: unknown }"
     },
     {
       "name": "tp-prose-editor-input",
@@ -196,6 +472,11 @@
   ],
   "credits": [
     {
+      "name": "tp-latex",
+      "url": "https://www.npmjs.com/package/@tp/tp-latex",
+      "summary": "LaTeX.js conversion and patched TikZJax assets."
+    },
+    {
       "name": "tp-utilities",
       "url": "https://www.npmjs.com/package/@tp/tp-utilities",
       "summary": "Shared parsers, games and rendering utilities."
@@ -214,7 +495,7 @@
   "userHelp": {
     "displayName": "Prose-editor",
     "introduction": "The custom `<tp-prose-editor>` element edits rich text with formatting, lists, tables and embedded media.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Edit the document directly and use the toolbar to format text, insert content, undo or redo changes. |\n| :tp-icon:{name=\"file\" size=\"1.25em\"} Files | Creates, loads, saves, or exports the document. |\n| :tp-icon:{name=\"format-title\" size=\"1.25em\"} Types | Inserts paragraphs, headings, quotations, code, markup, math, and horizontal rules. |\n| :tp-icon:{name=\"letter-f\" size=\"1.25em\"} Format | Applies inline text, math, and link formatting. |\n| :tp-icon:{name=\"list-down\" size=\"1.25em\"} :tp-icon:{name=\"table\" size=\"1.25em\"} :tp-icon:{name=\"multimedia\" size=\"1.25em\"} Lists / Table / Media | Inserts and edits structured or media content. |\n| :tp-icon:{name=\"emoticon-happy-outline\" size=\"1.25em\"} :tp-icon:{name=\"shapes\" size=\"1.25em\"} :tp-icon:{name=\"symbol\" size=\"1.25em\"} Emoji / Icon / Symbol | Opens a compact picker and inserts the selected item inline. |\n| :tp-icon:{name=\"undo\" size=\"1.25em\"} :tp-icon:{name=\"redo\" size=\"1.25em\"} Undo / Redo | Navigates the editing history. |\n| :tp-icon:{name=\"copy\" size=\"1.25em\"} :tp-icon:{name=\"cut\" size=\"1.25em\"} :tp-icon:{name=\"paste\" size=\"1.25em\"} :tp-icon:{name=\"select-all\" size=\"1.25em\"} Copy / Cut / Paste / Select all | Applies the corresponding clipboard or selection operation. |\n| :tp-icon:{name=\"format-clear\" size=\"1.25em\"} Clear formatting | Removes formatting from the selection. |\n| :tp-icon:{name=\"language-html\" size=\"1.25em\"} HTML | Opens the HTML source and rendered views. |\n| :tp-icon:{name=\"search\" size=\"1.25em\"} Search | Finds and highlights matching text. |\n| :tp-icon:{name=\"dots-vertical\" size=\"1.25em\"} More | Shows or hides the secondary formatting toolbar. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"1.25em\"} Editor toolbar | Shows or hides the toolbar of the visible code or markup block editor. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| :tp-icon:{name=\"menu\" size=\"1.25em\"} Minimize / Restore toolbar | Hides or restores all editing tools, keeping the menu button accessible and the document editable. |\n| Using the component | Edit the document directly and use the toolbar to format text, insert content, undo or redo changes. |\n| :tp-icon:{name=\"file\" size=\"1.25em\"} Files | Opens Import and Export as submenus for AsciiDoc, HTML, LaTeX, Markdown and reStructuredText. Import inserts the rendered file at the selection; Export as saves the whole document with a chosen filename. |\n| :tp-icon:{name=\"format-title\" size=\"1.25em\"} Types | Inserts paragraphs, headings, quotations, code, AsciiDoc/HTML/LaTeX/Markdown/reStructuredText blocks, math, and horizontal rules. |\n| :tp-icon:{name=\"letter-f\" size=\"1.25em\"} Format | Applies inline text, math, and link formatting. |\n| :tp-icon:{name=\"list-down\" size=\"1.25em\"} :tp-icon:{name=\"table\" size=\"1.25em\"} :tp-icon:{name=\"multimedia\" size=\"1.25em\"} Lists / Table / Media | Inserts and edits structured or media content. |\n| :tp-icon:{name=\"emoticon-happy-outline\" size=\"1.25em\"} :tp-icon:{name=\"shapes\" size=\"1.25em\"} :tp-icon:{name=\"symbol\" size=\"1.25em\"} Emoji / Icon / Symbol | Opens a compact picker and inserts the selected item inline. |\n| :tp-icon:{name=\"undo\" size=\"1.25em\"} :tp-icon:{name=\"redo\" size=\"1.25em\"} Undo / Redo | Navigates the editing history. |\n| :tp-icon:{name=\"copy\" size=\"1.25em\"} :tp-icon:{name=\"cut\" size=\"1.25em\"} :tp-icon:{name=\"paste\" size=\"1.25em\"} :tp-icon:{name=\"select-all\" size=\"1.25em\"} Copy / Cut / Paste / Select all | Applies the corresponding clipboard or selection operation. |\n| :tp-icon:{name=\"format-clear\" size=\"1.25em\"} Clear formatting | Removes formatting from the selection. |\n| :tp-icon:{name=\"language-html\" size=\"1.25em\"} HTML | Opens the HTML source and rendered views. |\n| :tp-icon:{name=\"search\" size=\"1.25em\"} Search | Finds and highlights matching text. |\n| :tp-icon:{name=\"dots-vertical\" size=\"1.25em\"} More | Shows or hides the secondary formatting toolbar. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"1.25em\"} Editor toolbar | Shows or hides the toolbar of the visible code or markup block editor. |\n| :tp-icon:{name=\"close\" size=\"2em\"} Clear search | Clear the search query and highlights. |\n| :tp-icon:{name=\"paragraph\" size=\"2em\"} Paragraph | Insert a paragraph at the selection. |\n| :tp-icon:{name=\"format-quote-open\" size=\"2em\"} Blockquote | Insert a blockquote at the selection. |\n| :tp-icon:{name=\"format-header-1\" size=\"2em\"} Heading 1 | Change the current block to heading 1. |\n| :tp-icon:{name=\"format-header-2\" size=\"2em\"} Heading 2 | Change the current block to heading 2. |\n| :tp-icon:{name=\"format-header-3\" size=\"2em\"} Heading 3 | Change the current block to heading 3. |\n| :tp-icon:{name=\"code-block\" size=\"2em\"} Code block | Insert a code block at the selection. |\n| :tp-icon:{name=\"function-block\" size=\"2em\"} Math block | Insert a math block at the selection. |\n| :tp-icon:{name=\"text-block\" size=\"2em\"} Markdown block | Insert a markdown block at the selection. |\n| :tp-icon:{name=\"horizontal-line\" size=\"2em\"} Horizontal rule | Insert a horizontal rule at the selection. |\n| :tp-icon:{name=\"format-list-bulleted\" size=\"2em\"} Unordered list | Insert an unordered list at the selection. |\n| :tp-icon:{name=\"format-list-numbered\" size=\"2em\"} Ordered list | Insert an ordered list at the selection. |\n| :tp-icon:{name=\"format-list-text\" size=\"2em\"} Definition list | Insert a definition list at the selection. |\n| :tp-icon:{name=\"image-plus\" size=\"2em\"} Image | Insert an image at the selection. |\n| :tp-icon:{name=\"video-plus\" size=\"2em\"} Video | Insert a video at the selection. |\n| :tp-icon:{name=\"music-note-plus\" size=\"2em\"} Audio | Insert an audio at the selection. |\n| :tp-icon:{name=\"format-bold\" size=\"2em\"} Bold | Apply bold formatting to the selection. |\n| :tp-icon:{name=\"format-italic\" size=\"2em\"} Italic | Apply italic formatting to the selection. |\n| :tp-icon:{name=\"format-underline\" size=\"2em\"} Underline | Apply underline formatting to the selection. |\n| :tp-icon:{name=\"format-strikethrough\" size=\"2em\"} Strikethrough | Apply strikethrough formatting to the selection. |\n| :tp-icon:{name=\"format-subscript\" size=\"2em\"} Subscript | Apply subscript formatting to the selection. |\n| :tp-icon:{name=\"format-superscript\" size=\"2em\"} Superscript | Apply superscript formatting to the selection. |\n| :tp-icon:{name=\"format-code\" size=\"2em\"} Code | Apply code formatting to the selection. |\n| :tp-icon:{name=\"function\" size=\"2em\"} Math | Apply math formatting to the selection. |\n| :tp-icon:{name=\"link\" size=\"2em\"} Link | Apply link formatting to the selection. |\n| :tp-icon:{name=\"file\" size=\"2em\"} Code file | Import or export the selected code block. |\n| :tp-icon:{name=\"code\" size=\"2em\"} Code language | Choose the language of the selected code block. |\n| :tp-icon:{name=\"palette-swatch\" size=\"2em\"} Color | Choose an accent color. |\n| :tp-icon:{name=\"theme-light-dark\" size=\"2em\"} Theme | Choose the light, dark or automatic theme. |\n| :tp-icon:{name=\"fullscreen\" size=\"2em\"} :tp-icon:{name=\"fullscreen-exit\" size=\"2em\"} Fullscreen | Enter or leave fullscreen. |\n| :tp-icon:{name=\"file_type_asciidoc\" library=\"languages\" size=\"2em\"} Files → Import → AsciiDoc | Import the document in AsciiDoc format. |\n| :tp-icon:{name=\"file_type_asciidoc\" library=\"languages\" size=\"2em\"} Files → Export as → AsciiDoc | Export the document in AsciiDoc format. |\n| :tp-icon:{name=\"file_type_html\" library=\"languages\" size=\"2em\"} Files → Import → HTML | Import the document in HTML format. |\n| :tp-icon:{name=\"file_type_html\" library=\"languages\" size=\"2em\"} Files → Export as → HTML | Export the document in HTML format. |\n| :tp-icon:{name=\"file_type_latex\" library=\"languages\" size=\"2em\"} Files → Import → LaTeX | Import the document in LaTeX format. |\n| :tp-icon:{name=\"file_type_latex\" library=\"languages\" size=\"2em\"} Files → Export as → LaTeX | Export the document in LaTeX format. |\n| :tp-icon:{name=\"file_type_markdown\" library=\"languages\" size=\"2em\"} Files → Import → Markdown | Import the document in Markdown format. |\n| :tp-icon:{name=\"file_type_markdown\" library=\"languages\" size=\"2em\"} Files → Export as → Markdown | Export the document in Markdown format. |\n| :tp-icon:{name=\"file_type_restructuredtext\" library=\"languages\" size=\"2em\"} Files → Import → reStructuredText | Import the document in reStructuredText format. |\n| :tp-icon:{name=\"file_type_restructuredtext\" library=\"languages\" size=\"2em\"} Files → Export as → reStructuredText | Export the document in reStructuredText format. |\n| :tp-icon:{name=\"file-import\" size=\"2em\"} Import | Open the import choices. |\n| :tp-icon:{name=\"file-upload-as\" size=\"2em\"} Export as | Open the export as choices. |\n| :tp-icon:{name=\"format-heading-hash\" size=\"2em\"} Headings | Open the headings choices. |\n| :tp-icon:{name=\"text-block\" size=\"2em\"} Markup block | Open the markup block choices. |\n| :tp-icon:{name=\"table-settings\" size=\"2em\"} Insert table | Insert table. |\n| :tp-icon:{name=\"text-short\" size=\"2em\"} Add caption | Add a caption to the selected table. |\n| :tp-icon:{name=\"table-row-plus-after\" size=\"2em\"} Insert row | Insert row. |\n| :tp-icon:{name=\"table-column-plus-after\" size=\"2em\"} Insert column | Insert column. |\n| :tp-icon:{name=\"table-row-remove\" size=\"2em\"} Delete row | Delete row. |\n| :tp-icon:{name=\"table-column-remove\" size=\"2em\"} Delete column | Delete column. |\n| :tp-icon:{name=\"table-remove\" size=\"2em\"} Delete table | Delete table. |\n| :tp-icon:{name=\"application-edit-outline\" size=\"2em\"} Editor | Open the editor choices. |\n| :tp-icon:{name=\"cellphone-screenshot\" size=\"2em\"} Rendered HTML | Rendered HTML. |\n| :tp-icon:{name=\"code\" size=\"2em\"} HTML code | HTML code. |\n| :tp-icon:{name=\"file_type_asciidoc\" library=\"languages\" size=\"2em\"} Types → Markup block → AsciiDoc | Insert an AsciiDoc block. |\n| :tp-icon:{name=\"file_type_html\" library=\"languages\" size=\"2em\"} Types → Markup block → HTML | Insert an HTML block. |\n| :tp-icon:{name=\"file_type_latex\" library=\"languages\" size=\"2em\"} Types → Markup block → LaTeX | Insert a LaTeX block. |\n| :tp-icon:{name=\"file_type_markdown\" library=\"languages\" size=\"2em\"} Types → Markup block → Markdown | Insert a Markdown block. |\n| :tp-icon:{name=\"file_type_restructuredtext\" library=\"languages\" size=\"2em\"} Types → Markup block → reStructuredText | Insert a reStructuredText block. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-cryptarithm" allow-script }
+::::: tp-markdown-viewer { label="tp-cryptarithm" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-cryptarithm { equation="SEND + MORE = MONEY" solution="9567 + 1085 = 10652" }

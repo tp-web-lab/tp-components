@@ -1,8 +1,16 @@
 import "../textfield/textfield.js";
 import type { TpTree } from "../tree/tree.js";
 
+export interface SidebarTools {
+	toggleWidth(): void;
+	toggleSearch(): void;
+}
+
 /** Shared navigation tools for both multi-page implementations. */
-export function appendSidebarTools(controls: HTMLElement, tree: TpTree): void {
+export function appendSidebarTools(
+	controls: HTMLElement,
+	tree: TpTree,
+): SidebarTools {
 	controls.dataset.helpGroup = "Table of contents";
 	for (const control of controls.querySelectorAll<HTMLElement>(
 		"tp-icon-button",
@@ -31,7 +39,7 @@ export function appendSidebarTools(controls: HTMLElement, tree: TpTree): void {
 	widthButton.dataset.helpDescription =
 		"Widen the sidebar to read long titles; click again to restore its previous width.";
 	widthButton.setAttribute("aria-pressed", "false");
-	widthButton.addEventListener("click", () => {
+	const toggleWidth = () => {
 		const sidebar = tree.closest<HTMLElement>('[data-role="sidebar"]');
 		const splitter = sidebar?.closest("tp-splitter");
 		if (!sidebar || !splitter) return;
@@ -73,7 +81,8 @@ export function appendSidebarTools(controls: HTMLElement, tree: TpTree): void {
 		widthButton.setAttribute("label", label);
 		widthButton.setAttribute("title", label);
 		widthButton.setAttribute("aria-pressed", String(expanded));
-	});
+	};
+	widthButton.addEventListener("click", toggleWidth);
 	const searchButton = button("search", "Search table of contents");
 	searchButton.dataset.helpDescription =
 		"Show or hide a title search field. Matches are highlighted in the table of contents without changing the current page.";
@@ -136,14 +145,15 @@ export function appendSidebarTools(controls: HTMLElement, tree: TpTree): void {
 		reveal();
 	};
 	field.addEventListener("input", update);
-	searchButton.addEventListener("click", () => {
+	const toggleSearch = () => {
 		search.hidden = !search.hidden;
 		searchButton.setAttribute("aria-expanded", String(!search.hidden));
 		if (search.hidden) {
 			field.value = "";
 			update();
 		} else field.querySelector("input")?.focus();
-	});
+	};
+	searchButton.addEventListener("click", toggleSearch);
 	field.addEventListener("keydown", (event) => {
 		if (event.key === "Escape") {
 			event.preventDefault();
@@ -158,4 +168,5 @@ export function appendSidebarTools(controls: HTMLElement, tree: TpTree): void {
 			reveal();
 		}
 	});
+	return { toggleWidth, toggleSearch };
 }

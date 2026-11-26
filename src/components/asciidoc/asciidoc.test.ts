@@ -136,3 +136,15 @@ describe("<tp-asciidoc>", () => {
 		expect(ast.blocks?.some((node) => node.context === "section")).toBe(true);
 	});
 });
+
+it("preserves native media dimensions against responsive styles", async () => {
+	const html = await renderAsciidocToHtml(
+		"image::picture.svg[Picture,160,100]\n\nvideo::movie.mp4[width=240,height=135]",
+	);
+	const holder = document.createElement("div");
+	holder.innerHTML = html;
+	expect(holder.querySelector("img")?.style.width).toBe("160px");
+	expect(holder.querySelector("img")?.style.height).toBe("100px");
+	expect(holder.querySelector("video")?.style.width).toBe("240px");
+	expect(holder.querySelector("video")?.style.height).toBe("135px");
+});

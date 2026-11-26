@@ -315,7 +315,8 @@ export class TpGameLife extends TpBase {
 		});
 	}
 
-	private stepOnce(): void {
+	/** Advances the simulation by one generation. */
+	stepOnce(): void {
 		if (!this.currentGrid) return;
 		this.currentGrid = stepGrid(this.currentGrid, {
 			wrap: this.hasBoolAttr("wrap"),
@@ -368,6 +369,23 @@ export class TpGameLife extends TpBase {
 			this.currentGrid = null;
 			this.innerHTML = `<pre class="tp-game-life-error">tp-game-life error: ${escapeHtml(message)}</pre>`;
 		}
+	}
+
+	/** Starts automatic simulation playback. */
+	play(): void {
+		this.startAutoplay();
+		this.renderWithToolbar();
+	}
+
+	/** Pauses automatic simulation playback. */
+	pause(): void {
+		this.stopAutoplay();
+		this.renderWithToolbar();
+	}
+
+	/** Restores the declared simulation program. */
+	async reset(): Promise<void> {
+		await this.render();
 	}
 }
 

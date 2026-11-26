@@ -6,7 +6,7 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<p>\n  Build status: <tp-badge variant=\"success\" pulse>Ready</tp-badge>\n</p>"
+      "code": "<p>\n  Build status: <tp-badge variant=\"success\" pulse=\"\">Ready</tp-badge>\n</p>"
     }
   ],
   "attributes": [

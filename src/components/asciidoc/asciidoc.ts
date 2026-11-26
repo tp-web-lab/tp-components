@@ -1,3 +1,6 @@
+import { escapeAttributeWhitespace } from "@tp/tp-utilities";
+import { prepareAsciidocPivot } from "../../utilities/markup-asciidoc-pivot.js";
+import { expandMarkupIncludes } from "../../utilities/markup-includes.js";
 /**
  * @module components/asciidoc
  * @summary Semantic AsciiDoc rendering component.
@@ -7,6 +10,10 @@
 /**
  * @tp-dependency tp-base
  * @summary Shared base class for tp-* components.
+ */
+/**
+ * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+ * @summary Shared parsers, games and rendering utilities.
  */
 // tp-docgen:dependencies:end
 
@@ -164,10 +171,26 @@ async function renderWithHtmlStyleAttributes(
 			`$1${FORWARDED_STYLE_ATTRIBUTE}=`,
 		),
 	);
-	return (await parser.render(normalizedSource)).replaceAll(
+	const template = document.createElement("template");
+	template.innerHTML = (await parser.render(normalizedSource)).replaceAll(
 		` ${FORWARDED_STYLE_ATTRIBUTE}=`,
 		" style=",
 	);
+	// Preserve native media dimensions against responsive width:100% styles.
+	for (const media of template.content.querySelectorAll<HTMLElement>(
+		"img,video,audio",
+	)) {
+		for (const dimension of ["width", "height"]) {
+			const value = media.getAttribute(dimension);
+			if (
+				value &&
+				/^\d+(?:\.\d+)?$/.test(value) &&
+				!media.style.getPropertyValue(dimension)
+			)
+				media.style.setProperty(dimension, `${value}px`);
+		}
+	}
+	return escapeAttributeWhitespace(template.innerHTML);
 }
 
 /**
@@ -179,8 +202,10 @@ async function renderWithHtmlStyleAttributes(
 export async function renderAsciidocToHtml(
 	source: string,
 	sourceUrl?: URL,
+	options: { pivot?: boolean } = {},
 ): Promise<string> {
 	const parser = await createTpAsciidocParser();
+	if (options.pivot) prepareAsciidocPivot(parser);
 	if (sourceUrl) parser.configure(getBrowserRenderOptions(sourceUrl));
 	return renderWithHtmlStyleAttributes(parser, source);
 }
@@ -396,6 +421,11 @@ export class TpAsciidoc extends TpBase {
 
 		try {
 			const { source, currentUrl } = await this.getAsciidocSource();
+			const includedSource = await expandMarkupIncludes(
+				source,
+				"asciidoc",
+				currentUrl.href,
+			);
 			if (token !== this.renderToken) return;
 			this.setAttribute("data-tp-asciidoc-source", currentUrl.pathname);
 			const parser = await createTpAsciidocParser();
@@ -403,7 +433,7 @@ export class TpAsciidoc extends TpBase {
 			parser.configure(getBrowserRenderOptions(currentUrl));
 			this.outputElement.innerHTML = await renderWithHtmlStyleAttributes(
 				parser,
-				source,
+				includedSource,
 			);
 			await renderAdocViewers(this.outputElement, { parser });
 			activateAsciidocBrowserAssets(this.outputElement);

@@ -131,6 +131,9 @@ describe("persistent Python runtime", () => {
 	});
 
 	it("creates cached loading and execution promises in the owner realm", async () => {
+		expect(createPyodideRuntimeScript({ isolated: true })).not.toContain(
+			"window.parent !== window ? window.parent : window",
+		);
 		const harness = createHarness();
 		const first = harness.createPreview();
 		await expect(first.load()).resolves.toBe(harness.pyodide);

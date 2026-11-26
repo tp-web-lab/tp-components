@@ -115,6 +115,23 @@ it("offers only reading commands in readonly palettes and restores editing comma
 	];
 	for (const readonly of [true, false, true]) {
 		host.readonly = readonly;
+		if (readonly) {
+			const source = host.getValue();
+			for (const method of [
+				"undo",
+				"redo",
+				"cutSelection",
+				"paste",
+				"indent",
+				"dedent",
+				"openReplace",
+				"toggleLineComment",
+				"toggleBlockComment",
+			] as const)
+				await host[method]();
+			expect(host.getValue()).toBe(source);
+		}
+
 		const palette = document.querySelector(
 			"[data-tp-code-editor-keyboard-dropdown]",
 		);

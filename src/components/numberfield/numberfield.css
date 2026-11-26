@@ -71,3 +71,11 @@ tp-numberfield[range][required]:not([label])
 	[data-tp-numberfield-control]::before {
 	content: none;
 }
+
+tp-numberfield[copy-code]:not([icon]) [data-tp-numberfield-control] {
+ grid-template-columns: minmax(0, 1fr) max-content max-content max-content;
+}
+tp-numberfield [data-tp-numberfield-copy] {
+ position: static; transform: none; margin: 0; grid-column: 4; grid-row: 1;
+ min-inline-size: 1.75rem; min-block-size: 1.75rem;
+}

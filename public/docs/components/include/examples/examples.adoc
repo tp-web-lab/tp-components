@@ -9,6 +9,13 @@
 ====
 ======
 
+.Raw HTML
+======
+[tp-include,src="/docs/components/include/examples/welcome.html",mode="raw"]
+====
+====
+======
+
 .Javascript API
 ======
 [script,type="module"]
@@ -23,6 +30,62 @@ element1.setAttribute("loading", "Loading the shared notice…");
 example.append(element1);
 
 document.body.append(example);
+====
+======
+
+.Converted Markdown
+======
+[tp-include,src="/docs/components/include/examples/notice.md"]
+====
+====
+======
+
+.Raw Markdown
+======
+[tp-include,src="/docs/components/include/examples/notice.md",mode="raw"]
+====
+====
+======
+
+.Converted AsciiDoc
+======
+[tp-include,src="/docs/components/include/examples/notice.adoc"]
+====
+====
+======
+
+.Raw AsciiDoc
+======
+[tp-include,src="/docs/components/include/examples/notice.adoc",mode="raw"]
+====
+====
+======
+
+.Converted LaTeX
+======
+[tp-include,src="/docs/components/include/examples/notice.tex"]
+====
+====
+======
+
+.Raw LaTeX
+======
+[tp-include,src="/docs/components/include/examples/notice.tex",mode="raw"]
+====
+====
+======
+
+.Converted reStructuredText
+======
+[tp-include,src="/docs/components/include/examples/notice.rst"]
+====
+====
+======
+
+.Raw reStructuredText
+======
+[tp-include,src="/docs/components/include/examples/notice.rst",mode="raw"]
+====
 ====
 ======
 ----

@@ -13,6 +13,8 @@ The user-help button legend groups commands by their location in the component a
 | User help | Show the selected component’s independent preview and interaction instructions. |
 | Author help | Show the selected component’s author documentation in the same drawer. |
 | Developer help | Show the selected component’s TypeDoc class reference in the same drawer. |
+| :tp-icon:{name="palette-swatch" size="2em"} Color | Choose an accent color. |
+| :tp-icon:{name="theme-light-dark" size="2em"} Theme | Choose the light, dark or automatic theme. |
 
 #### Keyboard interactions
 

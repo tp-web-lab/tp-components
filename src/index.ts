@@ -285,6 +285,7 @@ export {
 } from "./components/iframe/iframe-controls.js";
 export { TpInclude } from "./components/include/include.js";
 export { TpInline } from "./components/inline/inline.js";
+export { TpJavascript } from "./components/javascript/javascript.js";
 export { TpJavascriptNotebook } from "./components/javascript-notebook/javascript-notebook.js";
 export {
 	TpJavascriptPlayground,
@@ -353,6 +354,7 @@ export {
 } from "./components/popover/popover-triggers.js";
 export { TpPostIt, type TpPostItColor } from "./components/post-it/post-it.js";
 export { TpPostItEditor } from "./components/post-it-editor/post-it-editor.js";
+export { TpProlog } from "./components/prolog/prolog.js";
 export { TpPrologNotebook } from "./components/prolog-notebook/prolog-notebook.js";
 export {
 	TpPrologPlayground,
@@ -367,6 +369,7 @@ export {
 	type PuzzleShape,
 	TpPuzzle,
 } from "./components/puzzle/puzzle.js";
+export { TpPython } from "./components/python/python.js";
 export { TpPythonNotebook } from "./components/python-notebook/python-notebook.js";
 export {
 	TpPythonPlayground,
@@ -468,6 +471,7 @@ export {
 } from "./components/tooltip/tooltip-triggers.js";
 export { TpTree } from "./components/tree/tree.js";
 export { TpTurtle } from "./components/turtle/turtle.js";
+export { TpTypescript } from "./components/typescript/typescript.js";
 export { TpTypescriptNotebook } from "./components/typescript-notebook/typescript-notebook.js";
 export {
 	TpTypescriptPlayground,
@@ -485,6 +489,14 @@ console.log("tp-lib loaded");
 export { TpAsciidocBlog } from "./components/asciidoc-blog/asciidoc-blog.js";
 export { TpAudioPlaylist } from "./components/audio-playlist/audio-playlist.js";
 export { TpBiblio } from "./components/biblio/biblio.js";
+export {
+	type BibtexEntry,
+	type BibtexFormat,
+	type BibtexInput,
+	bibtexToCode,
+	parseBibtex,
+	TpBibtex,
+} from "./components/bibtex/bibtex.js";
 export { TpCalculator } from "./components/calculator/calculator.js";
 export { TpCarousel } from "./components/carousel/carousel.js";
 export {
@@ -505,6 +517,9 @@ export {
 } from "./components/chess/chess.js";
 export * from "./components/component-viewer/component-viewer.js";
 export { TpControl } from "./components/control/control.js";
+export { TpDiffCodeEditor } from "./components/diff-code-editor/diff-code-editor.js";
+export { TpEquanum } from "./components/equanum/equanum.js";
+export { TpGlobalListof } from "./components/global-listof/global-listof.js";
 export { TpGlossary } from "./components/glossary/glossary.js";
 export type {
 	GeometryObject,
@@ -520,6 +535,9 @@ export {
 	TpGraphGeometry,
 } from "./components/graph-geometry/graph-geometry.js";
 export { TpHtmlBlog } from "./components/html-blog/html-blog.js";
+export { TpIndex } from "./components/index/index.js";
+export { TpJavascriptInterpreterQuestion } from "./components/javascript-interpreter-question/javascript-interpreter-question.js";
+export { TpJavascriptTracer } from "./components/javascript-tracer/javascript-tracer.js";
 export { TpLatex } from "./components/latex/latex.js";
 export { TpLatexMultiPages } from "./components/latex-multi-pages/latex-multi-pages.js";
 export { TpLatexMultiSlides } from "./components/latex-multi-slides/latex-multi-slides.js";
@@ -536,8 +554,25 @@ export {
 	type TpBlogLanguage,
 	TpMarkupBlog,
 } from "./components/markup-blog/markup-blog.js";
+export {
+	convert,
+	convertFile,
+	TpMarkupConverter,
+} from "./components/markup-converter/markup-converter.js";
 export { TpMask } from "./components/mask/mask.js";
 export { TpNote } from "./components/note/note.js";
+export { TpOCaml } from "./components/ocaml/ocaml.js";
+export { TpOCamlInterpreterQuestion } from "./components/ocaml-interpreter-question/ocaml-interpreter-question.js";
+export { TpOCamlNotebook } from "./components/ocaml-notebook/ocaml-notebook.js";
+export { TpOCamlPlayground } from "./components/ocaml-playground/ocaml-playground.js";
+export { TpOCamlPlaygroundQuestion } from "./components/ocaml-playground-question/ocaml-playground-question.js";
+export { TpOCamlTracer } from "./components/ocaml-tracer/ocaml-tracer.js";
+export { TpOCamlViewer } from "./components/ocaml-viewer/ocaml-viewer.js";
+export { TpOCamlViewerQuestion } from "./components/ocaml-viewer-question/ocaml-viewer-question.js";
+export { TpPrologInterpreterQuestion } from "./components/prolog-interpreter-question/prolog-interpreter-question.js";
+export { TpPrologTracer } from "./components/prolog-tracer/prolog-tracer.js";
+export { TpPythonInterpreterQuestion } from "./components/python-interpreter-question/python-interpreter-question.js";
+export { TpPythonTracer } from "./components/python-tracer/python-tracer.js";
 export { TpRef } from "./components/ref/ref.js";
 export { TpRestructuredTextBlog } from "./components/restructuredtext-blog/restructuredtext-blog.js";
 export {
@@ -545,6 +580,14 @@ export {
 	TpSaveAudio,
 	type TpSaveAudioFormat,
 } from "./components/save-audio/save-audio.js";
+export { TpScheme } from "./components/scheme/scheme.js";
+export { TpSchemeInterpreterQuestion } from "./components/scheme-interpreter-question/scheme-interpreter-question.js";
+export { TpSchemeNotebook } from "./components/scheme-notebook/scheme-notebook.js";
+export { TpSchemePlayground } from "./components/scheme-playground/scheme-playground.js";
+export { TpSchemePlaygroundQuestion } from "./components/scheme-playground-question/scheme-playground-question.js";
+export { TpSchemeTracer } from "./components/scheme-tracer/scheme-tracer.js";
+export { TpSchemeViewer } from "./components/scheme-viewer/scheme-viewer.js";
+export { TpSchemeViewerQuestion } from "./components/scheme-viewer-question/scheme-viewer-question.js";
 export {
 	TP_SCREEN_DEVICES,
 	TpScreen,
@@ -566,7 +609,14 @@ export {
 	type TangramPlacement,
 	TpTangram,
 } from "./components/tangram/tangram.js";
+export {
+	type TheoremNumbering,
+	type TheoremType,
+	TpTheorem,
+} from "./components/theorem/theorem.js";
 export { TpTikz } from "./components/tikz/tikz.js";
+export { TpTypescriptInterpreterQuestion } from "./components/typescript-interpreter-question/typescript-interpreter-question.js";
+export { TpTypescriptTracer } from "./components/typescript-tracer/typescript-tracer.js";
 export {
 	TpVideoPlayer,
 	type TpVideoPlayerErrorDetail,
@@ -580,3 +630,4 @@ export {
 	type WariSide,
 } from "./components/wari/wari.js";
 export { TpWordCloud } from "./components/word-cloud/word-cloud.js";
+export type { MarkupConversionOptions } from "./utilities/markup-conversion.js";

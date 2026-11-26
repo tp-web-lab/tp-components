@@ -1,0 +1,50 @@
+<tp-html-viewer label="tp-ocaml-tracer" allow-script preserve-source>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-ocaml-tracer src="/docs/components/ocaml-tracer/examples/recursion.ml"></tp-ocaml-tracer>
+    </div>
+
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/ocaml/ocaml.js";
+      import "/components/ocaml-tracer/ocaml-tracer.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-ocaml-tracer");
+      element1.setAttribute("src", "/docs/components/ocaml-tracer/examples/recursion.ml");
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
+    <div role="example" label="Subexpressions on one line">
+      <tp-ocaml-tracer src="/docs/components/ocaml-tracer/examples/same-line.ml"></tp-ocaml-tracer>
+    </div>
+
+    <div role="example" label="Shared arrays and references">
+      <tp-ocaml-tracer src="/docs/components/ocaml-tracer/examples/shared.ml"></tp-ocaml-tracer>
+    </div>
+
+    <div role="example" label="Closures">
+      <tp-ocaml-tracer src="/docs/components/ocaml-tracer/examples/closures.ml"></tp-ocaml-tracer>
+    </div>
+
+    <div role="example" label="Pattern matching">
+      <tp-ocaml-tracer src="/docs/components/ocaml-tracer/examples/patterns.ml"></tp-ocaml-tracer>
+    </div>
+
+    <div role="example" label="Caught exception">
+      <tp-ocaml-tracer src="/docs/components/ocaml-tracer/examples/caught.ml"></tp-ocaml-tracer>
+    </div>
+
+    <div role="example" label="Uncaught exception">
+      <tp-ocaml-tracer src="/docs/components/ocaml-tracer/examples/error.ml"></tp-ocaml-tracer>
+    </div>
+
+    <div role="example" label="Replay a saved trace">
+      <tp-ocaml-tracer trace="/docs/components/ocaml-tracer/examples/recursion.trace.json"></tp-ocaml-tracer>
+    </div>
+  </template>
+</tp-html-viewer>

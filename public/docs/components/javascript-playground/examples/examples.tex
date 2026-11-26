@@ -8,6 +8,7 @@
 \documentclass{article}
 \begin{document}
 \wcScript[type=module]|
+import "/components/javascript/javascript.js";
 import "/components/javascript-playground/javascript-playground.js";
 
 const example = document.createDocumentFragment();
@@ -24,4 +25,10 @@ document.body.append(example);
 \documentclass{article}
 \begin{document}
 \wcTpJavascriptPlayground[src=/docs/components/_shared/single-source/example.js]{}
+\end{document}
+
+% !tp-example Mocha and Chai results
+\documentclass{article}
+\begin{document}
+\wcTpJavascriptPlayground[src=/docs/components/javascript-playground/examples/framework-tests.json]{}
 \end{document}

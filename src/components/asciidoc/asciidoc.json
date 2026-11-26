@@ -36,7 +36,13 @@
       "summary": "Shared base class for tp-* components."
     }
   ],
-  "credits": [],
+  "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    }
+  ],
   "userHelp": {
     "displayName": "AsciiDoc",
     "introduction": "The custom `<tp-asciidoc>` element renders AsciiDoc documents.",

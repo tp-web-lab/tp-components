@@ -1,0 +1,135 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=position: relative; contain: layout; block-size: 32rem; padding: 0;]{
+  \wcTpHtmlMultiPages[repository=/docs/components/global-listof/examples/guide,label=Global lists,menu]{}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/box/box.js";
+import "/components/html-multi-pages/html-multi-pages.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-box");
+element1.setAttribute("style", "position: relative; contain: layout; block-size: 32rem; padding: 0;");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("tp-html-multi-pages");
+element2.setAttribute("repository", "/docs/components/global-listof/examples/guide");
+element2.setAttribute("label", "Global lists");
+element2.setAttribute("menu", "");
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Markdown guide
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=position: relative; contain: layout; block-size: 32rem; padding: 0;]{
+  \wcTpMarkdownMultiPages[repository=/docs/components/global-listof/examples/markdown-guide,label=Global lists,menu]{}
+}
+\end{document}
+
+% !tp-example AsciiDoc guide
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=position: relative; contain: layout; block-size: 32rem; padding: 0;]{
+  \wcTpAsciidocMultiPages[repository=/docs/components/global-listof/examples/asciidoc-guide,label=Global lists,menu]{}
+}
+\end{document}
+
+% !tp-example LaTeX guide
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=position: relative; contain: layout; block-size: 32rem; padding: 0;]{
+  \wcTpLatexMultiPages[repository=/docs/components/global-listof/examples/latex-guide,label=Global lists,menu]{}
+}
+\end{document}
+
+% !tp-example reStructuredText guide
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=position: relative; contain: layout; block-size: 32rem; padding: 0;]{
+  \wcTpRestructuredtextMultiPages[repository=/docs/components/global-listof/examples/rst-guide,label=Global lists,menu]{}
+}
+\end{document}
+
+% !tp-example Mixed markup guide
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=position: relative; contain: layout; block-size: 32rem; padding: 0;]{
+  \wcTpMarkupMultiPages[repository=/docs/components/global-listof/examples/mixed-guide,label=Global lists,menu]{}
+}
+\end{document}
+
+% !tp-example Bibliography across pages
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=position: relative; contain: layout; block-size: 32rem; padding: 0;]{
+  \wcTpHtmlMultiPages[repository=/docs/components/global-listof/examples/biblio-guide,label=Bibliography across pages,menu]{}
+}
+\end{document}
+
+% !tp-example Glossary across pages
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=position: relative; contain: layout; block-size: 32rem; padding: 0;]{
+  \wcTpHtmlMultiPages[repository=/docs/components/global-listof/examples/glossary-guide,label=Glossary across pages,menu]{}
+}
+\end{document}
+
+% !tp-example Index across pages
+\documentclass{article}
+\begin{document}
+\wcTpBox[style=position: relative; contain: layout; block-size: 32rem; padding: 0;]{
+  \wcTpHtmlMultiPages[repository=/docs/components/global-listof/examples/index-guide,label=Index across pages,menu]{}
+}
+\end{document}
+
+% !tp-example Compare merge modes
+\documentclass{article}
+\begin{document}
+\wcDiv[data-merge-comparison]{
+  \wcTpCheckboxList[orientation=horizontal]{
+    \begin{itemize}
+      \item Merge across pages
+    \end{itemize}
+  }
+  \wcP[data-merge-status,role=status]{Separate sections}
+  \wcTpBox[style=position: relative; contain: layout; block-size: 32rem; padding: 0;]{
+    \wcTpHtmlMultiPages[repository=/docs/components/global-listof/examples/merge-guide,label=Merge comparison,menu]{}
+  }
+}
+
+\wcScript[type=module]|
+import "/components/checkbox-list/checkbox-list.js";
+import "/components/box/box.js";
+import "/components/html-multi-pages/html-multi-pages.js";
+import "/components/global-listof/global-listof.js";
+
+const example = document.querySelector("[data-merge-comparison]");
+const checkbox = example.querySelector("tp-checkbox-list");
+const guide = example.querySelector("tp-html-multi-pages");
+const status = example.querySelector("[data-merge-status]");
+
+function updateMerge() {
+  const merge = checkbox.value === "1";
+  const list = guide.querySelector("tp-global-listof");
+  if (list && list.merge !== merge) list.merge = merge;
+  status.textContent = merge ? "Merged list" : "Separate sections";
+}
+
+checkbox.addEventListener("tp-checkbox-list-change", updateMerge);
+guide.addEventListener("tp-global-listof-ready", updateMerge);
+updateMerge();
+|
+\end{document}

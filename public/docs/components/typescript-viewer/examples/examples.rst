@@ -15,6 +15,7 @@
          .. script::
             :type: module
 
+            import "/components/typescript/typescript.js";
             import "/components/typescript-viewer/typescript-viewer.js";
 
             const example = document.createDocumentFragment();
@@ -55,3 +56,88 @@
 
          .. tp-typescript-viewer::
             :src: /docs/components/_shared/single-source/example.ts
+
+      .. example:: Compare presentation modes
+
+         .. role:: example-kbd-1(kbd)
+
+         .. role:: example-kbd-2(kbd)
+
+         .. role:: example-kbd-3(kbd)
+
+         .. role:: example-kbd-4(kbd)
+
+         .. role:: example-kbd-5(kbd)
+
+         .. role:: example-kbd-6(kbd)
+
+         .. section::
+
+            .. heading-level:: 3
+
+            mode="default" — Standard controls
+            ==================================
+
+            Open Code to edit the source, then click Run or press :example-kbd-1:`Shift`\ +\ :example-kbd-2:`Enter` in the editor.
+
+            Run to print a console message followed by an intentional error. In simple mode the console opens automatically. Comment out the message statements and run again to check that the error alone opens it; remove the error statement to try a successful run.
+
+            .. tp-typescript-viewer::
+               :mode: default
+
+               .. script::
+                  :type: tp/typescript
+                  :filename: main.ts
+
+                  const message: string = "The program ran.";
+                  document.body.innerHTML = `<p>${message}</p>`;
+                  console.log("Console message before the intentional error.");
+                  throw new Error("Intentional error: the simple-mode console opens automatically.");
+
+         .. section::
+
+            .. heading-level:: 3
+
+            mode="lite" — Compact controls
+            ==============================
+
+            Open Code to edit the source, then click Run or press :example-kbd-3:`Shift`\ +\ :example-kbd-4:`Enter` in the editor.
+
+            Run to print a console message followed by an intentional error. In simple mode the console opens automatically. Comment out the message statements and run again to check that the error alone opens it; remove the error statement to try a successful run.
+
+            .. tp-typescript-viewer::
+               :mode: lite
+
+               .. script::
+                  :type: tp/typescript
+                  :filename: main.ts
+
+                  const message: string = "The program ran.";
+                  document.body.innerHTML = `<p>${message}</p>`;
+                  console.log("Console message before the intentional error.");
+                  throw new Error("Intentional error: the simple-mode console opens automatically.");
+
+         .. section::
+
+            .. heading-level:: 3
+
+            mode="simple" — Editor and rendered output only
+            ===============================================
+
+            Edit the code below, keep the cursor in the editor and press :example-kbd-5:`Shift`\ +\ :example-kbd-6:`Enter` (Return) to run it. This viewer has no Run button.
+
+            Run to print a console message followed by an intentional error. In simple mode the console opens automatically. Comment out the message statements and run again to check that the error alone opens it; remove the error statement to try a successful run.
+
+            .. tp-typescript-viewer::
+               :mode: simple
+
+               .. script::
+                  :type: tp/typescript
+                  :filename: main.ts
+
+                  const message: string = "The program ran.";
+                  document.body.innerHTML = `<p>${message}</p>`;
+                  console.log("Console message before the intentional error.");
+                  throw new Error("Intentional error: the simple-mode console opens automatically.");
+
+         Programming viewers already have compact controls, so default and lite look alike. The first run may load the language engine.

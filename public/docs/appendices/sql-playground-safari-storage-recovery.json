@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-25T15:36:07.476Z",
+  "browser": "native Safari",
+  "checks": [
+    {
+      "theme": "light",
+      "scenario": "sqlite",
+      "ms": 1960,
+      "status": "passed",
+      "passed": 8,
+      "actualTheme": "tp-light",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 8 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent querypassedStudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputpassed: Current query\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": "untouched",
+      "persistedAfterReload": true,
+      "storedBytes": 8192
+    },
+    {
+      "theme": "dark",
+      "scenario": "sqlite",
+      "ms": 1457,
+      "status": "passed",
+      "passed": 8,
+      "actualTheme": "tp-dark",
+      "storedUnchanged": true,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SQLite: 8 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsStudentsCurrent querypassedStudentsUnordered rows with duplicatespassedStudentsEmpty selectionpassedStudentsSemicolons in stringspassedStudentsDelete inside a testpassedStudentsNext test starts freshpassedStudentsCompanion query and typespassedStudentsExpected SQL errorpassedExpected SQL error: no such table: unknown_tableStudentsWork in progressskippedAdd a test for the average scoreEngine outputpassed: Current query\npassed: Unordered rows with duplicates\npassed: Empty selection\npassed: Semicolons in strings\npassed: Delete inside a test\npassed: Next test starts fresh\npassed: Companion query and types\npassed: Expected SQL error\nExpected SQL error: no such table: unknown_table\nskipped: Work in progress\nAdd a test for the average score\n",
+      "sentinel": "untouched",
+      "persistedAfterReload": true,
+      "storedBytes": 8192
+    }
+  ],
+  "limitations": [
+    "The CDN interruption scenario is covered by Playwright, not this native Safari run."
+  ],
+  "version": "26.6.2",
+  "storageProbe": {
+    "later": "test",
+    "immediate": "test"
+  }
+}

@@ -4,13 +4,14 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Speak | Start reading the text aloud. |
+| :tp-icon:{name="speakerphone-off" size="2em"} :tp-icon:{name="speakerphone" library="tp" size="2em"} Speak | Start reading the text aloud. |
 | Pause | Suspend speech or freeze the remaining scheduled silence. |
 | Resume | Continue paused speech or the remaining silence. |
-| Stop | End reading and cancel pending segments or pauses. |
+| :tp-icon:{name="speakerphone" size="2em"} :tp-icon:{name="speakerphone-off" size="2em"} Stop | End reading and cancel pending segments or pauses. |
 | Settings | Choose a voice for the text language; scroll the voice list when it exceeds the available space; Automatic lets the browser choose. Changing the voice stops reading. |
 | Compact speaker / stop button | Start or stop reading. Pause, Resume and voice settings are not available in this presentation. |
 | Status | Indicates whether speech is ready, playing, paused or unavailable. Voice availability depends on the browser and operating system. |
+| :tp-icon:{name="settings" size="2em"} Text-to-speech controls | Text-to-speech controls. |
 
 #### Keyboard interactions
 

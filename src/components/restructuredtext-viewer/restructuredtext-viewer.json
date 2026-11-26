@@ -29,6 +29,15 @@
       "default": "false"
     },
     {
+      "name": "mode",
+      "description": "Viewer presentation: full controls, compact controls, or only source editor and rendered output.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "\"default\" | \"lite\" | \"simple\"",
+      "default": "\"default\""
+    },
+    {
       "name": "src",
       "description": "Comma-separated URLs of external reStructuredText example files.",
       "reflected": false,
@@ -38,7 +47,53 @@
       "default": "\"\""
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "createRenderedDocument(): Promise<string>",
+      "inherited": true,
+      "description": "Creates an independent HTML document from the current source for testing."
+    },
+    {
+      "name": "getValue(): string",
+      "inherited": true,
+      "description": "Returns the current editable source, including unsaved preview changes."
+    },
+    {
+      "name": "reset(): void",
+      "inherited": true,
+      "description": "Restores the selected example and refreshes its preview."
+    },
+    {
+      "name": "run(): Promise<void>",
+      "inherited": true,
+      "description": "Renders the edited source, unless the cancelable run event is handled by the parent."
+    },
+    {
+      "name": "selectOutputMode(value: string): Promise<void>",
+      "inherited": true,
+      "description": "Selects the rendered, generated HTML or structural output supported by this viewer."
+    },
+    {
+      "name": "setValue(source: string): Promise<void>",
+      "inherited": true,
+      "description": "Replaces the editable source and refreshes the preview without replacing the editor."
+    },
+    {
+      "name": "toggleCode(): Promise<void>",
+      "inherited": true,
+      "description": "Shows or hides the source while retaining a visible panel."
+    },
+    {
+      "name": "toggleEditorToolbar(): Promise<void>",
+      "inherited": true,
+      "description": "Shows or hides toolbars on the currently visible editors."
+    },
+    {
+      "name": "toggleOutput(): Promise<void>",
+      "inherited": true,
+      "description": "Shows or hides the output while retaining a visible panel."
+    }
+  ],
   "events": [],
   "cssproperties": [],
   "dependencies": [
@@ -49,6 +104,10 @@
     {
       "name": "tp-divider",
       "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
     },
     {
       "name": "tp-html-viewer",
@@ -85,7 +144,12 @@
   "userHelp": {
     "displayName": "reStructuredText viewer",
     "introduction": "The custom `<tp-restructuredtext-viewer>` element provides an interactive reStructuredText viewer with editable source and parser outputs.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Code | The viewer initially displays the result. **Code** shows or hides the source editor; edit the source there, then use **Run** to update the result. **Reset** restores the initial source. |\n| HTML | In the output toolbar, **HTML**, **Generated HTML** (the code icon) and **Tree** switch between the rendered page, the parser's generated HTML in a read-only editor, and its syntax tree. |\n| Using the component | This is separate from the source-editor toggle and is not available in lite mode. |\n| :tp-icon:{name=\"code\" size=\"1.25em\"} Code | Shows or hides the source editor. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"1.25em\"} Editor toolbar | Shows or hides the toolbar of every visible code editor. |\n| :tp-icon:{name=\"eye-outline\" size=\"1.25em\"} Render | Shows or hides the rendered output. |\n| :tp-icon:{name=\"refresh\" size=\"1.25em\"} Reset | Restores the initially loaded content. |\n| :tp-icon:{name=\"play\" size=\"1.25em\"} Run | Renders the current source. |\n| Fullscreen / Exit fullscreen | Expand the entire component to fullscreen or return to its normal size. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Esc</kbd> | Exit fullscreen. |",
-    "keyboard": []
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Code | The viewer initially displays the result. **Code** shows or hides the source editor; edit the source there, then use **Run** to update the result. **Reset** restores the initial source. |\n| HTML | In the output toolbar, **HTML**, **Generated HTML** (the code icon) and **Tree** switch between the rendered page, the parser's generated HTML in a read-only editor, and its syntax tree. |\n| Using the component | This is separate from the source-editor toggle and is not available in lite mode. |\n| :tp-icon:{name=\"code\" size=\"1.25em\"} Code | Shows or hides the source editor. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"1.25em\"} Editor toolbar | Shows or hides the toolbar of every visible code editor. |\n| :tp-icon:{name=\"eye-outline\" size=\"1.25em\"} Render | Shows or hides the rendered output. |\n| :tp-icon:{name=\"refresh\" size=\"1.25em\"} Reset | Restores the initially loaded content. |\n| :tp-icon:{name=\"play\" size=\"1.25em\"} Run | Renders the current source. |\n| Fullscreen / Exit fullscreen | Expand the entire component to fullscreen or return to its normal size. |\n| :tp-icon:{name=\"code\" size=\"2em\"} Show code | Show code. |\n| :tp-icon:{name=\"eye-outline\" size=\"2em\"} Show output | Show output. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"2em\"} Toggle editor toolbar | Toggle editor toolbar. |\n| :tp-icon:{name=\"language-html\" library=\"tp\" size=\"2em\"} Rendered HTML | Rendered HTML. |\n| :tp-icon:{name=\"code\" library=\"tp\" size=\"2em\"} Generated HTML | Generated HTML. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Shift</kbd>+<kbd>Enter</kbd> | Run the current source from the viewer, including while editing code. |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Esc</kbd> | Exit fullscreen. |",
+    "keyboard": [
+      {
+        "key": "Shift+Enter",
+        "description": "Run the current source."
+      }
+    ]
   }
 }

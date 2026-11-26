@@ -11,6 +11,15 @@
   ],
   "attributes": [
     {
+      "name": "number",
+      "description": "Optional positive note number, preserved in references and local or global lists.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "number",
+      "default": "0"
+    },
+    {
       "name": "ref",
       "description": "Identifier used by references in this document.",
       "reflected": true,

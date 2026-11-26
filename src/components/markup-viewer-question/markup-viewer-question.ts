@@ -30,11 +30,15 @@ export interface MarkupQuestionViewer extends HTMLElement {
  * @accessibility Inherits question disclosure, submission and reset controls from the editor-question hierarchy; test results and loading failures are reported in its polite live feedback region.
  * @accessibility The concrete markup viewer supplies editor and preview interaction; this abstract class does not add a separate focusable control.
  * @accessibilityresponsibility Provide a descriptive question title and prompt, understandable assertion messages and accessible preview content. DOM test success alone does not establish accessibility of the learner's markup.
+ * @attr {string} src = "" - Markup source file loaded into the viewer; the concrete component selects its language.
  */
 export abstract class TpMarkupViewerQuestion<
 	TViewer extends MarkupQuestionViewer,
 > extends TpEditorQuestion<TViewer> {
 	/** Markup viewer source readiness event. */
+	protected override get loadsQuestionDefinition(): boolean {
+		return false;
+	}
 	protected readonly sourceLoadedEvent = "tp-markup-viewer-src-load";
 	/** Creates the fixed language viewer. */
 	protected abstract createViewer(): TViewer;

@@ -27,6 +27,7 @@ afterEach(() => {
 
 it("opens only on demand in LaTeX and synchronizes source, events and clear", async () => {
 	const field = document.createElement("tp-mathfield");
+	field.copyCode = true;
 	field.mathlive = true;
 	document.body.append(field);
 	const button = field.querySelector<HTMLElement>(

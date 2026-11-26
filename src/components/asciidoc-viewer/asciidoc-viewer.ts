@@ -17,6 +17,10 @@
  * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-html-viewer
  * @summary Interactive HTML viewer with editable source, live rendering, and DOM inspection.
  */
@@ -105,6 +109,8 @@ function extractTitledExamples(source: string): MarkupViewerExample[] {
  * @tagname tp-asciidoc-viewer
  * @attr {boolean} lite = false - Uses the compact single-example viewer with rendered HTML output.
  * @attr {string} src = "" - Comma-separated URLs of external AsciiDoc example files.
+ * @keyboard {Shift+Enter} Run the current source.
+ * @attr {"default" | "lite" | "simple"} mode = "default" - Viewer presentation: full controls, compact controls, or only source editor and rendered output.
  * @example
  * <tp-asciidoc-viewer>
  *         <script type="tp/asciidoc">
@@ -177,7 +183,10 @@ export class TpAsciidocViewer extends TpMarkupViewer<
 			const renderedSource = needsRuntimeRenderer
 				? `<tp-asciidoc><script type="tp/asciidoc">${source.replace(/<\/script/gi, "<\\/script")}</script></tp-asciidoc>`
 				: await renderAsciidocToHtml(source, sourceUrl);
-			iframe.srcdoc = buildIframeDocument(renderedSource, document.baseURI);
+			iframe.srcdoc = buildIframeDocument(
+				renderedSource,
+				getComponentSourceBaseUrl(this),
+			);
 			container.replaceChildren(iframe);
 			return;
 		}

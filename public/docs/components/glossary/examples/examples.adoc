@@ -6,7 +6,7 @@
 ======
 [div%data-tp-reference-scope]
 =====
-Read more [tp-ref,href="%example"]#glossary-example#.
+Read more [tp-ref,href="%example",tp-empty="true"]##glossary-example-1##.
 
 [tp-glossary,ref="example",title="Example"]
 ====

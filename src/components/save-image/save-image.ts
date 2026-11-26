@@ -38,7 +38,7 @@ import { chooseSaveTarget, saveBlob } from "../../utilities/save-file.js";
 
 export type TpSaveImageFormat = "svg" | "png" | "webp";
 
-type SvgExportTarget = Element & { exportSvg?: () => string };
+type SvgExportTarget = Element & { exportSvg?: () => string | Promise<string> };
 
 function isSaveImageFormat(value: string): value is TpSaveImageFormat {
 	return value === "svg" || value === "png" || value === "webp";
@@ -295,7 +295,10 @@ export class TpSaveImage extends TpBase {
 		const svg = await this.createSvg(target);
 		const { width, height } = this.svgSize(svg, target);
 		const image = new Image();
-		const url = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
+		const embeddedHtml = svg.includes("<foreignObject");
+		const url = embeddedHtml
+			? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
+			: URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
 		try {
 			await new Promise<void>((resolve, reject) => {
 				image.onload = () => resolve();
@@ -311,7 +314,7 @@ export class TpSaveImage extends TpBase {
 			context.drawImage(image, 0, 0, width, height);
 			return await this.canvasBlob(canvas, format);
 		} finally {
-			URL.revokeObjectURL(url);
+			if (!embeddedHtml) URL.revokeObjectURL(url);
 		}
 	}
 
@@ -368,7 +371,7 @@ export class TpSaveImage extends TpBase {
 		return new Promise((resolve, reject) =>
 			canvas.toBlob(
 				(blob) =>
-					blob
+					blob?.type === `image/${format}`
 						? resolve(blob)
 						: reject(
 								new Error(
@@ -399,6 +402,11 @@ export class TpSaveImage extends TpBase {
 				.replace(/[^a-z0-9._-]+/gi, "-")
 				.replace(/^-+|-+$/g, "") || "image"
 		);
+	}
+
+	/** Opens or closes the export format menu, respecting the disabled state. */
+	toggleMenu(): void {
+		this.handleTriggerClick();
 	}
 }
 

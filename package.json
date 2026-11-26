@@ -7,6 +7,10 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "exports": {
+    "./components/prolog/prolog.js": {
+      "types": "./dist/components/prolog/prolog.d.ts",
+      "import": "./dist/components/prolog/prolog.js"
+    },
     "./vite-ai": "./server/question-ai.mjs",
     ".": {
       "types": "./dist/index.d.ts",
@@ -36,6 +40,130 @@
     "./components/latex-playground/latex-playground.js": {
       "types": "./dist/components/latex-playground/latex-playground.d.ts",
       "import": "./dist/components/latex-playground/latex-playground.js"
+    },
+    "./components/theorem/theorem.js": {
+      "types": "./dist/components/theorem/theorem.d.ts",
+      "import": "./dist/components/theorem/theorem.js"
+    },
+    "./components/diff-code-editor/diff-code-editor.js": {
+      "types": "./dist/components/diff-code-editor/diff-code-editor.d.ts",
+      "import": "./dist/components/diff-code-editor/diff-code-editor.js"
+    },
+    "./components/global-listof/global-listof.js": {
+      "types": "./dist/components/global-listof/global-listof.d.ts",
+      "import": "./dist/components/global-listof/global-listof.js"
+    },
+    "./components/equanum/equanum.js": {
+      "types": "./dist/components/equanum/equanum.d.ts",
+      "import": "./dist/components/equanum/equanum.js"
+    },
+    "./components/javascript/javascript.js": {
+      "types": "./dist/components/javascript/javascript.d.ts",
+      "import": "./dist/components/javascript/javascript.js"
+    },
+    "./components/typescript/typescript.js": {
+      "types": "./dist/components/typescript/typescript.d.ts",
+      "import": "./dist/components/typescript/typescript.js"
+    },
+    "./components/python/python.js": {
+      "types": "./dist/components/python/python.d.ts",
+      "import": "./dist/components/python/python.js"
+    },
+    "./components/scheme/scheme.js": {
+      "types": "./dist/components/scheme/scheme.d.ts",
+      "import": "./dist/components/scheme/scheme.js"
+    },
+    "./components/scheme-playground/scheme-playground.js": {
+      "types": "./dist/components/scheme-playground/scheme-playground.d.ts",
+      "import": "./dist/components/scheme-playground/scheme-playground.js"
+    },
+    "./components/scheme-viewer/scheme-viewer.js": {
+      "types": "./dist/components/scheme-viewer/scheme-viewer.d.ts",
+      "import": "./dist/components/scheme-viewer/scheme-viewer.js"
+    },
+    "./components/scheme-notebook/scheme-notebook.js": {
+      "types": "./dist/components/scheme-notebook/scheme-notebook.d.ts",
+      "import": "./dist/components/scheme-notebook/scheme-notebook.js"
+    },
+    "./components/scheme-playground-question/scheme-playground-question.js": {
+      "types": "./dist/components/scheme-playground-question/scheme-playground-question.d.ts",
+      "import": "./dist/components/scheme-playground-question/scheme-playground-question.js"
+    },
+    "./components/scheme-viewer-question/scheme-viewer-question.js": {
+      "types": "./dist/components/scheme-viewer-question/scheme-viewer-question.d.ts",
+      "import": "./dist/components/scheme-viewer-question/scheme-viewer-question.js"
+    },
+    "./components/ocaml/ocaml.js": {
+      "types": "./dist/components/ocaml/ocaml.d.ts",
+      "import": "./dist/components/ocaml/ocaml.js"
+    },
+    "./components/ocaml-playground/ocaml-playground.js": {
+      "types": "./dist/components/ocaml-playground/ocaml-playground.d.ts",
+      "import": "./dist/components/ocaml-playground/ocaml-playground.js"
+    },
+    "./components/ocaml-viewer/ocaml-viewer.js": {
+      "types": "./dist/components/ocaml-viewer/ocaml-viewer.d.ts",
+      "import": "./dist/components/ocaml-viewer/ocaml-viewer.js"
+    },
+    "./components/ocaml-notebook/ocaml-notebook.js": {
+      "types": "./dist/components/ocaml-notebook/ocaml-notebook.d.ts",
+      "import": "./dist/components/ocaml-notebook/ocaml-notebook.js"
+    },
+    "./components/ocaml-playground-question/ocaml-playground-question.js": {
+      "types": "./dist/components/ocaml-playground-question/ocaml-playground-question.d.ts",
+      "import": "./dist/components/ocaml-playground-question/ocaml-playground-question.js"
+    },
+    "./components/ocaml-viewer-question/ocaml-viewer-question.js": {
+      "types": "./dist/components/ocaml-viewer-question/ocaml-viewer-question.d.ts",
+      "import": "./dist/components/ocaml-viewer-question/ocaml-viewer-question.js"
+    },
+    "./components/javascript-interpreter-question/javascript-interpreter-question.js": {
+      "types": "./dist/components/javascript-interpreter-question/javascript-interpreter-question.d.ts",
+      "import": "./dist/components/javascript-interpreter-question/javascript-interpreter-question.js"
+    },
+    "./components/ocaml-interpreter-question/ocaml-interpreter-question.js": {
+      "types": "./dist/components/ocaml-interpreter-question/ocaml-interpreter-question.d.ts",
+      "import": "./dist/components/ocaml-interpreter-question/ocaml-interpreter-question.js"
+    },
+    "./components/prolog-interpreter-question/prolog-interpreter-question.js": {
+      "types": "./dist/components/prolog-interpreter-question/prolog-interpreter-question.d.ts",
+      "import": "./dist/components/prolog-interpreter-question/prolog-interpreter-question.js"
+    },
+    "./components/python-interpreter-question/python-interpreter-question.js": {
+      "types": "./dist/components/python-interpreter-question/python-interpreter-question.d.ts",
+      "import": "./dist/components/python-interpreter-question/python-interpreter-question.js"
+    },
+    "./components/scheme-interpreter-question/scheme-interpreter-question.js": {
+      "types": "./dist/components/scheme-interpreter-question/scheme-interpreter-question.d.ts",
+      "import": "./dist/components/scheme-interpreter-question/scheme-interpreter-question.js"
+    },
+    "./components/typescript-interpreter-question/typescript-interpreter-question.js": {
+      "types": "./dist/components/typescript-interpreter-question/typescript-interpreter-question.d.ts",
+      "import": "./dist/components/typescript-interpreter-question/typescript-interpreter-question.js"
+    },
+    "./components/python-tracer/python-tracer.js": {
+      "types": "./dist/components/python-tracer/python-tracer.d.ts",
+      "import": "./dist/components/python-tracer/python-tracer.js"
+    },
+    "./components/scheme-tracer/scheme-tracer.js": {
+      "types": "./dist/components/scheme-tracer/scheme-tracer.d.ts",
+      "import": "./dist/components/scheme-tracer/scheme-tracer.js"
+    },
+    "./components/typescript-tracer/typescript-tracer.js": {
+      "types": "./dist/components/typescript-tracer/typescript-tracer.d.ts",
+      "import": "./dist/components/typescript-tracer/typescript-tracer.js"
+    },
+    "./components/javascript-tracer/javascript-tracer.js": {
+      "types": "./dist/components/javascript-tracer/javascript-tracer.d.ts",
+      "import": "./dist/components/javascript-tracer/javascript-tracer.js"
+    },
+    "./components/ocaml-tracer/ocaml-tracer.js": {
+      "types": "./dist/components/ocaml-tracer/ocaml-tracer.d.ts",
+      "import": "./dist/components/ocaml-tracer/ocaml-tracer.js"
+    },
+    "./components/prolog-tracer/prolog-tracer.js": {
+      "types": "./dist/components/prolog-tracer/prolog-tracer.d.ts",
+      "import": "./dist/components/prolog-tracer/prolog-tracer.js"
     }
   },
   "files": [
@@ -64,13 +192,16 @@
     "api:check": "pnpm api:check-all && node scripts/check-component-api.mjs && node scripts/sync-component-dependencies.mjs --check && node scripts/sync-component-api-docs.mjs --check && node scripts/sync-component-accessibility-docs.mjs --check && node scripts/generate-accessibility-report.mjs --check",
     "api:sync-docs": "node scripts/sync-component-dependencies.mjs && node scripts/sync-component-api-docs.mjs && node scripts/sync-component-accessibility-docs.mjs && node scripts/generate-accessibility-report.mjs",
     "api:sync-examples": "node scripts/sync-component-tsdoc-examples.mjs",
-    "docs:sync-intro-examples": "node scripts/sync-component-doc-introductions.mjs && pnpm examples:sync-javascript && pnpm api:sync-examples",
-    "docs:api": "typedoc && node scripts/sync-typedoc-links.mjs",
+    "docs:sync-intro-examples": "node scripts/sync-component-doc-introductions.mjs && pnpm examples:sync-javascript && pnpm examples:sync-basic && pnpm api:sync-examples",
+    "docs:sync-cover": "node scripts/sync-cover-badges.mjs",
+    "docs:check-cover": "node scripts/sync-cover-badges.mjs --check",
+    "docs:api": "typedoc && node scripts/sync-typedoc-links.mjs && pnpm docs:check-api-examples && pnpm examples:check-basic && pnpm examples:check-javascript",
     "docs:check-user-interactions": "node --test scripts/component-user-interactions.test.mjs",
-    "dev": "pnpm docs:api && pnpm examples:manifest && vite dev --force",
-    "build": "pnpm viewer:sync-controls && pnpm docs:api && tsc --noEmit && vite build && pnpm build:types && pnpm build:renderers",
+    "dev": "pnpm docs:sync-sidebar && pnpm docs:api && pnpm examples:manifest && pnpm docs:sync-cover && vite dev --force",
+    "build": "pnpm docs:sync-sidebar && pnpm viewer:sync-controls && pnpm docs:api && tsc --noEmit && pnpm docs:sync-cover && vite build && pnpm build:types && pnpm build:renderers",
     "preview": "vite preview",
     "test": "vitest run",
+    "test:browser:icon-buttons": "node scripts/check-icon-button-geometry-browser.mjs",
     "test:coverage": "vitest run --coverage.enabled --coverage.provider=v8 --coverage.reporter=json-summary --coverage.include='src/components/**/*.ts' --coverage.exclude='src/**/*.test.ts' --coverage.reportsDirectory=config/global-quality-coverage",
     "test:scripts": "node --test scripts/*.test.mjs",
     "test:playgrounds": "playwright test --config playwright.playgrounds.config.ts",
@@ -79,7 +210,7 @@
     "test:coverage:component": "node scripts/test-coverage-component.mjs",
     "test:a11y": "playwright test --config playwright.a11y.config.ts",
     "test:a11y:component": "node scripts/test-a11y-component.mjs",
-    "test:a11y:colors": "playwright test --config playwright.a11y.config.ts tests/accessibility/color-contract.a11y.test.ts",
+    "test:a11y:colors": "playwright test --config playwright.a11y.config.ts tests/accessibility/color-contract.a11y.test.ts tests/accessibility/interaction-colors.a11y.test.ts",
     "test:lighthouse": "node scripts/run-lighthouse-ci.mjs",
     "lighthouse:report": "node scripts/generate-lighthouse-report.mjs",
     "lighthouse": "pnpm test:lighthouse && pnpm lighthouse:report",
@@ -181,14 +312,21 @@
     "release:check": "node scripts/check-release.mjs",
     "prepack": "pnpm release:check",
     "build:renderers": "node scripts/build-markdown-renderer.mjs",
-    "api:check-methods": "node scripts/check-component-methods.mjs",
+    "api:check-methods": "node scripts/check-component-methods.mjs && node scripts/check-component-command-actions.mjs && node scripts/check-playground-actions.mjs",
     "api:check-css": "node scripts/check-component-css.mjs",
     "api:check-events": "node scripts/check-component-events.mjs",
     "api:check-all": "pnpm api:check-attributes && pnpm api:check-methods && pnpm api:check-css && pnpm api:check-events",
     "viewer:sync-controls": "node scripts/sync-component-viewer-controls.mjs",
     "viewer:check-controls": "node scripts/sync-component-viewer-controls.mjs --check",
     "docs:sync-layout": "node scripts/sync-component-doc-layout.mjs",
-    "docs:check-layout": "node scripts/sync-component-doc-layout.mjs --check"
+    "docs:check-layout": "node scripts/sync-component-doc-layout.mjs --check",
+    "docs:check-button-icons": "node scripts/audit-component-button-icons.mjs",
+    "docs:check-api-examples": "node scripts/sync-component-tsdoc-examples.mjs --check && node scripts/check-typedoc-examples.mjs",
+    "examples:check-basic": "node scripts/sync-basic-usage.mjs",
+    "examples:sync-basic": "node scripts/sync-basic-usage.mjs --write",
+    "examples:check-javascript-browser": "node scripts/check-javascript-reconstruction-browser.mjs",
+    "docs:sync-sidebar": "node scripts/sync-components-sidebar.mjs",
+    "docs:check-sidebar": "node scripts/sync-components-sidebar.mjs --check"
   },
   "keywords": [],
   "author": "",
@@ -206,6 +344,7 @@
     "@codemirror/language": "^6.12.4",
     "@codemirror/language-data": "^6.5.2",
     "@codemirror/legacy-modes": "^6.5.3",
+    "@codemirror/merge": "^6.12.3",
     "@codemirror/search": "^6.7.1",
     "@codemirror/state": "^6.7.1",
     "@codemirror/view": "^6.43.7",
@@ -213,6 +352,7 @@
     "@formulajs/formulajs": "^4.6.1",
     "@lezer/highlight": "^1.2.3",
     "@tp/tp-asciidoc": "workspace:*",
+    "@tp/tp-latex": "workspace:*",
     "@tp/tp-markdown": "workspace:*",
     "@tp/tp-restructuredtext": "workspace:*",
     "@tp/tp-utilities": "workspace:*",
@@ -253,8 +393,7 @@
     "sql.js": "^1.14.1",
     "typescript": "^6.0.3",
     "xlsx": "^0.18.5",
-    "zod": "^4.4.3",
-    "@tp/tp-latex": "workspace:*"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

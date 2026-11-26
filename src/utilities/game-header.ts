@@ -67,6 +67,15 @@ export function gameActivity(
 export function resetGameClock(host: HTMLElement): void {
 	headers.get(host)?.clock.stop();
 }
+/** Opens or closes the game's assistance menu. */
+export function toggleGameHelp(host: HTMLElement): void {
+	headers.get(host)?.menu.toggle();
+}
+/** Opens the game's rules drawer. */
+export function showGameRules(host: HTMLElement): void {
+	headers.get(host)?.showRules();
+}
+
 class GameHeader {
 	readonly root = document.createElement("div");
 	readonly actions = document.createElement("div");
@@ -240,7 +249,7 @@ class GameHeader {
 		list.append(separator, rules);
 		this.menu.replaceChildren(list);
 	}
-	private showRules(): void {
+	showRules(): void {
 		if (!this.options) return;
 		if (!this.rulesDrawer) {
 			this.rulesDrawer = document.createElement("tp-drawer") as TpDrawer;

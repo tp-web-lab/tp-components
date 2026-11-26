@@ -1,4 +1,4 @@
-<tp-html-viewer label="tp-python-viewer" allow-script>
+<tp-html-viewer label="tp-python-viewer" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
       <tp-python-viewer src="/docs/components/_shared/intro-projects/python.json"></tp-python-viewer>
@@ -6,6 +6,7 @@
 
     <div role="example" label="Javascript API">
       <script type="module">
+      import "/components/python/python.js";
       import "/components/python-viewer/python-viewer.js";
 
       const example = document.createDocumentFragment();
@@ -45,6 +46,51 @@
 
     <div role="example" label="Single source file">
       <tp-python-viewer src="/docs/components/_shared/single-source/example.py"></tp-python-viewer>
+    </div>
+
+    <div role="example" label="Compare presentation modes">
+      <section>
+      <h3>mode="default" — Standard controls</h3>
+      <p>Open Code to edit the source, then click Run or press <kbd>Shift</kbd>+<kbd>Enter</kbd> in the editor.</p>
+      <p>Run to print a console message followed by an intentional error. In simple mode the console opens automatically. Comment out the message statements and run again to check that the error alone opens it; remove the error statement to try a successful run.</p>
+      <tp-python-viewer mode="default">
+        <script type="tp/python" filename="main.py">
+      from js import document
+      document.body.innerHTML = "<p>The program ran.</p>"
+      print("Console message before the intentional error.")
+      raise RuntimeError("Intentional error: the simple-mode console opens automatically.")
+        </script>
+      </tp-python-viewer>
+      </section>
+
+      <section>
+      <h3>mode="lite" — Compact controls</h3>
+      <p>Open Code to edit the source, then click Run or press <kbd>Shift</kbd>+<kbd>Enter</kbd> in the editor.</p>
+      <p>Run to print a console message followed by an intentional error. In simple mode the console opens automatically. Comment out the message statements and run again to check that the error alone opens it; remove the error statement to try a successful run.</p>
+      <tp-python-viewer mode="lite">
+        <script type="tp/python" filename="main.py">
+      from js import document
+      document.body.innerHTML = "<p>The program ran.</p>"
+      print("Console message before the intentional error.")
+      raise RuntimeError("Intentional error: the simple-mode console opens automatically.")
+        </script>
+      </tp-python-viewer>
+      </section>
+
+      <section>
+      <h3>mode="simple" — Editor and rendered output only</h3>
+      <p>Edit the code below, keep the cursor in the editor and press <kbd>Shift</kbd>+<kbd>Enter</kbd> (Return) to run it. This viewer has no Run button.</p>
+      <p>Run to print a console message followed by an intentional error. In simple mode the console opens automatically. Comment out the message statements and run again to check that the error alone opens it; remove the error statement to try a successful run.</p>
+      <tp-python-viewer mode="simple">
+        <script type="tp/python" filename="main.py">
+      from js import document
+      document.body.innerHTML = "<p>The program ran.</p>"
+      print("Console message before the intentional error.")
+      raise RuntimeError("Intentional error: the simple-mode console opens automatically.")
+        </script>
+      </tp-python-viewer>
+      </section>
+      <p>Programming viewers already have compact controls, so default and lite look alike. The first run may load the language engine.</p>
     </div>
   </template>
 </tp-html-viewer>

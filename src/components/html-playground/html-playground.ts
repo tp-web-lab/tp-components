@@ -33,6 +33,10 @@
  * @summary In-memory file system component.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -187,6 +191,7 @@ function rewriteHtmlAssetUrls(
  * @attr {string} repository = "" - Directory containing an HTML playground project to load at initialization.
  * @attr {string} src = "" - JSON project or html source file to load.
  *
+ * @keyboard {Shift+Enter} Run the current project.
  * @example
  * <tp-html-playground src="/docs/components/_shared/intro-projects/html.json"></tp-html-playground>
  */
@@ -273,6 +278,29 @@ export class TpHtmlPlayground extends TpPlayground<TpHtmlProject> {
         </ul>
       </li>
     `;
+	}
+
+	/** Replaces the import map while retaining current file edits and reruns the project. */
+	public async setImportmap(
+		importmap: Record<string, unknown> | undefined,
+	): Promise<void> {
+		this.syncProjectFromFilesystem();
+		const project = this.getProject();
+		this.setProject(new TpHtmlProject({ ...project.toJSON(), importmap }));
+		await this.run();
+	}
+	protected override handleAdditionalToolbarAction(action: string): boolean {
+		if (action === "html-importmap-lit") {
+			void this.setImportmap({
+				imports: { lit: "https://cdn.jsdelivr.net/npm/lit@3/+esm" },
+			});
+			return true;
+		}
+		if (action === "html-importmap-none") {
+			void this.setImportmap(undefined);
+			return true;
+		}
+		return false;
 	}
 
 	protected override createEmptyProject(): TpHtmlProject {

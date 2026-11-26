@@ -17,10 +17,13 @@
                :langs: en,fr
                :repository: /docs/components/lang/examples
 
-            .. h2::
+            .. heading-level:: 2
+
+            .. attributes::
                :data-demo-translation:
 
-               Welcome to this example.
+            Welcome to this example.
+            ========================
 
             .. script::
                :src: /docs/components/_shared/introduction-actions.js

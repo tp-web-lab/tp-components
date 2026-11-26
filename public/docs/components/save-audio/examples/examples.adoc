@@ -6,12 +6,7 @@
 ======
 Listen to the sound of breaking glass, then save the MP3 file.
 
-[audio%controls,id="save-audio-example",preload="metadata",aria-label="Sound of breaking glass"]
-=====
-[source,src="/docs/medias/audios/glass-break.mp3",type="audio/mpeg"]
-====
-====
-=====
+audio::tp-media-sources[tp-media=true,id="save-audio-example",controls="true",preload="metadata",aria-label="Sound of breaking glass",autoplay="false",loop="false",muted="false",sources='[{"src":"/docs/medias/audios/glass-break.mp3","type":"audio/mpeg"}]']
 
 [tp-save-audio,anchor="#save-audio-example",filename="glass-break"]
 ====

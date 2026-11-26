@@ -37,7 +37,7 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 <!--
 @tp-dependency tp-calculator
-@summary Scientific calculator with an editable expression and degree/radian modes.
+@summary Provides a scientific calculator with an editable expression and degree/radian modes.
 -->
 <!--
 @tp-dependency tp-clock
@@ -60,6 +60,10 @@ All tp-components and external tools used by this component are loaded automatic
 @summary Fullscreen controller button.
 -->
 <!--
+@tp-dependency tp-global-listof
+@summary Lists labelled elements across the pages of a multi-page document, with links to their pages and anchors.
+-->
+<!--
 @tp-dependency tp-icon
 @summary SVG icon component with inline, URL, and registry sources.
 -->
@@ -73,7 +77,7 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 <!--
 @tp-dependency tp-post-it-editor
-@summary creates and edits persistent personal annotations attached to document elements.
+@summary Creates and edits persistent personal annotations attached to document elements.
 -->
 <!--
 @tp-dependency tp-screen
@@ -106,16 +110,17 @@ All tp-components and external tools used by this component are loaded automatic
 
 - [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 - [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-calculator>`](#/components/calculator/index.md) : Scientific calculator with an editable expression and degree/radian modes.
+- [`<tp-calculator>`](#/components/calculator/index.md) : Provides a scientific calculator with an editable expression and degree/radian modes.
 - [`<tp-clock>`](#/components/clock/index.md) : Live clock component with digital or analogic display and date tooltip.
 - [`<tp-color>`](#/components/color/index.md) : Brand color preset controller scoped to the containing element.
 - [`<tp-divider>`](#/components/divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
 - [`<tp-drawer>`](#/components/drawer/index.md) : Drawer overlay component.
 - [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
+- [`<tp-global-listof>`](#/components/global-listof/index.md) : Lists labelled elements across the pages of a multi-page document, with links to their pages and anchors.
 - [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
 - [`<tp-lang>`](#/components/lang/index.md) : Documentation language selector.
-- [`<tp-post-it-editor>`](#/components/post-it-editor/index.md) : creates and edits persistent personal annotations attached to document elements.
+- [`<tp-post-it-editor>`](#/components/post-it-editor/index.md) : Creates and edits persistent personal annotations attached to document elements.
 - [`<tp-screen>`](#/components/screen/index.md) : Responsive page preview in selectable device viewports.
 - [`<tp-source>`](#/components/source/index.md) : Source repository link button.
 - [`<tp-splitter>`](#/components/splitter/index.md) : Splitter component with two resizable panels.

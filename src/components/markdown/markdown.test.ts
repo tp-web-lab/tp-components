@@ -93,27 +93,47 @@ describe("<tp-markdown>", () => {
 		expect(element.hasAttribute("src")).toBe(false);
 	});
 
-	it("maps includes by format, raw mode and failures", async () => {
+	it("converts markup includes and retains raw and SVG inclusion modes", async () => {
 		vi.stubGlobal(
 			"fetch",
 			vi.fn(
 				async (url: string | URL | Request) =>
-					new Response(String(url).endsWith(".txt") ? "<raw>" : "", {
-						status: String(url).includes("missing") ? 404 : 200,
-					}),
+					new Response(
+						String(url).endsWith(".txt")
+							? "<raw>"
+							: String(url).endsWith(".adoc")
+								? "*Converted*"
+								: String(url).endsWith(".html")
+									? "<p><em>HTML</em></p>"
+									: '<svg xmlns="http://www.w3.org/2000/svg"></svg>',
+					),
 			),
 		);
 		const element = document.createElement("tp-markdown");
-		element.innerHTML = `<script type="tp/markdown">::include{page.adoc}\n::include{page.rst}\n::include{page.html}\n::include{icon.svg}\n::include{file.txt mode=raw}\n::include{missing.md}</script>`;
+		element.innerHTML = `<script type="tp/markdown">::include{page.adoc}\n::include{page.html}\n::include{icon.svg}\n::include{file.txt mode=raw}</script>`;
 		document.body.append(element);
 		await vi.waitFor(() =>
 			expect(element.hasAttribute("data-tp-markdown-rendered")).toBe(true),
 		);
-		expect(element.querySelector("tp-asciidoc")).not.toBeNull();
-		expect(element.querySelector("tp-restructuredtext")).not.toBeNull();
-		expect(element.querySelector("tp-include")).not.toBeNull();
+		expect(element.querySelector("strong")?.textContent).toBe("Converted");
+		expect(element.querySelector("em")?.textContent).toBe("HTML");
+		expect(element.querySelector("svg")).not.toBeNull();
 		expect(element.querySelector("raw")).not.toBeNull();
-		expect(element.textContent).toContain("Unable to include");
+	});
+	it("reports failed converted includes", async () => {
+		vi.stubGlobal(
+			"fetch",
+			vi.fn(async () => new Response("", { status: 404 })),
+		);
+		const element = document.createElement("tp-markdown");
+		element.innerHTML =
+			'<script type="tp/markdown">::include{missing.md}</script>';
+		document.body.append(element);
+		await vi.waitFor(() =>
+			expect(element.querySelector('[role="alert"]')?.textContent).toContain(
+				"404",
+			),
+		);
 	});
 
 	it("preserves several raw blocks and applies include prefixes", async () => {

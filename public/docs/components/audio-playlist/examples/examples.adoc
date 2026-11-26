@@ -7,7 +7,6 @@
 [tp-audio-playlist]
 ====
 . link:/docs/components/audio-playlist/examples/track-1.wav[Morning melody]
-
 . link:/docs/components/audio-playlist/examples/track-2.wav[Evening melody]
 ====
 ======

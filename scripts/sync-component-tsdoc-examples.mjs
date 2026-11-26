@@ -88,17 +88,16 @@ for (const directory of readdirSync(componentsRoot)) {
         const text = ` * @example
 ${lines}
 `;
-        if (introductoryExamples.length) {
-          for (const [index, example] of introductoryExamples.entries()) {
-            const nextTag = tags.find(item => item.getStart(sourceFile) > example.getStart(sourceFile));
-            const start = source.lastIndexOf('\n', example.getStart(sourceFile)) + 1;
-            const end = source.lastIndexOf('\n', nextTag ? nextTag.getStart(sourceFile) : jsDoc.end - 2) + 1;
-            changes.push({ start, end, text: index === 0 ? text : '' });
-          }
-        } else {
-          const start = source.lastIndexOf('\n', jsDoc.end - 2) + 1;
-          changes.push({ start, end: start, text });
+        // Keep the example last: TypeDoc can absorb a following @event into
+        // an un-fenced HTML example even though TypeScript parses it as a tag.
+        for (const example of introductoryExamples) {
+          const nextTag = tags.find(item => item.getStart(sourceFile) > example.getStart(sourceFile));
+          const start = source.lastIndexOf('\n', example.getStart(sourceFile)) + 1;
+          const end = source.lastIndexOf('\n', nextTag ? nextTag.getStart(sourceFile) : jsDoc.end - 2) + 1;
+          changes.push({ start, end, text: '' });
         }
+        const start = source.lastIndexOf('\n', jsDoc.end - 2) + 1;
+        changes.push({ start, end: start, text });
       }
     }
     ts.forEachChild(node, visit);

@@ -5,7 +5,7 @@
     {
       "path": "/index.html",
       "language": "html",
-      "content": "<h2>Python result</h2><p id=\"result\">Starting Python…</p>"
+      "content": "<p id=\"result\">Starting Python…</p>"
     },
     {
       "path": "/main.py",

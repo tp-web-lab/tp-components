@@ -13,9 +13,8 @@ Open the menu
 
 [tp-dropdown%outside-click,anchor="#intro-dropdown-trigger"]
 ====
-* /#/components/button/index.md[Buttons]
-
-* /#/components/tree/index.md[Trees]
+* link:/#/components/button/index.md[Buttons]
+* link:/#/components/tree/index.md[Trees]
 ====
 
 [p%data-demo-status,role="status"]

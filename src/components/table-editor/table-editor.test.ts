@@ -9,6 +9,7 @@ import {
 	type TableData,
 	tableFormats,
 } from "./table-markup.js";
+import { parseTableSource } from "./table-source.js";
 
 function editor(): TpTableEditor {
 	const element = new TpTableEditor();
@@ -28,6 +29,133 @@ afterEach(() => {
 	vi.unstubAllGlobals();
 });
 describe("tp-table-editor", () => {
+	it("imports vertical alignment from initial cells and restores it on reset", () => {
+		const element = new TpTableEditor();
+		element.innerHTML =
+			'<table><tr><th>Duration</th><th>Date</th></tr><tr><td data-type="number" style="vertical-align:middle">20</td><td data-type="date" style="vertical-align:middle">2026-11-14</td></tr></table>';
+		document.body.append(element);
+		expect(element.getData().cellVerticalAlignments?.[1]).toEqual([
+			"middle",
+			"middle",
+		]);
+		for (const cell of element.querySelectorAll<HTMLElement>(
+			'[data-grid-row="1"]',
+		))
+			expect(cell.style.verticalAlign).toBe("middle");
+		expect(element.getMarkup("markdown")).toContain("[=] 20");
+		expect(element.getMarkup("html")).toContain("vertical-align:middle");
+		element.setData([["Replacement"]]);
+		element.reset();
+		expect(element.getData().cellVerticalAlignments?.[1]).toEqual([
+			"middle",
+			"middle",
+		]);
+	});
+
+	it("imports consecutive HTML breaks as an empty middle line", () => {
+		const element = new TpTableEditor();
+		element.innerHTML =
+			"<table><tr><td>Practice<br><br>Guided exercises</td></tr></table>";
+		document.body.append(element);
+		expect(element.getData().cells[0]?.[0]).toBe(
+			"Practice\n\nGuided exercises",
+		);
+	});
+
+	it("aligns single-line fields vertically and preserves alignment through structural edits", () => {
+		const element = editor();
+		element.setCellType(1, 1, "number");
+		const menu = required(element.querySelector('[data-menu="vertical"]'));
+		const item = required(menu.querySelector('[data-choice="bottom"]'));
+		menu.dispatchEvent(
+			new CustomEvent("tp-menu-item-select", { detail: { item } }),
+		);
+		expect(element.getData().cellVerticalAlignments?.[1]?.[1]).toBe("bottom");
+		expect(
+			element.querySelector<HTMLElement>(
+				'[data-grid-row="1"][data-grid-column="1"]',
+			)?.style.verticalAlign,
+		).toBe("bottom");
+		element.undo();
+		expect(element.getData().cellVerticalAlignments?.[1]?.[1]).toBeUndefined();
+		element.redo();
+		element.addRow("before");
+		expect(element.getData().cellVerticalAlignments?.[2]?.[1]).toBe("bottom");
+		element.undo();
+		element.addColumn("before");
+		expect(element.getData().cellVerticalAlignments?.[1]?.[2]).toBe("bottom");
+	});
+	it("offers top, middle and bottom in the cell context menu", () => {
+		const element = editor();
+		element.setCellType(1, 1, "time");
+		const menu = required(element.querySelector("tp-contextmenu"));
+		menu.dispatchEvent(
+			new CustomEvent("tp-contextmenu-select", {
+				detail: { action: "vertical-middle" },
+			}),
+		);
+		expect(element.getData().cellVerticalAlignments?.[1]?.[1]).toBe("middle");
+		expect(
+			element.querySelector('[data-trigger="vertical"]')?.getAttribute("name"),
+		).toBe("format-align-middle");
+		element.setCellType(1, 1, "text");
+		expect(
+			element
+				.querySelector('[data-trigger="vertical"]')
+				?.hasAttribute("disabled"),
+		).toBe(false);
+	});
+
+	it("uses multiline math fields and preserves their source through a merge", () => {
+		const element = editor();
+		element.setCellType(1, 0, "math");
+		const field = required(
+			element.querySelector<HTMLTextAreaElement>(
+				'[data-row="1"][data-column="0"] textarea',
+			),
+		);
+		expect(field.rows).toBe(1);
+		field.value = "x + y\n+ z";
+		field.dispatchEvent(new Event("input", { bubbles: true }));
+		element.mergeCells(1, 0, 1, 1);
+		expect(element.getData().cells[1]?.[0]).toBe("x + y\n+ z");
+		expect(
+			element
+				.querySelector('tp-mathfield[data-row="1"]')
+				?.hasAttribute("multiline"),
+		).toBe(true);
+	});
+	it("exports multiline literal text without breaking table syntax", () => {
+		const element = editor();
+		element.setData([["Heading"], ["First\n<second>"]]);
+		expect(element.getMarkup("html")).toContain("First<br>&lt;second&gt;");
+		expect(element.getMarkup("markdown")).toContain("First<br>&lt;second&gt;");
+		expect(element.getMarkup("restructuredtext")).toContain("| First");
+		expect(element.getData().cells[1]?.[0]).toBe("First\n<second>");
+	});
+
+	it("preserves multiline text through editing, merging and splitting", () => {
+		const element = editor();
+		const field = required(
+			element.querySelector<HTMLTextAreaElement>(
+				'[data-row="1"][data-column="0"] textarea',
+			),
+		);
+		expect(field.rows).toBe(1);
+		field.value = "First line\nSecond line";
+		field.dispatchEvent(new Event("input", { bubbles: true }));
+		expect(element.getData().cells[1]?.[0]).toBe(field.value);
+		expect(element.mergeCells(1, 0, 1, 1)).toBe(true);
+		expect(
+			element
+				.querySelector('[data-row="1"][data-column="0"]')
+				?.hasAttribute("multiline"),
+		).toBe(true);
+		element.splitCell(1, 0);
+		expect(element.getData().cells[1]?.[0]).toBe(field.value);
+		expect(element.getData().cells[1]?.[1]).toBe("B2");
+	});
+
 	it("opens the size picker in its own dropdown and closes it with the parent menu", () => {
 		const element = editor();
 		element.deleteTable();
@@ -301,7 +429,7 @@ describe("tp-table-editor", () => {
 		element.addEventListener("tp-table-editor-change", events);
 		const input = required(
 			element.querySelector<HTMLInputElement>(
-				'[data-row="1"][data-column="0"] input',
+				'[data-row="1"][data-column="0"] :is(input,textarea)',
 			),
 		);
 		input.focus();
@@ -311,9 +439,11 @@ describe("tp-table-editor", () => {
 			["Session", "Room"],
 			["Review", "B2"],
 		]);
-		expect(element.querySelector('[data-row="1"][data-column="0"] input')).toBe(
-			input,
-		);
+		expect(
+			element.querySelector(
+				'[data-row="1"][data-column="0"] :is(input,textarea)',
+			),
+		).toBe(input);
 		expect(events).toHaveBeenCalledOnce();
 		expect(element.getMarkup()).toContain("Review");
 		element.undo();
@@ -325,7 +455,7 @@ describe("tp-table-editor", () => {
 		const element = editor();
 		required(
 			element.querySelector<HTMLInputElement>(
-				'[data-row="1"][data-column="1"] input',
+				'[data-row="1"][data-column="1"] :is(input,textarea)',
 			),
 		).focus();
 		element.addColumn();
@@ -392,8 +522,11 @@ describe("tp-table-editor", () => {
 				?.hasAttribute("disabled"),
 		).toBe(true);
 		expect(
-			required(element.querySelector<HTMLInputElement>('[data-row="0"] input'))
-				.readOnly,
+			required(
+				element.querySelector<HTMLInputElement>(
+					'[data-row="0"] :is(input,textarea)',
+				),
+			).readOnly,
 		).toBe(true);
 		element.querySelector<HTMLElement>('[data-trigger="structure"]')?.click();
 		expect(element.rows).toBe(2);
@@ -402,8 +535,11 @@ describe("tp-table-editor", () => {
 		).toBe(false);
 		element.readonly = false;
 		expect(
-			required(element.querySelector<HTMLInputElement>('[data-row="0"] input'))
-				.readOnly,
+			required(
+				element.querySelector<HTMLInputElement>(
+					'[data-row="0"] :is(input,textarea)',
+				),
+			).readOnly,
 		).toBe(false);
 	});
 	it("selects formats and column alignment through the visible controls", () => {
@@ -458,7 +594,7 @@ describe("RST serialization", () => {
 				{ cells: [["Title"]], header: true, caption: "", alignments: ["left"] },
 				"restructuredtext",
 			),
-		).toBe(".. list-table::\n   :header-rows: 1\n\n   * - Title\n   * -");
+		).toBe(".. list-table::\n   :header-rows: 1\n\n   * - Title\n\n   * -\n");
 	});
 });
 
@@ -494,11 +630,22 @@ describe("table markup exports", () => {
 		expect(tex).toContain("\\% ");
 		expect(tex).toContain("\\{z\\}");
 	});
-	it("does not discard the first data row in a headerless table", () => {
+	it("does not discard the first data row in a headerless table", async () => {
 		const plain = { ...data, header: false };
 		expect(serializeTable(plain, "markdown")).toContain(
-			"|  |  |\n| :--- | ---: |\n| Name | Value |",
+			"| :--- | ---: |\n| Name | Value |",
 		);
+		const table = await parseTableSource(
+			serializeTable(plain, "markdown"),
+			new URL("https://example.test/table.md"),
+			new AbortController().signal,
+		);
+		expect(table.querySelectorAll("th")).toHaveLength(0);
+		expect(
+			Array.from(table.rows, (row) =>
+				Array.from(row.cells, (cell) => cell.textContent),
+			),
+		).toEqual(data.cells);
 		expect(serializeTable(plain, "html")).not.toContain("<th");
 		expect(serializeTable(plain, "latex")).toContain("Name & Value");
 	});
@@ -561,7 +708,7 @@ describe("spreadsheet and image exports", () => {
 			}
 		},
 	);
-	it("builds an escaped SVG with a centered caption and exposes it to tp-save-image", () => {
+	it("builds an escaped SVG with a caption and exposes it to tp-save-image", async () => {
 		const element = editor();
 		element.setData([["<script>&", "0012"]]);
 		element.caption = "A & B";
@@ -570,16 +717,17 @@ describe("spreadsheet and image exports", () => {
 			measureText: (text: string) => ({ width: text.length * 8 }),
 		} as CanvasRenderingContext2D);
 		const svg = new DOMParser().parseFromString(
-			element.exportSvg(),
+			await element.exportSvg(),
 			"image/svg+xml",
 		);
 		expect(svg.querySelector("parsererror,script")).toBeNull();
 		expect(
-			Array.from(svg.querySelectorAll("text"), (node) => node.textContent),
-		).toEqual(["<script>&", "0012", "A & B"]);
-		expect(
-			svg.querySelector("text:last-child")?.getAttribute("text-anchor"),
-		).toBe("middle");
+			Array.from(
+				svg.querySelectorAll("th,td,caption"),
+				(node) => node.textContent,
+			),
+		).toEqual(["A & B", "<script>&", "0012"]);
+		expect(svg.querySelector("caption")?.textContent).toBe("A & B");
 		const save = required(element.querySelector("tp-save-image"));
 		expect(document.querySelector(required(save.getAttribute("anchor")))).toBe(
 			element,
@@ -755,7 +903,7 @@ describe("Type dropdown", () => {
 		const element = editor();
 		const input = required(
 			element.querySelector<HTMLInputElement>(
-				'[data-row="1"][data-column="1"] input',
+				'[data-row="1"][data-column="1"] :is(input,textarea)',
 			),
 		);
 		input.focus();
@@ -862,7 +1010,7 @@ it.each(["left", "center", "right"] as const)(
 			}),
 		);
 		const menu = required(element.querySelector("tp-contextmenu"));
-		expect(menu.querySelectorAll("tp-divider")).toHaveLength(4);
+		expect(menu.querySelectorAll("tp-divider")).toHaveLength(5);
 		menu.dispatchEvent(
 			new CustomEvent("tp-contextmenu-select", {
 				detail: { action: `align-${alignment}` },
@@ -934,7 +1082,7 @@ it("exposes five markup formats with independent Code/Render tabs and saves the 
 	).click();
 	expect(save).toHaveBeenCalledOnce();
 	element.format = "html";
-	expect(tabs.selected).toBe(1);
+	expect(tabs.selected).toBe(0);
 });
 
 it("lazily displays spreadsheet sources including the actual XLSX worksheet and refreshes edits", async () => {
@@ -944,6 +1092,9 @@ it("lazily displays spreadsheet sources including the actual XLSX worksheet and 
 	);
 	expect(details.open).toBe(false);
 	expect(details.querySelector("pre")).toBeNull();
+	expect(details.querySelectorAll("[data-spreadsheet-view-tabs]")).toHaveLength(
+		3,
+	);
 	details.open = true;
 	details.dispatchEvent(new Event("toggle"));
 	const tabs = required(
@@ -992,6 +1143,15 @@ it("lazily displays spreadsheet sources including the actual XLSX worksheet and 
 	const parsed = new DOMParser().parseFromString(xml, "application/xml");
 	expect(parsed.querySelector("parsererror")).toBeNull();
 	expect(parsed.querySelector('c[r="A2"] v')?.textContent).toBe("A & <B>");
+	const rendered = required(
+		details.querySelector(
+			'[data-spreadsheet-panel="xlsx"] [data-spreadsheet-render]',
+		),
+	);
+	expect(rendered.querySelectorAll("th")).toHaveLength(1);
+	expect(rendered.querySelectorAll("td")).toHaveLength(1);
+	expect(rendered.querySelector("td")?.textContent).toBe("A & <B>");
+	expect(rendered.querySelector("b")).toBeNull();
 	const save = vi.spyOn(element, "downloadSpreadsheet").mockResolvedValue();
 	required(
 		details.querySelector<HTMLElement>('[data-save-spreadsheet="xlsx"]'),
@@ -1169,7 +1329,7 @@ describe("merged cells", () => {
 	});
 });
 
-it("exports only visible merged cells to SVG with the correct rectangle dimensions", () => {
+it("exports merged cells to SVG without exposing covered values", async () => {
 	const element = editor();
 	element.setData([
 		["A", "B"],
@@ -1182,14 +1342,14 @@ it("exports only visible merged cells to SVG with the correct rectangle dimensio
 		font: "",
 	} as unknown as CanvasRenderingContext2D);
 	const root = new DOMParser().parseFromString(
-		element.exportSvg(),
+		await element.exportSvg(),
 		"image/svg+xml",
 	);
-	expect(root.querySelector('rect[height="72"]')?.getAttribute("width")).toBe(
-		"160",
+	expect(root.querySelector('td[rowspan="2"]')?.getAttribute("colspan")).toBe(
+		"2",
 	);
 	const labels = Array.from(
-		root.querySelectorAll("text"),
+		root.querySelectorAll("td,th"),
 		(node) => node.textContent,
 	);
 	expect(labels).toContain("Shown");
@@ -1202,7 +1362,7 @@ it("extends the selection by keyboard and disables interactive merges when reado
 			'[data-grid-row="1"][data-grid-column="0"]',
 		),
 	);
-	cell.querySelector("input")?.focus();
+	cell.querySelector<HTMLElement>("input,textarea")?.focus();
 	cell.dispatchEvent(
 		new KeyboardEvent("keydown", {
 			key: "ArrowRight",
@@ -1235,4 +1395,36 @@ it("separates a merge that crosses a newly enabled heading and undo restores it"
 	expect(element.getData().merges).toEqual([]);
 	element.undo();
 	expect(element.getData()).toEqual(merged);
+});
+
+it("reflects heading changes in the checkbox, exports and inverse attribute", async () => {
+	const element = editor();
+	await vi.waitFor(() =>
+		expect(element.querySelector("[data-heading] input")).not.toBeNull(),
+	);
+	expect(element.heading).toBe(true);
+	expect(element.hasAttribute("heading")).toBe(true);
+	element.removeAttribute("heading");
+	expect(element.noHeader).toBe(true);
+	expect(element.getData().header).toBe(false);
+	expect(
+		element.querySelector<HTMLInputElement>("[data-heading] input")?.checked,
+	).toBe(false);
+	expect(element.getMarkup("html")).not.toContain("<th ");
+	element.heading = true;
+	expect(element.noHeader).toBe(false);
+	expect(
+		element.querySelector<HTMLInputElement>("[data-heading] input")?.checked,
+	).toBe(true);
+	element.noHeader = true;
+	expect(element.hasAttribute("heading")).toBe(false);
+});
+it("accepts heading on a table initially containing only data cells", () => {
+	const element = new TpTableEditor();
+	element.setAttribute("heading", "");
+	element.innerHTML =
+		"<table><tr><td>Name</td></tr><tr><td>Ada</td></tr></table>";
+	document.body.append(element);
+	expect(element.getData().header).toBe(true);
+	expect(element.getMarkup("html")).toContain("<th ");
 });

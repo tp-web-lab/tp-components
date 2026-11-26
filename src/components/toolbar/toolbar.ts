@@ -10,6 +10,10 @@
  * @tp-dependency tp-base
  * @summary Shared base class for tp-* components.
  */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
 // tp-docgen:dependencies:end
 
 import "../divider/divider.js";
@@ -77,6 +81,11 @@ function isTpToolbarPlacement(value: string): value is TpToolbarPlacement {
  * @attr {string} orientation = "horizontal" - `horizontal` (default) or `vertical`.
  * @attr {string} placement = "top (horizontal) / start (vertical)" - `top` (default for horizontal) | `bottom` | `start` | `end`.
  *
+ *  @cssprop [--tp-toolbar-gap=0.25rem] Space between the toolbar sections along its main axis.
+ * @cssprop [--tp-toolbar-padding=0.25rem 0.5rem] Inner spacing around the toolbar content.
+ * @cssprop [--tp-toolbar-section-gap=0.25rem] Space between controls within a section and around section separators.
+ * @cssprop [--tp-toolbar-size=3rem] Minimum toolbar thickness: height for a horizontal toolbar, width for a vertical toolbar.
+ * @cssprop [--tp-toolbar-z-index=100] Stacking level of the sticky toolbar relative to overlapping content.
  * @example
  * <tp-box padding="0">
  * <tp-toolbar>
@@ -89,11 +98,6 @@ function isTpToolbarPlacement(value: string): value is TpToolbarPlacement {
  * </tp-toolbar>
  *   <tp-box border-width="0" style="min-block-size: 5rem; display: grid; place-items: center">Document area</tp-box>
  * </tp-box>
- *  @cssprop [--tp-toolbar-gap=0.25rem] Space between the toolbar sections along its main axis.
- * @cssprop [--tp-toolbar-padding=0.25rem 0.5rem] Inner spacing around the toolbar content.
- * @cssprop [--tp-toolbar-section-gap=0.25rem] Space between controls within a section and around section separators.
- * @cssprop [--tp-toolbar-size=3rem] Minimum toolbar thickness: height for a horizontal toolbar, width for a vertical toolbar.
- * @cssprop [--tp-toolbar-z-index=100] Stacking level of the sticky toolbar relative to overlapping content.
  */
 export class TpToolbar extends TpBase {
 	/** Identifier used for the injected component stylesheet. */

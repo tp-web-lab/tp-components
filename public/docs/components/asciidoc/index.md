@@ -190,6 +190,18 @@ This macro is registered by the TP adapter, not by standard Asciidoctor.js.
 
 The component renders an HTML fragment in the current page. It does not run a local Asciidoctor command, generate a PDF or provide access to the user's filesystem. Source files and linked resources must be available to the browser. Document navigation is provided separately by [`tp-asciidoc-multi-pages`](#/components/asciidoc-multi-pages/index.md).
 
+### Included documents in another markup language
+
+The component resolves simple standalone inclusion directives before parsing. It detects the included file's language from its extension and converts its content to the containing language. This also works without a viewer or converter.
+
+```asciidoc
+include::shared/fragment.md[]
+```
+
+Relative paths are resolved against the document loaded with `src`, or the component's source context for inline content. Nested inclusions resolve against their own files. Missing files, cycles and nesting beyond 20 levels display an error. Complete-file inclusions are supported; language-specific filtering and literal-code options retain their existing behavior. This conversion is provided by the TP component, not by the underlying standalone parser.
+
+See the [programmatic conversion API](../markup-converter/index.md#javascript-api) for `convert(code, from, to)` and `convertFile(filename, from, to)`.
+
 ### Importing
 
 ::: tp-tabs
@@ -232,19 +244,19 @@ Advanced example
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -266,7 +278,9 @@ All tp-components and external tools used by this component are loaded automatic
 ### External
 
 <!--
-@summary No external dependency.
+@credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
+@summary Shared parsers, games and rendering utilities.
 -->
-No external dependency
+
+- [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 <!-- tp-docgen:dependencies:end -->

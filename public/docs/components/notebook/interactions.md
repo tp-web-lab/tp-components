@@ -26,12 +26,15 @@
 | :tp-icon:{name="keyboard-f1" size="1.25em"} Editor toolbar | Shows or hides the toolbar of the selected cell's code editor. |
 | :tp-icon:{name="refresh" size="1.25em"} Reset | Restores the initially loaded notebook. |
 | :tp-icon:{name="eye-outline" size="1.25em"} :tp-icon:{name="pencil" size="1.25em"} Preview / Edit | Toggles between the final rendered document and the cell editor. |
-| :tp-icon:{name="play-all" size="1.25em"} Run all cells | Executes every programming cell in document order, in both edit and preview modes, including read-only notebooks. |
+| :tp-icon:{name="play-all" size="1.25em"} Run all cells | Reloads changed programs and executes each nonempty cell query in document order, in both edit and preview modes, including read-only notebooks. |
+| :tp-icon:{name="refresh" size="2em"} Reset all | Reset all. |
+| :tp-icon:{name="play-all" size="2em"} Run all | Run all. |
 
 #### Keyboard interactions
 
 | Key or gesture | Result |
 | --- | --- |
+| <kbd>Shift</kbd>+<kbd>Enter</kbd> | Reload changed source and execute the current programming cell’s query, or render the current markup cell. A programming query is required. |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
 | Focused controls | Use each control’s standard keyboard interaction.  |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |

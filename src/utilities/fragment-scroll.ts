@@ -1,4 +1,4 @@
-/** Keep a fragment aligned while asynchronous content changes its position. */
+/** Keep a fragment aligned until reader input or an explicit scroll restoration. */
 export function followFragment(
 	container: HTMLElement,
 	target: HTMLElement,
@@ -23,11 +23,23 @@ export function followFragment(
 		stopped = true;
 		observer?.disconnect();
 		cancelAnimationFrame(frame);
-		for (const type of ["wheel", "touchstart", "pointerdown", "keydown"]) {
+		for (const type of [
+			"wheel",
+			"touchstart",
+			"pointerdown",
+			"keydown",
+			"tp-scroll-restoration",
+		]) {
 			container.removeEventListener(type, stop);
 		}
 	};
-	for (const type of ["wheel", "touchstart", "pointerdown", "keydown"]) {
+	for (const type of [
+		"wheel",
+		"touchstart",
+		"pointerdown",
+		"keydown",
+		"tp-scroll-restoration",
+	]) {
 		container.addEventListener(type, stop, { passive: true });
 	}
 	observer?.observe(container);

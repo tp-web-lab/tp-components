@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-tree" allow-script }
+::::: tp-markdown-viewer { label="tp-tree" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-tree { selectable guides level="2" }
@@ -7,11 +7,8 @@
   - Documentation
 
     - Getting started
-
     - Examples
-
   - Source code
-
   - README.md
 :::
 ```

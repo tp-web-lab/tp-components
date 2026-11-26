@@ -1,0 +1,28 @@
+{
+  "name": "SQL result comparisons",
+  "entry": "/query.sql",
+  "setup": "/setup.sql",
+  "test": "/query.test.json",
+  "files": [
+    {
+      "path": "/query.sql",
+      "language": "sql",
+      "content": "SELECT name, score FROM students ORDER BY name;"
+    },
+    {
+      "path": "/setup.sql",
+      "language": "sql",
+      "content": "CREATE TABLE students (name TEXT, score INTEGER);\nINSERT INTO students VALUES ('Ada', 90), ('Bob', 80), ('Cara', NULL);"
+    },
+    {
+      "path": "/details.sql",
+      "language": "sql",
+      "content": "SELECT 1 AS number, '1' AS text, NULL AS missing, x'00ff' AS bytes;"
+    },
+    {
+      "path": "/query.test.json",
+      "language": "json",
+      "content": "{\n  \"name\": \"Students\",\n  \"tests\": [\n    {\n      \"name\": \"Current query\",\n      \"expected\": [\n        {\n          \"columns\": [\n            \"name\",\n            \"score\"\n          ],\n          \"values\": [\n            [\n              \"Ada\",\n              90\n            ],\n            [\n              \"Bob\",\n              80\n            ],\n            [\n              \"Cara\",\n              null\n            ]\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Unordered rows with duplicates\",\n      \"query\": \"SELECT score FROM students UNION ALL SELECT 90;\",\n      \"ordered\": false,\n      \"expected\": [\n        {\n          \"columns\": [\n            \"score\"\n          ],\n          \"values\": [\n            [\n              null\n            ],\n            [\n              90\n            ],\n            [\n              80\n            ],\n            [\n              90\n            ]\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Empty selection\",\n      \"query\": \"SELECT name FROM students WHERE 0;\",\n      \"expected\": [\n        {\n          \"columns\": [\n            \"name\"\n          ],\n          \"values\": []\n        }\n      ]\n    },\n    {\n      \"name\": \"Semicolons in strings\",\n      \"query\": \"SELECT 'a;b' AS text; SELECT 1 AS n;\",\n      \"expected\": [\n        {\n          \"columns\": [\n            \"text\"\n          ],\n          \"values\": [\n            [\n              \"a;b\"\n            ]\n          ]\n        },\n        {\n          \"columns\": [\n            \"n\"\n          ],\n          \"values\": [\n            [\n              1\n            ]\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Delete inside a test\",\n      \"query\": \"DELETE FROM students; SELECT count(*) AS total FROM students;\",\n      \"expected\": [\n        {\n          \"columns\": [\n            \"total\"\n          ],\n          \"values\": [\n            [\n              0\n            ]\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Next test starts fresh\",\n      \"query\": \"SELECT count(*) AS total FROM students;\",\n      \"expected\": [\n        {\n          \"columns\": [\n            \"total\"\n          ],\n          \"values\": [\n            [\n              3\n            ]\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Companion query and types\",\n      \"src\": \"/details.sql\",\n      \"expected\": [\n        {\n          \"columns\": [\n            \"number\",\n            \"text\",\n            \"missing\",\n            \"bytes\"\n          ],\n          \"values\": [\n            [\n              1,\n              \"1\",\n              null,\n              [\n                0,\n                255\n              ]\n            ]\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Expected SQL error\",\n      \"query\": \"SELECT * FROM unknown_table;\",\n      \"error\": \"no such table: unknown_table\"\n    },\n    {\n      \"name\": \"Work in progress\",\n      \"skip\": \"Add a test for the average score\"\n    }\n  ]\n}\n"
+    }
+  ]
+}

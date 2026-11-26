@@ -30,10 +30,11 @@ import { TpPythonViewer } from "../python-viewer/python-viewer.js";
  * @accessibility Reuses TpQuestion's disclosure, actions and feedback tabs.
  * @keyboard {Enter / Space} Expands the question or activates a focused action.
  * @example
- * <tp-python-viewer-question open="" src="/docs/components/playground-question/examples/python/double.py" test="/docs/components/playground-question/examples/python/double.test.py">
+ * <tp-python-viewer-question open="" src="/docs/components/playground-question/examples/python/double.py">
  *   <dl>
  *     <dt>Title</dt><dd>Double a number</dd>
  *     <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Open Code to edit, then submit to run the tests.</dd>
+ *     <dt>Feedback</dt><dd>/docs/components/playground-question/examples/python/double.test.py</dd>
  *     <dt>Solution</dt><dd>Return value * 2.</dd>
  *   </dl>
  * </tp-python-viewer-question>

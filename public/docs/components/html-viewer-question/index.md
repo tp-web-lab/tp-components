@@ -38,6 +38,12 @@ The custom `<tp-html-viewer-question>` element presents and grades exercises bas
 <!-- -->
 ## Usage
 
+### External source (`src`)
+
+`src` is the URL of the markup file to edit. The component selects the markup language. `test` is a separate JavaScript test file that checks the rendered document.
+
+The default is an empty string. Relative URLs are resolved from the containing document. Changing `src` loads a new exercise source and cancels the previous test report. It does not load the question’s Title, Prompt or Solution: these remain in the question’s description list.
+
 ### Authoring
 
 The inherited `timing="hh:mm:ss"` attribute enables the [timed-question flow](../question/index.md). Start begins the countdown; Continue restores access after expiry without clearing the response.
@@ -91,19 +97,19 @@ Javascript API
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-component-viewer" allow-script }
+::::: tp-markdown-viewer { label="tp-component-viewer" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-component-viewer { tag="tp-button" }

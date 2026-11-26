@@ -203,7 +203,8 @@ export class TpFullscreen extends TpBase {
 		);
 	}
 
-	private async toggleFullscreen(): Promise<void> {
+	/** Enters or leaves fullscreen for the configured target. */
+	async toggleFullscreen(): Promise<void> {
 		if (this.hasScreenFullscreen()) {
 			await this.screenDocument?.exitFullscreen();
 			this.updateControl();

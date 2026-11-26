@@ -56,7 +56,18 @@
       "default": "\"neutral\""
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "selectLang(choice: TpLangChoice): void",
+      "inherited": false,
+      "description": "Selects a document language, emits the language change and closes the language menu."
+    },
+    {
+      "name": "toggleMenu(): void",
+      "inherited": false,
+      "description": "Opens or closes the choices menu, unless this control is disabled."
+    }
+  ],
   "events": [
     {
       "name": "tp-lang-change",
@@ -91,7 +102,7 @@
   "userHelp": {
     "displayName": "Language",
     "introduction": "The custom `<tp-lang>` element provides a documentation language selector.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Language button | Open the list of available languages. |\n| Language entry | Navigate to that language version of the documentation. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| <!-- button --> Language button | Open the list of available languages. The icon is the flag of the current language. |\n| Language entry | Navigate to that language version of the documentation. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

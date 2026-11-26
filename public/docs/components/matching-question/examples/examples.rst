@@ -17,15 +17,11 @@
 
             Form
                - Hello
-
                - Thank you
-
                - Goodbye
 
                1. Bonjour
-
                2. Merci
-
                3. Au revoir
 
             Feedback

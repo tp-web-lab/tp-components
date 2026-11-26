@@ -433,3 +433,42 @@ greet()`);
 		expect(viewer.querySelectorAll("tp-code-editor")).toHaveLength(2);
 	});
 });
+
+it.each([
+	[
+		"javascript",
+		"/main.js",
+		"// line comment\n/* block comment */\nconst value = 1; // trailing comment",
+	],
+	[
+		"typescript",
+		"/main.ts",
+		"// line comment\n/* block comment */\nconst value: number = 1; // trailing comment",
+	],
+	["python", "/main.py", "# line comment\nvalue = 1 # trailing comment"],
+	[
+		"sql",
+		"/main.sql",
+		"-- line comment\n/* block comment */\nSELECT 1; -- trailing comment",
+	],
+	[
+		"prolog",
+		"/program.pl",
+		"% line comment\n/* block comment */\nfact(a). % trailing comment",
+	],
+])("preserves comments in the %s viewer project", (language, path, source) => {
+	const viewer = document.createElement(
+		`tp-${language}-viewer`,
+	) as HTMLElement & {
+		createInitialProject(): {
+			findFile(path: string): { content: string } | undefined;
+		};
+	};
+	const script = document.createElement("script");
+	script.type = `tp/${language}-viewer`;
+	script.setAttribute("filename", path);
+	script.textContent = source;
+	viewer.append(script);
+
+	expect(viewer.createInitialProject().findFile(path)?.content).toBe(source);
+});

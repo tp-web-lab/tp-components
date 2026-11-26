@@ -42,6 +42,10 @@ Place the content directly inside the component. `speed` is the number of letter
 
 HTML formatting and author elements are retained, not recreated. Text in native controls, scripts, styles, editable regions, SVG and mathematical content is not animated. Images and other non-text content appear immediately. Changes to the content or animation attributes restart the effect; disconnecting stops timers and restores the original text structure.
 
+Hovering pauses the timed reveal at its current letter or word, including the initial delay and the pause between loops. Moving the pointer away resumes with the remaining delay. Clicking or focusing still reveals all text and stops repetition. Speech-synchronized text continues to follow its speech controller.
+
+When the component is inside an initially hidden tab or panel, the reveal starts when that container becomes visible. Hiding the panel stops the animation; opening it again starts a new reveal.
+
 Readers requesting reduced motion see the complete content immediately, even with `loop`. Assistive technology receives the full text from the start without repeated live announcements. Use this effect for short decorative passages, not to withhold essential instructions. Clicking or focusing the component stops the current animation; changing its settings can start it again once focus has left.
 
 ### Programming notes
@@ -91,22 +95,25 @@ Javascript API
 
 Synchronized speech
 : Press Speak to reveal the words as the selected voice pronounces them. Try Pause, Resume and Stop; voices without word boundaries leave the full text visible.
+
+Initially hidden tab
+: Open the initially hidden Animated text tab to start the reveal. Switch back to Instructions and reopen it to see the animation restart.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

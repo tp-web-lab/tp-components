@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Additional native conversions</title><button id="run">Check additional native conversions</button><p id="status">Ready</p><pre id="summary"></pre><details><summary>Results</summary><pre id="report"></pre></details>
+<script type="module">
+import '/src/tp-loader.ts';
+import {htmlToMarkup,markupToHtml} from '/src/utilities/markup-conversion.ts';
+import {presentationCases,presentationSignature} from '/src/utilities/markup-presentation-next-fixtures.ts';
+document.querySelector('#run').onclick=async()=>{
+ const results=[];
+ for(const test of presentationCases) {
+ const original=await markupToHtml(test.source,test.language,location.href),expected=presentationSignature(original);
+ for(const first of ['markdown','asciidoc','restructuredtext','latex'])for(const second of ['markdown','asciidoc','restructuredtext','latex']) {
+ document.querySelector('#status').textContent=`${test.name}: ${first} → ${second}`;
+ try {
+ const source=htmlToMarkup(original,first),a=await markupToHtml(source,first,new URL("/relocated/first/document",location.href).href),code=htmlToMarkup(a,second),html=await markupToHtml(code,second,new URL("/relocated/second/document",location.href).href),actual=presentationSignature(html);
+ const backSource=htmlToMarkup(html,first),backHtml=await markupToHtml(backSource,first,new URL("/relocated/back/document",location.href).href),back=presentationSignature(backHtml);
+ const native=!/:+ (?:img|ol|ul|li|table)\b|\[(?:img|ol|ul|li|table),|\\wc(?:Img|Ol|Ul|Li|Div)\b|\.\. (?:img|ol|ul|li|html-table)::/.test([source,code,backSource].join("\n"));
+ results.push({name:test.name,first,second,pass:native&&JSON.stringify(actual)===JSON.stringify(expected)&&JSON.stringify(back)===JSON.stringify(expected),source,code,html,backSource,backHtml,expected,actual,back,native});
+ } catch(error) {results.push({name:test.name,first,second,pass:false,error:String(error)});}
+ }
+ }
+ document.querySelector('#report').textContent=JSON.stringify(results,null,2);
+ document.querySelector('#summary').textContent=JSON.stringify(results.filter(r=>!r.pass),null,2);
+ document.querySelector('#status').textContent=`Complete: ${results.filter(r=>r.pass).length}/${results.length} checks passed`;
+};
+</script></html>

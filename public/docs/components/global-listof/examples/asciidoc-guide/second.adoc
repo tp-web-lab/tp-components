@@ -1,0 +1,29 @@
+[discrete]
+= Second chapter
+
+See note [tp-ref,href="^local",tp-empty="true"]##note-local-1##.
+
+[figure,id="diagram"]
+=====
+A diagram for Second chapter.
+
+[figcaption]
+====
+Second chapter diagram
+====
+=====
+
+[figure]
+=====
+A second diagram.
+
+[figcaption]
+====
+Second chapter detail without an authored ID
+====
+=====
+
+[tp-note,ref="local"]
+====
+A local note for Second chapter.
+====

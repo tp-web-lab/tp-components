@@ -1,6 +1,9 @@
 /** @module components/editor-question */
 
-import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
+import {
+	rebaseSourceContent,
+	resolveComponentSourceUrl,
+} from "../../utilities/source-url.js";
 import {
 	TpConsole,
 	type TpConsoleEntryKind,
@@ -14,8 +17,8 @@ import { TpQuestion } from "../question/question.js";
 
 /**
  * @summary checks an editable exercise by running an external test file on each submission.
- * @attr {string} src = "" - Initial source file or supported project forwarded to the response viewer or playground.
- * @attr {string} test = "" - Test file executed against the current project after every submission.
+ * @attr {string} src = "" - Initial program/project, or a Markdown exercise defining Title, Prompt and Solution.
+ * @attr {string} test = "" - Optional legacy test-file URL; a filename or link in Feedback takes precedence. Tests run against the submitted editor contents.
  * @keyboard {Enter / Space} Opens the question or activates the focused action.
  * @accessibility Reuses question disclosures, output tabs and labelled programming controls.
  * @example
@@ -32,6 +35,13 @@ export abstract class TpEditorQuestion<
 > extends TpQuestion {
 	/** Creates the statically selected editable response component. */
 	protected abstract createEditor(): TEditor;
+	/** Captures the response before the test file is fetched. Programming subclasses freeze their source/project here. */
+	protected captureTests(
+		control: TEditor,
+	): (file: TpFile) => Promise<TpExecutionDocument> {
+		return (file) => this.buildTests(control, file);
+	}
+
 	/** Event emitted after the response source finishes loading. */
 	protected abstract readonly sourceLoadedEvent: string;
 	/** Serializes the current learner response. */
@@ -45,12 +55,161 @@ export abstract class TpEditorQuestion<
 	public static override get observedAttributes(): string[] {
 		return [...TpQuestion.observedAttributes, "test"];
 	}
-	/** External test source URL. */
+	/** Initial program, markup file or supported project loaded into the embedded editor. */
+	public override get src(): string {
+		return this.getAttribute("src") ?? "";
+	}
+	public set src(value: string) {
+		this.setAttribute("src", value);
+	}
+	/** Optional test filename or URL in Feedback, with links and the legacy test attribute also accepted. */
 	public get test(): string {
-		return this.getAttribute("test") ?? "";
+		const source = this.querySelector<HTMLElement>(
+			"[data-tp-question-feedback-source]",
+		);
+		const link = source?.querySelector<HTMLAnchorElement>("a[href]");
+		const filename = link?.getAttribute("href") ?? source?.textContent?.trim();
+		if (!filename || !source) return this.getAttribute("test") ?? "";
+		return this.definitionLoaded
+			? new URL(filename, this.definitionUrl).href
+			: resolveComponentSourceUrl(link ?? source, filename).href;
 	}
 	/** Embedded editable response, shared with the standalone programming components. */
 	private control: TEditor | null = null;
+	private definitionUrl = "";
+	private definitionLoaded = false;
+	private definitionLoading = false;
+	private definitionProgram = "";
+	private definitionRevision = 0;
+	private definitionAttributes: Map<string, string | null> | null = null;
+	/** A Markdown src is a complete exercise; other extensions remain program/project sources. */
+	protected get loadsQuestionDefinition(): boolean {
+		return /\.(?:md|markdown)(?:[?#]|$)/i.test(this.src);
+	}
+	private async loadDefinition(): Promise<void> {
+		const url = resolveComponentSourceUrl(this, this.src).href;
+		if (
+			this.definitionUrl === url &&
+			(this.definitionLoaded || this.definitionLoading)
+		)
+			return;
+		const revision = ++this.definitionRevision;
+		this.definitionUrl = url;
+		this.definitionLoaded = false;
+		this.definitionLoading = true;
+		this.definitionProgram = "";
+		this.definitionAttributes ??= new Map(
+			["value", "query", "test"].map((name) => [name, this.getAttribute(name)]),
+		);
+		try {
+			const response = await fetch(url);
+			if (!response.ok)
+				throw new Error(`Unable to load exercise (HTTP ${response.status}).`);
+			const { renderMarkdownFragment } = await import(
+				"../markdown/markdown.js"
+			);
+			const content = await renderMarkdownFragment(await response.text(), url);
+			if (revision !== this.definitionRevision) return;
+			if (!this.isConnected) {
+				this.definitionLoading = false;
+				return;
+			}
+			const template = document.createElement("template");
+			template.content.append(content);
+			const wrapper = template.content.querySelector(this.localName);
+			const list =
+				wrapper?.querySelector(":scope > dl") ??
+				template.content.querySelector("dl");
+			if (!list)
+				throw new Error(
+					"Exercise source must define Title, Prompt and Solution in a definition list.",
+				);
+			const fields = new Map<string, Element>();
+			for (const term of list.querySelectorAll(":scope > dt")) {
+				const definition = term.nextElementSibling;
+				if (definition?.localName === "dd")
+					fields.set(term.textContent?.trim().toLowerCase() ?? "", definition);
+			}
+			for (const name of ["title", "prompt", "solution"])
+				if (!fields.has(name))
+					throw new Error(`Missing exercise field: ${name}.`);
+			for (const [name, previous] of this.definitionAttributes) {
+				if (previous === null) this.removeAttribute(name);
+				else this.setAttribute(name, previous);
+			}
+			const program = fields.get("program");
+			if (program)
+				this.setAttribute(
+					"value",
+					program.querySelector("pre code")?.textContent ??
+						program.textContent ??
+						"",
+				);
+			const query =
+				wrapper?.getAttribute("query") ??
+				fields.get("query")?.textContent?.trim();
+			if (query) this.setAttribute("query", query);
+			const test =
+				wrapper?.getAttribute("test") ??
+				fields.get("feedback")?.querySelector("a")?.getAttribute("href") ??
+				(fields.get("feedback")?.textContent?.trim() || undefined) ??
+				fields.get("test")?.querySelector("a")?.getAttribute("href");
+			if (test) this.setAttribute("test", new URL(test, url).href);
+			const programSrc =
+				wrapper?.getAttribute("program-src") ??
+				fields.get("source")?.querySelector("a")?.getAttribute("href");
+			if (programSrc) this.definitionProgram = new URL(programSrc, url).href;
+			const context = fields
+				.get("context")
+				?.querySelector("a")
+				?.getAttribute("href");
+			if (context) {
+				const prompt = fields.get("prompt");
+				const container = document.createElement("div");
+				container.setAttribute("data-tp-source", new URL(context, url).href);
+				if (prompt) {
+					container.append(...prompt.childNodes);
+					rebaseSourceContent(container, url, new URL(context, url).href);
+					prompt.append(container);
+				}
+			}
+			for (const name of ["program", "query", "test", "source", "context"]) {
+				const field = fields.get(name);
+				field?.previousElementSibling?.remove();
+				field?.remove();
+			}
+			this.definitionLoaded = true;
+			this.definitionLoading = false;
+			this.applySourceMarkup(template.innerHTML, url);
+			// Definitions may finish loading after the multi-page shell tried its anchor.
+			const fragment =
+				this.ownerDocument.defaultView?.location.hash.split("#").at(-1) ?? "";
+			let anchor = "";
+			try {
+				anchor = decodeURIComponent(fragment);
+			} catch {
+				anchor = fragment;
+			}
+			const target = anchor ? this.ownerDocument.getElementById(anchor) : null;
+			if (target && (target === this || this.contains(target))) {
+				this.setAttribute("open", "both");
+				requestAnimationFrame(() => {
+					if (this.isConnected)
+						this.ownerDocument
+							.getElementById(anchor)
+							?.scrollIntoView?.({ block: "start" });
+				});
+			}
+		} catch (error: unknown) {
+			if (revision === this.definitionRevision && this.isConnected) {
+				this.definitionLoading = false;
+				this.showSrcError(
+					error instanceof Error ? error.message : String(error),
+				);
+			}
+		}
+	}
+
 	/** Whether the initial source finished loading. */
 	private ready = false;
 	/** Cancels pending fetches on reset, reconfiguration or disconnection. */
@@ -96,6 +255,12 @@ export abstract class TpEditorQuestion<
 		oldValue: string | null,
 		newValue: string | null,
 	): void {
+		if (name === "src" && oldValue !== newValue) {
+			this.definitionRevision++;
+			this.definitionLoading = false;
+			this.definitionLoaded = false;
+			this.definitionProgram = "";
+		}
 		super.attributeChangedCallback(name, oldValue, newValue);
 		if (
 			oldValue !== newValue &&
@@ -108,6 +273,21 @@ export abstract class TpEditorQuestion<
 	}
 	/** Creates the selected library control and passes it the resolved initial source. */
 	private configure(): void {
+		if (
+			this.definitionLoading &&
+			this.definitionUrl === resolveComponentSourceUrl(this, this.src).href
+		)
+			return;
+		if (
+			this.loadsQuestionDefinition &&
+			(!this.definitionLoaded ||
+				this.definitionUrl !== resolveComponentSourceUrl(this, this.src).href)
+		) {
+			this.cancelRun();
+			this.ready = false;
+			void this.loadDefinition();
+			return;
+		}
 		this.cancelRun();
 		this.result.replaceChildren();
 		this.ready = false;
@@ -125,8 +305,11 @@ export abstract class TpEditorQuestion<
 		control.addEventListener(this.sourceLoadedEvent, () => {
 			if (this.control === control) this.ready = true;
 		});
-		if (this.src.trim())
-			control.src = resolveComponentSourceUrl(this, this.src).href;
+		const programSrc = this.loadsQuestionDefinition
+			? this.definitionProgram
+			: this.src.trim();
+		if (programSrc)
+			control.src = resolveComponentSourceUrl(this, programSrc).href;
 		else this.ready = true;
 		form.replaceChildren(control);
 	}
@@ -142,14 +325,15 @@ export abstract class TpEditorQuestion<
 	protected override validateSubmit(): string | null {
 		if (!this.control || !this.ready)
 			return "Wait for the source to load, or check its configuration.";
-		return this.test.trim() ? null : "No test file is configured.";
+		return null;
 	}
 	/** Starts an asynchronous run; the base class handles attempt counting and output tabs. */
 	protected override onSubmitAttempt(): void {
-		void this.runTests();
+		if (this.test.trim()) void this.runTests();
 	}
 	/** Supplies the pending report container to the Feedback tab. */
 	protected override submitMessage(): HTMLElement {
+		if (!this.test.trim()) this.result.textContent = "No tests provided.";
 		return this.result;
 	}
 	/** Test results replace the usual missing-text-feedback notice. */
@@ -181,6 +365,7 @@ export abstract class TpEditorQuestion<
 		this.result.setAttribute("aria-live", "polite");
 		this.result.textContent = "Loading tests…";
 		try {
+			const build = control ? this.captureTests(control) : null;
 			this.pending = new AbortController();
 			const url = resolveComponentSourceUrl(this, this.test);
 			const response = await fetch(url.href, {
@@ -190,9 +375,9 @@ export abstract class TpEditorQuestion<
 			if (!response.ok)
 				throw new Error(`Unable to load tests (HTTP ${response.status}).`);
 			const content = await response.text();
-			if (generation !== this.generation || !control) return;
+			if (generation !== this.generation || !build) return;
 			const filename = url.pathname.split("/").at(-1) || "exercise.test.js";
-			const execution = await this.buildTests(control, {
+			const execution = await build({
 				path: `/${filename}`,
 				language: inferLanguage(filename),
 				content,
@@ -205,6 +390,8 @@ export abstract class TpEditorQuestion<
 			this.report = new TpConsole();
 			this.frame = new TpIframe();
 			this.frame.setAttribute("title", "Test execution");
+			// Execute tests in isolation; Feedback presents only the bridged console.
+			this.frame.hidden = true;
 			this.frame.srcdoc = execution.html;
 			this.result.replaceChildren(this.report, this.frame);
 		} catch (error: unknown) {

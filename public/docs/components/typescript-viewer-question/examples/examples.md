@@ -1,7 +1,7 @@
-::::: tp-markdown-viewer { label="tp-typescript-viewer-question" allow-script }
-:::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-typescript-viewer-question" allow-script preserve-source }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
-::: tp-typescript-viewer-question { open src="/docs/components/playground-question/examples/typescript/double.ts" test="/docs/components/playground-question/examples/typescript/double.test.ts" }
+::: tp-typescript-viewer-question { open src="/docs/components/playground-question/examples/typescript/double.ts" }
 Title
 :
   Double a number
@@ -10,14 +10,19 @@ Prompt
 :
   Complete double so it returns twice its argument. Open Code to edit, then submit to run the tests.
 
+Feedback
+:
+  /docs/components/playground-question/examples/typescript/double.test.ts
+
 Solution
 :
-  Return value * 2.
+  Return value \* 2.
 :::
 ```
 
 ``` example {label="Javascript API"}
 ::: script { type="module" }
+import "/components/typescript/typescript.js";
 import "/components/typescript-viewer/typescript-viewer.js";
 import "/components/typescript-viewer-question/typescript-viewer-question.js";
 
@@ -26,7 +31,6 @@ const example = document.createDocumentFragment();
 const element1 = document.createElement("tp-typescript-viewer-question");
 element1.setAttribute("open", "");
 element1.setAttribute("src", "/docs/components/playground-question/examples/typescript/double.ts");
-element1.setAttribute("test", "/docs/components/playground-question/examples/typescript/double.test.ts");
 element1.append(document.createTextNode("\n  "));
 
 const element2 = document.createElement("dl");
@@ -51,12 +55,21 @@ element2.append(element6);
 element2.append(document.createTextNode("\n    "));
 
 const element7 = document.createElement("dt");
-element7.append(document.createTextNode("Solution"));
+element7.append(document.createTextNode("Feedback"));
 element2.append(element7);
 
 const element8 = document.createElement("dd");
-element8.append(document.createTextNode("Return value * 2."));
+element8.append(document.createTextNode("/docs/components/playground-question/examples/typescript/double.test.ts"));
 element2.append(element8);
+element2.append(document.createTextNode("\n    "));
+
+const element9 = document.createElement("dt");
+element9.append(document.createTextNode("Solution"));
+element2.append(element9);
+
+const element10 = document.createElement("dd");
+element10.append(document.createTextNode("Return value * 2."));
+element2.append(element10);
 element2.append(document.createTextNode("\n  "));
 element1.append(element2);
 element1.append(document.createTextNode("\n"));
@@ -65,5 +78,31 @@ example.append(element1);
 document.body.append(example);
 :::
 ```
+
+``` example {label="Explicit Feedback file"}
+:::: tp-typescript-viewer-question { open }
+::: script { type="tp/typescript" }
+export function double(value: number): number {
+	return value + 1;
+}
+:::
+
+Title
+:
+  Double a number
+
+Prompt
+:
+  Complete double so it returns twice its argument. Open Code to edit, then submit to run the tests.
+
+Feedback
+:
+  /docs/components/typescript-viewer-question/examples/inline.test.ts
+
+Solution
+:
+  Return value \* 2.
 ::::
+```
 :::::
+::::::

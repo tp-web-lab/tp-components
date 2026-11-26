@@ -19,6 +19,7 @@ The header shows the game icon and name on the left. Rounded controls appear on 
 | Click | Click a face-up card to select it, then click a destination tableau pile or foundation. |
 | Click | Click a face-down card at the top of a tableau pile to reveal it. |
 | Double-click an exposed card | Sends it directly to its foundation when the move is valid. |
+| :tp-icon:{name="refresh" size="2em"} New solitaire | New solitaire. |
 
 #### Keyboard interactions
 

@@ -147,6 +147,11 @@ ${JSON.stringify(material, null, 2)}`;
 
 export class QuestionAi {
 	private controller: AbortController | null = null;
+	private explainAction: (() => Promise<void>) | null = null;
+	/** Opens the explanation for the current solution when available. */
+	async explain(): Promise<void> {
+		await this.explainAction?.();
+	}
 	constructor(private readonly host: HTMLElement) {}
 	sync(): void {
 		this.dispose();
@@ -199,7 +204,7 @@ export class QuestionAi {
 						})
 						.catch(() => "unavailable")
 				: Promise.resolve("disabled");
-		button.addEventListener("click", async () => {
+		this.explainAction = async () => {
 			if (
 				button.hasAttribute("disabled") ||
 				panel.hasAttribute("data-tp-question-solution-locked") ||
@@ -378,9 +383,13 @@ export class QuestionAi {
 				progress.textContent = "";
 				button.removeAttribute("disabled");
 			}
+		};
+		button.addEventListener("click", () => {
+			void this.explain();
 		});
 	}
 	dispose(): void {
+		this.explainAction = null;
 		this.controller?.abort();
 		this.controller = null;
 	}

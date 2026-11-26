@@ -241,8 +241,6 @@ export function evaluateSequentialCombinational(
  *
  * @summary Edits and simulates synchronous sequential logic circuits.
  * @tagname tp-graph-sequential-circuit
- * @example
- * <tp-graph-sequential-circuit id="sequential-counter" grid="" grid-size="20" message="Hubs distribute CLK, Q0, and Q1 along separate orthogonal lanes." src="/docs/components/graph-sequential-circuit/examples/two-bit-counter.json"></tp-graph-sequential-circuit>
  *  @event tp-logic-toggle Emitted after an input node is toggled; id identifies the input, value is its new Boolean level, and graph contains the resulting snapshot.
  * @eventdetail tp-logic-toggle { id: string; value: boolean; graph: TpGraphDocument }
  * @event tp-logic-evaluate Emitted after combinational outputs are recomputed without advancing the clock; graph contains the resulting snapshot.
@@ -251,6 +249,8 @@ export function evaluateSequentialCombinational(
  * @eventdetail tp-sequential-clock { values: Record<string, boolean>; graph: TpGraphDocument }
  * @event tp-sequential-reset Emitted after memory elements return to their initial states and the timeline is cleared; graph contains the reset snapshot.
  * @eventdetail tp-sequential-reset { graph: TpGraphDocument }
+ * @example
+ * <tp-graph-sequential-circuit id="sequential-counter" grid="" grid-size="20" message="Hubs distribute CLK, Q0, and Q1 along separate orthogonal lanes." src="/docs/components/graph-sequential-circuit/examples/two-bit-counter.json"></tp-graph-sequential-circuit>
  */
 export class TpGraphSequentialCircuit extends TpGraphLogicalCircuit {
 	private static readonly sequentialStyleId =

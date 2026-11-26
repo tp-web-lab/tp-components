@@ -10,6 +10,9 @@
 }
 .tp-table-editor-preview[data-markup-preview] figure:has(table) {
  inline-size: fit-content;
+ padding: 0;
+ border: 0;
+ box-shadow: none;
  max-inline-size: 100%;
 }
 
@@ -21,3 +24,14 @@
  font-weight: var(--tp-font-weight-bold, 700);
 }
 
+/* Native renderers use different cell spacing; previews share TP geometry. */
+.tp-table-editor-preview[data-markup-preview] :is(th,td) {
+ padding: .75em;
+}
+
+/* AsciiDoc media wrappers must not add spacing inside an already padded cell. */
+.tp-table-editor-preview[data-markup-preview] td > .content > :is(.imageblock,.videoblock,.audioblock) {
+ margin-inline: 0;
+ padding: 0;
+ border: 0;
+}

@@ -29,11 +29,11 @@
 
                   Close
 
-            .. p::
+            .. attributes::
                :data-demo-status:
                :role: status
 
-               Try the modal using its trigger.
+            Try the modal using its trigger.
 
             .. script::
                :src: /docs/components/_shared/introduction-actions.js

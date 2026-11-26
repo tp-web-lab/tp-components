@@ -3,7 +3,10 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "vitest";
-import { generateComponentApiFiles } from "./component-api-plugin.js";
+import {
+	generateComponentApiFiles,
+	generateComponentApiForChangedFile,
+} from "./component-api-plugin.js";
 
 test("CSS API retains documented defaults and prose for both tag syntaxes", async () => {
 	const root = await mkdtemp(join(tmpdir(), "tp-css-api-"));
@@ -159,6 +162,11 @@ test("reader interactions are loaded from the dedicated help file and refreshed 
 		api = JSON.parse(await readFile(join(dir, "example.json"), "utf8"));
 		assert.match(api.userHelp.interactions, /Dismiss the notice with Close/);
 		assert.doesNotMatch(api.userHelp.interactions, /Import the module/);
+		const withoutHeading = help.split("### User interactions\n\n")[1];
+		await writeFile(join(docs, "interactions.md"), withoutHeading);
+		await generateComponentApiFiles(root, "src/components");
+		api = JSON.parse(await readFile(join(dir, "example.json"), "utf8"));
+		assert.equal(api.userHelp.interactions, withoutHeading);
 	} finally {
 		await rm(root, { recursive: true, force: true });
 	}
@@ -170,7 +178,7 @@ test("document shells retain inherited attributes through multiple levels", asyn
 		const sources: Record<string, string> = {
 			base: "/** @tagname tp-base\n * @attr {string} generic - Base only.\n */\nexport class TpBase {}",
 			"markup-multi-pages":
-				'import { TpBase } from "../base/base.js";\n/** @tagname tp-markup-multi-pages\n * @attr {string} repository = "/docs" - Root directory.\n * @attr {string} label = "" - Toolbar title.\n */\nexport class TpMarkupMultiPages extends TpBase {}',
+				'import { TpBase } from "../base/base.js";\n/** @tagname tp-markup-multi-pages\n * @attr {string} repository = "/docs" - Root directory.\n * @attr {string} label = "" - Toolbar title.\n */\nexport class TpMarkupMultiPages extends TpBase {\n/** Returns to the cover. */\ngoToCover(): void {}\nprivate hidden(): void {}\n}',
 			"markup-multi-slides":
 				'import { TpMarkupMultiPages } from "../markup-multi-pages/markup-multi-pages.js";\n/** @tagname tp-markup-multi-slides\n * @attr {number} timing = 5000 - Step duration.\n */\nexport class TpMarkupMultiSlides extends TpMarkupMultiPages {}',
 			"latex-multi-slides":
@@ -195,6 +203,69 @@ test("document shells retain inherited attributes through multiple levels", asyn
 		assert.equal(api.attributes[0].default, '"Slides"');
 		assert.equal(api.attributes[1].inherited, true);
 		assert.equal(api.attributes[2].default, "5000");
+		assert.equal(api.methods.length, 1);
+		assert.equal(api.methods[0].name, "goToCover(): void");
+		assert.equal(api.methods[0].inherited, true);
+		assert.equal(api.methods[0].description, "Returns to the cover.");
+	} finally {
+		await rm(root, { recursive: true, force: true });
+	}
+});
+
+test("editable question APIs retain src and test through their shared abstract classes", async () => {
+	const root = await mkdtemp(join(tmpdir(), "tp-question-api-"));
+	try {
+		const sources: Record<string, string> = {
+			"editor-question":
+				'/**\n * @attr {string} src = "" - Initial source file.\n * @attr {string} test = "" - External tests.\n */\nexport abstract class TpEditorQuestion {}',
+		};
+		for (const family of ["Interpreter", "Playground", "Viewer"]) {
+			const base = `${family.toLowerCase()}-question`;
+			sources[base] =
+				`import { TpEditorQuestion } from "../editor-question/editor-question.js";\n/**\n * @attr {string} src = "" - ${family} source.\n */\nexport abstract class Tp${family}Question extends TpEditorQuestion {}`;
+			sources[`javascript-${base}`] =
+				`import { Tp${family}Question } from "../${base}/${base}.js";\n/** @tagname tp-javascript-${base} */\nexport class TpJavascript${family}Question extends Tp${family}Question {}`;
+		}
+		for (const [name, source] of Object.entries(sources)) {
+			const directory = join(root, "src/components", name);
+			await mkdir(directory, { recursive: true });
+			await writeFile(join(directory, `${name}.ts`), source);
+		}
+		await generateComponentApiFiles(root, "src/components");
+		for (const family of ["Interpreter", "Playground", "Viewer"]) {
+			const name = `javascript-${family.toLowerCase()}-question`;
+			const api = JSON.parse(
+				await readFile(
+					join(root, "src/components", name, `${name}.json`),
+					"utf8",
+				),
+			);
+			const src = api.attributes.find(
+				(attribute: { name: string }) => attribute.name === "src",
+			);
+			assert.equal(src.type, "string");
+			assert.equal(src.default, '""');
+			assert.equal(src.inherited, true);
+			assert.equal(src.description, `${family} source.`);
+			assert(
+				api.attributes.some(
+					(attribute: { name: string }) => attribute.name === "test",
+				),
+			);
+		}
+	} finally {
+		await rm(root, { recursive: true, force: true });
+	}
+});
+
+test("shared tracer CSS changes do not request a nonexistent component source", async () => {
+	const root = await mkdtemp(join(tmpdir(), "tp-shared-api-"));
+	try {
+		const dir = join(root, "src/components/trace");
+		await mkdir(dir, { recursive: true });
+		const css = join(dir, "trace.css");
+		await writeFile(css, "tp-ocaml-tracer {display:block}");
+		await generateComponentApiForChangedFile(root, "src/components", css);
 	} finally {
 		await rm(root, { recursive: true, force: true });
 	}

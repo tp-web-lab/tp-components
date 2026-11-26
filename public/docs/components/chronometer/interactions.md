@@ -4,9 +4,9 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Start chronometer | Start or resume timing. |
-| Pause chronometer | Freeze the elapsed time. |
-| Stop chronometer | Stop timing and reset the display. |
+| :tp-icon:{name="play" size="2em"} Start chronometer | Start or resume timing. |
+| :tp-icon:{name="pause" size="2em"} Pause chronometer | Freeze the elapsed time. |
+| :tp-icon:{name="stop" size="2em"} Stop chronometer | Stop timing and reset the display. |
 
 #### Keyboard interactions
 

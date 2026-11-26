@@ -1,0 +1,128 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcDiv[data-tp-reference-scope]{
+  \wcTpEquanum[ref=energy,number=2.1]{
+    \rawhtml|<tp-math displaystyle="" value="E = mc^2"></tp-math>|
+  }
+  See equation \rawhtml*|<tp-ref href="=energy"></tp-ref>|.
+
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/equanum/equanum.js";
+import "/components/math/math.js";
+import "/components/ref/ref.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("div");
+element1.setAttribute("data-tp-reference-scope", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("tp-equanum");
+element2.setAttribute("ref", "energy");
+element2.setAttribute("number", "2.1");
+element2.append(document.createTextNode("\n    "));
+
+const element3 = document.createElement("tp-math");
+element3.setAttribute("displaystyle", "");
+element3.setAttribute("value", "E = mc^2");
+element2.append(element3);
+element2.append(document.createTextNode("\n  "));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("See equation "));
+
+const element5 = document.createElement("tp-ref");
+element5.setAttribute("href", "=energy");
+element4.append(element5);
+element4.append(document.createTextNode("."));
+element1.append(element4);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example align row previews
+\documentclass{article}
+\begin{document}
+\wcTpLatex{
+  \wcScript[type=tp/latex]|
+\usepackage{amsmath}
+\begin{align}
+x &= 1\label{row:first} \\
+y &= 2\label{row:second}
+\end{align}
+Compare \eqref{row:first} and \eqref{row:second}: each reference previews only its own equation.
+        |
+}
+\end{document}
+
+% !tp-example alignat row previews
+\documentclass{article}
+\begin{document}
+\wcTpLatex{
+  \wcScript[type=tp/latex]|
+\usepackage{amsmath}
+\begin{alignat}{2}
+x &= 1 &\qquad z &= 3\label{row:first} \\
+y &= 2 &\qquad w &= 4\label{row:second}
+\end{alignat}
+Compare \eqref{row:first} and \eqref{row:second}: each reference previews only its own equation.
+        |
+}
+\end{document}
+
+% !tp-example flalign row previews
+\documentclass{article}
+\begin{document}
+\wcTpLatex{
+  \wcScript[type=tp/latex]|
+\usepackage{amsmath}
+\begin{flalign}
+x &= 1 &&\label{row:first} \\
+y &= 2 &&\label{row:second}
+\end{flalign}
+Compare \eqref{row:first} and \eqref{row:second}: each reference previews only its own equation.
+        |
+}
+\end{document}
+
+% !tp-example gather row previews
+\documentclass{article}
+\begin{document}
+\wcTpLatex{
+  \wcScript[type=tp/latex]|
+\usepackage{amsmath}
+\begin{gather}
+x = 1\label{row:first} \\
+y = 2\label{row:second}
+\end{gather}
+Compare \eqref{row:first} and \eqref{row:second}: each reference previews only its own equation.
+        |
+}
+\end{document}
+
+% !tp-example eqnarray row previews
+\documentclass{article}
+\begin{document}
+\wcTpLatex{
+  \wcScript[type=tp/latex]|
+\usepackage{amsmath}
+\begin{eqnarray}
+x &=& 1\label{row:first} \\
+y &=& 2\label{row:second}
+\end{eqnarray}
+Compare \eqref{row:first} and \eqref{row:second}: each reference previews only its own equation.
+        |
+}
+\end{document}

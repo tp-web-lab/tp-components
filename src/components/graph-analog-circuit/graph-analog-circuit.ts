@@ -816,10 +816,10 @@ function renderCircuitEquations(
  *
  * @summary Provides an interactive analog-circuit editor and transient simulator.
  * @tagname tp-graph-analog-circuit
- * @example
- * <tp-graph-analog-circuit grid="" grid-size="20" message="Run the transient analysis and inspect Vin and Vout." src="/docs/components/graph-analog-circuit/examples/rc-filter.json"></tp-graph-analog-circuit>
  *  @event tp-analog-simulate Emitted after transient simulation completes and updates the graph. samples contains time/value records keyed by measurement label or probe label/ID; time, duration and step are in seconds, with voltage in volts and current in amperes.
  * @eventdetail tp-analog-simulate { samples: readonly TpAnalogSample[]; duration: number; step: number }
+ * @example
+ * <tp-graph-analog-circuit grid="" grid-size="20" message="Run the transient analysis and inspect Vin and Vout." src="/docs/components/graph-analog-circuit/examples/rc-filter.json"></tp-graph-analog-circuit>
  */
 export class TpGraphAnalogCircuit extends TpGraphEditor {
 	private static instanceCounter = 0;
@@ -1193,9 +1193,7 @@ export class TpGraphAnalogCircuit extends TpGraphEditor {
 			button.addEventListener("click", () => {
 				const mode = button.dataset.analogMode;
 				if (mode === "voltage" || mode === "current") {
-					this.measurementMode = mode;
-					this.voltageZoom = 1;
-					super.setGraph(this.value);
+					this.setMeasurementMode(mode);
 				}
 			});
 		for (const button of this.querySelectorAll<HTMLElement>(
@@ -1203,18 +1201,7 @@ export class TpGraphAnalogCircuit extends TpGraphEditor {
 		))
 			button.addEventListener("click", () => {
 				const action = button.dataset.analogCalibration;
-				if (action === "reset") {
-					this.timeZoom = 1;
-					this.voltageZoom = 1;
-				} else if (action === "time-in")
-					this.timeZoom = Math.min(16, this.timeZoom * 2);
-				else if (action === "time-out")
-					this.timeZoom = Math.max(0.25, this.timeZoom / 2);
-				else if (action === "voltage-in")
-					this.voltageZoom = Math.min(16, this.voltageZoom * 2);
-				else if (action === "voltage-out")
-					this.voltageZoom = Math.max(0.25, this.voltageZoom / 2);
-				super.setGraph(this.value);
+				this.calibrate(action ?? "");
 			});
 		this.updateAnalogControls();
 	}
@@ -1226,6 +1213,28 @@ export class TpGraphAnalogCircuit extends TpGraphEditor {
 			return `<section class="tp-analog-panel tp-analog-oscilloscope-panel"><h3 class="tp-graph-results-header">Transient analysis</h3><div class="tp-graph-results-content tp-analog-error">${escapeXml(error instanceof Error ? error.message : "Simulation failed.")}</div></section>${renderCircuitEquations(this.value, step)}`;
 		}
 	}
+	/** Selects voltage or current measurements and resets the value scale. */
+	public setMeasurementMode(mode: "voltage" | "current"): void {
+		this.measurementMode = mode;
+		this.voltageZoom = 1;
+		super.setGraph(this.value);
+	}
+
+	private calibrate(action: string): void {
+		if (action === "reset") {
+			this.timeZoom = 1;
+			this.voltageZoom = 1;
+		} else if (action === "time-in")
+			this.timeZoom = Math.min(16, this.timeZoom * 2);
+		else if (action === "time-out")
+			this.timeZoom = Math.max(0.25, this.timeZoom / 2);
+		else if (action === "voltage-in")
+			this.voltageZoom = Math.min(16, this.voltageZoom * 2);
+		else if (action === "voltage-out")
+			this.voltageZoom = Math.max(0.25, this.voltageZoom / 2);
+		super.setGraph(this.value);
+	}
+
 	private isOrientable(node: Readonly<TpGraphNode>): boolean {
 		return ![TP_ANALOG_GROUND, TP_ANALOG_HUB, TP_GRAPH_COMMENT].includes(
 			node.type,
@@ -1455,6 +1464,31 @@ export class TpGraphAnalogCircuit extends TpGraphEditor {
 		);
 		if (toggle)
 			toggle.toggleAttribute("disabled", node?.type !== TP_ANALOG_SWITCH);
+	}
+
+	/** Applies the reset oscilloscope calibration and refreshes the result. */
+	resetCalibration(): void {
+		this.calibrate("reset");
+	}
+
+	/** Applies the time out oscilloscope calibration and refreshes the result. */
+	increaseTimeDivision(): void {
+		this.calibrate("time-out");
+	}
+
+	/** Applies the time in oscilloscope calibration and refreshes the result. */
+	decreaseTimeDivision(): void {
+		this.calibrate("time-in");
+	}
+
+	/** Applies the voltage out oscilloscope calibration and refreshes the result. */
+	increaseValueDivision(): void {
+		this.calibrate("voltage-out");
+	}
+
+	/** Applies the voltage in oscilloscope calibration and refreshes the result. */
+	decreaseValueDivision(): void {
+		this.calibrate("voltage-in");
 	}
 }
 

@@ -1,5 +1,6 @@
 import { afterEach, expect, it } from "vitest";
 import "./textfield.js";
+import "../markdown/markdown.js";
 import "../mathfield/mathfield.js";
 
 afterEach(() => document.body.replaceChildren());

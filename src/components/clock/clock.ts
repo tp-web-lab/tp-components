@@ -42,9 +42,9 @@ function isSvgLineElement(value: unknown): value is SVGElement {
  * @tagname tp-clock
  * @attr {string} type = "digital" - Display type (`digital` or `analogic`).
  * @attr {string} size = "1rem" - Base CSS font size used by the display and its icons, for example 16px, 1rem or 1.5em.
+ *  @cssprop [--tp-clock-size=1rem] Font size of the clock display, updated from the size attribute.
  * @example
  * <tp-clock></tp-clock>
- *  @cssprop [--tp-clock-size=1rem] Font size of the clock display, updated from the size attribute.
  */
 export class TpClock extends TpBase {
 	private static readonly styleId = "tp-clock-styles";

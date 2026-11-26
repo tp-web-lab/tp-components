@@ -44,6 +44,8 @@ The custom `<tp-toc>` element generates a table of contents from the headings in
 
 Place the component in a document containing headings. It assigns missing heading IDs and updates when the document structure changes.
 
+Heading links create browser history entries. Use the browser’s Back and Forward commands to return to the previous reading position. Inside a `tp-*-multi-pages` guide, navigation belongs to that guide, including when it is embedded in another document.
+
 Use `position` to place it at the start, at the end, or in the center. The `open` attribute opens the panel and `expand-all` expands every nested section.
 Use `brand` to apply the soft brand background, contrasting brand text, and brand border colors.
 
@@ -90,19 +92,19 @@ Javascript API
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

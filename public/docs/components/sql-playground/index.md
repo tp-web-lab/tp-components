@@ -71,6 +71,70 @@ The `src` attribute accepts either a JSON project or a single sql source file (`
 
 Source contents are preserved. URL query parameters do not affect extension detection. Dependencies and companion files are not fetched automatically: use a JSON project or `repository` for multiple files. Source priority remains `src`, then `repository`, then internal content. Missing or incompatible files produce a console error. Existing JSON sources, including extensionless URLs, remain supported.
 
+### Query tests
+
+Set the project's `test` path to a JSON file, for example `/query.test.json`. Without an explicit path, files ending in `.test.json`, `.tests.json` or `.spec.json` are detected. Use **Test** or the inherited `test()` method to run the suite.
+
+```json
+{
+  "name": "Students",
+  "tests": [
+    {
+      "name": "Current query",
+      "expected": [
+        {
+          "columns": ["name", "score"],
+          "values": [["Ada", 90], ["Bob", 80], ["Cara", null]]
+        }
+      ]
+    },
+    {
+      "name": "Expected error",
+      "query": "SELECT * FROM unknown_table;",
+      "error": "no such table: unknown_table"
+    }
+  ]
+}
+```
+
+Each test accepts these fields:
+
+| Field | Meaning |
+| --- | --- |
+| `name` | Label in the common results table. |
+| `query` | SQL to execute, optionally containing several statements. |
+| `src` | SQL file already present in the project. Use `query` or `src`; when neither is set, the project's entry file is tested. |
+| `expected` | Array of result sets, each with `columns` and `values`. Names, column order and value types are compared exactly. |
+| `ordered` | `true` by default. With `false`, row order is ignored within each result set, while duplicate counts are preserved. Result-set order and column order still matter. |
+| `error` | Nonempty, case-sensitive substring of an expected SQL error. Use this instead of `expected`. Errors in setup or file loading cannot satisfy this expectation. |
+| `skip` | `true` or a reason string to report the case as skipped. |
+
+Use `ORDER BY` when checking ordered rows. JSON numbers, strings and `null` retain their types; BLOB values use arrays of bytes. A SELECT returning no rows still has a result set with column names and `values: []`. Statements without result columns produce no result set (`expected: []`); follow a write with a SELECT to verify its effects. SQL statement boundaries are parsed by SQLite, including semicolons inside strings and comments.
+
+Each case uses a new database. SQL projects replay the selected setup script for every case, including temporary tables and connection settings. The active SQL database file takes precedence over `setup`; otherwise `/tables.sql` and `/setup.sql` are the fallbacks. An active SQLite database uses an independent copy of its saved snapshot. Tests never save changes to the playground's persistent database and never depend on earlier cases.
+
+The shared results table displays suite, test, status and details, including expected and actual results on mismatch. Expand **Engine output** for the complete test log. An empty suite, malformed expectations, missing files and unexpected errors fail the suite. Numeric comparisons use sql.js JavaScript numbers without tolerance; use a SQL text cast when exact representation of large integers is required.
+
+### Programmatic toolbar actions
+
+Toolbar and menu actions are also available as named methods. The API tab includes methods inherited from the shared playground.
+
+| Action | Method |
+| --- | --- |
+| Run / Test / Reset | `run()` / `test()` / `reset()` |
+| New / Clear project | `newProject()` / `clearProject()` |
+| Open source file | `openSourceFile()` |
+| Save / Save as | `saveFile()` / `saveFileAs()` |
+| Import / Export project | `importProject()` / `exportProject()` |
+| Save / Load / Clear browser memory | `saveInMemory()` / `loadFromMemory()` / `clearMemory()` |
+| Load a bundled example | `loadExample(id)` |
+| Language help | `showLanguageHelp()` |
+| Show/hide the editor toolbar | `toggleEditorToolbar()` |
+
+File choosers may require a user gesture. Await asynchronous methods to wait for completion. Browser memory stores one project per playground language.
+
+Use `resetActiveDatabase()` for **DB > Reset DB**.
+
 ### Importing
 
 ::: tp-tabs
@@ -110,22 +174,25 @@ Javascript API
 
 Single source file
 : Load the standalone sql file through src and inspect its output. Open the source editor to inspect the file used as the generated project's entry point.
+
+SQL query tests
+: Run tests to compare columns and rows, including empty results, duplicates, multiple statements and an expected error. Change query.sql to reverse the ordering and inspect the mismatch; the delete case shows that each following test starts with a fresh database.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -166,6 +233,10 @@ All tp-components and external tools used by this component are loaded automatic
 @summary In-memory file system component.
 -->
 <!--
+@tp-dependency tp-fullscreen
+@summary Fullscreen controller button.
+-->
+<!--
 @tp-dependency tp-icon
 @summary SVG icon component with inline, URL, and registry sources.
 -->
@@ -187,7 +258,7 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 <!--
 @tp-dependency tp-switcher
-@summary Component `<tp-switcher>`.
+@summary Switches between horizontal and vertical layouts based on available space.
 -->
 <!--
 @tp-dependency tp-tabs
@@ -205,12 +276,13 @@ All tp-components and external tools used by this component are loaded automatic
 - [`<tp-drawer>`](#/components/drawer/index.md) : Drawer overlay component.
 - [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
 - [`<tp-filesystem>`](#/components/filesystem/index.md) : In-memory file system component.
+- [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
 - [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
 - [`<tp-iframe>`](#/components/iframe/index.md) : Controlled iframe component.
 - [`<tp-menu>`](#/components/menu/index.md) : Accessible menu component.
 - [`<tp-splitter>`](#/components/splitter/index.md) : Splitter component with two resizable panels.
-- [`<tp-switcher>`](#/components/switcher/index.md) : Component `<tp-switcher>`.
+- [`<tp-switcher>`](#/components/switcher/index.md) : Switches between horizontal and vertical layouts based on available space.
 - [`<tp-tabs>`](#/components/tabs/index.md) : Accessible tabs component with keyboard and reorder support.
 - [`<tp-toolbar>`](#/components/toolbar/index.md) : Sticky toolbar with start / center / end sections,
 

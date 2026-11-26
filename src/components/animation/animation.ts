@@ -10,6 +10,7 @@
  */
 // tp-docgen:dependencies:end
 
+import animateCss from "animate.css/animate.css?inline";
 import { TpBase } from "../base/base.js";
 import style from "./animation.css?inline";
 
@@ -70,6 +71,7 @@ function parseThreshold(value: string | null): number | number[] {
  * @attr {TpAnimationTrigger} trigger = "load" - Playback trigger: load, click, hover (also keyboard focus), intersection (entering the viewport), or manual (playIn()/playOut()).
  * @attr {string} target = "" - CSS selector of a descendant to animate. When absent, the first child element is used.
  * @attr {boolean} paused = false - Pauses playback when present; removing it allows the animation to resume.
+ * @attr {boolean} autoplay = false - Plays the entrance on connection while retaining the selected interaction trigger for replay.
  * @attr {boolean} once = false - Limits automatic click, hover/focus and intersection triggers to their first playback.
  * @attr {string} iterations = "1" - Positive number of playback cycles, or infinite for continuous repetition. Invalid values use one cycle.
  * @attr {string} out = "" - Animate.css exit animation name used by playOut(), such as fadeOut; empty means no exit animation.
@@ -83,16 +85,16 @@ function parseThreshold(value: string | null): number | number[] {
  * @accessibility Reduces Web Animations API motion to an immediate state change when the operating system requests reduced motion.
  * @accessibilityresponsibility Prefer a native interactive element, such as a button, for a click-triggered animation.
  * @keyboard {Enter / Space} Starts a click-triggered animation when its target is not a native control.
- * @example
- * <tp-animation in="fadeIn" trigger="load" duration="800ms">
- *     <tp-box>Animated content</tp-box>
- *   </tp-animation>
- *  @event tp-animation-start Emitted when an entrance or exit animation starts, including when immediately paused. The detail identifies the configured animation names and the phase.
+ * @event tp-animation-start Emitted when an entrance or exit animation starts, including when immediately paused. The detail identifies the configured animation names and the phase.
  * @eventdetail tp-animation-start { in: string; out: string; phase: "in" | "out" }
  * @event tp-animation-finish Emitted after an entrance or exit animation finishes normally; cancellation does not emit finish. The detail identifies the configured animation names and the phase.
  * @eventdetail tp-animation-finish { in: string; out: string; phase: "in" | "out" }
  * @event tp-animation-cancel Emitted when cancel() cancels an existing animation, including cancellation before starting another phase. The detail contains the configured entrance and exit animation names.
  * @eventdetail tp-animation-cancel { in: string; out: string }
+ * @example
+ * <tp-animation in="shakeX" trigger="click" autoplay duration="1200ms" iterations="3">
+ *   <tp-box>This box shakes three times on load. Click to replay.</tp-box>
+ * </tp-animation>
  */
 export class TpAnimation extends TpBase {
 	private static readonly styleId = "tp-animation-styles";
@@ -100,6 +102,7 @@ export class TpAnimation extends TpBase {
 	private targetEl: HTMLElement | null = null;
 	private animation: Animation | null = null;
 	private hasAutoPlayed = false;
+	private autoplayFrame: number | null = null;
 	private intersectionObserver: IntersectionObserver | null = null;
 	private decoratedTarget: HTMLElement | null = null;
 	private decoratedRole: string | null = null;
@@ -116,6 +119,7 @@ export class TpAnimation extends TpBase {
 			"fill",
 			"trigger",
 			"paused",
+			"autoplay",
 			"once",
 			"target",
 			"root-margin",
@@ -212,6 +216,30 @@ export class TpAnimation extends TpBase {
 		this.setAttribute("trigger", value);
 	}
 
+	public get autoplay(): boolean {
+		return this.hasAttribute("autoplay");
+	}
+	public set autoplay(value: boolean) {
+		this.toggleAttribute("autoplay", value);
+	}
+	private scheduleAutoplay(): void {
+		if (this.autoplayFrame !== null) cancelAnimationFrame(this.autoplayFrame);
+		this.autoplayFrame = requestAnimationFrame(() => {
+			this.autoplayFrame = null;
+			if (
+				!this.isConnected ||
+				!this.autoplay ||
+				(this.once && this.hasAutoPlayed)
+			)
+				return;
+			this.unbindTrigger();
+			this.ensureTarget();
+			this.bindTrigger();
+			this.hasAutoPlayed = true;
+			void this.playIn();
+		});
+	}
+
 	public get paused(): boolean {
 		return this.hasAttribute("paused");
 	}
@@ -268,7 +296,8 @@ export class TpAnimation extends TpBase {
 		this.bindTrigger();
 		this.bindIntersectionTrigger();
 
-		if (this.trigger === "load" && (!this.once || !this.hasAutoPlayed)) {
+		if (this.autoplay) this.scheduleAutoplay();
+		else if (this.trigger === "load" && (!this.once || !this.hasAutoPlayed)) {
 			this.hasAutoPlayed = true;
 			void this.playIn();
 		}
@@ -293,12 +322,17 @@ export class TpAnimation extends TpBase {
 		this.unbindIntersectionTrigger();
 		this.bindIntersectionTrigger();
 
+		if (name === "autoplay" && this.autoplay) this.scheduleAutoplay();
 		if (this.paused) {
 			this.pause();
+		} else if (name === "paused") {
+			this.resume();
 		}
 	}
 
 	public disconnectedCallback(): void {
+		if (this.autoplayFrame !== null) cancelAnimationFrame(this.autoplayFrame);
+		this.autoplayFrame = null;
 		super.connectedCallback();
 		this.cancel();
 		this.unbindTrigger();
@@ -334,6 +368,17 @@ export class TpAnimation extends TpBase {
 	}
 
 	/**
+	 * @summary Resumes a paused animation at its current time; does nothing when no paused animation exists.
+	 */
+	public resume(): void {
+		if (this.paused) {
+			this.removeAttribute("paused");
+			return;
+		}
+		if (this.animation?.playState === "paused") this.animation.play();
+	}
+
+	/**
 	 * @summary Cancels the current animation, clears its playback reference and emits tp-animation-cancel when an animation existed.
 	 */
 	public cancel(): void {
@@ -366,7 +411,7 @@ export class TpAnimation extends TpBase {
 
 		const styleEl = document.createElement("style");
 		styleEl.id = TpAnimation.styleId;
-		styleEl.textContent = style;
+		styleEl.textContent = `${animateCss}\n${style}`;
 		document.head.append(styleEl);
 	}
 
@@ -526,7 +571,11 @@ export class TpAnimation extends TpBase {
 		animationName: string,
 		phase: "in" | "out",
 	): Promise<void> {
-		if (this.targetEl === null || animationName === "") {
+		if (
+			this.targetEl === null ||
+			animationName === "" ||
+			typeof this.targetEl.animate !== "function"
+		) {
 			return;
 		}
 
@@ -610,6 +659,19 @@ export class TpAnimation extends TpBase {
 
 		if (animationName === "none") {
 			return null;
+		}
+
+		// Read the browser's actual keyframes, preserving intermediate transforms,
+		// easing and properties that cannot be recovered by opacity sampling.
+		const cssAnimation = element
+			.getAnimations?.()
+			.find(
+				(animation) =>
+					"animationName" in animation &&
+					animation.animationName === animationName,
+			);
+		if (cssAnimation?.effect && "getKeyframes" in cssAnimation.effect) {
+			return (cssAnimation.effect as KeyframeEffect).getKeyframes();
 		}
 
 		const samples = [0, 0.25, 0.5, 0.75, 1];

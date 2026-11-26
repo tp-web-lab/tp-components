@@ -48,6 +48,24 @@ Each `.tex` file can be selected as the entry document. Inline scripts may use `
 
 LaTeX renders as HTML with MathJax formulas, interactive components and TikZ figures. This uses the packages and commands supported by `@tp/tp-latex`; it does not run a general-purpose PDF compiler. Use `\input{sections/introduction}` to assemble project files into one document. Paths are relative to the entry document directory, and the `.tex` extension may be omitted. Nested inputs are supported; missing files and circular inputs are reported in the console. Inputs use only files already loaded in the project. Filenames must be literal; macro-generated paths and `\include` are not supported. Commands inside comments, verbatim regions, `\wcScript` and `\rawhtml` remain literal.
 
+### Programmatic toolbar actions
+
+Toolbar and menu actions are also available as named methods. The API tab includes methods inherited from the shared playground.
+
+| Action | Method |
+| --- | --- |
+| Run / Test / Reset | `run()` / `test()` / `reset()` |
+| New / Clear project | `newProject()` / `clearProject()` |
+| Open source file | `openSourceFile()` |
+| Save / Save as | `saveFile()` / `saveFileAs()` |
+| Import / Export project | `importProject()` / `exportProject()` |
+| Save / Load / Clear browser memory | `saveInMemory()` / `loadFromMemory()` / `clearMemory()` |
+| Load a bundled example | `loadExample(id)` |
+| Language help | `showLanguageHelp()` |
+| Show/hide the editor toolbar | `toggleEditorToolbar()` |
+
+File choosers may require a user gesture. Await asynchronous methods to wait for completion. Browser memory stores one project per playground language.
+
 ### Importing
 
 ::: tp-tabs
@@ -93,19 +111,19 @@ A document with a TikZ figure
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -144,6 +162,10 @@ All tp-components and external tools used by this component are loaded automatic
 <!--
 @tp-dependency tp-filesystem
 @summary In-memory file system component.
+-->
+<!--
+@tp-dependency tp-fullscreen
+@summary Fullscreen controller button.
 -->
 <!--
 @tp-dependency tp-html-viewer
@@ -189,6 +211,7 @@ All tp-components and external tools used by this component are loaded automatic
 - [`<tp-drawer>`](#/components/drawer/index.md) : Drawer overlay component.
 - [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
 - [`<tp-filesystem>`](#/components/filesystem/index.md) : In-memory file system component.
+- [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
 - [`<tp-html-viewer>`](#/components/html-viewer/index.md) : Interactive HTML viewer with editable source, live rendering, and DOM inspection.
 - [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.

@@ -1,4 +1,5 @@
 import { afterEach, expect, it, vi } from "vitest";
+import codeEditorApi from "../code-editor/code-editor.json";
 import { TpComponentViewer } from "./component-viewer.js";
 
 const api = {
@@ -667,7 +668,7 @@ it("documents all declared controls independently of changes in the demo", async
 					tagname: "tp-console",
 					userHelp: {
 						interactions:
-							"#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Copy console | Copy displayed messages. |\n| Clear console | Remove displayed messages. |\n\n#### Keyboard interactions",
+							'#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| :tp-icon:{name="copy"} Copy console | Copy displayed messages. |\n| :tp-icon:{name="close"} Clear console | Remove displayed messages. |\n\n#### Keyboard interactions',
 					},
 					examples: [
 						{ code: "<tp-console><tp-button>Try me</tp-button></tp-console>" },
@@ -847,3 +848,203 @@ it("shows game button names and every state icon without listing mouse gestures"
 	expect(mouse?.textContent).not.toContain("Rules of the game");
 	expect(mouse?.querySelectorAll("tbody tr")).toHaveLength(1);
 });
+
+it("shows declared button icons with their own libraries, excluding gestures", async () => {
+	vi.spyOn(globalThis, "fetch").mockImplementation(
+		async () =>
+			new Response(
+				JSON.stringify({
+					...api,
+					userHelp: {
+						interactions: `#### Mouse interactions
+
+| Control or gesture | Result |
+| --- | --- |
+| Drag the canvas | Move the view. |
+| :tp-icon:{name="file"} :tp-icon:{name="file_type_html" library="languages"} Files | Open file options. |
+| <!-- button --> Confirm | Apply the selection. |
+
+#### Keyboard interactions
+`,
+					},
+				}),
+			),
+	);
+	const viewer = await mount();
+	const legend = viewer.querySelector("[data-component-buttons]");
+	expect(legend?.querySelectorAll("tbody tr")).toHaveLength(2);
+	expect(legend?.textContent).not.toContain("Drag the canvas");
+	expect(legend?.textContent).toContain("Confirm");
+	expect(
+		[...(legend?.querySelectorAll("tp-icon") ?? [])].map((icon) => [
+			icon.getAttribute("name"),
+			icon.getAttribute("library"),
+			icon.getAttribute("size"),
+		]),
+	).toEqual([
+		["file", null, "2em"],
+		["file_type_html", "languages", "2em"],
+	]);
+	expect(legend?.querySelector("button,tp-icon-button")).toBeNull();
+});
+
+it("does not present reading instructions as buttons", async () => {
+	vi.spyOn(globalThis, "fetch").mockImplementation(
+		async () =>
+			new Response(
+				JSON.stringify({
+					...api,
+					userHelp: {
+						interactions:
+							"#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Reading | Read the content. |\n\n#### Keyboard interactions",
+					},
+				}),
+			),
+	);
+	const viewer = await mount();
+	expect(viewer.querySelector("[data-component-buttons]")?.textContent).toBe(
+		"No component-specific buttons.",
+	);
+});
+
+it("limits code-editor Buttons to its five toolbar controls, not palette shortcuts", async () => {
+	vi.spyOn(globalThis, "fetch").mockImplementation(
+		async () => new Response(JSON.stringify(codeEditorApi)),
+	);
+	const viewer = await mount(
+		'<tp-component-viewer tag="tp-code-editor"></tp-component-viewer>',
+		"tp-code-editor",
+	);
+	const legend = viewer.querySelector("[data-component-buttons]");
+	expect(
+		[...(legend?.querySelectorAll("tbody tr td:first-child") ?? [])].map(
+			(cell) => cell.textContent?.trim(),
+		),
+	).toEqual([
+		"Keyboard shortcuts",
+		"Save as",
+		"Copy code",
+		"Theme",
+		"Fullscreen",
+	]);
+	expect(
+		[...(legend?.querySelectorAll("tp-icon") ?? [])].map((icon) =>
+			icon.getAttribute("name"),
+		),
+	).toEqual([
+		"keyboard-outline",
+		"file-upload-as",
+		"copy",
+		"theme-light-dark",
+		"fullscreen",
+		"fullscreen-exit",
+	]);
+	expect(legend?.textContent).not.toMatch(
+		/Palette:|Language badge|Editor text|Clipboard permission/,
+	);
+	expect(
+		codeEditorApi.userHelp.commands.some((command) =>
+			command.button.startsWith("Palette:"),
+		),
+	).toBe(true);
+});
+
+it.each(["interpreter", "playground", "viewer"])(
+	"shows inherited src and test in %s question demos",
+	async (family) => {
+		const tag = `tp-javascript-${family}-question`;
+		vi.spyOn(globalThis, "fetch").mockImplementation(
+			async () =>
+				new Response(
+					JSON.stringify({
+						...api,
+						tagname: tag,
+						examples: [
+							{
+								code: `<${tag} src="/double.js" test="/double.test.js"></${tag}>`,
+							},
+						],
+						attributes: ["src", "test"].map((name) => ({
+							name,
+							type: "string",
+							default: '""',
+							inherited: true,
+						})),
+					}),
+				),
+		);
+		const viewer = await mount(
+			`<tp-component-viewer tag="${tag}"></tp-component-viewer>`,
+			tag,
+		);
+		const controls = viewer.querySelector("[data-component-controls]");
+		expect(controls?.textContent).toContain("src");
+		expect(controls?.textContent).toContain("test");
+		expect(viewer.querySelector("iframe")?.srcdoc).toContain(
+			'src="/double.js"',
+		);
+	},
+);
+
+const playgroundApis = Object.values(
+	import.meta.glob<{
+		tagname: string;
+		classname: string;
+		methods: { name: string; description: string; inherited?: boolean }[];
+	}>("../*-playground/*-playground.json", { eager: true, import: "default" }),
+);
+
+it.each(playgroundApis)(
+	"displays inherited interaction methods in $tagname Doc / Methods",
+	async (manifest) => {
+		vi.spyOn(globalThis, "fetch").mockResolvedValue(
+			new Response(
+				JSON.stringify({
+					...manifest,
+					attributes: [],
+					examples: [{ code: `<${manifest.tagname}></${manifest.tagname}>` }],
+				}),
+			),
+		);
+		const viewer = new TpComponentViewer();
+		viewer.setAttribute("tag", manifest.tagname);
+		document.body.append(viewer);
+		await vi.waitFor(() =>
+			expect(
+				viewer.querySelector(".tp-component-viewer-docs tp-tabs"),
+			).not.toBeNull(),
+		);
+		const tabs = viewer.querySelector(".tp-component-viewer-docs tp-tabs");
+		const methodsTab = Array.from(
+			tabs?.querySelectorAll<HTMLElement>('[role="tab"]') ?? [],
+		).find((tab) => tab.textContent?.trim() === "Methods");
+		expect(methodsTab).toBeDefined();
+		methodsTab?.click();
+		const panelId = methodsTab?.getAttribute("aria-controls");
+		const panel = panelId ? document.getElementById(panelId) : null;
+		expect(panel).not.toBeNull();
+		expect(panel?.hidden).toBe(false);
+		for (const action of [
+			"run",
+			"test",
+			"reset",
+			"newProject",
+			"clearProject",
+			"saveFile",
+			"saveFileAs",
+			"importProject",
+			"exportProject",
+			"loadExample",
+			"showLanguageHelp",
+		]) {
+			expect(
+				manifest.methods.some((method) => method.name.startsWith(`${action}(`)),
+			).toBe(true);
+			expect(panel?.textContent).toContain(`${action}(`);
+		}
+		for (const method of manifest.methods) {
+			expect(panel?.textContent).toContain(method.name);
+			expect(panel?.textContent).toContain(method.description);
+		}
+	},
+);

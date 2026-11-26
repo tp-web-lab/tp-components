@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-11-24T10:12:46.707Z",
+  "browser": "chrome",
+  "version": "158.0.8127.38",
+  "parserSha256": "a02568410fe35d3719f76ecb738f894ce1f71050dca1d630a3afd7f675cfc02f",
+  "results": [
+    {
+      "scenario": "docutils",
+      "passed": true,
+      "firstError": "PythonError: Traceback (most recent call last):\n  File \"/lib/python313.zip/_pyodide/_base.py\", line 597, in eval_code_async\n    await CodeRunner(\n    ...<9 lines>...\n    .run_async(globals, locals)\n  File \"/lib/python313.zip/_pyodide/_base.py\", line 411, in run_async\n    coroutine = eval(self.code, globals, locals)\n  File \"<exec>\", line 9, in <module>\nModuleNotFoundError: No module named 'docutils'\nThe module 'docutils' is included in the Pyodide distribution, but it is not installed.\nYou can install it by calling:\n  await micropip.install(\"docutils\") in Python, or\n  await pyodide.loadPackage(\"docutils\") in JavaScript\nSee https://pyodide.org/en/stable/usage/loading-packages.html for more details.\n",
+      "failureMilliseconds": 1172.6000000238419,
+      "recoveryMilliseconds": 455.30000001192093,
+      "highlighted": true,
+      "requests": [
+        {
+          "file": "docutils-0.21.2-py3-none-any.whl",
+          "interrupted": true,
+          "at": 1795515163661
+        },
+        {
+          "file": "pygments-2.19.1-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795515163662
+        },
+        {
+          "file": "docutils-0.21.2-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795515163971
+        }
+      ],
+      "totalMilliseconds": 1804
+    },
+    {
+      "scenario": "pygments",
+      "passed": false,
+      "firstError": null,
+      "failureMilliseconds": 1470.8999999761581,
+      "recoveryMilliseconds": 92.40000003576279,
+      "highlighted": false,
+      "requests": [
+        {
+          "file": "docutils-0.21.2-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795515165798
+        },
+        {
+          "file": "pygments-2.19.1-py3-none-any.whl",
+          "interrupted": true,
+          "at": 1795515165799
+        },
+        {
+          "file": "pygments-2.19.1-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795515166425
+        }
+      ],
+      "totalMilliseconds": 1746
+    }
+  ]
+}

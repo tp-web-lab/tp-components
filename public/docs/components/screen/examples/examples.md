@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-screen" allow-script }
+::::: tp-markdown-viewer { label="tp-screen" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-screen { src="/docs/components/screen/examples/responsive.html" }

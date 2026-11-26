@@ -33,6 +33,10 @@
  * @summary In-memory file system component.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -147,6 +151,7 @@ function createBody(project: TpJavascriptProject): string {
  * @attr {string} repository = "" - Directory containing a JavaScript playground project to load at initialization.
  * @attr {string} src = "" - JSON project or javascript source file to load.
  *
+ * @keyboard {Shift+Enter} Run the current project.
  * @example
  * <tp-javascript-playground src="/docs/components/_shared/intro-projects/javascript.json"></tp-javascript-playground>
  */
@@ -155,7 +160,10 @@ export class TpJavascriptPlayground extends TpPlayground<TpJavascriptProject> {
 		return true;
 	}
 
-	private applyImportmap(importmap: Record<string, unknown> | undefined): void {
+	/** Replaces the project import map, retaining current file edits; undefined removes it. */
+	public async setImportmap(
+		importmap: Record<string, unknown> | undefined,
+	): Promise<void> {
 		this.syncProjectFromFilesystem();
 
 		const project = this.getProject();
@@ -170,7 +178,7 @@ export class TpJavascriptPlayground extends TpPlayground<TpJavascriptProject> {
 			}),
 		);
 
-		void this.run();
+		await this.run();
 	}
 
 	protected override createEmptyProject(): TpJavascriptProject {
@@ -331,10 +339,11 @@ console.log('Hello from JavaScript');
         owner.document.body.append(realm);
         owner.__tpJavascriptNotebookRealms.set(executionScope, realm);
       }
-      realm.contentWindow.console = console;
       const source = (await (await fetch(entryUrl)).text())
         .replace(/(^|\\n)(\\s*)(?:let|const)(\\s+)/g, '$1$2var$3')
         .replace(/^\\s*export\\s*\\{\\s*\\};?\\s*$/gm, '');
+      // Bind after the asynchronous fetch so another cell cannot redirect synchronous output.
+      realm.contentWindow.console = console;
       if (/^\\s*(?:import|export)\\b/m.test(source)) await import(entryUrl);
       else realm.contentWindow.eval(source);
     }
@@ -375,7 +384,7 @@ console.log('Hello from JavaScript');
 	protected override handleAdditionalToolbarAction(action: string): boolean {
 		switch (action) {
 			case "javascript-importmap-lit":
-				this.applyImportmap({
+				this.setImportmap({
 					imports: {
 						lit: "https://cdn.jsdelivr.net/npm/lit@3/+esm",
 					},
@@ -383,7 +392,7 @@ console.log('Hello from JavaScript');
 				return true;
 
 			case "javascript-importmap-shoelace":
-				this.applyImportmap({
+				this.setImportmap({
 					imports: {
 						"@shoelace-style/shoelace":
 							"https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2/+esm",
@@ -392,7 +401,7 @@ console.log('Hello from JavaScript');
 				return true;
 
 			case "javascript-importmap-none":
-				this.applyImportmap(undefined);
+				this.setImportmap(undefined);
 				return true;
 
 			default:

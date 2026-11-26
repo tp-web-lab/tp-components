@@ -12,26 +12,14 @@ tp-copy-code {
   color: var(--tp-text-body);
 }
 
-tp-copy-code > tp-animation {
+tp-copy-code [data-tp-copy-code-anchor],
+tp-copy-code [data-tp-copy-code-animation] {
   display: inline-flex;
 }
 
-tp-copy-code > tp-animation > tp-icon {
-  pointer-events: none;
-}
-
-
-tp-copy-code:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
-}
-
-tp-copy-code[data-state='success'] {
-  color: var(--tp-copy-code-success-color, green);
-}
-
-tp-copy-code[data-state='error'] {
-  color: var(--tp-copy-code-error-color, red);
+tp-copy-code [data-tp-copy-code-icon] {
+  --tp-button-success: var(--tp-copy-code-success-color, var(--tp-success-text-colorful));
+  --tp-button-danger: var(--tp-copy-code-error-color, var(--tp-danger-text-colorful));
 }
 
 pre.tp-code-block-copy {

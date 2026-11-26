@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-html-playground" allow-script }
+::::: tp-markdown-viewer { label="tp-html-playground" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-html-playground { src="/docs/components/_shared/intro-projects/html.json" }

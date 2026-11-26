@@ -12,10 +12,8 @@ Choose English or French to change the message in this isolated example.
 ====
 ====
 
-[h2%data-demo-translation]
-====
-Welcome to this example.
-====
+[discrete,data-demo-translation=""]
+== Welcome to this example.
 
 [script,src="/docs/components/_shared/introduction-actions.js"]
 ====

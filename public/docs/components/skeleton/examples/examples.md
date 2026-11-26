@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-skeleton" allow-script }
+:::::: tp-markdown-viewer { label="tp-skeleton" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-skeleton { label="Article layout preview" }

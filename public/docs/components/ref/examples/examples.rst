@@ -9,11 +9,12 @@
 
          .. role:: example-tp-ref-1(tp-ref)
             :href: ^detail
+            :tp-empty: true
 
          .. div::
             :data-tp-reference-scope:
 
-            A useful detail :example-tp-ref-1:`note-detail`.
+            A useful detail :example-tp-ref-1:`note-detail-1`.
 
             .. tp-note::
                :ref: detail

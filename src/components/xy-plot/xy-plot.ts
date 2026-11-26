@@ -718,7 +718,8 @@ export class TpXYPlot extends TpBase {
 		}
 	}
 
-	private async toggleZoomSource(): Promise<void> {
+	/** Shows or hides the definition in the enlarged graph. */
+	async toggleZoomSource(): Promise<void> {
 		const dialog = this.querySelector<HTMLDialogElement>(".tp-xy-plot-dialog");
 		if (!dialog?.open) return;
 		if (this.sourceHome) {
@@ -749,7 +750,8 @@ export class TpXYPlot extends TpBase {
 		// Moving disconnects CodeMirror; restore live input rather than its initial source.
 		if (editor && draft !== undefined) editor.setValue(draft);
 	}
-	private async toggleSource(): Promise<void> {
+	/** Shows or hides the graph definition. */
+	async toggleSource(): Promise<void> {
 		await this.ensureDefinition();
 		if (!this.settingsEditor) return;
 		const open = this.toggleAttribute("data-source-open");
@@ -1051,6 +1053,82 @@ export class TpXYPlot extends TpBase {
 			this.innerHTML = `<pre class="tp-xy-plot-error" role="alert" data-xy-plot-output><code>${escapeHtml(message)}</code></pre>`;
 			this.syncSettings();
 		}
+	}
+
+	/** Restores the preceding graph definition. */
+	undo(): void {
+		this.navigateHistory(false);
+	}
+
+	/** Restores the next graph definition. */
+	redo(): void {
+		this.navigateHistory(true);
+	}
+
+	/** Increases the graph viewport magnification. */
+	zoomIn(): void {
+		this.changeZoom(1);
+	}
+
+	/** Decreases the graph viewport magnification. */
+	zoomOut(): void {
+		this.changeZoom(-1);
+	}
+
+	/** Restores the original graph viewport. */
+	resetZoom(): void {
+		this.renderViewport(0, 0, 0);
+	}
+
+	/** Closes the enlarged graph. */
+	closeZoom(): void {
+		this.querySelector<HTMLDialogElement>(".tp-xy-plot-dialog")?.close();
+	}
+
+	/** Restores the initially loaded graph and its settings. */
+	reset(): void {
+		this.settingsEditor?.reset();
+	}
+
+	/** Restores the definition draft from the displayed graph. */
+	resetSource(): void {
+		this.settingsEditor?.resetSource();
+	}
+
+	/** Applies the definition draft and reports errors without replacing the last valid graph. */
+	applyDefinition(): void {
+		this.settingsEditor?.applySource();
+	}
+
+	/** Shows or hides the graph definition editor toolbar. */
+	toggleEditorToolbar(): void {
+		this.settingsEditor?.toggleEditorToolbar();
+	}
+
+	/** Opens or closes the graph definition files menu. */
+	openFiles(): void {
+		this.settingsEditor?.toggleFiles();
+	}
+
+	/** Chooses and validates a graph definition file. Requires a user gesture in browsers that restrict file dialogs. */
+	async loadFile(): Promise<void> {
+		await this.settingsEditor?.fileAction("load");
+	}
+
+	/** Saves the definition draft to its current file or asks for a destination. */
+	async save(): Promise<void> {
+		await this.settingsEditor?.fileAction("save");
+	}
+
+	/** Asks for a destination and saves the graph definition draft. */
+	async saveAs(): Promise<void> {
+		await this.settingsEditor?.fileAction("save-as");
+	}
+
+	/** Opens the enlarged graph dialog. */
+	openZoom(): void {
+		const dialog = this.querySelector<HTMLDialogElement>(".tp-xy-plot-dialog");
+		if (dialog && !dialog.open) dialog.showModal();
 	}
 }
 

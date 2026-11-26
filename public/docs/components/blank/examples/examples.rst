@@ -30,13 +30,15 @@
 
             Answers
                1. Paris
+               2.
 
-               2. .. image:: /docs/medias/examples/36c2ceb2a29fc3ae.svg
+                  .. image:: /docs/medias/examples/36c2ceb2a29fc3ae.svg
                      :alt: Triangle
                      :width: 48
                      :height: 40
+               3.
 
-               3. .. image:: /docs/medias/logos/logo-tp.svg
+                  .. image:: /docs/medias/logos/logo-tp.svg
                      :alt: tp-components logo
                      :width: 40
                      :height: 40

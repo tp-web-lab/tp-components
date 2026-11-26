@@ -34,11 +34,11 @@ import style from "./audio-recorder.css?inline";
  * @tagname tp-audio-recorder
  * @event tp-audio-recorded Emitted when a recording is ready.
  * @eventdetail tp-audio-recorded { blob: Blob }
- * @example
- * <tp-audio-recorder></tp-audio-recorder>
  *  @accessibility Groups recording controls in a native fieldset with a legend; Record, Stop and Clear use labelled buttons whose disabled state follows recording availability.
  * @accessibility Exposes recording and transcription messages through status regions and provides labelled native audio playback controls and a download link.
  * @accessibilityresponsibility Provide a meaningful legend and an alternative response method when microphone recording is unavailable or unsuitable; review any automatic transcript before using it as an equivalent text alternative.
+ * @example
+ * <tp-audio-recorder></tp-audio-recorder>
  */
 export class TpAudioRecorder extends TpBase {
 	public static override get observedAttributes(): string[] {

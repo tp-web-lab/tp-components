@@ -354,11 +354,13 @@
 
   pre {
     position: relative;
-    padding: calc(var(--tp-content-spacing) / 2);
-    border-radius: var(--tp-border-radius-md);
-    background: var(--tp-neutral-fill-softer);
-    color: var(--tp-neutral-text-on-soft);
-    font-size: 0.9375rem;
+    padding: var(--tp-code-padding-block) var(--tp-code-padding-inline);
+    border: 0;
+    border-radius: 0;
+    background: var(--tp-syntax-surface);
+    color: var(--tp-syntax-foreground);
+    font-size: var(--tp-code-font-size);
+    line-height: var(--tp-code-line-height);
     font-family: var(--tp-font-family-code);
     tab-size: 2;
 
@@ -374,85 +376,7 @@
     }
   }
 
-  .hljs {
-    display: block;
-    overflow-x: auto;
-    background: transparent;
-    color: var(--tp-syntax-foreground, #d4d4d4);
-  }
 
-  .hljs-subst {
-    color: var(--tp-syntax-foreground, #d4d4d4);
-  }
-
-  .hljs-comment,
-  .hljs-quote {
-    color: var(--tp-syntax-token-comment, #6a9955);
-    font-style: italic;
-  }
-
-  .hljs-keyword,
-  .hljs-selector-tag,
-  .hljs-literal,
-  .hljs-name,
-  .hljs-meta .hljs-keyword {
-    color: var(--tp-syntax-token-keyword, #569cd6);
-  }
-
-  .hljs-string,
-  .hljs-attr,
-  .hljs-addition,
-  .hljs-regexp,
-  .hljs-template-tag,
-  .hljs-template-variable {
-    color: var(--tp-syntax-token-string, #ce9178);
-  }
-
-  .hljs-number,
-  .hljs-symbol,
-  .hljs-bullet {
-    color: var(--tp-syntax-token-number, #b5cea8);
-  }
-
-  .hljs-variable,
-  .hljs-params,
-  .hljs-selector-class,
-  .hljs-selector-id {
-    color: var(--tp-syntax-token-variable, #9cdcfe);
-  }
-
-  .hljs-property,
-  .hljs-attribute,
-  .hljs-tag,
-  .hljs-selector-attr,
-  .hljs-selector-pseudo {
-    color: var(--tp-syntax-token-property, #9cdcfe);
-  }
-
-  .hljs-type,
-  .hljs-class .hljs-title,
-  .hljs-title.class_ {
-    color: var(--tp-syntax-token-type, #4ec9b0);
-  }
-
-  .hljs-title,
-  .hljs-title.function_,
-  .hljs-function .hljs-title {
-    color: var(--tp-syntax-token-function, #dcdcaa);
-  }
-
-  .hljs-link {
-    color: var(--tp-syntax-token-link, #4fc1ff);
-    text-decoration: underline;
-  }
-
-  .hljs-emphasis {
-    font-style: italic;
-  }
-
-  .hljs-strong {
-    font-weight: var(--tp-font-weight-bold);
-  }
 
   /* Lists */
   ul,
@@ -482,6 +406,24 @@
   ol ol {
     margin-block-end: 0;
   }
+
+  /* Shared authored alignment and LaTeX-compatible text structures. */
+  .tp-align-center { text-align: center; }
+  .tp-align-left { text-align: left; }
+  .tp-align-right { text-align: right; }
+  blockquote.tp-quotation > p + p { text-indent: 1.5em; }
+  .tp-verse { margin-inline: 1.5em; }
+  .tp-verse > p { padding-inline-start: 1.5em; text-indent: -1.5em; }
+  .tp-minipage { display: inline-flex; flex-direction: column; max-width: 100%; min-width: 0; vertical-align: middle; }
+  .tp-minipage[data-tp-position="t"] { vertical-align: top; }
+  .tp-minipage[data-tp-position="b"] { vertical-align: bottom; }
+  .tp-minipage[data-tp-inner-position="t"] { justify-content: flex-start; }
+  .tp-minipage[data-tp-inner-position="c"] { justify-content: center; }
+  .tp-minipage[data-tp-inner-position="b"] { justify-content: flex-end; }
+  table.tp-tabbing, table.tp-tabbing :where(tbody,tr,td) { border: 0; background: transparent; }
+  table.tp-tabbing td { padding: 0 .75em 0 0; vertical-align: top; }
+  table.tp-tabbing .tp-tabbing-guide { visibility: collapse; }
+  table.tp-latex-centered { margin-inline: auto; }
 
   /* Figures */
   figure {
@@ -626,7 +568,8 @@
 
   /* Tables */
   table {
-    width: 100%;
+    width: auto;
+    max-inline-size: 100%;
     border: var(--tp-border-style) var(--tp-border-width) var(--tp-neutral-stroke-soft);
     border-spacing: 0;
     border-collapse: collapse;
@@ -657,7 +600,7 @@
   thead td,
   tr:not(:last-of-type) th,
   tr:not(:last-of-type) td {
-    border-bottom: var(--tp-border-style) var(--tp-border-width) var(--tp-neutral-stroke-softer);
+    border-bottom: var(--tp-border-style) var(--tp-border-width) var(--tp-neutral-stroke-soft);
   }
 
   tr > :is(th, td) {
@@ -666,7 +609,7 @@
 
   tfoot th,
   tfoot td {
-    border-top: var(--tp-border-style) var(--tp-border-width) var(--tp-neutral-stroke-softer);
+    border-top: var(--tp-border-style) var(--tp-border-width) var(--tp-neutral-stroke-soft);
   }
 
   th,
@@ -680,6 +623,7 @@
     padding: 0.75em;
     font-variant-numeric: tabular-nums;
     text-align: start;
+    vertical-align: top;
   }
 
   table.tp-striped tbody tr:nth-child(2n) {

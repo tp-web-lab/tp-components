@@ -7,6 +7,7 @@
 | Using the component | Type a date or use the browser's date picker. |
 | Using the component | The display follows your locale. |
 | Using the component | Use the clear control when available to remove the selected date. |
+| :tp-icon:{name="copy" size="2em"} Copy code (when enabled) | Copy the current value to the clipboard. |
 
 #### Keyboard interactions
 

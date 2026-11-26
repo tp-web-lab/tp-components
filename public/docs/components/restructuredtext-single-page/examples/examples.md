@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-restructuredtext-single-page" allow-script }
+:::::: tp-markdown-viewer { label="tp-restructuredtext-single-page" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-restructuredtext-single-page

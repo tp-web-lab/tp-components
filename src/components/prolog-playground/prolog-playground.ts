@@ -33,6 +33,10 @@
  * @summary In-memory file system component.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -77,7 +81,11 @@
  * @summary Web-component examples and import maps.
  */
 /**
- * @credit Scryer Prolog https://www.scryer.pl/
+ * @credit PlUnit https://www.swi-prolog.org/pldoc/package/plunit
+ * @summary Native SWI-Prolog test suites and assertions.
+ */
+/**
+ * @credit SWI-Prolog WASM https://www.swi-prolog.org/
  * @summary Prolog execution in the browser.
  */
 /**
@@ -102,7 +110,7 @@ export { TpPrologProject } from "./prolog-project.js";
 /**
  * The custom `<tp-prolog-playground>` element edits and runs Prolog projects.
  *
- * Provides a file-based playground that executes Prolog in the browser with Scryer Prolog.
+ * Provides a file-based playground that executes Prolog in the browser with SWI-Prolog WASM.
  *
  * @summary Edits and runs Prolog projects.
  * @tagname tp-prolog-playground
@@ -110,6 +118,7 @@ export { TpPrologProject } from "./prolog-project.js";
  * @attr {string} repository = "" - Directory containing a Prolog playground project to load at initialization.
  * @attr {string} src = "" - JSON project or prolog source file to load.
  *
+ * @keyboard {Shift+Enter} Run the current project.
  * @example
  * <tp-prolog-playground src="/docs/components/_shared/intro-projects/prolog.json"></tp-prolog-playground>
  */
@@ -208,10 +217,10 @@ grandparent(Grandparent, Grandchild) :-
 	protected override getLanguageHelp(): string {
 		return `
       <h2>Prolog</h2>
-      <p>Ce playground exécute Prolog avec Scryer Prolog et prend en charge les contraintes CLP(Z).</p>
+      <p>This playground runs SWI-Prolog WASM with CLP(FD), native DOM access and PlUnit tests.</p>
       <ul>
-        <li><a href="https://www.scryer.pl/" target="_blank" rel="noreferrer">Scryer Prolog</a></li>
-        <li><a href="https://github.com/guregu/scryer-js" target="_blank" rel="noreferrer">scryer-js</a></li>
+        <li><a href="https://www.swi-prolog.org/" target="_blank" rel="noreferrer">SWI-Prolog WASM</a></li>
+        <li><a href="https://www.swi-prolog.org/pldoc/man?section=wasm-version" target="_blank" rel="noreferrer">WASM documentation</a></li>
       </ul>
     `;
 	}

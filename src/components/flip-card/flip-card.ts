@@ -41,6 +41,8 @@ const FLIP_CARD_SIDES: FlipCardSide[] = ["recto", "verso"];
  * @cssprop --tp-flip-card-button-offset Distance between the button and the card edge.
  * @cssprop --tp-flip-card-padding Card face padding.
  * @cssprop --tp-flip-card-width Card width.
+ *  @event tp-flip-card-change Emitted when the visible side changes; flipped is true when the back face is visible.
+ * @eventdetail tp-flip-card-change { flipped: boolean }
  * @example
  * <tp-flip-card>
  * <dl>
@@ -48,8 +50,6 @@ const FLIP_CARD_SIDES: FlipCardSide[] = ["recto", "verso"];
  *   <dt>verso</dt><dd><p>...and here is the content <strong>verso.</strong></p></dd>
  * </dl>
  * </tp-flip-card>
- *  @event tp-flip-card-change Emitted when the visible side changes; flipped is true when the back face is visible.
- * @eventdetail tp-flip-card-change { flipped: boolean }
  */
 export class TpFlipCard extends TpBase {
 	private static readonly styleId = "tp-flip-card-styles";

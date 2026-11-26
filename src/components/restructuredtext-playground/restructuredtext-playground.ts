@@ -33,6 +33,10 @@
  * @summary In-memory file system component.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -123,6 +127,7 @@ export { TpRestructuredTextProject } from "./restructuredtext-project.js";
  * @attr {string} repository = "" - Directory containing a reStructuredText playground project to load at initialization.
  * @attr {string} src = "" - JSON project or restructuredtext source file to load.
  *
+ * @keyboard {Shift+Enter} Run the current project.
  * @example
  * <tp-restructuredtext-playground src="/docs/components/_shared/intro-projects/restructuredtext.json"></tp-restructuredtext-playground>
  */
@@ -414,7 +419,7 @@ Bash
 			id,
 		);
 
-		this.applyMarkupExtensions(activeIds);
+		this.setExtensions(activeIds);
 		return true;
 	}
 
@@ -424,9 +429,10 @@ Bash
 		);
 	}
 
-	private applyMarkupExtensions(
+	/** Replaces the enabled reStructuredText extensions, retaining current file edits. */
+	public async setExtensions(
 		activeIds: ReadonlySet<TpMarkupExtensionId>,
-	): void {
+	): Promise<void> {
 		this.toolbarStartMenuEl?.closeAll?.();
 
 		this.syncProjectFromFilesystem();
@@ -444,10 +450,9 @@ Bash
 			}),
 		);
 
-		queueMicrotask(() => {
-			this.syncToolbarExtensionChecks();
-			void this.run();
-		});
+		await Promise.resolve();
+		this.syncToolbarExtensionChecks();
+		await this.run();
 	}
 
 	private syncToolbarExtensionChecks(): void {

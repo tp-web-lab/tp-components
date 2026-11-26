@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-turtle" allow-script }
+:::::: tp-markdown-viewer { label="tp-turtle" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-turtle { width="420" height="220" label="A square" }

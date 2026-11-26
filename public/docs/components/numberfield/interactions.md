@@ -8,6 +8,7 @@
 | Slider | Drag the thumb to change the value shown next to the # marker. |
 | Clear button | Empty a number field; for a slider, restore the native midpoint rounded to an allowed step. |
 | Unavailable field | Read-only and disabled fields cannot be edited. Number formatting follows the browser's locale. |
+| :tp-icon:{name="copy" size="2em"} Copy code (when enabled) | Copy the current value to the clipboard. |
 
 #### Keyboard interactions
 

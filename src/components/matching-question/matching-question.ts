@@ -6,7 +6,7 @@
  */
 /**
  * @tp-dependency tp-matching
- * @summary associates rich content from two or more optionally titled lists without grading the groups.
+ * @summary Groups related items from two or more lists.
  */
 /**
  * @tp-dependency tp-question

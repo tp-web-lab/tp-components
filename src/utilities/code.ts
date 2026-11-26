@@ -9,20 +9,20 @@
  * @summary Resolved data for a source snippet.
  */
 export type TpResolvedCode = {
-  /**
-   * Logical source file name.
-   */
-  filename: string;
+	/**
+	 * Logical source file name.
+	 */
+	filename: string;
 
-  /**
-   * Detected or provided language.
-   */
-  language: string;
+	/**
+	 * Detected or provided language.
+	 */
+	language: string;
 
-  /**
-   * Textual code content.
-   */
-  value: string;
+	/**
+	 * Textual code content.
+	 */
+	value: string;
 };
 
 /**
@@ -32,31 +32,35 @@ export type TpResolvedCode = {
  * @internal
  */
 const LANGUAGE_BY_EXTENSION: Record<string, string> = {
-  c: 'c',
-  cpp: 'cpp',
-  css: 'css',
-  h: 'c',
-  htm: 'html',
-  html: 'html',
-  java: 'java',
-  js: 'javascript',
-  json: 'json',
-  jsx: 'jsx',
-  md: 'markdown',
-  mjs: 'javascript',
-  pl: 'prolog',
-  py: 'python',
-  rest: 'restructuredtext',
-  rst: 'restructuredtext',
-  sh: 'shell',
-  sql: 'sql',
-  svg: 'xml',
-  ts: 'typescript',
-  tsx: 'tsx',
-  txt: 'plaintext',
-  xml: 'xml',
-  yaml: 'yaml',
-  yml: 'yaml',
+	c: "c",
+	cpp: "cpp",
+	css: "css",
+	h: "c",
+	htm: "html",
+	html: "html",
+	java: "java",
+	js: "javascript",
+	json: "json",
+	jsx: "jsx",
+	md: "markdown",
+	mjs: "javascript",
+	pl: "prolog",
+	py: "python",
+	scm: "scheme",
+	ml: "ocaml",
+	ss: "scheme",
+	sld: "scheme",
+	rest: "restructuredtext",
+	rst: "restructuredtext",
+	sh: "shell",
+	sql: "sql",
+	svg: "xml",
+	ts: "typescript",
+	tsx: "tsx",
+	txt: "plaintext",
+	xml: "xml",
+	yaml: "yaml",
+	yml: "yaml",
 };
 
 /**
@@ -70,48 +74,48 @@ const LANGUAGE_BY_EXTENSION: Record<string, string> = {
  * @returns Dedented text.
  */
 export function dedent(input: string): string {
-  const lines = input.replace(/\r\n/g, '\n').split('\n');
+	const lines = input.replace(/\r\n/g, "\n").split("\n");
 
-  while (lines.length > 0 && lines[0]?.trim() === '') {
-    lines.shift();
-  }
+	while (lines.length > 0 && lines[0]?.trim() === "") {
+		lines.shift();
+	}
 
-  while (lines.length > 0 && lines[lines.length - 1]?.trim() === '') {
-    lines.pop();
-  }
+	while (lines.length > 0 && lines[lines.length - 1]?.trim() === "") {
+		lines.pop();
+	}
 
-  if (lines.length === 0) {
-    return '';
-  }
+	if (lines.length === 0) {
+		return "";
+	}
 
-  let minIndent: number | null = null;
+	let minIndent: number | null = null;
 
-  for (const line of lines) {
-    if (line.trim() === '') {
-      continue;
-    }
+	for (const line of lines) {
+		if (line.trim() === "") {
+			continue;
+		}
 
-    const match = line.match(/^[\t ]*/);
-    const indent = match ? match[0].length : 0;
+		const match = line.match(/^[\t ]*/);
+		const indent = match ? match[0].length : 0;
 
-    if (minIndent === null || indent < minIndent) {
-      minIndent = indent;
-    }
-  }
+		if (minIndent === null || indent < minIndent) {
+			minIndent = indent;
+		}
+	}
 
-  if (minIndent === null || minIndent === 0) {
-    return lines.join('\n');
-  }
+	if (minIndent === null || minIndent === 0) {
+		return lines.join("\n");
+	}
 
-  return lines
-    .map((line) => {
-      if (line.trim() === '') {
-        return '';
-      }
+	return lines
+		.map((line) => {
+			if (line.trim() === "") {
+				return "";
+			}
 
-      return line.slice(minIndent);
-    })
-    .join('\n');
+			return line.slice(minIndent);
+		})
+		.join("\n");
 }
 
 /**
@@ -124,14 +128,14 @@ export function dedent(input: string): string {
  * @returns Detected language.
  */
 export function getLanguageFromFilename(filename: string): string {
-  const normalized = filename.trim().toLowerCase().split(/[?#]/, 1)[0] ?? '';
-  const match = /\.([a-z0-9]+)$/.exec(normalized);
+	const normalized = filename.trim().toLowerCase().split(/[?#]/, 1)[0] ?? "";
+	const match = /\.([a-z0-9]+)$/.exec(normalized);
 
-  if (!match?.[1]) {
-    return 'plaintext';
-  }
+	if (!match?.[1]) {
+		return "plaintext";
+	}
 
-  return LANGUAGE_BY_EXTENSION[match[1]] ?? 'plaintext';
+	return LANGUAGE_BY_EXTENSION[match[1]] ?? "plaintext";
 }
 
 /**
@@ -145,8 +149,8 @@ export function getLanguageFromFilename(filename: string): string {
  * @internal
  */
 function normalizeLanguage(language?: string): string {
-  const value = language?.trim().toLowerCase() ?? '';
-  return value === '' ? 'plaintext' : value;
+	const value = language?.trim().toLowerCase() ?? "";
+	return value === "" ? "plaintext" : value;
 }
 
 /**
@@ -162,136 +166,144 @@ function normalizeLanguage(language?: string): string {
  * @throws {Error} If loading fails.
  */
 export async function getCodeFromFile(
-  filename: string,
-  language?: string,
+	filename: string,
+	language?: string,
 ): Promise<TpResolvedCode> {
-  const fetchCandidates = [filename];
+	const fetchCandidates = [filename];
 
-  const retryFromParent = resolveRelativeAgainstFrameLocation(filename, 'parent');
-  if (retryFromParent !== null && !fetchCandidates.includes(retryFromParent)) {
-    fetchCandidates.push(retryFromParent);
-  }
+	const retryFromParent = resolveRelativeAgainstFrameLocation(
+		filename,
+		"parent",
+	);
+	if (retryFromParent !== null && !fetchCandidates.includes(retryFromParent)) {
+		fetchCandidates.push(retryFromParent);
+	}
 
-  const retryFromTop = resolveRelativeAgainstFrameLocation(filename, 'top');
-  if (retryFromTop !== null && !fetchCandidates.includes(retryFromTop)) {
-    fetchCandidates.push(retryFromTop);
-  }
+	const retryFromTop = resolveRelativeAgainstFrameLocation(filename, "top");
+	if (retryFromTop !== null && !fetchCandidates.includes(retryFromTop)) {
+		fetchCandidates.push(retryFromTop);
+	}
 
-  const retryFromDocsRoot = resolveRelativeAgainstDocsRoot(filename);
-  if (retryFromDocsRoot !== null && !fetchCandidates.includes(retryFromDocsRoot)) {
-    fetchCandidates.push(retryFromDocsRoot);
-  }
+	const retryFromDocsRoot = resolveRelativeAgainstDocsRoot(filename);
+	if (
+		retryFromDocsRoot !== null &&
+		!fetchCandidates.includes(retryFromDocsRoot)
+	) {
+		fetchCandidates.push(retryFromDocsRoot);
+	}
 
-  let response: Response | null = null;
-  let value = '';
-  let loadedFrom = filename;
-  let didLoad = false;
+	let response: Response | null = null;
+	let value = "";
+	let loadedFrom = filename;
+	let didLoad = false;
 
-  for (const candidate of fetchCandidates) {
-    const next = await globalThis.fetch(candidate);
-    if (!next.ok) {
-      response = next;
-      continue;
-    }
+	for (const candidate of fetchCandidates) {
+		const next = await globalThis.fetch(candidate);
+		if (!next.ok) {
+			response = next;
+			continue;
+		}
 
-    const nextValue = await next.text();
-    const likelyFallback = isLikelyHtmlFallback(filename, next, nextValue);
-    response = next;
+		const nextValue = await next.text();
+		const likelyFallback = isLikelyHtmlFallback(filename, next, nextValue);
+		response = next;
 
-    if (likelyFallback) {
-      continue;
-    }
+		if (likelyFallback) {
+			continue;
+		}
 
-    loadedFrom = candidate;
-    value = nextValue;
-    didLoad = true;
-    break;
-  }
+		loadedFrom = candidate;
+		value = nextValue;
+		didLoad = true;
+		break;
+	}
 
-  if (response === null || !response.ok || !didLoad) {
-    const status = response?.status ?? 0;
-    throw new Error(`Failed to fetch "${filename}" (${String(status)}).`);
-  }
+	if (response === null || !response.ok || !didLoad) {
+		const status = response?.status ?? 0;
+		throw new Error(`Failed to fetch "${filename}" (${String(status)}).`);
+	}
 
-  return {
-    filename: loadedFrom,
-    language:
-      language === undefined || language.trim() === ''
-        ? getLanguageFromFilename(loadedFrom)
-        : normalizeLanguage(language),
-    value,
-  };
+	return {
+		filename: loadedFrom,
+		language:
+			language === undefined || language.trim() === ""
+				? getLanguageFromFilename(loadedFrom)
+				: normalizeLanguage(language),
+		value,
+	};
 }
 
 function isLikelyHtmlFallback(
-  filename: string,
-  response: Response,
-  body: string,
+	filename: string,
+	response: Response,
+	body: string,
 ): boolean {
-  const lower = filename.trim().toLowerCase().split(/[?#]/, 1)[0] ?? '';
-  const extensionMatch = /\.([a-z0-9]+)$/.exec(lower);
-  const extension = extensionMatch?.[1] ?? '';
+	const lower = filename.trim().toLowerCase().split(/[?#]/, 1)[0] ?? "";
+	const extensionMatch = /\.([a-z0-9]+)$/.exec(lower);
+	const extension = extensionMatch?.[1] ?? "";
 
-  if (extension === 'html' || extension === 'htm' || extension === 'xhtml') {
-    return false;
-  }
+	if (extension === "html" || extension === "htm" || extension === "xhtml") {
+		return false;
+	}
 
-  const contentType = (response.headers.get('content-type') ?? '').toLowerCase();
-  const normalized = body.trimStart().toLowerCase();
-  const looksLikeHtmlDocument =
-    normalized.startsWith('<!doctype html') || normalized.startsWith('<html');
+	const contentType = (
+		response.headers.get("content-type") ?? ""
+	).toLowerCase();
+	const normalized = body.trimStart().toLowerCase();
+	const looksLikeHtmlDocument =
+		normalized.startsWith("<!doctype html") || normalized.startsWith("<html");
 
-  if (!looksLikeHtmlDocument) {
-    return false;
-  }
+	if (!looksLikeHtmlDocument) {
+		return false;
+	}
 
-  if (contentType.includes('text/html')) {
-    return true;
-  }
-  return true;
+	if (contentType.includes("text/html")) {
+		return true;
+	}
+	return true;
 }
 
 function resolveRelativeAgainstFrameLocation(
-  filename: string,
-  scope: 'parent' | 'top',
+	filename: string,
+	scope: "parent" | "top",
 ): string | null {
-  const raw = filename.trim();
-  if (raw === '' || (!raw.startsWith('./') && !raw.startsWith('../'))) {
-    return null;
-  }
+	const raw = filename.trim();
+	if (raw === "" || (!raw.startsWith("./") && !raw.startsWith("../"))) {
+		return null;
+	}
 
-  if (typeof window === 'undefined') {
-    return null;
-  }
+	if (typeof window === "undefined") {
+		return null;
+	}
 
-  try {
-    const location =
-      scope === 'parent'
-        ? window.parent?.location?.href
-        : window.top?.location?.href;
+	try {
+		const location =
+			scope === "parent"
+				? window.parent?.location?.href
+				: window.top?.location?.href;
 
-    if (!location || location === 'about:blank') {
-      return null;
-    }
+		if (!location || location === "about:blank") {
+			return null;
+		}
 
-    return new URL(raw, location).href;
-  } catch {
-    return null;
-  }
+		return new URL(raw, location).href;
+	} catch {
+		return null;
+	}
 }
 
 function resolveRelativeAgainstDocsRoot(filename: string): string | null {
-  const raw = filename.trim();
-  if (!raw.startsWith('../')) {
-    return null;
-  }
+	const raw = filename.trim();
+	if (!raw.startsWith("../")) {
+		return null;
+	}
 
-  const normalized = raw.replace(/^(\.\.\/)+/, '').replace(/^\.\//, '');
-  if (normalized === '') {
-    return null;
-  }
+	const normalized = raw.replace(/^(\.\.\/)+/, "").replace(/^\.\//, "");
+	if (normalized === "") {
+		return null;
+	}
 
-  return `/docs/${normalized}`;
+	return `/docs/${normalized}`;
 }
 
 /**
@@ -310,52 +322,52 @@ function resolveRelativeAgainstDocsRoot(filename: string): string | null {
  * @returns Resolved script data, or `null` if no matching script is found.
  */
 export function getCodeFromScript(
-  language?: string,
-  root: ParentNode = document,
+	language?: string,
+	root: ParentNode = document,
 ): TpResolvedCode | null {
-  const normalizedLanguage =
-    language === undefined || language.trim() === ''
-      ? ''
-      : normalizeLanguage(language);
+	const normalizedLanguage =
+		language === undefined || language.trim() === ""
+			? ""
+			: normalizeLanguage(language);
 
-  const selector =
-    normalizedLanguage === ''
-      ? 'script[type^="tp/"]'
-      : `script[type="tp/${normalizedLanguage}"]`;
+	const selector =
+		normalizedLanguage === ""
+			? 'script[type^="tp/"]'
+			: `script[type="tp/${normalizedLanguage}"]`;
 
-  const script = root.querySelector(selector);
+	const script = root.querySelector(selector);
 
-  if (!(script instanceof HTMLScriptElement)) {
-    return null;
-  }
+	if (!(script instanceof HTMLScriptElement)) {
+		return null;
+	}
 
-  const filename = script.getAttribute('filename') ?? '';
+	const filename = script.getAttribute("filename") ?? "";
 
-  let resolvedLanguage = normalizedLanguage;
+	let resolvedLanguage = normalizedLanguage;
 
-  if (resolvedLanguage === '') {
-    const type = script.getAttribute('type') ?? '';
-    const match = /^tp\/(.+)$/.exec(type.trim().toLowerCase());
-    resolvedLanguage = match?.[1] ?? '';
-  }
+	if (resolvedLanguage === "") {
+		const type = script.getAttribute("type") ?? "";
+		const match = /^tp\/(.+)$/.exec(type.trim().toLowerCase());
+		resolvedLanguage = match?.[1] ?? "";
+	}
 
-  if (filename !== '') {
-    const fromFilename = getLanguageFromFilename(filename);
+	if (filename !== "") {
+		const fromFilename = getLanguageFromFilename(filename);
 
-    if (resolvedLanguage === '' || resolvedLanguage === 'plaintext') {
-      resolvedLanguage = fromFilename;
-    }
-  }
+		if (resolvedLanguage === "" || resolvedLanguage === "plaintext") {
+			resolvedLanguage = fromFilename;
+		}
+	}
 
-  if (resolvedLanguage === '') {
-    resolvedLanguage = 'plaintext';
-  }
+	if (resolvedLanguage === "") {
+		resolvedLanguage = "plaintext";
+	}
 
-  return {
-    filename,
-    language: resolvedLanguage,
-    value: dedent(script.textContent ?? ''),
-  };
+	return {
+		filename,
+		language: resolvedLanguage,
+		value: dedent(script.textContent ?? ""),
+	};
 }
 
 /**
@@ -379,39 +391,39 @@ export function getCodeFromScript(
  * @returns Resolved template data, or `null` if no template is found.
  */
 export function getCodeFromTemplate(
-  language?: string,
-  root: ParentNode = document,
+	language?: string,
+	root: ParentNode = document,
 ): TpResolvedCode | null {
-  const template = root.querySelector('template');
+	const template = root.querySelector("template");
 
-  if (!(template instanceof HTMLTemplateElement)) {
-    return null;
-  }
+	if (!(template instanceof HTMLTemplateElement)) {
+		return null;
+	}
 
-  const filename = template.getAttribute('filename') ?? '';
+	const filename = template.getAttribute("filename") ?? "";
 
-  let resolvedLanguage =
-    language === undefined || language.trim() === ''
-      ? ''
-      : normalizeLanguage(language);
+	let resolvedLanguage =
+		language === undefined || language.trim() === ""
+			? ""
+			: normalizeLanguage(language);
 
-  if (filename !== '') {
-    const fromFilename = getLanguageFromFilename(filename);
+	if (filename !== "") {
+		const fromFilename = getLanguageFromFilename(filename);
 
-    if (resolvedLanguage === '' || resolvedLanguage === 'plaintext') {
-      resolvedLanguage = fromFilename;
-    }
-  }
+		if (resolvedLanguage === "" || resolvedLanguage === "plaintext") {
+			resolvedLanguage = fromFilename;
+		}
+	}
 
-  if (resolvedLanguage === '') {
-    resolvedLanguage = 'plaintext';
-  }
+	if (resolvedLanguage === "") {
+		resolvedLanguage = "plaintext";
+	}
 
-  return {
-    filename,
-    language: resolvedLanguage,
-    value: dedent(template.innerHTML),
-  };
+	return {
+		filename,
+		language: resolvedLanguage,
+		value: dedent(template.innerHTML),
+	};
 }
 
 /**
@@ -423,10 +435,13 @@ export function getCodeFromTemplate(
  * @returns Non-null value.
  * @throws {Error} If the value is missing.
  */
-export function expectDefined<T>(value: T | null | undefined, message: string): T {
-  if (value == null) {
-    throw new Error(message);
-  }
+export function expectDefined<T>(
+	value: T | null | undefined,
+	message: string,
+): T {
+	if (value == null) {
+		throw new Error(message);
+	}
 
-  return value;
+	return value;
 }

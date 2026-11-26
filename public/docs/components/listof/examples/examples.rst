@@ -13,7 +13,7 @@
             .. tp-listof::
                :selector: figure
 
-            .. figure::
+            .. html-figure::
 
                A diagram of the water cycle.
 
@@ -21,7 +21,7 @@
 
                   The water cycle
 
-            .. figure::
+            .. html-figure::
 
                A diagram of a food chain.
 

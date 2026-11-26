@@ -7,9 +7,7 @@
 [tp-radio-list,name="theme",value="2",orientation="horizontal"]
 ====
 * Light
-
 * Automatic
-
 * Dark
 ====
 ======

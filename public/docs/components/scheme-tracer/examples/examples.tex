@@ -1,0 +1,76 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpSchemeTracer[src=/docs/components/scheme-tracer/examples/recursion.scm]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/scheme/scheme.js";
+import "/components/scheme-tracer/scheme-tracer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-scheme-tracer");
+element1.setAttribute("src", "/docs/components/scheme-tracer/examples/recursion.scm");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Subexpressions on one line
+\documentclass{article}
+\begin{document}
+\wcTpSchemeTracer[src=/docs/components/scheme-tracer/examples/same-line.scm]{}
+\end{document}
+
+% !tp-example Tail recursion
+\documentclass{article}
+\begin{document}
+\wcTpSchemeTracer[src=/docs/components/scheme-tracer/examples/tail-recursion.scm]{}
+\end{document}
+
+% !tp-example Independent closures
+\documentclass{article}
+\begin{document}
+\wcTpSchemeTracer[src=/docs/components/scheme-tracer/examples/closures.scm]{}
+\end{document}
+
+% !tp-example Shared pairs and mutation
+\documentclass{article}
+\begin{document}
+\wcTpSchemeTracer[src=/docs/components/scheme-tracer/examples/shared-pairs.scm]{}
+\end{document}
+
+% !tp-example Cyclic pair
+\documentclass{article}
+\begin{document}
+\wcTpSchemeTracer[src=/docs/components/scheme-tracer/examples/cyclic-pair.scm]{}
+\end{document}
+
+% !tp-example Vectors and aliases
+\documentclass{article}
+\begin{document}
+\wcTpSchemeTracer[src=/docs/components/scheme-tracer/examples/vectors.scm]{}
+\end{document}
+
+% !tp-example Higher-order procedures
+\documentclass{article}
+\begin{document}
+\wcTpSchemeTracer[src=/docs/components/scheme-tracer/examples/higher-order.scm]{}
+\end{document}
+
+% !tp-example Error and call stack
+\documentclass{article}
+\begin{document}
+\wcTpSchemeTracer[src=/docs/components/scheme-tracer/examples/error.scm]{}
+\end{document}
+
+% !tp-example Replay a saved trace
+\documentclass{article}
+\begin{document}
+\wcTpSchemeTracer[trace=/docs/components/scheme-tracer/examples/recursion.trace.json]{}
+\end{document}

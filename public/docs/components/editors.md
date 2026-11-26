@@ -48,6 +48,12 @@ Editor components let users create and modify code, rich text, graphs and spread
 [tp-table-editor](table-editor/index.md)
 :::
 
+::: tp-center { intrinsic }
+:tp-icon:{name="diff-code-editor" library="components" size="4em" aria-hidden="true"}
+
+[tp-diff-code-editor](diff-code-editor/index.md)
+:::
+
 ::::::
 
 <!-- family-introduction:end -->

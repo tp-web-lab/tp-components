@@ -7,8 +7,16 @@ import { DeferredVisibility } from "../../utilities/deferred-visibility.js";
 import { syncIframeColor } from "../../utilities/iframe-color.js";
 import { connectIframeLinks } from "../../utilities/iframe-links.js";
 import { IframeOverlayBridge } from "../../utilities/iframe-overlay-bridge.js";
-import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
+import {
+	getComponentSourceBaseUrl,
+	resolveComponentSourceUrl,
+} from "../../utilities/source-url.js";
 import { createViewerFullscreen } from "../../utilities/viewer-fullscreen.js";
+import {
+	readViewerMode,
+	type ViewerMode,
+} from "../../utilities/viewer-mode.js";
+import { createViewerRunShortcut } from "../../utilities/viewer-run-shortcut.js";
 import { TpBase } from "../base/base.js";
 import type { TpCodeEditor } from "../code-editor/code-editor.js";
 import "../divider/divider.js";
@@ -189,11 +197,29 @@ function syncIframeHeight(iframe: HTMLIFrameElement): void {
  * rendering.
  *
  * @summary Shared implementation for markup viewer components.
+ * @attr {boolean} show-code = false - Initially displays the source code alongside the rendered output.
+ * @event tp-markup-viewer-run Cancelable request to render the edited source. A parent converter may handle it to update all formats.
+ * @event tp-markup-viewer-reset Cancelable request to restore the initial example. A parent converter may restore its original document instead.
  */
 export abstract class TpMarkupViewer<
 	TMode extends string,
 	TContext = undefined,
 > extends TpBase {
+	private toggleCodeAction: () => void | Promise<void> = () => {};
+
+	private toggleOutputAction: () => void | Promise<void> = () => {};
+
+	private toggleEditorToolbarAction: () => void | Promise<void> = () => {};
+
+	private selectOutputModeAction: (value: string) => Promise<void> =
+		async () => {};
+	/** Selects the rendered, generated HTML or structural output supported by this viewer. */
+	public async selectOutputMode(value: string): Promise<void> {
+		await this.selectOutputModeAction(value);
+	}
+
+	private runAction: () => void | Promise<void> = () => {};
+
 	private renderToken = 0;
 	/** Current source editor, including while its pane is hidden. */
 	private responseEditor: TpCodeEditor | null = null;
@@ -202,14 +228,35 @@ export abstract class TpMarkupViewer<
 	private renderResponse: (() => Promise<string>) | null = null;
 	/** Restores the selected example's initial source. */
 	private resetResponse: (() => void) | null = null;
+	private pendingSource: string | undefined;
+	private updateResponse: ((source: string) => Promise<void>) | null = null;
+
+	/** Replaces the editable source and refreshes the preview without replacing the editor. */
+	public async setValue(source: string): Promise<void> {
+		this.pendingSource = source;
+		await this.updateResponse?.(source);
+	}
 
 	/** Returns the current editable source, including unsaved preview changes. */
 	public getValue(): string {
-		return this.responseEditor?.getValue() ?? this.readResponseSource?.() ?? "";
+		return (
+			this.responseEditor?.getValue() ??
+			this.readResponseSource?.() ??
+			this.pendingSource ??
+			""
+		);
 	}
 	/** Restores the selected example and refreshes its preview. */
 	public reset(): void {
-		this.resetResponse?.();
+		if (
+			this.dispatchEvent(
+				new CustomEvent("tp-markup-viewer-reset", {
+					bubbles: true,
+					cancelable: true,
+				}),
+			)
+		)
+			this.resetResponse?.();
 	}
 	/** Creates an independent HTML document from the current source for testing. */
 	public async createRenderedDocument(): Promise<string> {
@@ -240,13 +287,21 @@ export abstract class TpMarkupViewer<
 	/** Whether initial source capture must wait for nested elements to initialize. */
 	protected readonly deferInitialRender: boolean = false;
 
+	/** Controls the viewer presentation independently of its source language. */
+	public get mode(): ViewerMode {
+		return readViewerMode(this);
+	}
+	public set mode(value: ViewerMode) {
+		this.setAttribute("mode", value);
+	}
+
 	public static override get observedAttributes(): string[] {
-		return [...TpBase.observedAttributes, "lite", "src"];
+		return [...TpBase.observedAttributes, "lite", "mode", "src", "show-code"];
 	}
 
 	/** Uses the compact, single-example viewer interface. */
 	public get lite(): boolean {
-		return this.hasAttribute("lite");
+		return this.mode === "lite";
 	}
 
 	public set lite(value: boolean) {
@@ -266,8 +321,16 @@ export abstract class TpMarkupViewer<
 		this.setAttribute("src", value);
 	}
 
+	private readonly handleViewerRunShortcut = createViewerRunShortcut(
+		this,
+		() => {
+			this.querySelector<HTMLElement>('[data-role="run"]')?.click();
+		},
+	);
+
 	protected override connectedCallback(): void {
 		super.connectedCallback();
+		this.addEventListener("keydown", this.handleViewerRunShortcut, true);
 		this.classList.add("tp-markup-viewer", this.viewerClassName);
 		this.ensureGlobalStyle(STYLE_ID, style);
 		if (this.deferInitialRender) {
@@ -277,7 +340,10 @@ export abstract class TpMarkupViewer<
 		}
 	}
 
-	protected override attributeChangedCallback(): void {
+	protected override attributeChangedCallback(name: string): void {
+		if (name === "src") this.pendingSource = undefined;
+		if ((name === "mode" || name === "lite") && this.readResponseSource)
+			this.pendingSource = this.getValue();
 		if (this.isConnected) void this.renderViewer();
 	}
 
@@ -301,6 +367,28 @@ export abstract class TpMarkupViewer<
 	protected abstract createExternalContext(
 		url: URL,
 	): Promise<TContext> | TContext;
+
+	private async resolveIncludes(source: string): Promise<string> {
+		const language =
+			this.sourceLanguage === "stex" ? "latex" : this.sourceLanguage;
+		if (
+			!["html", "asciidoc", "latex", "markdown", "restructuredtext"].includes(
+				language,
+			)
+		)
+			return source;
+		const { expandMarkupIncludes } = await import(
+			"../../utilities/markup-includes.js"
+		);
+		const base = this.src
+			? resolveComponentSourceUrl(this, this.src).href
+			: getComponentSourceBaseUrl(this);
+		return expandMarkupIncludes(
+			source,
+			language as import("../../utilities/markup-conversion.js").MarkupLanguage,
+			base,
+		);
+	}
 
 	/** Renders one output mode into the output panel. */
 	protected abstract renderOutput(
@@ -333,6 +421,7 @@ export abstract class TpMarkupViewer<
 	);
 
 	protected disconnectedCallback(): void {
+		this.removeEventListener("keydown", this.handleViewerRunShortcut, true);
 		this.pendingVisibility.disconnect();
 		this.renderToken += 1;
 		this.disconnectIframeResizeObserver();
@@ -350,12 +439,14 @@ export abstract class TpMarkupViewer<
 		this.readResponseSource = null;
 		this.renderResponse = null;
 		this.resetResponse = null;
+		this.updateResponse = null;
 
 		try {
 			const loadedExamples = await this.loadExamples();
 			if (token !== this.renderToken) return;
 
-			const examples = this.lite ? loadedExamples.slice(0, 1) : loadedExamples;
+			const examples =
+				this.mode !== "default" ? loadedExamples.slice(0, 1) : loadedExamples;
 
 			const sharedLabel = sharedViewerExample(
 				this,
@@ -365,6 +456,8 @@ export abstract class TpMarkupViewer<
 				examples.find((example) => example.label === sharedLabel) ??
 				examples[0] ??
 				(await this.readInlineSource());
+			if (this.pendingSource !== undefined)
+				currentExample.source = this.pendingSource;
 			const initialSourceByLabel = new Map(
 				examples.map((example) => [
 					example.label,
@@ -378,6 +471,7 @@ export abstract class TpMarkupViewer<
 				);
 			}
 
+			this.dataset.viewerMode = this.mode;
 			this.dataset.layout = "output";
 			this.innerHTML = this.createViewerMarkup(initialMode.value);
 
@@ -430,7 +524,9 @@ export abstract class TpMarkupViewer<
 			this.renderResponse = async () => {
 				const container = document.createElement("div");
 				await this.renderOutput(
-					editor?.getValue() ?? currentExample.source,
+					await this.resolveIncludes(
+						editor?.getValue() ?? currentExample.source,
+					),
 					initialMode.value,
 					container,
 					currentExample.context,
@@ -466,8 +562,10 @@ export abstract class TpMarkupViewer<
 			};
 			const updateLayout = (): void => {
 				const showSource =
+					this.mode === "simple" ||
 					sourceButton?.getAttribute("aria-pressed") === "true";
 				const showOutput =
+					this.mode === "simple" ||
 					outputButton?.getAttribute("aria-pressed") !== "false";
 				this.dataset.layout =
 					showSource && showOutput ? "both" : showSource ? "source" : "output";
@@ -478,9 +576,9 @@ export abstract class TpMarkupViewer<
 			};
 			const updateOutput = async (): Promise<void> => {
 				this.disconnectIframeResizeObserver();
-				const mode = this.lite ? initialMode.value : currentMode;
+				const mode = this.mode !== "default" ? initialMode.value : currentMode;
 				await this.renderOutput(
-					currentExample.source,
+					await this.resolveIncludes(currentExample.source),
 					mode,
 					outputContainer,
 					currentExample.context,
@@ -535,21 +633,20 @@ export abstract class TpMarkupViewer<
 				});
 			}
 
-			for (const button of modeButtons) {
-				button.addEventListener("click", () => {
-					currentMode = this.readMode(
-						button.dataset.mode ?? "",
-						initialMode.value,
+			this.selectOutputModeAction = async (value) => {
+				currentMode = this.readMode(value, initialMode.value);
+				for (const candidate of modeButtons)
+					candidate.setAttribute(
+						"aria-pressed",
+						String(candidate.dataset.mode === currentMode),
 					);
-					for (const candidate of modeButtons) {
-						candidate.setAttribute(
-							"aria-pressed",
-							String(candidate === button),
-						);
-					}
-					void updateOutput();
+				await updateOutput();
+			};
+			for (const button of modeButtons)
+				button.addEventListener("click", () => {
+					void this.selectOutputMode(button.dataset.mode ?? initialMode.value);
 				});
-			}
+
 			const togglePane = (
 				button: HTMLElement,
 				otherButton: HTMLElement,
@@ -561,24 +658,46 @@ export abstract class TpMarkupViewer<
 				updateLayout();
 			};
 			if (sourceButton !== null && outputButton !== null) {
-				sourceButton.addEventListener("click", () =>
-					togglePane(sourceButton, outputButton),
-				);
-				outputButton.addEventListener("click", () =>
-					togglePane(outputButton, sourceButton),
-				);
+				this.toggleCodeAction = () => togglePane(sourceButton, outputButton);
+				sourceButton.addEventListener("click", () => {
+					void this.toggleCode();
+				});
+				this.toggleOutputAction = () => togglePane(outputButton, sourceButton);
+				outputButton.addEventListener("click", () => {
+					void this.toggleOutput();
+				});
 			}
-			editorToolbarButton?.addEventListener("click", () => {
+			this.toggleEditorToolbarAction = () => {
 				const editors = visibleEditors();
 				const next = !editors.some((candidate) => candidate.toolbar);
 				for (const candidate of editors) {
 					candidate.toolbar = next;
 				}
 				syncEditorToolbarControl();
+			};
+			editorToolbarButton?.addEventListener("click", () => {
+				void this.toggleEditorToolbar();
 			});
-			runButton.addEventListener("click", () => {
+			this.updateResponse = async (source) => {
+				currentExample.source = source;
+				if (editor?.getValue() !== source) editor?.setValue(source);
+				await updateOutput();
+			};
+			this.runAction = async () => {
+				if (
+					!this.dispatchEvent(
+						new CustomEvent("tp-markup-viewer-run", {
+							bubbles: true,
+							cancelable: true,
+						}),
+					)
+				)
+					return;
 				currentExample.source = editor?.getValue() ?? currentExample.source;
-				void updateOutput();
+				await updateOutput();
+			};
+			runButton.addEventListener("click", () => {
+				void this.run();
 			});
 			this.resetResponse = () => {
 				currentExample.source =
@@ -797,12 +916,12 @@ export abstract class TpMarkupViewer<
 		const fullscreen = createViewerFullscreen(this).outerHTML;
 		// A demo or subclass tag still uses its canonical viewer's component icon.
 		const iconName = escapeHtml(this.viewerClassName.replace(/^tp-/, ""));
-		if (this.lite) {
+		if (this.mode !== "default") {
 			return `
         <div class="tp-markup-viewer-lite-toolbar ${prefix}-toolbar" role="toolbar" aria-label="Viewer controls">
           <span class="tp-markup-viewer-toolbar-start">
             <tp-icon class="tp-markup-viewer-language" library="components" name="${iconName}" size="1.5em" role="img" aria-label="${escapeHtml(languageLabel(this.sourceLanguage))}" title="${escapeHtml(languageLabel(this.sourceLanguage))}"></tp-icon>
-            <tp-icon-button data-role="toggle-source" name="code" label="Show code" title="Show code" size="s" aria-pressed="false"></tp-icon-button>
+            <tp-icon-button data-role="toggle-source" name="code" label="Show code" title="Show code" size="s" aria-pressed="${this.hasAttribute("show-code")}"></tp-icon-button>
             <tp-icon-button data-role="toggle-output" name="eye-outline" label="Show output" title="Show output" size="s" aria-pressed="true"></tp-icon-button>
           </span>
           <span class="tp-markup-viewer-start-controls ${prefix}-start-controls" data-role="start-controls"></span>
@@ -834,7 +953,7 @@ export abstract class TpMarkupViewer<
       <div class="tp-markup-viewer-toolbar ${prefix}-toolbar" role="toolbar" aria-label="Viewer controls">
         <span class="tp-markup-viewer-toolbar-start">
           <tp-icon class="tp-markup-viewer-language" library="components" name="${iconName}" size="1.5em" role="img" aria-label="${escapeHtml(languageLabel(this.sourceLanguage))}" title="${escapeHtml(languageLabel(this.sourceLanguage))}"></tp-icon>
-          <tp-icon-button data-role="toggle-source" name="code" label="Show code" title="Show code" size="s" aria-pressed="false"></tp-icon-button>
+          <tp-icon-button data-role="toggle-source" name="code" label="Show code" title="Show code" size="s" aria-pressed="${this.hasAttribute("show-code")}"></tp-icon-button>
           <tp-icon-button data-role="toggle-output" name="eye-outline" label="Show output" title="Show output" size="s" aria-pressed="true"></tp-icon-button>
         </span>
         <span class="tp-markup-viewer-start-controls ${prefix}-start-controls" data-role="start-controls"></span>
@@ -896,5 +1015,25 @@ export abstract class TpMarkupViewer<
 			examples.push(...this.extractExamples(externalExample));
 		}
 		return examples;
+	}
+
+	/** Shows or hides the source while retaining a visible panel. */
+	async toggleCode(): Promise<void> {
+		await this.toggleCodeAction();
+	}
+
+	/** Shows or hides the output while retaining a visible panel. */
+	async toggleOutput(): Promise<void> {
+		await this.toggleOutputAction();
+	}
+
+	/** Shows or hides toolbars on the currently visible editors. */
+	async toggleEditorToolbar(): Promise<void> {
+		await this.toggleEditorToolbarAction();
+	}
+
+	/** Renders the edited source, unless the cancelable run event is handled by the parent. */
+	async run(): Promise<void> {
+		await this.runAction();
 	}
 }

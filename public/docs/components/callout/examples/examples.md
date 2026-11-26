@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-callout" allow-script }
+::::: tp-markdown-viewer { label="tp-callout" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-callout { variant="info" heading="Information" }

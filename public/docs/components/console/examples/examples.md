@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-console" allow-script }
+:::::: tp-markdown-viewer { label="tp-console" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-box { data-intro-action="console" data-allow-script }
@@ -7,8 +7,8 @@ Inspect these example messages, then use Clear to empty the console.
 ::: tp-console
 :::
 
-::: p { data-demo-status role="status" }
-:::
+
+{data-demo-status role="status"}
 
 ::: script { src="/docs/components/_shared/introduction-actions.js" }
 :::
@@ -140,6 +140,32 @@ output.info('Informative message', { type: 'info', count: 2 });
 output.warn('Warning message');
 output.error(new Error('Error message'));
 });
+}
+:::
+```
+
+``` example {label="Console presentation modes"}
+### Default
+
+::: tp-console { mode="default" data-console-mode-example }
+:::
+
+### Lite
+
+::: tp-console { mode="lite" data-console-mode-example }
+:::
+
+### Simple
+
+::: tp-console { mode="simple" data-console-mode-example }
+:::
+
+::: script { type="module" }
+import "/components/console/console.js";
+for (const output of document.querySelectorAll("tp-console[data-console-mode-example]")) {
+  output.log("Result", 42);
+  output.info("Calculation complete.");
+  output.error("An example error.");
 }
 :::
 ```

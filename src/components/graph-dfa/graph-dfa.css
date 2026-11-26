@@ -8,5 +8,5 @@ tp-graph-dfa { display: block; }
 .tp-dfa-word-label input { width: 9rem; min-height: 2rem; box-sizing: border-box; border: 1px solid var(--tp-neutral-stroke-soft, #c7cedb); border-radius: .35rem; color: inherit; background: var(--tp-paper-color, Canvas); padding-inline: .5rem; }
 .tp-dfa-status { min-width: 5rem; font-size: .8rem; font-weight: 600; }
 .tp-dfa-status.success { color: var(--tp-success-text-colorful, #15803d); }
-.tp-dfa-status.danger { color: var(--tp-danger-text-colorful, #b91c1c); }
+.tp-dfa-status.danger { color: light-dark(var(--tp-danger-800), var(--tp-danger-300)); }
 @media (prefers-reduced-motion: reduce) { tp-graph-dfa, tp-graph-dfa * { transition-duration: 0.01ms !important; transition-delay: 0ms !important; } }

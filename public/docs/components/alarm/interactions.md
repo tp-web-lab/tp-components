@@ -5,8 +5,8 @@
 | Control or gesture | Result |
 | --- | --- |
 | Alarm time | Choose the time at which the alarm should ring. |
-| Start alarm | Start the alarm. Sound may require browser permission or an initial interaction. |
-| Stop alarm | Stop the alarm. |
+| :tp-icon:{name="play" size="2em"} Start alarm | Start the alarm. Sound may require browser permission or an initial interaction. |
+| :tp-icon:{name="stop" size="2em"} Stop alarm | Stop the alarm. |
 
 #### Keyboard interactions
 

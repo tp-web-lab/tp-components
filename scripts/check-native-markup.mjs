@@ -41,7 +41,7 @@ export function rawMarkup(language, source) {
 		}
 		if (
 			language === "adoc" &&
-			(/^\s*\[script\b/.test(line) || /^\s*\[source\b/.test(line))
+			(/^\s*\[script\b/.test(line) || /^\s*\[source\b/.test(line) || /^\s*\[(?:latexmath|asciimath)\]\s*$/.test(line))
 		) {
 			const delimiter = lines[++index]?.trim();
 			while (++index < lines.length && lines[index].trim() !== delimiter) {}

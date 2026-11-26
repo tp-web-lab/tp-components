@@ -48,7 +48,7 @@
     },
     {
       "name": "logo",
-      "description": "Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo.",
+      "description": "Icon name from the tp library or SVG URL displayed at the start of the toolbar, in a borderless button with a fixed height of 2em and proportional width. Empty hides the logo.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -101,8 +101,76 @@
       "default": "null"
     }
   ],
-  "methods": [],
-  "events": [],
+  "methods": [
+    {
+      "name": "getGlobalListPages(): GlobalListPage[]",
+      "inherited": false,
+      "description": "Pages available to global lists, in navigation order, without external links."
+    },
+    {
+      "name": "globalListHref(href: string): string",
+      "inherited": false,
+      "description": "Creates a route to a page and its local fragment."
+    },
+    {
+      "name": "goToCover(): Promise<void>",
+      "inherited": false,
+      "description": "Navigates to the introduction using the document history."
+    },
+    {
+      "name": "navigateToFragment(fragment: string): void",
+      "inherited": false,
+      "description": "Navigates to a fragment in the current document while recording the preceding reading position."
+    },
+    {
+      "name": "nextPage(): void",
+      "inherited": false,
+      "description": "Opens the following page in the navigation order."
+    },
+    {
+      "name": "previousPage(): void",
+      "inherited": false,
+      "description": "Opens the preceding page in the navigation order."
+    },
+    {
+      "name": "scrollToTop(): void",
+      "inherited": false,
+      "description": "Scrolls the current page to its beginning."
+    },
+    {
+      "name": "toggleCalculator(): void",
+      "inherited": false,
+      "description": "Shows or hides the document calculator."
+    },
+    {
+      "name": "toggleMenu(): Promise<void>",
+      "inherited": false,
+      "description": "Shows or hides the navigation sidebar."
+    },
+    {
+      "name": "toggleSidebarSearch(): void",
+      "inherited": false,
+      "description": "Shows or hides the table-of-contents search field, clearing the query when hidden."
+    },
+    {
+      "name": "toggleSidebarWidth(): void",
+      "inherited": false,
+      "description": "Widens the table of contents or restores its previous width."
+    },
+    {
+      "name": "toggleSourceMode(): Promise<void>",
+      "inherited": false,
+      "description": "Switches between the document and its editable source."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-global-pages-change",
+      "emitted": true,
+      "description": "Emitted when global pages change occurs.",
+      "detail": "void"
+    }
+  ],
   "cssproperties": [
     {
       "name": "--tp-markdown-multi-pages-sidebar-width",
@@ -116,8 +184,12 @@
       "summary": "Shared base class for tp-* components."
     },
     {
+      "name": "tp-button",
+      "summary": "Button component that supports native button and link rendering."
+    },
+    {
       "name": "tp-calculator",
-      "summary": "Scientific calculator with an editable expression and degree/radian modes."
+      "summary": "Provides a scientific calculator with an editable expression and degree/radian modes."
     },
     {
       "name": "tp-clock",
@@ -128,12 +200,20 @@
       "summary": "Brand color preset controller scoped to the containing element."
     },
     {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
       "name": "tp-drawer",
       "summary": "Drawer overlay component."
     },
     {
       "name": "tp-fullscreen",
       "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-global-listof",
+      "summary": "Lists labelled elements across the pages of a multi-page document, with links to their pages and anchors."
     },
     {
       "name": "tp-icon",
@@ -153,7 +233,7 @@
     },
     {
       "name": "tp-post-it-editor",
-      "summary": "creates and edits persistent personal annotations attached to document elements."
+      "summary": "Creates and edits persistent personal annotations attached to document elements."
     },
     {
       "name": "tp-screen",

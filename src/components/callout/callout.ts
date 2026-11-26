@@ -37,10 +37,6 @@ import "../icon-button/icon-button.js";
  * @attr {boolean} outlined = false - Removes the filled background.
  * @attr {string} title = "" - Native title text observed for authored callouts.
  * @method toast Displays the callout as a temporary toast notification in the top-right corner of the viewport.
- * @example
- * <tp-callout variant="info" heading="Information">
- *   The workshop starts at 9:00.
- * </tp-callout>
  *  @cssprop [--tp-callout-accent=var(--tp-neutral-text-colorful)] Color of the leading emphasis border; depends on variant.
  * @cssprop [--tp-callout-background=var(--tp-neutral-fill-softer)] Background color of the callout; depends on variant and appearance.
  * @cssprop [--tp-callout-border-color=var(--tp-neutral-stroke-soft)] Color of the thin outer border, excluding the leading emphasis border.
@@ -51,6 +47,10 @@ import "../icon-button/icon-button.js";
  * @cssprop [--tp-callout-padding-block=0.875rem] Inner spacing above and below the callout content.
  * @cssprop [--tp-callout-padding-inline=1rem] Inner spacing before and after the callout content.
  * @cssprop [--tp-callout-radius=0.75rem] Corner radius of the callout panel.
+ * @example
+ * <tp-callout variant="info" heading="Information">
+ *   The workshop starts at 9:00.
+ * </tp-callout>
  */
 export class TpCallout extends TpBase {
 	/**
@@ -385,11 +385,8 @@ export class TpCallout extends TpBase {
 		this.toastTimeoutId = null;
 	}
 
-	/**
-	 * @summary Hides the callout.
-	 * @internal
-	 */
-	private closeCallout(): void {
+	/** Dismisses the callout and emits its close notification. */
+	closeCallout(): void {
 		const wasToast = this.hasAttribute("data-tp-callout-toast");
 
 		this.clearToastTimeout();

@@ -13,6 +13,8 @@ const extensions: Record<string, readonly string[]> = {
 	javascript: ["js", "mjs", "cjs"],
 	typescript: ["ts", "mts", "cts"],
 	python: ["py"],
+	scheme: ["scm", "ss", "sld"],
+	ocaml: ["ml"],
 	prolog: ["pl", "pro"],
 	sql: ["sql"],
 	html: ["html", "htm"],

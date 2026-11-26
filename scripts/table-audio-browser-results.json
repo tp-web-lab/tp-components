@@ -1,0 +1,3530 @@
+{
+  "date": "2026-11-23T09:32:18.531Z",
+  "checks": [
+    {
+      "name": "direct",
+      "from": "html",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "html",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "html",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "html",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "html",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "markdown",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "markdown",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "markdown",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "markdown",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "markdown",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "asciidoc",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "asciidoc",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "asciidoc",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "asciidoc",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "asciidoc",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "latex",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "latex",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "latex",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "latex",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "latex",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "restructuredtext",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "restructuredtext",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "restructuredtext",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "restructuredtext",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "direct",
+      "from": "restructuredtext",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": "/sound.wav",
+        "controls": true,
+        "loop": false,
+        "sources": [],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "html",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "html",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "html",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "html",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "html",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "markdown",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "markdown",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "markdown",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "markdown",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "markdown",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "asciidoc",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "asciidoc",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "asciidoc",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "asciidoc",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "asciidoc",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "latex",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "latex",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "latex",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "latex",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "latex",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "restructuredtext",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "restructuredtext",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "restructuredtext",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "restructuredtext",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "source",
+      "from": "restructuredtext",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": false,
+        "sources": [
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "html",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "html",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "html",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "html",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "html",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "markdown",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "markdown",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "markdown",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "markdown",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "markdown",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "asciidoc",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "asciidoc",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "asciidoc",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "asciidoc",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "asciidoc",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "latex",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "latex",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "latex",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "latex",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "latex",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "restructuredtext",
+      "to": "html",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "restructuredtext",
+      "to": "markdown",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "restructuredtext",
+      "to": "asciidoc",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "restructuredtext",
+      "to": "latex",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    },
+    {
+      "name": "alternatives",
+      "from": "restructuredtext",
+      "to": "restructuredtext",
+      "expected": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "forward": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "back": {
+        "tables": 1,
+        "audio": 1,
+        "src": null,
+        "controls": true,
+        "loop": true,
+        "sources": [
+          {
+            "src": "/sound.ogg",
+            "type": "audio/ogg"
+          },
+          {
+            "src": "/sound.wav",
+            "type": "audio/wav"
+          }
+        ],
+        "errors": 0
+      },
+      "nativeLatex": true
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Native table border audit</title>
+<button id="run">Check native borders</button><p id="status">Ready</p><tp-base id="stage"></tp-base><details><summary>Results</summary><pre id="report"></pre></details>
+<script type="module">
+import '/src/tp-loader.ts';
+import '/src/components/base/base.ts';
+import {htmlToMarkup,markupToHtml} from '/src/utilities/markup-conversion.ts';
+const base=location.href,stage=document.querySelector('#stage');
+const source='<table style="width:400px;table-layout:fixed"><colgroup><col style="width:120px"><col style="width:280px"></colgroup><thead><tr><th style="border-bottom:2px dashed #123456">A</th><th>B</th></tr></thead><tbody><tr><td rowspan="2" style="border-left:3pt double red;border-top:none;border-bottom:1px solid var(--tp-brand-stroke-mid);text-align:center;vertical-align:middle">C</td><td style="border-right:4px dotted rgb(10,20,30)">D</td></tr><tr><td>E</td></tr></tbody></table>';
+const read=html=>{stage.innerHTML=html;return [...stage.querySelectorAll('th,td')].map(cell=>{const s=getComputedStyle(cell);return {text:cell.textContent.trim(),rowspan:cell.rowSpan,colspan:cell.colSpan,borders:['Top','Right','Bottom','Left'].map(side=>[s['border'+side+'Width'],s['border'+side+'Style'],s['border'+side+'Color']])};});};
+const native=(code,lang)=>lang==='markdown'?code.startsWith('|'):lang==='asciidoc'?code.includes('|===')&&!code.includes('[table,'):!code.includes('html-table')&&/^\.\. (list-table|table)::/.test(code);
+document.querySelector('#run').onclick=async()=>{
+ const results=[];
+ for(const theme of ['light','dark']){
+  stage.className='tp-'+theme;
+  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+  const expected=read(source);
+  for(const first of ['markdown','asciidoc','restructuredtext'])for(const second of ['markdown','asciidoc','restructuredtext']){
+   document.querySelector('#status').textContent=`Checking ${first} → ${second} (${theme})`;
+   try{
+    const code1=htmlToMarkup(source,first),html1=await markupToHtml(code1,first,base);
+    const code2=htmlToMarkup(html1,second),html2=await markupToHtml(code2,second,base),actual=read(html2);
+    results.push({theme,first,second,pass:native(code1,first)&&native(code2,second)&&JSON.stringify(actual)===JSON.stringify(expected),expected,actual,code1,code2});
+   }catch(error){results.push({theme,first,second,pass:false,error:String(error)});}
+  }
+ }
+ for(const format of ['markdown','asciidoc','restructuredtext']){
+  // Exercise list-table as well as merged grid tables.
+  const plain=source.replace(' rowspan="2"','').replace('<tr><td>E</td></tr>','<tr><td>E</td><td>F</td></tr>');
+  const expected=read(plain),code=htmlToMarkup(plain,format),actual=read(await markupToHtml(code,format,base));
+  results.push({name:'Unmerged '+format,pass:JSON.stringify(actual)===JSON.stringify(expected)&&native(code,format),code,expected,actual});
+ }
+ const grid=htmlToMarkup(source,'restructuredtext');
+ for(const value of ['0,1/border=none','2,1/background=red','2,1/border=url(x)','2,1/border=none;2,1/border=solid','9,9/border=none','3,1/border=none']){
+  try{
+   const output=await markupToHtml(grid.replace(/:cell-borders:.*/,`:cell-borders: ${value}`),'restructuredtext',base);
+   results.push({name:'Reject '+value,pass:/system-message|ERROR\/3/.test(output)});
+  }catch(error){results.push({name:'Reject '+value,pass:true,error:String(error)});}
+ }
+ document.querySelector('#report').textContent=JSON.stringify(results,null,2);
+ document.querySelector('#status').textContent=`Complete: ${results.filter(x=>x.pass).length}/${results.length} border checks passed`;
+};
+</script></html>

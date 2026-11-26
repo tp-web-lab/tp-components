@@ -6,7 +6,7 @@
 ======
 [tp-frame,aspect-ratio="16:9",style="max-width: 24rem;"]
 ====
-image::/docs/medias/logos/logo-tp.svg[tp-components logo]
+image::/docs/medias/logos/logo-tp.svg["tp-components logo"]
 ====
 ======
 

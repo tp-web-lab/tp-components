@@ -74,12 +74,6 @@ tp-prolog-viewer {
   margin-inline-end: 0.25rem;
 }
 
-[data-tp-programming-viewer-toolbar] tp-icon-button[aria-pressed='true'] {
-  background: var(--tp-brand-fill-softer, #eff6ff);
-  border-radius: 0.375rem;
-  color: var(--tp-brand-text-colorful, #2563eb);
-}
-
 [data-tp-programming-viewer-spacer] { flex: 1 1 auto; }
 [data-tp-programming-viewer-editor-actions] {
   align-items: center;
@@ -150,7 +144,6 @@ tp-prolog-viewer {
 [data-tp-programming-viewer-panel='output'] tp-iframe,
 [data-tp-programming-viewer-panel='output'] tp-console {
   border: 0;
-  border-radius: 0;
   margin: 0;
 }
 [data-tp-programming-viewer-root] [data-tp-programming-viewer-panel='output'] tp-iframe {
@@ -161,7 +154,7 @@ tp-prolog-viewer {
 }
 [data-tp-programming-viewer-root] [data-tp-programming-viewer-panel='output'] tp-console {
   max-block-size: none;
-  overflow: visible;
+  overflow: hidden;
 }
 [data-tp-programming-viewer-panel='output'] tp-console {
   border-block-start: 1px solid var(--tp-border-color, #ddd);
@@ -375,4 +368,8 @@ tp-console[data-tp-playground-console] {
 [data-tp-playground-language-help] {
   min-block-size: 1.5rem;
   min-inline-size: 1.5rem;
+}
+
+[data-viewer-mode="simple"] > [data-tp-programming-viewer-root] > [data-tp-programming-viewer-toolbar] {
+  display: none;
 }

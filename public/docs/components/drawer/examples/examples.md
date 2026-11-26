@@ -1,4 +1,4 @@
-::::::: tp-markdown-viewer { label="tp-drawer" allow-script }
+::::::: tp-markdown-viewer { label="tp-drawer" allow-script preserve-source }
 :::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::::: tp-box { data-intro-action="drawer" data-allow-script }
@@ -14,9 +14,8 @@ Close
 :::
 ::::
 
-::: p { data-demo-status role="status" }
 Try the drawer using its trigger.
-:::
+{data-demo-status role="status"}
 
 ::: script { src="/docs/components/_shared/introduction-actions.js" }
 :::

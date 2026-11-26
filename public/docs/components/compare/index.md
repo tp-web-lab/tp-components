@@ -16,8 +16,8 @@ The custom `<tp-compare>` element compares two views of content with an adjustab
 
 <!-- tp-docgen:introduction:start -->
 <tp-compare position="50%" before-label="Before" after-label="After" style="height: 12rem;">
-  <tp-box slot="before" style="height: 100%; background: var(--tp-neutral-100);">Before: the original design</tp-box>
-  <tp-box slot="after" style="height: 100%; background: var(--tp-brand-100);">After: the updated design</tp-box>
+  <tp-box slot="before" style="height: 100%; background: var(--tp-neutral-fill-softer); color: var(--tp-neutral-text-on-soft);">Before: the original design</tp-box>
+  <tp-box slot="after" style="height: 100%; background: var(--tp-brand-fill-softer); color: var(--tp-brand-text-on-soft);">After: the updated design</tp-box>
 </tp-compare>
 <!-- tp-docgen:introduction:end -->
 
@@ -85,19 +85,19 @@ Javascript API
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

@@ -39,6 +39,16 @@ The custom `<tp-html-viewer>` element provides an interactive HTML viewer with e
 <!-- -->
 ## Usage
 
+### External source (`src`)
+
+`src` is the URL of the HTML source file to load, edit and render in the viewer. The default is an empty string.
+
+### Source comments
+
+HTML comments are preserved by default in the editable source, including commented-out elements and comments inside templates. They remain comments in the rendered document. This applies to inline sources, external files and named examples; `preserve-source` is not required.
+
+Use `preserve-source` only when the example needs to retain its source formatting and bypass the usual runtime-markup cleanup. Without it, generated controls are still removed while authored comments are kept.
+
 ### Initial content
 
 ::: tp-tabs
@@ -109,6 +119,14 @@ Add `no-loader` when an executable example imports every dependency itself or de
 </tp-html-viewer>
 ```
 
+### Presentation mode
+
+Set `mode="default"` for the standard viewer, `mode="lite"` for the compact presentation, or `mode="simple"` for only the source editor and rendered output. Simple mode always shows both panes, hides the viewer toolbar and uses <kbd>Shift</kbd>+<kbd>Enter</kbd> to run the edited source. The panes adapt to the available width.
+
+The historical boolean `lite` attribute remains an alias for `mode="lite"` when `mode` is absent. An explicit `mode` takes precedence; unsupported values use `default`. Changing the mode preserves the current editable source.
+
+Lite and simple modes display one example and its rendered output, without generated-HTML or structure controls.
+
 ### Importing
 
 ::: tp-tabs
@@ -148,22 +166,25 @@ Javascript API
 
 Multiple examples
 : Switch between the named examples and compare their source and rendered output.
+
+Compare presentation modes
+: Compare default, lite and simple presentations of the same source. In simple mode, edit the code and press <kbd>Shift</kbd>+<kbd>Enter</kbd> (Return) from the editor to update only that viewer.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -184,6 +205,10 @@ All tp-components and external tools used by this component are loaded automatic
 @summary Visual separator for menus, dropdowns, toolbars, and layouts.
 -->
 <!--
+@tp-dependency tp-fullscreen
+@summary Fullscreen controller button.
+-->
+<!--
 @tp-dependency tp-icon
 @summary SVG icon component with inline, URL, and registry sources.
 -->
@@ -197,15 +222,16 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 <!--
 @tp-dependency tp-switcher
-@summary Component `<tp-switcher>`.
+@summary Switches between horizontal and vertical layouts based on available space.
 -->
 
 - [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 - [`<tp-divider>`](#/components/divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
+- [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
 - [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
 - [`<tp-object-tree>`](#/components/object-tree/index.md) : Specialized tree for inspecting JavaScript values.
-- [`<tp-switcher>`](#/components/switcher/index.md) : Component `<tp-switcher>`.
+- [`<tp-switcher>`](#/components/switcher/index.md) : Switches between horizontal and vertical layouts based on available space.
 
 ### External
 

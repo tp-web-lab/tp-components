@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-mask" allow-script }
+::::: tp-markdown-viewer { label="tp-mask" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-textfield { id="mask-answer" label="Answer" value="Thursday" clearable }

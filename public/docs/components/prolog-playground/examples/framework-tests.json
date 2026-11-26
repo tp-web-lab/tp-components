@@ -1,0 +1,17 @@
+{
+  "name": "PlUnit tests",
+  "entry": "/main.pl",
+  "test": "/main.test.pl",
+  "files": [
+    {
+      "path": "/main.pl",
+      "language": "prolog",
+      "content": "double(X, Y) :- Y is X * 2.\nchoice(a).\nchoice(b)."
+    },
+    {
+      "path": "/main.test.pl",
+      "language": "prolog",
+      "content": ":- use_module(library(plunit)).\n\n:- begin_tests(arithmetic).\ntest(double, true(Y == 6)) :- double(3, Y).\ntest(choices, all(X == [a, b])) :- choice(X).\ntest(no_solution, [fail]) :- choice(c).\ntest(expected_error, [throws(error(type_error(evaluable, _), _))]) :- double(hello, _).\ntest(work_in_progress, [blocked(todo)]) :- true.\n:- end_tests(arithmetic).\n"
+    }
+  ]
+}

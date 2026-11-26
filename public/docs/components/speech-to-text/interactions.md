@@ -4,9 +4,9 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Start | Request microphone access and begin listening; optionally record audio once recognition starts. |
-| Stop | Finish recognition and optional audio recording; allow final transcription results to arrive. |
-| Clear | Cancel listening and remove the transcript and optional recording. |
+| <!-- button --> Start | Request microphone access and begin listening; optionally record audio once recognition starts. |
+| <!-- button --> Stop | Finish recognition and optional audio recording; allow final transcription results to arrive. |
+| <!-- button --> Clear | Cancel listening and remove the transcript and optional recording. |
 | Audio player / Download recording | Replay or save the captured audio when recording is enabled. |
 | Transcript | Click to edit finalized text. Provisional text may change while you speak. |
 | Status | Read permission or service errors. Recognition depends on the browser and may send audio to an online service. |

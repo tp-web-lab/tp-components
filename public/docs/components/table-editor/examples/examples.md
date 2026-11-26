@@ -1,8 +1,8 @@
-::::::::: tp-markdown-viewer { label="tp-table-editor" allow-script }
-:::::::: script { type="tp/markdown" }
+:::::::::: tp-markdown-viewer { label="tp-table-editor" allow-script preserve-source }
+::::::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
-::::::: tp-table-editor { caption="Workshop schedule" }
-:::::: table
+:::::::: tp-table-editor { caption="Workshop schedule" }
+::::::: table
 ::::: thead
 :::: tr
 ::: th
@@ -23,35 +23,39 @@ Formula
 ::::
 :::::
 
-::::: tbody
-:::: tr
+:::::: tbody
+::::: tr
 ::: td
 Introduction
 :::
 
-::: td { data-type="number" }
+::: td { data-type="number" style="vertical-align:middle" }
 20
 :::
 
-::: td { data-type="date" }
+::: td { data-type="date" style="vertical-align:middle" }
 2026-11-14
 :::
 
-::: td { data-type="math" }
-x^2 + y^2
+:::: td { data-type="math" }
+::: script { type="tp/latex" }
+\begin{pmatrix}1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9\end{pmatrix}
 :::
 ::::
+:::::
 
 :::: tr
 ::: td
-Practice
+Practice  
+  
+Guided exercises
 :::
 
-::: td { data-type="number" }
+::: td { data-type="number" style="vertical-align:middle" }
 40
 :::
 
-::: td { data-type="date" }
+::: td { data-type="date" style="vertical-align:middle" }
 2026-11-15
 :::
 
@@ -59,9 +63,9 @@ Practice
 E = mc^2
 :::
 ::::
-:::::
 ::::::
 :::::::
+::::::::
 ```
 
 ``` example {label="Javascript API"}
@@ -111,42 +115,57 @@ element10.append(element11);
 
 const element12 = document.createElement("td");
 element12.setAttribute("data-type", "number");
+element12.setAttribute("style", "vertical-align:middle");
 element12.append(document.createTextNode("20"));
 element10.append(element12);
 
 const element13 = document.createElement("td");
 element13.setAttribute("data-type", "date");
+element13.setAttribute("style", "vertical-align:middle");
 element13.append(document.createTextNode("2026-11-14"));
 element10.append(element13);
 
 const element14 = document.createElement("td");
 element14.setAttribute("data-type", "math");
-element14.append(document.createTextNode("x^2 + y^2"));
+
+const element15 = document.createElement("script");
+element15.setAttribute("type", "tp/latex");
+element15.textContent = "\\begin{pmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9\\end{pmatrix}";
+element14.append(element15);
 element10.append(element14);
 element9.append(element10);
 element9.append(document.createTextNode("\n      "));
 
-const element15 = document.createElement("tr");
-
-const element16 = document.createElement("td");
-element16.append(document.createTextNode("Practice"));
-element15.append(element16);
+const element16 = document.createElement("tr");
 
 const element17 = document.createElement("td");
-element17.setAttribute("data-type", "number");
-element17.append(document.createTextNode("40"));
-element15.append(element17);
+element17.append(document.createTextNode("Practice"));
 
-const element18 = document.createElement("td");
-element18.setAttribute("data-type", "date");
-element18.append(document.createTextNode("2026-11-15"));
-element15.append(element18);
+const element18 = document.createElement("br");
+element17.append(element18);
 
-const element19 = document.createElement("td");
-element19.setAttribute("data-type", "math");
-element19.append(document.createTextNode("E = mc^2"));
-element15.append(element19);
-element9.append(element15);
+const element19 = document.createElement("br");
+element17.append(element19);
+element17.append(document.createTextNode("Guided exercises"));
+element16.append(element17);
+
+const element20 = document.createElement("td");
+element20.setAttribute("data-type", "number");
+element20.setAttribute("style", "vertical-align:middle");
+element20.append(document.createTextNode("40"));
+element16.append(element20);
+
+const element21 = document.createElement("td");
+element21.setAttribute("data-type", "date");
+element21.setAttribute("style", "vertical-align:middle");
+element21.append(document.createTextNode("2026-11-15"));
+element16.append(element21);
+
+const element22 = document.createElement("td");
+element22.setAttribute("data-type", "math");
+element22.append(document.createTextNode("E = mc^2"));
+element16.append(element22);
+element9.append(element16);
 element9.append(document.createTextNode("\n    "));
 element2.append(element9);
 element2.append(document.createTextNode("\n  "));
@@ -205,6 +224,66 @@ Mathematics
 
 ::: td { data-type="math" }
 x^2 + y^2
+:::
+::::
+:::::
+::::::
+:::::::
+```
+
+``` example {label="Rich content"}
+::::::: tp-table-editor { caption="Rich content export comparison" }
+:::::: table
+::::: thead
+:::: tr
+::: th
+Example
+:::
+
+::: th
+Content
+:::
+::::
+:::::
+
+::::: tbody
+:::: tr
+::: td
+Bold text
+:::
+
+::: td { data-type="rich" }
+**Compare bold text in each export.**
+:::
+::::
+
+:::: tr
+::: td
+Image
+:::
+
+::: td { data-type="rich" }
+![Canoe](/medias/image/canoe.svg){width="160"}
+:::
+::::
+
+:::: tr
+::: td
+Video
+:::
+
+::: td { data-type="rich" }
+:video:{src="/medias/video/chute-eau.mp4" controls preload="metadata" width="240" aria-label="Waterfall video"}
+:::
+::::
+
+:::: tr
+::: td
+Audio
+:::
+
+::: td { data-type="rich" }
+:audio:{src="/medias/audio/glass-break.mp3" controls preload="metadata" aria-label="Glass breaking sound"}
 :::
 ::::
 :::::
@@ -296,5 +375,5 @@ B2
 ::::::
 :::::::
 ```
-::::::::
 :::::::::
+::::::::::

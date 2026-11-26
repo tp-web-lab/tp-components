@@ -1,0 +1,34 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpSchemePlayground[src=/docs/components/_shared/intro-projects/scheme.json]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/scheme/scheme.js";
+import "/components/scheme-playground/scheme-playground.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-scheme-playground");
+element1.setAttribute("src", "/docs/components/_shared/intro-projects/scheme.json");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Scheme tests
+\documentclass{article}
+\begin{document}
+\wcTpSchemePlayground[src=/docs/components/scheme-playground/examples/test-project.json]{}
+\end{document}
+
+% !tp-example SRFI-64 tests
+\documentclass{article}
+\begin{document}
+\wcTpSchemePlayground[src=/docs/components/scheme-playground/examples/framework-tests.json]{}
+\end{document}

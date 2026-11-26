@@ -4,7 +4,7 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Repository button | Open the source repository. No button is displayed when no repository is available. |
+| :tp-icon:{name="github" size="2em"} :tp-icon:{name="gitlab" size="2em"} :tp-icon:{name="bitbucket" size="2em"} :tp-icon:{name="git" size="2em"} Repository button | Open the source repository. No button is displayed when no repository is available. |
 
 #### Keyboard interactions
 

@@ -29,11 +29,11 @@
 
                   Close
 
-            .. p::
+            .. attributes::
                :data-demo-status:
                :role: status
 
-               Try the drawer using its trigger.
+            Try the drawer using its trigger.
 
             .. script::
                :src: /docs/components/_shared/introduction-actions.js

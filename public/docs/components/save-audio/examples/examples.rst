@@ -9,15 +9,15 @@
 
          Listen to the sound of breaking glass, then save the MP3 file.
 
-         .. audio::
+         .. media:: audio
             :id: save-audio-example
-            :controls:
+            :controls: true
             :preload: metadata
             :aria-label: Sound of breaking glass
-
-            .. source::
-               :src: /docs/medias/audios/glass-break.mp3
-               :type: audio/mpeg
+            :autoplay: false
+            :loop: false
+            :muted: false
+            :sources: [{"src":"/docs/medias/audios/glass-break.mp3","type":"audio/mpeg"}]
 
          .. tp-save-audio::
             :anchor: #save-audio-example

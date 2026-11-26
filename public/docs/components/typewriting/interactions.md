@@ -5,6 +5,7 @@
 | Control or gesture | Result |
 | --- | --- |
 | Animated text | Watch the text appear progressively. Space is reserved for the complete content to avoid layout shifts. |
+| Hover / Move the pointer away | Pause the timed reveal at the current letter or word / Resume from the same position with the remaining delay. |
 | Click the component | Reveal all text immediately and stop repetition. Embedded links and controls retain their own actions. |
 | Linked speech controls | Speak starts the spoken reveal; Pause and Resume freeze and continue it. Stop shows all text. Clicking the text shows it without interrupting the audio. |
 

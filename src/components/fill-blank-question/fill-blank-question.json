@@ -38,13 +38,59 @@
       "default": "false"
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "continueAfterTimeout(): void",
+      "inherited": true,
+      "description": "Reopens the question after its timer expires."
+    },
+    {
+      "name": "explainSolution(): Promise<void>",
+      "inherited": true,
+      "description": "Opens the AI explanation for an unlocked solution when AI assistance is available."
+    },
+    {
+      "name": "openSolutionPanel(): void",
+      "inherited": true,
+      "description": "Opens the Solution panel."
+    },
+    {
+      "name": "reset(): void",
+      "inherited": true,
+      "description": "Resets the response and clears the submitted feedback."
+    },
+    {
+      "name": "setExerciseTiming(exercise: HTMLElement, pending: boolean): void",
+      "inherited": true,
+      "description": "Sets an enclosing exercise's solution gate without displaying a local timer."
+    },
+    {
+      "name": "start(): void",
+      "inherited": true,
+      "description": "Starts the timed question when its Start action is available."
+    },
+    {
+      "name": "submit(): Promise<void>",
+      "inherited": true,
+      "description": "Validates and submits the current response, respecting the same guards as Submit."
+    },
+    {
+      "name": "toggleInput(): void",
+      "inherited": true,
+      "description": "Shows or hides the answer form, keeping at least one panel visible."
+    },
+    {
+      "name": "toggleOutput(): void",
+      "inherited": true,
+      "description": "Shows or hides feedback, keeping at least one panel visible."
+    }
+  ],
   "events": [],
   "cssproperties": [],
   "dependencies": [
     {
       "name": "tp-blank",
-      "summary": "displays a text, SVG or image answer in a focusable blank."
+      "summary": "Provides an answer slot for text, images or drawings."
     },
     {
       "name": "tp-button",
@@ -102,7 +148,7 @@
   "userHelp": {
     "displayName": "Fill blank question",
     "introduction": "The custom `<tp-fill-blank-question>` element presents and grades a fill-in-the-blank question.",
-    "interactions": "The user-help button legend groups commands by their location in the component and describes their effect briefly. Detailed gestures and keyboard behavior remain in the interaction tables below.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Open-answer field | Click the field and enter an answer. |\n| Closed answer bank | Drag an answer to a blank, or select an answer then click a blank. |\n| Clear button | Remove the assigned answer. |\n| Submit | Check the answers. A correct answer displays a congratulatory message. |\n| Feedback / Solution tabs | Read feedback or view the solution. |\n| Case warning | When shown after the prompt, uppercase and lowercase letters must match. |\n| Input / Output buttons | Show or hide the answer form or result panel without losing their contents. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>ArrowRight</kbd> from a closed blank | Move to the answer bank. |\n| <kbd>Up</kbd> / <kbd>Down</kbd> in the answer bank | Choose an answer. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> in the answer bank | Place the chosen answer into the highlighted blank. |\n| <kbd>Escape</kbd> | Cancel answer selection. |\n| <kbd>Delete</kbd> on a blank | Clear its answer. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "The user-help button legend groups commands by their location in the component and describes their effect briefly. Detailed gestures and keyboard behavior remain in the interaction tables below.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Open-answer field | Click the field and enter an answer. |\n| Closed answer bank | Drag an answer to a blank, or select an answer then click a blank. |\n| Clear button | Remove the assigned answer. |\n| Submit | Check the answers. A correct answer displays a congratulatory message. |\n| Feedback / Solution tabs | Read feedback or view the solution. |\n| Case warning | When shown after the prompt, uppercase and lowercase letters must match. |\n| Input / Output buttons | Show or hide the answer form or result panel without losing their contents. |\n| :tp-icon:{name=\"input\" size=\"2em\"} Input button | Input button. |\n| :tp-icon:{name=\"output\" size=\"2em\"} Output button | Output button. |\n| :tp-icon:{name=\"refresh\" size=\"2em\"} Reset response | Reset response. |\n| :tp-icon:{name=\"play-arrow\" size=\"2em\"} Submit response | Submit response. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>ArrowRight</kbd> from a closed blank | Move to the answer bank. |\n| <kbd>Up</kbd> / <kbd>Down</kbd> in the answer bank | Choose an answer. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> in the answer bank | Place the chosen answer into the highlighted blank. |\n| <kbd>Escape</kbd> | Cancel answer selection. |\n| <kbd>Delete</kbd> on a blank | Clear its answer. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

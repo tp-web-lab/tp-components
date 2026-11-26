@@ -6,8 +6,9 @@ import { parseFragment, serialize } from "parse5";
 import { test } from "vitest";
 import { namedExamples, viewerSource } from "./component-basic-examples.mjs";
 import { javascriptExample } from "./component-javascript-examples.mjs";
+import { syncJavascriptExamples } from "./sync-javascript-examples.mjs";
 
-test("all Javascript API examples recreate Basic usage with DOM calls and targeted imports", () => {
+test("all Javascript API examples recreate introductions with DOM calls and targeted imports", () => {
 	let count = 0;
 	for (const component of readdirSync("public/docs/components")) {
 		const folder = `public/docs/components/${component}/examples`;
@@ -16,9 +17,13 @@ test("all Javascript API examples recreate Basic usage with DOM calls and target
 			"html",
 			viewerSource("html", readFileSync(`${folder}/examples.html`, "utf8")),
 		);
-		assert.equal(examples[1]?.label, "Javascript API", component);
+		const programmed = examples.filter(
+			(example) => example.label === "Javascript API",
+		);
+		assert.equal(programmed.length, 1, component);
 		const program =
-			examples[1].source.match(/<script[^>]*>([\s\S]*?)<\/script>/)?.[1] ?? "";
+			programmed[0].source.match(/<script[^>]*>([\s\S]*?)<\/script>/)?.[1] ??
+			"";
 		assert.doesNotMatch(
 			program,
 			/\.innerHTML\s*=|insertAdjacentHTML|import\s+.*tp-loader/,
@@ -35,12 +40,16 @@ test("all Javascript API examples recreate Basic usage with DOM calls and target
 		});
 		assert.equal(
 			serialize(parseFragment(documentNode.body.innerHTML)),
-			serialize(parseFragment(examples[0]?.source ?? "")),
+			serialize(
+				parseFragment(
+					readFileSync(`${folder}/introduction.html`, "utf8").trim(),
+				),
+			),
 			component,
 		);
 		count++;
 	}
-	assert.ok(count >= 205);
+	assert.ok(count >= 212);
 });
 
 test("literal scripts, templates, comments and SVG namespaces survive generation", () => {
@@ -52,4 +61,31 @@ test("literal scripts, templates, comments and SVG namespaces survive generation
 	assert.match(program, /\.content\.append/);
 	assert.match(program, /import "\/components\/button\/button.js"/);
 	assert.equal((program.match(/<\/script>/g) ?? []).length, 1);
+});
+
+test("all five Javascript API sources match their introduction without losing newlines", () => {
+	const { count, stale } = syncJavascriptExamples(true);
+	assert.ok(count >= 212);
+	assert.deepEqual(stale, []);
+});
+
+test("programmed reconstruction retains blank lines and indentation in literal source", () => {
+	const source =
+		'<tp-box><pre>\nfirst\n\n  indented\n</pre><script type="tp/python">\nvalue = 1\n\nif value:\n    print(value)\n</script></tp-box>';
+	const program = javascriptExample(source, new Map([["tp-box", "box"]]));
+	const code = program.match(/<script[^>]*>([\s\S]*?)<\/script>/)?.[1] ?? "";
+	const documentNode = document.implementation.createHTMLDocument();
+	vm.runInNewContext(code.replace(/^import .*;$/gm, ""), {
+		document: documentNode,
+	});
+	const expected = document.createElement("template");
+	expected.innerHTML = source;
+	assert.equal(
+		documentNode.body.querySelector("script")?.textContent,
+		expected.content.querySelector("script")?.textContent,
+	);
+	assert.equal(
+		documentNode.body.querySelector("pre")?.textContent,
+		expected.content.querySelector("pre")?.textContent,
+	);
 });

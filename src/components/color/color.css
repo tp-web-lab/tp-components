@@ -3,14 +3,7 @@ tp-color {
   display: inline-flex;
 }
 
-tp-color > tp-icon-button > button {
-  border: 1px solid var(--tp-neutral-stroke-mid, #9ca3af);
-  background: var(--tp-paper-color, #ffffff);
-}
 
-tp-color > tp-icon-button > button:hover {
-  background: var(--tp-neutral-fill-soft, #e5e7eb);
-}
 
 tp-color > tp-dropdown {
   inline-size: max-content;

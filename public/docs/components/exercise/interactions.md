@@ -5,8 +5,8 @@
 | Control or gesture | Result |
 | --- | --- |
 | Exercise title | Expand or collapse the context and questions. |
-| Start | Reveal the context and questions and begin the shared countdown. |
-| Continue | Reveal the context and questions after expiry, preserving answers. |
+| <!-- button --> Start | Reveal the context and questions and begin the shared countdown. |
+| <!-- button --> Continue | Reveal the context and questions after expiry, preserving answers. |
 
 Question controls belong to each question and have their own User help.
 

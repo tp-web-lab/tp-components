@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-mathfield" allow-script }
+::::: tp-markdown-viewer { label="tp-mathfield" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-mathfield { label="Formula" value="E = mc^2" clearable }

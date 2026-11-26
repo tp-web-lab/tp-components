@@ -41,6 +41,8 @@ The custom `<tp-icon-button>` element provides an icon action button with an acc
 
 ### Authoring
 
+Icon buttons use a circular brand-colored border, a brand-colored background on hover and a brand-colored keyboard focus ring. These styles follow the surrounding color and theme, whether the button stands alone or belongs to a toolbar. `aria-pressed="true"` uses the same brand background to indicate a selected toggle, including inside dropdowns and drawers. The `success`, `danger`, `warning` and `info` variants use their corresponding semantic colors.
+
 <tp-icon-button name="delete" label="Delete" color="crimson"></tp-icon-button>
 
 Like `tp-button`, this component supports `href`, `target`, `rel`, `download`, `disabled`, `loading`, `loading-mode`, `outlined`, `pill`, `type`, `variant`, and `size`. A nonempty `href` creates a native link; removing it restores a native button. `loading-mode="replace"` replaces the icon with a spinner; `inline` keeps both visible.
@@ -91,19 +93,19 @@ Javascript API
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

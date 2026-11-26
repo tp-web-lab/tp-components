@@ -28,6 +28,10 @@ import style from "./carousel.css?inline";
  * @attr {"horizontal" | "vertical"} orientation = "horizontal" - Direction of image navigation.
  * @attr {string} height = "20rem" - Height of the image viewport, in CSS units.
  * @attr {number} index = 0 - Zero-based index of the selected image, clamped to the available images.
+ * @attr {string} bg-color = "transparent" - Viewport background: a CSS color, brand, neutral or a CSS variable.
+ * @attr {"none" | "start-to-end" | "end-to-start"} transition = "none" - Full slide travel direction; follows reading direction horizontally and runs top/bottom vertically.
+ * @attr {boolean} hide-controls = false - Hides both navigation buttons and the image counter.
+ * @attr {number} auto = 0 - Automatic looping interval in milliseconds; zero disables automatic navigation.
  * @attr {boolean} loop = false - Lets Previous and Next wrap between the first and last images.
  * @event tp-carousel-change Emitted when the selected image changes.
  * @eventdetail tp-carousel-change { index: number; count: number }
@@ -57,6 +61,11 @@ export class TpCarousel extends TpBase {
 	private mutationObserver: MutationObserver | null = null;
 	private layoutFrame: number | null = null;
 	private scrollFrame: number | null = null;
+	private transitionAnimation: Animation | null = null;
+	private hovered = false;
+	private autoDeadline = 0;
+	private autoRemaining = 0;
+	private autoTimer: ReturnType<typeof setTimeout> | null = null;
 
 	public static override get observedAttributes(): string[] {
 		return [
@@ -65,6 +74,10 @@ export class TpCarousel extends TpBase {
 			"height",
 			"index",
 			"loop",
+			"auto",
+			"hide-controls",
+			"bg-color",
+			"transition",
 		];
 	}
 	public get orientation(): "horizontal" | "vertical" {
@@ -94,6 +107,144 @@ export class TpCarousel extends TpBase {
 	public set loop(value: boolean) {
 		this.toggleAttribute("loop", value);
 	}
+	/** Background color of the image viewport. */
+	public get bgColor(): string {
+		return this.getAttribute("bg-color")?.trim() || "transparent";
+	}
+	public set bgColor(value: string) {
+		this.setAttribute("bg-color", value);
+	}
+	/** Direction of the full traversal animation. */
+	public get transition(): "none" | "start-to-end" | "end-to-start" {
+		const value = this.getAttribute("transition");
+		return value === "start-to-end" || value === "end-to-start"
+			? value
+			: "none";
+	}
+	public set transition(value: "none" | "start-to-end" | "end-to-start") {
+		this.setAttribute("transition", value);
+	}
+	private cancelTransition(): void {
+		this.transitionAnimation?.cancel();
+		this.transitionAnimation = null;
+	}
+	private animateSelection(): void {
+		const slide = this.slides[this.activeIndex];
+		if (
+			!slide ||
+			this.transition === "none" ||
+			typeof slide.animate !== "function" ||
+			window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+		)
+			return;
+		const vertical = this.orientation === "vertical";
+		const rtl = !vertical && getComputedStyle(this).direction === "rtl";
+		const sign = (this.transition === "start-to-end" ? -1 : 1) * (rtl ? -1 : 1);
+		const viewportRect = this.viewport?.getBoundingClientRect();
+		if (!viewportRect) return;
+		const content = slide.querySelector<HTMLElement>("tp-icon, img") ?? slide;
+		const rect = content.getBoundingClientRect();
+		let size = vertical ? rect.height : rect.width;
+		let center = vertical
+			? rect.top + rect.height / 2
+			: rect.left + rect.width / 2;
+		if (
+			content instanceof HTMLImageElement &&
+			content.naturalWidth &&
+			content.naturalHeight &&
+			getComputedStyle(content).objectFit === "contain"
+		) {
+			const scale = Math.min(
+				rect.width / content.naturalWidth,
+				rect.height / content.naturalHeight,
+			);
+			size = (vertical ? content.naturalHeight : content.naturalWidth) * scale;
+		}
+		if (size === 0) {
+			size = vertical ? viewportRect.height : viewportRect.width;
+			center = vertical
+				? viewportRect.top + size / 2
+				: viewportRect.left + size / 2;
+		}
+		const start =
+			(vertical ? viewportRect.top : viewportRect.left) - center - size / 2;
+		const end =
+			(vertical ? viewportRect.bottom : viewportRect.right) - center + size / 2;
+		const animation = slide.animate(
+			[
+				{
+					transform: `translate${vertical ? "Y" : "X"}(${sign < 0 ? start : end}px)`,
+				},
+				{
+					transform: `translate${vertical ? "Y" : "X"}(${sign < 0 ? end : start}px)`,
+				},
+			],
+			{
+				duration: this.auto > 0 ? Math.min(this.auto, 2_147_483_647) : 400,
+				easing: "linear",
+				fill: "both",
+			},
+		);
+		this.transitionAnimation = animation;
+		if (this.hovered) animation.pause();
+	}
+	/** Whether navigation buttons and the counter are hidden. */
+	public get hideControls(): boolean {
+		return this.hasAttribute("hide-controls");
+	}
+	public set hideControls(value: boolean) {
+		this.toggleAttribute("hide-controls", value);
+	}
+	/** Automatic looping interval in milliseconds, or zero when disabled. */
+	public get auto(): number {
+		const value = Number(this.getAttribute("auto") ?? 0);
+		return Number.isFinite(value) && value > 0 ? value : 0;
+	}
+	public set auto(value: number) {
+		this.setAttribute("auto", String(value));
+	}
+	private stopAuto(): void {
+		if (this.autoTimer !== null) clearTimeout(this.autoTimer);
+		this.autoTimer = null;
+	}
+	private scheduleAuto(): void {
+		if (this.hovered || !this.isConnected || this.auto === 0 || this.count < 2)
+			return;
+		this.autoDeadline = Date.now() + this.autoRemaining;
+		this.autoTimer = setTimeout(() => {
+			this.autoTimer = null;
+			if (
+				this.hovered ||
+				!this.isConnected ||
+				this.auto === 0 ||
+				this.count < 2
+			)
+				return;
+			this.goTo((this.activeIndex + 1) % this.count);
+			this.syncAuto();
+		}, this.autoRemaining);
+	}
+	private syncAuto(): void {
+		this.stopAuto();
+		this.autoRemaining = Math.min(this.auto, 2_147_483_647);
+		this.scheduleAuto();
+	}
+	private readonly handleMouseEnter = (): void => {
+		if (this.hovered) return;
+		this.hovered = true;
+		if (this.autoTimer !== null) {
+			this.autoRemaining = Math.max(0, this.autoDeadline - Date.now());
+			this.stopAuto();
+		}
+		this.transitionAnimation?.pause();
+	};
+	private readonly handleMouseLeave = (): void => {
+		if (!this.hovered) return;
+		this.hovered = false;
+		if (this.transitionAnimation?.playState === "paused")
+			this.transitionAnimation.play();
+		this.scheduleAuto();
+	};
 	/** Number of images in the carousel. */
 	public get count(): number {
 		return this.slides.length;
@@ -118,6 +269,8 @@ export class TpCarousel extends TpBase {
 			!this.hasAttribute("aria-labelledby")
 		)
 			this.setAttribute("aria-label", "Image carousel");
+		this.addEventListener("mouseenter", this.handleMouseEnter);
+		this.addEventListener("mouseleave", this.handleMouseLeave);
 		this.ensureControls();
 		this.collectImages();
 		this.sync();
@@ -139,6 +292,11 @@ export class TpCarousel extends TpBase {
 		}
 	}
 	public disconnectedCallback(): void {
+		this.removeEventListener("mouseenter", this.handleMouseEnter);
+		this.removeEventListener("mouseleave", this.handleMouseLeave);
+		this.hovered = false;
+		this.cancelTransition();
+		this.stopAuto();
 		this.resizeObserver?.disconnect();
 		this.mutationObserver?.disconnect();
 		this.viewport?.removeEventListener("keydown", this.handleKeydown, true);
@@ -162,10 +320,15 @@ export class TpCarousel extends TpBase {
 	/** Selects an image by its zero-based index. */
 	public goTo(index: number): void {
 		if (!Number.isFinite(index)) return;
+		this.cancelTransition();
+		const previous = this.activeIndex;
 		this.select(index);
 		this.scrollToSelection(
-			!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches,
+			this.auto === 0 &&
+				this.transition === "none" &&
+				!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches,
 		);
+		if (previous !== this.activeIndex) this.animateSelection();
 	}
 	private step(delta: number): void {
 		if (!this.count) return;
@@ -234,11 +397,21 @@ export class TpCarousel extends TpBase {
 	}
 	private sync(): void {
 		if (!this.viewport) return;
+		this.cancelTransition();
+		const background =
+			this.bgColor === "brand"
+				? "var(--tp-brand-fill-softer)"
+				: this.bgColor === "neutral"
+					? "var(--tp-neutral-fill-softer)"
+					: this.bgColor;
+		this.viewport.style.removeProperty("background-color");
+		this.viewport.style.backgroundColor = background;
 		this.viewport.orientation = this.orientation;
 		this.viewport.sliderHeight = this.height;
 		this.select(this.index);
 		this.updateControls();
 		this.scheduleLayout();
+		this.syncAuto();
 	}
 	private select(index: number): void {
 		const next = Math.max(
@@ -261,6 +434,7 @@ export class TpCarousel extends TpBase {
 			);
 	}
 	private updateControls(): void {
+		if (this.controls) this.controls.hidden = this.hideControls;
 		const vertical = this.orientation === "vertical";
 		this.previousButton?.setAttribute(
 			"name",
@@ -278,6 +452,7 @@ export class TpCarousel extends TpBase {
 			"disabled",
 			this.count < 2 || (!this.loop && this.activeIndex === this.count - 1),
 		);
+		this.counter?.setAttribute("aria-live", this.auto > 0 ? "off" : "polite");
 		if (this.counter)
 			this.counter.textContent = this.count
 				? `${this.activeIndex + 1} / ${this.count}`
@@ -289,7 +464,14 @@ export class TpCarousel extends TpBase {
 		if (this.layoutFrame !== null) return;
 		this.layoutFrame = requestAnimationFrame(() => {
 			this.layoutFrame = null;
-			if (this.isConnected) this.scrollToSelection(false);
+			if (this.isConnected) {
+				this.cancelTransition();
+				this.scrollToSelection(false);
+				if (this.auto > 0 && this.transition !== "none") {
+					this.syncAuto();
+					this.animateSelection();
+				}
+			}
 		});
 	};
 	private scrollToSelection(smooth: boolean): void {
@@ -297,6 +479,10 @@ export class TpCarousel extends TpBase {
 		const slide = this.slides[this.activeIndex];
 		if (!viewport || !slide || !viewport.clientWidth || !viewport.clientHeight)
 			return;
+		if (this.transition !== "none") {
+			viewport.scrollTo({ left: 0, top: 0, behavior: "instant" });
+			return;
+		}
 		const origin = viewport.getBoundingClientRect();
 		const rect = slide.getBoundingClientRect();
 		const vertical = this.orientation === "vertical";
@@ -314,7 +500,13 @@ export class TpCarousel extends TpBase {
 		if (this.scrollFrame !== null) return;
 		this.scrollFrame = requestAnimationFrame(() => {
 			this.scrollFrame = null;
-			if (!this.viewport || !this.isConnected) return;
+			if (
+				!this.viewport ||
+				!this.isConnected ||
+				this.transition !== "none" ||
+				this.transitionAnimation
+			)
+				return;
 			const origin = this.viewport.getBoundingClientRect();
 			const vertical = this.orientation === "vertical";
 			const rtl =

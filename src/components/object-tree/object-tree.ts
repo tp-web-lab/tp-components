@@ -299,19 +299,6 @@ const OBJECT_TREE_CONTEXT_MENU_CONFIG: TpTreeContextMenuConfig = {
  * @eventdetail tp-object-tree-load { source: "script" | "src"; src: string; value: unknown }
  *
  *
- * @example
- * <tp-object-tree>
- *   <script type="tp/javascript">
- *     ({
- *       course: {
- *         title: 'Web components',
- *         lessons: 12,
- *         published: true
- *       },
- *       topics: ['HTML', 'CSS', 'JavaScript']
- *     })
- *   </script>
- * </tp-object-tree>
  *  @cssprop [--tp-object-tree-boolean-color=#8250df] Text color of Boolean values in the object tree.
  * @cssprop [--tp-object-tree-circular-color=#cf222e] Text color of circular-reference markers in the object tree.
  * @cssprop [--tp-object-tree-date-color=#116329] Text color of Date values in the object tree.
@@ -326,6 +313,19 @@ const OBJECT_TREE_CONTEXT_MENU_CONFIG: TpTreeContextMenuConfig = {
  * @cssprop [--tp-object-tree-structure-color=#57606a] Text color of array and object summaries in the object tree.
  * @event tp-tree-context-action Bubbles from the inner tree when a context-menu action is chosen. scope distinguishes global and node actions; target identifies the node or is null.
  * @eventdetail tp-tree-context-action { actionId: string; scope: "global" | "node"; target: TpTreeNodeTarget | null }
+ * @example
+ * <tp-object-tree>
+ *   <script type="tp/javascript">
+ *     ({
+ *       course: {
+ *         title: 'Web components',
+ *         lessons: 12,
+ *         published: true
+ *       },
+ *       topics: ['HTML', 'CSS', 'JavaScript']
+ *     })
+ *   </script>
+ * </tp-object-tree>
  */
 export class TpObjectTree extends TpBase {
 	private static readonly styleId = "tp-object-tree-styles";

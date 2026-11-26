@@ -57,3 +57,15 @@ Viewer questions combine a compact editable source viewer with submission contro
 ::::::
 
 <!-- family-introduction:end -->
+
+::: tp-center {intrinsic}
+:tp-icon:{name="scheme-viewer-question" library="components" size="4em"}
+
+[tp-scheme-viewer-question](scheme-viewer-question/index.md)
+:::
+
+::: tp-center {intrinsic}
+:tp-icon:{name="ocaml-viewer-question" library="components" size="4em"}
+
+[tp-ocaml-viewer-question](ocaml-viewer-question/index.md)
+:::

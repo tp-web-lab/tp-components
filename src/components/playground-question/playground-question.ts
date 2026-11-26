@@ -20,6 +20,7 @@ import type { TpProject } from "../playground/project.js";
  * @accessibility Inherits question disclosure, submission and reset controls from the editor-question hierarchy; test progress, results and failures are presented in its polite live feedback region.
  * @accessibility Keyboard editing and project navigation are provided by the concrete playground; this abstract class adds no separate interactive surface.
  * @accessibilityresponsibility Provide a descriptive title and prompt, understandable test messages and an editor configuration usable with the keyboard. Ensure any rendered program output has appropriate text alternatives.
+ * @attr {string} src = "" - Program, JSON project, or Markdown exercise defining Title, Prompt and Solution.
  */
 export abstract class TpPlaygroundQuestion<
 	TPlayground extends TpPlayground<TpProject>,
@@ -28,7 +29,13 @@ export abstract class TpPlaygroundQuestion<
 	protected abstract createPlayground(): TPlayground;
 	/** Adapts the programming factory to the shared editable question lifecycle. */
 	protected override createEditor(): TPlayground {
-		return this.createPlayground();
+		const control = this.createPlayground();
+		for (const script of this.querySelectorAll<HTMLScriptElement>(
+			":scope > script[type^='tp/']",
+		)) {
+			control.append(script.cloneNode(true));
+		}
+		return control;
 	}
 	/** Playground source readiness event. */
 	protected readonly sourceLoadedEvent = "tp-playground-src-load";
@@ -36,6 +43,15 @@ export abstract class TpPlaygroundQuestion<
 	protected override responseValue(control: TPlayground): unknown {
 		return control.getProject().toJSON();
 	}
+	/** Freezes the current project so edits made while downloading tests belong to the next submission. */
+	protected override captureTests(
+		control: TPlayground,
+	): (file: TpFile) => Promise<TpExecutionDocument> {
+		const runner = this.createPlayground();
+		runner.setProject(control.getProject());
+		return (file) => runner.createTestDocument(file);
+	}
+
 	/** Delegates test execution to the selected playground's existing engine. */
 	protected override buildTests(
 		control: TPlayground,

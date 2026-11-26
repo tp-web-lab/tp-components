@@ -14,6 +14,7 @@
  */
 // tp-docgen:dependencies:end
 
+import { navigateDocumentAnchor } from "../../utilities/document-history.js";
 import style from "./toc.css?inline";
 
 import "../tree/tree.js";
@@ -55,6 +56,9 @@ function isTpTreeElement(value: Element): value is TpTreeElement {
  * @attr {boolean} open = false - Opens the table of contents panel.
  * @attr {boolean} expand-all = false - Expands every table of contents subtree.
  * @attr {boolean} brand = false - Uses the soft brand background and contrasting brand text colors.
+ *  @cssprop [--tp-toc-background=color-mix(in srgb, Canvas 94%, CanvasText 6%)] Panel background color.
+ * @cssprop [--tp-toc-border-color=color-mix(in srgb, CanvasText 12%, transparent)] Panel border color.
+ * @cssprop [--tp-toc-color=inherit] Panel text color.
  * @example
  * <tp-box data-tp-toc-scope="">
  *   <tp-toc label="On this page" open="" expand-all=""></tp-toc>
@@ -63,9 +67,6 @@ function isTpTreeElement(value: Element): value is TpTreeElement {
  *   <h3>Installation</h3><p>Install the library in your project.</p>
  *   <h3>First component</h3><p>Add your first interactive component.</p>
  * </tp-box>
- *  @cssprop [--tp-toc-background=color-mix(in srgb, Canvas 94%, CanvasText 6%)] Panel background color.
- * @cssprop [--tp-toc-border-color=color-mix(in srgb, CanvasText 12%, transparent)] Panel border color.
- * @cssprop [--tp-toc-color=inherit] Panel text color.
  */
 export class TpToc extends TpBase {
 	private static readonly styleId = "tp-toc-styles";
@@ -362,13 +363,22 @@ export class TpToc extends TpBase {
 			return;
 		}
 
-		const heading = document.getElementById(anchor.id);
-		if (heading === null) return;
+		const heading =
+			[...this.getTocScope().querySelectorAll<HTMLElement>("[id]")].find(
+				(node) => node.id === anchor.id,
+			) ?? document.getElementById(anchor.id);
+		if (!heading) return;
 
 		event.preventDefault();
-		window.location.hash =
-			anchor.route === "" ? `#${anchor.id}` : `${anchor.route}#${anchor.id}`;
-		heading.scrollIntoView?.({ block: "start" });
+		const host = this.closest<
+			HTMLElement & { navigateToFragment?: (fragment: string) => void }
+		>(".tp-markdown-multi-pages-host, .tp-markup-multi-pages-host");
+		if (host?.navigateToFragment) host.navigateToFragment(`#${anchor.id}`);
+		else
+			navigateDocumentAnchor(
+				heading,
+				anchor.route === "" ? `#${anchor.id}` : `${anchor.route}#${anchor.id}`,
+			);
 	};
 }
 

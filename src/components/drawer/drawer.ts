@@ -312,7 +312,7 @@ export class TpDrawer extends TpOverlayElement {
 		expandButton.setAttribute("data-tp-drawer-expand", "");
 		expandButton.setAttribute("data-tp-drawer-role", "expand-button");
 		expandButton.addEventListener("click", () => {
-			this.width = TpDrawer.expandedWidth;
+			this.expand();
 		});
 
 		const collapseButton = document.createElement("tp-icon-button");
@@ -321,7 +321,7 @@ export class TpDrawer extends TpOverlayElement {
 		collapseButton.setAttribute("data-tp-drawer-collapse", "");
 		collapseButton.setAttribute("data-tp-drawer-role", "collapse-button");
 		collapseButton.addEventListener("click", () => {
-			this.width = TpDrawer.collapsedWidth;
+			this.collapse();
 		});
 
 		const title = document.createElement("p");
@@ -477,6 +477,16 @@ export class TpDrawer extends TpOverlayElement {
 		}
 
 		this.style.setProperty("--tp-drawer-size", this.width);
+	}
+
+	/** Expands the drawer to its maximum configured width. */
+	expand(): void {
+		this.width = TpDrawer.expandedWidth;
+	}
+
+	/** Restores the compact drawer width. */
+	collapse(): void {
+		this.width = TpDrawer.collapsedWidth;
 	}
 }
 

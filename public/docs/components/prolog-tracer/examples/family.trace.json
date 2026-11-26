@@ -1,0 +1,481 @@
+{
+  "version": 1,
+  "language": "prolog",
+  "code": "parent(ann, bob).\nparent(ann, cat).\nparent(bob, dan).\n\nancestor(X, Y) :-\n    parent(X, Y).\n\nancestor(X, Y) :-\n    parent(X, Z),\n    ancestor(Z, Y).\n",
+  "query": "ancestor(ann, Who).",
+  "events": [
+    {
+      "frame": 177,
+      "goal": "ancestor(ann,Who)",
+      "level": 10,
+      "line": 0,
+      "parent": 164,
+      "port": "call",
+      "sourceLine": 0
+    },
+    {
+      "frame": 177,
+      "goal": "ancestor(ann,Who)",
+      "level": 10,
+      "line": 5,
+      "parent": 164,
+      "port": "unify",
+      "sourceLine": 5
+    },
+    {
+      "frame": 191,
+      "goal": "parent(ann,Who)",
+      "level": 11,
+      "line": 0,
+      "parent": 177,
+      "port": "call",
+      "sourceLine": 6
+    },
+    {
+      "frame": 191,
+      "goal": "parent(ann,bob)",
+      "level": 11,
+      "line": 1,
+      "parent": 177,
+      "port": "unify",
+      "sourceLine": 1
+    },
+    {
+      "frame": 191,
+      "goal": "parent(ann,bob)",
+      "level": 11,
+      "line": 1,
+      "parent": 177,
+      "port": "exit",
+      "sourceLine": 6
+    },
+    {
+      "frame": 177,
+      "goal": "ancestor(ann,bob)",
+      "level": 10,
+      "line": 5,
+      "parent": 164,
+      "port": "exit",
+      "sourceLine": 5
+    },
+    {
+      "frame": 0,
+      "goal": "['Who'=bob]",
+      "level": 0,
+      "parent": 0,
+      "port": "solution"
+    },
+    {
+      "frame": 191,
+      "goal": "parent(ann,Who)",
+      "level": 11,
+      "line": 2,
+      "parent": 177,
+      "port": "redo(0)",
+      "sourceLine": 6
+    },
+    {
+      "frame": 191,
+      "goal": "parent(ann,cat)",
+      "level": 11,
+      "line": 2,
+      "parent": 177,
+      "port": "unify",
+      "sourceLine": 2
+    },
+    {
+      "frame": 191,
+      "goal": "parent(ann,cat)",
+      "level": 11,
+      "line": 2,
+      "parent": 177,
+      "port": "exit",
+      "sourceLine": 6
+    },
+    {
+      "frame": 177,
+      "goal": "ancestor(ann,cat)",
+      "level": 10,
+      "line": 5,
+      "parent": 164,
+      "port": "exit",
+      "sourceLine": 5
+    },
+    {
+      "frame": 0,
+      "goal": "['Who'=cat]",
+      "level": 0,
+      "parent": 0,
+      "port": "solution"
+    },
+    {
+      "frame": 177,
+      "goal": "ancestor(ann,Who)",
+      "level": 10,
+      "line": 8,
+      "parent": 164,
+      "port": "redo(0)",
+      "sourceLine": 8
+    },
+    {
+      "frame": 177,
+      "goal": "ancestor(ann,Who)",
+      "level": 10,
+      "line": 8,
+      "parent": 164,
+      "port": "unify",
+      "sourceLine": 8
+    },
+    {
+      "frame": 192,
+      "goal": "parent(ann,_12336)",
+      "level": 11,
+      "line": 0,
+      "parent": 177,
+      "port": "call",
+      "sourceLine": 9
+    },
+    {
+      "frame": 192,
+      "goal": "parent(ann,bob)",
+      "level": 11,
+      "line": 1,
+      "parent": 177,
+      "port": "unify",
+      "sourceLine": 1
+    },
+    {
+      "frame": 192,
+      "goal": "parent(ann,bob)",
+      "level": 11,
+      "line": 1,
+      "parent": 177,
+      "port": "exit",
+      "sourceLine": 9
+    },
+    {
+      "frame": 206,
+      "goal": "ancestor(bob,Who)",
+      "level": 11,
+      "line": 0,
+      "parent": 177,
+      "port": "call",
+      "sourceLine": 10
+    },
+    {
+      "frame": 206,
+      "goal": "ancestor(bob,Who)",
+      "level": 11,
+      "line": 5,
+      "parent": 177,
+      "port": "unify",
+      "sourceLine": 5
+    },
+    {
+      "frame": 220,
+      "goal": "parent(bob,Who)",
+      "level": 12,
+      "line": 0,
+      "parent": 206,
+      "port": "call",
+      "sourceLine": 6
+    },
+    {
+      "frame": 220,
+      "goal": "parent(bob,dan)",
+      "level": 12,
+      "line": 3,
+      "parent": 206,
+      "port": "unify",
+      "sourceLine": 3
+    },
+    {
+      "frame": 220,
+      "goal": "parent(bob,dan)",
+      "level": 12,
+      "line": 3,
+      "parent": 206,
+      "port": "exit",
+      "sourceLine": 6
+    },
+    {
+      "frame": 206,
+      "goal": "ancestor(bob,dan)",
+      "level": 11,
+      "line": 5,
+      "parent": 177,
+      "port": "exit",
+      "sourceLine": 10
+    },
+    {
+      "frame": 177,
+      "goal": "ancestor(ann,dan)",
+      "level": 10,
+      "line": 8,
+      "parent": 164,
+      "port": "exit",
+      "sourceLine": 8
+    },
+    {
+      "frame": 0,
+      "goal": "['Who'=dan]",
+      "level": 0,
+      "parent": 0,
+      "port": "solution"
+    },
+    {
+      "frame": 206,
+      "goal": "ancestor(bob,Who)",
+      "level": 11,
+      "line": 8,
+      "parent": 177,
+      "port": "redo(0)",
+      "sourceLine": 10
+    },
+    {
+      "frame": 206,
+      "goal": "ancestor(bob,Who)",
+      "level": 11,
+      "line": 8,
+      "parent": 177,
+      "port": "unify",
+      "sourceLine": 8
+    },
+    {
+      "frame": 221,
+      "goal": "parent(bob,_17662)",
+      "level": 12,
+      "line": 0,
+      "parent": 206,
+      "port": "call",
+      "sourceLine": 9
+    },
+    {
+      "frame": 221,
+      "goal": "parent(bob,dan)",
+      "level": 12,
+      "line": 3,
+      "parent": 206,
+      "port": "unify",
+      "sourceLine": 3
+    },
+    {
+      "frame": 221,
+      "goal": "parent(bob,dan)",
+      "level": 12,
+      "line": 3,
+      "parent": 206,
+      "port": "exit",
+      "sourceLine": 9
+    },
+    {
+      "frame": 221,
+      "goal": "ancestor(dan,Who)",
+      "level": 12,
+      "line": 0,
+      "parent": 206,
+      "port": "call",
+      "sourceLine": 10
+    },
+    {
+      "frame": 221,
+      "goal": "ancestor(dan,Who)",
+      "level": 12,
+      "line": 5,
+      "parent": 206,
+      "port": "unify",
+      "sourceLine": 5
+    },
+    {
+      "frame": 235,
+      "goal": "parent(dan,Who)",
+      "level": 13,
+      "line": 0,
+      "parent": 221,
+      "port": "call",
+      "sourceLine": 6
+    },
+    {
+      "frame": 235,
+      "goal": "parent(dan,Who)",
+      "level": 13,
+      "line": 0,
+      "parent": 221,
+      "port": "fail",
+      "sourceLine": 6
+    },
+    {
+      "frame": 221,
+      "goal": "ancestor(dan,Who)",
+      "level": 12,
+      "line": 8,
+      "parent": 206,
+      "port": "redo(0)",
+      "sourceLine": 10
+    },
+    {
+      "frame": 221,
+      "goal": "ancestor(dan,Who)",
+      "level": 12,
+      "line": 8,
+      "parent": 206,
+      "port": "unify",
+      "sourceLine": 8
+    },
+    {
+      "frame": 236,
+      "goal": "parent(dan,_20476)",
+      "level": 13,
+      "line": 0,
+      "parent": 221,
+      "port": "call",
+      "sourceLine": 9
+    },
+    {
+      "frame": 236,
+      "goal": "parent(dan,_20476)",
+      "level": 13,
+      "line": 0,
+      "parent": 221,
+      "port": "fail",
+      "sourceLine": 9
+    },
+    {
+      "frame": 221,
+      "goal": "ancestor(dan,Who)",
+      "level": 12,
+      "line": 0,
+      "parent": 206,
+      "port": "fail",
+      "sourceLine": 10
+    },
+    {
+      "frame": 206,
+      "goal": "ancestor(bob,Who)",
+      "level": 11,
+      "line": 0,
+      "parent": 177,
+      "port": "fail",
+      "sourceLine": 10
+    },
+    {
+      "frame": 192,
+      "goal": "parent(ann,_12336)",
+      "level": 11,
+      "line": 2,
+      "parent": 177,
+      "port": "redo(0)",
+      "sourceLine": 9
+    },
+    {
+      "frame": 192,
+      "goal": "parent(ann,cat)",
+      "level": 11,
+      "line": 2,
+      "parent": 177,
+      "port": "unify",
+      "sourceLine": 2
+    },
+    {
+      "frame": 192,
+      "goal": "parent(ann,cat)",
+      "level": 11,
+      "line": 2,
+      "parent": 177,
+      "port": "exit",
+      "sourceLine": 9
+    },
+    {
+      "frame": 192,
+      "goal": "ancestor(cat,Who)",
+      "level": 11,
+      "line": 0,
+      "parent": 177,
+      "port": "call",
+      "sourceLine": 10
+    },
+    {
+      "frame": 192,
+      "goal": "ancestor(cat,Who)",
+      "level": 11,
+      "line": 5,
+      "parent": 177,
+      "port": "unify",
+      "sourceLine": 5
+    },
+    {
+      "frame": 206,
+      "goal": "parent(cat,Who)",
+      "level": 12,
+      "line": 0,
+      "parent": 192,
+      "port": "call",
+      "sourceLine": 6
+    },
+    {
+      "frame": 206,
+      "goal": "parent(cat,Who)",
+      "level": 12,
+      "line": 0,
+      "parent": 192,
+      "port": "fail",
+      "sourceLine": 6
+    },
+    {
+      "frame": 192,
+      "goal": "ancestor(cat,Who)",
+      "level": 11,
+      "line": 8,
+      "parent": 177,
+      "port": "redo(0)",
+      "sourceLine": 10
+    },
+    {
+      "frame": 192,
+      "goal": "ancestor(cat,Who)",
+      "level": 11,
+      "line": 8,
+      "parent": 177,
+      "port": "unify",
+      "sourceLine": 8
+    },
+    {
+      "frame": 207,
+      "goal": "parent(cat,_19654)",
+      "level": 12,
+      "line": 0,
+      "parent": 192,
+      "port": "call",
+      "sourceLine": 9
+    },
+    {
+      "frame": 207,
+      "goal": "parent(cat,_19654)",
+      "level": 12,
+      "line": 0,
+      "parent": 192,
+      "port": "fail",
+      "sourceLine": 9
+    },
+    {
+      "frame": 192,
+      "goal": "ancestor(cat,Who)",
+      "level": 11,
+      "line": 0,
+      "parent": 177,
+      "port": "fail",
+      "sourceLine": 10
+    },
+    {
+      "frame": 177,
+      "goal": "ancestor(ann,Who)",
+      "level": 10,
+      "line": 0,
+      "parent": 164,
+      "port": "fail",
+      "sourceLine": 0
+    }
+  ],
+  "limited": false,
+  "stdout": ""
+}

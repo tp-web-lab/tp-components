@@ -74,7 +74,13 @@ The notebook remains a complete block editor. Preview and Export HTML turn marku
 
 The exported HTML toolbar stays at the top of the window while scrolling. The clock is visible by default and can be hidden from the Controllers menu. Set `label="My notebook"` to display a title in its center; the default title is the notebook type name (for example, `Generic Notebook` or `Python Notebook`). Set `label=""` to hide it.
 
-Set `logo="logo-tp"` to display an icon at the left of the exported HTML toolbar, at the same height as its buttons. The value is a `tp-icon` name. By default, the icon of this notebook type is displayed. Set `logo=""` to hide it.
+Set `logo="logo-tp"` to display a logo in a borderless `tp-button` at the left of the exported HTML toolbar. Its height is fixed at `2em`, and its width preserves the logo’s proportions. The value is a TP icon name or an SVG URL. By default, the icon of this notebook type is displayed. Set `logo=""` to hide it.
+
+### Cell presentation and execution
+
+Cell viewers use `mode="simple"`: the source editor and rendered output remain visible without a viewer toolbar. Place the cursor in a cell and press <kbd>Shift</kbd>+<kbd>Enter</kbd> (Return) to execute or render only that cell. The notebook's Run all command still executes all programming cells.
+
+Each programming cell's console is initially hidden and opens automatically for a message or error. Clearing it hides it again. Exported HTML notebooks use the same simple viewers for their executable cells, with the same keyboard shortcut and console behaviour; markup cells remain rendered document content.
 
 ### Importing
 
@@ -112,22 +118,25 @@ Basic usage
 
 Javascript API
 : Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Messages, errors and HTML export
+: Run each cell separately with <kbd>Shift</kbd>+<kbd>Return</kbd> to observe a SQL result message and automatic console opening on an error. Export HTML and repeat the same actions in the downloaded notebook.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-lsystem" allow-script }
+:::::: tp-markdown-viewer { label="tp-lsystem" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-lsystem { label="Koch curve" }

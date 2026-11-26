@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-restructuredtext-viewer-question" allow-script }
+::::: tp-markdown-viewer { label="tp-restructuredtext-viewer-question" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-restructuredtext-viewer-question { open src="/docs/components/markup-viewer-question/examples/emphasis.rst" test="/docs/components/markup-viewer-question/examples/emphasis.test.js" }

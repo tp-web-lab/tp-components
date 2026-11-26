@@ -10,11 +10,13 @@ In read-only mode, the palette omits editing commands: Undo, Redo, Cut, Paste, I
 | --- | --- | --- |
 | Editor text | Click to place the cursor; drag to select text. Editing does not execute the code. |  |
 | Numbered comment marker, when linked to tp-code-comment | Hover to read its formatted explanation in a tooltip. |  |
-| Keyboard button | Open or close the command palette listed below. | Mod Shift P |
-| Copy code button | Copy the entire editor content, unlike Copy in the palette, which copies the selection. | — |
-| Theme button | Choose light, dark or automatic appearance for this editor. | — |
-| Fullscreen button | Enter or leave fullscreen for this editor. | — |
+| :tp-icon:{name="keyboard-outline" size="2em"} Keyboard shortcuts | Open or close the command palette. | Mod Shift P |
+| :tp-icon:{name="file-upload-as" size="2em"} Save as | Choose a filename and save the current source code, including in read-only mode. | Mod S |
+| :tp-icon:{name="copy" size="2em"} Copy code | Copy the entire editor content, unlike Copy in the palette, which copies the selection. | — |
+| :tp-icon:{name="theme-light-dark" size="2em"} Theme | Choose light, dark or automatic appearance for this editor. | — |
+| :tp-icon:{name="fullscreen" size="2em"} :tp-icon:{name="fullscreen-exit" size="2em"} Fullscreen | Enter or leave fullscreen for this editor. | — |
 | Language badge / line and column | Display the current language and cursor position; these are indicators, not buttons. |  |
+| Palette: Save as | Choose a filename and save the current source code. | Mod S |
 | Palette: Undo | Reverts the last editor change. | Mod Z |
 | Palette: Redo | Reapplies the last reverted editor change. | Mod Shift Z |
 | Palette: Copy | Copies the current selection. | Mod C |
@@ -40,6 +42,7 @@ In read-only mode, the palette omits editing commands: Undo, Redo, Cut, Paste, I
 
 | Key or gesture | Result |
 | --- | --- |
+| <kbd>Ctrl</kbd>+<kbd>S</kbd> / <kbd>Cmd</kbd>+<kbd>S</kbd> | Save the current source with a chosen filename instead of saving the browser page. |
 | Typing and cursor movement | Edit text and move the insertion point in the focused editor. Editing is unavailable in read-only mode. |
 | <kbd>Mod</kbd>+<kbd>Z</kbd> | Reverts the last editor change. |
 | <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Reapplies the last reverted editor change. |

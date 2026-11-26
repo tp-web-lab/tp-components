@@ -41,6 +41,21 @@
       "description": "Resets the timer, hides and reshuffles every card."
     },
     {
+      "name": "revealPair(): void",
+      "inherited": false,
+      "description": "Reveals one unmatched pair unless a pair is already being resolved or the game is complete."
+    },
+    {
+      "name": "showRules(): void",
+      "inherited": false,
+      "description": "Opens the rules of this game in its drawer."
+    },
+    {
+      "name": "toggleHelp(): void",
+      "inherited": false,
+      "description": "Opens or closes the game assistance menu."
+    },
+    {
       "name": "undo(): void",
       "inherited": false,
       "description": "Takes back a completed pair attempt. Unmatched-pair animations must finish first."
@@ -132,7 +147,7 @@
   "userHelp": {
     "displayName": "Memory",
     "introduction": "The custom `<tp-memory>` element creates a memory matching game.",
-    "interactions": "The header shows the game icon and name on the left. Rounded controls appear on the right, in this order: Reset, Undo, Redo, Help, chronometer, Color, Theme and Fullscreen. Additional game commands remain below the header.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| :tp-icon:{name=\"refresh\"} Reset | Hides and reshuffles the cards, clears history and resets the timer. |\n| :tp-icon:{name=\"undo\"} Undo | Takes back a completed pair attempt. Wait for an unmatched-pair animation to finish. |\n| :tp-icon:{name=\"redo\"} Redo | Restores the next recorded pair attempt without reshuffling. |\n| :tp-icon:{name=\"help\"} Help | Opens the dropdown of assistance actions specific to this game. |\n| Help → Reveal one matching pair | Reveals the partner of the selected card, or an unmatched pair. Counts as a completed attempt. |\n| Help → Rules of the game | Opens a drawer with the rules of this game. |\n| Chronometer | Displays elapsed play time; starts with play and pauses on completion. Reset clears it. |\n| :tp-icon:{name=\"palette-swatch\"} Color | Changes the brand color of this game only. |\n| :tp-icon:{name=\"sun\"} :tp-icon:{name=\"moon\"} Theme | Changes the light, dark or automatic theme of this game only. |\n| :tp-icon:{name=\"fullscreen\"} :tp-icon:{name=\"fullscreen-exit\"} Fullscreen | Enters or leaves fullscreen for this game. |\n| Click a face-down card | Reveals it. Reveal a second card to form a pair; unmatched cards turn back over and matched pairs stay revealed. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "The header shows the game icon and name on the left. Rounded controls appear on the right, in this order: Reset, Undo, Redo, Help, chronometer, Color, Theme and Fullscreen. Additional game commands remain below the header.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| :tp-icon:{name=\"refresh\"} Reset | Hides and reshuffles the cards, clears history and resets the timer. |\n| :tp-icon:{name=\"undo\"} Undo | Takes back a completed pair attempt. Wait for an unmatched-pair animation to finish. |\n| :tp-icon:{name=\"redo\"} Redo | Restores the next recorded pair attempt without reshuffling. |\n| :tp-icon:{name=\"help\"} Help | Opens the dropdown of assistance actions specific to this game. |\n| Help → Reveal one matching pair | Reveals the partner of the selected card, or an unmatched pair. Counts as a completed attempt. |\n| Help → Rules of the game | Opens a drawer with the rules of this game. |\n| Chronometer | Displays elapsed play time; starts with play and pauses on completion. Reset clears it. |\n| :tp-icon:{name=\"palette-swatch\"} Color | Changes the brand color of this game only. |\n| :tp-icon:{name=\"sun\"} :tp-icon:{name=\"moon\"} Theme | Changes the light, dark or automatic theme of this game only. |\n| :tp-icon:{name=\"fullscreen\"} :tp-icon:{name=\"fullscreen-exit\"} Fullscreen | Enters or leaves fullscreen for this game. |\n| Click a face-down card | Reveals it. Reveal a second card to form a pair; unmatched cards turn back over and matched pairs stay revealed. |\n| :tp-icon:{name=\"refresh\" size=\"2em\"} Reset memory | Reset memory. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

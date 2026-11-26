@@ -1,12 +1,12 @@
-<tp-html-viewer label="tp-table-editor" allow-script>
+<tp-html-viewer label="tp-table-editor" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
       <tp-table-editor caption="Workshop schedule">
         <table>
           <thead><tr><th>Session</th><th>Duration (min)</th><th>Date</th><th>Formula</th></tr></thead>
           <tbody>
-            <tr><td>Introduction</td><td data-type="number">20</td><td data-type="date">2026-11-14</td><td data-type="math">x^2 + y^2</td></tr>
-            <tr><td>Practice</td><td data-type="number">40</td><td data-type="date">2026-11-15</td><td data-type="math">E = mc^2</td></tr>
+            <tr><td>Introduction</td><td data-type="number" style="vertical-align:middle">20</td><td data-type="date" style="vertical-align:middle">2026-11-14</td><td data-type="math"><script type="tp/latex">\begin{pmatrix}1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9\end{pmatrix}</script></td></tr>
+            <tr><td>Practice<br><br>Guided exercises</td><td data-type="number" style="vertical-align:middle">40</td><td data-type="date" style="vertical-align:middle">2026-11-15</td><td data-type="math">E = mc^2</td></tr>
           </tbody>
         </table>
       </tp-table-editor>
@@ -59,42 +59,57 @@
 
       const element12 = document.createElement("td");
       element12.setAttribute("data-type", "number");
+      element12.setAttribute("style", "vertical-align:middle");
       element12.append(document.createTextNode("20"));
       element10.append(element12);
 
       const element13 = document.createElement("td");
       element13.setAttribute("data-type", "date");
+      element13.setAttribute("style", "vertical-align:middle");
       element13.append(document.createTextNode("2026-11-14"));
       element10.append(element13);
 
       const element14 = document.createElement("td");
       element14.setAttribute("data-type", "math");
-      element14.append(document.createTextNode("x^2 + y^2"));
+
+      const element15 = document.createElement("script");
+      element15.setAttribute("type", "tp/latex");
+      element15.textContent = "\\begin{pmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9\\end{pmatrix}";
+      element14.append(element15);
       element10.append(element14);
       element9.append(element10);
       element9.append(document.createTextNode("\n      "));
 
-      const element15 = document.createElement("tr");
-
-      const element16 = document.createElement("td");
-      element16.append(document.createTextNode("Practice"));
-      element15.append(element16);
+      const element16 = document.createElement("tr");
 
       const element17 = document.createElement("td");
-      element17.setAttribute("data-type", "number");
-      element17.append(document.createTextNode("40"));
-      element15.append(element17);
+      element17.append(document.createTextNode("Practice"));
 
-      const element18 = document.createElement("td");
-      element18.setAttribute("data-type", "date");
-      element18.append(document.createTextNode("2026-11-15"));
-      element15.append(element18);
+      const element18 = document.createElement("br");
+      element17.append(element18);
 
-      const element19 = document.createElement("td");
-      element19.setAttribute("data-type", "math");
-      element19.append(document.createTextNode("E = mc^2"));
-      element15.append(element19);
-      element9.append(element15);
+      const element19 = document.createElement("br");
+      element17.append(element19);
+      element17.append(document.createTextNode("Guided exercises"));
+      element16.append(element17);
+
+      const element20 = document.createElement("td");
+      element20.setAttribute("data-type", "number");
+      element20.setAttribute("style", "vertical-align:middle");
+      element20.append(document.createTextNode("40"));
+      element16.append(element20);
+
+      const element21 = document.createElement("td");
+      element21.setAttribute("data-type", "date");
+      element21.setAttribute("style", "vertical-align:middle");
+      element21.append(document.createTextNode("2026-11-15"));
+      element16.append(element21);
+
+      const element22 = document.createElement("td");
+      element22.setAttribute("data-type", "math");
+      element22.append(document.createTextNode("E = mc^2"));
+      element16.append(element22);
+      element9.append(element16);
       element9.append(document.createTextNode("\n    "));
       element2.append(element9);
       element2.append(document.createTextNode("\n  "));
@@ -111,6 +126,20 @@
         <table>
           <thead><tr><th>Topic</th><th>Seats</th><th>Date</th><th>Time</th><th>Expression</th></tr></thead>
           <tbody><tr><td>Mathematics</td><td data-type="number">12</td><td data-type="date">2026-11-14</td><td data-type="time">09:30</td><td data-type="math">x^2 + y^2</td></tr></tbody>
+        </table>
+      </tp-table-editor>
+    </div>
+
+    <div role="example" label="Rich content">
+      <tp-table-editor caption="Rich content export comparison">
+        <table>
+          <thead><tr><th>Example</th><th>Content</th></tr></thead>
+          <tbody>
+            <tr><td>Bold text</td><td data-type="rich"><p><strong>Compare bold text in each export.</strong></p></td></tr>
+            <tr><td>Image</td><td data-type="rich"><img src="/medias/image/canoe.svg" alt="Canoe" width="160"></td></tr>
+            <tr><td>Video</td><td data-type="rich"><video src="/medias/video/chute-eau.mp4" controls preload="metadata" width="240" aria-label="Waterfall video"></video></td></tr>
+            <tr><td>Audio</td><td data-type="rich"><audio src="/medias/audio/glass-break.mp3" controls preload="metadata" aria-label="Glass breaking sound"></audio></td></tr>
+          </tbody>
         </table>
       </tp-table-editor>
     </div>

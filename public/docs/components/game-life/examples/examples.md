@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-game-life" allow-script }
+::::: tp-markdown-viewer { label="tp-game-life" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-game-life { preset="glider" label="Glider" cell-size="14" }

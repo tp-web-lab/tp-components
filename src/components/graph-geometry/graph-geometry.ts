@@ -903,7 +903,8 @@ export class TpGraphGeometry extends TpBase {
 			this.querySelector<HTMLElement>(`[data-action="${action}"]`)?.click();
 		}
 	}
-	private toggleSourceView(): void {
+	/** Shows or hides the construction source. */
+	toggleSourceView(): void {
 		const board = this.querySelector(".tp-geometry-board");
 		if (!board) return;
 		const open = board.toggleAttribute("data-source-open");
@@ -945,7 +946,8 @@ export class TpGraphGeometry extends TpBase {
 			?.setAttribute("aria-expanded", String(objectsOpen));
 		this.syncButtonControls();
 	}
-	private toggleZoom(): void {
+	/** Opens or closes the enlarged construction. */
+	toggleZoom(): void {
 		const dialog = this.querySelector<HTMLDialogElement>(".tp-geometry-dialog");
 		const board = this.querySelector(".tp-geometry-board");
 		if (!dialog || !board) return;
@@ -1201,130 +1203,7 @@ export class TpGraphGeometry extends TpBase {
 				this.animationStep = 0;
 				this.draw();
 			}
-			if (action?.startsWith("animation-")) {
-				const animation = this.currentAnimation();
-				if (animation?.definition.kind === "animation") {
-					const count = animation.definition.steps.length;
-					this.animationStep =
-						action === "animation-start"
-							? 0
-							: action === "animation-end"
-								? count
-								: Math.max(
-										0,
-										Math.min(
-											count,
-											this.animationStep +
-												(action === "animation-next" ? 1 : -1),
-										),
-									);
-					this.querySelector("[data-inline-rename]")?.remove();
-					this.draw();
-				}
-			}
-			if (action === "rename" && !this.readonly && this.selected) {
-				try {
-					const name =
-						this.querySelector<TpTextfield>(
-							"[data-object-name]",
-						)?.value.trim() ?? "";
-					this.renameObject(this.selected, name);
-				} catch (error) {
-					this.report(String(error));
-				}
-			}
-			if (action === "hide-name" && !this.readonly && this.selected) {
-				const id = this.selected;
-				const next = parseGeometry(this.value);
-				const object = next.find((item) => item.id === id);
-				if (object) {
-					if (object.labelHidden) delete object.labelHidden;
-					else object.labelHidden = true;
-					this.setConstruction(serializeGeometry(next));
-					this.selected = id;
-					this.movingName = false;
-					this.draw();
-				}
-			}
-			if (action === "move-name" && !this.readonly && this.selected) {
-				this.movingName = !this.movingName;
-				this.tool = "move";
-				this.updateTool();
-				this.draw();
-				this.querySelector<SVGSVGElement>("[data-geometry-canvas]")?.focus();
-			}
-			if (action === "source-view") this.toggleSourceView();
-			if (action === "source-files")
-				this.querySelector<TpDropdown>("[data-source-menu]")?.toggle();
-			if (action === "source-toolbar") {
-				const editor = this.querySelector<TpCodeEditor>("tp-code-editor");
-				if (editor) editor.toolbar = !editor.toolbar;
-			}
-			if (action === "source-reset")
-				this.querySelector<TpCodeEditor>("tp-code-editor")?.setValue(
-					this.value,
-				);
-
-			if (action === "palette")
-				this.querySelector<TpDropdown>("[data-tool-palette]")?.toggle();
-			if (action === "zoom") this.toggleZoom();
-			if (action === "style-menu" || action === "color-menu") {
-				this.querySelector<TpDropdown>(
-					action === "style-menu" ? "[data-style-menu]" : "[data-color-menu]",
-				)?.toggle();
-			}
-			if (action === "in" || action === "out") {
-				this.scale = Math.max(
-					3,
-					Math.min(300, this.scale * (action === "in" ? 1.25 : 0.8)),
-				);
-				this.draw();
-			}
-			if (action === "fit") this.fitView();
-			if (action === "grid") this.grid = !this.grid;
-			if (action === "objects-panel") {
-				this.objectsPanelVisible = !(
-					this.objectsPanelVisible ?? !this.canvasOnly
-				);
-				if (this.canvasOnly && this.objectsPanelVisible) {
-					this.querySelector(".tp-geometry-board")?.removeAttribute(
-						"data-source-open",
-					);
-				}
-				this.syncPanelViews();
-			}
-			if (this.readonly) return;
-			try {
-				if (action === "undo") this.undo();
-				if (action === "redo") this.redo();
-				if (action === "delete" && this.selected)
-					this.removeObject(this.selected);
-				if (action === "example") {
-					this.sourceSaveTarget = null;
-					this.setConstruction(MEDIATRIX_CONSTRUCTION);
-					this.fitView();
-				}
-				if (action === "finish-polygon") this.finishPolygon();
-				if (action === "clear") {
-					this.sourceSaveTarget = null;
-					this.setConstruction("");
-				}
-				if (action === "apply") {
-					this.setConstruction(
-						this.querySelector<TpCodeEditor>("tp-code-editor")?.getValue() ??
-							"",
-					);
-					this.fitView();
-				}
-			} catch (error) {
-				this.report(String(error));
-				this.dispatchEvent(
-					new CustomEvent("tp-geometry-error", {
-						bubbles: true,
-						detail: { message: String(error) },
-					}),
-				);
-			}
+			this.performControlAction(action);
 		};
 		const svg = this.querySelector<SVGSVGElement>("svg[data-geometry-canvas]");
 		if (!svg) return;
@@ -1604,6 +1483,128 @@ export class TpGraphGeometry extends TpBase {
 			}
 		});
 	}
+	private performControlAction(action: string | undefined): void {
+		if (action?.startsWith("animation-")) {
+			const animation = this.currentAnimation();
+			if (animation?.definition.kind === "animation") {
+				const count = animation.definition.steps.length;
+				this.animationStep =
+					action === "animation-start"
+						? 0
+						: action === "animation-end"
+							? count
+							: Math.max(
+									0,
+									Math.min(
+										count,
+										this.animationStep + (action === "animation-next" ? 1 : -1),
+									),
+								);
+				this.querySelector("[data-inline-rename]")?.remove();
+				this.draw();
+			}
+		}
+		if (action === "rename" && !this.readonly && this.selected) {
+			try {
+				const name =
+					this.querySelector<TpTextfield>("[data-object-name]")?.value.trim() ??
+					"";
+				this.renameObject(this.selected, name);
+			} catch (error) {
+				this.report(String(error));
+			}
+		}
+		if (action === "hide-name" && !this.readonly && this.selected) {
+			const id = this.selected;
+			const next = parseGeometry(this.value);
+			const object = next.find((item) => item.id === id);
+			if (object) {
+				if (object.labelHidden) delete object.labelHidden;
+				else object.labelHidden = true;
+				this.setConstruction(serializeGeometry(next));
+				this.selected = id;
+				this.movingName = false;
+				this.draw();
+			}
+		}
+		if (action === "move-name" && !this.readonly && this.selected) {
+			this.movingName = !this.movingName;
+			this.tool = "move";
+			this.updateTool();
+			this.draw();
+			this.querySelector<SVGSVGElement>("[data-geometry-canvas]")?.focus();
+		}
+		if (action === "source-view") this.toggleSourceView();
+		if (action === "source-files")
+			this.querySelector<TpDropdown>("[data-source-menu]")?.toggle();
+		if (action === "source-toolbar") {
+			const editor = this.querySelector<TpCodeEditor>("tp-code-editor");
+			if (editor) editor.toolbar = !editor.toolbar;
+		}
+		if (action === "source-reset")
+			this.querySelector<TpCodeEditor>("tp-code-editor")?.setValue(this.value);
+
+		if (action === "palette")
+			this.querySelector<TpDropdown>("[data-tool-palette]")?.toggle();
+		if (action === "zoom") this.toggleZoom();
+		if (action === "style-menu" || action === "color-menu") {
+			this.querySelector<TpDropdown>(
+				action === "style-menu" ? "[data-style-menu]" : "[data-color-menu]",
+			)?.toggle();
+		}
+		if (action === "in" || action === "out") {
+			this.scale = Math.max(
+				3,
+				Math.min(300, this.scale * (action === "in" ? 1.25 : 0.8)),
+			);
+			this.draw();
+		}
+		if (action === "fit") this.fitView();
+		if (action === "grid") this.grid = !this.grid;
+		if (action === "objects-panel") {
+			this.objectsPanelVisible = !(
+				this.objectsPanelVisible ?? !this.canvasOnly
+			);
+			if (this.canvasOnly && this.objectsPanelVisible) {
+				this.querySelector(".tp-geometry-board")?.removeAttribute(
+					"data-source-open",
+				);
+			}
+			this.syncPanelViews();
+		}
+		if (this.readonly) return;
+		try {
+			if (action === "undo") this.undo();
+			if (action === "redo") this.redo();
+			if (action === "delete" && this.selected)
+				this.removeObject(this.selected);
+			if (action === "example") {
+				this.sourceSaveTarget = null;
+				this.setConstruction(MEDIATRIX_CONSTRUCTION);
+				this.fitView();
+			}
+			if (action === "finish-polygon") this.finishPolygon();
+			if (action === "clear") {
+				this.sourceSaveTarget = null;
+				this.setConstruction("");
+			}
+			if (action === "apply") {
+				this.setConstruction(
+					this.querySelector<TpCodeEditor>("tp-code-editor")?.getValue() ?? "",
+				);
+				this.fitView();
+			}
+		} catch (error) {
+			this.report(String(error));
+			this.dispatchEvent(
+				new CustomEvent("tp-geometry-error", {
+					bubbles: true,
+					detail: { message: String(error) },
+				}),
+			);
+		}
+	}
+
 	private syncButtonControls(): void {
 		queueMicrotask(() => {
 			if (!this.isConnected) return;
@@ -2540,6 +2541,111 @@ export class TpGraphGeometry extends TpBase {
 					.join(" "),
 			);
 		else if (!this.pending.length) this.report("");
+	}
+
+	/** Runs the animation start construction command, retaining selection and readonly guards. */
+	firstStep(): void {
+		this.performControlAction("animation-start");
+	}
+
+	/** Runs the animation previous construction command, retaining selection and readonly guards. */
+	previousStep(): void {
+		this.performControlAction("animation-previous");
+	}
+
+	/** Runs the animation next construction command, retaining selection and readonly guards. */
+	nextStep(): void {
+		this.performControlAction("animation-next");
+	}
+
+	/** Runs the animation end construction command, retaining selection and readonly guards. */
+	lastStep(): void {
+		this.performControlAction("animation-end");
+	}
+
+	/** Runs the source toolbar construction command, retaining selection and readonly guards. */
+	toggleEditorToolbar(): void {
+		this.performControlAction("source-toolbar");
+	}
+
+	/** Runs the source reset construction command, retaining selection and readonly guards. */
+	resetSource(): void {
+		this.performControlAction("source-reset");
+	}
+
+	/** Runs the apply construction command, retaining selection and readonly guards. */
+	applySource(): void {
+		this.performControlAction("apply");
+	}
+
+	/** Runs the objects panel construction command, retaining selection and readonly guards. */
+	toggleObjects(): void {
+		this.performControlAction("objects-panel");
+	}
+
+	/** Runs the in construction command, retaining selection and readonly guards. */
+	zoomIn(): void {
+		this.performControlAction("in");
+	}
+
+	/** Runs the out construction command, retaining selection and readonly guards. */
+	zoomOut(): void {
+		this.performControlAction("out");
+	}
+
+	/** Runs the grid construction command, retaining selection and readonly guards. */
+	toggleGrid(): void {
+		this.performControlAction("grid");
+	}
+
+	/** Runs the source files construction command, retaining selection and readonly guards. */
+	openFiles(): void {
+		this.performControlAction("source-files");
+	}
+
+	/** Runs the clear construction command, retaining selection and readonly guards. */
+	clear(): void {
+		this.performControlAction("clear");
+	}
+
+	/** Runs the finish polygon construction command, retaining selection and readonly guards. */
+	finishPolygonAction(): void {
+		this.performControlAction("finish-polygon");
+	}
+
+	/** Runs the hide name construction command, retaining selection and readonly guards. */
+	toggleObjectLabel(): void {
+		this.performControlAction("hide-name");
+	}
+
+	/** Runs the move name construction command, retaining selection and readonly guards. */
+	moveObjectLabel(): void {
+		this.performControlAction("move-name");
+	}
+
+	/** Runs the delete construction command, retaining selection and readonly guards. */
+	deleteSelected(): void {
+		this.performControlAction("delete");
+	}
+
+	/** Runs the fit construction command, retaining selection and readonly guards. */
+	fit(): void {
+		this.performControlAction("fit");
+	}
+
+	/** Opens a file chooser and loads the selected source. Requires a user gesture in browsers that restrict file dialogs. */
+	async loadFile(): Promise<void> {
+		await this.sourceFileAction("load");
+	}
+
+	/** Saves the current source to its file, asking for a destination when needed. */
+	async save(): Promise<void> {
+		await this.sourceFileAction("save");
+	}
+
+	/** Asks for a destination and saves the current source. Requires a user gesture in browsers that restrict file dialogs. */
+	async saveAs(): Promise<void> {
+		await this.sourceFileAction("save-as");
 	}
 }
 if (!customElements.get("tp-graph-geometry"))

@@ -366,8 +366,6 @@ function tokenMarkup(tokens: number): string {
  *
  * @accessibility Exposes enabled transition controls as focusable buttons.
  * @keyboard {Enter / Space} Fires the focused enabled transition.
- * @example
- * <tp-graph-petri id="petri-intro" grid="" grid-size="20" src="/docs/components/graph-petri/examples/petri-intro.json"></tp-graph-petri>
  *  @event tp-graph-change Emitted after adding a token, as well as for inherited graph mutations. reason identifies the operation and graph contains the resulting snapshot.
  * @eventdetail tp-graph-change { reason: string; graph: TpGraphDocument }
  * @event tp-graph-error Emitted if adding a token from the UI fails, or for an inherited graph loading or edge-editing failure. operation identifies the failed action.
@@ -376,6 +374,8 @@ function tokenMarkup(tokens: number): string {
  * @eventdetail tp-petri-fire { transitionId: string; marking: Record<string, number>; graph: TpGraphDocument }
  * @event tp-petri-reset Emitted after the initial marking is restored; marking maps each place ID to its reset token count.
  * @eventdetail tp-petri-reset { marking: Record<string, number>; graph: TpGraphDocument }
+ * @example
+ * <tp-graph-petri id="petri-intro" grid="" grid-size="20" src="/docs/components/graph-petri/examples/petri-intro.json"></tp-graph-petri>
  */
 export class TpGraphPetri extends TpGraphEditor {
 	private static readonly petriStyleId = "tp-graph-petri-styles";

@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Native structure audit</title><button id="run">Check native structures</button><p id="status">Ready</p><div id="stage"></div><details><summary>Results</summary><pre id="report"></pre></details>
+<script type="module">
+import '/src/tp-loader.ts';
+import {htmlToMarkup,markupToHtml} from '/src/utilities/markup-conversion.ts';
+const base=location.href;
+const parse=html=>{const root=document.createElement('div');root.innerHTML=html;return root;};
+const cases=[
+ {name:'Headings and aliases',html:'<h2 id="main"><span id="alias"></span><span id="other"></span>Title</h2><p><a href="#alias">Link</a></p><h3 id="child">Child</h3>',check:r=>r.querySelector('h2')?.textContent.trim()==='Title'&&r.querySelector('h3')?.textContent.trim()==='Child'&&['main','alias','other','child'].every(id=>r.querySelector('#'+id))&&r.querySelector('a[href="#alias"]')},
+ {name:'Image caption',html:'<figure><img src="/medias/image/canoe.svg" width="120" alt="Canoe"><figcaption>A <strong>bold</strong> caption</figcaption></figure>',check:r=>r.querySelector('figure img')?.getAttribute('width')==='120'&&r.querySelector('figcaption strong')?.textContent==='bold'},
+ {name:'Figure without caption',html:'<figure><img src="/medias/image/canoe.svg" width="120" alt="Canoe"></figure>',check:r=>r.querySelector('figure img')&& !r.querySelector('figcaption')},
+ {name:'Numbered code',html:'<tp-code-editor readonly line-numbers line-number-start="20" language="javascript" value="const x = &quot;&lt;tag&gt;&quot;;&#10;console.log(x);"></tp-code-editor>',check:r=>r.querySelector('tp-code-editor')?.getAttribute('line-number-start')==='20'&&r.querySelector('tp-code-editor')?.getAttribute('value')==='const x = "<tag>";\nconsole.log(x);'}
+];
+document.querySelector('#run').onclick=async()=>{
+ const results=[];
+ for(const test of cases)for(const first of ['markdown','asciidoc','restructuredtext','latex'])for(const second of ['markdown','asciidoc','restructuredtext','latex']){
+  document.querySelector('#status').textContent=`${test.name}: ${first} → ${second}`;
+  try{
+   const source=htmlToMarkup(test.html,first),a=await markupToHtml(source,first,base);
+   const code=htmlToMarkup(a,second),html=await markupToHtml(code,second,base),root=parse(html);
+   const native=!(second==='markdown'&&/::: (?:figure|figcaption|span)|::: tp-code-editor/.test(code))&&!(second==='restructuredtext'&&/\.\. h[23]::/.test(code));
+   results.push({name:test.name,first,second,pass:!!test.check(root)&&native,source,code,html});
+  }catch(error){results.push({name:test.name,first,second,pass:false,error:String(error)});}
+ }
+ document.querySelector('#report').textContent=JSON.stringify(results,null,2);
+ document.querySelector('#status').textContent=`Complete: ${results.filter(x=>x.pass).length}/${results.length} structure checks passed`;
+};
+</script></html>

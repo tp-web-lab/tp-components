@@ -3,22 +3,33 @@
  * @summary Internal library of SVG icons used by `<tp-icon>`.
  */
 
+import tpAsciidocLogo from "./logos/tp-asciidoc-logo.svg?raw";
+import tpHtmlLogo from "./logos/tp-html-logo.svg?raw";
+import tpLatexLogo from "./logos/tp-latex-logo.svg?raw";
+import tpMarkdownLogo from "./logos/tp-markdown-logo.svg?raw";
+import tpRestructuredtextLogo from "./logos/tp-restructuredtext-logo.svg?raw";
+
 const attributes =
-	' xmlns="http://www.w3.org/2000/svgaaa" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:middle;display:inline;" ';
+	' xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:middle;display:inline;" ';
 
 export const tpInternalIcons: Record<string, string> = {
+	"tp-html-logo": tpHtmlLogo,
+	"tp-markdown-logo": tpMarkdownLogo,
+	"tp-asciidoc-logo": tpAsciidocLogo,
+	"tp-latex-logo": tpLatexLogo,
+	"tp-restructuredtext-logo": tpRestructuredtextLogo,
 	"table-merge-cells": `<svg ${attributes}><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 8h18M3 16h18M12 3v5m0 8v5M5 12h5l-2-2m2 2-2 2m11-2h-5l2-2m-2 2 2 2"/></g></svg>`,
 	"table-split-cell": `<svg ${attributes}><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 8h18M3 16h18M12 3v18m-2-9H5l2-2m-2 2 2 2m7-2h5l-2-2m2 2-2 2"/></g></svg>`,
 	"rotate-right": `<svg ${attributes}><path fill="currentColor" d="M16.89 4.44A8 8 0 1 0 20 10h-2a6 6 0 1 1-2.53-4.89L12 8.59V2h6.59z"/></svg>`,
 	"toggle-switch": `<svg ${attributes}><path fill="currentColor" d="M4 17a3 3 0 1 1 2.83-4H9l6-5h5v2h-4.27l-6 5H6.83A3 3 0 0 1 4 17m0-2a1 1 0 1 0 0-2a1 1 0 0 0 0 2"/></svg>`,
-	"logo-tp": `<svg id="logo-tp" ${attributes}><circle fill="var(--tp-brand-text-colorful, #88B1A1)" cx="12" cy="12" r="11" /><text dir="ltr" fill="var(--tp-brand-text-on-mid, #ffffff)" lengthAdjust="spacing" textLength="60%" x="5.5" y="15.75" stroke-width="0px" stroke-linecap="round" style="font:18px serif;font-weight:500;">tp</text></svg>`,
+	"logo-tp": `<svg id="logo-tp" ${attributes}><circle fill="var(--tp-brand-text-colorful, #88B1A1)" cx="12" cy="12" r="11" /><text dir="ltr" fill="var(--tp-paper-color, #ffffff)" lengthAdjust="spacing" textLength="60%" x="5.5" y="15.75" stroke-width="0px" stroke-linecap="round" style="font:18px serif;font-weight:500;">tp</text></svg>`,
 	"logo-tp-components": `
 <svg ${attributes} id="logo-tp-components" >
   <g transform="translate(0 -1.4)">
     <path fill="var(--tp-brand-text-colorful, #88B1A1)" d="M8 3h8c2.76 0 5 2.24 5 5v8c0 2.76-2.24 5-5 5H8c-2.76 0-5-2.24-5-5V8c0-2.76 2.24-5 5-5m0 2C6.34 5 5 6.34 5 8v8c0 1.66 1.34 3 3 3h8c1.66 0 3-1.34 3-3V8c0-1.66-1.34-3-3-3z"/>
     <circle fill="var(--tp-brand-text-colorful, #88B1A1)" cx="12" cy="20" r="4.1" />
     <circle fill="var(--tp-brand-text-colorful, #88B1A1)" cx="12" cy="20" r="3.5" />
-    <text dir="ltr" fill="var(--tp-brand-text-on-mid, #ffffff)" lengthAdjust="spacing" textLength="23%" x="9.3" y="21.5" stroke-width="0px" stroke-linecap="round" style="font:7px serif;font-weight:500;">tp</text>
+    <text dir="ltr" fill="var(--tp-paper-color, #ffffff)" lengthAdjust="spacing" textLength="23%" x="9.3" y="21.5" stroke-width="0px" stroke-linecap="round" style="font:7px serif;font-weight:500;">tp</text>
   </g>
   <g transform="translate(6 3) scale(0.5 0.5)">
     <path d="M0 0h24v24H0z" fill="none" />
@@ -32,7 +43,7 @@ export const tpInternalIcons: Record<string, string> = {
     <path fill="var(--tp-brand-text-colorful, #88B1A1)" d="M8 3h8c2.76 0 5 2.24 5 5v8c0 2.76-2.24 5-5 5H8c-2.76 0-5-2.24-5-5V8c0-2.76 2.24-5 5-5m0 2C6.34 5 5 6.34 5 8v8c0 1.66 1.34 3 3 3h8c1.66 0 3-1.34 3-3V8c0-1.66-1.34-3-3-3z"/>
     <circle fill="var(--tp-brand-text-colorful, #88B1A1)" cx="12" cy="20" r="4.1" />
     <circle fill="var(--tp-brand-text-colorful, #88B1A1)" cx="12" cy="20" r="3.5" />
-    <text dir="ltr" fill="var(--tp-brand-text-on-mid, #ffffff)" lengthAdjust="spacing" textLength="23%" x="9.3" y="21.5" stroke-width="0px" stroke-linecap="round" style="font:7px serif;font-weight:500;">tp</text>
+    <text dir="ltr" fill="var(--tp-paper-color, #ffffff)" lengthAdjust="spacing" textLength="23%" x="9.3" y="21.5" stroke-width="0px" stroke-linecap="round" style="font:7px serif;font-weight:500;">tp</text>
   </g>
   <g transform="translate(6 3) scale(0.5 0.5)">
     <path d="M0 0h24v24H0z" fill="none" />
@@ -63,7 +74,7 @@ export const tpInternalIcons: Record<string, string> = {
     <path fill="var(--tp-brand-text-colorful, #88B1A1)" d="M8 3h8c2.76 0 5 2.24 5 5v8c0 2.76-2.24 5-5 5H8c-2.76 0-5-2.24-5-5V8c0-2.76 2.24-5 5-5m0 2C6.34 5 5 6.34 5 8v8c0 1.66 1.34 3 3 3h8c1.66 0 3-1.34 3-3V8c0-1.66-1.34-3-3-3z"/>
     <circle fill="var(--tp-brand-text-colorful, #88B1A1)" cx="12" cy="20" r="4.1" />
     <circle fill="var(--tp-brand-text-colorful, #88B1A1)" cx="12" cy="20" r="3.5" />
-    <text dir="ltr" fill="var(--tp-brand-text-on-mid, #ffffff)" lengthAdjust="spacing" textLength="23%" x="9.3" y="21.5" stroke-width="0px" stroke-linecap="round" style="font:7px serif;font-weight:500;">tp</text>
+    <text dir="ltr" fill="var(--tp-paper-color, #ffffff)" lengthAdjust="spacing" textLength="23%" x="9.3" y="21.5" stroke-width="0px" stroke-linecap="round" style="font:7px serif;font-weight:500;">tp</text>
   </g>
   <g mask="url(#logo-tp-markdown-doc-rear-mask)">
     <g transform="translate(5 2) scale(0.5 0.5)">
@@ -203,6 +214,7 @@ export const tpInternalIcons: Record<string, string> = {
 	"format-align-center": `<svg ${attributes}><path fill="currentColor" d="M3 3h18v2H3zm4 4h10v2H7zm-4 4h18v2H3zm4 4h10v2H7zm-4 4h18v2H3z"/></svg>`,
 	"format-align-justify": `<svg ${attributes}><path fill="currentColor" d="M3 3h18v2H3zm0 4h18v2H3zm0 4h18v2H3zm0 4h18v2H3zm0 4h18v2H3z"/></svg>`,
 	"format-align-left": `<svg ${attributes}><path fill="currentColor" d="M3 3h18v2H3zm0 4h12v2H3zm0 4h18v2H3zm0 4h12v2H3zm0 4h18v2H3z"/></svg>`,
+	"format-align-middle": `<svg ${attributes}><path fill="currentColor" d="m13 6l2-2l1.42 1.42L12 9.84L7.58 5.42L9 4l2 2V2h2zM3 11h18v2H3zm10 7v4h-2v-4l-2 2l-1.42-1.42L12 14.16l4.42 4.42L15 20z"/></svg>`,
 	"format-align-right": `<svg ${attributes}><path fill="currentColor" d="M3 3h18v2H3zm6 4h12v2H9zm-6 4h18v2H3zm6 4h12v2H9zm-6 4h18v2H3z"/></svg>`,
 	"format-align-top": `<svg ${attributes}><path fill="currentColor" d="m13 15l2.5 2.5l1.42-1.42L12 11.16l-4.92 4.92L8.5 17.5L11 15v6h2zM3 3h18v2H3zm0 4h10v2H3z"/></svg>`,
 	"format-bold": `<svg  ${attributes}><path fill="currentColor" d="M13.5 15.5H10v-3h3.5A1.5 1.5 0 0 1 15 14a1.5 1.5 0 0 1-1.5 1.5m-3.5-9h3A1.5 1.5 0 0 1 14.5 8A1.5 1.5 0 0 1 13 9.5h-3m5.6 1.29c.97-.68 1.65-1.79 1.65-2.79c0-2.26-1.75-4-4-4H7v14h7.04c2.1 0 3.71-1.7 3.71-3.79c0-1.52-.86-2.82-2.15-3.42"/></svg>`,

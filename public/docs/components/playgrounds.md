@@ -472,3 +472,15 @@ Markup playgrounds can declare extensions.
 6. Read runtime logs and errors in the console.
 
 The `refresh` button restores the initial project loaded in the playground.
+
+::: tp-center {intrinsic}
+:tp-icon:{name="scheme-playground" library="components" size="4em"}
+
+[tp-scheme-playground](scheme-playground/index.md)
+:::
+
+::: tp-center {intrinsic}
+:tp-icon:{name="ocaml-playground" library="components" size="4em"}
+
+[tp-ocaml-playground](ocaml-playground/index.md)
+:::

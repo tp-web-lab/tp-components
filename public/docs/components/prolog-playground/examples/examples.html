@@ -1,4 +1,4 @@
-<tp-html-viewer label="tp-prolog-playground" allow-script>
+<tp-html-viewer label="tp-prolog-playground" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
       <tp-prolog-playground src="/docs/components/_shared/intro-projects/prolog.json"></tp-prolog-playground>
@@ -6,6 +6,7 @@
 
     <div role="example" label="Javascript API">
       <script type="module">
+      import "/components/prolog/prolog.js";
       import "/components/prolog-playground/prolog-playground.js";
 
       const example = document.createDocumentFragment();
@@ -20,6 +21,14 @@
 
     <div role="example" label="Single source file">
       <tp-prolog-playground src="/docs/components/_shared/single-source/example.pl"></tp-prolog-playground>
+    </div>
+
+    <div role="example" label="SWI-Prolog DOM, constraints and PlUnit">
+      <tp-prolog-playground repository="/examples/playgrounds/prolog-playground/06-swipl-dom-constraints"></tp-prolog-playground>
+    </div>
+
+    <div role="example" label="PlUnit tests">
+      <tp-prolog-playground src="/docs/components/prolog-playground/examples/framework-tests.json"></tp-prolog-playground>
     </div>
   </template>
 </tp-html-viewer>

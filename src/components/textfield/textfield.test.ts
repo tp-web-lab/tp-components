@@ -220,6 +220,7 @@ it("copies the live text after editing and switching to multiline", async () => 
 	vi.stubGlobal("navigator", { clipboard: { writeText } });
 	try {
 		const field = document.createElement("tp-textfield");
+		field.copyCode = true;
 		field.value = "Initial text";
 		document.body.append(field);
 		const copy = () => {

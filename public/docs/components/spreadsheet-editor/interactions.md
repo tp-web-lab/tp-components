@@ -6,22 +6,23 @@
 | --- | --- |
 | Click a cell | Select the active cell and edit its content. The formula bar displays its raw value or formula. |
 | Shift + click a cell | Select the rectangle from the selection anchor to the clicked cell. A plain click starts a new selection. |
-| Clear selected cells | Clear selected values and formulas while preserving formatting. Undo restores the operation in one step. |
+| :tp-icon:{name="close" size="2em"} Clear selected cells | Clear selected values and formulas while preserving formatting. Undo restores the operation in one step. |
 | Drag the right edge of a column heading | Resize the column, with a minimum of 48 pixels and no upper limit. Wide sheets scroll horizontally; widths survive cell edits and formatting changes. |
 | Double-click a column resize handle | Restore the default width of 112 pixels. |
 | File → Import | Load a CSV, JSON or XLSX file. |
 | File → Export CSV / JSON / XLSX — formulas | Save the sheet with its raw formulas. |
 | File → Export CSV / JSON / XLSX — values | Save calculated results without changing formulas in the open sheet. |
 | Formula picker | Choose a function and replace the selected parameters in the formula bar. |
-| Format | Set General, Number, Currency, Percent or Date display for the active cell. |
-| Cell style | Toggle Bold, Italic, Underline or Strikethrough for the active cell. |
-| Clear formatting | Remove number and text formatting from the active cell. |
-| Table | Insert a row or column before or after the active cell, or delete its row or column. At least one row and column remain. |
-| Undo / Redo | Undo or redo cell edits, grouped clearing and structural changes. |
-| Copy / Cut / Paste | Use the system clipboard with the active cell. Copying shifts relative formula references when pasted; cutting preserves the formula. These actions operate on one cell, even when a range is selected. |
-| Search / Close search | Highlight matching cells, or clear the search and hide its field. |
-| Fullscreen | Toggle fullscreen for this spreadsheet. |
-| Color / Theme | Change the spreadsheet's local brand color or theme. |
+| :tp-icon:{name="letter-f" size="2em"} Format | Set General, Number, Currency, Percent or Date display for the active cell. |
+| :tp-icon:{name="format-text" size="2em"} Cell style | Toggle Bold, Italic, Underline or Strikethrough for the active cell. |
+| :tp-icon:{name="format-clear" size="2em"} Clear formatting | Remove number and text formatting from the active cell. |
+| :tp-icon:{name="table" size="2em"} Table | Insert a row or column before or after the active cell, or delete its row or column. At least one row and column remain. |
+| :tp-icon:{name="redo" size="2em"} :tp-icon:{name="undo" size="2em"} Undo / Redo | Undo or redo cell edits, grouped clearing and structural changes. |
+| :tp-icon:{name="paste" size="2em"} :tp-icon:{name="cut" size="2em"} :tp-icon:{name="copy" size="2em"} Copy / Cut / Paste | Use the system clipboard with the active cell. Copying shifts relative formula references when pasted; cutting preserves the formula. These actions operate on one cell, even when a range is selected. |
+| :tp-icon:{name="close" size="2em"} :tp-icon:{name="search" size="2em"} Search / Close search | Highlight matching cells, or clear the search and hide its field. |
+| :tp-icon:{name="fullscreen" size="2em"} :tp-icon:{name="fullscreen-exit" size="2em"} Fullscreen | Toggle fullscreen for this spreadsheet. |
+| :tp-icon:{name="theme-light-dark" size="2em"} :tp-icon:{name="palette-swatch" size="2em"} Color / Theme | Change the spreadsheet's local brand color or theme. |
+| :tp-icon:{name="file" size="2em"} Files | Open file import and export options. |
 
 #### Keyboard interactions
 

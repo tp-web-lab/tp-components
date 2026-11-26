@@ -1,3 +1,7 @@
-:- test('doubles positive numbers', double(3, 6)).
-:- test('preserves zero', double(0, 0)).
-:- test('doubles negative numbers', double(-2, -4)).
+:- use_module(library(plunit)).
+
+:- begin_tests(double).
+test(positive) :- double(3, 6).
+test(zero) :- double(0, 0).
+test(negative) :- double(-2, -4).
+:- end_tests(double).

@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-prose-editor" allow-script }
+::::: tp-markdown-viewer { label="tp-prose-editor" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-prose-editor
@@ -7,7 +7,6 @@
 Select a word and use the toolbar to change its **formatting**.
 
 - Write a draft
-
 - Review the content
 :::
 ```

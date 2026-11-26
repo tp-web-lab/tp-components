@@ -1,0 +1,73 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Converter style audit</title></head><body>
+<button id="run">Check all documentation examples</button><p id="status">Ready</p><table id="summary"><thead><tr><th>Example</th><th>Light</th><th>Dark</th></tr></thead><tbody></tbody></table><div id="stage" style="width:800px;max-width:100%"></div><details><summary>Computed styles</summary><pre id="report"></pre></details>
+<script type="module">
+import '/src/tp-loader.ts';
+import '/src/components/markdown/markdown.ts';
+import '/src/components/asciidoc/asciidoc.ts';
+import '/src/components/latex/latex.ts';
+import '/src/components/restructuredtext/restructuredtext.ts';
+import {htmlToMarkup,markupToHtml,markupLanguageFromPath} from '/src/utilities/markup-conversion.ts';
+import {dedent} from '/src/utilities/code.ts';
+import {unexpectedNativeFallbacks} from '/src/utilities/markup-native-policy.js';
+const languages=['html','asciidoc','latex','markdown','restructuredtext'];
+const stage=document.querySelector('#stage');
+const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+const styles=(e,props)=>Object.fromEntries(props.map(p=>[p,getComputedStyle(e).getPropertyValue(p)]));
+function measure(){
+ const headingProps=['text-align','font-family','font-size','font-weight','line-height','color','border-bottom-width','margin-top','margin-bottom'];
+ const cellProps=['padding','font-size','font-weight','background-color','color','text-align','vertical-align'];
+ return {
+ headings:[...stage.querySelectorAll('h1,h2,h3,h4,h5,h6')].map(e=>({tag:e.tagName,text:e.textContent.trim(),height:Math.round(e.getBoundingClientRect().height),...styles(e,headingProps)})),
+ tables:[...stage.querySelectorAll('table')].map(e=>({left:Math.round(e.getBoundingClientRect().left-stage.getBoundingClientRect().left),width:Math.round(e.getBoundingClientRect().width),...styles(e,['border-collapse','border-top-width','border-top-color']),cells:[...e.querySelectorAll('th,td')].map(c=>styles(c,cellProps))})),
+ code:[...stage.querySelectorAll('pre:not([role=alert]),tp-code-editor')].map(e=>{let box=e.matches('pre')?e:e.querySelector('.cm-editor');return box?styles(box,['background-color','color','font-size','border-top-width']):{};}),
+ errors:[...stage.querySelectorAll('[role=alert],.system-message')].map(e=>e.textContent.trim()).filter(Boolean)
+ };
+}
+document.querySelector('#run').onclick=async()=>{
+ const holder=document.createElement('template');holder.innerHTML=await (await fetch('/docs/components/markup-converter/examples/examples.html')).text();
+ const examples=[...holder.content.querySelector('template').content.querySelectorAll('[role=example]')];
+ const report=[];document.querySelector('#summary tbody').replaceChildren();
+ for(const example of examples){
+  let converter=example.querySelector('tp-markup-converter');if(!converter){const match=example.querySelector('script')?.textContent.match(/element2.textContent = (".*");/);if(!match)continue;converter=document.createElement('tp-markup-converter');const script=document.createElement('script');script.type='tp/markdown';script.textContent=JSON.parse(match[1]);converter.append(script);}
+  const name=example.getAttribute('label');document.querySelector('#status').textContent='Checking '+name;
+  try {
+   const file=converter.getAttribute('src');const script=converter.querySelector('script');const base=file?new URL(file,location.href).href:location.href;
+   const language=file?markupLanguageFromPath(file):script.type.slice(3);
+   const source=file?await(await fetch(base)).text():dedent(script.textContent);
+   const html=await markupToHtml(source,language,base); const results={}, sources={}, nativeFailures={};
+   for(const target of languages){
+    const value=target===language?source:htmlToMarkup(html,target);sources[target]=value;nativeFailures[target]=target===language?[]:unexpectedNativeFallbacks(name,target,value);stage.replaceChildren();
+    if(target==='html')stage.innerHTML=value;
+    else {const renderer=document.createElement('tp-'+target);const script=document.createElement('script');script.type='tp/'+target;script.textContent=value;renderer.append(script);if(target==='latex')renderer.setAttribute('data-tp-listing-base',base);
+     const ready=new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Render timeout '+target)),20000);renderer.addEventListener('tp-'+target+'-error',e=>{clearTimeout(timer);reject(Error(e.detail.message));},{once:true});renderer.addEventListener('tp-'+target+'-rendered',()=>{clearTimeout(timer);resolve();},{once:true});});stage.append(renderer);stage.scrollIntoView();await ready;
+    }
+    await pause(250); results[target]={};
+    for(const theme of ['light','dark']){stage.className='tp-'+theme;await pause(30);results[target][theme]=measure();}
+   }
+   report.push({name,html,sources,nativeFailures,results});
+  }catch(error){report.push({name,error:String(error)});}
+  document.querySelector('#report').textContent=JSON.stringify(report,null,2);
+ }
+ const canonical=value=>JSON.stringify(value,(key,item)=>key==='text-align'&&item==='start'?'left':item);
+ let passed=0;
+ for(const result of report){const row=document.querySelector('#summary tbody').insertRow();row.insertCell().textContent=result.name;for(const theme of ['light','dark']){const reference=result.results?.html[theme];const differences=result.error?[result.error]:languages.filter(language=>canonical(result.results[language][theme])!==canonical(reference));row.insertCell().textContent=differences.length?differences.join(', '):'PASS';if(!differences.length)passed++;}}
+ const nativeErrors=report.flatMap(r=>Object.entries(r.nativeFailures||{}).filter(([,errors])=>errors.length).map(([lang,errors])=>`${r.name}: ${lang} (${errors.join(', ')})`));
+ const regressions=[];
+ try {
+  const anchors=htmlToMarkup('<h1 id="title"><span id="alias"></span>Title</h1><p><a href="#alias">Alias</a></p>','restructuredtext');
+  const parsed=document.createElement('template');parsed.innerHTML=await markupToHtml(anchors,'restructuredtext',location.href);
+  if(!parsed.content.querySelector('#alias')||!parsed.content.querySelector('#title')||anchors.includes('span::')) regressions.push('RST alias anchors');
+  const numbered='.. code:: javascript\n   :number-lines: 20\n\n   const x = "<tag>";\n   console.log(x);';
+  parsed.innerHTML=await markupToHtml(numbered,'restructuredtext',location.href);
+  const editor=parsed.content.querySelector('tp-code-editor');
+  if(editor?.getAttribute('line-number-start')!=='20'||editor?.getAttribute('value')!=='const x = "<tag>";\nconsole.log(x);') regressions.push('RST numbered literal');
+  for(const language of ['asciidoc','latex']){
+   const converted=htmlToMarkup(parsed.innerHTML,language);
+   if(converted.includes('tp-code-editor')||converted.includes('wcTpCodeEditor'))regressions.push('RST listing native '+language);
+   const result=document.createElement('template');result.innerHTML=await markupToHtml(converted,language,location.href);
+   if(result.content.querySelector('tp-code-editor')?.getAttribute('value')!==editor?.getAttribute('value'))regressions.push('RST listing round-trip '+language);
+  }
+ }catch(error){regressions.push(String(error));}
+ document.querySelector('#status').textContent=`Complete: ${passed}/${report.length*2} comparisons passed (${report.length} examples × 5 languages × 2 themes). Native syntax: ${nativeErrors.length?nativeErrors.join('; '):'PASS'}. RST regressions: ${regressions.length?regressions.join('; '):'PASS'}`;
+};
+</script></body></html>

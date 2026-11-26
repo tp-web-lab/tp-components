@@ -1,0 +1,128 @@
+{
+  "checkedAt": "2026-11-24T10:45:02.292Z",
+  "browser": "chrome",
+  "version": "158.0.8127.38",
+  "parserSha256": "e3aa41dcdf00828eb793da4a7a3f920c5826163a87b2eb70394a54c34b97a9a4",
+  "results": [
+    {
+      "scenario": "docutils",
+      "passed": true,
+      "firstError": "Error: Unable to load Python packages: docutils. Check the connection and retry the conversion.",
+      "failureMilliseconds": 1015.6000000238419,
+      "recoveryMilliseconds": 621.7000000476837,
+      "highlighted": true,
+      "openDuringRecovery": 0,
+      "requests": [
+        {
+          "file": "docutils-0.21.2-py3-none-any.whl",
+          "interrupted": true,
+          "at": 1795516972338
+        },
+        {
+          "file": "pygments-2.19.1-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795516972338
+        },
+        {
+          "file": "docutils-0.21.2-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795516972456
+        }
+      ],
+      "totalMilliseconds": 2128
+    },
+    {
+      "scenario": "pygments",
+      "passed": true,
+      "firstError": "Error: Unable to load Python packages: pygments. Check the connection and retry the conversion.",
+      "failureMilliseconds": 965.6999999880791,
+      "recoveryMilliseconds": 637.3999999761581,
+      "highlighted": true,
+      "openDuringRecovery": 0,
+      "requests": [
+        {
+          "file": "docutils-0.21.2-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795516974780
+        },
+        {
+          "file": "pygments-2.19.1-py3-none-any.whl",
+          "interrupted": true,
+          "at": 1795516974780
+        },
+        {
+          "file": "pygments-2.19.1-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795516974898
+        }
+      ],
+      "totalMilliseconds": 2055
+    },
+    {
+      "scenario": "docutils-stalled",
+      "passed": true,
+      "firstError": "Error: Python package loading timed out after 60000 ms. Check the connection and retry the conversion.",
+      "failureMilliseconds": 60846.69999998808,
+      "recoveryMilliseconds": 1356,
+      "highlighted": true,
+      "openDuringRecovery": 1,
+      "requests": [
+        {
+          "file": "docutils-0.21.2-py3-none-any.whl",
+          "interrupted": true,
+          "at": 1795516977190,
+          "responseOpen": false
+        },
+        {
+          "file": "pygments-2.19.1-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795516977190
+        },
+        {
+          "file": "docutils-0.21.2-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795517037820
+        },
+        {
+          "file": "pygments-2.19.1-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795517037820
+        }
+      ],
+      "totalMilliseconds": 62661
+    },
+    {
+      "scenario": "pygments-stalled",
+      "passed": true,
+      "firstError": "Error: Python package loading timed out after 60000 ms. Check the connection and retry the conversion.",
+      "failureMilliseconds": 60857.5,
+      "recoveryMilliseconds": 1367.199999988079,
+      "highlighted": true,
+      "openDuringRecovery": 1,
+      "requests": [
+        {
+          "file": "docutils-0.21.2-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795517040440
+        },
+        {
+          "file": "pygments-2.19.1-py3-none-any.whl",
+          "interrupted": true,
+          "at": 1795517040440,
+          "responseOpen": false
+        },
+        {
+          "file": "docutils-0.21.2-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795517101051
+        },
+        {
+          "file": "pygments-2.19.1-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795517101051
+        }
+      ],
+      "totalMilliseconds": 62671
+    }
+  ]
+}

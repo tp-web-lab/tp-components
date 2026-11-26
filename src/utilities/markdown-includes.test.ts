@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { afterEach, expect, it, vi } from "vitest";
 import { resolveMarkdownIncludes } from "./markdown-includes.js";
 
@@ -39,3 +40,42 @@ it.each(["```", "~~~~"])(
 		);
 	},
 );
+
+it("leaves inline include examples inert, including table cells and multiline code spans", async () => {
+	const fetch = vi
+		.fn()
+		.mockResolvedValue({ ok: true, text: async () => "Included" });
+	vi.stubGlobal("fetch", fetch);
+	const literal =
+		"| Syntax |\n| --- |\n| ` ::include{part.md} ` |\n| `` ` ::include{other.md} ` `` |\n\n`example\n::include{third.md}`";
+	expect(
+		await resolveMarkdownIncludes(
+			`${literal}\n\n::include{real.md}`,
+			new URL("https://example.test/docs/page.md"),
+		),
+	).toBe(`${literal}\n\nIncluded`);
+	expect(fetch).toHaveBeenCalledTimes(1);
+	expect(fetch).toHaveBeenCalledWith("https://example.test/docs/real.md", {
+		cache: "no-store",
+	});
+});
+
+it("does not fetch the illustrative include paths in the converter documentation", async () => {
+	const source = readFileSync(
+		"public/docs/components/markup-converter/index.md",
+		"utf8",
+	);
+	const mapping = source.slice(
+		source.indexOf("#### HTML-to-markup mapping"),
+		source.indexOf("#### Cleaning the HTML pivot"),
+	);
+	const fetch = vi.fn();
+	vi.stubGlobal("fetch", fetch);
+	expect(
+		await resolveMarkdownIncludes(
+			mapping,
+			new URL("https://example.test/docs/components/markup-converter/index.md"),
+		),
+	).toBe(mapping);
+	expect(fetch).not.toHaveBeenCalled();
+});

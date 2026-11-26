@@ -73,6 +73,10 @@
     {
       "name": "tp-base",
       "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
     }
   ],
   "credits": [],

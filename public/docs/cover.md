@@ -102,9 +102,20 @@ footer
 
 :::::::
 
-::: center { intrinsic }
-This documentation combines the main markup formats (HTML, AsciiDoc, Markdown and reStructuredText) and is formatted using the [`<tp-markup-multi-pages>`](/docs/components/markup-multi-pages/index.md) component.
-:::
+::::: center { intrinsic }
+:::: tp-badge {variant=brand}
+Components <tp-divider orientation="vertical"></tp-divider> 246
+::::
+:::: tp-badge {variant=brand}
+Examples <tp-divider orientation="vertical"></tp-divider> 998
+::::
+:::: tp-badge {variant=brand}
+Tests <tp-divider orientation="vertical"></tp-divider> 5038
+::::
+
+Update 2026/11/26
+
+:::::
 :::::::::
 
 

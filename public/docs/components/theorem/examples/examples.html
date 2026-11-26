@@ -1,0 +1,95 @@
+<tp-html-viewer label="tp-theorem" allow-script preserve-source>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-theorem type="theorem" heading="Nonnegativity" number="1" id="square">
+        <p>The square of every real number is nonnegative.</p>
+      </tp-theorem>
+    </div>
+
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/theorem/theorem.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-theorem");
+      element1.setAttribute("type", "theorem");
+      element1.setAttribute("heading", "Nonnegativity");
+      element1.setAttribute("number", "1");
+      element1.setAttribute("id", "square");
+      element1.append(document.createTextNode("\n  "));
+
+      const element2 = document.createElement("p");
+      element2.append(document.createTextNode("The square of every real number is nonnegative."));
+      element1.append(element2);
+      element1.append(document.createTextNode("\n"));
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
+    <div role="example" label="Statement types">
+      <tp-theorem type="theorem"><p>A theorem with its usual label.</p></tp-theorem>
+
+      <tp-theorem type="lemma"><p>A lemma with its usual label.</p></tp-theorem>
+
+      <tp-theorem type="proposition"><p>A proposition with its usual label.</p></tp-theorem>
+
+      <tp-theorem type="corollary"><p>A corollary with its usual label.</p></tp-theorem>
+
+      <tp-theorem type="definition"><p>A definition with its usual label.</p></tp-theorem>
+
+      <tp-theorem type="example"><p>A example with its usual label.</p></tp-theorem>
+
+      <tp-theorem type="remark"><p>A remark with its usual label.</p></tp-theorem>
+
+      <tp-theorem type="proof" qed="□"><p>A proof with its usual label.</p></tp-theorem>
+    </div>
+
+    <div role="example" label="Shared section counters">
+      <h2>First section</h2>
+      <tp-theorem numbering="section" counter="results"><p>The first statement.</p></tp-theorem>
+      <tp-theorem type="lemma" numbering="section" counter="results"><p>A supporting lemma.</p></tp-theorem>
+      <h2>Second section</h2>
+      <tp-theorem numbering="section" counter="results"><p>The counter restarts.</p></tp-theorem>
+    </div>
+
+    <div role="example" label="Background variants">
+      <tp-theorem type="remark" numbering="none" variant="none" heading="none"><p>The default appearance has no border or background.</p></tp-theorem>
+
+      <tp-theorem type="remark" numbering="none" variant="neutral" heading="neutral"><p>The background follows TP theme tokens.</p></tp-theorem>
+
+      <tp-theorem type="remark" numbering="none" variant="brand" heading="brand"><p>The background follows TP theme tokens.</p></tp-theorem>
+
+      <tp-theorem type="remark" numbering="none" variant="info" heading="info"><p>The background follows TP theme tokens.</p></tp-theorem>
+
+      <tp-theorem type="remark" numbering="none" variant="success" heading="success"><p>The background follows TP theme tokens.</p></tp-theorem>
+
+      <tp-theorem type="remark" numbering="none" variant="warning" heading="warning"><p>The background follows TP theme tokens.</p></tp-theorem>
+
+      <tp-theorem type="remark" numbering="none" variant="danger" heading="danger"><p>The background follows TP theme tokens.</p></tp-theorem>
+    </div>
+
+    <div role="example" label="Ending symbols">
+      <tp-theorem type="theorem" qed="◆"><p>A theorem with a diamond at its end.</p></tp-theorem>
+
+      <tp-theorem type="definition" qed="∎"><p>A definition with a filled square.</p></tp-theorem>
+
+      <tp-theorem type="proof" qed="□"><p>A proof with an explicit closing square.</p></tp-theorem>
+
+      <tp-theorem type="proof" qed=""><p>The explicit empty value hides the closing square.</p></tp-theorem>
+    </div>
+
+    <div role="example" label="Rich heading and citation">
+      <div data-tp-reference-scope="">
+        <tp-theorem type="proposition" number="2.1">
+          <span slot="heading">Companion input, <tp-ref href="@guide"></tp-ref></span>
+          <p>The conclusion follows from the cited result.</p>
+        </tp-theorem>
+        <tp-biblio ref="guide" label="[1]"><p>Alex Example. <em>A guide to reconstruction</em>. 2026.</p></tp-biblio>
+        <tp-listof selector="tp-biblio"></tp-listof>
+      </div>
+    </div>
+  </template>
+</tp-html-viewer>

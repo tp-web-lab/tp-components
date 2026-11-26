@@ -30,6 +30,12 @@ Markup components transform LaTeX, Markdown, AsciiDoc and reStructuredText sourc
 [tp-restructuredtext](restructuredtext/index.md)
 :::
 
+::: tp-center { intrinsic }
+:tp-icon:{name="markup-converter" library="components" size="4em" aria-hidden="true"}
+
+[tp-markup-converter](markup-converter/index.md)
+:::
+
 ::::::
 
 <!-- family-introduction:end -->

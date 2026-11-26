@@ -1,3 +1,5 @@
+@import "./document-logo.css";
+
 /* ---------------------------------------------------------------------------
  * tp-toolbar — sticky toolbar with start / center / end sections
  * Sticks to the edge of its nearest scrolling/containing element.
@@ -117,33 +119,6 @@ tp-toolbar tp-divider[data-document-navbar-divider][orientation="vertical"] {
   :is(.tp-markup-multi-pages-toolbar, .tp-markdown-multi-pages-toolbar) > [data-toolbar-divider="end"] { order: 2; }
 }
 
-/* Document logos keep their intrinsic aspect ratio instead of a square icon box. */
-tp-toolbar tp-icon-button[data-document-logo] {
-  flex: 0 0 auto;
-  inline-size: auto;
-  block-size: var(--tp-icon-button-size, 2em);
-}
-tp-toolbar tp-icon-button[data-document-logo] > button {
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  min-inline-size: 0;
-  min-block-size: 0;
-  inline-size: auto;
-  block-size: 100%;
-}
-tp-toolbar tp-icon-button[data-document-logo] tp-icon,
-tp-toolbar tp-icon-button[data-document-logo] [data-tp-icon-container] {
-  inline-size: auto;
-  block-size: 100%;
-  min-block-size: 0;
-}
-tp-toolbar tp-icon-button[data-document-logo] [data-tp-icon-container] > svg {
-  inline-size: auto;
-  block-size: 100%;
-  max-block-size: 100%;
-  flex: 0 0 auto;
-}
 
 tp-toolbar tp-divider[data-document-navbar-divider]:not(:has(~ :not([hidden]))) {
   display: none;

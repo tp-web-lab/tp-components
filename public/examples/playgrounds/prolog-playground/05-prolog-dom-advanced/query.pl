@@ -1,1 +1,1 @@
-setup_dom.
+once(setup_dom).

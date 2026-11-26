@@ -74,10 +74,10 @@ import style from "./map.css?inline";
  * @keyboard {+ / -} Zooms the focused map in or out.
  * @keyboard {Enter / Space} Activates toolbar buttons; Enter opens a focused marker popup.
  * @keyboard {Escape} Closes an open popup.
- * @example
- * <tp-map lat="48.3904" lon="-4.4861" zoom="13" title="Brest, Brittany, France" marker=""></tp-map>
  *  @cssprop [--tp-map-height=24rem] Height of the map viewport, with a minimum of 10rem.
  * @cssprop [--tp-map-width=100%] Preferred width of the map viewport and elevation profile, limited by the container width.
+ * @example
+ * <tp-map lat="48.3904" lon="-4.4861" zoom="13" title="Brest, Brittany, France" marker=""></tp-map>
  */
 export class TpMap extends TpBase {
 	/** Current Leaflet map instance, removed on disconnection. */
@@ -505,10 +505,10 @@ export class TpMap extends TpBase {
 				{ capture: true },
 			);
 			this.querySelector('[data-action="in"]')?.addEventListener("click", () =>
-				this.map?.zoomIn(),
+				this.zoomIn(),
 			);
 			this.querySelector('[data-action="out"]')?.addEventListener("click", () =>
-				this.map?.zoomOut(),
+				this.zoomOut(),
 			);
 			this.querySelector('[data-action="locate"]')?.addEventListener(
 				"click",
@@ -669,6 +669,16 @@ export class TpMap extends TpBase {
 			},
 			{ enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 },
 		);
+	}
+
+	/** Increases the map zoom by one step. */
+	zoomIn(): void {
+		this.map?.zoomIn();
+	}
+
+	/** Decreases the map zoom by one step. */
+	zoomOut(): void {
+		this.map?.zoomOut();
 	}
 }
 if (!customElements.get("tp-map")) customElements.define("tp-map", TpMap);

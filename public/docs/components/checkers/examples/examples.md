@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-checkers" allow-script }
+::::: tp-markdown-viewer { label="tp-checkers" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-checkers { position="W:W32,34,K46:B17,19,K5" draggable-pieces }

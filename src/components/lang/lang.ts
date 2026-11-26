@@ -447,7 +447,10 @@ export class TpLang extends TpBase {
 		return host.getAttribute("repository")?.trim() ?? "";
 	}
 
-	private selectLang(choice: TpLangChoice): void {
+	/** Selects a document language, emits the language change and closes the language menu. */
+	selectLang(choice: TpLangChoice): void {
+		if (this.disabled) return;
+		if (this.dropdownEl) this.dropdownEl.open = false;
 		const langs = this.readLangs();
 		const lang = choice === "auto" ? this.resolveAutoLang(langs) : choice;
 		const singlePage = this.resolveSinglePage();
@@ -564,6 +567,11 @@ export class TpLang extends TpBase {
 	private handleLocationChange = (): void => {
 		this.updateControl();
 	};
+
+	/** Opens or closes the choices menu, unless this control is disabled. */
+	toggleMenu(): void {
+		this.handleControlClick();
+	}
 }
 
 if (!customElements.get("tp-lang")) {

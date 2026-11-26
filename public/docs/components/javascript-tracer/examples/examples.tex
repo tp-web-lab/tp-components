@@ -1,0 +1,97 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpJavascriptTracer[src=/docs/components/javascript-tracer/examples/nested-arrays.js]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/javascript/javascript.js";
+import "/components/javascript-tracer/javascript-tracer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-javascript-tracer");
+element1.setAttribute("src", "/docs/components/javascript-tracer/examples/nested-arrays.js");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Subexpressions on one line
+\documentclass{article}
+\begin{document}
+\wcTpJavascriptTracer[src=/docs/components/javascript-tracer/examples/same-line.js]{}
+\end{document}
+
+% !tp-example Recursion
+\documentclass{article}
+\begin{document}
+Record factorial(5), inspect the five call frames and follow return values up to 120.
+
+
+\wcTpJavascriptTracer[src=/docs/components/javascript-tracer/examples/recursion.js]{}
+\end{document}
+
+% !tp-example Independent closures
+\documentclass{article}
+\begin{document}
+Follow count in the two captured makeCounter environments. The first counter returns 1 then 2; the second returns 1.
+
+
+\wcTpJavascriptTracer[src=/docs/components/javascript-tracer/examples/closures.js]{}
+\end{document}
+
+% !tp-example Class and shared instance
+\documentclass{article}
+\begin{document}
+Follow this.value from 3 to 4 and check that counter and alias point to the same instance. The output is 4, 4, true.
+
+
+\wcTpJavascriptTracer[src=/docs/components/javascript-tracer/examples/classes.js]{}
+\end{document}
+
+% !tp-example Inheritance and super
+\documentclass{article}
+\begin{document}
+Follow StepCounter extending Counter, the super(value) constructor call and the overridden increment method calling super.increment(). Inspect the same instance through both classes; the output is 5, 7, true.
+
+
+\wcTpJavascriptTracer[src=/docs/components/javascript-tracer/examples/inheritance.js]{}
+\end{document}
+
+% !tp-example Caught exception
+\documentclass{article}
+\begin{document}
+Follow the exception from divide into catch, then continue through finally. The error event uses the danger color and execution continues.
+
+
+\wcTpJavascriptTracer[src=/docs/components/javascript-tracer/examples/caught-exception.js]{}
+\end{document}
+
+% !tp-example Uncaught exception
+\documentclass{article}
+\begin{document}
+Inspect the TypeError and its call stack. Recording ends at the error; previous steps remain available.
+
+
+\wcTpJavascriptTracer[src=/docs/components/javascript-tracer/examples/uncaught-exception.js]{}
+\end{document}
+
+% !tp-example Loop and local variables
+\documentclass{article}
+\begin{document}
+Step through the loop to inspect n and the growing squares array. The final output contains 1, 4, 9 and 16.
+
+
+\wcTpJavascriptTracer[src=/docs/components/javascript-tracer/examples/loops.js]{}
+\end{document}
+
+% !tp-example Replay a saved trace
+\documentclass{article}
+\begin{document}
+\wcTpJavascriptTracer[trace=/docs/components/javascript-tracer/examples/nested-arrays.trace.json]{}
+\end{document}

@@ -1,11 +1,9 @@
-:::::: tp-markdown-viewer { label="tp-menu" allow-script }
+:::::: tp-markdown-viewer { label="tp-menu" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-menu
 - [Buttons](/#/components/button/index.md)
-
 - [Tabs](/#/components/tabs/index.md)
-
 - [Trees](/#/components/tree/index.md)
 :::
 

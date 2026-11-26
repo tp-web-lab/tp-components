@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-dialog" allow-script }
+:::::: tp-markdown-viewer { label="tp-dialog" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-box { data-intro-action="dialog" data-allow-script }
@@ -9,9 +9,8 @@ Open the confirmation dialog
 ::: tp-dialog
 :::
 
-::: p { data-demo-status role="status" }
 Try the dialog using its trigger.
-:::
+{data-demo-status role="status"}
 
 ::: script { src="/docs/components/_shared/introduction-actions.js" }
 :::

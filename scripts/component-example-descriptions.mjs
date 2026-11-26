@@ -18,6 +18,36 @@ import { describeAttributeControl } from "./interactive-attribute-examples.mjs";
 
 /** Editorial objectives for the existing examples; no descriptions are inferred from titles alone. */
 const basic = {
+ "python-tracer": "Load the Students Python program, record execution and navigate its variables and shared object references.",
+ "ocaml": "Wait for the OCaml engine to load, then run the prefilled expression.",
+ "ocaml-playground": "Run the OCaml project and compare its typed results with the source.",
+ "ocaml-viewer": "Run the OCaml project and compare its typed results with the source.",
+ "ocaml-notebook": "Run all cells to reuse a function defined in the preceding cell.",
+ "ocaml-playground-question": "Edit double, then submit to run the three OCaml assertions.",
+ "ocaml-viewer-question": "Edit double, then submit to run the three OCaml assertions.",
+ "scheme": "Wait for LIPS to load, then run (square 7) and explore the persistent session.",
+ "scheme-playground": "Run the Scheme project, inspect its list output and the updated paragraph.",
+ "scheme-viewer": "Run the compact Scheme example and edit its source.",
+ "scheme-notebook": "Run all cells in order to evaluate a function defined in an earlier cell.",
+ "scheme-playground-question": "Edit double, then submit to run the three external Scheme assertions.",
+ "javascript-interpreter-question": "Edit the program and run the query, then submit the current source to the external tests.",
+ "ocaml-interpreter-question": "Edit the program and run the query, then submit the current source to the external tests.",
+ "prolog-interpreter-question": "Edit the program and run the query, then submit the current source to the external tests.",
+ "python-interpreter-question": "Edit the program and run the query, then submit the current source to the external tests.",
+ "scheme-interpreter-question": "Edit the program and run the query, then submit the current source to the external tests.",
+ "typescript-interpreter-question": "Edit the program and run the query, then submit the current source to the external tests.",
+ "scheme-viewer-question": "Open Code, edit double, then submit to run the Scheme assertions.",
+
+ python: "Wait for Python to load, then run square(7), edit its source and explore the persistent session.",
+ typescript: "Run square(7), edit its typed source and explore the persistent TypeScript session.",
+ javascript: "Run square(7), then change the command and explore the persistent JavaScript session.",
+ prolog: "Enter color(X). and use Next solution or ; to enumerate red, green and blue. Assert a new fact and query it again to observe the persistent session.",
+ "global-listof": "Open Appendices to browse List of figures, List of tables, List of equations, List of codes, List of theorems, List of definitions, List of notes, Glossary, Bibliography and Index. Follow the entries to both chapters and compare authored and generated anchors while references remain local.",
+ equanum: "Hover or focus the equation reference to preview its mathematical expression and compare it with the numbered equation.",
+ "diff-code-editor": "Compare two JavaScript versions, edit either side and apply a selected difference in either direction.",
+ bibtex: "Load two BibTeX book entries and inspect their readable tp-biblio source code.",
+ theorem: "Read a named theorem with an explicit number and a reference target.",
+ "markup-converter": "Edit a Markdown document containing a formula and an image in a table, choose Run and compare all five formats.",
  "table-editor": "Edit the workshop schedule, insert a row or column, then export markup, spreadsheet data or an image.",
  wari: "Play an Oware Abapa game from the standard forty-eight-seed position. Sow a highlighted pit, inspect the scores and try the playback controls.",
  checkers: "Explore an international draughts endgame with men and kings. Select a piece to see its legal destinations, then play a complete turn or try random play.",
@@ -47,6 +77,7 @@ const basic = {
  "calculator": "Enter 2+3*4 and evaluate it, then try sin(30) in degree mode. Use the scientific keys to transform a selected expression.",
  "note": "Hover or focus the reference to read its HTML content; inspect the same entry in the generated list.",
  "biblio": "Hover or focus the reference to read its HTML content; inspect the same entry in the generated list.",
+ "index": "Read a visible index reference and mark a second occurrence silently. Follow the generated links and inspect the parent/child terms in the index.",
  "glossary": "Hover or focus the reference to read its HTML content; inspect the same entry in the generated list.",
  "ref": "Hover or focus the reference to reveal a formatted note; press Escape to dismiss it.",
  "listof": "Follow the generated figure links to their captions in the document.",
@@ -83,7 +114,7 @@ const basic = {
 		"Enter a quantity with the number field and adjust the level with the slider. Try the clear and reset controls.",
 	accordion: "Expand and collapse the questions to reveal their answers.",
 	alarm: "Set an alarm and try its controls to observe the scheduled alert.",
-	animation: "Watch the content fade in when the example loads.",
+	animation: "Watch shakeX play three times on load, with 1.2 seconds per cycle. Click the box to replay, or focus it and press Enter or Space.",
 	badge:
 		"Observe the pulsing badge indicating that the build is ready.",
 	base: "Inspect a minimal element using the common component foundation.",
@@ -418,6 +449,103 @@ const additional = {
 };
 
 export function describeExample(component, label) {
+ if (label === "Explicit Feedback file") return "Edit the program supplied in an inline script; the Feedback field explicitly names its test file, without src or a test attribute. Submit the initial program, correct double in the editor and submit again to compare failing and passing results.";
+ if (component === "sql-playground" && label === "SQL query tests") return "Run tests to compare columns and rows, including empty results, duplicates, multiple statements and an expected error. Change query.sql to reverse the ordering and inspect the mismatch; the delete case shows that each following test starts with a fresh database.";
+ if (["Mocha and Chai results", "unittest results"].includes(label)) return "Run tests to compare passing and skipped cases in the common results table, then change double to return its input and inspect the failures. Expand Engine output for messages; the Python example also shows subtests and an expected failure.";
+ if (["PlUnit tests", "SRFI-64 tests", "Alcotest tests"].includes(label)) return "Run the native test suite and compare passed and skipped cases in the shared results table. Change double to return x, run tests again and inspect the failure details; expand Engine output for the full log.";
+ if(component === "python-tracer" && label === "Inheritance and super") return "Follow StepCounter inheriting from Counter, super().__init__(value) and the overridden increment method calling super().increment(). Inspect self referring to the same instance in both classes; the output is 5, 7, True.";
+ if (["javascript-tracer", "typescript-tracer"].includes(component) && label === "Inheritance and super") return "Follow StepCounter extending Counter, the super(value) constructor call and the overridden increment method calling super.increment(). Inspect the same instance through both classes; the output is 5, 7, true.";
+ if (component === "scheme-tracer" && label === "Subexpressions on one line") return "Record execution and use Next and Previous to follow the two additions and their multiplication on one line. Setting x to its existing value adds no visible state change: these identical internal snapshots are grouped; the final output is 30, including after saving and reloading the trace.";
+ if (["javascript-tracer", "typescript-tracer", "python-tracer", "scheme-tracer", "ocaml-tracer"].includes(component) && label === "Subexpressions on one line") return "Record execution, then use Next and Previous to follow the two additions and their multiplication on the same source line. The output is 30; consecutive snapshots with unchanged highlighted source and visible state are grouped, including after Save trace and Load trace.";
+ if (["javascript-tracer", "typescript-tracer"].includes(component)) { const descriptions={"Basic usage":"Record the nested arrays, follow the two arrows to shared and observe push(5) updating the shared object.","Recursion":"Record factorial(5), inspect the five call frames and follow return values up to 120.","Independent closures":"Follow count in the two captured makeCounter environments. The first counter returns 1 then 2; the second returns 1.","Class and shared instance":"Follow this.value from 3 to 4 and check that counter and alias point to the same instance. The output is 4, 4, true.","Caught exception":"Follow the exception from divide into catch, then continue through finally. The error event uses the danger color and execution continues.","Uncaught exception":"Inspect the TypeError and its call stack. Recording ends at the error; previous steps remain available.","Loop and local variables":"Step through the loop to inspect n and the growing squares array. The final output contains 1, 4, 9 and 16.","Replay a saved trace":"Navigate the nested-arrays recording without executing the program. Save trace and Load trace let you save and reopen the complete JSON recording."}; if(descriptions[label]) return descriptions[label]; }
+ if (component === "ocaml-tracer" && label === "Replay a saved trace") return "Browse the saved factorial recording without starting OCaml. Load trace and Save trace let you reopen and save the complete JSON recording.";
+ if (component === "ocaml-tracer") { const descriptions={"Basic usage": "Record factorial 5 and follow the call frames and returned values up to 120.", "Subexpressions on one line": "Step through both additions and the multiplication on the same line. The output is 30.", "Shared arrays and references": "Follow mutations through shared references: both aliases point to the same array.", "Closures": "Inspect count captured by the counter and its mutation from 0 to 2.", "Pattern matching": "Follow recursive list matching and inspect the head and tail of each list cell.", "Caught exception": "Inspect the Division_by_zero event and continue through its handler.", "Uncaught exception": "Inspect the failure and its recorded source position; previous steps remain available."}; if(descriptions[label]) return descriptions[label]; }
+ if (component === "scheme-tracer") { const descriptions={"Basic usage":"Record factorial(5), inspect its five call frames and follow return values up to 120.","Tail recursion":"Record sum-iter with 50 iterations. The result is 1275, and tail calls replace the active frame instead of growing the call stack.","Independent closures":"Follow the separate count bindings captured by first and second. set! updates their retained environments; the output is 1, 2 and 11.","Shared pairs and mutation":"Compare shared and independent lists. set-car! changes both references to shared, while the separately constructed lists remain unchanged.","Cyclic pair":"Follow the cdr arrow back to the same pair after set-cdr!. set-car! updates that same object through the cycle.","Vectors and aliases":"Inspect the shared vector and its alias. vector-set! changes element 1 to 99 without creating a new vector.","Higher-order procedures":"Step through map callbacks, first with square and then with a lambda capturing factor. The results are (1 4 9 16) and (3 6 9).","Error and call stack":"Pass a number to car. Inspect the error, its source line and the active first-item call; previous steps remain available.","Replay a saved trace":"Replay factorial from JSON without loading LIPS or executing Scheme. Save trace and Load trace save and reopen the complete recording."}; if(descriptions[label]) return descriptions[label]; }
+ if (component === "python-tracer" && label === "Nested lists and shared references") return "Record execution and inspect the three arrows from rows: the first and third point to the same shared list. Step through append(5) to see both references reflect the change, while the middle list stays unchanged.";
+ if (component === "python-tracer" && label === "Caught exception") return "Record execution, then step through the exception and its handler. Output continues with caught and done.";
+ if (component === "python-tracer" && label === "Uncaught exception") return "Record execution and follow the exception from fail to the caller. The final event displays ValueError: test error; earlier steps remain available.";
+ if (component === "python-tracer" && label === "Closure with nonlocal") return "Record execution and follow count from 0 to 1 to 2 in the retained make_counter frame. The two calls share the same captured variable and print 1 then 2.";
+ if(component === "python-tracer" && label === "Class and shared instance") return "Record Counter, follow value from 3 to 4 and check that counter and alias point to the same instance. The output is 4, 4, True.";
+ if(component === "python-tracer" && label === "References between instances") return "Record two linked Node instances. Inspect their next attributes, the two reciprocal arrows and alias pointing to the first node; the output is 2.";
+
+ if (component === "prolog" && label === "Execution trace drawer") return "With tracer enabled, open Trace execution to follow ancestor(ann, Who) in a drawer initially 75% wide. Edit the source or query and reopen it; the independent recording preserves the interpreter session and its pending solutions.";
+ if (component === "prolog-tracer") {const descriptions={"Basic usage":"Record ancestor(ann, Who), then follow the three solutions, failed branches and successive clause attempts.","Recursion":"Record factorial(4, F) and follow the recursive goals and returned value 24.","Failure":"Follow both likes goals and see why no shared drink is found.","Cut":"Compare the single red solution with the pruned alternatives after the cut.","Exception":"Follow the arithmetic exception and its propagation through the call frames.","Replay a saved trace":"Explore a saved ancestor recording without starting SWI-Prolog. Save trace and Load trace preserve the complete event stream."};if(descriptions[label])return descriptions[label];}
+ if (component === "ocaml" && label === "Execution trace drawer") return "Enable tracer and open Trace execution to record the current program and query in a drawer initially 75% wide. Edit factorial or its argument and reopen the drawer; the recording is independent of the interpreter session.";
+ if (["typescript", "scheme"].includes(component) && label === "Execution trace drawer") return "With tracer enabled, open Trace execution to record factorial(5) in a drawer initially 75% wide. Edit the source or query and reopen the trace without changing the interpreter session.";
+ if(component === "javascript" && label === "Execution trace drawer") return "Open Trace execution to record factorial(5) and its console output in a drawer initially 75% wide. Edit the source or query and reopen the trace to compare the recursive calls without changing the interpreter session.";
+ if(component === "python" && label === "Execution trace drawer") return "Open Trace execution to record factorial(5) in a drawer initially 75% wide. Edit the source or query, reopen the trace and compare the recursive frames; closing the drawer stops recording.";
+ if(component === "python-tracer") {
+  const descriptions = {"Inline Python":"Record factorial(5) from an inline script and compare the recursive call frames.","Replay a saved trace":"Navigate a saved Students recording without starting Python or fetching its source file.","Save and reload":"Save the full trace under a chosen filename, reload that JSON and navigate to the final output. The trace attribute takes precedence over src."};
+  if(descriptions[label]) return descriptions[label];
+ }
+
+ if (component === "tooltip" && label === "Links and scrollable content") return "Move from the trigger into the tooltip, scroll the long guide and follow its links. Try keyboard focus and <kbd>Escape</kbd>, then leave both areas to observe the delayed closure.";
+ if(component === "global-listof" && label === "Compare merge modes") return "Toggle Merge across pages to compare two chapter panels with one merged bibliography. The shared definition and all four citation links remain available; switching back restores closed panels.";
+ if(component === "global-listof" && label === "Bibliography across pages") return "Follow four bibliography links across two chapters. Compare independent entries with the same ref, authored anchors and generated anchors, then read the local bibliography.";
+ if(component === "global-listof" && label === "Glossary across pages") return "Open the glossary definitions on each chapter page. The shared Model term retains its page-specific definition; local references and lists expose its content.";
+ if(component === "global-listof" && label === "Index across pages") return "Navigate to four definitions in the topics index across two chapters. The other index is excluded, and local occurrence links retain their page scope.";
+
+ if(component === "equanum" && label === "align row previews") return "Compare references to the two rows of a native LaTeX align environment; each tooltip contains only its own equation and number.";
+ if(component === "equanum" && label === "alignat row previews") return "Compare two rows with two equation pairs; each preview retains the alignat column-pair count and the referenced row's number.";
+ if(component === "equanum" && label === "flalign row previews") return "Compare full-width rows in the document with their compact previews; the source retains flalign while each tooltip uses align.";
+ if(component === "equanum" && label === "gather row previews") return "Compare independently centered equations; each reference previews its own row and number.";
+ if(component === "equanum" && label === "eqnarray row previews") return "Compare references to the two rows of a native LaTeX eqnarray environment, preserving its three-column alignment in each preview.";
+ if(component === "markup-converter" && label === "Native comments comparison") return "Compare native comment syntax across all five languages, including inline comments, multiline text and a commented-out component.";
+
+ if(component === "global-listof" && ["Markdown guide", "AsciiDoc guide", "LaTeX guide", "reStructuredText guide", "Mixed markup guide"].includes(label)) return "Follow figure and note entries across the guide pages, including a figure without an authored ID. Return to Overview to compare targets on other pages.";
+ if (component === "theorem" && label === "Rich heading and citation") return "Hover or focus the citation in the proposition title to read its bibliography entry. The numeric label is shared with the generated bibliography.";
+ if(component === "bibtex") {
+  const descriptions={"BibTeX script":"Convert a BibTeX entry supplied by an inline script, without fetching a file.","LaTeX bibliography":"Load two BibTeX books and inspect their standard thebibliography and bibitem output.","CSL-JSON input":"Convert an inline CSL-JSON record into tp-biblio source.","CSL-JSON to LaTeX":"Load a CSL-JSON file and generate a standard LaTeX bibliography."};
+  if(descriptions[label])return descriptions[label];
+ }
+
+ if (component === "diff-code-editor" && label === "Read-only files") return "Compare two JavaScript files without editing them; navigate differences and save either source.";
+ if (component === "diff-code-editor" && label === "Wrapped Markdown") return "Compare Markdown sources with wrapped lines, heading colors and list markers.";
+ if (component === "theorem" && label === "Ending symbols") return "Compare a theorem and a definition with custom ending symbols, a proof with an explicit square and a proof without a symbol.";
+ if (component === "theorem" && label === "Background variants") return "Compare the plain default with the six colored panels; switch the viewer between light and dark themes.";
+ if (component === "theorem" && label === "Statement types") return "Compare the eight statement types and the proof-ending symbol.";
+ if (component === "theorem" && label === "Shared section counters") return "Compare the shared theorem/lemma sequence across two sections.";
+ if (component === "include" && label === "Raw HTML") return "Display the original HTML notice without interpreting its tags and compare it with Basic usage.";
+ if (component === "include" && label === "Raw AsciiDoc") return "Display the original AsciiDoc notice without conversion and compare it with Converted AsciiDoc.";
+ if (component === "include" && label === "Raw LaTeX") return "Display the original LaTeX notice without conversion and compare it with Converted LaTeX.";
+ if (component === "include" && label === "Raw reStructuredText") return "Display the original reStructuredText notice without conversion and compare it with Converted reStructuredText.";
+ if (component === "include" && label === "Converted AsciiDoc") return "Load an AsciiDoc notice and display its heading, emphasis and list as HTML.";
+ if (component === "include" && label === "Converted LaTeX") return "Load a LaTeX notice and display its heading, emphasis and itemize list as HTML.";
+ if (component === "include" && label === "Converted reStructuredText") return "Load a reStructuredText notice and display its heading, emphasis and bullet list as HTML.";
+ if (component === "include" && label === "Converted Markdown") return "Load a Markdown notice and display its heading, emphasis and list as HTML.";
+ if (component === "include" && label === "Raw Markdown") return "Load the same Markdown notice in raw mode to inspect its original syntax without conversion.";
+ if (component === "index" && label === "Named indexes and cross-references") return "Compare subject and people indexes, follow occurrence links and use see/see also cross-references within each group.";
+ if (component === "markup-converter") {
+  const comparisonDescriptions = {
+ "LaTeX text environments comparison": "Compare alignment, quotations, verse, verbatim, a minipage, tabbing, a figure and a table; inspect the native LaTeX returned from each format.",
+   "Native HTML comparison": "Start with the native HTML test document and compare headings, references, numbered lists, tables, formulas, code and images in all five formats.",
+   "Native Markdown comparison": "Start with the native Markdown test document and compare its code and rendering in all five formats.",
+   "Native AsciiDoc comparison": "Start with the native AsciiDoc test document and compare its code and rendering in all five formats.",
+   "Native reStructuredText comparison": "Start with the native reStructuredText test document and compare its code and rendering in all five formats.",
+   "Media and subtitles comparison": "Compare formatting, a quotation, an image, audio and video with subtitle tracks. Both alternative video sources use the same local MP4 clip.",
+   "Merged table comparison": "Compare the caption, fixed column widths, merged cells, alignment and formatted cell content.",
+   "Math and code comparison": "Compare inline LaTeX and AsciiMath, display math, Python highlighting and preserved code indentation.",
+   "LaTeX flexible table comparison": "Compare a tabularray table with a fixed-width column, a flexible column, alignment and a bold heading.",
+   "LaTeX table rules comparison": "Compare booktabs top, middle, bottom and partial rules with the other four formats.",
+   "LaTeX lists comparison": "Compare custom enumitem labels, nested lists, a starting index and resumed numbering.",
+   "LaTeX theorems and references comparison": "Compare a definition, theorem and proof with shared counters, formulas and forward references. The definition uses the plain default appearance; the theorem has a brand background and a custom ◆ ending, while the proof keeps its default □ ending.",
+   "LaTeX units comparison": "Compare siunitx quantities, French decimal formatting, units and ranges.",
+   "LaTeX image transformations comparison": "Compare graphicx dimensions, aspect ratio, rotation and clipping on the canoe image.",
+   "LaTeX array and tabularx comparison": "Compare custom column types, fixed and flexible widths, merged cells and top/middle/bottom alignment. Convert to another language, run it, then return to LaTeX to check that the table layout is preserved.",
+   "Index components comparison": "Start with tp-index definitions and visible or silent tp-ref occurrences. Compare the five languages, including native imakeidx commands supplemented by TP commands for interactive labels and descriptions.",
+   "LaTeX indexes comparison": "Compare two alphabetical indexes with repeated occurrences, three-level entries, sort keys and see/see also links. Follow the occurrence links, then convert back to LaTeX to recover native makeindex, index and printindex commands.",
+   "LaTeX core math environments comparison": "Compare inline math, displaymath with a matrix, numbered eqnarray rows with references and an unnumbered eqnarray*. Switch among the five languages to compare the formulas, display mode and equation numbering.",
+   "LaTeX AMS equations comparison": "Compare numbered equations, aligned lines, an unnumbered line, cases and gathered equations. Follow the equation references and convert back to LaTeX to check the formulas and numbering.",
+   "LaTeX multilingual quotations comparison": "Compare quotation marks in English, French, German, Spanish, Italian, Portuguese and Dutch, with three nesting levels and a block quotation with bold text. Convert in both directions to check language scopes, punctuation and emphasis.",
+   "LaTeX code listings comparison": "Compare an external JavaScript listing with a line range and numbering starting at 20, followed by an indented Python listing."
+  };
+  if(comparisonDescriptions[label]) return comparisonDescriptions[label];
+  if (["HTML source", "AsciiDoc source", "LaTeX source", "Markdown source", "reStructuredText source"].includes(label)) return "Edit the source document, choose Run and compare the formula and image table across the five formats.";
+  if (label === "Rich text") return "Convert formatted text, a quotation, a list, an image, a video and an audio player; inspect their code and rendering.";
+ }
+
+ if (component === "markup-converter" && label === "External source") return "Load an AsciiDoc file and observe that its source tab is selected initially.";
+ if (component === "table-editor" && label === "Rich content") return "Edit bold text, an image, a video and an audio clip in four separate rich cells. Compare Code and Render for each markup export, then inspect the text representations in CSV, JSON and XLSX.";
  if (component === "table-editor" && label === "Typed cells") return "Edit numbers, dates, times and mathematical source with their TP fields. Right-click a cell to change its type or insert a row or column before or after it.";
  if (component === "table-editor" && label === "Empty table") return "Fill the empty four-row, three-column grid, then inspect the generated markup.";
  if (component === "table-editor" && label === "Headerless table") return "Export ordinary data without column headings. Switch to Markdown to observe the empty heading row required by pipe tables.";
@@ -426,7 +554,13 @@ export function describeExample(component, label) {
  if (label === "Javascript API") return "Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.";
  if (component === "control" && label === "All controllers") return "All seven entries start visible. Uncheck All controllers to hide them, then select individual entries.";
  if (component === "control" && label === "Initially hidden") return "Only the Controllers button is initially visible. Open it and select the controllers you want to display.";
+ if (component === "animation" && label === "Attention seekers") return "Click Bounce, Shake and Pulse to compare translation and scale; Pulse repeats three times.";
+ if (component === "animation" && label === "Directional entrances") return "Click the boxes to compare slideInLeft with bounceInDown. Each click replays the chosen entrance.";
+ if (component === "animation" && label === "Zoom and rotation") return "Compare zoomIn and rotateIn by clicking the boxes; observe scale, rotation and opacity changes.";
+ if (component === "animation" && label === "Three-dimensional flip") return "Hover over or focus the box to play flipInY. Leave and return to replay the vertical-axis flip.";
+ if (component === "animation" && label === "Entrance and exit") return "Use Enter or Exit, then Pause to freeze the movement and Resume to continue from the same position. Each animation lasts three seconds; Reset restores the original visible box.";
  if (component === "carousel" && label === "Vertical navigation") return "Browse the images vertically using the buttons, a vertical swipe or the Up and Down arrow keys.";
+ if (component === "carousel" && label === "Automatic scrolling and hover pause") return "Watch the five TP markup logos travel from left to right every three seconds in a 3em-high carousel, without buttons or a counter. Hover to pause, then move the pointer away to resume from the same position.";
  if (component === "carousel" && label === "Looping navigation") return "Use Next image after the last illustration to return to the first; Previous image also wraps in the other direction.";
  if (component === "latex-playground" && label === "A document in sections") return "Edit the introduction, calculation or conclusion file, then run main.tex to assemble the document with input commands.";
  if (component === "latex-playground" && label === "A document with a TikZ figure") return "Edit the explanation and the separate TikZ figure, then run main.tex to render both in one document.";
@@ -493,6 +627,7 @@ export function describeExample(component, label) {
  if (component === "python-playground" && label === "Attributes") return "Choose src file1 or file2, or leave src at Default and choose repository dir1 for addition or dir2 to import geometry.py from main.py; edit the Python files and run them again to update the HTML result. Default restores the greeting in the DOM and console; file-unknown and dir-unknown display loading errors without previous output.";
  if (component === "code-comment" && label === "Attributes") return "Set for to commented-function to connect the list to the visible editor; toggle open to show or hide the list while its tooltips remain available. Clear for or enter an unknown ID to show the warning; Reset defaults restores the defaults.";
  if (component === "text-to-speech" && label === "Read an element") return "Press Speak to read the article referenced by its ID. Its paragraphs and formatting stay unchanged; Pause, Resume and Stop control speech only.";
+ if (component === "typewriting" && label === "Initially hidden tab") return "Open the initially hidden Animated text tab to start the reveal. Switch back to Instructions and reopen it to see the animation restart.";
  if ((component === "typewriting" || component === "text-to-speech") && label === "Synchronized speech") return "Press Speak to reveal the words as the selected voice pronounces them. Try Pause, Resume and Stop; voices without word boundaries leave the full text visible.";
  if (component === "csv-table" && label === "Quoted fields") return "Read semicolon-separated records containing a separator, escaped quotes and a newline inside quoted cells.";
  if (component === "list-table" && label === "Single column") return "Compare a simple ordered list with its one-column table. The first item becomes the heading.";
@@ -670,5 +805,6 @@ export function describeExample(component, label) {
 	if (variants[label]) return variants[label];
 	if (["Basic usage", "Basic", "Additional usage"].includes(label) && objective)
 		return objective;
+	if (component.endsWith("-interpreter-question") && label === "Passing solution") return "Run the query with the completed function, then submit to observe passing tests. Modify the source and submit again to compare results.";
 	throw new Error(`Missing editorial description: ${component} / ${label}`);
 }

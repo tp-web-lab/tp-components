@@ -102,6 +102,12 @@ Utility components supply reusable features such as drag and drop, copying, anim
 [tp-typewriting](typewriting/index.md)
 :::
 
+::: tp-center { intrinsic }
+:tp-icon:{name="theorem" library="components" size="4em" aria-hidden="true"}
+
+[tp-theorem](theorem/index.md)
+:::
+
 ::::::
 
 <!-- family-introduction:end -->

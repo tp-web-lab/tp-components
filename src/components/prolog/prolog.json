@@ -1,0 +1,208 @@
+{
+  "tagname": "tp-prolog",
+  "classname": "TpProlog",
+  "superclass": "TpBase",
+  "description": "Provides an interactive Prolog interpreter.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-prolog>\n  <script type=\"tp/prolog\">\n    color(red).\n    color(green).\n    color(blue).\n  </script>\n</tp-prolog>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "filename",
+      "description": "Filename displayed in the toolbar and source editor; defaults to the src basename or the inline script filename when provided.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"program.pl\""
+    },
+    {
+      "name": "mode",
+      "description": "Presentation mode: default and lite show the normal interface; simple opens the editor and hides the header and welcome information while retaining all query actions.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"default\" | \"lite\" | \"simple\"",
+      "default": "\"default\""
+    },
+    {
+      "name": "query",
+      "description": "Initial query shown in the prompt and restored by Reset.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "src",
+      "description": "External Prolog source file; takes precedence over value and the inline script. Changes take effect on Reset.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "tracer",
+      "description": "Enables recording the current program and query in a drawer initially 75% wide.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "value",
+      "description": "Prolog program consulted when the interpreter starts or resets; takes precedence over an inline script.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "accept(): Promise<void>",
+      "inherited": false,
+      "description": "Accepts the current answer and closes its remaining choice points."
+    },
+    {
+      "name": "all(): Promise<void>",
+      "inherited": false,
+      "description": "Displays remaining answers when the prompt is unchanged or empty; otherwise executes the entered query."
+    },
+    {
+      "name": "applySource(): Promise<void>",
+      "inherited": false,
+      "description": "Applies the editor source in a fresh session; Reset restores the authored program."
+    },
+    {
+      "name": "clear(): void",
+      "inherited": false,
+      "description": "Clears the transcript while retaining the program and query history."
+    },
+    {
+      "name": "getSource(): Promise<string>",
+      "inherited": false,
+      "description": "Returns the current program, including unsaved editor changes."
+    },
+    {
+      "name": "loadLibrary(name: string): Promise<void>",
+      "inherited": false,
+      "description": "Loads a supported SWI-Prolog library, as from the libraries dropdown."
+    },
+    {
+      "name": "next(): Promise<void>",
+      "inherited": false,
+      "description": "Requests the next answer without recomputing earlier solutions."
+    },
+    {
+      "name": "openTrace(): Promise<void>",
+      "inherited": false,
+      "description": "Records the current program and query in a drawer initially 75% wide."
+    },
+    {
+      "name": "reset(): Promise<void>",
+      "inherited": false,
+      "description": "Discards session changes and reloads the initial program in a fresh interpreter."
+    },
+    {
+      "name": "run(source = this.input?.value ?? this.query): Promise<void>",
+      "inherited": false,
+      "description": "Reloads changed source, then executes a query and displays its first answer."
+    },
+    {
+      "name": "toggleSource(): Promise<void>",
+      "inherited": false,
+      "description": "Shows or hides the editable Prolog source without changing the running session."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-color",
+      "summary": "Brand color preset controller scoped to the containing element."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-dropdown",
+      "summary": "Dropdown menu component."
+    },
+    {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-menu",
+      "summary": "Accessible menu component."
+    },
+    {
+      "name": "tp-textfield",
+      "summary": "Single-line and automatically growing multiline text field."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
+    },
+    {
+      "name": "tp-toolbar",
+      "summary": "Sticky toolbar with start / center / end sections,"
+    }
+  ],
+  "credits": [
+    {
+      "name": "tp-utilities",
+      "url": "https://www.npmjs.com/package/@tp/tp-utilities",
+      "summary": "Shared parsers, games and rendering utilities."
+    },
+    {
+      "name": "SWI-Prolog WASM",
+      "url": "https://www.swi-prolog.org/",
+      "summary": "Prolog execution in the browser."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Prolog",
+    "introduction": "The custom `<tp-prolog>` element provides an interactive Prolog interpreter.",
+    "interactions": "The query buttons and Libraries dropdown remain available in all three modes, including simple mode and notebook cells.\n\n#### Mouse interactions\n\n| Action | Result |\n| --- | --- |\n| :tp-icon:{name=\"code\" size=\"2em\"} Edit source | Opens or hides the Prolog source editor below the toolbar. |\n| :tp-icon:{name=\"prolog-tracer\" library=\"components\" size=\"2em\"} Trace execution | When enabled, record the current program and query in a drawer initially 75% wide, without changing the interpreter session. |\n| :tp-icon:{name=\"play\" size=\"2em\"} Run | Reload changed source, then execute the query and display its result. Keep the session when the source is unchanged. |\n| :tp-icon:{name=\"next\" size=\"2em\"} Next solution ; | Requests the next solution of the current query. |\n| :tp-icon:{name=\"play-all\" size=\"2em\"} All solutions | Runs the entered query and displays all its solutions; with an unchanged or empty prompt, displays the remaining solutions of the current query. Accept or Escape stops enumeration. |\n| :tp-icon:{name=\"check\" size=\"2em\"} Accept . | Accepts the current answer and discards further solutions, keeping the query in the field. |\n| :tp-icon:{name=\"delete-outline\" size=\"2em\"} Clear | Clears the transcript without changing the program or history. |\n| :tp-icon:{name=\"file_type_swiprolog\" library=\"languages\" size=\"2em\"} Libraries | Opens the library menu below the query field. Selecting a library runs use_module; a check marks loaded libraries. |\n| :tp-icon:{name=\"refresh\" size=\"2em\"} Reset | Discards asserted facts and history and restores the initial program. |\n\nColor, theme and fullscreen are provided by the toolbar controllers and apply only to this interpreter. Their own contextual help describes their commands.\n\n#### Keyboard interactions\n\n| Key | Action |\n| --- | --- |\n| <kbd>;</kbd>, then <kbd>Enter</kbd> | Requests the next solution. |\n| <kbd>.</kbd>, then <kbd>Enter</kbd>, or <kbd>Escape</kbd> | Accepts the current answer. |\n| <kbd>ArrowUp</kbd> / <kbd>ArrowDown</kbd> | Recalls queries and restores the unfinished draft in the prompt; moves between library choices in the open menu. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> in Libraries | Opens the menu or loads the focused available library. |\n| <kbd>Return</kbd> or <kbd>Shift</kbd>+<kbd>Return</kbd> in the query field | Reload the program if its source changed, then run the current query. Keep the session if unchanged; retain the query text. An empty prompt accepts the current answer. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open contextual help for the component under the pointer or with focus; <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component in the containing hierarchy and open its User help. |",
+    "keyboard": [
+      {
+        "key": "Shift+Enter",
+        "description": "Reload changed source, then execute the current query from its input field."
+      },
+      {
+        "key": "Enter",
+        "description": "Reload changed source and submit the query, or accept the current solution when the prompt is empty."
+      },
+      {
+        "key": "ArrowUp / ArrowDown",
+        "description": "Recalls previous queries."
+      },
+      {
+        "key": "Escape",
+        "description": "Stops requesting further solutions."
+      }
+    ]
+  }
+}

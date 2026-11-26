@@ -38,7 +38,18 @@
       "default": "\"07:00\""
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "startAlarm(): void",
+      "inherited": false,
+      "description": "Arms the alarm using the selected time."
+    },
+    {
+      "name": "stopAlarm(): void",
+      "inherited": false,
+      "description": "Disarms the alarm and stops its current alert."
+    }
+  ],
   "events": [
     {
       "name": "tp-alarm-trigger",
@@ -87,7 +98,7 @@
   "userHelp": {
     "displayName": "Alarm",
     "introduction": "The custom `<tp-alarm>` element signals when a specified time is reached.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Alarm time | Choose the time at which the alarm should ring. |\n| Start alarm | Start the alarm. Sound may require browser permission or an initial interaction. |\n| Stop alarm | Stop the alarm. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Alarm time | Choose the time at which the alarm should ring. |\n| :tp-icon:{name=\"play\" size=\"2em\"} Start alarm | Start the alarm. Sound may require browser permission or an initial interaction. |\n| :tp-icon:{name=\"stop\" size=\"2em\"} Stop alarm | Stop the alarm. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

@@ -193,8 +193,12 @@ tp-textfield [data-tp-textfield-copy] {
     transform: translateY(-50%);
 }
 
+tp-textfield [data-tp-textfield-control]:has(> [data-tp-textfield-copy]) [data-tp-textfield-clear] {
+    inset-inline-end: calc(3.5rem + var(--tp-toolbar-section-gap, 0.25rem));
+}
+
 tp-textfield [data-tp-textfield-control]:has(> [data-tp-textfield-copy]) [data-tp-textfield-input] {
-    padding-inline-end: calc(var(--tp-textfield-padding-inline, 0.75em) + 5rem);
+    padding-inline-end: calc(var(--tp-textfield-padding-inline, 0.75em) + 5rem + var(--tp-toolbar-section-gap, 0.25rem));
 }
 
 tp-textfield[multiline] [data-tp-textfield-type],
@@ -207,4 +211,9 @@ tp-textfield[multiline] [data-tp-textfield-clear] {
 tp-textfield[data-disabled] [data-tp-textfield-control] {
 	cursor: not-allowed;
 	opacity: 0.6;
+}
+
+tp-textfield:not([copy-code]):not([data-tp-mathfield-editor]) [data-tp-textfield-clear] { inset-inline-end: 1.75rem; }
+tp-textfield:not([copy-code]):not([data-tp-mathfield-editor]):not([clearable]) [data-tp-textfield-input] {
+ padding-inline-end: calc(var(--tp-textfield-padding-inline, .75em) + 1.75rem);
 }

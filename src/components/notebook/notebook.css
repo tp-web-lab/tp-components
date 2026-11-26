@@ -139,7 +139,3 @@ tp-button[data-action='add-language'] {
 [data-tp-notebook-menu-trigger]:has(> [data-tp-notebook-language-choice]) {
   padding-inline-start: 0;
 }
-
-[data-tp-notebook-language-choice] + tp-icon-button {
-  border-inline-start: 1px solid var(--tp-border-color, #d1d5db);
-}

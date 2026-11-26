@@ -10,14 +10,14 @@ Use `label="My figure"` to title the drawing. With `canvas-only`, the action pal
 
 | Control or gesture | Result |
 | --- | --- |
-| Theme | Choose Light, Dark or Auto for this component only. The switcher remains available in canvas-only mode. |
+| :tp-icon:{name="theme-light-dark" size="2em"} Theme | Choose Light, Dark or Auto for this component only. The switcher remains available in canvas-only mode. |
 | Action icons | Select a construction tool. Each 24×24 SVG depicts the action; its tooltip gives the name and shortcut. The selected tool is highlighted. An outlined information callout shows the icon, action heading and instructions. |
 | Actions palette | Open the keyboard-icon menu of available tools, with icon, name and shortcut. Groups follow the tool strip order, separated by horizontal dividers. Scroll within the menu when space is limited. Extra tools require `built-in`. |
-| Zoom drawing | Enlarge the live drawing in a modal window; points, measurements, tools and view controls remain interactive. Close restores the same construction. |
+| :tp-icon:{name="zoom-out" size="2em"} Zoom drawing | Enlarge the live drawing in a modal window; points, measurements, tools and view controls remain interactive. Close restores the same construction. |
 | Move | Drag a measurement label to place it independently while keeping it attached to its supports. Drag a free point freely or slide an attached point along its support. Drag empty space to pan the whole drawing. Intersection and midpoint constructions are calculated and cannot be dragged. |
 | Pan view | Drag anywhere, including over a point, to move the entire view without changing the construction. Middle-button dragging also pans in any tool. |
 | Scroll / Shift + scroll | Scroll vertically or horizontally with the mouse wheel or trackpad. Shift + vertical scrolling pans horizontally. Scrolling outside the drawing still scrolls the page. |
-| Construction objects | Show or hide the object panel using the button immediately after Grid. In canvas-only mode, this panel replaces the drawing, just like the source view. Click again to return to the drawing. The control is available in readonly mode. |
+| :tp-icon:{name="splitscreen-right" library="tp" size="2em"} Construction objects | Show or hide the object panel using the button immediately after Grid. In canvas-only mode, this panel replaces the drawing, just like the source view. Click again to return to the drawing. The control is available in readonly mode. |
 | Grid | Toggle a light grid that follows panning and zooming, with no axes, origin marker or graduations. The grid starts hidden and does not snap points. |
 | Point | Click the drawing to create a free point. |
 | Point on object | Click a line, segment, ray, vector, circle or arc to create a sliding point. |
@@ -45,7 +45,7 @@ Use `label="My figure"` to title the drawing. With `canvas-only`, the action pal
 | Circle · through point | Select the centre, then a point the circle must pass through. |
 | Arc | Enter start and end angles, then select the supporting circle. The circle outline is hidden; further arcs can use that circle via the object list. |
 | Intersection | Select two supports. All currently existing distinct intersections are created. |
-| Save image | Open the format menu and save the current view as SVG (default, first item), PNG or WebP. The export includes the visible grid, colors and stroke styles. |
+| :tp-icon:{name="save-image" size="2em"} Save image | Open the format menu and save the current view as SVG (default, first item), PNG or WebP. The export includes the visible grid, colors and stroke styles. |
 | Style | In Move mode, select an object and choose hidden, dotted, dashed or solid (default). Hidden objects remain available in the object list and keep their dependencies. |
 | Color | Choose a library palette color for the selected object, or Automatic to restore its normal color. |
 | Object list | Select an object, including a hidden supporting circle. With a construction tool active, use the object as input to the tool. |
@@ -65,6 +65,16 @@ Use `label="My figure"` to title the drawing. With `canvas-only`, the action pal
 | Hide name in Construction objects | Toggle visibility of the selected object’s name while keeping its geometry visible. Press again to show the name. |
 | Rename in Construction objects | Apply a unique object name and update dependent references. |
 | Drag an object name / Move name | Reposition the name independently of the object; Move name also enables arrow-key positioning. |
+| :tp-icon:{name="code" library="tp" size="2em"} Show construction source | Show construction source. |
+| :tp-icon:{name="file-outline" size="2em"} Construction files (.txt) | Construction files (.txt). |
+| :tp-icon:{name="keyboard-f1" library="tp" size="2em"} F1 — Toggle editor toolbar | F1 — Toggle editor toolbar. |
+| :tp-icon:{name="refresh" size="2em"} Reset source | Reset source. |
+| :tp-icon:{name="play" size="2em"} Play | Play. |
+| :tp-icon:{name="chevron-left-first" size="2em"} Start animation | Start animation. |
+| :tp-icon:{name="chevron-left" size="2em"} Previous animation step | Previous animation step. |
+| :tp-icon:{name="chevron-right" size="2em"} Next animation step | Next animation step. |
+| :tp-icon:{name="chevron-right-last" size="2em"} Show complete animation | Show complete animation. |
+| :tp-icon:{name="zoom-in" size="2em"} Close zoomed drawing | Close zoomed drawing. |
 
 #### Keyboard interactions
 

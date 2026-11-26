@@ -85,7 +85,6 @@ tp-graph-geometry[canvas-only] > [data-status] { position:absolute; width:1px; h
 .tp-geometry-board-actions { display:flex; align-items:center; gap:.3rem; margin-inline-start:auto; }
 .tp-geometry-view { justify-content:flex-end; }
 .tp-geometry-tools tp-icon-button, .tp-geometry-view tp-icon-button { --tp-icon-button-icon-size:24px; --tp-icon-button-size:34px; }
-.tp-geometry-tools tp-icon-button[aria-pressed="true"], .tp-geometry-view tp-icon-button[aria-pressed="true"] { background:var(--tp-brand-fill-loud); color:var(--tp-brand-text-on-loud); border-radius:.3rem; }
 /* Dropdown positioning sets inline overflow/height; retain scrolling at our tighter cap. */
 [data-tool-palette] { max-height:var(--tp-geometry-palette-height, min(65vh,32rem)) !important; max-block-size:var(--tp-geometry-palette-height, min(65vh,32rem)) !important; overflow-y:auto !important; overflow-x:hidden; overscroll-behavior:contain; min-width:18rem; }
 [data-tool-palette] > ul { overflow:visible; }

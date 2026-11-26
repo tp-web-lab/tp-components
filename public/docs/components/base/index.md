@@ -46,6 +46,12 @@ The help drawer header offers three buttons for the selected component:
 
 The drawer opens on User help. Switching views keeps the originally selected component.
 
+### Tables and code
+
+Tables use the same content-sized layout, cell spacing, neutral heading background and borders in all markup renderers. Explicit column widths and cell formatting take precedence.
+
+Native `pre`/`code` blocks remain native HTML. They share the syntax colors, font, line height and content padding of `tp-code-editor`, without an outer border. Both follow the surrounding light or dark theme; explicit code palettes remain available. Language-tagged blocks are highlighted lazily and retain their hover copy button.
+
 ### Authoring
 
 `<tp-base>` is primarily an extension point for component authors. Application interfaces should normally use one of its specialized subclasses.
@@ -91,19 +97,19 @@ Javascript API
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -123,7 +129,9 @@ No internal dependency
 ### External
 
 <!--
-@summary No external dependency.
+@credit highlight.js https://highlightjs.org/
+@summary Source-code syntax highlighting.
 -->
-No external dependency
+
+- [highlight.js](https://highlightjs.org/) : Source-code syntax highlighting.
 <!-- tp-docgen:dependencies:end -->

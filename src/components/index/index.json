@@ -1,0 +1,93 @@
+{
+  "tagname": "tp-index",
+  "classname": "TpIndex",
+  "superclass": "TpBase",
+  "description": "Defines an alphabetical index entry with optional descriptive content and links to its occurrences.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<div data-tp-reference-scope=\"\">\n  <p>A <tp-ref href=\"!matrix\">matrix</tp-ref> represents a linear map.</p>\n  <p>A square matrix<tp-ref href=\"!square\" silent></tp-ref> has equal dimensions.</p>\n  <tp-index ref=\"matrix\" title=\"Matrix\"><p>A rectangular array of numbers.</p></tp-index>\n  <tp-index ref=\"square\" title=\"Square matrix\" parent=\"matrix\"></tp-index>\n  <tp-listof selector=\"tp-index\" title=\"Subject index\"></tp-listof>\n</div>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "index",
+      "description": "Index name shared with tp-ref and tp-listof.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"default\""
+    },
+    {
+      "name": "parent",
+      "description": "Parent entry identifier in the same index.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "ref",
+      "description": "Entry identifier within its index and reference scope.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "see",
+      "description": "Entry identifier or JSON array of identifiers or {ref,label} objects for see cross-references.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "see-also",
+      "description": "Entry identifier or JSON array of identifiers or {ref,label} objects for see also cross-references.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "sort-key",
+      "description": "Alphabetical sorting key; defaults to ref.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "title",
+      "description": "Displayed term; defaults to ref.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Index",
+    "introduction": "The custom `<tp-index>` element defines an alphabetical index entry with optional descriptive content and links to its occurrences.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| None | No component-specific mouse interaction; the definition is hidden. Its content is displayed through references and generated lists. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| None | No component-specific keyboard interaction. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "keyboard": []
+  }
+}

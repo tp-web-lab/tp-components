@@ -8,6 +8,7 @@
 | Closed destination | Select an answer from the bank or drag it onto the blank. |
 | Answer then blank | Select an answer and click the destination, or drag the answer onto it. |
 | Clear | Release the assigned answer; unavailable when empty or disabled. |
+| :tp-icon:{name="close" size="2em"} Clear answer | Clear answer. |
 
 #### Keyboard interactions
 

@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-25",
+  "browser": "Safari 26.6.2",
+  "probe": "Static JSON resource, no TP component; write localStorage and sessionStorage, wait 1500 ms, read both.",
+  "freshDriverPort": 4446,
+  "observations": [
+    {
+      "cookies": "tp_storage_diagnostic=test",
+      "before": {
+        "local": "local",
+        "session": "session"
+      },
+      "after": {
+        "local": null,
+        "session": "session"
+      },
+      "events": [],
+      "origin": "http://127.0.0.1:4198"
+    },
+    {
+      "cookies": "tp_storage_diagnostic=test",
+      "before": {
+        "local": "local",
+        "session": "session"
+      },
+      "after": {
+        "local": null,
+        "session": "session"
+      },
+      "events": [],
+      "origin": "http://localhost:4198"
+    }
+  ],
+  "notes": [
+    "The same failure reproduced with a new SafariDriver and with an initial storage read followed by a one-second delay before writing.",
+    "The Safari networking process logged internal database-open errors; this is evidence of an environment problem, not proof of its precise cause.",
+    "No browser data or preferences have been deleted or changed."
+  ],
+  "recovery": {
+    "action": "Safari quit and relaunched with user approval; no data deletion or preference changes",
+    "result": "Independent persistence probe and both SQLite scenarios passed",
+    "measurements": "sql-playground-safari-storage-recovery.json"
+  }
+}

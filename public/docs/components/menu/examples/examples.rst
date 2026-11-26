@@ -9,11 +9,9 @@
 
          .. tp-menu::
 
-            - `Buttons </#/components/button/index.md>`_
-
-            - `Tabs </#/components/tabs/index.md>`_
-
-            - `Trees </#/components/tree/index.md>`_
+            - `Buttons </#/components/button/index.md>`__
+            - `Tabs </#/components/tabs/index.md>`__
+            - `Trees </#/components/tree/index.md>`__
 
          .. script::
             :src: /docs/components/menu/examples/navigation.js

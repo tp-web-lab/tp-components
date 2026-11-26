@@ -30,10 +30,11 @@ import { TpPrologPlayground } from "../prolog-playground/prolog-playground.js";
  * @accessibility Reuses TpQuestion's disclosure, actions and feedback tabs.
  * @keyboard {Enter / Space} Expands the question or activates a focused action.
  * @example
- * <tp-prolog-playground-question open="" src="/docs/components/playground-question/examples/prolog/double.pl" test="/docs/components/playground-question/examples/prolog/double.test.pl">
+ * <tp-prolog-playground-question open="" src="/docs/components/playground-question/examples/prolog/double.pl">
  *   <dl>
  *     <dt>Title</dt><dd>Double a number</dd>
  *     <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Edit the source, then submit to run the tests.</dd>
+ *     <dt>Feedback</dt><dd>/docs/components/playground-question/examples/prolog/double.test.pl</dd>
  *     <dt>Solution</dt><dd>Use Result is Value * 2.</dd>
  *   </dl>
  * </tp-prolog-playground-question>

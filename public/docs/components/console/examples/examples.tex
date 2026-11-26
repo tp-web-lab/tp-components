@@ -144,3 +144,28 @@ document.body.append(example);
       }
     |
 \end{document}
+
+% !tp-example Console presentation modes
+\documentclass{article}
+\begin{document}
+\subsection*{Default}
+
+\wcTpConsole[mode=default,data-console-mode-example]{}
+
+\subsection*{Lite}
+
+\wcTpConsole[mode=lite,data-console-mode-example]{}
+
+\subsection*{Simple}
+
+\wcTpConsole[mode=simple,data-console-mode-example]{}
+
+\wcScript[type=module]|
+  import "/components/console/console.js";
+  for (const output of document.querySelectorAll("tp-console[data-console-mode-example]")) {
+    output.log("Result", 42);
+    output.info("Calculation complete.");
+    output.error("An example error.");
+  }
+|
+\end{document}

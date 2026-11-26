@@ -46,3 +46,35 @@ example.append(element1);
 document.body.append(example);
 |
 \end{document}
+
+% !tp-example Messages, errors and HTML export
+\documentclass{article}
+\begin{document}
+\wcTpSqlNotebook[label=Messages and errors]{
+  \wcScript[type=tp/markdown]|
+    # Messages and errors
+
+    Click inside the first code editor and press <kbd>Shift</kbd>+<kbd>Return</kbd>.
+    SQL displays the message in its result table; it has no console.log function.
+    The second cell has not run yet.
+
+    Then click inside the second code editor and press <kbd>Shift</kbd>+<kbd>Return</kbd>.
+    Its console opens automatically to show the intentional error. Edit the code and rerun the current cell.
+
+    Export this notebook as HTML, open the downloaded file and repeat both shortcuts.
+    The exported cells use the same simple presentation and automatic console behavior.
+    Internet access is required to load the components and their execution engines.
+  |
+  \wcScript[type=tp/sql,filename=query.sql]|
+    SELECT 'Message from the first cell.' AS message;
+  |
+  \wcScript[type=tp/markdown]|
+    ## An intentional error
+
+    Run the following cell separately to open its error console.
+  |
+  \wcScript[type=tp/sql,filename=query.sql]|
+    SELECT * FROM intentional_notebook_error;
+  |
+}
+\end{document}

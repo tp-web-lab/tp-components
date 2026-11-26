@@ -11,10 +11,11 @@
 | File > Open source file… | Opens a local source file, including in an empty playground, and creates its surrounding project automatically. This replaces the current project; choose Run to execute or render it. |
 | File > Save | Saves the active editor file, not the whole project. The first save asks for a destination; later saves reuse it where direct file access is supported, or download the file again otherwise. |
 | File > Save as… | Chooses a new destination or download filename for the active file. This does not rename files or change imports inside the project. Cancelling leaves the previous destination unchanged. |
+| Project > Save in memory / Load from memory / Clear memory | Saves one project for this language in this browser, restores it without running it, or removes the saved copy without changing the current project. |
 | Examples | Loads one of the bundled example projects. |
 | :tp-icon:{name="keyboard-f1" size="1.25em"} Editor toolbar | Shows or hides the active code editor toolbar. |
 | :tp-icon:{name="refresh" size="1.25em"} Reset | Restores the initially loaded project. |
-| :tp-icon:{name="test-tube" size="1.25em"} Test | Runs the project test file when one is available. |
+| :tp-icon:{name="test-tube-off" size="2em"} :tp-icon:{name="test-tube" size="1.25em"} Test | Runs the project test file when one is available. |
 | :tp-icon:{name="play" size="1.25em"} Run | Executes or renders the current project. |
 | Fullscreen / Exit fullscreen | Expand the entire component to fullscreen or return to its normal size. |
 
@@ -22,6 +23,7 @@
 
 | Key or gesture | Result |
 | --- | --- |
+| <kbd>Shift</kbd>+<kbd>Enter</kbd> | Run the current project. |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
 | <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> / <kbd>Enter</kbd> / <kbd>Space</kbd> / <kbd>Escape</kbd> | Navigate toolbar menus, activate an action, or close a submenu. |
 | Focused controls | Use each control’s standard keyboard interaction.  |

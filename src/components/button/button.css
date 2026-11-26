@@ -4,6 +4,7 @@ tp-button {
 	--tp-button-foreground: var(--tp-neutral-text-on-loud);
 	--tp-button-border-color: var(--tp-neutral-stroke-mid);
 	--tp-button-outline-background: var(--tp-neutral-fill-softer);
+	--tp-button-outline-foreground: var(--tp-neutral-text-on-soft);
 	--tp-button-focus-ring-color: var(--tp-focus-color);
 	--tp-button-radius: 0.5em;
 	--tp-button-font-size: 0.875em;
@@ -25,6 +26,7 @@ tp-button[variant="success"] {
 	--tp-button-foreground: var(--tp-success-text-on-loud);
 	--tp-button-border-color: var(--tp-success-stroke-mid);
 	--tp-button-outline-background: var(--tp-success-fill-softer);
+	--tp-button-outline-foreground: var(--tp-success-text-on-soft);
 }
 
 tp-button[variant="danger"] {
@@ -33,6 +35,7 @@ tp-button[variant="danger"] {
 	--tp-button-foreground: var(--tp-danger-text-on-loud);
 	--tp-button-border-color: var(--tp-danger-stroke-mid);
 	--tp-button-outline-background: var(--tp-danger-fill-softer);
+	--tp-button-outline-foreground: var(--tp-danger-text-on-soft);
 }
 
 tp-button[variant="warning"] {
@@ -41,6 +44,7 @@ tp-button[variant="warning"] {
 	--tp-button-foreground: var(--tp-warning-text-on-loud);
 	--tp-button-border-color: var(--tp-warning-stroke-mid);
 	--tp-button-outline-background: var(--tp-warning-fill-softer);
+	--tp-button-outline-foreground: var(--tp-warning-text-on-soft);
 }
 
 tp-button[variant="info"] {
@@ -49,6 +53,7 @@ tp-button[variant="info"] {
 	--tp-button-foreground: var(--tp-info-text-on-loud);
 	--tp-button-border-color: var(--tp-info-stroke-mid);
 	--tp-button-outline-background: var(--tp-info-fill-softer);
+	--tp-button-outline-foreground: var(--tp-info-text-on-soft);
 }
 
 tp-button[variant="neutral"] {
@@ -57,6 +62,7 @@ tp-button[variant="neutral"] {
 	--tp-button-foreground: var(--tp-neutral-text-on-loud);
 	--tp-button-border-color: var(--tp-neutral-stroke-mid);
 	--tp-button-outline-background: var(--tp-neutral-fill-softer);
+	--tp-button-outline-foreground: var(--tp-neutral-text-on-soft);
 }
 
 tp-button[variant="brand"] {
@@ -65,6 +71,7 @@ tp-button[variant="brand"] {
 	--tp-button-foreground: var(--tp-brand-text-on-loud);
 	--tp-button-border-color: var(--tp-brand-stroke-mid);
 	--tp-button-outline-background: var(--tp-brand-fill-softer);
+	--tp-button-outline-foreground: var(--tp-brand-text-on-soft);
 }
 
 tp-button[outlined] {
@@ -117,9 +124,12 @@ tp-button > a {
 	white-space: nowrap;
 }
 
-tp-button > a:any-link,
-tp-button > a:any-link > [data-tp-button-content] {
+tp-button > a:any-link {
 	color: var(--tp-button-foreground);
+}
+
+tp-button > a:any-link > [data-tp-button-content] {
+	color: inherit;
 }
 
 tp-button[outlined] > button,
@@ -245,13 +255,13 @@ tp-button:not([disabled]):not([loading]) > a:hover {
 	box-shadow:
 		0 0 0 2px Canvas,
 		0 0 0 4px var(--tp-button-focus-ring-color);
-	filter: brightness(1.14);
 	transform: translateY(-1px);
 }
 
 tp-button[outlined]:not([disabled]):not([loading]) > button:hover,
 tp-button[outlined]:not([disabled]):not([loading]) > a:hover {
 	background-color: var(--tp-button-outline-background);
+	color: var(--tp-button-outline-foreground);
 }
 
 tp-button:not([disabled]):not([loading]) > button:active,

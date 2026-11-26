@@ -257,6 +257,66 @@ A fragment can start with package declarations, such as `\usepackage{hyperref}`,
 \href{cover.tex}{Back to the introduction}
 ```
 
+### Included documents in another markup language
+
+The component resolves simple standalone inclusion directives before parsing. It detects the included file's language from its extension and converts its content to the containing language. This also works without a viewer or converter.
+
+```latex
+\input{shared/fragment.adoc}
+```
+
+Relative paths are resolved against the document loaded with `src`, or the component's source context for inline content. Nested inclusions resolve against their own files. Missing files, cycles and nesting beyond 20 levels display an error. Complete-file inclusions are supported; language-specific filtering and literal-code options retain their existing behavior. This conversion is provided by the TP component, not by the underlying standalone parser.
+
+See the [programmatic conversion API](../markup-converter/index.md#javascript-api) for `convert(code, from, to)` and `convertFile(filename, from, to)`.
+
+### Bibliography labels and previews
+
+Native `thebibliography` entries are rendered as `tp-biblio` definitions, citations as `tp-ref` previews, and the bibliography as a `tp-listof`. Hover or focus a citation to inspect the entry. Numeric and custom labels, multiple citations and optional citation notes are preserved. Citations in rich theorem headings remain in the heading.
+
+### Basic tables
+
+Use `\begin{tabular}{|l|r|} ... \end{tabular}` for a table with left-, center- or right-aligned columns (`l`, `c`, `r`). Separate cells with `&`, rows with `\\`, and add `\hline` between rows for horizontal rules. Vertical rules use `|` in the column specification. Cells retain LaTeX formatting and inline mathematics. Advanced column specifications, spanning cells and nested tables are not supported.
+
+Wrap a captioned table in `\begin{table} ... \end{table}` and place `\caption{...}` after the `tabular`. The caption is centered below the table and accepts LaTeX formatting. `\centering` and placement hints such as `[ht]` are accepted; the web rendering remains in document order. Captions are not automatically numbered.
+
+```latex
+\begin{table}
+\centering
+\begin{tabular}{|l|r|}
+\hline
+Item & Quantity \\
+\hline
+Books & 12 \\
+\hline
+\end{tabular}
+\caption{Workshop supplies}
+\end{table}
+```
+
+### Tabularray tables
+
+`\usepackage{tabularray}` enables the `tblr` subset used by TP Table Editor. It is adapted to HTML, not the full LaTeX3 package. Supported features are:
+
+- `colspec={Q[l] Q[c] Q[r]}` (also `l`, `c`, `r`), with `t`, `m`, `b` vertical alignment in `Q[...]`;
+- `cells={...}`, `cell{row}{column}={...}` and `\SetCell{...}` with `halign=l|c|r` and `valign=t|m|b`;
+- `\SetCell[r=2,c=2]{...}` for rectangular merges, with empty placeholders for covered cells;
+- `hlines`, `vlines` and `row{1}={font=\bfseries}` for grid rules and a semantic heading row;
+- grouped multiline cells, LaTeX formatting, delimited mathematics, and a surrounding `table` with `\caption`.
+
+Indexes start at 1. Unsupported options, invalid spans and nonempty covered cells produce an error. Width specifications, arbitrary row/column selectors, colors, custom rules, nested tables, `longtblr` and pagination are not implemented.
+
+```latex
+\usepackage{tabularray}
+\begin{table}
+\centering
+\begin{tblr}{colspec={Q[l] Q[r]}, hlines, vlines, row{1}={font=\bfseries}}
+Session & Duration \\
+{Practice\\Guided exercises} & \SetCell{halign=r,valign=b} 40 \\
+\end{tblr}
+\caption{Workshop schedule}
+\end{table}
+```
+
 ### Importing
 
 ::: tp-tabs
@@ -285,27 +345,6 @@ bundler
 :::
 
 <!-- -->
-### Basic tables
-
-Use `\begin{tabular}{|l|r|} ... \end{tabular}` for a table with left-, center- or right-aligned columns (`l`, `c`, `r`). Separate cells with `&`, rows with `\\`, and add `\hline` between rows for horizontal rules. Vertical rules use `|` in the column specification. Cells retain LaTeX formatting and inline mathematics. Advanced column specifications, spanning cells and nested tables are not supported.
-
-Wrap a captioned table in `\begin{table} ... \end{table}` and place `\caption{...}` after the `tabular`. The caption is centered below the table and accepts LaTeX formatting. `\centering` and placement hints such as `[ht]` are accepted; the web rendering remains in document order. Captions are not automatically numbered.
-
-```latex
-\begin{table}
-\centering
-\begin{tabular}{|l|r|}
-\hline
-Item & Quantity \\
-\hline
-Books & 12 \\
-\hline
-\end{tabular}
-\caption{Workshop supplies}
-\end{table}
-```
-
-
 ## Examples
 
 <!-- tp-docgen:example-descriptions:start -->
@@ -317,19 +356,19 @@ Javascript API
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -346,8 +385,28 @@ All tp-components and external tools used by this component are loaded automatic
 @summary Shared base class for tp-* components.
 -->
 <!--
+@tp-dependency tp-biblio
+@summary Defines a hidden bibliography entry for reference tooltips and generated lists.
+-->
+<!--
+@tp-dependency tp-code-editor
+@summary CodeMirror-based code editor component.
+-->
+<!--
+@tp-dependency tp-listof
+@summary Builds a list of reference entries or links to labelled document elements.
+-->
+<!--
 @tp-dependency tp-math
-@summary renders LaTeX or AsciiMath expressions as inline or display-style SVG.
+@summary Displays mathematical expressions as inline formulas or separate equations.
+-->
+<!--
+@tp-dependency tp-ref
+@summary Displays an inline reference with the corresponding HTML content in a tooltip.
+-->
+<!--
+@tp-dependency tp-theorem
+@summary Theorems, definitions, examples, remarks and proofs.
 -->
 <!--
 @tp-dependency tp-tikz
@@ -355,16 +414,26 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 
 - [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
-- [`<tp-math>`](#/components/math/index.md) : renders LaTeX or AsciiMath expressions as inline or display-style SVG.
+- [`<tp-biblio>`](#/components/biblio/index.md) : Defines a hidden bibliography entry for reference tooltips and generated lists.
+- [`<tp-code-editor>`](#/components/code-editor/index.md) : CodeMirror-based code editor component.
+- [`<tp-listof>`](#/components/listof/index.md) : Builds a list of reference entries or links to labelled document elements.
+- [`<tp-math>`](#/components/math/index.md) : Displays mathematical expressions as inline formulas or separate equations.
+- [`<tp-ref>`](#/components/ref/index.md) : Displays an inline reference with the corresponding HTML content in a tooltip.
+- [`<tp-theorem>`](#/components/theorem/index.md) : Theorems, definitions, examples, remarks and proofs.
 - [`<tp-tikz>`](#/components/tikz/index.md) : Compiles TikZ drawings into SVG with Unicode text, colors and directional fading.
 
 ### External
 
 <!--
+@credit highlight.js https://highlightjs.org/
+@summary Source-code syntax highlighting.
+-->
+<!--
 @credit tp-latex https://www.npmjs.com/package/@tp/tp-latex
 @summary LaTeX.js conversion and patched TikZJax assets.
 -->
 
+- [highlight.js](https://highlightjs.org/) : Source-code syntax highlighting.
 - [tp-latex](https://www.npmjs.com/package/@tp/tp-latex) : LaTeX.js conversion and patched TikZJax assets.
 
 ### See also

@@ -33,3 +33,71 @@
             example.append(element1);
 
             document.body.append(example);
+
+      .. example:: Compare presentation modes
+
+         .. role:: example-kbd-1(kbd)
+
+         .. role:: example-kbd-2(kbd)
+
+         .. role:: example-kbd-3(kbd)
+
+         .. role:: example-kbd-4(kbd)
+
+         .. role:: example-kbd-5(kbd)
+
+         .. role:: example-kbd-6(kbd)
+
+         .. section::
+
+            .. heading-level:: 3
+
+            mode="default" — Standard controls
+            ==================================
+
+            Open Code to edit the source, then click Run or press :example-kbd-1:`Shift`\ +\ :example-kbd-2:`Enter` in the editor.
+
+            .. tp-latex-viewer::
+               :mode: default
+
+               .. script::
+                  :type: tp/latex
+
+                  \section{Viewer modes}
+                  Change this \textbf{message}, then run the source.
+
+         .. section::
+
+            .. heading-level:: 3
+
+            mode="lite" — Compact controls
+            ==============================
+
+            Open Code to edit the source, then click Run or press :example-kbd-3:`Shift`\ +\ :example-kbd-4:`Enter` in the editor.
+
+            .. tp-latex-viewer::
+               :mode: lite
+
+               .. script::
+                  :type: tp/latex
+
+                  \section{Viewer modes}
+                  Change this \textbf{message}, then run the source.
+
+         .. section::
+
+            .. heading-level:: 3
+
+            mode="simple" — Editor and rendered output only
+            ===============================================
+
+            Edit the code below, keep the cursor in the editor and press :example-kbd-5:`Shift`\ +\ :example-kbd-6:`Enter` (Return) to run it. This viewer has no Run button.
+
+            .. tp-latex-viewer::
+               :mode: simple
+
+               .. script::
+                  :type: tp/latex
+
+                  \section{Viewer modes}
+                  Change this \textbf{message}, then run the source.

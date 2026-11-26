@@ -677,4 +677,53 @@ describe("<tp-include>", () => {
 			(failed.mock.calls[0]?.[0] as CustomEvent | undefined)?.detail.error,
 		).toBe("Unknown include error");
 	});
+	it.each([
+		["md", "**Converted**"],
+		["adoc", "*Converted*"],
+		["tex", String.raw`\textbf{Converted}`],
+	])("converts %s before dispatching load", async (extension, source) => {
+		vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response(source)));
+		const element = document.createElement("tp-include") as TpInclude;
+		const loaded = vi.fn(() =>
+			expect(element.querySelector("strong")?.textContent).toBe("Converted"),
+		);
+		element.addEventListener("tp-include-load", loaded);
+		element.src = `/notice.${extension}?version=1`;
+		document.body.append(element);
+		await vi.waitFor(() => expect(loaded).toHaveBeenCalledOnce());
+	});
+	it("keeps raw markup literal", async () => {
+		vi.stubGlobal(
+			"fetch",
+			vi.fn().mockResolvedValue(new Response("**Original**")),
+		);
+		const element = document.createElement("tp-include") as TpInclude;
+		element.mode = "raw";
+		element.src = "/notice.md";
+		document.body.append(element);
+		await vi.waitFor(() =>
+			expect(element.querySelector("pre code")?.textContent).toBe(
+				"**Original**",
+			),
+		);
+		expect(element.querySelector("strong")).toBeNull();
+	});
+	it("sanitizes converted markup before insertion", async () => {
+		vi.stubGlobal(
+			"fetch",
+			vi
+				.fn()
+				.mockResolvedValue(
+					new Response('**Safe**\n\n<img src="x" onerror="alert(1)">'),
+				),
+		);
+		const element = document.createElement("tp-include") as TpInclude;
+		element.sanitize = true;
+		element.src = "/notice.md";
+		document.body.append(element);
+		await vi.waitFor(() =>
+			expect(element.querySelector("strong")?.textContent).toBe("Safe"),
+		);
+		expect(element.querySelector("img")?.hasAttribute("onerror")).toBe(false);
+	});
 });

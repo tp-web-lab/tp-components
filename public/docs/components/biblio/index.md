@@ -36,6 +36,9 @@ The custom `<tp-biblio>` element defines a hidden bibliography entry for referen
 <!-- -->
 ## Usage
 
+
+See [Reference scope](#/components/references.md) for `data-tp-reference-scope`, nested boundaries and an editable example with repeated identifiers.
+
 ### Authoring
 
 Use `ref="identifier"` to identify this entry. Its HTML blocks remain hidden at their original location. A `tp-ref` shows them in a tooltip, and `tp-listof` displays their full content where the list is placed. Note numbers follow the first occurrence of each note in the text; repeated references reuse that number. Bibliography and glossary terms use their `ref` identifier.
@@ -43,6 +46,10 @@ Use `ref="identifier"` to identify this entry. Its HTML blocks remain hidden at 
 The identifier does not include the prefix: use `^identifier` for `tp-note`, `@identifier` for `tp-biblio`, and `%identifier` for `tp-glossary` in a reference's `href`.
 
 References and lists use the nearest `data-tp-reference-scope`, rendered markup document, `article` or `main`, falling back to the page body. Nested document scopes are independent. Identifiers should be unique within each reference kind and scope; the first matching definition is used for duplicates. Changes to definitions, labels and selected elements update existing tooltips and lists automatically.
+
+### Bibliography labels and previews
+
+The optional `label` attribute supplies the displayed bibliography label, for example `[7]`, without changing the stable `ref` identifier. References and generated bibliography lists use this label; without it they retain their usual identifier display.
 
 ### Importing
 
@@ -83,19 +90,19 @@ Javascript API
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

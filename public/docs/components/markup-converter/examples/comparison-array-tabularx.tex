@@ -1,0 +1,13 @@
+\usepackage{array,tabularx}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\bfseries}p{#1}}
+\begin{tabularx}{\linewidth}{|P{7em}|Y|X|}
+\hline
+Item & Description & Comment\\\hline
+\multicolumn{2}{|c|}{Two combined columns} & Last\\\hline
+Detail & A flexible paragraph column & Resize the preview\\\hline
+\end{tabularx}
+
+\begin{tabular}{p{8em}m{8em}b{8em}}
+First line\newline Second line & Middle & Bottom
+\end{tabular}

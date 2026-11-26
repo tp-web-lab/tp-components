@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-datefield" allow-script }
+::::: tp-markdown-viewer { label="tp-datefield" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-datefield { label="Date" value="2026-09-03" clearable }

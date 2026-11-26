@@ -9,6 +9,9 @@
 | Expand / Collapse | Switch between expanded and normal presentation. |
 | Free edge of a left or right drawer | Drag to resize its width within the available space. |
 | Outside the drawer | Close it only when outside-click dismissal is enabled. |
+| :tp-icon:{name="arrow-expand-horizontal" size="2em"} Expand drawer | Expand drawer. |
+| :tp-icon:{name="arrow-collapse-horizontal" size="2em"} Collapse drawer | Collapse drawer. |
+| :tp-icon:{name="close" size="2em"} Close drawer | Close drawer. |
 
 #### Keyboard interactions
 

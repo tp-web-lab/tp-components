@@ -121,6 +121,13 @@
   },
   "tp-asciidoc-single-page": {},
   "tp-asciidoc-viewer": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    },
     "src": {
       "choices": [
         {
@@ -142,7 +149,16 @@
       ]
     }
   },
-  "tp-asciidoc-viewer-question": {},
+  "tp-asciidoc-viewer-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
   "tp-audio-playlist": {
     "src": {
       "choices": [
@@ -292,6 +308,20 @@
     }
   },
   "tp-biblio": {},
+  "tp-bibtex": {
+    "in": {
+      "values": [
+        "bibtex",
+        "clsjson"
+      ]
+    },
+    "out": {
+      "values": [
+        "tp-biblio",
+        "latex"
+      ]
+    }
+  },
   "tp-binary": {},
   "tp-blank": {
     "type": {
@@ -375,6 +405,13 @@
       "values": [
         "horizontal",
         "vertical"
+      ]
+    },
+    "transition": {
+      "values": [
+        "none",
+        "start-to-end",
+        "end-to-start"
       ]
     }
   },
@@ -564,7 +601,15 @@
       ]
     }
   },
-  "tp-console": {},
+  "tp-console": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    }
+  },
   "tp-contextmenu": {},
   "tp-control": {},
   "tp-copy-code": {},
@@ -632,6 +677,7 @@
     }
   },
   "tp-dialog": {},
+  "tp-diff-code-editor": {},
   "tp-dir": {
     "mode": {
       "values": [
@@ -702,6 +748,7 @@
       ]
     }
   },
+  "tp-equanum": {},
   "tp-exercise": {},
   "tp-file-tree": {},
   "tp-filesystem": {},
@@ -764,6 +811,7 @@
       ]
     }
   },
+  "tp-global-listof": {},
   "tp-glossary": {},
   "tp-graph-analog-circuit": {},
   "tp-graph-dfa": {},
@@ -888,6 +936,13 @@
   },
   "tp-html-single-page": {},
   "tp-html-viewer": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    },
     "src": {
       "choices": [
         {
@@ -909,7 +964,16 @@
       ]
     }
   },
-  "tp-html-viewer-question": {},
+  "tp-html-viewer-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
   "tp-icon": {
     "src": {
       "choices": [
@@ -1074,6 +1138,7 @@
       ]
     }
   },
+  "tp-index": {},
   "tp-inline": {
     "align": {
       "values": [
@@ -1105,6 +1170,25 @@
         "space-around",
         "space-evenly",
         "stretch"
+      ]
+    }
+  },
+  "tp-javascript": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    }
+  },
+  "tp-javascript-interpreter-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
       ]
     }
   },
@@ -1151,8 +1235,25 @@
       ]
     }
   },
-  "tp-javascript-playground-question": {},
+  "tp-javascript-playground-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
+  "tp-javascript-tracer": {},
   "tp-javascript-viewer": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    },
     "repository": {
       "choices": [
         {
@@ -1194,7 +1295,16 @@
       ]
     }
   },
-  "tp-javascript-viewer-question": {},
+  "tp-javascript-viewer-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
   "tp-kakuro": {},
   "tp-lang": {
     "repository": {
@@ -1267,7 +1377,15 @@
   },
   "tp-latex-playground": {},
   "tp-latex-single-page": {},
-  "tp-latex-viewer": {},
+  "tp-latex-viewer": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    }
+  },
   "tp-list-table": {},
   "tp-listof": {},
   "tp-logigram": {
@@ -1499,6 +1617,13 @@
   },
   "tp-markdown-single-page": {},
   "tp-markdown-viewer": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    },
     "src": {
       "choices": [
         {
@@ -1520,13 +1645,33 @@
       ]
     }
   },
-  "tp-markdown-viewer-question": {},
+  "tp-markdown-viewer-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
   "tp-markup-blog": {
     "language": {
       "values": [
         "html",
         "markdown",
         "asciidoc",
+        "restructuredtext"
+      ]
+    }
+  },
+  "tp-markup-converter": {
+    "language": {
+      "values": [
+        "html",
+        "asciidoc",
+        "latex",
+        "markdown",
         "restructuredtext"
       ]
     }
@@ -1752,6 +1897,8 @@
         "javascript",
         "typescript",
         "python",
+        "scheme",
+        "ocaml",
         "prolog",
         "sql"
       ]
@@ -1829,6 +1976,57 @@
       ]
     }
   },
+  "tp-ocaml": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    }
+  },
+  "tp-ocaml-interpreter-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
+  "tp-ocaml-notebook": {},
+  "tp-ocaml-playground": {},
+  "tp-ocaml-playground-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
+  "tp-ocaml-tracer": {},
+  "tp-ocaml-viewer": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    }
+  },
+  "tp-ocaml-viewer-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
   "tp-popover": {
     "placement": {
       "values": [
@@ -1878,6 +2076,25 @@
       ]
     }
   },
+  "tp-prolog": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    }
+  },
+  "tp-prolog-interpreter-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
   "tp-prolog-notebook": {},
   "tp-prolog-playground": {
     "repository": {
@@ -1921,8 +2138,25 @@
       ]
     }
   },
-  "tp-prolog-playground-question": {},
+  "tp-prolog-playground-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
+  "tp-prolog-tracer": {},
   "tp-prolog-viewer": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    },
     "repository": {
       "choices": [
         {
@@ -1964,7 +2198,16 @@
       ]
     }
   },
-  "tp-prolog-viewer-question": {},
+  "tp-prolog-viewer-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
   "tp-prose-editor": {
     "src": {
       "choices": [
@@ -1994,6 +2237,25 @@
         "puzzle",
         "triangle",
         "hexagon"
+      ]
+    }
+  },
+  "tp-python": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    }
+  },
+  "tp-python-interpreter-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
       ]
     }
   },
@@ -2040,8 +2302,25 @@
       ]
     }
   },
-  "tp-python-playground-question": {},
+  "tp-python-playground-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
+  "tp-python-tracer": {},
   "tp-python-viewer": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    },
     "repository": {
       "choices": [
         {
@@ -2083,7 +2362,16 @@
       ]
     }
   },
-  "tp-python-viewer-question": {},
+  "tp-python-viewer-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
   "tp-question": {
     "ai-help": {
       "values": [
@@ -2238,6 +2526,13 @@
   },
   "tp-restructuredtext-single-page": {},
   "tp-restructuredtext-viewer": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    },
     "src": {
       "choices": [
         {
@@ -2259,7 +2554,16 @@
       ]
     }
   },
-  "tp-restructuredtext-viewer-question": {},
+  "tp-restructuredtext-viewer-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
   "tp-save-audio": {
     "format": {
       "values": [
@@ -2310,6 +2614,57 @@
         "info",
         "neutral",
         "brand"
+      ]
+    }
+  },
+  "tp-scheme": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    }
+  },
+  "tp-scheme-interpreter-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
+  "tp-scheme-notebook": {},
+  "tp-scheme-playground": {},
+  "tp-scheme-playground-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
+  "tp-scheme-tracer": {},
+  "tp-scheme-viewer": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    }
+  },
+  "tp-scheme-viewer-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
       ]
     }
   },
@@ -2546,6 +2901,13 @@
     }
   },
   "tp-sql-viewer": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    },
     "repository": {
       "choices": [
         {
@@ -2720,6 +3082,39 @@
       ]
     }
   },
+  "tp-theorem": {
+    "numbering": {
+      "values": [
+        "none",
+        "document",
+        "section",
+        "subsection"
+      ]
+    },
+    "type": {
+      "values": [
+        "theorem",
+        "lemma",
+        "proposition",
+        "corollary",
+        "definition",
+        "example",
+        "remark",
+        "proof"
+      ]
+    },
+    "variant": {
+      "values": [
+        "none",
+        "neutral",
+        "brand",
+        "info",
+        "success",
+        "warning",
+        "danger"
+      ]
+    }
+  },
   "tp-tikz": {},
   "tp-timefield": {
     "label-position": {
@@ -2798,6 +3193,25 @@
       ]
     }
   },
+  "tp-typescript": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    }
+  },
+  "tp-typescript-interpreter-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
   "tp-typescript-notebook": {},
   "tp-typescript-playground": {
     "repository": {
@@ -2841,8 +3255,25 @@
       ]
     }
   },
-  "tp-typescript-playground-question": {},
+  "tp-typescript-playground-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
+  "tp-typescript-tracer": {},
   "tp-typescript-viewer": {
+    "mode": {
+      "values": [
+        "default",
+        "lite",
+        "simple"
+      ]
+    },
     "repository": {
       "choices": [
         {
@@ -2884,7 +3315,16 @@
       ]
     }
   },
-  "tp-typescript-viewer-question": {},
+  "tp-typescript-viewer-question": {
+    "ai-help": {
+      "values": [
+        "none",
+        "feedback",
+        "solution",
+        "both"
+      ]
+    }
+  },
   "tp-typewriting": {},
   "tp-video-player": {
     "poster": {

@@ -6,7 +6,7 @@
 ======
 [div%data-tp-reference-scope]
 =====
-Read more [tp-ref,href="^example"]#note-example#.
+Read more [tp-ref,href="^example",tp-empty="true"]##note-example-1##.
 
 [tp-note,ref="example",title="Example"]
 ====

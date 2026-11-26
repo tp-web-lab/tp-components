@@ -74,7 +74,28 @@
       "default": "\"\""
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "nextPage(): void",
+      "inherited": true,
+      "description": "Displays the next page of articles unless already on the last page."
+    },
+    {
+      "name": "openArticle(id: string): void",
+      "inherited": true,
+      "description": "Opens the article with the supplied identifier in the reader."
+    },
+    {
+      "name": "previousPage(): void",
+      "inherited": true,
+      "description": "Displays the preceding page of articles unless already on the first page."
+    },
+    {
+      "name": "showArticles(): void",
+      "inherited": true,
+      "description": "Returns to the filtered article list at its current page."
+    }
+  ],
   "events": [
     {
       "name": "tp-markdown-blog-error",

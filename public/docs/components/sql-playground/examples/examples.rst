@@ -44,3 +44,8 @@
 
          .. tp-sql-playground::
             :src: /docs/components/_shared/single-source/example.sql
+
+      .. example:: SQL query tests
+
+         .. tp-sql-playground::
+            :src: /docs/components/sql-playground/examples/framework-tests.json

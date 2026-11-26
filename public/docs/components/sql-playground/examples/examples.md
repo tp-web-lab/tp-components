@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-sql-playground" allow-script }
+:::::: tp-markdown-viewer { label="tp-sql-playground" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-box
@@ -36,6 +36,11 @@ document.body.append(example);
 
 ``` example {label="Single source file"}
 ::: tp-sql-playground { src="/docs/components/_shared/single-source/example.sql" }
+:::
+```
+
+``` example {label="SQL query tests"}
+::: tp-sql-playground { src="/docs/components/sql-playground/examples/framework-tests.json" }
 :::
 ```
 :::::

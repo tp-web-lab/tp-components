@@ -1,7 +1,11 @@
-<tp-html-viewer label="tp-include" allow-script>
+<tp-html-viewer label="tp-include" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
       <tp-include src="/docs/components/include/examples/welcome.html" loading="Loading the shared notice…"></tp-include>
+    </div>
+
+    <div role="example" label="Raw HTML">
+      <tp-include src="/docs/components/include/examples/welcome.html" mode="raw"></tp-include>
     </div>
 
     <div role="example" label="Javascript API">
@@ -17,6 +21,38 @@
 
       document.body.append(example);
       </script>
+    </div>
+
+    <div role="example" label="Converted Markdown">
+      <tp-include src="/docs/components/include/examples/notice.md"></tp-include>
+    </div>
+
+    <div role="example" label="Raw Markdown">
+      <tp-include src="/docs/components/include/examples/notice.md" mode="raw"></tp-include>
+    </div>
+
+    <div role="example" label="Converted AsciiDoc">
+      <tp-include src="/docs/components/include/examples/notice.adoc"></tp-include>
+    </div>
+
+    <div role="example" label="Raw AsciiDoc">
+      <tp-include src="/docs/components/include/examples/notice.adoc" mode="raw"></tp-include>
+    </div>
+
+    <div role="example" label="Converted LaTeX">
+      <tp-include src="/docs/components/include/examples/notice.tex"></tp-include>
+    </div>
+
+    <div role="example" label="Raw LaTeX">
+      <tp-include src="/docs/components/include/examples/notice.tex" mode="raw"></tp-include>
+    </div>
+
+    <div role="example" label="Converted reStructuredText">
+      <tp-include src="/docs/components/include/examples/notice.rst"></tp-include>
+    </div>
+
+    <div role="example" label="Raw reStructuredText">
+      <tp-include src="/docs/components/include/examples/notice.rst" mode="raw"></tp-include>
     </div>
   </template>
 </tp-html-viewer>

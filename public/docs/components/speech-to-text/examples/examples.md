@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-speech-to-text" allow-script }
+::::: tp-markdown-viewer { label="tp-speech-to-text" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-speech-to-text { lang="en-US" interim-results }

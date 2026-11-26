@@ -18,11 +18,11 @@
                :label: Like this example
                :data-demo-trigger:
 
-            .. p::
+            .. attributes::
                :data-demo-status:
                :role: status
 
-               Likes: 0
+            Likes: 0
 
             .. script::
                :src: /docs/components/_shared/introduction-actions.js

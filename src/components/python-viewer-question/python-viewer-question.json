@@ -6,11 +6,148 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-python-viewer-question open=\"\" src=\"/docs/components/playground-question/examples/python/double.py\" test=\"/docs/components/playground-question/examples/python/double.test.py\">\n  <dl>\n    <dt>Title</dt><dd>Double a number</dd>\n    <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Open Code to edit, then submit to run the tests.</dd>\n    <dt>Solution</dt><dd>Return value * 2.</dd>\n  </dl>\n</tp-python-viewer-question>"
+      "code": "<tp-python-viewer-question open=\"\" src=\"/docs/components/playground-question/examples/python/double.py\">\n  <dl>\n    <dt>Title</dt><dd>Double a number</dd>\n    <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Open Code to edit, then submit to run the tests.</dd>\n    <dt>Feedback</dt><dd>/docs/components/playground-question/examples/python/double.test.py</dd>\n    <dt>Solution</dt><dd>Return value * 2.</dd>\n  </dl>\n</tp-python-viewer-question>"
     }
   ],
-  "attributes": [],
-  "methods": [],
+  "attributes": [
+    {
+      "name": "ai-api",
+      "description": "Allows sending AI prompts to the selected provider; without it, prompts are only copied.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "ai-assistant",
+      "description": "AI provider, optionally followed by /model; without a model, uses the server configuration. Providers: openai, anthropic, google, mistral.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"openai\""
+    },
+    {
+      "name": "ai-explanation-src",
+      "description": "URL of a saved Markdown explanation; the companion .prompt.md must match the current prompt.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "ai-help",
+      "description": "Optional AI assistance; solution and both enable solution explanations. Feedback assistance is reserved for a future release.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "\"none\"|\"feedback\"|\"solution\"|\"both\"",
+      "default": "\"none\""
+    },
+    {
+      "name": "mode",
+      "description": "Blank mode: opened, closed, or mixed local choices.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"mixed\""
+    },
+    {
+      "name": "open",
+      "description": "Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.\n *   `detail: { value: unknown }`",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "score",
+      "description": "Displays the numerical score in submission feedback.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src",
+      "description": "Program, JSON project, or Markdown exercise defining Title, Prompt and Solution.",
+      "reflected": false,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "test",
+      "description": "Optional legacy test-file URL; a filename or link in Feedback takes precedence. Tests run against the submitted editor contents.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "timing",
+      "description": "Optional nonzero time limit in strict hh:mm:ss format.",
+      "reflected": true,
+      "static": false,
+      "inherited": true,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "continueAfterTimeout(): void",
+      "inherited": true,
+      "description": "Reopens the question after its timer expires."
+    },
+    {
+      "name": "explainSolution(): Promise<void>",
+      "inherited": true,
+      "description": "Opens the AI explanation for an unlocked solution when AI assistance is available."
+    },
+    {
+      "name": "openSolutionPanel(): void",
+      "inherited": true,
+      "description": "Opens the Solution panel."
+    },
+    {
+      "name": "reset(): void",
+      "inherited": true,
+      "description": "Resets the response and clears the submitted feedback."
+    },
+    {
+      "name": "setExerciseTiming(exercise: HTMLElement, pending: boolean): void",
+      "inherited": true,
+      "description": "Sets an enclosing exercise's solution gate without displaying a local timer."
+    },
+    {
+      "name": "start(): void",
+      "inherited": true,
+      "description": "Starts the timed question when its Start action is available."
+    },
+    {
+      "name": "submit(): Promise<void>",
+      "inherited": true,
+      "description": "Validates and submits the current response, respecting the same guards as Submit."
+    },
+    {
+      "name": "toggleInput(): void",
+      "inherited": true,
+      "description": "Shows or hides the answer form, keeping at least one panel visible."
+    },
+    {
+      "name": "toggleOutput(): void",
+      "inherited": true,
+      "description": "Shows or hides feedback, keeping at least one panel visible."
+    }
+  ],
   "events": [],
   "cssproperties": [],
   "dependencies": [

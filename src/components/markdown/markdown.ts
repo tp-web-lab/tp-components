@@ -1,5 +1,6 @@
 import { DeferredVisibility } from "../../utilities/deferred-visibility.js";
 import { resolveMarkdownIncludes } from "../../utilities/markdown-includes.js";
+import { expandMarkupIncludes } from "../../utilities/markup-includes.js";
 /**
  * @module components/markdown
  * @summary Markdown rendering component.
@@ -32,7 +33,10 @@ export {
 import { dedent } from "../../utilities/code.js";
 import { prepareDocumentLayout } from "../../utilities/document-layout.js";
 import { labelMathSvg } from "../../utilities/math-accessibility.js";
-import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
+import {
+	getComponentSourceBaseUrl,
+	resolveComponentSourceUrl,
+} from "../../utilities/source-url.js";
 import { TpBase } from "../base/base.js";
 import style from "./markdown.css?inline";
 
@@ -64,6 +68,14 @@ export async function renderMarkdownInto(
 	const content = await prepareMarkdownContent(parser, source);
 	root.replaceChildren(content);
 	await runMarkdownRuntime(parser, root);
+}
+
+/** Prepares external Markdown fields, including math, without activating custom elements. */
+export async function renderMarkdownFragment(
+	source: string,
+	path = "/index.md",
+): Promise<DocumentFragment> {
+	return prepareMarkdownContent(createTpMarkdownParser(path), source);
 }
 
 /** Completes formulas in inert content before custom elements copy their answers. */
@@ -98,6 +110,8 @@ export async function renderMarkdownRuntimeIn(
  * @summary Renders Markdown documents.
  * @tagname tp-markdown
  * @attr {string} src = "" - URL of a Markdown source file to fetch and render; relative paths resolve against the containing source document when available.
+ *  @event tp-markdown-rendered Emitted after Markdown and its runtime extensions are rendered, or after a source/conversion error is displayed. This event alone does not indicate successful conversion.
+ * @eventdetail tp-markdown-rendered void
  * @example
  * <tp-markdown>
  *   <script type="tp/markdown">
@@ -110,8 +124,6 @@ export async function renderMarkdownRuntimeIn(
  * - Publish the page
  *   </script>
  * </tp-markdown>
- *  @event tp-markdown-rendered Emitted after Markdown and its runtime extensions are rendered, or after a source/conversion error is displayed. This event alone does not indicate successful conversion.
- * @eventdetail tp-markdown-rendered void
  */
 export class TpMarkdown extends TpBase {
 	public static get observedAttributes(): string[] {
@@ -193,8 +205,14 @@ export class TpMarkdown extends TpBase {
 				return;
 			}
 			const { source, currentUrl } = await this.getMarkdownSource();
-			const resolvedSource = await this.resolveIncludes(
+			const includedSource = await expandMarkupIncludes(
 				source,
+				"markdown",
+				currentUrl.href,
+			);
+			if (token !== this.renderToken || !this.isConnected) return;
+			const resolvedSource = await this.resolveIncludes(
+				includedSource,
 				currentUrl,
 				Number(this.getAttribute("data-tp-include-depth") ?? 0),
 			);
@@ -254,7 +272,7 @@ export class TpMarkdown extends TpBase {
 
 		return {
 			source: this.inlineSourceSnapshot,
-			currentUrl: new URL(this.ownerDocument.baseURI),
+			currentUrl: new URL(getComponentSourceBaseUrl(this)),
 		};
 	}
 

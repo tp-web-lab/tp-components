@@ -305,7 +305,8 @@ export class TpScreen extends TpBase {
 		native?.dispatchEvent(new CustomEvent("tp-screen-mode"));
 		native?.focus();
 	}
-	private reset(): void {
+	/** Closes the preview and restores the default screen mode. */
+	reset(): void {
 		this.editing = false;
 		this.confirmed = false;
 		this.appliedDevice = "default";

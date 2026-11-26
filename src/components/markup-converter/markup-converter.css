@@ -1,0 +1,30 @@
+tp-markup-converter { display: block; min-inline-size: 0; inline-size: 100%; box-sizing: border-box; border: 1px solid var(--tp-neutral-stroke-soft); border-radius: .5rem; padding: .5rem; background: var(--tp-paper-color); }
+tp-markup-converter > .tp-markup-converter-toolbar { margin-block-end: .5rem; }
+tp-markup-converter [data-converter-files], tp-markup-converter [data-converter-files] tp-menu { overflow: visible !important; max-block-size: none; }
+tp-markup-converter [data-converter-files] li { gap: .5rem; }
+tp-markup-converter [data-converter-files] [data-tp-menu-submenu] { z-index: 10002; }
+tp-markup-converter [data-converter-status]:empty { display: none; }
+
+tp-markup-converter [data-converter-files] tp-menu { min-inline-size: 11rem; border: 0; }
+tp-markup-converter .tp-markup-converter-menu-label,
+tp-markup-converter [data-import], tp-markup-converter li[data-save] { display: flex; align-items: center; gap: .5rem; }
+tp-markup-converter tp-dropdown[data-converter-files] li[aria-haspopup="menu"] > ul[data-tp-menu-submenu] { inset-inline-start: calc(100% + .25rem); inset-inline-end: auto; }
+@media (max-width: 600px) {
+ tp-markup-converter tp-dropdown[data-converter-files] li[aria-haspopup="menu"] > ul[data-tp-menu-submenu] { inset-inline-start: 0; inset-inline-end: auto; inset-block-start: 100%; }
+}
+
+
+tp-markup-converter .tp-markup-converter-title { display: inline-flex; align-items: center; gap: .5rem; font-weight: bold; }
+
+/* Keep the document icon and title separator in the locally selected brand. */
+tp-markup-converter .tp-markup-converter-title > tp-icon { color: var(--tp-brand-text-colorful); }
+tp-markup-converter .tp-markup-converter-title-divider {
+ --tp-divider-color: var(--tp-brand-stroke-soft);
+ --tp-divider-margin-inline: var(--tp-toolbar-section-gap, 0.25rem);
+ --tp-divider-margin-block: 0;
+ align-self: center;
+ block-size: var(--tp-toolbar-divider-size, 2em);
+}
+
+/* Pair the current source language with its native icon. */
+tp-markup-converter [data-converter-source] { display: inline-flex; align-items: center; gap: .35rem; }

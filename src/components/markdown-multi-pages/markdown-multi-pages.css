@@ -61,18 +61,6 @@ tp-markdown-multi-pages,
   font-size: 1.5rem;
 }
 
-.tp-markdown-multi-pages-toolbar tp-icon-button > button {
-  color: inherit;
-  border: 1px solid var(--tp-brand-stroke-mid);
-  border-radius: var(--tp-border-radius-circle);
-  /*background: var(--tp-brand-fill-softer);*/
-}
-
-.tp-markdown-multi-pages-toolbar tp-icon-button > button:hover {
-  background: var(--tp-brand-fill-soft);
-  color: var(--tp-brand-text-on-soft);
-}
-
 .tp-markdown-multi-pages {
   --tp-markdown-multi-pages-sidebar-width: 12rem;
   --tp-splitter-divider-size: 0.625rem;
@@ -143,11 +131,6 @@ tp-markdown-multi-pages,
   gap: 0.25rem;
   justify-content: flex-end;
   margin-block-end: 0.5rem;
-}
-
-.tp-markdown-multi-pages-sidebar-controls tp-icon-button > button {
-  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
-  border-radius: var(--tp-border-radius-circle);
 }
 
 .tp-markdown-multi-pages-sidebar-tree {

@@ -1,0 +1,24 @@
+tp-theorem { --tp-theorem-background: transparent; --tp-theorem-foreground: var(--tp-text-body); --tp-theorem-accent: var(--tp-neutral-text-colorful); display: block; margin-block: 1em; padding: 0; border: 0; background: var(--tp-theorem-background); color: var(--tp-theorem-foreground); border-radius: 0; }
+tp-theorem:is([variant="neutral"], [variant="brand"], [variant="info"], [variant="success"], [variant="warning"], [variant="danger"]) { padding: 1em; border-inline-start: 0.25em solid var(--tp-theorem-accent); border-radius: var(--tp-border-radius, 0.25rem); }
+tp-theorem[variant="neutral"] { --tp-theorem-background: var(--tp-neutral-fill-softer); }
+
+tp-theorem[hidden] { display: none; }
+tp-theorem > [data-tp-theorem-generated="heading"] { display: block; font-weight: 700; margin-block-end: 0.5em; color: var(--tp-theorem-foreground, var(--tp-text-body)); }
+tp-theorem > [data-tp-theorem-generated="qed"] { display: block; text-align: end; }
+tp-theorem > [data-tp-theorem-generated="qed"][hidden] { display: none; }
+tp-theorem > [data-tp-theorem-generated="heading"] + * { margin-block-start: 0; }
+tp-theorem > :nth-last-child(2) { margin-block-end: 0; }
+
+tp-theorem:not([type]) > :not([data-tp-theorem-generated]), tp-theorem[type="theorem"] > :not([data-tp-theorem-generated]), tp-theorem[type="lemma"] > :not([data-tp-theorem-generated]), tp-theorem[type="proposition"] > :not([data-tp-theorem-generated]), tp-theorem[type="corollary"] > :not([data-tp-theorem-generated]), tp-theorem[theorem-style="plain"] > :not([data-tp-theorem-generated]) { font-style: italic; }
+tp-theorem[theorem-style="definition"] > :not([data-tp-theorem-generated]), tp-theorem[theorem-style="remark"] > :not([data-tp-theorem-generated]) { font-style: normal; }
+tp-theorem[theorem-style="remark"] > [data-tp-theorem-generated="heading"] { font-style: italic; font-weight: 400; }
+
+tp-theorem[variant="brand"] { --tp-theorem-background: var(--tp-brand-fill-softer); --tp-theorem-foreground: var(--tp-brand-text-on-soft); --tp-theorem-accent: var(--tp-brand-text-colorful); }
+
+tp-theorem[variant="info"] { --tp-theorem-background: var(--tp-info-fill-softer); --tp-theorem-foreground: var(--tp-info-text-on-soft); --tp-theorem-accent: var(--tp-info-text-colorful); }
+
+tp-theorem[variant="success"] { --tp-theorem-background: var(--tp-success-fill-softer); --tp-theorem-foreground: var(--tp-success-text-on-soft); --tp-theorem-accent: var(--tp-success-text-colorful); }
+
+tp-theorem[variant="warning"] { --tp-theorem-background: var(--tp-warning-fill-softer); --tp-theorem-foreground: var(--tp-warning-text-on-soft); --tp-theorem-accent: var(--tp-warning-text-colorful); }
+
+tp-theorem[variant="danger"] { --tp-theorem-background: var(--tp-danger-fill-softer); --tp-theorem-foreground: var(--tp-danger-text-on-soft); --tp-theorem-accent: var(--tp-danger-text-colorful); }

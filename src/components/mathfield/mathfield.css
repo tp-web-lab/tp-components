@@ -152,3 +152,9 @@ tp-mathfield[multiline] [data-tp-textfield-control] [data-tp-mathfield-visual-bu
 
 /* Keep the notation marker beside the top-row actions in multiline mode. */
 tp-mathfield[multiline] [data-tp-mathfield-mode-button] { inset-block-start: 0.35em; transform: none; }
+
+tp-mathfield:not([copy-code]) tp-textfield [data-tp-textfield-control] [data-tp-textfield-clear] { inset-inline-end: 3.65rem; }
+tp-mathfield:not([copy-code]) tp-textfield [data-tp-textfield-control] [data-tp-textfield-input] { padding-inline-end: calc(var(--tp-textfield-padding-inline, .75em) + 5.25rem); }
+tp-mathfield:not([copy-code]) tp-textfield [data-tp-textfield-control]:has([data-tp-mathfield-visual-button]:not([hidden])) [data-tp-textfield-clear] { inset-inline-end: 5.4rem; }
+tp-mathfield:not([copy-code]) tp-textfield [data-tp-textfield-control]:has([data-tp-mathfield-visual-button]:not([hidden])) [data-tp-textfield-input] { padding-inline-end: calc(var(--tp-textfield-padding-inline, .75em) + 7rem); }
+tp-mathfield:not([copy-code])[multiline] [data-tp-mathfield-preview] { grid-template-columns: minmax(0, 1fr); }

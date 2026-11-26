@@ -145,3 +145,32 @@ it("preserves note numbering when a selector lists only part of the notes", asyn
 		document.querySelector<HTMLLIElement>("tp-listof ol > li")?.value,
 	).toBe(2);
 });
+
+it("preserves explicit book note numbers in references and lists", async () => {
+	document.body.innerHTML =
+		'<main><tp-ref href="^chapter-15"></tp-ref><tp-note ref="chapter-15" number="15">Original note</tp-note><tp-listof selector="tp-note"></tp-listof></main>';
+	await settle();
+	expect(document.querySelector("tp-ref tp-button")?.textContent).toBe("[15]");
+	expect(document.querySelector("tp-listof li")?.getAttribute("value")).toBe(
+		"15",
+	);
+	document.querySelector("tp-note")?.setAttribute("number", "0");
+	await settle();
+	expect(document.querySelector("tp-listof li")?.getAttribute("value")).toBe(
+		"1",
+	);
+});
+
+it("renders multiple labelled index cross-references and retains unresolved wording", async () => {
+	const targets = JSON.stringify([
+		{ ref: "a", label: "Original A" },
+		{ ref: "b", label: "Original B" },
+		{ ref: "missing", label: "Missing original" },
+	]).replaceAll('"', "&quot;");
+	document.body.innerHTML = `<main><tp-index ref="entry" title="Entry" see="${targets}"></tp-index><tp-index ref="a" title="A"></tp-index><tp-index ref="b" title="B"></tp-index><tp-listof selector="tp-index"></tp-listof></main>`;
+	await settle();
+	const text = document.querySelector("tp-listof")?.textContent;
+	expect(text).toContain("Original A");
+	expect(text).toContain("Original B");
+	expect(text).toContain("Missing original");
+});

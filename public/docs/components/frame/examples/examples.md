@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-frame" allow-script }
+::::: tp-markdown-viewer { label="tp-frame" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-frame { aspect-ratio="16:9" style="max-width: 24rem;" }

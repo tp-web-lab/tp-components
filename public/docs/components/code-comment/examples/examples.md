@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-code-comment" allow-script }
+:::::: tp-markdown-viewer { label="tp-code-comment" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-code-editor { id="commented-function" language="typescript" }
@@ -12,7 +12,6 @@ function f(x: number): number {
 
 ::: tp-code-comment { for="commented-function" }
 1. Positive values are doubled.
-
 2. Zero and negative values are multiplied by four.
 :::
 ```

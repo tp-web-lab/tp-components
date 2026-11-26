@@ -269,7 +269,8 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 		event.preventDefault();
 	};
 
-	private advanceProgress(): boolean {
+	/** Reveals the next fragment or opens the next slide; returns whether navigation advanced. */
+	public advanceProgress(): boolean {
 		const step = this.progressSteps[this.progressIndex];
 		if (step !== undefined) {
 			for (const element of this.progressElements) {
@@ -284,7 +285,8 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 		return this.goToRelativeSlide(1);
 	}
 
-	private rewindProgress(): boolean {
+	/** Hides the last revealed fragment or opens the previous slide; returns whether navigation moved. */
+	public rewindProgress(): boolean {
 		if (this.progressIndex > 0) {
 			this.progressIndex -= 1;
 			const step = this.progressSteps[this.progressIndex];
@@ -531,9 +533,7 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 			menu.addEventListener("tp-menu-item-select", (event) => {
 				const item = (event as CustomEvent<{ item: HTMLElement }>).detail.item;
 				if (item.dataset.action === "toggle-note") {
-					this.querySelector(
-						".tp-markup-multi-pages-content tp-slide-note",
-					)?.toggleAttribute("open");
+					this.toggleNote();
 				} else if (item.dataset.mode === "manual") this.auto = "";
 				else if (
 					item.dataset.mode === "notes" ||
@@ -670,6 +670,13 @@ export class TpMarkupMultiSlides extends TpMarkupMultiPages {
 		counter.setAttribute("aria-live", "polite");
 		counter.textContent = `${index + 1} / ${total}`;
 		return counter;
+	}
+
+	/** Shows or hides the note for the current slide. */
+	toggleNote(): void {
+		this.querySelector(
+			".tp-markup-multi-pages-content tp-slide-note",
+		)?.toggleAttribute("open");
 	}
 }
 

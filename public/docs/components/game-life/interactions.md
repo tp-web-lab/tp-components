@@ -7,10 +7,10 @@
 | Using the component | Toggle cells to prepare a pattern. |
 | Using the component | Step advances one generation; Play starts continuous evolution and changes to Pause. |
 | Using the component | Reset restores the starting state. |
-| Play / Pause | Starts or pauses the simulation. |
-| Step | Advances the simulation by one generation. |
-| Reset | Restores the initial pattern. |
-| Download | Saves the current pattern as a file. |
+| <!-- button --> Play / Pause | Starts or pauses the simulation. |
+| <!-- button --> Step | Advances the simulation by one generation. |
+| <!-- button --> Reset | Restores the initial pattern. |
+| <!-- button --> Download | Saves the current pattern as a file. |
 
 #### Keyboard interactions
 

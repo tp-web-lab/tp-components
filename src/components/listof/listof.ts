@@ -1,3 +1,4 @@
+import { navigateDocumentAnchor } from "../../utilities/document-history.js";
 // tp-docgen:dependencies:start
 /**
  * @tp-dependency tp-base
@@ -5,21 +6,27 @@
  */
 /**
  * @tp-dependency tp-biblio
- * @summary Defines a bibliography entry referenced by tp-ref.
+ * @summary Defines a hidden bibliography entry for reference tooltips and generated lists.
  */
 /**
  * @tp-dependency tp-glossary
- * @summary Defines a glossary entry referenced by tp-ref.
+ * @summary Defines a hidden glossary entry for reference tooltips and generated lists.
+ */
+/**
+ * @tp-dependency tp-index
+ * @summary Defines an alphabetical index entry with optional descriptive content and links to its occurrences.
  */
 /**
  * @tp-dependency tp-note
- * @summary Defines an HTML note referenced by tp-ref.
+ * @summary Defines a hidden HTML note for reference tooltips and generated lists.
  */
 // tp-docgen:dependencies:end
 
 import "../note/note.js";
 import "../biblio/biblio.js";
 import "../glossary/glossary.js";
+import "../index/index.js";
+import { indexList, indexName } from "../../utilities/index-references.js";
 import {
 	noteNumbers,
 	observeReferences,
@@ -37,23 +44,32 @@ import style from "./listof.css?inline";
  * @summary Builds a list of reference entries or links to labelled document elements.
  * @tagname tp-listof
  * @attr {string} selector = "" - CSS selector for reference definitions or elements with a title, label or caption.
+ * @attr {string} index = "default" - Selects the named index when listing tp-index entries.
+ * @attr {boolean} intoc = false - Includes the index heading in the table of contents when exporting to native LaTeX.
+ * @attr {string} title = "" - Index heading; defaults to Index for tp-index lists.
  * @keyboard {Enter} Follows the focused list link.
+ *  @accessibility Renders notes as a native ordered list, bibliography and glossary entries as description lists, and other matched elements as labelled anchor links in an unordered list.
+ * @accessibility Generated links retain native keyboard activation; an empty generated list is hidden.
+ * @accessibilityresponsibility Choose a selector that identifies meaningful targets and supply descriptive target labels. Ensure copied definition content, links and media are accessible in the generated list.
  * @example
  * <div data-tp-reference-scope="">
  *   <tp-listof selector="figure"></tp-listof>
  *   <figure><p>A diagram of the water cycle.</p><figcaption>The water cycle</figcaption></figure>
  *   <figure><p>A diagram of a food chain.</p><figcaption>A food chain</figcaption></figure>
  * </div>
- *  @accessibility Renders notes as a native ordered list, bibliography and glossary entries as description lists, and other matched elements as labelled anchor links in an unordered list.
- * @accessibility Generated links retain native keyboard activation; an empty generated list is hidden.
- * @accessibilityresponsibility Choose a selector that identifies meaningful targets and supply descriptive target labels. Ensure copied definition content, links and media are accessible in the generated list.
  */
 export class TpListof extends TpBase {
 	private unsubscribe: (() => void) | null = null;
 	private output: HTMLDivElement | null = null;
 	private signature = "";
 	public static get observedAttributes(): string[] {
-		return ["selector"];
+		return ["selector", "index", "title"];
+	}
+	public get index(): string {
+		return this.getAttribute("index") || "default";
+	}
+	public set index(value: string) {
+		this.setAttribute("index", value);
 	}
 	public get selector(): string {
 		return this.getAttribute("selector") ?? "";
@@ -100,14 +116,32 @@ export class TpListof extends TpBase {
 					e !== this && !e.contains(this) && !e.matches("tp-listof, tp-ref"),
 			)
 			.map((element) => ({ element, label: referenceLabel(element) }))
-			.filter((e) => e.label)
+			.filter(
+				(e) =>
+					e.label &&
+					(e.element.localName !== "tp-index" ||
+						indexName(e.element) === indexName(this)),
+			)
 			.map((e) => ({
 				...e,
 				id: referenceId(e.element),
-				definition: e.element.matches("tp-note, tp-biblio, tp-glossary"),
+				definition: e.element.matches(
+					"tp-note, tp-biblio, tp-glossary, tp-index",
+				),
 			}));
 		const numbers = noteNumbers(referenceScope(this));
-		const signature = JSON.stringify(
+		const indexReferences = referenceElements(
+			referenceScope(this),
+			'tp-ref[href^="!"]',
+		).filter((e) => !e.closest("tp-index,tp-note,tp-biblio,tp-glossary"));
+		const signature = JSON.stringify([
+			this.getAttribute("title"),
+			this.getAttribute("index"),
+			indexReferences.map((e) => [
+				referenceId(e),
+				e.getAttribute("href"),
+				indexName(e),
+			]),
 			entries.map((e) => [
 				e.id,
 				e.element.localName,
@@ -115,11 +149,27 @@ export class TpListof extends TpBase {
 				numbers.get(e.element.getAttribute("ref") ?? ""),
 				e.label,
 				e.definition ? e.element.innerHTML : "",
+				["label", "sort-key", "parent", "index", "see", "see-also"].map(
+					(name) => e.element.getAttribute(name),
+				),
 			]),
-		);
+		]);
 		if (signature === this.signature) return;
 		this.signature = signature;
 		const groups: HTMLElement[] = [];
+		const indexes = entries.filter((e) => e.element.localName === "tp-index");
+		if (indexes.length || this.selector.trim() === "tp-index") {
+			const heading = document.createElement("h2");
+			heading.textContent = this.getAttribute("title") || "Index";
+			groups.push(
+				heading,
+				indexList(
+					indexes.map((e) => e.element),
+					indexReferences,
+					this,
+				),
+			);
+		}
 		const notes = entries.filter((e) => e.element.localName === "tp-note");
 		if (notes.length) {
 			notes.sort(
@@ -131,6 +181,7 @@ export class TpListof extends TpBase {
 			list.className = "tp-listof-notes";
 			for (const entry of notes) {
 				const item = document.createElement("li");
+				item.dataset.tpNoteRef = entry.element.getAttribute("ref") ?? "";
 				const number = numbers.get(entry.element.getAttribute("ref") ?? "");
 				if (number !== undefined) item.value = number;
 				item.append(referenceContent(entry.element));
@@ -147,7 +198,9 @@ export class TpListof extends TpBase {
 				(e) => e.element.localName === `tp-${kind}`,
 			);
 			const term = (entry: (typeof entries)[number]) =>
-				entry.element.getAttribute("ref") || entry.label;
+				(kind === "biblio" ? entry.element.getAttribute("label") : null) ||
+				entry.element.getAttribute("ref") ||
+				entry.label;
 			definitions.sort((a, b) => collator.compare(term(a), term(b)));
 			if (!definitions.length) continue;
 			const list = document.createElement("dl");
@@ -182,9 +235,10 @@ export class TpListof extends TpBase {
 					)
 						return;
 					event.preventDefault();
-					const view = this.ownerDocument.defaultView;
-					if (view) view.location.hash = link.getAttribute("href") ?? "";
-					entry.element.scrollIntoView?.({ block: "start" });
+					navigateDocumentAnchor(
+						entry.element,
+						link.getAttribute("href") ?? "",
+					);
 				});
 				link.textContent = entry.label;
 				item.append(link);

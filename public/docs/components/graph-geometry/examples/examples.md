@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-graph-geometry" allow-script }
+:::::: tp-markdown-viewer { label="tp-graph-geometry" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-graph-geometry

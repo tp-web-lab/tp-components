@@ -13,9 +13,8 @@ Right-click this button
 
 [tp-contextmenu%outside-click,anchor="#intro-contextmenu-trigger"]
 ====
-* /#/components/button/index.md[Buttons]
-
-* /#/components/tree/index.md[Trees]
+* link:/#/components/button/index.md[Buttons]
+* link:/#/components/tree/index.md[Trees]
 ====
 
 [p%data-demo-status,role="status"]

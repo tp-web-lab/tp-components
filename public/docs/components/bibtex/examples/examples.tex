@@ -1,0 +1,79 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpBibtex[src=/docs/components/bibtex/examples/books.bib]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/bibtex/bibtex.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-bibtex");
+element1.setAttribute("src", "/docs/components/bibtex/examples/books.bib");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example BibTeX script
+\documentclass{article}
+\begin{document}
+\wcTpBibtex{
+  \wcScript[type=tp/bibtex]|
+@book{knuth1984,
+  author = {Donald E. Knuth},
+  title = {The \TeX book},
+  publisher = {Addison-Wesley},
+  year = {1984}
+}
+  |
+}
+\end{document}
+
+% !tp-example LaTeX bibliography
+\documentclass{article}
+\begin{document}
+\wcTpBibtex[src=/docs/components/bibtex/examples/books.bib,out=latex]{}
+\end{document}
+
+% !tp-example CSL-JSON input
+\documentclass{article}
+\begin{document}
+\wcTpBibtex[in=clsjson,out=tp-biblio]{
+  \wcScript[type=tp/clsjson]|
+[
+  {
+    "id": "lamport1994",
+    "type": "book",
+    "author": [
+      {
+        "given": "Leslie",
+        "family": "Lamport"
+      }
+    ],
+    "title": "LaTeX: A Document Preparation System",
+    "edition": "2",
+    "publisher": "Addison-Wesley",
+    "issued": {
+      "date-parts": [
+        [
+          1994
+        ]
+      ]
+    }
+  }
+]
+  |
+}
+\end{document}
+
+% !tp-example CSL-JSON to LaTeX
+\documentclass{article}
+\begin{document}
+\wcTpBibtex[src=/docs/components/bibtex/examples/books.json,in=clsjson,out=latex]{}
+\end{document}

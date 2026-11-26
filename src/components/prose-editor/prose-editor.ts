@@ -1,4 +1,6 @@
 import { reportToolLoaded } from "@tp/tp-utilities";
+import { htmlToMarkup } from "../../utilities/markup-conversion.js";
+import { chooseSaveTarget, saveBlob } from "../../utilities/save-file.js";
 /**
  * @module components/prose-editor
  * @summary ProseMirror-based rich text editor component.
@@ -72,6 +74,10 @@ import { reportToolLoaded } from "@tp/tp-utilities";
 /**
  * @tp-dependency tp-toolbar
  * @summary Sticky toolbar with start / center / end sections,
+ */
+/**
+ * @credit tp-latex https://www.npmjs.com/package/@tp/tp-latex
+ * @summary LaTeX.js conversion and patched TikZJax assets.
  */
 /**
  * @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
@@ -157,8 +163,11 @@ import "../symbol-picker/symbol-picker.js";
 import { renderRestructuredTextInto } from "../restructuredtext/restructuredtext.js";
 import "../theme/theme.js";
 import "../toolbar/toolbar.js";
-import { loadUsedTpComponents } from "../../tp-loader.js";
 import { getLanguageFromFilename } from "../../utilities/code.js";
+import {
+	collectTpComponentTags,
+	importTpComponentsIn,
+} from "../../utilities/component-imports.js";
 import { formatHtmlForDisplay } from "../../utilities/html-code.js";
 import { resolveComponentSourceUrl } from "../../utilities/source-url.js";
 import {
@@ -1166,7 +1175,6 @@ const schema = new Schema({
 	}),
 });
 
-const TP_LOADER_SCRIPT = '<script type="module" src="./tp-loader.js"></script>';
 const MARKDOWN_RENDER_TIMEOUT = 1500;
 
 function escapeHtml(value: string): string {
@@ -1235,6 +1243,7 @@ type TpProseEditorCommand =
 	| "insert-markdown-block"
 	| "insert-markup-asciidoc"
 	| "insert-markup-html"
+	| "insert-markup-latex"
 	| "insert-markup-markdown"
 	| "insert-markup-restructuredtext"
 	| "insert-image"
@@ -1253,6 +1262,8 @@ type TpProseEditorCommand =
 	| "insert-table"
 	| "format"
 	| "import-markdown"
+	| `import-${MarkupBlockLanguage}`
+	| `export-${MarkupBlockLanguage}`
 	| "redo"
 	| "search"
 	| "undo";
@@ -1294,14 +1305,58 @@ type MediaAttributes = MediaBooleanAttributes & {
 };
 
 type MarkdownBlockViewMode = "both" | "source" | "preview";
-type MarkupBlockLanguage =
+export type MarkupBlockLanguage =
 	| "asciidoc"
 	| "html"
+	| "latex"
 	| "markdown"
 	| "restructuredtext";
 
+const proseMarkupFormats = [
+	{
+		language: "asciidoc",
+		label: "AsciiDoc",
+		extension: "adoc",
+		accept: ".adoc,.asciidoc",
+		icon: "file_type_asciidoc",
+	},
+	{
+		language: "html",
+		label: "HTML",
+		extension: "html",
+		accept: ".html,.htm",
+		icon: "file_type_html",
+	},
+	{
+		language: "latex",
+		label: "LaTeX",
+		extension: "tex",
+		accept: ".tex,.latex",
+		icon: "file_type_latex",
+	},
+	{
+		language: "markdown",
+		label: "Markdown",
+		extension: "md",
+		accept: ".md,.markdown",
+		icon: "file_type_markdown",
+	},
+	{
+		language: "restructuredtext",
+		label: "reStructuredText",
+		extension: "rst",
+		accept: ".rst,.rest",
+		icon: "file_type_restructuredtext",
+	},
+] as const;
+
 function normalizeMarkupBlockLanguage(value: unknown): MarkupBlockLanguage {
-	if (value === "asciidoc" || value === "html" || value === "restructuredtext")
+	if (
+		value === "asciidoc" ||
+		value === "html" ||
+		value === "latex" ||
+		value === "restructuredtext"
+	)
 		return value;
 	return "markdown";
 }
@@ -1323,18 +1378,20 @@ function normalizeMarkdownBlockViewMode(value: unknown): MarkdownBlockViewMode {
  * @attr {boolean} readonly = false - Prevents the user from editing the prose.
  * @attr {string} src = "" - URL of an external document loaded into the editor.
  * @attr {string} value = "" - Initial HTML content of the editor.
+ *  @event tp-prose-editor-input Emitted after an editing transaction or editor command updates the document. value contains the current HTML serialization.
+ * @eventdetail tp-prose-editor-input { value: string }
+ * @event tp-prose-editor-change Emitted immediately after tp-prose-editor-input for the same edit; it does not wait for blur. value contains the current HTML serialization.
+ * @eventdetail tp-prose-editor-change { value: string }
  * @example
  * <tp-prose-editor>
  *   <h2>A short editable document</h2>
  *   <p>Select a word and use the toolbar to change its <strong>formatting</strong>.</p>
  *   <ul><li>Write a draft</li><li>Review the content</li></ul>
  * </tp-prose-editor>
- *  @event tp-prose-editor-input Emitted after an editing transaction or editor command updates the document. value contains the current HTML serialization.
- * @eventdetail tp-prose-editor-input { value: string }
- * @event tp-prose-editor-change Emitted immediately after tp-prose-editor-input for the same edit; it does not wait for blur. value contains the current HTML serialization.
- * @eventdetail tp-prose-editor-change { value: string }
  */
 export class TpProseEditor extends TpBase {
+	private toggleToolbarAction: () => void | Promise<void> = () => {};
+
 	private static readonly styleId = "tp-prose-editor-styles";
 	private static nextId = 0;
 
@@ -1509,6 +1566,54 @@ export class TpProseEditor extends TpBase {
 		}
 
 		this.editorView?.focus();
+	}
+
+	/** Converts the document to one of the five markup languages, preferring native syntax. */
+	public async getMarkup(
+		language: MarkupBlockLanguage = "html",
+	): Promise<string> {
+		if (!proseMarkupFormats.some((format) => format.language === language))
+			throw new TypeError("Unsupported markup language");
+		if (language === "html") return this.getHTML();
+		const root = document.createElement("div");
+		if (this.editorView && !this.htmlMode && !this.htmlRenderMode)
+			root.append(
+				DOMSerializer.fromSchema(schema).serializeFragment(
+					this.editorView.state.doc.content,
+				),
+			);
+		else root.innerHTML = this.getHTML();
+		for (const block of root.querySelectorAll<HTMLElement>(
+			"[data-tp-prose-editor-markdown-block]",
+		)) {
+			const rendered = document.createElement("div");
+			await this.renderMarkupInto(
+				block.dataset.markdown ?? "",
+				normalizeMarkupBlockLanguage(block.dataset.language),
+				rendered,
+			);
+			block.replaceWith(...rendered.childNodes);
+		}
+		return htmlToMarkup(root.innerHTML, language);
+	}
+	/** Saves the document in the requested markup language. */
+	async downloadMarkup(language: MarkupBlockLanguage): Promise<void> {
+		const format = proseMarkupFormats.find(
+			(format) => format.language === language,
+		);
+		if (!format) return;
+		const target = await chooseSaveTarget({
+			suggestedName: `prose-editor.${format.extension}`,
+			extension: `.${format.extension}`,
+			mimeType: "text/plain",
+			description: format.label,
+		});
+		if (!target) return;
+		const source = await this.getMarkup(language);
+		await saveBlob(
+			new Blob([source], { type: "text/plain;charset=utf-8" }),
+			target,
+		);
 	}
 
 	/**
@@ -1712,16 +1817,17 @@ export class TpProseEditor extends TpBase {
 		toolbar.dataset.tpProseEditorToolbar = "";
 		toolbar.setAttribute("placement", "top");
 		toolbar.innerHTML = `
+      <tp-icon-button section="start" name="menu" label="${this.hasAttribute("data-toolbar-collapsed") ? "Restore toolbar" : "Minimize toolbar"}" data-toolbar-toggle aria-expanded="${!this.hasAttribute("data-toolbar-collapsed")}" data-help-description="Minimize or restore all editing tools."></tp-icon-button>
       <tp-icon-button section="start" id="${this.fileButtonId}" name="file" label="Files" data-command="files" aria-haspopup="menu" aria-expanded="false"></tp-icon-button>
       <tp-dropdown section="start" data-tp-prose-editor-file-dropdown anchor="#${this.fileButtonId}" placement="bottom" offset="4px" outside-click>
         <tp-menu data-tp-prose-editor-file-menu>
           <ul>
-            ${menuItem("file-download", "Load HTML", 'data-file-action="load-html"')}
-            <li data-tp-menu-divider aria-disabled="true"></li>
-            ${menuItem("file-import", "Import Markdown", 'data-file-action="import-markdown"')}
-            <li data-tp-menu-divider aria-disabled="true"></li>
-            ${menuItem("file-upload", "Save HTML", 'data-file-action="save-html"')}
-            ${menuItem("file-upload-as", "Save HTML as", 'data-file-action="save-html-as"')}
+            <li>${menuLabel("file-import", "Import")}<ul>
+              ${proseMarkupFormats.map((format) => menuItem(format.icon, format.label, `data-file-action="${format.language === "html" ? "load-html" : `import-${format.language}`}"`, "languages")).join("")}
+            </ul></li>
+            <li>${menuLabel("file-upload-as", "Export as")}<ul>
+              ${proseMarkupFormats.map((format) => menuItem(format.icon, format.label, `data-file-action="${format.language === "html" ? "save-html-as" : `export-${format.language}`}"`, "languages")).join("")}
+            </ul></li>
           </ul>
         </tp-menu>
       </tp-dropdown>
@@ -1744,6 +1850,7 @@ export class TpProseEditor extends TpBase {
               <ul>
                 ${menuItem("file_type_asciidoc", "AsciiDoc", 'data-menu-command="insert-markup-asciidoc"', "languages")}
                 ${menuItem("file_type_html", "HTML", 'data-menu-command="insert-markup-html"', "languages")}
+                ${menuItem("file_type_latex", "LaTeX", 'data-menu-command="insert-markup-latex"', "languages")}
                 ${menuItem("file_type_markdown", "Markdown", 'data-menu-command="insert-markup-markdown"', "languages")}
                 ${menuItem("file_type_restructuredtext", "reStructuredText", 'data-menu-command="insert-markup-restructuredtext"', "languages")}
               </ul>
@@ -1892,6 +1999,26 @@ export class TpProseEditor extends TpBase {
       <tp-icon-button section="end" name="function" label="Math" data-command="format-math"></tp-icon-button>
       <tp-icon-button section="end" name="link" label="Link" data-command="link"></tp-icon-button>
     `;
+		this.toggleToolbarAction = () => {
+			const collapsed = this.toggleAttribute("data-toolbar-collapsed");
+			const toggle = toolbar.querySelector("[data-toolbar-toggle]");
+			toggle?.setAttribute(
+				"label",
+				collapsed ? "Restore toolbar" : "Minimize toolbar",
+			);
+			toggle?.setAttribute("aria-expanded", String(!collapsed));
+			if (collapsed) {
+				for (const dropdown of this.querySelectorAll<TpDropdownElement>(
+					"tp-dropdown",
+				))
+					dropdown.hide();
+			}
+		};
+		toolbar
+			.querySelector("[data-toolbar-toggle]")
+			?.addEventListener("click", () => {
+				void this.toggleToolbar();
+			});
 		toolbar.addEventListener("mousedown", this.handleToolbarMouseDown);
 		secondaryToolbar.addEventListener("mousedown", this.handleToolbarMouseDown);
 		toolbar.addEventListener("click", this.handleToolbarClick);
@@ -2310,6 +2437,24 @@ export class TpProseEditor extends TpBase {
 		language: MarkupBlockLanguage,
 		root: HTMLElement,
 	): Promise<void> {
+		if (language === "latex") {
+			await import("../latex/latex.js");
+			const { renderLatexToFragment } = await import("@tp/tp-latex");
+			root.classList.add("tp-latex-output");
+			root.replaceChildren(renderLatexToFragment(source));
+			for (const [selector, tag] of [
+				["span.bf", "strong"],
+				["span.it", "em"],
+				["span.tt", "code"],
+			] as const) {
+				for (const span of root.querySelectorAll(selector)) {
+					const replacement = document.createElement(tag);
+					replacement.append(...span.childNodes);
+					span.replaceWith(replacement);
+				}
+			}
+			return;
+		}
 		if (language === "html") {
 			root.innerHTML = source;
 			return;
@@ -2557,12 +2702,14 @@ export class TpProseEditor extends TpBase {
 		}
 	}
 
-	private loadRenderedTpComponents(): void {
-		if (this.surfaceElement === null) {
+	private loadRenderedTpComponents(
+		root: ParentNode | null = this.surfaceElement,
+	): void {
+		if (root === null) {
 			return;
 		}
 
-		void loadUsedTpComponents(this.surfaceElement).catch((error: unknown) => {
+		void importTpComponentsIn(root).catch((error: unknown) => {
 			console.error("Unable to load tp components in prose editor", error);
 		});
 	}
@@ -2577,7 +2724,7 @@ export class TpProseEditor extends TpBase {
 
 	private async refreshRenderedHTML(root: HTMLElement): Promise<void> {
 		try {
-			await loadUsedTpComponents(root);
+			await importTpComponentsIn(root);
 			await this.waitForRenderedMarkdownElements(root);
 			await renderMarkdownRuntimeIn(root, "/tp-prose-editor-html-render.md");
 			await this.renderMathElements(root);
@@ -3210,7 +3357,9 @@ export class TpProseEditor extends TpBase {
 					? "AsciiDoc"
 					: language === "html"
 						? "HTML"
-						: "Markdown";
+						: language === "latex"
+							? "LaTeX"
+							: "Markdown";
 
 		dom.dataset.tpProseEditorMarkdownBlockEditor = "";
 		header.dataset.tpProseEditorMarkdownBlockHeader = "";
@@ -3247,6 +3396,7 @@ export class TpProseEditor extends TpBase {
 		editor.setValue(String(node.attrs.markdown));
 		preview.dataset.tpProseEditorMarkdownPreview = "";
 		preview.innerHTML = String(node.attrs.html);
+		this.loadRenderedTpComponents(preview);
 		dom.append(header, editor, preview);
 
 		const updateMarkdownBlockAttributes = (attrs: {
@@ -3321,6 +3471,7 @@ export class TpProseEditor extends TpBase {
 
 					const html = this.serializeRenderedElement(previewRoot);
 					preview.innerHTML = html;
+					this.loadRenderedTpComponents(preview);
 
 					updateMarkdownBlockAttributes({
 						html,
@@ -3338,7 +3489,14 @@ export class TpProseEditor extends TpBase {
 		};
 
 		const handleInput = (): void => {
-			renderMarkupBlock(editor.getValue());
+			const source = editor.getValue();
+			updateMarkdownBlockAttributes({
+				html: String(currentNode.attrs.html),
+				language,
+				markdown: source,
+				view: viewMode,
+			});
+			renderMarkupBlock(source);
 		};
 
 		const handleModeMouseDown = (event: MouseEvent): void => {
@@ -3410,6 +3568,7 @@ export class TpProseEditor extends TpBase {
 
 				if (preview.innerHTML !== html) {
 					preview.innerHTML = html;
+					this.loadRenderedTpComponents(preview);
 				}
 
 				editor.readonly = this.readonly;
@@ -3430,7 +3589,7 @@ export class TpProseEditor extends TpBase {
 		dom.contentEditable = "false";
 		dom.dataset.tpProseEditorCustomElement = "";
 
-		void loadUsedTpComponents(dom).catch((error: unknown) => {
+		void importTpComponentsIn(dom).catch((error: unknown) => {
 			console.error("Unable to load tp component node view", error);
 		});
 
@@ -3658,6 +3817,12 @@ export class TpProseEditor extends TpBase {
 	};
 
 	private runCommand(command: TpProseEditorCommand): void {
+		if (
+			this.querySelector(
+				`tp-icon-button[data-command="${command}"]`,
+			)?.hasAttribute("disabled")
+		)
+			return;
 		if (this.editorView === null) {
 			return;
 		}
@@ -3703,6 +3868,7 @@ export class TpProseEditor extends TpBase {
 			"insert-markdown-block": this.insertMarkdownBlock,
 			"insert-markup-asciidoc": this.insertMarkupBlock("asciidoc"),
 			"insert-markup-html": this.insertMarkupBlock("html"),
+			"insert-markup-latex": this.insertMarkupBlock("latex"),
 			"insert-markup-markdown": this.insertMarkupBlock("markdown"),
 			"insert-markup-restructuredtext":
 				this.insertMarkupBlock("restructuredtext"),
@@ -3714,6 +3880,7 @@ export class TpProseEditor extends TpBase {
 			undo,
 		};
 
+		if (this.readonly) return;
 		commandMap[command]?.(
 			this.editorView.state,
 			this.editorView.dispatch,
@@ -3825,6 +3992,32 @@ export class TpProseEditor extends TpBase {
 	};
 
 	private runFileAction(action: TpProseEditorCommand): void {
+		if (action.startsWith("import-")) {
+			const format = proseMarkupFormats.find(
+				(format) => action === `import-${format.language}`,
+			);
+			if (format && this.markdownFileInputElement) {
+				this.markdownFileInputElement.accept = format.accept;
+				this.markdownFileInputElement.dataset.importLanguage = format.language;
+				this.openFileInput(this.markdownFileInputElement);
+			}
+			return;
+		}
+		if (action.startsWith("export-")) {
+			const format = proseMarkupFormats.find(
+				(format) => action === `export-${format.language}`,
+			);
+			if (format)
+				void this.downloadMarkup(format.language).catch((error) =>
+					this.dispatchEvent(
+						new CustomEvent("tp-prose-editor-error", {
+							bubbles: true,
+							detail: { error },
+						}),
+					),
+				);
+			return;
+		}
 		switch (action) {
 			case "load-html":
 				this.htmlFileInputElement?.click();
@@ -3869,7 +4062,14 @@ export class TpProseEditor extends TpBase {
 	};
 
 	private handleMarkdownFileChange = (event: Event): void => {
-		void this.loadSelectedMarkdownFile(event);
+		void this.loadSelectedMarkdownFile(event).catch((error) =>
+			this.dispatchEvent(
+				new CustomEvent("tp-prose-editor-error", {
+					bubbles: true,
+					detail: { error },
+				}),
+			),
+		);
 	};
 
 	private handleImageFileChange = (event: Event): void => {
@@ -3918,7 +4118,8 @@ export class TpProseEditor extends TpBase {
 		this.syncDropdownButton("list", this.listDropdownElement);
 	private handleMediaDropdownToggle = (): void =>
 		this.syncDropdownButton("media", this.mediaDropdownElement);
-	private toggleSecondaryToolbar(): void {
+	/** Minimizes or restores the secondary toolbar. */
+	toggleSecondaryToolbar(): void {
 		if (this.secondaryToolbarElement === null) {
 			return;
 		}
@@ -3965,7 +4166,8 @@ export class TpProseEditor extends TpBase {
 		);
 	}
 
-	private clearSearch(): void {
+	/** Clears the search query and matches. */
+	clearSearch(): void {
 		if (this.searchInputElement === null) {
 			return;
 		}
@@ -4040,7 +4242,9 @@ export class TpProseEditor extends TpBase {
 		}
 	}
 
-	private addTableCaption(): boolean {
+	/** Adds or edits the selected table caption, respecting readonly mode. */
+	public addTableCaption(): boolean {
+		if (this.readonly) return false;
 		if (this.editorView === null) {
 			return false;
 		}
@@ -4230,7 +4434,8 @@ export class TpProseEditor extends TpBase {
 		return value;
 	}
 
-	private toggleSearch(): void {
+	/** Opens or closes search. */
+	toggleSearch(): void {
 		if (this.searchInputElement === null) {
 			return;
 		}
@@ -5143,7 +5348,8 @@ export class TpProseEditor extends TpBase {
 		}
 	}
 
-	private selectAllContent(): void {
+	/** Selects the complete editable document. */
+	selectAllContent(): void {
 		if (this.isSelectAllActive()) {
 			this.clearSelectAllContent();
 			return;
@@ -5229,7 +5435,9 @@ export class TpProseEditor extends TpBase {
 		this.iconPickerDropdownElement?.hide();
 	};
 
-	private insertInlineIcon(value: string): void {
+	/** Inserts an inline icon at the current selection. */
+	public insertInlineIcon(value: string): void {
+		if (this.readonly) return;
 		if (this.htmlMode && this.htmlSourceElement !== null) {
 			this.insertTextInHTMLSource(value);
 			return;
@@ -5252,7 +5460,9 @@ export class TpProseEditor extends TpBase {
 		this.editorView.focus();
 	}
 
-	private insertPickerText(value: string): void {
+	/** Inserts the selected symbol or emoji at the current selection. */
+	public insertPickerText(value: string): void {
+		if (this.readonly) return;
 		if (this.htmlMode && this.htmlSourceElement !== null) {
 			this.insertTextInHTMLSource(value);
 			return;
@@ -5429,7 +5639,11 @@ export class TpProseEditor extends TpBase {
 
 		const markdown = await file.text();
 		const markdownRoot = document.createElement("div");
-		await renderMarkdownInto(markdown, markdownRoot, file.name);
+		await this.renderMarkupInto(
+			markdown,
+			normalizeMarkupBlockLanguage(input.dataset.importLanguage),
+			markdownRoot,
+		);
 		const html = markdownRoot.innerHTML;
 		this.insertHTMLWithHistory(html);
 		input.value = "";
@@ -5864,8 +6078,9 @@ export class TpProseEditor extends TpBase {
 		});
 	}
 
-	private downloadHTMLAs(): void {
-		void this.saveTextFileAs(
+	/** Prompts for a destination and saves the current document as HTML. */
+	public async downloadHTMLAs(): Promise<void> {
+		await this.saveTextFileAs(
 			"prose-editor.html",
 			this.createHTMLDocument(),
 			"text/html;charset=utf-8",
@@ -5873,7 +6088,8 @@ export class TpProseEditor extends TpBase {
 		);
 	}
 
-	private downloadHTML(filename: string): void {
+	/** Downloads the current editor document as an HTML file. */
+	public downloadHTML(filename: string): void {
 		this.downloadTextFile(
 			filename,
 			this.createHTMLDocument(),
@@ -5968,6 +6184,28 @@ export class TpProseEditor extends TpBase {
 	}
 
 	private createHTMLDocument(): string {
+		const html = this.getHTML();
+		const template = document.createElement("template");
+		template.innerHTML = html;
+		const tags = new Set<string>();
+		const collect = (root: ParentNode): void => {
+			for (const tag of collectTpComponentTags(root)) tags.add(tag);
+			for (const nested of root.querySelectorAll("template"))
+				collect(nested.content);
+		};
+		collect(template.content);
+		const imports = [...tags]
+			.sort()
+			.map((tag) => {
+				const name = tag.slice(3);
+				return `import "./components/${name}/${name}.js";`;
+			})
+			.join("\n");
+		const componentScript = `<script type="module">
+import { ensureTpBaseStyles } from "./components/base/base.js";
+${imports}
+ensureTpBaseStyles();
+</script>`;
 		return `<!doctype html>
 <html lang="en">
 <head>
@@ -5976,8 +6214,8 @@ export class TpProseEditor extends TpBase {
   <title>prose-editor</title>
 </head>
 <body>
-${this.getHTML()}
-${TP_LOADER_SCRIPT}
+${html}
+${componentScript}
 </body>
 </html>
 `;
@@ -6001,6 +6239,221 @@ ${TP_LOADER_SCRIPT}
 				detail: { value },
 			}),
 		);
+	}
+
+	/** Applies the format bold action to the current editing selection. */
+	toggleBold(): void {
+		this.runCommand("format-bold");
+	}
+
+	/** Applies the format italic action to the current editing selection. */
+	toggleItalic(): void {
+		this.runCommand("format-italic");
+	}
+
+	/** Applies the format underline action to the current editing selection. */
+	toggleUnderline(): void {
+		this.runCommand("format-underline");
+	}
+
+	/** Applies the format strikethrough action to the current editing selection. */
+	toggleStrikethrough(): void {
+		this.runCommand("format-strikethrough");
+	}
+
+	/** Applies the format subscript action to the current editing selection. */
+	toggleSubscript(): void {
+		this.runCommand("format-subscript");
+	}
+
+	/** Applies the format superscript action to the current editing selection. */
+	toggleSuperscript(): void {
+		this.runCommand("format-superscript");
+	}
+
+	/** Applies the format code action to the current editing selection. */
+	toggleCode(): void {
+		this.runCommand("format-code");
+	}
+
+	/** Applies the format text action to the current editing selection. */
+	setParagraph(): void {
+		this.runCommand("format-text");
+	}
+
+	/** Applies the format code block action to the current editing selection. */
+	setCodeBlock(): void {
+		this.runCommand("format-code-block");
+	}
+
+	/** Applies the format quote open action to the current editing selection. */
+	wrapBlockquote(): void {
+		this.runCommand("format-quote-open");
+	}
+
+	/** Applies the format list bulleted action to the current editing selection. */
+	wrapUnorderedList(): void {
+		this.runCommand("format-list-bulleted");
+	}
+
+	/** Applies the format list numbered action to the current editing selection. */
+	wrapOrderedList(): void {
+		this.runCommand("format-list-numbered");
+	}
+
+	/** Applies the format list text action to the current editing selection. */
+	insertDefinitionListCommand(): void {
+		this.runCommand("format-list-text");
+	}
+
+	/** Applies the insert horizontal rule action to the current editing selection. */
+	insertHorizontalRuleCommand(): void {
+		this.runCommand("insert-horizontal-rule");
+	}
+
+	/** Applies the insert math block action to the current editing selection. */
+	insertMathBlockCommand(): void {
+		this.runCommand("insert-math-block");
+	}
+
+	/** Applies the format math action to the current editing selection. */
+	insertInlineMathCommand(): void {
+		this.runCommand("format-math");
+	}
+
+	/** Applies the insert image action to the current editing selection. */
+	openImageDialog(): void {
+		this.runCommand("insert-image");
+	}
+
+	/** Applies the insert video action to the current editing selection. */
+	openVideoDialog(): void {
+		this.runCommand("insert-video");
+	}
+
+	/** Applies the insert audio action to the current editing selection. */
+	openAudioDialog(): void {
+		this.runCommand("insert-audio");
+	}
+
+	/** Applies the link action to the current editing selection. */
+	editLink(): void {
+		this.runCommand("link");
+	}
+
+	/** Applies the undo action to the current editing selection. */
+	undo(): void {
+		this.runCommand("undo");
+	}
+
+	/** Applies the redo action to the current editing selection. */
+	redo(): void {
+		this.runCommand("redo");
+	}
+
+	/** Applies the files action to the current editing selection. */
+	openFiles(): void {
+		this.runCommand("files");
+	}
+
+	/** Applies the types action to the current editing selection. */
+	openTypes(): void {
+		this.runCommand("types");
+	}
+
+	/** Applies the format action to the current editing selection. */
+	openFormat(): void {
+		this.runCommand("format");
+	}
+
+	/** Applies the list action to the current editing selection. */
+	openLists(): void {
+		this.runCommand("list");
+	}
+
+	/** Applies the media action to the current editing selection. */
+	openMedia(): void {
+		this.runCommand("media");
+	}
+
+	/** Applies the emoji picker action to the current editing selection. */
+	openEmojiPicker(): void {
+		this.runCommand("emoji-picker");
+	}
+
+	/** Applies the icon picker action to the current editing selection. */
+	openIconPicker(): void {
+		this.runCommand("icon-picker");
+	}
+
+	/** Applies the symbol picker action to the current editing selection. */
+	openSymbolPicker(): void {
+		this.runCommand("symbol-picker");
+	}
+
+	/** Applies the html action to the current editing selection. */
+	toggleHtml(): void {
+		this.runCommand("html");
+	}
+
+	/** Copies the current selection. */
+	async copy(): Promise<void> {
+		await this.runClipboardCommand("copy");
+	}
+
+	/** Cuts the current selection when editing is allowed. */
+	async cut(): Promise<void> {
+		await this.runClipboardCommand("cut");
+	}
+
+	/** Pastes clipboard content at the current selection. */
+	async paste(): Promise<void> {
+		await this.runClipboardCommand("paste");
+	}
+
+	/** Applies or removes the requested heading level. */
+	setHeading(level: 1 | 2 | 3 | 4 | 5 | 6): void {
+		this.runCommand(`format-header-${level}`);
+	}
+
+	/** Inserts an editable block in the requested markup language. */
+	insertMarkup(language: MarkupBlockLanguage): void {
+		this.runCommand(`insert-markup-${language}`);
+	}
+
+	/** Opens the file chooser for the requested markup language. */
+	openImport(language: MarkupBlockLanguage): void {
+		if (!this.readonly) this.runFileAction(`import-${language}`);
+	}
+
+	/** Removes formatting from the current selection. */
+	clearSelectionFormatting(): void {
+		this.runCommand("format-clear");
+	}
+
+	/** Returns from the HTML preview to editing. */
+	showEditor(): void {
+		this.runHTMLAction("editor");
+	}
+
+	/** Shows the rendered HTML document. */
+	showRenderedHtml(): void {
+		this.runHTMLAction("render");
+	}
+
+	/** Shows the generated HTML source. */
+	showHtmlCode(): void {
+		this.runHTMLAction("code");
+	}
+
+	/** Minimizes or restores all editing tools without changing the document. */
+	async toggleToolbar(): Promise<void> {
+		await this.toggleToolbarAction();
+	}
+
+	/** Opens or closes the table insertion and editing menu. */
+	openTableMenu(): void {
+		this.runCommand("insert-table");
 	}
 }
 

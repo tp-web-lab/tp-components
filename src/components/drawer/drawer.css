@@ -160,7 +160,7 @@ tp-drawer > [data-tp-drawer-resize]:is(:hover, :focus-visible) {
 }
 
 tp-drawer > [data-tp-drawer-resize]:focus-visible {
-  outline: 2px solid var(--tp-brand-text-colorful);
+  outline: 2px solid var(--tp-brand-text-on-mid);
   outline-offset: -2px;
 }
 

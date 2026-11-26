@@ -6,6 +6,9 @@
 | --- | --- |
 | Notes summary | Expand or collapse the transcript and speech controls. Closing the panel keeps narration running. |
 | Speech controls | Use the text-to-speech component's Speak, Pause, Resume, Stop and voice settings. |
+| :tp-icon:{name="speakerphone-off" size="2em"} :tp-icon:{name="speakerphone" library="tp" size="2em"} Speak | Speak. |
+| :tp-icon:{name="settings" size="2em"} Text-to-speech controls | Text-to-speech controls. |
+| :tp-icon:{name="speakerphone" size="2em"} :tp-icon:{name="speakerphone-off" size="2em"} Stop | Stop. |
 
 #### Keyboard interactions
 

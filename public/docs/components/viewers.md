@@ -75,3 +75,15 @@ Viewer components render source content and expose tools for inspecting, editing
 ::::::
 
 <!-- family-introduction:end -->
+
+::: tp-center {intrinsic}
+:tp-icon:{name="scheme-viewer" library="components" size="4em"}
+
+[tp-scheme-viewer](scheme-viewer/index.md)
+:::
+
+::: tp-center {intrinsic}
+:tp-icon:{name="ocaml-viewer" library="components" size="4em"}
+
+[tp-ocaml-viewer](ocaml-viewer/index.md)
+:::

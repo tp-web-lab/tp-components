@@ -1,0 +1,171 @@
+{
+  "tagname": "tp-typescript",
+  "classname": "TpTypescript",
+  "superclass": "TpTraceableInterpreter",
+  "description": "Provides an interactive TypeScript interpreter.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-typescript query=\"square(7)\">\n  <script type=\"tp/typescript\">\n    function square(x: number): number {\n      return x * x;\n    }\n  </script>\n</tp-typescript>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "filename",
+      "description": "Source filename displayed in the toolbar and editor.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"program.ts\""
+    },
+    {
+      "name": "mode",
+      "description": "Presentation mode: default and lite show the normal interface; simple opens the editor and hides the header, welcome information and query action buttons.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "\"default\" | \"lite\" | \"simple\"",
+      "default": "\"default\""
+    },
+    {
+      "name": "query",
+      "description": "Initial command, restored by Reset.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "src",
+      "description": "External TypeScript source; takes precedence over value and an inline script.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "tracer",
+      "description": "Enables tracing the current source and query in a drawer initially 75% wide.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "value",
+      "description": "Initial program, evaluated when the session starts or resets.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "applySource(): Promise<void>",
+      "inherited": false,
+      "description": "Starts a fresh session with the edited source."
+    },
+    {
+      "name": "clear(): void",
+      "inherited": false,
+      "description": "Clears output while preserving variables and history."
+    },
+    {
+      "name": "getSource(): Promise<string>",
+      "inherited": true,
+      "description": "Returns the current program, including unsaved editor changes."
+    },
+    {
+      "name": "openTrace(): Promise<void>",
+      "inherited": false,
+      "description": "Opens the trace drawer when tracer is enabled."
+    },
+    {
+      "name": "reset(): Promise<void>",
+      "inherited": false,
+      "description": "Restores the original source and command in a fresh session."
+    },
+    {
+      "name": "run(code?: string): Promise<void>",
+      "inherited": false,
+      "description": "Executes a command, or the current prompt when omitted."
+    },
+    {
+      "name": "toggleSource(): Promise<void>",
+      "inherited": false,
+      "description": "Shows or hides the editable source."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-color",
+      "summary": "Brand color preset controller scoped to the containing element."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-textfield",
+      "summary": "Single-line and automatically growing multiline text field."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
+    },
+    {
+      "name": "tp-toolbar",
+      "summary": "Sticky toolbar with start / center / end sections,"
+    }
+  ],
+  "credits": [
+    {
+      "name": "TypeScript",
+      "url": "https://www.typescriptlang.org/",
+      "summary": "TypeScript transpilation and language services."
+    }
+  ],
+  "userHelp": {
+    "displayName": "TypeScript",
+    "introduction": "The custom `<tp-typescript>` element provides an interactive TypeScript interpreter.",
+    "interactions": "#### Mouse interactions\n\n| Action | Result |\n| --- | --- |\n| :tp-icon:{name=\"code\" size=\"2em\"} Edit source | Show or hide the source editor. |\n| :tp-icon:{name=\"typescript-tracer\" library=\"components\" size=\"2em\"} Trace execution | When enabled, record the current source and query in a drawer initially 75% wide without changing the interpreter session. |\n| :tp-icon:{name=\"play\" size=\"2em\"} Run | Reload changed source, then execute the query and display its result. Keep the session when the source is unchanged. |\n| :tp-icon:{name=\"delete-outline\" size=\"2em\"} Clear | Clear the transcript while retaining session variables. |\n| :tp-icon:{name=\"refresh\" size=\"2em\"} Reset | Restore the original program and initial command. |\n| :tp-icon:{name=\"palette\" size=\"2em\"} Color | Choose this interpreter's brand color. |\n| :tp-icon:{name=\"theme-light-dark\" size=\"2em\"} Theme | Change this interpreter's theme. |\n| :tp-icon:{name=\"fullscreen\" size=\"2em\"} Fullscreen | Enter or leave fullscreen. |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>ArrowUp</kbd> / <kbd>ArrowDown</kbd> | Recall previous commands or restore the current draft. |\n| <kbd>Tab</kbd> | Move between controls. |\n| <kbd>Return</kbd> or <kbd>Shift</kbd>+<kbd>Return</kbd> in the query field | Reload the program if its source changed, then run the current query. Keep the session if unchanged; retain the query text. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open contextual help for the component under the pointer, falling back to the focused component; Shift may be needed to type ?. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Open the component viewer. |",
+    "keyboard": [
+      {
+        "key": "Shift+Enter",
+        "description": "Reload changed source, then execute the current query from its input field."
+      },
+      {
+        "key": "Enter",
+        "description": "Reload changed source, then execute the current query from its input field."
+      },
+      {
+        "key": "ArrowUp / ArrowDown",
+        "description": "Recalls previous commands."
+      }
+    ]
+  }
+}

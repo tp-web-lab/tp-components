@@ -1,4 +1,4 @@
-<tp-html-viewer label="tp-sql-playground" allow-script>
+<tp-html-viewer label="tp-sql-playground" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
       <tp-box>
@@ -34,6 +34,10 @@
 
     <div role="example" label="Single source file">
       <tp-sql-playground src="/docs/components/_shared/single-source/example.sql"></tp-sql-playground>
+    </div>
+
+    <div role="example" label="SQL query tests">
+      <tp-sql-playground src="/docs/components/sql-playground/examples/framework-tests.json"></tp-sql-playground>
     </div>
   </template>
 </tp-html-viewer>

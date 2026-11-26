@@ -4,7 +4,7 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Palette button | Open the color choices for the associated content. |
+| :tp-icon:{name="palette-swatch" size="2em"} Palette button | Open the color choices for the associated content. |
 | Color choice | Apply the selected brand color. |
 
 #### Keyboard interactions

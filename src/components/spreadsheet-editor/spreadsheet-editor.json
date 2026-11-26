@@ -49,6 +49,36 @@
   ],
   "methods": [
     {
+      "name": "applyFormat(format: TpSpreadsheetCellFormat): void",
+      "inherited": false,
+      "description": "Applies a number or text format to selected cells."
+    },
+    {
+      "name": "clearActiveFormatting(): void",
+      "inherited": false,
+      "description": "Removes formatting from selected cells."
+    },
+    {
+      "name": "clearSelection(): void",
+      "inherited": false,
+      "description": "Clears the selected cells."
+    },
+    {
+      "name": "closeSearch(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the close search action for the selected cells."
+    },
+    {
+      "name": "copy(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the copy action for the selected cells."
+    },
+    {
+      "name": "cut(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the cut action for the selected cells."
+    },
+    {
       "name": "deleteColumn(): void",
       "inherited": false,
       "description": "Deletes the active column, adjusts selection, clears cell formatting and emits a structure-change event. Preserves the last remaining column."
@@ -84,9 +114,34 @@
       "description": "Inserts an empty row before or after the active cell, selects it, clears cell formatting and emits a structure-change event. Does nothing without a valid active cell."
     },
     {
+      "name": "openSearch(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the search action for the selected cells."
+    },
+    {
+      "name": "paste(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the paste action for the selected cells."
+    },
+    {
+      "name": "redo(): void",
+      "inherited": false,
+      "description": "Restores the next spreadsheet state."
+    },
+    {
       "name": "setData(value: readonly (readonly unknown[])[]): void",
       "inherited": false,
       "description": "Replaces the matrix, converts values to strings and pads missing cells with empty strings. Updates rows, columns and value, retaining at least one row and column."
+    },
+    {
+      "name": "toggleCellStyle(styleName: TpSpreadsheetCellStyle): void",
+      "inherited": false,
+      "description": "Toggles a style on selected cells."
+    },
+    {
+      "name": "undo(): void",
+      "inherited": false,
+      "description": "Restores the preceding spreadsheet state."
     }
   ],
   "events": [
@@ -143,7 +198,7 @@
     },
     {
       "name": "tp-formula-picker",
-      "summary": "Selects an Excel-compatible Formula.js function.  *"
+      "summary": "Browses and selects spreadsheet functions."
     },
     {
       "name": "tp-fullscreen",
@@ -181,7 +236,7 @@
   "userHelp": {
     "displayName": "Spreadsheet editor",
     "introduction": "The custom `<tp-spreadsheet-editor>` element provides an editable spreadsheet with Excel-style formulas, file import and export, cell selection and resizable columns.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Click a cell | Select the active cell and edit its content. The formula bar displays its raw value or formula. |\n| Shift + click a cell | Select the rectangle from the selection anchor to the clicked cell. A plain click starts a new selection. |\n| Clear selected cells | Clear selected values and formulas while preserving formatting. Undo restores the operation in one step. |\n| Drag the right edge of a column heading | Resize the column, with a minimum of 48 pixels and no upper limit. Wide sheets scroll horizontally; widths survive cell edits and formatting changes. |\n| Double-click a column resize handle | Restore the default width of 112 pixels. |\n| File → Import | Load a CSV, JSON or XLSX file. |\n| File → Export CSV / JSON / XLSX — formulas | Save the sheet with its raw formulas. |\n| File → Export CSV / JSON / XLSX — values | Save calculated results without changing formulas in the open sheet. |\n| Formula picker | Choose a function and replace the selected parameters in the formula bar. |\n| Format | Set General, Number, Currency, Percent or Date display for the active cell. |\n| Cell style | Toggle Bold, Italic, Underline or Strikethrough for the active cell. |\n| Clear formatting | Remove number and text formatting from the active cell. |\n| Table | Insert a row or column before or after the active cell, or delete its row or column. At least one row and column remain. |\n| Undo / Redo | Undo or redo cell edits, grouped clearing and structural changes. |\n| Copy / Cut / Paste | Use the system clipboard with the active cell. Copying shifts relative formula references when pasted; cutting preserves the formula. These actions operate on one cell, even when a range is selected. |\n| Search / Close search | Highlight matching cells, or clear the search and hide its field. |\n| Fullscreen | Toggle fullscreen for this spreadsheet. |\n| Color / Theme | Change the spreadsheet's local brand color or theme. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Left</kbd> / <kbd>Right</kbd> on a focused column resize handle | Decrease / increase column width by 8 pixels. Reach handles with <kbd>Tab</kbd>. |\n| <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>C</kbd> / <kbd>X</kbd> / <kbd>V</kbd> in a cell | Copy, cut or paste the active cell. Copying shifts relative formula references when pasted; cutting preserves them. |\n| <kbd>Shift</kbd> <kbd>+</kbd> <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Extend or shrink the rectangular selection. |\n| <kbd>Delete</kbd> / <kbd>Backspace</kbd> with multiple cells selected | Clear the selected cells in one undoable operation. With one cell selected, edit its text normally. |\n| <kbd>Escape</kbd> | Collapse the selection to the focused cell. |\n| Typing in a selected cell | Edit its value or enter a formula beginning with =. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Click a cell | Select the active cell and edit its content. The formula bar displays its raw value or formula. |\n| Shift + click a cell | Select the rectangle from the selection anchor to the clicked cell. A plain click starts a new selection. |\n| :tp-icon:{name=\"close\" size=\"2em\"} Clear selected cells | Clear selected values and formulas while preserving formatting. Undo restores the operation in one step. |\n| Drag the right edge of a column heading | Resize the column, with a minimum of 48 pixels and no upper limit. Wide sheets scroll horizontally; widths survive cell edits and formatting changes. |\n| Double-click a column resize handle | Restore the default width of 112 pixels. |\n| File → Import | Load a CSV, JSON or XLSX file. |\n| File → Export CSV / JSON / XLSX — formulas | Save the sheet with its raw formulas. |\n| File → Export CSV / JSON / XLSX — values | Save calculated results without changing formulas in the open sheet. |\n| Formula picker | Choose a function and replace the selected parameters in the formula bar. |\n| :tp-icon:{name=\"letter-f\" size=\"2em\"} Format | Set General, Number, Currency, Percent or Date display for the active cell. |\n| :tp-icon:{name=\"format-text\" size=\"2em\"} Cell style | Toggle Bold, Italic, Underline or Strikethrough for the active cell. |\n| :tp-icon:{name=\"format-clear\" size=\"2em\"} Clear formatting | Remove number and text formatting from the active cell. |\n| :tp-icon:{name=\"table\" size=\"2em\"} Table | Insert a row or column before or after the active cell, or delete its row or column. At least one row and column remain. |\n| :tp-icon:{name=\"redo\" size=\"2em\"} :tp-icon:{name=\"undo\" size=\"2em\"} Undo / Redo | Undo or redo cell edits, grouped clearing and structural changes. |\n| :tp-icon:{name=\"paste\" size=\"2em\"} :tp-icon:{name=\"cut\" size=\"2em\"} :tp-icon:{name=\"copy\" size=\"2em\"} Copy / Cut / Paste | Use the system clipboard with the active cell. Copying shifts relative formula references when pasted; cutting preserves the formula. These actions operate on one cell, even when a range is selected. |\n| :tp-icon:{name=\"close\" size=\"2em\"} :tp-icon:{name=\"search\" size=\"2em\"} Search / Close search | Highlight matching cells, or clear the search and hide its field. |\n| :tp-icon:{name=\"fullscreen\" size=\"2em\"} :tp-icon:{name=\"fullscreen-exit\" size=\"2em\"} Fullscreen | Toggle fullscreen for this spreadsheet. |\n| :tp-icon:{name=\"theme-light-dark\" size=\"2em\"} :tp-icon:{name=\"palette-swatch\" size=\"2em\"} Color / Theme | Change the spreadsheet's local brand color or theme. |\n| :tp-icon:{name=\"file\" size=\"2em\"} Files | Open file import and export options. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Left</kbd> / <kbd>Right</kbd> on a focused column resize handle | Decrease / increase column width by 8 pixels. Reach handles with <kbd>Tab</kbd>. |\n| <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>C</kbd> / <kbd>X</kbd> / <kbd>V</kbd> in a cell | Copy, cut or paste the active cell. Copying shifts relative formula references when pasted; cutting preserves them. |\n| <kbd>Shift</kbd> <kbd>+</kbd> <kbd>←</kbd>/<kbd>↑</kbd>/<kbd>→</kbd>/<kbd>↓</kbd> | Extend or shrink the rectangular selection. |\n| <kbd>Delete</kbd> / <kbd>Backspace</kbd> with multiple cells selected | Clear the selected cells in one undoable operation. With one cell selected, edit its text normally. |\n| <kbd>Escape</kbd> | Collapse the selection to the focused cell. |\n| Typing in a selected cell | Edit its value or enter a formula beginning with =. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

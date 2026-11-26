@@ -36,6 +36,11 @@ const textFontsURL = new URL(fontsAsset, import.meta.url).href;
  * @attr {string} libraries = "" - Comma-separated TikZ libraries to load before the drawing.
  * @attr {number} scale = "1" - Positive display scale for the complete drawing, constrained to the available width.
  * @attr {string} label = "TikZ drawing" - Accessible title for the drawing frame.
+ *  @event tp-tikz-rendered Emitted when the SVG drawing is ready.
+ * @eventdetail tp-tikz-rendered void
+ * @event tp-tikz-error Emitted when loading or compilation fails.
+ * @eventdetail tp-tikz-error { message: string }
+ * @see tp-latex - Render a complete LaTeX document containing TikZ figures.
  * @example
  * <tp-tikz scale="1.8" label="Linear, sine and exponential functions"><script type="tp/tikz">\begin{tikzpicture}[domain=0:4]
  *   \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
@@ -48,11 +53,6 @@ const textFontsURL = new URL(fontsAsset, import.meta.url).href;
  *   \draw[color=blue]   plot (\x,{sin(\x r)})    node[right] {$f(x) = \sin x$};
  *   \draw[color=orange] plot (\x,{0.05*exp(\x)}) node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
  * \end{tikzpicture}</script></tp-tikz>
- *  @event tp-tikz-rendered Emitted when the SVG drawing is ready.
- * @eventdetail tp-tikz-rendered void
- * @event tp-tikz-error Emitted when loading or compilation fails.
- * @eventdetail tp-tikz-error { message: string }
- * @see tp-latex - Render a complete LaTeX document containing TikZ figures.
  */
 export class TpTikz extends TpBase {
 	public static get observedAttributes(): string[] {
@@ -64,7 +64,7 @@ export class TpTikz extends TpBase {
 	private frame?: HTMLIFrameElement;
 	private timer?: ReturnType<typeof setTimeout>;
 	private source = "";
-	private readonly output = this.attachShadow({ mode: "open" });
+	private readonly output = document.createElement("div");
 	private readonly receive = (event: MessageEvent) => {
 		if (
 			!this.frame?.contentWindow ||
@@ -128,6 +128,17 @@ export class TpTikz extends TpBase {
 				this.textContent ??
 				"",
 		);
+		if (!this.output.isConnected) {
+			const source =
+				this.querySelector(":scope > [data-tp-tikz-source]") ||
+				document.createElement("div");
+			source.setAttribute("data-tp-tikz-source", "");
+			source.setAttribute("hidden", "");
+			for (const child of [...this.childNodes])
+				if (child !== source && child !== this.output) source.append(child);
+			this.output.setAttribute("data-tp-tikz-output", "");
+			this.append(source, this.output);
+		}
 		window.addEventListener("message", this.receive);
 		void this.render();
 	}

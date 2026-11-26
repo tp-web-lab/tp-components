@@ -7,7 +7,7 @@
 | Using the component | The introductory circuit is an RC low-pass filter driven by a square-wave voltage source. |
 | Using the component | Its named `Vin` and `Vout` measurement points are the oscilloscope channels. |
 | Measurement | Drag **Measurement** from the **Annotations** palette onto any wire, then give it a label to add another channel. |
-| Run transient analysis | Press **Run transient analysis** to refresh the oscilloscope. |
+| :tp-icon:{name="play" size="2em"} Run transient analysis | Press **Run transient analysis** to refresh the oscilloscope. |
 | Using the component | Wires merge connected terminals into electrical nodes, and every simulatable circuit needs a ground reference. |
 | Hub | A four-port **Hub** creates an electrical junction for clean branch layouts; all four ports share exactly the same potential. |
 | Using the component | The oscilloscope header provides independent time and voltage calibration controls. |
@@ -18,8 +18,34 @@
 | Links | The **Links** palette provides straight and orthogonal wires without arrowheads. |
 | Using the component | Analog self-links are rejected because a component terminal cannot be wired back to the same component through a single editor link. |
 | Hub | The **Hub** is the single four-way equipotential junction used to lay out branches. |
-| Open or close selected switch | A switch can be open or closed; select it and use **Open or close selected switch** in the lower toolbar. |
+| :tp-icon:{name="toggle-switch" size="2em"} Open or close selected switch | A switch can be open or closed; select it and use **Open or close selected switch** in the lower toolbar. |
 | Using the component | An open switch has a very high resistance, while a closed switch behaves as an ideal conductor. |
+| :tp-icon:{name="minus" size="2em"} Increase time per division | Increase time per division. |
+| :tp-icon:{name="plus" size="2em"} Decrease time per division | Decrease time per division. |
+| :tp-icon:{name="refresh" size="2em"} Reset oscilloscope calibration | Reset oscilloscope calibration. |
+| :tp-icon:{name="rotate-right" size="2em"} Rotate selected component | Rotate selected component. |
+| :tp-icon:{name="keyboard-f1" size="2em"} Toggle editor toolbar | Toggle editor toolbar. |
+| :tp-icon:{name="sync" size="2em"} Synchronize graph and JSON | Synchronize graph and JSON. |
+| :tp-icon:{name="arrow-expand-vertical" size="2em"} Expand all | Expand all. |
+| :tp-icon:{name="arrow-collapse-vertical" size="2em"} Collapse all | Collapse all. |
+| :tp-icon:{name="undo" size="2em"} Undo | Undo. |
+| :tp-icon:{name="redo" size="2em"} Redo | Redo. |
+| :tp-icon:{name="select" size="2em"} Select area | Select area. |
+| :tp-icon:{name="content-copy" size="2em"} Copy | Copy. |
+| :tp-icon:{name="content-cut" size="2em"} Cut | Cut. |
+| :tp-icon:{name="content-paste" size="2em"} Paste | Paste. |
+| :tp-icon:{name="text-short" size="2em"} Label | Label. |
+| :tp-icon:{name="format-title" size="2em"} Graph title | Graph title. |
+| :tp-icon:{name="magnify-minus-outline" size="2em"} Zoom out | Zoom out. |
+| :tp-icon:{name="magnify-plus-outline" size="2em"} Zoom in | Zoom in. |
+| :tp-icon:{name="grid" size="2em"} Show or hide grid | Show or hide grid. |
+| :tp-icon:{name="file-upload" size="2em"} Import JSON | Import JSON. |
+| :tp-icon:{name="file-download" size="2em"} Export JSON | Export JSON. |
+| :tp-icon:{name="language-json" size="2em"} Show or hide graph JSON | Show or hide graph JSON. |
+| :tp-icon:{name="palette-swatch" size="2em"} Color | Choose an accent color. |
+| :tp-icon:{name="theme-light-dark" size="2em"} Theme | Choose the light, dark or automatic theme. |
+| :tp-icon:{name="fullscreen" size="2em"} :tp-icon:{name="fullscreen-exit" size="2em"} Fullscreen | Enter or leave fullscreen. |
+| :tp-icon:{name="save-image" size="2em"} Save image | Save the content as an image. |
 
 #### Keyboard interactions
 

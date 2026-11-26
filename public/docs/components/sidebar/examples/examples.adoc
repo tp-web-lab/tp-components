@@ -1,34 +1,30 @@
 [tp-asciidoc-viewer%allow-script,label="tp-sidebar"]
-=========
+========
 [script,type="tp/asciidoc"]
 ----
 .Basic usage
-========
-[tp-sidebar,side-width="12rem",gap="1rem"]
 ======
-[tp-box]
+[tp-sidebar,side-width="12rem",gap="1rem"]
 =====
-[h3]
+[tp-box]
 ====
-Navigation
-====
+[discrete]
+=== Navigation
 
 Overview
 
 Examples
-=====
+====
 
 [tp-box]
-=====
-[h3]
 ====
-Main content
-====
+[discrete]
+=== Main content
 
 The sidebar stays beside this content while there is enough space.
+====
 =====
 ======
-========
 
 .Javascript API
 ======
@@ -77,4 +73,4 @@ document.body.append(example);
 ====
 ======
 ----
-=========
+========

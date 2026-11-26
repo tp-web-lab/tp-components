@@ -58,6 +58,16 @@
   ],
   "methods": [
     {
+      "name": "addBranch(node: HTMLLIElement): void",
+      "inherited": false,
+      "description": "Adds a branch inside a node when permitted, emitting the context-menu request events."
+    },
+    {
+      "name": "addLeaf(node: HTMLLIElement): void",
+      "inherited": false,
+      "description": "Adds a leaf inside a node when permitted, emitting the context-menu request events."
+    },
+    {
       "name": "beginRename(node: HTMLLIElement): void",
       "inherited": false,
       "description": "Starts inline rename for a tree node."
@@ -76,6 +86,16 @@
       "name": "collapseNode(item: HTMLLIElement): void",
       "inherited": false,
       "description": "Collapses a tree item that has children."
+    },
+    {
+      "name": "deleteNode(node: HTMLLIElement): void",
+      "inherited": false,
+      "description": "Deletes a node when permitted, emitting the context-menu request events."
+    },
+    {
+      "name": "duplicateNode(node: HTMLLIElement): void",
+      "inherited": false,
+      "description": "Duplicates a node when permitted, emitting the context-menu request events."
     },
     {
       "name": "expandAll(): void",
@@ -224,7 +244,7 @@
   "userHelp": {
     "displayName": "Tree",
     "introduction": "The custom `<tp-tree>` element provides an interactive hierarchical tree.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Expand or collapse branches to inspect nested items. |\n| Select | Select available links or entries to use the actions provided by the surrounding page. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | Expand or collapse branches to inspect nested items. |\n| Horizontal scrolling | Read long item labels without wrapping them onto multiple lines. |\n| Select | Select available links or entries to use the actions provided by the surrounding page. |\n| :tp-icon:{name=\"plus\" library=\"tp\" size=\"2em\"} / :tp-icon:{name=\"minus\" library=\"tp\" size=\"2em\"} Expand/Collapse branch | Expand a closed branch or collapse an open branch. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

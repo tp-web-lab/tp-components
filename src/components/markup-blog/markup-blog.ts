@@ -203,6 +203,7 @@ export class TpMarkupBlog extends TpBase {
 	private controller: AbortController | null = null;
 	private reflecting = false;
 	private lastArticle = "";
+	private pageCount = 1;
 	protected override connectedCallback(): void {
 		super.connectedCallback();
 		this.classList.add("tp-markup-blog");
@@ -419,7 +420,7 @@ export class TpMarkupBlog extends TpBase {
 				this.button(
 					"Back to articles",
 					"Return to the filtered article list and its current page.",
-					() => this.removeAttribute("article"),
+					() => this.showArticles(),
 				),
 			);
 			if (!article) {
@@ -492,6 +493,7 @@ export class TpMarkupBlog extends TpBase {
 		const sizeValue = Number(this.getAttribute("page-size") ?? 5);
 		const size = Number.isInteger(sizeValue) && sizeValue > 0 ? sizeValue : 5;
 		const count = Math.max(1, Math.ceil(filtered.length / size));
+		this.pageCount = count;
 		const requested = Number(this.getAttribute("page") ?? 1);
 		const page = Math.min(
 			count,
@@ -506,7 +508,7 @@ export class TpMarkupBlog extends TpBase {
 			const button = this.button(
 				item.title,
 				"Open this article in the blog reader.",
-				() => this.setAttribute("article", item.id),
+				() => this.openArticle(item.id),
 			);
 			button.dataset.blogArticle = item.id;
 			heading.append(button);
@@ -538,10 +540,10 @@ export class TpMarkupBlog extends TpBase {
 		const previous = this.button(
 			"Previous",
 			"Show the previous page of articles.",
-			() => this.setAttribute("page", String(page - 1)),
+			() => this.previousPage(),
 		);
 		const next = this.button("Next", "Show the next page of articles.", () =>
-			this.setAttribute("page", String(page + 1)),
+			this.nextPage(),
 		);
 		previous.toggleAttribute("disabled", page <= 1);
 		next.toggleAttribute("disabled", page >= count);
@@ -572,6 +574,28 @@ export class TpMarkupBlog extends TpBase {
 				detail: { message },
 			}),
 		);
+	}
+
+	/** Opens the article with the supplied identifier in the reader. */
+	openArticle(id: string): void {
+		this.setAttribute("article", id);
+	}
+
+	/** Returns to the filtered article list at its current page. */
+	showArticles(): void {
+		this.removeAttribute("article");
+	}
+
+	/** Displays the preceding page of articles unless already on the first page. */
+	previousPage(): void {
+		const page = Number(this.getAttribute("page") ?? 1);
+		if (page > 1) this.setAttribute("page", String(page - 1));
+	}
+
+	/** Displays the next page of articles unless already on the last page. */
+	nextPage(): void {
+		const page = Number(this.getAttribute("page") ?? 1);
+		if (page < this.pageCount) this.setAttribute("page", String(page + 1));
 	}
 }
 if (!customElements.get("tp-markup-blog"))

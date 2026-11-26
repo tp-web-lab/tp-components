@@ -1,0 +1,22 @@
+[[results]]
+== Results
+
+*Energy* and <<results,results>>.
+
+[upperalpha,start=3]
+. First
+. Second
+
+[cols="<,>",options="header"]
+|===
+|Item |Value
+|Energy |latexmath:[E=mc^2]
+|===
+
+[source,python]
+----
+if ready:
+  print("ready")
+----
+
+image::/medias/image/canoe.svg[Diagram,120]

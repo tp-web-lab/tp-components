@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-switcher" allow-script }
+:::::: tp-markdown-viewer { label="tp-switcher" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-switcher { threshold="35rem" gap="1rem" }

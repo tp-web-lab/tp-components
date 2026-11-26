@@ -6,7 +6,7 @@
 ======
 [div%data-tp-reference-scope]
 =====
-A useful detail [tp-ref,href="^detail"]#note-detail#.
+A useful detail [tp-ref,href="^detail",tp-empty="true"]##note-detail-1##.
 
 [tp-note,ref="detail",title="Detail"]
 ====

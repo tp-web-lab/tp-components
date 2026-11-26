@@ -1,0 +1,387 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpProlog{
+  \wcScript[type=tp/prolog]|
+    color(red).
+    color(green).
+    color(blue).
+  |
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/prolog/prolog.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-prolog");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/prolog");
+element2.textContent = "\n    color(red).\n    color(green).\n    color(blue).\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Integer constraints
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-prolog query="digit(X), labeling([], [X]).">
+  <script type="tp/prolog">
+    :- use_module(library(clpfd)).
+
+    digit(X) :- X in 1..3.
+  </script>
+</tp-prolog>|
+\end{document}
+
+% !tp-example External Prolog file
+\documentclass{article}
+\begin{document}
+\wcTpProlog[src=/docs/components/prolog/examples/colors.pl]{}
+\end{document}
+
+% !tp-example DOM elements and click events
+\documentclass{article}
+\begin{document}
+Click Run to execute the prefilled \rawhtml*|<code>setup_dom.</code>| query, then click the generated button. SWI-Prolog automatically loads \rawhtml*|<code>dom</code>| when append\_html/2 or bind/4 is first used. Open the SWI-Prolog libraries menu afterward to see its check; loading dom there beforehand is optional.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="setup_dom."></tp-textfield>|
+
+\wcScript[type=module]|
+  import "/components/button/button.js";
+  import "/components/prolog/prolog.js";
+|
+
+\wcTpProlog[query=setup_dom.]{
+  \wcScript[type=tp/prolog,filename=dom-demo.pl]|
+    :- use_module(library(wasm)).
+
+    % SWI-Prolog autoloads dom when its predicates are first called.
+    setup_dom :-
+        Host := document.getElementById("prolog-dom-demo"),
+        _ := Host.replaceChildren(),
+        append_html(Host, [
+            Button = 'tp-button'([variant=brand], 'Click me'),
+            Message = p('Waiting for a click.')
+        ]),
+        bind(Button, click, _, clicked(Message)).
+
+    clicked(Message) :-
+        Message.textContent := "The click was handled by Prolog!".
+  |
+}
+
+\wcDiv[id=prolog-dom-demo,aria-live=polite]{}
+\end{document}
+
+% !tp-example Library aggregate: Aggregate values
+\documentclass{article}
+\begin{document}
+Click Run directly. SWI-Prolog loads aggregate automatically when needed, unless it has already been loaded by a dependency. Inspect its check in the libraries menu after execution; no manual loading is required for this example.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="aggregate_all(sum(Amount), salary(_, Amount), Total)."></tp-textfield>|
+
+Expected: \rawhtml*|<code>Total = 100</code>|. Totals the two salaries.
+
+
+\rawhtml|<tp-prolog query="aggregate_all(sum(Amount), salary(_, Amount), Total).">
+  <script type="tp/prolog" filename="aggregate-demo.pl">
+    salary(ada, 40).
+    salary(byron, 60).
+  </script>
+</tp-prolog>|
+\end{document}
+
+% !tp-example Library apply: Map a predicate
+\documentclass{article}
+\begin{document}
+Click Run directly. SWI-Prolog loads apply automatically when needed, unless it has already been loaded by a dependency. Inspect its check in the libraries menu after execution; no manual loading is required for this example.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="maplist(double, [1, 2, 3], Doubles)."></tp-textfield>|
+
+Expected: \rawhtml*|<code>Doubles = [2,4,6]</code>|. Applies double/2 to every list item.
+
+
+\rawhtml|<tp-prolog query="maplist(double, [1, 2, 3], Doubles).">
+  <script type="tp/prolog" filename="apply-demo.pl">
+    double(X, Y) :- Y is 2 * X.
+  </script>
+</tp-prolog>|
+\end{document}
+
+% !tp-example Library assoc: Key-value associations
+\documentclass{article}
+\begin{document}
+Click Run directly. SWI-Prolog loads assoc automatically when needed, unless it has already been loaded by a dependency. Inspect its check in the libraries menu after execution; no manual loading is required for this example.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="lookup_score(Score)."></tp-textfield>|
+
+Expected: \rawhtml*|<code>Score = 42</code>|. Builds an association tree and retrieves a value by key.
+
+
+\wcTpProlog[query=lookup_score(Score).]{
+  \wcScript[type=tp/prolog,filename=assoc-demo.pl]|
+    lookup_score(Score) :-
+        empty_assoc(A0),
+        put_assoc(ada, A0, 42, A1),
+        get_assoc(ada, A1, Score).
+  |
+}
+\end{document}
+
+% !tp-example Library clpfd: Finite-domain constraints
+\documentclass{article}
+\begin{document}
+This example requires clpfd: select it in the SWI-Prolog libraries dropdown, then click Run. The query is prefilled.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="[A, B] ins 1..3, A #< B, all_distinct([A, B]), labeling([], [A, B])."></tp-textfield>|
+
+Expected: \rawhtml*|<code>A = 1, B = 2</code>|. Use Next solution to obtain A = 1, B = 3, then A = 2, B = 3.
+
+
+\rawhtml|<tp-prolog query="[A, B] ins 1..3, A #< B, all_distinct([A, B]), labeling([], [A, B])."></tp-prolog>|
+\end{document}
+
+% !tp-example Library clpq: Exact rational constraints
+\documentclass{article}
+\begin{document}
+This example requires clpq: select it in the SWI-Prolog libraries dropdown, then click Run. The query is prefilled.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="{X = 1/3 + 1/6}."></tp-textfield>|
+
+Expected: \rawhtml*|<code>X = 1r2</code>|. Solves an exact rational equation; 1r2 means one half. Use this independent interpreter rather than loading clpr in the same session.
+
+
+\rawhtml|<tp-prolog query="{X = 1/3 + 1/6}."></tp-prolog>|
+\end{document}
+
+% !tp-example Library clpr: Real-number constraints
+\documentclass{article}
+\begin{document}
+This example requires clpr: select it in the SWI-Prolog libraries dropdown, then click Run. The query is prefilled.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="{2 * X = 3}."></tp-textfield>|
+
+Expected: \rawhtml*|<code>X = 1.5</code>|. Solves a real-number equation. Use this independent interpreter rather than loading clpq in the same session.
+
+
+\rawhtml|<tp-prolog query="{2 * X = 3}."></tp-prolog>|
+\end{document}
+
+% !tp-example Library dcg/basics: Parse an integer
+\documentclass{article}
+\begin{document}
+This example requires dcg/basics: select it in the SWI-Prolog libraries dropdown, then click Run. The query is prefilled.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="parse_number(&quot;42&quot;, Number)."></tp-textfield>|
+
+Expected: \rawhtml*|<code>Number = 42</code>|. Parses text with the integer//1 grammar rule.
+
+
+\rawhtml|<tp-prolog query="parse_number(&quot;42&quot;, Number).">
+  <script type="tp/prolog" filename="dcg-basics-demo.pl">
+    parse_number(Text, Number) :-
+        string_codes(Text, Codes),
+        phrase(integer(Number), Codes).
+  </script>
+</tp-prolog>|
+\end{document}
+
+% !tp-example Library dif: Disequality constraints
+\documentclass{article}
+\begin{document}
+Click Run directly. SWI-Prolog loads dif automatically when needed, unless it has already been loaded by a dependency. Inspect its check in the libraries menu after execution; no manual loading is required for this example.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="dif(X, red), member(X, [red, green, blue])."></tp-textfield>|
+
+Expected: \rawhtml*|<code>X = green</code>|. Excludes red before X is known. Next solution produces X = blue.
+
+
+\rawhtml|<tp-prolog query="dif(X, red), member(X, [red, green, blue])."></tp-prolog>|
+\end{document}
+
+% !tp-example Library lists: Reverse a list
+\documentclass{article}
+\begin{document}
+Click Run directly. SWI-Prolog loads lists automatically when needed, unless it has already been loaded by a dependency. Inspect its check in the libraries menu after execution; no manual loading is required for this example.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="route(Cities), reverse(Cities, Return)."></tp-textfield>|
+
+Expected: \rawhtml*|<code>Cities = [paris,lyon,nice], Return = [nice,lyon,paris]</code>|. Reverses the route using reverse/2.
+
+
+\rawhtml|<tp-prolog query="route(Cities), reverse(Cities, Return).">
+  <script type="tp/prolog" filename="lists-demo.pl">
+    route([paris, lyon, nice]).
+  </script>
+</tp-prolog>|
+\end{document}
+
+% !tp-example Library ordsets: Union of ordered sets
+\documentclass{article}
+\begin{document}
+Click Run directly. SWI-Prolog loads ordsets automatically when needed, unless it has already been loaded by a dependency. Inspect its check in the libraries menu after execution; no manual loading is required for this example.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="ord_union([blue, red], [green, red], Colors)."></tp-textfield>|
+
+Expected: \rawhtml*|<code>Colors = [blue,green,red]</code>|. Combines sorted sets without duplicating red.
+
+
+\rawhtml|<tp-prolog query="ord_union([blue, red], [green, red], Colors)."></tp-prolog>|
+\end{document}
+
+% !tp-example Library pairs: Group values by key
+\documentclass{article}
+\begin{document}
+Click Run directly. SWI-Prolog loads pairs automatically when needed, unless it has already been loaded by a dependency. Inspect its check in the libraries menu after execution; no manual loading is required for this example.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="group_pairs_by_key([fruit-apple, fruit-pear, vegetable-carrot], Groups)."></tp-textfield>|
+
+Expected: \rawhtml*|<code>Groups = [fruit-[apple,pear],vegetable-[carrot]]</code>|. Groups consecutive pairs with the same key.
+
+
+\rawhtml|<tp-prolog query="group_pairs_by_key([fruit-apple, fruit-pear, vegetable-carrot], Groups)."></tp-prolog>|
+\end{document}
+
+% !tp-example Library plunit: Unit tests
+\documentclass{article}
+\begin{document}
+Click Run directly. The source imports plunit before declaring the tests; no dropdown action is needed. Its check appears in the libraries menu after execution.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="run_tests(arithmetic)."></tp-textfield>|
+
+Expected: \rawhtml*|<code>true.</code>|. Both tests pass. Change the expected 4 to 5 in the source, click Run to see a failing test.
+
+
+\wcTpProlog[query=run_tests(arithmetic).]{
+  \wcScript[type=tp/prolog,filename=plunit-demo.pl]|
+    :- use_module(library(plunit)).
+
+    double(X, Y) :- Y is 2 * X.
+
+    :- begin_tests(arithmetic).
+
+    test(double_two) :-
+        double(2, 4).
+
+    test(wrong_result, [fail]) :-
+        double(2, 5).
+
+    :- end_tests(arithmetic).
+  |
+}
+\end{document}
+
+% !tp-example Library random: Roll a die
+\documentclass{article}
+\begin{document}
+Click Run directly. SWI-Prolog loads random automatically when needed, unless it has already been loaded by a dependency. Inspect its check in the libraries menu after execution; no manual loading is required for this example.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="random_between(1, 6, Die)."></tp-textfield>|
+
+Expected: \rawhtml*|<code>Die = an integer from 1 to 6</code>|. Run the query several times; results may repeat.
+
+
+\rawhtml|<tp-prolog query="random_between(1, 6, Die)."></tp-prolog>|
+\end{document}
+
+% !tp-example Library wasm: Call JavaScript
+\documentclass{article}
+\begin{document}
+Click Run directly. The runtime provides wasm at initialization; no dropdown action is needed.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="Maximum := 'Math'.max(3, 7)."></tp-textfield>|
+
+Expected: \rawhtml*|<code>Maximum = 7</code>|. Calls JavaScript Math.max through the := operator. The runtime already loads wasm; its check appears after initialization.
+
+
+\rawhtml|<tp-prolog query="Maximum := 'Math'.max(3, 7)."></tp-prolog>|
+\end{document}
+
+% !tp-example Library when: Delay a goal
+\documentclass{article}
+\begin{document}
+Click Run directly. SWI-Prolog loads when automatically when needed, unless it has already been loaded by a dependency. Inspect its check in the libraries menu after execution; no manual loading is required for this example.
+
+
+\rawhtml|<tp-textfield label="Query" label-position="start" style="--tp-textfield-inline-size:100%" readonly="" copy-code="" value="when(nonvar(X), Y is X * 2), X = 21."></tp-textfield>|
+
+Expected: \rawhtml*|<code>X = 21, Y = 42</code>|. Delays the multiplication until X has a value.
+
+
+\rawhtml|<tp-prolog query="when(nonvar(X), Y is X * 2), X = 21."></tp-prolog>|
+\end{document}
+
+% !tp-example Presentation modes and automatic reload
+\documentclass{article}
+\begin{document}
+Each interpreter has its own session. Default and lite show the normal controls; simple opens the editor and hides the header and welcome information. Prolog keeps its query buttons and Libraries dropdown, including Next solution, All solutions and Accept.
+
+
+In each mode, click Run to obtain X = 10, then Next solution to obtain X = 20, and All solutions to display the remaining answer, X = 30. Click All solutions again after the query has finished to display all three answers at once; Run is not required first. These buttons remain available in simple mode.
+
+
+In default and lite, open Edit source; simple already shows it. Change answer(10). to answer(100)., then click Run or press Return in the query field. The first answer becomes X = 100 and “> Program reloaded.” appears. Run again without editing: no new reload message appears. Shift+Return works too.
+
+
+\subsection*{Default}
+
+\wcTpProlog[mode=default,query=answer(X).]{
+  \wcScript[type=tp/prolog,filename=answer.pl]|
+    answer(10).
+    answer(20).
+    answer(30).
+  |
+}
+
+\subsection*{Lite}
+
+\wcTpProlog[mode=lite,query=answer(X).]{
+  \wcScript[type=tp/prolog,filename=answer.pl]|
+    answer(10).
+    answer(20).
+    answer(30).
+  |
+}
+
+\subsection*{Simple}
+
+\wcTpProlog[mode=simple,query=answer(X).]{
+  \wcScript[type=tp/prolog,filename=answer.pl]|
+    answer(10).
+    answer(20).
+    answer(30).
+  |
+}
+\end{document}
+
+% !tp-example Execution trace drawer
+\documentclass{article}
+\begin{document}
+\rawhtml|<tp-prolog tracer="" src="/docs/components/prolog-tracer/examples/family.pl" query="ancestor(ann, Who)."></tp-prolog>|
+\end{document}

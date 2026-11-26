@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-diagram" allow-script }
+:::::: tp-markdown-viewer { label="tp-diagram" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-diagram { label="Request flow" }

@@ -1,8 +1,8 @@
 % !tp-example Basic usage
 \documentclass{article}
 \begin{document}
-\wcTpAnimation[in=fadeIn,trigger=load,duration=800ms]{
-  \wcTpBox{Animated content}
+\wcTpAnimation[in=shakeX,trigger=click,autoplay,duration=1200ms,iterations=3]{
+  \wcTpBox{This box shakes three times on load. Click to replay.}
 }
 \end{document}
 
@@ -16,17 +16,110 @@ import "/components/box/box.js";
 const example = document.createDocumentFragment();
 
 const element1 = document.createElement("tp-animation");
-element1.setAttribute("in", "fadeIn");
-element1.setAttribute("trigger", "load");
-element1.setAttribute("duration", "800ms");
-element1.append(document.createTextNode("\n    "));
+element1.setAttribute("in", "shakeX");
+element1.setAttribute("trigger", "click");
+element1.setAttribute("autoplay", "");
+element1.setAttribute("duration", "1200ms");
+element1.setAttribute("iterations", "3");
+element1.append(document.createTextNode("\n  "));
 
 const element2 = document.createElement("tp-box");
-element2.append(document.createTextNode("Animated content"));
+element2.append(document.createTextNode("This box shakes three times on load. Click to replay."));
 element1.append(element2);
-element1.append(document.createTextNode("\n  "));
+element1.append(document.createTextNode("\n"));
 example.append(element1);
 
 document.body.append(example);
+|
+\end{document}
+
+% !tp-example Attention seekers
+\documentclass{article}
+\begin{document}
+Click each box to compare three ways of drawing attention.
+
+
+\wcTpStack{
+  \wcTpAnimation[in=bounce,trigger=click,duration=1200ms]{
+    \wcTpBox{Bounce: a vertical rebound.}
+  }
+  \wcTpAnimation[in=shakeX,trigger=click,duration=1200ms]{
+    \wcTpBox{Shake: a horizontal oscillation.}
+  }
+  \wcTpAnimation[in=pulse,trigger=click,duration=1200ms,iterations=3]{
+    \wcTpBox{Pulse: a gentle change of scale.}
+  }
+}
+\end{document}
+
+% !tp-example Directional entrances
+\documentclass{article}
+\begin{document}
+Click each box to compare a sliding entrance with a bouncing entrance.
+
+
+\wcTpStack{
+  \wcTpAnimation[in=slideInLeft,trigger=click,duration=1200ms]{
+    \wcTpBox{Slide in from the left.}
+  }
+  \wcTpAnimation[in=bounceInDown,trigger=click,duration=1200ms]{
+    \wcTpBox{Bounce in from above.}
+  }
+}
+\end{document}
+
+% !tp-example Zoom and rotation
+\documentclass{article}
+\begin{document}
+Click a box to play its entrance again.
+
+
+\wcTpStack{
+  \wcTpAnimation[in=zoomIn,trigger=click,duration=1200ms]{
+    \wcTpBox{Zoom in: grow from a smaller size.}
+  }
+  \wcTpAnimation[in=rotateIn,trigger=click,duration=1200ms]{
+    \wcTpBox{Rotate in: combine rotation and fading.}
+  }
+}
+\end{document}
+
+% !tp-example Three-dimensional flip
+\documentclass{article}
+\begin{document}
+Hover over the box, or focus it with the keyboard, to flip it around its vertical axis. Leave and return to replay.
+
+
+\wcTpAnimation[in=flipInY,trigger=hover,duration=1500ms]{
+  \wcTpBox{Flip in around the vertical axis.}
+}
+\end{document}
+
+% !tp-example Entrance and exit
+\documentclass{article}
+\begin{document}
+Use Enter or Exit, then Pause during the movement. Resume continues from the same position; Reset restores the box.
+
+
+\wcTpCluster{
+  \wcTpButton[id=animation-enter]{Enter}
+  \wcTpButton[id=animation-exit]{Exit}
+  \wcTpButton[id=animation-pause]{Pause}
+  \wcTpButton[id=animation-resume]{Resume}
+  \wcTpButton[id=animation-reset]{Reset}
+}
+
+\wcTpAnimation[id=controlled-animation,in=fadeInLeft,out=fadeOutRight,trigger=manual,duration=3000ms]{
+  \wcTpBox{Enter from the left; exit to the right.}
+}
+
+\wcScript[type=module]|
+await customElements.whenDefined("tp-animation");
+const animation = document.getElementById("controlled-animation");
+document.getElementById("animation-enter").addEventListener("click", () => animation.playIn());
+document.getElementById("animation-exit").addEventListener("click", () => animation.playOut());
+document.getElementById("animation-pause").addEventListener("click", () => animation.pause());
+document.getElementById("animation-resume").addEventListener("click", () => animation.resume());
+document.getElementById("animation-reset").addEventListener("click", () => animation.cancel());
 |
 \end{document}

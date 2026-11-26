@@ -1,0 +1,1033 @@
+{
+  "version": 1,
+  "code": "students = [\n    {'name': 'Ada', 'scores': (90, 95)},\n    {'name': 'Bob', 'scores': (80, 70)},\n]\ntop = None\nbest = -1\nfor s in students:\n    avg = sum(s['scores']) / 2\n    if avg > best:\n        best = avg\n        top = s['name']\nprint(top, best)",
+  "trace": [
+    {
+      "line": 2,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {},
+      "ordered_globals": [],
+      "stack_to_render": [],
+      "heap": {},
+      "stdout": ""
+    },
+    {
+      "line": 3,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {},
+      "ordered_globals": [],
+      "stack_to_render": [],
+      "heap": {},
+      "stdout": ""
+    },
+    {
+      "line": 1,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {},
+      "ordered_globals": [],
+      "stack_to_render": [],
+      "heap": {},
+      "stdout": ""
+    },
+    {
+      "line": 5,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {
+        "students": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "students"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "LIST",
+          [
+            "REF",
+            2
+          ],
+          [
+            "REF",
+            4
+          ]
+        ],
+        "2": [
+          "DICT",
+          [
+            "name",
+            "Ada"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              3
+            ]
+          ]
+        ],
+        "3": [
+          "TUPLE",
+          90,
+          95
+        ],
+        "4": [
+          "DICT",
+          [
+            "name",
+            "Bob"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              5
+            ]
+          ]
+        ],
+        "5": [
+          "TUPLE",
+          80,
+          70
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "line": 6,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {
+        "students": [
+          "REF",
+          1
+        ],
+        "top": null
+      },
+      "ordered_globals": [
+        "students",
+        "top"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "LIST",
+          [
+            "REF",
+            2
+          ],
+          [
+            "REF",
+            4
+          ]
+        ],
+        "2": [
+          "DICT",
+          [
+            "name",
+            "Ada"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              3
+            ]
+          ]
+        ],
+        "3": [
+          "TUPLE",
+          90,
+          95
+        ],
+        "4": [
+          "DICT",
+          [
+            "name",
+            "Bob"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              5
+            ]
+          ]
+        ],
+        "5": [
+          "TUPLE",
+          80,
+          70
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "line": 7,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {
+        "students": [
+          "REF",
+          1
+        ],
+        "top": null,
+        "best": -1
+      },
+      "ordered_globals": [
+        "students",
+        "top",
+        "best"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "LIST",
+          [
+            "REF",
+            2
+          ],
+          [
+            "REF",
+            4
+          ]
+        ],
+        "2": [
+          "DICT",
+          [
+            "name",
+            "Ada"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              3
+            ]
+          ]
+        ],
+        "3": [
+          "TUPLE",
+          90,
+          95
+        ],
+        "4": [
+          "DICT",
+          [
+            "name",
+            "Bob"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              5
+            ]
+          ]
+        ],
+        "5": [
+          "TUPLE",
+          80,
+          70
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "line": 8,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {
+        "students": [
+          "REF",
+          1
+        ],
+        "top": null,
+        "best": -1,
+        "s": [
+          "REF",
+          2
+        ]
+      },
+      "ordered_globals": [
+        "students",
+        "top",
+        "best",
+        "s"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "LIST",
+          [
+            "REF",
+            2
+          ],
+          [
+            "REF",
+            4
+          ]
+        ],
+        "2": [
+          "DICT",
+          [
+            "name",
+            "Ada"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              3
+            ]
+          ]
+        ],
+        "3": [
+          "TUPLE",
+          90,
+          95
+        ],
+        "4": [
+          "DICT",
+          [
+            "name",
+            "Bob"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              5
+            ]
+          ]
+        ],
+        "5": [
+          "TUPLE",
+          80,
+          70
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "line": 9,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {
+        "students": [
+          "REF",
+          1
+        ],
+        "top": null,
+        "best": -1,
+        "s": [
+          "REF",
+          2
+        ],
+        "avg": 92.5
+      },
+      "ordered_globals": [
+        "students",
+        "top",
+        "best",
+        "s",
+        "avg"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "LIST",
+          [
+            "REF",
+            2
+          ],
+          [
+            "REF",
+            4
+          ]
+        ],
+        "2": [
+          "DICT",
+          [
+            "name",
+            "Ada"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              3
+            ]
+          ]
+        ],
+        "3": [
+          "TUPLE",
+          90,
+          95
+        ],
+        "4": [
+          "DICT",
+          [
+            "name",
+            "Bob"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              5
+            ]
+          ]
+        ],
+        "5": [
+          "TUPLE",
+          80,
+          70
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "line": 10,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {
+        "students": [
+          "REF",
+          1
+        ],
+        "top": null,
+        "best": -1,
+        "s": [
+          "REF",
+          2
+        ],
+        "avg": 92.5
+      },
+      "ordered_globals": [
+        "students",
+        "top",
+        "best",
+        "s",
+        "avg"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "LIST",
+          [
+            "REF",
+            2
+          ],
+          [
+            "REF",
+            4
+          ]
+        ],
+        "2": [
+          "DICT",
+          [
+            "name",
+            "Ada"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              3
+            ]
+          ]
+        ],
+        "3": [
+          "TUPLE",
+          90,
+          95
+        ],
+        "4": [
+          "DICT",
+          [
+            "name",
+            "Bob"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              5
+            ]
+          ]
+        ],
+        "5": [
+          "TUPLE",
+          80,
+          70
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "line": 11,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {
+        "students": [
+          "REF",
+          1
+        ],
+        "top": null,
+        "best": 92.5,
+        "s": [
+          "REF",
+          2
+        ],
+        "avg": 92.5
+      },
+      "ordered_globals": [
+        "students",
+        "top",
+        "best",
+        "s",
+        "avg"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "LIST",
+          [
+            "REF",
+            2
+          ],
+          [
+            "REF",
+            4
+          ]
+        ],
+        "2": [
+          "DICT",
+          [
+            "name",
+            "Ada"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              3
+            ]
+          ]
+        ],
+        "3": [
+          "TUPLE",
+          90,
+          95
+        ],
+        "4": [
+          "DICT",
+          [
+            "name",
+            "Bob"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              5
+            ]
+          ]
+        ],
+        "5": [
+          "TUPLE",
+          80,
+          70
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "line": 7,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {
+        "students": [
+          "REF",
+          1
+        ],
+        "top": "Ada",
+        "best": 92.5,
+        "s": [
+          "REF",
+          2
+        ],
+        "avg": 92.5
+      },
+      "ordered_globals": [
+        "students",
+        "top",
+        "best",
+        "s",
+        "avg"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "LIST",
+          [
+            "REF",
+            2
+          ],
+          [
+            "REF",
+            4
+          ]
+        ],
+        "2": [
+          "DICT",
+          [
+            "name",
+            "Ada"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              3
+            ]
+          ]
+        ],
+        "3": [
+          "TUPLE",
+          90,
+          95
+        ],
+        "4": [
+          "DICT",
+          [
+            "name",
+            "Bob"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              5
+            ]
+          ]
+        ],
+        "5": [
+          "TUPLE",
+          80,
+          70
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "line": 8,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {
+        "students": [
+          "REF",
+          1
+        ],
+        "top": "Ada",
+        "best": 92.5,
+        "s": [
+          "REF",
+          4
+        ],
+        "avg": 92.5
+      },
+      "ordered_globals": [
+        "students",
+        "top",
+        "best",
+        "s",
+        "avg"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "LIST",
+          [
+            "REF",
+            2
+          ],
+          [
+            "REF",
+            4
+          ]
+        ],
+        "2": [
+          "DICT",
+          [
+            "name",
+            "Ada"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              3
+            ]
+          ]
+        ],
+        "3": [
+          "TUPLE",
+          90,
+          95
+        ],
+        "4": [
+          "DICT",
+          [
+            "name",
+            "Bob"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              5
+            ]
+          ]
+        ],
+        "5": [
+          "TUPLE",
+          80,
+          70
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "line": 9,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {
+        "students": [
+          "REF",
+          1
+        ],
+        "top": "Ada",
+        "best": 92.5,
+        "s": [
+          "REF",
+          4
+        ],
+        "avg": [
+          "SPECIAL_FLOAT",
+          "75.0"
+        ]
+      },
+      "ordered_globals": [
+        "students",
+        "top",
+        "best",
+        "s",
+        "avg"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "LIST",
+          [
+            "REF",
+            2
+          ],
+          [
+            "REF",
+            4
+          ]
+        ],
+        "2": [
+          "DICT",
+          [
+            "name",
+            "Ada"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              3
+            ]
+          ]
+        ],
+        "3": [
+          "TUPLE",
+          90,
+          95
+        ],
+        "4": [
+          "DICT",
+          [
+            "name",
+            "Bob"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              5
+            ]
+          ]
+        ],
+        "5": [
+          "TUPLE",
+          80,
+          70
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "line": 7,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {
+        "students": [
+          "REF",
+          1
+        ],
+        "top": "Ada",
+        "best": 92.5,
+        "s": [
+          "REF",
+          4
+        ],
+        "avg": [
+          "SPECIAL_FLOAT",
+          "75.0"
+        ]
+      },
+      "ordered_globals": [
+        "students",
+        "top",
+        "best",
+        "s",
+        "avg"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "LIST",
+          [
+            "REF",
+            2
+          ],
+          [
+            "REF",
+            4
+          ]
+        ],
+        "2": [
+          "DICT",
+          [
+            "name",
+            "Ada"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              3
+            ]
+          ]
+        ],
+        "3": [
+          "TUPLE",
+          90,
+          95
+        ],
+        "4": [
+          "DICT",
+          [
+            "name",
+            "Bob"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              5
+            ]
+          ]
+        ],
+        "5": [
+          "TUPLE",
+          80,
+          70
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "line": 12,
+      "event": "step_line",
+      "func_name": "<module>",
+      "globals": {
+        "students": [
+          "REF",
+          1
+        ],
+        "top": "Ada",
+        "best": 92.5,
+        "s": [
+          "REF",
+          4
+        ],
+        "avg": [
+          "SPECIAL_FLOAT",
+          "75.0"
+        ]
+      },
+      "ordered_globals": [
+        "students",
+        "top",
+        "best",
+        "s",
+        "avg"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "LIST",
+          [
+            "REF",
+            2
+          ],
+          [
+            "REF",
+            4
+          ]
+        ],
+        "2": [
+          "DICT",
+          [
+            "name",
+            "Ada"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              3
+            ]
+          ]
+        ],
+        "3": [
+          "TUPLE",
+          90,
+          95
+        ],
+        "4": [
+          "DICT",
+          [
+            "name",
+            "Bob"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              5
+            ]
+          ]
+        ],
+        "5": [
+          "TUPLE",
+          80,
+          70
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "line": 12,
+      "event": "return",
+      "func_name": "<module>",
+      "globals": {
+        "students": [
+          "REF",
+          1
+        ],
+        "top": "Ada",
+        "best": 92.5,
+        "s": [
+          "REF",
+          4
+        ],
+        "avg": [
+          "SPECIAL_FLOAT",
+          "75.0"
+        ]
+      },
+      "ordered_globals": [
+        "students",
+        "top",
+        "best",
+        "s",
+        "avg"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "LIST",
+          [
+            "REF",
+            2
+          ],
+          [
+            "REF",
+            4
+          ]
+        ],
+        "2": [
+          "DICT",
+          [
+            "name",
+            "Ada"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              3
+            ]
+          ]
+        ],
+        "3": [
+          "TUPLE",
+          90,
+          95
+        ],
+        "4": [
+          "DICT",
+          [
+            "name",
+            "Bob"
+          ],
+          [
+            "scores",
+            [
+              "REF",
+              5
+            ]
+          ]
+        ],
+        "5": [
+          "TUPLE",
+          80,
+          70
+        ]
+      },
+      "stdout": "Ada 92.5\n"
+    }
+  ]
+}

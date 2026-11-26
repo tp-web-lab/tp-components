@@ -1,0 +1,17 @@
+{
+  "name": "OCaml tests",
+  "entry": "/main.ml",
+  "test": "/main.test.ml",
+  "files": [
+    {
+      "path": "/main.ml",
+      "language": "ocaml",
+      "content": "let double x = x * 2;;"
+    },
+    {
+      "path": "/main.test.ml",
+      "language": "ocaml",
+      "content": "test_equal \"positive\" 8 (double 4);;\ntest_equal \"zero\" 0 (double 0);;\ntest_equal \"negative\" (-6) (double (-3));;\n"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-inline" allow-script }
+:::::: tp-markdown-viewer { label="tp-inline" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-inline { gap="1rem" align="center" }

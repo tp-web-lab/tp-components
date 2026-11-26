@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-multi-choice-question" allow-script }
+::::: tp-markdown-viewer { label="tp-multi-choice-question" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-multi-choice-question { answer="1,3,5" random }
@@ -13,25 +13,17 @@ Prompt
 Form
 :
   - CSS
-
   - HTML
-
   - Sass
-
   - JavaScript
-
   - Less
 
 Feedback
 :
   - Correct. CSS describes presentation.
-
   - HTML structures content.
-
   - Correct. Sass is a CSS preprocessor.
-
   - JavaScript is a programming language.
-
   - Correct. Less is a CSS preprocessor.
 
 Solution

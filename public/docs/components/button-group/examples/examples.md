@@ -1,4 +1,4 @@
-::::::: tp-markdown-viewer { label="tp-button-group" allow-script }
+::::::: tp-markdown-viewer { label="tp-button-group" allow-script preserve-source }
 :::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::::: tp-box { data-page-navigation data-allow-script }
@@ -14,9 +14,8 @@ Next
 :::
 ::::
 
-::: p { data-page-status role="status" }
 Page 1 of 5
-:::
+{data-page-status role="status"}
 
 ::: script { src="/docs/components/button-group/examples/page-navigation.js" }
 :::

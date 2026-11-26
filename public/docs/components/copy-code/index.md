@@ -35,6 +35,8 @@ The custom `<tp-copy-code>` element copies the textual content of a target compo
 <!-- -->
 ## Usage
 
+The copy control uses a `tp-icon-button` in light DOM, with the shared button appearance and native keyboard activation. Its icon and accessible label reflect copying success or failure.
+
 ### Authoring
 
 All `pre > code` blocks automatically receive a copy button when the library foundations are initialized, including dynamically loaded content. It appears in the top-right corner on hover or keyboard focus, and remains visible on touch devices. Only the code text is copied. Existing copy controls are preserved; editable content is not enhanced. No additional author markup is required.
@@ -87,19 +89,19 @@ Javascript API
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -120,13 +122,13 @@ All tp-components and external tools used by this component are loaded automatic
 @summary Shared base class for tp-* components.
 -->
 <!--
-@tp-dependency tp-icon
-@summary SVG icon component with inline, URL, and registry sources.
+@tp-dependency tp-icon-button
+@summary Accessible icon button component.
 -->
 
 - [`<tp-animation>`](#/components/animation/index.md) : Applies an animation to a target element.
 - [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
-- [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
+- [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
 
 ### External
 

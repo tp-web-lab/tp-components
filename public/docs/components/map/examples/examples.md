@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-map" allow-script }
+::::: tp-markdown-viewer { label="tp-map" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-map { lat="48.3904" lon="-4.4861" zoom="13" title="Brest, Brittany, France" marker }

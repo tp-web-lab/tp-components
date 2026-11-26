@@ -15,6 +15,7 @@
          .. script::
             :type: module
 
+            import "/components/python/python.js";
             import "/components/python-playground/python-playground.js";
 
             const example = document.createDocumentFragment();
@@ -29,3 +30,8 @@
 
          .. tp-python-playground::
             :src: /docs/components/_shared/single-source/example.py
+
+      .. example:: unittest results
+
+         .. tp-python-playground::
+            :src: /docs/components/python-playground/examples/framework-tests.json

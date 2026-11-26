@@ -166,7 +166,8 @@ export class TpTurtle extends TpBase {
 		)?.addEventListener("click", () => this.downloadCurrentSvg());
 	}
 
-	private replayCurrentProgram(): void {
+	/** Replays the current turtle program from its beginning. */
+	replayCurrentProgram(): void {
 		this.stopReplay();
 
 		const all = parseProgram(this.lastExpanded);
@@ -330,7 +331,8 @@ export class TpTurtle extends TpBase {
 		frame();
 	}
 
-	private downloadCurrentSvg(): void {
+	/** Downloads the current turtle drawing as SVG. */
+	downloadCurrentSvg(): void {
 		this.stopReplay();
 
 		const lines = parseProgram(this.lastExpanded);

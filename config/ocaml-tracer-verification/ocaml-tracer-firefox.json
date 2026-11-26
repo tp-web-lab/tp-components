@@ -1,0 +1,97 @@
+{
+  "browser": "firefox",
+  "cases": [
+    {
+      "file": "recursion.ml",
+      "steps": 53,
+      "output": "120\n",
+      "sourceRanges": true,
+      "replay": true
+    },
+    {
+      "file": "same-line.ml",
+      "steps": 11,
+      "output": "30\n",
+      "sourceRanges": true,
+      "replay": true
+    },
+    {
+      "file": "shared.ml",
+      "steps": 13,
+      "output": "9 1\n",
+      "sourceRanges": true,
+      "replay": true
+    },
+    {
+      "file": "closures.ml",
+      "steps": 33,
+      "output": "1\n2\n",
+      "sourceRanges": true,
+      "replay": true
+    },
+    {
+      "file": "patterns.ml",
+      "steps": 27,
+      "output": "6\n",
+      "sourceRanges": true,
+      "replay": true
+    },
+    {
+      "file": "caught.ml",
+      "steps": 11,
+      "output": "42\n",
+      "sourceRanges": true,
+      "replay": true
+    },
+    {
+      "file": "error.ml",
+      "steps": 8,
+      "output": "",
+      "sourceRanges": true,
+      "replay": true
+    },
+    {
+      "label": "Unicode",
+      "steps": 8,
+      "output": "5\n",
+      "error": false,
+      "replay": true
+    },
+    {
+      "label": "Structure without phrase separators",
+      "steps": 11,
+      "output": "9\n",
+      "error": false,
+      "replay": true
+    },
+    {
+      "label": "Infinite loop",
+      "steps": 502,
+      "output": "",
+      "error": true,
+      "replay": true
+    },
+    {
+      "label": "Syntax error",
+      "steps": 1,
+      "output": "",
+      "error": true,
+      "replay": true
+    },
+    {
+      "label": "Unsupported module",
+      "steps": 1,
+      "output": "",
+      "error": true,
+      "replay": true
+    },
+    {
+      "label": "Float array and bool ref",
+      "steps": 10,
+      "output": "2 true\n",
+      "error": false,
+      "replay": true
+    }
+  ],
+  "passed": true
+}

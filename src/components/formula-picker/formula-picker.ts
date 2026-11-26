@@ -52,10 +52,10 @@ export function spreadsheetFormulaSignature(name: string): string {
  *
  * @summary Browses and selects spreadsheet functions.
  * @tagname tp-formula-picker
- * @example
- * <tp-formula-picker></tp-formula-picker>
  *  @event tp-formula-picker-select Emitted when a spreadsheet function is selected. formula contains the leading = and argument placeholders; selectionStart and selectionEnd are zero-based string offsets delimiting the arguments to select.
  * @eventdetail tp-formula-picker-select { name: string; formula: string; selectionStart: number; selectionEnd: number }
+ * @example
+ * <tp-formula-picker></tp-formula-picker>
  */
 export class TpFormulaPicker extends TpBase {
 	private static readonly styleId = "tp-formula-picker-styles";

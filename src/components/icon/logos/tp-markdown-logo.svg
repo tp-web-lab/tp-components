@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <title>TP markdown</title>
+  <circle cx="12" cy="12" r="11" fill="var(--tp-brand-text-colorful, #88B1A1)"/>
+  <text x="8" y="10" textLength="8" lengthAdjust="spacing" fill="var(--tp-paper-color, #ffffff)" style="font:10px serif;font-weight:500;">tp</text>
+  <svg x="6" y="13.5" width="12" height="7.3" viewBox="2 7.455 28 17.091" fill="var(--tp-paper-color, #ffffff)">
+    <rect x="2.5" y="7.955" width="27" height="16.091" style="fill:none;stroke:var(--tp-paper-color, #ffffff)"/><polygon points="5.909 20.636 5.909 11.364 8.636 11.364 11.364 14.773 14.091 11.364 16.818 11.364 16.818 20.636 14.091 20.636 14.091 15.318 11.364 18.727 8.636 15.318 8.636 20.636 5.909 20.636" style="fill:var(--tp-paper-color, #ffffff)"/><polygon points="22.955 20.636 18.864 16.136 21.591 16.136 21.591 11.364 24.318 11.364 24.318 16.136 27.045 16.136 22.955 20.636" style="fill:var(--tp-paper-color, #ffffff)"/>
+  </svg>
+</svg>

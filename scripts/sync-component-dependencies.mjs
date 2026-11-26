@@ -43,6 +43,17 @@ const docsEnd = '<!-- tp-docgen:dependencies:end -->';
 const sourceBlockExpression = new RegExp(`${sourceStart.replaceAll('/', '\\/')}[\\s\\S]*?${sourceEnd.replaceAll('/', '\\/')}\\n?`);
 
 const credits = {
+  'runtime:plunit': ['PlUnit', 'https://www.swi-prolog.org/pldoc/package/plunit', 'Native SWI-Prolog test suites and assertions.'],
+  'runtime:srfi64': ['SRFI-64', 'https://srfi.schemers.org/srfi-64/srfi-64.html', 'Scheme test-suite reference implementation, loaded on demand.'],
+  'runtime:alcotest': ['Alcotest', 'https://github.com/mirage/alcotest', 'Typed OCaml tests, compiled for the browser and loaded on demand.'],
+  'runtime:prolog-tracer': ['SWI-Prolog', 'https://www.swi-prolog.org/', 'Native debugger interception through the pinned swipl-wasm runtime.'],
+  'runtime:ocaml-tracer': ['Js_of_ocaml', 'https://ocsigen.org/js_of_ocaml/', 'OCaml compilation and execution with observation hooks.'],
+  'runtime:scheme-tracer': ['LIPS', 'https://lips.js.org/', 'Pinned LIPS Scheme evaluator with observation hooks, loaded only when recording.'],
+  'runtime:typescript-tracer': ['TypeScript', 'https://www.typescriptlang.org/', 'TypeScript parsing and transpilation for synchronous execution tracing.'],
+  'runtime:javascript-tracer': ['TypeScript', 'https://www.typescriptlang.org/', 'JavaScript syntax parsing for synchronous execution tracing.'],
+  'runtime:python-tracer': ['Online Python Tutor', 'https://github.com/sineagles/OnlinePythonTutor', 'Local Python tracing engine adapted under the MIT license.'],
+  "runtime:ocaml": ["Js_of_ocaml", "https://ocsigen.org/js_of_ocaml/", "OCaml toplevel compiled to JavaScript, including the standard library and browser bindings."],
+  'runtime:lips': ['LIPS', 'https://lips.js.org/', 'Scheme execution in JavaScript with its standard library.'],
   'chess.js': ['chess.js', 'https://github.com/jhlywa/chess.js', 'Legal chess moves, FEN validation and game-end detection (BSD-2-Clause).'],
   '@tp/tp-latex': ['tp-latex', 'https://www.npmjs.com/package/@tp/tp-latex', 'LaTeX.js conversion and patched TikZJax assets.'],
   'runtime:tikzjax': ['TikZJax', 'https://tikzjax.com/', 'WebAssembly TeX engine, core dump and SVG conversion.'],
@@ -70,12 +81,23 @@ const credits = {
   'runtime:mathjax': ['MathJax', 'https://www.mathjax.org/', 'Mathematical notation rendering.'],
   'runtime:mocha': ['Mocha', 'https://mochajs.org/', 'Browser test execution.'],
   'runtime:pyodide': ['Pyodide', 'https://pyodide.org/', 'Python execution in the browser.'],
-  'runtime:scryer': ['Scryer Prolog', 'https://www.scryer.pl/', 'Prolog execution in the browser.'],
+  'runtime:swipl': ['SWI-Prolog WASM', 'https://www.swi-prolog.org/', 'Prolog execution in the browser.'],
   'runtime:shoelace': ['Shoelace', 'https://shoelace.style/', 'Web-component examples and import maps.'],
   'runtime:sqljs': ['sql.js', 'https://sql.js.org/', 'SQLite execution in the browser.'],
 };
 
 const runtimeCreditPatterns = {
+  'runtime:prolog-tracer': /from ["']\.\/prolog-tracer-runtime\.js["']/ ,
+  'runtime:plunit': /run_tests\(all, \[cleanup\(false\)\]\)/,
+  'runtime:srfi64': /scheme-test-runtime\.js|vendor\/srfi-64\.scm/,
+  'runtime:alcotest': /toplevel-tests\.js/,
+  'runtime:ocaml-tracer': /from ["']\.\/ocaml-tracer-runtime\.js["']/ ,
+  'runtime:scheme-tracer': /from ["']\.\/scheme-tracer-runtime\.js["']/ ,
+  'runtime:typescript-tracer': /from ["']\.\/typescript-tracer-runtime\.js["']/ ,
+  'runtime:javascript-tracer': /from ["']\.\/javascript-tracer-runtime\.js["']/ ,
+  'runtime:python-tracer': /from ["']\.\/python-tracer-runtime\.js["']/ ,
+  "runtime:ocaml": /runtimes\/ocaml\/toplevel\.js/,
+  'runtime:lips': /cdn\.jsdelivr\.net\/npm\/lips@/,
   'runtime:openstreetmap': /https:\/\/tile\.openstreetmap\.org\//,
   'runtime:asciidoctor': /cdn\.jsdelivr\.net\/npm\/@asciidoctor\/core/,
   'runtime:chai': /cdn\.jsdelivr\.net\/npm\/chai@/,
@@ -83,8 +105,8 @@ const runtimeCreditPatterns = {
   'runtime:lit': /cdn\.jsdelivr\.net\/npm\/lit@/,
   'runtime:mathjax': /cdn\.jsdelivr\.net\/npm\/mathjax@/,
   'runtime:mocha': /cdn\.jsdelivr\.net\/npm\/mocha@/,
-  'runtime:pyodide': /pyodide\.org|cdn\.jsdelivr\.net\/pyodide/,
-  'runtime:scryer': /esm\.sh\/scryer/,
+  'runtime:pyodide': /pyodide\.org|cdn\.jsdelivr\.net\/pyodide|python-tracer-runtime\.js/,
+  'runtime:swipl': /swipl-wasm@/,
   'runtime:shoelace': /cdn\.jsdelivr\.net\/npm\/@shoelace-style\/shoelace/,
   'runtime:sqljs': /cdn\.jsdelivr\.net\/npm\/sql\.js@/,
 };

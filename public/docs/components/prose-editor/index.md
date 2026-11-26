@@ -60,6 +60,16 @@ external file
   ```
 :::
 
+### Configuration
+
+Importing `tp-prose-editor` does not start the global autoloader. Its toolbar dependencies are imported directly; components embedded in the editor or its HTML preview are imported individually when needed. This loading is scoped to the editor content.
+
+The **Types → Markup block** submenu inserts an AsciiDoc, HTML, LaTeX, Markdown or reStructuredText block with editable source and a rendered preview. LaTeX blocks use `tp-latex`.
+
+**Files → Import** inserts a file in one of these five languages at the current selection. **Files → Export as** saves the entire document in the selected language and asks for a filename. Exports prefer native markup; custom-element syntax preserves content without a native equivalent. HTML retains the complete document and cherry-picked imports for its TP components. Place the exported file next to the library’s `components` directory. Embedded editing blocks export their rendered content in other languages.
+
+JavaScript callers can use `await editor.getMarkup("latex")` (or `"html"`, `"asciidoc"`, `"markdown"`, `"restructuredtext"`) to obtain the exported source.
+
 ### Importing
 
 ::: tp-tabs
@@ -99,19 +109,19 @@ Javascript API
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -221,11 +231,16 @@ All tp-components and external tools used by this component are loaded automatic
 @summary Rich-text editing.
 -->
 <!--
+@credit tp-latex https://www.npmjs.com/package/@tp/tp-latex
+@summary LaTeX.js conversion and patched TikZJax assets.
+-->
+<!--
 @credit tp-utilities https://www.npmjs.com/package/@tp/tp-utilities
 @summary Shared parsers, games and rendering utilities.
 -->
 
 - [MathJax](https://www.mathjax.org/) : Mathematical notation rendering.
 - [ProseMirror](https://prosemirror.net/) : Rich-text editing.
+- [tp-latex](https://www.npmjs.com/package/@tp/tp-latex) : LaTeX.js conversion and patched TikZJax assets.
 - [tp-utilities](https://www.npmjs.com/package/@tp/tp-utilities) : Shared parsers, games and rendering utilities.
 <!-- tp-docgen:dependencies:end -->

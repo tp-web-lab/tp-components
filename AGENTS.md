@@ -6,6 +6,10 @@ Use the installed `@biomejs/biome` through `pnpm exec biome check` on every chan
 
 Run focused tests when appropriate. Do not run global accessibility or coverage reports unless the user requests them.
 
+# Light DOM only
+
+All TP custom elements must render in light DOM. Do not call `attachShadow`, create declarative shadow roots or introduce Shadow DOM through a component framework. Scope component styles with the custom-element selector and use shared TP tokens. Identify generated presentation nodes explicitly and exclude them from markup conversion so author content is not duplicated.
+
 # Reuse library components
 
 For `tp-*field` components, the clear button must be hidden unless the boolean `clearable` attribute is present. Preserve the field-type markers independently of the clear button and cover dynamic addition/removal of `clearable` in tests.
@@ -15,6 +19,16 @@ Use existing `tp-*` components whenever they meet the need, both in implementati
 For viewer and playground rendering changes, always verify that both the native render iframe and its containing panel adapt dynamically to their content: initial loading, asynchronous growth, shrinking, replacement and width changes. Avoid fixed minimum heights or stretched containers that leave empty space before the console.
 
 Apply the same checks to code editors and their tab panels/work areas: use the editor's intrinsic height synchronization instead of forcing a fixed splitter height or overriding measured heights with `100% !important`. Verify typing, deletion, file switches, toolbar changes and line wrapping after width changes.
+
+# Conversions between markup languages
+
+Language parsers produce semantic HTML using native elements. Default typography, table and code-block presentation belong to the shared TP base stylesheet, not parser-injected fallback styles. Preserve explicit author formatting separately from default presentation. Generated markup must be readable and indented without changing literal code, whitespace-sensitive content or inline text spacing.
+
+For every conversion between markup languages, prefer the target language's native syntax whenever it preserves the content, semantics and intended rendering. This applies to imports, exports, shared converters, generated documentation and examples, including rich cell content.
+
+Use native constructs for formatting, links, lists, tables, images, video and audio wherever supported. Keep native table syntax when its cells can contain the required content. Use TP extensions or custom-element directives only for features that native syntax cannot represent faithfully; reserve raw HTML and passthrough escapes for indispensable cases. This rule takes precedence over the general preference for TP components when choosing the syntax of converted content.
+
+Preserve content and supported layout properties when selecting a fallback, and describe any unavoidable losses. Validate the generated content with the target renderer, rather than checking only its source syntax.
 
 # Documentation language
 
@@ -32,7 +46,7 @@ Component `@summary` comments describe the functionality without repeating the c
 
 Declare radio-list example choices with a `ul` containing `li` items, not `dl`/`dt`/`dd`. In native markup examples, use the corresponding unordered-list syntax. Name radio and checkbox groups with their `label` attribute; use `label-position="start"` for an inline group label rather than an external paragraph or a fieldset.
 
-Introductory examples must be pure HTML (with CSS/JavaScript when necessary), displayed directly and simple but meaningful: supply the content, source or controls needed to demonstrate the component. An empty content-dependent component is not a useful introduction. Repeat the introduction as the first "Basic usage" example in HTML and equivalent native forms in all three markup languages.
+Introductory examples must be pure HTML (with CSS/JavaScript when necessary), displayed directly and simple but meaningful: supply the content, source or controls needed to demonstrate the component. An empty content-dependent component is not a useful introduction. Repeat the introduction as the first "Basic usage" example in HTML and equivalent native forms in Markdown, AsciiDoc, LaTeX and reStructuredText. Preserve blank lines and literal code indentation. Use `pnpm examples:sync-basic` to synchronize these five versions and `pnpm examples:check-basic` to verify them; do not normalize away line breaks in this comparison.
 
 All component examples in Markdown, AsciiDoc and reStructuredText must use the corresponding @tp parser's native syntax and component directives/roles, not raw HTML or HTML passthrough blocks. Preserve literal HTML only as explicitly displayed code or as source data for an HTML viewer/editor. Run `pnpm examples:check-native-markup` after changing examples or their generators.
 
@@ -48,7 +62,7 @@ Immediately before the language tabs in Examples, provide a native Markdown defi
 
 # Button legends and keyboard notation
 
-User help for every component with button commands must include a Buttons table showing each command icon or text label with a short description. The shared help renderer builds this legend from the current controls; maintain concise, accurate descriptions in the Mouse interactions table, using the actual button labels. Do not duplicate live interactive controls in this legend.
+User help for every component with button commands must include a Buttons table showing each command icon or text label with a short description. The shared help renderer builds this legend from the current controls; maintain concise, accurate descriptions in the Mouse interactions table, using the actual button labels. Do not duplicate live interactive controls in this legend. Icon commands use explicit tp-icon notation in the Mouse table; mark text-only button rows with `<!-- button -->` in their first cell. Gesture-only rows must not become Buttons entries. Preserve each icon’s library when a row contains several icons. Run `pnpm docs:check-button-icons` after changing controls or their documentation.
 
 Whenever prose or interaction tables mention keyboard keys, wrap each key in `<kbd>` independently: `<kbd>Ctrl</kbd>+<kbd>?</kbd>`, `<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>`. Keep literal code examples and machine-readable shortcut metadata unchanged. Existing Mouse interactions and Keyboard interactions tables remain required; the generated Buttons legend is additional.
 
@@ -72,3 +86,19 @@ The first component-viewer documentation tab is User interactions: include the c
 Keep User interactions out of Usage. Maintain its source in the adjacent interactions.md file; the API generator embeds it in userHelp for the viewer and contextual help.
 
 Dependencies may end with an optional See also subsection for directly related tp-* components. Declare each relationship on the component class with `@see tp-NAME - A concise description of its relationship or purpose.` The dependency synchronizer generates the links alphabetically; these references are not runtime dependencies. Omit the subsection when no relationships are declared.
+
+# Documentation cover inventory
+
+`pnpm dev` and `pnpm build` automatically run `pnpm docs:sync-cover` after API metadata generation and before Vite starts or builds. Keep this step in both scripts so the served and built documentation contain current badges and the update date.
+
+Whenever a component is created, complete its API metadata, documentation, examples and tests, then run `pnpm docs:sync-cover` before finishing the work. Also run this command when adding or removing documented examples or tests, or removing a component. It updates the Components, Examples and Tests badges at the bottom of `public/docs/cover.md` and sets its update date to the current Europe/Paris date in `yyyy/mm/dd` format.
+
+Use the generated counts, never placeholders or hand estimates: documented components with API metadata; distinct selectable examples counted once from canonical HTML, without multiplying language variants; test cases collected by the normal Vitest configuration. The test badge is an inventory, not a count of passing tests. Collection does not execute the tests. Use `pnpm docs:check-cover` to check the inventory without modifying the page; a check does not require changing a valid date every day.
+
+# Named public actions
+
+Every user-facing button or menu action must have a documented, named public method on the component that owns the action. Prefer sharing the implementation between the event handler and that method. Preserve disabled, read-only and busy guards, emitted events and asynchronous completion. Do not add a generic command-name dispatcher as a substitute for named actions. Embedded functional components own their own commands; do not duplicate their APIs on every parent. Test meaningful button/method equivalence and regenerate API manifests and TypeDoc when adding or changing an action.
+
+# Components sidebar order
+
+Keep the entire Components subtree of `public/docs/sidebar.md` alphabetical at every depth. `pnpm docs:sync-sidebar` sorts sibling entries without changing their links or parents; `pnpm docs:check-sidebar` checks without writing. Both `pnpm dev` and `pnpm build` run the sorter automatically, and Vite also sorts sidebar edits while the development server is running. Keep the automatic hooks when changing documentation scripts. Add new entries under their intended parent; do not move entries to another category to achieve alphabetical order.

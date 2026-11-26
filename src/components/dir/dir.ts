@@ -435,8 +435,7 @@ export class TpDir extends TpBase {
 
 				li.append(check, icon, label);
 				li.addEventListener("click", () => {
-					this.mode = choice;
-					dropdownEl.open = false;
+					this.selectMode(choice);
 				});
 
 				newUl.append(li);
@@ -731,6 +730,18 @@ export class TpDir extends TpBase {
 	private teardownDocumentObserver(): void {
 		this.documentObserver?.disconnect();
 		this.documentObserver = null;
+	}
+
+	/** Opens or closes the choices menu, unless this control is disabled. */
+	toggleMenu(): void {
+		this.onControlClick();
+	}
+
+	/** Applies the chosen mode and closes its menu, unless the controller is disabled. */
+	selectMode(mode: TpDirType): void {
+		if (this.disabled) return;
+		this.mode = mode;
+		if (this.dropdownEl) this.dropdownEl.open = false;
 	}
 }
 

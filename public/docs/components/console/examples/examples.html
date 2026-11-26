@@ -1,4 +1,4 @@
-<tp-html-viewer label="tp-console" allow-script>
+<tp-html-viewer label="tp-console" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
       <tp-box data-intro-action="console" data-allow-script="">
@@ -128,6 +128,23 @@
             });
             }
           </script>
+    </div>
+
+    <div role="example" label="Console presentation modes">
+      <h3>Default</h3>
+      <tp-console mode="default" data-console-mode-example></tp-console>
+      <h3>Lite</h3>
+      <tp-console mode="lite" data-console-mode-example></tp-console>
+      <h3>Simple</h3>
+      <tp-console mode="simple" data-console-mode-example></tp-console>
+      <script type="module">
+        import "/components/console/console.js";
+        for (const output of document.querySelectorAll("tp-console[data-console-mode-example]")) {
+          output.log("Result", 42);
+          output.info("Calculation complete.");
+          output.error("An example error.");
+        }
+      </script>
     </div>
   </template>
 </tp-html-viewer>

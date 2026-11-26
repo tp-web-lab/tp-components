@@ -35,3 +35,15 @@ Playground questions let learners edit a complete programming project and submit
 <!-- family-introduction:end -->
 
 ## Further reading
+
+::: tp-center {intrinsic}
+:tp-icon:{name="scheme-playground-question" library="components" size="4em"}
+
+[tp-scheme-playground-question](scheme-playground-question/index.md)
+:::
+
+::: tp-center {intrinsic}
+:tp-icon:{name="ocaml-playground-question" library="components" size="4em"}
+
+[tp-ocaml-playground-question](ocaml-playground-question/index.md)
+:::

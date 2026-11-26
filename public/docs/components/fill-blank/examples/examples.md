@@ -1,4 +1,4 @@
-::::::: tp-markdown-viewer { label="tp-fill-blank" allow-script }
+::::::: tp-markdown-viewer { label="tp-fill-blank" allow-script preserve-source }
 :::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-fill-blank

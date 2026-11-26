@@ -1,0 +1,59 @@
+{
+  "browser": "firefox",
+  "version": "153.0",
+  "checkedAt": "2026-11-24T11:30:17.126Z",
+  "cases": [
+    {
+      "case": "recursion",
+      "steps": 24,
+      "milliseconds": 4187,
+      "passed": true
+    },
+    {
+      "case": "variables",
+      "steps": 5,
+      "milliseconds": 3977,
+      "passed": true
+    },
+    {
+      "case": "lists",
+      "steps": 5,
+      "milliseconds": 4061,
+      "passed": true
+    },
+    {
+      "case": "sharing",
+      "steps": 8,
+      "milliseconds": 3908,
+      "passed": true
+    },
+    {
+      "case": "syntax-error",
+      "passed": true
+    },
+    {
+      "case": "event-limit",
+      "steps": 1001,
+      "passed": true
+    },
+    {
+      "case": "stop-native-computation",
+      "passed": true
+    },
+    {
+      "case": "execution-timeout",
+      "milliseconds": 13748,
+      "passed": true
+    },
+    {
+      "case": "recovery-after-timeout",
+      "milliseconds": 3863,
+      "passed": true
+    }
+  ],
+  "requestHosts": [
+    "127.0.0.1",
+    "cdn.jsdelivr.net"
+  ],
+  "pythonTutorRequests": []
+}

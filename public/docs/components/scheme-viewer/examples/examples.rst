@@ -1,0 +1,114 @@
+.. tp-restructuredtext-viewer::
+   :label: tp-scheme-viewer
+   :allow-script:
+
+   .. script::
+      :type: tp/restructuredtext
+
+      .. example:: Basic usage
+
+         .. tp-scheme-viewer::
+            :src: /docs/components/_shared/intro-projects/scheme.json
+
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/scheme/scheme.js";
+            import "/components/scheme-viewer/scheme-viewer.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-scheme-viewer");
+            element1.setAttribute("src", "/docs/components/_shared/intro-projects/scheme.json");
+            example.append(element1);
+
+            document.body.append(example);
+
+      .. example:: Scheme tests
+
+         .. tp-scheme-viewer::
+            :src: /docs/components/scheme-playground/examples/test-project.json
+
+      .. example:: Compare presentation modes
+
+         .. role:: example-kbd-1(kbd)
+
+         .. role:: example-kbd-2(kbd)
+
+         .. role:: example-kbd-3(kbd)
+
+         .. role:: example-kbd-4(kbd)
+
+         .. role:: example-kbd-5(kbd)
+
+         .. role:: example-kbd-6(kbd)
+
+         .. section::
+
+            .. heading-level:: 3
+
+            mode="default" — Standard controls
+            ==================================
+
+            Open Code to edit the source, then click Run or press :example-kbd-1:`Shift`\ +\ :example-kbd-2:`Enter` in the editor.
+
+            Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.
+
+            .. tp-scheme-viewer::
+               :mode: default
+
+               .. script::
+                  :type: tp/scheme
+                  :filename: main.scm
+
+                  (display "Printed message before the intentional error.")
+                  (newline)
+                  (error "Intentional error: the error appears in the output.")
+
+         .. section::
+
+            .. heading-level:: 3
+
+            mode="lite" — Compact controls
+            ==============================
+
+            Open Code to edit the source, then click Run or press :example-kbd-3:`Shift`\ +\ :example-kbd-4:`Enter` in the editor.
+
+            Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.
+
+            .. tp-scheme-viewer::
+               :mode: lite
+
+               .. script::
+                  :type: tp/scheme
+                  :filename: main.scm
+
+                  (display "Printed message before the intentional error.")
+                  (newline)
+                  (error "Intentional error: the error appears in the output.")
+
+         .. section::
+
+            .. heading-level:: 3
+
+            mode="simple" — Editor and rendered output only
+            ===============================================
+
+            Edit the code below, keep the cursor in the editor and press :example-kbd-5:`Shift`\ +\ :example-kbd-6:`Enter` (Return) to run it. This viewer has no Run button.
+
+            Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.
+
+            .. tp-scheme-viewer::
+               :mode: simple
+
+               .. script::
+                  :type: tp/scheme
+                  :filename: main.scm
+
+                  (display "Printed message before the intentional error.")
+                  (newline)
+                  (error "Intentional error: the error appears in the output.")
+
+         Programming viewers already have compact controls, so default and lite look alike. The first run may load the language engine.

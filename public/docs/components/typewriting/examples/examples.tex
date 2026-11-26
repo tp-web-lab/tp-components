@@ -47,3 +47,17 @@ Press Speak, then try Pause, Resume and Stop. Some voices do not report word bou
 
 \wcTpTextToSpeech[for=spoken-text,lang=en]{}
 \end{document}
+
+% !tp-example Initially hidden tab
+\documentclass{article}
+\begin{document}
+\wcTpTabs{
+  \begin{description}
+    \item[{Instructions}] Open Animated text to start the reveal. Return to Instructions, then reopen Animated text to start it again.
+    \item[{Animated text}] \wcTpTypewriting[speed=15,delay=300]{
+      This sentence starts appearing only when you open this tab.
+
+    }
+  \end{description}
+}
+\end{document}

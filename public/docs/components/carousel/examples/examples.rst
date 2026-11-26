@@ -87,3 +87,69 @@
 
             .. image:: /docs/medias/images/walking-shoe.svg
                :alt: Walking shoe
+
+      .. example:: Automatic scrolling and hover pause
+
+         Hover over the carousel to pause the movement. Move the pointer away to resume from the same position.
+
+         .. tp-carousel::
+            :auto: 3000
+            :transition: start-to-end
+            :hide-controls:
+            :aria-label: TP markup languages
+            :height: 3em
+
+            .. html-figure::
+
+               .. role:: carousel-logo-html(tp-icon)
+                  :name: tp-html-logo
+                  :library: tp
+                  :size: 3em
+                  :role: img
+                  :aria-label: TP HTML
+
+               :carousel-logo-html:`HTML`
+
+            .. html-figure::
+
+               .. role:: carousel-logo-asciidoc(tp-icon)
+                  :name: tp-asciidoc-logo
+                  :library: tp
+                  :size: 3em
+                  :role: img
+                  :aria-label: TP AsciiDoc
+
+               :carousel-logo-asciidoc:`AsciiDoc`
+
+            .. html-figure::
+
+               .. role:: carousel-logo-latex(tp-icon)
+                  :name: tp-latex-logo
+                  :library: tp
+                  :size: 3em
+                  :role: img
+                  :aria-label: TP LaTeX
+
+               :carousel-logo-latex:`LaTeX`
+
+            .. html-figure::
+
+               .. role:: carousel-logo-markdown(tp-icon)
+                  :name: tp-markdown-logo
+                  :library: tp
+                  :size: 3em
+                  :role: img
+                  :aria-label: TP Markdown
+
+               :carousel-logo-markdown:`Markdown`
+
+            .. html-figure::
+
+               .. role:: carousel-logo-restructuredtext(tp-icon)
+                  :name: tp-restructuredtext-logo
+                  :library: tp
+                  :size: 3em
+                  :role: img
+                  :aria-label: TP reStructuredText
+
+               :carousel-logo-restructuredtext:`reStructuredText`

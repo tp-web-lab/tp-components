@@ -2,12 +2,10 @@ tp-icon-button {
   --tp-icon-button-size: 1.75em;
   --tp-icon-button-icon-size: 1em;
   --tp-icon-button-radius: 999rem;
-  --tp-icon-button-hover-background: color-mix(
-    in srgb,
-    currentColor 10%,
-    transparent
-  );
-  --tp-icon-button-focus-ring: currentColor;
+  --tp-icon-button-border-color: var(--tp-brand-stroke-mid);
+  --tp-icon-button-hover-background: var(--tp-brand-fill-soft);
+  --tp-icon-button-hover-color: var(--tp-brand-text-on-soft);
+  --tp-icon-button-focus-ring: var(--tp-brand-stroke-mid);
 
   display: inline-flex;
   line-height: 1;
@@ -53,7 +51,7 @@ tp-icon-button > :is(button, a) {
   align-items: center;
   appearance: none;
   background: transparent;
-  border: 0;
+  border: 1px solid var(--tp-icon-button-border-color);
   border-radius: var(--tp-icon-button-radius);
   color: currentColor;
   cursor: pointer;
@@ -66,8 +64,15 @@ tp-icon-button > :is(button, a) {
   padding: 0;
 }
 
-tp-icon-button > :is(button, a):hover {
+tp-icon-button > :is(button, a):hover:not(:disabled, [aria-disabled="true"]) {
   background: var(--tp-icon-button-hover-background);
+  color: var(--tp-icon-button-hover-color);
+}
+
+/* Toggle state belongs to the button, independently of its container. */
+tp-icon-button[aria-pressed="true"] > :is(button, a):not(:disabled, [aria-disabled="true"]) {
+  background: var(--tp-icon-button-hover-background);
+  color: var(--tp-icon-button-hover-color);
 }
 
 tp-icon-button > :is(button, a):focus-visible {
@@ -84,28 +89,54 @@ tp-icon-button > :is(button, a)[aria-disabled="true"]:hover {
   background: transparent;
 }
 
-tp-icon-button tp-icon {
+tp-icon-button > :is(button, a) > tp-icon {
   --tp-icon-size: var(--tp-icon-button-icon-size);
+  font-size: inherit;
+  inline-size: var(--tp-icon-button-icon-size);
+  block-size: var(--tp-icon-button-icon-size);
+  flex: none;
+  margin: 0;
+}
+
+/* The icon's default 1em minimum must not enlarge a smaller button icon. */
+tp-icon-button > :is(button, a) > tp-icon > [data-tp-icon-container] {
+  min-block-size: 0;
 }
 
 tp-icon-button[variant='brand'] {
-  color: var(--tp-button-brand, #7c3aed);
+  color: var(--tp-button-brand, var(--tp-brand-text-colorful));
 }
 
 tp-icon-button[variant='success'] {
-  color: var(--tp-button-success, #15803d);
+  --tp-icon-button-border-color: var(--tp-success-stroke-mid);
+  --tp-icon-button-hover-background: var(--tp-success-fill-soft);
+  --tp-icon-button-hover-color: var(--tp-success-text-on-soft);
+  --tp-icon-button-focus-ring: var(--tp-success-stroke-mid);
+  color: var(--tp-button-success, var(--tp-success-text-colorful));
 }
 
 tp-icon-button[variant='danger'] {
-  color: var(--tp-button-danger, #b91c1c);
+  --tp-icon-button-border-color: var(--tp-danger-stroke-mid);
+  --tp-icon-button-hover-background: var(--tp-danger-fill-soft);
+  --tp-icon-button-hover-color: var(--tp-danger-text-on-soft);
+  --tp-icon-button-focus-ring: var(--tp-danger-stroke-mid);
+  color: var(--tp-button-danger, var(--tp-danger-text-colorful));
 }
 
 tp-icon-button[variant='warning'] {
-  color: var(--tp-button-warning, #c2410c);
+  --tp-icon-button-border-color: var(--tp-warning-stroke-mid);
+  --tp-icon-button-hover-background: var(--tp-warning-fill-soft);
+  --tp-icon-button-hover-color: var(--tp-warning-text-on-soft);
+  --tp-icon-button-focus-ring: var(--tp-warning-stroke-mid);
+  color: var(--tp-button-warning, var(--tp-warning-text-colorful));
 }
 
 tp-icon-button[variant='info'] {
-  color: var(--tp-button-info, #1d4ed8);
+  --tp-icon-button-border-color: var(--tp-info-stroke-mid);
+  --tp-icon-button-hover-background: var(--tp-info-fill-soft);
+  --tp-icon-button-hover-color: var(--tp-info-text-on-soft);
+  --tp-icon-button-focus-ring: var(--tp-info-stroke-mid);
+  color: var(--tp-button-info, var(--tp-info-text-colorful));
 }
 
 tp-icon-button[variant='neutral'] {
@@ -118,7 +149,7 @@ tp-icon-button > :is(button, a) {
   text-decoration: none;
   box-sizing: border-box;
 }
-tp-icon-button[outlined] > :is(button, a) { border: 1px solid currentColor; }
+tp-icon-button[outlined] > :is(button, a) { border: 1px solid var(--tp-icon-button-border-color); }
 tp-icon-button[pill] > :is(button, a) { border-radius: 999px; }
 tp-icon-button[loading] > :is(button, a)::before {
   content: "";

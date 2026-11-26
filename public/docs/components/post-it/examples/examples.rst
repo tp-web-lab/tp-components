@@ -18,7 +18,6 @@
                Keep examples **simple and meaningful**.
 
                - Show a useful result.
-
                - Try the keyboard controls.
 
       .. example:: Javascript API

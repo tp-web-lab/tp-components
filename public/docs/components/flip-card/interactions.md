@@ -4,7 +4,7 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Flip button | Switch between the front and back of the card. |
+| :tp-icon:{name="card-flip" size="2em"} Flip button | Switch between the front and back of the card. |
 | Card without a flip button | Click the card itself to flip it. |
 
 #### Keyboard interactions

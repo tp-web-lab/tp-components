@@ -15,6 +15,7 @@
          .. script::
             :type: module
 
+            import "/components/javascript/javascript.js";
             import "/components/javascript-playground/javascript-playground.js";
 
             const example = document.createDocumentFragment();
@@ -29,3 +30,8 @@
 
          .. tp-javascript-playground::
             :src: /docs/components/_shared/single-source/example.js
+
+      .. example:: Mocha and Chai results
+
+         .. tp-javascript-playground::
+            :src: /docs/components/javascript-playground/examples/framework-tests.json

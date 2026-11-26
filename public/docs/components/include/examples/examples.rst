@@ -11,6 +11,12 @@
             :src: /docs/components/include/examples/welcome.html
             :loading: Loading the shared notice…
 
+      .. example:: Raw HTML
+
+         .. tp-include::
+            :src: /docs/components/include/examples/welcome.html
+            :mode: raw
+
       .. example:: Javascript API
 
          .. script::
@@ -26,3 +32,47 @@
             example.append(element1);
 
             document.body.append(example);
+
+      .. example:: Converted Markdown
+
+         .. tp-include::
+            :src: /docs/components/include/examples/notice.md
+
+      .. example:: Raw Markdown
+
+         .. tp-include::
+            :src: /docs/components/include/examples/notice.md
+            :mode: raw
+
+      .. example:: Converted AsciiDoc
+
+         .. tp-include::
+            :src: /docs/components/include/examples/notice.adoc
+
+      .. example:: Raw AsciiDoc
+
+         .. tp-include::
+            :src: /docs/components/include/examples/notice.adoc
+            :mode: raw
+
+      .. example:: Converted LaTeX
+
+         .. tp-include::
+            :src: /docs/components/include/examples/notice.tex
+
+      .. example:: Raw LaTeX
+
+         .. tp-include::
+            :src: /docs/components/include/examples/notice.tex
+            :mode: raw
+
+      .. example:: Converted reStructuredText
+
+         .. tp-include::
+            :src: /docs/components/include/examples/notice.rst
+
+      .. example:: Raw reStructuredText
+
+         .. tp-include::
+            :src: /docs/components/include/examples/notice.rst
+            :mode: raw

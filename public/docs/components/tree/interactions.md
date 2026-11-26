@@ -5,7 +5,9 @@
 | Control or gesture | Result |
 | --- | --- |
 | Using the component | Expand or collapse branches to inspect nested items. |
+| Horizontal scrolling | Read long item labels without wrapping them onto multiple lines. |
 | Select | Select available links or entries to use the actions provided by the surrounding page. |
+| :tp-icon:{name="plus" library="tp" size="2em"} / :tp-icon:{name="minus" library="tp" size="2em"} Expand/Collapse branch | Expand a closed branch or collapse an open branch. |
 
 #### Keyboard interactions
 

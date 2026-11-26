@@ -1,4 +1,5 @@
 import { reportToolLoaded } from "@tp/tp-utilities";
+import { expandMarkupIncludes } from "../../utilities/markup-includes.js";
 /**
  * @module components/restructuredtext
  * @summary reStructuredText rendering component.
@@ -105,8 +106,9 @@ async function mountRestructuredTextHtml(
  */
 export async function renderRestructuredTextToHtml(
 	source: string,
+	options: TpRestructuredTextOptions = {},
 ): Promise<string> {
-	return createTpRestructuredTextParser().render(source);
+	return createTpRestructuredTextParser(options).render(source);
 }
 
 /**
@@ -286,10 +288,15 @@ export class TpRestructuredText extends TpBase {
 
 		try {
 			const { source, currentUrl } = await this.getRestructuredTextSource();
+			const includedSource = await expandMarkupIncludes(
+				source,
+				"restructuredtext",
+				currentUrl.href,
+			);
 			if (token !== this.renderToken) return;
 			this.setAttribute("data-tp-restructuredtext-source", currentUrl.pathname);
 			const parser = createTpRestructuredTextParser({ doctest: this.doctest });
-			const result = await parser.renderDocument(source);
+			const result = await parser.renderDocument(includedSource);
 			await mountRestructuredTextHtml(result.html, this.outputElement);
 			await renderRstViewers(this.outputElement, { parser });
 			await highlightRestructuredTextCode(this.outputElement);

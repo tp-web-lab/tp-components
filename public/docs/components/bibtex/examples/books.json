@@ -1,0 +1,22 @@
+[
+  {
+    "id": "lamport1994",
+    "type": "book",
+    "author": [
+      {
+        "given": "Leslie",
+        "family": "Lamport"
+      }
+    ],
+    "title": "LaTeX: A Document Preparation System",
+    "edition": "2",
+    "publisher": "Addison-Wesley",
+    "issued": {
+      "date-parts": [
+        [
+          1994
+        ]
+      ]
+    }
+  }
+]

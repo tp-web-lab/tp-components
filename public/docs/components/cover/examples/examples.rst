@@ -13,9 +13,10 @@
 
             A short introduction
 
-            .. h2::
+            .. heading-level:: 2
 
-               A heading centered in the cover
+            A heading centered in the cover
+            ===============================
 
             Supporting information stays below.
 

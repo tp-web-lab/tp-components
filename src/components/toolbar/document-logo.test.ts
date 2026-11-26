@@ -10,12 +10,30 @@ import "../asciidoc-multi-pages/asciidoc-multi-pages.js";
 import "../restructuredtext-single-page/restructuredtext-single-page.js";
 import "../restructuredtext-multi-pages/restructuredtext-multi-pages.js";
 
+import "../markup-multi-slides/markup-multi-slides.js";
+import "../html-multi-slides/html-multi-slides.js";
+import "../markdown-multi-slides/markdown-multi-slides.js";
+import "../asciidoc-multi-slides/asciidoc-multi-slides.js";
+import "../restructuredtext-multi-slides/restructuredtext-multi-slides.js";
+import "../latex-multi-slides/latex-multi-slides.js";
+import "../latex-single-page/latex-single-page.js";
+import "../latex-multi-pages/latex-multi-pages.js";
+
 afterEach(() => {
 	document.body.replaceChildren();
 	vi.unstubAllGlobals();
 });
 
 it.each([
+	"tp-markup-multi-slides",
+	"tp-html-multi-slides",
+	"tp-markdown-multi-slides",
+	"tp-asciidoc-multi-slides",
+	"tp-restructuredtext-multi-slides",
+	"tp-latex-multi-slides",
+	"tp-latex-single-page",
+	"tp-latex-multi-pages",
+
 	"tp-markup-single-page",
 	"tp-markup-multi-pages",
 	"tp-html-single-page",
@@ -45,9 +63,14 @@ it.each([
 		const toolbar = element.querySelector("tp-toolbar");
 		if (!toolbar) throw new Error("Missing toolbar");
 		const icon = toolbar.querySelector("[data-document-logo]");
-		expect(icon?.tagName).toBe("TP-ICON-BUTTON");
+		expect(icon?.tagName).toBe("TP-BUTTON");
 		expect(icon?.getAttribute("size")).toBe("m");
-		expect(icon?.getAttribute("src")).toBe("/first.svg");
+		expect(icon?.getAttribute("href")).toBe(
+			new URL("./", document.baseURI).href,
+		);
+		expect(icon?.querySelector("tp-icon")?.getAttribute("src")).toBe(
+			"/first.svg",
+		);
 		expect(icon?.querySelector("tp-icon")?.getAttribute("src")).toBe(
 			"/first.svg",
 		);
@@ -83,15 +106,35 @@ it.each([
 		expect(
 			toolbar.querySelector("[data-toolbar-start]")?.firstElementChild,
 		).toBe(icon);
-		expect(icon?.getAttribute("src")).toBe("/second.svg");
+		expect(icon?.querySelector("tp-icon")?.getAttribute("src")).toBe(
+			"/second.svg",
+		);
 		expect(element.querySelector("tp-toolbar")).toBe(toolbar);
+		element.setAttribute("logo", "logo-tp");
+		expect(icon?.querySelector("tp-icon")?.hasAttribute("src")).toBe(false);
+		expect(icon?.querySelector("tp-icon")?.getAttribute("library")).toBe("tp");
+		expect(icon?.querySelector("tp-icon")?.getAttribute("name")).toBe(
+			"logo-tp",
+		);
+		await vi.waitFor(() =>
+			expect(icon?.querySelector("svg text")?.getAttribute("textLength")).toBe(
+				"60%",
+			),
+		);
+		element.setAttribute("logo", "/second.svg");
+		expect(icon?.querySelector("tp-icon")?.getAttribute("src")).toBe(
+			"/second.svg",
+		);
+		expect(icon?.querySelector("tp-icon")?.hasAttribute("name")).toBe(false);
+		expect(icon?.querySelector("tp-icon")?.hasAttribute("library")).toBe(false);
 		element.removeAttribute("logo");
 		expect(toolbar.querySelector("[data-document-logo]")).toBeNull();
 		element.setAttribute("logo", "/third.svg");
 		expect(
 			toolbar
 				.querySelector("[data-toolbar-start]")
-				?.firstElementChild?.getAttribute("src"),
+				?.firstElementChild?.querySelector("tp-icon")
+				?.getAttribute("src"),
 		).toBe("/third.svg");
 		element.setAttribute("logo", " ");
 		expect(toolbar.querySelector("[data-document-logo]")).toBeNull();

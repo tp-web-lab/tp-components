@@ -73,7 +73,24 @@ For a Markdown navbar:
 
 ### Linked toolbar logo
 
-Use `logo="logo.svg"` with `logo-href="https://example.org/"` to display the logo as a `tp-icon-button` that opens the associated website in the current tab. Relative destinations resolve against the page URL. When `logo-href` is omitted or empty, it defaults to `./` (the current directory). An invalid or non-HTTP(S) destination leaves the logo visible but inactive. Both attributes update immediately. Single-page documents also require `toolbar` to display the toolbar.
+Use `logo="logo.svg"` with `logo-href="https://example.org/"` to display the logo as a borderless `tp-button`, with a fixed height of `2em` and a width that follows the logo’s proportions, that opens the associated website in the current tab. Relative destinations resolve against the page URL. When `logo-href` is omitted or empty, it defaults to `./` (the current directory). An invalid or non-HTTP(S) destination leaves the logo visible but inactive. Both attributes update immediately. Single-page documents also require `toolbar` to display the toolbar.
+
+The `logo` attribute accepts an icon name from the `tp` library, such as `logo="logo-tp"`, or an SVG URL. An empty value hides the logo.
+
+### Internal links and browser history
+
+Internal links to a section, another page, or a section on another page create browser history entries. Sidebar links and the Home, Previous page and Next page controls use the same history. Back restores the previous page and reading position; Forward returns to the destination. This also works when the guide is embedded in another document, without changing the parent document’s address.
+
+
+The reading position is also saved when leaving the document for another site or guide. Repeated Back and Forward actions restore the full page URL, including its anchor, and the last horizontal and vertical reading position. A saved reading position takes precedence over the initial anchor location. This is automatic; no page-specific script or attribute is required. Pages visited internally before leaving also retain their saved positions after the document reloads. Each multi-pages instance has its own saved position. Give instances stable, unique IDs if their order can change between visits.
+
+Restoration follows asynchronous content layout and stops as soon as the reader scrolls, touches, clicks or types, so later rendering cannot pull the reader back. It preserves reading navigation, not arbitrary unsaved editor state. See the [cross-browser reading-history verification](../../appendices/multi-pages-reading-history.md) for tested scenarios, measured positions and reproduction commands.
+
+For an embedded guide, the current local page and fragment are also restored after a full-document return. Its navigation leaves the parent URL unchanged, and both reading panels keep their own scroll positions. Use a unique stable `id` for each guide. See the [nested-guide browser verification](../../appendices/multi-pages-nested-history.md).
+
+### Keeping the current page visible
+
+The navigation tree automatically opens the branches leading to the current page and scrolls the sidebar just enough to keep its selected link visible. This also applies to direct links, browser history, reopening the menu and resizing the sidebar. Other branches opened by the reader stay open, and the reading pane is not scrolled by this adjustment.
 
 ### Importing
 
@@ -114,19 +131,19 @@ Javascript API
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md loading=lazy}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -148,7 +165,7 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 <!--
 @tp-dependency tp-calculator
-@summary Scientific calculator with an editable expression and degree/radian modes.
+@summary Provides a scientific calculator with an editable expression and degree/radian modes.
 -->
 <!--
 @tp-dependency tp-clock
@@ -171,6 +188,10 @@ All tp-components and external tools used by this component are loaded automatic
 @summary Fullscreen controller button.
 -->
 <!--
+@tp-dependency tp-global-listof
+@summary Lists labelled elements across the pages of a multi-page document, with links to their pages and anchors.
+-->
+<!--
 @tp-dependency tp-icon
 @summary SVG icon component with inline, URL, and registry sources.
 -->
@@ -184,7 +205,7 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 <!--
 @tp-dependency tp-post-it-editor
-@summary creates and edits persistent personal annotations attached to document elements.
+@summary Creates and edits persistent personal annotations attached to document elements.
 -->
 <!--
 @tp-dependency tp-screen
@@ -217,16 +238,17 @@ All tp-components and external tools used by this component are loaded automatic
 
 - [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 - [`<tp-button>`](#/components/button/index.md) : Button component that supports native button and link rendering.
-- [`<tp-calculator>`](#/components/calculator/index.md) : Scientific calculator with an editable expression and degree/radian modes.
+- [`<tp-calculator>`](#/components/calculator/index.md) : Provides a scientific calculator with an editable expression and degree/radian modes.
 - [`<tp-clock>`](#/components/clock/index.md) : Live clock component with digital or analogic display and date tooltip.
 - [`<tp-color>`](#/components/color/index.md) : Brand color preset controller scoped to the containing element.
 - [`<tp-divider>`](#/components/divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
 - [`<tp-drawer>`](#/components/drawer/index.md) : Drawer overlay component.
 - [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
+- [`<tp-global-listof>`](#/components/global-listof/index.md) : Lists labelled elements across the pages of a multi-page document, with links to their pages and anchors.
 - [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
 - [`<tp-lang>`](#/components/lang/index.md) : Documentation language selector.
-- [`<tp-post-it-editor>`](#/components/post-it-editor/index.md) : creates and edits persistent personal annotations attached to document elements.
+- [`<tp-post-it-editor>`](#/components/post-it-editor/index.md) : Creates and edits persistent personal annotations attached to document elements.
 - [`<tp-screen>`](#/components/screen/index.md) : Responsive page preview in selectable device viewports.
 - [`<tp-source>`](#/components/source/index.md) : Source repository link button.
 - [`<tp-splitter>`](#/components/splitter/index.md) : Splitter component with two resizable panels.

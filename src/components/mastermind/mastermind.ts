@@ -1,3 +1,4 @@
+import { showGameRules, toggleGameHelp } from "../../utilities/game-header.js";
 /**
  * @module components/mastermind
  * @summary Interactive Mastermind game component.
@@ -479,14 +480,16 @@ export class TpMastermind extends TpBase {
 		return { exact, misplaced };
 	}
 
-	private undo(): void {
+	/** Restores the preceding guess state. */
+	undo(): void {
 		if (this.historyIndex === 0) return;
 		this.historyIndex -= 1;
 		const snapshot = this.history[this.historyIndex];
 		if (snapshot) this.restoreSnapshot(snapshot);
 	}
 
-	private redo(): void {
+	/** Restores the next guess state. */
+	redo(): void {
 		if (this.historyIndex >= this.history.length - 1) return;
 		this.historyIndex += 1;
 		const snapshot = this.history[this.historyIndex];
@@ -513,14 +516,16 @@ export class TpMastermind extends TpBase {
 		this.render();
 	}
 
-	private resetGame(): void {
+	/** Restarts the current puzzle. */
+	resetGame(): void {
 		this.querySelector<TpChronometer>(".tp-mastermind-chronometer")?.stop();
 		this.chronometerStarted = false;
 		this.resetState();
 		this.render();
 	}
 
-	private resetWithNewCode(): void {
+	/** Starts a new puzzle with another secret code. */
+	resetWithNewCode(): void {
 		const previous = this.solution.join(" ");
 		let next: MastermindColor[];
 		do {
@@ -551,6 +556,26 @@ export class TpMastermind extends TpBase {
 
 	private renderError(message: string): void {
 		this.innerHTML = `<div class="tp-mastermind-error">Error: ${message}</div>`;
+	}
+
+	/** Opens or closes the game assistance menu. */
+	toggleHelp(): void {
+		toggleGameHelp(this);
+	}
+
+	/** Opens the rules of this game in its drawer. */
+	showRules(): void {
+		showGameRules(this);
+	}
+
+	/** Fills the next empty peg of the current guess from the solution. */
+	revealPeg(): void {
+		this.applyAssist("show-peg");
+	}
+
+	/** Fills the current guess with the complete solution. */
+	revealSolution(): void {
+		this.applyAssist("show-solution");
 	}
 }
 

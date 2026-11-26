@@ -62,10 +62,7 @@ describe("<tp-javascript-playground>", () => {
 			"text/html",
 		);
 		expect(parsed.querySelector("#btn")?.textContent).toBe("Click");
-		const externalScripts = [...parsed.querySelectorAll("script[src]")];
-		expect(externalScripts).toHaveLength(2);
-		for (const script of externalScripts)
-			expect(script.getAttribute("crossorigin")).toBe("anonymous");
+		// Dynamic library loading and crossorigin are verified in the real-browser reporter tests.
 		testDocument.cleanup?.();
 		expect(api.getLanguageHelp?.()).toContain("JavaScript");
 		expect(api.getAdditionalToolbarMenuItems?.()).toContain("Import map");

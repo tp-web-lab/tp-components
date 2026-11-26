@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Markup conversion matrix</title><style>body{font:16px system-ui;margin:2rem}table{border-collapse:collapse}td,th{border:1px solid #aaa;padding:.4rem}.pass{color:#075}.fail{color:#a00}pre{white-space:pre-wrap}details{margin:1rem 0}</style></head><body>
+<h1>Markup conversion matrix</h1><p>Four source languages, twelve directions, four scenarios. Each output is parsed by its target renderer, including Docutils.</p><button id="run">Run conversions</button><p id="status">Ready</p><table><thead><tr><th>Direction</th><th>Scenario</th><th>Result</th></tr></thead><tbody id="results"></tbody></table><div id="outputs"></div>
+<script type="module">
+import {matrixLanguages,matrixCases,runMarkupMatrixCase} from '/src/utilities/markup-matrix-fixtures.ts';
+document.querySelector('#run').onclick=async()=>{
+ document.querySelector('#results').replaceChildren();document.querySelector('#outputs').replaceChildren();let passed=0,total=0;
+ for(const from of matrixLanguages)for(const to of matrixLanguages)if(from!==to)for(const name of matrixCases){
+  total++;document.querySelector('#status').textContent=`Running ${from} → ${to}: ${name}`;
+  const row=document.querySelector('#results').insertRow();row.insertCell().textContent=from+' → '+to;row.insertCell().textContent=name;const cell=row.insertCell();
+  try{const result=await runMarkupMatrixCase(name,from,to,location.href);cell.textContent=result.errors.length?result.errors.join('; '):'PASS';cell.className=result.errors.length?'fail':'pass';if(!result.errors.length)passed++;
+   const details=document.createElement('details'),summary=document.createElement('summary'),source=document.createElement('pre'),output=document.createElement('div');summary.textContent=from+' → '+to+': '+name;source.textContent=result.converted;output.innerHTML=result.rendered;details.append(summary,source,output);document.querySelector('#outputs').append(details);
+  }catch(error){cell.textContent=String(error);cell.className='fail';}
+ }
+ document.querySelector('#status').textContent=`Complete: ${passed}/${total} passed`;
+};
+</script></body></html>

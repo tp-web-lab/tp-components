@@ -1,4 +1,4 @@
-::::::: tp-markdown-viewer { label="tp-popover" allow-script }
+::::::: tp-markdown-viewer { label="tp-popover" allow-script preserve-source }
 :::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::::: tp-box { data-intro-action="popover" data-allow-script }
@@ -14,9 +14,8 @@ Close
 :::
 ::::
 
-::: p { data-demo-status role="status" }
 Try the popover using its trigger.
-:::
+{data-demo-status role="status"}
 
 ::: script { src="/docs/components/_shared/introduction-actions.js" }
 :::

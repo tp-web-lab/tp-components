@@ -33,7 +33,7 @@ export type TpColorPreset = (typeof TP_COLOR_PRESETS)[number];
  * @internal
  */
 export const TP_COLOR_SWATCH: Record<TpColorPreset, string> = {
-	"tp-default": "#88B1A1" /* tp-glaz */,
+	"tp-default": "#ae75f6" /* tp-purple */,
 	"tp-red": "#ef5655",
 	"tp-orange": "#f08039",
 	"tp-amber": "#e89a26",

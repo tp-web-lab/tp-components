@@ -1,7 +1,14 @@
-import { toolLoadedScript } from "@tp/tp-utilities";
+import {
+	createTestReporter,
+	testResultsHead,
+} from "../playground/test-results.js";
+import {
+	createSwiplRuntimeScript,
+	serializePrologData,
+} from "./prolog-runtime.js";
 /**
  * @module components/prolog-playground/prolog-test-document
- * @summary Scryer Prolog test document builder.
+ * @summary SWI-Prolog WASM test document builder.
  */
 
 import type { TpExecutionDocument } from "../playground/playground.js";
@@ -12,15 +19,6 @@ import {
 	resolveEntryFile,
 } from "../playground/playground-build-utils.js";
 import type { TpPrologProject } from "./prolog-project.js";
-import {
-	flattenLocalPrologModules,
-	getLocalPrologModuleNames,
-	PROLOG_DOM_MODULE_SOURCE,
-	usesPrologDomModule,
-} from "./prolog-source.js";
-
-const SCRYER_MODULE_URL = "https://esm.sh/scryer";
-
 /** Options for building a Prolog test document. */
 export interface BuildPrologTestDocumentOptions {
 	/** Default test file path. */
@@ -44,7 +42,7 @@ function resolveTestFile(
 	});
 }
 
-/** Builds the Scryer Prolog test execution document. */
+/** Builds the SWI-Prolog WASM test execution document. */
 export async function buildPrologTestDocument(
 	project: TpPrologProject,
 	options: BuildPrologTestDocumentOptions = {},
@@ -77,25 +75,10 @@ export async function buildPrologTestDocument(
 		...prologFiles.filter((file) => file.path !== entryFile.path),
 		entryFile,
 	];
-	const localModules = getLocalPrologModuleNames(prologFiles);
-	const usesDomModule = prologFiles.some((file) =>
-		usesPrologDomModule(file.content),
+	const sourcesJson = serializePrologData(
+		orderedSources.map(({ path, content }) => ({ path, content })),
 	);
-	const sourcesJson = JSON.stringify([
-		...(usesDomModule
-			? [
-					{
-						path: "/library/dom.pl",
-						content: PROLOG_DOM_MODULE_SOURCE,
-					},
-				]
-			: []),
-		...orderedSources.map((file) => ({
-			path: file.path,
-			content: flattenLocalPrologModules(file.content, localModules),
-		})),
-	]);
-	const testSourceJson = JSON.stringify(testFile.content);
+	const testSourceJson = serializePrologData(testFile.content);
 	const body = htmlFile?.content ?? '<main id="prolog-test-output"></main>';
 
 	return {
@@ -103,24 +86,7 @@ export async function buildPrologTestDocument(
 <!doctype html>
 <html>
 <head>
-  <style>
-    body {
-      box-sizing: border-box;
-      font-family: system-ui, sans-serif;
-      margin: 0;
-      padding: 1rem;
-    }
-
-    pre[data-tp-prolog-test-output] {
-      background: #111827;
-      border-radius: 0.375rem;
-      color: #f9fafb;
-      margin-block: 0;
-      overflow: auto;
-      padding: 0.75rem;
-      white-space: pre-wrap;
-    }
-  </style>
+  ${testResultsHead()}
 </head>
 <body>
   ${body}
@@ -129,31 +95,8 @@ export async function buildPrologTestDocument(
   <script type="module">
     const sources = ${sourcesJson};
     const testSource = ${testSourceJson};
-    const scryerModuleUrl = ${JSON.stringify(SCRYER_MODULE_URL)};
-    const scryerInitWarning =
-      'using deprecated parameters for the initialization function; pass a single object instead';
-
-    async function loadScryer() {
-      const originalWarn = console.warn;
-
-      console.warn = (...args) => {
-        if (args.some((arg) => String(arg).includes(scryerInitWarning))) {
-          return;
-        }
-
-        originalWarn.apply(console, args);
-      };
-
-      try {
-        const scryer = await import(scryerModuleUrl);
-        await scryer.init();
-        ${toolLoadedScript("scryer", "Scryer Prolog")}
-        return scryer;
-      } finally {
-        console.warn = originalWarn;
-      }
-    }
-
+    const testPath = ${serializePrologData(testFile.path)};
+    ${createSwiplRuntimeScript()}
 
     function ensureOutput() {
       let output = document.querySelector('[data-tp-prolog-test-output]');
@@ -168,68 +111,6 @@ export async function buildPrologTestDocument(
       output.setAttribute('data-tp-prolog-test-output', '');
       target.append(output);
       return output;
-    }
-
-    function stringifyTerm(value) {
-      if (value === null || value === undefined) {
-        return String(value);
-      }
-
-      if (typeof value === 'string') {
-        return value;
-      }
-
-      if (typeof value === 'number' || typeof value === 'boolean') {
-        return String(value);
-      }
-
-      if (typeof value.toString === 'function') {
-        return value.toString();
-      }
-
-      try {
-        return JSON.stringify(value);
-      } catch {
-        return String(value);
-      }
-    }
-
-    function formatBindings(bindings) {
-      if (bindings === null || bindings === undefined) {
-        return 'true';
-      }
-
-      const entries =
-        bindings instanceof Map
-          ? Array.from(bindings.entries())
-          : Object.entries(bindings);
-      const visibleEntries = entries.filter(
-        ([name]) => name !== 'TpPlaygroundResult',
-      );
-
-      if (visibleEntries.length === 0) {
-        return 'true';
-      }
-
-      return visibleEntries
-        .map(([name, value]) => name + ' = ' + stringifyTerm(value))
-        .join(', ');
-    }
-
-    function formatPrologError(error) {
-      if (error === null || error === undefined) {
-        return 'Unknown Prolog error';
-      }
-
-      if (typeof error.toProlog === 'function') {
-        return error.toProlog();
-      }
-
-      if (typeof error.toString === 'function') {
-        return error.toString();
-      }
-
-      return String(error);
     }
 
     function stripComments(source) {
@@ -399,25 +280,55 @@ export async function buildPrologTestDocument(
       return tests;
     }
 
-    function normalizeGoal(goal) {
-      const normalized = goal.trim().replace(/\\.\\s*$/, '');
-      return '(' + normalized + '), TpPlaygroundResult = true.';
-    }
-
+    const reporter = (${createTestReporter.toString()})(document.body, 'PlUnit');
     async function main() {
       const output = ensureOutput();
-      output.textContent = 'Loading Scryer Prolog...';
+      reporter.attachLog(output);
+      output.textContent = 'Loading SWI-Prolog WASM...';
 
-      const { Prolog } = await loadScryer();
-      const prolog = new Prolog();
-
+      const transcript = [];
+      const { prolog, FS } = await loadSwipl([], text => { transcript.push(text); }, false);
+      await prolog.load_string(":- dynamic tp_test_load_error/1. :- multifile user:message_hook/3. user:message_hook(T,error,_) :- assertz(tp_test_load_error(T)), fail.", '/tp-test-errors.pl');
       for (const source of sources) {
-        prolog.consultText(source.content);
+        const path = source.path.startsWith('/') ? source.path : '/' + source.path;
+        const directory = path.slice(0, path.lastIndexOf('/'));
+        if (directory) FS.mkdirTree(directory);
+        FS.writeFile(path, source.content);
+      }
+      for (const source of sources) await prolog.forEach('load_files(File, [if(not_loaded)])', {File:source.path});
+      async function checkLoading() {
+        const errors = await prolog.forEach('tp_test_load_error(T), term_string(T,Error)');
+        if (errors.length) throw new Error(errors.map(row=>row.Error).join('\\n'));
+      }
+      await checkLoading();
+      if (/:-\\s*begin_tests\\s*\\(/.test(stripComments(testSource))) {
+        await prolog.load_string(testSource, testPath);
+        await checkLoading();
+        await prolog.forEach('use_module(library(plunit))');
+        const results = await prolog.forEach('run_tests(all, [cleanup(false)])');
+        // The pinned SWI distribution stores completed PlUnit cases here.
+        // Read outcomes after run_tests so fixtures, forall and options stay native.
+        const rows = await prolog.forEach("(plunit:passed(U,N,_,_,_), Status=passed, D=''; plunit:failed(U,N,_,Reason,_), Status=failed, term_string(Reason,D); plunit:blocked(U,N,_,Reason), Status=skipped, term_string(Reason,D)), term_string(U,Suite), term_string(N,Name)");
+        for (const row of rows) {
+          reporter.add({suite:row.Suite,name:row.Name,status:row.Status,details:row.D});
+          const label = (row.Status === 'passed' ? '✓ ' : row.Status === 'failed' ? '✗ ' : '– ') + row.Suite + '.' + row.Name + ' [' + row.Status + ']';
+          const line = (label + (row.D ? ' — ' + row.D : '')).replace(/\\s+/g, ' ');
+          (row.Status === 'failed' ? console.error : console.info)(line);
+        }
+        if (!results.length && !rows.some(row=>row.Status==='failed')) reporter.error(transcript.join('') || 'PlUnit failed');
+        reporter.finish();
+        const ok = results.length > 0 && !reporter.results.some(row=>row.status==='failed');
+        transcript.push(ok ? 'PlUnit: passed' : 'PlUnit: failed');
+        output.textContent = transcript.join('');
+        output.dataset.testResult = ok ? 'passed' : 'failed';
+        window.tpPlaygroundReportHeight?.();
+        return;
       }
 
       const tests = parseTestDirectives(testSource);
 
       if (tests.length === 0) {
+        reporter.finish();
         output.textContent = 'No Prolog test directive found.';
         return;
       }
@@ -425,7 +336,6 @@ export async function buildPrologTestDocument(
       const lines = [];
       let passed = 0;
 
-      console.group('Prolog tests');
 
       for (const test of tests) {
         let answers = [];
@@ -433,10 +343,10 @@ export async function buildPrologTestDocument(
         let errorMessage = '';
 
         try {
-          answers = Array.from(prolog.query(normalizeGoal(test.goal)));
-          actual = answers.map((answer) => formatBindings(answer.bindings));
+          answers = await prolog.forEach('tp_runtime:run(Source, Text)', {Source:test.goal});
+          actual = answers.map(answer => answer.Text);
         } catch (error) {
-          errorMessage = formatPrologError(error);
+          errorMessage = prologErrorMessage(error);
         }
 
         const ok =
@@ -445,10 +355,11 @@ export async function buildPrologTestDocument(
             ? answers.length > 0
             : test.expected.every((expected) => actual.includes(expected)));
 
+        reporter.add({suite:'Legacy directives',name:test.name,status:ok?'passed':'failed',details:ok?'':('Expected: '+(test.expected.join('; ')||'success')+'; actual: '+(errorMessage||actual.join('; ')||'false'))});
         if (ok) {
           passed += 1;
           lines.push('✓ ' + test.name);
-          console.info('✓ ' + test.name);
+          console.info(('✓ ' + test.name + ' [passed]').replace(/\\s+/g, ' '));
         } else {
           lines.push('✗ ' + test.name);
           lines.push('  goal: ' + test.goal);
@@ -456,16 +367,12 @@ export async function buildPrologTestDocument(
           lines.push(
             '  actual: ' + (errorMessage || actual.join('; ') || 'false'),
           );
-          console.error('✗ ' + test.name, {
-            goal: test.goal,
-            expected: test.expected.length === 0 ? ['success'] : test.expected,
-            actual: errorMessage || actual,
-          });
+          console.error(('✗ ' + test.name + ' [failed] — expected: ' + (test.expected.join('; ') || 'success') + '; actual: ' + (errorMessage || actual.join('; ') || 'false')).replace(/\\s+/g, ' '));
         }
       }
 
-      console.groupEnd();
 
+      reporter.finish();
       lines.push('');
       lines.push('Tests: ' + passed + '/' + tests.length + ' passed');
       output.textContent = lines.join('\\n');
@@ -474,6 +381,7 @@ export async function buildPrologTestDocument(
 
     main().catch((error) => {
       const output = ensureOutput();
+      reporter.error(error);
       output.textContent = error?.message ?? String(error);
       console.error(error);
       window.tpPlaygroundReportHeight?.();

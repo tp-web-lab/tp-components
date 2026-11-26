@@ -21,6 +21,8 @@ export type TpSourceKind =
 	| "javascript"
 	| "typescript"
 	| "python"
+	| "scheme"
+	| "ocaml"
 	| "html"
 	| "css"
 	| "json"
@@ -629,6 +631,8 @@ export function inferSourceKind(path: string): TpSourceKind {
 		return "javascript";
 	}
 
+	if (hasExtension(path, [".scm", ".ss", ".sld"])) return "scheme";
+	if (hasExtension(path, [".ml"])) return "ocaml";
 	if (hasExtension(path, [".py"])) {
 		return "python";
 	}
@@ -958,7 +962,7 @@ function tpConsoleSerialize(value, seen = new WeakSet()) {
     };
   }
 
-  if (value instanceof Error) {
+  if (value instanceof Error || Object.prototype.toString.call(value) === '[object Error]') {
     return {
       __tp_console_type: 'error',
       name: value.name,

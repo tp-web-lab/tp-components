@@ -6,11 +6,11 @@
 ======
 [tp-carousel,aria-label="Outdoor activities",height="18rem"]
 ====
-image::/docs/medias/images/canoe.svg[Canoe]
+image::/docs/medias/images/canoe.svg["Canoe"]
 
-image::/docs/medias/images/basketball.svg[Basketball]
+image::/docs/medias/images/basketball.svg["Basketball"]
 
-image::/docs/medias/images/walking-shoe.svg[Walking shoe]
+image::/docs/medias/images/walking-shoe.svg["Walking shoe"]
 ====
 ======
 
@@ -71,6 +71,39 @@ image::/docs/medias/images/canoe.svg[Canoe]
 image::/docs/medias/images/basketball.svg[Basketball]
 
 image::/docs/medias/images/walking-shoe.svg[Walking shoe]
+====
+======
+
+.Automatic scrolling and hover pause
+======
+Hover over the carousel to pause the movement. Move the pointer away to resume from the same position.
+
+[tp-carousel%hide-controls,auto="3000",transition="start-to-end",aria-label="TP markup languages",height="3em"]
+====
+[figure]
+--
+[tp-icon,name="tp-html-logo",library="tp",size="3em",role="img",aria-label="TP HTML"]#HTML#
+--
+
+[figure]
+--
+[tp-icon,name="tp-asciidoc-logo",library="tp",size="3em",role="img",aria-label="TP AsciiDoc"]#AsciiDoc#
+--
+
+[figure]
+--
+[tp-icon,name="tp-latex-logo",library="tp",size="3em",role="img",aria-label="TP LaTeX"]#LaTeX#
+--
+
+[figure]
+--
+[tp-icon,name="tp-markdown-logo",library="tp",size="3em",role="img",aria-label="TP Markdown"]#Markdown#
+--
+
+[figure]
+--
+[tp-icon,name="tp-restructuredtext-logo",library="tp",size="3em",role="img",aria-label="TP reStructuredText"]#reStructuredText#
+--
 ====
 ======
 ----

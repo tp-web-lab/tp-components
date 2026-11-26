@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-latex" allow-script }
+:::::: tp-markdown-viewer { label="tp-latex" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-latex

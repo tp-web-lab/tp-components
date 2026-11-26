@@ -1,0 +1,170 @@
+.. tp-restructuredtext-viewer::
+   :label: tp-ocaml
+   :allow-script:
+
+   .. script::
+      :type: tp/restructuredtext
+
+      .. example:: Basic usage
+
+         .. tp-ocaml::
+            :query: square 7;;
+
+            .. script::
+               :type: tp/ocaml
+
+               let square x = x * x;;
+
+      .. example:: Javascript API
+
+         .. script::
+            :type: module
+
+            import "/components/ocaml/ocaml.js";
+
+            const example = document.createDocumentFragment();
+
+            const element1 = document.createElement("tp-ocaml");
+            element1.setAttribute("query", "square 7;;");
+            element1.append(document.createTextNode("\n  "));
+
+            const element2 = document.createElement("script");
+            element2.setAttribute("type", "tp/ocaml");
+            element2.textContent = "\n    let square x = x * x;;\n  ";
+            element1.append(element2);
+            element1.append(document.createTextNode("\n"));
+            example.append(element1);
+
+            document.body.append(example);
+
+      .. example:: DOM elements and click events
+
+         .. script::
+            :type: module
+
+            import "/components/button/button.js";
+            import "/components/ocaml/ocaml.js";
+
+         .. tp-ocaml::
+            :query: setup_dom ();;
+
+            .. script::
+               :type: tp/ocaml
+
+               open Js_of_ocaml;;
+               let setup_dom () =
+                 let document = Tp_dom.document () in
+                 let host = Js.Unsafe.meth_call document "getElementById"
+                   [| Js.Unsafe.inject (Js.string "ocaml-dom-demo") |] in
+                 let button = Js.Unsafe.meth_call document "createElement"
+                   [| Js.Unsafe.inject (Js.string "tp-button") |] in
+                 let message = Dom_html.createP document in
+                 let text node value = Js.Unsafe.set node "textContent" (Js.string value) in
+                 text button "Click me";
+                 text message "Waiting for a click.";
+                 ignore (Dom_html.addEventListener button Dom_html.Event.click
+                   (Dom_html.handler (fun _ ->
+                     text message "OCaml handled the click!";
+                     print_endline "Clicked from OCaml";
+                     Js._true)) Js._false);
+                 ignore (Js.Unsafe.meth_call host "replaceChildren"
+                   [| Js.Unsafe.inject button; Js.Unsafe.inject message |]);
+                 "Button ready";;
+
+         .. div::
+            :id: ocaml-dom-demo
+            :aria-live: polite
+
+      .. example:: Type errors and recovery
+
+         .. tp-ocaml::
+            :query: 1 + "wrong";;
+
+            .. script::
+               :type: tp/ocaml
+
+               let square x = x * x;;
+
+      .. example:: Lists and pattern matching
+
+         .. tp-ocaml::
+            :query: List.map describe [Some 3; None; Some 7];;
+
+            .. script::
+               :type: tp/ocaml
+
+               let describe = function
+                 | Some n -> string_of_int n
+                 | None -> "missing";;
+
+      .. example:: External OCaml file
+
+         .. tp-ocaml::
+            :src: /docs/components/ocaml/examples/functions.ml
+            :query: square 9;;
+
+      .. example:: Presentation modes and automatic reload
+
+         Each interpreter has its own session. Default and lite show the normal controls; simple opens the editor and hides the header and welcome information. Its query buttons are hidden.
+
+         In default and lite, open Edit source. Run the prefilled query to obtain 10. Change 10 to 20 in the source, then click Run or press Return in the query field. In simple, use Return in the query field. Shift+Return works too.
+
+         The result becomes 20 and “> Program reloaded.” appears before the query. Run again without editing: the result remains 20, with no new reload message. Merely editing the source does not execute it.
+
+         .. heading-level:: 3
+
+         Default
+         =======
+
+         .. tp-ocaml::
+            :mode: default
+            :query: answer ();;
+
+            .. script::
+               :type: tp/ocaml
+               :filename: answer.ml
+
+               let answer () = 10;;
+
+         .. heading-level:: 3
+
+         Lite
+         ====
+
+         .. tp-ocaml::
+            :mode: lite
+            :query: answer ();;
+
+            .. script::
+               :type: tp/ocaml
+               :filename: answer.ml
+
+               let answer () = 10;;
+
+         .. heading-level:: 3
+
+         Simple
+         ======
+
+         .. tp-ocaml::
+            :mode: simple
+            :query: answer ();;
+
+            .. script::
+               :type: tp/ocaml
+               :filename: answer.ml
+
+               let answer () = 10;;
+
+      .. example:: Execution trace drawer
+
+         .. tp-ocaml::
+            :tracer:
+            :filename: factorial.ml
+            :query: print_int (factorial 5);;
+
+            .. script::
+               :type: tp/ocaml
+
+               let rec factorial n =
+                 if n <= 1 then 1 else n * factorial (n - 1);;

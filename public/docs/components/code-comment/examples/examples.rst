@@ -23,7 +23,6 @@
             :for: commented-function
 
             1. Positive values are doubled.
-
             2. Zero and negative values are multiplied by four.
 
       .. example:: Javascript API

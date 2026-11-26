@@ -5,6 +5,7 @@ Question components combine an answer form, submission controls, feedback and a 
 :::
 
 - [Quizzes](quizzes.md): choices, matching and fill-in-the-blank exercises.
+- [Interpreters](interpreter-questions.md): exercises combining an editable program, interactive queries and external tests.
 - [Playgrounds](playground-questions.md): exercises using a full project workspace.
 - [Viewers](viewer-questions.md): programming and markup exercises using a compact source viewer.
 

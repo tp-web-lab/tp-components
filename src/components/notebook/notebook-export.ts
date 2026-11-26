@@ -7,12 +7,13 @@ import tokenStyle from "../base/tp-tokens.css?inline";
 import latexStyle from "../latex/latex.css?inline";
 import markdownStyle from "../markdown/markdown.css?inline";
 import rstStyle from "../restructuredtext/restructuredtext.css?inline";
-
 import documentLabelStyle from "../toolbar/document-label.css?inline";
+import documentLogoStyle from "../toolbar/document-logo.css?inline";
 
 export const notebookExportStyle = [
 	tokenStyle,
 	documentLabelStyle,
+	documentLogoStyle,
 	resetStyle,
 	baseStyle,
 	markdownStyle,

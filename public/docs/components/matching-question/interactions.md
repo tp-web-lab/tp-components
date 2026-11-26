@@ -21,6 +21,10 @@ Click a card or its link icon to select it, then click a card in another column 
 | Feedback / Solution tabs | Switch between the last result and the solution. The solution is available before submission; an empty solution displays a warning. |
 | Input / Output buttons beside Prompt | Show or hide the answer form or output panel, keeping at least one panel visible. |
 | Title | Expand or collapse the question. |
+| :tp-icon:{name="input" size="2em"} Input button | Input button. |
+| :tp-icon:{name="output" size="2em"} Output button | Output button. |
+| :tp-icon:{name="refresh" size="2em"} Reset response | Reset response. |
+| :tp-icon:{name="play-arrow" size="2em"} Submit response | Submit response. |
 
 #### Keyboard interactions
 

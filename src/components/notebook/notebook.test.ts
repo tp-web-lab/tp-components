@@ -40,6 +40,7 @@ type NotebookInternals = HTMLElement & {
 	chooseNotebookFile(format: "json" | "html"): void;
 	addCell(type: "markup" | "code", language: string): void;
 	selectCell(index: number): void;
+	captureCell(index: number, element: HTMLElement): void;
 };
 
 function internals(element: Element): NotebookInternals {
@@ -58,6 +59,31 @@ afterEach(() => {
 });
 
 describe("<tp-notebook>", () => {
+	it("captures named files independently of editor order and generated setup files", () => {
+		const notebook = internals(document.createElement("tp-sql-notebook"));
+		notebook.cells = [
+			{
+				type: "code",
+				language: "sql",
+				files: [{ filename: "query.sql", content: "SELECT 1;" }],
+			},
+		];
+		const host = document.createElement("div");
+		for (const [filename, content] of [
+			["/tables.sql", "CREATE TABLE setup (id INTEGER);"],
+			["/query.sql", "SELECT 42;"],
+		] as const) {
+			const editor = document.createElement("tp-code-editor");
+			editor.setAttribute("filename", filename);
+			editor.getValue = () => content;
+			host.append(editor);
+		}
+		notebook.captureCell(0, host);
+		expect(notebook.cells[0]?.files).toEqual([
+			{ filename: "query.sql", content: "SELECT 42;" },
+		]);
+	});
+
 	it("resolves the standalone loader in source and distribution builds", () => {
 		expect(
 			getNotebookLoaderUrl(
@@ -90,23 +116,21 @@ describe("<tp-notebook>", () => {
 		document.body.append(notebook);
 
 		await vi.waitFor(() =>
-			expect(notebook.querySelector("tp-python-viewer")).not.toBeNull(),
+			expect(notebook.querySelector("tp-python")).not.toBeNull(),
 		);
 		expect(
-			notebook.querySelector('tp-python-viewer script[type="tp/python"]')
-				?.textContent,
+			notebook.querySelector('tp-python script[type="tp/python"]')?.textContent,
 		).toContain("print(6 * 7)");
 		expect(
-			notebook.querySelector(
-				'tp-javascript-viewer script[type="tp/javascript"]',
-			)?.textContent,
+			notebook.querySelector('tp-javascript script[type="tp/javascript"]')
+				?.textContent,
 		).toContain("console.log(6 * 7)");
 		notebook.querySelector<HTMLElement>('[data-action="preview"]')?.click();
 		const preview = notebook.querySelector(
 			"[data-tp-notebook-preview-content]",
 		);
-		expect(preview?.querySelector("tp-python-viewer")).not.toBeNull();
-		expect(preview?.querySelector("tp-javascript-viewer")).not.toBeNull();
+		expect(preview?.querySelector("tp-python")).not.toBeNull();
+		expect(preview?.querySelector("tp-javascript")).not.toBeNull();
 	}, 15_000);
 
 	it("keeps the complete editor toolbar and adds preview and HTML export", async () => {
@@ -188,7 +212,7 @@ describe("<tp-notebook>", () => {
 		const editor = notebook.querySelector<HTMLElement>("tp-code-editor");
 		expect(button?.hidden).toBe(false);
 		button?.click();
-		expect(editor?.hasAttribute("toolbar")).toBe(true);
+		expect(editor?.hasAttribute("toolbar")).toBe(false);
 	});
 
 	it("renders AsciiDoc again in the final document so MathJax can initialize there", async () => {
@@ -248,9 +272,13 @@ describe("<tp-notebook>", () => {
 		).toContain(
 			"[data-tp-notebook-cell][data-cell-type='markup'] .tp-markup-viewer",
 		);
-		const prologViewer = notebook.querySelector("tp-prolog-viewer");
-		expect(prologViewer?.querySelectorAll(":scope > script")).toHaveLength(2);
-		expect(prologViewer?.hasAttribute("lite")).toBe(false);
+		const prologViewer = notebook.querySelector("tp-prolog");
+		expect(prologViewer?.querySelectorAll(":scope > script")).toHaveLength(1);
+		expect(prologViewer?.getAttribute("query")).toContain("X");
+		expect(prologViewer?.getAttribute("mode")).toBe("simple");
+		expect(
+			markupCell?.querySelector("tp-markdown-viewer")?.getAttribute("mode"),
+		).toBe("simple");
 		const title = notebook.querySelector("[data-tp-notebook-title]");
 		expect(title?.textContent.trim()).toBe("");
 		expect(
@@ -297,9 +325,9 @@ describe("<tp-notebook>", () => {
 		document.body.append(notebook);
 
 		await vi.waitFor(() =>
-			expect(notebook.querySelectorAll("tp-python-viewer")).toHaveLength(2),
+			expect(notebook.querySelectorAll("tp-python")).toHaveLength(2),
 		);
-		const viewers = Array.from(notebook.querySelectorAll("tp-python-viewer"));
+		const viewers = Array.from(notebook.querySelectorAll("tp-python"));
 		const scopes = viewers.map((viewer) =>
 			viewer.getAttribute("execution-scope"),
 		);
@@ -495,15 +523,27 @@ describe("<tp-notebook>", () => {
 				api
 					.standaloneHtml()
 					.then((html) => new DOMParser().parseFromString(html, "text/html"));
-			const selector = "[data-tp-notebook-export-actions] > tp-icon";
-			const defaultLogo = (await exported()).querySelector(selector);
+			const selector =
+				"[data-tp-notebook-export-actions] > tp-button[data-document-logo] tp-icon";
+			const exportDocument = await exported();
+			const info = exportDocument.querySelector(
+				"body > [data-tp-prolog-engine]",
+			);
+			expect(info).toBeNull();
+			const defaultLogo = exportDocument.querySelector(selector);
 			expect(defaultLogo?.getAttribute("name")).toBe(tag.slice(3));
 			expect(defaultLogo?.getAttribute("library")).toBe("components");
 			notebook.setAttribute("logo", "logo-tp");
 			const logo = (await exported()).querySelector(selector);
 			expect(logo?.getAttribute("name")).toBe("logo-tp");
-			expect(logo?.getAttribute("section")).toBe("start");
-			expect(logo?.getAttribute("size")).toBe("1.75em");
+			expect(logo?.closest("tp-button")?.getAttribute("section")).toBe("start");
+			expect(logo?.closest("tp-button")?.getAttribute("aria-label")).toBe(
+				"Notebook logo",
+			);
+			notebook.setAttribute("logo", "/wide-logo.svg");
+			expect(
+				(await exported()).querySelector(selector)?.getAttribute("src"),
+			).toBe("/wide-logo.svg");
 			notebook.setAttribute("logo", "");
 			expect((await exported()).querySelector(selector)).toBeNull();
 			notebook.removeAttribute("logo");
@@ -677,4 +717,71 @@ describe("<tp-notebook>", () => {
 		clickAction("delete");
 		expect(api.cells).toHaveLength(length);
 	}, 20_000);
+});
+
+it("runs only the selected notebook cell with Shift+Enter, including nested viewer focus", async () => {
+	const notebook = document.createElement("tp-notebook");
+	document.body.append(notebook);
+	const state = internals(notebook);
+	state.addCell("code", "javascript");
+	state.addCell("code", "javascript");
+	await new Promise((resolve) => setTimeout(resolve, 0));
+	const cells = Array.from(
+		notebook.querySelectorAll<HTMLElement>("[data-tp-notebook-cell]"),
+	);
+	const viewers = cells.map(
+		(cell) =>
+			cell.querySelector("tp-javascript") as HTMLElement & {
+				run(): Promise<void>;
+			},
+	);
+	const runs = viewers.map((viewer) =>
+		vi.spyOn(viewer, "run").mockResolvedValue(),
+	);
+	cells[0]?.focus();
+	cells[0]?.dispatchEvent(
+		new KeyboardEvent("keydown", {
+			key: "Enter",
+			shiftKey: true,
+			bubbles: true,
+			cancelable: true,
+		}),
+	);
+	await vi.waitFor(() => expect(runs[0]).toHaveBeenCalledOnce());
+	expect(runs[1]).not.toHaveBeenCalled();
+	viewers[1]?.dispatchEvent(
+		new KeyboardEvent("keydown", {
+			key: "Enter",
+			shiftKey: true,
+			bubbles: true,
+			cancelable: true,
+		}),
+	);
+	await vi.waitFor(() => expect(runs[0]).toHaveBeenCalledOnce());
+	await vi.waitFor(() => expect(runs[1]).toHaveBeenCalledOnce());
+	notebook.remove();
+	cells[0]?.dispatchEvent(
+		new KeyboardEvent("keydown", {
+			key: "Enter",
+			shiftKey: true,
+			bubbles: true,
+			cancelable: true,
+		}),
+	);
+	await vi.waitFor(() => expect(runs[0]).toHaveBeenCalledOnce());
+});
+
+it("creates separate cells for consecutive scripts with explicit queries", async () => {
+	const notebook = document.createElement("tp-notebook");
+	notebook.innerHTML =
+		'<script type="tp/javascript" query="first()">function first() { return 1; }</script><script type="tp/javascript" query="second()">function second() { return 2; }</script>';
+	document.body.append(notebook);
+	await vi.waitFor(() =>
+		expect(notebook.querySelectorAll("tp-javascript")).toHaveLength(2),
+	);
+	expect(
+		internals(notebook).cells.map(
+			(cell) => (cell as NotebookCell & { query?: string }).query,
+		),
+	).toEqual(["first()", "second()"]);
 });

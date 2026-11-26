@@ -1,4 +1,4 @@
-<tp-html-viewer label="tp-python-playground" allow-script>
+<tp-html-viewer label="tp-python-playground" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
       <tp-python-playground src="/docs/components/_shared/intro-projects/python.json"></tp-python-playground>
@@ -6,6 +6,7 @@
 
     <div role="example" label="Javascript API">
       <script type="module">
+      import "/components/python/python.js";
       import "/components/python-playground/python-playground.js";
 
       const example = document.createDocumentFragment();
@@ -20,6 +21,10 @@
 
     <div role="example" label="Single source file">
       <tp-python-playground src="/docs/components/_shared/single-source/example.py"></tp-python-playground>
+    </div>
+
+    <div role="example" label="unittest results">
+      <tp-python-playground src="/docs/components/python-playground/examples/framework-tests.json"></tp-python-playground>
     </div>
   </template>
 </tp-html-viewer>

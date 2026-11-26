@@ -5,8 +5,8 @@
 | Control or gesture | Result |
 | --- | --- |
 | Drag the map | Explore the surrounding area without moving the configured marker. |
-| Zoom in / Zoom out | Change the map scale. Controls are disabled at the zoom limits. Double-click also zooms in; touch devices support pinch zoom. |
-| Use my location | Ask the browser for location permission and center the map on your position. Refusal or unavailability displays a warning and preserves the previous coordinates. |
+| :tp-icon:{name="minus" size="2em"} :tp-icon:{name="plus" size="2em"} Zoom in / Zoom out | Change the map scale. Controls are disabled at the zoom limits. Double-click also zooms in; touch devices support pinch zoom. |
+| :tp-icon:{name="crosshairs-unknown" size="2em"} Use my location | Ask the browser for location permission and center the map on your position. Refusal or unavailability displays a warning and preserves the previous coordinates. |
 | Location marker | Open its title popup when a title is provided. Use the popup's close button to dismiss it. |
 | Mouse wheel | Scroll the page; it does not zoom the map. |
 | Route or track line | Follow the recorded path visually. Separate recording segments are not joined. Lines have no additional click action and do not provide navigation guidance. |

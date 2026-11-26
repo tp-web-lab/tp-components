@@ -3,8 +3,9 @@
     "01-prolog-basic",
     "02-prolog-module-file",
     "03-prolog-tau-module",
-    "04-prolog-clpz",
+    "04-prolog-clpfd",
     "04-prolog-dom",
-    "05-prolog-dom-advanced"
+    "05-prolog-dom-advanced",
+    "06-swipl-dom-constraints"
   ]
 }

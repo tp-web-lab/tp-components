@@ -6,4 +6,4 @@ tp-graph-nfa { display: block; }
 .tp-nfa-field input { width: 8rem; min-height: 2rem; box-sizing: border-box; padding-inline: .45rem; border: 1px solid var(--tp-neutral-stroke-soft, #c7cedb); border-radius: .35rem; color: inherit; background: var(--tp-paper-color, Canvas); }
 .tp-nfa-status { min-width: 4rem; font-size: .8rem; font-weight: 600; }
 .tp-nfa-status.success { color: var(--tp-success-text-colorful, #15803d); }
-.tp-nfa-status.danger { color: var(--tp-danger-text-colorful, #b91c1c); }
+.tp-nfa-status.danger { color: light-dark(var(--tp-danger-800), var(--tp-danger-300)); }

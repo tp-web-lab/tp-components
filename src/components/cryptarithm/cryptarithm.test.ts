@@ -55,6 +55,28 @@ describe("<tp-cryptarithm>", () => {
 		]) {
 			gameHelp(element, action);
 		}
+		const game = element as TpCryptarithm;
+		const actions = {
+			"reset-game": "reset",
+			"show-incorrect": "showIncorrect",
+			"clear-incorrect": "clearIncorrect",
+			"show-letter": "revealLetter",
+			"show-solution": "revealSolution",
+		} as const;
+		for (const [action, method] of Object.entries(actions)) {
+			game.reset();
+			game.querySelector<HTMLElement>(".tp-cryptarithm-char")?.click();
+			game[method]();
+			const expected = game.querySelector(".tp-cryptarithm-board")?.innerHTML;
+			expect(expected).toBeTruthy();
+			game.reset();
+			game.querySelector<HTMLElement>(".tp-cryptarithm-char")?.click();
+			gameHelp(game, action);
+			expect(game.querySelector(".tp-cryptarithm-board")?.innerHTML).toEqual(
+				expected,
+			);
+		}
+
 		const undo = element.querySelector<HTMLButtonElement>(
 			".tp-cryptarithm-undo",
 		);

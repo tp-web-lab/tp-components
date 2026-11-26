@@ -54,6 +54,11 @@
       "description": "Checks all marked cells and counts correct matches. Unknown negatives need not be filled."
     },
     {
+      "name": "clearIncorrect(): void",
+      "inherited": false,
+      "description": "Clears incorrect marks from the grid."
+    },
+    {
       "name": "redo(): void",
       "inherited": false,
       "description": "Reapplies an undone move."
@@ -62,6 +67,31 @@
       "name": "reset(): void",
       "inherited": false,
       "description": "Clears the grid; the reset can be undone."
+    },
+    {
+      "name": "revealBlock(): void",
+      "inherited": false,
+      "description": "Reveals the selected category pair."
+    },
+    {
+      "name": "revealCell(): void",
+      "inherited": false,
+      "description": "Reveals the selected grid box."
+    },
+    {
+      "name": "revealSolution(): void",
+      "inherited": false,
+      "description": "Reveals the complete grid and checks the result."
+    },
+    {
+      "name": "showRules(): void",
+      "inherited": false,
+      "description": "Opens the rules of this game in its drawer."
+    },
+    {
+      "name": "toggleHelp(): void",
+      "inherited": false,
+      "description": "Opens or closes the game assistance menu."
     },
     {
       "name": "undo(): void",

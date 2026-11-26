@@ -14,12 +14,13 @@ import { TpNotebook } from "../notebook/notebook.js";
  * @summary Combines written explanations and executable JavaScript code in an interactive notebook.
  * @tagname tp-javascript-notebook
  * @summary Interactive JavaScript notebook with markup and code cells.
+ * @keyboard {Shift+Enter} Reload changed source and execute the current cell query, or render the current markup cell.
  * @example
  * <tp-javascript-notebook>
  *     <script type="tp/markdown"># Interactive JavaScript
  *
- * Select **Run all cells** to execute the program. Use the code button in a cell to edit its source.</script>
- *     <script type="tp/javascript">console.log('Hello from JavaScript');</script>
+ * Select **Run all cells** to execute the program. Edit the program directly in each cell; its query is prefilled.</script>
+ *     <script type="tp/javascript" query="message">const message = 'Hello from JavaScript';</script>
  *   </tp-javascript-notebook>
  */
 export class TpJavascriptNotebook extends TpNotebook {

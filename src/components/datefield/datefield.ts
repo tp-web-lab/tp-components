@@ -9,12 +9,17 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-copy-code
+ * @summary Copy-to-clipboard button component.
+ */
+/**
  * @tp-dependency tp-icon-button
  * @summary Accessible icon button component.
  */
 // tp-docgen:dependencies:end
 
 import { initializeFieldName } from "../../utilities/field-name.js";
+import { TpCopyCode } from "../copy-code/copy-code.js";
 import style from "./datefield.css?inline";
 import "../icon-button/icon-button.js";
 import { TpBase } from "../base/base.js";
@@ -44,12 +49,11 @@ const LABEL_POSITIONS = new Set<TpDatefieldLabelPosition>([
  * @attr {boolean} required = false - Marks the field as required.
  * @attr {boolean} readonly = false - Prevents value editing.
  * @attr {boolean} disabled = false - Disables the field and its action buttons.
+ * @attr {boolean} copy-code = false - Shows a button to copy the current value.
  * @attr {boolean} clearable = false - Shows an embedded clear button while the field has a value.
  * @event input Emitted when the selected date changes while editing.
  * @event change Emitted when the selected date is committed.
  * @event tp-clear Emitted after the embedded button clears the value.
- * @example
- * <tp-datefield label="Date" value="2026-09-03" clearable=""></tp-datefield>
  *  @cssprop [--tp-datefield-background=var(--tp-paper-color)] Background of the input control, excluding its label.
  * @cssprop [--tp-datefield-border-color=var(--tp-neutral-stroke-soft)] Border color of the input control when it is not focused.
  * @cssprop [--tp-datefield-focus-color=var(--tp-brand-text-colorful)] Border color and translucent outline tint while focus is inside the control.
@@ -61,12 +65,27 @@ const LABEL_POSITIONS = new Set<TpDatefieldLabelPosition>([
  * @cssprop [--tp-datefield-radius=var(--tp-border-radius-sm)] Corner radius of the input control.
  * @cssprop [--tp-datefield-required-color=var(--tp-danger-text-colorful)] Color of the asterisk marking a required field.
  * @cssprop [--tp-datefield-value-font-weight=400] Font weight of the displayed input value.
+ * @example
+ * <tp-datefield label="Date" value="2026-09-03" clearable=""></tp-datefield>
  */
 export class TpDatefield extends TpBase {
 	private static readonly styleId = "tp-datefield-styles";
 	private field: HTMLInputElement | null = null;
 	private clearButton: HTMLElement | null = null;
 	private pickerButton: HTMLElement | null = null;
+
+	/** Whether copy buttons are shown. */
+	public get copyCode(): boolean {
+		return this.hasAttribute("copy-code");
+	}
+	public set copyCode(value: boolean) {
+		this.toggleAttribute("copy-code", value);
+	}
+
+	/** Return the current value for clipboard actions. */
+	public getValue(): string {
+		return this.value;
+	}
 
 	public static get observedAttributes(): string[] {
 		return [
@@ -82,6 +101,7 @@ export class TpDatefield extends TpBase {
 			"required",
 			"readonly",
 			"disabled",
+			"copy-code",
 			"clearable",
 		];
 	}
@@ -207,7 +227,7 @@ export class TpDatefield extends TpBase {
 		newValue: string | null,
 	): void {
 		if (oldValue === newValue || !this.isConnected) return;
-		if (name === "label") this.render();
+		if (name === "label" || name === "copy-code") this.render();
 		else this.sync();
 	}
 
@@ -255,6 +275,13 @@ export class TpDatefield extends TpBase {
 		);
 		this.pickerButton.addEventListener("click", this.handlePicker);
 		wrapper.append(this.field, this.clearButton, this.pickerButton);
+
+		if (this.copyCode) {
+			const copy = new TpCopyCode();
+			copy.setAttribute("data-tp-datefield-copy", "");
+			copy.forElement = this;
+			wrapper.append(copy);
+		}
 
 		if (this.label === "") this.replaceChildren(wrapper);
 		else {

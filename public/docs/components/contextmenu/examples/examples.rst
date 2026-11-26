@@ -21,15 +21,14 @@
                :anchor: #intro-contextmenu-trigger
                :outside-click:
 
-               - `Buttons </#/components/button/index.md>`_
+               - `Buttons </#/components/button/index.md>`__
+               - `Trees </#/components/tree/index.md>`__
 
-               - `Trees </#/components/tree/index.md>`_
-
-            .. p::
+            .. attributes::
                :data-demo-status:
                :role: status
 
-               Try the contextmenu using its trigger.
+            Try the contextmenu using its trigger.
 
             .. script::
                :src: /docs/components/_shared/introduction-actions.js

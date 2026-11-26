@@ -12,9 +12,7 @@
             :value: 1,3
 
             - HTML
-
             - CSS
-
             - JavaScript
 
       .. example:: Javascript API

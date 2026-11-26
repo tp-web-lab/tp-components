@@ -147,3 +147,30 @@ it("loads the complete general.md exercise without nesting questions", async () 
 	).toHaveLength(12);
 	expect(document.querySelectorAll("[data-tp-closed-reading]")).toHaveLength(1);
 });
+
+it("keeps rendered prompt resources relative to the external question", async () => {
+	const fetcher = vi
+		.fn()
+		.mockResolvedValue(
+			new Response(
+				"Title\n: External resources\n\nPrompt\n: ![Diagram](../images/diagram.svg)",
+			),
+		);
+	vi.stubGlobal("fetch", fetcher);
+	document.body.innerHTML =
+		'<div data-tp-markdown-source="/books/docs/chapter.md"><tp-question open src="exercises/example.md"></tp-question></div>';
+	await vi.waitFor(() =>
+		expect(
+			document.querySelector("[data-tp-question-prompt-content] img"),
+		).not.toBeNull(),
+	);
+	const image = document.querySelector<HTMLImageElement>(
+		"[data-tp-question-prompt-content] img",
+	);
+	expect(image?.src).toBe(
+		new URL("/books/docs/images/diagram.svg", document.baseURI).href,
+	);
+	expect(fetcher).toHaveBeenCalledWith(
+		new URL("/books/docs/exercises/example.md", document.baseURI).href,
+	);
+});

@@ -4,16 +4,16 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Orientation icon, top right | Switch between horizontal and vertical layouts. |
+| :tp-icon:{name="arrow-expand-horizontal" size="2em"} :tp-icon:{name="arrow-expand-vertical" size="2em"} Orientation icon, top right | Switch between horizontal and vertical layouts. |
 | Expression field | Edit the expression or select a part to transform. |
-| Digits, dot, comma, parentheses and operators | Insert at the caret or replace the selection. |
-| Scientific function | Wrap the selection or expression in the chosen function. |
-| e / π / Rand | Insert a constant or a random number. |
-| Deg / Rad | Toggle the trigonometric angle unit. |
-| = | Evaluate and display the result, or explain an error. |
-| AC | Clear the expression and result message. |
-| ⌫ | Delete the selection or character before the caret. |
-| ± | Negate the selection or expression. |
+| <!-- button --> Digits, dot, comma, parentheses and operators | Insert at the caret or replace the selection. |
+| <!-- button --> Scientific function | Wrap the selection or expression in the chosen function. |
+| <!-- button --> e / π / Rand | Insert a constant or a random number. |
+| <!-- button --> Deg / Rad | Toggle the trigonometric angle unit. |
+| <!-- button --> = | Evaluate and display the result, or explain an error. |
+| <!-- button --> AC | Clear the expression and result message. |
+| <!-- button --> ⌫ | Delete the selection or character before the caret. |
+| <!-- button --> ± | Negate the selection or expression. |
 
 #### Keyboard interactions
 

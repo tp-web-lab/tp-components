@@ -33,6 +33,10 @@
  * @summary In-memory file system component.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -122,6 +126,7 @@ export {
  * @attr {string} repository = "" - Directory containing a Markdown playground project to load at initialization.
  * @attr {string} src = "" - JSON project or markdown source file to load.
  *
+ * @keyboard {Shift+Enter} Run the current project.
  * @example
  * <tp-markdown-playground src="/docs/components/_shared/intro-projects/markdown.json"></tp-markdown-playground>
  */
@@ -255,7 +260,7 @@ A footnote example.[^1]
 			id,
 		);
 
-		this.applyMarkupExtensions(activeIds);
+		this.setExtensions(activeIds);
 		return true;
 	}
 
@@ -318,9 +323,10 @@ A footnote example.[^1]
 		return new Set(ids);
 	}
 
-	private applyMarkupExtensions(
+	/** Replaces the enabled Markdown extensions, retaining current file edits. */
+	public async setExtensions(
 		activeIds: ReadonlySet<TpMarkupExtensionId>,
-	): void {
+	): Promise<void> {
 		this.toolbarStartMenuEl?.closeAll?.();
 
 		this.syncProjectFromFilesystem();
@@ -337,10 +343,9 @@ A footnote example.[^1]
 			}),
 		);
 
-		queueMicrotask(() => {
-			this.syncToolbarExtensionChecks();
-			void this.run();
-		});
+		await Promise.resolve();
+		this.syncToolbarExtensionChecks();
+		await this.run();
 	}
 
 	private syncToolbarExtensionChecks(): void {

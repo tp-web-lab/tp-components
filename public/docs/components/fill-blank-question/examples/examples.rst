@@ -24,7 +24,6 @@
 
             Answers
                1. Paris
-
                2. Rome
 
             Title
@@ -42,7 +41,6 @@
                Check the spelling of each capital.
 
                - The capital of France is home to the Eiffel Tower.
-
                - The capital of Italy is home to the Colosseum.
 
             Solution

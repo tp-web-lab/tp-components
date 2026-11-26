@@ -6,7 +6,7 @@ afterEach(() => {
 	vi.unstubAllGlobals();
 });
 function frame(el: TpTikz): HTMLIFrameElement {
-	const result = el.shadowRoot?.querySelector("iframe");
+	const result = el.querySelector("iframe");
 	if (!result) throw new Error("Missing frame");
 	if (!result.contentWindow)
 		Object.defineProperty(result, "contentWindow", {
@@ -20,6 +20,8 @@ describe("tp-tikz", () => {
 		el.value = String.raw`\begin{tikzpicture}\node{Début, Pépé};\end{tikzpicture}`;
 		document.body.append(el);
 		const first = frame(el);
+		expect(el.shadowRoot).toBeNull();
+		expect(el.contains(first)).toBe(true);
 		expect(first.getAttribute("sandbox")).toBe("allow-scripts");
 		expect(first.srcdoc).toContain("Pépé");
 		const rendered = vi.fn();
@@ -50,7 +52,7 @@ describe("tp-tikz", () => {
 		);
 		expect(frame(el)).toBe(second);
 		el.remove();
-		expect(el.shadowRoot?.querySelector("iframe")).toBeNull();
+		expect(el.querySelector("iframe")).toBeNull();
 		document.body.append(el);
 		expect(frame(el).srcdoc).toContain("draw");
 	});
@@ -59,12 +61,15 @@ describe("tp-tikz", () => {
 		el.innerHTML = String.raw`<script type="tp/tikz">\begin{tikzpicture}\draw (0,0)--(1,1);\end{tikzpicture}</script>`;
 		document.body.append(el);
 		expect(frame(el).srcdoc).toContain("draw");
+		expect(el.querySelector('script[type="tp/tikz"]')?.textContent).toContain(
+			"draw",
+		);
 		el.libraries = "bad}";
-		expect(el.shadowRoot?.querySelector("[role=alert]")).not.toBeNull();
+		expect(el.querySelector("[role=alert]")).not.toBeNull();
 		el.libraries = "calc";
 		expect(frame(el).srcdoc).toContain("calc");
 		el.value = "";
-		expect(el.shadowRoot?.querySelector("iframe")).toBeNull();
+		expect(el.querySelector("iframe")).toBeNull();
 		expect(el.hasAttribute("aria-busy")).toBe(false);
 	});
 });

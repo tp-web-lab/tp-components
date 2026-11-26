@@ -6,7 +6,7 @@
 // tp-docgen:dependencies:start
 /**
  * @tp-dependency tp-blank
- * @summary displays a text, SVG or image answer in a focusable blank.
+ * @summary Provides an answer slot for text, images or drawings.
  */
 /**
  * @tp-dependency tp-button

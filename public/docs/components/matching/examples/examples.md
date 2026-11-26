@@ -1,17 +1,13 @@
-::::: tp-markdown-viewer { label="tp-matching" allow-script }
+::::: tp-markdown-viewer { label="tp-matching" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-matching
 - Hello
-
 - Thank you
-
 - Goodbye
 
 1. Bonjour
-
 2. Merci
-
 3. Au revoir
 :::
 ```

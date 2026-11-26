@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-prolog-playground" allow-script }
+::::: tp-markdown-viewer { label="tp-prolog-playground" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-prolog-playground { src="/docs/components/_shared/intro-projects/prolog.json" }
@@ -7,6 +7,7 @@
 
 ``` example {label="Javascript API"}
 ::: script { type="module" }
+import "/components/prolog/prolog.js";
 import "/components/prolog-playground/prolog-playground.js";
 
 const example = document.createDocumentFragment();
@@ -21,6 +22,16 @@ document.body.append(example);
 
 ``` example {label="Single source file"}
 ::: tp-prolog-playground { src="/docs/components/_shared/single-source/example.pl" }
+:::
+```
+
+``` example {label="SWI-Prolog DOM, constraints and PlUnit"}
+::: tp-prolog-playground { repository="/examples/playgrounds/prolog-playground/06-swipl-dom-constraints" }
+:::
+```
+
+``` example {label="PlUnit tests"}
+::: tp-prolog-playground { src="/docs/components/prolog-playground/examples/framework-tests.json" }
 :::
 ```
 ::::

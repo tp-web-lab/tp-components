@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-timefield" allow-script }
+::::: tp-markdown-viewer { label="tp-timefield" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-timefield { label="Time" value="14:30" clearable }

@@ -1,0 +1,8 @@
+{
+  "id": "06-swipl-dom-constraints",
+  "label": "SWI-Prolog: DOM, constraints and PlUnit",
+  "name": "SWI-Prolog: DOM, constraints and PlUnit",
+  "entry": "/program.pl",
+  "query": "/query.pl",
+  "test": "/test.pl"
+}

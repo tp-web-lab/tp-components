@@ -7,7 +7,7 @@ tp-slide-note > details {
 tp-slide-note > details > summary {
   padding: .4rem .75rem;
   cursor: pointer;
-  color: var(--tp-brand-text-colorful, currentColor);
+  color: var(--tp-brand-text-on-soft);
 }
 tp-slide-note > details > .tp-speech-fieldset {
   box-sizing: border-box;

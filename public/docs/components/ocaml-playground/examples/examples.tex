@@ -1,0 +1,34 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpOcamlPlayground[src=/docs/components/_shared/intro-projects/ocaml.json]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/ocaml/ocaml.js";
+import "/components/ocaml-playground/ocaml-playground.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-ocaml-playground");
+element1.setAttribute("src", "/docs/components/_shared/intro-projects/ocaml.json");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example OCaml tests
+\documentclass{article}
+\begin{document}
+\wcTpOcamlPlayground[src=/docs/components/ocaml-playground/examples/test-project.json]{}
+\end{document}
+
+% !tp-example Alcotest tests
+\documentclass{article}
+\begin{document}
+\wcTpOcamlPlayground[src=/docs/components/ocaml-playground/examples/framework-tests.json]{}
+\end{document}

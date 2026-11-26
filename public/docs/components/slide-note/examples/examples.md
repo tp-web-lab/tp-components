@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-slide-note" allow-script }
+:::::: tp-markdown-viewer { label="tp-slide-note" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-slide-note { legend="Speaker notes" lang="en-GB" show-text }

@@ -130,9 +130,29 @@
   ],
   "methods": [
     {
+      "name": "copySelection(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the copy editor command, retaining its readonly and selection behavior."
+    },
+    {
+      "name": "cutSelection(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the cut editor command, retaining its readonly and selection behavior."
+    },
+    {
+      "name": "dedent(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the dedent editor command, retaining its readonly and selection behavior."
+    },
+    {
       "name": "focus(): void",
       "inherited": false,
       "description": "Moves focus to the CodeMirror editor."
+    },
+    {
+      "name": "foldCode(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the fold code editor command, retaining its readonly and selection behavior."
     },
     {
       "name": "getContentHeight(): number",
@@ -150,6 +170,16 @@
       "description": "Returns the current editor content."
     },
     {
+      "name": "goToLine(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the goto line editor command, retaining its readonly and selection behavior."
+    },
+    {
+      "name": "indent(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the indent editor command, retaining its readonly and selection behavior."
+    },
+    {
       "name": "isCursorAtEnd(): boolean",
       "inherited": false,
       "description": "Returns `true` when the editor selection is collapsed at the end of the document."
@@ -160,6 +190,26 @@
       "description": "Returns `true` when the editor selection is collapsed at the start of the document."
     },
     {
+      "name": "openReplace(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the replace editor command, retaining its readonly and selection behavior."
+    },
+    {
+      "name": "openSearch(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the search editor command, retaining its readonly and selection behavior."
+    },
+    {
+      "name": "paste(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the paste editor command, retaining its readonly and selection behavior."
+    },
+    {
+      "name": "redo(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the redo editor command, retaining its readonly and selection behavior."
+    },
+    {
       "name": "reload(): void",
       "inherited": false,
       "description": "Reloads the content from `src`, when a source file is configured."
@@ -168,6 +218,16 @@
       "name": "reset(): void",
       "inherited": false,
       "description": "Restores the editor content to the initial value and emits `tp-code-editor-reset`."
+    },
+    {
+      "name": "saveAs(): Promise<void>",
+      "inherited": false,
+      "description": "Opens Save as for the current source, including in read-only mode."
+    },
+    {
+      "name": "selectAll(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the select all editor command, retaining its readonly and selection behavior."
     },
     {
       "name": "setCodeCommentNumbers(owner: object, numbers: readonly number[], comments: ReadonlyMap<number, HTMLElement> = new Map()): void",
@@ -188,6 +248,46 @@
       "name": "syncHeightToContent(): void",
       "inherited": false,
       "description": "Recomputes the editor height from the current content and panels."
+    },
+    {
+      "name": "toggleBlockComment(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the toggle block comment editor command, retaining its readonly and selection behavior."
+    },
+    {
+      "name": "toggleGutters(): void",
+      "inherited": false,
+      "description": "Shows or hides editor gutters."
+    },
+    {
+      "name": "toggleKeyboardDropdown(): void",
+      "inherited": false,
+      "description": "Opens or closes the keyboard commands menu."
+    },
+    {
+      "name": "toggleLineComment(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the toggle line comment editor command, retaining its readonly and selection behavior."
+    },
+    {
+      "name": "toggleLineNumbers(): void",
+      "inherited": false,
+      "description": "Shows or hides source line numbers."
+    },
+    {
+      "name": "toggleToolbar(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the toggle toolbar editor command, retaining its readonly and selection behavior."
+    },
+    {
+      "name": "undo(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the undo editor command, retaining its readonly and selection behavior."
+    },
+    {
+      "name": "unfoldCode(): Promise<void>",
+      "inherited": false,
+      "description": "Runs the unfold code editor command, retaining its readonly and selection behavior."
     }
   ],
   "events": [
@@ -349,6 +449,10 @@
       "summary": "Copy-to-clipboard button component."
     },
     {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
       "name": "tp-dropdown",
       "summary": "Dropdown menu component."
     },
@@ -388,24 +492,34 @@
   "userHelp": {
     "commands": [
       {
-        "button": "Keyboard button",
-        "description": "Open or close the command palette listed below.",
+        "button": ":tp-icon:{name=\"keyboard-outline\" size=\"2em\"} Keyboard shortcuts",
+        "description": "Open or close the command palette.",
         "shortcut": "Mod Shift P"
       },
       {
-        "button": "Copy code button",
+        "button": ":tp-icon:{name=\"file-upload-as\" size=\"2em\"} Save as",
+        "description": "Choose a filename and save the current source code, including in read-only mode.",
+        "shortcut": "Mod S"
+      },
+      {
+        "button": ":tp-icon:{name=\"copy\" size=\"2em\"} Copy code",
         "description": "Copy the entire editor content, unlike Copy in the palette, which copies the selection.",
         "shortcut": "—"
       },
       {
-        "button": "Theme button",
+        "button": ":tp-icon:{name=\"theme-light-dark\" size=\"2em\"} Theme",
         "description": "Choose light, dark or automatic appearance for this editor.",
         "shortcut": "—"
       },
       {
-        "button": "Fullscreen button",
+        "button": ":tp-icon:{name=\"fullscreen\" size=\"2em\"} :tp-icon:{name=\"fullscreen-exit\" size=\"2em\"} Fullscreen",
         "description": "Enter or leave fullscreen for this editor.",
         "shortcut": "—"
+      },
+      {
+        "button": "Palette: Save as",
+        "description": "Choose a filename and save the current source code.",
+        "shortcut": "Mod S"
       },
       {
         "button": "Palette: Undo",
@@ -505,7 +619,7 @@
     ],
     "displayName": "Code editor",
     "introduction": "The custom `<tp-code-editor>` element displays and edits source code.",
-    "interactions": "Use F1 while the editor is focused to show or hide its toolbar. Mod means ⌘ on macOS and Ctrl elsewhere; Shift and Alt are shown as ⇧ and ⌥ on macOS.\n\nIn read-only mode, the palette omits editing commands: Undo, Redo, Cut, Paste, Indent, Dedent, Replace, Toggle line comment and Toggle block comment. Reading, selection, copying and navigation remain available.\n\n#### Mouse interactions\n\n| Control or gesture | Result | Shortcut |\n| --- | --- | --- |\n| Editor text | Click to place the cursor; drag to select text. Editing does not execute the code. |  |\n| Numbered comment marker, when linked to tp-code-comment | Hover to read its formatted explanation in a tooltip. |  |\n| Keyboard button | Open or close the command palette listed below. | Mod Shift P |\n| Copy code button | Copy the entire editor content, unlike Copy in the palette, which copies the selection. | — |\n| Theme button | Choose light, dark or automatic appearance for this editor. | — |\n| Fullscreen button | Enter or leave fullscreen for this editor. | — |\n| Language badge / line and column | Display the current language and cursor position; these are indicators, not buttons. |  |\n| Palette: Undo | Reverts the last editor change. | Mod Z |\n| Palette: Redo | Reapplies the last reverted editor change. | Mod Shift Z |\n| Palette: Copy | Copies the current selection. | Mod C |\n| Palette: Cut | Cuts the current selection. | Mod X |\n| Palette: Paste | Pastes clipboard text at the current selection. | Mod V |\n| Palette: Select all | Selects the whole editor content. | Mod A |\n| Palette: Fold code | Folds the current foldable code block. | Mod Alt ↓ |\n| Palette: Unfold code | Unfolds the current folded code block. | Mod Alt ↑ |\n| Palette: Toggle gutters | Shows or hides the fold gutter. | Mod Alt G |\n| Palette: Toggle line numbers | Shows or hides line numbers. | Mod Alt L |\n| Palette: Indent | Indents the current line or selection. | Tab |\n| Palette: Dedent | Dedents the current line or selection. | Shift Tab |\n| Palette: Search | Opens the search panel. | Mod F |\n| Palette: Replace | Opens search and runs replace-next. | Mod Alt F |\n| Palette: Go to line | Opens the go-to-line prompt. | Mod G |\n| Palette: Toggle line comment | Toggles line comments for the current line or selection. | Mod Alt C |\n| Palette: Toggle block comment | Toggles block comments for the current selection. | Mod Alt B |\n| Palette: Toggle Command Palette | Opens or closes the command palette. | Mod Shift P |\n| Palette: Toggle toolbar | Opens or closes the toolbar. | F1 |\n| Clipboard permission | Paste may require browser permission. Read-only content cannot be edited. |  |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Typing and cursor movement | Edit text and move the insertion point in the focused editor. Editing is unavailable in read-only mode. |\n| <kbd>Mod</kbd>+<kbd>Z</kbd> | Reverts the last editor change. |\n| <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Reapplies the last reverted editor change. |\n| <kbd>Mod</kbd>+<kbd>C</kbd> | Copies the current selection. |\n| <kbd>Mod</kbd>+<kbd>X</kbd> | Cuts the current selection. |\n| <kbd>Mod</kbd>+<kbd>V</kbd> | Pastes clipboard text at the current selection. |\n| <kbd>Mod</kbd>+<kbd>A</kbd> | Selects the whole editor content. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>↓</kbd> | Folds the current foldable code block. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>↑</kbd> | Unfolds the current folded code block. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>G</kbd> | Shows or hides the fold gutter. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd> | Shows or hides line numbers. |\n| Focus in readonly mode | The code remains keyboard-focusable for reading, selection and scrolling. |\n| <kbd>Tab</kbd> | Indents the current line or selection. |\n| <kbd>Shift</kbd>+<kbd>Tab</kbd> | Dedents the current line or selection. |\n| <kbd>Mod</kbd>+<kbd>F</kbd> | Opens the search panel. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd> | Open the search and replacement panel. |\n| <kbd>Mod</kbd>+<kbd>G</kbd> | Opens the go-to-line prompt. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd> | Toggles line comments for the current line or selection. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> | Toggles block comments for the current selection. |\n| <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> | Opens or closes the command palette. |\n| <kbd>F1</kbd> | Opens or closes the toolbar. |\n| <kbd>Up</kbd> / <kbd>Down</kbd> in the open palette | Move between commands. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> in the open palette | Activate the focused command. |\n| <kbd>Escape</kbd> in the open palette | Close the palette. |\n| Focus a numbered comment marker / <kbd>Escape</kbd> | Show its explanation / close the tooltip without changing the code. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "Use F1 while the editor is focused to show or hide its toolbar. Mod means ⌘ on macOS and Ctrl elsewhere; Shift and Alt are shown as ⇧ and ⌥ on macOS.\n\nIn read-only mode, the palette omits editing commands: Undo, Redo, Cut, Paste, Indent, Dedent, Replace, Toggle line comment and Toggle block comment. Reading, selection, copying and navigation remain available.\n\n#### Mouse interactions\n\n| Control or gesture | Result | Shortcut |\n| --- | --- | --- |\n| Editor text | Click to place the cursor; drag to select text. Editing does not execute the code. |  |\n| Numbered comment marker, when linked to tp-code-comment | Hover to read its formatted explanation in a tooltip. |  |\n| :tp-icon:{name=\"keyboard-outline\" size=\"2em\"} Keyboard shortcuts | Open or close the command palette. | Mod Shift P |\n| :tp-icon:{name=\"file-upload-as\" size=\"2em\"} Save as | Choose a filename and save the current source code, including in read-only mode. | Mod S |\n| :tp-icon:{name=\"copy\" size=\"2em\"} Copy code | Copy the entire editor content, unlike Copy in the palette, which copies the selection. | — |\n| :tp-icon:{name=\"theme-light-dark\" size=\"2em\"} Theme | Choose light, dark or automatic appearance for this editor. | — |\n| :tp-icon:{name=\"fullscreen\" size=\"2em\"} :tp-icon:{name=\"fullscreen-exit\" size=\"2em\"} Fullscreen | Enter or leave fullscreen for this editor. | — |\n| Language badge / line and column | Display the current language and cursor position; these are indicators, not buttons. |  |\n| Palette: Save as | Choose a filename and save the current source code. | Mod S |\n| Palette: Undo | Reverts the last editor change. | Mod Z |\n| Palette: Redo | Reapplies the last reverted editor change. | Mod Shift Z |\n| Palette: Copy | Copies the current selection. | Mod C |\n| Palette: Cut | Cuts the current selection. | Mod X |\n| Palette: Paste | Pastes clipboard text at the current selection. | Mod V |\n| Palette: Select all | Selects the whole editor content. | Mod A |\n| Palette: Fold code | Folds the current foldable code block. | Mod Alt ↓ |\n| Palette: Unfold code | Unfolds the current folded code block. | Mod Alt ↑ |\n| Palette: Toggle gutters | Shows or hides the fold gutter. | Mod Alt G |\n| Palette: Toggle line numbers | Shows or hides line numbers. | Mod Alt L |\n| Palette: Indent | Indents the current line or selection. | Tab |\n| Palette: Dedent | Dedents the current line or selection. | Shift Tab |\n| Palette: Search | Opens the search panel. | Mod F |\n| Palette: Replace | Opens search and runs replace-next. | Mod Alt F |\n| Palette: Go to line | Opens the go-to-line prompt. | Mod G |\n| Palette: Toggle line comment | Toggles line comments for the current line or selection. | Mod Alt C |\n| Palette: Toggle block comment | Toggles block comments for the current selection. | Mod Alt B |\n| Palette: Toggle Command Palette | Opens or closes the command palette. | Mod Shift P |\n| Palette: Toggle toolbar | Opens or closes the toolbar. | F1 |\n| Clipboard permission | Paste may require browser permission. Read-only content cannot be edited. |  |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Ctrl</kbd>+<kbd>S</kbd> / <kbd>Cmd</kbd>+<kbd>S</kbd> | Save the current source with a chosen filename instead of saving the browser page. |\n| Typing and cursor movement | Edit text and move the insertion point in the focused editor. Editing is unavailable in read-only mode. |\n| <kbd>Mod</kbd>+<kbd>Z</kbd> | Reverts the last editor change. |\n| <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Reapplies the last reverted editor change. |\n| <kbd>Mod</kbd>+<kbd>C</kbd> | Copies the current selection. |\n| <kbd>Mod</kbd>+<kbd>X</kbd> | Cuts the current selection. |\n| <kbd>Mod</kbd>+<kbd>V</kbd> | Pastes clipboard text at the current selection. |\n| <kbd>Mod</kbd>+<kbd>A</kbd> | Selects the whole editor content. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>↓</kbd> | Folds the current foldable code block. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>↑</kbd> | Unfolds the current folded code block. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>G</kbd> | Shows or hides the fold gutter. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd> | Shows or hides line numbers. |\n| Focus in readonly mode | The code remains keyboard-focusable for reading, selection and scrolling. |\n| <kbd>Tab</kbd> | Indents the current line or selection. |\n| <kbd>Shift</kbd>+<kbd>Tab</kbd> | Dedents the current line or selection. |\n| <kbd>Mod</kbd>+<kbd>F</kbd> | Opens the search panel. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd> | Open the search and replacement panel. |\n| <kbd>Mod</kbd>+<kbd>G</kbd> | Opens the go-to-line prompt. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd> | Toggles line comments for the current line or selection. |\n| <kbd>Mod</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> | Toggles block comments for the current selection. |\n| <kbd>Mod</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> | Opens or closes the command palette. |\n| <kbd>F1</kbd> | Opens or closes the toolbar. |\n| <kbd>Up</kbd> / <kbd>Down</kbd> in the open palette | Move between commands. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> in the open palette | Activate the focused command. |\n| <kbd>Escape</kbd> in the open palette | Close the palette. |\n| Focus a numbered comment marker / <kbd>Escape</kbd> | Show its explanation / close the tooltip without changing the code. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

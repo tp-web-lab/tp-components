@@ -1,4 +1,4 @@
-::::::::::: tp-markdown-viewer { label="tp-dragdrop" allow-script }
+::::::::::: tp-markdown-viewer { label="tp-dragdrop" allow-script preserve-source }
 :::::::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::::::: tp-box { id="dragdrop-board" data-dragdrop-demo data-allow-script }
@@ -44,9 +44,8 @@ Move
 ::::::
 :::::::
 
-::: p { data-demo-status role="status" aria-live="polite" }
 Move a task to change its column.
-:::
+{data-demo-status role="status" aria-live="polite"}
 
 ::: tp-dragdrop { root="#dragdrop-board" items="[data-task]" }
 :::

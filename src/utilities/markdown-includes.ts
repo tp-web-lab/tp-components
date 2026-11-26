@@ -10,6 +10,53 @@ function escapeHtml(value: string): string {
 		.replaceAll("'", "&#39;");
 }
 
+/** Keep inline code inert while retaining the supported raw-include-in-fence feature. */
+function maskInlineCode(markdown: string): string {
+	const output: string[] = [];
+	let paragraph = "";
+	let fence: { marker: string; length: number } | undefined;
+	const flush = () => {
+		output.push(
+			paragraph.replace(
+				/(?<!`)(`+)(?!`)([\s\S]*?)(?<!`)\1(?!`)/g,
+				(match, _delimiter, _body, offset: number) => {
+					const prefix = paragraph.slice(0, offset);
+					const escapes = /\\*$/.exec(prefix)?.[0].length ?? 0;
+					return escapes % 2 ? match : match.replace(/[^\r\n]/g, " ");
+				},
+			),
+		);
+		paragraph = "";
+	};
+	for (const line of markdown.match(/[^\n]*\n|[^\n]+$/g) ?? []) {
+		const delimiter = /^ {0,3}(?:[:>]\s*)?(`{3,}|~{3,})(.*)/.exec(line);
+		if (fence) {
+			output.push(line);
+			if (
+				delimiter?.[1]?.[0] === fence.marker &&
+				delimiter[1].length >= fence.length &&
+				!delimiter[2]?.trim()
+			)
+				fence = undefined;
+		} else if (
+			delimiter &&
+			!(delimiter[1]?.[0] === "`" && delimiter[2]?.includes("`"))
+		) {
+			flush();
+			fence = {
+				marker: delimiter[1]?.[0] ?? "",
+				length: delimiter[1]?.length ?? 0,
+			};
+			output.push(line);
+		} else if (!line.trim()) {
+			flush();
+			output.push(line);
+		} else paragraph += line;
+	}
+	flush();
+	return output.join("");
+}
+
 export async function resolveMarkdownIncludes(
 	markdown: string,
 	currentUrl: URL,
@@ -23,7 +70,7 @@ export async function resolveMarkdownIncludes(
 	const parts: string[] = [];
 	let lastIndex = 0;
 
-	for (const match of markdown.matchAll(includePattern)) {
+	for (const match of maskInlineCode(markdown).matchAll(includePattern)) {
 		const index = match.index;
 		const prefix = match[1] ?? "";
 		const include = parseMarkdownInclude(match[2] ?? "");

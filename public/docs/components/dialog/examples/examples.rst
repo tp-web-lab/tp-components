@@ -19,11 +19,11 @@
 
             .. tp-dialog::
 
-            .. p::
+            .. attributes::
                :data-demo-status:
                :role: status
 
-               Try the dialog using its trigger.
+            Try the dialog using its trigger.
 
             .. script::
                :src: /docs/components/_shared/introduction-actions.js

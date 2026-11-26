@@ -21,15 +21,14 @@
                :anchor: #intro-dropdown-trigger
                :outside-click:
 
-               - `Buttons </#/components/button/index.md>`_
+               - `Buttons </#/components/button/index.md>`__
+               - `Trees </#/components/tree/index.md>`__
 
-               - `Trees </#/components/tree/index.md>`_
-
-            .. p::
+            .. attributes::
                :data-demo-status:
                :role: status
 
-               Try the dropdown using its trigger.
+            Try the dropdown using its trigger.
 
             .. script::
                :src: /docs/components/_shared/introduction-actions.js

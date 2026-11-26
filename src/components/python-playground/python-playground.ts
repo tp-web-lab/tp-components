@@ -33,6 +33,10 @@
  * @summary In-memory file system component.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -109,6 +113,7 @@ export { TpPythonProject } from "./python-project.js";
  * @attr {string} repository = "" - Directory containing a Python playground project to load at initialization.
  * @attr {string} src = "" - JSON project or python source file to load.
  *
+ * @keyboard {Shift+Enter} Run the current project.
  * @example
  * <tp-python-playground src="/docs/components/_shared/intro-projects/python.json"></tp-python-playground>
  */
@@ -224,19 +229,19 @@ print(message)
 	protected override handleAdditionalToolbarAction(action: string): boolean {
 		switch (action) {
 			case "python-libs-none":
-				this.applyLibs(undefined);
+				this.setLibraries(undefined);
 				return true;
 
 			case "python-libs-numpy":
-				this.applyLibs(["numpy"]);
+				this.setLibraries(["numpy"]);
 				return true;
 
 			case "python-libs-pandas":
-				this.applyLibs(["pandas"]);
+				this.setLibraries(["pandas"]);
 				return true;
 
 			case "python-libs-matplotlib":
-				this.applyLibs(["matplotlib"]);
+				this.setLibraries(["matplotlib"]);
 				return true;
 
 			default:
@@ -284,7 +289,8 @@ print(message)
 		});
 	}
 
-	private applyLibs(libs: string[] | undefined): void {
+	/** Replaces the Python libraries loaded for the project, retaining current file edits. */
+	public async setLibraries(libs: string[] | undefined): Promise<void> {
 		this.syncProjectFromFilesystem();
 
 		const project = this.getProject();
@@ -299,7 +305,7 @@ print(message)
 			}),
 		);
 
-		void this.run();
+		await this.run();
 	}
 }
 

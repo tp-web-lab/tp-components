@@ -1,4 +1,4 @@
-<tp-html-viewer label="tp-prolog-viewer" allow-script>
+<tp-html-viewer label="tp-prolog-viewer" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
       <tp-prolog-viewer src="/docs/components/_shared/intro-projects/prolog.json"></tp-prolog-viewer>
@@ -6,6 +6,7 @@
 
     <div role="example" label="Javascript API">
       <script type="module">
+      import "/components/prolog/prolog.js";
       import "/components/prolog-viewer/prolog-viewer.js";
 
       const example = document.createDocumentFragment();
@@ -61,6 +62,54 @@
 
     <div role="example" label="Single source file">
       <tp-prolog-viewer src="/docs/components/_shared/single-source/example.pl"></tp-prolog-viewer>
+    </div>
+
+    <div role="example" label="Compare presentation modes">
+      <section>
+      <h3>mode="default" — Standard controls</h3>
+      <p>Open Code to edit the source, then click Run or press <kbd>Shift</kbd>+<kbd>Enter</kbd> in the editor.</p>
+      <p>Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.</p>
+      <tp-prolog-viewer mode="default">
+        <script type="tp/prolog" filename="program.pl">
+      % The query file demonstrates console output and an intentional error.
+        </script>
+        <script type="tp/prolog" filename="query.pl">
+      writeln('Printed message before the intentional error.').
+      throw(error(intentional_viewer_error, context(mode_comparison, 'Intentional error: the error appears in the output.'))).
+        </script>
+      </tp-prolog-viewer>
+      </section>
+
+      <section>
+      <h3>mode="lite" — Compact controls</h3>
+      <p>Open Code to edit the source, then click Run or press <kbd>Shift</kbd>+<kbd>Enter</kbd> in the editor.</p>
+      <p>Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.</p>
+      <tp-prolog-viewer mode="lite">
+        <script type="tp/prolog" filename="program.pl">
+      % The query file demonstrates console output and an intentional error.
+        </script>
+        <script type="tp/prolog" filename="query.pl">
+      writeln('Printed message before the intentional error.').
+      throw(error(intentional_viewer_error, context(mode_comparison, 'Intentional error: the error appears in the output.'))).
+        </script>
+      </tp-prolog-viewer>
+      </section>
+
+      <section>
+      <h3>mode="simple" — Editor and rendered output only</h3>
+      <p>Edit the code below, keep the cursor in the editor and press <kbd>Shift</kbd>+<kbd>Enter</kbd> (Return) to run it. This viewer has no Run button.</p>
+      <p>Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.</p>
+      <tp-prolog-viewer mode="simple">
+        <script type="tp/prolog" filename="program.pl">
+      % The query file demonstrates console output and an intentional error.
+        </script>
+        <script type="tp/prolog" filename="query.pl">
+      writeln('Printed message before the intentional error.').
+      throw(error(intentional_viewer_error, context(mode_comparison, 'Intentional error: the error appears in the output.'))).
+        </script>
+      </tp-prolog-viewer>
+      </section>
+      <p>Programming viewers already have compact controls, so default and lite look alike. The first run may load the language engine.</p>
     </div>
   </template>
 </tp-html-viewer>

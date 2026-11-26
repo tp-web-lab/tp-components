@@ -28,11 +28,11 @@
 
                   Close
 
-            .. p::
+            .. attributes::
                :data-demo-status:
                :role: status
 
-               Try the popover using its trigger.
+            Try the popover using its trigger.
 
             .. script::
                :src: /docs/components/_shared/introduction-actions.js

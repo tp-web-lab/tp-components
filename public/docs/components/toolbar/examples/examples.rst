@@ -17,17 +17,21 @@
             :name: menu
             :aria-label: Menu
 
-         .. role:: example-tp-icon-3(tp-icon)
+         .. role:: example-span-3
+            :section: center
+            :class:
+
+         .. role:: example-tp-icon-4(tp-icon)
             :section: end
             :name: github
             :aria-label: GitHub
 
-         .. role:: example-tp-icon-4(tp-icon)
+         .. role:: example-tp-icon-5(tp-icon)
             :section: end
             :name: settings
             :aria-label: Settings
 
-         .. role:: example-tp-icon-5(tp-icon)
+         .. role:: example-tp-icon-6(tp-icon)
             :section: end
             :name: help
             :aria-label: Help
@@ -37,14 +41,7 @@
 
             .. tp-toolbar::
 
-               :example-tp-icon-1:`home` :example-tp-icon-2:`menu`
-
-               .. span::
-                  :section: center
-
-                  Document
-
-               :example-tp-icon-3:`github` :example-tp-icon-4:`settings` :example-tp-icon-5:`help`
+               :example-tp-icon-1:`home` :example-tp-icon-2:`menu` :example-span-3:`Document` :example-tp-icon-4:`github` :example-tp-icon-5:`settings` :example-tp-icon-6:`help`
 
             .. tp-box::
                :border-width: 0

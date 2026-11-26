@@ -4,6 +4,11 @@
  */
 
 import { createViewerFullscreen } from "../../utilities/viewer-fullscreen.js";
+import {
+	readViewerMode,
+	type ViewerMode,
+} from "../../utilities/viewer-mode.js";
+import { createViewerRunShortcut } from "../../utilities/viewer-run-shortcut.js";
 import style from "./playground.css?inline";
 
 import "../base/base.js";
@@ -167,8 +172,16 @@ export abstract class TpPlayground<
 
 	protected activeFile: string | null = null;
 
+	/** Controls the viewer presentation independently of its source language. */
+	public get mode(): ViewerMode {
+		return readViewerMode(this);
+	}
+	public set mode(value: ViewerMode) {
+		this.setAttribute("mode", value);
+	}
+
 	public static override get observedAttributes(): string[] {
-		return [...TpBase.observedAttributes, "repository", "src"];
+		return [...TpBase.observedAttributes, "repository", "src", "mode", "lite"];
 	}
 
 	public get repository(): string {
@@ -204,6 +217,57 @@ export abstract class TpPlayground<
 	/** Use the compact, single-project viewer interface instead of the IDE interface. */
 	protected get viewerMode(): boolean {
 		return false;
+	}
+
+	/** Scheme, OCaml and Prolog keep all output in the rendered result. */
+	protected get inlineConsoleOutput(): boolean {
+		return ["scheme", "ocaml", "prolog"].includes(this.getPlaygroundKind());
+	}
+
+	private executionHtml(html: string): string {
+		return this.inlineConsoleOutput
+			? html.replace(
+					/<head([^>]*)>/i,
+					"<head$1><script>window.__tpInlineConsole = true;</script>",
+				)
+			: html;
+	}
+
+	private appendInlineOutput(values: unknown[]): void {
+		const frame = this.iframeEl as
+			| (HTMLElement & { contentWindow?: Window | null })
+			| null;
+		const doc = frame?.contentWindow?.document;
+		if (!doc?.body) return;
+		let output = doc.querySelector<HTMLPreElement>("[data-tp-inline-messages]");
+		if (!output) {
+			output = doc.createElement("pre");
+			output.setAttribute("data-tp-inline-messages", "");
+			output.setAttribute("role", "log");
+			doc.body.append(output);
+		}
+		const text = values
+			.map((value) => {
+				if (typeof value === "string") return value;
+				if (value instanceof Error) return value.message;
+				if (typeof value === "object" && value !== null) {
+					const item = value as Record<string, unknown>;
+					if (item.__tp_console_type === "error")
+						return String(item.message ?? item.name ?? "Error");
+					if (item.__tp_console_type === "undefined") return "undefined";
+					try {
+						return JSON.stringify(value, null, 2);
+					} catch {
+						return String(value);
+					}
+				}
+				return String(value);
+			})
+			.join(" ");
+		output.append(doc.createTextNode(`${text}\n`));
+		if (this.iframeEl) this.iframeEl.hidden = false;
+		this.viewerOutputVisible = true;
+		this.updateViewerLayout();
 	}
 
 	protected getViewerLanguageLabel(): string {
@@ -326,7 +390,8 @@ export abstract class TpPlayground<
 					: "Unknown examples loading error";
 
 			console.warn("Unable to load examples", error);
-			this.consoleEl?.warn(message);
+			if (this.inlineConsoleOutput) this.appendInlineOutput([message]);
+			else this.consoleEl?.warn(message);
 
 			list.replaceChildren();
 
@@ -339,7 +404,8 @@ export abstract class TpPlayground<
 		}
 	}
 
-	protected async loadExample(id: string): Promise<void> {
+	/** Loads a bundled example by identifier, clears output and runs it. */
+	public async loadExample(id: string): Promise<void> {
 		const project = await this.getExampleLoader().loadProject(id);
 
 		this.setProject(project);
@@ -361,11 +427,20 @@ export abstract class TpPlayground<
 		this.initialProject = this.project.clone() as TProject;
 	}
 
+	private readonly handleViewerRunShortcut = createViewerRunShortcut(
+		this,
+		() => {
+			void this.run();
+		},
+	);
+
 	protected connectedCallback(): void {
 		super.connectedCallback();
+		this.addEventListener("keydown", this.handleViewerRunShortcut, true);
 		this.ensureGlobalStyle(TpPlayground.styleId, style);
 		this.ensureLayout();
 		this.bindEvents();
+		this.refreshMemoryMenu();
 		const initializeProject = (): void => {
 			if (!this.isConnected) return;
 			this.setProject(this.createInitialProject());
@@ -385,6 +460,7 @@ export abstract class TpPlayground<
 	}
 
 	public disconnectedCallback(): void {
+		this.removeEventListener("keydown", this.handleViewerRunShortcut, true);
 		this.configuredProjectRevision++;
 		this.fileChooserController?.abort();
 		this.fileChooserController = null;
@@ -398,10 +474,12 @@ export abstract class TpPlayground<
 		window.removeEventListener("message", this.handleWindowMessage);
 	}
 
+	/** Returns an independent copy of the current project and its files. */
 	public getProject(): TProject {
 		return this.project.clone() as TProject;
 	}
 
+	/** Replaces the project, records its reset state and opens its entry file. */
 	public setProject(project: TProject): void {
 		this.fileSaveTargets.clear();
 		this.project = this.normalizeProject(project);
@@ -428,11 +506,13 @@ export abstract class TpPlayground<
 		this.syncTestButton();
 	}
 
+	/** Restores the initially loaded project and clears the console. */
 	public reset(): void {
 		this.consoleEl?.clear();
 		this.setProject(this.initialProject.clone() as TProject);
 	}
 
+	/** Executes the current edited project and replaces the output document. */
 	public async run(): Promise<void> {
 		this.syncProjectFromFilesystem();
 
@@ -456,13 +536,17 @@ export abstract class TpPlayground<
 			this.viewerIframeMutationObserver = null;
 			this.iframeEl.style.blockSize = "1px";
 			this.iframeEl.hidden = false;
-			this.iframeEl.setAttribute("srcdoc", documentResult.html);
+			this.iframeEl.setAttribute(
+				"srcdoc",
+				this.executionHtml(documentResult.html),
+			);
 			this.editorEl?.syncHeightToContent();
 		} catch (error: unknown) {
 			this.reportError(error, "Unknown execution error");
 		}
 	}
 
+	/** Runs the current project tests and displays their output or an unsupported-test error. */
 	public async test(): Promise<void> {
 		this.syncProjectFromFilesystem();
 
@@ -481,7 +565,10 @@ export abstract class TpPlayground<
 			this.viewerIframeMutationObserver = null;
 			this.iframeEl.style.blockSize = "1px";
 			this.iframeEl.hidden = false;
-			this.iframeEl.setAttribute("srcdoc", documentResult.html);
+			this.iframeEl.setAttribute(
+				"srcdoc",
+				this.executionHtml(documentResult.html),
+			);
 		} catch (error: unknown) {
 			this.reportError(error, "Tests are not supported.");
 		}
@@ -501,6 +588,7 @@ export abstract class TpPlayground<
 		return this.buildTestDocument(snapshot);
 	}
 
+	/** Opens the project file at the given path and selects its editor tab. */
 	public openFile(path: string): void {
 		const file = this.project.findFile(path);
 
@@ -519,6 +607,7 @@ export abstract class TpPlayground<
 		this.syncEditorFromActiveFile();
 	}
 
+	/** Closes the editor tab for the given path without deleting the project file. */
 	public closeFile(path: string): void {
 		this.openFiles = this.openFiles.filter((openPath) => openPath !== path);
 
@@ -538,6 +627,12 @@ export abstract class TpPlayground<
 		_oldValue: string | null,
 		_newValue: string | null,
 	): void {
+		if (
+			(name === "mode" || name === "lite") &&
+			this.isConnected &&
+			this.viewerMode
+		)
+			this.updateViewerLayout();
 		if ((name === "src" || name === "repository") && this.isConnected) {
 			void this.loadConfiguredProject(true);
 		}
@@ -556,10 +651,6 @@ export abstract class TpPlayground<
 
 	protected createInitialProject(): TProject {
 		const project = this.createEmptyProject();
-
-		if (!this.viewerMode) {
-			return project;
-		}
 
 		const language = this.getPlaygroundKind();
 		const scripts = Array.from(
@@ -690,7 +781,8 @@ export abstract class TpPlayground<
 				error instanceof Error ? error.message : "Unable to load project.";
 			// Discard output from the previous project emitted during the request.
 			this.consoleEl?.clear();
-			this.consoleEl?.error(message);
+			if (this.inlineConsoleOutput) this.appendInlineOutput([message]);
+			else this.consoleEl?.error(message);
 			console.error(error);
 		}
 
@@ -1112,7 +1204,8 @@ export abstract class TpPlayground<
 		previewGroup.setAttribute("data-tp-playground-preview-group", "");
 
 		workGroup.append(main);
-		previewGroup.append(iframe, consoleEl);
+		previewGroup.append(iframe);
+		if (!this.inlineConsoleOutput) previewGroup.append(consoleEl);
 
 		switcher.append(workGroup, previewGroup);
 		root.append(toolbar, switcher, languageDrawer);
@@ -1122,7 +1215,7 @@ export abstract class TpPlayground<
 		this.editorEl = editor;
 		this.iframeEl = iframe;
 		this.tabsEl = tabs;
-		this.consoleEl = consoleEl;
+		this.consoleEl = this.inlineConsoleOutput ? null : consoleEl;
 		this.toolbarStartMenuEl = startMenu;
 		this.languageDrawerEl = languageDrawer;
 
@@ -1183,7 +1276,7 @@ export abstract class TpPlayground<
 			label,
 			codeButton,
 			outputButton,
-			consoleButton,
+			...(this.inlineConsoleOutput ? [] : [consoleButton]),
 			spacer,
 			editorActions,
 			createViewerFullscreen(this),
@@ -1229,7 +1322,8 @@ export abstract class TpPlayground<
 		iframe.setAttribute("data-tp-playground-preview", "");
 		const consoleEl = document.createElement("tp-console") as TpConsole;
 		consoleEl.setAttribute("data-tp-playground-console", "");
-		outputPanel.append(iframe, consoleEl);
+		outputPanel.append(iframe);
+		if (!this.inlineConsoleOutput) outputPanel.append(consoleEl);
 
 		panels.append(codePanel, outputPanel);
 		root.append(toolbar, panels);
@@ -1237,7 +1331,7 @@ export abstract class TpPlayground<
 
 		this.editorEl = editor;
 		this.iframeEl = iframe;
-		this.consoleEl = consoleEl;
+		this.consoleEl = this.inlineConsoleOutput ? null : consoleEl;
 		this.updateViewerLayout();
 	}
 
@@ -1350,6 +1444,12 @@ export abstract class TpPlayground<
 
 	private updateViewerLayout(): void {
 		if (!this.viewerMode) return;
+		const simple = this.mode === "simple";
+		const showCode = simple || this.viewerCodeVisible;
+		const showOutput = simple || this.viewerOutputVisible;
+		this.dataset.viewerMode = this.mode;
+		this.consoleEl?.setAttribute("mode", this.mode);
+		if (simple) this.editorEl?.removeAttribute("toolbar");
 		const root = this.queryElement<HTMLElement>(
 			"[data-tp-programming-viewer-root]",
 		);
@@ -1374,34 +1474,28 @@ export abstract class TpPlayground<
 		const editorActions = this.queryElement<HTMLElement>(
 			"[data-tp-programming-viewer-editor-actions]",
 		);
-		codePanel?.toggleAttribute("hidden", !this.viewerCodeVisible);
-		outputPanel?.toggleAttribute("hidden", !this.viewerOutputVisible);
-		codeButton?.setAttribute("aria-pressed", String(this.viewerCodeVisible));
-		outputButton?.setAttribute(
-			"aria-pressed",
-			String(this.viewerOutputVisible),
-		);
+		codePanel?.toggleAttribute("hidden", !showCode);
+		outputPanel?.toggleAttribute("hidden", !showOutput);
+		codeButton?.setAttribute("aria-pressed", String(showCode));
+		outputButton?.setAttribute("aria-pressed", String(showOutput));
 		this.consoleEl?.toggleAttribute("hidden", !this.viewerConsoleVisible);
 		consoleButton?.setAttribute(
 			"aria-pressed",
 			String(this.viewerConsoleVisible),
 		);
-		editorToolbarButton?.toggleAttribute("hidden", !this.viewerCodeVisible);
-		editorActions?.toggleAttribute("hidden", !this.viewerCodeVisible);
+		editorToolbarButton?.toggleAttribute("hidden", !showCode);
+		editorActions?.toggleAttribute("hidden", !showCode);
 		root?.setAttribute(
 			"data-view",
-			this.viewerCodeVisible && this.viewerOutputVisible
-				? "both"
-				: this.viewerCodeVisible
-					? "code"
-					: "output",
+			showCode && showOutput ? "both" : showCode ? "code" : "output",
 		);
 		this.syncViewerEditorHeights();
 	}
 
 	/** Keeps every visible programming-viewer editor at its intrinsic height. */
 	private syncViewerEditorHeights(): void {
-		if (!this.viewerMode || !this.viewerCodeVisible) return;
+		if (!this.viewerMode || (!this.viewerCodeVisible && this.mode !== "simple"))
+			return;
 
 		const sync = (): void => {
 			for (const editor of this.querySelectorAll<TpCodeEditor>(
@@ -1873,8 +1967,7 @@ export abstract class TpPlayground<
 		}
 
 		if (item.hasAttribute("data-tp-playground-language-help")) {
-			this.languageDrawerEl?.setContent(this.getLanguageHelp());
-			this.languageDrawerEl?.show();
+			this.showLanguageHelp();
 			return;
 		}
 
@@ -1896,15 +1989,15 @@ export abstract class TpPlayground<
 
 		switch (action) {
 			case "open-source-file":
-				void this.openLocalProject(false);
+				void this.openSourceFile();
 				break;
 
 			case "save-file":
-				void this.saveActiveFile(false);
+				void this.saveFile();
 				break;
 
 			case "save-file-as":
-				void this.saveActiveFile(true);
+				void this.saveFileAs();
 				break;
 			case "run-project":
 				void this.run();
@@ -1919,29 +2012,30 @@ export abstract class TpPlayground<
 				break;
 
 			case "new-project":
-				this.setProject(this.createNewProject());
-				this.consoleEl?.clear();
+				this.newProject();
 				break;
 
 			case "clear-project":
-				this.setProject(this.createClearProject());
-				this.consoleEl?.clear();
+				this.clearProject();
 				break;
 
+			case "load-memory":
+				this.loadFromMemory();
+				break;
 			case "save-memory":
-				// à brancher ensuite
+				this.saveInMemory();
 				break;
 
 			case "clear-memory":
-				// à brancher ensuite
+				this.clearMemory();
 				break;
 
 			case "import-disk":
-				void this.openLocalProject(true);
+				void this.importProject();
 				break;
 
 			case "export-disk":
-				void this.exportLocalProject();
+				void this.exportProject();
 				break;
 
 			default:
@@ -1949,8 +2043,111 @@ export abstract class TpPlayground<
 		}
 	};
 
-	/** Opens a JSON project or wraps a local source exactly as the src loader does. */
-	private async openLocalProject(jsonProject: boolean): Promise<void> {
+	/** Saves the current project in browser storage for this language and refreshes its menu entry. */
+	public saveInMemory(): void {
+		this.syncProjectFromFilesystem();
+		try {
+			localStorage.setItem(
+				`tp-playground-memory:${this.getPlaygroundKind()}`,
+				JSON.stringify(this.getProject().toJSON()),
+			);
+			this.refreshMemoryMenu();
+		} catch (error) {
+			this.reportError(error, "Unable to save the project in browser storage.");
+		}
+	}
+	/** Restores this language's saved project from browser storage without running it. */
+	public loadFromMemory(): void {
+		try {
+			const saved = localStorage.getItem(
+				`tp-playground-memory:${this.getPlaygroundKind()}`,
+			);
+			if (!saved) return;
+			this.setProject(
+				this.createProjectFromData(
+					parsePlaygroundProjectJson(JSON.parse(saved)),
+				),
+			);
+			this.consoleEl?.clear();
+			this.afterProjectLoaded();
+		} catch (error) {
+			this.reportError(error, "Unable to restore the saved project.");
+		}
+	}
+	/** Removes this language's saved project while retaining the current project. */
+	public clearMemory(): void {
+		try {
+			localStorage.removeItem(
+				`tp-playground-memory:${this.getPlaygroundKind()}`,
+			);
+			this.refreshMemoryMenu();
+		} catch (error) {
+			this.reportError(error, "Unable to clear the saved project.");
+		}
+	}
+	private refreshMemoryMenu(): void {
+		const list = this.querySelector("[data-tp-playground-memory-list]");
+		if (!list) return;
+		const item = document.createElement("li");
+		let saved = false;
+		try {
+			saved = Boolean(
+				localStorage.getItem(
+					`tp-playground-memory:${this.getPlaygroundKind()}`,
+				),
+			);
+		} catch {
+			/* Storage can be unavailable in embedded documents. */
+		}
+		if (saved) {
+			item.textContent = "Saved project";
+			item.setAttribute("data-tp-playground-action", "load-memory");
+		} else {
+			item.textContent = "No saved project";
+			item.setAttribute("aria-disabled", "true");
+		}
+		list.replaceChildren(item);
+		this.toolbarStartMenuEl?.refresh();
+	}
+
+	/** Replaces the current project with the language's starter project and clears its console. */
+	public newProject(): void {
+		this.setProject(this.createNewProject());
+		this.consoleEl?.clear();
+	}
+	/** Replaces the current project with an empty project and clears its console. */
+	public clearProject(): void {
+		this.setProject(this.createClearProject());
+		this.consoleEl?.clear();
+	}
+	/** Opens a local source chooser and creates a project from the selected file. */
+	public async openSourceFile(): Promise<void> {
+		await this.openLocalProject(false);
+	}
+	/** Opens a JSON project chooser and replaces the current project with the selected project. */
+	public async importProject(): Promise<void> {
+		await this.openLocalProject(true);
+	}
+	/** Saves the active source file, reusing its previously chosen destination when available. */
+	public async saveFile(): Promise<void> {
+		await this.saveActiveFile(false);
+	}
+	/** Prompts for a new destination for the active source file. */
+	public async saveFileAs(): Promise<void> {
+		await this.saveActiveFile(true);
+	}
+	/** Saves all files and language settings as a JSON project. */
+	public async exportProject(): Promise<void> {
+		await this.exportLocalProject();
+	}
+	/** Opens the language reference drawer for this playground. */
+	public showLanguageHelp(): void {
+		this.languageDrawerEl?.setContent(this.getLanguageHelp());
+		this.languageDrawerEl?.show();
+	}
+
+	/** Opens a local project chooser; true selects project JSON. */
+	async openLocalProject(jsonProject: boolean): Promise<void> {
 		this.fileChooserController?.abort();
 		const controller = new AbortController();
 		this.fileChooserController = controller;
@@ -1984,8 +2181,8 @@ export abstract class TpPlayground<
 		}
 	}
 
-	/** Saves the active file, reusing only a destination selected for this project. */
-	private async saveActiveFile(saveAs: boolean): Promise<void> {
+	/** Saves the active file; true requests a new destination. */
+	async saveActiveFile(saveAs: boolean): Promise<void> {
 		this.syncProjectFromFilesystem();
 		const project = this.project;
 		const file =
@@ -2011,8 +2208,8 @@ export abstract class TpPlayground<
 		}
 	}
 
-	/** Exports every project file and its language-specific metadata as JSON. */
-	private async exportLocalProject(): Promise<void> {
+	/** Downloads the complete project. */
+	async exportLocalProject(): Promise<void> {
 		this.syncProjectFromFilesystem();
 		const project = this.getProject();
 		try {
@@ -2137,6 +2334,10 @@ export abstract class TpPlayground<
 		const message = data as Partial<TpPlaygroundWindowMessage>;
 
 		if (message.type === "tp-playground-console-clear") {
+			if (this.inlineConsoleOutput)
+				iframe.contentWindow?.document
+					.querySelector("[data-tp-inline-messages]")
+					?.remove();
 			this.consoleEl?.clear();
 			return;
 		}
@@ -2146,14 +2347,18 @@ export abstract class TpPlayground<
 			typeof message.kind === "string" &&
 			Array.isArray(message.values)
 		) {
-			this.consoleEl?.addEntry(message.kind, message.values);
+			if (this.inlineConsoleOutput) {
+				if (message.kind !== "group-end")
+					this.appendInlineOutput(message.values);
+			} else this.consoleEl?.addEntry(message.kind, message.values);
 		}
 	};
 
 	private reportError(error: unknown, fallback: string): void {
 		const message = error instanceof Error ? error.message : fallback;
 
-		this.consoleEl?.error(new Error(message));
+		if (this.inlineConsoleOutput) this.appendInlineOutput([message]);
+		else this.consoleEl?.error(new Error(message));
 
 		this.dispatchEvent(
 			new CustomEvent("tp-playground-error", {
@@ -2163,6 +2368,26 @@ export abstract class TpPlayground<
 				},
 			}),
 		);
+	}
+
+	/** Shows or hides the code panel while retaining at least one visible panel. */
+	toggleCode(): void {
+		this.handleViewerCodeClick();
+	}
+
+	/** Shows or hides the output panel while retaining at least one visible panel. */
+	toggleOutput(): void {
+		this.handleViewerOutputClick();
+	}
+
+	/** Shows or hides the console panel. */
+	toggleConsole(): void {
+		this.handleViewerConsoleClick();
+	}
+
+	/** Shows or hides the active editor toolbar. */
+	toggleEditorToolbar(): void {
+		this.handleEditorToolbarClick();
 	}
 }
 

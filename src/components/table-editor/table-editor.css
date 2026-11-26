@@ -14,12 +14,12 @@ tp-table-editor > tp-toolbar { position: static; }
 .tp-table-editor-settings > [data-caption] { --tp-textfield-inline-size: 100%; min-inline-size: 0; }
 .tp-table-editor-settings > [data-heading] { justify-self: end; }
 .tp-table-editor-surface { overflow-x: auto; max-inline-size: 100%; }
-.tp-table-editor-surface table { width: 100%; border-collapse: collapse; }
+tp-table-editor .tp-table-editor-surface table { display: table; overflow: visible; width: 100%; border-collapse: collapse; }
 .tp-table-editor-surface :is(th,td) { padding: .2rem; border: 1px solid var(--tp-neutral-stroke-soft); min-inline-size: 8rem; }
 .tp-table-editor-surface th { background: color-mix(in oklab, var(--tp-brand-text-colorful) 12%, var(--tp-paper-color)); }
 .tp-table-editor-surface :is(tp-textfield,tp-numberfield,tp-datefield,tp-timefield,tp-mathfield) { --tp-textfield-inline-size: 100%; --tp-mathfield-inline-size: 100%; --tp-textfield-background: transparent; --tp-textfield-border-color: transparent; }
-.tp-table-editor-surface input { text-align: var(--tp-table-cell-align,left); }
-.tp-table-editor-surface th input { font-weight: 700; }
+.tp-table-editor-surface :is(input,textarea) { text-align: var(--tp-table-cell-align,left); }
+.tp-table-editor-surface th :is(input,textarea) { font-weight: 700; }
 .tp-table-editor-surface :is(th,td):focus-within { outline: 2px solid var(--tp-brand-text-colorful); outline-offset: -2px; }
 tp-table-editor :is([data-markup], [data-spreadsheet-code]) pre { margin: 0; overflow-x: auto; background: var(--tp-syntax-surface, #1e1e1e); color: var(--tp-syntax-foreground, #d4d4d4); }
 tp-table-editor :is([data-markup], [data-spreadsheet-code]) code { display: block; font-family: var(--tp-font-mono,monospace); }
@@ -33,8 +33,8 @@ tp-table-editor :is([data-markup], [data-spreadsheet-code]) code { display: bloc
 .tp-table-editor-choice [data-choice] tp-icon[data-check] { visibility: hidden; }
 .tp-table-editor-choice [data-choice][aria-current="true"] tp-icon[data-check] { visibility: visible; }
 
-tp-table-editor > tp-contextmenu :is([data-action^="type-"], [data-action^="align-"]) tp-icon[data-check] { visibility: hidden; }
-tp-table-editor > tp-contextmenu :is([data-action^="type-"], [data-action^="align-"])[aria-current="true"] tp-icon[data-check] { visibility: visible; }
+tp-table-editor > tp-contextmenu :is([data-action^="type-"], [data-action^="align-"], [data-action^="vertical-"]) tp-icon[data-check] { visibility: hidden; }
+tp-table-editor > tp-contextmenu :is([data-action^="type-"], [data-action^="align-"], [data-action^="vertical-"])[aria-current="true"] tp-icon[data-check] { visibility: visible; }
 .tp-table-editor-surface :is(tp-numberfield,tp-datefield,tp-timefield,tp-mathfield) { width: 100%; }
 
 tp-table-editor > tp-contextmenu li[aria-haspopup="menu"] > ul { inset-block-start: auto; inset-block-end: -.25rem; }
@@ -42,21 +42,6 @@ tp-table-editor > tp-contextmenu[data-submenu-side="left"] li[aria-haspopup="men
 tp-table-editor > tp-contextmenu[data-submenu-side="overlay"] li[aria-haspopup="menu"] > ul { inset-inline-start: 0; }
 
 tp-table-editor [data-format-tabs] [data-markup-preview] { overflow-x: auto; }
-
-
-/* Match the circular brand controls of the multi-pages toolbar. */
-tp-table-editor > tp-toolbar tp-icon-button > button,
-tp-table-editor .tp-table-editor-code-tools tp-icon-button > button {
- color: inherit;
- border: 1px solid var(--tp-brand-stroke-mid);
- border-radius: var(--tp-border-radius-circle);
- background: transparent;
-}
-tp-table-editor > tp-toolbar tp-icon-button:not([disabled]) > button:hover:not(:disabled, [aria-disabled="true"]),
-tp-table-editor .tp-table-editor-code-tools tp-icon-button:not([disabled]) > button:hover:not(:disabled, [aria-disabled="true"]) {
- background: var(--tp-brand-fill-soft);
- color: var(--tp-brand-text-on-soft);
-}
 
 .tp-table-editor-surface :is(th,td) { position: relative; }
 .tp-table-editor-surface [data-column-resize] {
@@ -145,12 +130,23 @@ tp-table-editor > tp-toolbar tp-divider[section="end"][orientation="vertical"] {
 }
 
 .tp-table-editor-preview-tools { display: flex; justify-content: flex-end; margin-block-end: .5rem; }
-tp-table-editor .tp-table-editor-preview-tools tp-icon-button > button { border: 1px solid var(--tp-brand-stroke-mid); border-radius: var(--tp-border-radius-circle); background: transparent; }
-tp-table-editor .tp-table-editor-preview-tools tp-icon-button:not([disabled]) > button:hover { background: var(--tp-brand-fill-soft); color: var(--tp-brand-text-on-soft); }
 
 .tp-table-editor-code-tools { display: flex; margin-block-end: .5rem; }
 tp-table-editor > [data-spreadsheet-details] { margin-block-start: 1rem; }
+tp-table-editor > [data-spreadsheet-details] > [data-spreadsheet-tabs] { margin-block-start: .75rem; }
 
 .tp-table-editor-surface [data-range-selected] { background: var(--tp-brand-fill-soft); box-shadow: inset 0 0 0 2px var(--tp-brand-stroke-mid); }
 
 .tp-table-editor-status { text-align: right; }
+
+/* A minimal table height lets spanning cells stretch their multiline controls.
+   Textareas still grow and shrink intrinsically with their content. */
+.tp-table-editor-surface table { height: 1px; }
+.tp-table-editor-surface :is(th,td) { vertical-align: top; height: 1px; }
+.tp-table-editor-surface :is(tp-textfield,tp-mathfield)[multiline] { width: 100%; height: 100%; }
+.tp-table-editor-surface tp-textfield[multiline] :is([data-tp-textfield-label],[data-tp-textfield-control]) { height: 100%; }
+.tp-table-editor-surface tp-textfield[multiline] [data-tp-textfield-label] { grid-template-rows: auto minmax(0,1fr); }
+/* Align the editable content inside the full-height cell field. */
+.tp-table-editor-surface tp-textfield[multiline] [data-tp-textfield-input] { align-self: var(--tp-table-cell-vertical, start); }
+.tp-table-editor-surface tp-mathfield[multiline] { align-content: stretch; }
+.tp-table-editor-surface tp-mathfield[multiline] > [data-tp-mathfield-editor] { flex-grow: 1; }

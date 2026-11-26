@@ -261,7 +261,7 @@ import
 		expect(styleText).toContain("max-inline-size: none;");
 	});
 
-	it("makes Markdown tables fit beside floated content", async () => {
+	it("uses TpBase table presentation without Markdown-specific overrides", async () => {
 		const element = document.createElement("tp-markdown");
 		element.innerHTML = `
       <script type="tp/markdown">
@@ -272,13 +272,22 @@ import
     `;
 
 		document.body.append(element);
-		await flush();
+		await waitFor(() => element.querySelector("table tbody td") !== null);
 
-		const style = document.getElementById("tp-markdown-styles");
-		expect(style?.textContent).toContain(".tp-markdown-output table");
-		expect(style?.textContent).toContain("display: block;");
-		expect(style?.textContent).toContain("inline-size: auto;");
-		expect(style?.textContent).toContain("overflow-x: auto;");
+		const table = element.querySelector("table");
+		expect(table?.querySelector("thead th")?.textContent).toBe("A");
+		expect(table?.querySelector("tbody td")?.textContent).toBe("Alpha");
+		const sharedStyles =
+			document.getElementById("tp-reset-styles")?.textContent ?? "";
+		const tableRule = /(?:^|\n)\s*table\s*\{([^{}]*)/.exec(sharedStyles)?.[1];
+		expect(tableRule).toBeDefined();
+		expect(tableRule).toMatch(/width:\s*auto\s*;/);
+		expect(tableRule).toMatch(/max-inline-size:\s*100%\s*;/);
+		expect(tableRule).toMatch(/border-collapse:\s*collapse\s*;/);
+		expect(tableRule).toContain("var(--tp-neutral-stroke-soft)");
+		const localStyles =
+			document.getElementById("tp-markdown-styles")?.textContent ?? "";
+		expect(localStyles).not.toMatch(/(?:\.tp-md-table|\btable\b)\s*(?:[,{])/);
 	});
 
 	it("makes fenced code containers fit beside floated content", async () => {
@@ -322,7 +331,7 @@ import
 		warnSpy.mockRestore();
 	});
 
-	it("injects Highlight.js colors through the Markdown component stylesheet", async () => {
+	it("uses shared TpBase syntax colors without Markdown-specific overrides", async () => {
 		const element = document.createElement("tp-markdown");
 		const script = document.createElement("script");
 		script.type = "tp/markdown";
@@ -336,12 +345,22 @@ import
 		document.body.append(element);
 		await waitFor(() => element.querySelector("pre > code") !== null);
 
-		const style = document.getElementById("tp-markdown-styles");
+		const sharedStyles =
+			document.getElementById("tp-base-styles")?.textContent ?? "";
+		const stringRule = /\.hljs-string,[^{]*\{([^}]*)\}/.exec(sharedStyles)?.[1];
+		expect(stringRule).toBeDefined();
+		expect(stringRule).toMatch(
+			/color:\s*var\(--tp-syntax-token-string,\s*#ce9178\)\s*;/,
+		);
+		const localStyles =
+			document.getElementById("tp-markdown-styles")?.textContent ?? "";
+		expect(localStyles).not.toContain(".hljs-");
+		expect(localStyles).not.toContain("--tp-syntax-token-string");
 		const code = element.querySelector("pre > code");
-
-		expect(style?.textContent).toContain(".tp-markdown-output .hljs-string");
-		expect(style?.textContent).toContain("--tp-syntax-token-string");
 		expect(code?.classList.contains("language-html")).toBe(true);
+		expect(code?.textContent).toContain(
+			'<script type="module" src="tp-loader.js">',
+		);
 	});
 
 	it("keeps inline include directives inside Markdown tp-tabs definition panels", async () => {

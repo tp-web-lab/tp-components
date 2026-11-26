@@ -8,12 +8,20 @@
 | Note | Open or close the current slide's notes; unavailable on slides without notes. |
 | Next arrow / click in slide content | Reveal the next progressive step, then advance to the next slide. |
 | Previous arrow / right-click in slide content | Hide the previous step, or return to the preceding slide with its steps revealed. |
-| Play automatically / Pause automatic playback | When automatic mode is enabled, start playback or pause it without losing the current voice or remaining interval. |
-| Stop automatic playback | Cancel automatic playback and keep the current slide. |
+| :tp-icon:{name="pause" size="2em"} :tp-icon:{name="play" size="2em"} :tp-icon:{name="stop" size="2em"} Play automatically / Pause automatic playback | When automatic mode is enabled, start playback or pause it without losing the current voice or remaining interval. |
+| :tp-icon:{name="play" size="2em"} :tp-icon:{name="stop" size="2em"} Stop automatic playback | Cancel automatic playback and keep the current slide. |
 | Speaker notes, when supplied | Open the notes panel or use its speech controls without advancing the slide. |
 | Slide slider | Drag to select a slide directly; its progressive content starts again from the beginning. |
 | Navigation menu, when shown | Choose a slide directly and stop automatic playback. |
 | Links, buttons and fields inside slides | Keep their usual behavior; interacting with them does not advance the slide. |
+| :tp-icon:{name="home" size="2em"} Home | Home. |
+| :tp-icon:{name="menu" size="2em"} Menu | Menu. |
+| :tp-icon:{name="code" size="2em"} Code | Code. |
+| :tp-icon:{name="calculator" library="components" size="2em"} Calculator | Calculator. |
+| :tp-icon:{name="palette-swatch" size="2em"} Color | Choose an accent color. |
+| :tp-icon:{name="theme-light-dark" size="2em"} Theme | Choose the light, dark or automatic theme. |
+| :tp-icon:{name="fullscreen" size="2em"} :tp-icon:{name="fullscreen-exit" size="2em"} Fullscreen | Enter or leave fullscreen. |
+| :tp-icon:{name="screen" size="2em"} Screen | Preview the content at a selected screen size. |
 
 #### Keyboard interactions
 

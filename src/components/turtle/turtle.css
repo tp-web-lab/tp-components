@@ -20,7 +20,7 @@
 
 .tp-turtle-figure figcaption {
   margin-block-start: 0.4rem;
-  color: #4b5563;
+  color: var(--tp-text-muted);
   font-size: 0.92rem;
 }
 

@@ -8,6 +8,7 @@
 =====
 [tp-box,id="intro-copy-code"]
 ====
+[literal-tail="-"]
 ....
 const answer = 6 * 7;
 ....

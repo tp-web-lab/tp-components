@@ -1,0 +1,25 @@
+\usepackage[english]{babel}
+\usepackage{amsthm,cleveref}
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\section{A simple result}\label{sec:result}
+
+See \cref{thm:square} below, in \Cref{sec:result}.
+
+\begin{definition}\label{def:square}
+The square of a real number $x$ is $x^2$.
+\end{definition}
+
+\tpAttributes[variant={brand},qed={◆}]{
+\begin{theorem}[Nonnegativity]\label{thm:square}
+For every real number $x$, we have $x^2\geq 0$.
+\end{theorem}
+}
+
+\begin{proof}
+The product of two numbers with the same sign is nonnegative.
+\end{proof}
+
+The shared counter gives Definition \ref{def:square} and Theorem \ref{thm:square}.

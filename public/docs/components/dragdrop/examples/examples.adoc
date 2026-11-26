@@ -14,10 +14,8 @@ Keyboard: focus a card, press Enter, use the arrow keys to choose another card, 
 =========
 [tp-box,data-zone="To do",role="group",aria-label="To do",style="min-height: 12rem;"]
 ========
-[h3]
-====
-To do
-====
+[discrete]
+=== To do
 
 [tp-stack%data-tasks,gap="0.5rem"]
 ======
@@ -45,10 +43,8 @@ Move
 
 [tp-box,data-zone="Done",role="group",aria-label="Done",style="min-height: 12rem;"]
 ========
-[h3]
-====
-Done
-====
+[discrete]
+=== Done
 
 [tp-stack%data-tasks,gap="0.5rem"]
 ======

@@ -29,9 +29,9 @@
 | Using the component | The point remains attached while nodes and bends move. |
 | Drag | Drag the square along the link to reposition it, then double-click it to give it a name. |
 | Using the component | Removing a node also removes its incident edges. |
-| Cut | The **Cut** button provides the equivalent toolbar action while retaining the element in the editor clipboard. |
-| Copy | Use **Copy**, **Cut**, and **Paste** on the selected element. |
-| Undo | A pasted node is offset from its source, with a larger offset for each consecutive paste. **Undo** and **Redo** navigate up to 100 graph changes. |
+| :tp-icon:{name="content-cut" size="2em"} Cut | The **Cut** button provides the equivalent toolbar action while retaining the element in the editor clipboard. |
+| :tp-icon:{name="content-copy" size="2em"} Copy | Use **Copy**, **Cut**, and **Paste** on the selected element. |
+| :tp-icon:{name="undo" size="2em"} Undo | A pasted node is offset from its source, with a larger offset for each consecutive paste. **Undo** and **Redo** navigate up to 100 graph changes. |
 | :tp-icon:{name="arrow-expand-vertical" size="1.25em"} :tp-icon:{name="arrow-collapse-vertical" size="1.25em"} Expand / Collapse | Expands or collapses every palette group. |
 | :tp-icon:{name="undo" size="1.25em"} :tp-icon:{name="redo" size="1.25em"} Undo / Redo | Navigates graph changes. |
 | :tp-icon:{name="select" size="1.25em"} Select area | Toggles rectangular multi-selection. |
@@ -43,6 +43,18 @@
 | :tp-icon:{name="language-json" size="1.25em"} Graph JSON | Shows or hides the JSON editor. |
 | :tp-icon:{name="keyboard-f1" size="1.25em"} Editor toolbar | Shows or hides the JSON code editor toolbar. |
 | :tp-icon:{name="sync" size="1.25em"} Synchronize | Applies edited JSON or copies the graph into the JSON editor. |
+| :tp-icon:{name="keyboard-f1" size="2em"} Toggle editor toolbar | Toggle editor toolbar. |
+| :tp-icon:{name="sync" size="2em"} Synchronize graph and JSON | Synchronize graph and JSON. |
+| :tp-icon:{name="arrow-expand-vertical" size="2em"} Expand all | Expand all. |
+| :tp-icon:{name="arrow-collapse-vertical" size="2em"} Collapse all | Collapse all. |
+| :tp-icon:{name="grid" size="2em"} Show or hide grid | Show or hide grid. |
+| :tp-icon:{name="file-upload" size="2em"} Import JSON | Import JSON. |
+| :tp-icon:{name="file-download" size="2em"} Export JSON | Export JSON. |
+| :tp-icon:{name="language-json" size="2em"} Show or hide graph JSON | Show or hide graph JSON. |
+| :tp-icon:{name="palette-swatch" size="2em"} Color | Choose an accent color. |
+| :tp-icon:{name="theme-light-dark" size="2em"} Theme | Choose the light, dark or automatic theme. |
+| :tp-icon:{name="fullscreen" size="2em"} :tp-icon:{name="fullscreen-exit" size="2em"} Fullscreen | Enter or leave fullscreen. |
+| :tp-icon:{name="save-image" size="2em"} Save image | Save the content as an image. |
 
 #### Keyboard interactions
 

@@ -366,6 +366,45 @@ describe("<tp-icon-picker>", () => {
 		).toBe("8em");
 	});
 
+	it("renders every chess icon in the selected preview and exported tp-icon", async () => {
+		const picker = mountPicker();
+		picker.library = "chess";
+		const cards = [
+			...picker.querySelectorAll<HTMLButtonElement>(
+				"[data-tp-icon-picker-item]",
+			),
+		];
+		expect(cards).toHaveLength(8);
+		for (const card of cards) {
+			card.click();
+			const selected = picker.querySelector(
+				"tp-icon[data-tp-icon-picker-selected-icon]",
+			);
+			expect(selected?.getAttribute("library")).toBe("chess");
+			expect(selected?.getAttribute("name")).toBe(card.dataset.name);
+			await vi.waitFor(() => {
+				expect(selected?.querySelector("svg")).not.toBeNull();
+				expect(
+					[...(selected?.querySelectorAll("path") ?? [])].map((path) =>
+						path.getAttribute("d"),
+					),
+				).toEqual(
+					[...card.querySelectorAll("path")].map((path) =>
+						path.getAttribute("d"),
+					),
+				);
+			});
+			const exported = document.createElement("tp-icon");
+			exported.setAttribute("library", "chess");
+			exported.setAttribute("name", card.dataset.name ?? "");
+			document.body.append(exported);
+			await vi.waitFor(() =>
+				expect(exported.querySelector("svg")).not.toBeNull(),
+			);
+			exported.remove();
+		}
+	});
+
 	it("uses normalized flag names in the selected tp-icon", async () => {
 		const picker = mountPicker();
 		picker.library = "flags";

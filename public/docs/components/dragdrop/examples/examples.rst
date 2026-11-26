@@ -26,9 +26,10 @@
                   :aria-label: To do
                   :style: min-height: 12rem;
 
-                  .. h3::
+                  .. heading-level:: 3
 
-                     To do
+                  To do
+                  =====
 
                   .. tp-stack::
                      :gap: 0.5rem
@@ -66,9 +67,10 @@
                   :aria-label: Done
                   :style: min-height: 12rem;
 
-                  .. h3::
+                  .. heading-level:: 3
 
-                     Done
+                  Done
+                  ====
 
                   .. tp-stack::
                      :gap: 0.5rem
@@ -87,12 +89,12 @@
 
                            Move
 
-            .. p::
+            .. attributes::
                :data-demo-status:
                :role: status
                :aria-live: polite
 
-               Move a task to change its column.
+            Move a task to change its column.
 
             .. tp-dragdrop::
                :root: #dragdrop-board

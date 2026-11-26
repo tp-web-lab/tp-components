@@ -32,6 +32,10 @@ The custom `<tp-datefield>` element collects a date within optional limits.
 <!-- -->
 ## Usage
 
+### Configuration
+
+Add the boolean attribute `copy-code` to show a `tp-copy-code` button that copies the current value. It is hidden by default. The JavaScript property `copyCode` enables or disables it dynamically.
+
 ### Authoring
 
 All fields use the same inline convention: `:tp-datefield:\`identifier\`{value="2026-10-05" placeholder="…"}`. The inline content initializes `name` only; it never sets `id`, `label` or `value`. An explicit `name` takes precedence. Use `value` for initial content and `placeholder` for a hint; omitting `value` keeps the component's normal default. The HTML equivalent is `<tp-datefield name="identifier" value="2026-10-05" placeholder="…"></tp-datefield>`.
@@ -93,19 +97,19 @@ Inline named field
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -122,11 +126,16 @@ All tp-components and external tools used by this component are loaded automatic
 @summary Shared base class for tp-* components.
 -->
 <!--
+@tp-dependency tp-copy-code
+@summary Copy-to-clipboard button component.
+-->
+<!--
 @tp-dependency tp-icon-button
 @summary Accessible icon button component.
 -->
 
 - [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
+- [`<tp-copy-code>`](#/components/copy-code/index.md) : Copy-to-clipboard button component.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
 
 ### External

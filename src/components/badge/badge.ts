@@ -29,10 +29,6 @@ import style from "./badge.css?inline";
  * @attr {boolean} outlined = false - Removes the filled background and uses the accent color for the border and text.
  * @attr {boolean} pill = false - Uses a fully rounded badge shape.
  * @attr {boolean} pulse = false - Makes the badge pulse to attract attention.
- * @example
- * <p>
- *   Build status: <tp-badge variant="success" pulse>Ready</tp-badge>
- * </p>
  *  @cssprop [--tp-badge-accent=var(--tp-neutral-text-colorful)] Accent color.
  * @cssprop [--tp-badge-background=var(--tp-neutral-fill-softer)] Background color.
  * @cssprop [--tp-badge-border-color=var(--tp-neutral-stroke-soft)] Border color.
@@ -41,6 +37,10 @@ import style from "./badge.css?inline";
  * @cssprop [--tp-badge-padding-block=0.35em] Block padding.
  * @cssprop [--tp-badge-padding-inline=0.7em] Inline padding.
  * @cssprop [--tp-badge-radius=0.5em] Border radius.
+ * @example
+ * <p>
+ *   Build status: <tp-badge variant="success" pulse="">Ready</tp-badge>
+ * </p>
  */
 export class TpBadge extends TpBase {
 	/**

@@ -71,10 +71,6 @@
   z-index: 1;
   --tp-icon-button-size: 2rem;
   --tp-icon-button-icon-size: 1.125rem;
-  --tp-icon-button-hover-background: var(--tp-neutral-fill-softer, #f5f6f8);
-
-  border-radius: 50%;
-  background: var(--tp-paper-color, #fff);
   color: var(--tp-text-body, inherit);
   box-shadow: var(--tp-shadow-m, 0 0.125rem 0.5rem rgb(0 0 0 / 20%));
 }

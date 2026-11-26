@@ -31,6 +31,10 @@ export class TpTypewriting extends TpBase {
 	private units: HTMLSpanElement[] = [];
 	/** Pending reveal or initialization task. */
 	private timer: ReturnType<typeof setTimeout> | null = null;
+	private hovered = false;
+	private pendingReveal: (() => void) | null = null;
+	private revealDeadline = 0;
+	private revealRemaining = 0;
 	/** Number of fragments already revealed. */
 	private position = 0;
 	/** Original author tab position, restored after the animation. */
@@ -62,6 +66,78 @@ export class TpTypewriting extends TpBase {
 		)
 			this.schedule();
 	});
+	/** Visibility of the component's enclosing panels. */
+	private hiddenByContainer = false;
+	/** Restarts content that was initialized inside a hidden tab or panel. */
+	private readonly visibilityObserver = new MutationObserver(() => {
+		const hidden = this.isContainerHidden();
+		if (hidden === this.hiddenByContainer) return;
+		this.hiddenByContainer = hidden;
+		if (hidden) this.finish();
+		else if (!this.speechController) this.schedule();
+	});
+	private isContainerHidden(): boolean {
+		for (
+			let element: HTMLElement | null = this;
+			element;
+			element = element.parentElement
+		) {
+			if (element.hidden || getComputedStyle(element).display === "none")
+				return true;
+		}
+		return false;
+	}
+	private observeVisibility(): void {
+		this.visibilityObserver.disconnect();
+		this.hiddenByContainer = this.isContainerHidden();
+		for (
+			let element: HTMLElement | null = this;
+			element;
+			element = element.parentElement
+		) {
+			this.visibilityObserver.observe(element, {
+				attributes: true,
+				attributeFilter: ["hidden", "class", "style"],
+			});
+		}
+	}
+	/** Pauses the local reveal clock without changing visible fragments. */
+	private readonly mouseEntered = (): void => {
+		if (this.hovered) return;
+		this.hovered = true;
+		if (this.pendingReveal && this.timer !== null) {
+			this.revealRemaining = Math.max(0, this.revealDeadline - Date.now());
+			clearTimeout(this.timer);
+			this.timer = null;
+		}
+	};
+	/** Resumes the suspended clock, including initial and inter-cycle delays. */
+	private readonly mouseLeft = (): void => {
+		if (!this.hovered) return;
+		this.hovered = false;
+		this.resumeReveal();
+	};
+	private queueReveal(callback: () => void, delay: number): void {
+		this.pendingReveal = callback;
+		this.revealRemaining = delay;
+		this.resumeReveal();
+	}
+	private resumeReveal(): void {
+		if (
+			this.hovered ||
+			!this.pendingReveal ||
+			this.timer !== null ||
+			!this.isConnected
+		)
+			return;
+		this.revealDeadline = Date.now() + this.revealRemaining;
+		this.timer = setTimeout(() => {
+			this.timer = null;
+			const callback = this.pendingReveal;
+			this.pendingReveal = null;
+			callback?.();
+		}, this.revealRemaining);
+	}
 	/** Ends animation when the reader interacts with this content. */
 	private readonly finish = (): void => {
 		this.speechDismissed = true;
@@ -124,13 +200,20 @@ export class TpTypewriting extends TpBase {
 				? matchMedia("(prefers-reduced-motion: reduce)")
 				: null;
 		this.motion?.addEventListener("change", this.motionChanged);
+		this.addEventListener("mouseenter", this.mouseEntered);
+		this.addEventListener("mouseleave", this.mouseLeft);
 		this.addEventListener("pointerdown", this.finish);
 		this.addEventListener("focusin", this.finish);
 		this.observe();
+		this.observeVisibility();
 		this.schedule();
 	}
 	/** Cancels work, restores visible content and releases all subscriptions. */
 	public disconnectedCallback(): void {
+		this.removeEventListener("mouseenter", this.mouseEntered);
+		this.removeEventListener("mouseleave", this.mouseLeft);
+		this.hovered = false;
+		this.visibilityObserver.disconnect();
 		this.observer.disconnect();
 		this.motion?.removeEventListener("change", this.motionChanged);
 		this.motion = null;
@@ -240,6 +323,7 @@ export class TpTypewriting extends TpBase {
 	}
 	/** Clears the current timer. */
 	private cancel(): void {
+		this.pendingReveal = null;
 		if (this.timer !== null) clearTimeout(this.timer);
 		this.timer = null;
 	}
@@ -269,6 +353,7 @@ export class TpTypewriting extends TpBase {
 		this.unwrap();
 		if (
 			this.motion?.matches ||
+			this.isContainerHidden() ||
 			this.contains(document.activeElement) ||
 			(this.speechController && !speech)
 		) {
@@ -326,7 +411,7 @@ export class TpTypewriting extends TpBase {
 		this.ownsTabindex = true;
 		if (this.authorTabindex === null) this.tabIndex = 0;
 		if (!speech && this.speed > 0)
-			this.timer = setTimeout(() => this.tick(), this.delay);
+			this.queueReveal(() => this.tick(), this.delay);
 	}
 	/** Reveals one fragment, then optionally starts a new cycle after a readable pause. */
 	private tick(): void {
@@ -335,9 +420,9 @@ export class TpTypewriting extends TpBase {
 		this.units[this.position]?.removeAttribute("data-pending");
 		this.position++;
 		if (this.position < this.units.length)
-			this.timer = setTimeout(() => this.tick(), interval);
+			this.queueReveal(() => this.tick(), interval);
 		else if (this.loop)
-			this.timer = setTimeout(
+			this.queueReveal(
 				() => {
 					for (const unit of this.units) unit.setAttribute("data-pending", "");
 					this.position = 0;

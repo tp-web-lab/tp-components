@@ -13,6 +13,10 @@
  * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-html-viewer
  * @summary Interactive HTML viewer with editable source, live rendering, and DOM inspection.
  */
@@ -40,6 +44,7 @@
 
 import { dedent } from "../../utilities/code.js";
 import { formatHtmlForDisplay } from "../../utilities/html-code.js";
+import { getComponentSourceBaseUrl } from "../../utilities/source-url.js";
 import type { TpCodeEditor } from "../code-editor/code-editor.js";
 import { buildIframeDocument } from "../html-viewer/html-viewer.js";
 import {
@@ -109,6 +114,8 @@ function extractFencedExamples(source: string): MarkupViewerExample[] {
  * @tagname tp-markdown-viewer
  * @attr {boolean} lite = false - Uses the compact single-example viewer with rendered HTML output.
  * @attr {string} src = "" - Comma-separated URLs of external Markdown example files.
+ * @keyboard {Shift+Enter} Run the current source.
+ * @attr {"default" | "lite" | "simple"} mode = "default" - Viewer presentation: full controls, compact controls, or only source editor and rendered output.
  * @example
  * <tp-markdown-viewer>
  *       <script type="tp/markdown">
@@ -178,7 +185,10 @@ export class TpMarkdownViewer extends TpMarkupViewer<MdViewerMode> {
 			const renderedSource = needsRuntimeRenderer
 				? `<tp-markdown><script type="tp/markdown">${source.replace(/<\/script/gi, "<\\/script")}</script></tp-markdown>`
 				: html;
-			iframe.srcdoc = buildIframeDocument(renderedSource, document.baseURI);
+			iframe.srcdoc = buildIframeDocument(
+				renderedSource,
+				getComponentSourceBaseUrl(this),
+			);
 			container.replaceChildren(iframe);
 			return;
 		}

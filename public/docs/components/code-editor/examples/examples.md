@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-code-editor" allow-script }
+:::::: tp-markdown-viewer { label="tp-code-editor" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-code-editor { language="javascript" line-numbers }

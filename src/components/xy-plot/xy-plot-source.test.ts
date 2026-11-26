@@ -81,6 +81,19 @@ it("edits definition inside details, toggles F1, applies atomically and resets d
 	expect(plot.querySelector(".tp-xy-plot-preview")?.innerHTML).toBe(svg);
 	plot.querySelector<HTMLElement>('[data-source-action="reset"]')?.click();
 	expect(editor.getValue()).toBe(replacement);
+	plot.toggleEditorToolbar();
+	expect(editor.toolbar).toBe(false);
+	editor.setValue("invalid definition");
+	plot.applyDefinition();
+	expect(plot.querySelector(".tp-xy-plot-preview")?.innerHTML).toBe(svg);
+	plot.resetSource();
+	expect(editor.getValue()).toBe(replacement);
+	editor.setValue(original);
+	plot.applyDefinition();
+	expect(plot.querySelector("[data-xy-label]")?.textContent).toBe("Original");
+	editor.setValue(replacement);
+	plot.applyDefinition();
+	expect(plot.querySelector("[data-xy-label]")?.textContent).toBe("Changed");
 });
 it("saves drafts with a label filename, reuses the target, and loads validated files", async () => {
 	const { plot, editor } = await mount();

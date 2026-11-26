@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-button" allow-script }
+::::: tp-markdown-viewer { label="tp-button" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-button { href="/#/components/button/index.md#usage" }

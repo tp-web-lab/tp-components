@@ -28,6 +28,10 @@
  * @summary Native date field with labels, constraints, picker access, and clearing.
  */
 /**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
  * @tp-dependency tp-html-viewer
  * @summary Interactive HTML viewer with editable source, live rendering, and DOM inspection.
  */
@@ -238,6 +242,8 @@ function fieldTag(item: ApiItem): string {
  * <tp-component-viewer tag="tp-button"></tp-component-viewer>
  */
 export class TpComponentViewer extends TpBase {
+	private toggleSourceAction: () => void | Promise<void> = () => {};
+
 	private inlineSource: string | null = null;
 	private source = "";
 	private contentOverride: string | null = null;
@@ -295,12 +301,14 @@ export class TpComponentViewer extends TpBase {
 		this.preview = null;
 	}
 	private get attributesApi(): ApiItem[] {
-		const documentShell = /-multi-(pages|slides)$/.test(
-			this.api?.tagname ?? "",
-		);
+		const exposeInherited =
+			/-multi-(pages|slides)$|-(interpreter|playground|viewer)-question$/.test(
+				this.api?.tagname ?? "",
+			);
 		return (
-			this.api?.attributes.filter((item) => documentShell || !item.inherited) ??
-			[]
+			this.api?.attributes.filter(
+				(item) => exposeInherited || !item.inherited,
+			) ?? []
 		);
 	}
 
@@ -417,7 +425,7 @@ export class TpComponentViewer extends TpBase {
 		if (!api) return;
 		this.innerHTML = `<header class="tp-component-viewer-header"><h2 data-component-title><tp-icon library="components" name="${escapeHtml(this.componentTag.slice(3))}" size="1.25em" aria-hidden="true"></tp-icon><span data-component-title-text>${escapeHtml(this.componentTag)}</span></h2><tp-radio-list data-component-mode orientation="horizontal" aria-label="Displayed panel" value="${this.activePanel === "Doc" ? "1" : this.activePanel === "Demo" ? "2" : "3"}"><ul><li>Doc</li><li>Demo</li><li>API</li></ul></tp-radio-list></header><div class="tp-component-viewer-layout"><section class="tp-component-viewer-docs" aria-label="Component API"><tp-tabs><dl>${commandsTable(api)}${table("Attributes", this.attributesApi, ["name", "type", "default", "description"])}${table(
 			"Methods",
-			(api.methods ?? []).filter((item) => !item.inherited),
+			api.methods ?? [],
 			["name", "description"],
 		)}${table(
 			"Events",
@@ -478,9 +486,9 @@ export class TpComponentViewer extends TpBase {
 			});
 		}
 		const toggle = this.querySelector("[data-component-source-toggle]");
-		toggle?.addEventListener("click", () => {
+		this.toggleSourceAction = () => {
 			const panel = this.querySelector<HTMLElement>("[data-component-source]");
-			if (!panel) return;
+			if (!panel || !toggle) return;
 			panel.hidden = !panel.hidden;
 			toggle.setAttribute("aria-pressed", String(!panel.hidden));
 			toggle.setAttribute(
@@ -488,6 +496,9 @@ export class TpComponentViewer extends TpBase {
 				panel.hidden ? "Show markup source" : "Hide markup source",
 			);
 			this.syncSource();
+		};
+		toggle?.addEventListener("click", () => {
+			void this.toggleSource();
 		});
 		const mode = this.querySelector<ValueControl>("[data-component-mode]");
 		mode?.addEventListener("tp-radio-list-change", () => {
@@ -712,7 +723,12 @@ export class TpComponentViewer extends TpBase {
 			const list = document.createElement("dl");
 			for (const [format, label, language] of languages) {
 				const term = document.createElement("dt");
-				term.textContent = label;
+				const icon = document.createElement("tp-icon");
+				icon.setAttribute("library", "languages");
+				icon.setAttribute("name", `file_type_${language}`);
+				icon.setAttribute("size", "1.25em");
+				icon.setAttribute("aria-hidden", "true");
+				term.append(icon, document.createTextNode(` ${label}`));
 				const content = document.createElement("dd");
 				const editor = document.createElement("tp-code-editor");
 				editor.dataset.componentSourceFormat = format;
@@ -753,6 +769,8 @@ export class TpComponentViewer extends TpBase {
 		const documented = document.createElement("section");
 		// The Doc panel describes the public controls, never the current demo state.
 		const instructions = this.api?.userHelp?.interactions ?? "";
+		if (!instructions.trim() && !/-multi-pages$/.test(this.componentTag))
+			return;
 		if (!/-multi-pages$/.test(this.componentTag)) {
 			const mouse =
 				instructions
@@ -774,6 +792,16 @@ export class TpComponentViewer extends TpBase {
 					!isGameButtonLabel(cells[0] ?? "")
 				)
 					continue;
+				// Gesture rows stay in Mouse. Text-only commands opt in explicitly.
+				if (
+					!/:tp-icon:\{/.test(cells[0] ?? "") &&
+					!/<!--\s*button\s*-->/.test(cells[0] ?? "") &&
+					!(
+						isGameComponent(this.componentTag) &&
+						isGameButtonLabel(cells[0] ?? "")
+					)
+				)
+					continue;
 				const entry = document.createElement("span");
 				entry.dataset.helpLabel = (cells[0] ?? "")
 					.replace(/:tp-icon:\{[^}]*\}|<[^>]*>|[*`]/g, "")
@@ -789,20 +817,12 @@ export class TpComponentViewer extends TpBase {
 					.map((icon) => /name="([^"]+)"/.exec(icon[1] ?? "")?.[1])
 					.filter(Boolean);
 				if (names.length) entry.dataset.helpIcons = names.join(" ");
-				const library = /library="([^"]+)"/.exec(icons[0]?.[1] ?? "")?.[1];
-				if (library) {
-					const icon = document.createElement("tp-icon");
-					icon.setAttribute("library", library);
-					entry.append(icon);
-				}
+				entry.dataset.helpIconLibraries = icons
+					.map((icon) => /library="([^"]+)"/.exec(icon[1] ?? "")?.[1] ?? "")
+					.join(",");
 				documented.append(entry);
 			}
 		}
-		if (
-			!/-multi-pages$/.test(this.componentTag) &&
-			!documented.childElementCount
-		)
-			return;
 		const legend = createHelpButtonTable(
 			/-multi-pages$/.test(this.componentTag)
 				? document.createElement(this.componentTag)
@@ -820,7 +840,8 @@ export class TpComponentViewer extends TpBase {
 		}
 	}
 
-	private renderPreview(): void {
+	/** Rebuilds the independent demo from the current attribute controls and source. */
+	public renderPreview(): void {
 		this.pendingPreviewValues.clear();
 		this.previewObserver?.disconnect();
 		this.preview = null;
@@ -882,6 +903,11 @@ export class TpComponentViewer extends TpBase {
 			true,
 		);
 		this.querySelector("[data-component-preview]")?.replaceChildren(viewer);
+	}
+
+	/** Shows or hides the current demo markup source. */
+	async toggleSource(): Promise<void> {
+		await this.toggleSourceAction();
 	}
 }
 if (!customElements.get("tp-component-viewer"))

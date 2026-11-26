@@ -1,0 +1,875 @@
+{
+  "browser": "firefox",
+  "date": "2026-11-25T10:38:43.459Z",
+  "module": "/components/component-viewer/component-viewer.js",
+  "checks": [
+    {
+      "tag": "tp-prolog-tracer",
+      "mode": "light",
+      "rows": [
+        {
+          "label": "Edit source",
+          "description": "Show or hide the program editor.",
+          "icons": [
+            {
+              "name": "code",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Load trace",
+          "description": "Open a saved Prolog JSON recording without executing it.",
+          "icons": [
+            {
+              "name": "file-import",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Save trace",
+          "description": "Save the complete recording with a filename of your choice.",
+          "icons": [
+            {
+              "name": "file-upload",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Record resolution",
+          "description": "Record the current program and query in a fresh engine.",
+          "icons": [
+            {
+              "name": "play",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Stop recording",
+          "description": "Terminate the recording Worker.",
+          "icons": [
+            {
+              "name": "stop",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "First step",
+          "description": "Return to the query root.",
+          "icons": [
+            {
+              "name": "chevron-left-first",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Previous step",
+          "description": "Restore the preceding event and tree.",
+          "icons": [
+            {
+              "name": "chevron-left",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Next step",
+          "description": "Reveal the next debugger event.",
+          "icons": [
+            {
+              "name": "chevron-right",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Last step",
+          "description": "Show the complete explored tree and solutions.",
+          "icons": [
+            {
+              "name": "chevron-right-last",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Trace JSON",
+          "description": "Expand or collapse the complete JSON recording.",
+          "icons": []
+        },
+        {
+          "label": "Color",
+          "description": "Change the brand color.",
+          "icons": [
+            {
+              "name": "palette-swatch",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Theme",
+          "description": "Change the theme.",
+          "icons": [
+            {
+              "name": "theme-light-dark",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Fullscreen",
+          "description": "Enter or leave fullscreen.",
+          "icons": [
+            {
+              "name": "fullscreen",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        }
+      ],
+      "visible": true,
+      "color": "oklab(0.266795 0.00149579 0.00363955)"
+    },
+    {
+      "tag": "tp-prolog-tracer",
+      "mode": "dark",
+      "rows": [
+        {
+          "label": "Edit source",
+          "description": "Show or hide the program editor.",
+          "icons": [
+            {
+              "name": "code",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Load trace",
+          "description": "Open a saved Prolog JSON recording without executing it.",
+          "icons": [
+            {
+              "name": "file-import",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Save trace",
+          "description": "Save the complete recording with a filename of your choice.",
+          "icons": [
+            {
+              "name": "file-upload",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Record resolution",
+          "description": "Record the current program and query in a fresh engine.",
+          "icons": [
+            {
+              "name": "play",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Stop recording",
+          "description": "Terminate the recording Worker.",
+          "icons": [
+            {
+              "name": "stop",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "First step",
+          "description": "Return to the query root.",
+          "icons": [
+            {
+              "name": "chevron-left-first",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Previous step",
+          "description": "Restore the preceding event and tree.",
+          "icons": [
+            {
+              "name": "chevron-left",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Next step",
+          "description": "Reveal the next debugger event.",
+          "icons": [
+            {
+              "name": "chevron-right",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Last step",
+          "description": "Show the complete explored tree and solutions.",
+          "icons": [
+            {
+              "name": "chevron-right-last",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Trace JSON",
+          "description": "Expand or collapse the complete JSON recording.",
+          "icons": []
+        },
+        {
+          "label": "Color",
+          "description": "Change the brand color.",
+          "icons": [
+            {
+              "name": "palette-swatch",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Theme",
+          "description": "Change the theme.",
+          "icons": [
+            {
+              "name": "theme-light-dark",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Fullscreen",
+          "description": "Enter or leave fullscreen.",
+          "icons": [
+            {
+              "name": "fullscreen",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        }
+      ],
+      "visible": true,
+      "color": "oklab(0.892864 0.0010813 0.00263104)"
+    },
+    {
+      "tag": "tp-diff-code-editor",
+      "mode": "light",
+      "rows": [
+        {
+          "label": "Previous difference",
+          "description": "Select and reveal the preceding differing block.",
+          "icons": [
+            {
+              "name": "previous",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Next difference",
+          "description": "Select and reveal the next differing block.",
+          "icons": [
+            {
+              "name": "next",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Copy difference left to right",
+          "description": "Replace the selected right-hand block with its left-hand version. Disabled in readonly mode.",
+          "icons": [
+            {
+              "name": "arrow-right",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Copy difference right to left",
+          "description": "Replace the selected left-hand block with its right-hand version. Disabled in readonly mode.",
+          "icons": [
+            {
+              "name": "arrow-left",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Reset both documents",
+          "description": "Restore both loaded originals. Disabled in readonly mode.",
+          "icons": [
+            {
+              "name": "refresh",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Each editor:  Save as",
+          "description": "Choose a filename and save that side's current source.",
+          "icons": [
+            {
+              "name": "file-upload-as",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Each editor:  Keyboard shortcuts",
+          "description": "Open the shared tp-code-editor command palette.",
+          "icons": [
+            {
+              "name": "keyboard-outline",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Each editor:  Copy code",
+          "description": "Copy the entire source on that side.",
+          "icons": [
+            {
+              "name": "copy",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Each editor:  Theme",
+          "description": "Choose that editor's appearance.",
+          "icons": [
+            {
+              "name": "theme-light-dark",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Each editor:  Fullscreen",
+          "description": "Enter or leave fullscreen for that editor.",
+          "icons": [
+            {
+              "name": "fullscreen",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Color",
+          "description": "Change the component's brand color.",
+          "icons": [
+            {
+              "name": "palette-swatch",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Theme",
+          "description": "Choose light, dark or automatic appearance.",
+          "icons": [
+            {
+              "name": "theme-light-dark",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Fullscreen",
+          "description": "Enter or leave fullscreen.",
+          "icons": [
+            {
+              "name": "fullscreen",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            },
+            {
+              "name": "fullscreen-exit",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        }
+      ],
+      "visible": true,
+      "color": "oklab(0.266795 0.00149579 0.00363955)"
+    },
+    {
+      "tag": "tp-diff-code-editor",
+      "mode": "dark",
+      "rows": [
+        {
+          "label": "Previous difference",
+          "description": "Select and reveal the preceding differing block.",
+          "icons": [
+            {
+              "name": "previous",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Next difference",
+          "description": "Select and reveal the next differing block.",
+          "icons": [
+            {
+              "name": "next",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Copy difference left to right",
+          "description": "Replace the selected right-hand block with its left-hand version. Disabled in readonly mode.",
+          "icons": [
+            {
+              "name": "arrow-right",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Copy difference right to left",
+          "description": "Replace the selected left-hand block with its right-hand version. Disabled in readonly mode.",
+          "icons": [
+            {
+              "name": "arrow-left",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Reset both documents",
+          "description": "Restore both loaded originals. Disabled in readonly mode.",
+          "icons": [
+            {
+              "name": "refresh",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Each editor:  Save as",
+          "description": "Choose a filename and save that side's current source.",
+          "icons": [
+            {
+              "name": "file-upload-as",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Each editor:  Keyboard shortcuts",
+          "description": "Open the shared tp-code-editor command palette.",
+          "icons": [
+            {
+              "name": "keyboard-outline",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Each editor:  Copy code",
+          "description": "Copy the entire source on that side.",
+          "icons": [
+            {
+              "name": "copy",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Each editor:  Theme",
+          "description": "Choose that editor's appearance.",
+          "icons": [
+            {
+              "name": "theme-light-dark",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Each editor:  Fullscreen",
+          "description": "Enter or leave fullscreen for that editor.",
+          "icons": [
+            {
+              "name": "fullscreen",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Color",
+          "description": "Change the component's brand color.",
+          "icons": [
+            {
+              "name": "palette-swatch",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Theme",
+          "description": "Choose light, dark or automatic appearance.",
+          "icons": [
+            {
+              "name": "theme-light-dark",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Fullscreen",
+          "description": "Enter or leave fullscreen.",
+          "icons": [
+            {
+              "name": "fullscreen",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            },
+            {
+              "name": "fullscreen-exit",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        }
+      ],
+      "visible": true,
+      "color": "oklab(0.892864 0.0010813 0.00263104)"
+    },
+    {
+      "tag": "tp-code-editor",
+      "mode": "light",
+      "rows": [
+        {
+          "label": "Keyboard shortcuts",
+          "description": "Open or close the command palette.",
+          "icons": [
+            {
+              "name": "keyboard-outline",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Save as",
+          "description": "Choose a filename and save the current source code, including in read-only mode.",
+          "icons": [
+            {
+              "name": "file-upload-as",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Copy code",
+          "description": "Copy the entire editor content, unlike Copy in the palette, which copies the selection.",
+          "icons": [
+            {
+              "name": "copy",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Theme",
+          "description": "Choose light, dark or automatic appearance for this editor.",
+          "icons": [
+            {
+              "name": "theme-light-dark",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        },
+        {
+          "label": "Fullscreen",
+          "description": "Enter or leave fullscreen for this editor.",
+          "icons": [
+            {
+              "name": "fullscreen",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            },
+            {
+              "name": "fullscreen-exit",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.266795 0.00149579 0.00363955)"
+            }
+          ]
+        }
+      ],
+      "visible": true,
+      "color": "oklab(0.266795 0.00149579 0.00363955)"
+    },
+    {
+      "tag": "tp-code-editor",
+      "mode": "dark",
+      "rows": [
+        {
+          "label": "Keyboard shortcuts",
+          "description": "Open or close the command palette.",
+          "icons": [
+            {
+              "name": "keyboard-outline",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Save as",
+          "description": "Choose a filename and save the current source code, including in read-only mode.",
+          "icons": [
+            {
+              "name": "file-upload-as",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Copy code",
+          "description": "Copy the entire editor content, unlike Copy in the palette, which copies the selection.",
+          "icons": [
+            {
+              "name": "copy",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Theme",
+          "description": "Choose light, dark or automatic appearance for this editor.",
+          "icons": [
+            {
+              "name": "theme-light-dark",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        },
+        {
+          "label": "Fullscreen",
+          "description": "Enter or leave fullscreen for this editor.",
+          "icons": [
+            {
+              "name": "fullscreen",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            },
+            {
+              "name": "fullscreen-exit",
+              "svg": true,
+              "width": 33.75,
+              "height": 33.75,
+              "color": "oklab(0.892864 0.0010813 0.00263104)"
+            }
+          ]
+        }
+      ],
+      "visible": true,
+      "color": "oklab(0.892864 0.0010813 0.00263104)"
+    }
+  ],
+  "version": "153.0",
+  "passed": true
+}

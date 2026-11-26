@@ -1,0 +1,76 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpOcamlViewer[src=/docs/components/_shared/intro-projects/ocaml.json]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/ocaml/ocaml.js";
+import "/components/ocaml-viewer/ocaml-viewer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-ocaml-viewer");
+element1.setAttribute("src", "/docs/components/_shared/intro-projects/ocaml.json");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example OCaml tests
+\documentclass{article}
+\begin{document}
+\wcTpOcamlViewer[src=/docs/components/ocaml-playground/examples/test-project.json]{}
+\end{document}
+
+% !tp-example Compare presentation modes
+\documentclass{article}
+\begin{document}
+\wcSection{
+  \subsection*{mode="default" — Standard controls}
+  Open Code to edit the source, then click Run or press \wcKbd*{Shift}+\wcKbd*{Enter} in the editor.
+
+  Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.
+
+  \wcTpOcamlViewer[mode=default]{
+    \wcScript[type=tp/ocaml,filename=main.ml]|
+print_endline "Printed message before the intentional error.";;
+failwith "Intentional error: the error appears in the output.";;
+  |
+  }
+}
+
+\wcSection{
+  \subsection*{mode="lite" — Compact controls}
+  Open Code to edit the source, then click Run or press \wcKbd*{Shift}+\wcKbd*{Enter} in the editor.
+
+  Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.
+
+  \wcTpOcamlViewer[mode=lite]{
+    \wcScript[type=tp/ocaml,filename=main.ml]|
+print_endline "Printed message before the intentional error.";;
+failwith "Intentional error: the error appears in the output.";;
+  |
+  }
+}
+
+\wcSection{
+  \subsection*{mode="simple" — Editor and rendered output only}
+  Edit the code below, keep the cursor in the editor and press \wcKbd*{Shift}+\wcKbd*{Enter} (Return) to run it. This viewer has no Run button.
+
+  Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.
+
+  \wcTpOcamlViewer[mode=simple]{
+    \wcScript[type=tp/ocaml,filename=main.ml]|
+print_endline "Printed message before the intentional error.";;
+failwith "Intentional error: the error appears in the output.";;
+  |
+  }
+}
+
+Programming viewers already have compact controls, so default and lite look alike. The first run may load the language engine.
+\end{document}

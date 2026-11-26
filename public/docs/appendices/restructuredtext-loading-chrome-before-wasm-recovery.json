@@ -1,0 +1,158 @@
+{
+  "checkedAt": "2026-11-24T09:48:05.069Z",
+  "browser": "chrome",
+  "version": "158.0.8127.38",
+  "parserSha256": "bdc67296b33ec9343bba7f2d18f1b6256f913b211f407e27538a70f0730f0d0a",
+  "results": [
+    {
+      "scenario": "normal",
+      "passed": true,
+      "milliseconds": 1596.1000000238419,
+      "network": {
+        "offline": false,
+        "latency": 0,
+        "downloadThroughput": -1,
+        "uploadThroughput": -1
+      },
+      "cacheDisabled": true,
+      "requests": [
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js",
+          "at": 1795513592299
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.asm.wasm",
+          "at": 1795513592344
+        }
+      ]
+    },
+    {
+      "scenario": "slow-network",
+      "passed": true,
+      "milliseconds": 8611.800000011921,
+      "network": {
+        "offline": false,
+        "latency": 150,
+        "downloadThroughput": 1048576,
+        "uploadThroughput": 524288
+      },
+      "cacheDisabled": true,
+      "requests": [
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js",
+          "at": 1795513594409
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.asm.wasm",
+          "at": 1795513594605
+        }
+      ]
+    },
+    {
+      "scenario": "interrupted-script",
+      "passed": true,
+      "milliseconds": 1657.300000011921,
+      "network": {
+        "offline": false,
+        "latency": 0,
+        "downloadThroughput": -1,
+        "uploadThroughput": -1
+      },
+      "cacheDisabled": true,
+      "requests": [
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js",
+          "at": 1795513603569
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js?tp-retry=1795513603572",
+          "at": 1795513603573
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.asm.wasm",
+          "at": 1795513603623
+        }
+      ]
+    },
+    {
+      "scenario": "offline-recovery",
+      "passed": true,
+      "milliseconds": 1647.800000011921,
+      "initialFailure": {
+        "passed": false,
+        "error": "Error: Unable to load Pyodide from https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js?tp-retry=1795513605658.",
+        "milliseconds": 8.900000035762787
+      },
+      "network": {
+        "offline": false,
+        "latency": 0,
+        "downloadThroughput": -1,
+        "uploadThroughput": -1
+      },
+      "cacheDisabled": true,
+      "requests": [
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js",
+          "at": 1795513605653
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js?tp-retry=1795513605658",
+          "at": 1795513605659
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js",
+          "at": 1795513605678
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.asm.wasm",
+          "at": 1795513605725
+        }
+      ]
+    },
+    {
+      "scenario": "interrupted-wasm",
+      "passed": false,
+      "error": "TimeoutError: page.waitForFunction: Timeout 60000ms exceeded.",
+      "requests": [
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js",
+          "at": 1795513607832
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.asm.wasm",
+          "at": 1795513607878
+        }
+      ]
+    },
+    {
+      "scenario": "stalled-first-script",
+      "passed": true,
+      "milliseconds": 16586.700000047684,
+      "network": {
+        "offline": false,
+        "latency": 0,
+        "downloadThroughput": -1,
+        "uploadThroughput": -1
+      },
+      "cacheDisabled": true,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:4380/__rst-load/pyodide.js?token=233d0f38-c542-4126-a946-80a0ff1fc521",
+          "at": 1795513668414
+        },
+        {
+          "url": "http://127.0.0.1:4380/__rst-load/pyodide.js?token=233d0f38-c542-4126-a946-80a0ff1fc521&tp-retry=1795513683414",
+          "at": 1795513683416
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js",
+          "at": 1795513683420
+        },
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.asm.wasm",
+          "at": 1795513683479
+        }
+      ]
+    }
+  ]
+}

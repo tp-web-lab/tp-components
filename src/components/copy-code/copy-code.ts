@@ -13,17 +13,17 @@
  * @summary Shared base class for tp-* components.
  */
 /**
- * @tp-dependency tp-icon
- * @summary SVG icon component with inline, URL, and registry sources.
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
  */
 // tp-docgen:dependencies:end
 
 import { TpBase } from "../base/base.js";
 import style from "./copy-code.css?inline";
 import "../animation/animation.js";
-import "../icon/icon.js";
+import "../icon-button/icon-button.js";
 import { TpAnimation } from "../animation/animation.js";
-import { TpIcon } from "../icon/icon.js";
+import { TpIconButton } from "../icon-button/icon-button.js";
 
 const SUCCESS_TIMEOUT = 1500;
 
@@ -109,17 +109,17 @@ function hasGetCode(value: unknown): value is { getCode: () => string } {
  *
  *
  *
+ *  @cssprop [--tp-copy-code-error-color=var(--tp-danger-text-colorful)] Color of the copy control while reporting a failed clipboard operation.
+ * @cssprop [--tp-copy-code-success-color=var(--tp-success-text-colorful)] Color of the copy control while confirming a successful clipboard operation.
+ * @event tp-copy-code-success Emitted after clipboard writing succeeds. The detail gives the copied text length in UTF-16 code units and the source element.
+ * @eventdetail tp-copy-code-success { length: number; target: HTMLElement }
+ * @event tp-copy-code-error Emitted when the target cannot be resolved or its contents cannot be copied; message explains the failure.
+ * @eventdetail tp-copy-code-error { message: string }
  * @example
  * <tp-box>
  *   <tp-box id="intro-copy-code"><pre><code>const answer = 6 * 7;</code></pre></tp-box>
  *   <tp-copy-code for="intro-copy-code"></tp-copy-code>
  * </tp-box>
- *  @cssprop [--tp-copy-code-error-color=red] Color of the copy control while reporting a failed clipboard operation.
- * @cssprop [--tp-copy-code-success-color=green] Color of the copy control while confirming a successful clipboard operation.
- * @event tp-copy-code-success Emitted after clipboard writing succeeds. The detail gives the copied text length in UTF-16 code units and the source element.
- * @eventdetail tp-copy-code-success { length: number; target: HTMLElement }
- * @event tp-copy-code-error Emitted when the target cannot be resolved or its contents cannot be copied; message explains the failure.
- * @eventdetail tp-copy-code-error { message: string }
  */
 export class TpCopyCode extends TpBase {
 	/**
@@ -141,10 +141,10 @@ export class TpCopyCode extends TpBase {
 	/**
 	 * Référence vers l’icône interne.
 	 *
-	 * @summary Référence vers le composant `tp-icon`.
+	 * @summary Référence vers le composant `tp-icon-button`.
 	 * @internal
 	 */
-	private iconEl: TpIcon | null = null;
+	private iconEl: TpIconButton | null = null;
 
 	/**
 	 * Référence vers le composant d’animation interne.
@@ -193,10 +193,10 @@ export class TpCopyCode extends TpBase {
 	 * @internal
 	 */
 	private readonly handleKeydown = (event: KeyboardEvent): void => {
-		if (event.key !== "Enter" && event.key !== " ") {
-			return;
-		}
-
+		if (event.key !== "Enter" && event.key !== " ") return;
+		// Let the native button activate once, without submitting a surrounding field.
+		event.stopPropagation();
+		if (event.target !== this) return;
 		event.preventDefault();
 		void this.copy();
 	};
@@ -218,7 +218,7 @@ export class TpCopyCode extends TpBase {
 	 * @internal
 	 */
 	public static get observedAttributes(): string[] {
-		return ["for", "icon", "success-icon", "error-icon", "copied-text"];
+		return ["for", "icon", "success-icon", "error-icon", "copied-text", "size"];
 	}
 
 	/**
@@ -367,8 +367,8 @@ export class TpCopyCode extends TpBase {
 		this.ensureAnchorId();
 		this.ensureDom();
 
-		this.setAttribute("role", "button");
-		this.tabIndex = 0;
+		this.removeAttribute("role");
+		this.removeAttribute("tabindex");
 		this.setAttribute("data-state", this.state);
 
 		this.addEventListener("click", this.handleClick);
@@ -474,7 +474,7 @@ export class TpCopyCode extends TpBase {
 	 * <tp-copy-code>
 	 *   <span id="...">
 	 *     <tp-animation target="[data-tp-copy-code-icon]">
-	 *       <tp-icon data-tp-copy-code-icon name="copy"></tp-icon>
+	 *       <tp-icon-button data-tp-copy-code-icon name="copy" label="Copy code"></tp-icon-button>
 	 *     </tp-animation>
 	 *   </span>
 	 * </tp-copy-code>
@@ -491,7 +491,7 @@ export class TpCopyCode extends TpBase {
 			":scope > [data-tp-copy-code-anchor] tp-animation",
 		);
 		const existingIcon = this.querySelector(
-			":scope > [data-tp-copy-code-anchor] tp-icon",
+			":scope > [data-tp-copy-code-anchor] tp-icon-button",
 		);
 
 		if (existingAnchor instanceof HTMLSpanElement) {
@@ -502,14 +502,14 @@ export class TpCopyCode extends TpBase {
 			this.animationEl = existingAnimation;
 		}
 
-		if (existingIcon instanceof TpIcon) {
+		if (existingIcon instanceof TpIconButton) {
 			this.iconEl = existingIcon;
 		}
 
 		if (
 			this.anchorEl instanceof HTMLSpanElement &&
 			this.animationEl instanceof TpAnimation &&
-			this.iconEl instanceof TpIcon
+			this.iconEl instanceof TpIconButton
 		) {
 			this.anchorEl.id = this.anchorId;
 			return;
@@ -527,10 +527,12 @@ export class TpCopyCode extends TpBase {
 		animation.setAttribute("target", "[data-tp-copy-code-icon]");
 		animation.setAttribute("in", "pulse");
 
-		const icon = document.createElement("tp-icon") as TpIcon;
+		const icon = document.createElement("tp-icon-button") as TpIconButton;
 		icon.setAttribute("data-tp-copy-code-icon", "");
 		icon.setAttribute("name", this.icon);
-		icon.setAttribute("aria-hidden", "true");
+		icon.setAttribute("label", "Copy code");
+		icon.setAttribute("pill", "");
+		icon.setAttribute("outlined", "");
 
 		animation.append(icon);
 		anchor.append(animation);
@@ -640,6 +642,23 @@ export class TpCopyCode extends TpBase {
 		}
 
 		this.iconEl.setAttribute("name", iconName);
+		this.iconEl.setAttribute("size", this.getAttribute("size") ?? "s");
+		this.iconEl.setAttribute(
+			"label",
+			this.state === "success"
+				? this.copiedText
+				: this.state === "error"
+					? "Copy failed — retry"
+					: "Copy code",
+		);
+		this.iconEl.setAttribute(
+			"variant",
+			this.state === "success"
+				? "success"
+				: this.state === "error"
+					? "danger"
+					: "brand",
+		);
 	}
 
 	/**

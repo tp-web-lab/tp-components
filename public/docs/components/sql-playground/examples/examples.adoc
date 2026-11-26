@@ -47,5 +47,12 @@ document.body.append(example);
 ====
 ====
 ======
+
+.SQL query tests
+======
+[tp-sql-playground,src="/docs/components/sql-playground/examples/framework-tests.json"]
+====
+====
+======
 ----
 ========

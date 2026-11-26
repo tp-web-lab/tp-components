@@ -1,6 +1,6 @@
 /**
  * @module components/include
- * @summary Remote HTML include component.
+ * @summary Remote markup inclusion with automatic HTML conversion.
  */
 
 // tp-docgen:dependencies:start
@@ -32,15 +32,15 @@ function isFullHtmlDocument(html: string): boolean {
 }
 
 /**
- * The custom `<tp-include>` element loads remote HTML content.
+ * The custom `<tp-include>` element loads remote markup content and displays it as HTML.
  *
  * Handling:
- * - document HTML complet → injecte uniquement `<body>`
- * - fragment HTML → injecte tel quel
+ * - Recognized markup extensions are converted to HTML before insertion.
+ * - Full HTML documents contribute their body; fragments are inserted directly.
  *
- * @summary Loads remote HTML content.
+ * @summary Loads remote markup content and displays it as HTML.
  * @tagname tp-include
- * @attr {string} src = "" - HTML source URL.
+ * @attr {string} src = "" - Source URL; the extension determines its markup language.
  * @attr {string} mode = "auto" - Inclusion mode (`auto` or `raw`).
  * @attr {string} fetch-mode = "cors" - Fetch mode (`cors`, `no-cors`, or `same-origin`).
  * @attr {boolean} allow-scripts = false - Allows included scripts to run.
@@ -271,10 +271,34 @@ export class TpInclude extends TpBase {
 				throw new Error(`HTTP ${String(response.status)}`);
 			}
 
-			const html = await response.text();
+			let html = await response.text();
 
 			if (currentRequestId !== this.requestId) {
 				return;
+			}
+
+			if (
+				this.mode !== "raw" &&
+				/\.(?:md|markdown|adoc|asciidoc|tex|latex|rst)$/i.test(
+					sourceUrl.pathname,
+				)
+			) {
+				const { convertMarkup: convert, markupLanguageFromPath } = await import(
+					"../../utilities/markup-conversion.js"
+				);
+				const { expandMarkupIncludes } = await import(
+					"../../utilities/markup-includes.js"
+				);
+				const language = markupLanguageFromPath(sourceUrl.href);
+				const source = await expandMarkupIncludes(
+					html,
+					language,
+					sourceUrl.href,
+				);
+				html = await convert(source, language, "html", {
+					baseURL: sourceUrl.href,
+				});
+				if (currentRequestId !== this.requestId) return;
 			}
 
 			if (this.mode === "raw") this.injectRaw(html);

@@ -128,6 +128,11 @@
       "description": "Loads draughts FEN or a numbered piece map atomically. Returns false and emits an error if invalid; an empty map clears the board."
     },
     {
+      "name": "showRules(): void",
+      "inherited": false,
+      "description": "Opens the rules of this game in its drawer."
+    },
+    {
       "name": "start(): void",
       "inherited": false,
       "description": "Loads the international starting position with twenty men per side. Stops automatic play."
@@ -136,6 +141,11 @@
       "name": "stop(): void",
       "inherited": false,
       "description": "Stops the random opponent or autoplay. The current position remains on the board."
+    },
+    {
+      "name": "toggleHelp(): void",
+      "inherited": false,
+      "description": "Opens or closes the game assistance menu."
     }
   ],
   "events": [

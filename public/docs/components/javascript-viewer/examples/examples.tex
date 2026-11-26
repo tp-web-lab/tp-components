@@ -8,6 +8,7 @@
 \documentclass{article}
 \begin{document}
 \wcScript[type=module]|
+import "/components/javascript/javascript.js";
 import "/components/javascript-viewer/javascript-viewer.js";
 
 const example = document.createDocumentFragment();
@@ -56,4 +57,55 @@ document.body.append(example);
 \documentclass{article}
 \begin{document}
 \wcTpJavascriptViewer[src=/docs/components/_shared/single-source/example.js]{}
+\end{document}
+
+% !tp-example Compare presentation modes
+\documentclass{article}
+\begin{document}
+\wcSection{
+  \subsection*{mode="default" — Standard controls}
+  Open Code to edit the source, then click Run or press \wcKbd*{Shift}+\wcKbd*{Enter} in the editor.
+
+  Run to print a console message followed by an intentional error. In simple mode the console opens automatically. Comment out the message statements and run again to check that the error alone opens it; remove the error statement to try a successful run.
+
+  \wcTpJavascriptViewer[mode=default]{
+    \wcScript[type=tp/javascript,filename=main.js]|
+document.body.innerHTML = "<p>The program ran.</p>";
+console.log("Console message before the intentional error.");
+throw new Error("Intentional error: the simple-mode console opens automatically.");
+  |
+  }
+}
+
+\wcSection{
+  \subsection*{mode="lite" — Compact controls}
+  Open Code to edit the source, then click Run or press \wcKbd*{Shift}+\wcKbd*{Enter} in the editor.
+
+  Run to print a console message followed by an intentional error. In simple mode the console opens automatically. Comment out the message statements and run again to check that the error alone opens it; remove the error statement to try a successful run.
+
+  \wcTpJavascriptViewer[mode=lite]{
+    \wcScript[type=tp/javascript,filename=main.js]|
+document.body.innerHTML = "<p>The program ran.</p>";
+console.log("Console message before the intentional error.");
+throw new Error("Intentional error: the simple-mode console opens automatically.");
+  |
+  }
+}
+
+\wcSection{
+  \subsection*{mode="simple" — Editor and rendered output only}
+  Edit the code below, keep the cursor in the editor and press \wcKbd*{Shift}+\wcKbd*{Enter} (Return) to run it. This viewer has no Run button.
+
+  Run to print a console message followed by an intentional error. In simple mode the console opens automatically. Comment out the message statements and run again to check that the error alone opens it; remove the error statement to try a successful run.
+
+  \wcTpJavascriptViewer[mode=simple]{
+    \wcScript[type=tp/javascript,filename=main.js]|
+document.body.innerHTML = "<p>The program ran.</p>";
+console.log("Console message before the intentional error.");
+throw new Error("Intentional error: the simple-mode console opens automatically.");
+  |
+  }
+}
+
+Programming viewers already have compact controls, so default and lite look alike. The first run may load the language engine.
 \end{document}

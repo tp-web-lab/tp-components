@@ -28,11 +28,11 @@
 
                   Next
 
-            .. p::
+            .. attributes::
                :data-page-status:
                :role: status
 
-               Page 1 of 5
+            Page 1 of 5
 
             .. script::
                :src: /docs/components/button-group/examples/page-navigation.js

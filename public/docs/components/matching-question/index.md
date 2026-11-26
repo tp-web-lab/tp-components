@@ -143,19 +143,19 @@ Header list
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -173,7 +173,7 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 <!--
 @tp-dependency tp-matching
-@summary Component `<tp-matching>`.
+@summary Groups related items from two or more lists.
 -->
 <!--
 @tp-dependency tp-question
@@ -181,7 +181,7 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 
 - [`<tp-callout>`](#/components/callout/index.md) : Callout component for highlighted contextual content.
-- [`<tp-matching>`](#/components/matching/index.md) : Component `<tp-matching>`.
+- [`<tp-matching>`](#/components/matching/index.md) : Groups related items from two or more lists.
 - [`<tp-question>`](#/components/question/index.md) : Base description-list container for question components.
 
 ### External

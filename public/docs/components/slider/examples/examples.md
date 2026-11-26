@@ -1,4 +1,4 @@
-:::::::: tp-markdown-viewer { label="tp-slider" allow-script }
+:::::::: tp-markdown-viewer { label="tp-slider" allow-script preserve-source }
 ::::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::::: tp-box { style="max-inline-size: 28rem" }

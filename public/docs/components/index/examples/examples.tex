@@ -1,0 +1,100 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcDiv[data-tp-reference-scope]{
+  A \wcTpRef*[href=!matrix]{matrix} represents a linear map.
+
+  A square matrix\wcTpRef*[href=!square,silent]{} has equal dimensions.
+
+  \wcTpIndex[ref=matrix,title=Matrix]{
+    A rectangular array of numbers.
+
+  }
+  \wcTpIndex[ref=square,title=Square matrix,parent=matrix]{}
+  \wcTpListof[selector=tp-index,title=Subject index]{}
+}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/index/index.js";
+import "/components/listof/listof.js";
+import "/components/ref/ref.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("div");
+element1.setAttribute("data-tp-reference-scope", "");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("p");
+element2.append(document.createTextNode("A "));
+
+const element3 = document.createElement("tp-ref");
+element3.setAttribute("href", "!matrix");
+element3.append(document.createTextNode("matrix"));
+element2.append(element3);
+element2.append(document.createTextNode(" represents a linear map."));
+element1.append(element2);
+element1.append(document.createTextNode("\n  "));
+
+const element4 = document.createElement("p");
+element4.append(document.createTextNode("A square matrix"));
+
+const element5 = document.createElement("tp-ref");
+element5.setAttribute("href", "!square");
+element5.setAttribute("silent", "");
+element4.append(element5);
+element4.append(document.createTextNode(" has equal dimensions."));
+element1.append(element4);
+element1.append(document.createTextNode("\n  "));
+
+const element6 = document.createElement("tp-index");
+element6.setAttribute("ref", "matrix");
+element6.setAttribute("title", "Matrix");
+
+const element7 = document.createElement("p");
+element7.append(document.createTextNode("A rectangular array of numbers."));
+element6.append(element7);
+element1.append(element6);
+element1.append(document.createTextNode("\n  "));
+
+const element8 = document.createElement("tp-index");
+element8.setAttribute("ref", "square");
+element8.setAttribute("title", "Square matrix");
+element8.setAttribute("parent", "matrix");
+element1.append(element8);
+element1.append(document.createTextNode("\n  "));
+
+const element9 = document.createElement("tp-listof");
+element9.setAttribute("selector", "tp-index");
+element9.setAttribute("title", "Subject index");
+element1.append(element9);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Named indexes and cross-references
+\documentclass{article}
+\begin{document}
+\wcDiv[data-tp-reference-scope]{
+  \wcTpRef*[href=!matrix]{Matrices} and \wcTpRef*[href=!vector]{vectors} are useful in algebra.
+
+  \wcTpRef*[href=!euler,index=people]{Leonhard Euler} studied matrices.
+
+  \wcTpIndex[ref=matrix,title=Matrix]{}
+  \wcTpIndex[ref=vector,title=Vector,see-also=matrix]{}
+  \wcTpIndex[ref=array,title=Array,see=matrix]{}
+  \wcTpIndex[ref=euler,index=people,title=Leonhard Euler,sort-key=Euler]{
+    Mathematician.
+
+  }
+  \wcTpListof[selector=tp-index,title=Subjects]{}
+  \wcTpListof[selector=tp-index,index=people,title=People]{}
+}
+\end{document}

@@ -11,6 +11,15 @@
   ],
   "attributes": [
     {
+      "name": "label",
+      "description": "Display label for references and bibliography lists; defaults to ref.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
       "name": "ref",
       "description": "Identifier used by references in this document.",
       "reflected": true,

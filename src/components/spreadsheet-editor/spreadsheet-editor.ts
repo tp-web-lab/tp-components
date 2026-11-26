@@ -18,7 +18,7 @@
  */
 /**
  * @tp-dependency tp-formula-picker
- * @summary Selects an Excel-compatible Formula.js function.  *
+ * @summary Browses and selects spreadsheet functions.
  */
 /**
  * @tp-dependency tp-fullscreen
@@ -378,8 +378,6 @@ class FormulaParser {
  *
  *
  *
- * @example
- * <tp-spreadsheet-editor src="/docs/components/spreadsheet-editor/examples/budget.csv"></tp-spreadsheet-editor>
  *  @event tp-spreadsheet-editor-clipboard-error Emitted when a clipboard command fails; command identifies copy, cut or paste.
  * @eventdetail tp-spreadsheet-editor-clipboard-error { command: "copy" | "cut" | "paste" }
  * @event tp-spreadsheet-editor-error Emitted when fetching or parsing src fails, except for aborted requests; src is the requested URL and error is the caught failure.
@@ -392,6 +390,8 @@ class FormulaParser {
  * @eventdetail tp-spreadsheet-editor-input { cell: string; raw: string; value: string | number | boolean | Date }
  * @event tp-spreadsheet-editor-structure Emitted after inserting or deleting a row or column. index is zero-based; rows and columns are the resulting dimensions.
  * @eventdetail tp-spreadsheet-editor-structure { action: "insert-row" | "delete-row" | "insert-column" | "delete-column"; index: number; rows: number; columns: number }
+ * @example
+ * <tp-spreadsheet-editor src="/docs/components/spreadsheet-editor/examples/budget.csv"></tp-spreadsheet-editor>
  */
 export class TpSpreadsheetEditor extends TpBase {
 	private static readonly styleId = "tp-spreadsheet-editor-styles";
@@ -1195,7 +1195,8 @@ export class TpSpreadsheetEditor extends TpBase {
 		return references;
 	}
 
-	private clearSelection(): void {
+	/** Clears the selected cells. */
+	clearSelection(): void {
 		const changed = this.selectedReferences().filter((reference) => {
 			const [row, column] = cellCoordinates(reference) ?? [0, 0];
 			return (this.data[row]?.[column] ?? "") !== "";
@@ -1307,21 +1308,24 @@ export class TpSpreadsheetEditor extends TpBase {
 		);
 	}
 
-	private undo(): void {
+	/** Restores the preceding spreadsheet state. */
+	undo(): void {
 		const state = this.undoStack.pop();
 		if (state === undefined) return;
 		this.redoStack.push(this.getData());
 		this.restoreState(state);
 	}
 
-	private redo(): void {
+	/** Restores the next spreadsheet state. */
+	redo(): void {
 		const state = this.redoStack.pop();
 		if (state === undefined) return;
 		this.undoStack.push(this.getData());
 		this.restoreState(state);
 	}
 
-	private applyFormat(format: TpSpreadsheetCellFormat): void {
+	/** Applies a number or text format to selected cells. */
+	applyFormat(format: TpSpreadsheetCellFormat): void {
 		if (format === "general") this.formats.delete(this.activeReference);
 		else this.formats.set(this.activeReference, format);
 		this.render();
@@ -1330,7 +1334,8 @@ export class TpSpreadsheetEditor extends TpBase {
 		)?.focus();
 	}
 
-	private toggleCellStyle(styleName: TpSpreadsheetCellStyle): void {
+	/** Toggles a style on selected cells. */
+	toggleCellStyle(styleName: TpSpreadsheetCellStyle): void {
 		const styles = new Set(this.cellStyles.get(this.activeReference) ?? []);
 		if (styles.has(styleName)) styles.delete(styleName);
 		else styles.add(styleName);
@@ -1342,7 +1347,8 @@ export class TpSpreadsheetEditor extends TpBase {
 		)?.focus();
 	}
 
-	private clearActiveFormatting(): void {
+	/** Removes formatting from selected cells. */
+	clearActiveFormatting(): void {
 		this.formats.delete(this.activeReference);
 		this.cellStyles.delete(this.activeReference);
 		this.render();
@@ -1490,6 +1496,46 @@ export class TpSpreadsheetEditor extends TpBase {
 			rows.push(values);
 		}
 		return rows;
+	}
+
+	/** Runs the copy action for the selected cells. */
+	async copy(): Promise<void> {
+		const toolbar = this.querySelector<HTMLElement>(
+			"[data-tp-spreadsheet-editor-search]",
+		)?.parentElement;
+		if (toolbar) await this.runToolbarCommand("copy", toolbar);
+	}
+
+	/** Runs the cut action for the selected cells. */
+	async cut(): Promise<void> {
+		const toolbar = this.querySelector<HTMLElement>(
+			"[data-tp-spreadsheet-editor-search]",
+		)?.parentElement;
+		if (toolbar) await this.runToolbarCommand("cut", toolbar);
+	}
+
+	/** Runs the paste action for the selected cells. */
+	async paste(): Promise<void> {
+		const toolbar = this.querySelector<HTMLElement>(
+			"[data-tp-spreadsheet-editor-search]",
+		)?.parentElement;
+		if (toolbar) await this.runToolbarCommand("paste", toolbar);
+	}
+
+	/** Runs the search action for the selected cells. */
+	async openSearch(): Promise<void> {
+		const toolbar = this.querySelector<HTMLElement>(
+			"[data-tp-spreadsheet-editor-search]",
+		)?.parentElement;
+		if (toolbar) await this.runToolbarCommand("search", toolbar);
+	}
+
+	/** Runs the close search action for the selected cells. */
+	async closeSearch(): Promise<void> {
+		const toolbar = this.querySelector<HTMLElement>(
+			"[data-tp-spreadsheet-editor-search]",
+		)?.parentElement;
+		if (toolbar) await this.runToolbarCommand("close-search", toolbar);
 	}
 }
 

@@ -1,0 +1,64 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpOcamlTracer[src=/docs/components/ocaml-tracer/examples/recursion.ml]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/ocaml/ocaml.js";
+import "/components/ocaml-tracer/ocaml-tracer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-ocaml-tracer");
+element1.setAttribute("src", "/docs/components/ocaml-tracer/examples/recursion.ml");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Subexpressions on one line
+\documentclass{article}
+\begin{document}
+\wcTpOcamlTracer[src=/docs/components/ocaml-tracer/examples/same-line.ml]{}
+\end{document}
+
+% !tp-example Shared arrays and references
+\documentclass{article}
+\begin{document}
+\wcTpOcamlTracer[src=/docs/components/ocaml-tracer/examples/shared.ml]{}
+\end{document}
+
+% !tp-example Closures
+\documentclass{article}
+\begin{document}
+\wcTpOcamlTracer[src=/docs/components/ocaml-tracer/examples/closures.ml]{}
+\end{document}
+
+% !tp-example Pattern matching
+\documentclass{article}
+\begin{document}
+\wcTpOcamlTracer[src=/docs/components/ocaml-tracer/examples/patterns.ml]{}
+\end{document}
+
+% !tp-example Caught exception
+\documentclass{article}
+\begin{document}
+\wcTpOcamlTracer[src=/docs/components/ocaml-tracer/examples/caught.ml]{}
+\end{document}
+
+% !tp-example Uncaught exception
+\documentclass{article}
+\begin{document}
+\wcTpOcamlTracer[src=/docs/components/ocaml-tracer/examples/error.ml]{}
+\end{document}
+
+% !tp-example Replay a saved trace
+\documentclass{article}
+\begin{document}
+\wcTpOcamlTracer[trace=/docs/components/ocaml-tracer/examples/recursion.trace.json]{}
+\end{document}

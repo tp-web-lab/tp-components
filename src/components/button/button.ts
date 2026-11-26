@@ -85,8 +85,6 @@ function escapeButtonAttribute(value: string): string {
  * @accessibility Exposes disabled and loading states to assistive technology.
  * @accessibilityresponsibility Provide visible text that describes the action or destination.
  * @keyboard {Enter / Space} Uses the browser's native button activation behavior.
- * @example
- * <tp-button href="/#/components/button/index.md#usage">Read the usage guide</tp-button>
  *  @cssprop [--tp-button-accent=var(--tp-neutral-text-colorful)] Accent color used for outlined text and borders, and for the hover border; depends on variant.
  * @cssprop [--tp-button-background=var(--tp-neutral-fill-loud)] Background color of the button or link; variant and outlined can change it.
  * @cssprop [--tp-button-border-color=var(--tp-neutral-stroke-mid)] Border color of the button or link in its resting state.
@@ -101,6 +99,8 @@ function escapeButtonAttribute(value: string): string {
  * @cssprop [--tp-button-spinner-size=1em] Width and height of the circular loading indicator.
  * @event click Native click event bubbling from the inner button or link when activated by pointer or keyboard; disabled controls suppress activation. This is not a CustomEvent, so there is no custom detail payload.
  * @eventdetail click void
+ * @example
+ * <tp-button href="/#/components/button/index.md#usage">Read the usage guide</tp-button>
  */
 export class TpButton extends TpBase {
 	/**
@@ -677,6 +677,11 @@ export class TpButton extends TpBase {
 
 		control.setAttribute("aria-busy", "false");
 		this.removeAttribute("data-loading");
+	}
+
+	/** Activates the button or follows its link, unless disabled or loading. Browser permission prompts still require a user gesture. */
+	activate(): void {
+		if (!this.disabled && !this.loading) this.controlEl?.click();
 	}
 }
 

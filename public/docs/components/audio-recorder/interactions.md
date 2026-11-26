@@ -4,11 +4,11 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Record | Request microphone access, capture a new response and transcribe it when configured. |
-| Stop | Finish capturing and prepare the audio for replay; allow final transcription results to arrive. |
-| Clear | Remove the current recording and clear the written transcript. |
+| <!-- button --> Record | Request microphone access, capture a new response and transcribe it when configured. |
+| <!-- button --> Stop | Finish capturing and prepare the audio for replay; allow final transcription results to arrive. |
+| <!-- button --> Clear | Remove the current recording and clear the written transcript. |
 | Playback controls | Listen, pause and seek in the recorded response. |
-| Download recording | Save the audio file on your device. |
+| <!-- button --> Download recording | Save the audio file on your device. |
 
 #### Keyboard interactions
 

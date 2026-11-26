@@ -57,6 +57,16 @@ Use `<tp-console>` when you need a visual console. You can write entries directl
 
 The component can also redirect global `console.log`, `console.info`, `console.warn`, `console.error`, and `console.clear` calls to itself while keeping the native browser console behavior.
 
+### Presentation modes
+
+| Mode | Toolbar | Level labels and timestamps |
+| --- | --- | --- |
+| `default` (default) | Visible | Visible |
+| `lite` | Hidden | Visible |
+| `simple` | Hidden | Hidden: only results remain |
+
+Changing `mode` preserves messages, groups and expanded objects. In `simple` mode, strings are displayed without added quotation marks; quotes and line breaks contained in the original message are preserved. Missing or invalid values use `default`. The console starts with a light theme only in `simple` mode; `default` and `lite` start with a dark theme. Changing modes applies the corresponding initial theme. The Theme control in default mode can change it. A programming viewer automatically applies its own presentation mode to its console, including notebook cells and exported notebooks. Automatic opening on a message or error is unchanged.
+
 ### Importing
 
 ::: tp-tabs
@@ -105,22 +115,25 @@ Redirect global console
 
 Message levels
 : Compare standard, informative, warning and error messages in the console, then clear its output.
+
+Console presentation modes
+: Compare the same message, information and error in default, lite and simple modes. Default shows the toolbar and entry metadata, lite hides the toolbar, and simple shows only the results; simple starts with a light theme, while default and lite start with a dark theme.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-asciidoc-viewer-question" allow-script }
+::::: tp-markdown-viewer { label="tp-asciidoc-viewer-question" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-asciidoc-viewer-question { open src="/docs/components/markup-viewer-question/examples/emphasis.adoc" test="/docs/components/markup-viewer-question/examples/emphasis.test.js" }

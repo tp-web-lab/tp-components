@@ -65,6 +65,14 @@ type OpenField =
  * @attr {string} placeholder = "…" - Text displayed while the blank is empty.
  * @attr {boolean} disabled = false - Disables interaction.
  *
+ *  @cssprop [--tp-blank-filled-border-color=var(--tp-brand-stroke-mid)] Bottom border color of a blank after an answer has been filled in.
+ * @event input Emitted when an answer is assigned or cleared; read the updated answer from value.
+ * @eventdetail input void
+ * @event tp-blank-mode-change Emitted when closed or type changes while connected, after the blank has been rendered in its new mode.
+ * @eventdetail tp-blank-mode-change void
+ * @accessibility Editable blanks delegate to the field matching their type and forward accessible naming attributes; closed blanks expose a named focusable group with aria-disabled reflecting availability.
+ * @accessibility Delete and Backspace clear an enabled focused closed blank; its clear control is disabled when clearing is unavailable.
+ * @accessibilityresponsibility Supply a descriptive label or aria-label for each answer location and text alternatives for image or SVG answers; do not rely on answer color or position alone.
  * @example
  * <tp-fill-blank-question mode="closed">
  *   <dl>
@@ -86,14 +94,6 @@ type OpenField =
  *     <dt>Solution</dt><dd>Paris; the triangle; the tp-components logo.</dd>
  *   </dl>
  * </tp-fill-blank-question>
- *  @cssprop [--tp-blank-filled-border-color=var(--tp-brand-stroke-mid)] Bottom border color of a blank after an answer has been filled in.
- * @event input Emitted when an answer is assigned or cleared; read the updated answer from value.
- * @eventdetail input void
- * @event tp-blank-mode-change Emitted when closed or type changes while connected, after the blank has been rendered in its new mode.
- * @eventdetail tp-blank-mode-change void
- * @accessibility Editable blanks delegate to the field matching their type and forward accessible naming attributes; closed blanks expose a named focusable group with aria-disabled reflecting availability.
- * @accessibility Delete and Backspace clear an enabled focused closed blank; its clear control is disabled when clearing is unavailable.
- * @accessibilityresponsibility Supply a descriptive label or aria-label for each answer location and text alternatives for image or SVG answers; do not rely on answer color or position alone.
  */
 export class TpBlank extends TpBase {
 	private editor: OpenField | null = null;

@@ -105,6 +105,11 @@ export class TpSource extends TpBase {
 
 		window.open(url, "_blank", "noopener,noreferrer");
 	};
+
+	/** Opens the configured repository in a new browser tab. */
+	openRepository(): void {
+		this.handleButtonClick();
+	}
 }
 
 if (!customElements.get("tp-source")) {

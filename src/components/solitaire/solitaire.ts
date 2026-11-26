@@ -1,3 +1,4 @@
+import { showGameRules, toggleGameHelp } from "../../utilities/game-header.js";
 /**
  * @module components/solitaire
  * @summary Klondike solitaire with a 32-card or 52-card deck.
@@ -497,7 +498,8 @@ export class TpSolitaire extends TpBase {
 		}
 	}
 
-	private draw(): void {
+	/** Draws the next card or turns the waste pile back into the stock. */
+	draw(): void {
 		this.startTimer();
 		this.selection = null;
 		if (this.stock.length > 0) {
@@ -662,6 +664,16 @@ export class TpSolitaire extends TpBase {
 
 	private suitSymbol(suit: Suit): string {
 		return { c: "♣", d: "♦", h: "♥", s: "♠" }[suit];
+	}
+
+	/** Opens or closes the game assistance menu. */
+	toggleHelp(): void {
+		toggleGameHelp(this);
+	}
+
+	/** Opens the rules of this game in its drawer. */
+	showRules(): void {
+		showGameRules(this);
 	}
 }
 

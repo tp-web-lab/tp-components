@@ -188,6 +188,8 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
  * @attr {string} open = "" - Initial panels: both (also a bare attribute), input, or output. Absent or invalid values collapse the question.
  *
  *   `detail: { value: unknown }`
+ *  @event tp-question-submit Emitted after an answer passes submission validation and preparation. value is the response widget value, whose type depends on the question; invalid or blocked repeated submissions do not emit it.
+ * @eventdetail tp-question-submit { value: unknown }
  * @example
  * <tp-question>
  *     <dl>
@@ -198,8 +200,6 @@ function isDdElement(node: Node | null | undefined): node is HTMLElement {
  *       <dt>Solution</dt><dd>They package reusable behavior behind a custom element.</dd>
  *     </dl>
  *   </tp-question>
- *  @event tp-question-submit Emitted after an answer passes submission validation and preparation. value is the response widget value, whose type depends on the question; invalid or blocked repeated submissions do not emit it.
- * @eventdetail tp-question-submit { value: unknown }
  */
 export class TpQuestion extends TpBase {
 	private readonly questionTiming = new QuestionTiming(this);
@@ -325,6 +325,7 @@ export class TpQuestion extends TpBase {
 		}
 		if (name === "src" && oldValue !== newValue) {
 			this.sourceRevision++;
+			this.sourceContentUrl = undefined;
 			this.inlineSourceLoaded = false;
 			if (this.isConnected && this.formContent && this.usesExternalData)
 				void this.loadSrc();
@@ -418,6 +419,7 @@ export class TpQuestion extends TpBase {
 
 	private sourceRevision = 0;
 	private inlineSourceLoaded = false;
+	private sourceContentUrl: string | undefined;
 
 	/** Whether the question still needs its external definition. */
 	protected get usesExternalData(): boolean {
@@ -509,7 +511,8 @@ export class TpQuestion extends TpBase {
 	}
 
 	/** Initializes parsed markup through the same lifecycle as an inline question. */
-	private applySourceMarkup(html: string, url: string): void {
+	protected applySourceMarkup(html: string, url: string): void {
+		this.sourceContentUrl = url;
 		const template = document.createElement("template");
 		template.innerHTML = html;
 		const wrapper = template.content.querySelector(this.localName);
@@ -524,7 +527,10 @@ export class TpQuestion extends TpBase {
 			const name = element.hasAttribute("src") ? "src" : "href";
 			const value = element.getAttribute(name);
 			if (value && !value.startsWith("#"))
-				element.setAttribute(name, new URL(value, url).href);
+				element.setAttribute(
+					name,
+					resolveComponentSourceUrl(element, value).href,
+				);
 		}
 		this.disconnectedCallback();
 		this.inlineSourceLoaded = true;
@@ -569,7 +575,9 @@ export class TpQuestion extends TpBase {
 			":scope > details[data-tp-question-details] > summary > [data-tp-question-title]",
 		);
 		if (title instanceof HTMLElement) {
-			this.replaceWithSrcContent(title, text, markup);
+			if (this.hasAttribute("data-tp-numbering-title"))
+				title.textContent = this.getAttribute("data-tp-numbering-title");
+			else this.replaceWithSrcContent(title, text, markup);
 		}
 	}
 
@@ -692,6 +700,8 @@ export class TpQuestion extends TpBase {
 			console.error("Unable to load question Markdown renderer", error);
 		});
 		const md = document.createElement("tp-markdown");
+		if (this.sourceContentUrl)
+			md.setAttribute("data-tp-source", this.sourceContentUrl);
 		md.textContent = markdown;
 		return md;
 	}
@@ -1230,7 +1240,8 @@ export class TpQuestion extends TpBase {
 		const title = document.createElement("span");
 		title.setAttribute("data-tp-question-title", "");
 		title.textContent =
-			titleText === "" ? "Question" : (titleText ?? "Question");
+			this.getAttribute("data-tp-numbering-title") ??
+			(titleText === "" ? "Question" : (titleText ?? "Question"));
 		summary.replaceChildren(titleIcon, title);
 
 		const statementDd = this.getSectionDd(list, "statement");
@@ -1345,6 +1356,14 @@ export class TpQuestion extends TpBase {
 	private handlePanelToggle = (event: Event): void => {
 		const button = event.currentTarget;
 		if (!(button instanceof HTMLElement)) return;
+		this.togglePanel(button.dataset.panelToggle ?? "");
+	};
+
+	private togglePanel(name: string): void {
+		const button = this.panelToggleButtons.find(
+			(item) => item.dataset.panelToggle === name,
+		);
+		if (!button) return;
 		const visible = button.getAttribute("aria-pressed") === "true";
 		if (
 			visible &&
@@ -1356,7 +1375,7 @@ export class TpQuestion extends TpBase {
 			return;
 		button.setAttribute("aria-pressed", String(!visible));
 		this.updatePanelVisibility();
-	};
+	}
 
 	/** Hides panels without recreating their content and synchronizes native button ARIA. */
 	private updatePanelVisibility(): void {
@@ -1604,7 +1623,7 @@ export class TpQuestion extends TpBase {
 	 *
 	 * @summary Opens the Solution panel.
 	 */
-	protected openSolutionPanel(): void {
+	public openSolutionPanel(): void {
 		if (
 			!(this.feedbackTabsEl instanceof HTMLElement) ||
 			!(this.solutionTabEl instanceof HTMLElement) ||
@@ -2017,6 +2036,41 @@ export class TpQuestion extends TpBase {
 		while (from.firstChild !== null) {
 			to.append(from.firstChild);
 		}
+	}
+
+	/** Resets the response and clears the submitted feedback. */
+	reset(): void {
+		this.handleResetClick();
+	}
+
+	/** Validates and submits the current response, respecting the same guards as Submit. */
+	async submit(): Promise<void> {
+		await this.handleSubmitClick();
+	}
+
+	/** Shows or hides the answer form, keeping at least one panel visible. */
+	toggleInput(): void {
+		this.togglePanel("input");
+	}
+
+	/** Shows or hides feedback, keeping at least one panel visible. */
+	toggleOutput(): void {
+		this.togglePanel("output");
+	}
+
+	/** Starts the timed question when its Start action is available. */
+	start(): void {
+		this.questionTiming.start();
+	}
+
+	/** Reopens the question after its timer expires. */
+	continueAfterTimeout(): void {
+		this.questionTiming.continueAfterTimeout();
+	}
+
+	/** Opens the AI explanation for an unlocked solution when AI assistance is available. */
+	async explainSolution(): Promise<void> {
+		await this.questionAi.explain();
 	}
 }
 

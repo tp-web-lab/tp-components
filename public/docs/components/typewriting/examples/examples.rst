@@ -51,3 +51,17 @@
          .. tp-text-to-speech::
             :for: spoken-text
             :lang: en
+
+      .. example:: Initially hidden tab
+
+         .. tp-tabs::
+
+            Instructions
+               Open Animated text to start the reveal. Return to Instructions, then reopen Animated text to start it again.
+
+            Animated text
+               .. tp-typewriting::
+                  :speed: 15
+                  :delay: 300
+
+                  This sentence starts appearing only when you open this tab.

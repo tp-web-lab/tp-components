@@ -64,10 +64,6 @@ tp-alarm > tp-icon-button {
   flex: 0 0 auto;
 }
 
-tp-alarm > tp-icon-button > button {
-  border: 1px solid #d1d5db;
-  box-sizing: border-box;
-}
 
 tp-alarm[data-alert] > [data-tp-alarm-display] {
   color: var(--tp-alarm-alert);

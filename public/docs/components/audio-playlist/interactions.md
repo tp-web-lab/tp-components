@@ -8,9 +8,10 @@
 | Random | Start a newly shuffled playlist without repeating tracks. |
 | Track link | Play the selected track from the beginning. |
 | Previous / Next | Play the adjacent track in the current playback order. Disabled at the ends. |
-| Resume / Pause | Resume or pause the current track. |
+| :tp-icon:{name="play" size="2em"} :tp-icon:{name="pause" size="2em"} Resume / Pause | Resume or pause the current track. |
 | Playback position | Seek within the current track. Dark indicates elapsed time; light indicates remaining time, independently of buffering. |
-| Mute / Unmute and Volume | Toggle sound or adjust its volume. |
+| :tp-icon:{name="volume-off" size="2em"} :tp-icon:{name="volume-high" size="2em"} Mute / Unmute and Volume | Toggle sound or adjust its volume. |
+| :tp-icon:{name="volume-off" size="2em"} :tp-icon:{name="volume-high" size="2em"} Unmute | Unmute. |
 
 #### Keyboard interactions
 

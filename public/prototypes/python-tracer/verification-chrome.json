@@ -1,0 +1,59 @@
+{
+  "browser": "chrome",
+  "version": "158.0.8127.38",
+  "checkedAt": "2026-11-24T11:29:41.219Z",
+  "cases": [
+    {
+      "case": "recursion",
+      "steps": 24,
+      "milliseconds": 988,
+      "passed": true
+    },
+    {
+      "case": "variables",
+      "steps": 5,
+      "milliseconds": 813,
+      "passed": true
+    },
+    {
+      "case": "lists",
+      "steps": 5,
+      "milliseconds": 830,
+      "passed": true
+    },
+    {
+      "case": "sharing",
+      "steps": 8,
+      "milliseconds": 831,
+      "passed": true
+    },
+    {
+      "case": "syntax-error",
+      "passed": true
+    },
+    {
+      "case": "event-limit",
+      "steps": 1001,
+      "passed": true
+    },
+    {
+      "case": "stop-native-computation",
+      "passed": true
+    },
+    {
+      "case": "execution-timeout",
+      "milliseconds": 10762,
+      "passed": true
+    },
+    {
+      "case": "recovery-after-timeout",
+      "milliseconds": 712,
+      "passed": true
+    }
+  ],
+  "requestHosts": [
+    "127.0.0.1",
+    "cdn.jsdelivr.net"
+  ],
+  "pythonTutorRequests": []
+}

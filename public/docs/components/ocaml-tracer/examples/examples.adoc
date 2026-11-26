@@ -1,0 +1,78 @@
+[tp-asciidoc-viewer%allow-script,label="tp-ocaml-tracer"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-ocaml-tracer,src="/docs/components/ocaml-tracer/examples/recursion.ml"]
+====
+====
+======
+
+.Javascript API
+======
+[script,type="module"]
+====
+import "/components/ocaml/ocaml.js";
+import "/components/ocaml-tracer/ocaml-tracer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-ocaml-tracer");
+element1.setAttribute("src", "/docs/components/ocaml-tracer/examples/recursion.ml");
+example.append(element1);
+
+document.body.append(example);
+====
+======
+
+.Subexpressions on one line
+======
+[tp-ocaml-tracer,src="/docs/components/ocaml-tracer/examples/same-line.ml"]
+====
+====
+======
+
+.Shared arrays and references
+======
+[tp-ocaml-tracer,src="/docs/components/ocaml-tracer/examples/shared.ml"]
+====
+====
+======
+
+.Closures
+======
+[tp-ocaml-tracer,src="/docs/components/ocaml-tracer/examples/closures.ml"]
+====
+====
+======
+
+.Pattern matching
+======
+[tp-ocaml-tracer,src="/docs/components/ocaml-tracer/examples/patterns.ml"]
+====
+====
+======
+
+.Caught exception
+======
+[tp-ocaml-tracer,src="/docs/components/ocaml-tracer/examples/caught.ml"]
+====
+====
+======
+
+.Uncaught exception
+======
+[tp-ocaml-tracer,src="/docs/components/ocaml-tracer/examples/error.ml"]
+====
+====
+======
+
+.Replay a saved trace
+======
+[tp-ocaml-tracer,trace="/docs/components/ocaml-tracer/examples/recursion.trace.json"]
+====
+====
+======
+----
+========

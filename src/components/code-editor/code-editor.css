@@ -35,6 +35,7 @@ tp-code-editor {
   box-sizing: border-box;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   min-block-size: 0;
   min-inline-size: 0;
   overflow: visible;
@@ -46,28 +47,7 @@ tp-code-editor .cm-placeholder {
   opacity: 1 !important;
 }
 
-tp-code-editor.tp-dark {
-  /* Standalone dark fallback when tp.css isn't present. */
-  --tp-syntax-surface: #1e1e1e;
-  --tp-syntax-foreground: #d4d4d4;
-  --tp-syntax-muted: #6a9955;
-  --tp-syntax-caret: #d4d4d4;
-  --tp-syntax-selection: rgb(38 119 191 / 62%);
-  --tp-syntax-active-line: rgb(255 255 255 / 5%);
-  --tp-syntax-gutter-background: #181818;
-  --tp-syntax-gutter-foreground: #858585;
-  --tp-syntax-gutter-border: #2f2f2f;
-  --tp-syntax-fold-background: rgb(255 255 255 / 8%);
-  --tp-syntax-token-keyword: #569cd6;
-  --tp-syntax-token-string: #ce9178;
-  --tp-syntax-token-number: #b5cea8;
-  --tp-syntax-token-comment: #6a9955;
-  --tp-syntax-token-variable: #9cdcfe;
-  --tp-syntax-token-property: #9cdcfe;
-  --tp-syntax-token-type: #4ec9b0;
-  --tp-syntax-token-function: #dcdcaa;
-  --tp-syntax-token-link: #4fc1ff;
-}
+
 
 tp-code-editor {
   direction: ltr;
@@ -91,9 +71,9 @@ tp-code-editor > [data-tp-code-editor] {
 }
 
 tp-code-editor .cm-editor {
-  background: Canvas;
+  background: var(--tp-code-editor-surface);
   block-size: 100%;
-  color: CanvasText;
+  color: var(--tp-code-editor-foreground);
   inline-size: 100%;
   min-block-size: 0;
   min-inline-size: 0;
@@ -106,13 +86,13 @@ tp-code-editor .cm-scroller {
 }
 
 tp-code-editor .cm-content {
-  line-height: 1.5rem;
+  line-height: var(--tp-code-line-height);
   min-block-size: 2.8em;
   min-block-size: 2lh;
 }
 
 tp-code-editor .cm-line {
-  line-height: 1.5rem;
+  line-height: var(--tp-code-line-height);
   overflow-wrap: normal;
   word-break: normal;
 }
@@ -215,11 +195,6 @@ tp-code-editor [data-tp-code-editor-action-panel] tp-fullscreen > tp-icon-button
   --tp-icon-button-icon-size: 0.85rem;
 }
 
-tp-code-editor [data-tp-code-editor-action-panel] tp-theme > tp-icon-button > button,
-tp-code-editor [data-tp-code-editor-action-panel] tp-fullscreen > tp-icon-button > button {
-  border: 0 !important;
-}
-
 tp-code-editor [data-tp-code-editor-action-panel] tp-copy-code[size='xs'] {
   min-block-size: 1.5rem;
   min-inline-size: 1.5rem;
@@ -236,7 +211,7 @@ tp-code-editor [data-tp-code-editor-cursor-position] {
   white-space: nowrap;
 }
 
-tp-code-editor .cm-panels :is(input, button, select, .cm-button) {
+tp-code-editor .cm-panels :is(input, button, select, .cm-button):not(:where(tp-icon-button > button)) {
   block-size: 1.5rem;
   min-block-size: 1.5rem;
   min-height: 1.5rem;
@@ -346,10 +321,25 @@ tp-code-editor .tp-code-comment-marker svg > circle[fill="white"] {
 
 /* A hidden toolbar must not retain its empty CodeMirror panel border or gap.
    Search panels and source errors still participate in intrinsic sizing. */
-tp-code-editor:not([toolbar]) > [data-tp-code-editor-panels]:not(:has(
+tp-code-editor:not([toolbar]):not([data-tp-code-editor-managed-layout]) > [data-tp-code-editor-panels]:not(:has(
   [data-tp-code-editor-source-error]:not([hidden]),
   .cm-panel:not([data-tp-code-editor-action-panel])
 )) {
   display: none !important; /* Override CodeMirror’s root display rule. */
   margin-block-end: 0;
+}
+
+/* Native code blocks and editors share typography and content spacing. */
+tp-code-editor .cm-scroller { font-family: var(--tp-font-family-code); font-size: var(--tp-code-font-size); }
+tp-code-editor .cm-content { padding-block: var(--tp-code-padding-block); }
+tp-code-editor .cm-line { padding-inline: var(--tp-code-padding-inline); }
+
+/* A filename follows the language badge in both standalone and merge editors. */
+tp-code-editor [data-tp-code-editor-filename] {
+  min-inline-size: 0;
+  max-inline-size: 18em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: .85em;
 }

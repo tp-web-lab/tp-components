@@ -14,6 +14,7 @@ import { TpNotebook } from "../notebook/notebook.js";
  * @summary Combines written explanations and executable SQL code in an interactive notebook.
  * @tagname tp-sql-notebook
  * @summary Interactive SQL notebook with markup and code cells.
+ * @keyboard {Shift+Enter} Execute or render only the current cell, including while editing its source.
  * @example
  * <tp-sql-notebook>
  *     <script type="tp/markdown"># Interactive SQL

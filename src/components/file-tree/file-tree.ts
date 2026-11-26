@@ -391,13 +391,6 @@ const FILE_TREE_CONTEXT_MENU_CONFIG: TpTreeContextMenuConfig = {
  *
  *
  *
- * @example
- * <tp-box data-intro-action="file-tree" data-allow-script="">
- *   <p>Expand the folders and select a file in this in-memory example.</p>
- *   <tp-file-tree></tp-file-tree>
- *   <p data-demo-status="" role="status">Select a file to see its path.</p>
- *   <script src="/docs/components/_shared/introduction-actions.js"></script>
- * </tp-box>
  *  @cssprop [--tp-file-tree-active-color=inherit] Text color of the active file row.
  * @cssprop [--tp-file-tree-dirty-color=#d97706] Color of the dot marking a file with unsaved changes.
  * @cssprop [--tp-file-tree-icon-size=1rem] Width and height of file and directory icons.
@@ -423,6 +416,13 @@ const FILE_TREE_CONTEXT_MENU_CONFIG: TpTreeContextMenuConfig = {
  * @event tp-file-tree-move-request Requests moving sourcePath relative to destinationPath at position; a null destination denotes the root. The consumer performs the move.
  * @eventdetail tp-file-tree-rename-request { path: string; newName: string }
  * @event tp-file-tree-rename-request Requests renaming the entry at path to newName; the consumer performs the rename.
+ * @example
+ * <tp-box data-intro-action="file-tree" data-allow-script="">
+ *   <p>Expand the folders and select a file in this in-memory example.</p>
+ *   <tp-file-tree></tp-file-tree>
+ *   <p data-demo-status="" role="status">Select a file to see its path.</p>
+ *   <script src="/docs/components/_shared/introduction-actions.js"></script>
+ * </tp-box>
  */
 export class TpFileTree extends TpBase {
 	/**
@@ -784,6 +784,19 @@ export class TpFileTree extends TpBase {
 		);
 	};
 
+	/** Requests copying a file path through the same event as the context menu. */
+	public copyPath(path: string): void {
+		if (!path) return;
+		this.dispatchEvent(
+			new CustomEvent<TpFileTreePathDetail>("tp-file-tree-copy-request", {
+				bubbles: true,
+				detail: {
+					path,
+				},
+			}),
+		);
+	}
+
 	/**
 	 * Réagit aux actions du menu contextuel.
 	 *
@@ -812,14 +825,7 @@ export class TpFileTree extends TpBase {
 			return;
 		}
 
-		this.dispatchEvent(
-			new CustomEvent<TpFileTreePathDetail>("tp-file-tree-copy-request", {
-				bubbles: true,
-				detail: {
-					path,
-				},
-			}),
-		);
+		this.copyPath(path);
 	};
 
 	/**

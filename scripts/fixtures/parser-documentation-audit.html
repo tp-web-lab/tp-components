@@ -1,0 +1,37 @@
+<!doctype html><meta charset="utf-8"><title>Parser documentation audit</title>
+<button id="run">Check adaptation examples</button><p id="status">Ready</p><pre id="report"></pre>
+<script type="module">
+import {markupToHtml} from '/src/utilities/markup-conversion.ts';
+const files=import.meta.glob('../../../tp-docs/packages/*/public/docs/{extensions-built-in.md,extensions.adoc,extensions.rst,packages.tex,extensions-examples/*,examples/*}',{query:'?url',import:'default',eager:true});
+const languages={markdown:'md',asciidoc:'adoc',restructuredtext:'rst',latex:'tex'};
+document.querySelector('#run').onclick=async()=>{
+ const report=[];
+ for(const [lang,ext] of Object.entries(languages)){
+ const names=lang==='latex'?['native-media','literal-code','image-origin']:['native-media','literal-code','list-options','image-options',...(lang==='restructuredtext'?['heading-levels']:[])];
+ names.push("guide");
+ for(const name of names){
+ const folder=lang==='latex'?'examples':'extensions-examples';
+ const path=name==='guide'?(lang==='latex'?'packages.tex':lang==='markdown'?'extensions-built-in.md':'extensions.'+ext):folder+'/'+name+'.'+ext;
+ const url=files['../../../tp-docs/packages/'+lang+'/public/docs/'+path];
+ document.querySelector('#status').textContent=lang+': '+name;
+ try{
+ const response=await fetch(url);if(!response.ok)throw Error(response.status+' '+url);
+ const html=await markupToHtml(await response.text(),lang,location.origin+url);
+ const root=document.createElement('div');root.innerHTML=html;
+ if(root.querySelector('.system-message,[role=alert]'))throw Error(root.textContent);
+ if(name==='native-media'){
+ if(!root.querySelector('audio[controls]')||!root.querySelector('video[controls] source')||!root.querySelector('track[default][srclang=en]'))throw Error('Missing semantic media/source/track: '+html);
+ }
+ if(name==='literal-code'){
+ const code=root.querySelector('tp-code-editor');
+ if(code?.getAttribute('line-number-start')!=='20'||!code.getAttribute('value')?.startsWith('  if ready:\n\t'))throw Error('Literal code/numbering mismatch: '+html);
+ }
+ if(name==='heading-levels'&&[...root.querySelectorAll('h1,h2,h3,h4,h5,h6')].map(x=>x.localName).join(',')!=='h2,h4,h3,h6')throw Error('Heading mismatch: '+html);
+ report.push({lang,name,pass:true});
+ }catch(e){report.push({lang,name,pass:false,error:String(e)});}
+ }
+ }
+ document.querySelector('#report').textContent=JSON.stringify(report,null,2);
+ document.querySelector('#status').textContent='Complete: '+report.filter(x=>x.pass).length+'/'+report.length+' passed';
+};
+</script>

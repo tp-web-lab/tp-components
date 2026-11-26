@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-badge" allow-script }
+:::::: tp-markdown-viewer { label="tp-badge" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 Build status: :tp-badge:`Ready`{variant="success" pulse}

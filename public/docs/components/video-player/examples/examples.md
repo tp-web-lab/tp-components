@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-video-player" allow-script }
+::::: tp-markdown-viewer { label="tp-video-player" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-video-player { src="/docs/components/video-player/examples/clip-1.mp4" controls label="Moving shapes" }

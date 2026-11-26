@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-grid" allow-script }
+:::::: tp-markdown-viewer { label="tp-grid" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-grid { min-width="12rem" gap="1rem" }

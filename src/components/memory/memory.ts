@@ -1,3 +1,4 @@
+import { showGameRules, toggleGameHelp } from "../../utilities/game-header.js";
 /**
  * @module components/memory
  * @summary Memory matching game generated from a list.
@@ -93,12 +94,12 @@ interface MemorySnapshot {
  * @event tp-memory-reset Emitted after the game is reset.
  * @cssprop --tp-memory-card-max-width Maximum width of image and SVG cards.
  * @cssprop --tp-memory-gap Gap between cards.
+ *  @event tp-memory-match Emitted after two matching cards are revealed; pair is the zero-based identifier assigned to their original list item.
+ * @eventdetail tp-memory-match { pair: number }
  * @example
  * <tp-memory label="Match the fruits">
  *   <ol><li>Apple</li><li>Pear</li><li>Plum</li></ol>
  * </tp-memory>
- *  @event tp-memory-match Emitted after two matching cards are revealed; pair is the zero-based identifier assigned to their original list item.
- * @eventdetail tp-memory-match { pair: number }
  */
 export class TpMemory extends TpBase {
 	private static readonly styleId = "tp-memory-styles";
@@ -300,20 +301,7 @@ export class TpMemory extends TpBase {
 				{
 					label: "Reveal one matching pair",
 					disabled: () => this.busy || this.matchedPairs === this.pairCount,
-					run: () => {
-						const cards = Array.from(
-							this.querySelectorAll<TpFlipCard>("tp-flip-card"),
-						);
-						const first =
-							this.selectedCards[0] ??
-							cards.find((c) => c.dataset.matched !== "true");
-						if (!first) return;
-						const second = cards.find(
-							(c) => c !== first && c.dataset.pair === first.dataset.pair,
-						);
-						if (!first.flipped) first.flip();
-						if (second && !second.flipped) second.flip();
-					},
+					run: () => this.revealPair(),
 				},
 			],
 		});
@@ -429,6 +417,30 @@ export class TpMemory extends TpBase {
 		error.className = "tp-memory-error";
 		error.textContent = `Error: ${message}`;
 		this.replaceChildren(error);
+	}
+
+	/** Opens or closes the game assistance menu. */
+	toggleHelp(): void {
+		toggleGameHelp(this);
+	}
+
+	/** Opens the rules of this game in its drawer. */
+	showRules(): void {
+		showGameRules(this);
+	}
+
+	/** Reveals one unmatched pair unless a pair is already being resolved or the game is complete. */
+	revealPair(): void {
+		if (this.busy || this.matchedPairs === this.pairCount) return;
+		const cards = Array.from(this.querySelectorAll<TpFlipCard>("tp-flip-card"));
+		const first =
+			this.selectedCards[0] ?? cards.find((c) => c.dataset.matched !== "true");
+		if (!first) return;
+		const second = cards.find(
+			(c) => c !== first && c.dataset.pair === first.dataset.pair,
+		);
+		if (!first.flipped) first.flip();
+		if (second && !second.flipped) second.flip();
 	}
 }
 

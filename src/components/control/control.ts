@@ -102,6 +102,8 @@ const controllers = [
  * </tp-box>
  */
 export class TpControl extends TpBase {
+	private toggleMenuAction: () => void | Promise<void> = () => {};
+
 	private static nextId = 0;
 	private toolbar: HTMLElement | null = null;
 	private trigger: HTMLElement | null = null;
@@ -183,11 +185,14 @@ export class TpControl extends TpBase {
 			document.createElement("tp-divider"),
 			this.choices,
 		);
-		this.trigger.addEventListener("click", () => {
+		this.toggleMenuAction = () => {
 			if (!this.dropdown) return;
 			this.dropdown.open = !this.dropdown.open;
 			if (this.dropdown.open)
 				this.all?.querySelector<HTMLInputElement>("input")?.focus();
+		};
+		this.trigger.addEventListener("click", () => {
+			void this.toggleMenu();
 		});
 		this.dropdown.addEventListener("tp-dropdown-toggle", (event) => {
 			if (event.target !== this.dropdown) return;
@@ -289,6 +294,16 @@ export class TpControl extends TpBase {
 		this.choices.value = controllers
 			.flatMap((c, i) => (selected.has(c.name) ? [String(i + 1)] : []))
 			.join(",");
+	}
+
+	/** Opens or closes the controller selection menu and focuses its first choice. */
+	async toggleMenu(): Promise<void> {
+		await this.toggleMenuAction();
+	}
+
+	/** Selects a comma-separated list of controller names and emits tp-control-change. An empty string hides all controllers. */
+	selectControllers(value: string): void {
+		if (!this.hasAttribute("disabled")) this.choose(value);
 	}
 }
 if (!customElements.get("tp-control"))

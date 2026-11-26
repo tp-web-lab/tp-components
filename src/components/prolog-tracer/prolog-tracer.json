@@ -1,0 +1,183 @@
+{
+  "tagname": "tp-prolog-tracer",
+  "classname": "TpPrologTracer",
+  "superclass": "TpBase",
+  "description": "Records and replays Prolog execution with the explored resolution tree and backtracking.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-prolog-tracer src=\"/docs/components/prolog-tracer/examples/family.pl\" query=\"ancestor(ann, Who).\"></tp-prolog-tracer>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "filename",
+      "description": "Display filename override; defaults to the source basename or program.pl.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "query",
+      "description": "Prolog goal whose resolution is recorded.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "src",
+      "description": "Prolog source URL; loaded without executing the program.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "trace",
+      "description": "Complete JSON recording URL; takes precedence over src and inline source without executing Prolog.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "value",
+      "description": "Prolog source used when src and trace are absent.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "firstStep(): void",
+      "inherited": false,
+      "description": "Restores the first displayed step."
+    },
+    {
+      "name": "getCode(): string",
+      "inherited": false,
+      "description": "Returns the complete versioned JSON recording as a string."
+    },
+    {
+      "name": "goTo(index: number): void",
+      "inherited": false,
+      "description": "Displays a zero-based event index; -1 restores the query root."
+    },
+    {
+      "name": "lastStep(): void",
+      "inherited": false,
+      "description": "Displays the final recorded step."
+    },
+    {
+      "name": "loadTrace(): void",
+      "inherited": false,
+      "description": "Opens the saved trace file chooser without starting the language engine."
+    },
+    {
+      "name": "nextStep(): void",
+      "inherited": false,
+      "description": "Displays the following step."
+    },
+    {
+      "name": "previousStep(): void",
+      "inherited": false,
+      "description": "Displays the preceding step."
+    },
+    {
+      "name": "record(): void",
+      "inherited": false,
+      "description": "Records the current editor source in a fresh Prolog Worker."
+    },
+    {
+      "name": "refresh(): Promise<void>",
+      "inherited": false,
+      "description": "Reloads the trace or source according to attribute precedence."
+    },
+    {
+      "name": "saveAs(): Promise<void>",
+      "inherited": false,
+      "description": "Opens Save as for the complete recording, including its original source."
+    },
+    {
+      "name": "stop(): void",
+      "inherited": false,
+      "description": "Terminates the current recording Worker."
+    },
+    {
+      "name": "toggleJson(): void",
+      "inherited": false,
+      "description": "Expands or collapses the trace JSON panel."
+    },
+    {
+      "name": "toggleSource(): void",
+      "inherited": false,
+      "description": "Shows or hides the Prolog editor without changing the recording."
+    }
+  ],
+  "events": [],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-color",
+      "summary": "Brand color preset controller scoped to the containing element."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-textfield",
+      "summary": "Single-line and automatically growing multiline text field."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
+    },
+    {
+      "name": "tp-toolbar",
+      "summary": "Sticky toolbar with start / center / end sections,"
+    }
+  ],
+  "credits": [
+    {
+      "name": "SWI-Prolog",
+      "url": "https://www.swi-prolog.org/",
+      "summary": "Native debugger interception through the pinned swipl-wasm runtime."
+    }
+  ],
+  "userHelp": {
+    "displayName": "Prolog tracer",
+    "introduction": "The custom `<tp-prolog-tracer>` element records and replays Prolog execution with the explored resolution tree and backtracking.",
+    "interactions": "#### Mouse interactions\n\n| Action | Result |\n| --- | --- |\n| :tp-icon:{name=\"code\" size=\"2em\"} Edit source | Show or hide the program editor. |\n| :tp-icon:{name=\"file-import\" size=\"2em\"} Load trace | Open a saved Prolog JSON recording without executing it. |\n| :tp-icon:{name=\"file-upload\" size=\"2em\"} Save trace | Save the complete recording with a filename of your choice. |\n| :tp-icon:{name=\"play\" size=\"2em\"} Record resolution | Record the current program and query in a fresh engine. |\n| :tp-icon:{name=\"stop\" size=\"2em\"} Stop recording | Terminate the recording Worker. |\n| :tp-icon:{name=\"chevron-left-first\" size=\"2em\"} First step | Return to the query root. |\n| :tp-icon:{name=\"chevron-left\" size=\"2em\"} Previous step | Restore the preceding event and tree. |\n| :tp-icon:{name=\"chevron-right\" size=\"2em\"} Next step | Reveal the next debugger event. |\n| :tp-icon:{name=\"chevron-right-last\" size=\"2em\"} Last step | Show the complete explored tree and solutions. |\n| <!-- button --> Trace JSON | Expand or collapse the complete JSON recording. |\n| Select a tree node | Return to the event that created this attempt. |\n| Scroll the tree | Explore branches outside the visible area. |\n| :tp-icon:{name=\"palette-swatch\" size=\"2em\"} Color | Change the brand color. |\n| :tp-icon:{name=\"theme-light-dark\" size=\"2em\"} Theme | Change the theme. |\n| :tp-icon:{name=\"fullscreen\" size=\"2em\"} Fullscreen | Enter or leave fullscreen. |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>Return</kbd> or <kbd>Shift</kbd>+<kbd>Return</kbd> in Query | Record the current program and query. |\n| <kbd>Return</kbd> or <kbd>Space</kbd> on a tree node | Return to that attempt's creation event. |\n| <kbd>Tab</kbd> | Move between controls and tree nodes. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open contextual help for the component under the pointer, falling back to focus; Shift may be needed to type ?. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Open the component viewer. |",
+    "keyboard": []
+  }
+}

@@ -2,6 +2,25 @@
 
 The test suites cover component behavior, shared utilities, the local question-assistance server, documentation generators, browser integrations and accessibility. Run commands from the `tp-components` package directory after installing the workspace dependencies.
 
+## Named public actions
+
+See the [named public actions audit](public-actions-audit.md) for the menu-to-method corrections, execution results and remaining test limitations. `pnpm api:check-methods` checks published descriptions, command branches across component classes and the menu contract of all twelve playgrounds. Functional subcomponents retain ownership of their own commands.
+
+## Optional test feedback for programming questions
+
+On 2026/11/25, the programming questions were verified with an optional **Feedback** filename or path to an external test file. Submission captures the current edited program/project before fetching the tests. The legacy `test` attribute remains supported; the Feedback field takes precedence. Without tests, submission reports “No tests provided.” without claiming correctness.
+
+- **20 focused Vitest tests passed** across interpreter, playground and markup-viewer question adapters, including source snapshots, Feedback precedence and existing cancellation/error behavior.
+- **19 Chromium integration scenarios passed**: failure followed by success after an editor correction for JavaScript, TypeScript, Python, Prolog, Scheme and OCaml in each of the interpreter, playground and viewer questions (18 scenarios), plus a Markdown exercise with a relative Feedback filename.
+- **18 additional Chromium scenarios passed** for the documented **Explicit Feedback file** examples: the six languages in all three question families load the program from an inline script with an explicit Feedback filename, fail with the initial source and pass after correction. Neither `src` nor a `test` attribute is used.
+- TypeScript and Biome checks passed. Introductory examples, their five markup versions, JavaScript API examples and TypeDoc were synchronized. Native markup, example labels and descriptions were checked.
+
+Programming-question Feedback uses only the console; the execution iframe is hidden. Scheme now logs each test name and status, failure details and the final summary, matching the console-based presentation of the other languages. Standalone playgrounds retain their common results table. Python and Prolog test feedback is compact: one line per test plus one suite summary. Python tracebacks remain in the detailed report/engine output; the console keeps the final error message. PlUnit engine output is retained in its log without being duplicated in the console. The Python/Prolog browser checks cover failing and corrected submissions and verify three single-line results plus one summary (excluding the initial runtime-loading notice). All 37 Chromium scenarios pass with console-only question feedback, including Scheme per-test messages; the 20 question adapter tests also pass.
+
+Run the browser regressions with `pnpm exec playwright test --config playwright.playgrounds.config.ts tests/playgrounds/programming-question-feedback.test.ts --project=chromium`. This verification does not claim Firefox or Safari coverage for the new Feedback-file flow.
+
+The six programming languages now share the same deliberate initial error (`x + 1`) in Basic usage and Explicit Feedback file. All suites check `3 → 6`, `0 → 0` and `−2 → −4`. The 36 example scenarios verify **three failures and no passes before correction**, then **three passes and no failures** with `x * 2`; the additional external-Markdown scenario also passes (**37 Chromium scenarios**, 2026/11/25). The five markup variants, API examples and TypeDoc are synchronized.
+
 ## Running the suites
 
 | Command | Scope |
@@ -22,18 +41,86 @@ Install the three Playwright browsers with `pnpm exec playwright install` when t
 
 The `test:quality:*` commands select overlapping parts of the Vitest suite and collect coverage; they do not introduce additional independent tests. Test files under `public/` are sample projects or learner exercise fixtures, executed by the embedded runners. Some deliberately fail for the initial answer, so they must not be collected as library regression tests.
 
+## Tracer stepping in Safari
+
+On 2026/11/24, the four tracers passed the focused checks in **Safari 26.6.2** using SafariDriver, rather than Playwright WebKit.
+
+| Tracer | Recorded steps | Highlight checks | Saved JSON replay and duplicate grouping | Next/Previous buttons |
+| --- | ---: | ---: | --- | --- |
+| JavaScript | 7 | 42 | Passed | Passed |
+| TypeScript | 7 | 42 | Passed | Passed |
+| Python | 10 | 60 | Passed | Passed |
+| Scheme | 14 | 84 | Passed | Passed |
+
+The scenarios evaluate nested arithmetic with Unicode text before the highlighted expressions, and retain the original TypeScript annotations. Each recording is checked forwards and backwards, saved to a JSON file, then loaded with Worker creation blocked. A second load introduces duplicate snapshots to verify grouping. Every highlighted source range and accumulated output is checked; native pointer navigation is also exercised. These focused checks do not constitute a complete language or SICP example audit.
+
+Run `node scripts/check-tracer-visible-steps-safari.mjs` with the documentation server at `BASE_URL` (default `http://127.0.0.1:4386`) and SafariDriver at `SAFARI_DRIVER_URL` (default `http://127.0.0.1:4445`). The script writes recordings, screenshots and its report to `/tmp/tp-tracer-safari/`. The verified result is retained in `config/tracer-visible-steps-safari.json`.
+
+SafariDriver's pointer coordinates required compensation for the inherited 85% page zoom; this adjustment belongs to the test harness and does not alter the components or Safari settings.
+
+## Same-line expressions and OCaml recording
+
+On 2026/11/25, the five “Subexpressions on one line” documentation examples passed in Chrome and Firefox. The checks verify separate source ranges for both additions, actual grouping of unchanged snapshots, and saved JSON replay with Worker creation blocked.
+
+| Tracer | Visible steps | Groups containing unchanged snapshots |
+| --- | ---: | ---: |
+| JavaScript | 7 | 1 |
+| TypeScript | 7 | 1 |
+| Python | 8 | 1 |
+| Scheme | 15 | 1 |
+| OCaml | 11 | 5 |
+
+Run `node scripts/check-tracer-same-line-examples.mjs` with `BROWSER=chrome` or `BROWSER=firefox`. The default documentation server is `http://127.0.0.1:4386`; override it with `BASE_URL`.
+
+The OCaml recorder additionally passed thirteen cases in Chrome and Firefox: the seven executable documentation examples, Unicode source locations, a structure without phrase separators, a bounded infinite loop, syntax errors, explicitly unsupported modules, and typed float arrays/Boolean references. Checks cover recursion depth, shared identities, captured mutable values, source highlights and replay. The same thirteen cases passed against the production build in Chrome. These checks validate the documented synchronous subset, not complete OCaml language compatibility.
+
+Run `node scripts/check-ocaml-tracer-browser.mjs`; use `TRACE_MODULE=/components/ocaml-tracer/ocaml-tracer.js` and the preview server's `BASE_URL` to test a production build. Reports are retained in `config/ocaml-tracer-verification/`. The focused Vitest run for the five tracers and component API generation passed **119 tests**. Documentation checks, TypeScript declarations and the Vite build also passed.
+
+Safari 26.6.2 also passed the focused OCaml recording, 66 source-highlight checks, duplicate grouping and saved JSON replay without a Worker. Next/Previous were exercised with DOM button clicks. Native SafariDriver pointer clicks did not reach the document during this run, so native pointer interaction remains **unverified** for this new component; no component fix is inferred from that automation failure. Reproduce the completed checks with `TRACERS=ocaml SAFARI_NAVIGATION=dom node scripts/check-tracer-visible-steps-safari.mjs`. The report explicitly records this navigation mode.
+
+## Prolog resolution tracer
+
+On 2026/11/25, `tp-prolog-tracer` passed the documented family search, factorial, failure, cut and arithmetic-exception scenarios in Chrome and Firefox using SWI-Prolog 10.1.21 through swipl-wasm 8.3.1. The family query returns bob, cat and dan; factorial returns 24; failure returns no solution; the cut keeps only red. Both browsers passed JSON replay with Worker creation prohibited and identical reconstructed SVG trees. An infinite recursive query stops at 2,000 debugger events and preserves a partial recording, including its terminal exception.
+
+Run `node scripts/check-prolog-tracer-browser.mjs` with `BROWSER=chrome` or `BROWSER=firefox` and a documentation server at `BASE_URL` (default `http://127.0.0.1:4386`). Reports are retained in `config/prolog-tracer-verification/`. Seven focused unit tests cover explored alternatives, reused SWI frame references, malformed recordings, replay precedence, current source/query capture, cancellation and deferred engine loading. TypeScript, documentation checks and the production build pass. The execution scenarios above have not been verified in Safari; its presentation checks are described below.
+
+The 2026/11/25 follow-up verifies numbered source lines and event-by-event highlighting in Chrome and Firefox, including calling subgoals on separate lines of a clause and JSON replay. The `tp-prolog tracer` drawer passes with edited source, an edited query, 75% initial width, simple mode and an unchanged interpreter transcript. Run `node scripts/check-prolog-interpreter-tracer.mjs` with the same browser/server options. The shared drawer controller and Prolog source-line regression run passed 47 tests across seven files; the broader interpreter run also passed 52 tests. These runs overlap and must not be added together.
+
+Presentation checks on 2026/11/25 passed in **Firefox 153.0** and **Safari 26.6.2** against the rebuilt production component, in both light and dark themes. They verify the centered filename, larger native icon/title, brand divider, aligned Source and Solutions headings, light default, and opening/closing the complete Trace JSON with native clicks. The displayed JSON matches `getCode()`. SafariDriver's native pointer coordinates compensate for the inherited page zoom; the component does not modify browser zoom.
+
+Run `BROWSER=firefox node scripts/check-prolog-tracer-presentation.mjs` or `BROWSER=safari node scripts/check-prolog-tracer-presentation.mjs` with a Vite preview server at `BASE_URL` (default `http://127.0.0.1:4409`). Safari uses SafariDriver at `SAFARI_DRIVER_URL` (default `http://127.0.0.1:4445`). Reports are in `config/prolog-tracer-verification/presentation-*.json`. Rebuild before running: an earlier `dist` still contained the previous toolbar and omitted the JSON panel, even though the development sources were updated.
+
+The visualizer represents explored goals and clause attempts from the native debugger, not the full theoretical SLD tree. This verification does not claim support for interactive input, DOM operations or programs overriding the debugger hooks.
+
+## Targeted component imports
+
+`pnpm exec vitest run src/utilities/component-imports.test.ts` checks scoped component discovery, source and production module URLs, deduplication and the absence of startup observers. The prose-editor tests cover HTML exports with cherry-picked imports, shared styles and components stored in templates. Importing the editor does not start the document-wide autoloader; embedded content is imported on insertion or rendering. The explicit `tp-loader` entry point retains its global observation behavior.
+
 ## Checking API documentation
 
 Run these read-only checks after regenerating the component manifests and documentation with `pnpm build` and `pnpm api:sync-docs` when source comments change.
 
 | Command | Scope |
 | --- | --- |
+| `pnpm examples:check-javascript` | All five Javascript API sources reconstruct the canonical introduction using cherry-picked imports, with exact source comparison including blank lines and indentation. |
+| `pnpm examples:check-basic` | All five Basic usage sources match the introductory example through their native conversion, including blank lines and literal code indentation. Native TikZ is checked against the introductory drawing and scale. |
+| `pnpm docs:check-api-examples` | Exact agreement between each introductory HTML example, its class JSDoc, API metadata and generated TypeDoc code, including indentation and blank lines; rejects missing, duplicate or contaminated class examples. |
 | `pnpm api:check-attributes` | Attribute types, defaults, descriptions, source comment conventions and coverage of observed attributes. |
 | `pnpm api:check-methods` | Missing descriptions and descriptions that merely repeat a method name. |
 | `pnpm api:check-css` | Missing CSS property descriptions or defaults and generic placeholder descriptions. |
 | `pnpm api:check-events` | Event descriptions, payload declarations and coverage of directly dispatched events with literal names. |
 | `pnpm api:check-all` | All four checks above, stopping at the first failure. |
 | `pnpm api:check` | All four checks plus source/API consistency, dependency metadata, generated documentation and accessibility report consistency. |
+
+`pnpm examples:check-javascript-browser` parses all five language variants, checks the resulting JavaScript including its line breaks, and executes each reconstruction in Chromium, Firefox and WebKit. It compares inert author DOMs: component upgrades and nested scripts are intentionally not executed. Start the Vite documentation server first; `TP_EXAMPLES_URL` defaults to `http://127.0.0.1:4173`.
+
+`pnpm test:browser:icon-buttons` measures icon and SVG centering and circular button geometry in every component’s introductory example, in light and dark modes, before and after opening its dropdowns and drawers. It also checks all seven button sizes, links, disabled and pressed states, and loading indicators. Run the Vite documentation server first (`TP_EXAMPLES_URL`, default `http://127.0.0.1:4173`). Use `TP_BROWSER=chromium`, `firefox` or `webkit` to restrict the browser, and `TP_COMPONENTS=tree,drawer` to restrict the components. The report is written to `/tmp/tp-icon-button-geometry.json`. Inline loading intentionally places the spinner beside the icon and is excluded from individual-icon centering checks.
+
+The programmed DOM reconstruction and targeted imports are tested with `pnpm exec vitest run scripts/component-javascript-examples.test.ts`. Use `pnpm examples:sync-javascript` after changing an introduction.
+
+Use `pnpm examples:sync-basic` to update only Basic usage in the five languages while retaining complementary examples.
+
+`pnpm docs:api` runs the API, Basic usage and Javascript API checks automatically after generation (also during `pnpm dev` and `pnpm build`). After editing an introduction, run `pnpm api:sync-examples` and regenerate the API. The focused checker regressions run with `node --test scripts/typedoc-examples.test.mjs`. TypeDoc previews preserve the original HTML source instead of serializing it through a template.
 
 These checks catch omissions and placeholders; reviewing behavior against the implementation remains necessary. Dynamically named events and inherited behavior require explicit documentation. The generator regression tests run with `pnpm exec vitest run scripts/component-api.test.ts`.
 
@@ -284,3 +371,265 @@ The final production Lighthouse run contains **three mobile measurements per pag
 | Markup multi-pages | 77 → 83 | 83, 82, 83 | 2.82 → 2.44 s | 4.89 → 4.13 s | 603.8 → 437.4 kB |
 
 **CLS remains 0, and Accessibility, Best Practices and SEO remain 100 in all nine audits.** The representative scores reach the requested 80 threshold for both target pages. Code editor remains close to the threshold: one run scored 77, so these results do not guarantee 80 on every execution or device. Its remaining initial work includes the Markdown renderer and the visible CodeMirror editor. The previous official measurement is retained under `performance80Baseline` in `config/lighthouse-latest-run.json`; the earlier example-loading trace remains separately dated. See the [Lighthouse appendix](lighthouse/index.md) for the regenerated report.
+
+### LaTeX package conversions
+
+The focused conversion fixtures cover `tabularray`, `booktabs`, `enumitem`, `amsthm`/`cleveref`, `siunitx`, `graphicx` and `listings`, including external listing files. Each fixture is rendered with TP LaTeX, converted, and rendered again with the target parser. Checks compare formulas, anchors and links, list markers, table structure and column widths, image transformations, code contents and line-number settings.
+
+Run the automated conversion and converter tests with:
+
+```sh
+pnpm exec vitest run src/utilities/markup-latex-packages.test.ts src/utilities/converter-title.test.ts src/components/markup-converter/markup-converter.test.ts
+```
+
+For the complete browser matrix, start the development server, open `/scripts/fixtures/latex-package-conversions.html` and select **Run all conversions**. This also exercises the real Docutils runtime for reStructuredText. Each result includes the generated source and rendered output for inspection.
+
+Validation on 2026-11-16: **44 focused unit tests**, **12 native-markup regression tests**, and **28 browser conversions** pass (seven fixtures into HTML, Markdown, AsciiDoc and reStructuredText). TypeScript compilation, Biome checks and the production build pass. This checks the supported package subsets and these fixtures; it does not imply support for arbitrary LaTeX packages or identical typography across renderers.
+
+
+#### Conversion into TP LaTeX
+
+The same browser fixture also provides **Run reverse conversions**. It converts each package example through HTML, Markdown, AsciiDoc or reStructuredText and renders the resulting TP LaTeX. Four additional documents are authored directly in the source languages and exercise headings, anchors, formatting, numbered lists, tables, formulas, code and images independently of the LaTeX fixtures.
+
+The reverse checks cover column widths and cell alignment, booktabs horizontal and partial rules, graphicx image transformations and alternative text, links and anchors, list numbering, and listings code content and language. Native LaTeX commands are preferred; custom-element commands retain HTML attributes and structures that the native conversion does not represent.
+
+Validation on 2026-11-16: **32 reverse browser conversions** and the **28 forward browser conversions** pass. The focused conversion, converter and rich-table export suites contain **106 passing tests**, with **12 additional native-markup regression tests** passing. TypeScript and Biome checks pass. Generated LaTeX preserves the tested content and supported presentation; it does not reconstruct the original package declarations or macro definitions from rendered HTML.
+
+
+#### Cross-conversions between HTML, Markdown, AsciiDoc and reStructuredText
+
+Open `/scripts/fixtures/markup-conversion-matrix.html` on the development server and select **Run conversions**. The matrix exercises all **12 directed conversions** between the four languages, with four scenarios per direction:
+
+- Independently authored native documents: headings, anchors, links, numbered lists, tables, inline formulas, code and images.
+- Rich media: formatted text, inline code, quotations, images, audio, video with multiple sources and subtitle tracks.
+- Table layout: caption, column widths, merged cells, horizontal and vertical alignment, rich cell content.
+- Math and code: inline LaTeX and AsciiMath, display math, Python syntax metadata and indentation.
+
+Each converted source is parsed by the target renderer. Checks compare structural elements, references, formatting, numbering, image dimensions, media attributes, table spans and alignment, formulas, code text and language. The browser suite uses the real Docutils runtime. Expand a result to inspect its generated source and rendered output.
+
+The automated subset uses the HTML, Markdown and AsciiDoc parsers:
+
+```sh
+pnpm exec vitest run src/utilities/markup-matrix.test.ts
+```
+
+Validation on 2026-11-16: **48 of 48 browser scenarios** pass, including both directions for every pair of languages. These are focused content and structure checks; they do not assert pixel-identical typography or support for every feature of each language.
+
+#### Native table width conversions
+
+Open `/scripts/fixtures/converter-width-audit.html` and choose **Check width conversions**. Four combinations (fixed lengths, fixed plus automatic, fixed plus weighted shares, and percentage plus rem plus flexible) pass through all five languages as both source and destination. The matrix checks native syntax, retained dimensions, cell content and measured column widths at 800px and 400px. A separate assertion requires the weighted columns to keep a 2:1 ratio and actually shrink. Columns are recalculated after replacement and container resizing.
+
+Focused validation: **127 conversion/table tests** and **16 LaTeX tests** pass. The browser matrix reports **100/100 width conversions**. These checks cover the declared width syntax and the tested layouts; normal HTML minimum-content and table-width constraints still apply.
+
+#### Native RST cell alignment
+
+The fixture `/scripts/fixtures/converter-rst-alignment-audit.html` verifies all nine horizontal/vertical combinations through HTML, Markdown, AsciiDoc and LaTeX and back to native RST. Additional checks cover merged cells, retained widths, rich text line breaks and invalid, duplicate or covered coordinates. **42 browser checks** pass. The focused converter/table suites pass **131 tests**. The native-syntax policy now rejects table fallbacks for the alignment comparison examples.
+
+#### Markup converter presentation
+
+The [native syntax audit](../components/markup-converter/native-syntax-audit.md) covers all **23 examples and 92 conversions** separately from presentation checks. `markup-documentation-native.test.ts` reads the actual documentation sources; `markup-native-policy.js` records the reviewed exceptions. The browser audit includes both reStructuredText source examples and rejects additional HTML-element fallbacks. Its detailed report includes the 115 source views. Validation: **145 conversion/table tests**, **49 LaTeX tests** and **12 serializer tests** pass, together with **46/46** browser presentation comparisons and the native-syntax policy.
+
+The native-syntax follow-up adds headerless Markdown tables, cell-specific Markdown alignment, native AsciiDoc spans/alignment and relative column widths, RST alias targets, and native numbered listings in AsciiDoc/RST/LaTeX. **109 focused conversion/table tests** and **31 AsciiDoc parser tests** pass. The browser fixture additionally checks RST alias destinations and numbered-code round trips through AsciiDoc and LaTeX, including literal text and a starting line number of 20.
+
+Open `/scripts/fixtures/converter-style-audit.html` on the development server and select **Check all documentation examples**. The audit reads the current converter examples, including the source used by the JavaScript example, and renders each through HTML, TP AsciiDoc, TP LaTeX, TP Markdown and TP reStructuredText.
+
+For each example it compares computed styles in both light and dark themes: heading levels, fonts, heights and spacing; table horizontal positions and widths, cell padding, heading backgrounds and alignment; code backgrounds, foregrounds and borders. Explicit local themes remain part of the source. Expand **Computed styles** to inspect the measurements. The report groups the five language outputs into one comparison per example and theme: **23 examples, 230 rendered states, 46 comparisons**.
+
+Native-output regression tests read the actual introductory documentation source and require native AsciiDoc tables and reStructuredText `list-table`, including caption anchors. Captioned LaTeX exports must not introduce `\centering`; the parser produces a semantic table and caption, while an explicit centering declaration supplies a class for the host stylesheet. The focused conversion/table suites pass **118 tests**, and the LaTeX table suites pass **10 tests**. The visual comparison, including horizontal positions, passes **46/46**.
+
+The shared defaults come from `tp-base`. Read-only code listings without their own toolbar inherit the surrounding theme, while explicit code themes remain unchanged. Markdown does not inject fallback table styles. Conversion tests also cover heading levels, reference anchors, table dimensions and literal code inside table cells.
+
+Validation on 2026-11-16: **46/46 presentation comparisons pass**, covering all **230 rendered states**. The focused component/conversion suites pass **132 tests**, with **13 Markdown**, **12 AsciiDoc** and **9 LaTeX** tests passing separately. TypeScript, Biome and production builds pass. These checks cover the listed computed styles and documentation examples, rather than arbitrary documents or every possible CSS property.
+
+
+The theorem fixture also covers `babel` with English text, an `amsthm` definition sharing the theorem counter, forward `cleveref` references and a proof. Regression checks preserve complete sentences and spaces, Definition 1.1 / Theorem 1.2, all formulas and links, and prevent prose becoming inline code. Heading content remains inline rather than acquiring an invalid nested paragraph. Browser validation compares the actual five component renderers, including upright definition text, italic theorem text, normal theorem headings and the proof-ending symbol.
+
+#### Native table cell borders
+
+`src/utilities/markup-borders.test.ts` covers native Markdown/AsciiDoc round trips, generated RST, merged cells, explicit widths, workbook border exports, invalid declarations and nested tables. Together with the four existing converter/table suites, **139 focused tests** pass.
+
+The browser fixture `/scripts/fixtures/converter-border-audit.html` adds **27 checks**: all nine Markdown/AsciiDoc/RST directed conversions in light and dark themes, three unmerged-table cases and six invalid RST option cases. It compares the computed width, style and color of every cell edge. The documentation native-syntax policy no longer allows table fallbacks for the LaTeX partial-rule example.
+
+#### Native headings, figures and numbered code
+
+`src/utilities/markup-structure.test.ts` verifies heading aliases, RST level directives, image captions, captionless figures, numbered fences and literal code whitespace. The focused converter/table suites pass **157 tests** across seven files.
+
+`/scripts/fixtures/converter-structure-audit.html` runs **64 browser checks** across Markdown, AsciiDoc, RST and LaTeX in both directions, using HTML references. It checks heading levels, every alias target, figure captions and image dimensions, and exact numbered-code content and starting numbers. The documentation policy rejects the former heading, alias-span and Markdown figure fallbacks.
+
+### Native list and image conversions
+
+`src/utilities/markup-presentation.test.ts` checks custom markers, nested lists, continuation, explicit spacing, image dimensions and transformations through Markdown and AsciiDoc and back to LaTeX. It also checks invalid options and unchanged ordinary lists. `/scripts/fixtures/converter-presentation-audit.html` runs 48 directed conversions with the real RST engine. The documentation syntax policy now rejects list/image element fallbacks for the enumitem and graphicx comparison examples.
+
+`markup-presentation-next.test.ts` and `/scripts/fixtures/converter-presentation-next-audit.html` cover per-item marker overrides, inline RST images, image origins, transformed images inside native tables, and local listing themes with and without line numbers. The browser matrix checks 96 directed conversions and rejects standard-element fallbacks for these cases.
+
+### Native media, RST literal code and heading levels
+
+`markup-media-rst.test.ts` checks simple and advanced audio/video through Markdown, AsciiDoc and LaTeX in both directions. `/scripts/fixtures/converter-media-rst-audit.html` adds the real RST engine: 56 directed checks cover media attributes, source order, subtitle languages/defaults, literal whitespace, line numbering, local themes and noncontiguous heading levels. The rich-cell export test also checks native media within tables. These checks accompany the existing documentation-wide native-syntax policy and light/dark presentation audit.
+
+### Component viewer button icons
+
+`pnpm docs:check-button-icons` audits all 212 component interaction pages against statically declared icon buttons and their state icons. It reads executable TypeScript rather than JSDoc examples. Multi-page controls use the complete shared document catalog tested by `help-presentation.test.ts`. Dynamic author-supplied icons (icon-button, language flags and picker tiles) are described explicitly rather than replaced with an unrelated fixed symbol.
+
+The Component viewer tests check that Buttons contains declared icon/text commands, excludes gestures and reading instructions, preserves icon libraries, and stays independent of the current Demo. Hidden optional toolbars remain documented; internal commands of functional subcomponents belong to their own help. Text-only buttons carry an explicit button marker in interactions.md. The source audit detects missing static icons; it does not prove every dynamically constructed menu or runtime configuration reachable.
+
+Latest button-doc verification: 212 interaction pages audited, 204 statically declared icon/state occurrences covered, 35 Component viewer/help tests and 3 documentation tests passing. The browser fixture `/scripts/fixtures/component-buttons-audit.html` checks prose-editor, spreadsheet-editor, calculator, theme, word-cloud and latex-multi-pages, including language icon libraries, secondary tools, text-only keys and the absence of invented commands.
+
+## Documentation cover inventory
+
+`pnpm dev` and `pnpm build` automatically refresh the cover badges and update date before starting the development server or building the site. This step collects the test inventory without executing test cases.
+
+Run `pnpm docs:sync-cover` after adding or removing a component, documented example or test. It updates the badges at the bottom of `cover.md` and the date in `yyyy/mm/dd` format using the Europe/Paris time zone.
+
+The component count covers documented components with API metadata. Examples are counted once from their canonical HTML definitions, regardless of the number of markup-language variants. The test count comes from `vitest list` with the normal project configuration: it is a collected-test inventory, not a successful-execution result. This command does not run test cases or collect coverage.
+
+`pnpm docs:check-cover` verifies the inventory without rewriting the cover or requiring a new date every day.
+
+### Markup pivot provenance
+
+The focused `src/utilities/markup-pivot.test.ts` tests distinguish parser-generated decoration from explicitly authored HTML and classes, including literal scripts and comments. Conversion regression tests cover formulas, tables, lists and numbered code blocks.
+
+With the development server running, `node scripts/check-markup-pivot-browser.mjs` checks the real Pyodide/Docutils renderer: generated code/link classes, explicit native classes and raw HTML. Set `TP_EXAMPLES_URL` to use a server other than `http://127.0.0.1:4173`.
+
+
+## SWI-Prolog WASM and PlUnit
+
+The five Prolog components share SWI-Prolog WASM. Their focused unit suite is:
+
+```sh
+pnpm exec vitest run src/components/prolog-playground src/components/prolog-viewer src/components/prolog-notebook src/components/prolog-playground-question src/components/prolog-viewer-question
+```
+
+With the documentation server running, run `node scripts/check-swipl-browser.mjs` and `node scripts/check-swipl-components-browser.mjs`. Set `TP_EXAMPLES_URL` for a server other than `http://127.0.0.1:4173`, and `BROWSER=chromium`, `firefox` or `webkit` to select the browser. By default the tests load the pinned official distribution from the CDN; `SWIPL_DIST` optionally points to a local copy of that distribution for repeatable offline runtime loading.
+
+The runtime checks cover the seven example projects, native modules, CLP(FD), CLP(Q), CLP(R), residual constraints, DOM updates and event handlers, output and exceptions. PlUnit fixtures check successful tests, expected failure, expected exceptions and a deliberately failing suite; legacy TP test directives remain covered. Component checks exercise viewers and playgrounds, iframe growth and shrinkage, both question components, notebook cells and exported HTML notebooks. The notebook fixture loads the documented “Constraints and PlUnit” example itself, checks both integer-pair solutions and all three named PlUnit results, then repeats these checks in the exported HTML.
+
+These checks passed in Chromium, Firefox and WebKit. The CDN path was also exercised in Chromium. PlUnit's deliberately failing fixture prints failure diagnostics as part of the test; the browser script verifies that this result is correctly reported.
+
+
+### Prolog interpreter
+
+`node scripts/check-prolog-browser.mjs` exercises the `tp-prolog` prompt with the real SWI-Prolog runtime: successive solutions, persistent facts, query history, clear/reset, constraints, error recovery, the inference limit, narrow layouts and independent sessions. Use `TP_EXAMPLES_URL`, `BROWSER` and optionally `SWIPL_DIST` as described above. The unit tests in `src/components/prolog` also cover lazy loading, initial-source precedence and closing query state.
+
+
+### Component viewer button legends
+
+`node scripts/check-help-buttons-presentation.mjs` checks the rendered Buttons panel in Firefox; use `BROWSER=safari` for native SafariDriver. `BASE_URL` selects the built documentation server (default `http://127.0.0.1:4409`), and `SAFARI_DRIVER_URL` selects SafariDriver (default port 4445).
+
+On 2026/11/25, Firefox 153.0 and Safari 26.6.2 passed the light and dark checks for Prolog tracer (13 commands), Diff code editor (13 commands) and Code editor (5 commands). The checks require a visible legend, nonempty descriptions, loaded SVG icons and nonzero icon dimensions, including rows initially outside the viewport. Reports are stored in `config/help-buttons-verification/`. Screenshots were also inspected for Prolog tracer in Safari dark mode. This is a focused browser check, not a visual audit of every component or every brand color.
+
+The check exposed and corrected the Prolog tracer Color legend's icon name (`palette-swatch`) and an invalid SVG namespace in the internal icon definitions.
+
+### Named button actions
+
+Button actions are exposed as named methods on their owning component, such as `firstStep()`, `nextStep()`, `toggleJson()`, `undo()` or `saveAs()`. The API of concrete components includes inherited methods; changes to a shared component regenerate the dependent API manifests during development. TypeDoc remains the reference for signatures and parameters.
+
+A control embedded in another component retains its own API: for example, a `tp-color` menu belongs to `tp-color`, and an editor's copy control belongs to `tp-copy-code`. Calling a method does not bypass read-only state, a disabled command or an operation already in progress. File choosers, clipboard operations and fullscreen may still require a browser user gesture.
+
+The regression checks compare trace navigation and JSON/file controls with their buttons, Cryptarithm assistance with its menu commands, and read-only code-editor commands with the restrictions of the keyboard menu. The API generator checks inherited methods and excludes private methods. These checks supplement the existing component tests; they are not an exhaustive proof for every possible sequence of commands.
+
+Verification on 2026/11/25: the 246 interaction pages and the descriptions of 2,008 public method signatures pass their checks. The focused Firefox and Safari checks above also pass after rebuilding. All 83 ProseMirror cases pass when run in separate groups (78 named cases and five parameterized source-resolution cases); the single-process run exceeded the available JavaScript heap, so it is not reported as a successful run. No assertions were removed for the grouped runs.
+
+The editor/graph/notebook selection ran 703 tests. Two outdated export expectations were corrected and their two files rerun successfully (72 tests): headerless Markdown uses a native headerless table rather than a fabricated heading, and LaTeX media use native multimedia commands rather than `wc` wrappers. The Markdown check now also parses the exported table and compares every cell. These results cover the selected suites, not a fresh run of the complete repository test suite.
+
+### Components sidebar ordering
+
+The Components subtree is sorted alphabetically at every depth by `pnpm docs:sync-sidebar`. Both `pnpm dev` and `pnpm build` run this command; the Vite plugin also sorts edits made while the development server is running. Links, parent categories and sections outside Components are preserved. Sorting ignores case and accents.
+
+Use `pnpm docs:check-sidebar` to detect an unsorted sidebar without changing it. Run `node --test scripts/sync-components-sidebar.test.mjs` to verify recursive ordering, unchanged hierarchy, idempotence, check-only behavior, malformed-input protection, the built sidebar and live development edits.
+
+### Native playground test frameworks
+
+The JavaScript and TypeScript playgrounds use Mocha/Chai, Python uses unittest, Prolog uses PlUnit, Scheme uses the SRFI-64 reference implementation and OCaml uses Alcotest 1.10.2. SQL uses JSON expectations to compare SQLite query results. All seven share a semantic results table (suite, case, status, details), separate skipped and expected-failure counts, and a closed Engine output disclosure. Styles come from TP base. OCaml's test runtime is loaded only for Test; Scheme loads its test implementation on demand.
+
+Verification on 2026/11/25: 36 browser checks passed (12 each in Chromium, Firefox and Playwright WebKit). These are WebKit checks, not a native Safari run. Each framework was exercised through its playground with a passing suite, an intentional failure, an empty suite and invalid syntax. Passing fixtures include expected exceptions and skipped cases; Scheme also includes an expected failure. The checks open the engine log and verify asynchronous iframe growth, shrinking after content removal and rendering at a narrower viewport. Three focused unit/component checks passed. TypeScript and Biome checks passed.
+
+```sh
+pnpm exec playwright test --config playwright.playgrounds.config.ts tests/playgrounds/test-frameworks.test.ts
+pnpm exec vitest run src/components/playground/test-results.test.ts src/components/prolog-playground/prolog-playground.test.ts
+```
+
+Additional verification on 2026/11/25: 72 Mocha/Chai and unittest browser checks passed (24 each in Chromium, Firefox and Playwright WebKit). They cover passing and failing suites, skipped tests, native asynchronous execution, unexpected runtime errors, module and library loading failures, fixture errors and empty suites. Mocha timeouts and unittest unexpected successes are also checked. Passing cases exercise unittest subtests and expected failures without double-counting the parent method, opening the engine log, iframe growth/shrinking, a narrower viewport and rerunning after changing the source. The eight Chromium Python cases were rerun successfully after enriching the unittest log. Eight focused unit/component tests, TypeScript and Biome checks passed.
+
+Mocha's errors retain both their message and stack on Firefox as well as Chromium/WebKit. Test libraries still load with anonymous CORS; this is checked on the actual dynamically inserted scripts. Python test runs use the existing shared Pyodide execution queue. The examples and user-help descriptions are synchronized in all five markup variants, and the cover inventory was regenerated.
+
+```sh
+pnpm exec playwright test --config playwright.playgrounds.config.ts tests/playgrounds/mocha-unittest-results.test.ts
+pnpm exec vitest run src/components/playground/test-results.test.ts src/components/javascript-playground/javascript-playground.test.ts src/components/typescript-playground/typescript-playground.test.ts src/components/python-playground/python-playground.test.ts
+```
+
+
+SQL verification on 2026/11/25: 42 browser checks passed (14 each in Chromium, Firefox and Playwright WebKit; not native Safari). They cover explicit and inferred test files, exact column names and value types, ordered rows and unordered rows with duplicate counts, empty SELECT results, multiple statements, expected SQL errors, invalid expectations, setup errors and loading failures. Each case uses a fresh database. Tests verify that modifying data in one case cannot affect the next case and that a stored SQLite database remains unchanged. Passing cases also verify the engine log, iframe growth/shrinking, a narrower viewport and rerunning modified source through the public `test()` method after using the Test button. Seven focused unit/component tests, TypeScript and Biome checks passed. Example descriptions, language labels, native markup and button documentation checks passed.
+
+The SQL query tests documentation example contains eight passing cases and one skipped case. Its source and descriptions are available in all five markup variants.
+
+```sh
+pnpm exec playwright test --config playwright.playgrounds.config.ts tests/playgrounds/sql-test-results.test.ts
+pnpm exec vitest run src/components/sql-playground/sql-test-runner.test.ts src/components/sql-playground/sql-playground.test.ts src/components/playground/test-results.test.ts
+```
+
+
+#### Six language playgrounds in native Safari
+
+Verification on 2026/11/25 with Safari 26.6.2 through SafariDriver uses the actual documentation projects and native test runners: Mocha/Chai, unittest, PlUnit, SRFI-64 and Alcotest. The scenarios are shared with the cross-engine regression fixtures. Every scenario is repeated in light and dark mode; a deliberately failing suite passes its verification only when the common report identifies the failure.
+
+**66/66 functional scenarios passed** in native Safari, plus 18 passing-suite regression checks in Chromium, Firefox and Playwright WebKit. Two shared-reporter unit tests, TypeScript and Biome checks passed. [Detailed Safari measurements](playground-frameworks-safari.json) include every result, theme, elapsed time, height measurements and toolbar rerun.
+
+| Language | Light scenarios | Dark scenarios | Total scenario time |
+| --- | ---: | ---: | ---: |
+| JavaScript | 7 | 7 | 8.123 s |
+| OCaml | 4 | 4 | 6.817 s |
+| Prolog | 4 | 4 | 6.954 s |
+| Python | 7 | 7 | 21.001 s |
+| Scheme | 4 | 4 | 9.223 s |
+| TypeScript | 7 | 7 | 10.285 s |
+
+Times include navigation, loading, assertions and presentation checks; they are not engine-only execution times.
+
+The campaign covers passing and failing assertions, skipped tests and empty suites in all six languages. Prolog, Scheme and OCaml also check syntax errors. JavaScript, TypeScript and Python additionally check execution, module and fixture errors; Mocha checks a timeout, while unittest checks unexpected success. Python and Scheme preserve their expected-failure counts.
+
+The presentation checks cover the four headers, visible borders, nontransparent theme backgrounds, the closed/open Engine output disclosure, live theme changes in both directions, iframe growth and shrinking, a narrower window and a second execution through the toolbar Test click handler. The initial run uses the public `test()` method. These are DOM click-handler checks, not physical pointer delivery tests. Height comparisons use the larger of the body's and document element's scroll heights, since Safari can report them differently at the browser's existing zoom.
+
+Visual review exposed long Python test names and tracebacks pushing the Details column outside the visible report. The shared TP base stylesheet now constrains the table to the report width and wraps long cell content; no framework-specific styling is added. Detailed tracebacks remain complete, so their rows can be tall. Test frames now receive a dedicated marker so shared TP base rules can apply the report palette without changing ordinary program output frames. The marker is removed when leaving the test document. Narrow-window checks assert that the table remains within the iframe width.
+
+**Remaining visual limitation:** twelve passing-suite screenshots were reviewed. At Safari's retained zoom, some still show a white area outside the dark document content, although the report, native iframe and preview container report matching dark background colors. This residual rendering issue is not counted as fixed; functional and computed-style successes do not imply pixel-perfect rendering. No browser zoom preference was changed.
+
+CDN-interruption scenarios are not repeated here because this native Safari harness does not intercept requests; their existing Playwright coverage remains separate. Browser caches were not cleared, so timings are not cold-download benchmarks.
+
+Reproduce with the playground fixture server on port 4198 and SafariDriver on port 4446:
+
+```sh
+pnpm vite --config vite.playwright.config.ts --host 127.0.0.1 --port 4198
+safaridriver -p 4446
+node scripts/check-playground-frameworks-safari.mjs
+```
+
+Run these commands in separate terminals. `BASE_URL`, `SAFARI_DRIVER_URL`, `REPORT_DIR` and `LANGUAGES` (comma-separated) can select the server, driver, output directory and languages; `SCENARIOS` can select comma-separated cases. Measurements and light/dark screenshots are written to `/tmp/playground-frameworks-safari`; the temporary fixture and the harness's own browser session are cleaned up.
+
+#### SQL results in native Safari
+
+Verification on 2026/11/25 with native Safari 26.6.2 through SafariDriver: **26 scenarios passed across the initial campaign and the stored-database rerun**, 13 in light mode and 13 in dark mode. These are actual Safari checks, not Playwright WebKit. They cover the documentation fixture (eight passed cases and one skipped case), inferred test files, changed queries, column and duplicate mismatches, unexpected and expected errors, setup errors, missing source files, invalid JSON, empty suites and invalid expectations. Intentional SQL failures must produce a failed report to pass their verification.
+
+The visual review exposed missing shared reset styles and missing theme propagation in the common report. Reports now load TP's shared typography, table borders, header background and body palette, and inherit their playground's theme and color tokens. Live theme changes update existing reports without executing SQL again. Previously copied CSS tokens are refreshed even when Firefox omits them from a subsequent computed-style enumeration, preventing a stale dark palette after returning to light mode.
+
+Safari checks verify the four table headers, success/failure/skipped rows, closed/open Engine output disclosure, table width, live theme switching and a subsequent call to the public `test()` method. Screenshots were reviewed in both themes. The Test control is activated through its DOM click handler; this does not claim a physical pointer test.
+
+The initial campaign left two stored-database cases blocked: a localStorage value written on a static page disappeared within one second. These original failures remain in the [initial Safari measurements](sql-playground-safari.json). The [independent diagnostic](sql-playground-safari-storage.json) reproduced the loss on both `127.0.0.1` and `localhost`, even with a fresh SafariDriver and a delayed first write. Cookies and session storage remained available; Safari's networking process logged internal database-open errors. This established that the failure also occurred outside TP, without establishing the precise internal browser cause.
+
+**Resolved after restarting Safari with user approval on 2026/11/25.** The independent persistence probe now retains its value. Both stored-database scenarios passed in native Safari 26.6.2: light in **1.960 s**, dark in **1.457 s**, each with eight passing SQL cases and one intentionally skipped case. The **8,192-byte** saved SQLite database remains byte-for-byte unchanged after tests, including a destructive query isolated in its own test database, and survives a full page reload. The unrelated storage sentinel remains unchanged. See the [recovery measurements](sql-playground-safari-storage-recovery.json).
+
+Recovery required restarting the browser, not changing SQL persistence code, substituting a storage mock, deleting browser data or changing Safari preferences. This validates recovery from the observed browser state; it does not establish why that state developed or guarantee it cannot recur. The native check now fails immediately if the independent persistence probe fails, asserts storage isolation and checks persistence after reloading. `SCENARIOS=sqlite` selects the two stored-database checks. The CDN interruption case remains covered by Playwright; it was not repeated in native Safari.
+
+
+After the presentation fix, all 42 SQL checks passed again in Chromium, Firefox and Playwright WebKit, including saved-database isolation and CDN failure. The passing scenario also verifies light → dark → light background restoration, table borders and iframe growth/shrinking. The six other playgrounds' passing-suite checks passed in all three engines (18 checks). Seven focused unit/component tests, TypeScript and Biome checks passed.
+
+To reproduce the native Safari campaign, start the playground fixture server and SafariDriver, then run:
+
+```sh
+pnpm vite --config vite.playwright.config.ts --host 127.0.0.1 --port 4198
+safaridriver -p 4445
+node scripts/check-sql-playground-safari.mjs
+```
+
+Run the three commands in separate terminals. The script writes measurements and screenshots to `/tmp/sql-playground-safari`; `BASE_URL`, `SAFARI_DRIVER_URL` and `REPORT_DIR` can override these locations. It removes its temporary HTML fixture and closes its own automation session.
+
+Browser limitations: Alcotest's TP runner accepts the suite name and test groups and prevents process exit; command-line and Lwt/Async options are not supported. The Scheme adapter uses the reference R7RS exception branch (`#t` for any expected error), preserves LIPS macro labels and replaces file logging with browser reporting. PlUnit result collection targets the pinned SWI-Prolog distribution. Native runtime APIs are not reimplemented as JavaScript assertions.

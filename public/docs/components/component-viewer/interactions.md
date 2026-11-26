@@ -14,6 +14,7 @@
 | Preview | Interact with the component; reflected attribute changes update the controls. |
 | Reset defaults | Restore the documented attribute defaults and restart the preview. |
 | Reload preview | Restart the preview with current settings, including initialization-only attributes. |
+| :tp-icon:{name="code" size="2em"} Show markup source | Show markup source. |
 
 #### Keyboard interactions
 

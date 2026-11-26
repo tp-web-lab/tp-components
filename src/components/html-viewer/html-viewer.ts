@@ -13,6 +13,10 @@
  * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -370,6 +374,9 @@ function isGeneratedViewerAttribute(
 }
 
 function serializeViewerSourceNode(node: ChildNode): string {
+	if (node.nodeType === Node.COMMENT_NODE) {
+		return `<!--${node.textContent ?? ""}-->`;
+	}
 	if (node.nodeType === Node.TEXT_NODE) {
 		return escapeHtml(node.textContent ?? "");
 	}
@@ -433,7 +440,11 @@ function serializeViewerSourceNode(node: ChildNode): string {
 		return `<${openTag}>${node.textContent ?? ""}</${tagName}>`;
 	}
 
-	const children = Array.from(node.childNodes)
+	const children = Array.from(
+		node instanceof HTMLTemplateElement
+			? node.content.childNodes
+			: node.childNodes,
+	)
 		.map((child) => serializeViewerSourceNode(child))
 		.join("");
 
@@ -835,7 +846,13 @@ function readExamples(
 	source: string,
 	context: HtmlViewerContext,
 	loadTpComponents = true,
+	preserveSource = false,
 ): HtmlViewerExample[] {
+	const prepareSource = (value: string): string => {
+		if (preserveSource) return dedent(value);
+		const sanitized = sanitizeViewerSource(value);
+		return loadTpComponents ? preferTpLoaderImport(sanitized) : sanitized;
+	};
 	const parser = new DOMParser();
 	const doc = parser.parseFromString(source, "text/html");
 	const root = doc.body;
@@ -845,9 +862,7 @@ function readExamples(
 	).map((example, index) => ({
 		label:
 			example.getAttribute("label")?.trim() || `Example ${String(index + 1)}`,
-		source: loadTpComponents
-			? preferTpLoaderImport(sanitizeViewerSource(example.innerHTML))
-			: sanitizeViewerSource(example.innerHTML),
+		source: prepareSource(example.innerHTML),
 		context,
 	}));
 
@@ -855,9 +870,7 @@ function readExamples(
 	return [
 		{
 			label: "Example",
-			source: loadTpComponents
-				? preferTpLoaderImport(sanitizeViewerSource(source))
-				: sanitizeViewerSource(source),
+			source: prepareSource(source),
 			context,
 		},
 	];
@@ -872,6 +885,8 @@ function readExamples(
  * @attr {boolean} lite = false - Uses the compact single-example viewer with rendered HTML output.
  * @attr {boolean} no-loader = false - Disables automatic tp-loader injection when the example manages its own imports.
  * @attr {string} src = "" - URL of the HTML file to load into the viewer.
+ * @keyboard {Shift+Enter} Run the current source.
+ * @attr {"default" | "lite" | "simple"} mode = "default" - Viewer presentation: full controls, compact controls, or only source editor and rendered output.
  * @example
  * <tp-html-viewer>
  *   <script type="tp/html">
@@ -937,6 +952,7 @@ export class TpHtmlViewer extends TpMarkupViewer<
 			rawSource,
 			{ baseHref },
 			!this.hasAttribute("no-loader"),
+			this.hasAttribute("preserve-source"),
 		).map((example) => ({
 			...example,
 			source: this.hasAttribute("preserve-source")

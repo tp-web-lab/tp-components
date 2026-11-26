@@ -5,8 +5,8 @@
 | Control or gesture | Result |
 | --- | --- |
 | Using the component | View the drawing and use the available replay and download controls. |
-| Replay | Runs the drawing program again. |
-| Save SVG | Saves the generated drawing as SVG. |
+| <!-- button --> Replay | Runs the drawing program again. |
+| <!-- button --> Save SVG | Saves the generated drawing as SVG. |
 
 #### Keyboard interactions
 

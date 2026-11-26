@@ -135,10 +135,7 @@ export class XYPlotSettings {
 		reset.setAttribute("type", "button");
 		reset.className = "tp-xy-plot-settings-reset";
 		reset.addEventListener("click", () => {
-			clearTimeout(this.timer);
-			this.setFields(this.initialSource);
-			this.apply(this.initialSource);
-			this.report("Original graph restored.");
+			this.reset();
 		});
 		this.status.setAttribute("role", "status");
 		const details = document.createElement("details");
@@ -155,27 +152,21 @@ export class XYPlotSettings {
 		this.container.append(details);
 		details
 			.querySelector('[data-source-action="files"]')
-			?.addEventListener("click", () =>
-				details.querySelector<TpDropdown>("tp-dropdown")?.toggle(),
-			);
+			?.addEventListener("click", () => this.toggleFiles());
 		details
 			.querySelector('[data-source-action="toolbar"]')
 			?.addEventListener("click", () => {
-				this.generated.toolbar = !this.generated.toolbar;
+				this.toggleEditorToolbar();
 			});
 		details
 			.querySelector('[data-source-action="reset"]')
 			?.addEventListener("click", () => {
-				this.generated.setValue(this.currentSource);
+				this.resetSource();
 			});
 		details
 			.querySelector('[data-source-action="play"]')
 			?.addEventListener("click", () => {
-				try {
-					this.applyDefinition(this.generated.getValue());
-				} catch (error) {
-					this.report(`${String(error)} The previous graph is retained.`, true);
-				}
+				this.applySource();
 			});
 		for (const item of details.querySelectorAll<HTMLElement>(
 			"[data-source-file]",
@@ -448,7 +439,8 @@ export class XYPlotSettings {
 		this.setFields(source);
 		this.report("Graph updated.");
 	}
-	private async fileAction(action: "load" | "save" | "save-as"): Promise<void> {
+	/** Loads a validated definition or saves the draft, retaining its current file destination. */
+	async fileAction(action: "load" | "save" | "save-as"): Promise<void> {
 		if (this.fileBusy || this.fileRequest.signal.aborted) return;
 		this.fileBusy = true;
 		for (const item of this.generated
@@ -514,5 +506,32 @@ export class XYPlotSettings {
 		this.fileRequest.abort();
 		clearTimeout(this.timer);
 		this.container.remove();
+	}
+	/** Restores the initially loaded graph. */
+	reset(): void {
+		clearTimeout(this.timer);
+		this.setFields(this.initialSource);
+		this.apply(this.initialSource);
+		this.report("Original graph restored.");
+	}
+	/** Restores the source draft from the displayed graph. */
+	resetSource(): void {
+		this.generated.setValue(this.currentSource);
+	}
+	/** Applies the source draft and retains the preceding graph on failure. */
+	applySource(): void {
+		try {
+			this.applyDefinition(this.generated.getValue());
+		} catch (error) {
+			this.report(`${String(error)} The previous graph is retained.`, true);
+		}
+	}
+	/** Toggles the definition editor's toolbar. */
+	toggleEditorToolbar(): void {
+		this.generated.toolbar = !this.generated.toolbar;
+	}
+	/** Opens or closes the definition files menu. */
+	toggleFiles(): void {
+		this.container.querySelector<TpDropdown>("tp-dropdown")?.toggle();
 	}
 }

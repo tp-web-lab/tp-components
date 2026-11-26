@@ -8,6 +8,10 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-copy-code
+ * @summary Copy-to-clipboard button component.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -18,6 +22,7 @@
 // tp-docgen:dependencies:end
 
 import { TpBase } from "../base/base.js";
+import { TpCopyCode } from "../copy-code/copy-code.js";
 import "../icon-button/icon-button.js";
 import "../icon/icon.js";
 import {
@@ -50,6 +55,7 @@ export type TpNumberfieldLabelPosition = TpChoiceLabelPosition;
  * @attr {boolean} required = false - Requires a value in number mode; ignored by native range inputs.
  * @attr {boolean} readonly = false - Prevents editing; a readonly slider is disabled with a hidden submission mirror.
  * @attr {boolean} disabled = false - Disables editing, clearing and form submission.
+ * @attr {boolean} copy-code = false - Shows a button to copy the current value.
  * @attr {boolean} clearable = false - Shows a button that empties a number or resets a slider to its native midpoint.
  * @event input Emitted when the value changes during editing or clearing.
  * @event change Emitted when the value is committed or cleared.
@@ -65,15 +71,15 @@ export type TpNumberfieldLabelPosition = TpChoiceLabelPosition;
  * @cssprop [--tp-numberfield-background=var(--tp-paper-color)] Field background.
  * @cssprop [--tp-numberfield-border-color=var(--tp-neutral-stroke-soft)] Field border color.
  * @cssprop [--tp-numberfield-focus-color=var(--tp-brand-text-colorful)] Border color and translucent outline tint while focus is inside the numeric control.
+ *  @accessibility Uses a native number or range input with an associated visible label or forwarded aria-label; forwards numeric constraints and native disabled or readonly behavior.
+ * @accessibility The optional clear button is labelled and unavailable when editing is blocked. Decorative markers and the duplicate slider readout are hidden from assistive technology.
+ * @accessibility A readonly range input is disabled for interaction while a hidden mirror preserves its submitted value.
+ * @accessibilityresponsibility Provide a meaningful label or aria-label and explain units, limits and step values where needed; do not use a placeholder as the only label.
  * @example
  * <tp-cluster>
  *   <tp-numberfield label="Quantity" value="3" min="0" max="10" clearable=""></tp-numberfield>
  *   <tp-numberfield label="Level" value="40" min="0" max="100" step="5" range="" clearable=""></tp-numberfield>
  * </tp-cluster>
- *  @accessibility Uses a native number or range input with an associated visible label or forwarded aria-label; forwards numeric constraints and native disabled or readonly behavior.
- * @accessibility The optional clear button is labelled and unavailable when editing is blocked. Decorative markers and the duplicate slider readout are hidden from assistive technology.
- * @accessibility A readonly range input is disabled for interaction while a hidden mirror preserves its submitted value.
- * @accessibilityresponsibility Provide a meaningful label or aria-label and explain units, limits and step values where needed; do not use a placeholder as the only label.
  */
 export class TpNumberfield extends TpBase {
 	/** Native editor, retained when labels and modes change. */
@@ -88,6 +94,19 @@ export class TpNumberfield extends TpBase {
 	private syncing = false;
 
 	/** Attributes synchronized with the native input. */
+	/** Whether copy buttons are shown. */
+	public get copyCode(): boolean {
+		return this.hasAttribute("copy-code");
+	}
+	public set copyCode(value: boolean) {
+		this.toggleAttribute("copy-code", value);
+	}
+
+	/** Return the current value for clipboard actions. */
+	public getValue(): string {
+		return this.value;
+	}
+
 	public static get observedAttributes(): string[] {
 		return [
 			...TpBase.observedAttributes,
@@ -105,6 +124,7 @@ export class TpNumberfield extends TpBase {
 			"required",
 			"readonly",
 			"disabled",
+			"copy-code",
 			"clearable",
 		];
 	}
@@ -254,7 +274,7 @@ export class TpNumberfield extends TpBase {
 		newValue: string | null,
 	): void {
 		if (!this.isConnected || oldValue === newValue) return;
-		if (name === "label") this.render();
+		if (name === "label" || name === "copy-code") this.render();
 		else this.sync();
 	}
 
@@ -299,6 +319,13 @@ export class TpNumberfield extends TpBase {
 		this.submission.type = "hidden";
 		this.submission.setAttribute("data-tp-numberfield-submission", "");
 		wrapper.append(this.field, this.clearButton, suffix, this.submission);
+		if (this.copyCode) {
+			const copy = new TpCopyCode();
+			copy.setAttribute("data-tp-numberfield-copy", "");
+			copy.forElement = this;
+			wrapper.append(copy);
+		}
+
 		if (this.label) {
 			const label = document.createElement("label");
 			label.setAttribute("data-tp-numberfield-label", "");

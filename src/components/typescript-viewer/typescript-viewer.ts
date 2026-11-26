@@ -23,6 +23,8 @@ import { TpTypescriptPlayground } from "../typescript-playground/typescript-play
  * @eventdetail tp-playground-src-load { src: string; project: TpProject }
  * @event tp-playground-repository-load Emitted after a project configured with `repository` has loaded.
  * @eventdetail tp-playground-repository-load { repository: string; project: TpProject }
+ * @keyboard {Shift+Enter} Run the current source.
+ * @attr {"default" | "lite" | "simple"} mode = "default" - Viewer presentation: full controls, compact controls, or only source editor and rendered output.
  * @example
  * <tp-typescript-viewer src="/docs/components/_shared/intro-projects/typescript.json"></tp-typescript-viewer>
  */

@@ -1,5 +1,6 @@
 /** Markdown source conversion shared by browser components and publication builds. */
 import { TpMarkdownParser } from "@tp/tp-markdown/markdown/engine/markdown";
+import { markPivotRawHtml } from "./markup-pivot-authorship.js";
 
 type TpMarkdownParserInstance = InstanceType<typeof TpMarkdownParser>;
 
@@ -11,6 +12,7 @@ interface ProtectedMarkdownSource {
 /** Keeps raw-text HTML elements intact while their parent web component is rendered as Markdown. */
 function protectMarkdownRawTextElements(
 	source: string,
+	pivot = false,
 ): ProtectedMarkdownSource {
 	const lines = source.replace(/\r\n?/g, "\n").split("\n");
 	const blocks: string[] = [];
@@ -58,7 +60,10 @@ function protectMarkdownRawTextElements(
 		restore: (html: string): string =>
 			blocks.reduce(
 				(result, block, index) =>
-					result.replace(`<!--tp-markdown-raw-text-${String(index)}-->`, block),
+					result.replace(
+						`<!--tp-markdown-raw-text-${String(index)}-->`,
+						pivot ? markPivotRawHtml(block) : block,
+					),
 				html,
 			),
 	};
@@ -67,8 +72,9 @@ function protectMarkdownRawTextElements(
 export async function renderProtectedMarkdown(
 	parser: TpMarkdownParserInstance,
 	source: string,
+	pivot = false,
 ): Promise<string> {
-	const protectedSource = protectMarkdownRawTextElements(source);
+	const protectedSource = protectMarkdownRawTextElements(source, pivot);
 	const rendered = protectedSource.restore(
 		await parser.renderAsync(protectedSource.source),
 	);
@@ -88,11 +94,86 @@ export function createTpMarkdownParser(
 	});
 }
 
+/** Keep authored tabindex values while omitting the anchor plugin's generated values. */
+function omitGeneratedHeadingTabindex(parser: TpMarkdownParserInstance): void {
+	const authored = new WeakMap<object, string | null>();
+	parser.md.core.ruler.before(
+		"anchor",
+		"tp_capture_heading_tabindex",
+		(state) => {
+			for (const token of state.tokens) {
+				if (token.type === "heading_open")
+					authored.set(token, token.attrGet("tabindex"));
+			}
+		},
+	);
+	parser.md.core.ruler.after(
+		"anchor",
+		"tp_restore_heading_tabindex",
+		(state) => {
+			for (const token of state.tokens) {
+				if (!authored.has(token)) continue;
+				const value = authored.get(token);
+				if (value != null) token.attrSet("tabindex", value);
+				else {
+					const index = token.attrIndex("tabindex");
+					if (index >= 0) token.attrs?.splice(index, 1);
+				}
+			}
+		},
+	);
+}
+
+/** Omit presentation-only table decorations; protect raw author HTML at token level. */
+function prepareMarkdownPivot(parser: TpMarkdownParserInstance): void {
+	parser.md.core.ruler.disable("tp_native_table_class", true);
+	// Wrap only the actual HTML rules, not HTML tokens emitted by extensions.
+	const inline = (
+		parser.md.inline.ruler as unknown as {
+			__rules__: {
+				name: string;
+				fn: ReturnType<typeof parser.md.inline.ruler.getRules>[number];
+			}[];
+		}
+	).__rules__.find((rule) => rule.name === "html_inline")?.fn;
+	if (inline)
+		parser.md.inline.ruler.at("html_inline", (state, silent) => {
+			const start = state.tokens.length;
+			const matched = inline(state, silent);
+			if (matched && !silent)
+				for (const token of state.tokens.slice(start))
+					token.content = markPivotRawHtml(token.content);
+			return matched;
+		});
+	const block = (
+		parser.md.block.ruler as unknown as {
+			__rules__: {
+				name: string;
+				fn: ReturnType<typeof parser.md.block.ruler.getRules>[number];
+			}[];
+		}
+	).__rules__.find((rule) => rule.name === "html_block")?.fn;
+	if (block)
+		parser.md.block.ruler.at("html_block", (state, start, end, silent) => {
+			const offset = state.tokens.length;
+			const matched = block(state, start, end, silent);
+			if (matched && !silent)
+				for (const token of state.tokens.slice(offset))
+					token.content = markPivotRawHtml(token.content);
+			return matched;
+		});
+}
+
 export async function renderMarkdownToHtml(
 	source: string,
 	path = "/index.md",
+	options: { omitGeneratedHeadingTabindex?: boolean; pivot?: boolean } = {},
 ): Promise<string> {
-	return renderProtectedMarkdown(createTpMarkdownParser(path), source);
+	const parser = createTpMarkdownParser(path);
+	if (options.pivot) prepareMarkdownPivot(parser);
+	if (options.omitGeneratedHeadingTabindex)
+		omitGeneratedHeadingTabindex(parser);
+	return renderProtectedMarkdown(parser, source, options.pivot);
 }
 
 export async function parseMarkdownToTokens(

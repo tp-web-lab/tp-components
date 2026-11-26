@@ -1,4 +1,4 @@
-::::::: tp-markdown-viewer { label="tp-post-it" allow-script }
+::::::: tp-markdown-viewer { label="tp-post-it" allow-script preserve-source }
 :::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-box { style="min-block-size: 20rem" }
@@ -8,7 +8,6 @@ Drag the note by its header to move it over the page. The pin folds and opens it
 Keep examples **simple and meaningful**.
 
 - Show a useful result.
-
 - Try the keyboard controls.
 :::
 ::::

@@ -33,6 +33,10 @@
  * @summary In-memory file system component.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -97,6 +101,7 @@ import {
 	createSqlStorageKey,
 } from "./sql-execution-document.js";
 import { type TpSqlDatabase, TpSqlProject } from "./sql-project.js";
+import { buildSqlTestDocument } from "./sql-test-document.js";
 
 export {
 	type TpSqlDatabase,
@@ -115,6 +120,7 @@ export {
  * @attr {string} repository = "" - Directory containing a SQL playground project to load at initialization.
  * @attr {string} src = "" - JSON project or sql source file to load.
  *
+ * @keyboard {Shift+Enter} Run the current project.
  * @example
  * <tp-box>
  *   <p>The query lists three European capitals. Expand the query in the result panel to see its rows.</p>
@@ -122,6 +128,15 @@ export {
  * </tp-box>
  */
 export class TpSqlPlayground extends TpPlayground<TpSqlProject> {
+	protected override get supportsTestExecution(): boolean {
+		return true;
+	}
+	protected override async buildTestDocument(
+		project: TpSqlProject,
+	): Promise<TpExecutionDocument> {
+		return buildSqlTestDocument(project);
+	}
+
 	protected override createEmptyProject(): TpSqlProject {
 		return new TpSqlProject({
 			name: "SQL project",
@@ -303,7 +318,8 @@ INSERT INTO users (name) VALUES
 		});
 	}
 
-	private resetActiveDatabase(): void {
+	/** Restores the active database to its initial contents. */
+	async resetActiveDatabase(): Promise<void> {
 		const project = this.getProject();
 		const database = project.getActiveDatabase();
 		const key =
@@ -315,7 +331,7 @@ INSERT INTO users (name) VALUES
 		localStorage.removeItem(`${key}:reset`);
 		localStorage.removeItem(`${key}:name`);
 
-		void this.run();
+		await this.run();
 	}
 }
 

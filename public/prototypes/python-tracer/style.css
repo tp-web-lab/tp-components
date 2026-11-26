@@ -1,0 +1,52 @@
+tp-python-tracer {
+display:block;
+.examples,.controls { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; margin-block:1rem; }
+.panels { display:grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,20rem),1fr)); gap:1rem; }
+.frame,.object { border:1px solid var(--tp-brand-stroke-soft, #60858c); border-radius:.4rem; padding:.75rem; margin-block:.5rem; overflow:auto; }
+h3 { margin:0 0 .5rem; font-size:1rem; }
+dl { display:grid; grid-template-columns:max-content 1fr; gap:.3rem .8rem; margin:0; } dd { margin:0; overflow-wrap:anywhere; }
+pre { padding:.75rem; overflow:auto; } [data-role="recorded"] span { display:block; white-space:pre; } [data-role="recorded"] .current, .object:target { background:var(--tp-brand-fill-soft, #e1f2f4); }
+[data-role="recorded"] { white-space:normal; } [data-role="json"] { max-height:24rem; } a { color:var(--tp-brand-text-on-soft, #126570); }
+
+/* Keep the memory graph in two columns even on narrow screens. */
+.panels { grid-template-columns: minmax(16rem, .8fr) minmax(0, 1.8fr); align-items:start; }
+.memory-scroll { overflow-x:auto; }
+[data-role="memory"] { position:relative; display:grid; grid-template-columns: minmax(14rem, .8fr) minmax(17rem, 1fr); gap:5rem; min-width:42rem; padding-right:4rem; }
+[data-role="memory"] h2 { font-size:1.45rem; margin-top:0; }
+[data-role="heap"] { display:flex; flex-direction:column; gap:1rem; }
+.frame dd { display:flex; align-items:center; }
+.frame .reference-port { margin-left:auto; }
+.reference-port { display:inline-block; width:.7rem; height:.7rem; min-width:.7rem; border-radius:50%; background:var(--tp-brand-text-on-soft, #126570); vertical-align:middle; }
+.reference-port:focus-visible { outline:3px solid var(--tp-brand-stroke-soft); outline-offset:4px; }
+.reference-arrows { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+.reference-arrows g path { fill:none; stroke:var(--tp-brand-text-on-soft, #126570); stroke-width:1.8; }
+.reference-arrows marker path { fill:var(--tp-brand-text-on-soft, #126570); }
+.reference-arrows g path.active { stroke-width:3.5; }
+.object.referenced { background:var(--tp-brand-fill-soft, #e1f2f4); }
+.sequence dl { display:flex; gap:0; flex-wrap:wrap; padding-top:1.5rem; position:relative; }
+.sequence dt { width:0; position:relative; left:1.2rem; top:-1.4rem; color:var(--tp-text-muted, #666); font-size:.8rem; }
+.sequence dd { display:flex; align-items:center; justify-content:center; min-width:2.8rem; min-height:2.4rem; border:1px solid var(--tp-neutral-stroke-soft, #aaa); padding:.2rem .5rem; }
+@media(max-width:900px) { .panels { grid-template-columns:1fr; } }
+
+[data-role="memory"] { padding-bottom:3rem; }
+
+[data-role="memory"] { padding-right:var(--reference-gutter, 4rem); }
+[data-role="memory"].highlight-reference .reference-arrows g path:not(.active) { opacity:.18; }
+
+/* Compact memory diagrams; keep code editor and output at their normal size. */
+[data-role="memory"] { grid-template-columns:13rem 18rem; gap:3rem; width:max-content; min-width:0; font-size:.85rem; }
+[data-role="memory"] h2 { font-size:1.15rem; line-height:1.3; margin-bottom:.45rem; }
+[data-role="memory"] section > p { font-size:.8rem; line-height:1.35; margin-block:.4rem .7rem; max-width:18rem; }
+[data-role="memory"] .frame, [data-role="memory"] .object { padding:.45rem .55rem; margin-block:.25rem; border-radius:.3rem; }
+[data-role="memory"] h3 { font-size:.9rem; margin:0 0 .4rem; line-height:1.3; }
+[data-role="memory"] dl { gap:.25rem .6rem; }
+[data-role="memory"] dl, [data-role="memory"] dt, [data-role="memory"] dd { margin:0; line-height:1.35; }
+[data-role="heap"] { gap:1rem; }
+[data-role="memory"] .sequence dl { gap:0; padding-top:1.15rem; }
+[data-role="memory"] .sequence dt { left:.8rem; top:-1.1rem; font-size:.7rem; }
+[data-role="memory"] .sequence dd { min-width:2rem; min-height:1.65rem; padding:.15rem .3rem; }
+[data-role="memory"] .reference-port { width:.55rem; min-width:.55rem; height:.55rem; }
+[data-role="memory"] .object pre { margin:0; padding:.35rem; font-size:.8rem; }
+
+}
+body {margin:0;font-family:system-ui,sans-serif;} main {max-width:100rem;margin:auto;padding:1rem;}

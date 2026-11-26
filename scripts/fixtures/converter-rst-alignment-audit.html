@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Native RST cell alignments</title>
+<button id="run">Check RST alignments</button><p id="status">Ready</p><tp-base id="stage"></tp-base><details><summary>Results</summary><pre id="report"></pre></details>
+<script type="module">
+import '/src/tp-loader.ts';
+import '/src/components/base/base.ts';
+import {htmlToMarkup,markupToHtml} from '/src/utilities/markup-conversion.ts';
+const base=location.href;
+const parse=html=>{const root=document.createElement('div');root.innerHTML=html;return root;};
+document.querySelector('#run').onclick=async()=>{
+ const results=[];
+ for(const horizontal of ['left','center','right'])for(const vertical of ['top','middle','bottom']){
+  const initial=`<table><thead><tr><th>A</th><th>B</th></tr></thead><tbody><tr><td style="text-align:${horizontal};vertical-align:${vertical}">Cell</td><td>Tall<br>cell<br>content</td></tr></tbody></table>`;
+  const rst=htmlToMarkup(initial,'restructuredtext');
+  for(const language of ['html','markdown','asciidoc','latex']){
+   document.querySelector('#status').textContent=`Checking ${horizontal}/${vertical} via ${language}`;
+   try{
+    const original=await markupToHtml(rst,'restructuredtext',base);
+    const converted=await markupToHtml(htmlToMarkup(original,language),language,base);
+    const source=htmlToMarkup(converted,'restructuredtext');
+    const output=await markupToHtml(source,'restructuredtext',base);
+    const root=parse(output),cell=root.querySelector('tbody td');
+    document.querySelector('#stage').replaceChildren(root);
+    const style=getComputedStyle(cell);
+    const pass=source.startsWith('.. list-table::')&&!source.includes('html-table')&&(style.textAlign==='start'?'left':style.textAlign)===horizontal&&style.verticalAlign===vertical&&cell.textContent.trim()==='Cell';
+    results.push({horizontal,vertical,language,pass,source,actual:{horizontal:style.textAlign,vertical:style.verticalAlign}});
+   }catch(error){results.push({horizontal,vertical,language,pass:false,error:String(error)});}
+  }
+ }
+ const merged='<table style="width:360px;table-layout:fixed"><colgroup><col style="width:120px"><col style="width:240px"></colgroup><thead><tr><th>A</th><th>B</th></tr></thead><tbody><tr><td rowspan="2" style="text-align:center;vertical-align:middle">Group</td><td style="text-align:right;vertical-align:bottom">20</td></tr><tr><td><strong>Rich</strong><br>cell</td></tr></tbody></table>';
+ const grid=htmlToMarkup(merged,'restructuredtext');
+ try{
+  const root=parse(await markupToHtml(grid,'restructuredtext',base));
+  const group=root.querySelector('td[rowspan="2"]');
+  results.push({name:'Merged grid, rich line breaks and widths',pass:!grid.includes('html-table')&&group?.style.textAlign==='center'&&group?.style.verticalAlign==='middle'&&root.querySelector('table')?.style.width==='360px'&&root.querySelector('strong')?.textContent==='Rich'&&root.querySelector('strong')?.parentElement?.querySelectorAll('br').length===1,source:grid,html:root.innerHTML});
+ }catch(error){results.push({name:'Merged grid',pass:false,error:String(error),source:grid});}
+ for(const option of ['0,1=left/top','2,1=justify/top','2,1=right/top;2,1=left/top','9,9=right/top','3,1=right/top']){
+  try{
+   const source=grid.replace(/:cell-alignments:.*/,`:cell-alignments: ${option}`);
+   const output=await markupToHtml(source,'restructuredtext',base);
+   results.push({name:'Reject '+option,pass:/system-message|ERROR\/3/.test(output)});
+  }catch(error){results.push({name:'Reject '+option,pass:true,error:String(error)});}
+ }
+ document.querySelector('#report').textContent=JSON.stringify(results,null,2);
+ document.querySelector('#status').textContent=`Complete: ${results.filter(x=>x.pass).length}/${results.length} RST alignment checks passed`;
+};
+</script></html>

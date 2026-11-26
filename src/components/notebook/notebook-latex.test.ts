@@ -115,7 +115,7 @@ it("keeps the programming choice for repeated additions and disables both contro
 	);
 	add?.click();
 	add?.click();
-	expect(notebook.querySelectorAll("tp-python-viewer")).toHaveLength(2);
+	expect(notebook.querySelectorAll("tp-python")).toHaveLength(2);
 	notebook.querySelector<HTMLElement>('[data-action="preview"]')?.click();
 	for (const selector of [
 		'[data-action="add-language"]',
@@ -130,7 +130,7 @@ it("keeps the programming choice for repeated additions and disables both contro
 	notebook.querySelector<HTMLElement>('[data-action="preview"]')?.click();
 	notebook.setAttribute("readonly", "");
 	add?.click();
-	expect(notebook.querySelectorAll("tp-python-viewer")).toHaveLength(2);
+	expect(notebook.querySelectorAll("tp-python")).toHaveLength(2);
 });
 
 it("opens markup and programming editors when entering edit mode", async () => {
@@ -139,18 +139,17 @@ it("opens markup and programming editors when entering edit mode", async () => {
 		'<script type="tp/markdown">Hello</script><script type="tp/python">print(42)</script>';
 	document.body.append(notebook);
 	const check = async () => {
-		await vi.waitFor(() => {
+		await vi.waitFor(() =>
 			expect(
-				notebook
-					.querySelector('[data-role="toggle-source"]')
-					?.getAttribute("aria-pressed"),
-			).toBe("true");
+				notebook.querySelector("tp-markdown-viewer tp-code-editor"),
+			).not.toBeNull(),
+		);
+		await vi.waitFor(() =>
 			expect(
-				notebook
-					.querySelector("[data-tp-programming-viewer-code]")
-					?.getAttribute("aria-pressed"),
-			).toBe("true");
-		});
+				notebook.querySelector<HTMLElement>("tp-python .tp-interpreter-source")
+					?.hidden,
+			).toBe(false),
+		);
 	};
 	await check();
 	notebook.querySelector<HTMLElement>('[data-action="preview"]')?.click();
@@ -166,35 +165,37 @@ it.each(["tp-notebook", "tp-python-notebook"])(
 			'<script type="tp/python">print(1)</script><script type="tp/markdown">Between cells</script><script type="tp/python">print(2)</script>';
 		document.body.append(notebook);
 		await vi.waitFor(() =>
-			expect(notebook.querySelectorAll("tp-python-viewer")).toHaveLength(2),
+			expect(notebook.querySelectorAll("tp-python")).toHaveLength(2),
 		);
 		notebook.querySelector<HTMLElement>('[data-action="preview"]')?.click();
 		await vi.waitFor(() =>
 			expect(
 				notebook.querySelectorAll(
-					"[data-tp-notebook-preview-content] [data-tp-playground-run]",
+					"[data-tp-notebook-preview-content] tp-python",
 				),
 			).toHaveLength(2),
 		);
 		const buttons = Array.from(
 			notebook.querySelectorAll<HTMLElement>(
-				"[data-tp-notebook-preview-content] [data-tp-playground-run]",
+				"[data-tp-notebook-preview-content] tp-python",
 			),
 		);
 		const calls: number[] = [];
 		const spies = buttons.map((button, index) =>
-			vi.spyOn(button, "click").mockImplementation(() => {
-				calls.push(index);
-			}),
+			vi
+				.spyOn(button as HTMLElement & { run(): Promise<void> }, "run")
+				.mockImplementation(async () => {
+					calls.push(index);
+				}),
 		);
 		const run = notebook.querySelector<HTMLElement>('[data-action="run-all"]');
 		expect(run?.hasAttribute("disabled")).toBe(false);
 		run?.click();
-		expect(calls).toEqual([0, 1]);
+		await vi.waitFor(() => expect(calls).toEqual([0, 1]));
 		notebook.setAttribute("readonly", "");
 		expect(run?.hasAttribute("disabled")).toBe(false);
 		run?.click();
-		expect(calls).toEqual([0, 1, 0, 1]);
+		await vi.waitFor(() => expect(calls).toEqual([0, 1, 0, 1]));
 		spies.forEach((spy) => {
 			spy.mockRestore();
 		});

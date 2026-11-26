@@ -1,0 +1,10 @@
+(define (make-counter count)
+  (lambda ()
+    (set! count (+ count 1))
+    count))
+
+(define first (make-counter 0))
+(define second (make-counter 10))
+(first)
+(first)
+(second)

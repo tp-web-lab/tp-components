@@ -43,7 +43,7 @@
  */
 /**
  * @tp-dependency tp-post-it
- * @summary displays a movable floating paper note that folds into a pushpin.
+ * @summary Displays a movable floating paper note that folds into a pushpin.
  */
 /**
  * @tp-dependency tp-stack

@@ -5,18 +5,15 @@
 .Basic usage
 ======
 [tp-prose-editor]
-=====
-[h2]
 ====
-A short editable document
-====
+[discrete]
+== A short editable document
 
 Select a word and use the toolbar to change its *formatting*.
 
 * Write a draft
-
 * Review the content
-=====
+====
 ======
 
 .Javascript API

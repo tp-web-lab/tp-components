@@ -74,14 +74,13 @@ type TextControl = HTMLInputElement | HTMLTextAreaElement;
  * @attr {boolean} required = false - Marks the field as required.
  * @attr {boolean} readonly = false - Prevents value editing.
  * @attr {boolean} disabled = false - Disables the field and its clear button.
+ * @attr {boolean} copy-code = false - Shows a button to copy the current value.
  * @attr {boolean} clearable = false - Shows the clear button; it is disabled when empty, readonly or disabled.
  * @attr {string} icon = "" - Prefix icon name.
  * @attr {string} icon-library = "tp" - Prefix icon library.
  * @event input Emitted when the value changes while editing.
  * @event change Emitted when the edited value is committed.
  * @event tp-clear Emitted after the embedded button clears the value.
- * @example
- * <tp-textfield label="Single line" placeholder="Type some text..." clearable=""></tp-textfield>
  *  @cssprop [--tp-textfield-background=var(--tp-paper-color)] Background of the input control, excluding its label.
  * @cssprop [--tp-textfield-border-color=var(--tp-neutral-stroke-soft)] Border color of the input control when it is not focused.
  * @cssprop [--tp-textfield-focus-color=var(--tp-brand-text-colorful)] Border color and translucent outline tint while focus is inside the control.
@@ -93,6 +92,8 @@ type TextControl = HTMLInputElement | HTMLTextAreaElement;
  * @cssprop [--tp-textfield-radius=var(--tp-border-radius-sm)] Corner radius of the input control.
  * @cssprop [--tp-textfield-required-color=var(--tp-danger-text-colorful)] Color of the asterisk marking a required field.
  * @cssprop [--tp-textfield-value-font-weight=400] Font weight of the displayed input value.
+ * @example
+ * <tp-textfield label="Single line" placeholder="Type some text..." clearable=""></tp-textfield>
  */
 export class TpTextfield extends TpBase {
 	private static readonly textfieldStyleId = "tp-textfield-styles";
@@ -102,6 +103,14 @@ export class TpTextfield extends TpBase {
 	private resizeFrame: number | null = null;
 	private prefixIcon: HTMLElement | null = null;
 	private clearButton: HTMLElement | null = null;
+
+	/** Whether copy buttons are shown. */
+	public get copyCode(): boolean {
+		return this.hasAttribute("copy-code");
+	}
+	public set copyCode(value: boolean) {
+		this.toggleAttribute("copy-code", value);
+	}
 
 	public static get observedAttributes(): string[] {
 		return [
@@ -118,6 +127,7 @@ export class TpTextfield extends TpBase {
 			"required",
 			"readonly",
 			"disabled",
+			"copy-code",
 			"clearable",
 			"icon",
 			"icon-library",
@@ -296,7 +306,8 @@ export class TpTextfield extends TpBase {
 		newValue: string | null,
 	): void {
 		if (oldValue === newValue || !this.isConnected) return;
-		if (name === "multiline" || name === "label") this.render();
+		if (name === "multiline" || name === "label" || name === "copy-code")
+			this.render();
 		else this.sync();
 	}
 
@@ -354,7 +365,7 @@ export class TpTextfield extends TpBase {
 		typeMarker.setAttribute("size", "1.25em");
 		typeMarker.setAttribute("aria-hidden", "true");
 		wrapper.append(this.prefixIcon, this.field, this.clearButton, typeMarker);
-		if (!this.closest("tp-mathfield")) {
+		if (this.copyCode && !this.closest("tp-mathfield")) {
 			const copyButton = new TpCopyCode();
 			copyButton.setAttribute("data-tp-textfield-copy", "");
 			copyButton.setAttribute("copied-text", "Text copied!");

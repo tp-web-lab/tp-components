@@ -192,7 +192,7 @@ export const exampleRefinements = {
 			description:
 				"Load the constraint-programming project from repository, inspect its files and run its queries.",
 			source:
-				'<tp-prolog-playground repository="/examples/playgrounds/prolog-playground/04-prolog-clpz"></tp-prolog-playground>',
+				'<tp-prolog-playground repository="/examples/playgrounds/prolog-playground/04-prolog-clpfd"></tp-prolog-playground>',
 		},
 	],
 	"prose-editor": [

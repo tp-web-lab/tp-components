@@ -8,8 +8,12 @@
 | Mathfield mark | Open the notation menu; choose latexmath or asciimath. A check identifies the active mode. |
 | Using the component | Use the trailing clear button when available to remove the expression. |
 | Using the component | A required-field marker means an answer is needed. |
-| Using the component | The formula copy button copies the mathematical source. |
-| Using the component | Eye opens or closes the rendered preview; its copy button copies the rendered SVG. |
+| Using the component | When enabled, the formula copy button copies the mathematical source. |
+| Using the component | Eye opens or closes the rendered preview; when enabled, its copy button copies the rendered SVG. |
+| :tp-icon:{name="eye-outline" size="2em"} Show preview | Show preview. |
+| :tp-icon:{name="pencil-off" size="2em"} :tp-icon:{name="pencil" size="2em"} Close visual editor | Close visual editor. |
+| :tp-icon:{name="pencil-off" size="2em"} :tp-icon:{name="pencil" size="2em"} Edit visually | Edit visually. |
+| :tp-icon:{name="copy" size="2em"} Copy code | Copy the associated code. |
 
 #### Keyboard interactions
 

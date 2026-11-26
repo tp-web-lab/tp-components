@@ -13,7 +13,7 @@
  * ]);
  */
 
-import { parseFragment, serializeOuter } from "parse5";
+import { parseFragment } from "parse5";
 import { EXAMPLE_TABS_FENCE } from "./component-example-tabs.mjs";
 import { nativeMarkup } from "./native-markup.mjs";
 
@@ -21,7 +21,7 @@ const indent = (text, size) =>
 	text
 		.split("\n")
 		.map((line) =>
-			line.trim() ? " ".repeat(size) + line.replace(/(?<=\S) $/, "") : "",
+			line ? " ".repeat(size) + line : "",
 		)
 		.join("\n");
 const attr = (node, name) =>
@@ -62,19 +62,25 @@ const fence = (character, text, minimum = 4) => {
 	return character.repeat(length);
 };
 
+// Slice the authored source: HTML serialization changes boolean attributes,
+// entities and the first newline of pre/textarea blocks.
+function originalContent(node, source) {
+	const location = node.sourceCodeLocation;
+	if (!location?.startTag || !location.endTag) throw new Error("Unclosed example wrapper");
+	return source.slice(location.startTag.endOffset, location.endTag.startOffset);
+}
+
 /** Read the editable source, not the wrapper that displays its editor. */
 export function viewerSource(extension, text) {
 	if (extension === "html") {
 		const root = find(
-			parseFragment(text),
+			parseFragment(text, { sourceCodeLocationInfo: true }),
 			(node) => node.tagName === "tp-html-viewer",
 		);
 		if (!root) throw new Error("Missing HTML viewer");
 		const template = children(root).find((node) => node.tagName === "template");
 		return dedent(
-			children(template ?? root)
-				.map(serializeOuter)
-				.join(""),
+			originalContent(template ?? root, text),
 		);
 	}
 	if (extension === "md") {
@@ -100,12 +106,12 @@ export function viewerSource(extension, text) {
 /** Extract named examples while preserving their original language source. */
 export function namedExamples(extension, source) {
 	if (extension === "html") {
-		const nodes = parseFragment(source).childNodes;
+		const nodes = parseFragment(source, { sourceCodeLocationInfo: true }).childNodes;
 		return nodes
 			.filter((node) => attr(node, "role") === "example")
 			.map((node) => ({
 				label: attr(node, "label") ?? "Example",
-				source: dedent(children(node).map(serializeOuter).join("")),
+				source: dedent(originalContent(node, source)),
 			}));
 	}
 	const result = [];
@@ -177,7 +183,7 @@ export function exampleFile(extension, tag, examples) {
 		})
 		.join("\n\n");
 	if (extension === "html")
-		return `<tp-html-viewer label="${tag}" allow-script${fullWindow ? ` style="${frameStyle}"` : ""}>\n  <template>\n${indent(body, 4)}\n  </template>\n</tp-html-viewer>\n`;
+		return `<tp-html-viewer label="${tag}" allow-script preserve-source${fullWindow ? ` style="${frameStyle}"` : ""}>\n  <template>\n${indent(body, 4)}\n  </template>\n</tp-html-viewer>\n`;
 	if (extension === "md") {
 		const script = fence(":", body, 4);
 		const viewer = `${script}:`;
@@ -186,7 +192,7 @@ export function exampleFile(extension, tag, examples) {
 				`${tag}: Markdown examples need shorter nested fences than the ${EXAMPLE_TABS_FENCE.length}-colon language tabs.`,
 			);
 		}
-		return `${viewer} tp-markdown-viewer { label="${tag}" allow-script${fullWindow ? ` style="${frameStyle}"` : ""} }\n${script} script { type="tp/markdown" }\n${body}\n${script}\n${viewer}\n`;
+		return `${viewer} tp-markdown-viewer { label="${tag}" allow-script preserve-source${fullWindow ? ` style="${frameStyle}"` : ""} }\n${script} script { type="tp/markdown" }\n${body}\n${script}\n${viewer}\n`;
 	}
 	if (extension === "adoc") {
 		const script = fence("-", body);

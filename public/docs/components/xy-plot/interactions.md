@@ -4,11 +4,11 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Zoom in (+) / Zoom out (−) | Magnify or widen the coordinate ranges around the graph center, in both the preview and enlarged view. Keep the current animation step. |
-| Save image | Save the current graph view as SVG, PNG or WebP, with its visible axes, grid, animation step and theme colors. |
-| Theme | Choose Light, Dark or Auto for this plot only; the enlarged view shares the same theme. |
+| :tp-icon:{name="plus" library="tp" size="2em"} :tp-icon:{name="minus" library="tp" size="2em"} Zoom in (+) / Zoom out (−) | Magnify or widen the coordinate ranges around the graph center, in both the preview and enlarged view. Keep the current animation step. |
+| :tp-icon:{name="save-image" size="2em"} Save image | Save the current graph view as SVG, PNG or WebP, with its visible axes, grid, animation step and theme colors. |
+| :tp-icon:{name="theme-light-dark" size="2em"} Theme | Choose Light, Dark or Auto for this plot only; the enlarged view shares the same theme. |
 | Code (`</>`) | Replace the curves with Graph definition, or return to the curves, in either view. Draft edits are preserved; Play applies them. Closing zoom restores the previous normal view. |
-| Undo / Redo | Undo or redo an applied definition change (Play, file load, interactive settings or Reset). A new change clears the redo history. View navigation is independent. |
+| :tp-icon:{name="redo" library="tp" size="2em"} :tp-icon:{name="undo" library="tp" size="2em"} Undo / Redo | Undo or redo an applied definition change (Play, file load, interactive settings or Reset). A new change clears the redo history. View navigation is independent. |
 | Drag the graph (mouse or touch) | Move the drawing horizontally and vertically. Center a point of interest before zooming in. |
 | Settings fields | Update the graph and enlarged view; invalid entries retain the last valid graph and show feedback. |
 | Start / Previous / Next / End | Return to zero revealed objects, hide the last revealed object, reveal the next object, or reveal all objects. The counter shows the current step and total. |
@@ -18,6 +18,9 @@
 | Reset | Restore the original graph definition and settings. |
 | Zoom graph (outward arrows) | Open the enlarged graph. |
 | Close zoomed graph (inward arrows) | Close the enlarged graph and return to the preview. |
+| :tp-icon:{name="code" library="tp" size="2em"} Show graph definition | Show graph definition. |
+| :tp-icon:{name="zoom-out" library="tp" size="2em"} Zoom graph | Zoom graph. |
+| :tp-icon:{name="zoom-in" library="tp" size="2em"} Close zoomed graph | Close zoomed graph. |
 
 #### Keyboard interactions
 

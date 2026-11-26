@@ -1,10 +1,11 @@
-<tp-html-viewer label="tp-prolog-viewer-question" allow-script>
+<tp-html-viewer label="tp-prolog-viewer-question" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
-      <tp-prolog-viewer-question open="" src="/docs/components/playground-question/examples/prolog/double.pl" test="/docs/components/playground-question/examples/prolog/double.test.pl">
+      <tp-prolog-viewer-question open="" src="/docs/components/playground-question/examples/prolog/double.pl">
         <dl>
           <dt>Title</dt><dd>Double a number</dd>
           <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Open Code to edit, then submit to run the tests.</dd>
+          <dt>Feedback</dt><dd>/docs/components/playground-question/examples/prolog/double.test.pl</dd>
           <dt>Solution</dt><dd>Use Result is Value * 2.</dd>
         </dl>
       </tp-prolog-viewer-question>
@@ -12,6 +13,7 @@
 
     <div role="example" label="Javascript API">
       <script type="module">
+      import "/components/prolog/prolog.js";
       import "/components/prolog-viewer/prolog-viewer.js";
       import "/components/prolog-viewer-question/prolog-viewer-question.js";
 
@@ -20,7 +22,6 @@
       const element1 = document.createElement("tp-prolog-viewer-question");
       element1.setAttribute("open", "");
       element1.setAttribute("src", "/docs/components/playground-question/examples/prolog/double.pl");
-      element1.setAttribute("test", "/docs/components/playground-question/examples/prolog/double.test.pl");
       element1.append(document.createTextNode("\n  "));
 
       const element2 = document.createElement("dl");
@@ -45,12 +46,21 @@
       element2.append(document.createTextNode("\n    "));
 
       const element7 = document.createElement("dt");
-      element7.append(document.createTextNode("Solution"));
+      element7.append(document.createTextNode("Feedback"));
       element2.append(element7);
 
       const element8 = document.createElement("dd");
-      element8.append(document.createTextNode("Use Result is Value * 2."));
+      element8.append(document.createTextNode("/docs/components/playground-question/examples/prolog/double.test.pl"));
       element2.append(element8);
+      element2.append(document.createTextNode("\n    "));
+
+      const element9 = document.createElement("dt");
+      element9.append(document.createTextNode("Solution"));
+      element2.append(element9);
+
+      const element10 = document.createElement("dd");
+      element10.append(document.createTextNode("Use Result is Value * 2."));
+      element2.append(element10);
       element2.append(document.createTextNode("\n  "));
       element1.append(element2);
       element1.append(document.createTextNode("\n"));
@@ -58,6 +68,20 @@
 
       document.body.append(example);
       </script>
+    </div>
+
+    <div role="example" label="Explicit Feedback file">
+      <tp-prolog-viewer-question open="">
+        <script type="tp/prolog">
+          double(Value, Result) :- Result is Value + 1.
+        </script>
+        <dl>
+          <dt>Title</dt><dd>Double a number</dd>
+          <dt>Prompt</dt><dd>Complete double so it returns twice its argument. Open Code to edit, then submit to run the tests.</dd>
+          <dt>Feedback</dt><dd>/docs/components/playground-question/examples/prolog/double.test.pl</dd>
+          <dt>Solution</dt><dd>Use Result is Value * 2.</dd>
+        </dl>
+      </tp-prolog-viewer-question>
     </div>
   </template>
 </tp-html-viewer>

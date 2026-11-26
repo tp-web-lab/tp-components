@@ -1,4 +1,4 @@
-<tp-html-viewer label="tp-carousel" allow-script>
+<tp-html-viewer label="tp-carousel" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
       <tp-carousel aria-label="Outdoor activities" height="18rem">
@@ -55,6 +55,17 @@
         <img src="/docs/medias/images/canoe.svg" alt="Canoe">
         <img src="/docs/medias/images/basketball.svg" alt="Basketball">
         <img src="/docs/medias/images/walking-shoe.svg" alt="Walking shoe">
+      </tp-carousel>
+    </div>
+
+    <div role="example" label="Automatic scrolling and hover pause">
+      <p>Hover over the carousel to pause the movement. Move the pointer away to resume from the same position.</p>
+      <tp-carousel auto="3000" transition="start-to-end" hide-controls aria-label="TP markup languages" height="3em">
+        <figure><tp-icon name="tp-html-logo" library="tp" size="3em" role="img" aria-label="TP HTML"></tp-icon></figure>
+        <figure><tp-icon name="tp-asciidoc-logo" library="tp" size="3em" role="img" aria-label="TP AsciiDoc"></tp-icon></figure>
+        <figure><tp-icon name="tp-latex-logo" library="tp" size="3em" role="img" aria-label="TP LaTeX"></tp-icon></figure>
+        <figure><tp-icon name="tp-markdown-logo" library="tp" size="3em" role="img" aria-label="TP Markdown"></tp-icon></figure>
+        <figure><tp-icon name="tp-restructuredtext-logo" library="tp" size="3em" role="img" aria-label="TP reStructuredText"></tp-icon></figure>
       </tp-carousel>
     </div>
   </template>

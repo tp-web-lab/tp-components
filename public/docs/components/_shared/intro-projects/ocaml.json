@@ -1,0 +1,16 @@
+{
+  "name": "OCaml functions",
+  "entry": "/main.ml",
+  "files": [
+    {
+      "path": "/index.html",
+      "language": "html",
+      "content": ""
+    },
+    {
+      "path": "/main.ml",
+      "language": "ocaml",
+      "content": "let square x = x * x;;\nList.map square [1; 2; 3];;\nsquare 7;;"
+    }
+  ]
+}

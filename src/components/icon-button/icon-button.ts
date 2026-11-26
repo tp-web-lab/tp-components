@@ -75,6 +75,15 @@ function isIconButtonNativeType(
  * @accessibility Uses a native button or link and hides the decorative icon from the accessible name.
  * @accessibilityresponsibility Set `label` to a concise name that describes the action.
  * @keyboard {Enter / Space} Uses native button activation; links activate with Enter.
+ * @cssprop [--tp-icon-button-border-color=var(--tp-brand-stroke-mid)] Color of the circular border.
+ * @cssprop [--tp-icon-button-focus-ring=var(--tp-brand-stroke-mid)] Color of the outline shown when the button receives keyboard focus.
+ * @cssprop [--tp-icon-button-hover-background=var(--tp-brand-fill-soft)] Background color of the button on hover.
+ * @cssprop [--tp-icon-button-hover-color=var(--tp-brand-text-on-soft)] Foreground color on hover and when pressed.
+ * @cssprop [--tp-icon-button-icon-size=1em] Width and height of the icon inside the button; distinct from the clickable area.
+ * @cssprop [--tp-icon-button-radius=999rem] Corner radius of the clickable button.
+ * @cssprop [--tp-icon-button-size=1.75em] Minimum width and height of the clickable button; size presets also update this value.
+ * @event click Native click event bubbling from the inner button when activated by pointer or keyboard; disabled controls suppress activation. This is not a CustomEvent, so there is no custom detail payload.
+ * @eventdetail click void
  * @example
  * <tp-box data-intro-action="counter" data-allow-script="">
  *   <p>Activate the heart button to add a like.</p>
@@ -82,13 +91,6 @@ function isIconButtonNativeType(
  *   <p data-demo-status="" role="status">Likes: 0</p>
  *   <script src="/docs/components/_shared/introduction-actions.js"></script>
  * </tp-box>
- *  @cssprop [--tp-icon-button-focus-ring=currentColor] Color of the outline shown when the button receives keyboard focus.
- * @cssprop [--tp-icon-button-hover-background=color-mix( in srgb, currentColor 10%, transparent )] Background color of the button on hover.
- * @cssprop [--tp-icon-button-icon-size=1em] Width and height of the icon inside the button; distinct from the clickable area.
- * @cssprop [--tp-icon-button-radius=999rem] Corner radius of the clickable button.
- * @cssprop [--tp-icon-button-size=1.75em] Minimum width and height of the clickable button; size presets also update this value.
- * @event click Native click event bubbling from the inner button when activated by pointer or keyboard; disabled controls suppress activation. This is not a CustomEvent, so there is no custom detail payload.
- * @eventdetail click void
  */
 export class TpIconButton extends TpBase {
 	/**
@@ -531,6 +533,11 @@ export class TpIconButton extends TpBase {
 			this.iconEl.toggleAttribute("flip-v", this.flipV);
 			this.iconEl.toggleAttribute("spin", this.spin);
 		}
+	}
+
+	/** Activates the icon button or follows its link unless disabled or loading. Browser permissions may still require a user gesture. */
+	activate(): void {
+		if (!this.disabled && !this.loading) this.buttonEl?.click();
 	}
 }
 

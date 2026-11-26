@@ -5,6 +5,7 @@
 | Control or gesture | Result |
 | --- | --- |
 | Using the component | Activate the direction button to change the reading direction of the associated content. |
+| :tp-icon:{name="arrow-right" size="2em"} :tp-icon:{name="arrow-left" size="2em"} Direction | Direction. |
 
 #### Keyboard interactions
 

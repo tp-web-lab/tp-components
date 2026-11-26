@@ -5,16 +5,14 @@
 .Basic usage
 ======
 [tp-cover,min-height="16rem",heading="h2"]
-=====
+====
 A short introduction
 
-[h2]
-====
-A heading centered in the cover
-====
+[discrete]
+== A heading centered in the cover
 
 Supporting information stays below.
-=====
+====
 ======
 
 .Javascript API

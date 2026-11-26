@@ -95,3 +95,11 @@ tp-datefield [data-tp-datefield-input] {
 tp-datefield input::-webkit-calendar-picker-indicator { display: none; }
 tp-datefield [data-tp-datefield-clear][hidden] { display: none; }
 tp-datefield[data-disabled] [data-tp-datefield-control] { cursor: not-allowed; opacity: 0.6; }
+
+tp-datefield[copy-code] [data-tp-datefield-control] {
+ grid-template-columns: minmax(0, 1fr) max-content max-content max-content;
+}
+tp-datefield [data-tp-datefield-copy] {
+ position: static; transform: none; margin: 0; grid-column: 4; grid-row: 1;
+ min-inline-size: 1.75rem; min-block-size: 1.75rem;
+}

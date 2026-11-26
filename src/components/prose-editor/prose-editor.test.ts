@@ -57,6 +57,7 @@ async function waitFor(
 
 function getEditor(): HTMLElement & {
 	focus: () => void;
+	toggleToolbar: () => Promise<void>;
 	getHTML: () => string;
 	insertTable: (rows?: number, columns?: number) => boolean;
 	setHTML: (value: string) => void;
@@ -70,6 +71,7 @@ function getEditor(): HTMLElement & {
 
 	return editor as HTMLElement & {
 		focus: () => void;
+		toggleToolbar: () => Promise<void>;
 		getHTML: () => string;
 		insertTable: (rows?: number, columns?: number) => boolean;
 		setHTML: (value: string) => void;
@@ -295,6 +297,138 @@ describe("<tp-prose-editor>", () => {
 		vi.unstubAllGlobals();
 	});
 
+	it("minimizes and restores editing tools without changing the document", async () => {
+		document.body.innerHTML =
+			"<tp-prose-editor><p>Keep this text.</p></tp-prose-editor>";
+		await flush();
+		const editor = getEditor();
+		const toggle = required(
+			editor.querySelector<HTMLElement>("[data-toolbar-toggle]"),
+		);
+		const original = editor.getHTML();
+		toggle.click();
+		expect(editor.hasAttribute("data-toolbar-collapsed")).toBe(true);
+		expect(toggle.getAttribute("aria-expanded")).toBe("false");
+		expect(toggle.getAttribute("label")).toBe("Restore toolbar");
+		expect(editor.querySelector("[contenteditable='true']")).not.toBeNull();
+		toggle.click();
+		expect(editor.hasAttribute("data-toolbar-collapsed")).toBe(false);
+		expect(toggle.getAttribute("aria-expanded")).toBe("true");
+		await editor.toggleToolbar();
+		expect(editor.hasAttribute("data-toolbar-collapsed")).toBe(true);
+		await editor.toggleToolbar();
+		expect(editor.hasAttribute("data-toolbar-collapsed")).toBe(false);
+		expect(editor.getHTML()).toBe(original);
+	});
+	it("offers five formats in each file submenu and includes a LaTeX block", async () => {
+		document.body.innerHTML =
+			"<tp-prose-editor><p>Example</p></tp-prose-editor>";
+		await flush();
+		const editor = getEditor();
+		expect(
+			editor.querySelectorAll(
+				"[data-tp-prose-editor-file-menu] [data-file-action]",
+			),
+		).toHaveLength(10);
+		for (const action of [
+			"load-html",
+			"import-asciidoc",
+			"import-latex",
+			"import-markdown",
+			"import-restructuredtext",
+			"save-html-as",
+			"export-asciidoc",
+			"export-latex",
+			"export-markdown",
+			"export-restructuredtext",
+		])
+			expect(
+				editor.querySelector(`[data-file-action="${action}"]`),
+			).not.toBeNull();
+		editor
+			.querySelector<HTMLElement>('[data-menu-command="insert-markup-latex"]')
+			?.click();
+		await flush();
+		expect(
+			editor.querySelector('tp-code-editor[language="latex"]'),
+		).not.toBeNull();
+		const code = required(
+			editor.querySelector<HTMLElement & { setValue(value: string): void }>(
+				'tp-code-editor[language="latex"]',
+			),
+		);
+		code.setValue("\\textbf{Block bold}");
+		code.dispatchEvent(
+			new CustomEvent("tp-code-editor-input", { bubbles: true }),
+		);
+		await waitFor(() =>
+			editor.getHTML().includes("<strong>Block bold</strong>"),
+		);
+	});
+	it("exports native document formatting in five markup languages", async () => {
+		document.body.innerHTML =
+			"<tp-prose-editor><h2>Heading</h2><p><strong>Bold</strong> and <em>italic</em></p><ul><li>First</li></ul></tp-prose-editor>";
+		await flush();
+		const editor = getEditor() as ReturnType<typeof getEditor> & {
+			getMarkup: (language: string) => Promise<string>;
+		};
+		expect(await editor.getMarkup("html")).toContain("<strong>Bold</strong>");
+		expect(await editor.getMarkup("markdown")).toContain("**Bold**");
+		expect(await editor.getMarkup("asciidoc")).toContain("*Bold*");
+		expect(await editor.getMarkup("restructuredtext")).toContain("**Bold**");
+		const latex = await editor.getMarkup("latex");
+		expect(latex).toContain("\\section*{Heading}");
+		expect(latex).toContain("\\textbf{Bold}");
+		expect(latex).toContain("\\begin{itemize}");
+		const { renderLatexToFragment } = await import("@tp/tp-latex");
+		expect(renderLatexToFragment(latex).textContent).toContain("Bold");
+		expect(renderLatexToFragment(latex).querySelector("h2")?.textContent).toBe(
+			"Heading",
+		);
+	});
+	it("exports document tables as native LaTeX with merged cells", async () => {
+		document.body.innerHTML =
+			'<tp-prose-editor><table><tbody><tr><td colspan="2">Merged</td></tr><tr><td>A</td><td>B</td></tr></tbody></table></tp-prose-editor>';
+		await flush();
+		const editor = getEditor() as ReturnType<typeof getEditor> & {
+			getMarkup: (language: string) => Promise<string>;
+		};
+		const source = await editor.getMarkup("latex");
+		expect(source).toContain("\\begin{tblr}");
+		const { renderLatexToFragment } = await import("@tp/tp-latex");
+		const root = renderLatexToFragment(source);
+		expect(root.querySelector("td")?.colSpan).toBe(2);
+		expect(root.textContent).toContain("Merged");
+	});
+	it("imports LaTeX through the file submenu and preserves bold text", async () => {
+		document.body.innerHTML = "<tp-prose-editor></tp-prose-editor>";
+		await flush();
+		const editor = getEditor();
+		const input = required(
+			editor.querySelector<HTMLInputElement>(
+				"[data-tp-prose-editor-markdown-file]",
+			),
+		);
+		vi.spyOn(input, "click").mockImplementation(() => {});
+		editor
+			.querySelector<HTMLElement>('[data-file-action="import-latex"]')
+			?.click();
+		expect(input.accept).toBe(".tex,.latex");
+		Object.defineProperty(input, "files", {
+			configurable: true,
+			value: [
+				{
+					name: "example.tex",
+					text: async () => "\\section*{Imported}\\textbf{LaTeX bold}",
+				},
+			],
+		});
+		input.dispatchEvent(new Event("change"));
+		await waitFor(() =>
+			editor.getHTML().includes("<strong>LaTeX bold</strong>"),
+		);
+		expect(editor.getHTML()).toContain("Imported");
+	});
 	it("est défini", () => {
 		expect(customElements.get("tp-prose-editor")).toBeDefined();
 	});
@@ -342,6 +476,7 @@ describe("<tp-prose-editor>", () => {
 		for (const command of [
 			"insert-markup-asciidoc",
 			"insert-markup-html",
+			"insert-markup-latex",
 			"insert-markup-markdown",
 			"insert-markup-restructuredtext",
 		]) {
@@ -2419,11 +2554,12 @@ describe("<tp-prose-editor>", () => {
 		expect(close).toHaveBeenCalled();
 	});
 
-	it("sauvegarde les composants tp-* avec le loader", async () => {
+	it("exports TP components with cherry-picked imports", async () => {
 		document.body.innerHTML = "<tp-prose-editor></tp-prose-editor>";
 		await flush();
 
 		const editor = getEditor();
+		vi.spyOn(window, "prompt").mockReturnValue("prose-editor.html");
 		let savedBlob: Blob | undefined;
 		const createURLSpy = vi
 			.spyOn(URL, "createObjectURL")
@@ -2444,9 +2580,10 @@ describe("<tp-prose-editor>", () => {
 			'<tp-fill-blank-question answer="went"><dl><dt>form</dt><dd><input name="blank1"></dd></dl></tp-fill-blank-question>',
 		);
 		editor
-			.querySelector<HTMLElement>('li[data-file-action="save-html"]')
+			.querySelector<HTMLElement>('li[data-file-action="save-html-as"]')
 			?.click();
 
+		await waitFor(() => savedBlob !== undefined);
 		const blob = savedBlob;
 
 		if (blob === undefined) {
@@ -2457,8 +2594,9 @@ describe("<tp-prose-editor>", () => {
 		expect(savedHTML).toContain("<tp-fill-blank-question");
 		expect(savedHTML).toContain('answer="went"');
 		expect(savedHTML).toContain(
-			'<script type="module" src="./tp-loader.js"></script>',
+			'import "./components/fill-blank-question/fill-blank-question.js";',
 		);
+		expect(savedHTML).not.toContain("tp-loader");
 
 		createURLSpy.mockRestore();
 		revokeURLSpy.mockRestore();
@@ -2939,6 +3077,7 @@ describe("<tp-prose-editor>", () => {
 			"insert-markdown-block",
 			"insert-markup-asciidoc",
 			"insert-markup-html",
+			"insert-markup-latex",
 			"insert-markup-markdown",
 			"insert-markup-restructuredtext",
 			"insert-audio",
@@ -3139,4 +3278,27 @@ describe("<tp-prose-editor>", () => {
 		expect(editor.restoreEditorMode()).toBe(true);
 		expect(editor.setHTMLCodeMode(false)).toBe(true);
 	});
+});
+
+it("exports shared styles and deduplicated imports, including inert template content", () => {
+	const editor = document.createElement(
+		"tp-prose-editor",
+	) as unknown as HTMLElement & {
+		createHTMLDocument(): string;
+	};
+	editor.setAttribute(
+		"value",
+		"<p>Plain text</p><tp-callout>One</tp-callout><template><tp-callout>Two</tp-callout><tp-button>Later</tp-button></template>",
+	);
+	const html = editor.createHTMLDocument();
+	expect(html).toContain(
+		'import { ensureTpBaseStyles } from "./components/base/base.js";',
+	);
+	expect(
+		html.match(/import "\.\/components\/callout\/callout\.js";/g),
+	).toHaveLength(1);
+	expect(html).toContain('import "./components/button/button.js";');
+	expect(html).not.toContain("tp-loader");
+	editor.setAttribute("value", "<p>Plain text only</p>");
+	expect(editor.createHTMLDocument()).toContain("ensureTpBaseStyles();");
 });

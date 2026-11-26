@@ -14,12 +14,13 @@ import { TpNotebook } from "../notebook/notebook.js";
  * @summary Combines written explanations and executable Prolog code in an interactive notebook.
  * @tagname tp-prolog-notebook
  * @summary Interactive Prolog notebook with markup and code cells.
+ * @keyboard {Shift+Enter} Reload changed source and execute the current cell query, or render the current markup cell.
  * @example
  * <tp-prolog-notebook>
  *       <script type="tp/markdown">
  *         # Family relations
  *
- *         Select **Run all cells** to execute the program. Use the code button in a cell to edit its source.
+ *         Select **Run all cells** to execute the program. Edit the program directly in each cell; its query is prefilled.
  *       </script>
  *       <script type="tp/prolog" filename="program.pl">
  *         parent(ada, byron).

@@ -1,0 +1,232 @@
+{
+  "tagname": "tp-diff-code-editor",
+  "classname": "TpDiffCodeEditor",
+  "superclass": "TpBase",
+  "description": "Compares and edits two source documents side by side.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-diff-code-editor>\n  <dl>\n    <dt>left</dt>\n    <dd><script type=\"tp/javascript\" filename=\"before.js\">\nconst message = \"Hello\";\nconst count = 3;\nconst prefix = \"Greeting:\";\nconsole.log(prefix, message, count);\nconsole.log(\"Done\");\n    </script></dd>\n    <dt>right</dt>\n    <dd><script type=\"tp/javascript\" filename=\"after.js\">\nconst message = \"Hello world\";\nconst count = 3;\nconst prefix = \"Greeting:\";\nconsole.log(prefix, message);\nconsole.log(\"Done\");\n    </script></dd>\n  </dl>\n</tp-diff-code-editor>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "filename-left",
+      "description": "Displayed and suggested save filename for the left document.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "filename-right",
+      "description": "Displayed and suggested save filename for the right document.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "language",
+      "description": "Language for both documents; otherwise inferred independently from filenames or script types.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "readonly",
+      "description": "Prevents editing and applying differences; saving remains available.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "src-left",
+      "description": "URL of the left source file.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "src-right",
+      "description": "URL of the right source file.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "value-left",
+      "description": "Left source text, used when src-left is absent.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "value-right",
+      "description": "Right source text, used when src-right is absent.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "wrap",
+      "description": "Wraps long lines in both editors.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    }
+  ],
+  "methods": [
+    {
+      "name": "copyDifference(from: TpDiffSide): void",
+      "inherited": false,
+      "description": "Copy the selected differing block from the specified side to the other document."
+    },
+    {
+      "name": "getValue(side: TpDiffSide): string",
+      "inherited": false,
+      "description": "Return the current source, including unsaved edits."
+    },
+    {
+      "name": "nextDifference(): void",
+      "inherited": false,
+      "description": "Select and reveal the next differing block, wrapping at the end."
+    },
+    {
+      "name": "previousDifference(): void",
+      "inherited": false,
+      "description": "Select and reveal the previous differing block, wrapping at the beginning."
+    },
+    {
+      "name": "refresh(): Promise<void>",
+      "inherited": false,
+      "description": "Reload both declared sources and establish new reset originals. Errors are reported visibly and by event."
+    },
+    {
+      "name": "reset(side?: TpDiffSide): void",
+      "inherited": false,
+      "description": "Restore the source loaded by the last refresh, on one side or both."
+    },
+    {
+      "name": "save(side: TpDiffSide): Promise<void>",
+      "inherited": false,
+      "description": "Save one document with a user-selected filename."
+    },
+    {
+      "name": "setValue(side: TpDiffSide, value: string): void",
+      "inherited": false,
+      "description": "Replace one document without changing its reset original."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-diff-code-editor-change",
+      "emitted": true,
+      "description": "Emitted when a document changes.",
+      "detail": "{ side: \"left\" | \"right\"; value: string }"
+    },
+    {
+      "name": "tp-diff-code-editor-error",
+      "emitted": true,
+      "description": "Emitted when loading or saving fails.",
+      "detail": "{ message: string }"
+    },
+    {
+      "name": "tp-diff-code-editor-load",
+      "emitted": true,
+      "description": "Emitted after both sources have loaded.",
+      "detail": "{ left: string; right: string }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-code-editor",
+      "summary": "CodeMirror-based code editor component."
+    },
+    {
+      "name": "tp-color",
+      "summary": "Brand color preset controller scoped to the containing element."
+    },
+    {
+      "name": "tp-divider",
+      "summary": "Visual separator for menus, dropdowns, toolbars, and layouts."
+    },
+    {
+      "name": "tp-fullscreen",
+      "summary": "Fullscreen controller button."
+    },
+    {
+      "name": "tp-icon",
+      "summary": "SVG icon component with inline, URL, and registry sources."
+    },
+    {
+      "name": "tp-icon-button",
+      "summary": "Accessible icon button component."
+    },
+    {
+      "name": "tp-theme",
+      "summary": "Parent-scoped light/dark/auto theme controller with embedded UI."
+    }
+  ],
+  "credits": [
+    {
+      "name": "CodeMirror",
+      "url": "https://codemirror.net/",
+      "summary": "Code editing and language support."
+    },
+    {
+      "name": "Lezer",
+      "url": "https://lezer.codemirror.net/",
+      "summary": "Syntax tree highlighting."
+    }
+  ],
+  "userHelp": {
+    "commands": [
+      {
+        "button": ":tp-icon:{name=\"previous\" size=\"2em\"} Previous difference",
+        "description": "Select and reveal the preceding differing block.",
+        "shortcut": "<kbd>Alt</kbd>+<kbd>↑</kbd>"
+      },
+      {
+        "button": ":tp-icon:{name=\"next\" size=\"2em\"} Next difference",
+        "description": "Select and reveal the next differing block.",
+        "shortcut": "<kbd>Alt</kbd>+<kbd>↓</kbd>"
+      },
+      {
+        "button": "Each editor: :tp-icon:{name=\"file-upload-as\" size=\"2em\"} Save as",
+        "description": "Choose a filename and save that side's current source.",
+        "shortcut": "<kbd>Ctrl</kbd>/<kbd>Cmd</kbd> S"
+      },
+      {
+        "button": "Each editor: :tp-icon:{name=\"keyboard-outline\" size=\"2em\"} Keyboard shortcuts",
+        "description": "Open the shared tp-code-editor command palette.",
+        "shortcut": "<kbd>Ctrl</kbd>/<kbd>Cmd</kbd> <kbd>Shift</kbd> P"
+      }
+    ],
+    "displayName": "Diff code editor",
+    "introduction": "The custom `<tp-diff-code-editor>` element compares and edits two source documents side by side.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result | Shortcut |\n| --- | --- | --- |\n| Editor text | Place the cursor or select text; edit either side unless readonly. | |\n| :tp-icon:{name=\"previous\" size=\"2em\"} Previous difference | Select and reveal the preceding differing block. | <kbd>Alt</kbd>+<kbd>↑</kbd> |\n| :tp-icon:{name=\"next\" size=\"2em\"} Next difference | Select and reveal the next differing block. | <kbd>Alt</kbd>+<kbd>↓</kbd> |\n| :tp-icon:{name=\"arrow-right\" size=\"2em\"} Copy difference left to right | Replace the selected right-hand block with its left-hand version. Disabled in readonly mode. | |\n| :tp-icon:{name=\"arrow-left\" size=\"2em\"} Copy difference right to left | Replace the selected left-hand block with its right-hand version. Disabled in readonly mode. | |\n| :tp-icon:{name=\"refresh\" size=\"2em\"} Reset both documents | Restore both loaded originals. Disabled in readonly mode. | |\n| Each editor: :tp-icon:{name=\"file-upload-as\" size=\"2em\"} Save as | Choose a filename and save that side's current source. | <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> S |\n| Each editor: :tp-icon:{name=\"keyboard-outline\" size=\"2em\"} Keyboard shortcuts | Open the shared tp-code-editor command palette. | <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> <kbd>Shift</kbd> P |\n| Each editor: :tp-icon:{name=\"copy\" size=\"2em\"} Copy code | Copy the entire source on that side. | |\n| Each editor: :tp-icon:{name=\"theme-light-dark\" size=\"2em\"} Theme | Choose that editor's appearance. | |\n| Each editor: :tp-icon:{name=\"fullscreen\" size=\"2em\"} Fullscreen | <kbd>Enter</kbd> or leave fullscreen for that editor. | |\n| :tp-icon:{name=\"palette-swatch\" size=\"2em\"} Color | Change the component's brand color. | |\n| :tp-icon:{name=\"theme-light-dark\" size=\"2em\"} Theme | Choose light, dark or automatic appearance. | |\n| :tp-icon:{name=\"fullscreen\" size=\"2em\"} :tp-icon:{name=\"fullscreen-exit\" size=\"2em\"} Fullscreen | <kbd>Enter</kbd> or leave fullscreen. | |\n| Horizontal scrolling | Read long lines independently on either side when wrapping is disabled. | |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>F1</kbd> | Hide or show the focused editor toolbar (shown initially). |\n| <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>Shift</kbd>+P | Open the focused editor command palette. |\n| <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+S | Save the focused document with a chosen filename. |\n| <kbd>Alt</kbd>+<kbd>Down</kbd> / <kbd>Alt</kbd>+<kbd>Up</kbd> | Select the next / previous differing block. |\n| <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+Z / <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>Shift</kbd>+Z | Undo / redo changes in the focused editor, unless readonly. |\n| <kbd>Arrow keys</kbd>, <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>Page Up</kbd>, <kbd>Page Down</kbd> | Move through the focused document. |\n| <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+A / <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+C | Select all / copy the selected source. |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move focus between controls and the editors. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> on a toolbar button | Activate that button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component. <kbd>Shift</kbd> may be needed to type ?. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy and open its User Help. <kbd>Shift</kbd> may be needed to type ?. |",
+    "keyboard": []
+  }
+}

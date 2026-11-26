@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Native lists and images audit</title><button id="run">Check lists and images</button><p id="status">Ready</p><pre id="summary"></pre><details><summary>Results</summary><pre id="report"></pre></details><div id="stage"></div>
+<script type="module">
+import '/src/tp-loader.ts';
+import {htmlToMarkup,markupToHtml} from '/src/utilities/markup-conversion.ts';
+import {packageExamples} from '/src/utilities/markup-latex-package-fixtures.ts';
+function signature(html) {
+ const root=document.createElement('div');root.innerHTML=html;
+ return {
+ lists:[...root.querySelectorAll('ol,ul')].map(e=>({tag:e.localName,label:e.getAttribute('data-tp-list-label'),start:e.getAttribute('data-tp-list-start'),spacing:e.style.marginBlock.replace(/^0(?:px|pt)$/, '0')})),
+ markers:[...root.querySelectorAll('[data-tp-list-marker]')].map(e=>e.textContent),
+ images:[...root.querySelectorAll('img')].map(e=>({src:e.src,alt:e.alt,width:e.style.width||e.getAttribute('width'),height:e.style.height||e.getAttribute('height'),transform:e.style.transform,clip:e.style.clipPath,fit:e.style.objectFit}))
+ };
+}
+document.querySelector('#run').onclick=async()=>{
+ const results=[];
+ for(const name of ['lists','graphics','scaled-image']) {
+ const original=name==='scaled-image' ? '<img src="/medias/image/canoe.svg" alt="Canoe" width="180" style="transform:scale(0.75) rotate(-30deg);clip-path:inset(4pt 3pt 2pt 1pt)">' : await markupToHtml(packageExamples[name],'latex',location.href),expected=signature(original);
+ for(const first of ['markdown','asciidoc','restructuredtext','latex'])for(const second of ['markdown','asciidoc','restructuredtext','latex']){
+  document.querySelector('#status').textContent=`${name}: ${first} → ${second}`;
+  try{
+   const source=htmlToMarkup(original,first),a=await markupToHtml(source,first,location.href);
+   const code=htmlToMarkup(a,second),html=await markupToHtml(code,second,location.href);
+   const actual=signature(html),pass=JSON.stringify(expected)===JSON.stringify(actual);
+   results.push({name,first,second,pass,expected,actual,source,code,html});
+  }catch(error){results.push({name,first,second,pass:false,error:String(error)});}
+ }
+ }
+ document.querySelector('#report').textContent=JSON.stringify(results,null,2);
+ document.querySelector('#summary').textContent=JSON.stringify(results.filter(x=>!x.pass),null,2);
+ document.querySelector('#status').textContent=`Complete: ${results.filter(x=>x.pass).length}/${results.length} checks passed`;
+};
+</script></html>

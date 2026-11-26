@@ -6,10 +6,19 @@
   "examples": [
     {
       "label": "Example 1",
-      "code": "<tp-animation in=\"fadeIn\" trigger=\"load\" duration=\"800ms\">\n    <tp-box>Animated content</tp-box>\n  </tp-animation>"
+      "code": "<tp-animation in=\"shakeX\" trigger=\"click\" autoplay duration=\"1200ms\" iterations=\"3\">\n  <tp-box>This box shakes three times on load. Click to replay.</tp-box>\n</tp-animation>"
     }
   ],
   "attributes": [
+    {
+      "name": "autoplay",
+      "description": "Plays the entrance on connection while retaining the selected interaction trigger for replay.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
     {
       "name": "delay",
       "description": "Wait before each animation, with an explicit time unit such as 200ms or 0.5s.",
@@ -158,6 +167,11 @@
       "name": "restart(): Promise<void>",
       "inherited": false,
       "description": "Starts the configured entrance animation again from the beginning; returns the same completion promise as playIn()."
+    },
+    {
+      "name": "resume(): void",
+      "inherited": false,
+      "description": "Resumes a paused animation at its current time; does nothing when no paused animation exists."
     }
   ],
   "events": [

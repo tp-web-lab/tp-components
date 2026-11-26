@@ -1,12 +1,9 @@
-:::::: tp-markdown-viewer { label="tp-save-audio" allow-script }
-::::: script { type="tp/markdown" }
+::::: tp-markdown-viewer { label="tp-save-audio" allow-script preserve-source }
+:::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 Listen to the sound of breaking glass, then save the MP3 file.
 
-:::: audio { id="save-audio-example" controls preload="metadata" aria-label="Sound of breaking glass" }
-::: source { src="/docs/medias/audios/glass-break.mp3" type="audio/mpeg" }
-:::
-::::
+![](tp-media-sources){media=audio id="save-audio-example" controls="true" preload="metadata" aria-label="Sound of breaking glass" autoplay="false" loop="false" muted="false" sources='[{"src":"/docs/medias/audios/glass-break.mp3","type":"audio/mpeg"}]'}
 
 ::: tp-save-audio { anchor="#save-audio-example" filename="glass-break" }
 :::
@@ -46,5 +43,5 @@ example.append(element4);
 document.body.append(example);
 :::
 ```
+::::
 :::::
-::::::

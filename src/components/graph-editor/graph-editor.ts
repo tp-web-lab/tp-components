@@ -418,8 +418,6 @@ const ANNOTATION_PALETTE: TpGraphPalette = {
  *
  *
  *
- * @example
- * <tp-graph-editor grid="" grid-size="20" message="Graph message area" src="/docs/components/graph-editor/examples/graph-example.json"></tp-graph-editor>
  *  @event tp-graph-change Emitted after a recorded graph mutation, JSON edit, undo or redo. reason identifies the operation and graph contains the resulting snapshot.
  * @eventdetail tp-graph-change { reason: string; graph: TpGraphDocument }
  * @event tp-graph-error Emitted when loading src or creating/reconnecting an edge fails. operation identifies the failed action; src is included only for load-src.
@@ -432,8 +430,24 @@ const ANNOTATION_PALETTE: TpGraphPalette = {
  * @eventdetail tp-graph-selection-change { id: string | null; ids: string[] }
  * @event tp-graph-simulation-step Emitted after a registered simulator step and its transition animation complete; simulator is its registered name and graph is the resulting snapshot.
  * @eventdetail tp-graph-simulation-step { simulator: string; graph: TpGraphDocument }
+ * @example
+ * <tp-graph-editor grid="" grid-size="20" message="Graph message area" src="/docs/components/graph-editor/examples/graph-example.json"></tp-graph-editor>
  */
 export class TpGraphEditor extends TpBase {
+	private toggleAreaSelectionAction: () => void | Promise<void> = () => {};
+
+	private expandPaletteAction: () => void | Promise<void> = () => {};
+
+	private collapsePaletteAction: () => void | Promise<void> = () => {};
+
+	private toggleJsonAction: () => void | Promise<void> = () => {};
+
+	private toggleEditorToolbarAction: () => void | Promise<void> = () => {};
+
+	private toggleGridAction: () => void | Promise<void> = () => {};
+
+	private openFileAction: () => void | Promise<void> = () => {};
+
 	private static readonly styleId = "tp-graph-editor-styles";
 	private static editorCounter = 0;
 	private graphValue = cloneGraph(DEFAULT_GRAPH);
@@ -1657,7 +1671,8 @@ export class TpGraphEditor extends TpBase {
 		else this.graphCodeEditor.setAttribute("value", source);
 	}
 
-	private syncGraphCode(): void {
+	/** Applies edited graph JSON, or refreshes the JSON from the current graph when unchanged or read-only. */
+	syncGraphCode(): void {
 		if (this.pendingGraphCodeSource !== null && !this.readonly) {
 			this.applyGraphCode(this.pendingGraphCodeSource);
 			return;
@@ -2384,6 +2399,30 @@ export class TpGraphEditor extends TpBase {
 		return start && end ? { start, end } : null;
 	}
 
+	/** Selects the palette shape for subsequent insertions; opens the color menu for comments. */
+	public selectShapeType(type: string): void {
+		if (this.readonly) return;
+		this.activeShapeType = type;
+		if (this.activeShapeType === TP_GRAPH_COMMENT) {
+			const dropdown = this.querySelector<HTMLElement & { toggle: () => void }>(
+				".tp-graph-comment-color-dropdown",
+			);
+			dropdown?.toggle();
+		} else {
+			this.render();
+		}
+	}
+
+	/** Selects the color of subsequently inserted comments, closes the palette and refreshes it. */
+	public selectCommentColor(value: string | undefined): void {
+		if (this.readonly) return;
+		this.commentPaletteColor = graphCommentColor(value);
+		this.querySelector(".tp-graph-comment-color-dropdown")?.removeAttribute(
+			"open",
+		);
+		this.render();
+	}
+
 	private bindEvents(): void {
 		for (const button of this.querySelectorAll<HTMLButtonElement>(
 			"[data-edge-direction]",
@@ -2454,15 +2493,7 @@ export class TpGraphEditor extends TpBase {
 			"[data-shape]",
 		)) {
 			button.addEventListener("click", () => {
-				this.activeShapeType = button.dataset.shape ?? "node";
-				if (this.activeShapeType === TP_GRAPH_COMMENT) {
-					const dropdown = this.querySelector<
-						HTMLElement & { toggle: () => void }
-					>(".tp-graph-comment-color-dropdown");
-					dropdown?.toggle();
-				} else {
-					this.render();
-				}
+				this.selectShapeType(button.dataset.shape ?? "node");
 			});
 			button.addEventListener("dragstart", (event) => {
 				const type = button.dataset.shape;
@@ -2476,24 +2507,21 @@ export class TpGraphEditor extends TpBase {
 			"[data-comment-palette-color]",
 		)) {
 			const chooseColor = (): void => {
-				this.commentPaletteColor = graphCommentColor(
-					item.dataset.commentPaletteColor,
-				);
-				this.querySelector(".tp-graph-comment-color-dropdown")?.removeAttribute(
-					"open",
-				);
-				this.render();
+				this.selectCommentColor(item.dataset.commentPaletteColor);
 			};
 			item.addEventListener("click", chooseColor);
 			item.addEventListener("keydown", (event) => {
 				if (event.key === "Enter" || event.key === " ") chooseColor();
 			});
 		}
+		this.toggleAreaSelectionAction = () => {
+			this.selectionMode = !this.selectionMode;
+			this.render();
+		};
 		this.querySelector('[data-action="select-area"]')?.addEventListener(
 			"click",
 			() => {
-				this.selectionMode = !this.selectionMode;
-				this.render();
+				void this.toggleAreaSelection();
 			},
 		);
 		this.querySelector('[data-action="undo"]')?.addEventListener("click", () =>
@@ -2528,10 +2556,13 @@ export class TpGraphEditor extends TpBase {
 			"click",
 			() => this.zoomOut(),
 		);
+		this.toggleGridAction = () => {
+			this.toggleAttribute("grid");
+		};
 		this.querySelector('[data-action="toggle-grid"]')?.addEventListener(
 			"click",
 			() => {
-				this.toggleAttribute("grid");
+				void this.toggleGrid();
 			},
 		);
 		this.querySelector('[data-action="export"]')?.addEventListener(
@@ -2540,63 +2571,75 @@ export class TpGraphEditor extends TpBase {
 				void this.downloadJson();
 			},
 		);
+		this.expandPaletteAction = () => {
+			const accordion = this.querySelector(".tp-graph-palette-accordion");
+			const count = accordion?.querySelectorAll("dt").length ?? 0;
+			this.paletteOpenIndexes = Array.from(
+				{ length: count },
+				(_, index) => index,
+			).join(" ");
+			if (this.paletteOpenIndexes === "")
+				accordion?.removeAttribute("open-indexes");
+			else accordion?.setAttribute("open-indexes", this.paletteOpenIndexes);
+		};
 		this.querySelector('[data-action="palette-expand"]')?.addEventListener(
 			"click",
 			() => {
-				const accordion = this.querySelector(".tp-graph-palette-accordion");
-				const count = accordion?.querySelectorAll("dt").length ?? 0;
-				this.paletteOpenIndexes = Array.from(
-					{ length: count },
-					(_, index) => index,
-				).join(" ");
-				if (this.paletteOpenIndexes === "")
-					accordion?.removeAttribute("open-indexes");
-				else accordion?.setAttribute("open-indexes", this.paletteOpenIndexes);
+				void this.expandPalette();
 			},
 		);
+		this.collapsePaletteAction = () => {
+			this.paletteOpenIndexes = "";
+			this.querySelector(".tp-graph-palette-accordion")?.removeAttribute(
+				"open-indexes",
+			);
+		};
 		this.querySelector('[data-action="palette-collapse"]')?.addEventListener(
 			"click",
 			() => {
-				this.paletteOpenIndexes = "";
-				this.querySelector(".tp-graph-palette-accordion")?.removeAttribute(
-					"open-indexes",
-				);
+				void this.collapsePalette();
 			},
 		);
+		this.toggleJsonAction = () => {
+			this.graphCodeVisible = !this.graphCodeVisible;
+			const codeSection = this.querySelector<HTMLElement>(
+				":scope > .tp-graph-code",
+			);
+			if (codeSection) codeSection.hidden = !this.graphCodeVisible;
+			this.querySelector('[data-action="toggle-json"]')?.setAttribute(
+				"aria-pressed",
+				String(this.graphCodeVisible),
+			);
+			if (this.graphCodeVisible) {
+				if (this.pendingGraphCodeSource === null) {
+					this.writeGraphCode(this.exportJson());
+					this.graphCodeEditor?.removeAttribute("data-invalid");
+					const status = this.querySelector<HTMLElement>(
+						":scope > .tp-graph-code .tp-graph-code-status",
+					);
+					if (status) status.textContent = "";
+				}
+				this.graphCodeEditor?.focus();
+			}
+		};
 		this.querySelector('[data-action="toggle-json"]')?.addEventListener(
 			"click",
 			() => {
-				this.graphCodeVisible = !this.graphCodeVisible;
-				const codeSection = this.querySelector<HTMLElement>(
-					":scope > .tp-graph-code",
-				);
-				if (codeSection) codeSection.hidden = !this.graphCodeVisible;
-				this.querySelector('[data-action="toggle-json"]')?.setAttribute(
-					"aria-pressed",
-					String(this.graphCodeVisible),
-				);
-				if (this.graphCodeVisible) {
-					if (this.pendingGraphCodeSource === null) {
-						this.writeGraphCode(this.exportJson());
-						this.graphCodeEditor?.removeAttribute("data-invalid");
-						const status = this.querySelector<HTMLElement>(
-							":scope > .tp-graph-code .tp-graph-code-status",
-						);
-						if (status) status.textContent = "";
-					}
-					this.graphCodeEditor?.focus();
-				}
+				void this.toggleJson();
 			},
 		);
+		this.toggleEditorToolbarAction = () => {
+			if (this.graphCodeEditor === null) return;
+			this.graphCodeEditor.toolbar = !this.graphCodeEditor.toolbar;
+			this.querySelector('[data-action="editor-toolbar"]')?.setAttribute(
+				"aria-pressed",
+				String(this.graphCodeEditor.toolbar),
+			);
+		};
 		this.querySelector('[data-action="editor-toolbar"]')?.addEventListener(
 			"click",
 			() => {
-				if (this.graphCodeEditor === null) return;
-				this.graphCodeEditor.toolbar = !this.graphCodeEditor.toolbar;
-				this.querySelector('[data-action="editor-toolbar"]')?.setAttribute(
-					"aria-pressed",
-					String(this.graphCodeEditor.toolbar),
-				);
+				void this.toggleEditorToolbar();
 			},
 		);
 		this.querySelector<HTMLSelectElement>(
@@ -2612,9 +2655,12 @@ export class TpGraphEditor extends TpBase {
 		const importInput = this.querySelector<HTMLInputElement>(
 			'[data-role="import"]',
 		);
+		this.openFileAction = () => importInput?.click();
 		this.querySelector('[data-action="import"]')?.addEventListener(
 			"click",
-			() => importInput?.click(),
+			() => {
+				void this.openFile();
+			},
 		);
 		importInput?.addEventListener("change", () => {
 			const file = importInput.files?.[0];
@@ -3295,7 +3341,8 @@ export class TpGraphEditor extends TpBase {
 		this.classList.remove("is-connecting");
 	}
 
-	private openLabelEditor(id: string): void {
+	/** Opens the label editor for the specified graph object. */
+	openLabelEditor(id: string): void {
 		const foundMeasurement = this.measurement(id);
 		const element =
 			foundMeasurement?.measurement ??
@@ -3359,7 +3406,8 @@ export class TpGraphEditor extends TpBase {
 		input.select();
 	}
 
-	private openTitleEditor(): void {
+	/** Opens the graph title editor. */
+	openTitleEditor(): void {
 		if (this.readonly) return;
 		const workspace = this.querySelector<HTMLElement>(".tp-graph-workspace");
 		if (!workspace) return;
@@ -3389,7 +3437,8 @@ export class TpGraphEditor extends TpBase {
 		input.select();
 	}
 
-	private async downloadJson(): Promise<void> {
+	/** Saves the complete graph as JSON. */
+	async downloadJson(): Promise<void> {
 		const target = await chooseSaveTarget({
 			suggestedName: this.jsonExportFilename(),
 			description: "Graph JSON",
@@ -3530,7 +3579,8 @@ export class TpGraphEditor extends TpBase {
 		this.selectMany(ids);
 	}
 
-	private deleteSelection(): void {
+	/** Deletes the currently selected graph objects. */
+	deleteSelection(): void {
 		const removedIds = new Set(this.selectedIds);
 		this.graphValue.nodes = this.graphValue.nodes.filter(
 			(node) => !removedIds.has(node.id),
@@ -3637,6 +3687,41 @@ export class TpGraphEditor extends TpBase {
 		const parsed = Number(this.getAttribute("grid-size"));
 		const size = Number.isFinite(parsed) && parsed > 0 ? parsed : 20;
 		return Math.round(value / size) * size;
+	}
+
+	/** Expands all shape palette sections. */
+	async expandPalette(): Promise<void> {
+		await this.expandPaletteAction();
+	}
+
+	/** Collapses all shape palette sections. */
+	async collapsePalette(): Promise<void> {
+		await this.collapsePaletteAction();
+	}
+
+	/** Shows or hides the graph JSON panel. */
+	async toggleJson(): Promise<void> {
+		await this.toggleJsonAction();
+	}
+
+	/** Shows or hides the JSON editor toolbar. */
+	async toggleEditorToolbar(): Promise<void> {
+		await this.toggleEditorToolbarAction();
+	}
+
+	/** Shows or hides the graph grid. */
+	async toggleGrid(): Promise<void> {
+		await this.toggleGridAction();
+	}
+
+	/** Opens the graph JSON file chooser. */
+	async openFile(): Promise<void> {
+		await this.openFileAction();
+	}
+
+	/** Enables or disables rectangular graph selection. */
+	async toggleAreaSelection(): Promise<void> {
+		await this.toggleAreaSelectionAction();
 	}
 }
 

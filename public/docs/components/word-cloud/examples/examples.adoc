@@ -9,23 +9,14 @@
 . {blank}
 +
 [tp-icon,name="logo-tp",aria-label="tp logo"]#logo-tp#
-
 . {blank}
-
 . quizzes, playgrounds, viewers, notebooks
-
 . simulators, plots, games
-
 . {blank}
-
 . documentations, editors, pickers, controllers, feedbacks
-
 . markdown, asciidoc, latex, restructuredtext
-
 . forms, overlays, medias, times
-
 . {blank}
-
 . utilities
 ====
 ======

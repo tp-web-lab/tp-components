@@ -1,13 +1,13 @@
-export type TpMarkupMultiPagesTheme = 'light' | 'dark' | 'auto';
+export type TpMarkupMultiPagesTheme = "light" | "dark" | "auto";
 
 export interface TpMarkupMultiPagesPageLink {
-  title: string;
-  href: string;
-  level: number;
+	title: string;
+	href: string;
+	level: number;
 }
 
 export interface TpMarkupMultiPagesSearchResult {
-  title: string;
-  href: string;
-  excerpt: string;
+	title: string;
+	href: string;
+	excerpt: string;
 }

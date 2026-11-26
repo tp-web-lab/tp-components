@@ -1,0 +1,35 @@
+tp-diff-code-editor { display:block; inline-size:100%; min-inline-size:0; }
+tp-diff-code-editor .tp-diff-root { min-inline-size:0; }
+tp-diff-code-editor .tp-diff-toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; padding:.5rem; }
+tp-diff-code-editor .tp-diff-toolbar strong { display:flex; align-items:center; gap:.5rem; }
+tp-diff-code-editor .tp-diff-actions { display:flex; flex-wrap:wrap; gap:.25rem; margin-inline-start:auto; }
+tp-diff-code-editor .tp-diff-status { color:var(--tp-text-muted); font-size:.875em; }
+tp-diff-code-editor .tp-diff-labels { display:grid; grid-template-columns:1fr 1fr; background:var(--tp-neutral-fill-softer); }
+tp-diff-code-editor .tp-diff-labels > span { min-inline-size:0; overflow-wrap:anywhere; padding:.5rem; }
+tp-diff-code-editor .tp-diff-message:not(:empty) { padding:.75rem; color:var(--tp-danger-text-on-soft); }
+tp-diff-code-editor .cm-mergeViewEditor { min-inline-size:0; }
+tp-diff-code-editor .cm-mergeViewEditor + .cm-mergeViewEditor { border-inline-start:1px solid var(--tp-neutral-stroke-soft); }
+tp-diff-code-editor .cm-editor, tp-diff-code-editor .cm-content { direction:ltr; text-align:left; }
+tp-diff-code-editor .cm-scroller { font-family:var(--tp-font-family-code,monospace); overflow-x:auto; }
+tp-diff-code-editor[data-tp-base-host] .cm-editor.cm-merge-a .cm-changedLine { background:var(--tp-danger-fill-softer); }
+tp-diff-code-editor[data-tp-base-host] .cm-editor.cm-merge-b .cm-changedLine { background:var(--tp-success-fill-softer); }
+tp-diff-code-editor[data-tp-base-host] .cm-editor.cm-merge-a .cm-changedText { background:var(--tp-danger-fill-soft); text-decoration:underline; text-decoration-color:var(--tp-danger-text-on-soft); }
+tp-diff-code-editor[data-tp-base-host] .cm-editor.cm-merge-b .cm-changedText { background:var(--tp-success-fill-soft); text-decoration:underline; text-decoration-color:var(--tp-success-text-on-soft); }
+tp-diff-code-editor[data-tp-base-host] .cm-editor.cm-merge-a .cm-changedLineGutter { background:var(--tp-danger-fill-mid); }
+tp-diff-code-editor[data-tp-base-host] .cm-editor.cm-merge-b .cm-changedLineGutter { background:var(--tp-success-fill-mid); }
+
+tp-diff-code-editor .tp-diff-toolbar strong tp-icon { color:var(--tp-brand-text-colorful); }
+
+tp-diff-code-editor { border:1px solid var(--tp-neutral-stroke-soft); }
+tp-diff-code-editor tp-code-editor.tp-diff-editor-shell { display:block; border:0; block-size:auto; }
+tp-diff-code-editor tp-code-editor.tp-diff-editor-shell > [data-tp-code-editor],
+tp-diff-code-editor tp-code-editor.tp-diff-editor-shell .cm-editor { block-size:auto; }
+
+/* Keep matching lines aligned even when one toolbar is hidden or a search panel opens. */
+tp-diff-code-editor tp-code-editor.tp-diff-editor-shell > [data-tp-code-editor-panels] {
+  min-block-size:var(--tp-diff-panel-height, 0px);
+  align-content:start;
+}
+
+/* One viewport preserves MergeView alignment and scrolls both sources together. */
+tp-diff-code-editor .cm-mergeView { max-block-size:var(--tp-diff-max-height, none); overflow-y:auto; }

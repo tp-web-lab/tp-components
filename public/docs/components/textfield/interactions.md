@@ -5,9 +5,10 @@
 | Control or gesture | Result |
 | --- | --- |
 | Using the component | Type or edit text in the field. |
-| Copy code | Copy the current text to the clipboard. |
+| :tp-icon:{name="copy" size="2em"} Copy code (when enabled) | Copy the current text to the clipboard. |
 | Using the component | The trailing clear button removes its contents when clearing is available. |
 | Using the component | A required-field marker means you must provide a value before submitting the form. |
+| :tp-icon:{name="close" size="2em"} Clear | Clear. |
 
 #### Keyboard interactions
 

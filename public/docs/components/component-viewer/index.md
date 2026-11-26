@@ -32,6 +32,10 @@ The custom `<tp-component-viewer>` element documents a component and lets reader
 <!-- -->
 ## Usage
 
+### External source (`src`)
+
+`src` is the URL of the HTML example used by the Demo panel. It is resolved relative to the author document. Use `tag` to identify the component; `api-src` separately selects an API manifest when needed. The default is an empty string.
+
 ### Initial content
 
 ::: tp-tabs
@@ -123,19 +127,19 @@ Custom content
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -170,6 +174,10 @@ All tp-components and external tools used by this component are loaded automatic
 <!--
 @tp-dependency tp-datefield
 @summary Native date field with labels, constraints, picker access, and clearing.
+-->
+<!--
+@tp-dependency tp-divider
+@summary Visual separator for menus, dropdowns, toolbars, and layouts.
 -->
 <!--
 @tp-dependency tp-html-viewer
@@ -214,6 +222,7 @@ All tp-components and external tools used by this component are loaded automatic
 - [`<tp-cluster>`](#/components/cluster/index.md) : Flexible cluster layout component.
 - [`<tp-code-editor>`](#/components/code-editor/index.md) : CodeMirror-based code editor component.
 - [`<tp-datefield>`](#/components/datefield/index.md) : Native date field with labels, constraints, picker access, and clearing.
+- [`<tp-divider>`](#/components/divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
 - [`<tp-html-viewer>`](#/components/html-viewer/index.md) : Interactive HTML viewer with editable source, live rendering, and DOM inspection.
 - [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.

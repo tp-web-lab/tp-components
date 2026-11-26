@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-accordion" allow-script }
+::::: tp-markdown-viewer { label="tp-accordion" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-accordion { open-indexes="1" }

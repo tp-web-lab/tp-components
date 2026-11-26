@@ -232,6 +232,23 @@ This is an adapter extension, not a native Docutils directive. For the usual TP 
 
 Conversion is asynchronous because the first render loads Python and Docutils. Browser execution does not provide access to local Python installations, arbitrary installed Sphinx extensions or the user's filesystem. Linked resources must be available to the browser. The `doctest` attribute described below adds execution of Python examples; ordinary document conversion does not run doctests.
 
+### Included documents in another markup language
+
+The component resolves simple standalone inclusion directives before parsing. It detects the included file's language from its extension and converts its content to the containing language. This also works without a viewer or converter.
+
+```rst
+.. include:: shared/fragment.md
+```
+
+Relative paths are resolved against the document loaded with `src`, or the component's source context for inline content. Nested inclusions resolve against their own files. Missing files, cycles and nesting beyond 20 levels display an error. Complete-file inclusions are supported; language-specific filtering and literal-code options retain their existing behavior. This conversion is provided by the TP component, not by the underlying standalone parser.
+
+See the [programmatic conversion API](../markup-converter/index.md#javascript-api) for `convert(code, from, to)` and `convertFile(filename, from, to)`.
+
+### Runtime loading
+
+The first conversion loads Pyodide and Docutils. The Pyodide bootstrap script is retried once after a network error or a 15-second timeout. Two failed attempts produce an error rather than leaving later conversions blocked; a new conversion can retry initialization. Runtime initialization also has a 60-second deadline: if WebAssembly loading stalls, the conversion reports an error and a later conversion can initialize the runtime again. The parser API accepts `initializationTimeout` in milliseconds for slower networks. This limits the wait without cancelling Pyodide’s internal requests; late initialization results are ignored. Before converting, the parser also checks that Docutils and Pygments were actually installed. A failed download reports the missing package; retrying after connection recovery preserves the working runtime and restores highlighting. See the [package download recovery audit](../../appendices/restructuredtext-package-loading.md). Package loading has a separate 60-second deadline, configurable as `packageTimeout` through the parser API. After expiration, retrying the same parser creates a fresh runtime so that an unfinished package installation cannot block it. The old internal requests are not cancelled. See the [loading verification](../../appendices/restructuredtext-loading.md).
+
+
 ### Importing
 
 ::: tp-tabs
@@ -274,19 +291,19 @@ External document
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

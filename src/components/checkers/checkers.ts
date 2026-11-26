@@ -1,3 +1,4 @@
+import { showGameRules, toggleGameHelp } from "../../utilities/game-header.js";
 /** @module components/checkers
  * @summary Interactive checkers positions and endgames with legal moves and random opponents.
  */
@@ -910,6 +911,16 @@ export class TpCheckers extends TpBase {
 		if (drag && this.board?.hasPointerCapture?.(drag.id))
 			this.board.releasePointerCapture(drag.id);
 	};
+
+	/** Opens or closes the game assistance menu. */
+	toggleHelp(): void {
+		toggleGameHelp(this);
+	}
+
+	/** Opens the rules of this game in its drawer. */
+	showRules(): void {
+		showGameRules(this);
+	}
 }
 if (!customElements.get("tp-checkers"))
 	customElements.define("tp-checkers", TpCheckers);

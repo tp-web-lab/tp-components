@@ -1,3 +1,4 @@
+import { showGameRules, toggleGameHelp } from "../../utilities/game-header.js";
 /** @module components/logigram */
 // tp-docgen:dependencies:start
 /**
@@ -82,6 +83,10 @@ import { deriveLogigramResults } from "./logigram-results.js";
  * @keyboard {Enter / Space} Cycles the focused cell through unknown, no and yes, or activates a control.
  * @keyboard {Arrow keys} Moves between cells in the same category pair.
  * @keyboard {Delete / Backspace} Clears the focused cell.
+ *  @accessibility Uses a labelled table with category headers and native cell buttons whose accessible names include both matched items and the current yes, no or unknown state.
+ * @accessibility Arrow keys move between cells, Enter or Space changes a cell, and Delete or Backspace clears it; disabled state is forwarded to game controls.
+ * @accessibility Announces selection and checking feedback through status regions and exposes checked errors with aria-invalid.
+ * @accessibilityresponsibility Provide clear category names, item names and written clues; keep all information needed to solve the puzzle available as text.
  * @example
  * <tp-logigram label="The reading club">
  *   <dl>
@@ -114,10 +119,6 @@ import { deriveLogigramResults } from "./logigram-results.js";
  * </dd>
  *   </dl>
  * </tp-logigram>
- *  @accessibility Uses a labelled table with category headers and native cell buttons whose accessible names include both matched items and the current yes, no or unknown state.
- * @accessibility Arrow keys move between cells, Enter or Space changes a cell, and Delete or Backspace clears it; disabled state is forwarded to game controls.
- * @accessibility Announces selection and checking feedback through status regions and exposes checked errors with aria-invalid.
- * @accessibilityresponsibility Provide clear category names, item names and written clues; keep all information needed to solve the puzzle available as text.
  */
 export class TpLogigram extends TpBase {
 	private model: LogigramModel | null = null;
@@ -368,9 +369,7 @@ export class TpLogigram extends TpBase {
 				action === "show-block" ||
 				action === "show-solution"
 			) {
-				this.model.assist(action, this.selectedCell);
-				this.changed();
-				if (action === "show-solution") this.check();
+				this.assist(action);
 			}
 		});
 		this.assistSelect = assist;
@@ -635,6 +634,46 @@ export class TpLogigram extends TpBase {
 				: `${values.filter((v) => v === 1).length} / ${result.total} matches marked.`;
 			this.status.dataset.success = String(this.checked && result.complete);
 		}
+	}
+
+	/** Opens or closes the game assistance menu. */
+	toggleHelp(): void {
+		toggleGameHelp(this);
+	}
+
+	/** Opens the rules of this game in its drawer. */
+	showRules(): void {
+		showGameRules(this);
+	}
+
+	/** Clears incorrect marks from the grid. */
+	clearIncorrect(): void {
+		this.assist("clear-incorrect");
+	}
+
+	/** Reveals the selected grid box. */
+	revealCell(): void {
+		this.assist("show-cell");
+	}
+
+	/** Reveals the selected category pair. */
+	revealBlock(): void {
+		this.assist("show-block");
+	}
+
+	/** Reveals the complete grid and checks the result. */
+	revealSolution(): void {
+		this.assist("show-solution");
+	}
+
+	/** Shares assistance between the menu and named actions. */
+	private assist(
+		action: "clear-incorrect" | "show-cell" | "show-block" | "show-solution",
+	): void {
+		if (this.disabled || !this.model) return;
+		this.model.assist(action, this.selectedCell);
+		this.changed();
+		if (action === "show-solution") this.check();
 	}
 }
 if (!customElements.get("tp-logigram"))

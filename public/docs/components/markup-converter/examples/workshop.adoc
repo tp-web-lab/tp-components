@@ -1,0 +1,6 @@
+== Workshop
+
+A *practical* introduction to markup.
+
+* Read the source
+* Compare the five formats

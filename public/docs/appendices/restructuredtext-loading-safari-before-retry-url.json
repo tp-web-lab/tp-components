@@ -1,0 +1,33 @@
+{
+  "checkedAt": "2026-11-24T09:23:01.050Z",
+  "browser": "safari",
+  "version": "26.6.2",
+  "parserSha256": "375034804374e12c1612a6c4e4e23f0a3fc60fec3201660d34d7f4bf0c5bd77a",
+  "results": [
+    {
+      "scenario": "cold-1",
+      "passed": true,
+      "milliseconds": 1572,
+      "totalMilliseconds": 1733
+    },
+    {
+      "scenario": "cold-2",
+      "passed": true,
+      "milliseconds": 1636,
+      "totalMilliseconds": 1796
+    },
+    {
+      "scenario": "cold-3",
+      "passed": true,
+      "milliseconds": 1695,
+      "totalMilliseconds": 1847
+    },
+    {
+      "scenario": "stalled-first-script",
+      "error": "Error: Unable to load Pyodide from /__rst-load/pyodide.js?token=a5f8e500-1fa9-4c72-9d66-ceb5a6d81d4d.",
+      "passed": false,
+      "milliseconds": 20013,
+      "totalMilliseconds": 20151
+    }
+  ]
+}

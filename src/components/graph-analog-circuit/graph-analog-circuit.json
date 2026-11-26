@@ -17,9 +17,144 @@
       "description": "Adds a non-directional wire between distinct existing component IDs using the requested ports and routing; returns its edge record. Arrows, self-links and unsupported wire types throw."
     },
     {
+      "name": "addMeasurement(edgeId: string, position = 0.5, label?: string): TpGraphMeasurement",
+      "inherited": true,
+      "description": "Adds a measurement marker to edgeId at a position clamped to 0..1 along the edge; returns its detached record. Throws for an unknown edge."
+    },
+    {
       "name": "addNode(type: string, point: TpGraphPoint, nodeLabel?: string): TpGraphNode",
       "inherited": false,
       "description": "Adds a supported analog component at graph coordinates point with the optional label; returns a detached node record. Unsupported types throw TypeError."
+    },
+    {
+      "name": "animateTransition(transition: TpGraphTransition): Promise<void>",
+      "inherited": true,
+      "description": "Applies node and edge patches to existing IDs, animates their appearance for transition.duration milliseconds (300 by default), then records the change. Resolves after that duration."
+    },
+    {
+      "name": "collapsePalette(): Promise<void>",
+      "inherited": true,
+      "description": "Collapses all shape palette sections."
+    },
+    {
+      "name": "copy(): boolean",
+      "inherited": true,
+      "description": "Copies the selected graph elements and connecting edges into the editor-local clipboard. Returns false when nothing is selected; does not use the system clipboard."
+    },
+    {
+      "name": "cut(): boolean",
+      "inherited": true,
+      "description": "Copies the selection into the editor-local clipboard, then removes it and connected edges as an undoable change. Returns false when readonly or nothing is selected."
+    },
+    {
+      "name": "decreaseTimeDivision(): void",
+      "inherited": false,
+      "description": "Applies the time in oscilloscope calibration and refreshes the result."
+    },
+    {
+      "name": "decreaseValueDivision(): void",
+      "inherited": false,
+      "description": "Applies the voltage in oscilloscope calibration and refreshes the result."
+    },
+    {
+      "name": "deleteSelection(): void",
+      "inherited": true,
+      "description": "Deletes the currently selected graph objects."
+    },
+    {
+      "name": "downloadJson(): Promise<void>",
+      "inherited": true,
+      "description": "Saves the complete graph as JSON."
+    },
+    {
+      "name": "expandPalette(): Promise<void>",
+      "inherited": true,
+      "description": "Expands all shape palette sections."
+    },
+    {
+      "name": "exportJson(pretty = true): string",
+      "inherited": true,
+      "description": "Returns the graph serialized as JSON; pretty uses two-space indentation, while false produces compact JSON."
+    },
+    {
+      "name": "exportSvg(): string",
+      "inherited": true,
+      "description": "Returns a standalone SVG of the graph with resolved styles and content bounds; throws when the canvas is not ready."
+    },
+    {
+      "name": "importJson(source: string): void",
+      "inherited": true,
+      "description": "Parses and validates a JSON graph, replaces the current graph and emits tp-graph-import. Invalid JSON or graph data throws before replacement."
+    },
+    {
+      "name": "increaseTimeDivision(): void",
+      "inherited": false,
+      "description": "Applies the time out oscilloscope calibration and refreshes the result."
+    },
+    {
+      "name": "increaseValueDivision(): void",
+      "inherited": false,
+      "description": "Applies the voltage out oscilloscope calibration and refreshes the result."
+    },
+    {
+      "name": "moveMeasurement(id: string, position: number): void",
+      "inherited": true,
+      "description": "Moves the marker identified by id to a relative edge position clamped to 0..1; throws when the marker is unknown."
+    },
+    {
+      "name": "openFile(): Promise<void>",
+      "inherited": true,
+      "description": "Opens the graph JSON file chooser."
+    },
+    {
+      "name": "openLabelEditor(id: string): void",
+      "inherited": true,
+      "description": "Opens the label editor for the specified graph object."
+    },
+    {
+      "name": "openTitleEditor(): void",
+      "inherited": true,
+      "description": "Opens the graph title editor."
+    },
+    {
+      "name": "paste(): string | null",
+      "inherited": true,
+      "description": "Duplicates the editor-local clipboard with new IDs and an offset, then selects the copies. Returns the first pasted ID, or null when readonly or no clipboard content is available."
+    },
+    {
+      "name": "reconnectEdge(edgeId: string, endpoint: \"source\" | \"target\", nodeId: string, port: TpGraphPort): TpGraphEdge",
+      "inherited": true,
+      "description": "Moves the source or target endpoint of edgeId to nodeId and port after connection validation; returns a detached copy of the updated edge."
+    },
+    {
+      "name": "redo(): boolean",
+      "inherited": true,
+      "description": "Restores the next undone graph snapshot and returns true; returns false when redo history is empty."
+    },
+    {
+      "name": "registerPalette(palette: TpGraphPalette): void",
+      "inherited": true,
+      "description": "Registers or replaces a shape palette by its ID and refreshes the palette UI. Requires a nonempty ID and at least one shape."
+    },
+    {
+      "name": "registerSimulator(name: string, simulator: TpGraphSimulator): void",
+      "inherited": true,
+      "description": "Registers or replaces the simulator function associated with name for subsequent step(name) calls."
+    },
+    {
+      "name": "removeElement(id: string): void",
+      "inherited": true,
+      "description": "Removes the node, edge or measurement identified by id; removing a node also removes its connected edges. Updates selection and records an undoable change."
+    },
+    {
+      "name": "resetCalibration(): void",
+      "inherited": false,
+      "description": "Applies the reset oscilloscope calibration and refreshes the result."
+    },
+    {
+      "name": "resetZoom(): void",
+      "inherited": true,
+      "description": "Restores magnification to 1 (100%) without changing graph data."
     },
     {
       "name": "rotateSelected(): void",
@@ -27,9 +162,59 @@
       "description": "Rotates the selected orientable component 90 degrees clockwise and rotates its connected ports. Does nothing when no eligible component is selected."
     },
     {
+      "name": "selectCommentColor(value: string | undefined): void",
+      "inherited": true,
+      "description": "Selects the color of subsequently inserted comments, closes the palette and refreshes it."
+    },
+    {
+      "name": "selectShapeType(type: string): void",
+      "inherited": true,
+      "description": "Selects the palette shape for subsequent insertions; opens the color menu for comments."
+    },
+    {
+      "name": "setCommentColor(id: string, color: TpGraphCommentColor): void",
+      "inherited": true,
+      "description": "Changes the color of a comment node and records the change; throws for an unknown comment or unsupported color."
+    },
+    {
+      "name": "setEdgeDirection(edgeId: string, direction: TpGraphEdgeDirection): void",
+      "inherited": true,
+      "description": "Changes an existing edge direction and the default for new edges; throws for an unknown edge or a direction unsupported by this editor."
+    },
+    {
+      "name": "setEdgeOrthogonal(edgeId: string, elbows: 1 | 2 | 3, departure: \"horizontal\" | \"vertical\", turns: \"alternating\" | \"same\" = \"alternating\"): void",
+      "inherited": true,
+      "description": "Uses orthogonal routing with 1, 2 or 3 elbows and a horizontal or vertical departure. The turns choice applies to two elbows; throws for an unknown edge."
+    },
+    {
+      "name": "setEdgeRouting(edgeId: string, routing: TpGraphEdgeRouting): void",
+      "inherited": true,
+      "description": "Changes an existing edge routing mode and the default for new edges; throws for an unknown edge."
+    },
+    {
+      "name": "setElementLabel(id: string, label: string): void",
+      "inherited": true,
+      "description": "Sets the trimmed label of a node, edge or measurement by ID; empty clears the label. Throws for an unknown element."
+    },
+    {
       "name": "setGraph(graph: TpGraphDocument): void",
       "inherited": false,
       "description": "Validates the specialized graph before replacing the editor graph; retains the base editor cloning and undo-history behavior. Invalid data throws without replacing the graph."
+    },
+    {
+      "name": "setMeasurementMode(mode: \"voltage\" | \"current\"): void",
+      "inherited": false,
+      "description": "Selects voltage or current measurements and resets the value scale."
+    },
+    {
+      "name": "setTitle(title: string): void",
+      "inherited": true,
+      "description": "Trims and stores the graph title, then records an undoable change; an empty string removes visible title text."
+    },
+    {
+      "name": "setZoom(value: number): void",
+      "inherited": true,
+      "description": "Sets a positive finite magnification factor, clamped to the supported zoom range. A value of 1 means 100%; invalid inputs throw TypeError."
     },
     {
       "name": "simulate(duration?: number, step?: number): TpAnalogSimulation",
@@ -37,9 +222,59 @@
       "description": "Runs transient analysis with positive duration and time step in seconds (defaults: 0.02 and 0.0002), refreshes the graph and emits tp-analog-simulate. Returns sampled results; invalid circuits or timings throw."
     },
     {
+      "name": "step(simulatorName: string): Promise<void>",
+      "inherited": true,
+      "description": "Runs the simulator registered as simulatorName on a graph snapshot, awaits its animated transition and emits tp-graph-simulation-step. Throws for an unknown simulator."
+    },
+    {
+      "name": "syncGraphCode(): void",
+      "inherited": true,
+      "description": "Applies edited graph JSON, or refreshes the JSON from the current graph when unchanged or read-only."
+    },
+    {
+      "name": "toggleAreaSelection(): Promise<void>",
+      "inherited": true,
+      "description": "Enables or disables rectangular graph selection."
+    },
+    {
+      "name": "toggleEditorToolbar(): Promise<void>",
+      "inherited": true,
+      "description": "Shows or hides the JSON editor toolbar."
+    },
+    {
+      "name": "toggleGrid(): Promise<void>",
+      "inherited": true,
+      "description": "Shows or hides the graph grid."
+    },
+    {
+      "name": "toggleJson(): Promise<void>",
+      "inherited": true,
+      "description": "Shows or hides the graph JSON panel."
+    },
+    {
       "name": "toggleSwitch(): void",
       "inherited": false,
       "description": "Toggles the selected analog switch between open and closed; does nothing when the selection is not a switch."
+    },
+    {
+      "name": "undo(): boolean",
+      "inherited": true,
+      "description": "Restores the preceding graph snapshot and returns true; returns false when undo history is empty."
+    },
+    {
+      "name": "unregisterPalette(id: string): void",
+      "inherited": true,
+      "description": "Removes the palette with the supplied ID and selects a remaining shape if needed; does not remove existing graph nodes."
+    },
+    {
+      "name": "zoomIn(): void",
+      "inherited": true,
+      "description": "Increases magnification by the configured zoom factor, up to the supported maximum."
+    },
+    {
+      "name": "zoomOut(): void",
+      "inherited": true,
+      "description": "Decreases magnification by the configured zoom factor, down to the supported minimum."
     }
   ],
   "events": [
@@ -65,7 +300,7 @@
   "userHelp": {
     "displayName": "Analog circuits",
     "introduction": "The custom `<tp-graph-analog-circuit>` element provides an interactive analog-circuit editor and transient simulator.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | The introductory circuit is an RC low-pass filter driven by a square-wave voltage source. |\n| Using the component | Its named `Vin` and `Vout` measurement points are the oscilloscope channels. |\n| Measurement | Drag **Measurement** from the **Annotations** palette onto any wire, then give it a label to add another channel. |\n| Run transient analysis | Press **Run transient analysis** to refresh the oscilloscope. |\n| Using the component | Wires merge connected terminals into electrical nodes, and every simulatable circuit needs a ground reference. |\n| Hub | A four-port **Hub** creates an electrical junction for clean branch layouts; all four ports share exactly the same potential. |\n| Using the component | The oscilloscope header provides independent time and voltage calibration controls. |\n| Using the component | The displayed values use `ms/div` and `V/div`; the center button restores both automatic scales. |\n| Using the component | Use the `V / A` selector in the oscilloscope header to display either node voltage or signed branch current at every named measurement point. |\n| Using the component | Current mode changes the legend and vertical scale to amperes. |\n| Using the component | A current point placed on a direct component wire uses the component terminal as its sign reference; a point on an electrically ambiguous junction branch reports zero until it is moved to a wire adjoining a component. |\n| Links | The **Links** palette provides straight and orthogonal wires without arrowheads. |\n| Using the component | Analog self-links are rejected because a component terminal cannot be wired back to the same component through a single editor link. |\n| Hub | The **Hub** is the single four-way equipotential junction used to lay out branches. |\n| Open or close selected switch | A switch can be open or closed; select it and use **Open or close selected switch** in the lower toolbar. |\n| Using the component | An open switch has a very high resistance, while a closed switch behaves as an ideal conductor. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Using the component | The introductory circuit is an RC low-pass filter driven by a square-wave voltage source. |\n| Using the component | Its named `Vin` and `Vout` measurement points are the oscilloscope channels. |\n| Measurement | Drag **Measurement** from the **Annotations** palette onto any wire, then give it a label to add another channel. |\n| :tp-icon:{name=\"play\" size=\"2em\"} Run transient analysis | Press **Run transient analysis** to refresh the oscilloscope. |\n| Using the component | Wires merge connected terminals into electrical nodes, and every simulatable circuit needs a ground reference. |\n| Hub | A four-port **Hub** creates an electrical junction for clean branch layouts; all four ports share exactly the same potential. |\n| Using the component | The oscilloscope header provides independent time and voltage calibration controls. |\n| Using the component | The displayed values use `ms/div` and `V/div`; the center button restores both automatic scales. |\n| Using the component | Use the `V / A` selector in the oscilloscope header to display either node voltage or signed branch current at every named measurement point. |\n| Using the component | Current mode changes the legend and vertical scale to amperes. |\n| Using the component | A current point placed on a direct component wire uses the component terminal as its sign reference; a point on an electrically ambiguous junction branch reports zero until it is moved to a wire adjoining a component. |\n| Links | The **Links** palette provides straight and orthogonal wires without arrowheads. |\n| Using the component | Analog self-links are rejected because a component terminal cannot be wired back to the same component through a single editor link. |\n| Hub | The **Hub** is the single four-way equipotential junction used to lay out branches. |\n| :tp-icon:{name=\"toggle-switch\" size=\"2em\"} Open or close selected switch | A switch can be open or closed; select it and use **Open or close selected switch** in the lower toolbar. |\n| Using the component | An open switch has a very high resistance, while a closed switch behaves as an ideal conductor. |\n| :tp-icon:{name=\"minus\" size=\"2em\"} Increase time per division | Increase time per division. |\n| :tp-icon:{name=\"plus\" size=\"2em\"} Decrease time per division | Decrease time per division. |\n| :tp-icon:{name=\"refresh\" size=\"2em\"} Reset oscilloscope calibration | Reset oscilloscope calibration. |\n| :tp-icon:{name=\"rotate-right\" size=\"2em\"} Rotate selected component | Rotate selected component. |\n| :tp-icon:{name=\"keyboard-f1\" size=\"2em\"} Toggle editor toolbar | Toggle editor toolbar. |\n| :tp-icon:{name=\"sync\" size=\"2em\"} Synchronize graph and JSON | Synchronize graph and JSON. |\n| :tp-icon:{name=\"arrow-expand-vertical\" size=\"2em\"} Expand all | Expand all. |\n| :tp-icon:{name=\"arrow-collapse-vertical\" size=\"2em\"} Collapse all | Collapse all. |\n| :tp-icon:{name=\"undo\" size=\"2em\"} Undo | Undo. |\n| :tp-icon:{name=\"redo\" size=\"2em\"} Redo | Redo. |\n| :tp-icon:{name=\"select\" size=\"2em\"} Select area | Select area. |\n| :tp-icon:{name=\"content-copy\" size=\"2em\"} Copy | Copy. |\n| :tp-icon:{name=\"content-cut\" size=\"2em\"} Cut | Cut. |\n| :tp-icon:{name=\"content-paste\" size=\"2em\"} Paste | Paste. |\n| :tp-icon:{name=\"text-short\" size=\"2em\"} Label | Label. |\n| :tp-icon:{name=\"format-title\" size=\"2em\"} Graph title | Graph title. |\n| :tp-icon:{name=\"magnify-minus-outline\" size=\"2em\"} Zoom out | Zoom out. |\n| :tp-icon:{name=\"magnify-plus-outline\" size=\"2em\"} Zoom in | Zoom in. |\n| :tp-icon:{name=\"grid\" size=\"2em\"} Show or hide grid | Show or hide grid. |\n| :tp-icon:{name=\"file-upload\" size=\"2em\"} Import JSON | Import JSON. |\n| :tp-icon:{name=\"file-download\" size=\"2em\"} Export JSON | Export JSON. |\n| :tp-icon:{name=\"language-json\" size=\"2em\"} Show or hide graph JSON | Show or hide graph JSON. |\n| :tp-icon:{name=\"palette-swatch\" size=\"2em\"} Color | Choose an accent color. |\n| :tp-icon:{name=\"theme-light-dark\" size=\"2em\"} Theme | Choose the light, dark or automatic theme. |\n| :tp-icon:{name=\"fullscreen\" size=\"2em\"} :tp-icon:{name=\"fullscreen-exit\" size=\"2em\"} Fullscreen | Enter or leave fullscreen. |\n| :tp-icon:{name=\"save-image\" size=\"2em\"} Save image | Save the content as an image. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| Focused controls | Use each control’s standard keyboard interaction.  |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Local Python tracer prototype</title><link rel="stylesheet" href="./style.css"></head>
+<body>
+<main>
+<h1>Local Python execution trace</h1>
+<p>A local prototype using a Python tracer engine in a disposable Pyodide Worker. No Python Tutor service, advertising or external visualizer. Pyodide itself is loaded from jsDelivr.</p>
+<p><a href="replay.html">Replay the saved Students trace without running Python</a></p>
+<tp-python-tracer></tp-python-tracer>
+<p>Prototype limits: 1,000 recorded events; 60 seconds to initialize; 10 seconds to execute. Stop terminates the Worker. Each recording starts a fresh session. No DOM access or arbitrary imports; not a security sandbox for hostile code.</p>
+<p>Trace engine adapted from Online Python Tutor, © Philip J. Guo. <a href="vendor/LICENSE.txt">License</a> · <a href="README.md">Prototype notes and verification</a></p>
+</main>
+<script type="module" src="./main.js?v=20261124-students-arrows"></script>
+</body></html>

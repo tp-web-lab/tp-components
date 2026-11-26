@@ -213,7 +213,7 @@ export async function generateComponentApiFiles(
 	}
 }
 
-async function generateComponentApiForChangedFile(
+export async function generateComponentApiForChangedFile(
 	rootDir: string,
 	componentsDir: string,
 	filePath: string,
@@ -233,7 +233,11 @@ async function generateComponentApiForChangedFile(
 		return;
 	}
 
-	if (/-multi-(pages|slides)$/.test(name)) {
+	// Shared style directories (trace, interpreter, ...) have no component class.
+	if (!(await readOptionalFile(path.join(rootDir, sourcePath)))) return;
+
+	// Public methods and attributes may be inherited by any component family.
+	if (relativePath.endsWith(".ts") || /-multi-(pages|slides)$/.test(name)) {
 		await generateComponentApiFiles(rootDir, componentsDir);
 	} else {
 		await generateComponentApiFile(rootDir, sourcePath);
@@ -263,7 +267,12 @@ async function generateComponentApiFile(
 	const cssText = await readOptionalFile(cssPath);
 	const outputPath = path.join(componentDirectory, `${componentName}.json`);
 	const api = buildComponentApi(parsed, cssText, componentName);
-	if (/-multi-(pages|slides)$/.test(componentName)) {
+	api.methods = await documentMethods(parsed, new Set());
+	if (
+		/-multi-(pages|slides)$|-(interpreter|playground|viewer)-question$/.test(
+			componentName,
+		)
+	) {
 		api.attributes = await documentAttributes(parsed, new Set());
 	}
 	const documentation = await readOptionalFile(
@@ -277,8 +286,19 @@ async function generateComponentApiFile(
 			"interactions.md",
 		),
 	);
+	// The dedicated help file remains usable even if its wrapper heading is missing.
+	const hasHelpHeading = /^### User interactions\s*$/m.test(interactions);
+	if (interactions.trim() && !hasHelpHeading) {
+		console.warn(
+			`[component-api] ${componentName}/interactions.md: missing "### User interactions"; including the dedicated help file automatically.`,
+		);
+	}
+	const help =
+		interactions.trim() && !hasHelpHeading
+			? `### User interactions\n\n${interactions}`
+			: interactions;
 	api.userHelp = extractComponentUserHelp(
-		`${documentation}\n\n${interactions}`,
+		`${documentation}\n\n${help}`,
 		sourceText,
 	);
 	const nextContent = `${JSON.stringify(api, null, 2)}\n`;
@@ -291,7 +311,7 @@ async function generateComponentApiFile(
 	await fs.writeFile(outputPath, nextContent);
 }
 
-/** Document shells expose their complete public interface, excluding generic base attributes. */
+/** Document shells and editable questions expose inherited public attributes, excluding TpBase. */
 async function documentAttributes(
 	parsed: ParsedSource,
 	seen: Set<string>,
@@ -328,6 +348,47 @@ async function documentAttributes(
 		);
 		for (const item of own) attributes.set(item.name, item);
 		return [...attributes.values()].sort(compareByName);
+	}
+	return own;
+}
+
+/** Includes inherited public actions in every concrete component API. */
+async function documentMethods(
+	parsed: ParsedSource,
+	seen: Set<string>,
+): Promise<ComponentApiMethod[]> {
+	const own = extractMethods(parsed);
+	const parent = extractSuperclass(parsed.classNode, parsed.sourceFile);
+	if (!parent || parent === "TpBase" || seen.has(parent)) return own;
+	seen.add(parent);
+	for (const statement of parsed.sourceFile.statements) {
+		if (
+			!ts.isImportDeclaration(statement) ||
+			!ts.isStringLiteral(statement.moduleSpecifier)
+		)
+			continue;
+		const bindings = statement.importClause?.namedBindings;
+		if (
+			!bindings ||
+			!ts.isNamedImports(bindings) ||
+			!bindings.elements.some((item) => item.name.text === parent)
+		)
+			continue;
+		const file = path.resolve(
+			path.dirname(parsed.sourceFile.fileName),
+			statement.moduleSpecifier.text.replace(/\.js$/, ".ts"),
+		);
+		const source = await readOptionalFile(file);
+		const base = source ? parseSource(file, source) : null;
+		if (!base) continue;
+		const methods = new Map(
+			(await documentMethods(base, seen)).map((item) => [
+				item.name.split("(")[0],
+				{ ...item, inherited: true },
+			]),
+		);
+		for (const item of own) methods.set(item.name.split("(")[0], item);
+		return [...methods.values()].sort(compareByName);
 	}
 	return own;
 }

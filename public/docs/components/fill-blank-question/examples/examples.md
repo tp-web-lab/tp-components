@@ -1,11 +1,10 @@
-:::::: tp-markdown-viewer { label="tp-fill-blank-question" allow-script }
+:::::: tp-markdown-viewer { label="tp-fill-blank-question" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-fill-blank-question { case-sensitive }
 Answers
 :
   1. Paris
-
   2. Rome
 
 Title
@@ -27,7 +26,6 @@ Feedback
   Check the spelling of each capital.
 
   - The capital of France is home to the Eiffel Tower.
-
   - The capital of Italy is home to the Colosseum.
 
 Solution

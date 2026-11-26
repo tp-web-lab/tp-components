@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Table image export check</title>
+<style>body{margin:24px;font:16px system-ui}#source{max-width:850px}#results{display:flex;flex-wrap:wrap;gap:20px}figure{margin:0;border:1px solid #aaa;padding:8px}figure img{max-width:650px}pre{white-space:pre-wrap}#source{position:absolute;left:-10000px;width:800px}button{padding:8px}</style>
+<h1>Table image export check</h1><button id="run">Run exports</button><pre id="status">Ready</pre><div id="results"></div><div id="source"></div>
+<script type="module">
+import '/src/tp-loader.ts';
+import '/src/components/table-editor/table-editor.ts';
+import '/src/components/save-image/save-image.ts';
+const status=document.querySelector('#status');
+const source=document.querySelector('#source');
+source.innerHTML=await (await fetch('/docs/components/table-editor/examples/introduction.html')).text();
+const editor=source.querySelector('tp-table-editor');
+const save=document.createElement('tp-save-image');
+async function run(){
+ status.textContent='Rendering…';document.querySelector('#results').replaceChildren();
+ try{
+ const svg=await editor.exportSvg();
+ const parsed=new DOMParser().parseFromString(svg,'image/svg+xml');
+ status.textContent=`${navigator.userAgent}\nSVG caption: ${parsed.querySelector('caption')?.textContent}\n`;
+ for(const format of ['png','webp']){
+  const blob=await save.createRaster(editor,format);
+  const img=new Image();img.src=URL.createObjectURL(blob);await img.decode();
+  const figure=document.createElement('figure');const caption=document.createElement('figcaption');caption.textContent=`${format.toUpperCase()}: ${img.naturalWidth} × ${img.naturalHeight} — ${blob.type}`;figure.append(img,caption);document.querySelector('#results').append(figure);
+  const canvas=document.createElement('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);const pixels=ctx.getImageData(0,0,canvas.width,canvas.height).data;let ink=0;for(let i=0;i<pixels.length;i+=4)if(pixels[i+3]>128&&pixels[i]<100&&pixels[i+1]<100&&pixels[i+2]<100)ink++;
+  status.textContent+=`${format}: ${blob.type}, ${blob.size} bytes, ${ink} dark pixels\n`;
+ }
+ status.textContent+='Complete';
+ }catch(error){status.textContent+='\nERROR: '+error.message+'\n'+error.stack;}
+}
+document.querySelector('#run').onclick=run;
+run();
+</script></html>

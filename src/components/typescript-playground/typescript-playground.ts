@@ -33,6 +33,10 @@
  * @summary In-memory file system component.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
  */
@@ -143,6 +147,7 @@ function createBody(project: TpTypescriptProject): string {
  * @attr {string} repository = "" - Directory containing a TypeScript playground project to load at initialization.
  * @attr {string} src = "" - JSON project or typescript source file to load.
  *
+ * @keyboard {Shift+Enter} Run the current project.
  * @example
  * <tp-typescript-playground src="/docs/components/_shared/intro-projects/typescript.json"></tp-typescript-playground>
  */
@@ -257,7 +262,7 @@ console.log(message);
 	protected override handleAdditionalToolbarAction(action: string): boolean {
 		switch (action) {
 			case "typescript-importmap-lit":
-				this.applyImportmap({
+				this.setImportmap({
 					imports: {
 						lit: "https://cdn.jsdelivr.net/npm/lit@3/+esm",
 					},
@@ -265,7 +270,7 @@ console.log(message);
 				return true;
 
 			case "typescript-importmap-shoelace":
-				this.applyImportmap({
+				this.setImportmap({
 					imports: {
 						"@shoelace-style/shoelace":
 							"https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2/+esm",
@@ -274,7 +279,7 @@ console.log(message);
 				return true;
 
 			case "typescript-importmap-none":
-				this.applyImportmap(undefined);
+				this.setImportmap(undefined);
 				return true;
 
 			default:
@@ -357,10 +362,11 @@ console.log(message);
         owner.document.body.append(realm);
         owner.__tpTypescriptNotebookRealms.set(executionScope, realm);
       }
-      realm.contentWindow.console = console;
       const source = (await (await fetch(entryUrl)).text())
         .replace(/(^|\\n)(\\s*)(?:let|const)(\\s+)/g, '$1$2var$3')
         .replace(/^\\s*export\\s*\\{\\s*\\};?\\s*$/gm, '');
+      // Bind after the asynchronous fetch so another cell cannot redirect synchronous output.
+      realm.contentWindow.console = console;
       if (/^\\s*(?:import|export)\\b/m.test(source)) await import(entryUrl);
       else realm.contentWindow.eval(source);
     }
@@ -382,7 +388,10 @@ console.log(message);
 		});
 	}
 
-	private applyImportmap(importmap: Record<string, unknown> | undefined): void {
+	/** Replaces the project import map, retaining current file edits; undefined removes it. */
+	public async setImportmap(
+		importmap: Record<string, unknown> | undefined,
+	): Promise<void> {
 		this.syncProjectFromFilesystem();
 
 		const project = this.getProject();
@@ -397,7 +406,7 @@ console.log(message);
 			}),
 		);
 
-		void this.run();
+		await this.run();
 	}
 }
 

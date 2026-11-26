@@ -1,0 +1,17 @@
+{
+  "name": "Scheme tests",
+  "entry": "/main.scm",
+  "test": "/main.test.scm",
+  "files": [
+    {
+      "path": "/main.scm",
+      "language": "scheme",
+      "content": "(define (double x) (* x 2))"
+    },
+    {
+      "path": "/main.test.scm",
+      "language": "scheme",
+      "content": "(test-equal \"Positive number\" 6 (double 3))\n(test-equal \"Zero\" 0 (double 0))\n(test-assert \"Negative number\" (= -4 (double -2)))\n"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "browser": "chrome",
+  "checks": [
+    {
+      "language": "javascript",
+      "steps": 7,
+      "grouped": 1,
+      "replay": true
+    },
+    {
+      "language": "typescript",
+      "steps": 7,
+      "grouped": 1,
+      "replay": true
+    },
+    {
+      "language": "python",
+      "steps": 8,
+      "grouped": 1,
+      "replay": true
+    },
+    {
+      "language": "scheme",
+      "steps": 15,
+      "grouped": 1,
+      "replay": true
+    },
+    {
+      "language": "ocaml",
+      "steps": 11,
+      "grouped": 5,
+      "replay": true
+    }
+  ]
+}

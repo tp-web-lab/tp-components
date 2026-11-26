@@ -1,0 +1,17 @@
+{
+  "name": "Alcotest tests",
+  "entry": "/main.ml",
+  "test": "/main.test.ml",
+  "files": [
+    {
+      "path": "/main.ml",
+      "language": "ocaml",
+      "content": "let double x = x * 2;;"
+    },
+    {
+      "path": "/main.test.ml",
+      "language": "ocaml",
+      "content": "Alcotest.run \"Double\" [\n  \"arithmetic\", [\n    Alcotest.test_case \"Positive number\" `Quick (fun () ->\n      Alcotest.(check int) \"double 3\" 6 (double 3));\n    Alcotest.test_case \"List\" `Quick (fun () ->\n      Alcotest.(check (list int)) \"doubles\" [2; 4] (List.map double [1; 2]));\n    Alcotest.test_case \"Expected error\" `Quick (fun () ->\n      Alcotest.check_raises \"invalid argument\" (Invalid_argument \"demo\")\n        (fun () -> invalid_arg \"demo\"));\n    Alcotest.test_case \"Work in progress\" `Quick (fun () -> Alcotest.skip ());\n  ]\n];;\n"
+    }
+  ]
+}

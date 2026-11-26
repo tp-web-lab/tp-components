@@ -119,7 +119,13 @@
       "default": "neutral"
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "activate(): void",
+      "inherited": false,
+      "description": "Activates the button or follows its link, unless disabled or loading. Browser permission prompts still require a user gesture."
+    }
+  ],
   "events": [
     {
       "name": "click",
@@ -164,6 +170,11 @@
       "description": "Background color of an enabled outlined button on hover."
     },
     {
+      "name": "--tp-button-outline-foreground",
+      "default": "var(--tp-brand-text-on-soft)",
+      "description": "Controls the outline foreground."
+    },
+    {
       "name": "--tp-button-padding-block",
       "default": "0.35em",
       "description": "Inner spacing above and below the button content."
@@ -200,7 +211,7 @@
     "commands": [],
     "displayName": "Button",
     "introduction": "The custom `<tp-button>` element provides an action button or navigation link, with configurable appearance and loading feedback.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result | Shortcut |\n| --- | --- | --- |\n| Button | Click to perform the action identified by its label. Disabled controls cannot be activated. |  |\n| Navigation button | Click to open its destination. |  |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> | Activate the focused button or link. |\n| <kbd>Space</kbd> | Activate a focused action button; links use <kbd>Enter</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result | Shortcut |\n| --- | --- | --- |\n| <!-- button --> Button | Click to perform the action identified by its label. Disabled controls cannot be activated. |  |\n| <!-- button --> Navigation button | Click to open its destination. |  |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> | Activate the focused button or link. |\n| <kbd>Space</kbd> | Activate a focused action button; links use <kbd>Enter</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Enter / Space",

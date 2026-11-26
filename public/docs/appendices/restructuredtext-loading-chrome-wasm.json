@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-11-24T10:01:26.875Z",
+  "browser": "chrome",
+  "version": "158.0.8127.38",
+  "parserSha256": "a02568410fe35d3719f76ecb738f894ce1f71050dca1d630a3afd7f675cfc02f",
+  "results": [
+    {
+      "scenario": "interrupted-wasm",
+      "passed": true,
+      "firstError": "Error: Pyodide initialization timed out after 60000 ms. Check the connection and retry the conversion.",
+      "failureMilliseconds": 60051.59999996424,
+      "recoveryMilliseconds": 1500.1000000238419,
+      "totalMilliseconds": 61681
+    }
+  ]
+}

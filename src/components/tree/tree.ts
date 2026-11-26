@@ -1425,7 +1425,7 @@ export class TpTree extends TpBase {
 					toggle.setAttribute("data-tp-tree-toggle", "");
 					toggle.setAttribute("library", "tp");
 					toggle.setAttribute("size", "xxs");
-					toggle.setAttribute("name", "plus-box-outline");
+					toggle.setAttribute("name", "plus");
 					toggle.setAttribute("label", "Toggle node");
 
 					row.prepend(toggle);
@@ -1550,10 +1550,7 @@ export class TpTree extends TpBase {
 
 		if (toggle instanceof HTMLElement) {
 			toggle.setAttribute("aria-expanded", String(expanded));
-			toggle.setAttribute(
-				"name",
-				expanded ? "minus-box-outline" : "plus-box-outline",
-			);
+			toggle.setAttribute("name", expanded ? "minus" : "plus");
 			const nativeButton = toggle.querySelector("button");
 			if (nativeButton instanceof HTMLButtonElement) {
 				nativeButton.setAttribute("aria-expanded", String(expanded));
@@ -1963,6 +1960,30 @@ export class TpTree extends TpBase {
 		scope: TpTreeContextScope,
 		target: TpTreeNodeTarget | null,
 	): void {
+		if (scope === "node" && target) {
+			switch (actionId) {
+				case "add-leaf":
+					this.addLeaf(target.element);
+					return;
+				case "add-node":
+					this.addBranch(target.element);
+					return;
+				case "clone":
+					this.duplicateNode(target.element);
+					return;
+				case "delete":
+					this.deleteNode(target.element);
+					return;
+			}
+		}
+		this.executeContextAction(actionId, scope, target);
+	}
+
+	private executeContextAction(
+		actionId: string,
+		scope: TpTreeContextScope,
+		target: TpTreeNodeTarget | null,
+	): void {
 		this.dispatchEvent(
 			new CustomEvent<TpTreeContextActionDetail>("tp-tree-context-action", {
 				bubbles: true,
@@ -2011,6 +2032,38 @@ export class TpTree extends TpBase {
 			default:
 				break;
 		}
+	}
+
+	/** Adds a leaf inside a node when permitted, emitting the context-menu request events. */
+	public addLeaf(node: HTMLLIElement): void {
+		if (node.closest("tp-tree") !== this) return;
+		const target = this.getNodeTarget(node);
+		if (!this.getNodeCapabilities(target).addable) return;
+		this.executeContextAction("add-leaf", "node", target);
+	}
+
+	/** Adds a branch inside a node when permitted, emitting the context-menu request events. */
+	public addBranch(node: HTMLLIElement): void {
+		if (node.closest("tp-tree") !== this) return;
+		const target = this.getNodeTarget(node);
+		if (!this.getNodeCapabilities(target).addable) return;
+		this.executeContextAction("add-node", "node", target);
+	}
+
+	/** Duplicates a node when permitted, emitting the context-menu request events. */
+	public duplicateNode(node: HTMLLIElement): void {
+		if (node.closest("tp-tree") !== this) return;
+		const target = this.getNodeTarget(node);
+		if (!this.getNodeCapabilities(target).clonable) return;
+		this.executeContextAction("clone", "node", target);
+	}
+
+	/** Deletes a node when permitted, emitting the context-menu request events. */
+	public deleteNode(node: HTMLLIElement): void {
+		if (node.closest("tp-tree") !== this) return;
+		const target = this.getNodeTarget(node);
+		if (!this.getNodeCapabilities(target).deletable) return;
+		this.executeContextAction("delete", "node", target);
 	}
 
 	/**

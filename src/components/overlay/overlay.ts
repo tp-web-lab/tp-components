@@ -140,19 +140,20 @@ export abstract class TpOverlayElement extends TpBase {
 	}
 
 	/**
-	 * Ouvre l’overlay.
+	 * Opens the overlay and synchronizes its backdrop.
 	 */
 	public show(): void {
 		this.open = true;
 	}
 
 	/**
-	 * Ferme l’overlay.
+	 * Closes the overlay and removes its backdrop.
 	 */
 	public hide(): void {
 		this.open = false;
 	}
 
+	/** Switches between the open and closed overlay states. */
 	public toggle(): void {
 		this.open = !this.open;
 	}

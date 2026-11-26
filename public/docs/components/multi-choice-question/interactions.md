@@ -6,6 +6,10 @@
 | --- | --- |
 | Reading | Select every answer you consider correct, or leave all boxes unchecked if none applies, then submit. |
 | Using the component | Review Feedback to understand the result or open Solution for the explanation. |
+| :tp-icon:{name="input" size="2em"} Input button | Input button. |
+| :tp-icon:{name="output" size="2em"} Output button | Output button. |
+| :tp-icon:{name="refresh" size="2em"} Reset response | Reset response. |
+| :tp-icon:{name="play-arrow" size="2em"} Submit response | Submit response. |
 
 #### Keyboard interactions
 

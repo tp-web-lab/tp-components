@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-solitaire" allow-script }
+::::: tp-markdown-viewer { label="tp-solitaire" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-solitaire

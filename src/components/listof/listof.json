@@ -11,8 +11,35 @@
   ],
   "attributes": [
     {
+      "name": "index",
+      "description": "Selects the named index when listing tp-index entries.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"default\""
+    },
+    {
+      "name": "intoc",
+      "description": "Includes the index heading in the table of contents when exporting to native LaTeX.",
+      "reflected": false,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
       "name": "selector",
       "description": "CSS selector for reference definitions or elements with a title, label or caption.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "title",
+      "description": "Index heading; defaults to Index for tp-index lists.",
       "reflected": true,
       "static": false,
       "inherited": false,
@@ -30,22 +57,26 @@
     },
     {
       "name": "tp-biblio",
-      "summary": "Defines a bibliography entry referenced by tp-ref."
+      "summary": "Defines a hidden bibliography entry for reference tooltips and generated lists."
     },
     {
       "name": "tp-glossary",
-      "summary": "Defines a glossary entry referenced by tp-ref."
+      "summary": "Defines a hidden glossary entry for reference tooltips and generated lists."
+    },
+    {
+      "name": "tp-index",
+      "summary": "Defines an alphabetical index entry with optional descriptive content and links to its occurrences."
     },
     {
       "name": "tp-note",
-      "summary": "Defines an HTML note referenced by tp-ref."
+      "summary": "Defines a hidden HTML note for reference tooltips and generated lists."
     }
   ],
   "credits": [],
   "userHelp": {
     "displayName": "List of elements",
     "introduction": "The custom `<tp-listof>` element builds a list of reference entries or links to labelled document elements.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| List link | Follow the link to its document element. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between generated links. |\n| <kbd>Enter</kbd> | Follow the focused link. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| List link | Follow the link to its document element. |\n\nFor an index, numbered links return to individual visible or silent occurrences; see/see also links lead to terms within this generated list.\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between generated links. |\n| <kbd>Enter</kbd> | Follow the focused link. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": [
       {
         "key": "Enter",

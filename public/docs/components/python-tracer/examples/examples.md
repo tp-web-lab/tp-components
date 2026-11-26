@@ -1,0 +1,98 @@
+:::::: tp-markdown-viewer { label="tp-python-tracer" allow-script preserve-source }
+::::: script { type="tp/markdown" }
+``` example {label="Basic usage"}
+::: tp-python-tracer { src="/docs/components/python-tracer/examples/students.py" }
+:::
+```
+
+``` example {label="Javascript API"}
+::: script { type="module" }
+import "/components/python/python.js";
+import "/components/python-tracer/python-tracer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-python-tracer");
+element1.setAttribute("src", "/docs/components/python-tracer/examples/students.py");
+example.append(element1);
+
+document.body.append(example);
+:::
+```
+
+``` example {label="Subexpressions on one line"}
+::: tp-python-tracer { src="/docs/components/python-tracer/examples/same-line.py" }
+:::
+```
+
+``` example {label="Inline Python"}
+:::: tp-python-tracer
+::: script { type="tp/python" }
+def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+
+print(factorial(5))
+:::
+::::
+```
+
+``` example {label="Replay a saved trace"}
+::: tp-python-tracer { trace="/docs/components/python-tracer/examples/students.trace.json" }
+:::
+```
+
+``` example {label="Save and reload"}
+Choose Save trace, name the JSON file, then choose Load trace to reopen it. Navigate to Last to see Ada 92.5 without running Python again.
+
+::: tp-python-tracer { src="/docs/components/python-tracer/examples/students.py" trace="/docs/components/python-tracer/examples/students.trace.json" }
+:::
+```
+
+``` example {label="Class and shared instance"}
+::: tp-python-tracer { src="/docs/components/python-tracer/examples/counter.py" }
+:::
+```
+
+``` example {label="Inheritance and super"}
+Follow StepCounter inheriting from Counter, super().\_\_init\_\_(value) and the overridden increment method calling super().increment(). Inspect self referring to the same instance in both classes; the output is 5, 7, True.
+
+::: tp-python-tracer { src="/docs/components/python-tracer/examples/inheritance.py" }
+:::
+```
+
+``` example {label="References between instances"}
+::: tp-python-tracer { src="/docs/components/python-tracer/examples/linked-nodes.py" }
+:::
+```
+
+``` example {label="Caught exception"}
+Record execution, then step through the exception and its handler. Output continues with caught and done.
+
+::: tp-python-tracer { src="/docs/components/python-tracer/examples/caught-exception.py" }
+:::
+```
+
+``` example {label="Uncaught exception"}
+Record execution and follow the exception from fail to the caller. The final event displays ValueError: test error; earlier steps remain available.
+
+::: tp-python-tracer { src="/docs/components/python-tracer/examples/uncaught-exception.py" }
+:::
+```
+
+``` example {label="Closure with nonlocal"}
+Record execution and follow count from 0 to 1 to 2 in the retained make\_counter frame. The two calls share the same captured variable and print 1 then 2.
+
+::: tp-python-tracer { src="/docs/components/python-tracer/examples/closure-nonlocal.py" }
+:::
+```
+
+``` example {label="Nested lists and shared references"}
+Record execution and inspect the three arrows from rows: the first and third point to the same shared list. Step through append(5) to see both references reflect the change, while the middle list stays unchanged.
+
+::: tp-python-tracer { src="/docs/components/python-tracer/examples/nested-lists.py" }
+:::
+```
+:::::
+::::::

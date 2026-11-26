@@ -17,6 +17,7 @@ import {
 	resolveEntryFile,
 } from "./playground-build-utils.js";
 import type { TpProject } from "./project.js";
+import { createTestReporter, testResultsHead } from "./test-results.js";
 
 /** Options for building a browser test document. */
 export interface BuildBrowserTestDocumentOptions {
@@ -34,7 +35,6 @@ export async function buildBrowserTestDocument(
 	project: TpProject,
 	options: BuildBrowserTestDocumentOptions = {},
 ): Promise<TpExecutionDocument> {
-	console.log("browser test project.test", project.test);
 	const allowedTestExtensions =
 		options.kind === "typescript"
 			? [
@@ -83,6 +83,11 @@ if (!api) {
 export const describe = api.describe;
 export const it = api.it;
 export const expect = api.expect;
+export const assert = api.assert;
+export const before = api.before;
+export const after = api.after;
+export const beforeEach = api.beforeEach;
+export const afterEach = api.afterEach;
 `;
 
 	const tpTestUrl = URL.createObjectURL(
@@ -126,88 +131,72 @@ export const expect = api.expect;
 	const html = `
 <!doctype html>
 <html>
-<head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mocha@10/mocha.css">
-</head>
+<head>${testResultsHead()}</head>
 <body>
   ${body}
-  <div id="mocha"></div>
   ${createCommonRuntimeScript()}
   ${createConsoleBridgeScript()}
-
-  <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/mocha@10/mocha.js"></script>
-  <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/chai@4/chai.js"></script>
-
-<script>
-  ${toolLoadedScript("mocha", "Mocha", "mocha.version")}
-  ${toolLoadedScript("chai", "Chai", "chai.version")}
-  mocha.setup('bdd');
-
-  window.__tp_test__ = {
-    describe: window.describe,
-    it: window.it,
-    expect: window.chai.expect
-  };
-
-  function TpConsoleReporter(runner) {
-    let passCount = 0;
-    let failCount = 0;
-    const suiteTitles = [];
-
-    runner.on('suite', (suite) => {
-      if (suite.root) {
-        return;
-      }
-
-      suiteTitles.push(suite.title);
-      console.group(suite.title);
-    });
-
-    runner.on('suite end', (suite) => {
-      if (suite.root) {
-        return;
-      }
-
-      console.groupEnd();
-    });
-
-    runner.on('pass', (test) => {
-      passCount += 1;
-      console.info('%c✓ ' + test.title, 'color: green;');
-    });
-
-    runner.on('fail', (test, error) => {
-      failCount += 1;
-      console.error(
-        '%c✗ ' + test.title,
-        'color: red; font-weight: bold;',
-        error,
-      );
-    });
-
-    runner.once('end', () => {
-      const suiteLabel =
-        suiteTitles.length === 1 ? suiteTitles[0] : 'All tests';
-
-      if (failCount === 0) {
-        console.log(\`\${suiteLabel}: Tests passed: \${passCount}\`);
-      } else {
-        console.warn(
-          \`\${suiteLabel}: Tests finished: \${passCount} passed, \${failCount} failed\`,
-        );
-      }
-    });
-  }
-
-  mocha.reporter(TpConsoleReporter);
-</script>
-  <script type="importmap">
-${JSON.stringify(importmap, null, 2)}
-  </script>
-
+  <script type="importmap">${JSON.stringify(importmap).replaceAll("<", "\\u003c")}</script>
   <script type="module">
-    import ${JSON.stringify(testUrl)};
-    mocha.run();
+    const reporter = (${createTestReporter.toString()})(document.body, 'Mocha / Chai');
+    const output = document.createElement('pre');
+    reporter.attachLog(output);
+    function display(value) {
+      if (typeof value === 'string') return value;
+      if (value instanceof Error) {
+        const title = String(value);
+        return value.stack?.includes(title) ? value.stack : title + (value.stack ? '\\n' + value.stack : '');
+      }
+      try { return JSON.stringify(value) ?? String(value); } catch { return String(value); }
+    }
+    for (const level of ['log', 'info', 'warn', 'error', 'debug']) {
+      const original = console[level].bind(console);
+      console[level] = (...values) => {
+        output.append(document.createTextNode(values.map(display).join(' ') + '\\n'));
+        original(...values);
+      };
+    }
+    async function loadScript(src) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.crossOrigin = 'anonymous';
+        script.onload = resolve;
+        script.onerror = () => reject(new Error('Unable to load test library: ' + src));
+        document.head.append(script);
+      });
+    }
+    try {
+      await loadScript('https://cdn.jsdelivr.net/npm/mocha@10/mocha.js');
+      await loadScript('https://cdn.jsdelivr.net/npm/chai@4/chai.js');
+      const { mocha, chai } = window;
+      ${toolLoadedScript("mocha", "Mocha", "mocha.version")}
+      ${toolLoadedScript("chai", "Chai", "chai.version")}
+      mocha.setup('bdd');
+      window.__tp_test__ = {
+        describe: window.describe, it: window.it, expect: chai.expect, assert: chai.assert,
+        before: window.before, after: window.after, beforeEach: window.beforeEach, afterEach: window.afterEach
+      };
+      function TpReporter(runner) {
+        const add = (test, status, details = '') => reporter.add({
+          suite: test.parent?.fullTitle() || 'Tests', name: test.title, status, details
+        });
+        runner.on('pass', test => { add(test, 'passed'); console.info('✓ ' + test.fullTitle()); });
+        runner.on('pending', test => { add(test, 'skipped'); console.info('Skipped: ' + test.fullTitle()); });
+        runner.on('fail', (test, error) => {
+          const comparison = error.showDiff ? '\\nExpected: ' + display(error.expected) + '\\nActual: ' + display(error.actual) : '';
+          add(test, 'failed', display(error) + comparison);
+          console.error('✗ ' + test.fullTitle(), error);
+        });
+        runner.once('end', () => reporter.finish());
+      }
+      mocha.reporter(TpReporter);
+      await import(${JSON.stringify(testUrl)});
+      mocha.run();
+    } catch (error) {
+      reporter.error(error);
+      console.error(error);
+    }
   </script>
 </body>
 </html>

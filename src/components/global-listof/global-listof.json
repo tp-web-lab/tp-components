@@ -1,0 +1,101 @@
+{
+  "tagname": "tp-global-listof",
+  "classname": "TpGlobalListof",
+  "superclass": "TpBase",
+  "description": "Lists labelled elements across the pages of a multi-page document, with links to their pages and anchors.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-box style=\"position: relative; contain: layout; block-size: 32rem; padding: 0;\">\n  <tp-html-multi-pages repository=\"/docs/components/global-listof/examples/guide\" label=\"Global lists\" menu=\"\"></tp-html-multi-pages>\n</tp-box>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "group-by",
+      "description": "Set to letter to group a merged index in closed alphabetical accordion panels.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "index",
+      "description": "Named index used when selecting tp-index definitions.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"default\""
+    },
+    {
+      "name": "merge",
+      "description": "Combines source pages into a global list instead of closed per-page accordion panels.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "selector",
+      "description": "CSS selector identifying the elements to list on each page.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "title",
+      "description": "Heading displayed above the generated list.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    }
+  ],
+  "methods": [
+    {
+      "name": "refresh(): Promise<void>",
+      "inherited": false,
+      "description": "Reloads the document index after files have changed."
+    }
+  ],
+  "events": [
+    {
+      "name": "tp-global-listof-ready",
+      "emitted": true,
+      "description": "Emitted after indexing with the entry count and number of unavailable pages.",
+      "detail": "{ count: number; failures: number }"
+    }
+  ],
+  "cssproperties": [],
+  "dependencies": [
+    {
+      "name": "tp-accordion",
+      "summary": "Collapsible multi-panels element."
+    },
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    },
+    {
+      "name": "tp-theorem",
+      "summary": "Theorems, definitions, examples, remarks and proofs."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Global list of elements",
+    "introduction": "The custom `<tp-global-listof>` element lists labelled elements across the pages of a multi-page document, with links to their pages and anchors.",
+    "interactions": "#### Mouse interactions\n\n| Action | Result |\n| --- | --- |\n| Click a section heading | Expands or collapses its figures, tables, equations, code blocks, theorems or notes. |\n| Click an entry link | Opens its page and scrolls to the target anchor. |\n\n#### Keyboard interactions\n\n| Key | Result |\n| --- | --- |\n| <kbd>Tab</kbd> | Moves between section headings and visible entry links. |\n| <kbd>Enter</kbd> | Follows the focused link or toggles the focused section. |\n| <kbd>Space</kbd> | Toggles the focused section. |\n| <kbd>ArrowUp</kbd> / <kbd>ArrowDown</kbd> | Moves between section headings. |\n| <kbd>Home</kbd> / <kbd>End</kbd> | Focuses the first or last section heading. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Opens help for the component under the pointer, or the focused component; <kbd>Shift</kbd> may be needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component in the containing hierarchy and open its User help. |",
+    "keyboard": [
+      {
+        "key": "Enter",
+        "description": "Follows the focused page and anchor link."
+      }
+    ]
+  }
+}

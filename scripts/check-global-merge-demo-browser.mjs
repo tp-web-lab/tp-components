@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import {chromium} from '@playwright/test';
+import {componentDocScenarios} from './component-doc-scenarios.mjs';
+const source=componentDocScenarios['global-listof'].find(example=>example.label==='Compare merge modes').source.replaceAll('import "/components/','import "/src/components/').replaceAll('.js";','.ts";');
+const browser=await chromium.launch();
+try {
+ const page=await browser.newPage();
+ await page.route('**/__merge-demo',route=>route.fulfill({contentType:'text/html',body:`<!doctype html><body>${source}</body>`}));
+ await page.goto('http://127.0.0.1:4174/__merge-demo');
+ await page.waitForFunction(()=>document.querySelectorAll('tp-global-listof [data-tp-global-definitions] > dt').length===2);
+ const original=await page.locator('tp-global-listof').elementHandle();
+ const checkbox=page.getByRole('checkbox',{name:'Merge across pages',exact:true});
+ assert.equal(await checkbox.isChecked(),false);
+ assert.deepEqual(await page.locator('tp-global-listof tp-accordion > dl > dt').allTextContents(),['First chapter','Second chapter']);
+ assert.equal(await page.locator('tp-global-listof tp-accordion [aria-expanded=true]').count(),0);
+ const hrefs=await page.locator('[data-tp-global-citation]').evaluateAll(items=>items.map(item=>item.getAttribute('href')));
+ assert.equal(hrefs.length,4);
+ await checkbox.check();
+ await page.waitForFunction(()=>!document.querySelector('tp-global-listof tp-accordion') && document.querySelectorAll('tp-global-listof [data-tp-global-definitions] > dt').length===1);
+ assert.ok(await page.evaluate(element=>element===document.querySelector('tp-global-listof'),original));
+ assert.equal(await page.locator('[data-merge-status]').textContent(),'Merged list');
+ assert.deepEqual(await page.locator('[data-tp-global-citation]').evaluateAll(items=>items.map(item=>item.getAttribute('href'))),hrefs);
+ await checkbox.uncheck();
+ await page.waitForFunction(()=>document.querySelectorAll('tp-global-listof tp-accordion > dl > dt').length===2);
+ assert.ok(await page.evaluate(element=>element===document.querySelector('tp-global-listof'),original));
+ assert.equal(await page.locator('tp-global-listof tp-accordion [aria-expanded=true]').count(),0);
+ assert.equal(await page.locator('[data-merge-status]').textContent(),'Separate sections');
+ await checkbox.check();
+ await page.waitForFunction(()=>document.querySelectorAll('tp-global-listof [data-tp-global-definitions] > dt').length===1);
+ await page.locator('[data-tp-global-citation]').first().click();
+ await page.waitForFunction(()=>!document.querySelector('tp-global-listof') && !!document.querySelector('tp-ref'));
+ await page.locator('[data-role=sidebar]').getByRole('link',{name:'Bibliography',exact:true}).click();
+ await page.waitForFunction(()=>document.querySelector('tp-global-listof')?.hasAttribute('merge') && document.querySelectorAll('tp-global-listof [data-tp-global-definitions] > dt').length===1);
+ assert.equal(await checkbox.isChecked(),true);
+ console.log('Merge demo: unchecked default, same-instance switching, shared entry fusion, four preserved citation links and retained choice after navigation passed.');
+} finally {await browser.close();}

@@ -13,6 +13,10 @@
  * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-html-viewer
  * @summary Interactive HTML viewer with editable source, live rendering, and DOM inspection.
  */
@@ -81,6 +85,8 @@ const OUTPUT_MODES: readonly MarkupViewerMode<RstViewerMode>[] = [
  * @attr {boolean} lite = false - Uses the compact single-example viewer with rendered HTML output.
  * @attr {boolean} doctest = false - Runs standard Python doctest blocks in rendered output.
  * @attr {string} src = "" - Comma-separated URLs of external reStructuredText example files.
+ * @keyboard {Shift+Enter} Run the current source.
+ * @attr {"default" | "lite" | "simple"} mode = "default" - Viewer presentation: full controls, compact controls, or only source editor and rendered output.
  * @example
  * <tp-restructuredtext-viewer>
  *         <script type="tp/restructuredtext">

@@ -1,3 +1,4 @@
+import { showGameRules, toggleGameHelp } from "../../utilities/game-header.js";
 /** @module components/wari
  * @summary Interactive Oware Abapa positions, sowing and endgames.
  */
@@ -626,6 +627,16 @@ export class TpWari extends TpBase {
 			?.querySelector<HTMLButtonElement>(`[data-pit="${this.focusPit}"]`)
 			?.focus();
 	};
+
+	/** Opens or closes the game assistance menu. */
+	toggleHelp(): void {
+		toggleGameHelp(this);
+	}
+
+	/** Opens the rules of this game in its drawer. */
+	showRules(): void {
+		showGameRules(this);
+	}
 }
 if (!customElements.get("tp-wari")) customElements.define("tp-wari", TpWari);
 declare global {

@@ -1,3 +1,11 @@
+import { DocumentHistory } from "../../utilities/document-history.js";
+import { preserveReadingHistory } from "../../utilities/multi-pages-reading-history.js";
+import "../global-listof/global-listof.js";
+import {
+	clearGlobalListCache,
+	type GlobalListPage,
+	globalListTarget,
+} from "../../utilities/global-listof.js";
 /**
  * @module components/markup-multi-pages
  * @summary Multi-page documentation with support for multiple markup languages.
@@ -9,8 +17,12 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-button
+ * @summary Button component that supports native button and link rendering.
+ */
+/**
  * @tp-dependency tp-calculator
- * @summary Scientific calculator with an editable expression and degree/radian modes.
+ * @summary Provides a scientific calculator with an editable expression and degree/radian modes.
  */
 /**
  * @tp-dependency tp-clock
@@ -21,12 +33,20 @@
  * @summary Brand color preset controller scoped to the containing element.
  */
 /**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
  * @tp-dependency tp-drawer
  * @summary Drawer overlay component.
  */
 /**
  * @tp-dependency tp-fullscreen
  * @summary Fullscreen controller button.
+ */
+/**
+ * @tp-dependency tp-global-listof
+ * @summary Lists labelled elements across the pages of a multi-page document, with links to their pages and anchors.
  */
 /**
  * @tp-dependency tp-icon
@@ -42,7 +62,7 @@
  */
 /**
  * @tp-dependency tp-post-it-editor
- * @summary creates and edits persistent personal annotations attached to document elements.
+ * @summary Creates and edits persistent personal annotations attached to document elements.
  */
 /**
  * @tp-dependency tp-screen
@@ -77,8 +97,12 @@
 import "../button/button.js";
 import "../icon/icon.js";
 import { TpBase } from "../base/base.js";
+import { observeCurrentSidebarPage } from "../markup-multi-pages/sidebar-current.js";
 import sidebarToolsStyle from "../markup-multi-pages/sidebar-tools.css?inline";
-import { appendSidebarTools } from "../markup-multi-pages/sidebar-tools.js";
+import {
+	appendSidebarTools,
+	type SidebarTools,
+} from "../markup-multi-pages/sidebar-tools.js";
 import { updateDocumentLogo } from "../toolbar/document-logo.js";
 import { updateDocumentNavbar } from "../toolbar/document-navbar.js";
 import {
@@ -160,11 +184,24 @@ function highlightRestructuredTextSource(source: string): string {
  * @attr {string} git = "" - Repository URL assigned to the toolbar source link when the document shell is created. Set before connecting the component.
  * @attr {TpMarkupMultiPagesTheme} theme = "" - Legacy light, dark or auto property. Attribute-driven styling is currently inactive; use the toolbar theme control.
  * @attr {string} brand = "tp-default" - Legacy brand preset property, such as tp-default. Attribute-driven styling is currently inactive; use the toolbar color control.
+ *  @cssprop [--tp-markup-multi-pages-sidebar-width=12rem] Width of the overlay navigation sidebar on narrow screens, capped at 85% of its container; desktop sizing is controlled by the splitter.
  * @example
  * <tp-markup-multi-pages repository="/docs/components/markup-multi-pages/docs"></tp-markup-multi-pages>
- *  @cssprop [--tp-markup-multi-pages-sidebar-width=12rem] Width of the overlay navigation sidebar on narrow screens, capped at 85% of its container; desktop sizing is controlled by the splitter.
  */
 export class TpMarkupMultiPages extends TpBase {
+	private toggleMenuAction: () => void | Promise<void> = () => {};
+
+	private navigationHistory?: DocumentHistory;
+	private get documentHistory(): DocumentHistory {
+		this.navigationHistory ??= new DocumentHistory(this, (href) =>
+			this.navigate(href),
+		);
+		return this.navigationHistory;
+	}
+	/** Navigates to a fragment in the current document while recording the preceding reading position. */
+	public navigateToFragment(fragment: string): void {
+		this.goToCurrentFragment(fragment);
+	}
 	public static get observedAttributes(): string[] {
 		return [
 			"logo",
@@ -179,6 +216,7 @@ export class TpMarkupMultiPages extends TpBase {
 	}
 
 	private sidebarElement: HTMLElement | null = null;
+	private stopSidebarTracking: (() => void) | null = null;
 	private contentElement: HTMLElement | null = null;
 	private currentHref = "";
 	/** Shared page-scoped personal annotation editor. */
@@ -195,6 +233,8 @@ export class TpMarkupMultiPages extends TpBase {
 	protected get fixedLanguage(): TpMarkupMultiPagesLanguage | null {
 		return null;
 	}
+
+	private stopReadingHistory: (() => void) | null = null;
 
 	private stopOrientationObserver: (() => void) | null = null;
 
@@ -219,13 +259,28 @@ export class TpMarkupMultiPages extends TpBase {
 			this.annotations.setTarget(this.contentElement);
 			this.querySelector('[data-action="calculator"]')?.after(this.annotations);
 		}
+		this.stopSidebarTracking?.();
+		if (this.sidebarElement)
+			this.stopSidebarTracking = observeCurrentSidebarPage(
+				this,
+				this.sidebarElement,
+			);
 		updateMultiPagesToolbar(this);
 		// this.applyTheme();
+		this.stopReadingHistory?.();
+		this.stopReadingHistory = preserveReadingHistory(this);
+		void this.documentHistory;
 		void this.initialize();
 		window.addEventListener("hashchange", this.handleHashChange);
 	}
 
 	public disconnectedCallback(): void {
+		this.stopReadingHistory?.();
+		this.stopReadingHistory = null;
+		this.stopSidebarTracking?.();
+		this.stopSidebarTracking = null;
+		this.navigationHistory?.disconnect();
+		this.navigationHistory = undefined;
 		this.stopOrientationObserver?.();
 		this.stopOrientationObserver = null;
 		this.annotations?.dispose();
@@ -315,7 +370,7 @@ export class TpMarkupMultiPages extends TpBase {
 	}
 
 	/**
-	 * @summary Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo.
+	 * @summary Icon name from the tp library or SVG URL displayed at the start of the toolbar, in a borderless button with a fixed height of 2em and proportional width. Empty hides the logo.
 	 * @attr logo
 	 * @default ""
 	 */
@@ -446,7 +501,11 @@ export class TpMarkupMultiPages extends TpBase {
 			this.hasAttribute("repository") &&
 			view?.frameElement !== null &&
 			!view?.frameElement?.hasAttribute("data-tp-screen-preview");
-		const initialHref = ignoresInheritedRoute ? null : this.readCurrentHref();
+		const initialHref = this.hasParentDocument
+			? this.documentHistory.currentHref
+			: ignoresInheritedRoute
+				? null
+				: this.readCurrentHref();
 		if (initialHref === null || initialHref === "") {
 			await this.navigate(
 				(await this.resolveSpecialPageHref("cover")) ?? this.coverHref,
@@ -511,11 +570,14 @@ export class TpMarkupMultiPages extends TpBase {
 				void this.goToCover();
 			},
 		);
+		this.toggleMenuAction = () => {
+			this.menu = !this.menu;
+			this.applyMenuState();
+		};
 		this.querySelector('[data-action="menu"]')?.addEventListener(
 			"click",
 			() => {
-				this.menu = !this.menu;
-				this.applyMenuState();
+				void this.toggleMenu();
 			},
 		);
 		this.querySelector('[data-action="code"]')?.addEventListener(
@@ -526,7 +588,8 @@ export class TpMarkupMultiPages extends TpBase {
 		);
 	}
 
-	private toggleCalculator(): void {
+	/** Shows or hides the document calculator. */
+	toggleCalculator(): void {
 		if (!this.calculatorDrawer) {
 			const drawer = new TpDrawer();
 			drawer.setAttribute("label", "Calculator");
@@ -553,6 +616,23 @@ export class TpMarkupMultiPages extends TpBase {
 		layout.toggleAttribute("sidebar-open", this.menu);
 	}
 
+	/** Pages available to global lists, in navigation order, without external links. */
+	public getGlobalListPages(): GlobalListPage[] {
+		const seen = new Set<string>();
+		return this.pageLinks
+			.filter((page) => {
+				if (!this.isRepositoryHref(page.href) || seen.has(page.href))
+					return false;
+				seen.add(page.href);
+				return true;
+			})
+			.map(({ href, title }) => ({ href, title }));
+	}
+	/** Creates a route to a page and its local fragment. */
+	public globalListHref(href: string): string {
+		return `#/${this.stripRepository(href)}`;
+	}
+
 	private async loadSidebar(): Promise<void> {
 		if (this.sidebarElement === null) return;
 
@@ -571,6 +651,8 @@ export class TpMarkupMultiPages extends TpBase {
 		}
 		this.wrapSidebarListWithTree(this.sidebarElement);
 		this.rewriteSidebarLinks(this.sidebarElement);
+		clearGlobalListCache(this);
+		this.dispatchEvent(new CustomEvent("tp-global-pages-change"));
 	}
 
 	private wrapSidebarListWithTree(root: HTMLElement): void {
@@ -639,7 +721,7 @@ export class TpMarkupMultiPages extends TpBase {
 		);
 		controls.className = "tp-markup-multi-pages-sidebar-controls";
 		controls.append(expandButton, collapseButton);
-		appendSidebarTools(controls, tree);
+		this.sidebarTools = appendSidebarTools(controls, tree);
 		return controls;
 	}
 
@@ -750,7 +832,8 @@ export class TpMarkupMultiPages extends TpBase {
 		this.updateCurrentLink(href);
 	}
 
-	private async toggleSourceMode(): Promise<void> {
+	/** Switches between the document and its editable source. */
+	async toggleSourceMode(): Promise<void> {
 		const content = this.contentElement;
 		if (content === null || this.currentHref === "") return;
 
@@ -1279,7 +1362,7 @@ export class TpMarkupMultiPages extends TpBase {
 		button.dataset.helpLabel = "Top of page";
 		button.dataset.helpDescription = "Scroll to the top of the current page.";
 		button.addEventListener("click", () => {
-			this.contentElement?.scrollTo({ top: 0, behavior: "smooth" });
+			this.scrollToTop();
 		});
 
 		button.setAttribute("aria-label", `Top of page: ${page.title}`);
@@ -1374,34 +1457,29 @@ export class TpMarkupMultiPages extends TpBase {
 	private goTo(href: string, baseHref = this.currentHref): void {
 		const resolved = this.resolveDocumentHref(href, baseHref);
 		const hash = `#/${this.stripRepository(resolved)}`;
-
-		if (window.location.hash === hash) {
-			void this.navigate(resolved, true);
-			return;
-		}
-
-		window.location.hash = hash;
+		this.documentHistory.go(
+			resolved,
+			this.currentHref || this.coverHref,
+			this.hasParentDocument ? undefined : hash,
+		);
 	}
 
 	private goToCurrentFragment(fragment: string): void {
-		const currentHref =
-			this.currentHref !== "" ? this.currentHref : this.readCurrentHref();
-		if (currentHref === null || currentHref === "") {
-			return;
-		}
-
-		const { href } = this.splitHrefFragment(currentHref);
-		const hash = `#/${this.stripRepository(href)}${fragment}`;
-
-		if (window.location.hash === hash) {
-			this.scrollToFragment(fragment);
-			return;
-		}
-
-		window.location.hash = hash;
+		const current = this.currentHref || this.coverHref;
+		const { href } = this.splitHrefFragment(current);
+		const resolved = `${href}${fragment}`;
+		this.documentHistory.go(
+			resolved,
+			current,
+			this.hasParentDocument
+				? undefined
+				: `#/${this.stripRepository(href)}${fragment}`,
+		);
 	}
 
 	private handleHashChange = (): void => {
+		if (this.navigationHistory?.consumeHashChange()) return;
+		if (this.hasParentDocument) return;
 		const href = this.readCurrentHref();
 		if (href === null || href === "") {
 			void this.navigateToCover();
@@ -1416,7 +1494,8 @@ export class TpMarkupMultiPages extends TpBase {
 		);
 	}
 
-	private async goToCover(): Promise<void> {
+	/** Navigates to the introduction using the document history. */
+	async goToCover(): Promise<void> {
 		this.goTo((await this.resolveSpecialPageHref("cover")) ?? this.coverHref);
 	}
 
@@ -1444,6 +1523,10 @@ export class TpMarkupMultiPages extends TpBase {
 			return;
 		}
 
+		const owner = link.closest(
+			".tp-markdown-multi-pages-host, .tp-markup-multi-pages-host",
+		);
+		if (owner && owner !== this) return;
 		const href = link.getAttribute("href") ?? "";
 		if (this.isHashOnlyHref(href)) {
 			event.preventDefault();
@@ -1457,7 +1540,15 @@ export class TpMarkupMultiPages extends TpBase {
 		this.goTo(href, this.currentHref);
 	};
 
+	/** Embedded guides navigate locally instead of consuming their parent's route. */
+	private get hasParentDocument(): boolean {
+		return !!this.parentElement?.closest(
+			".tp-markdown-multi-pages-host, .tp-markup-multi-pages-host",
+		);
+	}
+
 	private readCurrentHref(): string | null {
+		if (this.hasParentDocument) return null;
 		if (!window.location.hash.startsWith("#/")) return null;
 		return this.normalizeHref(window.location.hash.slice(2));
 	}
@@ -1650,9 +1741,11 @@ export class TpMarkupMultiPages extends TpBase {
 		if (fragment === "") return;
 
 		const id = decodeURIComponent(fragment.slice(1));
-		const target = this.contentElement?.querySelector<HTMLElement>(
-			`#${this.escapeCssIdentifier(id)}`,
-		);
+		const target =
+			globalListTarget(this.contentElement, id) ??
+			this.contentElement?.querySelector<HTMLElement>(
+				`#${this.escapeCssIdentifier(id)}`,
+			);
 		target?.scrollIntoView?.({ block: "start" });
 	}
 
@@ -1777,6 +1870,46 @@ export class TpMarkupMultiPages extends TpBase {
 		return extensions.map((extension) => {
 			return `${this.repositoryBasePath}${name}.${extension}`;
 		});
+	}
+
+	private sidebarTools: SidebarTools | undefined;
+	/** Widens the table of contents or restores its previous width. */
+	public toggleSidebarWidth(): void {
+		this.sidebarTools?.toggleWidth();
+	}
+	/** Shows or hides the table-of-contents search field, clearing the query when hidden. */
+	public toggleSidebarSearch(): void {
+		this.sidebarTools?.toggleSearch();
+	}
+
+	/** Scrolls the current page to its beginning. */
+	public scrollToTop(): void {
+		this.contentElement?.scrollTo({ top: 0, behavior: "smooth" });
+	}
+
+	/** Shows or hides the navigation sidebar. */
+	async toggleMenu(): Promise<void> {
+		await this.toggleMenuAction();
+	}
+
+	/** Opens the preceding page in the navigation order. */
+	previousPage(): void {
+		const { href } = this.splitHrefFragment(
+			this.resolveDocumentHref(this.currentHref),
+		);
+		const index = this.pageLinks.findIndex((link) => link.href === href);
+		const page = index > 0 ? this.pageLinks[index - 1] : undefined;
+		if (page) this.goTo(page.href);
+	}
+
+	/** Opens the following page in the navigation order. */
+	nextPage(): void {
+		const { href } = this.splitHrefFragment(
+			this.resolveDocumentHref(this.currentHref),
+		);
+		const index = this.pageLinks.findIndex((link) => link.href === href);
+		const page = index >= 0 ? this.pageLinks[index + 1] : undefined;
+		if (page) this.goTo(page.href);
 	}
 }
 

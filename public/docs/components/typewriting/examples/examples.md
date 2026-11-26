@@ -1,5 +1,5 @@
-::::: tp-markdown-viewer { label="tp-typewriting" allow-script }
-:::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-typewriting" allow-script preserve-source }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-typewriting { speed="20" }
 Welcome to **tp-components**. Make your words appear progressively.
@@ -41,5 +41,18 @@ Welcome to **tp-components**. You can pause this reading and resume it whenever 
 ::: tp-text-to-speech { for="spoken-text" lang="en" }
 :::
 ```
+
+``` example {label="Initially hidden tab"}
+:::: tp-tabs
+Instructions
+: Open Animated text to start the reveal. Return to Instructions, then reopen Animated text to start it again.
+
+Animated text
+:
+  ::: tp-typewriting {speed="15" delay="300"}
+  This sentence starts appearing only when you open this tab.
+  :::
 ::::
+```
 :::::
+::::::

@@ -3,6 +3,7 @@ import type { TpConsole } from "../console/console.js";
 import type { TpIframe } from "../iframe/iframe.js";
 import { TpJavascriptViewerQuestion } from "../javascript-viewer-question/javascript-viewer-question.js";
 import { TpPlayground } from "../playground/playground.js";
+import type { TpProject } from "../playground/project.js";
 
 beforeEach(() => {
 	vi.stubGlobal(
@@ -40,7 +41,7 @@ function action(question: TpJavascriptViewerQuestion, name: string): void {
 	button.click();
 }
 
-it("uses inherited open handling and requires a test source", () => {
+it("uses inherited open handling and accepts an optional test source", () => {
 	const question = new TpJavascriptViewerQuestion();
 	expect(question.test).toBe("");
 	document.body.append(question);
@@ -49,7 +50,7 @@ it("uses inherited open handling and requires a test source", () => {
 	question.open = true;
 	expect(question.querySelector("details")?.open).toBe(true);
 	action(question, "submit");
-	expect(question.textContent).toContain("No test file is configured");
+	expect(question.textContent).toContain("No tests provided.");
 });
 
 it("forwards src and waits for the current control to finish loading", async () => {
@@ -172,4 +173,57 @@ it("starts a closed exercise only when opened and retains edits on reopening", a
 	question.open = false;
 	question.open = true;
 	expect(question.querySelector("tp-javascript-viewer")).toBe(viewer);
+});
+
+it("uses a Feedback file and tests the submitted project snapshot, not subsequent edits", async () => {
+	let finish: ((response: Response) => void) | undefined;
+	vi.stubGlobal(
+		"fetch",
+		vi.fn(
+			() =>
+				new Promise<Response>((resolve) => {
+					finish = resolve;
+				}),
+		),
+	);
+	const question = new TpJavascriptViewerQuestion();
+	question.open = true;
+	question.setAttribute(
+		"data-tp-source",
+		"https://example.test/course/exercise.md",
+	);
+	question.innerHTML =
+		'<dl><dt>Title</dt><dd>Double</dd><dt>Prompt</dt><dd>Edit</dd><dt>Feedback</dt><dd><a href="tests/double.test.js">Tests</a></dd></dl>';
+	document.body.append(question);
+	const viewer = question.querySelector("tp-javascript-viewer");
+	if (!viewer) throw new Error("Missing viewer");
+	const project = viewer.getProject();
+	project.entry = "/main.js";
+	project.files = [
+		{
+			path: "/main.js",
+			language: "javascript",
+			content: "function double(x) { return x * 2; }",
+		},
+	];
+	viewer.setProject(project);
+	let tested = "";
+	vi.spyOn(TpPlayground.prototype, "createTestDocument").mockImplementation(
+		async function (this: TpPlayground<TpProject>) {
+			tested = this.getProject().findFile("/main.js")?.content ?? "";
+			return { html: "<p>Tests</p>" };
+		},
+	);
+	action(question, "submit");
+	expect(fetch).toHaveBeenCalledWith(
+		"https://example.test/course/tests/double.test.js",
+		expect.anything(),
+	);
+	const file = project.files[0];
+	if (!file) throw new Error("Missing program");
+	file.content = "function double(x) { return 0; }";
+	viewer.setProject(project);
+	finish?.(new Response("assertions"));
+	await vi.waitFor(() => expect(tested).toContain("x * 2"));
+	expect(tested).not.toContain("return 0");
 });

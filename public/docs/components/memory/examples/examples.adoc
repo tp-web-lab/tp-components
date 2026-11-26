@@ -7,9 +7,7 @@
 [tp-memory,label="Match the fruits"]
 ====
 . Apple
-
 . Pear
-
 . Plum
 ====
 ======

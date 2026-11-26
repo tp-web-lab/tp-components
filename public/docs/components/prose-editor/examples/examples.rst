@@ -9,14 +9,14 @@
 
          .. tp-prose-editor::
 
-            .. h2::
+            .. heading-level:: 2
 
-               A short editable document
+            A short editable document
+            =========================
 
             Select a word and use the toolbar to change its **formatting**.
 
             - Write a draft
-
             - Review the content
 
       .. example:: Javascript API

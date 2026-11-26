@@ -21,6 +21,10 @@
  * @summary Copy-to-clipboard button component.
  */
 /**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
  * @tp-dependency tp-dropdown
  * @summary Dropdown menu component.
  */
@@ -88,11 +92,14 @@ import {
 	searchKeymap,
 } from "@codemirror/search";
 import { Compartment, EditorState, type Extension } from "@codemirror/state";
+import { chooseSaveTarget, saveBlob } from "../../utilities/save-file.js";
+import "../divider/divider.js";
 import { TpBase } from "../base/base.js";
 import { codeCommentMarkers } from "./code-comment-markers.js";
 import style from "./code-editor.css?inline";
 import {
 	getCatalogLanguageFromFilename,
+	getLanguageFileExtension,
 	getLoadedLanguageSupport,
 	loadLanguageSupport,
 } from "./language-support.js";
@@ -142,6 +149,7 @@ import { abcBaseTheme, abcLanguage } from "./abc-language.js";
 type TpCodeEditorSource = "api" | "script" | "src" | "value" | "none";
 
 type TpCodeEditorKeyboardAction =
+	| "save-as"
 	| "undo"
 	| "redo"
 	| "copy"
@@ -947,6 +955,41 @@ export class TpCodeEditor extends TpBase {
 	 * @internal
 	 */
 	private editor: EditorView | null = null;
+	private mergeManaged = false;
+	private readonly mergeExtensions = new Compartment();
+
+	/** Prepare the shared editor toolbar and extensions for an owning MergeView. @internal */
+	public prepareMergeEditor(source: {
+		value: string;
+		language: string;
+		filename: string;
+		readonly: boolean;
+		wrap: boolean;
+	}): Extension {
+		this.mergeManaged = true;
+		this.setAttribute("data-tp-code-editor-managed-layout", "");
+		this.currentValue = source.value;
+		this.currentLanguage = source.language;
+		this.currentFilename = source.filename;
+		this.filename = source.filename;
+		this.readonly = source.readonly;
+		this.wordWrap = source.wrap;
+		this.toolbar = true;
+		this.lineNumbers = true;
+		this.ensureStyles();
+		this.ensureThemeTargetId();
+		this.ensureContainer();
+		this.ensureActionPanel();
+		return this.mergeExtensions.of(this.buildExtensions());
+	}
+
+	/** Attach the owning MergeView's editor without creating another CodeMirror instance. @internal */
+	public attachMergeEditor(view: EditorView): void {
+		this.editor = view;
+		this.container?.append(view.dom);
+		this.syncActionPanel();
+	}
+
 	/** Annotation numbers owned by each linked tp-code-comment list. */
 	private readonly commentNumbers = new Map<object, readonly number[]>();
 	/** Rich explanations supplied by each linked annotation list. */
@@ -1094,11 +1137,13 @@ export class TpCodeEditor extends TpBase {
 	private initialValue = "";
 	private hasInitialValue = false;
 
-	private toggleGutters(): void {
+	/** Shows or hides editor gutters. */
+	toggleGutters(): void {
 		this.foldGutter = !this.foldGutter;
 	}
 
-	private toggleLineNumbers(): void {
+	/** Shows or hides source line numbers. */
+	toggleLineNumbers(): void {
 		this.lineNumbers = !this.lineNumbers;
 	}
 
@@ -1398,7 +1443,14 @@ export class TpCodeEditor extends TpBase {
 	 * @internal
 	 */
 	protected connectedCallback(): void {
+		if (this.mergeManaged) {
+			super.connectedCallback();
+			this.ensureStyles();
+			this.syncActionPanel();
+			return;
+		}
 		if (
+			!this.readonly &&
 			!this.classList.contains("tp-light") &&
 			!this.classList.contains("tp-dark")
 		) {
@@ -1448,6 +1500,13 @@ export class TpCodeEditor extends TpBase {
 		newValue: string | null,
 	): void {
 		if (!this.isConnected || oldValue === newValue) {
+			return;
+		}
+
+		if (this.mergeManaged) {
+			this.syncActionPanel();
+			if (name !== "toolbar") this.reconfigureEditor();
+			this.editor?.requestMeasure();
 			return;
 		}
 
@@ -1501,7 +1560,7 @@ export class TpCodeEditor extends TpBase {
 		);
 		this.keyboardDropdownEl?.remove();
 		this.keyboardDropdownEl = null;
-		this.editor?.destroy();
+		if (!this.mergeManaged) this.editor?.destroy();
 		this.editor = null;
 	}
 
@@ -1715,6 +1774,45 @@ export class TpCodeEditor extends TpBase {
 		});
 	}
 
+	private sourceFilename(): string {
+		const filename = this.filename || this.currentFilename || this.src;
+		if (!filename) return "";
+		try {
+			return decodeURIComponent(
+				new URL(filename, this.baseURI).pathname.split("/").pop() ?? "",
+			);
+		} catch {
+			return filename;
+		}
+	}
+
+	/** Opens Save as for the current source, including in read-only mode. */
+	public async saveAs(): Promise<void> {
+		const source = this.getValue();
+		const basename = this.sourceFilename();
+		const extension =
+			basename.match(/\.([a-z0-9]+)$/i)?.[1] ??
+			getLanguageFileExtension(this.currentLanguage);
+		const target = await chooseSaveTarget({
+			suggestedName: basename || `source.${extension}`,
+			extension: `.${extension}`,
+			mimeType: "text/plain",
+			description: `${this.currentLanguage} source`,
+		});
+		if (target)
+			await saveBlob(
+				new Blob([source], { type: "text/plain;charset=utf-8" }),
+				target,
+			);
+	}
+	private requestSave(): void {
+		void this.saveAs().catch((error: unknown) =>
+			this.dispatchErrorEvent(
+				error instanceof Error ? error.message : String(error),
+			),
+		);
+	}
+
 	private async runKeyboardAction(
 		action: TpCodeEditorKeyboardAction,
 	): Promise<void> {
@@ -1722,10 +1820,28 @@ export class TpCodeEditor extends TpBase {
 			return;
 		}
 
+		if (
+			this.readonly &&
+			[
+				"undo",
+				"redo",
+				"cut",
+				"paste",
+				"indent",
+				"dedent",
+				"replace",
+				"toggle-line-comment",
+				"toggle-block-comment",
+			].includes(action)
+		)
+			return;
 		const view = this.editor;
 		view.focus();
 
 		switch (action) {
+			case "save-as":
+				this.requestSave();
+				return;
 			case "undo":
 				undo(view);
 				return;
@@ -1769,11 +1885,11 @@ export class TpCodeEditor extends TpBase {
 				return;
 
 			case "toggle-gutters":
-				this.foldGutter = !this.foldGutter;
+				this.toggleGutters();
 				return;
 
 			case "toggle-line-numbers":
-				this.lineNumbers = !this.lineNumbers;
+				this.toggleLineNumbers();
 				return;
 
 			case "indent":
@@ -2016,6 +2132,12 @@ export class TpCodeEditor extends TpBase {
 	 * @internal
 	 */
 	private reconfigureEditor(): void {
+		if (this.mergeManaged) {
+			this.editor?.dispatch({
+				effects: this.mergeExtensions.reconfigure(this.buildExtensions()),
+			});
+			return;
+		}
 		if (this.editor === null) {
 			return;
 		}
@@ -2061,7 +2183,8 @@ export class TpCodeEditor extends TpBase {
 		this.isApplyingExternalValue = false;
 	}
 
-	private toggleKeyboardDropdown(): void {
+	/** Opens or closes the keyboard commands menu. */
+	toggleKeyboardDropdown(): void {
 		if (this.keyboardDropdownEl?.open) {
 			this.keyboardDropdownEl.hide();
 		} else {
@@ -2078,6 +2201,13 @@ export class TpCodeEditor extends TpBase {
 	 */
 	private buildExtensions(): Extension[] {
 		const customKeymap = keymap.of([
+			{
+				key: "Mod-s",
+				run: () => {
+					this.requestSave();
+					return true;
+				},
+			},
 			{
 				key: "ArrowUp",
 				run: () => {
@@ -2403,6 +2533,7 @@ export class TpCodeEditor extends TpBase {
 	 * @internal
 	 */
 	private scheduleSyncHeight(): void {
+		if (this.mergeManaged) return;
 		this.syncHeight();
 
 		this.editor?.requestMeasure({
@@ -2470,6 +2601,18 @@ export class TpCodeEditor extends TpBase {
 		this.languageBadgeEl =
 			badge instanceof HTMLElement ? (badge as TpBadge) : null;
 
+		let filename = panel.querySelector<HTMLElement>(
+			"[data-tp-code-editor-filename]",
+		);
+		if (!filename) {
+			filename = document.createElement("span");
+			filename.setAttribute("data-tp-code-editor-filename", "");
+		}
+		filename.textContent = this.sourceFilename();
+		filename.title = filename.textContent;
+		filename.hidden = !filename.textContent;
+		badge.after(filename);
+
 		let cursorPosition = panel.querySelector<HTMLSpanElement>(
 			"[data-tp-code-editor-cursor-position]",
 		);
@@ -2482,6 +2625,22 @@ export class TpCodeEditor extends TpBase {
 		if (cursorPosition.parentElement !== startSection)
 			startSection.append(cursorPosition);
 		this.cursorPositionEl = cursorPosition;
+
+		let save = panel.querySelector<HTMLElement>("[data-tp-code-editor-save]");
+		if (!save) {
+			save = document.createElement("tp-icon-button");
+			save.setAttribute("data-tp-code-editor-save", "");
+			save.setAttribute("name", "file-upload-as");
+			save.setAttribute("label", "Save as");
+			save.setAttribute("title", "Save as (Ctrl/Cmd+S)");
+			save.setAttribute("size", "xs");
+			save.setAttribute(
+				"data-help-description",
+				"Choose a filename and save the current source code.",
+			);
+			save.addEventListener("click", () => this.requestSave());
+		}
+		if (save.parentElement !== endSection) endSection.append(save);
 
 		let copy = panel.querySelector("tp-copy-code[data-tp-code-editor-copy]");
 
@@ -2567,7 +2726,8 @@ export class TpCodeEditor extends TpBase {
 			if (copy.parentElement !== endSection) endSection.append(copy);
 		}
 		if (theme instanceof HTMLElement) {
-			if (theme.parentElement !== endSection) endSection.append(theme);
+			if (this.readonly && !this.toolbar) theme.remove();
+			else if (theme.parentElement !== endSection) endSection.append(theme);
 		}
 		if (fullscreen instanceof HTMLElement) {
 			if (fullscreen.parentElement !== endSection)
@@ -2603,6 +2763,8 @@ export class TpCodeEditor extends TpBase {
 
 			dropdown.innerHTML = `
       <ul>
+        <li data-tp-code-editor-keyboard-action="save-as"><span>Save as</span><kbd>${mod} S</kbd></li>
+        <tp-divider data-tp-dropdown-divider></tp-divider>
         <li data-tp-code-editor-keyboard-action="undo">
           <span>Undo</span><kbd>${mod} Z</kbd>
         </li>
@@ -3016,6 +3178,86 @@ export class TpCodeEditor extends TpBase {
 		this.sourceErrorElement.textContent = "";
 		this.sourceErrorElement.hidden = true;
 		this.scheduleSyncHeight();
+	}
+
+	/** Runs the undo editor command, retaining its readonly and selection behavior. */
+	async undo(): Promise<void> {
+		await this.runKeyboardAction("undo");
+	}
+
+	/** Runs the redo editor command, retaining its readonly and selection behavior. */
+	async redo(): Promise<void> {
+		await this.runKeyboardAction("redo");
+	}
+
+	/** Runs the copy editor command, retaining its readonly and selection behavior. */
+	async copySelection(): Promise<void> {
+		await this.runKeyboardAction("copy");
+	}
+
+	/** Runs the cut editor command, retaining its readonly and selection behavior. */
+	async cutSelection(): Promise<void> {
+		await this.runKeyboardAction("cut");
+	}
+
+	/** Runs the paste editor command, retaining its readonly and selection behavior. */
+	async paste(): Promise<void> {
+		await this.runKeyboardAction("paste");
+	}
+
+	/** Runs the select all editor command, retaining its readonly and selection behavior. */
+	async selectAll(): Promise<void> {
+		await this.runKeyboardAction("select-all");
+	}
+
+	/** Runs the fold code editor command, retaining its readonly and selection behavior. */
+	async foldCode(): Promise<void> {
+		await this.runKeyboardAction("fold-code");
+	}
+
+	/** Runs the unfold code editor command, retaining its readonly and selection behavior. */
+	async unfoldCode(): Promise<void> {
+		await this.runKeyboardAction("unfold-code");
+	}
+
+	/** Runs the indent editor command, retaining its readonly and selection behavior. */
+	async indent(): Promise<void> {
+		await this.runKeyboardAction("indent");
+	}
+
+	/** Runs the dedent editor command, retaining its readonly and selection behavior. */
+	async dedent(): Promise<void> {
+		await this.runKeyboardAction("dedent");
+	}
+
+	/** Runs the search editor command, retaining its readonly and selection behavior. */
+	async openSearch(): Promise<void> {
+		await this.runKeyboardAction("search");
+	}
+
+	/** Runs the replace editor command, retaining its readonly and selection behavior. */
+	async openReplace(): Promise<void> {
+		await this.runKeyboardAction("replace");
+	}
+
+	/** Runs the goto line editor command, retaining its readonly and selection behavior. */
+	async goToLine(): Promise<void> {
+		await this.runKeyboardAction("goto-line");
+	}
+
+	/** Runs the toggle line comment editor command, retaining its readonly and selection behavior. */
+	async toggleLineComment(): Promise<void> {
+		await this.runKeyboardAction("toggle-line-comment");
+	}
+
+	/** Runs the toggle block comment editor command, retaining its readonly and selection behavior. */
+	async toggleBlockComment(): Promise<void> {
+		await this.runKeyboardAction("toggle-block-comment");
+	}
+
+	/** Runs the toggle toolbar editor command, retaining its readonly and selection behavior. */
+	async toggleToolbar(): Promise<void> {
+		await this.runKeyboardAction("toggle-toolbar");
 	}
 }
 

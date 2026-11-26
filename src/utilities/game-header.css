@@ -13,20 +13,14 @@
 
 [data-tp-game-scope] .tp-game-header tp-icon-button > button { /* Keep legacy game button rules from changing TP icon-button geometry. */
   color:inherit;
-  background:transparent;
   padding:0;
   height:auto;
   inline-size:var(--tp-icon-button-size);
   block-size:var(--tp-icon-button-size);
   min-inline-size:var(--tp-icon-button-size);
-  min-block-size:var(--tp-icon-button-size);
-  border:var(--tp-border-width) var(--tp-border-style) var(--tp-brand-stroke-mid);
-  border-radius:var(--tp-border-radius-circle); }
-[data-tp-game-scope] .tp-game-header tp-icon-button > button:hover:not(:disabled):not([aria-disabled="true"]) { background:var(--tp-brand-fill-soft); color:var(--tp-brand-text-on-soft); }
+  min-block-size:var(--tp-icon-button-size); }
 
 [data-tp-game-scope] { --tp-color-background:var(--tp-paper-color); --tp-color-text:var(--tp-text-body); background:var(--tp-paper-color); }
-
-[data-tp-game-scope] .tp-game-header :is(tp-color, tp-theme) tp-icon-button > button:hover:not(:disabled):not([aria-disabled="true"]) { color:inherit; }
 
 [data-tp-game-scope] .tp-game-help-separator { padding:0; margin:0; list-style:none; }
 [data-tp-game-scope] .tp-game-rules li + li { margin-block-start:.75rem; }

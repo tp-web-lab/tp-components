@@ -9,11 +9,8 @@
 * Project
 ** Documentation
 *** Getting started
-
 *** Examples
-
 ** Source code
-
 ** README.md
 ====
 ======

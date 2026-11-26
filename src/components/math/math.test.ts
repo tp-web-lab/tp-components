@@ -376,5 +376,6 @@ it("retains formula sources when rendered notes are copied into lists or tooltip
 				?.getAttribute("data-tp-math-source"),
 		).toBe(String.raw`\dot{x}`);
 	}
-	expect(render).toHaveBeenCalledOnce();
+	// Each copy re-renders its source instead of duplicating MathJax SVG IDs.
+	expect(render).toHaveBeenCalledTimes(3);
 });

@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-22T23:17:57.798Z",
+  "results": [
+    {
+      "language": "html",
+      "code": "<template data-tp-numbering=\"\">{\"section\":{\"enabled\":true,\"maxLevel\":3,\"start\":[2,3]},\"figure\":{\"enabled\":true,\"prefix\":\"2.\",\"start\":7},\"table\":{\"enabled\":true},\"code\":{\"enabled\":true}}</template><h2 id=\"results\"><span data-section-number=\"\" data-tp-numbering-generated=\"section\">2.3 </span>Results</h2>\n<h3 id=\"detail\"><span data-section-number=\"\" data-tp-numbering-generated=\"section\">2.3.1 </span>Detail</h3>\n<figure><img src=\"http://127.0.0.1:4188/medias/image/canoe.svg\" alt=\"Diagram\"><figcaption><span data-object-number=\"figure\" data-tp-numbering-generated=\"figure\">Figure 2.7. </span>An illustration</figcaption>\n</figure>\n<table>\n<caption id=\"measurements\" style=\"caption-side: bottom\"><span data-object-number=\"table\" data-tp-numbering-generated=\"table\">Table 1. </span>Measurements</caption>\n<thead>\n<tr>\n<th>Name</th>\n<th>Value</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>A</td>\n<td>1</td>\n</tr>\n</tbody>\n</table>\n<figure>\n  <pre><code class=\"language-scheme\">(+ 1 2)\n</code></pre>\n<figcaption>\n  <p><span data-object-number=\"code\" data-tp-numbering-generated=\"code\">Code 1. </span>Calculation</p>\n\n  </figcaption>\n  \n  </figure>\n  <script data-tp-numbering-runtime=\"\">(()=>{const apply=function applyDocumentNumbering(root, config) {\n    // This function is self-contained so the same implementation can run in exported HTML.\n    const kinds = [\"section\", \"figure\", \"table\", \"code\"];\n    const positive = (n, fallback = 1) => Number.isSafeInteger(Number(n)) && Number(n) > 0 ? Number(n) : fallback;\n    if (!config) {\n        const template = root.querySelector(\"template[data-tp-numbering]\");\n        if (template) {\n            try {\n                config = JSON.parse(template.content.textContent || \"{}\");\n            }\n            catch {\n                return;\n            }\n        }\n    }\n    if (!config || !kinds.some((k) => config?.[k]?.enabled))\n        return;\n    for (const node of root.querySelectorAll(\"[data-tp-numbering-generated],template[data-tp-numbering]\"))\n        node.remove();\n    const doc = root.ownerDocument || document;\n    const meta = doc.createElement(\"template\");\n    meta.setAttribute(\"data-tp-numbering\", \"\");\n    meta.content.textContent = JSON.stringify(config);\n    root.prepend(meta);\n    const heading = config.section;\n    if (heading?.enabled) {\n        const rawMax = Number(heading.maxLevel);\n        const max = Math.min(6, Math.max(1, Number.isInteger(rawMax) ? rawMax : 6));\n        const candidate = Array.isArray(heading.start)\n            ? heading.start\n            : [positive(heading.start)];\n        const start = candidate.length > 0 &&\n            candidate.length <= max &&\n            candidate.every((n) => Number.isSafeInteger(n) && n > 0)\n            ? candidate\n            : [1];\n        const values = Array.from({ length: 6 }, (_, i) => positive(start[i], 0) - (i === start.length - 1 ? 1 : 0));\n        for (const h of root.querySelectorAll(\"h1,h2,h3,h4,h5,h6\")) {\n            const level = Number(h.localName[1]);\n            if (level > max || h.classList.contains(\"unnumbered\"))\n                continue;\n            values[level - 1] = (values[level - 1] || 0) + 1;\n            values.fill(0, level);\n            const number = (heading.prefix || \"\") +\n                values\n                    .slice(0, level)\n                    .filter((v) => v > 0)\n                    .join(\".\");\n            const span = doc.createElement(\"span\");\n            span.setAttribute(\"data-section-number\", \"\");\n            span.setAttribute(\"data-tp-numbering-generated\", \"section\");\n            span.textContent = `${number} `;\n            h.prepend(span);\n        }\n    }\n    const next = {\n        figure: positive(config.figure?.start),\n        table: positive(config.table?.start),\n        code: positive(config.code?.start),\n    };\n    for (const object of root.querySelectorAll(\"figure,table\")) {\n        const caption = object.querySelector(\":scope > caption,:scope > figcaption\");\n        if (!caption ||\n            object.classList.contains(\"unnumbered\") ||\n            caption.classList.contains(\"unnumbered\"))\n            continue;\n        const declared = object.getAttribute(\"data-numbering\");\n        const kind = declared === \"figure\" || declared === \"table\" || declared === \"code\"\n            ? declared\n            : object.localName === \"table\"\n                ? \"table\"\n                : object.querySelector(\":scope > pre\")\n                    ? \"code\"\n                    : \"figure\";\n        const rule = config[kind];\n        if (!rule?.enabled)\n            continue;\n        const value = positive(object.getAttribute(\"data-number\"), next[kind]);\n        next[kind] = value + 1;\n        const label = rule.label ?? kind[0].toUpperCase() + kind.slice(1);\n        const marker = doc.createElement(\"span\");\n        marker.setAttribute(\"data-object-number\", kind);\n        marker.setAttribute(\"data-tp-numbering-generated\", kind);\n        marker.textContent = `${(label ? `${label} ` : \"\") + (rule.prefix || \"\") + value}. `;\n        const first = caption.firstElementChild;\n        if (first?.localName === \"p\" &&\n            ![...caption.childNodes].some((n) => n.nodeType === 3 && n.textContent?.trim()))\n            first.prepend(marker);\n        else\n            caption.prepend(marker);\n    }\n};const root=document.body;const options={childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:[\"class\",\"data-number\",\"data-numbering\"]};const observer=new MutationObserver(()=>{observer.disconnect();apply(root);observer.observe(root,options);});apply(root);observer.observe(root,options);})();</script>",
+      "forward": {
+        "missing": [],
+        "automatic": true,
+        "errors": 0,
+        "anchor": true
+      },
+      "back": {
+        "missing": [],
+        "automatic": true,
+        "errors": 0,
+        "anchor": true
+      },
+      "mutation": true,
+      "mutationBack": true
+    },
+    {
+      "language": "markdown",
+      "code": "---\nsectionNumbering:\n  enabled: true\n  start: [2,3]\n  maxLevel: 3\nfigureNumbering:\n  enabled: true\n  start: 7\n  prefix: \"2.\"\ntableNumbering:\n  enabled: true\ncodeNumbering:\n  enabled: true\n---\n\n## Results {#results}\n\n### Detail {#detail}\n\n![Diagram](http://127.0.0.1:4188/medias/image/canoe.svg)\n[An illustration]\n\n| Name | Value |\n| :--- | :--- |\n| A | 1 |\n[Measurements][measurements]\n\n> ```scheme {literal-tail=\"%0A\"}\n> (+ 1 2)\n> \n> ```\n> \n> Calculation\n\n{figure-layout=\"1:1:blocks;caption-present=true\"}",
+      "forward": {
+        "missing": [],
+        "automatic": true,
+        "errors": 0,
+        "anchor": true
+      },
+      "back": {
+        "missing": [],
+        "automatic": true,
+        "errors": 0,
+        "anchor": true
+      },
+      "mutation": true,
+      "mutationBack": true
+    },
+    {
+      "language": "asciidoc",
+      "code": ":sectnums:\n:sectnumlevels: 3\n:sectnum-start: 2.3\n:figure-numbering:\n:figure-start: 7\n:figure-caption: Figure\n:figure-prefix: \"2.\"\n:table-numbering:\n:table-start: 1\n:table-caption: Table\n:table-prefix: \"\"\n:code-numbering:\n:code-start: 1\n:listing-caption: Code\n:code-prefix: \"\"\n\n[[results]]\n== Results\n\n[[detail]]\n=== Detail\n\n.An illustration\n[caption=\"\"]\nimage::http://127.0.0.1:4188/medias/image/canoe.svg[\"Diagram\"]\n\n[[measurements]]\n.Measurements\n[caption=\"\",cols=\"<,<\",options=\"header,autowidth\"]\n|===\n.<|Name\n.<|Value\n\n.<|A\n.<|1\n\n|===\n\n[example,figure-layout=\"1:1:blocks;caption-present=true\"]\n====\n[source,scheme,literal-tail=\"%0A\"]\n----\n(+ 1 2)\n\n----\n\nCalculation\n====",
+      "forward": {
+        "missing": [],
+        "automatic": true,
+        "errors": 0,
+        "anchor": true
+      },
+      "back": {
+        "missing": [],
+        "automatic": true,
+        "errors": 0,
+        "anchor": true
+      },
+      "mutation": true,
+      "mutationBack": true
+    },
+    {
+      "language": "latex",
+      "code": "\\documentclass{report}\n\\usepackage{graphicx,hyperref,tabularray}\n\\usepackage{listings}\n\\counterwithout{figure}{chapter}\n\\counterwithout{table}{chapter}\n\\counterwithout{lstlisting}{chapter}\n\\setcounter{secnumdepth}{2}\n\\setcounter{chapter}{2}\n\\setcounter{section}{2}\n\\setcounter{figure}{6}\n\\renewcommand{\\figurename}{Figure}\n\\renewcommand{\\thefigure}{2.\\arabic{figure}}\n\\setcounter{table}{0}\n\\renewcommand{\\tablename}{Table}\n\\renewcommand{\\thetable}{\\arabic{table}}\n\\setcounter{lstlisting}{0}\n\\renewcommand{\\lstlistingname}{Code}\n\\renewcommand{\\thelstlisting}{\\arabic{lstlisting}}\n\\section{\\hypertarget{results}{Results}}\n\\subsection{\\hypertarget{detail}{Detail}}\n\\begin{figure}\n\\includegraphics[alt={Diagram}]{http://127.0.0.1:4188/medias/image/canoe.svg}\n\n\\caption{An illustration}\n\\end{figure}\n\\begin{table}\n\\begin{tblr}{\n  colspec={Q[l] Q[l]},\n  row{1}={font=\\bfseries}\n}\n\\SetCell{halign=l,valign=t} {Name} & \\SetCell{halign=l,valign=t} {Value} \\\\\n\\SetCell{halign=l,valign=t} {A} & \\SetCell{halign=l,valign=t} {1} \\\\\n\\end{tblr}\n\\caption{Measurements}\n\\end{table}\\begin{lstlisting}[language=scheme,literal-tail=%0A,caption={Calculation}]\n(+ 1 2)\n\\end{lstlisting}\n\n",
+      "forward": {
+        "missing": [],
+        "automatic": true,
+        "errors": 0,
+        "anchor": true
+      },
+      "back": {
+        "missing": [],
+        "automatic": true,
+        "errors": 0,
+        "anchor": true
+      },
+      "mutation": true,
+      "mutationBack": true
+    },
+    {
+      "language": "restructuredtext",
+      "code": ".. sectnum::\n   :depth: 3\n   :start-at: 2.3\n\n.. figure-numbering::\n   :start: 7\n   :label: \"Figure\"\n   :prefix: \"2.\"\n\n.. table-numbering::\n   :start: 1\n   :label: \"Table\"\n   :prefix: \"\"\n\n.. code-numbering::\n   :start: 1\n   :label: \"Code\"\n   :prefix: \"\"\n\n.. heading-level:: 2\n\n.. _results:\n\nResults\n-------\n\n.. _detail:\n\nDetail\n~~~~~~\n\n.. figure:: http://127.0.0.1:4188/medias/image/canoe.svg\n   :alt: Diagram\n\n   An illustration\n\n.. list-table:: Measurements\n   :name: measurements\n   :header-rows: 1\n\n   * - Name\n\n     - Value\n\n   * - A\n\n     - 1\n\n\n.. container::\n   :figure-layout: 1:1:blocks;caption-present=true\n\n   .. code:: scheme\n      :literal-indent: 3\n      :literal-lines: 2\n\n      (+ 1 2)\n\n   Calculation",
+      "forward": {
+        "missing": [],
+        "automatic": true,
+        "errors": 0,
+        "anchor": true
+      },
+      "back": {
+        "missing": [],
+        "automatic": true,
+        "errors": 0,
+        "anchor": true
+      },
+      "mutation": true,
+      "mutationBack": true
+    }
+  ]
+}

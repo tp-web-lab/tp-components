@@ -1,21 +1,14 @@
-::::: tp-markdown-viewer { label="tp-kakuro" allow-script }
+::::: tp-markdown-viewer { label="tp-kakuro" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-kakuro
 1. `# 23/0 30/0 # # 27/0 12/0 16/0`
-
 2. `0/16 . . # 17/24 . . .`
-
 3. `0/17 . . 15/29 . . . .`
-
 4. `0/35 . . . . . 12/0 #`
-
 5. `# 0/7 . . 7/8 . . 7/0`
-
 6. `# 11/0 10/16 . . . . .`
-
 7. `0/21 . . . . 0/5 . .`
-
 8. `0/6 . . . # 0/3 . .`
 :::
 ```

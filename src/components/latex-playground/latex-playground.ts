@@ -32,6 +32,10 @@
  * @summary In-memory file system component.
  */
 /**
+ * @tp-dependency tp-fullscreen
+ * @summary Fullscreen controller button.
+ */
+/**
  * @tp-dependency tp-html-viewer
  * @summary Interactive HTML viewer with editable source, live rendering, and DOM inspection.
  */
@@ -103,10 +107,11 @@ export { TpLatexProject } from "./latex-project.js";
  * @tagname tp-latex-playground
  * @attr {string} src = "" - LaTeX source file or JSON project to load.
  * @attr {string} repository = "" - Directory containing a playground project.
- * @example
- * <tp-latex-playground><script type="tp/latex">\section{Hello}A formula $x^2$.</script></tp-latex-playground>
  *  @see tp-latex-viewer - Present editable examples with rendered and generated HTML views.
  * @see tp-latex - Render LaTeX directly in a page.
+ * @keyboard {Shift+Enter} Run the current project.
+ * @example
+ * <tp-latex-playground><script type="tp/latex">\section{Hello}A formula $x^2$.</script></tp-latex-playground>
  */
 export class TpLatexPlayground extends TpPlayground<TpLatexProject> {
 	protected override createEmptyProject(): TpLatexProject {

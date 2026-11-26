@@ -68,6 +68,26 @@ The `src` attribute accepts either a JSON project or a single restructuredtext s
 
 Source contents are preserved. URL query parameters do not affect extension detection. Dependencies and companion files are not fetched automatically: use a JSON project or `repository` for multiple files. Source priority remains `src`, then `repository`, then internal content. Missing or incompatible files produce a console error. Existing JSON sources, including extensionless URLs, remain supported.
 
+### Programmatic toolbar actions
+
+Toolbar and menu actions are also available as named methods. The API tab includes methods inherited from the shared playground.
+
+| Action | Method |
+| --- | --- |
+| Run / Test / Reset | `run()` / `test()` / `reset()` |
+| New / Clear project | `newProject()` / `clearProject()` |
+| Open source file | `openSourceFile()` |
+| Save / Save as | `saveFile()` / `saveFileAs()` |
+| Import / Export project | `importProject()` / `exportProject()` |
+| Save / Load / Clear browser memory | `saveInMemory()` / `loadFromMemory()` / `clearMemory()` |
+| Load a bundled example | `loadExample(id)` |
+| Language help | `showLanguageHelp()` |
+| Show/hide the editor toolbar | `toggleEditorToolbar()` |
+
+File choosers may require a user gesture. Await asynchronous methods to wait for completion. Browser memory stores one project per playground language.
+
+Use `setExtensions(extensions)` to replace the selected extensions and rerun the project; see the API signature for the language-specific collection type.
+
 ### Importing
 
 ::: tp-tabs
@@ -110,19 +130,19 @@ Single source file
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -163,6 +183,10 @@ All tp-components and external tools used by this component are loaded automatic
 @summary In-memory file system component.
 -->
 <!--
+@tp-dependency tp-fullscreen
+@summary Fullscreen controller button.
+-->
+<!--
 @tp-dependency tp-icon
 @summary SVG icon component with inline, URL, and registry sources.
 -->
@@ -184,7 +208,7 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 <!--
 @tp-dependency tp-switcher
-@summary Component `<tp-switcher>`.
+@summary Switches between horizontal and vertical layouts based on available space.
 -->
 <!--
 @tp-dependency tp-tabs
@@ -202,12 +226,13 @@ All tp-components and external tools used by this component are loaded automatic
 - [`<tp-drawer>`](#/components/drawer/index.md) : Drawer overlay component.
 - [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
 - [`<tp-filesystem>`](#/components/filesystem/index.md) : In-memory file system component.
+- [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
 - [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
 - [`<tp-iframe>`](#/components/iframe/index.md) : Controlled iframe component.
 - [`<tp-menu>`](#/components/menu/index.md) : Accessible menu component.
 - [`<tp-splitter>`](#/components/splitter/index.md) : Splitter component with two resizable panels.
-- [`<tp-switcher>`](#/components/switcher/index.md) : Component `<tp-switcher>`.
+- [`<tp-switcher>`](#/components/switcher/index.md) : Switches between horizontal and vertical layouts based on available space.
 - [`<tp-tabs>`](#/components/tabs/index.md) : Accessible tabs component with keyboard and reorder support.
 - [`<tp-toolbar>`](#/components/toolbar/index.md) : Sticky toolbar with start / center / end sections,
 

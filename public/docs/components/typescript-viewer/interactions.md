@@ -12,11 +12,14 @@
 | :tp-icon:{name="refresh" size="1.25em"} Reset | Restores the initially loaded project. |
 | :tp-icon:{name="play" size="1.25em"} Run | Executes the current project. |
 | Fullscreen / Exit fullscreen | Expand the entire component to fullscreen or return to its normal size. |
+| :tp-icon:{name="test-tube" size="2em"} :tp-icon:{name="test-tube-off" size="2em"} Test | Test. |
+| :tp-icon:{name="keyboard-f1" size="2em"} Toggle editor toolbar | Toggle editor toolbar. |
 
 #### Keyboard interactions
 
 | Key or gesture | Result |
 | --- | --- |
+| <kbd>Shift</kbd>+<kbd>Enter</kbd> | Run the current source from the viewer, including while editing code. |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
 | Focused controls | Use each control’s standard keyboard interaction.  |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |

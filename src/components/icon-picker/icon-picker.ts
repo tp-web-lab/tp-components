@@ -317,12 +317,12 @@ function collectIconPickerItems(): TpIconPickerItem[] {
  * @attr {boolean} compact = false - Shows only the title, filters, and a compact 2em icon grid.
  *
  *
- * @example
- * <tp-icon-picker></tp-icon-picker>
  *  @event tp-icon-picker-select Emitted when a icon is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success.
  * @eventdetail tp-icon-picker-select { name: string; library: string; sourcePath: string; format: TpIconPickerCopyFormat; value: string }
  * @event tp-icon-picker-copy-error Emitted when copying the selected icon fails. The detail contains the requested clipboard text, selection metadata and the caught error.
  * @eventdetail tp-icon-picker-copy-error { name: string; library: string; format: TpIconPickerCopyFormat; value: string; error: unknown }
+ * @example
+ * <tp-icon-picker></tp-icon-picker>
  */
 export class TpIconPicker extends TpBase {
 	/**
@@ -1237,32 +1237,7 @@ export class TpIconPicker extends TpBase {
 		button.addEventListener("pointerenter", showClipboardPreview);
 		button.addEventListener("focus", showClipboardPreview);
 		button.addEventListener("click", () => {
-			showClipboardPreview();
-			this.selectedItem = item;
-			if (this.compactSelectedIconElement !== null) {
-				this.compactSelectedIconElement.innerHTML = namespaceSvgIds(
-					item.svg,
-					`tp-icon-picker-compact-${toSvgIdPrefix(item.id)}`,
-				);
-				this.compactSelectedIconElement.title = `${item.name} — ${item.library}`;
-			}
-			this.renderSelectedPreview();
-			const format = this.copy;
-			const value = this.getClipboardValue(item, format);
-			void this.copyToClipboard(item, format, value);
-			this.dispatchEvent(
-				new CustomEvent("tp-icon-picker-select", {
-					bubbles: true,
-					composed: true,
-					detail: {
-						name: item.name,
-						library: item.library,
-						sourcePath: item.sourcePath,
-						format,
-						value,
-					},
-				}),
-			);
+			void this.selectIcon(item.name, item.library);
 		});
 
 		return button;
@@ -1372,6 +1347,42 @@ export class TpIconPicker extends TpBase {
 				}),
 			);
 		}
+	}
+
+	/** Selects an icon, copies it using the current copy format, and emits tp-icon-picker-select. Clipboard access may require a user gesture. */
+	async selectIcon(name: string, library = "tp"): Promise<void> {
+		const item = this.items.find(
+			(item) => item.name === name && item.library === library,
+		);
+		if (!item) throw new RangeError(`Unknown icon: ${library}/${name}`);
+		this.activeItem = item;
+		this.syncCopyControls();
+		this.selectedItem = item;
+		if (this.compactSelectedIconElement !== null) {
+			this.compactSelectedIconElement.innerHTML = namespaceSvgIds(
+				item.svg,
+				`tp-icon-picker-compact-${toSvgIdPrefix(item.id)}`,
+			);
+			this.compactSelectedIconElement.title = `${item.name} — ${item.library}`;
+		}
+		this.renderSelectedPreview();
+		const format = this.copy;
+		const value = this.getClipboardValue(item, format);
+		const copying = this.copyToClipboard(item, format, value);
+		this.dispatchEvent(
+			new CustomEvent("tp-icon-picker-select", {
+				bubbles: true,
+				composed: true,
+				detail: {
+					name: item.name,
+					library: item.library,
+					sourcePath: item.sourcePath,
+					format,
+					value,
+				},
+			}),
+		);
+		await copying;
 	}
 }
 

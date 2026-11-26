@@ -15,9 +15,11 @@
 
             .. tp-console::
 
-            .. p::
+            .. attributes::
                :data-demo-status:
                :role: status
+
+
 
             .. script::
                :src: /docs/components/_shared/introduction-actions.js
@@ -150,4 +152,43 @@
             output.warn('Warning message');
             output.error(new Error('Error message'));
             });
+            }
+
+      .. example:: Console presentation modes
+
+         .. heading-level:: 3
+
+         Default
+         =======
+
+         .. tp-console::
+            :mode: default
+            :data-console-mode-example:
+
+         .. heading-level:: 3
+
+         Lite
+         ====
+
+         .. tp-console::
+            :mode: lite
+            :data-console-mode-example:
+
+         .. heading-level:: 3
+
+         Simple
+         ======
+
+         .. tp-console::
+            :mode: simple
+            :data-console-mode-example:
+
+         .. script::
+            :type: module
+
+            import "/components/console/console.js";
+            for (const output of document.querySelectorAll("tp-console[data-console-mode-example]")) {
+              output.log("Result", 42);
+              output.info("Calculation complete.");
+              output.error("An example error.");
             }

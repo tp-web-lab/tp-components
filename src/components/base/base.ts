@@ -4,11 +4,15 @@
  */
 
 // tp-docgen:dependencies:start
-
+/**
+ * @credit highlight.js https://highlightjs.org/
+ * @summary Source-code syntax highlighting.
+ */
 // tp-docgen:dependencies:end
 
 import { dedent } from "../../utilities/code.js";
 import { ensureCodeBlockCopyButtons } from "../../utilities/code-block-copy.js";
+import { ensureTableColumnWidths } from "../../utilities/table-column-widths.js";
 import baseStyle from "./base.css?inline";
 import resetStyle from "./tp-reset.css?inline";
 import tokenStyle from "./tp-tokens.css?inline";
@@ -113,6 +117,7 @@ export class TpBase extends HTMLElement {
 	protected connectedCallback(): void {
 		this.captureInitialHelpMarkup();
 		this.ensureBaseStyles();
+		ensureTableColumnWidths(this.ownerDocument);
 		this.setAttribute("data-tp-base-host", "");
 		TpBase.ensureGlobalHelpKeydown();
 		if (!this.baseHelpListenerAttached) {

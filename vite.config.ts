@@ -7,6 +7,7 @@ import { defineConfig } from "vitest/config";
 import { componentApiPlugin } from "./scripts/component-api-plugin.js";
 // import dts from "unplugin-dts/vite";
 import { documentPreloadPlugin } from "./scripts/document-preload-plugin.mjs";
+import { componentsSidebarPlugin } from "./scripts/sync-components-sidebar.mjs";
 import { questionAiPlugin } from "./server/question-ai.mjs";
 
 function sanitizeChunkName(name: string): string {
@@ -138,6 +139,7 @@ export default defineConfig({
 		},
 	},
 	plugins: [
+		componentsSidebarPlugin(),
 		componentApiPlugin(),
 		documentPreloadPlugin(),
 		questionAiPlugin(),

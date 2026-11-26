@@ -6,6 +6,7 @@
 | --- | --- |
 | Message | Read the highlighted information. |
 | Close, when shown | Dismiss the message. |
+| :tp-icon:{name="close" size="2em"} Close callout | Close callout. |
 
 #### Keyboard interactions
 

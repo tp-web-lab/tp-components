@@ -50,6 +50,14 @@ LaTeX renders as HTML with MathJax formulas, interactive components and TikZ fig
 
 Use `allow-script` for authored examples that contain executable JavaScript. The generated HTML is loaded in the preview iframe, preserving scripts from both `\wcScript` and `\rawhtml`.
 
+### Presentation mode
+
+Set `mode="default"` for the standard viewer, `mode="lite"` for the compact presentation, or `mode="simple"` for only the source editor and rendered output. Simple mode always shows both panes, hides the viewer toolbar and uses <kbd>Shift</kbd>+<kbd>Enter</kbd> to run the edited source. The panes adapt to the available width.
+
+The historical boolean `lite` attribute remains an alias for `mode="lite"` when `mode` is absent. An explicit `mode` takes precedence; unsupported values use `default`. Changing the mode preserves the current editable source.
+
+Lite and simple modes display one example and its rendered output, without generated-HTML or structure controls.
+
 ### Importing
 
 ::: tp-tabs
@@ -86,22 +94,25 @@ Basic usage
 
 Javascript API
 : Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Compare presentation modes
+: Compare default, lite and simple presentations of the same source. In simple mode, edit the code and press <kbd>Shift</kbd>+<kbd>Enter</kbd> (Return) from the editor to update only that viewer.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -122,6 +133,10 @@ All tp-components and external tools used by this component are loaded automatic
 @summary Visual separator for menus, dropdowns, toolbars, and layouts.
 -->
 <!--
+@tp-dependency tp-fullscreen
+@summary Fullscreen controller button.
+-->
+<!--
 @tp-dependency tp-html-viewer
 @summary Interactive HTML viewer with editable source, live rendering, and DOM inspection.
 -->
@@ -140,6 +155,7 @@ All tp-components and external tools used by this component are loaded automatic
 
 - [`<tp-base>`](#/components/base/index.md) : Shared base class for tp-* components.
 - [`<tp-divider>`](#/components/divider/index.md) : Visual separator for menus, dropdowns, toolbars, and layouts.
+- [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
 - [`<tp-html-viewer>`](#/components/html-viewer/index.md) : Interactive HTML viewer with editable source, live rendering, and DOM inspection.
 - [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
@@ -148,10 +164,15 @@ All tp-components and external tools used by this component are loaded automatic
 ### External
 
 <!--
+@credit highlight.js https://highlightjs.org/
+@summary Source-code syntax highlighting.
+-->
+<!--
 @credit tp-latex https://www.npmjs.com/package/@tp/tp-latex
 @summary LaTeX.js conversion and patched TikZJax assets.
 -->
 
+- [highlight.js](https://highlightjs.org/) : Source-code syntax highlighting.
 - [tp-latex](https://www.npmjs.com/package/@tp/tp-latex) : LaTeX.js conversion and patched TikZJax assets.
 
 ### See also

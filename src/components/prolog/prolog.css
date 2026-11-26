@@ -1,0 +1,16 @@
+@import "../interpreter/interpreter.css";
+
+
+tp-prolog .tp-prolog-libraries {
+	margin-inline-start: auto;
+}
+tp-prolog [data-prolog-library] > tp-icon {
+	margin-inline-end: 0.5em;
+	visibility: hidden;
+}
+tp-prolog [data-prolog-library][data-loaded] > tp-icon {
+	visibility: visible;
+}
+tp-prolog [data-prolog-library][aria-disabled="true"] {
+	cursor: not-allowed;
+}

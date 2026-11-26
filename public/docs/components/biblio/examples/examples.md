@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-biblio" allow-script }
+:::::: tp-markdown-viewer { label="tp-biblio" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: div { data-tp-reference-scope }

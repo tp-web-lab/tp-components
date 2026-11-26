@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-restructuredtext-playground" allow-script }
+::::: tp-markdown-viewer { label="tp-restructuredtext-playground" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-restructuredtext-playground { src="/docs/components/_shared/intro-projects/restructuredtext.json" }

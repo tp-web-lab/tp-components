@@ -1,5 +1,5 @@
-::::: tp-markdown-viewer { label="tp-carousel" allow-script }
-:::: script { type="tp/markdown" }
+:::::: tp-markdown-viewer { label="tp-carousel" allow-script preserve-source }
+::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-carousel { aria-label="Outdoor activities" height="18rem" }
 ![Canoe](/docs/medias/images/canoe.svg)
@@ -63,5 +63,31 @@ document.body.append(example);
 ![Walking shoe](/docs/medias/images/walking-shoe.svg)
 :::
 ```
+
+``` example {label="Automatic scrolling and hover pause"}
+Hover over the carousel to pause the movement. Move the pointer away to resume from the same position.
+
+:::: tp-carousel { auto="3000" transition="start-to-end" hide-controls aria-label="TP markup languages" height="3em" }
+::: figure
+:tp-icon:{name="tp-html-logo" library="tp" size="3em" role="img" aria-label="TP HTML"}
+:::
+
+::: figure
+:tp-icon:{name="tp-asciidoc-logo" library="tp" size="3em" role="img" aria-label="TP AsciiDoc"}
+:::
+
+::: figure
+:tp-icon:{name="tp-latex-logo" library="tp" size="3em" role="img" aria-label="TP LaTeX"}
+:::
+
+::: figure
+:tp-icon:{name="tp-markdown-logo" library="tp" size="3em" role="img" aria-label="TP Markdown"}
+:::
+
+::: figure
+:tp-icon:{name="tp-restructuredtext-logo" library="tp" size="3em" role="img" aria-label="TP reStructuredText"}
+:::
 ::::
+```
 :::::
+::::::

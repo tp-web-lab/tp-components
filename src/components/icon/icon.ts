@@ -24,6 +24,7 @@ import { setupTpIcons } from "./icon-setup.js";
 setupTpIcons();
 
 const builtinLibraries: Record<string, (name: string) => Promise<unknown>> = {
+	chess: () => import("./icon-library-chess.js"),
 	languages: () => import("./icon-library-languages.js"),
 	flags: () => import("./icon-library-flags.js"),
 	numbers: () => import("./icon-library-numbers.js"),
@@ -132,7 +133,7 @@ const cache = new Map<string, string | null>();
  * @summary Displays icons and vector images.
  * @tagname tp-icon
  * @attr {string} name = "" - Icon identifier in the selected library, for example heart or settings. Used when no inline SVG or successfully loaded src is available.
- * @attr {string} library = "tp" - Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters, screens and components. Custom registered libraries are also accepted.
+ * @attr {string} library = "tp" - Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, chess, languages, flags, numbers, letters, screens and components. Custom registered libraries are also accepted.
  * @attr {string} src = "" - URL of an SVG file to load. Relative URLs resolve against the containing source document when available, otherwise the page URL. Inline SVG takes precedence; a failed load falls back to name, then the fallback settings.
  * @attr {string} size = "1em" - Base width and height as a CSS length, for example 24px, 2rem or 1.5em. The scale factor multiplies both dimensions; 1em follows the surrounding font size.
  * @attr {string} color = "" - CSS color applied to the SVG and its colorizable fills and strokes, for example red, #2563eb or var(--brand-color). Empty inherits the surrounding text color; explicit fixed SVG colors are preserved.
@@ -143,9 +144,9 @@ const cache = new Map<string, string | null>();
  * @attr {boolean} spin = false - Continuously rotates the SVG once per second when present, overriding rotate. Respects the reduced-motion preference. Remove the attribute to stop; writing false still enables it.
  * @attr {string} fallback = "" - Plain text displayed only when no SVG can be resolved, including fallback-icon. For example, use ? for an unavailable icon. Empty leaves the reserved icon area blank.
  * @attr {string} fallback-icon = "" - Backup icon identifier used when inline SVG, src and name provide no icon. Looked up in the selected library, then in tp; if unavailable, fallback text is used.
+ *  @cssprop [--tp-icon-size=1em] Width and height of the rendered icon; assigned internally from size multiplied by scale.
  * @example
  * <tp-icon name="heart" size="3rem" aria-label="Heart"></tp-icon>
- *  @cssprop [--tp-icon-size=1em] Width and height of the rendered icon; assigned internally from size multiplied by scale.
  */
 export class TpIcon extends TpBase {
 	/**
@@ -212,7 +213,7 @@ export class TpIcon extends TpBase {
 	}
 
 	/**
-	 * @summary Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, languages, flags, numbers, letters, screens and components. Custom registered libraries are also accepted.
+	 * @summary Registry containing name and the first fallback-icon lookup. Built-in libraries: tp, chess, languages, flags, numbers, letters, screens and components. Custom registered libraries are also accepted.
 	 * @attr library
 	 * @default tp
 	 */

@@ -186,6 +186,7 @@ it("removes generated runtime markup while preserving authored HTML", async () =
 	);
 	expect(element.querySelector("tp-code-editor")).toBeNull();
 	const value = element.getValue();
+	expect(value).toContain("<!-- comment -->");
 	expect(value).toContain("color: red");
 	expect(value).toContain('title="kept"');
 	expect(value).not.toContain("generated");
@@ -204,4 +205,24 @@ it("preserves author reference scopes and their definitions", async () => {
 	expect(source).toContain("data-tp-reference-scope");
 	expect(source).toContain('href="^note"');
 	expect(source).toContain('selector="tp-note"');
+});
+
+it("preserves the exact introductory source without adding loader code to the editor", async () => {
+	const source =
+		'<tp-box hidden>\n\n  Text &amp; more\n</tp-box>\n<script type="module">\n  console.log("example");\n</script>';
+	const viewer = document.createElement("tp-html-viewer");
+	viewer.setAttribute("preserve-source", "");
+	const script = document.createElement("script");
+	script.type = "tp/html";
+	script.textContent = source;
+	viewer.append(script);
+	const api = viewer as HTMLElement & {
+		loadExamples(): Promise<Array<{ source: string }>>;
+	};
+	const examples = await api.loadExamples();
+	expect(examples).toHaveLength(1);
+	expect(examples[0]?.source).toBe(source);
+	expect(buildIframeDocument(examples[0]?.source ?? "", null)).toContain(
+		"tp-loader",
+	);
 });

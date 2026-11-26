@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-chess" allow-script }
+::::: tp-markdown-viewer { label="tp-chess" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-chess { position="8/8/3k4/8/3PK3/8/8/8" draggable-pieces }

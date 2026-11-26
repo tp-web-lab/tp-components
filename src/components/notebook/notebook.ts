@@ -1,3 +1,10 @@
+import { releaseInterpreterScope } from "../interpreter/interpreter-scope.js";
+import {
+	createNotebookInterpreter,
+	isQueryFile,
+	NOTEBOOK_INTERPRETERS,
+	runNotebookCell,
+} from "./notebook-interpreters.js";
 /**
  * @module components/notebook
  * @summary Interactive notebook combining markup and executable code cells.
@@ -19,13 +26,13 @@
  * @summary Displays editable Markdown code and its rendered result.
  * @tp-dependency tp-restructuredtext-viewer
  * @summary Displays editable reStructuredText code and its rendered result.
- * @tp-dependency tp-javascript-viewer
+ * @tp-dependency tp-javascript
  * @summary Displays and runs one JavaScript example in a compact interface.
- * @tp-dependency tp-typescript-viewer
+ * @tp-dependency tp-typescript
  * @summary Displays and runs one TypeScript example in a compact interface.
- * @tp-dependency tp-python-viewer
+ * @tp-dependency tp-python
  * @summary Displays and runs one Python example in a compact interface.
- * @tp-dependency tp-prolog-viewer
+ * @tp-dependency tp-prolog
  * @summary Displays and runs one Prolog example in a compact interface.
  * @tp-dependency tp-sql-viewer
  * @summary Displays and runs one SQL example in a compact interface.
@@ -64,8 +71,8 @@
  * @summary Accessible icon button component.
  */
 /**
- * @tp-dependency tp-javascript-viewer
- * @summary Compact JavaScript code viewer and runner.
+ * @tp-dependency tp-javascript
+ * @summary Provides an interactive JavaScript interpreter.
  */
 /**
  * @tp-dependency tp-latex
@@ -80,27 +87,36 @@
  * @summary Interactive Markdown viewer with editable source and parser outputs.
  */
 /**
- * @tp-dependency tp-prolog-viewer
- * @summary Compact Prolog code viewer and runner.
+ * @tp-dependency tp-ocaml
+ * @summary Provides an interactive OCaml interpreter.
  */
 /**
- * @tp-dependency tp-python-viewer
- * @summary Compact Python code viewer and runner.
+ * @tp-dependency tp-prolog
+ * @summary Provides an interactive Prolog interpreter.
+ */
+/**
+ * @tp-dependency tp-python
+ * @summary Provides an interactive Python interpreter.
  */
 /**
  * @tp-dependency tp-restructuredtext-viewer
  * @summary Interactive reStructuredText viewer with editable source and parser outputs.
  */
 /**
+ * @tp-dependency tp-scheme
+ * @summary Provides an interactive Scheme interpreter.
+ */
+/**
  * @tp-dependency tp-sql-viewer
  * @summary Compact SQL code viewer and runner.
  */
 /**
- * @tp-dependency tp-typescript-viewer
- * @summary Compact TypeScript code viewer and runner.
+ * @tp-dependency tp-typescript
+ * @summary Provides an interactive TypeScript interpreter.
  */
 // tp-docgen:dependencies:end
 
+import { createViewerRunShortcut } from "../../utilities/viewer-run-shortcut.js";
 import { TP_COLOR_PRESETS } from "../color/color-presets.js";
 import style from "./notebook.css?inline";
 
@@ -108,6 +124,7 @@ import "../base/base.js";
 import "../icon-button/icon-button.js";
 import "../button/button.js";
 import "../icon/icon.js";
+import { hasTpIcon } from "../icon/icon-registry.js";
 import "../dropdown/dropdown.js";
 import "../divider/divider.js";
 import { setupTpDropdownTriggers } from "../dropdown/dropdown-triggers.js";
@@ -117,10 +134,12 @@ import "../latex-viewer/latex-viewer.js";
 import "../latex/latex.js";
 import "../markdown-viewer/markdown-viewer.js";
 import "../restructuredtext-viewer/restructuredtext-viewer.js";
-import "../javascript-viewer/javascript-viewer.js";
-import "../typescript-viewer/typescript-viewer.js";
-import "../python-viewer/python-viewer.js";
-import "../prolog-viewer/prolog-viewer.js";
+import "../javascript/javascript.js";
+import "../typescript/typescript.js";
+import "../python/python.js";
+import "../scheme/scheme.js";
+import "../ocaml/ocaml.js";
+import "../prolog/prolog.js";
 import "../sql-viewer/sql-viewer.js";
 import { dedent } from "../../utilities/code.js";
 import {
@@ -133,6 +152,8 @@ type NotebookLanguage =
 	| "javascript"
 	| "typescript"
 	| "python"
+	| "scheme"
+	| "ocaml"
 	| "prolog"
 	| "sql";
 type MarkupLanguage =
@@ -146,6 +167,7 @@ interface NotebookFile {
 	content: string;
 }
 interface NotebookCell {
+	query?: string;
 	type: "markup" | "code";
 	language: MarkupLanguage | NotebookLanguage;
 	content?: string;
@@ -175,6 +197,8 @@ const CODE_LANGUAGES: NotebookLanguage[] = [
 	"javascript",
 	"prolog",
 	"python",
+	"scheme",
+	"ocaml",
 	"sql",
 	"typescript",
 ];
@@ -187,6 +211,8 @@ const LANGUAGE_ICONS: Record<MarkupLanguage | NotebookLanguage, string> = {
 	javascript: "file_type_javascript",
 	typescript: "file_type_typescript",
 	python: "file_type_python",
+	scheme: "file_type_scheme",
+	ocaml: "file_type_ocaml",
 	prolog: "file_type_prolog",
 	sql: "file_type_sql",
 };
@@ -194,6 +220,8 @@ const LANGUAGE_LABELS: Record<NotebookLanguage, string> = {
 	javascript: "JavaScript",
 	prolog: "Prolog",
 	python: "Python",
+	scheme: "Scheme",
+	ocaml: "OCaml",
 	sql: "SQL",
 	typescript: "TypeScript",
 };
@@ -229,13 +257,14 @@ export function getNotebookLoaderUrl(
  * @attr {string} language = "javascript" - Programming language enforced by a specialized notebook.
  * @attr {string} src = "" - JSON notebook file.
  * @attr {string} label - Title displayed in the center of the exported HTML toolbar. Defaults to the notebook type name; an empty value hides it.
- * @attr {string} logo - Icon name displayed at the start of the exported HTML toolbar. Defaults to the notebook type icon; an empty value hides it.
+ * @attr {string} logo - TP icon name or SVG URL displayed in a borderless button at the start of the exported HTML toolbar, with a fixed height of 2em and proportional width. Defaults to the notebook type icon; an empty value hides it.
  * @attr {string} repository = "" - Directory containing project.json and .files.json.
  * @attr {boolean} readonly = false - Makes all notebook editors read-only and disables structural changes.
  * @event tp-notebook-load Emitted after inline, src, or repository cells are loaded.
  * @eventdetail tp-notebook-load { source: "inline" | "src" | "repository" | "file"; cells: number }
  * @event tp-notebook-change Emitted after the cell collection changes.
  * @eventdetail tp-notebook-change { cells: number }
+ * @keyboard {Shift+Enter} Reload changed source and execute the current cell query, or render the current markup cell.
  * @example
  * <tp-notebook>
  *   <script type="tp/markdown">
@@ -245,9 +274,8 @@ export function getNotebookLoaderUrl(
  *     ## Calculation
  *     We perform a simple multiplication in Python to demonstrate the calculation.
  *   </script>
- *   <script type="tp/python">
+ *   <script type="tp/python" query="x">
  *     x = 6 * 7
- *     print(x)
  *   </script>
  *   <script type="tp/restructuredtext" doctest="">
  *     .. h2::
@@ -262,9 +290,8 @@ export function getNotebookLoaderUrl(
  *   <script type="tp/html">
  *     In JavaScript, we would have written the following code:
  *   </script>
- *   <script type="tp/javascript">
+ *   <script type="tp/javascript" query="x">
  *     const x = 6 * 7;
- *     console.log(x)
  *   </script>
  *   <script type="tp/asciidoc">
  *     == Result
@@ -306,6 +333,7 @@ export class TpNotebook extends TpBase {
 	private notebookName = "notebook";
 	private fileHandle: NotebookWritableFileHandle | null = null;
 	private viewerObservers: MutationObserver[] = [];
+	private runningAll = false;
 	private previewing = false;
 	private markupLanguage: MarkupLanguage = "markdown";
 	private codeLanguage: NotebookLanguage = "javascript";
@@ -334,6 +362,8 @@ export class TpNotebook extends TpBase {
 			"tp-javascript-notebook": "Javascript Notebook",
 			"tp-prolog-notebook": "Prolog Notebook",
 			"tp-python-notebook": "Python Notebook",
+			"tp-scheme-notebook": "Scheme Notebook",
+			"tp-ocaml-notebook": "OCaml Notebook",
 			"tp-sql-notebook": "SQL Notebook",
 			"tp-typescript-notebook": "Typescript Notebook",
 		};
@@ -365,13 +395,28 @@ export class TpNotebook extends TpBase {
 		this.toggleAttribute("readonly", value);
 	}
 
+	private readonly handleRunShortcut = createViewerRunShortcut(
+		this,
+		(event) => {
+			const cell =
+				(event.target as Element)?.closest?.("[data-tp-notebook-cell]") ??
+				this.querySelector<HTMLElement>(
+					"[data-tp-notebook-cell][data-selected]",
+				);
+			if (cell) void runNotebookCell(cell);
+		},
+	);
+
 	public connectedCallback(): void {
+		this.addEventListener("keydown", this.handleRunShortcut, true);
 		this.ensureGlobalStyle(TpNotebook.styleId, style);
 		this.renderShell();
 		void this.load();
 	}
 
 	public disconnectedCallback(): void {
+		releaseInterpreterScope(this);
+		this.removeEventListener("keydown", this.handleRunShortcut, true);
 		this.viewerObservers.forEach((observer) => {
 			observer.disconnect();
 		});
@@ -485,11 +530,16 @@ export class TpNotebook extends TpBase {
 				CODE_LANGUAGES.includes(language as NotebookLanguage) &&
 				(this.localName === "tp-notebook" || language === this.language)
 			) {
-				if (codeCell === null || codeCell.language !== language) {
+				if (
+					codeCell === null ||
+					codeCell.language !== language ||
+					(script.hasAttribute("query") && codeCell.files?.length)
+				) {
 					codeCell = {
 						type: "code",
 						language: language as NotebookLanguage,
 						files: [],
+						query: script.getAttribute("query") ?? undefined,
 					};
 					cells.push(codeCell);
 				}
@@ -500,6 +550,11 @@ export class TpNotebook extends TpBase {
 			}
 		}
 		return cells;
+	}
+
+	/** Optional runtime information shared with the standalone HTML export. */
+	protected getRuntimeInformation(): HTMLElement | null {
+		return null;
 	}
 
 	private renderShell(): void {
@@ -551,7 +606,10 @@ export class TpNotebook extends TpBase {
 		);
 		const cells = document.createElement("div");
 		cells.setAttribute("data-tp-notebook-cells", "");
-		root.append(toolbar, cells);
+		root.append(toolbar);
+		const runtimeInformation = this.getRuntimeInformation();
+		if (runtimeInformation) root.append(runtimeInformation);
+		root.append(cells);
 		this.append(root);
 		setupTpDropdownTriggers(root);
 		this.cellsEl = cells;
@@ -603,7 +661,8 @@ export class TpNotebook extends TpBase {
 		return dropdown;
 	}
 
-	private chooseNotebookFile(format: "json" | "html"): void {
+	/** Opens the file chooser for a saved JSON notebook or exported HTML notebook. */
+	public chooseNotebookFile(format: "json" | "html"): void {
 		const input = document.createElement("input");
 		input.type = "file";
 		input.accept =
@@ -625,7 +684,8 @@ export class TpNotebook extends TpBase {
 		input.click();
 	}
 
-	private async loadNotebookFile(file: File): Promise<void> {
+	/** Imports a notebook file and replaces the current cells. */
+	async loadNotebookFile(file: File): Promise<void> {
 		const data = JSON.parse(await file.text()) as NotebookData;
 		if (!Array.isArray(data.cells))
 			throw new TypeError("The notebook file must contain a cells array.");
@@ -693,7 +753,8 @@ export class TpNotebook extends TpBase {
 		});
 	}
 
-	private async saveNotebook(saveAs: boolean): Promise<void> {
+	/** Saves the notebook; true requests a new destination. */
+	async saveNotebook(saveAs: boolean): Promise<void> {
 		const picker = (
 			window as Window & {
 				showSaveFilePicker?: (
@@ -801,12 +862,22 @@ export class TpNotebook extends TpBase {
 		label.setAttribute("section", "center");
 		label.className = "tp-notebook-export-toolbar-label";
 		label.textContent = this.label;
-		const logo = document.createElement("tp-icon");
+		const logo = document.createElement("tp-button");
+		logo.setAttribute("data-document-logo", "");
 		logo.setAttribute("section", "start");
-		logo.setAttribute("name", this.logo);
-		if (!this.hasAttribute("logo")) logo.setAttribute("library", "components");
-		logo.setAttribute("size", "1.75em");
-		logo.setAttribute("aria-hidden", "true");
+		logo.setAttribute("aria-label", "Notebook logo");
+		const logoImage = document.createElement("tp-icon");
+		if (!this.hasAttribute("logo")) {
+			logoImage.setAttribute("library", "components");
+			logoImage.setAttribute("name", this.logo);
+		} else if (hasTpIcon(this.logo, "tp")) {
+			logoImage.setAttribute("library", "tp");
+			logoImage.setAttribute("name", this.logo);
+		} else if (this.logo) {
+			logoImage.setAttribute("src", this.logo);
+		}
+		logoImage.setAttribute("aria-hidden", "true");
+		logo.append(logoImage);
 		const title = this.notebookName
 			.replaceAll("&", "&amp;")
 			.replaceAll("<", "&lt;")
@@ -839,6 +910,7 @@ ${bodyOpening}
     <tp-divider section="end" orientation="vertical" data-document-navbar-divider></tp-divider>
     <tp-control section="end" value="clock"></tp-control>
   </tp-toolbar>
+  ${this.getRuntimeInformation()?.outerHTML ?? ""}
   <main>${body}</main>
   <script>
     for (const source of document.querySelectorAll('script[data-tp-export-type]')) {
@@ -847,32 +919,44 @@ ${bodyOpening}
       source.removeAttribute('data-tp-export-type');
     }
     const viewers = Array.from(document.querySelectorAll('main > [data-tp-notebook-code-viewer]'));
-    const resetAll = document.querySelector('[data-tp-notebook-export-reset]');
-    const runAll = document.querySelector('[data-tp-notebook-export-run]');
+
     let busy = false;
     const updateActions = () => {
       const ready = viewers.length > 0 && viewers.every(viewer =>
-        viewer.querySelector('[data-tp-programming-viewer-code]') &&
-        viewer.querySelector('[data-tp-programming-viewer-output]') &&
+        (viewer.matches('[data-tp-notebook-interpreter]') ? viewer.querySelector('tp-code-editor') && viewer.getAttribute('aria-busy') !== 'true' : viewer.querySelector('[data-tp-programming-viewer-code]') && viewer.querySelector('[data-tp-programming-viewer-output]')) &&
         typeof viewer.run === 'function' && typeof viewer.reset === 'function');
-      resetAll.toggleAttribute('disabled', busy || !ready);
-      runAll.toggleAttribute('disabled', busy || !ready);
+      document.querySelector('[data-tp-notebook-export-reset]')?.toggleAttribute('disabled', busy || !ready);
+      document.querySelector('[data-tp-notebook-export-run]')?.toggleAttribute('disabled', busy || !ready);
     };
     const applyToAll = async (action) => {
-      if (busy || runAll.hasAttribute('disabled')) return;
+      const runAll = document.querySelector('[data-tp-notebook-export-run]');
+      if (busy || !runAll || runAll.hasAttribute('disabled')) return;
       busy = true;
       updateActions();
       try {
+        if (action === 'reset') {
+          const scopes = new Map();
+          for (const viewer of viewers) {
+            const previous = viewer.getAttribute('execution-scope');
+            if (previous) { if (!scopes.has(previous)) scopes.set(previous, previous + '-reset-' + Date.now()); viewer.setAttribute('execution-scope', scopes.get(previous)); }
+          }
+        }
         for (const viewer of viewers) await viewer[action]();
       } finally {
         busy = false;
         updateActions();
       }
     };
-    resetAll.addEventListener('click', () => { void applyToAll('reset'); });
-    runAll.addEventListener('click', () => { void applyToAll('run'); });
+    // Toolbar initialization can replace its controls; delegate to the document.
+    document.addEventListener('click', event => {
+      const target = event.target;
+      if (!target || typeof target.closest !== 'function') return;
+      if (target.closest('[data-tp-notebook-export-reset]')) void applyToAll('reset');
+      else if (target.closest('[data-tp-notebook-export-run]')) void applyToAll('run');
+    });
     for (const viewer of viewers) {
       const openPanels = () => {
+        if (viewer.matches('[data-tp-notebook-interpreter]')) { updateActions(); return; }
         const code = viewer.querySelector('[data-tp-programming-viewer-code]');
         const output = viewer.querySelector('[data-tp-programming-viewer-output]');
         if (!code || !output) return;
@@ -882,7 +966,7 @@ ${bodyOpening}
         if (output.getAttribute('aria-pressed') === 'false') output.click();
       };
       const observer = new MutationObserver(openPanels);
-      observer.observe(viewer, { childList: true, subtree: true });
+      observer.observe(viewer, { childList: true, subtree: true, attributes: true, attributeFilter: ['aria-busy'] });
       openPanels();
     }
   </script>
@@ -892,7 +976,10 @@ ${bodyOpening}
 
 	private createRenderedCell(cell: NotebookCell, index: number): HTMLElement {
 		if (cell.type === "code") {
+			if (NOTEBOOK_INTERPRETERS.has(cell.language))
+				return createNotebookInterpreter(cell, this.executionScope, index);
 			const viewer = document.createElement(`tp-${cell.language}-viewer`);
+			viewer.setAttribute("mode", "simple");
 			viewer.setAttribute("execution-scope", this.executionScope);
 			viewer.setAttribute("execution-index", String(index));
 			for (const file of cell.files ?? [{ content: "" }]) {
@@ -926,7 +1013,8 @@ ${bodyOpening}
 		return new Blob([await this.standaloneHtml()], { type: "text/html" });
 	}
 
-	private togglePreview(): void {
+	/** Switches between editing and previewing the notebook. */
+	togglePreview(): void {
 		if (this.cellsEl === null) return;
 		if (this.previewing) {
 			this.previewing = false;
@@ -968,7 +1056,8 @@ ${bodyOpening}
 		button.setAttribute("aria-pressed", String(this.previewing));
 	}
 
-	private async exportHtml(): Promise<void> {
+	/** Exports a standalone interactive HTML notebook. */
+	async exportHtml(): Promise<void> {
 		const picker = (
 			window as Window & {
 				showSaveFilePicker?: (
@@ -1199,12 +1288,21 @@ ${bodyOpening}
 	}
 
 	private createViewer(cell: NotebookCell, index: number): HTMLElement {
+		if (cell.type === "code" && NOTEBOOK_INTERPRETERS.has(cell.language)) {
+			const interpreter = createNotebookInterpreter(
+				cell,
+				this.executionScope,
+				index,
+			);
+			this.observeViewer(interpreter, true, 1);
+			return interpreter;
+		}
 		const viewer = document.createElement(`tp-${cell.language}-viewer`);
+		viewer.setAttribute("mode", "simple");
 		if (cell.type === "code") {
 			viewer.setAttribute("execution-scope", this.executionScope);
 			viewer.setAttribute("execution-index", String(index));
 		}
-		if (cell.type === "markup") viewer.setAttribute("lite", "");
 		if (
 			cell.type === "markup" &&
 			cell.language === "restructuredtext" &&
@@ -1241,7 +1339,7 @@ ${bodyOpening}
 		openSource: boolean,
 		expectedEditors: number,
 	): void {
-		let sourceOpened = !openSource;
+		let sourceOpened = !openSource || viewer.getAttribute("mode") === "simple";
 		let observer: MutationObserver;
 		const sync = (): void => {
 			const editors = viewer.querySelectorAll<HTMLElement>("tp-code-editor");
@@ -1269,16 +1367,26 @@ ${bodyOpening}
 				observer.disconnect();
 		};
 		observer = new MutationObserver(sync);
-		observer.observe(viewer, { childList: true, subtree: true });
+		observer.observe(viewer, {
+			childList: true,
+			subtree: true,
+			attributes: true,
+			attributeFilter: ["aria-busy"],
+		});
 		this.viewerObservers.push(observer);
 		queueMicrotask(sync);
 	}
 
 	private handleAction(event: Event): void {
 		const target = event.target as Element | null;
+		if (target?.closest("[data-tp-notebook-interpreter]")) return;
 		const action =
 			target?.closest<HTMLElement>("[data-action]")?.dataset.action;
 		if (action === undefined) return;
+		void this.performAction(action);
+	}
+
+	private async performAction(action: string): Promise<void> {
 		if (
 			this.readonly &&
 			!["run-all", "preview", "editor-toolbar"].includes(action)
@@ -1317,16 +1425,22 @@ ${bodyOpening}
 			return;
 		}
 		const index = this.selectedIndex;
-		if (action === "run-all")
-			this.querySelectorAll<HTMLElement>(
-				this.previewing
-					? "[data-tp-notebook-preview-content] > [execution-scope] [data-tp-playground-run]"
-					: "[data-tp-notebook-cell] [data-tp-playground-run]",
-			).forEach((button) => {
-				button.click();
-			});
-		else if (action === "preview") this.togglePreview();
+		if (action === "run-all") {
+			if (this.runningAll) return;
+			this.runningAll = true;
+			try {
+				for (const cell of this.querySelectorAll(
+					this.previewing
+						? "[data-tp-notebook-preview-content] > [execution-scope]"
+						: "[data-tp-notebook-cell]",
+				))
+					await runNotebookCell(cell);
+			} finally {
+				this.runningAll = false;
+			}
+		} else if (action === "preview") this.togglePreview();
 		else if (action === "reset") {
+			releaseInterpreterScope(this);
 			this.executionScopeVersion += 1;
 			this.cells = structuredClone(this.initialCells);
 			this.selectedIndex = this.cells.length > 0 ? 0 : -1;
@@ -1356,7 +1470,8 @@ ${bodyOpening}
 		}
 	}
 
-	private addCell(type: "markup" | "code", language: string): void {
+	/** Adds and selects a markup or code cell in the requested language. */
+	addCell(type: "markup" | "code", language: string): void {
 		if (this.readonly) return;
 		this.captureAllCells();
 		const cell: NotebookCell =
@@ -1475,15 +1590,50 @@ ${bodyOpening}
 	private captureCell(index: number, element: HTMLElement | null): void {
 		const cell = this.cells[index];
 		if (cell === undefined || element === null) return;
+		const interpreter = element.matches("[data-tp-notebook-interpreter]")
+			? element
+			: element.querySelector("[data-tp-notebook-interpreter]");
+		if (interpreter) {
+			const field = interpreter.querySelector(
+				".tp-interpreter-prompt tp-textfield",
+			) as (HTMLElement & { value: string }) | null;
+			cell.query = field?.value ?? interpreter.getAttribute("query") ?? "";
+			const editor = interpreter.querySelector("tp-code-editor") as
+				| (HTMLElement & { getValue(): string })
+				| null;
+			const program =
+				cell.files?.filter((file) => !isQueryFile(file.filename)) ?? [];
+			const source = editor?.getValue();
+			if (
+				source !== undefined &&
+				source !== program.map((file) => file.content).join("\n\n")
+			)
+				cell.files = [
+					{
+						filename: interpreter.getAttribute("filename") ?? undefined,
+						content: source,
+					},
+				];
+			for (const file of cell.files ?? [])
+				if (isQueryFile(file.filename)) file.content = cell.query;
+			return;
+		}
 		const editors = Array.from(
 			element.querySelectorAll("tp-code-editor"),
 		) as Array<HTMLElement & { getValue(): string }>;
 		if (cell.type === "markup")
 			cell.content = editors[0]?.getValue() ?? cell.content ?? "";
 		else
-			editors.forEach((editor, fileIndex) => {
-				const file = cell.files?.[fileIndex];
-				if (file) file.content = editor.getValue();
+			cell.files?.forEach((file, fileIndex) => {
+				const filename = file.filename?.replace(/^\//, "");
+				const editor = filename
+					? editors.find(
+							(candidate) =>
+								candidate.getAttribute("filename")?.replace(/^\//, "") ===
+								filename,
+						)
+					: editors[fileIndex];
+				if (editor) file.content = editor.getValue();
 			});
 	}
 
@@ -1494,6 +1644,51 @@ ${bodyOpening}
 				detail: { cells: this.cells.length },
 			}),
 		);
+	}
+
+	/** Runs the run all notebook action on the selected cell or notebook, respecting readonly mode. */
+	async runAll(): Promise<void> {
+		await this.performAction("run-all");
+	}
+
+	/** Runs the reset notebook action on the selected cell or notebook, respecting readonly mode. */
+	async reset(): Promise<void> {
+		await this.performAction("reset");
+	}
+
+	/** Runs the up notebook action on the selected cell or notebook, respecting readonly mode. */
+	async moveCellUp(): Promise<void> {
+		await this.performAction("up");
+	}
+
+	/** Runs the down notebook action on the selected cell or notebook, respecting readonly mode. */
+	async moveCellDown(): Promise<void> {
+		await this.performAction("down");
+	}
+
+	/** Runs the duplicate notebook action on the selected cell or notebook, respecting readonly mode. */
+	async duplicateCell(): Promise<void> {
+		await this.performAction("duplicate");
+	}
+
+	/** Runs the delete notebook action on the selected cell or notebook, respecting readonly mode. */
+	async deleteCell(): Promise<void> {
+		await this.performAction("delete");
+	}
+
+	/** Runs the editor toolbar notebook action on the selected cell or notebook, respecting readonly mode. */
+	async toggleEditorToolbar(): Promise<void> {
+		await this.performAction("editor-toolbar");
+	}
+
+	/** Runs the add markup notebook action on the selected cell or notebook, respecting readonly mode. */
+	async addMarkupCell(): Promise<void> {
+		await this.performAction("add-markup");
+	}
+
+	/** Runs the add language notebook action on the selected cell or notebook, respecting readonly mode. */
+	async addCodeCell(): Promise<void> {
+		await this.performAction("add-language");
 	}
 }
 

@@ -22,6 +22,11 @@
       "description": "Collapses every directory in the displayed tree; has no effect before the internal tree is created."
     },
     {
+      "name": "copyPath(path: string): void",
+      "inherited": false,
+      "description": "Requests copying a file path through the same event as the context menu."
+    },
+    {
       "name": "expandAll(): void",
       "inherited": false,
       "description": "Expands every directory in the displayed tree; has no effect before the internal tree is created."

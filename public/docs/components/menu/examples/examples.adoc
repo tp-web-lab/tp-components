@@ -6,11 +6,9 @@
 ======
 [tp-menu]
 ====
-* /#/components/button/index.md[Buttons]
-
-* /#/components/tabs/index.md[Tabs]
-
-* /#/components/tree/index.md[Trees]
+* link:/#/components/button/index.md[Buttons]
+* link:/#/components/tabs/index.md[Tabs]
+* link:/#/components/tree/index.md[Trees]
 ====
 
 [script,src="/docs/components/menu/examples/navigation.js"]

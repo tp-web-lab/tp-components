@@ -1,0 +1,38 @@
+tp-prolog-tracer {display:block;border:1px solid var(--tp-neutral-stroke-soft);border-radius:var(--tp-border-radius, .5rem);overflow:hidden}
+tp-prolog-tracer .tp-interpreter-panel {padding:.75rem}
+tp-prolog-tracer .resolution-controls {display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+tp-prolog-tracer .resolution-controls {margin-block:1rem}
+tp-prolog-tracer [data-role=query] {margin-block:1rem;display:block}
+tp-prolog-tracer .resolution-scroll {overflow:auto;max-height:65vh;border:1px solid var(--tp-brand-stroke-soft);border-radius:.5rem}
+tp-prolog-tracer .resolution-node rect {fill:var(--tp-paper-color);stroke:var(--tp-brand-stroke-mid);stroke-width:1.5}
+tp-prolog-tracer .resolution-node text {fill:var(--tp-text-body);font:12px monospace;pointer-events:none}
+tp-prolog-tracer .resolution-node .resolution-port {font-size:11px}
+tp-prolog-tracer .resolution-node {cursor:pointer}
+tp-prolog-tracer .resolution-node.active rect, tp-prolog-tracer .resolution-node:focus rect {stroke-width:4}
+tp-prolog-tracer .resolution-node.exit rect {stroke:var(--tp-success-stroke-mid)}
+tp-prolog-tracer .resolution-node.fail rect, tp-prolog-tracer .resolution-node.exception rect {stroke:var(--tp-danger-stroke-mid)}
+tp-prolog-tracer .resolution-node.redo rect {stroke-dasharray:5 3}
+tp-prolog-tracer .resolution-node.backtracked {opacity:.65}
+tp-prolog-tracer .resolution-edge {fill:none;stroke:var(--tp-brand-stroke-mid);stroke-width:1.5}
+tp-prolog-tracer .resolution-details {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:1rem}
+tp-prolog-tracer .resolution-details h2 {font-size:1rem;border-bottom:1px solid var(--tp-brand-stroke-mid)}
+tp-prolog-tracer .resolution-details pre {white-space:pre-wrap;overflow-wrap:anywhere}
+tp-prolog-tracer .resolution-error {color:var(--tp-danger-text-on-soft)}
+tp-prolog-tracer [data-role=tree] {display:block;max-width:none;max-inline-size:none;max-height:none}
+tp-prolog-tracer [data-role=query] {--tp-textfield-inline-size:100%}
+
+tp-prolog-tracer [data-role=recorded] {position:relative;max-height:26rem;overflow:auto;white-space:normal;padding:.5rem 0}
+tp-prolog-tracer .resolution-source-line {display:grid;grid-template-columns:4ch minmax(max-content,1fr);gap:1ch;min-height:1.5em;padding-inline:.5rem}
+tp-prolog-tracer .resolution-line-number {text-align:end;color:var(--tp-neutral-text-on-soft);user-select:none;border-inline-end:1px solid var(--tp-neutral-stroke-soft);padding-inline-end:1ch}
+tp-prolog-tracer .resolution-line-text {white-space:pre}
+tp-prolog-tracer .resolution-source-line.current {background:var(--tp-brand-fill-soft);color:var(--tp-brand-text-on-soft);box-shadow:inset 3px 0 var(--tp-brand-stroke-mid)}
+
+tp-prolog-tracer .tp-interpreter-title {font-size:1.125rem}
+tp-prolog-tracer > .tp-interpreter-panel > .tp-interpreter-toolbar > tp-divider,
+tp-prolog-tracer > .tp-interpreter-panel > .tp-interpreter-toolbar > [data-toolbar-end] > tp-divider,
+tp-prolog-tracer > .tp-interpreter-panel > .resolution-controls > tp-divider {--tp-divider-color:var(--tp-brand-stroke-soft)}
+tp-prolog-tracer .resolution-details {align-items:start;margin-block-start:1rem}
+tp-prolog-tracer .resolution-details > .resolution-column {margin:0;min-inline-size:0}
+tp-prolog-tracer .resolution-details > .resolution-column > h2:first-child {margin-block-start:0}
+tp-prolog-tracer .resolution-json {margin-block-start:1rem}
+tp-prolog-tracer .resolution-json pre {max-height:24rem;overflow:auto;margin-block-start:.75rem}

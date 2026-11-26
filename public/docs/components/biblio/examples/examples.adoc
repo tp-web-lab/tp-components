@@ -6,7 +6,7 @@
 ======
 [div%data-tp-reference-scope]
 =====
-Read more [tp-ref,href="@example"]#bibliography-example#.
+Read more [tp-ref,href="@example",tp-empty="true"]##bibliography-example-1##.
 
 [tp-biblio,ref="example",title="Example"]
 ====

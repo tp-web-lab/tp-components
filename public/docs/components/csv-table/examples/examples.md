@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-csv-table" allow-script }
+:::::: tp-markdown-viewer { label="tp-csv-table" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-csv-table { heading }

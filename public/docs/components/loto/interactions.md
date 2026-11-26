@@ -18,6 +18,7 @@ The header shows the game icon and name on the left. Rounded controls appear on 
 | :tp-icon:{name="sun"} :tp-icon:{name="moon"} Theme | Changes the light, dark or automatic theme of this game only. |
 | :tp-icon:{name="fullscreen"} :tp-icon:{name="fullscreen-exit"} Fullscreen | Enters or leaves fullscreen for this game. |
 | Draw a number | Draws the next number and marks matching numbers on all tickets. |
+| :tp-icon:{name="refresh" size="2em"} New loto game | New loto game. |
 
 #### Keyboard interactions
 

@@ -1,0 +1,20 @@
+<tp-diff-code-editor>
+  <dl>
+    <dt>left</dt>
+    <dd><script type="tp/javascript" filename="before.js">
+const message = "Hello";
+const count = 3;
+const prefix = "Greeting:";
+console.log(prefix, message, count);
+console.log("Done");
+    </script></dd>
+    <dt>right</dt>
+    <dd><script type="tp/javascript" filename="after.js">
+const message = "Hello world";
+const count = 3;
+const prefix = "Greeting:";
+console.log(prefix, message);
+console.log("Done");
+    </script></dd>
+  </dl>
+</tp-diff-code-editor>

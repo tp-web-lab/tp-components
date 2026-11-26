@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Native media and RST audit</title><button id="run">Check media and RST conversions</button><p id="status">Ready</p><pre id="summary"></pre><details><summary>Results</summary><pre id="report"></pre></details>
+<script type="module">
+import '/src/tp-loader.ts';
+import {htmlToMarkup,markupToHtml} from '/src/utilities/markup-conversion.ts';
+import {mediaRstCases,mediaRstSignature} from '/src/utilities/markup-media-rst-fixtures.ts';
+document.querySelector('#run').onclick=async()=>{
+ const results=[];
+ for(const test of mediaRstCases) {
+ const original=await markupToHtml(test.html,'html',location.href),expected=mediaRstSignature(original);
+ const pairs=test.name.includes('media')||test.name.includes('tracks') ? ['markdown','asciidoc','restructuredtext','latex'].flatMap(first=>['markdown','asciidoc','restructuredtext','latex'].map(second=>[first,second])) : ['markdown','asciidoc','latex','restructuredtext'].flatMap(other=>[['restructuredtext',other],[other,'restructuredtext']]);
+ for(const [first,second] of pairs) {
+ document.querySelector('#status').textContent=`${test.name}: ${first} → ${second}`;
+ try {
+ const source=htmlToMarkup(original,first),a=await markupToHtml(source,first,location.href),code=htmlToMarkup(a,second),html=await markupToHtml(code,second,location.href),actual=mediaRstSignature(html);
+ const native=!/^\s*:{3,} (?:video|audio|source|track|h[1-6])\b|\[(?:audio|video)[%,]|\\wc(?:Video|Audio|Source|Track)|\.\. (?:video|audio|source|track|h[1-6])::/m.test(code);
+ results.push({name:test.name,first,second,pass:native&&JSON.stringify(actual)===JSON.stringify(expected),source,code,html,expected,actual,native});
+ } catch(error) {results.push({name:test.name,first,second,pass:false,error:String(error)});}
+ }
+ }
+ document.querySelector('#report').textContent=JSON.stringify(results,null,2);
+ document.querySelector('#summary').textContent=JSON.stringify(results.filter(r=>!r.pass),null,2);
+ document.querySelector('#status').textContent=`Complete: ${results.filter(r=>r.pass).length}/${results.length} checks passed`;
+};
+</script></html>

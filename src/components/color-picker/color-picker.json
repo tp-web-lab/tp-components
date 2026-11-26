@@ -10,7 +10,18 @@
     }
   ],
   "attributes": [],
-  "methods": [],
+  "methods": [
+    {
+      "name": "copyToken(tokenName: string): Promise<void>",
+      "inherited": false,
+      "description": "Copies a CSS token reference and emits the same selection event as a swatch click."
+    },
+    {
+      "name": "scrollToSection(targetId: string): void",
+      "inherited": false,
+      "description": "Scrolls to a palette section or token card by its element identifier."
+    }
+  ],
   "events": [
     {
       "name": "tp-color-picker-copy-error",

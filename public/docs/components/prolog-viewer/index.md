@@ -32,6 +32,10 @@ The custom `<tp-prolog-viewer>` element displays and runs one Prolog example in 
 <!-- -->
 ## Usage
 
+Results, printed messages, JavaScript `console.log`/`console.info`/`console.warn`/`console.error` calls and errors appear in the rendered output. There is no separate console or Console button. This also applies to executable cells in exported HTML notebooks.
+
+Engine versions and documentation links are displayed only in the Prolog interpreter, once per page.
+
 ### Initial content
 
 ::: tp-tabs
@@ -158,7 +162,25 @@ The `src` attribute accepts either a JSON project or a single prolog source file
 <tp-prolog-viewer src="/docs/components/_shared/single-source/example.pl"></tp-prolog-viewer>
 ```
 
-Source contents are preserved. URL query parameters do not affect extension detection. Dependencies and companion files are not fetched automatically: use a JSON project or `repository` for multiple files. Source priority remains `src`, then `repository`, then internal content. Missing or incompatible files produce a console error. Existing JSON sources, including extensionless URLs, remain supported.
+Source contents are preserved. URL query parameters do not affect extension detection. Dependencies and companion files are not fetched automatically: use a JSON project or `repository` for multiple files. Source priority remains `src`, then `repository`, then internal content. Missing or incompatible files display an error in the output. Existing JSON sources, including extensionless URLs, remain supported.
+
+### SWI-Prolog runtime
+
+Prolog runs on demand with SWI-Prolog WASM (distribution `swipl-wasm` 8.3.1). Execution uses the same runtime in viewers, playgrounds, notebooks, questions and exported HTML notebooks. Prolog source files retain their modules and relative `use_module`/`include` paths.
+
+Use `library(clpfd)` for integer constraints, including `ins`, `#=` and `labeling/2`; `library(clpq)` and `library(clpr)` provide rational and real constraints. Unlabelled answers retain their residual constraints. Programs written for the previous runtime should replace `library(clpz)` with `library(clpfd)`.
+
+`library(wasm)` provides direct JavaScript and DOM access through `:=/2`. `library(dom)` provides HTML creation and event bindings; its DOM is the execution iframe's document. This is SWI-Prolog's native DOM library, not the former TP DOM simulation. For Tau-style predicates such as `get_by_id/2` and `set_html/2`, use `library(dialect/tau/dom)` where supported. See the [SWI-Prolog WASM manual](https://www.swi-prolog.org/pldoc/man?section=wasm-version).
+
+Tests can use [PlUnit](https://www.swi-prolog.org/pldoc/package/plunit.html): load `library(plunit)`, declare a suite with `begin_tests/1` and `end_tests/1`, and write `test/1` or `test/2` clauses. The test command runs `run_tests/0` and reports success or failure. Existing TP `:- test(Name, Goal[, Expected]).` directives remain supported in files without a PlUnit suite.
+
+### Presentation mode
+
+Set `mode="default"` for the standard viewer, `mode="lite"` for the compact presentation, or `mode="simple"` for only the source editor and rendered output. Simple mode always shows both panes, hides the viewer toolbar and uses <kbd>Shift</kbd>+<kbd>Enter</kbd> to run the edited source. The panes adapt to the available width.
+
+The historical boolean `lite` attribute remains an alias for `mode="lite"` when `mode` is absent. An explicit `mode` takes precedence; unsupported values use `default`. Changing the mode preserves the current editable source.
+
+Programming viewers already use a compact toolbar, so `lite` retains their standard controls. In all three modes, messages and errors appear directly in the output.
 
 ### Importing
 
@@ -211,22 +233,25 @@ error
 
 Single source file
 : Load the standalone prolog file through src and inspect its output. Open the source editor to inspect the file used as the generated project's entry point.
+
+Compare presentation modes
+: Compare the three modes and use <kbd>Shift</kbd>+<kbd>Return</kbd> to display messages and errors directly in the output, without a separate console.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

@@ -1,0 +1,17 @@
+{
+  "name": "SRFI-64 tests",
+  "entry": "/main.scm",
+  "test": "/main.test.scm",
+  "files": [
+    {
+      "path": "/main.scm",
+      "language": "scheme",
+      "content": "(define (double x) (* x 2))"
+    },
+    {
+      "path": "/main.test.scm",
+      "language": "scheme",
+      "content": "(test-begin \"Double\")\n(test-equal \"Positive number\" 6 (double 3))\n(test-equal \"Zero\" 0 (double 0))\n(test-approximate \"Floating point\" 0.3 (+ 0.1 0.2) 0.000001)\n(test-error \"Expected error\" #t (error \"Demonstration\"))\n(test-skip 1)\n(test-equal \"Work in progress\" 7 (double 3))\n(test-expect-fail 1)\n(test-equal \"Known discrepancy\" 7 (double 3))\n(test-end \"Double\")\n"
+    }
+  ]
+}

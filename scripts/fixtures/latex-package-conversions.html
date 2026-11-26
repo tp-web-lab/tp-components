@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>LaTeX package conversion checks</title>
+<style>body{font:16px system-ui;margin:2rem}table{border-collapse:collapse;width:100%}td,th{padding:.5rem;border:1px solid #aaa;text-align:left}.fail{color:#a00}.pass{color:#075}pre{white-space:pre-wrap}details{margin:1rem 0}</style></head><body>
+<h1>LaTeX package conversion checks</h1><p>Checks the shared converter with all four target parsers, including the real Docutils browser runtime.</p><button id="run">Run all conversions</button><button id="reverse">Run reverse conversions</button><p id="status">Ready</p><table><thead><tr><th>Example</th><th>Target</th><th>Result</th></tr></thead><tbody id="results"></tbody></table><div id="outputs"></div>
+<script type="module">
+import {packageExamples,nativeLatexSources} from '/src/utilities/markup-latex-package-fixtures.ts';
+import {htmlToMarkup,markupToHtml} from '/src/utilities/markup-conversion.ts';
+import {packageConversionErrors} from '/src/utilities/markup-latex-package-checks.ts';
+const node=html=>{const e=document.createElement('div');e.innerHTML=html;return e;};
+const formulas=root=>[...root.querySelectorAll('tp-math')].map(e=>(e.getAttribute('value')??e.textContent??'').trim());
+const verify=(before,after,name)=>{
+ const errors=packageConversionErrors(before,after,name);const equal=(a,b,label)=>{if(JSON.stringify(a)!==JSON.stringify(b))errors.push(label+': '+JSON.stringify(a)+' != '+JSON.stringify(b));};
+ if(after.querySelector('.system-message,[role=alert]'))errors.push(after.querySelector('.system-message,[role=alert]').textContent);
+ equal(formulas(before),formulas(after),'formulas');
+ for(const tag of ['table','tr','td','th','ol','ul','li','img'])equal(before.querySelectorAll(tag).length,after.querySelectorAll(tag).length,tag+' count');
+ for(const e of before.querySelectorAll('[id]'))if(!after.querySelector(`[id="${e.id}"]`))errors.push('Missing anchor '+e.id);
+ equal([...before.querySelectorAll('a')].map(e=>e.getAttribute('href')),[...after.querySelectorAll('a')].map(e=>e.getAttribute('href')),'links');
+ if(name==='graphics'){const a=before.querySelector('img'),b=after.querySelector('img');equal(a?.getAttribute('src'),b?.getAttribute('src'),'image source');for(const property of ['width','height','object-fit','transform','clip-path'])equal(a?.style.getPropertyValue(property),b?.style.getPropertyValue(property),'image '+property);}
+ if(name==='listings'){
+ const value=after.querySelector('tp-code-editor')?.getAttribute('value')??after.querySelector('tp-code-editor script')?.textContent?.trim();equal(value,'const x = "<tag>";\nconsole.log(x);','numbered code');equal(after.querySelector('tp-code-editor')?.getAttribute('line-number-start'),'20','line numbers');equal(after.querySelector('pre code')?.textContent?.replace(/\n$/,''),'  print("<literal>")','literal code');
+ }
+ if(name==='lists')for(const label of ['C)','D)','E)'])if(!after.textContent.includes(label))errors.push('Missing list label '+label);
+ if(name==='tables'&&!after.querySelector('col')?.getAttribute('style')?.includes('9em'))errors.push('Lost column width');
+ return errors;
+};
+const run=async(reverse=false)=>{
+ document.querySelector('#results').replaceChildren();document.querySelector('#outputs').replaceChildren();let passed=0,total=0;
+ for(const [name,source] of Object.entries(packageExamples))for(const language of ['html','markdown','asciidoc','restructuredtext']){
+  const row=document.querySelector('#results').insertRow();row.insertCell().textContent=name;row.insertCell().textContent=language;const result=row.insertCell();result.textContent='Running';document.querySelector('#status').textContent=`Running ${name} → ${language}`;total++;
+  try {
+   const html=await markupToHtml(source,'latex',new URL('./lesson.tex',location.href).href),converted=htmlToMarkup(html,language),rendered=await markupToHtml(converted,language,location.href);const latex=reverse?htmlToMarkup(rendered,'latex'):converted; const final=reverse?await markupToHtml(latex,'latex',location.href):rendered;const errors=verify(node(html),node(final),name);
+   result.textContent=errors.length?errors.join('; '):'PASS';result.className=errors.length?'fail':'pass';if(!errors.length)passed++;
+   const details=document.createElement('details'),summary=document.createElement('summary'),pre=document.createElement('pre');summary.textContent=`${name} → ${language}`;pre.textContent=latex;details.append(summary,pre);const output=document.createElement('div');output.innerHTML=final;details.append(output);document.querySelector('#outputs').append(details);
+  }catch(error){result.textContent=String(error);result.className='fail';}
+ }
+ if(reverse) for(const [language,source] of Object.entries(nativeLatexSources)) {
+  total++; const row=document.querySelector('#results').insertRow();row.insertCell().textContent='Native document';row.insertCell().textContent=language+' → latex';const result=row.insertCell();
+  try {
+   const html=await markupToHtml(source,language,location.href),latex=htmlToMarkup(html,'latex'),rendered=await markupToHtml(latex,'latex',location.href),root=node(rendered);const errors=[];
+   for(const selector of ['[id="results"]','a[href="#results"]','strong','table','tp-math','pre code.language-python','img[alt="Diagram"]'])if(!root.querySelector(selector))errors.push('Missing '+selector);
+   if(root.querySelector('pre code')?.textContent!==node(html).querySelector('pre code')?.textContent)errors.push('Changed code');
+   result.textContent=errors.length?errors.join('; '):'PASS';result.className=errors.length?'fail':'pass';if(!errors.length)passed++;
+   const details=document.createElement('details'),summary=document.createElement('summary'),pre=document.createElement('pre'),output=document.createElement('div');summary.textContent='Native '+language+' → latex';pre.textContent=latex;output.innerHTML=rendered;details.append(summary,pre,output);document.querySelector('#outputs').append(details);
+  }catch(error){result.textContent=String(error);result.className='fail';}
+ }
+ document.querySelector('#status').textContent=`Complete: ${passed}/${total} passed`;
+};
+document.querySelector('#run').onclick=()=>run();
+document.querySelector('#reverse').onclick=()=>run(true);
+</script></body></html>

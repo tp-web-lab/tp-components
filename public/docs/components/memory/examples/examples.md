@@ -1,11 +1,9 @@
-:::::: tp-markdown-viewer { label="tp-memory" allow-script }
+:::::: tp-markdown-viewer { label="tp-memory" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-memory { label="Match the fruits" }
 1. Apple
-
 2. Pear
-
 3. Plum
 :::
 ```

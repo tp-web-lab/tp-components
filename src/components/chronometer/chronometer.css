@@ -22,6 +22,3 @@ tp-chronometer > [data-tp-chronometer-icon] {
   color: currentColor;
 }
 
-tp-chronometer > tp-icon-button > button {
-  border: 1px solid #d1d5db;
-}

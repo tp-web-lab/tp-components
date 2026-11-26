@@ -1,0 +1,78 @@
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) {
+	display: block;
+}
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) > .tp-interpreter-panel {
+	border: 1px solid var(--tp-neutral-stroke-soft);
+	border-radius: var(--tp-border-radius, 0.5rem);
+	padding: 1rem;
+	background: var(--tp-paper-color);
+	color: var(--tp-text-body);
+}
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) .tp-interpreter-output {
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+	font-family: var(--tp-font-mono, monospace);
+	max-block-size: 24rem;
+	overflow: auto;
+	margin-block-end: 0.75rem;
+}
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) .tp-interpreter-prompt {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-family: var(--tp-font-mono, monospace);
+}
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) .tp-interpreter-prompt > span {
+	color: var(--tp-brand-text-on-soft);
+	font-weight: bold;
+}
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) .tp-interpreter-prompt > tp-textfield {
+	flex: 1;
+	min-inline-size: 0;
+}
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) .tp-interpreter-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-block-start: 0.75rem;
+}
+
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) .tp-interpreter-toolbar {
+	position: relative;
+	margin-block-end: 0.75rem;
+}
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) .tp-interpreter-title {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-weight: bold;
+}
+
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) .tp-interpreter-file {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	min-inline-size: 0;
+}
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) [data-interpreter-filename] {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	min-inline-size: 0;
+	max-inline-size: 20rem;
+}
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) .tp-interpreter-source {
+	margin-block-end: 0.75rem;
+	min-inline-size: 0;
+}
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) .tp-interpreter-toolbar {
+	flex-wrap: wrap;
+}
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) .tp-interpreter-toolbar > [data-toolbar-center] {
+	min-inline-size: 0;
+	flex-basis: 8rem;
+}
+
+:is(tp-prolog, tp-javascript, tp-typescript, tp-python, tp-scheme, tp-ocaml, tp-python-tracer, tp-javascript-tracer, tp-typescript-tracer, tp-scheme-tracer, tp-ocaml-tracer, tp-prolog-tracer) > .tp-interpreter-panel > :is(.tp-interpreter-toolbar, .tp-interpreter-actions)[hidden] {
+	display: none;
+}

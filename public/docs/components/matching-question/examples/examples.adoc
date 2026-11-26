@@ -18,17 +18,13 @@ Form::
 +
 --
 * Hello
-
 * Thank you
-
 * Goodbye
 
 //
 
 . Bonjour
-
 . Merci
-
 . Au revoir
 --
 

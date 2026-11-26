@@ -9,6 +9,9 @@ tp-tree {
   );
   display: block;
   inline-size: 100%;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  overflow-x: auto;
   box-sizing: border-box;
   position: relative;
   color: inherit;
@@ -39,6 +42,11 @@ tp-tree li > [data-tp-tree-row]:hover {
   color: var(--tp-brand-text-on-soft);
 }
 
+/* Preserve the row foreground even for the current page link. */
+tp-tree [data-tp-tree-row]:hover a {
+  color: var(--tp-brand-text-on-soft);
+}
+
 /* ROW */
 
 tp-tree [data-tp-tree-row] {
@@ -46,9 +54,9 @@ tp-tree [data-tp-tree-row] {
   align-items: center;
   line-height: 1;
   gap: 0.35rem;
-  inline-size: fit-content;
+  inline-size: max-content;
   min-inline-size: 0;
-  max-inline-size: 100%;
+  white-space: nowrap;
   padding: var(--tp-tree-row-padding-block, 0.125rem) 0.25rem;
   border-radius: 0.25rem;
   /*color: var(--tp-brand-text-on-soft);*/
@@ -66,20 +74,13 @@ tp-tree [data-tp-tree-row] > a {
 
 tp-tree tp-icon-button[data-tp-tree-toggle] {
   --tp-icon-button-size: var(--tp-tree-toggle-size, 1rem);
-  --tp-icon-button-icon-size: var(--tp-tree-toggle-size, 1rem);
-  --tp-icon-button-radius: 0;
-  --tp-icon-button-hover-background: transparent;
+  --tp-icon-button-icon-size: calc(var(--tp-tree-toggle-size, 1rem) * 0.75);
   flex: 0 0 auto;
   align-self: center;
   margin: 0;
   padding: 0;
-  transform: translateY(-1px);
 }
 
-tp-tree tp-icon-button[data-tp-tree-toggle] tp-icon {
-  inline-size: var(--tp-tree-toggle-size);
-  block-size: var(--tp-tree-toggle-size);
-}
 
 /* SELECTION */
 

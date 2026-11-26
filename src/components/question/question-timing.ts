@@ -16,6 +16,7 @@ export class QuestionTiming {
 	private static readonly sessions = new WeakMap<HTMLElement, QuestionTiming>();
 	private startedAt: number | null = null;
 	private pending = false;
+	private expired = false;
 	private solved = false;
 	private readonly exerciseLocks = new Set<HTMLElement>();
 	private readonly notifiedQuestions = new Set<
@@ -66,6 +67,23 @@ export class QuestionTiming {
 		private readonly kind: "question" | "exercise" = "question",
 	) {}
 
+	start(): void {
+		if (!this.timer || !this.mask || this.startedAt !== null || !this.pending)
+			return;
+		this.mask.active = false;
+		this.startedAt = Date.now();
+		this.timer.start();
+		this.focusContent();
+	}
+	continueAfterTimeout(): void {
+		if (!this.expired || !this.mask) return;
+		this.pending = false;
+		this.refreshSolutionLock();
+		this.publishExerciseTiming();
+		this.mask.active = false;
+		this.focusContent();
+	}
+
 	configure(): void {
 		const value = this.host.getAttribute("timing") ?? "";
 		const layout = this.host.querySelector<HTMLElement>(
@@ -95,6 +113,7 @@ export class QuestionTiming {
 		QuestionTiming.sessions.set(this.host, this);
 		const seconds = questionTimingSeconds(value);
 		this.pending = seconds > 0;
+		this.expired = false;
 		this.solved = false;
 		if (this.kind === "question") {
 			for (
@@ -131,22 +150,14 @@ export class QuestionTiming {
 		this.message(
 			`Time-limited ${this.kind}: this section will close in ${value}`,
 			"Start",
-			() => {
-				mask.active = false;
-				this.startedAt = Date.now();
-				timer.start();
-				this.focusContent();
-			},
+			() => this.start(),
 		);
 		timer.addEventListener("tp-timer-elapsed", () => {
 			if (this.timer !== timer) return;
-			this.message("Time limit has expired.", "Continue", () => {
-				this.pending = false;
-				this.refreshSolutionLock();
-				this.publishExerciseTiming();
-				mask.active = false;
-				this.focusContent();
-			});
+			this.expired = true;
+			this.message("Time limit has expired.", "Continue", () =>
+				this.continueAfterTimeout(),
+			);
 		});
 	}
 	/** Returns elapsed time from the nearest started question or exercise timer. */

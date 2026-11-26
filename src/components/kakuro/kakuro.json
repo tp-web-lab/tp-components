@@ -20,7 +20,53 @@
       "default": "\"\""
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "redo(): void",
+      "inherited": false,
+      "description": "Restores the next cell values and notes."
+    },
+    {
+      "name": "reset(): void",
+      "inherited": false,
+      "description": "Restores the givens and clears notes and error highlighting."
+    },
+    {
+      "name": "revealCell(): void",
+      "inherited": false,
+      "description": "Reveals the selected or next empty cell."
+    },
+    {
+      "name": "revealSolution(): void",
+      "inherited": false,
+      "description": "Reveals the complete solution."
+    },
+    {
+      "name": "showRules(): void",
+      "inherited": false,
+      "description": "Opens the rules of this game in its drawer."
+    },
+    {
+      "name": "toggleEntryMode(): void",
+      "inherited": false,
+      "description": "Switches between entering a value and entering notes."
+    },
+    {
+      "name": "toggleErrors(): void",
+      "inherited": false,
+      "description": "Shows or hides incorrect cell values."
+    },
+    {
+      "name": "toggleHelp(): void",
+      "inherited": false,
+      "description": "Opens or closes the game assistance menu."
+    },
+    {
+      "name": "undo(): void",
+      "inherited": false,
+      "description": "Restores the preceding cell values and notes."
+    }
+  ],
   "events": [
     {
       "name": "tp-kakuro-change",

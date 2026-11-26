@@ -1,0 +1,30 @@
+<tp-html-viewer label="tp-scheme-playground" allow-script preserve-source>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-scheme-playground src="/docs/components/_shared/intro-projects/scheme.json"></tp-scheme-playground>
+    </div>
+
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/scheme/scheme.js";
+      import "/components/scheme-playground/scheme-playground.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-scheme-playground");
+      element1.setAttribute("src", "/docs/components/_shared/intro-projects/scheme.json");
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
+    <div role="example" label="Scheme tests">
+      <tp-scheme-playground src="/docs/components/scheme-playground/examples/test-project.json"></tp-scheme-playground>
+    </div>
+
+    <div role="example" label="SRFI-64 tests">
+      <tp-scheme-playground src="/docs/components/scheme-playground/examples/framework-tests.json"></tp-scheme-playground>
+    </div>
+  </template>
+</tp-html-viewer>

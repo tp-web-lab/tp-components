@@ -62,3 +62,46 @@ document.body.append(example);
         !
 }
 \end{document}
+
+% !tp-example Compare presentation modes
+\documentclass{article}
+\begin{document}
+\wcSection{
+  \subsection*{mode="default" — Standard controls}
+  Open Code to edit the source, then click Run or press \wcKbd*{Shift}+\wcKbd*{Enter} in the editor.
+
+  \wcTpAsciidocViewer[mode=default]{
+    \wcScript[type=tp/asciidoc]|
+== Viewer modes
+
+Change this *message*, then run the source.
+  |
+  }
+}
+
+\wcSection{
+  \subsection*{mode="lite" — Compact controls}
+  Open Code to edit the source, then click Run or press \wcKbd*{Shift}+\wcKbd*{Enter} in the editor.
+
+  \wcTpAsciidocViewer[mode=lite]{
+    \wcScript[type=tp/asciidoc]|
+== Viewer modes
+
+Change this *message*, then run the source.
+  |
+  }
+}
+
+\wcSection{
+  \subsection*{mode="simple" — Editor and rendered output only}
+  Edit the code below, keep the cursor in the editor and press \wcKbd*{Shift}+\wcKbd*{Enter} (Return) to run it. This viewer has no Run button.
+
+  \wcTpAsciidocViewer[mode=simple]{
+    \wcScript[type=tp/asciidoc]|
+== Viewer modes
+
+Change this *message*, then run the source.
+  |
+  }
+}
+\end{document}

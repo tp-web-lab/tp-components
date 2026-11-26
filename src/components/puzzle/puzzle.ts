@@ -1,3 +1,4 @@
+import { showGameRules, toggleGameHelp } from "../../utilities/game-header.js";
 /** @module components/puzzle
  * @summary Image puzzle with draggable square, interlocking, triangular or hexagonal pieces.
  */
@@ -667,7 +668,8 @@ export class TpPuzzle extends TpBase {
 		this.showingImage = show;
 		this.update();
 	}
-	private rotate(angle: number): void {
+	/** Rotates the selected piece by the given angle in degrees. */
+	rotate(angle: number): void {
 		const p = this.state.find((p) => p.id === this.selected);
 		if (p) this.place(p.id, p.x, p.y, p.angle + angle);
 	}
@@ -884,6 +886,16 @@ export class TpPuzzle extends TpBase {
 				Math.hypot(p.x - target.x, p.y - target.y);
 		this.commit(p.id, x, y, angle, snap);
 	};
+
+	/** Opens or closes the game assistance menu. */
+	toggleHelp(): void {
+		toggleGameHelp(this);
+	}
+
+	/** Opens the rules of this game in its drawer. */
+	showRules(): void {
+		showGameRules(this);
+	}
 }
 if (!customElements.get("tp-puzzle"))
 	customElements.define("tp-puzzle", TpPuzzle);

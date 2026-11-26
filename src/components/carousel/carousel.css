@@ -1,12 +1,25 @@
 /* Keep carousel sizing and contain fitting ahead of the slider defaults, regardless of load order. */
 tp-carousel { display: block; min-inline-size: 0; }
-tp-carousel > tp-slider[data-carousel-viewport] { inline-size: 100%; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; border-radius: var(--tp-border-radius-sm, .25rem); background: var(--tp-neutral-fill-softer); }
+tp-carousel > tp-slider[data-carousel-viewport] { inline-size: 100%; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; border-radius: var(--tp-border-radius-sm, .25rem); background: transparent; }
 tp-carousel > tp-slider[data-carousel-viewport][orientation="vertical"] { scroll-snap-type: y mandatory; overscroll-behavior-x: auto; overscroll-behavior-y: contain; }
 tp-carousel > tp-slider[data-carousel-viewport] > :is(img, picture, figure) { flex: 0 0 100%; inline-size: 100%; block-size: 100%; min-block-size: 0; max-inline-size: none; margin: 0; object-fit: contain; scroll-snap-align: start; scroll-snap-stop: always; }
 tp-carousel > tp-slider[data-carousel-viewport] > picture { display: block; }
-tp-carousel > tp-slider[data-carousel-viewport] > figure { display: flex; flex-direction: column; align-items: center; }
+tp-carousel > tp-slider[data-carousel-viewport] > figure { display: flex; flex-direction: column; align-items: center; padding: 0; border: 0; background: transparent; box-shadow: none; }
 tp-carousel > tp-slider[data-carousel-viewport] > :is(picture, figure) img { display: block; inline-size: 100%; block-size: 100%; min-block-size: 0; object-fit: contain; }
 tp-carousel > tp-slider[data-carousel-viewport] > figure img { flex: 1 1 0; }
 tp-carousel > tp-slider[data-carousel-viewport] > figure figcaption { flex: 0 0 auto; padding: .5rem; text-align: center; }
 tp-carousel > [data-carousel-controls] { display: flex; align-items: center; justify-content: center; gap: .75rem; padding-block: .5rem; }
 tp-carousel [data-carousel-counter] { font-variant-numeric: tabular-nums; min-inline-size: 4ch; text-align: center; }
+
+tp-carousel > [data-carousel-controls][hidden] { display: none; }
+
+tp-carousel > tp-slider[data-carousel-viewport] > figure > tp-icon { flex: 0 1 auto; max-block-size: 100%; max-inline-size: 100%; }
+/* A travelling slide must not become a moving scroll-snap target. */
+tp-carousel:is([transition="start-to-end"], [transition="end-to-start"]) > tp-slider[data-carousel-viewport] { scroll-snap-type: none; overflow: hidden; overflow-anchor: none; }
+
+/* Animated slides share one viewport; inactive slides cannot reappear when a previous animation is cancelled. */
+tp-carousel:is([transition="start-to-end"], [transition="end-to-start"]) > tp-slider[data-carousel-viewport] { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); }
+tp-carousel:is([transition="start-to-end"], [transition="end-to-start"]) > tp-slider[data-carousel-viewport] > :is(img, picture, figure) { grid-area: 1 / 1; visibility: hidden; }
+tp-carousel:is([transition="start-to-end"], [transition="end-to-start"]) > tp-slider[data-carousel-viewport] > [data-carousel-active] { visibility: visible; }
+/* Native markup renderers may wrap a standalone inline icon in a paragraph. */
+tp-carousel > tp-slider[data-carousel-viewport] > figure > p:has(> tp-icon:only-child) { display: contents; }

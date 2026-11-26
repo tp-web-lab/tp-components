@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-single-choice-question" allow-script }
+::::: tp-markdown-viewer { label="tp-single-choice-question" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-single-choice-question { answer="1" random }
@@ -13,17 +13,13 @@ Prompt
 Form
 :
   - Paris
-
   - London
-
   - Berlin
 
 Feedback
 :
   - Correct.
-
   - London is in the UK.
-
   - Berlin is in Germany.
 
 Solution

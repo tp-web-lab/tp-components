@@ -1,6 +1,6 @@
 ### User interactions
 
-The console starts in dark mode. Its Theme button selects light, dark or automatic appearance for this console only.
+The console starts with a dark theme in default and lite modes, and a light theme in simple mode. Its Theme button selects light, dark or automatic appearance for this console only. The toolbar is available in default mode; lite hides it, and simple also hides level labels and timestamps.
 
 #### Mouse interactions
 
@@ -8,6 +8,9 @@ The console starts in dark mode. Its Theme button selects light, dark or automat
 | --- | --- |
 | Messages | Read output and errors. |
 | Structured values | Expand or collapse values to inspect their contents. |
+| :tp-icon:{name="close" size="2em"} Clear console | Remove all displayed messages and reset counters and timers. |
+| :tp-icon:{name="theme-light-dark" size="2em"} Theme | Choose the light, dark or automatic theme. |
+| :tp-icon:{name="copy" size="2em"} Copy code | Copy the associated code. |
 
 #### Keyboard interactions
 

@@ -88,6 +88,7 @@ describe("<tp-mathfield>", () => {
 
 	it("places source copy between clear and preview and exposes the formula source", () => {
 		const field = document.createElement("tp-mathfield");
+		field.copyCode = true;
 		field.setAttribute("clearable", "");
 		field.value = "x^2";
 		document.body.append(field);
@@ -111,6 +112,7 @@ describe("<tp-mathfield>", () => {
 
 	it("configures the rendered copy action to return the generated SVG", () => {
 		const field = document.createElement("tp-mathfield");
+		field.copyCode = true;
 		field.value = "x^2";
 		document.body.append(field);
 		const content = required(
@@ -284,6 +286,7 @@ describe("<tp-mathfield>", () => {
 
 it("keeps a single source copy action in the embedded text field", () => {
 	const field = document.createElement("tp-mathfield");
+	field.copyCode = true;
 	document.body.append(field);
 	expect(
 		field.querySelectorAll("[data-tp-mathfield-source-copy]"),

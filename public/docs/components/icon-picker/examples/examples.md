@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-icon-picker" allow-script }
+::::: tp-markdown-viewer { label="tp-icon-picker" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-icon-picker

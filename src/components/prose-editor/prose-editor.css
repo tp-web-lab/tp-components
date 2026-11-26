@@ -52,11 +52,6 @@ tp-prose-editor[readonly] > tp-toolbar[data-tp-prose-editor-secondary-toolbar] {
   display: none;
 }
 
-tp-prose-editor tp-icon-button[aria-pressed="true"] > button {
-  background: var(--tp-color-accent-soft, color-mix(in srgb, Highlight 14%, transparent));
-  color: var(--tp-color-accent, Highlight);
-}
-
 tp-prose-editor [data-tp-prose-editor-separator] {
   inline-size: 1px;
   align-self: stretch;
@@ -143,15 +138,19 @@ tp-prose-editor [data-tp-prose-editor-menu] {
   border-radius: 0;
 }
 
+tp-prose-editor tp-dropdown[data-tp-prose-editor-file-dropdown],
+tp-prose-editor [data-tp-prose-editor-file-menu],
 tp-prose-editor tp-dropdown[data-tp-prose-editor-type-dropdown],
 tp-prose-editor [data-tp-prose-editor-menu][data-menu-kind="type"] {
   overflow: visible !important;
 }
 
+tp-prose-editor [data-tp-prose-editor-file-menu],
 tp-prose-editor [data-tp-prose-editor-menu][data-menu-kind="type"] {
   max-block-size: none;
 }
 
+tp-prose-editor [data-tp-prose-editor-file-menu] ul[data-tp-menu-submenu],
 tp-prose-editor [data-tp-prose-editor-menu][data-menu-kind="type"] ul[data-tp-menu-submenu] {
   z-index: 10002;
 }
@@ -531,18 +530,7 @@ tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-block-modes] {
 }
 
 tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-block-modes] > tp-icon-button {
-  border-inline-start: 1px solid var(--tp-color-border, color-mix(in srgb, currentColor 18%, transparent));
   color: inherit;
-  --tp-icon-button-radius: 0;
-}
-
-tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-block-modes] > tp-icon-button:first-child {
-  border-inline-start: 0;
-}
-
-tp-prose-editor .ProseMirror [data-tp-prose-editor-markdown-block-modes] > tp-icon-button[aria-pressed="true"] > button {
-  background: var(--tp-color-accent-soft, color-mix(in srgb, Highlight 14%, transparent));
-  color: var(--tp-color-accent, Highlight);
 }
 
 tp-prose-editor .ProseMirror tp-code-editor[data-tp-prose-editor-markdown-source][hidden],
@@ -616,4 +604,12 @@ tp-prose-editor .ProseMirror-search-match {
 tp-prose-editor .ProseMirror-active-search-match {
   background: color-mix(in srgb, Highlight 45%, transparent);
   outline: 1px solid Highlight;
+}
+
+/* Keep the menu trigger reachable while all editing tools are minimized. */
+tp-prose-editor[data-toolbar-collapsed] > tp-toolbar[data-tp-prose-editor-toolbar] > [data-toolbar-start] > :not([data-toolbar-toggle]),
+tp-prose-editor[data-toolbar-collapsed] > tp-toolbar[data-tp-prose-editor-toolbar] > [data-toolbar-center],
+tp-prose-editor[data-toolbar-collapsed] > tp-toolbar[data-tp-prose-editor-toolbar] > [data-toolbar-end],
+tp-prose-editor[data-toolbar-collapsed] > tp-toolbar[data-tp-prose-editor-secondary-toolbar] {
+ display: none;
 }

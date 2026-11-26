@@ -247,7 +247,7 @@ tp-icon-picker [data-tp-icon-picker-item] {
   border: 1px solid var(--tp-neutral-stroke-soft, #d1d5db);
   border-radius: var(--tp-border-radius-md, 0.375rem);
   background: var(--tp-brand-fill-soft);
-  color: inherit;
+  color: var(--tp-brand-text-on-soft);
   font: inherit;
   padding: 0.5rem;
   cursor: pointer;
@@ -294,7 +294,7 @@ tp-icon-picker [data-tp-icon-picker-name] {
 
 tp-icon-picker [data-tp-icon-picker-library-name] {
   font-size: 0.7rem;
-  color: var(--tp-text-muted);
+  color: inherit;
 }
 
 tp-icon-picker[compact] {

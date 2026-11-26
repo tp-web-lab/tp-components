@@ -48,12 +48,15 @@ it("preserves code containing closing script tags and includes styles and the as
 	notebook.append(script);
 	document.body.append(notebook);
 	await vi.waitFor(() =>
-		expect(notebook.querySelector("tp-javascript-viewer")).not.toBeNull(),
+		expect(notebook.querySelector("tp-javascript")).not.toBeNull(),
 	);
 	const api = notebook as unknown as { standaloneHtml(): Promise<string> };
 	const doc = new DOMParser().parseFromString(
 		await api.standaloneHtml(),
 		"text/html",
+	);
+	expect(doc.querySelector("tp-javascript")?.getAttribute("mode")).toBe(
+		"simple",
 	);
 	expect(doc.querySelector("base")?.href).toBe(
 		"https://example.test/course/lesson.md",
@@ -179,6 +182,12 @@ it("runs exported cells in order and resets their sources through the viewers", 
 		"MutationObserver",
 		doc.body.querySelector("script")?.textContent ?? "",
 	)(doc, MutationObserver);
+	// Custom toolbar upgrades may replace their child buttons after setup.
+	for (const control of doc.querySelectorAll(
+		"[data-tp-notebook-export-run], [data-tp-notebook-export-reset]",
+	)) {
+		control.replaceWith(control.cloneNode(true));
+	}
 	const run = doc.querySelector<HTMLElement>("[data-tp-notebook-export-run]");
 	const reset = doc.querySelector<HTMLElement>(
 		"[data-tp-notebook-export-reset]",
@@ -193,4 +202,37 @@ it("runs exported cells in order and resets their sources through the viewers", 
 	await vi.waitFor(() =>
 		expect(calls).toEqual(["run-0", "run-1", "reset-0", "reset-1"]),
 	);
+});
+
+it("preserves an edited mandatory query and source in standalone HTML", async () => {
+	vi.stubGlobal(
+		"requestAnimationFrame",
+		vi.fn(() => 0),
+	);
+	const notebook = document.createElement("tp-notebook");
+	notebook.innerHTML =
+		'<script type="tp/javascript" query="answer() +\n1">function answer() { return 10; }</script>';
+	document.body.append(notebook);
+	await vi.waitFor(() =>
+		expect(
+			notebook.querySelector("tp-javascript tp-code-editor"),
+		).not.toBeNull(),
+	);
+	const interpreter = notebook.querySelector("tp-javascript");
+	interpreter
+		?.querySelector("tp-code-editor")
+		?.setValue("function answer() { return 20; }");
+	const input = interpreter?.querySelector(
+		".tp-interpreter-prompt tp-textfield",
+	) as (HTMLElement & { value: string }) | null;
+	if (input) input.value = "answer() +\n2";
+	const api = notebook as unknown as { standaloneHtml(): Promise<string> };
+	const doc = new DOMParser().parseFromString(
+		await api.standaloneHtml(),
+		"text/html",
+	);
+	const cell = doc.querySelector("tp-javascript");
+	expect(cell?.getAttribute("query")).toBe("answer() +\n2");
+	expect(cell?.getAttribute("mode")).toBe("simple");
+	expect(cell?.textContent).toContain("return 20");
 });

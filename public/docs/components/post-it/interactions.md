@@ -8,6 +8,8 @@
 | Dragging the folded pin | Move the folded note without opening it; movements under 4 pixels remain clicks. |
 | Header | Drag anywhere on the header except its buttons, using a mouse, pen or touch. Pin and Reset keep their normal actions. In lite mode, drag the pin instead. |
 | Note surface | Read, select text or use controls without moving the note accidentally. The note does not block interaction with the rest of the page. |
+| :tp-icon:{name="pin" library="components" size="2em"} Toggle postit | Pushpin folds or opens the postit. |
+| :tp-icon:{name="refresh" size="2em"} Reset position | Restore the initial attachment without changing content or folded state. |
 
 #### Keyboard interactions
 

@@ -1,0 +1,118 @@
+{
+  "tagname": "tp-theorem",
+  "classname": "TpTheorem",
+  "superclass": "TpBase",
+  "description": "Presents theorems, lemmas, propositions, corollaries, definitions, examples, remarks and proofs with optional titles, numbering and references.",
+  "examples": [
+    {
+      "label": "Example 1",
+      "code": "<tp-theorem type=\"theorem\" heading=\"Nonnegativity\" number=\"1\" id=\"square\">\n  <p>The square of every real number is nonnegative.</p>\n</tp-theorem>"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "counter",
+      "description": "Shared counter name; defaults to the statement type.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "heading",
+      "description": "Optional plain-text complementary title; a child with slot=\"heading\" takes precedence.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "label",
+      "description": "Optional replacement for the usual type name.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "number",
+      "description": "Explicit display number; an explicitly empty value suppresses numbering.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "numbering",
+      "description": "Automatic numbering: none, document, section or subsection; defaults to none for proofs.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"none\" | \"document\" | \"section\" | \"subsection\"",
+      "default": "document"
+    },
+    {
+      "name": "qed",
+      "description": "Ending symbol; empty by default, or □ for proof when omitted. Explicit values, including empty, take priority.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "string",
+      "default": "\"\""
+    },
+    {
+      "name": "type",
+      "description": "Statement type: theorem, lemma, proposition, corollary, definition, example, remark or proof.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "| \"theorem\"\n\t\t| \"lemma\"\n\t\t| \"proposition\"\n\t\t| \"corollary\"\n\t\t| \"definition\"\n\t\t| \"example\"\n\t\t| \"remark\"\n\t\t| \"proof\"",
+      "default": "theorem"
+    },
+    {
+      "name": "variant",
+      "description": "Appearance: none (no border or background), neutral, brand, info, success, warning or danger.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "| \"none\"\n\t\t| \"neutral\"\n\t\t| \"brand\"\n\t\t| \"info\"\n\t\t| \"success\"\n\t\t| \"warning\"\n\t\t| \"danger\"",
+      "default": "none"
+    }
+  ],
+  "methods": [],
+  "events": [],
+  "cssproperties": [
+    {
+      "name": "--tp-theorem-accent",
+      "default": "var(--tp-danger-text-colorful)",
+      "description": "Controls the accent."
+    },
+    {
+      "name": "--tp-theorem-background",
+      "default": "var(--tp-danger-fill-softer)",
+      "description": "Controls the background."
+    },
+    {
+      "name": "--tp-theorem-foreground",
+      "default": "var(--tp-danger-text-on-soft)",
+      "description": "Controls the foreground."
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "tp-base",
+      "summary": "Shared base class for tp-* components."
+    }
+  ],
+  "credits": [],
+  "userHelp": {
+    "displayName": "Theorem",
+    "introduction": "The custom `<tp-theorem>` element presents theorems, lemmas, propositions, corollaries, definitions, examples, remarks and proofs with optional titles, numbering and references.",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Statement content | No component-specific mouse interaction. Authored links and nested components retain their normal behavior. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| Statement content | No component-specific keyboard interaction. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer or currently focused. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component in the current hierarchy and open its help. |",
+    "keyboard": []
+  }
+}

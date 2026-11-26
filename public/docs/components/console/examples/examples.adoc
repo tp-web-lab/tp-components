@@ -164,5 +164,39 @@ output.error(new Error('Error message'));
 }
 ====
 ======
+
+.Console presentation modes
+======
+[discrete]
+=== Default
+
+[tp-console%data-console-mode-example,mode="default"]
+====
+====
+
+[discrete]
+=== Lite
+
+[tp-console%data-console-mode-example,mode="lite"]
+====
+====
+
+[discrete]
+=== Simple
+
+[tp-console%data-console-mode-example,mode="simple"]
+====
+====
+
+[script,type="module"]
+====
+import "/components/console/console.js";
+for (const output of document.querySelectorAll("tp-console[data-console-mode-example]")) {
+  output.log("Result", 42);
+  output.info("Calculation complete.");
+  output.error("An example error.");
+}
+====
+======
 ----
 ========

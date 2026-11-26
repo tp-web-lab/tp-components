@@ -28,16 +28,23 @@ function tpTypeDocEnhanceHtmlExamples() {
     const pre = code.parentElement;
     if (pre === null) continue;
 
-    const source = code.textContent?.trim();
+    // TypeDoc emits code line breaks as <br> elements. Preserve them in the viewer.
+    const sourceNode = code.cloneNode(true);
+    for (const lineBreak of sourceNode.querySelectorAll('br')) {
+      lineBreak.replaceWith(document.createTextNode('\n'));
+    }
+    const source = sourceNode.textContent?.trim();
     if (source === undefined || source === '') continue;
     const htmlSource = source.replace(/^(?:\s*\/\/[^\n]*\n)+/, '').trim();
     if (!htmlSource.startsWith('<')) continue;
 
     const viewer = document.createElement('tp-html-viewer');
-    const template = document.createElement('template');
+    const script = document.createElement('script');
     viewer.setAttribute('lite', '');
-    template.innerHTML = htmlSource;
-    viewer.append(template);
+    viewer.setAttribute('preserve-source', '');
+    script.type = 'tp/html';
+    script.textContent = htmlSource;
+    viewer.append(script);
     pre.replaceWith(viewer);
   }
 }

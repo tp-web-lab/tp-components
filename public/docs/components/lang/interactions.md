@@ -4,7 +4,7 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Language button | Open the list of available languages. |
+| <!-- button --> Language button | Open the list of available languages. The icon is the flag of the current language. |
 | Language entry | Navigate to that language version of the documentation. |
 
 #### Keyboard interactions

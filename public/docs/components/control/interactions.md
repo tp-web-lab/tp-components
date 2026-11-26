@@ -4,7 +4,7 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Controllers | Opens or closes the selection dropdown. |
+| :tp-icon:{name="cog-transfert" size="2em"} Controllers | Opens or closes the selection dropdown. |
 | All controllers | Shows all controllers when some or none are visible; hides all when all are visible. A partial check indicates a mixed selection. |
 | Clock, Language, Color, Theme, Screen, Fullscreen | Shows or hides the corresponding controller in the toolbar to the left. Checked choices are visible. |
 | Outside the dropdown | Closes the selection dropdown. |

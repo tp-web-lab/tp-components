@@ -1,5 +1,5 @@
 [tp-asciidoc-viewer%allow-script,label="tp-html-viewer"]
-========
+=========
 [script,type="tp/asciidoc"]
 -----
 .Basic usage
@@ -51,5 +51,61 @@ document.body.append(example);
 ----
 =====
 ======
------
+
+.Compare presentation modes
 ========
+:experimental:
+
+[section]
+======
+[discrete]
+=== mode="default" — Standard controls
+
+Open Code to edit the source, then click Run or press kbd:[Shift]+kbd:[Enter] in the editor.
+
+[tp-html-viewer,mode="default"]
+=====
+[script,type="tp/html"]
+====
+<h2>Viewer modes</h2>
+<p>Change this message, then run the source.</p>
+====
+=====
+======
+
+[section]
+======
+[discrete]
+=== mode="lite" — Compact controls
+
+Open Code to edit the source, then click Run or press kbd:[Shift]+kbd:[Enter] in the editor.
+
+[tp-html-viewer,mode="lite"]
+=====
+[script,type="tp/html"]
+====
+<h2>Viewer modes</h2>
+<p>Change this message, then run the source.</p>
+====
+=====
+======
+
+[section]
+======
+[discrete]
+=== mode="simple" — Editor and rendered output only
+
+Edit the code below, keep the cursor in the editor and press kbd:[Shift]+kbd:[Enter] (Return) to run it. This viewer has no Run button.
+
+[tp-html-viewer,mode="simple"]
+=====
+[script,type="tp/html"]
+====
+<h2>Viewer modes</h2>
+<p>Change this message, then run the source.</p>
+====
+=====
+======
+========
+-----
+=========

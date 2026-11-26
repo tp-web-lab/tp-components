@@ -1,11 +1,3 @@
-tp-icon-button[data-action="annotations"] > button {
-	border: 1px solid var(--tp-brand-stroke-mid);
-	background: transparent;
-}
-tp-icon-button[data-action="annotations"] > button:hover {
-	background: var(--tp-brand-fill-soft);
-	color: var(--tp-brand-text-on-soft);
-}
 [data-personal-annotation="panel"] {
 	position: fixed;
 	inset: 4rem 1rem auto auto;
@@ -89,16 +81,6 @@ tp-icon-button[data-action="annotations"] > button:hover {
 [data-annotation-add] {
 	font-size: 2em;
 	margin-inline-end: var(--tp-space-xs, 0.5rem);
-}
-[data-annotation-header] tp-icon-button > button,
-[data-annotation-footer] tp-icon-button > button {
-	border: 1px solid var(--tp-brand-stroke-mid);
-	border-radius: var(--tp-border-radius-circle);
-}
-[data-annotation-header] tp-icon-button > button:hover,
-[data-annotation-footer] tp-icon-button > button:hover {
-	background: var(--tp-brand-fill-soft);
-	color: var(--tp-brand-text-on-soft);
 }
 [data-annotation-footer] {
 	margin-block-start: var(--tp-space-xs, 0.5rem);

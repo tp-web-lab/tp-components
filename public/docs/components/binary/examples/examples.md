@@ -1,21 +1,14 @@
-::::: tp-markdown-viewer { label="tp-binary" allow-script }
+::::: tp-markdown-viewer { label="tp-binary" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-binary
 1. 1010110!0
-
 2. 01!01!0011!
-
 3. 0010101!1!
-
 4. 11!01!0100
-
 5. 10011001!
-
 6. 0!110!1010
-
 7. 0110!0!101
-
 8. 10!0101!10
 :::
 ```

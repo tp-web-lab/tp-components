@@ -13,6 +13,10 @@ The user-help button legend groups commands by their location in the component a
 | Feedback / Solution tabs | Read feedback or view the solution. |
 | Case warning | When shown after the prompt, uppercase and lowercase letters must match. |
 | Input / Output buttons | Show or hide the answer form or result panel without losing their contents. |
+| :tp-icon:{name="input" size="2em"} Input button | Input button. |
+| :tp-icon:{name="output" size="2em"} Output button | Output button. |
+| :tp-icon:{name="refresh" size="2em"} Reset response | Reset response. |
+| :tp-icon:{name="play-arrow" size="2em"} Submit response | Submit response. |
 
 #### Keyboard interactions
 

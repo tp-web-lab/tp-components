@@ -10,6 +10,7 @@
 
 import assert from "node:assert/strict";
 import test from "node:test";
+import { synchronizeBasicUsage } from "./sync-basic-usage.mjs";
 import {
 	exampleFile,
 	markupExample,
@@ -134,4 +135,46 @@ test("Markdown and AsciiDoc preserve inline code within a component paragraph", 
 		markupExample("adoc", html),
 		`[tp-box]\n====\n${sentence}\n====`,
 	);
+});
+
+
+test("HTML extraction preserves blank lines, entities, boolean attributes and literal first newlines", () => {
+  const source = '<tp-box hidden>\n\n  <pre>\nfirst\n\n  third\n</pre>\n  <script type="module">\n    const x = "&amp;";\n\n    console.log(x);\n  </script>\n</tp-box>';
+  const examples = [{label: "Basic usage", source}];
+  assert.deepEqual(namedExamples("html", viewerSource("html", exampleFile("html", "tp-box", examples))), examples);
+});
+
+test("all native example envelopes preserve blank lines and literal indentation", () => {
+  for (const language of ["md", "adoc", "rst"]) {
+    const source = markupExample(language, '<tp-box><script type="tp/python">\nvalue = 1\n\nif value:\n    print(value)\n</script></tp-box>');
+    const examples = [{label:"Basic usage", source}];
+    assert.deepEqual(namedExamples(language, viewerSource(language, exampleFile(language, "tp-box", examples))), examples, language);
+  }
+});
+
+test("native math retains the accessible label from the introductory component", () => {
+  for (const language of ["md", "adoc", "rst"]) {
+    const source = markupExample(language, '<tp-math value="x^2" label="x squared"></tp-math>');
+    assert.ok(source.includes("x squared"), language);
+    assert.ok(source.includes("tp-math"), language);
+  }
+});
+
+test("all components keep Basic usage synchronized in all five languages", () => {
+  const {count, issues} = synchronizeBasicUsage();
+  assert.ok(count >= 212);
+  assert.deepEqual(issues, []);
+});
+
+
+test("RST list items keep nested directives on their own line", () => {
+ const source = markupExample("rst", '<ol><li><tp-question><p>Question</p></tp-question></li></ol>');
+ assert.match(source, /^1\.\n\n {3}\.\. tp-question::/);
+});
+
+test("inline layouts retain their span child rather than a paragraph", () => {
+ for (const language of ["md", "adoc", "rst"]) {
+  const source = markupExample(language, "<tp-inline><tp-button>Previous</tp-button><span>Page 2 of 5</span></tp-inline>");
+  assert.match(source, /(?:::: span|\[span\]|\.\. span::)/, language);
+ }
 });

@@ -1,0 +1,1596 @@
+{
+  "date": "2026-11-25T15:45:53.842Z",
+  "browser": "native Safari",
+  "checks": [
+    {
+      "language": "javascript",
+      "theme": "tp-light",
+      "scenario": "passing",
+      "ms": 2301,
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 3 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsDoubledoubles a positive numberpassedDoublesupports asynchronous testspassedDoublechecks an expected exceptionpassedDoublework in progressskippedEngine outputPreparing Double tests\n\u2713 Double doubles a positive number\n\u2713 Double supports asynchronous tests\n\u2713 Double checks an expected exception\nSkipped: Double work in progress\nMocha / Chai: 3 passed, 0 failed, 1 skipped, 0 expected failures\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)",
+      "log": {
+        "initiallyClosed": true,
+        "opened": true
+      },
+      "height": {
+        "initial": 802.6470336914062,
+        "grown": 1302.64697265625,
+        "shrunk": 802.6470336914062
+      },
+      "liveThemeRoundTrip": true,
+      "narrow": {
+        "width": 862.0220336914062,
+        "table": 687.125,
+        "viewport": 862
+      },
+      "toolbarRerun": true
+    },
+    {
+      "language": "javascript",
+      "theme": "tp-light",
+      "scenario": "failing",
+      "ms": 460,
+      "status": "failed",
+      "passed": 1,
+      "failed": 2,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 1 passed, 2 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsDoubledoubles a positive numberfailedAssertionError: expected 3 to equal 6\n@[native code]\n@blob:http://127.0.0.1:4198/a7efc42e-5617-4b13-a873-4748e8f67f29:8:31\nExpected: 6\nActual: 3Doublesupports asynchronous testsfailedAssertionError: expected -2 to equal -4\n@[native code]\n@blob:http://127.0.0.1:4198/a7efc42e-5617-4b13-a873-4748e8f67f29:13:27\nExpected: -4\nActual: -2Doublechecks an expected exceptionpassedDoublework in progressskippedEngine outputPreparing Double tests\n\u2717 Double doubles a positive number AssertionError: expected 3 to equal 6\n@[native code]\n@blob:http://127.0.0.1:4198/a7efc42e-5617-4b13-a873-4748e8f67f29:8:31\n\u2717 Double supports asynchronous tests AssertionError: expected -2 to equal -4\n@[native code]\n@blob:http://127.0.0.1:4198/a7efc42e-5617-4b13-a873-4748e8f67f29:13:27\n\u2713 Double checks an expected exception\nSkipped: Double work in progress\nMocha / Chai: 1 passed, 2 failed, 1 skipped, 0 expected failures\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "javascript",
+      "theme": "tp-light",
+      "scenario": "runtime-error",
+      "ms": 227,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsTestsrejected promisefailedError: case exploded\n@blob:http://127.0.0.1:4198/e0496772-980e-4fc9-bfbf-bbee6688af26:1:136Engine output\u2717 rejected promise Error: case exploded\n@blob:http://127.0.0.1:4198/e0496772-980e-4fc9-bfbf-bbee6688af26:1:136\nMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "javascript",
+      "theme": "tp-light",
+      "scenario": "import-error",
+      "ms": 233,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsMocha / ChaiExecution errorfailedError: module explodedEngine outputError: module exploded\nmodule code@blob:http://127.0.0.1:4198/3380b8d7-b80b-462b-a01d-c62d1a8f4275:1:16\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "javascript",
+      "theme": "tp-light",
+      "scenario": "empty",
+      "ms": 429,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsMocha / ChaiTest suitefailedNo tests executed.Engine outputMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "javascript",
+      "theme": "tp-light",
+      "scenario": "fixture-error",
+      "ms": 430,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsBroken fixture\"before all\" hook for \"unreachable\"failedError: fixture exploded\n@blob:http://127.0.0.1:4198/98d682f1-db60-4e46-8d7f-abec7b4d2e73:1:167Engine output\u2717 Broken fixture \"before all\" hook for \"unreachable\" Error: fixture exploded\n@blob:http://127.0.0.1:4198/98d682f1-db60-4e46-8d7f-abec7b4d2e73:1:167\nMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "javascript",
+      "theme": "tp-light",
+      "scenario": "timeout",
+      "ms": 427,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsTeststimeoutfailedError: Timeout of 20ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves.Engine output\u2717 timeout Error: Timeout of 20ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves.\nMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "javascript",
+      "theme": "tp-dark",
+      "scenario": "passing",
+      "ms": 1808,
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 3 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsDoubledoubles a positive numberpassedDoublesupports asynchronous testspassedDoublechecks an expected exceptionpassedDoublework in progressskippedEngine outputPreparing Double tests\n\u2713 Double doubles a positive number\n\u2713 Double supports asynchronous tests\n\u2713 Double checks an expected exception\nSkipped: Double work in progress\nMocha / Chai: 3 passed, 0 failed, 1 skipped, 0 expected failures\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)",
+      "log": {
+        "initiallyClosed": true,
+        "opened": true
+      },
+      "height": {
+        "initial": 802.6470336914062,
+        "grown": 1302.64697265625,
+        "shrunk": 802.6470336914062
+      },
+      "liveThemeRoundTrip": true,
+      "narrow": {
+        "width": 862.0220336914062,
+        "table": 687.125,
+        "viewport": 862
+      },
+      "toolbarRerun": true
+    },
+    {
+      "language": "javascript",
+      "theme": "tp-dark",
+      "scenario": "failing",
+      "ms": 255,
+      "status": "failed",
+      "passed": 1,
+      "failed": 2,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 1 passed, 2 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsDoubledoubles a positive numberfailedAssertionError: expected 3 to equal 6\n@[native code]\n@blob:http://127.0.0.1:4198/88e0176d-ca72-42c3-ae52-bdeb18cb4186:8:31\nExpected: 6\nActual: 3Doublesupports asynchronous testsfailedAssertionError: expected -2 to equal -4\n@[native code]\n@blob:http://127.0.0.1:4198/88e0176d-ca72-42c3-ae52-bdeb18cb4186:13:27\nExpected: -4\nActual: -2Doublechecks an expected exceptionpassedDoublework in progressskippedEngine outputPreparing Double tests\n\u2717 Double doubles a positive number AssertionError: expected 3 to equal 6\n@[native code]\n@blob:http://127.0.0.1:4198/88e0176d-ca72-42c3-ae52-bdeb18cb4186:8:31\n\u2717 Double supports asynchronous tests AssertionError: expected -2 to equal -4\n@[native code]\n@blob:http://127.0.0.1:4198/88e0176d-ca72-42c3-ae52-bdeb18cb4186:13:27\n\u2713 Double checks an expected exception\nSkipped: Double work in progress\nMocha / Chai: 1 passed, 2 failed, 1 skipped, 0 expected failures\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "javascript",
+      "theme": "tp-dark",
+      "scenario": "runtime-error",
+      "ms": 234,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsTestsrejected promisefailedError: case exploded\n@blob:http://127.0.0.1:4198/e280cc25-cff4-438d-955d-4b0fcbb29d51:1:136Engine output\u2717 rejected promise Error: case exploded\n@blob:http://127.0.0.1:4198/e280cc25-cff4-438d-955d-4b0fcbb29d51:1:136\nMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "javascript",
+      "theme": "tp-dark",
+      "scenario": "import-error",
+      "ms": 440,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsMocha / ChaiExecution errorfailedError: module explodedEngine outputError: module exploded\nmodule code@blob:http://127.0.0.1:4198/30e47fa5-8cab-43f5-8879-f36f81cb1489:1:16\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "javascript",
+      "theme": "tp-dark",
+      "scenario": "empty",
+      "ms": 228,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsMocha / ChaiTest suitefailedNo tests executed.Engine outputMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "javascript",
+      "theme": "tp-dark",
+      "scenario": "fixture-error",
+      "ms": 225,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsBroken fixture\"before all\" hook for \"unreachable\"failedError: fixture exploded\n@blob:http://127.0.0.1:4198/7a07f93c-bfb8-4092-a351-3449aee8fd7a:1:167Engine output\u2717 Broken fixture \"before all\" hook for \"unreachable\" Error: fixture exploded\n@blob:http://127.0.0.1:4198/7a07f93c-bfb8-4092-a351-3449aee8fd7a:1:167\nMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "javascript",
+      "theme": "tp-dark",
+      "scenario": "timeout",
+      "ms": 426,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsTeststimeoutfailedError: Timeout of 20ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves.Engine output\u2717 timeout Error: Timeout of 20ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves.\nMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-light",
+      "scenario": "passing",
+      "ms": 2304,
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 3 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsDoubledoubles a positive numberpassedDoublesupports asynchronous testspassedDoublechecks an expected exceptionpassedDoublework in progressskippedEngine outputPreparing Double tests\n\u2713 Double doubles a positive number\n\u2713 Double supports asynchronous tests\n\u2713 Double checks an expected exception\nSkipped: Double work in progress\nMocha / Chai: 3 passed, 0 failed, 1 skipped, 0 expected failures\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)",
+      "log": {
+        "initiallyClosed": true,
+        "opened": true
+      },
+      "height": {
+        "initial": 802.6470336914062,
+        "grown": 1302.64697265625,
+        "shrunk": 802.6470336914062
+      },
+      "liveThemeRoundTrip": true,
+      "narrow": {
+        "width": 862.0220336914062,
+        "table": 808.38232421875,
+        "viewport": 862
+      },
+      "toolbarRerun": true
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-light",
+      "scenario": "failing",
+      "ms": 500,
+      "status": "failed",
+      "passed": 1,
+      "failed": 2,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 1 passed, 2 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsDoubledoubles a positive numberfailedAssertionError: expected 3 to equal 6\n@[native code]\n@blob:http://127.0.0.1:4198/f3b4fe99-0f8e-4a13-b478-0af774c0f7c9:6:35\nExpected: 6\nActual: 3Doublesupports asynchronous testsfailedAssertionError: expected -2 to equal -4\n@[native code]\n@blob:http://127.0.0.1:4198/f3b4fe99-0f8e-4a13-b478-0af774c0f7c9:10:31\nExpected: -4\nActual: -2Doublechecks an expected exceptionpassedDoublework in progressskippedEngine outputPreparing Double tests\n\u2717 Double doubles a positive number AssertionError: expected 3 to equal 6\n@[native code]\n@blob:http://127.0.0.1:4198/f3b4fe99-0f8e-4a13-b478-0af774c0f7c9:6:35\n\u2717 Double supports asynchronous tests AssertionError: expected -2 to equal -4\n@[native code]\n@blob:http://127.0.0.1:4198/f3b4fe99-0f8e-4a13-b478-0af774c0f7c9:10:31\n\u2713 Double checks an expected exception\nSkipped: Double work in progress\nMocha / Chai: 1 passed, 2 failed, 1 skipped, 0 expected failures\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-light",
+      "scenario": "runtime-error",
+      "ms": 484,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsTestsrejected promisefailedError: case exploded\n@blob:http://127.0.0.1:4198/70a33452-7afd-49b8-b09b-a46a5bbe7ea6:2:53Engine output\u2717 rejected promise Error: case exploded\n@blob:http://127.0.0.1:4198/70a33452-7afd-49b8-b09b-a46a5bbe7ea6:2:53\nMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-light",
+      "scenario": "import-error",
+      "ms": 470,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsMocha / ChaiExecution errorfailedError: module explodedEngine outputError: module exploded\nmodule code@blob:http://127.0.0.1:4198/e0439071-9921-4953-a981-c53c8b6e6268:2:16\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-light",
+      "scenario": "empty",
+      "ms": 467,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsMocha / ChaiTest suitefailedNo tests executed.Engine outputMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-light",
+      "scenario": "fixture-error",
+      "ms": 464,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsBroken fixture\"before all\" hook for \"unreachable\"failedError: fixture exploded\n@blob:http://127.0.0.1:4198/8bff5ece-66ff-40ed-bea4-464ac6eed608:2:66Engine output\u2717 Broken fixture \"before all\" hook for \"unreachable\" Error: fixture exploded\n@blob:http://127.0.0.1:4198/8bff5ece-66ff-40ed-bea4-464ac6eed608:2:66\nMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-light",
+      "scenario": "timeout",
+      "ms": 465,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsTeststimeoutfailedError: Timeout of 20ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves.Engine output\u2717 timeout Error: Timeout of 20ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves.\nMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-dark",
+      "scenario": "passing",
+      "ms": 2013,
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 3 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsDoubledoubles a positive numberpassedDoublesupports asynchronous testspassedDoublechecks an expected exceptionpassedDoublework in progressskippedEngine outputPreparing Double tests\n\u2713 Double doubles a positive number\n\u2713 Double supports asynchronous tests\n\u2713 Double checks an expected exception\nSkipped: Double work in progress\nMocha / Chai: 3 passed, 0 failed, 1 skipped, 0 expected failures\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)",
+      "log": {
+        "initiallyClosed": true,
+        "opened": true
+      },
+      "height": {
+        "initial": 802.6470336914062,
+        "grown": 1302.64697265625,
+        "shrunk": 802.6470336914062
+      },
+      "liveThemeRoundTrip": true,
+      "narrow": {
+        "width": 862.0220336914062,
+        "table": 687.125,
+        "viewport": 862
+      },
+      "toolbarRerun": true
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-dark",
+      "scenario": "failing",
+      "ms": 567,
+      "status": "failed",
+      "passed": 1,
+      "failed": 2,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 1 passed, 2 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsDoubledoubles a positive numberfailedAssertionError: expected 3 to equal 6\n@[native code]\n@blob:http://127.0.0.1:4198/f35a0e73-846a-425a-abca-99fb185d9624:6:35\nExpected: 6\nActual: 3Doublesupports asynchronous testsfailedAssertionError: expected -2 to equal -4\n@[native code]\n@blob:http://127.0.0.1:4198/f35a0e73-846a-425a-abca-99fb185d9624:10:31\nExpected: -4\nActual: -2Doublechecks an expected exceptionpassedDoublework in progressskippedEngine outputPreparing Double tests\n\u2717 Double doubles a positive number AssertionError: expected 3 to equal 6\n@[native code]\n@blob:http://127.0.0.1:4198/f35a0e73-846a-425a-abca-99fb185d9624:6:35\n\u2717 Double supports asynchronous tests AssertionError: expected -2 to equal -4\n@[native code]\n@blob:http://127.0.0.1:4198/f35a0e73-846a-425a-abca-99fb185d9624:10:31\n\u2713 Double checks an expected exception\nSkipped: Double work in progress\nMocha / Chai: 1 passed, 2 failed, 1 skipped, 0 expected failures\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-dark",
+      "scenario": "runtime-error",
+      "ms": 529,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsTestsrejected promisefailedError: case exploded\n@blob:http://127.0.0.1:4198/0b6c5138-a75d-44ca-80ea-83f72075a7f0:2:53Engine output\u2717 rejected promise Error: case exploded\n@blob:http://127.0.0.1:4198/0b6c5138-a75d-44ca-80ea-83f72075a7f0:2:53\nMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-dark",
+      "scenario": "import-error",
+      "ms": 528,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsMocha / ChaiExecution errorfailedError: module explodedEngine outputError: module exploded\nmodule code@blob:http://127.0.0.1:4198/72f760db-bc93-4de5-b61a-f5187996359c:2:16\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-dark",
+      "scenario": "empty",
+      "ms": 465,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsMocha / ChaiTest suitefailedNo tests executed.Engine outputMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-dark",
+      "scenario": "fixture-error",
+      "ms": 518,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsBroken fixture\"before all\" hook for \"unreachable\"failedError: fixture exploded\n@blob:http://127.0.0.1:4198/8a610553-141d-43d0-9ff1-4cd81f1216b1:2:66Engine output\u2717 Broken fixture \"before all\" hook for \"unreachable\" Error: fixture exploded\n@blob:http://127.0.0.1:4198/8a610553-141d-43d0-9ff1-4cd81f1216b1:2:66\nMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "typescript",
+      "theme": "tp-dark",
+      "scenario": "timeout",
+      "ms": 511,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Mocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsTeststimeoutfailedError: Timeout of 20ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves.Engine output\u2717 timeout Error: Timeout of 20ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves.\nMocha / Chai: 0 passed, 1 failed, 0 skipped, 0 expected failures\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "python",
+      "theme": "tp-light",
+      "scenario": "passing",
+      "ms": 3136,
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 1,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 4 passed, 0 failed, 1 skipped, 1 expected failuresSuiteTestStatusDetailsDoubleTeststest_expected_exceptionpassedDoubleTeststest_known_discrepancyexpected-failureTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 27, in test_known_discrepancy\n    self.assertEqual(double(3), 7)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 6 != 7\nDoubleTeststest_pendingskippedWork in progressDoubleTeststest_positivepassedDoubleTeststest_values (tp_test_module.DoubleTests.test_values) (value=0)passedDoubleTeststest_values (tp_test_module.DoubleTests.test_values) (value=-2)passedEngine outputPreparing DoubleTests\npassed: DoubleTests.test_expected_exception\nexpected-failure: DoubleTests.test_known_discrepancy\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 27, in test_known_discrepancy\n    self.assertEqual(double(3), 7)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 6 != 7\n\nskipped: DoubleTests.test_pending\nWork in progress\npassed: DoubleTests.test_positive\npassed: DoubleTests.test_values (tp_test_module.DoubleTests.test_values) (value=0)\npassed: DoubleTests.test_values (tp_test_module.DoubleTests.test_values) (value=-2)\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)",
+      "log": {
+        "initiallyClosed": true,
+        "opened": true
+      },
+      "height": {
+        "initial": 2765.643310546875,
+        "grown": 3265.64306640625,
+        "shrunk": 2765.643310546875
+      },
+      "liveThemeRoundTrip": true,
+      "narrow": {
+        "width": 862.0220336914062,
+        "table": 687.125,
+        "viewport": 862
+      },
+      "toolbarRerun": true
+    },
+    {
+      "language": "python",
+      "theme": "tp-light",
+      "scenario": "failing",
+      "ms": 1257,
+      "status": "failed",
+      "passed": 1,
+      "failed": 3,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 1,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 1 passed, 3 failed, 1 skipped, 1 expected failuresSuiteTestStatusDetailsDoubleTeststest_expected_exceptionfailedTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 18, in test_expected_exception\n    with self.assertRaises(TypeError):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^\nAssertionError: TypeError not raised\nDoubleTeststest_known_discrepancyexpected-failureTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 27, in test_known_discrepancy\n    self.assertEqual(double(3), 7)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 3 != 7\nDoubleTeststest_pendingskippedWork in progressDoubleTeststest_positivefailedTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 10, in test_positive\n    self.assertEqual(double(3), 6)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 3 != 6\nDoubleTeststest_values (tp_test_module.DoubleTests.test_values) (value=0)passedDoubleTeststest_values (tp_test_module.DoubleTests.test_values) (value=-2)failedTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 556, in subTest\n    yield\n  File \"/project/main.test.py\", line 15, in test_values\n    self.assertEqual(double(value), value * 2)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: -2 != -4\nEngine outputPreparing DoubleTests\nfailed: DoubleTests.test_expected_exception\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 18, in test_expected_exception\n    with self.assertRaises(TypeError):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^\nAssertionError: TypeError not raised\n\nexpected-failure: DoubleTests.test_known_discrepancy\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 27, in test_known_discrepancy\n    self.assertEqual(double(3), 7)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 3 != 7\n\nskipped: DoubleTests.test_pending\nWork in progress\nfailed: DoubleTests.test_positive\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 10, in test_positive\n    self.assertEqual(double(3), 6)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 3 != 6\n\npassed: DoubleTests.test_values (tp_test_module.DoubleTests.test_values) (value=0)\nfailed: DoubleTests.test_values (tp_test_module.DoubleTests.test_values) (value=-2)\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 556, in subTest\n    yield\n  File \"/project/main.test.py\", line 15, in test_values\n    self.assertEqual(double(value), value * 2)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: -2 != -4\n\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "python",
+      "theme": "tp-light",
+      "scenario": "runtime-error",
+      "ms": 1293,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsErrorstest_errorfailedTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 4, in test_error\n    raise ValueError('case exploded')\nValueError: case exploded\nEngine outputfailed: Errors.test_error\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 4, in test_error\n    raise ValueError('case exploded')\nValueError: case exploded\n\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "python",
+      "theme": "tp-light",
+      "scenario": "import-error",
+      "ms": 1283,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsunittestExecution errorfailedPythonError: Traceback (most recent call last):\n  File \"/lib/python313.zip/_pyodide/_base.py\", line 597, in eval_code_async\n    await CodeRunner(\n    ...<9 lines>...\n    .run_async(globals, locals)\n  File \"/lib/python313.zip/_pyodide/_base.py\", line 411, in run_async\n    coroutine = eval(self.code, globals, locals)\n  File \"<exec>\", line 13, in <module>\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/project/main.test.py\", line 1, in <module>\n    raise RuntimeError('module exploded')\nRuntimeError: module exploded\nEngine outputTraceback (most recent call last):\n  File \"/lib/python313.zip/_pyodide/_base.py\", line 597, in eval_code_async\n    await CodeRunner(\n    ...<9 lines>...\n    .run_async(globals, locals)\n  File \"/lib/python313.zip/_pyodide/_base.py\", line 411, in run_async\n    coroutine = eval(self.code, globals, locals)\n  File \"<exec>\", line 13, in <module>\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/project/main.test.py\", line 1, in <module>\n    raise RuntimeError('module exploded')\nRuntimeError: module exploded\n\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "python",
+      "theme": "tp-light",
+      "scenario": "empty",
+      "ms": 1274,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsunittestTest suitefailedNo tests executed.Engine output",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "python",
+      "theme": "tp-light",
+      "scenario": "fixture-error",
+      "ms": 1229,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetails_ErrorHoldersetUpClass (tp_test_module.BrokenFixture)failedTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/suite.py\", line 166, in _handleClassSetUp\n    setUpClass()\n    ~~~~~~~~~~^^\n  File \"/project/main.test.py\", line 5, in setUpClass\n    raise ValueError('fixture exploded')\nValueError: fixture exploded\nEngine outputfailed: _ErrorHolder.setUpClass (tp_test_module.BrokenFixture)\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/suite.py\", line 166, in _handleClassSetUp\n    setUpClass()\n    ~~~~~~~~~~^^\n  File \"/project/main.test.py\", line 5, in setUpClass\n    raise ValueError('fixture exploded')\nValueError: fixture exploded\n\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "python",
+      "theme": "tp-light",
+      "scenario": "unexpected-success",
+      "ms": 1278,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsUnexpectedtest_successfailedUnexpected success: this test is marked expectedFailure.Engine outputfailed: Unexpected.test_success\nUnexpected success: this test is marked expectedFailure.\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "python",
+      "theme": "tp-dark",
+      "scenario": "passing",
+      "ms": 2823,
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 1,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 4 passed, 0 failed, 1 skipped, 1 expected failuresSuiteTestStatusDetailsDoubleTeststest_expected_exceptionpassedDoubleTeststest_known_discrepancyexpected-failureTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 27, in test_known_discrepancy\n    self.assertEqual(double(3), 7)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 6 != 7\nDoubleTeststest_pendingskippedWork in progressDoubleTeststest_positivepassedDoubleTeststest_values (tp_test_module.DoubleTests.test_values) (value=0)passedDoubleTeststest_values (tp_test_module.DoubleTests.test_values) (value=-2)passedEngine outputPreparing DoubleTests\npassed: DoubleTests.test_expected_exception\nexpected-failure: DoubleTests.test_known_discrepancy\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 27, in test_known_discrepancy\n    self.assertEqual(double(3), 7)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 6 != 7\n\nskipped: DoubleTests.test_pending\nWork in progress\npassed: DoubleTests.test_positive\npassed: DoubleTests.test_values (tp_test_module.DoubleTests.test_values) (value=0)\npassed: DoubleTests.test_values (tp_test_module.DoubleTests.test_values) (value=-2)\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)",
+      "log": {
+        "initiallyClosed": true,
+        "opened": true
+      },
+      "height": {
+        "initial": 2765.643310546875,
+        "grown": 3265.64306640625,
+        "shrunk": 2765.643310546875
+      },
+      "liveThemeRoundTrip": true,
+      "narrow": {
+        "width": 862.0220336914062,
+        "table": 687.125,
+        "viewport": 862
+      },
+      "toolbarRerun": true
+    },
+    {
+      "language": "python",
+      "theme": "tp-dark",
+      "scenario": "failing",
+      "ms": 1284,
+      "status": "failed",
+      "passed": 1,
+      "failed": 3,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 1,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 1 passed, 3 failed, 1 skipped, 1 expected failuresSuiteTestStatusDetailsDoubleTeststest_expected_exceptionfailedTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 18, in test_expected_exception\n    with self.assertRaises(TypeError):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^\nAssertionError: TypeError not raised\nDoubleTeststest_known_discrepancyexpected-failureTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 27, in test_known_discrepancy\n    self.assertEqual(double(3), 7)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 3 != 7\nDoubleTeststest_pendingskippedWork in progressDoubleTeststest_positivefailedTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 10, in test_positive\n    self.assertEqual(double(3), 6)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 3 != 6\nDoubleTeststest_values (tp_test_module.DoubleTests.test_values) (value=0)passedDoubleTeststest_values (tp_test_module.DoubleTests.test_values) (value=-2)failedTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 556, in subTest\n    yield\n  File \"/project/main.test.py\", line 15, in test_values\n    self.assertEqual(double(value), value * 2)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: -2 != -4\nEngine outputPreparing DoubleTests\nfailed: DoubleTests.test_expected_exception\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 18, in test_expected_exception\n    with self.assertRaises(TypeError):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^\nAssertionError: TypeError not raised\n\nexpected-failure: DoubleTests.test_known_discrepancy\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 27, in test_known_discrepancy\n    self.assertEqual(double(3), 7)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 3 != 7\n\nskipped: DoubleTests.test_pending\nWork in progress\nfailed: DoubleTests.test_positive\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 10, in test_positive\n    self.assertEqual(double(3), 6)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: 3 != 6\n\npassed: DoubleTests.test_values (tp_test_module.DoubleTests.test_values) (value=0)\nfailed: DoubleTests.test_values (tp_test_module.DoubleTests.test_values) (value=-2)\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 556, in subTest\n    yield\n  File \"/project/main.test.py\", line 15, in test_values\n    self.assertEqual(double(value), value * 2)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: -2 != -4\n\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "python",
+      "theme": "tp-dark",
+      "scenario": "runtime-error",
+      "ms": 1233,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsErrorstest_errorfailedTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 4, in test_error\n    raise ValueError('case exploded')\nValueError: case exploded\nEngine outputfailed: Errors.test_error\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/case.py\", line 58, in testPartExecutor\n    yield\n  File \"/lib/python313.zip/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/lib/python313.zip/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n       ~~~~~~^^\n  File \"/project/main.test.py\", line 4, in test_error\n    raise ValueError('case exploded')\nValueError: case exploded\n\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "python",
+      "theme": "tp-dark",
+      "scenario": "import-error",
+      "ms": 1171,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsunittestExecution errorfailedPythonError: Traceback (most recent call last):\n  File \"/lib/python313.zip/_pyodide/_base.py\", line 597, in eval_code_async\n    await CodeRunner(\n    ...<9 lines>...\n    .run_async(globals, locals)\n  File \"/lib/python313.zip/_pyodide/_base.py\", line 411, in run_async\n    coroutine = eval(self.code, globals, locals)\n  File \"<exec>\", line 13, in <module>\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/project/main.test.py\", line 1, in <module>\n    raise RuntimeError('module exploded')\nRuntimeError: module exploded\nEngine outputTraceback (most recent call last):\n  File \"/lib/python313.zip/_pyodide/_base.py\", line 597, in eval_code_async\n    await CodeRunner(\n    ...<9 lines>...\n    .run_async(globals, locals)\n  File \"/lib/python313.zip/_pyodide/_base.py\", line 411, in run_async\n    coroutine = eval(self.code, globals, locals)\n  File \"<exec>\", line 13, in <module>\n  File \"<frozen importlib._bootstrap_external>\", line 1026, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/project/main.test.py\", line 1, in <module>\n    raise RuntimeError('module exploded')\nRuntimeError: module exploded\n\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "python",
+      "theme": "tp-dark",
+      "scenario": "empty",
+      "ms": 1202,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsunittestTest suitefailedNo tests executed.Engine output",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "python",
+      "theme": "tp-dark",
+      "scenario": "fixture-error",
+      "ms": 1307,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetails_ErrorHoldersetUpClass (tp_test_module.BrokenFixture)failedTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/suite.py\", line 166, in _handleClassSetUp\n    setUpClass()\n    ~~~~~~~~~~^^\n  File \"/project/main.test.py\", line 5, in setUpClass\n    raise ValueError('fixture exploded')\nValueError: fixture exploded\nEngine outputfailed: _ErrorHolder.setUpClass (tp_test_module.BrokenFixture)\nTraceback (most recent call last):\n  File \"/lib/python313.zip/unittest/suite.py\", line 166, in _handleClassSetUp\n    setUpClass()\n    ~~~~~~~~~~^^\n  File \"/project/main.test.py\", line 5, in setUpClass\n    raise ValueError('fixture exploded')\nValueError: fixture exploded\n\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "python",
+      "theme": "tp-dark",
+      "scenario": "unexpected-success",
+      "ms": 1231,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "unittest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsUnexpectedtest_successfailedUnexpected success: this test is marked expectedFailure.Engine outputfailed: Unexpected.test_success\nUnexpected success: this test is marked expectedFailure.\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "prolog",
+      "theme": "tp-light",
+      "scenario": "passing",
+      "ms": 2215,
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "PlUnit: 4 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsarithmeticdoublepassedarithmeticchoicespassedarithmeticno_solutionpassedarithmeticexpected_errorpassedarithmeticwork_in_progressskippedtodoEngine output% [1/4] arithmetic:double ........................... passed (0.000 sec)\n% [2/4] arithmetic:choices .......................... passed (0.000 sec)\n% [3/4] arithmetic:no_solution ...................... passed (0.000 sec)\n% [4/4] arithmetic:expected_error ................... passed (0.000 sec)\nPlUnit: passed",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)",
+      "log": {
+        "initiallyClosed": true,
+        "opened": true
+      },
+      "height": {
+        "initial": 721.635986328125,
+        "grown": 1252.64697265625,
+        "shrunk": 721.635986328125
+      },
+      "liveThemeRoundTrip": true,
+      "narrow": {
+        "width": 862.0220336914062,
+        "table": 687.125,
+        "viewport": 862
+      },
+      "toolbarRerun": true
+    },
+    {
+      "language": "prolog",
+      "theme": "tp-light",
+      "scenario": "failing",
+      "ms": 502,
+      "status": "failed",
+      "passed": 2,
+      "failed": 2,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "PlUnit: 2 passed, 2 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsarithmeticchoicespassedarithmeticno_solutionpassedarithmeticdoublefailed[wrong_answer(3==6)]arithmeticexpected_errorfailedno_exceptionarithmeticwork_in_progressskippedtodoEngine output% [1/4] arithmetic:double ......................... **FAILED (0.000 sec)\nERROR: [Thread main] /main.test.pl:4:\nERROR: [Thread main]     test arithmetic:double: \nERROR: [Thread main] wrong answer (compared using ==)\nERROR: [Thread main]     Expected: 6\nERROR: [Thread main]     Got:      3\n% [2/4] arithmetic:choices .......................... passed (0.000 sec)\n% [3/4] arithmetic:no_solution ...................... passed (0.000 sec)\n% [4/4] arithmetic:expected_error ................. **FAILED (0.000 sec)\nERROR: [Thread main] /main.test.pl:7:\nERROR: [Thread main]     test arithmetic:expected_error: no_exception\nERROR: [Thread main] 2 tests failed\nPlUnit: failed",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "prolog",
+      "theme": "tp-light",
+      "scenario": "empty",
+      "ms": 442,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "PlUnit: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsPlUnitTest suitefailedNo tests executed.Engine outputPlUnit: failed",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "prolog",
+      "theme": "tp-light",
+      "scenario": "syntax-error",
+      "ms": 438,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "PlUnit: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsPlUnitExecution errorfailedError: error(syntax_error(end_of_clause),file('/main.test.pl',1,87,86))Engine outputerror(syntax_error(end_of_clause),file('/main.test.pl',1,87,86))",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "prolog",
+      "theme": "tp-dark",
+      "scenario": "passing",
+      "ms": 2003,
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "PlUnit: 4 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsarithmeticdoublepassedarithmeticchoicespassedarithmeticno_solutionpassedarithmeticexpected_errorpassedarithmeticwork_in_progressskippedtodoEngine output% [1/4] arithmetic:double ........................... passed (0.000 sec)\n% [2/4] arithmetic:choices .......................... passed (0.000 sec)\n% [3/4] arithmetic:no_solution ...................... passed (0.000 sec)\n% [4/4] arithmetic:expected_error ................... passed (0.000 sec)\nPlUnit: passed",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)",
+      "log": {
+        "initiallyClosed": true,
+        "opened": true
+      },
+      "height": {
+        "initial": 721.635986328125,
+        "grown": 1252.64697265625,
+        "shrunk": 721.635986328125
+      },
+      "liveThemeRoundTrip": true,
+      "narrow": {
+        "width": 862.0220336914062,
+        "table": 687.125,
+        "viewport": 862
+      },
+      "toolbarRerun": true
+    },
+    {
+      "language": "prolog",
+      "theme": "tp-dark",
+      "scenario": "failing",
+      "ms": 443,
+      "status": "failed",
+      "passed": 2,
+      "failed": 2,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "PlUnit: 2 passed, 2 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsarithmeticchoicespassedarithmeticno_solutionpassedarithmeticdoublefailed[wrong_answer(3==6)]arithmeticexpected_errorfailedno_exceptionarithmeticwork_in_progressskippedtodoEngine output% [1/4] arithmetic:double ......................... **FAILED (0.000 sec)\nERROR: [Thread main] /main.test.pl:4:\nERROR: [Thread main]     test arithmetic:double: \nERROR: [Thread main] wrong answer (compared using ==)\nERROR: [Thread main]     Expected: 6\nERROR: [Thread main]     Got:      3\n% [2/4] arithmetic:choices .......................... passed (0.000 sec)\n% [3/4] arithmetic:no_solution ...................... passed (0.000 sec)\n% [4/4] arithmetic:expected_error ................. **FAILED (0.000 sec)\nERROR: [Thread main] /main.test.pl:7:\nERROR: [Thread main]     test arithmetic:expected_error: no_exception\nERROR: [Thread main] 2 tests failed\nPlUnit: failed",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "prolog",
+      "theme": "tp-dark",
+      "scenario": "empty",
+      "ms": 469,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "PlUnit: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsPlUnitTest suitefailedNo tests executed.Engine outputPlUnit: failed",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "prolog",
+      "theme": "tp-dark",
+      "scenario": "syntax-error",
+      "ms": 442,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "PlUnit: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsPlUnitExecution errorfailedError: error(syntax_error(end_of_clause),file('/main.test.pl',1,87,86))Engine outputerror(syntax_error(end_of_clause),file('/main.test.pl',1,87,86))",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "scheme",
+      "theme": "tp-light",
+      "scenario": "passing",
+      "ms": 2888,
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 1,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SRFI-64: 4 passed, 0 failed, 1 skipped, 1 expected failuresSuiteTestStatusDetails(Double)Positive numberpassed(Double)Zeropassed(Double)Floating pointpassed(Double)Expected errorpassed(Double)Work in progressskipped((result-kind . skip) (test-name . \"Work in progress\"))(Double)Known discrepancyexpected-failure((actual-value . 6) (expected-value . 7) (result-kind . xfail) (test-name . \"Known discrepancy\"))Engine output",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)",
+      "log": {
+        "initiallyClosed": true,
+        "opened": true
+      },
+      "height": {
+        "initial": 875.643310546875,
+        "grown": 1406.635986328125,
+        "shrunk": 875.643310546875
+      },
+      "liveThemeRoundTrip": true,
+      "narrow": {
+        "width": 862.0220336914062,
+        "table": 808.38232421875,
+        "viewport": 862
+      },
+      "toolbarRerun": true
+    },
+    {
+      "language": "scheme",
+      "theme": "tp-light",
+      "scenario": "failing",
+      "ms": 886,
+      "status": "failed",
+      "passed": 3,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 1,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SRFI-64: 3 passed, 1 failed, 1 skipped, 1 expected failuresSuiteTestStatusDetails(Double)Positive numberfailed((result-kind . fail) (actual-value . 3) (expected-value . 6) (test-name . \"Positive number\"))(Double)Zeropassed(Double)Floating pointpassed(Double)Expected errorpassed(Double)Work in progressskipped((result-kind . skip) (test-name . \"Work in progress\"))(Double)Known discrepancyexpected-failure((actual-value . 3) (expected-value . 7) (result-kind . xfail) (test-name . \"Known discrepancy\"))Engine output",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "scheme",
+      "theme": "tp-light",
+      "scenario": "empty",
+      "ms": 622,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SRFI-64: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsSRFI-64Test suitefailedNo tests executed.Engine output",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "scheme",
+      "theme": "tp-light",
+      "scenario": "syntax-error",
+      "ms": 547,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SRFI-64: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsSRFI-64Execution errorfailedError: Syntax Error: expected parenthesis but eof found at line 1 and column 1Engine outputError: Syntax Error: expected parenthesis but eof found at line 1 and column 1",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "scheme",
+      "theme": "tp-dark",
+      "scenario": "passing",
+      "ms": 2586,
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 1,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SRFI-64: 4 passed, 0 failed, 1 skipped, 1 expected failuresSuiteTestStatusDetails(Double)Positive numberpassed(Double)Zeropassed(Double)Floating pointpassed(Double)Expected errorpassed(Double)Work in progressskipped((result-kind . skip) (test-name . \"Work in progress\"))(Double)Known discrepancyexpected-failure((actual-value . 6) (expected-value . 7) (result-kind . xfail) (test-name . \"Known discrepancy\"))Engine output",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)",
+      "log": {
+        "initiallyClosed": true,
+        "opened": true
+      },
+      "height": {
+        "initial": 875.643310546875,
+        "grown": 1406.635986328125,
+        "shrunk": 875.643310546875
+      },
+      "liveThemeRoundTrip": true,
+      "narrow": {
+        "width": 862.0220336914062,
+        "table": 808.38232421875,
+        "viewport": 862
+      },
+      "toolbarRerun": true
+    },
+    {
+      "language": "scheme",
+      "theme": "tp-dark",
+      "scenario": "failing",
+      "ms": 692,
+      "status": "failed",
+      "passed": 3,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 1,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SRFI-64: 3 passed, 1 failed, 1 skipped, 1 expected failuresSuiteTestStatusDetails(Double)Positive numberfailed((result-kind . fail) (actual-value . 3) (expected-value . 6) (test-name . \"Positive number\"))(Double)Zeropassed(Double)Floating pointpassed(Double)Expected errorpassed(Double)Work in progressskipped((result-kind . skip) (test-name . \"Work in progress\"))(Double)Known discrepancyexpected-failure((actual-value . 3) (expected-value . 7) (result-kind . xfail) (test-name . \"Known discrepancy\"))Engine output",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "scheme",
+      "theme": "tp-dark",
+      "scenario": "empty",
+      "ms": 491,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SRFI-64: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsSRFI-64Test suitefailedNo tests executed.Engine output",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "scheme",
+      "theme": "tp-dark",
+      "scenario": "syntax-error",
+      "ms": 511,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "SRFI-64: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsSRFI-64Execution errorfailedError: Syntax Error: expected parenthesis but eof found at line 1 and column 1Engine outputError: Syntax Error: expected parenthesis but eof found at line 1 and column 1",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "ocaml",
+      "theme": "tp-light",
+      "scenario": "passing",
+      "ms": 2469,
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Alcotest: 3 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsarithmeticPositive numberpassedarithmeticListpassedarithmeticExpected errorpassedarithmeticWork in progressskippedSkipped by testEngine outputTesting `Double'.\nThis run has ID `HQSW7XFZ'.\n\nASSERT double 3\n  [OK]          arithmetic          0   Positive number.\nASSERT doubles\n  [OK]          arithmetic          1   List.\nASSERT invalid argument\n  [OK]          arithmetic          2   Expected error.\n  [SKIP]        arithmetic          3   Work in progress.\n\nTest Successful in 0.007s. 3 tests run.\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)",
+      "log": {
+        "initiallyClosed": true,
+        "opened": true
+      },
+      "height": {
+        "initial": 850.643310546875,
+        "grown": 1382.64697265625,
+        "shrunk": 850.643310546875
+      },
+      "liveThemeRoundTrip": true,
+      "narrow": {
+        "width": 862.0220336914062,
+        "table": 808.38232421875,
+        "viewport": 862
+      },
+      "toolbarRerun": true
+    },
+    {
+      "language": "ocaml",
+      "theme": "tp-light",
+      "scenario": "failing",
+      "ms": 419,
+      "status": "failed",
+      "passed": 1,
+      "failed": 2,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Alcotest: 1 passed, 2 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsarithmeticPositive numberfailedAlcotest assertion failure\nFAIL double 3\n\n   Expected: `6'\n   Received: `3'\n\narithmeticListfailedAlcotest assertion failure\nFAIL doubles\n\n   Expected: `[2; 4]'\n   Received: `[1; 2]'\n\narithmeticExpected errorpassedarithmeticWork in progressskippedSkipped by testEngine outputTesting `Double'.\nThis run has ID `4YI6ZXZW'.\n\n  [FAIL]        arithmetic          0   Positive number.\n  [FAIL]        arithmetic          1   List.\nASSERT invalid argument\n  [OK]          arithmetic          2   Expected error.\n  [SKIP]        arithmetic          3   Work in progress.\n\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 [FAIL]        arithmetic          0   Positive number.                       \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\nFAIL double 3\n\n   Expected: `6'\n   Received: `3'\n\n \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\n\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 [FAIL]        arithmetic          1   List.                                  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\nFAIL doubles\n\n   Expected: `[2; 4]'\n   Received: `[1; 2]'\n\n \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\n2 failures! in 0.002s. 3 tests run.\n",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "ocaml",
+      "theme": "tp-light",
+      "scenario": "empty",
+      "ms": 371,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Alcotest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsAlcotestTest suitefailedNo tests executed.Engine output",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "ocaml",
+      "theme": "tp-light",
+      "scenario": "syntax-error",
+      "ms": 349,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Alcotest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsAlcotestExecution errorfailedError: Line 1, characters 4-5:\nError: Syntax errorEngine outputError: Line 1, characters 4-5:\nError: Syntax error",
+      "background": "rgb(255, 255, 255)",
+      "frameBackground": "rgb(255, 255, 255)"
+    },
+    {
+      "language": "ocaml",
+      "theme": "tp-dark",
+      "scenario": "passing",
+      "ms": 2088,
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Alcotest: 3 passed, 0 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsarithmeticPositive numberpassedarithmeticListpassedarithmeticExpected errorpassedarithmeticWork in progressskippedSkipped by testEngine outputTesting `Double'.\nThis run has ID `N1K5OMQU'.\n\nASSERT double 3\n  [OK]          arithmetic          0   Positive number.\nASSERT doubles\n  [OK]          arithmetic          1   List.\nASSERT invalid argument\n  [OK]          arithmetic          2   Expected error.\n  [SKIP]        arithmetic          3   Work in progress.\n\nTest Successful in 0.001s. 3 tests run.\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)",
+      "log": {
+        "initiallyClosed": true,
+        "opened": true
+      },
+      "height": {
+        "initial": 850.643310546875,
+        "grown": 1382.64697265625,
+        "shrunk": 850.643310546875
+      },
+      "liveThemeRoundTrip": true,
+      "narrow": {
+        "width": 862.0220336914062,
+        "table": 808.38232421875,
+        "viewport": 862
+      },
+      "toolbarRerun": true
+    },
+    {
+      "language": "ocaml",
+      "theme": "tp-dark",
+      "scenario": "failing",
+      "ms": 390,
+      "status": "failed",
+      "passed": 1,
+      "failed": 2,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 1,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Alcotest: 1 passed, 2 failed, 1 skipped, 0 expected failuresSuiteTestStatusDetailsarithmeticPositive numberfailedAlcotest assertion failure\nFAIL double 3\n\n   Expected: `6'\n   Received: `3'\n\narithmeticListfailedAlcotest assertion failure\nFAIL doubles\n\n   Expected: `[2; 4]'\n   Received: `[1; 2]'\n\narithmeticExpected errorpassedarithmeticWork in progressskippedSkipped by testEngine outputTesting `Double'.\nThis run has ID `C0TWI837'.\n\n  [FAIL]        arithmetic          0   Positive number.\n  [FAIL]        arithmetic          1   List.\nASSERT invalid argument\n  [OK]          arithmetic          2   Expected error.\n  [SKIP]        arithmetic          3   Work in progress.\n\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 [FAIL]        arithmetic          0   Positive number.                       \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\nFAIL double 3\n\n   Expected: `6'\n   Received: `3'\n\n \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\n\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 [FAIL]        arithmetic          1   List.                                  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\nFAIL doubles\n\n   Expected: `[2; 4]'\n   Received: `[1; 2]'\n\n \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\n2 failures! in 0.001s. 3 tests run.\n",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "ocaml",
+      "theme": "tp-dark",
+      "scenario": "empty",
+      "ms": 371,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Alcotest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsAlcotestTest suitefailedNo tests executed.Engine output",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    },
+    {
+      "language": "ocaml",
+      "theme": "tp-dark",
+      "scenario": "syntax-error",
+      "ms": 360,
+      "status": "failed",
+      "passed": 0,
+      "failed": 1,
+      "headerBorder": "1.176471px",
+      "expectedFailures": 0,
+      "skipped": 0,
+      "headers": [
+        "Suite",
+        "Test",
+        "Status",
+        "Details"
+      ],
+      "text": "Alcotest: 0 passed, 1 failed, 0 skipped, 0 expected failuresSuiteTestStatusDetailsAlcotestExecution errorfailedError: Line 1, characters 4-5:\nError: Syntax errorEngine outputError: Line 1, characters 4-5:\nError: Syntax error",
+      "background": "oklab(0.168756 0.000946 0.002302)",
+      "frameBackground": "oklab(0.168756 0.000946 0.002302)"
+    }
+  ],
+  "limitations": [
+    "CDN interruption scenarios require request interception and remain covered by Playwright, not this native Safari campaign.",
+    "Test uses the public test() method; the passing case also replays the toolbar Test click handler."
+  ],
+  "version": "26.6.2",
+  "visualReview": {
+    "screenshots": 12,
+    "findings": [
+      "Long test names and tracebacks wrap within the four-column report after the shared CSS correction.",
+      "At the retained Safari zoom, some screenshots still show a white area outside the dark document content despite matching computed frame and preview background colors; this visual issue is not claimed as resolved."
+    ]
+  }
+}

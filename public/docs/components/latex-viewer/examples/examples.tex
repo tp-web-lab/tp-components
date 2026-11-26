@@ -2,7 +2,7 @@
 \documentclass{article}
 \begin{document}
 \wcTpLatexViewer{
-  \wcScript[type=tp/latex]{\section{Hello}A formula $x^2$.}
+  \wcScript[type=tp/latex]|\section{Hello}A formula $x^2$.|
 }
 \end{document}
 
@@ -26,3 +26,40 @@ example.append(element1);
 document.body.append(example);
 |
 \end{document}
+
+% !tp-example Compare presentation modes
+\wcSection{
+  \subsection*{mode="default" — Standard controls}
+  Open Code to edit the source, then click Run or press \wcKbd*{Shift}+\wcKbd*{Enter} in the editor.
+
+  \wcTpLatexViewer[mode=default]{
+    \wcScript[type=tp/latex]|
+\section{Viewer modes}
+Change this \textbf{message}, then run the source.
+  |
+  }
+}
+
+\wcSection{
+  \subsection*{mode="lite" — Compact controls}
+  Open Code to edit the source, then click Run or press \wcKbd*{Shift}+\wcKbd*{Enter} in the editor.
+
+  \wcTpLatexViewer[mode=lite]{
+    \wcScript[type=tp/latex]|
+\section{Viewer modes}
+Change this \textbf{message}, then run the source.
+  |
+  }
+}
+
+\wcSection{
+  \subsection*{mode="simple" — Editor and rendered output only}
+  Edit the code below, keep the cursor in the editor and press \wcKbd*{Shift}+\wcKbd*{Enter} (Return) to run it. This viewer has no Run button.
+
+  \wcTpLatexViewer[mode=simple]{
+    \wcScript[type=tp/latex]|
+\section{Viewer modes}
+Change this \textbf{message}, then run the source.
+  |
+  }
+}

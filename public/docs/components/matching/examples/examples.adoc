@@ -7,17 +7,13 @@
 [tp-matching]
 ====
 * Hello
-
 * Thank you
-
 * Goodbye
 
 //
 
 . Bonjour
-
 . Merci
-
 . Au revoir
 ====
 ======

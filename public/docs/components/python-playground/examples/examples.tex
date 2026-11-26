@@ -8,6 +8,7 @@
 \documentclass{article}
 \begin{document}
 \wcScript[type=module]|
+import "/components/python/python.js";
 import "/components/python-playground/python-playground.js";
 
 const example = document.createDocumentFragment();
@@ -24,4 +25,10 @@ document.body.append(example);
 \documentclass{article}
 \begin{document}
 \wcTpPythonPlayground[src=/docs/components/_shared/single-source/example.py]{}
+\end{document}
+
+% !tp-example unittest results
+\documentclass{article}
+\begin{document}
+\wcTpPythonPlayground[src=/docs/components/python-playground/examples/framework-tests.json]{}
 \end{document}

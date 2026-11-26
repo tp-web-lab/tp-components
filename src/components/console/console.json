@@ -9,7 +9,17 @@
       "code": "<tp-box data-intro-action=\"console\" data-allow-script=\"\">\n  <p>Inspect these example messages, then use Clear to empty the console.</p>\n  <tp-console></tp-console>\n  <p data-demo-status=\"\" role=\"status\"></p>\n  <script src=\"/docs/components/_shared/introduction-actions.js\"></script>\n</tp-box>"
     }
   ],
-  "attributes": [],
+  "attributes": [
+    {
+      "name": "mode",
+      "description": "Presentation: full console, no toolbar, or results without toolbar, level labels and timestamps.",
+      "reflected": true,
+      "static": false,
+      "inherited": false,
+      "type": "\"default\" | \"lite\" | \"simple\"",
+      "default": "\"default\""
+    }
+  ],
   "methods": [
     {
       "name": "addEntry(kind: TpConsoleEntryKind, values: TpConsoleValue[]): TpConsoleEntry",
@@ -107,6 +117,11 @@
       "description": "Displays elapsed milliseconds for label with any additional values, without stopping the timer."
     },
     {
+      "name": "toggleGroup(id: number): void",
+      "inherited": false,
+      "description": "Expands or collapses the existing console group identified by its entry id."
+    },
+    {
       "name": "warn(...values: TpConsoleValue[]): void",
       "inherited": false,
       "description": "Writes a warning entry."
@@ -198,6 +213,11 @@
       "description": "Text color and background tint of the log-level badge; assigned by the entry level."
     },
     {
+      "name": "--tp-console-kind-background",
+      "default": "var(--tp-danger-fill-soft)",
+      "description": "Controls the kind background."
+    },
+    {
       "name": "--tp-console-nullish-color",
       "default": "#8b949e",
       "description": "Null and undefined value color."
@@ -279,7 +299,7 @@
   "userHelp": {
     "displayName": "Console",
     "introduction": "The custom `<tp-console>` element provides a visual console for playground output.",
-    "interactions": "The console starts in dark mode. Its Theme button selects light, dark or automatic appearance for this console only.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Messages | Read output and errors. |\n| Structured values | Expand or collapse values to inspect their contents. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "The console starts with a dark theme in default and lite modes, and a light theme in simple mode. Its Theme button selects light, dark or automatic appearance for this console only. The toolbar is available in default mode; lite hides it, and simple also hides level labels and timestamps.\n\n#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Messages | Read output and errors. |\n| Structured values | Expand or collapse values to inspect their contents. |\n| :tp-icon:{name=\"close\" size=\"2em\"} Clear console | Remove all displayed messages and reset counters and timers. |\n| :tp-icon:{name=\"theme-light-dark\" size=\"2em\"} Theme | Choose the light, dark or automatic theme. |\n| :tp-icon:{name=\"copy\" size=\"2em\"} Copy code | Copy the associated code. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

@@ -101,10 +101,11 @@
 
 .tp-mastermind-row.current {
   background: var(--tp-brand-fill-softer);
+  color: var(--tp-brand-text-on-soft);
 }
 
 .tp-mastermind-attempt {
-  color: #526071;
+  color: inherit;
   font-weight: 700;
   text-align: center;
 }

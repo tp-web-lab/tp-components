@@ -1,0 +1,43 @@
+{
+  "browser": "chrome",
+  "version": "158.0.8127.38",
+  "date": "2026-11-25T09:44:42.960Z",
+  "cases": [
+    {
+      "file": "family.pl",
+      "events": 53,
+      "solutions": 3,
+      "replay": true
+    },
+    {
+      "file": "recursion.pl",
+      "events": 49,
+      "solutions": 1,
+      "replay": true
+    },
+    {
+      "file": "failure.pl",
+      "events": 8,
+      "solutions": 0,
+      "replay": true
+    },
+    {
+      "file": "cut.pl",
+      "events": 8,
+      "solutions": 1,
+      "replay": true
+    },
+    {
+      "file": "exception.pl",
+      "events": 6,
+      "solutions": 0,
+      "replay": true
+    },
+    {
+      "file": "infinite recursion",
+      "events": 2001,
+      "limited": true
+    }
+  ],
+  "passed": true
+}

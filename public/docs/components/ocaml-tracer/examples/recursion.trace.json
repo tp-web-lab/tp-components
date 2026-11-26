@@ -1,0 +1,3285 @@
+{
+  "version": 1,
+  "language": "ocaml",
+  "code": "let rec factorial n = if n <= 1 then 1 else n * factorial (n - 1);;\nprint_int (factorial 5);;\nprint_newline ();;\n",
+  "trace": [
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 0,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 2,
+      "source_range": {
+        "start": 68,
+        "end": 91
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 2,
+      "source_range": {
+        "start": 78,
+        "end": 91
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 22,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "",
+      "grouped_steps": 2
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 25,
+        "end": 31
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 25,
+        "end": 31
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5,
+            "__return__": false
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 44,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 48,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 58,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 58,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5,
+            "__return__": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 22,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "",
+      "grouped_steps": 2
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 25,
+        "end": 31
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 25,
+        "end": 31
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4,
+            "__return__": false
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 44,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 48,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 58,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 58,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4,
+            "__return__": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 22,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "",
+      "grouped_steps": 2
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 25,
+        "end": 31
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 25,
+        "end": 31
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3,
+            "__return__": false
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 44,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 48,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 58,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 58,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3,
+            "__return__": 2
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 22,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "",
+      "grouped_steps": 2
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 25,
+        "end": 31
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 25,
+        "end": 31
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2,
+            "__return__": false
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 44,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 48,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 58,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 58,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2,
+            "__return__": 1
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 22,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 5,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 1
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "",
+      "grouped_steps": 2
+    },
+    {
+      "event": "step_line",
+      "line": 1,
+      "source_range": {
+        "start": 25,
+        "end": 31
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 5,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 1
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 25,
+        "end": 31
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 5,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 1,
+            "__return__": true
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "return",
+      "line": 1,
+      "source_range": {
+        "start": 22,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 5,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 1,
+            "__return__": 1
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "",
+      "grouped_steps": 2
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 48,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2,
+            "__return__": 1
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 44,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2,
+            "__return__": 2
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "return",
+      "line": 1,
+      "source_range": {
+        "start": 22,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 4,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 2,
+            "__return__": 2
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "",
+      "grouped_steps": 2
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 48,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3,
+            "__return__": 2
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 44,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3,
+            "__return__": 6
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "return",
+      "line": 1,
+      "source_range": {
+        "start": 22,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 3,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 3,
+            "__return__": 6
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "",
+      "grouped_steps": 2
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 48,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4,
+            "__return__": 6
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 44,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4,
+            "__return__": 24
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "return",
+      "line": 1,
+      "source_range": {
+        "start": 22,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n"
+          ]
+        },
+        {
+          "frame_id": 2,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 4,
+            "__return__": 24
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "",
+      "grouped_steps": 2
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 48,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5,
+            "__return__": 24
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 1,
+      "source_range": {
+        "start": 44,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5,
+            "__return__": 120
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "return",
+      "line": 1,
+      "source_range": {
+        "start": 22,
+        "end": 65
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [
+        {
+          "frame_id": 1,
+          "func_name": "factorial",
+          "encoded_locals": {
+            "factorial": [
+              "REF",
+              1
+            ],
+            "n": 5,
+            "__return__": 120
+          },
+          "ordered_varnames": [
+            "factorial",
+            "n",
+            "__return__"
+          ]
+        }
+      ],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "",
+      "grouped_steps": 2
+    },
+    {
+      "event": "result",
+      "line": 2,
+      "source_range": {
+        "start": 78,
+        "end": 91
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "result",
+      "line": 2,
+      "source_range": {
+        "start": 68,
+        "end": 91
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": ""
+    },
+    {
+      "event": "step_line",
+      "line": 2,
+      "source_range": {
+        "start": 68,
+        "end": 91
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "120"
+    },
+    {
+      "event": "step_line",
+      "line": 3,
+      "source_range": {
+        "start": 94,
+        "end": 110
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "120"
+    },
+    {
+      "event": "result",
+      "line": 3,
+      "source_range": {
+        "start": 108,
+        "end": 110
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "120",
+      "grouped_steps": 2
+    },
+    {
+      "event": "step_line",
+      "line": 3,
+      "source_range": {
+        "start": 94,
+        "end": 110
+      },
+      "globals": {
+        "factorial": [
+          "REF",
+          1
+        ]
+      },
+      "ordered_globals": [
+        "factorial"
+      ],
+      "stack_to_render": [],
+      "heap": {
+        "1": [
+          "FUNCTION",
+          "OCaml function",
+          ""
+        ]
+      },
+      "stdout": "120\n",
+      "grouped_steps": 2
+    }
+  ]
+}

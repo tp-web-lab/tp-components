@@ -15,6 +15,7 @@
          .. script::
             :type: module
 
+            import "/components/prolog/prolog.js";
             import "/components/prolog-playground/prolog-playground.js";
 
             const example = document.createDocumentFragment();
@@ -29,3 +30,13 @@
 
          .. tp-prolog-playground::
             :src: /docs/components/_shared/single-source/example.pl
+
+      .. example:: SWI-Prolog DOM, constraints and PlUnit
+
+         .. tp-prolog-playground::
+            :repository: /examples/playgrounds/prolog-playground/06-swipl-dom-constraints
+
+      .. example:: PlUnit tests
+
+         .. tp-prolog-playground::
+            :src: /docs/components/prolog-playground/examples/framework-tests.json

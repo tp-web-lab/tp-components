@@ -125,6 +125,14 @@ let instanceCount = 0;
  * @keyboard {End} Moves focus to the last tab.
  * @keyboard {Enter / Space} Activates the focused tab in manual activation mode.
  * @keyboard {Delete} Requests closing a dynamically added tab.
+ *  @cssprop [--tp-tabs-border-color=var(--tp-neutral-stroke-soft)] Border color of inactive tab headers and the content panel.
+ * @cssprop [--tp-tabs-border-selected-color=var(--tp-brand-stroke-soft)] Border color of the selected tab header.
+ * @cssprop [--tp-tabs-panel-bg=var(--tp-paper-color)] Background color of the tab content panel.
+ * @cssprop [--tp-tabs-panel-color=var(--tp-text-body)] Text color of the tab content panel.
+ * @cssprop [--tp-tabs-tab-bg=var(--tp-neutral-fill-softer)] Background color of inactive tab headers.
+ * @cssprop [--tp-tabs-tab-color=var(--tp-text-body)] Text color of inactive tab headers.
+ * @cssprop [--tp-tabs-tab-selected-bg=var(--tp-paper-color)] Background color of the selected tab header.
+ * @cssprop [--tp-tabs-tab-selected-color=var(--tp-brand-text-on-soft)] Text color of the selected tab header.
  * @example
  * <tp-tabs>
  *         <dl>
@@ -138,13 +146,6 @@ let instanceCount = 0;
  *           <dd>Content of panel <tp-icon size="2em" name="numeric-4"></tp-icon></dd>
  *         </dl>
  *       </tp-tabs>
- *  @cssprop [--tp-tabs-border-color=var(--tp-neutral-stroke-soft)] Border color of inactive tab headers and the content panel.
- * @cssprop [--tp-tabs-border-selected-color=var(--tp-brand-stroke-soft)] Border color of the selected tab header.
- * @cssprop [--tp-tabs-panel-bg=var(--tp-paper-color)] Background color of the tab content panel.
- * @cssprop [--tp-tabs-tab-bg=var(--tp-neutral-fill-softer)] Background color of inactive tab headers.
- * @cssprop [--tp-tabs-tab-color=var(--tp-text-body)] Text color of inactive tab headers.
- * @cssprop [--tp-tabs-tab-selected-bg=var(--tp-paper-color)] Background color of the selected tab header.
- * @cssprop [--tp-tabs-tab-selected-color=var(--tp-brand-text-colorful)] Text color of the selected tab header.
  */
 export class TpTabs extends TpBase {
 	/**
@@ -349,7 +350,7 @@ export class TpTabs extends TpBase {
 		const closeButton = document.createElement("tp-icon");
 		closeButton.setAttribute("data-tp-tab-close", "");
 		closeButton.setAttribute("name", "close");
-		closeButton.setAttribute("size", "xs");
+		closeButton.setAttribute("size", "0.75em");
 		closeButton.setAttribute("aria-hidden", "true");
 
 		dt.append(labelEl, closeButton);
@@ -565,7 +566,7 @@ export class TpTabs extends TpBase {
 					const closeButton = document.createElement("tp-icon");
 					closeButton.setAttribute("data-tp-tab-close", "");
 					closeButton.setAttribute("name", "close");
-					closeButton.setAttribute("size", "xs");
+					closeButton.setAttribute("size", "0.75em");
 					closeButton.setAttribute("aria-hidden", "true");
 					dt.append(closeButton);
 				}

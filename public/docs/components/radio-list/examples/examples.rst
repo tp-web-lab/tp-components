@@ -13,9 +13,7 @@
             :orientation: horizontal
 
             - Light
-
             - Automatic
-
             - Dark
 
       .. example:: Javascript API

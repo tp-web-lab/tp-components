@@ -1,5 +1,5 @@
-:::::: tp-markdown-viewer { label="tp-sql-viewer" allow-script }
-::::: script { type="tp/markdown" }
+::::::: tp-markdown-viewer { label="tp-sql-viewer" allow-script preserve-source }
+:::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-box
 The query lists three European capitals. Expand the query in the result panel to see its rows.
@@ -75,5 +75,72 @@ SELECT * FROM missing_table;
 ::: tp-sql-viewer { src="/docs/components/_shared/single-source/example.sql" }
 :::
 ```
+
+``` example {label="Compare presentation modes"}
+::::: section
+### mode="default" — Standard controls
+
+Open Code to edit the source, then click Run or press :kbd:Shift{}+:kbd:Enter{} in the editor.
+
+Run the query to trigger an intentional missing-table error and open the console. Comment out the final SELECT and run again to display the successful query.
+
+:::: tp-sql-viewer { mode="default" }
+::: script { type="tp/sql" filename="tables.sql" }
+-- No setup is needed for this calculation.
+:::
+
+::: script { type="tp/sql" filename="query.sql" }
+SELECT 6 * 7 AS answer;
+
+-- Intentional error: comment out the next line to display the calculation.
+SELECT * FROM intentional_viewer_error;
+:::
+::::
 :::::
+
+::::: section
+### mode="lite" — Compact controls
+
+Open Code to edit the source, then click Run or press :kbd:Shift{}+:kbd:Enter{} in the editor.
+
+Run the query to trigger an intentional missing-table error and open the console. Comment out the final SELECT and run again to display the successful query.
+
+:::: tp-sql-viewer { mode="lite" }
+::: script { type="tp/sql" filename="tables.sql" }
+-- No setup is needed for this calculation.
+:::
+
+::: script { type="tp/sql" filename="query.sql" }
+SELECT 6 * 7 AS answer;
+
+-- Intentional error: comment out the next line to display the calculation.
+SELECT * FROM intentional_viewer_error;
+:::
+::::
+:::::
+
+::::: section
+### mode="simple" — Editor and rendered output only
+
+Edit the code below, keep the cursor in the editor and press :kbd:Shift{}+:kbd:Enter{} (Return) to run it. This viewer has no Run button.
+
+Run the query to trigger an intentional missing-table error and open the console. Comment out the final SELECT and run again to display the successful query.
+
+:::: tp-sql-viewer { mode="simple" }
+::: script { type="tp/sql" filename="tables.sql" }
+-- No setup is needed for this calculation.
+:::
+
+::: script { type="tp/sql" filename="query.sql" }
+SELECT 6 * 7 AS answer;
+
+-- Intentional error: comment out the next line to display the calculation.
+SELECT * FROM intentional_viewer_error;
+:::
+::::
+:::::
+
+Programming viewers already have compact controls, so default and lite look alike. The first run may load the language engine.
+```
 ::::::
+:::::::

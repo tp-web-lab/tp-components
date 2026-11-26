@@ -1,0 +1,186 @@
+[tp-asciidoc-viewer%allow-script,label="tp-typescript"]
+========
+[script,type="tp/asciidoc"]
+----
+.Basic usage
+======
+[tp-typescript,query="square(7)"]
+=====
+[script,type="tp/typescript"]
+====
+function square(x: number): number {
+  return x * x;
+}
+====
+=====
+======
+
+.Javascript API
+======
+[script,type="module"]
+====
+import "/components/typescript/typescript.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-typescript");
+element1.setAttribute("query", "square(7)");
+element1.append(document.createTextNode("\n  "));
+
+const element2 = document.createElement("script");
+element2.setAttribute("type", "tp/typescript");
+element2.textContent = "\n    function square(x: number): number {\n      return x * x;\n    }\n  ";
+element1.append(element2);
+element1.append(document.createTextNode("\n"));
+example.append(element1);
+
+document.body.append(example);
+====
+======
+
+.Persistent session
+======
+[tp-typescript,query="++count"]
+=====
+[script,type="tp/typescript"]
+====
+let count: number = 0;
+====
+=====
+======
+
+.Promises and console
+======
+[tp-typescript,query="await answer()"]
+=====
+[script,type="tp/typescript"]
+====
+async function answer(): Promise<number> {
+  console.log("Computing the answer");
+  return Promise.resolve(42);
+}
+====
+=====
+======
+
+.External TypeScript file
+======
+[tp-typescript,src="/docs/components/typescript/examples/squares.ts",query="square(9)"]
+====
+====
+======
+
+.DOM elements and click events
+======
+[script,type="module"]
+====
+import "/components/button/button.js";
+import "/components/typescript/typescript.js";
+====
+
+[tp-typescript,query="setupDom()"]
+=====
+[script,type="tp/typescript",filename="dom-demo.ts"]
+====
+function setupDom(): string {
+  const host = parent.document.getElementById("typescript-dom-demo");
+  if (!host) throw new Error("Demo container not found.");
+  const button = parent.document.createElement("tp-button");
+  button.textContent = "Click me";
+  const message = parent.document.createElement("p");
+  message.textContent = "Waiting for a click.";
+  let clicks: number = 0;
+  button.addEventListener("click", () => {
+    clicks += 1;
+    message.textContent = `TypeScript handled ${clicks} click(s).`;
+    console.log("Clicks:", clicks);
+  });
+  host.replaceChildren(button, message);
+  return "Button ready";
+}
+====
+=====
+
+[div,id="typescript-dom-demo",aria-live="polite"]
+====
+====
+======
+
+.Errors and recovery
+======
+[tp-typescript,query="divide(12, 0)"]
+=====
+[script,type="tp/typescript",filename="errors.ts"]
+====
+function divide(numerator: number, denominator: number): number {
+  if (denominator === 0) {
+    throw new Error("The denominator must not be zero.");
+  }
+  return numerator / denominator;
+}
+====
+=====
+======
+
+.Presentation modes and automatic reload
+======
+Each interpreter has its own session. Default and lite show the normal controls; simple opens the editor and hides the header and welcome information. Its query buttons are hidden.
+
+In default and lite, open Edit source. Run the prefilled query to obtain 10. Change 10 to 20 in the source, then click Run or press Return in the query field. In simple, use Return in the query field. Shift+Return works too.
+
+The result becomes 20 and “> Program reloaded.” appears before the query. Run again without editing: the result remains 20, with no new reload message. Merely editing the source does not execute it.
+
+[discrete]
+=== Default
+
+[tp-typescript,mode="default",query="answer()"]
+=====
+[script,type="tp/typescript",filename="answer.ts"]
+====
+function answer(): number {
+  return 10;
+}
+====
+=====
+
+[discrete]
+=== Lite
+
+[tp-typescript,mode="lite",query="answer()"]
+=====
+[script,type="tp/typescript",filename="answer.ts"]
+====
+function answer(): number {
+  return 10;
+}
+====
+=====
+
+[discrete]
+=== Simple
+
+[tp-typescript,mode="simple",query="answer()"]
+=====
+[script,type="tp/typescript",filename="answer.ts"]
+====
+function answer(): number {
+  return 10;
+}
+====
+=====
+======
+
+.Execution trace drawer
+======
+[tp-typescript%tracer,filename="factorial.ts",query="console.log(factorial(5))"]
+=====
+[script,type="tp/typescript"]
+====
+function factorial(n: number): number {
+  return n <= 1 ? 1 : n * factorial(n - 1);
+}
+====
+=====
+======
+----
+========

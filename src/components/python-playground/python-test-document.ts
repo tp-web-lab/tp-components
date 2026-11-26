@@ -12,6 +12,10 @@ import {
 	resolveEntryFile,
 } from "../playground/playground-build-utils.js";
 import type { TpProject } from "../playground/project.js";
+import {
+	createTestReporter,
+	testResultsHead,
+} from "../playground/test-results.js";
 import { createPyodideRuntimeScript } from "./python-runtime-script.js";
 
 /** Options for building a Python test document. */
@@ -54,12 +58,14 @@ export async function buildPythonTestDocument(
 	const htmlFile = findProjectFile(project, "/index.html");
 	const body = htmlFile ? stripScripts(htmlFile.content) : "";
 
-	const filesJson = JSON.stringify(
+	const json = (value: unknown) =>
+		JSON.stringify(value).replaceAll("<", "\\u003c");
+	const filesJson = json(
 		Object.fromEntries(project.files.map((file) => [file.path, file.content])),
 	);
 
-	const testPathJson = JSON.stringify(testFile.path);
-	const libsJson = JSON.stringify(options.libs ?? []);
+	const testPathJson = json(testFile.path);
+	const libsJson = json(options.libs ?? []);
 
 	const setupPython = `
 import sys
@@ -102,92 +108,76 @@ for module_name in project_modules:
 from pathlib import Path
 import importlib.util
 import unittest
+import traceback
 
 test_path = Path(tp_test_path)
-
 spec = importlib.util.spec_from_file_location("tp_test_module", test_path)
-
 if spec is None or spec.loader is None:
     raise RuntimeError(f"Unable to load test module: {test_path}")
-
 module = importlib.util.module_from_spec(spec)
+sys.modules["tp_test_module"] = module
 spec.loader.exec_module(module)
-
 suite = unittest.defaultTestLoader.loadTestsFromModule(module)
 
 class TpTestResult(unittest.TestResult):
     def __init__(self):
         super().__init__()
-        self.current_class = None
-        self.pass_count = 0
+        self.subtest_parents = set()
 
-    def _class_name(self, test):
-        return test.__class__.__name__
+    def report(self, test, status, details="", name=None):
+        tp_report_result(test.__class__.__qualname__,
+                         name or getattr(test, "_testMethodName", str(test)), status, details)
 
-    def _method_name(self, test):
-        return getattr(test, "_testMethodName", str(test))
-
-    def startTest(self, test):
-        class_name = self._class_name(test)
-
-        if self.current_class != class_name:
-            if self.current_class is not None:
-                tp_console.groupEnd()
-
-            self.current_class = class_name
-            tp_console.group(class_name)
-
-        super().startTest(test)
+    def error_text(self, err):
+        return "".join(traceback.format_exception(*err))
 
     def addSuccess(self, test):
         super().addSuccess(test)
-        self.pass_count += 1
-        tp_console.info("%c✓ " + self._method_name(test), "color: green")
+        if test.id() not in self.subtest_parents:
+            self.report(test, "passed")
 
     def addFailure(self, test, err):
         super().addFailure(test, err)
-        error_type, error_value, _ = err
-        tp_console.error(
-            "%c✗ " + self._method_name(test),
-            "color: red; font-weight: bold;",
-            f"{error_type.__name__}: {error_value}",
-        )
+        self.report(test, "failed", self.error_text(err))
 
     def addError(self, test, err):
         super().addError(test, err)
-        error_type, error_value, _ = err
-        tp_console.error(
-            "%c⚠ " + self._method_name(test),
-            "color: red; font-weight: bold;",
-            f"{error_type.__name__}: {error_value}",
-        )
+        self.report(test, "failed", self.error_text(err))
 
-    def stopTestRun(self):
-        if self.current_class is not None:
-            tp_console.groupEnd()
+    def addSkip(self, test, reason):
+        super().addSkip(test, reason)
+        parent = getattr(test, "test_case", None)
+        if parent is not None:
+            self.subtest_parents.add(parent.id())
+        self.report(parent or test, "skipped", str(reason), str(test) if parent else None)
+
+    def addExpectedFailure(self, test, err):
+        super().addExpectedFailure(test, err)
+        self.report(test, "expected-failure", self.error_text(err))
+
+    def addUnexpectedSuccess(self, test):
+        super().addUnexpectedSuccess(test)
+        self.report(test, "failed", "Unexpected success: this test is marked expectedFailure.")
+
+    def addSubTest(self, test, subtest, err):
+        super().addSubTest(test, subtest, err)
+        self.subtest_parents.add(test.id())
+        self.report(test, "passed" if err is None else "failed",
+                    "" if err is None else self.error_text(err), str(subtest))
 
 result = TpTestResult()
-suite.run(result)
-result.stopTestRun()
-
-print("")
-
-if result.wasSuccessful():
-    print(f"Tests passed: {result.testsRun}")
-else:
-    passed = result.pass_count
-    print(
-        f"Tests finished: {passed} passed, "
-        f"{len(result.failures)} failed, "
-        f"{len(result.errors)} errors"
-    )
+result.startTestRun()
+try:
+    suite.run(result)
+finally:
+    result.stopTestRun()
 `;
 
 	return {
 		html: `
 <!doctype html>
 <html>
-<head></head>
+<head>${testResultsHead()}</head>
 <body>
   ${body}
   ${createCommonRuntimeScript()}
@@ -195,6 +185,13 @@ else:
   ${createPyodideRuntimeScript()}
 
   <script>
+    const reporter = (${createTestReporter.toString()})(document.body, 'unittest');
+    const output = document.createElement('pre');
+    reporter.attachLog(output);
+    function writeOutput(text, level) {
+      output.append(document.createTextNode(text + '\\n'));
+      console[level](text);
+    }
     function removeProjectPath(pyodide, path) {
       const stat = pyodide.FS.stat(path);
 
@@ -276,8 +273,8 @@ else:
         await window.tpLoadPyodidePackages(pyodide, libs);
       }
 
-      pyodide.setStdout({ batched: (text) => console.log(text) });
-      pyodide.setStderr({ batched: (text) => console.error(text) });
+      pyodide.setStdout({ batched: (text) => writeOutput(text, "log") });
+      pyodide.setStderr({ batched: (text) => writeOutput(text, "error") });
       resetProjectDirectory(pyodide);
       pyodide.FS.chdir('/project');
 
@@ -291,7 +288,7 @@ else:
         pyodide.globals.set('tp_project_paths', Object.keys(files));
         pyodide.globals.set('tp_window', window);
 
-        pyodide.runPython(${JSON.stringify(setupPython)});
+        pyodide.runPython(${json(setupPython)});
 
         const source = files['/' + testPath] ?? files[testPath] ?? '';
 
@@ -299,15 +296,27 @@ else:
  for (const name of Object.keys(pyodide.loadedPackages ?? {})) {
  (${reportToolLoaded.toString()})("python-" + name, name);
  }
-        pyodide.globals.set('tp_console', console);
+        pyodide.globals.set('tp_report_result', (suite, name, status, details) => {
+          reporter.add({suite: String(suite), name: String(name), status: String(status), details: String(details)});
+          const fullDetails = String(details ?? '');
+          const reason = fullDetails.split(/\\r?\\n/).map(line => line.trim()).filter(Boolean).at(-1) ?? '';
+          const label = (status === 'passed' ? '✓ ' : status === 'failed' ? '✗ ' : '– ') + suite + '.' + name + ' [' + status + ']';
+          const concise = (label + (reason ? ' — ' + reason : '')).replace(/\\s+/g, ' ');
+          output.append(document.createTextNode(label + (fullDetails ? '\\n' + fullDetails : '') + '\\n'));
+          console[status === 'failed' ? 'error' : 'info'](concise);
+        });
 
-        await pyodide.runPythonAsync(${JSON.stringify(runPythonTests)});
-      } catch (error) {
-        console.error(error?.message ?? error);
+        await pyodide.runPythonAsync(${json(runPythonTests)});
+        reporter.finish();
+      } finally {
+        pyodide.globals.delete('tp_report_result');
       }
     }
 
-    void main();
+    void window.tpRunWithPyodide(main).catch(error => {
+      reporter.error(error);
+      writeOutput(error?.message ?? String(error), 'error');
+    });
   </script>
 </body>
 </html>

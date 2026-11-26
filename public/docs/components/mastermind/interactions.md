@@ -21,6 +21,8 @@ The header shows the game icon and name on the left. Rounded controls appear on 
 | Click a peg in the current attempt | Sets the peg to the selected palette color. |
 | Palette color | Selects the color used for the next peg. |
 | Play | Submits the current guess. |
+| :tp-icon:{name="refresh" size="2em"} Reset with another code | Reset with another code. |
+| :tp-icon:{name="help" size="2em"} Mastermind assistance | Mastermind assistance. |
 
 #### Keyboard interactions
 

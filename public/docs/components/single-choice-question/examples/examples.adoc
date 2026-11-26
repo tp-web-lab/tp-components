@@ -17,17 +17,13 @@ What is the capital of France?
 Form::
 +
 * Paris
-
 * London
-
 * Berlin
 
 Feedback::
 +
 * Correct.
-
 * London is in the UK.
-
 * Berlin is in Germany.
 
 Solution::

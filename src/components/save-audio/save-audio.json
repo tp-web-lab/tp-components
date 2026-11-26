@@ -79,6 +79,11 @@
       "name": "save(format: TpSaveAudioFormat = this.format): Promise<void>",
       "inherited": false,
       "description": "Requests the anchored component to save mp3, ogg or wav audio using filename. Resolves after completion or cancellation; does nothing when disabled or already saving. Invalid formats and incompatible targets reject."
+    },
+    {
+      "name": "toggleMenu(): void",
+      "inherited": false,
+      "description": "Opens or closes the export format menu, respecting the disabled state."
     }
   ],
   "events": [
@@ -118,7 +123,7 @@
   "userHelp": {
     "displayName": "Save audio",
     "introduction": "The custom `<tp-save-audio>` element saves the associated audio in its original format.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Save audio | Open or close the format menu. |\n| MP3 / OGG / WAV | Choose an available format, then a filename, and save the audio. For an audio player, only the current source’s format is shown; unavailable formats are omitted. A check marks the current format. |\n| Outside the menu | Close the menu. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused control or format. |\n| <kbd>Escape</kbd> | Close the menu. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to focus. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| :tp-icon:{name=\"save-audio\" size=\"2em\"} Save audio | Open or close the format menu. |\n| MP3 / OGG / WAV | Choose an available format, then a filename, and save the audio. For an audio player, only the current source’s format is shown; unavailable formats are omitted. A check marks the current format. |\n| Outside the menu | Close the menu. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused control or format. |\n| <kbd>Escape</kbd> | Close the menu. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User help for the component under the pointer, falling back to focus. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

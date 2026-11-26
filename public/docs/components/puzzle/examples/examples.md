@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-puzzle" allow-script }
+::::: tp-markdown-viewer { label="tp-puzzle" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-puzzle { src="/docs/components/puzzle/examples/landscape.svg" pieces="12" alt="Mountain lake at sunrise" }

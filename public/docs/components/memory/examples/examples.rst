@@ -11,9 +11,7 @@
             :label: Match the fruits
 
             1. Apple
-
             2. Pear
-
             3. Plum
 
       .. example:: Javascript API

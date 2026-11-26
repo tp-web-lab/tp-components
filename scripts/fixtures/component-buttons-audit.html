@@ -1,0 +1,32 @@
+<!doctype html><meta charset="utf-8"><title>Component button documentation audit</title>
+<button id="run">Check Buttons documentation</button><p id="status">Ready</p><pre id="report"></pre><main id="stage"></main>
+<script type="module">
+import '/src/tp-loader.ts';
+import '/src/components/component-viewer/component-viewer.ts';
+const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+document.querySelector('#run').onclick=async()=>{
+ const results=[];
+ for(const name of ['code-editor','prose-editor','spreadsheet-editor','calculator','theme','word-cloud','latex-multi-pages']){
+  document.querySelector('#status').textContent='Checking '+name;
+  const viewer=document.createElement('tp-component-viewer');viewer.setAttribute('tag','tp-'+name);viewer.setAttribute('api-src','/src/components/'+name+'/'+name+'.json');document.querySelector('#stage').replaceChildren(viewer);
+  try{
+   for(let i=0;i<200&&!viewer.querySelector('[data-component-buttons]');i++)await pause(25);
+   const legend=viewer.querySelector('[data-component-buttons]');if(!legend)throw Error('Missing Buttons');
+   const icons=[...legend.querySelectorAll('tp-icon')];
+   if(legend.textContent.includes('Using the component'))throw Error('Gesture leaked into Buttons');
+   if(name==='word-cloud'&&icons.length)throw Error('Invented command icons');
+   if(name!=='word-cloud'&&!icons.length)throw Error('Missing command icons');
+   if(name==='code-editor'&&(legend.querySelectorAll('tbody tr').length!==4||legend.textContent.includes('Palette:')))throw Error('Extra code-editor commands');
+   if(name==='prose-editor'){
+    if(!icons.some(i=>i.getAttribute('name')==='format-bold'))throw Error('Missing secondary toolbar');
+    if(!icons.some(i=>i.getAttribute('name')==='file_type_html'&&i.getAttribute('library')==='languages'))throw Error('Missing language icon library');
+   }
+   if(legend.querySelector('tp-icon-button,button'))throw Error('Interactive legend');
+   results.push({name,pass:true,rows:legend.querySelectorAll('tbody tr').length,icons:icons.length});
+  }catch(error){results.push({name,pass:false,error:String(error)});}
+ }
+ document.querySelector('#report').textContent=JSON.stringify(results,null,2);
+ document.querySelector('#status').textContent='Complete: '+results.filter(x=>x.pass).length+'/'+results.length+' passed';
+ const prose=document.createElement('tp-component-viewer');prose.setAttribute('tag','tp-code-editor');prose.setAttribute('api-src','/src/components/code-editor/code-editor.json');document.querySelector('#stage').replaceChildren(prose);
+};
+</script>

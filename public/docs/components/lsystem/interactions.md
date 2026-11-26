@@ -7,7 +7,7 @@
 | Step | Pause and advance one rewriting iteration. After the final iteration, return to iteration zero. |
 | Play / Pause | Play successive iterations or pause on the current one. Starting from the final iteration restarts at zero; playback stops at the final iteration. |
 | Reset | Pause and display the axiom at iteration zero. |
-| Save image | Choose SVG, PNG or WebP to download the current drawing. |
+| :tp-icon:{name="save-image" size="2em"} Save image | Choose SVG, PNG or WebP to download the current drawing. |
 | Iteration counter | Read the current iteration and the definition's maximum. |
 
 #### Keyboard interactions

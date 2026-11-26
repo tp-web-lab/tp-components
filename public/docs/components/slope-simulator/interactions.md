@@ -8,7 +8,7 @@
 | Clear slope | Restore a flat line (0%). |
 | Drag either point horizontally | Spend movement effort along the route. Release and grab again to continue; the point does not jump to the pointer. Mouse, pen and touch are supported. |
 | Stage profile | Select one of the available profiles; restart the stage point. A single supplied profile is shown as a label. |
-| Grid | Show or hide the cycling-stage grid, with distance in kilometres and absolute elevation in metres. Graduations adapt to the selected or edited profile. |
+| :tp-icon:{name="grid" library="geometry" size="2em"} Grid | Show or hide the cycling-stage grid, with distance in kilometres and absolute elevation in metres. Graduations adapt to the selected or edited profile. |
 | Restart | Return that route's point to 10% of the route. |
 | Profile code disclosure | Expand or collapse the profile editor and its point-unit / slope-limit legend. |
 | Profile files → Load (.json) | Choose a local JSON file, validate it and replace the collection; invalid files leave the current profiles unchanged. |
@@ -17,6 +17,10 @@
 | Profile code editor | Edit the selected profile JSON; changes remain a draft until applied. |
 | Play (Apply profile) | Validate and apply the selected profile, or replace the collection when the JSON contains multiple profiles; reset the point to 10%. Invalid JSON or a slope beyond ±20% keeps the curve and draft unchanged. |
 | Refresh (Restore original profile) | Restore the selected profile and its code as originally loaded, discarding its edits. |
+| :tp-icon:{name="file-outline" size="2em"} Profile files (.json) | Profile files (.json). |
+| :tp-icon:{name="keyboard-f1" library="tp" size="2em"} F1 — Toggle editor toolbar | F1 — Toggle editor toolbar. |
+| :tp-icon:{name="refresh" size="2em"} Restore original profile | Restore original profile. |
+| :tp-icon:{name="play" size="2em"} Apply profile | Apply profile. |
 
 #### Keyboard interactions
 

@@ -6,9 +6,9 @@
 | --- | --- |
 | Screen preview | Hover to see the currently applied format and window width and height in CSS pixels; click to open the selected device viewport. |
 | Absolute formats / Relative formats | Preview a tentative format without reloading the page; the active choice is highlighted. |
-| OK | Apply the selected format; default restores the original page. |
-| Cancel / Close preview | Discard the tentative choice and restore the last confirmed format. |
-| Screen formats | Reopen the chooser from an applied page without its own Screen control. |
+| <!-- button --> OK | Apply the selected format; default restores the original page. |
+| <!-- button --> :tp-icon:{name="close" size="2em"} Cancel / Close preview | Discard the tentative choice and restore the last confirmed format. |
+| :tp-icon:{name="screen" library="components" size="2em"} Screen formats | Reopen the chooser from an applied page without its own Screen control. |
 
 #### Keyboard interactions
 

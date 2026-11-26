@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-asciidoc-playground" allow-script }
+::::: tp-markdown-viewer { label="tp-asciidoc-playground" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-asciidoc-playground { src="/docs/components/_shared/intro-projects/asciidoc.json" }

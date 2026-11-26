@@ -4,8 +4,8 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Button | Click to perform the action identified by its label. Disabled or loading controls cannot be activated. |
-| Navigation button | Click to open its destination. |
+| <!-- button --> Button | The displayed icon comes from the configured name and library. Click to perform the action identified by its label. Disabled or loading controls cannot be activated. |
+| <!-- button --> Navigation button | Click to open its destination. |
 
 #### Keyboard interactions
 

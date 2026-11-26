@@ -11,11 +11,13 @@
 | Cell menu → :tp-icon:{name="table-column-plus-before"} Insert column before / :tp-icon:{name="table-column-plus-after"} Insert column after | Insert a text column on the chosen side of the cell. | — |
 | Cell menu → :tp-icon:{name="table-row-remove"} Delete row / :tp-icon:{name="table-column-remove"} Delete column | Remove the cell’s row or column, preserving at least one of each. | — |
 | Cell menu → :tp-icon:{name="format-align-left"} Align left / :tp-icon:{name="format-align-center"} Align center / :tp-icon:{name="format-align-right"} Align right | Align the selected column; the current alignment is checked. | — |
-| Cell menu → :tp-icon:{name="symbol"} Cell type → tp-textfield / tp-numberfield / tp-datefield / tp-timefield / tp-mathfield | Choose the cell’s editor; incompatible values are cleared and can be restored with Undo. | — |
+| Cell menu → :tp-icon:{name="symbol"} Cell type → text / number / date / time / math | Choose the cell’s editor; incompatible values are cleared and can be restored with Undo. | — |
 | <kbd>Shift</kbd>+click another cell | Select a rectangular area from the current cell; existing merged regions are included in full. | |
 | :tp-icon:{name="table-merge-cells"} Merge cells (+/− or cell menu) | Merge the selected rectangle, showing its upper-left cell and preserving all covered contents. Unavailable for a single cell or across the heading boundary. | |
 | :tp-icon:{name="table-split-cell"} Split cell (+/− or cell menu) | Separate the selected merged cell and reveal its preserved contents and field types. | |
+| :tp-icon:{name="format-align-top"} Top / :tp-icon:{name="format-align-middle"} Middle / :tp-icon:{name="format-align-bottom"} Bottom (Vertical alignment or cell menu) | Position the selected text, number, date, time or math field vertically in its cell. The current choice is checked; available for all cell types. | — |
 | Click a cell | Select its row and column, and edit its text. | |
+| :tp-icon:{name="file-import"} Import table | Open the import menu: five markup formats, then CSV, JSON and XLSX below a divider. Select a format to open the filtered file picker and replace the table. Invalid files leave the current table unchanged. | — |
 | :tp-icon:{name="refresh"} Reset | Restore the initial table; Undo can reverse the reset. | — |
 | :tp-icon:{name="undo"} Undo | Restore the preceding table state. | — |
 | :tp-icon:{name="redo"} Redo | Reapply an undone edit. | — |
@@ -29,19 +31,22 @@
 | :tp-icon:{name="plus-minus"} Insert or delete → :tp-icon:{name="table-column-remove"} Delete column | Remove the selected column; keep at least one column. | — |
 | Caption | Edit the table caption. | |
 | Heading | Check to use the first row as column headings; uncheck to use it as ordinary data. | |
-| Cell type (field symbol) → tp-textfield / tp-numberfield / tp-datefield / tp-timefield / tp-mathfield | Change the selected cell’s editor; Undo restores its previous value and type. | — |
+| Cell type (field symbol) → text / number / date / time / math | Change the selected cell’s editor; Undo restores its previous value and type. | — |
 | :tp-icon:{name="format-align-left"} Column alignment → :tp-icon:{name="format-align-left"} Left / :tp-icon:{name="format-align-center"} Center / :tp-icon:{name="format-align-right"} Right | Align the selected column to the left, center or right. | |
-| tp-asciidoc / html / tp-latex / tp-markdown / tp-restructuredtext | Select a markup language; each language has its own Code and Render tabs. | |
+| html / tp-asciidoc / tp-latex / tp-markdown / tp-restructuredtext | Select a markup language; each language has its own Code and Render tabs. | |
 | :tp-icon:{name="screen" library="components"} Screen preview (Render tab) | Preview only the rendered table at phone, tablet, laptop or desktop dimensions, with the editor’s color and theme. | — |
 | Code / Render | Switch between the generated source and its rendered table in the selected language. | |
 | :tp-icon:{name="copy"} Copy code (Code tab) | Copy the displayed source; if clipboard access is unavailable, select and copy the source manually. | — |
 | :tp-icon:{name="file-upload"} Save as (code panels) | Choose a filename and save the displayed format. In XLSX, save the complete workbook. Cancel to save nothing. | — |
 | Spreadsheet | Expand or collapse the CSV, JSON and XLSX source tabs; initially closed. | |
-| csv / json / xlsx | Inspect the current table as CSV, JSON or worksheet XML. | |
+| csv / json / xlsx | Select a spreadsheet format, then use Code to inspect its source or Render to view its table. | |
 | :tp-icon:{name="image-download"} Save image → SVG / PNG / WebP | Save the complete table and its caption as an image in the current colors. | — |
 | :tp-icon:{name="palette-swatch"} Color | Change the brand color within the editor. | — |
 | :tp-icon:{name="theme-light-dark"} Theme | Change the editor's light, dark or automatic theme. | — |
-| :tp-icon:{name="fullscreen"} Fullscreen | Enter or leave fullscreen for the editor. | — |
+| :tp-icon:{name="fullscreen-exit" size="2em"} :tp-icon:{name="fullscreen"} Fullscreen | Enter or leave fullscreen for the editor. | — |
+| :tp-icon:{name="plus-minus" size="2em"} Insert or delete | Create or delete the table, or insert or delete rows and columns. |
+| :tp-icon:{name="save-image" size="2em"} Save image | Save the content as an image. |
+| :tp-icon:{name="screen" size="2em"} Screen | Preview the content at a selected screen size. |
 
 #### Keyboard interactions
 

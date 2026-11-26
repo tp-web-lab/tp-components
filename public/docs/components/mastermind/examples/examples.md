@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-mastermind" allow-script }
+::::: tp-markdown-viewer { label="tp-mastermind" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-mastermind { solution="red blue green yellow" attempts="8" }

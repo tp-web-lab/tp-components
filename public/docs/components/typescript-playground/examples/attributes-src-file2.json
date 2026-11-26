@@ -5,7 +5,7 @@
     {
       "path": "/index.html",
       "language": "html",
-      "content": "<h2>TypeScript result</h2><p id=\"result\"></p>"
+      "content": "<p id=\"result\"></p>"
     },
     {
       "path": "/main.ts",

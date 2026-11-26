@@ -1,4 +1,4 @@
-:::::::: tp-markdown-viewer { label="tp-flip-card" allow-script }
+:::::::: tp-markdown-viewer { label="tp-flip-card" allow-script preserve-source }
 ::::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 ::: tp-flip-card

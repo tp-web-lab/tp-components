@@ -7,7 +7,9 @@ import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { latexMarkup } from "../src/utilities/latex-markup.js";
+
 export { latexMarkup, rawBody } from "../src/utilities/latex-markup.js";
+
 import { namedExamples, viewerSource } from "./component-basic-examples.mjs";
 
 const root = resolve(import.meta.dirname, "../public/docs/components");
@@ -70,9 +72,7 @@ export function synchronizeLatexExamples(check = false, selected = null) {
 							.find((line) =>
 								line.startsWith(`: ::include{examples/${file}`),
 							) ?? `: ::include{examples/${file}}`;
-					const title = body.includes("<tp-icon")
-						? `<tp-icon name="file_type_${icon}" library="languages" size="1.25em"></tp-icon> ${label}`
-						: label;
+					const title = `:tp-icon:{name="file_type_${icon}" library="languages" size="1.25em" aria-hidden="true"} ${label}`;
 					return `${title}\n${include}`;
 				});
 				return `${fence} tp-tabs\n${entries.join("\n\n")}\n${fence}`;
@@ -93,4 +93,9 @@ if (
 	process.argv[1] &&
 	import.meta.url === pathToFileURL(resolve(process.argv[1])).href
 )
-	synchronizeLatexExamples(process.argv.includes("--check"), process.argv.includes("--component") ? process.argv[process.argv.indexOf("--component") + 1] : null);
+	synchronizeLatexExamples(
+		process.argv.includes("--check"),
+		process.argv.includes("--component")
+			? process.argv[process.argv.indexOf("--component") + 1]
+			: null,
+	);

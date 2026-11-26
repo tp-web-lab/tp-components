@@ -13,9 +13,10 @@
 
             .. tp-box::
 
-               .. h3::
+               .. heading-level:: 3
 
-                  Navigation
+               Navigation
+               ==========
 
                Overview
 
@@ -23,9 +24,10 @@
 
             .. tp-box::
 
-               .. h3::
+               .. heading-level:: 3
 
-                  Main content
+               Main content
+               ============
 
                The sidebar stays beside this content while there is enough space.
 

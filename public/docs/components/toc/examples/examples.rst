@@ -15,21 +15,24 @@
                :open:
                :expand-all:
 
-            .. h2::
+            .. heading-level:: 2
 
-               Getting started
+            Getting started
+            ===============
 
             Choose a heading in the table of contents to jump to its section.
 
-            .. h3::
+            .. heading-level:: 3
 
-               Installation
+            Installation
+            ============
 
             Install the library in your project.
 
-            .. h3::
+            .. heading-level:: 3
 
-               First component
+            First component
+            ===============
 
             Add your first interactive component.
 

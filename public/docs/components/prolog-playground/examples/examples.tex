@@ -8,6 +8,7 @@
 \documentclass{article}
 \begin{document}
 \wcScript[type=module]|
+import "/components/prolog/prolog.js";
 import "/components/prolog-playground/prolog-playground.js";
 
 const example = document.createDocumentFragment();
@@ -24,4 +25,16 @@ document.body.append(example);
 \documentclass{article}
 \begin{document}
 \wcTpPrologPlayground[src=/docs/components/_shared/single-source/example.pl]{}
+\end{document}
+
+% !tp-example SWI-Prolog DOM, constraints and PlUnit
+\documentclass{article}
+\begin{document}
+\wcTpPrologPlayground[repository=/examples/playgrounds/prolog-playground/06-swipl-dom-constraints]{}
+\end{document}
+
+% !tp-example PlUnit tests
+\documentclass{article}
+\begin{document}
+\wcTpPrologPlayground[src=/docs/components/prolog-playground/examples/framework-tests.json]{}
 \end{document}

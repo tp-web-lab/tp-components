@@ -1,0 +1,72 @@
+{
+  "checkedAt": "2026-11-24T10:34:23.220Z",
+  "browser": "firefox",
+  "version": "153.0",
+  "parserSha256": "92e54d59b1690ab614c01bd7a28d0598b8e22c544307eabdeb7bdec7f37b4db5",
+  "results": [
+    {
+      "scenario": "docutils",
+      "passed": true,
+      "firstError": "Error: Unable to load Python packages: docutils. Check the connection and retry the conversion.",
+      "failureMilliseconds": 6913,
+      "recoveryMilliseconds": 4023,
+      "highlighted": true,
+      "openDuringRecovery": 0,
+      "requests": [
+        {
+          "file": "docutils-0.21.2-py3-none-any.whl",
+          "interrupted": true,
+          "at": 1795516205971
+        },
+        {
+          "file": "pygments-2.19.1-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795516205971
+        },
+        {
+          "file": "docutils-0.21.2-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795516206467
+        }
+      ],
+      "totalMilliseconds": 11810
+    },
+    {
+      "scenario": "pygments",
+      "passed": true,
+      "firstError": "Error: Unable to load Python packages: pygments. Check the connection and retry the conversion.",
+      "failureMilliseconds": 4288,
+      "recoveryMilliseconds": 3731,
+      "highlighted": true,
+      "openDuringRecovery": 0,
+      "requests": [
+        {
+          "file": "docutils-0.21.2-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795516216160
+        },
+        {
+          "file": "pygments-2.19.1-py3-none-any.whl",
+          "interrupted": true,
+          "at": 1795516216160
+        },
+        {
+          "file": "pygments-2.19.1-py3-none-any.whl",
+          "interrupted": false,
+          "at": 1795516216550
+        }
+      ],
+      "totalMilliseconds": 8742
+    },
+    {
+      "scenario": "docutils-stalled",
+      "passed": false,
+      "error": "Error: Content not ready before the scenario deadline"
+    },
+    {
+      "scenario": "pygments-stalled",
+      "passed": false,
+      "error": "Error: Content not ready before the scenario deadline"
+    }
+  ]
+}

@@ -67,9 +67,19 @@
   ],
   "methods": [
     {
+      "name": "selectPreset(preset: TpColorPreset): void",
+      "inherited": false,
+      "description": "Applies the chosen brand preset and closes its menu, unless the controller is disabled."
+    },
+    {
       "name": "syncToPreset(preset: TpColorPreset): void",
       "inherited": false,
       "description": "Synchronizes the preset from another controller."
+    },
+    {
+      "name": "toggleMenu(): void",
+      "inherited": false,
+      "description": "Opens or closes the choices menu, unless this control is disabled."
     }
   ],
   "events": [
@@ -106,7 +116,7 @@
   "userHelp": {
     "displayName": "Color",
     "introduction": "The custom `<tp-color>` element changes the color scheme of the surrounding content.",
-    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| Palette button | Open the color choices for the associated content. |\n| Color choice | Apply the selected brand color. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
+    "interactions": "#### Mouse interactions\n\n| Control or gesture | Result |\n| --- | --- |\n| :tp-icon:{name=\"palette-swatch\" size=\"2em\"} Palette button | Open the color choices for the associated content. |\n| Color choice | Apply the selected brand color. |\n\n#### Keyboard interactions\n\n| Key or gesture | Result |\n| --- | --- |\n| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |\n| <kbd>Enter</kbd> / <kbd>Space</kbd> | Activate the focused button. |\n| <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |\n| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>?</kbd> | Choose a component from the hierarchy under the pointer, or around the focused component, then open its help. <kbd>Alt</kbd> is <kbd>Option</kbd> on macOS; include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |",
     "keyboard": []
   }
 }

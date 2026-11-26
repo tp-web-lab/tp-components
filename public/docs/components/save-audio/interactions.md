@@ -4,7 +4,7 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Save audio | Open or close the format menu. |
+| :tp-icon:{name="save-audio" size="2em"} Save audio | Open or close the format menu. |
 | MP3 / OGG / WAV | Choose an available format, then a filename, and save the audio. For an audio player, only the current source’s format is shown; unavailable formats are omitted. A check marks the current format. |
 | Outside the menu | Close the menu. |
 

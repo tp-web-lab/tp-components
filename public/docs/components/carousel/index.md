@@ -42,7 +42,28 @@ Place images inside the carousel and provide meaningful `alt` text. A `picture` 
 
 Set `orientation="vertical"` for vertical navigation; the default is `horizontal`. Set `height` to the image viewport height (default `20rem`). Images retain their proportions and fit inside this viewport.
 
-`index` selects an image by its zero-based position. Add the boolean `loop` attribute to let the Previous and Next commands wrap between the first and last images. Navigation is manual; images do not advance automatically.
+`index` selects an image by its zero-based position. Add the boolean `loop` attribute to let the Previous and Next commands wrap between the first and last images. Navigation is manual by default. Set `auto="2000"` to advance every 2,000 milliseconds and automatically wrap from the last image to the first, even without `loop`. Set `auto="0"` (the default) or remove the attribute to stop automatic navigation. Negative and non-finite values also disable it. Changing the interval takes effect immediately. Manual navigation remains available. Hovering over the carousel pauses both automatic navigation and any running transition. Moving the pointer away resumes the movement from the same position, with the remaining time before the next image.
+
+```html
+<tp-carousel auto="2000" height="3em" aria-label="TP markup languages">
+  <img src="/docs/medias/logos/tp-html-logo.svg" alt="TP HTML">
+  <img src="/docs/medias/logos/tp-markdown-logo.svg" alt="TP Markdown">
+  <img src="/docs/medias/logos/tp-latex-logo.svg" alt="TP LaTeX">
+</tp-carousel>
+```
+
+Add the boolean `hide-controls` attribute to hide both navigation buttons and the counter, without leaving space below the images. Automatic navigation, keyboard navigation and touch scrolling remain available. Remove the attribute to show the controls again. The JavaScript property is `hideControls`.
+
+The viewport background is transparent by default. Set `bg-color="brand"` or `bg-color="neutral"` for a theme-aware TP background, or use a CSS color such as `bg-color="#eeeeee"` or `bg-color="var(--tp-paper-color)"`. Remove the attribute to restore transparency.
+
+Set `transition="start-to-end"` to move each selected slide all the way from outside the left edge to outside the right edge, without stopping in the middle. `transition="end-to-start"` reverses this motion. Directions follow the reading direction; vertical carousels use top-to-bottom and bottom-to-top respectively. With `auto="2000"`, each traversal lasts two seconds at constant speed, then the next slide starts at the entrance edge as soon as the previous image has fully left. The travel distance follows the visible image or icon bounds to avoid off-screen waiting time. The first slide starts moving as soon as the carousel is ready. Without automatic navigation, a manually selected slide traverses in 400 milliseconds. The default `transition="none"` keeps automatic changes immediate. Reduced-motion preferences disable the movement and keep the selected slide visible.
+
+```html
+<tp-carousel auto="2000" hide-controls height="3em" bg-color="transparent" transition="start-to-end">
+  <figure><tp-icon name="tp-html-logo" library="tp" size="3em" role="img" aria-label="TP HTML"></tp-icon></figure>
+  <figure><tp-icon name="tp-markdown-logo" library="tp" size="3em" role="img" aria-label="TP Markdown"></tp-icon></figure>
+</tp-carousel>
+```
 
 Use `previous()`, `next()` or `goTo(index)` to select an image from JavaScript. The `tp-carousel-change` event provides `{ index, count }` in `event.detail`.
 
@@ -90,22 +111,25 @@ Vertical navigation
 
 Looping navigation
 : Use Next image after the last illustration to return to the first; Previous image also wraps in the other direction.
+
+Automatic scrolling and hover pause
+: Watch the five TP markup logos travel from left to right every three seconds in a 3em-high carousel, without buttons or a counter. Hover to pause, then move the pointer away to resume from the same position.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

@@ -103,3 +103,31 @@ export function getCatalogLanguageFromFilename(
 	const path = filename.split(/[?#]/, 1)[0] ?? filename;
 	return LanguageDescription.matchFilename(languages, path)?.name.toLowerCase();
 }
+
+/** Preferred source-file extension, including dynamically loaded languages. */
+export function getLanguageFileExtension(language: string): string {
+	const name = language.toLowerCase();
+	const preferred: Record<string, string> = {
+		html: "html",
+		javascript: "js",
+		typescript: "ts",
+		markdown: "md",
+		asciidoc: "adoc",
+		restructuredtext: "rst",
+		latex: "tex",
+		stex: "tex",
+		python: "py",
+		scheme: "scm",
+		ocaml: "ml",
+		prolog: "pl",
+		abc: "abc",
+		plaintext: "txt",
+		text: "txt",
+	};
+	return (
+		preferred[name] ??
+		LanguageDescription.matchLanguageName(languages, name, false)
+			?.extensions[0] ??
+		"txt"
+	);
+}

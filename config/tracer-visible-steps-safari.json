@@ -1,0 +1,46 @@
+{
+  "browser": "Safari",
+  "version": "26.6.2",
+  "date": "2026-11-24T22:52:42.751Z",
+  "checks": [
+    {
+      "language": "javascript",
+      "steps": 7,
+      "highlightChecks": 42,
+      "sourceRange": true,
+      "navigationButtons": true,
+      "replayWithoutWorker": true,
+      "duplicateGrouping": true
+    },
+    {
+      "language": "typescript",
+      "steps": 7,
+      "highlightChecks": 42,
+      "sourceRange": true,
+      "navigationButtons": true,
+      "replayWithoutWorker": true,
+      "duplicateGrouping": true
+    },
+    {
+      "language": "python",
+      "steps": 10,
+      "highlightChecks": 60,
+      "sourceRange": true,
+      "navigationButtons": true,
+      "replayWithoutWorker": true,
+      "duplicateGrouping": true
+    },
+    {
+      "language": "scheme",
+      "steps": 14,
+      "highlightChecks": 84,
+      "sourceRange": true,
+      "navigationButtons": true,
+      "replayWithoutWorker": true,
+      "duplicateGrouping": true
+    }
+  ],
+  "passed": true,
+  "scope": "Nested arithmetic, original TypeScript annotations, Unicode source positions, forward/backward navigation, JSON replay and injected duplicate snapshots.",
+  "automationNote": "SafariDriver pointer coordinates compensated for inherited 85% page zoom; no component changes."
+}

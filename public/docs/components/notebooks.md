@@ -45,3 +45,15 @@ Notebook components combine editable code cells and their outputs into interacti
 ::::::
 
 <!-- family-introduction:end -->
+
+::: tp-center {intrinsic}
+:tp-icon:{name="scheme-notebook" library="components" size="4em"}
+
+[tp-scheme-notebook](scheme-notebook/index.md)
+:::
+
+::: tp-center {intrinsic}
+:tp-icon:{name="ocaml-notebook" library="components" size="4em"}
+
+[tp-ocaml-notebook](ocaml-notebook/index.md)
+:::

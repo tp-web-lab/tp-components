@@ -1,0 +1,65 @@
+<tp-html-viewer label="tp-ocaml-viewer" allow-script preserve-source>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-ocaml-viewer src="/docs/components/_shared/intro-projects/ocaml.json"></tp-ocaml-viewer>
+    </div>
+
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/ocaml/ocaml.js";
+      import "/components/ocaml-viewer/ocaml-viewer.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-ocaml-viewer");
+      element1.setAttribute("src", "/docs/components/_shared/intro-projects/ocaml.json");
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
+    <div role="example" label="OCaml tests">
+      <tp-ocaml-viewer src="/docs/components/ocaml-playground/examples/test-project.json"></tp-ocaml-viewer>
+    </div>
+
+    <div role="example" label="Compare presentation modes">
+      <section>
+      <h3>mode="default" — Standard controls</h3>
+      <p>Open Code to edit the source, then click Run or press <kbd>Shift</kbd>+<kbd>Enter</kbd> in the editor.</p>
+      <p>Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.</p>
+      <tp-ocaml-viewer mode="default">
+        <script type="tp/ocaml" filename="main.ml">
+      print_endline "Printed message before the intentional error.";;
+      failwith "Intentional error: the error appears in the output.";;
+        </script>
+      </tp-ocaml-viewer>
+      </section>
+
+      <section>
+      <h3>mode="lite" — Compact controls</h3>
+      <p>Open Code to edit the source, then click Run or press <kbd>Shift</kbd>+<kbd>Enter</kbd> in the editor.</p>
+      <p>Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.</p>
+      <tp-ocaml-viewer mode="lite">
+        <script type="tp/ocaml" filename="main.ml">
+      print_endline "Printed message before the intentional error.";;
+      failwith "Intentional error: the error appears in the output.";;
+        </script>
+      </tp-ocaml-viewer>
+      </section>
+
+      <section>
+      <h3>mode="simple" — Editor and rendered output only</h3>
+      <p>Edit the code below, keep the cursor in the editor and press <kbd>Shift</kbd>+<kbd>Enter</kbd> (Return) to run it. This viewer has no Run button.</p>
+      <p>Run to show the printed message and intentional error in the output. This viewer has no separate console; JavaScript console messages also appear in the output.</p>
+      <tp-ocaml-viewer mode="simple">
+        <script type="tp/ocaml" filename="main.ml">
+      print_endline "Printed message before the intentional error.";;
+      failwith "Intentional error: the error appears in the output.";;
+        </script>
+      </tp-ocaml-viewer>
+      </section>
+      <p>Programming viewers already have compact controls, so default and lite look alike. The first run may load the language engine.</p>
+    </div>
+  </template>
+</tp-html-viewer>

@@ -1,5 +1,5 @@
-:::::: tp-markdown-viewer { label="tp-tooltip" allow-script }
-::::: script { type="tp/markdown" }
+::::::: tp-markdown-viewer { label="tp-tooltip" allow-script preserve-source }
+:::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-box { data-intro-action="tooltip" data-allow-script }
 ::: tp-button { id="intro-tooltip-trigger" data-demo-trigger }
@@ -10,9 +10,8 @@ Hover or focus for help
 This help also appears when the trigger receives keyboard focus.
 :::
 
-::: p { data-demo-status role="status" }
 Try the tooltip using its trigger.
-:::
+{data-demo-status role="status"}
 
 ::: script { src="/docs/components/_shared/introduction-actions.js" }
 :::
@@ -61,5 +60,37 @@ example.append(element1);
 document.body.append(example);
 :::
 ```
+
+``` example {label="Links and scrollable content"}
+::::: tp-box { style="min-height: 20rem; padding: 1rem; display: flex; align-items: end;" }
+::: tp-button { id="scroll-tooltip-trigger" class="scroll-tooltip-trigger" }
+Hover, then enter the tooltip
+:::
+
+:::: tp-tooltip { anchor=".scroll-tooltip-trigger" style="inline-size: 28rem; max-inline-size: calc(100vw - 2rem); padding: 0; border: 1px solid var(--tp-brand-stroke-soft); background: var(--tp-background-color); color: var(--tp-text-body);" }
+::: div { tabindex="0" aria-label="Scrollable tooltip guide" style="max-height: 10rem; overflow: auto; overscroll-behavior: contain; padding: 1rem;" }
+**Try the interactive tooltip**
+
+Move the pointer here, then [open the details below](#tooltip-example-details) or scroll through this guide.
+
+1. Hover over the button to open the tooltip.
+2. Move across the gap into the tooltip.
+3. Keep the pointer inside: the tooltip stays open.
+4. Select some text without closing it.
+5. Use the mouse wheel or scrollbar to continue reading.
+6. Use :kbd:Tab{} to focus the scrollable guide.
+7. Use the arrow keys to scroll while the guide has focus.
+8. Follow the link at the end of the guide.
+9. Move away from both areas to close the tooltip when it has no keyboard focus.
+10. Press :kbd:Escape{} to close it immediately.
+
+[Read the details](#tooltip-example-details)
+:::
+::::
 :::::
+
+**Details:** Links inside the tooltip work like ordinary links. Hover or focus the button again to reopen the guide.
+{id="tooltip-example-details"}
+```
 ::::::
+:::::::

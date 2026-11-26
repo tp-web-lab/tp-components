@@ -13,25 +13,25 @@ The components in the `tp-components` library are grouped by their primary purpo
 | Theme | Components | Use it for |
 | --- | ---: | --- |
 | [Base](#base) | 2 | Shared foundations used to build higher-level components. |
-| [Controllers](#controllers) | 6 | Direction, color, language, fullscreen, and theme controls. |
-| [Documentations](#documentations) | 26 | Single-page and multi-page documentation renderers and markup blogs. |
-| [Editors](#editors) | 6 | Interactive editors for code, prose, graphs, and spreadsheets. |
+| [Controllers](#controllers) | 7 | Direction, color, language, fullscreen, and theme controls. |
+| [Documentations](#documentations) | 33 | Single-page and multi-page documentation renderers and markup blogs. |
+| [Editors](#editors) | 8 | Interactive editors for code, prose, graphs, and spreadsheets. |
 | [Feedbacks](#feedbacks) | 4 | Status, messages, and runtime feedback. |
 | [Files](#files) | 4 | File trees, file systems, includes, and embedded documents. |
 | [Forms](#forms) | 13 | Buttons and reusable form controls. |
 | [Games](#games) | 16 | Puzzle and game activities. |
 | [Layouts](#layouts) | 20 | Page structure, spacing, alignment, and responsive composition. |
-| [Markup Languages](#markup-languages) | 4 | Markup-language rendering components. |
-| [Medias](#medias) | 8 | Audio and video playback, recording, image comparison, media export and speech tools. |
+| [Markup Languages](#markup-languages) | 5 | Markup-language rendering components. |
+| [Medias](#medias) | 9 | Audio and video playback, recording, image comparison, media export and speech tools. |
 | [Overlays](#overlays) | 8 | Dialogs, menus, popovers, and floating contextual content. |
 | [Pickers](#pickers) | 5 | Visual selection of colors, emoji, formulas, icons, and symbols. |
-| [Plots](#plots) | 7 | Geometric constructions, programmatic drawing and mathematical plotting. |
-| [Programming](#programming) | 25 | Components in the Programming family. |
-| [Questions](#questions) | 17 | Quizzes and programming exercises using viewers or playgrounds. |
+| [Plots](#plots) | 8 | Geometric constructions, programmatic drawing and mathematical plotting. |
+| [Programming](#programming) | 44 | Components in the Programming family. |
+| [Questions](#questions) | 27 | Quizzes and programming exercises using viewers or playgrounds. |
 | [Simulators](#simulators) | 10 | Interactive automata, circuits, optics, and query simulations. |
 | [Time](#time) | 4 | Clocks, alarms, timers, and chronometers. |
-| [Utilities](#utilities) | 16 | Reusable interaction and content helpers. |
-| **Total** | **196** | |
+| [Utilities](#utilities) | 17 | Reusable interaction and content helpers. |
+| **Total** | **244** | |
 [Classification of the components in `tp-components` by main themes]
 
 ## Base
@@ -46,6 +46,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | Component | Description |
 | --- | --- |
 | <tp-icon name="color" library="components" size="1.25em"></tp-icon> [`<tp-color>`](color/index.md) | Preset-based color controller. |
+| <tp-icon name="control" library="components" size="1.25em"></tp-icon> [`<tp-control>`](control/index.md) | The custom `<tp-control>` element selects which interface controllers appear in a compact toolbar. |
 | <tp-icon name="dir" library="components" size="1.25em"></tp-icon> [`<tp-dir>`](dir/index.md) | Parent-scoped reading-direction switcher. |
 | <tp-icon name="fullscreen" library="components" size="1.25em"></tp-icon> [`<tp-fullscreen>`](fullscreen/index.md) | Fullscreen controller button scoped to its containing component. |
 | <tp-icon name="lang" library="components" size="1.25em"></tp-icon> [`<tp-lang>`](lang/index.md) | Documentation language selector. |
@@ -61,11 +62,18 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="asciidoc-multi-slides" library="components" size="1.25em"></tp-icon> [`<tp-asciidoc-multi-slides>`](asciidoc-multi-slides/index.md) | Navigable repository of AsciiDoc slides. |
 | <tp-icon name="asciidoc-single-page" library="components" size="1.25em"></tp-icon> [`<tp-asciidoc-single-page>`](asciidoc-single-page/index.md) | Renders one document with tp-asciidoc. |
 | <tp-icon name="biblio" library="components" size="1.25em"></tp-icon> [`<tp-biblio>`](biblio/index.md) | Defines a hidden bibliography entry for reference tooltips and generated lists. |
+| <tp-icon name="bibtex" library="components" size="1.25em"></tp-icon> [`<tp-bibtex>`](bibtex/index.md) | The custom `<tp-bibtex>` element converts BibTeX or CSL-JSON entries into tp-biblio or standard LaTeX bibliography source code. |
+| <tp-icon name="equanum" library="components" size="1.25em"></tp-icon> [`<tp-equanum>`](equanum/index.md) | The custom `<tp-equanum>` element associates an equation with its number and reference previews. |
+| <tp-icon name="global-listof" library="components" size="1.25em"></tp-icon> [`<tp-global-listof>`](global-listof/index.md) | The custom `<tp-global-listof>` element lists labelled elements across the pages of a multi-page document, with links to their pages and anchors. |
 | <tp-icon name="glossary" library="components" size="1.25em"></tp-icon> [`<tp-glossary>`](glossary/index.md) | Defines a hidden glossary entry for reference tooltips and generated lists. |
 | <tp-icon name="html-blog" library="components" size="1.25em"></tp-icon> [`<tp-html-blog>`](html-blog/index.md) | Paginated html articles with category and tag filters and a reader. |
 | <tp-icon name="html-multi-pages" library="components" size="1.25em"></tp-icon> [`<tp-html-multi-pages>`](html-multi-pages/index.md) | Renders a navigable repository as native browser HTML. |
 | <tp-icon name="html-multi-slides" library="components" size="1.25em"></tp-icon> [`<tp-html-multi-slides>`](html-multi-slides/index.md) | Navigable repository of native HTML slides. |
 | <tp-icon name="html-single-page" library="components" size="1.25em"></tp-icon> [`<tp-html-single-page>`](html-single-page/index.md) | Inserts one HTML document using the browser renderer. |
+| <tp-icon name="index" library="components" size="1.25em"></tp-icon> [`<tp-index>`](index/index.md) | The custom `<tp-index>` element defines an alphabetical index entry with optional descriptive content and links to its occurrences. |
+| <tp-icon name="latex-multi-pages" library="components" size="1.25em"></tp-icon> [`<tp-latex-multi-pages>`](latex-multi-pages/index.md) | The custom `<tp-latex-multi-pages>` element presents LaTeX documents with navigation between pages. |
+| <tp-icon name="latex-multi-slides" library="components" size="1.25em"></tp-icon> [`<tp-latex-multi-slides>`](latex-multi-slides/index.md) | The custom `<tp-latex-multi-slides>` element presents LaTeX documents as a slide deck. |
+| <tp-icon name="latex-single-page" library="components" size="1.25em"></tp-icon> [`<tp-latex-single-page>`](latex-single-page/index.md) | The custom `<tp-latex-single-page>` element displays a single LaTeX document. |
 | <tp-icon name="listof" library="components" size="1.25em"></tp-icon> [`<tp-listof>`](listof/index.md) | Builds a list of reference entries or links to labelled document elements. |
 | <tp-icon name="markdown-blog" library="components" size="1.25em"></tp-icon> [`<tp-markdown-blog>`](markdown-blog/index.md) | Paginated markdown articles with category and tag filters and a reader. |
 | <tp-icon name="markdown-multi-pages" library="components" size="1.25em"></tp-icon> [`<tp-markdown-multi-pages>`](markdown-multi-pages/index.md) | Renders a navigable repository of Markdown pages. |
@@ -89,10 +97,12 @@ The components in the `tp-components` library are grouped by their primary purpo
 | --- | --- |
 | <tp-icon name="code-comment" library="components" size="1.25em"></tp-icon> [`<tp-code-comment>`](code-comment/index.md) | Associates an ordered annotation list with numbered comments in a code editor. |
 | <tp-icon name="code-editor" library="components" size="1.25em"></tp-icon> [`<tp-code-editor>`](code-editor/index.md) | [CodeMirror](https://codemirror.net)-based code editor. |
+| <tp-icon name="diff-code-editor" library="components" size="1.25em"></tp-icon> [`<tp-diff-code-editor>`](diff-code-editor/index.md) | The custom `<tp-diff-code-editor>` element compares and edits two source documents side by side. |
 | <tp-icon name="graph-editor" library="components" size="1.25em"></tp-icon> [`<tp-graph-editor>`](graph-editor/index.md) | Edits and animates domain-specific graphs. |
 | <tp-icon name="post-it-editor" library="components" size="1.25em"></tp-icon> [`<tp-post-it-editor>`](post-it-editor/index.md) | Create and edits persistent personal annotations attached to document elements. |
 | <tp-icon name="prose-editor" library="components" size="1.25em"></tp-icon> [`<tp-prose-editor>`](prose-editor/index.md) | [ProseMirror](https://prosemirror.net)-based rich text editor. |
 | <tp-icon name="spreadsheet-editor" library="components" size="1.25em"></tp-icon> [`<tp-spreadsheet-editor>`](spreadsheet-editor/index.md) | Editable spreadsheet with Excel-style formulas powered by [Formula.js](https://formulajs.info). |
+| <tp-icon name="table-editor" library="components" size="1.25em"></tp-icon> [`<tp-table-editor>`](table-editor/index.md) | The custom `<tp-table-editor>` element builds and edits tables and exports them as markup, spreadsheet data or images. |
 
 ## Feedbacks
 
@@ -139,8 +149,8 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="chess" library="components" size="1.25em"></tp-icon> [`<tp-chess>`](chess/index.md) | Chess positions and interactive endgames. |
 | <tp-icon name="crossword" library="components" size="1.25em"></tp-icon> [`<tp-crossword>`](crossword/index.md) | Interactive crossword puzzle. |
 | <tp-icon name="cryptarithm" library="components" size="1.25em"></tp-icon> [`<tp-cryptarithm>`](cryptarithm/index.md) | Interactive cryptarithm puzzle. |
-| <tp-icon name="logigram" library="components" size="1.25em"></tp-icon> [`<tp-logigram>`](logigram/index.md) | Solve a logic-grid puzzle by using written clues to match items across categories. Each item matches exactly one item in every other category. |
 | <tp-icon name="kakuro" library="components" size="1.25em"></tp-icon> [`<tp-kakuro>`](kakuro/index.md) | Interactive cross-sum puzzle. |
+| <tp-icon name="logigram" library="components" size="1.25em"></tp-icon> [`<tp-logigram>`](logigram/index.md) | Solve a logic-grid puzzle by using written clues to match items across categories. Each item matches exactly one item in every other category. |
 | <tp-icon name="loto" library="components" size="1.25em"></tp-icon> [`<tp-loto>`](loto/index.md) | Interactive French loto game. |
 | <tp-icon name="mastermind" library="components" size="1.25em"></tp-icon> [`<tp-mastermind>`](mastermind/index.md) | Interactive Mastermind game. |
 | <tp-icon name="memory" library="components" size="1.25em"></tp-icon> [`<tp-memory>`](memory/index.md) | Interactive Memory matching game. |
@@ -183,6 +193,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="asciidoc" library="components" size="1.25em"></tp-icon> [`<tp-asciidoc>`](asciidoc/index.md) | Semantic AsciiDoc rendering component. |
 | <tp-icon name="latex" library="components" size="1.25em"></tp-icon> [`<tp-latex>`](latex/index.md) | The custom `<tp-latex>` element renders LaTeX documents with interactive components, MathJax formulas and TikZ drawings. |
 | <tp-icon name="markdown" library="components" size="1.25em"></tp-icon> [`<tp-markdown>`](markdown/index.md) | Markdown rendering component adapted from [`mardown-it`](https://github.com/markdown-it/markdown-it). |
+| <tp-icon name="markup-converter" library="components" size="1.25em"></tp-icon> [`<tp-markup-converter>`](markup-converter/index.md) | The custom `<tp-markup-converter>` element converts documents between HTML, AsciiDoc, LaTeX, Markdown and reStructuredText with source and rendered previews. |
 | <tp-icon name="restructuredtext" library="components" size="1.25em"></tp-icon> [`<tp-restructuredtext>`](restructuredtext/index.md) | reStructuredText rendering component. |
 
 ## Medias
@@ -191,6 +202,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | --- | --- |
 | <tp-icon name="audio-playlist" library="components" size="1.25em"></tp-icon> [`<tp-audio-playlist>`](audio-playlist/index.md) | Plays a list of audio tracks sequentially or in shuffled order. |
 | <tp-icon name="audio-recorder" library="components" size="1.25em"></tp-icon> [`<tp-audio-recorder>`](audio-recorder/index.md) | Records microphone audio locally for replay and download. |
+| <tp-icon name="carousel" library="components" size="1.25em"></tp-icon> [`<tp-carousel>`](carousel/index.md) | The custom `<tp-carousel>` element displays images one at a time in a horizontal or vertical carousel. |
 | <tp-icon name="compare" library="components" size="1.25em"></tp-icon> [`<tp-compare>`](compare/index.md) | Before-and-after images comparison. |
 | <tp-icon name="save-audio" library="components" size="1.25em"></tp-icon> [`<tp-save-audio>`](save-audio/index.md) | Saves audio as MP3, OGG or WAV through an associated component. |
 | <tp-icon name="save-image" library="components" size="1.25em"></tp-icon> [`<tp-save-image>`](save-image/index.md) | Downloads an anchored image as SVG, PNG, or WebP. |
@@ -231,6 +243,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="map" library="components" size="1.25em"></tp-icon> [`<tp-map>`](map/index.md) | Interactive [Leaflet](https://leafletjs.com)/[OpenStreetMap](https://www.openstreetmap.org/) with named markers and GPX routes or tracks. |
 | <tp-icon name="tikz" library="components" size="1.25em"></tp-icon> [`<tp-tikz>`](tikz/index.md) | The custom `<tp-tikz>` element compiles TikZ drawings to SVG, including Unicode labels, text colors and standard directional fading. |
 | <tp-icon name="turtle" library="components" size="1.25em"></tp-icon> [`<tp-turtle>`](turtle/index.md) | SVG renderer for the tp turtle drawing language. |
+| <tp-icon name="word-cloud" library="components" size="1.25em"></tp-icon> [`<tp-word-cloud>`](word-cloud/index.md) | The custom `<tp-word-cloud>` element generates a responsive SVG word cloud inside a chosen silhouette. |
 | <tp-icon name="xy-plot" library="components" size="1.25em"></tp-icon> [`<tp-xy-plot>`](xy-plot/index.md) | Interactive SVG plot generated from the tp XY graph language. |
 
 ## Programming
@@ -241,26 +254,45 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="asciidoc-viewer" library="components" size="1.25em"></tp-icon> [`<tp-asciidoc-viewer>`](asciidoc-viewer/index.md) | Interactive AsciiDoc viewer with editable source and parser outputs. |
 | <tp-icon name="html-playground" library="components" size="1.25em"></tp-icon> [`<tp-html-playground>`](html-playground/index.md) | HTML project playground. |
 | <tp-icon name="html-viewer" library="components" size="1.25em"></tp-icon> [`<tp-html-viewer>`](html-viewer/index.md) | Interactive HTML viewer with editable source, live rendering, and DOM inspection. |
+| <tp-icon name="javascript" library="components" size="1.25em"></tp-icon> [`<tp-javascript>`](javascript/index.md) | The custom `<tp-javascript>` element provides an interactive JavaScript interpreter. |
 | <tp-icon name="javascript-notebook" library="components" size="1.25em"></tp-icon> [`<tp-javascript-notebook>`](javascript-notebook/index.md) | Interactive notebook combining markup and executable Javascript cells. |
 | <tp-icon name="javascript-playground" library="components" size="1.25em"></tp-icon> [`<tp-javascript-playground>`](javascript-playground/index.md) | JavaScript project playground. |
+| <tp-icon name="javascript-tracer" library="components" size="1.25em"></tp-icon> [`<tp-javascript-tracer>`](javascript-tracer/index.md) | The custom `<tp-javascript-tracer>` element records and replays JavaScript execution with variables, call frames and object references. |
 | <tp-icon name="javascript-viewer" library="components" size="1.25em"></tp-icon> [`<tp-javascript-viewer>`](javascript-viewer/index.md) | Displays and runs one JavaScript example in a compact interface. |
+| <tp-icon name="latex-playground" library="components" size="1.25em"></tp-icon> [`<tp-latex-playground>`](latex-playground/index.md) | The custom `<tp-latex-playground>` element edits and previews LaTeX projects. |
+| <tp-icon name="latex-viewer" library="components" size="1.25em"></tp-icon> [`<tp-latex-viewer>`](latex-viewer/index.md) | The custom `<tp-latex-viewer>` element presents editable LaTeX examples with rendered and generated HTML views. |
 | <tp-icon name="markdown-playground" library="components" size="1.25em"></tp-icon> [`<tp-markdown-playground>`](markdown-playground/index.md) | Markdown project playground. |
 | <tp-icon name="markdown-viewer" library="components" size="1.25em"></tp-icon> [`<tp-markdown-viewer>`](markdown-viewer/index.md) | Interactive Markdown viewer with editable source and parser outputs. |
 | <tp-icon name="notebook" library="components" size="1.25em"></tp-icon> [`<tp-notebook>`](notebook/index.md) | Interactive notebook combining editable markup cells and executable programming-language cells. |
 | <tp-icon name="object-tree" library="components" size="1.25em"></tp-icon> [`<tp-object-tree>`](object-tree/index.md) | Specialized tree for inspecting JavaScript values. |
+| <tp-icon name="ocaml" library="components" size="1.25em"></tp-icon> [`<tp-ocaml>`](ocaml/index.md) | The custom `<tp-ocaml>` element provides an interactive OCaml interpreter. |
+| <tp-icon name="ocaml-notebook" library="components" size="1.25em"></tp-icon> [`<tp-ocaml-notebook>`](ocaml-notebook/index.md) | The custom `<tp-ocaml-notebook>` element combines written explanations and executable OCaml code in an interactive notebook. |
+| <tp-icon name="ocaml-playground" library="components" size="1.25em"></tp-icon> [`<tp-ocaml-playground>`](ocaml-playground/index.md) | The custom `<tp-ocaml-playground>` element edits and runs an OCaml project. |
+| <tp-icon name="ocaml-tracer" library="components" size="1.25em"></tp-icon> [`<tp-ocaml-tracer>`](ocaml-tracer/index.md) | The custom `<tp-ocaml-tracer>` element records and replays OCaml execution with variables, call frames and object references. |
+| <tp-icon name="ocaml-viewer" library="components" size="1.25em"></tp-icon> [`<tp-ocaml-viewer>`](ocaml-viewer/index.md) | The custom `<tp-ocaml-viewer>` element displays and runs one OCaml example in a compact interface. |
+| <tp-icon name="prolog" library="components" size="1.25em"></tp-icon> [`<tp-prolog>`](prolog/index.md) | The custom `<tp-prolog>` element provides an interactive Prolog interpreter. |
 | <tp-icon name="prolog-notebook" library="components" size="1.25em"></tp-icon> [`<tp-prolog-notebook>`](prolog-notebook/index.md) | Interactive notebook combining markup and executable Prolog cells. |
-| <tp-icon name="prolog-playground" library="components" size="1.25em"></tp-icon> [`<tp-prolog-playground>`](prolog-playground/index.md) | [Scryer Prolog](https://www.scryer.pl) project playground. |
+| <tp-icon name="prolog-playground" library="components" size="1.25em"></tp-icon> [`<tp-prolog-playground>`](prolog-playground/index.md) | [SWI-Prolog WASM](https://www.swi-prolog.org) project playground. |
 | <tp-icon name="prolog-viewer" library="components" size="1.25em"></tp-icon> [`<tp-prolog-viewer>`](prolog-viewer/index.md) | Displays and runs one Prolog example in a compact interface. |
+| <tp-icon name="python" library="components" size="1.25em"></tp-icon> [`<tp-python>`](python/index.md) | The custom `<tp-python>` element provides an interactive Python interpreter. |
 | <tp-icon name="python-notebook" library="components" size="1.25em"></tp-icon> [`<tp-python-notebook>`](python-notebook/index.md) | The custom `<tp-python-notebook>` element implements the Python Notebook functionality: interactive notebook combining markup and executable code cells. |
 | <tp-icon name="python-playground" library="components" size="1.25em"></tp-icon> [`<tp-python-playground>`](python-playground/index.md) | Python project playground. |
+| <tp-icon name="python-tracer" library="components" size="1.25em"></tp-icon> [`<tp-python-tracer>`](python-tracer/index.md) | The custom `<tp-python-tracer>` element records and replays Python execution with variables, call frames and object references. |
 | <tp-icon name="python-viewer" library="components" size="1.25em"></tp-icon> [`<tp-python-viewer>`](python-viewer/index.md) | Displays and runs one Python example in a compact interface. |
 | <tp-icon name="restructuredtext-playground" library="components" size="1.25em"></tp-icon> [`<tp-restructuredtext-playground>`](restructuredtext-playground/index.md) | reStructuredText project playground. |
 | <tp-icon name="restructuredtext-viewer" library="components" size="1.25em"></tp-icon> [`<tp-restructuredtext-viewer>`](restructuredtext-viewer/index.md) | Interactive reStructuredText viewer with editable source and parser outputs. |
+| <tp-icon name="scheme" library="components" size="1.25em"></tp-icon> [`<tp-scheme>`](scheme/index.md) | The custom `<tp-scheme>` element provides an interactive Scheme interpreter. |
+| <tp-icon name="scheme-notebook" library="components" size="1.25em"></tp-icon> [`<tp-scheme-notebook>`](scheme-notebook/index.md) | The custom `<tp-scheme-notebook>` element combines written explanations and executable Scheme code in an interactive notebook. |
+| <tp-icon name="scheme-playground" library="components" size="1.25em"></tp-icon> [`<tp-scheme-playground>`](scheme-playground/index.md) | The custom `<tp-scheme-playground>` element edits and runs a Scheme project with LIPS. |
+| <tp-icon name="scheme-tracer" library="components" size="1.25em"></tp-icon> [`<tp-scheme-tracer>`](scheme-tracer/index.md) | The custom `<tp-scheme-tracer>` element records and replays Scheme execution with variables, call frames and object references. |
+| <tp-icon name="scheme-viewer" library="components" size="1.25em"></tp-icon> [`<tp-scheme-viewer>`](scheme-viewer/index.md) | The custom `<tp-scheme-viewer>` element displays and runs one Scheme example in a compact interface. |
 | <tp-icon name="sql-notebook" library="components" size="1.25em"></tp-icon> [`<tp-sql-notebook>`](sql-notebook/index.md) | Interactive notebook combining markup and executable SQL cells. |
 | <tp-icon name="sql-playground" library="components" size="1.25em"></tp-icon> [`<tp-sql-playground>`](sql-playground/index.md) | SQL project playground. |
 | <tp-icon name="sql-viewer" library="components" size="1.25em"></tp-icon> [`<tp-sql-viewer>`](sql-viewer/index.md) | Displays and runs one SQL example in a compact interface. |
+| <tp-icon name="typescript" library="components" size="1.25em"></tp-icon> [`<tp-typescript>`](typescript/index.md) | The custom `<tp-typescript>` element provides an interactive TypeScript interpreter. |
 | <tp-icon name="typescript-notebook" library="components" size="1.25em"></tp-icon> [`<tp-typescript-notebook>`](typescript-notebook/index.md) | Interactive notebook combining markup and executable Typescript cells. |
 | <tp-icon name="typescript-playground" library="components" size="1.25em"></tp-icon> [`<tp-typescript-playground>`](typescript-playground/index.md) | TypeScript project playground. |
+| <tp-icon name="typescript-tracer" library="components" size="1.25em"></tp-icon> [`<tp-typescript-tracer>`](typescript-tracer/index.md) | The custom `<tp-typescript-tracer>` element records and replays TypeScript execution with variables, call frames and object references. |
 | <tp-icon name="typescript-viewer" library="components" size="1.25em"></tp-icon> [`<tp-typescript-viewer>`](typescript-viewer/index.md) | Displays and runs one TypeScript example in a compact interface. |
 
 ## Questions
@@ -271,17 +303,27 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="exercise" library="components" size="1.25em"></tp-icon> [`<tp-exercise>`](exercise/index.md) | Shared context and ordered questions with an optional common timer. |
 | <tp-icon name="fill-blank-question" library="components" size="1.25em"></tp-icon> [`<tp-fill-blank-question>`](fill-blank-question/index.md) | Fill-in-the-blank open-ended or closed-ended question. |
 | <tp-icon name="html-viewer-question" library="components" size="1.25em"></tp-icon> [`<tp-html-viewer-question>`](html-viewer-question/index.md) | Checks rendered HTML using a viewer and external JavaScript DOM tests. |
+| <tp-icon name="javascript-interpreter-question" library="components" size="1.25em"></tp-icon> [`<tp-javascript-interpreter-question>`](javascript-interpreter-question/index.md) | The custom `<tp-javascript-interpreter-question>` element presents and grades JavaScript exercises in an interactive interpreter. |
 | <tp-icon name="javascript-playground-question" library="components" size="1.25em"></tp-icon> [`<tp-javascript-playground-question>`](javascript-playground-question/index.md) | JavaScript project using its playground and external tests. |
 | <tp-icon name="javascript-viewer-question" library="components" size="1.25em"></tp-icon> [`<tp-javascript-viewer-question>`](javascript-viewer-question/index.md) | JavaScript exercise using its viewer and external tests. |
 | <tp-icon name="markdown-viewer-question" library="components" size="1.25em"></tp-icon> [`<tp-markdown-viewer-question>`](markdown-viewer-question/index.md) | Checks rendered Markdown using a viewer and external JavaScript DOM tests. |
 | <tp-icon name="matching-question" library="components" size="1.25em"></tp-icon> [`<tp-matching-question>`](matching-question/index.md) | Checks groups across two or more optionally titled lists. |
 | <tp-icon name="multi-choice-question" library="components" size="1.25em"></tp-icon> [`<tp-multi-choice-question>`](multi-choice-question/index.md) | Multiple-choice question with feedback and a solution. |
+| <tp-icon name="ocaml-interpreter-question" library="components" size="1.25em"></tp-icon> [`<tp-ocaml-interpreter-question>`](ocaml-interpreter-question/index.md) | The custom `<tp-ocaml-interpreter-question>` element presents and grades OCaml exercises in an interactive interpreter. |
+| <tp-icon name="ocaml-playground-question" library="components" size="1.25em"></tp-icon> [`<tp-ocaml-playground-question>`](ocaml-playground-question/index.md) | The custom `<tp-ocaml-playground-question>` element presents and grades OCaml programming exercises. |
+| <tp-icon name="ocaml-viewer-question" library="components" size="1.25em"></tp-icon> [`<tp-ocaml-viewer-question>`](ocaml-viewer-question/index.md) | The custom `<tp-ocaml-viewer-question>` element presents and grades OCaml programming exercises. |
+| <tp-icon name="prolog-interpreter-question" library="components" size="1.25em"></tp-icon> [`<tp-prolog-interpreter-question>`](prolog-interpreter-question/index.md) | The custom `<tp-prolog-interpreter-question>` element presents and grades Prolog exercises in an interactive interpreter. |
 | <tp-icon name="prolog-playground-question" library="components" size="1.25em"></tp-icon> [`<tp-prolog-playground-question>`](prolog-playground-question/index.md) | Prolog project using its playground and external tests. |
 | <tp-icon name="prolog-viewer-question" library="components" size="1.25em"></tp-icon> [`<tp-prolog-viewer-question>`](prolog-viewer-question/index.md) | Prolog exercise using its viewer and external tests. |
+| <tp-icon name="python-interpreter-question" library="components" size="1.25em"></tp-icon> [`<tp-python-interpreter-question>`](python-interpreter-question/index.md) | The custom `<tp-python-interpreter-question>` element presents and grades Python exercises in an interactive interpreter. |
 | <tp-icon name="python-playground-question" library="components" size="1.25em"></tp-icon> [`<tp-python-playground-question>`](python-playground-question/index.md) | Python project using its playground and external tests. |
 | <tp-icon name="python-viewer-question" library="components" size="1.25em"></tp-icon> [`<tp-python-viewer-question>`](python-viewer-question/index.md) | Python exercise using its viewer and external tests. |
 | <tp-icon name="restructuredtext-viewer-question" library="components" size="1.25em"></tp-icon> [`<tp-restructuredtext-viewer-question>`](restructuredtext-viewer-question/index.md) | Checks rendered reStructuredText using a viewer and external JavaScript DOM tests. |
+| <tp-icon name="scheme-interpreter-question" library="components" size="1.25em"></tp-icon> [`<tp-scheme-interpreter-question>`](scheme-interpreter-question/index.md) | The custom `<tp-scheme-interpreter-question>` element presents and grades Scheme exercises in an interactive interpreter. |
+| <tp-icon name="scheme-playground-question" library="components" size="1.25em"></tp-icon> [`<tp-scheme-playground-question>`](scheme-playground-question/index.md) | The custom `<tp-scheme-playground-question>` element presents and grades Scheme programming exercises. |
+| <tp-icon name="scheme-viewer-question" library="components" size="1.25em"></tp-icon> [`<tp-scheme-viewer-question>`](scheme-viewer-question/index.md) | The custom `<tp-scheme-viewer-question>` element presents and grades Scheme programming exercises. |
 | <tp-icon name="single-choice-question" library="components" size="1.25em"></tp-icon> [`<tp-single-choice-question>`](single-choice-question/index.md) | Single-choice question with feedback and a solution. |
+| <tp-icon name="typescript-interpreter-question" library="components" size="1.25em"></tp-icon> [`<tp-typescript-interpreter-question>`](typescript-interpreter-question/index.md) | The custom `<tp-typescript-interpreter-question>` element presents and grades TypeScript exercises in an interactive interpreter. |
 | <tp-icon name="typescript-playground-question" library="components" size="1.25em"></tp-icon> [`<tp-typescript-playground-question>`](typescript-playground-question/index.md) | TypeScript project using its playground and external tests. |
 | <tp-icon name="typescript-viewer-question" library="components" size="1.25em"></tp-icon> [`<tp-typescript-viewer-question>`](typescript-viewer-question/index.md) | TypeScript exercise using its viewer and external tests. |
 
@@ -328,6 +370,7 @@ The components in the `tp-components` library are grouped by their primary purpo
 | <tp-icon name="skeleton" library="components" size="1.25em"></tp-icon> [`<tp-skeleton>`](skeleton/index.md) | Renders selected HTML elements as fixed shaded skeleton patterns without executing the source. |
 | <tp-icon name="slide-note" library="components" size="1.25em"></tp-icon> [`<tp-slide-note>`](slide-note/index.md) | Presents collapsible speaker notes above a presentation's mode menu. |
 | <tp-icon name="source" library="components" size="1.25em"></tp-icon> [`<tp-source>`](source/index.md) | Source repository link button. |
+| <tp-icon name="theorem" library="components" size="1.25em"></tp-icon> [`<tp-theorem>`](theorem/index.md) | The custom `<tp-theorem>` element presents theorems, lemmas, propositions, corollaries, definitions, examples, remarks and proofs with optional titles, numbering and references. |
 | <tp-icon name="typewriting" library="components" size="1.25em"></tp-icon> [`<tp-typewriting>`](typewriting/index.md) | Progressively reveals text one letter or one word at a time. |
 
 [`tp-components` component library]

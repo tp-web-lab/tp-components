@@ -1,0 +1,97 @@
+<h1>First chapter</h1>
+<p>See note <tp-ref href="^local"></tp-ref>.</p>
+<figure id="diagram"><img src="/medias/image/canoe.svg" alt="canoe"><figcaption>First chapter diagram</figcaption></figure>
+<figure><img src="/medias/image/valley.jpg" alt="valley"><figcaption>First chapter detail without an authored ID</figcaption></figure>
+<tp-note ref="local">A local note for First chapter.</tp-note>
+
+<h2>Equations</h2>
+<p>See equations <tp-ref href="=law"></tp-ref> and <tp-ref href="=relation"></tp-ref>. Their numbering starts again in each chapter.</p>
+<tp-equanum id="equation-law" ref="law" number="1">
+  <tp-math displaystyle value="E = mc^2"></tp-math>
+</tp-equanum>
+<tp-equanum ref="relation" number="2">
+  <tp-math displaystyle value="v = d / t"></tp-math>
+</tp-equanum>
+
+<h2>Activities</h2>
+<table id="activities">
+  <caption>First chapter activities</caption>
+  <thead><tr><th scope="col">Activity</th><th scope="col">Participants</th></tr></thead>
+  <tbody>
+    <tr><td>Canoe</td><td>2</td></tr>
+    <tr><td>Walking</td><td>1</td></tr>
+  </tbody>
+</table>
+<h2>Schedule</h2>
+<table>
+  <caption>First chapter schedule</caption>
+  <thead><tr><th scope="col">Session</th><th scope="col">Duration</th></tr></thead>
+  <tbody><tr><th scope="row">Introduction</th><td>20 minutes</td></tr><tr><th scope="row">Practice</th><td>40 minutes</td></tr></tbody>
+</table>
+
+<h2>Code examples</h2>
+<p>Greeting</p>
+<pre id="greeting" label="Greeting"><code class="language-javascript">const name = "Ada";
+console.log(`Hello, ${name}!`);</code></pre>
+<p>Total duration</p>
+<pre label="Total duration"><code class="language-javascript">const durations = [20, 40];
+const total = durations.reduce((sum, value) =&gt; {
+  return sum + value;
+}, 0);</code></pre>
+
+<h2>Theorems</h2>
+<tp-theorem id="first-result" heading="Nonnegativity">
+  <p>The square of a real number is nonnegative.</p>
+</tp-theorem>
+<tp-theorem heading="Sum of nonnegative numbers">
+  <p>The sum of two nonnegative real numbers is nonnegative.</p>
+</tp-theorem>
+
+<tp-theorem type="lemma" id="positive-product" heading="Product of nonnegative numbers">
+  <p>The product of two nonnegative real numbers is nonnegative.</p>
+</tp-theorem>
+<tp-theorem type="definition" heading="Nonnegative number">
+  <p>A real number is nonnegative when it is greater than or equal to zero.</p>
+</tp-theorem>
+
+<h2>Terms and reading</h2>
+<p>This chapter introduces <tp-ref href="%model">Model</tp-ref> and the subject <tp-ref href="!water-cycle">Water cycle</tp-ref>. See the sample reading reference <tp-ref href="@first-reading"></tp-ref>.</p>
+<tp-glossary id="model-definition" ref="model" title="Model">
+  <p>A simplified representation used to explain or explore a phenomenon.</p>
+</tp-glossary>
+<tp-biblio id="reading-definition" ref="first-reading" title="Modelling cycles">
+  <p>Alex Example. <em>Modelling cycles</em>. Example Press, 2026. Illustrative bibliography entry.</p>
+</tp-biblio>
+<tp-index id="subject-definition" ref="water-cycle" parent="shared-term" title="Water cycle">
+  <p>Movement of water between the atmosphere, land and bodies of water.</p>
+</tp-index>
+
+<h2>Shared and page-specific reading</h2>
+<p>The shared handbook is cited here <tp-ref id="shared-citation-1" href="@shared-reading"></tp-ref> and again here <tp-ref href="@shared-reading"></tp-ref>.</p>
+<tp-biblio id="shared-reading-definition" ref="shared-reading" label="Shared handbook">
+  <p>Alex Example. <em>A shared modelling handbook</em>. Example Press, 2026. Illustrative bibliography entry.</p>
+</tp-biblio>
+<p>This chapter also cites its own version of a regional guide <tp-ref href="@regional-reading"></tp-ref>.</p>
+<tp-biblio ref="regional-reading" label="Regional guide">
+  <p>Jordan Example. <em>Water systems</em>. Example Press, 2026. A different definition under the same reference key.</p>
+</tp-biblio>
+<tp-biblio ref="further-reading" label="Further reading">
+  <p>Sam Example. <em>More modelling examples</em>. Example Press, 2025. This entry is not cited.</p>
+</tp-biblio>
+
+<h2>Shared terms and subjects</h2>
+<p>First occurrence: <tp-ref id="glossary-occurrence-1" href="%shared-term">Shared concept</tp-ref>. Second occurrence: <tp-ref href="%shared-term">Shared concept</tp-ref>.</p>
+<tp-glossary ref="shared-term" title="Shared concept"><p>A common definition used in both chapters.</p></tp-glossary>
+<p>Local meaning: <tp-ref href="%local-term">Local term</tp-ref>.</p>
+<tp-glossary ref="local-term" title="Local term"><p>A definition specific to the first chapter.</p></tp-glossary>
+<tp-glossary ref="unused-term" title="Further term"><p>A definition without an occurrence.</p></tp-glossary>
+<p>First occurrence: <tp-ref id="index-occurrence-1" href="!shared-term">Shared subject</tp-ref>. Second occurrence: <tp-ref href="!shared-term" silent>Shared subject</tp-ref>.</p>
+<tp-index ref="shared-term" title="Shared subject"><p>A common definition used in both chapters.</p></tp-index>
+<p>Local meaning: <tp-ref href="!local-term">Local term</tp-ref>.</p>
+<tp-index ref="local-term" title="Local term" see="shared-term"><p>A definition specific to the first chapter.</p></tp-index>
+<tp-index ref="unused-term" title="Further term" see-also="shared-term"><p>A definition without an occurrence.</p></tp-index>
+
+<h2>Definitions on this page</h2>
+<tp-listof selector="tp-glossary"></tp-listof>
+<tp-listof selector="tp-biblio"></tp-listof>
+<tp-listof selector="tp-index"></tp-listof>

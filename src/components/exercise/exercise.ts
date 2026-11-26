@@ -41,6 +41,9 @@ import style from "./exercise.css?inline";
  * @tagname tp-exercise
  * @attr {boolean} open = false - Initially expand the exercise.
  * @attr {string} timing = "" - Optional nonzero time limit in strict hh:mm:ss format.
+ *  @accessibility Uses native details and summary for disclosure, preserves the authored title content and ordered questions, and hides the decorative title icon from assistive technology.
+ * @accessibility Timed exercises use labelled start controls and tp-mask to make unavailable question content inert; individual questions retain their own controls and feedback.
+ * @accessibilityresponsibility Provide a descriptive title, clear instructions and accessible question content. Offer an untimed alternative or appropriate accommodation when imposing a countdown.
  * @example
  * <tp-exercise open="">
  *   <dl>
@@ -64,9 +67,6 @@ import style from "./exercise.css?inline";
  *     </ol></dd>
  *   </dl>
  * </tp-exercise>
- *  @accessibility Uses native details and summary for disclosure, preserves the authored title content and ordered questions, and hides the decorative title icon from assistive technology.
- * @accessibility Timed exercises use labelled start controls and tp-mask to make unavailable question content inert; individual questions retain their own controls and feedback.
- * @accessibilityresponsibility Provide a descriptive title, clear instructions and accessible question content. Offer an untimed alternative or appropriate accommodation when imposing a countdown.
  */
 export class TpExercise extends TpBase {
 	private readonly exerciseTiming = new QuestionTiming(this, "exercise");
@@ -157,6 +157,16 @@ export class TpExercise extends TpBase {
 		}
 		this.exerciseTiming.configure();
 		return true;
+	}
+
+	/** Starts the timed exercise when its Start action is available. */
+	start(): void {
+		this.exerciseTiming.start();
+	}
+
+	/** Reopens the exercise after its timer expires. */
+	continueAfterTimeout(): void {
+		this.exerciseTiming.continueAfterTimeout();
 	}
 }
 if (!customElements.get("tp-exercise"))

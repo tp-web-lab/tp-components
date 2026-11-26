@@ -19,23 +19,14 @@
             :rotate: 0
 
             1. :example-tp-icon-1:`logo-tp`
-
-            2.
-
+            2. 
             3. quizzes, playgrounds, viewers, notebooks
-
             4. simulators, plots, games
-
-            5.
-
+            5. 
             6. documentations, editors, pickers, controllers, feedbacks
-
             7. markdown, asciidoc, latex, restructuredtext
-
             8. forms, overlays, medias, times
-
-            9.
-
+            9. 
             10. utilities
 
       .. example:: Javascript API

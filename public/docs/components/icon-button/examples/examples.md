@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-icon-button" allow-script }
+:::::: tp-markdown-viewer { label="tp-icon-button" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-box { data-intro-action="counter" data-allow-script }
@@ -7,9 +7,8 @@ Activate the heart button to add a like.
 ::: tp-icon-button { name="heart" label="Like this example" data-demo-trigger }
 :::
 
-::: p { data-demo-status role="status" }
 Likes: 0
-:::
+{data-demo-status role="status"}
 
 ::: script { src="/docs/components/_shared/introduction-actions.js" }
 :::

@@ -4,7 +4,7 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Using the component | Browse or search the available items, then select one to copy it in the chosen format. |
+| <!-- button --> Icon tile | Browse or search the available items, then select one to copy it in the chosen format. |
 | Using the component | Use the displayed filters and format selector, when available, to narrow the list or change the copied representation. |
 
 #### Keyboard interactions

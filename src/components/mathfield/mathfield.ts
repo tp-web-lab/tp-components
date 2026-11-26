@@ -61,6 +61,7 @@ export type TpMathfieldLabelPosition = "top" | "bottom" | "start" | "end";
  * @tagname tp-mathfield
  * @attr {string} mode = "latexmath" - Mathematical notation (`latexmath` or `asciimath`).
  * @attr {boolean} multiline = false - Uses a multiline editor and display-style rendering.
+ * @attr {number} rows = 3 - Minimum number of rows in multiline mode.
  * @attr {boolean} mathlive = false - Offers a visual MathLive editor in LaTeX mode, loaded on first opening.
  * @attr {boolean} preview = false - Opens the rendered MathJax preview panel.
  * @attr {string} value = "" - Mathematical expression source.
@@ -72,19 +73,20 @@ export type TpMathfieldLabelPosition = "top" | "bottom" | "start" | "end";
  * @attr {boolean} required = false - Marks the field as required.
  * @attr {boolean} readonly = false - Prevents value editing.
  * @attr {boolean} disabled = false - Disables the field.
+ * @attr {boolean} copy-code = false - Shows copy buttons for the current value (and rendered SVG for mathematical fields).
  * @attr {boolean} clearable = false - Shows the clear button; it is disabled when empty, readonly or disabled.
  * @event input Emitted when the expression changes while editing.
  * @event change Emitted when the expression is committed or a different notation is selected in the menu.
  * @event tp-clear Emitted after the embedded button clears the expression.
  *
- * @example
- * <tp-mathfield label="Formula" value="E = mc^2" clearable=""></tp-mathfield>
  *  @cssprop [--tp-mathfield-inline-size=28rem] Preferred width of the math editor, limited by available space; also caps the multiline component width.
  * @cssprop [--tp-mathfield-preview-background=Canvas] Background color of the rendered formula preview.
  * @cssprop [--tp-mathfield-preview-border-color=var(--tp-neutral-stroke-soft)] Border color of the rendered formula preview.
  * @cssprop [--tp-mathfield-preview-padding=0.75rem] Inner spacing around the rendered formula preview.
  * @event tp-math-rendered Emitted when the formula preview reports that rendering has finished; mode is the input notation and value is the current expression.
  * @eventdetail tp-math-rendered { mode: "latexmath" | "asciimath"; value: string }
+ * @example
+ * <tp-mathfield label="Formula" value="E = mc^2" clearable=""></tp-mathfield>
  */
 export class TpMathfield extends TpBase {
 	private static nextModeId = 0;
@@ -100,11 +102,20 @@ export class TpMathfield extends TpBase {
 	private visualRevision = 0;
 	private sourceCopyButton: HTMLElement | null = null;
 
+	/** Whether copy buttons are shown. */
+	public get copyCode(): boolean {
+		return this.hasAttribute("copy-code");
+	}
+	public set copyCode(value: boolean) {
+		this.toggleAttribute("copy-code", value);
+	}
+
 	public static get observedAttributes(): string[] {
 		return [
 			"mode",
 			"mathlive",
 			"multiline",
+			"rows",
 			"preview",
 			"value",
 			"label",
@@ -115,6 +126,7 @@ export class TpMathfield extends TpBase {
 			"required",
 			"readonly",
 			"disabled",
+			"copy-code",
 			"clearable",
 		];
 	}
@@ -311,15 +323,7 @@ export class TpMathfield extends TpBase {
 				} else if (event.key === "Escape") this.modeButton?.focus();
 			});
 			item.addEventListener("click", () => {
-				if (this.disabled || this.readOnly) return;
-				const changed = this.mode !== mode;
-				this.mode = mode;
-				this.modeDropdown?.hide();
-				this.modeButton?.focus();
-				if (changed)
-					this.dispatchEvent(
-						new Event("change", { bubbles: true, composed: true }),
-					);
+				this.selectMode(mode);
 			});
 			list.append(item);
 		}
@@ -332,12 +336,7 @@ export class TpMathfield extends TpBase {
 		});
 		this.modeButton.addEventListener("click", (event) => {
 			event.preventDefault();
-			if (this.disabled || this.readOnly) return;
-			this.modeDropdown?.toggle();
-			if (this.modeDropdown?.open)
-				this.modeDropdown
-					.querySelector<HTMLElement>(`[data-mode="${this.mode}"]`)
-					?.focus();
+			this.toggleModeMenu();
 		});
 		// Connect the dropdown only after its trigger exists in the document.
 		this.visualButton = document.createElement("tp-icon-button");
@@ -364,6 +363,7 @@ export class TpMathfield extends TpBase {
 	private syncEditor(): void {
 		if (this.editor === null) return;
 		const stringAttributes = [
+			"rows",
 			"value",
 			"label",
 			"label-position",
@@ -402,8 +402,10 @@ export class TpMathfield extends TpBase {
 				"[data-tp-textfield-control]",
 			);
 			if (control !== null) {
-				if (this.sourceCopyButton !== null)
-					control.append(this.sourceCopyButton);
+				if (this.sourceCopyButton !== null) {
+					if (this.copyCode) control.append(this.sourceCopyButton);
+					else this.sourceCopyButton.remove();
+				}
 				if (this.visualButton) control.append(this.visualButton);
 				control.append(this.previewButton);
 			}
@@ -447,6 +449,29 @@ export class TpMathfield extends TpBase {
 		);
 	}
 
+	/** Opens or closes the notation menu unless disabled or readonly. */
+	public toggleModeMenu(): void {
+		if (this.disabled || this.readOnly) return;
+		this.modeDropdown?.toggle();
+		if (this.modeDropdown?.open)
+			this.modeDropdown
+				.querySelector<HTMLElement>(`[data-mode="${this.mode}"]`)
+				?.focus();
+	}
+
+	/** Selects a math notation, closes the menu and emits change unless readonly or disabled. */
+	public selectMode(mode: TpMathfieldMode): void {
+		if (this.disabled || this.readOnly) return;
+		const changed = this.mode !== mode;
+		this.mode = mode;
+		this.modeDropdown?.hide();
+		this.modeButton?.focus();
+		if (changed)
+			this.dispatchEvent(
+				new Event("change", { bubbles: true, composed: true }),
+			);
+	}
+
 	private renderPreview(): void {
 		if (this.previewPanel === null) return;
 		this.previewPanel.replaceChildren();
@@ -476,7 +501,8 @@ export class TpMathfield extends TpBase {
 			once: true,
 		});
 		content.append(markdown);
-		this.previewPanel.append(content, renderCopyButton);
+		this.previewPanel.append(content);
+		if (this.copyCode) this.previewPanel.append(renderCopyButton);
 	}
 
 	private syncVisualEditor(): void {
@@ -501,7 +527,8 @@ export class TpMathfield extends TpBase {
 		}
 	}
 
-	private closeVisualEditor(): void {
+	/** Closes the visual math editor. */
+	closeVisualEditor(): void {
 		this.visualRevision += 1;
 		this.visualEditor?.executeCommand("hideVirtualKeyboard");
 		this.visualEditor = null;
@@ -516,7 +543,8 @@ export class TpMathfield extends TpBase {
 		}
 	}
 
-	private async openVisualEditor(): Promise<void> {
+	/** Opens the visual math editor for the current expression. */
+	async openVisualEditor(): Promise<void> {
 		if (
 			!this.mathlive ||
 			this.mode !== "latexmath" ||

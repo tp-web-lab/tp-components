@@ -12,7 +12,9 @@ const PYODIDE_URL = `${PYODIDE_INDEX_URL}pyodide.js`;
 const PYODIDE_RUNTIME_VERSION = 3;
 
 /** Creates the shared Pyodide loader used by Python run and test documents. */
-export function createPyodideRuntimeScript(): string {
+export function createPyodideRuntimeScript(
+	options: { isolated?: boolean } = {},
+): string {
 	// Cached promises and their callbacks must belong to the persistent owner,
 	// not to a preview realm that is destroyed whenever Run replaces srcdoc.
 	const runtimeSource = `
@@ -137,7 +139,7 @@ export function createPyodideRuntimeScript(): string {
 	return `
 <script>
 (() => {
-  const runtimeOwner = window.parent !== window ? window.parent : window;
+  const runtimeOwner = ${options.isolated ? "window" : "window.parent !== window ? window.parent : window"};
   const runtimeKey = '__tpPythonPlaygroundPyodideRuntime';
   const previous = runtimeOwner[runtimeKey];
   // A callback in a discarded iframe can remain pending forever. Its Python

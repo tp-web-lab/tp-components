@@ -1,0 +1,97 @@
+% !tp-example Basic usage
+\documentclass{article}
+\begin{document}
+\wcTpTypescriptTracer[src=/docs/components/typescript-tracer/examples/nested-arrays.ts]{}
+\end{document}
+
+% !tp-example Javascript API
+\documentclass{article}
+\begin{document}
+\wcScript[type=module]|
+import "/components/typescript/typescript.js";
+import "/components/typescript-tracer/typescript-tracer.js";
+
+const example = document.createDocumentFragment();
+
+const element1 = document.createElement("tp-typescript-tracer");
+element1.setAttribute("src", "/docs/components/typescript-tracer/examples/nested-arrays.ts");
+example.append(element1);
+
+document.body.append(example);
+|
+\end{document}
+
+% !tp-example Subexpressions on one line
+\documentclass{article}
+\begin{document}
+\wcTpTypescriptTracer[src=/docs/components/typescript-tracer/examples/same-line.ts]{}
+\end{document}
+
+% !tp-example Recursion
+\documentclass{article}
+\begin{document}
+Record factorial(5), inspect the five call frames and follow return values up to 120.
+
+
+\wcTpTypescriptTracer[src=/docs/components/typescript-tracer/examples/recursion.ts]{}
+\end{document}
+
+% !tp-example Independent closures
+\documentclass{article}
+\begin{document}
+Follow count in the two captured makeCounter environments. The first counter returns 1 then 2; the second returns 1.
+
+
+\wcTpTypescriptTracer[src=/docs/components/typescript-tracer/examples/closures.ts]{}
+\end{document}
+
+% !tp-example Class and shared instance
+\documentclass{article}
+\begin{document}
+Follow this.value from 3 to 4 and check that counter and alias point to the same instance. The output is 4, 4, true.
+
+
+\wcTpTypescriptTracer[src=/docs/components/typescript-tracer/examples/classes.ts]{}
+\end{document}
+
+% !tp-example Inheritance and super
+\documentclass{article}
+\begin{document}
+Follow StepCounter extending Counter, the super(value) constructor call and the overridden increment method calling super.increment(). Inspect the same instance through both classes; the output is 5, 7, true.
+
+
+\wcTpTypescriptTracer[src=/docs/components/typescript-tracer/examples/inheritance.ts]{}
+\end{document}
+
+% !tp-example Caught exception
+\documentclass{article}
+\begin{document}
+Follow the exception from divide into catch, then continue through finally. The error event uses the danger color and execution continues.
+
+
+\wcTpTypescriptTracer[src=/docs/components/typescript-tracer/examples/caught-exception.ts]{}
+\end{document}
+
+% !tp-example Uncaught exception
+\documentclass{article}
+\begin{document}
+Inspect the TypeError and its call stack. Recording ends at the error; previous steps remain available.
+
+
+\wcTpTypescriptTracer[src=/docs/components/typescript-tracer/examples/uncaught-exception.ts]{}
+\end{document}
+
+% !tp-example Loop and local variables
+\documentclass{article}
+\begin{document}
+Step through the loop to inspect n and the growing squares array. The final output contains 1, 4, 9 and 16.
+
+
+\wcTpTypescriptTracer[src=/docs/components/typescript-tracer/examples/loops.ts]{}
+\end{document}
+
+% !tp-example Replay a saved trace
+\documentclass{article}
+\begin{document}
+\wcTpTypescriptTracer[trace=/docs/components/typescript-tracer/examples/nested-arrays.trace.json]{}
+\end{document}

@@ -13,11 +13,17 @@
 | :tp-icon:{name="refresh" size="1.25em"} Reset | Restores the initially loaded content. |
 | :tp-icon:{name="play" size="1.25em"} Run | Renders the current source. |
 | Fullscreen / Exit fullscreen | Expand the entire component to fullscreen or return to its normal size. |
+| :tp-icon:{name="code" size="2em"} Show code | Show code. |
+| :tp-icon:{name="eye-outline" size="2em"} Show output | Show output. |
+| :tp-icon:{name="keyboard-f1" size="2em"} Toggle editor toolbar | Toggle editor toolbar. |
+| :tp-icon:{name="language-html" library="tp" size="2em"} Rendered HTML | Rendered HTML. |
+| :tp-icon:{name="code" library="tp" size="2em"} Generated HTML | Generated HTML. |
 
 #### Keyboard interactions
 
 | Key or gesture | Result |
 | --- | --- |
+| <kbd>Shift</kbd>+<kbd>Enter</kbd> | Run the current source from the viewer, including while editing code. |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Move between the available controls. |
 | Focused controls | Use each control’s standard keyboard interaction.  |
 | <kbd>Ctrl</kbd>+<kbd>?</kbd> | Open User Help for the component under the pointer, or the focused component if none is hovered. Include <kbd>Shift</kbd> if needed to type <kbd>?</kbd>. |

@@ -49,14 +49,18 @@ describe("<tp-color-picker>", () => {
 		const picker = mountViewer();
 		const listener = vi.fn();
 		picker.addEventListener("tp-color-picker-select", listener);
-		picker.querySelector<HTMLElement>(
-			'[data-tp-color-picker-token][data-token="--tp-brand-500"]',
-		)?.click();
+		picker
+			.querySelector<HTMLElement>(
+				'[data-tp-color-picker-token][data-token="--tp-brand-500"]',
+			)
+			?.click();
 
 		expect(writeText).toHaveBeenCalledWith("var(--tp-brand-500)");
-		expect(listener).toHaveBeenCalledWith(expect.objectContaining({
-			detail: { token: "--tp-brand-500", value: "var(--tp-brand-500)" },
-		}));
+		expect(listener).toHaveBeenCalledWith(
+			expect.objectContaining({
+				detail: { token: "--tp-brand-500", value: "var(--tp-brand-500)" },
+			}),
+		);
 	});
 
 	it("renders a section for built-in .tp-* classes", () => {
@@ -310,7 +314,9 @@ describe("<tp-color-picker>", () => {
 		);
 
 		expect(toneSubcaption).not.toBeNull();
-		expect(toneSubcaption?.hasAttribute("data-tp-color-picker-class-subcaption")).toBe(true);
+		expect(
+			toneSubcaption?.hasAttribute("data-tp-color-picker-class-subcaption"),
+		).toBe(true);
 	});
 
 	it("parses the CSS color formats used by design tokens", () => {
@@ -323,7 +329,10 @@ describe("<tp-color-picker>", () => {
 			parseUnitIntervalChannel(value: string): number | null;
 			linearToSrgb(value: number): number;
 			clampUnit(value: number): number;
-			getContrastRatio(first: readonly [number, number, number], second: readonly [number, number, number]): number;
+			getContrastRatio(
+				first: readonly [number, number, number],
+				second: readonly [number, number, number],
+			): number;
 		};
 
 		expect(picker.parseCssColor("white")).toEqual([1, 1, 1]);
@@ -331,10 +340,16 @@ describe("<tp-color-picker>", () => {
 		expect(picker.parseCssColor("#f80")).toEqual([1, 136 / 255, 0]);
 		expect(picker.parseCssColor("#ff8800cc")).toEqual([1, 136 / 255, 0]);
 		expect(picker.parseCssColor("rgb(255 50% 0 / .5)")).toEqual([1, 0.5, 0]);
-		expect(picker.parseCssColor("color(srgb 1 50% 0 / .5)")).toEqual([1, 0.5, 0]);
+		expect(picker.parseCssColor("color(srgb 1 50% 0 / .5)")).toEqual([
+			1, 0.5, 0,
+		]);
 		expect(picker.parseCssColor("oklab(50% 0 0)")).not.toBeNull();
 		expect(picker.parseCssColor("oklch(0.5 0.1 0.5turn)")).not.toBeNull();
-		expect(picker.parseCssColor("legacy(255, 128, 0)")).toEqual([1, 128 / 255, 0]);
+		expect(picker.parseCssColor("legacy(255, 128, 0)")).toEqual([
+			1,
+			128 / 255,
+			0,
+		]);
 		expect(picker.parseCssColor("")).toBeNull();
 		expect(picker.parseCssColor("#12")).toBeNull();
 		expect(picker.parseCssColor("rgb(nope 0 0)")).toBeNull();
@@ -367,41 +382,64 @@ describe("<tp-color-picker>", () => {
 		const picker = mountViewer();
 		const onError = vi.fn();
 		picker.addEventListener("tp-color-picker-copy-error", onError);
-		const swatch = picker.querySelector<HTMLElement>("[data-tp-color-picker-token]");
-		swatch?.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+		const swatch = picker.querySelector<HTMLElement>(
+			"[data-tp-color-picker-token]",
+		);
+		swatch?.dispatchEvent(
+			new KeyboardEvent("keydown", { key: "Enter", bubbles: true }),
+		);
 		await vi.waitFor(() => expect(onError).toHaveBeenCalledOnce());
-		swatch?.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+		swatch?.dispatchEvent(
+			new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+		);
 		expect(writeText).toHaveBeenCalledOnce();
 	});
 
 	it("computes the best chip contrast and operates jump controls", () => {
 		const picker = mountViewer() as unknown as HTMLElement & {
-			applyBestContrastToMode(mode: "best-contrast", candidates: readonly string[]): void;
+			applyBestContrastToMode(
+				mode: "best-contrast",
+				candidates: readonly string[],
+			): void;
 		};
-		const computedStyle = vi.spyOn(globalThis, "getComputedStyle").mockImplementation(
-			(element) => ({
-				backgroundColor: "rgb(255 255 255)",
-				color: (element as HTMLElement).style.color || "black",
-				getPropertyValue: () => "rgb(152 156 255)",
-			}) as unknown as CSSStyleDeclaration,
-		);
+		const computedStyle = vi
+			.spyOn(globalThis, "getComputedStyle")
+			.mockImplementation(
+				(element) =>
+					({
+						backgroundColor: "rgb(255 255 255)",
+						color: (element as HTMLElement).style.color || "black",
+						getPropertyValue: () => "rgb(152 156 255)",
+					}) as unknown as CSSStyleDeclaration,
+			);
 
-		picker.applyBestContrastToMode("best-contrast", ["white", "black", "invalid"]);
+		picker.applyBestContrastToMode("best-contrast", [
+			"white",
+			"black",
+			"invalid",
+		]);
 		const text = picker.querySelector<HTMLElement>(
 			'[data-mode="best-contrast"] [data-tp-color-picker-class-chip-text]',
 		);
 		expect(text?.style.color).toBe("black");
 
-		const target = picker.querySelector<HTMLElement>("#tp-color-picker-brand-scale");
+		const target = picker.querySelector<HTMLElement>(
+			"#tp-color-picker-brand-scale",
+		);
 		const scrollIntoView = vi.fn();
 		if (target !== null) target.scrollIntoView = scrollIntoView;
-		const select = picker.querySelector<HTMLSelectElement>("[data-tp-color-picker-jump-select]");
+		const select = picker.querySelector<HTMLSelectElement>(
+			"[data-tp-color-picker-jump-select]",
+		);
 		if (select !== null) {
 			select.dispatchEvent(new Event("change"));
 			select.value = "tp-color-picker-brand-scale";
 			select.dispatchEvent(new Event("change"));
 		}
-		expect(scrollIntoView).toHaveBeenCalledWith({ behavior: "smooth", block: "start" });
+		expect(scrollIntoView).toHaveBeenCalledWith({
+			behavior: "smooth",
+			block: "start",
+		});
 		expect(select?.value).toBe("");
 		computedStyle.mockRestore();
 	});

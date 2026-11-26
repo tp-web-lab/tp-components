@@ -55,7 +55,7 @@ tp-graph-analog-circuit > .tp-graph-results { display: grid; gap: .75rem; overfl
 .tp-analog-calibration { display: flex; align-items: center; gap: var(--tp-space-xs); flex-wrap: wrap; }
 .tp-analog-calibration-group { display: inline-flex; align-items: center; gap: .2rem; }
 .tp-analog-calibration-divider { align-self: stretch; width: 1px; min-height: 1.5rem; background: var(--tp-neutral-stroke-soft); }
-.tp-analog-calibration-value { min-width: 5.5rem; color: var(--tp-neutral-text-colorful); font-size: .72rem; text-align: center; text-transform: none; letter-spacing: normal; }
+.tp-analog-calibration-value { min-width: 5.5rem; color: var(--tp-neutral-text-on-soft); font-size: .72rem; text-align: center; text-transform: none; letter-spacing: normal; }
 .tp-analog-results svg { min-width: 38rem; width: 100%; height: 17rem; }
 .tp-analog-axis { fill: none; stroke: var(--tp-neutral-stroke-mid); stroke-width: 1; }
 .tp-analog-grid { fill: none; stroke: var(--tp-neutral-stroke-soft); stroke-width: 1; }

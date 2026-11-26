@@ -1,4 +1,4 @@
-::::::: tp-markdown-viewer { label="tp-splitter" allow-script }
+::::::: tp-markdown-viewer { label="tp-splitter" allow-script preserve-source }
 :::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-splitter { position="40%" }

@@ -44,14 +44,6 @@ tp-timer > [data-tp-timer-icon] {
   color: currentColor;
 }
 
-tp-timer > tp-icon-button > button {
-  border: 1px solid #d1d5db;
-}
-
-tp-timer[data-elapsed] > tp-icon-button > button {
-  border-color: var(--tp-danger-stroke-soft);
-}
-
 tp-timer[data-elapsed] > [data-tp-timer-display] {
   color: var(--tp-timer-alert);
   font-weight: 700;

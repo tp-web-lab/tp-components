@@ -1,0 +1,40 @@
+{
+  "checkedAt": "2026-11-24T10:01:10.468Z",
+  "browser": "firefox",
+  "version": "153.0",
+  "parserSha256": "a02568410fe35d3719f76ecb738f894ce1f71050dca1d630a3afd7f675cfc02f",
+  "results": [
+    {
+      "scenario": "cold-1",
+      "passed": true,
+      "milliseconds": 8754,
+      "totalMilliseconds": 8967
+    },
+    {
+      "scenario": "cold-2",
+      "passed": true,
+      "milliseconds": 8075,
+      "totalMilliseconds": 8316
+    },
+    {
+      "scenario": "cold-3",
+      "passed": true,
+      "milliseconds": 8022,
+      "totalMilliseconds": 8248
+    },
+    {
+      "scenario": "stalled-first-script",
+      "passed": true,
+      "milliseconds": 23112,
+      "totalMilliseconds": 23325
+    },
+    {
+      "scenario": "interrupted-wasm",
+      "passed": true,
+      "firstError": "Error: Pyodide initialization timed out after 60000 ms. Check the connection and retry the conversion.",
+      "failureMilliseconds": 60402,
+      "recoveryMilliseconds": 8040,
+      "totalMilliseconds": 68881
+    }
+  ]
+}

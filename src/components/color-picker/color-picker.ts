@@ -363,12 +363,12 @@ const TP_COLOR_CLASS_ITEMS: readonly TpColorClassItem[] = [
  * @tagname tp-color-picker
  *
  *
- * @example
- * <tp-color-picker></tp-color-picker>
  *  @event tp-color-picker-select Emitted when a color token is selected. The detail contains the selection metadata and requested clipboard text; this event does not confirm clipboard success.
  * @eventdetail tp-color-picker-select { token: string; value: string }
  * @event tp-color-picker-copy-error Emitted when copying the selected color token fails. The detail contains the requested clipboard text, selection metadata and the caught error.
  * @eventdetail tp-color-picker-copy-error { token: string; value: string; error: unknown }
+ * @example
+ * <tp-color-picker></tp-color-picker>
  */
 export class TpColorPicker extends TpBase {
 	/**
@@ -490,6 +490,13 @@ export class TpColorPicker extends TpBase {
 		return control;
 	}
 
+	/** Scrolls to a palette section or token card by its element identifier. */
+	public scrollToSection(targetId: string): void {
+		Array.from(this.querySelectorAll<HTMLElement>("[id]"))
+			.find((element) => element.id === targetId)
+			?.scrollIntoView({ behavior: "smooth", block: "start" });
+	}
+
 	/**
 	 * Handles a jump select change by scrolling to the selected target.
 	 *
@@ -503,10 +510,7 @@ export class TpColorPicker extends TpBase {
 			return;
 		}
 
-		this.querySelector<HTMLElement>(`#${targetId}`)?.scrollIntoView({
-			behavior: "smooth",
-			block: "start",
-		});
+		this.scrollToSection(targetId);
 		select.value = "";
 	}
 
@@ -763,27 +767,33 @@ export class TpColorPicker extends TpBase {
 		return swatch;
 	}
 
+	/** Copies a CSS token reference and emits the same selection event as a swatch click. */
+	public async copyToken(tokenName: string): Promise<void> {
+		const value = `var(${tokenName})`;
+		const copying = navigator.clipboard
+			?.writeText(value)
+			.catch((error: unknown) => {
+				this.dispatchEvent(
+					new CustomEvent("tp-color-picker-copy-error", {
+						bubbles: true,
+						composed: true,
+						detail: { token: tokenName, value, error },
+					}),
+				);
+			});
+		this.dispatchEvent(
+			new CustomEvent("tp-color-picker-select", {
+				bubbles: true,
+				composed: true,
+				detail: { token: tokenName, value },
+			}),
+		);
+		await copying;
+	}
+
 	private addCopyInteraction(element: HTMLElement, tokenName: string): void {
 		const copy = (): void => {
-			const value = `var(${tokenName})`;
-			if (navigator.clipboard !== undefined) {
-				void navigator.clipboard.writeText(value).catch((error: unknown) => {
-					this.dispatchEvent(
-						new CustomEvent("tp-color-picker-copy-error", {
-							bubbles: true,
-							composed: true,
-							detail: { token: tokenName, value, error },
-						}),
-					);
-				});
-			}
-			this.dispatchEvent(
-				new CustomEvent("tp-color-picker-select", {
-					bubbles: true,
-					composed: true,
-					detail: { token: tokenName, value },
-				}),
-			);
+			void this.copyToken(tokenName);
 		};
 		element.addEventListener("click", copy);
 		element.addEventListener("keydown", (event) => {

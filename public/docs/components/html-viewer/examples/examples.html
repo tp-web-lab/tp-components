@@ -1,4 +1,4 @@
-<tp-html-viewer label="tp-html-viewer" allow-script>
+<tp-html-viewer label="tp-html-viewer" allow-script preserve-source>
   <template>
     <div role="example" label="Basic usage">
       <tp-html-viewer>
@@ -40,6 +40,41 @@
               </div>
             </script>
           </tp-html-viewer>
+    </div>
+
+    <div role="example" label="Compare presentation modes">
+      <section>
+      <h3>mode="default" — Standard controls</h3>
+      <p>Open Code to edit the source, then click Run or press <kbd>Shift</kbd>+<kbd>Enter</kbd> in the editor.</p>
+      <tp-html-viewer mode="default">
+        <script type="tp/html">
+      <h2>Viewer modes</h2>
+      <p>Change this message, then run the source.</p>
+        </script>
+      </tp-html-viewer>
+      </section>
+
+      <section>
+      <h3>mode="lite" — Compact controls</h3>
+      <p>Open Code to edit the source, then click Run or press <kbd>Shift</kbd>+<kbd>Enter</kbd> in the editor.</p>
+      <tp-html-viewer mode="lite">
+        <script type="tp/html">
+      <h2>Viewer modes</h2>
+      <p>Change this message, then run the source.</p>
+        </script>
+      </tp-html-viewer>
+      </section>
+
+      <section>
+      <h3>mode="simple" — Editor and rendered output only</h3>
+      <p>Edit the code below, keep the cursor in the editor and press <kbd>Shift</kbd>+<kbd>Enter</kbd> (Return) to run it. This viewer has no Run button.</p>
+      <tp-html-viewer mode="simple">
+        <script type="tp/html">
+      <h2>Viewer modes</h2>
+      <p>Change this message, then run the source.</p>
+        </script>
+      </tp-html-viewer>
+      </section>
     </div>
   </template>
 </tp-html-viewer>

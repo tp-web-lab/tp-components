@@ -4,7 +4,10 @@
 
 | Control or gesture | Result |
 | --- | --- |
-| Save image button | Download the associated image. The browser handles the download. |
+| :tp-icon:{name="save-image" size="2em"} Save image button | Download the associated image. The browser handles the download. |
+| :tp-icon:{name="file-svg" size="2em"} SVG | SVG. |
+| :tp-icon:{name="file-png" size="2em"} PNG | PNG. |
+| :tp-icon:{name="file-webp" size="2em"} WebP | WebP. |
 
 #### Keyboard interactions
 

@@ -1,0 +1,18 @@
+{
+  "browser": "Safari",
+  "navigation": "DOM button click (native pointer not verified)",
+  "version": "26.6.2",
+  "date": "2026-11-24T23:48:53.447Z",
+  "checks": [
+    {
+      "language": "ocaml",
+      "steps": 11,
+      "highlightChecks": 66,
+      "sourceRange": true,
+      "navigationButtons": true,
+      "replayWithoutWorker": true,
+      "duplicateGrouping": true
+    }
+  ],
+  "passed": true
+}

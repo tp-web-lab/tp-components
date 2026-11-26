@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-markup-blog" allow-script }
+:::::: tp-markdown-viewer { label="tp-markup-blog" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-markup-blog { page-size="2" }

@@ -1,4 +1,4 @@
-::::: tp-markdown-viewer { label="tp-icon" allow-script }
+::::: tp-markdown-viewer { label="tp-icon" allow-script preserve-source }
 :::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :tp-icon:{name="heart" size="3rem" aria-label="Heart"}

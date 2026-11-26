@@ -1,0 +1,6 @@
+{
+  "package": "@live-codes/swift-wasm",
+  "version": "0.1.0",
+  "integrity": "sha512-Ht7flunnTPc1TdXVt8h+XQ+oOx2EE8b1J+p3zBtZa/CZIeDvFww9WCDZo2MkVlLURvSzNSeQT0fhHrvmM/Lh1A==",
+  "source": "https://github.com/live-codes/browser-swift/tree/54d47da6899e8f772b143aa69bb4ba8bfebb705b"
+}

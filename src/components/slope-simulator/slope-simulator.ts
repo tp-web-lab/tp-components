@@ -68,11 +68,11 @@ import style from "./slope-simulator.css?inline";
  * @keyboard ArrowLeft / ArrowRight Move the focused point with slope-dependent effort.
  * @keyboard Escape End the current drag.
  * @keyboard F1 Toggle the toolbar while editing profile JSON.
- * @example
- * <tp-slope-simulator></tp-slope-simulator>
  *  @accessibility Represents each movable point as a labelled horizontal slider with current value and descriptive value text; Left and Right arrows provide a keyboard alternative to dragging.
  * @accessibility Hides decorative route SVGs, labels the profile editor and controls, exposes the grid toggle state with aria-pressed and reports source failures in an alert region.
  * @accessibilityresponsibility Provide clear profile labels and units, and a textual explanation of the route and effort relationship so the lesson does not depend only on the visual curve.
+ * @example
+ * <tp-slope-simulator></tp-slope-simulator>
  */
 export class TpSlopeSimulator extends TpBase {
 	private ui?: HTMLDivElement;
@@ -698,6 +698,57 @@ ${p.points.map((point) => `      ${JSON.stringify(point)}`).join(",\n")}
 		this.drag = undefined;
 		if (drag?.target.hasPointerCapture(drag.id))
 			drag.target.releasePointerCapture(drag.id);
+	}
+
+	/** Shows or hides distance and elevation grid lines. */
+	toggleGrid(): void {
+		this.gridVisible = !this.gridVisible;
+		this.update(0);
+		this.update(1);
+	}
+
+	/** Restores the original profile in the editor. */
+	resetSource(): void {
+		this.editProfile(true);
+	}
+
+	/** Applies the profile currently edited. */
+	applySource(): void {
+		this.editProfile(false);
+	}
+
+	/** Shows or hides the profile editor toolbar. */
+	toggleEditorToolbar(): void {
+		const editor = this.ui?.querySelector("tp-code-editor");
+		if (editor) editor.toolbar = !editor.toolbar;
+	}
+
+	/** Opens or closes the profile file menu. */
+	openFiles(): void {
+		this.ui?.querySelector<TpDropdown>("tp-dropdown")?.toggle();
+	}
+
+	/** Restarts the selected cyclist from its initial position. */
+	restart(track: 0 | 1): void {
+		this.finish();
+		this.positions[track] = 0.1;
+		this.directions[track] = 1;
+		this.update(track);
+	}
+
+	/** Opens a file chooser and loads the selected source. Requires a user gesture in browsers that restrict file dialogs. */
+	async loadFile(): Promise<void> {
+		await this.profileFileAction("load");
+	}
+
+	/** Saves the current source to its file, asking for a destination when needed. */
+	async save(): Promise<void> {
+		await this.profileFileAction("save");
+	}
+
+	/** Asks for a destination and saves the current source. Requires a user gesture in browsers that restrict file dialogs. */
+	async saveAs(): Promise<void> {
+		await this.profileFileAction("save-as");
 	}
 }
 if (!customElements.get("tp-slope-simulator"))

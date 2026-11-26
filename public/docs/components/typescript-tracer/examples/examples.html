@@ -1,0 +1,65 @@
+<tp-html-viewer label="tp-typescript-tracer" allow-script preserve-source>
+  <template>
+    <div role="example" label="Basic usage">
+      <tp-typescript-tracer src="/docs/components/typescript-tracer/examples/nested-arrays.ts"></tp-typescript-tracer>
+    </div>
+
+    <div role="example" label="Javascript API">
+      <script type="module">
+      import "/components/typescript/typescript.js";
+      import "/components/typescript-tracer/typescript-tracer.js";
+
+      const example = document.createDocumentFragment();
+
+      const element1 = document.createElement("tp-typescript-tracer");
+      element1.setAttribute("src", "/docs/components/typescript-tracer/examples/nested-arrays.ts");
+      example.append(element1);
+
+      document.body.append(example);
+      </script>
+    </div>
+
+    <div role="example" label="Subexpressions on one line">
+      <tp-typescript-tracer src="/docs/components/typescript-tracer/examples/same-line.ts"></tp-typescript-tracer>
+    </div>
+
+    <div role="example" label="Recursion">
+      <p>Record factorial(5), inspect the five call frames and follow return values up to 120.</p>
+      <tp-typescript-tracer src="/docs/components/typescript-tracer/examples/recursion.ts"></tp-typescript-tracer>
+    </div>
+
+    <div role="example" label="Independent closures">
+      <p>Follow count in the two captured makeCounter environments. The first counter returns 1 then 2; the second returns 1.</p>
+      <tp-typescript-tracer src="/docs/components/typescript-tracer/examples/closures.ts"></tp-typescript-tracer>
+    </div>
+
+    <div role="example" label="Class and shared instance">
+      <p>Follow this.value from 3 to 4 and check that counter and alias point to the same instance. The output is 4, 4, true.</p>
+      <tp-typescript-tracer src="/docs/components/typescript-tracer/examples/classes.ts"></tp-typescript-tracer>
+    </div>
+
+    <div role="example" label="Inheritance and super">
+      <p>Follow StepCounter extending Counter, the super(value) constructor call and the overridden increment method calling super.increment(). Inspect the same instance through both classes; the output is 5, 7, true.</p>
+      <tp-typescript-tracer src="/docs/components/typescript-tracer/examples/inheritance.ts"></tp-typescript-tracer>
+    </div>
+
+    <div role="example" label="Caught exception">
+      <p>Follow the exception from divide into catch, then continue through finally. The error event uses the danger color and execution continues.</p>
+      <tp-typescript-tracer src="/docs/components/typescript-tracer/examples/caught-exception.ts"></tp-typescript-tracer>
+    </div>
+
+    <div role="example" label="Uncaught exception">
+      <p>Inspect the TypeError and its call stack. Recording ends at the error; previous steps remain available.</p>
+      <tp-typescript-tracer src="/docs/components/typescript-tracer/examples/uncaught-exception.ts"></tp-typescript-tracer>
+    </div>
+
+    <div role="example" label="Loop and local variables">
+      <p>Step through the loop to inspect n and the growing squares array. The final output contains 1, 4, 9 and 16.</p>
+      <tp-typescript-tracer src="/docs/components/typescript-tracer/examples/loops.ts"></tp-typescript-tracer>
+    </div>
+
+    <div role="example" label="Replay a saved trace">
+      <tp-typescript-tracer trace="/docs/components/typescript-tracer/examples/nested-arrays.trace.json"></tp-typescript-tracer>
+    </div>
+  </template>
+</tp-html-viewer>

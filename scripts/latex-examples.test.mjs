@@ -133,7 +133,7 @@ test("uses native paragraphs, formatting, lists, descriptions, headings and math
 	);
 	assert.equal(fragment.querySelector("dt").textContent, "Title");
 	assert.equal(fragment.querySelector("tp-math").getAttribute("value"), "x^2");
-	assert.ok(fragment.querySelector("span.bf"));
+	assert.equal(fragment.querySelector("strong")?.textContent, "simple");
 });
 
 test("preserves authored attributes instead of converting functional elements into plain prose", () => {

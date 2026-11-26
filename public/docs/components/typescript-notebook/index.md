@@ -19,9 +19,9 @@ The custom `<tp-typescript-notebook>` element combines written explanations and 
 <tp-typescript-notebook>
     <script type="tp/markdown"># Interactive TypeScript
 
-Select **Run all cells** to execute the program. Use the code button in a cell to edit its source.</script>
-    <script type="tp/typescript">const language: string = 'TypeScript';
-console.log(`Hello from ${language}`);</script>
+Select **Run all cells** to execute the program. Edit the program directly in each cell; its query is prefilled.</script>
+    <script type="tp/typescript" query="language">const language: string = 'TypeScript';
+</script>
   </tp-typescript-notebook>
 ```
 <!-- tp-docgen:introduction:end -->
@@ -39,6 +39,12 @@ console.log(`Hello from ${language}`);</script>
 
 <!-- -->
 ## Usage
+
+### Programs and queries
+
+Set `query` on a programming script to prefill its interpreter prompt, or use a code cell's `query` property in a JSON notebook. Existing `query.*` and `*.query.*` files supply the prompt separately from the program. An empty query leaves the program unexecuted, including with Run all. Several source files in a cell are presented as one editable program; after editing this combined program, it is saved as a single source file.
+
+Run or Return reloads a changed program before evaluating its query; unchanged source retains the current session. Successful reloads display “> Program reloaded.”. Source errors prevent query execution. Reset all restores the initially loaded source and query. Definitions remain available to following executed cells of the same language; a source reload in a shared notebook session does not clear definitions belonging to other cells.
 
 ### Initial content
 
@@ -73,7 +79,13 @@ The notebook remains a complete block editor. Preview and Export HTML turn marku
 
 The exported HTML toolbar stays at the top of the window while scrolling. The clock is visible by default and can be hidden from the Controllers menu. Set `label="My notebook"` to display a title in its center; the default title is the notebook type name (for example, `Generic Notebook` or `Python Notebook`). Set `label=""` to hide it.
 
-Set `logo="logo-tp"` to display an icon at the left of the exported HTML toolbar, at the same height as its buttons. The value is a `tp-icon` name. By default, the icon of this notebook type is displayed. Set `logo=""` to hide it.
+Set `logo="logo-tp"` to display a logo in a borderless `tp-button` at the left of the exported HTML toolbar. Its height is fixed at `2em`, and its width preserves the logo’s proportions. The value is a TP icon name or an SVG URL. By default, the icon of this notebook type is displayed. Set `logo=""` to hide it.
+
+### Cell presentation and execution
+
+Programming cells use the corresponding interpreter in `mode="simple"`: the source editor, transcript and query field remain visible, without an interpreter header or query buttons. A nonempty query is required; a program alone is not executed. Press <kbd>Return</kbd> in the query field or <kbd>Shift</kbd>+<kbd>Return</kbd> in the cell to reload changed source and execute the query. Run all processes cells in document order. SQL retains its specialized viewer.
+
+The HTML export uses the same simple interpreters, mandatory queries and automatic source reloading. Edited source and query text are preserved when saving or exporting. Markup cells remain rendered document content.
 
 ### Importing
 
@@ -111,22 +123,28 @@ Basic usage
 
 Javascript API
 : Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Messages, errors and HTML export
+: Run each cell with <kbd>Shift</kbd>+<kbd>Return</kbd> to see its message or error directly in the output. Export HTML and repeat the same actions; these interpreters have a required prefilled query and no separate console.
+
+Program queries and automatic reload
+: Run the prefilled query to obtain 10. Change 10 to 20 in the program and press Return in the query field or Shift+Return in the editor. A successful reload displays “> Program reloaded.” before the query. Export HTML and repeat the change: the source and query remain editable. Clear the query to verify that no program is executed without one.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

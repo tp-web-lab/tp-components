@@ -1,0 +1,27 @@
+{
+  "browser": "firefox",
+  "date": "2026-11-25T10:02:13.555Z",
+  "module": "/components/prolog-tracer/prolog-tracer.js",
+  "checks": [
+    {
+      "mode": "light",
+      "toolbar": true,
+      "columnsAligned": true,
+      "brandDivider": true,
+      "jsonNativeToggle": true,
+      "background": "rgb(255, 255, 255)",
+      "foreground": "oklab(0.266795 0.00149579 0.00363955)"
+    },
+    {
+      "mode": "dark",
+      "toolbar": true,
+      "columnsAligned": true,
+      "brandDivider": true,
+      "jsonNativeToggle": true,
+      "background": "oklab(0.189537 0.000922481 0.00224457)",
+      "foreground": "oklab(0.892864 0.0010813 0.00263104)"
+    }
+  ],
+  "version": "153.0",
+  "passed": true
+}

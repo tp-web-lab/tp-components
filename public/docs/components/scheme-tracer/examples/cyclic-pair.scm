@@ -1,0 +1,5 @@
+(define ring (cons 'start '()))
+(set-cdr! ring ring)
+(eq? ring (cdr ring))
+(set-car! ring 'changed)
+(car (cdr ring))

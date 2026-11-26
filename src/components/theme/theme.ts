@@ -263,14 +263,14 @@ function syncThemeTargets(target: HTMLElement, source: TpTheme): void {
  *
  * @event tp-theme-change Emitted when the effective theme applied to a target changes.
  * @eventdetail tp-theme-change { mode: "light" | "dark" | "auto"; theme: "light" | "dark"; anchor: string; target: HTMLElement }
+ *  @event tp-theme-refresh Emitted when a controller asks other theme controllers to refresh their effective scope; source is the initiating controller and scope is its target element. This is a synchronization notification, distinct from tp-theme-change.
+ * @eventdetail tp-theme-refresh { source: TpTheme; scope: HTMLElement }
  * @example
  * <section>
  *       <tp-theme></tp-theme>
  *       <p>The selected theme is scoped to this section.</p>
  *       <code>Inline code follows the selected theme.</code>
  *     </section>
- *  @event tp-theme-refresh Emitted when a controller asks other theme controllers to refresh their effective scope; source is the initiating controller and scope is its target element. This is a synchronization notification, distinct from tp-theme-change.
- * @eventdetail tp-theme-refresh { source: TpTheme; scope: HTMLElement }
  */
 export class TpTheme extends TpBase {
 	private static readonly styleId = "tp-theme-styles";
@@ -525,8 +525,7 @@ export class TpTheme extends TpBase {
 
 				li.append(check, icon, label);
 				li.addEventListener("click", () => {
-					this.mode = choice;
-					dropdownEl.open = false;
+					this.selectMode(choice);
 				});
 
 				newUl.append(li);
@@ -634,7 +633,10 @@ export class TpTheme extends TpBase {
 			"name",
 			effectiveMode === "dark" ? "moon" : "sun",
 		);
-		this.controlEl.style.setProperty("color", "var(--tp-warning-500)");
+		this.controlEl.style.setProperty(
+			"color",
+			"var(--tp-warning-text-colorful)",
+		);
 
 		if (this.dropdownEl instanceof HTMLElement) {
 			const options =
@@ -914,6 +916,18 @@ export class TpTheme extends TpBase {
 		}
 
 		mediaQuery.removeEventListener("change", this.onMediaQueryChange);
+	}
+
+	/** Opens or closes the choices menu, unless this control is disabled. */
+	toggleMenu(): void {
+		this.onControlClick();
+	}
+
+	/** Applies the chosen mode and closes its menu, unless the controller is disabled. */
+	selectMode(mode: TpThemeMode): void {
+		if (this.disabled) return;
+		this.mode = mode;
+		if (this.dropdownEl) this.dropdownEl.open = false;
 	}
 }
 

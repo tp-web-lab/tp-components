@@ -17,50 +17,48 @@
                The museum opens at 9 a.m. Admission costs 8 euros.
 
             Questions
-               .. ol::
-                  :class: questions
+               .. class:: questions
 
-                  .. li::
+               1.
 
-                     .. tp-question::
-                        :open: input
+                  .. tp-question::
+                     :open: input
 
-                        Title
-                           Opening time
+                     Title
+                        Opening time
 
-                        Prompt
-                           When does the museum open?
+                     Prompt
+                        When does the museum open?
 
-                        Form
-                           .. tp-textfield::
-                              :label: Your answer
+                     Form
+                        .. tp-textfield::
+                           :label: Your answer
 
-                        Feedback
-                           Compare your answer with the opening time in the context.
+                     Feedback
+                        Compare your answer with the opening time in the context.
 
-                        Solution
-                           At 9 a.m.
+                     Solution
+                        At 9 a.m.
+               2.
 
-                  .. li::
+                  .. tp-question::
+                     :open: input
 
-                     .. tp-question::
-                        :open: input
+                     Title
+                        Admission
 
-                        Title
-                           Admission
+                     Prompt
+                        How much do two tickets cost?
 
-                        Prompt
-                           How much do two tickets cost?
+                     Form
+                        .. tp-textfield::
+                           :label: Your answer
 
-                        Form
-                           .. tp-textfield::
-                              :label: Your answer
+                     Feedback
+                        Multiply the price of one ticket by two.
 
-                        Feedback
-                           Multiply the price of one ticket by two.
-
-                        Solution
-                           16 euros.
+                     Solution
+                        16 euros.
 
       .. example:: Javascript API
 

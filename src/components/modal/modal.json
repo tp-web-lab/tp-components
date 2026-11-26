@@ -65,7 +65,23 @@
       "default": "false"
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "hide(): void",
+      "inherited": true,
+      "description": "Closes the overlay and removes its backdrop."
+    },
+    {
+      "name": "show(): void",
+      "inherited": true,
+      "description": "Opens the overlay and synchronizes its backdrop."
+    },
+    {
+      "name": "toggle(): void",
+      "inherited": true,
+      "description": "Switches between the open and closed overlay states."
+    }
+  ],
   "events": [
     {
       "name": "tp-modal-toggle",

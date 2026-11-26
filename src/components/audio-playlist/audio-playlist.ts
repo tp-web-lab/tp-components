@@ -8,12 +8,16 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-button-group
+ * @summary Button group component for organizing multiple buttons.
+ */
+/**
  * @tp-dependency tp-icon-button
  * @summary Accessible icon button component.
  */
 /**
- * @tp-dependency tp-button-group
- * @summary Button group component for organizing multiple buttons.
+ * @tp-dependency tp-typewriting
+ * @summary Progressively reveals text one letter or one word at a time.
  */
 // tp-docgen:dependencies:end
 
@@ -31,6 +35,8 @@ import style from "./audio-playlist.css?inline";
  * @tagname tp-audio-playlist
  * @attr {boolean} random = false - Shuffle tracks without repetition; changing this attribute preserves the current track.
  * @attr {string} src = "" - HTML file containing a ul or ol playlist; overrides inline content. Track URLs resolve relative to the file.
+ *  @accessibility Preserves list semantics and keyboard-operable track links, marks the current track with aria-current, and announces status changes.
+ * @accessibilityresponsibility Supply meaningful track titles and transcripts for spoken content.
  * @example
  * <tp-audio-playlist>
  * <ol>
@@ -42,10 +48,12 @@ import style from "./audio-playlist.css?inline";
  * </li>
  * </ol>
  * </tp-audio-playlist>
- *  @accessibility Preserves list semantics and keyboard-operable track links, marks the current track with aria-current, and announces status changes.
- * @accessibilityresponsibility Supply meaningful track titles and transcripts for spoken content.
  */
 export class TpAudioPlaylist extends TpBase {
+	private togglePlaybackAction: () => void | Promise<void> = () => {};
+
+	private toggleMuteAction: () => void | Promise<void> = () => {};
+
 	public static override get observedAttributes(): string[] {
 		return [...TpBase.observedAttributes, "random", "src"];
 	}
@@ -181,7 +189,7 @@ export class TpAudioPlaylist extends TpBase {
 		)
 			return;
 		event.preventDefault();
-		this.select(target, true);
+		this.selectTrack(this.tracks.indexOf(target));
 	};
 	protected override connectedCallback(): void {
 		super.connectedCallback();
@@ -230,11 +238,7 @@ export class TpAudioPlaylist extends TpBase {
 				? "Start a new shuffled playlist without repeating tracks."
 				: "Start the playlist from the first track in list order.";
 			mode.addEventListener("click", () => {
-				if (!this.tracks.length) return;
-				this.current = null;
-				this.toggleAttribute("random", random);
-				this.reorder();
-				this.select(this.order[0] ?? null, true);
+				this.play(random);
 			});
 			this.modes.push(mode);
 			group.append(mode);
@@ -293,7 +297,7 @@ export class TpAudioPlaylist extends TpBase {
 		const playback = document.createElement("tp-icon-button");
 		this.playback = playback;
 		playback.dataset.helpDescription = "Pause or resume the current track.";
-		playback.addEventListener("click", () => {
+		this.togglePlaybackAction = () => {
 			if (!this.audio || !this.current) return;
 			if (!this.audio.paused) this.audio.pause();
 			else {
@@ -303,6 +307,9 @@ export class TpAudioPlaylist extends TpBase {
 						this.message("Playback could not start. Try again.");
 				});
 			}
+		};
+		playback.addEventListener("click", () => {
+			void this.togglePlayback();
 		});
 		this.timeLabel = document.createElement("span");
 		this.timeLabel.className = "tp-audio-playlist-time";
@@ -322,9 +329,12 @@ export class TpAudioPlaylist extends TpBase {
 		this.position = position;
 		const mute = document.createElement("tp-icon-button");
 		mute.dataset.helpDescription = "Mute or restore the sound.";
-		mute.addEventListener("click", () => {
+		this.toggleMuteAction = () => {
 			if (this.audio) this.audio.muted = !this.audio.muted;
 			this.updateTransport();
+		};
+		mute.addEventListener("click", () => {
+			void this.toggleMute();
 		});
 		this.muteButton = mute;
 		const volume = document.createElement("input");
@@ -447,6 +457,12 @@ export class TpAudioPlaylist extends TpBase {
 				];
 		}
 	}
+	/** Selects a track by zero-based source order and optionally starts playback. Invalid indices leave playback unchanged. */
+	public selectTrack(index: number, play = true): void {
+		const track = this.tracks[index];
+		if (track) this.select(track, play);
+	}
+
 	private move(offset: number): void {
 		const index = this.current ? this.order.indexOf(this.current) : -1;
 		const track = this.order[index + offset];
@@ -507,6 +523,35 @@ export class TpAudioPlaylist extends TpBase {
 			index < 0 || index >= this.order.length - 1,
 		);
 		this.updateTransport();
+	}
+
+	/** Pauses or resumes the current track. */
+	async togglePlayback(): Promise<void> {
+		await this.togglePlaybackAction();
+	}
+
+	/** Mutes or restores the current audio. */
+	async toggleMute(): Promise<void> {
+		await this.toggleMuteAction();
+	}
+
+	/** Starts the playlist from the beginning, optionally in shuffled order. */
+	play(random = false): void {
+		if (!this.tracks.length) return;
+		this.current = null;
+		this.toggleAttribute("random", random);
+		this.reorder();
+		this.select(this.order[0] ?? null, true);
+	}
+
+	/** Plays the preceding track in the current order. */
+	previousTrack(): void {
+		this.move(-1);
+	}
+
+	/** Plays the following track in the current order. */
+	nextTrack(): void {
+		this.move(1);
 	}
 }
 if (!customElements.get("tp-audio-playlist"))

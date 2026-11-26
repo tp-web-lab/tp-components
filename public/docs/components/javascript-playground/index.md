@@ -68,6 +68,34 @@ The `src` attribute accepts either a JSON project or a single javascript source 
 
 Source contents are preserved. URL query parameters do not affect extension detection. Dependencies and companion files are not fetched automatically: use a JSON project or `repository` for multiple files. Source priority remains `src`, then `repository`, then internal content. Missing or incompatible files produce a console error. Existing JSON sources, including extensionless URLs, remain supported.
 
+### Test results
+
+Set the project's `test` path to a test module. Import `describe`, `it` and Chai's `expect` or `assert` from `@tp/test`; Mocha's `before`, `after`, `beforeEach` and `afterEach` hooks are also exported. Import the project functions you want to test with relative module paths.
+
+The common results table lists suite, test, status and details. It preserves Mocha's nested suites, asynchronous tests and timeouts. `it.skip` and pending tests appear as skipped; assertion failures, unexpected exceptions and failing hooks appear as failed. Chai's comparison details retain expected and actual values.
+
+An empty suite, a test-module import error or a library loading failure is a failure. Expand **Engine output** to inspect console messages and detailed errors. Both JavaScript and TypeScript use the same reporter; TypeScript modules are compiled before execution.
+
+### Programmatic toolbar actions
+
+Toolbar and menu actions are also available as named methods. The API tab includes methods inherited from the shared playground.
+
+| Action | Method |
+| --- | --- |
+| Run / Test / Reset | `run()` / `test()` / `reset()` |
+| New / Clear project | `newProject()` / `clearProject()` |
+| Open source file | `openSourceFile()` |
+| Save / Save as | `saveFile()` / `saveFileAs()` |
+| Import / Export project | `importProject()` / `exportProject()` |
+| Save / Load / Clear browser memory | `saveInMemory()` / `loadFromMemory()` / `clearMemory()` |
+| Load a bundled example | `loadExample(id)` |
+| Language help | `showLanguageHelp()` |
+| Show/hide the editor toolbar | `toggleEditorToolbar()` |
+
+File choosers may require a user gesture. Await asynchronous methods to wait for completion. Browser memory stores one project per playground language.
+
+Use `setImportmap(map)` to replace the import map and rerun the project; pass `undefined` to remove it.
+
 ### Importing
 
 ::: tp-tabs
@@ -107,22 +135,25 @@ Javascript API
 
 Single source file
 : Load the standalone javascript file through src and inspect its output. Open the source editor to inspect the file used as the generated project's entry point.
+
+Mocha and Chai results
+: Run tests to compare passing and skipped cases in the common results table, then change double to return its input and inspect the failures. Expand Engine output for messages; the Python example also shows subtests and an expected failure.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 
@@ -163,6 +194,10 @@ All tp-components and external tools used by this component are loaded automatic
 @summary In-memory file system component.
 -->
 <!--
+@tp-dependency tp-fullscreen
+@summary Fullscreen controller button.
+-->
+<!--
 @tp-dependency tp-icon
 @summary SVG icon component with inline, URL, and registry sources.
 -->
@@ -184,7 +219,7 @@ All tp-components and external tools used by this component are loaded automatic
 -->
 <!--
 @tp-dependency tp-switcher
-@summary Component `<tp-switcher>`.
+@summary Switches between horizontal and vertical layouts based on available space.
 -->
 <!--
 @tp-dependency tp-tabs
@@ -202,12 +237,13 @@ All tp-components and external tools used by this component are loaded automatic
 - [`<tp-drawer>`](#/components/drawer/index.md) : Drawer overlay component.
 - [`<tp-dropdown>`](#/components/dropdown/index.md) : Dropdown menu component.
 - [`<tp-filesystem>`](#/components/filesystem/index.md) : In-memory file system component.
+- [`<tp-fullscreen>`](#/components/fullscreen/index.md) : Fullscreen controller button.
 - [`<tp-icon>`](#/components/icon/index.md) : SVG icon component with inline, URL, and registry sources.
 - [`<tp-icon-button>`](#/components/icon-button/index.md) : Accessible icon button component.
 - [`<tp-iframe>`](#/components/iframe/index.md) : Controlled iframe component.
 - [`<tp-menu>`](#/components/menu/index.md) : Accessible menu component.
 - [`<tp-splitter>`](#/components/splitter/index.md) : Splitter component with two resizable panels.
-- [`<tp-switcher>`](#/components/switcher/index.md) : Component `<tp-switcher>`.
+- [`<tp-switcher>`](#/components/switcher/index.md) : Switches between horizontal and vertical layouts based on available space.
 - [`<tp-tabs>`](#/components/tabs/index.md) : Accessible tabs component with keyboard and reorder support.
 - [`<tp-toolbar>`](#/components/toolbar/index.md) : Sticky toolbar with start / center / end sections,
 

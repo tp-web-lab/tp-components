@@ -1,4 +1,4 @@
-:::::: tp-markdown-viewer { label="tp-sidebar" allow-script }
+:::::: tp-markdown-viewer { label="tp-sidebar" allow-script preserve-source }
 ::::: script { type="tp/markdown" }
 ``` example {label="Basic usage"}
 :::: tp-sidebar { side-width="12rem" gap="1rem" }

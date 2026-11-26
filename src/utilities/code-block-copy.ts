@@ -1,4 +1,5 @@
 import type { TpCopyCode } from "../components/copy-code/copy-code.js";
+import { highlightCodeBlocks } from "./latex-listings.js";
 
 /** Documents already watched for static and dynamically rendered code blocks. */
 const observedDocuments = new WeakSet<Document>();
@@ -7,6 +8,7 @@ const observedDocuments = new WeakSet<Document>();
 async function enhanceCodeBlock(pre: HTMLPreElement): Promise<void> {
 	if (!pre.isConnected || !pre.querySelector(":scope > code")) return;
 	if (pre.closest('.cm-editor, [contenteditable="true"]')) return;
+	void highlightCodeBlocks(pre);
 	// Lazy loading avoids a dependency cycle through TpCopyCode -> TpBase.
 	await import("../components/copy-code/copy-code.js");
 	if (!pre.isConnected) return;

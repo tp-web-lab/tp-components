@@ -9,7 +9,7 @@
  */
 /**
  * @tp-dependency tp-frame
- * @summary displays content in a fixed-aspect-ratio frame.
+ * @summary Displays content in a fixed-aspect-ratio frame.
  */
 // tp-docgen:dependencies:end
 

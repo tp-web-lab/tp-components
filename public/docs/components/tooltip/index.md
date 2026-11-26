@@ -47,6 +47,12 @@ Use `<tp-tooltip>` as shown below.
 <tp-tooltip></tp-tooltip>
 ```
 
+### Pointer and keyboard interaction
+
+Move the pointer from the anchor into the tooltip to follow links, select text or scroll its content. A short closing delay lets the pointer cross the gap. The tooltip stays open while the pointer or keyboard focus remains in either the anchor or the tooltip, and closes after both leave. Press <kbd>Escape</kbd> to close it immediately.
+
+For long content, constrain its height and enable scrolling on the content container, for example `max-height: 20rem; overflow: auto`. Keep links keyboard accessible and place the tooltip after its anchor in document order.
+
 ### Importing
 
 ::: tp-tabs
@@ -83,22 +89,25 @@ Basic usage
 
 Javascript API
 : Create the Basic usage example entirely with JavaScript and explicit component imports. Run the example to obtain the same content and interactions without the autoloader.
+
+Links and scrollable content
+: Move from the trigger into the tooltip, scroll the long guide and follow its links. Try keyboard focus and <kbd>Escape</kbd>, then leave both areas to observe the delayed closure.
 <!-- tp-docgen:example-descriptions:end -->
 
 ::::::::::::::: tp-tabs
-<tp-icon name="file_type_html" library="languages" size="1.25em"></tp-icon> HTML
+:tp-icon:{name="file_type_html" library="languages" size="1.25em" aria-hidden="true"} HTML
 : ::include{examples/examples.html}
 
-<tp-icon name="file_type_asciidoc" library="languages" size="1.25em"></tp-icon> tp-asciidoc
+:tp-icon:{name="file_type_asciidoc" library="languages" size="1.25em" aria-hidden="true"} tp-asciidoc
 : ::include{examples/examples.adoc}
 
-<tp-icon name="file_type_latex" library="languages" size="1.25em"></tp-icon> tp-latex
+:tp-icon:{name="file_type_latex" library="languages" size="1.25em" aria-hidden="true"} tp-latex
 : ::include{examples/examples-latex.html}
 
-<tp-icon name="file_type_markdown" library="languages" size="1.25em"></tp-icon> tp-markdown
+:tp-icon:{name="file_type_markdown" library="languages" size="1.25em" aria-hidden="true"} tp-markdown
 : ::include{examples/examples.md}
 
-<tp-icon name="file_type_restructuredtext" library="languages" size="1.25em"></tp-icon> tp-restructuredtext
+:tp-icon:{name="file_type_restructuredtext" library="languages" size="1.25em" aria-hidden="true"} tp-restructuredtext
 : ::include{examples/examples.rst}
 :::::::::::::::
 

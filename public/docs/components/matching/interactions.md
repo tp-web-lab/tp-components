@@ -11,9 +11,11 @@ Click a card or its link icon to select it, then click a card in another column 
 | Click a card | Select it or associate it with the selected item from another column. Clicking it again cancels selection. Embedded controls do not select the card. |
 | Select | Select an item, then one in each other column to build a group. Select an existing member to extend its group. Select the same item again to cancel. |
 | Drag a Select button | Drop it on an item in the other list to associate the two items. |
-| Remove pair / Remove from group (close icon) | Remove this member. Other members stay associated unless fewer than two remain. |
+| :tp-icon:{name="close" size="2em"} Remove pair / Remove from group (close icon) | Remove this member. Other members stay associated unless fewer than two remain. |
 | Pair or group number | The same number identifies associated items; it does not indicate a correct answer. A group contains at most one item per column. |
 | Embedded content | Use media players, links and components normally; interacting with them does not select an item. |
+| :tp-icon:{name="link" size="2em"} Select item | Select item. |
+| :tp-icon:{name="close" size="2em"} Remove from group | Remove from group. |
 
 #### Keyboard interactions
 

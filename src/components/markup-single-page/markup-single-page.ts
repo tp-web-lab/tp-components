@@ -9,8 +9,20 @@
  * @summary Shared base class for tp-* components.
  */
 /**
+ * @tp-dependency tp-button
+ * @summary Button component that supports native button and link rendering.
+ */
+/**
+ * @tp-dependency tp-divider
+ * @summary Visual separator for menus, dropdowns, toolbars, and layouts.
+ */
+/**
  * @tp-dependency tp-icon
  * @summary SVG icon component with inline, URL, and registry sources.
+ */
+/**
+ * @tp-dependency tp-icon-button
+ * @summary Accessible icon button component.
  */
 // tp-docgen:dependencies:end
 
@@ -251,7 +263,7 @@ export class TpMarkupSinglePage extends TpBase {
 	}
 
 	/**
-	 * @summary Logo URL displayed at the start of the toolbar, at the default icon-button size. Empty hides the logo.
+	 * @summary Icon name from the tp library or SVG URL displayed at the start of the toolbar, in a borderless button with a fixed height of 2em and proportional width. Empty hides the logo.
 	 * @attr logo
 	 * @default ""
 	 */
@@ -473,7 +485,8 @@ export class TpMarkupSinglePage extends TpBase {
 		control.hidden = available.size < 2;
 	}
 
-	private toggleCalculator(): void {
+	/** Shows or hides the document calculator. */
+	toggleCalculator(): void {
 		if (!this.calculatorDrawer) {
 			const drawer = document.createElement("tp-drawer") as TpDrawer;
 			drawer.setAttribute("label", "Calculator");
@@ -489,7 +502,8 @@ export class TpMarkupSinglePage extends TpBase {
 		else this.calculatorDrawer.show();
 	}
 
-	private async toggleSource(): Promise<void> {
+	/** Shows or hides the document source. */
+	async toggleSource(): Promise<void> {
 		if (this.sourceDrawer?.hasAttribute("open")) {
 			this.sourceToken++;
 			this.sourceDrawer.hide();

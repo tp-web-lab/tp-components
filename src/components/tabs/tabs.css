@@ -4,8 +4,9 @@ tp-tabs {
   --tp-tabs-tab-bg: var(--tp-neutral-fill-softer);
   --tp-tabs-tab-color: var(--tp-text-body);
   --tp-tabs-tab-selected-bg: var(--tp-paper-color);
-  --tp-tabs-tab-selected-color: var(--tp-brand-text-colorful);
+  --tp-tabs-tab-selected-color: var(--tp-brand-text-on-soft);
   --tp-tabs-panel-bg: var(--tp-paper-color);
+  --tp-tabs-panel-color: var(--tp-text-body);
   display: flow-root;
   min-inline-size: 0;
   max-inline-size: 100%;
@@ -110,6 +111,7 @@ tp-tabs > [role='tabpanel'] {
   border: 1px solid var(--tp-tabs-border-color);
   border-radius: 0 0 0.5rem 0.5rem;
   background: var(--tp-tabs-panel-bg);
+  color: var(--tp-tabs-panel-color);
 }
 
 tp-tabs > [role='tabpanel'][hidden] {

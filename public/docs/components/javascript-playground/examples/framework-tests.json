@@ -1,0 +1,17 @@
+{
+  "name": "Mocha and Chai results",
+  "entry": "/main.js",
+  "test": "/main.test.js",
+  "files": [
+    {
+      "path": "/main.js",
+      "language": "javascript",
+      "content": "export function double(value) {\n  return value * 2;\n}\n"
+    },
+    {
+      "path": "/main.test.js",
+      "language": "javascript",
+      "content": "import { describe, it, expect, before } from \"@tp/test\";\nimport { double } from \"./main.js\";\n\ndescribe(\"Double\", () => {\n  before(() => console.log(\"Preparing Double tests\"));\n\n  it(\"doubles a positive number\", () => {\n    expect(double(3)).to.equal(6);\n  });\n\n  it(\"supports asynchronous tests\", async () => {\n    const value = await Promise.resolve(double(-2));\n    expect(value).to.equal(-4);\n  });\n\n  it(\"checks an expected exception\", () => {\n    expect(() => { throw new TypeError(\"demonstration\"); })\n      .to.throw(TypeError, \"demonstration\");\n  });\n\n  it.skip(\"work in progress\", () => {\n    expect(double(3)).to.equal(7);\n  });\n});\n"
+    }
+  ]
+}

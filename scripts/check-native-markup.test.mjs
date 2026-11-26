@@ -16,6 +16,8 @@ import { nativeMarkup } from "./native-markup.mjs";
 test("rejects raw HTML while allowing explicitly literal HTML source", () => {
 	assert.equal(rawMarkup("md", "A <tp-blank></tp-blank>."), true);
 	assert.equal(rawMarkup("adoc", "++++\n<p>Text</p>\n++++"), true);
+assert.equal(rawMarkup("adoc", "[latexmath]\n++++\nx < y\n++++"), false);
+assert.equal(rawMarkup("adoc", "[asciimath]\n++++\nx < y\n++++"), false);
 	assert.equal(rawMarkup("rst", ".. raw:: html\n\n   <p>Text</p>"), true);
 	assert.equal(
 		rawMarkup("md", "`<tp-box>`\n``` html\n<p>Code</p>\n```"),

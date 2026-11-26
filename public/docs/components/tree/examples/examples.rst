@@ -17,11 +17,8 @@
               - Documentation
 
                 - Getting started
-
                 - Examples
-
               - Source code
-
               - README.md
 
       .. example:: Javascript API

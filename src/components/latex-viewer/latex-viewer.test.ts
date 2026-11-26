@@ -5,7 +5,7 @@ import type { MarkupViewerExample } from "../markup-viewer/markup-viewer.js";
 import { TpLatexViewer } from "./latex-viewer.js";
 
 class TestViewer extends TpLatexViewer {
-	public examples(source: string): MarkupViewerExample[] {
+	public examples(source: string): MarkupViewerExample<string | undefined>[] {
 		return this.extractExamples({
 			label: "Document",
 			source,
@@ -17,16 +17,16 @@ class TestViewer extends TpLatexViewer {
 		mode: "render" | "html",
 		target: HTMLElement,
 	): Promise<void> {
-		return this.renderOutput(source, mode, target);
+		return this.renderOutput(source, mode, target, undefined);
 	}
 }
 customElements.define("test-latex-viewer", TestViewer);
-it("converts all eight native TikZ documents without losing libraries or drawing source", () => {
+it("converts all nine native TikZ documents without losing libraries or drawing source", () => {
 	const viewer = new TestViewer();
 	const examples = viewer.examples(
 		readFileSync("public/docs/components/tikz/examples/examples.tex", "utf8"),
 	);
-	expect(examples).toHaveLength(9);
+	expect(examples).toHaveLength(10);
 	expect(viewer.examples("Plain text")[0]?.source).toBe("Plain text");
 	for (const example of examples) {
 		if (example.label === "Javascript API") {

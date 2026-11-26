@@ -1,3 +1,4 @@
+import { showGameRules, toggleGameHelp } from "../../utilities/game-header.js";
 /** @module components/kakuro
  * @summary Interactive cross-sum puzzle with notes, history and assistance.
  */
@@ -179,36 +180,13 @@ export class TpKakuro extends TpBase {
 		toolbar.className = "tp-kakuro-toolbar";
 		toolbar.dataset.helpGroup = "Game controls";
 		const actions: [string, string, () => void][] = [
-			[
-				"notes",
-				"Game",
-				() => {
-					this.noteMode = !this.noteMode;
-					this.update();
-				},
-			],
-			["undo", "Undo", () => this.history(false)],
-			["redo", "Redo", () => this.history(true)],
-			[
-				"check",
-				"Check",
-				() => {
-					this.showingErrors = !this.showingErrors;
-					this.update();
-				},
-			],
-			["hint", "Reveal cell", () => this.assist(false)],
-			["solve", "Reveal solution", () => this.assist(true)],
-			[
-				"reset",
-				"Reset",
-				() =>
-					this.change(() => {
-						this.values = grid.cells.map((cell) => cell.given);
-						this.notes = this.values.map(() => 0);
-						this.showingErrors = false;
-					}),
-			],
+			["notes", "Game", () => this.toggleEntryMode()],
+			["undo", "Undo", () => this.undo()],
+			["redo", "Redo", () => this.redo()],
+			["check", "Check", () => this.toggleErrors()],
+			["hint", "Reveal cell", () => this.revealCell()],
+			["solve", "Reveal solution", () => this.revealSolution()],
+			["reset", "Reset", () => this.reset()],
 		];
 		for (const [action, label, handler] of actions) {
 			const button = document.createElement(
@@ -532,6 +510,59 @@ export class TpKakuro extends TpBase {
 		}
 		this.completed = complete;
 		this.updateSelection();
+	}
+
+	/** Restores the preceding cell values and notes. */
+	undo(): void {
+		this.history(false);
+	}
+
+	/** Restores the next cell values and notes. */
+	redo(): void {
+		this.history(true);
+	}
+
+	/** Switches between entering a value and entering notes. */
+	toggleEntryMode(): void {
+		this.noteMode = !this.noteMode;
+		this.update();
+	}
+
+	/** Shows or hides incorrect cell values. */
+	toggleErrors(): void {
+		this.showingErrors = !this.showingErrors;
+		this.update();
+	}
+
+	/** Reveals the selected or next empty cell. */
+	revealCell(): void {
+		this.assist(false);
+	}
+
+	/** Reveals the complete solution. */
+	revealSolution(): void {
+		this.assist(true);
+	}
+
+	/** Restores the givens and clears notes and error highlighting. */
+	reset(): void {
+		const grid = this.grid;
+		if (!grid) return;
+		this.change(() => {
+			this.values = grid.cells.map((cell) => cell.given);
+			this.notes = this.values.map(() => 0);
+			this.showingErrors = false;
+		});
+	}
+
+	/** Opens or closes the game assistance menu. */
+	toggleHelp(): void {
+		toggleGameHelp(this);
+	}
+
+	/** Opens the rules of this game in its drawer. */
+	showRules(): void {
+		showGameRules(this);
 	}
 }
 if (!customElements.get("tp-kakuro"))
