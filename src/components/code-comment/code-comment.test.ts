@@ -151,7 +151,7 @@ it("shows live rich comments on hover and keyboard focus, closes on Escape and c
 	marker.dispatchEvent(new MouseEvent("mouseenter"));
 	expect(tooltip.hasAttribute("open")).toBe(true);
 	marker.dispatchEvent(new MouseEvent("mouseleave"));
-	expect(tooltip.hasAttribute("open")).toBe(false);
+	await vi.waitFor(() => expect(tooltip.hasAttribute("open")).toBe(false));
 	marker.focus();
 	expect(tooltip.hasAttribute("open")).toBe(true);
 	document.dispatchEvent(

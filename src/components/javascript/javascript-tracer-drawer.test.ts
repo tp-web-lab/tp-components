@@ -59,7 +59,8 @@ it("adds a toolbar command and records current edited code and query in a 75% dr
 		trace = drawer?.querySelector("tp-javascript-tracer");
 	expect(drawer?.getAttribute("width")).toBe("75%");
 	expect(drawer?.hasAttribute("open")).toBe(true);
-	expect(trace?.value).toBe("let x = 42;\n\nconsole.log(x + 1)");
+	expect(trace?.value).toBe("let x = 42;");
+	expect(trace?.query).toBe("console.log(x + 1)");
 	expect(trace?.filename).toBe("lesson.js");
 	expect(trace?.record).toHaveBeenCalledOnce();
 	expect(host.querySelector("[role=log]")?.textContent).toBe(transcript);
@@ -76,9 +77,9 @@ it("stops on close and creates a fresh recording while retaining the resized wid
 	await host.openTrace();
 	expect(host.querySelectorAll("tp-drawer")).toHaveLength(1);
 	expect(drawer?.getAttribute("width")).toBe("60%");
-	expect(drawer?.querySelector("tp-javascript-tracer")?.value).toBe(
-		"let x = 9;\n\nconsole.log(x)",
-	);
+	const trace = drawer?.querySelector("tp-javascript-tracer");
+	expect(trace?.value).toBe("let x = 9;");
+	expect(trace?.query).toBe("console.log(x)");
 	expect(drawer?.querySelector("tp-javascript-tracer")).not.toBe(first);
 });
 it("records only source for an empty query and cleans up when removed", async () => {

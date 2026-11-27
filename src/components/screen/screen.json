@@ -103,19 +103,19 @@
     {
       "name": "tp-screen-edit",
       "emitted": true,
-      "description": "Emitted when screen edit occurs.",
+      "description": "Dispatched on the iframe when the nested screen requests the format chooser.",
       "detail": "void"
     },
     {
       "name": "tp-screen-mode",
       "emitted": true,
-      "description": "Emitted when screen mode occurs.",
+      "description": "Dispatched on the iframe when the parent enters the chooser or applies a format. The nested screen reads data-tp-screen-applied to update its controls.",
       "detail": "void"
     },
     {
       "name": "tp-screen-ready",
       "emitted": true,
-      "description": "Emitted when screen ready occurs.",
+      "description": "Dispatched on the iframe when the nested screen has connected and can respond to mode changes.",
       "detail": "void"
     }
   ],

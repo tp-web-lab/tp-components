@@ -73,12 +73,19 @@ describe("programming viewers", () => {
 				),
 			).toBe(true);
 			expect(viewer.querySelector("tp-iframe")).not.toBeNull();
-			expect(viewer.querySelector("tp-console")).not.toBeNull();
-			expect(
-				viewer.querySelector(
-					"tp-console [data-tp-console-header-right] tp-copy-code",
-				),
-			).not.toBeNull();
+			if (tag === "tp-prolog-viewer") {
+				expect(viewer.querySelector("tp-console")).toBeNull();
+				expect(
+					viewer.querySelector("[data-tp-programming-viewer-console]"),
+				).toBeNull();
+			} else {
+				expect(viewer.querySelector("tp-console")).not.toBeNull();
+				expect(
+					viewer.querySelector(
+						"tp-console [data-tp-console-header-right] tp-copy-code",
+					),
+				).not.toBeNull();
+			}
 			expect(viewer.querySelector("tp-filesystem")).toBeNull();
 			expect(
 				document.getElementById("tp-playground-styles")?.textContent,

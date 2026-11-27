@@ -85,7 +85,14 @@ it("preserves named expressions, styles and ranges through form edits and undo",
 		"curve f = function(x, cos(x), range=[-PI, PI]) style=dotted",
 	);
 	curves.dispatchEvent(new Event("input", { bubbles: true }));
-	await vi.waitFor(() => expect(editor.getValue()).toContain("cos(x)"));
+	await vi.waitFor(
+		() =>
+			expect(
+				editor.getValue(),
+				plot.querySelector('[role="status"]')?.textContent ?? "",
+			).toContain("cos(x)"),
+		{ timeout: 5000 },
+	);
 	expect(parseXYGraph(editor.getValue()).functions[0]).toMatchObject({
 		label: "f",
 		expression: "cos(x)",

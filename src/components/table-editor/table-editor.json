@@ -215,13 +215,13 @@
     {
       "name": "tp-table-editor-error",
       "emitted": true,
-      "description": "- Fired when a table file cannot be imported.",
+      "description": "Fired when a table file cannot be imported.",
       "detail": "{ src: string, message: string }"
     },
     {
       "name": "tp-table-editor-load",
       "emitted": true,
-      "description": "- Fired after a table file is imported.",
+      "description": "Fired after a table file is imported.",
       "detail": "{ src: string, data: TableData }"
     }
   ],

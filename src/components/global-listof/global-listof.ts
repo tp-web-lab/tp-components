@@ -318,6 +318,21 @@ export class TpGlobalListof extends TpBase {
 							content.append(
 								globalListDefinitionContent(target, doc, host, page.href),
 							);
+							if (target.localName === "figure") {
+								const caption = content.querySelector(":scope > figcaption");
+								if (caption?.textContent?.trim()) {
+									if (caption.querySelector("a")) {
+										link.textContent = merge
+											? `${page.title} — View figure`
+											: "View figure";
+										caption.append(" ", link);
+									} else {
+										link.replaceChildren(...caption.childNodes);
+										if (merge) link.prepend(`${page.title} — `);
+										caption.append(link);
+									}
+								}
+							}
 							item.append(content);
 						}
 						group.append(item);

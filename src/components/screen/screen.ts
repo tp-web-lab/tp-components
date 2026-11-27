@@ -102,6 +102,9 @@ export const TP_SCREEN_DEVICES = {
  * @eventdetail tp-screen-change { device: string; width: number; height: number }
  * @keyboard {Enter / Space} Opens the focused preview button or selects a focused device.
  * @keyboard {Escape} Cancels the chooser; from an applied page, restores the original window.
+ * @event tp-screen-edit Dispatched on the iframe when the nested screen requests the format chooser.
+ * @event tp-screen-ready Dispatched on the iframe when the nested screen has connected and can respond to mode changes.
+ * @event tp-screen-mode Dispatched on the iframe when the parent enters the chooser or applies a format. The nested screen reads data-tp-screen-applied to update its controls.
  * @example
  * <tp-screen src="/docs/components/screen/examples/responsive.html"></tp-screen>
  */

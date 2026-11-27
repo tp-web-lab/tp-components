@@ -167,7 +167,7 @@
     {
       "name": "tp-global-pages-change",
       "emitted": true,
-      "description": "Emitted when global pages change occurs.",
+      "description": "Emitted after the sidebar links are refreshed and the global list cache is cleared. Read getGlobalListPages() for the current page list.",
       "detail": "void"
     }
   ],

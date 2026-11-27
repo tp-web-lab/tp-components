@@ -56,7 +56,7 @@ describe("OCaml execution documents", () => {
 			true,
 		);
 		expect(result.html).toContain('const scope=""');
-		expect(result.html).toContain("No test assertions executed");
+		expect(result.html).toContain("No tests executed.");
 		expect(result.html).toContain("data-ocaml-test-status");
 	});
 });

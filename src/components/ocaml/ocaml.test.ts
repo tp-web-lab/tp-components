@@ -147,9 +147,8 @@ describe("OCaml execution trace drawer", () => {
 		expect(drawer?.getAttribute("width")).toBe("75%");
 		expect(drawer?.open).toBe(true);
 		const trace = el.querySelector("tp-ocaml-tracer");
-		expect(trace?.value).toBe(
-			"let square x = x * x\n;;\n\nprint_int (square 8);;",
-		);
+		expect(trace?.value).toBe("let square x = x * x\n;;");
+		expect(trace?.query).toBe("print_int (square 8);;");
 		expect(trace?.filename).toBe("edited.ml");
 		expect(trace?.record).toHaveBeenCalledOnce();
 		expect(execute).toHaveBeenCalledTimes(calls);
@@ -175,7 +174,7 @@ describe("OCaml execution trace drawer", () => {
 		prompt.value = "square 9;;";
 		await el.openTrace();
 		expect(el.querySelectorAll("tp-drawer")).toHaveLength(1);
-		expect(el.querySelector("tp-ocaml-tracer")?.value).toContain("square 9;;");
+		expect(el.querySelector("tp-ocaml-tracer")?.query).toBe("square 9;;");
 		expect(el.querySelector("tp-ocaml-tracer")).not.toBe(first);
 	});
 });

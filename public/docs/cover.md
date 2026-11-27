@@ -110,10 +110,10 @@ Components <tp-divider orientation="vertical"></tp-divider> 246
 Examples <tp-divider orientation="vertical"></tp-divider> 1008
 ::::
 :::: tp-badge {variant=brand}
-Tests <tp-divider orientation="vertical"></tp-divider> 5049
+Tests <tp-divider orientation="vertical"></tp-divider> 5053
 ::::
 
-Update 2026/11/26
+Update 2026/11/27
 
 :::::
 :::::::::

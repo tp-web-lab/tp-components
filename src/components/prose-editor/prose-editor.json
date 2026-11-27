@@ -389,7 +389,7 @@
     {
       "name": "tp-prose-editor-error",
       "emitted": true,
-      "description": "Emitted when prose editor error occurs.",
+      "description": "Emitted when a markup file import or export fails. The error is available in detail.error.",
       "detail": "{ error: unknown }"
     },
     {

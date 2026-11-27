@@ -31,6 +31,9 @@ jobs:
       - name: Test publication preparation
         working-directory: tp-components
         run: node --test scripts/prepare-pages.test.mjs
+      - name: Run unit tests
+        working-directory: tp-components
+        run: pnpm test
       - name: Build documentation
         working-directory: tp-components
         run: pnpm build

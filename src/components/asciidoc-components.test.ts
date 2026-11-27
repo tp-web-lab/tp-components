@@ -169,8 +169,13 @@ Last paragraph.`);
       <script type="tp/asciidoc">include::advanced-example.adoc[]</script>
     </tp-asciidoc>`;
 		documentation.append(host);
+		const rendered = new Promise<void>((resolve) =>
+			documentation.addEventListener("tp-asciidoc-rendered", () => resolve(), {
+				once: true,
+			}),
+		);
 		document.body.append(documentation);
-		await flush();
+		await rendered;
 
 		expect(fetchMock).toHaveBeenCalledOnce();
 		expect(host.querySelector("tp-asciidoc p")?.textContent).toBe(

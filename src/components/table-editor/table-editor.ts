@@ -287,9 +287,9 @@ const formatLabels: Record<TableFormat, string> = {
  * @attr {"html" | "markdown" | "asciidoc" | "restructuredtext" | "latex"} format = "markdown" - Selected export format.
  * @attr {boolean} readonly = false - Prevents interactive edits while keeping exports available.
  * @event tp-table-editor-change Emitted after a table edit, reset, undo or redo.
- * @event tp-table-editor-load - Fired after a table file is imported.
+ * @event tp-table-editor-load Fired after a table file is imported.
  * @eventdetail tp-table-editor-load { src: string, data: TableData }
- * @event tp-table-editor-error - Fired when a table file cannot be imported.
+ * @event tp-table-editor-error Fired when a table file cannot be imported.
  * @eventdetail tp-table-editor-error { src: string, message: string }
  * @eventdetail tp-table-editor-change { data: TableData, markup: string }
  * @keyboard {Shift+F10 / ContextMenu} Open the focused cell menu.

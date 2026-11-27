@@ -25,7 +25,7 @@ it("covers titled examples and every AsciiDoc output mode", async () => {
 			source: string;
 			context: undefined;
 		}): Array<{ label: string }>;
-		createExternalContext(url: URL): undefined;
+		createExternalContext(url: URL): URL;
 		renderOutput(
 			source: string,
 			mode: string,
@@ -51,9 +51,8 @@ it("covers titled examples and every AsciiDoc output mode", async () => {
 			context: undefined,
 		}),
 	).toHaveLength(1);
-	expect(
-		api.createExternalContext(new URL("https://example.test/a.adoc")),
-	).toBeUndefined();
+	const external = new URL("https://example.test/a.adoc");
+	expect(api.createExternalContext(external).href).toBe(external.href);
 	for (const mode of ["render", "ast", "html"]) {
 		const output = document.createElement("div");
 		await api.renderOutput("= Heading", mode, output);

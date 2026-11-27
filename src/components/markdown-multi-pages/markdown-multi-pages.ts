@@ -172,6 +172,7 @@ function wrapAsMarkdownCodeBlock(source: string): string {
  * @attr {TpMarkdownMultiPagesTheme} theme = "" - Legacy light, dark or auto property. Attribute-driven styling is currently inactive; use the toolbar theme control.
  * @attr {string} brand = "tp-default" - Legacy brand preset property, such as tp-default. Attribute-driven styling is currently inactive; use the toolbar color control.
  *  @cssprop [--tp-markdown-multi-pages-sidebar-width=12rem] Width of the overlay navigation sidebar on narrow screens, capped at 85% of its container; desktop sizing is controlled by the splitter.
+ * @event tp-global-pages-change Emitted after the sidebar links are refreshed and the global list cache is cleared. Read getGlobalListPages() for the current page list.
  * @example
  * <tp-markdown-multi-pages></tp-markdown-multi-pages>
  */

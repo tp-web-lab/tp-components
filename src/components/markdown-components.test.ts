@@ -757,17 +757,19 @@ import
 		).toBe("components");
 		expect(
 			document.getElementById("tp-markup-viewer-styles")?.textContent,
-		).toContain(".tp-markup-viewer[lite] .tp-markup-viewer-start");
+		).toContain(
+			'.tp-markup-viewer[data-viewer-mode="lite"] .tp-markup-viewer-start',
+		);
 		expect(
 			document.getElementById("tp-markup-viewer-styles")?.textContent,
-		).toContain(".tp-markup-viewer[lite] {");
+		).toContain('.tp-markup-viewer[data-viewer-mode="lite"] {');
 		expect(
 			document.getElementById("tp-markup-viewer-styles")?.textContent,
 		).toContain("border-block-end: 1px solid");
 		expect(
 			document.getElementById("tp-markup-viewer-styles")?.textContent,
 		).toContain(
-			".tp-markup-viewer[lite][data-layout='both'] .tp-markup-viewer-end",
+			".tp-markup-viewer[data-viewer-mode=\"lite\"][data-layout='both'] .tp-markup-viewer-end",
 		);
 		expect(
 			document.getElementById("tp-markup-viewer-styles")?.textContent,

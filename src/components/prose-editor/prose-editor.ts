@@ -1382,6 +1382,7 @@ function normalizeMarkdownBlockViewMode(value: unknown): MarkdownBlockViewMode {
  * @eventdetail tp-prose-editor-input { value: string }
  * @event tp-prose-editor-change Emitted immediately after tp-prose-editor-input for the same edit; it does not wait for blur. value contains the current HTML serialization.
  * @eventdetail tp-prose-editor-change { value: string }
+ * @event tp-prose-editor-error Emitted when a markup file import or export fails. The error is available in detail.error.
  * @example
  * <tp-prose-editor>
  *   <h2>A short editable document</h2>

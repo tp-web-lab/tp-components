@@ -3,8 +3,9 @@ import { stubMathJaxRuntime } from "../../test-helpers/mathjax.js";
 import "./mathfield.js";
 
 beforeEach(() => stubMathJaxRuntime());
-afterEach(() => {
+afterEach(async () => {
 	document.body.replaceChildren();
+	await vi.dynamicImportSettled();
 	vi.unstubAllGlobals();
 });
 it("switches notation and synchronizes its check without replacing the expression", () => {

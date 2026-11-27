@@ -208,10 +208,16 @@ export function globalListDefinitionContent(
 	const base = new URL(href, host.ownerDocument.baseURI);
 	// Book resources may already include the repository path (docs/image.svg).
 	// Keep that application-relative prefix rather than adding docs twice.
-	const repository = host
-		.getAttribute("repository")
-		?.replace(/^\.\//, "")
-		.replace(/\/$/, "");
+	const application = new URL("./", host.ownerDocument.baseURI);
+	const repositoryAttribute = host.getAttribute("repository");
+	const repositoryUrl = repositoryAttribute
+		? new URL(`${repositoryAttribute.replace(/\/$/, "")}/`, application)
+		: null;
+	// A root-relative repository inside this application has the same prefix
+	// semantics as ./docs, including when the whole book is mounted below Home.
+	const repository = repositoryUrl?.href.startsWith(application.href)
+		? repositoryUrl.href.slice(application.href.length).replace(/\/$/, "")
+		: undefined;
 	const pages = new Set(
 		host
 			.getGlobalListPages()

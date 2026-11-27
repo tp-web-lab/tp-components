@@ -869,3 +869,63 @@ it("indexes external exercise prompts without loading solutions or executing edi
 		"https://example.test/docs/exercises/one.md",
 	);
 });
+
+for (const mounted of [false, true])
+	it(`resolves root-relative repositories for figure previews (mounted=${mounted})`, () => {
+		const base = document.createElement("base");
+		base.href = new URL(
+			mounted ? "/tp-books/sicp-js/" : "/",
+			document.baseURI,
+		).href;
+		document.head.append(base);
+		try {
+			const { host } = setup({});
+			const directory = mounted ? "/tp-books/sicp-js/docs" : "/docs";
+			host.setAttribute("repository", directory);
+			const doc = new DOMParser().parseFromString(
+				`<figure><img src="docs/images/a.svg"><img src="images/b.svg"><img src="${directory}/docs/images/c.svg"></figure>`,
+				"text/html",
+			);
+			const figure = doc.querySelector("figure");
+			if (!figure) throw new Error("Missing figure fixture");
+			const content = globalListDefinitionContent(
+				figure,
+				doc,
+				host,
+				`${directory}/chapter.md`,
+			);
+			expect(
+				[...content.querySelectorAll("img")].map(
+					(i) => new URL(i.src).pathname,
+				),
+			).toEqual(["a", "b", "c"].map((n) => `${directory}/images/${n}.svg`));
+		} finally {
+			base.remove();
+		}
+	});
+it("shows a figure caption once and keeps its formatting and origin link", async () => {
+	const { list } = setup({
+		"/a.html":
+			'<figure id="f"><img src="a.svg"><figcaption>Figure 1.1 <em>A tree</em></figcaption></figure>',
+	});
+	await list.refresh();
+	expect(list.textContent?.match(/Figure 1\.1/g)).toHaveLength(1);
+	expect(
+		list.querySelector("figcaption a[data-tp-global-origin] em")?.textContent,
+	).toBe("A tree");
+	expect(list.querySelector("figcaption a")?.getAttribute("href")).toBe(
+		"#/a.html#f",
+	);
+});
+it("retains authored caption links without nesting anchors", async () => {
+	const { list } = setup({
+		"/a.html":
+			'<figure id="f"><img src="a.svg"><figcaption>Figure 1.1 <a href="https://example.org/">Source</a></figcaption></figure>',
+	});
+	await list.refresh();
+	expect(list.querySelector("a a")).toBeNull();
+	expect(list.textContent?.match(/Figure 1\.1/g)).toHaveLength(1);
+	expect(
+		list.querySelector("figcaption a[data-tp-global-origin]")?.textContent,
+	).toBe("View figure");
+});

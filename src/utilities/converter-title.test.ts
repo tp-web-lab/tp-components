@@ -23,18 +23,19 @@ it("preserves heading levels through LaTeX conversion", async () => {
 
 it("uses explicit reStructuredText headings when levels cannot be inferred natively", async () => {
 	const { htmlToMarkup } = await import("./markup-conversion.js");
-	expect(
-		htmlToMarkup(
-			"<h2>Second level</h2><h4>Fourth level</h4>",
-			"restructuredtext",
-		),
-	).toMatch(/\.\. h2::/);
-	expect(
-		htmlToMarkup(
-			"<h2>Second level</h2><h4>Fourth level</h4>",
-			"restructuredtext",
-		),
-	).toMatch(/\.\. h4::/);
+	const source = htmlToMarkup(
+		"<h2>Second level</h2><h4>Fourth level</h4>",
+		"restructuredtext",
+	);
+	expect(source.split("\n")).toEqual([
+		".. heading-levels:: 2,4",
+		"",
+		"Second level",
+		"------------",
+		"",
+		"Fourth level",
+		"^^^^^^^^^^^^",
+	]);
 });
 
 it("keeps AsciiDoc document titles", async () => {
@@ -63,7 +64,7 @@ it("preserves a converted title, inline image and formula from AsciiDoc", async 
 		"markdown",
 	);
 	expect(markdown).toContain("canoe.svg");
-	expect(markdown).toContain("tp-math");
+	expect(markdown).toContain(":latexmath:`E=mc^2`");
 	expect(markdown).not.toContain("data-tp-asciidoc-asset");
 });
 

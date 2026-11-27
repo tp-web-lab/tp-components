@@ -51,7 +51,7 @@ The list indexes the internal pages declared in the nearest shell's sidebar, in 
 
 Labels use title, label or caption attributes, a direct caption/figcaption child, then ref; headings may use their text. Inside accordion panels, links show only the object label or equation number; the section name appears once in the summary. Other link lists retain the page title followed by the element label. Matching elements without a label are omitted. For tp-index definitions, index selects the named group (default: default).
 
-Existing authored IDs are used as anchors. Otherwise a route locator uses the element tag, label and occurrence on that page; navigation inserts an empty anchor immediately before the target. Prefer stable authored IDs for permanent links, since renaming or reordering repeated labels changes a generated locator. The source definitions remain hidden. For `tp-glossary`, `tp-biblio` and `tp-index`, the global list displays a native description list: each linked term leads to its first source definition, and its description shows the definition content. For `tp-note`, it displays an ordered list with the note content and its source-page link. Each item retains its original local number using the same first-citation rules as `tp-listof`; equations display their mathematical content beneath the source link and its local number. Figures display their content and caption as thumbnails in a native `figure` below the source-page link. Previews fit within 20rem in width and media within 14rem in height, shrinking on narrow screens while preserving the complete image. Source figures retain their original size. Other targets remain link lists.
+Existing authored IDs are used as anchors. Otherwise a route locator uses the element tag, label and occurrence on that page; navigation inserts an empty anchor immediately before the target. Prefer stable authored IDs for permanent links, since renaming or reordering repeated labels changes a generated locator. The source definitions remain hidden. For `tp-glossary`, `tp-biblio` and `tp-index`, the global list displays a native description list: each linked term leads to its first source definition, and its description shows the definition content. For `tp-note`, it displays an ordered list with the note content and its source-page link. Each item retains its original local number using the same first-citation rules as `tp-listof`; equations display their mathematical content beneath the source link and its local number. Figures display their content and caption as thumbnails in a native `figure`. The caption links to the source page and is shown only once. If it already contains authored links, a separate “View figure” link is added within the caption without nesting links. Previews fit within 20rem in width and media within 14rem in height, shrinking on narrow screens while preserving the complete image. Source figures retain their original size. Other targets remain link lists.
 
 When a guide is embedded inside another multi-page document, its links navigate locally without consuming or changing the parent document route. Standalone guides continue to use page-and-anchor routes in the browser address.
 
@@ -199,6 +199,8 @@ CSS properties
 <!-- tp-docgen:typedoc:start -->
 [More details…](/api/classes/components_global-listof_global-listof.TpGlobalListof.html)
 <!-- tp-docgen:typedoc:end -->
+
+
 
 
 
